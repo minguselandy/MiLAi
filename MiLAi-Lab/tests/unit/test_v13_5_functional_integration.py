@@ -4320,11 +4320,12 @@ def test_explicit_history_tool_delivers_withdrawn_versions_without_new_write(
 
 
 @pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
+@pytest.mark.parametrize("memory_method", ["milai_edit_m_v1", "milai_fact_append_v1"])
 def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str, memory_method: str,
 ) -> None:
     root = prepared(tmp_path, native=True, request_interpretation=True,
-                    memory_method="milai_edit_m_v1", edit_interface_version="I2",
+                    memory_method=memory_method, edit_interface_version="I2",
                     edit_features={name: True for name in (
                         "matter_organization", "semantic_operations", "bound_references",
                         "single_record_changes", "source_metadata")},
@@ -4344,10 +4345,14 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
             packet = json.loads(wire["messages"][-1]["content"])["delivery"]
             assert "Remember the local marker is blue." in json.dumps(packet)
             evidence = packet["evidence"][0]["id"]
+            clause = {
+                "text": "User reports the local marker is blue.", "evidence": [evidence],
+                "assertion": {"source": evidence, "kind": "reported"},
+            }
+            if memory_method == "milai_edit_m_v1":
+                clause["conditions"] = []
             return {"role": "assistant", "content": json.dumps({"creates": [{
-                "action": "create", "matter": "User's marker", "clauses": [{
-                    "text": "User reports the local marker is blue.", "evidence": [evidence],
-                    "assertion": {"source": evidence, "kind": "reported"}, "conditions": []}],
+                "action": "create", "matter": "User's marker", "clauses": [clause],
             }], "records": {}})}
         assert not {"save_memory", "update_memory", "confirm_existing_memory"}.intersection(
             t["function"]["name"] for t in wire.get("tools", []))
@@ -4362,6 +4367,9 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
     assert first["status"] == "COMPLETED", first
     assert stages == (["extract", "edit"] if recipe == "extract_then_edit" else ["edit"])
     assert len(first["records"]) == 1
+    if memory_method == "milai_fact_append_v1":
+        assert first["records"][0]["value"]["method_version"] == memory_method
+        assert first["records"][0]["value"]["method_arm"] == "Append-only"
     assert first["operation_status"]["semantic_memory"]["status"] == "committed"
     calls = len(wires)
     again = message(root, resume=True)
@@ -4370,9 +4378,10 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
     assert again["operation_status"]["semantic_memory"]["status"] == "committed"
 
 
-def test_shared_maintenance_obeys_readonly_request_mode(tmp_path, monkeypatch):
+@pytest.mark.parametrize("memory_method", ["milai_edit_b1_v1", "milai_fact_append_v1"])
+def test_shared_maintenance_obeys_readonly_request_mode(tmp_path, monkeypatch, memory_method):
     root = prepared(tmp_path, native=True, request_interpretation=True,
-                    memory_method="milai_edit_b1_v1", edit_interface_version="I2",
+                    memory_method=memory_method, edit_interface_version="I2",
                     maintenance_recipe="extract_then_edit")
 
     def reply(wire, ordinal):

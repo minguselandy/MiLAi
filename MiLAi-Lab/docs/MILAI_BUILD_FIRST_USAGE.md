@@ -14,6 +14,10 @@
 
 `methods/append_memory.py`提供主比较所需的`Append-only`事实追加对照。它复用共同recipe、普通表示、来源／时间字段、dense检索、Reader及MemoryService，只允许创建事实事项；更正、撤销和计划变化作为新的带来源陈述保存，旧记录保持。旧候选仍交付以识别重复陈述，原文与提取提示的证据地位与其他组相同。现有suite的`arms`可选择`Append-only`，实验配置须同时选择共同`maintenance_recipe`和I2；当前公开首轮配置仍只运行M。脚本响应下验证了两次真实SQLite提交、旧值保持、日期归属及重开不重复写入，尚无Append-only真实模型结果，不以其没有UPDATE判失败。
 
+普通Host也可通过现有`memory_method: "milai_fact_append_v1"`选择该方案，同时使用`edit_interface_version: "I2"`和共同`maintenance_recipe`，其余功能配置沿用。使用新的运行目录；当前公开开发配置仍选M。Host经原功能提交边界追加事实，只读、历史、明确遗忘及业务恢复继续走既有路径；追加方案不提供改写工具。脚本响应和实际SQLite已验证保存后重开不重复写入、更正追加并保留旧陈述及两个原始时间、只读不维护；尚无该Host方案的真实模型效果，不据此选择最终方法。
+
+该适配的现有功能检查及两种recipe的Host定向检查通过，Ruff、受影响mypy及包依赖边界通过。完整Host回归仍待候选定稿；已用现有`prepare_edit_functional_inputs.py`将原r52五组输入复制到`artifacts/milai-edit/e5-inputs/historical-r52-v1`，合计135案例／192消息，未初始化语义记忆或运行模型。正式执行仍使用`run_functional.py prepare --fixture ... --controls ...`与`run`；没有controls文件的组省略该参数。候选固定后的新故事另行执行，不能把旧输入改名为新故事。
+
 ## 使用现有入口
 
 在Lab目录使用已有包含LangGraph依赖的Python环境，设置`PYTHONPATH=src`。以下命令会使用配置中的现有本地服务；`message`与benchmark运行会产生真实调用，需保持串行。配置中的本机服务、tokenizer及账本路径按当前环境填写，不创建新服务或预算。

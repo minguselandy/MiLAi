@@ -766,15 +766,54 @@ def whole_rewrite_args(
     }
 
 
-def test_four_arm_public_mapping_retains_the_default_m_identity(tmp_path: Path) -> None:
+def test_public_mapping_retains_the_default_m_identity(tmp_path: Path) -> None:
     assert FUNCTIONAL_ARMS == {
         FUNCTIONAL_B0_METHOD: "B0", FUNCTIONAL_B1_METHOD: "B1",
         FUNCTIONAL_B2_METHOD: "B2", FUNCTIONAL_METHOD: "M",
+        "milai_fact_append_v1": "Append-only",
     }
     with opened(tmp_path) as memory:
         assert memory.arm == "M" and memory.policy["memory_method"] == FUNCTIONAL_METHOD
         assert memory.policy["integration_version"] == "functional_m_v1"
         assert memory.formation_support_review is None and memory.revision_support_review is None
+
+
+def test_append_host_correction_keeps_old_report_and_original_assertion_times(tmp_path):
+    with opened(tmp_path, arm="Append-only", interface_version="I2", features=NEXT_FEATURES,
+                maintenance_recipe="single_pass") as memory:
+        first = None
+        for index, color in enumerate(["blue", "red"]):
+            message_id = "u" if index == 0 else "u2"
+            date = f"2030-01-0{index + 1}"
+            memory.service.capture_user("s", message_id, f"My marker is now {color}.",
+                                        occurred_at=date)
+            memory.context("s", message_id, "functional-m-test-v1")
+
+            def call(stage, messages, schema, reported=color):
+                assert stage == "edit"
+                packet = json.loads(messages[1]["content"])["delivery"]
+                if reported == "red":
+                    assert any("blue" in str(record) for record in packet["records"])
+                return {"creates": [{"action": "create", "matter": "Marker", "clauses": [{
+                    "text": f"My marker is now {reported}.", "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"},
+                }]}], "records": {}}
+
+            results = memory.maintain_sources(cfg(message_id), recipe="single_pass",
+                                              model_call=call, allowed=True)
+            assert results[0]["status"] == "completed" and results[0]["semantic_write_performed"]
+            records = memory.service.records()
+            if first is None:
+                first = copy.deepcopy(records[0])
+            assert memory.service.read(first["id"])["value"] == first["value"]
+        assert len(records) == 2
+        assert {r["value"]["method_arm"] for r in records} == {"Append-only"}
+        assert {r["value"]["edit_state"]["units"][0]["assertion"]["occurred_at"]
+                for r in records} == {"2030-01-01", "2030-01-02"}
+        assert "update_memory" not in {tool.name for tool in memory.writer_tools(cfg("u2"))}
+        with pytest.raises(FunctionalRejection, match="APPEND_ONLY_CREATE_REQUIRED"):
+            memory.apply_writer_proposal(cfg("u2"), "rewrite", {"action": "rewrite"})
+        assert memory.service.records() == records
 
 
 def test_opt_in_actual_wrapper_save_confirmation_and_archived_continuation(tmp_path: Path) -> None:

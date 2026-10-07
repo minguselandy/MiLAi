@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import copy
 from collections.abc import Callable
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableConfig
@@ -41,6 +41,7 @@ from milai_lab.memory.functional_state import (
     reference_key,
     scope_leaves,
 )
+from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.edit_maintenance import MaintenanceRecipe, ModelCall, maintain_event
 from milai_lab.methods.edit_memory import Arm, EditMemory, InterfaceVersion
@@ -49,11 +50,14 @@ FUNCTIONAL_METHOD = "milai_edit_m_v1"
 FUNCTIONAL_B0_METHOD = "milai_edit_b0_v1"
 FUNCTIONAL_B1_METHOD = "milai_edit_b1_v1"
 FUNCTIONAL_B2_METHOD = "milai_edit_b2_v1"
-FUNCTIONAL_ARMS: dict[str, Arm] = {
+FUNCTIONAL_APPEND_METHOD = "milai_fact_append_v1"
+FunctionalArm = Arm | Literal["Append-only"]
+FUNCTIONAL_ARMS: dict[str, FunctionalArm] = {
     FUNCTIONAL_B0_METHOD: "B0",
     FUNCTIONAL_B1_METHOD: "B1",
     FUNCTIONAL_B2_METHOD: "B2",
     FUNCTIONAL_METHOD: "M",
+    FUNCTIONAL_APPEND_METHOD: "Append-only",
 }
 INTEGRATION_VERSION = "functional_m_v1"
 
@@ -98,7 +102,7 @@ class FunctionalEditMemory(FunctionalMemory):
     def __init__(
         self,
         *args: Any,
-        arm: Arm = "M",
+        arm: FunctionalArm = "M",
         interface_version: InterfaceVersion = "v1",
         features: EditFeatures | None = None,
         maintenance_recipe: MaintenanceRecipe | None = None,
@@ -108,9 +112,15 @@ class FunctionalEditMemory(FunctionalMemory):
             raise ValueError("FUNCTIONAL_EDIT_ARM_INVALID")
         super().__init__(*args, **kwargs)
         self.arm = arm
-        self.writer = EditMemory(
-            self.service, arm, interface_version=interface_version, features=features
-        )
+        self.writer: EditMemory
+        if arm == "Append-only":
+            if interface_version != "I2" or maintenance_recipe is None:
+                raise ValueError("FUNCTIONAL_APPEND_REQUIRES_I2_MAINTENANCE_RECIPE")
+            self.writer = AppendMemory(self.service, features=features or EditFeatures())
+        else:
+            self.writer = EditMemory(
+                self.service, arm, interface_version=interface_version, features=features
+            )
         self.features = self.writer.features
         self.interface_version = interface_version
         self.maintenance_recipe = maintenance_recipe
@@ -150,7 +160,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 "outcome. Support review remains an optional caller callback. "
             )
         if not self.local:
-            return EditMemory(self.service, self.arm).instructions() + (
+            return self.writer.instructions() + (
                 "The functional tool signatures replace the proposal envelope: save_memory "
                 "takes units/relations/scope; update_memory takes an actual read_handle and the "
                 "entire replacement units/relations. Include all retained text, qualifications "
@@ -172,7 +182,7 @@ class FunctionalEditMemory(FunctionalMemory):
             if self.conditioned
             else "keep conditions and qualifications in the selected plain text units. "
         )
-        return EditMemory(self.service, self.arm).instructions() + (
+        return self.writer.instructions() + (
             "The functional tool signatures replace the proposal envelope: use save_memory "
             "with units/relations/scope, or update_memory with an actual read_handle and edits. "
             "Do not send action/target_record/base_revision to these tools. Copy edit_unit.unit_id "
@@ -639,6 +649,8 @@ class FunctionalEditMemory(FunctionalMemory):
         """Operation-bound decoding before existing save/update/review/commit gates."""
         if self.interface_version == "v1":
             raise FunctionalRejection("FUNCTIONAL_EDIT_V2_INTERFACE_REQUIRED")
+        if self.arm == "Append-only" and proposal.get("action") != "create":
+            raise FunctionalRejection("APPEND_ONLY_CREATE_REQUIRED")
         bound = self._binding(config)
         key = "edit-writer-operation:" + reference_key([bound, operation_id])
         requested: dict[str, Any] = {
@@ -1425,6 +1437,7 @@ class FunctionalEditMemory(FunctionalMemory):
             replacements.get(tool.name, tool)
             for tool in super().tools()
             if not (tool.name == "save_memory" and create_schema is None)
+            and not (tool.name == "update_memory" and self.arm == "Append-only")
             and not (
                 tool.name == "update_memory"
                 and self.features.enabled
