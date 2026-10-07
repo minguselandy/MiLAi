@@ -14,6 +14,26 @@ class FunctionalRejection(ValueError):
     """Explicit contract refusal before a semantic/visibility mutation is entered."""
 
 
+class FunctionalReviewRejection(FunctionalRejection):
+    """An identified precommit review outcome, distinct from semantic falsity."""
+
+    def __init__(
+        self, message: str, review_status: str, proposal_id: str, failure_type: str | None = None
+    ) -> None:
+        super().__init__(message)
+        self.review_status = review_status
+        self.proposal_id = proposal_id
+        self.failure_type = failure_type
+
+
+class FunctionalMaintenanceRejection(FunctionalRejection):
+    """A durable maintenance allowance refused this proposal before commit."""
+
+    def __init__(self, message: str, details: dict[str, Any]) -> None:
+        super().__init__(message)
+        self.details = details
+
+
 class FunctionalIntegrityError(ValueError):
     """Stored identity or visibility integrity failed; not an ordinary input refusal."""
 

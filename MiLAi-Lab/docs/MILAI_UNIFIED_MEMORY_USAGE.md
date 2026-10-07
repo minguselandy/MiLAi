@@ -7,6 +7,10 @@ benchmark、配置及显式整理／完整请求恢复入口。它是待测功�
 真实模型效果、最终方法选择或Product准入。原[build-first完整任务](
 MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 
+2026-10-07用户要求合并相关GitHub开发内容；PR83的可选来源工作视图和提案额度接入本候选，
+保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
+版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
+
 ## 实现及证据边界
 
 | 能力 | 正常实现／入口 | 当前证据 |

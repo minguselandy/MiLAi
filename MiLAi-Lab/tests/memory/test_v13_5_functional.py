@@ -83,6 +83,103 @@ def invoke(
     return json.loads(response.content)
 
 
+def test_support_context_keeps_selected_bodies_separate_from_exact_record_and_old_support(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, support_context=True, read_interface='explicit_selectors_v1',
+                material_limit=30000) as memory:
+        old_ref = turn(memory, text='For this workshop only, plan two visits weekly.')
+        saved = memory.save(cfg(), 'save', 'For this workshop only, plan two visits weekly.',
+                            handles(memory, old_ref))
+        before = memory.service.read(saved['id'])
+        current_ref = turn(memory, 'change',
+            'For this workshop, change the plan to three weekly; start week is undecided.')
+        selected = handles(memory, current_ref)
+        args = {'fragment_handles': selected, 'read_handle': before['candidate_handle']}
+        result = invoke(memory, 'read_support_context', args, 'view', cfg('change'))
+        assert result['operation_effect'] == 'read_only'
+        assert not result['semantic_write_performed']
+        assert result['support_context']['selection_status'] == (
+            'read_preview_not_committed_field_support')
+        record = next(row for row in result['items'] if row['type'] == 'record')
+        assert record['record_id'] == saved['id'] and record['revision'] == 1
+        assert record['content'] == before['value']['content']
+        assert record['prior_field_support_identity']['content'][0]['source_ref'] == old_ref
+        fragments = [row for row in result['items'] if row['type'] == 'fragment']
+        assert {row['source_ref'] for row in fragments} == {current_ref}
+        assert 'start week is undecided' in ''.join(row['content'] for row in fragments)
+        assert memory.service.read(saved['id'])['value'] == before['value']
+        assert invoke(memory, 'read_support_context', args, 'view', cfg('change')) == result
+    with opened(tmp_path, support_context=True, read_interface='explicit_selectors_v1',
+                material_limit=30000) as memory:
+        memory.context('s', 'change', CONFIG_VERSION)
+        assert invoke(memory, 'read_support_context', args, 'view', cfg('change')) == result
+        assert memory.service.read(saved['id'])['value'] == before['value']
+        revised = memory.update(cfg('change'), 'change', before['candidate_handle'], [{
+            'field': 'content', 'op': 'set',
+            'value': 'For this workshop only, plan three visits weekly; start week undecided.',
+            'fragment_handles': handles(memory, old_ref) + selected}])
+        assert revised['ok'] and revised['id'] == saved['id'] and revised['revision'] == 2
+        value = memory.service.read(saved['id'])['value']
+        assert set(value['functional_support']['content']['source_refs']) == {old_ref, current_ref}
+        assert value['functional_support']['kind'] == before['value']['functional_support']['kind']
+
+
+def test_support_context_rejects_foreign_or_revoked_evidence_and_cache_on_reopen(
+    tmp_path: Path,
+) -> None:
+    owner_text = 'A separate owner private assertion.'
+    with opened(tmp_path, owner='bob') as other:
+        ref = turn(other, text=owner_text)
+        foreign = handles(other, ref)
+    with opened(tmp_path, support_context=True, read_interface='explicit_selectors_v1',
+                material_limit=30000) as memory:
+        ref = turn(memory, text='A temporary phrase visible only before forgetting.')
+        selected = handles(memory, ref)
+        bad = invoke(memory, 'read_support_context', {'fragment_handles': foreign}, 'foreign')
+        assert bad['status'] == 'read_rejected' and owner_text not in canonical(bad)
+        result = invoke(memory, 'read_support_context', {'fragment_handles': selected}, 'view')
+        assert result['ok']
+        turn(memory, 'forget', 'Forget the temporary phrase.')
+        forgotten = memory.service.forget('s', 'forget', fragment_handles=selected)
+        assert forgotten['ok']
+        with pytest.raises(FunctionalRejection):
+            invoke(memory, 'read_support_context', {'fragment_handles': selected}, 'view')
+        turn(memory, 'after', 'Which selected originals are still available?')
+        blocked = invoke(memory, 'read_support_context', {'fragment_handles': selected},
+                         'new-view', cfg('after'))
+        assert blocked['status'] == 'read_rejected'
+        assert 'temporary phrase visible only' not in canonical(blocked)
+    with opened(tmp_path, support_context=True, read_interface='explicit_selectors_v1',
+                material_limit=30000) as memory:
+        turn(memory, 'later', 'What sources are visible now?')
+        blocked = invoke(memory, 'read_support_context', {'fragment_handles': selected},
+                         'reopen', cfg('later'))
+        assert blocked['status'] == 'read_rejected'
+        assert 'temporary phrase visible only' not in canonical(blocked)
+
+
+def test_support_context_oversized_record_reports_omission_and_reaches_selected_original(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, support_context=True, read_interface='explicit_selectors_v1',
+                material_limit=5000) as memory:
+        ref = turn(memory, text='Only the proposed arrangement is known; start date is unknown.')
+        selected = handles(memory, ref)
+        saved = memory.save(cfg(), 'save', 'A proposed arrangement.', selected,
+                            scope={'large': 'x' * 8000})
+        row = memory.service.read(saved['id'])
+        result = invoke(memory, 'read_support_context',
+            {'fragment_handles': selected, 'read_handle': row['candidate_handle']}, 'view')
+        assert result['status'] == 'advanced_with_explicit_omission'
+        assert result['skipped_units'][0]['type'] == 'record'
+        assert result['examined_units'] == 2 and result['next_cursor'] is None
+        assert result['delivery_status'] == 'snapshot_end_with_omissions'
+        assert result['items'][0]['content'].endswith('start date is unknown.')
+        assert len(canonical(result)) <= 5000
+        assert memory.service.read(saved['id'])['value'] == row['value']
+
+
 def test_explicit_existing_confirmation_preserves_version_support_and_owner_on_reopen(
     tmp_path: Path,
 ) -> None:
@@ -1649,6 +1746,207 @@ def test_revision_review_delivery_forget_does_not_revoke_independent_input(
         assert memory.service.source(secret) is None
         assert memory.service.source(independent['source_ref']) is not None
         assert (memory.service.source(assistant['source_ref']) is None) is delivered
+
+
+def test_maintenance_limit_reopens_reuses_refusal_and_new_request_can_reaffirm(
+    tmp_path: Path,
+) -> None:
+    from milai_lab.memory.functional_state import FunctionalReviewRejection
+
+    reviewed: list[dict[str, Any]] = []
+
+    def review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
+        reviewed.append(evidence)
+        delivered()
+        if evidence['binding']['message_id'] == 'u':
+            raise FunctionalReviewRejection(
+                'SCRIPTED_ACTUAL_GAP', 'review_declined', evidence['proposal_id'])
+
+    options = {'semantic_reproposal_policy': 'maintenance_two_proposals_v1',
+               'formation_support_review': review, 'revision_support_review': review}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='Planned three visits weekly; start week undecided.')
+        selected = handles(memory, ref)
+        args = {'content': 'Three visits weekly.', 'fragment_handles': selected}
+        first = invoke(memory, 'save_memory', args, 'first')
+        assert first['review_status'] == 'review_declined'
+        assert invoke(memory, 'save_memory', args, 'different-call-id') == first
+        assert len(reviewed) == 1
+        second = invoke(memory, 'save_memory',
+                        {**args, 'content': 'Three weekly visits.'}, 'second')
+        assert second['review_status'] == 'review_declined' and len(reviewed) == 2
+    with opened(tmp_path, **options) as memory:
+        turn(memory, text='Planned three visits weekly; start week undecided.')
+        third = invoke(memory, 'save_memory',
+                       {**args, 'content': 'Visits three times weekly.'}, 'third')
+        assert third['effect'] == 'none' and third['formation_status'] == 'pending'
+        assert third['maintenance']['proposals_used'] == third['maintenance']['proposal_limit'] == 2
+        assert invoke(memory, 'save_memory', args, 'fourth') == first
+        assert len(reviewed) == 2 and memory.service.source(ref) is not None
+        new_ref = turn(memory, 'reaffirm', 'Please remember the planned frequency, start unknown.')
+        new_args = {'content': 'Planned three visits weekly; start unknown.',
+                    'fragment_handles': [*selected, *handles(memory, new_ref)]}
+        saved = invoke(memory, 'save_memory', new_args, 'reaffirm-save', cfg('reaffirm'))
+        assert saved['status'] == 'committed' and len(reviewed) == 3
+        assert invoke(memory, 'save_memory', new_args, 'reaffirm-save', cfg('reaffirm'))['replayed']
+        duplicate = invoke(memory, 'save_memory', new_args, 'new-id', cfg('reaffirm'))
+        assert duplicate['status'] == 'no_change' and duplicate['existing_record']
+        assert duplicate['id'] == saved['id'] and len(reviewed) == 3
+        correction = turn(memory, 'later-change', 'Change the planned frequency to four.')
+        memory.update(cfg('later-change'), 'update-later',
+            memory.service.read(saved['id'])['candidate_handle'], [{'field': 'content',
+                'op': 'set', 'value': 'Planned four visits weekly; start unknown.',
+                'fragment_handles': [*handles(memory, correction), *selected]}])
+        memory.context('s', 'reaffirm', CONFIG_VERSION)
+        stale = invoke(memory, 'save_memory', new_args, 'stale-copy', cfg('reaffirm'))
+        assert stale['status'] == 'rejected' and 'ORIGINAL_OPERATION_ID' in stale['reason']
+        assert memory.service.read(saved['id'])['value']['revision'] == 2
+
+
+def test_maintenance_limit_binds_record_not_wording_version_or_source_order(tmp_path: Path) -> None:
+    reviewed: list[dict[str, Any]] = []
+
+    def review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
+        reviewed.append(evidence)
+        delivered()
+        if evidence['binding']['message_id'] == 'change':
+            raise FunctionalRejection('SCRIPTED_REVISION_GAP')
+
+    options = {'semantic_reproposal_policy': 'maintenance_two_proposals_v1',
+               'formation_support_review': review, 'revision_support_review': review}
+    with opened(tmp_path, **options) as memory:
+        a = turn(memory, text='Only sample A: unit A.')
+        ra = memory.save(cfg(), 'save-a', 'Only sample A: unit A.', handles(memory, a))
+        b = turn(memory, 'b', 'Only sample B: unit B.')
+        rb = memory.save(cfg('b'), 'save-b', 'Only sample B: unit B.', handles(memory, b))
+        correction = turn(memory, 'change', 'For sample A use unit C; for sample B use unit D.')
+        read_a = memory.service.read(ra['id'])
+        selections = [*handles(memory, a), *handles(memory, correction)]
+        args = {'read_handle': read_a['candidate_handle'], 'changes': [{'field': 'content',
+            'op': 'set', 'value': 'Only sample A: unit C.', 'fragment_handles': selections}]}
+        first = invoke(memory, 'update_memory', args, 'a1', cfg('change'))
+        assert first['status'] == 'rejected'
+        args['changes'][0]['fragment_handles'] = list(reversed(selections))
+        assert invoke(memory, 'update_memory', args, 'a2', cfg('change'))['status'] == 'rejected'
+        args['changes'][0]['value'] = 'For sample A only, unit C.'
+        args['read_handle'] = memory.service.read(ra['id'])['candidate_handle']
+        limited = invoke(memory, 'update_memory', args, 'a3', cfg('change'))
+        assert limited['maintenance']['proposals_used'] == 2
+        assert len(reviewed) == 4
+        args_b = {'read_handle': memory.service.read(rb['id'])['candidate_handle'],
+                  'changes': [{'field': 'content', 'op': 'set', 'value': 'Only sample B: unit D.',
+                               'fragment_handles': handles(memory, correction)}]}
+        assert invoke(memory, 'update_memory', args_b, 'b1', cfg('change'))['status'] == 'rejected'
+        assert len(reviewed) == 5  # An independent actual target gets its own allowance.
+        no_change = invoke(memory, 'update_memory', {'read_handle': read_a['candidate_handle'],
+                           'changes': []}, 'unchanged', cfg('change'))
+        assert no_change['status'] == 'no_change' and len(reviewed) == 5
+        assert memory.service.read(ra['id'])['value'] == read_a['value']
+
+
+def test_maintenance_refusal_cache_never_restores_forgotten_or_foreign_support(
+    tmp_path: Path,
+) -> None:
+    def review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
+        raise FunctionalRejection('SCRIPTED_DECLINE')
+
+    options = {'semantic_reproposal_policy': 'maintenance_two_proposals_v1',
+               'formation_support_review': review, 'revision_support_review': review}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='PRIVATE_SUPPORT_FOR_REJECTION')
+        args = {'content': 'PRIVATE_SUPPORT_FOR_REJECTION',
+                'fragment_handles': handles(memory, ref)}
+        assert invoke(memory, 'save_memory', args, 'decline')['reason'] == 'SCRIPTED_DECLINE'
+        turn(memory, 'forget', 'Forget that source.')
+        forgotten = invoke(memory, 'forget_memory', {'fragment_handles': args['fragment_handles']},
+                           'forget', cfg('forget'))
+        assert forgotten['ok']
+        denied = invoke(memory, 'save_memory', args, 'again', cfg('forget'))
+        assert denied['reason'] != 'SCRIPTED_DECLINE' and denied['effect'] == 'none'
+    with opened(tmp_path, owner='bob', **options) as foreign:
+        turn(foreign, text='A different owner.')
+        denied = invoke(foreign, 'save_memory', args, 'foreign', cfg(owner='bob'))
+        assert denied['reason'] != 'SCRIPTED_DECLINE' and denied['effect'] == 'none'
+
+
+@pytest.mark.parametrize('after_commit', [False, True])
+def test_maintenance_approval_does_not_replay_unknown_commit_as_new_operation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, after_commit: bool,
+) -> None:
+    from milai_lab.memory.functional_state import FunctionalOperationError
+
+    reviewed: list[dict[str, Any]] = []
+
+    def review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
+        reviewed.append(evidence)
+        delivered()
+
+    options = {'semantic_reproposal_policy': 'maintenance_two_proposals_v1',
+               'formation_support_review': review, 'revision_support_review': review}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='Only this trial uses unit A.')
+        args = {'content': 'Only this trial uses unit A.', 'fragment_handles': handles(memory, ref)}
+        commit = memory._commit
+
+        def interrupted(*args: Any, **kwargs: Any) -> dict[str, Any]:
+            if after_commit:
+                commit(*args, **kwargs)
+            raise FunctionalOperationError('semantic_commit', ValueError('acknowledgment lost'))
+
+        monkeypatch.setattr(memory, '_commit', interrupted)
+        unknown = invoke(memory, 'save_memory', args, 'original')
+        assert unknown['status'] == 'outcome_unknown' and unknown['error_type'] == 'ValueError'
+        assert len(reviewed) == 1
+    with opened(tmp_path, **options) as memory:
+        turn(memory, text='Only this trial uses unit A.')
+        prohibited = invoke(memory, 'save_memory', args, 'new-operation')
+        if after_commit:
+            assert prohibited['status'] == 'no_change' and prohibited['existing_record']
+        else:
+            assert prohibited['effect'] == 'none'
+            assert 'ORIGINAL_OPERATION_ID' in prohibited['reason']
+            changed = invoke(memory, 'save_memory',
+                             {**args, 'content': 'Unit A is used only in this trial.'}, 'reworded')
+            assert changed['effect'] == 'none' and 'PRIOR_OUTCOME_UNCONFIRMED' in changed['reason']
+            assert changed['maintenance']['proposals_used'] == 1 and len(reviewed) == 1
+        recovered = invoke(memory, 'save_memory', args, 'original')
+        assert recovered['ok'] and len(reviewed) == 1
+        assert recovered['status'] == ('no_change' if after_commit else 'committed')
+        assert memory.service.read(recovered['id'])['value']['revision'] == 1
+
+
+def test_maintenance_create_then_revise_actual_record_keeps_original_allowance(
+    tmp_path: Path,
+) -> None:
+    reviewed: list[dict[str, Any]] = []
+
+    def review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
+        reviewed.append(evidence)
+        delivered()
+
+    options = {'semantic_reproposal_policy': 'maintenance_two_proposals_v1',
+               'formation_support_review': review, 'revision_support_review': review}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='Only sample A uses unit A; other samples are unknown.')
+        selected = handles(memory, ref)
+        saved = memory.save(cfg(), 'create', 'Sample A uses unit A.', selected)
+        row = memory.service.read(saved['id'])
+        revised = invoke(memory, 'update_memory', {'read_handle': row['candidate_handle'],
+            'changes': [{'field': 'content', 'op': 'set',
+                         'value': 'Only sample A uses unit A; other samples are unknown.',
+                         'fragment_handles': selected}]}, 'revision')
+        assert revised['ok'] and revised['id'] == saved['id'] and revised['revision'] == 2
+        assert len(reviewed) == 2
+    with opened(tmp_path, **options) as memory:
+        turn(memory, text='Only sample A uses unit A; other samples are unknown.')
+        row = memory.service.read(saved['id'])
+        limited = invoke(memory, 'update_memory', {'read_handle': row['candidate_handle'],
+            'changes': [{'field': 'content', 'op': 'set',
+                         'value': 'Unit A is used by sample A only; other samples remain unknown.',
+                         'fragment_handles': selected}]}, 'third')
+        assert limited['effect'] == 'none' and 'PROPOSAL_LIMIT' in limited['reason']
+        assert limited['maintenance']['proposals_used'] == 2 and len(reviewed) == 2
+        assert memory.service.read(saved['id'])['value'] == row['value']
 
 
 def test_formation_review_rejection_preserves_raw_and_replay_skips_review(tmp_path: Path) -> None:

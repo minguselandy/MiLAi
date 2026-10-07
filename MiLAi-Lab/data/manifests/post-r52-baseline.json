@@ -1,0 +1,381 @@
+{
+  "schema": "post_r52_w0_baseline_v1",
+  "status": "BASELINE_AND_LOCAL_REPLAYABILITY_VERIFIED_NO_NEW_MODEL_RUNS",
+  "plan": {
+    "path": "docs/MILAI_R52_FOLLOWUP_DEVELOPMENT_EXPERIMENT_PLAN.md",
+    "sha256": "54930c7086786151b4c872c0497f034eda9126bc529fafa2e3cac085b9b23fbd"
+  },
+  "baseline": {
+    "head_commit": "fc1c6c93f6e75f8775e2d5195bb35e6e8ce0e0b1",
+    "tree": "08f1d355eeb2768bbd8bbacc85c889efcde3c65b",
+    "config_file_sha256": "7a297138e98e08d0aa94b0c051ee558ead2a127f35de4f4dc0ec09f39db1435a",
+    "original_ledger_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "ledger_sha256": "e8113aa1372d4131dd69766d081b5714b587c8a3b80cf265bfca226004c89dd6",
+    "ledger_totals": {
+      "generation_requests": 15390,
+      "generation": {
+        "charged_tokens": 59894199,
+        "known_tokens": 59863812,
+        "unknown_usage": 1
+      },
+      "embedding": {
+        "charged_tokens": 964645,
+        "known_tokens": 964645,
+        "unknown_usage": 0
+      },
+      "limits": {
+        "arms": 3,
+        "embedding_tokens": null,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "questions": 12
+      }
+    },
+    "all_sealed_files_checked": 3052,
+    "raw_generation_requests_indexed": 981
+  },
+  "local_artifacts": {
+    "artifacts/post-r52/w0/evidence-index.json": "0a1b93aae2c7780efe787e5fd6dd5eb57b3642e451f97798ee2df678cfd21211",
+    "artifacts/post-r52/w0/effective-baseline.json": "3795dd70aa4d120a2851906b734bccccae94b165ecb5651fe880f1b19677ba84"
+  },
+  "cohorts": [
+    {
+      "id": "continuation-r51",
+      "source_commit": "684f9dc765c24aedbbbd91c7cbb6161bd12726d8",
+      "seal_sha256": "281d5adb8bb538b2d1bea691973fb2fd1b7772d7a0821e6682c7d52edd930d8a",
+      "freeze_sha256": "4576eae7a98e7b528aa365e5dfa44cb8594d88724e9f2ee65bc4df0c233c77c7",
+      "review_sha256": "9ef0311a225d925790a473a1ee753e22e21c8ddc54c1fd680fedd6376d140f74",
+      "sealed_files": 55,
+      "replayability": "ORIGINALS_AVAILABLE",
+      "original_counts": {
+        "FAIL": 2
+      },
+      "cost_delta": {
+        "generation_requests": 13,
+        "generation.known_tokens": 67405,
+        "generation.charged_tokens": 67405,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    },
+    {
+      "id": "continuation-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "seal_sha256": "c11ce61b260521ce3682ee1b0e114e3be423cd8c309dc23f2b97a3145a6b9039",
+      "freeze_sha256": "1bf63f99da316dcf51bd7de9eaff133291979724212cab7d1034f42788fad638",
+      "review_sha256": "be911302d59eb36e23fb0a33fccbf80f0a168ee547e073a6092e11e0be1379b6",
+      "sealed_files": 63,
+      "replayability": "ORIGINALS_AVAILABLE",
+      "original_counts": {
+        "PASS_SCOPED": 2
+      },
+      "cost_delta": {
+        "generation_requests": 27,
+        "generation.known_tokens": 205721,
+        "generation.charged_tokens": 205721,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    },
+    {
+      "id": "l1-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "seal_sha256": "5c8603559cd831a1d828df02906e99678a480bb4144cad28623f14adffb81935",
+      "freeze_sha256": "241eafbb329eb8dbddcb328956567898517d0c2eeb9bfdaa5df451d21c9b38c9",
+      "review_sha256": "b48caddbadc453a1c3ebb1b9b3093acfe56975f8b142f22db4439522c7357bac",
+      "sealed_files": 612,
+      "replayability": "ORIGINALS_AVAILABLE",
+      "original_counts": {
+        "PASS_SCOPED": 23,
+        "FAIL": 1
+      },
+      "cost_delta": {
+        "generation_requests": 222,
+        "generation.known_tokens": 1230598,
+        "generation.charged_tokens": 1230598,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    },
+    {
+      "id": "l2-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "seal_sha256": "e5ed5989a59d98b14513d1c84644d9aea0d2a97eeb942a640614fe0bbb3a8451",
+      "freeze_sha256": "871171b569ec218b5e14573fff3995f2552be7c4e93b5533e69c5e8e40870dd5",
+      "review_sha256": "e7a3d94a450d09cd60805d8eb8281adab1dbf4f41a1fd9036661e226c60d9250",
+      "sealed_files": 353,
+      "replayability": "ORIGINALS_AVAILABLE",
+      "original_counts": {
+        "PASS_SCOPED": 9,
+        "FAIL": 3
+      },
+      "cost_delta": {
+        "generation_requests": 167,
+        "generation.known_tokens": 1368243,
+        "generation.charged_tokens": 1368243,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    },
+    {
+      "id": "l3-formation-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "seal_sha256": "b538d5285a08c6ab6630c4986b06bd567f38e808de886501ccc21fe884e6b7ee",
+      "freeze_sha256": "52aa3b63b3113bd25a70f79e9cd3039257deef7a4c45803d88e523f03e88ac40",
+      "review_sha256": "a61596161158a033b10f694e814c778850993ed7ef97b83190e1560e330f3c8f",
+      "sealed_files": 1075,
+      "replayability": "ORIGINALS_AVAILABLE",
+      "original_counts": {
+        "PASS_SCOPED": 41,
+        "FAIL": 16
+      },
+      "cost_delta": {
+        "generation_requests": 328,
+        "generation.known_tokens": 2338709,
+        "generation.charged_tokens": 2338709,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    },
+    {
+      "id": "l3-reading-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "seal_sha256": "49d8640f63c6e4e5cfa8aadb1736b68f8b3a1b9c245b25042c9f393f86b44b39",
+      "freeze_sha256": "749732726f87460b96509e0d4b5d5e7be92623e28e278baa7994325455deb384",
+      "review_sha256": "fd95df6445a36f112496ae7dc1bd80bc3a34c05692bd3cd057cd85c0d2487380",
+      "sealed_files": 485,
+      "replayability": "ORIGINALS_AVAILABLE",
+      "original_counts": {
+        "FAIL": 13,
+        "PASS_SCOPED": 17
+      },
+      "cost_delta": {
+        "generation_requests": 65,
+        "generation.known_tokens": 538658,
+        "generation.charged_tokens": 538658,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    },
+    {
+      "id": "l4-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "seal_sha256": "aeff52f24a27e055b33322e7d4fe1f1982d15dc1ec1845d2aa1cf426b7923f1d",
+      "freeze_sha256": "e2fa83518d9db2c767686941407481f35524d37d05c703e00c30a02c6cedb870",
+      "review_sha256": "9cb8e89f63ced6fdf3f9bd72eaf44d0085f36ab8dae1b882699fb81d43e43f20",
+      "sealed_files": 369,
+      "replayability": "ORIGINALS_AVAILABLE",
+      "original_counts": {
+        "PASS_SCOPED": 9,
+        "FAIL": 3
+      },
+      "cost_delta": {
+        "generation_requests": 149,
+        "generation.known_tokens": 1040502,
+        "generation.charged_tokens": 1040502,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    },
+    {
+      "id": "forget-r52",
+      "source_commit": "2166cc746cff1665bfa809a9fc59757bf0b8b5d6",
+      "seal_sha256": "a2de5b60c2bb16a16228aaed901d728b5a81c9fd96ae5a30a822cb3674b5c1a9",
+      "freeze_sha256": "eb24e1c3b4614767742a2a95be262a6bdbe176f42930ea8b002868d67c196398",
+      "review_sha256": "00099c6e9528e801e140754af973abff6aeda3571e2c883f407e3d27251957f8",
+      "sealed_files": 40,
+      "replayability": "ORIGINALS_AVAILABLE",
+      "original_counts": {
+        "PASS_SCOPED": 1
+      },
+      "cost_delta": {
+        "generation_requests": 10,
+        "generation.known_tokens": 47280,
+        "generation.charged_tokens": 47280,
+        "generation.unknown_usage": 0,
+        "embedding.known_tokens": 0,
+        "embedding.charged_tokens": 0,
+        "embedding.unknown_usage": 0
+      }
+    }
+  ],
+  "effective_parameters_from_actual_http": {
+    "classify_current_request": [
+      {
+        "parameters": {
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          },
+          "max_tokens": 8192,
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "response_format": null,
+          "temperature": 0.0,
+          "tool_choice": "required"
+        },
+        "actual_requests": 203
+      }
+    ],
+    "host_execution": [
+      {
+        "parameters": {
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_tokens": 8192,
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "response_format": null,
+          "temperature": 1.0,
+          "tool_choice": "auto"
+        },
+        "actual_requests": 539
+      },
+      {
+        "parameters": {
+          "chat_template_kwargs": {
+            "enable_thinking": true
+          },
+          "max_tokens": 8192,
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "response_format": null,
+          "temperature": 1.0,
+          "tool_choice": "required"
+        },
+        "actual_requests": 11
+      }
+    ],
+    "resolve_continuation_operations": [
+      {
+        "parameters": {
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          },
+          "max_tokens": 8192,
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "response_format": null,
+          "temperature": 0.0,
+          "tool_choice": "required"
+        },
+        "actual_requests": 18
+      }
+    ],
+    "review_formation_support": [
+      {
+        "parameters": {
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          },
+          "max_tokens": 8192,
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "response_format": null,
+          "temperature": 0.0,
+          "tool_choice": "required"
+        },
+        "actual_requests": 196
+      }
+    ],
+    "review_revision_support": [
+      {
+        "parameters": {
+          "chat_template_kwargs": {
+            "enable_thinking": false
+          },
+          "max_tokens": 8192,
+          "model": "Qwen3.6-35B-A3B-FP8",
+          "response_format": null,
+          "temperature": 0.0,
+          "tool_choice": "required"
+        },
+        "actual_requests": 14
+      }
+    ]
+  },
+  "frozen_development_selection": {
+    "selection_before_new_method_or_results": true,
+    "X2": {
+      "failures": [
+        "RFC7574-eid4724",
+        "RFC7574-eid4726",
+        "RFC7788-eid4677",
+        "RFC7788-eid5113",
+        "RFC7940-eid5986",
+        "RFC7970-eid5583",
+        "RFC8259-eid7603",
+        "RFC8360-eid5638",
+        "RFC8466-eid5615",
+        "RFC8794-eid7189",
+        "RFC8824-eid8270",
+        "RFC9115-eid7336",
+        "RFC9562-eid8288",
+        "RFC9580-eid8465",
+        "RFC9711-eid8783",
+        "RFC9793-eid8463"
+      ],
+      "matched_pass_controls": [
+        "RFC7574-eid4725",
+        "RFC7788-eid5021",
+        "RFC7940-eid8409",
+        "RFC7970-eid5544",
+        "RFC8259-eid7600",
+        "RFC8360-eid5870",
+        "RFC8466-eid6922",
+        "RFC9580-eid8466"
+      ],
+      "control_selection_reason": "Eight prior terminal successes from the same RFC groups as failures, covering normative scope, units, identifiers, alternatives, exceptions and explicit unresolved status. Overrejection and recovered-provider histories retained; terminal pass is not a clean first proposal."
+    },
+    "X3": {
+      "delivery_gaps": [
+        "t0-a0c725c212efae75",
+        "t0-ca61a29da8aed4a8",
+        "t0-cb5be9b136526465",
+        "t0-eba0d031c65ff246"
+      ],
+      "core_correct_extra_error": [
+        "t0-031c3e8238595fff",
+        "t0-181098e89b47832b",
+        "t0-b318e27eb81ec145",
+        "t0-c7ddaea5265c6b8e"
+      ],
+      "pass_controls": [
+        "t0-21b6c95abab65d34",
+        "t0-6bd7ea3069a5a3f6",
+        "t0-ee47970fbb986788",
+        "t0-f24d486ce83eb94b"
+      ],
+      "control_selection_reason": "Preselected correct public-boundary, normative, technical-table and dynamic-count cases. Same-source questions are paired/correlated, never counted as independent histories."
+    },
+    "X1": "Not yet frozen: derive fixed supported and controlled-error pairs from original evidence before any new reviewer result.",
+    "X4": "Not yet frozen: actual stage identities above precede probe construction.",
+    "X5_new_confirmation": "NOT_AUTHORED; only after final candidate freeze."
+  },
+  "limitations": [
+    "Original semantic grades are retained single-team judgments; W0 does not independently regrade them.",
+    "An available exact source/trace/database proves replayability and identity, not semantic support.",
+    "The first local index omitted top-level retracted revision; corrected before freeze, prior intermediate retained; original artifacts unchanged.",
+    "Case rows and HTTP requests are not pooled into an independent-task accuracy."
+  ],
+  "execution_order": [
+    "M0 done",
+    "M1 W1 input and W2 local contracts plus X0",
+    "M2 X1, X2 A0/A1; conditional A2",
+    "M3 W3 and X3",
+    "M4 W4 and X4",
+    "M5 W5 and full X5",
+    "M6 terminal artifacts and exact tested identity"
+  ],
+  "product_status": "NO_GO",
+  "functional_acceptance_inherited": "PARTIAL"
+}

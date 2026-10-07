@@ -1,3 +1,10 @@
+# 2026-10-07: user-requested GitHub integration
+
+The user explicitly requests processing and merging related GitHub pull requests.
+Root integrates PR83/84/85 with current normal IDs and checks, preserving each
+historical experiment and all unresolved scope. This supersedes earlier draft-only
+publication instructions; a code merge never completes research or admits Product.
+
 # 2026-10-07: unified multi-agent development authorized
 
 The current user explicitly activates MILAI_MULTI_AGENT_DEVELOPMENT_TASKS.md and
@@ -1770,6 +1777,26 @@ with a reviewable draft PR and CI verification. This does not pause the experime
 or authorize a merge. Keep serial E1 running and preserve its frozen source copy;
 raw corpora, databases, model files and request logs stay ignored. All remaining
 experiment and reporting requirements above remain active.
+
+# Historical post-r52 activation (2026-10-04)
+
+# 2026-10-04 post-r52 follow-up execution
+
+The user explicitly activated docs/MILAI_R52_FOLLOWUP_DEVELOPMENT_EXPERIMENT_PLAN.md.
+Execute W0-W5 and X0-X5 in the declared M0-M6 order from PR82 main merge
+fc1c6c93f6e75f8775e2d5195bb35e6e8ce0e0b1 in this isolated post-r52 worktree.
+The earlier v13.5 goal is completed as scoped experimental delivery, not full functional
+acceptance. Preserve every r52 original, assessment, source freeze and continuous ledger.
+First verify original artifacts and effective stage parameters; do not rerun r52 as W0.
+Freeze matched cases and source-based labels before new results. Keep W1 presentation,
+W2 review contract/attempt limits, W3 reading and W4 communication changes separable.
+A0/A1 precede conditional A2. One candidate must then complete the entire X5 denominator;
+new confirmation stories are authored only after that candidate is frozen.
+Root alone owns serial actual model HTTP and the original ledger. No new service/model,
+Product/Archive changes, default weakening, hidden answer inputs, T1-T3 or F5 expansion.
+New runtime behavior requires direct mechanical checks and own CI before model admission.
+Single-team review limitations, semantic failures and all first attempts remain explicit.
+No candidate is complete merely because local tests or publication CI pass.
 
 ---
 

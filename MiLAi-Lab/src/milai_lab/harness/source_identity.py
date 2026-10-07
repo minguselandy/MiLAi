@@ -23,6 +23,7 @@ MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/embeddings.py",
     "src/milai_lab/memory/episodes.py",
     "src/milai_lab/memory/functional.py",
+    "src/milai_lab/memory/functional_maintenance.py",
     "src/milai_lab/memory/functional_state.py",
     "src/milai_lab/memory/mcp.py",
     "src/milai_lab/memory/observation.py",
