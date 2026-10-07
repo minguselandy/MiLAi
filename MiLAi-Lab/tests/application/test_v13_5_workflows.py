@@ -22,6 +22,8 @@ from langgraph.store.sqlite import SqliteStore
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.journal import UnknownBusinessAction
 from milai_lab.application.recovery import UnknownSemanticCommit, resume_request
+from milai_lab.application.request_plans import compile_application_requests, project_stage_receipt
+from milai_lab.contracts.memory import VerifiedObjectRef
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.functional import FunctionalMemory
@@ -455,6 +457,7 @@ def test_resume_unknown_memory_keeps_original_binding_across_sessions(
         unresolved = resume_request(
             app, adapter, "original-request", current=current, save_result=no_new_save,
             reconcile_memory=still_unknown, semantic_attempt_binding=new_binding,
+            execute_business=False,
         )
         assert unresolved["memory"]["status"] == "semantic_unknown"
         assert unresolved["memory"]["attempts"] == [original_attempt]
@@ -466,6 +469,7 @@ def test_resume_unknown_memory_keeps_original_binding_across_sessions(
         complete = resume_request(
             app, adapter, "original-request", current=current, save_result=no_new_save,
             reconcile_memory=actual_commit, semantic_attempt_binding=new_binding,
+            execute_business=False,
         )
         assert complete["complete"] and complete["memory"]["status"] == "committed"
         assert complete["memory"]["attempts"] == [original_attempt]
@@ -512,6 +516,196 @@ def test_resume_binding_cannot_authorize_new_memory_attempt(
         assert result["memory"]["current_permission"] == "not_authorized_current_request"
         assert result["memory"]["attempts"] == [] and service.records() == []
         assert len(app.world.snapshot()["attempts"]) == 1
+
+
+def test_original_request_binding_and_unattempted_items_are_registered_before_effects(
+    tmp_path: Path,
+) -> None:
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, "reservation")
+        requirements = compile_application_requests("reservation", [{
+            "target": {"item_key": "mechanical item"},
+            "actions": [{"operation": "reserve_and_label", "arguments": {
+                "quantity": 1, "destination": "local", "packing": "box",
+            }}],
+        }], save_result=True)[0]
+        original = json.loads(json.dumps(requirements))
+        binding = {"source_ref": service.event_id("session", "message", "user"),
+                   "session": "session", "turn_id": "message", "config_version": "plan-v1"}
+        old_binding = dict(binding)
+        key, row = app.progress.request_state(
+            "alice", "whole-request", requirements, binding=binding,
+        )
+        assert row["requirements"]["steps"][1]["operation"] == "complete_label"
+        assert row["request_progress"]["business"]["steps"] == [
+            {"id": "reservation", "status": "pending", "attempts": []},
+            {"id": "label", "status": "pending", "attempts": []},
+        ]
+        assert row["request_progress"]["memory"]["status"] == "pending"
+        assert row["request_progress"]["feedback"]["status"] == "pending"
+        assert row["request_progress"]["discoveries"] == []
+        assert app.world.snapshot()["attempts"] == [] and service.records() == []
+        requirements["target"]["item_key"] = "caller changed its local plan"
+        binding["turn_id"] = "caller changed its local binding"
+        stored_key, stored = app.progress.request_state("alice", "whole-request", None)
+        assert stored_key == key and stored["requirements"] == original
+        assert stored["binding"] == old_binding
+        with pytest.raises(ValueError, match="APPLICATION_REQUEST_REQUIREMENTS_CHANGED"):
+            app.progress.request_state("alice", "whole-request", requirements)
+        with pytest.raises(ValueError, match="APPLICATION_REQUEST_BINDING_CHANGED"):
+            app.progress.request_state("alice", "whole-request", None, binding=binding)
+        _, legacy = app.progress.request_state("alice", "legacy-request", original)
+        assert "binding" not in legacy and "request_progress" not in legacy
+        with pytest.raises(ValueError, match="APPLICATION_REQUEST_BINDING_CHANGED"):
+            app.progress.request_state("alice", "legacy-request", None, binding=old_binding)
+        _, legacy = app.progress.request_state("alice", "legacy-request", None)
+        assert "binding" not in legacy and "request_progress" not in legacy
+
+
+@pytest.mark.parametrize("workflow", ["reservation", "document"])
+def test_compiled_host_request_reopens_and_keeps_actual_business_dispatch_external(
+    tmp_path: Path, workflow: str,
+) -> None:
+    reservation = workflow == "reservation"
+    target = {"item_key": "mechanical item"} if reservation else {"title": "mechanical draft"}
+    actions = ([{"operation": "reserve_and_label", "arguments": {
+        "quantity": 1, "destination": "local", "packing": "box",
+    }}] if reservation else [
+        {"operation": "create_or_update_draft", "arguments": {"content": "Original content"}},
+        {"operation": "approve_document_version", "arguments": {}},
+        {"operation": "publish_approved_document", "arguments": {"audience": "local team"}},
+    ])
+    requirements = compile_application_requests(workflow, [{"target": target, "actions": actions}],
+                                                save_result=True)[0]
+    operations = tuple(step["operation"] for step in requirements["steps"])
+    options = {"initial_label_available" if reservation else "initial_publication_available": False}
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, workflow, **options)
+        binding = {"source_ref": service.event_id("session", "message", "user"),
+                   "session": "session", "turn_id": "message", "config_version": "plan-v1"}
+        app.progress.request_state("alice", "whole-request", requirements, binding=binding)
+        before = app.world.snapshot()
+        adapter = app.adapter(service, "session", "message", allowed_operations=operations)
+        pending = resume_request(app, adapter, "whole-request", execute_business=False)
+        assert pending["business"]["status"] == "pending_host_execution"
+        assert all(step["attempts"] == [] for step in pending["business"]["steps"])
+        assert app.world.snapshot() == before
+        readonly = resume_request(app, adapter, "whole-request", current={"readonly": True},
+                                  execute_business=False)
+        assert readonly["business"]["status"] == "observed_only"
+        denied = resume_request(app, app.adapter(service, "session", "message"),
+                                "whole-request", execute_business=False)
+        assert denied["business"]["status"] == "not_authorized_current_request"
+        assert app.world.snapshot() == before
+        if reservation:
+            actual = adapter.execute("reserve_and_label", reserve_args(), attempt_id="host-reserve")
+            assert actual["business_effect"] == "partial"
+            actual["call_identity"] = {"thread_id": adapter.runtime_config["configurable"][
+                "thread_id"], "generation_id": "host-reserve", "call_id": "host-reserve"}
+            stage_results = [project_stage_receipt(step, actual) for step in requirements["steps"]]
+            assert [result["business_effect"] for result in stage_results] == ["confirmed", "none"]
+            assert all(result["receipt"] == actual["receipt"]
+                       and result["source_ref"] == actual["source_ref"]
+                       and result["call_identity"] == actual["call_identity"]
+                       and result["original_business_effect"] == "partial"
+                       for result in stage_results)
+            unknown = project_stage_receipt(requirements["steps"][1],
+                                            {**actual, "business_effect": "unknown"})
+            assert unknown["business_effect"] == "unknown" and not unknown["stage_satisfied"]
+        else:
+            draft = adapter.execute("create_or_update_draft", {**target,
+                "content": "Original content", "document_version": 0}, attempt_id="host-draft")
+            current = adapter.discover(target, attempt_id="host-current-approval")
+            approved = adapter.execute("approve_document_version", {}, attempt_id="host-approve",
+                                       ref=VerifiedObjectRef(**current["object_ref"]))
+            current = adapter.discover(target, attempt_id="host-current-publication")
+            published = adapter.execute("publish_approved_document", {"audience": "local team"},
+                attempt_id="host-publish", ref=VerifiedObjectRef(**current["object_ref"]))
+            assert published["business_effect"] == "none"
+            stage_results = [project_stage_receipt(step, actual) for step, actual in zip(
+                requirements["steps"], [draft, approved, published], strict=True)]
+        key, row = app.progress.request_state("alice", "whole-request", None)
+        state = row["request_progress"]
+        for step, actual in zip(state["business"]["steps"], stage_results, strict=True):
+            step["attempts"].append({"attempt_id": actual["attempt_id"], "status": "complete",
+                                     "result": actual})
+            step["status"] = "completed" if actual["stage_satisfied"] else "incomplete"
+        app.progress.save_request_state(key, state)
+        after_effects = app.world.snapshot()
+        partial = resume_request(app, adapter, "whole-request", execute_business=False)
+        assert partial["business"]["status"] == "pending_host_execution"
+        assert partial["business"]["steps"][-1]["status"] != "superseded"
+        assert partial["memory"]["status"] == "pending"
+        assert app.world.snapshot() == after_effects
+
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, workflow, **options)
+        service.capture_user("new-session", "continue", "Complete the remaining step only.")
+        _, original = app.progress.request_state("alice", "whole-request", None)
+        assert original["binding"] == binding and original["requirements"] == requirements
+        finish = "complete_label" if reservation else "publish_approved_document"
+        adapter = app.adapter(service, "new-session", "continue", allowed_operations=(finish,))
+        current = adapter.discover(target, attempt_id="host-fresh-state")
+        if reservation:
+            app.world.set_label_available("actual-labels-back", True)
+        else:
+            app.world.set_publication_available("actual-publication-back", True)
+        pending = resume_request(app, adapter, "whole-request", execute_business=False)
+        assert pending["business"]["status"] == "pending_host_execution"
+        completed = adapter.execute(finish, {} if reservation else {"audience": "local team"},
+            attempt_id="host-finish", ref=VerifiedObjectRef(**current["object_ref"]))
+        assert completed["receipt"]["ok"]
+        after_finish = app.world.snapshot()
+        summary = resume_request(app, adapter, "whole-request", execute_business=False)
+        assert summary["business"]["status"] == "completed" and not summary["complete"]
+        assert summary["memory"]["status"] == summary["feedback"]["status"] == "pending"
+        assert app.world.snapshot() == after_finish
+        if reservation:
+            assert [attempt["operation"] for attempt in after_finish["attempts"]] == [
+                "reserve_and_label", "complete_label"]
+        else:
+            document = after_finish["documents"][0]
+            assert len(document["versions"]) == len(document["approvals"]) == len(
+                document["publications"]) == 1
+        assert original["request_progress"]["business"]["steps"][-1]["attempts"][0][
+            "result"]["business_effect"] == "none"
+
+
+@pytest.mark.parametrize("workflow", ["reservation", "document"])
+def test_compiled_request_keeps_default_cli_execution_and_observed_versions(
+    tmp_path: Path, workflow: str,
+) -> None:
+    reservation = workflow == "reservation"
+    target = {"item_key": "mechanical item"} if reservation else {"title": "mechanical draft"}
+    actions = ([{"operation": "reserve_and_label", "arguments": {
+        "quantity": 1, "destination": "local", "packing": "box",
+    }}] if reservation else [
+        {"operation": "create_or_update_draft", "arguments": {"content": "Original content"}},
+        {"operation": "approve_document_version", "arguments": {}},
+        {"operation": "publish_approved_document", "arguments": {"audience": "local team"}},
+    ])
+    requirements = compile_application_requests(workflow, [{"target": target, "actions": actions}],
+                                                save_result=False, feedback=False)[0]
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, workflow)
+        adapter = app.adapter(service, "session", "message", allowed_operations=tuple(
+            step["operation"] for step in requirements["steps"]))
+        result = resume_request(app, adapter, "compiled-cli", requirements=requirements)
+        assert result["complete"] and result["business"]["status"] == "completed"
+        if reservation:
+            assert len(app.world.snapshot()["attempts"]) == 1
+        else:
+            updated = compile_application_requests("document", [{"target": target, "actions": [
+                {"operation": "create_or_update_draft", "arguments": {"content": "New content"}},
+            ]}], save_result=False, feedback=False)[0]
+            service.capture_user("session", "edit", "Change the actual draft to New content.")
+            editor = app.adapter(service, "session", "edit",
+                                 allowed_operations=("create_or_update_draft",))
+            changed = resume_request(app, editor, "compiled-edit", requirements=updated)
+            assert changed["complete"]
+            document = app.world.snapshot()["documents"][0]
+            assert document["document_version"] == 2 and document["content"] == "New content"
+            assert len(document["approvals"]) == len(document["publications"]) == 1
 
 
 def test_owner_identity_and_cooperative_lock_are_enforced(tmp_path: Path) -> None:
