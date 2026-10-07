@@ -16,6 +16,23 @@ from milai_lab.contracts.memory import (
 )
 
 
+def visible_verified_ref(service: Any, ref: VerifiedObjectRef) -> VerifiedObjectRef | None:
+    """Resolve the actual issued identity; state and permission stay separate.
+
+    The Host cannot issue a reference by assembling its public fields. Only an
+    existing visible trusted source can supply one, including its historical
+    observed fields. No content fingerprint or current-state assertion is used.
+    """
+    source = service.source(ref.source_ref)
+    issued = source.get("object_ref") if source else None
+    if issued is None or any(
+        issued[field] != getattr(ref, field)
+        for field in ("id", "owner", "source_ref", "external_id", "application")
+    ):
+        return None
+    return VerifiedObjectRef(**issued)
+
+
 def observation_profile(workflow: str) -> ObservationProfile:
     """Only public receipt structure; no correctness plans or hidden task metadata.
 

@@ -77,6 +77,47 @@ class ReceiptProgressJournal:
         rows[key]["delivery"] = "checkpointed"
         write_json(self.path, rows)
 
+    def request_state(
+        self,
+        owner: str,
+        request_id: str,
+        requirements: dict[str, Any] | None,
+    ) -> tuple[str, dict[str, Any]]:
+        """The full request uses this existing journal, beside individual receipts."""
+        rows = self.snapshot()
+        for key, row in rows.items():
+            identity = row["identity"]
+            if identity.get("name") == "resume_request" and (
+                identity["owner"],
+                identity["call_id"],
+            ) == (owner, request_id):
+                if requirements is not None and row["requirements"] != requirements:
+                    raise ValueError("APPLICATION_REQUEST_REQUIREMENTS_CHANGED")
+                return key, row
+        if requirements is None:
+            raise ValueError("APPLICATION_REQUEST_REQUIREMENTS_REQUIRED")
+        key = str(uuid.uuid4())
+        rows[key] = {
+            "identity": {
+                "thread_id": owner,
+                "generation_id": "resume_request",
+                "call_id": request_id,
+                "owner": owner,
+                "name": "resume_request",
+                "args": {},
+            },
+            "delivery": "pending",
+            "requirements": requirements,
+        }
+        write_json(self.path, rows)
+        return key, rows[key]
+
+    def save_request_state(self, key: str, state: dict[str, Any]) -> None:
+        """Attempts and discoveries remain in state; a new attempt never replaces one."""
+        rows = self.snapshot()
+        rows[key]["request_progress"] = state
+        write_json(self.path, rows)
+
 
 class FunctionalApplication:
     """Two distinct actual worlds with one owner-bound execution interface."""
@@ -245,6 +286,29 @@ class FunctionalApplication:
         )
         return binder(self.world, self.owner, source_ref, tool_name, receipt, observer=observer)
 
+    def adapter(
+        self,
+        service: Any,
+        session: str,
+        turn_id: str,
+        *,
+        allowed_operations: Sequence[str] = (),
+        can_read: bool = True,
+        runtime_config: Mapping[str, Any] | None = None,
+    ) -> Any:
+        """Bind current permissions to the normal actual application adapter."""
+        from milai_lab.application.adapters import SandboxApplicationAdapter
+
+        return SandboxApplicationAdapter(
+            self,
+            service,
+            session,
+            turn_id,
+            allowed_operations=allowed_operations,
+            can_read=can_read,
+            runtime_config=runtime_config,
+        )
+
     def recover_pending(self, agent: Any, scope: Any, runtime: Any) -> None:
         if isinstance(self.journal, NativePublicActionJournal):
             recover_native_pending(self, agent, scope, runtime)
@@ -294,18 +358,18 @@ class FunctionalApplication:
                 and getattr(service, "functional_contract", "legacy") == "functional_v1"
             ):
                 cfg = runtime_config.get("configurable", {})
-                digest = cfg.get("v13_config_version", cfg.get("v13_support_config_sha256"))
+                config_version = cfg.get("v13_config_version")
                 if (
                     cfg.get("v13_session") != session
                     or cfg.get("v13_turn_id") != turn_id
-                    or not isinstance(digest, str)
-                    or not digest
+                    or not isinstance(config_version, str)
+                    or not config_version
                 ):
                     raise ValueError("FUNCTIONAL_PUBLIC_TURN_CONFIGURATION_INVALID")
                 # Forget may hide this exact in-flight trigger. Its persisted
                 # session/message/config binding permits continuation only;
                 # normal source retrieval and fragment issuance stay revoked.
-                source = service.active_public_input(session, turn_id, digest)
+                source = service.active_public_input(session, turn_id, config_version)
             if source is None:
                 raise ValueError("FUNCTIONAL_ACTUAL_PUBLIC_SOURCE_REQUIRED")
             self.journal.bind_public_turn(session, turn_id, source)
