@@ -643,7 +643,7 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         rewrite = {
             "action": "rewrite", "target": "r1", "clauses": [{
                 "text": clause["text"], "evidence": [],
-                "keep_support": clause["support"],
+                "from_unit": clause["id"],
                 "assertion": {"keep": clause["support"][0]},
                 "conditions": [{
                     "text": "During evening hours.", "evidence": ["e1"],
@@ -659,6 +659,30 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         generated = copy.deepcopy(rewrite)
         generated.pop("target")
         Draft202012Validator(view["schema"]).validate({"creates": [], "records": {"r1": generated}})
+
+        missing_identity = copy.deepcopy(rewrite)
+        missing_identity["clauses"][0].pop("from_unit")
+        with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
+            method.decode_proposal(missing_identity, view["mapping"])
+        wrong_assertion = copy.deepcopy(rewrite)
+        wrong_assertion["clauses"][0]["assertion"] = {"keep": condition["support"][0]}
+        with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
+            method.decode_proposal(wrong_assertion, view["mapping"])
+        explicit_empty = copy.deepcopy(rewrite)
+        explicit_empty["clauses"][0]["keep_support"] = []
+        with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
+            method.decode_proposal(explicit_empty, view["mapping"])
+        changed_retained = copy.deepcopy(rewrite)
+        changed_retained["clauses"][0]["text"] = "Use loud reminders."
+        with pytest.raises(FunctionalRejection, match="CHANGED_CLAIM"):
+            method.decode_proposal(changed_retained, view["mapping"])
+        changed_retained["clauses"][0]["evidence"] = ["e1"]
+        with pytest.raises(FunctionalRejection, match="CHANGED_ASSERTION"):
+            method.decode_proposal(changed_retained, view["mapping"])
+        missing_binding = copy.deepcopy(rewrite)
+        missing_binding["clauses"][0]["conditions"][0]["binding"].pop("keep_support")
+        with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
+            method.decode_proposal(missing_binding, view["mapping"])
 
         wrong_role = copy.deepcopy(rewrite)
         wrong_role["clauses"][0]["conditions"][0]["from_unit"] = clause["id"]
@@ -686,6 +710,8 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         ]
         assert len(current["relations"]) == 1
         assert current["relations"][0]["relation_type"] == "modifies"
+        assert current["units"][0]["assertion"] == original["units"][0]["assertion"]
+        assert current["units"][0]["evidence_refs"] == original["units"][0]["evidence_refs"]
         assert {r["source_ref"] for r in current["units"][1]["evidence_refs"]} == {new_source}
         assert {r["source_ref"] for r in current["relations"][0]["evidence_refs"]} == {old_source}
         assert service.read(saved["id"], 1)["value"]["edit_state"] == original

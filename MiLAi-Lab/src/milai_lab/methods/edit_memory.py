@@ -313,8 +313,15 @@ class EditMemory:
                 "clause or condition continues, independently of evidence. Each prior unit "
                 "has at most one such continuation, with the same role. It permits retaining "
                 "the existing binding after a supported value change; it retains no old text "
-                "or support by itself. Changed text still selects actual e evidence. "
+                "or support by itself. "
             )
+            if self.features.source_metadata:
+                instruction += (
+                    "Exact unchanged text/role with from_unit=u# and assertion={keep:h#} "
+                    "for that same unit reuses its own support without repeating keep_support. "
+                    "Bindings still select their separate relation support. "
+                )
+            instruction += "Changed text still selects actual e evidence. "
         elif self.arm == "M" and self.features.semantic_operations:
             instruction += (
                 "Within one record container use change_value for same-scope content, "
@@ -1501,6 +1508,16 @@ class EditMemory:
         origins: list[set[str]] = []
         explicit_origins: set[str] = set()
         for item in proposal.get("units", []):
+            if (
+                proposal["action"] == "rewrite"
+                and self.features.source_metadata
+                and "from_unit" in item
+                and "keep_support" not in item
+                and (kept_alias := item["assertion"].get("keep"))
+            ):
+                support = bound["support"].get(kept_alias)
+                if support is not None and support.get("unit") == item["from_unit"]:
+                    item["keep_support"] = [kept_alias]
             handles, kept = supports(item)
             origin = {support["unit"] for support in kept if "unit" in support}
             if len(origin) != len(kept) or len(origin) > 1:
