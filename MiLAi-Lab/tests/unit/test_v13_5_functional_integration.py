@@ -476,15 +476,40 @@ def test_unified_public_resume_discovers_effects_obeys_readonly_and_saves_actual
     exported = functional.memory_data(root, bank="mechanical-bank", owner="alice",
                                       operation="export")
     episode_ids = [row["episode_id"] for row in exported["episodes"]]
-    consolidated = memory_operations.run(
-        root, bank="mechanical-bank", owner="alice", session="session",
-        request_id="organize", text="Organize the selected visible history.",
-        episode_ids=episode_ids,
+    consolidation_outcomes = []
+
+    def lose_consolidation_reply(memory: Any, *args: Any, **kwargs: Any) -> dict[str, Any]:
+        outcome = maintain_delivery(memory, *args, **kwargs)
+        if (not consolidation_outcomes and kwargs.get("execute", True)
+                and kwargs["request_id"] == "organize"):
+            consolidation_outcomes.append(outcome)
+            raise RuntimeError("Maintenance completed before consolidation result was saved")
+        return outcome
+
+    monkeypatch.setattr(
+        functional.FunctionalEditMemory, "maintain_delivery", lose_consolidation_reply,
     )
+    organize = {
+        "bank": "mechanical-bank", "owner": "alice", "session": "session",
+        "request_id": "organize", "text": "Organize the selected visible history.",
+        "episode_ids": episode_ids,
+    }
+    with pytest.raises(RuntimeError, match="before consolidation result was saved"):
+        memory_operations.run(root, **organize)
+    assert consolidation_outcomes[0]["status"] == "completed" and len(wires) == 5
+    after_interruption = functional.memory_data(
+        root, bank="mechanical-bank", owner="alice", operation="export",
+    )
+    consolidated = memory_operations.run(root, **organize)
     assert consolidated["status"] == "completed", consolidated
+    assert consolidated["replayed"]
     assert consolidated["business_operations_executed"] == 0 and len(wires) == 5
     after = functional.memory_data(root, bank="mechanical-bank", owner="alice", operation="export")
     assert len(after["records"]) == 1
+    assert after["records"] == after_interruption["records"]
+    assert {source["event_id"] for source in after["sources"]} == {
+        source["event_id"] for source in after_interruption["sources"]
+    }
     assert {source["event_id"] for source in exported["sources"]} < {
         source["event_id"] for source in after["sources"]
     }
