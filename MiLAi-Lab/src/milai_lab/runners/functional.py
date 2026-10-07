@@ -2268,9 +2268,7 @@ def message(
                         *matching,
                         *messages[forgotten_at:],
                     ]
-                trace({"event": "functional_material_delivery", "material": material})
                 effects = memory_effects(messages)
-                trace({"event": "functional_memory_effects", "effects": effects})
                 completion_feedback = [row for row in messages if isinstance(row, SystemMessage)
                                        and row.id in {identity + ":required-memory-receipt",
                                                       identity + ":observed-continuation"}]
@@ -2294,12 +2292,17 @@ def message(
                             execute=not for_finalization and forgotten_at is None,
                         )
                         effects["maintenance"] = output["maintenance"]
+                        material = memory.context(
+                            session, message_id, freeze["config_version"], query=content
+                        )
                         trace({"event": "functional_maintenance_result",
                                "batches": output["maintenance"]})
                     elif memory.interface_version != "v1":
                         material = memory.writer_context(
                             session, message_id, freeze["config_version"], query=content
                         )
+                trace({"event": "functional_material_delivery", "material": material})
+                trace({"event": "functional_memory_effects", "effects": effects})
                 if settings.get("capability_delivery") == "actual_catalog_v1":
                     active = [] if for_finalization else sorted(allowed_tools)
                     capability_text = (

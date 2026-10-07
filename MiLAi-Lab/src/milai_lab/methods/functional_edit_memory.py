@@ -334,7 +334,17 @@ class FunctionalEditMemory(FunctionalMemory):
                 self.note_delivered_fragment_handles(
                     config, [row["evidence_id"] for row in mapping["evidence"].values()]
                 )
-                return self.apply_writer_proposal(config, operation_id, proposal)
+                receipt = self.apply_writer_proposal(config, operation_id, proposal)
+                if receipt.get("ok") and (receipt.get("status") == "committed"
+                                         or receipt.get("original_status") == "committed"):
+                    # The existing immutable read snapshots remain historical.
+                    # Rebuild only this turn's ordinary view after an actual write.
+                    self.service.store.delete(
+                        namespace(self.service), "ordinary:" + reference_key(
+                            [bound["session"], bound["message_id"], self.forget_epoch]
+                        ),
+                    )
+                return receipt
 
             results.append(maintain_event(
                 self.writer, delivery, session=bound["session"], request_id=request_id,

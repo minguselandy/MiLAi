@@ -4352,6 +4352,9 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
         assert not {"save_memory", "update_memory", "confirm_existing_memory"}.intersection(
             t["function"]["name"] for t in wire.get("tools", []))
         assert memory_effects(wire)["maintenance"][0]["semantic_write_performed"]
+        current_records = [item for item in materials(wire)["items"] if item["type"] == "record"]
+        assert current_records and "User reports the local marker is blue." in json.dumps(
+            current_records)
         return {"role": "assistant", "content": "Saved the local marker."}
 
     wires = scripted(monkeypatch, reply, native=True)
