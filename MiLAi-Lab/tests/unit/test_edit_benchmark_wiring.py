@@ -66,8 +66,8 @@ def test_reader_shared_metadata_preserves_each_actual_source_and_time() -> None:
     def expand(value: Any) -> Any:
         if isinstance(value, dict):
             if set(value) == {"$ref"}:
-                name = value["$ref"].removeprefix("#/shared_metadata/")
-                return expand(payload["shared_metadata"][name])
+                index = int(value["$ref"].removeprefix("#/shared/"))
+                return expand(payload["shared"][index])
             return {key: expand(item) for key, item in value.items()}
         if isinstance(value, list):
             return [expand(item) for item in value]
@@ -84,7 +84,7 @@ def test_reader_shared_metadata_preserves_each_actual_source_and_time() -> None:
     assert set(table) == {"source-a", "source-b"}
     assert table["source-a"] == table["source-b"] and "$ref" in table["source-a"]
     assert any(isinstance(value, dict) and "precision" in value
-               for value in payload["shared_metadata"].values())
+               for value in payload["shared"])
 
 
 def test_source_history_reader_retains_original_messages_without_metadata_refs() -> None:

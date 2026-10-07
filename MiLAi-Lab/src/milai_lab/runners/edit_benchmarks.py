@@ -153,20 +153,20 @@ def reader_messages(
         collect_identities(memory, references_in_view)
         share_identities(memory, references_in_view)
     counts = Counter((category, encoded) for _, _, category, encoded in metadata)
-    shared: dict[str, Any] = {}
+    shared: list[Any] = []
     references: dict[tuple[str, str], str] = {}
     for container, position, category, encoded in metadata:
         key = (category, encoded)
         if counts[key] <= 1:
             continue
         if key not in references:
-            references[key] = f"v{len(shared)}"
-            shared[references[key]] = cast(Any, container)[position]
-        cast(Any, container)[position] = {"$ref": "#/shared_metadata/" + references[key]}
+            references[key] = str(len(shared))
+            shared.append(cast(Any, container)[position])
+        cast(Any, container)[position] = {"$ref": "#/shared/" + references[key]}
     payload = {
         "question": question, "date": date, "memory_view": memory_view,
         "memories": delivered,
-        **({"shared_metadata": shared} if shared else {}),
+        **({"shared": shared} if shared else {}),
     }
     instructions = READER_PROMPT
     if shared:
