@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import copy
 import uuid
+from datetime import UTC, datetime
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -429,11 +430,114 @@ def apply_local(
     return state
 
 
-def read_applicability(state: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    """Expand stored direct edges, without interpreting scope or changing facts.
+def _declared_time(value: str | None) -> datetime | None:
+    """Read explicit ISO dates (midnight UTC) or timestamps with their offset."""
+    if value is None:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if len(value) == 10:
+        return parsed.replace(tzinfo=UTC)
+    return parsed if parsed.tzinfo is not None else None
 
-    Occurrence dates belong to source reports. Effective dates and the subject
-    remain in the actual assertion text; this projection never infers them.
+
+def validate_applicability(applicability: dict[str, Any]) -> None:
+    """Validate generated semantic dates once, when decoding the public proposal."""
+    times = {}
+    for key in ("event_at", "effective_from", "effective_until"):
+        if key in applicability:
+            times[key] = _declared_time(applicability[key])
+            if times[key] is None:
+                raise FunctionalRejection("EDIT_EXPLICIT_ISO_TIME_REQUIRED")
+    start, end = times.get("effective_from"), times.get("effective_until")
+    if start is not None and end is not None and start >= end:
+        raise FunctionalRejection("EDIT_EFFECTIVE_INTERVAL_INVALID")
+
+
+def evidence_status(assertion: dict[str, Any]) -> str:
+    """Classify explicitly selected evidence links, never source existence or truth."""
+    links = assertion.get("evidence_links") or {}
+    supporting, opposing = bool(links.get("supports")), bool(links.get("opposes"))
+    return "both" if supporting and opposing else "supported" if supporting else (
+        "opposed" if opposing else "insufficient"
+    )
+
+
+def _temporal_view(
+    unit: dict[str, Any],
+    conditions: list[dict[str, Any]],
+    query_time: str | None,
+    version_time: str | None,
+) -> dict[str, Any]:
+    assertion = unit.get("assertion") or {}
+    applicability = assertion.get("applicability") or {}
+    limits = []
+    starts, ends = [], []
+    for item in [unit, *conditions]:
+        declared = (item.get("assertion") or {}).get("applicability") or {}
+        start, end = declared.get("effective_from"), declared.get("effective_until")
+        if start is not None or end is not None:
+            limits.append({"unit_id": item["unit_id"], "from": start, "until": end})
+        parsed_start, parsed_end = _declared_time(start), _declared_time(end)
+        if parsed_start is not None:
+            starts.append(parsed_start)
+        if parsed_end is not None:
+            ends.append(parsed_end)
+    start_at, end_at = max(starts, default=None), min(ends, default=None)
+    queried_at = _declared_time(query_time)
+    if start_at is not None and end_at is not None and start_at >= end_at:
+        status = "inconsistent_explicit_limits"
+    elif query_time is None:
+        status = "query_time_unspecified"
+    elif queried_at is None:
+        status = "query_time_unresolved"
+    elif start_at is not None and queried_at < start_at:
+        status = "before_explicit_start"
+    elif end_at is not None and queried_at >= end_at:
+        status = "expired"
+    elif limits:
+        status = "within_explicit_limits"
+    else:
+        status = "effective_limits_unspecified"
+    reported_at = assertion.get("occurred_at")
+    reported = _declared_time(reported_at)
+    explicit_past = _declared_time(applicability.get("event_at")) or _declared_time(
+        applicability.get("effective_from")
+    )
+    return {
+        "reported_at": reported_at,
+        "captured_at": assertion.get("observed_at"),
+        "event_at": applicability.get("event_at"),
+        "effective_from": applicability.get("effective_from"),
+        "effective_until": applicability.get("effective_until"),
+        "bound_effective_limits": limits,
+        "combined_effective_from": start_at.isoformat() if start_at is not None else None,
+        "combined_effective_until": end_at.isoformat() if end_at is not None else None,
+        "version_time": version_time,
+        "query_time": query_time,
+        "status": status,
+        "interval_convention": "[from, until); date boundaries are midnight UTC",
+        "retrospective": explicit_past < reported
+        if explicit_past is not None and reported is not None else None,
+        "reported_after_query": reported > queried_at
+        if reported is not None and queried_at is not None else None,
+    }
+
+
+def read_applicability(
+    state: dict[str, Any],
+    *,
+    query_time: str | None = None,
+    version_time: str | None = None,
+    include_temporal: bool = False,
+) -> dict[str, dict[str, Any]]:
+    """Project actual relations and explicit limits, without resolving natural scope.
+
+    A report clock never supplies a missing onset. An explicit retrospective event
+    remains available for a descriptive past answer. Temporal eligibility is not
+    truth, scope satisfaction or evidence availability at that historical time.
     The caller supplies an already-visible current or historical record version.
     """
     units = {unit["unit_id"]: unit for unit in state["units"]}
@@ -457,13 +561,34 @@ def read_applicability(state: dict[str, Any]) -> dict[str, dict[str, Any]]:
             **({"assertion": copy.deepcopy(unit["assertion"])} if "assertion" in unit else {}),
         }
 
+    project_time = include_temporal or query_time is not None or version_time is not None or any(
+        "applicability" in (unit.get("assertion") or {}) for unit in units.values()
+    )
+
     def qualified(key: str) -> dict[str, Any]:
-        return {**statement(key), "applies_under": [statement(c) for c in conditions[key]]}
+        unit = units[key]
+        bound = [units[c] for c in conditions[key]]
+        result = {**statement(key), "applies_under": [statement(c) for c in conditions[key]]}
+        if project_time:
+            declared = (unit.get("assertion") or {}).get("applicability") or {}
+            result.update(
+                temporal=_temporal_view(unit, bound, query_time, version_time),
+                declared_scope=declared.get("scope"),
+                scope_status="requires_source_interpretation" if bound or declared.get("scope")
+                else "not_declared",
+                quantity_scope=declared.get("quantity_scope", "unspecified"),
+                evidence_status=evidence_status(unit.get("assertion") or {}),
+                semantic_support="unchecked",
+            )
+            if declared.get("quantity_scope") == "overall":
+                result["member_quantities"] = "not_implied_by_overall_total"
+        return result
 
     result = {}
     for key, unit in units.items():
         if unit["role"] == "condition":
-            result[key] = {**statement(key), "kind": "bound_condition"
+            result[key] = {**(qualified(key) if project_time else statement(key)),
+                           "kind": "bound_condition"
                            if key in attached_conditions else "unbound_condition"}
             continue
         is_exception = bool(overrides[key] or unit.get("local_exception"))
@@ -479,21 +604,138 @@ def read_applicability(state: dict[str, Any]) -> dict[str, dict[str, Any]]:
     return result
 
 
-def render_state(state: dict[str, Any]) -> str:
+def render_revision_view(
+    state: dict[str, Any],
+    *,
+    query_time: str | None = None,
+    version_time: str | None = None,
+) -> dict[str, Any]:
+    """One deterministic current/history view for ordinary Host and benchmark readers.
+
+    No newest-report winner is chosen among separate scopes. Even a time-eligible
+    explicit override requires its actual conditions; cancellation only removes
+    edges and cannot alter an expired general rule's independently stored limit.
+    """
+    projected = read_applicability(
+        state, query_time=query_time, version_time=version_time, include_temporal=True
+    )
+    units = {unit["unit_id"]: unit for unit in state["units"]}
+    ineligible = {"expired", "before_explicit_start", "inconsistent_explicit_limits"}
+    relations = []
+    for edge in state["relations"]:
+        statuses = [
+            projected[key].get("temporal", {}).get("status", "effective_limits_unspecified")
+            for key in (edge["source_unit"], edge["target_unit"])
+        ]
+        relations.append({
+            **copy.deepcopy(edge),
+            "applicability": "time_ineligible" if any(s in ineligible for s in statuses)
+            else "requires_source_interpretation",
+        })
+    common_conditions = [
+        key for key, unit in units.items() if unit["role"] == "condition" and len({
+            edge["target_unit"] for edge in state["relations"]
+            if edge["relation_type"] == "modifies" and edge["source_unit"] == key
+        }) > 1
+    ]
+    # Every actual unit appears once. Relations and scope lists point to it;
+    # different source roles are retained once in the source table rather than
+    # repeatedly copying a whole assertion into every attached condition view.
+    source_table = {}
+    compact_units = []
+    for item in projected.values():
+        compact = copy.deepcopy(item)
+        for field in ("applies_under", "general_rules", "exceptions"):
+            if field in compact:
+                compact[field] = [statement["unit_id"] for statement in compact[field]]
+        assertion = compact.get("assertion") or {}
+        sources = [assertion] if "source_ref" in assertion else []
+        for linked in assertion.get("evidence_links", {}).values():
+            sources.extend(linked)
+        for source in sources:
+            source_table[source["source_ref"]] = {
+                key: source.get(key) for key in (
+                    "source_revision", "role", "occurred_at", "observed_at"
+                )
+            }
+        if "evidence_links" in assertion:
+            assertion["evidence_links"] = {
+                stance: [{key: ref[key] for key in
+                          ("evidence_id", "source_ref", "source_revision", "start", "end")}
+                         for ref in linked]
+                for stance, linked in assertion["evidence_links"].items()
+            }
+        compact_units.append(compact)
+    return {
+        "representation": state["representation"],
+        "matter": state.get("matter_description"),
+        "query_time": query_time,
+        "version_time": version_time,
+        "units": compact_units,
+        "source_table": source_table,
+        "relations": relations,
+        "common_conditions": common_conditions,
+        "historical_units": [
+            key for key, item in projected.items()
+            if item.get("temporal", {}).get("status") == "expired"
+        ],
+        "future_units": [
+            key for key, item in projected.items()
+            if item.get("temporal", {}).get("status") == "before_explicit_start"
+        ],
+        "unresolved_units": [
+            key for key, item in projected.items()
+            if item["kind"] == "unbound_condition"
+            or item.get("general_rule_status") == "not_stored"
+            or item.get("scope_status") == "requires_source_interpretation"
+            or item.get("temporal", {}).get("status") in {
+                "effective_limits_unspecified", "query_time_unresolved", "query_time_unspecified",
+                "inconsistent_explicit_limits",
+            }
+        ],
+        "selection_policy": "actual_relations_and_explicit_limits; no last_report_wins",
+        "completion_status": "not_inferred_from_time",
+        "semantic_support": "unchecked",
+    }
+
+
+def render_state(
+    state: dict[str, Any],
+    *,
+    query_time: str | None = None,
+    version_time: str | None = None,
+) -> str:
     """One renderer shared by B2/M; explicit scoped alternatives guide the common Reader."""
 
     def assertion_text(unit: dict[str, Any]) -> str:
         assertion = unit.get("assertion")
         if not assertion:
             return ""
+        declared = assertion.get("applicability") or {}
+        semantic = "".join(
+            "; " + key + "=" + str(declared[key]) for key in
+            ("event_at", "effective_from", "effective_until", "scope", "quantity_scope")
+            if key in declared
+        )
+        if "evidence_links" in assertion:
+            semantic += "; evidence_status=" + evidence_status(assertion)
         return str(
             " [Assertion: "
             + assertion["kind"]
             + "; speaker="
             + assertion["role"]
             + ("; occurred_at=" + assertion["occurred_at"] if assertion.get("occurred_at") else "")
-            + "]"
+            + semantic + "]"
         )
+
+    applicability = read_applicability(state, query_time=query_time, version_time=version_time)
+
+    def temporal_text(unit: dict[str, Any]) -> str:
+        if query_time is None:
+            return ""
+        item = applicability[unit["unit_id"]]
+        status = item["temporal"]["status"]
+        return " [Time: " + str(status) + "; scope remains evidence-dependent]"
 
     matter = (
         ["Matter: " + state["matter_description"]]
@@ -502,7 +744,8 @@ def render_state(state: dict[str, Any]) -> str:
     )
     if state["representation"] == "plain_v1":
         return "\n".join(
-            [*matter, *(unit["text"] + assertion_text(unit) for unit in state["units"])]
+            [*matter, *(unit["text"] + assertion_text(unit) + temporal_text(unit)
+                       for unit in state["units"])]
         )
     units = {unit["unit_id"]: unit for unit in state["units"]}
     overrides = {
@@ -525,11 +768,15 @@ def render_state(state: dict[str, Any]) -> str:
         prefix = (
             "Scoped override of " + overrides[unit_id] + ": "
             if unit_id in overrides
+            else "Scoped exception (general rule not stored): "
+            if unit.get("local_exception")
             else "General content (outside explicit override scopes): "
             if unit_id in overrides.values()
             else "Content: "
         )
-        lines.append(unit_id + " — " + prefix + unit["text"] + assertion_text(unit))
+        lines.append(
+            unit_id + " — " + prefix + unit["text"] + assertion_text(unit) + temporal_text(unit)
+        )
         conditions = [
             units[r["source_unit"]]["text"] + assertion_text(units[r["source_unit"]])
             for r in state["relations"]
@@ -925,6 +1172,24 @@ def writer_projection(
                         if assertion and "source_ref" in assertion
                         else {"kind": "legacy_unspecified", "source": None}
                     )
+                    if (
+                        features.get("temporal_scope") and assertion
+                        and "applicability" in assertion
+                    ):
+                        public_units[-1]["assertion"]["applicability"] = copy.deepcopy(
+                            assertion["applicability"]
+                        )
+                    if features.get("temporal_scope") and assertion:
+                        public_units[-1]["assertion"]["evidence_status"] = evidence_status(
+                            assertion
+                        )
+                        if "evidence_links" in assertion:
+                            public_units[-1]["assertion"]["evidence_links"] = {
+                                stance: [{"source": source_id(ref),
+                                          "range": [ref["start"], ref["end"]]}
+                                         for ref in linked]
+                                for stance, linked in assertion["evidence_links"].items()
+                            }
 
             def support_id(
                 item: dict[str, Any], binding: dict[str, Any], record_alias: str = record_alias
@@ -968,6 +1233,8 @@ def writer_projection(
             public_record["scope"] = copy.deepcopy(record["scope"])
         if features and features.get("matter_organization"):
             public_record["matter"] = state.get("matter_description") if state else None
+        if features and features.get("temporal_scope"):
+            public_record["version_time"] = record.get("version_time")
         if profile == "I1":
             # Preserve v1's repeated text view, but remove persistent identifiers.
             repeated = (

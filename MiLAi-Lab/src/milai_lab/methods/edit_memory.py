@@ -21,8 +21,10 @@ from milai_lab.memory.edit_units import (
     form_state,
     issue_evidence,
     new_id,
+    render_revision_view,
     render_state,
     source_evidence,
+    validate_applicability,
     writer_projection,
     writer_proposal_schema,
 )
@@ -266,6 +268,25 @@ class EditMemory:
                 "Historical speaker "
                 "and occurred_at remain actual metadata even when body_delivered=false. Unknown "
                 "legacy attribution or time stays unknown; observed_at is the capture clock. "
+            )
+        if self.features.temporal_scope:
+            instruction += (
+                "Optional assertion.applicability selects explicit event_at/effective_from/"
+                "effective_until/scope/quantity_scope from its new e; omit unknown fields. "
+                "Intervals are [from,until); ISO dates mean midnight UTC, timestamps retain "
+                "their stated offset. Report/capture/version clocks are service metadata, "
+                "never inferred onset. Explicit retrospective reports may explain the past; "
+                "unspecified dates stay unknown and a plan's date does not prove completion. "
+                "Keep independently changeable limits/scopes as separate conditions with "
+                "their own support; exact kept units retain prior applicability. "
+                "overall totals imply no per-member quantities or computed shares; per_member "
+                "requires explicit source support. Different scopes do not use last-report-wins. "
+                "Canceling an exception needs cancellation e, not reproof of the original "
+                "value, and never revives an expired general rule. Optional assertion."
+                "evidence_links={supports:[e#],opposes:[e#]} selects only this item's evidence "
+                "and preserves actual source roles. Explicit links yield supported/opposed/"
+                "both/insufficient evidence states, never certified truth; absent links stay "
+                "insufficient. Generate semantic content/selections, not actual IDs or clocks. "
             )
         if self.arm in {"B0", "B2"}:
             instruction += (
@@ -901,6 +922,8 @@ class EditMemory:
             }
             if self.interface_version != "v1":
                 record["scope"] = copy.deepcopy(version.get("scope", {}))
+            if self.features.temporal_scope:
+                record["version_time"] = version.get("committed_at")
             records.append(record)
         delivery = {
             "method_version": self.method_version,
@@ -1383,7 +1406,7 @@ class EditMemory:
                 actual = self.service.source(evidence["source_ref"])
                 if actual is None:
                     raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
-                return {
+                result = {
                     "kind": selected["kind"],
                     "source_ref": evidence["source_ref"],
                     "source_revision": evidence["source_revision"],
@@ -1391,6 +1414,24 @@ class EditMemory:
                     "occurred_at": actual.get("occurred_at"),
                     "observed_at": actual["observed_at"],
                 }
+                if self.features.temporal_scope and "applicability" in selected:
+                    validate_applicability(selected["applicability"])
+                    result["applicability"] = copy.deepcopy(selected["applicability"])
+                if self.features.temporal_scope and "evidence_links" in selected:
+                    links = {}
+                    for stance, aliases in selected["evidence_links"].items():
+                        linked = []
+                        for evidence_alias in dict.fromkeys(aliases):
+                            if evidence_alias not in item.get("evidence", []):
+                                raise FunctionalRejection("EDIT_EVIDENCE_LINK_NOT_SELECTED")
+                            original = bound["evidence"][evidence_alias]
+                            linked.append({key: original.get(key) for key in (
+                                "evidence_id", "source_ref", "source_revision", "start", "end",
+                                "role", "occurred_at", "observed_at",
+                            )})
+                        links[stance] = linked
+                    result["evidence_links"] = links
+                return result
             alias = selected["keep"]
             if alias not in item.get("keep_support", []):
                 raise FunctionalRejection("EDIT_ASSERTION_SUPPORT_NOT_KEPT")
@@ -1674,7 +1715,22 @@ class EditMemory:
         return self.service.commit(session, proposal_id, raw)
 
     @staticmethod
-    def render(version: dict[str, Any]) -> str:
+    def render(version: dict[str, Any], *, query_time: str | None = None) -> str:
         return (
-            render_state(version["edit_state"]) if version.get("edit_state") else version["content"]
+            render_state(
+                version["edit_state"], query_time=query_time,
+                version_time=version.get("committed_at") if query_time is not None else None,
+            ) if version.get("edit_state") else version["content"]
+        )
+
+    @staticmethod
+    def revision_view(
+        version: dict[str, Any], *, query_time: str | None = None
+    ) -> dict[str, Any]:
+        """Use the same actual state/commit clock for current and explicit history reads."""
+        if not version.get("edit_state"):
+            return {"content": version["content"], "semantic_support": "unchecked",
+                    "query_time": query_time, "version_time": version.get("committed_at")}
+        return render_revision_view(
+            version["edit_state"], query_time=query_time, version_time=version.get("committed_at")
         )

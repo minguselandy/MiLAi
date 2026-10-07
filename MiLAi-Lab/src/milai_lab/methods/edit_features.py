@@ -19,6 +19,7 @@ class EditFeatures:
     bound_references: bool = False
     single_record_changes: bool = False
     source_metadata: bool = False
+    temporal_scope: bool = False
 
     @classmethod
     def from_settings(cls, settings: dict[str, Any]) -> EditFeatures:
@@ -27,12 +28,20 @@ class EditFeatures:
             raise ValueError("EDIT_FEATURE_SETTINGS_INVALID")
         return cls(**settings)
 
+    def __post_init__(self) -> None:
+        if self.temporal_scope and not self.source_metadata:
+            raise ValueError("EDIT_TEMPORAL_SCOPE_REQUIRES_SOURCE_METADATA")
+
     @property
     def enabled(self) -> bool:
         return any(asdict(self).values())
 
     def settings(self) -> dict[str, bool]:
-        return asdict(self)
+        settings = asdict(self)
+        # Existing frozen writer maps keep their original five-feature shape.
+        if not self.temporal_scope:
+            settings.pop("temporal_scope")
+        return settings
 
 
 def _object(fields: dict[str, Any], required: list[str]) -> dict[str, Any]:
@@ -279,6 +288,24 @@ def feature_proposal_schema(
                 _object({"keep": reference("h")}, ["keep"]),
             ]
         }
+        if features.temporal_scope:
+            # These are semantic selections from the named current evidence, not
+            # service-owned speaker, source, version or capture metadata.
+            assertion["oneOf"][0]["properties"]["applicability"] = _object(
+                {
+                    key: {"type": "string", "minLength": 1}
+                    for key in ("event_at", "effective_from", "effective_until", "scope")
+                }
+                | {"quantity_scope": {"enum": ["overall", "per_member"]}},
+                [],
+            )
+            assertion["oneOf"][0]["properties"]["evidence_links"] = _object(
+                {
+                    stance: {"type": "array", "items": reference("e")}
+                    for stance in ("supports", "opposes")
+                },
+                [],
+            )
         assertion["oneOf"] = [
             v
             for v in assertion["oneOf"]
