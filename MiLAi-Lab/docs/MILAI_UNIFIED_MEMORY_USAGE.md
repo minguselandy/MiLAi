@@ -11,6 +11,82 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 11:02:46 UTC：PR88已合并、普通Host完整请求接线与容量运行
+
+本节固定于2026-10-07 11:02:46 UTC／北京时间19:02:46。最新开发源码为`752862b`，
+报告版本以本节所在提交为准；正在运行的预测仍冻结于`34fa5c9`，不是本次Host源码。
+原完整任务继续，工程检查、实际业务结果、自然答案及作者标签分别记录。
+
+**相关PR已经合并。**[PR88](https://github.com/minguselandy/MiLAi/pull/88)头`b5992e3`
+自身[Fast511](https://github.com/minguselandy/MiLAi/actions/runs/37605480212)和
+[Full326](https://github.com/minguselandy/MiLAi/actions/runs/37605480313)成功，Full21/21。
+Root核对远端头后转ready，于10:51:41普通merge；main为`2e1dac6`，本地integration快进且
+干净，源码树与b5992e3相同。PR83至88均merged，随后远端open列表为空是当时观察。
+原checkout及未跟踪用户计划保持。上述CI属于b5992e3，不借给本次752862b或合并提交。
+
+**普通Host首次效果前登记完整业务请求。**C源码`a1e4eb5`把当前用户解释中的target／
+actions／字面参数编译到既有requirements；对象ID、文档版本和完成条件由实际应用合同及
+查询给出。ReceiptProgressJournal保存原session／turn／config／user source，业务效果前
+已有request_state。`e0f9e51`将普通ToolNode的实际call身份及结果链接到原阶段；预订和标签
+分开投影，部分成功不变成全失败。Host刷新进度时resume_request使用execute_business=False，
+C仅发现实际状态、核对当前权限，实际mutation仍经同一个ToolNode／应用适配器。
+
+Root源码`d21cd0d`新增可选current_request_native_v8和[功能配置v2](
+../configs/milai-unified-functional-v2.json)。当前请求声明可单独解析原请求身份；只读查询
+不因此获得保存或业务许可。旧完整请求卡片与原User片段作为专用进展／意图材料发行，
+不进入普通事实dense检索。重开沿用实际已送达的解析快照，重新核对来源可见性；后续普通
+Reader视图刷新不会使已接受的解析失效。请求解释来自同一个Host模型，语义覆盖仍unchecked。
+
+实际结果保存复用共同maintain_sources，不另起Writer或事实库。C的semantic attempt及
+原维护batch／source绑定在Writer之前持久化；回执必须来自包含该target全部请求完成字段
+的实际Tool来源及真实commit。当前User指令、另一个target的提交、raw capture或真实空提案
+不能代替结果保存。跨会话核对只读取原维护操作ID及实际operation_receipt；不盲重发未知
+模型或提交。临时查不到已提交回执时保留semantic_unknown，之后只读新请求可核对为committed；
+原attempt、binding和error仍在。无关来源batch不阻挡对该结果的原操作核对。
+
+反馈记录实际provider响应对进度frame的接收，以及该AI响应进入Host checkpoint；仅在实际
+业务／保存状态相符时关闭Host反馈。它不证明用户已收到，user_seen仍unchecked；原CLI本地
+反馈文件依然host_seen=false。结构上的complete也不证明自然答案或持久记忆语义正确。
+
+`752862b`修复同一target上的新明确perform要求：不同参数或新文档内容登记当前新请求，
+mutation优先链接当前计划；continue_if_unfinished及同参数阶段子集保留原完整计划。
+实际SQLite检查中第二文档版本真实创建／审批／发布，旧请求及回执保持；预约数量变更被
+sandbox实际拒绝，原数量保持，新要求仍incomplete，没有伪造更新。旧save_result=false、
+随后仅新增保存旧结果这一新要求，目前仍用普通memory-only维护与独立回执，不宣称原请求的
+not_requested替代新保存，也未把新要求retrofit进原不可变requirements。
+
+**本地验证已闭合，真实Host验证尚0。**最终受影响Host、application及共同memory adapter
+检查共461项通过；Ruff、原Python3.11七个受影响源mypy、包DAG／工具依赖边界和CLI help通过。
+合成transport及真实SQLite覆盖两recipe、原部分结果、当前no-save／只读、真实空保存、跨会话
+提交响应丢失与回执暂不可查询、重开零重复、两个sandbox及同目标新请求。全部0真实HTTP，
+未增加模型、reviewer、Store、预算或并发；Product Schema/API/权限/Canonical及workflow不变。
+Lab仅增加可选请求模式与API参数。回滚源码参考b5992e3，不回滚已发生业务效果或账本。
+新源码远端CI另外核对，完整真实Host135case／192message及最终冻结后新故事仍未完成。
+
+**容量预测仍在原冻结版本运行。**prefix8-v6于10:08:13从34fa5c9启动，Root独占串行HTTP，
+四个公开开发用户各前8、各自实际空库。当前PID2132391仍存在，保存预测31/32，依次
+8／8／8／7；尚无terminal-predict或process-exit，不推定全部完成。配置与预算沿用原值，
+只有Writer／Reader重复表示共享这一主要变化；恢复9abc783及本次752862b都不在其中。
+
+固定快照的已确认抽取33／editor33／Reader65，共131个生成响应，全部stop；另1个Reader在途，
+共132请求。known分别380,156／730,900／957,121，合计2,068,177；Judge0。编码183请求／
+183响应，70,306 tokens。已确认editor中12个真实空提案，不合并为HTTP前容量失败。
+Root已阅读63个完整自然答案（第一20、第二12、第三22、第四前四会话9），没有数值重评分。
+首用户原0／1的5／3条抽取候选及实际User支持已送达，但editor真实返回{}，普通语义库为空；
+后续部分Reader拒绝把题中姓名与User事实关联，其他答案又采用该关联。容量可容纳并未修复
+这些维护选择或读取语义，尚无本次作者score、完整M成绩或方法优势结论。
+
+连续账本为42,336请求、known167,279,568／charged167,532,472、embedding1,231,998、
+unknown6＝历史5＋当前1个在途reservation；不能记成新已闭合失败。相对本次预测起点，
+确认响应与账本known、请求文件及编码tokens差额均0；账本请求比确认响应多1。limits未变，
+原采样及完整产物ignored；这是11:02固定成本，不是后续实时成本。10:06的f307两份保存score
+已经闭合，仍只覆盖原失败32中的13；不重复相加，也不归入当前34fa预测。
+
+原同前态recipe配对仍0真实调用；同版B0／B1／B2／M／强Append-only、65／277连续历史、
+native／drift／必要消融／固定更紧预算、最终冻结后16保留用户、外部及完整Host回归和六项
+交付均未完成。16保留用户未用于开发，尚无最终候选或Product准入，Product仍NO_GO。
+下面保留各自原观察时点，不能把新源码检查或实时进度写回旧冻结结果。
+
 ## 10:06:37 UTC：PR87已合并、保存评分闭合与恢复接线
 
 本节固定于2026-10-07 10:06:37 UTC／北京时间18:06:37，报告父源码`9abc783`。
@@ -253,6 +329,24 @@ Qwen3.6、BGE-m3、dense K10及容量。`answer_from_delivered_v1`只在实际�
 停用额外读取，让Host用已送达材料作答或说明缺失；业务能力继续服从当前许可。
 独立对象／版本／范围／游标的读取进展可由适配器`read_progress`检查。
 没有扩读取次数、输出预算或并发额度。
+
+可选v2在同一公开Host入口登记完整业务请求；它保持v1的M、I2、六特征、recipe、
+模型、dense K10及容量。使用新目录，不改变旧冻结配置。例如：
+
+```bash
+python tools/run_functional.py prepare --root artifacts/unified/host-v2 \
+  --config configs/milai-unified-functional-v2.json --source-version ACTUAL_SOURCE_COMMIT
+python tools/run_functional.py message --root artifacts/unified/host-v2 \
+  --owner example-owner --session original --message-id request \
+  --text '预订并贴好一份示例包裹，保存实际完成情况。'
+python tools/run_functional.py message --root artifacts/unified/host-v2 \
+  --owner example-owner --session later --message-id inspect \
+  --text '只查看原请求的进度，不执行也不保存。'
+```
+
+输出application_requests分别记录原业务、结果保存、Host反馈及complete；当前许可独立。
+原请求身份与维护操作绑定来自实际来源／Store，记忆正文不能授权业务。真实模型执行仍由
+Root串行安排；脚本传输检查通过不代表此例已完成真实效果验证。
 
 ## 显式整理及语义继续
 

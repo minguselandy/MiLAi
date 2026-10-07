@@ -1,5 +1,22 @@
 # MiLAi Lab 当前状态
 
+**2026-10-07 11:02:46 UTC／北京时间19:02:46：PR83至88已合并，Host完整请求接线检查闭合。**
+
+PR88头b5992e3自身Fast511及Full326成功21/21，10:51:41合并；main2e1dac6树与该头相同，
+integration快进且干净。新源码752862b在普通ToolNode效果前登记原完整请求，按真实阶段
+回执、当前权限、同一共同维护及实际Host响应checkpoint维护进度；同目标的新明确要求
+独立登记，续办保留原计划。461项受影响检查、Ruff、七源3.11mypy及包／工具边界通过，
+0真实HTTP；用户收到及语义覆盖仍unchecked。新源码CI另核对，真实完整Host仍待验证。
+
+冻结34fa5c9的prefix8-v6继续predict：31/32保存（8／8／8／7），PID2132391存在、无终态；
+132生成请求／131确认stop／2,068,177known，183编码／70,306token，Judge0。12真实空提案
+与容量失败分开；Root读63完整答案，无数值重评分。账本42336／167279568known／
+167532472charged／embedding1231998，unknown6含一个在途；此固定采样不是之后实时成本。
+恢复9abc783及本次752862b不在34fa运行中。详见[版本、实际证据及成本](MILAI_UNIFIED_MEMORY_USAGE.md)
+和[同一问题表](MILAI_BUILD_FIRST_ISSUES.md)。原完整任务未完，16保留用户未读，Product NO_GO。
+
+---
+
 **2026-10-07 10:06:37 UTC／北京时间18:06:37：PR87已合并，保存13份评分闭合，原任务未完。**
 
 PR83／84／85／86／87均merged；main354807f及integration干净，树与34fa5c9相同；

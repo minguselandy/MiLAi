@@ -1,3 +1,11 @@
+# Current handoff: 2026-10-07 11:02 UTC
+
+PR83–88 merged; main2e1dac6, integration clean. Development752862b adds nativev8
+complete Host requests;461 local checks pass,0realHTTP. Actualprefix8-v6 remains
+frozen34fa5c9,31/32saved/no terminal. Root alone schedules realHTTP; no hotedit/retry.
+Use docs/MILAI_UNIFIED_MEMORY_USAGE.md for evidence/costs. Full task incomplete,
+16reserved unused,ProductNO_GO. Earlier timed blocks are historical.
+
 # 2026-10-07 10:06:37 UTC: PR87 merged, saved score closed, recovery bindings
 
 PR83/84/85/86/87 merged; main354807f tree equals34fa5c9, whose ownFast507/Full325
