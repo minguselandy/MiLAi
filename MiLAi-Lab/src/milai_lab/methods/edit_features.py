@@ -65,6 +65,7 @@ def compact_prompt_schema(schema: dict[str, Any]) -> dict[str, Any]:
     counts: Counter[str] = Counter()
     originals: dict[str, dict[str, Any]] = {}
     names: dict[str, str] = {}
+    references: list[tuple[dict[str, str], str]] = []
 
     def key(value: dict[str, Any]) -> str:
         return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
@@ -99,7 +100,10 @@ def compact_prompt_schema(schema: dict[str, Any]) -> dict[str, Any]:
             return copy.deepcopy(value)
         candidate = key(value)
         if candidate in names and not definition:
-            return {"$ref": "#/$defs/" + names[candidate]}
+            name = names[candidate]
+            reference = {"$ref": "#/$defs/" + name}
+            references.append((reference, name))
+            return reference
         # Preserve key order and independent data without first copying schema
         # subtrees that the recursive projection immediately replaces.
         result = copy.deepcopy({
@@ -132,11 +136,16 @@ def compact_prompt_schema(schema: dict[str, Any]) -> dict[str, Any]:
             name: project(originals[candidate], definition=True)
             for candidate, name in names.items()
         }
-    return (
-        result
-        if len(key(result)) < len(key(schema))
-        else copy.deepcopy(schema)
-    )
+    if len(key(result)) >= len(key(schema)):
+        return copy.deepcopy(schema)
+    # Rename only generated definitions after the original selection/fallback.
+    # Shorter names must not change which sub-schemas are shared, or literal data.
+    short_names = {name: f"d{index}" for index, name in enumerate(names.values())}
+    for reference, name in references:
+        reference["$ref"] = "#/$defs/" + short_names[name]
+    if names:
+        result["$defs"] = {short_names[name]: value for name, value in result["$defs"].items()}
+    return result
 
 
 def feature_proposal_schema(

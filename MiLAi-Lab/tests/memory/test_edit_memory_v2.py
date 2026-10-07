@@ -74,6 +74,8 @@ def test_compact_prompt_schema_keeps_ordered_definitions_and_literal_data_indepe
     literal = {
         "properties": {"items": [1, {"default": ["ordinary data"]}]},
         "oneOf": [False, {"type": "not a schema"}],
+        "$ref": "#/$defs/shared_0",
+        "$defs": {"shared_0": {"const": "ordinary literal data"}},
     }
     child = {
         "description": "An ordinary nested value. " * 8,
@@ -94,12 +96,12 @@ def test_compact_prompt_schema_keeps_ordered_definitions_and_literal_data_indepe
     expected = {
         **schema,
         "properties": {
-            "left": {"$ref": "#/$defs/shared_0"},
-            "right": {"$ref": "#/$defs/shared_0"},
+            "left": {"$ref": "#/$defs/d0"},
+            "right": {"$ref": "#/$defs/d0"},
         },
         "$defs": {
-            "shared_0": {**child, "properties": {"payload": {"$ref": "#/$defs/shared_1"}}},
-            "shared_1": {"const": literal},
+            "d0": {**child, "properties": {"payload": {"$ref": "#/$defs/d1"}}},
+            "d1": {"const": literal},
         },
     }
     compact = compact_prompt_schema(schema)
@@ -111,11 +113,21 @@ def test_compact_prompt_schema_keeps_ordered_definitions_and_literal_data_indepe
         validator = Draft202012Validator(original)
         assert validator.is_valid(value) and not validator.is_valid(invalid)
     compact["default"]["properties"]["properties"]["items"].append("changed")
-    compact["$defs"]["shared_1"]["const"]["oneOf"].append("changed")
+    assert compact["$defs"]["d1"]["const"]["$ref"] == "#/$defs/shared_0"
+    compact["$defs"]["d1"]["const"]["oneOf"].append("changed")
     assert schema == before
     already_shared = compact_prompt_schema(compact)
-    already_shared["$defs"]["shared_1"]["const"]["oneOf"].append("copy changed")
+    already_shared["$defs"]["d1"]["const"]["oneOf"].append("copy changed")
     assert already_shared != compact
+    # A shorter-name estimate could introduce sharing or bypass the former
+    # size fallback here. Naming alone must retain both original decisions.
+    for description_size in (30, 40):
+        small_child = {"type": "string", "description": "A" * description_size}
+        small = {
+            "type": "object",
+            "properties": {"left": small_child, "right": copy.deepcopy(small_child)},
+        }
+        assert compact_prompt_schema(small) == small
 
 
 def test_default_envelope_retains_exact_legacy_structure_and_per_proposal_rejection(tmp_path):
