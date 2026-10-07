@@ -69,32 +69,57 @@ def compact_prompt_schema(schema: dict[str, Any]) -> dict[str, Any]:
     def key(value: dict[str, Any]) -> str:
         return json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
 
-    def project(value: Any, *, collect: bool = False, definition: bool = False) -> Any:
+    mapping_fields = ("properties", "patternProperties", "dependentSchemas")
+    single_fields = ("items", "additionalProperties", "contains", "propertyNames", "not",
+                     "if", "then", "else")
+    sequence_fields = ("oneOf", "anyOf", "allOf", "prefixItems")
+    schema_fields = {*mapping_fields, *single_fields, *sequence_fields}
+
+    def collect(value: Any) -> None:
+        if not isinstance(value, dict):
+            return
+        candidate = key(value)
+        counts[candidate] += 1
+        originals.setdefault(candidate, value)
+        # This pass only counts; its former projected tree was discarded.
+        for field in mapping_fields:
+            if field in value:
+                for child in value[field].values():
+                    collect(child)
+        for field in single_fields:
+            if field in value:
+                collect(value[field])
+        for field in sequence_fields:
+            if field in value:
+                for child in value[field]:
+                    collect(child)
+
+    def project(value: Any, *, definition: bool = False) -> Any:
         if not isinstance(value, dict):
             return copy.deepcopy(value)
         candidate = key(value)
-        if collect:
-            counts[candidate] += 1
-            originals.setdefault(candidate, value)
-        elif candidate in names and not definition:
+        if candidate in names and not definition:
             return {"$ref": "#/$defs/" + names[candidate]}
-        result = copy.deepcopy(value)
+        # Preserve key order and independent data without first copying schema
+        # subtrees that the recursive projection immediately replaces.
+        result = copy.deepcopy({
+            field: None if field in schema_fields else child for field, child in value.items()
+        })
         # Only schema positions are traversed: enum/const/default values are data.
-        for field in ("properties", "patternProperties", "dependentSchemas"):
+        for field in mapping_fields:
             if field in value:
                 result[field] = {
-                    name: project(child, collect=collect) for name, child in value[field].items()
+                    name: project(child) for name, child in value[field].items()
                 }
-        for field in ("items", "additionalProperties", "contains", "propertyNames", "not",
-                      "if", "then", "else"):
+        for field in single_fields:
             if field in value:
-                result[field] = project(value[field], collect=collect)
-        for field in ("oneOf", "anyOf", "allOf", "prefixItems"):
+                result[field] = project(value[field])
+        for field in sequence_fields:
             if field in value:
-                result[field] = [project(child, collect=collect) for child in value[field]]
+                result[field] = [project(child) for child in value[field]]
         return result
 
-    project(schema, collect=True)
+    collect(schema)
     for candidate, count in counts.items():
         name = f"shared_{len(names)}"
         reference = {"$ref": "#/$defs/" + name}
