@@ -2,14 +2,124 @@
 
 本轮按[多Agent任务卡](MILAI_MULTI_AGENT_DEVELOPMENT_TASKS.md)及用户提供的
 [配套规划](MILAI_UNIFIED_MEMORY_ARCHITECTURE_AND_BUILD_PLAN.md)开发。
-五个模块已合流到同一MemoryService，父版本为`5c36b28`；本提交加入中央Host、
-benchmark、配置及显式整理／完整请求恢复入口。首轮真实Host结果及后续修复分列如下；
+五个模块已合流到同一MemoryService，首次集成父版本为`5c36b28`；中央Host、
+benchmark、配置及显式整理／完整请求恢复入口已接通。真实结果及后续修复分列如下；
 尚无最终方法选择或Product准入。原[build-first完整任务](
 MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 
 2026-10-07用户要求合并相关GitHub开发内容；PR83的可选来源工作视图和提案额度接入本候选，
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
+
+## 21:58:44 UTC：三臂预测闭合、两臂部分失败；读取与保存续办按实际断点修复
+
+本节固定于2026-10-07 21:58:44 UTC／北京时间2026-10-08 05:58:44。报告版本以所在
+提交为准。远端main为`1af2585012990e0df21d18b54df68c1b87bf0d8a`，PR83至98已合并；
+发布前集成源码为`c2a5900`（Reader880、恢复4bfc及反馈c2），自己的远端CI尚未请求。下面五臂预测及B0评分仍冻结
+`505cefaee8c25cac0670fb1d3a38f7c2fae33165`；Host两消息实际冻结main `1af2585`；
+新Reader诊断冻结`1f1022def0d4e98bfe9dd362c18875dbba4ea36f`。各运行不互相补成绩。
+
+**后续工程已合并到main，原运行没有热改。**PR96减少容量预览的重复schema复制；
+PR97只缩短生成的解释性定义名称，保留原共享选择和fallback；PR98在同一旧unit同时
+显式指定from_unit与assertion.keep且未指定keep_support时沿用其已有支持。旧文本、角色、
+断言、来源可见性、关系支持及版本检查继续适用，改变断言仍需实际新证据。PR98自身
+[Full337](https://github.com/minguselandy/MiLAi/actions/runs/37683448942)成功21/21。
+两个原B2容量失败用合并后的实际提示离线投影为31,821及32,078，低于32,256；尚未
+真实复跑。工程修复不能改记原505的拒绝、容量失败或语义问题。
+
+**505原suite已退出1，Append-only独立后续也退出1。**原suite于21:08:17 UTC退出，
+B0／B1／B2各自预测32/32闭合；M在第三用户原7首问题的Reader输入45,933超限后失败，
+保存23份预测，第四用户未运行。随后仍用同一冻结505源码及原参数，从该臂自己的空库
+单独执行Append-only；首用户原7 QA0已有完整答案，QA1输入34,646超限，最终只保存7份
+预测。两次失败均发生在对应Reader HTTP前；旧输出和终态保留，不续写成COMPLETED。
+
+| 505实际预测范围 | 保存预测／完整自然答案 | 生成响应／known tokens | embedding响应／tokens |
+|---|---|---|---|
+| B0 | 32／73 | 139／2,452,536 | 219／74,992 |
+| B1 | 32／73 | 139／2,306,194 | 200／68,175 |
+| B2 | 32／73 | 137／2,332,611 | 212／73,209 |
+| M，部分失败 | 23／44 | 92／1,486,884 | 142／53,421 |
+| Append-only，部分失败 | 7／13 | 29／456,691 | 43／19,761 |
+| 操作成本合计，不是方法总分 | 126／276 | 536／9,034,916 | 816／289,558 |
+
+全部536生成响应均stop，预测Judge0、新增unknown0。M及Append分别有24／8次维护记录，
+不能按保存预测数量推导其bank终态。B0有11个真实空提案、57新建／6修订／1拒绝；
+B1有16个真实空提案、53新建／6编辑；B2有8个真实空提案、47新建／5重写／4拒绝／
+4no_change，另2个编辑前容量失败；M有10个真实空提案、49新建／7编辑、0拒绝；
+Append有2个真实空提案、20新建／1明确时间拒绝。空提案、no_change、拒绝和调用前
+容量失败分列，实际提交不定义语义成功。
+
+Root已读这276个完整自然答案，完整来源审计未完成，没有另造数值重评分。实际选定
+来源复核仍见：身份与姓名关联遗漏、Assistant金额被归为User、已抽取且旧目标送达之后
+仍漏写，以及“考虑／可能”被强化为计划。B2第二用户原0的部分普通事实被生成成条件
+关系；端点来源存在不证明关系本身。没有完整五方法分数或方法优势结论。
+
+**原保存B0开始纯评分。**21:56:17 UTC从冻结505目录，用原B0 actual-config及单臂CLI
+执行既有单臂入口：
+
+```bash
+PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -u tools/run_edit_benchmarks.py \
+  --config /cra/memory/mx_memory/MiLAi-worktrees/development-milai-edit-v2/MiLAi-Lab/artifacts/unified/prefix8-five-arm-505cefa-v2-B0-config.json \
+  --output /cra/memory/mx_memory/MiLAi-worktrees/development-milai-edit-v2/MiLAi-Lab/artifacts/unified/prefix8-five-arm-505cefa-v2/B0 \
+  --benchmark halumem --phase score
+```
+
+PID728144存在；固定观察已确认22个Judge响应／53,427 known，完整评估
+0/32，尚无terminal-score或进程终态。Writer／Reader／encoder不重跑；B1、B2评分待串行
+排队，M及Append失败部分不补零。此在途观察不能用于重启或并发占用真实HTTP。
+
+**Reader修复选择语义投影，停止继续枚举格式。**仅增加重复值共享后，原M超限输入
+仍为45,937；试验性列式／数字引用仍为36,084，未提交这些codec。新1f1022d在现有
+Reader函数内按实际source_ref继承相同来源元数据、从外层继承相同查询与版本时间，省去
+这些重复值及可重新计算的相同时间解析；不同值、显式null、精度／时区差异、实际有效
+限、条件关系、原文本与来源片段继续送达。保留全部K10、预算及存储原件。它是有明确
+继承语义的只读呈现，不能再称所有内部字段逐字段无损压缩。
+
+21:53:15至21:53:36 UTC，原M和Append失败检索各完成一次独立Reader诊断，新prompt
+分别28,506／24,744，2stop／54,860 known；Writer、提交、embedding、Judge均0，
+新增unknown0。Root读完两答案并核对相关实际来源：退休动机及月收入能够从材料中
+回答，但第一答案仍把“考虑旅行”列为退休动机。只证明这两条已曝光材料可以读取；
+不续写旧预测，不记语义全面通过或独立确认。发布前追加离线检查覆盖505全部278份
+实际检索：B0／B1／B2各73、M45、Append14，276份用原保存请求，另2份为上述HTTP前
+失败输入。超限2→0，最大45,933→28,506，每项实际K、正文及单位数量差异0，原文本及
+来源证据保留，0HTTP；不证明未来所有容量或回答效果。3项受影响Reader检查、类型／格式／
+边界及SQLite示例通过，新实现的远端CI另行核对。
+
+**普通Host显式只补保存，发现回执绑定与反馈的真实断点。**21:40起，以原1f业务完成／
+保存pending实际数据库的独立备份，在main1af源码执行save-only及跨会话只读两消息。
+两条均COMPLETED，11生成／125,504 known、embedding1,162 tokens、Judge0、新增unknown0；
+真实业务始终恰有1预订／1补标签，没有重复执行。首次User维护为已确认length失败，
+后续实际get_reservation来源共同维护已提交r2；旧request却仍memory.failed，因为新
+Tool批次未登记到下一语义attempt。第二消息已实际读到r2，但程序反馈仅显示本轮未写，
+遗漏已保存内容。两条执行闭合不等于原完整请求闭合或内容正确。
+
+新9496416（集成为4bfcf5a）只在当前允许保存且原请求已选中时，按实际Tool调用、原
+回执、来源和已验证对象关联新批次，在Writer前登记原请求下一attempt，再收取这些批次
+的实际回执。旧failed／unknown保留，只读不登记、不认领提交，业务不重放。
+11项受影响Host检查、Ruff、Python3.11 mypy及包／工具边界通过，0真实HTTP；新的真实
+效果待串行复核。新4ecbd67（集成为c2a5900）在现有renderer仅引用实际送达的保存正文及
+版本，保留本轮未写；未送达原request进度时明确未核对完整闭合。14项直接检查、SQLite
+重开只读例子、Ruff、3.11 mypy及边界通过，0真实HTTP；没有额外读取或借用模型最终声明。
+原r2将目的地配置
+写成已送达，仍是独立语义缺口，不能借新回执绑定称其事实已经正确。
+
+**四次Writer格式诊断闭合，但不据此改默认。**同505两个已曝光实际输入各用原json_schema
+与json_object一次，4stop／44,571 known、无提交／embedding／Judge／新增unknown。
+第一输入两次均3新建；第二输入分别真实空与5新建，四次均通过原schema。json_object的
+一条提案错配恋爱状态主体；更多提案不等于忠实。旧reasoning里的草稿不被当作实际
+输出或提交，四个随机观察不建立格式导致漏写的因果结论。
+
+**闭合成本与在途成本分开。**上表预测536，加独立格式4、Host11、Reader2，共553个
+闭合生成／9,259,851 known，自17:09预测启动前账本差额一致；embedding为290,720 tokens。
+21:53 Reader闭合／B0评分启动前连续账本为44,074 requests、183,102,655 known、
+183,294,143 charged、embedding1,621,851、unknown5。此处不包含随后在途B0评分，
+unknown5仍是原历史值；没有重置预算或新增上限。子集与上表不再重复相加。
+
+方法借鉴与推断见[原始方法核对](MILAI_EDIT_RELATED_WORK.md)。完整目标继续active：
+同版五方法、65／277连续历史、native／drift／recovery、消融／固定更紧预算、最终冻结后
+16保留用户、外部任务、完整Host135case／192message及新增故事、六项交付仍未完成。
+不拼接跨版本轨迹，16未用于开发，single_verdict_v1未准入，Product NO_GO。全部原始正文、
+gold、HTTP、reasoning、数据库、私有配置与日志继续ignored。下面旧固定快照保留原时点。
 
 ## 17:12:00 UTC：PR94合并，旧23份保存评分闭合，新五方法从空库运行
 
