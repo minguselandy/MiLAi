@@ -1,3 +1,20 @@
+# Fixed handoff: 2026-10-07 14:16 UTC
+
+PR83–91 merged; main/integration2cf0c739 clean. PR91 own962Fast/Full21 and main push passed.
+New4b3501b integrates D actual bounded stored-history entries (bd4), compact metadata
+(8cc) and independent recipe-clone future read-grant cleanup.247affected checks pass,
+Ruff/core3-source mypy/package+tools boundaries/SQLite example pass; own remoteCI pending.
+Tool's separate strict mypy has5unchanged pre-existing errors versus main2cf; no full-tool type claim.
+Frozen962 calendar4executions closed: committedr1/r2/r3 persisted, readonly answer falsely
+conflates current withdrawal with past saved exception.17generation150654/17embedding720.
+Frozen962 compare exited1 after single_pass2complete cases and case7actual2edits;
+future copied handle collision in after read.3generation71290/8embedding12755/0Reader.
+Other recipe unrun, not zero; new actual validation0. Original results/config/source untouched.
+At this fixed observation no real runner live; inspect actual PID/terminal before scheduling.
+Root alone serial realHTTP and unchanged ledger42928/170108073known/170299561charged/
+embed1250904/unknown5; no hotedit, unknown retry, SHA gates or budget reset. Full goal active/
+incomplete,16reserved unused,single_verdict_v1 not admitted,ProductNO_GO. Earlier blocks historical.
+
 # Current handoff: 2026-10-07 13:06 UTC
 
 PR83–90 merged; main/integration e0abb07 clean, PR90 own16f Fast519/520/Full32921 passed.

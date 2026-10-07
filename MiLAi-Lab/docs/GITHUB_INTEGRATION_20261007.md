@@ -4,6 +4,21 @@
 [PR84](https://github.com/minguselandy/MiLAi/pull/84)和[PR85](https://github.com/minguselandy/MiLAi/pull/85)。
 工程合并不表示原研究任务完成，也不改变Product NO_GO。
 
+## 13:41:39 UTC：PR91已合并
+
+[PR91](https://github.com/minguselandy/MiLAi/pull/91)最终头962beaa自己的
+[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37627853728)及
+[Full](https://github.com/minguselandy/MiLAi/actions/runs/37626176881)成功，Full21/21；
+Root按既有合并授权转ready并普通merge为main2cf0c739。远端merged时间、integration快进／
+干净及与测试头树相同已核对；该main的
+[push检查](https://github.com/minguselandy/MiLAi/actions/runs/37630543098)也success。
+PR83至91已合并，14:03 open列表为空；不改workflow、权限、预算或冻结运行。
+
+14:16固定观察：独立4b3501b后续分支加入普通实际历史入口及比较副本未来授权清理，
+247项受影响检查和相关边界／格式／核心类型／SQLite示例通过，0真实新HTTP；自己的远端CI
+待发布。962实际日期答复及recipe首失败另列于[固定报告](MILAI_UNIFIED_MEMORY_USAGE.md)，
+不因工程修复改记语义成功。原完整目标、16保留未用与Product NO_GO保持。
+
 13:06:36 UTC：独立后续分支集成业务进度／执行许可分列及4a2d7ba日期prompt澄清；本地
 受影响检查通过。自己的远端CI尚未请求，未借PR90成功宣称后续修复已验证。
 
