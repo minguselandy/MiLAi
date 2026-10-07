@@ -13,13 +13,14 @@ from types import SimpleNamespace
 from typing import Any
 
 import pytest
-from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import MessagesState, StateGraph
 from langgraph.prebuilt import ToolNode
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.application.functional import FunctionalApplication
+from milai_lab.application.host_requests import HostRequestProgress, visible_cards
 from milai_lab.application.journal import UnknownBusinessAction
 from milai_lab.application.recovery import UnknownSemanticCommit, resume_request
 from milai_lab.application.request_plans import compile_application_requests, project_stage_receipt
@@ -65,6 +66,24 @@ def draft_args() -> dict[str, Any]:
 
 def receipt(message: Any) -> dict[str, Any]:
     return json.loads(message.content)["receipt"]
+
+
+def host_call(
+    tracker: HostRequestProgress, name: str, arguments: dict[str, Any], call_id: str,
+    messages: list[Any], execute: Any = None,
+) -> tuple[ToolMessage, list[Any]]:
+    actual = {"name": name, "args": arguments, "id": call_id, "type": "tool_call"}
+    history = [*messages, AIMessage(content="", id="g-" + call_id, tool_calls=[actual])]
+    request = SimpleNamespace(tool_call=actual, state={"messages": history},
+                              runtime=SimpleNamespace(config=tracker.adapter.runtime_config))
+    tool = next(tool for tool in tracker.app.tools if tool.name == name)
+    result = tracker.wrap_call(request, execute or (lambda item: tool.invoke(item.tool_call)))
+    return result, [*history, result]
+
+
+def host_binding(service: Any, session: str = "session", turn: str = "message") -> dict[str, Any]:
+    return {"source_ref": service.event_id(session, turn, "user"), "session": session,
+            "turn_id": turn, "config_version": "plan-v1"}
 
 
 @pytest.mark.parametrize('workflow', ['reservation', 'document'])
@@ -706,6 +725,236 @@ def test_compiled_request_keeps_default_cli_execution_and_observed_versions(
             document = app.world.snapshot()["documents"][0]
             assert document["document_version"] == 2 and document["content"] == "New content"
             assert len(document["approvals"]) == len(document["publications"]) == 1
+
+
+@pytest.mark.parametrize("workflow", ["reservation", "document"])
+def test_host_stage_links_are_durable_before_dispatch_and_resume_only_remaining_work(
+    tmp_path: Path, workflow: str,
+) -> None:
+    reservation = workflow == "reservation"
+    target = {"item_key": "mechanical item"} if reservation else {"title": "mechanical draft"}
+    first_name = "reserve_and_label" if reservation else "create_or_update_draft"
+    first_args = reserve_args() if reservation else draft_args()
+    actions = ([{"operation": first_name, "arguments": {
+        "quantity": 1, "destination": "local", "packing": "box",
+    }}] if reservation else [
+        {"operation": first_name, "arguments": {"content": "Original content"}},
+        {"operation": "approve_document_version", "arguments": {}},
+        {"operation": "publish_approved_document", "arguments": {"audience": "local team"}},
+    ])
+    plans = compile_application_requests(workflow, [{"target": target, "actions": actions}],
+                                         save_result=True)
+    operations = tuple(step["operation"] for step in plans[0]["steps"])
+    options = {"initial_label_available" if reservation else "initial_publication_available": False}
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, workflow, **options)
+        binding = host_binding(service)
+        adapter = app.adapter(service, "session", "message", allowed_operations=operations)
+        tracker = HostRequestProgress(app, adapter, service, binding, {}, plans, [])
+        request_id = binding["source_ref"] + ":application:0"
+        assert tracker.request_ids == [request_id] and not tracker.dirty
+        initial = tracker.snapshot()[0]
+        assert initial["business"]["status"] == "pending"
+        assert initial["memory"]["status"] == initial["feedback"]["status"] == "pending"
+        assert tracker.rows()[0][1]["request_progress"]["discoveries"] == []
+        assert app.world.snapshot()["reservations" if reservation else "documents"] == []
+        assert app.journal._entries() == {}
+
+        def checked_execute(request: Any) -> Any:
+            _, stored = app.progress.request_state("alice", request_id, None)
+            progress = stored["request_progress"]["business"]["steps"]
+            assert stored["requirements"] == plans[0]
+            assert stored["binding"] == {**binding, "workflow": app.workflow}
+            assert [row["status"] for row in progress] == (
+                ["unknown", "unknown"] if reservation else ["unknown", "pending", "pending"])
+            identity = progress[0]["attempts"][0]["call_identity"]
+            assert identity == {"thread_id": adapter.runtime_config["configurable"]["thread_id"],
+                "generation_id": "g-first", "call_id": "first", "name": first_name,
+                "args": first_args}
+            assert app.world.snapshot()["reservations" if reservation else "documents"] == []
+            return next(tool for tool in app.tools if tool.name == first_name).invoke(
+                request.tool_call)
+
+        first, history = host_call(tracker, first_name, first_args, "first", [], checked_execute)
+        assert tracker.dirty
+        if not reservation:
+            current, history = host_call(tracker, "get_document_status", target, "query", history)
+            bound = {field: receipt(current)[field] for field in ("title", "document_version")}
+            _, history = host_call(tracker, "approve_document_version", bound, "approve", history)
+            _, history = host_call(tracker, "publish_approved_document",
+                {**bound, "audience": "local team"}, "unavailable", history)
+        progress = tracker.snapshot()[0]["business"]["steps"]
+        assert [row["status"] for row in progress] == (
+            ["completed", "incomplete"] if reservation else [
+                "completed", "completed", "incomplete"])
+        assert [row["attempts"][0]["result"]["business_effect"] for row in progress] == (
+            ["confirmed", "none"] if reservation else ["confirmed", "confirmed", "none"])
+        if reservation:
+            assert all(row["attempts"][0]["result"]["original_business_effect"] == "partial"
+                       for row in progress)
+        before = app.world.snapshot()
+        wrong = {**first_args, "quantity": 2} if reservation else {
+            **first_args, "content": "Undeclared content"}
+        denied, _ = host_call(tracker, first_name, wrong, "wrong-args", history)
+        assert json.loads(denied.content)["status"] == "request_plan_not_registered"
+        denied, _ = host_call(tracker, first_name, first_args, "duplicate", history)
+        assert json.loads(denied.content)["status"] == "request_step_already_completed"
+        assert app.world.snapshot() == before
+        denied_tracker = HostRequestProgress(app, app.adapter(service, "session", "message"),
+                                            service, binding, {}, plans, [])
+        denied, _ = host_call(denied_tracker, first_name, first_args, "first", history)
+        assert json.loads(denied.content)["status"] == "operation_not_authorized_current_request"
+        assert tracker.snapshot()[0]["business"]["steps"] == progress
+
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, workflow, **options)
+        adapter = app.adapter(service, "session", "message", allowed_operations=operations)
+        reopened = HostRequestProgress(app, adapter, service, binding, {}, plans, [])
+        replay, _ = host_call(reopened, first_name, first_args, "first", history)
+        assert replay == first and app.world.snapshot() == before
+        assert reopened.snapshot()[0]["business"]["steps"] == progress
+        service.capture_user("new-session", "continue", "Query and complete the remaining work.")
+        cards = visible_cards(app, service, service.event_id("new-session", "continue", "user"))
+        assert [card["request_id"] for card in cards] == [request_id]
+        assert cards[0]["requirements"] == plans[0]
+        assert cards[0]["user_fragments"] == service.source_fragments(binding["source_ref"])
+        remaining = "complete_label" if reservation else "publish_approved_document"
+        narrowed = compile_application_requests(workflow, [{"target": target, "actions": [
+            {"operation": remaining,
+             "arguments": {} if reservation else {"audience": "local team"}},
+        ]}], save_result=False)
+        another = {field: "another " + value for field, value in target.items()}
+        narrowed.extend(compile_application_requests(workflow, [{
+            "target": another, "actions": actions,
+        }], save_result=False))
+        adapter = app.adapter(service, "new-session", "continue", allowed_operations=(remaining,))
+        resumed = HostRequestProgress(app, adapter, service, host_binding(
+            service, "new-session", "continue"), {}, narrowed, [request_id])
+        assert resumed.request_ids == [request_id, service.event_id(
+            "new-session", "continue", "user") + ":application:1"] and resumed.dirty
+        assert resumed.rows()[0][1]["requirements"] == plans[0]
+        assert resumed.rows()[1][1]["requirements"]["target"] == another
+        assert resumed.snapshot()[1]["business"]["status"] == "pending"
+        query = "get_reservation" if reservation else "get_document_status"
+        current, new_history = host_call(resumed, query, target, "fresh-query", [])
+        if reservation:
+            app.world.set_label_available("actual-backend-up", True)
+            args = {"reservation_id": receipt(current)["reservation_id"]}
+        else:
+            app.world.set_publication_available("actual-backend-up", True)
+            args = {field: receipt(current)[field] for field in ("title", "document_version")}
+            args["audience"] = "local team"
+        done, _ = host_call(resumed, remaining, args, "finish", new_history)
+        assert receipt(done)["ok"]
+        assert resumed.snapshot()[0]["business"]["status"] == "completed"
+        finished = app.world.snapshot()
+        summary = resume_request(app, adapter, request_id, execute_business=False)
+        assert summary["business"]["status"] == "completed" and not summary["complete"]
+        assert summary["memory"]["status"] == summary["feedback"]["status"] == "pending"
+        assert app.world.snapshot() == finished
+        final_steps = summary["business"]["steps"]
+        assert len(final_steps[-1]["attempts"]) == 2
+        assert final_steps[-1]["attempts"][0]["result"] == progress[-1]["attempts"][0]["result"]
+        if reservation:
+            assert [row["operation"] for row in finished["attempts"]] == [
+                "reserve_and_label", "complete_label"]
+        else:
+            doc = finished["documents"][0]
+            assert len(doc["versions"]) == len(doc["approvals"]) == len(doc["publications"]) == 1
+
+
+def test_host_unknown_call_keeps_original_attempt_and_requires_actual_discovery(
+    tmp_path: Path,
+) -> None:
+    def lost(row: Any, response: Any) -> None:
+        raise OSError("lost native response")
+
+    plans = compile_application_requests("reservation", [{"target": {"item_key": "mechanical item"},
+        "actions": [{"operation": "reserve_and_label", "arguments": {
+            "quantity": 1, "destination": "local", "packing": "box"}}]}], save_result=False)
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, "reservation", response_hook=lost)
+        binding = host_binding(service)
+        adapter = app.adapter(service, "session", "message",
+                              allowed_operations=("reserve_and_label",))
+        tracker = HostRequestProgress(app, adapter, service, binding, {}, plans, [])
+        with pytest.raises(OSError, match="lost native response"):
+            host_call(tracker, "reserve_and_label", reserve_args(), "unknown", [])
+        progress = tracker.snapshot()[0]["business"]
+        assert progress["status"] == "business_unknown"
+        assert all(row["status"] == "unknown" and len(row["attempts"]) == 1
+                   and row["attempts"][0]["error"]["message"] == "lost native response"
+                   for row in progress["steps"])
+        assert len(app.world.snapshot()["attempts"]) == 1
+
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, "reservation")
+        adapter = app.adapter(service, "session", "message",
+                              allowed_operations=("reserve_and_label",))
+        tracker = HostRequestProgress(app, adapter, service, binding, {}, plans, [])
+        with pytest.raises(UnknownBusinessAction):
+            host_call(tracker, "reserve_and_label", reserve_args(), "unknown", [])
+        denied, _ = host_call(tracker, "reserve_and_label", reserve_args(), "changed", [])
+        assert json.loads(denied.content)["status"] == "request_step_outcome_unknown_query_required"
+        assert tracker.snapshot()[0]["business"] == progress
+        host_call(tracker, "get_reservation", plans[0]["target"], "discover", [])
+        result = resume_request(app, adapter, tracker.request_ids[0], execute_business=False)
+        assert result["business"]["status"] == "completed"
+        for stage in result["business"]["steps"]:
+            assert stage["attempts"][0]["status"] == "unknown"
+            assert stage["attempts"][0]["error"]["message"] == "lost native response"
+        denied, _ = host_call(tracker, "reserve_and_label", reserve_args(), "after-query", [])
+        assert json.loads(denied.content)["status"] == "request_step_already_completed"
+        assert len(app.world.snapshot()["attempts"]) == 1
+
+
+def test_host_cards_use_actual_visible_user_requests_and_redact_revoked_receipts(
+    tmp_path: Path,
+) -> None:
+    plans = compile_application_requests("reservation", [{"target": {"item_key": "mechanical item"},
+        "actions": [{"operation": "reserve_and_label", "arguments": {
+            "quantity": 1, "destination": "local", "packing": "box"}}]}], save_result=False)
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, "reservation")
+        binding = host_binding(service)
+        adapter = app.adapter(service, "session", "message",
+                              allowed_operations=("reserve_and_label",))
+        tracker = HostRequestProgress(app, adapter, service, binding, {}, plans, [])
+        first, _ = host_call(tracker, "reserve_and_label", reserve_args(), "first", [])
+        actual_ref = json.loads(first.content)["source_ref"]
+        service.capture_user("session", "cards", "Show the current unfinished requests.")
+        current_ref = service.event_id("session", "cards", "user")
+        service.forget("session", "hide-receipt", fragment_handles=[
+            part["fragment_handle"] for part in service.source_fragments(actual_ref)])
+        cards = visible_cards(app, service, current_ref)
+        assert len(cards) == 1
+        assert cards[0]["progress"]["business"]["steps"][0]["attempts"][0]["result"] == {
+            "source_ref": actual_ref, "status": "visibility_revoked"}
+        assert cards[0]["progress"]["source_refs"] == []
+        assert cards[0]["user_fragments"] == service.source_fragments(binding["source_ref"])
+        app.progress.request_state("alice", "legacy", plans[0])
+        app.progress.request_state("bob", "foreign", plans[0], binding={
+            **binding, "workflow": app.workflow})
+        app.progress.request_state("alice", "other-workflow", plans[0], binding={
+            **binding, "workflow": "document_publication_v1"})
+        assert len(visible_cards(app, service, current_ref)) == 1
+        for index in range(13):
+            turn = "registration-" + str(index)
+            service.capture_user("session", turn, "Do the requested local operation.")
+            HostRequestProgress(app, app.adapter(service, "session", turn), service,
+                                host_binding(service, "session", turn), {}, plans, [])
+        cards = visible_cards(app, service, current_ref)
+        assert len(cards) == 12 and cards[0]["binding"]["turn_id"] == "registration-1"
+        assert cards[-1]["binding"]["turn_id"] == "registration-12"
+        service.forget("session", "hide-request", fragment_handles=[
+            part["fragment_handle"] for part in service.source_fragments(binding["source_ref"])])
+        assert all(card["request_id"] != tracker.request_ids[0]
+                   for card in visible_cards(app, service, current_ref))
+        with pytest.raises(ValueError, match="HOST_PRIOR_APPLICATION_REQUEST_UNAVAILABLE"):
+            HostRequestProgress(app, app.adapter(service, "session", "cards"), service,
+                                host_binding(service, "session", "cards"), {}, [],
+                                tracker.request_ids)
+        assert len(app.world.snapshot()["attempts"]) == 1
 
 
 def test_owner_identity_and_cooperative_lock_are_enforced(tmp_path: Path) -> None:
