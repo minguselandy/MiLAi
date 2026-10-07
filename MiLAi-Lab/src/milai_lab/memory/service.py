@@ -1334,7 +1334,8 @@ class MemoryService:
             return str(source_ref)
 
     def capture_user(
-        self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None
+        self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None,
+        calendar_context: str | None = None,
     ) -> dict[str, Any]:
         """Capture an actual incoming user event, not a model-selected source body."""
         return self._capture(
@@ -1345,10 +1346,12 @@ class MemoryService:
             content,
             None,
             occurred_at=occurred_at,
+            calendar_context=calendar_context,
         )
 
     def capture_assistant(
-        self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None
+        self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None,
+        calendar_context: str | None = None,
     ) -> dict[str, Any]:
         """Trusted actual assistant message; proposals/packets are never original messages."""
         if self.mutation_contract != "event_bound_v1":
@@ -1377,6 +1380,7 @@ class MemoryService:
             content,
             None,
             occurred_at=occurred_at,
+            calendar_context=calendar_context,
         )
 
     def capture_tool(
@@ -1388,10 +1392,12 @@ class MemoryService:
         object_ref: VerifiedObjectRef | None,
         *,
         occurred_at: str | None = None,
+        calendar_context: str | None = None,
     ) -> dict[str, Any]:
         """Trusted application adapter only; this API is never a Host tool."""
         return self._capture(
-            session, event_key, "tool", tool_name, content, object_ref, occurred_at=occurred_at
+            session, event_key, "tool", tool_name, content, object_ref, occurred_at=occurred_at,
+            calendar_context=calendar_context,
         )
 
     def _capture(
@@ -1404,11 +1410,16 @@ class MemoryService:
         object_ref: VerifiedObjectRef | None,
         *,
         occurred_at: str | None = None,
+        calendar_context: str | None = None,
     ) -> dict[str, Any]:
         if occurred_at is not None and (
             not isinstance(occurred_at, str) or not occurred_at.strip()
         ):
             raise ValueError("V13_SOURCE_OCCURRENCE_TIME_INVALID")
+        if calendar_context is not None and (
+            not isinstance(calendar_context, str) or not calendar_context.strip()
+        ):
+            raise ValueError("V13_SOURCE_CALENDAR_CONTEXT_INVALID")
         event_id = self.event_id(session, event_key, role)
         if self._functional_hidden(source_ref=event_id):
             actual = self._source(event_id, binding_only=True)
@@ -1457,6 +1468,8 @@ class MemoryService:
         }
         if occurred_at is not None:
             event["occurred_at"] = occurred_at
+        if calendar_context is not None:
+            event["calendar_context"] = calendar_context
         if self.memory_profile == "unified_v1":
             event["episode_id"] = reference_key([session, event_key, role])
         with self._locked():
@@ -1465,6 +1478,9 @@ class MemoryService:
             if prior is not None:
                 if occurred_at is not None and prior.value.get("occurred_at") != occurred_at:
                     raise ValueError("V13_SOURCE_OCCURRENCE_TIME_CHANGED")
+                if (calendar_context is not None
+                        and prior.value.get("calendar_context") != calendar_context):
+                    raise ValueError("V13_SOURCE_CALENDAR_CONTEXT_CHANGED")
                 comparable = {
                     key: dict(event)[key]
                     for key in (

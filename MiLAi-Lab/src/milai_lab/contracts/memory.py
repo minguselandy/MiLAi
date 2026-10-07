@@ -54,6 +54,9 @@ class SourceEvent(TypedDict):
     capture_key: NotRequired[str]
     observed_at: str
     occurred_at: NotRequired[str]
+    # Framework-declared coordinates for unzoned event/effective clocks; this
+    # does not establish a physical timezone or change the capture clock.
+    calendar_context: NotRequired[str]
     episode_id: NotRequired[str]
     object_ref: dict[str, Any] | None
 

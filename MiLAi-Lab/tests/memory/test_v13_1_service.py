@@ -108,6 +108,44 @@ def test_source_capture_is_immutable_unformed_with_source_revision(tmp_path: Pat
         assert replayed["formation_status"] == "formed"
 
 
+def test_declared_source_calendar_survives_replay_and_reopen(tmp_path: Path) -> None:
+    with opened(tmp_path) as service:
+        ref = service.capture_user(
+            "s1", "calendar", "A reported local event.",
+            occurred_at="Jan 06, 2026, 17:48:59", calendar_context="example-local-calendar",
+        )["source_ref"]
+        original = service.source(ref)
+        assert original is not None
+        assert original["occurred_at"] == "Jan 06, 2026, 17:48:59"
+        assert original["calendar_context"] == "example-local-calendar"
+        assert original["observed_at"].endswith("+00:00")
+        service.capture_user("s1", "calendar", "A reported local event.")
+        assert service.source(ref) == original
+    with opened(tmp_path) as service:
+        assert service.source(ref) == original
+        with pytest.raises(ValueError, match="SOURCE_CALENDAR_CONTEXT_CHANGED"):
+            service.capture_user(
+                "s1", "calendar", "A reported local event.", calendar_context="other-calendar",
+            )
+        assert service.source(ref) == original
+
+
+def test_old_source_without_calendar_is_not_reinterpreted(tmp_path: Path) -> None:
+    with opened(tmp_path) as service:
+        ref = service.capture_user(
+            "s1", "old-calendar", "An event with no declared calendar.",
+            occurred_at="Jan 06, 2026, 17:48:59",
+        )["source_ref"]
+        original = service.source(ref)
+        assert original is not None and "calendar_context" not in original
+        with pytest.raises(ValueError, match="SOURCE_CALENDAR_CONTEXT_CHANGED"):
+            service.capture_user(
+                "s1", "old-calendar", "An event with no declared calendar.",
+                calendar_context="example-local-calendar",
+            )
+        assert service.source(ref) == original
+
+
 @pytest.mark.parametrize("wrong", ["nonexistent", "foreign"])
 @pytest.mark.parametrize("receipt_contract", ["optional", "explicit_receipt_v1"])
 def test_source_and_object_refs_are_owner_bound(
