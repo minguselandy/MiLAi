@@ -404,7 +404,9 @@ def test_metadata_misses_and_full_lexical_page_use_the_same_visible_bank(tmp_pat
         result = service.search("14 refreshment", limit=1, include_raw=False)
         assert result["retrieval"] == "dense_cosine"
         assert [row["id"] for row in result["records"]] == ["food"]
-        assert vectors.documents == ["\nGreen tea is preferred.", "\nAirplane travel."]
+        # Store timestamps can tie; dense retrieval must encode both whole bodies
+        # exactly once and keep their vectors aligned, regardless of corpus order.
+        assert sorted(vectors.documents) == ["\nAirplane travel.", "\nGreen tea is preferred."]
         assert service.records() == before
         seed(service, "dated", "Tea only on 2030-02-01.")
         dated = service.search("2030", limit=1, include_raw=False)["records"]
