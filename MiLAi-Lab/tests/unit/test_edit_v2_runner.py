@@ -833,6 +833,7 @@ def test_shared_benchmark_source_and_reader_use_declared_nominal_calendar(tmp_pa
     )
     calls = []
     text = "The marker is blue from September 4 inclusive to September 6 exclusive."
+    query_time = "Sep 05, 2025, 10:00:00"
 
     def call(key, messages, *, structured, **kwargs):
         payload = json.loads(messages[1]["content"])
@@ -847,10 +848,36 @@ def test_shared_benchmark_source_and_reader_use_declared_nominal_calendar(tmp_pa
                                 "applicability": {"effective_from": "2025-09-04",
                                                   "effective_until": "2025-09-06"}}}],
             }], "records": {}})
-        view = payload["memories"][0]["applicability"]
-        assert view["time_values"]["query_time"]["timezone_known"] is False
+        def expand(value):
+            if isinstance(value, dict):
+                if set(value) == {"$ref"}:
+                    index = int(value["$ref"].removeprefix("#/shared/"))
+                    return expand(payload["shared"][index])
+                return {key: expand(item) for key, item in value.items()}
+            if isinstance(value, list):
+                return [expand(item) for item in value]
+            return value
+
+        view = expand(payload["memories"][0]["applicability"])
+        # Reader presentation omits source/query parse diagnostics, while raw
+        # clocks, nominal coordinates and semantic limit precision remain.
+        assert "time_values" not in view
+        assert payload["date"] == view["query_time"] == query_time
         assert view["query_calendar_context"] == "example-history"
-        assert view["units"][0]["temporal"]["status"] == "within_explicit_limits"
+        source_ref = view["units"][0]["assertion"]["source_ref"]
+        assert view["source_table"][source_ref]["occurred_at"] == "Sep 04, 2025, 18:42:18"
+        assert view["source_table"][source_ref]["calendar_context"] == "example-history"
+        temporal = view["units"][0]["temporal"]
+        assert temporal["status"] == "within_explicit_limits"
+        assert temporal["comparison_basis"]["effective_limits"] == "shared_floating_calendar"
+        for field, date in (("effective_from", "2025-09-04"), ("effective_until", "2025-09-06")):
+            assert temporal[field] == date
+            assert temporal["time_values"][field] == {
+                "value": date, "precision": "day", "timezone_known": False,
+                "calendar_context": "example-history",
+            }
+        assert "Dates retain stated precision" in messages[0]["content"]
+        assert "a calendar name does not establish a timezone" in messages[0]["content"]
         return "Blue during the stated period."
 
     run.call = call
@@ -860,7 +887,20 @@ def test_shared_benchmark_source_and_reader_use_declared_nominal_calendar(tmp_pa
             "role": "user", "content": text, "timestamp": "Sep 04, 2025, 18:42:18",
         },))
         assert run.maintain(service, observed, "halumem/alice/0")
-        assert run.answer(service, "Marker color?", "Sep 05, 2025, 10:00:00", "qa")
+        before = service.records()
+        api_view = EditMemory.revision_view(
+            before[0]["value"], query_time=query_time, query_calendar_context="example-history",
+        )
+        assert api_view["time_values"]["query_time"] == {
+            "value": "2025-09-05T10:00:00", "precision": "second", "timezone_known": False,
+            "calendar_context": "example-history",
+        }
+        source_clock = next(iter(api_view["source_table"].values()))["time_values"]["reported_at"]
+        assert source_clock["timezone_known"] is False and source_clock["precision"] == "second"
+        assert run.answer(service, "Marker color?", query_time, "qa")
+        snapshot = read_json(tmp_path / "http/qa/retrieval.json")[0]
+        assert snapshot["applicability"] == api_view
+        assert service.records() == before
         assert len(calls) == 2
         assertion = service.records()[0]["value"]["edit_state"]["units"][0]["assertion"]
         assert assertion["calendar_context"] == "example-history"
