@@ -42,6 +42,7 @@ _FIELDS = {
     "audience": "沙箱发布对象",
     "attempted_audience": "本次尝试的沙箱受众 (不代表已发布)",
 }
+_MEMORY_READS = {"search_memory", "read_memory", "read_history", "read_page"}
 
 
 def _text(value: Any) -> str:
@@ -76,6 +77,55 @@ def _receipt_lines(receipt: dict[str, Any]) -> list[str]:
         lines.append("先前操作回执: " + name + " / " + status + " / " + effect)
     if history.get("omitted_earlier_count"):
         lines.append("更早操作回执未列出数量: " + str(history["omitted_earlier_count"]))
+    return lines
+
+
+def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[str]:
+    """Quote already delivered, visibility-filtered record parts without new reads."""
+    calls: dict[str, str] = {}
+    items: list[dict[str, Any]] = []
+    for message in messages:
+        if isinstance(message, AIMessage):
+            for call in message.tool_calls:
+                call_id = call.get("id")
+                if isinstance(call_id, str):
+                    calls[call_id] = call["name"]
+        elif isinstance(message, ToolMessage):
+            name = calls.pop(message.tool_call_id, None)
+            if name not in _MEMORY_READS or name != message.name or message.status == "error":
+                continue
+            try:
+                packet = json.loads(str(message.content))
+            except ValueError:
+                continue
+            if (isinstance(packet, dict) and packet.get("schema") == "functional_material_v1"
+                    and packet.get("ok") is not False):
+                items.extend(packet.get("items", []))
+    if material.get("schema") == "functional_material_v1":
+        items.extend(material.get("items", []))
+    lines = []
+    seen = set()
+    remaining = 1000
+    for unit in items:
+        if unit.get("type") != "record" or not unit.get("content"):
+            continue
+        identity = (unit["record_id"], unit["revision"],
+                    unit.get("edit_unit", {}).get("unit_id"), tuple(unit.get("content_range", [])))
+        if identity in seen:
+            continue
+        seen.add(identity)
+        content = unit["content"]
+        excerpt = content[:remaining]
+        version = str(unit["revision"])
+        if unit.get("version_view") == "historical_exact_revision":
+            version += ", 历史版本"
+        if unit.get("retracted"):
+            version += ", 已撤销"
+        lines.append("已读取的保存内容 (版本 " + version + "): " + _text(excerpt)
+                     + (" (引用已截断)" if len(excerpt) < len(content) else ""))
+        remaining -= len(excerpt)
+        if remaining == 0:
+            break
     return lines
 
 
@@ -135,6 +185,10 @@ def business_response(
         historical.add(ref)
         paragraphs.append("历史原始回执 (不代表当前状态): \n\n" + "\n".join(
             "- " + line for line in _receipt_lines(old)))
+    saved_content = _saved_content_lines(messages, material)
+    paragraphs.extend(saved_content)
+    if saved_content and not effects.get("application_requests"):
+        paragraphs.append("原请求是否已全部完成尚未核对。")
     semantic = effects["semantic_memory"]
     paragraphs.append("本轮语义记忆: " + _STATUS.get(semantic["status"], semantic["status"]) + "。")
     for operation in semantic["operations"]:

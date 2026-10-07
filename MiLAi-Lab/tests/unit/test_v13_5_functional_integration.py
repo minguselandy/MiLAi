@@ -3732,6 +3732,84 @@ def test_visibility_response_keeps_rejected_and_successful_attempts_separate() -
     assert '未执行物理擦除' in answer
 
 
+def test_receipt_response_reports_read_saved_content_without_a_new_write(tmp_path: Path) -> None:
+    from milai_lab.memory.functional import FunctionalMemory
+    from milai_lab.memory.service import MemoryService
+    from milai_lab.runners.functional_response import business_response
+
+    version = 'stored-response-example-v1'
+
+    def config(turn: str) -> dict[str, Any]:
+        return {'configurable': {'user_id': 'alice', 'v13_session': 's',
+                                'v13_turn_id': turn, 'v13_config_version': version}}
+
+    def source(memory: FunctionalMemory, turn: str, text: str) -> list[str]:
+        ref = memory.service.capture_user('s', turn, text)['source_ref']
+        memory.context('s', turn, version)
+        return [row['fragment_handle'] for row in memory.service.source_fragments(ref)]
+
+    db = str(tmp_path / 'stored-response.sqlite')
+    body = '预订已登记; 目的地配置为工作室; 标签已创建。'
+    with SqliteStore.from_conn_string(db) as store:
+        service = MemoryService(store, ('stored-response', 'alice'), 'alice',
+                                tmp_path / 'lock', functional_contract='functional_v1')
+        memory = FunctionalMemory(service, len, retrieval_candidates=[])
+        handles = source(memory, 'save', '预订已登记; 标签尚未创建。')
+        saved = memory.save(config('save'), 'save', '预订已登记; 标签尚未创建。', handles)
+        assert saved['ok'] and saved['revision'] == 1
+        handles = source(memory, 'update', body)
+        revised = memory.update(config('update'), 'update',
+            service.read(saved['id'])['candidate_handle'],
+            [{'field': 'content', 'op': 'set', 'value': body, 'fragment_handles': handles}])
+        assert revised['ok'] and revised['revision'] == 2
+        source(memory, 'read', '之前保存了什么内容?')
+
+    with SqliteStore.from_conn_string(db) as store:
+        service = MemoryService(store, ('stored-response', 'alice'), 'alice',
+                                tmp_path / 'lock', functional_contract='functional_v1')
+        memory = FunctionalMemory(service, len, retrieval_candidates=[])
+        material = memory.context('s', 'read', version)
+        call = {'name': 'read_memory', 'args': {'record_id': saved['id']},
+                'id': 'read-saved', 'type': 'tool_call'}
+        read_tool = next(tool for tool in memory.tools() if tool.name == 'read_memory')
+        receipt = read_tool.invoke(call, config=config('read'))
+        packet = json.loads(receipt.content)
+        assert packet['ok'] and not packet['semantic_write_performed']
+        before = service.read(saved['id'])['value']
+        effects = dict(business=dict(status='not_executed', operations=[], observations=[]),
+                       semantic_memory=dict(status='not_committed', operations=[]),
+                       visibility=dict(operations=[]), raw_event=dict(status='stored'),
+                       application_requests=[])
+        messages = [AIMessage(content='模型声称已完成全部事项。', tool_calls=[call]), receipt]
+        answer = str(business_response(messages, effects, material).content)
+        assert '已读取的保存内容 (版本 2): ' + json.dumps(body, ensure_ascii=False) in answer
+        assert '本轮语义记忆: 未提交' in answer
+        assert '原请求是否已全部完成尚未核对。' in answer
+        assert '模型声称' not in answer and saved['id'] not in answer
+        assert 'unchecked' not in answer and 'read_memory' not in answer
+        assert service.read(saved['id'])['value'] == before
+        assert effects['semantic_memory']['operations'] == []
+        duplicated = str(business_response(messages, effects, packet).content)
+        assert duplicated.count(body) == 1
+        context_only = str(business_response([], effects, packet).content)
+        assert body in context_only
+        unpaired = str(business_response([receipt], effects, material).content)
+        assert body not in unpaired
+        mismatched = ToolMessage(name='search_memory', tool_call_id='read-saved',
+                                 content=receipt.content)
+        assert body not in str(business_response(
+            [messages[0], mismatched], effects, material).content)
+        failed = ToolMessage(name='read_memory', tool_call_id='read-saved',
+                            content=receipt.content, status='error')
+        assert body not in str(business_response([messages[0], failed], effects, material).content)
+        raw = {'items': [{'type': 'fragment', 'content': body}]}
+        assert body not in str(business_response([], effects, raw).content)
+        bounded = json.loads(receipt.content)
+        bounded['items'][0]['content'] = '保存的说明' * 300
+        excerpt = str(business_response([], effects, bounded).content)
+        assert '引用已截断' in excerpt and bounded['items'][0]['content'] not in excerpt
+
+
 @pytest.mark.parametrize('required,interrupted', [(False, False), (True, False), (True, True)])
 def test_existing_confirmation_uses_one_required_proposal_and_no_new_revision_after_reopen(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, required: bool, interrupted: bool,
