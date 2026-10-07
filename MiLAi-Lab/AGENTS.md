@@ -1,3 +1,19 @@
+# 2026-10-07 10:06:37 UTC: PR87 merged, saved score closed, recovery bindings
+
+PR83/84/85/86/87 merged; main354807f tree equals34fa5c9, whose ownFast507/Full325
+21 passed; integration clean. Frozenf307 first8 savedscore COMPLETED/exited0,
+updates7/19valid18/QA12/20valid17;167Judge stop/495237known,0newembedding/unknown.
+Second5 SAMEf307 score COMPLETED/exited0 at10:03:32,updates3/7valid7/QA6/9valid7;
+126Judge stop/493202known,0newembedding/unknown. Original failed32 remains13saved; no
+Writer/Reader rerun or old397 retry. Root alone realHTTP, unchanged ledger.
+Capacityprefix8-v6 frozen34fa5c9 prepared0, Root runs serially after closedscore.
+New9abc783 wires selected prior request ranges ascontext and reconciles original
+session/turn/config/source bindings;44Host+6adapter/application checks/types/lint/
+boundaries pass,0realHTTP. OrdinaryHost complete requirements/request_state
+registration and real fullrequest recovery still pending; one receipt is not full
+completion. Do not assign timezone to unknown HaluMem dates. Original full goal
+active/incomplete,16reserved unused,ProductNO_GO; older blocks historical.
+
 # 2026-10-07 09:26:49 UTC: PR86 merged, failed diagnostic and subset scoring
 
 PR83/84/85/86 merged; mainf89fe56 tree equals6ab9a6e, whose own Fast/Full21 passed.

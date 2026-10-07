@@ -2,6 +2,13 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
+2026-10-07 10:06:37 UTC：PR83至87均已合并，main354807f；34fa5c9自身Fast／Full21成功。
+f307第一用户保存8份score闭合：更新7/19valid18、QA12/20valid17，167Judge／495237known；
+第二保存5份score也COMPLETED／退出0：更新3/7valid7、QA6/9valid7，126Judge／493202known；
+合计13份描述性评分不替代原32预测FAILED。恢复源码9abc783
+的旧片段与原attempt绑定接线检查通过，0真实HTTP，普通Host完整请求登记仍待开发。
+详见[固定报告](MILAI_UNIFIED_MEMORY_USAGE.md)；以下旧描述保持原观察时点。
+
 2026-10-07 09:26:49 UTC：PR86已合并，main f89fe56。冻结f307聚焦Host两消息闭合，但
 prefix8-v5预测因Reader超限退出1，仅13保存预测；两次Editor容量失败与一次真实空提案分开。
 第一用户8份保存预测评分中，第二用户5份仅准备，不替代32会话分母。容量新源码437b80f
@@ -28,6 +35,9 @@ Root复核全部14条实际送达答复，未重评分；新源码4b5963f的修�
 
 | 案例／运行标识 | 用户任务与失败现象 | 最早断点 | 计划修改的一个机制 | 复测结果／仍未解决部分 |
 |---|---|---|---|---|
+| 普通Host共同维护／选定旧请求 | v7解析旧保存请求，但最近四来源限制可能使其未送到Writer | 中央maintain_sources未传选定旧范围 | 重新读取解析句柄，作为prior_context保留原范围及时间，当前no-save优先 | 9abc783接线及SQLite检查通过，M／Append与两recipe适配仍共用；0真实模型，不将旧语境升级为本轮支持 |
+| 公共resume／跨会话旧语义未知 | 旧实际提交响应丢失，新session用当前会话查原operation_id会漏掉 | C原attempt未存绑定，CLI核对用当前session／公共轮次 | callback前保存原session／turn／config／source，按原绑定execute=False核对 | 跨会话只读实际SQLite检查闭合旧commit，原错误与attempt保持，0重复保存／业务；无新权限或unknown重试 |
+| 普通Host／完整请求登记 | 实际调用journal只记录单次业务／记忆，不能自动证明旧请求全部项完成 | v7首次dispatch前没有C的完整requirements／request_state | 后续接通实际请求解释与既有完整进度，ToolNode与C不能重复业务 | 仍待开发及真实验证；选定片段接线、CLI完整requirements示例、一次maintenance均不等于普通Host完整恢复闭合 |
 | prefix8-v5／M冻结f307 | Reader37196输入超过32256，预测退出1；13/32保存、后两用户未运行 | 第二用户原5实际10项Reader中重复来源断言与时间元数据 | 紧凑JSON并在瞬时Reader消息共享逐值相同metadata，保留所有结果与字段 | 新源码30份实际输入展开等价，最大25059；仅去空格仍33823。0真实复跑，不把失败记完成或未运行记零分 |
 | prefix8-v5／M首用户7及第二用户5 | 抽取完成，editor HTTP前容量失败，无修改 | 现有enum共享后完整schema子结构仍重复 | 只扩Writer解释性schema的$defs／$ref共享，内联生成API和decoder不变 | 32640→25910及33092→26306；九份保存view展开相等，原16提案有效性一致，0真实HTTP |
 | prefix8-v5／M首用户0及4／5 | 五项候选送达却只形成基本卡；原4真实空提案，原5后来追加旧事项 | 已送达后的维护选择和复合条款，不是候选没送达 | 保留真实空输出与后续局部追加，集中评分及同前态recipe比较 | 29完整答案Root已读，未数值重评分；容量改动不修这些语义，原5不是新建或原4补记成功 |

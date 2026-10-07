@@ -11,6 +11,64 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 10:06:37 UTC：PR87已合并、保存评分闭合与恢复接线
+
+本节固定于2026-10-07 10:06:37 UTC／北京时间18:06:37，报告父源码`9abc783`。
+PR83／84／85／86／87均已合并；main为`354807f`，本地integration快进且干净，
+源码树与PR87头`34fa5c9`相同。34fa5c9自身Fast507及Full325成功，Full21/21；
+不把这些检查写成合并提交354807f自身CI。用户的原checkout及未跟踪计划保持。
+
+**同f307保存评分仅覆盖已保存13份。**第一用户8份保存预测的作者score已
+COMPLETED_EXPERIMENT_PHASE，09:45:46退出0。更新Correct7/19、valid18；
+QA Correct12/20、valid17；formation reference122／valid115，formed outputs16／valid14。
+原更新标签为7Correct、11Omission、1无效，QA为12Correct、4Hallucination、1Omission、
+3无效，原无效判断全部保留。167个Judge响应均stop，495,237 known tokens，
+新增embedding／unknown均0。Root已读该用户全部20个原完整答案，没有额外数值重评分，
+同家族Judge及开发复核不是独立确认。不能和旧dffc或其他源码成绩排列方法优势。
+
+第二用户5份保存预测于09:47:11从同一冻结f307串行score，10:03:32退出0；
+5/5检查点及score终态COMPLETED_EXPERIMENT_PHASE。更新Correct3/7、valid7；
+QA Correct6/9、valid7；formation reference89／valid77，formed outputs19／valid16。
+更新原标签3Correct／4Omission，QA为6Correct／1Hallucination／2无效，全部保留。
+126个Judge响应均stop，493,202 known tokens，新增embedding／unknown均0。
+没有重新调用Writer／Reader／encoder。原prefix8-v5的32会话预测仍是FAILED、13保存预测；
+两份subset终态不替代32分母，后两用户未运行不记零分，不重发旧dffc未确认请求397。
+两个描述性subset合计更新10/26、valid25，QA18/29、valid24；不同长度用户分列，
+不是完整M成绩或同版方法对照。Root已读第二用户全部9答复，总计29答复，无新增数值重评分。
+
+第一评分闭合账本为42,078请求、known164,718,189／charged164,909,677、
+embedding1,161,692、unknown5。两份评分闭合账本为42,204请求、known165,211,391／
+charged165,402,879、embedding仍1,161,692、unknown仍历史5，无新增已闭合unknown。
+自prefix8-v5预测起生成348请求／348响应、1,998,492 known tokens；其中两份score
+293响应／988,439 known仅相加一次，编码仍91次／33,242。原limits未变，
+确认文件与账本request／known差额一致，完整采样保持ignored。此固定快照不是后续实时成本。
+
+**恢复代码尚未做真实模型验证。**`48ae6f6`把显式选定的旧请求原范围加入共同维护
+prior_context，不再受最近四来源限制；旧片段不是当前事件、独立支持或新授权。
+`9dcd928`为C的resume_request增加可选semantic_attempt_binding，在memory callback前
+深拷贝保存实际session／turn／config／source；原unknown尝试的binding及error不覆盖。
+Root源码`9abc783`接通普通Host三处maintain_sources，重新读取已解析句柄并核对当前可见性；
+当前不允许保存时不读取这些旧请求。公共CLI按原attempt绑定定位旧维护结果，恢复原公共
+轮次后execute=False核对提交；同会话暂时恢复旧轮次后恢复本轮绑定，不盲重试unknown。
+
+Root的44项Host／continuation相关检查及6项适配器／application窄检查通过，使用合成
+transport、真实SQLite；Ruff、原Python3.11四个受影响源mypy及包／工具边界通过。
+跨会话只读新请求能核对实际已提交而响应丢失的旧保存，原semantic_unknown尝试及错误仍在，
+总体memory关闭为committed；没有重复保存、预订或补标签。选定旧语境、当前no-save及重开
+零重复也已检查。这些工程检查不是真实语义效果或完整请求恢复的完成证据，源码自身CI另核对。
+
+普通Host的v7仍未在首次业务dispatch前登记C要求的完整requirements／request_state，
+当前单次maintenance或单回执不能证明全部原请求项已完成；CLI反馈仍只确认本地文件、
+host_seen=false。该接点和普通Host真实完整恢复仍待开发／验证，不能因上述接线宣称闭合。
+HaluMem日期没有已证实的时区，后续表示规范化不得凭空赋予UTC或推定生效时间。
+
+容量诊断`prefix8-v6`已冻结34fa5c9，仍0真实调用；两份评分已闭合，随后由Root串行运行，
+四开发用户各前8、各自空库、同预算及参数，只有Writer／Reader重复表示共享这一主要变化。
+恢复9abc783不在此冻结诊断内，不热改或拼接轨迹。原同前态recipe配对也仍0真实调用。
+正式五组、65／277连续历史、native／drift／消融／较紧预算、最终冻结后16保留用户、
+外部基准、完整Host135case／192message及新故事与六项交付均未完成。16保留用户未用于开发，
+尚无最终候选、稳定方法优势或Product准入，Product仍NO_GO。下方保留各自原快照。
+
 ## 09:26:49 UTC：PR合并、冻结诊断失败与容量修复
 
 本节固定观察于2026-10-07 09:26:49 UTC／北京时间17:26:49。PR83／84／85／86均已合并；

@@ -4,6 +4,23 @@
 [PR84](https://github.com/minguselandy/MiLAi/pull/84)和[PR85](https://github.com/minguselandy/MiLAi/pull/85)。
 工程合并不表示原研究任务完成，也不改变Product NO_GO。
 
+## 09:59:01 UTC：已合并PR83至87
+
+用户授权的相关开发PR83／84／85／86／87均已合并。PR85最终头613c992的自身Fast37586244057
+及Full37586217823成功后于07:52:02合并，main7141340；PR83包含的祖先保留，GitHub也标为merged。
+PR86头6ab9a6e的自身Fast37596266589及Full37596266603成功21/21后于09:18:49合并，mainf89fe56。
+[PR87](https://github.com/minguselandy/MiLAi/pull/87)头34fa5c9的自身
+[Fast507](https://github.com/minguselandy/MiLAi/actions/runs/37600971509)与
+[Full325](https://github.com/minguselandy/MiLAi/actions/runs/37600971657)成功21/21后，
+Root核对远端头，转ready并以普通merge合并；main354807f，源码树与34fa5c9一致。
+独立integration已快进且干净；原checkout未跟踪用户计划保持。未删除分支或覆盖旧产物。
+
+PR87仅共享Writer解释性schema和Reader瞬时消息的重复metadata，并发布固定报告；
+未改变实际K10、预算、生成decoder、Store/API/业务权限。全部离线字段等价，真实容量诊断
+仅准备0调用；新恢复接线9abc783在独立分支，不归入PR87或旧冻结实验。合并后远端open列表
+为空是当时观察，不表示后续开发结束。原完整研究、真实功能和全部交付仍未完成。
+下面保留原整合过程；CI属于各自头提交，不宣称合并提交自身CI已运行。
+
 ## 分支与整合方式
 
 PR83的post-r52分支和PR84的四臂分支从`fc1c6c9`分叉；PR85原来以PR84分支为基础。
