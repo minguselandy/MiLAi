@@ -1527,9 +1527,10 @@ class MemoryService:
                     }
                 self._uncertain_captures.discard(event_id)
         episode_id = event.get("episode_id")
-        if episode_id is not None and self.memory_profile == "unified_v1":
+        if self.memory_profile == "unified_v1":
             from milai_lab.memory.episodes import EpisodeIndex
 
+            episode_id = episode_id or reference_key([session, event_key, role])
             EpisodeIndex(self).register(episode_id, [event_id])
         return {
             "ok": True,
@@ -1815,7 +1816,11 @@ class MemoryService:
             return sorted(result, key=lambda event: (event["observed_at"], event["event_id"]))
 
     def episodes(
-        self, *, episode_ids: list[str] | None = None, pending_only: bool = False, limit: int = 20
+        self,
+        *,
+        episode_ids: list[str] | None = None,
+        pending_only: bool = False,
+        limit: int | None = 20,
     ) -> list[dict[str, Any]]:
         """Visible source-backed episodes in this same owner's Store."""
         from milai_lab.memory.episodes import EpisodeIndex
@@ -1823,6 +1828,52 @@ class MemoryService:
         return EpisodeIndex(self).select(
             episode_ids=episode_ids, pending_only=pending_only, limit=limit
         )
+
+    def index_source_episodes(self) -> dict[str, Any]:
+        """Add episode indices for visible older sources without recapturing them."""
+        from milai_lab.memory.episodes import EpisodeIndex
+
+        index = EpisodeIndex(self)
+        results = []
+        for source in self.sources():
+            episode_id = source.get("episode_id") or reference_key(
+                [source["session"], source["capture_key"], source["role"]]
+            )
+            results.append(index.register(episode_id, [source["event_id"]]))
+        return {
+            "indexed": len(results),
+            "episode_ids": [row["episode_id"] for row in results],
+            "new_sources": 0,
+            "semantic_records_changed": 0,
+        }
+
+    def export_snapshot(self) -> dict[str, Any]:
+        """Export this owner's currently visible sources, records and history.
+
+        This is a portable observation of memory, never a business authorization
+        or a promise to erase external backups. Execution journals stay separate.
+        """
+        records = [row for row in self.records() if row["ok"]]
+        history = []
+        for row in self._rows(self.namespace):
+            metadata = row["value"].get("_v13_1")
+            if metadata is None or metadata["owner"] != self.owner:
+                continue
+            versions = [
+                self.read(row["id"], version["revision"]) for version in metadata["history"]
+            ]
+            history.append({"id": row["id"], "versions": [v for v in versions if v["ok"]]})
+        return {
+            "owner": self.owner,
+            "namespace": list(self.namespace),
+            "memory_profile": self.memory_profile,
+            "sources": self.sources(),
+            "records": records,
+            "history": history,
+            "episodes": self.episodes(limit=None) if self.memory_profile == "unified_v1" else [],
+            "visibility_scope": "currently permitted memory only",
+            "business_effects": "not established by this export",
+        }
 
     def _uses_explicit_receipt(self, proposal: dict[str, Any], source: dict[str, Any]) -> bool:
         ref = source.get("object_ref")
@@ -1946,6 +1997,22 @@ class MemoryService:
                     if body[field] != proposal["fields"][field]:
                         return "receipt_body_conflict:" + field, source
         return None, source
+
+    def operation_receipt(self, session: str, operation_id: str) -> dict[str, Any] | None:
+        """Observe the saved outcome of an old semantic operation without repeating it."""
+        identity = reference_key([session, operation_id])
+        with self._locked():
+            attempt = self.store.get(self.attempts_namespace, identity)
+            for row in self._rows(self.namespace):
+                metadata = row["value"].get("_v13_1", {})
+                if metadata.get("owner") != self.owner:
+                    continue
+                proposal = metadata.get("proposals", {}).get(identity)
+                if proposal is not None:
+                    return cast(dict[str, Any], json.loads(_json(proposal["receipt"])))
+            if attempt is not None:
+                return cast(dict[str, Any], json.loads(_json(attempt.value["receipt"])))
+        return None
 
     def replay_requested(
         self, session: str, proposal_id: str, requested: dict[str, Any]

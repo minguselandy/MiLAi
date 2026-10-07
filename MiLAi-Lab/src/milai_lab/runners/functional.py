@@ -858,7 +858,7 @@ def prepare(
     target = root / "input-freeze.json"
     if target.exists():
         existing = read_json(target)
-        if existing.get("config_version", existing.get("config_sha256")) != config_version:
+        if existing.get("config_version") != config_version:
             raise ValueError("FUNCTIONAL_EXISTING_CONFIGURATION_VERSION_CHANGED")
         return cast(dict[str, Any], existing)
     write_json(target, frozen)
