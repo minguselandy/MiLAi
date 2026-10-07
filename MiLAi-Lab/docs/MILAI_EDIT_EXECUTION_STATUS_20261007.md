@@ -1,5 +1,30 @@
 # MiLAi-Edit 当前执行情况
 
+## 有限抽取配对的公开复现入口已准备；真实配对仍0调用（2026-10-07 北京时间）
+
+计划10.1／10.2的复现交付继续推进：将既有Root薄驱动整理为[公开CLI](../tools/run_edit_change_pairs.py)，显式传入原B0目录、独立输入／配置和新输出，不硬编码本机路径或用户ID。保留原声明的首用户序号3／6／7／4、原始实际before、一次抽取→既有dense定位→既有编辑器→原问题Reader；不新增方法开关、模型、Store或审核流程。原实验`072af2e`的冻结源码及配置不改，原型核心`c86a5ea`也未改。
+
+新CLI的`prepare`已在**另一个ignored目录**做离线复现：四实际before仍16／20／20／16条，抽取请求与原准备结果完全一致、投影12,066／6,876／11,396／10,853，原问题0／0／8／3。只替换副本路径；原准备输入／配置未覆盖，执行调用流程与旧薄驱动一致。0模型／编码调用，不能算四次真实抽取或语义成功。Ruff单文件、编译、四份已有实际输入比较和工具依赖边界通过，0新测试函数，不重跑原型9项或全套。
+
+```bash
+# LAB是包含本入口与实际导入代码的冻结源码；所有输入／输出位于ignored目录。
+PYTHONPATH="$LAB/src" "$PYTHON" "$LAB/tools/run_edit_change_pairs.py" prepare \
+  "$ORIGINAL_B0" "$PREPARED" "$PREPARED_CONFIG" --source-version "$SOURCE_COMMIT"
+# 仅在本入口自身Fast成功、原整个四组真实终态／PID退出和串行资源释放后执行。
+PYTHONPATH="$LAB/src" "$PYTHON" "$LAB/tools/run_edit_change_pairs.py" execute \
+  "$PREPARED" "$ADMITTED_CONFIG" "$NEW_RUN_DIR"
+```
+
+第二条命令本次未执行。真实有限配对仍最多4抽取＋4编辑＋原11Reader、0Judge，实际调用0／未准入／未采用，Host两阶段未切换。后续准入须冻结包含公开入口的实际版本，绑定准确runtime commit并核实其自身CI；不借原型或报告CI给新入口通过。现有c86四份准备输入仍保留，不把离线复现副本新增为实验样本。
+
+原四组快照2026-10-07T00:05:20.260237+00:00：B0维护／评估32/32已闭合，B1维护3／评估2，B2／M未轮到；PID3476759活跃、无suite终态。900请求／899确认响应全stop、3,932,884 known、1在途；210编码／75,635 known。live账本40,482／155,260,276 known／155,426,515 charged、编码1,050,467／unknown4含在途预留；最近闭合仍B0边界40,358／154,825,220 known／154,936,935 charged、编码1,047,799／历史unknown3，差额一致，预算不变。B0原27/72更新（valid64）、49/73QA（valid68）与原无效标签不改。
+
+Root已读B1前两事件实际形成与6个完整答案：事项形成可执行，职业前提与未来目标有正确区分；一答将姓名第二部分猜为中间名，原Hallucination保留。两次形成不能证明局部修订有效，继续等待真实变化会话，不据部分成绩排名。上轮报告b187自身Fast／Full仍in_progress（00:03:59 UTC）；新入口提交自身CI另查。
+
+本阶段6个Lab文件：1公开薄驱动、5文档／状态／脱敏复现记录；没有修改方法、runner、Product/API/权限/Canonical、Archive或workflow，回滚`b187209`。私有正文／gold／HTTP／reasoning／数据库／配置不上GitHub。完整四组、65／277、机制／漂移／消融／较紧预算、16保留／外部／普通Host／遗忘／业务效果／恢复与六交付仍未完成，无最终候选，Product NO_GO、PR85 draft未合并。
+
+[复现入口记录](../data/manifests/milai-post87c-change-pairs-reproduction-entry-20261007.json) · [原有限配对声明](../data/manifests/milai-post87c-change-extraction-paired-development-20261007.json) · [B0闭合结果](../data/manifests/milai-post87c-common-dense-B0-four-user-prefix-results-20261007.json)。下方保留原时点。
+
 ## B0四用户前缀闭合：可执行，但送达后漏写仍限制维护效果（2026-10-07 北京时间）
 
 原冻结`072af2e`的B0已真实闭合：四用户各自空库、原序号0–7，共32次维护／完整评估、72更新／73QA；arm终态为`COMPLETED_EXPERIMENT_PHASE`。Root已复核第四位全部9个Writer批次和19个完整答案，累计四用户32会话／73答案；原作者离线聚合成功，新增HTTP0。原四组PID3476759仍活跃，已继续B1，不能把B0终态当整个队列结束或方法比较完成。

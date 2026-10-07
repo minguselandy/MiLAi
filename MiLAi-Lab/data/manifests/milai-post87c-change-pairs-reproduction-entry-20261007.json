@@ -1,0 +1,215 @@
+{
+  "status": "PUBLIC_ENTRY_OFFLINE_PREPARATION_VERIFIED_NOT_MODEL_EXECUTED",
+  "observed_at": "2026-10-07T00:05:20.260237+00:00",
+  "report_parent_and_rollback_commit": "b18720952aa65e5e02f63489c6b981dca60ea456",
+  "plan_sections": [
+    "10.1 reproducible commands",
+    "10.2 code/config/data/cost delivery",
+    "5.2 conditional B scope",
+    "8.2 narrow checks",
+    "8.3 first attempts and serial resources"
+  ],
+  "public_entry": {
+    "path": "tools/run_edit_change_pairs.py",
+    "status": "PUBLIC_ENTRY_OFFLINE_PREPARATION_VERIFIED_NOT_MODEL_EXECUTED",
+    "source_version": "Commit containing public entry; bind exact runtime commit before admission",
+    "prototype_core_source_commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
+    "original_baseline_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+    "declaration": "milai-post87c-change-extraction-paired-development-20261007.json",
+    "fixed_original_ordinals": [
+      3,
+      6,
+      7,
+      4
+    ],
+    "explicit_arguments": [
+      "original B0 arm directory",
+      "new prepared input directory",
+      "private prepared or admitted config",
+      "new actual output directory",
+      "source version for preparation"
+    ],
+    "absolute_machine_paths_in_source": 0,
+    "corpus_user_IDs_hardcoded_in_source": 0,
+    "prepare_invoked_offline": true,
+    "execute_invoked": false,
+    "new_model_calls": 0,
+    "new_embedding_calls": 0,
+    "actual_before_records": [
+      16,
+      20,
+      20,
+      16
+    ],
+    "extraction_input_tokens": [
+      12066,
+      6876,
+      11396,
+      10853
+    ],
+    "original_question_counts": [
+      0,
+      0,
+      8,
+      3
+    ],
+    "offline_prepared_inputs_equal_original_except_copy_paths": true,
+    "execute_body_equal_original_private_helper_except_input_path_binding": true,
+    "original_prepared_inputs_and_config_preserved": true,
+    "extra_experiment_samples": 0,
+    "CLI_checks": {
+      "Ruff": "PASS single driver",
+      "compile": "PASS",
+      "actual_existing_input_comparisons": 4,
+      "active_tools_Product_dependency_inventory": "PASS",
+      "new_test_functions": 0,
+      "core_test_suite_repeated": false,
+      "initial_portability_cleanup": "Private helper formatting and parameter/local-batch name collision corrected before offline prepare; no failed runtime/model retry."
+    },
+    "planned_finite_execution": {
+      "extractor_calls_max": 4,
+      "editor_calls_max": 4,
+      "original_Reader_calls_max": 11,
+      "generation_requests_max": 19,
+      "Judge_requests": 0,
+      "retries": 0,
+      "admitted": false,
+      "adopted_as_common_flow": false,
+      "normal_Host_flow_switched": false,
+      "wait_for_whole_original_suite_terminal_PID_exit_and_serial_release": true,
+      "public_entry_own_Fast_required_before_HTTP": true,
+      "own_Full_before_common_full_prefix_or_candidate": true
+    },
+    "original_core_editor_decoder_and_commit_contracts_changed": false,
+    "frozen_original_runtime_or_config_changed": false
+  },
+  "offline_reproduction_scope": "Four further independent copies used only to verify preparation; not four new model experiments or a new continuous history. Raw data remains ignored.",
+  "B1_initial_Root_review": {
+    "completed_original_ordinals": [
+      0,
+      1
+    ],
+    "formation_states_read": 2,
+    "complete_natural_answers_read": 6,
+    "finding": "Matter formation executes; employment and future goals are distinguished in answers, but one answer guesses a middle name from the second name component. Original Hallucination label retained. This does not prove local editing.",
+    "final_user_prefix_review_complete": false,
+    "numerical_Root_rescoring": false,
+    "independent_audit": false
+  },
+  "parent_queue_live_snapshot": {
+    "observed_at": "2026-10-07T00:05:20.260237+00:00",
+    "per_arm": {
+      "B0": {
+        "maintenance": 32,
+        "evaluation": 32,
+        "generation_requests": 776,
+        "generation_responses": 776,
+        "terminal": true
+      },
+      "B1": {
+        "maintenance": 3,
+        "evaluation": 2,
+        "generation_requests": 124,
+        "generation_responses": 123,
+        "terminal": false
+      },
+      "B2": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "terminal": false
+      },
+      "M": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "terminal": false
+      }
+    },
+    "generation_requests": 900,
+    "generation_responses": 899,
+    "generation_pending": 1,
+    "generation_known_tokens": 3932884,
+    "finish_reasons": {
+      "stop": 899
+    },
+    "encoding_responses": 210,
+    "embedding_known_tokens": 75635,
+    "ledger": {
+      "generation_requests": 40482,
+      "generation": {
+        "charged_tokens": 155426515,
+        "known_tokens": 155260276,
+        "unknown_usage": 4
+      },
+      "embedding": {
+        "charged_tokens": 1050467,
+        "known_tokens": 1050467,
+        "unknown_usage": 0
+      },
+      "limits": {
+        "arms": 3,
+        "embedding_tokens": null,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "questions": 12
+      }
+    },
+    "ledger_stable_during_read": true,
+    "receipt_deltas_match": true,
+    "original_PID_live": true,
+    "suite_terminal_exists": false,
+    "new_prototype_model_calls": 0,
+    "maintenance_count_rule": "Session-level completion only; nested batch excluded.",
+    "arm_terminal_file": "terminal.json"
+  },
+  "last_closed_B0_arm_boundary": {
+    "arm": "B0",
+    "scope": "Actual B0 arm terminal boundary; original four-arm suite still running",
+    "snapshot": {
+      "generation_requests": 40358,
+      "generation": {
+        "charged_tokens": 154936935,
+        "known_tokens": 154825220,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 1047799,
+        "known_tokens": 1047799,
+        "unknown_usage": 0
+      },
+      "limits": {
+        "arms": 3,
+        "embedding_tokens": null,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "questions": 12
+      }
+    }
+  },
+  "previous_report_ci": {
+    "commit": "b18720952aa65e5e02f63489c6b981dca60ea456",
+    "observed_at": "2026-10-07T00:03:59Z",
+    "Fast": {
+      "run_id": 37549217306,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "Full": {
+      "run_id": 37549217325,
+      "status": "in_progress",
+      "conclusion": null
+    }
+  },
+  "publication_scope": "Six Lab files: one public driver plus five report/status/reproduction records. No method/runner/Product/Archive/workflow changes, model/encoding calls or new tests.",
+  "conclusions": {
+    "candidate_selected": false,
+    "stable_method_advantage_established": false,
+    "goal_complete": false,
+    "product_status": "NO_GO",
+    "heldout_users_read": false,
+    "second_generation_family_added": false
+  }
+}
