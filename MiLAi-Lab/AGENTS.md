@@ -1,3 +1,18 @@
+# 2026-10-07 09:26:49 UTC: PR86 merged, failed diagnostic and subset scoring
+
+PR83/84/85/86 merged; mainf89fe56 tree equals6ab9a6e, whose own Fast/Full21 passed.
+Frozenf307 focusedHost closed2COMPLETED/20generation213307known/14embedding1602;
+actualToolr3 commits, later declared no-maintenance preserves that boundary.
+Samef307 prefix8-v5 predict FAILED/exited1:13/32saved(8/5/0/0),29answers,14maintenance,
+2pre-editorcapacity gaps,1realempty,35commits;55stop/1010053known,91embedding33242,
+0Judge/newunknown. Reader37196 exceeded32256 beforeHTTP; never hotedit or overwrite.
+Root alone scores only13saved predictions in two explicit subsets from SAMEf307;
+first8 started09:21:46,2checkpoints/39Judge at snapshot,no terminal;second5prepared0.
+No Writer/Reader/encoder rerun or oldunknown397 retry; subsets do not close32.
+Newsource437b80f onlyshares repeated schema/Reader metadata; field-equivalent
+offline projections fit,0realHTTP. Original full goal remains active/incomplete;
+16reserved unused,ProductNO_GO. See docs/MILAI_UNIFIED_MEMORY_USAGE.md; older blocks historical.
+
 # 2026-10-07: mixed-source followup and serial focused Host
 
 Use docs/MILAI_UNIFIED_MEMORY_USAGE.md for fixed v4/v5 execution, semantics and
