@@ -185,9 +185,27 @@ def run(
             )
             return memory.maintain_delivery(config, delivery, **kwargs)
 
+        def reconcile_consolidation(*, request_id: str) -> dict[str, Any] | None:
+            saved = service.store.get(
+                (*service.namespace, "edit_maintenance"),
+                json.dumps([session, request_id], ensure_ascii=False),
+            )
+            if saved is None:
+                return None
+            binding = saved.value["binding"]
+            delivery = {"sources": [dict(row) for row in binding["sources"]]}
+            return memory.maintain_delivery(
+                config, delivery, request_id=request_id, prior_request_id=request_id,
+                new_attempt_id=None, date=saved.value["date"],
+                recipe=cast(MaintenanceRecipe, binding["recipe"]), model_call=call,
+                allowed=True, execute=False,
+                selected_record_ids=binding.get("selected_record_ids"),
+            )
+
         if operation == "consolidate":
             result = consolidate(
                 EpisodeIndex(service), request_id=request_id, maintain=maintain,
+                reconcile=reconcile_consolidation,
                 episode_ids=episode_ids, record_ids=record_ids or [],
                 prior_episode_ids=prior_episode_ids or [], limit=limit,
             )

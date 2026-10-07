@@ -1,5 +1,29 @@
 # MiLAi Lab 当前状态
 
+**2026-10-07 15:24:02 UTC／北京时间23:24:02：整理回执核对已接入，当前五组运行保持ec冻结源。**
+
+新源码188c80a基于main7f，修复内层维护提交后外层整理仍pending的窗口；同session/request
+重开仅核对原回执，unknown不重生成，原选择／可见性检查优先。2项CLI集成检查、真实SQLite
+示例、Ruff、受影响三源mypy及包／工具边界通过，0真实HTTP；自己的远端CI待发布。
+该修复不在PID3237374的ec37d38五组预测中：此时B0维护／预测14/32（8／6／0／0），
+其余未开始，无终态或评分。Root已读B0首用户20完整答案，来源审计未完整，无数值重评分。
+五条主线已有一体化候选，接下来围绕语义变化、非目标保持、历史与完整恢复收敛；
+[统一报告](MILAI_UNIFIED_MEMORY_USAGE.md)区分新工程检查、冻结运行及原固定成本。
+原完整目标active，16保留未用、single_verdict_v1未准入、Product NO_GO。
+
+**2026-10-07 15:04:41 UTC／北京时间23:04:41：PR83至92合并，同版五组预测中。**
+
+main7f755bac／integration干净，PR92头ec37d38自身两Fast及Full21成功，main push成功；
+main部分测试按原workflow复用已测试PR内容。新历史入口ec复测4执行退出0，真实r2已读，
+最后答复仍有初始保存／Source与修订措辞错误；同源recipe两组4case及22答案退出0，未来
+授权冲突未复现，仍有真实空提案、范围较窄引用和语义强化。两运行共52生成675155known、
+61编码24739，Judge0／新unknown0；不记语义全通过或recipe排名。
+
+14:59:07冻结ec启动B0／B1／B2／M／强Append-only共同底座、各自空库prefix8预测，
+PID3237374实际存在。本快照仅B0维护／预测3/32，16生成响应／17编码响应，无终态；
+其余未开始不记零分，score尚0。固定成本、命令和完整未完范围见
+[统一报告](MILAI_UNIFIED_MEMORY_USAGE.md)。原目标仍active，16保留未用、Product NO_GO。
+
 **2026-10-07 14:16 UTC／北京时间22:16：PR83至91合并，历史读取与比较克隆入口后续修复。**
 
 PR91实际头962自身Fast／Full21成功，13:41:39合并main2cf0c739，main push也成功；integration
