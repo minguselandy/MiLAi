@@ -11,6 +11,98 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 13:06:36 UTC：日期输出位置澄清已集成，真实效果待验证
+
+最新开发源码`4a2d7ba`在402d7d5上集成B的`743c2ded`，仅向既有editor prompt补14行：
+applicability属于对应content／condition的assertion，binding只承载关系支持；Source的
+报告时刻、角色和调用方日历不代填生效限。只在temporal_scope及conditioned开启时加入
+明确标为假设的日期条件示例。公共schema、decoder、权限和实际日期故事402产物均不改。
+
+Root检查85项既有编辑器测试通过，7个受影响文件Ruff、5个源／示例3.11mypy及真实SQLite
+日期示例通过，均0真实模型／编码调用。这些检查验证合法输出与日期读取路径，不证明
+模型会生成正确结构。4a自身远端CI尚未请求；新的真实效果与成本另记，下面12:58固定
+报告、原首次非法属性失败与原来源绑定限制继续保留。原完整目标仍未完成。
+
+## 12:58:48 UTC：PR90合并、完整诊断评分与两组Host检查闭合
+
+本节固定于2026-10-07 12:58:48 UTC／北京时间20:58:48。报告版本以本节所在提交为准，
+最新开发源码为`402d7d5`（C的`e9fd56a`集成为`ee0b2dc`，Root接通进度呈现）；
+实际prefix8-v6预测／评分仍为`34fa5c9`，Native8两应用为`1f22097`，日期故事为402d7d5。
+三条运行分别统计；工程合并、实际提交、作者标签与Root复核不互相替代。
+
+**PR83至90均已合并。**[PR90](https://github.com/minguselandy/MiLAi/pull/90)头16f3083
+自身[Fast519](https://github.com/minguselandy/MiLAi/actions/runs/37620097357)、
+[Fast520](https://github.com/minguselandy/MiLAi/actions/runs/37620147498)及
+[Full329](https://github.com/minguselandy/MiLAi/actions/runs/37620147442)均success，Full21/21。
+12:51:28普通merge为main`e0abb07`；integration快进、干净，源码树与已检查的16f相同。
+未改变workflow、业务权限或Product内容，不借main／其他提交CI证明新402源码。
+
+**业务事实与当前执行许可分列。**ee0b2dc按实际必需步骤汇总business.status；
+当前执行状态、can_execute、allowed_operations及readonly放入business.execution。
+先按真实观察辨明已完成／未完成／部分完成，再决定本次可办理的阶段；保留原attempt、
+实际回执、unknown及当前拒绝。402d7d5的普通业务答复分别展示“业务部分完成”和
+“本次只查询／未获允许”；不把旧请求的保存要求当新许可，也不增加业务／语义重放。
+47项应用、10项Host、4项包边界及5项工具边界检查通过；三个源／示例3.11mypy、Ruff和
+两应用SQLite重开示例通过，以上均0真实HTTP。示例只补正确RunnableConfig／文档world类型，
+不修改实际办理行为。402自己的远端CI尚未请求，不能借父16的成功冒称已通过。
+
+**同一34fa诊断的predict与score均已闭合。**预测11:04:45退出0；评分12:19:34退出0，
+terminal-score为COMPLETED_EXPERIMENT_PHASE，32/32会话按用户8／8／8／8完成。
+507个Judge请求及507个确认stop响应，known1,900,646；未重做Writer、Reader或encoder。
+用同一冻结源的既有汇总入口读取保存标签，0新增模型；原Omitted／None等无效判断保留。
+
+| 用户顺序 | 更新Correct／全部；valid | QACorrect／全部；valid | formation reference／valid | formed outputs／valid |
+|---|---|---|---|---|
+| 第一 | 9/19；18 | 9/20；18 | 122/115 | 14/12 |
+| 第二 | 5/15；15 | 5/12；11 | 102/90 | 16/12 |
+| 第三 | 4/20；18 | 11/22；20 | 100/93 | 16/13 |
+| 第四 | 2/18；15 | 4/19；17 | 115/112 | 7/6 |
+| 合计 | 20/72；66 | 29/73；66 | 439/410 | 53/43 |
+
+更新原标签为20Correct、44Omission、2Hallucination及3Omitted／3None无效；QA为29Correct、
+21Omission、16Hallucination及7None无效。全部机会与valid分母分别保留，不把未运行对照
+补零。predict的139响应／2,162,788known与score合计646生成响应／4,063,434known；编码
+仍198次／70,668，新增unknown0。此前151／131／147 Judge等用户子集不重复加总。
+Root已读该冻结轨迹全部73个完整自然答案，无额外数值重评分；仍有真实空维护、同目标
+重叠拒绝、来源／限定缺口。没有同版本控制组或稳定方法优势，同家族Judge不算独立确认。
+
+**冻结1f的Native8两应用已实际闭合。**2个既有case／5个消息跨进程执行，12:31:02退出0，
+5次COMPLETED代表执行状态。Root读全部5个完整业务自然候选及最终答复，读取实际SQLite：
+预订恰1次reserve_and_label＋1次complete_label，续办前实际查询、没有重复预订；原结果
+维护因EDIT_APPEND_CONDITION_TARGET_INVALID拒绝。后续当前不允许记忆维护，业务完成但
+原保存项仍pending，原完整请求incomplete；实际记忆只保留用户请求r1，不能称保存了结果。
+
+文档第一次草稿和审批成功而发布不可用；后续实际查询后只补发布，DB恰1审批／1成功
+发布，实际结果事项r1至r4。原请求提交回执闭合，语义覆盖仍另行理解。外部随后修改正文
+成为版本2；只读答复区分当前未审批／未发布与历史版本1发布，0新增业务／维护，r4不变。
+Host响应checkpoint仅证明Host看到反馈，不证明用户收到。此组39生成／437,000known，
+23stop＋16tool_calls；29编码／4,636，Judge0、新unknown0。不是5条语义通过，也不是最终
+候选冻结后的新故事；这组不在34fa的成本或方法成绩中。
+
+**402日期故事闭合，首保存仍失败。**一空库4个新开发消息，显式声明同一名义日历，分别
+传入报告时间与Reader目标；没有声明物理时区或注入理想状态。12:52:50退出0，4次执行
+COMPLETED。首次editor把applicability放到condition顶层而非assertion内部，原公共schema
+拒绝，0语义提交；Reader诚实区分原始捕获与保存失败，原输入／失败保持。后来的回溯
+报告实际形成1事项、4unit（2content／2condition）、3关系；撤销后r2保留一般内容／原条件，
+移除例外／相关关系。只读回答区分已结束区间与r1历史例外，0维护、r2不变。
+
+这些实际unit只有日期文字，没有assertion.applicability；不能据自然答案正确称程序已形成
+结构化生效限。其精确旧区间来自prior_context，而新unit均绑定后来的当前报告，不是原
+早来源绑定保留的证明。Root读4个完整答案和实际前后units／来源时刻，没有Judge或另造
+数值重评分；下一轮只澄清合法属性位置，不自动搬字段、放宽schema或热改该402结果。
+此组19生成／174,304known，10stop＋9tool_calls；10编码／433，Judge0、新unknown0。
+普通API确实保存调用方日历／报告时刻及独立query参数，实际方法质量仍有缺口。
+
+三组的响应与连续账本差额分别核对一致。最后闭合账本42,908生成请求，known169,886,129，
+charged170,077,617，embedding1,237,429，unknown5为原历史未确认项；limits未改变，旧397
+未重试。此为12:58固定成本，后续新运行另记；不将不同代码的Host成本拼成同版方法结果。
+详细私有采样仍在ignored的artifacts/unified，原正文、gold、HTTP、reasoning、DB与日志未上传。
+
+原同实际前态recipe、同版B0／B1／B2／M／Append、65／277连续历史、native／drift／必要
+消融／固定更紧预算、最终冻结后16保留用户、LongMemEval／外部、同候选Host135case／
+192message与最终冻结后的新故事及六项交付仍未完成。16保留未用于开发，尚无最终候选，
+single_verdict_v1未准入，Product NO_GO；下面旧固定报告保留原时点。
+
 ## 12:13:17 UTC：PR89已合并、日历入口与保存评分观察
 
 本节固定于2026-10-07 12:13:17 UTC／北京时间20:13:17。开发源码为`e07644e`，

@@ -276,6 +276,10 @@ class EditMemory:
             instruction += (
                 "Optional assertion.applicability selects explicit event_at/effective_from/"
                 "effective_until/scope/quantity_scope from its new e; omit unknown fields. "
+                "Put applicability inside the owning content/condition's assertion, never "
+                "at its top level or in binding; binding carries only relation support. "
+                "The selected Source supplies actual speaker role, report time and declared "
+                "calendar; these are not effective_from/effective_until. "
                 "Intervals are [from,until); ISO or English-month datetimes retain their "
                 "stated precision and offset. A date denotes a day, without an inferred "
                 "timezone. Date limits bound that calendar day. Only a framework-declared "
@@ -459,6 +463,16 @@ class EditMemory:
             "Examples below assume explicitly hypothetical CURRENT inputs; "
             "do not copy their facts or aliases into real memory. "
         )
+        if self.features.temporal_scope and self.conditioned:
+            instruction += (
+                "Date input: user e1 explicitly reports a rule applying from April 1, 2025 "
+                "inclusive to April 8 exclusive, with a framework-declared Source calendar. "
+                "Date condition fragment in that content's conditions[]: "
+                '{"text":"Only from April 1 inclusive to April 8 exclusive.",'
+                '"evidence":["e1"],"assertion":{"source":"e1","kind":"reported",'
+                '"applicability":{"effective_from":"2025-04-01",'
+                '"effective_until":"2025-04-08"}},"binding":{"evidence":["e1"]}}. '
+            )
         if allow_create:
             instruction += (
                 "Formation input: records=[]; user e1 reports reminders use a soft tone "

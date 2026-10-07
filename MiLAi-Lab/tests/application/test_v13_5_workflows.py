@@ -563,6 +563,10 @@ def test_original_request_binding_and_unattempted_items_are_registered_before_ef
         assert row["request_progress"]["memory"]["status"] == "pending"
         assert row["request_progress"]["feedback"]["status"] == "pending"
         assert row["request_progress"]["discoveries"] == []
+        assert row["request_progress"]["business"]["execution"] == {
+            "status": "not_evaluated", "can_execute": False,
+            "allowed_operations": [], "readonly": None,
+        }
         assert app.world.snapshot()["attempts"] == [] and service.records() == []
         requirements["target"]["item_key"] = "caller changed its local plan"
         binding["turn_id"] = "caller changed its local binding"
@@ -598,6 +602,7 @@ def test_compiled_host_request_reopens_and_keeps_actual_business_dispatch_extern
                                                 save_result=True)[0]
     operations = tuple(step["operation"] for step in requirements["steps"])
     options = {"initial_label_available" if reservation else "initial_publication_available": False}
+    options["attempt_policy"] = "single_phase_per_public_turn_v1"
     with ExitStack() as stack:
         app, service, _ = opened(stack, tmp_path, workflow, **options)
         binding = {"source_ref": service.event_id("session", "message", "user"),
@@ -606,15 +611,22 @@ def test_compiled_host_request_reopens_and_keeps_actual_business_dispatch_extern
         before = app.world.snapshot()
         adapter = app.adapter(service, "session", "message", allowed_operations=operations)
         pending = resume_request(app, adapter, "whole-request", execute_business=False)
-        assert pending["business"]["status"] == "pending_host_execution"
+        assert pending["business"]["status"] == "incomplete"
+        assert pending["business"]["execution"]["status"] == "pending_host_execution"
+        assert pending["business"]["execution"]["can_execute"]
         assert all(step["attempts"] == [] for step in pending["business"]["steps"])
         assert app.world.snapshot() == before
         readonly = resume_request(app, adapter, "whole-request", current={"readonly": True},
                                   execute_business=False)
-        assert readonly["business"]["status"] == "observed_only"
+        assert readonly["business"]["status"] == "incomplete"
+        assert readonly["business"]["execution"]["status"] == "observed_only"
+        assert not readonly["business"]["execution"]["can_execute"]
         denied = resume_request(app, app.adapter(service, "session", "message"),
                                 "whole-request", execute_business=False)
-        assert denied["business"]["status"] == "not_authorized_current_request"
+        assert denied["business"]["status"] == "incomplete"
+        assert denied["business"]["execution"]["status"] == "not_authorized_current_request"
+        assert denied["business"]["execution"]["allowed_operations"] == []
+        assert not denied["business"]["execution"]["can_execute"]
         assert app.world.snapshot() == before
         if reservation:
             actual = adapter.execute("reserve_and_label", reserve_args(), attempt_id="host-reserve")
@@ -652,10 +664,71 @@ def test_compiled_host_request_reopens_and_keeps_actual_business_dispatch_extern
         app.progress.save_request_state(key, state)
         after_effects = app.world.snapshot()
         partial = resume_request(app, adapter, "whole-request", execute_business=False)
-        assert partial["business"]["status"] == "pending_host_execution"
+        assert partial["business"]["status"] == "partial"
+        assert partial["business"]["execution"]["status"] == "pending_host_execution"
         assert partial["business"]["steps"][-1]["status"] != "superseded"
         assert partial["memory"]["status"] == "pending"
         assert app.world.snapshot() == after_effects
+
+        def no_extra_save(operation_id: str, result: dict[str, Any]) -> dict[str, Any]:
+            raise AssertionError("A partial readonly result cannot dispatch semantic saving")
+
+        readonly = resume_request(app, adapter, "whole-request", current={
+            "readonly": True, "allow_memory": True}, execute_business=False,
+            save_result=no_extra_save)
+        denied = resume_request(app, app.adapter(service, "session", "message",
+                                                allowed_operations=operations[:-1]),
+                                "whole-request", execute_business=False,
+                                save_result=no_extra_save)
+        for result, decision in ((readonly, "observed_only"),
+                                 (denied, "not_authorized_current_request")):
+            assert result["business"]["status"] == "partial"
+            execution = result["business"]["execution"]
+            assert execution["status"] == decision and not execution["can_execute"]
+            assert execution["readonly"] == (decision == "observed_only")
+            assert execution["allowed_operations"] == (sorted(operations)
+                if decision == "observed_only" else sorted(operations[:-1]))
+            assert [step["status"] for step in result["business"]["steps"]] == (
+                ["completed", "incomplete"] if reservation else [
+                    "completed", "completed", "incomplete"])
+            assert [step["attempts"] for step in result["business"]["steps"]] == [
+                step["attempts"] for step in partial["business"]["steps"]]
+            observed_source = service.source(result["business"]["observation"]["source_ref"])
+            assert observed_source["origin"] == ("get_reservation" if reservation else
+                                                 "get_document_status")
+            assert result["memory"]["attempts"] == []
+            assert app.world.snapshot() == after_effects
+        blocked = resume_request(app, adapter, "whole-request")
+        assert blocked["business"]["status"] == "partial"
+        assert blocked["business"]["execution"]["status"] == (
+            "business_phase_already_attempted_this_turn")
+        assert not blocked["business"]["execution"]["can_execute"]
+        assert [step["status"] for step in blocked["business"]["steps"]] == [
+            step["status"] for step in partial["business"]["steps"]]
+        assert [step["attempts"][0] for step in blocked["business"]["steps"]] == [
+            step["attempts"][0] for step in partial["business"]["steps"]]
+        assert app.world.snapshot() == after_effects
+
+        def lose_query(row: Any, response: Any) -> None:
+            raise OSError("actual query reply lost")
+
+        app.journal.response_hook = lose_query
+        unknown = resume_request(app, adapter, "whole-request", execute_business=False)
+        app.journal.response_hook = None
+        assert unknown["business"]["status"] == "observation_unknown"
+        assert unknown["business"]["execution"] == {
+            "status": "observation_unknown", "can_execute": False,
+            "allowed_operations": sorted(operations), "readonly": False,
+        }
+        assert unknown["business"]["steps"] == blocked["business"]["steps"]
+        inaccessible = resume_request(app, app.adapter(service, "session", "message",
+            can_read=False, allowed_operations=operations), "whole-request",
+            current={"readonly": True}, execute_business=False)
+        assert inaccessible["business"] == {"status": "access_revoked", "execution": {
+            "status": "access_revoked", "can_execute": False,
+            "allowed_operations": sorted(operations), "readonly": True,
+        }}
+        assert inaccessible["source_refs"] == [] and app.world.snapshot() == after_effects
 
     with ExitStack() as stack:
         app, service, _ = opened(stack, tmp_path, workflow, **options)
@@ -670,13 +743,16 @@ def test_compiled_host_request_reopens_and_keeps_actual_business_dispatch_extern
         else:
             app.world.set_publication_available("actual-publication-back", True)
         pending = resume_request(app, adapter, "whole-request", execute_business=False)
-        assert pending["business"]["status"] == "pending_host_execution"
+        assert pending["business"]["status"] == "partial"
+        assert pending["business"]["execution"]["status"] == "pending_host_execution"
         completed = adapter.execute(finish, {} if reservation else {"audience": "local team"},
             attempt_id="host-finish", ref=VerifiedObjectRef(**current["object_ref"]))
         assert completed["receipt"]["ok"]
         after_finish = app.world.snapshot()
         summary = resume_request(app, adapter, "whole-request", execute_business=False)
         assert summary["business"]["status"] == "completed" and not summary["complete"]
+        assert summary["business"]["execution"]["status"] == "not_needed"
+        assert not summary["business"]["execution"]["can_execute"]
         assert summary["memory"]["status"] == summary["feedback"]["status"] == "pending"
         assert app.world.snapshot() == after_finish
         if reservation:
@@ -755,6 +831,10 @@ def test_host_stage_links_are_durable_before_dispatch_and_resume_only_remaining_
         assert tracker.request_ids == [request_id] and not tracker.dirty
         initial = tracker.snapshot()[0]
         assert initial["business"]["status"] == "pending"
+        assert initial["business"]["execution"] == {
+            "status": "not_evaluated", "can_execute": False,
+            "allowed_operations": [], "readonly": None,
+        }
         assert initial["memory"]["status"] == initial["feedback"]["status"] == "pending"
         assert tracker.rows()[0][1]["request_progress"]["discoveries"] == []
         assert app.world.snapshot()["reservations" if reservation else "documents"] == []
@@ -985,6 +1065,8 @@ def test_host_unknown_call_keeps_original_attempt_and_requires_actual_discovery(
             host_call(tracker, "reserve_and_label", reserve_args(), "unknown", [])
         progress = tracker.snapshot()[0]["business"]
         assert progress["status"] == "business_unknown"
+        assert progress["execution"]["status"] == "not_evaluated"
+        assert not progress["execution"]["can_execute"]
         assert all(row["status"] == "unknown" and len(row["attempts"]) == 1
                    and row["attempts"][0]["error"]["message"] == "lost native response"
                    for row in progress["steps"])

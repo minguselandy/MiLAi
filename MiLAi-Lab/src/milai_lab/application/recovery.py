@@ -34,11 +34,17 @@ class UnknownSemanticCommit(RuntimeError):
     """An issued semantic operation needs reconciliation by its original ID."""
 
 
+def _initial_execution() -> dict[str, Any]:
+    return {"status": "not_evaluated", "can_execute": False,
+            "allowed_operations": [], "readonly": None}
+
+
 def initial_request_progress(requirements: Mapping[str, Any]) -> dict[str, Any]:
     """Initialize existing request items without discovery, effects or callbacks."""
     return {
         "business": {
             "status": "pending",
+            "execution": _initial_execution(),
             "steps": [{"id": step["id"], "status": "pending", "attempts": []}
                       for step in requirements["steps"]],
         },
@@ -48,6 +54,33 @@ def initial_request_progress(requirements: Mapping[str, Any]) -> dict[str, Any]:
                      else "not_requested", "attempts": []},
         "discoveries": [],
     }
+
+
+def _observed_business_steps(
+    requirements: Mapping[str, Any], business: dict[str, Any], observed: dict[str, Any],
+) -> None:
+    actual = observed.get("current_state") or {}
+    for step, progress in zip(requirements["steps"], business["steps"], strict=True):
+        if all(actual.get(field) == value for field, value in step["completed"].items()):
+            progress.update(status="completed", completion_source=observed.get("source_ref"))
+        elif progress["status"] in {"completed", "superseded"} or any(
+            attempt.get("result", {}).get("business_effect") in {"confirmed", "partial"}
+            for attempt in progress["attempts"]
+        ):
+            progress["status"] = "superseded"
+        else:
+            progress["status"] = "incomplete"
+
+
+def _business_status(business: dict[str, Any]) -> str:
+    statuses = {step["status"] for step in business["steps"]}
+    if "superseded" in statuses:
+        return "current_state_changed"
+    if "unknown" in statuses:
+        return "business_unknown"
+    if statuses <= {"completed"}:
+        return "completed"
+    return "partial" if "completed" in statuses else "incomplete"
 
 
 def resume_request(
@@ -80,6 +113,9 @@ def resume_request(
     With execute_business=False, the Host ToolNode owns business dispatch. This
     function still observes real state and current permissions, and leaves an
     authorized unfinished step pending without invoking adapter.execute.
+    Business status summarizes actual known stages. Current execution permission
+    and dispatch decisions are separate in business.execution; that view never
+    grants permissions beyond the current adapter and controls.
     """
     controls = dict(current or {})
     if not request_id or adapter.owner != app.owner:
@@ -107,12 +143,21 @@ def resume_request(
             "request_id": request_id,
             "status": "access_revoked",
             "complete": False,
-            "business": {"status": "access_revoked"},
+            "business": {"status": "access_revoked", "execution": {
+                "status": "access_revoked", "can_execute": False,
+                "allowed_operations": sorted(adapter.allowed_operations),
+                "readonly": bool(controls.get("readonly", False)),
+            }},
             "memory": {"status": "not_authorized_current_request"},
             "feedback": {"status": "not_authorized_current_request"},
             "source_refs": [],
         }
 
+    business = state["business"]
+    execution = {"status": "not_evaluated", "can_execute": False,
+                 "allowed_operations": sorted(adapter.allowed_operations),
+                 "readonly": bool(controls.get("readonly", False))}
+    business["execution"] = execution
     discovery_id = request_id + ":discover:" + str(len(state["discoveries"]) + 1)
     state["discoveries"].append({"attempt_id": discovery_id, "status": "pending"})
     persist()
@@ -121,39 +166,35 @@ def resume_request(
     except Exception as error:
         state["discoveries"][-1].update(status="unknown", error=str(error))
         state["business"]["status"] = "observation_unknown"
+        execution["status"] = "observation_unknown"
         persist()
         return snapshot_result()
     state["discoveries"][-1].update(status="complete", result=observed)
-    business = state["business"]
     actual = observed.get("current_state") or {}
     business["observation"] = observed
     business["status"] = "pending"
     if observed.get("unknown_effects"):
         business["status"] = "business_unknown"
+        execution["status"] = "outcome_unknown"
         persist()
         return snapshot_result()
+    execution["status"] = "not_needed"
+    _observed_business_steps(requirements, business, observed)
     for step, progress in zip(requirements["steps"], business["steps"], strict=True):
-        satisfied = all(actual.get(field) == value for field, value in step["completed"].items())
-        if satisfied:
-            progress.update(status="completed", completion_source=observed.get("source_ref"))
+        if progress["status"] == "completed":
             continue
         # Confirmed effects cannot be repeated merely because later state changed.
-        if progress["status"] == "completed" or any(
-            attempt.get("result", {}).get("business_effect") in {"confirmed", "partial"}
-            for attempt in progress["attempts"]
-        ):
-            progress["status"] = "superseded"
         if progress["status"] == "superseded":
-            business["status"] = "current_state_changed"
+            execution["status"] = "current_state_changed"
             break
         if controls.get("readonly", False):
-            business["status"] = "observed_only"
+            execution["status"] = "observed_only"
             break
         if step["operation"] not in adapter.allowed_operations:
-            business["status"] = "not_authorized_current_request"
+            execution["status"] = "not_authorized_current_request"
             break
         if not execute_business:
-            business["status"] = "pending_host_execution"
+            execution["status"] = "pending_host_execution"
             break
         missing = [
             argument
@@ -161,7 +202,7 @@ def resume_request(
             if field not in actual and argument not in step.get("arguments", {})
         ]
         if missing:
-            business["status"] = "incomplete"
+            execution["status"] = "missing_observed_arguments"
             progress.update(status="incomplete", missing_observed_arguments=missing)
             break
         arguments = {
@@ -184,23 +225,26 @@ def resume_request(
         except Exception as error:
             attempt["error"] = str(error)
             progress["status"], business["status"] = "unknown", "business_unknown"
+            execution["status"] = "outcome_unknown"
             break
         attempt.update(status="complete", result=result)
         observed = result
         actual = result.get("current_state") or actual
-        satisfied = all(actual.get(field) == value for field, value in step["completed"].items())
-        progress["status"] = "completed" if satisfied else "incomplete"
-        if satisfied:
-            progress["completion_source"] = result.get("source_ref")
+        if result.get("executed"):
+            _observed_business_steps(requirements, business, observed)
+        execution["status"] = "attempted" if result.get("executed") else result["status"]
         if not result.get("executed") or not result.get("receipt", {}).get("ok"):
-            business["status"] = (
-                "partial"
-                if any(item["status"] == "completed" for item in business["steps"])
-                else "incomplete"
-            )
             break
-    else:
-        business["status"] = "completed"
+    business["status"] = _business_status(business)
+    execution["can_execute"] = bool(
+        not execution["readonly"]
+        and business["status"] not in {"business_unknown", "current_state_changed"}
+        and execution["status"] in {"pending_host_execution", "attempted"}
+        and any(
+            progress["status"] != "completed" and step["operation"] in adapter.allowed_operations
+            for step, progress in zip(requirements["steps"], business["steps"], strict=True)
+        )
+    )
     persist()
 
     memory = state["memory"]
@@ -359,7 +403,8 @@ def _resume_result(
                         "request_id": request_id,
                         "status": "completed" if complete else "incomplete",
                         "complete": complete,
-                        "business": state["business"],
+                        "business": {**state["business"], "execution": state["business"].get(
+                            "execution", _initial_execution())},
                         "memory": state["memory"],
                         "feedback": state["feedback"],
                         "source_refs": refs,

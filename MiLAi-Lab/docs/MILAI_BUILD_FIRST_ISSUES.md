@@ -2,6 +2,15 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
+13:06:36 UTC后续源码4a2d7ba仅澄清日期字段合法位置，85项既有编辑器检查及类型／格式／
+SQLite日期示例通过，0真实HTTP；新prompt效果及自己的远端CI待验证。
+
+2026-10-07 12:58:48 UTC：PR83至90已合并main e0abb07，PR90头16f自身Fast519／520及
+Full329成功21/21。新402实际business进度与当前execution许可分列，窄检查／示例通过；
+自己的远端CI未请求。同34fa32份score闭合，更新20/72valid66、QA29/73valid66，原无效保留。
+1f两应用5执行闭合但预订保存项仍pending；402日期4执行闭合但首维护schema拒绝，实际
+后续日期文字不证明结构化生效限。版本、分母、真实提交与成本见[固定报告](MILAI_UNIFIED_MEMORY_USAGE.md)。
+
 2026-10-07 12:13:17 UTC：PR83至89已合并main88a101f，PR89头1f自身Fast516／Full328
 21/21成功。新e07644e日历与查询入口检查通过，unknown时区不填UTC，旧来源不回填；
 新Reader最初8/73超限，逐值共享后的73份均展开等价、最大31532，0真实HTTP。
@@ -48,6 +57,10 @@ Root复核全部14条实际送达答复，未重评分；新源码4b5963f的修�
 
 | 案例／运行标识 | 用户任务与失败现象 | 最早断点 | 计划修改的一个机制 | 复测结果／仍未解决部分 |
 |---|---|---|---|---|
+| Native8／冻结1f实际两应用 | 业务续办后成功不等于原保存项完成 | 预订结果editor追加condition目标非法，后续当前无记忆写许可 | 保留当前权限与原完整要求，不从业务完成推保存完成 | 5执行／39生成闭合，DB1预订＋1补标签；原memory pending；文档结果r4与只读外部v2历史分列 |
+| 业务进度／当前许可 | 已完成部分被not_authorized／observed_only总状态遮盖 | 实际进度与当前dispatch状态共用business.status | ee0b2dc／402d7d5分business.status及business.execution，footer分别显示 | 47应用＋10Host及边界／类型／SQLite示例通过；不增加权限／重放，自己的远端CI待请求 |
+| 日期故事／冻结402d7d5 | 第一保存失败，后来的字面条件不代表结构化生效限 | applicability被生成在condition顶层而非assertion内部 | 4a2d7ba只澄清既有合法属性位置，不自动搬字段或放宽schema | 原4执行／19生成闭合；首次0提交，后来r1／r2及只读历史真实保留；新prompt85检查通过、真实调用0，原unit无applicability及来源绑定限制保留 |
+| prefix8-v6／同34fa闭合评分 | 原32诊断有成绩仍不足以排名或关闭原任务 | 缺少同版对照与完整长历史／外部／功能验证 | 原作者保存标签纯汇总、全部机会与valid分开 | 更新20/72valid66、QA29/73valid66、507Judge闭合；Root73全读，无重评分，原无效及旧失败保留 |
 | 普通Host v8／完整请求与新要求 | 旧v7只有单调用journal；同target新内容又可能被旧完整计划吞掉 | 首次dispatch前缺完整登记及当前计划选择 | 原User绑定登记requirements；实际ToolNode回执链接阶段，明确新perform单独登记 | 752862b的461项相关检查通过，两个sandbox、两recipe及重开零重复；0真实模型，语义覆盖与用户收到未确认 |
 | 普通Host v8／旧保存响应丢失 | 保存实际提交但响应丢失，回执查询暂不可用 | 原语义attempt必须在共同Writer前保存实际batch绑定 | 原操作execute=False核对，仅匹配请求完成字段的实际Tool来源 | 两recipe跨会话只读核对为committed，原unknown/error保持；无重复保存／业务，不盲重发unknown模型 |
 | 普通Host v8／memory-only新增要求 | 原请求未要求保存，后续仅新增保存旧结果要求 | 原requirements不可变，not_requested不代表新保存 | 保持新memory-only维护与独立回执，不retrofit或借用旧complete | 此扩展未纳入C新request API，不能宣称旧原请求完整状态证明当前新要求完成 |

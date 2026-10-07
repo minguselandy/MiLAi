@@ -422,7 +422,9 @@ def test_unified_public_resume_discovers_effects_obeys_readonly_and_saves_actual
         root, **common, request_id="check-only", text="Only inspect the pending result.",
         requirements=requirements, readonly=True,
     )
-    assert readonly["business"]["status"] == "observed_only"
+    assert readonly["business"]["status"] == "partial"
+    assert readonly["business"]["execution"]["status"] == "observed_only"
+    assert not readonly["business"]["execution"]["can_execute"]
     assert readonly["memory"]["current_permission"] == "not_authorized_current_request"
     assert len(readonly["application_snapshot"]["attempts"]) == 1 and len(wires) == 3
     freeze = functional.frozen(root)
@@ -5050,6 +5052,7 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str, continuation: str,
 ) -> None:
     root = prepared(tmp_path, native=True, complete_requests=True,
+        direct_response=True, phase_thinking=True, current_delivery=True,
         memory_profile="unified_v1", memory_method="milai_edit_m_v1",
         edit_interface_version="I2", maintenance_recipe=recipe,
         edit_features={name: True for name in (
@@ -5135,6 +5138,7 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     assert first["status"] == "COMPLETED", first.get("error")
     original = first["application_requests"][0]
     assert not original["complete"] and original["memory"]["status"] == "pending"
+    assert original["business"]["status"] == "partial"
     assert [s["status"] for s in original["business"]["steps"]] == ["completed", "incomplete"]
     assert original["feedback"]["status"] == "delivered"
     assert len(first["world"]["world"]["attempts"]) == 1
@@ -5153,6 +5157,12 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     assert seen["reserve"] == 1 and seen["label"] == int(continuation != "readonly")
     assert len(second["world"]["world"]["attempts"]) == 1 + int(continuation != "readonly")
     assert progress["feedback"]["status"] == "delivered"
+    assert progress["business"]["status"] == (
+        "partial" if continuation == "readonly" else "completed")
+    if continuation == "readonly":
+        assert progress["business"]["execution"]["status"] == "observed_only"
+        assert not progress["business"]["execution"]["can_execute"]
+        assert "业务部分完成; 本次执行只查询" in second["final_answer"]
     if continuation == "complete":
         assert progress["complete"] and progress["memory"]["status"] == "committed"
         assert seen["saved"] == 1 and len(second["records"]) == 1
