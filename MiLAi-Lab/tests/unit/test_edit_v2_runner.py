@@ -749,9 +749,16 @@ def test_unknown_response_stops_without_completion_or_blind_retry(tmp_path: Path
 
 @pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
 def test_shared_recipe_benchmark_persists_predictions_without_repeating_calls(tmp_path, recipe):
+    from milai_lab.analysis.edit_results import writer_operations
+    from milai_lab.harness.artifact_io import write_json
+
     run = execution(tmp_path, "B1")
     run.settings["maintenance_recipe"] = recipe
+    write_json(tmp_path / "actual-config.json", run.settings)
+    bank = tmp_path / "banks/alice/memory.sqlite"
+    bank.parent.mkdir(parents=True)
     calls = []
+    empty = False
 
     def provider(request):
         wire = json.loads(request.content)
@@ -761,22 +768,45 @@ def test_shared_recipe_benchmark_persists_predictions_without_repeating_calls(tm
             return httpx.Response(200, json={
                 "choices": [{"finish_reason": "stop", "message": {
                     "content": json.dumps({"changes": []})}}], "usage": {"total_tokens": 8}})
+        if empty:
+            return httpx.Response(200, json={"choices": [{"finish_reason": "stop", "message": {
+                "content": '{"proposals":[]}'}}], "usage": {"total_tokens": 8}})
         return response({"action": "create", "units": [
             {"text": "The marker is blue.", "evidence": ["e1"]}]})
 
     with VLLMClient(VLLMConfig("http://local.invalid/v1", "synthetic", max_tokens=100),
                     transport=httpx.MockTransport(provider)) as client:
         run.client = client
-        with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        with SqliteStore.from_conn_string(str(bank)) as store:
             service = MemoryService(store, ("shared", "alice"), "alice", tmp_path / "memory.lock")
             event = observation("s", "Remember the marker is blue.")
-            first = run.maintain(service, event, "event")
+            first = run.maintain(service, event, "halumem/alice/0")
             assert len(first) == 1 and "The marker is blue." in first[0]
             assert len(service.records()) == 1
             assert len(calls) == (2 if recipe == "extract_then_edit" else 1)
             before = len(calls)
-            assert run.maintain(service, event, "event") == first and len(calls) == before
-            assert read_json(tmp_path / "maintenance/event/complete.json")["status"] == "completed"
+            assert run.maintain(service, event, "halumem/alice/0") == first
+            assert len(calls) == before
+            fit = run._fits
+            run._fits = lambda messages: False
+            assert run.maintain(service, observation("s2", "New report"), "halumem/alice/1") == []
+            assert len(calls) == before
+            run._fits = fit
+            empty = True
+            assert run.maintain(service, observation("s3", "No new fact"), "halumem/alice/2") == []
+    original = bank.read_bytes()
+    summary = writer_operations(tmp_path, "alice", [0, 1, 2])
+    assert bank.read_bytes() == original
+    assert summary["counts"]["prepared_sessions"] == 3
+    assert summary["counts"]["maintenance_completed_sessions"] == 3
+    assert summary["counts"]["incomplete_maintenance_batches"] == 1
+    assert summary["counts"]["writer_returned_empty_list_batches"] == 1
+    assert summary["counts"]["recorded_writer_requests"] == 2
+    assert summary["counts"]["confirmed_committed_operations"] == 1
+    assert summary["committed_actions"] == {"create": 1}
+    stage = "extraction" if recipe == "extract_then_edit" else "writer"
+    assert summary[f"first_attempt_{stage}_failures"] == {"context_unavailable_before_http": 1}
+    assert summary["requests_without_confirmed_responses"] == 0
 
 
 

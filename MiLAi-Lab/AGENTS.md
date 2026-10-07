@@ -1,3 +1,27 @@
+# 2026-10-07: prefix8 prediction closed; original author scoring active
+
+Fixed dffc232 prefix8-v1 prediction exited0:32 maintenance records/32 predictions,
+33 source batches,33 extract+26 edit+73 Reader=132 stop/1566037 known,198 encoder/
+15268 tokens,0Judge/newunknown. Seven pre-edit capacity gaps (first3/4/7,third3/4,
+fourth6/7),2 real empty envelopes,72create+4edit=76commits/no rejects. Independent
+end states72matters/203content/68condition/max10content. These are NOT semantic
+passes. Actual attribution errors and qualifier loss are in the one issues table.
+All7 exact old payloads fit32256 with compactJSON only; first54 saved Reader
+inputs also fit with new view. No real fixed-version validation yet.
+
+SCORE now active from SAME frozen dffc232/config/root; tool session56331,
+Python PID691580 (shell691575). Logs prefix8-v1.score.stdout/stderr.log. Start is
+closed prediction ledger41272/160139120known/160289893charged/embed1120458/unknown4.
+Do not rerun Writer/Reader, mutate frozen source, or start a competing model job.
+New analyzer reads common Store checkpoints in SQLite mode=ro, recognizes score
+terminal, includes M/Append-only pairing; actual analysis still INCOMPLETE while
+scoring. Own dffc Fast/Full success;107df58 Fast37566914753 success/Full running.
+Append-only common control66fae63 and external phased entry107df58 are committed;
+their real comparisons remain pending. Full build-first goal active/incomplete:
+same-state recipe contrast,main controls,65/277/native/drift/ablation/tighter budget,
+16reserved,external28 and full Host135/192 still required; no agents/ProductNO_GO.
+Earlier blocks are historical and may refer to now-closed prediction PID501262.
+
 # 2026-10-07: diagnostic input/Reader wiring fixes prepared offline
 
 Live prefix8-v1 remains fixed dffc232/PID501262/session88573. First user
