@@ -1,3 +1,16 @@
+# 2026-10-07: build-first plan activated
+
+The user activated docs/MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md.
+Its engineering-first order supersedes earlier pair-admission and matrix-before-
+integration scheduling. Implement A-D using the existing one MemoryService, then
+five real smoke flows and concentrated evaluation. Keep ordinary semantic failures
+in one issue table and continue unaffected work. No new agents, reviewers, hashes,
+model deployment or defensive-check platform. The old frozen072 source/results
+remain untouched. PID3476759 is now absent and the serial lease was available;
+B1 has no arm terminal and the suite is incomplete, not completed or resumed.
+Continue on this worktree. Original reports and all unknown usage remain evidence.
+The new recipe is a development candidate, never Product approval or superiority.
+
 # 2026-10-07 00:20 UTC: user-requested execution summary; original suite stays live
 
 User requests a current execution summary published to GitHub. Frozen072 is

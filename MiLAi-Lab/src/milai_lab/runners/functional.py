@@ -55,8 +55,10 @@ from milai_lab.memory.functional_state import (
 )
 from milai_lab.memory.functional_state import namespace as functional_namespace
 from milai_lab.memory.functional_state import reference_key as functional_reference_key
+from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
+from milai_lab.methods.edit_maintenance import MaintenanceRecipe, parse_object
 from milai_lab.methods.functional_edit_memory import (
     FUNCTIONAL_ARMS,
     FunctionalEditMemory,
@@ -64,7 +66,8 @@ from milai_lab.methods.functional_edit_memory import (
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.chat_bridge import IncompleteChatResponse
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
-from milai_lab.providers.contextual_vllm import VLLMConfig
+from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
+from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLMClient
 from milai_lab.runners.functional_response import business_response, unattempted_continuations
 
@@ -657,6 +660,8 @@ def prepare(
         "memory_method",
         "edit_interface_version",
         "edit_features",
+        "maintenance_recipe",
+        "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
     if set(settings) - allowed:
         raise ValueError("FUNCTIONAL_CONFIG_UNKNOWN_KEYS:"
@@ -674,6 +679,12 @@ def prepare(
         edit_interface != "I2" or settings.get("memory_method") not in FUNCTIONAL_ARMS
     ):
         raise ValueError("FUNCTIONAL_EDIT_FEATURES_REQUIRE_I2_EDIT_METHOD")
+    if "maintenance_recipe" in settings and (
+        settings["maintenance_recipe"] not in {"single_pass", "extract_then_edit"}
+        or edit_interface != "I2"
+        or settings.get("memory_method") not in FUNCTIONAL_ARMS
+    ):
+        raise ValueError("FUNCTIONAL_MAINTENANCE_REQUIRES_I2_RECIPE")
     capacity_keys = {
         "model",
         "tokenizer_path",
@@ -1376,6 +1387,22 @@ def operation_status(
                                                 "physical_erasure", "raw_audit_retained")
                         if k in receipt}}
         (visibility_effects if name == "forget_memory" else memory).append(operation)
+    for batch in output.get("maintenance", []):
+        for receipt in batch["receipts"]:
+            status = ("committed" if receipt.get("ok") and (
+                receipt.get("status") == "committed"
+                or receipt.get("original_status") == "committed") else
+                "no_change" if receipt.get("ok") and receipt.get("status") == "no_change" else
+                "not_committed" if receipt.get("effect") == "none" else "unknown")
+            memory.append({"tool": "maintain_event", "status": status,
+                           **{k: receipt[k] for k in ("id", "revision", "effect", "replayed")
+                              if k in receipt}})
+        if batch["status"] != "completed":
+            memory.append({"tool": "maintain_event", "status": "unknown"
+                           if batch["phase"].endswith("_pending") else "not_committed",
+                           "phase": batch["phase"], "unprocessed": batch["unprocessed"]})
+        elif not batch["receipts"]:
+            memory.append({"tool": "maintain_event", "status": "no_change", "effect": "none"})
     semantic_states = {row["status"] for row in memory}
     semantic = ("unknown" if "unknown" in semantic_states else
                 "partial" if "committed" in semantic_states and "not_committed" in semantic_states
@@ -1785,7 +1812,8 @@ def message(
             http_budget_scope(
                 settings,
                 RunLimits(**freeze["budget_before"]["limits"]),
-                client_configs=[asdict(VLLMConfig(**settings["host"]))],
+                client_configs=[asdict(VLLMConfig(**settings["host"])),
+                                *([settings["embedding"]] if "embedding" in settings else [])],
             )
         )
         budget = entry_budget(
@@ -1819,6 +1847,16 @@ def message(
             )
             cfg["configurable"]["thread_id"] = _thread_reference(bank_root, saver, cfg)
             scope = replace(scope, stored_thread_id=cfg["configurable"]["thread_id"])
+            retriever = None
+            if "embedding" in settings:
+                embedding_client = stack.enter_context(VLLMClient(
+                    VLLMConfig(**settings["embedding"]), emit=trace, budget=budget))
+                embeddings = MeteredEmbeddings(
+                    embedding_client, settings["embedding"]["model"],
+                    settings["embedding_capacity"], dimension=settings["embedding_dimension"],
+                    batch_size=settings["embedding_batch_size"],
+                )
+                retriever = SemanticRetriever(embeddings, settings["embedding_dimension"])
             service = MemoryService(
                 store,
                 namespace,
@@ -1831,6 +1869,7 @@ def message(
                     else "reservation_v1"
                 ),
                 observer=trace,
+                semantic_retriever=retriever,
             )
             seed_receipts = (
                 seed_sources(service, initial_sources, bank_root / "source-imports.json",
@@ -2113,6 +2152,23 @@ def message(
                 mode["allow_memory_maintenance"] if tool.name in {
                     "save_memory", "update_memory", "confirm_existing_memory"}
                 else mode["allow_forgetting"] if tool.name == "forget_memory" else True))
+            maintenance_recipe = settings.get("maintenance_recipe")
+            maintenance_allowed = mode is None or mode["allow_memory_maintenance"]
+            if maintenance_recipe:
+                selected_memory = tuple(t for t in selected_memory if t.name not in {
+                    "save_memory", "update_memory", "confirm_existing_memory"})
+
+            def maintenance_call(
+                stage: str, messages: list[dict[str, str]], schema: dict[str, Any]
+            ) -> dict[str, Any]:
+                response = model.invoke(messages, tools=[], tool_choice="none")
+                if not isinstance(response, AIMessage) or not isinstance(response.content, str):
+                    raise ValueError("FUNCTIONAL_MAINTENANCE_RESPONSE_MISSING")
+                value = parse_object(response.content, reject_duplicate_keys=True)
+                trace({"event": "functional_maintenance_envelope", "stage": stage,
+                       "envelope": value})
+                return value
+
             selected_business = tuple(tool for tool in app.tools if mode is None
                 or tool.name in {"get_reservation", "get_document_status"}
                 or (tool.name in mode["business_operations"] if "business_operations" in mode
@@ -2227,7 +2283,16 @@ def message(
                 capability_text = ""
                 if isinstance(memory, FunctionalEditMemory):
                     _note_edit_tool_delivery(memory, config, wire_messages)
-                    if memory.interface_version != "v1":
+                    if maintenance_recipe:
+                        output["maintenance"] = memory.maintain_sources(
+                            config, recipe=cast(MaintenanceRecipe, maintenance_recipe),
+                            model_call=maintenance_call, allowed=maintenance_allowed,
+                            execute=not for_finalization and forgotten_at is None,
+                        )
+                        effects["maintenance"] = output["maintenance"]
+                        trace({"event": "functional_maintenance_result",
+                               "batches": output["maintenance"]})
+                    elif memory.interface_version != "v1":
                         material = memory.writer_context(
                             session, message_id, freeze["config_version"], query=content
                         )
@@ -2238,7 +2303,12 @@ def message(
                         "Only these tools are available in this phase. An earlier request or "
                         "an earlier phase cannot enable a missing tool. "
                     )
-                    if not {"save_memory", "update_memory"}.intersection(active):
+                    if maintenance_recipe:
+                        capability_text += (
+                            "The shared maintenance recipe reports its actual results below. "
+                            "The Agent does not need a save/update tool to confirm those receipts. "
+                        )
+                    elif not {"save_memory", "update_memory"}.intersection(active):
                         capability_text += (
                             "Memory saving/updating is unavailable in this phase. Do not search "
                             "or read repeatedly to try to enable it. Report the actually observed "
@@ -2263,7 +2333,13 @@ def message(
                                 if require_proposal else None),
                             content=capability_text + settings["system_prompt"]
                             + ("\n" + memory.instructions()
-                               if isinstance(memory, FunctionalEditMemory) else "")
+                               if isinstance(memory, FunctionalEditMemory)
+                               and not maintenance_recipe else "")
+                            + ("\nMemory maintenance for this event is handled by the shared "
+                               "recipe. Use its actual receipts below to report saved, unchanged "
+                               "or unfinished work. Raw capture is not a semantic save. "
+                               "Do not duplicate maintenance through other tools."
+                               if maintenance_recipe else "")
                             + (("\nPersisted current-request interpretation: " if capability_text
                                 else "\nCurrent request interpretation and enforced tool limits: ")
                                + json.dumps(mode, ensure_ascii=False) if mode else "")
@@ -2429,6 +2505,16 @@ def message(
                     None if prior else {"messages": [HumanMessage(content=content, id=message_id)]}
                 )
 
+            if maintenance_recipe and isinstance(memory, FunctionalEditMemory):
+                # A completed graph can reopen without running its model hook.
+                # Recover receipts from the same Store without starting new work.
+                memory.context(session, message_id, freeze["config_version"], query=content)
+                _note_edit_tool_delivery(memory, cfg, messages)
+                output["maintenance"] = memory.maintain_sources(
+                    cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
+                    model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
+                )
+
             if (settings.get("business_completion") == "observed_continuation_v1"
                     and mode and mode.get("business_action_request") == "continue_if_unfinished"
                     and isinstance(messages[-1], AIMessage) and not messages[-1].tool_calls):
@@ -2462,6 +2548,10 @@ def message(
                 # Necessary condition only: one receipt does not prove that every
                 # requested item, its meaning or the final prose is correct.
                 effects = memory_effects(current)
+                if maintenance_recipe and output.get("maintenance") and not (
+                    mode and mode["allow_forgetting"]
+                ):
+                    return False
                 return bool(mode and (mode["requires_memory_result"] or (
                     settings.get("memory_completion") == "declared_operations_v3"
                     and mode["allow_forgetting"]) or (
@@ -2678,7 +2768,8 @@ def message(
                 sources=service.sources(),
                 world=app.snapshot(),
                 memory_mutation_receipts=mutation_receipts,
-                formation_stage="host_tools_before_final",
+                formation_stage=("shared_maintenance_before_final" if maintenance_recipe
+                                 else "host_tools_before_final"),
                 snapshot_before_close=True,
             )
         except _VisibilityReplayRevoked as revoked:

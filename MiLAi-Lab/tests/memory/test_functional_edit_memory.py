@@ -2125,3 +2125,53 @@ def test_v2_nonmatching_representation_rejected_and_no_change_does_not_form(tmp_
         assert global_no_change["ok"] and global_no_change["status"] == "no_change"
         assert global_no_change["id"] is None
         assert len(memory.service.records()) == 1
+
+
+@pytest.mark.parametrize("fault", ["after_commit", "during_extract"])
+def test_shared_recipe_recovery_preserves_effect_and_unknown_call(tmp_path, fault):
+    from milai_lab.methods.edit_maintenance import maintain_event
+
+    calls = []
+    with opened(tmp_path, arm="B1", interface_version="I2") as memory:
+        turn(memory, "u", "Remember the marker is blue.")
+        ref = memory._binding(cfg())["source_ref"]
+        delivery = memory.writer.prepare([ref], "", selected_records=[], redelivered_ranges=[])
+
+        def call(stage, messages, schema):
+            calls.append(stage)
+            if stage == "extract":
+                if fault == "during_extract":
+                    raise OSError("lost extraction response")
+                return {"changes": []}
+            return {"proposals": [{"action": "create", "units": [
+                {"text": "The marker is blue.", "evidence": ["e1"]}]}]}
+
+        def commit(operation, proposal, mapping):
+            memory.service.store.put(
+                namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
+                {"mapping_id": mapping["mapping_id"]}, index=False,
+            )
+            receipt = memory.apply_writer_proposal(cfg(), operation, proposal)
+            assert receipt["ok"]
+            raise OSError("crash after durable commit")
+
+        args = dict(session="s", request_id="batch", date="2026-10-07",
+                    recipe="extract_then_edit", model_call=call, commit=commit)
+        with pytest.raises(OSError):
+            maintain_event(memory.writer, delivery, **args)
+        count = len(calls)
+    with opened(tmp_path, arm="B1", interface_version="I2") as memory:
+        # Resume through the same functional mutation boundary and operation ID.
+        memory.context("s", "u", "functional-m-test-v1")
+        args["commit"] = lambda op, proposal, mapping: memory.apply_writer_proposal(
+            cfg(), op, proposal)
+        result = maintain_event(memory.writer, delivery, **args)
+        assert len(calls) == count
+        if fault == "after_commit":
+            assert result["status"] == "completed" and result["semantic_write_performed"]
+            assert len(memory.service.records()) == 1
+            assert memory.service.records()[0]["value"]["revision"] == 1
+        else:
+            assert result["status"] == "incomplete" and result["phase"] == "extract_pending"
+            assert result["unprocessed"][0]["reason"] == "model_outcome_unconfirmed"
+            assert memory.service.records() == []

@@ -30,6 +30,7 @@ from milai_lab.memory.functional_state import FunctionalRejection, body_text, re
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import (
     EditFeatures,
+    compact_prompt_schema,
     compile_semantic_operations,
     decorate_state,
     feature_envelope_schema,
@@ -950,6 +951,54 @@ class EditMemory:
             features=self.features.settings(),
         )
         return {"packet": packet}
+
+    def edit_messages(
+        self, packet: dict[str, Any], date: str, *, allow_create: bool,
+        schema: dict[str, Any] | None = None,
+        change_candidates: list[dict[str, Any]] | None = None,
+    ) -> list[dict[str, str]]:
+        response_schema = (
+            schema if schema is not None else self.envelope_schema(allow_create=allow_create)
+        )
+        if self.features.bound_references:
+            response_schema = compact_prompt_schema(response_schema)
+        empty_instruction = (
+            "An empty maintenance envelope means no maintenance, not a successful update."
+            if "records" in response_schema.get("properties", {})
+            else "An empty proposals list means no maintenance, not a successful update."
+        )
+        payload: dict[str, Any] = {
+            "observed_date": date,
+            "delivery": packet,
+            "response_schema": response_schema,
+        }
+        if change_candidates is not None:
+            payload["change_candidates"] = change_candidates
+            empty_instruction += (
+                " change_candidates are temporary locating hints; decide what to persist "
+                "from the original delivered sources and actual old state."
+            )
+        return [
+            {
+                "role": "system",
+                "content": self.instructions(allow_create=allow_create)
+                + " Group distinct topics into separate records. Preserve dates and roles. "
+                "In every arm, form one independently stated clause per unit. In plain memory "
+                "keep its qualifications in that clause; in conditioned memory explicitly link "
+                "the same content and qualifications. Do not pack independent matters into a "
+                "single long unit or create duplicate records for the same matter. "
+                "Return the supplied envelope. At most one proposal per existing target in "
+                "this request; combine dependent changes in that target's single proposal. "
+                + empty_instruction,
+            },
+            {
+                "role": "user",
+                "content": json.dumps(
+                    payload,
+                    ensure_ascii=False,
+                ),
+            },
+        ]
 
     def change_request(self, delivery: dict[str, Any], date: str) -> dict[str, Any]:
         """One temporary extraction task over current source bodies, with no Store writes.

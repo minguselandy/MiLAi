@@ -69,6 +69,7 @@ def prepared(
     memory_method: str = "functional_v1",
     edit_interface_version: str = "v1",
     edit_features: dict[str, bool] | None = None,
+    maintenance_recipe: str | None = None,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -153,6 +154,8 @@ def prepared(
         settings["edit_interface_version"] = edit_interface_version
     if edit_features is not None:
         settings["edit_features"] = edit_features
+    if maintenance_recipe is not None:
+        settings["maintenance_recipe"] = maintenance_recipe
     settings_path = tmp_path / "settings.json"
     write_json(settings_path, settings)
     root = tmp_path / "run"
@@ -4314,3 +4317,69 @@ def test_explicit_history_tool_delivers_withdrawn_versions_without_new_write(
     count = len(wires)
     assert functional.message(root, **common, **args) == result
     assert len(wires) == count
+
+
+@pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
+def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True,
+                    memory_method="milai_edit_m_v1", edit_interface_version="I2",
+                    edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")},
+                    maintenance_recipe=recipe)
+    stages = []
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True, business=False)
+        system = wire["messages"][0]["content"]
+        if "Extract brief candidate propositions" in system:
+            stages.append("extract")
+            # Empty hints must still allow the editor to use original evidence.
+            return {"role": "assistant", "content": json.dumps({"changes": []})}
+        if not wire.get("tools"):
+            stages.append("edit")
+            packet = json.loads(wire["messages"][-1]["content"])["delivery"]
+            assert "Remember the local marker is blue." in json.dumps(packet)
+            evidence = packet["evidence"][0]["id"]
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "User's marker", "clauses": [{
+                    "text": "User reports the local marker is blue.", "evidence": [evidence],
+                    "assertion": {"source": evidence, "kind": "reported"}, "conditions": []}],
+            }], "records": {}})}
+        assert not {"save_memory", "update_memory", "confirm_existing_memory"}.intersection(
+            t["function"]["name"] for t in wire.get("tools", []))
+        assert memory_effects(wire)["maintenance"][0]["semantic_write_performed"]
+        return {"role": "assistant", "content": "Saved the local marker."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = message(root)
+    assert first["status"] == "COMPLETED", first
+    assert stages == (["extract", "edit"] if recipe == "extract_then_edit" else ["edit"])
+    assert len(first["records"]) == 1
+    assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    calls = len(wires)
+    again = message(root, resume=True)
+    assert again["status"] == "COMPLETED", again
+    assert again["records"] == first["records"] and len(wires) == calls
+    assert again["operation_status"]["semantic_memory"]["status"] == "committed"
+
+
+def test_shared_maintenance_obeys_readonly_request_mode(tmp_path, monkeypatch):
+    root = prepared(tmp_path, native=True, request_interpretation=True,
+                    memory_method="milai_edit_b1_v1", edit_interface_version="I2",
+                    maintenance_recipe="extract_then_edit")
+
+    def reply(wire, ordinal):
+        if ordinal == 1:
+            return intent_reply(memory=False, business=False)
+        assert not {"save_memory", "update_memory"}.intersection(
+            t["function"]["name"] for t in wire.get("tools", []))
+        return {"role": "assistant", "content": "I do not have a saved marker."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = message(root)
+    assert result["status"] == "COMPLETED", result
+    assert result["records"] == [] and result["maintenance"] == [] and len(wires) == 2

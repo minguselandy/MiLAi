@@ -35,7 +35,8 @@ from milai_lab.memory.edit_units import read_revision_evidence, read_revision_sc
 from milai_lab.memory.functional_state import FunctionalRejection, resolve_fragment
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
-from milai_lab.methods.edit_features import EditFeatures, compact_prompt_schema
+from milai_lab.methods.edit_features import EditFeatures
+from milai_lab.methods.edit_maintenance import MaintenanceRecipe, maintain_event, parse_object
 from milai_lab.methods.edit_memory import Arm, EditMemory
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, generation_schema
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
@@ -91,27 +92,6 @@ def reader_messages(
 
 class UnconfirmedModelOutcome(RuntimeError):
     """A sent model request has no confirmed original response; never silently continue."""
-
-
-def parse_object(text: str, *, reject_duplicate_keys: bool = False) -> dict[str, Any]:
-    value = text.strip()
-    if value.startswith("```"):
-        value = value.split("\n", 1)[1].rsplit("```", 1)[0].strip()
-    def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-        result: dict[str, Any] = {}
-        for key, item in pairs:
-            if key in result:
-                raise ValueError(f"Duplicate JSON object key: {key}")
-            result[key] = item
-        return result
-
-    parsed = (
-        json.loads(value, object_pairs_hook=unique_object)
-        if reject_duplicate_keys else json.loads(value)
-    )
-    if not isinstance(parsed, dict):
-        raise ValueError("Model response is not a JSON object")
-    return parsed
 
 
 def source_batches(
@@ -433,6 +413,8 @@ class BenchmarkRun:
     def maintain(self, service: MemoryService, observed: ObservedSession, key: str) -> list[str]:
         if self.settings.get("arm") in {"B0", "B1", "B2", "M"}:
             if self.settings.get("interface_version", "v1") != "v1":
+                if "maintenance_recipe" in self.settings:
+                    return self.maintain_recipe(service, observed, key)
                 return self.maintain_edit_v2(service, observed, key)
             return self.maintain_edit(service, observed, key)
         folder = self.root / "maintenance" / key
@@ -686,48 +668,10 @@ class BenchmarkRun:
         schema: dict[str, Any] | None = None,
         change_candidates: list[dict[str, Any]] | None = None,
     ) -> list[dict[str, str]]:
-        response_schema = (
-            schema if schema is not None else method.envelope_schema(allow_create=allow_create)
+        return method.edit_messages(
+            packet, date, allow_create=allow_create, schema=schema,
+            change_candidates=change_candidates,
         )
-        if method.features.bound_references:
-            response_schema = compact_prompt_schema(response_schema)
-        empty_instruction = (
-            "An empty maintenance envelope means no maintenance, not a successful update."
-            if "records" in response_schema.get("properties", {})
-            else "An empty proposals list means no maintenance, not a successful update."
-        )
-        payload: dict[str, Any] = {
-            "observed_date": date,
-            "delivery": packet,
-            "response_schema": response_schema,
-        }
-        if change_candidates is not None:
-            payload["change_candidates"] = change_candidates
-            empty_instruction += (
-                " change_candidates are temporary locating hints; decide what to persist "
-                "from the original delivered sources and actual old state."
-            )
-        return [
-            {
-                "role": "system",
-                "content": method.instructions(allow_create=allow_create)
-                + " Group distinct topics into separate records. Preserve dates and roles. "
-                "In every arm, form one independently stated clause per unit. In plain memory "
-                "keep its qualifications in that clause; in conditioned memory explicitly link "
-                "the same content and qualifications. Do not pack independent matters into a "
-                "single long unit or create duplicate records for the same matter. "
-                "Return the supplied envelope. At most one proposal per existing target in "
-                "this request; combine dependent changes in that target's single proposal. "
-                + empty_instruction,
-            },
-            {
-                "role": "user",
-                "content": json.dumps(
-                    payload,
-                    ensure_ascii=False,
-                ),
-            },
-        ]
 
     def _fits(self, messages: list[dict[str, str]]) -> bool:
         return bool(
@@ -816,6 +760,78 @@ class BenchmarkRun:
             "selection_order": "first support occurrence in selected actual records",
             "limit": "preflight selection, not proof of HTTP transport or semantic support",
         }
+
+    def maintain_recipe(
+        self, service: MemoryService, observed: ObservedSession, key: str
+    ) -> list[str]:
+        """Run the same source-batch orchestration as the ordinary functional Host."""
+        folder = self.root / "maintenance" / key
+        done = folder / "complete.json"
+        if done.exists():
+            return list(read_json(done)["extracted_memories"])
+        features = EditFeatures.from_settings(self.settings.get("edit_features", {}))
+        method = EditMemory(service, cast(Arm, self.settings["arm"]),
+                            interface_version=self.settings["interface_version"], features=features)
+        refs = []
+        for index, turn in enumerate(observed.turns):
+            capture = service.capture_user if turn["role"] == "user" else service.capture_assistant
+            receipt = capture(observed.session_id, f"turn:{index}", turn["content"],
+                              occurred_at=turn["timestamp"])
+            if not receipt["ok"]:
+                raise RuntimeError("Original source capture unconfirmed")
+            refs.append(receipt["source_ref"])
+        batches = natural_source_batches(observed, self.tokenizer, self.settings["source_tokens"])
+        results, changed = [], {}
+        for index, batch in enumerate(batches):
+            spans = [{"source_ref": refs[p["turn"]], "start": p["start"], "end": p["end"]}
+                     for p in batch]
+            selected_refs = list(dict.fromkeys(p["source_ref"] for p in spans))
+            request_id = f"{key}:batch:{index}"
+            service.bind_source_boundary(observed.session_id, request_id, selected_refs)
+            delivery = method.prepare(selected_refs, "", source_ranges=spans,
+                                      selected_records=[], redelivered_ranges=[])
+            before_path = folder / f"batch-{index}-before.json"
+            if not before_path.exists():
+                write_json(before_path, service.records())
+
+            def call(
+                stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
+                batch_index: int = index,
+            ) -> dict[str, Any]:
+                response = self.call(
+                    f"maintenance/{key}/batch-{batch_index}/{stage}", messages, structured=True,
+                    response_format={"type": "json_schema", "json_schema": {
+                        "name": "milai_" + stage, "schema": schema}},
+                )
+                return parse_object(response, reject_duplicate_keys=True)
+
+            result = maintain_event(
+                method, delivery, session=observed.session_id, request_id=request_id,
+                date=observed.date,
+                recipe=cast(MaintenanceRecipe, self.settings["maintenance_recipe"]),
+                model_call=call, retrieval_limit=self.settings["retrieval_limit"], fit=self._fits,
+                prepare_delivery=lambda located: self._old_support_plan(
+                    method, located, located["records"], observed.date, allow_create=True
+                )[0],
+            )
+            results.append(result)
+            write_json(folder / f"batch-{index}-result.json", result)
+            write_json(folder / f"batch-{index}-after.json", service.records())
+            for receipt in result["receipts"]:
+                if receipt.get("ok") and receipt.get("status") == "committed":
+                    row = service.read(receipt["id"])
+                    if row["ok"]:
+                        changed[receipt["id"]] = row["value"]["content"]
+        extracted = list(changed.values())
+        write_json(done, {
+            "extracted_memories": extracted,
+            "receipts": [receipt for result in results for receipt in result["receipts"]],
+            "batches": results,
+            "unprocessed": [gap for result in results for gap in result["unprocessed"]],
+            "status": "completed" if all(r["status"] == "completed" for r in results)
+                      else "incomplete",
+        })
+        return extracted
 
     def maintain_edit_v2(
         self, service: MemoryService, observed: ObservedSession, key: str

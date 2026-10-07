@@ -41,6 +41,7 @@ from milai_lab.memory.functional_state import (
     scope_leaves,
 )
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
+from milai_lab.methods.edit_maintenance import MaintenanceRecipe, ModelCall, maintain_event
 from milai_lab.methods.edit_memory import Arm, EditMemory, InterfaceVersion
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
@@ -263,6 +264,62 @@ class FunctionalEditMemory(FunctionalMemory):
             )
             if self.interface_version != "v1":
                 self._cache_writer_items(config, result.get("items", []), redelivered=True)
+
+    def maintain_sources(
+        self,
+        config: RunnableConfig,
+        *,
+        recipe: MaintenanceRecipe,
+        model_call: ModelCall,
+        allowed: bool,
+        execute: bool = True,
+    ) -> list[dict[str, Any]]:
+        """Maintain current user input and actually delivered tool sources once each.
+
+        Current Host permission is authoritative. Old context and assistant prose
+        never become a fresh event just because they occur in the Reader cache.
+        """
+        if not allowed:
+            return []
+        bound = self._binding(config)
+        stored = self.service.store.get(
+            namespace(self.service), self._writer_key(config, "edit-writer-delivery:")
+        )
+        refs = [bound["source_ref"]]
+        refs.extend(
+            item["source_ref"] for item in (stored.value["items"] if stored else [])
+            if item["type"] == "fragment" and item.get("role") == "tool"
+            and item.get("delivery_kind") != "redelivered_support"
+        )
+        results = []
+        for ref in dict.fromkeys(refs):
+            source = self.service.source(ref)
+            if source is None:
+                continue
+            delivery = self.writer.prepare([ref], "", selected_records=[], redelivered_ranges=[])
+            request_id = "maintenance:" + canonical(
+                [bound["session"], bound["message_id"], bound["config_version"], ref]
+            )
+
+            def commit(
+                operation_id: str, proposal: dict[str, Any], mapping: dict[str, Any]
+            ) -> dict[str, Any]:
+                self.service.store.put(
+                    namespace(self.service), self._writer_key(config, "edit-writer-active:"),
+                    {"mapping_id": mapping["mapping_id"]}, index=False,
+                )
+                self.note_delivered_fragment_handles(
+                    config, [row["evidence_id"] for row in mapping["evidence"].values()]
+                )
+                return self.apply_writer_proposal(config, operation_id, proposal)
+
+            results.append(maintain_event(
+                self.writer, delivery, session=bound["session"], request_id=request_id,
+                date=source.get("occurred_at") or source["observed_at"], recipe=recipe,
+                model_call=model_call, commit=commit, execute=execute,
+                fit=lambda messages: self.token_count(canonical(messages)) <= self.material_limit,
+            ))
+        return results
 
     def writer_context(
         self, session: str, turn_id: str, config_version: str, *, query: str | None = None

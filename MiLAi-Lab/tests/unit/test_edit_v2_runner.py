@@ -730,3 +730,35 @@ def test_unknown_response_stops_without_completion_or_blind_retry(tmp_path: Path
             assert service.records() == []
     assert len(attempts) == 1
     assert not (tmp_path / "maintenance/1/complete.json").exists()
+
+
+@pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
+def test_shared_recipe_benchmark_persists_predictions_without_repeating_calls(tmp_path, recipe):
+    run = execution(tmp_path, "B1")
+    run.settings["maintenance_recipe"] = recipe
+    calls = []
+
+    def provider(request):
+        wire = json.loads(request.content)
+        payload = json.loads(wire["messages"][1]["content"])
+        calls.append(payload)
+        if "changes" in payload["response_schema"]["properties"]:
+            return httpx.Response(200, json={
+                "choices": [{"finish_reason": "stop", "message": {
+                    "content": json.dumps({"changes": []})}}], "usage": {"total_tokens": 8}})
+        return response({"action": "create", "units": [
+            {"text": "The marker is blue.", "evidence": ["e1"]}]})
+
+    with VLLMClient(VLLMConfig("http://local.invalid/v1", "synthetic", max_tokens=100),
+                    transport=httpx.MockTransport(provider)) as client:
+        run.client = client
+        with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+            service = MemoryService(store, ("shared", "alice"), "alice", tmp_path / "memory.lock")
+            event = observation("s", "Remember the marker is blue.")
+            first = run.maintain(service, event, "event")
+            assert len(first) == 1 and "The marker is blue." in first[0]
+            assert len(service.records()) == 1
+            assert len(calls) == (2 if recipe == "extract_then_edit" else 1)
+            before = len(calls)
+            assert run.maintain(service, event, "event") == first and len(calls) == before
+            assert read_json(tmp_path / "maintenance/event/complete.json")["status"] == "completed"
