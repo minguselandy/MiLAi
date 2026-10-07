@@ -2,6 +2,11 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
+23:15:33 UTC固定观察：PR99头4e自身Fast／Full21成功后合并main eedd26c，日历测试首
+失败保留。原505 B0评分32/32闭合，更新31/72valid61、QA43/73valid67；新4e两消息保存
+续办／只读重开闭合，旧failed及semantic_coverage unchecked保留，业务无重复。
+B1开始原保存score；完整五方法及全任务仍未完成，详见[报告](MILAI_UNIFIED_MEMORY_USAGE.md)。
+
 21:58:44 UTC固定观察：PR83至98合并；冻结505前三臂预测各32闭合，M23及Append7部分
 失败，B0纯score在途。Reader语义投影两条真实诊断已闭合；Host新Tool保存回执未绑定及
 只读反馈遗漏保存状态分别处理。完整任务继续，版本／成本见[详细报告](MILAI_UNIFIED_MEMORY_USAGE.md)。
@@ -85,6 +90,8 @@ Root复核全部14条实际送达答复，未重评分；新源码4b5963f的修�
 
 | 案例／运行标识 | 用户任务与失败现象 | 最早断点 | 计划修改的一个机制 | 复测结果／仍未解决部分 |
 |---|---|---|---|---|
+| PR99／Reader日历测试 | 首81d CI从精简后的Reader读取已省去的派生time_values而KeyError | 既有测试仍要求重复呈现字段 | 只更新测试，分别检查API／保存检索与Reader的语义合同 | 4e自身Fast／Full21成功；秒精度、未知时区、原始时刻、名义日历、实际有效限及只读保持，原失败不删 |
+| 4e／真实原结果保存续办 | User来源提交r2仍不足以确认业务结果保存 | 原attempt只认领符合原完成字段的实际Tool来源 | 新get_reservation批次按实际身份登记下一attempt并收取r3提交 | 两消息COMPLETED；原memory committed／request结构completed，先failed保留；只读0维护、记录与业务行不变，快照答复未新查业务，非完整语义或漂移验证 |
 | 505五臂／Reader容量 | M第三原7 QA0为45933、Append首原7 QA1为34646，均HTTP前超限 | 真实K10元数据重复扩张；格式改写仍不足 | 现有Reader按实际来源／查询继承相同元数据，保留语义差异及正文 | 1f两独立诊断28506／24744、2stop；278份离线超限2→0、K／正文／单位差异0；退休回答仍将考虑旅行列作动机，原失败不改，非全量效果证明 |
 | main1af／显式补保存 | 首User维护length失败，后Tool维护已提交r2但旧memory仍failed | 新实际Tool批次未登记原request下一attempt | Writer前按实际调用／来源／原对象关联新批次，收取该批次回执 | 949／集成4bfc的11项受影响Host检查通过，0新真实HTTP；旧失败／unknown、当前权限与业务效果保留，语义覆盖unchecked |
 | main1af／跨会话只读反馈 | r2已实际送达，程序只说本轮未写，遗漏保存内容 | feedback只查看当轮写回执 | 仅用实际送达material／读取工具呈现已保存内容与版本 | 4ec／集成c2的14项直接检查、重开只读SQLite及边界通过，0新真实HTTP；原application_requests为空，不据记录存在声称旧完整请求完成；原r2物理送达措辞仍未证实 |
