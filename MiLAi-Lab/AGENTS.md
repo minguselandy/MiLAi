@@ -1,3 +1,31 @@
+# 2026-10-07 04:29 UTC: user-requested detailed publication; scoring continues
+
+User asks to summarize current progress and make a complete detailed commit.
+Code base830d23a adds Append-only to ordinary Host;84adapter+6Host checks and
+lint/types/boundary pass, no real Append Host model run. Earlier1c8d9c8 supplies
+same-actual-state recipe compare (max34generation,0Judge,actual0); immutable
+source-1c8d9c8 snapshot exists. ead06ee adapts mechanism/drift and external audit
+to common artifacts and split scoring. All73 Reader projections now fit32256,
+max28721, offline only. Existing tool copied r52 Host135cases/192messages to
+artifacts/milai-edit/e5-inputs/historical-r52-v1; no semantic initialization/HTTP.
+
+SAME frozen dffc232 SCORE remains live PID691580/session56331. Snapshot04:29UTC:
+evaluation13/32 (8/5/0/0),285Judge stop/1053312known +1pending; prediction remains
+132generation/1566037known and198encoder/15268, no reruns. Global41558requests,
+161192432known/161380513charged,embedding1120458,unknown5=history4+1inflight.
+First user8closed:update4/19valid19,QA15/20valid20;Root read20fullanswers, no rescore.
+Its capacityfailed3/4/7 have11Omission+1Correct; empty6has1Correct+2Omission.
+Second3all4authorupdatesCorrect, but source misattribution/qualifier loss remain.
+No whole-arm scores or ranking. No competing HTTP, hotedit, retry or new budget.
+
+Detailed current report is docs/MILAI_BUILD_FIRST_USAGE.md and one issues table;
+LAB_CURRENT_STATUS links it. Publication only, no pause/merge or new model task.
+830ownFast/Full running at snapshot;1c8/eadownFast success,Full running;
+dffcownFast/Full success. Report CI separately. Full goal active/incomplete:
+recipe/main5arms,65/277/native/drift/ablations/tighter budget,reserved16,external28,
+Host135/192+postfreeze new stories and six deliverables. ProductNO_GO/noagents.
+Earlier blocks retain their original observation times.
+
 # 2026-10-07: prefix8 prediction closed; original author scoring active
 
 Fixed dffc232 prefix8-v1 prediction exited0:32 maintenance records/32 predictions,
