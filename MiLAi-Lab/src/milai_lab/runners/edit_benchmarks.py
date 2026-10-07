@@ -85,24 +85,84 @@ def reader_messages(
 ) -> list[dict[str, str]]:
     """Common Reader over actual retained records or observed source messages."""
     delivered = copy.deepcopy(memories)
-    metadata = [
-        (unit, field, json.dumps(unit[field], ensure_ascii=False, separators=(",", ":")))
+    metadata: list[tuple[dict[str, Any] | list[Any], str | int, str, str]] = [
+        (unit, field, field, json.dumps(unit[field], ensure_ascii=False, separators=(",", ":")))
         for memory in delivered
         for unit in (memory.get("applicability") or {}).get("units", [])
         for field in ("assertion", "temporal")
         if unit.get(field)
     ]
-    counts = Counter((field, encoded) for _, field, encoded in metadata)
+    identity_fields = {
+        "source_ref", "source_unit", "target_unit", "unit_id", "current_unit_id",
+        "record_id", "relation_id", "evidence_id", "fragment_handle",
+    }
+    clock_fields = {
+        "occurred_at", "observed_at", "reported_at", "captured_at", "committed_at",
+        "version_time", "query_time", "event_at", "effective_from", "effective_until",
+        "value",
+    }
+
+    def collect_identities(value: Any, identities: set[str]) -> None:
+        if isinstance(value, dict):
+            for key, item in value.items():
+                if (isinstance(item, str)
+                        and ((key in identity_fields and len(item) >= 36)
+                             or (key in clock_fields and len(item) >= 25))):
+                    identities.add(item)
+                collect_identities(item, identities)
+        elif isinstance(value, list):
+            for item in value:
+                collect_identities(item, identities)
+
+    def share_identities(value: Any, identities: set[str]) -> None:
+        if isinstance(value, (dict, list)):
+            positions = value.items() if isinstance(value, dict) else enumerate(value)
+            for key, item in positions:
+                if isinstance(item, str) and item in identities:
+                    metadata.append((value, key, "reference", json.dumps(item)))
+                else:
+                    share_identities(item, identities)
+
+    # Share exact repeated clock/source descriptions too. They remain full JSON
+    # values at the same public locations when the Reader expands the references.
+    for memory in delivered:
+        view = memory.get("applicability") or {}
+        source_table = view.get("source_table", {})
+        clocks = [view.get("time_values", {})]
+        for source in view.get("source_table", {}).values():
+            clocks.append(source.get("time_values", {}))
+        for unit in view.get("units", []):
+            temporal = unit.get("temporal") or {}
+            clocks.append(temporal.get("time_values", {}))
+            if temporal.get("comparison_basis"):
+                metadata.append((temporal, "comparison_basis", "comparison", json.dumps(
+                    temporal["comparison_basis"], ensure_ascii=False, separators=(",", ":"))))
+            for limit in temporal.get("bound_effective_limits", []):
+                for field in ("from_time", "until_time"):
+                    if limit.get(field):
+                        metadata.append((limit, field, "clock", json.dumps(
+                            limit[field], ensure_ascii=False, separators=(",", ":"))))
+        for field, value in source_table.items():
+            metadata.append((source_table, field, "source", json.dumps(
+                value, ensure_ascii=False, separators=(",", ":"))))
+        for table in clocks:
+            for field, value in table.items():
+                metadata.append((table, field, "clock", json.dumps(
+                    value, ensure_ascii=False, separators=(",", ":"))))
+        references_in_view: set[str] = set()
+        collect_identities(memory, references_in_view)
+        share_identities(memory, references_in_view)
+    counts = Counter((category, encoded) for _, _, category, encoded in metadata)
     shared: dict[str, Any] = {}
     references: dict[tuple[str, str], str] = {}
-    for unit, field, encoded in metadata:
-        key = (field, encoded)
+    for container, position, category, encoded in metadata:
+        key = (category, encoded)
         if counts[key] <= 1:
             continue
         if key not in references:
-            references[key] = f"{field}_{len(shared)}"
-            shared[references[key]] = unit[field]
-        unit[field] = {"$ref": "#/shared_metadata/" + references[key]}
+            references[key] = f"v{len(shared)}"
+            shared[references[key]] = cast(Any, container)[position]
+        cast(Any, container)[position] = {"$ref": "#/shared_metadata/" + references[key]}
     payload = {
         "question": question, "date": date, "memory_view": memory_view,
         "memories": delivered,
@@ -111,7 +171,8 @@ def reader_messages(
     instructions = READER_PROMPT
     if shared:
         instructions += (
-            "\nShared metadata stores exact repeated assertion and temporal values. "
+            "\nShared metadata stores exact repeated JSON values, including assertions, "
+            "time descriptions and reference identifiers. "
             "A sole $ref points to the JSON value at that path in this message; "
             "interpret it as that complete value in each referenced field. "
             "Sharing does not add evidence or authority."
@@ -781,6 +842,8 @@ class BenchmarkRun:
                 **part, "evidence_id": fragment["fragment_handle"],
                 "role": source["role"], "observed_at": source["observed_at"],
                 "occurred_at": source.get("occurred_at"), "text": fragment["content"],
+                **({"calendar_context": source["calendar_context"]}
+                   if "calendar_context" in source else {}),
                 "body_delivered": True, "semantic_support": "unchecked",
             }
             trial = {**subset, "redelivered_sources": [*subset["redelivered_sources"], candidate]}
@@ -831,7 +894,8 @@ class BenchmarkRun:
         for index, turn in enumerate(observed.turns):
             capture = service.capture_user if turn["role"] == "user" else service.capture_assistant
             receipt = capture(observed.session_id, f"turn:{index}", turn["content"],
-                              occurred_at=turn["timestamp"])
+                              occurred_at=turn["timestamp"],
+                              calendar_context=self.settings.get("calendar_context"))
             if not receipt["ok"]:
                 raise RuntimeError("Original source capture unconfirmed")
             refs.append(receipt["source_ref"])
@@ -951,8 +1015,9 @@ class BenchmarkRun:
             capture = service.capture_user if turn["role"] == "user" else service.capture_assistant
             receipt = (
                 capture(observed.session_id, f"turn:{ordinal}", turn["content"],
-                        occurred_at=turn["timestamp"])
-                if features.source_metadata
+                        occurred_at=turn["timestamp"],
+                        calendar_context=self.settings.get("calendar_context"))
+                if features.source_metadata or self.settings.get("calendar_context") is not None
                 else capture(observed.session_id, f"turn:{ordinal}", turn["content"])
             )
             if not receipt["ok"]:
@@ -1339,7 +1404,10 @@ class BenchmarkRun:
                     **({"record_id": row["id"]}
                        if service.memory_profile == "unified_v1" else {}),
                     **({"applicability": (
-                        EditMemory.revision_view(row["value"], query_time=date)
+                        EditMemory.revision_view(
+                            row["value"], query_time=date,
+                            query_calendar_context=self.settings.get("calendar_context"),
+                        )
                         if self.settings.get("edit_features", {}).get("temporal_scope")
                         else {
                             "view": "current_at_snapshot", "basis": "stored_direct_relations_only",

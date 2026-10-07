@@ -31,12 +31,19 @@ from milai_lab.runners.edit_benchmarks import BenchmarkRun, reader_messages, sou
 
 
 def test_reader_shared_metadata_preserves_each_actual_source_and_time() -> None:
+    clock = {"value": "2026-02-01T12:00:00", "precision": "second",
+             "timezone_known": False, "calendar_context": "example-calendar"}
+
     def unit(key: str, role: str, end: str | None) -> dict[str, Any]:
         return {
             "unit_id": key, "text": "Same words, independently scoped.",
             "assertion": {"source_ref": "actual-source", "source_revision": 1,
                           "role": role, "kind": "reported", "occurred_at": "2026-01-01"},
             "temporal": {"effective_until": end, "query_time": "2026-02-01",
+                         "time_values": {"effective_from": copy.deepcopy(clock)},
+                         "bound_effective_limits": [{"from_time": copy.deepcopy(clock),
+                                                     "until_time": None}],
+                         "comparison_basis": {"effective_limits": "shared_floating_calendar"},
                          "status": "expired" if end else "effective_limits_unspecified"},
             "applies_under": ["condition-1"],
         }
@@ -46,6 +53,10 @@ def test_reader_shared_metadata_preserves_each_actual_source_and_time() -> None:
         "revision_evidence": [{"role": "assistant", "content": "Original witness"}],
         "applicability": {"units": [unit("u1", "user", None), unit("u2", "user", None),
                                     unit("u3", "assistant", "2026-01-31")],
+                          "time_values": {"query_time": copy.deepcopy(clock)},
+                          "source_table": {source: {"role": "user", "occurred_at": "same",
+                                                     "time_values": {"reported_at": clock}}
+                                           for source in ("source-a", "source-b")},
                           "relations": [{"source_unit": "condition-1", "target_unit": "u1"}]},
     }]
     before = copy.deepcopy(memories)
@@ -69,6 +80,11 @@ def test_reader_shared_metadata_preserves_each_actual_source_and_time() -> None:
     assert delivered[0]["assertion"] == delivered[1]["assertion"]
     assert delivered[2]["assertion"]["role"] == "assistant"
     assert delivered[2]["temporal"]["status"] == "expired"
+    table = payload["memories"][0]["applicability"]["source_table"]
+    assert set(table) == {"source-a", "source-b"}
+    assert table["source-a"] == table["source-b"] and "$ref" in table["source-a"]
+    assert any(isinstance(value, dict) and "precision" in value
+               for value in payload["shared_metadata"].values())
 
 
 def test_source_history_reader_retains_original_messages_without_metadata_refs() -> None:
