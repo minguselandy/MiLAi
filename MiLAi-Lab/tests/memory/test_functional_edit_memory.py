@@ -2337,7 +2337,8 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
     from milai_lab.memory.edit_units import read_applicability
 
     with opened(tmp_path, arm="M", interface_version="I2",
-                maintenance_recipe="extract_then_edit") as memory:
+                maintenance_recipe="extract_then_edit",
+                read_interface="explicit_selectors_v1") as memory:
         writer_turn(memory, "u", "Across the whole project, visit three times weekly this quarter.")
         saved = json.loads(invoke(memory, "save_memory", {"proposal": {
             "action": "create", "units": [
@@ -2377,15 +2378,31 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
                 for alias in ("u3", "u4")],
         }}, "cancel", "u3").content)
         assert cancelled["ok"], cancelled
-        page = json.loads(invoke(memory, "read_memory", {
+        turn(memory, "question",
+             "Read the current project visits and what was actually saved before.")
+        before_read = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        ordinary = memory.context("s", "question", "functional-m-test-v1")
+        records = [u for u in ordinary["items"] if u["type"] == "record"]
+        entry = next(u["stored_history"] for u in records if "stored_history" in u)
+        assert entry["revision_count"] == 3 and entry["revisions"] == [1, 2, 3]
+        assert all(u["revision"] == 3 and u["version_view"] == "current_at_snapshot"
+                   and u["committed_at"] == before_read["committed_at"] for u in records)
+        assert all(not u.get("applicability", {}).get("exceptions") for u in records)
+        assert sum("stored_history" in u for u in records) == 1
+        history = json.loads(invoke(memory, entry["read"]["tool"], entry["read"]["arguments"],
+                                    "history", "question").content)
+        assert {u["revision"] for u in history["items"]} == {1, 2, 3}
+        assert all(u["version_view"] == "historical_exact_revision" for u in history["items"])
+        page = json.loads(invoke(memory, entry["revision_tool"], {
             "record_id": saved["id"], "revision": 2,
-        }, "history", "u3").content)
+        }, "revision2", "question").content)
         assert page["ok"], page
         assert any(u.get("applicability", {}).get("kind") == "scoped_exception"
                    for u in page["items"])
         current = memory._record_units(memory.service.read(saved["id"]))
         assert all(not u["applicability"].get("exceptions") for u in current)
         assert current[0]["applicability"]["text"] == general["text"]
+        assert memory.service.read(saved["id"])["value"] == before_read
 
 
 @pytest.mark.parametrize("query_time,calendar_context,expected", [

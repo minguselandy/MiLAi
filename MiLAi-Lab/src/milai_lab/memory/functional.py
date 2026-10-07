@@ -311,12 +311,13 @@ class FunctionalMemory:
             return []
         version = row["value"]
         body = version["content"]
-        return [
+        units = [
             {
                 "type": "record",
                 "record_id": row["id"],
                 "read_handle": row["candidate_handle"],
                 "revision": version["revision"],
+                "committed_at": version.get("committed_at"),
                 "kind": version["kind"],
                 "scope": version["scope"],
                 "basis": version["basis"],
@@ -330,6 +331,32 @@ class FunctionalMemory:
             }
             for start in range(0, max(1, len(body)), self.fragment_chars)
         ]
+        if view == "current_at_snapshot":
+            index = self.service.history_index(row["id"])
+            explicit = self.read_interface == "explicit_selectors_v1"
+            # A bounded index exposes actual saved revision identities, not old
+            # bodies or captured requests. The existing read tools fetch those
+            # bodies under the same owner, visibility, budget and cursor rules.
+            units[0]["stored_history"] = {
+                key: index[key]
+                for key in ("status", "revision_count", "revisions", "omitted_count")
+                if key in index
+            }
+            if index.get("ok") and index["status"] == "available":
+                units[0]["stored_history"].update(
+                    current_revision_at_index=index["current_revision_at_snapshot"],
+                    index_next_cursor=index["next_cursor"],
+                    read={
+                        "tool": "read_memory_history" if explicit else "read_memory",
+                        "arguments": {
+                            "record_id": row["id"],
+                            **({} if explicit else {"history": True}),
+                        },
+                    },
+                    revision_tool="read_memory_revision" if explicit else "read_memory",
+                    body_page_tool="read_page" if explicit else "read_memory",
+                )
+        return units
 
     def _deduplicate(self, units: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Subtract only already delivered intervals of this exact Source/body version."""
@@ -464,7 +491,7 @@ class FunctionalMemory:
             "delivered_semantic_record_units": sum(unit["type"] == "record" for unit in items),
             "delivered_raw_fragment_count": sum(unit["type"] == "fragment" for unit in items),
             "delivery_count_scope": "this_packet_items_only_not_owner_total_or_writes",
-            "record_unit_scope": "a_unit_may_be_only_part_of_a_record_body",
+            "record_unit_scope": "a_unit_may_be_only_part_of_one_original_stored_revision_body",
             "formation_evidence": (
                 "Successful save_memory/update_memory receipt; "
                 "raw capture/search/read is not formation"
@@ -474,10 +501,19 @@ class FunctionalMemory:
                 "new_values": "must_be_directly_supported_by_selected_fragments",
                 "trigger_binding": "execution_attribution_not_field_evidence",
                 "input_relation": "timing_only_not_automatic_evidence",
+                "stored_history": (
+                    "current_at_snapshot is only the shown saved revision, not past saved content. "
+                    "For what was saved before, use its stored_history.read entry or an exact "
+                    "stored revision. historical_exact_revision never makes that content current. "
+                    "committed_at is the storage clock, not reported or effective time. "
+                    "History body pages use that read's next_cursor, not index_next_cursor. "
+                    "Captured source text is not a saved revision."
+                ),
                 "missing_material": (
                     "Only currently visible delivered evidence is shown. No match does not "
-                    "establish never supplied, forgotten, or physically erased. Report unknown "
-                    "history/reason for absence unless actual topic-bound evidence proves it."
+                    "establish never supplied, forgotten, or physically erased. Follow available "
+                    "stored-history reads for past saved content. Remaining unavailable material "
+                    "has unknown reason unless actual topic-bound evidence proves it."
                 ),
             },
         }
@@ -1671,6 +1707,8 @@ class FunctionalMemory:
             """Read current/exact historical revision, or a previously issued cursor.
 
             history=true reads original stored revision bodies with snapshot pagination.
+            A current snapshot omitting content does not establish it was never
+            saved. Read the stored history when answering what was saved before.
             History is read-only: do not save an old value as a new or current fact.
             Reading a record or raw fragment performs no semantic write. Only an
             actual successful save_memory/update_memory receipt confirms that effect.
@@ -1763,7 +1801,8 @@ class FunctionalMemory:
             """Read the current version of an issued record ID, without changing it.
 
             Supply only record_id. For earlier bodies use read_memory_history or
-            read_memory_revision. Continue any next_cursor with read_page.
+            read_memory_revision: absence here does not establish never saved.
+            Continue any next_cursor with read_page.
             Every read uses the shared explicit read allowance; it is not a save.
             """
             return record_read(
