@@ -21,6 +21,7 @@ from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.journal import UnknownBusinessAction
+from milai_lab.application.recovery import UnknownSemanticCommit, resume_request
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.functional import FunctionalMemory
@@ -377,6 +378,140 @@ def test_semantic_commit_w3_reopens_without_duplicate_revision(tmp_path: Path) -
     assert actual["records"][0]["value"]["revision"] == 1
     assert actual["history"][0]["revision_count"] == 1
     assert actual["application"]["world"]["attempts"] == []
+
+
+@pytest.mark.parametrize("current", [{"allow_memory": False},
+                                    {"readonly": True, "allow_memory": True}])
+def test_resume_unknown_memory_keeps_original_binding_across_sessions(
+    tmp_path: Path, current: dict[str, Any],
+) -> None:
+    arguments = reserve_args()
+    requirements = {
+        "target": {"item_key": arguments["item_key"]},
+        "steps": [{"id": "reserve", "operation": "reserve_and_label",
+                   "arguments": arguments, "completed": arguments}],
+        "save_result": True, "feedback": False,
+    }
+    actual_receipt: dict[str, Any] = {}
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, "reservation")
+        memory = FunctionalMemory(service, len, read_limit=16, material_limit=16000)
+        memory.context("session", "message", "binding-test-v1")
+        semantic_config = {"configurable": {
+            "user_id": "alice", "v13_session": "session", "v13_turn_id": "message",
+            "v13_config_version": "binding-test-v1",
+        }}
+        old_source = service.event_id("session", "message", "user")
+        binding = {"session": "session", "turn_id": "message",
+                   "config_version": "binding-test-v1", "source_ref": old_source,
+                   "range": {"start": 0, "end": len("Operate the local test object.")}}
+        expected = json.loads(json.dumps(binding))
+        adapter = app.adapter(service, "session", "message",
+                              allowed_operations=("reserve_and_label",))
+
+        def commit_then_lose(operation_id: str, progress: dict[str, Any]) -> dict[str, Any]:
+            _, row = app.progress.request_state("alice", "original-request", None)
+            persisted = row["request_progress"]["memory"]["attempts"][-1]
+            assert persisted == {"operation_id": operation_id, "status": "semantic_unknown",
+                                 "binding": expected}
+            # Caller mutation during dispatch cannot change the durable binding.
+            binding["range"]["end"] = 0
+            observed = progress["business"]["steps"][0]["attempts"][0]["result"]
+            handles = [fragment["fragment_handle"]
+                       for fragment in service.source_fragments(observed["source_ref"])]
+            actual_receipt.update(memory.save(
+                semantic_config, operation_id, json.dumps(observed["receipt"]), handles,
+            ))
+            assert actual_receipt["ok"] and actual_receipt["status"] == "committed"
+            raise UnknownSemanticCommit("scripted response lost after actual commit")
+
+        uncertain = resume_request(
+            app, adapter, "original-request", requirements=requirements,
+            current={"allow_memory": True}, save_result=commit_then_lose,
+            semantic_attempt_binding=binding,
+        )
+        original_attempt = uncertain["memory"]["attempts"][0]
+        assert uncertain["memory"]["status"] == "semantic_unknown"
+        assert original_attempt["binding"] == expected and original_attempt["error"]
+        assert len(service.records()) == 1 and len(app.world.snapshot()["attempts"]) == 1
+
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, "reservation")
+        service.capture_user("other-session", "continue", "Only inspect the actual saved result.")
+        adapter = app.adapter(service, "other-session", "continue")
+        new_binding = {"session": "other-session", "turn_id": "continue",
+                       "config_version": "binding-test-v2",
+                       "source_ref": service.event_id("other-session", "continue", "user")}
+        reconciled: list[str] = []
+
+        def no_new_save(_operation_id: str, _progress: dict[str, Any]) -> dict[str, Any]:
+            pytest.fail("An unknown semantic attempt must never be dispatched again")
+
+        def still_unknown(operation_id: str) -> None:
+            reconciled.append(operation_id)
+            _, row = app.progress.request_state("alice", "original-request", None)
+            assert row["request_progress"]["memory"]["attempts"] == [original_attempt]
+
+        unresolved = resume_request(
+            app, adapter, "original-request", current=current, save_result=no_new_save,
+            reconcile_memory=still_unknown, semantic_attempt_binding=new_binding,
+        )
+        assert unresolved["memory"]["status"] == "semantic_unknown"
+        assert unresolved["memory"]["attempts"] == [original_attempt]
+
+        def actual_commit(operation_id: str) -> dict[str, Any]:
+            reconciled.append(operation_id)
+            return actual_receipt
+
+        complete = resume_request(
+            app, adapter, "original-request", current=current, save_result=no_new_save,
+            reconcile_memory=actual_commit, semantic_attempt_binding=new_binding,
+        )
+        assert complete["complete"] and complete["memory"]["status"] == "committed"
+        assert complete["memory"]["attempts"] == [original_attempt]
+        assert reconciled == [original_attempt["operation_id"]] * 2
+        assert len(service.records()) == 1 and len(app.world.snapshot()["attempts"]) == 1
+        # Revocation hides the context in result views, while retaining the journal.
+        assert service.forget("other-session", "forget-old", fragment_handles=[
+            fragment["fragment_handle"] for fragment in service.source_fragments(old_source)
+        ])["ok"]
+        hidden = resume_request(app, adapter, "original-request", current=current)
+        assert hidden["memory"]["attempts"][0]["binding"] == {
+            "source_ref": old_source, "status": "visibility_revoked",
+        }
+        _, row = app.progress.request_state("alice", "original-request", None)
+        assert row["request_progress"]["memory"]["attempts"][0]["binding"] == expected
+
+
+@pytest.mark.parametrize("current", [{"allow_memory": False},
+                                    {"readonly": True, "allow_memory": True}])
+def test_resume_binding_cannot_authorize_new_memory_attempt(
+    tmp_path: Path, current: dict[str, Any],
+) -> None:
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, "reservation")
+        arguments = reserve_args()
+        app.world.reserve_and_label("alice", **arguments)
+        requirements = {
+            "target": {"item_key": arguments["item_key"]},
+            "steps": [{"id": "reserve", "operation": "reserve_and_label",
+                       "arguments": arguments, "completed": arguments}],
+            "save_result": True, "feedback": False,
+        }
+
+        def no_save(_operation_id: str, _progress: dict[str, Any]) -> dict[str, Any]:
+            pytest.fail("A binding is not permission to save")
+
+        result = resume_request(
+            app, app.adapter(service, "session", "message"), "not-authorized",
+            requirements=requirements, current=current, save_result=no_save,
+            semantic_attempt_binding={"session": "old", "allow_memory": True},
+        )
+        assert result["business"]["status"] == "completed"
+        assert result["memory"]["status"] == "pending"
+        assert result["memory"]["current_permission"] == "not_authorized_current_request"
+        assert result["memory"]["attempts"] == [] and service.records() == []
+        assert len(app.world.snapshot()["attempts"]) == 1
 
 
 def test_owner_identity_and_cooperative_lock_are_enforced(tmp_path: Path) -> None:

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Callable, Mapping
+from copy import deepcopy
 from typing import TYPE_CHECKING, Any, Protocol, cast
 
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
@@ -42,6 +43,7 @@ def resume_request(
     current: Mapping[str, Any] | None = None,
     save_result: Callable[[str, dict[str, Any]], dict[str, Any]] | None = None,
     reconcile_memory: Callable[[str], dict[str, Any] | None] | None = None,
+    semantic_attempt_binding: Mapping[str, Any] | None = None,
     feedback: Callable[[str, dict[str, Any]], dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Continue full request requirements using the existing receipt progress.
@@ -55,6 +57,9 @@ def resume_request(
     new_semantic_attempt. Business permission is always the adapter's CURRENT
     allowlist. Callbacks perform maintenance/delivery; this module owns no model,
     semantic core or secondary database. Failures and unknown attempts stay intact.
+    Semantic attempt binding records the caller's actual session/turn/source
+    context before dispatch; it identifies the original attempt, not permission.
+    A later caller's binding never changes an earlier attempt's binding.
     """
     controls = dict(current or {})
     if not request_id or adapter.owner != app.owner:
@@ -196,6 +201,7 @@ def resume_request(
                 reconcile_memory,
                 persist,
                 snapshot_result,
+                semantic_attempt_binding,
             )
         if not can_save and memory["status"] != "committed":
             memory["current_permission"] = "not_authorized_current_request"
@@ -228,6 +234,7 @@ def _resume_memory(
     reconcile: Callable[[str], dict[str, Any] | None] | None,
     persist: Callable[[], None],
     result: Callable[[], dict[str, Any]],
+    semantic_attempt_binding: Mapping[str, Any] | None,
 ) -> None:
     memory = state["memory"]
     if memory["status"] == "semantic_unknown":
@@ -251,6 +258,8 @@ def _resume_memory(
         return
     operation_id = request_id + ":memory:" + str(len(memory["attempts"]) + 1)
     attempt: dict[str, Any] = {"operation_id": operation_id, "status": "semantic_unknown"}
+    if semantic_attempt_binding is not None:
+        attempt["binding"] = deepcopy(dict(semantic_attempt_binding))
     memory["attempts"].append(attempt)
     memory["status"] = "semantic_unknown"
     persist()

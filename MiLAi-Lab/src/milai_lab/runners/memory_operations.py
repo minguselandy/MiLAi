@@ -226,9 +226,16 @@ def run(
                 return _maintenance_receipt(outcome)
 
             def reconcile(operation_id: str) -> dict[str, Any] | None:
+                _, request = app.progress.request_state(
+                    owner, resume_request_id or request_id, None,
+                )
+                attempt = next(row for row in request["request_progress"]["memory"]["attempts"]
+                               if row["operation_id"] == operation_id)
+                original = attempt.get("binding")
+                original_session = original["session"] if original else session
                 saved = service.store.get(
                     (*service.namespace, "edit_maintenance"),
-                    json.dumps([session, operation_id], ensure_ascii=False),
+                    json.dumps([original_session, operation_id], ensure_ascii=False),
                 )
                 if saved is None:
                     return None
@@ -240,11 +247,30 @@ def run(
                         for row in binding["sources"]
                     ], redelivered_ranges=[],
                 )
-                outcome = memory.maintain_delivery(
-                    config, delivery, request_id=operation_id, prior_request_id=operation_id,
-                    date=saved.value["date"], recipe=recipe, model_call=call, allowed=True,
-                    execute=False, selected_record_ids=binding.get("selected_record_ids"),
-                )
+                original_config = cast(RunnableConfig, {
+                    **config, "configurable": {**config["configurable"], **({
+                        "v13_session": original_session, "v13_turn_id": original["turn_id"],
+                        "v13_config_version": original["config_version"],
+                    } if original else {})},
+                })
+                if original:
+                    service.bind_public_turn(
+                        original_session, original["turn_id"], original["source_ref"],
+                        config_version=original["config_version"], phase="resume",
+                    )
+                try:
+                    outcome = memory.maintain_delivery(
+                        original_config, delivery, request_id=operation_id,
+                        prior_request_id=operation_id, date=saved.value["date"],
+                        recipe=recipe, model_call=call, allowed=True, execute=False,
+                        selected_record_ids=binding.get("selected_record_ids"),
+                    )
+                finally:
+                    if original and original_session == session:
+                        service.bind_public_turn(
+                            session, request_id, capture["source_ref"],
+                            config_version=freeze["config_version"], phase="resume",
+                        )
                 if outcome["status"] != "completed":
                     return None
                 return _maintenance_receipt(outcome)
@@ -263,6 +289,11 @@ def run(
                              new_attempt_id is not None and not repeated_command
                          )},
                 save_result=save_result, reconcile_memory=reconcile, feedback=feedback,
+                semantic_attempt_binding={
+                    "session": session, "turn_id": request_id,
+                    "config_version": freeze["config_version"],
+                    "source_ref": capture["source_ref"],
+                },
             )
             if can_read:
                 result["application_snapshot"] = app.world.snapshot()

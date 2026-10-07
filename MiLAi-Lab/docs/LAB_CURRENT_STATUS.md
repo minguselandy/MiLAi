@@ -1,5 +1,23 @@
 # MiLAi Lab 当前状态
 
+**2026-10-07 10:06:37 UTC／北京时间18:06:37：PR87已合并，保存13份评分闭合，原任务未完。**
+
+PR83／84／85／86／87均merged；main354807f及integration干净，树与34fa5c9相同；
+34fa5c9自身Fast507、Full325的21项成功。f307第一用户8份保存预测score已COMPLETED／退出0：
+更新7/19、valid18；QA12/20、valid17；167Judge stop／495237known、0新增编码／unknown。
+第二用户5份score也COMPLETED，10:03:32退出0：更新3/7valid7、QA6/9valid7；
+126Judge stop／493202known、0新增编码／unknown。合计更新10/26valid25、QA18/29valid24。
+仍是失败原32会话中保存13份的描述性subset，不重做预测或重试旧397，无完整M排名。
+
+新源码9abc783将选定旧片段送到共同prior_context，并按原session／turn／config／source
+核对旧语义尝试；44Host相关＋6adapter/application检查、Ruff、相关3.11mypy和边界通过，
+0真实HTTP。普通Host完整requirements登记和真实完整恢复仍待完成。容量诊断冻结34fa5c9、
+0实际调用，当前score闭合后由Root串行运行；不把恢复接线归入该运行。成本与固定边界见
+[最新统一报告](MILAI_UNIFIED_MEMORY_USAGE.md)及[同一问题表](MILAI_BUILD_FIRST_ISSUES.md)。
+长历史／同版对照／保留／外部／完整Host及六交付未完成，16保留用户未读，Product NO_GO。
+
+---
+
 **2026-10-07 09:26:49 UTC／北京时间17:26:49：PR86已合并，prefix诊断失败，保存部分评分中。**
 
 PR83／84／85／86均已合入main f89fe56；PR86头6ab9a6e自身Fast／Full21/21成功，

@@ -2043,6 +2043,13 @@ def message(
                 else mode["allow_forgetting"] if tool.name == "forget_memory" else True))
             maintenance_recipe = settings.get("maintenance_recipe")
             maintenance_allowed = mode is None or mode["allow_memory_maintenance"]
+
+            def prior_request_fragments() -> list[dict[str, Any]]:
+                if not maintenance_allowed or mode is None:
+                    return []
+                return [service.source_fragment(handle) for handle in
+                        mode.get("resumed_memory_request", {}).get("fragment_handles", [])]
+
             if maintenance_recipe:
                 selected_memory = tuple(t for t in selected_memory if t.name not in {
                     "save_memory", "update_memory", "confirm_existing_memory"})
@@ -2198,6 +2205,7 @@ def message(
                             model_call=maintenance_call, allowed=maintenance_allowed,
                             execute=not for_finalization and forgotten_at is None,
                             fit=maintenance_fit,
+                            prior_request_fragments=prior_request_fragments(),
                         )
                         effects["maintenance"] = output["maintenance"]
                         material = memory.context(
@@ -2472,6 +2480,7 @@ def message(
                     cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                     model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
                     fit=maintenance_fit,
+                    prior_request_fragments=prior_request_fragments(),
                 )
 
             if (settings.get("business_completion") == "observed_continuation_v1"
@@ -2769,6 +2778,7 @@ def message(
                             cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                             model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
                             fit=maintenance_fit,
+                            prior_request_fragments=prior_request_fragments(),
                         )
                 except Exception as snapshot_error:
                     output["maintenance_snapshot_error"] = (
