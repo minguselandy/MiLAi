@@ -25,6 +25,7 @@ from milai_lab.memory.edit_units import (
     UnitEdit,
     apply_local,
     form_state,
+    read_applicability,
     read_revision_evidence,
     read_revision_scope,
     render_state,
@@ -100,6 +101,7 @@ class FunctionalEditMemory(FunctionalMemory):
         arm: Arm = "M",
         interface_version: InterfaceVersion = "v1",
         features: EditFeatures | None = None,
+        maintenance_recipe: MaintenanceRecipe | None = None,
         **kwargs: Any,
     ) -> None:
         if arm not in FUNCTIONAL_ARMS.values():
@@ -111,6 +113,9 @@ class FunctionalEditMemory(FunctionalMemory):
         )
         self.features = self.writer.features
         self.interface_version = interface_version
+        self.maintenance_recipe = maintenance_recipe
+        if maintenance_recipe is not None:
+            self.policy["maintenance_recipe"] = maintenance_recipe
         self.conditioned = arm in {"B2", "M"}
         self.local = arm in {"B1", "M"}
         self.memory_method = next(name for name, value in FUNCTIONAL_ARMS.items() if value == arm)
@@ -297,6 +302,24 @@ class FunctionalEditMemory(FunctionalMemory):
             if source is None:
                 continue
             delivery = self.writer.prepare([ref], "", selected_records=[], redelivered_ranges=[])
+            old = {}
+            for item in (stored.value["items"] if stored else []):
+                if item["type"] != "fragment" or item["source_ref"] == ref:
+                    continue
+                previous = self.service.source(item["source_ref"])
+                if previous is not None and previous["observed_at"] < source["observed_at"]:
+                    old[(item["source_ref"], item["start"], item["end"])] = previous
+            recent_refs = sorted(
+                {key[0] for key in old},
+                key=lambda key: next(s["observed_at"] for k, s in old.items() if k[0] == key),
+            )[-4:]
+            ranges = [{"source_ref": key[0], "start": key[1], "end": key[2]}
+                      for key in old if key[0] in recent_refs]
+            if ranges:
+                delivery["prior_context"] = self.writer.prepare(
+                    recent_refs, "", selected_records=[], source_ranges=ranges,
+                    redelivered_ranges=[],
+                )["sources"]
             request_id = "maintenance:" + canonical(
                 [bound["session"], bound["message_id"], bound["config_version"], ref]
             )
@@ -317,7 +340,6 @@ class FunctionalEditMemory(FunctionalMemory):
                 self.writer, delivery, session=bound["session"], request_id=request_id,
                 date=source.get("occurred_at") or source["observed_at"], recipe=recipe,
                 model_call=model_call, commit=commit, execute=execute,
-                fit=lambda messages: self.token_count(canonical(messages)) <= self.material_limit,
             ))
         return results
 
@@ -735,6 +757,7 @@ class FunctionalEditMemory(FunctionalMemory):
             item["current_unit_id"]: item
             for item in read_revision_scope(self.service, row["id"], row["value"])
         } if self.features.enabled else {}
+        applicability = read_applicability(state) if self.maintenance_recipe else {}
         result = []
         for unit in state["units"]:
             text = unit["text"]
@@ -770,6 +793,11 @@ class FunctionalEditMemory(FunctionalMemory):
                         result[-1]["edit_unit"]["local_exception"] = True
                     if start == 0 and unit["unit_id"] in revision_scope:
                         result[-1]["revision_scope"] = revision_scope[unit["unit_id"]]
+                if start == 0 and unit["unit_id"] in applicability:
+                    result[-1]["applicability"] = {
+                        "view": view, "basis": "stored_direct_relations_only",
+                        **applicability[unit["unit_id"]],
+                    }
         result = result or [
             {
                 **ordinary[0],

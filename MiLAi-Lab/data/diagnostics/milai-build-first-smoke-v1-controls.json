@@ -1,0 +1,17 @@
+{
+  "kind": "v13_5_evaluator_controls",
+  "runtime_prompt_readable": false,
+  "cases": [
+    {
+      "case_id": "l4-h09",
+      "before_message_events": [
+        {
+          "before_message_index": 1,
+          "operation": "reservation.set_label_available",
+          "event_id": "l4-h09-service-restored",
+          "available": true
+        }
+      ]
+    }
+  ]
+}

@@ -1388,13 +1388,15 @@ def operation_status(
                         if k in receipt}}
         (visibility_effects if name == "forget_memory" else memory).append(operation)
     for batch in output.get("maintenance", []):
-        for receipt in batch["receipts"]:
+        for index, receipt in enumerate(batch["receipts"]):
             status = ("committed" if receipt.get("ok") and (
                 receipt.get("status") == "committed"
                 or receipt.get("original_status") == "committed") else
                 "no_change" if receipt.get("ok") and receipt.get("status") == "no_change" else
                 "not_committed" if receipt.get("effect") == "none" else "unknown")
             memory.append({"tool": "maintain_event", "status": status,
+                           **({"receipt_ref": f"{batch['request_id']}:proposal:{index}"}
+                              if "request_id" in batch else {}),
                            **{k: receipt[k] for k in ("id", "revision", "effect", "replayed")
                               if k in receipt}})
         if batch["status"] != "completed":
@@ -1930,6 +1932,7 @@ def message(
                 memory_options["arm"] = edit_arm
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
                 memory_options["features"] = edit_features
+                memory_options["maintenance_recipe"] = settings.get("maintenance_recipe")
             memory = memory_class(
                 service,
                 capacity.text_tokens,
@@ -2801,6 +2804,17 @@ def message(
                     )
                 except Exception as snapshot_error:
                     output["snapshot_error"] = (
+                        type(snapshot_error).__name__ + ":" + str(snapshot_error)
+                    )
+            if "maintenance_call" in locals() and isinstance(memory, FunctionalEditMemory):
+                try:
+                    if maintenance_recipe:
+                        output["maintenance"] = memory.maintain_sources(
+                            cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
+                            model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
+                        )
+                except Exception as snapshot_error:
+                    output["maintenance_snapshot_error"] = (
                         type(snapshot_error).__name__ + ":" + str(snapshot_error)
                     )
             if "app" in locals():

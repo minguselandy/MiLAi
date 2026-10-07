@@ -83,9 +83,13 @@ def maintain_event(
     prior = service.store.get(ns, key)
     state: dict[str, Any] = copy.deepcopy(prior.value) if prior else {
         "binding": binding, "phase": "start", "receipts": [], "unprocessed": [],
+        "prior_context": copy.deepcopy(delivery.get("prior_context", [])),
     }
     if state["binding"] != binding:
         raise FunctionalRejection("EDIT_MAINTENANCE_REQUEST_CHANGED")
+    for source in state.get("prior_context", []):
+        if service.source(source["source_ref"]) is None:
+            raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
 
     def save() -> None:
         service.store.put(ns, key, copy.deepcopy(state), index=False)
@@ -94,6 +98,7 @@ def maintain_event(
         return {
             "status": "completed" if state["phase"] == "complete" else "incomplete",
             "phase": state["phase"], "recipe": recipe,
+            "request_id": request_id,
             "source_refs": list(dict.fromkeys(s["source_ref"] for s in sources)),
             "receipts": copy.deepcopy(state["receipts"]),
             "unprocessed": copy.deepcopy(state["unprocessed"]) + (
@@ -123,7 +128,9 @@ def maintain_event(
     try:
         if state["phase"] == "start":
             if recipe == "extract_then_edit":
-                request = method.change_request(delivery, date)
+                request = method.change_request(
+                    {**delivery, "prior_context": state.get("prior_context", [])}, date
+                )
                 envelope = call("extract", request["messages"], request["schema"])
                 state["changes"] = method.decode_changes(envelope, request)
             else:
@@ -142,6 +149,7 @@ def maintain_event(
             )
             # Keep original source bodies and their metadata in both recipes.
             located["sources"] = copy.deepcopy(sources)
+            located["prior_context"] = state.get("prior_context", [])
             if prepare_delivery is not None:
                 located = prepare_delivery(located)
             view = method.writer_request(located, request_id=request_id)
@@ -153,6 +161,7 @@ def maintain_event(
                 view["packet"], date, allow_create=True, schema=view["schema"],
                 change_candidates=(method.writer_changes(state["changes"], view["mapping"])
                                    if state["changes"] is not None else None),
+                prior_context=state.get("prior_context", []),
             )
             envelope = call("edit", messages, view["schema"])
             state.update(

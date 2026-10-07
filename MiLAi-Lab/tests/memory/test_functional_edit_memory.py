@@ -2175,3 +2175,80 @@ def test_shared_recipe_recovery_preserves_effect_and_unknown_call(tmp_path, faul
             assert result["status"] == "incomplete" and result["phase"] == "extract_pending"
             assert result["unprocessed"][0]["reason"] == "model_outcome_unconfirmed"
             assert memory.service.records() == []
+
+
+def test_shared_reader_expands_actual_exception_and_history_without_inheriting_scope(tmp_path):
+    from milai_lab.memory.edit_units import read_applicability
+
+    with opened(tmp_path, arm="M", interface_version="I2",
+                maintenance_recipe="extract_then_edit") as memory:
+        writer_turn(memory, "u", "Across the whole project, visit three times weekly this quarter.")
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": {
+            "action": "create", "units": [
+                {"text": "The whole project has three visits weekly.", "evidence": ["e1"]},
+                {"text": "This quarter.", "role": "condition", "evidence": ["e1"]}],
+            "relations": [{"source": 1, "target": 0, "relation_type": "modifies",
+                           "evidence": ["e1"]}],
+        }}, "save").content)
+        assert saved["ok"], saved
+        writer_turn(memory, "u2", "For branch A only, visit once weekly.")
+        scoped = json.loads(invoke(memory, "update_memory", {"proposal": {
+            "action": "edit", "target": "r1", "edits": [{
+                "operation": "override", "target_unit": "u1", "text": "One visit weekly.",
+                "condition": "Branch A only.", "evidence": ["e1"]}],
+        }}, "override", "u2").content)
+        assert scoped["ok"], scoped
+        row = memory.service.read(saved["id"])
+        before = copy.deepcopy(row["value"])
+        views = [u["applicability"] for u in memory._record_units(row)]
+        general = next(v for v in views if v["kind"] == "general_rule")
+        exception = next(v for v in views if v["kind"] == "scoped_exception")
+        assert [c["text"] for c in general["applies_under"]] == ["This quarter."]
+        assert [c["text"] for c in exception["applies_under"]] == ["Branch A only."]
+        assert exception["general_rules"][0]["text"] == general["text"]
+        assert general["exceptions"][0]["text"] == exception["text"]
+        assert memory.service.read(saved["id"])["value"] == before
+        # A missing original rule is reported, never reconstructed from an exception.
+        missing = copy.deepcopy(before["edit_state"])
+        missing["relations"] = []
+        missing["units"] = [dict(missing["units"][2], local_exception=True)]
+        missing_view = next(iter(read_applicability(missing).values()))
+        assert missing_view["general_rule_status"] == "not_stored"
+        writer_turn(memory, "u3", "Cancel the branch A exception.")
+        cancelled = json.loads(invoke(memory, "update_memory", {"proposal": {
+            "action": "edit", "target": "r1", "edits": [
+                {"operation": "retract", "target_unit": alias, "evidence": ["e1"]}
+                for alias in ("u3", "u4")],
+        }}, "cancel", "u3").content)
+        assert cancelled["ok"], cancelled
+        page = json.loads(invoke(memory, "read_memory", {
+            "record_id": saved["id"], "revision": 2,
+        }, "history", "u3").content)
+        assert page["ok"], page
+        assert any(u.get("applicability", {}).get("kind") == "scoped_exception"
+                   for u in page["items"])
+        current = memory._record_units(memory.service.read(saved["id"]))
+        assert all(not u["applicability"].get("exceptions") for u in current)
+        assert current[0]["applicability"]["text"] == general["text"]
+
+
+def test_shared_extraction_context_is_old_visible_speech_not_current_evidence(tmp_path):
+    with opened(tmp_path, arm="B1", interface_version="I2",
+                maintenance_recipe="extract_then_edit", recent_context="bank_recent_v2") as memory:
+        turn(memory, "old", "My reminder uses a chime.")
+        turn(memory, "u", "Make that quiet instead.")
+        seen = []
+
+        def call(stage, messages, schema):
+            payload = json.loads(messages[1]["content"])
+            seen.append(payload)
+            assert payload["prior_context"][0]["text"] == "My reminder uses a chime."
+            assert payload["prior_context"][0]["kind"] == "prior_context"
+            assert all(e["text"] == "Make that quiet instead."
+                       for e in payload["delivery"]["evidence"])
+            return {"changes": []} if stage == "extract" else {"proposals": []}
+
+        results = memory.maintain_sources(cfg(), recipe="extract_then_edit",
+                                          model_call=call, allowed=True)
+        assert len(seen) == 2 and results[0]["status"] == "completed"
+        assert memory.service.records() == []

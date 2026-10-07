@@ -762,3 +762,121 @@ def test_shared_recipe_benchmark_persists_predictions_without_repeating_calls(tm
             before = len(calls)
             assert run.maintain(service, event, "event") == first and len(calls) == before
             assert read_json(tmp_path / "maintenance/event/complete.json")["status"] == "completed"
+
+
+
+def test_predict_then_score_reuses_saved_answers_and_diagnostic_retrieval(tmp_path, monkeypatch):
+    from milai_lab.runners import edit_benchmarks
+
+    session = {
+        "start_time": "Jan 01, 2030, 09:00:00", "end_time": "Jan 01, 2030, 10:00:00",
+        "dialogue": [{"role": "user", "content": "The marker is blue.",
+                      "timestamp": "Jan 01, 2030, 09:00:00"}],
+        "memory_points": [{"memory_content": "The marker is blue.", "memory_type": "preference",
+                           "is_update": "True", "original_memories": ["The marker was red."],
+                           "memory_source": "user"}],
+        "questions": [{"question": "What color is the marker?", "answer": "blue",
+                       "evidence": [{"memory_content": "The marker is blue."}]}],
+    }
+    dataset = tmp_path / "input.jsonl"
+    dataset.write_text(json.dumps({"uuid": "alice", "sessions": [session]}) + "\n")
+    run = execution(tmp_path / "run", "B1")
+    run.retrieval_embeddings = None
+    run.settings.update(maintenance_recipe="extract_then_edit", halumem={
+        "path": str(dataset), "users": ["alice"], "session_prefix": 1,
+        "official_checkout": "unused-by-this-engineering-fixture"})
+    judge_calls = []
+
+    class AuthorFixture:
+        def __init__(self, checkout, judge):
+            pass
+
+        def score(self, name, *args):
+            judge_calls.append((name, args))
+            return {"evaluation_result": "unexpected_original_label", "accuracy_score": 1}
+
+        def aggregate_results(self, records):
+            return dict(records)
+
+    monkeypatch.setattr(edit_benchmarks, "HaluMemOfficial", AuthorFixture)
+
+    def provider(request):
+        wire = json.loads(request.content)
+        if wire["messages"][0]["content"].startswith("Answer the current question"):
+            content = "The marker is blue."
+        elif wire["messages"][0]["content"].startswith("Extract brief candidate"):
+            content = json.dumps({"changes": []})
+        else:
+            content = json.dumps({"proposals": [{"action": "create", "units": [
+                {"text": "The marker is blue.", "evidence": ["e1"]}]}]})
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
+            "message": {"content": content}}], "usage": {"total_tokens": 8}})
+
+    with VLLMClient(VLLMConfig("http://local.invalid/v1", "synthetic", max_tokens=100),
+                    transport=httpx.MockTransport(provider)) as client:
+        run.client = client
+        predicted = run.halumem("predict")
+        assert predicted == {"status": "PREDICTIONS_SAVED", "sessions": 1, "judge_calls": 0}
+        assert judge_calls == []
+        snapshot = run.root / "predictions/halumem/alice/0/complete.json"
+        original = snapshot.read_bytes()
+        saved = read_json(snapshot)
+        assert saved["update_retrieval"] == [["The marker is blue."]]
+        assert saved["state"] and saved["prediction"]["questions"][0]["hypothesis"]
+
+        def forbidden(*args, **kwargs):
+            raise AssertionError("Scoring must not invoke prediction or retrieval again")
+
+        monkeypatch.setattr(run, "maintain", forbidden)
+        monkeypatch.setattr(run, "answer", forbidden)
+        monkeypatch.setattr(run, "_score_retrieval", forbidden)
+        result = run.halumem("score")
+        assert snapshot.read_bytes() == original
+        assert [name for name, _ in judge_calls] == [
+            "update_memory", "memory_accuracy", "question"]
+        assert judge_calls[-1][1][-1] == saved["prediction"]["questions"][0]["hypothesis"]
+        assert result["memory_update_records"][0]["memory_update_type"] == (
+            "unexpected_original_label")
+        assert result["question_answering_records"][0]["result_type"] == (
+            "unexpected_original_label")
+        assert result["supplemental_denominators"]["invalid_update_judgements"] == 1
+
+
+def test_longmemeval_deferred_score_uses_saved_hypothesis(tmp_path, monkeypatch):
+    from milai_lab.runners import edit_benchmarks
+
+    dataset = tmp_path / "long.json"
+    dataset.write_text(json.dumps([{
+        "question_id": "case", "question": "Marker?", "answer": "blue",
+        "question_type": "single-session-user", "question_date": "2030-01-02",
+        "haystack_sessions": [[{"role": "user", "content": "Blue marker."}]],
+        "haystack_dates": ["2030-01-01"], "haystack_session_ids": ["first"],
+    }]))
+    run = execution(tmp_path / "run", "B1")
+    run.retrieval_embeddings = None
+    run.settings["longmemeval"] = {
+        "path": str(dataset), "questions": ["case"], "official_checkout": "fixture"}
+    calls = []
+    monkeypatch.setattr(run, "maintain", lambda *args: calls.append("maintain"))
+    monkeypatch.setattr(run, "answer", lambda *args: calls.append("answer") or "blue")
+    monkeypatch.setattr(run, "call", lambda *args, **kwargs: calls.append("judge") or "yes")
+
+    class AuthorFixture:
+        def __init__(self, checkout):
+            calls.append("author_loaded")
+
+        def make_prompt(self, case, answer):
+            assert answer == "blue"
+            return "judge fixture"
+
+        def label(self, verdict):
+            return verdict == "yes"
+
+    monkeypatch.setattr(edit_benchmarks, "LongMemEvalOfficial", AuthorFixture)
+    assert run.longmemeval("predict")[0]["hypothesis"] == "blue"
+    assert calls == ["maintain", "answer"]
+    snapshot = run.root / "predictions/longmemeval/case/complete.json"
+    original = snapshot.read_bytes()
+    assert run.longmemeval("score")[0]["autoeval_label"] is True
+    assert calls == ["maintain", "answer", "author_loaded", "judge"]
+    assert snapshot.read_bytes() == original

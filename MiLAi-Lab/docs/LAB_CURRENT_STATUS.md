@@ -3,7 +3,7 @@
 
 **2026-10-07：按build-first计划推进共同维护与普通Host集成。**
 
-包A代码已接通`single_pass`／`extract_then_edit`共用编排、dense定位和真实提交回执；普通Host关闭重复的独立保存入口。已有工程检查支持保存、重开、只读权限及中断恢复，尚无新真实模型结果。包B–D、五条真实冒烟和集中实验仍未完成。当前入口与问题统一记录在[使用说明](MILAI_BUILD_FIRST_USAGE.md)及[问题表](MILAI_BUILD_FIRST_ISSUES.md)，完整范围见[新执行计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。
+包A代码已接通`single_pass`／`extract_then_edit`共用编排、dense定位和真实提交回执；普通Host关闭重复的独立保存入口。已有工程检查支持保存、重开、只读权限及中断恢复，尚无新真实模型结果。包B–D现已补上旧语境、只读关系展开、故障回执及预测／评分分离；五条真实冒烟与集中实验仍未完成。父提交43f5ff7的Fast暴露解析函数隐式重导出类型错误，当前候选已修正，待新提交CI。当前入口与问题统一记录在[使用说明](MILAI_BUILD_FIRST_USAGE.md)及[问题表](MILAI_BUILD_FIRST_ISSUES.md)，完整范围见[新执行计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。
 
 原冻结072队列本次核对：PID3476759已不存在、串行锁空闲；B0仍32/32，B1为27/26且无arm终态，suite未完成，B2/M未运行。中断原因未确认，未重启或覆盖原队列，unknown账本保持。旧分数与下方时间快照保留；Product仍NO_GO。
 

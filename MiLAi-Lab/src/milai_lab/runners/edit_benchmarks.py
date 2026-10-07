@@ -8,7 +8,7 @@ import json
 import re
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, Literal, cast
 
 import httpx
 from langgraph.store.sqlite import SqliteStore
@@ -31,12 +31,17 @@ from milai_lab.datasets.edit_benchmarks import (
 )
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
-from milai_lab.memory.edit_units import read_revision_evidence, read_revision_scope
+from milai_lab.memory.edit_units import (
+    read_applicability,
+    read_revision_evidence,
+    read_revision_scope,
+)
 from milai_lab.memory.functional_state import FunctionalRejection, resolve_fragment
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
-from milai_lab.methods.edit_maintenance import MaintenanceRecipe, maintain_event, parse_object
+from milai_lab.methods.edit_maintenance import MaintenanceRecipe, maintain_event
+from milai_lab.methods.edit_maintenance import parse_object as parse_object
 from milai_lab.methods.edit_memory import Arm, EditMemory
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, generation_schema
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
@@ -251,8 +256,10 @@ def adjacent_source_context(
 
 
 class BenchmarkRun:
-    def __init__(self, settings: dict[str, Any], root: Path) -> None:
-        self.settings, self.root = settings, root
+    def __init__(
+        self, settings: dict[str, Any], root: Path, *, phase: str = "all"
+    ) -> None:
+        self.settings, self.root, self.phase = settings, root, phase
         root.mkdir(parents=True, exist_ok=True)
         self.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
             settings["tokenizer_path"],
@@ -306,7 +313,8 @@ class BenchmarkRun:
             raise
 
     def close(self) -> None:
-        write_json(self.root / "accounting-end.json", self.budget.state)
+        name = "accounting-end.json" if self.phase == "all" else f"accounting-{self.phase}-end.json"
+        write_json(self.root / name, self.budget.state)
         embedding_client = getattr(self, "retrieval_embedding_client", None)
         if embedding_client is not None:
             embedding_client.close()
@@ -449,6 +457,11 @@ class BenchmarkRun:
                 {
                     "id": row["id"],
                     "revision": row["value"]["revision"],
+                    **({"applicability": {
+                        "view": "current_at_snapshot", "basis": "stored_direct_relations_only",
+                        "statements": list(read_applicability(row["value"]["edit_state"]).values()),
+                    }} if self.settings.get("maintenance_recipe")
+                       and row["value"].get("edit_state") else {}),
                     "content": row["value"]["content"],
                     "scope": row["value"]["scope"],
                 }
@@ -701,6 +714,10 @@ class BenchmarkRun:
             len(self.tokenizer.encode(source["text"], add_special_tokens=False))
             for source in delivery["sources"]
         )
+        context_tokens = sum(
+            len(self.tokenizer.encode(source["text"], add_special_tokens=False))
+            for source in delivery.get("prior_context", [])
+        )
         if current_tokens > limit:
             raise ValueError("Current source bodies exceed declared shared body budget")
         subset["redelivered_sources"] = []
@@ -730,7 +747,7 @@ class BenchmarkRun:
                 omitted.append({**part, "reason": "old_source_unavailable"})
                 continue
             cost = len(self.tokenizer.encode(fragment["content"], add_special_tokens=False))
-            if current_tokens + old_tokens + cost > limit:
+            if current_tokens + context_tokens + old_tokens + cost > limit:
                 omitted.append({**part, "reason": "shared_source_body_budget", "tokens": cost})
                 continue
             candidate = {
@@ -754,6 +771,7 @@ class BenchmarkRun:
         return subset, {
             "source_body_token_limit": limit,
             "current_body_tokens": current_tokens,
+            "prior_context_tokens": context_tokens,
             "selected_old_body_tokens": old_tokens,
             "selected_ranges": selected,
             "omitted_ranges": omitted,
@@ -790,6 +808,23 @@ class BenchmarkRun:
             service.bind_source_boundary(observed.session_id, request_id, selected_refs)
             delivery = method.prepare(selected_refs, "", source_ranges=spans,
                                       selected_records=[], redelivered_ranges=[])
+            cutoff = min(source["observed_at"] for source in delivery["sources"])
+            recent = sorted(
+                (source for source in service.sources() if source["observed_at"] < cutoff),
+                key=lambda source: (source["observed_at"], source["event_id"]),
+            )[-4:]
+            remaining = self.settings.get("source_body_tokens", self.settings["source_tokens"])
+            remaining -= sum(len(self.tokenizer.encode(s["text"], add_special_tokens=False))
+                             for s in delivery["sources"])
+            prior_context: list[dict[str, Any]] = []
+            for source in reversed(recent):
+                previous = method.prepare([source["event_id"]], "", selected_records=[],
+                                          redelivered_ranges=[])["sources"][0]
+                cost = len(self.tokenizer.encode(previous["text"], add_special_tokens=False))
+                if cost <= remaining:
+                    prior_context.insert(0, previous)
+                    remaining -= cost
+            delivery["prior_context"] = prior_context
             before_path = folder / f"batch-{index}-before.json"
             if not before_path.exists():
                 write_json(before_path, service.records())
@@ -1263,7 +1298,7 @@ class BenchmarkRun:
             raise RuntimeError("Reference-guided scorer retrieval mutated actual memory")
         return [row["value"]["content"] for row in rows]
 
-    def halumem(self) -> dict[str, Any]:
+    def halumem(self, phase: str = "all") -> dict[str, Any]:
         selection = self.settings["halumem"]
         users = halumem_users(Path(selection["path"]), selection["users"])
         official = HaluMemOfficial(
@@ -1271,7 +1306,7 @@ class BenchmarkRun:
             lambda prompt: parse_object(
                 self.call(self._judge_key(), [{"role": "user", "content": prompt}], structured=True)
             ),
-        )
+        ) if phase != "predict" else None
         records: dict[str, Any] = {
             name: []
             for name in [
@@ -1345,7 +1380,7 @@ class BenchmarkRun:
                     previous_time = now
                     key = f"halumem/{owner}/{ordinal}"
                     checkpoint = self.root / "evaluation" / key / "complete.json"
-                    if checkpoint.exists():
+                    if phase != "predict" and checkpoint.exists():
                         saved = read_json(checkpoint)
                         for name in records:
                             records[name].extend(saved["records"][name])
@@ -1356,16 +1391,50 @@ class BenchmarkRun:
                         continue
                     prior_counts = dict(opportunities)
                     prior_lengths = {name: len(value) for name, value in records.items()}
-                    extracted = self.maintain(
-                        service, halumem_session(owner, ordinal, session), key
-                    )
+                    prediction_path = self.root / "predictions" / key / "complete.json"
+                    if prediction_path.exists():
+                        saved_prediction = read_json(prediction_path)
+                    else:
+                        if phase == "score":
+                            raise ValueError(f"Prediction not saved: {key}")
+                        extracted = self.maintain(
+                            service, halumem_session(owner, ordinal, session), key
+                        )
+                        predicted = {
+                            "uuid": owner, "session": ordinal,
+                            "extracted_memories": extracted, "questions": [],
+                        }
+                        generated = session.get("is_generated_qa_session", False)
+                        if not generated:
+                            for qordinal, qa in enumerate(session.get("questions", [])):
+                                answer = self.answer(
+                                    service, qa["question"], session["end_time"],
+                                    f"{key}/qa/{qordinal}",
+                                )
+                                predicted["questions"].append(
+                                    {"question": qa["question"], "hypothesis": answer}
+                                )
+                        # Author-required reference retrieval is evaluator-only.
+                        # It runs after predictions; saved material is not fed to a Writer/Reader.
+                        update_retrieval = [
+                            self._score_retrieval(service, memory["memory_content"])
+                            if not generated and memory["is_update"] == "True"
+                            and memory.get("original_memories") else []
+                            for memory in session.get("memory_points", [])
+                        ]
+                        saved_prediction = {
+                            "prediction": predicted, "update_retrieval": update_retrieval,
+                            "state": service.records(),
+                        }
+                        write_json(prediction_path, saved_prediction)
+                    predicted = saved_prediction["prediction"]
+                    extracted = predicted["extracted_memories"]
                     opportunities["formed_sessions"] += 1
-                    predicted = {
-                        "uuid": owner,
-                        "session": ordinal,
-                        "extracted_memories": extracted,
-                        "questions": [],
-                    }
+                    if phase == "predict":
+                        predictions.append(predicted)
+                        write_json(self.root / "halumem-predictions.json", predictions)
+                        continue
+                    assert official is not None
                     if session.get("is_generated_qa_session", False):
                         predictions.append(predicted)
                         self._checkpoint(
@@ -1377,7 +1446,7 @@ class BenchmarkRun:
                             predicted,
                         )
                         continue
-                    for memory in session["memory_points"]:
+                    for mordinal, memory in enumerate(session["memory_points"]):
                         item = {**copy.deepcopy(memory), "uuid": owner, "ssession_id": ordinal}
                         retrieved: list[str] = []
                         if memory["is_update"] == "True":
@@ -1385,7 +1454,7 @@ class BenchmarkRun:
                             if not memory.get("original_memories"):
                                 opportunities["updates_missing_original"] += 1
                         if memory["is_update"] == "True" and memory.get("original_memories"):
-                            retrieved = self._score_retrieval(service, memory["memory_content"])
+                            retrieved = saved_prediction["update_retrieval"][mordinal]
                             if not retrieved:
                                 opportunities["empty_update_retrieval"] += 1
                         if memory["is_update"] == "True" and retrieved:
@@ -1453,9 +1522,7 @@ class BenchmarkRun:
                             }
                         )
                     for qordinal, qa in enumerate(session.get("questions", [])):
-                        answer = self.answer(
-                            service, qa["question"], session["end_time"], f"{key}/qa/{qordinal}"
-                        )
+                        answer = predicted["questions"][qordinal]["hypothesis"]
                         result = self._safe_score(
                             official,
                             opportunities,
@@ -1473,9 +1540,6 @@ class BenchmarkRun:
                                 "system_response": answer,
                                 "result_type": result.get("evaluation_result"),
                             }
-                        )
-                        predicted["questions"].append(
-                            {"question": qa["question"], "hypothesis": answer}
                         )
                     predictions.append(predicted)
                     self._checkpoint(
@@ -1495,6 +1559,9 @@ class BenchmarkRun:
                         ),
                         flush=True,
                     )
+        if phase == "predict":
+            return {"status": "PREDICTIONS_SAVED", "sessions": len(predictions), "judge_calls": 0}
+        assert official is not None
         result = official.aggregate_results(records)
         opportunities["unscored_updates"] = (
             opportunities["total_updates"] - opportunities["scored_updates"]
@@ -1555,9 +1622,10 @@ class BenchmarkRun:
             counts["judge_failures"] += 1
             return {"judge_failure": type(error).__name__ + ": " + str(error)}
 
-    def longmemeval(self) -> list[dict[str, Any]]:
+    def longmemeval(self, phase: str = "all") -> list[dict[str, Any]]:
         selection = self.settings["longmemeval"]
-        official = LongMemEvalOfficial(Path(selection["official_checkout"]))
+        official = (LongMemEvalOfficial(Path(selection["official_checkout"]))
+                    if phase != "predict" else None)
         predictions = []
         for case in longmemeval_cases(Path(selection["path"]), selection["questions"]):
             owner = case["question_id"]
@@ -1574,22 +1642,38 @@ class BenchmarkRun:
                     semantic_retriever=self._semantic_retriever(),
                 )
                 history = longmemeval_history(case)
-                for ordinal, observed in enumerate(history):
-                    self.maintain(service, observed, f"longmemeval/{owner}/session/{ordinal}")
-                    print(
-                        json.dumps(
-                            {
-                                "benchmark": "longmemeval",
-                                "case": owner,
-                                "session": ordinal + 1,
-                                "total_sessions": len(history),
-                            }
-                        ),
-                        flush=True,
+                prediction_path = self.root / "predictions/longmemeval" / owner / "complete.json"
+                if prediction_path.exists():
+                    answer = read_json(prediction_path)["hypothesis"]
+                else:
+                    if phase == "score":
+                        raise ValueError(f"Prediction not saved: longmemeval/{owner}")
+                    for ordinal, observed in enumerate(history):
+                        self.maintain(service, observed, f"longmemeval/{owner}/session/{ordinal}")
+                        print(
+                            json.dumps(
+                                {
+                                    "benchmark": "longmemeval",
+                                    "case": owner,
+                                    "session": ordinal + 1,
+                                    "total_sessions": len(history),
+                                }
+                            ),
+                            flush=True,
+                        )
+                    answer = self.answer(
+                        service, case["question"], case["question_date"],
+                        f"longmemeval/{owner}/answer",
                     )
-                answer = self.answer(
-                    service, case["question"], case["question_date"], f"longmemeval/{owner}/answer"
-                )
+                    write_json(prediction_path, {
+                        "question_id": owner, "hypothesis": answer, "state": service.records(),
+                    })
+                if phase == "predict":
+                    predictions.append({"question_id": owner, "hypothesis": answer,
+                                        "question_type": case["question_type"]})
+                    write_json(self.root / "longmemeval-predictions.json", predictions)
+                    continue
+                assert official is not None
                 verdict = self.call(
                     f"longmemeval/{owner}/judge",
                     [{"role": "user", "content": official.make_prompt(case, answer)}],
@@ -1623,20 +1707,25 @@ class BenchmarkRun:
         return predictions
 
 
-def run(settings: dict[str, Any], root: Path, benchmark: str) -> None:
-    execution = BenchmarkRun(settings, root)
+def run(
+    settings: dict[str, Any], root: Path, benchmark: str,
+    phase: Literal["all", "predict", "score"] = "all",
+) -> None:
+    execution = BenchmarkRun(settings, root, phase=phase)
+    terminal = root / ("terminal.json" if phase == "all" else f"terminal-{phase}.json")
     try:
         if benchmark in {"halumem", "all"}:
-            execution.halumem()
+            execution.halumem(phase)
         if benchmark in {"longmemeval", "all"}:
-            execution.longmemeval()
+            execution.longmemeval(phase)
         write_json(
-            root / "terminal.json",
+            terminal,
             {
                 "status": "COMPLETED_EXPERIMENT_PHASE"
                 if settings.get("arm")
                 else "COMPLETED_WIRING",
                 "benchmark": benchmark,
+                "phase": phase,
                 "configuration": settings["experiment_name"],
                 "actual_model": asdict(execution.client.config),
                 "new_generation_requests": execution.budget.state["generation_requests"]
@@ -1647,7 +1736,7 @@ def run(settings: dict[str, Any], root: Path, benchmark: str) -> None:
         )
     except Exception as error:
         write_json(
-            root / "terminal.json",
+            terminal,
             {
                 "status": "FAILED",
                 "type": type(error).__name__,

@@ -429,6 +429,56 @@ def apply_local(
     return state
 
 
+def read_applicability(state: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """Expand stored direct edges, without interpreting scope or changing facts.
+
+    Occurrence dates belong to source reports. Effective dates and the subject
+    remain in the actual assertion text; this projection never infers them.
+    The caller supplies an already-visible current or historical record version.
+    """
+    units = {unit["unit_id"]: unit for unit in state["units"]}
+    conditions: dict[str, list[str]] = {key: [] for key in units}
+    overrides: dict[str, list[str]] = {key: [] for key in units}
+    exceptions: dict[str, list[str]] = {key: [] for key in units}
+    attached_conditions = set()
+    for edge in state["relations"]:
+        source, target = edge["source_unit"], edge["target_unit"]
+        if edge["relation_type"] == "modifies":
+            conditions[target].append(source)
+            attached_conditions.add(source)
+        elif edge["relation_type"] == "overrides":
+            overrides[source].append(target)
+            exceptions[target].append(source)
+
+    def statement(key: str) -> dict[str, Any]:
+        unit = units[key]
+        return {
+            "unit_id": key, "text": unit["text"],
+            **({"assertion": copy.deepcopy(unit["assertion"])} if "assertion" in unit else {}),
+        }
+
+    def qualified(key: str) -> dict[str, Any]:
+        return {**statement(key), "applies_under": [statement(c) for c in conditions[key]]}
+
+    result = {}
+    for key, unit in units.items():
+        if unit["role"] == "condition":
+            result[key] = {**statement(key), "kind": "bound_condition"
+                           if key in attached_conditions else "unbound_condition"}
+            continue
+        is_exception = bool(overrides[key] or unit.get("local_exception"))
+        result[key] = {
+            **qualified(key),
+            "kind": "scoped_exception" if is_exception else
+                    "general_rule" if exceptions[key] else "assertion",
+            "general_rules": [qualified(target) for target in overrides[key]],
+            "exceptions": [qualified(target) for target in exceptions[key]],
+        }
+        if is_exception:
+            result[key]["general_rule_status"] = "stored" if overrides[key] else "not_stored"
+    return result
+
+
 def render_state(state: dict[str, Any]) -> str:
     """One renderer shared by B2/M; explicit scoped alternatives guide the common Reader."""
 

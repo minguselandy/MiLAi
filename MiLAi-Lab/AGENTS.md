@@ -1,3 +1,13 @@
+# 2026-10-07: build-first A-D candidate prepared
+
+Shared context and readonly applicability now serve Host and benchmark; deferred
+predict/score preserves saved predictions and author diagnostic retrieval. Five
+real smoke flows are prepared in one fixture, not yet run at this checkpoint.
+Parent43f5ff7 Fast failed an implicit parse_object re-export; explicit export is
+fixed with affected type checks. No model/embedding calls in this code checkpoint.
+Continue the active build-first plan with serial real smoke, then concentrated
+evaluation; keep semantic failures visible and do not overwrite frozen072.
+
 # 2026-10-07: build-first plan activated
 
 The user activated docs/MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md.

@@ -1,0 +1,137 @@
+{
+  "kind": "functional_v1",
+  "cases": [
+    {
+      "case_id": "l4-h01",
+      "owner": "v13-5-l4-h01",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h01-m1",
+          "session_id": "visit-1",
+          "content": "请记住，列我个人骑行的随身清单时，尽量先列车灯，再列修车工具；汽车应急箱的清单不按这条处理。"
+        },
+        {
+          "message_id": "l4-h01-m2",
+          "session_id": "visit-2",
+          "content": "骑行清单顺序的约定已经存过了吗？只核对，不要再存一遍。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h02",
+      "owner": "v13-5-l4-h02",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "l4-h02-m1",
+          "session_id": "visit-1",
+          "content": "请记住，我给学校手工实验记长度时用英寸；海报上已经印好的尺寸不在这条约定内。"
+        },
+        {
+          "message_id": "l4-h02-m2",
+          "session_id": "visit-2",
+          "content": "之前长度用什么单位？现在把我的手工实验记录改为厘米，海报尺寸仍不受影响，请更新原来那条。"
+        },
+        {
+          "message_id": "l4-h02-m3",
+          "session_id": "visit-3",
+          "content": "现在实验记录和印好的海报尺寸分别按什么约定？"
+        },
+        {
+          "message_id": "l4-h02-m4",
+          "session_id": "visit-4",
+          "content": "这次只查询，不保存：现在长度单位是什么，修改前的历史约定是什么？海报尺寸的限定有变化吗？"
+        }
+      ]
+    },
+    {
+      "case_id": "build-smoke-3",
+      "owner": "build-smoke-3",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "build-smoke-3-m1",
+          "session_id": "visit-1",
+          "content": "请记住：本季度，读书小组整体每周活动三次。活动的共同条件是提前一天通知；北区和南区目前没有单独规定的次数。"
+        },
+        {
+          "message_id": "build-smoke-3-m2",
+          "session_id": "visit-2",
+          "content": "新增一个局部例外：本季度北区活动每周一次，也需提前一天通知。整体每周三次的安排保留，其他范围不变。请保存。"
+        },
+        {
+          "message_id": "build-smoke-3-m3",
+          "session_id": "visit-3",
+          "content": "只查询，不保存：现在整体、北区和南区分别有怎样的活动安排？哪些次数没有单独规定？"
+        },
+        {
+          "message_id": "build-smoke-3-m4",
+          "session_id": "visit-4",
+          "content": "把刚才整体活动和北区例外的共同通知条件都改为提前两天。每周次数及本季度的范围不变，请更新。"
+        },
+        {
+          "message_id": "build-smoke-3-m5",
+          "session_id": "visit-5",
+          "content": "现在撤销北区每周一次的局部例外，整体活动安排和提前两天通知的要求保留。保留例外的历史，不再当成现行安排。"
+        },
+        {
+          "message_id": "build-smoke-3-m6",
+          "session_id": "visit-6",
+          "content": "只查询，不保存：现在保存的活动安排是什么？此前北区例外和通知条件是什么？没有单独规定的内容请说明不知道。"
+        }
+      ]
+    },
+    {
+      "case_id": "build-smoke-4",
+      "owner": "build-smoke-4",
+      "workflow": "reservation",
+      "initial_world": {},
+      "messages": [
+        {
+          "message_id": "build-smoke-4-m1",
+          "session_id": "visit-1",
+          "content": "请记住，我的午休提醒用静音模式。"
+        },
+        {
+          "message_id": "build-smoke-4-m2",
+          "session_id": "visit-2",
+          "content": "这次只查询，不保存：我的午休提醒模式是什么？我有没有告诉过你常用雨伞的颜色？"
+        },
+        {
+          "message_id": "build-smoke-4-m3",
+          "session_id": "visit-3",
+          "content": "请遗忘我的午休提醒偏好，包括关联原话，不要在之后查询或恢复时再使用。"
+        },
+        {
+          "message_id": "build-smoke-4-m4",
+          "session_id": "visit-4",
+          "content": "这次只查询，不保存：你还能读取我的午休提醒偏好吗？不知道就直接说明。"
+        }
+      ]
+    },
+    {
+      "case_id": "l4-h09",
+      "owner": "v13-5-l4-h09",
+      "workflow": "reservation",
+      "initial_world": {
+        "label_available": false
+      },
+      "messages": [
+        {
+          "message_id": "l4-h09-m1",
+          "session_id": "visit-1",
+          "content": "为“泡棉护角-西库货架”预订3件，送到“清点工作台”，用“透明袋”包装并制作标签；请保存真实办理结果。"
+        },
+        {
+          "message_id": "l4-h09-m2",
+          "session_id": "visit-2",
+          "content": "先实时查询泡棉护角-西库货架，只补做没完成的标签，不要再预订一次。"
+        }
+      ]
+    }
+  ]
+}
