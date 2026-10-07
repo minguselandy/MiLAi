@@ -1,3 +1,25 @@
+# 2026-10-07 00:20 UTC: user-requested execution summary; original suite stays live
+
+User requests a current execution summary published to GitHub. Frozen072 is
+unchanged: B0 maintenance/evaluation32/32 closed; B1 first user0–6 closed7/32,
+B2/M not reached. B0 original27/72 updates(valid64),49/73QA(valid68) preserved.
+B1 has22 creates,0 edits,empty6,22 matters114content/max13; no partial scores.
+Root additionally read actual3/4 proposals/targets/states and all3 event4 answers.
+Old preference was deliveredr1 but left unchanged by create; dated Reader
+coordination is not persistent revision. All original QA labels retained.
+Snapshot00:20:59:963 requests962stop4367676known,1pending;240encoder92147.
+Live40545/155695068known155998125charged/embed1066979/unknown4 pending;
+last closed B0 arm40358/154825220known154936935charged/embed1047799/history3.
+Ledger matches, limits unchanged, PID3476759 live and no suite terminal.
+Public entry b1 ownFast success, Full running00:21:00; finite B0calls/notadmitted/
+notadopted/Host not switched. Wait WHOLE original suite terminal/PID exit/serial
+release. No new model runner, hotedit, retry, ideal state, auditor or agents.
+Only5 Lab report/status/sanitized files; lightweight JSON/newlinks/history/
+counts/ledger/ignored/diff,0new source/tests/workflow/config or publicationHTTP.
+Rollback b1d0bbe; Product/API/permissions/Canonical/Archive unchanged.
+Full plan remains active/incomplete,16reserved unread,oneQwen+BGE,NO_GO/PR85draft.
+Lower blocks retain their original timestamps and scopes.
+
 # 2026-10-07 00:05 UTC: portable bounded B driver prepared offline; original suite live
 
 Previousb187 B0arm closure is progress. Addedtools/run_edit_change_pairs.py,
