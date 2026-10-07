@@ -11,6 +11,82 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 17:12:00 UTC：PR94合并，旧23份保存评分闭合，新五方法从空库运行
+
+本节固定于2026-10-07 17:12:00 UTC／北京时间2026-10-08 01:12:00。报告版本以所在
+提交为准；main为`2cedc371`，最新Reader实现为`588260e`，实际新运行冻结报告头
+`505cefaee8c25cac0670fb1d3a38f7c2fae33165`。旧预测及下面23份评分仍冻结`ec37d38`，
+不包含Reader表示压缩或整理回执修复。下方16:04及更早快照保留原时点。
+
+**PR83至94已合并。**[PR94](https://github.com/minguselandy/MiLAi/pull/94)于16:45:09 UTC
+普通merge为main`2cedc371`，integration快进、干净，源码内容与受测头`505cefa`相同。
+该头自身[Fast534](https://github.com/minguselandy/MiLAi/actions/runs/37649602069)及
+[Full333](https://github.com/minguselandy/MiLAi/actions/runs/37649602205)成功，Full21/21；
+[main push](https://github.com/minguselandy/MiLAi/actions/runs/37654504196)成功。
+PR93的整理中断核对已在父版本合入；这些CI与工程闭合不证明记忆语义正确。
+
+**ec实际保存的23份B0预测评分已闭合。**16:08:14至17:03:48 UTC，三个明确子队列分别
+评分第一用户8、第二用户8、第三用户7会话，均有`COMPLETED_EXPERIMENT_PHASE`评分
+终态且退出0。使用原预测、状态快照及保存的作者更新检索，未重跑Writer、Reader或编码器。
+第三用户的复制bank包含原第8次维护；它不是7会话bank终态，评分读取逐会话保存材料。
+原32会话预测仍FAILED，第四用户没有预测，其他四方法原队列未启动，均不补零分。
+
+| ec保存子集 | 更新Correct／全部机会；valid | QA Correct／全部机会；valid | Judge响应／known tokens |
+|---|---|---|---|
+| 第一用户8会话 | 9/19；18 | 11/20；20 | 157／523,098 |
+| 第二用户8会话 | 8/15；12 | 12/12；12 | 145／435,922 |
+| 第三用户7会话 | 5/12；10 | 11/12；12 | 146／461,097 |
+| 合计23会话 | 22/46；40 | 34/44；44 | 448／1,420,117 |
+
+原更新标签为22 Correct、17 Omission、1 Hallucination、3非标准`Omitted`及3空标签；
+后两类共6个无效判断原样保留，不映射成Omission。QA为34 Correct、5 Omission、
+5 Hallucination，全部44有效。formation reference324／valid284，formed outputs56／
+valid44。Root已读全部44完整自然答案，完整来源审计未完成，没有另造数值重评分；
+同家族Judge与Root开发复核不算独立确认。此子集不是完整32或同版本五方法成绩。
+
+**闭合成本单列。**448个Judge响应全部stop，新增编码0、unknown0。评分后连续账本为
+43,520 requests、173,809,046 known、174,000,534 charged、embedding1,331,131、unknown5；
+与原预测闭合账本差额一致。ec首预测92生成加这次448 Judge合计540响应／3,025,818 known，
+编码仍151次／55,488 tokens；上表用户小计不再重复相加，预算没有重置或提高。
+
+**原超限Reader输入在505实际完成一次调用。**17:06:20至17:06:38 UTC，保留原实际K10、
+问题和只读视图，仅使用已合并的引用表表示；实际prompt31,787低于32,256，completion1,971，
+合计33,758 known，finish_reason=stop。Writer／encoder／Judge均0、新增unknown0。
+Root已读完整回答：它将退休动机标为未知，将后续计划与退休原因分开；未作数值重评分，
+完整来源审计未完成，不宣称语义通过或所有未来输入均可容纳。原ec失败不改记成功。
+此独立调用结束后账本为43,521 requests、173,842,804 known、174,034,292 charged，
+embedding与unknown均不变；这是17:06闭合成本，不是17:12新队列的实时账本。
+
+**新五方法集中预测已启动。**17:09:18 UTC从冻结`source-505cefa/MiLAi-Lab`运行：
+
+```bash
+PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -u tools/run_edit_suite.py \
+  /cra/memory/mx_memory/MiLAi-worktrees/development-milai-edit-v2/MiLAi-Lab/artifacts/unified/prefix8-five-arm-505cefa-v2-config.json \
+  /cra/memory/mx_memory/MiLAi-worktrees/development-milai-edit-v2/MiLAi-Lab/artifacts/unified/prefix8-five-arm-505cefa-v2 \
+  --benchmark halumem --phase predict
+```
+
+按B0→B1→B2→M→Append-only串行，每臂每用户各自空库；四开发用户各前八会话。
+只更改相对ec配置的experiment_name、config_version、source_version。共同两阶段、I2、
+BGE-m3 dense cosine K10、Qwen3.6 thinking=true／temperature1、context65,536／输出32,768／
+余量512、source4,096／body8,192、working_sets=false及全部EditFeatures保持。
+Root独占真实HTTP，旧产物和冻结源未改，16保留用户未进入运行。
+
+本固定观察PID3757265存在；B0维护2/32、保存预测1/32，8生成响应均stop／71,493 known，
+8编码响应／915 tokens。其余四臂未启动，无任何臂预测终态、进程退出或score。
+这是在途观察，不是闭合成本；不得根据旧PID快照重启或同时另起模型任务。
+
+**继续按实际断点收敛。**漏写发生在候选与旧目标已送达之后时，优先检验变化如何落实；
+keep支持的旧文本被改写则保留为来源选择问题，不放宽边界。参考现有[方法核对](
+MILAI_EDIT_RELATED_WORK.md)，后续只选择一个通用维护因素，固定实际来源、旧库、预算与
+Reader评价新要求、非目标保持及后续任务。保持空提案、追加事件和未知的合法性，
+不增加抽取器、审核循环或case规则；当前冻结对照不中途改方法。
+
+同版五方法尚未闭合。65／277连续历史、native／drift／recovery、必要消融与更紧预算、
+最终候选后的16保留用户、外部任务、完整Host回归及六项交付继续未完成；65不另算独立
+子集，不跨版本拼接轨迹。无最终候选、稳定方法优势或独立确认，single_verdict_v1未准入，
+Product NO_GO。原始正文、gold、HTTP、reasoning、数据库及私有配置继续ignored。
+
 ## 16:04:07 UTC：PR93合并，五组首预测失败，Reader无损压缩仅离线验证
 
 本节固定于2026-10-07 16:04:07 UTC／北京时间2026-10-08 00:04:07。最新源码为
