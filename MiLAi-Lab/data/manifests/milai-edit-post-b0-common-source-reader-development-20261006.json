@@ -1,0 +1,110 @@
+{
+  "version": "milai-edit-post-b0-common-source-reader-development-1.0",
+  "declared_at": "2026-10-06T04:51:30.867318+00:00",
+  "status": "PREDECLARED_AFFECTED_BEHAVIOR_RECHECK_NOT_CANDIDATE",
+  "actual_generation_calls": 0,
+  "source_identity": "ordinary Git commit carrying this predeclaration and bounded input/Reader implementation; bind exact source and own CI before HTTP",
+  "interface": "I2",
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "single_Qwen_family": true,
+  "common_model_parameters": {
+    "enable_thinking": true,
+    "temperature": 1.0,
+    "max_tokens": 32768,
+    "context_tokens": 65536,
+    "source_tokens": 4096,
+    "source_body_tokens": 8192,
+    "retrieval_limit": 10,
+    "working_sets": false,
+    "other_sampling_parameters": "existing server defaults, not full vendor profile"
+  },
+  "source_delivery": {
+    "current_event_boundary": "original current source_refs only",
+    "old_body_selection": "whole exact supports of selected actual records in first occurrence order, under shared current+old body and complete-request budgets",
+    "unselected_ranges": "recorded explicitly; remain existing-support-only, no body falsely claimed",
+    "no_redelivery_budget": "old Writer packets/schema/instructions unchanged"
+  },
+  "Reader": "one common Reader, explicitly distinguish retained state from observed source history; source date does not by itself expire a retained claim; actual applicability, corrections and scopes decide",
+  "phases": [
+    {
+      "phase": "actual_state_Reader_diagnostic",
+      "declared_generation_calls": 9,
+      "actual_generation_calls": 0,
+      "Writer_calls": 0,
+      "Reader_calls": 9,
+      "Judge_calls": 0,
+      "input_basis": "known-response delivered memories from frozen497 native80 own-history results; not ideal states or a new primary method score",
+      "cases": "all four arms original final reaffirmation and global final withdrawal, plus M global condition-change successful-answer control",
+      "Root_review_before_next_phase": true
+    },
+    {
+      "phase": "existing_R3_own_empty_histories",
+      "declared_generation_calls": 80,
+      "actual_generation_calls": 0,
+      "Writer_calls": 44,
+      "Reader_calls": 36,
+      "Judge_calls": 0,
+      "branches": [
+        {
+          "manifest": "milai-edit-v2-r3-development-behavior.json",
+          "generation_calls": 44
+        },
+        {
+          "manifest": "milai-edit-v2-r3-development-global-condition.json",
+          "generation_calls": 36
+        }
+      ],
+      "one_exposed_source": true,
+      "own_empty_banks_per_arm_and_branch": true,
+      "Root_review_between_branches": true
+    },
+    {
+      "phase": "existing_source_attribution_controls",
+      "declared_generation_calls": 52,
+      "actual_generation_calls": 0,
+      "Writer_calls": 28,
+      "Reader_calls": 24,
+      "Judge_calls": 0,
+      "controls": [
+        "accurate assistant restatement16",
+        "later user confirmation20",
+        "unsupported assistant strengthening16"
+      ],
+      "constructed_exposed_controls_not_public_benchmark": true,
+      "own_empty_banks_per_arm": true,
+      "Root_review_between_controls": true
+    }
+  ],
+  "declared_generation_calls_total": 141,
+  "no_new_ideal_state_or_gold_in_Writer": true,
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "reserved_users_accessed": false,
+  "independent_confirmation": false,
+  "no_retry_or_truncation_repair": true,
+  "old_raw_outputs_and_terminals_preserved": true,
+  "affected_engineering_checks": {
+    "Root_source_SDK_Host": 412,
+    "Root_runner_external_driver": 52,
+    "total_distinct": 464,
+    "owner148_included_in_Root412_not_added": true,
+    "Ruff_files": 9,
+    "strict_mypy_sources": 5,
+    "old_actual_Writer_packets_schemas_messages_exact": 44,
+    "package_tools_root_boundaries": "PASS"
+  },
+  "CI": "finite daily calibration per plan7.2 after affected checks; bind own CI before HTTP; own Full precedes prefix/candidate/merge",
+  "scope_not_admitted_by_preparation": [
+    "four-user prefix and preselected first-user long smoke",
+    "full277 histories",
+    "holdout",
+    "Host model trials",
+    "low-level M ablation and fixed tighter budget"
+  ],
+  "product_status": "NO_GO"
+}

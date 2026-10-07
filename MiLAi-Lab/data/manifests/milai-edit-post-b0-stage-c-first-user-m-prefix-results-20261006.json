@@ -1,0 +1,340 @@
+{
+  "status": "M_FIRST_DEVELOPMENT_USER_FIRST8_CLOSED_FULL_M_ARM_RUNNING",
+  "observed_at": "2026-10-06T12:34:04.616644+00:00",
+  "Root_review_observed_at": "2026-10-06T12:22:01.012767+00:00",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+  "interface": "I2",
+  "model_family": "Qwen3.6 only",
+  "arm": "M",
+  "development_user_position": 0,
+  "initial_state": "OWN_EMPTY_BANK",
+  "sessions": 8,
+  "update_opportunities": 19,
+  "QA_opportunities": 20,
+  "author_update_labels": {
+    "Omission": 16,
+    "Omitted": 1,
+    "Correct": 2
+  },
+  "author_QA_labels": {
+    "Correct": 14,
+    "Omission": 5,
+    "Hallucination": 1
+  },
+  "updates_Correct": 2,
+  "updates_valid": 18,
+  "QA_Correct": 14,
+  "QA_valid": 20,
+  "original_author_aggregation_succeeded": true,
+  "original_labels_and_gold_unchanged": true,
+  "role_usage": {
+    "Writer": {
+      "calls": 6,
+      "input_tokens": 112005,
+      "completion_tokens": 28046,
+      "known_tokens": 140051
+    },
+    "Reader": {
+      "calls": 20,
+      "input_tokens": 35113,
+      "completion_tokens": 34142,
+      "known_tokens": 69255
+    },
+    "Judge": {
+      "calls": 160,
+      "input_tokens": 205188,
+      "completion_tokens": 164445,
+      "known_tokens": 369633
+    }
+  },
+  "requests_and_responses": 186,
+  "known_tokens": 578939,
+  "finish_reasons": {
+    "stop": 186
+  },
+  "Judge_serial_interval": [
+    1,
+    160
+  ],
+  "maintenance": {
+    "pre_HTTP_capacity_failures": 2,
+    "failed_original_ordinals": [
+      3,
+      7
+    ],
+    "input_tokens_at_failure": [
+      33628,
+      36357
+    ],
+    "input_limit": 32256,
+    "unprocessed_sessions": 2,
+    "additional_attempts": 0,
+    "actual_empty_envelopes": 1,
+    "operation_rejections": 0,
+    "committed_actions": {
+      "create": 6,
+      "edit": 1
+    },
+    "actual_local_operations": {
+      "change_value": 1
+    },
+    "complete_state_version_support_unchanged_sessions": 3
+  },
+  "final_state_counts": {
+    "records": 6,
+    "content_units": 22,
+    "condition_units": 0,
+    "relations": 0
+  },
+  "Root_review_scope": {
+    "before_after_pairs": 8,
+    "complete_actual_Writer_envelopes": 6,
+    "complete_Reader_answers": 20,
+    "HTTP_usage_pairs": 186,
+    "selected_source_context_only": true,
+    "independent_Judge_or_exhaustive_source_database_audit": false
+  },
+  "bounded_semantic_observations": [
+    "Initial formation omits some durable User statements actually delivered to Writer; later formation retains several distinct matters. Complete responses are not equivalent to complete memory formation.",
+    "One actual change_value updates a preference while preserving the other three units of that record, including text, support and assertion identity. This is an ordinary local-update positive; no condition units or relations are formed.",
+    "The selected new evidence is narrower than the full conversational confirmation. Assistant interpretation and subsequent User acknowledgement must be distinguished; an existing short reference does not certify entailment.",
+    "A later career-intent record incorporates some delivered User aspirations but omits other delivered event and relationship facts. Subsequent answers omit some of those facts.",
+    "Ordinals3 and7 fail before HTTP at33628 and36357 input tokens. Corresponding prepared source facts are not delivered to Writer; unchanged state is failure, not successful preservation.",
+    "All20 complete natural answers were reviewed. Current preference and some appropriate uncertainty are preserved, while event identity, historical motivation and completed transition remain missing. Correct abstention is separate from completing a required update."
+  ],
+  "lossless_capacity_projection": {
+    "projected_source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+    "new_M_first_user_rows": [
+      {
+        "arm": "M",
+        "development_user_position": 0,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 33628,
+        "projected_input_tokens": 21659,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "M",
+        "development_user_position": 0,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 36357,
+        "projected_input_tokens": 22359,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      }
+    ],
+    "previous26_detail_manifest": "milai-edit-post-b0-stage-c-b2-four-user-prefix-results-20261006.json",
+    "cumulative_failed_inputs_projected": 28,
+    "scope": "All8 B1 and18 B2 prefix failures, plus2 M first-user failures; later M users excluded.",
+    "all_fit_input_limit": true,
+    "schema_expansion_exact": true,
+    "original_packet_mapping_system_date_and_API_schema_unchanged": true,
+    "actual_model_calls": 0,
+    "new_own_history_not_projected": true,
+    "finite_B1_first_user_first8_recheck_scope_unchanged": true,
+    "finite_recheck_admitted": false,
+    "does_not_establish_semantics_or_long_history_stability": true
+  },
+  "external_counter_repair": {
+    "source_commit": "d5476bd790a315480436a7bfbb1b258514483c84",
+    "own_CI": {
+      "commit": "d5476bd790a315480436a7bfbb1b258514483c84",
+      "observed_at": "2026-10-06 12:35:01 UTC",
+      "Fast": {
+        "run_id": 37459592051,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37459592057,
+        "status": "completed",
+        "conclusion": "success"
+      }
+    },
+    "actual_model_calls": 0,
+    "admitted": false,
+    "not_explanation_for_main_capacity_failures": true
+  },
+  "frozen_queue_snapshot": {
+    "observed_at": "2026-10-06T12:34:04.616644+00:00",
+    "observation_started_at": "2026-10-06T12:34:04.422817+00:00",
+    "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
+    "PID": 178764,
+    "PID_and_exact_frozen_command_verified_live": true,
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+    "predeclaration_commit": "f4106f1a1ed418afc723328562c92d958a3a9000",
+    "started_at": "2026-10-06T07:23:06.705004+00:00",
+    "per_arm_planned_sessions": 32,
+    "per_arm_planned_updates": 72,
+    "per_arm_planned_QA": 73,
+    "arms": {
+      "B0": {
+        "maintenance_complete": 32,
+        "evaluation_complete": 32,
+        "requests": 696,
+        "saved_response_files": 696,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+      },
+      "B1": {
+        "maintenance_complete": 32,
+        "evaluation_complete": 32,
+        "requests": 662,
+        "saved_response_files": 662,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+      },
+      "B2": {
+        "maintenance_complete": 32,
+        "evaluation_complete": 32,
+        "requests": 418,
+        "saved_response_files": 418,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+      },
+      "M": {
+        "maintenance_complete": 15,
+        "evaluation_complete": 14,
+        "requests": 307,
+        "saved_response_files": 306,
+        "pending_HTTP_count": 1,
+        "failure_files": 0,
+        "terminal_status": null
+      }
+    },
+    "per_user_checkpoints": {
+      "B0": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        }
+      ],
+      "B1": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        }
+      ],
+      "B2": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        }
+      ],
+      "M": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 7,
+          "evaluation_complete": 6
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 0,
+          "evaluation_complete": 0
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 0,
+          "evaluation_complete": 0
+        }
+      ]
+    },
+    "request_artifacts": 2083,
+    "saved_response_roles": {
+      "Writer": 84,
+      "Reader": 251,
+      "Judge": 1747
+    },
+    "saved_response_count": 2082,
+    "saved_response_finish_reasons": {
+      "stop": 2082
+    },
+    "known_tokens_from_saved_responses": 7366474,
+    "input_tokens_from_saved_responses": 4641411,
+    "completion_tokens_from_saved_responses": 2725063,
+    "not_final_accounting": true,
+    "pending_budget_unknown_reservation_is_not_terminal_failure": true,
+    "candidate_selected": false,
+    "method_advantage_established": false,
+    "long_smoke_actual_model_calls": 0,
+    "session_checkpoint_count_scope": "Only maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; nested batch checkpoints excluded.",
+    "Root_closed_user_review_scope": "B0, B1 and B2 all32 before/after pairs and73 complete Reader answers per arm reviewed. B2 all15 complete actual Writer envelopes read, including second-user additional2. M first-user8 before/after pairs,6 complete actual Writer envelopes and20 complete Reader answers reviewed. Selected source context only; not independent Judge or exhaustive source/database audit.",
+    "no_new_model_process_started_for_publication": true
+  },
+  "closed_accounting_scope": "Closed through B2 only. Live M and the first-user subset are not added again.",
+  "full_M_arm_score": null,
+  "candidate_selected": false,
+  "method_advantage_established": false,
+  "new_model_calls_started_for_publication": 0,
+  "Product_status": "NO_GO",
+  "remaining_original_plan": "Finish frozen M and declared finite input repair; then own same-version65/277 histories, native/drift, semantic-entry ablation and fixed tighter budget,16 reserved users, external comparison, ordinary Host/new stories/recovery and all six deliverables.",
+  "publication_limits": [
+    "Single Qwen3.6 family and same-family Judge; no independent confirmation.",
+    "First-user result cannot be ranked against other arms four-user totals.",
+    "Failed or omitted updates with unchanged state are not preservation successes.",
+    "Only sanitized counts and mechanism observations; no source bodies, gold, predictions, HTTP, reasoning, databases or logs."
+  ]
+}

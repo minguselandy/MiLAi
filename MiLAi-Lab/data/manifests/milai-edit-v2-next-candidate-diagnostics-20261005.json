@@ -1,0 +1,111 @@
+{
+  "status": "ROOT_OFFLINE_LITERAL_OUTPUT_COMPOSITION_NOT_SEMANTIC_EVALUATION",
+  "observed_at": "2026-10-05T14:57:10.235402+00:00",
+  "source_version": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+  "arm": "B0",
+  "user": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+  "new_model_calls": 0,
+  "writer_batches": 66,
+  "length_batches": 29,
+  "length_summary": {
+    "all_states_unchanged_no_receipts": true,
+    "all_whole_json_incomplete": true,
+    "all_delivered_one_record": true,
+    "copied_complete_fragments": 4228,
+    "other_complete_fragments": 10,
+    "copied_fragment_fraction_of_local_output_tokens": {
+      "min": 0.9251708984375,
+      "median": 0.9925537109375,
+      "max": 0.9925537109375
+    },
+    "aggregated_local_tokens_by_unit_fragment": {
+      "envelope_or_incomplete_tail": 2841,
+      "literal_old_unit": 234082,
+      "other_complete_unit": 645
+    },
+    "aggregated_local_tokens_by_field": {
+      "envelope_or_incomplete_tail": 2841,
+      "complete_unit_syntax": 68893,
+      "text_literal": 132819,
+      "role_literal": 7629,
+      "support_arrays": 25386
+    },
+    "local_minus_provider_completion_tokens": {
+      "min": 0,
+      "median": 0,
+      "max": 0
+    }
+  },
+  "limits": [
+    "Only complete literal unit objects already present in the actual response prefix are inspected; incomplete responses are never repaired, submitted or scored as maintenance.",
+    "All token buckets use a single local tokenization and midpoint-based field assignment; boundary tokens may span fields. Provider usage remains separate.",
+    "Literal old-unit matching consumes a Counter of role/text occurrences; identity preservation is not semantic correctness.",
+    "The incomplete tail is unclassified. Missing new content beyond it is unknown, rather than assumed absent.",
+    "This describes the first closed user under one implementation; it does not establish a four-arm method effect or an irreducible output bound."
+  ],
+  "record_organization": {
+    "create_proposals_in_all_66_batches": 1,
+    "first_create_units": 17,
+    "later_create_proposals": 0,
+    "final_records": 1,
+    "final_units": 168,
+    "old_prompt_already_requested_distinct_topic_records": true,
+    "old_schema_had_explicit_matter_description": false,
+    "interpretation": "The model repeatedly rewrote the same growing record despite the shared topic-grouping instruction. No programmatic semantic topic split was performed."
+  },
+  "withdrawal_field_review": {
+    "first_user_rejections": 6,
+    "copy_only_proposals": 4,
+    "proposals_with_new_body_content": 2,
+    "source_review": "ROOT_OFFLINE_NOT_INDEPENDENT",
+    "supported_new_requirement_not_committed": {
+      "original_session": 5,
+      "old_units_preserved": 29,
+      "proposed_added_units": 15,
+      "actual_state_unchanged": true,
+      "limit": "Some proposed user-supported durable content was blocked by an invalid top-level withdrawal-field combination; the entire proposal was not validated as correct."
+    },
+    "proposed_non_target_damage_not_committed": {
+      "original_session": 13,
+      "proposed_added_units": 23,
+      "proposed_removed_units": 1,
+      "still_valid_preferences_in_removed_compound_unit": 4,
+      "actual_state_unchanged": true,
+      "limit": "The rejected proposal would lose still-valid non-target preferences; the structural rejection did not semantically detect that damage."
+    }
+  },
+  "r3_operator_use": {
+    "branches": 2,
+    "M_create_proposals": 2,
+    "M_formed_condition_units": 4,
+    "M_formed_modifies_relations": 4,
+    "M_chosen_edit_operations": [
+      "replace",
+      "retract"
+    ],
+    "M_override_uses": 0,
+    "override_available_in_actual_schema_and_instructions": true,
+    "interpretation": "In both own-history development branches M first formed explicit conditions but later replaced the general content and retracted global qualifiers when adding a local exception. Model intention is not observable from these artifacts."
+  },
+  "next_candidate": {
+    "interface": "I2",
+    "arms": [
+      "B0",
+      "B1",
+      "B2",
+      "M"
+    ],
+    "candidate_selected": false,
+    "actual_model_validation": "NOT_RUN",
+    "changes": [
+      "Shared independently correctable matter records",
+      "Direct scoped semantic edits compiled to existing conditional operators",
+      "Packet-bound aliases and unique per-record containers",
+      "Separate nonempty rewrite and whole-record withdrawal",
+      "Historical source role/time and assertion attribution"
+    ],
+    "previous_queue_modified": false,
+    "heldout_users_consumed": false,
+    "new_model_family_connected": false
+  }
+}

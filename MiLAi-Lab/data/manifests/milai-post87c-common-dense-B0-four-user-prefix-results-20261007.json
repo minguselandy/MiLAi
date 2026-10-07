@@ -1,0 +1,747 @@
+{
+  "status": "CLOSED_B0_FOUR_USER_FIRST8_PARENT_FOUR_ARM_SUITE_RUNNING",
+  "observed_at": "2026-10-06T23:50:04.008364+00:00",
+  "parent_queue_snapshot_observed_at": "2026-10-06T23:52:23.202970+00:00",
+  "actual_experiment_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "report_parent_and_rollback_commit": "9996188475fbd773bc1efdeb2791744dd95a624e",
+  "declaration": "milai-post87c-common-dense-prefix-development-20261007.json",
+  "scope": {
+    "arm": "B0",
+    "development_users": 4,
+    "original_session_ordinals": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "maintenance_sessions": 32,
+    "completed_evaluation_sessions": 32,
+    "starts_from_own_empty_banks": true,
+    "all_four_arm_prefix_complete": false,
+    "first_user_full65_complete": false,
+    "full277_complete": false
+  },
+  "configuration": {
+    "common_interface": "I2",
+    "retrieval": "BGE-m3 ordinary dense cosine K10",
+    "generation_family": "Qwen3.6",
+    "thinking": true,
+    "temperature": 1.0,
+    "context_window": 65536,
+    "output_reservation": 32768,
+    "margin": 512,
+    "gold_or_future_QA_delivered_to_Writer": false,
+    "runtime_source_or_config_hot_edited": false
+  },
+  "original_author_labels": {
+    "update": {
+      "correct": 27,
+      "all_opportunities": 72,
+      "valid_judgments": 64,
+      "raw_label_counts": {
+        "Omission": 35,
+        "Correct": 27,
+        "Correct Update": 1,
+        "Omitted": 4,
+        "Hallucination": 2,
+        "Omitted Update": 1,
+        "null": 2
+      },
+      "invalid_labels_normalized": false
+    },
+    "QA": {
+      "correct": 49,
+      "all_questions": 73,
+      "valid_judgments": 68,
+      "raw_label_counts": {
+        "Correct": 49,
+        "Omission": 9,
+        "Hallucination": 10,
+        "null": 5
+      },
+      "invalid_labels_normalized": false
+    }
+  },
+  "original_author_aggregation": {
+    "status": "SUCCESS",
+    "error": null,
+    "new_model_calls": 0,
+    "overall_score": {
+      "memory_integrity": {
+        "recall(all)": 0.715261958997722,
+        "recall(valid)": 0.8263157894736842,
+        "weighted_recall(all)": 0.744874715261959,
+        "weighted_recall(valid)": 0.8605263157894737,
+        "memory_valid_importance_sum": 285.0,
+        "memory_importance_sum": 329.25,
+        "memory_valid_num": 380,
+        "memory_num": 439
+      },
+      "memory_accuracy": {
+        "interference_accuracy(all)": 0.6551724137931034,
+        "interference_accuracy(valid)": 0.7307692307692307,
+        "interference_memory_valid_num": 26,
+        "interference_memory_num": 29,
+        "target_accuracy(all)": 1.0,
+        "target_accuracy(valid)": 1.0,
+        "target_memory_valid_num": 48,
+        "target_memory_num": 48,
+        "weighted_accuracy(all)": 0.7790697674418605,
+        "weighted_accuracy(valid)": 0.9436619718309859,
+        "memory_valid_num": 71,
+        "memory_num": 86
+      },
+      "memory_extraction_f1": 0.8339973439575032,
+      "memory_update": {
+        "correct_update_memory_ratio(all)": 0.375,
+        "correct_update_memory_ratio(valid)": 0.421875,
+        "hallucination_update_memory_ratio(all)": 0.027777777777777776,
+        "hallucination_update_memory_ratio(valid)": 0.03125,
+        "omission_update_memory_ratio(all)": 0.4861111111111111,
+        "omission_update_memory_ratio(valid)": 0.546875,
+        "other_update_memory_ratio(all)": 0.0,
+        "other_update_memory_ratio(valid)": 0.0,
+        "update_memory_valid_num": 64,
+        "update_memory_num": 72
+      },
+      "question_answering": {
+        "correct_qa_ratio(all)": 0.6712328767123288,
+        "correct_qa_ratio(valid)": 0.7205882352941176,
+        "hallucination_qa_ratio(all)": 0.136986301369863,
+        "hallucination_qa_ratio(valid)": 0.14705882352941177,
+        "omission_qa_ratio(all)": 0.1232876712328767,
+        "omission_qa_ratio(valid)": 0.1323529411764706,
+        "qa_valid_num": 68,
+        "qa_num": 73
+      },
+      "memory_type_accuracy": {
+        "Relationship Memory": {
+          "memory_integrity_acc": 0.2857142857142857,
+          "memory_update_acc": 0.0,
+          "total_num": 28,
+          "memory_acc": 0.2857142857142857
+        },
+        "Persona Memory": {
+          "memory_integrity_acc": 0.6845794392523364,
+          "memory_update_acc": 0.03271028037383177,
+          "total_num": 428,
+          "memory_acc": 0.7172897196261682
+        },
+        "Event Memory": {
+          "memory_integrity_acc": 0.16666666666666666,
+          "memory_update_acc": 0.15476190476190477,
+          "total_num": 84,
+          "memory_acc": 0.3214285714285714
+        }
+      }
+    },
+    "original_prompt_labels_formulas_unchanged": true,
+    "same_family_Judge_is_independent_confirmation": false
+  },
+  "generation": {
+    "requests": 776,
+    "responses": 776,
+    "roles": {
+      "Writer": 33,
+      "Reader": 73,
+      "Judge": 670
+    },
+    "known_tokens": 3497828,
+    "finish_reasons": {
+      "stop": 776
+    },
+    "actual_prompt_tokens_match_requests": true
+  },
+  "embedding": {
+    "requests": 200,
+    "responses": 200,
+    "known_tokens": 72967
+  },
+  "maintenance": {
+    "creates": 75,
+    "rewrites": 11,
+    "committed_operations": 86,
+    "call_before_capacity_failures": 0,
+    "output_truncations": 0,
+    "rejections": 0,
+    "unprocessed": 0,
+    "new_unknown_usage": 0,
+    "retries": 0,
+    "empty_sessions": 6,
+    "final_independent_bank_records_sum": 75,
+    "final_content_units_sum": 349,
+    "maximum_units_per_record": 39,
+    "B0_zero_condition_units_is_expected_text_representation": true,
+    "Writer_batch_count_differs_from_session_count": true
+  },
+  "per_user": [
+    {
+      "declared_user_position": 1,
+      "maintenance_sessions": 8,
+      "completed_evaluation_sessions": 8,
+      "update": {
+        "correct": 5,
+        "all_opportunities": 19,
+        "valid_judgments": 18,
+        "raw_label_counts": {
+          "Omission": 13,
+          "Correct": 5,
+          "Correct Update": 1
+        },
+        "invalid_labels_normalized": false
+      },
+      "QA": {
+        "correct": 15,
+        "all_questions": 20,
+        "valid_judgments": 20,
+        "raw_label_counts": {
+          "Correct": 15,
+          "Omission": 3,
+          "Hallucination": 2
+        },
+        "invalid_labels_normalized": false
+      },
+      "generation": {
+        "responses": 211,
+        "roles": {
+          "Writer": 8,
+          "Reader": 20,
+          "Judge": 183
+        },
+        "known_tokens": 887277,
+        "finish_reasons": {
+          "stop": 211
+        },
+        "actual_prompt_tokens_match_requests": true
+      },
+      "embedding": {
+        "responses": 52,
+        "known_tokens": 19026
+      },
+      "actions": {
+        "create": 20,
+        "rewrite": 4
+      },
+      "committed_operations": 24,
+      "final_records": 20,
+      "final_content_units": 68,
+      "maximum_units_per_record": 5,
+      "empty_original_ordinals": [
+        3,
+        6
+      ]
+    },
+    {
+      "declared_user_position": 2,
+      "maintenance_sessions": 8,
+      "completed_evaluation_sessions": 8,
+      "update": {
+        "correct": 8,
+        "all_opportunities": 15,
+        "valid_judgments": 14,
+        "raw_label_counts": {
+          "Correct": 8,
+          "Omission": 5,
+          "Omitted": 1,
+          "Hallucination": 1
+        },
+        "invalid_labels_normalized": false
+      },
+      "QA": {
+        "correct": 10,
+        "all_questions": 12,
+        "valid_judgments": 10,
+        "raw_label_counts": {
+          "Correct": 10,
+          "null": 2
+        },
+        "invalid_labels_normalized": false
+      },
+      "generation": {
+        "responses": 173,
+        "roles": {
+          "Writer": 8,
+          "Reader": 12,
+          "Judge": 153
+        },
+        "known_tokens": 702202,
+        "finish_reasons": {
+          "stop": 173
+        },
+        "actual_prompt_tokens_match_requests": true
+      },
+      "embedding": {
+        "responses": 41,
+        "known_tokens": 15531
+      },
+      "actions": {
+        "create": 21,
+        "rewrite": 1
+      },
+      "committed_operations": 22,
+      "final_records": 21,
+      "final_content_units": 84,
+      "maximum_units_per_record": 12,
+      "empty_original_ordinals": [
+        4
+      ]
+    },
+    {
+      "declared_user_position": 3,
+      "maintenance_sessions": 8,
+      "completed_evaluation_sessions": 8,
+      "update": {
+        "correct": 13,
+        "all_opportunities": 20,
+        "valid_judgments": 19,
+        "raw_label_counts": {
+          "Correct": 13,
+          "Omission": 6,
+          "Omitted Update": 1
+        },
+        "invalid_labels_normalized": false
+      },
+      "QA": {
+        "correct": 10,
+        "all_questions": 22,
+        "valid_judgments": 19,
+        "raw_label_counts": {
+          "Correct": 10,
+          "null": 3,
+          "Omission": 5,
+          "Hallucination": 4
+        },
+        "invalid_labels_normalized": false
+      },
+      "generation": {
+        "responses": 200,
+        "roles": {
+          "Writer": 8,
+          "Reader": 22,
+          "Judge": 170
+        },
+        "known_tokens": 969382,
+        "finish_reasons": {
+          "stop": 200
+        },
+        "actual_prompt_tokens_match_requests": true
+      },
+      "embedding": {
+        "responses": 57,
+        "known_tokens": 17737
+      },
+      "actions": {
+        "create": 16,
+        "rewrite": 5
+      },
+      "committed_operations": 21,
+      "final_records": 16,
+      "final_content_units": 100,
+      "maximum_units_per_record": 39,
+      "empty_original_ordinals": []
+    },
+    {
+      "declared_user_position": 4,
+      "maintenance_sessions": 8,
+      "completed_evaluation_sessions": 8,
+      "update": {
+        "correct": 1,
+        "all_opportunities": 18,
+        "valid_judgments": 13,
+        "raw_label_counts": {
+          "null": 2,
+          "Hallucination": 1,
+          "Omission": 11,
+          "Correct": 1,
+          "Omitted": 3
+        },
+        "invalid_labels_normalized": false
+      },
+      "QA": {
+        "correct": 14,
+        "all_questions": 19,
+        "valid_judgments": 19,
+        "raw_label_counts": {
+          "Correct": 14,
+          "Hallucination": 4,
+          "Omission": 1
+        },
+        "invalid_labels_normalized": false
+      },
+      "generation": {
+        "responses": 192,
+        "roles": {
+          "Writer": 9,
+          "Reader": 19,
+          "Judge": 164
+        },
+        "known_tokens": 938967,
+        "finish_reasons": {
+          "stop": 192
+        },
+        "actual_prompt_tokens_match_requests": true
+      },
+      "embedding": {
+        "responses": 50,
+        "known_tokens": 20673
+      },
+      "actions": {
+        "create": 18,
+        "rewrite": 1
+      },
+      "committed_operations": 19,
+      "final_records": 18,
+      "final_content_units": 97,
+      "maximum_units_per_record": 12,
+      "empty_original_ordinals": [
+        4,
+        5,
+        7
+      ]
+    }
+  ],
+  "fourth_user_detail": {
+    "Writer_input_tokens": {
+      "min": 4270,
+      "max": 32256
+    },
+    "Writer_completion_tokens": {
+      "min": 1021,
+      "max": 10393
+    },
+    "input_max_equals_declared_input_limit": true,
+    "Judge_serial_interval": [
+      507,
+      670
+    ],
+    "per_session": [
+      {
+        "ordinal": 0,
+        "source_batches": 1,
+        "creates": 5,
+        "rewrites": 0,
+        "committed_operations": 5,
+        "unprocessed": 0,
+        "before_records": 0,
+        "after_records": 5,
+        "units_after": 24,
+        "max_units_per_record": 8,
+        "QA_all": 3,
+        "update_all": 0
+      },
+      {
+        "ordinal": 1,
+        "source_batches": 1,
+        "creates": 3,
+        "rewrites": 0,
+        "committed_operations": 3,
+        "unprocessed": 0,
+        "before_records": 5,
+        "after_records": 8,
+        "units_after": 37,
+        "max_units_per_record": 8,
+        "QA_all": 3,
+        "update_all": 0
+      },
+      {
+        "ordinal": 2,
+        "source_batches": 1,
+        "creates": 7,
+        "rewrites": 0,
+        "committed_operations": 7,
+        "unprocessed": 0,
+        "before_records": 8,
+        "after_records": 15,
+        "units_after": 65,
+        "max_units_per_record": 8,
+        "QA_all": 3,
+        "update_all": 0
+      },
+      {
+        "ordinal": 3,
+        "source_batches": 2,
+        "creates": 0,
+        "rewrites": 1,
+        "committed_operations": 1,
+        "unprocessed": 0,
+        "before_records": 15,
+        "after_records": 15,
+        "units_after": 67,
+        "max_units_per_record": 8,
+        "QA_all": 0,
+        "update_all": 2
+      },
+      {
+        "ordinal": 4,
+        "source_batches": 1,
+        "creates": 0,
+        "rewrites": 0,
+        "committed_operations": 0,
+        "unprocessed": 0,
+        "before_records": 15,
+        "after_records": 15,
+        "units_after": 67,
+        "max_units_per_record": 8,
+        "QA_all": 0,
+        "update_all": 2
+      },
+      {
+        "ordinal": 5,
+        "source_batches": 1,
+        "creates": 0,
+        "rewrites": 0,
+        "committed_operations": 0,
+        "unprocessed": 0,
+        "before_records": 15,
+        "after_records": 15,
+        "units_after": 67,
+        "max_units_per_record": 8,
+        "QA_all": 0,
+        "update_all": 5
+      },
+      {
+        "ordinal": 6,
+        "source_batches": 1,
+        "creates": 3,
+        "rewrites": 0,
+        "committed_operations": 3,
+        "unprocessed": 0,
+        "before_records": 15,
+        "after_records": 18,
+        "units_after": 97,
+        "max_units_per_record": 12,
+        "QA_all": 0,
+        "update_all": 1
+      },
+      {
+        "ordinal": 7,
+        "source_batches": 1,
+        "creates": 0,
+        "rewrites": 0,
+        "committed_operations": 0,
+        "unprocessed": 0,
+        "before_records": 18,
+        "after_records": 18,
+        "units_after": 97,
+        "max_units_per_record": 12,
+        "QA_all": 10,
+        "update_all": 8
+      }
+    ],
+    "Root_review": {
+      "status": "CLOSED_ROOT_REVIEW_ALL_EIGHT_STATES_AND_NINETEEN_ANSWERS",
+      "observed_at": "2026-10-06T23:51:31.423888+00:00",
+      "source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+      "reviewed_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "complete_answers_read": 19,
+      "writer_batches_read": 9,
+      "findings": [
+        {
+          "original_session_ordinals": [
+            0,
+            1,
+            2
+          ],
+          "finding": "Fifteen independent matters formed. Most preference/personal information bound to actual current User statements. Ambiguous relationship catalogue is projected as parents divorced rather than own relationship; source identity alone does not establish subject. This is formation evidence, not preservation under within-record edits."
+        },
+        {
+          "original_session_ordinals": [
+            3
+          ],
+          "finding": "Two actual source batches: first rewrites delivered employment r3, second empty without changing state. New promotion and income use explicit User statements rather than repeated conflicting Assistant income. Two old savings/duty units retain full text/support/assertion except unit ID. Original invalid and Hallucination update labels preserved; source fidelity distinct from author labels.",
+          "preserved_full_unmentioned_units": 2
+        },
+        {
+          "original_session_ordinals": [
+            4
+          ],
+          "finding": "Current health improvement, daily walking/meditation and old health r2 delivered. Empty envelope leaves bank byte-equivalent. Final QA2 cannot explain the actual health change."
+        },
+        {
+          "original_session_ordinals": [
+            5
+          ],
+          "finding": "Current network expansion, named emotional support and actual old relationships r2 delivered. Empty envelope. Later project experience records some support but not earlier event relationship/time; final QA3 uses January assertions to answer a by-December question."
+        },
+        {
+          "original_session_ordinals": [
+            6
+          ],
+          "finding": "Three new matters distinguish style, development plans and project experience. All actual before record values preserved. Future intent remains plans in most clauses; actual project roles/support included. Creates do not prove earlier health/relationship revisions completed."
+        },
+        {
+          "original_session_ordinals": [
+            7
+          ],
+          "finding": "Actual health restatement, project completion report and further plans delivered with relevant old targets. Empty envelope leaves bank identical, including previously missing health detail. Some facts repeat prior history but need repair relative to actual bank; do not mark every repeated statement novel."
+        }
+      ],
+      "answer_findings": {
+        "last_session_complete_questions_read": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "last_session0_role_answer": "Uses actual current promoted title with User-report attribution.",
+        "last_session1_income_answer": "Uses actual User amount, conflicting Assistant amount not promoted to current fact; original author label retained.",
+        "last_session2_health_answer": "Cannot answer dated improvement because health maintenance omitted.",
+        "last_session3_time_answer": "Explicitly cites later January support but also uses it to characterize an earlier transition by December; future evidence not evidence of earlier causality.",
+        "last_session4_project_answer": "States no later reported achievements in stored material; later completion report did not enter actual bank.",
+        "last_session5_6_unknowns": "Middle name and blood type correctly remain unknown from memory.",
+        "last_session7_8_9_plans": "Use saved leadership/planning material and qualify intentions/projected outcomes; valid labels not independent verification."
+      },
+      "new_model_calls": 0,
+      "original_labels_changed": false,
+      "independent_audit": false,
+      "numerical_Root_rescoring": false
+    }
+  },
+  "previous_closed_user_result_manifests": [
+    "milai-post87c-common-dense-B0-first-user-prefix-results-20261007.json",
+    "milai-post87c-common-dense-B0-second-user-prefix-results-20261007.json",
+    "milai-post87c-common-dense-B0-third-user-prefix-results-20261007.json"
+  ],
+  "B0_terminal": {
+    "status": "COMPLETED_EXPERIMENT_PHASE",
+    "generation_requests": 776,
+    "known_tokens": 3497828
+  },
+  "B0_closed_accounting_boundary": {
+    "generation_requests": 40358,
+    "generation": {
+      "charged_tokens": 154936935,
+      "known_tokens": 154825220,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 1047799,
+      "known_tokens": 1047799,
+      "unknown_usage": 0
+    },
+    "limits": {
+      "arms": 3,
+      "embedding_tokens": null,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "questions": 12
+    }
+  },
+  "parent_queue_live_snapshot": {
+    "observed_at": "2026-10-06T23:52:23.202970+00:00",
+    "per_arm": {
+      "B0": {
+        "maintenance": 32,
+        "evaluation": 32,
+        "generation_requests": 776,
+        "generation_responses": 776,
+        "terminal": true
+      },
+      "B1": {
+        "maintenance": 1,
+        "evaluation": 0,
+        "generation_requests": 26,
+        "generation_responses": 25,
+        "terminal": false
+      },
+      "B2": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "terminal": false
+      },
+      "M": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "terminal": false
+      }
+    },
+    "generation_requests": 802,
+    "generation_responses": 801,
+    "generation_pending": 1,
+    "generation_known_tokens": 3576939,
+    "finish_reasons": {
+      "stop": 801
+    },
+    "encoding_responses": 204,
+    "embedding_known_tokens": 73350,
+    "ledger": {
+      "generation_requests": 40384,
+      "generation": {
+        "charged_tokens": 155056943,
+        "known_tokens": 154904331,
+        "unknown_usage": 4
+      },
+      "embedding": {
+        "charged_tokens": 1048182,
+        "known_tokens": 1048182,
+        "unknown_usage": 0
+      },
+      "limits": {
+        "arms": 3,
+        "embedding_tokens": null,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "questions": 12
+      }
+    },
+    "ledger_stable_during_read": true,
+    "receipt_deltas_match": true,
+    "original_PID_live": true,
+    "suite_terminal_exists": false,
+    "new_prototype_model_calls": 0,
+    "maintenance_count_rule": "Session-level completion only; nested batch excluded.",
+    "arm_terminal_file": "terminal.json"
+  },
+  "accounting": {
+    "receipt_deltas_match": true,
+    "user_and_arm_subsets_already_in_continuous_ledger": true,
+    "B0_closed_arm_is_not_whole_suite_terminal": true,
+    "budget_limits_unchanged": true
+  },
+  "prototype": {
+    "source_commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
+    "own_Fast_Full_success": true,
+    "prepared_actual_before_cases": 4,
+    "model_calls": 0,
+    "admitted": false,
+    "adopted_as_common_flow": false,
+    "normal_Host_flow_switched": false,
+    "wait_for_whole_original_suite_terminal_and_serial_release": true
+  },
+  "conclusions": {
+    "stable_method_advantage_established": false,
+    "candidate_selected": false,
+    "product_status": "NO_GO",
+    "heldout_users_read": false,
+    "goal_complete": false,
+    "independent_Root_audit": false,
+    "Root_numerical_rescoring": false,
+    "current_more_QA_Correct_does_not_prove_persistent_updates_complete": true,
+    "short_prefix_does_not_prove_long_capacity": true,
+    "other_arms_not_zero_filled": true
+  },
+  "publication_scope": "Five Lab reports/status/sanitized result files; zero source/tests/workflow/config changes or new model/encoding calls for publication."
+}

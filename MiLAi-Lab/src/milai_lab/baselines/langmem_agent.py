@@ -17,6 +17,7 @@ from langchain_core.tools import BaseTool, tool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.base import BaseCheckpointSaver
 from langgraph.checkpoint.sqlite import SqliteSaver
+from langgraph.config import get_config
 from langgraph.prebuilt import create_react_agent
 from langgraph.prebuilt.tool_node import ToolCallWrapper, ToolNode
 from langgraph.store.base import BaseStore
@@ -152,6 +153,7 @@ def build_agent(
     tool_schema_communication: str | None = None,
     tool_save_communication: str | None = None,
     model_tool_choice: Callable[[list[BaseMessage]], Literal["auto", "required"]] | None = None,
+    model_tools_provider: Callable[[RunnableConfig], Sequence[BaseTool]] | None = None,
 ) -> Any:
     """Select the native or strict memory mutation contract for Host tools."""
     selected_save = read_profile("tool_save_communication", model.tool_save_communication)
@@ -263,12 +265,31 @@ def build_agent(
         for tool in tools
     }
 
+    def actual_tools(config: RunnableConfig) -> list[BaseTool]:
+        current = list(model_tools_provider(config)) if model_tools_provider else tools
+        names = [tool.name for tool in current]
+        if len(names) != len(set(names)) or not set(names) <= set(parameter_schemas):
+            raise ValueError("DYNAMIC_TOOL_CATALOG_MUST_KEEP_EXECUTABLE_NAMES")
+        return current
+
     def validate_then_execute(
         request: Any,
         execute: Any,
     ) -> Any:
         def original(current: Any) -> Any:
             call = current.tool_call
+            current_schemas = (
+                {tool.name: convert_to_openai_tool(tool)["function"]["parameters"]
+                 for tool in actual_tools(current.runtime.config)}
+                if model_tools_provider is not None else parameter_schemas
+            )
+            if model_tools_provider is not None and call["name"] not in current_schemas:
+                return ToolMessage(
+                    content=json.dumps({"ok": False, "status": "rejected", "effect": "none",
+                        "operation_executed": False, "origin": "tool_catalog",
+                        "reason": "tool_unavailable", "available_tools": sorted(current_schemas)}),
+                    name=call["name"], tool_call_id=call["id"], status="error",
+                )
             if model.research_profile is not None and current.runtime.config.get(
                 "max_concurrency"
             ) != 1:
@@ -289,7 +310,7 @@ def build_agent(
             ], model.active_message_key or "") is not None and call["name"] not in CORRECTION_TOOLS:
                 return ToolMessage(content="Tool unavailable during memory-only correction",
                     name=call["name"], tool_call_id=call["id"], status="error")
-            if schema := parameter_schemas.get(call["name"]):
+            if schema := current_schemas.get(call["name"]):
                 try:
                     validate(call["args"], schema)
                 except ValidationError as error:
@@ -326,12 +347,14 @@ def build_agent(
 
     def select_model(state: dict[str, Any], runtime: Any) -> Any:
         # Bind the exact executable catalog; the selector cannot grant tools.
-        assert model_tool_choice is not None
-        return model.bind_tools(tools, tool_choice=model_tool_choice(state["messages"]))
+        selected = actual_tools(get_config()) if model_tools_provider is not None else tools
+        choice = model_tool_choice(state["messages"]) if model_tool_choice else "auto"
+        return model.bind_tools(selected, tool_choice=choice)
 
     prompt = system_prompt + ("\n" + environment_rules if environment_rules else "")
     return create_react_agent(
-        select_model if model_tool_choice is not None else model,
+        (select_model if model_tool_choice is not None or model_tools_provider is not None
+         else model),
         tools=ToolNode(tools, wrap_tool_call=validate_then_execute),
         prompt=(prompt if persistent_memory_arm is None
                 and local_state_controller is None and not full_history

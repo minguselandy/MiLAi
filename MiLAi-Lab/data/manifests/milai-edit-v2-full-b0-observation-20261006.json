@@ -1,0 +1,470 @@
+{
+  "status": "CLOSED_FULL_B0_COHORT_SAVED_LABELS_NOT_FOUR_ARM_COMPARISON",
+  "observed_at": "2026-10-05T23:04:38.972352+00:00",
+  "source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+  "config_version": "milai-edit-common-v2-i2-durability",
+  "interface": "I2",
+  "arm": "B0",
+  "users": [
+    {
+      "development_user_ordinal": 1,
+      "user": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "maintenance_sessions": 65,
+      "evaluation_sessions": 65,
+      "writer_requests": 66,
+      "writer_length_failures": 29,
+      "session_statuses": {
+        "COMPLETE_ATTEMPTS": 18,
+        "COMPLETE_WITH_GAPS": 47
+      },
+      "receipt_statuses": {
+        "committed": 15,
+        "rejected": 19
+      },
+      "rejection_reasons": {
+        "FunctionalRejection: EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE": 6,
+        "FunctionalRejection: EDIT_CHANGED_CLAIM_REQUIRES_NEW_EVIDENCE": 2,
+        "current_boundary_source_required": 11
+      },
+      "writer_usage": {
+        "prompt_tokens": 1970772,
+        "completion_tokens": 391900,
+        "total_tokens": 2362672
+      },
+      "final_records": 1,
+      "final_record_unit_counts": [
+        168
+      ],
+      "saved_author_labels": {
+        "updates": {
+          "Omission": 75,
+          "Correct": 46,
+          "Omitted": 7,
+          "Hallucination": 14
+        },
+        "qa": {
+          "Correct": 35,
+          "Omission": 32,
+          "Hallucination": 95,
+          "None": 2
+        }
+      }
+    },
+    {
+      "development_user_ordinal": 2,
+      "user": "8ece194a-885c-8e0c-359e-93a97220252c",
+      "maintenance_sessions": 77,
+      "evaluation_sessions": 77,
+      "writer_requests": 78,
+      "writer_length_failures": 28,
+      "session_statuses": {
+        "COMPLETE_ATTEMPTS": 30,
+        "COMPLETE_WITH_GAPS": 47
+      },
+      "receipt_statuses": {
+        "committed": 12,
+        "rejected": 19
+      },
+      "rejection_reasons": {
+        "FunctionalRejection: EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE": 9,
+        "current_boundary_source_required": 8,
+        "FunctionalRejection: EDIT_SHORT_EVIDENCE_UNAVAILABLE": 2
+      },
+      "writer_usage": {
+        "prompt_tokens": 2271057,
+        "completion_tokens": 382802,
+        "total_tokens": 2653859
+      },
+      "final_records": 1,
+      "final_record_unit_counts": [
+        191
+      ],
+      "saved_author_labels": {
+        "updates": {
+          "Omission": 93,
+          "Correct": 41,
+          "Omitted": 16,
+          "Hallucination": 12
+        },
+        "qa": {
+          "Correct": 30,
+          "Hallucination": 118,
+          "Omission": 39,
+          "None": 1
+        }
+      }
+    },
+    {
+      "development_user_ordinal": 3,
+      "user": "6106afc1-6ad6-c821-3f0f-b491e3e0b833",
+      "maintenance_sessions": 62,
+      "evaluation_sessions": 62,
+      "writer_requests": 62,
+      "writer_length_failures": 13,
+      "session_statuses": {
+        "COMPLETE_ATTEMPTS": 26,
+        "COMPLETE_WITH_GAPS": 36
+      },
+      "receipt_statuses": {
+        "committed": 23,
+        "rejected": 35
+      },
+      "rejection_reasons": {
+        "FunctionalRejection: EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE": 11,
+        "current_boundary_source_required": 20,
+        "FunctionalRejection: EDIT_CHANGED_CLAIM_REQUIRES_NEW_EVIDENCE": 1,
+        "FunctionalRejection: EDIT_SHORT_SUPPORT_UNAVAILABLE": 3
+      },
+      "writer_usage": {
+        "prompt_tokens": 1747230,
+        "completion_tokens": 300278,
+        "total_tokens": 2047508
+      },
+      "final_records": 2,
+      "final_record_unit_counts": [
+        176,
+        15
+      ],
+      "saved_author_labels": {
+        "updates": {
+          "Hallucination": 9,
+          "Omission": 78,
+          "Omitted": 4,
+          "Correct": 32
+        },
+        "qa": {
+          "Correct": 50,
+          "Hallucination": 82,
+          "Omission": 36,
+          "None": 1
+        }
+      }
+    },
+    {
+      "development_user_ordinal": 4,
+      "user": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "maintenance_sessions": 73,
+      "evaluation_sessions": 73,
+      "writer_requests": 74,
+      "writer_length_failures": 1,
+      "session_statuses": {
+        "COMPLETE_ATTEMPTS": 35,
+        "COMPLETE_WITH_GAPS": 38
+      },
+      "receipt_statuses": {
+        "committed": 27,
+        "rejected": 56
+      },
+      "rejection_reasons": {
+        "current_boundary_source_required": 47,
+        "FunctionalRejection: EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE": 8,
+        "FunctionalRejection: EDIT_SHORT_EVIDENCE_UNAVAILABLE": 1
+      },
+      "writer_usage": {
+        "prompt_tokens": 1541121,
+        "completion_tokens": 164555,
+        "total_tokens": 1705676
+      },
+      "final_records": 2,
+      "final_record_unit_counts": [
+        16,
+        127
+      ],
+      "saved_author_labels": {
+        "updates": {
+          "Correct": 28,
+          "Omission": 118,
+          "Omitted": 15,
+          "Hallucination": 6,
+          "None": 1
+        },
+        "qa": {
+          "Correct": 50,
+          "Hallucination": 94,
+          "Omission": 40
+        }
+      }
+    }
+  ],
+  "cohort": {
+    "maintenance_sessions": 277,
+    "evaluation_sessions": 277,
+    "writer_requests": 280,
+    "writer_length_failures": 71,
+    "session_statuses": {
+      "COMPLETE_ATTEMPTS": 109,
+      "COMPLETE_WITH_GAPS": 168
+    },
+    "receipt_statuses": {
+      "committed": 77,
+      "rejected": 129
+    },
+    "rejection_reasons": {
+      "FunctionalRejection: EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE": 34,
+      "FunctionalRejection: EDIT_CHANGED_CLAIM_REQUIRES_NEW_EVIDENCE": 3,
+      "current_boundary_source_required": 86,
+      "FunctionalRejection: EDIT_SHORT_EVIDENCE_UNAVAILABLE": 3,
+      "FunctionalRejection: EDIT_SHORT_SUPPORT_UNAVAILABLE": 3
+    },
+    "final_records": 6,
+    "final_units": 693,
+    "writer_usage": {
+      "prompt_tokens": 7530180,
+      "completion_tokens": 1239535,
+      "total_tokens": 8769715
+    },
+    "saved_author_labels": {
+      "updates": {
+        "Omission": 364,
+        "Correct": 147,
+        "Omitted": 42,
+        "Hallucination": 41,
+        "None": 1
+      },
+      "qa": {
+        "Correct": 165,
+        "Omission": 147,
+        "Hallucination": 389,
+        "None": 4
+      }
+    },
+    "official_aggregate_complete": false,
+    "official_aggregation_error": "ZeroDivisionError: absent prefix denominator",
+    "scoring_supplemental": {
+      "total_updates": 595,
+      "empty_update_retrieval": 0,
+      "scored_updates": 595,
+      "valid_scored_updates": 552,
+      "updates_missing_original": 0,
+      "judge_failures": 5,
+      "formed_sessions": 277,
+      "unscored_updates": 0,
+      "invalid_update_judgements": 43
+    },
+    "coverage_totals": {
+      "original_characters": 3782002,
+      "covered_characters": 3782002,
+      "sent_core_characters_union": 3782002,
+      "response_received_core_characters_union": 3782002,
+      "complete_parsed_core_characters_union": 2764825,
+      "sent_characters_including_repeats_and_context": 3782002
+    },
+    "prompt_count_mismatches": 0,
+    "input_boundary_failures": 0
+  },
+  "actual_usage": {
+    "saved_requests": 3210,
+    "saved_responses": 3210,
+    "sent_unconfirmed_requests": 0,
+    "role_requests": {
+      "Writer": 280,
+      "Reader": 705,
+      "author_Judge": 2225
+    },
+    "usage": {
+      "prompt_tokens": 14845437,
+      "completion_tokens": 1696866,
+      "total_tokens": 16542303
+    },
+    "matches_original_start_to_end_ledger": true,
+    "new_generation_unknown_usage": 0,
+    "historical_generation_unknown_usage_at_terminal": 2,
+    "note": "terminal.json reports only the resumed invocation; complete-cohort totals use every saved response and original accounting-start/end."
+  },
+  "new_model_calls_for_analysis": 0,
+  "candidate_selected": false,
+  "product_status": "NO_GO",
+  "limits": [
+    "First-attempt failures and gaps retain the original full denominators.",
+    "Correct counts are saved author labels; failed official aggregation is not repaired or presented as a composite score.",
+    "All Writer/Reader/Judge generations use the existing Qwen3.6 family; the Judge is not independent.",
+    "B1/B2/M are not complete; no paired four-arm conclusion or conditional-edit advantage is established.",
+    "The fourth user has two zero-text-delta commits awaiting Root semantic review; no preservation success is assigned.",
+    "Raw sources, predictions, requests, logs and databases remain local and ignored."
+  ],
+  "fourth_user_diagnostics": {
+    "output": {
+      "writer_batches": 74,
+      "length_batches": 1,
+      "length_summary": {
+        "all_states_unchanged_no_receipts": true,
+        "all_whole_json_incomplete": true,
+        "all_delivered_one_record": false,
+        "copied_complete_fragments": 126,
+        "other_complete_fragments": 1,
+        "copied_fragment_fraction_of_local_output_tokens": {
+          "min": 0.8740234375,
+          "median": 0.8740234375,
+          "max": 0.8740234375
+        },
+        "aggregated_local_tokens_by_unit_fragment": {
+          "envelope_or_incomplete_tail": 972,
+          "literal_old_unit": 7160,
+          "other_complete_unit": 60
+        },
+        "aggregated_local_tokens_by_field": {
+          "envelope_or_incomplete_tail": 972,
+          "complete_unit_syntax": 3557,
+          "text_literal": 1985,
+          "role_literal": 254,
+          "support_arrays": 1424
+        },
+        "local_minus_provider_completion_tokens": {
+          "min": 0,
+          "median": 0,
+          "max": 0
+        }
+      }
+    },
+    "views": {
+      "categories": {
+        "committed": 21,
+        "rejected_only": 31,
+        "complete_empty": 15,
+        "partial_commit_and_rejected": 6,
+        "incomplete_writer": 1
+      },
+      "totals": {
+        "new_or_changed_units": 165,
+        "removed_or_replaced_units": 22,
+        "new_or_changed_relations": 0,
+        "removed_or_replaced_relations": 0,
+        "official_extracted_characters": 113414,
+        "new_or_changed_unit_characters": 14373,
+        "unchanged_text_unit_count": 1299
+      },
+      "zero_text_delta_commits": [
+        {
+          "original_session": 23,
+          "batch": 0,
+          "category": "partial_commit_and_rejected",
+          "committed": 1,
+          "rejected": 1,
+          "state_unchanged": false,
+          "new_or_changed_units": 0,
+          "removed_or_replaced_units": 0,
+          "new_or_changed_relations": 0,
+          "removed_or_replaced_relations": 0,
+          "official_extracted_characters": 2399,
+          "new_or_changed_unit_characters": 0,
+          "unchanged_text_unit_count": 38,
+          "added_support_occurrences": 1,
+          "removed_support_occurrences": 0,
+          "semantic_review": "PENDING_NOT_PRESERVATION_SUCCESS"
+        },
+        {
+          "original_session": 32,
+          "batch": 0,
+          "category": "committed",
+          "committed": 1,
+          "rejected": 0,
+          "state_unchanged": false,
+          "new_or_changed_units": 0,
+          "removed_or_replaced_units": 0,
+          "new_or_changed_relations": 0,
+          "removed_or_replaced_relations": 0,
+          "official_extracted_characters": 2437,
+          "new_or_changed_unit_characters": 0,
+          "unchanged_text_unit_count": 38,
+          "added_support_occurrences": 1,
+          "removed_support_occurrences": 0,
+          "semantic_review": "PENDING_NOT_PRESERVATION_SUCCESS"
+        }
+      ]
+    },
+    "input_distributions": {
+      "provider_prompt_tokens": {
+        "min": 3227,
+        "median": 19905.5,
+        "max": 33952
+      },
+      "provider_completion_tokens": {
+        "min": 8,
+        "median": 2011,
+        "max": 8192
+      },
+      "old_body_tokens": {
+        "min": 0,
+        "median": 780,
+        "max": 2345
+      },
+      "units_delivered": {
+        "min": 0,
+        "median": 54,
+        "max": 144
+      },
+      "old_unit_listing": {
+        "min": 1,
+        "median": 2169,
+        "max": 6164
+      },
+      "historical_support": {
+        "min": 1,
+        "median": 4644.5,
+        "max": 10383
+      },
+      "current_evidence": {
+        "min": 404,
+        "median": 3711.5,
+        "max": 5950
+      },
+      "source_table": {
+        "min": 827,
+        "median": 6971,
+        "max": 10957
+      }
+    },
+    "root_semantic_review": "PENDING"
+  },
+  "run_snapshot": {
+    "observed_at": "2026-10-06T07:08:46.327683+08:00",
+    "arms": {
+      "B0": {
+        "maintenance": 277,
+        "evaluation": 277
+      },
+      "B1": {
+        "maintenance": 63,
+        "evaluation": 63
+      },
+      "B2": {
+        "maintenance": 0,
+        "evaluation": 0
+      },
+      "M": {
+        "maintenance": 0,
+        "evaluation": 0
+      }
+    },
+    "next_candidate_source_commit": "624d15870c021b779c418459588c6c4a2b7cd2b8",
+    "next_candidate_actual_model_calls": 0,
+    "native_and_drift_followup_actual_model_calls": 0,
+    "frozen_old_queue_live": true
+  },
+  "ci_before_publication": {
+    "commit": "3ab1c567c935356a4a286c27257cab11dd4762b2",
+    "Fast": {
+      "run_id": 37366804679,
+      "attempts": 2,
+      "status": "failure",
+      "latest_jobs": {
+        "cancelled": 2,
+        "skipped": 10
+      },
+      "first_job_steps": 0
+    },
+    "Full": {
+      "run_id": 37366804715,
+      "attempts": 2,
+      "status": "failure",
+      "latest_jobs": {
+        "cancelled": 1,
+        "skipped": 12
+      },
+      "first_job_steps": 0
+    },
+    "precise_cancellation_cause": "Unconfirmed; hosted runner delays were reported by GitHub during the first attempts.",
+    "incident_context_url": "https://www.githubstatus.com/incidents/3q1yb5m7ltvb",
+    "not_a_successful_code_check": true
+  }
+}

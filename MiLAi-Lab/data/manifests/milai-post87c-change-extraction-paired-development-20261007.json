@@ -1,0 +1,266 @@
+{
+  "status": "PROTOTYPE_IMPLEMENTED_LOCAL_CHECKS_PASS_FOUR_ACTUAL_BEFORE_PREPARED_NOT_ADMITTED_OR_RUN",
+  "observed_at": "2026-10-06T22:41:20.453419+00:00",
+  "implementation_source": "Commit containing this declaration; precise identity recorded in runtime config before admission.",
+  "rollback_commit": "7ab13edd4c44feabe9cf800365083aded8f47b4f",
+  "baseline_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "plan_sections": [
+    "5.2 conditional B",
+    "6.3 matched actual before comparison",
+    "8 existing shared editor",
+    "8.2 narrow engineering checks",
+    "8.3 first-attempt accounting and serial resources"
+  ],
+  "trigger_evidence": "Baseline first B0 user original3/6: current new facts and old targets delivered, Writer still empty; original7: affected old matter exists but not delivered.",
+  "baseline_closed_result": "milai-post87c-common-dense-B0-first-user-prefix-results-20261007.json",
+  "implementation": {
+    "paths": [
+      "src/milai_lab/methods/edit_memory.py",
+      "src/milai_lab/runners/edit_benchmarks.py"
+    ],
+    "current_source_extraction_calls_per_batch": 1,
+    "candidate_fields": [
+      "subject",
+      "statement",
+      "actual source selections",
+      "known time",
+      "scope"
+    ],
+    "candidate_storage": "Temporary caller task data and ignored request artifacts; no authoritative memory or new Store.",
+    "locator": "Existing same dense K10 over actual visible bank; one batch query from extracted propositions, original query when empty.",
+    "editor": "Existing arm-specific schema, decoder, full rewrite or local operator and MemoryService commit.",
+    "original_sources_still_delivered": true,
+    "candidate_refs_remapped_to_actual_editor_e": true,
+    "empty_extraction_disables_editor": false,
+    "nonempty_extraction_forces_write": false,
+    "common_to_all_four_arms": true,
+    "extra_EditFeatures_flags": 0,
+    "new_generators_verifiers_platforms_Stores": 0,
+    "single_pass_default_messages_unchanged": true,
+    "baseline_frozen_runtime_or_config_changed": false,
+    "normal_Host_uses_same_EditMemory_class": true,
+    "normal_Host_flow_switched": false,
+    "adopted_as_common_flow": false
+  },
+  "prepared_cases": [
+    {
+      "arm": "B0",
+      "declared_user_position": 1,
+      "original_session_ordinal": 3,
+      "actual_before_records": 16,
+      "independent_original_bank_copy": true,
+      "exact_actual_before_values": true,
+      "later_record_versions_and_creation_receipts_removed_from_copy": true,
+      "future_body_or_gold_delivered": false,
+      "current_event_original_bodies_roles_dates_retained": true,
+      "extraction_projected_input_tokens": 12066,
+      "extraction_request_fits": true,
+      "post_extraction_editor_targets_and_capacity": "Pending actual extracted result; no guessed candidates or ideal state.",
+      "original_natural_questions_after_maintenance": 0
+    },
+    {
+      "arm": "B0",
+      "declared_user_position": 1,
+      "original_session_ordinal": 6,
+      "actual_before_records": 20,
+      "independent_original_bank_copy": true,
+      "exact_actual_before_values": true,
+      "later_record_versions_and_creation_receipts_removed_from_copy": true,
+      "future_body_or_gold_delivered": false,
+      "current_event_original_bodies_roles_dates_retained": true,
+      "extraction_projected_input_tokens": 6876,
+      "extraction_request_fits": true,
+      "post_extraction_editor_targets_and_capacity": "Pending actual extracted result; no guessed candidates or ideal state.",
+      "original_natural_questions_after_maintenance": 0
+    },
+    {
+      "arm": "B0",
+      "declared_user_position": 1,
+      "original_session_ordinal": 7,
+      "actual_before_records": 20,
+      "independent_original_bank_copy": true,
+      "exact_actual_before_values": true,
+      "later_record_versions_and_creation_receipts_removed_from_copy": true,
+      "future_body_or_gold_delivered": false,
+      "current_event_original_bodies_roles_dates_retained": true,
+      "extraction_projected_input_tokens": 11396,
+      "extraction_request_fits": true,
+      "post_extraction_editor_targets_and_capacity": "Pending actual extracted result; no guessed candidates or ideal state.",
+      "original_natural_questions_after_maintenance": 8
+    },
+    {
+      "arm": "B0",
+      "declared_user_position": 1,
+      "original_session_ordinal": 4,
+      "actual_before_records": 16,
+      "independent_original_bank_copy": true,
+      "exact_actual_before_values": true,
+      "later_record_versions_and_creation_receipts_removed_from_copy": true,
+      "future_body_or_gold_delivered": false,
+      "current_event_original_bodies_roles_dates_retained": true,
+      "extraction_projected_input_tokens": 10853,
+      "extraction_request_fits": true,
+      "post_extraction_editor_targets_and_capacity": "Pending actual extracted result; no guessed candidates or ideal state.",
+      "original_natural_questions_after_maintenance": 3
+    }
+  ],
+  "finite_execution_scope": {
+    "preselected_original_ordinals": [
+      3,
+      6,
+      7,
+      4
+    ],
+    "independent_copies_not_a_new_continuous_history": true,
+    "baseline_original_outputs_preserved_no_replay": true,
+    "planned_extractors": 4,
+    "planned_editors_at_most": 4,
+    "original_Readers_at_most": 11,
+    "generation_requests_at_most": 19,
+    "Judge_requests": 0,
+    "actual_model_calls": 0,
+    "actual_embedding_calls": 0,
+    "admitted": false,
+    "started": false,
+    "no_retries_or_parsed_truncation_repair": true,
+    "no_independent_holdout_or_stable_causal_claim": true,
+    "evaluate_final_state_non_target_source_fidelity_and_full_answers": true
+  },
+  "configuration": {
+    "generation_family": "Qwen3.6",
+    "thinking": true,
+    "temperature": 1.0,
+    "context_window": 65536,
+    "output_reservation": 32768,
+    "margin": 512,
+    "source_body_tokens": 8192,
+    "retrieval_limit": 10,
+    "retrieval": "BGE-m3 ordinary dense cosine",
+    "seed": "Not provided; do not invent one.",
+    "budget_increase_reset": false
+  },
+  "admission_remaining": [
+    "Verify this prototype source own Fast success",
+    "Observe original four-arm suite terminal and PID exit; existing shared serial lease available",
+    "Freeze prototype source and bind its exact Git commit in separate prepared config",
+    "Preserve all first outcomes; own Full before common full prefix or candidate"
+  ],
+  "engineering_checks": {
+    "distinct_affected_checks_passed": 9,
+    "new_test_functions": 1,
+    "new_parametrized_checks": 4,
+    "existing_controls": 5,
+    "Ruff_files": 3,
+    "mypy_source_files": 2,
+    "active_package_boundary": "PASS",
+    "default_messages_equal_original_actual_cases": 4,
+    "broad_suite_repeated": false,
+    "initial_pytest_collection_error": "Existing venv imported another checkout without PYTHONPATH; rerun scoped command with PYTHONPATH=src, no code change or model HTTP."
+  },
+  "parent_queue_live_snapshot": {
+    "observed_at": "2026-10-06T22:41:20.453419+00:00",
+    "per_arm": {
+      "B0": {
+        "maintenance": 16,
+        "evaluation": 16,
+        "generation_requests": 385,
+        "generation_responses": 384,
+        "terminal": false
+      },
+      "B1": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "terminal": false
+      },
+      "B2": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "terminal": false
+      },
+      "M": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "terminal": false
+      }
+    },
+    "generation_responses": 384,
+    "generation_known_tokens": 1589479,
+    "finish_reasons": {
+      "stop": 384
+    },
+    "encoding_responses": 93,
+    "embedding_known_tokens": 34557,
+    "ledger": {
+      "generation_requests": 39967,
+      "generation": {
+        "charged_tokens": 153079247,
+        "known_tokens": 152916871,
+        "unknown_usage": 4
+      },
+      "embedding": {
+        "charged_tokens": 1009389,
+        "known_tokens": 1009389,
+        "unknown_usage": 0
+      },
+      "limits": {
+        "arms": 3,
+        "embedding_tokens": null,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "questions": 12
+      }
+    },
+    "ledger_stable_during_read": true,
+    "receipt_deltas_match": true,
+    "original_PID_live": true,
+    "suite_terminal_exists": false,
+    "new_prototype_model_calls": 0,
+    "maintenance_count_rule": "Session-level completion only; batch completion is a nested subscope, not another maintenance event."
+  },
+  "accounting": {
+    "last_closed_global_snapshot": {
+      "generation_requests": 39582,
+      "generation": {
+        "known_tokens": 151327392,
+        "charged_tokens": 151439107,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "known_tokens": 974832,
+        "charged_tokens": 974832,
+        "unknown_usage": 0
+      }
+    },
+    "preparation_additional_generation_or_embedding": 0,
+    "live_unknown4_contains_one_pending_reservation": true,
+    "closed_first_B0_user_usage_already_in_parent": true,
+    "not_added_again": true
+  },
+  "remaining_full_scope": [
+    "Same chosen source four-arm 32/72/73 prefix, preselected first-user65/142/164, full277/595/705",
+    "Native32/12/4 and drift, one entry ablation and fixed tighter budget",
+    "Sixteen reserved users after candidate/config freeze",
+    "LongMemEval28/1354/original10 full answers with strong simple baselines",
+    "Normal Host135/192, fresh stories after freeze, forgetting, actual effects and recovery",
+    "Six deliverables and reproducibility/contribution explanation"
+  ],
+  "candidate_selected": false,
+  "reserved_16_users_read": false,
+  "stable_method_advantage_established": false,
+  "product_status": "NO_GO",
+  "goal_complete": false,
+  "publication_scope": {
+    "Lab_files": 9,
+    "source_files": 2,
+    "existing_test_files": 1,
+    "docs_status_declaration_files": 6,
+    "Product_Schema_API_permissions_Canonical_Archive_workflow_changed": false,
+    "private_originals_uploaded": false
+  }
+}

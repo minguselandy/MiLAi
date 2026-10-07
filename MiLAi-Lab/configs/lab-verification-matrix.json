@@ -112,7 +112,11 @@
     "tests/integrations/test_amem_contracts.py",
     "tests/memory/test_functional_edit_memory.py",
     "tests/unit/test_edit_external.py",
-    "tests/unit/test_edit_mechanism.py"
+    "tests/unit/test_edit_mechanism.py",
+    "tests/memory/test_edit_memory_v2.py",
+    "tests/unit/test_edit_v2_runner.py",
+    "tests/unit/test_edit_development_history.py",
+    "tests/unit/test_edit_views.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -187,7 +191,11 @@
     "tests/integrations/test_amem_contracts.py",
     "tests/memory/test_functional_edit_memory.py",
     "tests/unit/test_edit_external.py",
-    "tests/unit/test_edit_mechanism.py"
+    "tests/unit/test_edit_mechanism.py",
+    "tests/memory/test_edit_memory_v2.py",
+    "tests/unit/test_edit_v2_runner.py",
+    "tests/unit/test_edit_development_history.py",
+    "tests/unit/test_edit_views.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",

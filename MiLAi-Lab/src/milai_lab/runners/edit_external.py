@@ -18,9 +18,9 @@ from milai_lab.methods.contextual_memory.retrieval import IndexEntry, hybrid_ord
 from milai_lab.providers.contextual_embeddings import embed_texts_windowed
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.edit_benchmarks import (
-    READER_PROMPT,
     BenchmarkRun,
     parse_object,
+    reader_messages,
     source_batches,
 )
 
@@ -33,24 +33,16 @@ not authorize business actions. Do not add unsupported facts. Return JSON with
 one string field 'summary'. No future questions or reference memories are supplied."""
 
 
-def reader_payload(question: str, date: str, records: list[dict[str, Any]]) -> list[dict[str, str]]:
-    return [
-        {"role": "system", "content": READER_PROMPT},
-        {
-            "role": "user",
-            "content": json.dumps(
-                {
-                    "question": question,
-                    "date": date,
-                    "memories": [
-                        {field: record[field] for field in ("content", "scope", "revision")}
-                        for record in records
-                    ],
-                },
-                ensure_ascii=False,
-            ),
-        },
-    ]
+def reader_payload(
+    question: str, date: str, records: list[dict[str, Any]], *,
+    memory_view: str = "retained_state",
+) -> list[dict[str, str]]:
+    return reader_messages(
+        question, date,
+        [{field: record[field] for field in ("content", "scope", "revision")}
+         for record in records],
+        memory_view=memory_view,
+    )
 
 
 def bound_author_context(result: dict[str, Any], limit: int) -> dict[str, Any]:
@@ -121,8 +113,10 @@ class EmbeddingTransport:
 
 
 class ExternalRun(BenchmarkRun):
-    def __init__(self, settings: dict[str, Any], root: Path) -> None:
-        super().__init__(settings, root)
+    def __init__(
+        self, settings: dict[str, Any], root: Path, *, phase: str = "all"
+    ) -> None:
+        super().__init__(settings, root, phase=phase)
         try:
             self.embedding_client = VLLMClient(
                 VLLMConfig(**settings["embedding"]), budget=self.budget
@@ -159,11 +153,7 @@ class ExternalRun(BenchmarkRun):
             return self.completed_content(read_json(cached))
         if (folder / "request.json").exists():
             raise RuntimeError("Unconfirmed author model request; do not blindly repeat")
-        tokens = len(
-            self.tokenizer.apply_chat_template(
-                messages, tokenize=True, add_generation_prompt=True, enable_thinking=False
-            )
-        )
+        tokens = self.input_tokens(messages)
         if tokens + self.settings["model"]["max_tokens"] + 512 > self.settings["context_tokens"]:
             raise ValueError("Author context unavailable without loss")
         write_json(
@@ -235,7 +225,7 @@ class ExternalRun(BenchmarkRun):
             )
         observed = ObservedSession(source_session, observed.date, observed.turns)
         arm = self.settings["arm"]
-        if arm == "M":
+        if arm in {"B0", "B1", "B2", "M", "Append-only"}:
             return super().maintain(service, observed, key)
         if arm not in {"RawRAG", "RollingSummary", "A-MEM"}:
             raise ValueError("Unsupported external comparison arm")
@@ -368,7 +358,7 @@ class ExternalRun(BenchmarkRun):
 
     def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
         arm = self.settings["arm"]
-        if arm == "M":
+        if arm in {"B0", "B1", "B2", "M", "Append-only"}:
             return super().answer(service, question, date, key)
         path = self.root / "reader-delivery" / key / "memories.json"
         if path.exists():
@@ -423,18 +413,25 @@ class ExternalRun(BenchmarkRun):
                 raise ValueError("Unsupported external comparison arm")
             write_json(path, delivery)
         return self.call(
-            key + "/reader", reader_payload(question, date, delivery["records"]), structured=False
+            key + "/reader", reader_payload(
+                question, date, delivery["records"],
+                memory_view="source_history" if self.settings["arm"] == "RawRAG"
+                else "retained_state",
+            ), structured=False
         )
 
 
-def run_external(settings: dict[str, Any], root: Path) -> None:
-    execution = ExternalRun(settings, root)
+def run_external(settings: dict[str, Any], root: Path, phase: str = "all") -> None:
+    execution = ExternalRun(settings, root, phase=phase)
+    terminal = root / ("terminal.json" if phase == "all" else f"terminal-{phase}.json")
     try:
-        predictions = execution.longmemeval()
+        predictions = execution.longmemeval(phase)
         write_json(
-            root / "terminal.json",
+            terminal,
             {
-                "status": "COMPLETED_EXTERNAL_PHASE",
+                "status": "PREDICTIONS_SAVED" if phase == "predict"
+                else "COMPLETED_EXTERNAL_PHASE",
+                "phase": phase,
                 "arm": settings["arm"],
                 "questions": len(predictions),
                 "source_condition": "shared-history descriptive subset; not independent holdout",
@@ -442,7 +439,7 @@ def run_external(settings: dict[str, Any], root: Path) -> None:
         )
     except Exception as error:
         write_json(
-            root / "terminal.json",
+            terminal,
             {"status": "FAILED", "type": type(error).__name__, "message": str(error)},
         )
         raise

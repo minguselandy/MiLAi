@@ -8,9 +8,27 @@ the runner. No upstream cloud client, automatic retries or process pool is run.
 from __future__ import annotations
 
 import ast
+from collections import Counter
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any
+
+
+def fixed_native_categories(sessions: list[tuple[int, dict[str, Any]]]) -> dict[str, Any]:
+    """Predeclared metadata denominators, supplemental to author's dynamic counts."""
+    categories: dict[str, Counter[str]] = {}
+    for _, session in sessions:
+        if session.get("is_generated_qa_session", False):
+            continue
+        for memory in session["memory_points"]:
+            category = str(memory["memory_type"])
+            counts = categories.setdefault(category, Counter())
+            counts["all_native_opportunities"] += 1
+            is_update = memory["is_update"] == "True"
+            counts["updates" if is_update else "formation"] += 1
+            counts["interference"] += memory["memory_source"] == "interference"
+            counts["updates_missing_original"] += is_update and not memory.get("original_memories")
+    return {category: dict(counts) for category, counts in sorted(categories.items())}
 
 
 def author_functions(path: Path, names: set[str], bindings: dict[str, Any]) -> dict[str, Any]:

@@ -1,0 +1,53 @@
+{
+  "version": "milai-edit-controlled-exposure-v2",
+  "recorded_at": "2026-10-05T13:44:00+08:00",
+  "controlled_manifest": "data/manifests/milai-edit-controlled-dialogues-v1.json",
+  "status": "DEVELOPMENT_EXPOSURE_RECORDED_BEFORE_FINAL_CANDIDATE_FREEZE",
+  "final_candidate_frozen": false,
+  "source_clusters": 3,
+  "variant_histories": 10,
+  "independent_confirmatory_source_clusters": 0,
+  "known_exposure": [
+    {
+      "material": "Full authored controlled histories, questions and review labels",
+      "audience": "Root evaluator and protocol author",
+      "evidence": "Existing authored controlled manifest predates final candidate selection."
+    },
+    {
+      "material": "Full controlled observations and independent-event ordering",
+      "audience": "Engineering test execution",
+      "evidence": "tests/unit/test_edit_mechanism.py::test_controlled_formation_inputs_exclude_reviews_questions_and_future_events"
+    },
+    {
+      "material": "Project P frequency, scoped exception, global condition change and withdrawal development example",
+      "audience": "Plan readers",
+      "evidence": "docs/MILAI_EDIT_V2_FOLLOWUP_DEVELOPMENT_EXPERIMENT_PLAN.md section 7.3"
+    },
+    {
+      "material": "Two-project formation, independent value correction and thanks",
+      "audience": "Stage A interface development",
+      "evidence": "tools/run_edit_interface_checks.py::NORMAL_EVENTS; shared correction/preservation mechanism, different literal history"
+    }
+  ],
+  "cluster_assessment": [
+    {
+      "source_cluster": "report-rule",
+      "variant_count": 3,
+      "overlap": "Authored history already visible to protocol author and engineering tests. Scope, retained holiday condition and withdrawal share the declared R3 development mechanism."
+    },
+    {
+      "source_cluster": "travel-rule",
+      "variant_count": 3,
+      "overlap": "Authored history already visible to protocol author and engineering tests. Scoped exception, global update while retaining an exception, withdrawal and historical erratum are declared development targets."
+    },
+    {
+      "source_cluster": "independent-decisions",
+      "variant_count": 4,
+      "overlap": "Authored history already visible to protocol author and engineering tests. Independent correction, cancellation without inventing an opposite preference and role/modality preservation are development targets."
+    }
+  ],
+  "method_owner_full_history_exposure": "UNKNOWN; no independent attestable historical access record, so no unexposed-source claim",
+  "interpretation": "Keep the existing three clusters and ten histories unchanged. Run actual controlled confirmation only after final candidate and common Writer configuration are fixed, then do not use those results to select or tune the candidate. This is exposed authored mechanism confirmation, not independent unseen-source generalization or natural-user prevalence. Language variants and the independent-order swap remain clustered.",
+  "writer_input_policy": "Runtime receives only the observed dialogue prefix, roles and dates through normal maintenance. Questions, future events and review labels remain evaluator-only. This registry is reporting metadata, never Writer input.",
+  "additional_model_calls_for_registry": 0
+}

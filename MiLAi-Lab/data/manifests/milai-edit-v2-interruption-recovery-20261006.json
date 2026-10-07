@@ -1,0 +1,66 @@
+{
+  "status": "RESUMED_AND_KNOWN_EMPTY_WRITER_RECOVERED_NO_REPEAT",
+  "observed_at": "2026-10-06T03:55:54+08:00",
+  "source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+  "config_version": "milai-edit-common-v2-i2-durability",
+  "interface": "I2",
+  "interruption": {
+    "observed_at": "2026-10-06T03:36:22+08:00",
+    "original_process_and_session_handles_missing": true,
+    "original_exit_code_available": false,
+    "cause": "Unknown; no evidence establishing a model or method failure.",
+    "B0_maintenance_sessions_complete": 254,
+    "B0_evaluation_sessions_complete": 254,
+    "fourth_user_sessions_complete": 50,
+    "saved_model_requests": 2970,
+    "saved_model_responses": 2970,
+    "sent_unconfirmed_requests": 0,
+    "historical_generation_unknown_usage_without_inflight": 2,
+    "embedding_unknown_usage": 0
+  },
+  "recovery": {
+    "frozen_source_unchanged": true,
+    "configuration_unchanged": true,
+    "original_output_reused": true,
+    "completed_checkpoints_reused": true,
+    "cached_request": {
+      "arm": "B0",
+      "development_user_ordinal": 4,
+      "original_session_ordinal_zero_based": 50,
+      "writer_source_batch": 0,
+      "saved_complete_stop_response": true,
+      "unique_saved_response_and_usage_unchanged": true,
+      "saved_proposals_empty": true,
+      "maintenance_complete_marker_present": true,
+      "receipts_empty": true,
+      "extracted_empty": true,
+      "before_after_equal": true,
+      "new_writer_calls_for_this_request": 0
+    },
+    "old_waiter_status_files_preserved": true,
+    "restored_waiters": [
+      "native_and_drift_after_full_277x4",
+      "next_candidate_R3_after_old_full_native_and_drift",
+      "fourth_user_readonly_diagnostics_after_73x2_checkpoints"
+    ]
+  },
+  "snapshot": {
+    "B0": {"maintenance_complete": 257, "evaluation_complete": 257, "declared_sessions": 277},
+    "B1": {"maintenance_complete": 0, "evaluation_complete": 0, "declared_sessions": 277},
+    "B2": {"maintenance_complete": 0, "evaluation_complete": 0, "declared_sessions": 277},
+    "M": {"maintenance_complete": 0, "evaluation_complete": 0, "declared_sessions": 277},
+    "fourth_user": {"maintenance_complete": 53, "evaluation_complete": 53, "declared_sessions": 73},
+    "native_and_drift_followup_actual_calls": 0,
+    "next_candidate_actual_calls": 0
+  },
+  "analysis_new_model_calls": 0,
+  "candidate_selected": false,
+  "product_status": "NO_GO",
+  "limits": [
+    "Restoring an interrupted process is distinct from retrying a failed or unconfirmed model attempt.",
+    "Empty receipts and unchanged state establish replay behavior, not semantic preservation success.",
+    "Static source inspection supports finite expensive prefix scans; no actual stack or SQL plan was captured.",
+    "All following never-issued requests retain ordinary first-attempt accounting and failure denominators.",
+    "The full four-arm comparison and all remaining plan deliverables are incomplete."
+  ]
+}

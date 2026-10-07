@@ -1,10 +1,351 @@
 # MiLAi-Edit reproduction instructions
 
+**2026-10-06 14:10:30 UTC：ab8有限真实复核已正常结束。**
+
+源码`ab8f475`、事前声明`7add825`、配置`milai-edit-post-b0-schema-shared-choices-affected-first-user-v1`，使用冻结正常driver，B1第一开发用户自己的空库前8，19更新机会/20QA。
+实际维护8/评估8，188响应全stop/639,421 known；8 Writer/20 Reader/160原作者Judge。说明schema共享定义实际出现，packet与实际HTTP逐一相同；8输入均<32256，原失败ordinal3/4/7均送达，首尝试不重试。
+原模型/thinking/temp1/max32768/context65536/512余量/300秒与Reader/评分保持；保留None1、Omitted Update2、QA null2。原作者离线聚合成功，记录和完整回答分别匹配保存结果和HTTP。
+Root读完8前后状态/8实际提案/20回答，来源选择性。3实际空提案、1旧证据编辑拒绝与4状态不变单列，不能用容量通过、合法格式或不修改代替语义成功。
+固定历史状态/原始饮食问题的只读正文词匹配对照沿用冻结词元和排序，事实日期原样保留；旅行误命中消失，饮食卡仍零匹配。无embedding/Reader调用或存储/排名修改，普通语义＋词匹配和同Reader效果仍待验证。
+连续闭合账本39119/149346200known/149457915charged，unknown3/embed964645保持；有限188与旧活动78快照重叠，不再次计费。与7b82四组分数分开，不能续接旧前缀伪造同版65/277。
+raw/gold/预测/HTTP/reasoning/数据库/私有配置/日志和Root助手保持ignored。
+[有限终态与检索比较](../data/manifests/milai-edit-post-b0-schema-shared-choices-finite-results-20261006.json)；原完整计划范围不变，下方保留历史复现。
+
+**2026-10-06 13:47:09 UTC：冻结四组前缀已闭合；ab8有限真实复核已绑定原声明启动。**
+
+四组实际源码`7b82c60`、配置`milai-edit-post-b0-unit-correspondence-main-v1`、共同I2和各自空库，均32会话/72更新/73QA。
+实际响应及用量逐对核对：2,412响应/8,650,621 known，M Judge512唯一已知length，原响应/usage/无效评分保留。M原作者离线聚合成功、原checkpoint处理后与保存结果精确一致，不重跑模型或修补JSON。
+输入修复源码`ab8f475`及事前声明`7add825`自身Fast/Full在13:26:57 UTC成功；旧队列正常退出后，13:36:08 UTC使用冻结ab8归档中的正常`tools/run_edit_suite.py`启动有限B1首位开发用户前8，从自己的空库形成19更新机会/20QA。
+沿用现有Qwen3.6/thinking=true/temp1/max32768/context65536/512余量/input32256/timeout300、原Reader/官方评分和连续账本；不扩大范围、提高预算、注入旧状态或覆盖7b82失败。
+2026-10-06 13:47:09 UTC快照维护3/评估2、78请求/77响应/212,775 known/1待响应；PID1628748及实际冻结命令匹配，最终分数null。报告提交不替换运行源码，活动费用不混入旧队列闭合账本。
+已有37固定失败输入投影保持原packet/mapping/系统/日期/API schema；不是新历史或语义验证，不扩充投影采样。
+第三用户ordinal5/6实际HTTP包含旧就业/健康，完整响应分别为空和3create/14条款，无旧目标变化；原User发生时间保留，历史有效性与当前适用性分开。
+固定状态/原查询的共同词匹配与语义检索比较尚未运行；原冻结检索/模型输出不改。真实时间保留，展示元数据的相关性作用单独检验。
+复核仅Root选择性来源和同家族Judge；raw/gold/HTTP/reasoning/DB/config/log/Root助手保持ignored。
+[四组结果、实际目标诊断与有限运行快照](../data/manifests/milai-edit-post-b0-stage-c-four-arm-prefix-results-20261006.json)；原65/277和其余完整计划仍保留，下方为原日期复现历史。
+
+## Latest M three-user subset (2026-10-06 13:09:44 UTC)
+
+Frozen7b82/I2 has closed B0/B1/B2 four-user first8; M first3 users are Root-reviewed,
+fourth user remains running. [The24-session M subset](../data/manifests/milai-edit-post-b0-stage-c-m-first-three-user-prefix-results-20261006.json)
+is not a full M score. Reproduce from exact7b82 source and its immutable normal
+driver configuration; do not substitute current report HEAD or repaired sources.
+All33 fixed failed-input ab8 projections fit offline; finite B1 first-user8 own-empty
+check remains unadmitted/model0 pending normal queue exit and actual admission binding.
+Exact frozen retrieval diagnosis uses original query and actual historical state,
+without changing outputs. Native B0/B1/B2 capacity preparation has31/32 available
+opportunities,11 sessions, model0/semanticnull; original session16 and full277 drift
+remain outstanding. No-delta counts are not preservation scores.
+ab8 source/declaration and external d547 ownFast/Full success queried 2026-10-06 13:10:09 UTC;
+external actual calls0/not admitted. Preserve original labels/gold, first failures,
+actual states, continuous ledger and version-separated configurations/results.
+This publication starts no model calls. The following sections retain dated scopes.
+
+## Latest M subset and source-own CI (2026-10-06 12:34:04 UTC)
+
+Frozen7b82/I2 four-user first8 has closed B0/B1/B2; M is still running.
+[M first-user8 results](../data/manifests/milai-edit-post-b0-stage-c-first-user-m-prefix-results-20261006.json) are a closed subset,
+not a full M score. Reproduce with exact7b82 source and its immutable config.
+All28 fixed failed-input ab8 projections fit offline; its declared finite B1
+first-user8 own-empty real check remains unadmitted/model0 until queue exit.
+External source d547 ownFast/Full success queried 2026-10-06 12:35:01 UTC; existing22
+unit tests and synthetic tokenizer proof are engineering evidence, external
+actual calls0/not admitted. Do not substitute it into the ab8 declaration.
+Original author labels/gold, first failures, budget ledger and all historical
+configs/results are retained. No new model calls are needed for publication.
+The following sections retain their dated scopes and CI observations.
+
+## Current frozen prefix and external counter source (2026-10-06 12:03:58 UTC)
+
+See [current results](MILAI_EDIT_CHECKPOINT_20261006.md),
+[prefix/long-smoke declaration](../data/manifests/milai-edit-post-b0-prefix-and-long-smoke-development-20261006.json),
+and [closed B2 results](../data/manifests/milai-edit-post-b0-stage-c-b2-four-user-prefix-results-20261006.json).
+Frozen7b82/I2 first8 runs have closed B0/B1/B2; M is still live. Reproduce that
+experiment using its exact7b82 source and declared parameters, not current HEAD.
+The normal tools/run_edit_suite.py and BenchmarkRun remain the execution path.
+Original first failures, own-empty formation and accounting must be retained.
+
+Separate ab8 compact explanatory schema preserves the original API generation
+contract.26 actual failed inputs fit offline; its declared finite B1 first-user8
+real check remains CI-bound but unadmitted until current queue normal exit.
+Do not silently use d547 or another source for the ab8 declaration.
+
+External callback source d5476bd790a315480436a7bfbb1b258514483c84 reuses common
+input_tokens(messages), so configured thinking and provider prompt counting
+agree. Explicit legacy false requests are unchanged.22 existing external tests,
+Ruff2/mypy1 and real local tokenizer with synthetic completions pass; source own
+Fast/Full are pending as of12:04:28. External actual model calls0/not admitted.
+This does not change original A-MEM operations/prompt/schema, reader budgets,
+no-replay, main frozen source, or the finite ab8 protocol. It is not a semantic
+result, final candidate, or explanation for main B1/B2 capacity failures.
+
+The following sections retain their dated historical scopes.
+
+
+## Current source-control and identity-repair checkpoint (2026-10-06 15:06:50)
+
+Use [the current checkpoint](MILAI_EDIT_CHECKPOINT_20261006.md) and the separate
+[complete7cc results](../data/manifests/milai-edit-post-b0-common-source-reader-complete-results-20261006.json)
+and [7b82 affected12 results](../data/manifests/milai-edit-post-b0-whole-rewrite-identity-results-20261006.json).
+All original7cc141 slots are accounted:141 attempts/140 responses/604072 known.
+Transport300 executes only102 originally unattempted tasks;180second unknown
+Writer is not replayed. The historical66 result/predeclarations/raw terminals
+remain unchanged. These counts span transport configs and are cost accounting.
+
+New frozen source7b82c60e04755f385e5f80658ed67e4067826093 adds opt-in from_unit
+correspondence on whole-rewrite content/conditions, separate from factual support.
+The existing public tools/run_edit_development_history.py with ordinary
+BenchmarkRun/MemoryService ran the predeclared neutral two-event history from
+four own-empty banks:8Writer4Reader/48474known/allstop. B2 actually emitted
+from_unitu1/u2/u3, retained original condition bindings and used current evidence
+for the changed cutoff; four core answers complete. B1 old direct unit support
+was lost. This ordinary correction control does not test exception lifecycle.
+Do not reproduce frozen7cc with7b82, inject ideal prior state, repair truncated
+JSON or merge configuration scores. Model/gold/source controls are not Host tasks.
+
+The common affected profile is I2/Qwen3.6 only, thinking=true, temperature1,
+max_tokens32768, timeout300, context65536, current_source_tokens4096,
+current+old_body8192, retrieval_limit10, working_sets=false. Writer/Reader/scorer
+and method source identities remain bound separately from documentation commits.
+Source ownFast success/Full in_progress at15:06:50; prefix/candidate/merge require
+own Full success. First finite12 was daily development under plan7.2 after294
+checks with ownCI bound, both in_progress at firstHTTP; that fact is preserved.
+
+StageC is offline-prepared, not started/admitted: perarm four development users'
+chronological first8 (32sessions/72update opportunities/73QA), then preselected
+first user full65 (142updates/164QA) from each own actual same-version prefix.
+Publish and bind its full protocol before any newHTTP; no extra perfect-R3 gate.
+All deferred full/native/drift/reserved/external/ordinaryHost scopes remain.
+The following headings and running/not-started claims retain their dated history.
+
+Current v2 execution is described in
+[the v2 progress report](MILAI_EDIT_V2_PROGRESS_20261005.md). The v1 commands
+below retain their historical configuration and results. v1 M ended FAILED
+after a Reader disconnect; it is not an active queue awaiting completion.
+
+## Current bound-clause and native-capacity checkpoints
+
+Frozen497b8d8 now completed original44/global36:80calls/162068known,allstop,
+35committed/4rejected/1no_change plus4empty envelopes. Root reviewed44events/
+36answers and80pairedHTTP/usage. Both B2/M formations create actual conditions
+and edges; ordinary changes retain unmentioned limits, but scope/global changes/
+withdrawal still fail. No candidate/prefix. Keep the original44 snapshot below
+and raw runtime terminals/configs unchanged.
+
+The next [finite native-capacity declaration](../data/manifests/milai-edit-post-b0-native-capacity-development-20261006.json)
+uses the same source/archive/instructions/schema/Reader/scorer, same arms and
+own-empty input branches, with thinking=true,temperature1,max_tokens32768 for all
+Writer/Reader. Context65536/source4096/retrieval10/working_sets=false remain.
+Only supported existing transport options change; other sampling defaults are
+not the full vendor-recommended profile. No new code, warning examples, model,
+source-control/prefix/reserved admission or replay. Actual0 before new HTTP;
+bind the new config/source and own CI, review original44 before global36. Full
+success remains required before prefix/candidate/merge. Model configuration
+effects do not establish M method advantage.
+
+## Historical bound-clause original44 snapshot (11:31)
+
+The five existing opt-in features now expose create/rewrite as clauses: conditioned
+B2/M clauses declare condition bodies, separate binding supports and explicit
+shared reuse/override targets; plain B0/B1 clauses contain full qualified text.
+The Writer's old-state view groups actual existing edges only. Storage, Reader,
+scorer, reference/origin/CAS checks and default-off contracts stay unchanged.
+No full-rewrite omissions or orphan links are filled in.
+
+145 existing source/SDK tests and 295 Root runner/normal-Host tests pass, along
+with Ruff, strict method mypy, 24 actual default-off instruction/schema pairs and
+identical B2/M/low-level-M formation schemas. The finite original44/global36
+[declaration](../data/manifests/milai-edit-post-b0-bound-clauses-development-20261006.json)
+retains its historical before-call actual0. Actual source/config/own CI were
+bound before HTTP: source `497b8d89f37ebe795e1e79f8791fe5ddd9289ed9`, configuration
+`milai-edit-post-b0-i2-bound-clauses-v1`, matching
+8ed7826's nonthinking/temp0/output8192/budgets and common I2/five enabled features.
+Use the existing public next-development config as the parameter base; Root's
+run binding records the final ordinary version/config without modifying old runs.
+
+At 2026-10-06 11:31:00 Asia/Shanghai original44 is complete and Root reviewed:
+24 Writer/20 Reader/0 Judge, 86445 known tokens (82875 prompt/3570 completion),
+44 stop/no length. B2/M actually form two conditions/two modifies edges each;
+all four ordinary corrections preserve unmentioned limits and old body supports.
+Scope and withdrawal still fail. M changes the general value, retracts valid
+shared limits and later misses newly restated limits; no add/remove exception.
+Two B2 rejections leave old state unchanged without completing maintenance.
+All four queries leave exact state unchanged; M uses valid targeted no_change.
+17 committed/2 rejected/1 no_change and four empty envelopes are operation counts,
+not semantic scores. [Reviewed results](../data/manifests/milai-edit-post-b0-bound-clauses-results-20261006.json)
+distinguish those outcomes; raw terminal and first attempts remain unchanged.
+
+Global36 is declared but unstarted, not cancelled. Continue it only with the same
+ordinary source archive/config and its own empty banks; this report launches no
+model calls. No new source controls/prefix/reserved trial is admitted. Source
+Fast37408624077 succeeded (8 success/4 scoped skips) at 11:34:13;
+Full37408624028 remains in progress. Require own
+Full success before candidate/prefix/merge. Frozen config description own_ci IDs
+were inherited from 8ed7826, while the actual497 own CI was recorded separately
+in the pre-HTTP run binding. Preserve that original config and use the result's
+provenance note; inherited IDs do not establish new-source CI success.
+
+The separate frozen2335ea9 thinking diagnostic is now fully closed:80calls,
+348003known tokens,71stop/9length, no new unknown or embedding. Both M formations
+fail length; add/remove each applies twice but final Reader remains incomplete.
+Root reviewed all44event rows/36answers. Its source/mode and the new 497b8d8
+nonthinking original44 are separate cohorts with separate results.
+These are different source/config cohorts, never one method score table.
+
+The following original44 checkpoint remains the historical pre-global snapshot.
+
+## Latest model-mode checkpoint (2026-10-06 10:58:17 Asia/Shanghai)
+
+Frozen Git source `2335ea9e3a1d0df5efdd69bedd2ef70f0c58ea3e` follows the configured thinking mode
+for prompt token projection. Writer/method/schema/operators remain those of
+`8ed7826`. Configuration `milai-edit-post-b0-i2-thinking-mode-diagnostic-v1`
+changes only enable_thinking=true for all four arms' Writer/Reader; temperature0,
+max_tokens8192 and other budgets remain fixed. Actual original44 is complete:
+24 Writer/20 Reader, 184643 known tokens (including reasoning once), 39 stop/5
+length, no new unknown usage. Global36 is prepared but unstarted. The published
+[predeclaration](../data/manifests/milai-edit-post-b0-model-mode-diagnostic-20261006.json)
+retains its before-first-call zero; use the [reviewed result](../data/manifests/milai-edit-post-b0-model-mode-results-20261006.json)
+for the current state. Original runtime terminal remains awaiting-review as written
+at process exit; the dated Root review is later and does not alter raw attempts.
+
+All four queries are empty and exact-state unchanged. M applies add_exception
+and remove_exception while retaining its actual general rule; its initial
+formation length failure leaves shared limits absent, and final Reader scope
+answers remain incomplete. No candidate/prefix admission or independent Judge.
+This fixed-profile mode diagnostic does not establish conditional-edit advantage
+or vendor-optimal thinking behavior. No truncated response repair or retries.
+
+The active working-tree clause/binding/grouped-view change is still implementation
+in progress, unvalidated and excluded from this report. Never reproduce the frozen
+mode run using that dirty tree. Use the recorded ordinary Git archive, bound
+configuration, declared inputs and a newly declared output, never overwrite raw
+results or repeat unknown effects. No model calls are needed for this publication.
+Remaining old/new full/native/drift/reserved/external/Host scope remains incomplete.
+
+The following 132-call checkpoint is historical, not the latest mode result.
+
+## Published nonthinking checkpoint (10:20, 2026-10-06)
+
+The actual final minimal-example recheck and source controls both used ordinary
+Git source `8ed7826b845e2d019a40c7534e92ea792f435f03`, not the subsequent report
+commit. Configurations were `milai-edit-post-b0-i2-final-examples-8ed7826` and
+`milai-edit-post-b0-i2-source-controls-8ed7826`: I2, all five opt-in features,
+Qwen3.6-35B-A3B-FP8, temperature=0, enable_thinking=false, context=65536,
+max_tokens=8192, source_tokens=4096, retrieval_limit=10, working_sets=false.
+The original44/global36 and constructed source16/20/16 scenarios used separate
+own-empty-bank histories, no ideal starting cards and no Judge. All 132 calls
+returned stop, costing 236165 known tokens; raw inputs, HTTP and banks remain
+ignored. [The safe aggregate](../data/manifests/milai-edit-post-b0-final-repair-and-source-controls-20261006.json)
+records counts, costs, actual attempted/applied operations and limits.
+
+These are reviewed critical failures, not successful candidate admission.
+Ordinary preservation and limited empty-query controls improved; scoped updates
+still destroy the general rule, withdrawal fails, and unsupported assistant
+statements become user claims in B1/M. Two minimal repairs are exhausted; further
+warning/example iterations are not admitted. No model-mode comparison or new
+representation contract has run. The original runtime terminal's awaiting-review
+marker is an execution snapshot; the dated Root review supplies the later semantic
+conclusion. Reproduction never overwrites an old output or replays unknown calls.
+
+Old 4357d46 is closed B0=277/277, B1=115/277 at a verified complete boundary,
+B2/M unstarted; no model queue is currently live. Remaining original and new
+full-history/native/drift/held-out/external/Host work remains incomplete.
+
+## Exposed v2 R3 development histories
+
+The public driver is `tools/run_edit_development_history.py`. The original six
+events/five questions declare 44 calls across four independently formed banks;
+the global-condition branch declares 36. Both branches share one exposed source.
+The actual first attempts used the archived Root driver and `4357d46` source:
+80 calls, 120,345 known tokens, no new unknown usage. Publishing this entry point
+does not add a new model trial or change the original results.
+
+Use `FROZEN_RUN` for the Lab source preserved at ordinary Git version `4357d46`,
+`V2_LAB` for this checkout containing the public driver/configuration/declarations,
+and `MILAI_EDIT_PY` for the installed interpreter described below. Outputs must
+be new declared runs. Never change an output path to repeat an unconfirmed request.
+The selected shared configuration remains `milai-edit-common-v2-i2-durability`.
+
+```bash
+PYTHONPATH="$FROZEN_RUN/src" "$MILAI_EDIT_PY" "$V2_LAB/tools/run_edit_development_history.py" \
+  --config "$V2_LAB/configs/milai-edit-v2-e1-i2.json" \
+  --inputs "$V2_LAB/data/manifests/milai-edit-v2-r3-development-behavior.json" \
+  --output "$R3_ORIGINAL_OUT" --source-version 4357d46
+PYTHONPATH="$FROZEN_RUN/src" "$MILAI_EDIT_PY" "$V2_LAB/tools/run_edit_development_history.py" \
+  --config "$V2_LAB/configs/milai-edit-v2-e1-i2.json" \
+  --inputs "$V2_LAB/data/manifests/milai-edit-v2-r3-development-global-condition.json" \
+  --output "$R3_GLOBAL_OUT" --source-version 4357d46
+```
+
+Adding `--prepare` validates the declaration and saves only actual Writer
+observations without constructing a model client or acquiring the HTTP lease.
+Preparation needs its own output directory. Actual execution uses the existing
+serial ledger/lease, semantic-only Reader and actual MemoryService. Evaluator
+requirements and questions do not enter Writer observations. A terminal completion
+means attempts completed, not semantic success; review `actual-behavior.json`,
+receipts, before/after states and answers. New unknown usage or an exception stops
+the driver without replay. This development driver is not the controlled final
+candidate confirmation; that remains after the eventual candidate/Writer freeze.
+
+The same driver accepts an event's `observed_dialogue` instead of
+`observed_user_text`, preserving actual user/assistant messages' `role`, `content`
+and optional `timestamp`. An absent message timestamp is represented as null and
+remains unknown; the event date does not become its statement time. Other role
+types use their existing functional tool-observation path, not this dialogue
+driver. `reader_questions` supports several questions
+after that event's maintenance, with distinct saved calls and answers. These
+questions and evaluator requirements remain outside Writer observations. Original
+single-user/single-question declarations retain their inputs, call counts and
+saved paths. Source-attribution controls use separate own-empty-bank runs per
+scenario; declaring or preparing them is not actual model validation.
+
 Prepared during execution; this file does not claim completion of unrun stages.
 See [progress](MILAI_EDIT_PROGRESS.md), [analysis](MILAI_EDIT_ANALYSIS_SPEC.md) and
 the [original plan](MILAI_EDIT_LITERATURE_AND_EXPERIMENT_PLAN.md). The baseline is
 PR82 `fc1c6c93f6e75f8775e2d5195bb35e6e8ce0e0b1`. Preserve all older worktrees,
 historical cohorts and their original results. New experiments use separate roots.
+
+## Opt-in I2 contracts: real development failures, no candidate selected
+
+`configs/milai-edit-v2-next-development.json` prepares the same four exposed users'
+first eight chronological sessions and all four own-empty-bank arms. The five
+`edit_features` booleans enable matter organization, semantic operations,
+packet-bound references, one change container per record, and source/assertion
+metadata. All default to false; the old `4357d46` source, configuration and saved
+results remain intact. These changes have no new algorithm name, model family,
+review agent, output repair or full-rewrite backfill.
+
+The template's `writer_source_commit=null` and `PREPARED_NOT_RUN` admission are
+intentional. Before real HTTP, record the actual ordinary Git source version and
+its own CI in a separate immutable run configuration. Do not copy the old
+`4357d46` source identity onto new code. The continuous accounting ledger and
+single HTTP owner are shared with the old queue. Start with the two already
+exposed R3 declarations above using the new bound configuration and new outputs;
+each arm still forms its actual history from its own empty bank. The existing
+`run_edit_development_history.py --prepare` only checks the declaration and
+prepares observations; it does not establish behavioral success. Review actual
+formation, unmentioned preservation, scoped exception creation/removal, common
+conditions, source attribution and read-only behavior before the prefix and a
+fresh complete four-arm comparison. Reserved users and new functional stories
+still follow final candidate/Writer freeze.
+
+The next Writer envelope is `{"creates": [...], "records": {"r1": {...}}}`. A record
+key has one change container, with dependent edits inside it; missing keys imply
+no maintenance for those records. The same actual packet schema is used for
+preflight and generation. Duplicate JSON object keys are rejected before parsing
+can silently replace an earlier change. Reference enums choose only delivered
+aliases; they do not establish semantic support. vLLM documents JSON Schema
+generation with enum fields in its [official structured-output example](https://docs.vllm.ai/en/stable/features/structured_outputs/#online-serving-openai-api);
+the specific installed service and new schema still require real verification.
+
+Normal Host accepts the same `edit_features` with `edit_interface_version="I2"` and
+an existing edit memory method. Its dynamic catalog follows `writer_context`,
+with the same executable tools and existing permission/recovery boundaries.
+`occurred_at`/`--occurred-at` accepts an actual caller-supplied statement time;
+missing time remains unknown and differs from the source capture clock.
+Imported user/assistant sources can supply `occurred_at` or `timestamp` explicitly.
+Assertion kind and actual source role/time are stored and rendered across all
+arms. This source path and synthetic checks are not E5 functional acceptance.
 
 ## Local environment and source material
 

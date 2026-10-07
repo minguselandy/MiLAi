@@ -46,6 +46,7 @@ from milai_lab.memory.observation import (
 from milai_lab.memory.observation import (
     observation_view as field_observation_view,
 )
+from milai_lab.memory.retrieval import SemanticRetriever, semantic_text
 
 
 def _json(value: Any) -> str:
@@ -149,6 +150,10 @@ class MemoryService:
         observation_capture_feedback: str = "legacy",
         functional_contract: str = "legacy",
         observer: Callable[[dict[str, Any]], None] | None = None,
+        semantic_retriever: SemanticRetriever | None = None,
+        memory_profile: str = "ordinary",
+        memory_ranking: str = "dense",
+        clock: Callable[[], datetime] | None = None,
     ) -> None:
         if functional_contract == "functional_v1":
             mutation_contract = (
@@ -169,8 +174,14 @@ class MemoryService:
         if namespace[-1] != owner:
             raise ValueError("V13_MEMORY_OWNER_NAMESPACE_MISMATCH")
         self.store, self.namespace, self.owner = store, namespace, owner
+        self.semantic_retriever = semantic_retriever
         self._thread_lock = threading.RLock()
         self._lock_depth = 0
+        self.memory_profile = memory_profile
+        if memory_ranking not in {"dense", "activation"}:
+            raise ValueError("MEMORY_RANKING_INVALID")
+        self.memory_ranking = memory_ranking
+        self.clock = clock or (lambda: datetime.now(UTC))
         self.mode, self.lock_path = mode, lock_path.resolve()
         self.receipt_contract = self.validate_receipt_contract(receipt_contract)
         self.mutation_contract = self.validate_mutation_contract(mutation_contract)
@@ -1322,11 +1333,23 @@ class MemoryService:
             self.store.put(ns, key, {"source_ref": source_ref}, index=False)
             return str(source_ref)
 
-    def capture_user(self, session: str, event_key: str, content: Any) -> dict[str, Any]:
+    def capture_user(
+        self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None
+    ) -> dict[str, Any]:
         """Capture an actual incoming user event, not a model-selected source body."""
-        return self._capture(session, event_key, "user", "public_user_message", content, None)
+        return self._capture(
+            session,
+            event_key,
+            "user",
+            "public_user_message",
+            content,
+            None,
+            occurred_at=occurred_at,
+        )
 
-    def capture_assistant(self, session: str, event_key: str, content: Any) -> dict[str, Any]:
+    def capture_assistant(
+        self, session: str, event_key: str, content: Any, *, occurred_at: str | None = None
+    ) -> dict[str, Any]:
         """Trusted actual assistant message; proposals/packets are never original messages."""
         if self.mutation_contract != "event_bound_v1":
             raise ValueError("V13_ASSISTANT_CAPTURE_REQUIRES_EVENT_BOUND")
@@ -1347,7 +1370,13 @@ class MemoryService:
                         kind="assistant_output",
                     )
         return self._capture(
-            session, event_key, "assistant", "public_assistant_message", content, None
+            session,
+            event_key,
+            "assistant",
+            "public_assistant_message",
+            content,
+            None,
+            occurred_at=occurred_at,
         )
 
     def capture_tool(
@@ -1357,9 +1386,13 @@ class MemoryService:
         tool_name: str,
         content: str,
         object_ref: VerifiedObjectRef | None,
+        *,
+        occurred_at: str | None = None,
     ) -> dict[str, Any]:
         """Trusted application adapter only; this API is never a Host tool."""
-        return self._capture(session, event_key, "tool", tool_name, content, object_ref)
+        return self._capture(
+            session, event_key, "tool", tool_name, content, object_ref, occurred_at=occurred_at
+        )
 
     def _capture(
         self,
@@ -1369,7 +1402,13 @@ class MemoryService:
         origin: str,
         content: Any,
         object_ref: VerifiedObjectRef | None,
+        *,
+        occurred_at: str | None = None,
     ) -> dict[str, Any]:
+        if occurred_at is not None and (
+            not isinstance(occurred_at, str) or not occurred_at.strip()
+        ):
+            raise ValueError("V13_SOURCE_OCCURRENCE_TIME_INVALID")
         event_id = self.event_id(session, event_key, role)
         if self._functional_hidden(source_ref=event_id):
             actual = self._source(event_id, binding_only=True)
@@ -1413,13 +1452,19 @@ class MemoryService:
             "content": body,
             "source_revision": 1,
             "capture_key": event_key,
-            "observed_at": datetime.now(UTC).isoformat(),
+            "observed_at": self.clock().isoformat(),
             "object_ref": asdict(object_ref) if object_ref is not None else None,
         }
+        if occurred_at is not None:
+            event["occurred_at"] = occurred_at
+        if self.memory_profile == "unified_v1":
+            event["episode_id"] = reference_key([session, event_key, role])
         with self._locked():
             prior = self.store.get(self.sources_namespace, event_id)
             formed = False
             if prior is not None:
+                if occurred_at is not None and prior.value.get("occurred_at") != occurred_at:
+                    raise ValueError("V13_SOURCE_OCCURRENCE_TIME_CHANGED")
                 comparable = {
                     key: dict(event)[key]
                     for key in (
@@ -1485,6 +1530,12 @@ class MemoryService:
                         "error_type": type(error).__name__,
                     }
                 self._uncertain_captures.discard(event_id)
+        episode_id = event.get("episode_id")
+        if self.memory_profile == "unified_v1":
+            from milai_lab.memory.episodes import EpisodeIndex
+
+            episode_id = episode_id or reference_key([session, event_key, role])
+            EpisodeIndex(self).register(episode_id, [event_id])
         return {
             "ok": True,
             "status": "raw_captured",
@@ -1492,6 +1543,7 @@ class MemoryService:
             "observed_at": event["observed_at"],
             "formation_status": "formed" if formed else "pending",
             "object_ref": event["object_ref"],
+            **({"episode_id": episode_id} if episode_id is not None else {}),
             **({"visibility": "revoked"} if self._functional_hidden(source_ref=event_id) else {}),
         }
 
@@ -1767,6 +1819,67 @@ class MemoryService:
                 result.append({**event, "formation_status": "formed" if formed else "pending"})
             return sorted(result, key=lambda event: (event["observed_at"], event["event_id"]))
 
+    def episodes(
+        self,
+        *,
+        episode_ids: list[str] | None = None,
+        pending_only: bool = False,
+        limit: int | None = 20,
+    ) -> list[dict[str, Any]]:
+        """Visible source-backed episodes in this same owner's Store."""
+        from milai_lab.memory.episodes import EpisodeIndex
+
+        return EpisodeIndex(self).select(
+            episode_ids=episode_ids, pending_only=pending_only, limit=limit
+        )
+
+    def index_source_episodes(self) -> dict[str, Any]:
+        """Add episode indices for visible older sources without recapturing them."""
+        from milai_lab.memory.episodes import EpisodeIndex
+
+        index = EpisodeIndex(self)
+        results = []
+        for source in self.sources():
+            episode_id = source.get("episode_id") or reference_key(
+                [source["session"], source["capture_key"], source["role"]]
+            )
+            results.append(index.register(episode_id, [source["event_id"]]))
+        return {
+            "indexed": len(results),
+            "episode_ids": [row["episode_id"] for row in results],
+            "new_sources": 0,
+            "semantic_records_changed": 0,
+        }
+
+    def export_snapshot(self) -> dict[str, Any]:
+        """Export this owner's currently visible sources, records and history.
+
+        This is a portable observation of memory, never a business authorization
+        or a promise to erase external backups. Execution journals stay separate.
+        """
+        records = [row for row in self.records() if row["ok"]]
+        history = []
+        for row in self._rows(self.namespace):
+            metadata = row["value"].get("_v13_1")
+            if metadata is None or metadata["owner"] != self.owner:
+                continue
+            versions = [
+                self.read(row["id"], version["revision"]) for version in metadata["history"]
+            ]
+            history.append({"id": row["id"], "versions": [v for v in versions if v["ok"]]})
+        return {
+            "owner": self.owner,
+            "namespace": list(self.namespace),
+            "memory_profile": self.memory_profile,
+            "memory_ranking": self.memory_ranking,
+            "sources": self.sources(),
+            "records": records,
+            "history": history,
+            "episodes": self.episodes(limit=None) if self.memory_profile == "unified_v1" else [],
+            "visibility_scope": "currently permitted memory only",
+            "business_effects": "not established by this export",
+        }
+
     def _uses_explicit_receipt(self, proposal: dict[str, Any], source: dict[str, Any]) -> bool:
         ref = source.get("object_ref")
         return (
@@ -1889,6 +2002,22 @@ class MemoryService:
                     if body[field] != proposal["fields"][field]:
                         return "receipt_body_conflict:" + field, source
         return None, source
+
+    def operation_receipt(self, session: str, operation_id: str) -> dict[str, Any] | None:
+        """Observe the saved outcome of an old semantic operation without repeating it."""
+        identity = reference_key([session, operation_id])
+        with self._locked():
+            attempt = self.store.get(self.attempts_namespace, identity)
+            for row in self._rows(self.namespace):
+                metadata = row["value"].get("_v13_1", {})
+                if metadata.get("owner") != self.owner:
+                    continue
+                proposal = metadata.get("proposals", {}).get(identity)
+                if proposal is not None:
+                    return cast(dict[str, Any], json.loads(_json(proposal["receipt"])))
+            if attempt is not None:
+                return cast(dict[str, Any], json.loads(_json(attempt.value["receipt"])))
+        return None
 
     def replay_requested(
         self, session: str, proposal_id: str, requested: dict[str, Any]
@@ -2264,7 +2393,7 @@ class MemoryService:
                 if self.mode == "field_grounded" and raw["fields"]
                 else "unchecked",
                 "observed_at": source["observed_at"],
-                "committed_at": datetime.now(UTC).isoformat(),
+                "committed_at": self.clock().isoformat(),
                 "session": session,
             }
             receipt = {
@@ -2295,6 +2424,8 @@ class MemoryService:
                     method_version=raw.get("method_version"),
                     method_arm=raw.get("method_arm"),
                 )
+                if "revision_evidence" in raw:
+                    version["revision_evidence"] = raw["revision_evidence"]
                 version["retracted"] = raw.get("patch_operation") == "retract"
             if functional_support is not None:
                 version["functional_support"] = functional_support
@@ -2464,7 +2595,7 @@ class MemoryService:
         if not 1 <= limit <= 100:
             raise ValueError("V13_SEARCH_LIMIT_INVALID")
         degradation = None
-        if dense:
+        if dense and self.semantic_retriever is None:
             try:
                 page = self.store.search(self.namespace, query=query, limit=limit)
                 rows = [self.read(item.key) for item in page if item.namespace == self.namespace]
@@ -2492,6 +2623,8 @@ class MemoryService:
             # Readable provenance IDs may contain public event keys or bank names.
             # Those keys are identities, never additional semantic search terms.
             value = row.get("value", row)
+            if self.semantic_retriever is not None:
+                return semantic_text(value)
             keys = (
                 ("content", "kind", "scope", "basis", "fields")
                 if "value" in row
@@ -2618,10 +2751,30 @@ class MemoryService:
                             "body_visibility": "notice_only",
                         }
                     )
-        records = sorted(
-            (row for row in records if row["ok"] and (enumerate_bank or rank(row))),
-            key=lambda row: (-rank(row), row["id"]),
-        )[:limit]
+        visible_records = [row for row in records if row["ok"]]
+        if self.semantic_retriever is not None and not enumerate_bank:
+            if self.memory_ranking == "activation":
+                from milai_lab.memory.activation import ActivationIndex, rank_candidates
+
+                index = ActivationIndex(self)
+                candidates = self.semantic_retriever.rank(
+                    query, visible_records, len(visible_records), include_scores=True,
+                )
+                ranked = []
+                for candidate in candidates:
+                    activation = index.describe(candidate["id"])
+                    if activation is not None:
+                        ranked.append({**candidate, "activation": activation["activation"],
+                                       "utility": activation["utility"], "visible": True,
+                                       "allowed": True})
+                records = rank_candidates(ranked, limit=limit)
+            else:
+                records = self.semantic_retriever.rank(query, visible_records, limit)
+        else:
+            records = sorted(
+                (row for row in records if row["ok"] and (enumerate_bank or rank(row))),
+                key=lambda row: (-rank(row), row["id"]),
+            )[:limit]
         raw = sorted(
             (row for row in raw if enumerate_bank or rank(row)),
             key=lambda row: (-rank(row), row["event_id"]),
@@ -2629,7 +2782,11 @@ class MemoryService:
         return {
             "ok": True,
             "status": "found" if records or raw else "no_results",
-            "retrieval": "raw_keyword",
+            "retrieval": (
+                "dense_activation_v1" if self.semantic_retriever is not None
+                and self.memory_ranking == "activation" else
+                "dense_cosine" if self.semantic_retriever is not None else "raw_keyword"
+            ),
             "degraded": degradation is not None,
             "degradation_reason": degradation,
             "records": records,

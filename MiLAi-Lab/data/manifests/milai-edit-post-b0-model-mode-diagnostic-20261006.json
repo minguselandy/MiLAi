@@ -1,0 +1,68 @@
+{
+  "status": "PREDECLARED_INPUT_MODE_DIAGNOSTIC_NOT_RUN",
+  "observed_at": "2026-10-06T02:32:06.487581+00:00",
+  "source_commit": "BIND_ACTUAL_GIT_VERSION_BEFORE_MODEL_HTTP",
+  "previous_report_commit": "478d7530eb3942909792e4d66f59d13a4b4a1705",
+  "unchanged_writer_method_source": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+  "source_change": "Runner input token projection follows transported model enable_thinking; no method, schema, decoder or operator change",
+  "config_version": "milai-edit-post-b0-i2-thinking-mode-diagnostic-v1",
+  "interface": "I2",
+  "single_Qwen_family": true,
+  "model": "Qwen3.6-35B-A3B-FP8",
+  "model_enable_thinking": true,
+  "controlled_model_configuration_change_only": "enable_thinking false to true",
+  "unchanged_model_parameters": {
+    "temperature": 0,
+    "max_tokens": 8192,
+    "context_tokens": 65536,
+    "source_tokens": 4096,
+    "retrieval_limit": 10,
+    "working_sets": false
+  },
+  "vendor_recommended_sampling_profile_not_adopted": true,
+  "Writer_Reader_modes_changed_together_for_all_arms": true,
+  "branches": {
+    "original_lifecycle": {
+      "expected_generation_calls": 44,
+      "Writer_calls": 24,
+      "Reader_calls": 20
+    },
+    "global_conditions": {
+      "expected_generation_calls": 36,
+      "Writer_calls": 20,
+      "Reader_calls": 16
+    }
+  },
+  "declared_generation_calls": 80,
+  "actual_generation_calls": 0,
+  "own_empty_banks_per_arm_and_branch": true,
+  "one_exposed_lifecycle_source": true,
+  "no_ideal_state_injection": true,
+  "Root_review_between_branches": true,
+  "new_source_controls_not_yet_admitted": true,
+  "no_retry_or_truncation_repair": true,
+  "reasoning_cost_in_provider_completion_usage_counted_once": true,
+  "mode_diagnostic_not_conditional_edit_method_contribution": true,
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "affected_checks": {
+    "pytest_passed": 31,
+    "ruff": "PASS",
+    "mypy_runner": "PASS",
+    "existing_real_nonthinking_token_projections_unchanged": 132,
+    "local_thinking_prompt_prefix_token_difference": -2
+  },
+  "daily_finite_diagnostic_per_plan_7_2": true,
+  "Full_CI_required_before_prefix_candidate_or_merge": true,
+  "used_primary_resource": {
+    "title": "Qwen3.6-35B-A3B official model card",
+    "url": "https://huggingface.co/Qwen/Qwen3.6-35B-A3B",
+    "retrieved_at": "2026-10-06T02:32:06.487258+00:00",
+    "revision": "995ad96eacd98c81ed38be0c5b274b04031597b0",
+    "resource_sha256": "c4ddaa065649ff6352648f64747a16eda31726f3e34add94ce04abb461c77b75",
+    "used_for": "Official native thinking-mode API toggle; no model weights fetched, no deployment or scoring claims",
+    "not_runtime_admission_or_content_fingerprint_gate": true,
+    "local_readable_path": "artifacts/milai-edit/research/qwen36-model-mode-20261006/README.md"
+  },
+  "product_status": "NO_GO"
+}

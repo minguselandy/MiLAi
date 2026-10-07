@@ -1,0 +1,100 @@
+{
+  "version": "milai-post87c-common-dense-prefix-development-v1",
+  "status": "DECLARED_PREPARED_NOT_ADMITTED_OR_RUN",
+  "source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "plan": "milai-post-87c-current-first-plan-1.0 sections6.5,7.2,9",
+  "purpose": "End-to-end same-version four-arm development on own-formed state after finite interface diagnosis; not perfect-R3-until-pass or method confirmation.",
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "development_users": [
+    "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+    "8ece194a-885c-8e0c-359e-93a97220252c",
+    "6106afc1-6ad6-c821-3f0f-b491e3e0b833",
+    "5c005ed8-0d18-99f8-a20e-6a776a7ea30a"
+  ],
+  "scope": {
+    "users": 4,
+    "chronological_sessions_per_user": 8,
+    "maintenance_and_evaluation_sessions_per_arm": 32,
+    "update_opportunities_per_arm": 72,
+    "QA_per_arm": 73,
+    "first_bank": "each own empty bank",
+    "reference_or_other_arm_state_injected": false
+  },
+  "common_configuration": {
+    "interface": "I2",
+    "retrieval": "ordinary BGE-m3 dense cosine K10 over actual semantic body",
+    "generation_family": "existing Qwen3.6 only",
+    "thinking": true,
+    "temperature": 1.0,
+    "context_tokens": 65536,
+    "output_tokens": 32768,
+    "margin_tokens": 512,
+    "source_partition_tokens": 4096,
+    "old_body_target_tokens": 8192,
+    "feature_settings": {
+      "matter_organization": true,
+      "semantic_operations": true,
+      "bound_references": true,
+      "single_record_changes": true,
+      "source_metadata": true
+    },
+    "first_attempt_failures_retained": true,
+    "Judge": "original author prompts and label rules, same Qwen family, not independent",
+    "Writer_access": "observed dialogue/roles/dates and its own actual state only; no gold or future QA"
+  },
+  "specific_variables": {
+    "B0": "plain clauses and whole relevant matter replacement",
+    "B1": "plain clauses and local unit edits",
+    "B2": "conditioned representation and whole relevant matter replacement",
+    "M": "same conditioned representation rules and semantic local operations"
+  },
+  "admission": {
+    "own_Fast": {
+      "run_id": 37531198186,
+      "conclusion": "success",
+      "verified_at": "2026-10-06T21:15:11Z"
+    },
+    "own_Full": {
+      "run_id": 37531198051,
+      "status": "in_progress",
+      "must_succeed_before_prefix": true
+    },
+    "paired_B2_Writer_diagnosis": "must close and receive Root semantic/receipt review before prefix; first failures preserved, no unlimited retry",
+    "input_or_output_unknown": "stop without replay using existing serial lease and continuous ledger"
+  },
+  "known_limits_preserved": [
+    "Reader scope-applicability refusal",
+    "relative-calendar errors",
+    "M shared-condition change_condition not yet demonstrated",
+    "B2/M may naturally form different states; no ideal common initialization"
+  ],
+  "later_same_version_scope": {
+    "preselected_long_user": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+    "user_sessions": 65,
+    "user_update_opportunities": 142,
+    "user_QA": 164,
+    "full_development_sessions_per_arm": 277,
+    "full_updates_per_arm": 595,
+    "full_QA_per_arm": 705,
+    "continuation": "Use existing actual-prefix isolated-user continuation; same source/model/method/retrieval/scorer, preserve original ordinals and own MemoryService namespace, no repeated first8 HTTP or cost; no cross-user Judge serial collision. First65 and prefix are subsets, not extra independent samples."
+  },
+  "subsequent_scope_retained": [
+    "native32/12sessions/4users and full277 drift",
+    "one M-entry ablation and fixed tighter budget",
+    "16 reserved users after candidate/config freeze",
+    "LongMemEval28/1354 and original10 full answers plus strong simple baselines",
+    "normal Host135/192 and frozen-candidate new stories, forgetting, real effects and recovery",
+    "six original deliverables"
+  ],
+  "candidate_selected": false,
+  "goal_complete": false,
+  "Product_status": "NO_GO",
+  "actual_prefix_model_calls": 0,
+  "rollback_commit": "59ce2f895ca022cf1f929c48c52dcafbc26fc92a",
+  "private_configs_HTTP_DB_and_results_ignored": true
+}

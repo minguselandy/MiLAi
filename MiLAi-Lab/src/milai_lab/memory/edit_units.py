@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import copy
 import uuid
+from datetime import UTC, datetime
 from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -89,6 +90,81 @@ def source_evidence(service: Any, evidence_ids: list[str]) -> list[dict[str, Any
             }
         )
     return evidence
+
+
+def read_revision_evidence(service: Any, version: dict[str, Any]) -> list[dict[str, Any]]:
+    """Read only the exact original ranges selected for this committed revision.
+
+    Older local revisions retain their actual witnesses in edit_operations.
+    Missing whole-rewrite witnesses are not reconstructed from a source ID.
+    """
+    handles = version.get("revision_evidence")
+    if handles is None:
+        handles = [
+            handle
+            for edit in version.get("edit_operations", [])
+            for handle in edit["evidence"]
+        ]
+    result = []
+    for handle in dict.fromkeys(handles):
+        fragment = resolve_fragment(service, handle)
+        source = service.source(fragment["source_ref"])
+        result.append({
+            **{key: fragment[key] for key in (
+                "source_ref", "source_revision", "start", "end", "content", "role", "observed_at"
+            )},
+            "occurred_at": source.get("occurred_at"),
+            "semantic_support": "unchecked",
+        })
+    return result
+
+
+def read_revision_scope(
+    service: Any, record_id: str, version: dict[str, Any]
+) -> list[dict[str, Any]]:
+    """Show previous override roles only for literally retained current units.
+
+    Read one existing predecessor, not the full history. Removed facts are not
+    delivered or reconstructed, and prior scope handles remain historical.
+    """
+    state = version.get("edit_state")
+    if not state or version["revision"] <= 1:
+        return []
+    previous = service.read(record_id, version["revision"] - 1)
+    if not previous["ok"]:
+        return []
+    prior = previous["value"].get("edit_state")
+    if not prior:
+        return []
+    result = []
+    for old in prior["units"]:
+        overrides = [
+            edge for edge in prior["relations"]
+            if edge["relation_type"] == "overrides" and edge["target_unit"] == old["unit_id"]
+        ]
+        if not overrides:
+            continue
+        kept = [
+            unit for unit in state["units"]
+            if {k: v for k, v in unit.items() if k != "unit_id"}
+            == {k: v for k, v in old.items() if k != "unit_id"}
+        ]
+        if len(kept) != 1:
+            continue
+        for unit in kept:
+            result.append({
+                "current_unit_id": unit["unit_id"],
+                "previous_revision": previous["value"]["revision"],
+                "previous_role": "general_rule_outside_explicit_override_scopes",
+                "previous_scope_units": list(dict.fromkeys(
+                    edge["source_unit"] for edge in prior["relations"]
+                    if edge["relation_type"] == "modifies"
+                    and any(
+                        edge["target_unit"] == override["source_unit"] for override in overrides
+                    )
+                )),
+            })
+    return result
 
 
 def validate_state(state: dict[str, Any], service: Any | None = None) -> None:
@@ -218,12 +294,17 @@ def apply_local(
     service: Any,
     *,
     conditioned: bool,
+    assertions: list[dict[str, Any] | None] | None = None,
+    mark_exceptions: bool = False,
 ) -> dict[str, Any]:
     state = copy.deepcopy(old)
     units, relations = state["units"], state["relations"]
     original_ids = {unit["unit_id"] for unit in units}
     targeted = set()
-    for edit in edits:
+    if assertions is not None and len(assertions) != len(edits):
+        raise FunctionalRejection("EDIT_ASSERTION_COMPILATION_INVALID")
+    for edit_index, edit in enumerate(edits):
+        assertion = assertions[edit_index] if assertions is not None else None
         if edit.operation not in (
             {"replace", "append", "override", "retract"}
             if conditioned
@@ -255,6 +336,8 @@ def apply_local(
         if edit.operation == "replace":
             assert target is not None
             target.update(text=edit.text, evidence_refs=evidence)
+            if assertions is not None:
+                target["assertion"] = copy.deepcopy(assertion)
             continue
         if edit.operation == "override":
             assert target is not None
@@ -265,18 +348,23 @@ def apply_local(
             ):
                 raise FunctionalRejection("EDIT_EXPLICIT_OVERRIDE_SCOPE_REQUIRED")
             # All generated IDs are issued by the service side, never model hashes.
-            scoped = {
+            scoped: dict[str, Any] = {
                 "unit_id": new_id("unit"),
                 "text": edit.text,
                 "role": "content",
                 "evidence_refs": evidence,
             }
-            scope = {
+            scope: dict[str, Any] = {
                 "unit_id": new_id("unit"),
                 "text": edit.condition,
                 "role": "condition",
                 "evidence_refs": evidence,
             }
+            if mark_exceptions:
+                scoped["local_exception"] = True
+            if assertions is not None:
+                scoped["assertion"] = copy.deepcopy(assertion)
+                scope["assertion"] = copy.deepcopy(assertion)
             units.extend([scoped, scope])
             relations.extend(
                 [
@@ -311,12 +399,14 @@ def apply_local(
                     }
                 )
             continue
-        inserted = {
+        inserted: dict[str, Any] = {
             "unit_id": new_id("unit"),
             "text": edit.text,
             "role": edit.role,
             "evidence_refs": evidence,
         }
+        if assertions is not None:
+            inserted["assertion"] = copy.deepcopy(assertion)
         if edit.operation == "insert" and target is not None:
             units.insert(units.index(target) + 1, inserted)
         else:
@@ -340,10 +430,323 @@ def apply_local(
     return state
 
 
-def render_state(state: dict[str, Any]) -> str:
+def _declared_time(value: str | None) -> datetime | None:
+    """Read explicit ISO dates (midnight UTC) or timestamps with their offset."""
+    if value is None:
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError:
+        return None
+    if len(value) == 10:
+        return parsed.replace(tzinfo=UTC)
+    return parsed if parsed.tzinfo is not None else None
+
+
+def validate_applicability(applicability: dict[str, Any]) -> None:
+    """Validate generated semantic dates once, when decoding the public proposal."""
+    times = {}
+    for key in ("event_at", "effective_from", "effective_until"):
+        if key in applicability:
+            times[key] = _declared_time(applicability[key])
+            if times[key] is None:
+                raise FunctionalRejection("EDIT_EXPLICIT_ISO_TIME_REQUIRED")
+    start, end = times.get("effective_from"), times.get("effective_until")
+    if start is not None and end is not None and start >= end:
+        raise FunctionalRejection("EDIT_EFFECTIVE_INTERVAL_INVALID")
+
+
+def evidence_status(assertion: dict[str, Any]) -> str:
+    """Classify explicitly selected evidence links, never source existence or truth."""
+    links = assertion.get("evidence_links") or {}
+    supporting, opposing = bool(links.get("supports")), bool(links.get("opposes"))
+    return "both" if supporting and opposing else "supported" if supporting else (
+        "opposed" if opposing else "insufficient"
+    )
+
+
+def _temporal_view(
+    unit: dict[str, Any],
+    conditions: list[dict[str, Any]],
+    query_time: str | None,
+    version_time: str | None,
+) -> dict[str, Any]:
+    assertion = unit.get("assertion") or {}
+    applicability = assertion.get("applicability") or {}
+    limits = []
+    starts, ends = [], []
+    for item in [unit, *conditions]:
+        declared = (item.get("assertion") or {}).get("applicability") or {}
+        start, end = declared.get("effective_from"), declared.get("effective_until")
+        if start is not None or end is not None:
+            limits.append({"unit_id": item["unit_id"], "from": start, "until": end})
+        parsed_start, parsed_end = _declared_time(start), _declared_time(end)
+        if parsed_start is not None:
+            starts.append(parsed_start)
+        if parsed_end is not None:
+            ends.append(parsed_end)
+    start_at, end_at = max(starts, default=None), min(ends, default=None)
+    queried_at = _declared_time(query_time)
+    if start_at is not None and end_at is not None and start_at >= end_at:
+        status = "inconsistent_explicit_limits"
+    elif query_time is None:
+        status = "query_time_unspecified"
+    elif queried_at is None:
+        status = "query_time_unresolved"
+    elif start_at is not None and queried_at < start_at:
+        status = "before_explicit_start"
+    elif end_at is not None and queried_at >= end_at:
+        status = "expired"
+    elif limits:
+        status = "within_explicit_limits"
+    else:
+        status = "effective_limits_unspecified"
+    reported_at = assertion.get("occurred_at")
+    reported = _declared_time(reported_at)
+    explicit_past = _declared_time(applicability.get("event_at")) or _declared_time(
+        applicability.get("effective_from")
+    )
+    return {
+        "reported_at": reported_at,
+        "captured_at": assertion.get("observed_at"),
+        "event_at": applicability.get("event_at"),
+        "effective_from": applicability.get("effective_from"),
+        "effective_until": applicability.get("effective_until"),
+        "bound_effective_limits": limits,
+        "combined_effective_from": start_at.isoformat() if start_at is not None else None,
+        "combined_effective_until": end_at.isoformat() if end_at is not None else None,
+        "version_time": version_time,
+        "query_time": query_time,
+        "status": status,
+        "interval_convention": "[from, until); date boundaries are midnight UTC",
+        "retrospective": explicit_past < reported
+        if explicit_past is not None and reported is not None else None,
+        "reported_after_query": reported > queried_at
+        if reported is not None and queried_at is not None else None,
+    }
+
+
+def read_applicability(
+    state: dict[str, Any],
+    *,
+    query_time: str | None = None,
+    version_time: str | None = None,
+    include_temporal: bool = False,
+) -> dict[str, dict[str, Any]]:
+    """Project actual relations and explicit limits, without resolving natural scope.
+
+    A report clock never supplies a missing onset. An explicit retrospective event
+    remains available for a descriptive past answer. Temporal eligibility is not
+    truth, scope satisfaction or evidence availability at that historical time.
+    The caller supplies an already-visible current or historical record version.
+    """
+    units = {unit["unit_id"]: unit for unit in state["units"]}
+    conditions: dict[str, list[str]] = {key: [] for key in units}
+    overrides: dict[str, list[str]] = {key: [] for key in units}
+    exceptions: dict[str, list[str]] = {key: [] for key in units}
+    attached_conditions = set()
+    for edge in state["relations"]:
+        source, target = edge["source_unit"], edge["target_unit"]
+        if edge["relation_type"] == "modifies":
+            conditions[target].append(source)
+            attached_conditions.add(source)
+        elif edge["relation_type"] == "overrides":
+            overrides[source].append(target)
+            exceptions[target].append(source)
+
+    def statement(key: str) -> dict[str, Any]:
+        unit = units[key]
+        return {
+            "unit_id": key, "text": unit["text"],
+            **({"assertion": copy.deepcopy(unit["assertion"])} if "assertion" in unit else {}),
+        }
+
+    project_time = include_temporal or query_time is not None or version_time is not None or any(
+        "applicability" in (unit.get("assertion") or {}) for unit in units.values()
+    )
+
+    def qualified(key: str) -> dict[str, Any]:
+        unit = units[key]
+        bound = [units[c] for c in conditions[key]]
+        result = {**statement(key), "applies_under": [statement(c) for c in conditions[key]]}
+        if project_time:
+            declared = (unit.get("assertion") or {}).get("applicability") or {}
+            result.update(
+                temporal=_temporal_view(unit, bound, query_time, version_time),
+                declared_scope=declared.get("scope"),
+                scope_status="requires_source_interpretation" if bound or declared.get("scope")
+                else "not_declared",
+                quantity_scope=declared.get("quantity_scope", "unspecified"),
+                evidence_status=evidence_status(unit.get("assertion") or {}),
+                semantic_support="unchecked",
+            )
+            if declared.get("quantity_scope") == "overall":
+                result["member_quantities"] = "not_implied_by_overall_total"
+        return result
+
+    result = {}
+    for key, unit in units.items():
+        if unit["role"] == "condition":
+            result[key] = {**(qualified(key) if project_time else statement(key)),
+                           "kind": "bound_condition"
+                           if key in attached_conditions else "unbound_condition"}
+            continue
+        is_exception = bool(overrides[key] or unit.get("local_exception"))
+        result[key] = {
+            **qualified(key),
+            "kind": "scoped_exception" if is_exception else
+                    "general_rule" if exceptions[key] else "assertion",
+            "general_rules": [qualified(target) for target in overrides[key]],
+            "exceptions": [qualified(target) for target in exceptions[key]],
+        }
+        if is_exception:
+            result[key]["general_rule_status"] = "stored" if overrides[key] else "not_stored"
+    return result
+
+
+def render_revision_view(
+    state: dict[str, Any],
+    *,
+    query_time: str | None = None,
+    version_time: str | None = None,
+) -> dict[str, Any]:
+    """One deterministic current/history view for ordinary Host and benchmark readers.
+
+    No newest-report winner is chosen among separate scopes. Even a time-eligible
+    explicit override requires its actual conditions; cancellation only removes
+    edges and cannot alter an expired general rule's independently stored limit.
+    """
+    projected = read_applicability(
+        state, query_time=query_time, version_time=version_time, include_temporal=True
+    )
+    units = {unit["unit_id"]: unit for unit in state["units"]}
+    ineligible = {"expired", "before_explicit_start", "inconsistent_explicit_limits"}
+    relations = []
+    for edge in state["relations"]:
+        statuses = [
+            projected[key].get("temporal", {}).get("status", "effective_limits_unspecified")
+            for key in (edge["source_unit"], edge["target_unit"])
+        ]
+        relations.append({
+            **copy.deepcopy(edge),
+            "applicability": "time_ineligible" if any(s in ineligible for s in statuses)
+            else "requires_source_interpretation",
+        })
+    common_conditions = [
+        key for key, unit in units.items() if unit["role"] == "condition" and len({
+            edge["target_unit"] for edge in state["relations"]
+            if edge["relation_type"] == "modifies" and edge["source_unit"] == key
+        }) > 1
+    ]
+    # Every actual unit appears once. Relations and scope lists point to it;
+    # different source roles are retained once in the source table rather than
+    # repeatedly copying a whole assertion into every attached condition view.
+    source_table = {}
+    compact_units = []
+    for item in projected.values():
+        compact = copy.deepcopy(item)
+        for field in ("applies_under", "general_rules", "exceptions"):
+            if field in compact:
+                compact[field] = [statement["unit_id"] for statement in compact[field]]
+        assertion = compact.get("assertion") or {}
+        sources = [assertion] if "source_ref" in assertion else []
+        for linked in assertion.get("evidence_links", {}).values():
+            sources.extend(linked)
+        for source in sources:
+            source_table[source["source_ref"]] = {
+                key: source.get(key) for key in (
+                    "source_revision", "role", "occurred_at", "observed_at"
+                )
+            }
+        if "evidence_links" in assertion:
+            assertion["evidence_links"] = {
+                stance: [{key: ref[key] for key in
+                          ("evidence_id", "source_ref", "source_revision", "start", "end")}
+                         for ref in linked]
+                for stance, linked in assertion["evidence_links"].items()
+            }
+        compact_units.append(compact)
+    return {
+        "representation": state["representation"],
+        "matter": state.get("matter_description"),
+        "query_time": query_time,
+        "version_time": version_time,
+        "units": compact_units,
+        "source_table": source_table,
+        "relations": relations,
+        "common_conditions": common_conditions,
+        "historical_units": [
+            key for key, item in projected.items()
+            if item.get("temporal", {}).get("status") == "expired"
+        ],
+        "future_units": [
+            key for key, item in projected.items()
+            if item.get("temporal", {}).get("status") == "before_explicit_start"
+        ],
+        "unresolved_units": [
+            key for key, item in projected.items()
+            if item["kind"] == "unbound_condition"
+            or item.get("general_rule_status") == "not_stored"
+            or item.get("scope_status") == "requires_source_interpretation"
+            or item.get("temporal", {}).get("status") in {
+                "effective_limits_unspecified", "query_time_unresolved", "query_time_unspecified",
+                "inconsistent_explicit_limits",
+            }
+        ],
+        "selection_policy": "actual_relations_and_explicit_limits; no last_report_wins",
+        "completion_status": "not_inferred_from_time",
+        "semantic_support": "unchecked",
+    }
+
+
+def render_state(
+    state: dict[str, Any],
+    *,
+    query_time: str | None = None,
+    version_time: str | None = None,
+) -> str:
     """One renderer shared by B2/M; explicit scoped alternatives guide the common Reader."""
+
+    def assertion_text(unit: dict[str, Any]) -> str:
+        assertion = unit.get("assertion")
+        if not assertion:
+            return ""
+        declared = assertion.get("applicability") or {}
+        semantic = "".join(
+            "; " + key + "=" + str(declared[key]) for key in
+            ("event_at", "effective_from", "effective_until", "scope", "quantity_scope")
+            if key in declared
+        )
+        if "evidence_links" in assertion:
+            semantic += "; evidence_status=" + evidence_status(assertion)
+        return str(
+            " [Assertion: "
+            + assertion["kind"]
+            + "; speaker="
+            + assertion["role"]
+            + ("; occurred_at=" + assertion["occurred_at"] if assertion.get("occurred_at") else "")
+            + semantic + "]"
+        )
+
+    applicability = read_applicability(state, query_time=query_time, version_time=version_time)
+
+    def temporal_text(unit: dict[str, Any]) -> str:
+        if query_time is None:
+            return ""
+        item = applicability[unit["unit_id"]]
+        status = item["temporal"]["status"]
+        return " [Time: " + str(status) + "; scope remains evidence-dependent]"
+
+    matter = (
+        ["Matter: " + state["matter_description"]]
+        if state.get("matter_description") and state["units"]
+        else []
+    )
     if state["representation"] == "plain_v1":
-        return "\n".join(unit["text"] for unit in state["units"])
+        return "\n".join(
+            [*matter, *(unit["text"] + assertion_text(unit) + temporal_text(unit)
+                       for unit in state["units"])]
+        )
     units = {unit["unit_id"]: unit for unit in state["units"]}
     overrides = {
         r["source_unit"]: r["target_unit"]
@@ -351,26 +754,574 @@ def render_state(state: dict[str, Any]) -> str:
         if r["relation_type"] == "overrides"
     }
     modified = {r["source_unit"] for r in state["relations"] if r["relation_type"] == "modifies"}
-    lines = []
+    lines = matter
     for unit in state["units"]:
         unit_id = unit["unit_id"]
         if unit["role"] == "condition":
             if unit_id not in modified:
-                lines.append("Unbound condition (applicability unresolved): " + unit["text"])
+                lines.append(
+                    "Unbound condition (applicability unresolved): "
+                    + unit["text"]
+                    + assertion_text(unit)
+                )
             continue
         prefix = (
             "Scoped override of " + overrides[unit_id] + ": "
             if unit_id in overrides
+            else "Scoped exception (general rule not stored): "
+            if unit.get("local_exception")
             else "General content (outside explicit override scopes): "
             if unit_id in overrides.values()
             else "Content: "
         )
-        lines.append(unit_id + " — " + prefix + unit["text"])
+        lines.append(
+            unit_id + " — " + prefix + unit["text"] + assertion_text(unit) + temporal_text(unit)
+        )
         conditions = [
-            units[r["source_unit"]]["text"]
+            units[r["source_unit"]]["text"] + assertion_text(units[r["source_unit"]])
             for r in state["relations"]
             if r["relation_type"] == "modifies" and r["target_unit"] == unit_id
         ]
         if conditions:
             lines.append("  Applies under: " + "; ".join(conditions))
     return "\n".join(lines)
+
+
+# This directory is the single source for the opt-in writer interface. The v1 DTO
+# remains unchanged so archived callers retain their exact public contract.
+ARM_OPERATIONS: dict[str, tuple[str, ...]] = {
+    "B0": (),
+    "B1": ("replace", "insert", "delete"),
+    "B2": (),
+    "M": ("replace", "append", "override", "retract"),
+}
+OPERATION_INSTRUCTIONS = {
+    "replace": "replace changes only target_unit text/support; it retains that unit's role. ",
+    "insert": "insert follows target_unit, or appends when target_unit is omitted or null. ",
+    "delete": "delete removes target_unit; cancellation does not assert its opposite. ",
+    "append": "append adds a unit; a condition explicitly lists content targets in attach_to. ",
+    "override": "override needs condition text; shared_conditions explicitly selects retained "
+    "conditions, never automatically copying them to a new subject. ",
+    "retract": "retract removes target_unit and incident relations, preserving other scopes. ",
+}
+
+
+def _group_clauses(
+    units: list[dict[str, Any]], relations: list[dict[str, Any]], *, view: bool
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Group only explicit edges; declare each shared condition body once."""
+    keys = [unit["id"] if view else index for index, unit in enumerate(units)]
+    by_key = dict(zip(keys, units, strict=True))
+    contents = [key for key in keys if by_key[key].get("role", "content") == "content"]
+    declared: dict[Any, int] = {}
+    clauses = []
+    for key in contents:
+        clause = copy.deepcopy(by_key[key])
+        clause.pop("role", None)
+        if view or any(unit.get("role") == "condition" for unit in units) or relations:
+            clause["conditions"] = []
+        for relation in relations:
+            if relation["target"] != key or relation["relation_type"] != "modifies":
+                continue
+            source = relation["source"]
+            binding = {
+                k: copy.deepcopy(v)
+                for k, v in relation.items()
+                if k not in {"source", "target", "relation_type"}
+            }
+            if source in declared:
+                condition = {"reuse": source if view else declared[source]}
+            else:
+                declared[source] = len(declared)
+                condition = copy.deepcopy(by_key[source])
+                condition.pop("role", None)
+            condition["binding"] = binding
+            clause.setdefault("conditions", []).append(condition)
+        overrides = []
+        for relation in relations:
+            if relation["source"] == key and relation["relation_type"] == "overrides":
+                overrides.append(
+                    {
+                        "target": relation["target"]
+                        if view
+                        else contents.index(relation["target"]),
+                        **{
+                            k: copy.deepcopy(v)
+                            for k, v in relation.items()
+                            if k not in {"source", "target", "relation_type"}
+                        },
+                    }
+                )
+        if overrides:
+            clause["overrides"] = overrides
+        clauses.append(clause)
+    unresolved = [
+        {k: copy.deepcopy(v) for k, v in by_key[key].items() if k != "role"}
+        for key in keys
+        if by_key[key].get("role") == "condition" and key not in declared
+    ]
+    return clauses, unresolved
+
+
+def clause_proposal(proposal: dict[str, Any], *, conditioned: bool) -> dict[str, Any]:
+    """Serialize an explicit flat proposal into the opt-in clause contract."""
+    result = copy.deepcopy(proposal)
+    if result.get("action") not in {"create", "rewrite"} or "units" not in result:
+        return result
+    clauses, unresolved = _group_clauses(
+        result.pop("units"), result.pop("relations", []), view=False
+    )
+    if conditioned:
+        for clause in clauses:
+            clause.setdefault("conditions", [])
+    else:
+        for clause in clauses:
+            clause.pop("conditions", None)
+    result["clauses"] = clauses
+    if unresolved:
+        result["unresolved_conditions"] = unresolved
+    return result
+
+
+def compile_clause_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
+    """Expand declared bindings, without selecting supports or reading old bodies."""
+    result = copy.deepcopy(proposal)
+    if "clauses" not in result:
+        return result
+    clauses = result.pop("clauses")
+    units: list[dict[str, Any]] = []
+    relations: list[dict[str, Any]] = []
+    declarations: list[int] = []
+    content_indexes: list[int] = []
+    relation_groups: list[tuple[list[dict[str, Any]], list[dict[str, Any]]]] = []
+    for clause in clauses:
+        declared_links: list[dict[str, Any]] = []
+        reused_links: list[dict[str, Any]] = []
+        content_index = len(units)
+        content_indexes.append(content_index)
+        units.append(
+            {k: v for k, v in clause.items() if k not in {"conditions", "overrides"}}
+            | {"role": "content"}
+        )
+        for condition in clause.get("conditions", []):
+            if "reuse" in condition:
+                reuse = condition["reuse"]
+                if type(reuse) is not int or not 0 <= reuse < len(declarations):
+                    raise FunctionalRejection("EDIT_DECLARED_CONDITION_UNAVAILABLE")
+                source_index = declarations[reuse]
+            else:
+                source_index = len(units)
+                declarations.append(source_index)
+                units.append(
+                    {k: v for k, v in condition.items() if k != "binding"} | {"role": "condition"}
+                )
+            link = {
+                "source": source_index,
+                "target": content_index,
+                "relation_type": "modifies",
+                **condition["binding"],
+            }
+            (reused_links if "reuse" in condition else declared_links).append(link)
+        relation_groups.append((declared_links, reused_links))
+    for clause, source_index, (declared_links, reused_links) in zip(
+        clauses, content_indexes, relation_groups, strict=True
+    ):
+        relations.extend(declared_links)
+        for override in clause.get("overrides", []):
+            target = override["target"]
+            if type(target) is not int or not 0 <= target < len(content_indexes):
+                raise FunctionalRejection("EDIT_FORMATION_RELATION_INDEX_INVALID")
+            relations.append(
+                {
+                    "source": source_index,
+                    "target": content_indexes[target],
+                    "relation_type": "overrides",
+                    **{k: v for k, v in override.items() if k != "target"},
+                }
+            )
+        relations.extend(reused_links)
+    units.extend({**unit, "role": "condition"} for unit in result.pop("unresolved_conditions", []))
+    result.update(units=units, relations=relations)
+    return result
+
+
+def clause_record_view(record: dict[str, Any]) -> None:
+    """Replace flat public state with actual grouped rules, preserving aliases."""
+    state = record.get("edit_state", record)
+    if not state or "units" not in state:
+        return
+    units = state.pop("units")
+    if any(unit.get("role") == "legacy_unstructured" for unit in units):
+        state["clauses"] = units
+        state.pop("relations", None)
+        return
+    clauses, unresolved = _group_clauses(units, state.pop("relations", []), view=True)
+    if record["representation"] == "plain_v1":
+        for clause in clauses:
+            clause.pop("conditions", None)
+    state["clauses"] = clauses
+    if unresolved:
+        state["unresolved_conditions"] = unresolved
+
+
+def writer_proposal_schema(arm: str, *, allow_create: bool = True) -> dict[str, Any]:
+    """Thin legal proposals: no model-issued persistent IDs or revisions."""
+    if arm not in ARM_OPERATIONS:
+        raise ValueError("EDIT_ARM_INVALID")
+    conditioned = arm in {"B2", "M"}
+
+    def obj(fields: dict[str, Any], required: list[str]) -> dict[str, Any]:
+        return {
+            "type": "object",
+            "properties": fields,
+            "required": required,
+            "additionalProperties": False,
+        }
+
+    def ref(prefix: str) -> dict[str, Any]:
+        return {"type": "string", "pattern": "^" + prefix + "[1-9][0-9]*$"}
+
+    def refs(prefix: str, minimum: int = 0) -> dict[str, Any]:
+        return {"type": "array", "items": ref(prefix), "minItems": minimum}
+
+    text = {"type": "string", "minLength": 1}
+    support = {"evidence": refs("e"), "keep_support": refs("h")}
+    role = {"type": "string", "enum": ["content", "condition"] if conditioned else ["content"]}
+
+    def units(create: bool) -> dict[str, Any]:
+        fields = {"text": text, "role": role, **support}
+        if create:
+            fields.pop("keep_support")
+            fields["evidence"] = refs("e", 1)
+        return {
+            "type": "array",
+            "items": obj(fields, ["text", "evidence"]),
+            "minItems": 1 if create else 0,
+        }
+
+    def relations(create: bool) -> dict[str, Any]:
+        index = {"type": "integer", "minimum": 0}
+        fields = {
+            "source": index,
+            "target": index,
+            "relation_type": {"enum": ["modifies", "overrides"], "type": "string"},
+            **support,
+        }
+        if create:
+            fields.pop("keep_support")
+            fields["evidence"] = refs("e", 1)
+        return {
+            "type": "array",
+            "items": obj(fields, ["source", "target", "relation_type", "evidence"]),
+        }
+
+    def state_fields(create: bool) -> dict[str, Any]:
+        fields = {"units": units(create)}
+        if conditioned:
+            fields["relations"] = relations(create)
+        return fields
+
+    variants = []
+    if allow_create:
+        variants.append(
+            obj({"action": {"const": "create"}, **state_fields(True)}, ["action", "units"])
+        )
+    if not ARM_OPERATIONS[arm]:
+        fields = {
+            "action": {"const": "rewrite"},
+            "target": ref("r"),
+            **state_fields(False),
+            "withdrawal_evidence": refs("e", 1),
+        }
+        variants.append(obj(fields, ["action", "target", "units"]))
+    else:
+        edits = []
+        for operation in ARM_OPERATIONS[arm]:
+            fields = {"operation": {"const": operation}, "evidence": refs("e", 1)}
+            required = ["operation", "evidence"]
+            if operation in {"replace", "delete", "retract", "override"}:
+                fields["target_unit"] = ref("u")
+                required.append("target_unit")
+            elif operation == "insert":
+                fields["target_unit"] = {"anyOf": [ref("u"), {"type": "null"}]}
+            if operation not in {"delete", "retract"}:
+                fields["text"] = text
+                required.append("text")
+            if operation == "replace":
+                fields.update(support)
+            if operation in {"insert", "append"}:
+                fields["role"] = role
+            if operation == "append":
+                fields["attach_to"] = refs("u")
+            if operation == "override":
+                fields["condition"] = text
+                fields["shared_conditions"] = refs("u")
+                required.append("condition")
+            edits.append(obj(fields, required))
+        variants.append(
+            obj(
+                {
+                    "action": {"const": "edit"},
+                    "target": ref("r"),
+                    "edits": {"type": "array", "minItems": 1, "items": {"oneOf": edits}},
+                },
+                ["action", "target", "edits"],
+            )
+        )
+    variants.append(obj({"action": {"const": "no_change"}, "target": ref("r")}, ["action"]))
+    return {"oneOf": variants}
+
+
+def writer_projection(
+    delivery: dict[str, Any],
+    profile: str,
+    arm: str,
+    *,
+    allow_create: bool,
+    features: dict[str, bool] | None = None,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Pure projection for request budgeting, including old immutable snapshots.
+
+    No Store reads, source resolution, fresh delivery claims, or persistence occur
+    here. Only EditMemory.writer_view can turn this draft into an executable map.
+    """
+    records: dict[str, Any] = {}
+    units: dict[str, Any] = {}
+    fresh: dict[str, Any] = {}
+    prior: dict[str, Any] = {}
+    sources: dict[tuple[str, int], str] = {}
+    attributes = []
+    public_evidence = []
+    public_records: list[dict[str, Any]] = []
+    public_support = []
+    delivered = [
+        (row, "current") for row in delivery.get("sources", [])
+    ] + [(row, "redelivered_support") for row in delivery.get("redelivered_sources", [])]
+    classify_delivery = "redelivered_sources" in delivery
+    delivery_kinds: dict[tuple[str, int], list[str]] = {}
+    if classify_delivery:
+        for row, kind in delivered:
+            kinds = delivery_kinds.setdefault((row["source_ref"], row["source_revision"]), [])
+            if kind not in kinds:
+                kinds.append(kind)
+    source_rows = {row["source_ref"]: row for row, _ in delivered}
+    if features and features.get("source_metadata"):
+        source_rows.update(
+            {row["source_ref"]: row for row in delivery.get("source_attributes", [])}
+        )
+    delivered_sources = {row["source_ref"] for row, _ in delivered}
+
+    def source_id(ref: dict[str, Any]) -> str:
+        key = (ref["source_ref"], ref["source_revision"])
+        if key not in sources:
+            alias = "s" + str(len(sources) + 1)
+            sources[key] = alias
+            row = source_rows.get(key[0], {})
+            attributes.append(
+                {
+                    "id": alias,
+                    "role": row.get("role", "not_redelivered"),
+                    "observed_at": row.get("observed_at"),
+                    "source_revision": key[1],
+                }
+            )
+            if "timestamp" in row:
+                attributes[-1]["timestamp"] = copy.deepcopy(row["timestamp"])
+            if features and features.get("source_metadata"):
+                attributes[-1]["role"] = row.get("role", "unknown")
+                attributes[-1]["body_delivered"] = key[0] in delivered_sources
+                attributes[-1]["occurred_at"] = row.get("occurred_at")
+            if classify_delivery:
+                attributes[-1]["delivery_kinds"] = delivery_kinds.get(key, []).copy()
+                attributes[-1]["body_delivered"] = bool(attributes[-1]["delivery_kinds"])
+                attributes[-1]["occurred_at"] = row.get("occurred_at")
+        return sources[key]
+
+    for source, kind in delivered:
+        alias = "e" + str(len(fresh) + 1)
+        fresh[alias] = copy.deepcopy(source)
+        public_evidence.append(
+            {
+                "id": alias,
+                "source": source_id(source),
+                "range": [source["start"], source["end"]],
+                "text": source["text"],
+            }
+        )
+        if classify_delivery:
+            fresh[alias]["delivery_kind"] = kind
+            public_evidence[-1]["delivery_kind"] = kind
+    for record in delivery.get("records", []):
+        record_alias = "r" + str(len(records) + 1)
+        records[record_alias] = copy.deepcopy(record)
+        state = record.get("edit_state")
+        public_units, public_relations = [], []
+        by_id = {}
+        if state:
+            for unit in state["units"]:
+                alias = "u" + str(len(units) + 1)
+                by_id[unit["unit_id"]] = alias
+                units[alias] = {"record": record_alias, **copy.deepcopy(unit)}
+                public_units.append({"id": alias, "role": unit["role"], "text": unit["text"]})
+                if features and unit.get("local_exception"):
+                    public_units[-1]["local_exception"] = True
+                if features and features.get("source_metadata"):
+                    assertion = unit.get("assertion")
+                    public_units[-1]["assertion"] = (
+                        {"kind": assertion["kind"], "source": source_id(assertion)}
+                        if assertion and "source_ref" in assertion
+                        else {"kind": "legacy_unspecified", "source": None}
+                    )
+                    if (
+                        features.get("temporal_scope") and assertion
+                        and "applicability" in assertion
+                    ):
+                        public_units[-1]["assertion"]["applicability"] = copy.deepcopy(
+                            assertion["applicability"]
+                        )
+                    if features.get("temporal_scope") and assertion:
+                        public_units[-1]["assertion"]["evidence_status"] = evidence_status(
+                            assertion
+                        )
+                        if "evidence_links" in assertion:
+                            public_units[-1]["assertion"]["evidence_links"] = {
+                                stance: [{"source": source_id(ref),
+                                          "range": [ref["start"], ref["end"]]}
+                                         for ref in linked]
+                                for stance, linked in assertion["evidence_links"].items()
+                            }
+
+            def support_id(
+                item: dict[str, Any], binding: dict[str, Any], record_alias: str = record_alias
+            ) -> str:
+                alias = "h" + str(len(prior) + 1)
+                refs = copy.deepcopy(item["evidence_refs"])
+                prior[alias] = {"record": record_alias, "evidence_refs": refs, **binding}
+                public_support.append(
+                    {
+                        "id": alias,
+                        "use": "EXISTING_SUPPORT_ONLY",
+                        "record": record_alias,
+                        **binding,
+                        "ranges": [
+                            {"source": source_id(ref), "range": [ref["start"], ref["end"]]}
+                            for ref in refs
+                        ],
+                    }
+                )
+                return alias
+
+            for item, public in zip(state["units"], public_units, strict=True):
+                public["support"] = [support_id(item, {"unit": public["id"]})]
+            for relation in state["relations"]:
+                binding = {
+                    "source": by_id[relation["source_unit"]],
+                    "target": by_id[relation["target_unit"]],
+                    "relation_type": relation["relation_type"],
+                }
+                public_relations.append({**binding, "support": [support_id(relation, binding)]})
+        else:
+            # Legacy records stay readable; no invented unit formation or support.
+            public_units = [{"text": record["content"], "role": "legacy_unstructured"}]
+        public_record = {
+            "id": record_alias,
+            "representation": state["representation"] if state else "legacy_unstructured",
+            "units": public_units,
+            "relations": public_relations,
+        }
+        if "scope" in record:
+            public_record["scope"] = copy.deepcopy(record["scope"])
+        if features and features.get("matter_organization"):
+            public_record["matter"] = state.get("matter_description") if state else None
+        if features and features.get("temporal_scope"):
+            public_record["version_time"] = record.get("version_time")
+        if profile == "I1":
+            # Preserve v1's repeated text view, but remove persistent identifiers.
+            repeated = (
+                {
+                    "representation": state["representation"],
+                    "units": public_units,
+                    "relations": public_relations,
+                }
+                if state
+                else None
+            )
+            if state and state["representation"] == "conditioned_v1":
+                renderable = copy.deepcopy(state)
+                for unit in renderable["units"]:
+                    unit["unit_id"] = by_id[unit["unit_id"]]
+                for relation in renderable["relations"]:
+                    relation["source_unit"] = by_id[relation["source_unit"]]
+                    relation["target_unit"] = by_id[relation["target_unit"]]
+                content = render_state(renderable)
+            else:
+                content = record["content"]
+            public_record["content"] = content
+            public_record["edit_state"] = repeated
+            public_record.pop("units")
+            public_record.pop("relations")
+        public_records.append(public_record)
+    # The opt-in matter workflow starts with the actual dialogue; old matters
+    # follow as revision targets. Keep the information, aliases and default view.
+    material = (
+        {"evidence": public_evidence, "records": public_records}
+        if features and any(features.values())
+        else {"records": public_records, "evidence": public_evidence}
+    )
+    packet = {
+        "interface_version": profile,
+        "arm": arm,
+        "allow_create": allow_create,
+        **material,
+        "historical_support": public_support,
+        "source_table": attributes,
+    }
+    if profile == "I1":
+        # I1 retains v1's repeated support metadata as well as its two text
+        # views. I2 factors these exact attributes into one global table.
+        by_source = {attribute["id"]: attribute for attribute in attributes}
+        by_support = {support["id"]: support for support in public_support}
+
+        def repeated_refs(support_ids: list[str]) -> list[dict[str, Any]]:
+            return [
+                {
+                    "support": support_id,
+                    **span,
+                    **{
+                        key: value
+                        for key, value in by_source[span["source"]].items()
+                        if key != "id"
+                    },
+                    "body_delivered": False,
+                }
+                for support_id in support_ids
+                for span in by_support[support_id]["ranges"]
+            ]
+
+        for public_record in public_records:
+            repeated = public_record["edit_state"]
+            if repeated:
+                for item in [*repeated["units"], *repeated["relations"]]:
+                    item["evidence_refs"] = repeated_refs(item["support"])
+        packet["historical_evidence"] = repeated_refs(list(by_support))
+        for evidence in public_evidence:
+            evidence.update(
+                {key: value for key, value in by_source[evidence["source"]].items() if key != "id"}
+            )
+            evidence["body_delivered"] = True
+    if features and any(features.values()):
+        for public_record in public_records:
+            clause_record_view(public_record)
+    draft = {
+        "arm": arm,
+        "interface_version": profile,
+        "allow_create": allow_create,
+        "records": records,
+        "units": units,
+        "evidence": fresh,
+        "support": prior,
+    }
+    if features and any(features.values()):
+        packet["edit_features"] = copy.deepcopy(features)
+        draft["edit_features"] = copy.deepcopy(features)
+    return packet, draft

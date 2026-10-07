@@ -1,0 +1,217 @@
+{
+  "status": "COMMON_SEMANTIC_RETRIEVAL_SOURCE_ENGINEERING_PASS_REAL_CHAIN_NOT_ADMITTED_NOT_RUN",
+  "observed_at": "2026-10-06T15:44:04.817496+00:00",
+  "source_commit_reference": "Bind the exact commit containing this source and declaration before HTTP",
+  "source_base": "87c0f1f76ea899bb293be84830447130834fed36",
+  "plan": "milai-edit-post-b0-plan-1.0 sections5.6,7.2,9B",
+  "common_to_all_four_arms": true,
+  "generation_family": "existing Qwen3.6 only",
+  "source_files": [
+    "src/milai_lab/memory/retrieval.py",
+    "src/milai_lab/memory/service.py",
+    "src/milai_lab/providers/embedding_capacity.py",
+    "src/milai_lab/runners/edit_benchmarks.py",
+    "tools/run_edit_development_history.py"
+  ],
+  "behavior": [
+    "Use literal matter and clause/condition text for matching when the existing embedding connection is configured; display IDs and collection timestamps are excluded, literal factual dates remain.",
+    "Interleave positive lexical and cosine ranks with the same retrieval limit. A full lexical page cannot exclude every semantic-only result. No weights, thresholds, query rewrite or gold/source-selection routing.",
+    "Use current visible owner-scoped records. Keep vectors only in a disposable per-service cache keyed by ordinary ID and actual body; changed bodies are re-encoded and removed records leave the cache.",
+    "Existing MeteredEmbeddings checks complete input capacity and bills the same continuous budget. Journal every actual batch before HTTP and preserve known budget refusals as not sent; no retry, truncation or silent lexical success after a configured embedding failure.",
+    "Without embedding configuration the old delivery, retrieval and Reader are unchanged. HaluMem, LongMemEval and the existing four-arm own-empty development driver share the same injected MemoryService retrieval."
+  ],
+  "engineering": {
+    "affected_tests_passed": 313,
+    "new_behavior_tests_included": 5,
+    "Ruff_source_and_test_files": 6,
+    "mypy_source_files": 5,
+    "active_package_boundary": "PASS",
+    "saved_15_record_existing_vector_replay": "PASS_TEXT_EXACT_OLD_FOOD_DELIVERED",
+    "new_HTTP_calls_for_engineering": 0,
+    "new_capacity_projection_inputs": 0
+  },
+  "prior_actual_diagnostic": "milai-edit-post-b0-fixed-state-semantic-retrieval-results-20261006.json",
+  "ranking_differs_from_prior_diagnostic": "Prior diagnosis kept all positive lexical results before cosine fill. This generic source interleaves them; prior Reader answers are not runtime validation of this new source.",
+  "actual_model_calls_for_new_retrieval_source": 0,
+  "own_CI": "47aa_CORE_COLLECTION_FAILURE_CORRECTED_FOUNDATION_PLACEMENT_OWN_CI_PENDING",
+  "next_finite_real_check": {
+    "status": "DECLARED_NOT_ADMITTED_PENDING_FIXED_COMMIT_OWN_FAST_NOT_RUN",
+    "normal_driver": "tools/run_edit_development_history.py",
+    "arms": [
+      "B0",
+      "B1",
+      "B2",
+      "M"
+    ],
+    "initial_state": "each own empty bank",
+    "material": "Reuse unchanged global-condition five-event developer history, already exposed one source shared with original R3 branch; not independent confirmation.",
+    "events_per_arm": 5,
+    "Reader_questions_per_arm": 4,
+    "planned_generation_calls": 36,
+    "sequence": "form general rule, change frequency without restating conditions, add night exception, change global conditions, withdraw exception and query actual state",
+    "Writer_questions_or_evaluator_requirements": "NEVER_DELIVERED",
+    "Judge_calls": 0,
+    "review": "Root actual state, proposals, complete Reader answers and selected source review; not independent Judge",
+    "model": {
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "temperature": 1.0,
+      "enable_thinking": true,
+      "max_tokens": 32768,
+      "timeout": 300
+    },
+    "context_tokens": 65536,
+    "input_limit": 32256,
+    "safety_tokens": 512,
+    "retrieval_limit": 10,
+    "source_tokens": 4096,
+    "old_body_tokens": 8192,
+    "embedding": {
+      "model": "bge-m3",
+      "dimension": 1024,
+      "input_context_tokens": 8192,
+      "batch_size": 16,
+      "existing_service": true,
+      "same_continuous_budget": true
+    },
+    "before_HTTP": "Prior finite process must exit normally; exact published source/declaration and own Fast success, immutable config/source and existing serial lease. Full required before full-prefix/candidate/merge.",
+    "failures": "Keep all first attempts; no replay, ideal old cards, repaired JSON, budget increase or cross-version score splicing.",
+    "source_binding": "Exact commit containing this declaration and CI compatibility correction; do not admit failed20b source"
+  },
+  "bounded_current_first_observations": [
+    "Current-first A yields4 actual accepted edits,1 genuine empty batch and a real completed-role/health revision, not only more creates. No writer capacity failure or operation rejection in this finite8.",
+    "Career plans and a new pet preference are saved where ab8 returned empty, but the original dated career-change motivation is still not saved; later revisions cannot supply that missing historical report.",
+    "Planned exercise/mindfulness scheduling becomes present integrates wording. A same-topic second pet record and insufficient selected evidence remain; actual dialogue coverage is distinct from selected-reference adequacy.",
+    "The new-role revision retains original employment and financial facts as previous history and updates health while retaining old support. Reader gets the old income value right but wrongly dates its report to the new-role assertion date. The scalar assertion date of a compound unit can flatten older fact provenance.",
+    "One later interviews/offers/networking event is delivered with relevant old records but remains empty. All20 answers read; unanswered historical motivation and colleagues influence remain alongside correct unknown-detail abstentions.",
+    "This is one exposed B1 user and one stochastic first attempt, not a causal effect estimate, all4 confirmation, condition-operator advantage or65/277 capacity proof. B remains unused; test actual shared retrieval/condition chain next."
+  ],
+  "extraction_first_B": "NOT_IMPLEMENTED_OR_RUN_DECIDE_FROM_CLOSED_CURRENT_FIRST_A_RESULT",
+  "candidate_selected": false,
+  "method_advantage_established": false,
+  "Product_status": "NO_GO",
+  "remaining_original_plan": "Common65/277, own-state chain, native/drift, M-entry ablation/fixed tighter budget,16 reserved users, external tasks/strong baselines, ordinary Host/recovery and six deliverables remain.",
+  "Product_Schema_API_permissions_Canonical_Archive_workflow": "UNCHANGED",
+  "raw_questions_gold_predictions_HTTP_reasoning_DB_logs_private_configs": "IGNORED",
+  "rollback_reference": "87c0f1f76ea899bb293be84830447130834fed36",
+  "current_first_closed_result_manifest": "milai-edit-post-b0-current-first-finite-results-20261006.json",
+  "current_first_final_result": {
+    "status": "CLOSED_FINITE_CURRENT_FIRST_B1_MAINTENANCE_IMPROVED_OMISSIONS_ATTRIBUTION_AND_DUPLICATION_REMAIN",
+    "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+    "updates_Correct": 10,
+    "updates_all": 19,
+    "updates_valid": 18,
+    "QA_Correct": 15,
+    "QA_all": 20,
+    "QA_valid": 18,
+    "known_tokens": 784726,
+    "accounting_end": {
+      "generation_requests": 39340,
+      "generation": {
+        "charged_tokens": 150249941,
+        "known_tokens": 150138226,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 965219,
+        "known_tokens": 965219,
+        "unknown_usage": 0
+      }
+    }
+  },
+  "ci_compatibility_correction": {
+    "status": "CI_COMPATIBILITY_CORRECTION_LOCAL_CHECKS_PASS_OWN_FAST_PENDING_REAL_CHAIN_NOT_ADMITTED",
+    "source_base": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+    "source_commit_reference": "Bind exact commit containing correction and declaration before HTTP",
+    "observed_at": "2026-10-06T16:02:00+00:00",
+    "causes": [
+      "Existing memory source registration omitted retrieval.py",
+      "Optional base embedding_client collided with ExternalRun required transport and its existing configuration",
+      "Existing P5 conditional string kwargs needed explicit dict[str, Any] after adding an optional retriever dependency"
+    ],
+    "source_files": [
+      "src/milai_lab/harness/source_identity.py",
+      "src/milai_lab/runners/edit_benchmarks.py",
+      "src/milai_lab/runners/v13_1_p5.py"
+    ],
+    "behavior": [
+      "Register the already implemented retrieval module",
+      "Create common retrieval embeddings only for the declared embedding_capacity configuration; keep distinct transport attributes from existing external baselines",
+      "Preserve existing P5 kwargs values and conditional behavior"
+    ],
+    "checks": {
+      "related_tests_passed": 39,
+      "new_necessary_external_configuration_regression": 1,
+      "Ruff_files": 4,
+      "mypy_source_files": 4,
+      "verification_matrix": "PASS_245_ACTIVE_SOURCES",
+      "package_boundary": "PASS",
+      "previous_313_tests_repeated": false
+    },
+    "new_real_model_calls": 0,
+    "own_CI": "QUERY_AFTER_PUBLICATION",
+    "previous_source_CI": {
+      "commit": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b",
+      "observed_at": "2026-10-06T16:02:00+00:00",
+      "Fast": {
+        "run_id": 37490884803,
+        "status": "completed",
+        "conclusion": "failure"
+      },
+      "Full": {
+        "run_id": 37490884560,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "fixed_commit_own_CI": "QUERY_AFTER_PUBLICATION_BEFORE_HTTP"
+    },
+    "next_real_check": "Unchanged exposed global-condition5 events/all4 ownempty/36 Writer-Reader/0 Judge plus all billed embedding; own Fast success required",
+    "rollback_reference": "20b979aa066d86bf27ba3a9a5ff7ce7f61e5dc4b"
+  },
+  "historical_current_first_running_snapshot_before_closure": {
+    "status": "RUNNING_FINITE_CURRENT_FIRST_B1_OWN_EMPTY_FIRST8",
+    "observed_at": "2026-10-06T15:35:47.648995+00:00",
+    "source_commit": "87c0f1f76ea899bb293be84830447130834fed36",
+    "config_version": "milai-edit-post-b0-current-first-affected-first-user-v1",
+    "scope": {
+      "arms": [
+        "B1"
+      ],
+      "development_user_position": 0,
+      "chronological_sessions": 8,
+      "updates": 19,
+      "QA": 20,
+      "initial_state": "OWN_EMPTY_BANK"
+    },
+    "maintenance_completed": 7,
+    "evaluation_completed": 7,
+    "HTTP_requests": 189,
+    "HTTP_responses": 188,
+    "pending_responses": 1,
+    "saved_known_tokens": 664689,
+    "saved_finish_reasons": {
+      "stop": 188
+    },
+    "final_update_score": null,
+    "final_QA_score": null,
+    "same_frozen_lexical_Reader_and_author_scoring": true,
+    "authoritative_process_handle_confirmed_live": true,
+    "no_hot_source_config_changes_or_restart": true,
+    "not_closed_cost_or_new_method_advantage": true
+  },
+  "foundation_test_placement": {
+    "status": "EXISTING_FOUNDATION_TARGET_16_PASS_NO_RUNTIME_SOURCE_CHANGE",
+    "source_base": "47aa6a9eed1c14847f50ae91937fa1b00d70c9f2",
+    "reason": "Core job112370442935 collected the new optional-dependency test without langchain_core; existing source registration/boundaries/Ruff/mypy all passed.",
+    "removed_standalone_test": "tests/memory/test_semantic_retrieval.py",
+    "unchanged5_checks_in": "tests/unit/test_edit_benchmark_wiring.py",
+    "workflow_dependency_changes": false,
+    "new_model_calls": 0,
+    "own_CI": "QUERY_AFTER_PUBLICATION"
+  },
+  "next_execution_order": [
+    "Plan6.2 preselected12 actual query-state L/plain-fill/D/fixed-interleaveH diagnostic, ownFast-bound",
+    "Select common retrieval from actual full-answer and delivery evidence",
+    "Original R3 ownempty global5 and originalbranch; unchanged exposed sources, then same-version prefix65/277"
+  ],
+  "fixed_state_diagnostic_declaration": "milai-post87c-fixed-state-retrieval12-development-20261007.json"
+}

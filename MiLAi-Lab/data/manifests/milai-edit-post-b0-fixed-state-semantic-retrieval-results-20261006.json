@@ -1,0 +1,104 @@
+{
+  "status": "ROOT_REVIEWED_FIXED_STATE_RETRIEVAL_RECOVERS_OLD_FOOD_BUT_NEW_CHANGE_NOT_STORED",
+  "observed_at": "2026-10-06T14:33:41.861117+00:00",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "scope": {
+    "development_user_position": 2,
+    "ordinal": 4,
+    "question_position": 0,
+    "records": 15,
+    "new_Writer_calls": 0,
+    "new_Reader_calls": 3,
+    "new_Judge_calls": 0,
+    "embedding_requests": 1,
+    "embedding_inputs": 16
+  },
+  "actual_state_records": 15,
+  "complete_Reader_answers_reviewed": 3,
+  "HTTP_pairs_reviewed": 4,
+  "dense_food_record_rank": 2,
+  "food_delivered_by_condition": {
+    "frozen_lexical": false,
+    "semantic_text_lexical": false,
+    "semantic_plus_lexical": true
+  },
+  "generation_requests": 3,
+  "generation_known_tokens": 7300,
+  "embedding_requests": 1,
+  "embedding_known_tokens": 574,
+  "new_unknown_usage": 0,
+  "actual_usage": [
+    {
+      "condition": "frozen_lexical",
+      "prompt_tokens": 480,
+      "total_tokens": 2290,
+      "completion_tokens": 1810,
+      "prompt_tokens_details": null,
+      "finish_reason": "stop",
+      "delivered_records": 2
+    },
+    {
+      "condition": "semantic_text_lexical",
+      "prompt_tokens": 368,
+      "total_tokens": 1996,
+      "completion_tokens": 1628,
+      "prompt_tokens_details": null,
+      "finish_reason": "stop",
+      "delivered_records": 1
+    },
+    {
+      "condition": "semantic_plus_lexical",
+      "prompt_tokens": 1519,
+      "total_tokens": 3014,
+      "completion_tokens": 1495,
+      "prompt_tokens_details": null,
+      "finish_reason": "stop",
+      "delivered_records": 10
+    }
+  ],
+  "accounting_start": {
+    "generation_requests": 39119,
+    "generation": {
+      "charged_tokens": 149457915,
+      "known_tokens": 149346200,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_end": {
+    "generation_requests": 39122,
+    "generation": {
+      "charged_tokens": 149465215,
+      "known_tokens": 149353500,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 965219,
+      "known_tokens": 965219,
+      "unknown_usage": 0
+    }
+  },
+  "original_state_and_benchmark_results_unchanged": true,
+  "Writer_or_Judge_calls": 0,
+  "ordinary_runtime_retrieval_source_changed": false,
+  "not_method_comparison_or_new_author_score": true,
+  "future_retrieval_change_common_to_all_arms": true,
+  "Root_not_independent_audit": true,
+  "Reader_model_prompt_and_material_format_unchanged": true,
+  "retrieval_limit": 10,
+  "semantic_text": "Actual matter description and literal clauses including conditions and factual dates; rendered IDs/labels/collection metadata excluded.",
+  "hybrid": "Positive semantic-text lexical hits first, then unseen normalized BGE-m3 cosine results until limit10; no threshold, tuned weights or query rewrite.",
+  "outcomes": [
+    "Frozen lexical delivers2 records, semantic-text lexical1, hybrid10. Food record absent in both lexical conditions and present in hybrid.",
+    "Same Reader accurately recites the older User food report and its date after hybrid retrieval, but still cannot determine later new culinary choices.",
+    "The actual new food preference/openness and Assistant suggestion were never committed because that original event failed before Writer HTTP. Retrieval alone cannot supply this missing change."
+  ],
+  "limitations": [
+    "One exposed actual M state and3 Reader calls are diagnostic only, not a new benchmark score or runtime deployment.",
+    "Larger actual hybrid prompt is accounted; future chosen retrieval must be common to all four arms."
+  ]
+}

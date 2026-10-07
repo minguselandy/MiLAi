@@ -2,6 +2,7 @@
 
 APPLICATION_SOURCE_FILES = (
     "src/milai_lab/application/__init__.py",
+    "src/milai_lab/application/adapters.py",
     "src/milai_lab/application/journal.py",
     "src/milai_lab/application/world.py",
     "src/milai_lab/application/tools.py",

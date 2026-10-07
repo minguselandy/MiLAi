@@ -7,13 +7,24 @@ import json
 from itertools import pairwise
 from pathlib import Path
 
+import httpx
 import pytest
 from langgraph.store.sqlite import SqliteStore
 
-from milai_lab.harness.artifact_io import write_json
+from milai_lab.analysis.edit_mechanism import (
+    delta_judge_view,
+    summarize_three_views,
+    validate_delta,
+)
+from milai_lab.analysis.edit_views import record_index
+from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+from milai_lab.memory.edit_units import render_state
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.runners.edit_mechanism import (
+    MechanismRun,
     blinded_states,
     controlled_events,
     controlled_observations,
@@ -78,6 +89,265 @@ def test_blinding_preserves_same_record_and_changed_revision() -> None:
     assert before[0]["revision"] == 1 and after[0]["revision"] == 2
     assert "method_arm" not in str(before) and "method_version" not in str(after)
     assert after[1]["record_id"] != after[0]["record_id"]
+
+
+def test_conditioned_blinding_renames_only_structural_labels() -> None:
+    state = {
+        "representation": "conditioned_v1",
+        "units": [
+            {"unit_id": "internal:M:condition", "role": "condition", "text": "Weekdays"},
+            {"unit_id": "internal:M:claim", "role": "content", "text": "Keep literal u7"},
+        ],
+        "relations": [{"relation_type": "modifies", "source_unit": "internal:M:condition",
+                       "target_unit": "internal:M:claim"}],
+    }
+    original = row(render_state(state))
+    original["value"]["edit_state"] = state
+    preserved = copy.deepcopy(original)
+    before, after = blinded_states([original], [original], renderer=render_state)
+    assert before == after and "internal:M:" not in str(before)
+    assert "Keep literal u7" in before[0]["content"]
+    assert "Applies under: Weekdays" in before[0]["content"]
+    assert original == preserved
+
+
+def test_delta_relation_removal_preserves_context_without_persistent_ids() -> None:
+    state = {
+        "representation": "conditioned_v1",
+        "units": [
+            {"unit_id": "internal:B2:condition", "role": "condition", "text": "Weekdays"},
+            {"unit_id": "internal:B2:claim", "role": "content", "text": "Twice weekly"},
+        ],
+        "relations": [{"relation_type": "modifies", "source_unit": "internal:B2:condition",
+                       "target_unit": "internal:B2:claim"}],
+    }
+    before = row(render_state(state))
+    before["value"]["edit_state"] = state
+    after = copy.deepcopy(before)
+    after["value"]["revision"] = 2
+    after["value"]["edit_state"]["relations"] = []
+    after["value"]["content"] = render_state(after["value"]["edit_state"])
+    view = delta_judge_view([before], [after], [{"ok": True, "id": before["id"]}])
+    assert view["has_evaluable_delta"] and "internal:B2:" not in str(view)
+    delta = view["net_session_delta"][0]
+    assert delta["new_or_changed_units"] == []
+    assert {u["text"] for u in delta["necessary_current_context"]} == {
+        "Weekdays", "Twice weekly",
+    }
+    judgment = {"status": "VALID", "judgment": {
+        "changes_supported": True,
+        "unsupported_changes": [{"record_id": "unavailable", "claim": "Rule",
+                                 "reason": "No actual target"}],
+        "grounding_unknown": [], "reason": "Unsupported",
+    }}
+    assert validate_delta(judgment, view)["status"] == "INVALID_FIRST_ATTEMPT"
+
+
+def test_missing_actual_old_bodies_cannot_be_scored_as_valid_prior_claims() -> None:
+    before, after = blinded_states([row("Old")], [row("New", 2)])
+    judgment = {"status": "VALID", "judgment": {
+        "valid_prior_claims": 1, "damaged_valid_prior_claims": [],
+        "unsupported_additions": [], "prior_grounding_unknown": [],
+        "cancellation_succeeded": None,
+    }}
+    assert validate_transition(
+        judgment, before, after, cancellation=False, prior_sources=[]
+    )["status"] == "INVALID_FIRST_ATTEMPT"
+    judgment["judgment"].update(valid_prior_claims=0, prior_grounding_unknown=["record_0"])
+    assert validate_transition(
+        judgment, before, after, cancellation=False, prior_sources=[]
+    )["status"] == "VALID"
+
+
+def test_three_tables_keep_unassessed_and_no_delta_in_fixed_opportunities() -> None:
+    rows = [
+        {"arm": "B1", "variant": "Actual", "delta_view": {"has_evaluable_delta": changed},
+         "delta_assessment": {"status": status, "judgment": {
+             "changes_supported": True, "unsupported_changes": [], "grounding_unknown": []}}}
+        for changed, status in [(True, "VALID"), (True, "INVALID_FIRST_ATTEMPT"),
+                                (False, "NO_EVALUABLE_DELTA")]
+    ]
+    author = {"B1": {"official_score": {"recall(all)": 0.2}}}
+    state = {"B1/Actual": {"opportunities": 3, "non_target_damage_rate_valid_grounded": None}}
+    report = summarize_three_views(rows, ["B1"], state, author)
+    delta = report["delta_source_faithfulness_table"]["B1"]
+    assert delta["fixed_native_opportunities"] == 3
+    assert delta["text_or_scope_delta_opportunities"] == 2
+    assert delta["supported_delta_all_fixed_opportunities"] == 1 / 3
+    assert delta["without_evaluable_delta"] == 1
+    assert delta["unavailable_or_invalid_changed_delta"] == 1
+    assert report["official_extracted_compat_table"] == author
+    assert report["state_after_native_table"]["B1"] == state["B1/Actual"]
+    assert not report["author_score_replaced"] and report["extra_state_judge_calls"] == 0
+
+
+@pytest.mark.parametrize("artifact_layout", ["legacy", "recipe"])
+def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
+    tmp_path: Path, artifact_layout: str,
+) -> None:
+    """Synthetic engineering fixture; no actual model or scientific score proof."""
+    suite = tmp_path / "suite"
+    original = {}
+    arms = ["B0", "B1", "B2", "M"]
+    for arm in arms:
+        root = suite / arm
+        bank = root / "banks/alice"
+        bank.mkdir(parents=True)
+        write_json(root / "actual-config.json", {
+            "arm": arm, "interface_version": "I2", "halumem": {"users": ["alice"]},
+            **({"maintenance_recipe": "extract_then_edit"} if artifact_layout == "recipe" else {}),
+        })
+        terminal = "terminal-score.json" if artifact_layout == "recipe" else "terminal.json"
+        write_json(root / terminal, {"status": "COMPLETED_EXPERIMENT_PHASE"})
+        write_json(bank / "session-order.json", {"original_ordinals": [0, 1]})
+        write_json(root / "halumem-official-results.json", {
+            "overall_score": {"author_fixture": arm}, "supplemental_denominators": {},
+        })
+        with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
+            service = MemoryService(
+                store, ("edit", arm, arm, "alice"), "alice", bank / "memory.lock",
+                mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+            )
+            method = EditMemory(service, arm, interface_version="I2")
+            for step, text in enumerate([
+                "Twice weekly; holidays paused.", "Once weekly; holidays paused.",
+            ]):
+                session = f"halumem:alice:session:{step}"
+                captured = service.capture_user(
+                    session, "actual-user", text,
+                    occurred_at=f"2030-01-0{step + 1}" if artifact_layout == "recipe" else None,
+                )
+                service.bind_source_boundary(session, "boundary", [captured["source_ref"]])
+                before = copy.deepcopy(service.records())
+                delivery = method.prepare([captured["source_ref"]], "weekly")
+                delivery["sources"][0]["timestamp"] = f"2030-01-0{step + 1}"
+                view = method.writer_view(delivery)
+                if not step:
+                    proposal = {"action": "create", "units": [{"text": text, "evidence": ["e1"]}]}
+                elif arm in {"B0", "B2"}:
+                    proposal = {"action": "rewrite", "target": "r1",
+                                "units": [{"text": text, "evidence": ["e1"]}]}
+                else:
+                    proposal = {"action": "edit", "target": "r1", "edits": [
+                        {"operation": "replace", "target_unit": "u1",
+                         "text": text, "evidence": ["e1"]},
+                    ]}
+                receipt = method.apply(
+                    session, f"actual:{step}", method.decode_proposal(proposal, view["mapping"])
+                )
+                assert receipt["ok"]
+                folder = root / "maintenance/halumem/alice" / str(step)
+                if artifact_layout == "recipe":
+                    write_json(folder / "complete.json", {"receipts": [receipt], "batches": [{
+                        "receipts": [receipt], "source_refs": [captured["source_ref"]],
+                        "unprocessed": [], "status": "completed",
+                    }]})
+                    write_json(folder / "batch-0-before.json", before)
+                    write_json(folder / "batch-0-after.json", service.records())
+                else:
+                    write_json(folder / "complete.json", {"receipts": [receipt]})
+                    write_json(folder / "batch-0000/complete.json", {"receipts": [receipt]})
+                    write_json(folder / "batch-0000/before.json", before)
+                    write_json(folder / "batch-0000/after.json", service.records())
+                    write_json(folder / "batch-0000/delivery.json", delivery)
+                    write_json(folder / "source-coverage.json", {
+                        "original_characters": len(text), "source_refs": [captured["source_ref"]],
+                    })
+                write_json(root / "evaluation/halumem/alice" / str(step) / "complete.json", {
+                    "counts": {"formed_sessions": 1}, "records": {},
+                })
+            service.capture_user("future", "unrelated", "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE")
+            original[arm] = copy.deepcopy(service.records())
+    case = {"uuid": "alice", "session": 1, "memory_ordinal": 0,
+            "date": "2030-01-02", "observed_dialogue": [
+                {"role": "user", "content": "Once weekly; holidays paused."},
+            ]}
+    label = {**case, "classification": "ordinary_update",
+             "source_supported_requirement": "Once weekly while holidays remain paused.",
+             "guard_against_unsupported_change": "Keep the holiday qualification.",
+             "cancellation": False, "uncertainty": "none",
+             "diagnostic_question": "What is the current schedule?"}
+    selection, review = tmp_path / "selection.json", tmp_path / "review.json"
+    write_json(selection, {"selected": [case]})
+    write_json(review, {"selection_count": 1, "reviews": [label]})
+    requests = []
+
+    def provider(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.content)
+        requests.append(body)
+        payload = json.loads(body["messages"][-1]["content"])
+        properties = payload.get("response_schema", {}).get("properties", {})
+        if "changes_supported" in properties:
+            output = {"changes_supported": True, "unsupported_changes": [],
+                      "grounding_unknown": [], "reason": "Synthetic response"}
+        elif "initial_target_present" in properties:
+            contents = [r["content"] for r in payload["after"]]
+            conflict = any("Twice weekly" in t for t in contents) and any(
+                "Once weekly" in t for t in contents
+            )
+            satisfied = any("Once weekly" in t for t in contents) and not conflict
+            output = {"initial_target_present": True, "new_requirement_satisfied": satisfied,
+                      "valid_prior_claims": 1, "damaged_valid_prior_claims": [],
+                      "unsupported_additions": [], "prior_grounding_unknown": [],
+                      "current_conflicts": ["Both current values"] if conflict else [],
+                      "cancellation_succeeded": None, "reason": "Synthetic response"}
+        elif "complete_and_supported" in properties:
+            output = {"requirement_correct": True, "complete_and_supported": True,
+                      "unsupported_explanations": [], "current_conflicts": [],
+                      "reason": "Synthetic response"}
+        else:
+            output = "Once weekly; holidays paused."
+        content = output if isinstance(output, str) else json.dumps(output)
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
+            "message": {"role": "assistant", "content": content}}],
+            "usage": {"prompt_tokens": 10, "completion_tokens": 10, "total_tokens": 20}})
+
+    class Tokenizer:
+        def apply_chat_template(self, messages, **kwargs):
+            return [1] * sum(len(m["content"]) for m in messages)
+
+    run = MechanismRun.__new__(MechanismRun)
+    run.root = tmp_path / "assessment"
+    run.settings = {"mechanism": {"arms": arms}, "drift": {"arms": arms},
+                    "interface_version": "I2",
+                    "model": {"max_tokens": 100}, "context_tokens": 65536, "retrieval_limit": 10}
+    run.tokenizer = Tokenizer()
+    run.budget = RunBudget(RunLimits(), tmp_path / "budget.json")
+    run.client = VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100),
+                            transport=httpx.MockTransport(provider), budget=run.budget)
+    try:
+        result = run.run_native(suite, selection, review)
+        assert result["metrics"]["M/Actual"]["opportunities"] == 1
+        assert len(requests) == 40
+        count = run.budget.state["generation_requests"]
+        run.run_native(suite, selection, review)
+        assert run.budget.state["generation_requests"] == count
+        drift = run.run_drift(suite)
+        assert len(drift["trajectories"]) == len(arms)
+        assert len(requests) == 48
+        for request in requests[-8:]:
+            payload = json.loads(request["messages"][-1]["content"])
+            assert len(payload["observed_dialogue"]) == 1
+            assert payload["observed_dialogue"][0]["original_timestamp"] in {
+                "2030-01-01", "2030-01-02",
+            }
+        assert "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE" not in json.dumps(requests)
+        for request in requests:
+            if "response_schema" in json.loads(request["messages"][-1]["content"]):
+                assert request["response_format"]["type"] == "json_schema"
+        tables = read_json(run.root / "r4-three-view-results.json")
+        for arm in arms:
+            assert tables["delta_source_faithfulness_table"][arm]["valid_delta_judgments"] == 1
+            assert tables["official_extracted_compat_table"][arm]["official_score"] == {
+                "author_fixture": arm,
+            }
+            bank = suite / arm / "banks/alice"
+            with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
+                service = MemoryService(store, ("edit", arm, arm, "alice"), "alice",
+                                        bank / "memory.lock")
+                assert record_index(service.records()) == record_index(original[arm])
+    finally:
+        run.client.close()
 
 
 def test_snapshot_availability_does_not_count_no_change_or_unknown_as_committed(
@@ -261,6 +531,31 @@ def test_full_answer_audit_keeps_every_original_session_and_exact_answer(tmp_pat
     write_json(tmp_path / "M" / "terminal.json", {"status": "COMPLETED_EXPERIMENT_PHASE"})
     with pytest.raises(ValueError, match="external arm"):
         require_completed_external(tmp_path, ["M"])
+    (tmp_path / "M/terminal.json").unlink()
+    write_json(tmp_path / "M/terminal-predict.json", {"status": "PREDICTIONS_SAVED"})
+    with pytest.raises(ValueError, match="external arm"):
+        require_completed_external(tmp_path, ["M"])
+    with pytest.raises(ValueError, match="development arm"):
+        require_completed_suite(tmp_path, ["M"])
+    write_json(tmp_path / "M/terminal-score.json", {"status": "COMPLETED_EXTERNAL_PHASE"})
+    require_completed_external(tmp_path, ["M"])
+
+
+def test_recipe_snapshot_keeps_failed_batch_and_numeric_last_state(tmp_path: Path) -> None:
+    folder = tmp_path / "M/maintenance/halumem/alice/0"
+    batches = [{"status": "completed", "unprocessed": []} for _ in range(11)]
+    batches[3] = {"status": "incomplete", "unprocessed": [{
+        "phase": "edit", "reason": "EDIT_MAINTENANCE_REQUEST_EXCEEDS_CAPACITY",
+    }]}
+    write_json(folder / "complete.json", {"batches": batches, "receipts": []})
+    write_json(folder / "batch-0-before.json", [row("Initial")])
+    write_json(folder / "batch-9-after.json", [row("Earlier")])
+    write_json(folder / "batch-10-after.json", [row("Actual final")])
+    before, after, availability = snapshots(tmp_path, "M", "alice", 0)
+    assert before == [row("Initial")] and after == [row("Actual final")]
+    assert availability["actual_source_batches"] == 11
+    assert availability["incomplete_maintenance_batches"] == availability["writer_failures"] == 1
+    assert availability["committed_receipts"] == 0
 
 
 def test_continuous_damage_reports_invalid_gaps_and_original_chronology() -> None:

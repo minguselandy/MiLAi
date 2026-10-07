@@ -1,0 +1,98 @@
+{
+  "version": "milai-post87c-claim-revision-evidence-development-1.0",
+  "status": "SOURCE_IMPLEMENTED_NARROW_ENGINEERING_PASS_REAL_MODEL_RECHECK_NOT_ADMITTED",
+  "observed_at": "2026-10-06T18:29:24.251694+00:00",
+  "previous_report_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+  "closed_R3_source_commit": "646d9fad9e8562a5c7ee7cbaa51b4f4ed9d0b845",
+  "closed_R3_results": "milai-post87c-common-dense-r3-results-20261007.json",
+  "source_identity": "Bind this publication exact commit and its own Fast before any new HTTP",
+  "common_arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "implementation": {
+    "formation": "One independently revisable assertion per clause. Plain qualifications have their own matter/scope text; B2/M use identical content/condition and binding rules. No forced conditions for unrestricted facts.",
+    "revision_evidence": "Internal decoder records only actual selected e fragment handles, excluding retained h support. Same MemoryService committed version keeps these references. Common read resolves exact ranges, real roles, occurrence and capture times; no full-source widening.",
+    "legacy": "Old local versions can read their actual edit_operations witnesses. Missing whole-rewrite fragment selections are not reconstructed from source IDs or interpreted as absent evidence.",
+    "ordinary_Host": "Same read helper on the first actual record unit/page, subject to existing material limit/pagination/visibility. No extra writer e alias issued from this read-only field.",
+    "benchmark_Reader": "Selected retained records plus actual revision fragments. Existing retrieval snapshot/recovery remains; no fresh event attached to rejected or empty maintenance.",
+    "method_variables_retained": "B0/B2 generate complete related matters; B1/M perform their own local operations; B2/M share representation. No automatic fill or semantic guard relaxation.",
+    "Lab_version_read_metadata_changed": true,
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "new_platform_auditor_or_feature_flag": false
+  },
+  "engineering": {
+    "pytest_distinct_passed": 23,
+    "targeted_withdrawal_rerun_passed": 2,
+    "existing_test_functions_strengthened": 3,
+    "new_test_functions": 0,
+    "Ruff_files": 7,
+    "mypy_source_files": 5,
+    "package_boundary": "PASS",
+    "four_arm_hypothetical_lifecycle": "All 4 actual empty SQLite banks apply formation/exception/common-cutoff/withdrawal; final3 units, plain0 or conditioned2 links; retained general attribution unchanged.",
+    "four_arm_hypothetical_correction": "All 4 preserve text/role/support/attribution for both unrestated qualifiers. Reader resolves only the newly selected exact fragment and actual report date.",
+    "not_real_model_behavior": true,
+    "local_check_corrections": [
+      "Root temporary engineering namespace corrected to its actual owner before executing examples",
+      "Two long-line formatting findings corrected",
+      "Optional internal metadata access narrowed after mypy finding"
+    ]
+  },
+  "real_recheck_declaration": {
+    "status": "PREPARED_SCOPE_NOT_ADMITTED",
+    "first": "At most2 read-only Reader calls on fixed actual first-branch M post-withdrawal and final delivered states/questions; existing old responses preserved as baseline. No Writer/embedding or stored-state changes.",
+    "then": "Both unchanged original exposed R3 branches, all4 arms each own empty bank, one run per branch; original event/question order preserved.",
+    "original_generation_scope": [
+      44,
+      36
+    ],
+    "Judge_calls": 0,
+    "sampling": "Existing Qwen3.6 family, thinking=true, temperature1.0",
+    "capacity": {
+      "context": 65536,
+      "output": 32768,
+      "margin": 512,
+      "input_limit": 32256
+    },
+    "retrieval": "Same common I2/dense cosine/K10/BGE-m3; all actual encoding metered.",
+    "recovery": "First attempts; no retry/unknown replay/JSON repair/hot edit/ideal old card. Existing serial lease and continuous ledger.",
+    "admission": "New exact source own Fast success before HTTP. Own Full success before new four-user prefix/final candidate/merge.",
+    "preserve_all_results": true,
+    "not_independent_source_or_Judge_confirmation": true
+  },
+  "actual_new_calls": {
+    "Writer": 0,
+    "Reader": 0,
+    "Judge": 0,
+    "embedding_requests": 0
+  },
+  "continuous_accounting_snapshot": {
+    "generation_requests": 39460,
+    "generation": {
+      "charged_tokens": 150764705,
+      "known_tokens": 150652990,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 970470,
+      "known_tokens": 970470,
+      "unknown_usage": 0
+    }
+  },
+  "full_goal_remaining": [
+    "Same-version4-arm own-empty prefix8/selected65/full277",
+    "Native32 opportunities12sessions4users and actual full-history drift",
+    "One M entry ablation and one fixed tighter-budget sensitivity",
+    "16 reserved users after candidate freeze",
+    "LongMemEval28/1354history appearances/10full reviews and RawRAG/RollingSummary/authorA-MEM",
+    "Ordinary Host135cases192messages/new stories/forget/actual effects/recovery",
+    "Six deliverables and reproducible supported/unsupported contribution"
+  ],
+  "candidate_selected": false,
+  "product_status": "NO_GO",
+  "goal_complete": false,
+  "rollback_commit": "06198a53a66aa64b3c3eea4d8bee6840d21afdc3",
+  "raw_HTTP_DB_gold_reasoning_configs_private_and_ignored": true
+}

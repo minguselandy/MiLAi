@@ -19,24 +19,30 @@ from pydantic import BaseModel, ValidationError
 
 from milai_lab.analysis.edit_mechanism import (
     ANSWER_PROMPT,
+    DELTA_PROMPT,
     TRANSITION_PROMPT,
     VARIANTS,
     AnswerAssessment,
+    DeltaAssessment,
     TransitionAssessment,
     blinded_states,
     controls,
+    delta_judge_view,
     summarize_controlled,
     summarize_drift,
     summarize_native,
+    summarize_three_views,
+    validate_delta,
     validate_transition,
 )
-from milai_lab.analysis.edit_results import ratio, receipt_effect
+from milai_lab.analysis.edit_results import ratio, receipt_effect, scoring_terminal
 from milai_lab.datasets.edit_benchmarks import (
     ObservedSession,
     longmemeval_cases,
     longmemeval_history,
 )
 from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.memory.edit_units import render_state
 from milai_lab.memory.functional_state import body_text
 from milai_lab.memory.service import MemoryService
 from milai_lab.runners.edit_benchmarks import BenchmarkRun, parse_object
@@ -44,16 +50,20 @@ from milai_lab.runners.edit_benchmarks import BenchmarkRun, parse_object
 T = TypeVar("T", bound=BaseModel)
 
 
-def require_completed_suite(root: Path, arms: list[str]) -> None:
+def require_completed_suite(root: Path, arms: list[str], *, v2: bool = False) -> None:
     for arm in arms:
-        terminal = root / arm / "terminal.json"
+        terminal = scoring_terminal(root / arm)
         if not terminal.exists() or read_json(terminal)["status"] != "COMPLETED_EXPERIMENT_PHASE":
             raise ValueError("Complete every paired development arm before mechanism scoring")
+        if v2 and read_json(root / arm / "actual-config.json").get(
+            "interface_version", "v1"
+        ) == "v1":
+            raise ValueError("v2 assessment requires each arm's own v2 cohort")
 
 
 def require_completed_external(root: Path, arms: list[str]) -> None:
     for arm in arms:
-        terminal = root / arm / "terminal.json"
+        terminal = scoring_terminal(root / arm)
         if not terminal.exists() or read_json(terminal)["status"] != "COMPLETED_EXTERNAL_PHASE":
             raise ValueError("Complete every external arm before the full-answer audit")
 
@@ -133,30 +143,54 @@ def snapshots(
     folder = root / arm / "maintenance" / "halumem" / owner / str(session)
     if not (folder / "complete.json").exists():
         raise ValueError("Actual source opportunity has not completed")
-    batches = sorted(folder.glob("batch-*"))
-    if not batches or any(not (b / "after.json").exists() for b in batches):
-        raise ValueError("Actual before/after transition snapshot missing")
-    before, after = read_json(batches[0] / "before.json"), read_json(batches[-1] / "after.json")
-    receipts = [r for b in batches for r in read_json(b / "complete.json")["receipts"]]
+    complete = read_json(folder / "complete.json")
+    recipe_batches = complete.get("batches")
+    if recipe_batches is not None:
+        if not recipe_batches:
+            raise ValueError("Actual before/after transition snapshot missing")
+        before = read_json(folder / "batch-0-before.json")
+        after = read_json(folder / f"batch-{len(recipe_batches) - 1}-after.json")
+        receipts = complete["receipts"]
+        batch_count = len(recipe_batches)
+        writer_failures = sum(
+            any(gap.get("phase") in {"locate", "edit", "edit_pending"}
+                for gap in batch["unprocessed"])
+            for batch in recipe_batches
+        )
+    else:
+        batches = sorted(path for path in folder.glob("batch-*") if path.is_dir())
+        if not batches or any(not (b / "after.json").exists() for b in batches):
+            raise ValueError("Actual before/after transition snapshot missing")
+        before = read_json(batches[0] / "before.json")
+        after = read_json(batches[-1] / "after.json")
+        receipts = [r for b in batches for r in read_json(b / "complete.json")["receipts"]]
+        batch_count = len(batches)
+        writer_failures = sum((b / "writer-failure.json").exists() for b in batches)
     effects = [receipt_effect(receipt) for receipt in receipts]
     return (
         before,
         after,
         {
-            "actual_source_batches": len(batches),
+            "actual_source_batches": batch_count,
             "proposals": len(receipts),
             "committed_receipts": effects.count("committed"),
             "original_commits_confirmed_by_replay": effects.count("replayed_commit"),
             "accepted_no_change_receipts": effects.count("no_change"),
             "rejected_receipts": effects.count("rejected"),
             "other_or_unconfirmed_receipts": effects.count("other_or_unconfirmed"),
-            "writer_failures": sum((b / "writer-failure.json").exists() for b in batches),
+            "writer_failures": writer_failures,
+            **({"incomplete_maintenance_batches": sum(
+                batch["status"] != "completed" for batch in recipe_batches
+            )} if recipe_batches is not None else {}),
             "after_record_count": len(after),
         },
     )
 
 
-def prior_evidence(root: Path, arm: str, owner: str, before: list[dict[str, Any]]) -> list[Any]:
+def prior_evidence(
+    root: Path, arm: str, owner: str, before: list[dict[str, Any]], *,
+    record_names: dict[str, str] | None = None, label_prefix: str = "old_source",
+) -> list[Any]:
     """Fetch only ranges cited by the actual OLD state, never future-bank records."""
     config = read_json(root / arm / "actual-config.json")
     bank = root / arm / "banks" / owner
@@ -168,12 +202,16 @@ def prior_evidence(root: Path, arm: str, owner: str, before: list[dict[str, Any]
             service,
             before,
             timestamp_lookup=lambda source: original_timestamp(root, arm, owner, source),
+            bind_records=config.get("interface_version", "v1") != "v1",
+            record_names=record_names, label_prefix=label_prefix,
         )
     return result
 
 
 def original_timestamp(root: Path, arm: str, owner: str, source: dict[str, Any]) -> str | None:
-    """Read the actual original timestamp from this cited source's past delivery."""
+    """Use the captured original time, or its saved delivery in historical runs."""
+    if source.get("occurred_at") is not None:
+        return str(source["occurred_at"])
     prefix = "halumem:" + owner + ":session:"
     if not source["session"].startswith(prefix):
         return None
@@ -195,26 +233,58 @@ def grounded_ranges(
     before: list[dict[str, Any]],
     *,
     timestamp_lookup: Callable[[dict[str, Any]], str | None] | None = None,
+    bind_records: bool = False,
+    record_names: dict[str, str] | None = None,
+    label_prefix: str = "old_source",
 ) -> list[Any]:
     """Deliver only evidence already cited by the actual state, with opaque labels."""
     result: list[Any] = []
-    seen: set[tuple[Any, ...]] = set()
+    seen: dict[tuple[Any, ...], int] = {}
+    names = record_names or {
+        key: f"record_{i}" for i, key in enumerate(dict.fromkeys(row["id"] for row in before))
+    }
     for row in before:
         if not row.get("ok"):
             continue
-        state = row["value"].get("edit_state", {})
+        state = row["value"].get("edit_state") or {}
+        units = {u["unit_id"]: u for u in state.get("units", [])}
         for item in [*state.get("units", []), *state.get("relations", [])]:
+            binding = {"record_id": names[row["id"]]}
+            if "text" in item:
+                binding.update({"text": item["text"], "role": item["role"]})
+            else:
+                binding.update({
+                    "relation_type": item["relation_type"],
+                    "source_text": units[item["source_unit"]]["text"],
+                    "target_text": units[item["target_unit"]]["text"],
+                })
             for ref in item.get("evidence_refs", []):
                 identity = tuple(ref[k] for k in ("source_ref", "source_revision", "start", "end"))
                 if identity in seen:
+                    if bind_records and binding not in result[seen[identity]]["cited_by"]:
+                        result[seen[identity]]["cited_by"].append(copy.deepcopy(binding))
                     continue
-                seen.add(identity)
+                seen[identity] = len(result)
                 source = service.source(ref["source_ref"])
-                if source is None or source["source_revision"] != ref["source_revision"]:
-                    raise ValueError("Actual old-state source binding unavailable")
+                body = body_text(source) if source is not None else ""
+                if (
+                    source is None or source["source_revision"] != ref["source_revision"]
+                    or not 0 <= ref["start"] < ref["end"] <= len(body)
+                ):
+                    result.append(
+                        {
+                            "source_id": label_prefix + "_" + str(len(result)),
+                            "status": "UNKNOWN",
+                            "body_delivered": False,
+                            "reason": "actual old-state source binding unavailable",
+                        }
+                    )
+                    if bind_records:
+                        result[-1]["cited_by"] = [copy.deepcopy(binding)]
+                    continue
                 result.append(
                     {
-                        "source_id": "old_source_" + str(len(result)),
+                        "source_id": label_prefix + "_" + str(len(result)),
                         "source_revision": ref["source_revision"],
                         "start": ref["start"],
                         "end": ref["end"],
@@ -222,9 +292,11 @@ def grounded_ranges(
                         "original_timestamp": timestamp_lookup(source)
                         if timestamp_lookup
                         else None,
-                        "text": body_text(source)[ref["start"] : ref["end"]],
+                        "text": body[ref["start"] : ref["end"]],
                     }
                 )
+                if bind_records:
+                    result[-1]["cited_by"] = [copy.deepcopy(binding)]
     return result
 
 
@@ -260,6 +332,7 @@ class MechanismRun(BenchmarkRun):
         self, key: str, prompt: str, payload: dict[str, Any], schema: type[T]
     ) -> dict[str, Any]:
         try:
+            output_schema = schema.model_json_schema()
             response = self.call(
                 key,
                 [
@@ -267,12 +340,16 @@ class MechanismRun(BenchmarkRun):
                     {
                         "role": "user",
                         "content": json.dumps(
-                            {**payload, "response_schema": schema.model_json_schema()},
+                            {**payload, "response_schema": output_schema},
                             ensure_ascii=False,
                         ),
                     },
                 ],
                 structured=True,
+                response_format={
+                    "type": "json_schema",
+                    "json_schema": {"name": schema.__name__, "schema": output_schema},
+                } if self.settings.get("interface_version", "v1") != "v1" else None,
             )
             judgment = schema.model_validate(parse_object(response))
             return {"status": "VALID", "judgment": judgment.model_dump()}
@@ -308,7 +385,8 @@ class MechanismRun(BenchmarkRun):
 
     def run_native(self, suite: Path, selection: Path, review: Path) -> dict[str, Any]:
         arms = self.settings["mechanism"]["arms"]
-        require_completed_suite(suite, arms)
+        v2 = self.settings.get("interface_version", "v1") != "v1"
+        require_completed_suite(suite, arms, v2=v2)
         selected, labels = read_json(selection), read_json(review)
         cases = selected["selected"]
         if len(cases) != len(labels["reviews"]) or labels["selection_count"] != len(cases):
@@ -324,10 +402,16 @@ class MechanismRun(BenchmarkRun):
                     key = f"native/{index:03d}/{arm}/{variant}"
                     done = self.root / key / "complete.json"
                     if done.exists():
-                        results.append(read_json(done))
+                        saved = read_json(done)
+                        if (
+                            v2 and saved.get("r4_protocol_version")
+                            != "milai-edit-r4-three-views-v2"
+                        ):
+                            raise ValueError("Existing native checkpoint has another protocol")
+                        results.append(saved)
                         continue
                     state = controls(before, after, variant)
-                    first, second = blinded_states(before, state)
+                    first, second = blinded_states(before, state, renderer=render_state)
                     source_review = {
                         k: label[k]
                         for k in (
@@ -350,8 +434,46 @@ class MechanismRun(BenchmarkRun):
                         key + "/transition-judge", TRANSITION_PROMPT, payload, TransitionAssessment
                     )
                     transition = validate_transition(
-                        transition, first, second, cancellation=label["cancellation"]
+                        transition, first, second, cancellation=label["cancellation"],
+                        prior_sources=old_sources if v2 else None,
                     )
+                    supplemental = {}
+                    if v2 and variant == "Actual":
+                        location = (
+                            suite / arm / "maintenance/halumem" / case["uuid"]
+                            / str(case["session"])
+                        )
+                        receipts = read_json(location / "complete.json")["receipts"]
+                        delta = delta_judge_view(before, state, receipts)
+                        aliases = {
+                            row["id"]: view["record_id"]
+                            for row, view in zip(
+                                [r for r in [*before, *state] if r.get("ok")],
+                                [*first, *second], strict=True,
+                            )
+                        }
+                        affected = {d["record_id"] for d in delta["net_session_delta"]}
+                        cited_after = prior_evidence(
+                            suite, arm, case["uuid"],
+                            [r for r in state if r.get("ok") and aliases[r["id"]] in affected],
+                            record_names=aliases, label_prefix="delta_cited_source",
+                        )
+                        delta_assessment = (
+                            self.assess(
+                                key + "/delta-judge", DELTA_PROMPT,
+                                {"observed_dialogue": case["observed_dialogue"],
+                                 "source_review": source_review, "delta_view": delta,
+                                 "prior_source_ranges": old_sources,
+                                 "actual_after_cited_ranges": cited_after},
+                                DeltaAssessment,
+                            ) if delta["has_evaluable_delta"] else
+                            {"status": "NO_EVALUABLE_DELTA", "additional_model_calls": 0}
+                        )
+                        supplemental = {
+                            "delta_view": delta,
+                            "delta_assessment": validate_delta(delta_assessment, delta),
+                            "actual_after_cited_ranges": cited_after,
+                        }
                     probe = self.probe(
                         case["uuid"], state, label["diagnostic_question"], case["date"], key
                     )
@@ -389,11 +511,26 @@ class MechanismRun(BenchmarkRun):
                         "answer_assessment": answer,
                         "gold_initialization": False,
                         "additional_editor_calls": 0,
+                        **supplemental,
                     }
+                    if v2:
+                        result["r4_protocol_version"] = "milai-edit-r4-three-views-v2"
                     write_json(done, result)
                     results.append(result)
         report = summarize_native(results, arms)
         write_json(self.root / "native-mechanism-results.json", report)
+        if v2:
+            author_scores = {}
+            for arm in arms:
+                original = read_json(suite / arm / "halumem-official-results.json")
+                author_scores[arm] = {
+                    "official_score": original["overall_score"],
+                    "supplemental_denominators": original["supplemental_denominators"],
+                }
+            tables = summarize_three_views(
+                results, arms, report["metrics"], author_scores,
+            )
+            write_json(self.root / "r4-three-view-results.json", tables)
         return report
 
     def run_long_audit(self, suite: Path, manifest: Path) -> dict[str, Any]:
@@ -474,7 +611,9 @@ class MechanismRun(BenchmarkRun):
 
     def run_drift(self, suite: Path) -> dict[str, Any]:
         arms = self.settings["drift"]["arms"]
-        require_completed_suite(suite, arms)
+        require_completed_suite(
+            suite, arms, v2=self.settings.get("interface_version", "v1") != "v1"
+        )
         rows = []
         for arm in arms:
             config = read_json(suite / arm / "actual-config.json")
@@ -487,8 +626,17 @@ class MechanismRun(BenchmarkRun):
                         rows.append(read_json(done))
                         continue
                     maintenance = suite / arm / "maintenance" / "halumem" / owner / str(ordinal)
-                    coverage = read_json(maintenance / "source-coverage.json")
-                    if coverage["original_characters"] == 0:
+                    if config.get("maintenance_recipe"):
+                        complete = read_json(maintenance / "complete.json")
+                        source_refs = list(dict.fromkeys(
+                            ref for batch in complete["batches"] for ref in batch["source_refs"]
+                        ))
+                        empty_source = not source_refs
+                    else:
+                        coverage = read_json(maintenance / "source-coverage.json")
+                        source_refs = coverage["source_refs"]
+                        empty_source = coverage["original_characters"] == 0
+                    if empty_source:
                         row = {
                             "arm": arm,
                             "uuid": owner,
@@ -508,7 +656,7 @@ class MechanismRun(BenchmarkRun):
                                 bank / "memory.lock",
                             )
                             new_sources = []
-                            for i, ref in enumerate(coverage["source_refs"]):
+                            for i, ref in enumerate(source_refs):
                                 source = service.source(ref)
                                 if source is None:
                                     raise ValueError("Actual native source unavailable")
@@ -522,7 +670,7 @@ class MechanismRun(BenchmarkRun):
                                         ),
                                     }
                                 )
-                        first, second = blinded_states(before, after)
+                        first, second = blinded_states(before, after, renderer=render_state)
                         transition = self.assess(
                             key + "/transition-judge",
                             TRANSITION_PROMPT,
@@ -549,7 +697,10 @@ class MechanismRun(BenchmarkRun):
                             TransitionAssessment,
                         )
                         transition = validate_transition(
-                            transition, first, second, cancellation=False
+                            transition, first, second, cancellation=False,
+                            prior_sources=old_sources if self.settings.get(
+                                "interface_version", "v1"
+                            ) != "v1" else None,
                         )
                         row = {
                             "arm": arm,
@@ -613,12 +764,12 @@ class MechanismRun(BenchmarkRun):
                                 before_path = self.root / key / "before.json"
                                 if not before_path.exists():
                                     write_json(before_path, service.records())
-                                self.maintain_edit(service, observed, key)
+                                self.maintain(service, observed, key)
                                 after_path = self.root / key / "after.json"
                                 if not after_path.exists():
                                     write_json(after_path, service.records())
                                 before, after = read_json(before_path), read_json(after_path)
-                                first, second = blinded_states(before, after)
+                                first, second = blinded_states(before, after, renderer=render_state)
                                 prefix = [
                                     {"date": s.date, "dialogue": s.turns}
                                     for s in history[: step + 1]
@@ -633,6 +784,9 @@ class MechanismRun(BenchmarkRun):
                                         timestamp_lookup=observed_timestamp_lookup(
                                             history[: step + 1]
                                         ),
+                                        bind_records=self.settings.get(
+                                            "interface_version", "v1"
+                                        ) != "v1",
                                     ),
                                     "before": first,
                                     "after": second,
@@ -648,6 +802,9 @@ class MechanismRun(BenchmarkRun):
                                     first,
                                     second,
                                     cancellation=event["review"]["cancellation"],
+                                    prior_sources=payload["prior_source_ranges"]
+                                    if self.settings.get("interface_version", "v1") != "v1"
+                                    else None,
                                 )
                                 question = event["diagnostic_questions"][wording]
                                 probe = self.probe(owner, after, question, observed.date, key)

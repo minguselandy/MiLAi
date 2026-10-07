@@ -1,0 +1,771 @@
+{
+  "schema_version": "milai-edit-progress-review-summary-v1",
+  "status": "B0_B1_CLOSED_B2_PARTIAL_M_UNSTARTED_NO_FINAL_CANDIDATE",
+  "observed_at": "2026-10-06T11:41:47.739252+00:00",
+  "previous_report_commit": "7b723b32a50649f9b4a0fd268b1f16297c809b63",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+  "interface": "I2",
+  "model_family": "Qwen3.6",
+  "closed_same_scope": {
+    "users": 4,
+    "sessions_per_arm": 32,
+    "updates_per_arm": 72,
+    "QA_per_arm": 73,
+    "B0": {
+      "update_Correct": 6,
+      "update_valid": 58,
+      "QA_Correct": 42,
+      "QA_valid": 73
+    },
+    "B1": {
+      "update_Correct": 5,
+      "update_valid": 60,
+      "QA_Correct": 36,
+      "QA_valid": 69
+    },
+    "B2_M_final_scores": null,
+    "labels_gold_and_first_attempt_failures_preserved": true
+  },
+  "additional_closed_user_reviews": [
+    {
+      "arm": "B1",
+      "development_user_position": 3,
+      "author_update_labels": {
+        "Correct": 2,
+        "None": 2,
+        "Omission": 13,
+        "Omitted": 1
+      },
+      "author_QA_labels": {
+        "Correct": 11,
+        "Hallucination": 3,
+        "Omission": 4,
+        "None": 1
+      },
+      "role_usage": {
+        "Writer": {
+          "calls": 5,
+          "input_tokens": 80224,
+          "completion_tokens": 23051,
+          "known_tokens": 103275
+        },
+        "Reader": {
+          "calls": 19,
+          "input_tokens": 21286,
+          "completion_tokens": 31294,
+          "known_tokens": 52580
+        },
+        "Judge": {
+          "calls": 151,
+          "input_tokens": 202751,
+          "completion_tokens": 183859,
+          "known_tokens": 386610
+        }
+      },
+      "HTTP_usage_pairs": 175,
+      "known_tokens": 542465,
+      "Judge_serial_interval": [
+        414,
+        564
+      ],
+      "final_records": 15,
+      "final_units": 15,
+      "unit_roles": {
+        "content": 15
+      },
+      "relation_types": {},
+      "Root_before_after_pairs_read": 8,
+      "Root_actual_Writer_envelopes_read": 5,
+      "Root_complete_Reader_answers_read": 19,
+      "selected_source_context_only": true,
+      "independent_Judge_or_exhaustive_source_database_audit": false,
+      "writer_operations": {
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 88440,
+          "prepared_characters": 88440,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 16,
+          "prepared_batches": 9,
+          "completed_batches": 9,
+          "recorded_writer_requests": 5,
+          "characters_in_recorded_requests": 19040,
+          "confirmed_writer_responses": 5,
+          "characters_in_confirmed_responses": 19040,
+          "writer_returned_proposal_list_batches": 5,
+          "writer_returned_empty_list_batches": 0,
+          "proposed_operations": 17,
+          "recorded_operation_receipts": 17,
+          "confirmed_committed_operations": 16,
+          "first_attempt_writer_failed_batches": 4,
+          "additional_writer_attempts": 0,
+          "rejected_operations": 1
+        },
+        "first_attempt_writer_failures": {
+          "context_unavailable_before_http": 4
+        },
+        "committed_actions": {
+          "create": 15,
+          "edit": 1
+        },
+        "rejection_reasons": {
+          "current_boundary_source_required": 1
+        }
+      },
+      "unchanged_sessions": 4,
+      "actual_empty_envelopes": 0
+    },
+    {
+      "arm": "B2",
+      "development_user_position": 0,
+      "author_update_labels": {
+        "None": 2,
+        "Omission": 17
+      },
+      "author_QA_labels": {
+        "Correct": 9,
+        "Hallucination": 5,
+        "Omission": 5,
+        "None": 1
+      },
+      "role_usage": {
+        "Reader": {
+          "calls": 20,
+          "input_tokens": 25314,
+          "completion_tokens": 25261,
+          "known_tokens": 50575
+        },
+        "Writer": {
+          "calls": 5,
+          "input_tokens": 99061,
+          "completion_tokens": 15880,
+          "known_tokens": 114941
+        },
+        "Judge": {
+          "calls": 59,
+          "input_tokens": 84127,
+          "completion_tokens": 73489,
+          "known_tokens": 157616
+        }
+      },
+      "HTTP_usage_pairs": 84,
+      "known_tokens": 323132,
+      "Judge_serial_interval": [
+        1,
+        59
+      ],
+      "final_records": 5,
+      "final_units": 11,
+      "unit_roles": {
+        "content": 11
+      },
+      "relation_types": {},
+      "Root_before_after_pairs_read": 8,
+      "Root_actual_Writer_envelopes_read": 5,
+      "Root_complete_Reader_answers_read": 20,
+      "selected_source_context_only": true,
+      "independent_Judge_or_exhaustive_source_database_audit": false,
+      "writer_operations": {
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 80537,
+          "prepared_characters": 80537,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 5,
+          "prepared_batches": 8,
+          "completed_batches": 8,
+          "recorded_writer_requests": 5,
+          "characters_in_recorded_requests": 33768,
+          "confirmed_writer_responses": 5,
+          "characters_in_confirmed_responses": 33768,
+          "writer_returned_proposal_list_batches": 5,
+          "writer_returned_empty_list_batches": 4,
+          "proposed_operations": 5,
+          "recorded_operation_receipts": 5,
+          "confirmed_committed_operations": 5,
+          "first_attempt_writer_failed_batches": 3,
+          "additional_writer_attempts": 0
+        },
+        "first_attempt_writer_failures": {
+          "context_unavailable_before_http": 3
+        },
+        "committed_actions": {
+          "create": 5
+        },
+        "rejection_reasons": {}
+      },
+      "unchanged_sessions": 7,
+      "actual_empty_envelopes": 4
+    },
+    {
+      "arm": "B2",
+      "development_user_position": 1,
+      "author_update_labels": {
+        "Omission": 10,
+        "Hallucination": 1,
+        "None": 2,
+        "Omitted": 2
+      },
+      "author_QA_labels": {
+        "Correct": 6,
+        "None": 2,
+        "Omission": 4
+      },
+      "role_usage": {
+        "Writer": {
+          "calls": 2,
+          "input_tokens": 21939,
+          "completion_tokens": 13394,
+          "known_tokens": 35333
+        },
+        "Reader": {
+          "calls": 12,
+          "input_tokens": 31895,
+          "completion_tokens": 17558,
+          "known_tokens": 49453
+        },
+        "Judge": {
+          "calls": 63,
+          "input_tokens": 140289,
+          "completion_tokens": 79676,
+          "known_tokens": 219965
+        }
+      },
+      "HTTP_usage_pairs": 77,
+      "known_tokens": 304751,
+      "Judge_serial_interval": [
+        60,
+        122
+      ],
+      "final_records": 8,
+      "final_units": 33,
+      "unit_roles": {
+        "content": 33
+      },
+      "relation_types": {},
+      "Root_before_after_pairs_read": 8,
+      "Root_actual_Writer_envelopes_read": 0,
+      "Root_complete_Reader_answers_read": 12,
+      "selected_source_context_only": true,
+      "independent_Judge_or_exhaustive_source_database_audit": false,
+      "writer_operations": {
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 63988,
+          "prepared_characters": 63988,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 8,
+          "prepared_batches": 8,
+          "completed_batches": 8,
+          "recorded_writer_requests": 2,
+          "characters_in_recorded_requests": 3921,
+          "confirmed_writer_responses": 2,
+          "characters_in_confirmed_responses": 3921,
+          "writer_returned_proposal_list_batches": 2,
+          "writer_returned_empty_list_batches": 0,
+          "proposed_operations": 8,
+          "recorded_operation_receipts": 8,
+          "confirmed_committed_operations": 8,
+          "first_attempt_writer_failed_batches": 6,
+          "additional_writer_attempts": 0
+        },
+        "first_attempt_writer_failures": {
+          "context_unavailable_before_http": 6
+        },
+        "committed_actions": {
+          "create": 8
+        },
+        "rejection_reasons": {}
+      },
+      "unchanged_sessions": 6,
+      "actual_empty_envelopes": 0
+    }
+  ],
+  "B1_cumulative_Root_review_scope": {
+    "B1_before_after_pairs_semantically_reviewed": 32,
+    "B1_actual_Writer_envelopes_reviewed": 25,
+    "B1_pre_HTTP_failures_reviewed": 8,
+    "B1_complete_Reader_answers_reviewed": 73,
+    "fourth_user_complete_Reader_answers_reviewed": 19,
+    "selected_source_context_only": true,
+    "independent_Judge_or_full_source_database_audit": false
+  },
+  "B2_reviewed_first_two_users": {
+    "sessions": 16,
+    "update_opportunities": 34,
+    "QA_opportunities": 32,
+    "author_update_labels": {
+      "None": 4,
+      "Omission": 27,
+      "Hallucination": 1,
+      "Omitted": 2
+    },
+    "author_QA_labels": {
+      "Correct": 15,
+      "Hallucination": 5,
+      "Omission": 9,
+      "None": 3
+    },
+    "updates_Correct": 0,
+    "updates_valid": 28,
+    "QA_Correct": 15,
+    "QA_valid": 29,
+    "HTTP_requests_and_responses": 161,
+    "known_tokens": 627883,
+    "pre_HTTP_failures": 9,
+    "Root_before_after_pairs": 16,
+    "Root_complete_answers": 32,
+    "Root_full_Writer_envelopes_read": 5,
+    "second_user_Writer_batches_mechanically_checked": 2,
+    "full_B2_arm_score": false,
+    "subset_costs_not_added_again": true
+  },
+  "bounded_semantic_observations": [
+    "B1 fourth-user promotion/income User evidence fails before HTTP. A later Assistant claim is delivered separately and commits with inferred/assistant attribution. The successful Writer did not receive the failed conflicting User statement; delivery failure and attribution must be distinguished.",
+    "A later B1 proposal uses only redelivered old evidence and would revert earlier changes while omitting current networking facts. Rejection does not establish a correct update blocked solely by the interface.",
+    "B2 first user forms5 records/11 content units once;7 later states remain unchanged. Four actual empty envelopes omit durable delivered new facts, while3 other attempts fail before HTTP.",
+    "B2 second user forms8 records/33 content units in first2 sessions; all6 later attempts fail before HTTP. These are not model no-change choices. Initial formation preserves separate financial facts and a seasonal qualifier, without condition relations.",
+    "Both reviewed B2 users have0 condition units/relations. These subsets cannot establish a conditional representation advantage; other B2 users and M are not semantically reviewed here.",
+    "Missing pet facts in reviewed B2 states are formation or delivery omissions; B0/B1 stored-pet retrieval failures for the same exposed users are a different mechanism.",
+    "B1 selected retirement replacement preserves non-restated savings but omits delivered motivation and has compound-unit source/time ambiguity. Ordinary editing remains incomplete."
+  ],
+  "shared_schema_input_projections": {
+    "source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+    "actual_failed_inputs": 17,
+    "B1": 8,
+    "B2_first_two_users": 9,
+    "input_limit": 32256,
+    "all_fit_with_exact_original_data_and_generation_contract": true,
+    "rows": [
+      {
+        "arm": "B1",
+        "development_user_position": 0,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 37672,
+        "projected_input_tokens": 22953,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 0,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 34439,
+        "projected_input_tokens": 21760,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 0,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 37039,
+        "projected_input_tokens": 22320,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 1,
+        "ordinal": 5,
+        "batch": 0,
+        "original_input_tokens": 33939,
+        "projected_input_tokens": 21260,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 3,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 37181,
+        "projected_input_tokens": 23227,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 3,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 34169,
+        "projected_input_tokens": 21490,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 3,
+        "ordinal": 6,
+        "batch": 0,
+        "original_input_tokens": 37097,
+        "projected_input_tokens": 22378,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 3,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 37218,
+        "projected_input_tokens": 22499,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 0,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 37256,
+        "projected_input_tokens": 22414,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 0,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 34003,
+        "projected_input_tokens": 21201,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 0,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 36586,
+        "projected_input_tokens": 21744,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 2,
+        "batch": 0,
+        "original_input_tokens": 33149,
+        "projected_input_tokens": 22443,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 35390,
+        "projected_input_tokens": 23904,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 39207,
+        "projected_input_tokens": 24601,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 5,
+        "batch": 0,
+        "original_input_tokens": 47828,
+        "projected_input_tokens": 27762,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 6,
+        "batch": 0,
+        "original_input_tokens": 34783,
+        "projected_input_tokens": 23297,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 34507,
+        "projected_input_tokens": 23021,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      }
+    ],
+    "projected_min_tokens": 21201,
+    "projected_max_tokens": 27762,
+    "actual_new_source_model_calls": 0,
+    "actual_new_own_histories_not_projected": true,
+    "finite_B1_first_user_first8": "PREPARED_CI_BOUND_WAITING_FROZEN_QUEUE_NORMAL_EXIT_NOT_ADMITTED",
+    "predeclaration_commit": "7add8259a1a81133d6bb69efad5893909472aa16",
+    "source_own_Fast_and_Full_success": true,
+    "finite_scope_not_expanded": true
+  },
+  "external_template_counter_draft": {
+    "status": "TWO_LOCAL_UNCOMMITTED_SOURCE_TEST_FILES_NOT_PUBLISHED_NOT_ADMITTED",
+    "purpose": "Use configured thinking template for external author callback token counting; not an explanation for main B1/B2 capacity failures.",
+    "checks_already_completed": {
+      "external_unit_tests": 22,
+      "Ruff_files": 2,
+      "strict_mypy_source_files": 1,
+      "real_local_Qwen_tokenizer_synthetic_callback": true,
+      "old_source_true_regression_fails_as_expected": true
+    },
+    "actual_model_calls": 0,
+    "own_source_CI": null,
+    "frozen_main_and_predeclared_ab8_source_unchanged": true
+  },
+  "running_frozen_queue_snapshot": {
+    "observed_at": "2026-10-06T11:41:47.739252+00:00",
+    "observation_started_at": "2026-10-06T11:41:47.575069+00:00",
+    "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
+    "PID": 178764,
+    "PID_and_exact_frozen_command_verified_live": true,
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+    "predeclaration_commit": "f4106f1a1ed418afc723328562c92d958a3a9000",
+    "started_at": "2026-10-06T07:23:06.705004+00:00",
+    "per_arm_planned_sessions": 32,
+    "per_arm_planned_updates": 72,
+    "per_arm_planned_QA": 73,
+    "arms": {
+      "B0": {
+        "maintenance_complete": 32,
+        "evaluation_complete": 32,
+        "requests": 696,
+        "saved_response_files": 696,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+      },
+      "B1": {
+        "maintenance_complete": 32,
+        "evaluation_complete": 32,
+        "requests": 662,
+        "saved_response_files": 662,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+      },
+      "B2": {
+        "maintenance_complete": 26,
+        "evaluation_complete": 26,
+        "requests": 372,
+        "saved_response_files": 371,
+        "pending_HTTP_count": 1,
+        "failure_files": 0,
+        "terminal_status": null
+      },
+      "M": {
+        "maintenance_complete": 0,
+        "evaluation_complete": 0,
+        "requests": 0,
+        "saved_response_files": 0,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": null
+      }
+    },
+    "per_user_checkpoints": {
+      "B0": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        }
+      ],
+      "B1": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        }
+      ],
+      "B2": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 2,
+          "evaluation_complete": 2
+        }
+      ],
+      "M": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 0,
+          "evaluation_complete": 0
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 0,
+          "evaluation_complete": 0
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 0,
+          "evaluation_complete": 0
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 0,
+          "evaluation_complete": 0
+        }
+      ]
+    },
+    "request_artifacts": 1730,
+    "saved_response_roles": {
+      "Writer": 70,
+      "Reader": 206,
+      "Judge": 1453
+    },
+    "saved_response_count": 1729,
+    "saved_response_finish_reasons": {
+      "stop": 1729
+    },
+    "known_tokens_from_saved_responses": 6112202,
+    "input_tokens_from_saved_responses": 3842938,
+    "completion_tokens_from_saved_responses": 2269264,
+    "not_final_accounting": true,
+    "pending_budget_unknown_reservation_is_not_terminal_failure": true,
+    "candidate_selected": false,
+    "method_advantage_established": false,
+    "long_smoke_actual_model_calls": 0,
+    "session_checkpoint_count_scope": "Only maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; nested batch checkpoints excluded.",
+    "Root_closed_user_review_scope": "B0 and B1 all32 before/after pairs and73 complete Reader answers reviewed. B2 first2 users16 before/after pairs and32 complete answers reviewed; second-user full proposal text/source context only partially read. Other B2 users and M not reviewed. Selected User/Assistant source context only, not independent Judge or exhaustive source/database audit.",
+    "no_new_model_process_started_for_publication": true
+  },
+  "closed_accounting_end_through_B1_only": {
+    "generation_requests": 37877,
+    "generation": {
+      "charged_tokens": 145072137,
+      "known_tokens": 144960422,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_scope": "B0/B1 counted once through B1 closure; exclude live B2, pending reservations and all user subsets.",
+  "previous_report_own_CI": {
+    "commit": "7b723b32a50649f9b4a0fd268b1f16297c809b63",
+    "observed_at": "2026-10-06 11:42:31 UTC",
+    "Fast": {
+      "run_id": 37453578151,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37453577867,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "new_report_CI_must_be_queried_separately": true
+  },
+  "remaining": [
+    "B2/M prefix closure and source/answer review",
+    "Declared finite shared-schema repair real recheck",
+    "Common version selection and actual-state preselected65/full277 histories",
+    "M entry ablation and predeclared fixed tighter budget",
+    "Native32 opportunities/12 sessions/4 users and full277 drift",
+    "16 reserved users",
+    "LongMemEval28/1354/10 and strong external comparisons",
+    "Normal Host135 cases/192 messages, new frozen-candidate stories and recovery",
+    "R0-R5/E0-E5 six deliverables"
+  ],
+  "candidate_selected": false,
+  "method_advantage_established": false,
+  "product_status": "NO_GO",
+  "publication": {
+    "Lab_files": 7,
+    "new_model_calls_started": 0,
+    "source_test_config_changes": false,
+    "local_two_file_external_draft_preserved_unstaged": true,
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "Archive_workflow_changed": false,
+    "raw_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
+    "rollback_reference": "7b723b32a50649f9b4a0fd268b1f16297c809b63"
+  }
+}

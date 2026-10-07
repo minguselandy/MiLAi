@@ -1,0 +1,65 @@
+{
+  "status": "DECLARATION_FIXED_BEFORE_ACTUAL_R3_ATTEMPTS",
+  "story_clusters": 1,
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "source": "Existing Project P R3 developer example: frequency, unknown start, holidays, night scope and withdrawal. Constructed development material, not natural benchmark or independent confirmation.",
+  "initial_state": "each arm's own empty semantic memory; form from the observed events only",
+  "writer_messages_per_arm": 6,
+  "reader_questions_per_arm": 5,
+  "expected_generation_calls": 44,
+  "actual_model_calls": 0,
+  "candidate_selected": false,
+  "allow_tuning_from_confirmation": false,
+  "events": [
+    {
+      "event_id": "form_general",
+      "date": "2030-03-01",
+      "observed_user_text": "项目P试运行每周两次，开始时间未定，遇节假日暂停。",
+      "evaluator_only_requirement": "Establish the stated general frequency and both qualifications from actual user evidence; no ideal-state injection.",
+      "reader_question": null
+    },
+    {
+      "event_id": "frequency_without_restatement",
+      "date": "2030-03-02",
+      "observed_user_text": "项目P试运行改为每周三次。",
+      "evaluator_only_requirement": "Change frequency to three per week while retaining the unmentioned pending start and holiday pause on actual old support. Missing initial formation is reported separately.",
+      "reader_question": "项目P的试运行频率、开始时间和节假日安排现在各是什么？"
+    },
+    {
+      "event_id": "night_scope",
+      "date": "2030-03-03",
+      "observed_user_text": "项目P夜班试运行改为每周四次；日班保持通用安排。",
+      "evaluator_only_requirement": "Night scope four; day/general scope three; unmentioned start and holiday qualifications remain. Do not extend the local override globally.",
+      "reader_question": "项目P的日班和夜班试运行分别每周几次？开始时间和节假日安排是什么？"
+    },
+    {
+      "event_id": "withdraw_night_exception",
+      "date": "2030-03-04",
+      "observed_user_text": "取消项目P夜班每周四次的例外，恢复通用安排。",
+      "evaluator_only_requirement": "Remove the active night exception; current general/day/night frequency three with actual retained qualifications. Old four-per-week may be historical but not current. Withdrawal must not be blocked merely to preserve old support.",
+      "reader_question": "取消例外后，项目P的日班和夜班当前分别每周几次？开始时间和节假日安排是什么？"
+    },
+    {
+      "event_id": "query_without_new_fact",
+      "date": "2030-03-05",
+      "observed_user_text": "项目P的试运行安排现在是什么？",
+      "evaluator_only_requirement": "No unjustified revision, invented content or replacement of existing support; answer from actual retained state. Actual packet delivery may include records even though the event has no new durable fact.",
+      "reader_question": "项目P的试运行安排现在是什么？"
+    },
+    {
+      "event_id": "exact_reaffirmation",
+      "date": "2030-03-06",
+      "observed_user_text": "项目P试运行每周三次，开始时间仍未定，节假日暂停。",
+      "evaluator_only_requirement": "No novel fact: record actual proposals, revisions and support changes. Separate unnecessary supported rewriting from unsupported mutation; do not label every guard rejection successful maintenance.",
+      "reader_question": "项目P现在的日班和夜班频率、开始时间及节假日安排各是什么？"
+    }
+  ],
+  "limits": "This single exposed development history shares R3 mechanisms and earlier developer material; four independently formed banks do not create four independent sources. Evaluator requirements/questions never enter Writer packets. Use the already selected common pilot interface and frozen method source, preserving continuous accounting and original failures. Run after real positive/empty Stage A and I1/I2 review, before full development comparison. The existing three-cluster/ten-history confirmation remains scheduled after final candidate/Writer freeze.",
+  "actual_results": "milai-edit-v2-r3-development-results-20261005.json",
+  "actual_model_calls_meaning": "Zero at declaration; completed calls are recorded separately in actual_results."
+}

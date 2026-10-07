@@ -209,3 +209,42 @@ def test_a_response_without_its_original_request_is_not_confirmed_exposure(tmp_p
     write_json(tmp_path / "http" / "halumem" / "owner" / "0" / "writer" / "0" / "response.json", {})
     with pytest.raises(ValueError, match="original recorded request"):
         writer_operations(tmp_path, "owner", [0])
+
+
+def test_separate_prediction_is_not_scoring_closure_and_append_control_is_compared(
+    tmp_path, monkeypatch
+):
+    from milai_lab.analysis import edit_results
+
+    class AuthorFixture:
+        def __init__(self, path, judge):
+            pass
+
+        def aggregate_results(self, records):
+            return {"overall_score": {"fixture_only": True}}
+
+    monkeypatch.setattr(edit_results, "HaluMemOfficial", AuthorFixture)
+    for arm in ["M", "Append-only"]:
+        folder = tmp_path / arm
+        write_json(folder / "actual-config.json", {
+            "halumem": {"users": ["owner"], "official_checkout": "fixture"}})
+        write_json(folder / "banks/owner/session-order.json", {"original_ordinals": [0]})
+        write_json(folder / "evaluation/halumem/owner/0/complete.json", {
+            "counts": {"total_updates": 0}})
+        write_json(folder / "halumem-official-results.json", {
+            "memory_integrity_records": [], "memory_accuracy_records": [],
+            "memory_update_records": [],
+            "question_answering_records": [{"uuid": "owner", "result_type": "Correct"}],
+            "overall_score": {}, "supplemental_denominators": {"total_updates": 0},
+        })
+        write_json(folder / "terminal-predict.json", {
+            "status": "COMPLETED_EXPERIMENT_PHASE", "phase": "predict"})
+    assert halumem_suite(tmp_path, ["M", "Append-only"])["status"] == "INCOMPLETE"
+    for arm in ["M", "Append-only"]:
+        write_json(tmp_path / arm / "terminal-score.json", {
+            "status": "COMPLETED_EXPERIMENT_PHASE", "phase": "score"})
+    result = halumem_suite(tmp_path, ["M", "Append-only"])
+    assert result["status"] == "COMPLETED_PAIRED_SOURCE_ANALYSIS"
+    comparison = result["pairs"]["M_to_Append-only"]["qa_correct_all"]
+    assert comparison["eligible_users"] == ["owner"]
+    assert comparison["interval"]["difference_second_minus_first"] == 0

@@ -75,6 +75,10 @@ class MeteredEmbeddings(Embeddings):
         output: list[list[float]] = []
         for start in range(0, len(texts), self.batch_size):
             batch = texts[start : start + self.batch_size]
+            if self.client.emit is not None:
+                self.client.emit(
+                    {"event": "embedding_request", "model": self.model, "input": batch}
+                )
             vectors = self.client.embed(batch, self.model)
             if len(vectors) != len(batch):
                 raise ValueError("EMBEDDING_VECTOR_COUNT_MISMATCH")

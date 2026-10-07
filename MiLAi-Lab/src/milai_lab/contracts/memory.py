@@ -53,7 +53,21 @@ class SourceEvent(TypedDict):
     source_revision: int
     capture_key: NotRequired[str]
     observed_at: str
+    occurred_at: NotRequired[str]
+    episode_id: NotRequired[str]
     object_ref: dict[str, Any] | None
+
+
+class EpisodeDescription(TypedDict):
+    """A grounded description; its prose is not a new original source."""
+
+    kind: Literal["event", "participant", "context", "outcome"]
+    basis: Literal["reported", "observed", "inferred", "uncertain"]
+    text: str
+    source_refs: list[str]
+    occurred_at: NotRequired[str]
+    effective_from: NotRequired[str]
+    effective_until: NotRequired[str]
 
 
 class MemoryRecord(TypedDict):

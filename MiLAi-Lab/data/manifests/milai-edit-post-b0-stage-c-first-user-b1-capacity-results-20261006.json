@@ -1,0 +1,418 @@
+{
+  "status": "CLOSED_FIRST_B1_USER_NOT_FOUR_USER_OR_FOUR_ARM_RESULTS",
+  "observed_at": "2026-10-06T09:51:47.923649+00:00",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+  "interface": "I2",
+  "arm": "B1",
+  "development_user_position": 0,
+  "chronological_original_ordinals": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "maintenance_checkpoints": 8,
+  "evaluation_checkpoints": 8,
+  "author_update_labels": {
+    "Omission": 16,
+    "None": 1,
+    "Correct": 1,
+    "Omitted Update": 1
+  },
+  "author_QA_labels": {
+    "Correct": 11,
+    "None": 2,
+    "Hallucination": 4,
+    "Omission": 3
+  },
+  "author_update_correct_all": {
+    "numerator": 1,
+    "denominator": 19
+  },
+  "author_update_correct_valid": {
+    "numerator": 1,
+    "denominator": 17
+  },
+  "author_QA_correct_all": {
+    "numerator": 11,
+    "denominator": 20
+  },
+  "author_QA_correct_valid": {
+    "numerator": 11,
+    "denominator": 18
+  },
+  "original_author_offline_aggregation": "SUCCESS_FIRST_USER_SCOPE_ONLY",
+  "invalid_labels_preserved_without_mapping": [
+    "None",
+    "Omitted Update"
+  ],
+  "HTTP_requests_and_responses": 180,
+  "finish_reasons": {
+    "stop": 180
+  },
+  "role_usage": {
+    "Reader": {
+      "calls": 20,
+      "input_tokens": 27081,
+      "completion_tokens": 30620,
+      "known_tokens": 57701
+    },
+    "Writer": {
+      "calls": 5,
+      "input_tokens": 94475,
+      "completion_tokens": 18242,
+      "known_tokens": 112717
+    },
+    "Judge": {
+      "calls": 155,
+      "input_tokens": 262800,
+      "completion_tokens": 186142,
+      "known_tokens": 448942
+    }
+  },
+  "known_tokens": 619360,
+  "closed_user_cost_is_subset_of_live_B1_not_added_to_closed_arm_ledger": true,
+  "pre_HTTP_capacity_failed_sessions": [
+    3,
+    4,
+    7
+  ],
+  "actual_empty_envelope_sessions": [
+    5,
+    6
+  ],
+  "session_effects": [
+    {
+      "ordinal": 0,
+      "actual_source_batches": 1,
+      "Writer_HTTP_sent": true,
+      "Writer_response_saved": true,
+      "full_state_values_unchanged": false,
+      "new_records": 5,
+      "changed_existing_records": 0,
+      "unprocessed_count": 0,
+      "failure": null,
+      "Writer_envelope_exists": true,
+      "empty_Writer_envelope": false
+    },
+    {
+      "ordinal": 1,
+      "actual_source_batches": 1,
+      "Writer_HTTP_sent": true,
+      "Writer_response_saved": true,
+      "full_state_values_unchanged": false,
+      "new_records": 3,
+      "changed_existing_records": 0,
+      "unprocessed_count": 0,
+      "failure": null,
+      "Writer_envelope_exists": true,
+      "empty_Writer_envelope": false
+    },
+    {
+      "ordinal": 2,
+      "actual_source_batches": 1,
+      "Writer_HTTP_sent": true,
+      "Writer_response_saved": true,
+      "full_state_values_unchanged": false,
+      "new_records": 8,
+      "changed_existing_records": 0,
+      "unprocessed_count": 0,
+      "failure": null,
+      "Writer_envelope_exists": true,
+      "empty_Writer_envelope": false
+    },
+    {
+      "ordinal": 3,
+      "actual_source_batches": 1,
+      "Writer_HTTP_sent": false,
+      "Writer_response_saved": false,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "unprocessed_count": 1,
+      "failure": {
+        "type": "ValueError",
+        "message": "Context unavailable without loss: 37672 input tokens",
+        "source_opportunity_consumed": false,
+        "additional_attempts": 0,
+        "status": "UNPROCESSED_FIRST_ATTEMPT"
+      },
+      "Writer_envelope_exists": false,
+      "selected_old_body_tokens": 0,
+      "omitted_old_ranges": 10
+    },
+    {
+      "ordinal": 4,
+      "actual_source_batches": 1,
+      "Writer_HTTP_sent": false,
+      "Writer_response_saved": false,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "unprocessed_count": 1,
+      "failure": {
+        "type": "ValueError",
+        "message": "Context unavailable without loss: 34439 input tokens",
+        "source_opportunity_consumed": false,
+        "additional_attempts": 0,
+        "status": "UNPROCESSED_FIRST_ATTEMPT"
+      },
+      "Writer_envelope_exists": false,
+      "selected_old_body_tokens": 0,
+      "omitted_old_ranges": 10
+    },
+    {
+      "ordinal": 5,
+      "actual_source_batches": 1,
+      "Writer_HTTP_sent": true,
+      "Writer_response_saved": true,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "unprocessed_count": 0,
+      "failure": null,
+      "Writer_envelope_exists": true,
+      "empty_Writer_envelope": true
+    },
+    {
+      "ordinal": 6,
+      "actual_source_batches": 1,
+      "Writer_HTTP_sent": true,
+      "Writer_response_saved": true,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "unprocessed_count": 0,
+      "failure": null,
+      "Writer_envelope_exists": true,
+      "empty_Writer_envelope": true
+    },
+    {
+      "ordinal": 7,
+      "actual_source_batches": 1,
+      "Writer_HTTP_sent": false,
+      "Writer_response_saved": false,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "unprocessed_count": 1,
+      "failure": {
+        "type": "ValueError",
+        "message": "Context unavailable without loss: 37039 input tokens",
+        "source_opportunity_consumed": false,
+        "additional_attempts": 0,
+        "status": "UNPROCESSED_FIRST_ATTEMPT"
+      },
+      "Writer_envelope_exists": false,
+      "selected_old_body_tokens": 0,
+      "omitted_old_ranges": 10
+    }
+  ],
+  "writer_operations": {
+    "expected_sessions": 8,
+    "counts": {
+      "official_completed_sessions": 8,
+      "prepared_sessions": 8,
+      "original_characters_in_prepared_sessions": 80537,
+      "prepared_characters": 80537,
+      "maintenance_completed_sessions": 8,
+      "upstream_extracted_outputs": 16,
+      "prepared_batches": 8,
+      "completed_batches": 8,
+      "recorded_writer_requests": 5,
+      "characters_in_recorded_requests": 33768,
+      "confirmed_writer_responses": 5,
+      "characters_in_confirmed_responses": 33768,
+      "writer_returned_proposal_list_batches": 5,
+      "writer_returned_empty_list_batches": 2,
+      "proposed_operations": 16,
+      "recorded_operation_receipts": 16,
+      "confirmed_committed_operations": 16,
+      "first_attempt_writer_failed_batches": 3,
+      "additional_writer_attempts": 0
+    },
+    "not_yet_prepared_sessions": 0,
+    "pending_prepared_sessions": 0,
+    "pending_prepared_batches": 0,
+    "requests_without_confirmed_responses": 0,
+    "first_attempt_writer_failures": {
+      "context_unavailable_before_http": 3
+    },
+    "receipt_statuses": {
+      "committed": 16
+    },
+    "rejection_reasons": {},
+    "proposed_actions": {
+      "create": 16
+    },
+    "committed_actions": {
+      "create": 16
+    },
+    "proposed_local_operations": {},
+    "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+  },
+  "final_records": 16,
+  "final_units": 16,
+  "max_record_units": 1,
+  "max_record_characters": 829,
+  "input_capacity": {
+    "context_tokens": 65536,
+    "reserved_output_tokens": 32768,
+    "safety_tokens": 512,
+    "input_limit": 32256
+  },
+  "shared_prompt_choices_offline_prototype": {
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "status": "OFFLINE_PROTOTYPE_ONLY_NOT_ADMITTED",
+    "new_model_calls": 0,
+    "API_generation_schema_unchanged_in_proposed_presentation": "Expanded original schema stays in response_format; only repeated in-prompt enums shared.",
+    "sessions": [
+      {
+        "ordinal": 0,
+        "original_input_tokens": 3775,
+        "shared_choice_input_tokens": 3746,
+        "short_schema_definitions": 1,
+        "fits_without_losing_candidates": true,
+        "schema_expands_exactly_to_original": true,
+        "actual_Writer_HTTP_sent": true
+      },
+      {
+        "ordinal": 1,
+        "original_input_tokens": 9582,
+        "shared_choice_input_tokens": 8198,
+        "short_schema_definitions": 1,
+        "fits_without_losing_candidates": true,
+        "schema_expands_exactly_to_original": true,
+        "actual_Writer_HTTP_sent": true
+      },
+      {
+        "ordinal": 2,
+        "original_input_tokens": 23504,
+        "shared_choice_input_tokens": 15775,
+        "short_schema_definitions": 1,
+        "fits_without_losing_candidates": true,
+        "schema_expands_exactly_to_original": true,
+        "actual_Writer_HTTP_sent": true
+      },
+      {
+        "ordinal": 3,
+        "original_input_tokens": 37672,
+        "shared_choice_input_tokens": 22953,
+        "short_schema_definitions": 1,
+        "fits_without_losing_candidates": true,
+        "schema_expands_exactly_to_original": true,
+        "actual_Writer_HTTP_sent": false
+      },
+      {
+        "ordinal": 4,
+        "original_input_tokens": 34439,
+        "shared_choice_input_tokens": 21760,
+        "short_schema_definitions": 1,
+        "fits_without_losing_candidates": true,
+        "schema_expands_exactly_to_original": true,
+        "actual_Writer_HTTP_sent": false
+      },
+      {
+        "ordinal": 5,
+        "original_input_tokens": 28643,
+        "shared_choice_input_tokens": 19024,
+        "short_schema_definitions": 1,
+        "fits_without_losing_candidates": true,
+        "schema_expands_exactly_to_original": true,
+        "actual_Writer_HTTP_sent": true
+      },
+      {
+        "ordinal": 6,
+        "original_input_tokens": 28971,
+        "shared_choice_input_tokens": 19352,
+        "short_schema_definitions": 1,
+        "fits_without_losing_candidates": true,
+        "schema_expands_exactly_to_original": true,
+        "actual_Writer_HTTP_sent": true
+      },
+      {
+        "ordinal": 7,
+        "original_input_tokens": 37039,
+        "shared_choice_input_tokens": 22320,
+        "short_schema_definitions": 1,
+        "fits_without_losing_candidates": true,
+        "schema_expands_exactly_to_original": true,
+        "actual_Writer_HTTP_sent": false
+      }
+    ]
+  },
+  "source_draft": {
+    "status": "UNCOMMITTED_NOT_USED_BY_FROZEN_QUEUE_NOT_MODEL_VERIFIED",
+    "files": [
+      "src/milai_lab/methods/edit_features.py",
+      "src/milai_lab/runners/edit_benchmarks.py",
+      "tests/unit/test_edit_v2_runner.py"
+    ],
+    "scope": "Only Writer explanatory schema shares repeated enum choices; original API generation schema and decoding remain unchanged.",
+    "mechanical_checks": {
+      "runner_checks_passed": 17,
+      "wiring_checks_passed": 11
+    },
+    "actual_new_source_projection_and_default_off_checks_complete": false,
+    "own_source_CI": "NOT_COMMITTED_NOT_RUN",
+    "actual_model_recheck_calls": 0
+  },
+  "B0_existing_native_offline_preparation": {
+    "selected_opportunities": 32,
+    "available_opportunities": 31,
+    "distinct_source_sessions": 11,
+    "summary": {
+      "transition": {
+        "requests": 93,
+        "fits": 93,
+        "input_tokens": {
+          "min": 9280,
+          "median": 11343,
+          "max": 15622
+        },
+        "unknown_prior_range_occurrences": 0
+      },
+      "delta": {
+        "requests": 7,
+        "fits": 7,
+        "input_tokens": {
+          "min": 8283,
+          "median": 10663,
+          "max": 14982
+        },
+        "unknown_prior_range_occurrences": 0
+      }
+    },
+    "unrun_opportunities": 1,
+    "semantic_scores": null,
+    "actual_model_calls": 0,
+    "no_native_model_configuration_admitted": true
+  },
+  "Root_review": {
+    "before_after_session_pairs": 8,
+    "actual_Writer_responses": 5,
+    "pre_HTTP_failed_attempts": 3,
+    "complete_Reader_answers": 20,
+    "HTTP_usage_pairs_checked": 180,
+    "source_context": "PARTIAL_EXPOSED_CURRENT_USER_AND_SELECTED_ASSISTANT_CONTENT",
+    "independent_Judge": false,
+    "independent_complete_source_database_audit": false
+  },
+  "findings": [
+    "First three sessions formed16 independent matter records. Later five full states remain unchanged: three pre-HTTP capacity failures and two actual empty model envelopes are distinct.",
+    "Input failures persist even when selected old support bodies total0 tokens; repeated bound source choices in the explanatory schema remain material overhead.",
+    "The prototype expands exactly to original choices and fits all eight frozen inputs, but this is not a real model recheck of the uncommitted source.",
+    "Some answers infer expiry or absence from missing explicit dates or missing owner names. Stored first-person owner facts do not require a repeated name to be meaningful; no Reader fix is claimed.",
+    "Original author labels, source-attribution/currency discrepancies, unsupported extra statements and actual maintenance effects stay separate. Correct labels do not establish complete faithful answers."
+  ],
+  "new_model_calls_for_summary": 0,
+  "original_labels_gold_banks_attempts_configs_unchanged": true,
+  "method_advantage_established": false,
+  "candidate_selected": false,
+  "product_status": "NO_GO"
+}

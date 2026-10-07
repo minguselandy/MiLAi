@@ -1,0 +1,1423 @@
+{
+  "schema_version": "milai-edit-stage-c-closed-arm-prefix-summary-v1",
+  "status": "B2_FOUR_DEVELOPMENT_USERS_FIRST8_CLOSED_M_RUNNING_NO_FINAL_CANDIDATE",
+  "observed_at": "2026-10-06T11:55:46.813451+00:00",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+  "interface": "I2",
+  "model_family": "Qwen3.6",
+  "scope": {
+    "arm": "B2",
+    "users": 4,
+    "sessions": 32,
+    "update_opportunities": 72,
+    "QA_opportunities": 73,
+    "own_empty_initial_banks": true,
+    "reserved_users_used": false
+  },
+  "terminal_status": "COMPLETED_EXPERIMENT_PHASE",
+  "author_update_labels": {
+    "None": 6,
+    "Omission": 60,
+    "Hallucination": 1,
+    "Omitted": 5
+  },
+  "author_QA_labels": {
+    "Correct": 32,
+    "Hallucination": 16,
+    "Omission": 20,
+    "null": 5
+  },
+  "official_original_overall_score": {
+    "memory_integrity": {
+      "recall(all)": 0.1867881548974943,
+      "recall(valid)": 0.1938534278959811,
+      "weighted_recall(all)": 0.1970387243735763,
+      "weighted_recall(valid)": 0.2044917257683215,
+      "memory_valid_importance_sum": 317.25,
+      "memory_importance_sum": 329.25,
+      "memory_valid_num": 423,
+      "memory_num": 439
+    },
+    "memory_accuracy": {
+      "interference_accuracy(all)": 1.0,
+      "interference_accuracy(valid)": 1.0,
+      "interference_memory_valid_num": 29,
+      "interference_memory_num": 29,
+      "target_accuracy(all)": 1.0,
+      "target_accuracy(valid)": 1.0,
+      "target_memory_valid_num": 21,
+      "target_memory_num": 21,
+      "weighted_accuracy(all)": 0.9333333333333333,
+      "weighted_accuracy(valid)": 1.0,
+      "memory_valid_num": 28,
+      "memory_num": 30
+    },
+    "memory_extraction_f1": 0.31477927063339733,
+    "memory_update": {
+      "correct_update_memory_ratio(all)": 0.0,
+      "correct_update_memory_ratio(valid)": 0.0,
+      "hallucination_update_memory_ratio(all)": 0.013888888888888888,
+      "hallucination_update_memory_ratio(valid)": 0.01639344262295082,
+      "omission_update_memory_ratio(all)": 0.8333333333333334,
+      "omission_update_memory_ratio(valid)": 0.9836065573770492,
+      "other_update_memory_ratio(all)": 0.0,
+      "other_update_memory_ratio(valid)": 0.0,
+      "update_memory_valid_num": 61,
+      "update_memory_num": 72
+    },
+    "question_answering": {
+      "correct_qa_ratio(all)": 0.4383561643835616,
+      "correct_qa_ratio(valid)": 0.47058823529411764,
+      "hallucination_qa_ratio(all)": 0.2191780821917808,
+      "hallucination_qa_ratio(valid)": 0.23529411764705882,
+      "omission_qa_ratio(all)": 0.273972602739726,
+      "omission_qa_ratio(valid)": 0.29411764705882354,
+      "qa_valid_num": 68,
+      "qa_num": 73
+    },
+    "memory_type_accuracy": {
+      "Event Memory": {
+        "memory_integrity_acc": 0.0,
+        "memory_update_acc": 0.0,
+        "total_num": 84,
+        "memory_acc": 0.0
+      },
+      "Relationship Memory": {
+        "memory_integrity_acc": 0.25,
+        "memory_update_acc": 0.0,
+        "total_num": 28,
+        "memory_acc": 0.25
+      },
+      "Persona Memory": {
+        "memory_integrity_acc": 0.17523364485981308,
+        "memory_update_acc": 0.0,
+        "total_num": 428,
+        "memory_acc": 0.17523364485981308
+      }
+    }
+  },
+  "original_author_reaggregation": {
+    "error": null,
+    "checkpoint_rows_with_original_is_valid_exact_match": true,
+    "labels_gold_and_first_attempts_unchanged": true,
+    "new_model_calls": 0
+  },
+  "HTTP": {
+    "requests": 418,
+    "responses": 418,
+    "known_tokens": 1418066,
+    "role_usage": {
+      "Writer": {
+        "calls": 15,
+        "input_tokens": 277030,
+        "completion_tokens": 59649,
+        "known_tokens": 336679
+      },
+      "Reader": {
+        "calls": 73,
+        "input_tokens": 111901,
+        "completion_tokens": 106862,
+        "known_tokens": 218763
+      },
+      "Judge": {
+        "calls": 330,
+        "input_tokens": 470762,
+        "completion_tokens": 391862,
+        "known_tokens": 862624
+      }
+    },
+    "finish_reasons": {
+      "stop": 418
+    },
+    "failure_files": 0,
+    "unconfirmed_requests": 0,
+    "HTTP_failure_count_does_not_include_pre_HTTP_failures": true
+  },
+  "writer_operations": {
+    "counts": {
+      "official_completed_sessions": 32,
+      "prepared_sessions": 32,
+      "original_characters_in_prepared_sessions": 300136,
+      "prepared_characters": 300136,
+      "maintenance_completed_sessions": 32,
+      "upstream_extracted_outputs": 30,
+      "prepared_batches": 33,
+      "completed_batches": 33,
+      "recorded_writer_requests": 15,
+      "characters_in_recorded_requests": 66201,
+      "confirmed_writer_responses": 15,
+      "characters_in_confirmed_responses": 66201,
+      "writer_returned_proposal_list_batches": 15,
+      "writer_returned_empty_list_batches": 7,
+      "proposed_operations": 30,
+      "recorded_operation_receipts": 30,
+      "confirmed_committed_operations": 30,
+      "first_attempt_writer_failed_batches": 18,
+      "additional_writer_attempts": 0
+    },
+    "first_attempt_writer_failures": {
+      "context_unavailable_before_http": 18
+    },
+    "committed_actions": {
+      "create": 30
+    }
+  },
+  "actual_state": {
+    "final_records": 30,
+    "final_units": 66,
+    "condition_units": 0,
+    "relations": 0,
+    "unchanged_full_state_sessions": 24,
+    "sessions_with_unprocessed_gaps": 18,
+    "existing_record_updates": 0,
+    "unchanged_or_committed_is_not_semantic_completion": true
+  },
+  "per_user_operations_and_state": [
+    {
+      "development_user_position": 0,
+      "chronological_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "update_labels": {
+        "None": 2,
+        "Omission": 17
+      },
+      "QA_labels": {
+        "Correct": 9,
+        "Hallucination": 5,
+        "Omission": 5,
+        "null": 1
+      },
+      "writer_operations": {
+        "expected_sessions": 8,
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 80537,
+          "prepared_characters": 80537,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 5,
+          "prepared_batches": 8,
+          "completed_batches": 8,
+          "recorded_writer_requests": 5,
+          "characters_in_recorded_requests": 33768,
+          "confirmed_writer_responses": 5,
+          "characters_in_confirmed_responses": 33768,
+          "writer_returned_proposal_list_batches": 5,
+          "writer_returned_empty_list_batches": 4,
+          "proposed_operations": 5,
+          "recorded_operation_receipts": 5,
+          "confirmed_committed_operations": 5,
+          "first_attempt_writer_failed_batches": 3,
+          "additional_writer_attempts": 0
+        },
+        "not_yet_prepared_sessions": 0,
+        "pending_prepared_sessions": 0,
+        "pending_prepared_batches": 0,
+        "requests_without_confirmed_responses": 0,
+        "first_attempt_writer_failures": {
+          "context_unavailable_before_http": 3
+        },
+        "receipt_statuses": {
+          "committed": 5
+        },
+        "rejection_reasons": {},
+        "proposed_actions": {
+          "create": 5
+        },
+        "committed_actions": {
+          "create": 5
+        },
+        "proposed_local_operations": {},
+        "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+      },
+      "final_records": 5,
+      "final_units": 11,
+      "unit_roles": {
+        "content": 11
+      },
+      "relation_types": {},
+      "max_record_units": 4,
+      "max_record_characters": 981
+    },
+    {
+      "development_user_position": 1,
+      "chronological_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "update_labels": {
+        "Omission": 10,
+        "Hallucination": 1,
+        "None": 2,
+        "Omitted": 2
+      },
+      "QA_labels": {
+        "Correct": 6,
+        "null": 2,
+        "Omission": 4
+      },
+      "writer_operations": {
+        "expected_sessions": 8,
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 63988,
+          "prepared_characters": 63988,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 8,
+          "prepared_batches": 8,
+          "completed_batches": 8,
+          "recorded_writer_requests": 2,
+          "characters_in_recorded_requests": 3921,
+          "confirmed_writer_responses": 2,
+          "characters_in_confirmed_responses": 3921,
+          "writer_returned_proposal_list_batches": 2,
+          "writer_returned_empty_list_batches": 0,
+          "proposed_operations": 8,
+          "recorded_operation_receipts": 8,
+          "confirmed_committed_operations": 8,
+          "first_attempt_writer_failed_batches": 6,
+          "additional_writer_attempts": 0
+        },
+        "not_yet_prepared_sessions": 0,
+        "pending_prepared_sessions": 0,
+        "pending_prepared_batches": 0,
+        "requests_without_confirmed_responses": 0,
+        "first_attempt_writer_failures": {
+          "context_unavailable_before_http": 6
+        },
+        "receipt_statuses": {
+          "committed": 8
+        },
+        "rejection_reasons": {},
+        "proposed_actions": {
+          "create": 8
+        },
+        "committed_actions": {
+          "create": 8
+        },
+        "proposed_local_operations": {},
+        "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+      },
+      "final_records": 8,
+      "final_units": 33,
+      "unit_roles": {
+        "content": 33
+      },
+      "relation_types": {},
+      "max_record_units": 6,
+      "max_record_characters": 1404
+    },
+    {
+      "development_user_position": 2,
+      "chronological_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "update_labels": {
+        "Omission": 16,
+        "Omitted": 2,
+        "None": 2
+      },
+      "QA_labels": {
+        "Correct": 8,
+        "Omission": 8,
+        "Hallucination": 5,
+        "null": 1
+      },
+      "writer_operations": {
+        "expected_sessions": 8,
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 67171,
+          "prepared_characters": 67171,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 9,
+          "prepared_batches": 8,
+          "completed_batches": 8,
+          "recorded_writer_requests": 3,
+          "characters_in_recorded_requests": 9472,
+          "confirmed_writer_responses": 3,
+          "characters_in_confirmed_responses": 9472,
+          "writer_returned_proposal_list_batches": 3,
+          "writer_returned_empty_list_batches": 0,
+          "proposed_operations": 9,
+          "recorded_operation_receipts": 9,
+          "confirmed_committed_operations": 9,
+          "first_attempt_writer_failed_batches": 5,
+          "additional_writer_attempts": 0
+        },
+        "not_yet_prepared_sessions": 0,
+        "pending_prepared_sessions": 0,
+        "pending_prepared_batches": 0,
+        "requests_without_confirmed_responses": 0,
+        "first_attempt_writer_failures": {
+          "context_unavailable_before_http": 5
+        },
+        "receipt_statuses": {
+          "committed": 9
+        },
+        "rejection_reasons": {},
+        "proposed_actions": {
+          "create": 9
+        },
+        "committed_actions": {
+          "create": 9
+        },
+        "proposed_local_operations": {},
+        "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+      },
+      "final_records": 9,
+      "final_units": 14,
+      "unit_roles": {
+        "content": 14
+      },
+      "relation_types": {},
+      "max_record_units": 3,
+      "max_record_characters": 701
+    },
+    {
+      "development_user_position": 3,
+      "chronological_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "update_labels": {
+        "Omission": 17,
+        "Omitted": 1
+      },
+      "QA_labels": {
+        "Correct": 9,
+        "Hallucination": 6,
+        "null": 1,
+        "Omission": 3
+      },
+      "writer_operations": {
+        "expected_sessions": 8,
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 88440,
+          "prepared_characters": 88440,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 8,
+          "prepared_batches": 9,
+          "completed_batches": 9,
+          "recorded_writer_requests": 5,
+          "characters_in_recorded_requests": 19040,
+          "confirmed_writer_responses": 5,
+          "characters_in_confirmed_responses": 19040,
+          "writer_returned_proposal_list_batches": 5,
+          "writer_returned_empty_list_batches": 3,
+          "proposed_operations": 8,
+          "recorded_operation_receipts": 8,
+          "confirmed_committed_operations": 8,
+          "first_attempt_writer_failed_batches": 4,
+          "additional_writer_attempts": 0
+        },
+        "not_yet_prepared_sessions": 0,
+        "pending_prepared_sessions": 0,
+        "pending_prepared_batches": 0,
+        "requests_without_confirmed_responses": 0,
+        "first_attempt_writer_failures": {
+          "context_unavailable_before_http": 4
+        },
+        "receipt_statuses": {
+          "committed": 8
+        },
+        "rejection_reasons": {},
+        "proposed_actions": {
+          "create": 8
+        },
+        "committed_actions": {
+          "create": 8
+        },
+        "proposed_local_operations": {},
+        "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+      },
+      "final_records": 8,
+      "final_units": 8,
+      "unit_roles": {
+        "content": 8
+      },
+      "relation_types": {},
+      "max_record_units": 1,
+      "max_record_characters": 428
+    }
+  ],
+  "session_actual_views": [
+    {
+      "development_user_position": 0,
+      "ordinal": 0,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 5,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 5,
+      "author_compat_extracted": 5,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 1,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 2,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 3,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 4,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 5,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 6,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 7,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 0,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 5,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 5,
+      "author_compat_extracted": 5,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 1,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 3,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 3,
+      "author_compat_extracted": 3,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 2,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 3,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 4,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 5,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 6,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 7,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 0,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 5,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 5,
+      "author_compat_extracted": 5,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 1,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 3,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 3,
+      "author_compat_extracted": 3,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 2,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 1,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 1,
+      "author_compat_extracted": 1,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 3,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 4,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 5,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 6,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 7,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 0,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 5,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 5,
+      "author_compat_extracted": 5,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 1,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 3,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 3,
+      "author_compat_extracted": 3,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 2,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 3,
+      "actual_source_batches": 2,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 4,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 5,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 6,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 7,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 1
+    }
+  ],
+  "Root_review_scope": {
+    "status": "B2_ALL32_STATES_15_COMPLETE_ENVELOPES_73_COMPLETE_ANSWERS_REVIEWED",
+    "observed_at": "2026-10-06T12:01:02.097333+00:00",
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+    "second_user_additional_complete_envelopes_read": 2,
+    "prior_second_user_review_retained_unchanged": true,
+    "cumulative_before_after_pairs": 32,
+    "cumulative_actual_Writer_envelopes": 15,
+    "cumulative_complete_Reader_answers": 73,
+    "HTTP_usage_pairs_checked_for_closure": 418,
+    "source_context_selected_only": true,
+    "independent_Judge_or_exhaustive_database_source_audit": false,
+    "new_model_calls": 0,
+    "bank_and_ledger_writes": 0
+  },
+  "bounded_semantic_observations": [
+    "First user has four actual empty maintenance responses despite delivered durable new facts and three separate capacity failures; missing pet facts are formation omission, not the stored-pet retrieval miss in B0/B1.",
+    "Second user forms33 content units in8 matters, including separate financial facts and a seasonal-income qualifier, without condition relations. All later6 maintenance attempts fail before HTTP.",
+    "Third user forms9 records/14 content units, then5 maintenance attempts fail before HTTP. Retirement and motivation exist in the prepared User packet but never reach Writer; old financial facts remaining in state cannot count as successful non-target preservation.",
+    "Third-user successful preference formation creates only food, omitting delivered explicit music and other preferences. A later culinary Reader request actually receives only demographics although food exists in state; retrieval and update omissions are separate.",
+    "Fourth user forms8 records in first2 sessions, then6 states stay unchanged. Three actual empty envelopes omit delivered preferences/networking facts; four other source batches fail before HTTP, including the User promotion/income batch.",
+    "Fourth-user later Assistant batch yields empty output; memory keeps the old reported role/income. It is neither successful revision nor the separate B1 inferred/assistant update. Natural answers sometimes abstain or repeat older claims with date caveats.",
+    "All32 actual state pairs,15 complete Writer envelopes and73 complete answers reviewed. Source context selective; not independent Judge or exhaustive source/database audit. No final M comparison or conditional-edit advantage."
+  ],
+  "same_scope_closed_three_arm_counts": {
+    "sessions_per_arm": 32,
+    "updates_per_arm": 72,
+    "QA_per_arm": 73,
+    "B0": {
+      "update_Correct": 6,
+      "update_valid": 58,
+      "QA_Correct": 42,
+      "QA_valid": 73
+    },
+    "B1": {
+      "update_Correct": 5,
+      "update_valid": 60,
+      "QA_Correct": 36,
+      "QA_valid": 69
+    },
+    "B2": {
+      "update_Correct": 0,
+      "update_valid": 61,
+      "QA_Correct": 32,
+      "QA_valid": 68
+    },
+    "M": null,
+    "single_family_exposed_development_prefix": true,
+    "method_advantage_established": false
+  },
+  "shared_schema_repair_all_closed_failed_inputs": {
+    "source_commit": "ab8f475efb9ea5991a715615e5b922e4c9b81b8c",
+    "B1_actual_failed_inputs": 8,
+    "B2_actual_failed_inputs": 18,
+    "actual_failed_inputs": 26,
+    "rows": [
+      {
+        "arm": "B1",
+        "development_user_position": 0,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 37672,
+        "projected_input_tokens": 22953,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 0,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 34439,
+        "projected_input_tokens": 21760,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 0,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 37039,
+        "projected_input_tokens": 22320,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 1,
+        "ordinal": 5,
+        "batch": 0,
+        "original_input_tokens": 33939,
+        "projected_input_tokens": 21260,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 3,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 37181,
+        "projected_input_tokens": 23227,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 3,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 34169,
+        "projected_input_tokens": 21490,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 3,
+        "ordinal": 6,
+        "batch": 0,
+        "original_input_tokens": 37097,
+        "projected_input_tokens": 22378,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B1",
+        "development_user_position": 3,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 37218,
+        "projected_input_tokens": 22499,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 0,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 37256,
+        "projected_input_tokens": 22414,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 0,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 34003,
+        "projected_input_tokens": 21201,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 0,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 36586,
+        "projected_input_tokens": 21744,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 2,
+        "batch": 0,
+        "original_input_tokens": 33149,
+        "projected_input_tokens": 22443,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 35390,
+        "projected_input_tokens": 23904,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 39207,
+        "projected_input_tokens": 24601,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 5,
+        "batch": 0,
+        "original_input_tokens": 47828,
+        "projected_input_tokens": 27762,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 6,
+        "batch": 0,
+        "original_input_tokens": 34783,
+        "projected_input_tokens": 23297,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 1,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 34507,
+        "projected_input_tokens": 23021,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 2,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 39385,
+        "projected_input_tokens": 23727,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 2,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 43465,
+        "projected_input_tokens": 25197,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 2,
+        "ordinal": 5,
+        "batch": 0,
+        "original_input_tokens": 34494,
+        "projected_input_tokens": 22316,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 2,
+        "ordinal": 6,
+        "batch": 0,
+        "original_input_tokens": 34454,
+        "projected_input_tokens": 22282,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 2,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 43696,
+        "projected_input_tokens": 25428,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 3,
+        "ordinal": 3,
+        "batch": 0,
+        "original_input_tokens": 48095,
+        "projected_input_tokens": 26743,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 3,
+        "ordinal": 4,
+        "batch": 0,
+        "original_input_tokens": 44166,
+        "projected_input_tokens": 24764,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 3,
+        "ordinal": 6,
+        "batch": 0,
+        "original_input_tokens": 48192,
+        "projected_input_tokens": 25670,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      },
+      {
+        "arm": "B2",
+        "development_user_position": 3,
+        "ordinal": 7,
+        "batch": 0,
+        "original_input_tokens": 48298,
+        "projected_input_tokens": 25776,
+        "fits_new_source_without_data_loss": true,
+        "schema_expands_exactly": true,
+        "packet_mapping_system_date_and_original_API_schema_unchanged": true
+      }
+    ],
+    "projected_min_tokens": 21201,
+    "projected_max_tokens": 27762,
+    "input_limit": 32256,
+    "exact_data_and_original_generation_contract_preserved": true,
+    "actual_model_calls": 0,
+    "new_own_histories_not_projected": true,
+    "finite_recheck_scope": "B1 first exposed user first8 own-empty only",
+    "finite_recheck_status": "PREPARED_CI_BOUND_WAITING_FROZEN_QUEUE_NORMAL_EXIT_NOT_ADMITTED"
+  },
+  "external_template_counter_repair": {
+    "status": "SOURCE_COMMITTED_OFFLINE_VERIFIED_OWN_CI_PENDING_NOT_ADMITTED",
+    "source_commit": "d5476bd790a315480436a7bfbb1b258514483c84",
+    "own_CI": {
+      "commit": "d5476bd790a315480436a7bfbb1b258514483c84",
+      "observed_at": "2026-10-06 12:04:28 UTC",
+      "Fast": {
+        "run_id": 37459592051,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "Full": {
+        "run_id": 37459592057,
+        "status": "in_progress",
+        "conclusion": null
+      }
+    },
+    "affected_external_unit_tests_already_passed": 22,
+    "Ruff_files_passed": 2,
+    "strict_mypy_source_files_passed": 1,
+    "real_local_Qwen_tokenizer_synthetic_callback_verified": true,
+    "old_true_mode_regression_fails_as_expected": true,
+    "legacy_false_request_unchanged": true,
+    "actual_model_calls": 0,
+    "not_explanation_for_main_capacity_failures": true,
+    "frozen_main_and_ab8_finite_source_unchanged": true
+  },
+  "running_frozen_queue_snapshot": {
+    "observed_at": "2026-10-06T12:03:58.677767+00:00",
+    "observation_started_at": "2026-10-06T12:03:58.497964+00:00",
+    "status": "RUNNING_PARTIAL_NOT_FINAL_RESULTS",
+    "PID": 178764,
+    "PID_and_exact_frozen_command_verified_live": true,
+    "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+    "predeclaration_commit": "f4106f1a1ed418afc723328562c92d958a3a9000",
+    "started_at": "2026-10-06T07:23:06.705004+00:00",
+    "per_arm_planned_sessions": 32,
+    "per_arm_planned_updates": 72,
+    "per_arm_planned_QA": 73,
+    "arms": {
+      "B0": {
+        "maintenance_complete": 32,
+        "evaluation_complete": 32,
+        "requests": 696,
+        "saved_response_files": 696,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+      },
+      "B1": {
+        "maintenance_complete": 32,
+        "evaluation_complete": 32,
+        "requests": 662,
+        "saved_response_files": 662,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+      },
+      "B2": {
+        "maintenance_complete": 32,
+        "evaluation_complete": 32,
+        "requests": 418,
+        "saved_response_files": 418,
+        "pending_HTTP_count": 0,
+        "failure_files": 0,
+        "terminal_status": "COMPLETED_EXPERIMENT_PHASE"
+      },
+      "M": {
+        "maintenance_complete": 3,
+        "evaluation_complete": 2,
+        "requests": 121,
+        "saved_response_files": 120,
+        "pending_HTTP_count": 1,
+        "failure_files": 0,
+        "terminal_status": null
+      }
+    },
+    "per_user_checkpoints": {
+      "B0": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        }
+      ],
+      "B1": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        }
+      ],
+      "B2": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 8,
+          "evaluation_complete": 8
+        }
+      ],
+      "M": [
+        {
+          "development_user_position": 0,
+          "maintenance_complete": 3,
+          "evaluation_complete": 2
+        },
+        {
+          "development_user_position": 1,
+          "maintenance_complete": 0,
+          "evaluation_complete": 0
+        },
+        {
+          "development_user_position": 2,
+          "maintenance_complete": 0,
+          "evaluation_complete": 0
+        },
+        {
+          "development_user_position": 3,
+          "maintenance_complete": 0,
+          "evaluation_complete": 0
+        }
+      ]
+    },
+    "request_artifacts": 1897,
+    "saved_response_roles": {
+      "Writer": 76,
+      "Reader": 225,
+      "Judge": 1595
+    },
+    "saved_response_count": 1896,
+    "saved_response_finish_reasons": {
+      "stop": 1896
+    },
+    "known_tokens_from_saved_responses": 6612199,
+    "input_tokens_from_saved_responses": 4149298,
+    "completion_tokens_from_saved_responses": 2462901,
+    "not_final_accounting": true,
+    "pending_budget_unknown_reservation_is_not_terminal_failure": true,
+    "candidate_selected": false,
+    "method_advantage_established": false,
+    "long_smoke_actual_model_calls": 0,
+    "session_checkpoint_count_scope": "Only maintenance/halumem/<user>/<ordinal>/complete.json and evaluation equivalent; nested batch checkpoints excluded.",
+    "Root_closed_user_review_scope": "B0, B1 and B2 all32 before/after pairs and73 complete Reader answers per arm reviewed. B2 all15 complete actual Writer envelopes read, including second-user additional2. M not reviewed. Selected source context only; not independent Judge or exhaustive source/database audit.",
+    "no_new_model_process_started_for_publication": true
+  },
+  "accounting_start": {
+    "generation_requests": 37877,
+    "generation": {
+      "charged_tokens": 145072137,
+      "known_tokens": 144960422,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_end": {
+    "generation_requests": 38295,
+    "generation": {
+      "charged_tokens": 146490203,
+      "known_tokens": 146378488,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_scope": "Closed through B2 end. Count B0/B1/B2 once; exclude live M, pending reservations and user subsets.",
+  "remaining": [
+    "Frozen M prefix closure and semantic review",
+    "Declared finite ab8 B1 first-user repair real recheck",
+    "Common version selection and actual-state preselected65/full277",
+    "M entry ablation and fixed tighter budget",
+    "Native32/12/4 and full277 drift",
+    "16 reserved users",
+    "LongMemEval28/1354/10 and strong external baselines",
+    "Normal Host135/192, frozen new stories and recovery",
+    "Full R0-R5/E0-E5 six deliverables"
+  ],
+  "product_status": "NO_GO",
+  "candidate_selected": false,
+  "method_advantage_established": false,
+  "publication": {
+    "Lab_files": 8,
+    "new_model_calls_started": 0,
+    "source_test_config_changes": false,
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "Archive_workflow_changed": false,
+    "raw_gold_predictions_HTTP_reasoning_DB_logs_ignored": true,
+    "rollback_reference": "d5476bd790a315480436a7bfbb1b258514483c84"
+  }
+}

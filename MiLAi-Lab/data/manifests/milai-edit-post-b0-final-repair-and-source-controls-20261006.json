@@ -1,0 +1,514 @@
+{
+  "status": "FINAL_MINIMAL_REPAIR80_AND_SOURCE_CONTROLS52_REVIEWED_CRITICAL_FAILURES",
+  "observed_at": "2026-10-06T10:20:45+08:00",
+  "source_commit": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+  "interface": "I2",
+  "config_versions": {
+    "lifecycle": "milai-edit-post-b0-i2-final-examples-8ed7826",
+    "source_controls": "milai-edit-post-b0-i2-source-controls-8ed7826"
+  },
+  "model": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 8192,
+    "enable_thinking": false,
+    "context_tokens": 65536,
+    "source_tokens": 4096,
+    "retrieval_limit": 10,
+    "working_sets": false
+  },
+  "own_empty_banks_per_arm_branch_and_scenario": true,
+  "ideal_state_injected": false,
+  "single_Qwen_family": true,
+  "independent_judge": false,
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "two_minimal_repairs_exhausted": true,
+  "further_prompt_warning_or_example_iteration_admitted": false,
+  "product_status": "NO_GO",
+  "original_lifecycle44": {
+    "status": "FINAL_MINIMAL_EXAMPLE_REPAIR_ORIGINAL44_REVIEWED_FAILED",
+    "source_commit": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+    "actual_generation_calls": 44,
+    "known_tokens": 79642,
+    "Writer_calls": 24,
+    "Reader_calls": 20,
+    "Judge_calls": 0,
+    "receipt_statuses": {
+      "committed": 19,
+      "no_change": 1,
+      "rejected": 1
+    },
+    "arms": {
+      "B0": {
+        "initial_condition_count": 0,
+        "initial_relation_count": 0,
+        "ordinary_update_complete": true,
+        "scope_kept_actual_general_rule": false,
+        "scope_formed_override": false,
+        "scope_kept_unmentioned_start_text": false,
+        "scope_kept_unmentioned_holiday_text": true,
+        "withdraw_restored_complete_general_arrangement": false,
+        "withdraw_deleted_whole_record": false,
+        "withdraw_rejected_and_left_old_exception": false,
+        "query_exact_state_unchanged": true,
+        "reaffirm_general_text_restored": true,
+        "final_reader_fully_resolves_shift_applicability": false,
+        "operations": {}
+      },
+      "B1": {
+        "initial_condition_count": 0,
+        "initial_relation_count": 0,
+        "ordinary_update_complete": true,
+        "scope_kept_actual_general_rule": false,
+        "scope_formed_override": false,
+        "scope_kept_unmentioned_start_text": false,
+        "scope_kept_unmentioned_holiday_text": false,
+        "withdraw_restored_complete_general_arrangement": false,
+        "withdraw_deleted_whole_record": true,
+        "withdraw_rejected_and_left_old_exception": false,
+        "query_exact_state_unchanged": true,
+        "reaffirm_general_text_restored": true,
+        "final_reader_fully_resolves_shift_applicability": false,
+        "operations": {
+          "replace": 2,
+          "delete": 1
+        }
+      },
+      "B2": {
+        "initial_condition_count": 2,
+        "initial_relation_count": 2,
+        "ordinary_update_complete": true,
+        "scope_kept_actual_general_rule": false,
+        "scope_formed_override": false,
+        "scope_kept_unmentioned_start_text": true,
+        "scope_kept_unmentioned_holiday_text": true,
+        "withdraw_restored_complete_general_arrangement": false,
+        "withdraw_deleted_whole_record": false,
+        "withdraw_rejected_and_left_old_exception": true,
+        "query_exact_state_unchanged": true,
+        "reaffirm_general_text_restored": true,
+        "final_reader_fully_resolves_shift_applicability": false,
+        "operations": {}
+      },
+      "M": {
+        "initial_condition_count": 2,
+        "initial_relation_count": 0,
+        "ordinary_update_complete": true,
+        "scope_kept_actual_general_rule": false,
+        "scope_formed_override": false,
+        "scope_kept_unmentioned_start_text": true,
+        "scope_kept_unmentioned_holiday_text": true,
+        "withdraw_restored_complete_general_arrangement": false,
+        "withdraw_deleted_whole_record": true,
+        "withdraw_rejected_and_left_old_exception": false,
+        "query_exact_state_unchanged": true,
+        "reaffirm_general_text_restored": true,
+        "final_reader_fully_resolves_shift_applicability": false,
+        "operations": {
+          "change_value": 2,
+          "retract": 3
+        }
+      }
+    },
+    "diagnosis": [
+      "All four ordinary updates now retain unmentioned limits.",
+      "All scoped writes still replace the general rule, despite generic exception examples.",
+      "M initial output includes two condition units but relations=[]; raw envelope confirms model omission.",
+      "B2 withdrawal proposes unchanged old exception with h-only support, is rejected current_boundary_source_required and misses withdrawal.",
+      "B1/M withdrawal removes the actual whole record; no valid general rule remains.",
+      "All four query attempts leave exact semantic state unchanged, but this does not repair already damaged state.",
+      "Reaffirmation repairs supported general text; final Reader still refuses explicit day/night applicability."
+    ],
+    "limits": [
+      "One exposed source, not independent confirmation or method superiority.",
+      "Only generic example repair; no source or prompt edits during the queue.",
+      "Initial start-time unknown was chosen as condition; condition count alone does not establish linkage.",
+      "Stop further warning/example iterations after two minimal repairs; inspect actual input and representation."
+    ],
+    "request_count": 44,
+    "response_count": 44,
+    "finish_reasons": {
+      "stop": 44
+    },
+    "empty_maintenance_envelopes": 3,
+    "accounting_start_generation_requests": 35994,
+    "accounting_end_generation_requests": 36038,
+    "accounting_matches_responses": true,
+    "source_commit_verified": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+    "runtime_terminal_records_completed_attempts_not_semantic_success": true,
+    "query_exact_state_unchanged_arms": 4
+  },
+  "global_condition36": {
+    "status": "FINAL_MINIMAL_EXAMPLE_REPAIR_GLOBAL36_REVIEWED_FAILED",
+    "source_commit": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+    "actual_generation_calls": 36,
+    "known_tokens": 73464,
+    "Writer_calls": 20,
+    "Reader_calls": 16,
+    "Judge_calls": 0,
+    "receipt_statuses": {
+      "committed": 18,
+      "rejected": 3
+    },
+    "arms": {
+      "B0": {
+        "initial_condition_count": 0,
+        "initial_relation_count": 0,
+        "ordinary_update_complete": true,
+        "scope_kept_actual_general_rule": false,
+        "scope_formed_override": false,
+        "global_new_start_and_holiday_saved": true,
+        "global_transaction_rejected_overlap": false,
+        "withdraw_restored_complete_general_arrangement": false,
+        "withdraw_retained_updated_start_holiday": true,
+        "final_reader_complete_and_supported": false,
+        "operations_attempted": {},
+        "global_general_frequency_present_before": false,
+        "global_prior_night_frequency_present": true,
+        "global_post_attempt_night_frequency_present": true,
+        "global_actual_old_shared_condition_targets_present_before": false,
+        "global_replaced_present_old_shared_conditions": null
+      },
+      "B1": {
+        "initial_condition_count": 0,
+        "initial_relation_count": 0,
+        "ordinary_update_complete": true,
+        "scope_kept_actual_general_rule": false,
+        "scope_formed_override": false,
+        "global_new_start_and_holiday_saved": true,
+        "global_transaction_rejected_overlap": false,
+        "withdraw_restored_complete_general_arrangement": false,
+        "withdraw_retained_updated_start_holiday": true,
+        "final_reader_complete_and_supported": false,
+        "operations_attempted": {
+          "replace": 3,
+          "insert": 1
+        },
+        "global_general_frequency_present_before": false,
+        "global_prior_night_frequency_present": true,
+        "global_post_attempt_night_frequency_present": true,
+        "global_actual_old_shared_condition_targets_present_before": false,
+        "global_replaced_present_old_shared_conditions": null
+      },
+      "B2": {
+        "initial_condition_count": 2,
+        "initial_relation_count": 2,
+        "ordinary_update_complete": true,
+        "scope_kept_actual_general_rule": false,
+        "scope_formed_override": false,
+        "global_new_start_and_holiday_saved": true,
+        "global_transaction_rejected_overlap": false,
+        "withdraw_restored_complete_general_arrangement": false,
+        "withdraw_retained_updated_start_holiday": true,
+        "final_reader_complete_and_supported": false,
+        "operations_attempted": {},
+        "global_general_frequency_present_before": false,
+        "global_prior_night_frequency_present": true,
+        "global_post_attempt_night_frequency_present": false,
+        "global_actual_old_shared_condition_targets_present_before": true,
+        "global_replaced_present_old_shared_conditions": true
+      },
+      "M": {
+        "initial_condition_count": 2,
+        "initial_relation_count": 2,
+        "ordinary_update_complete": true,
+        "scope_kept_actual_general_rule": false,
+        "scope_formed_override": false,
+        "global_new_start_and_holiday_saved": false,
+        "global_transaction_rejected_overlap": true,
+        "withdraw_restored_complete_general_arrangement": false,
+        "withdraw_retained_updated_start_holiday": false,
+        "final_reader_complete_and_supported": false,
+        "operations_attempted": {
+          "change_value": 5,
+          "change_condition": 2,
+          "retract": 2
+        },
+        "global_general_frequency_present_before": false,
+        "global_prior_night_frequency_present": true,
+        "global_post_attempt_night_frequency_present": true,
+        "global_actual_old_shared_condition_targets_present_before": true,
+        "global_replaced_present_old_shared_conditions": false
+      }
+    },
+    "diagnosis": [
+      "All four ordinary updates retain old unmentioned limits; all scoped writes still lose general frequency.",
+      "M initially forms two modifies links, yet chooses change_value for the local exception: linked formation alone does not solve scope choice.",
+      "M attempts two change_condition operations for actual common conditions but also duplicates change_value on u1; EDIT_OVERLAPPING_TARGET rejects the whole transaction.",
+      "B2 common-condition rewrite saves new conditions while dropping remaining night frequency; B0 separates start/holiday into a new matter and its h-only old rewrite is rejected.",
+      "Withdrawal still cannot restore lost general rule; M retracts both valid conditions and keeps only vague general-restoration text.",
+      "Reader adds unsupported seven-day/24-hour behavior and wrong calendar interpretations in some answers; complete answer quality is distinct from saved core clauses."
+    ],
+    "limits": [
+      "One exposed source, no independent Judge or held-out user access.",
+      "Attempted semantic operations counted separately from operations applied; overlap rejection is missed maintenance, not semantic protection.",
+      "New ordinary control success does not establish scoped exception or candidate usability.",
+      "Two minimal repairs are exhausted; stop further warning/example iterations and inspect actual input/representation."
+    ],
+    "request_count": 36,
+    "response_count": 36,
+    "finish_reasons": {
+      "stop": 36
+    },
+    "empty_maintenance_envelopes": 0,
+    "accounting_start_generation_requests": 36038,
+    "accounting_end_generation_requests": 36074,
+    "accounting_matches_responses": true,
+    "source_commit_verified": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+    "runtime_terminal_records_completed_attempts_not_semantic_success": true,
+    "paired_observation_limits": [
+      "General frequency was already lost before common-condition editing in all arms; absence cannot be rewarded as preservation.",
+      "The surviving night frequency is distinct from the lost general frequency. M retains night frequency after rejected global transaction; rejection is not successful maintenance.",
+      "B0/B1 had already lost the original shared conditions. Their absence after a later event is not successful replacement of actual old conditions.",
+      "M attempted two change_condition and two change_value on the same content target; the two change_value cause EDIT_OVERLAPPING_TARGET and the transaction is not applied."
+    ]
+  },
+  "source_attribution_controls52": {
+    "status": "THREE_SOURCE_CONTROLS_REVIEWED_PARTIAL_FAILURE",
+    "source_commit": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+    "actual_generation_calls": 52,
+    "known_tokens": 83059,
+    "Writer_calls": 28,
+    "Reader_calls": 24,
+    "Judge_calls": 0,
+    "receipt_statuses": {
+      "committed": 21,
+      "no_change": 1,
+      "rejected": 3
+    },
+    "scenarios": {
+      "assistant_accurate_restatement": {
+        "actual_generation_calls": 16,
+        "known_tokens": 23018,
+        "Writer_calls": 8,
+        "Reader_calls": 8,
+        "Judge_calls": 0,
+        "receipt_statuses": {
+          "committed": 4,
+          "no_change": 1
+        },
+        "arms": {
+          "B0": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_income_preserved": true,
+            "final_original_speaker_preserved": true,
+            "repeat_exact_state_unchanged": true
+          },
+          "B1": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_income_preserved": true,
+            "final_original_speaker_preserved": true,
+            "repeat_exact_state_unchanged": true
+          },
+          "B2": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_income_preserved": true,
+            "final_original_speaker_preserved": true,
+            "repeat_exact_state_unchanged": true
+          },
+          "M": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_income_preserved": true,
+            "final_original_speaker_preserved": true,
+            "repeat_exact_state_unchanged": true
+          }
+        },
+        "request_count": 16,
+        "response_count": 16,
+        "finish_reasons": {
+          "stop": 16
+        },
+        "empty_maintenance_envelopes": 3,
+        "accounting_start_generation_requests": 36074,
+        "accounting_end_generation_requests": 36090,
+        "accounting_matches_responses": true,
+        "source_commit_verified": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+        "runtime_terminal_records_completed_attempts_not_semantic_success": true
+      },
+      "user_confirms_assistant_supplement": {
+        "actual_generation_calls": 20,
+        "known_tokens": 36622,
+        "Writer_calls": 12,
+        "Reader_calls": 8,
+        "Judge_calls": 0,
+        "receipt_statuses": {
+          "committed": 11,
+          "rejected": 1
+        },
+        "arms": {
+          "B0": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_confirmation_correct": true,
+            "final_speaker_user_correct": true,
+            "assistant_estimate_prior_user_report_preserved": true,
+            "assistant_estimate_own_role_and_uncertainty_complete": true,
+            "assistant_estimate_operation_rejected": false,
+            "intermediate_composite_unit_assertion_cannot_express_both_speakers": false
+          },
+          "B1": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_confirmation_correct": true,
+            "final_speaker_user_correct": true,
+            "assistant_estimate_prior_user_report_preserved": true,
+            "assistant_estimate_own_role_and_uncertainty_complete": false,
+            "assistant_estimate_operation_rejected": false,
+            "intermediate_composite_unit_assertion_cannot_express_both_speakers": true
+          },
+          "B2": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_confirmation_correct": true,
+            "final_speaker_user_correct": true,
+            "assistant_estimate_prior_user_report_preserved": true,
+            "assistant_estimate_own_role_and_uncertainty_complete": false,
+            "assistant_estimate_operation_rejected": true,
+            "intermediate_composite_unit_assertion_cannot_express_both_speakers": false
+          },
+          "M": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_confirmation_correct": true,
+            "final_speaker_user_correct": true,
+            "assistant_estimate_prior_user_report_preserved": false,
+            "assistant_estimate_own_role_and_uncertainty_complete": false,
+            "assistant_estimate_operation_rejected": false,
+            "intermediate_composite_unit_assertion_cannot_express_both_speakers": false
+          }
+        },
+        "request_count": 20,
+        "response_count": 20,
+        "finish_reasons": {
+          "stop": 20
+        },
+        "empty_maintenance_envelopes": 0,
+        "accounting_start_generation_requests": 36090,
+        "accounting_end_generation_requests": 36110,
+        "accounting_matches_responses": true,
+        "source_commit_verified": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+        "runtime_terminal_records_completed_attempts_not_semantic_success": true
+      },
+      "assistant_unsupported_strengthening": {
+        "actual_generation_calls": 16,
+        "known_tokens": 23419,
+        "Writer_calls": 8,
+        "Reader_calls": 8,
+        "Judge_calls": 0,
+        "receipt_statuses": {
+          "committed": 6,
+          "rejected": 2
+        },
+        "arms": {
+          "B0": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_report_preserved": true,
+            "assistant_statement_promoted_to_user_report": false,
+            "saved_speaker_metadata_remains_assistant": false,
+            "correct_state_after_structural_rejection_not_successful_maintenance": true
+          },
+          "B1": {
+            "actual_query_answers_complete_and_supported": 0,
+            "final_user_report_preserved": false,
+            "assistant_statement_promoted_to_user_report": true,
+            "saved_speaker_metadata_remains_assistant": true,
+            "correct_state_after_structural_rejection_not_successful_maintenance": false
+          },
+          "B2": {
+            "actual_query_answers_complete_and_supported": 2,
+            "final_user_report_preserved": true,
+            "assistant_statement_promoted_to_user_report": false,
+            "saved_speaker_metadata_remains_assistant": false,
+            "correct_state_after_structural_rejection_not_successful_maintenance": true
+          },
+          "M": {
+            "actual_query_answers_complete_and_supported": 0,
+            "final_user_report_preserved": false,
+            "assistant_statement_promoted_to_user_report": true,
+            "saved_speaker_metadata_remains_assistant": true,
+            "correct_state_after_structural_rejection_not_successful_maintenance": false
+          }
+        },
+        "request_count": 16,
+        "response_count": 16,
+        "finish_reasons": {
+          "stop": 16
+        },
+        "empty_maintenance_envelopes": 0,
+        "accounting_start_generation_requests": 36110,
+        "accounting_end_generation_requests": 36126,
+        "accounting_matches_responses": true,
+        "source_commit_verified": "8ed7826b845e2d019a40c7534e92ea792f435f03",
+        "runtime_terminal_records_completed_attempts_not_semantic_success": true
+      }
+    },
+    "final_reader_answers_complete_and_supported_by_root": 20,
+    "final_reader_answer_opportunities": 24,
+    "actual_role_and_time_projections_verified": 28,
+    "diagnosis": [
+      "Actual current speaker and known occurrence time arrive in all 28 Writer projections.",
+      "Accurate restatement leaves original report/state unchanged in all arms and final answers preserve original user attribution.",
+      "Later explicit user confirmation updates the final amount and speaker in all arms, but M lost original user report during unconfirmed estimate and B1 combines two speakers into one assertion.",
+      "Unsupported assistant strengthening is promoted to user report by B1/M, despite assertion metadata speaker=assistant; both Reader questions then answer as if user confirmed it.",
+      "B0/B2 preserve the original amount after rejected h-only rewrites. Correct state/QA here does not count those rejected operations as successful maintenance."
+    ],
+    "limits": [
+      "Constructed development controls from one already exposed mechanism, not natural benchmark frequency or held-out confirmation.",
+      "Root answer reading is not official author scoring or an independent Judge.",
+      "Final answer success does not erase intermediate attribution damage.",
+      "No assistant blacklist, role-based mutation override or label rewriting."
+    ],
+    "empty_maintenance_envelopes": 3,
+    "final_reader_20_of_24_is_constructed_root_review_not_benchmark_score": true
+  },
+  "total": {
+    "generation_calls": 132,
+    "Writer_calls": 72,
+    "Reader_calls": 60,
+    "Judge_calls": 0,
+    "known_tokens": 236165,
+    "request_count": 132,
+    "response_count": 132,
+    "finish_reasons": {
+      "stop": 132
+    },
+    "receipt_statuses": {
+      "committed": 58,
+      "no_change": 2,
+      "rejected": 7
+    },
+    "empty_maintenance_envelopes": 6,
+    "receipt_counts_are_per_proposal_not_a_partition_of_writer_calls": true,
+    "new_unknown_usage": 0,
+    "new_embedding_calls": 0,
+    "truncations": 0
+  },
+  "continuous_accounting_interval": {
+    "start_generation_requests": 35994,
+    "end_generation_requests": 36126,
+    "start_generation_known_tokens": 138272981,
+    "end_generation_known_tokens": 138509146,
+    "historical_generation_unknown_usage": 2,
+    "historical_embedding_unknown_usage": 0,
+    "embedding_known_tokens": 964645,
+    "all_three_intervals_contiguous": true,
+    "responded_usage_matches_ledger": true
+  },
+  "publication_model_calls": 0,
+  "actual_input_diagnosis": {
+    "full_generic_lifecycle_examples_delivered": true,
+    "current_scoped_event_and_actual_general_state_delivered": true,
+    "available_scope_semantic_ops_include_add_exception": true,
+    "condition_without_relation_is_actual_model_output_not_decoder_loss": true,
+    "source_role_and_time_writer_projections_checked": 28,
+    "saved_assistant_speaker_can_conflict_with_user_claim_text": true,
+    "hierarchical_state_view_or_new_condition_binding_contract_implemented": false,
+    "model_mode_comparison_declared_or_run": false
+  },
+  "next_step": "Analyze actual input organization, condition binding, per-unit operation structure and assertion expression; do not add another warning/example repair or start prefix on current critical failures.",
+  "limits": [
+    "One exposed lifecycle source with two branches and three constructed exposed source controls, not five independent sources.",
+    "Root review of outputs and answers is not official author scoring or an independent Judge.",
+    "Correct final confirmation answers do not erase earlier attribution damage.",
+    "Failed unchanged state and previously absent target cannot be credited as successful preservation.",
+    "All raw source bodies, gold, predictions, HTTP, databases and logs remain ignored.",
+    "No complete same-version four-user/four-arm comparison, candidate or Product claim."
+  ]
+}

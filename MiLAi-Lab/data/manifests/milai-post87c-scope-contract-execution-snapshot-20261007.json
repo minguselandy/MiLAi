@@ -1,0 +1,199 @@
+{
+  "version": "milai-post87c-scope-contract-execution-snapshot-v1",
+  "status": "FIXED_READER_CLOSED_FAILED_GLOBAL_R3_RUNNING",
+  "observed_at": "2026-10-06T20:30:37.510508+00:00",
+  "experiment_source_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+  "previous_report_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+  "immutable_pre_HTTP_declaration": "milai-post87c-scope-contract-revision-read-development-20261007.json",
+  "source_own_CI": {
+    "commit": "978bc657cef700fab8c57058cb38b026df87384c",
+    "observed_at": "2026-10-06T20:33:16+00:00",
+    "Fast": {
+      "run_id": 37524225408,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37524225437,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "source_own_Fast_verified_before_first_HTTP": true,
+    "Fast_admission_verified_at": "2026-10-06T20:19:13+00:00",
+    "new_report_CI_separate": true
+  },
+  "fixed_actual_Reader": {
+    "status": "ROOT_REVIEWED_FIXED_READER_SCOPE2_TASK_FAILED",
+    "reviewed_at": "2026-10-06T20:24:57.960943+00:00",
+    "Reader_responses": 2,
+    "finish_reasons": [
+      "stop",
+      "stop"
+    ],
+    "generation_known_tokens": 5398,
+    "complete_task_correct": 0,
+    "complete_task_denominator": 2,
+    "current_state_unchanged": true,
+    "actual_previous_role_received": true,
+    "actual_source_dates_and_cancel_witness_received": true,
+    "scope_inference_still_refused": true,
+    "final_answer_misreads_four_times_as_Thursday": true,
+    "first_answer_preserves_actual_report_dates": true,
+    "new_unknown": 0,
+    "embedding_calls": 0,
+    "Writer_calls": 0,
+    "Judge_calls": 0,
+    "accounting_exact": true,
+    "original_receipts_and_answers_preserved": true,
+    "full_reasoning_or_independent_database_audit": false,
+    "interpretation": "Prior general role and opaque scope IDs alone did not repair full scope answers. Do not repeat until passing or count legal output as task success."
+  },
+  "fixed_Reader_material": "Original actual baa first-M withdrawal/final states and original questions/dates; only revision_scope added. Actual previous role and scope IDs, no old exception text or invented facts.",
+  "global_R3_running_snapshot": {
+    "observed_at": "2026-10-06T20:30:37.510508+00:00",
+    "finished_read_at": "2026-10-06T20:30:37.601776+00:00",
+    "status": "RUNNING_ORIGINAL_GLOBAL_CONDITION_R3",
+    "source_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+    "authoritative_driver_PIDs": [
+      3191346
+    ],
+    "terminal_present": false,
+    "accounting_end_present": false,
+    "planned": {
+      "arms": [
+        "B0",
+        "B1",
+        "B2",
+        "M"
+      ],
+      "events_per_arm": 5,
+      "event_rows": 20,
+      "Writer_calls": 20,
+      "Reader_calls": 16,
+      "generation_calls": 36,
+      "Judge_calls": 0,
+      "initial_state": "OWN_EMPTY_PER_ARM"
+    },
+    "completed_event_rows_per_arm": {
+      "B0": 5,
+      "B1": 3,
+      "B2": 0,
+      "M": 0
+    },
+    "completed_event_rows": 8,
+    "maintenance_results_written": 8,
+    "saved_Writer_responses": 8,
+    "saved_Reader_responses": 6,
+    "saved_generation_responses": 14,
+    "saved_generation_known_tokens": 66762,
+    "saved_finish_reasons": {
+      "stop": 14
+    },
+    "saved_embedding_responses": 21,
+    "saved_embedding_inputs": 21,
+    "saved_embedding_known_tokens": 673,
+    "pending_generation_requests": 1,
+    "pending_embedding_requests": 0,
+    "operation_rejections_in_written_maintenance": 0,
+    "written_maintenance_results_with_unprocessed": 0,
+    "saved_request_prompt_tokens_match_response_usage": true,
+    "ledger_read_stable_during_snapshot": true,
+    "ledger_snapshot": {
+      "generation_requests": 39559,
+      "generation": {
+        "charged_tokens": 151325863,
+        "known_tokens": 151163480,
+        "unknown_usage": 4
+      },
+      "embedding": {
+        "charged_tokens": 974008,
+        "known_tokens": 974008,
+        "unknown_usage": 0
+      }
+    },
+    "R3_start_ledger": {
+      "generation_requests": 39544,
+      "generation": {
+        "charged_tokens": 151208433,
+        "known_tokens": 151096718,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 973335,
+        "known_tokens": 973335,
+        "unknown_usage": 0
+      }
+    },
+    "known_generation_receipts_match_ledger_delta": true,
+    "known_embedding_receipts_match_ledger_delta": true,
+    "full_semantic_review_complete": false,
+    "final_scores": null,
+    "final_accounting": false,
+    "interpretation": "Running snapshot only. Unknown counter includes unsettled in-flight reservations; not yet a closed transport failure. No hot change, restart, new experiment or retry for publication."
+  },
+  "last_closed_continuous_accounting_after_fixed_Reader": {
+    "generation_requests": 39544,
+    "generation": {
+      "charged_tokens": 151208433,
+      "known_tokens": 151096718,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 973335,
+      "known_tokens": 973335,
+      "unknown_usage": 0
+    }
+  },
+  "source_stage_confirmed_receipts_at_snapshot": {
+    "generation_responses": 16,
+    "generation_known_tokens": 72160,
+    "finish_reasons": {
+      "stop": 16
+    },
+    "embedding_responses": 21,
+    "embedding_known_tokens": 673,
+    "generation_request_reservations": 17,
+    "generation_pending_requests": 1,
+    "not_final_accounting": true
+  },
+  "continuous_accounting_scope": "Running ledger includes one pending generation reservation in unknown_usage4; historical settled unknown3 remain. Confirmed known receipt deltas match. This is not a new closed transport failure or final accounting. Stage subsets already included in cumulative ledger.",
+  "publication_only_new_generation_calls": 0,
+  "publication_only_new_embedding_calls": 0,
+  "new_source_tests_for_report": 0,
+  "full_semantic_review_of_global_R3_complete": false,
+  "candidate_selected": false,
+  "same_version_prefix_admitted": false,
+  "stable_method_advantage_established": false,
+  "historical_results_separate": [
+    "4357d46",
+    "7b82c60",
+    "646d9fa",
+    "baa0e70"
+  ],
+  "full_goal_remaining": [
+    "same-version four-arm first8, first65 and full277",
+    "native mechanisms and long-history drift",
+    "M semantic-entry ablation and fixed tighter-budget sensitivity",
+    "16 reserved users after freeze",
+    "LongMemEval and strong simple baselines",
+    "normal Host, post-freeze stories, forgetting, real effects and recovery",
+    "all six original deliverables"
+  ],
+  "reserved_users_read": false,
+  "generation_family": "Qwen3.6 only",
+  "encoder": "existing BGE-m3",
+  "product_status": "NO_GO",
+  "goal_complete": false,
+  "boundaries": {
+    "Product_schema_API_permissions_Canonical_changed": false,
+    "Archive_changed": false,
+    "workflow_changed": false,
+    "new_auditor_platform_or_deployment": false,
+    "budget_reset_or_increase": false,
+    "hot_source_or_config_change": false,
+    "unknown_replay_or_JSON_repair": false
+  },
+  "publication_scope": "Six Lab documentation/status/result files; no source, tests or active experiment config changes.",
+  "rollback_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+  "private_raw_HTTP_DB_gold_reasoning_configs_and_logs_ignored": true
+}

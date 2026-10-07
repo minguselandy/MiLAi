@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import copy
+import json
 import random
+import sqlite3
 from collections import Counter
 from collections.abc import Sequence
 from pathlib import Path
@@ -13,7 +15,7 @@ from typing import Any
 from milai_lab.analysis.edit_official import HaluMemOfficial
 from milai_lab.harness.artifact_io import read_json
 
-PAIRS = (("B0", "B1"), ("B0", "B2"), ("B2", "M"), ("B1", "M"))
+PAIRS = (("B0", "B1"), ("B0", "B2"), ("B2", "M"), ("B1", "M"), ("M", "Append-only"))
 METRICS = (
     "formation_recall_all",
     "formed_memory_accuracy_all",
@@ -120,6 +122,9 @@ def writer_operations(
     folder: Path, owner: str, expected_sessions: Sequence[int] | None
 ) -> dict[str, Any]:
     """Count recorded first attempts and effects without inferring semantic success."""
+    config = folder / "actual-config.json"
+    if config.exists() and read_json(config).get("maintenance_recipe"):
+        return recipe_writer_operations(folder, owner, expected_sessions)
     maintenance = folder / "maintenance" / "halumem" / owner
     sessions = (
         list(expected_sessions)
@@ -254,6 +259,132 @@ def writer_operations(
     }
 
 
+def recipe_writer_operations(
+    folder: Path, owner: str, expected_sessions: Sequence[int] | None
+) -> dict[str, Any]:
+    """Read the common pipeline's existing checkpoints; never open its bank for writes."""
+    counts: Counter[str] = Counter()
+    failures: Counter[str] = Counter()
+    extraction_failures: Counter[str] = Counter()
+    receipts: Counter[str] = Counter()
+    rejected: Counter[str] = Counter()
+    proposed: Counter[str] = Counter()
+    committed: Counter[str] = Counter()
+    edits: Counter[str] = Counter()
+    examples: dict[str, list[str]] = {}
+    sessions = set()
+    bank = folder / "banks" / owner / "memory.sqlite"
+    if bank.exists():
+        with sqlite3.connect(bank.resolve().as_uri() + "?mode=ro", uri=True) as connection:
+            rows = connection.execute(
+                "SELECT key, value FROM store WHERE prefix LIKE ?", ("%.edit_maintenance",)
+            ).fetchall()
+        for key, raw in rows:
+            _, request_id = json.loads(key)
+            prefix = f"halumem/{owner}/"
+            if not request_id.startswith(prefix):
+                continue
+            ordinal, *batch_parts = request_id.removeprefix(prefix).split(":batch:")
+            if expected_sessions is not None and int(ordinal) not in expected_sessions:
+                continue
+            sessions.add(int(ordinal))
+            state = json.loads(raw)
+            if "batches" in state:
+                counts["batch_containers"] += 1
+                counts["planned_subbatches"] += len(state["batches"])
+                continue  # Parent receipts repeat actual child effects; count each leaf once.
+            counts["prepared_batches"] += 1
+            counts["completed_batches"] += state["phase"] in {"complete", "incomplete"}
+            counts["incomplete_maintenance_batches"] += state["phase"] == "incomplete"
+            characters = sum(s["end"] - s["start"] for s in state["binding"]["sources"])
+            counts["prepared_characters"] += characters
+            http = folder / "http/maintenance" / prefix / ordinal / f"batch-{batch_parts[0]}"
+            for part in batch_parts[1:]:
+                http = http / f"subbatch-{part}"
+            for stage, label in (("extract", "extraction"), ("edit", "writer")):
+                request, response = http / stage / "request.json", http / stage / "response.json"
+                counts[f"recorded_{label}_requests"] += request.exists()
+                counts[f"confirmed_{label}_responses"] += response.exists()
+                if stage == "edit":
+                    counts["characters_in_recorded_requests"] += characters * request.exists()
+                    counts["characters_in_confirmed_responses"] += characters * response.exists()
+            for gap in state["unprocessed"]:
+                if "reason" not in gap:
+                    continue  # Commit rejections are counted from their actual receipts below.
+                message = gap["reason"]
+                kind = ("context_unavailable_before_http"
+                        if message == "EDIT_MAINTENANCE_REQUEST_EXCEEDS_CAPACITY"
+                        else "provider_output_incomplete"
+                        if "Provider output incomplete:" in message
+                        else message)
+                label = ("extraction" if gap.get("phase") == "start"
+                         or gap.get("phase", "").startswith("extract") else "writer")
+                (extraction_failures if label == "extraction" else failures)[kind] += 1
+                counts[f"first_attempt_{label}_failed_batches"] += 1
+                paths = examples.setdefault(kind, [])
+                if len(paths) < 3:
+                    paths.append(f"banks/{owner}/memory.sqlite:{request_id}")
+            proposals = state.get("proposals", [])
+            if "proposals" in state:
+                counts["writer_returned_proposal_list_batches"] += 1
+                counts["writer_returned_empty_list_batches"] += not proposals
+            counts["proposed_operations"] += len(proposals)
+            for proposal in proposals:
+                proposed[proposal["action"]] += 1
+                edits.update(edit["operation"] for edit in proposal.get("edits", []))
+            for index, receipt in enumerate(state["receipts"]):
+                counts["recorded_operation_receipts"] += 1
+                receipts[str(receipt.get("status", "missing"))] += 1
+                counts["replayed_operation_receipts"] += receipt.get("replayed") is True
+                effect = receipt_effect(receipt)
+                if effect in {"committed", "replayed_commit"}:
+                    counts["confirmed_committed_operations" if effect == "committed"
+                           else "original_commits_confirmed_by_replay"] += 1
+                    committed[proposals[index]["action"]] += 1
+                elif effect == "no_change":
+                    counts["accepted_no_change_operations"] += 1
+                elif effect == "rejected":
+                    counts["rejected_operations"] += 1
+                    rejected[str(receipt.get("reason", "missing"))] += 1
+                else:
+                    counts["other_or_unconfirmed_operation_receipts"] += 1
+    counts["prepared_sessions"] = len(sessions)
+    for ordinal in sessions:
+        done = folder / "maintenance/halumem" / owner / str(ordinal) / "complete.json"
+        counts["maintenance_completed_sessions"] += done.exists()
+        if done.exists():
+            counts["upstream_extracted_outputs"] += len(read_json(done)["extracted_memories"])
+        counts["official_completed_sessions"] += (
+            folder / "evaluation/halumem" / owner / str(ordinal) / "complete.json"
+        ).exists()
+    return {
+        "expected_sessions": len(expected_sessions) if expected_sessions is not None else None,
+        "counts": dict(counts),
+        "not_yet_prepared_sessions": (len(expected_sessions) - len(sessions)
+                                     if expected_sessions is not None else None),
+        "pending_prepared_sessions": len(sessions) - counts["maintenance_completed_sessions"],
+        "pending_prepared_batches": counts["prepared_batches"] - counts["completed_batches"],
+        "requests_without_confirmed_responses": (
+            counts["recorded_writer_requests"] - counts["confirmed_writer_responses"]),
+        "extraction_requests_without_confirmed_responses": (
+            counts["recorded_extraction_requests"] - counts["confirmed_extraction_responses"]),
+        "first_attempt_writer_failures": dict(failures),
+        "first_attempt_extraction_failures": dict(extraction_failures),
+        "failure_example_paths": examples,
+        "receipt_statuses": dict(receipts), "rejection_reasons": dict(rejected),
+        "proposed_actions": dict(proposed), "committed_actions": dict(committed),
+        "proposed_local_operations": dict(edits),
+        "interpretation": "Common pipeline checkpoints read in SQLite mode=ro. Prepared ranges "
+        "are not confirmed exposure; incomplete batches are not empty proposals. Commits and "
+        "original commits confirmed by replay remain separate, and do not prove semantic success.",
+    }
+
+
+def scoring_terminal(folder: Path) -> Path:
+    separate = folder / "terminal-score.json"
+    return separate if separate.exists() else folder / "terminal.json"
+
+
 def halumem_availability(root: Path, arms: Sequence[str]) -> dict[str, Any]:
     """Report partial operational availability without computing paired effects."""
     orders: dict[str, list[int]] = {}
@@ -272,7 +403,7 @@ def halumem_availability(root: Path, arms: Sequence[str]) -> dict[str, Any]:
             results[arm] = {"status": "NOT_STARTED"}
             continue
         config = read_json(config_path)
-        terminal_path = folder / "terminal.json"
+        terminal_path = scoring_terminal(folder)
         per_user = {
             owner: writer_operations(folder, owner, orders.get(owner))
             for owner in config["halumem"]["users"]
@@ -282,6 +413,8 @@ def halumem_availability(root: Path, arms: Sequence[str]) -> dict[str, Any]:
             totals.update(operations["counts"])
         results[arm] = {
             "status": read_json(terminal_path)["status"] if terminal_path.exists() else "UNSEALED",
+            "prediction_phase": read_json(folder / "terminal-predict.json")
+            if (folder / "terminal-predict.json").exists() else None,
             "per_user": per_user,
             "counts": dict(totals),
         }
@@ -294,7 +427,7 @@ def halumem_suite(root: Path, arms: Sequence[str]) -> dict[str, Any]:
         arm
         for arm in arms
         if not (root / arm / "halumem-official-results.json").exists()
-        or not (root / arm / "terminal.json").exists()
+        or not scoring_terminal(root / arm).exists()
     ]
     if missing:
         return {
@@ -307,7 +440,7 @@ def halumem_suite(root: Path, arms: Sequence[str]) -> dict[str, Any]:
     selected: list[str] | None = None
     for arm in arms:
         folder = root / arm
-        terminal = read_json(folder / "terminal.json")
+        terminal = read_json(scoring_terminal(folder))
         if terminal["status"] != "COMPLETED_EXPERIMENT_PHASE":
             raise ValueError("Cannot summarize an uncompleted experiment arm")
         config = read_json(folder / "actual-config.json")

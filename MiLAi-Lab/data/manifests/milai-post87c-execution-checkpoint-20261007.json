@@ -1,0 +1,280 @@
+{
+  "observed_at": "2026-10-07T00:20:59.832402+00:00",
+  "status": "RUNNING_ORIGINAL_FOUR_ARM_SUITE_B0_CLOSED_B1_PARTIAL",
+  "actual_experiment_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "report_parent_and_rollback_commit": "b1d0bbeec019dbf2ef21f995734332a85deee974",
+  "snapshot": {
+    "observed_at": "2026-10-07T00:20:59.832402+00:00",
+    "per_arm": {
+      "B0": {
+        "maintenance": 32,
+        "evaluation": 32,
+        "generation_requests": 776,
+        "generation_responses": 776,
+        "terminal": true
+      },
+      "B1": {
+        "maintenance": 7,
+        "evaluation": 7,
+        "generation_requests": 187,
+        "generation_responses": 186,
+        "terminal": false
+      },
+      "B2": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "terminal": false
+      },
+      "M": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "generation_requests": 0,
+        "generation_responses": 0,
+        "terminal": false
+      }
+    },
+    "generation_requests": 963,
+    "generation_responses": 962,
+    "generation_pending": 1,
+    "generation_known_tokens": 4367676,
+    "generation_response_roles": {
+      "Writer": 40,
+      "Reader": 85,
+      "Judge": 837
+    },
+    "finish_reasons": {
+      "stop": 962
+    },
+    "encoding_responses": 240,
+    "embedding_known_tokens": 92147,
+    "ledger": {
+      "generation_requests": 40545,
+      "generation": {
+        "charged_tokens": 155998125,
+        "known_tokens": 155695068,
+        "unknown_usage": 4
+      },
+      "embedding": {
+        "charged_tokens": 1066979,
+        "known_tokens": 1066979,
+        "unknown_usage": 0
+      },
+      "limits": {
+        "arms": 3,
+        "embedding_tokens": null,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "questions": 12
+      }
+    },
+    "last_closed_ledger": {
+      "generation_requests": 40358,
+      "generation": {
+        "charged_tokens": 154936935,
+        "known_tokens": 154825220,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 1047799,
+        "known_tokens": 1047799,
+        "unknown_usage": 0
+      },
+      "limits": {
+        "arms": 3,
+        "embedding_tokens": null,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "questions": 12
+      }
+    },
+    "last_closed_ledger_scope": "B0 arm boundary; original four-arm suite is not terminal.",
+    "ledger_stable_during_read": true,
+    "receipt_deltas_match": true,
+    "original_PID_live": true,
+    "suite_terminal_exists": false,
+    "new_prototype_model_calls": 0,
+    "maintenance_count_rule": "Only session-level complete.json; nested source-batch completions excluded.",
+    "arm_terminal_file": "terminal.json"
+  },
+  "closed_B0": {
+    "detail_manifest": "milai-post87c-common-dense-B0-four-user-prefix-results-20261007.json",
+    "maintenance_sessions": 32,
+    "evaluation_sessions": 32,
+    "update_correct": 27,
+    "update_all": 72,
+    "update_valid": 64,
+    "QA_correct": 49,
+    "QA_all": 73,
+    "QA_valid": 68,
+    "original_labels_preserved": true,
+    "Root_maintenance_sessions_reviewed": 32,
+    "Root_full_answers_reviewed": 73,
+    "same_family_Judge_is_independent_confirmation": false
+  },
+  "B1_partial": {
+    "scope": "First declared user original0–6 only; 7/32 sessions, not a closed8-session prefix or whole arm.",
+    "maintenance_sessions": 7,
+    "evaluation_sessions": 7,
+    "creates": 22,
+    "edits": 0,
+    "committed_operations": 22,
+    "rejections": 0,
+    "unprocessed": 0,
+    "empty_original_ordinals": [
+      6
+    ],
+    "last_closed_state": {
+      "ordinal": 6,
+      "records": 22,
+      "content_units": 114,
+      "max_units_per_record": 13
+    },
+    "scores_final": false,
+    "Root_review": {
+      "scope": "Development review of original B1 first-user events3/4 and all3 event4 natural answers; not complete B1 review or independent audit.",
+      "additional_actual_events_read": [
+        3,
+        4
+      ],
+      "additional_complete_answers_read": 3,
+      "event3": {
+        "creates": 3,
+        "old_employment_goal_health_records_delivered": true,
+        "all_existing_record_values_unchanged": true,
+        "finding": "Career transition criteria, leadership goals and self-care are stored as separate matters. A career-change intention alone does not establish a completed job change."
+      },
+      "event4": {
+        "creates": 1,
+        "old_preference_delivered_alias": "r1",
+        "all_existing_record_values_unchanged": true,
+        "old_preference_revised": false,
+        "original_QA_labels": [
+          "Correct",
+          "Correct",
+          "Correct"
+        ],
+        "finding": "New preference stored separately; Reader distinguishes original assertion dates and refuses to invent an unnamed friend. Correct answering does not prove the old matter was revised."
+      },
+      "initial_review_preserved": {
+        "original_ordinals": [
+          0,
+          1
+        ],
+        "complete_answers_read": 6,
+        "middle_name_Hallucination_label_retained": true
+      },
+      "remaining_events_and_answers_fully_reviewed": false,
+      "numerical_Root_rescoring": false,
+      "original_labels_changed": false
+    }
+  },
+  "public_finite_pair_entry": {
+    "source_commit": "b1d0bbeec019dbf2ef21f995734332a85deee974",
+    "prototype_core_source_commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
+    "path": "tools/run_edit_change_pairs.py",
+    "reproduction_manifest": "milai-post87c-change-pairs-reproduction-entry-20261007.json",
+    "offline_actual_before_cases": 4,
+    "fixed_original_ordinals": [
+      3,
+      6,
+      7,
+      4
+    ],
+    "model_calls": 0,
+    "admitted": false,
+    "adopted_as_common_flow": false,
+    "normal_Host_flow_switched": false,
+    "own_ci": {
+      "commit": "b1d0bbeec019dbf2ef21f995734332a85deee974",
+      "observed_at": "2026-10-07T00:21:00Z",
+      "Fast": {
+        "run_id": 37550439393,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37550439603,
+        "status": "in_progress",
+        "conclusion": null
+      }
+    },
+    "wait_for_whole_original_suite_terminal_PID_exit_and_serial_release": true,
+    "generation_requests_max": 19,
+    "Judge_requests": 0
+  },
+  "configuration": {
+    "interface": "I2",
+    "retrieval": "BGE-m3 ordinary dense cosine K10",
+    "generation_family": "Qwen3.6 only",
+    "thinking": true,
+    "temperature": 1.0,
+    "context_window": 65536,
+    "output_reservation": 32768,
+    "margin": 512,
+    "frozen_runtime_or_config_changed": false,
+    "gold_or_future_QA_delivered_to_Writer": false
+  },
+  "conclusions": {
+    "complete_four_arm_comparison": false,
+    "stable_method_advantage_established": false,
+    "candidate_selected": false,
+    "product_status": "NO_GO",
+    "heldout_users_read": 0,
+    "goal_complete": false,
+    "partial_B1_scores_published": false
+  },
+  "remaining_scope": [
+    "Remaining three arms original prefix,32sessions/72updates/73QA perarm; declared finite pairs after serial release.",
+    "Same-version first user65sessions/142updates/164QA and four-user277/595/705 histories.",
+    "Native mechanisms32opportunities/12sessions/4users, drift, semantic-entry ablation and fixed tighter budget.",
+    "After candidate freeze,16reserved users and external LongMemEval28/1354/10 complete answers plus strong simple baselines.",
+    "Normal Host135cases/192messages and new stories, forgetting, real business effects, lifecycle recovery and six deliverables."
+  ],
+  "publication_scope": {
+    "Lab_files": 5,
+    "source_files": 0,
+    "test_files": 0,
+    "workflow_or_configuration_changes": false,
+    "Product_Schema_API_permissions_Canonical_Archive_changed": false,
+    "new_generation_calls": 0,
+    "new_embedding_calls": 0,
+    "private_raw_gold_HTTP_reasoning_DB_config_logs_uploaded": false,
+    "original_declarations_and_results_preserved": true,
+    "validation": "JSON, new relative links, actual counts and ledger, historical blocks, ignored boundary and git diff only; no source/broad suites repeated."
+  },
+  "previous_report_ci": {
+    "commit": "b1d0bbeec019dbf2ef21f995734332a85deee974",
+    "observed_at": "2026-10-07T00:21:00Z",
+    "Fast": {
+      "run_id": 37550439393,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37550439603,
+      "status": "in_progress",
+      "conclusion": null
+    }
+  },
+  "development_status": {
+    "implemented_common_foundation": [
+      "I2 common interface",
+      "matter-level records",
+      "actual candidate references",
+      "conditional and exception semantic operations",
+      "source speaker and time metadata",
+      "ordinary BGE-m3 dense retrieval"
+    ],
+    "temporary_change_extraction_interface_implemented": true,
+    "portable_public_pair_driver_implemented": true,
+    "prior_narrow_core_checks_passed": 9,
+    "public_driver_offline_actual_inputs_reproduced": 4,
+    "public_driver_Ruff_compile_and_tools_boundary_passed": true,
+    "real_pair_model_calls": 0,
+    "normal_Host_two_stage_flow_switched": false,
+    "method_advantage_established": false,
+    "prior_engineering_checks_repeated_for_this_summary": false
+  }
+}

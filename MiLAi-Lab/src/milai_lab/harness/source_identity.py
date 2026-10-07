@@ -18,14 +18,18 @@ CONTRACT_SOURCE_FILES = (
 )
 MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/__init__.py",
+    "src/milai_lab/memory/activation.py",
     "src/milai_lab/memory/edit_units.py",
     "src/milai_lab/memory/embeddings.py",
+    "src/milai_lab/memory/episodes.py",
     "src/milai_lab/memory/functional.py",
+    "src/milai_lab/memory/functional_maintenance.py",
     "src/milai_lab/memory/functional_state.py",
     "src/milai_lab/memory/mcp.py",
     "src/milai_lab/memory/observation.py",
     "src/milai_lab/memory/presentation.py",
     "src/milai_lab/memory/read_tools.py",
+    "src/milai_lab/memory/retrieval.py",
     "src/milai_lab/memory/service.py",
     "src/milai_lab/memory/service_tools.py",
     "src/milai_lab/memory/revision_store.py",
@@ -80,6 +84,7 @@ HARNESS_SOURCE_FILES = (
     "src/milai_lab/harness/functional_faults.py",
     "src/milai_lab/harness/http_ownership.py",
     "src/milai_lab/harness/lease.py",
+    "src/milai_lab/harness/memory_simulation.py",
     "src/milai_lab/harness/source_identity.py",
 )
 BOUNDARY_SOURCE_FILES = (

@@ -1,0 +1,474 @@
+{
+  "status": "CLOSED_B0_FIRST_USER_FIRST8_PARENT_FOUR_ARM_PREFIX_RUNNING",
+  "closed_subset_observed_at": "2026-10-06T22:16:35.589505+00:00",
+  "parent_queue_snapshot_observed_at": "2026-10-06T22:19:13.866182+00:00",
+  "actual_experiment_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "report_parent_and_rollback_commit": "7ee271072dfa73df51a1b02e236ff1bbad12b411",
+  "declaration": "milai-post87c-common-dense-prefix-development-20261007.json",
+  "scope": {
+    "arm": "B0",
+    "declared_user_position": 1,
+    "original_session_ordinals": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "maintenance_sessions": 8,
+    "completed_evaluation_sessions": 8,
+    "all_four_arm_prefix_complete": false,
+    "first_user_full65_complete": false,
+    "full277_complete": false,
+    "starts_from_own_empty_bank": true
+  },
+  "configuration": {
+    "common_interface": "I2",
+    "retrieval": "BGE-m3 ordinary dense cosine K10",
+    "generation_family": "Qwen3.6",
+    "thinking": true,
+    "temperature": 1.0,
+    "context_window": 65536,
+    "output_reservation": 32768,
+    "margin": 512,
+    "gold_or_future_QA_delivered_to_Writer": false,
+    "runtime_source_or_config_hot_edited": false
+  },
+  "original_author_labels": {
+    "update": {
+      "correct": 5,
+      "all_opportunities": 19,
+      "valid_judgments": 18,
+      "raw_label_counts": {
+        "Omission": 13,
+        "Correct": 5,
+        "Correct Update": 1
+      },
+      "invalid_labels": {
+        "Correct Update": 1
+      },
+      "invalid_labels_normalized": false
+    },
+    "QA": {
+      "correct": 15,
+      "all_questions": 20,
+      "valid_judgments": 20,
+      "raw_label_counts": {
+        "Correct": 15,
+        "Omission": 3,
+        "Hallucination": 2
+      }
+    },
+    "offline_aggregation": "SUCCESS",
+    "offline_aggregation_extra_HTTP": 0,
+    "overall_score": {
+      "memory_integrity": {
+        "recall(all)": 0.7295081967213115,
+        "recall(valid)": 0.8476190476190476,
+        "weighted_recall(all)": 0.7540983606557377,
+        "weighted_recall(valid)": 0.8761904761904762,
+        "memory_valid_importance_sum": 78.75,
+        "memory_importance_sum": 91.5,
+        "memory_valid_num": 105,
+        "memory_num": 122
+      },
+      "memory_accuracy": {
+        "interference_accuracy(all)": 0.5714285714285714,
+        "interference_accuracy(valid)": 0.5714285714285714,
+        "interference_memory_valid_num": 7,
+        "interference_memory_num": 7,
+        "target_accuracy(all)": 1.0,
+        "target_accuracy(valid)": 1.0,
+        "target_memory_valid_num": 14,
+        "target_memory_num": 14,
+        "weighted_accuracy(all)": 0.7916666666666666,
+        "weighted_accuracy(valid)": 0.95,
+        "memory_valid_num": 20,
+        "memory_num": 24
+      },
+      "memory_extraction_f1": 0.8436018957345972,
+      "memory_update": {
+        "correct_update_memory_ratio(all)": 0.2631578947368421,
+        "correct_update_memory_ratio(valid)": 0.2777777777777778,
+        "hallucination_update_memory_ratio(all)": 0.0,
+        "hallucination_update_memory_ratio(valid)": 0.0,
+        "omission_update_memory_ratio(all)": 0.6842105263157895,
+        "omission_update_memory_ratio(valid)": 0.7222222222222222,
+        "other_update_memory_ratio(all)": 0.0,
+        "other_update_memory_ratio(valid)": 0.0,
+        "update_memory_valid_num": 18,
+        "update_memory_num": 19
+      },
+      "question_answering": {
+        "correct_qa_ratio(all)": 0.75,
+        "correct_qa_ratio(valid)": 0.75,
+        "hallucination_qa_ratio(all)": 0.1,
+        "hallucination_qa_ratio(valid)": 0.1,
+        "omission_qa_ratio(all)": 0.15,
+        "omission_qa_ratio(valid)": 0.15,
+        "qa_valid_num": 20,
+        "qa_num": 20
+      },
+      "memory_type_accuracy": {
+        "Relationship Memory": {
+          "memory_integrity_acc": 0.25,
+          "memory_update_acc": 0.0,
+          "total_num": 8,
+          "memory_acc": 0.25
+        },
+        "Persona Memory": {
+          "memory_integrity_acc": 0.7107438016528925,
+          "memory_update_acc": 0.024793388429752067,
+          "total_num": 121,
+          "memory_acc": 0.7355371900826446
+        },
+        "Event Memory": {
+          "memory_integrity_acc": 0.10526315789473684,
+          "memory_update_acc": 0.10526315789473684,
+          "total_num": 19,
+          "memory_acc": 0.21052631578947367
+        }
+      }
+    },
+    "same_family_Judge_is_independent_confirmation": false
+  },
+  "closed_subset_usage": {
+    "generation": {
+      "requests": 211,
+      "responses": 211,
+      "roles": {
+        "Reader": 20,
+        "Writer": 8,
+        "Judge": 183
+      },
+      "known_tokens": 887277,
+      "finish_reasons": {
+        "stop": 211
+      },
+      "actual_prompt_tokens_match_requests": true
+    },
+    "embedding": {
+      "requests": 52,
+      "responses": 52,
+      "known_tokens": 19026,
+      "scope_rule": "All sequential arm embedding receipts before first user last complete.json; no concurrent model call or extra driver existed."
+    },
+    "Writer_input_tokens": {
+      "min": 4285,
+      "max": 25172
+    },
+    "Writer_completion_tokens": {
+      "min": 1625,
+      "max": 6324
+    },
+    "already_included_in_parent_snapshot": true,
+    "not_added_again_to_continuous_ledger": true
+  },
+  "closed_subset_maintenance": {
+    "creates": 20,
+    "rewrites": 4,
+    "committed_operations": 24,
+    "final_records": 20,
+    "final_content_units": 68,
+    "final_condition_units": 0,
+    "final_relations": 0,
+    "maximum_units_per_record": 5,
+    "capacity_failures": 0,
+    "truncated_responses": 0,
+    "operation_rejections": 0,
+    "unprocessed_gaps": 0,
+    "new_unknown_usage": 0,
+    "retries": 0,
+    "real_empty_envelopes": 2,
+    "real_empty_original_ordinals": [
+      3,
+      6
+    ],
+    "per_session": [
+      {
+        "ordinal": 0,
+        "creates": 5,
+        "rewrites": 0,
+        "receipts": 5,
+        "unprocessed": 0,
+        "before_records": 0,
+        "after_records": 5,
+        "changed_existing_records": 0,
+        "units_after": 16,
+        "max_units_per_record": 5
+      },
+      {
+        "ordinal": 1,
+        "creates": 3,
+        "rewrites": 0,
+        "receipts": 3,
+        "unprocessed": 0,
+        "before_records": 5,
+        "after_records": 8,
+        "changed_existing_records": 0,
+        "units_after": 26,
+        "max_units_per_record": 5
+      },
+      {
+        "ordinal": 2,
+        "creates": 8,
+        "rewrites": 0,
+        "receipts": 8,
+        "unprocessed": 0,
+        "before_records": 8,
+        "after_records": 16,
+        "changed_existing_records": 0,
+        "units_after": 59,
+        "max_units_per_record": 5
+      },
+      {
+        "ordinal": 3,
+        "creates": 0,
+        "rewrites": 0,
+        "receipts": 0,
+        "unprocessed": 0,
+        "before_records": 16,
+        "after_records": 16,
+        "changed_existing_records": 0,
+        "units_after": 59,
+        "max_units_per_record": 5
+      },
+      {
+        "ordinal": 4,
+        "creates": 0,
+        "rewrites": 1,
+        "receipts": 1,
+        "unprocessed": 0,
+        "before_records": 16,
+        "after_records": 16,
+        "changed_existing_records": 1,
+        "units_after": 59,
+        "max_units_per_record": 5
+      },
+      {
+        "ordinal": 5,
+        "creates": 4,
+        "rewrites": 0,
+        "receipts": 4,
+        "unprocessed": 0,
+        "before_records": 16,
+        "after_records": 20,
+        "changed_existing_records": 0,
+        "units_after": 67,
+        "max_units_per_record": 5
+      },
+      {
+        "ordinal": 6,
+        "creates": 0,
+        "rewrites": 0,
+        "receipts": 0,
+        "unprocessed": 0,
+        "before_records": 20,
+        "after_records": 20,
+        "changed_existing_records": 0,
+        "units_after": 67,
+        "max_units_per_record": 5
+      },
+      {
+        "ordinal": 7,
+        "creates": 0,
+        "rewrites": 3,
+        "receipts": 3,
+        "unprocessed": 0,
+        "before_records": 20,
+        "after_records": 20,
+        "changed_existing_records": 3,
+        "units_after": 68,
+        "max_units_per_record": 5
+      }
+    ],
+    "empty_with_unmet_requirement_is_successful_maintenance": false
+  },
+  "Root_review": {
+    "scope": "All eight actual states/proposals/current delivered materials and all twenty complete natural answers; original receipts and author labels reconciled.",
+    "official_rescore": false,
+    "independent_audit": false,
+    "numeric_Root_QA_score_created": false,
+    "findings": [
+      {
+        "original_session_ordinals": [
+          0,
+          1,
+          2
+        ],
+        "finding": "Independent matters formed while previous complete record values were unchanged. These creates do not measure within-record update preservation."
+      },
+      {
+        "original_session_ordinals": [
+          3
+        ],
+        "old_target_exists": true,
+        "old_target_delivered": true,
+        "current_fact_delivered": true,
+        "finding": "New career intent and priorities were delivered with affected old matters, but Writer returned an empty envelope. No capacity or operation rejection explains this omission."
+      },
+      {
+        "original_session_ordinals": [
+          4
+        ],
+        "finding": "One actual preference rewrite retains three unmentioned clauses including their original support and attribution. The changed composite claim selects an actual user fragment whose coverage of the full change remains incomplete; additional newly confirmed context is omitted."
+      },
+      {
+        "original_session_ordinals": [
+          5
+        ],
+        "finding": "Four new plan matters formed; this later event does not retroactively repair the earlier missing dated intent. A reported plan is not completion of a career change."
+      },
+      {
+        "original_session_ordinals": [
+          6
+        ],
+        "old_target_delivered": true,
+        "current_fact_delivered": true,
+        "finding": "Goals are partly restated, but newly reported search progress is delivered and still receives an empty proposal. Legitimate restatement and omitted new facts are distinct."
+      },
+      {
+        "original_session_ordinals": [
+          7
+        ],
+        "affected_old_employment_record_exists": true,
+        "affected_old_employment_record_delivered": false,
+        "finding": "New role and health changes are saved through three delivered-matter rewrites. The separate old employment matter is absent from Writer top10 and remains unchanged. Current versus historical applicability is not fully revised; preserving historical financial reports does not require deleting the whole old matter."
+      }
+    ],
+    "answer_label_interpretation": {
+      "original_Hallucination_labels_retained": 2,
+      "source_supported_historical_income_is_not_verified_exact_salary": true,
+      "partial_preference_answer_and_missing_dated_context_reported_separately": true,
+      "Reader_coordination_is_not_persistent_state_revision": true,
+      "no_benchmark_label_rewritten": true
+    }
+  },
+  "parent_queue_live_snapshot": {
+    "observed_at": "2026-10-06T22:19:13.866182+00:00",
+    "ledger_stable_during_read": true,
+    "per_arm": {
+      "B0": {
+        "maintenance": 10,
+        "evaluation": 9,
+        "requests": 246,
+        "responses": 245,
+        "terminal": false
+      },
+      "B1": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "requests": 0,
+        "responses": 0,
+        "terminal": false
+      },
+      "B2": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "requests": 0,
+        "responses": 0,
+        "terminal": false
+      },
+      "M": {
+        "maintenance": 0,
+        "evaluation": 0,
+        "requests": 0,
+        "responses": 0,
+        "terminal": false
+      }
+    },
+    "confirmed_generation_responses": 245,
+    "generation_known_tokens": 997298,
+    "finish_reasons": {
+      "stop": 245
+    },
+    "encoding_responses": 57,
+    "embedding_known_tokens": 19819,
+    "ledger": {
+      "generation_requests": 39828,
+      "generation": {
+        "charged_tokens": 152473616,
+        "known_tokens": 152324690,
+        "unknown_usage": 4
+      },
+      "embedding": {
+        "charged_tokens": 994651,
+        "known_tokens": 994651,
+        "unknown_usage": 0
+      },
+      "limits": {
+        "arms": 3,
+        "embedding_tokens": null,
+        "generation_requests": null,
+        "generation_tokens": null,
+        "questions": 12
+      }
+    },
+    "receipt_deltas_match": true,
+    "suite_terminal_exists": false,
+    "PID_live": true
+  },
+  "accounting_scope": {
+    "last_closed_global_ledger_unchanged": {
+      "generation_requests": 39582,
+      "generation": {
+        "known_tokens": 151327392,
+        "charged_tokens": 151439107,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "known_tokens": 974832,
+        "charged_tokens": 974832,
+        "unknown_usage": 0
+      }
+    },
+    "live_unknown4_contains_one_inflight_reservation": true,
+    "closed_first_user_is_not_parent_queue_terminal": true,
+    "no_budget_increase_or_reset": true
+  },
+  "next_actions": {
+    "original_frozen_prefix_continues": true,
+    "bounded_extraction_locate_edit_comparison_justified": true,
+    "bounded_comparison_reason": "Two genuinely delivered empty maintenance batches and a separate affected-target locating omission.",
+    "bounded_comparison_preselected_original_ordinals": [
+      3,
+      6,
+      7,
+      4
+    ],
+    "bounded_comparison_implemented": false,
+    "bounded_comparison_admitted": false,
+    "bounded_comparison_model_calls": 0,
+    "uses_actual_before_states_and_current_sources": true,
+    "no_ideal_old_cards_or_future_QA": true,
+    "common_flow_for_all_four_arms_if_adopted": true,
+    "no_new_perfect_R3_until_pass_gate": true
+  },
+  "remaining_scope": [
+    "Complete same-source four-arm prefix, each 32 sessions / 72 updates / 73 QA",
+    "Preselected first user 65 sessions / 142 updates / 164 QA and full four-user 277 / 595 / 705 on selected common source without splicing different versions",
+    "Native 32 opportunities / 12 sessions / 4 users and full-history drift",
+    "One semantic-entry ablation and one fixed tighter budget",
+    "Sixteen reserved users after candidate/configuration freeze",
+    "LongMemEval 28 cases / 1354 history appearances / original 10 full answers and strong simple baselines",
+    "Normal Host 135 cases / 192 messages, fresh stories after freeze, forgetting, actual business effects and recovery",
+    "Six declared deliverables"
+  ],
+  "product_status": "NO_GO",
+  "candidate_selected": false,
+  "stable_method_advantage_established": false,
+  "reserved_16_users_read": false,
+  "goal_complete": false,
+  "publication": {
+    "scope": "Six Lab documentation/status/sanitized-result files",
+    "source_test_workflow_changes": 0,
+    "new_model_calls_for_publication": 0,
+    "private_raw_gold_HTTP_reasoning_DB_configs_logs_uploaded": false,
+    "Product_Schema_API_permissions_Canonical_Archive_changed": false,
+    "source_own_Fast_Full_passed_before_prefix_HTTP": true,
+    "report_own_CI_checked_separately": true
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "status": "FIRST_MINIMAL_REPAIR_REAL20_AND_FORWARD44_FAILED_REVIEWED",
+  "observed_at": "2026-10-06T09:53:13+08:00",
+  "source_commit": "4c90f155e30803e11f4083a2731f1d410bf21725",
+  "single_Qwen_family": true,
+  "independent_judge": false,
+  "one_exposed_source": true,
+  "no_ideal_state_injection": true,
+  "candidate_selected": false,
+  "prefix_admitted": false,
+  "product_status": "NO_GO",
+  "old_B1_closed_resumed_segment": {
+    "maintenance": 115,
+    "evaluation": 115,
+    "request_count": 1666,
+    "response_count": 1666,
+    "unconfirmed_requests": 0,
+    "live_state_matches_last_after": true,
+    "serial_lease_free": true,
+    "old_pid_exited": true,
+    "resumed_interval": {
+      "requests": 102,
+      "known_tokens": 808360,
+      "start_generation_requests": 35828,
+      "end_generation_requests": 35930,
+      "intervening_new_R3_known_tokens_excluded": 112173
+    },
+    "total_B1_received_known_tokens": 7691805
+  },
+  "formation_recheck": {
+    "actual_generation_calls": 20,
+    "known_tokens": 30641,
+    "Writer_calls": 12,
+    "Reader_calls": 8,
+    "Judge_calls": 0,
+    "receipt_statuses": {
+      "committed": 7,
+      "no_change": 4,
+      "rejected": 1
+    },
+    "new_unknown_usage": 0,
+    "arms": {
+      "B0": {
+        "initial_units": 1,
+        "initial_conditions": 0,
+        "initial_relations": 0,
+        "initial_semantic_requirements_present": true,
+        "change_receipt_status": "committed",
+        "change_rejected_reason": null,
+        "unmentioned_limits_preserved": false,
+        "change_frequency_implemented": true,
+        "correct_complete_post_change_state": false,
+        "query_exact_state_unchanged": true,
+        "query_receipt_status": "no_change",
+        "query_semantic_no_maintenance": true,
+        "post_change_reader_complete": false,
+        "query_reader_complete_current_arrangement": false
+      },
+      "B1": {
+        "initial_units": 1,
+        "initial_conditions": 0,
+        "initial_relations": 0,
+        "initial_semantic_requirements_present": true,
+        "change_receipt_status": "committed",
+        "change_rejected_reason": null,
+        "unmentioned_limits_preserved": false,
+        "change_frequency_implemented": true,
+        "correct_complete_post_change_state": false,
+        "query_exact_state_unchanged": true,
+        "query_receipt_status": "no_change",
+        "query_semantic_no_maintenance": true,
+        "post_change_reader_complete": false,
+        "query_reader_complete_current_arrangement": false
+      },
+      "B2": {
+        "initial_units": 3,
+        "initial_conditions": 1,
+        "initial_relations": 1,
+        "initial_semantic_requirements_present": true,
+        "change_receipt_status": "rejected",
+        "change_rejected_reason": "FunctionalRejection: EDIT_RELATION_SUPPORT_BINDING_INVALID",
+        "unmentioned_limits_preserved": false,
+        "change_frequency_implemented": false,
+        "correct_complete_post_change_state": false,
+        "query_exact_state_unchanged": true,
+        "query_receipt_status": "no_change",
+        "query_semantic_no_maintenance": true,
+        "post_change_reader_complete": false,
+        "query_reader_complete_current_arrangement": false
+      },
+      "M": {
+        "initial_units": 3,
+        "initial_conditions": 1,
+        "initial_relations": 1,
+        "initial_semantic_requirements_present": true,
+        "change_receipt_status": "committed",
+        "change_rejected_reason": null,
+        "unmentioned_limits_preserved": true,
+        "change_frequency_implemented": true,
+        "correct_complete_post_change_state": true,
+        "query_exact_state_unchanged": true,
+        "query_receipt_status": "no_change",
+        "query_semantic_no_maintenance": true,
+        "post_change_reader_complete": true,
+        "query_reader_complete_current_arrangement": true
+      }
+    },
+    "structural_rejection_diagnosis": "B2 supplied correct new value and exact old qualified units but omitted the changed content own h. decode origins lacks its old unit, so the retained h relation cannot bind its target; old frequency remains. This is a missed update, not successful protection.",
+    "limits": [
+      "One exposed source, three selected events; no exception/withdrawal tested here.",
+      "Initial start-time-unknown stored as content, not forced condition; holiday condition participates.",
+      "No Root independent certification, generalization or method advantage."
+    ]
+  },
+  "forward_original_lifecycle": {
+    "actual_generation_calls": 44,
+    "known_tokens": 66428,
+    "Writer_calls": 24,
+    "Reader_calls": 20,
+    "Judge_calls": 0,
+    "finish_reasons": {
+      "stop": 44
+    },
+    "receipt_statuses": {
+      "committed": 20,
+      "no_change": 3,
+      "rejected": 1
+    },
+    "accounting_matches_responses": true,
+    "new_unknown_usage": 0,
+    "arms": {
+      "B0": {
+        "initial_condition_count": 0,
+        "initial_relation_count": 0,
+        "ordinary_update_complete": true,
+        "ordinary_update_rejection": null,
+        "scope_kept_actual_general_rule": false,
+        "scope_kept_unmentioned_limits": false,
+        "scope_formed_override": false,
+        "withdraw_restored_complete_general_arrangement": false,
+        "query_exact_state_unchanged": true,
+        "query_overwrote_with_question": false,
+        "reaffirm_general_text_restored": true,
+        "reaffirm_complete_arrangement_restored": true,
+        "final_reader_fully_resolves_shift_applicability": false,
+        "operations": {}
+      },
+      "B1": {
+        "initial_condition_count": 0,
+        "initial_relation_count": 0,
+        "ordinary_update_complete": false,
+        "ordinary_update_rejection": null,
+        "scope_kept_actual_general_rule": false,
+        "scope_kept_unmentioned_limits": false,
+        "scope_formed_override": false,
+        "withdraw_restored_complete_general_arrangement": false,
+        "query_exact_state_unchanged": false,
+        "query_overwrote_with_question": true,
+        "reaffirm_general_text_restored": true,
+        "reaffirm_complete_arrangement_restored": true,
+        "final_reader_fully_resolves_shift_applicability": false,
+        "operations": {
+          "replace": 5
+        }
+      },
+      "B2": {
+        "initial_condition_count": 1,
+        "initial_relation_count": 1,
+        "ordinary_update_complete": false,
+        "ordinary_update_rejection": "FunctionalRejection: EDIT_EVIDENCE_REQUIRED",
+        "scope_kept_actual_general_rule": false,
+        "scope_kept_unmentioned_limits": false,
+        "scope_formed_override": false,
+        "withdraw_restored_complete_general_arrangement": false,
+        "query_exact_state_unchanged": true,
+        "query_overwrote_with_question": false,
+        "reaffirm_general_text_restored": true,
+        "reaffirm_complete_arrangement_restored": true,
+        "final_reader_fully_resolves_shift_applicability": false,
+        "operations": {}
+      },
+      "M": {
+        "initial_condition_count": 1,
+        "initial_relation_count": 1,
+        "ordinary_update_complete": true,
+        "ordinary_update_rejection": null,
+        "scope_kept_actual_general_rule": false,
+        "scope_kept_unmentioned_limits": true,
+        "scope_formed_override": false,
+        "withdraw_restored_complete_general_arrangement": false,
+        "query_exact_state_unchanged": true,
+        "query_overwrote_with_question": false,
+        "reaffirm_general_text_restored": true,
+        "reaffirm_complete_arrangement_restored": false,
+        "final_reader_fully_resolves_shift_applicability": false,
+        "operations": {
+          "change_value": 5,
+          "retract": 1
+        }
+      }
+    },
+    "diagnosis": [
+      "Initial holiday conditions now exist for B2/M; M scope still uses change_value instead of add_exception and loses general rule.",
+      "M withdrawal uses change_value+retract and also loses the still-valid holiday condition.",
+      "B2 ordinary rewrite has an unsupported relation selection; original EVIDENCE_REQUIRED rejection and missed update retained.",
+      "B1 no-new-fact query can still overwrite state after earlier semantic loss, despite the successful limited-query control.",
+      "Reaffirming observed general content is a real repair; M still omits holiday information, and final Readers do not resolve shift applicability."
+    ],
+    "limits": [
+      "One exposed branch, not independent source or four-user method comparison.",
+      "Own actual histories differ; rejected B2 update did not produce a correct general frequency before scope.",
+      "No scoring labels rewritten, no replays, no ideal state or truncated output repair.",
+      "64 additional development calls across limited20 and forward44; 97069 known tokens, not 80-call second-version validation."
+    ]
+  },
+  "total_repaired_source_development_calls": 64,
+  "total_repaired_source_known_tokens": 97069,
+  "previous_624_first_R3_calls_preserved": 80,
+  "previous_624_first_R3_known_tokens_preserved": 112173,
+  "second_minimal_example_repair_status": "MECHANICALLY_CHECKED_REAL_RECHECK_NOT_RUN",
+  "source_control_driver": {
+    "status": "MECHANICALLY_CHECKED_THREE_SCENARIOS_PREPARED_NOT_ADMITTED",
+    "planned_generation_calls": 52,
+    "actual_generation_calls": 0,
+    "known_role_and_time_preserved": true,
+    "unknown_message_time_not_filled_from_event_date": true,
+    "multiple_readers_after_maintenance": true,
+    "old_single_user_and_single_reader_paths_preserved": true,
+    "affected_unit_tests_passed": 4,
+    "strict_mypy": "PASS",
+    "ruff": "PASS"
+  },
+  "limits": [
+    "Not a final candidate or completed four-arm full-history comparison.",
+    "Initial start-time unknown is content; holiday condition is represented and participates.",
+    "No-new-fact successful limited query cannot generalize to damaged-state query.",
+    "Root semantic review is not independent evaluation.",
+    "All raw inputs, source text, gold, HTTP and databases remain local ignored artifacts.",
+    "Remaining full plan requirements are still incomplete."
+  ],
+  "second_minimal_example_repair_actual_calls": 0,
+  "second_minimal_example_repair_checks": {
+    "status": "MECHANICALLY_CHECKED_REAL_RECHECK_NOT_RUN",
+    "actual_generation_calls": 0,
+    "default_off_unchanged": true,
+    "schema_decoder_unchanged": true,
+    "source_commit": "THIS_PUBLICATION_COMMIT_NOT_YET_BOUND_TO_MODEL_RUN",
+    "examples": [
+      "same_scope_value_preserves_limits",
+      "local_exception_preserves_general_and_shared_conditions",
+      "shared_condition_change",
+      "exception_withdrawal"
+    ],
+    "existing_method_host_checks_passed": 27,
+    "actual_sqlite_independent_branches_passed": 16,
+    "rejected_negative_controls_passed": 4,
+    "root_default_off_instruction_combinations_unchanged": 24,
+    "root_AST_outside_feature_instructions_unchanged": true,
+    "next_existing_two_branch_recheck_planned_calls": 80
+  }
+}

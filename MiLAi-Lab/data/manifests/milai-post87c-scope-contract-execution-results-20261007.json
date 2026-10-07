@@ -1,0 +1,331 @@
+{
+  "version": "milai-post87c-scope-contract-execution-results-v1",
+  "status": "CLOSED_SCOPED_STORAGE_MECHANISM_POSITIVE_COMPLETE_READER_PARTIAL",
+  "observed_at": "2026-10-06T20:54:14.169347+00:00",
+  "experiment_source_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+  "original_pre_HTTP_declaration": "milai-post87c-scope-contract-revision-read-development-20261007.json",
+  "historical_running_snapshot": "milai-post87c-scope-contract-execution-snapshot-20261007.json",
+  "source_own_CI": {
+    "observed_at": "2026-10-06T20:49:00+00:00",
+    "Fast": {
+      "run_id": 37524225408,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37524225437,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Fast_verified_before_first_HTTP": true
+  },
+  "fixed_Reader": {
+    "status": "ROOT_REVIEWED_FIXED_READER_SCOPE2_TASK_FAILED",
+    "source_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+    "reviewed_at": "2026-10-06T20:24:57.960943+00:00",
+    "Reader_responses": 2,
+    "finish_reasons": [
+      "stop",
+      "stop"
+    ],
+    "generation_known_tokens": 5398,
+    "complete_task_correct": 0,
+    "complete_task_denominator": 2,
+    "current_state_unchanged": true,
+    "actual_previous_role_received": true,
+    "actual_source_dates_and_cancel_witness_received": true,
+    "scope_inference_still_refused": true,
+    "final_answer_misreads_four_times_as_Thursday": true,
+    "first_answer_preserves_actual_report_dates": true,
+    "source_own_Fast_before_HTTP": true,
+    "new_unknown": 0,
+    "embedding_calls": 0,
+    "Writer_calls": 0,
+    "Judge_calls": 0,
+    "full_reasoning_or_independent_database_audit": false,
+    "original_receipts_and_answers_preserved": true,
+    "accounting_exact": true,
+    "interpretation": "Prior general role and opaque scope IDs alone did not repair full scope answers. Do not repeat until passing or count legal output as task success."
+  },
+  "original_global_condition_R3": {
+    "status": "CLOSED_NORMAL_PROCESS_ROOT_REVIEW_IN_PROGRESS",
+    "source_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+    "closed_at": "2026-10-06T20:38:17.125750+00:00",
+    "event_rows": 20,
+    "generation_responses": 36,
+    "roles": {
+      "Writer": 20,
+      "Reader": 16
+    },
+    "known_tokens": 207619,
+    "finish_reasons": {
+      "stop": 36
+    },
+    "embedding_requests": 50,
+    "embedding_inputs": 50,
+    "embedding_known_tokens": 1497,
+    "operation_rejections": [
+      "FunctionalRejection: EDIT_RELATION_SUPPORT_BINDING_INVALID",
+      "current_boundary_source_required"
+    ],
+    "events_with_gaps": 2,
+    "Reader_state_unchanged": true,
+    "actual_request_usage_matches": 36,
+    "new_unknown": 0,
+    "continuous_accounting_end": {
+      "generation_requests": 39580,
+      "generation": {
+        "charged_tokens": 151416052,
+        "known_tokens": 151304337,
+        "unknown_usage": 3
+      },
+      "embedding": {
+        "charged_tokens": 974832,
+        "known_tokens": 974832,
+        "unknown_usage": 0
+      }
+    },
+    "original_PID_missing": true,
+    "normal_session_exit_confirmed": true,
+    "existing_serial_lease_free": true
+  },
+  "Root_semantic_review": {
+    "status": "ROOT_REVIEWED_ORIGINAL_GLOBAL_R3_CLOSED_PARTIAL_STORAGE_READER_FAILED",
+    "source_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+    "reviewed_at": "2026-10-06T20:51:07.450667+00:00",
+    "review_scope": {
+      "complete_states_and_proposals": 20,
+      "complete_Reader_answers": 16,
+      "actual_Writer_requests_and_current_facts_checked": 20,
+      "actual_before_records_delivered_checked": 16,
+      "actual_Reader_questions_dates_retained_materials_checked": 16,
+      "generation_usage_pairs_checked": 36,
+      "independent_source_DB_or_reasoning_audit": false
+    },
+    "formed_representations": {
+      "B0": {
+        "content": 3,
+        "condition": 0,
+        "relations": 0
+      },
+      "B1": {
+        "content": 3,
+        "condition": 0,
+        "relations": 0
+      },
+      "B2": {
+        "content": 1,
+        "condition": 2,
+        "relations": 2
+      },
+      "M": {
+        "content": 3,
+        "condition": 0,
+        "relations": 0
+      }
+    },
+    "actual_qualifier_preservation_controls": [
+      {
+        "arm": "B0",
+        "actually_formed_qualifiers": 2,
+        "retained_exact_text_role_support_assertion_except_fullrewrite_IDs": 2
+      },
+      {
+        "arm": "B1",
+        "actually_formed_qualifiers": 2,
+        "retained_exact_text_role_support_assertion_except_fullrewrite_IDs": 2
+      },
+      {
+        "arm": "B2",
+        "actually_formed_qualifiers": 2,
+        "retained_exact_text_role_support_assertion_except_fullrewrite_IDs": 2
+      },
+      {
+        "arm": "M",
+        "actually_formed_qualifiers": 2,
+        "retained_exact_text_role_support_assertion_except_fullrewrite_IDs": 2
+      }
+    ],
+    "M_actual_mechanism": [
+      {
+        "event": 0,
+        "operations": [],
+        "content_units": 3,
+        "condition_units": 0,
+        "relations": 0
+      },
+      {
+        "event": 1,
+        "operations": [
+          "change_value"
+        ],
+        "content_units": 3,
+        "condition_units": 0,
+        "relations": 0
+      },
+      {
+        "event": 2,
+        "operations": [
+          "add_exception"
+        ],
+        "content_units": 4,
+        "condition_units": 1,
+        "relations": 2
+      },
+      {
+        "event": 3,
+        "operations": [
+          "change_value",
+          "change_value"
+        ],
+        "content_units": 4,
+        "condition_units": 1,
+        "relations": 2
+      },
+      {
+        "event": 4,
+        "operations": [
+          "remove_exception"
+        ],
+        "content_units": 3,
+        "condition_units": 0,
+        "relations": 0
+      }
+    ],
+    "Root_complete_Reader_task": {
+      "by_arm": {
+        "B0": {
+          "correct": 1,
+          "all": 4,
+          "event_order": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "pass_first_attempt": [
+            true,
+            false,
+            false,
+            false
+          ]
+        },
+        "B1": {
+          "correct": 1,
+          "all": 4,
+          "event_order": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "pass_first_attempt": [
+            true,
+            false,
+            false,
+            false
+          ]
+        },
+        "B2": {
+          "correct": 2,
+          "all": 4,
+          "event_order": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "pass_first_attempt": [
+            true,
+            true,
+            false,
+            false
+          ]
+        },
+        "M": {
+          "correct": 2,
+          "all": 4,
+          "event_order": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "pass_first_attempt": [
+            true,
+            true,
+            false,
+            false
+          ]
+        }
+      },
+      "correct": 6,
+      "all": 16,
+      "official_or_independent_score": false
+    },
+    "semantic_findings": {
+      "B0_loses_general_value_on_local_exception": true,
+      "B1_keeps_general_and_updates_actual_qualifiers_with_ordinary_operations": true,
+      "B1_scope_Reader_still_incomplete": true,
+      "B2_declared_conditions_and_overrides_actual": true,
+      "B2_no_empty_conditions_override_rejection_in_this_run": true,
+      "B2_conditions_shared_global_qualifiers_not_separate_night_scope_node": true,
+      "B2_global_qualifier_change_relation_support_rejected": true,
+      "B2_exception_omission_current_boundary_rejected": true,
+      "B2_final_Reader_describes_withdrawal_despite_active_override_and_old_qualifiers": true,
+      "M_general_and_qualifier_units_exact_on_exception_add": 3,
+      "M_general_and_exception_graph_kept_on_global_qualifier_change": true,
+      "M_final_actual_new_qualifier_units_and_general_kept_on_remove": 3,
+      "M_uses_change_value_for_content_qualifiers_not_change_condition": true,
+      "M_postwithdraw_Reader_received_prior_general_role_and_cancellation_but_refused": true,
+      "M_relative_next_Monday_wrong_2030_03_10_expected_2030_03_11": true
+    },
+    "global_terminal_and_ledger_reconciled": true,
+    "new_generation_unknown": 0,
+    "old_failures_answers_states_preserved": true,
+    "candidate_selected": false,
+    "method_advantage_established": false,
+    "evidence_scope": "One already-exposed original shared source branch; first unaffected44 not rerun; stochastic free-model outcomes are not attribution to978 contract changes."
+  },
+  "source_stage_total": {
+    "Writer": 20,
+    "Reader": 18,
+    "Judge": 0,
+    "generation_requests": 38,
+    "generation_known_tokens": 213017,
+    "finish_reasons": {
+      "stop": 38
+    },
+    "embedding_requests": 50,
+    "embedding_inputs": 50,
+    "embedding_known_tokens": 1497,
+    "new_unknown": 0,
+    "generation_retries": 0,
+    "capacity_failures": 0,
+    "operation_rejections": 2,
+    "events_with_unprocessed_gaps": 2
+  },
+  "continuous_accounting_snapshot": {
+    "generation_requests": 39580,
+    "generation": {
+      "charged_tokens": 151416052,
+      "known_tokens": 151304337,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 974832,
+      "known_tokens": 974832,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_scope": "Stage38 includes fixed2 and originalglobal36, previously published running14 is overlapping subset. All known receipts reconcile; no pending new requests, historicalunknown3 unchanged.",
+  "same_shared_exposed_source_not_independent_confirmation": true,
+  "unaffected_first44_branch_not_rerun": true,
+  "original_states_answers_HTTP_and_failures_preserved": true,
+  "candidate_selected": false,
+  "stable_method_advantage_established": false,
+  "goal_complete": false,
+  "product_status": "NO_GO",
+  "generation_family": "existing Qwen3.6 only",
+  "private_raw_originals_ignored": true
+}

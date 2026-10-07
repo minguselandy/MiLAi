@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from collections.abc import Callable
+from collections.abc import Callable, Mapping
 from typing import TYPE_CHECKING, Any, Protocol, cast
 
 from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
@@ -15,22 +15,350 @@ from milai_lab.application.document_publication import DOCUMENT_MUTATIONS, docum
 from milai_lab.application.journal import BusinessActionJournal, UnknownBusinessAction
 from milai_lab.application.tools import _business_tools, document_business_tools
 from milai_lab.application.world import ApplicationWorld
+from milai_lab.contracts.memory import VerifiedObjectRef
 
 if TYPE_CHECKING:
     from langgraph.prebuilt.tool_node import ToolCallRequest
 
+    from milai_lab.application.adapters import ApplicationAdapter
+    from milai_lab.application.functional import FunctionalApplication
     from milai_lab.contracts.scope import FoundationScope
+
+
+class UnknownModelRequest(RuntimeError):
+    """A model request lost its response; this does not imply a semantic commit."""
+
+
+class UnknownSemanticCommit(RuntimeError):
+    """An issued semantic operation needs reconciliation by its original ID."""
+
+
+def resume_request(
+    app: FunctionalApplication,
+    adapter: ApplicationAdapter,
+    request_id: str,
+    *,
+    requirements: dict[str, Any] | None = None,
+    current: Mapping[str, Any] | None = None,
+    save_result: Callable[[str, dict[str, Any]], dict[str, Any]] | None = None,
+    reconcile_memory: Callable[[str], dict[str, Any] | None] | None = None,
+    feedback: Callable[[str, dict[str, Any]], dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Continue full request requirements using the existing receipt progress.
+
+    Requirements contain target, steps, save_result and feedback. Each step has
+    id, operation, arguments, completed (literal observed fields), and optionally
+    arguments_from_state (argument -> actual observed field). The caller supplies
+    this trusted plan; it is neither model inference nor application permission.
+
+    Current controls readonly, allow_memory, allow_feedback and
+    new_semantic_attempt. Business permission is always the adapter's CURRENT
+    allowlist. Callbacks perform maintenance/delivery; this module owns no model,
+    semantic core or secondary database. Failures and unknown attempts stay intact.
+    """
+    controls = dict(current or {})
+    if not request_id or adapter.owner != app.owner:
+        raise ValueError("APPLICATION_RESUME_SCOPE_INVALID")
+    if requirements is not None:
+        steps = requirements["steps"]
+        if len({step["id"] for step in steps}) != len(steps) or any(
+            not step["completed"] for step in steps
+        ):
+            raise ValueError("APPLICATION_RESUME_STEPS_INVALID")
+    key, row = app.progress.request_state(app.owner, request_id, requirements)
+    requirements = row["requirements"]
+    state = row.get("request_progress") or {
+        "business": {
+            "status": "pending",
+            "steps": [
+                {"id": step["id"], "status": "pending", "attempts": []}
+                for step in requirements["steps"]
+            ],
+        },
+        "memory": {
+            "status": "pending" if requirements.get("save_result") else "not_requested",
+            "attempts": [],
+        },
+        "feedback": {
+            "status": "pending" if requirements.get("feedback", True) else "not_requested",
+            "attempts": [],
+        },
+        "discoveries": [],
+    }
+
+    def persist() -> None:
+        app.progress.save_request_state(key, state)
+
+    def snapshot_result() -> dict[str, Any]:
+        return _resume_result(request_id, state, adapter.source_visible)
+
+    if not adapter.can_read:
+        # The original journal remains evidence, but access revocation prevents
+        # redisclosing prior receipts, saving them or invoking a feedback callback.
+        return {
+            "request_id": request_id,
+            "status": "access_revoked",
+            "complete": False,
+            "business": {"status": "access_revoked"},
+            "memory": {"status": "not_authorized_current_request"},
+            "feedback": {"status": "not_authorized_current_request"},
+            "source_refs": [],
+        }
+
+    discovery_id = request_id + ":discover:" + str(len(state["discoveries"]) + 1)
+    state["discoveries"].append({"attempt_id": discovery_id, "status": "pending"})
+    persist()
+    try:
+        observed = adapter.discover(requirements["target"], attempt_id=discovery_id)
+    except Exception as error:
+        state["discoveries"][-1].update(status="unknown", error=str(error))
+        state["business"]["status"] = "observation_unknown"
+        persist()
+        return snapshot_result()
+    state["discoveries"][-1].update(status="complete", result=observed)
+    business = state["business"]
+    actual = observed.get("current_state") or {}
+    business["observation"] = observed
+    business["status"] = "pending"
+    if observed.get("unknown_effects"):
+        business["status"] = "business_unknown"
+        persist()
+        return snapshot_result()
+    for step, progress in zip(requirements["steps"], business["steps"], strict=True):
+        satisfied = all(actual.get(field) == value for field, value in step["completed"].items())
+        if satisfied:
+            progress.update(status="completed", completion_source=observed.get("source_ref"))
+            continue
+        # Confirmed effects cannot be repeated merely because later state changed.
+        if progress["status"] == "completed" or any(
+            attempt.get("result", {}).get("business_effect") in {"confirmed", "partial"}
+            for attempt in progress["attempts"]
+        ):
+            progress["status"] = "superseded"
+        if progress["status"] == "superseded":
+            business["status"] = "current_state_changed"
+            break
+        if controls.get("readonly", False):
+            business["status"] = "observed_only"
+            break
+        if step["operation"] not in adapter.allowed_operations:
+            business["status"] = "not_authorized_current_request"
+            break
+        arguments = {
+            **step.get("arguments", {}),
+            **{
+                argument: actual[field]
+                for argument, field in step.get("arguments_from_state", {}).items()
+            },
+        }
+        attempt_id = request_id + ":" + step["id"] + ":" + str(len(progress["attempts"]) + 1)
+        attempt: dict[str, Any] = {"attempt_id": attempt_id, "status": "unknown"}
+        progress["attempts"].append(attempt)
+        persist()
+        try:
+            ref = (
+                VerifiedObjectRef(**observed["object_ref"]) if observed.get("object_ref") else None
+            )
+            result = adapter.execute(step["operation"], arguments, attempt_id=attempt_id, ref=ref)
+        except Exception as error:
+            attempt["error"] = str(error)
+            progress["status"], business["status"] = "unknown", "business_unknown"
+            break
+        attempt.update(status="complete", result=result)
+        observed = result
+        actual = result.get("current_state") or actual
+        satisfied = all(actual.get(field) == value for field, value in step["completed"].items())
+        progress["status"] = "completed" if satisfied else "incomplete"
+        if satisfied:
+            progress["completion_source"] = result.get("source_ref")
+        if not result.get("executed") or not result.get("receipt", {}).get("ok"):
+            business["status"] = (
+                "partial"
+                if any(item["status"] == "completed" for item in business["steps"])
+                else "incomplete"
+            )
+            break
+    else:
+        business["status"] = "completed"
+    persist()
+
+    memory = state["memory"]
+    readonly = controls.get("readonly", False)
+    can_save = not readonly and controls.get("allow_memory", False)
+    if requirements.get("save_result") and memory["status"] != "committed":
+        if business["status"] == "completed":
+            memory.pop("current_permission", None)
+            _resume_memory(
+                request_id,
+                state,
+                controls,
+                save_result if can_save else None,
+                reconcile_memory,
+                persist,
+                snapshot_result,
+            )
+        if not can_save and memory["status"] != "committed":
+            memory["current_permission"] = "not_authorized_current_request"
+    if requirements.get("feedback", True) and controls.get("allow_feedback", True) and feedback:
+        final_input = snapshot_result()
+        old = state["feedback"]
+        basis = {name: final_input[name]["status"] for name in ("business", "memory")}
+        if old["status"] != "delivered" or old.get("basis") != basis:
+            attempt_id = request_id + ":feedback:" + str(len(old["attempts"]) + 1)
+            attempt = {"attempt_id": attempt_id, "status": "unknown"}
+            old["attempts"].append(attempt)
+            persist()
+            try:
+                receipt = feedback(attempt_id, final_input)
+            except Exception as error:
+                attempt.update(status="failed", error=str(error))
+                old["status"] = "failed"
+            else:
+                attempt.update(status="complete", receipt=receipt)
+                old.update(status="delivered" if receipt.get("ok") else "failed", basis=basis)
+    persist()
+    return snapshot_result()
+
+
+def _resume_memory(
+    request_id: str,
+    state: dict[str, Any],
+    current: dict[str, Any],
+    save_result: Callable[[str, dict[str, Any]], dict[str, Any]] | None,
+    reconcile: Callable[[str], dict[str, Any] | None] | None,
+    persist: Callable[[], None],
+    result: Callable[[], dict[str, Any]],
+) -> None:
+    memory = state["memory"]
+    if memory["status"] == "semantic_unknown":
+        receipt = reconcile(memory["attempts"][-1]["operation_id"]) if reconcile else None
+        if receipt is None:
+            return
+        memory["reconciliation"] = receipt
+        memory["status"] = (
+            "committed"
+            if _semantic_committed(receipt)
+            else (
+                "failed"
+                if receipt.get("status") in {"not_committed", "rejected", "failed"}
+                else "semantic_unknown"
+            )
+        )
+        persist()
+    if memory["status"] in {"failed", "model_unknown"} and not current.get("new_semantic_attempt"):
+        return
+    if memory["status"] in {"committed", "semantic_unknown"} or save_result is None:
+        return
+    operation_id = request_id + ":memory:" + str(len(memory["attempts"]) + 1)
+    attempt: dict[str, Any] = {"operation_id": operation_id, "status": "semantic_unknown"}
+    memory["attempts"].append(attempt)
+    memory["status"] = "semantic_unknown"
+    persist()
+    try:
+        receipt = save_result(operation_id, result())
+    except UnknownModelRequest as error:
+        attempt.update(status="model_unknown", error=str(error))
+    except Exception as error:
+        # UnknownSemanticCommit and an unclassified callback interruption both
+        # need operation-ID reconciliation; neither is a known failed write.
+        attempt.update(status="semantic_unknown", error=str(error))
+    else:
+        attempt.update(
+            status="committed" if _semantic_committed(receipt) else "failed", receipt=receipt
+        )
+    memory["status"] = attempt["status"]
+    persist()
+
+
+def _semantic_committed(receipt: dict[str, Any]) -> bool:
+    return bool(
+        receipt.get("ok")
+        and (
+            receipt.get("status") == "committed"
+            or (
+                receipt.get("status") == "no_change"
+                and receipt.get("replayed")
+                and receipt.get("original_status") == "committed"
+            )
+        )
+    )
+
+
+def _resume_result(
+    request_id: str,
+    state: dict[str, Any],
+    source_visible: Callable[[str], bool],
+) -> dict[str, Any]:
+    refs = list(
+        dict.fromkeys(
+            result["source_ref"]
+            for result in [
+                *(row["result"] for row in state["discoveries"] if "result" in row),
+                *(
+                    attempt["result"]
+                    for step in state["business"]["steps"]
+                    for attempt in step["attempts"]
+                    if "result" in attempt
+                ),
+            ]
+            if result.get("source_ref") and source_visible(result["source_ref"])
+        )
+    )
+    complete = (
+        state["business"]["status"] == "completed"
+        and state["memory"]["status"]
+        in {
+            "committed",
+            "not_requested",
+        }
+        and state["feedback"]["status"] in {"delivered", "not_requested"}
+    )
+
+    def visible(value: Any) -> Any:
+        if isinstance(value, dict):
+            if value.get("source_ref") and not source_visible(value["source_ref"]):
+                return {"source_ref": value["source_ref"], "status": "visibility_revoked"}
+            return {key: visible(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [visible(item) for item in value]
+        return value
+
+    # Return a visible snapshot: callbacks cannot change durable progress or use
+    # forgotten cached receipts as fresh semantic evidence.
+    return cast(
+        dict[str, Any],
+        visible(
+            json.loads(
+                json.dumps(
+                    {
+                        "request_id": request_id,
+                        "status": "completed" if complete else "incomplete",
+                        "complete": complete,
+                        "business": state["business"],
+                        "memory": state["memory"],
+                        "feedback": state["feedback"],
+                        "source_refs": refs,
+                    }
+                )
+            )
+        ),
+    )
 
 
 class RecoveryObserver(Protocol):
     """Only the two observer operations consumed by the recovery query."""
 
     def begin_public_message(
-        self, scope: FoundationScope, public_index: int, content: str,
+        self,
+        scope: FoundationScope,
+        public_index: int,
+        content: str,
     ) -> None: ...
 
     def run_tool(
-        self, request: ToolCallRequest, execute: Callable[[ToolCallRequest], Any],
+        self,
+        request: ToolCallRequest,
+        execute: Callable[[ToolCallRequest], Any],
         business_journal: Any = None,
     ) -> Any: ...
 

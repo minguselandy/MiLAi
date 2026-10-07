@@ -1,0 +1,515 @@
+{
+  "observed_at": "2026-10-06T23:34:16.145053+00:00",
+  "actual_experiment_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "report_parent_and_rollback_commit": "31e5bb9c482e40e87480432ef90c3ad68bf33e5d",
+  "status": "RUNNING_NOT_TERMINAL",
+  "per_arm": {
+    "B0": {
+      "maintenance": 27,
+      "evaluation": 27,
+      "generation_requests": 709,
+      "generation_responses": 708,
+      "terminal": false
+    },
+    "B1": {
+      "maintenance": 0,
+      "evaluation": 0,
+      "generation_requests": 0,
+      "generation_responses": 0,
+      "terminal": false
+    },
+    "B2": {
+      "maintenance": 0,
+      "evaluation": 0,
+      "generation_requests": 0,
+      "generation_responses": 0,
+      "terminal": false
+    },
+    "M": {
+      "maintenance": 0,
+      "evaluation": 0,
+      "generation_requests": 0,
+      "generation_responses": 0,
+      "terminal": false
+    }
+  },
+  "generation_requests": 709,
+  "generation_responses": 708,
+  "generation_pending": 1,
+  "generation_known_tokens": 3005753,
+  "generation_response_roles": {
+    "Writer": 27,
+    "Reader": 63,
+    "Judge": 618
+  },
+  "finish_reasons": {
+    "stop": 708
+  },
+  "encoding_responses": 165,
+  "embedding_known_tokens": 59788,
+  "ledger": {
+    "generation_requests": 40291,
+    "generation": {
+      "charged_tokens": 154607655,
+      "known_tokens": 154333145,
+      "unknown_usage": 4
+    },
+    "embedding": {
+      "charged_tokens": 1034620,
+      "known_tokens": 1034620,
+      "unknown_usage": 0
+    },
+    "limits": {
+      "arms": 3,
+      "embedding_tokens": null,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "questions": 12
+    }
+  },
+  "last_closed_ledger": {
+    "generation_requests": 39582,
+    "generation": {
+      "charged_tokens": 151439107,
+      "known_tokens": 151327392,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 974832,
+      "known_tokens": 974832,
+      "unknown_usage": 0
+    },
+    "limits": {
+      "arms": 3,
+      "embedding_tokens": null,
+      "generation_requests": null,
+      "generation_tokens": null,
+      "questions": 12
+    }
+  },
+  "ledger_stable_during_read": true,
+  "receipt_deltas_match": true,
+  "original_PID_live": true,
+  "suite_terminal_exists": false,
+  "new_prototype_model_calls": 0,
+  "maintenance_count_rule": "Only session-level complete.json; nested batch completions excluded.",
+  "arm_terminal_file": "terminal.json",
+  "subsets_already_in_parent_costs": true,
+  "configuration_hot_edited": false,
+  "publication_model_calls": 0,
+  "publication_encoding_calls": 0,
+  "fourth_B0_user_partial": {
+    "maintenance_completed_ordinals": [
+      0,
+      1,
+      2
+    ],
+    "evaluation_completed_ordinals": [
+      0,
+      1,
+      2
+    ],
+    "closed_user_result": false,
+    "scores_final": false
+  },
+  "declaration": "milai-post87c-common-dense-prefix-development-20261007.json",
+  "configuration": {
+    "common_interface": "I2",
+    "retrieval": "BGE-m3 ordinary dense cosine K10",
+    "generation_family": "Qwen3.6",
+    "thinking": true,
+    "temperature": 1.0,
+    "context_window": 65536,
+    "output_reservation": 32768,
+    "margin": 512,
+    "gold_or_future_QA_delivered_to_Writer": false
+  },
+  "closed_B0_user_subsets": [
+    {
+      "declared_user_position": 1,
+      "result_manifest": "milai-post87c-common-dense-B0-first-user-prefix-results-20261007.json",
+      "maintenance_sessions": 8,
+      "completed_evaluation_sessions": 8,
+      "original_author_labels": {
+        "update": {
+          "correct": 5,
+          "all_opportunities": 19,
+          "valid_judgments": 18,
+          "raw_label_counts": {
+            "Omission": 13,
+            "Correct": 5,
+            "Correct Update": 1
+          },
+          "invalid_labels": {
+            "Correct Update": 1
+          },
+          "invalid_labels_normalized": false
+        },
+        "QA": {
+          "correct": 15,
+          "all_questions": 20,
+          "valid_judgments": 20,
+          "raw_label_counts": {
+            "Correct": 15,
+            "Omission": 3,
+            "Hallucination": 2
+          }
+        },
+        "offline_aggregation": "SUCCESS",
+        "offline_aggregation_extra_HTTP": 0,
+        "overall_score": {
+          "memory_integrity": {
+            "recall(all)": 0.7295081967213115,
+            "recall(valid)": 0.8476190476190476,
+            "weighted_recall(all)": 0.7540983606557377,
+            "weighted_recall(valid)": 0.8761904761904762,
+            "memory_valid_importance_sum": 78.75,
+            "memory_importance_sum": 91.5,
+            "memory_valid_num": 105,
+            "memory_num": 122
+          },
+          "memory_accuracy": {
+            "interference_accuracy(all)": 0.5714285714285714,
+            "interference_accuracy(valid)": 0.5714285714285714,
+            "interference_memory_valid_num": 7,
+            "interference_memory_num": 7,
+            "target_accuracy(all)": 1.0,
+            "target_accuracy(valid)": 1.0,
+            "target_memory_valid_num": 14,
+            "target_memory_num": 14,
+            "weighted_accuracy(all)": 0.7916666666666666,
+            "weighted_accuracy(valid)": 0.95,
+            "memory_valid_num": 20,
+            "memory_num": 24
+          },
+          "memory_extraction_f1": 0.8436018957345972,
+          "memory_update": {
+            "correct_update_memory_ratio(all)": 0.2631578947368421,
+            "correct_update_memory_ratio(valid)": 0.2777777777777778,
+            "hallucination_update_memory_ratio(all)": 0.0,
+            "hallucination_update_memory_ratio(valid)": 0.0,
+            "omission_update_memory_ratio(all)": 0.6842105263157895,
+            "omission_update_memory_ratio(valid)": 0.7222222222222222,
+            "other_update_memory_ratio(all)": 0.0,
+            "other_update_memory_ratio(valid)": 0.0,
+            "update_memory_valid_num": 18,
+            "update_memory_num": 19
+          },
+          "question_answering": {
+            "correct_qa_ratio(all)": 0.75,
+            "correct_qa_ratio(valid)": 0.75,
+            "hallucination_qa_ratio(all)": 0.1,
+            "hallucination_qa_ratio(valid)": 0.1,
+            "omission_qa_ratio(all)": 0.15,
+            "omission_qa_ratio(valid)": 0.15,
+            "qa_valid_num": 20,
+            "qa_num": 20
+          },
+          "memory_type_accuracy": {
+            "Relationship Memory": {
+              "memory_integrity_acc": 0.25,
+              "memory_update_acc": 0.0,
+              "total_num": 8,
+              "memory_acc": 0.25
+            },
+            "Persona Memory": {
+              "memory_integrity_acc": 0.7107438016528925,
+              "memory_update_acc": 0.024793388429752067,
+              "total_num": 121,
+              "memory_acc": 0.7355371900826446
+            },
+            "Event Memory": {
+              "memory_integrity_acc": 0.10526315789473684,
+              "memory_update_acc": 0.10526315789473684,
+              "total_num": 19,
+              "memory_acc": 0.21052631578947367
+            }
+          }
+        },
+        "same_family_Judge_is_independent_confirmation": false
+      },
+      "Root_complete_answers_read": 20
+    },
+    {
+      "declared_user_position": 2,
+      "result_manifest": "milai-post87c-common-dense-B0-second-user-prefix-results-20261007.json",
+      "maintenance_sessions": 8,
+      "completed_evaluation_sessions": 8,
+      "original_author_labels": {
+        "update": {
+          "correct": 8,
+          "all_opportunities": 15,
+          "valid_judgments": 14,
+          "raw_label_counts": {
+            "Correct": 8,
+            "Omission": 5,
+            "Omitted": 1,
+            "Hallucination": 1
+          },
+          "invalid_labels": {
+            "Omitted": 1
+          },
+          "invalid_labels_normalized": false,
+          "raw_label_field": "memory_update_type"
+        },
+        "QA": {
+          "correct": 10,
+          "all_questions": 12,
+          "valid_judgments": 10,
+          "raw_label_counts": {
+            "Correct": 10,
+            "null": 2
+          },
+          "invalid_labels": {
+            "null": 2
+          },
+          "invalid_labels_normalized": false,
+          "raw_label_field": "result_type"
+        },
+        "offline_aggregation": "SUCCESS",
+        "offline_aggregation_extra_HTTP": 0,
+        "overall_score": {
+          "memory_integrity": {
+            "recall(all)": 0.6862745098039216,
+            "recall(valid)": 0.7865168539325843,
+            "weighted_recall(all)": 0.7352941176470589,
+            "weighted_recall(valid)": 0.8426966292134831,
+            "memory_valid_importance_sum": 66.75,
+            "memory_importance_sum": 76.5,
+            "memory_valid_num": 89,
+            "memory_num": 102
+          },
+          "memory_accuracy": {
+            "interference_accuracy(all)": 0.42857142857142855,
+            "interference_accuracy(valid)": 0.6,
+            "interference_memory_valid_num": 5,
+            "interference_memory_num": 7,
+            "target_accuracy(all)": 1.0,
+            "target_accuracy(valid)": 1.0,
+            "target_memory_valid_num": 14,
+            "target_memory_num": 14,
+            "weighted_accuracy(all)": 0.8409090909090909,
+            "weighted_accuracy(valid)": 0.9736842105263158,
+            "memory_valid_num": 19,
+            "memory_num": 22
+          },
+          "memory_extraction_f1": 0.813953488372093,
+          "memory_update": {
+            "correct_update_memory_ratio(all)": 0.5333333333333333,
+            "correct_update_memory_ratio(valid)": 0.5714285714285714,
+            "hallucination_update_memory_ratio(all)": 0.06666666666666667,
+            "hallucination_update_memory_ratio(valid)": 0.07142857142857142,
+            "omission_update_memory_ratio(all)": 0.3333333333333333,
+            "omission_update_memory_ratio(valid)": 0.35714285714285715,
+            "other_update_memory_ratio(all)": 0.0,
+            "other_update_memory_ratio(valid)": 0.0,
+            "update_memory_valid_num": 14,
+            "update_memory_num": 15
+          },
+          "question_answering": {
+            "correct_qa_ratio(all)": 0.8333333333333334,
+            "correct_qa_ratio(valid)": 1.0,
+            "hallucination_qa_ratio(all)": 0.0,
+            "hallucination_qa_ratio(valid)": 0.0,
+            "omission_qa_ratio(all)": 0.0,
+            "omission_qa_ratio(valid)": 0.0,
+            "qa_valid_num": 10,
+            "qa_num": 12
+          },
+          "memory_type_accuracy": {
+            "Relationship Memory": {
+              "memory_integrity_acc": 0.16666666666666666,
+              "memory_update_acc": 0.0,
+              "total_num": 6,
+              "memory_acc": 0.16666666666666666
+            },
+            "Persona Memory": {
+              "memory_integrity_acc": 0.6767676767676768,
+              "memory_update_acc": 0.04040404040404041,
+              "total_num": 99,
+              "memory_acc": 0.7171717171717172
+            },
+            "Event Memory": {
+              "memory_integrity_acc": 0.10526315789473684,
+              "memory_update_acc": 0.21052631578947367,
+              "total_num": 19,
+              "memory_acc": 0.3157894736842105
+            }
+          }
+        },
+        "same_family_Judge_is_independent_confirmation": false
+      },
+      "Root_complete_answers_read": 12
+    },
+    {
+      "declared_user_position": 3,
+      "result_manifest": "milai-post87c-common-dense-B0-third-user-prefix-results-20261007.json",
+      "maintenance_sessions": 8,
+      "completed_evaluation_sessions": 8,
+      "original_author_labels": {
+        "update": {
+          "correct": 13,
+          "all_opportunities": 20,
+          "valid_judgments": 19,
+          "raw_label_counts": {
+            "Correct": 13,
+            "Omission": 6,
+            "Omitted Update": 1
+          },
+          "invalid_labels": {
+            "Omitted Update": 1
+          },
+          "invalid_labels_normalized": false,
+          "raw_label_field": "memory_update_type"
+        },
+        "QA": {
+          "correct": 10,
+          "all_questions": 22,
+          "valid_judgments": 19,
+          "raw_label_counts": {
+            "Correct": 10,
+            "Omission": 5,
+            "Hallucination": 4,
+            "null": 3
+          },
+          "invalid_labels": {
+            "null": 3
+          },
+          "invalid_labels_normalized": false,
+          "raw_label_field": "result_type"
+        },
+        "offline_aggregation": "SUCCESS",
+        "offline_aggregation_extra_HTTP": 0,
+        "overall_score": {
+          "memory_integrity": {
+            "recall(all)": 0.75,
+            "recall(valid)": 0.8928571428571429,
+            "weighted_recall(all)": 0.77,
+            "weighted_recall(valid)": 0.9166666666666666,
+            "memory_valid_importance_sum": 63.0,
+            "memory_importance_sum": 75.0,
+            "memory_valid_num": 84,
+            "memory_num": 100
+          },
+          "memory_accuracy": {
+            "interference_accuracy(all)": 0.7142857142857143,
+            "interference_accuracy(valid)": 0.8333333333333334,
+            "interference_memory_valid_num": 6,
+            "interference_memory_num": 7,
+            "target_accuracy(all)": 1.0,
+            "target_accuracy(valid)": 1.0,
+            "target_memory_valid_num": 10,
+            "target_memory_num": 10,
+            "weighted_accuracy(all)": 0.7142857142857143,
+            "weighted_accuracy(valid)": 0.8823529411764706,
+            "memory_valid_num": 17,
+            "memory_num": 21
+          },
+          "memory_extraction_f1": 0.8571428571428571,
+          "memory_update": {
+            "correct_update_memory_ratio(all)": 0.65,
+            "correct_update_memory_ratio(valid)": 0.6842105263157895,
+            "hallucination_update_memory_ratio(all)": 0.0,
+            "hallucination_update_memory_ratio(valid)": 0.0,
+            "omission_update_memory_ratio(all)": 0.3,
+            "omission_update_memory_ratio(valid)": 0.3157894736842105,
+            "other_update_memory_ratio(all)": 0.0,
+            "other_update_memory_ratio(valid)": 0.0,
+            "update_memory_valid_num": 19,
+            "update_memory_num": 20
+          },
+          "question_answering": {
+            "correct_qa_ratio(all)": 0.45454545454545453,
+            "correct_qa_ratio(valid)": 0.5263157894736842,
+            "hallucination_qa_ratio(all)": 0.18181818181818182,
+            "hallucination_qa_ratio(valid)": 0.21052631578947367,
+            "omission_qa_ratio(all)": 0.22727272727272727,
+            "omission_qa_ratio(valid)": 0.2631578947368421,
+            "qa_valid_num": 19,
+            "qa_num": 22
+          },
+          "memory_type_accuracy": {
+            "Persona Memory": {
+              "memory_integrity_acc": 0.6666666666666666,
+              "memory_update_acc": 0.058823529411764705,
+              "total_num": 102,
+              "memory_acc": 0.7254901960784313
+            },
+            "Relationship Memory": {
+              "memory_integrity_acc": 0.25,
+              "memory_update_acc": 0.0,
+              "total_num": 4,
+              "memory_acc": 0.25
+            },
+            "Event Memory": {
+              "memory_integrity_acc": 0.2857142857142857,
+              "memory_update_acc": 0.3333333333333333,
+              "total_num": 21,
+              "memory_acc": 0.6190476190476191
+            }
+          }
+        },
+        "same_family_Judge_is_independent_confirmation": false
+      },
+      "Root_complete_answers_read": 22
+    }
+  ],
+  "prototype": {
+    "source_commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
+    "own_ci": {
+      "commit": "c86a5ea263ce90da7fdf4f7335e1618d0be88deb",
+      "observed_at": "2026-10-06T23:34:29Z",
+      "Fast": {
+        "run_id": 37542861434,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "Full": {
+        "run_id": 37542861507,
+        "status": "completed",
+        "conclusion": "success"
+      }
+    },
+    "prepared_actual_before_cases": 4,
+    "model_calls": 0,
+    "admitted": false,
+    "adopted_as_common_flow": false,
+    "normal_Host_flow_switched": false,
+    "declaration": "milai-post87c-change-extraction-paired-development-20261007.json",
+    "wait_for_whole_original_suite_terminal_and_serial_release": true
+  },
+  "previous_report_ci": {
+    "commit": "31e5bb9c482e40e87480432ef90c3ad68bf33e5d",
+    "observed_at": "2026-10-06T23:34:29Z",
+    "Fast": {
+      "run_id": 37546429131,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "Full": {
+      "run_id": 37546429293,
+      "status": "in_progress",
+      "conclusion": null
+    }
+  },
+  "conclusions": {
+    "complete_four_arm_comparison": false,
+    "stable_method_advantage_established": false,
+    "candidate_selected": false,
+    "product_status": "NO_GO",
+    "heldout_users_read": false,
+    "goal_complete": false,
+    "generating_model_families": 1,
+    "same_family_Judge_is_independent_confirmation": false,
+    "raw_invalid_author_labels_preserved": true
+  },
+  "remaining_scope": [
+    "Complete frozen four-arm first8 prefix per user, each arm32 sessions72updates73QA",
+    "Same-version first-user65 and four-user277 full histories",
+    "Native mechanism and drift, entry ablation and fixed tighter budget",
+    "Frozen candidate confirmation on16 reserved users, external tasks and simple strong baselines",
+    "Normal Host functional use, forgetting, actual effects, lifecycle recovery and six deliverables"
+  ],
+  "publication_scope": "Five Lab documentation/status/sanitized snapshot files; no source/tests/workflows/configuration changes or new model/encoding calls for publication.",
+  "historical_fields_note": "Earlier completed_session_checkpoints and stage_C fields in current-status refer to their recorded older versions. Only latest_execution_summary and this source-bound snapshot describe the running072 queue."
+}

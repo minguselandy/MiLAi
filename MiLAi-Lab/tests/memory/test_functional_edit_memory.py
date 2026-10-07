@@ -18,9 +18,16 @@ from pydantic import ValidationError
 
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.journal import UnknownBusinessAction
+from milai_lab.memory.edit_units import EditProposal, clause_proposal, form_state, render_state
 from milai_lab.memory.functional import FunctionalMemory
-from milai_lab.memory.functional_state import FunctionalRejection, canonical, reference_key
+from milai_lab.memory.functional_state import (
+    FunctionalRejection,
+    canonical,
+    namespace,
+    reference_key,
+)
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.functional_edit_memory import (
     FUNCTIONAL_ARMS,
     FUNCTIONAL_B0_METHOD,
@@ -51,6 +58,623 @@ def cfg(turn: str = "u", owner: str = "alice") -> dict[str, Any]:
             "v13_config_version": "functional-m-test-v1",
         },
     }
+
+
+NEXT_FEATURES = EditFeatures(True, True, True, True, True)
+
+
+def next_sdk_create():
+    return clause_proposal(
+        {
+            "action": "create",
+            "matter": "User's reminder sound",
+            "units": [
+                {
+                    "text": "User reports quiet reminders.",
+                    "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"},
+                }
+            ],
+        },
+        conditioned=True,
+    )
+
+
+def test_next_sdk_reopened_clause_support_enters_wrapper_without_old_source_delivery(tmp_path):
+    with opened(tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES) as memory:
+        text = "Use quiet reminders.\nOnly on weekdays.\nOnly before 18:00."
+        ref = memory.service.capture_user("s", "u", text)["source_ref"]
+        source = memory.service.source(ref)
+        bound = memory.service.bind_public_turn(
+            "s", "u", ref, config_version="functional-m-test-v1", phase="start"
+        )
+        first, second = text.index("\n"), text.rindex("\n")
+        handles = [
+            memory.service.source_fragment_range(ref, start, end)["fragment_handle"]
+            for start, end in (
+                (0, first),
+                (first + 1, second),
+                (second + 1, len(text)),
+                (0, second),
+                (0, len(text)),
+            )
+        ]
+        parsed = EditProposal.model_validate(
+            {
+                "action": "create",
+                "units": [
+                    {"text": "Use quiet reminders.", "evidence": [handles[0]]},
+                    {"text": "Only on weekdays.", "role": "condition", "evidence": [handles[1]]},
+                    {"text": "Only before 18:00.", "role": "condition", "evidence": [handles[2]]},
+                ],
+                "relations": [
+                    {
+                        "source": 1,
+                        "target": 0,
+                        "relation_type": "modifies",
+                        "evidence": [handles[3]],
+                    },
+                    {
+                        "source": 2,
+                        "target": 0,
+                        "relation_type": "modifies",
+                        "evidence": [handles[4]],
+                    },
+                ],
+            }
+        )
+        state = form_state(parsed, memory.service, conditioned=True)
+        decorate_state(
+            state,
+            {
+                "matter_description": "Reminder tone",
+                "unit_assertions": [
+                    {
+                        "kind": "reported",
+                        "source_ref": ref,
+                        "source_revision": source["source_revision"],
+                        "role": source["role"],
+                        "observed_at": source["observed_at"],
+                        "occurred_at": None,
+                    }
+                    for _ in parsed.units
+                ],
+            },
+        )
+        # A trusted Service import has real source/version support, without an SDK
+        # source-read receipt. This avoids previous global delivery masking the bug.
+        saved = memory.service.commit(
+            "s",
+            "import",
+            {
+                "action": "create",
+                "id": None,
+                "expected_revision": 0,
+                "content": render_state(state),
+                "kind": "semantic",
+                "basis": "user_statement",
+                "scope": {},
+                "fields": {},
+                "object_ref": None,
+                "source_ref": ref,
+                "source_refs": [ref],
+                "edit_state": state,
+                "field_support": {
+                    field: {"source_refs": [ref]} for field in ("content", "scope", "basis", "kind")
+                },
+                "functional_support": {field: handles for field in ("content", "kind", "basis")},
+                "trigger_binding": bound,
+                "requested": {"operation": "synthetic_import"},
+            },
+        )
+        assert saved["ok"], saved
+        old = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        assert all(
+            memory.service.store.get(namespace(memory.service), "edit-delivered:" + h) is None
+            for h in handles
+        )
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(
+            tmp_path,
+            arm="B2",
+            interface_version="I2",
+            features=NEXT_FEATURES,
+            retrieval_candidates=[],
+        ) as memory:
+            memory.service.capture_user("s", "u2", "Now use written reminders; retain the limits.")
+            memory.writer_context("s", "u2", "functional-m-test-v1")
+            page = json.loads(
+                invoke(memory, "read_memory", {"record_id": saved["id"]}, "read-old", "u2").content
+            )
+            assert page["ok"] and all(item["type"] == "record" for item in page["items"])
+            context = memory.writer_context("s", "u2", "functional-m-test-v1")
+            record = context["writer_packet"]["records"][0]
+            assert all(
+                memory.service.store.get(namespace(memory.service), "edit-delivered:" + h) is None
+                for h in handles
+            )
+            proposal = {
+                "action": "rewrite",
+                "target": "r1",
+                "clauses": [
+                    {
+                        "text": "Use written reminders.",
+                        "evidence": ["e1"],
+                        "keep_support": record["clauses"][0]["support"],
+                        "assertion": {"source": "e1", "kind": "reported"},
+                        "conditions": [
+                            {
+                                "text": c["text"],
+                                "evidence": [],
+                                "keep_support": c["support"],
+                                "assertion": {"keep": c["support"][0]},
+                                "binding": {
+                                    "evidence": [],
+                                    "keep_support": c["binding"]["support"],
+                                },
+                            }
+                            for c in record["clauses"][0]["conditions"]
+                        ],
+                    }
+                ],
+            }
+            before = app.world.snapshot()
+            updated = json.loads(
+                invoke(
+                    memory,
+                    "update_memory",
+                    {"proposal": proposal},
+                    "rewrite-nested",
+                    "u2",
+                    app.call_wrapper(memory.service, "s", "u2"),
+                ).content
+            )
+            assert updated["ok"], updated.get("reason", updated)
+            assert updated["id"] == saved["id"] and updated["revision"] == 2
+            op = memory.service.store.get(
+                namespace(memory.service),
+                "edit-writer-operation:"
+                + reference_key([memory._binding(cfg("u2")), "rewrite-nested"]),
+            )
+            assert set(op.value["kept_support"]) == set(handles)
+            candidate = memory.service.candidate(op.value["read_handle"])
+            assert candidate["record_id"] == saved["id"] and candidate["revision"] == 1
+            assert memory.service.read(saved["id"], 1)["value"] == old
+            assert app.world.snapshot() == before
+
+
+def test_sdk_reopened_rewrite_changes_condition_and_retains_its_existing_link(tmp_path):
+    with opened(tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES) as memory:
+        old_ref = memory.service.capture_user(
+            "s", "u", "Use quiet reminders during gallery hours."
+        )["source_ref"]
+        memory.writer_context("s", "u", "functional-m-test-v1")
+        create = {
+            "action": "create", "matter": "Reminder sound", "clauses": [{
+                "text": "Use quiet reminders.", "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+                "conditions": [{
+                    "text": "During gallery hours.", "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"},
+                    "binding": {"evidence": ["e1"]},
+                }],
+            }],
+        }
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": create}, "save").content)
+        assert saved["ok"]
+        original = copy.deepcopy(memory.service.read(saved["id"], 1)["value"])
+
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(
+            tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES,
+            retrieval_candidates=[],
+        ) as memory:
+            new_ref = memory.service.capture_user(
+                "s", "u2", "The reminder rule now applies during evening hours."
+            )["source_ref"]
+            memory.writer_context("s", "u2", "functional-m-test-v1")
+            page = json.loads(
+                invoke(memory, "read_memory", {"record_id": saved["id"]}, "record", "u2").content
+            )
+            assert page["ok"]
+            packet = memory.writer_context("s", "u2", "functional-m-test-v1")["writer_packet"]
+            clause = packet["records"][0]["clauses"][0]
+            condition = clause["conditions"][0]
+            rewrite = {
+                "action": "rewrite", "target": "r1", "clauses": [{
+                    "text": clause["text"], "evidence": [],
+                    "keep_support": clause["support"],
+                    "assertion": {"keep": clause["support"][0]},
+                    "conditions": [{
+                        "from_unit": condition["id"], "text": "During evening hours.",
+                        "evidence": ["e1"],
+                        "assertion": {"source": "e1", "kind": "reported"},
+                        "binding": {
+                            "evidence": [], "keep_support": condition["binding"]["support"]
+                        },
+                    }],
+                }],
+            }
+            binding = copy.deepcopy(memory.service.public_turn("s"))
+            boundary = copy.deepcopy(memory.service._source_boundaries)
+            world = app.world.snapshot()
+            result = json.loads(invoke(
+                memory, "update_memory", {"proposal": rewrite}, "change-hours", "u2",
+                app.call_wrapper(memory.service, "s", "u2"),
+            ).content)
+            assert result["ok"] and result["revision"] == 2, result.get("reason", result)
+            state = memory.service.read(saved["id"])["value"]["edit_state"]
+            assert [u["text"] for u in state["units"]] == [
+                "Use quiet reminders.", "During evening hours."
+            ]
+            assert {e["source_ref"] for e in state["units"][1]["evidence_refs"]} == {new_ref}
+            assert {e["source_ref"] for e in state["relations"][0]["evidence_refs"]} == {old_ref}
+            assert memory.service.read(saved["id"], 1)["value"] == original
+            assert memory.service.public_turn("s") == binding
+            assert memory.service._source_boundaries == boundary
+            assert app.world.snapshot() == world
+    with opened(tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES) as memory:
+        assert memory.service.read(saved["id"])["value"]["edit_state"] == state
+
+
+def test_sdk_real_old_source_page_becomes_e_without_rebinding_current_turn(tmp_path):
+    with opened(tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES) as memory:
+        old_ref = memory.service.capture_user(
+            "s", "u", "Remember quiet reminders, on weekdays before 18:00.",
+            occurred_at="2025-02-03T00:00:00Z",
+        )["source_ref"]
+        memory.writer_context("s", "u", "functional-m-test-v1")
+        units = [
+            {
+                "text": text,
+                "role": role,
+                "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+            }
+            for text, role in (
+                ("Quiet reminders.", "content"), ("On weekdays before 18:00.", "condition")
+            )
+        ]
+        create = clause_proposal(
+            {
+                "action": "create", "matter": "Reminder tone", "units": units,
+                "relations": [
+                    {"source": 1, "target": 0, "relation_type": "modifies", "evidence": ["e1"]}
+                ],
+            },
+            conditioned=True,
+        )
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": create}, "save").content)
+        assert saved["ok"]
+        old = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        handle = old["edit_state"]["units"][1]["evidence_refs"][0]["evidence_id"]
+
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(
+            tmp_path, arm="B2", interface_version="I2", features=NEXT_FEATURES,
+            retrieval_candidates=[],
+        ) as memory:
+            current_ref = memory.service.capture_user(
+                "s", "u2", "Remember bright reminders now.", occurred_at="2025-02-04T00:00:00Z"
+            )["source_ref"]
+            memory.writer_context("s", "u2", "functional-m-test-v1")
+            invoke(memory, "read_memory", {"record_id": saved["id"]}, "record", "u2")
+            before = memory.writer_context("s", "u2", "functional-m-test-v1")["writer_packet"]
+            assert before["evidence"] and all(
+                e["text"] == "Remember bright reminders now." for e in before["evidence"]
+            )
+            assert "delivery_kind" not in canonical(before)
+            binding = copy.deepcopy(memory.service.public_turn("s"))
+            boundary = copy.deepcopy(memory.service._source_boundaries)
+            page = json.loads(
+                invoke(memory, "read_source", {"fragment_handle": handle}, "source", "u2").content
+            )
+            assert page["ok"] and page["items"][0]["source_ref"] == old_ref
+            packet = memory.writer_context("s", "u2", "functional-m-test-v1")["writer_packet"]
+            by_kind = {
+                kind: next(e["id"] for e in packet["evidence"] if e["delivery_kind"] == kind)
+                for kind in ("current", "redelivered_support")
+            }
+            old_source = next(
+                s for s in packet["source_table"] if "redelivered_support" in s["delivery_kinds"]
+            )
+            assert old_source["role"] == "user"
+            assert old_source["occurred_at"] == "2025-02-03T00:00:00Z"
+            assert memory.service.public_turn("s") == binding
+            assert binding["source_ref"] == current_ref
+            assert memory.service._source_boundaries == boundary
+            clause = packet["records"][0]["clauses"][0]
+            condition = clause["conditions"][0]
+            rewrite = {
+                "action": "rewrite", "target": "r1", "clauses": [
+                    {
+                        "text": "Bright reminders.",
+                        "evidence": [by_kind["current"]], "keep_support": clause["support"],
+                        "assertion": {"source": by_kind["current"], "kind": "reported"},
+                        "conditions": [
+                            {
+                                "text": "Weekdays, earlier than 18:00.",
+                                "evidence": [by_kind["redelivered_support"]],
+                                "keep_support": condition["support"],
+                                "assertion": {
+                                    "source": by_kind["redelivered_support"], "kind": "reported"
+                                },
+                                "binding": {
+                                    "evidence": [], "keep_support": condition["binding"]["support"]
+                                },
+                            }
+                        ],
+                    }
+                ],
+            }
+            updated = json.loads(invoke(
+                memory, "update_memory", {"proposal": rewrite}, "rewrite", "u2",
+                app.call_wrapper(memory.service, "s", "u2"),
+            ).content)
+            assert updated["ok"] and updated["id"] == saved["id"] and updated["revision"] == 2
+            assert memory.service.read(saved["id"], 1)["value"] == old
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+def test_next_sdk_real_tools_matter_delivery_scope_update_and_guard(tmp_path, arm):
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(tmp_path, arm=arm, interface_version="I2", features=NEXT_FEATURES) as memory:
+            memory.service.capture_user(
+                "s", "u", "Remember my quiet reminders and bright Tuesday reminders.",
+                occurred_at="2025-02-03T00:00:00Z"
+            )
+            context = memory.writer_context("s", "u", "functional-m-test-v1")
+            assert context["writer_packet"]["records"] == []
+            catalog = {t.name: t for t in memory.writer_tools(cfg())}
+            assert "save_memory" in catalog and "update_memory" not in catalog
+            raw = catalog["save_memory"].tool_call_schema
+            assert "matter" in json.dumps(raw)
+            clause_schema = raw["properties"]["proposal"]["properties"]["clauses"]["items"]
+            variants = clause_schema["oneOf"] if memory.conditioned else [clause_schema]
+            for variant in variants:
+                assert variant["properties"]["evidence"]["items"]["enum"] == [
+                    e["id"] for e in context["writer_packet"]["evidence"]
+                ]
+            before_world = app.world.snapshot()
+            wrapper = app.call_wrapper(memory.service, "s", "u")
+            args = {"proposal": next_sdk_create(), "scope": {"project": "gallery"}}
+            if not memory.local:
+                extra = copy.deepcopy(args["proposal"]["clauses"][0])
+                extra["text"] = "User reports bright Tuesday reminders."
+                args["proposal"]["clauses"].append(extra)
+            if not memory.conditioned:
+                for clause in args["proposal"]["clauses"]:
+                    clause.pop("conditions")
+            response = invoke(memory, "save_memory", args, "next-save", wrapper=wrapper)
+            receipt = json.loads(response.content)
+            assert receipt["ok"] and receipt["effect"] == "memory_only"
+            old = copy.deepcopy(memory.service.read(receipt["id"])["value"])
+            assert "Matter: User's reminder sound" in old["content"]
+            assert old["edit_state"]["units"][0]["assertion"]["role"] == "user"
+            assert invoke(memory, "save_memory", args, "next-save", wrapper=wrapper) == response
+            memory.service.capture_user("s", "u2", "Remember my soft reminder tone now.")
+            context = memory.writer_context("s", "u2", "functional-m-test-v1")
+            assert context["writer_packet"]["records"][0]["matter"] == "User's reminder sound"
+            new_unit = {
+                "text": "User reports a soft reminder tone.",
+                "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+            }
+            proposal = (
+                {"action": "rewrite", "target": "r1", "units": [
+                    new_unit,
+                    {"text": "User reports bright Tuesday reminders.", "evidence": [],
+                     "keep_support": ["h2"], "assertion": {"keep": "h2"}},
+                ]}
+                if not memory.local
+                else {
+                    "action": "edit",
+                    "target": "r1",
+                    "edits": [
+                        {
+                            **new_unit,
+                            "operation": "change_value" if arm == "M" else "replace",
+                            "target_unit": "u1",
+                        }
+                    ],
+                }
+            )
+            changed = json.loads(
+                invoke(
+                    memory,
+                    "update_memory",
+                    {"proposal": clause_proposal(proposal, conditioned=memory.conditioned)},
+                    "next-update",
+                    "u2",
+                    app.call_wrapper(memory.service, "s", "u2"),
+                ).content
+            )
+            assert changed["ok"] and changed["id"] == receipt["id"] and changed["revision"] == 2
+            assert memory.service.read(receipt["id"], 1)["value"] == old
+            assert memory.service.read(receipt["id"])["value"]["scope"] == {"project": "gallery"}
+            page = json.loads(invoke(
+                memory, "read_memory", {"record_id": receipt["id"]}, "revision-read", "u2"
+            ).content)
+            evidence = page["items"][0]["revision_evidence"]
+            assert [part["content"] for part in evidence] == ["Remember my soft reminder tone now."]
+            assert evidence[0]["role"] == "user"
+            assert app.world.snapshot() == before_world
+            if not memory.local:
+                memory.service.capture_user(
+                    "s", "u3", "Withdraw bright Tuesday reminders; use the general soft tone."
+                )
+                context = memory.writer_context("s", "u3", "functional-m-test-v1")
+                current = copy.deepcopy(memory.service.read(receipt["id"])["value"])
+                partial = clause_proposal(
+                    {"action": "rewrite", "target": "r1", "revision_evidence": ["e1"],
+                     "units": [{"text": "User reports a soft reminder tone.", "evidence": [],
+                                "keep_support": ["h1"], "assertion": {"keep": "h1"}}]},
+                    conditioned=memory.conditioned,
+                )
+                wrapper = app.call_wrapper(memory.service, "s", "u3")
+                response = invoke(
+                    memory, "update_memory", {"proposal": partial}, "remove-local", "u3", wrapper
+                )
+                assert json.loads(response.content)["revision"] == 3
+                assert invoke(
+                    memory, "update_memory", {"proposal": partial}, "remove-local", "u3", wrapper
+                ) == response
+                kept = memory.service.read(receipt["id"])["value"]
+                assert len(kept["edit_state"]["units"]) == 1
+                assert {
+                    k: v for k, v in kept["edit_state"]["units"][0].items() if k != "unit_id"
+                } == {
+                    k: v for k, v in current["edit_state"]["units"][0].items() if k != "unit_id"
+                }
+                page = json.loads(invoke(
+                    memory, "read_memory", {"record_id": receipt["id"]}, "cancel-read", "u3"
+                ).content)
+                assert [part["content"] for part in page["items"][0]["revision_evidence"]] == [
+                    "Withdraw bright Tuesday reminders; use the general soft tone."
+                ]
+                assert app.world.snapshot() == before_world
+            memory.service.capture_user("s", "u4", "Keep the existing reminder memory unchanged.")
+            memory.writer_context("s", "u4", "functional-m-test-v1")
+            no_change = {"action": "no_change", "target": "r1"}
+            first_confirm = memory.apply_writer_proposal(cfg("u4"), "one-container", no_change)
+            assert first_confirm["ok"]
+            assert memory.apply_writer_proposal(cfg("u4"), "one-container", no_change)["replayed"]
+            with pytest.raises(FunctionalRejection, match="DUPLICATE_RECORD_CONTAINER"):
+                memory.apply_writer_proposal(cfg("u4"), "second-container", no_change)
+
+
+@pytest.mark.parametrize("after_put", [False, True])
+def test_next_sdk_unknown_first_commit_reopen_exact_operation(tmp_path, monkeypatch, after_put):
+    def lost_put(original):
+        def put(ns, key, value, **kw):
+            if isinstance(value, dict) and value.get("_v13_1") and not failed[0]:
+                failed[0] = True
+                if after_put:
+                    original(ns, key, value, **kw)
+                raise RuntimeError("SCRIPTED_COMMIT_WINDOW")
+            return original(ns, key, value, **kw)
+
+        return put
+
+    failed = [False]
+    args = {"proposal": next_sdk_create()}
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(tmp_path, interface_version="I2", features=NEXT_FEATURES) as memory:
+            memory.service.capture_user("s", "u", "Remember my quiet reminders.")
+            memory.writer_context("s", "u", "functional-m-test-v1")
+            monkeypatch.setattr(memory.service.store, "put", lost_put(memory.service.store.put))
+            first = invoke(
+                memory,
+                "save_memory",
+                args,
+                "next-unknown",
+                wrapper=app.call_wrapper(memory.service, "s", "u"),
+            )
+            unknown = json.loads(first.content)
+            assert unknown["status"] == "outcome_unknown"
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(tmp_path, interface_version="I2", features=NEXT_FEATURES) as memory:
+            memory.writer_context("s", "u", "functional-m-test-v1")
+            second = invoke(
+                memory,
+                "save_memory",
+                args,
+                "next-unknown",
+                wrapper=app.call_wrapper(memory.service, "s", "u"),
+            )
+            assert second == first
+            found = memory.service.search("reminders", limit=10, include_raw=False)["records"]
+            assert len(found) == int(after_put)
+
+
+@pytest.mark.parametrize("invalid", [False, True])
+def test_next_real_langgraph_dynamic_catalog_after_hook_and_original_wrapper(tmp_path, invalid):
+    from langchain_core.language_models.fake_chat_models import FakeMessagesListChatModel
+    from langchain_core.utils.function_calling import convert_to_openai_tool
+    from langgraph.checkpoint.sqlite import SqliteSaver
+
+    from milai_lab.baselines.langmem_agent import build_agent
+
+    class ScriptModel(FakeMessagesListChatModel):
+        tool_save_communication: str = "legacy"
+        tool_schema_communication: str = "legacy"
+        research_profile: Any = None
+        unknown_tool_feedback: bool = False
+        bound: list[Any]
+
+        def bind_tools(self, tools, **kwargs):
+            self.bound.append([convert_to_openai_tool(tool) for tool in tools])
+            return self
+
+    with FunctionalApplication.open(tmp_path, "reservation", "alice") as app:
+        with opened(tmp_path, interface_version="I2", features=NEXT_FEATURES) as memory:
+            memory.service.capture_user("s", "u", "Remember my quiet reminders.")
+            proposal = next_sdk_create()
+            if invalid:
+                proposal["clauses"][0]["evidence"] = ["e99"]
+            model = ScriptModel(
+                bound=[],
+                responses=[
+                    AIMessage(
+                        content="",
+                        tool_calls=[
+                            {
+                                "name": "save_memory",
+                                "id": "scripted-save",
+                                "type": "tool_call",
+                                "args": {"proposal": proposal},
+                            }
+                        ],
+                    ),
+                    AIMessage(content="done"),
+                ]
+            )
+            hooks = []
+
+            def hook(state, config):
+                memory.writer_context("s", "u", "functional-m-test-v1")
+                hooks.append("actual_context")
+                return {"llm_input_messages": state["messages"]}
+
+            def catalog(config):
+                assert hooks
+                return memory.writer_tools(config)
+
+            before = app.world.snapshot()
+            with SqliteSaver.from_conn_string(str(tmp_path / "graph.sqlite")) as saver:
+                agent = build_agent(
+                    model,
+                    memory.service.store,
+                    saver,
+                    memory_tools=memory.tools(),
+                    benchmark_view_hook=hook,
+                    model_tools_provider=catalog,
+                    business_call_wrapper=app.call_wrapper(memory.service, "s", "u"),
+                )
+                final = agent.invoke(
+                    {"messages": [HumanMessage(content="Remember my quiet reminders.")]}, cfg()
+                )
+            first_catalog = {t["function"]["name"]: t for t in model.bound[0]}
+            assert "update_memory" not in first_catalog
+            assert '"enum"' in json.dumps(first_catalog["save_memory"])
+            assert '"e1"' in json.dumps(first_catalog["save_memory"])
+            clause_schema = first_catalog["save_memory"]["function"]["parameters"]["properties"][
+                "proposal"
+            ]["properties"]["clauses"]["items"]
+            for variant in clause_schema["oneOf"]:
+                assert "binding" in variant["properties"]["conditions"]["items"]["oneOf"][0][
+                    "properties"
+                ]
+            result = next(
+                msg
+                for msg in final["messages"]
+                if getattr(msg, "tool_call_id", None) == "scripted-save"
+            )
+            assert result.status == ("error" if invalid else "success")
+            assert len(memory.service.search("reminders", include_raw=False)["records"]) == int(
+                not invalid
+            )
+            assert app.world.snapshot() == before
 
 
 @contextmanager
@@ -142,15 +766,54 @@ def whole_rewrite_args(
     }
 
 
-def test_four_arm_public_mapping_retains_the_default_m_identity(tmp_path: Path) -> None:
+def test_public_mapping_retains_the_default_m_identity(tmp_path: Path) -> None:
     assert FUNCTIONAL_ARMS == {
         FUNCTIONAL_B0_METHOD: "B0", FUNCTIONAL_B1_METHOD: "B1",
         FUNCTIONAL_B2_METHOD: "B2", FUNCTIONAL_METHOD: "M",
+        "milai_fact_append_v1": "Append-only",
     }
     with opened(tmp_path) as memory:
         assert memory.arm == "M" and memory.policy["memory_method"] == FUNCTIONAL_METHOD
         assert memory.policy["integration_version"] == "functional_m_v1"
         assert memory.formation_support_review is None and memory.revision_support_review is None
+
+
+def test_append_host_correction_keeps_old_report_and_original_assertion_times(tmp_path):
+    with opened(tmp_path, arm="Append-only", interface_version="I2", features=NEXT_FEATURES,
+                maintenance_recipe="single_pass") as memory:
+        first = None
+        for index, color in enumerate(["blue", "red"]):
+            message_id = "u" if index == 0 else "u2"
+            date = f"2030-01-0{index + 1}"
+            memory.service.capture_user("s", message_id, f"My marker is now {color}.",
+                                        occurred_at=date)
+            memory.context("s", message_id, "functional-m-test-v1")
+
+            def call(stage, messages, schema, reported=color):
+                assert stage == "edit"
+                packet = json.loads(messages[1]["content"])["delivery"]
+                if reported == "red":
+                    assert any("blue" in str(record) for record in packet["records"])
+                return {"creates": [{"action": "create", "matter": "Marker", "clauses": [{
+                    "text": f"My marker is now {reported}.", "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"},
+                }]}], "records": {}}
+
+            results = memory.maintain_sources(cfg(message_id), recipe="single_pass",
+                                              model_call=call, allowed=True)
+            assert results[0]["status"] == "completed" and results[0]["semantic_write_performed"]
+            records = memory.service.records()
+            if first is None:
+                first = copy.deepcopy(records[0])
+            assert memory.service.read(first["id"])["value"] == first["value"]
+        assert len(records) == 2
+        assert {r["value"]["method_arm"] for r in records} == {"Append-only"}
+        assert {r["value"]["edit_state"]["units"][0]["assertion"]["occurred_at"]
+                for r in records} == {"2030-01-01", "2030-01-02"}
+        assert "update_memory" not in {tool.name for tool in memory.writer_tools(cfg("u2"))}
+        with pytest.raises(FunctionalRejection, match="APPEND_ONLY_CREATE_REQUIRED"):
+            memory.apply_writer_proposal(cfg("u2"), "rewrite", {"action": "rewrite"})
+        assert memory.service.records() == records
 
 
 def test_opt_in_actual_wrapper_save_confirmation_and_archived_continuation(tmp_path: Path) -> None:
@@ -214,8 +877,9 @@ def test_opt_in_actual_wrapper_save_confirmation_and_archived_continuation(tmp_p
 
 @pytest.mark.parametrize("stage", ["formation", "revision"])
 @pytest.mark.parametrize("arm", ["M", "B1", "B0", "B2"])
+@pytest.mark.parametrize("bounded", [False, True])
 def test_actual_review_rejection_reopen_and_corrected_formation_or_local_revision(
-    tmp_path: Path, stage: str, arm: str
+    tmp_path: Path, stage: str, arm: str, bounded: bool
 ) -> None:
     reviewed: list[dict[str, Any]] = []
 
@@ -243,7 +907,9 @@ def test_actual_review_rejection_reopen_and_corrected_formation_or_local_revisio
             assert "Unsupported broad claim" in content["after"]
             raise FunctionalRejection("SCRIPTED_UNSUPPORTED_M_PROPOSAL")
 
-    options = {"formation_support_review": review, "revision_support_review": review, "arm": arm}
+    options = {"formation_support_review": review, "revision_support_review": review, "arm": arm,
+               "semantic_reproposal_policy": "maintenance_two_proposals_v1" if bounded
+               else "message_limit_only"}
     with (
         FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app,
         opened(tmp_path, **options) as memory,
@@ -480,6 +1146,19 @@ def test_same_id_override_retract_history_reader_and_forget_after_reopen(tmp_pat
         surviving = memory.service.read(saved["id"])["value"]["edit_state"]
         assert surviving["units"][:2] == old_state["units"]
         assert not any(r["relation_type"] == "overrides" for r in surviving["relations"])
+        reader = FunctionalEditMemory(
+            memory.service, len, interface_version="I2", features=NEXT_FEATURES,
+            material_limit=memory.material_limit, read_limit=memory.read_limit,
+        )
+        page = json.loads(invoke(
+            reader, "read_memory", {"record_id": saved["id"]}, "read-after-cancel", "cancel"
+        ).content)
+        prior_scope = [item["revision_scope"] for item in page["items"] if "revision_scope" in item]
+        assert len(prior_scope) == 1
+        assert prior_scope[0]["current_unit_id"] == old_state["units"][0]["unit_id"]
+        assert prior_scope[0]["previous_revision"] == 2
+        assert len(canonical(page)) <= reader.material_limit
+        assert memory.service.read(saved["id"])["value"]["edit_state"] == surviving
     with opened(tmp_path) as memory:
         turn(memory, "forget", "Forget the exhibition memory and its supporting sources.")
         current = memory.service.read(saved["id"])
@@ -1105,3 +1784,513 @@ def test_reader_omitted_ranges_are_not_delivered_and_full_withdrawal_retains_his
         assert memory.service.source(ref) is None
     with opened(tmp_path, arm=arm) as memory:
         assert not memory.service.read(saved["id"], 1)["ok"]
+
+
+def writer_turn(memory, message, text):
+    memory.service.capture_user("s", message, text)
+    return memory.writer_context("s", message, "functional-m-test-v1")
+
+
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+@pytest.mark.parametrize("profile", ["I1", "I2"])
+def test_v2_sdk_writer_formation_same_id_support_and_history(tmp_path, arm, profile):
+    with opened(tmp_path, arm=arm, interface_version=profile) as memory:
+        packet = writer_turn(memory, "u", "Use quiet reminders only during exhibition.")
+        assert packet["writer_packet"]["records"] == []
+        proposal = {
+            "action": "create",
+            "units": [
+                {"text": "Use quiet reminders", "evidence": ["e1"]},
+                {
+                    "text": "Only during exhibition",
+                    "role": "condition" if memory.conditioned else "content",
+                    "evidence": ["e1"],
+                },
+            ],
+        }
+        if memory.conditioned:
+            proposal["relations"] = [
+                {"source": 1, "target": 0, "relation_type": "modifies", "evidence": ["e1"]}
+            ]
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": proposal}, "v2-save").content)
+        assert saved["ok"], saved
+        old = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        packet = writer_turn(memory, "u2", "Use a soft tone instead; exhibition limit remains.")
+        assert packet["writer_packet"]["records"][0]["id"] == "r1"
+        assert saved["id"] not in canonical(packet["writer_packet"])
+        if memory.local:
+            update = {
+                "action": "edit",
+                "target": "r1",
+                "edits": [
+                    {
+                        "operation": "replace",
+                        "target_unit": "u1",
+                        "text": "Use a soft tone",
+                        "evidence": ["e1"],
+                        "keep_support": ["h1"],
+                    }
+                ],
+            }
+        else:
+            update = {
+                "action": "rewrite",
+                "target": "r1",
+                "units": [
+                    {"text": "Use a soft tone", "evidence": ["e1"], "keep_support": ["h1"]},
+                    {
+                        "text": "Only during exhibition",
+                        "role": "condition" if memory.conditioned else "content",
+                        "evidence": [],
+                        "keep_support": ["h2"],
+                    },
+                ],
+            }
+            if memory.conditioned:
+                update["relations"] = [
+                    {
+                        "source": 1,
+                        "target": 0,
+                        "relation_type": "modifies",
+                        "evidence": [],
+                        "keep_support": ["h3"],
+                    }
+                ]
+        changed = json.loads(
+            invoke(memory, "update_memory", {"proposal": update}, "v2-update", "u2").content
+        )
+        assert changed["ok"] and changed["revision"] == 2, changed
+        assert changed["id"] == saved["id"]
+        assert memory.service.read(saved["id"], 1)["value"] == old
+        current = memory.service.read(saved["id"])["value"]
+        assert current["scope"] == old["scope"]
+        if memory.local:
+            assert current["edit_state"]["units"][1:] == old["edit_state"]["units"][1:]
+        repeat = json.loads(
+            invoke(memory, "update_memory", {"proposal": update}, "v2-update", "u2").content
+        )
+        assert repeat["replayed"] and memory.service.read(saved["id"])["value"]["revision"] == 2
+
+
+def test_v2_sdk_strict_arm_schema_unknown_short_ref_and_no_old_metadata_proof(tmp_path):
+    with opened(tmp_path, arm="B0", interface_version="I2") as memory:
+        writer_turn(memory, "u", "Use quiet reminders.")
+        proposal = {"action": "create", "units": [{"text": "Quiet reminders", "evidence": ["e1"]}]}
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": proposal}, "save").content)
+        assert saved["ok"]
+        writer_turn(memory, "u2", "Quiet reminders remain unchanged.")
+        bad = {
+            "action": "rewrite",
+            "target": "r1",
+            "units": [{"text": "Loud reminders", "evidence": [], "keep_support": ["h1"]}],
+        }
+        rejected = json.loads(
+            invoke(memory, "update_memory", {"proposal": bad}, "bad-h", "u2").content
+        )
+        assert not rejected["ok"] and "CHANGED_CLAIM" in rejected["reason"]
+        bad = {"action": "edit", "target": "r1", "edits": []}
+        rejected = json.loads(
+            invoke(memory, "update_memory", {"proposal": bad}, "bad-edit", "u2").content
+        )
+        assert not rejected["ok"] and "PUBLIC_PROPOSAL" in rejected["reason"]
+        with pytest.raises(ValidationError):
+            invoke(
+                memory,
+                "update_memory",
+                {"proposal": {"action": "no_change", "target": "r1"}, "edits": []},
+                "extra",
+                "u2",
+            )
+        assert memory.service.read(saved["id"])["value"]["revision"] == 1
+        tools = {tool.name: tool for tool in memory.tools()}
+        schema = tools["update_memory"].tool_call_schema.model_json_schema()
+        assert "tool_call_id" not in schema["properties"] and "config" not in schema["properties"]
+        assert "rewrite" in canonical(schema) and '"edit"' not in canonical(schema)
+        assert "base_revision" not in canonical(schema)
+
+
+@pytest.mark.parametrize("after_put", [False, True])
+@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
+def test_v2_actual_wrapper_unknown_reopen_uses_same_decoded_operation(
+    tmp_path, monkeypatch, arm, after_put
+):
+    args = {
+        "proposal": {"action": "create", "units": [{"text": "Quiet reminders", "evidence": ["e1"]}]}
+    }
+    with FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app:
+        with opened(tmp_path, arm=arm, interface_version="I2") as memory:
+            writer_turn(memory, "u", "Keep quiet reminders.")
+            original = memory.service.store.put
+            entered = 0
+
+            def failed(ns, key, value, **kwargs):
+                nonlocal entered
+                semantic = ns == memory.service.namespace and "_v13_1" in value
+                if semantic:
+                    entered += 1
+                    if not after_put:
+                        raise OSError("Synthetic unavailable commit")
+                original(ns, key, value, **kwargs)
+                if semantic:
+                    raise OSError("Synthetic lost commit acknowledgement")
+
+            monkeypatch.setattr(memory.service.store, "put", failed)
+            wrapper = app.call_wrapper(memory.service, "s", "u")
+            response = invoke(memory, "save_memory", args, "save-v2-unknown", wrapper=wrapper)
+            receipt = json.loads(response.content)
+            assert receipt["status"] == "outcome_unknown" and receipt["phase"] == "semantic_commit"
+            assert entered == 1
+            monkeypatch.setattr(memory.service.store, "put", original)
+            assert (
+                invoke(memory, "save_memory", args, "save-v2-unknown", wrapper=wrapper) == response
+            )
+            assert len(memory.service.records()) == int(after_put)
+    with FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app:
+        with opened(tmp_path, arm=arm, interface_version="I2") as memory:
+            memory.writer_context("s", "u", "functional-m-test-v1")
+            wrapper = app.call_wrapper(memory.service, "s", "u")
+            assert (
+                invoke(memory, "save_memory", args, "save-v2-unknown", wrapper=wrapper) == response
+            )
+            if after_put:
+                direct = memory.apply_writer_proposal(cfg(), "save-v2-unknown", args["proposal"])
+                assert direct["replayed"] and direct["revision"] == 1
+            assert len(memory.service.records()) == int(after_put)
+
+
+def test_v2_whole_record_partial_and_undelivered_fragment_cannot_gain_alias(tmp_path):
+    with opened(tmp_path, arm="B0", interface_version="I2", fragment_chars=80) as memory:
+        writer_turn(memory, "u", "Quiet reminders.")
+        text = "Quiet reminder conditions remain unchanged. " * 12
+        args = {"proposal": {"action": "create", "units": [{"text": text, "evidence": ["e1"]}]}}
+        saved = json.loads(invoke(memory, "save_memory", args, "save").content)
+        assert saved["ok"]
+        turn(memory, "u2", "Quiet reminders need maintenance.")
+        row = memory.service.read(saved["id"])
+        fragments = memory._record_units(row)
+        assert len(fragments) > 1
+        key = memory._writer_key(cfg("u2"), "edit-writer-delivery:")
+        from milai_lab.memory.functional_state import namespace
+
+        first = {"items": [fragments[0]]}
+        memory.service.store.put(namespace(memory.service), key, first, index=False)
+        partial = memory._writer_packet(cfg("u2"), {"ok": True})
+        assert partial["writer_packet"]["records"] == []
+        assert partial["unprocessed_records"][0]["reason"] == "complete_record_body_not_delivered"
+        # Existing read SDK pages supply missing chunks. Mere capture/issued spans do not.
+        extra = memory.service.capture_user("s", "not-delivered", "Unseen correction.")[
+            "source_ref"
+        ]
+        handle = memory.service.source_fragment_range(extra, 0, len("Unseen correction."))[
+            "fragment_handle"
+        ]
+        assert all(
+            handle != e["evidence_id"]
+            for e in memory.writer.load_mapping(
+                memory.service.store.get(
+                    namespace(memory.service), memory._writer_key(cfg("u2"), "edit-writer-active:")
+                ).value["mapping_id"]
+            )["evidence"].values()
+        )
+        read = json.loads(
+            invoke(memory, "read_memory", {"record_id": saved["id"]}, "read-complete", "u2").content
+        )
+        assert read["ok"]
+        complete = memory._writer_packet(cfg("u2"), {"ok": True})
+        assert complete["writer_packet"]["records"][0]["units"][0]["text"] == text
+        assert not complete["unprocessed_records"]
+
+
+@pytest.mark.parametrize("arm", ["B0", "B2"])
+def test_v2_actual_sdk_whole_withdrawal_history_and_forget(tmp_path, arm):
+    with opened(tmp_path, arm=arm, interface_version="I2") as memory:
+        writer_turn(memory, "u", "Use quiet reminders.")
+        saved = json.loads(
+            invoke(
+                memory,
+                "save_memory",
+                {
+                    "proposal": {
+                        "action": "create",
+                        "units": [{"text": "Quiet reminders", "evidence": ["e1"]}],
+                    }
+                },
+                "save",
+            ).content
+        )
+        assert saved["ok"]
+        writer_turn(memory, "cancel", "Cancel quiet reminders.")
+        canceled = json.loads(
+            invoke(
+                memory,
+                "update_memory",
+                {
+                    "proposal": {
+                        "action": "rewrite",
+                        "target": "r1",
+                        "units": [],
+                        "withdrawal_evidence": ["e1"],
+                    }
+                },
+                "cancel",
+                "cancel",
+            ).content
+        )
+        assert canceled["ok"] and canceled["revision"] == 2
+        assert memory.service.read(saved["id"])["status"] == "retracted"
+        history = json.loads(
+            invoke(
+                memory,
+                "read_memory",
+                {"record_id": saved["id"], "history": True},
+                "history",
+                "cancel",
+            ).content
+        )
+        assert history["ok"] and history["items"]
+        forgotten = json.loads(
+            invoke(
+                memory,
+                "forget_memory",
+                {
+                    "read_handle": next(
+                        item["read_handle"] for item in history["items"] if item["revision"] == 2
+                    )
+                },
+                "forget",
+                "cancel",
+            ).content
+        )
+        assert forgotten["ok"]
+        assert not memory.service.read(saved["id"], 1)["ok"]
+
+
+def test_v2_review_uses_immutable_proposal_and_rejection_keeps_history(tmp_path):
+    calls = []
+
+    def review(evidence, delivered):
+        item = memory.service.store.get(
+            (*memory.service.namespace, "prepared_proposals"),
+            reference_key(["s", evidence["proposal_id"]]),
+        )
+        assert item is not None and item.value["proposal"]["method_version"] == "milai_edit_v2"
+        calls.append(evidence["proposal_id"])
+        delivered()
+        if evidence["proposal_id"] == "unsupported":
+            raise FunctionalRejection("SYNTHETIC_UNSUPPORTED")
+
+    with opened(
+        tmp_path,
+        interface_version="I2",
+        formation_support_review=review,
+        revision_support_review=review,
+    ) as memory:
+        writer_turn(memory, "u", "Quiet reminders.")
+        saved = json.loads(
+            invoke(
+                memory,
+                "save_memory",
+                {
+                    "proposal": {
+                        "action": "create",
+                        "units": [{"text": "Quiet reminders", "evidence": ["e1"]}],
+                    }
+                },
+                "save",
+            ).content
+        )
+        assert saved["ok"]
+        before = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        writer_turn(memory, "u2", "Quiet reminders now use a soft tone.")
+        proposal = {
+            "action": "edit",
+            "target": "r1",
+            "edits": [
+                {
+                    "operation": "replace",
+                    "target_unit": "u1",
+                    "text": "Unsupported universal tone",
+                    "evidence": ["e1"],
+                }
+            ],
+        }
+        failed = json.loads(
+            invoke(memory, "update_memory", {"proposal": proposal}, "unsupported", "u2").content
+        )
+        assert not failed["ok"] and "SYNTHETIC_UNSUPPORTED" in failed["reason"]
+        assert memory.service.read(saved["id"])["value"] == before
+        assert memory.service.read(saved["id"], 1)["value"] == before
+        proposal["edits"][0]["text"] = "Quiet reminders use a soft tone"
+        accepted = json.loads(
+            invoke(memory, "update_memory", {"proposal": proposal}, "supported", "u2").content
+        )
+        assert accepted["ok"] and accepted["revision"] == 2
+        assert calls == ["save", "unsupported", "supported"]
+
+
+def test_v2_nonmatching_representation_rejected_and_no_change_does_not_form(tmp_path):
+    with opened(tmp_path, arm="B1") as old:
+        evidence = turn(old, "u", "Quiet reminders.")
+        saved = json.loads(
+            invoke(
+                old,
+                "save_memory",
+                {"units": [{"text": "Quiet reminders", "evidence": evidence}]},
+                "save-old",
+            ).content
+        )
+        assert saved["ok"]
+    with opened(tmp_path, arm="M", interface_version="I2") as memory:
+        writer_turn(memory, "u2", "Quiet reminders now use a soft tone.")
+        update = {
+            "action": "edit",
+            "target": "r1",
+            "edits": [
+                {
+                    "operation": "replace",
+                    "target_unit": "u1",
+                    "text": "Quiet soft reminders",
+                    "evidence": ["e1"],
+                }
+            ],
+        }
+        rejected = json.loads(
+            invoke(memory, "update_memory", {"proposal": update}, "wrong-repr", "u2").content
+        )
+        assert not rejected["ok"] and "EXPLICIT_M_FORMATION_REQUIRED" in rejected["reason"]
+        assert memory.service.read(saved["id"])["value"]["revision"] == 1
+        global_no_change = json.loads(
+            invoke(
+                memory, "update_memory", {"proposal": {"action": "no_change"}}, "none", "u2"
+            ).content
+        )
+        assert global_no_change["ok"] and global_no_change["status"] == "no_change"
+        assert global_no_change["id"] is None
+        assert len(memory.service.records()) == 1
+
+
+@pytest.mark.parametrize("fault", ["after_commit", "during_extract"])
+def test_shared_recipe_recovery_preserves_effect_and_unknown_call(tmp_path, fault):
+    from milai_lab.methods.edit_maintenance import maintain_event
+
+    calls = []
+    with opened(tmp_path, arm="B1", interface_version="I2") as memory:
+        turn(memory, "u", "Remember the marker is blue.")
+        ref = memory._binding(cfg())["source_ref"]
+        delivery = memory.writer.prepare([ref], "", selected_records=[], redelivered_ranges=[])
+
+        def call(stage, messages, schema):
+            calls.append(stage)
+            if stage == "extract":
+                if fault == "during_extract":
+                    raise OSError("lost extraction response")
+                return {"changes": []}
+            return {"proposals": [{"action": "create", "units": [
+                {"text": "The marker is blue.", "evidence": ["e1"]}]}]}
+
+        def commit(operation, proposal, mapping):
+            memory.service.store.put(
+                namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
+                {"mapping_id": mapping["mapping_id"]}, index=False,
+            )
+            receipt = memory.apply_writer_proposal(cfg(), operation, proposal)
+            assert receipt["ok"]
+            raise OSError("crash after durable commit")
+
+        args = dict(session="s", request_id="batch", date="2026-10-07",
+                    recipe="extract_then_edit", model_call=call, commit=commit)
+        with pytest.raises(OSError):
+            maintain_event(memory.writer, delivery, **args)
+        count = len(calls)
+    with opened(tmp_path, arm="B1", interface_version="I2") as memory:
+        # Resume through the same functional mutation boundary and operation ID.
+        memory.context("s", "u", "functional-m-test-v1")
+        args["commit"] = lambda op, proposal, mapping: memory.apply_writer_proposal(
+            cfg(), op, proposal)
+        result = maintain_event(memory.writer, delivery, **args)
+        assert len(calls) == count
+        if fault == "after_commit":
+            assert result["status"] == "completed" and result["semantic_write_performed"]
+            assert len(memory.service.records()) == 1
+            assert memory.service.records()[0]["value"]["revision"] == 1
+        else:
+            assert result["status"] == "incomplete" and result["phase"] == "extract_pending"
+            assert result["unprocessed"][0]["reason"] == "model_outcome_unconfirmed"
+            assert memory.service.records() == []
+
+
+def test_shared_reader_expands_actual_exception_and_history_without_inheriting_scope(tmp_path):
+    from milai_lab.memory.edit_units import read_applicability
+
+    with opened(tmp_path, arm="M", interface_version="I2",
+                maintenance_recipe="extract_then_edit") as memory:
+        writer_turn(memory, "u", "Across the whole project, visit three times weekly this quarter.")
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": {
+            "action": "create", "units": [
+                {"text": "The whole project has three visits weekly.", "evidence": ["e1"]},
+                {"text": "This quarter.", "role": "condition", "evidence": ["e1"]}],
+            "relations": [{"source": 1, "target": 0, "relation_type": "modifies",
+                           "evidence": ["e1"]}],
+        }}, "save").content)
+        assert saved["ok"], saved
+        writer_turn(memory, "u2", "For branch A only, visit once weekly.")
+        scoped = json.loads(invoke(memory, "update_memory", {"proposal": {
+            "action": "edit", "target": "r1", "edits": [{
+                "operation": "override", "target_unit": "u1", "text": "One visit weekly.",
+                "condition": "Branch A only.", "evidence": ["e1"]}],
+        }}, "override", "u2").content)
+        assert scoped["ok"], scoped
+        row = memory.service.read(saved["id"])
+        before = copy.deepcopy(row["value"])
+        views = [u["applicability"] for u in memory._record_units(row)]
+        general = next(v for v in views if v["kind"] == "general_rule")
+        exception = next(v for v in views if v["kind"] == "scoped_exception")
+        assert [c["text"] for c in general["applies_under"]] == ["This quarter."]
+        assert [c["text"] for c in exception["applies_under"]] == ["Branch A only."]
+        assert exception["general_rules"][0]["text"] == general["text"]
+        assert general["exceptions"][0]["text"] == exception["text"]
+        assert memory.service.read(saved["id"])["value"] == before
+        # A missing original rule is reported, never reconstructed from an exception.
+        missing = copy.deepcopy(before["edit_state"])
+        missing["relations"] = []
+        missing["units"] = [dict(missing["units"][2], local_exception=True)]
+        missing_view = next(iter(read_applicability(missing).values()))
+        assert missing_view["general_rule_status"] == "not_stored"
+        writer_turn(memory, "u3", "Cancel the branch A exception.")
+        cancelled = json.loads(invoke(memory, "update_memory", {"proposal": {
+            "action": "edit", "target": "r1", "edits": [
+                {"operation": "retract", "target_unit": alias, "evidence": ["e1"]}
+                for alias in ("u3", "u4")],
+        }}, "cancel", "u3").content)
+        assert cancelled["ok"], cancelled
+        page = json.loads(invoke(memory, "read_memory", {
+            "record_id": saved["id"], "revision": 2,
+        }, "history", "u3").content)
+        assert page["ok"], page
+        assert any(u.get("applicability", {}).get("kind") == "scoped_exception"
+                   for u in page["items"])
+        current = memory._record_units(memory.service.read(saved["id"]))
+        assert all(not u["applicability"].get("exceptions") for u in current)
+        assert current[0]["applicability"]["text"] == general["text"]
+
+
+def test_shared_extraction_context_is_old_visible_speech_not_current_evidence(tmp_path):
+    with opened(tmp_path, arm="B1", interface_version="I2",
+                maintenance_recipe="extract_then_edit", recent_context="bank_recent_v2") as memory:
+        turn(memory, "old", "My reminder uses a chime.")
+        turn(memory, "u", "Make that quiet instead.")
+        seen = []
+
+        def call(stage, messages, schema):
+            payload = json.loads(messages[1]["content"])
+            seen.append(payload)
+            assert payload["prior_context"][0]["text"] == "My reminder uses a chime."
+            assert payload["prior_context"][0]["kind"] == "prior_context"
+            assert all(e["text"] == "Make that quiet instead."
+                       for e in payload["delivery"]["evidence"])
+            return {"changes": []} if stage == "extract" else {"proposals": []}
+
+        results = memory.maintain_sources(cfg(), recipe="extract_then_edit",
+                                          model_call=call, allowed=True)
+        assert len(seen) == 2 and results[0]["status"] == "completed"
+        assert memory.service.records() == []

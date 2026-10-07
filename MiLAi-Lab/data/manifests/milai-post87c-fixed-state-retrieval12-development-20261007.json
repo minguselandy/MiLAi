@@ -1,0 +1,67 @@
+{
+  "status": "PRESELECTED_PREPARED_NOT_ADMITTED_NO_NEW_HTTP",
+  "plan": "milai-post-87c-current-first-plan-1.0 sections6.2,9",
+  "source_reference": "Bind the exact commit containing this declaration and unchanged retrieval source before HTTP; own Fast success required",
+  "actual_state_source": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "snapshot_arm": "M",
+  "exposed_development_users": 4,
+  "query_state_pairs": 12,
+  "pairs_per_user": 3,
+  "preselected_original_query_positions": [
+    {"user_position": 0, "ordinals": [1, 4, 7], "question_position": 0},
+    {"user_position": 1, "ordinals": [0, 2, 5], "question_position": 0},
+    {"user_position": 2, "ordinals": [0, 4, 7], "question_position": 0},
+    {"user_position": 3, "ordinals": [0, 2, 7], "question_position": 0}
+  ],
+  "selection": "Actual original questions and their actual current states,3 per user, fixed before new ranking. Root selected necessary records by literal state review; no ideal/gold cards or winner-based replacement. The earlier culinary diagnosis remains exposed history.",
+  "Root_literal_state_availability_before_ranking": {
+    "direct_answer_present": 7,
+    "old_context_only": 1,
+    "no_saved_direct_answer": 4
+  },
+  "Root_review_scope": "Selected complete relevant records and complete literal visible banks for missing-answer controls; earlier source review is selective. Not an independent source/database audit.",
+  "conditions": {
+    "L": "Unicode literal-body lexical score, only positive matches; same ordinary ID tie order as service.",
+    "L_plain_fill": "L first, then unseen visible records in fixed ordinary ID ascending order, unrelated to query, up to K.",
+    "D": "Existing bge-m3 normalized dense cosine over the same literal bodies, ordinary ID tie order, top K.",
+    "H": "The already implemented fixed alternating lexical/dense de-duplication in memory/retrieval.py, same K; no tuned weights or thresholds."
+  },
+  "H_rule_scope": "Current fixed interleave is the simple alternative permitted by plan6.2 to avoid a full lexical page excluding dense candidates. Prior lexical-first/dense-fill3-Reader diagnosis is retained separately, not relabeled as this H.",
+  "K": 10,
+  "Reader_material_tokens_max": 8192,
+  "material_limit_policy": "Complete selected record material must fit the same limit; otherwise preserve pre-HTTP capacity failure. Do not truncate, inject sources or silently replace records.",
+  "Reader": {
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 1.0,
+    "enable_thinking": true,
+    "max_tokens": 32768,
+    "timeout": 300,
+    "context_tokens": 65536,
+    "input_limit": 32256,
+    "prompt_and_material_format": "Existing benchmark reader_messages, original question/date, actual content/scope/revision only"
+  },
+  "embedding": {
+    "model": "bge-m3",
+    "dimension": 1024,
+    "context_tokens": 8192,
+    "batch_size": 16,
+    "all_actual_calls_billed_to_existing_continuous_ledger": true,
+    "identical_owner_record_body_vectors_shared_within_diagnostic": true
+  },
+  "planned_Reader_conditions": 48,
+  "Reader_HTTP_max": 48,
+  "identical_request_policy": "Byte-equivalent message objects within the same preselected pair share one completed actual Reader attempt and are identified as shared, including known failures; all4 condition rows remain. No hash, repeated sampling or outcome-based retry.",
+  "Writer_calls": 0,
+  "Judge_calls": 0,
+  "bank_writes": 0,
+  "actual_model_calls": 0,
+  "no_future_questions_or_evaluator_labels_in_Writer": true,
+  "no_gold_targets_in_Reader_or_ranking": true,
+  "before_HTTP": "Published source/declaration, own Fast success, immutable admitted config/frozen source, existing serial ledger lease; no pending model process or unknown replay.",
+  "after_run": "Root complete answers, actual delivery/necessary coverage/input counts/costs, saved fact availability; choose the simplest common retrieval before own-empty R3 and full four-arm comparison.",
+  "original_R3": "Unchanged exposed two branches44/36 remain required; prepared global5-event ownempty all4 config is not admitted or run.",
+  "candidate_selected": false,
+  "method_advantage_established": false,
+  "Product_status": "NO_GO",
+  "raw_query_state_targets_predictions_HTTP_DB_private_configs": "IGNORED"
+}

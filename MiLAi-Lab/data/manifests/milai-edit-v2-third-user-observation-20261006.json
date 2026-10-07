@@ -1,0 +1,284 @@
+{
+  "status": "THIRD_DEVELOPMENT_USER_B0_COMPLETE_HISTORY_WITH_GAPS_NOT_FULL_FOUR_ARM_RESULT",
+  "observed_at": "2026-10-05T18:50:08.439133+00:00",
+  "user": "6106afc1-6ad6-c821-3f0f-b491e3e0b833",
+  "source_commit": "4357d46aa45e16ab876899b69db69d8539d63ebd",
+  "interface": "I2",
+  "config_version": "milai-edit-common-v2-i2-durability",
+  "maintenance_sessions": 62,
+  "evaluation_sessions": 62,
+  "writer_requests": 62,
+  "known_failed_writer_requests": 13,
+  "session_terminals": {
+    "COMPLETE_WITH_GAPS": 36,
+    "COMPLETE_ATTEMPTS": 26
+  },
+  "receipt_statuses": {
+    "committed": 23,
+    "rejected": 35
+  },
+  "rejection_reasons": {
+    "current_boundary_source_required": 20,
+    "FunctionalRejection: EDIT_CHANGED_CLAIM_REQUIRES_NEW_EVIDENCE": 1,
+    "FunctionalRejection: EDIT_SHORT_SUPPORT_UNAVAILABLE": 3,
+    "FunctionalRejection: EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE": 11
+  },
+  "distributions": {
+    "provider_prompt_tokens": {
+      "min": 3287,
+      "median": 32244.5,
+      "max": 43323
+    },
+    "provider_completion_tokens": {
+      "min": 8,
+      "median": 5790.5,
+      "max": 8192
+    },
+    "old_body_tokens": {
+      "min": 0,
+      "median": 3445.0,
+      "max": 5675
+    },
+    "units_delivered": {
+      "min": 0,
+      "median": 140.0,
+      "max": 191
+    },
+    "old_unit_listing": {
+      "min": 1,
+      "median": 7151.0,
+      "max": 10809
+    },
+    "historical_support": {
+      "min": 1,
+      "median": 9748.0,
+      "max": 12772
+    },
+    "current_evidence": {
+      "min": 641,
+      "median": 3510.5,
+      "max": 5316
+    },
+    "source_table": {
+      "min": 827,
+      "median": 9859.0,
+      "max": 13469
+    }
+  },
+  "coverage_totals": {
+    "original_characters": 812373,
+    "covered_characters": 812373,
+    "sent_core_characters_union": 812373,
+    "response_received_core_characters_union": 812373,
+    "complete_parsed_core_characters_union": 641488,
+    "sent_characters_including_repeats_and_context": 812373
+  },
+  "writer_actual_usage": {
+    "prompt_tokens": 1747230,
+    "completion_tokens": 300278,
+    "total_tokens": 2047508
+  },
+  "prompt_count_mismatches": 0,
+  "input_exceeds_context_minus_configured_output": 0,
+  "create_proposals": 2,
+  "final_records": 2,
+  "final_units": 191,
+  "final_record_unit_counts": [
+    176,
+    15
+  ],
+  "literal_output_analysis": {
+    "status": "ROOT_OFFLINE_LITERAL_OUTPUT_COMPOSITION_NOT_SEMANTIC_EVALUATION",
+    "observed_at": "2026-10-05T18:42:35.839856+00:00",
+    "arm": "B0",
+    "closed_sessions": {
+      "maintenance": 62,
+      "evaluation": 62
+    },
+    "new_model_calls": 0,
+    "writer_batches": 62,
+    "length_batches": 13,
+    "length_summary": {
+      "all_states_unchanged_no_receipts": true,
+      "all_whole_json_incomplete": true,
+      "all_delivered_one_record": false,
+      "copied_complete_fragments": 1927,
+      "other_complete_fragments": 1,
+      "copied_fragment_fraction_of_local_output_tokens": {
+        "min": 0.9188232421875,
+        "median": 0.9765625,
+        "max": 0.987060546875
+      },
+      "aggregated_local_tokens_by_unit_fragment": {
+        "envelope_or_incomplete_tail": 3306,
+        "literal_old_unit": 102965,
+        "other_complete_unit": 225
+      },
+      "aggregated_local_tokens_by_field": {
+        "envelope_or_incomplete_tail": 3306,
+        "complete_unit_syntax": 36764,
+        "text_literal": 48933,
+        "role_literal": 3331,
+        "support_arrays": 14162
+      },
+      "local_minus_provider_completion_tokens": {
+        "min": 0,
+        "median": 0,
+        "max": 0
+      }
+    },
+    "limits": [
+      "Only complete literal unit objects already present in the actual response prefix are inspected; incomplete responses are never repaired, submitted or scored as maintenance.",
+      "All token buckets use a single local tokenization and midpoint-based field assignment; boundary tokens may span fields. Provider usage remains separate.",
+      "Literal old-unit matching consumes a Counter of role/text occurrences; identity preservation is not semantic correctness.",
+      "The incomplete tail is unclassified. Missing new content beyond it is unknown, rather than assumed absent.",
+      "Only the first units array is inspected. Later arrays and incomplete tails remain unclassified.",
+      "This describes one declared closed user under one implementation; it does not establish a four-arm method effect or an irreducible output bound."
+    ]
+  },
+  "three_view_observation": {
+    "status": "CLOSED_USER_THREE_VIEW_COUNTS_NOT_SEMANTIC_SCORE",
+    "observed_at": "2026-10-05T18:42:42.221152+00:00",
+    "arm": "B0",
+    "closed_sessions": {
+      "maintenance": 62,
+      "evaluation": 62
+    },
+    "writer_batches": 62,
+    "categories": {
+      "committed": 19,
+      "partial_commit_and_rejected": 4,
+      "rejected_only": 19,
+      "complete_empty": 7,
+      "incomplete_writer": 13
+    },
+    "totals": {
+      "new_or_changed_units": 202,
+      "removed_or_replaced_units": 11,
+      "new_or_changed_relations": 0,
+      "removed_or_replaced_relations": 0,
+      "official_extracted_characters": 212154,
+      "new_or_changed_unit_characters": 30830,
+      "unchanged_text_unit_count": 1535
+    },
+    "zero_text_delta_commits": [
+      {
+        "original_session": 14,
+        "batch": 0,
+        "category": "partial_commit_and_rejected",
+        "committed": 1,
+        "rejected": 1,
+        "state_unchanged": false,
+        "new_or_changed_units": 0,
+        "removed_or_replaced_units": 0,
+        "new_or_changed_relations": 0,
+        "removed_or_replaced_relations": 0,
+        "official_extracted_characters": 5517,
+        "new_or_changed_unit_characters": 0,
+        "unchanged_text_unit_count": 47,
+        "added_support_occurrences": 10,
+        "removed_support_occurrences": 1,
+        "semantic_review": "MISSED_CHANGED_PREFERENCE_AND_REPLACED_SUPPORT_WITH_CONTRADICTORY_CURRENT_EVIDENCE"
+      },
+      {
+        "original_session": 20,
+        "batch": 0,
+        "category": "committed",
+        "committed": 1,
+        "rejected": 0,
+        "state_unchanged": false,
+        "new_or_changed_units": 0,
+        "removed_or_replaced_units": 0,
+        "new_or_changed_relations": 0,
+        "removed_or_replaced_relations": 0,
+        "official_extracted_characters": 8152,
+        "new_or_changed_unit_characters": 0,
+        "unchanged_text_unit_count": 66,
+        "added_support_occurrences": 12,
+        "removed_support_occurrences": 0,
+        "semantic_review": "CORE_PREFERENCE_REAFFIRMED_IN_ALREADY_MATCHING_STATE_WITH_ADDITIONAL_PLANS_UNSTORED"
+      }
+    ],
+    "new_model_calls": 0,
+    "candidate_selected": false,
+    "limits": [
+      "Existing exact text/role/edge deltas are aggregated without new scoring.",
+      "Support occurrences use a multiset, preserving duplicate claims.",
+      "Failed and rejected unchanged states are not preservation successes.",
+      "Zero text delta may miss a new requirement; Root semantic review remains.",
+      "One closed development user does not establish a four-arm method result."
+    ]
+  },
+  "root_localized_semantic_reviews": [
+    {
+      "original_session": 14,
+      "finding": "MISSED_CHANGED_PREFERENCE_AND_REPLACED_SUPPORT_WITH_CONTRADICTORY_CURRENT_EVIDENCE",
+      "reviewer": "Root",
+      "independent_review": false,
+      "new_model_calls": 0,
+      "basis": "Actual delivered user statements, generated proposals, receipts and before/after states.",
+      "observation": "The user enjoyed a controlled extreme-sport experience and intended to explore safe events with friends. The committed rewrite retained the old categorical avoidance claim, replaced its historical support with ten current user fragments, and changed only support/version. A second record rewrite was rejected for lack of current-boundary support.",
+      "support_occurrences": {
+        "added": 10,
+        "removed": 1
+      },
+      "committed_revision_before": 7,
+      "committed_revision_after": 8,
+      "saved_author_update_labels": {
+        "Omission": 1
+      },
+      "preservation_success": false,
+      "limit": "Structural evidence selection did not establish semantic entailment; this localized review is not a new aggregate score."
+    },
+    {
+      "original_session": 20,
+      "finding": "CORE_PREFERENCE_REAFFIRMED_IN_ALREADY_MATCHING_STATE_WITH_ADDITIONAL_PLANS_UNSTORED",
+      "reviewer": "Root",
+      "independent_review": false,
+      "new_model_calls": 0,
+      "basis": "Actual delivered user statements, generated proposal, receipt and before/after states.",
+      "observation": "Avoidance of high-altitude destinations because of altitude sickness was already present before this event. Current user statements reaffirmed comfort-oriented travel; the rewrite retained that claim and its old support and added twelve current user support fragments. The core preference is therefore not a missing update inferred from zero text delta. The expressed interest in discussing travel plans with friends was not represented in the resulting state.",
+      "support_occurrences": {
+        "added": 12,
+        "removed": 0
+      },
+      "committed_revision_before": 10,
+      "committed_revision_after": 11,
+      "saved_author_update_labels": {
+        "Correct": 2
+      },
+      "preservation_success": null,
+      "limit": "Core preference correspondence is narrower than full new-requirement completion, semantic preservation or source fidelity."
+    }
+  ],
+  "saved_author_label_counts": {
+    "update": {
+      "Hallucination": 9,
+      "Omission": 78,
+      "Omitted": 4,
+      "Correct": 32
+    },
+    "qa": {
+      "Correct": 50,
+      "Hallucination": 82,
+      "Omission": 36,
+      "None": 1
+    }
+  },
+  "official_aggregate_score": null,
+  "scoring_scope": "Saved per-item author labels only; full four-user author aggregate not yet available. Root localized semantic review and source fidelity remain distinct.",
+  "new_model_calls_for_analysis": 0,
+  "additional_writer_attempts": 0,
+  "candidate_selected": false,
+  "limits": [
+    "All 62 first-attempt session records are present; gaps, Omitted labels and None QA are retained.",
+    "Only B0 has closed these three exposed development users; this is not a four-arm method comparison.",
+    "This user has two final records, not one; the larger record still has 176 units. Prior one-record observations are not universal.",
+    "Inputs fit and responses arrived, but complete parsing and committed maintenance are distinct.",
+    "Independent serialized input components overlap and cannot be summed.",
+    "Incomplete JSON was never repaired or submitted; only the first units array complete literal fragments are analyzed and later arrays/tails remain unclassified.",
+    "Text/role/edge deltas and support counts do not certify new requirements, semantic preservation or source fidelity.",
+    "The two zero-text-delta commits have different semantic outcomes; neither is automatically scored as preservation success.",
+    "Root review is not independent audit or a replacement of saved author labels; the official aggregate remains unset."
+  ]
+}

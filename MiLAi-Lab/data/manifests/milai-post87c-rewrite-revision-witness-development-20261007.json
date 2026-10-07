@@ -1,0 +1,110 @@
+{
+  "version": "milai-post87c-rewrite-revision-witness-development-v1",
+  "status": "SOURCE_IMPLEMENTED_ENGINEERING_PASS_FREE_WRITER_NOT_RUN",
+  "observed_at": "2026-10-06T20:54:14.169347+00:00",
+  "previous_report_commit": "59ce2f895ca022cf1f929c48c52dcafbc26fc92a",
+  "closed_model_source_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+  "closed_model_results_manifest": "milai-post87c-scope-contract-execution-results-20261007.json",
+  "source_identity": "CURRENT_PUBLICATION_COMMIT_BIND_AND_OWN_FAST_BEFORE_HTTP",
+  "problem": "Whole replacement that omits an exception can retain every remaining clause with h support but has no separate public slot for its current removal witness. Existing event-bound commit rejects the h-only proposal.",
+  "implementation": {
+    "public_opt_in_B0_B2_rewrite_field": "revision_evidence: nonempty array of actual request e references, optional for existing whole rewrite",
+    "internal_field_reused": "Stored revision_evidence already records exact selected fragments. No new store, auditor, flag or operation.",
+    "whole_rewrite_body": "Model still generates the complete nonempty replacement; omission actually removes old units/relations; no hidden body fill or JSON repair.",
+    "unchanged_units": "Exact retained text, role, original attribution and h support unchanged; revision witness is separate from per-unit support.",
+    "changed_units": "Top-level witness cannot replace their own new evidence or permit changed text from h alone.",
+    "normal_Host": "Shared decoder plus actual update-delivery and commit boundary; separate witness is included among actual revision handles.",
+    "legacy": "Default feature-off interfaces and Product unchanged.",
+    "Reader_prompt_or_material_changed": false,
+    "full_withdrawal": "Separate retract_record branch and distinct witness rules unchanged."
+  },
+  "engineering": {
+    "existing_test_functions_strengthened": 2,
+    "new_test_functions": 0,
+    "distinct_affected_checks_passed": 8,
+    "targeted_failed_checks_rerun": 2,
+    "first_failure_and_fix": "Empty revision_evidence reached source_evidence, which requires nonempty references; source now resolves selected revision handles only when present. Original h-only boundary failure retained.",
+    "Ruff_files": 5,
+    "mypy_source_files": 3,
+    "package_boundary": "PASS",
+    "broad_suite_repeated": false,
+    "actual_failed_proposal_clone": {
+      "status": "PASS_ACTUAL_REJECTED_B2_OMISSION_CLONE_WITH_EXPLICIT_REVISION_WITNESS",
+      "kind": "OFFLINE_STRUCTURAL_APPLICATION_NOT_FREE_MODEL_OR_METHOD_SUCCESS",
+      "original_source_commit": "978bc657cef700fab8c57058cb38b026df87384c",
+      "case": "B2 global-condition branch ordinal4",
+      "original_rejection": "current_boundary_source_required",
+      "only_proposal_change": "revision_evidence=[e1]",
+      "revision_before": 3,
+      "revision_after": 4,
+      "retained_units_exact_except_new_fullrewrite_IDs": 3,
+      "old_unit_count": 4,
+      "new_unit_count": 3,
+      "remaining_modifies": 2,
+      "remaining_overrides": 0,
+      "selected_current_cancellation_fragments": 1,
+      "retained_assertions_and_per_unit_support_unchanged": true,
+      "prior_missing_global_change_not_reconstructed": true,
+      "original_state_and_HTTP_unchanged": true,
+      "new_generation_or_embedding_calls": 0,
+      "normal_Host_same_path_checked_separately": true,
+      "first_clone_setup_failure": "Known boundary rejection before transient actual-input boundary was rebound on fresh service; original failed offline operation preserved. Rebound exact original event source, used distinct offline operation ID; no model retry or original state mutation."
+    }
+  },
+  "finite_next_development": {
+    "status": "DECLARED_NOT_ADMITTED_OR_RUN",
+    "maximum_new_Writer_calls": 2,
+    "Reader_calls": 0,
+    "Judge_calls": 0,
+    "embedding_calls": 0,
+    "cases": [
+      {
+        "arm": "B2",
+        "original_branch": "global_condition",
+        "event_ordinal": 3,
+        "input": "Original actual before, current qualifier-change event, original delivered source/record packet."
+      },
+      {
+        "arm": "B2",
+        "original_branch": "global_condition",
+        "event_ordinal": 4,
+        "input": "Original actual before, current cancellation event, original delivered source/record packet."
+      }
+    ],
+    "state": "Each separate clone of actual own-formed B2 state; no ideal records or successful case3 state spliced into case4.",
+    "purpose": "Matched-before local Writer diagnosis of relation continuity and explicit whole-rewrite removal evidence, not same-version natural-history comparison.",
+    "parameters": "Original Qwen3.6 thinking=true temperature1, I2, context65536/output32768/margin512, exact source/role/time and serial continuous ledger. No budget changes.",
+    "admission": "Bind published source and verify own Fast before either HTTP. Preserve first outputs/commits/rejections/unknown; no retry-until-pass. Own Full before new prefix/candidate/merge.",
+    "scope_limit": "Does not claim repair of retained-state Reader scope refusal or relative-calendar error."
+  },
+  "actual_new_model_or_embedding_calls": 0,
+  "continuous_accounting_snapshot": {
+    "generation_requests": 39580,
+    "generation": {
+      "charged_tokens": 151416052,
+      "known_tokens": 151304337,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 974832,
+      "known_tokens": 974832,
+      "unknown_usage": 0
+    }
+  },
+  "full_goal_remaining": [
+    "same-version four-arm first8/first65/full277",
+    "native32 and drift",
+    "M entry ablation and fixed tighter-budget sensitivity",
+    "16 reserved users after freeze",
+    "LongMemEval and strong simple baselines",
+    "normal Host/new stories/forgetting/real effects/recovery",
+    "six original deliverables"
+  ],
+  "candidate_selected": false,
+  "goal_complete": false,
+  "product_status": "NO_GO",
+  "publication_scope": "12Labfiles:3source,2existingtests,7docs-status-results-declaration",
+  "Product_schema_API_permissions_Canonical_Archive_workflow_changed": false,
+  "rollback_commit": "59ce2f895ca022cf1f929c48c52dcafbc26fc92a",
+  "private_original_HTTP_DB_gold_reasoning_and_configs_ignored": true
+}

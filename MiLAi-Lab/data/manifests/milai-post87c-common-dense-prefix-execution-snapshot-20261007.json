@@ -1,0 +1,156 @@
+{
+  "version": "milai-post87c-common-dense-prefix-execution-snapshot-v1",
+  "status": "RUNNING_DECLARED_SAME_VERSION_FOUR_ARM_PREFIX_NO_TERMINAL_OR_FINAL_SCORE",
+  "observed_at": "2026-10-06T21:45:22.438483+00:00",
+  "report_parent_commit": "ae2a0eb0e1cb114371c72fb21ffdbee40c1fcef8",
+  "actual_source_commit": "072af2e38507ad8593afab66c10e3400591534d0",
+  "pre_HTTP_declaration": "milai-post87c-common-dense-prefix-development-20261007.json",
+  "own_source_CI": {
+    "Fast": {
+      "run_id": 37531198186,
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37531198051,
+      "conclusion": "success"
+    },
+    "verified_before_prefix_HTTP_at": "2026-10-06T21:40:25Z"
+  },
+  "actual_admission": "Original two072 Writer cases closed and Root reviewed, semantic failures retained; source own Fast/Full success. Corrected system-Python UTC import during offline metadata preparation,0HTTP/source edits; original preparation failure preserved.",
+  "same_version_configuration": {
+    "arms": [
+      "B0",
+      "B1",
+      "B2",
+      "M"
+    ],
+    "initial_state": "each own empty bank",
+    "users": 4,
+    "sessions_per_user": 8,
+    "sessions_per_arm": 32,
+    "update_opportunities_per_arm": 72,
+    "QA_per_arm": 73,
+    "I2": true,
+    "dense_cosine_K10": true,
+    "Qwen_generation_family": "existing Qwen3.6 only",
+    "thinking": true,
+    "temperature": 1.0,
+    "context": 65536,
+    "output": 32768,
+    "margin": 512,
+    "source_partition": 4096,
+    "old_body_target": 8192,
+    "candidate_selected": false
+  },
+  "per_arm_snapshot": {
+    "B0": {
+      "maintenance_events": 2,
+      "evaluation_events": 1,
+      "generation_requests": 30,
+      "generation_responses": 29,
+      "committed_operations": 8,
+      "rejected_operations": 0,
+      "events_with_unprocessed": 0,
+      "terminal": false
+    },
+    "B1": {
+      "maintenance_events": 0,
+      "evaluation_events": 0,
+      "generation_requests": 0,
+      "generation_responses": 0,
+      "committed_operations": 0,
+      "rejected_operations": 0,
+      "events_with_unprocessed": 0,
+      "terminal": false
+    },
+    "B2": {
+      "maintenance_events": 0,
+      "evaluation_events": 0,
+      "generation_requests": 0,
+      "generation_responses": 0,
+      "committed_operations": 0,
+      "rejected_operations": 0,
+      "events_with_unprocessed": 0,
+      "terminal": false
+    },
+    "M": {
+      "maintenance_events": 0,
+      "evaluation_events": 0,
+      "generation_requests": 0,
+      "generation_responses": 0,
+      "committed_operations": 0,
+      "rejected_operations": 0,
+      "events_with_unprocessed": 0,
+      "terminal": false
+    }
+  },
+  "confirmed_generation_snapshot": {
+    "Writer": 2,
+    "Reader": 3,
+    "Judge": 24,
+    "responses": 29,
+    "known_tokens": 93925,
+    "finish_reasons": {
+      "stop": 29
+    },
+    "requests": 30,
+    "not_yet_confirmed_requests": 1
+  },
+  "confirmed_encoding_snapshot": {
+    "requests": 5,
+    "responses": 5,
+    "known_tokens": 738
+  },
+  "first_B0_formation": {
+    "maintenance_event_completed": true,
+    "Writer_stop": true,
+    "Writer_input_tokens": 4285,
+    "actual_formed_records": 5,
+    "actual_formed_units": 16,
+    "committed_operations": 5,
+    "unprocessed": 0,
+    "not_semantic_or_preservation_success_claim": true
+  },
+  "process": {
+    "PID_live": true,
+    "unified_session_id": 68500,
+    "suite_terminal_exists": false,
+    "restart_or_replay": false,
+    "frozen_source_or_active_config_hot_changes": false
+  },
+  "receipt_and_ledger_deltas_match": true,
+  "last_closed_continuous_accounting_before_prefix": {
+    "generation_requests": 39582,
+    "generation": {
+      "charged_tokens": 151439107,
+      "known_tokens": 151327392,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 974832,
+      "known_tokens": 974832,
+      "unknown_usage": 0
+    }
+  },
+  "live_continuous_accounting_snapshot": {
+    "generation_requests": 39612,
+    "generation": {
+      "charged_tokens": 151570370,
+      "known_tokens": 151421317,
+      "unknown_usage": 4
+    },
+    "embedding": {
+      "charged_tokens": 975570,
+      "known_tokens": 975570,
+      "unknown_usage": 0
+    }
+  },
+  "counter_interpretation": "The prefix is live. Confirmed receipts match known deltas; current extra unknown is in-flight reservation, not a newly closed failure. First2 Writer23055 and old97838 already belong to previous closed totals; do not sum them again.",
+  "complete_semantic_review_or_official_final_score": false,
+  "goal_complete": false,
+  "candidate_selected": false,
+  "Product_status": "NO_GO",
+  "remaining_scope": "Complete current same-version prefix, existing actual-state first65/full277 continuation, native/drift, entry ablation/tighter budget,16reserved afterfreeze, external/baselines, Host/newstories/forget/real effects/recovery and six deliverables.",
+  "publication_scope": "Six Lab documentation/status/snapshot files only. No source/test/workflow change, repeated tests or added HTTP for reporting; original declarations/closed results preserved, private originals ignored.",
+  "rollback_commit": "ae2a0eb0e1cb114371c72fb21ffdbee40c1fcef8"
+}

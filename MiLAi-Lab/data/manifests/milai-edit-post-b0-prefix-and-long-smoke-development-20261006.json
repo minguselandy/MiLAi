@@ -1,0 +1,159 @@
+{
+  "version": "milai-edit-post-b0-prefix-and-long-smoke-development-v1",
+  "declared_at": "2026-10-06T07:20:52.374486+00:00",
+  "status": "PREDECLARED_ADMITTED_NOT_STARTED",
+  "actual_generation_calls": 0,
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "source_own_ci": {
+    "commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+    "observed_at": "2026-10-06 07:19:12 UTC",
+    "Fast": {
+      "run_id": 37426071277,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full": {
+      "run_id": 37426071235,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "Full_before_prefix": true
+  },
+  "admission_basis": {
+    "Root_affected_checks": 294,
+    "Root_reviewed_affected_model_calls": 12,
+    "affected_result_manifest": "milai-edit-post-b0-whole-rewrite-identity-results-20261006.json",
+    "B2_actual_from_unit_and_condition_binding_update_verified": true,
+    "ordinary_source_attribution_and_Reader_failures_remain": true,
+    "not_a_perfect_R3_gate": true,
+    "not_final_candidate_or_method_advantage": true
+  },
+  "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+  "experiment_name": "milai-edit-post-b0-unit-correspondence-prefix-v1",
+  "interface": "I2",
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "model_family": "Qwen3.6 only",
+  "model_id": "Qwen3.6-35B-A3B-FP8",
+  "generation_parameters": {
+    "temperature": 1.0,
+    "max_tokens": 32768,
+    "timeout": 300,
+    "enable_thinking": true
+  },
+  "context_tokens": 65536,
+  "current_source_tokens": 4096,
+  "current_plus_old_source_body_tokens": 8192,
+  "retrieval_limit": 10,
+  "working_sets": false,
+  "edit_features": {
+    "matter_organization": true,
+    "semantic_operations": true,
+    "bound_references": true,
+    "single_record_changes": true,
+    "source_metadata": true
+  },
+  "development_selection": {
+    "split_manifest": "milai-edit-source-split-v1.json",
+    "split_version": "milai-edit-split-v1",
+    "users": [
+      "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "8ece194a-885c-8e0c-359e-93a97220252c",
+      "6106afc1-6ad6-c821-3f0f-b491e3e0b833",
+      "5c005ed8-0d18-99f8-a20e-6a776a7ea30a"
+    ],
+    "chronological_order": "timestamp",
+    "session_prefix": 8,
+    "prefix_per_arm": {
+      "sessions": 32,
+      "update_opportunities": 72,
+      "QA": 73
+    },
+    "per_user": [
+      {
+        "user_position": 0,
+        "prefix_sessions": 8,
+        "prefix_update_opportunities": 19,
+        "prefix_QA": 20,
+        "full_sessions": 65
+      },
+      {
+        "user_position": 1,
+        "prefix_sessions": 8,
+        "prefix_update_opportunities": 15,
+        "prefix_QA": 12,
+        "full_sessions": 77
+      },
+      {
+        "user_position": 2,
+        "prefix_sessions": 8,
+        "prefix_update_opportunities": 20,
+        "prefix_QA": 22,
+        "full_sessions": 62
+      },
+      {
+        "user_position": 3,
+        "prefix_sessions": 8,
+        "prefix_update_opportunities": 18,
+        "prefix_QA": 19,
+        "full_sessions": 73
+      }
+    ],
+    "all_four_arms_totals": {
+      "sessions": 128,
+      "update_opportunities": 288,
+      "QA": 292
+    },
+    "reserved_sources_read": false
+  },
+  "preselected_long_smoke": {
+    "selection_rule": "first user in the already frozen development order, fixed before new prefix outcomes",
+    "selection_fixed_at": "2026-10-06T02:39:25.742802+00:00",
+    "user_position": 0,
+    "user": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+    "sessions": 65,
+    "update_opportunities": 142,
+    "QA": 164,
+    "all_four_arms": true,
+    "start_state": "each arm actual same-version completed first8 state, never an evaluator-injected ideal card",
+    "ordinary_semantic_failure": "preserve and continue remaining predeclared cases",
+    "new_memory_commit_or_business_effect_unknown": "stop affected work; inspect actual effect; no replay"
+  },
+  "continuation_protocol": {
+    "prefix_results_reused_only_if_method_generation_Reader_scoring_unchanged": true,
+    "scope_expansion_separately_bound_before_HTTP": true,
+    "fresh_scope_with_readonly_SQLite_backup_and_exact_completed_checkpoints": true,
+    "no_existing_actual_config_or_result_overwritten": true,
+    "copy_only_selected_user_HTTP_and_its_actual_Judge_serial_interval": true,
+    "reason_for_user_scopes": "Existing official Judge keys are a cohort-wide serial; do not copy other users Judge caches into a per-user continuation or reset into already used keys. Use isolated per-user continuation scopes with normal frozen runner; combined277 records are aggregated offline.",
+    "inherited_HTTP_not_new_model_calls_or_new_costs": true,
+    "source_output_child_names_same_as_arm_preserve_namespace": true
+  },
+  "evaluation_protocol": {
+    "halumem_author_version": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
+    "official_prompts_and_original_label_rules_unchanged": true,
+    "Writer_current_dialogue_and_legally_delivered_memory_only": true,
+    "gold_and_reference_guided_update_retrieval_are_evaluator_only": true,
+    "QA_and_Writer_retrieval_are_not_reference_guided": true,
+    "three_views": "author-compatible extracted, actual delta, actual full before/after state",
+    "report_all_and_valid_denominators": true,
+    "invalid_labels_preserved": true,
+    "undefined_formula_denominators": "N/A with actual numerator/denominator; no epsilon or silent0",
+    "source_fidelity_separate_from_author_labels": true,
+    "same_family_Judge_not_independent": true,
+    "first_attempts_no_retry_no_truncated_JSON_repair_no_automatic_body_fill": true,
+    "generation_request_count": "actual Writer source batches and author Judge calls depend on actual states; report each role from real HTTP, no fixed call-count substitution"
+  },
+  "driver": "Frozen existing tools/run_edit_suite.py --benchmark halumem and ordinary BenchmarkRun/MemoryService. Root owns serial orchestration/raw/accounting.",
+  "resource_protocol": "Original continuous ledger, one actual model request at a time; no token-limit change; all actual known/unknown costs retained.",
+  "full_plan_remaining": "StageD same-version four277/595updates705QA; native32/drift277; same-M semantic-entry ablation and one tighter budget;16reserved users; LongMemEval28/1354appearances/10reviews/external baselines; normalHost135/192 and frozen new stories/recovery; fullR0-R5/E0-E5/sixdeliverables.",
+  "historical_results_and_predeclarations_unchanged": true,
+  "Product_schema_API_permissions_Canonical_Archive_workflow_changed": false,
+  "candidate_selected": false,
+  "prefix_admitted": true,
+  "product_status": "NO_GO"
+}

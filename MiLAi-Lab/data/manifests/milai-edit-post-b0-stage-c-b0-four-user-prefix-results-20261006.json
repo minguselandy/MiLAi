@@ -1,0 +1,995 @@
+{
+  "schema_version": "milai-edit-stage-c-closed-arm-prefix-summary-v1",
+  "status": "B0_FOUR_DEVELOPMENT_USERS_FIRST8_CLOSED_NOT_FOUR_ARM_COMPARISON",
+  "observed_at": "2026-10-06T09:16:44.399226+00:00",
+  "source_commit": "7b82c60e04755f385e5f80658ed67e4067826093",
+  "config_version": "milai-edit-post-b0-unit-correspondence-main-v1",
+  "interface": "I2",
+  "model_family": "Qwen3.6",
+  "official_author_commit": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
+  "scope": {
+    "arm": "B0",
+    "users": 4,
+    "sessions": 32,
+    "update_opportunities": 72,
+    "QA_opportunities": 73,
+    "own_empty_initial_banks": true,
+    "reserved_users_used": false
+  },
+  "terminal_status": "COMPLETED_EXPERIMENT_PHASE",
+  "author_update_labels": {
+    "Omission": 51,
+    "Correct": 6,
+    "None": 10,
+    "Omitted": 4,
+    "Hallucination": 1
+  },
+  "author_QA_labels": {
+    "Correct": 42,
+    "Hallucination": 17,
+    "Omission": 14
+  },
+  "official_original_overall_score": {
+    "memory_integrity": {
+      "recall(all)": 0.6697038724373576,
+      "recall(valid)": 0.75,
+      "weighted_recall(all)": 0.6879271070615034,
+      "weighted_recall(valid)": 0.7704081632653061,
+      "memory_valid_importance_sum": 294.0,
+      "memory_importance_sum": 329.25,
+      "memory_valid_num": 392,
+      "memory_num": 439
+    },
+    "memory_accuracy": {
+      "interference_accuracy(all)": 0.9655172413793104,
+      "interference_accuracy(valid)": 1.0,
+      "interference_memory_valid_num": 28,
+      "interference_memory_num": 29,
+      "target_accuracy(all)": 1.0,
+      "target_accuracy(valid)": 1.0,
+      "target_memory_valid_num": 40,
+      "target_memory_num": 40,
+      "weighted_accuracy(all)": 0.6644736842105263,
+      "weighted_accuracy(valid)": 0.8145161290322581,
+      "memory_valid_num": 62,
+      "memory_num": 76
+    },
+    "memory_extraction_f1": 0.8021828103683493,
+    "memory_update": {
+      "correct_update_memory_ratio(all)": 0.08333333333333333,
+      "correct_update_memory_ratio(valid)": 0.10344827586206896,
+      "hallucination_update_memory_ratio(all)": 0.013888888888888888,
+      "hallucination_update_memory_ratio(valid)": 0.017241379310344827,
+      "omission_update_memory_ratio(all)": 0.7083333333333334,
+      "omission_update_memory_ratio(valid)": 0.8793103448275862,
+      "other_update_memory_ratio(all)": 0.0,
+      "other_update_memory_ratio(valid)": 0.0,
+      "update_memory_valid_num": 58,
+      "update_memory_num": 72
+    },
+    "question_answering": {
+      "correct_qa_ratio(all)": 0.5753424657534246,
+      "correct_qa_ratio(valid)": 0.5753424657534246,
+      "hallucination_qa_ratio(all)": 0.2328767123287671,
+      "hallucination_qa_ratio(valid)": 0.2328767123287671,
+      "omission_qa_ratio(all)": 0.1917808219178082,
+      "omission_qa_ratio(valid)": 0.1917808219178082,
+      "qa_valid_num": 73,
+      "qa_num": 73
+    },
+    "memory_type_accuracy": {
+      "Event Memory": {
+        "memory_integrity_acc": 0.07142857142857142,
+        "memory_update_acc": 0.011904761904761904,
+        "total_num": 84,
+        "memory_acc": 0.08333333333333333
+      },
+      "Relationship Memory": {
+        "memory_integrity_acc": 0.10714285714285714,
+        "memory_update_acc": 0.0,
+        "total_num": 28,
+        "memory_acc": 0.10714285714285714
+      },
+      "Persona Memory": {
+        "memory_integrity_acc": 0.6658878504672897,
+        "memory_update_acc": 0.011682242990654205,
+        "total_num": 428,
+        "memory_acc": 0.677570093457944
+      }
+    }
+  },
+  "official_aggregation_error": null,
+  "original_author_reaggregation_exact_match": true,
+  "checkpoint_records_after_original_author_is_valid_augmentation_exactly_match_final_results": true,
+  "invalid_update_labels": {
+    "None": 10,
+    "Omitted": 4,
+    "total": 14,
+    "valid": 58,
+    "included_in_all_denominator": true,
+    "remapped_or_rejudged": false
+  },
+  "HTTP": {
+    "requests": 696,
+    "responses": 696,
+    "role_usage": {
+      "Writer": {
+        "calls": 33,
+        "input_tokens": 687033,
+        "completion_tokens": 110592,
+        "known_tokens": 797625
+      },
+      "Reader": {
+        "calls": 73,
+        "input_tokens": 92863,
+        "completion_tokens": 111689,
+        "known_tokens": 204552
+      },
+      "Judge": {
+        "calls": 590,
+        "input_tokens": 939269,
+        "completion_tokens": 689341,
+        "known_tokens": 1628610
+      }
+    },
+    "known_tokens": 2630787,
+    "finish_reasons": {
+      "stop": 696
+    },
+    "failure_files": 0,
+    "unconfirmed_requests": 0,
+    "new_model_calls_for_review": 0
+  },
+  "accounting_start": {
+    "generation_requests": 36519,
+    "generation": {
+      "charged_tokens": 140167873,
+      "known_tokens": 140056158,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_end": {
+    "generation_requests": 37215,
+    "generation": {
+      "charged_tokens": 142798660,
+      "known_tokens": 142686945,
+      "unknown_usage": 3
+    },
+    "embedding": {
+      "charged_tokens": 964645,
+      "known_tokens": 964645,
+      "unknown_usage": 0
+    }
+  },
+  "accounting_delta": {
+    "generation_requests": 696,
+    "known_tokens": 2630787,
+    "charged_tokens": 2630787,
+    "new_unknown_usage": 0,
+    "new_embedding_tokens": 0,
+    "B1_live_excluded": true
+  },
+  "per_user_operations_and_state": [
+    {
+      "development_user_position": 0,
+      "chronological_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "update_labels": {
+        "Omission": 14,
+        "Correct": 2,
+        "None": 2,
+        "Omitted": 1
+      },
+      "QA_labels": {
+        "Correct": 12,
+        "Hallucination": 7,
+        "Omission": 1
+      },
+      "writer_operations": {
+        "expected_sessions": 8,
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 80537,
+          "prepared_characters": 80537,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 26,
+          "prepared_batches": 8,
+          "completed_batches": 8,
+          "recorded_writer_requests": 8,
+          "characters_in_recorded_requests": 80537,
+          "confirmed_writer_responses": 8,
+          "characters_in_confirmed_responses": 80537,
+          "writer_returned_proposal_list_batches": 8,
+          "writer_returned_empty_list_batches": 4,
+          "proposed_operations": 26,
+          "recorded_operation_receipts": 26,
+          "confirmed_committed_operations": 16,
+          "accepted_no_change_operations": 10
+        },
+        "not_yet_prepared_sessions": 0,
+        "pending_prepared_sessions": 0,
+        "pending_prepared_batches": 0,
+        "requests_without_confirmed_responses": 0,
+        "first_attempt_writer_failures": {},
+        "failure_example_paths": {},
+        "receipt_statuses": {
+          "committed": 16,
+          "no_change": 10
+        },
+        "rejection_reasons": {},
+        "proposed_actions": {
+          "create": 16,
+          "no_change": 10
+        },
+        "committed_actions": {
+          "create": 16
+        },
+        "proposed_local_operations": {},
+        "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+      },
+      "final_records": 16,
+      "final_units": 16,
+      "unit_roles": {
+        "content": 16
+      },
+      "relation_types": {},
+      "max_record_units": 1,
+      "max_record_characters": 859,
+      "HTTP": {
+        "requests": 200,
+        "known_tokens": 784060,
+        "role_usage": {
+          "Writer": {
+            "calls": 8,
+            "input_tokens": 170543,
+            "completion_tokens": 25358,
+            "known_tokens": 195901
+          },
+          "Reader": {
+            "calls": 20,
+            "input_tokens": 28054,
+            "completion_tokens": 30466,
+            "known_tokens": 58520
+          },
+          "Judge": {
+            "calls": 172,
+            "input_tokens": 329794,
+            "completion_tokens": 199845,
+            "known_tokens": 529639
+          }
+        }
+      },
+      "update_valid_judgments": 16
+    },
+    {
+      "development_user_position": 1,
+      "chronological_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "update_labels": {
+        "Omission": 11,
+        "Correct": 3,
+        "None": 1
+      },
+      "QA_labels": {
+        "Correct": 8,
+        "Hallucination": 2,
+        "Omission": 2
+      },
+      "writer_operations": {
+        "expected_sessions": 8,
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 63988,
+          "prepared_characters": 63988,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 16,
+          "prepared_batches": 8,
+          "completed_batches": 8,
+          "recorded_writer_requests": 8,
+          "characters_in_recorded_requests": 63988,
+          "confirmed_writer_responses": 8,
+          "characters_in_confirmed_responses": 63988,
+          "writer_returned_proposal_list_batches": 8,
+          "writer_returned_empty_list_batches": 4,
+          "proposed_operations": 16,
+          "recorded_operation_receipts": 16,
+          "confirmed_committed_operations": 16
+        },
+        "not_yet_prepared_sessions": 0,
+        "pending_prepared_sessions": 0,
+        "pending_prepared_batches": 0,
+        "requests_without_confirmed_responses": 0,
+        "first_attempt_writer_failures": {},
+        "failure_example_paths": {},
+        "receipt_statuses": {
+          "committed": 16
+        },
+        "rejection_reasons": {},
+        "proposed_actions": {
+          "create": 16
+        },
+        "committed_actions": {
+          "create": 16
+        },
+        "proposed_local_operations": {},
+        "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+      },
+      "final_records": 16,
+      "final_units": 29,
+      "unit_roles": {
+        "content": 29
+      },
+      "relation_types": {},
+      "max_record_units": 5,
+      "max_record_characters": 919,
+      "HTTP": {
+        "requests": 146,
+        "known_tokens": 564198,
+        "role_usage": {
+          "Writer": {
+            "calls": 8,
+            "input_tokens": 167613,
+            "completion_tokens": 30165,
+            "known_tokens": 197778
+          },
+          "Reader": {
+            "calls": 12,
+            "input_tokens": 12592,
+            "completion_tokens": 16074,
+            "known_tokens": 28666
+          },
+          "Judge": {
+            "calls": 126,
+            "input_tokens": 189094,
+            "completion_tokens": 148660,
+            "known_tokens": 337754
+          }
+        }
+      },
+      "update_valid_judgments": 14
+    },
+    {
+      "development_user_position": 2,
+      "chronological_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "update_labels": {
+        "None": 3,
+        "Correct": 1,
+        "Omission": 14,
+        "Omitted": 2
+      },
+      "QA_labels": {
+        "Correct": 12,
+        "Hallucination": 4,
+        "Omission": 6
+      },
+      "writer_operations": {
+        "expected_sessions": 8,
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 67171,
+          "prepared_characters": 67171,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 14,
+          "prepared_batches": 8,
+          "completed_batches": 8,
+          "recorded_writer_requests": 8,
+          "characters_in_recorded_requests": 67171,
+          "confirmed_writer_responses": 8,
+          "characters_in_confirmed_responses": 67171,
+          "writer_returned_proposal_list_batches": 8,
+          "writer_returned_empty_list_batches": 4,
+          "proposed_operations": 14,
+          "recorded_operation_receipts": 14,
+          "confirmed_committed_operations": 14
+        },
+        "not_yet_prepared_sessions": 0,
+        "pending_prepared_sessions": 0,
+        "pending_prepared_batches": 0,
+        "requests_without_confirmed_responses": 0,
+        "first_attempt_writer_failures": {},
+        "failure_example_paths": {},
+        "receipt_statuses": {
+          "committed": 14
+        },
+        "rejection_reasons": {},
+        "proposed_actions": {
+          "create": 13,
+          "rewrite": 1
+        },
+        "committed_actions": {
+          "create": 13,
+          "rewrite": 1
+        },
+        "proposed_local_operations": {},
+        "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+      },
+      "final_records": 13,
+      "final_units": 20,
+      "unit_roles": {
+        "content": 20
+      },
+      "relation_types": {},
+      "max_record_units": 4,
+      "max_record_characters": 697,
+      "HTTP": {
+        "requests": 177,
+        "known_tokens": 624947,
+        "role_usage": {
+          "Writer": {
+            "calls": 8,
+            "input_tokens": 158868,
+            "completion_tokens": 22789,
+            "known_tokens": 181657
+          },
+          "Reader": {
+            "calls": 22,
+            "input_tokens": 29782,
+            "completion_tokens": 34440,
+            "known_tokens": 64222
+          },
+          "Judge": {
+            "calls": 147,
+            "input_tokens": 203196,
+            "completion_tokens": 175872,
+            "known_tokens": 379068
+          }
+        }
+      },
+      "update_valid_judgments": 15
+    },
+    {
+      "development_user_position": 3,
+      "chronological_original_ordinals": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "update_labels": {
+        "Omission": 12,
+        "Hallucination": 1,
+        "Omitted": 1,
+        "None": 4
+      },
+      "QA_labels": {
+        "Correct": 10,
+        "Hallucination": 4,
+        "Omission": 5
+      },
+      "writer_operations": {
+        "expected_sessions": 8,
+        "counts": {
+          "official_completed_sessions": 8,
+          "prepared_sessions": 8,
+          "original_characters_in_prepared_sessions": 88440,
+          "prepared_characters": 88440,
+          "maintenance_completed_sessions": 8,
+          "upstream_extracted_outputs": 20,
+          "prepared_batches": 9,
+          "completed_batches": 9,
+          "recorded_writer_requests": 9,
+          "characters_in_recorded_requests": 88440,
+          "confirmed_writer_responses": 9,
+          "characters_in_confirmed_responses": 88440,
+          "writer_returned_proposal_list_batches": 9,
+          "writer_returned_empty_list_batches": 6,
+          "proposed_operations": 20,
+          "recorded_operation_receipts": 20,
+          "confirmed_committed_operations": 15,
+          "accepted_no_change_operations": 5
+        },
+        "not_yet_prepared_sessions": 0,
+        "pending_prepared_sessions": 0,
+        "pending_prepared_batches": 0,
+        "requests_without_confirmed_responses": 0,
+        "first_attempt_writer_failures": {},
+        "failure_example_paths": {},
+        "receipt_statuses": {
+          "committed": 15,
+          "no_change": 5
+        },
+        "rejection_reasons": {},
+        "proposed_actions": {
+          "create": 15,
+          "no_change": 5
+        },
+        "committed_actions": {
+          "create": 15
+        },
+        "proposed_local_operations": {},
+        "interpretation": "Prepared ranges are not confirmed model exposure. A recorded request is not a confirmed response. Committed effects and accepted no_change are separate; replay confirms an original commit without a second write. None establishes semantic correctness. Pending or failed opportunities remain."
+      },
+      "final_records": 15,
+      "final_units": 15,
+      "unit_roles": {
+        "content": 15
+      },
+      "relation_types": {},
+      "max_record_units": 1,
+      "max_record_characters": 608,
+      "HTTP": {
+        "requests": 173,
+        "known_tokens": 657582,
+        "role_usage": {
+          "Writer": {
+            "calls": 9,
+            "input_tokens": 190009,
+            "completion_tokens": 32280,
+            "known_tokens": 222289
+          },
+          "Reader": {
+            "calls": 19,
+            "input_tokens": 22435,
+            "completion_tokens": 30709,
+            "known_tokens": 53144
+          },
+          "Judge": {
+            "calls": 145,
+            "input_tokens": 217185,
+            "completion_tokens": 164964,
+            "known_tokens": 382149
+          }
+        }
+      },
+      "update_valid_judgments": 13
+    }
+  ],
+  "actual_maintenance_summary": {
+    "create_commits": 60,
+    "rewrite_commits": 1,
+    "no_change_receipts": 15,
+    "compatibility_extracted_outputs": 76,
+    "actual_delta_record_occurrences": 61,
+    "unchanged_full_state_sessions": 18,
+    "unprocessed_sessions": 0,
+    "Writer_source_batches": 33,
+    "source_characters_sent_received_and_parsed": 300136,
+    "max_final_record_units": 5,
+    "max_final_record_characters": 919,
+    "short_prefix_grain_observation_not_long_history_capacity_proof": true
+  },
+  "session_actual_views": [
+    {
+      "development_user_position": 0,
+      "ordinal": 0,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 5,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 5,
+      "author_compat_extracted": 5,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 1,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 3,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 3,
+      "author_compat_extracted": 3,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 2,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 8,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 8,
+      "author_compat_extracted": 8,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 3,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 4,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 5,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 6,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 0,
+      "ordinal": 7,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 10,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 0,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 4,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 4,
+      "author_compat_extracted": 4,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 1,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 2,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 7,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 7,
+      "author_compat_extracted": 7,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 3,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 4,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 4,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 4,
+      "author_compat_extracted": 4,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 5,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 1,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 1,
+      "author_compat_extracted": 1,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 6,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 1,
+      "ordinal": 7,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 0,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 3,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 3,
+      "author_compat_extracted": 3,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 1,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 3,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 3,
+      "author_compat_extracted": 3,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 2,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 7,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 7,
+      "author_compat_extracted": 7,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 3,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 0,
+      "changed_existing_records": 1,
+      "per_batch_delta_record_occurrences": 1,
+      "author_compat_extracted": 1,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 4,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 5,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 6,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 2,
+      "ordinal": 7,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 0,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 5,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 5,
+      "author_compat_extracted": 5,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 1,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 3,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 3,
+      "author_compat_extracted": 8,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 2,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": false,
+      "new_records": 7,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 7,
+      "author_compat_extracted": 7,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 3,
+      "actual_source_batches": 2,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 4,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 5,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 6,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    },
+    {
+      "development_user_position": 3,
+      "ordinal": 7,
+      "actual_source_batches": 1,
+      "full_state_values_unchanged": true,
+      "new_records": 0,
+      "changed_existing_records": 0,
+      "per_batch_delta_record_occurrences": 0,
+      "author_compat_extracted": 0,
+      "unprocessed": 0
+    }
+  ],
+  "Root_semantic_findings": [
+    {
+      "finding": "new_fact_omission",
+      "evidence": "Multiple unchanged later sessions contain explicit new career, health, preference or participation information. State preservation and accepted no_change do not establish successful maintenance."
+    },
+    {
+      "finding": "actual_non_target_loss",
+      "development_user_position": 2,
+      "ordinal": 3,
+      "evidence": "A committed rewrite correctly adds the retirement decision but removes previously formed User-reported savings, not restated or cancelled by the current User sources. from_unit and valid evidence binding preserve identity, not omitted meaning."
+    },
+    {
+      "finding": "historical_retrieval_word_form_miss",
+      "development_user_position": 1,
+      "ordinal": 2,
+      "evidence": "Frozen source plus the actual historical 11-record state and 12 cited past sources reproduces the original Reader memories exactly. Original plural noun returns one identity record; changing only to singular returns two records including the pet matter; matter query returns seven. This is an exact-word lexical filtering miss in one exposed case, not a deployed fix or changed QA score."
+    },
+    {
+      "finding": "unreconciled_attitude_update",
+      "development_user_position": 1,
+      "ordinal": 5,
+      "evidence": "A new changed-attitude record is committed while the delivered old negative-attitude record remains active and unchanged."
+    },
+    {
+      "finding": "source_and_author_target_divergence",
+      "development_user_position": 3,
+      "evidence": "The User reports a new salary while Assistant text repeatedly asserts a different higher salary. Both source batches of ordinal3 produce empty changes, so the genuine promotion and User-reported salary are omitted. Separately, an answer includes both music dislikes explicitly stated by User, while the saved author label is Hallucination; source fidelity and author labels remain separate, with no rescoring."
+    }
+  ],
+  "Root_review_limits": {
+    "before_after_session_pairs": 32,
+    "Writer_batches": 33,
+    "HTTP_prompt_usage_pairs": 696,
+    "complete_Reader_answers_reviewed": 73,
+    "source_review": "Selected current User and Assistant statements inspected, including retirement, conflicting salary and music statements. Not an independent Judge or exhaustive source/database audit.",
+    "retrieval_diagnostic_new_model_calls": 0,
+    "native_retirement_control_model_scores": null,
+    "B0_condition_relation_counts_are_expected_for_text_arm": true
+  },
+  "remaining_work": {
+    "four_arm_prefix": "B1_RUNNING_B2_M_NOT_STARTED",
+    "actual_state_preselected_user_65": "NOT_STARTED",
+    "same_version_four_arm_277": "NOT_STARTED",
+    "M_entry_ablation_and_tighter_budget": "PREPARED_ONLY",
+    "native_drift_reserved_external_Host_and_six_deliverables": "INCOMPLETE",
+    "plan_5_5_current_change_first_alternative": "CONDITIONAL_NOT_ADMITTED"
+  },
+  "original_gold_labels_attempts_banks_and_frozen_configs_unchanged": true,
+  "new_model_calls_for_publication": 0,
+  "method_advantage_established": false,
+  "final_candidate_selected": false,
+  "product_status": "NO_GO",
+  "Root_review_completed_at": "2026-10-06T09:22:41.428493+00:00"
+}

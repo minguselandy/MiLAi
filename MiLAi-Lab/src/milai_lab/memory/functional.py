@@ -18,10 +18,13 @@ from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
 from pydantic import BaseModel, ConfigDict, Field
 
+from milai_lab.memory.functional_maintenance import bounded_support_review
 from milai_lab.memory.functional_state import (
     FunctionalIntegrityError,
+    FunctionalMaintenanceRejection,
     FunctionalOperationError,
     FunctionalRejection,
+    FunctionalReviewRejection,
     canonical,
     fragment_support,
     namespace,
@@ -143,6 +146,11 @@ class PageSelector(ReadSelector):
     cursor: str = Field(min_length=1)
 
 
+class SupportContextSelector(ReadSelector):
+    fragment_handles: list[str] = Field(min_length=1)
+    read_handle: str | None = None
+
+
 class ReadSelectorTool(StructuredTool):
     """Preserve the selector model's constraints in the model-visible schema."""
 
@@ -172,6 +180,8 @@ class FunctionalMemory:
         read_interface: str = "combined_selectors_v1",
         recent_context: str = "disabled",
         existing_confirmation: bool = False,
+        support_context: bool = False,
+        semantic_reproposal_policy: str = "message_limit_only",
         revision_support_review: Callable[[dict[str, Any], Callable[[], None]], None] | None = None,
         formation_support_review: (
             Callable[[dict[str, Any], Callable[[], None]], None] | None
@@ -200,6 +210,16 @@ class FunctionalMemory:
         if type(existing_confirmation) is not bool:
             raise FunctionalRejection("V13_5_EXISTING_CONFIRMATION_INVALID")
         self.existing_confirmation = existing_confirmation
+        if type(support_context) is not bool:
+            raise FunctionalRejection("V13_5_SUPPORT_CONTEXT_INVALID")
+        self.support_context = support_context
+        if semantic_reproposal_policy not in {"message_limit_only", "maintenance_two_proposals_v1"}:
+            raise FunctionalRejection("FUNCTIONAL_SEMANTIC_REPROPOSAL_POLICY_INVALID")
+        if semantic_reproposal_policy != "message_limit_only" and (
+            revision_support_review is None or formation_support_review is None
+        ):
+            raise FunctionalRejection("FUNCTIONAL_BOUNDED_REPROPOSAL_REQUIRES_BOTH_REVIEWS")
+        self.semantic_reproposal_policy = semantic_reproposal_policy
         self.revision_support_review = revision_support_review
         self.formation_support_review = formation_support_review
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
@@ -222,6 +242,10 @@ class FunctionalMemory:
             self.policy["formation_interface"] = formation_interface
         if read_interface != "combined_selectors_v1":
             self.policy["read_interface"] = read_interface
+        if support_context:
+            self.policy["support_context"] = "selected_sources_v1"
+        if semantic_reproposal_policy != "message_limit_only":
+            self.policy["semantic_reproposal_policy"] = semantic_reproposal_policy
         if recent_context != "disabled":
             self.policy["recent_context"] = recent_context
         if revision_support_review is not None:
@@ -254,6 +278,8 @@ class FunctionalMemory:
             names.update(
                 {"read_memory_history", "read_memory_revision", "read_fragment", "read_page"}
             )
+        if self.support_context:
+            names.add("read_support_context")
         return frozenset(names)
 
     @property
@@ -270,7 +296,7 @@ class FunctionalMemory:
         bound = self.service.public_turn(
             str(cfg.get("v13_session", "")),
             message_id=cfg.get("v13_turn_id"),
-            config_version=cfg.get("v13_config_version", cfg.get("v13_support_config_sha256")),
+            config_version=cfg.get("v13_config_version"),
         )
         if bound is None:
             raise FunctionalRejection("V13_5_ACTUAL_PUBLIC_TURN_REQUIRED")
@@ -479,6 +505,22 @@ class FunctionalMemory:
                 "schema": "functional_material_v1",
                 "snapshot_id": key,
                 "kind": value["kind"],
+                **(
+                    {
+                        "support_context": {
+                            "selection_status": "read_preview_not_committed_field_support",
+                            "target": "record_units_are_the_exact_read_version_not_new_evidence",
+                            "unchanged_fields": "inherit_only_their_own_visible_prior_support",
+                            "changed_fields": "select_originals_for_each_change_at_write_time",
+                            "qualifications": "retain_unmodified_limits_unless_selected_correction_"
+                            "changes_or_cancels_them; unknown_time_is_not_current_effect",
+                            "context_vs_outcome": "select_both_when_the_assertion_uses_both; "
+                            "a_request_is_not_an_executed_result",
+                        }
+                    }
+                    if value["kind"] == "support_context"
+                    else {}
+                ),
                 "items": chosen,
                 "start": start,
                 "delivered_units": len(chosen),
@@ -719,12 +761,16 @@ class FunctionalMemory:
         }
         if self.formation_support_review is not None:
             self.service.prepare_proposal(bound["session"], operation_id, proposal)
-            self._run_support_review(
+            existing = self._run_support_review(
                 self.formation_support_review,
                 self._formation_evidence(bound, proposal, operation_id),
                 bound,
                 refs,
+                operation_id,
+                requested,
             )
+            if existing is not None:
+                return existing
         return self._commit(bound["session"], operation_id, proposal)
 
     @staticmethod
@@ -902,12 +948,16 @@ class FunctionalMemory:
                 return preview
         if self.revision_support_review is not None and not equal:
             self.service.prepare_proposal(bound["session"], operation_id, proposal)
-            self._run_support_review(
+            existing = self._run_support_review(
                 self.revision_support_review,
                 self._revision_evidence(bound, proposal, old, operation_id),
                 bound,
                 proposal["source_refs"],
+                operation_id,
+                requested,
             )
+            if existing is not None:
+                return existing
         return self._commit(bound["session"], operation_id, proposal)
 
     def _run_support_review(
@@ -916,14 +966,26 @@ class FunctionalMemory:
         evidence: dict[str, Any],
         bound: dict[str, Any],
         source_refs: list[str],
-    ) -> None:
+        operation_id: str,
+        requested: dict[str, Any],
+    ) -> dict[str, Any] | None:
         def note_review_delivery() -> None:
             # A returned review can inform the final answer, including a refusal.
             # Independent input remains the exposure anchor, not derived content.
             with self.service._locked():
                 note_exposure(self.service, bound["source_ref"], source_refs)
 
+        if self.semantic_reproposal_policy == "maintenance_two_proposals_v1":
+            return bounded_support_review(
+                self.service,
+                bound,
+                evidence,
+                operation_id,
+                requested,
+                lambda: review(evidence, note_review_delivery),
+            )
         review(evidence, note_review_delivery)
+        return None
 
     def _formation_evidence(
         self,
@@ -1274,6 +1336,65 @@ class FunctionalMemory:
                 raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT") from error
         return result
 
+    def read_support_context(
+        self,
+        config: RunnableConfig,
+        call_id: str,
+        fragment_handles: list[str],
+        read_handle: str | None = None,
+    ) -> dict[str, Any]:
+        """Present actual selected sources and an optional exact target without writing."""
+
+        def action(bound: dict[str, Any]) -> dict[str, Any]:
+            if not self.support_context:
+                raise FunctionalRejection("V13_5_SUPPORT_CONTEXT_DISABLED")
+            fragment_support(self.service, fragment_handles)  # Validate all before exposing any.
+            units = []
+            if read_handle is not None:
+                candidate = self.service.candidate(read_handle)
+                if candidate is None:
+                    raise FunctionalRejection("V13_5_READ_HANDLE_INVALID")
+                row = self.service.read(candidate["record_id"], candidate["revision"])
+                if not row.get("ok"):
+                    raise FunctionalRejection("V13_5_RECORD_UNAVAILABLE")
+                units.extend(self._record_units(row, "read_target_exact_revision"))
+                # The old support identities are context only, never selected for a new value.
+                prior = {
+                    field: [
+                        {
+                            k: quote[k]
+                            for k in (
+                                "source_ref",
+                                "source_revision",
+                                "fragment_handle",
+                                "start",
+                                "end",
+                            )
+                            if k in quote
+                        }
+                        for quote in support["quotes"]
+                    ]
+                    for field, support in row["value"].get("functional_support", {}).items()
+                }
+                for unit in units:
+                    unit["prior_field_support_identity"] = prior
+            units.extend(
+                {"type": "fragment", **self.service.source_fragment(handle)}
+                for handle in fragment_handles
+            )
+            return self._page(self._snapshot(bound, units, "support_context"), 0, bound)
+
+        return self._read(
+            config,
+            call_id,
+            {
+                "tool": "read_support_context",
+                "read_handle": read_handle,
+                "fragment_handles": fragment_handles,
+            },
+            action,
+        )
+
     def tools(self) -> tuple[BaseTool, ...]:
         def message(name: str, call_id: str, result: dict[str, Any]) -> ToolMessage:
             return ToolMessage(
@@ -1295,6 +1416,22 @@ class FunctionalMemory:
                     "formation_status": "pending",
                     "error_type": type(error).__name__,
                     "phase": "pre_mutation_contract",
+                    **(
+                        {
+                            "review_status": error.review_status,
+                            "review_proposal_id": error.proposal_id,
+                            "review_failure_type": error.failure_type,
+                            "review_budget_exhausted": error.failure_type == "BudgetExceeded",
+                            "phase": "precommit_support_review",
+                        }
+                        if isinstance(error, FunctionalReviewRejection)
+                        else {}
+                    ),
+                    **(
+                        {"maintenance": error.details, "phase": "precommit_maintenance_allowance"}
+                        if isinstance(error, FunctionalMaintenanceRejection)
+                        else {}
+                    ),
                 }
             except Exception as error:
                 # A Store put can commit and then raise. Only the same durable
@@ -1716,6 +1853,32 @@ class FunctionalMemory:
             """
             return record_read(config, tool_call_id, {"tool": "read_page", "cursor": cursor})
 
+        def read_support_context(
+            fragment_handles: list[str],
+            config: RunnableConfig,
+            *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            read_handle: str | None = None,
+        ) -> ToolMessage:
+            """Read chosen original bodies beside an optional exact target before proposing.
+
+            Select fragments for the actual assertion, including conditions or context,
+            and an issued read_handle when revising. Returns the old content/scope and
+            prior field-support identities separately from selected original bodies.
+            Preserve necessary limits, unknown effective times and source roles; an
+            explicit correction can change or cancel an old limit. The current request
+            remains the user's instruction, not automatically supporting evidence.
+            This is a read-only working view, not approval, a semantic save, or a claim
+            that all necessary evidence was selected. Final save/update must explicitly
+            select its sources. Omitted bodies remain missing; continue next_cursor with
+            read_page. Uses the existing shared additional-read allowance.
+            """
+            return message(
+                "read_support_context",
+                tool_call_id,
+                self.read_support_context(config, tool_call_id, fragment_handles, read_handle),
+            )
+
         def forget_memory(
             config: RunnableConfig,
             *,
@@ -2046,5 +2209,14 @@ class FunctionalMemory:
             *confirmation_tools,
             StructuredTool.from_function(search_memory),
             *read_tools,
+            *(
+                (
+                    ReadSelectorTool.from_function(
+                        read_support_context, args_schema=SupportContextSelector
+                    ),
+                )
+                if self.support_context
+                else ()
+            ),
             StructuredTool.from_function(forget_memory),
         )
