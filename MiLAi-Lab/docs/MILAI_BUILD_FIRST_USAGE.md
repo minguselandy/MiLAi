@@ -1,6 +1,6 @@
 # Build-first 开发候选
 
-执行范围见[完整计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。当前包A–D的候选代码已接通，首次启动发生调用前配置失败，修复后五条真实冒烟待继续，Product仍为NO_GO。
+执行范围见[完整计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。当前包A–D已形成可运行候选，五条初轮真实冒烟已结束并暴露语义及反馈问题，定向修复复测已结束，集中开发集预测运行中，Product仍为NO_GO。
 
 ## 实现
 
@@ -18,19 +18,19 @@
 
 ```bash
 python tools/run_functional.py prepare \
-  --root artifacts/build-first/functional-v1-smoke \
+  --root artifacts/build-first/functional-v2-personal \
   --config configs/milai-build-first-functional-v1.json
 python tools/run_functional.py message \
-  --root artifacts/build-first/functional-v1-smoke \
+  --root artifacts/build-first/functional-v2-personal \
   --owner development --session daily --message-id save-1 \
   --text '请记住：我的提醒用静音模式。'
 python tools/run_functional.py message \
-  --root artifacts/build-first/functional-v1-smoke \
+  --root artifacts/build-first/functional-v2-personal \
   --owner development --session daily --message-id query-1 \
   --text '我现在的提醒偏好是什么？这次只查询，不保存。'
 ```
 
-同一公开消息显式恢复时使用相同owner/session/message-id/text并加`--resume`。新的用户消息使用新的message-id。真实五条冒烟尚未运行，上述是可运行入口说明，不是成功结果。
+同一公开消息显式恢复时使用相同owner/session/message-id/text并加`--resume`。新的用户消息使用新的message-id。下面记录初轮五条冒烟的实际结果；入口可运行不代表完整语义成功。
 
 实验配置使用同一方法实现，首轮只选M作为工程候选，不是最终方法选择：
 
@@ -56,6 +56,24 @@ python tools/run_functional.py prepare \
 python tools/run_functional.py run --root artifacts/build-first/functional-v2-five-flows
 ```
 
+## 五条初轮真实观察
+
+固定源码`1a8079b`、公开功能配置v2，运行目录`artifacts/build-first/functional-v2-five-flows`。18条原定消息各使用独立进程：原顺序队列16个COMPLETED、1个VISIBILITY_REVOKED，另1个后续查询被队列标记NOT_RUN；随后单独执行该新只读消息并COMPLETED，没有重发遗忘或覆盖原队列状态。COMPLETED只说明执行闭合。
+
+| 流程 | 实际观察与限制 |
+|---|---|
+| 保存／读取／重开 | 相同记录重开可查，只读后记录值不变；回答把“尽量”强化为“严格遵守” |
+| 更正／历史／未改内容 | 英寸实际改为厘米，海报限定保持；历史读取工具返回旧版，两次纯查询均不写入 |
+| 一般／例外／共同条件／撤销 | 例外、共同条件两天及撤销实际提交，旧版保留；旧否定事项已送达却未改，回答出现子组频次推导；共同条件提交后Host引用维护前缓存并声称未更新 |
+| 纯查询／未知／遗忘 | 未编造雨伞颜色；遗忘后没有重新显示偏好，原答复协议失败而被遮蔽；新的只读消息错误推断从未保存 |
+| 部分业务／恢复／反馈 | 实际预订一次，标签服务恢复后先查询再补标签一次；程序回执明确部分业务和记忆未完成；持久语义仍把部分完成概括为操作失败 |
+
+原队列77次生成、528,871 known tokens；后续只读5次、21,924 tokens，合计82次／550,795，编码38次／1,592 tokens，Judge0。与原账本差额一致，新增unknown0，原unknown4保留，预算未重置。用户来源编辑截断与遗忘后答复失败保留，不修写为通过；原始内容、HTTP与数据库均ignored。
+
+`dffc232`只针对已定位的缓存问题：实际维护提交后重新生成本轮普通视图，已发行历史快照保持。脚本响应定向检查、Ruff及受影响mypy通过；同一例外故事前四条的真实复测从新的空库运行，不能替代本初轮失败。复测4条新消息：1条COMPLETED、3条FAILED；新增例外的编辑截断导致未提交，后续查询与条件更新均耗尽读取额度。条件更新实际提交为两天，运行轨迹确认Host已收到新状态，回执如实报告已提交，但没有完整自然答案。18次生成／160,508 tokens、14次编码／710 tokens、Judge0、新增unknown0；不重发截断请求，原NOT_RUN条目与后续独立step输出同时保留。
+
+集中开发集现已从固定dffc232源码启动：`artifacts/build-first/prefix8-v1/M`，四个既有开发用户各前8，M候选、extract_then_edit、I2、BGE-m3普通dense K10，先`predict`再另行`score`。没有启动其他组或读取16保留用户。预测阶段尚无完成结论，不能与旧B0/B1排名。主比较、长历史、保留用户、外部验证和完整Host回归仍未完成。
+
 ## 本次验证与边界
 
 受影响工程检查覆盖普通Host两个recipe实际SQLite提交和重开、只读权限、提交后中断恢复、未知抽取请求不自动重发，以及既有四组schema/来源/版本/遗忘路径。传输使用脚本响应，只能证明工程连接，不能证明真实模型效果。新增只读范围／历史、旧语境和两套基准延后评分检查使用脚本响应与实际SQLite，仍不算真实样本。开发配置离线prepare已成功；截至本候选提交准备时，新增真实生成／编码均为0。
@@ -69,3 +87,5 @@ python tools/run_functional.py run --root artifacts/build-first/functional-v2-fi
 当前未完事项集中在[问题表](MILAI_BUILD_FIRST_ISSUES.md)。
 
 首次启动记录：`functional-v1-five-flows`使用45596d8，在计账作用域创建前缺失编码客户端的可选配置默认字段，五个首消息均未进入模型；后续消息未运行。生成／编码新增均0，原unknown=4不变。修复域声明并按VLLMConfig展开默认值，使用同一公开配置文件的v2版本及新目录继续，不覆盖失败产物。
+
+候选源码dffc232自身Fast37563832351成功，Full37563832443查询时仍运行；这不证明语义效果。集中预测开始前原账本为41140生成请求／158,573,083 known／158,723,856 charged／unknown4，编码1,105,190；这是两个已闭合冒烟范围之后的边界，不包括在途开发集调用。

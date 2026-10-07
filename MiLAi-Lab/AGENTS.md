@@ -1,3 +1,30 @@
+# 2026-10-07: five real smoke flows closed; concentrated prediction active
+
+Frozen1a8079b five-flow run plus its distinct post-forget query:18 messages,
+17executionCOMPLETED/1VISIBILITY_REVOKED, NOT semantic passes.82generation
+550795known,38embedding1592,0Judge/newunknown. Actual correction/history and
+partial business recovery worked; modality, subgroup scope, stale negative fact,
+partial effect text and forgotten-history explanations still fail. Business DB
+shows exactly1reserve+1complete_label. Forget original answer protocol failure
+kept redacted; later new query cannot read hidden preference but falsely says
+never saved. No reissue of forget or unknown/truncated model request.
+
+Commitdffc232 refreshes current ordinary view after actual maintenance commits;
+old snapshots remain historical. Focused4-message replay FROM EMPTY has1closed
+and3FAILED due editor truncation/repeated read exhaustion. Actual two-day
+condition saved and fresh view delivered, but natural response remains failed.
+18generation160508known,14embedding710,0Judge/newunknown; original results kept.
+Affected checks pass; dffc Fast37563832351 success, Full37563832443 running.
+
+Concentrated4dev users prefix8 M PREDICT now uses fixed source-dffc232 and public
+configs/milai-build-first-prefix8-v1.json. Root artifacts/build-first/prefix8-v1,
+serial tool session88573; do not launch competing model jobs or edit frozen source.
+Its start ledger41140/158573083known/158723856charged/embed1105190/unknown4.
+Next read actual prediction progress and full answers/states, then existing
+--phase score reuses outputs, no Writer/Reader repeat. No final ranking.
+Full plan ACTIVE/incomplete,16reserved unread,ProductNO_GO,PR85draft,no agents.
+Use the one issues table and usage doc; raw/HTTP/DB remain ignored.
+
 # 2026-10-07: build-first A-D candidate prepared
 
 Shared context and readonly applicability now serve Host and benchmark; deferred

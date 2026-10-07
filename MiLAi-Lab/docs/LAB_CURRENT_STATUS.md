@@ -3,7 +3,9 @@
 
 **2026-10-07：按build-first计划推进共同维护与普通Host集成。**
 
-包A代码已接通`single_pass`／`extract_then_edit`共用编排、dense定位和真实提交回执；普通Host关闭重复的独立保存入口。已有工程检查支持保存、重开、只读权限及中断恢复，尚无新真实模型结果。包B–D现已补上旧语境、只读关系展开、故障回执及预测／评分分离；五条真实冒烟与集中实验仍未完成。父提交43f5ff7的Fast暴露解析函数隐式重导出类型错误，当前候选已修正，待新提交CI。当前入口与问题统一记录在[使用说明](MILAI_BUILD_FIRST_USAGE.md)及[问题表](MILAI_BUILD_FIRST_ISSUES.md)，完整范围见[新执行计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。
+包A–D候选已接通共同维护、旧语境、只读关系展开、真实回执与预测／评分分离。固定1a8079b的五条真实冒烟已结束：共18条独立进程消息（含队列后单独执行的原定只读查询），17条执行COMPLETED、1条遗忘后答复VISIBILITY_REVOKED；这不是17条语义通过。82次生成／550,795 tokens、38次编码／1,592 tokens、Judge0、新增unknown0。更正／历史及实际部分业务恢复链可用；限定强化、子组频次推导、旧否定事项漏改、部分效果误写、遗忘后的历史误断仍存在。实际提交后普通视图未刷新的工程错误已在dffc232修复，定向真实复测4条已结束：1条COMPLETED／3条FAILED，新状态送达已验证，但编辑截断及重复读取仍影响答复；18生成／160,508 tokens、14编码／710 tokens，新增unknown0。
+
+父43f5ff7的隐式重导出CI错误与首次调用前客户端配置错误均已修正；1a8079b自身Fast37562995360成功，Full37562995296查询时运行中。dffc232自身Fast37563832351成功，Full37563832443仍运行。当前入口和逐项失败见[使用说明](MILAI_BUILD_FIRST_USAGE.md)及[问题表](MILAI_BUILD_FIRST_ISSUES.md)，范围见[完整计划](MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)。固定dffc232已启动四开发用户前8的M候选预测，随后独立评分；尚无新开发集评分或方法排名；Product NO_GO。
 
 原冻结072队列本次核对：PID3476759已不存在、串行锁空闲；B0仍32/32，B1为27/26且无arm终态，suite未完成，B2/M未运行。中断原因未确认，未重启或覆盖原队列，unknown账本保持。旧分数与下方时间快照保留；Product仍NO_GO。
 
