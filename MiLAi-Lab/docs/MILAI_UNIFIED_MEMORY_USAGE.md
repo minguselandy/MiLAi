@@ -11,6 +11,77 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 23:15:33 UTC：PR99合并，原B0评分闭合，真实保存续办与只读重开闭合
+
+本节固定于2026-10-07 23:15:33 UTC／北京时间2026-10-08 07:15:33。报告版本以所在
+提交为准。main为`eedd26c5455811d9e3b30624249e205467410268`，PR83至99已合并。
+PR99实际受测头及本次Host源码为`4e4609917c1b0ce6e3aa14b3f885df6854c364c1`；
+原B0评分及刚启动的B1评分仍冻结`505cefaee8c25cac0670fb1d3a38f7c2fae33165`。
+当前main源码内容与受测4e相同；这不把新修复归入原505预测或评分。
+
+**PR99自身CI成功后合并，首失败保留。**[PR99](https://github.com/minguselandy/MiLAi/pull/99)
+于23:01:58 UTC普通merge。其4e头的[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37696067124)
+及[Full](https://github.com/minguselandy/MiLAi/actions/runs/37696067365)成功，Full21/21作业通过。
+首81d头的[Full foundation](https://github.com/minguselandy/MiLAi/actions/runs/37693982093)
+因旧日历测试读取Reader已省去的外层派生time_values而失败。后续只修正既有测试，分别
+核对API及保存检索保留秒精度／未知时区、Reader保留原始时刻／名义日历／实际有效限，
+并检查指令不从日历名推断时区；未补回重复字段或改变源码／workflow／运行配置。
+工程CI不等于语义效果验证。合并后远端open列表为空是该时点观察。
+
+**原505 B0预测及评分均闭合。**评分从21:56:17至23:04:56 UTC，32/32会话检查点、
+terminal-score为COMPLETED_EXPERIMENT_PHASE、进程退出0。没有重跑Writer、Reader或
+encoder，也没有重启原预测。作者原标签如下，不重命名Omitted或补评null：
+
+| 原B0标签 | 全部机会 | 有效判断 | Correct | 其他原标签 |
+|---|---|---|---|---|
+| 更新 | 72 | 61 | 31 | 29 Omission、1 Hallucination、4 Omitted、7 null |
+| QA | 73 | 67 | 43 | 9 Omission、15 Hallucination、6 null |
+
+更新Correct为31/72（43.1%），valid分母为31/61；QA为43/73（58.9%），valid为43/67。
+formation非interference参考439／valid394；实际formed输出63／valid51。原作者聚合没有
+异常，但无效判断仍存在。479个Judge响应全部stop，1,510,929 known、新增unknown0、
+embedding0。B0预测139加评分479，共618生成／3,963,465 known，embedding仍219次／
+74,992 tokens。各用户及先前部分评分成本属于这479的子集，不能再次相加。
+Root先前已读73完整自然答案，来源审计未完整，没有另造数值重评分或独立确认。
+
+**新Host从原1f实际pending状态独立复制，两次执行闭合。**不是续写已运行main1af的库，
+原run_id、owner、request、业务对象和配置保留，使用既有普通message入口，不注入理想
+事项或业务回执。23:07:07至23:08:54 UTC第一消息只授权查询业务及续办原结果保存。
+User来源维护实际提交r2，但不能证明业务结果保存，原attempt仍为failed／
+result_save_unconfirmed；本次不是旧1af的Writer length失败。随后真实get_reservation的
+Tool来源维护提交r3，新attempt关联该批次及实际回执，原memory变为committed，
+request结构状态completed。旧failed保留，semantic_coverage仍unchecked，反馈仅确认
+Host收到checkpoint，user_seen仍unchecked。当前记录保留预订编号、数量、目的地／包装
+配置、首次标签失败及后续标签完成历史；未写成实际物理送达。程序最终反馈引用实际
+已送达的r3正文，分别列出业务查询、记忆提交及原请求进度。
+
+23:11:39至23:12:01 UTC第二消息跨进程／会话只读重开，memory及business写权限均false，
+maintenance及显式记忆修改均0。实际公开records的值与第一消息之后相同；业务DB所有
+reservation／attempt行也相同，始终恰有1预订／1补标签。该消息用已送达快照与先前真实
+回执回答，走agent_response_retained，没有新业务工具调用；不能宣称再次实时发现了
+外部变化，或直接复现旧1af第二消息的程序回执分支。Root读完两条完整候选／送达答复，
+并核对实际提交、来源及业务行；这是已曝光故事的改进复核，不是未见故事或完整Host准入。
+第一消息8生成／96,115 known、embedding1,196 tokens；第二2生成／14,429 known、
+embedding176。两条共10生成／110,544 known、embedding1,372，Judge0、新增unknown0。
+
+**只汇总已经闭合的费用，B1在途另列。**自17:09预测启动前账本起，上节五臂部分预测、
+格式诊断、旧1af Host和独立Reader共553生成／9,259,851 known；新增B0 Judge479及新Host10，
+共1,042闭合生成／10,881,324 known，embedding292,092 tokens。B1开始前连续账本为
+44,563 requests、184,724,128 known、184,915,616 charged、embedding1,623,223、
+unknown5，差额核对一致；unknown5是原历史值。没有重置预算或新增上限。旧报告、各臂
+预测、子用户评分与这段累计费用不再重复相加。
+
+23:15:33 UTC原505 B1从32份保存预测启动纯score，PID1052682；此固定节不计其未闭合
+成本。其后B2待串行评分；原M／Append失败部分不补零。新的4e五方法独立空库prefix8
+配置及源码已准备，真实调用仍0，保持原K10、预算、模型、recipe及方法配置；旧81准备
+已标为执行前替换，未运行输出不存在。原278份离线容量检查和两条独立Reader诊断仍按
+原版本及范围归属，不能当新的完整五方法结果。
+
+完整任务继续active：同版五方法、65／277连续历史、native／drift／recovery、必要消融／
+一个固定更紧预算、最终冻结后16保留用户、外部任务、Host135case／192message及新增
+故事、六项交付尚未完成。16未用于开发，single_verdict_v1未准入，Product NO_GO；原始
+正文、gold、HTTP、reasoning、数据库、私有配置及日志继续ignored。下面各固定快照保留。
+
 ## 21:58:44 UTC：三臂预测闭合、两臂部分失败；读取与保存续办按实际断点修复
 
 本节固定于2026-10-07 21:58:44 UTC／北京时间2026-10-08 05:58:44。报告版本以所在

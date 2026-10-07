@@ -4,6 +4,24 @@
 [PR84](https://github.com/minguselandy/MiLAi/pull/84)和[PR85](https://github.com/minguselandy/MiLAi/pull/85)。
 工程合并不表示原研究任务完成，也不改变Product NO_GO。
 
+## 23:01:58 UTC：PR99已合并
+
+[PR99](https://github.com/minguselandy/MiLAi/pull/99)头`4e46099`的自身
+[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37696067124)及
+[Full](https://github.com/minguselandy/MiLAi/actions/runs/37696067365)成功，Full21/21。
+Root核对实际头、main基础和工作区后，按用户既有授权普通merge为
+`eedd26c5455811d9e3b30624249e205467410268`；远端merged／closed及23:01:58时间、
+本地origin/main及源码内容均已核对，合并后open列表为空是该时点观察。
+
+首81d头的[Full foundation失败](https://github.com/minguselandy/MiLAi/actions/runs/37693982093)
+保留：旧日历测试仍读取Reader已省去的重复时间解析。后续只改既有测试，验证API／保存
+检索保留精度和未知时区，以及Reader的实际时刻／名义日历／有效限。没有改workflow、
+运行源码或参数来通过此检查，也没有重跑首失败冒充同头成功。
+
+原505 B0评分及新4e两条Host消息的真实闭合、原失败和费用见[固定报告](
+MILAI_UNIFIED_MEMORY_USAGE.md)。B1仍从原505保存预测串行评分；完整研究／功能范围
+未完成，16保留未用，Product NO_GO。各实验冻结源与CI均按自己的版本归属。
+
 ## 21:58:44 UTC：PR83至98已合并，main为1af2585
 
 远端main与本地整合基础均为`1af2585012990e0df21d18b54df68c1b87bf0d8a`。

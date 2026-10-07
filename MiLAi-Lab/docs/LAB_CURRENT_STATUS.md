@@ -1,5 +1,16 @@
 # MiLAi Lab 当前状态
 
+**2026-10-07 23:15:33 UTC／北京时间2026-10-08 07:15:33：PR99合并，原B0评分与新保存续办闭合。**
+
+main eedd26c，PR83至99已合并；受测4e自身Fast／Full21成功，旧日历测试首失败保留。
+冻结505 B0评分32/32、进程0：更新31/72valid61，QA43/73valid67，479Judge／1510929known。
+新4e从原1f pending实际库复制执行两消息，Tool批次r3绑定原保存attempt，旧failed保留；
+业务仍1预订／1补标签。只读重开记录值及业务行不变，答复依据已送达快照，不记新实时查询。
+两条10生成／110544known、embedding1372，Judge0／新增unknown0，非完整Host语义准入。
+原505 B1纯score于23:15:33启动、PID1052682；B2待串行，新4e五方法配置准备0调用。
+详细标签、固定闭合成本和版本见[报告](MILAI_UNIFIED_MEMORY_USAGE.md)。完整目标active，
+16保留未用、single_verdict_v1未准入、Product NO_GO；以下为历史观察。
+
 **2026-10-07 21:58:44 UTC／北京时间2026-10-08 05:58:44：PR83至98合并，五臂预测仍部分失败。**
 
 main1af2585；发布前新集成c2a5900包含Reader语义投影、新Tool保存attempt绑定及已读取正文反馈，自身CI待请求。
