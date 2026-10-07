@@ -1,5 +1,14 @@
 # MiLAi Lab 当前状态
 
+**2026-10-07 17:12:00 UTC／北京时间2026-10-08 01:12:00：PR94合并，旧子集评分闭合，新五方法运行中。**
+
+main2cedc371／integration干净，PR94头505cefa自身Fast／Full21及main push成功。
+ec旧23份B0保存评分闭合：更新22/46valid40、QA34/44valid44；原32预测仍FAILED。
+505单次实际超限Reader输入31787／stop已闭合，非语义通过；新同505五臂空库预测
+17:09启动、PID3757265存在，本快照B0维护2／预测1，其余未启动、无终态或score。
+版本、标签、闭合费用及未完范围见[唯一详细报告](MILAI_UNIFIED_MEMORY_USAGE.md)。
+完整目标active，16保留未用、single_verdict_v1未准入、Product NO_GO；以下为历史观察。
+
 **2026-10-07 16:04:07 UTC／北京时间2026-10-08 00:04:07：PR93合并，ec五组首预测已失败。**
 
 main9775a47／integration干净，PR93头ffce自身Fast／Full21及main push成功。ec冻结预测
