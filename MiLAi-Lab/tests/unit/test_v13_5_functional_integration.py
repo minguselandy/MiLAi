@@ -66,6 +66,7 @@ def prepared(
     catalog_feedback: bool = False,
     explicit_reads: bool = False,
     memory_continuation: bool = False,
+    complete_requests: bool = False,
     memory_method: str = "functional_v1",
     edit_interface_version: str = "v1",
     edit_features: dict[str, bool] | None = None,
@@ -135,7 +136,8 @@ def prepared(
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
-        "request_mode": "current_request_native_v7" if memory_continuation else
+        "request_mode": "current_request_native_v8" if complete_requests else
+        "current_request_native_v7" if memory_continuation else
         "current_request_native_v6" if independent_capabilities else
         "current_request_native_v5" if reference_mode_declaration else
         "current_request_native_v4" if operation_mode_declaration else
@@ -4988,3 +4990,229 @@ def test_shared_host_delivers_selected_prior_request_beyond_recent_context(
     repeated = functional.message(root, **args, resume=True)
     assert repeated["status"] == "COMPLETED" and repeated["records"] == []
     assert len(wires) == calls
+
+
+@pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
+@pytest.mark.parametrize("continuation", ["complete", "no_save", "readonly", "empty_save"])
+def test_complete_host_request_survives_partial_effect_and_new_session(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str, continuation: str,
+) -> None:
+    root = prepared(tmp_path, native=True, complete_requests=True,
+        memory_profile="unified_v1", memory_method="milai_edit_m_v1",
+        edit_interface_version="I2", maintenance_recipe=recipe,
+        edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope")})
+    initial_text = "Reserve and label the teal pack, and remember the actual result."
+    followup_text = {
+        "complete": "Continue the complete earlier request, including its unfinished saving.",
+        "no_save": "Continue the missing business step only; do not save anything.",
+        "readonly": "Only inspect progress of the earlier request; do not act or save.",
+        "empty_save": "Continue the missing business step and save the actual result.",
+    }[continuation]
+    reserved = {"item_key": "teal pack", "quantity": 1,
+                "destination": "local", "packing": "box"}
+    seen = {"reserve": 0, "label": 0, "saved": 0}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {t["function"]["name"] for t in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            current = wire["messages"][-1]["content"]
+            first = current == initial_text
+            return native_call("classify_current_request", "mode-" + str(ordinal),
+                memory_write_request="explicit" if first or continuation == "empty_save"
+                else "none", allow_forgetting=False,
+                business_action_request="perform" if first else
+                "none" if continuation == "readonly" else "continue_if_unfinished",
+                business_operations=["reserve_and_label", "complete_label"] if first else [],
+                memory_continuation_request="resolve_prior_explicit" if not first
+                and continuation in {"complete", "empty_save"} else "none",
+                application_continuation_request="none" if first else "resolve_prior_request",
+                application_requests=[{"target": {"item_key": "teal pack"}, "actions": [{
+                    "operation": "reserve_and_label", "arguments": {
+                        key: value for key, value in reserved.items() if key != "item_key"}}]}]
+                if first else [])
+        if names == {"resolve_continuation_operations"}:
+            frame = json.loads(wire["messages"][-1]["content"])
+            cards = frame["archived_reference_material"]["registered_application_requests"]
+            assert len(cards) == 1
+            card = cards[0]
+            assert len(card["requirements"]["steps"]) == 2
+            assert card["requirements"]["save_result"]
+            return native_call("resolve_continuation_operations", "resolve-" + str(ordinal),
+                business_operations=[] if continuation == "readonly" else ["complete_label"],
+                prior_request_ids=[card["request_id"]],
+                prior_memory_request_fragments=[p["fragment_handle"]
+                    for p in card["user_fragments"]]
+                if continuation in {"complete", "empty_save"} else [])
+        if not names:
+            system = wire["messages"][0]["content"]
+            if "Extract brief candidate propositions" in system:
+                return {"role": "assistant", "content": json.dumps({"changes": []})}
+            packet = json.loads(wire["messages"][-1]["content"])["delivery"]
+            tool_sources = {s["id"] for s in packet["source_table"] if s["role"] == "tool"}
+            completed_evidence = [e for e in packet["evidence"] if e["source"] in tool_sources
+                                  and '"label_status": "created"' in e["text"]]
+            envelope: dict[str, Any] = {"creates": [], "records": {}}
+            if continuation == "complete" and completed_evidence:
+                evidence = completed_evidence[0]["id"]
+                envelope["creates"] = [{"action": "create", "matter": "Teal pack outcome",
+                    "clauses": [{"text": "The teal pack was reserved and its label created.",
+                                 "evidence": [evidence], "conditions": [],
+                                 "assertion": {"source": evidence, "kind": "observed"}}]}]
+                seen["saved"] += 1
+            return {"role": "assistant", "content": json.dumps(envelope)}
+        current = next(m["content"] for m in wire["messages"] if m["role"] == "user")
+        tools = [m for m in wire["messages"] if m["role"] == "tool"]
+        if not tools:
+            if current == initial_text:
+                seen["reserve"] += 1
+                return native_call("reserve_and_label", "reserve", **reserved)
+            return native_call("get_reservation", "query", item_key="teal pack")
+        last = tools[-1]
+        if last["name"] == "get_reservation" and continuation != "readonly":
+            seen["label"] += 1
+            actual = json.loads(last["content"])["receipt"]
+            return native_call("complete_label", "label", reservation_id=actual["reservation_id"])
+        return {"role": "assistant", "content": "Reported the actual request progress."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first_args = dict(bank="request-bank", owner="alice", session="first", message_id="start",
+                      content=initial_text, initial_world={"label_available": False})
+    first = functional.message(root, **first_args)
+    assert first["status"] == "COMPLETED", first.get("error")
+    original = first["application_requests"][0]
+    assert not original["complete"] and original["memory"]["status"] == "pending"
+    assert [s["status"] for s in original["business"]["steps"]] == ["completed", "incomplete"]
+    assert original["feedback"]["status"] == "delivered"
+    assert len(first["world"]["world"]["attempts"]) == 1
+    original_rows = [r for r in first["world"]["receipt_progress"].values()
+                     if r["identity"]["name"] == "resume_request"]
+    assert len(original_rows) == 1 and original_rows[0]["binding"]["session"] == "first"
+    followup_args = dict(bank="request-bank", owner="alice", session="second",
+        message_id="continue",
+        content=followup_text, message_index=1, evaluator_control={"before_message_events": [{
+            "event_id": "label-restored", "before_message_index": 1,
+            "operation": "reservation.set_label_available", "available": True}]})
+    second = functional.message(root, **followup_args)
+    assert second["status"] == "COMPLETED", second.get("error")
+    progress = second["application_requests"][0]
+    assert progress["request_id"] == original["request_id"]
+    assert seen["reserve"] == 1 and seen["label"] == int(continuation != "readonly")
+    assert len(second["world"]["world"]["attempts"]) == 1 + int(continuation != "readonly")
+    assert progress["feedback"]["status"] == "delivered"
+    if continuation == "complete":
+        assert progress["complete"] and progress["memory"]["status"] == "committed"
+        assert seen["saved"] == 1 and len(second["records"]) == 1
+        assert progress["semantic_coverage"] == "unchecked"
+    else:
+        assert not progress["complete"] and second["records"] == []
+        if continuation == "empty_save":
+            assert progress["memory"]["status"] == "failed"
+            assert len(progress["memory"]["attempts"]) == 1
+        else:
+            assert progress["memory"]["current_permission"] == "not_authorized_current_request"
+    calls = len(wires)
+    replay = functional.message(root, **followup_args, resume=True)
+    assert replay["status"] == "COMPLETED" and len(wires) == calls
+    assert replay["records"] == second["records"]
+
+
+@pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
+def test_host_request_reconciles_original_shared_commit_after_response_loss(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str,
+) -> None:
+    from milai_lab.memory.service import MemoryService
+    from milai_lab.methods.functional_edit_memory import FunctionalEditMemory
+
+    root = prepared(tmp_path, native=True, complete_requests=True,
+        memory_profile="unified_v1", memory_method="milai_edit_m_v1",
+        edit_interface_version="I2", maintenance_recipe=recipe,
+        edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope")})
+    apply = FunctionalEditMemory.apply_writer_proposal
+    operation_receipt = MemoryService.operation_receipt
+    lost = []
+    lookup_available = False
+
+    def receipt_lookup(self, session, operation_id):
+        if operation_id in lost and not lookup_available:
+            return None
+        return operation_receipt(self, session, operation_id)
+
+    def commit_then_lose(self, config, operation_id, proposal):
+        progress = read_json(next(root.glob(
+            "banks/*/applications/reservation/receipt-progress.json")))
+        request = next(r for r in progress.values() if r["identity"]["name"] == "resume_request")
+        pending = request["request_progress"]["memory"]
+        assert pending["status"] == "semantic_unknown" and len(pending["attempts"]) == 1
+        assert pending["attempts"][0]["binding"]["maintenance"]
+        receipt = apply(self, config, operation_id, proposal)
+        if receipt.get("status") == "committed" and not lost:
+            lost.append(operation_id)
+            raise RuntimeError("ACTUAL_COMMIT_RESPONSE_LOST")
+        return receipt
+
+    monkeypatch.setattr(FunctionalEditMemory, "apply_writer_proposal", commit_then_lose)
+    monkeypatch.setattr(MemoryService, "operation_receipt", receipt_lookup)
+
+    def reply(wire, ordinal):
+        names = {t["function"]["name"] for t in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            first = "Reserve" in wire["messages"][-1]["content"]
+            return native_call("classify_current_request", "mode-" + str(ordinal),
+                memory_write_request="explicit" if first else "none", allow_forgetting=False,
+                business_action_request="perform" if first else "none",
+                business_operations=["reserve_and_label"] if first else [],
+                memory_continuation_request="none",
+                application_continuation_request="none" if first else "resolve_prior_request",
+                application_requests=[{"target": {"item_key": "violet pack"}, "actions": [{
+                    "operation": "reserve_and_label", "arguments": {
+                        "quantity": 1, "destination": "local", "packing": "box"}}]}]
+                if first else [])
+        if names == {"resolve_continuation_operations"}:
+            frame = json.loads(wire["messages"][-1]["content"])
+            card = frame["archived_reference_material"]["registered_application_requests"][0]
+            return native_call("resolve_continuation_operations", "resolve",
+                business_operations=[], prior_memory_request_fragments=[],
+                prior_request_ids=[card["request_id"]])
+        if not names:
+            if "Extract brief candidate propositions" in wire["messages"][0]["content"]:
+                return {"role": "assistant", "content": json.dumps({"changes": []})}
+            packet = json.loads(wire["messages"][-1]["content"])["delivery"]
+            tools = {s["id"] for s in packet["source_table"] if s["role"] == "tool"}
+            envelope = {"creates": [], "records": {}}
+            if tools:
+                evidence = next(e["id"] for e in packet["evidence"] if e["source"] in tools)
+                envelope["creates"] = [{"action": "create", "matter": "Violet pack result",
+                    "clauses": [{"text": "Violet pack was reserved and labeled.",
+                        "evidence": [evidence], "conditions": [],
+                        "assertion": {"source": evidence, "kind": "observed"}}]}]
+            return {"role": "assistant", "content": json.dumps(envelope)}
+        if not [m for m in wire["messages"] if m["role"] == "tool"] and not lost:
+            return native_call("reserve_and_label", "reserve", item_key="violet pack",
+                               quantity=1, destination="local", packing="box")
+        return {"role": "assistant", "content": "Report actual progress and its memory status."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    first = functional.message(root, bank="loss-bank", owner="alice", session="original",
+        message_id="request", content="Reserve and label violet pack; save its actual result.")
+    assert first["status"] == "COMPLETED", first.get("error")
+    assert len(lost) == 1 and len(first["records"]) == 1
+    old = first["application_requests"][0]
+    assert old["memory"]["status"] == "semantic_unknown" and not old["complete"]
+    assert old["memory"]["attempts"][0]["error"] == "ACTUAL_COMMIT_RESPONSE_LOST"
+    assert len(first["world"]["world"]["attempts"]) == 1
+    count = len(wires)
+    lookup_available = True
+    second = functional.message(root, bank="loss-bank", owner="alice", session="readonly",
+        message_id="inspect", content="Only inspect progress of the original request; do not save.")
+    assert second["status"] == "COMPLETED", second.get("error")
+    current = second["application_requests"][0]
+    assert current["request_id"] == old["request_id"]
+    assert current["memory"]["status"] == "committed"
+    assert current["memory"]["attempts"] == old["memory"]["attempts"]
+    assert second["records"] == first["records"] and second["maintenance"] == []
+    assert len(second["world"]["world"]["attempts"]) == 1
+    assert len(wires) - count == 3  # declaration, bounded reference, actual Host response

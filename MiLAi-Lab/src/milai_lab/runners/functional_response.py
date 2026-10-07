@@ -140,6 +140,22 @@ def business_response(
     for operation in semantic["operations"]:
         paragraphs.append("记忆操作: " + _text({k: operation[k] for k in (
             "tool", "id", "revision", "status") if k in operation}))
+    for request in effects.get("application_requests", []):
+        labels = {
+            "completed": "完成", "pending_host_execution": "仍有待办",
+            "observed_only": "只查询", "not_authorized_current_request": "当前未获允许",
+            "current_state_changed": "当前状态已变化", "business_unknown": "效果待查询",
+            "pending": "尚未确认", "committed": "提交已确认", "failed": "未确认成功",
+            "not_requested": "未要求", "delivered": "Host已收到进度",
+            "semantic_unknown": "提交结果未知", "model_unknown": "模型响应未知",
+        }
+        business_status = request["business"]["status"]
+        memory_status = request["memory"].get("current_permission", request["memory"]["status"])
+        feedback_status = request["feedback"]["status"]
+        paragraphs.append("原请求进度: 业务" + labels.get(business_status, business_status)
+            + "; 实际结果保存" + labels.get(memory_status, memory_status)
+            + "; 反馈" + labels.get(feedback_status, feedback_status)
+            + "。回执进度与语义正确性分别记录。")
     for number, operation in enumerate(effects.get("visibility", {}).get("operations", []), 1):
         attempt_label = "遗忘尝试 " + str(number) + ": "
         if operation["status"] == "visibility_revoked":
