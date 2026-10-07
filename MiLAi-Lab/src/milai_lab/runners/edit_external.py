@@ -113,8 +113,10 @@ class EmbeddingTransport:
 
 
 class ExternalRun(BenchmarkRun):
-    def __init__(self, settings: dict[str, Any], root: Path) -> None:
-        super().__init__(settings, root)
+    def __init__(
+        self, settings: dict[str, Any], root: Path, *, phase: str = "all"
+    ) -> None:
+        super().__init__(settings, root, phase=phase)
         try:
             self.embedding_client = VLLMClient(
                 VLLMConfig(**settings["embedding"]), budget=self.budget
@@ -223,7 +225,7 @@ class ExternalRun(BenchmarkRun):
             )
         observed = ObservedSession(source_session, observed.date, observed.turns)
         arm = self.settings["arm"]
-        if arm in {"B0", "B1", "B2", "M"}:
+        if arm in {"B0", "B1", "B2", "M", "Append-only"}:
             return super().maintain(service, observed, key)
         if arm not in {"RawRAG", "RollingSummary", "A-MEM"}:
             raise ValueError("Unsupported external comparison arm")
@@ -356,7 +358,7 @@ class ExternalRun(BenchmarkRun):
 
     def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
         arm = self.settings["arm"]
-        if arm in {"B0", "B1", "B2", "M"}:
+        if arm in {"B0", "B1", "B2", "M", "Append-only"}:
             return super().answer(service, question, date, key)
         path = self.root / "reader-delivery" / key / "memories.json"
         if path.exists():
@@ -419,14 +421,17 @@ class ExternalRun(BenchmarkRun):
         )
 
 
-def run_external(settings: dict[str, Any], root: Path) -> None:
-    execution = ExternalRun(settings, root)
+def run_external(settings: dict[str, Any], root: Path, phase: str = "all") -> None:
+    execution = ExternalRun(settings, root, phase=phase)
+    terminal = root / ("terminal.json" if phase == "all" else f"terminal-{phase}.json")
     try:
-        predictions = execution.longmemeval()
+        predictions = execution.longmemeval(phase)
         write_json(
-            root / "terminal.json",
+            terminal,
             {
-                "status": "COMPLETED_EXTERNAL_PHASE",
+                "status": "PREDICTIONS_SAVED" if phase == "predict"
+                else "COMPLETED_EXTERNAL_PHASE",
+                "phase": phase,
                 "arm": settings["arm"],
                 "questions": len(predictions),
                 "source_condition": "shared-history descriptive subset; not independent holdout",
@@ -434,7 +439,7 @@ def run_external(settings: dict[str, Any], root: Path) -> None:
         )
     except Exception as error:
         write_json(
-            root / "terminal.json",
+            terminal,
             {"status": "FAILED", "type": type(error).__name__, "message": str(error)},
         )
         raise

@@ -58,6 +58,8 @@ python tools/run_functional.py prepare \
 python tools/run_functional.py run --root artifacts/build-first/functional-v2-five-flows
 ```
 
+外部对照沿用`tools/run_edit_external.py --config ... --output ...`，现在也接受`--phase predict|score|all`，并可选择B0/B1/B2/M／Append-only及已有RawRAG、RollingSummary、A-MEM适配。两阶段使用同一冻结配置和产物目录，阶段终态、进度及结束账本分别保存；评分阶段复用已保存的LongMemEval答案，不重做形成、检索或回答。原默认`all`入口保留。已用脚本响应和实际SQLite验证RawRAG预测后重开评分，以及Append-only经外部入口形成状态并调用共同Reader；尚未启动本轮28题真实外部比较，旧外部配置不代表当前候选的冻结配置。
+
 ## 五条初轮真实观察
 
 固定源码`1a8079b`、公开功能配置v2，运行目录`artifacts/build-first/functional-v2-five-flows`。18条原定消息各使用独立进程：原顺序队列16个COMPLETED、1个VISIBILITY_REVOKED，另1个后续查询被队列标记NOT_RUN；随后单独执行该新只读消息并COMPLETED，没有重发遗忘或覆盖原队列状态。COMPLETED只说明执行闭合。

@@ -19,10 +19,14 @@ from milai_lab.runners.edit_external import (
     ExternalRun,
     bound_author_context,
     reader_payload,
+    run_external,
 )
 
 
-def test_external_embedding_configuration_keeps_its_original_transport(tmp_path, monkeypatch):
+@pytest.mark.parametrize("phase", ["all", "predict", "score"])
+def test_external_embedding_configuration_keeps_its_original_transport(
+    tmp_path, monkeypatch, phase
+):
     tokenizer = Tokenizer(WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer_path = tmp_path / "tokenizer.json"
     tokenizer.save(str(tokenizer_path))
@@ -42,14 +46,15 @@ def test_external_embedding_configuration_keeps_its_original_transport(tmp_path,
         "embedding_context_tokens": 128,
         "embedding_batch_size": 2,
     }
-    execution = ExternalRun(settings, tmp_path / "run")
+    execution = ExternalRun(settings, tmp_path / "run", phase=phase)
     try:
         assert execution.embedding.execution is execution
         assert execution.retrieval_embedding_client is None
         assert execution._semantic_retriever() is None
     finally:
         execution.close()
-    assert read_json(tmp_path / "run/accounting-end.json") == read_json(
+    end = "accounting-end.json" if phase == "all" else f"accounting-{phase}-end.json"
+    assert read_json(tmp_path / "run" / end) == read_json(
         tmp_path / "run/accounting-start.json"
     )
 
@@ -299,8 +304,9 @@ def test_repeated_author_session_id_keeps_every_dated_occurrence_and_reopens(tmp
         assert len(callbacks) == callback_count
 
 
-@pytest.mark.parametrize("arm", ["B0", "B1", "B2", "M"])
-@pytest.mark.parametrize("interface", ["I1", "I2"])
+@pytest.mark.parametrize("arm,interface", [
+    (arm, interface) for arm in ["B0", "B1", "B2", "M"] for interface in ["I1", "I2"]
+] + [("Append-only", "I2")])
 def test_external_selected_edit_candidate_forms_own_state_and_common_reader(
     tmp_path, arm, interface
 ):
@@ -311,6 +317,8 @@ def test_external_selected_edit_candidate_forms_own_state_and_common_reader(
         "retrieval_limit": 10, "working_sets": False, "context_tokens": 65536,
         "model": {"max_tokens": 8192},
     }
+    if arm == "Append-only":
+        execution.settings["maintenance_recipe"] = "single_pass"
     execution.tokenizer = SimpleNamespace(encode=lambda text, **kwargs: list(text))
     execution.input_tokens = lambda messages: 100
     callbacks = []
@@ -341,9 +349,85 @@ def test_external_selected_edit_candidate_forms_own_state_and_common_reader(
         formed = execution.maintain(service, observed, "observed/0")
         assert len(formed) == 1
         assert service.records()[0]["value"]["method_arm"] == arm
-        assert service.records()[0]["value"]["method_version"] == "milai_edit_v2"
+        assert service.records()[0]["value"]["method_version"] == (
+            "milai_fact_append_v1" if arm == "Append-only" else "milai_edit_v2")
         before = service.records()
         assert execution.answer(service, "What case do Harbor labels use?", "2030-01-02", "qa/0") \
             == "Lowercase."
         assert service.records() == before
         assert len(callbacks) == 2
+
+
+def test_external_deferred_score_reopens_saved_prediction_without_retrieval(tmp_path, monkeypatch):
+    from milai_lab.runners import edit_benchmarks
+
+    tokenizer = Tokenizer(WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
+    tokenizer_path = tmp_path / "tokenizer.json"
+    tokenizer.save(str(tokenizer_path))
+    monkeypatch.setattr(
+        edit_benchmarks.AutoTokenizer, "from_pretrained",
+        lambda *args, **kwargs: SimpleNamespace(encode=lambda text, **kw: list(text)),
+    )
+    budget_path = tmp_path / "budget.json"
+    write_json(budget_path, RunBudget(RunLimits(), budget_path).state)
+    dataset = tmp_path / "input.json"
+    write_json(dataset, [{
+        "question_id": "case", "question": "Marker?", "answer": "blue",
+        "question_type": "single-session-user", "question_date": "2030-01-02",
+        "haystack_sessions": [[{"role": "user", "content": "The marker is blue."}]],
+        "haystack_dates": ["2030-01-01"], "haystack_session_ids": ["first"],
+    }])
+    settings = {
+        "experiment_name": "external-deferred-fixture", "arm": "RawRAG",
+        "tokenizer_path": "synthetic", "budget_path": str(budget_path),
+        "model": {"base_url": "http://synthetic.invalid/v1", "model": "synthetic"},
+        "embedding": {"base_url": "http://synthetic.invalid/v1", "model": "synthetic"},
+        "embedding_tokenizer_path": str(tokenizer_path), "embedding_context_tokens": 128,
+        "embedding_batch_size": 2, "source_tokens": 1000, "retrieval_limit": 10,
+        "longmemeval": {"path": str(dataset), "questions": ["case"],
+                       "official_checkout": "fixture"},
+    }
+    calls = []
+
+    def call(self, key, messages, *, structured, **kwargs):
+        calls.append(key)
+        if key.endswith("/reader"):
+            payload = json.loads(messages[1]["content"])
+            assert "The marker is blue." in payload["memories"][0]["content"]
+            return "Blue."
+        assert messages == [{"role": "user", "content": "Score saved Blue."}]
+        return "yes"
+
+    class AuthorFixture:
+        def __init__(self, checkout):
+            pass
+
+        def make_prompt(self, case, answer):
+            assert answer == "Blue."
+            return "Score saved Blue."
+
+        def label(self, verdict):
+            return verdict == "yes"
+
+    monkeypatch.setattr(ExternalRun, "call", call)
+    monkeypatch.setattr(EmbeddingTransport, "encode", lambda self, texts: [[1.0, 0.0]] * len(texts))
+    monkeypatch.setattr(edit_benchmarks, "LongMemEvalOfficial", AuthorFixture)
+    root = tmp_path / "run"
+    run_external(settings, root, "predict")
+    assert calls == ["longmemeval/case/answer/reader"]
+    saved = root / "predictions/longmemeval/case/complete.json"
+    original = saved.read_bytes()
+    assert read_json(root / "terminal-predict.json")["status"] == "PREDICTIONS_SAVED"
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("Scoring cannot maintain, answer or encode again")
+
+    monkeypatch.setattr(ExternalRun, "maintain", forbidden)
+    monkeypatch.setattr(ExternalRun, "answer", forbidden)
+    monkeypatch.setattr(EmbeddingTransport, "encode", forbidden)
+    run_external(settings, root, "score")
+    assert calls == ["longmemeval/case/answer/reader", "longmemeval/case/judge"]
+    assert saved.read_bytes() == original
+    assert read_json(root / "longmemeval-predictions.json")[0]["autoeval_label"] is True
+    assert read_json(root / "terminal-score.json")["status"] == "COMPLETED_EXTERNAL_PHASE"
+    assert not (root / "terminal.json").exists()
