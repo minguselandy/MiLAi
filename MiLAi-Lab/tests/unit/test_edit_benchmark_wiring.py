@@ -23,6 +23,7 @@ from milai_lab.datasets.edit_benchmarks import (
 )
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget, RunLimits
+from milai_lab.memory.edit_units import render_revision_view
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
@@ -94,6 +95,94 @@ def test_source_history_reader_retains_original_messages_without_metadata_refs()
     )[1]["content"])
     assert payload == {"question": "Who said this?", "date": "2026-02-01",
                        "memory_view": "source_history", "memories": memories}
+
+
+def test_reader_semantic_projection_keeps_limits_and_explicit_unknown_overrides() -> None:
+    source = {
+        "source_ref": "actual-user-source", "source_revision": 1, "role": "user",
+        "occurred_at": "2026-01-01T12:00:00", "observed_at": "2026-01-01T12:01:00Z",
+        "calendar_context": "example-calendar", "kind": "reported",
+    }
+    state = {
+        "representation": "conditioned_v1", "matter_description": "A scoped training plan",
+        "units": [
+            {"unit_id": "u1", "role": "content", "text": "Plan two rounds per shift.",
+             "assertion": {**source, "applicability": {"scope": "each shift"}}},
+            {"unit_id": "u2", "role": "condition", "text": "Only during January.",
+             "assertion": {**source, "applicability": {
+                 "effective_from": "2026-01-01", "effective_until": "2026-02-01"}}},
+        ],
+        "relations": [{"source_unit": "u2", "target_unit": "u1", "relation_type": "modifies"}],
+    }
+    view = render_revision_view(
+        state, query_time="2026-02-02", query_calendar_context="example-calendar",
+        version_time="2026-01-01T12:02:00Z",
+    )
+    # Nonmatching input remains explicit, including unknown overriding a known
+    # parent clock/calendar and a differently precise parsed description.
+    override = view["units"][1]
+    override["assertion"].update(role="assistant", source_revision=None, occurred_at=None,
+                                 calendar_context=None)
+    override["temporal"].update(reported_at=None, captured_at="2026-01-01T12:03:00Z",
+                                query_time=None, query_calendar_context=None)
+    different_precision = {**view["time_values"]["query_time"], "precision": "hour"}
+    override["temporal"]["time_values"]["query_time"] = different_precision
+    unknown_precision = {**view["time_values"]["version_time"], "precision": None, "value": None}
+    override["temporal"]["time_values"]["version_time"] = unknown_precision
+    override["temporal"]["time_values"]["reported_at"] = None
+    memories = [{
+        "record_id": "actual-record", "revision": 1,
+        "content": "Plan two rounds per shift. Only during January.",
+        "revision_evidence": [{"role": "user", "content": "Original plan with its limits."}],
+        "applicability": view,
+    }]
+    before = copy.deepcopy(memories)
+    messages = reader_messages("Current or historical training plan?", "2026-02-02", memories)
+    payload = json.loads(messages[1]["content"])
+
+    def expand(value: Any) -> Any:
+        if isinstance(value, dict):
+            if set(value) == {"$ref"}:
+                return expand(payload["shared"][int(value["$ref"].removeprefix("#/shared/"))])
+            return {key: expand(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [expand(item) for item in value]
+        return value
+
+    row = expand(payload["memories"])[0]
+    projected = row["applicability"]
+    assert memories == before
+    assert row["content"] == before[0]["content"]
+    assert row["revision_evidence"] == before[0]["revision_evidence"]
+    assert [unit["text"] for unit in projected["units"]] == [unit["text"] for unit in view["units"]]
+    for key in ("relations", "historical_units", "future_units", "unresolved_units"):
+        assert projected[key] == view[key]
+    assert projected["semantic_support"] == "unchecked"
+    origin = projected["source_table"][source["source_ref"]]
+    original_source = view["source_table"][source["source_ref"]]
+    assert origin == {key: value for key, value in original_source.items() if key != "time_values"}
+    assert projected["units"][0]["assertion"] == {"source_ref": source["source_ref"],
+                                                   "kind": "reported",
+                                                   "applicability": {"scope": "each shift"}}
+    actual_override = projected["units"][1]
+    for key in ("role", "source_revision", "occurred_at", "calendar_context"):
+        assert actual_override["assertion"][key] == override["assertion"][key]
+    for key in ("reported_at", "captured_at", "query_time", "query_calendar_context"):
+        assert actual_override["temporal"][key] == override["temporal"][key]
+    assert actual_override["temporal"]["time_values"]["query_time"] == different_precision
+    assert actual_override["temporal"]["time_values"]["version_time"] == unknown_precision
+    assert actual_override["temporal"]["time_values"]["reported_at"] is None
+    for actual, old in zip(projected["units"], view["units"], strict=True):
+        for key in ("status", "comparison_basis", "retrospective", "reported_after_query"):
+            assert actual["temporal"][key] == old["temporal"][key]
+        bound = actual["temporal"]["bound_effective_limits"][0]
+        assert bound["from"] == "2026-01-01" and bound["until"] == "2026-02-01"
+        assert bound["from_time"]["precision"] == "day"
+        assert bound["from_time"]["timezone_known"] is False
+        assert actual["evidence_status"] == "insufficient"
+        assert actual["semantic_support"] == "unchecked"
+    assert "including null" in messages[0]["content"]
+    assert "unlimited validity" in messages[0]["content"]
 
 
 def test_observed_input_excludes_reference_and_future_material() -> None:
