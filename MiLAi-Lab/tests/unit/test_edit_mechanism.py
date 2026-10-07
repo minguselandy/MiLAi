@@ -181,8 +181,9 @@ def test_three_tables_keep_unassessed_and_no_delta_in_fixed_opportunities() -> N
     assert not report["author_score_replaced"] and report["extra_state_judge_calls"] == 0
 
 
+@pytest.mark.parametrize("artifact_layout", ["legacy", "recipe"])
 def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
-    tmp_path: Path,
+    tmp_path: Path, artifact_layout: str,
 ) -> None:
     """Synthetic engineering fixture; no actual model or scientific score proof."""
     suite = tmp_path / "suite"
@@ -192,8 +193,13 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
         root = suite / arm
         bank = root / "banks/alice"
         bank.mkdir(parents=True)
-        write_json(root / "actual-config.json", {"arm": arm, "interface_version": "I2"})
-        write_json(root / "terminal.json", {"status": "COMPLETED_EXPERIMENT_PHASE"})
+        write_json(root / "actual-config.json", {
+            "arm": arm, "interface_version": "I2", "halumem": {"users": ["alice"]},
+            **({"maintenance_recipe": "extract_then_edit"} if artifact_layout == "recipe" else {}),
+        })
+        terminal = "terminal-score.json" if artifact_layout == "recipe" else "terminal.json"
+        write_json(root / terminal, {"status": "COMPLETED_EXPERIMENT_PHASE"})
+        write_json(bank / "session-order.json", {"original_ordinals": [0, 1]})
         write_json(root / "halumem-official-results.json", {
             "overall_score": {"author_fixture": arm}, "supplemental_denominators": {},
         })
@@ -207,7 +213,10 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
                 "Twice weekly; holidays paused.", "Once weekly; holidays paused.",
             ]):
                 session = f"halumem:alice:session:{step}"
-                captured = service.capture_user(session, "actual-user", text)
+                captured = service.capture_user(
+                    session, "actual-user", text,
+                    occurred_at=f"2030-01-0{step + 1}" if artifact_layout == "recipe" else None,
+                )
                 service.bind_source_boundary(session, "boundary", [captured["source_ref"]])
                 before = copy.deepcopy(service.records())
                 delivery = method.prepare([captured["source_ref"]], "weekly")
@@ -228,11 +237,25 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
                 )
                 assert receipt["ok"]
                 folder = root / "maintenance/halumem/alice" / str(step)
-                write_json(folder / "complete.json", {"receipts": [receipt]})
-                write_json(folder / "batch-0000/complete.json", {"receipts": [receipt]})
-                write_json(folder / "batch-0000/before.json", before)
-                write_json(folder / "batch-0000/after.json", service.records())
-                write_json(folder / "batch-0000/delivery.json", delivery)
+                if artifact_layout == "recipe":
+                    write_json(folder / "complete.json", {"receipts": [receipt], "batches": [{
+                        "receipts": [receipt], "source_refs": [captured["source_ref"]],
+                        "unprocessed": [], "status": "completed",
+                    }]})
+                    write_json(folder / "batch-0-before.json", before)
+                    write_json(folder / "batch-0-after.json", service.records())
+                else:
+                    write_json(folder / "complete.json", {"receipts": [receipt]})
+                    write_json(folder / "batch-0000/complete.json", {"receipts": [receipt]})
+                    write_json(folder / "batch-0000/before.json", before)
+                    write_json(folder / "batch-0000/after.json", service.records())
+                    write_json(folder / "batch-0000/delivery.json", delivery)
+                    write_json(folder / "source-coverage.json", {
+                        "original_characters": len(text), "source_refs": [captured["source_ref"]],
+                    })
+                write_json(root / "evaluation/halumem/alice" / str(step) / "complete.json", {
+                    "counts": {"formed_sessions": 1}, "records": {},
+                })
             service.capture_user("future", "unrelated", "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE")
             original[arm] = copy.deepcopy(service.records())
     case = {"uuid": "alice", "session": 1, "memory_ordinal": 0,
@@ -285,7 +308,8 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
 
     run = MechanismRun.__new__(MechanismRun)
     run.root = tmp_path / "assessment"
-    run.settings = {"mechanism": {"arms": arms}, "interface_version": "I2",
+    run.settings = {"mechanism": {"arms": arms}, "drift": {"arms": arms},
+                    "interface_version": "I2",
                     "model": {"max_tokens": 100}, "context_tokens": 65536, "retrieval_limit": 10}
     run.tokenizer = Tokenizer()
     run.budget = RunBudget(RunLimits(), tmp_path / "budget.json")
@@ -298,6 +322,15 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
         count = run.budget.state["generation_requests"]
         run.run_native(suite, selection, review)
         assert run.budget.state["generation_requests"] == count
+        drift = run.run_drift(suite)
+        assert len(drift["trajectories"]) == len(arms)
+        assert len(requests) == 48
+        for request in requests[-8:]:
+            payload = json.loads(request["messages"][-1]["content"])
+            assert len(payload["observed_dialogue"]) == 1
+            assert payload["observed_dialogue"][0]["original_timestamp"] in {
+                "2030-01-01", "2030-01-02",
+            }
         assert "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE" not in json.dumps(requests)
         for request in requests:
             if "response_schema" in json.loads(request["messages"][-1]["content"]):
@@ -498,6 +531,31 @@ def test_full_answer_audit_keeps_every_original_session_and_exact_answer(tmp_pat
     write_json(tmp_path / "M" / "terminal.json", {"status": "COMPLETED_EXPERIMENT_PHASE"})
     with pytest.raises(ValueError, match="external arm"):
         require_completed_external(tmp_path, ["M"])
+    (tmp_path / "M/terminal.json").unlink()
+    write_json(tmp_path / "M/terminal-predict.json", {"status": "PREDICTIONS_SAVED"})
+    with pytest.raises(ValueError, match="external arm"):
+        require_completed_external(tmp_path, ["M"])
+    with pytest.raises(ValueError, match="development arm"):
+        require_completed_suite(tmp_path, ["M"])
+    write_json(tmp_path / "M/terminal-score.json", {"status": "COMPLETED_EXTERNAL_PHASE"})
+    require_completed_external(tmp_path, ["M"])
+
+
+def test_recipe_snapshot_keeps_failed_batch_and_numeric_last_state(tmp_path: Path) -> None:
+    folder = tmp_path / "M/maintenance/halumem/alice/0"
+    batches = [{"status": "completed", "unprocessed": []} for _ in range(11)]
+    batches[3] = {"status": "incomplete", "unprocessed": [{
+        "phase": "edit", "reason": "EDIT_MAINTENANCE_REQUEST_EXCEEDS_CAPACITY",
+    }]}
+    write_json(folder / "complete.json", {"batches": batches, "receipts": []})
+    write_json(folder / "batch-0-before.json", [row("Initial")])
+    write_json(folder / "batch-9-after.json", [row("Earlier")])
+    write_json(folder / "batch-10-after.json", [row("Actual final")])
+    before, after, availability = snapshots(tmp_path, "M", "alice", 0)
+    assert before == [row("Initial")] and after == [row("Actual final")]
+    assert availability["actual_source_batches"] == 11
+    assert availability["incomplete_maintenance_batches"] == availability["writer_failures"] == 1
+    assert availability["committed_receipts"] == 0
 
 
 def test_continuous_damage_reports_invalid_gaps_and_original_chronology() -> None:

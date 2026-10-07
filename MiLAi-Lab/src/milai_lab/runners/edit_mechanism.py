@@ -35,7 +35,7 @@ from milai_lab.analysis.edit_mechanism import (
     validate_delta,
     validate_transition,
 )
-from milai_lab.analysis.edit_results import ratio, receipt_effect
+from milai_lab.analysis.edit_results import ratio, receipt_effect, scoring_terminal
 from milai_lab.datasets.edit_benchmarks import (
     ObservedSession,
     longmemeval_cases,
@@ -52,7 +52,7 @@ T = TypeVar("T", bound=BaseModel)
 
 def require_completed_suite(root: Path, arms: list[str], *, v2: bool = False) -> None:
     for arm in arms:
-        terminal = root / arm / "terminal.json"
+        terminal = scoring_terminal(root / arm)
         if not terminal.exists() or read_json(terminal)["status"] != "COMPLETED_EXPERIMENT_PHASE":
             raise ValueError("Complete every paired development arm before mechanism scoring")
         if v2 and read_json(root / arm / "actual-config.json").get(
@@ -63,7 +63,7 @@ def require_completed_suite(root: Path, arms: list[str], *, v2: bool = False) ->
 
 def require_completed_external(root: Path, arms: list[str]) -> None:
     for arm in arms:
-        terminal = root / arm / "terminal.json"
+        terminal = scoring_terminal(root / arm)
         if not terminal.exists() or read_json(terminal)["status"] != "COMPLETED_EXTERNAL_PHASE":
             raise ValueError("Complete every external arm before the full-answer audit")
 
@@ -143,24 +143,45 @@ def snapshots(
     folder = root / arm / "maintenance" / "halumem" / owner / str(session)
     if not (folder / "complete.json").exists():
         raise ValueError("Actual source opportunity has not completed")
-    batches = sorted(folder.glob("batch-*"))
-    if not batches or any(not (b / "after.json").exists() for b in batches):
-        raise ValueError("Actual before/after transition snapshot missing")
-    before, after = read_json(batches[0] / "before.json"), read_json(batches[-1] / "after.json")
-    receipts = [r for b in batches for r in read_json(b / "complete.json")["receipts"]]
+    complete = read_json(folder / "complete.json")
+    recipe_batches = complete.get("batches")
+    if recipe_batches is not None:
+        if not recipe_batches:
+            raise ValueError("Actual before/after transition snapshot missing")
+        before = read_json(folder / "batch-0-before.json")
+        after = read_json(folder / f"batch-{len(recipe_batches) - 1}-after.json")
+        receipts = complete["receipts"]
+        batch_count = len(recipe_batches)
+        writer_failures = sum(
+            any(gap.get("phase") in {"locate", "edit", "edit_pending"}
+                for gap in batch["unprocessed"])
+            for batch in recipe_batches
+        )
+    else:
+        batches = sorted(path for path in folder.glob("batch-*") if path.is_dir())
+        if not batches or any(not (b / "after.json").exists() for b in batches):
+            raise ValueError("Actual before/after transition snapshot missing")
+        before = read_json(batches[0] / "before.json")
+        after = read_json(batches[-1] / "after.json")
+        receipts = [r for b in batches for r in read_json(b / "complete.json")["receipts"]]
+        batch_count = len(batches)
+        writer_failures = sum((b / "writer-failure.json").exists() for b in batches)
     effects = [receipt_effect(receipt) for receipt in receipts]
     return (
         before,
         after,
         {
-            "actual_source_batches": len(batches),
+            "actual_source_batches": batch_count,
             "proposals": len(receipts),
             "committed_receipts": effects.count("committed"),
             "original_commits_confirmed_by_replay": effects.count("replayed_commit"),
             "accepted_no_change_receipts": effects.count("no_change"),
             "rejected_receipts": effects.count("rejected"),
             "other_or_unconfirmed_receipts": effects.count("other_or_unconfirmed"),
-            "writer_failures": sum((b / "writer-failure.json").exists() for b in batches),
+            "writer_failures": writer_failures,
+            **({"incomplete_maintenance_batches": sum(
+                batch["status"] != "completed" for batch in recipe_batches
+            )} if recipe_batches is not None else {}),
             "after_record_count": len(after),
         },
     )
@@ -188,7 +209,9 @@ def prior_evidence(
 
 
 def original_timestamp(root: Path, arm: str, owner: str, source: dict[str, Any]) -> str | None:
-    """Read the actual original timestamp from this cited source's past delivery."""
+    """Use the captured original time, or its saved delivery in historical runs."""
+    if source.get("occurred_at") is not None:
+        return str(source["occurred_at"])
     prefix = "halumem:" + owner + ":session:"
     if not source["session"].startswith(prefix):
         return None
@@ -603,8 +626,17 @@ class MechanismRun(BenchmarkRun):
                         rows.append(read_json(done))
                         continue
                     maintenance = suite / arm / "maintenance" / "halumem" / owner / str(ordinal)
-                    coverage = read_json(maintenance / "source-coverage.json")
-                    if coverage["original_characters"] == 0:
+                    if config.get("maintenance_recipe"):
+                        complete = read_json(maintenance / "complete.json")
+                        source_refs = list(dict.fromkeys(
+                            ref for batch in complete["batches"] for ref in batch["source_refs"]
+                        ))
+                        empty_source = not source_refs
+                    else:
+                        coverage = read_json(maintenance / "source-coverage.json")
+                        source_refs = coverage["source_refs"]
+                        empty_source = coverage["original_characters"] == 0
+                    if empty_source:
                         row = {
                             "arm": arm,
                             "uuid": owner,
@@ -624,7 +656,7 @@ class MechanismRun(BenchmarkRun):
                                 bank / "memory.lock",
                             )
                             new_sources = []
-                            for i, ref in enumerate(coverage["source_refs"]):
+                            for i, ref in enumerate(source_refs):
                                 source = service.source(ref)
                                 if source is None:
                                     raise ValueError("Actual native source unavailable")

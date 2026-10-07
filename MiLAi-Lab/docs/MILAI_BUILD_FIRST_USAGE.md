@@ -60,6 +60,8 @@ python tools/run_functional.py run --root artifacts/build-first/functional-v2-fi
 
 外部对照沿用`tools/run_edit_external.py --config ... --output ...`，现在也接受`--phase predict|score|all`，并可选择B0/B1/B2/M／Append-only及已有RawRAG、RollingSummary、A-MEM适配。两阶段使用同一冻结配置和产物目录，阶段终态、进度及结束账本分别保存；评分阶段复用已保存的LongMemEval答案，不重做形成、检索或回答。原默认`all`入口保留。已用脚本响应和实际SQLite验证RawRAG预测后重开评分，以及Append-only经外部入口形成状态并调用共同Reader；尚未启动本轮28题真实外部比较，旧外部配置不代表当前候选的冻结配置。
 
+原生机制／漂移及外部完整答案审读入口现在也识别`terminal-score.json`；只有预测终态仍不能当作评分完成。共同recipe的机制诊断复用现有逐批前后快照、实际回执及原始来源，不依赖旧版批次目录；原始时间取来源实际`occurred_at`，历史产物仍沿用其已保存交付时间。未完成批次保留在可用性统计中，不能把无提交当作语义成功。18项受影响检查、Ruff和mypy通过，覆盖两种产物格式、未来来源隔离、独立终态及容量失败；未新增真实Judge调用。
+
 ## 同前态recipe比较
 
 现有配对CLI增加`compare`，使用原B0首用户已曝光的原3／6／7／4四份实际前态，记录数16／20／20／16；每种recipe分别复制准备库，使用相同当前原文、B0编辑器、普通dense K10、输入预算及Reader。候选由各自recipe正常检索，不保证两组检索结果相同；不使用理想旧卡或把旧072答案当作当前源码的单轮结果。
