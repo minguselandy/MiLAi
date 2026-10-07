@@ -6,7 +6,6 @@ neither this contract nor that lock supplies backend CAS or HTTP serialization.
 
 from __future__ import annotations
 
-import hashlib
 import json
 from typing import Any, NoReturn, cast
 
@@ -44,10 +43,6 @@ def canonical(value: Any) -> str:
     )
 
 
-def digest(value: Any) -> str:
-    return hashlib.sha256(canonical(value).encode()).hexdigest()
-
-
 def profile(name: str, value: Any = "legacy") -> str:
     if name not in PROFILES or type(value) is not str or value not in {"legacy", PROFILES[name]}:
         raise ValueError("V13_READ_PROTOCOL_PROFILE_INVALID:" + name)
@@ -81,23 +76,19 @@ def freeze_fields(settings: dict[str, Any], catalog: list[dict[str, Any]]) -> di
         **active,
         "read_protocol_presentation": {
             "profiles": profiles(settings),
-            "catalog_sha256": digest(catalog),
-            "save_guidance_sha256": digest(SAVE_GUIDANCE)
+            "catalog_version": settings.get("config_version", "public_memory_v2"),
+            "save_guidance_version": "completed_receipt_v1"
             if active.get("tool_save_communication")
             else None,
             "feedback_max_utf8_bytes": 1024,
-            "snapshot_store": "exact selected_snapshot:<cursor digest>; public get/put, not CAS",
+            "snapshot_store": "issued snapshot_id; public Store get/put under service lock",
         },
     }
 
 
 def check_frozen(frozen: dict[str, Any]) -> None:
-    expected = freeze_fields(frozen["config"], frozen["tool_catalog"])
+    """Parse declared profiles; the run owns its ordinary immutable config version."""
     validate_settings(frozen["config"])
-    if any(
-        frozen.get(key) != expected.get(key) for key in [*PROFILES, "read_protocol_presentation"]
-    ):
-        raise ValueError("V13_READ_PROTOCOL_FROZEN_CHANGED")
 
 
 def save_guidance(value: Any = "legacy") -> str:
@@ -147,7 +138,7 @@ def reject(code: str, origin: str, value: Any = "legacy") -> NoReturn:
     raise ReadProtocolRejected(code, origin)
 
 
-def snapshot_key(short_digest: str) -> str:
-    if len(short_digest) != 24 or any(char not in "0123456789abcdef" for char in short_digest):
+def snapshot_key(snapshot_id: str) -> str:
+    if not isinstance(snapshot_id, str) or not snapshot_id:
         raise ValueError("V13_SELECTED_SNAPSHOT_KEY_INVALID")
-    return "selected_snapshot:" + short_digest
+    return "selected_snapshot:" + snapshot_id

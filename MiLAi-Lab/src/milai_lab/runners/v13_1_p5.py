@@ -983,7 +983,7 @@ def step(
                             "bank": list(service.namespace),
                             "session": scope.episode_id,
                             "request_ref": public_source["event_id"],
-                            "request_sha256": public_source["content_sha256"],
+                            "request_revision": public_source.get("source_revision", 1),
                             "config_sha256": frozen["config_sha256"],
                         },
                     )

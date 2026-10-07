@@ -6,7 +6,6 @@ provenance only, never semantic support or permission for a business mutation.
 
 from __future__ import annotations
 
-import hashlib
 import json
 from typing import Any, cast
 
@@ -33,12 +32,9 @@ def canonical(value: Any) -> str:
     )
 
 
-def digest(value: Any) -> str:
-    return hashlib.sha256(canonical(value).encode()).hexdigest()
-
-
-def text_hash(value: str) -> str:
-    return hashlib.sha256(value.encode()).hexdigest()
+def reference_key(identifiers: Any) -> str:
+    """Readable lookup key of explicit identifiers and versions."""
+    return canonical(identifiers)
 
 
 def body_text(event: dict[str, Any]) -> str:
@@ -199,18 +195,18 @@ def issue_fragment_range(service: Any, source_ref: str, start: int, end: int) ->
         "owner": service.owner,
         "bank": list(service.namespace),
         "source_ref": source_ref,
-        "source_sha256": event["content_sha256"],
-        "body_text_sha256": text_hash(body),
+        "source_revision": event.get("source_revision", 1),
         "start": start,
         "end": end,
-        "span_sha256": text_hash(part),
         "role": event["role"],
         "origin": event["origin"],
         "observed_at": event["observed_at"],
         "source_total_codepoints": len(body),
         "range_basis": "body_text_unicode_codepoints_half_open",
     }
-    handle = "frag-" + digest(bound)
+    handle = "frag:" + reference_key(
+        [service.namespace, service.owner, source_ref, bound["source_revision"], start, end]
+    )
     prior = service.store.get(namespace(service), handle)
     if prior is not None and prior.value != bound:
         raise FunctionalIntegrityError("V13_5_FRAGMENT_COLLISION")
@@ -241,17 +237,13 @@ def issue_fragments(service: Any, source_ref: str, max_chars: int) -> list[dict[
 
 
 def resolve_fragment(service: Any, handle: str) -> dict[str, Any]:
-    if not isinstance(handle, str) or not handle.startswith("frag-"):
+    if not isinstance(handle, str):
         raise FunctionalRejection("V13_5_FRAGMENT_NOT_ISSUED")
     item = service.store.get(namespace(service), handle)
     if item is None:
         raise FunctionalRejection("V13_5_FRAGMENT_NOT_ISSUED")
     bound = item.value
-    if (
-        handle != "frag-" + digest(bound)
-        or bound.get("owner") != service.owner
-        or bound.get("bank") != list(service.namespace)
-    ):
+    if bound.get("owner") != service.owner or bound.get("bank") != list(service.namespace):
         raise FunctionalIntegrityError("V13_5_FRAGMENT_BINDING_CHANGED")
     event = service.source(bound["source_ref"])
     if event is None:
@@ -262,15 +254,14 @@ def resolve_fragment(service: Any, handle: str) -> dict[str, Any]:
         type(start) is not int
         or type(end) is not int
         or not 0 <= start < end <= len(body)
-        or event["content_sha256"] != bound["source_sha256"]
-        or text_hash(body) != bound["body_text_sha256"]
-        or text_hash(body[start:end]) != bound["span_sha256"]
+        or event.get("source_revision", 1) != bound.get("source_revision", 1)
         or any(event[k] != bound[k] for k in ("role", "origin", "observed_at"))
     ):
         raise FunctionalIntegrityError("V13_5_FRAGMENT_SOURCE_CHANGED")
     return {
         "fragment_handle": handle,
         **bound,
+        "source_revision": bound.get("source_revision", 1),
         "content": body[start:end],
         "semantic_support": "unchecked",
     }
@@ -294,11 +285,9 @@ def fragment_support(service: Any, handles: list[str]) -> dict[str, Any]:
                 for k in (
                     "fragment_handle",
                     "source_ref",
-                    "source_sha256",
-                    "body_text_sha256",
+                    "source_revision",
                     "start",
                     "end",
-                    "span_sha256",
                     "content",
                 )
             }

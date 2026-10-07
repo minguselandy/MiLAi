@@ -5,17 +5,11 @@ No Source/tool argument conversion, Store read, selection, ranking or schema rep
 
 from __future__ import annotations
 
-import hashlib
-import json
 import math
 from collections import Counter
 from typing import Any
 
 from milai_lab.contracts.public_memory_contracts import DECODE_GUIDANCE
-
-
-def _bytes(value: Any) -> bytes:
-    return json.dumps(value, ensure_ascii=False, separators=(",", ":"), allow_nan=False).encode()
 
 
 def _scalar(value: Any) -> None:
@@ -69,7 +63,6 @@ def encode(value: Any) -> dict[str, Any]:
         "key_layouts": layouts,
         "strings": strings,
         "root": root,
-        "decoded_sha256": hashlib.sha256(_bytes(value)).hexdigest(),
     }
 
 
@@ -83,7 +76,6 @@ def decode(frame: dict[str, Any]) -> Any:
             "key_layouts",
             "strings",
             "root",
-            "decoded_sha256",
         }
         or frame["format"] != "json_dictionary_v1"
         or frame["decode"] != DECODE_GUIDANCE
@@ -128,7 +120,4 @@ def decode(frame: dict[str, Any]) -> Any:
         _scalar(v)
         return v
 
-    value = node(frame["root"])
-    if hashlib.sha256(_bytes(value)).hexdigest() != frame["decoded_sha256"]:
-        raise ValueError("COMPACT_EXACT_HASH_CHANGED")
-    return value
+    return node(frame["root"])

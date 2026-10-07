@@ -346,6 +346,7 @@ def test_dispatch_drift_fails_without_reserve(tmp_path: Path, fault: str) -> Non
         elif fault == "stale":
             state = json.loads(Path(settings["budget_path"]).read_text())
             state["generation_requests"] += 1
+            state["ledger_revision"] = state.get("ledger_revision", 0) + 1
             Path(settings["budget_path"]).write_text(json.dumps(state))
         with pytest.raises(HttpOwnershipError):
             if fault == "request_model":

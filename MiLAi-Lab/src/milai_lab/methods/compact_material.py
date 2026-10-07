@@ -54,9 +54,7 @@ def compact_units(
     def bindings(value: Any) -> bool:
         return isinstance(value, list) and all(
             isinstance(row, dict)
-            and all(
-                isinstance(row.get(key), str) for key in ("source_ref", "role", "content_sha256")
-            )
+            and all(isinstance(row.get(key), str) for key in ("source_ref", "role"))
             for row in value
         )
 
@@ -70,7 +68,7 @@ def compact_units(
                 {
                     "source_ref": unit["source_ref"],
                     "role": unit["role"],
-                    "content_sha256": unit["source_hash"],
+                    "source_revision": unit["source_revision"],
                 }
             )
 
@@ -110,7 +108,7 @@ def compact_units(
                 {
                     "source_ref": unit.pop("source_ref"),
                     "role": unit.pop("role"),
-                    "content_sha256": unit.pop("source_hash"),
+                    "source_revision": unit.pop("source_revision"),
                 }
             )
         for match in record.get("source_matches", []):
@@ -118,12 +116,12 @@ def compact_units(
                 index
                 for index, binding in enumerate(table)
                 if binding["source_ref"] == match["source_ref"]
-                and binding["content_sha256"] == match["source_hash"]
+                and binding.get("source_revision", 1) == match["source_revision"]
             ]
             if len(indices) == 1:
                 match["source_binding_index"] = indices[0]
                 match.pop("source_ref")
-                match.pop("source_hash")
+                match.pop("source_revision")
             read_pointer(match.get("read_more"))
         for pointer in (
             unit.get("read_more"),

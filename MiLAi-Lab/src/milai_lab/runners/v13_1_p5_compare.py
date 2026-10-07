@@ -39,7 +39,6 @@ from milai_lab.integrations.memory.mem0 import (
 )
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.service_tools import create_service_tools
-from milai_lab.methods.grounded_memory import _hash as packet_key_hash
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
@@ -452,7 +451,7 @@ class ComparisonRuntime:
             raise ValueError("COMMON_BOUNDARY_ACTUAL_HUMAN_REQUIRED")
         binding = {"owner": self.scope.user_id, "bank": list(self.service.namespace),
             "session": self.scope.episode_id, "turn_id": turn,
-            "request_ref": row["event_id"], "request_sha256": row["content_sha256"],
+            "request_ref": row["event_id"], "request_revision": row.get("source_revision", 1),
             "config_sha256": self.frozen["config_sha256"],
             "profiles": self.common_profiles}
         return row, binding
@@ -472,11 +471,9 @@ class ComparisonRuntime:
             packet = value["packet"]
             capacity = self.model.client.capacity
             if self.arm == "field_grounded":
-                if (capacity is None or value["common_cache_sha256"] != view_digest({
-                        k: v for k, v in value.items() if k != "common_cache_sha256"})
+                if (capacity is None or value["common_cache_version"] != 1
                         or capacity.text_tokens(value["material"]) > 2048
-                        or value["packet_hash"] != packet_key_hash({
-                            k: v for k, v in packet.items() if k != "packet_hash"})):
+                        or value["packet_id"] != packet["packet_id"]):
                     raise ValueError("COMMON_BOUNDARY_CACHED_PACKET_CHANGED")
             elif (capacity is None or view_digest(packet) != value["packet_sha256"]
                     or view_digest(value["snapshot_rows"]) != packet["snapshot_sha256"]
@@ -499,7 +496,7 @@ class ComparisonRuntime:
             # Existing M selection/allocator/CAS remain authoritative. Freeze this public
             # turn's delivered result; later changes require an explicit read or next turn.
             result.update(binding=binding, query=query)
-            result["common_cache_sha256"] = view_digest(result)
+            result["common_cache_version"] = 1
             if ordinary:
                 self.store.put(namespace, key, result, index=False)
             self.trace({"event": "common_memory_material", "arm": self.arm, **result})
@@ -695,7 +692,7 @@ class ComparisonRuntime:
                 if self.recipe is None:
                     raise ValueError("COMMON_BOUNDARY_M_RECIPE_REQUIRED")
                 self.last_material = self._common_recall(actual["content"], config, ordinary=True)
-                packet_hash = self.last_material["packet_hash"]
+                packet_id = self.last_material["packet_id"]
                 projected = []
                 reference_tokens = 0
                 for message in state["messages"]:
@@ -706,8 +703,8 @@ class ComparisonRuntime:
                             body = None
                         if (isinstance(body, dict) and message.status == "success"
                                 and body.get("query_kind") == "ordinary_public"
-                                and body.get("packet_hash") == packet_hash):
-                            reference = json.dumps({"ok": body["ok"], "packet_hash": packet_hash})
+                                and body.get("packet_id") == packet_id):
+                            reference = json.dumps({"ok": body["ok"], "packet_id": packet_id})
                             reference_tokens += self.recipe.token_count(reference)
                             message = message.model_copy(update={"content": reference})
                     projected.append(message)

@@ -120,6 +120,69 @@ def test_mechanical_success_never_assigns_semantic_pass(tmp_path: Path) -> None:
     assert before == {str(p): p.read_bytes() for p in root.rglob("*") if p.is_file()}
 
 
+def test_ordinary_evaluation_reuses_opaque_stored_ids_without_fingerprints(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root, bank, identity = setup_run(tmp_path)
+    row = attempt(bank, identity)
+    row["sources"][0]["source_revision"] = 1
+    save(bank / f"{identity}-attempt-0.json", row)
+    save(bank / f"{identity}-result.json", row)
+    freeze = json.loads((root / "input-freeze.json").read_text())
+    freeze.pop("fixture_sha256")
+    freeze.pop("config_sha256")
+    freeze.update(schema="functional_run_inputs_v2", config_version="functional_v1",
+                  source_version={"implementation_version": "ordinary-v1"})
+    save(root / "input-freeze.json", freeze)
+    save(root / "bank-index.json", [{"identity": {"bank": "sample", "owner": "owner-a"},
+                                     "id": bank.name}])
+    save(bank / "message-index.json", [{"identity": {"session": "s1", "message_id": "m1"},
+                                        "id": identity}])
+
+    def forbid_hash(*args: Any, **kwargs: Any) -> None:
+        raise AssertionError("NORMAL_EVALUATOR_MUST_NOT_RECOMPUTE_OPAQUE_IDS")
+
+    monkeypatch.setattr(EVAL.hashlib, "sha256", forbid_hash)
+    result = EVAL.evaluate(root, cohort="L2")
+    assert result["case_packs"][0]["acceptance_evidence_complete"]
+    assert result["case_packs"][0]["semantic_verdict"] == "UNREVIEWED"
+    assert result["attempt_ledger_delta_sum"]["generation.known_tokens"] == 10
+    assert "sha256" not in json.dumps(result)
+    missing = EVAL.quote_checks({"source_ref": "source-1", "source_revision": 2,
+                                "start": 0, "end": 4}, row["sources"], ordinary=True)
+    assert missing["status"] == "FAIL" and missing["semantic_support"] == "UNREVIEWED"
+
+
+@pytest.mark.parametrize("fault", ["none", "missing_confirmation", "different_revision"])
+def test_ordinary_hidden_capture_uses_actual_sqlite_source_revision(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, fault: str,
+) -> None:
+    import sqlite3
+
+    event = {"event_id": "ordinary-source", "source_revision": 1, "owner": "alice",
+             "role": "assistant", "content": "Revoked public delivery."}
+    confirmation = {"source_ref": event["event_id"],
+                    "source_revision": 2 if fault == "different_revision" else 1}
+    database = tmp_path / "memory.sqlite"
+    with sqlite3.connect(database) as store:
+        store.execute("create table store (key text, value text)")
+        store.execute("insert into store values (?, ?)", (event["event_id"], json.dumps(event)))
+        if fault != "missing_confirmation":
+            store.execute("insert into store values (?, ?)",
+                          ("capture:" + event["event_id"], json.dumps(confirmation)))
+
+    def forbid_hash(*args: Any, **kwargs: Any) -> None:
+        raise AssertionError("NORMAL_CAPTURE_REFERENCE_HAS_NO_DIGEST")
+
+    monkeypatch.setattr(EVAL.hashlib, "sha256", forbid_hash)
+    row = {"final_capture": {"ok": True, "source_ref": event["event_id"], "visibility": "revoked"}}
+    reader = EVAL.ArtifactReader(ordinary=True)
+    before = database.read_bytes()
+    captured = EVAL.hidden_program_capture(reader, tmp_path, row)
+    assert captured == (event if fault == "none" else None)
+    assert database.read_bytes() == before and not (tmp_path / "memory.sqlite-shm").exists()
+
+
 @pytest.mark.parametrize("fault", ["none", "provider_text", "missing_http", "delivery_hash",
                                   "missing_delivery", "checkpoint_text", "metadata", "policy"])
 def test_retained_agent_answer_requires_original_http_and_delivery(

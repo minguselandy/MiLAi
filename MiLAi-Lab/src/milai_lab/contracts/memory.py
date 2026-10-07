@@ -17,11 +17,10 @@ RECEIPT_PROFILES: dict[str, dict[str, Any]] = {
         "fields": {
             "status": "string",
             "document_version": "integer",
-            "content_digest": "string",
             "approval_status": "string",
-            "approved_digest": "string",
+            "approved_version": "integer",
             "publication_status": "string",
-            "published_digest": "string",
+            "published_version": "integer",
             "audience": "string",
         },
     },
@@ -51,7 +50,8 @@ class SourceEvent(TypedDict):
     role: Literal["user", "tool", "assistant"]
     origin: str
     content: Any
-    content_sha256: str
+    source_revision: int
+    capture_key: NotRequired[str]
     observed_at: str
     object_ref: dict[str, Any] | None
 
@@ -88,7 +88,7 @@ class MemorySourceRef(TypedDict):
     kind: str
     checkpoint_position: int
     message_id: str | None
-    content_sha256: str
+    source_revision: int
     observed_at: str | None
 
 
@@ -107,7 +107,6 @@ class CandidateBinding(TypedDict):
     record_id: str
     revision: int
     support_sources: list[dict[str, Any]]
-    version_sha256: str
 
 
 @dataclass(frozen=True)

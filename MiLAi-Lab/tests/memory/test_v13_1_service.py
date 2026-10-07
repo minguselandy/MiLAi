@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import asyncio
-import hashlib
 import json
 import subprocess
 import sys
@@ -90,13 +89,13 @@ def call(name: str, arguments: dict[str, Any], identity: str = "proposal1") -> d
     return {"name": name, "args": arguments, "id": identity, "type": "tool_call"}
 
 
-def test_source_capture_is_immutable_unformed_and_hashes_actual_body(tmp_path: Path) -> None:
+def test_source_capture_is_immutable_unformed_with_source_revision(tmp_path: Path) -> None:
     with opened(tmp_path) as service:
         source = captured(service)
         assert service.sources()[0]["formation_status"] == "pending"
         event = service.source(source)
         assert event is not None
-        assert event["content_sha256"] == hashlib.sha256(b"Keep short replies").hexdigest()
+        assert event["source_revision"] == 1 and "content_sha256" not in event
         assert service.records() == []
         assert service.search("short")["raw_events"][0]["event_id"] == source
         assert captured(service) == source
@@ -194,14 +193,34 @@ def test_receipt_idempotence_partial_fields_and_prose_never_verified(tmp_path: P
             receipt = service.commit("s1", "p1", raw)
             assert receipt["fields_verification"] == "receipt_matched"
             assert set(receipt) == {
-                "ok", "status", "id", "revision", "source_ref", "formation_status",
-                "content_verification", "fields_verification", "effect", "mode",
+                "ok",
+                "status",
+                "id",
+                "revision",
+                "source_ref",
+                "formation_status",
+                "content_verification",
+                "fields_verification",
+                "effect",
+                "mode",
             }
             version = service.read(receipt["id"])["value"]
             assert set(version) == {
-                "revision", "content", "kind", "scope", "basis", "source_ref", "object_ref",
-                "fields", "mode", "content_verification", "source_status", "fields_verification",
-                "observed_at", "committed_at", "session",
+                "revision",
+                "content",
+                "kind",
+                "scope",
+                "basis",
+                "source_ref",
+                "object_ref",
+                "fields",
+                "mode",
+                "content_verification",
+                "source_status",
+                "fields_verification",
+                "observed_at",
+                "committed_at",
+                "session",
             }
             duplicate = service.commit("s1", "different-call", raw)
             assert duplicate["status"] == "no_change" and duplicate["id"] == receipt["id"]
@@ -226,8 +245,10 @@ def test_receipt_idempotence_partial_fields_and_prose_never_verified(tmp_path: P
     [
         ({}, "receipt_fields_required"),
         ({"status": "reserved_label_failed"}, "receipt_fields_required"),
-        ({"status": "reserved_label_failed", "label_status": "not_created", "extra": "raw"},
-         "unsupported_operational_field"),
+        (
+            {"status": "reserved_label_failed", "label_status": "not_created", "extra": "raw"},
+            "unsupported_operational_field",
+        ),
         ({"status": 1, "label_status": "not_created"}, "invalid_receipt_fields"),
     ],
 )
@@ -303,22 +324,40 @@ def test_explicit_receipt_schema_does_not_turn_ref_only_into_field_grounding(
 @pytest.mark.parametrize(
     ("content", "content_format", "reason"),
     [
-        ('{"status":"reserved_label_failed","label_status":"not_created"}', None,
-         "receipt_content_format_required"),
-        ('{"status":"reserved_label_failed","label_status":"not_created"}', "plain",
-         "receipt_content_format_required"),
+        (
+            '{"status":"reserved_label_failed","label_status":"not_created"}',
+            None,
+            "receipt_content_format_required",
+        ),
+        (
+            '{"status":"reserved_label_failed","label_status":"not_created"}',
+            "plain",
+            "receipt_content_format_required",
+        ),
         ('{"status":', "receipt_json_v1", "receipt_body_invalid_json"),
-        ('```json\n{}\n```', "receipt_json_v1", "receipt_body_invalid_json"),
-        ('[]', "receipt_json_v1", "receipt_body_invalid_schema"),
+        ("```json\n{}\n```", "receipt_json_v1", "receipt_body_invalid_json"),
+        ("[]", "receipt_json_v1", "receipt_body_invalid_schema"),
         ('{"status":"reserved_label_failed"}', "receipt_json_v1", "receipt_body_invalid_schema"),
-        ('{"status":1,"label_status":"not_created"}', "receipt_json_v1",
-         "receipt_body_invalid_schema"),
-        ('{"status":"reserved_label_failed","label_status":"not_created","extra":"claim"}',
-         "receipt_json_v1", "receipt_body_invalid_schema"),
-        ('{"status":"reserved_label_failed","label_status":"not_created","notes":null}',
-         "receipt_json_v1", "receipt_body_invalid_schema"),
-        ('{"status":"reserved_label_failed","status":"other","label_status":"not_created"}',
-         "receipt_json_v1", "receipt_body_invalid_json"),
+        (
+            '{"status":1,"label_status":"not_created"}',
+            "receipt_json_v1",
+            "receipt_body_invalid_schema",
+        ),
+        (
+            '{"status":"reserved_label_failed","label_status":"not_created","extra":"claim"}',
+            "receipt_json_v1",
+            "receipt_body_invalid_schema",
+        ),
+        (
+            '{"status":"reserved_label_failed","label_status":"not_created","notes":null}',
+            "receipt_json_v1",
+            "receipt_body_invalid_schema",
+        ),
+        (
+            '{"status":"reserved_label_failed","status":"other","label_status":"not_created"}',
+            "receipt_json_v1",
+            "receipt_body_invalid_json",
+        ),
     ],
 )
 @pytest.mark.parametrize("mode", ["ref_only", "field_grounded"])
@@ -330,7 +369,10 @@ def test_explicit_receipt_invalid_body_preserved_across_store_reopening(
         with opened(tmp_path, mode=mode, receipt_contract="explicit_receipt_v1") as service:
             source, ref, body = tool_event(service, world)
             raw = proposal(
-                source, content, basis="tool_observation", object_ref=ref,
+                source,
+                content,
+                basis="tool_observation",
+                object_ref=ref,
                 fields={key: body[key] for key in ("status", "label_status")},
                 content_format=content_format,
                 requested={"content": content, "content_format": content_format},
@@ -356,14 +398,17 @@ def test_explicit_receipt_tool_binding_history_and_idempotence(tmp_path: Path) -
             fields = {key: body[key] for key in ("status", "label_status")}
             content = json.dumps({**fields, "notes": "Invented quote and free prose unchecked."})
             arguments = {
-                "content": content, "basis": "tool_observation", "fields": fields,
+                "content": content,
+                "basis": "tool_observation",
+                "fields": fields,
                 "content_format": "receipt_json_v1",
             }
             node = ToolNode(create_service_tools(service))
 
             async def save() -> dict[str, Any]:
                 result = await node.ainvoke(
-                    [call("manage_memory", arguments)], config=config(),
+                    [call("manage_memory", arguments)],
+                    config=config(),
                     runtime=Runtime(store=service.store),
                 )
                 return json.loads(result["messages"][0].content)
@@ -377,16 +422,25 @@ def test_explicit_receipt_tool_binding_history_and_idempotence(tmp_path: Path) -
             stored = service.store.get(service.namespace, first["id"]).value["_v13_1"]
             raw = next(iter(stored["proposals"].values()))["raw"]
             assert raw["requested"] == {
-                "content": content, "action": "create", "kind": "semantic", "scope": None,
-                "basis": "tool_observation", "target_query": None, "id": None,
-                "expected_revision": None, "source_ref": None, "object_ref": None,
-                "fields": fields, "content_format": "receipt_json_v1",
+                "content": content,
+                "action": "create",
+                "kind": "semantic",
+                "scope": None,
+                "basis": "tool_observation",
+                "target_query": None,
+                "id": None,
+                "expected_revision": None,
+                "source_ref": None,
+                "object_ref": None,
+                "fields": fields,
+                "content_format": "receipt_json_v1",
             }
             assert raw["source_ref"] == source and raw["object_ref"] == ref
             assert asyncio.run(save())["status"] == "no_change"
             assert service.commit("s1", "different-id", raw)["status"] == "no_change"
             changed = {
-                **raw, "content": json.dumps({**fields, "notes": "Different unchecked note"})
+                **raw,
+                "content": json.dumps({**fields, "notes": "Different unchecked note"}),
             }
             assert service.commit("s1", "conflict", changed)["reason"] == "receipt_already_consumed"
             # A later real receipt can form a new revision; no live lookup edits
@@ -401,9 +455,14 @@ def test_explicit_receipt_tool_binding_history_and_idempotence(tmp_path: Path) -
             service.capture_tool("s1", "complete", "complete_label", latest_body, latest_ref)
             updated_fields = {key: json.loads(latest_body)[key] for key in fields}
             update = proposal(
-                latest_source, json.dumps(updated_fields), basis="tool_observation",
-                object_ref=latest_ref.id, fields=updated_fields, content_format="receipt_json_v1",
-                id=first["id"], expected_revision=1,
+                latest_source,
+                json.dumps(updated_fields),
+                basis="tool_observation",
+                object_ref=latest_ref.id,
+                fields=updated_fields,
+                content_format="receipt_json_v1",
+                id=first["id"],
+                expected_revision=1,
             )
             assert service.commit("s1", "revision", update)["revision"] == 2
             assert service.commit("s1", "revision-replay", update)["reason"] == "revision_conflict"
@@ -450,8 +509,12 @@ def test_explicit_receipt_minimal_body_found_by_original_public_item(
                 source, ref, body = tool_event(service, world, item)
                 fields = {key: body[key] for key in ("status", "label_status")}
                 raw = proposal(
-                    source, json.dumps(fields), basis="tool_observation",
-                    object_ref=ref, fields=fields, content_format="receipt_json_v1",
+                    source,
+                    json.dumps(fields),
+                    basis="tool_observation",
+                    object_ref=ref,
+                    fields=fields,
+                    content_format="receipt_json_v1",
                 )
                 receipts[item] = service.commit("s1", item, raw)
             assert len(service.records()) == 2
@@ -474,8 +537,10 @@ def test_explicit_receipt_minimal_body_found_by_original_public_item(
             assert len(source_gets) == result["source_relation"]["store_get_calls"] == 2
             assert observed[-1]["query"] == "parcel" and observed[-1]["store_get_calls"] == 2
             assert observed[-1]["wall_ns"] > 0 and observed[-1]["cpu_ns"] > 0
-            assert {json.loads(row["original_result"]["content"])["item_key"]
-                    for row in observed[-1]["lookups"]} == {"parcel", "envelope"}
+            assert {
+                json.loads(row["original_result"]["content"])["item_key"]
+                for row in observed[-1]["lookups"]
+            } == {"parcel", "envelope"}
             assert result["records"][0] == next(
                 row for row in before if row["id"] == receipts["parcel"]["id"]
             )
@@ -495,10 +560,18 @@ def test_explicit_receipt_minimal_body_found_by_original_public_item(
             with opened(tmp_path, "bob", mode, receipt_contract) as other:
                 source, ref, body = tool_event(other, world, "foreignparcel")
                 fields = {key: body[key] for key in ("status", "label_status")}
-                other.commit("s1", "foreign", proposal(
-                    source, json.dumps(fields), basis="tool_observation",
-                    object_ref=ref, fields=fields, content_format="receipt_json_v1",
-                ))
+                other.commit(
+                    "s1",
+                    "foreign",
+                    proposal(
+                        source,
+                        json.dumps(fields),
+                        basis="tool_observation",
+                        object_ref=ref,
+                        fields=fields,
+                        content_format="receipt_json_v1",
+                    ),
+                )
             assert service.search("foreignparcel", include_raw=False)["records"] == []
             assert service.search("")["records"] == sorted(before, key=lambda row: row["id"])
             assert "source_relation" not in service.search("")
@@ -506,20 +579,30 @@ def test_explicit_receipt_minimal_body_found_by_original_public_item(
             # a user-supplied memory id or source/object ref.
             body_text = world.get_reservation("alice", "parcel")
             source = service.event_id("s1", "rediscovery", "tool")
-            ref = verified_reservation_ref(
-                world, "alice", source, "get_reservation", body_text
-            )
+            ref = verified_reservation_ref(world, "alice", source, "get_reservation", body_text)
             assert ref is not None
             service.capture_tool("s1", "rediscovery", "get_reservation", body_text, ref)
             fields = {key: json.loads(body_text)[key] for key in ("status", "label_status")}
-            update = tools["manage_memory"].invoke(call("manage_memory", {
-                "action": "update", "target_query": "parcel", "content": json.dumps(fields),
-                "basis": "tool_observation", "fields": fields, "content_format": "receipt_json_v1",
-            }, "natural-update"), config=config(mode))
+            update = tools["manage_memory"].invoke(
+                call(
+                    "manage_memory",
+                    {
+                        "action": "update",
+                        "target_query": "parcel",
+                        "content": json.dumps(fields),
+                        "basis": "tool_observation",
+                        "fields": fields,
+                        "content_format": "receipt_json_v1",
+                    },
+                    "natural-update",
+                ),
+                config=config(mode),
+            )
             receipt = json.loads(update.content)
             assert receipt["id"] == receipts["parcel"]["id"] and receipt["revision"] == 2
             assert service.read(receipt["id"], 1)["value"]["source_ref"] != source
             assert observed[-1]["store_get_calls"] == 2
+
             # Failed actual source I/O is counted and its first error is preserved.
             def fail(namespace: tuple[str, ...], key: str, **kwargs: Any) -> Any:
                 if namespace == service.sources_namespace:
@@ -765,4 +848,5 @@ def test_multilingual_fixed_bank_keyword_queries_preserve_original_content(
         assert [row["event_id"] for row in result["raw_events"]] == [source]
         assert result["records"][0]["value"]["content"] == card
         assert result["raw_events"][0]["content"] == card
-        assert service.source(source)["content_sha256"] == hashlib.sha256(card.encode()).hexdigest()
+        assert service.source(source)["source_revision"] == 1
+        assert service.source(source)["content"] == card

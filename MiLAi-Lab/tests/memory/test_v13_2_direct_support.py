@@ -32,7 +32,7 @@ from milai_lab.runners import v13_1_d0 as d0
 from milai_lab.runners import v13_1_p5 as p5
 
 FIELDS = ("content", "scope", "basis", "kind")
-CONFIG_HASH = "a" * 64
+CONFIG_VERSION = "synthetic-v1"
 
 
 @pytest.fixture(autouse=True)
@@ -70,14 +70,14 @@ def opened(
 
 
 def cfg(
-    service: MemoryService, message: str = "u", config_hash: str = CONFIG_HASH
+    service: MemoryService, message: str = "u", config_version: str = CONFIG_VERSION
 ) -> dict[str, Any]:
     return {
         "configurable": {
             "user_id": service.owner,
             "v13_session": "s",
             "v13_turn_id": message,
-            "v13_support_config_sha256": config_hash,
+            "v13_config_version": config_version,
         }
     }
 
@@ -87,12 +87,12 @@ def turn(
     message: str = "u",
     text: str = "Actual public trigger",
     phase: str = "start",
-    config_hash: str = CONFIG_HASH,
+    config_version: str = CONFIG_VERSION,
 ) -> str:
     source = service.capture_user("s", message, text)["source_ref"]
     service.bind_source_boundary("s", message, [source])
     if service.support_contract == "direct_support_v1":
-        service.bind_public_turn("s", message, source, config_sha256=config_hash, phase=phase)
+        service.bind_public_turn("s", message, source, config_version=config_version, phase=phase)
     return str(source)
 
 
@@ -299,14 +299,14 @@ def test_reopen_resume_identity_exact_replay_and_trigger_conflict(tmp_path: Path
         assert turn(service, phase="resume") == source
         assert service.public_turn("s") == bound
         assert save(service, [source])["replayed"]
-        row = service.store.get(service.turns_namespace, service_module._hash(["s", "u"]))
+        row = service.store.get(service.turns_namespace, service_module.reference_key(["s", "u"]))
         assert row.value["last_binding_phase"] == "resume"
         with pytest.raises(ValueError, match="IDENTITY_CHANGED"):
-            turn(service, phase="resume", config_hash="b" * 64)
+            turn(service, phase="resume", config_version="synthetic-v2")
         other = service.capture_user("s", "missing", "No persisted trigger")["source_ref"]
         with pytest.raises(ValueError, match="RESUME_MISSING"):
             service.bind_public_turn(
-                "s", "missing", other, config_sha256=CONFIG_HASH, phase="resume"
+                "s", "missing", other, config_version=CONFIG_VERSION, phase="resume"
             )
         turn(service, "next", "Different public trigger")
         conflict = invoke(
@@ -332,7 +332,7 @@ def test_config_owner_trigger_and_stale_cas(tmp_path: Path) -> None:
             "manage_memory",
             {"content": "Actual", "source_refs": [source], "field_support": selected([source])},
             "config",
-            cfg(service, config_hash="b" * 64),
+            cfg(service, config_version="synthetic-v2"),
         )
         assert bad["reason"] == "public_turn_required_or_mismatched"
         with pytest.raises(ValueError, match="SCOPE_MISMATCH"):
@@ -356,7 +356,9 @@ def test_config_owner_trigger_and_stale_cas(tmp_path: Path) -> None:
         assert service.read(first["id"], 1)["value"]["content"] != "Explicit replacement"
 
 
-def test_hash_change_wrong_owner_and_unbound_trigger_preserve_pending(tmp_path: Path) -> None:
+def test_source_revision_change_wrong_owner_and_unbound_trigger_preserve_pending(
+    tmp_path: Path,
+) -> None:
     with opened(tmp_path, owner="bob") as foreign:
         other = turn(foreign)
     with opened(tmp_path) as service:
@@ -365,7 +367,7 @@ def test_hash_change_wrong_owner_and_unbound_trigger_preserve_pending(tmp_path: 
         created = save(service, [source])
         handle = service.read(created["id"])["candidate_handle"]
         event = service.store.get(service.sources_namespace, source).value
-        event["content"] = "changed bytes with old hash"
+        event["source_revision"] = event["source_revision"] + 1
         service.store.put(service.sources_namespace, source, event, index=False)
         result = invoke(
             service,
@@ -607,7 +609,10 @@ def test_absent_corrupt_trigger_and_wrong_public_identity(tmp_path: Path) -> Non
             == "public_turn_required_or_mismatched"
         )
         service.store.put(
-            service.turns_namespace, service_module._hash(["s", "u"]), {"binding": {}}, index=False
+            service.turns_namespace,
+            service_module.reference_key(["s", "u"]),
+            {"binding": {}},
+            index=False,
         )
         assert invoke(service, "manage_memory", args, "corrupt")["reason"] == (
             "public_turn_required_or_mismatched"
@@ -659,7 +664,7 @@ def test_delivery_metadata_does_not_change_raw_rank_documents(tmp_path: Path) ->
 
 @pytest.mark.parametrize("invalid", [True, False, 0.0, -1, 9, "0"])
 def test_display_indices_are_explicit_and_never_tool_args(invalid: Any) -> None:
-    bindings = [{"source_ref": "actual-id", "role": "user", "content_sha256": "a" * 64}]
+    bindings = [{"source_ref": "actual-id", "role": "user", "source_revision": 1}]
     fields = {
         "content": {
             "source_refs": ["actual-id"],
@@ -674,17 +679,16 @@ def test_display_indices_are_explicit_and_never_tool_args(invalid: Any) -> None:
         expand_field_support(encoded, bindings, parents)
 
 
-def test_display_preserves_order_full_parent_hashes_and_literal_types() -> None:
+def test_display_preserves_order_full_parent_versions_and_literal_types() -> None:
     bindings = [
-        {"source_ref": "leaf-a", "role": "user", "content_sha256": "a" * 64},
-        {"source_ref": "leaf-b", "role": "user", "content_sha256": "b" * 64},
+        {"source_ref": "leaf-a", "role": "user", "source_revision": 1},
+        {"source_ref": "leaf-b", "role": "user", "source_revision": 2},
     ]
     parent = {
         "candidate_handle": "actual-handle",
         "record_id": "actual-record",
         "revision": 1,
-        "version_sha256": "c" * 64,
-        "field_sha256": "d" * 64,
+        "field": "content",
         "lineage_scope": "legacy_whole_version_set",
     }
     fields = {
@@ -701,7 +705,7 @@ def test_display_preserves_order_full_parent_hashes_and_literal_types() -> None:
     assert len(parents) == 2
     assert encoded["content"]["record_source_indices"] == [1, 0]
     assert expand_field_support(encoded, bindings, parents) == fields
-    assert parents[0]["version_sha256"] == "c" * 64
+    assert parents[0]["revision"] == 1 and parents[0]["field"] == "content"
     encoded["content"]["reused_from_index"] = True
     with pytest.raises(ValueError, match="DISPLAY_INDEX_INVALID"):
         expand_field_support(encoded, bindings, parents)
@@ -816,7 +820,7 @@ def test_actual_runner_binds_frozen_public_trigger_and_skips_paid_writer(
     assert version["source_refs"] == [public]
     binding = version["trigger_binding"]
     assert binding["source_ref"] == public and binding["message_id"] == "m1"
-    assert binding["session"] == "s1" and binding["config_sha256"] == frozen["config_sha256"]
+    assert binding["session"] == "s1" and binding["config_version"] == frozen["config_sha256"]
     assert version["field_support"]["content"]["source_refs"] == [public]
     write_json(
         tmp_path / "direct-runner-evidence.json",
@@ -947,9 +951,9 @@ def test_actual_d0_entry_profile_host_writer_and_checkpoint_resume(
     assert version["trigger_binding"] == bindings[0]
     assert version["source_refs"] == [public]
     assert version["field_support"]["content"]["source_refs"] == [public]
-    assert bindings[0]["config_sha256"] == frozen["config_sha256"]
+    assert bindings[0]["config_version"] == frozen["config_sha256"]
     user = next(s for s in result["sources"] if s["event_id"] == public)
-    assert bindings[0]["content_sha256"] == user["content_sha256"]
+    assert bindings[0]["source_revision"] == user["source_revision"]
     maintenance = result["semantic_maintenance"]
     assert maintenance["trigger_binding"] == bindings[0]
     if path == "host_commit":
@@ -1123,7 +1127,7 @@ def test_actual_p5_shape_feedback_checkpoint_resume_reuses_profile(
     assert len(wires) == 2
     assert result["semantic_maintenance"]["generation_calls"] == 1
     assert (
-        result["semantic_maintenance"]["trigger_binding"]["config_sha256"]
+        result["semantic_maintenance"]["trigger_binding"]["config_version"]
         == frozen["config_sha256"]
     )
     write_json(

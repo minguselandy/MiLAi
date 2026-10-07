@@ -173,8 +173,8 @@ def local_runtime(
             "bank": list(service.namespace),
             "session": "s",
             "request_ref": public["event_id"],
-            "request_sha256": public["content_sha256"],
-            "config_sha256": "c" * 64,
+            "request_revision": public["source_revision"],
+            "config_version": "c" * 64,
         },
     )
     # Constructor receives actual already-frozen method-only context.

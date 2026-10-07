@@ -79,12 +79,12 @@ def test_history_pages_public_tool_actual_revisions_owner_cursor_and_stale_cas(
         assert matches["matched_revisions"] == list(range(1, 7))
         assert matches["matched_revision_count"] == 8
         assert matches["omitted_matched_revision_count"] == 2
-        assert len(matches["matched_revision_set_hash"]) == 64
+        assert matches["source_revision"] == service.source(source)["source_revision"]
         all_matches = service.backlink_candidates([row["event_id"] for row in service.sources()])[0]
         assert len(all_matches["source_matches"]) == 6
         assert all_matches["source_match_count"] == 8
         assert all_matches["omitted_source_match_count"] == 2
-        assert len(all_matches["source_match_set_hash"]) == 64
+        assert all_matches["source_matches_read_more"]["id"] == memory_id
         filtered = bound.invoke(
             service,
             "read_memory",
@@ -108,14 +108,23 @@ def test_history_pages_public_tool_actual_revisions_owner_cursor_and_stale_cas(
         assert service.revise(
             "s1", "r9", service.read(memory_id)["candidate_handle"], {"content": "ninth"}
         )["ok"]
-        with pytest.raises(ValueError, match="CURSOR"):
-            service.history_index(memory_id, cursor=first["next_cursor"])
+        frozen = service.history_index(memory_id, cursor=first["next_cursor"])
+        assert frozen["revisions"] == [7, 8]
+        assert frozen["current_revision_at_snapshot"] == 8
+        assert service.history_index(memory_id)["revision_count"] == 9
         service.store.put(service.namespace, "legacy", {"content": "old unknown"}, index=False)
         unknown = service.history_index("legacy")
         assert unknown["status"] == "history_unavailable" and unknown["revision_count"] is None
         persisted_index = service.history_index(memory_id)
     with bound.opened(tmp_path) as reopened:
-        assert reopened.history_index(memory_id) == persisted_index
+        current_index = reopened.history_index(memory_id)
+        assert current_index["snapshot_id"] != persisted_index["snapshot_id"]
+        omitted = {"snapshot_id", "next_cursor"}
+        assert {k: v for k, v in current_index.items() if k not in omitted} == {
+            k: v for k, v in persisted_index.items() if k not in omitted}
+        persisted_page = reopened.history_index(memory_id, cursor=persisted_index["next_cursor"])
+        assert persisted_page["snapshot_id"] == persisted_index["snapshot_id"]
+        assert persisted_page["revisions"] == [7, 8, 9]
         assert reopened.read(memory_id, 1)["value"]["source_ref"] == source
 
 
@@ -224,7 +233,7 @@ def test_budget_omissions_are_visible_explicit_page_is_full_and_does_not_retriev
         ordinary_refs = [
             row for row in projected if getattr(row, "tool_call_id", None) == "ordinary"
         ]
-        assert len(ordinary_refs) == 1 and "presented_packet_hash" in ordinary_refs[0].content
+        assert len(ordinary_refs) == 1 and "presented_packet_id" in ordinary_refs[0].content
         system_material = projected[0].content.split(HEADER)[1]
         assert (
             capacity.text_tokens(HEADER + system_material)
@@ -397,20 +406,21 @@ def test_single_write_only_boundary_receives_only_the_paid_selected_packet(tmp_p
         client.close()
 
 
-def test_history_filtered_source_owner_and_integrity_fail_closed(tmp_path: Path) -> None:
+def test_history_filtered_source_owner_and_immutable_capture(tmp_path: Path) -> None:
     with bound.opened(tmp_path) as service:
         memory_id, source = history(service)
         filtered = service.history_index(memory_id, source_ref=source)
         assert filtered["revisions"] == [1] and filtered["source_ref"] == source
-        assert filtered["source_hash"] == service.source(source)["content_sha256"]
+        assert filtered["source_revision"] == service.source(source)["source_revision"]
         with pytest.raises(ValueError, match="SOURCE_NOT_FOUND"):
             service.history_index(memory_id, source_ref="foreign-or-invented")
-        actual = service.store.get(service.sources_namespace, source).value
-        service.store.put(
-            service.sources_namespace, source, {**actual, "content": "changed"}, index=False
-        )
-        with pytest.raises(ValueError, match="INTEGRITY"):
-            service.history_index(memory_id, source_ref=source)
+        before = service.source(source)
+        with pytest.raises(ValueError, match="SOURCE_EVENT_CHANGED"):
+            service.capture_user("s1", "r1", "changed")
+        assert service.source(source) == before
+        unchanged = service.history_index(memory_id, source_ref=source)
+        assert unchanged["revisions"] == [1]
+        assert unchanged["source_revision"] == filtered["source_revision"]
 
 
 def test_dirty_revision_metadata_keeps_match_snapshot_and_current_read_separate(

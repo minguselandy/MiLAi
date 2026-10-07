@@ -77,7 +77,7 @@ def test_selected_late_original_json_range_and_true_empty_reuse_reopen(tmp_path:
         serialized = json.dumps(memory.source(ref), ensure_ascii=False)
         assert leaf["excerpt"] == serialized[slice(*leaf["range"])]
         assert leaf["range_basis"] == "serialized_original_event_json"
-        assert leaf["source_hash"] == memory.source(ref)["content_sha256"]
+        assert leaf["source_revision"] == memory.source(ref)["source_revision"]
         assert (
             len(embeddings.queries) == 1
             and recipe.prepare_context("LATE_TOKEN", owner="alice", session="s1", turn_id="q")[
@@ -449,7 +449,7 @@ def test_actual_new_user_patch_binds_current_singleton_and_receives_fixed_packet
     )
 
 
-def test_batch_partial_repair_cap_and_repeated_rejection_fingerprint(tmp_path: Path) -> None:
+def test_batch_partial_repair_cap_and_distinct_rejection_attempts(tmp_path: Path) -> None:
     from langchain_core.messages import AIMessage
 
     with SqliteStore.from_conn_string(str(tmp_path / "store.sqlite")) as store:
@@ -495,9 +495,14 @@ def test_batch_partial_repair_cap_and_repeated_rejection_fingerprint(tmp_path: P
         assert model.calls == receipt["generation_calls"] == 2
         assert receipt["status"] == "partial" and receipt["batch_atomic"] is False
         assert receipt["committed_actions"] == 2 and len(memory.records()) == 2
-        assert any(
-            row["receipt"].get("reason") == "repeated_rejection" for row in receipt["receipts"]
-        )
+        rejected = [row for row in receipt["receipts"] if not row["receipt"].get("ok")]
+        assert len(rejected) == 2
+        assert all(row["receipt"]["reason"] == "source_role_mismatch"
+                   for row in rejected), rejected
+        attempts = memory.store.search(memory.attempts_namespace, limit=20)
+        assert len(attempts) == 2 and len({row.key for row in attempts}) == 2
+        assert all(row.value["raw"]["requested"]["basis"] == "tool_observation"
+                   for row in attempts)
         assert recipe.maintain(
             model,
             session="s1",

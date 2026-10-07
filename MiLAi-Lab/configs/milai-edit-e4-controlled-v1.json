@@ -1,0 +1,69 @@
+{
+  "experiment_name": "milai-edit-e4-controlled-v1",
+  "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "tokenizer_path": "/cra/qwen36-35B",
+  "context_tokens": 65536,
+  "retrieval_limit": 10,
+  "model": {
+    "base_url": "http://127.0.0.1:7862/v1",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 8192,
+    "timeout": 180,
+    "enable_thinking": false
+  },
+  "halumem": {
+    "path": "/cra/memory/mx_memory/reference-sources/milai-edit/data/HaluMem-Medium.jsonl",
+    "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/HaluMem",
+    "users": [
+      "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "8ece194a-885c-8e0c-359e-93a97220252c",
+      "6106afc1-6ad6-c821-3f0f-b491e3e0b833",
+      "5c005ed8-0d18-99f8-a20e-6a776a7ea30a"
+    ],
+    "session_prefix": null
+  },
+  "longmemeval": {
+    "path": "/cra/memory/mx_memory/reference-sources/milai-edit/data/longmemeval_s_cleaned.json",
+    "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/LongMemEval",
+    "questions": [
+      "852ce960",
+      "6613b389"
+    ]
+  },
+  "provenance": {
+    "baseline": "PR82 fc1c6c9",
+    "halumem_author_version": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
+    "longmemeval_author_version": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+    "claim": "fixed four development users, complete chronological histories, paired official scores; no independent Judge or cross-family claim",
+    "judge": "same actual Qwen model, official prompts and label rules; not independent Judge"
+  },
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "source_tokens": 4096,
+  "evidence_kind": "OWN_FORMED_AUTHORED_CONTROLLED_DIALOGUES_NOT_OFFICIAL",
+  "chronological_order": "timestamp",
+  "method_version": "milai_edit_v1",
+  "config_version": "milai-edit-common-v1",
+  "controlled": {
+    "arms": [
+      "B0",
+      "B1",
+      "B2",
+      "M"
+    ],
+    "manifest": "data/manifests/milai-edit-controlled-dialogues-v1.json",
+    "source_clusters": 3,
+    "variant_histories": 10,
+    "events_per_history": 5,
+    "independent_order_pairs": 1,
+    "all_variants_share_original_cluster": true,
+    "additional_editor_review": false,
+    "confirmation_family": "Qwen3.6 only",
+    "status": "PREPARED_UNADMITTED_WAIT_FOR_FROZEN_CANDIDATE"
+  }
+}

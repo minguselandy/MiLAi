@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import importlib.util
 import json
 import os
@@ -50,7 +49,7 @@ def authority() -> list[dict[str, Any]]:
         {
             "operation_id": "create",
             "tool": "create_or_update_draft",
-            "args": {"title": TITLE, "content": BODY, "document_version": 0, "content_digest": ""},
+            "args": {"title": TITLE, "content": BODY, "document_version": 0},
             "target": target,
         },
         {
@@ -271,9 +270,9 @@ def test_actual_document_refs_finite_typed_claims_body_raw_history_and_reopen(
                 config={"configurable": {"user_id": "alice", "v13_session": "s0"}},
             )
             assert json.loads(tool_result.content)["ok"]
-            world.approve_document_version("alice", TITLE, 1, fields["content_digest"])
+            world.approve_document_version("alice", TITLE, 1)
             world.create_or_update_draft(
-                "alice", TITLE, "Changed body", 1, fields["content_digest"]
+                "alice", TITLE, "Changed body", 1
             )
             # Historical draft receipt retains its original observed fields after live edit.
             historical = verified_document_ref(
@@ -302,42 +301,42 @@ def test_actual_draft_approval_publication_versions_noops_and_reopen(tmp_path: P
     try:
         draft = json.loads(world.create_or_update_draft("alice", "Release note", "Original body"))
         assert draft["document_version"] == 1
-        assert draft["content_digest"] == hashlib.sha256(b"Original body").hexdigest()
+        assert "content_digest" not in draft
         assert draft["approval_status"] == "not_approved"
         approved = json.loads(
             world.approve_document_version(
-                "alice", "Release note", draft["document_version"], draft["content_digest"]
+                "alice", "Release note", draft["document_version"]
             )
         )
         assert approved["status"] == "document_approved"
         published = json.loads(
             world.publish_approved_document(
-                "alice", "Release note", 1, draft["content_digest"], "Project members"
+                "alice", "Release note", 1, audience="Project members"
             )
         )
         assert published["status"] == "document_published"
-        assert published["published_digest"] == draft["content_digest"]
+        assert published["published_version"] == draft["document_version"]
         duplicate = json.loads(
             world.publish_approved_document(
-                "alice", "Release note", 1, draft["content_digest"], "Project members"
+                "alice", "Release note", 1, audience="Project members"
             )
         )
         assert duplicate["status"] == "already_published" and not duplicate["ok"]
         same = json.loads(
             world.create_or_update_draft(
-                "alice", "Release note", "Original body", 1, draft["content_digest"]
+                "alice", "Release note", "Original body", 1
             )
         )
         assert same["status"] == "draft_unchanged" and same["document_version"] == 1
         changed = json.loads(
             world.create_or_update_draft(
-                "alice", "Release note", "Changed body", 1, draft["content_digest"]
+                "alice", "Release note", "Changed body", 1
             )
         )
         assert changed["document_version"] == 2 and changed["approval_status"] == "invalidated"
         stale = json.loads(
             world.publish_approved_document(
-                "alice", "Release note", 2, changed["content_digest"], "Project members"
+                "alice", "Release note", 2, audience="Project members"
             )
         )
         assert stale["status"] == "stale_approval" and not stale["ok"]
@@ -350,7 +349,7 @@ def test_actual_draft_approval_publication_versions_noops_and_reopen(tmp_path: P
         assert current["content"] == "Changed body"
         assert current["document_version"] == 2 and current["publication_status"] == "not_published"
         assert [row["document_version"] for row in current["versions"]] == [1, 2]
-        assert current["approvals"][0]["content_digest"] == draft["content_digest"]
+        assert current["approvals"][0]["document_version"] == draft["document_version"]
         assert len(current["publications"]) == 1
         assert current["publications"][0]["audience"] == "Project members"
     finally:
@@ -363,23 +362,25 @@ def test_publication_no_effect_retains_approval_and_rejects_stale_native_args(
     world = DocumentPublicationWorld(tmp_path / "world.sqlite", False)
     try:
         created = json.loads(world.create_or_update_draft("alice", "Notice", "Body"))
-        digest = created["content_digest"]
+        version = created["document_version"]
         assert (
-            json.loads(world.approve_document_version("alice", "Notice", 2, digest))["status"]
+            json.loads(world.approve_document_version("alice", "Notice", 2))["status"]
             == "stale_document_version"
         )
         assert (
-            json.loads(world.approve_document_version("alice", "Notice", 1, "invented"))["status"]
-            == "content_digest_conflict"
+            json.loads(world.approve_document_version("alice", "Notice", True))["status"]
+            == "stale_document_version"
         )
         assert (
-            json.loads(world.publish_approved_document("alice", "Notice", 1, digest, "Team"))[
+            json.loads(world.publish_approved_document(
+                "alice", "Notice", version, audience="Team"))[
                 "status"
             ]
             == "approval_required"
         )
-        world.approve_document_version("alice", "Notice", 1, digest)
-        failed = json.loads(world.publish_approved_document("alice", "Notice", 1, digest, "Team"))
+        world.approve_document_version("alice", "Notice", version)
+        failed = json.loads(world.publish_approved_document(
+            "alice", "Notice", version, audience="Team"))
         assert failed["status"] == "publish_service_unavailable"
         assert failed["approval_status"] == "approved" and failed["publications"] == []
         world.set_publication_available("actual-backend-change", True)
@@ -387,7 +388,8 @@ def test_publication_no_effect_retains_approval_and_rejects_stale_native_args(
         with pytest.raises(ValueError, match="WORLD_EVENT_CHANGED"):
             world.set_publication_available("actual-backend-change", False)
         assert (
-            json.loads(world.publish_approved_document("alice", "Notice", 1, digest, "Team"))[
+            json.loads(world.publish_approved_document(
+                "alice", "Notice", version, audience="Team"))[
                 "status"
             ]
             == "document_published"
@@ -427,7 +429,6 @@ class ScriptModel(LangMemRecipeChatModel):
             version_args = {
                 "title": TITLE,
                 "document_version": native.get("document_version"),
-                "content_digest": native.get("content_digest"),
             }
             if native.get("status") == "ORIGINAL_CALL_OUTCOME_UNKNOWN":
                 name, args = "get_document_status", {"title": TITLE}
@@ -636,20 +637,20 @@ def test_actual_two_connection_stale_edit_cannot_overwrite_current_version(tmp_p
     first, second = DocumentPublicationWorld(path), DocumentPublicationWorld(path)
     try:
         created = json.loads(first.create_or_update_draft("alice", TITLE, BODY))
-        second.approve_document_version("alice", TITLE, 1, created["content_digest"])
+        second.approve_document_version("alice", TITLE, created["document_version"])
         changed = json.loads(
-            first.create_or_update_draft("alice", TITLE, "New draft", 1, created["content_digest"])
+            first.create_or_update_draft("alice", TITLE, "New draft", 1)
         )
         refused = json.loads(
             second.create_or_update_draft(
-                "alice", TITLE, "Stale overwrite", 1, created["content_digest"]
+                "alice", TITLE, "Stale overwrite", 1
             )
         )
         assert not refused["ok"] and refused["status"] == "stale_document_version"
         actual = json.loads(second.get_document_status("alice", TITLE))
         assert (
             actual["content"] == "New draft"
-            and actual["content_digest"] == changed["content_digest"]
+            and actual["document_version"] == changed["document_version"]
         )
         assert actual["approval_status"] == "invalidated"
         assert [row["document_version"] for row in actual["versions"]] == [1, 2]

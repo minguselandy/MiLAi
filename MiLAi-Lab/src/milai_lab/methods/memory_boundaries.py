@@ -103,6 +103,14 @@ def _body_hash(content: Any) -> str:
     return hashlib.sha256(json.dumps(content, ensure_ascii=False).encode()).hexdigest()
 
 
+def _source_revision(message: Mapping[str, Any]) -> int:
+    """Keep an adapter's ordinary revision; immutable SDK events start at one."""
+    revision = message.get("source_revision", 1)
+    if type(revision) is not int or revision < 1:
+        raise ValueError("MEMORY_BOUNDARY_SOURCE_REVISION_INVALID")
+    return revision
+
+
 def _receipt_time(ref: str, content: Any, metadata: Mapping[str, Any],
                   scope: Mapping[str, str]) -> str | None:
     row = metadata.get(ref, {})
@@ -189,7 +197,7 @@ def operation_audit(messages: Sequence[Mapping[str, Any]], scope: Mapping[str, s
             events.append({
                 "id": event_reference(thread_id, position, message), "kind": kind,
                 "checkpoint_position": position, "message_id": message.get("id"),
-                "content_sha256": _body_hash(content),
+                "source_revision": _source_revision(message),
                 "observed_at": _receipt_time(event_reference(thread_id, position, message),
                                              content, received, scope) if kind == "tool" else None,
             })

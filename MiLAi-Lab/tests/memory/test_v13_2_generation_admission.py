@@ -47,8 +47,8 @@ def no_sockets(monkeypatch: pytest.MonkeyPatch) -> None:
 
 def scope() -> dict[str, Any]:
     return {"owner": "alice", "bank": ["synthetic", "alice"], "session": "session",
-            "request_ref": "actual-public-source", "request_sha256": "a" * 64,
-            "config_sha256": "b" * 64}
+            "request_ref": "actual-public-source", "request_revision": 1,
+            "config_version": "synthetic-config-v1"}
 
 
 def first_row(path: Path) -> dict[str, Any]:
@@ -119,7 +119,7 @@ def test_actual_host_native_m_and_scripted_summary_share_inclusive_cap(
         captured = service.capture_user("session", "u", "Keep actual event roles.")
         source = service.source(captured["source_ref"])
         actual_scope = {**scope(), "request_ref": source["event_id"],
-                        "request_sha256": source["content_sha256"]}
+                        "request_revision": source.get("source_revision", 1)}
         begin(model, actual_scope=actual_scope)
         host_checkpoint.append(model.invoke([HumanMessage("真实输入 / entrada real")],
                                             tools=HOST_TOOLS))
@@ -199,8 +199,8 @@ def test_bad_resume_refuses_before_any_transport(tmp_path: Path, damage: str) ->
     model.client.close()
 
 
-@pytest.mark.parametrize("field", ["owner", "bank", "session", "request_ref", "request_sha256",
-                                   "config_sha256"])
+@pytest.mark.parametrize("field", ["owner", "bank", "session", "request_ref", "request_revision",
+                                   "config_version"])
 def test_actual_scope_identity_must_match_on_resume(tmp_path: Path, field: str) -> None:
     model, wires, _ = make(tmp_path)
     begin(model)
@@ -386,7 +386,7 @@ def test_new_message_and_session_get_separate_scoped_slots(tmp_path: Path) -> No
     model.client.close()
 
 
-def test_runner_uses_actual_checkpoint_phase_source_hash_and_frozen_config(
+def test_archived_runner_uses_actual_checkpoint_phase_source_revision_and_opaque_config(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     import test_v13_1_p5 as old
@@ -415,7 +415,7 @@ def test_runner_uses_actual_checkpoint_phase_source_hash_and_frozen_config(
     row = first_row(path)
     identity = row["identity"]
     assert identity["public_message_id"] == "m1" and identity["owner"] == "alice"
-    assert identity["config_sha256"] == hashlib.sha256(
+    assert identity["config_version"] == hashlib.sha256(
         (tmp_path / "durable.json").read_bytes()
     ).hexdigest()
     assert identity["request_ref"] == started["capture_receipt"]["source_ref"]

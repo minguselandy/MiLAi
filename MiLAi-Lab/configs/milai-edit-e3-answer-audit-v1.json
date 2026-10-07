@@ -1,0 +1,91 @@
+{
+  "experiment_name": "milai-edit-e3-answer-audit-v1",
+  "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "tokenizer_path": "/cra/qwen36-35B",
+  "context_tokens": 65536,
+  "retrieval_limit": 10,
+  "model": {
+    "base_url": "http://127.0.0.1:7862/v1",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0,
+    "max_tokens": 8192,
+    "timeout": 180,
+    "enable_thinking": false
+  },
+  "halumem": {
+    "path": "/cra/memory/mx_memory/reference-sources/milai-edit/data/HaluMem-Medium.jsonl",
+    "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/HaluMem",
+    "users": [
+      "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "8ece194a-885c-8e0c-359e-93a97220252c",
+      "6106afc1-6ad6-c821-3f0f-b491e3e0b833",
+      "5c005ed8-0d18-99f8-a20e-6a776a7ea30a"
+    ],
+    "session_prefix": null
+  },
+  "longmemeval": {
+    "path": "/cra/memory/mx_memory/reference-sources/milai-edit/data/longmemeval_s_cleaned.json",
+    "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/LongMemEval",
+    "questions": [
+      "01493427",
+      "031748ae",
+      "06db6396",
+      "07741c44",
+      "031748ae_abs",
+      "00ca467f",
+      "0100672e",
+      "078150f1",
+      "099778bb",
+      "09ba9854_abs",
+      "0e5e2d1a",
+      "1568498a",
+      "16c90bf4",
+      "18dcd5a5",
+      "06878be2",
+      "06f04340",
+      "07b6f563",
+      "09d032c9",
+      "001be529",
+      "0862e8bf",
+      "118b2229",
+      "15745da0",
+      "0862e8bf_abs",
+      "08f4fc43",
+      "0bb5a684",
+      "0bc8ad92",
+      "0bc8ad93",
+      "982b5123_abs"
+    ]
+  },
+  "provenance": {
+    "baseline": "PR82 fc1c6c9",
+    "halumem_author_version": "718f16ff0c83413b1c86fa83fc13cc1a639871f9",
+    "longmemeval_author_version": "9e0b455f4ef0e2ab8f2e582289761153549043fc",
+    "claim": "fixed four development users, complete chronological histories, paired official scores; no independent Judge or cross-family claim",
+    "judge": "same actual Qwen model, official prompts and label rules; not independent Judge"
+  },
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M"
+  ],
+  "source_tokens": 4096,
+  "evidence_kind": "PRESELECTED_ENTIRE_ANSWER_AUDIT_FULL_ORIGINAL_HISTORY",
+  "chronological_order": "timestamp",
+  "method_version": "milai_edit_v1",
+  "config_version": "milai-edit-common-v1",
+  "answer_audit": {
+    "arms": [
+      "RawRAG",
+      "RollingSummary",
+      "A-MEM",
+      "M"
+    ],
+    "selection_manifest": "data/manifests/milai-edit-external-subset-v1.json",
+    "audit_questions": 10,
+    "replacement_of_official_score": false,
+    "judge_family": "Qwen3.6 only; not independent",
+    "status": "PREPARED_UNADMITTED_WAIT_FOR_ALL_EXTERNAL_ARMS"
+  }
+}

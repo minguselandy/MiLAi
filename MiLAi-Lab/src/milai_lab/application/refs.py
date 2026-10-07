@@ -25,24 +25,36 @@ def observation_profile(workflow: str) -> ObservationProfile:
     """
     if workflow == "reservation_v1":
         return ObservationProfile(
-            profile_id=workflow, adapter_version="1", application="ApplicationWorld.reservation",
+            profile_id=workflow,
+            adapter_version="1",
+            application="ApplicationWorld.reservation",
             origins=("reserve_and_label", "get_reservation", "complete_label"),
             object_id_path=("reservation_id",),
-            fields=(ObservationField("status", ("status",), "string"),
-                    ObservationField("label_status", ("label_status",), "string")),
+            fields=(
+                ObservationField("status", ("status",), "string"),
+                ObservationField("label_status", ("label_status",), "string"),
+            ),
         )
     if workflow == "document_publication_v1":
         from milai_lab.application.document_publication import DOCUMENT_NAMES
 
         return ObservationProfile(
-            profile_id=workflow, adapter_version="1", application="ApplicationWorld.document",
-            origins=tuple(DOCUMENT_NAMES), object_id_path=("document_id",),
-            resource_version_path=("document_version",), resource_version_type="integer",
-            fields=tuple(ObservationField(
-                name, (name,), "integer" if dtype == "integer" else "string",
-                version_domain=("document_content"
-                                if name in {"content_digest", "document_version"} else None),
-            ) for name, dtype in RECEIPT_PROFILES[workflow]["fields"].items()),
+            profile_id=workflow,
+            adapter_version="1",
+            application="ApplicationWorld.document",
+            origins=tuple(DOCUMENT_NAMES),
+            object_id_path=("document_id",),
+            resource_version_path=("document_version",),
+            resource_version_type="integer",
+            fields=tuple(
+                ObservationField(
+                    name,
+                    (name,),
+                    "integer" if dtype == "integer" else "string",
+                    version_domain=("document_content" if name == "document_version" else None),
+                )
+                for name, dtype in RECEIPT_PROFILES[workflow]["fields"].items()
+            ),
         )
     raise ValueError("V13_OBSERVATION_WORKFLOW_INVALID")
 
@@ -119,7 +131,6 @@ def verified_document_ref(
         or not body.get("title")
         or type(body.get("document_version")) is not int
         or body["document_version"] < 1
-        or not isinstance(body.get("content_digest"), str)
     ):
         return None
     wall, cpu = time.perf_counter_ns(), time.process_time_ns()
@@ -144,7 +155,6 @@ def verified_document_ref(
         or actual.get("document_id") != body["document_id"]
         or not any(
             value["document_version"] == body.get("document_version")
-            and value["content_digest"] == body.get("content_digest")
             for value in actual.get("versions", [])
         )
     ):

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import json
 from collections.abc import Mapping, Sequence
 from copy import deepcopy
@@ -18,10 +17,6 @@ class CapacityExceeded(ValueError):
         self.receipt = receipt
 
 
-def _sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
 def _field(message: Any, key: str) -> str:
     value = message[key] if isinstance(message, Mapping) else getattr(message, key)
     if not isinstance(value, str):
@@ -30,7 +25,8 @@ def _field(message: Any, key: str) -> str:
 
 
 def history_arrival_boundaries(
-    history: Sequence[Any], policy: str = "natural_capacity",
+    history: Sequence[Any],
+    policy: str = "natural_capacity",
 ) -> list[dict[str, int]]:
     """Freeze message-index arrival units before tokenizer-based batching."""
     if policy not in {"natural_capacity", "online_turn_replay"}:
@@ -39,8 +35,9 @@ def history_arrival_boundaries(
         return []
     if policy == "natural_capacity":
         return [{"start": 0, "end": len(history)}]
-    user_starts = [index for index, message in enumerate(history)
-                   if _field(message, "role") == "user"]
+    user_starts = [
+        index for index, message in enumerate(history) if _field(message, "role") == "user"
+    ]
     if not user_starts:
         return [{"start": 0, "end": len(history)}]
     starts = [0, *user_starts[1:]]
@@ -61,52 +58,32 @@ class HostCapacity:
         path = Path(config["tokenizer_path"])
         if not path.is_absolute() or not path.is_dir():
             raise ValueError("TOKENIZER_PATH_MUST_BE_LOCAL_DIRECTORY")
-        expected: dict[str, str] = config["tokenizer_files_sha256"]
-        required = {"tokenizer.json", "tokenizer_config.json", "chat_template.jinja"}
-        if not required <= expected.keys():
-            raise ValueError("TOKENIZER_IDENTITY_INCOMPLETE")
-        actual = {}
-        for name, digest in expected.items():
-            if Path(name).name != name or len(digest) != 64:
-                raise ValueError("INVALID_TOKENIZER_FILE_IDENTITY")
-            file = path / name
-            if not file.is_file():
-                raise ValueError("TOKENIZER_IDENTITY_FILE_MISSING")
-            actual[name] = _sha256(file)
-            if actual[name] != digest:
-                raise ValueError("TOKENIZER_IDENTITY_MISMATCH")
         self.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
-            str(path), local_files_only=True,
+            str(path),
+            local_files_only=True,
         )
-        template = (path / "chat_template.jinja").read_text()
-        if self.tokenizer.chat_template != template:
-            raise ValueError("TOKENIZER_TEMPLATE_MISMATCH")
         self.context_tokens = self._positive("context_tokens")
         self.output_tokens = self._positive("output_tokens")
         self.safety_tokens = self._nonnegative("safety_tokens")
         self.batch_source_tokens = self._positive("batch_source_tokens")
         self.related_reserve_tokens = self._nonnegative("related_reserve_tokens")
         self.schema_reserve_tokens = self._nonnegative("schema_reserve_tokens")
-        self.source_message_overhead_tokens = self._nonnegative(
-            "source_message_overhead_tokens"
-        )
-        if (self.batch_source_tokens + self.output_tokens + self.safety_tokens
-                + self.related_reserve_tokens + self.schema_reserve_tokens
-                > self.context_tokens):
+        self.source_message_overhead_tokens = self._nonnegative("source_message_overhead_tokens")
+        if (
+            self.batch_source_tokens
+            + self.output_tokens
+            + self.safety_tokens
+            + self.related_reserve_tokens
+            + self.schema_reserve_tokens
+            > self.context_tokens
+        ):
             raise ValueError("BATCH_RESERVATION_EXCEEDS_CONTEXT")
-        policy = {
-            key: value for key, value in config.items()
-            if key not in {"description", "notes"}
-        }
-        policy["enable_thinking"] = self.enable_thinking
         self.identity = {
             "model": config["model"],
             "enable_thinking": self.enable_thinking,
             "tokenizer_path": str(path),
-            "tokenizer_files_sha256": actual,
-            "capacity_policy_sha256": hashlib.sha256(
-                json.dumps(policy, sort_keys=True, ensure_ascii=False).encode()
-            ).hexdigest(),
+            "capacity_version": config.get("capacity_version", "loaded-local-v1"),
+            "chat_template": self.tokenizer.chat_template,
         }
 
     def _positive(self, name: str) -> int:
@@ -127,7 +104,8 @@ class HostCapacity:
         return len(self.tokenizer.encode(text, add_special_tokens=False))
 
     def count_messages(
-        self, messages: Sequence[Mapping[str, Any]],
+        self,
+        messages: Sequence[Mapping[str, Any]],
         tools: Sequence[dict[str, Any]] | None = None,
     ) -> int:
         rendered_messages = []
@@ -155,21 +133,29 @@ class HostCapacity:
         rendered = self.tokenizer.apply_chat_template(
             rendered_messages,
             tools=list(tools) if tools else None,
-            tokenize=True, add_generation_prompt=True,
+            tokenize=True,
+            add_generation_prompt=True,
             enable_thinking=self.enable_thinking,
         )
         return len(rendered)
 
     def check(
-        self, messages: Sequence[Mapping[str, Any]], output_tokens: int | None = None,
+        self,
+        messages: Sequence[Mapping[str, Any]],
+        output_tokens: int | None = None,
         tools: Sequence[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         reserve = self.output_tokens if output_tokens is None else output_tokens
         if type(reserve) is not int or reserve <= 0:
             raise ValueError("INVALID_OUTPUT_RESERVATION")
         prompt = self.count_messages(messages, tools)
-        total = (prompt + reserve + self.safety_tokens
-                 + self.related_reserve_tokens + self.schema_reserve_tokens)
+        total = (
+            prompt
+            + reserve
+            + self.safety_tokens
+            + self.related_reserve_tokens
+            + self.schema_reserve_tokens
+        )
         receipt = {
             "prompt_tokens": prompt,
             "output_reserve_tokens": reserve,
@@ -212,7 +198,10 @@ class HostCapacity:
         return spans
 
     def plan_history(
-        self, history: Sequence[Any], *, arrival_policy: str = "natural_capacity",
+        self,
+        history: Sequence[Any],
+        *,
+        arrival_policy: str = "natural_capacity",
     ) -> list[list[dict[str, int]]]:
         """Honor arrival units, then real sessions, messages and exact character spans."""
         batches: list[list[dict[str, int]]] = []
@@ -247,7 +236,8 @@ class HostCapacity:
 
 
 def history_coverage(
-    history: Sequence[Any], batches: Sequence[Sequence[dict[str, int]]],
+    history: Sequence[Any],
+    batches: Sequence[Sequence[dict[str, int]]],
 ) -> dict[str, Any]:
     """Prove chronological, non-overlapping, complete coverage of immutable input."""
     index, offset, characters = 0, 0, 0
@@ -256,9 +246,12 @@ def history_coverage(
             if index >= len(history):
                 raise ValueError("HISTORY_COVERAGE_EXTRA_RANGE")
             content = _field(history[index], "content")
-            if (span["message_index"] != index or span["start"] != offset
-                    or not offset <= span["end"] <= len(content)
-                    or (span["end"] == offset and content)):
+            if (
+                span["message_index"] != index
+                or span["start"] != offset
+                or not offset <= span["end"] <= len(content)
+                or (span["end"] == offset and content)
+            ):
                 raise ValueError("HISTORY_COVERAGE_GAP_OR_OVERLAP")
             characters += span["end"] - offset
             offset = span["end"]
@@ -266,8 +259,9 @@ def history_coverage(
                 index, offset = index + 1, 0
     if index != len(history) or offset:
         raise ValueError("HISTORY_COVERAGE_INCOMPLETE")
-    return {"complete": True, "messages": index, "characters": characters,
-            "ranges": sum(len(batch) for batch in batches),
-            "boundaries_sha256": hashlib.sha256(
-                json.dumps(batches, sort_keys=True).encode()
-            ).hexdigest()}
+    return {
+        "complete": True,
+        "messages": index,
+        "characters": characters,
+        "ranges": sum(len(batch) for batch in batches),
+    }

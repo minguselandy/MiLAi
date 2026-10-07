@@ -1,0 +1,577 @@
+{
+  "version": "milai-edit-controlled-dialogues-v1",
+  "created_date": "2026-10-05",
+  "status": "FIXED_BEFORE_ANY_CONTROLLED_MODEL_OUTPUT",
+  "evidence_kind": "AUTHOR_CREATED_CONTROLLED_DIALOGUES_NOT_OFFICIAL_BENCHMARK_OR_REAL_USER_SAMPLE",
+  "source_policy": "These source statements are authored test dialogue. Each variant forms its own state from observed messages using the normal four-arm benchmark writer. No ideal or reference memory is written. Questions and reviews are evaluator-only.",
+  "source_clusters": 3,
+  "variant_histories": 10,
+  "events_per_history": 5,
+  "variants_share_source_cluster": true,
+  "cross_family_claim": false,
+  "semantic_variant_review": "Root manual review of propositions, scope, modality and dates; not independent annotation",
+  "case_date_rule": "Observation dates assigned monotonically by position within each authored variant, 2030-01-01 through 2030-01-05. Effective July/June/2029/2032 claims remain literal source content.",
+  "cases": [
+    {
+      "source_cluster": "report-rule",
+      "subject": "North report arrangements",
+      "events": [
+        {
+          "event_id": "formation",
+          "review": {
+            "classification": "formation",
+            "source_supported_requirement": "North reports use email every Friday at 09:00 UTC, paused on public holidays. No South policy is established.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "My North team report rule is weekly email on Friday at 09:00 UTC. Pause reports on public holidays. This rule is only for North; I have not set a South team rule."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "For North, email the report at 09:00 UTC each Friday unless it is a public holiday, when it is paused. This does not establish any rule for South."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "North 团队的周报每周五 09:00 UTC 用 email 发送；公共假日暂停。这个规则只适用于 North，我没有设置 South 的规则。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "What report arrangement is confirmed for North, including day, time, channel and public holidays, and what is known about South?",
+            "en_paraphrase": "What report arrangement is confirmed for North, including day, time, channel and public holidays, and what is known about South?",
+            "zh_en": "North 已确认的周报日期、时间、渠道和公共假日规则是什么？South 是否已有规则？"
+          }
+        },
+        {
+          "event_id": "july_override",
+          "review": {
+            "classification": "scope_override",
+            "source_supported_requirement": "Only in July 2030, North uses Tuesday 09:00 UTC email, with the public-holiday pause still applying. Outside July the Friday arrangement remains.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "For July 2030 only, North reports should be emailed on Tuesday at 09:00 UTC instead of Friday. The public-holiday pause still applies. Outside July keep the Friday rule."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "North needs a July 2030 exception: move that month's email report from Friday to Tuesday, still at 09:00 UTC and still paused on public holidays. All other months keep Friday."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "仅在 July 2030，North 周报改为周二 09:00 UTC 用 email；公共假日仍暂停。July 以外保持周五的规则。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "For North, compare July 2030 and August 2030 report day, time, channel and holiday behavior.",
+            "en_paraphrase": "For North, compare July 2030 and August 2030 report day, time, channel and holiday behavior.",
+            "zh_en": "请比较 North 在 July 2030 与 August 2030 的周报日期、时间、渠道及假日规则。"
+          }
+        },
+        {
+          "event_id": "cancel_july",
+          "review": {
+            "classification": "cancellation",
+            "source_supported_requirement": "The July Tuesday exception is cancelled; North resumes the Friday 09:00 UTC email rule in July as elsewhere, preserving the holiday pause.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": true
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "Cancel the July 2030 Tuesday exception for North. Use the ordinary Friday 09:00 UTC email rule in July too, still pausing on public holidays."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "Withdraw North's special Tuesday report arrangement for July 2030. July follows our usual Friday email at 09:00 UTC; the holiday pause is unchanged."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "取消 North 在 July 2030 的周二例外；July 也恢复周五 09:00 UTC 的 email 周报，公共假日仍暂停。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "After the cancellation, what North report rule applies in July and August, including public holidays?",
+            "en_paraphrase": "After the cancellation, what North report rule applies in July and August, including public holidays?",
+            "zh_en": "取消例外后，North 在 July 和 August 的周报规则及公共假日处理是什么？"
+          }
+        },
+        {
+          "event_id": "global_time",
+          "review": {
+            "classification": "ordinary_value_update",
+            "source_supported_requirement": "North's general Friday report time is now 10:00 UTC instead of 09:00. Email, Friday, scope and holiday pause remain unchanged.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "Change the North report time to 10:00 UTC for every month. Keep Friday, email and the public-holiday pause unchanged."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "Across all months, North's Friday email report is now at 10:00 UTC rather than 09:00. Nothing changes about the public-holiday pause."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "North 所有月份的周报时间改为 10:00 UTC；仍是周五 email，公共假日暂停不变。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "What is North's confirmed report rule now, and is any different rule established for South?",
+            "en_paraphrase": "What is North's confirmed report rule now, and is any different rule established for South?",
+            "zh_en": "North 当前已确认的完整周报规则是什么？South 是否有不同规则？"
+          }
+        },
+        {
+          "event_id": "tentative_august",
+          "review": {
+            "classification": "uncertainty",
+            "source_supported_requirement": "An August Monday arrangement is only under consideration. Confirmed North rules remain Friday 10:00 UTC email with holiday pause; South remains unspecified.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "I might move North's August reports to Monday, but I have not decided. Do not treat that possibility as a confirmed change."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "Moving North's report to Monday in August is a tentative thought, not an agreed rule. The existing arrangement remains confirmed."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "我可能把 North 的 August 周报改到周一，但还没决定；这个想法不算已确认的变更。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "What North report rule is confirmed, including holiday behavior, and is Monday in August settled?",
+            "en_paraphrase": "What North report rule is confirmed, including holiday behavior, and is Monday in August settled?",
+            "zh_en": "North 已确认的周报规则及假日规则是什么？August 改为周一是否已经确定？"
+          }
+        }
+      ],
+      "variants": [
+        "en",
+        "en_paraphrase",
+        "zh_en"
+      ]
+    },
+    {
+      "source_cluster": "travel-rule",
+      "subject": "Rowan's commute, history and meal preference",
+      "events": [
+        {
+          "event_id": "formation",
+          "review": {
+            "classification": "formation",
+            "source_supported_requirement": "Rowan's current weekday home-to-work commute is train at 08:00, avoiding stairs. Rowan prefers vegetarian meals. Rowan reports taking the bus in 2029.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "I am Rowan. For my weekday home-to-work commute, I take the train at 08:00 and avoid stairs. I prefer vegetarian meals. I used the bus for that commute in 2029."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "My name is Rowan. On working weekdays I currently travel from home to work by train, leaving at 08:00 and choosing routes without stairs. My meals are vegetarian by preference. Back in 2029 my commute used a bus."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "我叫 Rowan。目前工作日从家到公司坐 train，08:00 出发，并避免楼梯；我偏好 vegetarian meals。2029 年这段通勤我坐 bus。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "What are Rowan's current commute and meal preferences, and which transport did Rowan report for 2029?",
+            "en_paraphrase": "What are Rowan's current commute and meal preferences, and which transport did Rowan report for 2029?",
+            "zh_en": "Rowan 当前通勤和饮食偏好是什么？此前说 2029 年乘坐哪种交通工具？"
+          }
+        },
+        {
+          "event_id": "june_override",
+          "review": {
+            "classification": "scope_override",
+            "source_supported_requirement": "June 2030 only uses bus instead of train for the weekday home-to-work commute at 08:00, still avoiding stairs. Outside June train remains; meals and history remain.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "For June 2030 only, use the bus instead of the train for my weekday home-to-work commute. Keep 08:00 and keep avoiding stairs. Other months stay with the train."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "Make a June 2030 exception for the home-to-work trip on weekdays: bus at 08:00, with no stairs. The train arrangement still applies outside June."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "仅 June 2030，工作日家到公司的通勤改坐 bus；仍是 08:00，仍避免楼梯。June 之外保持 train。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "Compare Rowan's June and July 2030 commute, including time and stairs, and state the meal preference.",
+            "en_paraphrase": "Compare Rowan's June and July 2030 commute, including time and stairs, and state the meal preference.",
+            "zh_en": "比较 Rowan 在 June 与 July 2030 的通勤方式、时间和楼梯限制；饮食偏好是什么？"
+          }
+        },
+        {
+          "event_id": "all_scope_time",
+          "review": {
+            "classification": "ordinary_value_update",
+            "source_supported_requirement": "All current weekday home-to-work commute departures become 08:30, including June's bus exception and the general train rule. Avoiding stairs, vegetarian preference and historical transport remain.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "Change every current weekday home-to-work departure to 08:30, including June's bus exception and the general train rule. Keep avoiding stairs."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "Every applicable weekday commute should now leave at 08:30. That includes the special bus trip in June and the train in other months; the no-stairs preference stays."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "所有当前工作日家到公司的通勤都改为 08:30，包括 June 的 bus 例外以及其他月份的 train；避免楼梯不变。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "For June and July, what are Rowan's commute transport and departure time, which restriction remains, and has the meal preference changed?",
+            "en_paraphrase": "For June and July, what are Rowan's commute transport and departure time, which restriction remains, and has the meal preference changed?",
+            "zh_en": "Rowan 在 June 与 July 的通勤方式和出发时间各是什么？限制及饮食偏好是否仍有效？"
+          }
+        },
+        {
+          "event_id": "cancel_june",
+          "review": {
+            "classification": "cancellation",
+            "source_supported_requirement": "The June bus exception is cancelled, so all current weekday home-to-work commute uses train at 08:30, avoiding stairs. Meals and historical claim remain unaffected.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": true
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "Cancel the June 2030 bus exception. The general train commute now applies in June as well, at 08:30 and still avoiding stairs."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "Withdraw the special June bus rule. Use the ordinary weekday train trip from home to work in June too, keeping the current 08:30 departure and no-stairs preference."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "取消 June 2030 的 bus 例外；June 也恢复普通工作日家到公司的 train 通勤，08:30 出发并避免楼梯。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "After cancellation, what commute applies in June and July, and what are Rowan's meal preference and reported 2029 transport?",
+            "en_paraphrase": "After cancellation, what commute applies in June and July, and what are Rowan's meal preference and reported 2029 transport?",
+            "zh_en": "取消后 Rowan 在 June 与 July 的通勤规则是什么？饮食偏好和先前描述的 2029 年交通方式是什么？"
+          }
+        },
+        {
+          "event_id": "historical_erratum",
+          "review": {
+            "classification": "historical_erratum",
+            "source_supported_requirement": "Rowan corrects the 2029 commute from bus to train. This is a correction of past history, with no change to the current train 08:30 no-stairs rule or vegetarian preference.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "I need to correct my earlier history: in 2029 I commuted by train, not bus. This corrects that past statement and does not change my current commute or meal preference."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "My earlier statement that I used a bus in 2029 was mistaken; it was the train. This is about 2029 only, not a new change to today's commute or meals."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "更正此前的历史说法：2029 年我坐的是 train，不是 bus。这里只纠正过去，当前通勤和饮食偏好不变。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "What transport did Rowan use in 2029, and what are the current commute time, stairs restriction and meal preference?",
+            "en_paraphrase": "What transport did Rowan use in 2029, and what are the current commute time, stairs restriction and meal preference?",
+            "zh_en": "Rowan 在 2029 年乘坐什么交通工具？当前通勤时间、楼梯限制和饮食偏好是什么？"
+          }
+        }
+      ],
+      "variants": [
+        "en",
+        "en_paraphrase",
+        "zh_en"
+      ]
+    },
+    {
+      "source_cluster": "independent-decisions",
+      "subject": "Lina's employment and food preferences",
+      "events": [
+        {
+          "event_id": "formation",
+          "review": {
+            "classification": "formation",
+            "source_supported_requirement": "Lina is a developer at Orion, confirmed monthly salary USD12000. Salmon is Lina's favorite dinner dish; Lina avoids shellfish because of an allergy.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "I am Lina. I work as a developer at Orion and my confirmed monthly salary is USD 12000. Salmon is my favorite dinner dish. I have a shellfish allergy and avoid shellfish."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "My name is Lina. My role is developer at Orion, with a confirmed salary of USD 12000 per month. For dinner my favorite is salmon, while shellfish is avoided due to my allergy."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "我叫 Lina。我在 Orion 做 developer，已确认月薪是 USD 12000。Salmon 是我最喜欢的晚餐菜；我对 shellfish 过敏并避免食用。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "What are Lina's confirmed job, salary, dinner preference and allergy restriction?",
+            "en_paraphrase": "What are Lina's confirmed job, salary, dinner preference and allergy restriction?",
+            "zh_en": "Lina 已确认的工作、月薪、晚餐偏好和过敏限制是什么？"
+          }
+        },
+        {
+          "event_id": "salary_raise",
+          "review": {
+            "classification": "ordinary_value_update",
+            "source_supported_requirement": "Lina's confirmed monthly salary is now USD14000; developer role at Orion remains. Food preference/restrictions change only if separately cancelled.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "My monthly salary is now confirmed at USD 14000. I remain a developer at Orion; this changes no food preferences."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "The confirmed pay for my developer job at Orion has increased to USD 14000 a month. This is a salary update, with no food-preference change."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "我在 Orion 的 developer 月薪现在已确认是 USD 14000；这是工资变更，饮食偏好不因此改变。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "What monthly salary and job are confirmed for Lina now?",
+            "en_paraphrase": "What monthly salary and job are confirmed for Lina now?",
+            "zh_en": "Lina 当前已确认月薪和工作是什么？"
+          }
+        },
+        {
+          "event_id": "cancel_salmon",
+          "review": {
+            "classification": "cancellation",
+            "source_supported_requirement": "Lina withdraws salmon as favorite dinner dish without naming a replacement or declaring no fish intake. Shellfish allergy remains; salary/job are unaffected.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": true
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "Salmon is no longer my favorite dinner dish. I have not named a new favorite and this does not mean I avoid all fish. My shellfish allergy remains."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "Withdraw my earlier favorite-dinner designation for salmon. No replacement favorite is established, and I am not saying I avoid fish generally; the shellfish allergy still applies."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "Salmon 不再是我最喜欢的晚餐菜；没有指定新的最爱，也不表示我避免所有鱼类。Shellfish 过敏仍然存在。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "What dinner preference is established now, and which food restriction remains for Lina?",
+            "en_paraphrase": "What dinner preference is established now, and which food restriction remains for Lina?",
+            "zh_en": "Lina 当前确定的晚餐偏好是什么？仍有什么饮食限制？"
+          }
+        },
+        {
+          "event_id": "retirement_uncertain",
+          "review": {
+            "classification": "uncertainty",
+            "source_supported_requirement": "Retirement in 2032 is a possibility, not a decision or completed retirement. Current developer employment at Orion remains confirmed.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "user",
+                "content": "I am considering retiring in 2032, but I have not decided. I am still employed as a developer at Orion."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "user",
+                "content": "Retirement in 2032 is under consideration only. There is no confirmed retirement decision; I currently still work as Orion's developer."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "user",
+                "content": "我正在考虑 2032 年退休，但还没决定；目前仍在 Orion 做 developer。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "Is Lina's retirement decided, and what job and salary are currently confirmed?",
+            "en_paraphrase": "Is Lina's retirement decided, and what job and salary are currently confirmed?",
+            "zh_en": "Lina 是否已决定退休？当前已确认的工作和月薪是什么？"
+          }
+        },
+        {
+          "event_id": "unconfirmed_assistant",
+          "review": {
+            "classification": "role_conflict",
+            "source_supported_requirement": "The assistant's USD16000 claim is unconfirmed and contradicted by Lina's explicit USD14000 confirmation. Other employment, uncertainty and food claims remain.",
+            "guard_against_unsupported_change": "Preserve all still-valid subjects, dates, conditions and modality supported by the observed prefix. Do not invent business effects or a replacement for a cancelled claim.",
+            "cancellation": false
+          },
+          "wordings": {
+            "en": [
+              {
+                "role": "assistant",
+                "content": "Your monthly salary is now USD 16000."
+              },
+              {
+                "role": "user",
+                "content": "I have not confirmed any increase to USD 16000. USD 14000 remains my confirmed monthly salary."
+              }
+            ],
+            "en_paraphrase": [
+              {
+                "role": "assistant",
+                "content": "You now earn USD 16000 per month."
+              },
+              {
+                "role": "user",
+                "content": "Do not treat a suggested USD 16000 salary as confirmed. My confirmed monthly pay is still USD 14000."
+              }
+            ],
+            "zh_en": [
+              {
+                "role": "assistant",
+                "content": "你当前月薪已经是 USD 16000。"
+              },
+              {
+                "role": "user",
+                "content": "我没有确认涨到 USD 16000；已确认月薪仍然是 USD 14000。"
+              }
+            ]
+          },
+          "diagnostic_questions": {
+            "en": "State Lina's confirmed salary and job, whether retirement is decided, and current dinner preference and allergy restriction.",
+            "en_paraphrase": "State Lina's confirmed salary and job, whether retirement is decided, and current dinner preference and allergy restriction.",
+            "zh_en": "请说明 Lina 已确认的月薪及工作、退休是否确定、当前晚餐偏好和过敏限制。"
+          }
+        }
+      ],
+      "independent_order_pair": [
+        "salary_raise",
+        "cancel_salmon"
+      ],
+      "independence_rationale": "The salary update changes employment compensation only; withdrawing a favorite dish changes food preference only. Neither changes or requires the other. The final source propositions are the same under both orders.",
+      "variants": [
+        "en",
+        "en_paraphrase",
+        "zh_en",
+        "en_independent_swap"
+      ]
+    }
+  ]
+}

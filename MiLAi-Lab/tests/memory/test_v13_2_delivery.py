@@ -104,9 +104,12 @@ def test_source_backlink_finds_cross_language_card_without_rewriting_business_ke
         assert [row["id"] for row in found] == [first["id"]]
         assert found[0]["value"]["scope"]["project"] == "Pine"
         assert found[0]["candidate_handle"]
-        assert service.store.get(service.backlinks_namespace, source).value["records"] == {
-            first["id"]: [1]
-        }
+        discovery = service.backlink_candidates([source])[0]
+        assert discovery["id"] == first["id"]
+        assert discovery["source_matches"][0]["matched_revisions"] == [1]
+        assert discovery["source_matches"][0]["source_revision"] == service.source(source)[
+            "source_revision"
+        ]
         newer = bound.user(service, "u2", "松林项目回复要更详细")
         service.bind_source_boundary("s1", "u2", [newer])
         revised = service.revise(

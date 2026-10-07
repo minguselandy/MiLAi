@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import fcntl
-import hashlib
 import json
 import os
 import tempfile
@@ -13,10 +12,6 @@ from pathlib import Path
 from typing import Any, cast
 
 SCHEMA = "durable_shared_admission_v1"
-
-
-def _hash(value: Any) -> str:
-    return hashlib.sha256(json.dumps(value, sort_keys=True, allow_nan=False).encode()).hexdigest()
 
 
 def _reject(reason: str) -> None:
@@ -57,38 +52,69 @@ def _persist(path: Path, state: dict[str, Any]) -> None:
 class DurableGenerationAdmission:
     """One file/lock owns all callbacks; resume never substitutes a Host lower bound."""
 
-    def __init__(self, path: Path, message: str, scope: dict[str, Any],
-                 host_config: dict[str, Any], cap: int, phase: str,
-                 checkpoint_calls: int) -> None:
+    def __init__(
+        self,
+        path: Path,
+        message: str,
+        scope: dict[str, Any],
+        host_config: dict[str, Any],
+        cap: int,
+        phase: str,
+        checkpoint_calls: int,
+    ) -> None:
         if phase not in {"start", "resume"}:
             _reject("EXPLICIT_PHASE_REQUIRED")
         if type(cap) is not int or cap <= 0:
             _reject("CAP_INVALID")
         if type(checkpoint_calls) is not int or checkpoint_calls < 0:
             _reject("CHECKPOINT_INVALID")
-        if not isinstance(scope, dict) or set(scope) != {
-            "owner", "bank", "session", "request_ref", "request_sha256", "config_sha256"
-        }:
+        if not isinstance(scope, dict):
             _reject("SCOPE_INVALID")
-        if any(type(scope[name]) is not str or not scope[name] for name in (
-            "owner", "session", "request_ref", "request_sha256", "config_sha256"
-        )) or type(message) is not str or not message:
+        scope = {
+            "owner": scope.get("owner"),
+            "bank": scope.get("bank"),
+            "session": scope.get("session"),
+            "request_ref": scope.get("request_ref"),
+            "request_revision": scope.get("request_revision", 1),
+            "config_version": scope.get("config_version", scope.get("config_sha256")),
+        }
+        if (
+            any(
+                type(scope[name]) is not str or not scope[name]
+                for name in ("owner", "session", "request_ref", "config_version")
+            )
+            or type(message) is not str
+            or not message
+        ):
             _reject("IDENTITY_INVALID")
         bank = scope["bank"]
-        if (type(bank) is not list or not bank
-                or any(type(row) is not str or not row for row in bank)):
+        if (
+            type(bank) is not list
+            or not bank
+            or any(type(row) is not str or not row for row in bank)
+        ):
             _reject("BANK_INVALID")
-        if any(len(scope[name]) != 64 or any(char not in "0123456789abcdef"
-                                           for char in scope[name])
-               for name in ("request_sha256", "config_sha256")):
-            _reject("HASH_INVALID")
+        if type(scope["request_revision"]) is not int or scope["request_revision"] < 1:
+            _reject("REQUEST_REVISION_INVALID")
         self.path, self.cap = path, cap
         self.identity = json.loads(json.dumps({**scope, "public_message_id": message}))
-        self.configuration = json.loads(json.dumps({
-            "owner": scope["owner"], "bank": bank, "config_sha256": scope["config_sha256"],
-            "host": host_config, "cap": cap,
-        }, allow_nan=False))
-        self.key = _hash([scope["owner"], bank, scope["session"], message])
+        self.configuration = json.loads(
+            json.dumps(
+                {
+                    "owner": scope["owner"],
+                    "bank": bank,
+                    "config_version": scope["config_version"],
+                    "host": host_config,
+                    "cap": cap,
+                },
+                allow_nan=False,
+            )
+        )
+        self.key = json.dumps(
+            [scope["owner"], bank, scope["session"], message],
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
         with _locked(path):
             if not path.exists():
                 if phase == "resume":
@@ -116,25 +142,37 @@ class DurableGenerationAdmission:
             state = json.loads(self.path.read_text())
         except (OSError, ValueError) as error:
             raise ValueError("GENERATION_ADMISSION_STATE_UNREADABLE") from error
-        if (type(state) is not dict or set(state) != {"schema", "configuration", "messages"}
-                or state["schema"] != SCHEMA or state["configuration"] != self.configuration
-                or type(state["messages"]) is not dict):
+        if (
+            type(state) is not dict
+            or set(state) != {"schema", "configuration", "messages"}
+            or state["schema"] != SCHEMA
+            or state["configuration"] != self.configuration
+            or type(state["messages"]) is not dict
+        ):
             _reject("STATE_INCOMPATIBLE")
         for key, row in state["messages"].items():
-            if (type(key) is not str or type(row) is not dict
-                    or set(row) != {"identity", "count", "reservations"}
-                    or type(row["identity"]) is not dict
-                    or type(row["count"]) is not int or not 0 <= row["count"] <= self.cap
-                    or type(row["reservations"]) is not list
-                    or len(row["reservations"]) != row["count"]):
+            if (
+                type(key) is not str
+                or type(row) is not dict
+                or set(row) != {"identity", "count", "reservations"}
+                or type(row["identity"]) is not dict
+                or type(row["count"]) is not int
+                or not 0 <= row["count"] <= self.cap
+                or type(row["reservations"]) is not list
+                or len(row["reservations"]) != row["count"]
+            ):
                 _reject("COUNTER_INVALID")
             for ordinal, reservation in enumerate(row["reservations"], start=1):
-                if (type(reservation) is not dict or set(reservation) != {"ordinal", "origin"}
-                        or type(reservation["ordinal"]) is not int
-                        or reservation["ordinal"] != ordinal
-                        or (reservation["origin"] is not None
-                            and (type(reservation["origin"]) is not str
-                                 or not reservation["origin"]))):
+                if (
+                    type(reservation) is not dict
+                    or set(reservation) != {"ordinal", "origin"}
+                    or type(reservation["ordinal"]) is not int
+                    or reservation["ordinal"] != ordinal
+                    or (
+                        reservation["origin"] is not None
+                        and (type(reservation["origin"]) is not str or not reservation["origin"])
+                    )
+                ):
                     _reject("RESERVATION_INVALID")
         return cast(dict[str, Any], state)
 
@@ -144,8 +182,7 @@ class DurableGenerationAdmission:
         if row["count"] < checkpoint_calls or row["count"] < getattr(self, "count", 0):
             _reject("COUNTER_BELOW_LOWER_BOUND")
 
-    def reserve(self, host_config: dict[str, Any], cap: int,
-                origin: str | None = None) -> int:
+    def reserve(self, host_config: dict[str, Any], cap: int, origin: str | None = None) -> int:
         if host_config != self.configuration["host"] or cap != self.cap:
             _reject("CONFIGURATION_CHANGED")
         if origin is not None and (type(origin) is not str or not origin):
