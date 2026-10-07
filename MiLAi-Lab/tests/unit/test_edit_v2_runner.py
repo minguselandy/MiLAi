@@ -1122,7 +1122,30 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
                 assert method.apply("old", f"save:{index}", proposal)["ok"]
             current = service.capture_user("new", "change", "The marker is now red.")["source_ref"]
             delivery = method.prepare([current], "", selected_records=[], redelivered_ranges=[])
-            write_json(folder / "before.json", service.records())
+            before = service.records()
+            write_json(folder / "before.json", before)
+            marker = next(row for row in before
+                          if row["value"]["edit_state"]["matter_description"] == "Marker")
+            original_record = copy.deepcopy(store.get(service.namespace, marker["id"]).value)
+            future = service.capture_user("future", "change", "A later report says green.")[
+                "source_ref"]
+            service.bind_source_boundary("future", "change", [future])
+            view = method.writer_request(method.prepare([future], "Marker",
+                                                        selected_records=[marker]))
+            record = view["packet"]["records"][0]
+            proposal = method.decode_envelope({"creates": [], "records": {record["id"]: {
+                "action": "rewrite", "clauses": [{
+                    "from_unit": record["clauses"][0]["id"], "text": "The marker is green.",
+                    "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"}}],
+            }}}, view["mapping"])[0]
+            assert method.apply("future", "future-edit", proposal)["ok"]
+            assert service.read(marker["id"])["value"]["revision"] == 2
+            # Preparation rewinds the actual values, while a copied future handle
+            # remains in the independent bank. The CLI must discard that grant,
+            # otherwise its new red r2 collides with the old green r2's support.
+            store.put(service.namespace, marker["id"], original_record, index=False)
+            assert {row["id"]: row["value"] for row in service.records()} == {
+                row["id"]: row["value"] for row in before}
             cases.append({"ordinal": ordinal, "owner": "owner", "session": "new",
                           "date": "2030-01-02", "delivery": delivery,
                           "questions": ["What color is the marker?"]})
@@ -1150,6 +1173,7 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
                 "evidence": ["e1"], "time": None, "scope": None}]})
         else:
             calls.append("edit")
+            assert "A later report says green." not in json.dumps(payload)
             packet = payload["delivery"]
             record = next(row for row in packet["records"] if row["matter"] == "Marker")
             assert record["clauses"][0]["text"] == "The marker is blue."
