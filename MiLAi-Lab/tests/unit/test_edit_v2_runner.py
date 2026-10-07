@@ -383,6 +383,19 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
         packet, schema = material["delivery"], material["response_schema"]
         generation_contract = payload["response_format"]["json_schema"]["schema"]
         assert "$defs" not in generation_contract
+
+        def expand(value: Any) -> Any:
+            if isinstance(value, dict):
+                if set(value) == {"$ref"}:
+                    return expand(schema["$defs"][value["$ref"].removeprefix("#/$defs/")])
+                return {key: expand(child) for key, child in value.items()}
+            if isinstance(value, list):
+                return [expand(child) for child in value]
+            return value
+
+        assert expand({key: value for key, value in schema.items() if key != "$defs"}) == (
+            generation_contract
+        )
         requests.append(packet)
         evidence = packet["evidence"][0]["id"]
         assertion = {"source": evidence, "kind": "reported"}
