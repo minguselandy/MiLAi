@@ -9,9 +9,10 @@ from __future__ import annotations
 import json
 from collections.abc import Iterator
 from contextlib import contextmanager
+from copy import deepcopy
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Any
+from typing import Any, cast
 
 from langgraph.store.sqlite import SqliteStore
 
@@ -19,7 +20,7 @@ from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.consolidation import consolidate
-from milai_lab.methods.edit_maintenance import maintain_event
+from milai_lab.methods.edit_maintenance import MaintenanceRecipe, maintain_event, resume_maintenance
 from milai_lab.methods.edit_memory import EditMemory
 
 SESSION = "meeting-example"
@@ -53,6 +54,7 @@ class ScriptedMaintenance:
 
     def __init__(self, method: EditMemory, proposal: dict[str, Any], calls: list[str]) -> None:
         self.method, self.proposal, self.calls = method, proposal, calls
+        self.inspections: list[str] = []
 
     def __call__(
         self,
@@ -91,6 +93,36 @@ class ScriptedMaintenance:
             recipe="single_pass",
             model_call=transport,
             prepare_delivery=selected_delivery,
+        )
+
+    def reconcile(self, *, request_id: str) -> dict[str, Any] | None:
+        """Read the original checkpoint, without issuing evidence or model calls."""
+        self.inspections.append(request_id)
+        saved = self.method.service.store.get(
+            (*self.method.service.namespace, "edit_maintenance"),
+            json.dumps([SESSION, request_id], ensure_ascii=False),
+        )
+        if saved is None:
+            return None
+        binding = saved.value["binding"]
+
+        def forbidden_transport(
+            stage: str,
+            messages: list[dict[str, str]],
+            schema: dict[str, Any],
+        ) -> dict[str, Any]:
+            raise AssertionError("Read-only consolidation recovery invoked transport")
+
+        return resume_maintenance(
+            self.method,
+            {"sources": deepcopy(binding["sources"])},
+            session=SESSION,
+            prior_request_id=request_id,
+            date=saved.value["date"],
+            recipe=cast(MaintenanceRecipe, binding["recipe"]),
+            model_call=forbidden_transport,
+            selected_record_ids=binding.get("selected_record_ids"),
+            new_attempt_id=None,
         )
 
 
@@ -151,21 +183,72 @@ def example(root: Path) -> dict[str, Any]:
             },
             calls,
         )
+        committed: dict[str, Any] = {}
+
+        def commit_then_interrupt(**kwargs: Any) -> dict[str, Any]:
+            committed.update(meeting_callback(**kwargs))
+            raise RuntimeError("Interrupted before outer consolidation result was saved")
+
+        try:
+            consolidate(
+                episodes,
+                request_id="meeting-maintain",
+                episode_ids=[meeting_episode],
+                maintain=commit_then_interrupt,
+            )
+        except RuntimeError as error:
+            assert str(error) == "Interrupted before outer consolidation result was saved"
+        else:
+            raise AssertionError("The actual commit interruption did not occur")
+        meeting_id = saved_id(committed)
+        pending = service.store.get((*service.namespace, "consolidation"), "meeting-maintain")
+        assert pending is not None and pending.value["result"]["phase"] == "maintenance_pending"
+        assert episodes.select(pending_only=True)[0]["episode_id"] == meeting_episode
+        source_count = len(service.sources())
+        original_history = service.history_index(meeting_id)["revisions"]
+        original_records = [row["value"] for row in service.records()]
+    with opened(root) as (service, episodes, method):
+
+        def forbidden_maintain(**kwargs: Any) -> dict[str, Any]:
+            raise AssertionError("A replay called generating maintenance")
+
+        recovered_callback = ScriptedMaintenance(method, {}, calls)
+        try:
+            consolidate(
+                episodes,
+                request_id="meeting-maintain",
+                episode_ids=[meeting_episode],
+                record_ids=[meeting_id],
+                maintain=forbidden_maintain,
+                reconcile=recovered_callback.reconcile,
+            )
+        except FunctionalRejection as error:
+            assert str(error) == "CONSOLIDATION_REQUEST_SELECTION_CHANGED"
+        else:
+            raise AssertionError("Reconciliation accepted a changed original selection")
+        assert recovered_callback.inspections == []
         first = consolidate(
             episodes,
             request_id="meeting-maintain",
             episode_ids=[meeting_episode],
-            maintain=meeting_callback,
+            maintain=forbidden_maintain,
+            reconcile=recovered_callback.reconcile,
         )
-        meeting_id = saved_id(first)
-        source_count = len(service.sources())
+        assert first["status"] == "completed" and first["replayed"] and first["reconciled"]
+        assert saved_id(first) == meeting_id and first["receipts"][0]["revision"] == 1
+        assert recovered_callback.inspections == ["meeting-maintain"]
+        assert service.history_index(meeting_id)["revisions"] == original_history
+        assert [row["value"] for row in service.records()] == original_records
+        assert len(calls) == 1 and len(service.sources()) == source_count
         replay = consolidate(
             episodes,
             request_id="meeting-maintain",
             episode_ids=[meeting_episode],
-            maintain=meeting_callback,
+            maintain=forbidden_maintain,
+            reconcile=recovered_callback.reconcile,
         )
         assert replay["replayed"] and len(calls) == 1
+        assert recovered_callback.inspections == ["meeting-maintain"]
         assert len(service.sources()) == source_count
         meeting_view = episodes.read(meeting_episode)
         assert meeting_view is not None and meeting_view["actual_outcomes"] == []
@@ -254,6 +337,74 @@ def example(root: Path) -> dict[str, Any]:
         assert len(calls) == 3
         assert service.read(meeting_id)["value"]["revision"] == 1
         assert episodes.read(meeting_episode) is not None
+
+        def unknown_maintain(**kwargs: Any) -> dict[str, Any]:
+            def lose_model_reply(
+                stage: str,
+                messages: list[dict[str, str]],
+                schema: dict[str, Any],
+            ) -> dict[str, Any]:
+                calls.append(stage)
+                raise OSError("Scripted original model reply unknown")
+
+            return maintain_event(
+                method,
+                kwargs["delivery"],
+                session=SESSION,
+                request_id=kwargs["request_id"],
+                date=kwargs["delivery"]["sources"][0]["observed_at"],
+                recipe="single_pass",
+                model_call=lose_model_reply,
+                selected_record_ids=kwargs["record_ids"],
+            )
+
+        try:
+            consolidate(
+                episodes,
+                request_id="unknown-maintain",
+                episode_ids=[cancellation_episode],
+                record_ids=[meeting_id],
+                maintain=unknown_maintain,
+            )
+        except OSError as error:
+            assert str(error) == "Scripted original model reply unknown"
+        else:
+            raise AssertionError("The unknown model window did not occur")
+        assert len(calls) == 4
+        unchanged_history = service.history_index(meeting_id)["revisions"]
+        unchanged_sources = service.sources()
+    with opened(root) as (service, episodes, method):
+        unknown_callback = ScriptedMaintenance(method, {}, calls)
+        unknown = consolidate(
+            episodes,
+            request_id="unknown-maintain",
+            episode_ids=[cancellation_episode],
+            record_ids=[meeting_id],
+            maintain=forbidden_maintain,
+            reconcile=unknown_callback.reconcile,
+        )
+        assert unknown["status"] == "incomplete" and unknown["phase"] == "edit_pending"
+        assert unknown["unprocessed"][0]["reason"] == "model_outcome_unconfirmed"
+        assert len(calls) == 4 and service.sources() == unchanged_sources
+        assert service.history_index(meeting_id)["revisions"] == unchanged_history
+        cancellation_view = episodes.read(cancellation_episode)
+        assert cancellation_view is not None
+        assert cancellation_view["consolidation_request_id"] == "cancellation-maintain"
+        handle = service.read(meeting_id)["candidate_handle"]
+        assert service.forget(
+            SESSION, "forget-record-only", candidate_handle=handle, scope="record"
+        )["ok"]
+        assert service.source(meeting) is not None
+        hidden_record = consolidate(
+            episodes,
+            request_id="unknown-maintain",
+            episode_ids=[cancellation_episode],
+            record_ids=[meeting_id],
+            maintain=forbidden_maintain,
+            reconcile=unknown_callback.reconcile,
+        )
+        assert hidden_record["status"] == "visibility_revoked"
+        assert unknown_callback.inspections == ["unknown-maintain"]
         fragment = service.source_fragments(meeting)[0]["fragment_handle"]
         capture(service, "forget", "忘掉那次会议的来源和相应记忆。")
         forgotten = service.forget(SESSION, "forget-meeting", fragment_handles=[fragment])
@@ -266,15 +417,17 @@ def example(root: Path) -> dict[str, Any]:
             episodes,
             request_id="meeting-maintain",
             episode_ids=[meeting_episode],
-            maintain=meeting_callback,
+            maintain=forbidden_maintain,
+            reconcile=unknown_callback.reconcile,
         )
-        assert hidden["status"] == "visibility_revoked" and len(calls) == 3
+        assert hidden["status"] == "visibility_revoked" and len(calls) == 4
+        assert unknown_callback.inspections == ["unknown-maintain"]
         try:
             consolidate(
                 episodes,
                 request_id="new-meeting-replay",
                 episode_ids=[meeting_episode],
-                maintain=meeting_callback,
+                maintain=forbidden_maintain,
             )
         except FunctionalRejection as error:
             assert str(error) == "CONSOLIDATION_EPISODE_UNAVAILABLE"
@@ -287,6 +440,9 @@ def example(root: Path) -> dict[str, Any]:
         return {
             "engineering_example": "completed",
             "scripted_editor_calls": len(calls),
+            "completed_callback_interruption_recovered": True,
+            "unknown_model_not_regenerated": True,
+            "selected_record_revocation_precedes_reconciliation": True,
             "real_model_or_embedding_calls": 0,
             "meeting_history_preserved_on_preference_cancellation": True,
             "source_forget_revoked_episode_and_derived_access": True,

@@ -29,6 +29,48 @@ class MaintenanceCallback(Protocol):
     ) -> dict[str, Any]: ...
 
 
+class ReconcileCallback(Protocol):
+    """Inspect the original maintenance identity without generating or committing."""
+
+    def __call__(self, *, request_id: str) -> dict[str, Any] | None: ...
+
+
+def _maintenance_result(result: dict[str, Any], maintained: dict[str, Any]) -> dict[str, Any]:
+    receipts = maintained.get("receipts", [])
+    if not receipts and maintained["status"] != "completed":
+        receipts = result.get("receipts", [])
+    updated = {
+        **copy.deepcopy(result),
+        "status": maintained["status"],
+        "phase": maintained.get("phase", result.get("phase")),
+        "semantic_write_performed": result.get("semantic_write_performed", False)
+        or maintained.get("semantic_write_performed", False),
+        "receipts": [
+            {
+                key: receipt[key]
+                for key in (
+                    "ok",
+                    "status",
+                    "original_status",
+                    "id",
+                    "revision",
+                    "effect",
+                    "replayed",
+                    "reason",
+                )
+                if key in receipt
+            }
+            for receipt in receipts
+        ],
+    }
+    for key in ("outcome", "unprocessed"):
+        if key in maintained:
+            updated[key] = copy.deepcopy(maintained[key])
+        elif maintained["status"] == "completed":
+            updated.pop(key, None)
+    return updated
+
+
 def _delivery_sources(index: EpisodeIndex, refs: list[str]) -> list[dict[str, Any]]:
     sources = []
     for ref in refs:
@@ -55,6 +97,7 @@ def consolidate(
     *,
     request_id: str,
     maintain: MaintenanceCallback,
+    reconcile: ReconcileCallback | None = None,
     episode_ids: Sequence[str] | None = None,
     record_ids: Sequence[str] = (),
     prior_episode_ids: Sequence[str] = (),
@@ -64,8 +107,9 @@ def consolidate(
 
     The callback decides whether any proposal is warranted and commits through
     the existing service. A completed empty proposal counts as processed work,
-    never as a new fact. A pending callback is inspected under its old request
-    ID without invoking transport again; a new semantic attempt needs a new ID.
+    never as a new fact. A pending callback is inspected only by the separate
+    readonly reconciler under its original ID. Missing or unknown outcomes remain
+    unfinished; a new semantic attempt needs a new ID.
     """
     if not request_id or not 1 <= limit <= 100:
         raise FunctionalRejection("CONSOLIDATION_ID_OR_LIMIT_INVALID")
@@ -93,7 +137,29 @@ def consolidate(
             for record_id, revision in state["record_revisions"].items()
         ):
             return {"status": "visibility_revoked", "request_id": request_id, "replayed": True}
-        return {**copy.deepcopy(state["result"]), "replayed": True}
+        inspected = None
+        if state["result"]["status"] != "completed" and reconcile is not None:
+            inspected = reconcile(request_id=request_id)
+            if inspected is not None:
+                state["result"] = _maintenance_result(state["result"], inspected)
+                service.store.put(namespace, request_id, state, index=False)
+        if state["result"]["status"] == "completed":
+            ids = state["result"]["episode_ids"]
+            if inspected is not None:
+                index.mark_consolidated(ids, request_id)
+            else:
+                unmarked = [
+                    episode_id
+                    for episode_id in ids
+                    if service.store.get(index.consolidated_namespace, episode_id) is None
+                ]
+                if unmarked:
+                    index.mark_consolidated(unmarked, request_id)
+        return {
+            **copy.deepcopy(state["result"]),
+            "replayed": True,
+            **({"reconciled": True} if inspected is not None else {}),
+        }
     if len(selected_record_ids) > limit:
         raise FunctionalRejection("CONSOLIDATION_RECORD_SELECTION_EXCEEDS_LIMIT")
     episodes = index.select(
@@ -157,30 +223,7 @@ def consolidate(
     maintained = maintain(
         delivery=delivery, record_ids=selected_record_ids, episode_ids=ids, request_id=request_id
     )
-    result.update(
-        {
-            "status": maintained["status"],
-            "phase": maintained.get("phase"),
-            "semantic_write_performed": maintained.get("semantic_write_performed", False),
-            "receipts": [
-                {
-                    key: receipt[key]
-                    for key in (
-                        "ok",
-                        "status",
-                        "original_status",
-                        "id",
-                        "revision",
-                        "effect",
-                        "replayed",
-                        "reason",
-                    )
-                    if key in receipt
-                }
-                for receipt in maintained.get("receipts", [])
-            ],
-        }
-    )
+    result = _maintenance_result(result, maintained)
     state["result"] = result
     service.store.put(namespace, request_id, state, index=False)
     if result["status"] == "completed":
