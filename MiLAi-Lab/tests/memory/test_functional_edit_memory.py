@@ -3026,6 +3026,8 @@ def test_current_refresh_keeps_original_maintenance_selection_binding(tmp_path):
 
 
 def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
+    from milai_lab.application.host_requests import visible_cards
+
     options = {"interface_version": "I2", "features": NEXT_FEATURES,
                "memory_profile": "unified_v1", "memory_view_mode": "state_driven",
                "maintenance_recipe": "extract_then_edit"}
@@ -3068,6 +3070,15 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
             "new-session", "resume", current_text,
         )["source_ref"]
         memory.context("new-session", "resume", "current-config-v2")
+        prior_cards = visible_cards(None, memory.service, current_ref,
+                                   pending_maintenance=memory.pending_maintenance(current_cfg))
+        assert len(prior_cards) == 1 and prior_cards[0]["kind"] == "memory_maintenance"
+        assert prior_cards[0]["session"] == "s"
+        assert prior_cards[0]["request_id"] == initial["request_id"]
+        assert prior_cards[0]["source_refs"] == [original_ref]
+        assert prior_cards[0]["checkpoint"] == pending[0]["checkpoint"]
+        assert [part["content"] for part in prior_cards[0]["user_fragments"]] == [original_text]
+        assert "requirements" not in prior_cards[0] and "progress" not in prior_cards[0]
 
         def inspect(messages):
             assert [message["role"] for message in messages] == ["system", "user"]
@@ -3145,3 +3156,51 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
         assert (len(calls), len(fitted)) == counts
         assert memory.service.store.get(ns, old_key).value == old_checkpoint
         assert memory.service.records() == before and memory.pending_maintenance(current_cfg) == []
+        assert visible_cards(None, memory.service, current_ref,
+                             pending_maintenance=memory.pending_maintenance(current_cfg)) == []
+
+        mixed_text = "Do not book anything. Remember that I now prefer quiet Friday reminders."
+        mixed_ref = memory.service.capture_user("new-session", "mixed", mixed_text)["source_ref"]
+        memory.context("new-session", "mixed", "current-config-v2")
+        mixed_cfg = copy.deepcopy(current_cfg)
+        mixed_cfg["configurable"]["v13_turn_id"] = "mixed"
+        mixed_calls, mixed_fits = [], []
+
+        def mixed_fit(messages):
+            assert [m["role"] for m in messages] == ["system", "user"]
+            assert json.loads(messages[0]["content"].split(
+                "not fact evidence):\n", 1)[1]) == mixed_text
+            mixed_fits.append(copy.deepcopy(messages))
+            return True
+
+        def mixed_save(stage, messages, schema):
+            assert messages == mixed_fits[-1]
+            mixed_calls.append(stage)
+            payload = json.loads(messages[-1]["content"])
+            if stage.startswith("select:"):
+                return {"record_ids": [row["id"]], "done": True}
+            assert payload["delivery"]["evidence"][0]["text"] == mixed_text
+            if stage == "extract":
+                return {"changes": [{"subject": "Reminder tone", "statement":
+                    "User prefers quiet Friday reminders.", "evidence": ["e1"],
+                    "time": None, "scope": None}]}
+            return {"records": {"r1": {"action": "edit", "edits": [{
+                "operation": "change_value", "target_unit": "u1", "evidence": ["e1"],
+                "text": "Use quiet reminders only on Fridays.",
+                "assertion": {"source": "e1", "kind": "reported"},
+            }]}}}
+
+        mixed_args = dict(recipe="extract_then_edit", model_call=mixed_save,
+                          fit=mixed_fit, maintenance_scope=mixed_text)
+        updated = memory.maintain_sources(mixed_cfg, allowed=True, **mixed_args)
+        assert updated[0]["status"] == "completed" and len(mixed_calls) == 3
+        current = memory.service.read(row["id"])["value"]
+        assert current["revision"] == 2
+        assert current["edit_state"]["units"][0]["assertion"]["source_ref"] == mixed_ref
+        counts = len(mixed_calls), len(mixed_fits)
+        assert memory.maintain_sources(mixed_cfg, allowed=False, **mixed_args) == []
+        assert (len(mixed_calls), len(mixed_fits)) == counts
+        memory.service.forget("new-session", "hide-prior", fragment_handles=[
+            part["fragment_handle"] for part in memory.service.source_fragments(original_ref)])
+        assert visible_cards(None, memory.service, current_ref,
+                             pending_maintenance=prior_cards) == []

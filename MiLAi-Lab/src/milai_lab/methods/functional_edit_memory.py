@@ -488,29 +488,34 @@ class FunctionalEditMemory(FunctionalMemory):
         current = self.service.source(bound["source_ref"])
         if current is None:
             raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
-        def messages_for_current(messages: list[dict[str, str]]) -> list[dict[str, str]]:
-            projected = copy.deepcopy(messages)
-            projected[0]["content"] += (
-                "\nCurrent maintenance scope (instructions for this attempt, "
-                "not fact evidence):\n" + json.dumps(current["content"], ensure_ascii=False)
-            )
-            return projected
-
-        def call(stage: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
-            return model_call(stage, messages_for_current(messages), schema)
-
-        def capacity(messages: list[dict[str, str]]) -> bool:
-            return fit(messages_for_current(messages)) if fit is not None else True
-
         return self.maintain_delivery(
             config, delivery, request_id=prior_request_id, prior_request_id=prior_request_id,
             prior_session=prior_session, new_attempt_id=new_attempt_id,
-            date=state["date"], recipe=state["binding"]["recipe"], model_call=call,
-            allowed=allowed, execute=execute, fit=capacity if fit is not None else None,
+            date=state["date"], recipe=state["binding"]["recipe"], model_call=model_call,
+            allowed=allowed, execute=execute, fit=fit,
             prepare_delivery=prepare_delivery,
             selected_record_ids=state["binding"].get("selected_record_ids"),
-            memory_save_requested=True,
+            memory_save_requested=True, maintenance_scope=current["content"],
         )
+
+    @staticmethod
+    def maintenance_messages(
+        messages: list[dict[str, str]], maintenance_scope: str | None,
+    ) -> list[dict[str, str]]:
+        """Present current controls in the existing System, preserving actual evidence.
+
+        The quote creates no permission, source, or evidence alias. A mixed current
+        User source remains in its actual delivery; the Host selects which sources
+        belong to this attempt using the current declared request.
+        """
+        if maintenance_scope is None:
+            return messages
+        projected = copy.deepcopy(messages)
+        projected[0]["content"] += (
+            "\nCurrent maintenance scope (instructions for this attempt, "
+            "not fact evidence):\n" + json.dumps(maintenance_scope, ensure_ascii=False)
+        )
+        return projected
 
     def _commit(
         self, session: str, operation_id: str, proposal: dict[str, Any]
@@ -655,6 +660,7 @@ class FunctionalEditMemory(FunctionalMemory):
         prior_session: str | None = None,
         new_attempt_id: str | None = None,
         memory_save_requested: bool = False,
+        maintenance_scope: str | None = None,
     ) -> dict[str, Any]:
         """Bind a current event or explicit consolidation to the ordinary Host commits."""
         if not allowed and (execute or prior_request_id is None):
@@ -718,11 +724,18 @@ class FunctionalEditMemory(FunctionalMemory):
                                     resident_refs=[], pending_refs=state["pending_refs"])
             return prepared
 
+        def call(stage: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
+            return model_call(stage, self.maintenance_messages(messages, maintenance_scope), schema)
+
+        def capacity(messages: list[dict[str, str]]) -> bool:
+            return fit(self.maintenance_messages(messages, maintenance_scope)) \
+                if fit is not None else True
+
         options: dict[str, Any] = {
             "session": prior_session if prior_session is not None else bound["session"],
             "date": date, "recipe": recipe,
-            "model_call": model_call, "commit": commit, "selected_record_ids": selected_record_ids,
-            "fit": fit, "prepare_delivery": selected_delivery,
+            "model_call": call, "commit": commit, "selected_record_ids": selected_record_ids,
+            "fit": capacity if fit is not None else None, "prepare_delivery": selected_delivery,
             "memory_view_mode": self.memory_view_mode,
             "memory_save_requested": memory_save_requested,
         }
@@ -752,6 +765,8 @@ class FunctionalEditMemory(FunctionalMemory):
         prior_request_fragments: list[dict[str, Any]] | None = None,
         skip_source_refs: list[str] | None = None,
         memory_save_requested: bool = False,
+        maintenance_scope: str | None = None,
+        prepare_source_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
     ) -> list[dict[str, Any]]:
         """Maintain current user input and actually delivered tool sources once each.
 
@@ -803,6 +818,8 @@ class FunctionalEditMemory(FunctionalMemory):
                     selected_records=[], source_ranges=ranges,
                     redelivered_ranges=[],
                 )["sources"]
+            if prepare_source_delivery is not None:
+                delivery = prepare_source_delivery(delivery)
             request_id = "maintenance:" + canonical(
                 [bound["session"], bound["message_id"], bound["config_version"], ref]
             )
@@ -811,7 +828,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 config, delivery, request_id=request_id,
                 date=source.get("occurred_at") or source["observed_at"], recipe=recipe,
                 model_call=model_call, allowed=allowed, execute=execute, fit=fit,
-                memory_save_requested=memory_save_requested,
+                memory_save_requested=memory_save_requested, maintenance_scope=maintenance_scope,
             ))
         return results
 
