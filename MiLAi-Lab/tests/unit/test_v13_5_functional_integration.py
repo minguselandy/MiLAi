@@ -5275,6 +5275,9 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
         if continuation == "empty_save":
             assert progress["memory"]["status"] == "failed"
             assert len(progress["memory"]["attempts"]) == 1
+            assert second["operation_status"]["semantic_memory"]["status"] == "not_committed"
+            assert "本轮语义记忆: 未提交。" in second["final_answer"]
+            assert "已有记录, 无需变更" not in second["final_answer"]
         else:
             assert progress["memory"]["current_permission"] == "not_authorized_current_request"
     calls = len(wires)
