@@ -13,7 +13,7 @@ from types import SimpleNamespace
 from typing import Any
 
 import pytest
-from langchain_core.messages import AIMessage, HumanMessage
+from langchain_core.messages import AIMessage, HumanMessage, ToolMessage
 from langgraph.store.sqlite import SqliteStore
 from pydantic import ValidationError
 
@@ -679,7 +679,9 @@ def test_next_real_langgraph_dynamic_catalog_after_hook_and_original_wrapper(tmp
 
 
 @contextmanager
-def opened(root: Path, *, owner: str = "alice", **options: Any) -> Any:
+def opened(
+    root: Path, *, owner: str = "alice", memory_profile: str = "ordinary", **options: Any
+) -> Any:
     root.mkdir(exist_ok=True)
     with SqliteStore.from_conn_string(str(root / "memory.sqlite")) as store:
         service = MemoryService(
@@ -688,6 +690,7 @@ def opened(root: Path, *, owner: str = "alice", **options: Any) -> Any:
             owner,
             root / "memory.lock",
             functional_contract="functional_v1",
+            memory_profile=memory_profile,
         )
         yield FunctionalEditMemory(
             service, len, material_limit=30000, read_limit=12, existing_confirmation=True, **options
@@ -2699,3 +2702,84 @@ def test_shared_maintenance_delivers_selected_prior_request_beyond_recent_source
         args["allowed"] = False
         assert memory.maintain_sources(cfg("status-only"), **args) == []
         assert (len(calls), len(previews)) == count and memory.service.records() == before
+
+
+def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path):
+    options = {"interface_version": "I2", "features": NEXT_FEATURES,
+               "memory_profile": "unified_v1"}
+    saved = []
+    with opened(tmp_path, **options) as memory:
+        for turn_id, matter, text in (
+            ("seed-a", "Reminder tone", "Use quiet reminders only on weekdays."),
+            ("seed-b", "Invoice handling", "Keep supplier labels unchanged."),
+        ):
+            writer_turn(memory, turn_id, text)
+            clause = {"text": text, "evidence": ["e1"], "conditions": [],
+                      "assertion": {"source": "e1", "kind": "reported"}}
+            result = json.loads(invoke(memory, "save_memory", {"proposal": {
+                "action": "create", "matter": matter, "clauses": [clause],
+            }}, "save-" + turn_id, turn_id).content)
+            assert result["ok"], result.get("reason", result)
+            saved.append(result["id"])
+    options["memory_view_mode"] = "state_driven"
+    request = "Use written reminders; retain the weekday limit. Compare with invoice handling."
+    with opened(tmp_path, **options) as memory:
+        memory.service.capture_user("s", "u", request)
+        directory = memory.context("s", "u", "functional-m-test-v1")
+        assert directory["candidates"]
+        assert all(item["type"] == "fragment" for item in directory["items"])
+        a = invoke(memory, "read_memory", {"record_id": saved[0]}, "open-a")
+        first_refs = memory.view_state(cfg())["resident_refs"]
+        b = invoke(memory, "read_memory", {"record_id": saved[1]}, "open-b")
+        material = memory.model_material(cfg())
+        assert {item["record_id"] for item in material["items"] if item["type"] == "record"} == {
+            saved[1]
+        }
+        assert memory.read_progress(cfg())["delivered_units_total"] >= 3
+        # Reload the already read actual reference without a new read/model call.
+        memory.focus_view(cfg(), focus="Reminder tone", read_goal="current",
+                          resident_refs=first_refs)
+        writer = memory.model_material(cfg(), for_write=True)["writer_packet"]
+        assert len(writer["records"]) == 1 and "weekday" in canonical(writer)
+        history = json.loads(invoke(memory, "read_memory", {
+            "record_id": saved[0], "revision": 1, "keep_resident": True,
+        }, "saved-history").content)
+        assert history["ok"]
+        memory.model_material(cfg(), for_write=True)
+        changed = json.loads(invoke(memory, "update_memory", {"proposal": {
+            "action": "edit", "target": "r1", "edits": [{
+                "operation": "change_value", "target_unit": "u1",
+                "text": "Use written reminders only on weekdays.", "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+            }],
+        }}, "change-a").content)
+        assert changed["ok"], changed
+        views = memory.model_material(cfg())["items"]
+        assert {(item["revision"], item["version_view"]) for item in views
+                if item["type"] == "record"} == {
+            (1, "historical_exact_revision"), (2, "current_at_snapshot")
+        }
+        calls = [{"name": "read_memory", "args": {"record_id": record_id},
+                  "id": call_id, "type": "tool_call"}
+                 for record_id, call_id in zip(saved, ("open-a", "open-b"), strict=True)]
+        business_receipt = ToolMessage(name="get_reservation", tool_call_id="business",
+                                       content='{"business_outcome":"confirmed"}')
+        messages = [HumanMessage(content=request), AIMessage(content="", tool_calls=calls),
+                    a, b, AIMessage(content="", tool_calls=[{
+                        "name": "get_reservation", "args": {}, "id": "business",
+                        "type": "tool_call"}]), business_receipt]
+        projected = memory.project_model_messages(cfg(), messages)
+        assert len(projected) == len(messages) and projected[1].tool_calls == calls
+        assert projected[-1] is business_receipt
+        assert json.loads(projected[2].content)["items"] == []
+        assert json.loads(a.content)["items"]  # Full original trace was not changed.
+        before = memory.service.records()
+    with opened(tmp_path, **options) as memory:
+        assert memory.service.records() == before
+        memory.context("s", "u", "functional-m-test-v1")
+        assert any(item.get("revision") == 2 for item in memory.model_material(cfg())["items"])
+        # The unrelated actually read matter is still available from the archive.
+        archive = memory.service.store.get(
+            namespace(memory.service), memory._writer_key(cfg(), "edit-writer-delivery:")
+        ).value["items"]
+        assert {item["record_id"] for item in archive if item["type"] == "record"} == set(saved)
