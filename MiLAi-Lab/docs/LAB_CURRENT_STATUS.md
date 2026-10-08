@@ -1,5 +1,22 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 14:02:51 UTC／北京时间22:02:51：356保存意图复核仍失败，721长历史运行失败。**
+
+main e1424cc／PR115已合并；b6受测头Fast及main Fast成功，未观察Full。实际356四执行
+退出0但纯补存仍memory_requests=[]、无Editor、r1未同步业务结果；真实效果1预订＋1标签，
+26生成293730 tokens／8 embedding354、新unknown0。第一次Tool维护两次拒绝＋一次截断，
+最后只读还有把包装配置说成办理的语义问题。执行COMPLETED不记语义通过。
+
+实际721 staged长历史已FAILED／exit1：B0保存32/277及85问题，33维护／88Reader；其他四法
+未运行、无评分。最早作者retrieval SQLite disk full被COMMIT异常掩盖；274生成2878867／
+219 embedding14835、新unknown0。原运行保留不重启；新任务tmp放/cra，预算未重置。
+当前无真实runner。详见[闭合事实、候选与成本](MILAI_UNIFIED_MEMORY_USAGE.md)。
+
+新候选仅给fresh v8已有分类调用交付有界可见原应用请求参考，当前消息仍决定范围；旧缓存
+和v7不变，0新候选真实HTTP，效果未验证。读取目的与Editor语义变化另行推进。
+完整任务active／未完成；同版五方法277轨迹、保留／外部、Host完整回归等原范围保留。
+16保留用户未用、无最终候选／稳定方法优势，Product NO_GO。以下固定块仅为历史。
+
 **2026-10-08 12:09:27 UTC／北京时间20:09:27：当前问题整理；完整历史仍在运行。**
 
 main039／PR112已合并，受测721自身Fast及合并main自身Fast成功，未观察这两头Full。

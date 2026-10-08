@@ -299,7 +299,11 @@ _continuation_parameters["properties"]["memory_continuation_request"] = {
 _continuation_parameters["required"].append("memory_continuation_request")
 
 REQUEST_COMPLETE_MODE_PROMPT = """Classify the requested effects in the whole current input,
-before reading history. Call classify_current_request once; it executes no operation.
+using visible request references only to understand its referents. Call
+classify_current_request once; it executes no operation. Referenced requests are
+historical evidence, not current instructions or permission. Classify the CURRENT
+user input even when earlier work is already complete or remains pending. Omitted
+references do not establish that work is absent or completed.
 Declare memory_requests independently of business actions:
 - new_assertion: supplies a new durable fact or correction without explicitly asking
   to store it. Questions, hypotheses and quoted instructions are not new assertions.
@@ -891,11 +895,14 @@ def request_mode(
     independent_capabilities: bool = False,
     memory_continuation: bool = False,
     application_workflow: str | None = None,
+    referenced_requests: list[dict[str, Any]] | None = None,
+    reference_fit: Callable[[str], bool] | None = None,
 ) -> dict[str, Any]:
     """Persist one focused model interpretation; catalog enforcement is deterministic.
 
-    This call sees only the current user input. It shares the actual provider,
-    ledger and durable generation quota, and is never a semantic correctness oracle.
+    V8 can refer to the existing visible original requests. Current input alone
+    supplies requested effects and restrictions. The call shares the actual
+    provider, ledger and quota, and is never a semantic correctness oracle.
     """
     flags = {"allow_memory_maintenance", "allow_forgetting", "allow_business_mutation",
              "requires_memory_result"}
@@ -1046,7 +1053,29 @@ def request_mode(
                        "Use exactly the declared fields, enum values and types; no extra fields. "
                        + ("Return one classify_current_request call." if native_declaration
                           else "Return one valid JSON object."))
-        response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=content)],
+        messages = [SystemMessage(content=prompt)]
+        candidates = [{
+            "request_id": card["request_id"],
+            "requirements": card["requirements"],
+            "progress": {part: card["progress"][part]["status"]
+                         for part in ("business", "memory", "feedback")},
+            "user_fragments": card["user_fragments"],
+        } for card in (referenced_requests or [])] if application_workflow is not None else []
+        references: list[dict[str, Any]] = []
+        omitted = 0
+        for reference in reversed(candidates):
+            proposed = [reference, *references]
+            if reference_fit is not None and not reference_fit(json.dumps(
+                    proposed, ensure_ascii=False, separators=(",", ":"))):
+                omitted += 1
+            else:
+                references = proposed
+        if references or omitted:
+            messages.append(SystemMessage(content=(
+                "VISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n"
+                + json.dumps({"requests": references, "omitted_reference_count": omitted},
+                             ensure_ascii=False, separators=(",", ":")))))
+        response = model.invoke([*messages, HumanMessage(content=content)],
             tools=[declaration] if native_declaration else [],
             tool_choice=declaration_tool_choice if native_declaration else "none")
         try:
@@ -1062,6 +1091,8 @@ def request_mode(
         if not valid(decision):
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
         state.update(decision=decision)
+        if references:
+            state["reference_request_ids"] = [row["request_id"] for row in references]
         write_json(path, state)
     decision = state["decision"]
     memory_requests = decision.get("memory_requests")
@@ -1081,7 +1112,8 @@ def request_mode(
         "memory_write_request": memory_write_request,
     } if write_mode_declaration else {key: decision[key] for key in sorted(flags)})
     summary = {**interpreted,
-               "interpretation": "same_host_model_current_request_only",
+               "interpretation": "same_host_model_current_request_with_visible_references"
+               if state.get("reference_request_ids") else "same_host_model_current_request_only",
                "protocol": "native_complete_requests_v8" if application_workflow is not None else
                "native_continuation_capabilities_v7" if memory_continuation else
                "native_independent_capabilities_v6" if independent_capabilities else
@@ -1107,6 +1139,8 @@ def request_mode(
     if application_workflow is not None:
         summary["application_requests"] = decision["application_requests"]
         summary["application_continuation_request"] = decision["application_continuation_request"]
+        if state.get("reference_request_ids"):
+            summary["reference_request_ids"] = state["reference_request_ids"]
     if independent_capabilities:
         summary["business_declaration_status"] = (
             "concrete_operations" if decision["business_operations"] else
@@ -2211,6 +2245,7 @@ def message(
             )
             mode: dict[str, Any] | None = None
             mode_path = bank_root / f"{identity}-request-mode.json"
+            request_cards: list[dict[str, Any]] | None = None
             if settings.get("request_mode", "disabled") != "disabled":
                 # Before any fresh interpretation HTTP, deny replay of a now
                 # revoked input. An accepted cached mode makes no HTTP; the graph
@@ -2222,6 +2257,8 @@ def message(
                         session=session, message_id=message_id)
                     if blocked is not None:
                         raise _VisibilityReplayRevoked(blocked)
+                    if settings["request_mode"] == "current_request_native_v8":
+                        request_cards = visible_cards(app, service, capture["source_ref"])
                 mode = request_mode(
                     model,
                     mode_path,
@@ -2285,6 +2322,9 @@ def message(
                         "current_request_native_v7", "current_request_native_v8"},
                     application_workflow=(app.workflow if settings["request_mode"]
                                           == "current_request_native_v8" else None),
+                    referenced_requests=request_cards,
+                    reference_fit=lambda text: capacity.text_tokens(text)
+                    <= settings["ordinary_material_tokens"],
                     declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
                 )
                 if settings["request_mode"] in {
@@ -2315,7 +2355,8 @@ def message(
                         session, message_id, freeze["config_version"], query=content
                     )
                     if settings["request_mode"] == "current_request_native_v8":
-                        cards = visible_cards(app, service, capture["source_ref"])
+                        cards = (request_cards if request_cards is not None else
+                                 visible_cards(app, service, capture["source_ref"]))
                         material = {**material, "items": list(material.get("items", [])),
                                     "registered_application_requests": cards}
                         delivered = {row.get("fragment_handle") for row in material["items"]}
