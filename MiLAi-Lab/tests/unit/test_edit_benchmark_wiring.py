@@ -18,6 +18,7 @@ from milai_lab.analysis.edit_official import LongMemEvalOfficial, author_functio
 from milai_lab.datasets.edit_benchmarks import (
     ObservedSession,
     halumem_session,
+    halumem_users,
     history_components,
     longmemeval_history,
 )
@@ -234,18 +235,26 @@ def test_reader_semantic_projection_keeps_limits_and_explicit_unknown_overrides(
         assert mapping["units"]["u1"]["evidence_refs"] == [support]
 
 
-def test_observed_input_excludes_reference_and_future_material() -> None:
-    observed = halumem_session(
-        "u",
-        0,
-        {
-            "start_time": "Jan 01, 2025, 10:00:00",
-            "dialogue": [{"role": "user", "content": "actual speech", "timestamp": "now"}],
-            "persona_info": "secret persona",
-            "memory_points": ["gold"],
-            "questions": [{"question": "future question", "answer": "gold answer"}],
-        },
-    )
+def test_observed_input_excludes_reference_and_future_material(tmp_path: Path) -> None:
+    raw = {
+        "start_time": "Jan 01, 2025, 10:00:00",
+        "dialogue": [{"role": "user", "content": "actual speech", "timestamp": "now"}],
+        "persona_info": "secret persona",
+        "memory_points": ["gold"],
+        "questions": [{"question": "future question", "answer": "gold answer"}],
+    }
+    first = {"uuid": "u", "sessions": [raw]}
+    second = {"uuid": "later", "sessions": [{**raw, "start_time": "Jan 02, 2025, 10:00:00"}]}
+    dataset = tmp_path / "selected.jsonl"
+    # The unselected body is deliberately not JSON: even decoding it would fail.
+    dataset.write_text('{"uuid":"other","body":UNSELECTED_BODY_WITH_u}\n'
+                       + json.dumps(first) + "\n" + json.dumps(second) + "\n")
+    users = halumem_users(dataset, ["later", "u"])
+    assert users == [first, second]  # Original file order and full selected values.
+    with pytest.raises(ValueError, match="HaluMem users missing") as error:
+        halumem_users(dataset, ["missing-z", "u", "missing-a"])
+    assert str(error.value) == "HaluMem users missing: ['missing-a', 'missing-z']"
+    observed = halumem_session(users[0]["uuid"], 0, users[0]["sessions"][0])
     assert observed.turns == ({"role": "user", "content": "actual speech", "timestamp": "now"},)
     assert "gold" not in repr(observed)
 
