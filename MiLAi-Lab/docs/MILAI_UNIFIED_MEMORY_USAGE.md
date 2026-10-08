@@ -11,6 +11,65 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 09:55:23 UTC：冻结预测闭合，同源范围比较入口修正
+
+本节为固定观察。[PR107](https://github.com/minguselandy/MiLAi/pull/107)已于09:01:29 UTC合并，
+合并main为16763b5140de8099aa9d08199414ec7886f0d2da。受测头d5a0c88自身[Fast](
+https://github.com/minguselandy/MiLAi/actions/runs/37752254276)成功、[Full](
+https://github.com/minguselandy/MiLAi/actions/runs/37752254300)skipped；合并main自身[Fast](
+https://github.com/minguselandy/MiLAi/actions/runs/37753781615)成功，不称Full 21/21通过。
+新比较源码9a59832d05e6898bc52788764b5b981be1e22a07；实际预测和当前评分仍冻结d62f0b4，
+733新建能力及9a来源范围修复均不回填该运行。
+
+预测PID3145901已退出0，terminal-predict为COMPLETED_EXPERIMENT_PHASE：四用户各8份，
+共32/32预测、33个来源batch、73个完整自然答案。Root读完全部73个答案，选定来源、
+正式输出和回执审计仍为部分；没有另造数值重评分或独立审计全部HTTP／reasoning。
+正常stop与进程闭合不表示语义通过。40个编辑工作中24次真实空提案；46个实际回执为
+40提交（31新建、9局部编辑）、1 no_change、5拒绝，无重放。另3个来源batch维护不完整，
+选择阶段1次EDIT_VIEW_CREATE_SCOPE_ALREADY_PROCESSED单列；空提案以编辑工作为单位，
+不能与来源batch或该选择失败合并。拒绝含2次EDIT_APPEND_CONDITION_TARGET_INVALID及
+3次EDIT_EVIDENCE_LINK_NOT_SELECTED，原失败保留。
+
+| 闭合预测，阶段互斥 | 确认响应 | known tokens |
+|---|---:|---:|
+| 抽取 | 33 | 385299 |
+| Writer选择 | 50 | 834344 |
+| Editor | 40 | 600413 |
+| Reader选择 | 161 | 1019093 |
+| 完整Reader | 73 | 470885 |
+| 合计生成 | 357 | 3310034 |
+
+357请求／357响应均stop，embedding183次／11273tokens，预测Judge0、新unknown0。
+预测闭合／评分前连续账本46553 requests、200720816 known、200997512 charged、
+embedding1913903、历史unknown6；生成known／charged差额均3310034，embedding差额11273，
+与实际确认文件一致。未重置预算、未增加上限。评分约09:46 UTC从同一冻结源码和保存产物启动，
+Python PID3552053／session61454；固定本时点2/32会话[2,0,0,0]闭合，75个Judge响应／
+208582 known，另1请求在途，无terminal-score。没有重跑Writer／Reader／encoder，也无完整分数。
+
+补充定位：第三用户原1有3条新候选，Editor输入5529tokens，但旧导航create=false禁用新建，
+正式响应为空；与首用户能力限制同类。第二用户原0旧库为空、5条候选、Editor输入5461tokens，
+新建可用却正式返回{}。后者说明733只能消除已确认的导航限制，不能据此解释或解决所有空输出。
+第二用户后期3项提案的evidence_links包含实际送达别名，但未同时选入本条evidence，按既有合同
+拒绝；不放宽算子或把离线可修提案记为成功。主体关联、限定保持、未来计划与历史问题的协调
+仍有语义缺口。最终回答还出现内部证据标签直接呈现的问题，Root发现与原作者标签分别保留。
+
+尚未运行的Writer比较原先按每次打开的事项重分配旧来源正文额度，可能使D1／D2取得D0完整池
+预算已排除的来源。9a仅修正有限writer-views：每case先按实际完整固定池确定共同可读旧范围，
+后续工作只取该范围的子集，实际当前来源继续保留；保存allowed_support_ranges及原预览计划。
+三种展示仍共用B0／I2、single_pass、实际前态、模型／额度及legacy Reader，原recipe compare
+协议沿用。扩展原一项SQLite检查，验证被共同预算排除的旧正文不能因选小子集而新增，
+相同前态／范围、非目标保持、原prepared字节不变；52次累计合成生成全部计量。
+检查、两文件Ruff、包／工具边界及CLI帮助通过，工具strict mypy仍为四项原错误，无新增。
+0真实HTTP；新冻结source-9a59832及v2配置／声明已准备，原733未运行声明保留。
+Reader固定池四题及Writer实际四前态比较继续等待评分释放串行资源，均无方法效果结论。
+
+方法反思限于假设：[Grammar-Aligned Decoding摘要](https://arxiv.org/abs/2405.21047v4)提示
+语法约束可改变采样分布，不能证明本部署空输出的原因。[vLLM官方说明](
+https://docs.vllm.ai/en/stable/features/reasoning_outputs/)区分reasoning与正式content；
+不执行推理草稿、不强制非空、不改当前解码部署。先完成交付方式比较，再决定是否需要有限的
+输出表达诊断。原长历史、同版本强简单／Append-only、保留／外部、完整Host和六项交付未完成；
+16保留用户未用，完整目标active，Product NO_GO。
+
 ## 2026-10-08 08:46:08 UTC：导航误限新建已定位，候选保持原冻结版本运行
 
 本节为固定观察。main64f006f；[PR107](https://github.com/minguselandy/MiLAi/pull/107)

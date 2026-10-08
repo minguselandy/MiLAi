@@ -1,5 +1,18 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 09:55:23 UTC／北京时间17:55:23：冻结预测闭合，评分开始；比较固定共同来源范围。**
+
+PR107已合并，main16763b5；受测头d5自身Fast成功／Full skipped，合并main自身Fast成功。
+预测仍冻结d62，PID3145901退出0、terminal-predict闭合32/32／73完整答案；Root全部读完，
+来源审计部分，无新数值重评分。357生成3310034known、183embedding11273tokens、新unknown0。
+40编辑工作含24真实空提案；40提交、1 no_change、5拒绝，另3来源batch维护不完整。
+同冻结评分PID3552053／session61454在运行：2/32[2,0,0,0]、75Judge响应208582known、
+另1在途，无terminal-score／完整分数。733不能解释新建可用仍{}的独立案例，不回填旧预测。
+新9a59832仅固定Writer比较的共同旧来源范围，阻止选小事项集取得D0预算外正文；原recipe协议
+沿用。一窄SQLite检查、Ruff／边界／CLI通过，工具mypy四项原错误；修复和两项比较实际0HTTP。
+新v2声明准备，评分后串行比较。完整目标active，16未用，Product NO_GO。
+详见[当前报告](MILAI_UNIFIED_MEMORY_USAGE.md)。下方均为固定历史观察。
+
 **2026-10-08 08:46:08 UTC／北京时间16:46:08：冻结候选继续，定位并修复导航误限新建。**
 
 PR107 open、ready、尚未合并，main64f006f；新开发733fa72，实际运行仍冻结d62f0b4。
