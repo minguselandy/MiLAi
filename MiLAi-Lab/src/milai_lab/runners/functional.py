@@ -3390,7 +3390,8 @@ def message(
             # to COMPLETED. Only already delivered, paired receipts are rendered.
             evidence = (agent.get_state(cfg).values.get("messages", [])
                         if "agent" in locals() else [])
-            final = business_response(evidence, output["operation_status"], {})
+            final = business_response(evidence, output["operation_status"], {},
+                                      current_mode=output.get("request_mode"))
             output["final_answer"] = (
                 ("请求未完成, 执行已停止; 以下是已确认的操作状态。" if known_incomplete else
                  "回答协议失败, 执行已停止; 以下是已确认的操作状态。") +
