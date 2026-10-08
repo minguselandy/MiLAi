@@ -331,7 +331,8 @@ class EditMemory:
                 instruction += (
                     "With from_unit=u# and assertion={keep:h#} for that same old unit, "
                     "omit text to reuse its actual text, or repeat it exactly. This also reuses "
-                    "its own support without repeating keep_support. "
+                    "its own support without repeating keep_support. Exact old text with "
+                    "assertion={keep:h#} also reuses its support without from_unit. "
                     "Bindings still select their separate relation support. "
                 )
             instruction += "Changed text still selects actual e evidence. "
@@ -1529,12 +1530,15 @@ class EditMemory:
             )
             if (
                 self.features.source_metadata
-                and retained_unit
                 and "keep_support" not in item
                 and (kept_alias := item.get("assertion", {}).get("keep"))
             ):
                 support = bound["support"].get(kept_alias)
-                if support is not None and support.get("unit") == retained_unit:
+                if support is not None and support.get("unit") and (
+                    support["unit"] == retained_unit
+                    or (proposal["action"] == "rewrite" and not retained_unit
+                        and support["record"] == target)
+                ):
                     item["keep_support"] = [kept_alias]
             handles, kept = [], []
             for alias in item.get("evidence", []):

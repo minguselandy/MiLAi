@@ -639,10 +639,11 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         }
         saved = method.apply("s", "form", method.decode_proposal(create, view["mapping"]))
         original = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
+        other, _ = next_save(service, method, key="other-record")
         view, new_source = next_request(
             service, method, "change", "The reminder rule now applies during evening hours. "
             "Use haptic backup for reminders.",
-            [service.read(saved["id"])], allow_create=False,
+            [service.read(saved["id"]), service.read(other["id"])], allow_create=False,
         )
         clause = view["packet"]["records"][0]["clauses"][0]
         condition = clause["conditions"][0]
@@ -668,19 +669,31 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         generated_assertion["source_evidence"] = generated_assertion.pop("source")
         Draft202012Validator(view["schema"]).validate({"creates": [], "records": {"r1": generated}})
 
-        missing_identity = copy.deepcopy(rewrite)
-        missing_identity["clauses"][0].pop("from_unit")
-        with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
-            method.decode_proposal(missing_identity, view["mapping"])
+        kept_without_identity = copy.deepcopy(rewrite)
+        kept_without_identity["clauses"][0].pop("from_unit")
+        decoded_keep = method.decode_proposal(kept_without_identity, view["mapping"])
+        assert (
+            decoded_keep["_edit_metadata"]["unit_assertions"][0]
+            == original["units"][0]["assertion"]
+        )
+        assert decoded_keep["units"][0]["evidence"] == [
+            ref["evidence_id"] for ref in original["units"][0]["evidence_refs"]
+        ]
+        wrong_record = copy.deepcopy(kept_without_identity)
+        wrong_record["clauses"][0]["assertion"] = {
+            "keep": view["packet"]["records"][1]["clauses"][0]["support"][0]
+        }
+        with pytest.raises(FunctionalRejection, match="PUBLIC_PROPOSAL_INVALID"):
+            method.decode_proposal(wrong_record, view["mapping"])
         wrong_assertion = copy.deepcopy(rewrite)
         wrong_assertion["clauses"][0]["assertion"] = {"keep": condition["support"][0]}
         with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
             method.decode_proposal(wrong_assertion, view["mapping"])
-        explicit_empty = copy.deepcopy(rewrite)
+        explicit_empty = copy.deepcopy(kept_without_identity)
         explicit_empty["clauses"][0]["keep_support"] = []
         with pytest.raises(FunctionalRejection, match="EVIDENCE_REQUIRED"):
             method.decode_proposal(explicit_empty, view["mapping"])
-        changed_retained = copy.deepcopy(rewrite)
+        changed_retained = copy.deepcopy(kept_without_identity)
         changed_retained["clauses"][0]["text"] = "Use loud reminders."
         with pytest.raises(FunctionalRejection, match="CHANGED_CLAIM"):
             method.decode_proposal(changed_retained, view["mapping"])
@@ -710,8 +723,7 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
             method.decode_proposal(duplicated, view["mapping"])
 
-        retained = copy.deepcopy(rewrite)
-        retained["clauses"][0].pop("text")
+        retained = copy.deepcopy(kept_without_identity)
         unchanged_condition = clause["conditions"][1]
         retained["clauses"][0]["conditions"].append({
             "from_unit": unchanged_condition["id"], "evidence": [],
@@ -724,6 +736,8 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
             "assertion": {"source_evidence": "e1", "kind": "reported"}, "conditions": [],
         })
         wrong_keep = copy.deepcopy(retained)
+        wrong_keep["clauses"][0]["from_unit"] = clause["id"]
+        wrong_keep["clauses"][0].pop("text")
         wrong_keep["clauses"][0]["assertion"] = {"keep": condition["support"][0]}
         with pytest.raises(FunctionalRejection, match="ASSERTION_UNIT_BINDING_INVALID"):
             method.decode_proposal(wrong_keep, view["mapping"])
