@@ -223,6 +223,7 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
     original_text = "Remember that I use a teal marker for the calendar."
     continue_text = "Continue only the unfinished saving of my earlier calendar preference."
     read_text = "Only inspect the saved preference; do not save or perform business."
+    correction_text = "Change my earlier calendar marker preference to green and save it."
     seen = {"extract": 0, "edit": 0, "resolve": 0}
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
@@ -230,15 +231,16 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
         if names == {"classify_current_request"}:
             text = wire["messages"][-1]["content"]
             return native_call("classify_current_request", "mode-" + str(ordinal),
-                memory_write_request="explicit" if text == original_text else "none",
+                memory_write_request="explicit" if text in {original_text, correction_text}
+                else "none",
                 allow_forgetting=False, business_action_request="none", business_operations=[],
                 memory_continuation_request="resolve_prior_explicit"
-                if text == continue_text else "none",
+                if text in {continue_text, correction_text} else "none",
                 application_continuation_request="none", application_requests=[])
         if names == {"resolve_continuation_operations"}:
             seen["resolve"] += 1
             material = json.loads(wire["messages"][-1]["content"])["archived_reference_material"]
-            assert len(material["pending_maintenance"]) == 1
+            assert len(material["pending_maintenance"]) == (1 if seen["resolve"] == 1 else 0)
             part = next(row for row in material["items"] if row.get("content") == original_text)
             return native_call("resolve_continuation_operations", "resolve",
                 business_operations=[], prior_request_ids=[],
@@ -249,6 +251,11 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                 return {"role": "assistant", "content": json.dumps({"changes": []})}
             seen["edit"] += 1
             frame = json.loads(wire["messages"][-1]["content"])
+            if "directory" in frame:
+                seen["edit"] -= 1
+                return {"role": "assistant", "content": json.dumps({
+                    "record_ids": [frame["directory"][0]["record_id"]],
+                    "create": False, "done": True})}
             if "continuation_request" not in frame:
                 return {"role": "assistant", "content": "{}"}
             assert frame["continuation_request"]["content"] == continue_text
@@ -285,6 +292,12 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
     replay = functional.message(root, **common, session="current", message_id="continue",
                                 content=continue_text, resume=True)
     assert replay["records"] == continued["records"] and len(wires) == count
+    corrected = functional.message(root, **common, session="correction", message_id="change",
+                                   content=correction_text)
+    assert corrected["status"] == "COMPLETED", corrected.get("error")
+    assert corrected["request_mode"]["resumed_memory_request"]["fragment_handles"]
+    assert corrected["request_mode"]["prior_maintenance_requests"] == []
+    assert seen == {"extract": 2, "edit": 3, "resolve": 2}
 
 
 def tool(action: str, **args: Any) -> dict[str, Any]:

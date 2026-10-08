@@ -1529,11 +1529,7 @@ class BenchmarkRun:
             ]
             write_json(snapshot, memories)
         cached_response = (snapshot.parent / "response.json").exists()
-        if self.settings.get("memory_view_mode", "legacy") == "legacy":
-            answer = self.call(key, reader_messages(question, date, memories), structured=False)
-            used_memories = memories
-        else:
-            answer, used_memories = self._answer_view(question, date, key, memories)
+        answer, used_memories = self.answer_material(question, date, key, memories)
         if service.memory_profile == "unified_v1":
             from milai_lab.memory.activation import ActivationIndex
 
@@ -1542,6 +1538,20 @@ class BenchmarkRun:
                 if "record_id" in memory:
                     index.record_use(memory["record_id"], request_id=key, cached=cached_response)
         return answer
+
+    def answer_material(
+        self, question: str, date: str, key: str, memories: list[dict[str, Any]],
+    ) -> tuple[str, list[dict[str, Any]]]:
+        """Shared Reader over an actual retained retrieval snapshot, without new search.
+
+        The ordinary caller owns retrieval and access. The finite view comparison
+        uses the exact saved pool, so changing delivery cannot add sources or facts.
+        """
+        if self.settings.get("memory_view_mode", "legacy") == "legacy":
+            return self.call(
+                key, reader_messages(question, date, memories), structured=False
+            ), memories
+        return self._answer_view(question, date, key, memories)
 
     def _answer_view(
         self, question: str, date: str, key: str, memories: list[dict[str, Any]],

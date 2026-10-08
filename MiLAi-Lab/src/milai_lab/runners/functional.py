@@ -157,6 +157,9 @@ REQUEST_MODE_DECLARATION: dict[str, Any] = {
 
 REQUEST_WRITE_MODE_PROMPT = """Classify only the current request before reading history.
 Call classify_current_request once, with no explanation. It executes no operation.
+Classify each requested effect independently. Restrictions apply to the named work:
+excluding business actions or already-completed saves leaves a separately requested
+unfinished memory save permitted.
 Select memory_write_request:
 - none: only reading/recalling/comparing facts, preferences, history or status.
   Needing an answer FROM memory is not a request to WRITE memory. A proposition
@@ -271,14 +274,14 @@ CONTINUATION_OPERATIONS_DECLARATION: dict[str, Any] = {
 
 REQUEST_CONTINUATION_MODE_PROMPT = REQUEST_REFERENCE_MODE_PROMPT + """
 Separately declare memory_continuation_request:
-- none: the current input does not ask to continue earlier unfinished work, or limits
-  continuation to business actions, asks only for information, or excludes saving memory.
+- none: the current input asks for no memory continuation, limits continuation to
+  business actions, or restricts all memory work to reading.
 - resolve_prior_explicit: the current input asks to finish still-authorized prior work
   and permits continuing an unfinished explicit save/archive/update request within it.
   This includes a general continuation whose prior memory work cannot be identified
   without history. It does not itself grant a memory write or assert that work is pending.
-Do not infer a prior save request before reading its actual original. A current no-save,
-read-only, or business-only restriction takes precedence. Memory continuation can be
+Read the actual original before identifying a prior save request. A current restriction
+on all memory saving takes precedence. Memory continuation can be
 requested even when business_operations are already concrete, or no business action
 is requested. Keep memory_write_request about assertions/requests in the CURRENT input.
 """
@@ -287,7 +290,7 @@ _continuation_parameters = REQUEST_CONTINUATION_MODE_DECLARATION["function"]["pa
 _continuation_parameters["properties"]["memory_continuation_request"] = {
     "type": "string", "enum": ["none", "resolve_prior_explicit"],
     "description": "Current permission to resolve prior explicit unfinished memory work; "
-                   "none for pure queries, business-only continuation or any no-save restriction."}
+                   "none for pure queries, business-only continuation or exclusion of all saving."}
 _continuation_parameters["required"].append("memory_continuation_request")
 CONTINUATION_MEMORY_DECLARATION = json.loads(json.dumps(CONTINUATION_OPERATIONS_DECLARATION))
 _continuation_memory_parameters = CONTINUATION_MEMORY_DECLARATION["function"]["parameters"]
@@ -2249,21 +2252,27 @@ def message(
                         pending = memory.pending_maintenance(cfg)
                         material["pending_maintenance"] = pending
                         delivered = {row.get("fragment_handle") for row in material["items"]}
-                        for card in pending:
-                            for ref in card["source_refs"]:
-                                parts = service.source_fragments(
-                                    ref, max_chars=memory.fragment_chars)
-                                if not parts or parts[0]["role"] != "user":
-                                    continue
-                                part = parts[0]
-                                if part["fragment_handle"] in delivered:
-                                    continue
-                                proposed = {**material, "items": [
-                                    *material["items"], {"type": "fragment", **part}]}
-                                if capacity.text_tokens(json.dumps(proposed, ensure_ascii=False)) \
-                                        <= settings["ordinary_material_tokens"]:
-                                    material = proposed
-                                    delivered.add(part["fragment_handle"])
+                        refs = [ref for card in pending for ref in card["source_refs"]]
+                        refs.extend(candidate["source_ref"]
+                                    for candidate in material.get("candidates", [])
+                                    if candidate["type"] == "source_candidate"
+                                    and candidate["role"] == "user")
+                        for ref in dict.fromkeys(refs):
+                            if ref == capture["source_ref"]:
+                                continue
+                            parts = service.source_fragments(ref, max_chars=memory.fragment_chars)
+                            if not parts or parts[0]["role"] != "user":
+                                continue
+                            part = parts[0]
+                            if part["fragment_handle"] in delivered:
+                                continue
+                            proposed = {**material, "items": [
+                                *material["items"], {"type": "fragment", **part,
+                                                    "input_relation": "archived_source"}]}
+                            if capacity.text_tokens(json.dumps(proposed, ensure_ascii=False)) \
+                                    <= settings["ordinary_material_tokens"]:
+                                material = proposed
+                                delivered.add(part["fragment_handle"])
                     trace({"event": "functional_material_delivery", "material": material,
                            "consumer": "continuation_reference_resolution"})
                     mode = continuation_operations(

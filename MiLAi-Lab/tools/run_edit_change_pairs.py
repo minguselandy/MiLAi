@@ -459,6 +459,77 @@ def compare_recipes(prepared: Path, config: Path, output: Path, source_version: 
             })
 
 
+def compare_reader_views(
+    baseline: Path, config: Path, output: Path, source_version: str, http_keys: list[str],
+) -> None:
+    """Compare only delivery, using selected actual saved Reader pools and requests.
+
+    No bank, source capture, Writer, search, encoder or Judge is invoked. Inputs
+    come from the existing request/retrieval files, never supplied ideal memories.
+    Each finite mode uses the same model, Reader, records and original call limit.
+    """
+    if output.exists():
+        raise ValueError("Preserve prior comparison; use a new output directory")
+    original = read_json(config)
+    cases = []
+    for key in dict.fromkeys(http_keys):
+        request = read_json(baseline / "http" / key / "request.json")
+        payload = json.loads(request["messages"][1]["content"])
+        memories = read_json(baseline / "http" / key / "retrieval.json")
+        if payload.get("memory_view", "retained_state") != "retained_state":
+            raise ValueError("Reader view comparison requires actual retained-state material")
+        if any("record_id" not in memory for memory in memories):
+            raise ValueError("Saved Reader pool lacks actual record IDs for selection")
+        cases.append({"http_key": key, "question": payload["question"],
+                      "date": payload["date"], "memories": memories})
+    write_json(output / "inputs.json", {
+        "baseline": str(baseline), "source_commit": source_version, "cases": cases,
+        "claim": "same saved pool and Reader; exposed diagnostic, not independent confirmation",
+    })
+    for mode in ("legacy", "staged", "state_driven"):
+        settings = copy.deepcopy(original)
+        settings.update(experiment_name="milai-reader-view-pairs-" + mode,
+                        config_version="milai-reader-view-pairs-v1", memory_view_mode=mode)
+        settings["provenance"] = {"source_commit": source_version, "baseline": str(baseline),
+            "purpose": "fixed saved Reader pools; D0/D1/D2 delivery only; no new retrieval"}
+        root = output / mode
+        run = BenchmarkRun(settings, root)
+        rows: list[dict[str, Any]] = []
+        status = "STOPPED_READER_VIEW_COMPARISON"
+        try:
+            for case in cases:
+                key = case["http_key"]
+                write_json(root / "http" / key / "retrieval.json", case["memories"])
+                row: dict[str, Any] = {"http_key": key, "question": case["question"]}
+                try:
+                    answer, opened = run.answer_material(
+                        case["question"], case["date"], key, case["memories"]
+                    )
+                    row.update(answer=answer, opened_ids=[m["record_id"] for m in opened])
+                except (ValueError, SchemaError) as error:
+                    row["first_failure"] = str(error)
+                rows.append(row)
+                write_json(root / "answers.json", rows)
+            status = "FINISHED_READER_VIEW_ATTEMPTS_AWAITING_ROOT_REVIEW"
+        finally:
+            run.close()
+            end = read_json(root / "accounting-end.json")
+            terminal = {
+                "status": status, "source_commit": source_version, "memory_view_mode": mode,
+                "questions": len(rows),
+                "generation_requests": end["generation_requests"]
+                - run.before["generation_requests"],
+                "generation_known_tokens": end["generation"]["known_tokens"]
+                - run.before["generation"]["known_tokens"],
+                "new_generation_unknown": end["generation"]["unknown_usage"]
+                - run.before["generation"]["unknown_usage"],
+                "embedding_known_tokens": end["embedding"]["known_tokens"]
+                - run.before["embedding"]["known_tokens"],
+            }
+            write_json(root / "terminal.json", terminal)
+            print(json.dumps(terminal), flush=True)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="action", required=True)
@@ -476,13 +547,24 @@ def main() -> None:
     compare_parser.add_argument("config", type=Path)
     compare_parser.add_argument("output", type=Path, help="New isolated comparison directory")
     compare_parser.add_argument("--source-version", required=True)
+    reader_parser = commands.add_parser(
+        "reader-views", help="Compare D0/D1/D2 on explicitly selected saved Reader pools"
+    )
+    reader_parser.add_argument("baseline", type=Path, help="Actual run with saved Reader snapshots")
+    reader_parser.add_argument("config", type=Path)
+    reader_parser.add_argument("output", type=Path, help="New isolated comparison directory")
+    reader_parser.add_argument("--source-version", required=True)
+    reader_parser.add_argument("--http-key", required=True, action="append")
     args = parser.parse_args()
     if args.action == "prepare":
         prepare(args.original, args.prepared, args.config, args.source_version)
     elif args.action == "execute":
         execute(args.prepared, args.config, args.output)
-    else:
+    elif args.action == "compare":
         compare_recipes(args.prepared, args.config, args.output, args.source_version)
+    else:
+        compare_reader_views(args.baseline, args.config, args.output, args.source_version,
+                             args.http_key)
 
 
 if __name__ == "__main__":
