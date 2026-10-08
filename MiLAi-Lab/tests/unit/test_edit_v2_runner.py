@@ -1163,6 +1163,8 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
             current = service.capture_user("new", "change", "The marker is now red.")["source_ref"]
             delivery = method.prepare([current], "", selected_records=[], redelivered_ranges=[])
             before = service.records()
+            delivery = method.prepare([current], "Marker", selected_records=before,
+                                      redelivered_ranges=[])
             write_json(folder / "before.json", before)
             marker = next(row for row in before
                           if row["value"]["edit_state"]["matter_description"] == "Marker")
@@ -1211,6 +1213,14 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
             content = json.dumps({"changes": [{
                 "subject": "Marker", "statement": "The marker is now red.",
                 "evidence": ["e1"], "time": None, "scope": None}]})
+        elif "directory" in payload:
+            calls.append("select")
+            assert {row["description"] for row in payload["directory"]} == {
+                "Marker", "Poster"}
+            marker = next(row for row in payload["directory"]
+                          if row["description"] == "Marker")
+            content = json.dumps({"record_ids": [marker["record_id"]],
+                                  "create": False, "done": True})
         else:
             calls.append("edit")
             assert "A later report says green." not in json.dumps(payload)
@@ -1256,6 +1266,27 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
                           == "Poster")
             assert before[poster] == after[poster]
             assert result["answers"][0]["answer"] == "Red."
+
+    view_output = tmp_path / "writer-views"
+    driver["compare_writer_views"](prepared, config, view_output, "fixture-only")
+    assert calls.count("extract") == 4  # No extraction added to the delivery-only comparison.
+    assert calls.count("select") == 8
+    for ordinal in driver["ORDINALS"]:
+        assert (prepared / str(ordinal) / "memory.sqlite").read_bytes() == originals[ordinal]
+        results = [read_json(view_output / mode / "cases" / str(ordinal) / "result.json")
+                   for mode in ("legacy", "staged", "state_driven")]
+        assert results[0]["before"] == results[1]["before"] == results[2]["before"]
+        assert results[0]["candidate_record_ids"] == results[1]["candidate_record_ids"] \
+            == results[2]["candidate_record_ids"]
+        for result in results:
+            assert result["maintenance"]["status"] == "completed"
+            before = {r["id"]: r["value"] for r in result["before"]}
+            after = {r["id"]: r["value"] for r in result["after"]}
+            poster = next(k for k, v in before.items() if v["edit_state"]["matter_description"]
+                          == "Poster")
+            assert before[poster] == after[poster]
+            assert result["answers"][0]["answer"] == "Red."
+    assert budget.state["generation_requests"] == 52
 
 
 def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path, monkeypatch):

@@ -14,7 +14,7 @@ import json
 import os
 import sqlite3
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 from jsonschema.exceptions import ValidationError as SchemaError
 from langgraph.store.sqlite import SqliteStore
@@ -25,7 +25,7 @@ from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
-from milai_lab.methods.edit_maintenance import MaintenanceRecipe, maintain_event
+from milai_lab.methods.edit_maintenance import MaintenanceRecipe, MemoryViewMode, maintain_event
 from milai_lab.methods.edit_memory import EditMemory
 from milai_lab.runners.edit_benchmarks import BenchmarkRun, parse_object
 
@@ -336,26 +336,54 @@ def execute(prepared: Path, config: Path, output: Path) -> None:
 
 def compare_recipes(prepared: Path, config: Path, output: Path, source_version: str) -> None:
     """Compare both common recipes from independent copies of each actual before bank."""
+    _compare_writers(prepared, config, output, source_version,
+                     [("single_pass", "legacy"), ("extract_then_edit", "legacy")])
+
+
+def compare_writer_views(prepared: Path, config: Path, output: Path, source_version: str) -> None:
+    """Fix actual before/pool/source and the B0 editor; compare only delivery.
+
+    All modes use single_pass and the same legacy Reader after maintenance. The
+    actual pool was saved by the original run, so no new Writer retrieval or
+    extraction can change it. Reader retrieval still follows actual after state.
+    """
+    modes: tuple[MemoryViewMode, ...] = ("legacy", "staged", "state_driven")
+    _compare_writers(prepared, config, output, source_version,
+                     [("single_pass", mode) for mode in modes],
+                     fixed_pool=True)
+
+
+def _compare_writers(
+    prepared: Path, config: Path, output: Path, source_version: str,
+    conditions: list[tuple[MaintenanceRecipe, MemoryViewMode]], *, fixed_pool: bool = False,
+) -> None:
     if output.exists():
         raise ValueError("Preserve prior comparison; use a new output directory")
     cases = read_json(prepared / "inputs.json")["cases"]
     if [case["ordinal"] for case in cases] != list(ORDINALS):
         raise ValueError("Expected the four original exposed cases in their declared order")
     original = read_json(config)
-    for recipe in ("single_pass", "extract_then_edit"):
+    for recipe, view_mode in conditions:
+        condition = view_mode if fixed_pool else recipe
         settings = copy.deepcopy(original)
         settings.update(
-            experiment_name="milai-build-first-recipe-pairs-" + recipe,
-            config_version="milai-build-first-recipe-pairs-v1", maintenance_recipe=recipe,
+            experiment_name=("milai-build-first-writer-pairs-" if fixed_pool
+                             else "milai-build-first-recipe-pairs-") + condition,
+            config_version="milai-build-first-writer-pairs-v1" if fixed_pool
+                           else "milai-build-first-recipe-pairs-v1", maintenance_recipe=recipe,
         )
+        if fixed_pool:
+            settings["memory_view_mode"] = "legacy"  # Common Reader across Writer conditions.
         settings["provenance"] = {
             "source_commit": source_version,
             "original_source_commit": original["provenance"]["original_source_commit"],
             "prepared_inputs": str(prepared),
-            "purpose": "same original sources, actual before states and editor; recipe contrast",
+            "purpose": "same original sources, actual before states and editor; "
+                       + ("fixed-pool delivery contrast" if fixed_pool else "recipe contrast"),
+            "writer_view_mode": view_mode,
             "claim": "four exposed development cases, not independent confirmation",
         }
-        root = output / recipe
+        root = output / condition
         run = BenchmarkRun(settings, root)
         rows = []
         status = "STOPPED_RECIPE_COMPARISON"
@@ -394,15 +422,21 @@ def compare_recipes(prepared: Path, config: Path, output: Path, source_version: 
                     bind(service, case)
                     method = EditMemory(service, "B0", interface_version="I2",
                                         features=EditFeatures.from_settings(settings["edit_features"]))
+                    calls: list[str] = []
 
                     def call(
                         stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
                         execution: BenchmarkRun = run, pair: int = ordinal,
+                        case_calls: list[str] = calls,
                     ) -> dict[str, Any]:
+                        http_key = f"pairs/{pair}/{stage}"
+                        if fixed_pool and len(case_calls) >= execution.client.config.max_calls:
+                            raise FunctionalRejection("EDIT_MODEL_CALL_LIMIT_REACHED")
+                        case_calls.append(http_key)
                         return parse_object(execution.call(
-                            f"pairs/{pair}/{stage}", messages, structured=True,
+                            http_key, messages, structured=True,
                             response_format={"type": "json_schema", "json_schema": {
-                                "name": "milai_" + stage, "schema": schema}},
+                                "name": "milai_" + stage.split(":", 1)[0], "schema": schema}},
                         ), reject_duplicate_keys=True)
 
                     def prepare_delivery(
@@ -413,16 +447,24 @@ def compare_recipes(prepared: Path, config: Path, output: Path, source_version: 
                             editor, delivery, delivery["records"], date, allow_create=True
                         )[0]
 
+                    delivery = copy.deepcopy(case["delivery"])
+                    pool = [r["record_id"] for r in delivery["records"]] if fixed_pool else None
+                    if fixed_pool:
+                        delivery["materialize_selected_support"] = True
                     result = maintain_event(
-                        method, case["delivery"], session=case["session"],
-                        request_id=f"recipe-pair:{ordinal}", date=case["date"],
-                        recipe=cast(MaintenanceRecipe, recipe), model_call=call,
+                        method, delivery, session=case["session"],
+                        request_id=f"{'writer' if fixed_pool else 'recipe'}-pair:{ordinal}",
+                        date=case["date"], recipe=recipe, model_call=call,
                         retrieval_limit=settings["retrieval_limit"], fit=run._fits,
                         prepare_delivery=prepare_delivery,
+                        memory_view_mode=view_mode, candidate_record_ids=pool,
+                        batch_sources=False if fixed_pool else None,
                     )
                     row: dict[str, Any] = {
                         "ordinal": ordinal, "before": before,
                         "maintenance": result, "answers": [],
+                        **({"candidate_record_ids": pool, "writer_view_mode": view_mode}
+                           if fixed_pool else {}),
                     }
                     # Retain the actual first maintenance outcome even if a later
                     # observation or Reader fails. Do not repeat its model call.
@@ -446,7 +488,8 @@ def compare_recipes(prepared: Path, config: Path, output: Path, source_version: 
             run.close()
             end = read_json(root / "accounting-end.json")
             write_json(root / "terminal.json", {
-                "status": status, "recipe": recipe, "case_rows": len(rows),
+                "status": status, "recipe": recipe, "writer_view_mode": view_mode,
+                "case_rows": len(rows),
                 "source_commit": source_version,
                 "generation_requests": end["generation_requests"]
                 - run.before["generation_requests"],
@@ -547,6 +590,13 @@ def main() -> None:
     compare_parser.add_argument("config", type=Path)
     compare_parser.add_argument("output", type=Path, help="New isolated comparison directory")
     compare_parser.add_argument("--source-version", required=True)
+    writer_parser = commands.add_parser(
+        "writer-views", help="Compare D0/D1/D2 from the same actual before states and pools"
+    )
+    writer_parser.add_argument("prepared", type=Path)
+    writer_parser.add_argument("config", type=Path)
+    writer_parser.add_argument("output", type=Path, help="New isolated comparison directory")
+    writer_parser.add_argument("--source-version", required=True)
     reader_parser = commands.add_parser(
         "reader-views", help="Compare D0/D1/D2 on explicitly selected saved Reader pools"
     )
@@ -562,6 +612,8 @@ def main() -> None:
         execute(args.prepared, args.config, args.output)
     elif args.action == "compare":
         compare_recipes(args.prepared, args.config, args.output, args.source_version)
+    elif args.action == "writer-views":
+        compare_writer_views(args.prepared, args.config, args.output, args.source_version)
     else:
         compare_reader_views(args.baseline, args.config, args.output, args.source_version,
                              args.http_key)

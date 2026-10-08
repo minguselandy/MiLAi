@@ -416,7 +416,7 @@ def _maintain_views(
             # before issuing this work's immutable editor mapping.
             pending["records"] = [_directory_ref(service.read(key)) for key in selected_ids]
             child_binding = {key: copy.deepcopy(value) for key, value in state["binding"].items()
-                             if key != "memory_view_mode"}
+                             if key not in {"memory_view_mode", "candidate_record_ids"}}
             child_binding["selected_record_ids"] = selected_ids
             service.store.put(ns, child_key, {
                 "binding": child_binding, "phase": "locate", "receipts": [], "unprocessed": [],
@@ -468,6 +468,7 @@ def maintain_event(
     batch_sources: bool | None = None,
     memory_view_mode: MemoryViewMode = "legacy",
     memory_save_requested: bool = False,
+    candidate_record_ids: list[str] | None = None,
 ) -> dict[str, Any]:
     """Maintain an actual event with legacy or selected whole-matter delivery.
 
@@ -476,6 +477,8 @@ def maintain_event(
     A saved envelope resumes with the same operation IDs. An interrupted model
     request remains incomplete; recovery never silently repeats unknown HTTP.
     The Host must establish current write permission before invoking this path.
+    A finite delivery comparison can fix an actual candidate pool without marking
+    those candidates as selected/opened work. Ordinary callers still locate it.
     """
     if recipe not in {"single_pass", "extract_then_edit"}:
         raise ValueError("EDIT_MAINTENANCE_RECIPE_INVALID")
@@ -501,6 +504,9 @@ def maintain_event(
         binding["candidate_mode"] = candidate_mode
     if memory_view_mode != "legacy":
         binding["memory_view_mode"] = memory_view_mode
+    if candidate_record_ids is not None:
+        binding["candidate_record_ids"] = list(dict.fromkeys(candidate_record_ids))
+    locating_ids = selected_record_ids if selected_record_ids is not None else candidate_record_ids
     prior = service.store.get(ns, key)
     state: dict[str, Any] = copy.deepcopy(prior.value) if prior else {
         "binding": binding, "phase": "start", "receipts": [], "unprocessed": [],
@@ -586,7 +592,7 @@ def maintain_event(
         ):
             batches = plan_source_batches(
                 method, delivery, date=date, recipe=recipe, fit=fit,
-                retrieval_limit=retrieval_limit, selected_record_ids=selected_record_ids,
+                retrieval_limit=retrieval_limit, selected_record_ids=locating_ids,
                 candidate_mode=candidate_mode, prepare_delivery=prepare_delivery,
             )
             if len(batches) > 1:
@@ -604,7 +610,7 @@ def maintain_event(
                     request_id=f"{request_id}:batch:{index}", date=date, recipe=recipe,
                     model_call=model_call, commit=commit, retrieval_limit=retrieval_limit,
                     fit=fit, prepare_delivery=prepare_delivery, execute=execute,
-                    selected_record_ids=selected_record_ids, candidate_mode=candidate_mode,
+                    selected_record_ids=locating_ids, candidate_mode=candidate_mode,
                     batch_sources=False,
                     memory_save_requested=state.get("memory_save_requested", False),
                 )
@@ -637,8 +643,8 @@ def maintain_event(
         if state["phase"] == "locate":
             if memory_view_mode != "legacy":
                 selected = (
-                    [service.read(record_id) for record_id in dict.fromkeys(selected_record_ids)]
-                    if selected_record_ids is not None else locate_candidates(
+                    [service.read(record_id) for record_id in dict.fromkeys(locating_ids)]
+                    if locating_ids is not None else locate_candidates(
                         method, state["changes"], "\n".join(s["text"] for s in sources),
                         limit=retrieval_limit, mode=candidate_mode,
                     )
@@ -654,7 +660,7 @@ def maintain_event(
                 located = _located_delivery(
                     method, {**delivery, "prior_context": state.get("prior_context", [])},
                     state["changes"], retrieval_limit=retrieval_limit,
-                    selected_record_ids=selected_record_ids, candidate_mode=candidate_mode,
+                    selected_record_ids=locating_ids, candidate_mode=candidate_mode,
                     prepare_delivery=prepare_delivery,
                     materialize_support=bool(delivery.get("materialize_selected_support")),
                 )
