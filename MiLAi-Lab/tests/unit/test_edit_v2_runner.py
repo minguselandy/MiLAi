@@ -1335,6 +1335,7 @@ def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path,
                         "interface_version": "I2", "additional_reads": 2})
     budget = RunBudget(RunLimits(generation_requests=6), tmp_path / "budget.json")
     final_ids = {}
+    selection_budgets = {}
 
     def factory(settings, root):
         run = execution(root, "M")
@@ -1346,6 +1347,17 @@ def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path,
             if "candidates" in packet:
                 assert {row["record_id"] for row in packet["candidates"]} == {
                     "actual-marker", "actual-poster"}
+                mode = settings["memory_view_mode"]
+                selection_budgets.setdefault(mode, []).append(packet["remaining_reads"])
+                system = wire["messages"][0]["content"]
+                if mode == "staged":
+                    assert "This call is the one selection before the final answer." in system
+                    assert "selected whole matters are delivered directly" in system
+                    assert "Previously opened bodies can be loaded again." not in system
+                    assert "Selecting another matter replaces the resident body" not in system
+                else:
+                    assert "Previously opened bodies can be loaded again." in system
+                    assert "Selecting another matter replaces the resident body" in system
                 first = not packet["opened_ids"]
                 content = json.dumps({"record_ids": ["actual-marker" if first else "actual-poster"],
                                       "keep_resident": not first, "done": not first})
@@ -1371,8 +1383,13 @@ def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path,
     compare(baseline, config, output, "fixture-only", [key])
     assert final_ids == {"legacy": ["actual-marker", "actual-poster"], "staged": ["actual-marker"],
                          "state_driven": ["actual-marker", "actual-poster"]}
+    assert selection_budgets == {"staged": [1], "state_driven": [2, 1]}
     for mode, requests in (("legacy", 1), ("staged", 2), ("state_driven", 3)):
-        assert read_json(output / mode / "terminal.json")["generation_requests"] == requests
+        terminal = read_json(output / mode / "terminal.json")
+        assert terminal["generation_requests"] == requests
+        assert terminal["generation_known_tokens"] == requests * 8
+        assert terminal["new_generation_unknown"] == 0
+        assert terminal["embedding_known_tokens"] == 0
         assert read_json(output / mode / "http" / key / "retrieval.json") == memories
     assert {p.name: p.read_bytes() for p in (baseline / "http" / key).iterdir()} == inputs
     assert budget.state["generation_requests"] == 6

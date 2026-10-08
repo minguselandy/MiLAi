@@ -1599,6 +1599,8 @@ class BenchmarkRun:
         if call_limit < 1:
             raise FunctionalRejection("READ_MODEL_CALL_LIMIT_REACHED")
         read_limit = min(self.settings.get("additional_reads", call_limit - 1), call_limit - 1)
+        if mode == "staged":
+            read_limit = min(read_limit, 1)
 
         def resident() -> list[dict[str, Any]]:
             return [memories[ref["unit_index"]] for ref in state["resident_refs"]]
@@ -1606,6 +1608,16 @@ class BenchmarkRun:
         while memories and not state["complete"] and state["steps"] < read_limit:
             messages = reader_messages(question, date, resident())
             messages[0]["content"] += (
+                "\nThis call is the one selection before the final answer. "
+                "Directory descriptions locate records; they are not evidence. Select "
+                "record_ids to open together. After this selection, the selected whole "
+                "matters are delivered directly for the final answer. keep_resident and "
+                "done retain the selection schema but do not add another selection. "
+                "read_goal states what this question asks to establish; it is not the type "
+                "of material opened. It may combine purposes and remains in force unless "
+                "explicitly changed. A purpose does not make absent history available. "
+                "Return only the supplied selection schema, not the final answer."
+                if mode == "staged" else
                 "\nThis call selects actual whole matters to read before answering. "
                 "Directory descriptions locate records; they are not evidence. Select "
                 "record_ids to open. Selecting another matter replaces the resident body; "
