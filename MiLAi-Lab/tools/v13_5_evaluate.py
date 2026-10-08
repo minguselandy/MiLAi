@@ -499,6 +499,14 @@ def retained_agent_final_linkage(
     metadata = {"status": "agent_response_retained", "attempts": 0,
                 "tools_available": False, "execution_candidate_delivered": True,
                 "protocol": "agent_response_v1", "model_generation": False}
+    finalization = row.get("finalization")
+    if isinstance(finalization, dict) and "observation_receipts_appended" in finalization:
+        # Old retained deliveries omit this field. Explicit False still means
+        # the whole delivered answer must match the original Agent HTTP text.
+        # An appended program receipt is not additional model-generated text.
+        if finalization["observation_receipts_appended"] is not False:
+            return {"status": "UNKNOWN", "reason": "appended_receipts_require_separate_linkage"}
+        metadata["observation_receipts_appended"] = False
     if (freeze.get("config", {}).get("finalization") != "receipt_or_agent_response_v1"
             or row.get("finalization") != metadata):
         return {"status": "UNKNOWN", "reason": "unrecognized_retained_agent_contract"}

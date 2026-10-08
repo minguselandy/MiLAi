@@ -229,6 +229,26 @@ def test_retained_agent_answer_requires_original_http_and_delivery(
     assert (linkage["status"] == "PASS") is (fault == "none")
     assert pack["acceptance_evidence_complete"] is (fault == "none")
     assert pack["semantic_verdict"] == "UNREVIEWED"
+    if fault == "none":
+        # Current Host records whether real query receipts were appended. False
+        # preserves the original HTTP contract, including the delivery trace.
+        metadata["observation_receipts_appended"] = False
+        delivery["observation_receipts_appended"] = False
+        save(bank / f"{identity}-attempt-0.json", row)
+        save(bank / f"{identity}-result.json", row)
+        trace.write_text("".join(json.dumps(e) + "\n" for e in events))
+        current = EVAL.evaluate(root, cohort="L2")["case_packs"][0]
+        assert current["acceptance_evidence_complete"] is True
+        assert current["semantic_verdict"] == "UNREVIEWED"
+        metadata["observation_receipts_appended"] = True
+        delivery["observation_receipts_appended"] = True
+        save(bank / f"{identity}-attempt-0.json", row)
+        save(bank / f"{identity}-result.json", row)
+        trace.write_text("".join(json.dumps(e) + "\n" for e in events))
+        appended = EVAL.evaluate(root, cohort="L2")["case_packs"][0]
+        assert appended["acceptance_evidence_complete"] is False
+        assert appended["messages"][0]["attempts"][0]["actual_http_linkage"] == {
+            "status": "UNKNOWN", "reason": "appended_receipts_require_separate_linkage"}
 
 
 def test_resumed_failure_is_retained_and_latest_not_double_charged(tmp_path: Path) -> None:
