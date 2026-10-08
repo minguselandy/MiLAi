@@ -73,6 +73,7 @@ def prepared(
     maintenance_recipe: str | None = None,
     read_exhaustion: str | None = None,
     memory_profile: str = "ordinary",
+    memory_view_mode: str = "legacy",
     support_contract: str = "legacy",
     support_input: bool = False,
     bounded_reproposal: bool = False,
@@ -98,6 +99,7 @@ def prepared(
         "profile": "functional_v1", "host": asdict(host),
         "memory_method": memory_method,
         "memory_profile": memory_profile,
+        "memory_view_mode": memory_view_mode,
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
         "failure_delivery": "receipt_status_v4" if format_failure_receipts else
@@ -237,16 +239,19 @@ def message(root: Path, **kwargs: Any) -> dict[str, Any]:
                               **kwargs)
 
 
-@pytest.mark.parametrize("arm,memory_profile", [
-    ("B0", "ordinary"), ("B1", "ordinary"), ("B2", "ordinary"), ("M", "ordinary"),
-    ("M", "unified_v1"),
+@pytest.mark.parametrize("arm,memory_profile,memory_view_mode", [
+    ("B0", "ordinary", "legacy"), ("B1", "ordinary", "legacy"),
+    ("B2", "ordinary", "legacy"), ("M", "ordinary", "legacy"),
+    ("M", "unified_v1", "legacy"), ("M", "unified_v1", "state_driven"),
 ])
 def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, memory_profile: str,
+    memory_view_mode: str,
 ) -> None:
     root = prepared(
         tmp_path, native=True, request_interpretation=True,
         memory_profile=memory_profile,
+        memory_view_mode=memory_view_mode,
         memory_method="milai_edit_" + arm.lower() + "_v1", edit_interface_version="I2",
         edit_features={name: True for name in (
             "matter_organization", "semantic_operations", "bound_references",
@@ -282,6 +287,9 @@ def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
             })
         assert ordinal == 3
         assert actual_tool_receipt(wire)["status"] == "committed"
+        if memory_view_mode != "legacy":
+            assert any(ref["kind"] == "record" and ref["revision"] == 1
+                       for ref in materials(wire)["memory_view"]["resident_refs"])
         return {"role": "assistant", "content": "Saved your reported marker."}
 
     wires = scripted(monkeypatch, reply, native=True)

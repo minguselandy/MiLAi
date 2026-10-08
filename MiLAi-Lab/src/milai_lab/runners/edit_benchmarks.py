@@ -1012,6 +1012,10 @@ class BenchmarkRun:
             ) -> dict[str, Any]:
                 http_folder = f"maintenance/{key}/batch-{batch_index}"
                 active_request_id = f"{key}:batch:{batch_index}"
+                stage_name, _, work_ref = stage.partition(":")
+                stage_path = stage_name
+                if work_ref:
+                    stage_path += f"/work-{work_ref.rsplit(':', 1)[-1]}"
                 calls_path = folder / f"batch-{batch_index}-calls.json"
                 calls: list[dict[str, Any]] = []
                 if service.memory_profile == "unified_v1":
@@ -1028,15 +1032,18 @@ class BenchmarkRun:
                         child_index = checkpoint.value["next_batch"]
                         active_request_id += f":batch:{child_index}"
                         http_folder += f"/subbatch-{child_index}"
+                    if work_ref:
+                        if stage_name == "edit":
+                            active_request_id = work_ref
                     calls = read_json(calls_path) if calls_path.exists() else []
                     calls.append({"request_id": active_request_id, "stage": stage,
-                                  "http_key": http_folder + "/" + stage,
+                                  "http_key": http_folder + "/" + stage_path,
                                   "response_saved": False})
                     write_json(calls_path, calls)
                 response = self.call(
-                    http_folder + "/" + stage, messages, structured=True,
+                    http_folder + "/" + stage_path, messages, structured=True,
                     response_format={"type": "json_schema", "json_schema": {
-                        "name": "milai_" + stage, "schema": schema}},
+                        "name": "milai_" + stage_name, "schema": schema}},
                 )
                 if calls:
                     calls[-1]["response_saved"] = True
@@ -1047,6 +1054,7 @@ class BenchmarkRun:
                 method, delivery, session=observed.session_id, request_id=request_id,
                 date=observed.date,
                 recipe=cast(MaintenanceRecipe, self.settings["maintenance_recipe"]),
+                memory_view_mode=self.settings.get("memory_view_mode", "legacy"),
                 model_call=call, retrieval_limit=self.settings["retrieval_limit"], fit=self._fits,
                 prepare_delivery=lambda located: self._old_support_plan(
                     method, located, located["records"], observed.date, allow_create=True

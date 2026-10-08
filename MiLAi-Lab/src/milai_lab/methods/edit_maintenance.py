@@ -20,6 +20,7 @@ from milai_lab.memory.edit_units import issue_evidence
 from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.retrieval import merge_candidates
+from milai_lab.memory.working_set import record_candidate
 from milai_lab.methods.edit_memory import EditMemory
 
 MaintenanceRecipe = Literal["single_pass", "extract_then_edit"]
@@ -330,7 +331,9 @@ def _maintain_views(
                     or state["work_items"][-1]["done"])) or not (remaining or create_available):
                 state["phase"] = "complete"
                 return
-            directory = [_directory_ref(service.read(ref["record_id"])) for ref in remaining]
+            directory_refs = [_directory_ref(service.read(ref["record_id"])) for ref in remaining]
+            directory = [record_candidate(ref["record_id"], ref["revision"], ref["matter"])
+                         for ref in directory_refs]
             schema = {
                 "type": "object", "additionalProperties": False,
                 "properties": {
@@ -363,7 +366,7 @@ def _maintain_views(
             selection = state["selection"]
             Draft202012Validator(schema).validate(selection)
             identifiers = list(dict.fromkeys(selection["record_ids"]))
-            available = {ref["record_id"]: ref for ref in directory}
+            available = {ref["record_id"]: ref for ref in directory_refs}
             if any(identifier not in available for identifier in identifiers):
                 raise FunctionalRejection("EDIT_VIEW_SELECTION_UNAVAILABLE")
             create = bool(selection["create"])

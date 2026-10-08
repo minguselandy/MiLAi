@@ -488,6 +488,7 @@ def prepare(
         "edit_interface_version",
         "edit_features",
         "maintenance_recipe",
+        "memory_view_mode",
         "memory_profile",
         "memory_ranking",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
@@ -497,6 +498,8 @@ def prepare(
                          + ",".join(sorted(set(settings) - allowed)))
     if settings.get("memory_profile", "ordinary") not in {"ordinary", "unified_v1"}:
         raise ValueError("FUNCTIONAL_MEMORY_PROFILE_INVALID")
+    if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
+        raise ValueError("FUNCTIONAL_MEMORY_VIEW_MODE_INVALID")
     if settings.get("memory_ranking", "dense") not in {"dense", "activation"}:
         raise ValueError("MEMORY_RANKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
@@ -2013,6 +2016,7 @@ def message(
                 capacity.text_tokens,
                 read_limit=settings["additional_reads"],
                 material_limit=settings["ordinary_material_tokens"],
+                memory_view_mode=settings.get("memory_view_mode", "legacy"),
                 formation_interface=settings.get("formation_interface", "content_and_scope_v1"),
                 read_interface=settings.get("read_interface", "combined_selectors_v1"),
                 recent_context=settings.get("recent_context", "disabled"),
@@ -2316,7 +2320,9 @@ def message(
                 return memory.maintain_sources(
                     cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                     model_call=maintenance_call, allowed=maintenance_allowed, execute=execute,
-                    fit=maintenance_fit, prior_request_fragments=prior_request_fragments())
+                    fit=maintenance_fit, prior_request_fragments=prior_request_fragments(),
+                    memory_save_requested=bool(memory.memory_view_mode != "legacy"
+                                               and mode and mode["requires_memory_result"]))
 
             def context_hook(
                 state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
@@ -2450,6 +2456,13 @@ def message(
                         material = memory.writer_context(
                             session, message_id, freeze["config_version"], query=content
                         )
+                    if memory.memory_view_mode != "legacy":
+                        material = memory.model_material(config, for_write=(
+                            not maintenance_recipe and not for_finalization
+                            and bool({"save_memory", "update_memory"}.intersection(allowed_tools))
+                        ))
+                        wire_messages = memory.project_model_messages(config, wire_messages)
+                        material["pending_maintenance"] = memory.pending_maintenance(config)
                 trace({"event": "functional_material_delivery", "material": material})
                 trace({"event": "functional_memory_effects", "effects": effects})
                 refresh_requests()
