@@ -1,3 +1,28 @@
+# Fixed experiment publication: 2026-10-08 14:52:48 UTC
+
+User requests experiment summary and GitHub submission. This follow-up changes only
+four reports/handoff, not source/tests/config/workflow, and starts no model or score.
+main b3/PR116+117 merged, own/main Fast passed;61 Full skipped,no797 Full observed.
+PR118 source38 ownFast37795955212 in_progress at snapshot; new report head must be
+verified separately. Frozen38 independent four-message root is PREPARED/HTTP0,
+no results/no real runner; actual source remains38 despite subsequent document commit.
+Do not dispatch from this snapshot without current ownership/terminal inspection.
+
+505 B0/B1/B2 closed update31/27/26 of72,QA43/33/34 of73;M/Append partial notzero.
+d62 M closed32predict+score:16/72valid63,30/73valid70;not cross-version ranking.
+9a Reader/Writer finite comparisons closed;no multi-round causal advantage.
+721 FAILED32saved predictions/85questions,33maintenance/88Reader,othersunrun/noscore;
+356 fourCOMPLETED/saveclass[];d3661COMPLETED/1FAILED/2NOT_RUN/templatepreHTTP;
+61 fourCOMPLETED/continue_prior/false cancellation+resultlength/savepartial.
+Four recent runs total335gen3608899known/charged,241embed16365,newunknown0.
+Ledger47416/206714013known/206990709charged/embed1939409/historyunknown6,no in-flight.
+Original roots/source/config/results/invalid labels stay;no overwrites/restarts/reset.
+Three existing agents only read-check existing evidence;Root integrates/ownsserialHTTP.
+Root356+61 fourdeliveredanswers each,72117 answers;full private/source independent
+audit not claimed. SamefamilyJudge/devreview not independent confirmation.
+Full goal active/incomplete,originalsame-version277/holdout/external/Host/sixdeliveries
+remain,16unused,no finalcandidate,Product NO_GO. All earlier blocks are historical.
+
 # Development handoff: 2026-10-08 14:50:21 UTC maintenance instruction scope
 
 PR117 merged main b3;797 own Fast37794118847/main Fast37795630102 success;
