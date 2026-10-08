@@ -303,6 +303,29 @@ def _append_work(
     })
 
 
+def _has_semantic_receipt(receipts: list[dict[str, Any]]) -> bool:
+    return any(
+        receipt.get("ok") and receipt.get("id") is not None
+        and receipt.get("revision") is not None and (
+            receipt.get("status") in {"committed", "no_change"}
+            or receipt.get("original_status") in {"committed", "no_change"}
+        ) for receipt in receipts
+    )
+
+
+def has_pending_save(state: dict[str, Any]) -> bool:
+    """An explicit save is pending when any actual work scope lacks confirmation."""
+    if not state.get("memory_save_requested"):
+        return False
+    if state["phase"] != "complete" or state.get("unprocessed"):
+        return True
+    scopes = [item.get("result", {}) for item in state.get("work_items", [])] or list(
+        state.get("batch_results", {}).values()
+    )
+    return any(not _has_semantic_receipt(scope.get("receipts", [])) for scope in scopes) \
+        if scopes else not _has_semantic_receipt(state.get("receipts", []))
+
+
 def _maintain_views(
     method: EditMemory, delivery: dict[str, Any], state: dict[str, Any], *,
     session: str, request_id: str, date: str, recipe: MaintenanceRecipe,
@@ -520,6 +543,7 @@ def maintain_event(
                 "source_batch_count": len(state["batches"])} if "batches" in state else {}),
             **({"prior_request_id": state["prior_request_id"]}
                if "prior_request_id" in state else {}),
+            **({"prior_session": state["prior_session"]} if "prior_session" in state else {}),
             **({"episode_index": copy.deepcopy(state["episode_index"])}
                if "episode_index" in state else {}),
             **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
@@ -571,6 +595,10 @@ def maintain_event(
         if state["phase"] == "batches":
             while state["next_batch"] < len(state["batches"]):
                 index = state["next_batch"]
+                if str(index) in state["batch_results"]:
+                    state["next_batch"] += 1
+                    save()
+                    continue
                 batch = maintain_event(
                     method, state["batches"][index], session=session,
                     request_id=f"{request_id}:batch:{index}", date=date, recipe=recipe,
@@ -709,6 +737,8 @@ def resume_maintenance(
     candidate_mode: CandidateMode = "combined_dense",
     memory_view_mode: MemoryViewMode = "legacy",
     memory_save_requested: bool = False,
+    execute: bool = True,
+    new_attempt_session: str | None = None,
 ) -> dict[str, Any]:
     """Reconcile old proposal outcomes, then use an explicit new semantic identity.
 
@@ -716,6 +746,11 @@ def resume_maintenance(
     commit remains unknown unless its existing operation receipt is observable.
     An unknown model response can be left intact while a caller requests a new
     semantic attempt. Confirmed source batches are reused rather than edited again.
+    A completed empty explicit save can likewise get an explicit new attempt;
+    completion of the old call is not proof of saved semantic memory. The Host's
+    current permission boundary remains authoritative. ``execute=False`` only
+    inspects and reconciles receipts. A cross-session attempt uses its current
+    session for new operations while retaining the old source and journal refs.
     """
     service = method.service
     ns = (*service.namespace, "edit_maintenance")
@@ -736,7 +771,10 @@ def resume_maintenance(
         method, delivery, request_id=prior_request_id, execute=False, **options
     )
     state = copy.deepcopy(prior.value)
-    if state["phase"] == "complete":
+    retry_completed = (
+        state["phase"] == "complete" and has_pending_save(state) and new_attempt_id is not None
+    )
+    if state["phase"] == "complete" and (not retry_completed or not execute):
         return {**original, "replayed": True}
 
     reconciliation: list[dict[str, Any]] = []
@@ -761,12 +799,13 @@ def resume_maintenance(
                 child_options["model_call"] = work_call
                 inspected = maintain_event(
                     method, {**delivery, "materialize_selected_support": True},
-                    request_id=child_id, **child_options,
+                    request_id=child_id, execute=execute and new_attempt_id is None,
+                    **child_options,
                 )
             else:
                 inspected = resume_maintenance(
                     method, {**delivery, "materialize_selected_support": True},
-                    prior_request_id=child_id, **child_options,
+                    prior_request_id=child_id, execute=execute, **child_options,
                 )
             reconciliation.append({"request_id": child_id, "result": inspected})
             if inspected.get("outcome") == "semantic_outcome_unconfirmed":
@@ -782,23 +821,23 @@ def resume_maintenance(
         service.store.put(ns, key, state, index=False)
         original = maintain_event(method, delivery, request_id=prior_request_id,
                                   execute=False, **options)
-        if state["phase"] == "complete":
+        if state["phase"] == "complete" and not retry_completed:
             return {**original, "replayed": True, "reconciliation": reconciliation}
-        if new_attempt_id is None and state["phase"] == "views" and (
+        if execute and new_attempt_id is None and state["phase"] == "views" and (
             not pending or all(service.store.get(
                 ns, json.dumps([session, work["request_id"]], ensure_ascii=False)
             ) is None for work in pending)
         ):
             return {**maintain_event(method, delivery, request_id=prior_request_id, **options),
                     "reconciliation": reconciliation}
-    elif state.get("batches"):
+    elif state.get("batches") and not retry_completed:
         index = state["next_batch"]
         child_id = f"{prior_request_id}:batch:{index}"
         child = service.store.get(ns, json.dumps([session, child_id], ensure_ascii=False))
         if child is not None:
             inspected = resume_maintenance(
                 method, state["batches"][index], prior_request_id=child_id,
-                **options,
+                execute=execute, **options,
             )
             reconciliation.append({"request_id": child_id, "result": inspected})
             if inspected.get("outcome") == "semantic_outcome_unconfirmed":
@@ -817,7 +856,7 @@ def resume_maintenance(
                 original = maintain_event(
                     method, delivery, request_id=prior_request_id, execute=False, **options
                 )
-                if state["phase"] == "complete":
+                if state["phase"] == "complete" and not retry_completed:
                     return {**original, "replayed": True, "reconciliation": reconciliation}
     else:
         for index in range(len(state.get("proposals", []))):
@@ -854,18 +893,21 @@ def resume_maintenance(
             original = maintain_event(
                 method, delivery, request_id=prior_request_id, execute=False, **options
             )
-            if state["phase"] == "complete":
+            if state["phase"] == "complete" and not retry_completed:
                 return {**original, "replayed": True, "reconciliation": reconciliation}
 
-    if new_attempt_id is None:
+    if not execute or new_attempt_id is None:
         return {**original, "reconciliation": reconciliation,
                 "continuation": "explicit_new_semantic_attempt_required"}
     if not new_attempt_id or new_attempt_id == prior_request_id:
         raise FunctionalRejection("EDIT_MAINTENANCE_NEW_ATTEMPT_ID_REQUIRED")
-    new_key = json.dumps([session, new_attempt_id], ensure_ascii=False)
+    attempt_session = session if new_attempt_session is None else new_attempt_session
+    new_key = json.dumps([attempt_session, new_attempt_id], ensure_ascii=False)
     previous_attempt = service.store.get(ns, new_key)
     if previous_attempt is not None:
         if previous_attempt.value.get("prior_request_id") != prior_request_id:
+            raise FunctionalRejection("EDIT_MAINTENANCE_NEW_ATTEMPT_ALREADY_BOUND")
+        if previous_attempt.value.get("prior_session", attempt_session) != session:
             raise FunctionalRejection("EDIT_MAINTENANCE_NEW_ATTEMPT_ALREADY_BOUND")
     else:
         replacement = {
@@ -874,34 +916,60 @@ def resume_maintenance(
             "prior_request_id": prior_request_id,
             "date": state.get("date", date),
             **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
+            **({"prior_session": session} if attempt_session != session else {}),
         }
         if "changes" in state:
             replacement.update(changes=copy.deepcopy(state["changes"]), phase="locate")
         if "work_items" in state:
             confirmed_work = [copy.deepcopy(work) for work in state["work_items"]
-                              if work.get("status") == "completed"]
-            replacement.update(
-                phase="views", directory=copy.deepcopy(state["directory"]),
-                work_items=confirmed_work,
-                receipts=[receipt for work in confirmed_work
-                          for receipt in work["result"]["receipts"]],
-            )
-            for work in state["work_items"]:
-                if work.get("status") != "completed":
-                    _append_work(replacement, new_attempt_id, work["records"],
-                                 create=work["create"], done=work["done"])
+                              if work.get("status") == "completed" and (
+                                  not retry_completed
+                                  or _has_semantic_receipt(work["result"]["receipts"])
+                              )]
+            if not retry_completed or confirmed_work:
+                replacement.update(
+                    phase="views", directory=copy.deepcopy(state["directory"]),
+                    work_items=confirmed_work,
+                    receipts=[receipt for work in confirmed_work
+                              for receipt in work["result"]["receipts"]],
+                )
+                for work in state["work_items"]:
+                    if work.get("status") != "completed" or (
+                        retry_completed and not _has_semantic_receipt(work["result"]["receipts"])
+                    ):
+                        _append_work(replacement, new_attempt_id, work["records"],
+                                     create=work["create"], done=work["done"])
         if state.get("batches"):
             confirmed = {
                 str(index): state["batch_results"][str(index)]
-                for index in range(state["next_batch"])
+                for index in range(state["next_batch"]) if not retry_completed
+                or _has_semantic_receipt(state["batch_results"][str(index)]["receipts"])
             }
             replacement.update(
                 phase="batches", batches=copy.deepcopy(state["batches"]),
-                batch_results=confirmed, next_batch=state["next_batch"],
+                batch_results=confirmed, next_batch=0 if retry_completed else state["next_batch"],
                 receipts=[receipt for batch in confirmed.values() for receipt in batch["receipts"]],
             )
+            for index in range(state["next_batch"]):
+                if str(index) in confirmed:
+                    continue
+                child = service.store.get(ns, json.dumps(
+                    [session, f"{prior_request_id}:batch:{index}"], ensure_ascii=False
+                ))
+                if child is not None and "changes" in child.value:
+                    service.store.put(ns, json.dumps(
+                        [attempt_session, f"{new_attempt_id}:batch:{index}"], ensure_ascii=False
+                    ), {
+                        "binding": copy.deepcopy(child.value["binding"]), "phase": "locate",
+                        "changes": copy.deepcopy(child.value["changes"]),
+                        "prior_context": copy.deepcopy(child.value.get("prior_context", [])),
+                        "date": child.value.get("date", date), "receipts": [], "unprocessed": [],
+                        **({"memory_save_requested": True}
+                           if state.get("memory_save_requested") else {}),
+                    }, index=False)
         service.store.put(ns, new_key, replacement, index=False)
     return {
-        **maintain_event(method, delivery, request_id=new_attempt_id, **options),
+        **maintain_event(method, delivery, request_id=new_attempt_id,
+                         **{**options, "session": attempt_session}),
         "new_attempt_id": new_attempt_id, "reconciliation": reconciliation,
     }

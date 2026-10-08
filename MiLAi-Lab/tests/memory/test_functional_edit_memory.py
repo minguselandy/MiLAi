@@ -2446,6 +2446,117 @@ def test_staged_selection_keeps_unknown_and_allows_explicit_empty_result(tmp_pat
         assert original["phase"] == "select_pending"  # Original unknown is retained.
 
 
+def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path):
+    from milai_lab.methods.edit_maintenance import (
+        has_pending_save,
+        maintain_event,
+        resume_maintenance,
+    )
+
+    calls = []
+    options = dict(session="s", date="2026-10-08", recipe="extract_then_edit",
+                   memory_view_mode="state_driven", memory_save_requested=True)
+    current = cfg()
+
+    def commit(operation, proposal, mapping):
+        memory.service.store.put(
+            namespace(memory.service), memory._writer_key(current, "edit-writer-active:"),
+            {"mapping_id": mapping["mapping_id"]}, index=False,
+        )
+        memory.note_delivered_fragment_handles(
+            current, [row["evidence_id"] for row in mapping["evidence"].values()],
+        )
+        return memory.apply_writer_proposal(current, operation, proposal)
+
+    with opened(tmp_path, arm="B1", interface_version="I2", features=NEXT_FEATURES) as memory:
+        writer_turn(memory, "seed", "The marker is green. The alarm is loud.")
+        records = [json.loads(invoke(memory, "save_memory", {"proposal": {
+            "action": "create", "matter": matter, "clauses": [{
+                "text": text, "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+            }],
+        }}, f"seed-{index}", "seed").content) for index, (matter, text) in enumerate([
+            ("Marker color", "The marker is green."), ("Alarm tone", "The alarm is loud."),
+        ])]
+        assert all(row["ok"] for row in records)
+        turn(memory, "u", "Remember the marker is blue and the alarm is soft.")
+        ref = memory._binding(cfg())["source_ref"]
+        delivery = memory.writer.prepare([ref], "", selected_records=[], redelivered_ranges=[])
+
+        def empty(stage, messages, schema):
+            calls.append(stage)
+            packet = json.loads(messages[-1]["content"])
+            if stage == "extract":
+                return {"changes": []}
+            if stage.startswith("select:"):
+                target = "Marker color" if not packet["processed"] else "Alarm tone"
+                return {"record_ids": [next(row["record_id"] for row in packet["directory"]
+                                            if row["description"] == target)],
+                        "create": False, "done": target == "Alarm tone"}
+            if stage.endswith("work:1"):
+                return {}  # This completed scope has no semantic receipt.
+            return {"records": {"r1": {"action": "edit", "edits": [{
+                "operation": "replace", "target_unit": "u1", "text": "The marker is blue.",
+                "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"},
+            }]}}}
+
+        first = maintain_event(memory.writer, delivery, request_id="save", model_call=empty,
+                               commit=commit, **options)
+        assert first["status"] == "completed" and len(first["receipts"]) == 1
+        ns = (*memory.service.namespace, "edit_maintenance")
+        original = copy.deepcopy(memory.service.store.get(ns, json.dumps(["s", "save"])).value)
+        assert all(work["status"] == "completed" for work in original["work_items"])
+        assert original["work_items"][1]["result"]["receipts"] == []
+        assert has_pending_save(original)
+        assert memory.service.read(records[0]["id"])["value"]["revision"] == 2
+        assert memory.service.read(records[1]["id"])["value"]["revision"] == 1
+    with opened(tmp_path, arm="B1", interface_version="I2", features=NEXT_FEATURES) as memory:
+        memory.service.capture_user(
+            "next", "continue", "Continue saving the remaining information."
+        )
+        memory.writer_context("next", "continue", "functional-m-test-v1")
+        current = cfg("continue")
+        current["configurable"]["v13_session"] = "next"
+
+        def create(stage, messages, schema):
+            calls.append(stage)
+            assert stage == "edit:continued:work:1"  # No repeated select/extract/committed work.
+            packet = json.loads(messages[-1]["content"])
+            assert len(packet["delivery"]["records"]) == 1
+            assert packet["delivery"]["records"][0]["matter"] == "Alarm tone"
+            assert "Remember the marker is blue and the alarm is soft." in messages[-1]["content"]
+            return {"records": {"r1": {"action": "edit", "edits": [{
+                "operation": "replace", "target_unit": "u1", "text": "The alarm is soft.",
+                "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"},
+            }]}}}
+
+        count = len(calls)
+        inspected = resume_maintenance(
+            memory.writer, delivery, prior_request_id="save", model_call=create, commit=commit,
+            new_attempt_id="continued", new_attempt_session="next", execute=False, **options,
+        )
+        assert len(inspected["receipts"]) == 1 and len(calls) == count
+        assert memory.service.store.get(ns, json.dumps(["next", "continued"])) is None
+        saved = resume_maintenance(
+            memory.writer, delivery, prior_request_id="save", model_call=create, commit=commit,
+            new_attempt_id="continued", new_attempt_session="next", **options,
+        )
+        assert saved["status"] == "completed" and saved["semantic_write_performed"], saved
+        assert saved["prior_session"] == "s" and len(memory.service.records()) == 2
+        assert all(row["value"]["revision"] == 2 for row in memory.service.records())
+        assert memory.service.read(records[1]["id"])["value"]["source_ref"] == ref
+        completed_state = memory.service.store.get(ns, json.dumps(["next", "continued"])).value
+        assert not has_pending_save(completed_state)
+        assert memory.service.store.get(ns, json.dumps(["s", "save"])).value == original
+        count = len(calls)
+        replayed = resume_maintenance(
+            memory.writer, delivery, prior_request_id="save", model_call=create, commit=commit,
+            new_attempt_id="continued", new_attempt_session="next", **options,
+        )
+        assert replayed["status"] == "completed" and len(calls) == count
+        assert len(memory.service.records()) == 2 and calls.count("extract") == 1
+
+
 def test_shared_reader_expands_actual_exception_and_history_without_inheriting_scope(tmp_path):
     from milai_lab.memory.edit_units import read_applicability
 
