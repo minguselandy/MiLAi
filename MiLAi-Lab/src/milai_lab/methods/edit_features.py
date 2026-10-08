@@ -407,8 +407,10 @@ def feature_proposal_schema(
                             item["properties"]["assertion"] = copy.deepcopy(current_assertion)
                         item["required"].append("assertion")
 
-    def retained_text(item: dict[str, Any]) -> None:
-        if not features.source_metadata or "from_unit" not in item["properties"]:
+    def retained_text(item: dict[str, Any], *, keep_only: bool = False) -> None:
+        if not features.source_metadata or (
+            not keep_only and "from_unit" not in item["properties"]
+        ):
             return
         item["required"].remove("text")
         item["anyOf"] = [
@@ -416,6 +418,8 @@ def feature_proposal_schema(
             {"required": ["from_unit"],
              "properties": {"assertion": {"required": ["keep"]}}},
         ]
+        if keep_only:
+            item["anyOf"][1].pop("required")
 
     for variant in variants:
         fields = variant["properties"]
@@ -428,12 +432,13 @@ def feature_proposal_schema(
             prior_contents = [
                 alias for alias in refs["u"] if mapping["units"][alias]["role"] == "content"
             ]
-            if prior_contents:
+            if prior_contents and not (arm == "B0" and features.source_metadata and for_generation):
                 clause["properties"]["from_unit"] = reference("u", prior_contents)
         fields["clauses"] = {**unit, "items": clause}
         variant["required"] = ["clauses" if key == "units" else key for key in variant["required"]]
         if arm not in {"B2", "M"}:
-            retained_text(clause)
+            retained_text(clause, keep_only=arm == "B0"
+                          and fields["action"]["const"] == "rewrite" and bool(prior_contents))
             continue
         relation = fields.pop("relations")["items"]
         binding = _object(

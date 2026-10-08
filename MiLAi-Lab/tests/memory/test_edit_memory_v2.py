@@ -1109,14 +1109,24 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
             ),
         )
         original = copy.deepcopy(service.read(saved["id"])["value"])
+        rows = [service.read(saved["id"])]
+        cancellation_text = "Tuesday reminders use the general quiet tone again."
+        if arm == "B0":
+            other, _ = next_save(service, method, key="other-reminder")
+            rows.append(service.read(other["id"]))
+            cancellation_text += (
+                " Tuesday reminders vibrate before chiming, and Tuesday reminders do not flash."
+            )
         partial, cancellation = next_request(
-            service, method, "cancel-local", "Tuesday reminders use the general quiet tone again.",
-            [service.read(saved["id"])],
+            service, method, "cancel-local", cancellation_text, rows,
         )
         retained = {
             "text": "User reports quiet reminders.", "evidence": [],
             "keep_support": ["h1"], "assertion": {"keep": "h1"},
         }
+        if arm == "B0":
+            retained.pop("text")
+            retained.pop("keep_support")
         public = clause_proposal(
             {"action": "rewrite", "target": "r1", "units": [retained]},
             conditioned=method.conditioned,
@@ -1127,16 +1137,50 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
         assert not rejected["ok"] and rejected["reason"] == "current_boundary_source_required"
         assert service.read(saved["id"])["value"] == original
         public["revision_evidence"] = ["e1"]
+        if arm == "B0":
+            public["clauses"].extend([
+                {"text": "Tuesday reminders vibrate before chiming.", "evidence": ["e1"],
+                 "assertion": {"source_evidence": "e1", "kind": "reported"}},
+                {"text": "Tuesday reminders do not flash.", "evidence": ["e1"],
+                 "assertion": {"source_evidence": "e1", "kind": "reported"}},
+            ])
+            assert "from_unit" not in json.dumps(partial["schema"])
+            assert "from_unit" not in method.instructions()
+            generated = copy.deepcopy(public)
+            generated.pop("target")
+            Draft202012Validator(partial["schema"]).validate(
+                {"creates": [], "records": {"r1": generated}}
+            )
+            wrong_target = copy.deepcopy(public)
+            wrong_target["target"] = "r2"
+            with pytest.raises(FunctionalRejection, match="PUBLIC_PROPOSAL_INVALID"):
+                method.decode_proposal(wrong_target, partial["mapping"])
+            wrong_role = copy.deepcopy(public)
+            wrong_role["clauses"][0]["role"] = "condition"
+            with pytest.raises(FunctionalRejection, match="PUBLIC_PROPOSAL_INVALID"):
+                method.decode_proposal(wrong_role, partial["mapping"])
         changed = copy.deepcopy(public)
         changed["clauses"][0]["text"] = "User reports loud reminders."
         with pytest.raises(FunctionalRejection, match="CHANGED_CLAIM"):
             method.decode_proposal(changed, partial["mapping"])
         decoded = method.decode_proposal(public, partial["mapping"])
+        if arm == "B0":
+            legacy = copy.deepcopy(public)
+            legacy["clauses"][0]["from_unit"] = "u1"
+            assert method.decode_proposal(legacy, partial["mapping"]) == decoded
+            legacy["clauses"][1]["from_unit"] = "u1"
+            with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
+                method.decode_proposal(legacy, partial["mapping"])
         receipt = method.apply("s", "remove-local", decoded)
         assert receipt["ok"] and receipt["revision"] == 2
         assert method.apply("s", "remove-local", decoded)["replayed"]
         current = service.read(saved["id"])["value"]
-        assert len(current["edit_state"]["units"]) == 1
+        assert len(current["edit_state"]["units"]) == (3 if arm == "B0" else 1)
+        if arm == "B0":
+            assert [u["text"] for u in current["edit_state"]["units"][1:]] == [
+                "Tuesday reminders vibrate before chiming.", "Tuesday reminders do not flash.",
+            ]
+            assert all(u["assertion"]["role"] == "user" for u in current["edit_state"]["units"])
         assert {
             k: v for k, v in current["edit_state"]["units"][0].items() if k != "unit_id"
         } == {
@@ -1193,6 +1237,10 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
         assert service.read(saved["id"], 1)["value"]["edit_state"]["units"]
         assert service.read(saved["id"], 2)["value"]["edit_state"]["units"]
         assert service.read(saved["id"], 3)["value"]["edit_state"]["units"] == []
+    if arm == "B0":
+        with opened(tmp_path, arm) as (service, _):
+            assert service.read(saved["id"], 2)["value"] == current
+            assert service.read(saved["id"], 3)["value"]["edit_state"]["units"] == []
 
 
 def test_next_contract_occurrence_time_restart_immutable_and_unknown(tmp_path):

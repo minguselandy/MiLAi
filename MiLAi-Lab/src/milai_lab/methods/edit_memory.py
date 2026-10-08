@@ -321,14 +321,21 @@ class EditMemory:
                 "No hidden body is filled in. retract_record is a separate entire-record "
                 "withdrawal with new actual e evidence and no replacement body. "
                 "No local edits are available. "
-                "In a rewrite, from_unit=u# identifies which delivered unit the generated "
-                "clause or condition continues, independently of evidence. Each prior unit "
-                "has at most one such continuation, with the same role. It permits retaining "
-                "the existing binding after a supported value change; it retains no old text "
-                "or support by itself. "
             )
+            if self.arm != "B0" or not self.features.source_metadata:
+                instruction += (
+                    "In a rewrite, from_unit=u# identifies which delivered unit the generated "
+                    "clause or condition continues, independently of evidence. Each prior unit "
+                    "has at most one such continuation, with the same role. It permits retaining "
+                    "the existing binding after a supported value change; it retains no old text "
+                    "or support by itself. "
+                )
             if self.features.source_metadata:
                 instruction += (
+                    "For an unchanged old content clause, assertion={keep:h#} selects its "
+                    "actual text, support and attribution. Omit text to reuse it, or repeat "
+                    "it exactly; keep_support need not be repeated. "
+                    if self.arm == "B0" else
                     "With from_unit=u# and assertion={keep:h#} for that same old unit, "
                     "omit text to reuse its actual text, or repeat it exactly. This also reuses "
                     "its own support without repeating keep_support. Exact old text with "
@@ -449,6 +456,9 @@ class EditMemory:
                 }
                 if self.features.source_metadata:
                     retained["assertion"] = {"keep": f"h{index}"}
+                    if self.arm == "B0":
+                        retained.pop("text")
+                        retained.pop("keep_support")
                 correction["units"].append(retained)
             if self.conditioned:
                 correction["relations"] = [
@@ -1624,10 +1634,16 @@ class EditMemory:
         for item in proposal.get("units", []):
             if proposal["action"] == "rewrite" and "text" not in item:
                 support = bound["support"].get(item["assertion"]["keep"])
+                retained_unit = item.get("from_unit")
+                if self.arm == "B0" and retained_unit is None and support is not None:
+                    retained_unit = support.get("unit")
                 if (support is None or support["record"] != target
-                        or support.get("unit") != item["from_unit"]):
+                        or not retained_unit or support.get("unit") != retained_unit):
                     raise FunctionalRejection("EDIT_ASSERTION_UNIT_BINDING_INVALID")
-                item["text"] = alias_unit(item["from_unit"])["text"]
+                prior_unit = alias_unit(retained_unit)
+                if self.arm == "B0" and prior_unit["role"] != "content":
+                    raise FunctionalRejection("EDIT_ASSERTION_UNIT_BINDING_INVALID")
+                item["text"] = prior_unit["text"]
             handles, kept = supports(item)
             origin = {support["unit"] for support in kept if "unit" in support}
             if len(origin) != len(kept) or len(origin) > 1:
