@@ -270,7 +270,8 @@ class EditMemory:
             )
         if self.features.source_metadata:
             instruction += (
-                "Every generated unit or text edit selects assertion={source:e#,kind:reported|"
+                "Every generated unit or text edit selects "
+                "assertion={source_evidence:e#,kind:reported|"
                 "inferred|observed|uncertain} from that item's new evidence. The service records "
                 "the ACTUAL speaker role and occurrence time; this does not certify truth. "
                 "Preserve assertion ownership in wording too: a user's report is a user report; "
@@ -410,7 +411,7 @@ class EditMemory:
         for formed_unit in formation_units:
             formed_unit["evidence"] = ["e1"]
             if self.features.source_metadata:
-                formed_unit["assertion"] = {"source": "e1", "kind": "reported"}
+                formed_unit["assertion"] = {"source_evidence": "e1", "kind": "reported"}
         create: dict[str, Any] = {"action": "create", "units": formation_units}
         if self.conditioned:
             create["relations"] = [
@@ -427,7 +428,7 @@ class EditMemory:
             "keep_support": ["h1"],
         }
         if self.features.source_metadata:
-            change["assertion"] = {"source": "e1", "kind": "reported"}
+            change["assertion"] = {"source_evidence": "e1", "kind": "reported"}
         if self.arm in {"B0", "B2"}:
             correction: dict[str, Any] = {
                 "action": "rewrite",
@@ -485,7 +486,7 @@ class EditMemory:
                 "inclusive to April 8 exclusive, with a framework-declared Source calendar. "
                 "Date condition fragment in that content's conditions[]: "
                 '{"text":"Only from April 1 inclusive to April 8 exclusive.",'
-                '"evidence":["e1"],"assertion":{"source":"e1","kind":"reported",'
+                '"evidence":["e1"],"assertion":{"source_evidence":"e1","kind":"reported",'
                 '"applicability":{"effective_from":"2025-04-01",'
                 '"effective_until":"2025-04-08"}},"binding":{"evidence":["e1"]}}. '
             )
@@ -536,7 +537,8 @@ class EditMemory:
                 result["keep_support"] = [support]
             if self.features.source_metadata:
                 result["assertion"] = (
-                    {"keep": support} if keep_attribution else {"source": "e1", "kind": "reported"}
+                    {"keep": support} if keep_attribution
+                    else {"source_evidence": "e1", "kind": "reported"}
                 )
             return result
 

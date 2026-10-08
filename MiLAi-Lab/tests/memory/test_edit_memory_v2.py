@@ -238,7 +238,7 @@ def next_unit(text, evidence="e1", role="content", kind="reported"):
         "text": text,
         "role": role,
         "evidence": [evidence],
-        "assertion": {"source": evidence, "kind": kind},
+        "assertion": {"source_evidence": evidence, "kind": kind},
     }
 
 
@@ -882,6 +882,18 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
             method.decode_envelope({"records": {"r1": wrong_support}}, view["mapping"])
         decoded = method.decode_envelope({"records": {"r1": edit}}, view["mapping"])[0]
+        legacy_attribution = copy.deepcopy(edit)
+        for item in legacy_attribution["edits"]:
+            item["assertion"]["source"] = item["assertion"].pop("source_evidence")
+        assert not validator.is_valid({"records": {"r1": legacy_attribution}})
+        assert (
+            method.decode_envelope({"records": {"r1": legacy_attribution}}, view["mapping"])[0]
+            == decoded
+        )
+        conflicting_attribution = copy.deepcopy(edit)
+        conflicting_attribution["edits"][0]["assertion"]["source"] = "e1"
+        with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
+            method.decode_envelope({"records": {"r1": conflicting_attribution}}, view["mapping"])
         legacy_edit = copy.deepcopy(edit)
         legacy_edit["edits"][0]["operation"] = "change_condition"
         assert not validator.is_valid({"records": {"r1": legacy_edit}})
@@ -946,6 +958,9 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         decoded_stale = method.decode_proposal(stale, view["mapping"])
         legacy_stale = copy.deepcopy(stale)
         legacy_stale["edits"][0]["operation"] = "change_value"
+        legacy_stale["edits"][0]["assertion"]["source"] = legacy_stale["edits"][0][
+            "assertion"
+        ].pop("source_evidence")
         assert method.decode_proposal(legacy_stale, view["mapping"]) == decoded_stale
         rejected = method.apply("s", "stale", decoded_stale)
         assert not rejected["ok"] and service.read(saved["id"])["value"]["revision"] == 3

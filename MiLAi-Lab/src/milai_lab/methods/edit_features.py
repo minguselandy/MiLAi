@@ -342,10 +342,10 @@ def feature_proposal_schema(
             "oneOf": [
                 _object(
                     {
-                        "source": reference("e"),
+                        "source_evidence": reference("e"),
                         "kind": {"enum": ["reported", "inferred", "observed", "uncertain"]},
                     },
-                    ["source", "kind"],
+                    ["source_evidence", "kind"],
                 ),
                 _object({"keep": reference("h")}, ["keep"]),
             ]
@@ -368,12 +368,25 @@ def feature_proposal_schema(
                 },
                 [],
             )
+        if not for_generation:
+            legacy_assertion = copy.deepcopy(assertion["oneOf"][0])
+            legacy_assertion["properties"]["source"] = legacy_assertion["properties"].pop(
+                "source_evidence"
+            )
+            legacy_assertion["required"] = ["source", "kind"]
+            assertion["oneOf"].insert(1, legacy_assertion)
         assertion["oneOf"] = [
             v
             for v in assertion["oneOf"]
-            if ("source" in v["properties"] and refs["e"])
+            if (("source_evidence" in v["properties"] or "source" in v["properties"])
+                and refs["e"])
             or ("keep" in v["properties"] and refs["h"])
         ]
+        current_assertions = [v for v in assertion["oneOf"] if "keep" not in v["properties"]]
+        current_assertion = (
+            current_assertions[0] if len(current_assertions) == 1
+            else {"oneOf": current_assertions}
+        )
         for variant in variants:
             fields = variant["properties"]
             if "units" in fields:
@@ -381,9 +394,7 @@ def feature_proposal_schema(
                 item["properties"]["assertion"] = copy.deepcopy(assertion)
                 item["required"].append("assertion")
                 if fields["action"]["const"] == "create":
-                    item["properties"]["assertion"] = next(
-                        v for v in assertion["oneOf"] if "source" in v["properties"]
-                    )
+                    item["properties"]["assertion"] = copy.deepcopy(current_assertion)
             if "edits" in fields:
                 for item in fields["edits"]["items"]["oneOf"]:
                     if "text" in item["properties"]:
@@ -393,9 +404,7 @@ def feature_proposal_schema(
                             "change_value",
                             "change_condition",
                         }:
-                            item["properties"]["assertion"] = next(
-                                v for v in assertion["oneOf"] if "source" in v["properties"]
-                            )
+                            item["properties"]["assertion"] = copy.deepcopy(current_assertion)
                         item["required"].append("assertion")
     for variant in variants:
         fields = variant["properties"]
@@ -569,6 +578,11 @@ def compile_semantic_operations(
 ) -> dict[str, Any]:
     """Structural compilation only. The model chooses meaning and applicability."""
     result = compile_clause_proposal(proposal)
+    for item in [*result.get("units", []), *result.get("edits", [])]:
+        assertion = item.get("assertion")
+        if assertion and "source_evidence" in assertion:
+            # Reuse the existing attribution path with the exact selected fragment.
+            assertion["source"] = assertion.pop("source_evidence")
     if result["action"] == "retract_record":
         return {
             "action": "rewrite",
