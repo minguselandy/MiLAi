@@ -2634,6 +2634,28 @@ def message(
                         execute_maintenance = not for_finalization and forgotten_at is None
                         dispatched = False
                         if tracker is not None:
+                            # Request recovery already queries the selected object.
+                            # Admit that actual observation before preparing its
+                            # maintenance binding; Agent ToolMessages are only one
+                            # producer of source deliveries.
+                            refresh_requests()
+                            if execute_maintenance and mode and mode["requires_memory_result"]:
+                                for _, request_row in tracker.rows():
+                                    progress = request_row["request_progress"]
+                                    attempts = progress["memory"]["attempts"]
+                                    if progress["business"]["status"] != "completed" or (
+                                        progress["memory"]["status"] == "committed"
+                                    ) or (
+                                        attempts and attempts[-1].get("binding", {}).get(
+                                            "source_ref") == capture["source_ref"]
+                                    ):
+                                        continue
+                                    observation = progress["business"].get("observation", {})
+                                    if "delivery_response" in observation:
+                                        _note_edit_tool_delivery(memory, config, [
+                                            ToolMessage.model_validate(
+                                                observation["delivery_response"])
+                                        ])
                             # Record original semantic bindings before the shared
                             # Writer can commit or lose its response. These are
                             # the actual source batch IDs, without another Writer.
@@ -2852,7 +2874,8 @@ def message(
                                      != capture["source_ref"]
                                      and mode.get("current_memory_write_request",
                                          mode["memory_write_request"]) == "explicit"))},
-                        save_result=save_result, reconcile_memory=reconcile,
+                        save_result=save_result if perform_maintenance else None,
+                        reconcile_memory=reconcile,
                         feedback=feedback if acknowledged_messages is not None else None,
                         semantic_attempt_binding={**request_binding,
                                                   "maintenance": new_batches or batches})
@@ -3185,10 +3208,18 @@ def message(
                         and effects["visibility"]["operations"]
                     )
                     or output.get("execution_stop")
+                    or (
+                        mode and mode["requires_memory_result"]
+                        and effects["semantic_memory"]["status"]
+                        in {"not_committed", "partial", "unknown"}
+                    )
                 ):
                     final = business_response(response_input, effects,
                         json.loads(str(response_input[0].content).splitlines()[-1]),
-                        execution_stop=output.get("execution_stop"), current_mode=mode)
+                        execution_stop=output.get("execution_stop"), current_mode=mode,
+                        include_business=bool(effects["business"]["operations"]
+                            or effects["business"]["observations"]
+                            or effects.get("application_requests")))
                     output["finalization"] = {"status": "response_rendered", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": False,
                         "protocol": "receipt_business_response_v1", "model_generation": False}

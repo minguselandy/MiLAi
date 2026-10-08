@@ -133,6 +133,7 @@ def business_response(
     messages: list[Any], effects: dict[str, Any], material: dict[str, Any],
     *, execution_stop: dict[str, Any] | None = None,
     current_mode: dict[str, Any] | None = None,
+    include_business: bool = True,
 ) -> AIMessage:
     """Use matched delivered receipts and current-message journal identities only."""
     business = effects["business"]
@@ -164,13 +165,14 @@ def business_response(
             source_refs.add(body.get("source_ref", ""))
             targets.update((k, receipt[k]) for k in ("item_key", "title")
                            if isinstance(receipt.get(k), str))
-    paragraphs = ["本轮业务结果: " + _STATUS.get(business["status"], business["status"]) +
-                  "。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。"]
+    paragraphs = (["本轮业务结果: " + _STATUS.get(business["status"], business["status"]) +
+                   "。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。"]
+                  if include_business else [])
     for name, receipt in receipts:
         paragraphs.append(_TOOLS[name] + ": \n\n" + "\n".join(
             "- " + line for line in _receipt_lines(receipt)))
-    if not receipts:
-        paragraphs.append("本轮没有可交付的业务结果回执; 不能确认所请求的业务已完成。")
+    if include_business and not receipts:
+        paragraphs.append("本轮未取得新的业务回执。")
     historical = set()
     for unit in material.get("items", []):
         ref = unit.get("source_ref")
