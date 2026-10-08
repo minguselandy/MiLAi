@@ -1,3 +1,60 @@
+# Live handoff: 2026-10-08 17:17:53 UTC frozen diagnosis RUNNING
+
+Frozen26893e2857a2d84b1215495054f900e8870d199f M/staged/prefix8 predict started16:49:21,
+PID1021934/execsession16312,11/32completepredictions (8,3,0,0),11maintenancecomplete,
+29QAresponses,Judge0/no terminal at observation. Root alone realHTTP; no restart or
+concurrent model task. Source artifacts/post118/source-26893e2/MiLAi-Lab; root
+artifacts/post118/prefix8-m-26893e2-v1; config sibling prefix8-m-26893e2-v1.config.json;
+logs sibling .predict.stdout.log/.predict.stderr.log. Inspect currentPID/files/terminal,
+not snapshot; saved predictions are predictions/halumem/USER/INDEX/complete.json.
+After prediction closes, score independently from frozen saved answers/retrieval.
+268 ownFast37811162750 FAILED:Foundation535pass/1old call-count fixturefail; Labfast and
+external passed; Full37811162730 skipped. Test-onlyd49cb44 aligns receipt feedback to
+7calls, keeps2reviewlimit/0effects/notcommitted+reopen no call checks; direct1pass/Ruff.
+ReportCIseparate; do not backfill268passed. Firstuser actualevent3 formalEditor{} despite
+extract/selected old matters delivered,0receipts; no new numerical regrading.
+
+Latestalgorithm8cf098c/tests b342aa8 are NOT actual268 run:4e96461 new generated
+assertion.source_evidence uses actuale instead of input Sourceidentitys; oldsource
+and aliasesdecode, keep/role/time/support unchanged. s1 still invalid; explicit e1
+copy only rejectiondiagnosis. Receipt-or-Agent query-only observations nowappend real
+matched receipts to existing candidate, not replace its answer. Mutation/selected app
+progress/requiredfailedsave/forget/stop stay receiptowned; original journal and candidate
+persist. DirectSQLite/compat/privacy/reopen/failurefeedback/Ruff/types pass; wholeaffected
+editcontractfile76passed/onegeneratedfixtureupdated then thatcheckpass, no fullsuite claim.
+Actualm5candidate+two notfoundreceipts offline replay0HTTP; no fresh realeffect claim.
+Three workers offline completed code/evidence; no reviewers or realHTTP delegation.
+Scope general/outside label is staticrisk, not earliest observedReadererror cause.
+Fixed16:45closed0dd costs below remain distinct from current in-flight prediction.
+16reserved unused/full researchscopeactive/ProductNO_GO; lower blocks historical.
+
+# 2026-10-08 16:45 UTC: first real flows closed; refined candidate ready for diagnosis
+
+Actual0dd1bbe frozen three exposed stories18planned/17executed/16COMPLETED/1forgetFAILED/
+1NOT_RUN; driverexit0 is not allpassed. Business1reserve+1label only. Bike qualification
+stored but Readerstrength/sessionterm wrong; correct joint candidate maskedbyreceipt
+renderer. Exceptionchange_value targetscondition rejected/false savedack; current
+two-day correction classifiedonlycontinue_prior, r2 uses oldone-dayevidence. Withdrawal
+Extractorlength; old exception remains. ActualTool6literal candidatesdelivered but
+assertion.source s1 rejected. Saveonly classificationcorrect; existingdiscoverSource
+not admitted to Writer,0Editor. ForgetHostlength/no confirmedrevoke; no tailrestart.
+91gen1149094known/charged (59tool_calls30stop2length),44embedding1652,Judge0/newunknown0;
+ledger47537/208294242known/208570938charged/embed1941744/historyunknown6, no realrunner.
+
+Latestsource26893e2857a2d84b1215495054f900e8870d199f frozen separately: SDK adapter optional
+LangMem layer; capturedpublicturn boundbeforependinglookup; M generationonlyexisting
+replace/legacytwoaliasesdecode; actualselectedrequestobservationdelivery admitted before
+batchbinding/model, no empty failedattempt or repeatsfromrefresh; knownfailedsavereceipts
+rendered, purememoryno businesssection. DirectSQLite/compat/recovery/privacy/Ruff/types
+passed, actualm1receiptfeedback replay0HTTP. Not realeffect/oldrunrepair or fullrendererfix.
+PR119 open draft;268Fast37811162750in_progress/Full37811162730skipped; old0dd/d573Fastfailed.
+Own reportCIseparate. Fourdevprefix8 M staged privateconfigPREPARED/newroot/0HTTP; nextRoot
+serialpredict thenseparatescore. BenchmarkUser/Assistant, HostliteralToolprojection and
+reading_basis unusedhere; include_rawFalse and savedauthorretrieval boundaries unchanged.
+Keep originalscope/sixdeliveries,16unused/no finalcandidate/ProductNO_GO, goalactive.
+Workers independent/no actualHTTP. Do not dispatch from this fixedstatus without live
+ownership/ledger/terminal check. Original artifacts/config/unknowns stay; no oldtailretry.
+
 # 2026-10-08 16:02:17 UTC: integrated post118 candidate, real HTTP still0
 
 Root integrated A requests/scope, B actual field maintenance/edit schema and C reads/runtime,

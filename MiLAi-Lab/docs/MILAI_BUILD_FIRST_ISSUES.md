@@ -2,6 +2,38 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
+## 2026-10-08 17:17:53 UTC：集中诊断与合同简化分开
+
+冻结268的M／staged前八会话已保存11/32预测、11维护、29QA响应，Judge0／无终态。
+首用户原3正式Editor仍为`{}`，候选与四个旧事项已送达；统一replace未自动解决变化落实。
+不能解释为容量／传输失败或把0提交记为语义成功，尚无新评分或同版排名。
+
+新开发8cf／测试b342：生成用source_evidence明确实际e，旧source解码，s1仍不放行；
+仅查询观察时保留原问答并附真实配对回执，办理、应用任务、失败保存／遗忘／停止仍由回执
+主导。直接检查及0HTTP原m5副本复放通过，不改变0dd交付或正在运行的268，也不证明新
+语义质量。整体→分区推断已早于override；Renderer标签静态风险不是本次已证实根因。
+
+268 ownFast失败仅最后组一个旧8调用预期（535通过）；d49更新为7调用并保留两次提案
+上限、0状态／业务效果、未提交反馈及重开不新增调用，直接检查通过。Full skipped、新报告
+CI另核验。16保留用户未用，Product NO_GO；下面各项失败、成本与固定时点保持。
+
+## 首轮真实断点：2026-10-08 16:45:00 UTC
+
+0dd首轮三链18预定／17执行：16 COMPLETED、1遗忘FAILED、1 NOT_RUN；业务1预订＋1补标签，
+不是16语义通过。91生成1149094known／44embedding1652／Judge0／新增unknown0。最新开发268
+与实际0dd分开，[首轮事实及修正](MILAI_UNIFIED_MEMORY_USAGE.md)保留版本、成本和原件边界。
+
+| 当前问题 | 实际定位与最小方向 |
+|---|---|
+| 目标role重复编码 | 第二链例外提案change_value选u4 condition；shared_conditions与assertion均合法，HTTP无response_format，schema只在实际payload。新生成统一既有replace／旧名兼容，离线通过，未真实复跑；原r1未改却答已存的失败保留 |
+| 当前更正被归成纯续办 | 初次classify已只有continue_prior，不是程序删除explicit；当前两天只有scope，r2引用旧一天来源。区分更正旧事项与补办旧保存，保留复合动作；不能借旧e支持当前事实，也不增加关键词保存规则 |
+| 已确认结果没进维护 | l4补存有现有discover真实Source、分类／选原请求正确，但只登记Agent ToolMessages，maintenance=[]；新268接既有observation delivery且批次先绑定，不造空失败尝试，直接正常检查通过／真实效果待测 |
+| 字段送达仍不保证正式提交 | 首条Tool六literal候选实际送达，append assertion.source用s1被schema拒。已消除content＋attach_to路线不等于所有合同错配消失；不从私有reasoning补提交、不静默放行错误归属 |
+| 正确保存或候选仍会交付错误 | 骑行“尽量”被首答强化并新增会话期限；联合问题候选完整，renderer只交付午休与无关预订未找到。新268仅修已知保存失败反馈，不宣称解决一般回答或renderer范围选择 |
+| 撤销及遗忘未闭合 | 撤销Extractor小输入仍length，最终未撤例外；遗忘多次无效参数／未知工具回执后Host length，0确认撤回，重开未运行。length已知响应不算新增transport unknown，不扩大输出或重试原失败尾段 |
+| 直接CI失败与归组 | SQLite SDK适配器已归LangMem层，public turn前绑定已修；旧隐私测试改更早VISIBILITY_REVOKED并保留原产物／0HTTP。268自身Fast在跑／Full skipped，实际0dd不能借新CI通过 |
+| 新候选评价未完成 | 268四开发用户prefix8 M staged诊断配置已准备、HTTP0；Host Tool投影／reading_basis不在此benchmark入口。原五方法277、最终确认和六交付继续，16未用于开发，Product NO_GO |
+
 ## Post117/118功能候选：2026-10-08 16:02:17 UTC
 
 完整计划已启动，Root＋三agent已合流直接检查，真实新候选HTTP仍0，暂无runner；旧失败不回填。

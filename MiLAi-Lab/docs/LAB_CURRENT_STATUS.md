@@ -1,5 +1,28 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 17:17:53 UTC／北京时间2026-10-09 01:17:53：冻结集中诊断运行中。**
+
+268 M／staged／四开发用户前八会话predict已于16:49:21启动，PID1021934；11/32完整预测
+（8／3／0／0）、11维护、29QA响应，Judge0／无终态。新轨迹仍有正式空Editor；无数值效果
+结论。开发源码8cf／测试b342加入证据片段字段及问答附查询回执，直接工程检查通过，不热改
+实际268。268 ownFast37811162750失败（Foundation535通过、1旧调用计数），Full skipped；
+d49直接修正通过，新报告CI另核验。闭合0dd与在途成本分开，PR119 open draft；完整计划
+active、16未用、Product NO_GO。详见[运行与版本边界](MILAI_UNIFIED_MEMORY_USAGE.md)。
+下方固定历史不用于重新调度。
+
+**2026-10-08 16:45:00 UTC／北京时间2026-10-09 00:45:00：首轮功能诊断闭合，修正后准备集中诊断。**
+
+实际0dd三条既有链17/18执行：16 COMPLETED、1遗忘FAILED、1 NOT_RUN；Source／正式输出／
+状态与最终交付分开。业务仅1预订＋1补标签；例外schema拒、更正借旧证据、撤销Extractor
+length、结果补存Source未进维护、renderer遮蔽及遗忘Host length仍保留，不是16语义通过。
+91生成1149094known／44embedding1652，Judge0／新增unknown0；账本47537／208294242known／
+208570938charged／embed1941744／历史unknown6，无真实runner。新开发268已另冻：SDK归组、
+前绑定、统一replace旧名兼容、实际请求观察接入维护及失败反馈已直接检查，尚未真实复跑。
+268四开发prefix8 M staged配置已准备，无新预测／评分；Host两项专属变化不归此benchmark。
+PR119 open draft；268 ownFast37811162750在跑／Full37811162730 skipped，不借CI。详见
+[首轮事实、正常入口与后续范围](MILAI_UNIFIED_MEMORY_USAGE.md)。完整计划执行中，16未用于开发、
+无最终候选／Product NO_GO；下方保留原固定历史。
+
 **2026-10-08 16:02:17 UTC／北京时间2026-10-09 00:02:17：功能优先完整计划执行中。**
 
 PR118已合并main518（aad own Fast成功／Full skipped，main own Fast成功）；Root＋三独立
