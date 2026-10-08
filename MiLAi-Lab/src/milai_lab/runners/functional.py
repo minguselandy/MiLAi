@@ -1273,6 +1273,12 @@ def continuation_operations(
             resumed_memory_request={"fragment_handles": handles,
                 "source_refs": list(dict.fromkeys(row["source_ref"] for row in selected)),
                 "semantic_correctness": "unchecked", "completion": "not_proven_by_resolution"})
+        selected_refs = {fragment["source_ref"] for fragment in selected}
+        resolved["prior_maintenance_requests"] = [
+            {name: card[name] for name in ("session", "request_id", "checkpoint")}
+            for card in material.get("pending_maintenance", [])
+            if selected_refs.intersection(card["source_refs"])
+        ]
     trace({"event": "functional_continuation_resolution", **resolved})
     return resolved
 
@@ -2238,6 +2244,26 @@ def message(
                                 if part["fragment_handle"] not in delivered:
                                     material["items"].append({"type": "fragment", **part})
                                     delivered.add(part["fragment_handle"])
+                    if (isinstance(memory, FunctionalEditMemory)
+                            and memory.memory_view_mode != "legacy"):
+                        pending = memory.pending_maintenance(cfg)
+                        material["pending_maintenance"] = pending
+                        delivered = {row.get("fragment_handle") for row in material["items"]}
+                        for card in pending:
+                            for ref in card["source_refs"]:
+                                parts = service.source_fragments(
+                                    ref, max_chars=memory.fragment_chars)
+                                if not parts or parts[0]["role"] != "user":
+                                    continue
+                                part = parts[0]
+                                if part["fragment_handle"] in delivered:
+                                    continue
+                                proposed = {**material, "items": [
+                                    *material["items"], {"type": "fragment", **part}]}
+                                if capacity.text_tokens(json.dumps(proposed, ensure_ascii=False)) \
+                                        <= settings["ordinary_material_tokens"]:
+                                    material = proposed
+                                    delivered.add(part["fragment_handle"])
                     trace({"event": "functional_material_delivery", "material": material,
                            "consumer": "continuation_reference_resolution"})
                     mode = continuation_operations(
@@ -2317,12 +2343,24 @@ def message(
 
             def maintain_current(execute: bool) -> list[dict[str, Any]]:
                 assert isinstance(memory, FunctionalEditMemory)
-                return memory.maintain_sources(
+                results = [memory.maintain_prior(
+                    cfg, prior_session=prior["session"], prior_request_id=prior["request_id"],
+                    new_attempt_id="maintenance-resume:" + json.dumps([
+                        session, message_id, freeze["config_version"],
+                        prior["session"], prior["request_id"],
+                    ], ensure_ascii=False, separators=(",", ":")),
+                    model_call=maintenance_call, allowed=maintenance_allowed,
+                    execute=execute, fit=maintenance_fit,
+                ) for prior in (mode or {}).get("prior_maintenance_requests", [])]
+                skip_current = bool(results and mode
+                                    and mode.get("current_memory_write_request") == "none")
+                return [*results, *memory.maintain_sources(
                     cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                     model_call=maintenance_call, allowed=maintenance_allowed, execute=execute,
                     fit=maintenance_fit, prior_request_fragments=prior_request_fragments(),
+                    skip_source_refs=[capture["source_ref"]] if skip_current else None,
                     memory_save_requested=bool(memory.memory_view_mode != "legacy"
-                                               and mode and mode["requires_memory_result"]))
+                                               and mode and mode["requires_memory_result"]))]
 
             def context_hook(
                 state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
@@ -2827,12 +2865,7 @@ def message(
                 # Recover receipts from the same Store without starting new work.
                 memory.context(session, message_id, freeze["config_version"], query=content)
                 _note_edit_tool_delivery(memory, cfg, messages)
-                output["maintenance"] = memory.maintain_sources(
-                    cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
-                    model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
-                    fit=maintenance_fit,
-                    prior_request_fragments=prior_request_fragments(),
-                )
+                output["maintenance"] = maintain_current(False)
             if (messages and isinstance(messages[-1], AIMessage) and not messages[-1].tool_calls
                     and final_delivery(messages[-1].content)["status"] == "available"):
                 refresh_requests(acknowledged_messages=messages)
@@ -3132,12 +3165,7 @@ def message(
             if "maintenance_call" in locals() and isinstance(memory, FunctionalEditMemory):
                 try:
                     if maintenance_recipe:
-                        output["maintenance"] = memory.maintain_sources(
-                            cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
-                            model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
-                            fit=maintenance_fit,
-                            prior_request_fragments=prior_request_fragments(),
-                        )
+                        output["maintenance"] = maintain_current(False)
                 except Exception as snapshot_error:
                     output["maintenance_snapshot_error"] = (
                         type(snapshot_error).__name__ + ":" + str(snapshot_error)

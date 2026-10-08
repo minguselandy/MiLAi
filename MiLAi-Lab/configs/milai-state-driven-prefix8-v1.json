@@ -58,7 +58,7 @@
     "M"
   ],
   "maintenance_recipe": "extract_then_edit",
-  "evidence_kind": "DEVELOPMENT_WRITER_VIEW_ONLY_READER_PENDING",
+  "evidence_kind": "DEVELOPMENT_STATE_VIEW_CANDIDATE_UNVALIDATED",
   "memory_profile": "unified_v1",
   "memory_ranking": "dense",
   "calendar_context": "history-calendar",

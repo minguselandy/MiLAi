@@ -266,6 +266,7 @@ def recipe_writer_operations(
     counts: Counter[str] = Counter()
     failures: Counter[str] = Counter()
     extraction_failures: Counter[str] = Counter()
+    selection_failures: Counter[str] = Counter()
     receipts: Counter[str] = Counter()
     rejected: Counter[str] = Counter()
     proposed: Counter[str] = Counter()
@@ -273,6 +274,46 @@ def recipe_writer_operations(
     edits: Counter[str] = Counter()
     examples: dict[str, list[str]] = {}
     sessions = set()
+    calls: dict[str, dict[str, str]] = {}
+    for path in (folder / "maintenance/halumem" / owner).glob("*/batch-*-calls.json"):
+        for call in read_json(path):
+            calls.setdefault(call["request_id"], {})[call["http_key"]] = (
+                call["stage"].partition(":")[0])
+
+    def count_exposure(request_id: str, http: Path, characters: int, *, parent: bool) -> None:
+        observed = calls.get(request_id)
+        if observed is None:
+            observed = {str((http / stage).relative_to(folder / "http")): stage
+                        for stage in (("extract", "select") if parent else ("extract", "edit"))}
+        for key, stage in observed.items():
+            label = {"extract": "extraction", "select": "selection", "edit": "writer"}[stage]
+            request = folder / "http" / key / "request.json"
+            response = folder / "http" / key / "response.json"
+            counts[f"recorded_{label}_requests"] += request.exists()
+            counts[f"confirmed_{label}_responses"] += response.exists()
+            if stage == "edit":
+                counts["characters_in_recorded_requests"] += characters * request.exists()
+                counts["characters_in_confirmed_responses"] += characters * response.exists()
+
+    def count_failures(request_id: str, state: dict[str, Any], *, parent: bool) -> None:
+        for gap in state["unprocessed"]:
+            if "reason" not in gap:
+                continue  # Commit rejections come from their actual receipts.
+            message = gap["reason"]
+            kind = ("context_unavailable_before_http"
+                    if message == "EDIT_MAINTENANCE_REQUEST_EXCEEDS_CAPACITY"
+                    else "provider_output_incomplete"
+                    if "Provider output incomplete:" in message else message)
+            label = ("selection" if parent else "extraction"
+                     if gap.get("phase") == "start"
+                     or gap.get("phase", "").startswith("extract") else "writer")
+            {"selection": selection_failures, "extraction": extraction_failures,
+             "writer": failures}[label][kind] += 1
+            counts[f"first_attempt_{label}_failed_batches"] += 1
+            paths = examples.setdefault(kind, [])
+            if len(paths) < 3:
+                paths.append(f"banks/{owner}/memory.sqlite:{request_id}")
+
     bank = folder / "banks" / owner / "memory.sqlite"
     if bank.exists():
         with sqlite3.connect(bank.resolve().as_uri() + "?mode=ro", uri=True) as connection:
@@ -284,7 +325,8 @@ def recipe_writer_operations(
             prefix = f"halumem/{owner}/"
             if not request_id.startswith(prefix):
                 continue
-            ordinal, *batch_parts = request_id.removeprefix(prefix).split(":batch:")
+            source_request, _, work = request_id.partition(":work:")
+            ordinal, *batch_parts = source_request.removeprefix(prefix).split(":batch:")
             if expected_sessions is not None and int(ordinal) not in expected_sessions:
                 continue
             sessions.add(int(ordinal))
@@ -293,37 +335,25 @@ def recipe_writer_operations(
                 counts["batch_containers"] += 1
                 counts["planned_subbatches"] += len(state["batches"])
                 continue  # Parent receipts repeat actual child effects; count each leaf once.
-            counts["prepared_batches"] += 1
-            counts["completed_batches"] += state["phase"] in {"complete", "incomplete"}
-            counts["incomplete_maintenance_batches"] += state["phase"] == "incomplete"
-            characters = sum(s["end"] - s["start"] for s in state["binding"]["sources"])
-            counts["prepared_characters"] += characters
             http = folder / "http/maintenance" / prefix / ordinal / f"batch-{batch_parts[0]}"
             for part in batch_parts[1:]:
                 http = http / f"subbatch-{part}"
-            for stage, label in (("extract", "extraction"), ("edit", "writer")):
-                request, response = http / stage / "request.json", http / stage / "response.json"
-                counts[f"recorded_{label}_requests"] += request.exists()
-                counts[f"confirmed_{label}_responses"] += response.exists()
-                if stage == "edit":
-                    counts["characters_in_recorded_requests"] += characters * request.exists()
-                    counts["characters_in_confirmed_responses"] += characters * response.exists()
-            for gap in state["unprocessed"]:
-                if "reason" not in gap:
-                    continue  # Commit rejections are counted from their actual receipts below.
-                message = gap["reason"]
-                kind = ("context_unavailable_before_http"
-                        if message == "EDIT_MAINTENANCE_REQUEST_EXCEEDS_CAPACITY"
-                        else "provider_output_incomplete"
-                        if "Provider output incomplete:" in message
-                        else message)
-                label = ("extraction" if gap.get("phase") == "start"
-                         or gap.get("phase", "").startswith("extract") else "writer")
-                (extraction_failures if label == "extraction" else failures)[kind] += 1
-                counts[f"first_attempt_{label}_failed_batches"] += 1
-                paths = examples.setdefault(kind, [])
-                if len(paths) < 3:
-                    paths.append(f"banks/{owner}/memory.sqlite:{request_id}")
+            characters = sum(s["end"] - s["start"] for s in state["binding"]["sources"])
+            if "work_items" in state:
+                counts["view_containers"] += 1
+                counts["planned_work_items"] += len(state["work_items"])
+                count_exposure(request_id, http, characters, parent=True)
+                count_failures(request_id, state, parent=True)
+                continue  # Work results repeat child receipts and proposals.
+            counts["prepared_batches"] += 1
+            counts["completed_batches"] += state["phase"] in {"complete", "incomplete"}
+            counts["incomplete_maintenance_batches"] += state["phase"] == "incomplete"
+            counts["prepared_characters"] += characters
+            if work and request_id not in calls:
+                calls[request_id] = {str((http / "edit" / f"work-{work}").relative_to(
+                    folder / "http")): "edit"}
+            count_exposure(request_id, http, characters, parent=False)
+            count_failures(request_id, state, parent=False)
             proposals = state.get("proposals", [])
             if "proposals" in state:
                 counts["writer_returned_proposal_list_batches"] += 1
@@ -368,8 +398,11 @@ def recipe_writer_operations(
             counts["recorded_writer_requests"] - counts["confirmed_writer_responses"]),
         "extraction_requests_without_confirmed_responses": (
             counts["recorded_extraction_requests"] - counts["confirmed_extraction_responses"]),
+        "selection_requests_without_confirmed_responses": (
+            counts["recorded_selection_requests"] - counts["confirmed_selection_responses"]),
         "first_attempt_writer_failures": dict(failures),
         "first_attempt_extraction_failures": dict(extraction_failures),
+        "first_attempt_selection_failures": dict(selection_failures),
         "failure_example_paths": examples,
         "receipt_statuses": dict(receipts), "rejection_reasons": dict(rejected),
         "proposed_actions": dict(proposed), "committed_actions": dict(committed),

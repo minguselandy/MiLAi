@@ -35,6 +35,7 @@ MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/revision_store.py",
     "src/milai_lab/memory/strict_tools.py",
     "src/milai_lab/memory/support_display.py",
+    "src/milai_lab/memory/working_set.py",
 )
 MEMORY_FACADE_FILES = (
     "src/milai_lab/baselines/langmem_mcp.py",

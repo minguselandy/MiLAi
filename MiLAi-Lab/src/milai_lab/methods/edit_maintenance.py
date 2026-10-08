@@ -771,6 +771,19 @@ def resume_maintenance(
         method, delivery, request_id=prior_request_id, execute=False, **options
     )
     state = copy.deepcopy(prior.value)
+    if not execute and new_attempt_id is not None:
+        attempt_session = session if new_attempt_session is None else new_attempt_session
+        attempted = service.store.get(ns, json.dumps(
+            [attempt_session, new_attempt_id], ensure_ascii=False
+        ))
+        if attempted is not None:
+            if (attempted.value.get("prior_request_id") != prior_request_id
+                    or attempted.value.get("prior_session", attempt_session) != session):
+                raise FunctionalRejection("EDIT_MAINTENANCE_NEW_ATTEMPT_ALREADY_BOUND")
+            return maintain_event(
+                method, delivery, request_id=new_attempt_id, execute=False,
+                **{**options, "session": attempt_session},
+            )
 
     def retry_completed() -> bool:
         return (state["phase"] == "complete" and has_pending_save(state)

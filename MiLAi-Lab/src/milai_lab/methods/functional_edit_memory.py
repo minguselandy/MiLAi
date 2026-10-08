@@ -723,7 +723,7 @@ class FunctionalEditMemory(FunctionalMemory):
         if prior_request_id is not None:
             result = resume_maintenance(
                 self.writer, delivery, prior_request_id=prior_request_id,
-                new_attempt_id=new_attempt_id if execute else None,
+                new_attempt_id=new_attempt_id,
                 new_attempt_session=bound["session"], execute=execute, **options,
             )
         else:
@@ -744,6 +744,7 @@ class FunctionalEditMemory(FunctionalMemory):
         execute: bool = True,
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
         prior_request_fragments: list[dict[str, Any]] | None = None,
+        skip_source_refs: list[str] | None = None,
         memory_save_requested: bool = False,
     ) -> list[dict[str, Any]]:
         """Maintain current user input and actually delivered tool sources once each.
@@ -767,6 +768,8 @@ class FunctionalEditMemory(FunctionalMemory):
         )
         results = []
         for ref in dict.fromkeys(refs):
+            if ref in (skip_source_refs or []):
+                continue
             source = self.service.source(ref)
             if source is None:
                 continue

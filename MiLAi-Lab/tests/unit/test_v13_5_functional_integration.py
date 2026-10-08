@@ -210,6 +210,83 @@ def scripted(
     return wires
 
 
+def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, complete_requests=True,
+        direct_response=True, phase_thinking=True, current_delivery=True,
+        memory_profile="unified_v1", memory_view_mode="state_driven",
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        maintenance_recipe="extract_then_edit", edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope")})
+    original_text = "Remember that I use a teal marker for the calendar."
+    continue_text = "Continue only the unfinished saving of my earlier calendar preference."
+    read_text = "Only inspect the saved preference; do not save or perform business."
+    seen = {"extract": 0, "edit": 0, "resolve": 0}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {t["function"]["name"] for t in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            text = wire["messages"][-1]["content"]
+            return native_call("classify_current_request", "mode-" + str(ordinal),
+                memory_write_request="explicit" if text == original_text else "none",
+                allow_forgetting=False, business_action_request="none", business_operations=[],
+                memory_continuation_request="resolve_prior_explicit"
+                if text == continue_text else "none",
+                application_continuation_request="none", application_requests=[])
+        if names == {"resolve_continuation_operations"}:
+            seen["resolve"] += 1
+            material = json.loads(wire["messages"][-1]["content"])["archived_reference_material"]
+            assert len(material["pending_maintenance"]) == 1
+            part = next(row for row in material["items"] if row.get("content") == original_text)
+            return native_call("resolve_continuation_operations", "resolve",
+                business_operations=[], prior_request_ids=[],
+                prior_memory_request_fragments=[part["fragment_handle"]])
+        if not names:
+            if "Extract brief candidate propositions" in wire["messages"][0]["content"]:
+                seen["extract"] += 1
+                return {"role": "assistant", "content": json.dumps({"changes": []})}
+            seen["edit"] += 1
+            frame = json.loads(wire["messages"][-1]["content"])
+            if "continuation_request" not in frame:
+                return {"role": "assistant", "content": "{}"}
+            assert frame["continuation_request"]["content"] == continue_text
+            packet = frame["delivery"]
+            evidence = next(row for row in packet["evidence"] if row["text"] == original_text)
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "User's calendar marker", "clauses": [{
+                    "text": "User uses a teal calendar marker.", "evidence": [evidence["id"]],
+                    "conditions": [], "assertion": {"source": evidence["id"], "kind": "reported"},
+                }]}], "records": {}})}
+        return {"role": "assistant", "content": "Report the actual saved result."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {"bank": "pure-save", "owner": "alice"}
+    first = functional.message(root, **common, session="original", message_id="save",
+                               content=original_text)
+    assert first["status"] == "COMPLETED", first.get("error")
+    assert first["records"] == [] and len(first["maintenance"]) == 1
+    continued = functional.message(root, **common, session="current", message_id="continue",
+                                   content=continue_text)
+    assert continued["status"] == "COMPLETED", continued.get("error")
+    assert len(continued["records"]) == 1 and seen == {"extract": 1, "edit": 2, "resolve": 1}
+    assert continued["request_mode"]["prior_maintenance_requests"]
+    assert len(continued["maintenance"]) == 1
+    assert continued["operation_status"]["semantic_memory"]["status"] == "committed"
+    count = len(wires)
+    readonly = functional.message(root, **common, session="reopened", message_id="read",
+                                  content=read_text)
+    assert readonly["status"] == "COMPLETED", readonly.get("error")
+    assert readonly["maintenance"] == [] and readonly["records"] == continued["records"]
+    assert seen == {"extract": 1, "edit": 2, "resolve": 1}
+    assert len(wires) - count == 2  # Current declaration and normal Host answer.
+    count = len(wires)
+    replay = functional.message(root, **common, session="current", message_id="continue",
+                                content=continue_text, resume=True)
+    assert replay["records"] == continued["records"] and len(wires) == count
+
+
 def tool(action: str, **args: Any) -> dict[str, Any]:
     return {"calls": [{"name": action, "arguments": args}]}
 
