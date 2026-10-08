@@ -1584,6 +1584,9 @@ class BenchmarkRun:
                     "type": "string", "enum": [memory["record_id"] for memory in memories]
                 }} if memories else {"type": "array", "maxItems": 0},
                 "keep_resident": {"type": "boolean"}, "done": {"type": "boolean"},
+                "read_goal": {"type": ["string", "null"], "description":
+                    "Purpose of this question, possibly combining current applicability, "
+                    "original wording and actual saved history; omission inherits the purpose."},
             }, "required": ["record_ids", "keep_resident", "done"],
         }
         call_limit = self.client.config.max_calls
@@ -1604,6 +1607,9 @@ class BenchmarkRun:
                 "bodies can be loaded again. Select all necessary matters before a final "
                 "comparison; old read identities do not contain their details. Set done "
                 "when the selected material suffices or no justified reading remains. "
+                "read_goal states what this question asks to establish; it is not the type "
+                "of material opened. It may combine purposes and remains in force unless "
+                "explicitly changed. A purpose does not make absent history available. "
                 "Return only the supplied selection schema, not the final answer."
             )
             payload = json.loads(messages[1]["content"])
@@ -1621,6 +1627,7 @@ class BenchmarkRun:
             state.update(select_view_refs(
                 state, refs, [{"id": identifier} for identifier in selected["record_ids"]],
                 keep_resident=selected["keep_resident"],
+                read_goal=selected.get("read_goal"),
             ))
             state["steps"] += 1
             state["opened_ids"] = list(dict.fromkeys([
@@ -1630,7 +1637,17 @@ class BenchmarkRun:
             write_json(path, state)
         state["complete"] = True
         write_json(path, state)
-        answer = self.call(key, reader_messages(question, date, resident()), structured=False)
+        messages = reader_messages(question, date, resident())
+        if state["read_goal"] is not None:
+            messages[0]["content"] += (
+                " read_goal describes this question's purpose, not the provenance or "
+                "validity of the supplied memories. It does not establish that requested "
+                "history is available; use the actual supplied evidence."
+            )
+            payload = json.loads(messages[1]["content"])
+            payload["read_goal"] = state["read_goal"]
+            messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+        answer = self.call(key, messages, structured=False)
         return answer, [memory for memory in memories if memory["record_id"] in state["opened_ids"]]
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:

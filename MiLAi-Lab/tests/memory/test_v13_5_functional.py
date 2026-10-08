@@ -18,7 +18,12 @@ from pydantic import ValidationError
 
 from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional import FunctionalMemory
-from milai_lab.memory.functional_state import FunctionalRejection, canonical, namespace
+from milai_lab.memory.functional_state import (
+    FunctionalRejection,
+    canonical,
+    namespace,
+    reference_key,
+)
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.working_set import empty_view, select_view_refs
 
@@ -1487,7 +1492,8 @@ def test_history_body_cursor_stays_on_issued_versions_after_later_update(
 ) -> None:
     with opened(tmp_path, material_limit=3500, fragment_chars=300, read_limit=20,
                 read_interface="explicit_selectors_v1" if explicit
-                else "combined_selectors_v1") as memory:
+                else "combined_selectors_v1",
+                memory_view_mode="state_driven" if explicit else "legacy") as memory:
         ref = turn(memory)
         hs = handles(memory, ref)
         saved = memory.save(cfg(), "save", "version1 " * 30, hs)
@@ -1501,7 +1507,10 @@ def test_history_body_cursor_stays_on_issued_versions_after_later_update(
                 hs,
             )
             assert result["ok"]
-        current = invoke(memory, "read_memory", {"record_id": saved["id"]}, "current")
+        current = invoke(memory, "read_memory", {"record_id": saved["id"],
+            **({"read_goal": "saved_history"} if explicit else {})}, "current")
+        if explicit:
+            assert memory.view_state(cfg())["read_goal"] == "saved_history"
         entry = current["items"][0]["stored_history"]
         assert entry["current_revision_at_index"] == entry["revision_count"] == 8
         assert entry["revisions"] == list(range(1, 7)) and entry["omitted_count"] == 2
@@ -1519,6 +1528,8 @@ def test_history_body_cursor_stays_on_issued_versions_after_later_update(
             memory, entry["read"]["tool"], entry["read"]["arguments"], "history"
         )
         assert first["items"] and first["next_cursor"]
+        if explicit:
+            assert memory.view_state(cfg())["read_goal"] == "saved_history"
         row = memory.service.read(saved["id"])
         memory.update(
             cfg(),
@@ -1535,6 +1546,8 @@ def test_history_body_cursor_stays_on_issued_versions_after_later_update(
             page = invoke(memory, "read_page" if explicit else "read_memory",
                           {"cursor": page["next_cursor"]}, f"page{index}")
             assert page["snapshot_id"] == first["snapshot_id"]
+            if explicit:
+                assert memory.view_state(cfg())["read_goal"] == "saved_history"
             units.extend(page["items"])
         assert {u["revision"] for u in units} == set(range(1, 9))
         assert all(u["version_view"] == "historical_exact_revision" for u in units)
@@ -2237,30 +2250,47 @@ def test_explicit_read_selectors_reject_placeholders_and_extra_fields_before_exe
 
 
 def test_explicit_read_shared_budget_identity_and_owner_survive_reopen(tmp_path: Path) -> None:
-    with opened(tmp_path, read_interface="explicit_selectors_v1") as memory:
+    options = {"read_interface": "explicit_selectors_v1", "memory_view_mode": "state_driven"}
+    admission_key = "read-admission:" + reference_key(["s", "u"])
+    with opened(tmp_path, **options) as memory:
         ref = turn(memory, text='Personal record with original support.')
         fragment = handles(memory, ref)[0]
         saved = memory.save(cfg(), 'save', 'Personal record with original support.', [fragment])
         current = memory.service.read(saved['id'])
         original = invoke(memory, 'read_source', {'source_ref': ref}, 'first')
+        admission = memory.service.store.get(namespace(memory.service), admission_key)
+        assert admission is not None
+        omitted_arguments = admission.value['calls']['first']['arguments']
+        assert omitted_arguments == {'tool': 'read_source', 'source_ref': ref,
+                                     'keep_resident': False}
         exact = invoke(memory, 'read_memory_revision',
-                       {'record_id': saved['id'], 'revision': 1}, 'second')
+                       {'record_id': saved['id'], 'revision': 1,
+                        'read_goal': 'saved_history'}, 'second')
         assert original['ok'] and exact['items'][0]['revision'] == 1
         assert exact['items'][0]['version_view'] == 'historical_exact_revision'
+        assert memory.view_state(cfg())['read_goal'] == 'saved_history'
+        with pytest.raises(FunctionalRejection, match='READ_CALL_CHANGED'):
+            invoke(memory, 'read_source', {'source_ref': ref, 'read_goal': 'original_source'},
+                   'first')
         with pytest.raises(FunctionalRejection, match='OWNER_MISMATCH'):
             invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'wrong-owner',
                    cfg(owner='bob'))
         with pytest.raises(FunctionalRejection, match='READ_CALL_CHANGED'):
             invoke(memory, 'read_memory', {'record_id': saved['id']}, 'second')
-    with opened(tmp_path, read_interface="explicit_selectors_v1") as memory:
+    with opened(tmp_path, **options) as memory:
         memory.context('s', 'u', CONFIG_VERSION)
         assert invoke(memory, 'read_source', {'source_ref': ref}, 'first') == original
+        admission = memory.service.store.get(namespace(memory.service), admission_key)
+        assert admission is not None and len(admission.value['calls']) == 2
+        assert admission.value['calls']['first']['arguments'] == omitted_arguments
+        assert memory.view_state(cfg())['read_goal'] == 'saved_history'
         assert invoke(memory, 'read_fragment', {'fragment_handle': fragment}, 'third')['ok']
+        assert memory.view_state(cfg())['read_goal'] == 'saved_history'
         exhausted = invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'fourth')
         assert exhausted['status'] == 'read_limit_exhausted'
         assert memory.service.read(saved['id'])['value'] == current['value']
         assert memory.service.history_index(saved['id'])['revisions'] == [1]
-    with opened(tmp_path, owner='bob', read_interface="explicit_selectors_v1") as memory:
+    with opened(tmp_path, owner='bob', **options) as memory:
         memory.service.capture_user('s', 'u', 'Unrelated user asks about history.')
         memory.context('s', 'u', CONFIG_VERSION)
         result = invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'foreign',

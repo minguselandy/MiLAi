@@ -2912,23 +2912,34 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         directory = memory.context("s", "u", "functional-m-test-v1")
         assert directory["candidates"]
         assert all(item["type"] == "fragment" for item in directory["items"])
-        a = invoke(memory, "read_memory", {"record_id": saved[0]}, "open-a")
+        a_args = {"record_id": saved[0], "read_goal": "original_source"}
+        a = invoke(memory, "read_memory", a_args, "open-a")
+        assert memory.view_state(cfg())["read_goal"] == "original_source"
         first_refs = memory.view_state(cfg())["resident_refs"]
         b = invoke(memory, "read_memory", {"record_id": saved[1]}, "open-b")
         material = memory.model_material(cfg())
+        assert material["memory_view"]["read_goal"] == "original_source"
         assert {item["record_id"] for item in material["items"] if item["type"] == "record"} == {
             saved[1]
         }
         assert memory.read_progress(cfg())["delivered_units_total"] >= 3
         # Reload the already read actual reference without a new read/model call.
-        memory.focus_view(cfg(), focus="Reminder tone", read_goal="current",
+        memory.focus_view(cfg(), focus="Reminder tone",
+                          read_goal=material["memory_view"]["read_goal"],
                           resident_refs=first_refs)
+        original_ref = memory.service.read(saved[0])["value"]["source_ref"]
+        original = json.loads(invoke(memory, "read_source", {"source_ref": original_ref},
+                                     "original-words").content)
+        assert original["ok"] and all(item["source_ref"] == original_ref
+                                      for item in original["items"])
+        assert memory.view_state(cfg())["read_goal"] == "original_source"
         writer = memory.model_material(cfg(), for_write=True)["writer_packet"]
         assert len(writer["records"]) == 1 and "weekday" in canonical(writer)
         history = json.loads(invoke(memory, "read_memory", {
             "record_id": saved[0], "revision": 1, "keep_resident": True,
         }, "saved-history").content)
         assert history["ok"]
+        assert memory.view_state(cfg())["read_goal"] == "original_source"
         memory.model_material(cfg(), for_write=True)
         changed = json.loads(invoke(memory, "update_memory", {"proposal": {
             "action": "edit", "target": "r1", "edits": [{
@@ -2938,14 +2949,19 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
             }],
         }}, "change-a").content)
         assert changed["ok"], changed
-        views = memory.model_material(cfg())["items"]
+        material = memory.model_material(cfg())
+        assert material["memory_view"]["read_goal"] == "original_source"
+        views = material["items"]
         assert {(item["revision"], item["version_view"]) for item in views
                 if item["type"] == "record"} == {
             (1, "historical_exact_revision"), (2, "current_at_snapshot")
         }
-        calls = [{"name": "read_memory", "args": {"record_id": record_id},
+        memory.context("s", "u", "functional-m-test-v1")
+        assert memory.model_material(cfg())["memory_view"]["read_goal"] == "original_source"
+        calls = [{"name": "read_memory", "args": args,
                   "id": call_id, "type": "tool_call"}
-                 for record_id, call_id in zip(saved, ("open-a", "open-b"), strict=True)]
+                 for args, call_id in zip((a_args, {"record_id": saved[1]}),
+                                         ("open-a", "open-b"), strict=True)]
         business_receipt = ToolMessage(name="get_reservation", tool_call_id="business",
                                        content='{"business_outcome":"confirmed"}')
         messages = [HumanMessage(content=request), AIMessage(content="", tool_calls=calls),
@@ -2961,12 +2977,24 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
     with opened(tmp_path, **options) as memory:
         assert memory.service.records() == before
         memory.context("s", "u", "functional-m-test-v1")
-        assert any(item.get("revision") == 2 for item in memory.model_material(cfg())["items"])
+        material = memory.model_material(cfg())
+        assert material["memory_view"]["read_goal"] == "original_source"
+        assert any(item.get("revision") == 2 for item in material["items"])
         # The unrelated actually read matter is still available from the archive.
         archive = memory.service.store.get(
             namespace(memory.service), memory._writer_key(cfg(), "edit-writer-delivery:")
         ).value["items"]
         assert {item["record_id"] for item in archive if item["type"] == "record"} == set(saved)
+        mixed = json.loads(invoke(memory, "read_memory", {
+            "record_id": saved[0], "keep_resident": True,
+            "read_goal": "current_and_saved_history",
+        }, "current-and-history").content)
+        assert mixed["ok"]
+        assert memory.model_material(cfg())["memory_view"]["read_goal"] == (
+            "current_and_saved_history")
+        memory.service.capture_user("s", "next", "Only inspect the invoice arrangement.")
+        memory.context("s", "next", "functional-m-test-v1")
+        assert memory.model_material(cfg("next"))["memory_view"]["read_goal"] is None
 
 
 def test_current_refresh_keeps_original_maintenance_selection_binding(tmp_path):
