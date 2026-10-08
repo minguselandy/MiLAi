@@ -20,6 +20,7 @@ from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import FunctionalRejection, canonical, namespace
 from milai_lab.memory.service import MemoryService
+from milai_lab.memory.working_set import empty_view, select_view_refs
 
 CONFIG_VERSION = "synthetic-v1"
 
@@ -143,6 +144,43 @@ def test_state_driven_catalog_switch_reopen_reload_and_forget(tmp_path: Path) ->
         visible = invoke(memory, "read_memory", {"record_id": orchid["id"]}, "remaining",
                          cfg("after"))
         assert visible["ok"] and "date undecided" in visible["items"][0]["content"]
+
+
+def test_state_view_current_refresh_and_fixed_pool_selection(tmp_path: Path) -> None:
+    with opened(tmp_path, memory_view_mode="state_driven", read_limit=10,
+                read_interface="explicit_selectors_v1") as memory:
+        original = turn(memory, text="Atlas visits twice weekly; holidays pause visits.")
+        saved = memory.save(cfg(), "save", "Atlas visits twice weekly; holidays pause visits.",
+                            handles(memory, original))
+        correction = turn(memory, "change", "Atlas now visits three times weekly; holidays pause.")
+        config = cfg("change")
+        before = invoke(memory, "read_memory", {"record_id": saved["id"]}, "before", config)
+        old_handle = before["items"][0]["read_handle"]
+        revised = memory.update(config, "revise", old_handle, [{"field": "content", "op": "set",
+            "value": "Atlas visits three times weekly; holidays pause visits.",
+            "fragment_handles": handles(memory, correction)}])
+        assert revised["ok"] and revised["revision"] == 2
+        current = invoke(memory, "read_memory", {"record_id": saved["id"]}, "current", config)
+        assert {ref["revision"] for ref in memory.view_state(config)["resident_refs"]
+                if ref["kind"] == "record"} == {2}
+        history = invoke(memory, "read_memory_revision",
+                         {"record_id": saved["id"], "revision": 1}, "history", config)
+        pool = [*current["view_refs"], *history["view_refs"]]
+        state = select_view_refs(empty_view(), pool, [{"id": saved["id"], "view": "current"}])
+        assert {ref["revision"] for ref in state["resident_refs"]} == {2}
+        state = select_view_refs(state, pool,
+                                 [{"id": saved["id"], "revision": 1, "view": "saved_history"}])
+        assert {(ref["revision"], ref["view"]) for ref in state["resident_refs"]} == {
+            (2, "current_at_snapshot"), (1, "historical_exact_revision")}
+        state = select_view_refs(empty_view(), pool, [{"id": "outside-fixed-pool"}])
+        assert state["resident_refs"] == []
+        bound = memory._binding(config)
+        search = invoke(memory, "search_memory", {"query": "holidays"}, "explore", config)
+        assert memory._binding(config) == bound and search["delivered_units"] == 0
+        assert all(len(candidate["description"]) <= memory.fragment_chars
+                   for candidate in search["candidates"] if candidate["type"] == "source_candidate")
+        with pytest.raises(FunctionalRejection, match="PUBLIC_QUERY_CHANGED"):
+            memory.context("s", "change", CONFIG_VERSION, query="holidays")
 
 
 def test_support_context_keeps_selected_bodies_separate_from_exact_record_and_old_support(

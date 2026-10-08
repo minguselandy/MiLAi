@@ -46,6 +46,15 @@ def admit_refs(
     merged = copy.deepcopy(previous) if (
         keep_resident or same_matter or same_source or supporting_source
     ) else []
+    current_revisions = {
+        ref["id"]: ref["revision"] for ref in refs
+        if ref["kind"] == "record" and ref["view"] == "current_at_snapshot"
+    }
+    merged = [
+        ref for ref in merged if ref["kind"] != "record"
+        or ref["view"] != "current_at_snapshot" or ref["id"] not in current_revisions
+        or ref["revision"] == current_revisions[ref["id"]]
+    ]
     for ref in refs:
         identity = [ref.get(key) for key in (
             "kind", "id", "revision", "view", "range", "unit_id"
@@ -68,6 +77,32 @@ def admit_refs(
         ),
         "resident_refs": merged,
     }
+
+
+def select_view_refs(
+    state: dict[str, Any], available_refs: list[dict[str, Any]],
+    selections: list[dict[str, Any]], *, keep_resident: bool = False,
+) -> dict[str, Any]:
+    """Open selected identities from one actual pool, without bodies or another controller.
+
+    Callers resolve these references through their existing reader. Omitting a
+    range selects every available page/unit of that actual object and revision.
+    A missing identity cannot discover material outside the supplied candidate pool.
+    """
+    selected: list[dict[str, Any]] = []
+    for selection in selections:
+        kind = selection.get("kind", "record")
+        view = selection.get("view", "original_source" if kind == "source"
+                             else "current_at_snapshot")
+        view = {"current": "current_at_snapshot", "saved_history": "historical_exact_revision"}.get(
+            view, view)
+        selected.extend(
+            ref for ref in available_refs
+            if ref["kind"] == kind and ref["id"] == selection["id"] and ref["view"] == view
+            and all(ref.get(key) == selection[key]
+                    for key in ("revision", "range", "unit_id") if key in selection)
+        )
+    return admit_refs(state, selected, keep_resident=keep_resident)
 
 
 def catalog_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
