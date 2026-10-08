@@ -1,3 +1,21 @@
+# 2026-10-08 16:02:17 UTC: integrated post118 candidate, real HTTP still0
+
+Root integrated A requests/scope, B actual field maintenance/edit schema and C reads/runtime,
+then current feedback. Shared config milai-post118-function-first-v1 uses staged and
+literal_observations_v1; sampling/budgets/ordinarydense/model family unchanged. Pure
+continuation excludes current control even without a prior checkpoint; mixed new facts
+stay. Application results use Tool evidence, pure memory tasks keep original checkpoints.
+Profile default empty prose paths omitted from persisted definition to keep old v1 mapping.
+Own SQLite adapter keeps earliest SQLITE_FULL; old721 remains FAILED. Current feedback
+reports saved status separately from current permission. No new store/reviewer/retry/gates.
+Direct affected flows/types/Ruff/boundaries passed;25 actual localQwen template projections
+singleSystem/count equalscheck/peak11532/0HTTP. No real runner. Ledger unchanged47446/
+207145148known/207421844charged/embed1940092/historyunknown6. PR118 merged518;aad own
+Fast37800226798 success/Full37800226831 skipped;mainFast37802017275 success, not candidateCI.
+Next freeze new source/new roots, Root serial actual three exposed Host stories, then one
+staged diagnosis/necessary singlefactor/sameversion277/final confirmation. Preserve all
+original scope/sixdeliveries,16unused,no finalcandidate/Product NO_GO; agents no actualHTTP.
+
 # 2026-10-08: post117/118 function-first plan explicitly activated
 
 The user now explicitly requests full execution of

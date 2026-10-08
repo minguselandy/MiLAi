@@ -13,7 +13,6 @@ from typing import Any, Literal, cast
 
 import httpx
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
-from langgraph.store.sqlite import SqliteStore
 from pydantic import ValidationError
 from transformers import AutoTokenizer
 
@@ -33,6 +32,7 @@ from milai_lab.datasets.edit_benchmarks import (
 )
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+from milai_lab.harness.sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.memory.edit_units import (
     read_applicability,
     read_revision_evidence,

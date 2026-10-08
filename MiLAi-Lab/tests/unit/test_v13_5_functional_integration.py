@@ -71,6 +71,7 @@ def prepared(
     edit_interface_version: str = "v1",
     edit_features: dict[str, bool] | None = None,
     maintenance_recipe: str | None = None,
+    result_maintenance_mode: str = "legacy",
     read_exhaustion: str | None = None,
     memory_profile: str = "ordinary",
     memory_view_mode: str = "legacy",
@@ -100,6 +101,7 @@ def prepared(
         "memory_method": memory_method,
         "memory_profile": memory_profile,
         "memory_view_mode": memory_view_mode,
+        "result_maintenance_mode": result_maintenance_mode,
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
         "failure_delivery": "receipt_status_v4" if format_failure_receipts else
@@ -235,6 +237,11 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
         if names == {"classify_current_request"}:
             text = wire["messages"][-1]["content"]
             schema = wire["tools"][0]["function"]["parameters"]
+            if text == continue_text:
+                references = json.loads(wire["messages"][0]["content"].split(
+                    "VISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n", 1)[1])
+                assert references["requests"][0]["kind"] == "memory_maintenance"
+                assert "requirements" not in references["requests"][0]
             assert set(schema["required"]) == {
                 "memory_requests", "allow_forgetting", "business_action_request",
                 "business_operations", "application_continuation_request", "application_requests"}
@@ -268,6 +275,8 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                 return {"role": "assistant", "content": "{}"}
             assert sum(row["role"] == "system" for row in wire["messages"]) == 1
             scope = json.loads(system.rsplit(scope_marker, 1)[1])
+            if scope in {original_text, correction_text}:
+                return {"role": "assistant", "content": "{}"}
             assert scope == continue_text
             continuation_scopes.append(scope)
             packet = frame["delivery"]
@@ -5315,8 +5324,9 @@ def test_shared_host_delivers_selected_prior_request_beyond_recent_context(
     result = functional.message(root, **args)
     assert result["status"] == "COMPLETED", result.get("error")
     assert result["records"] == []  # Context delivery and empty proposals do not prove a save.
-    assert stages == ([] if no_save else ["extract", "edit"]
-                      if recipe == "extract_then_edit" else ["edit"])
+    # This continuation carries only control and has no pending checkpoint or
+    # delivered Tool result. Its words are not a new source to be maintained.
+    assert stages == []
     if no_save:
         assert result["maintenance"] == [] and len(wires) == 3
     else:
@@ -5564,7 +5574,7 @@ def test_host_request_reconciles_original_shared_commit_after_response_loss(
     assert len(wires) - count == 3  # declaration, bounded reference, actual Host response
 
 
-def test_host_save_continuation_registers_new_tool_batch_after_known_writer_failure(
+def test_host_save_continuation_registers_actual_tool_batch_after_unconfirmed_save(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     from milai_lab.application.functional import FunctionalApplication
@@ -5575,7 +5585,8 @@ def test_host_save_continuation_registers_new_tool_batch_after_known_writer_fail
         direct_response=True, phase_thinking=True, current_delivery=True,
         memory_profile="unified_v1",
         memory_method="milai_edit_m_v1", edit_interface_version="I2",
-        maintenance_recipe="single_pass", edit_features={name: True for name in (
+        maintenance_recipe="single_pass", result_maintenance_mode="literal_observations_v1",
+        edit_features={name: True for name in (
             "matter_organization", "semantic_operations", "bound_references",
             "single_record_changes", "source_metadata", "temporal_scope")})
     freeze = functional.frozen(root)
@@ -5681,19 +5692,23 @@ def test_host_save_continuation_registers_new_tool_batch_after_known_writer_fail
                                                 for p in card["user_fragments"]]
                 if frame["current_request"] == save_text else [])
         if not names:
-            packet = json.loads(wire["messages"][-1]["content"])["delivery"]
+            payload = json.loads(wire["messages"][-1]["content"])
+            packet = payload["delivery"]
             role = packet["source_table"][0]["role"]
             editor_roles.append(role)
-            if role == "user":
-                assert editor_roles == ["user"]
-                return {"role": "assistant", "content": "{", "_test_finish_reason": "length"}
-            assert role == "tool" and editor_roles == ["user", "tool"]
-            evidence = packet["evidence"][0]["id"]
+            assert role == "tool" and editor_roles == ["tool"]
+            assert save_text not in json.dumps(packet)
+            assert "Current maintenance scope" in wire["messages"][0]["content"]
+            candidates = {row["field"]: row for row in payload["change_candidates"]}
+            assert all(row["basis"] == "actual_source_literal"
+                       for row in candidates.values())
+            evidence = [alias for field in ("status", "label_status")
+                        for alias in candidates[field]["evidence"]]
             return {"role": "assistant", "content": json.dumps({"creates": [{
                 "action": "create", "matter": "Amber pack outcome", "clauses": [{
                     "text": "The amber pack was reserved and its label created.",
-                    "evidence": [evidence], "conditions": [],
-                    "assertion": {"source": evidence, "kind": "observed"}}]}], "records": {}})}
+                    "evidence": evidence, "conditions": [],
+                    "assertion": {"source": evidence[-1], "kind": "observed"}}]}], "records": {}})}
         assert not {"reserve_and_label", "complete_label"}.intersection(names)
         tools = [m for m in wire["messages"] if m["role"] == "tool"]
         if not tools:
@@ -5725,7 +5740,7 @@ def test_host_save_continuation_registers_new_tool_batch_after_known_writer_fail
     assert readonly["status"] == "COMPLETED", readonly.get("error")
     assert not readonly["request_mode"]["allow_memory_maintenance"]
     assert not readonly["request_mode"]["allow_business_mutation"]
-    assert readonly["maintenance"] == [] and editor_roles == ["user", "tool"]
+    assert readonly["maintenance"] == [] and editor_roles == ["tool"]
     assert readonly["application_requests"][0]["memory"]["attempts"] == (
         result["memory"]["attempts"])
     assert readonly["records"] == saved["records"] and readonly["world"]["world"] == original_world

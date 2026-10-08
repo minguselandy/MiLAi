@@ -11,6 +11,79 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## Post117/118功能优先候选：2026-10-08 16:02:17 UTC／北京时间2026-10-09 00:02:17
+
+用户已明确启动[功能优先完整计划](MILAI_POST_117_118_FUNCTION_FIRST_DEVELOPMENT_EXPERIMENT_PLAN.md)，
+Root与三开发agent在独立worktree合流；原完整研究任务和六项交付继续有效。PR118已于
+15:35:25 UTC合并，main为`518aee4190f3abdd6f902baeb59454f49cd0b22b`。报告头aad自身
+Fast37800226798成功、Full37800226831 skipped；合并后main Fast37802017275成功。
+这些是各自工程证据，不能归给新候选或替代语义评价。下面15:15等块是固定历史。
+
+**本候选已接通并完成直接离线检查，实际生成／embedding／Judge仍为0；不是最终候选。**
+当前没有真实runner；连续账本仍47446 requests／207145148 known／207421844 charged／
+embedding1940092／历史generation unknown6。旧38已闭合且原件不变，不恢复任何旧根。
+
+### 实现与可执行入口
+
+配置：[milai-post118-function-first-v1](../configs/milai-post118-function-first-v1.json)。
+共同默认为staged：一次目录选择后展开；多轮state_driven保留为可选。Qwen3.6、BGE-m3、
+thinking、temperature、检索、输出和累计额度保持原值，没有新生成阶段或Reviewer。
+
+- 实际当前范围通过同一单System构造进入普通维护与原请求续办，fit和调用用同一投影。
+  pure continue_prior且当前memory_write_request为none时，不再把当轮控制作为新User事实，
+  即使没有待恢复checkpoint也如此；混合新断言／更正仍保留当前来源。当前权限不由旧请求恢复。
+- 同一有界原请求目录补充已有纯记忆pending_maintenance；它们没有虚构业务requirements。
+  已选应用结果保存优先实际Tool来源，原User计划保留为上下文；其他记忆待办沿原checkpoint续办。
+  原话、已有尝试、来源时间及实际回执保持。没有新事实库或按关键词授予权限。
+- `result_maintenance_mode=literal_observations_v1`复用公开ObservationProfile维护版2，
+  将原JSON成员的实际key:value范围和字面分项值交给共同Editor；原Tool Source仍可完整读取。
+  已知字段不再由Extractor重造，声明的未结构化正文仍经过同一Extractor；未匹配来源沿旧抽取。
+  候选元数据和范围进入原维护checkpoint，重开复用；程序候选不能计为LLM形成、提交或语义通过。
+  字段包过大明确incomplete，不任意删字段、扩预算或盲重试。
+- 普通属性仍用content；新生成schema不再提供content＋attach_to非法组合，条件目标只使用
+  实际content。旧解码及原拒绝语义保留，不将旧拒绝回填成功。新形成与实际修改采用可独立更正
+  而自足的条款组织，保留已有support继承；没有全库自动拆分，语义保持尚待真实检验。
+- 实际材料带有当前保存解释／原话／精确保存历史的reading_basis；已知历史revision直接通过
+  原read_memory_revision工具打开，目的沿原read_goal保持，权限、读取额度和固定池不扩大。
+  renderer分列实际保存状态及当前许可；旧禁写原因不掩盖本轮失败，回执不表示全部语义覆盖。
+- 两CLI在导入runner／SQLite前支持`--runtime-dir`，单次检查可写和空间，设置TMPDIR、
+  SQLITE_TMPDIR及tempfile cache；未声明时保留原启动行为。共同Host与edit benchmark使用
+  锁定Store2.0.11的局部事务适配，异常时rollback、附清理异常并保留最早错误，成功才commit；
+  不修改site-packages或全局monkey-patch。普通维护缺少可用证据时不要求不存在的重复保存工具。
+
+正常使用示例（从MiLAi-Lab运行，ROOT为新的输出目录，不能使用旧运行根）：
+
+```bash
+PYTHONPATH=src python tools/run_functional.py --runtime-dir artifacts/runtime/post118-v1 \
+  prepare --root artifacts/post118/ordinary-v1 \
+  --config configs/milai-post118-function-first-v1.json
+PYTHONPATH=src python tools/run_functional.py --runtime-dir artifacts/runtime/post118-v1 \
+  message --root artifacts/post118/ordinary-v1 --bank personal --owner example-user \
+  --session visit-1 --message-id save-1 --text '请记住，我的午休提醒使用静音模式。'
+```
+
+业务使用沿既有公开应用入口；外部应用提供公开profile，不能从隐藏world或gold构造观察。
+当前保存状态查询和原始观察可读不等于完整请求已经语义完成。运行目录启动检查也不保证整段
+历史永不耗尽空间；实际失败仍保留。
+
+### 直接检查、反思与尚未完成项
+
+Root已运行共同保存／重开、Tool结果补存＋只读重开、无结果来源时不维护控制、纯记忆待办
+跨会话续办的直接既有流程；使用合成transport和真实SQLite，0真实HTTP。实际SQLITE_FULL
+检查保留原错误、失败行不存在、后续写入与重开可用。三worker各自的直接流程、相关Ruff、
+类型及包边界通过；不是Full全套或语义验证。25份已保存机械请求使用真实本地Qwen模板
+离线渲染，均单System、count与check一致，峰值11532 tokens，0HTTP。输入变小不证明维护正确。
+
+这次改变的是实际控制路由、已知观察的投递、合法编辑选择和读取／反馈材料。程序已知的
+字面字段不再交给模型重复猜；没有新增平行事实状态。仅凭合法空输出、导航done或已提交
+仍不能确认语义变化落实。下一步冻结合流源码，复用三条已曝光连续故事、独立空库，Root串行
+真实HTTP；一般语义失败登记后继续其他功能，权限／数据损坏／重复业务先处理。随后一版staged
+开发诊断、一个实际因素的有限对照、同版五方法277独立连续历史及最终确认依原计划推进。
+
+新候选尚无真实Host效果、集中评分或同版优势结论。16保留用户未用；旧505负结果、d62、9a、
+721 FAILED与38失败画像不回填。最终Host135case／192message、新故事、保留集、外部任务及
+原六项交付均未完成；Product仍NO_GO。
+
 ## 当前实验汇总：2026-10-08 15:15:56 UTC／北京时间23:15:56固定快照
 
 **最新四消息Host已执行闭合，真实最终业务结果进入r3，但语义维护仍未通过。**

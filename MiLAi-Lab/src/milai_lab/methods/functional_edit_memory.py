@@ -42,6 +42,7 @@ from milai_lab.memory.functional_state import (
     reference_key,
     scope_leaves,
 )
+from milai_lab.memory.working_set import read_evidence_basis
 from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.edit_maintenance import (
@@ -331,6 +332,7 @@ class FunctionalEditMemory(FunctionalMemory):
         material = {
             "ok": True, "schema": "functional_material_v1", "kind": "resident",
             "items": items, **self._read_only_metadata(items),
+            "reading_basis": read_evidence_basis(items),
             "memory_view": view, "read_progress": self.read_progress(config),
             "pending_maintenance": pending,
         }

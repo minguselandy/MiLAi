@@ -1,5 +1,16 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 16:02:17 UTC／北京时间2026-10-09 00:02:17：功能优先完整计划执行中。**
+
+PR118已合并main518（aad own Fast成功／Full skipped，main own Fast成功）；Root＋三独立
+开发agent已合流范围／纯记忆待办、真实字段结果维护、局部编辑生成合同、历史导航／读取解释、
+当前反馈及运行目录／事务清理。新普通Host配置为milai-post118-function-first-v1，默认staged；
+相关直接检查通过，真实Qwen模板25机械输入单System/count一致、峰值11532，真实候选HTTP0。
+无真实runner，账本47446／207145148known／207421844charged／embed1940092／历史unknown6。
+下一步冻结候选，Root串行复用三条既有连续故事；不是语义通过、最终候选或研究完成。
+原范围／六交付、16保留未用和Product NO_GO保持。详见[候选与正常用法](MILAI_UNIFIED_MEMORY_USAGE.md)
+及[当前问题](MILAI_BUILD_FIRST_ISSUES.md)。下方都是各自固定历史，旧暂停／PID不用于当前调度。
+
 **2026-10-08 15:15:56 UTC／北京时间23:15:56：38 Host闭合，结果保存与语义问题并列。**
 
 冻结38四消息均COMPLETED／exit0；实际业务恰一次预订＋一次标签完成，补存／只读零

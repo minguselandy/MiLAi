@@ -33,11 +33,11 @@ from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
-from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.host_requests import HostRequestProgress, visible_cards
 from milai_lab.application.recovery import UnknownModelRequest, resume_request
+from milai_lab.application.refs import observation_profile
 from milai_lab.application.request_plans import (
     application_requests_schema,
     compile_application_requests,
@@ -53,6 +53,7 @@ from milai_lab.harness.contextual_artifacts import (
     http_budget_scope,
 )
 from milai_lab.harness.functional_faults import FunctionalFaults
+from milai_lab.harness.sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.memory.activation import ActivationIndex
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import FunctionalIntegrityError as FunctionalIntegrityError
@@ -531,6 +532,7 @@ def prepare(
         "edit_features",
         "maintenance_recipe",
         "memory_view_mode",
+        "result_maintenance_mode",
         "memory_profile",
         "memory_ranking",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
@@ -542,6 +544,10 @@ def prepare(
         raise ValueError("FUNCTIONAL_MEMORY_PROFILE_INVALID")
     if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
         raise ValueError("FUNCTIONAL_MEMORY_VIEW_MODE_INVALID")
+    if settings.get("result_maintenance_mode", "legacy") not in {
+        "legacy", "literal_observations_v1",
+    }:
+        raise ValueError("FUNCTIONAL_RESULT_MAINTENANCE_MODE_INVALID")
     if settings.get("memory_ranking", "dense") not in {"dense", "activation"}:
         raise ValueError("MEMORY_RANKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
@@ -1053,13 +1059,22 @@ def request_mode(
                        "Use exactly the declared fields, enum values and types; no extra fields. "
                        + ("Return one classify_current_request call." if native_declaration
                           else "Return one valid JSON object."))
-        candidates = [{
-            "request_id": card["request_id"],
-            "requirements": card["requirements"],
-            "progress": {part: card["progress"][part]["status"]
-                         for part in ("business", "memory", "feedback")},
-            "user_fragments": card["user_fragments"],
-        } for card in (referenced_requests or [])] if application_workflow is not None else []
+        candidates = []
+        if application_workflow is not None:
+            for card in referenced_requests or []:
+                if card.get("kind") == "memory_maintenance":
+                    candidates.append({key: card[key] for key in (
+                        "kind", "request_id", "maintenance_phase", "pending_refs",
+                        "confirmed_receipt_count", "user_fragments",
+                    )})
+                else:
+                    candidates.append({
+                        "request_id": card["request_id"],
+                        "requirements": card["requirements"],
+                        "progress": {part: card["progress"][part]["status"]
+                                     for part in ("business", "memory", "feedback")},
+                        "user_fragments": card["user_fragments"],
+                    })
         references: list[dict[str, Any]] = []
         omitted = 0
         for reference in reversed(candidates):
@@ -1370,10 +1385,19 @@ def continuation_operations(
                 "source_refs": list(dict.fromkeys(row["source_ref"] for row in selected)),
                 "semantic_correctness": "unchecked", "completion": "not_proven_by_resolution"})
         selected_refs = {fragment["source_ref"] for fragment in selected}
+        result_request_refs = {
+            card["binding"]["source_ref"]
+            for card in material.get("registered_application_requests", [])
+            if card["request_id"] in prior_request_ids and card["requirements"]["save_result"]
+        }
         resolved["prior_maintenance_requests"] = [
             {name: card[name] for name in ("session", "request_id", "checkpoint")}
             for card in material.get("pending_maintenance", [])
             if selected_refs.intersection(card["source_refs"])
+            # The selected application result uses an actual Tool observation.
+            # Its original User plan remains context, rather than another result
+            # save attempt. Unrelated memory-only work retains its own checkpoint.
+            and not set(card["source_refs"]).issubset(result_request_refs)
         ]
     trace({"event": "functional_continuation_resolution", **resolved})
     return resolved
@@ -2257,7 +2281,12 @@ def message(
                     if blocked is not None:
                         raise _VisibilityReplayRevoked(blocked)
                     if settings["request_mode"] == "current_request_native_v8":
-                        request_cards = visible_cards(app, service, capture["source_ref"])
+                        request_cards = visible_cards(
+                            app, service, capture["source_ref"],
+                            pending_maintenance=(memory.pending_maintenance(cfg)
+                                                 if isinstance(memory, FunctionalEditMemory)
+                                                 else None),
+                        )
                 mode = request_mode(
                     model,
                     mode_path,
@@ -2355,9 +2384,17 @@ def message(
                     )
                     if settings["request_mode"] == "current_request_native_v8":
                         cards = (request_cards if request_cards is not None else
-                                 visible_cards(app, service, capture["source_ref"]))
+                                 visible_cards(
+                                     app, service, capture["source_ref"],
+                                     pending_maintenance=(memory.pending_maintenance(cfg)
+                                                          if isinstance(memory,
+                                                                        FunctionalEditMemory)
+                                                          else None),
+                                 ))
                         material = {**material, "items": list(material.get("items", [])),
-                                    "registered_application_requests": cards}
+                                    "registered_application_requests": [
+                                        card for card in cards
+                                        if card.get("kind") != "memory_maintenance"]}
                         delivered = {row.get("fragment_handle") for row in material["items"]}
                         for card in cards:
                             for part in card["user_fragments"]:
@@ -2478,15 +2515,22 @@ def message(
                     model_call=maintenance_call, allowed=maintenance_allowed,
                     execute=execute, fit=maintenance_fit,
                 ) for prior in (mode or {}).get("prior_maintenance_requests", [])]
-                skip_current = bool(results and mode
-                                    and mode.get("current_memory_write_request") == "none")
+                skip_current = bool(mode and mode.get(
+                    "current_memory_write_request", mode.get("memory_write_request")) == "none")
                 return [*results, *memory.maintain_sources(
                     cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                     model_call=maintenance_call, allowed=maintenance_allowed, execute=execute,
                     fit=maintenance_fit, prior_request_fragments=prior_request_fragments(),
                     skip_source_refs=[capture["source_ref"]] if skip_current else None,
                     memory_save_requested=bool(memory.memory_view_mode != "legacy"
-                                               and mode and mode["requires_memory_result"]))]
+                                               and mode and mode["requires_memory_result"]),
+                    maintenance_scope=content,
+                    prepare_source_delivery=(
+                        (lambda delivery: memory.writer.observation_delivery(
+                            delivery, [observation_profile(app.workflow, maintenance=True)]))
+                        if settings.get("result_maintenance_mode", "legacy")
+                        == "literal_observations_v1" else None),
+                )]
 
             def context_hook(
                 state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
@@ -3030,7 +3074,7 @@ def message(
                 # Necessary condition only: one receipt does not prove that every
                 # requested item, its meaning or the final prose is correct.
                 effects = memory_effects(current)
-                if maintenance_recipe and output.get("maintenance") and not (
+                if maintenance_recipe and not (
                     mode and mode["allow_forgetting"]
                 ):
                     return False
@@ -3150,7 +3194,7 @@ def message(
                 ):
                     final = business_response(response_input, effects,
                         json.loads(str(response_input[0].content).splitlines()[-1]),
-                        execution_stop=output.get("execution_stop"))
+                        execution_stop=output.get("execution_stop"), current_mode=mode)
                     output["finalization"] = {"status": "response_rendered", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": False,
                         "protocol": "receipt_business_response_v1", "model_generation": False}
