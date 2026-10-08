@@ -25,7 +25,7 @@ from milai_lab.memory.functional_state import (
     reference_key,
 )
 from milai_lab.memory.service import MemoryService
-from milai_lab.memory.working_set import empty_view, select_view_refs
+from milai_lab.memory.working_set import catalog_candidates, empty_view, select_view_refs
 
 CONFIG_VERSION = "synthetic-v1"
 
@@ -118,6 +118,8 @@ def test_state_driven_catalog_switch_reopen_reload_and_forget(tmp_path: Path) ->
         assert search["delivered_raw_fragment_count"] == 0
         first = invoke(memory, "read_memory", {"record_id": atlas["id"]}, "atlas", config)
         assert "holidays pause" in first["items"][0]["content"]
+        assert set(first["reading_basis"]) == {"current_at_snapshot"}
+        assert search["reading_basis"] == {}
         invoke(memory, "read_memory", {"record_id": orchid["id"]}, "orchid", config)
         assert {item["record_id"] for item in memory.resident_items(config)} == {orchid["id"]}
         invoke(memory, "read_memory", {"record_id": atlas["id"], "keep_resident": True},
@@ -137,7 +139,8 @@ def test_state_driven_catalog_switch_reopen_reload_and_forget(tmp_path: Path) ->
                 if item["type"] == "record"} == {orchid["id"]}
         reloaded = invoke(memory, "read_memory", {"record_id": atlas["id"]}, "reload", config)
         assert reloaded["items"] == first["items"]
-        invoke(memory, "read_source", {"source_ref": atlas_ref}, "original", config)
+        original = invoke(memory, "read_source", {"source_ref": atlas_ref}, "original", config)
+        assert set(original["reading_basis"]) == {"original_source"}
         assert {item["type"] for item in memory.resident_items(config)} == {"record", "fragment"}
         old_refs = memory.view_state(config)["resident_refs"]
         forgotten = memory.service.forget(
@@ -170,6 +173,16 @@ def test_state_view_current_refresh_and_fixed_pool_selection(tmp_path: Path) -> 
                 if ref["kind"] == "record"} == {2}
         history = invoke(memory, "read_memory_revision",
                          {"record_id": saved["id"], "revision": 1}, "history", config)
+        assert set(history["reading_basis"]) == {"historical_exact_revision"}
+        catalog = memory._page(memory._snapshot(memory._binding(config),
+            catalog_candidates(history["items"]), "saved_history_catalog"),
+            0, memory._binding(config))
+        read = catalog["candidates"][0]["read"]
+        reopened = invoke(memory, read["tool"], read["arguments"], "history-catalog", config)
+        assert reopened["items"][0]["revision"] == 1
+        assert "twice weekly" in reopened["items"][0]["content"]
+        assert "three times" in current["items"][0]["content"]
+        assert catalog["delivered_units"] == 0 and catalog["reading_basis"] == {}
         pool = [*current["view_refs"], *history["view_refs"]]
         state = select_view_refs(empty_view(), pool, [{"id": saved["id"], "view": "current"}])
         assert {ref["revision"] for ref in state["resident_refs"]} == {2}
