@@ -104,7 +104,7 @@ class NativePublicActionJournal(BusinessActionJournal):
                 "operation": old["name"],
                 "effect": old.get("effect", "unknown"),
                 "receipt_status": old.get("status", "pending"),
-                "dispatch_started": old.get("executed", False),
+                "operation_call_started": old.get("executed", False),
                 "same_public_message": old.get("public_turn") == self.public_turn,
             }
             if old.get("status") == "complete":
