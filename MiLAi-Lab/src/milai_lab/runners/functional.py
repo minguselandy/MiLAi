@@ -3196,7 +3196,10 @@ def message(
                     "receipt_or_agent_response_v1",
                 } and (
                     effects["business"]["operations"]
-                    or effects["business"]["observations"]
+                    or (effects["business"]["observations"]
+                        and settings.get("finalization") != "receipt_or_agent_response_v1")
+                    or (effects.get("application_requests")
+                        and settings.get("finalization") == "receipt_or_agent_response_v1")
                     or (
                         settings.get("finalization") == "receipt_business_response_v1"
                         and mode
@@ -3238,10 +3241,20 @@ def message(
                     if (not isinstance(final, AIMessage) or final.tool_calls
                             or final_delivery(final.content)["status"] != "available"):
                         raise IncompleteChatResponse("FUNCTIONAL_AGENT_FINAL_UNAVAILABLE")
+                    observations_appended = bool(effects["business"]["observations"])
+                    if observations_appended:
+                        # A query alone does not define the user's whole task.
+                        # Preserve the answer and separately report its actual
+                        # matched observations, without a new model call.
+                        observed = business_response(response_input, effects, {},
+                            include_memory_feedback=False)
+                        final = final.model_copy(update={
+                            "content": str(final.content) + "\n\n" + str(observed.content)})
                     output["finalization"] = {
                         "status": "agent_response_retained", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": True,
-                        "protocol": "agent_response_v1", "model_generation": False}
+                        "protocol": "agent_response_v1", "model_generation": False,
+                        "observation_receipts_appended": observations_appended}
                     trace(
                         {
                             "event": "functional_agent_finalization",

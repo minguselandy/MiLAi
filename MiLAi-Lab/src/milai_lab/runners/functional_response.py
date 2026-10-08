@@ -134,6 +134,7 @@ def business_response(
     *, execution_stop: dict[str, Any] | None = None,
     current_mode: dict[str, Any] | None = None,
     include_business: bool = True,
+    include_memory_feedback: bool = True,
 ) -> AIMessage:
     """Use matched delivered receipts and current-message journal identities only."""
     business = effects["business"]
@@ -188,6 +189,8 @@ def business_response(
         historical.add(ref)
         paragraphs.append("历史原始回执 (不代表当前状态): \n\n" + "\n".join(
             "- " + line for line in _receipt_lines(old)))
+    if not include_memory_feedback:
+        return AIMessage(content="\n\n".join(paragraphs))
     saved_content = _saved_content_lines(messages, material)
     paragraphs.extend(saved_content)
     if saved_content and not effects.get("application_requests"):
