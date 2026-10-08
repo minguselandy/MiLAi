@@ -3454,17 +3454,18 @@ def test_direct_response_preserves_agent_text_but_keeps_memory_and_business_rece
         operation_completion=True, phase_thinking=True, reasoning_history=True,
         direct_response=True)
     answer = 'Saved: try short sentences only for this presentation.'
+    query_answer = 'The stored limit applies only here.'
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
-        declaration = ordinal in {1, 5, 7}
+        declaration = ordinal in {1, 5, 8}
         assert wire['temperature'] == (0 if declaration else 1)
         assert wire['chat_template_kwargs']['enable_thinking'] is not declaration
         if declaration:
             return native_call('classify_current_request', f'mode-{ordinal}',
                 memory_write_request='explicit' if ordinal == 1 else 'none',
                 allow_forgetting=False,
-                business_action_request='perform' if ordinal == 7 else 'none',
-                business_operations=['reserve_and_label'] if ordinal == 7 else [])
+                business_action_request='perform' if ordinal == 8 else 'none',
+                business_operations=['reserve_and_label'] if ordinal == 8 else [])
         if ordinal == 2:
             return {'role': 'assistant', 'content': 'Saved without doing anything.'}
         if ordinal == 3:
@@ -3475,11 +3476,17 @@ def test_direct_response_preserves_agent_text_but_keeps_memory_and_business_rece
             return {'role': 'assistant', 'content': answer}
         if ordinal == 6:
             assert 'save_memory' not in {t['function']['name'] for t in wire['tools']}
-            return {'role': 'assistant', 'content': 'The stored limit applies only here.'}
-        if ordinal == 8:
+            return native_call('get_reservation', 'query-only', item_key='query-only-item')
+        if ordinal == 7:
+            observation = json.loads(next(message['content'] for message in wire['messages']
+                if message.get('tool_call_id') == 'query-only'))
+            assert observation['receipt']['status'] == 'not_found'
+            assert observation['receipt']['item_key'] == 'query-only-item'
+            return {'role': 'assistant', 'content': query_answer}
+        if ordinal == 9:
             return native_call('reserve_and_label', 'reserve', item_key='direct-response-item',
                                quantity=1, destination='local', packing='box')
-        assert ordinal == 9
+        assert ordinal == 10
         return {'role': 'assistant', 'content': 'DRAFT_FALSE_BUSINESS_NOT_DONE'}
 
     wires = scripted(monkeypatch, reply, native=True)
@@ -3494,13 +3501,34 @@ def test_direct_response_preserves_agent_text_but_keeps_memory_and_business_rece
     assert len(wires) == 4 and len(saved['records']) == 1
     assert sum(m.get('content') == answer for m in saved['messages']) == 1
     assert functional.message(root, **common, **args) == saved and len(wires) == 4
-    query = functional.message(root, **common, session='s2', message_id='query',
-                               content='Does the stored limit apply everywhere?')
-    assert query['status'] == 'COMPLETED' and len(wires) == 6
+    query_args = dict(session='s2', message_id='query', content=(
+        'Does the stored limit apply everywhere? Also query query-only-item; do not act or save.'))
+    query = functional.message(root, **common, **query_args)
+    assert query['status'] == 'COMPLETED' and len(wires) == 7
     assert query['operation_status']['semantic_memory']['status'] == 'not_committed'
+    assert not query['operation_status']['business']['operations']
+    assert len(query['operation_status']['business']['observations']) == 1
+    assert not query['operation_status'].get('application_requests')
+    assert query['execution_candidate_answer'] == query_answer
+    assert query['final_answer'].startswith(query_answer + '\n\n')
+    assert query['final_answer'].count(query_answer) == 1
+    assert '未查到对象' in query['final_answer'] and 'query-only-item' in query['final_answer']
+    assert '本轮语义记忆' not in query['final_answer']
+    assert query['finalization']['protocol'] == 'agent_response_v1'
+    assert query['finalization']['execution_candidate_delivered'] is True
+    assert query['finalization']['observation_receipts_appended'] is True
+    assert query['finalization']['model_generation'] is False
+    assert query['records'] == saved['records']
+    assert query['world']['world'] == saved['world']['world']
+    query_sources = {source['event_id']: source for source in query['sources']}
+    assert all(query_sources[source['event_id']] == source for source in saved['sources'])
+    replay = functional.message(root, **common, **query_args, resume=True)
+    assert len(wires) == 7 and replay['final_answer'] == query['final_answer']
+    assert replay['records'] == query['records'] and replay['sources'] == query['sources']
+    assert replay['world'] == query['world']
     operated = functional.message(root, **common, session='s3', message_id='reserve',
                                   content='Reserve and label one direct-response-item.')
-    assert operated['status'] == 'COMPLETED' and len(wires) == 9
+    assert operated['status'] == 'COMPLETED' and len(wires) == 10
     assert operated['operation_status']['business']['status'] == 'completed'
     assert 'DRAFT_FALSE_BUSINESS_NOT_DONE' not in operated['final_answer']
     assert 'direct-response-item' in operated['final_answer']
