@@ -728,9 +728,10 @@ def read_applicability(
                 scope_status="requires_source_interpretation" if bound or declared.get("scope")
                 else "not_declared",
                 quantity_scope=declared.get("quantity_scope", "unspecified"),
-                evidence_status=evidence_status(unit.get("assertion") or {}),
                 semantic_support="unchecked",
             )
+            if "evidence_links" in (unit.get("assertion") or {}):
+                result["evidence_status"] = evidence_status(unit["assertion"])
             if declared.get("quantity_scope") == "overall":
                 result["member_quantities"] = "not_implied_by_overall_total"
         return result
@@ -1377,17 +1378,17 @@ def writer_projection(
                         public_units[-1]["assertion"]["applicability"] = copy.deepcopy(
                             assertion["applicability"]
                         )
-                    if features.get("temporal_scope") and assertion:
+                    if (features.get("temporal_scope") and assertion
+                            and "evidence_links" in assertion):
                         public_units[-1]["assertion"]["evidence_status"] = evidence_status(
                             assertion
                         )
-                        if "evidence_links" in assertion:
-                            public_units[-1]["assertion"]["evidence_links"] = {
-                                stance: [{"source": source_id(ref),
-                                          "range": [ref["start"], ref["end"]]}
-                                         for ref in linked]
-                                for stance, linked in assertion["evidence_links"].items()
-                            }
+                        public_units[-1]["assertion"]["evidence_links"] = {
+                            stance: [{"source": source_id(ref),
+                                      "range": [ref["start"], ref["end"]]}
+                                     for ref in linked]
+                            for stance, linked in assertion["evidence_links"].items()
+                        }
 
             def support_id(
                 item: dict[str, Any], binding: dict[str, Any], record_alias: str = record_alias

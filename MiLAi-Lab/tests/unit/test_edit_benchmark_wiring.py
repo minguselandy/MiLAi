@@ -23,7 +23,7 @@ from milai_lab.datasets.edit_benchmarks import (
 )
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget, RunLimits
-from milai_lab.memory.edit_units import render_revision_view
+from milai_lab.memory.edit_units import evidence_status, render_revision_view, writer_projection
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
@@ -179,10 +179,53 @@ def test_reader_semantic_projection_keeps_limits_and_explicit_unknown_overrides(
         assert bound["from"] == "2026-01-01" and bound["until"] == "2026-02-01"
         assert bound["from_time"]["precision"] == "day"
         assert bound["from_time"]["timezone_known"] is False
-        assert actual["evidence_status"] == "insufficient"
+        assert "evidence_status" not in actual
         assert actual["semantic_support"] == "unchecked"
     assert "including null" in messages[0]["content"]
     assert "unlimited validity" in messages[0]["content"]
+
+    # Optional stance links do not replace an actual report's primary Source or
+    # retained support. Missing links are undeclared, not evidence against it.
+    original_text = "Plan two rounds per shift. Only during January."
+    support = {"evidence_id": "actual-user-fragment",
+               "source_ref": source["source_ref"], "source_revision": 1,
+               "start": 0, "end": len(original_text)}
+    retained = copy.deepcopy(state)
+    for item in [*retained["units"], *retained["relations"]]:
+        item["evidence_refs"] = [support]
+
+    def writer_input() -> tuple[dict[str, Any], dict[str, Any]]:
+        return writer_projection({
+            "records": [{"edit_state": retained}],
+            "redelivered_sources": [{**source, **support, "text": original_text}],
+        }, "I2", "M", allow_create=False,
+            features={"source_metadata": True, "temporal_scope": True})
+
+    packet, mapping = writer_input()
+    assert packet["records"][0]["clauses"][0]["assertion"] == {
+        "kind": "reported", "source": "s1", "applicability": {"scope": "each shift"},
+    }
+    assert packet["source_table"][0]["role"] == "user"
+    assert packet["source_table"][0]["occurred_at"] == source["occurred_at"]
+    assert mapping["units"]["u1"]["assertion"] == state["units"][0]["assertion"]
+    assert mapping["units"]["u1"]["evidence_refs"] == [support]
+    assert packet["historical_support"][0]["ranges"] == [{
+        "source": "s1", "range": [0, len(original_text)],
+    }]
+    assert evidence_status(source) == "insufficient"  # Existing helper contract stays.
+    for links, status in [
+        ({"supports": [support]}, "supported"),
+        ({"opposes": [support]}, "opposed"),
+        ({"supports": [support], "opposes": [support]}, "both"),
+        ({}, "insufficient"),
+    ]:
+        retained["units"][0]["assertion"]["evidence_links"] = links
+        linked = render_revision_view(retained, query_time="2026-02-02")
+        assert linked["units"][0]["evidence_status"] == status
+        assert linked["units"][0]["assertion"]["source_ref"] == source["source_ref"]
+        packet, mapping = writer_input()
+        assert packet["records"][0]["clauses"][0]["assertion"]["evidence_status"] == status
+        assert mapping["units"]["u1"]["evidence_refs"] == [support]
 
 
 def test_observed_input_excludes_reference_and_future_material() -> None:
