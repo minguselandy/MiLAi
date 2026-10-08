@@ -4563,20 +4563,33 @@ def test_bounded_reproposal_actual_agent_stops_before_third_review(
             return native_call('save_memory', f'proposal-{ordinal}',
                 content={2: 'Use unit A.', 4: 'Unit A is used.', 6: 'The unit is A.'}[ordinal],
                 fragment_handles=selected)
-        if ordinal == 7:
-            receipt = actual_tool_receipt(wire)
-            assert receipt['maintenance']['proposals_used'] == 2 and receipt['effect'] == 'none'
-        else:
-            assert ordinal == 8 and not wire.get('tools')
+        assert ordinal == 7
+        receipt = actual_tool_receipt(wire)
+        assert receipt['maintenance']['proposals_used'] == 2 and receipt['effect'] == 'none'
         return {'role': 'assistant', 'content': 'The semantic memory remains pending.'}
 
     wires = scripted(monkeypatch, reply, native=True)
     final = functional.message(root, bank='limit', owner='alice', session='s',
                                message_id='m', content=request)
     assert final['status'] == 'COMPLETED', final
-    assert final['records'] == [] and len(wires) == 8
-    assert len(list(root.glob('banks/*/*-formation-review-*.json'))) == 2
+    assert final['records'] == [] and final['generation_calls'] == len(wires) == 7
+    reviews = {path: read_json(path) for path in root.glob('banks/*/*-formation-review-*.json')}
+    assert len(reviews) == 2
     assert not final['world']['world']['attempts']
+    assert final['operation_status']['semantic_memory']['status'] == 'not_committed'
+    assert final['operation_status']['request_completion'] == 'unchecked'
+    assert final['finalization']['status'] == 'response_rendered'
+    assert not final['finalization']['model_generation']
+    assert not final['finalization']['execution_candidate_delivered']
+    assert '本轮语义记忆: 未提交。' in final['final_answer']
+    assert '本轮已尝试记忆维护' in final['final_answer']
+    assert '本轮业务结果' not in final['final_answer']
+    assert [s['content'] for s in final['sources'] if s['role'] == 'user'] == [request]
+    replay = functional.message(root, bank='limit', owner='alice', session='s',
+                                message_id='m', content=request, resume=True)
+    assert replay['records'] == [] and len(wires) == 7
+    assert replay['world'] == final['world']
+    assert {path: read_json(path) for path in reviews} == reviews
 
 
 @pytest.mark.parametrize('kind', ['formation', 'revision'])
