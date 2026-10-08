@@ -5610,9 +5610,9 @@ def test_host_save_continuation_registers_new_tool_batch_after_known_writer_fail
         names = {tool["function"]["name"] for tool in wire.get("tools", [])}
         if names == {"classify_current_request"}:
             readonly = wire["messages"][-1]["content"] == read_text
-            references = json.loads(next(row["content"].split("\n", 1)[1]
-                for row in wire["messages"] if row["content"].startswith(
-                    "VISIBLE ORIGINAL REQUEST REFERENCES")))["requests"]
+            references = json.loads(wire["messages"][0]["content"].split(
+                "VISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n", 1)[1])[
+                    "requests"]
             assert len(references) == 1 and references[0]["request_id"] == original_id
             assert references[0]["requirements"]["save_result"]
             assert references[0]["progress"]["business"] == "completed"

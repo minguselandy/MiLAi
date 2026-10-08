@@ -1,3 +1,17 @@
+# Development handoff: 2026-10-08 single-System reference input
+
+PR116 initiald366 is frozen; actualHost CLOSED/exit0 but1COMPLETED/1FAILED/2NOT_RUN.
+Second message failed beforeHTTP: Qwen template rejects second System. Initial synthetic
+template missed it. Root merged reference data into original System only; no hotedit,
+old-root retry or new gate.2direct checks/Ruff/single-source mypy pass; actual local
+Qwen template/count_messages probe passes1799tokens/0HTTP, corrected realHTTP0.
+Do not claim save-only improvement.
+d366 actual11generation122095/4embedding260/newunknown0; local failed generation_calls1
+is not an HTTP. Currentledger47392/206399806known/206676502charged/embed1938493/unknown6.
+356save failure/721diskfull failure preserved. Next run must freeze corrected commit,
+fresh empty banks, Root serial HTTP, /cra TMPDIR and SQLITE_TMPDIR, same ledger.
+Full goal active/incomplete,16unused,no final candidate,Product NO_GO. Older blocks historical.
+
 # Development handoff: 2026-10-08 visible request interpretation
 
 Base main e1424cc/PR115 merged; b6 ownFast37784334748/mainFast37785621886 passed,

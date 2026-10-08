@@ -11,6 +11,27 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 14:12:21 UTC：参考输入首轮被模板拒绝，修正消息拼装
+
+冻结`d3669bf2a31e29340a82367bffa016819e947ce2`的独立四消息Host已闭合，进程退出0，
+实际为1 COMPLETED／1 FAILED／2 NOT_RUN。首次消息形成r1及带部分业务结果的r2，但仍有
+`EDIT_APPEND_CONDITION_TARGET_INVALID`；第二条在HTTP之前被本地Qwen模板拒绝：
+`System message must be at the beginning.` 后两条没有运行，所以尚无此候选的纯补存分类结果。
+
+根因是本次输入拼装添加了第二条System消息。合成测试的简单模板允许它，因此没有发现；
+实际模板不同。本次仅把参考材料并入原System、保留当前User全文及原一次调用，不增加
+校验框架、重试或修改冻结d366源码。两个直接流程、Ruff及单源mypy再次通过；实际本地
+Qwen模板离线检查通过，apply_chat_template与HostCapacity均计1799 tokens；同一窄probe
+仍确认省略、当前全文、合法空动作和缓存0调用。不能当模型效果；修正版尚无真实HTTP，
+须另冻结／独立空库。
+
+首轮实际11个生成响应（4 tool_calls＋7 stop），122095 known／charged tokens；
+4 embedding／260 tokens、新unknown0。第二条generation_calls=1只是本地额度记录，
+无vllm_response、无第12次生成HTTP。连续账本47392 requests／206399806 known／
+206676502 charged／embedding1938493、历史unknown6，与确认差额一致。
+Root读取首条完整交付及保存内容，未Judge；业务仅预订部分完成，保存语义未经确认。
+原失败产物保留，不续跑或覆盖。本计划全部剩余范围仍active，下面时点保持历史。
+
 ## 2026-10-08 14:02:51 UTC：两项运行已闭合，保存分类仍未改善
 
 基础main为`e1424cc0f2a7fc2bbc9c6213827a4ad3bf80151a`；[PR115](

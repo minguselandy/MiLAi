@@ -1053,7 +1053,6 @@ def request_mode(
                        "Use exactly the declared fields, enum values and types; no extra fields. "
                        + ("Return one classify_current_request call." if native_declaration
                           else "Return one valid JSON object."))
-        messages = [SystemMessage(content=prompt)]
         candidates = [{
             "request_id": card["request_id"],
             "requirements": card["requirements"],
@@ -1071,11 +1070,11 @@ def request_mode(
             else:
                 references = proposed
         if references or omitted:
-            messages.append(SystemMessage(content=(
-                "VISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n"
+            prompt += (
+                "\nVISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n"
                 + json.dumps({"requests": references, "omitted_reference_count": omitted},
-                             ensure_ascii=False, separators=(",", ":")))))
-        response = model.invoke([*messages, HumanMessage(content=content)],
+                             ensure_ascii=False, separators=(",", ":")))
+        response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=content)],
             tools=[declaration] if native_declaration else [],
             tool_choice=declaration_tool_choice if native_declaration else "none")
         try:
