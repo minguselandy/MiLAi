@@ -62,7 +62,11 @@ from milai_lab.memory.functional_state import reference_key as functional_refere
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
-from milai_lab.methods.edit_maintenance import MaintenanceRecipe, parse_object
+from milai_lab.methods.edit_maintenance import (
+    MaintenanceRecipe,
+    has_semantic_receipt,
+    parse_object,
+)
 from milai_lab.methods.functional_edit_memory import (
     FUNCTIONAL_ARMS,
     FunctionalEditMemory,
@@ -1419,25 +1423,42 @@ def operation_status(
         (visibility_effects if name == "forget_memory" else memory).append(operation)
     for batch in output.get("maintenance", []):
         for index, receipt in enumerate(batch["receipts"]):
-            status = ("committed" if receipt.get("ok") and (
+            confirmed = has_semantic_receipt([receipt])
+            status = ("committed" if confirmed and (
                 receipt.get("status") == "committed"
                 or receipt.get("original_status") == "committed") else
-                "no_change" if receipt.get("ok") and receipt.get("status") == "no_change" else
+                "no_change" if confirmed and receipt.get("status") == "no_change" else
                 "not_committed" if receipt.get("effect") == "none" else "unknown")
             memory.append({"tool": "maintain_event", "status": status,
                            **({"receipt_ref": f"{batch['request_id']}:proposal:{index}"}
                               if "request_id" in batch else {}),
                            **{k: receipt[k] for k in ("id", "revision", "effect", "replayed")
                               if k in receipt}})
-        if batch["status"] != "completed":
-            memory.append({"tool": "maintain_event", "status": "unknown"
-                           if batch["phase"].endswith("_pending") else "not_committed",
+        empty_scopes = [scope for scope in batch.get("batches", [])
+                        if batch.get("memory_save_requested")
+                        and scope["status"] == "completed" and not scope["receipts"]]
+        for scope in empty_scopes:
+            memory.append({"tool": "maintain_event", "status": "not_committed",
+                           "effect": "none", "receipt_ref": scope["request_id"]})
+        unknown_scopes = [scope for scope in batch.get("batches", [])
+                          if scope["status"] != "completed" and (
+                              scope["phase"].endswith("_pending") or scope["phase"] == "commit")]
+        for scope in unknown_scopes:
+            memory.append({"tool": "maintain_event", "status": "unknown",
+                           "receipt_ref": scope["request_id"], "phase": scope["phase"],
+                           "unprocessed": scope["unprocessed"]})
+        root_unknown = (batch["phase"].endswith("_pending") or batch["phase"] == "commit"
+                        or batch.get("outcome") == "semantic_outcome_unconfirmed")
+        if batch["status"] != "completed" and (root_unknown or not unknown_scopes):
+            memory.append({"tool": "maintain_event",
+                           "status": "unknown" if root_unknown else "not_committed",
                            "phase": batch["phase"], "unprocessed": batch["unprocessed"]})
-        elif not batch["receipts"]:
+        elif batch["status"] == "completed" and not batch["receipts"] and not empty_scopes:
             memory.append({"tool": "maintain_event", "status": "not_committed", "effect": "none"})
     semantic_states = {row["status"] for row in memory}
     semantic = ("unknown" if "unknown" in semantic_states else
-                "partial" if "committed" in semantic_states and "not_committed" in semantic_states
+                "partial" if semantic_states & {"committed", "no_change"}
+                and "not_committed" in semantic_states
                 else "committed" if "committed" in semantic_states else
                 "not_committed" if "not_committed" in semantic_states or not semantic_states
                 else "no_change")
@@ -2565,7 +2586,6 @@ def message(
                             and bool({"save_memory", "update_memory"}.intersection(allowed_tools))
                         ))
                         wire_messages = memory.project_model_messages(config, wire_messages)
-                        material["pending_maintenance"] = memory.pending_maintenance(config)
                 trace({"event": "functional_material_delivery", "material": material})
                 trace({"event": "functional_memory_effects", "effects": effects})
                 refresh_requests()

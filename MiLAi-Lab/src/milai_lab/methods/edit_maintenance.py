@@ -303,7 +303,8 @@ def _append_work(
     })
 
 
-def _has_semantic_receipt(receipts: list[dict[str, Any]]) -> bool:
+def has_semantic_receipt(receipts: list[dict[str, Any]]) -> bool:
+    """Confirmation refers to an actual record/version, including no_change."""
     return any(
         receipt.get("ok") and receipt.get("id") is not None
         and receipt.get("revision") is not None and (
@@ -322,8 +323,24 @@ def has_pending_save(state: dict[str, Any]) -> bool:
     scopes = [item.get("result", {}) for item in state.get("work_items", [])] or list(
         state.get("batch_results", {}).values()
     )
-    return any(not _has_semantic_receipt(scope.get("receipts", [])) for scope in scopes) \
-        if scopes else not _has_semantic_receipt(state.get("receipts", []))
+    return any(not has_semantic_receipt(scope.get("receipts", [])) for scope in scopes) \
+        if scopes else not has_semantic_receipt(state.get("receipts", []))
+
+
+def pending_work_refs(state: dict[str, Any]) -> list[str]:
+    """Project actual unfinished work, including an unconfirmed explicit save.
+
+    A completed model call may legally propose nothing. Only explicit saves keep
+    that scope pending; this does not reopen navigation or issue another call.
+    """
+    refs = [item["request_id"] for item in state.get("work_items", [])
+            if item.get("status") != "completed" or (
+                state.get("memory_save_requested")
+                and not has_semantic_receipt(item.get("result", {}).get("receipts", []))
+            )]
+    if state["phase"].endswith("_pending") and "active_call_ref" in state:
+        refs.append(state["active_call_ref"])
+    return refs
 
 
 def _maintain_views(
@@ -570,11 +587,7 @@ def maintain_event(
                     "work_items": [{key: copy.deepcopy(item[key]) for key in (
                         "request_id", "records", "create", "status"
                     ) if key in item} for item in state["work_items"]],
-                    "pending_refs": [item["request_id"] for item in state["work_items"]
-                                     if item.get("status") != "completed"] + (
-                        [state["active_call_ref"]] if state["phase"].endswith("_pending")
-                        and "active_call_ref" in state else []
-                    ),
+                    "pending_refs": pending_work_refs(state),
                 }} if "work_items" in state else {}),
         }
 
@@ -955,7 +968,7 @@ def resume_maintenance(
             confirmed_work = [copy.deepcopy(work) for work in state["work_items"]
                               if work.get("status") == "completed" and (
                                   not retry_completed()
-                                  or _has_semantic_receipt(work["result"]["receipts"])
+                                  or has_semantic_receipt(work["result"]["receipts"])
                               )]
             if not retry_completed() or confirmed_work:
                 replacement.update(
@@ -966,7 +979,7 @@ def resume_maintenance(
                 )
                 for work in state["work_items"]:
                     if work.get("status") != "completed" or (
-                        retry_completed() and not _has_semantic_receipt(work["result"]["receipts"])
+                        retry_completed() and not has_semantic_receipt(work["result"]["receipts"])
                     ):
                         _append_work(replacement, new_attempt_id, work["records"],
                                      create=work["create"], done=work["done"])
@@ -974,7 +987,7 @@ def resume_maintenance(
             confirmed = {
                 str(index): state["batch_results"][str(index)]
                 for index in range(state["next_batch"]) if not retry_completed()
-                or _has_semantic_receipt(state["batch_results"][str(index)]["receipts"])
+                or has_semantic_receipt(state["batch_results"][str(index)]["receipts"])
             }
             replacement.update(
                 phase="batches", batches=copy.deepcopy(state["batches"]),

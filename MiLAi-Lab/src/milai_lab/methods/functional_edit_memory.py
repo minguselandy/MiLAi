@@ -49,6 +49,7 @@ from milai_lab.methods.edit_maintenance import (
     ModelCall,
     has_pending_save,
     maintain_event,
+    pending_work_refs,
     resume_maintenance,
 )
 from milai_lab.methods.edit_memory import Arm, EditMemory, InterfaceVersion
@@ -321,10 +322,17 @@ class FunctionalEditMemory(FunctionalMemory):
                 )
             return self.context(bound["session"], bound["message_id"], bound["config_version"])
         items = self._model_items(config)
+        pending = self.pending_maintenance(config)
+        view = self.view_state(config)
+        for card in pending:
+            for ref in card["pending_refs"]:
+                if ref not in view["pending_refs"]:
+                    view["pending_refs"].append(ref)
         material = {
             "ok": True, "schema": "functional_material_v1", "kind": "resident",
             "items": items, **self._read_only_metadata(items),
-            "memory_view": self.view_state(config), "read_progress": self.read_progress(config),
+            "memory_view": view, "read_progress": self.read_progress(config),
+            "pending_maintenance": pending,
         }
         page_ends: dict[str, int] = {}
         for ref in material["memory_view"]["resident_refs"]:
@@ -355,6 +363,7 @@ class FunctionalEditMemory(FunctionalMemory):
         if for_write and self.interface_version != "v1":
             packet = self._writer_packet(config, material)
             packet["memory_view"] = material["memory_view"]
+            packet["pending_maintenance"] = pending
             if "candidates" in material:
                 packet["candidates"] = material["candidates"]
                 packet["candidate_scope"] = material["candidate_scope"]
@@ -427,6 +436,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 "request_id": request_id, "session": session,
                 "source_refs": list(dict.fromkeys(row["source_ref"] for row in sources)),
                 "maintenance_phase": state["phase"],
+                "pending_refs": pending_work_refs(state) or [request_id],
                 "confirmed_receipt_count": sum(bool(row.get("ok")) for row in receipts),
                 "checkpoint": {"namespace": list(ns), "key": stored.key},
                 "recovery": "inspect_original_receipts_before_explicit_new_attempt",
