@@ -9,6 +9,7 @@ from pathlib import Path
 
 import httpx
 import pytest
+from langchain_core.embeddings import Embeddings
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.analysis.edit_mechanism import (
@@ -20,6 +21,7 @@ from milai_lab.analysis.edit_views import record_index
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.edit_units import render_state
+from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_memory import EditMemory
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
@@ -58,7 +60,9 @@ def row(text: str, revision: int = 1, identity: str = "saved-record") -> dict:
     }
 
 
-def test_controls_retain_actual_revisions_without_ideal_initialization(tmp_path: Path) -> None:
+def test_controls_retain_actual_revisions_without_ideal_initialization(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
     before = [row("Current rule: twice weekly, holidays paused.")]
     after = [row("Current rule: once weekly, holidays paused.", 2)]
     original = copy.deepcopy((before, after))
@@ -78,6 +82,50 @@ def test_controls_retain_actual_revisions_without_ideal_initialization(tmp_path:
         restore_current(service, after)
         assert len(service.records()) == 1
         assert service.read("saved-record")["value"] == after[0]["value"]
+    class LocalEmbeddings(Embeddings):
+        def embed_documents(self, texts: list[str]) -> list[list[float]]:
+            return [[1.0, 0.0] if "once weekly" in text else [0.0, 1.0] for text in texts]
+
+        def embed_query(self, text: str) -> list[float]:
+            return [1.0, 0.0]
+
+    run = MechanismRun.__new__(MechanismRun)
+    run.root = tmp_path / "assessment"
+    run.settings = {"retrieval_limit": 10}
+    ordinary_answer = run.answer
+    probes = []
+    requests = []
+
+    def inspect_answer(service, question, date, key):
+        probes.append(service)
+        if run.settings.get("memory_profile") == "unified_v1":
+            assert service.memory_profile == "unified_v1" and service.memory_ranking == "dense"
+            assert isinstance(service.semantic_retriever, SemanticRetriever)
+            assert service.semantic_retriever.embeddings is run.retrieval_embeddings
+        else:
+            assert service.memory_profile == "ordinary" and service.semantic_retriever is None
+        return ordinary_answer(service, question, date, key)
+
+    def answer_call(key, messages, **kwargs):
+        requests.append(messages)
+        return "Once weekly; holidays paused."
+
+    monkeypatch.setattr(run, "answer", inspect_answer)
+    monkeypatch.setattr(run, "call", answer_call)
+    assert run.probe("alice", retained, "weekly", "2030-01-01", "ordinary")["status"] == (
+        "ANSWERED"
+    )
+    run.retrieval_embeddings = LocalEmbeddings()
+    run.settings.update(memory_profile="unified_v1", memory_ranking="dense", embedding_dimension=2)
+    assert run.probe("alice", retained, "weekly", "2030-01-01", "configured")["status"] == (
+        "ANSWERED"
+    )
+    material = read_json(run.root / "http/configured/reader/retrieval.json")
+    assert [memory["content"] for memory in material] == [
+        after[0]["value"]["content"], before[0]["value"]["content"],
+    ]
+    assert all("record_id" in memory for memory in material)
+    assert len(probes) == len(requests) == 2
     assert (before, after) == original
 
 

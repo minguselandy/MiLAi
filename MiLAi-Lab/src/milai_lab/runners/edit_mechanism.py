@@ -371,7 +371,10 @@ class MechanismRun(BenchmarkRun):
         try:
             with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
                 service = MemoryService(
-                    store, ("edit", "mechanism", owner), owner, bank / "memory.lock"
+                    store, ("edit", "mechanism", owner), owner, bank / "memory.lock",
+                    semantic_retriever=self._semantic_retriever(),
+                    memory_profile=self.settings.get("memory_profile", "ordinary"),
+                    memory_ranking=self.settings.get("memory_ranking", "dense"),
                 )
                 restore_current(service, state)
                 answer = self.answer(service, question, date, key + "/reader")
@@ -754,6 +757,9 @@ class MechanismRun(BenchmarkRun):
                                 bank / "memory.lock",
                                 mutation_contract="event_bound_v1",
                                 candidate_contract="read_handle_v1",
+                                semantic_retriever=self._semantic_retriever(),
+                                memory_profile=self.settings.get("memory_profile", "ordinary"),
+                                memory_ranking=self.settings.get("memory_ranking", "dense"),
                             )
                             for step, (event, observed) in enumerate(
                                 zip(events, history, strict=True)
