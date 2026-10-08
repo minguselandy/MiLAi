@@ -1,5 +1,34 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 11:17:10 UTC／北京时间19:17:10：候选评分与两项交付比较均闭合，当前问题整理发布。**
+
+实际M候选冻结d62，预测与评分均退出0：四用户各8会话，32/32、73完整答案；更新Correct16/72
+（valid63，原Omitted2／null7保留）、QA30/73（valid70，null3保留）。formation reference439／
+valid412，formed outputs40／valid32，interference不混入reference。预测357生成3310034known，
+评分426Judge1239622known；合计783生成4549656known，183embedding11273tokens、全部stop、
+新增unknown0。这是单臂实际低分，733／9a修复不回填，也没有同版优势或条件机制因果结论。
+
+新比较单独冻结9a，Root串行真实HTTP、三位subagent并行只读效果核对；实际进程均已退出0。
+固定Reader四题／模式：D0／D1／D2分别4／8／12生成、36341／32362／63415known；D1身份卡
+未选，D2首轮选到而协调，D0也做到，D2第二轮均未增加正文。固定实际前态Writer四case／模式，
+共同B0 single_pass和legacy Reader：15／19／22生成、210969／284888／306185known；Editor
+13次，8空提案／6提交，33完整答案。D1保存了部分D0遗漏变化，但新角色行业归属及部分旧目标
+保留仍有缺口；D2旧库均未变。原7／4的D1／D2选择及Editor request整体相同，正式输出分歧
+不能归因于视图。选择阶段峰值21485使D1／D2整体输入峰值没有比D0的20389更小。
+
+9a两项比较80生成934160known、42embedding8463tokens，Judge0、全部stop、新unknown0。
+固定比较后账本47059 requests／202894598known／203171294charged／embedding1922366／
+历史unknown6；候选加诊断总成本863生成5483816known、225embedding19736tokens，不能合并
+准确率。正式空维护、来源强度、非目标限定、主体选择、历史层次、完整保存与未依据业务的发货
+继承分别列在[当前问题](MILAI_BUILD_FIRST_ISSUES.md)，详细证据／成本／版本见[报告](
+MILAI_UNIFIED_MEMORY_USAGE.md)。开发复核非独立确认，完整来源审计仍非全部完成。
+
+本次提交只更新三个报告，父main f71ab3e／PR109自身与main自身Fast成功；d62自身Fast成功、
+Full skipped，9a包含于PR108受测头97，未观察到9a单独workflow，不借用CI。未改变公开Host
+配置或算子，尚未选定最终候选；后续优先简单交付／一次选择，不以更多导航当优势。
+同版五方法、65／277历史、native／drift／recovery、消融／紧预算、冻结后保留／外部／完整Host
+及六项交付未完成，16未用于开发、Product NO_GO。下方时间块保留原固定历史。
+
 **2026-10-08 10:24:17 UTC／北京时间18:24:17：三位subagent并行复核闭合，评分18/32。**
 
 PR108已合并main2d9baa0，受测97自身与合并main自身Fast均成功，未观察到97 Full。
