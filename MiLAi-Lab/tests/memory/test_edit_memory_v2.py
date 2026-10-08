@@ -844,7 +844,7 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
             "edits": [
                 {
                     **next_unit("During afternoon gallery hours.", role="condition"),
-                    "operation": "change_condition",
+                    "operation": "replace",
                     "target_unit": "u2",
                 },
                 {
@@ -882,10 +882,18 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
             method.decode_envelope({"records": {"r1": wrong_support}}, view["mapping"])
         decoded = method.decode_envelope({"records": {"r1": edit}}, view["mapping"])[0]
+        legacy_edit = copy.deepcopy(edit)
+        legacy_edit["edits"][0]["operation"] = "change_condition"
+        assert not validator.is_valid({"records": {"r1": legacy_edit}})
+        assert (
+            method.decode_envelope({"records": {"r1": legacy_edit}}, view["mapping"])[0] == decoded
+        )
         revised = method.apply("s", "scope", decoded)
         state = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
         assert revised["revision"] == 2 and state["units"][0] == baseline["units"][0]
         assert state["units"][1]["unit_id"] == baseline["units"][1]["unit_id"]
+        assert state["units"][1]["role"] == baseline["units"][1]["role"]
+        assert state["relations"][0] == baseline["relations"][0]
         assert len(state["units"]) == 4 and len(state["relations"]) == 4
         view, _ = next_request(
             service,
@@ -929,13 +937,17 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
             "edits": [
                 {
                     **next_unit("Changed stale value."),
-                    "operation": "change_value",
+                    "operation": "replace",
                     "target_unit": "u1",
                 }
             ],
         }
         stale["edits"][0].pop("role")
-        rejected = method.apply("s", "stale", method.decode_proposal(stale, view["mapping"]))
+        decoded_stale = method.decode_proposal(stale, view["mapping"])
+        legacy_stale = copy.deepcopy(stale)
+        legacy_stale["edits"][0]["operation"] = "change_value"
+        assert method.decode_proposal(legacy_stale, view["mapping"]) == decoded_stale
+        rejected = method.apply("s", "stale", decoded_stale)
         assert not rejected["ok"] and service.read(saved["id"])["value"]["revision"] == 3
 
 

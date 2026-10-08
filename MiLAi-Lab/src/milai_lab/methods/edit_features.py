@@ -267,12 +267,15 @@ def feature_proposal_schema(
         ]
         general = [alias for alias in content if alias not in exceptions]
         ops = []
-        for operation, candidates in (
-            ("change_value", content),
+        operations = [
+            ("replace", refs["u"]),
             ("add_exception", general),
             ("remove_exception", exceptions),
-            ("change_condition", conditions),
-        ):
+        ]
+        if not for_generation:
+            # Previously saved proposals keep their original role-bound names.
+            operations.extend([("change_value", content), ("change_condition", conditions)])
+        for operation, candidates in operations:
             if not candidates or (
                 not refs["e"] and operation in {"add_exception", "remove_exception"}
             ):
@@ -286,7 +289,7 @@ def feature_proposal_schema(
             if operation != "remove_exception":
                 fields["text"] = {"type": "string", "minLength": 1}
                 required.append("text")
-            if operation in {"change_value", "change_condition"}:
+            if operation in {"replace", "change_value", "change_condition"}:
                 fields["evidence"]["minItems"] = 0
                 fields["keep_support"] = {"type": "array", "items": reference("h")}
             if operation == "add_exception":

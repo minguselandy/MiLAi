@@ -335,18 +335,18 @@ class EditMemory:
             instruction += "Changed text still selects actual e evidence. "
         elif self.arm == "M" and self.features.semantic_operations:
             instruction += (
-                "Within one record container use change_value for same-scope content, "
-                "add_exception for a local scoped alternative, "
-                "remove_exception for an existing local alternative, "
-                "or change_condition for a shared condition. add_exception retains its general "
-                "rule and only attaches explicitly selected shared_conditions. remove_exception "
+                "Within one record container use replace for same-scope changes to a delivered "
+                "content or condition unit; its actual role and linked units/edges remain. "
+                "Use add_exception for a local scoped alternative and remove_exception for an "
+                "existing local alternative. "
+                "add_exception retains its general rule and only attaches explicitly selected "
+                "shared_conditions. remove_exception "
                 "removes that alternative and its exclusive condition nodes, preserving general "
                 "rules/shared conditions; it cannot reconstruct an already lost general rule. "
-                "change_condition keeps actual linked units and edges. append/retract remain "
-                "available for other local formation/removal. Dependent changes to delivered units "
+                "append/retract remain available for other local formation/removal. "
+                "Dependent changes to delivered units "
                 "belong in the same ordered edits list; the record commits once. "
-                "Use the actual delivered role: change_value selects content, change_condition "
-                "selects condition, and shared_conditions selects only existing condition units. "
+                "shared_conditions selects only existing condition units. "
                 "A content clause mentioning a prerequisite has no condition binding. Do not "
                 "select it as a shared condition. With supporting new e, append a condition "
                 "with explicit attach_to targets and retract the obsolete clause when justified; "
@@ -463,9 +463,7 @@ class EditMemory:
                 "edits": [
                     {
                         **change,
-                        "operation": "change_value"
-                        if self.arm == "M" and self.features.semantic_operations
-                        else "replace",
+                        "operation": "replace",
                         "target_unit": "u1",
                     }
                 ],
@@ -713,7 +711,7 @@ class EditMemory:
                     "edits": [
                         example_edit(
                             cutoff,
-                            "change_condition" if self.features.semantic_operations else "replace",
+                            "replace",
                             "u3",
                         )
                     ],
