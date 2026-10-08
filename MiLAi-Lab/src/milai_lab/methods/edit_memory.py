@@ -233,7 +233,7 @@ class EditMemory:
 
     def _feature_instructions(self, *, allow_create: bool) -> str:
         empty = (
-            '{}'
+            '{"creates":[],"records":{}}'
             if self.features.single_record_changes
             else '{"proposals":[]}'
         )
@@ -382,7 +382,8 @@ class EditMemory:
             instruction += (
                 "creates is a list; records has at most one unique container per delivered r key. "
                 "Never repeat a record or split its dependent changes across containers. "
-                "Omit creates or records when empty. An existing change always names its r key "
+                "Return both creates and records; use [] and {} respectively when empty. "
+                "An existing change always names its r key "
                 "in records, even when only one record was delivered; never return a bare edit. "
             )
         instruction += (
@@ -473,7 +474,8 @@ class EditMemory:
         def envelope(proposal: dict[str, Any], *, created: bool) -> dict[str, Any]:
             proposal = clause_proposal(proposal, conditioned=self.conditioned)
             if self.features.single_record_changes:
-                return {"creates": [proposal]} if created else {"records": {"r1": proposal}}
+                return {"creates": [proposal] if created else [],
+                        "records": {} if created else {"r1": proposal}}
             return {"proposals": [proposal if created else {**proposal, "target": "r1"}]}
 
         instruction += (

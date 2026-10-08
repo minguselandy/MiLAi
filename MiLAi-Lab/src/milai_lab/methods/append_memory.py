@@ -50,6 +50,14 @@ class AppendMemory(EditMemory):
             packet, date, allow_create=allow_create, schema=schema,
             change_candidates=change_candidates, prior_context=prior_context,
         )
+        envelope_instruction = (
+            "Return both creates and records in the supplied JSON envelope; "
+            "use [] and {} respectively when empty. Only creates may contain create proposals; "
+            "records stays {}. "
+            if self.features.single_record_changes else
+            "Return the supplied JSON envelope with only creates (or create proposals); "
+            "records stays {}. "
+        )
         messages[0]["content"] = (
             "Maintain factual append-only memory using the supplied plain-record schema. "
             "Append useful independently stated facts from the current original sources. "
@@ -65,8 +73,8 @@ class AppendMemory(EditMemory):
             "Do not append duplicate restatements or copy the raw dialogue as a substitute "
             "for useful factual memory. change_candidates are temporary hints, not evidence; "
             "empty candidates still allow original-source facts. prior_context is earlier "
-            "speech for resolving references, not a new event to append again. Return the "
-            "supplied JSON envelope with only creates (or create proposals); records stays {}. "
+            "speech for resolving references, not a new event to append again. "
+            + envelope_instruction +
             "An empty envelope means no new factual record, not proof of successful maintenance."
         )
         return messages

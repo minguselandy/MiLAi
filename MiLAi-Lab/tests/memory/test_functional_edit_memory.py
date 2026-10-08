@@ -2497,6 +2497,8 @@ def test_staged_selection_keeps_unknown_and_allows_explicit_empty_result(tmp_pat
 
 
 def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path):
+    from jsonschema import Draft202012Validator
+
     from milai_lab.methods.edit_maintenance import (
         has_pending_save,
         maintain_event,
@@ -2546,9 +2548,22 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
                 return {"record_ids": [next(row["record_id"] for row in packet["directory"]
                                             if row["description"] == target)],
                         "done": target == "Alarm tone"}
+            validator = Draft202012Validator(schema)
+            assert schema["required"] == ["creates", "records"]
+            explicit_empty = {"creates": [], "records": {}}
+            validator.validate(explicit_empty)
+            assert not validator.is_valid({})
+            empty_example, _ = json.JSONDecoder().raw_decode(messages[0]["content"].split(
+                "Complete empty envelope: ", 1)[1])
+            assert empty_example == explicit_empty
+            if "Complete formation envelope: " in messages[0]["content"]:
+                formation, _ = json.JSONDecoder().raw_decode(messages[0]["content"].split(
+                    "Complete formation envelope: ", 1)[1])
+                assert set(formation) == {"creates", "records"} and formation["records"] == {}
+                validator.validate(formation)
             if stage.endswith("work:1"):
-                return {}  # This completed scope has no semantic receipt.
-            return {"records": {"r1": {"action": "edit", "edits": [{
+                return explicit_empty  # This completed scope has no semantic receipt.
+            return {"creates": [], "records": {"r1": {"action": "edit", "edits": [{
                 "operation": "replace", "target_unit": "u1", "text": "The marker is blue.",
                 "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"},
             }]}}}
@@ -2558,6 +2573,12 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
         assert first["status"] == "completed" and len(first["receipts"]) == 1
         assert first["memory_view"]["pending_refs"] == ["save:work:1"]
         before_records = memory.service.records()
+        active = memory.service.store.get(namespace(memory.service),
+            memory._writer_key(current, "edit-writer-active:")).value
+        assert memory.writer.decode_envelope({}, active["mapping_id"]) == []
+        assert memory.writer.decode_envelope(
+            {"creates": [], "records": {}}, active["mapping_id"]) == []
+        assert memory.service.records() == before_records
         material = memory.model_material(cfg())
         assert material["memory_view"]["pending_refs"] == ["save:work:1"]
         assert material["pending_maintenance"][0]["pending_refs"] == ["save:work:1"]
@@ -2597,7 +2618,8 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
             assert len(packet["delivery"]["records"]) == 1
             assert packet["delivery"]["records"][0]["matter"] == "Alarm tone"
             assert "Remember the marker is blue and the alarm is soft." in messages[-1]["content"]
-            return {"records": {"r1": {"action": "edit", "edits": [{
+            assert schema["required"] == ["creates", "records"]
+            return {"creates": [], "records": {"r1": {"action": "edit", "edits": [{
                 "operation": "replace", "target_unit": "u1", "text": "The alarm is soft.",
                 "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"},
             }]}}}

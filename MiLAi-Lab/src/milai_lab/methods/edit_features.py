@@ -557,7 +557,9 @@ def feature_envelope_schema(
         {
             "creates": {
                 "type": "array",
-                "description": "New matters only. Omit when there are none.",
+                "description": ("New matters only. Return [] when there are none."
+                                if for_generation else
+                                "New matters only. Omit when there are none."),
                 "default": [],
                 "items": create[0] if create else False,
                 **({"maxItems": 0} if not create else {}),
@@ -565,11 +567,12 @@ def feature_envelope_schema(
             "records": {
                 **_object(containers, []),
                 "description": "Existing matters keyed by their explicit delivered r alias. "
-                "Omit when there are no existing-matter changes.",
+                + ("Return {} when there are no existing-matter changes." if for_generation else
+                   "Omit when there are no existing-matter changes."),
                 "default": {},
             },
         },
-        [],
+        ["creates", "records"] if for_generation else [],
     )
 
 
