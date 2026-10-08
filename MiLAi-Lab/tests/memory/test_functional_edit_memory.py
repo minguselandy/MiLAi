@@ -611,6 +611,8 @@ def test_next_real_langgraph_dynamic_catalog_after_hook_and_original_wrapper(tmp
         with opened(tmp_path, interface_version="I2", features=NEXT_FEATURES) as memory:
             memory.service.capture_user("s", "u", "Remember my quiet reminders.")
             proposal = next_sdk_create()
+            assertion = proposal["clauses"][0]["assertion"]
+            assertion["source_evidence"] = assertion.pop("source")
             if invalid:
                 proposal["clauses"][0]["evidence"] = ["e99"]
             model = ScriptModel(
