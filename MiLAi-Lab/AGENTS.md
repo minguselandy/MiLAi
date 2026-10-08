@@ -1,3 +1,33 @@
+# Live handoff: 2026-10-08 18:26:47 UTC saved16 score CLOSED, new candidates offline
+
+Actual268 predict remains FAILED exit1/16complete sessions32answers; preserve old root/terminal.
+Same268 independent saved16 score PID1218852 gone/session7233 exited0;16/16eval(8,8),321Judge
+stop1121397known/charged,0enc/newunknown0,terminal-score COMPLETED_EXPERIMENT_PHASE.
+Authorupdate15/34valid31,QA22/32valid29;invalidlabels retained;not full32/crossversion ranking.
+Ledger47972/210503621known/210780317charged/embed1949234;unknown6 historical,no reservation.
+Seriallease checkedfree. Root owns realHTTP; inspect livePID/terminal/ledger before dispatch.
+
+Latestdevelopment a0005f53100cd669007f4aba1a8677780f73ad27 frozen separately at
+artifacts/post118/source-a0005f5/MiLAi-Lab,NOT actual268. 687selectedunchangedlocalsupport
+inheritance;ec862 candidateHTTP+capturedpublicdelivery separate,UNREVIEWED;cached reopen
+withoutHTTP UNKNOWN. a05 HaluMem explicit reader_failure_policy=record_confirmed_length
+records only finalknownlength/usage asnull opportunity,skipsJudge,continues history;default
+fail-fast,unknown/budget/capacity/selection/Writer stillstop. Terminal completeanswers and
+knownfailurecounts explicit;no oldroot continuation or failure-to-success backfill.
+b6/a000 optionalpresence passed/recorded through existingbudget/ownership;defaultwire/DTO
+unchanged. DirectSQLite/contracts/Ruff/types pass,0realHTTP.
+
+Reader actualcontentnull;1320input32768outputlength,reasoning tail93027chars period144
+(88.75%chars),no separate reasoningtoken allocation. Evidence delivered;cause unconfirmed.
+Two independent eightgeneration packets onlyPREPARED:editor-formal-containers-26893e2-v1
+uses268 unchanged exceptoutercontainers;reader-presence-pairs-26893e2-input-v1 usesa000
+calland268actualmessages,presence0vs1.5 only. Noenc/ReaderinWriterpacket/Judge/DBapply.
+Host2exposedchains10messages inputs at host-two-flows-next-v1-inputs,notfrozen/run yet.
+Preserve alloutputs/no nonemptyforce/reasoningexecute/unknown retry/modeldefault change.
+86 ownFast37819055064 FAILED(536pass then140pass/1freshgeneratedfixture);Full37819055072
+skipped,Lab/externalpassed. 683fixture2directpass,newheadCIseparate. PR119open draft.
+Original scope/sixdeliveriesactive,16reservedunused/ProductNO_GO;lowerblocks historical.
+
 # Live handoff: 2026-10-08 17:44:06 UTC predict FAILED; saved16 partial score RUNNING
 
 Frozen268 predict PID1021934 exited1; terminal-predict FAILED Provider output incomplete:length.

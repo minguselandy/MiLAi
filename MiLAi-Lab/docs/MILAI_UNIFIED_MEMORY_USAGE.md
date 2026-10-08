@@ -11,6 +11,66 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 部分评分闭合与有限方法诊断：2026-10-08 18:26:47 UTC／北京时间2026-10-09 02:26:47
+
+**当前开发源码为`a0005f53100cd669007f4aba1a8677780f73ad27`；实际预测与评分仍为冻结`26893e2`。**
+旧预测仍FAILED／exit1、16/32完整会话／32完整答案，不补跑尾段、不回填新修复。独立
+saved16评分已退出0、16/16完整评估（8／8），terminal-score为COMPLETED_EXPERIMENT_PHASE；
+321个Judge响应均stop，1,121,397 known／charged tokens，0编码／新增unknown0。首用户8会话标签为
+更新Correct7/19、valid16，QA Correct13/20、valid18；原无效标签保留。这是两个用户部分
+范围中的一个子集。第二用户更新Correct8/15、valid15，QA Correct9/12、valid11；合计
+更新15/34、valid31，QA22/32、valid29。更新16 Omission＋3原无效，QA4 Omission＋
+3 Hallucination＋3原无效；formation reference224／valid200、formed outputs45／valid34。
+不能当完整四用户成绩，也不能与其他版本组成排名；同家族Judge与开发复核不是独立确认。
+
+预测＋已闭合部分score为435请求／435确认响应／2,209,379 known／charged tokens；编码器仍为
+94响应／7,490tokens。连续账本47972requests、210503621known、210780317charged、
+embedding1949234；unknown6均为历史量，无在途reservation。逐响应与账本known／charged／
+request差额一致，串行lease已释放。下方17:44和其他快照保持原值。
+
+### 三项转换修复，不把工程接通当语义通过
+
+- `687c89e`：普通局部replace和整项rewrite共用旧支持继承。只有明确保留同一实际旧单元、
+  未显式另选keep_support时才沿用既有支持；文本改变、错单元、显式空选择仍拒绝。原首用户
+  原7提案的只读副本可解码，三条保留内容／断言／支持一致，未apply或改写旧结果。
+- `ec8629d`：原Agent正文的实际HTTP链与追加后全文的公开Source／交付链分别核对。两链
+  齐全仅为provenance PASS；没有新增HTTP的重开仍UNKNOWN。追加文字含义、事实与任务
+  完成均UNREVIEWED，不把合成全文假装成一份模型响应。
+- `a05a65b`：新HaluMem候选可显式选择
+  `halumem.reader_failure_policy="record_confirmed_length"`。仅已确认最终Reader length且
+  usage齐全时保存null缺答和原失败引用，继续后续自然历史；缺答占QA机会但不送Judge。
+  默认仍fail-fast，预算／容量／选择／Writer／unknown仍停止。原terminal-predict列出
+  完整答案数与已知失败数；遍历保存闭合不等于每题有完整答案。直接SQLite流程及原作者
+  聚合兼容通过，原Judge无效与Reader失败分列，0真实HTTP，不改变旧268终态。
+
+最早Reader断点已进一步定位：1320输入的来源与目标事实已送达，正式content为null；
+32768输出后length，reasoning末尾93027字符呈144字符周期，占其字符长度88.75%。API
+未单列reasoning tokens，不另造精确token分摊，也不使用草稿补答案。这是生成循环观察，
+不能确定归因于服务端、采样或提示。新处理只保留失败及后续机会，不制造语义成功。
+
+### 下一项实际运行按单因素分开
+
+两份ignored输入包均仅PREPARED／0真实调用，各预先固定8次生成：
+
+1. 正式容器：两个实际Editor输入、optional／required外层creates与records、各2次重复。
+   空容器仍合法，原Source／旧状态／候选／内层操作／采样／预算相同；使用冻结268实现，
+   无Reader、Judge、编码或提交。只比较正式变化及来源忠实性，不按非空率认定成功。
+2. Reader采样：一个已失败出生日期核对输入与一个已完成的缺信息回答输入，显式
+   presence_penalty0／1.5、各2次重复。旧268消息逐值保留，调用实现为另冻a000；thinking、
+   T1、输出32768及其他参数不变，无选材／编码／Judge／提交。官方模型卡建议一般思考
+   任务使用1.5并说明可能减少持续重复、也可能损害效果；这是诊断依据，不是根因或收益
+   结论。[Qwen官方模型卡](https://huggingface.co/Qwen/Qwen3.6-35B-A3B-FP8)
+
+`b6ec657`／`a0005f5`只在既有记账与ownership路径透传并记录显式presence参数，省略
+时原wire／VLLMConfig／默认配置不变。两包不叠加改动、不盲重试，全部预定结果保留。
+普通Host两个已曝光故事的10消息输入也已准备，保持原控制／权限和独立空库，尚未运行。
+这些有限诊断不替代五方法277历史、保留集、外部任务或135case／192message完整回归。
+
+报告父头`86a0a86`自身Fast37819055064失败：Foundation首组536通过，下一组140通过／
+1个新生成fixture仍使用旧source字段失败；Lab fast与external成功，Full37819055072
+skipped。`683490c`只修该fixture，两个参数直接检查通过；父头CI不回填，新头另核。
+PR119仍open draft；完整原任务与六项交付active，16保留用户未用于开发，Product NO_GO。
+
 ## 集中预测已失败，已保存部分独立评分：2026-10-08 17:44:06 UTC／北京时间2026-10-09 01:44:06
 
 **冻结268预测已FAILED／exit1，停在16/32完整会话；新开发修复不能回填该运行。**
