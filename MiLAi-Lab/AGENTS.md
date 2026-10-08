@@ -1,3 +1,45 @@
+# Live handoff: 2026-10-08 20:02:53 UTC development223 capability fixed, actual807 running
+
+Latestdevelopment22335ec6b8ace108798effbd7499ce9a168ce073 correctsstaged selection allowance
+min(original,1)/singlepass instructions,0boundary/oldDTO/state_driven/directoryunchanged.
+Rootexistingfixedpool normalcheck/Ruff/1source strictmypy passed0realHTTP; original8/9answers
+notrerun/notfixedclaim. Below19:57 DEVELOPING is historicalupdatedbythiscode,not807hotchange.
+ActualPID1579386/session20792 stillfrozen807five277predict;Rootalone serialHTTP,inspectalive/
+terminal/ledgerbeforeanynextdispatch. Threeworkerscompletedoffline/codehandoffs; originalfull
+scope/sixdeliveriesactive,nofinalcandidate/ProductNO_GO;publication/CIisnotgoalcompletion.
+
+# Live handoff: 2026-10-08 19:57:36 UTC frozen807 running, development807ac separate
+
+Actual807 PID1579386/session20792 five-method277 predict still RUNNING; fixed14B0/allfirstuser,
+otherarmsunrun/no terminal/Judge.121stop1136517known+1inflight,93embedding6563;ledger48157/
+212393427known/212716288charged/embed1957184/unknown7=history6+active reservation,notclosedfailure.
+Root0–10all29answers+selectedactualSources/formal/state/HTTPread;no numericregrade/independentconfirm.
+Event3nonemptyrewrite5old+6new rejected firstoldcurrently/keeph4/noe; stateequalisNOTemptyproposal.
+Event8qa2sports/event9qa1game actuallyinK10 butselectionexcluded; finaldidnotreceive. Event9selfname
+delivered,notinitialidentityomission;title/subject/randomcausesunisolated. Event8qa0samepoolall10used.
+Stagedadvertised11reads/reload/donefalsebutoneactualround;minimal capabilityfixDEVELOPING,
+notyetintegrated/effectfixed;no forcedall/multiloop/metadatafactor. Frozen807unchanged.
+
+Latestdevelopment807ac2489e0acb1c5354ae4bd93f8ea97dabe9d9 allows explicitsame-unit
+from_unit/assertion.keep missingtext tocopyactualoldtext;changedexplicittextstillrequiresnewe,
+creates/local/relations/rolecontractsunchanged,0realHTTP. f708sharedReaderprofile/retriever/ranking;
+688nativeactualreadonlybank/originalnamespace/fragments<=selectedrevisions/candidatepruning;
+849newcontrolledownerlastonly,nooldcheckpointmigration. Rootactualbefore16items/16original
+revisionrangesrestored0HTTP;2normalSQLiteflows+1headercheck/Ruff/4source strictmypy passed.
+Native32/fullcontrolled/drift/recovery notexecuted. A178ownFast37831637141success/Full37831637229
+skipped;newheadCIseparate. Don'tborrowCI orbackfill actual807 results.
+
+Heldout boundary clarified: legacy807loader JSONdecoded unselected wholelines before UUIDfilter;
+do notclaim rawbytes/bodyneverdecoded. Only returned4devusers enter owner/Store/model/eval paths,
+not exhaustiveindependenthistoricalHTTPaudit;no semanticreviewof16.51a futureheaderfirst skipsbody
+JSONdecode forunselected,stillrawlinestream/uuidfirstformat;notlive807. Finalconfirmationnotstarted.
+Ignorededitor-candidate-delivery-807eacb-v1 only8fixedcallsPREPARED usingfrozen807driver/0HTTP,
+with/withoutordinaryfreecandidates/source/schema/samplingfixed;noDBapply/Reader/Judge/keeptextfactor.
+Host12/external28/1354/old10audit/native/drift/135case192msgs inputs/entries onlyprepared,
+finalsource/outputunselected. Rootalone serialrealHTTP;recheck PID/terminal/ledger beforenextdispatch.
+Originalfullscope/sixdeliveriesactive,no finalcandidate/stableadvantage/ProductNO_GO. Lowerblocks
+fixedhistoricalobservations;publication/CI/partialphasecompletionisnotfullgoalcompletion.
+
 # Live handoff: 2026-10-08 19:22:33 UTC development8bf schema connected, actual807 predict unchanged
 
 Latestdevelopment8bf3f23 nativeHostmaintenance callback schema -> invoke -> originalclient
