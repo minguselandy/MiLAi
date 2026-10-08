@@ -2246,6 +2246,9 @@ def test_v2_review_uses_immutable_proposal_and_rejection_keeps_history(tmp_path)
 
 
 def test_v2_nonmatching_representation_rejected_and_no_change_does_not_form(tmp_path):
+    from milai_lab.methods.edit_maintenance import has_pending_save, maintain_event
+    from milai_lab.runners.functional import operation_status
+
     with opened(tmp_path, arm="B1") as old:
         evidence = turn(old, "u", "Quiet reminders.")
         saved = json.loads(
@@ -2284,6 +2287,24 @@ def test_v2_nonmatching_representation_rejected_and_no_change_does_not_form(tmp_
         assert global_no_change["ok"] and global_no_change["status"] == "no_change"
         assert global_no_change["id"] is None
         assert len(memory.service.records()) == 1
+        ref = memory._binding(cfg("u2"))["source_ref"]
+        delivery = memory.writer.prepare([ref], "", selected_records=[], redelivered_ranges=[])
+        declined = maintain_event(
+            memory.writer, delivery, session="s", request_id="decline", date="2026-10-08",
+            recipe="single_pass", selected_record_ids=[], memory_save_requested=True,
+            model_call=lambda *_: {"proposals": [{"action": "no_change"}]},
+        )
+        assert declined["status"] == "completed"
+        assert declined["receipts"][0]["ok"] and declined["receipts"][0]["id"] is None
+        state = memory.service.store.get(
+            (*memory.service.namespace, "edit_maintenance"), json.dumps(["s", "decline"])
+        ).value
+        assert has_pending_save(state) and len(memory.service.records()) == 1
+        effects = operation_status({"owner": "alice", "session": "s", "message_id": "u2",
+                                    "world": {}, "maintenance": [declined]},
+                                   thread_id=cfg()["configurable"]["thread_id"],
+                                   execution_started=True)
+        assert effects["semantic_memory"]["status"] == "not_committed"
 
 
 @pytest.mark.parametrize("fault", ["after_commit", "during_extract"])
@@ -2413,8 +2434,10 @@ def test_state_view_opens_whole_targets_and_continues_after_durable_commit(tmp_p
         assert replayed["status"] == "completed" and len(calls) == before
 
 
-def test_staged_selection_keeps_unknown_and_allows_explicit_empty_result(tmp_path):
+@pytest.mark.parametrize("fault", ["selection", "editor"])
+def test_staged_selection_keeps_unknown_and_allows_explicit_empty_result(tmp_path, fault):
     from milai_lab.methods.edit_maintenance import maintain_event, resume_maintenance
+    from milai_lab.runners.functional import operation_status
 
     with opened(tmp_path, arm="B1", interface_version="I2") as memory:
         writer_turn(memory, "seed", "The marker is blue.")
@@ -2429,15 +2452,29 @@ def test_staged_selection_keeps_unknown_and_allows_explicit_empty_result(tmp_pat
 
         def unknown(stage, messages, schema):
             calls.append(stage)
-            raise OSError("selection response not confirmed")
+            if fault == "editor" and stage.startswith("select:"):
+                return {"record_ids": [], "done": True}
+            raise OSError("response not confirmed")
 
         options = dict(session="s", date="2026-10-08", recipe="single_pass",
                        memory_view_mode="staged", model_call=unknown)
         with pytest.raises(OSError):
             maintain_event(memory.writer, delivery, request_id="unknown", **options)
         pending = resume_maintenance(memory.writer, delivery, prior_request_id="unknown", **options)
-        assert pending["status"] == "incomplete" and calls == ["select:0"]
-        assert pending["memory_view"]["pending_refs"] == ["unknown:select:0"]
+        assert pending["status"] == "incomplete"
+        expected = ["select:0"] if fault == "selection" else ["select:0", "edit:unknown:work:0"]
+        assert calls == expected
+        assert pending["memory_view"]["pending_refs"] == [
+            "unknown:select:0" if fault == "selection" else "unknown:work:0"]
+        effects = operation_status({"owner": "alice", "session": "s", "message_id": "u",
+                                    "world": {}, "maintenance": [pending]},
+                                   thread_id=cfg()["configurable"]["thread_id"],
+                                   execution_started=True)
+        assert effects["semantic_memory"]["status"] == "unknown"
+        assert {row["status"] for row in effects["semantic_memory"]["operations"]} == {"unknown"}
+        if fault == "editor":
+            assert any(row.get("receipt_ref") == "unknown:work:0" and row["status"] == "unknown"
+                       for row in effects["semantic_memory"]["operations"])
         def empty(stage, messages, schema):
             calls.append(stage)
             if stage.startswith("select:"):
@@ -2448,11 +2485,13 @@ def test_staged_selection_keeps_unknown_and_allows_explicit_empty_result(tmp_pat
         completed = resume_maintenance(memory.writer, delivery, prior_request_id="unknown",
                                        new_attempt_id="empty", **options)
         assert completed["status"] == "completed" and completed["receipts"] == []
-        assert calls == ["select:0", "select:0", "edit:empty:work:0"]
+        assert completed["memory_view"]["pending_refs"] == []
+        assert calls == expected + (["select:0"] if fault == "selection" else []) + [
+            "edit:empty:work:0"]
         assert memory.service.read(saved["id"])["value"]["revision"] == 1
         original = maintain_event(memory.writer, delivery, request_id="unknown",
                                   execute=False, **options)
-        assert original["phase"] == "select_pending"  # Original unknown is retained.
+        assert original["phase"] == pending["phase"]  # Original unknown is retained.
 
 
 def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path):
@@ -2461,6 +2500,8 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
         maintain_event,
         resume_maintenance,
     )
+    from milai_lab.runners.functional import operation_status
+    from milai_lab.runners.functional_response import business_response
 
     calls = []
     options = dict(session="s", date="2026-10-08", recipe="extract_then_edit",
@@ -2477,7 +2518,8 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
         )
         return memory.apply_writer_proposal(current, operation, proposal)
 
-    with opened(tmp_path, arm="B1", interface_version="I2", features=NEXT_FEATURES) as memory:
+    with opened(tmp_path, arm="B1", interface_version="I2", features=NEXT_FEATURES,
+                memory_view_mode="state_driven") as memory:
         writer_turn(memory, "seed", "The marker is green. The alarm is loud.")
         records = [json.loads(invoke(memory, "save_memory", {"proposal": {
             "action": "create", "matter": matter, "clauses": [{
@@ -2512,6 +2554,24 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
         first = maintain_event(memory.writer, delivery, request_id="save", model_call=empty,
                                commit=commit, **options)
         assert first["status"] == "completed" and len(first["receipts"]) == 1
+        assert first["memory_view"]["pending_refs"] == ["save:work:1"]
+        before_records = memory.service.records()
+        material = memory.model_material(cfg())
+        assert material["memory_view"]["pending_refs"] == ["save:work:1"]
+        assert material["pending_maintenance"][0]["pending_refs"] == ["save:work:1"]
+        assert memory.model_material(cfg(), for_write=True)["memory_view"]["pending_refs"] == [
+            "save:work:1"]
+        assert memory.service.records() == before_records
+        effects = operation_status({"owner": "alice", "session": "s", "message_id": "u",
+                                    "world": {}, "maintenance": [first]},
+                                   thread_id=cfg()["configurable"]["thread_id"],
+                                   execution_started=True)
+        assert effects["semantic_memory"]["status"] == "partial"
+        assert [row["status"] for row in effects["semantic_memory"]["operations"]] == [
+            "committed", "not_committed"]
+        assert effects["semantic_memory"]["operations"][1]["receipt_ref"] == "save:work:1"
+        assert effects["request_completion"] == "unchecked"
+        assert "本轮语义记忆: 部分完成" in business_response([], effects, material).content
         ns = (*memory.service.namespace, "edit_maintenance")
         original = copy.deepcopy(memory.service.store.get(ns, json.dumps(["s", "save"])).value)
         assert all(work["status"] == "completed" for work in original["work_items"])
@@ -2519,7 +2579,8 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
         assert has_pending_save(original)
         assert memory.service.read(records[0]["id"])["value"]["revision"] == 2
         assert memory.service.read(records[1]["id"])["value"]["revision"] == 1
-    with opened(tmp_path, arm="B1", interface_version="I2", features=NEXT_FEATURES) as memory:
+    with opened(tmp_path, arm="B1", interface_version="I2", features=NEXT_FEATURES,
+                memory_view_mode="state_driven") as memory:
         memory.service.capture_user(
             "next", "continue", "Continue saving the remaining information."
         )
@@ -2551,6 +2612,8 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
             new_attempt_id="continued", new_attempt_session="next", **options,
         )
         assert saved["status"] == "completed" and saved["semantic_write_performed"], saved
+        assert saved["memory_view"]["pending_refs"] == []
+        assert memory.model_material(current)["pending_maintenance"] == []
         assert saved["prior_session"] == "s" and len(memory.service.records()) == 2
         assert all(row["value"]["revision"] == 2 for row in memory.service.records())
         assert memory.service.read(records[1]["id"])["value"]["source_ref"] == ref
@@ -2563,6 +2626,7 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
             new_attempt_id="continued", new_attempt_session="next", **options,
         )
         assert replayed["status"] == "completed" and len(calls) == count
+        assert replayed["memory_view"]["pending_refs"] == []
         assert len(memory.service.records()) == 2 and calls.count("extract") == 1
 
 
