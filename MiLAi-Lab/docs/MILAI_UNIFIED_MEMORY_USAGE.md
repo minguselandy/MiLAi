@@ -11,6 +11,55 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 08:46:08 UTC：导航误限新建已定位，候选保持原冻结版本运行
+
+本节为固定观察。main64f006f；[PR107](https://github.com/minguselandy/MiLAi/pull/107)
+已ready、open、尚未合并。最新开发源码733fa7227fddac7b15eded76899af906b48fc8bd，
+实际集中预测仍冻结d62f0b457b8b497146b7bd96b043124597e3c912，不热改、不重启。
+Python PID3145901／session15141仍运行，产物artifacts/state-view/prefix8-d62f0b4-v1；
+15/32份预测，四用户[8,7,0,0]，32个完整Reader答案，尚无terminal-predict／score或Judge。
+
+Root已读首用户20个、第二用户12个完整答案；选定来源、选择、正式输出和回执审计部分，
+没有独立审计全部HTTP／reasoning，没有新增数值重评分。首用户原1的五条新候选实际送达，
+Editor输入5533tokens；选择器只打开旧基本资料并返回create=false，程序因此将creates设为
+maxItems=0。正式结果是空creates及旧事项no_change，不是空HTTP对象，也不能直接归因于
+Editor未落实已识别的新事实。候选目录、实际打开的正文与可用编辑能力应分别观察。
+两用户中也有Reader无法将泛称User与问题姓名对应、已保存偏好未被稳定使用的现象；
+不从owner或问题中的姓名构造主体关联，后续按实际可见来源定位。
+
+733fa72将导航选择收敛为record_ids／done。首次工作保留既有编辑器的新建机会，后续工作
+沿用已处理来源状态，不重复开放新建；选空旧事项仍可让编辑器返回合法空结果，不强制写入。
+已保存的旧选择和已发工作保留原创建决定／映射，unknown不自动重试。编辑算子、当前写权限、
+来源、模型、窗口、调用上限与旧legacy合同沿用。此前D0允许新建而D1／D2可被导航禁用，
+不能将其效果差直接归为展示方式；修复后才能用同一编辑能力开展有限比较。
+复用五项直接检查，实际SQLite覆盖首次能力、后续不重复、提交后重开、合法空结果、
+原unknown保留、完整Host纯保存及固定池CLI；源strict mypy、四文件Ruff和包／工具边界通过。
+修复本身0真实HTTP，尚无修复后方法效果。[54b2aaf自身Fast](
+https://github.com/minguselandy/MiLAi/actions/runs/37749073531)成功，
+[Full](https://github.com/minguselandy/MiLAi/actions/runs/37749073574)skipped；733自身CI待发布核对。
+
+当前冻结首用户8份预测闭合，维护含9个编辑工作：16次提交、1次no_change、1次拒绝，
+另2次真实空提案；选择阶段另有1个EDIT_VIEW_CREATE_SCOPE_ALREADY_PROCESSED，
+父维护不完整，不能并为空提案或称8次维护语义通过。拒绝为EDIT_APPEND_CONDITION_TARGET_INVALID。
+完整候选保留这些失败，评分使用同一冻结版本；新修复不回填其预测。
+
+| 固定08:46:08累计，阶段互斥 | 确认响应 | known tokens |
+|---|---:|---:|
+| 抽取 | 16 | 183908 |
+| Writer选择 | 21 | 376029 |
+| Editor | 18 | 278876 |
+| Reader选择 | 65 | 364402 |
+| 完整Reader | 32 | 130902 |
+| 合计生成 | 152 | 1334117 |
+
+153生成请求，另1Editor在途；确认响应均stop。embedding78次／5170tokens，Judge0。
+连续账本46349 requests、198744899 known、199102123 charged、embedding1907800；
+unknown7＝历史6＋在途reservation1，不直接认定为新增已闭合失败。与候选前账本及已确认
+文件的request／known／embedding差额均为0；未重置预算或增加上限。
+采样文件artifacts/state-view/observation-20261008-084608.json保持ignored。
+Writer／Reader固定池比较尚0真实调用；先闭合候选，再比较D0／D1／D2。原长历史、
+强简单与Append-only、保留／外部、完整Host与六项交付未完成，16未用，Product NO_GO。
+
 ## 2026-10-08 08:00:24 UTC：受影响续办闭合，冻结共同M候选开始集中预测
 
 最新开发源码为d62f0b457b8b497146b7bd96b043124597e3c912；PR107仍open draft、main64f006f。
