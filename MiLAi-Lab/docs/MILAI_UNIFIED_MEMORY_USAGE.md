@@ -11,6 +11,80 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 01:43:03 UTC：三组原评分完整闭合，新五方法预测已启动
+
+本节固定于2026-10-08 01:43:03 UTC／北京时间09:43:03。报告版本以所在提交为准；
+发布前main为`32c4584a93704436aba41618612cdbc394b2aa0c`，PR83至100已合并，远端open
+列表在本轮核对时为空。[PR100](https://github.com/minguselandy/MiLAi/pull/100)于前日23:58:06
+UTC合并，其实际受测头99a的[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37702216803)
+与[Full](https://github.com/minguselandy/MiLAi/actions/runs/37702216877)成功，Full21/21作业通过。
+本地canonical main已快进到32c；17份与远端正文相同的原untracked计划在可恢复备份后
+成为tracked，另一个用户计划仍保留为untracked。运行源码及连续账本没有被替换或重置。
+
+**原505 B0／B1／B2的预测和评分分别完整闭合。**实际源码均为
+`505cefaee8c25cac0670fb1d3a38f7c2fae33165`，每臂四用户各八会话、32检查点及评分终态
+COMPLETED_EXPERIMENT_PHASE，进程均退出0。B1评分从前日23:15:33至00:21:56 UTC，B2从
+00:27:41至01:40:11 UTC；均只读原预测、状态和author retrieval，没有重跑Writer／Reader／
+encoder。原M／Append-only仍是部分预测失败，不补零分，也没有完整五方法终态。
+
+| 臂 | 更新Correct／全部机会；valid | 更新其他原标签 | QA Correct／全部机会；valid | QA其他原标签 |
+|---|---|---|---|---|
+| B0 | 31/72；61 | 29 Omission、1 Hallucination、4 Omitted、7 null | 43/73；67 | 9 Omission、15 Hallucination、6 null |
+| B1 | 27/72；62 | 33 Omission、2 Hallucination、9 Omitted、1 null | 33/73；69 | 15 Omission、21 Hallucination、4 null |
+| B2 | 26/72；64 | 38 Omission、4 Omitted、1 Omitted Update、3 null | 34/73；69 | 14 Omission、21 Hallucination、4 null |
+
+全部机会更新正确率分别43.1%、37.5%、36.1%；QA分别58.9%、45.2%、46.6%。valid正确率
+另以31/61、27/62、26/64和43/67、33/69、34/69计算；不把Omitted／Omitted Update重命名
+为合法Omission。formation非interference参考均439，valid分别394／416／407；实际formed
+输出63／59／52，valid51／47／41。作者离线聚合均无异常，原无效判断仍存在。
+
+| 按既定四用户顺序的Correct／全部机会 | B0 | B1 | B2 |
+|---|---|---|---|
+| 更新 | 11/19、7/15、7/20、6/18 | 10/19、3/15、12/20、2/18 | 10/19、6/15、4/20、6/18 |
+| QA | 12/20、7/12、14/22、10/19 | 8/20、8/12、10/22、7/19 | 12/20、10/12、5/22、7/19 |
+
+既有分析器读取三臂终态，状态为COMPLETED_PAIRED_SOURCE_ANALYSIS，仅限这三臂。
+按用户等权、四个来源簇的描述性95%区间，B1减B0的更新为−7.29百分点
+[−24.44,+13.19]、QA为−11.41[−19.09,+1.70]；B2减B0更新为−6.73[−12.57,−1.67]、
+QA为−7.92[−30.68,+14.80]。本轮B2更新标签落后于B0；这里只有四个曝光用户、各方法
+单条随机历史及同家族Judge，不能推广为稳定的总体结论，没有独立确认。Root先前已读
+三臂及M／Append部分共276条完整答案，来源审计未完整，没有另造数值重评分。
+
+**最早语义断点仍是已识别变化没有落实。**同一曝光事件中，B0／B1的当前来源与相关旧
+事项均实际送达，抽取和editor正常stop，但editor为空、没有提交，记录值不变。B2实际
+修改一条职业事项并新建计划，另一个财务事项仍保持原值；M新建四条，但相关旧事项未
+在其实际K10中，不能声称修订了它。这些臂此前状态不同，不是同前态recipe比较。来源的
+决定／考虑仍可能被强化为完成／计划；参考要求中未获当前来源明确支持的更强事实不能
+由程序补写。原作者标签与Root的来源复核分别保留。B2原首用户4／7两次editor前容量
+失败覆盖五个更新，原标签3 Omission、1 Correct、1 Omitted；它们没有editor HTTP／语义
+提交，不能合并成真实空提案，也不能把该Correct当成本次提交成功。
+
+**费用截止B2闭合，与新运行在途费用分开。**B0 Judge479／1,510,929 known，B1
+446／1,408,572，B2 514／1,772,308；合计1,439响应／4,691,809 known，全部stop，
+新增unknown及embedding均0。子用户费用全部包含在相应整臂内。自原505预测启动前
+闭合账本起，包含部分五臂预测、格式诊断、两批Host、独立Reader及这三臂评分的累计为
+2,002闭合生成／14,062,204 known、embedding292,092 tokens。B2结束的连续账本为
+45,523 requests、187,905,008 known、188,096,496 charged、embedding1,623,223、
+unknown5；请求和known差额核对一致，unknown5为原历史值，预算未重置、上限未新增。
+原B0报告及各评分子集不再重复计入。本段没有计入随后新五方法的在途请求。
+
+**新4e五方法已真实启动，尚未完成。**01:41:28 UTC，确认旧B2退出及串行HTTP lease
+空闲后，从冻结`4e4609917c1b0ce6e3aa14b3f885df6854c364c1`运行既有
+`tools/run_edit_suite.py CONFIG OUTPUT --benchmark halumem --phase predict`。
+配置为ignored的`artifacts/unified/prefix8-five-arm-4e46099-v3-config.json`，产物为同目录
+`prefix8-five-arm-4e46099-v3`，实际PID1675659。B0／B1／B2／M／Append-only依次串行，
+各方法／用户独立空库；只改版本及实验元信息，模型、dense K10、输入／输出预算、
+recipe及方法参数与原505配置相同。4e自身CI已在上节核验，源码内容与当前main相同。
+固定观察时仅B0保存1/32预测，其余未启动，各臂无predict终态，score0；这不是完整结果
+或新Reader语义成功。旧准备、失败及日志保留，不热改或覆盖。
+
+完整任务继续active。依配套规划14.2，先完成共同底座五方法诊断，再选择一个候选沿
+自己的连续历史取得65／277观察；已准备的长历史配置尚未准入，不自动启动全臂长跑。
+native／drift／recovery、必要消融与固定更紧预算、冻结后的16保留用户、外部任务、同候选
+Host135case／192message及实质新故事、六项交付仍未完成。16未用于开发，
+single_verdict_v1未准入，Product NO_GO。原始正文、gold、HTTP、reasoning、数据库、
+私有配置及日志仍ignored。以下固定快照保留。
+
 ## 23:15:33 UTC：PR99合并，原B0评分闭合，真实保存续办与只读重开闭合
 
 本节固定于2026-10-07 23:15:33 UTC／北京时间2026-10-08 07:15:33。报告版本以所在
