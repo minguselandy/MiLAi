@@ -867,16 +867,16 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         compact = compact_prompt_schema(view["schema"])
         validator = Draft202012Validator(compact)
         Draft202012Validator.check_schema(compact)
-        assert validator.is_valid({"records": {"r1": edit}})
+        assert validator.is_valid({"creates": [], "records": {"r1": edit}})
         assert compact_prompt_schema(compact) == compact
         wrong_role = copy.deepcopy(edit)
         wrong_role["edits"][1]["shared_conditions"] = ["u1"]
-        assert not validator.is_valid({"records": {"r1": wrong_role}})
+        assert not validator.is_valid({"creates": [], "records": {"r1": wrong_role}})
         with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
             method.decode_envelope({"records": {"r1": wrong_role}}, view["mapping"])
         wrong_target = copy.deepcopy(edit)
         wrong_target["edits"][0]["target_unit"] = "u999"
-        assert not validator.is_valid({"records": {"r1": wrong_target}})
+        assert not validator.is_valid({"creates": [], "records": {"r1": wrong_target}})
         with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
             method.decode_envelope({"records": {"r1": wrong_target}}, view["mapping"])
         wrong_support = copy.deepcopy(edit)
@@ -887,7 +887,7 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         legacy_attribution = copy.deepcopy(edit)
         for item in legacy_attribution["edits"]:
             item["assertion"]["source"] = item["assertion"].pop("source_evidence")
-        assert not validator.is_valid({"records": {"r1": legacy_attribution}})
+        assert not validator.is_valid({"creates": [], "records": {"r1": legacy_attribution}})
         assert (
             method.decode_envelope({"records": {"r1": legacy_attribution}}, view["mapping"])[0]
             == decoded
@@ -898,7 +898,7 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
             method.decode_envelope({"records": {"r1": conflicting_attribution}}, view["mapping"])
         legacy_edit = copy.deepcopy(edit)
         legacy_edit["edits"][0]["operation"] = "change_condition"
-        assert not validator.is_valid({"records": {"r1": legacy_edit}})
+        assert not validator.is_valid({"creates": [], "records": {"r1": legacy_edit}})
         assert (
             method.decode_envelope({"records": {"r1": legacy_edit}}, view["mapping"])[0] == decoded
         )
@@ -908,7 +908,7 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
             "operation": "replace", "target_unit": clause["id"], "text": clause["text"],
             "evidence": [], "assertion": {"keep": clause["support"][0]},
         })
-        assert validator.is_valid({"records": {"r1": edit}})
+        assert validator.is_valid({"creates": [], "records": {"r1": edit}})
         decoded = method.decode_envelope({"records": {"r1": edit}}, view["mapping"])[0]
         explicit = copy.deepcopy(edit)
         explicit["edits"][-1]["keep_support"] = clause["support"]
