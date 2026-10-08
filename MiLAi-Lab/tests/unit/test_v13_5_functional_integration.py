@@ -3961,6 +3961,34 @@ def test_receipt_response_reports_read_saved_content_without_a_new_write(tmp_pat
         excerpt = str(business_response([], effects, bounded).content)
         assert '引用已截断' in excerpt and bounded['items'][0]['content'] not in excerpt
 
+        # Old permission metadata cannot replace this turn's actual failed attempt.
+        attempted = json.loads(json.dumps(effects))
+        attempted['semantic_memory']['operations'] = [
+            {'tool': 'maintain_event', 'status': 'not_committed', 'effect': 'none'}]
+        attempted['application_requests'] = [{
+            'business': {'status': 'completed', 'execution': {'status': 'observed_only'}},
+            'memory': {'status': 'failed', 'current_permission': 'not_authorized_current_request'},
+            'feedback': {'status': 'delivered'},
+        }]
+        allowed = {'allow_memory_maintenance': True, 'requires_memory_result': True}
+        failed_answer = str(business_response([], attempted, packet, current_mode=allowed).content)
+        assert '本轮已尝试记忆维护' in failed_answer
+        assert '实际结果保存未确认成功; 保存许可当前允许记忆维护' in failed_answer
+        assert '当前未获允许' not in failed_answer
+        assert '不确认全部请求或语义覆盖' in failed_answer
+        assert json.dumps(body, ensure_ascii=False) in failed_answer
+
+        attempted['semantic_memory']['operations'] = []
+        unattempted = str(business_response([], attempted, packet, current_mode=allowed).content)
+        assert '本轮没有可确认的记忆维护尝试回执' in unattempted
+        assert '本轮已尝试记忆维护' not in unattempted
+        attempted['application_requests'][0]['memory']['status'] = 'committed'
+        readonly = str(business_response([], attempted, packet,
+            current_mode={'allow_memory_maintenance': False}).content)
+        assert '实际结果保存提交已确认; 保存许可当前未获允许' in readonly
+        assert '本轮已尝试记忆维护' not in readonly
+        assert service.read(saved['id'])['value'] == before
+
 
 @pytest.mark.parametrize('required,interrupted', [(False, False), (True, False), (True, True)])
 def test_existing_confirmation_uses_one_required_proposal_and_no_new_revision_after_reopen(

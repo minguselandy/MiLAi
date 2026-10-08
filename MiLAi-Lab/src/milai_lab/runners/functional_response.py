@@ -132,6 +132,7 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
 def business_response(
     messages: list[Any], effects: dict[str, Any], material: dict[str, Any],
     *, execution_stop: dict[str, Any] | None = None,
+    current_mode: dict[str, Any] | None = None,
 ) -> AIMessage:
     """Use matched delivered receipts and current-message journal identities only."""
     business = effects["business"]
@@ -190,7 +191,17 @@ def business_response(
     if saved_content and not effects.get("application_requests"):
         paragraphs.append("原请求是否已全部完成尚未核对。")
     semantic = effects["semantic_memory"]
-    paragraphs.append("本轮语义记忆: " + _STATUS.get(semantic["status"], semantic["status"]) + "。")
+    paragraphs.append("本轮语义记忆: " + _STATUS.get(semantic["status"], semantic["status"])
+                      + "。这里只报告列出的回执, 不确认全部请求或语义覆盖。")
+    if current_mode is not None:
+        allowed = current_mode["allow_memory_maintenance"]
+        paragraphs.append("本轮保存许可: " + ("当前允许记忆维护" if allowed
+                                               else "当前未获允许") + "。")
+        if allowed and semantic["status"] in {"not_committed", "partial", "unknown"}:
+            if semantic["operations"]:
+                paragraphs.append("本轮已尝试记忆维护; 列出的未提交或未知结果不能确认保存成功。")
+            else:
+                paragraphs.append("本轮没有可确认的记忆维护尝试回执, 尚不能确认保存完成。")
     for operation in semantic["operations"]:
         paragraphs.append("记忆操作: " + _text({k: operation[k] for k in (
             "tool", "id", "revision", "status") if k in operation}))
@@ -212,11 +223,16 @@ def business_response(
         }
         business_status = request["business"]["status"]
         execution_status = request["business"]["execution"]["status"]
-        memory_status = request["memory"].get("current_permission", request["memory"]["status"])
+        memory_status = request["memory"]["status"]
+        permission = request["memory"].get("current_permission")
+        if current_mode is not None:
+            permission = ("当前允许记忆维护" if current_mode["allow_memory_maintenance"]
+                          else "not_authorized_current_request")
         feedback_status = request["feedback"]["status"]
         paragraphs.append("原请求进度: 业务" + labels.get(business_status, business_status)
             + "; 本次执行" + labels.get(execution_status, execution_status)
             + "; 实际结果保存" + labels.get(memory_status, memory_status)
+            + ("; 保存许可" + labels.get(permission, permission) if permission else "")
             + "; 反馈" + labels.get(feedback_status, feedback_status)
             + "。回执进度与语义正确性分别记录。")
     for number, operation in enumerate(effects.get("visibility", {}).get("operations", []), 1):
