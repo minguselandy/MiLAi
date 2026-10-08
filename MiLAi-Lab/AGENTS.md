@@ -1,3 +1,31 @@
+# 2026-10-08: post117/118 function-first plan explicitly activated
+
+The user now explicitly requests full execution of
+docs/MILAI_POST_117_118_FUNCTION_FIRST_DEVELOPMENT_EXPERIMENT_PLAN.md with multiple
+development subagents, efficient implementation, fewer defensive layers/tests and
+method reflection on real failures. This supersedes the preceding paused scheduling.
+Read the whole plan. Preserve all original research scope/six deliveries. Work from
+the integrated117/118 source; PR118 report aad is published and its own CI/merge is
+being finalized. Plan's PREPARED38 premise is historical: actual38 CLOSED/all4,
+r3 actual results stored but r2 wrongly revised request; scope projection not exercised.
+Current ledger47446/207145148known/207421844charged/embed1940092/historyunknown6.
+No real runner now; recheck ownership before any dispatch. No old-root retries.
+
+Root owns shared contracts, runners/functional.py, common configuration/integration,
+reports and serial real Qwen/BGE/Judge HTTP. Three workers use independent worktrees:
+A requests/continuation; B observations/local editing; C reads/run environment.
+One owner per file/function; coordinate through Root for crossing interfaces.
+Workers may run only directly affected offline/SQLite/template checks, no real model,
+gold or reserved users, new reviewers, per-case routing, stores or defensive platforms.
+Do not independently write plans/reports or run full suites. Return changed files,
+normal executable use, precise limitations and one reflection to Root for integration.
+First integrate a complete staged ordinaryHost candidate, reuse existing three stories,
+then one frozen concentrated development diagnosis and minimal mechanism comparison;
+same-version277 histories and final confirmation remain required, not development gates.
+Actual evidence/permissions/versions/receipts stay authoritative; controls are not facts,
+ordinary attributes are not automatically conditions; commits are not semantic passes.
+16reserved unused, no finalcandidate/stableadvantage, Product NO_GO. Older blocks historical.
+
 # Fixed experiment publication: 2026-10-08 15:15:56 UTC
 
 User requests current experiment summary and GitHub submission. This is four
