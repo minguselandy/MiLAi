@@ -2359,8 +2359,10 @@ def test_state_view_opens_whole_targets_and_continues_after_durable_commit(tmp_p
                 return {"changes": []}
             if stage.startswith("select:"):
                 assert "The marker is blue." not in canonical(packet)
+                if packet["processed"]:
+                    assert schema["properties"]["create"] == {"type": "boolean", "enum": [False]}
                 return {"record_ids": [packet["directory"][0]["record_id"]],
-                        "create": False, "done": len(packet["directory"]) == 1}
+                        "create": not packet["processed"], "done": len(packet["directory"]) == 1}
             record = packet["delivery"]["records"][0]
             assert len(packet["delivery"]["records"]) == 1
             opened_records.append(copy.deepcopy(record))

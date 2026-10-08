@@ -363,7 +363,9 @@ def _maintain_views(
                     "record_ids": {"type": "array", "uniqueItems": True, "items": {
                         "type": "string", "enum": [ref["record_id"] for ref in directory]
                     }} if directory else {"type": "array", "maxItems": 0},
-                    "create": {"type": "boolean"}, "done": {"type": "boolean"},
+                    "create": {"type": "boolean"} if create_available
+                    else {"type": "boolean", "enum": [False]},
+                    "done": {"type": "boolean"},
                 }, "required": ["record_ids", "create", "done"],
             }
             messages = [{"role": "system", "content": (
