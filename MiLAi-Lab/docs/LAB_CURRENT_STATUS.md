@@ -1,5 +1,19 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 18:55:54 UTC／北京时间2026-10-09 02:55:54：两项有限诊断闭合，新Host运行。**
+
+实际268预测FAILED／16完整预测，saved16同源score闭合，更新15/34(valid31)、QA22/32(valid29)。
+Editor两实际输入×两容器表达×两重复共8生成／180076known，7stop1length；显式容器4提案，
+仍有模态强化／遗漏，0apply／Reader／Judge。Reader两个实际输入presence0／1.5各4调用，
+8stop／17641known，原循环未重现；中间名未知保持、时间措辞仍有问题，不改默认采样。
+新开发及Host冻结807eacb：新生成明返creates/records、两者可空，旧{}解码／inner合同保持；
+6直接检查＋Ruff／相关类型通过，不把提案增多当方法效果。新Host2链10消息18:55:30启动，
+PID1501670／session7180／尚无保存结果或总终态，Root独占串行HTTP，不能按快照重启。
+b88自身Fast失败9旧生成fixture／摘要期望，Lab／external成功、Full skipped；1cbd精确修复
+9直接检查通过，新头CI另核。诊断闭合账本47988／210701338known，Host在途另计。
+五方法各277配置仅准备（65/77/62/73），16未用／完整六交付active／Product NO_GO。
+详见[实际版本、语义反思及下一步](MILAI_UNIFIED_MEMORY_USAGE.md)。下方为固定历史。
+
 **2026-10-08 18:26:47 UTC／北京时间2026-10-09 02:26:47：部分评分闭合，有限诊断准备。**
 
 实际268预测仍FAILED／16完整会话32完整答案；同冻结源码saved16独立score已退出0，
