@@ -1,5 +1,27 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 15:15:56 UTC／北京时间23:15:56：38 Host闭合，结果保存与语义问题并列。**
+
+冻结38四消息均COMPLETED／exit0；实际业务恰一次预订＋一次标签完成，补存／只读零
+业务效果，r3保存最终实际结果。原应用请求结构completed、semantic_coverage unchecked；
+r2却误改原请求并撤回包装／制签要求，r3仍含当轮补存控制condition，不能记四语义通过。
+首条两次content＋attach_to条件目标拒绝仍在。未交付自然候选的“已送达”与实际Host仅
+报告目的地配置分开。Root读四个交付及三版保存正文，既有三agent只读审计，Judge0。
+
+第三条prior_maintenance_requests=[]，四条HTTP的Current maintenance scope为0，新38
+maintain_prior投影未被命中，效果仍未验证；控制实际走当前User维护。P1读取目的被两次
+read_memory设置，各自后续两次材料继承，是接线证据，不是质量或机制优势。
+30生成431135known／charged（15 tool_calls＋15 stop），13embedding683、新unknown0；
+最新账本47446 requests／207145148known／207421844charged／embedding1940092，历史unknown6。
+最近五项合计365生成4040034known／254embedding17048，消息子集不重复相加。
+
+旧505三臂负结果、d62 M16/72和QA30/73、9a有限比较及721 FAILED32/277状态均保持。
+main b3／PR116+117已合并；PR118父报告8d自身Fast37796882896成功、Full37796882927
+skipped，本次新报告头单独核验。当前无真实runner；此次只更新四文档／交接，未新增模型
+或评分、未改源码／测试／配置／workflow。完整范围未完成，16未用、无最终候选、Product NO_GO。
+详见[最新实验汇总](MILAI_UNIFIED_MEMORY_USAGE.md)与[问题表](MILAI_BUILD_FIRST_ISSUES.md)。
+下方各块是其固定历史，14:52的PREPARED不代表当前38终态。
+
 **2026-10-08 14:52:48 UTC／北京时间22:52:48：当前实验汇总提交，暂无真实运行。**
 
 main b3a40b4，PR116／117已合并且各自Fast及合并main Fast成功；61 Full skipped，

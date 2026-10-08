@@ -1,3 +1,38 @@
+# Fixed experiment publication: 2026-10-08 15:15:56 UTC
+
+User requests current experiment summary and GitHub submission. This is four
+reports/handoff only; no new model/score/source/tests/config/workflow changes.
+Frozen38 Host CLOSED/exit0/all4COMPLETED; actual business1reserve+1complete_label,
+save-only/readonly no business effects. r1/r2/r3 three committed receipts and two
+incomplete maintenance results; r3 stores final real outcome, application structure
+completed with semantic_coverage unchecked. r2 wrongly revises original request
+and retracts packaging/label requirements; current save-only control remains condition.
+First two Tool editors rejected content+attach_to with existing condition error.
+Do not call four semantic passes or current save pending. Candidate delivery claim
+is not in actual Host final text, which reports destination configuration only.
+
+38 maintain_prior change was NOT exercised: prior_maintenance_requests=[] and
+Current maintenance scope appears zero times in actual four HTTP traces. Current
+continuation went through ordinary current User maintenance; do not attribute r3
+to the new projection or equate this path with old61. P1 read_goal actually used by
+two read_memory calls, each followed by two inheriting material deliveries; new
+User views start independent. Wiring evidence, not quality/causal confirmation.
+Root read all4 delivered texts/three revision bodies/selected sources+proposals;
+three existing agents read-only audited. Raw evidence stays ignored, no Judge.
+30gen431135known/charged (15tool_calls+15stop),13embed683,newunknown0;
+ledger47446/207145148known/207421844charged/embed1940092/historygenunknown6.
+Recent five closed runs365gen4040034known/254embed17048; do not add subsets again.
+721 FAILED32/277+85QA,other4unrun/noscore;505/d62/9a scores unchanged.
+No actual runner now. Original frozen roots/source/config/outputs remain; no restart,
+hot edit, budget reset or unknown replay. Inspect live state before any later dispatch.
+
+main b3/PR116+117 merged. PR118 parent report8d ownFast37796882896 success,
+Full37796882927 skipped; new report head needs its own remote verification.
+Current goal tool reports paused; this user-authorized publication does not restart
+execution. Full original task remains INCOMPLETE, same-version277/holdout/external/
+Host/six deliveries remain,16unused,no finalcandidate,Product NO_GO. Older blocks
+are historical snapshots and do not authorize dispatch from stale observations.
+
 # Fixed experiment publication: 2026-10-08 14:52:48 UTC
 
 User requests experiment summary and GitHub submission. This follow-up changes only
