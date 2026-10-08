@@ -1,4 +1,4 @@
-"""Local transaction cleanup for the locked SQLite Store."""
+"""Local transaction cleanup for the optional LangMem SQLite Store."""
 
 from __future__ import annotations
 

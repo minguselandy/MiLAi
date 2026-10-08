@@ -22,6 +22,7 @@ from milai_lab.analysis.edit_official import (
     fixed_native_categories,
 )
 from milai_lab.analysis.edit_views import maintenance_views, record_index
+from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.datasets.edit_benchmarks import (
     ObservedSession,
     halumem_session,
@@ -32,7 +33,6 @@ from milai_lab.datasets.edit_benchmarks import (
 )
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
-from milai_lab.harness.sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.memory.edit_units import (
     read_applicability,
     read_revision_evidence,

@@ -43,6 +43,7 @@ from milai_lab.application.request_plans import (
     compile_application_requests,
 )
 from milai_lab.baselines.langmem_agent import build_agent
+from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import (
@@ -53,7 +54,6 @@ from milai_lab.harness.contextual_artifacts import (
     http_budget_scope,
 )
 from milai_lab.harness.functional_faults import FunctionalFaults
-from milai_lab.harness.sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.memory.activation import ActivationIndex
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import FunctionalIntegrityError as FunctionalIntegrityError
@@ -2109,21 +2109,15 @@ def message(
             if not capture.get("ok"):
                 raise ValueError("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:" + str(capture))
             service.bind_source_boundary(session, message_id, [capture["source_ref"]])
-            if settings.get("failure_delivery") in {
-                "receipt_status_v2",
-                "receipt_status_v3",
-                "receipt_status_v4",
-            }:
-                # Bind the incoming event before classification, without retrieving
-                # anything. A pre-Agent failure delivery must inherit this input's
-                # visibility, never the preceding public turn's exposure.
-                service.bind_public_turn(
-                    session,
-                    message_id,
-                    capture["source_ref"],
-                    config_version=freeze["config_version"],
-                    phase="start",
-                )
+            # Bind the captured event before classification or pending-request
+            # lookup. Neither step retrieves memory or creates semantic facts.
+            service.bind_public_turn(
+                session,
+                message_id,
+                capture["source_ref"],
+                config_version=freeze["config_version"],
+                phase="start",
+            )
             capacity = HostCapacity(settings["capacity"])
 
             def support_review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
