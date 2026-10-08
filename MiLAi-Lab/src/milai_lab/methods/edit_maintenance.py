@@ -11,7 +11,8 @@ import json
 from collections.abc import Callable
 from typing import Any, Literal
 
-from jsonschema import ValidationError as SchemaError  # type: ignore[import-untyped]
+from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
+from jsonschema import ValidationError as SchemaError
 from pydantic import ValidationError
 
 from milai_lab.contracts.memory import EpisodeDescription
@@ -25,6 +26,7 @@ MaintenanceRecipe = Literal["single_pass", "extract_then_edit"]
 ModelCall = Callable[[str, list[dict[str, str]], dict[str, Any]], dict[str, Any]]
 Commit = Callable[[str, dict[str, Any], dict[str, Any]], dict[str, Any]]
 CandidateMode = Literal["combined_dense", "per_candidate_dense"]
+MemoryViewMode = Literal["legacy", "staged", "state_driven"]
 
 
 def parse_object(text: str, *, reject_duplicate_keys: bool = False) -> dict[str, Any]:
@@ -86,6 +88,7 @@ def _located_delivery(
     candidate_mode: CandidateMode,
     prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None,
     selected_records: list[dict[str, Any]] | None = None,
+    materialize_support: bool = False,
 ) -> dict[str, Any]:
     sources = delivery["sources"]
     if selected_records is None:
@@ -100,7 +103,8 @@ def _located_delivery(
         list(dict.fromkeys(s["source_ref"] for s in sources)), "",
         selected_records=selected_records,
         source_ranges=[{k: s[k] for k in ("source_ref", "start", "end")} for s in sources],
-        redelivered_ranges=[],
+        redelivered_ranges=(method.target_support_ranges(selected_records)
+                            if materialize_support else []),
     )
     located.update(
         sources=copy.deepcopy(sources),
@@ -277,6 +281,148 @@ def plan_source_batches(
     return batches
 
 
+def _directory_ref(row: dict[str, Any]) -> dict[str, Any]:
+    if not row.get("ok") or not isinstance(row.get("value"), dict):
+        raise FunctionalRejection("EDIT_RECORD_UNAVAILABLE")
+    value = row["value"]
+    return {
+        "record_id": row["id"], "revision": value["revision"],
+        "matter": (value.get("edit_state") or {}).get("matter_description", ""),
+    }
+
+
+def _append_work(
+    state: dict[str, Any], request_id: str, records: list[dict[str, Any]],
+    *, create: bool, done: bool,
+) -> None:
+    state["work_items"].append({
+        "request_id": f"{request_id}:work:{len(state['work_items'])}",
+        "records": copy.deepcopy(records), "create": create, "done": done,
+        "status": "pending",
+    })
+
+
+def _maintain_views(
+    method: EditMemory, delivery: dict[str, Any], state: dict[str, Any], *,
+    session: str, request_id: str, date: str, recipe: MaintenanceRecipe,
+    memory_view_mode: MemoryViewMode, model_call: ModelCall, commit: Commit | None,
+    retrieval_limit: int, fit: Callable[[list[dict[str, str]]], bool] | None,
+    prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None,
+    candidate_mode: CandidateMode, save: Callable[[], None],
+    call: Callable[[str, list[dict[str, str]], dict[str, Any]], Any],
+) -> None:
+    """Replace the writer scope per work item; all calls use the original callback.
+
+    Each initial pool record is selected at most once, and creation is one work
+    scope. This bounds navigation without a second model budget or retry loop.
+    Work IDs and child checkpoints are durable before an editor can be issued.
+    """
+    service = method.service
+    ns = (*service.namespace, "edit_maintenance")
+    while state["phase"] == "views":
+        pending = next((item for item in state["work_items"]
+                        if item["status"] != "completed"), None)
+        if pending is None:
+            handled = {ref["record_id"] for item in state["work_items"] for ref in item["records"]}
+            remaining = [ref for ref in state["directory"] if ref["record_id"] not in handled]
+            create_available = not any(item["create"] for item in state["work_items"])
+            if (state["work_items"] and (memory_view_mode == "staged"
+                    or state["work_items"][-1]["done"])) or not (remaining or create_available):
+                state["phase"] = "complete"
+                return
+            directory = [_directory_ref(service.read(ref["record_id"])) for ref in remaining]
+            schema = {
+                "type": "object", "additionalProperties": False,
+                "properties": {
+                    "record_ids": {"type": "array", "uniqueItems": True, "items": {
+                        "type": "string", "enum": [ref["record_id"] for ref in directory]
+                    }} if directory else {"type": "array", "maxItems": 0},
+                    "create": {"type": "boolean"}, "done": {"type": "boolean"},
+                }, "required": ["record_ids", "create", "done"],
+            }
+            messages = [{"role": "system", "content": (
+                "Select actual whole matters to open for this source's maintenance. "
+                "The directory is a locating hint, not evidence. Related targets can be "
+                "selected together. create opens one scope for new matters; do not select "
+                "it for duplication. Empty selection and done are allowed when no justified "
+                "maintenance remains. No record must be selected. Return the supplied schema."
+            )}, {"role": "user", "content": json.dumps({
+                "observed_date": date, "sources": delivery["sources"],
+                "prior_context": method.context_projection(state.get("prior_context", [])),
+                "change_candidates": state["changes"], "directory": directory,
+                "create_available": create_available,
+                "processed": [{"request_id": item["request_id"], "records": item["records"],
+                               "receipts": item["result"]["receipts"]}
+                              for item in state["work_items"]],
+                "response_schema": schema,
+            }, ensure_ascii=False, separators=(",", ":"))}]
+            if "selection" not in state:
+                state["selection"] = call(f"select:{len(state['work_items'])}", messages, schema)
+                state["phase"] = "views"
+                save()
+            selection = state["selection"]
+            Draft202012Validator(schema).validate(selection)
+            identifiers = list(dict.fromkeys(selection["record_ids"]))
+            available = {ref["record_id"]: ref for ref in directory}
+            if any(identifier not in available for identifier in identifiers):
+                raise FunctionalRejection("EDIT_VIEW_SELECTION_UNAVAILABLE")
+            create = bool(selection["create"])
+            if create and not create_available:
+                raise FunctionalRejection("EDIT_VIEW_CREATE_SCOPE_ALREADY_PROCESSED")
+            if not identifiers and not create:
+                if selection["done"]:
+                    state["phase"] = "complete"
+                    state.pop("selection")
+                    save()
+                    return
+                raise FunctionalRejection("EDIT_VIEW_NO_PROGRESS")
+            _append_work(state, request_id, [available[key] for key in identifiers],
+                         create=create, done=bool(selection["done"]))
+            state.pop("selection")
+            save()
+            pending = state["work_items"][-1]
+
+        child_id = pending["request_id"]
+        child_key = json.dumps([session, child_id], ensure_ascii=False)
+        if service.store.get(ns, child_key) is None:
+            selected_ids = [ref["record_id"] for ref in pending["records"]]
+            # Earlier work can change actual state. Open the current version now,
+            # before issuing this work's immutable editor mapping.
+            pending["records"] = [_directory_ref(service.read(key)) for key in selected_ids]
+            child_binding = {key: copy.deepcopy(value) for key, value in state["binding"].items()
+                             if key != "memory_view_mode"}
+            child_binding["selected_record_ids"] = selected_ids
+            service.store.put(ns, child_key, {
+                "binding": child_binding, "phase": "locate", "receipts": [], "unprocessed": [],
+                "changes": copy.deepcopy(state["changes"]),
+                "prior_context": copy.deepcopy(state.get("prior_context", [])), "date": date,
+                "allow_create": pending["create"],
+                **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
+            }, index=False)
+            save()
+
+        def work_call(
+            stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
+            work_ref: str = child_id,
+        ) -> Any:
+            return model_call(f"{stage}:{work_ref}", messages, schema)
+
+        child = maintain_event(
+            method, {**delivery, "materialize_selected_support": True},
+            session=session, request_id=child_id, date=date, recipe=recipe,
+            model_call=work_call, commit=commit, retrieval_limit=retrieval_limit, fit=fit,
+            prepare_delivery=prepare_delivery, candidate_mode=candidate_mode,
+            selected_record_ids=[ref["record_id"] for ref in pending["records"]],
+            batch_sources=False,
+        )
+        pending.update(result=child, status=child["status"])
+        state["receipts"] = [receipt for item in state["work_items"]
+                             for receipt in item.get("result", {}).get("receipts", [])]
+        save()
+        if child["status"] != "completed":
+            return
+
+
 def maintain_event(
     method: EditMemory,
     delivery: dict[str, Any],
@@ -294,15 +440,21 @@ def maintain_event(
     selected_record_ids: list[str] | None = None,
     candidate_mode: CandidateMode = "combined_dense",
     batch_sources: bool | None = None,
+    memory_view_mode: MemoryViewMode = "legacy",
+    memory_save_requested: bool = False,
 ) -> dict[str, Any]:
-    """At most one extraction and one editor call for this actual source batch.
+    """Maintain an actual event with legacy or selected whole-matter delivery.
 
+    Legacy retains at most one extraction and one edit per source batch. View
+    modes extract once, then use bounded selections within the caller's budget.
     A saved envelope resumes with the same operation IDs. An interrupted model
     request remains incomplete; recovery never silently repeats unknown HTTP.
     The Host must establish current write permission before invoking this path.
     """
     if recipe not in {"single_pass", "extract_then_edit"}:
         raise ValueError("EDIT_MAINTENANCE_RECIPE_INVALID")
+    if memory_view_mode not in {"legacy", "staged", "state_driven"}:
+        raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
     service = method.service
     sources = delivery["sources"]
     # Recheck visibility before replaying any cached envelope or receipt.
@@ -321,11 +473,14 @@ def maintain_event(
         binding["selected_record_ids"] = list(dict.fromkeys(selected_record_ids))
     if candidate_mode != "combined_dense":
         binding["candidate_mode"] = candidate_mode
+    if memory_view_mode != "legacy":
+        binding["memory_view_mode"] = memory_view_mode
     prior = service.store.get(ns, key)
     state: dict[str, Any] = copy.deepcopy(prior.value) if prior else {
         "binding": binding, "phase": "start", "receipts": [], "unprocessed": [],
         "prior_context": copy.deepcopy(delivery.get("prior_context", [])),
         "date": date,
+        **({"memory_save_requested": True} if memory_save_requested else {}),
     }
     date = state.get("date", date)
     if state["binding"] != binding:
@@ -339,6 +494,8 @@ def maintain_event(
 
     def result() -> dict[str, Any]:
         batches = list(state.get("batch_results", {}).values())
+        if "work_items" in state:
+            batches = [item["result"] for item in state["work_items"] if "result" in item]
         return {
             "status": "completed" if state["phase"] == "complete" else "incomplete",
             "phase": state["phase"], "recipe": recipe,
@@ -362,27 +519,42 @@ def maintain_event(
                if "prior_request_id" in state else {}),
             **({"episode_index": copy.deepcopy(state["episode_index"])}
                if "episode_index" in state else {}),
+            **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
+            **({"batches": copy.deepcopy(batches), "source_batch_count": 1,
+                "memory_view": {
+                    "mode": memory_view_mode,
+                    "directory": copy.deepcopy(state.get("directory", [])),
+                    "work_items": [{key: copy.deepcopy(item[key]) for key in (
+                        "request_id", "records", "create", "status"
+                    ) if key in item} for item in state["work_items"]],
+                    "pending_refs": [item["request_id"] for item in state["work_items"]
+                                     if item.get("status") != "completed"] + (
+                        [state["active_call_ref"]] if state["phase"].endswith("_pending")
+                        and "active_call_ref" in state else []
+                    ),
+                }} if "work_items" in state else {}),
         }
 
     if execute and state["phase"] == "complete" and service.memory_profile == "unified_v1" \
             and "episode_index" not in state:
         state["episode_index"] = _index_episode_descriptions(method, sources, state["receipts"])
         save()
-    if not execute or state["phase"] in {
-        "complete", "incomplete", "extract_pending", "edit_pending"
-    }:
+    if not execute or state["phase"] in {"complete", "incomplete"} \
+            or state["phase"].endswith("_pending"):
         return result()
 
     def call(stage: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
         if fit is not None and not fit(messages):
             raise FunctionalRejection("EDIT_MAINTENANCE_REQUEST_EXCEEDS_CAPACITY")
-        state["phase"] = stage + "_pending"
+        state["phase"] = stage.split(":", 1)[0] + "_pending"
+        if memory_view_mode != "legacy":
+            state["active_call_ref"] = f"{request_id}:{stage}"
         save()
         # Transport exceptions deliberately leave the durable pending marker.
         return model_call(stage, messages, schema)
 
     try:
-        if state["phase"] == "start" and fit is not None and (
+        if memory_view_mode == "legacy" and state["phase"] == "start" and fit is not None and (
             batch_sources if batch_sources is not None else service.memory_profile == "unified_v1"
         ):
             batches = plan_source_batches(
@@ -403,6 +575,7 @@ def maintain_event(
                     fit=fit, prepare_delivery=prepare_delivery, execute=execute,
                     selected_record_ids=selected_record_ids, candidate_mode=candidate_mode,
                     batch_sources=False,
+                    memory_save_requested=state.get("memory_save_requested", False),
                 )
                 state["batch_results"][str(index)] = batch
                 state["receipts"] = [
@@ -431,19 +604,53 @@ def maintain_event(
             state["phase"] = "locate"
             save()
         if state["phase"] == "locate":
-            located = _located_delivery(
-                method, {**delivery, "prior_context": state.get("prior_context", [])},
-                state["changes"], retrieval_limit=retrieval_limit,
-                selected_record_ids=selected_record_ids, candidate_mode=candidate_mode,
-                prepare_delivery=prepare_delivery,
+            if memory_view_mode != "legacy":
+                selected = (
+                    [service.read(record_id) for record_id in dict.fromkeys(selected_record_ids)]
+                    if selected_record_ids is not None else locate_candidates(
+                        method, state["changes"], "\n".join(s["text"] for s in sources),
+                        limit=retrieval_limit, mode=candidate_mode,
+                    )
+                )
+                state.update(
+                    directory=[_directory_ref(row) for row in selected],
+                    work_items=[], phase="views",
+                )
+                if selected_record_ids is not None or not selected:
+                    _append_work(state, request_id, state["directory"], create=True, done=True)
+                save()
+            else:
+                located = _located_delivery(
+                    method, {**delivery, "prior_context": state.get("prior_context", [])},
+                    state["changes"], retrieval_limit=retrieval_limit,
+                    selected_record_ids=selected_record_ids, candidate_mode=candidate_mode,
+                    prepare_delivery=prepare_delivery,
+                    materialize_support=bool(delivery.get("materialize_selected_support")),
+                )
+                view = method.writer_request(
+                    located, request_id=request_id, allow_create=state.get("allow_create", True)
+                )
+                state.update(view=view, phase="edit")
+                save()
+        if state["phase"] == "views":
+            _maintain_views(
+                method, delivery, state, session=session, request_id=request_id,
+                date=date, recipe=recipe, memory_view_mode=memory_view_mode,
+                model_call=model_call, commit=commit, retrieval_limit=retrieval_limit,
+                fit=fit, prepare_delivery=prepare_delivery, candidate_mode=candidate_mode,
+                save=save, call=call,
             )
-            view = method.writer_request(located, request_id=request_id)
-            state.update(view=view, phase="edit")
+            if state["phase"] == "complete" and service.memory_profile == "unified_v1":
+                state["episode_index"] = _index_episode_descriptions(
+                    method, sources, state["receipts"]
+                )
             save()
+            return result()
         if state["phase"] == "edit":
             view = state["view"]
             messages = method.edit_messages(
-                view["packet"], date, allow_create=True, schema=view["schema"],
+                view["packet"], date, allow_create=state.get("allow_create", True),
+                schema=view["schema"],
                 change_candidates=(method.writer_changes(state["changes"], view["mapping"])
                                    if state["changes"] is not None else None),
                 prior_context=state.get("prior_context", []),
@@ -497,6 +704,8 @@ def resume_maintenance(
     prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
     selected_record_ids: list[str] | None = None,
     candidate_mode: CandidateMode = "combined_dense",
+    memory_view_mode: MemoryViewMode = "legacy",
+    memory_save_requested: bool = False,
 ) -> dict[str, Any]:
     """Reconcile old proposal outcomes, then use an explicit new semantic identity.
 
@@ -517,6 +726,8 @@ def resume_maintenance(
         "commit": commit, "retrieval_limit": retrieval_limit, "fit": fit,
         "prepare_delivery": prepare_delivery, "selected_record_ids": selected_record_ids,
         "candidate_mode": candidate_mode,
+        "memory_view_mode": memory_view_mode,
+        "memory_save_requested": memory_save_requested,
     }
     original = maintain_event(
         method, delivery, request_id=prior_request_id, execute=False, **options
@@ -526,7 +737,58 @@ def resume_maintenance(
         return {**original, "replayed": True}
 
     reconciliation: list[dict[str, Any]] = []
-    if state.get("batches"):
+    if "work_items" in state:
+        for work in state["work_items"]:
+            if work.get("status") == "completed":
+                continue
+            child_id = work["request_id"]
+            child = service.store.get(ns, json.dumps([session, child_id], ensure_ascii=False))
+            if child is None:
+                # This work has not issued a model request; the same identity is safe.
+                continue
+            child_options = {**options, "memory_view_mode": "legacy",
+                             "selected_record_ids": [ref["record_id"] for ref in work["records"]]}
+            if child.value["phase"] in {"locate", "edit"}:
+                def work_call(
+                    stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
+                    work_ref: str = child_id,
+                ) -> Any:
+                    return model_call(f"{stage}:{work_ref}", messages, schema)
+
+                child_options["model_call"] = work_call
+                inspected = maintain_event(
+                    method, {**delivery, "materialize_selected_support": True},
+                    request_id=child_id, **child_options,
+                )
+            else:
+                inspected = resume_maintenance(
+                    method, {**delivery, "materialize_selected_support": True},
+                    prior_request_id=child_id, **child_options,
+                )
+            reconciliation.append({"request_id": child_id, "result": inspected})
+            if inspected.get("outcome") == "semantic_outcome_unconfirmed":
+                return {**original, "outcome": "semantic_outcome_unconfirmed",
+                        "reconciliation": reconciliation}
+            work.update(result=inspected, status=inspected["status"])
+        state["receipts"] = [receipt for work in state["work_items"]
+                             for receipt in work.get("result", {}).get("receipts", [])]
+        pending = [work for work in state["work_items"] if work.get("status") != "completed"]
+        if not pending and state["work_items"] and (
+                memory_view_mode == "staged" or state["work_items"][-1]["done"]):
+            state["phase"] = "complete"
+        service.store.put(ns, key, state, index=False)
+        original = maintain_event(method, delivery, request_id=prior_request_id,
+                                  execute=False, **options)
+        if state["phase"] == "complete":
+            return {**original, "replayed": True, "reconciliation": reconciliation}
+        if new_attempt_id is None and state["phase"] == "views" and (
+            not pending or all(service.store.get(
+                ns, json.dumps([session, work["request_id"]], ensure_ascii=False)
+            ) is None for work in pending)
+        ):
+            return {**maintain_event(method, delivery, request_id=prior_request_id, **options),
+                    "reconciliation": reconciliation}
+    elif state.get("batches"):
         index = state["next_batch"]
         child_id = f"{prior_request_id}:batch:{index}"
         child = service.store.get(ns, json.dumps([session, child_id], ensure_ascii=False))
@@ -608,9 +870,23 @@ def resume_maintenance(
             "prior_context": copy.deepcopy(state.get("prior_context", [])),
             "prior_request_id": prior_request_id,
             "date": state.get("date", date),
+            **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
         }
         if "changes" in state:
             replacement.update(changes=copy.deepcopy(state["changes"]), phase="locate")
+        if "work_items" in state:
+            confirmed_work = [copy.deepcopy(work) for work in state["work_items"]
+                              if work.get("status") == "completed"]
+            replacement.update(
+                phase="views", directory=copy.deepcopy(state["directory"]),
+                work_items=confirmed_work,
+                receipts=[receipt for work in confirmed_work
+                          for receipt in work["result"]["receipts"]],
+            )
+            for work in state["work_items"]:
+                if work.get("status") != "completed":
+                    _append_work(replacement, new_attempt_id, work["records"],
+                                 create=work["create"], done=work["done"])
         if state.get("batches"):
             confirmed = {
                 str(index): state["batch_results"][str(index)]

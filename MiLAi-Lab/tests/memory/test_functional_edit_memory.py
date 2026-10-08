@@ -2333,6 +2333,116 @@ def test_shared_recipe_recovery_preserves_effect_and_unknown_call(tmp_path, faul
             assert memory.service.records() == []
 
 
+def test_state_view_opens_whole_targets_and_continues_after_durable_commit(tmp_path):
+    from milai_lab.methods.edit_maintenance import maintain_event, resume_maintenance
+
+    calls, opened_records = [], []
+    with opened(tmp_path, arm="B1", interface_version="I2") as memory:
+        writer_turn(memory, "seed", "The marker is blue. The alarm is loud.")
+        saved = [json.loads(invoke(memory, "save_memory", {"proposal": {
+            "action": "create", "units": [{"text": text, "evidence": ["e1"]}],
+        }}, f"seed-{index}", "seed").content) for index, text in enumerate([
+            "The marker is blue.", "The alarm is loud.",
+        ])]
+        assert all(receipt["ok"] for receipt in saved)
+        turn(memory, "u", "The marker is red. The alarm is soft.")
+        ref = memory._binding(cfg())["source_ref"]
+        delivery = memory.writer.prepare([ref], "", selected_records=[], redelivered_ranges=[])
+
+        def call(stage, messages, schema):
+            calls.append(stage)
+            packet = json.loads(messages[-1]["content"])
+            if stage == "extract":
+                return {"changes": []}
+            if stage.startswith("select:"):
+                assert "The marker is blue." not in canonical(packet)
+                return {"record_ids": [packet["directory"][0]["record_id"]],
+                        "create": False, "done": len(packet["directory"]) == 1}
+            record = packet["delivery"]["records"][0]
+            assert len(packet["delivery"]["records"]) == 1
+            opened_records.append(copy.deepcopy(record))
+            old = record["units"][0]["text"]
+            return {"proposals": [{"action": "edit", "target": "r1", "edits": [{
+                "operation": "replace", "target_unit": "u1", "evidence": ["e1"],
+                "text": "The marker is red." if "marker" in old else "The alarm is soft.",
+            }]}]}
+
+        def commit(operation, proposal, mapping):
+            memory.service.store.put(
+                namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
+                {"mapping_id": mapping["mapping_id"]}, index=False,
+            )
+            receipt = memory.apply_writer_proposal(cfg(), operation, proposal)
+            assert receipt["ok"], receipt
+            raise OSError("stop after the first real commit")
+
+        options = dict(session="s", date="2026-10-08", recipe="extract_then_edit",
+                       model_call=call, memory_view_mode="state_driven",
+                       memory_save_requested=True)
+        with pytest.raises(OSError):
+            maintain_event(memory.writer, delivery, request_id="multi", commit=commit, **options)
+        assert sum(row["value"]["revision"] == 2 for row in memory.service.records()) == 1
+    with opened(tmp_path, arm="B1", interface_version="I2") as memory:
+        memory.context("s", "u", "functional-m-test-v1")
+
+        def commit(operation, proposal, mapping):
+            memory.service.store.put(
+                namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
+                {"mapping_id": mapping["mapping_id"]}, index=False,
+            )
+            return memory.apply_writer_proposal(cfg(), operation, proposal)
+
+        result = resume_maintenance(memory.writer, delivery, prior_request_id="multi",
+                                    commit=commit, **options)
+        assert result["status"] == "completed", result
+        assert result["memory_save_requested"]
+        assert len(result["receipts"]) == 2
+        assert result["memory_view"]["pending_refs"] == []
+        assert len(opened_records) == 2 and calls.count("extract") == 1
+        assert len(set(stage for stage in calls if stage.startswith("edit:"))) == 2
+        assert all(row["value"]["revision"] == 2 for row in memory.service.records())
+        before = len(calls)
+        replayed = maintain_event(memory.writer, delivery, request_id="multi", **options)
+        assert replayed["status"] == "completed" and len(calls) == before
+
+
+def test_staged_selection_keeps_unknown_and_allows_explicit_empty_result(tmp_path):
+    from milai_lab.methods.edit_maintenance import maintain_event, resume_maintenance
+
+    with opened(tmp_path, arm="B1", interface_version="I2") as memory:
+        writer_turn(memory, "seed", "The marker is blue.")
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": {
+            "action": "create", "units": [{"text": "The marker is blue.", "evidence": ["e1"]}],
+        }}, "seed", "seed").content)
+        assert saved["ok"]
+        turn(memory, "u", "The marker is still blue.")
+        ref = memory._binding(cfg())["source_ref"]
+        delivery = memory.writer.prepare([ref], "", selected_records=[], redelivered_ranges=[])
+        calls = []
+
+        def unknown(stage, messages, schema):
+            calls.append(stage)
+            raise OSError("selection response not confirmed")
+
+        options = dict(session="s", date="2026-10-08", recipe="single_pass",
+                       memory_view_mode="staged", model_call=unknown)
+        with pytest.raises(OSError):
+            maintain_event(memory.writer, delivery, request_id="unknown", **options)
+        pending = resume_maintenance(memory.writer, delivery, prior_request_id="unknown", **options)
+        assert pending["status"] == "incomplete" and calls == ["select:0"]
+        assert pending["memory_view"]["pending_refs"] == ["unknown:select:0"]
+        options["model_call"] = lambda stage, messages, schema: {
+            "record_ids": [], "create": False, "done": True,
+        }
+        completed = resume_maintenance(memory.writer, delivery, prior_request_id="unknown",
+                                       new_attempt_id="empty", **options)
+        assert completed["status"] == "completed" and completed["receipts"] == []
+        assert memory.service.read(saved["id"])["value"]["revision"] == 1
+        original = maintain_event(memory.writer, delivery, request_id="unknown",
+                                  execute=False, **options)
+        assert original["phase"] == "select_pending"  # Original unknown is retained.
+
+
 def test_shared_reader_expands_actual_exception_and_history_without_inheriting_scope(tmp_path):
     from milai_lab.memory.edit_units import read_applicability
 
