@@ -2896,6 +2896,34 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         assert {item["record_id"] for item in archive if item["type"] == "record"} == set(saved)
 
 
+def test_current_refresh_keeps_original_maintenance_selection_binding(tmp_path):
+    calls = []
+    with opened(tmp_path, interface_version="I2", features=NEXT_FEATURES,
+                memory_profile="unified_v1", memory_view_mode="state_driven",
+                maintenance_recipe="extract_then_edit") as memory:
+        turn(memory, "u", "Remember quiet reminders.")
+
+        def call(stage, messages, schema):
+            calls.append(stage)
+            if stage == "extract":
+                return {"changes": []}
+            return {"creates": [{"action": "create", "matter": "Reminder tone", "clauses": [{
+                "text": "Use quiet reminders.", "conditions": [], "evidence": ["e1"],
+                "assertion": {"source": "e1", "kind": "reported"},
+            }]}], "records": {}}
+
+        args = dict(recipe="extract_then_edit", model_call=call, allowed=True,
+                    memory_save_requested=True)
+        saved = memory.maintain_sources(cfg(), **args)
+        assert saved[0]["receipts"][0]["status"] == "committed"
+        assert any(ref["id"] == saved[0]["receipts"][0]["id"]
+                   for ref in memory.view_state(cfg())["resident_refs"])
+        inspected = memory.maintain_sources(cfg(), execute=False, **args)
+        replayed = memory.maintain_sources(cfg(), **args)
+        assert inspected[0]["receipts"] == replayed[0]["receipts"] == saved[0]["receipts"]
+        assert len(calls) == 2 and len(memory.service.records()) == 1
+
+
 def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
     options = {"interface_version": "I2", "features": NEXT_FEATURES,
                "memory_profile": "unified_v1", "memory_view_mode": "state_driven",

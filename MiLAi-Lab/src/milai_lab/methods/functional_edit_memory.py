@@ -664,12 +664,19 @@ class FunctionalEditMemory(FunctionalMemory):
         bound = self._binding(config)
         if self.memory_view_mode != "legacy" and selected_record_ids is None \
                 and prior_request_id is None:
-            selected = list(dict.fromkeys(
-                item["record_id"] for item in self.resident_items(config)
-                if item["type"] == "record" and item["version_view"] == "current_at_snapshot"
-            ))
-            if selected:
-                selected_record_ids = selected
+            checkpoint = self.service.store.get(
+                (*self.service.namespace, "edit_maintenance"),
+                json.dumps([bound["session"], request_id], ensure_ascii=False),
+            )
+            if checkpoint is not None:
+                selected_record_ids = checkpoint.value["binding"].get("selected_record_ids")
+            else:
+                selected = list(dict.fromkeys(
+                    item["record_id"] for item in self.resident_items(config)
+                    if item["type"] == "record" and item["version_view"] == "current_at_snapshot"
+                ))
+                if selected:
+                    selected_record_ids = selected
 
         def commit(
             operation_id: str, proposal: dict[str, Any], mapping: dict[str, Any]
