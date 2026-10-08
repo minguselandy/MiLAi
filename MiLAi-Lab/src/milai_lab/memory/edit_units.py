@@ -1150,7 +1150,9 @@ def clause_record_view(record: dict[str, Any]) -> None:
         state["unresolved_conditions"] = unresolved
 
 
-def writer_proposal_schema(arm: str, *, allow_create: bool = True) -> dict[str, Any]:
+def writer_proposal_schema(
+    arm: str, *, allow_create: bool = True, for_generation: bool = False
+) -> dict[str, Any]:
     """Thin legal proposals: no model-issued persistent IDs or revisions."""
     if arm not in ARM_OPERATIONS:
         raise ValueError("EDIT_ARM_INVALID")
@@ -1239,6 +1241,14 @@ def writer_proposal_schema(arm: str, *, allow_create: bool = True) -> dict[str, 
                 fields["role"] = role
             if operation == "append":
                 fields["attach_to"] = refs("u")
+                if for_generation:
+                    # Preserve old decoding/rejection; constrain only new output
+                    # to the content/condition operation the executor accepts.
+                    fields["role"] = {"const": "content"}
+                    fields["attach_to"] = {"type": "array", "maxItems": 0}
+                    edits.append(obj(fields, required))
+                    fields = {**fields, "role": {"const": "condition"}, "attach_to": refs("u")}
+                    required = [*required, "role"]
             if operation == "override":
                 fields["condition"] = text
                 fields["shared_conditions"] = refs("u")

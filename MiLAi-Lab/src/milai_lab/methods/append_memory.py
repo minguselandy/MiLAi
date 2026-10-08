@@ -22,9 +22,12 @@ class AppendMemory(EditMemory):
         return "Append-only"
 
     def envelope_schema(
-        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None
+        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None,
+        for_generation: bool = True,
     ) -> dict[str, Any]:
-        schema = super().envelope_schema(allow_create=allow_create, mapping=mapping)
+        schema = super().envelope_schema(
+            allow_create=allow_create, mapping=mapping, for_generation=for_generation
+        )
         fields = schema["properties"]
         if "creates" in fields:
             fields["records"] = {

@@ -12,6 +12,7 @@ from typing import Any, Literal
 
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 
+from milai_lab.contracts.memory import ObservationProfile
 from milai_lab.memory.edit_units import (
     ARM_OPERATIONS,
     OPERATION_INSTRUCTIONS,
@@ -29,6 +30,7 @@ from milai_lab.memory.edit_units import (
     writer_proposal_schema,
 )
 from milai_lab.memory.functional_state import FunctionalRejection, body_text, resolve_fragment
+from milai_lab.memory.observation import maintenance_projection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import (
     EditFeatures,
@@ -73,13 +75,15 @@ class EditMemory:
         return self.arm
 
     def proposal_schema(
-        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None
+        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None,
+        for_generation: bool = True,
     ) -> dict[str, Any]:
         if self.interface_version == "v1":
             return EditProposal.model_json_schema()
         if self.features.enabled:
             schema = feature_proposal_schema(
-                self.arm, self.features, mapping or {}, allow_create=allow_create
+                self.arm, self.features, mapping or {}, allow_create=allow_create,
+                for_generation=for_generation,
             )
             if self.features.bound_references and mapping and mapping.get("records"):
                 variants = [
@@ -89,7 +93,8 @@ class EditMemory:
                 ]
                 for target in mapping["records"]:
                     scoped = feature_proposal_schema(
-                        self.arm, self.features, mapping, allow_create=False, target=target
+                        self.arm, self.features, mapping, allow_create=False, target=target,
+                        for_generation=for_generation,
                     )
                     for variant in scoped.get("oneOf", []):
                         variant["properties"]["target"] = {"type": "string", "const": target}
@@ -98,14 +103,18 @@ class EditMemory:
                         variants.append(variant)
                 return {"oneOf": variants}
             return schema
-        return writer_proposal_schema(self.arm, allow_create=allow_create)
+        return writer_proposal_schema(
+            self.arm, allow_create=allow_create, for_generation=for_generation
+        )
 
     def envelope_schema(
-        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None
+        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None,
+        for_generation: bool = True,
     ) -> dict[str, Any]:
         if self.features.enabled:
             return feature_envelope_schema(
-                self.arm, self.features, mapping or {}, allow_create=allow_create
+                self.arm, self.features, mapping or {}, allow_create=allow_create,
+                for_generation=for_generation,
             )
         return {
             "type": "object",
@@ -115,7 +124,9 @@ class EditMemory:
                 "proposals": {
                     "type": "array",
                     "minItems": 0,
-                    "items": self.proposal_schema(allow_create=allow_create),
+                    "items": self.proposal_schema(
+                        allow_create=allow_create, for_generation=for_generation
+                    ),
                 }
             },
         }
@@ -978,6 +989,72 @@ class EditMemory:
             self._source_attributes(delivery)
         return delivery
 
+    def observation_delivery(
+        self, delivery: dict[str, Any], profiles: list[ObservationProfile]
+    ) -> dict[str, Any]:
+        """Opt-in public field candidates over exact original JSON member ranges.
+
+        The original Tool Source remains readable. Deterministic candidates are
+        neither semantic records nor independent evidence; the editor still
+        decides which assertions to form. Unmatched sources retain extraction.
+        """
+        self._require_v2()
+        projected = copy.deepcopy(delivery)
+        sources, changes, extraction_ranges = [], [], []
+        for row in delivery["sources"]:
+            actual = self.service.source(row["source_ref"])
+            if actual is None:
+                raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
+            profile = next((p for p in profiles if actual["role"] == "tool"
+                            and actual["origin"] in p.origins), None)
+            text = body_text(actual)
+            projection = (maintenance_projection(actual, profile, text)
+                          if profile is not None and row["start"] == 0 and row["end"] == len(text)
+                          else {"observations": []})
+            observations = projection["observations"]
+            if not observations:
+                sources.append(copy.deepcopy(row))
+                extraction_ranges.append({k: row[k] for k in ("source_ref", "start", "end")})
+                continue
+            spans = list(dict.fromkeys(
+                [span for observation in observations for span in observation["ranges"]]
+                + projection["unstructured_ranges"]
+            ))
+            fragments = self.prepare(
+                [row["source_ref"]], "", selected_records=[],
+                source_ranges=[{"source_ref": row["source_ref"], "start": start, "end": end}
+                               for start, end in spans],
+            )["sources"]
+            sources.extend(fragments)
+            by_span = {(fragment["start"], fragment["end"]): fragment for fragment in fragments}
+            extraction_ranges.extend(
+                {k: by_span[span][k] for k in ("source_ref", "start", "end")}
+                for span in projection["unstructured_ranges"]
+            )
+            for observation in observations:
+                changes.append({
+                    "basis": "actual_source_literal",
+                    "subject": (observation["object_ref"]["application"] + " "
+                                + observation["object_ref"]["external_id"]),
+                    "statement": observation["field"] + "=" + json.dumps(
+                        observation["literal_value"], ensure_ascii=False, separators=(",", ":")
+                    ),
+                    "field": observation["field"],
+                    "field_paths": observation["field_paths"],
+                    "literal_value": observation["literal_value"],
+                    "observed_at": observation["observed_at"],
+                    "resource_version": observation["resource_version"],
+                    "version_domain": observation["version_domain"],
+                    "current_verified": False,
+                    "evidence": [by_span[span]["evidence_id"] for span in observation["ranges"]],
+                    "time": None, "scope": None,
+                })
+        projected.update(sources=sources, result_maintenance={
+            "mode": "literal_observations_v1", "literal_changes": changes,
+            "extraction_source_ranges": extraction_ranges,
+        })
+        return projected
+
     def _source_attributes(self, delivery: dict[str, Any]) -> None:
         refs = [
             source["source_ref"]
@@ -1062,11 +1139,18 @@ class EditMemory:
                 + " Group distinct topics into separate records. Preserve dates and roles. "
                 "In every arm, form one independently stated clause per unit. In plain memory "
                 "keep its qualifications in that clause; in conditioned memory explicitly link "
-                "the same content and qualifications. Do not pack independent matters into a "
+                "actual applicability limits, not ordinary quantities, attributes or observed "
+                "states. Keep each independently mutable value self-contained with its subject "
+                "and still-applicable qualifications. Do not pack independent matters into a "
                 "single long unit or create duplicate records for the same matter. "
                 "Return the supplied envelope. At most one proposal per existing target in "
                 "this request; combine dependent changes in that target's single proposal. "
-                + empty_instruction,
+                + empty_instruction
+                + (" Candidates marked actual_source_literal are program-projected fields of "
+                   "the actual Tool source, not LLM semantic formation. Their observation time "
+                   "is not a guarantee of live state. Preserve separate component outcomes."
+                   if any(change.get("basis") == "actual_source_literal"
+                          for change in change_candidates or []) else ""),
             },
             {
                 "role": "user",
@@ -1097,6 +1181,12 @@ class EditMemory:
         are selectable evidence for a candidate change.
         """
         self._require_v2()
+        projection = delivery.get("result_maintenance")
+        if projection is not None:
+            extraction = {(row["source_ref"], row["start"], row["end"])
+                          for row in projection["extraction_source_ranges"]}
+            delivery = {**delivery, "sources": [row for row in delivery["sources"]
+                        if (row["source_ref"], row["start"], row["end"]) in extraction]}
         packet, mapping = writer_projection(
             {**delivery, "records": [], "redelivered_sources": []},
             self.interface_version,
@@ -1349,7 +1439,9 @@ class EditMemory:
             return [copy.deepcopy(proposal) for proposal in envelope["proposals"]]
         errors = list(
             Draft202012Validator(
-                self.envelope_schema(allow_create=bound["allow_create"], mapping=bound)
+                self.envelope_schema(
+                    allow_create=bound["allow_create"], mapping=bound, for_generation=False
+                )
             ).iter_errors(envelope)
         )
         if errors:
@@ -1391,7 +1483,9 @@ class EditMemory:
         bound = self.load_mapping(mapping if isinstance(mapping, str) else mapping["mapping_id"])
         if not isinstance(mapping, str) and mapping != bound:
             raise FunctionalRejection("EDIT_MAPPING_CHANGED")
-        schema = self.proposal_schema(allow_create=bound["allow_create"], mapping=bound)
+        schema = self.proposal_schema(
+            allow_create=bound["allow_create"], mapping=bound, for_generation=False
+        )
         if self.features.enabled and "oneOf" not in schema:
             raise FunctionalRejection("EDIT_PUBLIC_ACTION_UNAVAILABLE")
         errors = list(Draft202012Validator(schema).iter_errors(proposal))

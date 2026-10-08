@@ -155,8 +155,11 @@ def feature_proposal_schema(
     *,
     allow_create: bool,
     target: str | None = None,
+    for_generation: bool = False,
 ) -> dict[str, Any]:
-    schema = copy.deepcopy(writer_proposal_schema(arm, allow_create=allow_create))
+    schema = copy.deepcopy(writer_proposal_schema(
+        arm, allow_create=allow_create, for_generation=for_generation
+    ))
     refs = {
         "r": list(mapping.get("records", {})),
         "u": [
@@ -197,6 +200,20 @@ def feature_proposal_schema(
 
     walk(schema)
     variants = schema["oneOf"]
+    for variant in variants:
+        if "edits" not in variant["properties"]:
+            continue
+        for operation in variant["properties"]["edits"]["items"]["oneOf"]:
+            append_fields = operation["properties"]
+            if append_fields["operation"]["const"] != "append" \
+                    or append_fields["role"].get("const") != "condition":
+                continue
+            content = [alias for alias in refs["u"]
+                       if mapping["units"][alias]["role"] == "content"]
+            append_fields["attach_to"] = {
+                "type": "array", "items": reference("u", content),
+                **({"maxItems": 0} if not content else {}),
+            }
     variants[:] = [
         v
         for v in variants
@@ -496,8 +513,11 @@ def feature_envelope_schema(
     mapping: dict[str, Any],
     *,
     allow_create: bool,
+    for_generation: bool = True,
 ) -> dict[str, Any]:
-    full = feature_proposal_schema(arm, features, mapping, allow_create=allow_create)
+    full = feature_proposal_schema(
+        arm, features, mapping, allow_create=allow_create, for_generation=for_generation
+    )
     if not features.single_record_changes:
         return _object(
             {
@@ -514,7 +534,8 @@ def feature_envelope_schema(
     containers = {}
     for target in mapping.get("records", {}):
         variants = feature_proposal_schema(
-            arm, features, mapping, allow_create=False, target=target
+            arm, features, mapping, allow_create=False, target=target,
+            for_generation=for_generation,
         )["oneOf"]
         for variant in variants:
             variant["properties"].pop("target", None)
