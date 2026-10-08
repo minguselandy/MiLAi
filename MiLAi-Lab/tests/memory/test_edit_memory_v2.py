@@ -1104,7 +1104,14 @@ def test_next_contract_occurrence_time_restart_immutable_and_unknown(tmp_path):
             service.capture_user("s", "known", "Actual text.", occurred_at="2025-01-03T00:00:00Z")
 
 
-def test_revision_calendar_context_actual_metadata_current_and_history(tmp_path):
+@pytest.mark.parametrize("event_at,effective_from,effective_until", [
+    ("October 03, 2025, 09:00:00", "2025-10-01", "2025-10-08"),
+    ("October 3, 2025", "October 1, 2025", "October 8, 2025"),
+    ("Oct 3, 2025", "Oct 1, 2025", "Oct 8, 2025"),
+])
+def test_revision_calendar_context_actual_metadata_current_and_history(
+    tmp_path, event_at, effective_from, effective_until,
+):
     with opened(tmp_path, "B2") as (service, _):
         method = EditMemory(service, "B2", interface_version="I2", features=EditFeatures(
             matter_organization=True, semantic_operations=True, bound_references=True,
@@ -1121,11 +1128,26 @@ def test_revision_calendar_context_actual_metadata_current_and_history(tmp_path)
         assert view["packet"]["source_table"][0]["calendar_context"] == "team-calendar"
         clause = next_unit("User reports three joint visits for the whole team in total.")
         clause["assertion"].update(
-            applicability={"event_at": "October 03, 2025, 09:00:00", "effective_from": "2025-10-01",
-                           "effective_until": "2025-10-08", "quantity_scope": "overall"},
+            applicability={"event_at": event_at, "effective_from": effective_from,
+                           "effective_until": effective_until, "quantity_scope": "overall"},
             evidence_links={"supports": ["e1"]},
         )
         proposal = {"action": "create", "matter": "Team joint visits", "units": [clause]}
+        for invalid in ("October 3", "October 2025", "October 3, 2025, 09:00",
+                        "February 29, 2025", "April 31, 2025", "Oct 0, 2025",
+                        "Unknown 3, 2025"):
+            rejected = copy.deepcopy(proposal)
+            rejected["units"][0]["assertion"]["applicability"]["event_at"] = invalid
+            with pytest.raises(FunctionalRejection, match="EDIT_EXPLICIT_TIME_REQUIRED"):
+                method.decode_proposal(clause_proposal(rejected, conditioned=True), view["mapping"])
+        for end in ("Oct 1, 2025", "September 30, 2025"):
+            rejected = copy.deepcopy(proposal)
+            rejected["units"][0]["assertion"]["applicability"].update(
+                effective_from="October 1, 2025", effective_until=end,
+            )
+            with pytest.raises(FunctionalRejection, match="EDIT_EFFECTIVE_INTERVAL_INVALID"):
+                method.decode_proposal(clause_proposal(rejected, conditioned=True), view["mapping"])
+        assert service.records() == []
         saved = method.apply("s", "save-total", method.decode_envelope(
             {"creates": [clause_proposal(proposal, conditioned=True)]}, view["mapping"]
         )[0])
@@ -1133,6 +1155,7 @@ def test_revision_calendar_context_actual_metadata_current_and_history(tmp_path)
         assertion = old["edit_state"]["units"][0]["assertion"]
         assert assertion["calendar_context"] == "team-calendar"
         assert assertion["occurred_at"] == "Oct 10, 2025, 12:00:00"
+        assert assertion["applicability"] == clause["assertion"]["applicability"]
         assert assertion["evidence_links"]["supports"][0]["calendar_context"] == "team-calendar"
         current = method.revision_view(old, query_time="Oct 07, 2025, 10:00:00",
                                        query_calendar_context="team-calendar")
@@ -1179,13 +1202,17 @@ def test_revision_calendar_context_actual_metadata_current_and_history(tmp_path)
         assert service.read(saved["id"], 1)["value"] == old
 
 
-def test_revision_day_precision_and_explicit_offsets_remain_separate():
+@pytest.mark.parametrize("event_at,query_time", [
+    ("2025-09-04", "2025-09-04"),
+    ("September 4, 2025", "Sep 4, 2025"),
+])
+def test_revision_day_precision_and_explicit_offsets_remain_separate(event_at, query_time):
     version = {"content": "Synthetic event.", "edit_state": {
         "representation": "plain_v1", "relations": [], "units": [{
             "unit_id": "total", "role": "content", "text": "A reported event.",
             "evidence_refs": [], "assertion": {
                 "calendar_context": "example-calendar", "occurred_at": "Sep 04, 2025, 18:42:18",
-                "applicability": {"event_at": "2025-09-04"},
+                "applicability": {"event_at": event_at},
             },
         }],
     }}
@@ -1201,7 +1228,7 @@ def test_revision_day_precision_and_explicit_offsets_remain_separate():
     version["edit_state"]["units"][0]["assertion"]["applicability"].update(
         effective_from="Sep 04, 2025, 12:00:00", effective_until="2025-09-05",
     )
-    projected = EditMemory.revision_view(version, query_time="2025-09-04",
+    projected = EditMemory.revision_view(version, query_time=query_time,
                                         query_calendar_context="example-calendar")
     temporal = projected["units"][0]["temporal"]
     assert temporal["status"] == "query_time_precision_unresolved"

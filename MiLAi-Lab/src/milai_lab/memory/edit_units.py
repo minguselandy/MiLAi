@@ -476,7 +476,9 @@ def _declared_time(
     try:
         parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
-        english = re.fullmatch(r"([A-Za-z]+) (\d{1,2}), (\d{4}), (\d{2}):(\d{2}):(\d{2})", value)
+        english = re.fullmatch(
+            r"([A-Za-z]+) (\d{1,2}), (\d{4})(?:, (\d{2}):(\d{2}):(\d{2}))?", value
+        )
         months = (
             "January", "February", "March", "April", "May", "June", "July", "August",
             "September", "October", "November", "December",
@@ -489,10 +491,12 @@ def _declared_time(
             return None
         try:
             parsed = datetime(int(english[3]), month, int(english[2]),
-                              int(english[4]), int(english[5]), int(english[6]))
+                              int(english[4]) if english[4] is not None else 0,
+                              int(english[5]) if english[5] is not None else 0,
+                              int(english[6]) if english[6] is not None else 0)
         except ValueError:
             return None
-        precision = "second"
+        precision = "second" if english[4] is not None else "day"
     else:
         clock = re.search(r"[Tt ](\d{2}(?::?\d{2}){0,2})([.,]\d+)?", value)
         precision = "subsecond" if clock and clock[2] else {
