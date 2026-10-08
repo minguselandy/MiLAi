@@ -47,6 +47,7 @@ from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.edit_maintenance import (
     MaintenanceRecipe,
     ModelCall,
+    has_pending_save,
     maintain_event,
     resume_maintenance,
 )
@@ -399,21 +400,29 @@ class FunctionalEditMemory(FunctionalMemory):
         self._binding(config)
         result = []
         ns = (*self.service.namespace, "edit_maintenance")
-        for stored in self.service.store.search(ns, limit=10000):
+        checkpoints = self.service.store.search(ns, limit=10000)
+        referenced: set[tuple[str, str]] = set()
+        for stored in checkpoints:
+            session, request_id = json.loads(stored.key)
             state = stored.value
-            if not state.get("memory_save_requested"):
+            referenced.update((session, work["request_id"])
+                              for work in state.get("work_items", []))
+            referenced.update((session, f"{request_id}:batch:{index}")
+                              for index in range(len(state.get("batches", []))))
+            if "prior_request_id" in state:
+                referenced.add((state.get("prior_session", session), state["prior_request_id"]))
+        for stored in checkpoints:
+            state = stored.value
+            if not has_pending_save(state):
                 continue
             session, request_id = json.loads(stored.key)
+            if (session, request_id) in referenced:
+                continue
             sources = state["binding"]["sources"]
             if not sources or any(self.service.source(row["source_ref"]) is None
                                   for row in sources):
                 continue
             receipts = state.get("receipts", [])
-            confirmed = any(row.get("ok") and row.get("effect") == "memory_only"
-                            and row.get("status") in {"committed", "no_change", "replayed"}
-                            for row in receipts)
-            if state["phase"] == "complete" and confirmed and not state.get("unprocessed"):
-                continue
             result.append({
                 "request_id": request_id, "session": session,
                 "source_refs": list(dict.fromkeys(row["source_ref"] for row in sources)),
@@ -423,6 +432,86 @@ class FunctionalEditMemory(FunctionalMemory):
                 "recovery": "inspect_original_receipts_before_explicit_new_attempt",
             })
         return result
+
+    def maintain_prior(
+        self,
+        config: RunnableConfig,
+        *,
+        prior_session: str,
+        prior_request_id: str,
+        model_call: ModelCall,
+        allowed: bool,
+        new_attempt_id: str | None = None,
+        execute: bool = True,
+        fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Continue an actual explicit save under the current public request.
+
+        The old session is only the identity for its checkpoint and receipts.
+        An explicitly requested new attempt belongs to the current session and
+        uses this request's permissions and trigger. Original facts retain their
+        actual sources and dates; the continuation is not recaptured as evidence.
+        """
+        bound = self._binding(config)
+        if execute and not allowed:
+            return {"status": "not_permitted", "phase": "permission", "receipts": [],
+                    "unprocessed": [], "semantic_write_performed": False}
+        prior = self.service.store.get(
+            (*self.service.namespace, "edit_maintenance"),
+            json.dumps([prior_session, prior_request_id], ensure_ascii=False),
+        )
+        if prior is None or not prior.value.get("memory_save_requested"):
+            raise FunctionalRejection("EDIT_MAINTENANCE_EXPLICIT_SAVE_UNAVAILABLE")
+        state = prior.value
+        sources = state["binding"]["sources"]
+        delivery = self.writer.prepare(
+            list(dict.fromkeys(source["source_ref"] for source in sources)), "",
+            selected_records=[], source_ranges=[{
+                key: source[key] for key in ("source_ref", "start", "end")
+            } for source in sources], redelivered_ranges=[],
+        )
+        delivery.update(
+            prior_context=copy.deepcopy(state.get("prior_context", [])),
+            replay=True, new_independent_support=False,
+        )
+        current = self.service.source(bound["source_ref"])
+        if current is None:
+            raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
+        continuation = {"source_ref": current["event_id"], **{
+            key: current[key] for key in ("role", "observed_at", "content")
+        }}
+        continuation["purpose"] = "current_request_control_not_memory_evidence"
+
+        def messages_for_current(messages: list[dict[str, str]]) -> list[dict[str, str]]:
+            projected = copy.deepcopy(messages)
+            packet = json.loads(projected[-1]["content"])
+            packet["continuation_request"] = continuation
+            projected[-1]["content"] = json.dumps(
+                packet, ensure_ascii=False, separators=(",", ":")
+            )
+            projected[0]["content"] += (
+                " Follow the actual current continuation request's scope and limits. "
+                "It controls this attempt and is not an extra evidence alias for the "
+                "original remembered facts. Original source identity and dates remain."
+            )
+            return projected
+
+        def call(stage: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
+            return model_call(stage, messages_for_current(messages), schema)
+
+        def capacity(messages: list[dict[str, str]]) -> bool:
+            return fit(messages_for_current(messages)) if fit is not None else True
+
+        return self.maintain_delivery(
+            config, delivery, request_id=prior_request_id, prior_request_id=prior_request_id,
+            prior_session=prior_session, new_attempt_id=new_attempt_id,
+            date=state["date"], recipe=state["binding"]["recipe"], model_call=call,
+            allowed=allowed, execute=execute, fit=capacity if fit is not None else None,
+            prepare_delivery=prepare_delivery,
+            selected_record_ids=state["binding"].get("selected_record_ids"),
+            memory_save_requested=True,
+        )
 
     def _commit(
         self, session: str, operation_id: str, proposal: dict[str, Any]
@@ -564,11 +653,12 @@ class FunctionalEditMemory(FunctionalMemory):
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
         prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
         prior_request_id: str | None = None,
+        prior_session: str | None = None,
         new_attempt_id: str | None = None,
         memory_save_requested: bool = False,
     ) -> dict[str, Any]:
         """Bind a current event or explicit consolidation to the ordinary Host commits."""
-        if not allowed:
+        if not allowed and (execute or prior_request_id is None):
             return {"status": "not_permitted", "phase": "permission", "receipts": [],
                     "unprocessed": [], "semantic_write_performed": False}
         bound = self._binding(config)
@@ -623,7 +713,8 @@ class FunctionalEditMemory(FunctionalMemory):
             return prepared
 
         options: dict[str, Any] = {
-            "session": bound["session"], "date": date, "recipe": recipe,
+            "session": prior_session if prior_session is not None else bound["session"],
+            "date": date, "recipe": recipe,
             "model_call": model_call, "commit": commit, "selected_record_ids": selected_record_ids,
             "fit": fit, "prepare_delivery": selected_delivery,
             "memory_view_mode": self.memory_view_mode,
@@ -632,7 +723,8 @@ class FunctionalEditMemory(FunctionalMemory):
         if prior_request_id is not None:
             result = resume_maintenance(
                 self.writer, delivery, prior_request_id=prior_request_id,
-                new_attempt_id=new_attempt_id if execute else None, **options,
+                new_attempt_id=new_attempt_id if execute else None,
+                new_attempt_session=bound["session"], execute=execute, **options,
             )
         else:
             if new_attempt_id is not None:

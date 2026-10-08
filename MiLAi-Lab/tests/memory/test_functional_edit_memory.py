@@ -2894,3 +2894,97 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
             namespace(memory.service), memory._writer_key(cfg(), "edit-writer-delivery:")
         ).value["items"]
         assert {item["record_id"] for item in archive if item["type"] == "record"} == set(saved)
+
+
+def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
+    options = {"interface_version": "I2", "features": NEXT_FEATURES,
+               "memory_profile": "unified_v1", "memory_view_mode": "state_driven",
+               "maintenance_recipe": "extract_then_edit"}
+    calls, fitted = [], []
+    original_text = "Remember quiet reminders only on weekdays."
+    with opened(tmp_path, **options) as memory:
+        original_ref = memory.service.capture_user(
+            "s", "u", original_text, occurred_at="2026-10-01",
+        )["source_ref"]
+        memory.context("s", "u", "functional-m-test-v1")
+
+        def first(stage, messages, schema):
+            calls.append(stage)
+            return {"changes": []} if stage == "extract" else {}
+
+        initial = memory.maintain_sources(
+            cfg(), recipe="extract_then_edit", model_call=first, allowed=True,
+            memory_save_requested=True,
+        )[0]
+        assert initial["status"] == "completed" and initial["receipts"] == []
+        pending = memory.pending_maintenance(cfg())
+        assert len(pending) == 1 and pending[0]["source_refs"] == [original_ref]
+        old_key = json.dumps(["s", initial["request_id"]], ensure_ascii=False)
+        ns = (*memory.service.namespace, "edit_maintenance")
+        old_checkpoint = copy.deepcopy(memory.service.store.get(ns, old_key).value)
+        original_source = memory.service.source(original_ref)
+    with opened(tmp_path, **options) as memory:
+        current_cfg = cfg("resume")
+        current_cfg["configurable"].update(
+            v13_session="new-session", v13_config_version="current-config-v2",
+        )
+        current_ref = memory.service.capture_user(
+            "new-session", "resume",
+            "Continue only saving the earlier reminder. No business action.",
+        )["source_ref"]
+        memory.context("new-session", "resume", "current-config-v2")
+
+        def inspect(messages):
+            packet = json.loads(messages[-1]["content"])
+            assert packet["continuation_request"]["source_ref"] == current_ref
+            assert packet["continuation_request"]["purpose"].endswith("not_memory_evidence")
+            assert packet["replay"] and not packet["new_independent_support"]
+            assert all(e["text"] == original_text for e in packet["delivery"]["evidence"])
+            assert packet["delivery"]["source_table"][0]["occurred_at"] == "2026-10-01"
+
+        def fit(messages):
+            inspect(messages)
+            fitted.append(copy.deepcopy(messages))
+            return True
+
+        def save(stage, messages, schema):
+            inspect(messages)
+            assert stage.startswith("edit:") and messages == fitted[-1]
+            calls.append(stage)
+            return {"creates": [{"action": "create", "matter": "Reminder tone", "clauses": [{
+                "text": "Use quiet reminders only on weekdays.", "conditions": [],
+                "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported"},
+            }]}], "records": {}}
+
+        args = dict(prior_session="s", prior_request_id=initial["request_id"],
+                    model_call=save, new_attempt_id="resume-save", fit=fit)
+        count = len(calls)
+        denied = memory.maintain_prior(current_cfg, allowed=False, **args)
+        assert denied["status"] == "not_permitted" and len(calls) == count
+        inspected = memory.maintain_prior(current_cfg, allowed=False, execute=False, **args)
+        assert inspected["receipts"] == [] and len(calls) == count
+        assert memory.service.store.get(ns, json.dumps(["new-session", "resume-save"])) is None
+        result = memory.maintain_prior(current_cfg, allowed=True, **args)
+        assert result["status"] == "completed" and result["prior_session"] == "s"
+        assert calls.count("extract") == 1
+        assert memory.service.store.get(ns, old_key).value == old_checkpoint
+        row = memory.service.records()[0]
+        assert row["value"]["source_refs"] == [original_ref]
+        attempt = memory.service.store.get(
+            ns, json.dumps(["new-session", "resume-save"], ensure_ascii=False)
+        ).value
+        operation = attempt["work_items"][0]["request_id"] + ":proposal:0"
+        receipt = memory.service.operation_receipt("new-session", operation)
+        assert receipt["ok"] and row["value"]["revision"] == 1
+        assert memory.service.operation_receipt("s", operation) is None
+        raw = memory.service.store.get(memory.service.namespace, row["id"]).value["_v13_1"][
+            "proposals"
+        ][reference_key(["new-session", operation])]["raw"]
+        assert raw["trigger_binding"] == memory._binding(current_cfg)
+        assert memory.service.source(original_ref) == original_source
+        assert len(memory.service.sources()) == 2
+        assert memory.pending_maintenance(current_cfg) == []
+        before = copy.deepcopy(memory.service.records())
+    with opened(tmp_path, **options) as memory:
+        memory.context("new-session", "resume", "current-config-v2")
+        assert memory.service.records() == before and memory.pending_maintenance(current_cfg) == []
