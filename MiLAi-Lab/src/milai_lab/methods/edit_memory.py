@@ -333,8 +333,9 @@ class EditMemory:
             if self.features.source_metadata:
                 instruction += (
                     "For an unchanged old content clause, assertion={keep:h#} selects its "
-                    "actual text, support and attribution. Omit text to reuse it, or repeat "
-                    "it exactly; keep_support need not be repeated. "
+                    "actual text, support and attribution. Return this keep reference without "
+                    "text; keep_support need not be repeated. New or changed text selects "
+                    "assertion={source_evidence:e#,kind:reported/inferred/observed/uncertain}. "
                     if self.arm == "B0" else
                     "With from_unit=u# and assertion={keep:h#} for that same old unit, "
                     "omit text to reuse its actual text, or repeat it exactly. This also reuses "
@@ -554,6 +555,9 @@ class EditMemory:
                     {"keep": support} if keep_attribution
                     else {"source_evidence": "e1", "kind": "reported"}
                 )
+                if self.arm == "B0" and keep_attribution:
+                    result.pop("text")
+                    result.pop("keep_support", None)
             return result
 
         def example_relation(

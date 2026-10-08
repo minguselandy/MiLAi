@@ -1151,6 +1151,11 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
             Draft202012Validator(partial["schema"]).validate(
                 {"creates": [], "records": {"r1": generated}}
             )
+            repeated = copy.deepcopy(generated)
+            repeated["clauses"][0]["text"] = "User reports quiet reminders."
+            assert not Draft202012Validator(partial["schema"]).is_valid(
+                {"creates": [], "records": {"r1": repeated}}
+            )
             wrong_target = copy.deepcopy(public)
             wrong_target["target"] = "r2"
             with pytest.raises(FunctionalRejection, match="PUBLIC_PROPOSAL_INVALID"):
@@ -1166,6 +1171,7 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
         decoded = method.decode_proposal(public, partial["mapping"])
         if arm == "B0":
             legacy = copy.deepcopy(public)
+            legacy["clauses"][0]["text"] = "User reports quiet reminders."
             legacy["clauses"][0]["from_unit"] = "u1"
             assert method.decode_proposal(legacy, partial["mapping"]) == decoded
             legacy["clauses"][1]["from_unit"] = "u1"

@@ -412,6 +412,18 @@ def feature_proposal_schema(
             not keep_only and "from_unit" not in item["properties"]
         ):
             return
+        if keep_only and for_generation:
+            choices = []
+            for selected in item["properties"]["assertion"]["oneOf"]:
+                choice = copy.deepcopy(item)
+                choice["properties"]["assertion"] = copy.deepcopy(selected)
+                if "keep" in selected["properties"]:
+                    choice["properties"].pop("text")
+                    choice["required"].remove("text")
+                choices.append(choice)
+            item.clear()
+            item["oneOf"] = choices
+            return
         item["required"].remove("text")
         item["anyOf"] = [
             {"required": ["text"]},
