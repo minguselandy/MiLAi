@@ -1,3 +1,27 @@
+# Fixed handoff: 2026-10-08 12:09:27 UTC
+
+User requests a current issues publication; this change is documents/handoff only.
+Base main039bcad/PR112 merged; tested72179e3 Fast37772066720 and main Fast37773282422
+success, no Full observed for these heads. Keep report/source/run identities separate.
+Frozen721 full five-method staged/extract_then_edit/I2 continuous history is LIVE:
+PID4027428/session39616, B0 predict9/277 [9,0,0,0],23 complete answers; other methods
+unstarted, no terminal/score/Judge. Users65/77/62/73; first65 is part of277.
+Root read3 new full answers; source audit incomplete. Inspect actual PID/terminal
+before scheduling; never restart/hotedit or parallelize real HTTP from this snapshot.
+Fixed73 generation requests/72 stop responses/671649known +1 in flight;57 encoder/
+4190tokens. Global47154/203776763known/204135558charged/embed1927234;unknown7 is history6
+plus one active reservation, not a new closed failure. Same ledger, no reset or new limit.
+e978 Host four executions closed, business1reserve+1label; pure-save classifiernone
+caused no Editor/r2 unchanged, first condition rejection remains. ce14/e978 classifier
+HTTP input identical: do not attribute differing declarations to Native history rename.
+Single memory intent and explicit empty containers remain proposals, NOT implemented.
+d62 M score16/72valid63,QA30/73valid70 and9a finite comparisons stay separate; no advantage.
+Existing subagents are authorized for parallel read-only checks; Root alone owns serial
+Qwen/BGE/Judge HTTP. No reviewer/new model/platform/SHA gates/unknown retries.
+See docs/MILAI_UNIFIED_MEMORY_USAGE.md and MILAI_BUILD_FIRST_ISSUES.md for current issues.
+Full goal active/incomplete,16 reserved unused,no final candidate,Product NO_GO.
+This publication does not pause execution; all earlier timed handoffs are historical.
+
 # Fixed handoff: 2026-10-07 16:04:07 UTC
 
 PR83–93 merged; main9775a47 clean, ffce ownFast/Full21 and main push passed.
