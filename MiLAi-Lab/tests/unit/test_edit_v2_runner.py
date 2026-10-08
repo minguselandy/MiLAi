@@ -111,20 +111,20 @@ def test_temporary_changes_locate_then_use_existing_editor_without_becoming_memo
             assert packet["evidence"][1]["text"].startswith("Review Thursday")
             record = next(r for r in packet["records"] if r["matter"] == "Review schedule")
             clause = {"text": "User reports review Thursday.", "evidence": ["e2"],
-                      "assertion": {"source": "e2", "kind": "reported"}}
+                      "assertion": {"source_evidence": "e2", "kind": "reported"}}
             if arm in {"B0", "B2"}:
                 change = {"action": "rewrite", "clauses": [
                     {**clause, **({"conditions": []} if arm == "B2" else {})}
                 ]}
             else:
                 change = {"action": "edit", "edits": [{
-                    **clause, "operation": "change_value" if arm == "M" else "replace",
+                    **clause, "operation": "replace",
                     "target_unit": record["clauses"][0]["id"],
                 }]}
             envelope = {"creates": [{
                 "action": "create", "matter": "Ceramics plan", "clauses": [{
                     "text": "User plans ceramics Friday.", "evidence": ["e2"],
-                    "assertion": {"source": "e2", "kind": "reported"},
+                    "assertion": {"source_evidence": "e2", "kind": "reported"},
                     **({"conditions": []} if arm in {"B2", "M"} else {}),
                 }],
             }], "records": {record["id"]: change}}
@@ -398,7 +398,7 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
         )
         requests.append(packet)
         evidence = packet["evidence"][0]["id"]
-        assertion = {"source": evidence, "kind": "reported"}
+        assertion = {"source_evidence": evidence, "kind": "reported"}
         if not packet["records"]:
             assert schema["properties"]["records"]["properties"] == {}
             envelope = {
@@ -425,7 +425,7 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
                 ]}
             else:
                 change = {"action": "edit", "edits": [
-                    {"operation": "change_value" if arm == "M" else "replace",
+                    {"operation": "replace",
                      "target_unit": unit["id"], "text": "Project schedule Thursday",
                      "evidence": [evidence], "assertion": assertion}
                 ]}
@@ -962,7 +962,10 @@ def test_predict_then_score_reuses_saved_answers_and_diagnostic_retrieval(tmp_pa
                     transport=httpx.MockTransport(provider)) as client:
         run.client = client
         predicted = run.halumem("predict")
-        assert predicted == {"status": "PREDICTIONS_SAVED", "sessions": 1, "judge_calls": 0}
+        assert predicted == {
+            "status": "PREDICTIONS_SAVED", "sessions": 1, "judge_calls": 0,
+            "complete_answers": 1, "known_reader_failures": 0,
+        }
         assert judge_calls == []
         snapshot = run.root / "predictions/halumem/alice/0/complete.json"
         original = snapshot.read_bytes()
