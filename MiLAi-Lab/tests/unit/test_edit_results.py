@@ -3,9 +3,9 @@
 from __future__ import annotations
 
 import json
+import sqlite3
 
 import pytest
-from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.analysis.edit_results import (
     halumem_suite,
@@ -27,7 +27,8 @@ def test_view_audit_counts_actual_calls_and_child_effects_once(tmp_path):
     binding = {"sources": [{"source_ref": "actual-source", "start": 0, "end": 10}]}
     bank = tmp_path / "banks/owner/memory.sqlite"
     bank.parent.mkdir(parents=True)
-    with SqliteStore.from_conn_string(str(bank)) as store:
+    with sqlite3.connect(bank) as connection:
+        connection.execute("CREATE TABLE store (prefix TEXT, key TEXT, value TEXT)")
         for suffix, state in (
             ("", {"phase": "views", "work_items": [{}, {}], "receipts": [receipt],
                   "unprocessed": [{"phase": "views", "reason": "EDIT_MODEL_CALL_LIMIT_REACHED"}]}),
@@ -35,9 +36,11 @@ def test_view_audit_counts_actual_calls_and_child_effects_once(tmp_path):
                          "receipts": [receipt], "unprocessed": []}),
             (":work:1", {"phase": "edit_pending", "receipts": [], "unprocessed": []}),
         ):
-            store.put(("audit", "owner", "edit_maintenance"),
-                      json.dumps(["original-session", request_id + suffix]),
-                      {**state, "binding": binding}, index=False)
+            connection.execute("INSERT INTO store VALUES (?, ?, ?)", (
+                "audit.owner.edit_maintenance",
+                json.dumps(["original-session", request_id + suffix]),
+                json.dumps({**state, "binding": binding}),
+            ))
     calls = []
     for suffix, stage, path in (
         ("", "extract", "extract"),
