@@ -11,6 +11,90 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 07:40 UTC：三条真实Host链闭合，保留语义失败并修复续办接线
+
+本节为固定观察。main仍为64f006f；[PR107](https://github.com/minguselandy/MiLAi/pull/107)
+为open draft，最新开发ce14dd7dd11bc065b75dfb854ed05d8d38c07884，完整三链实际冻结d4756a0。
+三链在07:29:36 UTC完成18次尝试，17 COMPLETED、1 FAILED；执行闭合不是语义通过数。
+Root阅读17个完整最终答案，并核对选定来源、前后状态和实际回执；未独立审计全部HTTP／reasoning，
+没有另造数值重评分。这些是已曝光的开发故事，不是最终冻结后的新故事或保留集。
+
+| d4756a0实际链路 | 已观察行为 | 保留的失败 |
+|---|---|---|
+| 两事项保存／切换／跨进程重开／原文重装，6次执行闭合 | 两个事项真实提交；只读查询及原User话术可用 | “尽量”被强化为“严格”；仅存偏好却声称提醒已设置 |
+| 局部例外／更正／撤销／当前与保存历史，5次闭合、1次失败 | 北区例外r2实际保存，后续撤销形成r3 | 更正时只提供旧来源目录，解析器却无读取工具，选中当前片段后被正确拒绝；两天要求未保存；Reader将要求当成已保存历史，并把整体次数推给南区；撤销后另有一次editor截断 |
+| 部分业务／补标签／只补保存／只读／遗忘，6次执行闭合 | 业务库恰有一次reserve_and_label、一次complete_label；遗忘回执撤销一事项及六来源，重开记录仍visibility_revoked，业务保留 | 部分结果被存成整体失败；“只补保存”误判none、零维护；业务完成不能替代原结果保存完成 |
+
+ce14dd7只补两项实际合同：续办解析器在原材料额度内取得候选池中可见的旧User片段，
+保留实际角色、时间、句柄和权限；当前意图的限制按所指工作范围表达，排除业务或已保存部分
+不会自动排除另行请求的未完成保存。仍由模型解释当前意图，不强行授权、写入或重做业务。
+同请求原件、旧unknown、失败输出不改写。新空库、独立冻结ce14dd7已启动两个直接受影响
+片段共8消息，观察时尚无终态；不把此代码修复归给d4756a0成绩。
+
+另在既有[配对入口](../tools/run_edit_change_pairs.py)增加有限`reader-views`：显式指定实际保存的
+HTTP key，固定同一retrieval池、状态、问题、日期、模型与Reader，只改变legacy／staged／state_driven
+的材料交付。没有新检索、encoder、Writer、来源捕获或Judge，选择与最终回答全部记费。
+实际模型调用仍为0。两项窄检查覆盖相同池／原件不变／所有选择计费和跨会话旧来源交付；
+Ruff、两源strict mypy、工具边界、CLI帮助及diff检查通过。工具单独strict mypy仍有与父版本
+相同的五项既有错误，不称完整工具类型检查通过。Writer同前态视图比较尚未接入此命令。
+
+| 已闭合试验，分别计量 | 确认生成／known tokens | embedding／tokens | 新unknown／Judge |
+|---|---:|---:|---:|
+| 18e3935工程失败后的两条试验 | 8／48,473 | 2／37 | 0／0 |
+| d4756a0三条完整Host链 | 97／898,449 | 49／2,118 | 0／0 |
+
+d4756a0的97响应为54 tool_calls、42 stop、1 length；这不是全部正常stop。
+原账本差额与逐条HTTP usage一致。三链闭合时连续账本为46,146 requests、196,881,421 known、
+197,158,117 charged、generation unknown6、embedding1,901,157；此为07:29:36闭合值，
+不含正在进行的ce14dd7复核。原预算未重置、上限未增加。
+d4756a0自身[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37742073430)成功，
+[Full](https://github.com/minguselandy/MiLAi/actions/runs/37742073455)skipped；最新ce14dd7自身
+[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37744739546)仍in_progress，
+[Full](https://github.com/minguselandy/MiLAi/actions/runs/37744739545)skipped，不能借用其他提交CI。
+
+下一步收敛一个共同完整候选并闭合其开发集，再做固定实际状态的D0／D1／D2比较；
+不继续扩大架构。原65／277连续历史、五方法与Append-only、保留与外部、完整Host回归和
+六项最终交付均未完成。旧505负结果与4e中断保留，16保留用户未用于开发，Product NO_GO。
+
+## 2026-10-08 07:15 UTC：恢复视图任务，接通共同Reader与纯保存续办
+
+用户“继续”恢复状态视图目标，原完整研究范围保留。main仍为64f006f；[PR107](https://github.com/minguselandy/MiLAi/pull/107)
+为open draft，当前开发头及真实新运行冻结源码均为d4756a030c460ece705eeb45664ff5641267ddf9。
+本节为固定观察，不将下方06:30暂停交接当作当前执行状态；旧4e中断实验仍未恢复。
+
+共同benchmark Reader现在沿实际固定K10池选择完整事项、替换／保留驻留正文、重装并最终回答；
+原Source、保留状态、历史与支持由原Reader呈现，QA不成为新来源。选择调用和最终调用共用
+原模型、真实窗口、调用额度与连续费用账本。普通Host的纯保存续办关联实际pending checkpoint
+和旧User片段，原session只用于核对旧回执，新尝试使用当前请求的权限、身份及trigger；
+已完成事项不重做，complete但零提交的显式保存仍可以明确续办，unknown原件保留。
+最终反馈读取本次新尝试回执，不再误取旧空输出。分析器按实际calls manifest分列抽取、选择、
+分项editor，父容器重复回执不重复计数。前八配置标记为DEVELOPMENT_STATE_VIEW_CANDIDATE_UNVALIDATED，
+未启动，尚无方法成绩或准入。
+
+Root九项直接检查覆盖普通Host跨会话纯保存、只读重开、同请求重放、原业务续办、实际SQLite
+事项维护与unknown、Reader切换／重装／比较及统计；均通过。八源strict mypy、既有Core
+52源mypy、Ruff、包／工具边界及verification matrix通过。它们是合成transport与真实SQLite。
+首个远端a4da1b1 Fast因新增working_set.py遗漏既有源码登记失败，已补齐；18e3935 Fast又暴露
+Core统计测试错误地依赖可选LangGraph，已改用标准SQLite，不扩依赖或CI。d4756a0自身
+[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37742073430)在观察时仍in_progress；
+[Full](https://github.com/minguselandy/MiLAi/actions/runs/37742073455)为skipped，不称为成功。
+
+首次真实18e3935试验保留两次消息及原件：第一条editor截断、无语义提交，Host却声称记住；
+第二条实际提交午休提醒r1，随后驻留刷新改变隐式目标选择，回执读取报EDIT_MAINTENANCE_REQUEST_CHANGED。
+这批按工程错误停止，余16条未运行；8生成／48,473 known、2embedding／37tokens，新unknown0、Judge0。
+d4756a0仅固定原checkpoint的首次选择绑定；实际SQLite回归证明提交后的读取／重放不重新选目标，
+没有放宽绑定检查，未热改或重放旧试验。
+
+新的三个连续流程从d4756a0独立冻结副本、新空库串行执行，产物为
+artifacts/state-view/host-three-flows-d4756a0-v2；观察时仅第一条闭合并真实提交，余流程尚在运行。
+第一条自然回答将“尽量”强化成“严格”，不称语义通过。流程复用已曝光故事，检查切换／重开、
+更正／例外／历史、实际业务／只补保存／遗忘。首次旧试验与新流程成本分别计量，交叉子集不相加。
+
+当前仍未完成：三个真实流程闭合与Root复核、一个完整开发候选、同实际状态／候选池的D0／D1／D2
+效果比较及原65／277连续历史、保留用户、外部任务、完整Host和六项最终交付。视图接线不能证明
+已消除空输出、来源错归属、主体关联或限定损坏；保持合法no-op与强简单／Append-only对照。
+旧505负结果、无效标签及原4e中断unknown保留。16保留用户未用于开发，Product NO_GO。
+
 ## 2026-10-08 06:30:20 UTC：状态视图阶段提交，发布后按用户要求暂停
 
 本节固定于06:30:20 UTC／北京时间14:30:20，区分新开发源码、旧实验和发布状态。
