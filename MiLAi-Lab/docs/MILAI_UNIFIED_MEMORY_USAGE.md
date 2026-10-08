@@ -11,6 +11,31 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 14:50:21 UTC：只将续办范围放回指令层，尚无真实效果结论
+
+读取目的`797989d`的[PR117](https://github.com/minguselandy/MiLAi/pull/117)已合并，
+自身Fast `37794118847`及main `b3a40b4`自身Fast `37795630102`成功，未观察797的Full。
+下面固定61 Host结论与成本不变。本次新开发基于b3，并未修改任何已冻结运行或新启动模型任务。
+
+进一步核对61原件：首条Extractor候选是正向预订计划；续办复用这些保存候选，未重新抽取。
+实际Editor输入仍有相同正向候选，正式提案才首次新增取消，引用原User预订要求的e1。
+既有代码已声明continuation不是证据；缺少禁止提示不是已确认根因。当前控制以
+source_ref／role／observed_at／content的来源形状出现在Human事实包，可能增加了混淆，
+这是解释性假设，不是已经隔离的因果结论；实际Tool结果抽取截断是另一条维护链。
+
+最小修改只将当前续办全文用JSON字符串放在原单System的维护范围段落。Human中的原来源、
+候选、证据映射、日期及replay保持；不再添加来源形状的控制对象。实际当前来源仍由
+MemoryService保存，触发身份和权限边界不变；`call`与`fit`共用投影。没有新Agent、模型
+阶段、控制字段状态机、关键词门禁或自动重试；不将原取消提案离线回填为成功。
+
+两位既有subagent只适配两个直接受影响的既有检查：真实SQLite跨会话续办，以及合成
+transport普通Host保存／只读／当前更正完整流程，均通过。原source/date/checkpoint、
+同attempt回放0调用和业务不执行保持。Ruff、单源strict mypy及包边界通过。
+实际61 Editor消息的离线投影保留delivery／change_candidates逐字段一致，Qwen本地模板
+可渲染单System，输入3621 tokens、0HTTP。这些是接线证据；新候选真实HTTP0，未证明
+能消除错误取消或改善完整保存。P1历史语义效果、原结果截断、普通事实误用condition、
+部分效果与来源／限定保持仍待后续集中确认。完整目标active／未完成，16未用、Product NO_GO。
+
 ## 2026-10-08 14:35:31 UTC：保存请求已进入维护，错误取消与结果截断仍保留
 
 基础main为`51f58ee6c63d37745bc983cbcfe2556361e94111`；[PR116](

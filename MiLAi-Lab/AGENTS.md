@@ -1,3 +1,24 @@
+# Development handoff: 2026-10-08 14:50:21 UTC maintenance instruction scope
+
+PR117 merged main b3;797 own Fast37794118847/main Fast37795630102 success;
+no797 Full observed. Frozen61 facts/costs unchanged. Confirmed positive original
+Extractor candidates were reused; cancellation first appears in Editor, not a new
+Extractor. Existing not-evidence notice was already supplied. The source-shaped
+current control may confuse semantics; this is a hypothesis, not proven causality.
+New candidate puts exact current continuation text as a JSON string in original
+single System maintenance scope. Human delivery/candidates/mapping/date/replay stay;
+actual current Source, trigger, permissions, checkpoints and budgets stay. Call/fit
+share one projection. No new model stage, retry, keyword gate or completion state.
+Two directly affected existing SQLite/synthetic Host checks, Ruff/single-source
+strict mypy/package boundary pass. Actual Editor input local template projection
+3621 tokens/one System/delivery+candidate equality/0HTTP. Real effect UNVERIFIED;
+no new real task. P1 history and whole save semantics remain unverified separately.
+Original 356/d366/721/61 outputs untouched, same ledger; inspect live ownership before
+dispatch and use /cra TMPDIR+SQLITE_TMPDIR. Root integrates, three existing agents
+only isolated checks/read audit; no reviewer or additional generation family.
+Full goal active/incomplete with original scope/six deliveries,16unused,no final
+candidate,Product NO_GO. Older handoffs are historical, never restart from snapshots.
+
 # Development handoff: 2026-10-08 14:35:31 UTC read purpose and closed61
 
 PR116 merged main51f58ee;61 ownFast37791385445 success,Full37791385453 skipped;

@@ -225,6 +225,10 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
     read_text = "Only inspect the saved preference; do not save or perform business."
     correction_text = "Change my earlier calendar marker preference to green and save it."
     seen = {"extract": 0, "edit": 0, "resolve": 0}
+    scope_marker = (
+        "\nCurrent maintenance scope (instructions for this attempt, not fact evidence):\n"
+    )
+    continuation_scopes = []
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         names = {t["function"]["name"] for t in wire.get("tools", [])}
@@ -258,11 +262,19 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                 return {"role": "assistant", "content": json.dumps({
                     "record_ids": [frame["directory"][0]["record_id"]],
                     "done": True})}
-            if "continuation_request" not in frame:
+            assert "continuation_request" not in frame
+            system = wire["messages"][0]["content"]
+            if scope_marker not in system:
                 return {"role": "assistant", "content": "{}"}
-            assert frame["continuation_request"]["content"] == continue_text
+            assert sum(row["role"] == "system" for row in wire["messages"]) == 1
+            scope = json.loads(system.rsplit(scope_marker, 1)[1])
+            assert scope == continue_text
+            continuation_scopes.append(scope)
             packet = frame["delivery"]
+            assert continue_text not in json.dumps(packet, ensure_ascii=False)
             evidence = next(row for row in packet["evidence"] if row["text"] == original_text)
+            source = next(row for row in packet["source_table"] if row["id"] == evidence["source"])
+            assert source["role"] == "user"
             return {"role": "assistant", "content": json.dumps({"creates": [{
                 "action": "create", "matter": "User's calendar marker", "clauses": [{
                     "text": "User uses a teal calendar marker.", "evidence": [evidence["id"]],
@@ -280,14 +292,20 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                                    content=continue_text)
     assert continued["status"] == "COMPLETED", continued.get("error")
     assert len(continued["records"]) == 1 and seen == {"extract": 1, "edit": 2, "resolve": 1}
+    assert continuation_scopes == [continue_text]
+    assert continued["records"][0]["value"]["source_refs"] == [first["capture"]["source_ref"]]
+    assert continued["capture"]["source_ref"] not in \
+        continued["records"][0]["value"]["source_refs"]
     assert continued["request_mode"]["prior_maintenance_requests"]
     assert len(continued["maintenance"]) == 1
     assert continued["operation_status"]["semantic_memory"]["status"] == "committed"
+    assert continued["operation_status"]["business"]["operations"] == []
     count = len(wires)
     readonly = functional.message(root, **common, session="reopened", message_id="read",
                                   content=read_text)
     assert readonly["status"] == "COMPLETED", readonly.get("error")
     assert readonly["maintenance"] == [] and readonly["records"] == continued["records"]
+    assert readonly["operation_status"]["business"]["operations"] == []
     assert seen == {"extract": 1, "edit": 2, "resolve": 1}
     assert len(wires) - count == 2  # Current declaration and normal Host answer.
     count = len(wires)
