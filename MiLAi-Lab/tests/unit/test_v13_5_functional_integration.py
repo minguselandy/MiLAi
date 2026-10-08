@@ -1182,15 +1182,20 @@ def test_request_mode_reproposal_cannot_redisclose_forgotten_input(
     old = {"message_id": "old", "content": "Remember MECHANICAL_MODE_SECRET."}
     failed = functional.message(root, **common, **old)
     assert failed["error"] == "FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"
+    archived_path = next(path for path in root.glob("banks/*/*-result.json")
+                         if read_json(path).get("message_id") == "old")
+    archived = read_json(archived_path)
     forgotten = functional.message(root, **common, message_id="forget",
                                    content="Forget my previous input.")
     assert forgotten["status"] == "COMPLETED", forgotten
     replay = functional.message(root, **common, **old, resume=True)
-    # Raw capture rejects this revoked original input even before mode admission.
-    assert replay["status"] == "FAILED", replay
-    assert replay["error"].startswith("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:")
-    assert replay["capture"]["status"] == "visibility_revoked"
+    # The actual bound input is now rejected before capture or mode admission.
+    assert replay["status"] == "VISIBILITY_REVOKED", replay
+    assert replay["original_status"] == failed["status"]
+    assert failed["capture"]["source_ref"] in replay["revoked_source_refs"]
     assert replay.get("final_answer") is None and len(wires) == 5
+    assert "MECHANICAL_MODE_SECRET" not in json.dumps(replay)
+    assert replay["historical_artifact_retained"] and read_json(archived_path) == archived
 
 
 def test_request_mode_and_answer_recovery_share_one_format_reproposal(
@@ -5625,15 +5630,27 @@ def test_host_save_continuation_registers_actual_tool_batch_after_unconfirmed_sa
             labeled = adapter.execute("complete_label", {}, attempt_id="label-once",
                                       ref=VerifiedObjectRef(**observed["object_ref"]))
             assert labeled["receipt"]["label_status"] == "created"
+            failed = []
+
+            def unconfirmed_save(operation_id, result):
+                assert operation_id == original_id + ":memory:1"
+                assert result["business"]["status"] == "completed"
+                return {"ok": False, "status": "result_save_unconfirmed", "effect": "none"}
+
             progress = resume_request(app, adapter, original_id,
-                current={"readonly": True, "allow_memory": False}, execute_business=False)
+                current={"readonly": False, "allow_memory": True}, execute_business=False,
+                save_result=unconfirmed_save,
+                semantic_attempt_binding={**binding, "maintenance": []})
             assert progress["business"]["status"] == "completed"
-            assert progress["memory"]["status"] == "pending"
-            assert progress["memory"]["attempts"] == []
+            assert progress["memory"]["status"] == "failed"
+            assert len(progress["memory"]["attempts"]) == 1
+            attempt = progress["memory"]["attempts"][0]
+            assert attempt["binding"] == {**binding, "maintenance": []}
+            assert attempt["receipt"]["status"] == "result_save_unconfirmed"
+            failed.append(json.loads(json.dumps(attempt)))
             original_world = app.world.snapshot()
     save_text = "Only continue saving the earlier actual result. Query, but do not redo business."
     read_text = "Only inspect the original request and saved state. Do not act or save."
-    failed: list[dict[str, Any]] = []
     editor_roles: list[str] = []
     commit_attempts: list[str] = []
     apply = functional.FunctionalEditMemory.apply_writer_proposal
@@ -5648,7 +5665,9 @@ def test_host_save_continuation_registers_actual_tool_batch_after_unconfirmed_sa
         assert [a["status"] for a in attempts] == ["failed", "semantic_unknown"]
         assert attempts[0] == failed[0]
         bound = attempts[1]["binding"]
-        assert bound["source_ref"] == attempts[0]["binding"]["source_ref"]
+        assert bound["source_ref"] == memory._binding(config)["source_ref"]
+        assert bound["session"] == "save-only" and bound["turn_id"] == "save"
+        assert bound["source_ref"] != attempts[0]["binding"]["source_ref"]
         assert len(bound["maintenance"]) == 1
         batch = bound["maintenance"][0]
         assert len(batch["source_refs"]) == 1
@@ -5717,7 +5736,7 @@ def test_host_save_continuation_registers_actual_tool_batch_after_unconfirmed_sa
                 attempt = request_row()["request_progress"]["memory"]["attempts"][0]
                 assert attempt["status"] == "failed"
                 assert attempt["receipt"]["status"] == "result_save_unconfirmed"
-                failed.append(json.loads(json.dumps(attempt)))
+                assert attempt == failed[0]
             return native_call("get_reservation", "query-" + str(ordinal), item_key="amber pack")
         return {"role": "assistant", "content": "Reported actual business and memory receipts."}
 
