@@ -1,5 +1,27 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 19:22:33 UTC：Host共同生成schema接线已修，实际五方法仍冻结807。**
+
+最新开发8bf3f23将维护schema沿原invoke/client进入native request，缺省Agent请求保持；
+一个既有SQLite保存→重开流程、真实模板离线渲染／Ruff／相关类型通过，0真实HTTP。
+不证明截断已解决，实际807 Host失败及当前五方法预测不回填／不热改。另两原case12消息
+仅PREPARED／未选source/output，含规则撤销及业务遗忘，不是旧失败尾段。下方为固定观察。
+
+**2026-10-08 19:20:19 UTC／北京时间2026-10-09 03:20:19：Host10闭合，五方法277已启动。**
+
+实际807 Host2链10次execution COMPLETED／driver退出0；补存分类及实际来源已经进入Editor，
+但7361输入／8192输出length、正式null、0提交，r2未同步。业务仅1预订＋1补标签；
+回答如实区分当前已完成与保存旧失败。Root读10答案，无新增数值重评分，追加查询的实际
+candidate HTTP与公开交付两链通过仅为provenance。闭合47生成555572known／27embedding1387，
+新unknown0；闭合账本48035／211256910known／211533606charged，历史unknown6。
+
+同冻结807五方法各277新根 five-methods-four-dev277-807eacb-v1，PID1579386／session20792；
+19:18:56观察B0完整1/277、其余未开始、无终态／Judge，9生成43899known＋1在途。
+Root独占串行资源，不热改／重启；已知最终Reader缺答保留null机会，其他失败仍停止。
+2f5自身Fast失败1旧外层fixture、Full skipped，76d测试仅6样例补creates，2直接通过。
+Host schema未上wire的静态差异独立开发中，未集成／未复跑，不回填807。完整范围／16未用／
+NO_GO保持，详见[实际结果与运行边界](MILAI_UNIFIED_MEMORY_USAGE.md)。下方固定历史。
+
 **2026-10-08 18:55:54 UTC／北京时间2026-10-09 02:55:54：两项有限诊断闭合，新Host运行。**
 
 实际268预测FAILED／16完整预测，saved16同源score闭合，更新15/34(valid31)、QA22/32(valid29)。

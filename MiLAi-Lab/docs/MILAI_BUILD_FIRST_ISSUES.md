@@ -2,6 +2,35 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
+## 2026-10-08 19:22:33 UTC：落实已有生成合同，不继续叠提示
+
+8bf3f23将已传入维护回调的schema经原native bridge/client落实到response_format。
+只补两处传递，Agent缺省请求、采样／预算／权限／解码保持；一个既有SQLite保存重开、
+真实Qwen单System模板离线渲染／类型／Ruff通过，0真实HTTP。合同接通仍不保证length、
+来源模态或状态分类改善；807旧失败保留，冻结五方法继续，不在运行中改格式。
+两个原case12消息的规则撤销／业务遗忘包仅准备，source/output未选，非语义结果。
+
+## 2026-10-08 19:20:19 UTC：补存已经进维护，正式生成与语义落实仍失败
+
+807 Host两链10次执行闭合，不是10语义通过；Root读全部自然答案及实际来源／状态，
+0额外数值评分。业务恰1reserve＋1complete_label；补存允许记忆、禁止业务，7字面候选/
+16片段已送达；Editor7361输入／8192输出length/content=null、0提交、r2未同步，
+原保存incomplete。当前反馈如实保留失败，不以业务完成代替全请求完成。
+
+| 当前断点 | 方法反思／已做或待做 |
+|---|---|
+| Host收到schema但未上wire | callback和native bridge分别缺显式response_format传递；沿既有Client对齐独立开发中，非扩大预算或强制非空，尚无真实修复效果 |
+| 原限定在抽取先变强 | “尽量”变为“应／should”，不自动判等同必须；最终原话可达／联合回答改善不等于保存措辞已修。普通自由候选重复释义仍为待隔离假设 |
+| 业务状态被建成condition | 标签失败是观察属性，不证明适用条件；未靠放宽关系目标静默转换或改写旧库 |
+| 选择／提交／任务仍须分开 | 补存Editor失败后未提交，正确查询和如实答复仍不能让保存任务completed；保留原pending而非自动重试 |
+| 程序追加需要两条证据链 | m3 True实际candidate HTTP与captured public Source/lastAI/delivery通过，整段当HTTP UNKNOWN，语义另审，不伪造模型输出 |
+| 新头CI另有外层旧fixture | 2f5 Fast FAILED／Full skipped；76d只补6正反例creates=[]，2直接检查，旧解码／条件依赖／支持保持，新头CI另核 |
+
+807五方法独立各277连续历史已启动；19:18:56仅B0保存1会话，其余未开始，无Judge/终态。
+已知最终Reader缺答保留null机会，不漏全部分母；其他失败不重启原失败arm或补零。
+闭合Host47生成555572known／27embedding1387，新unknown0；16未用／完整六交付active/
+ProductNO_GO。详见[闭合事实与连续历史](MILAI_UNIFIED_MEMORY_USAGE.md)。下方为固定历史。
+
 ## 2026-10-08 18:55:54 UTC：正式容器有限改善，语义和采样结论保持边界
 
 8次固定Editor表达诊断已闭合：原外层2空／1新增／1JSON截断，显式外层4完整新增提案；

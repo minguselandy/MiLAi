@@ -11,6 +11,98 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 开发补记：2026-10-08 19:22:33 UTC／北京时间2026-10-09 03:22:33
+
+`8bf3f23`已将Host收到的维护schema沿现有`model.invoke → VLLMClient.chat`送到
+native response_format，使用benchmark相同的json_schema包装；默认Agent分类／自然工具轮
+仍不传schema，json_action协议、采样／预算／权限／旧{}解码保持。现有SQLite保存→重开
+正常流程核对实际synthetic请求通过，Ruff／两源strict mypy通过；真实本地Qwen模板离线
+渲染两个维护输入，均单System／0tools。0真实HTTP，没有新增审核、强制非空或恢复循环。
+这修正实际已定位的接线差异，不证明807的截断或语义失败已消失。下方19:20快照及正在运行的
+五方法仍是冻结807，未热改、不回填；新头CI须独立核对。
+
+另外，`artifacts/post118/host-rule-withdraw-forget-next-v1-inputs`只准备了原规则case6消息
+及原业务case完整6消息，共12消息、两个独立银行，原文／顺序／配置与标签恢复控制不改，
+无理想卡、0HTTP／0DB。遗忘在业务case原m4/m5，不在规则case；807业务仅选前4条，
+故该包不是旧18队列的失败尾段。仍PREPARED_NO_SOURCE_SELECTED，未来source/output未选，
+不能称为撤销／遗忘已复核或已修好。
+
+## 普通Host闭合与同版连续历史启动：2026-10-08 19:20:19 UTC／北京时间2026-10-09 03:20:19
+
+本段是固定报告。真实Host及新五方法预测都冻结于`807eacbf2e7f6a07c4b4cf19185c2b2cc6e4af67`；
+报告及随后开发另列。旧268预测仍FAILED，saved16评分、两项各8次诊断的原结果不改写。
+
+### 两条Host链：执行闭合，结果补存仍未完成
+
+独立根`artifacts/post118/host-two-flows-807eacb-v1`于18:55:30 UTC启动，
+19:03:02.883318 UTC闭合，driver退出0；10次执行均COMPLETED。这表示执行路径结束，
+不是10次语义通过，也不是原三条18消息或最终135case／192message回归完成。
+
+| 实际范围 | 已观察事实 | 剩余问题 |
+|---|---|---|
+| 保存、切换、原话与重开，6消息 | 骑行范围及汽车排除保留，旧r1后来未重写；午休模式独立保存；原话实际可读取，联合回答保留原“尽量” | 抽取先将“尽量”改为“应／should”，保存仍较概括；should不自动等同必须。未知物品有保留，但把有限可见材料扩大成全对话缺失 |
+| 部分业务、补办、只补保存、只读，4消息 | 真实业务恰1次预订＋1次补标签；无重复。只补保存被识别为explicit＋resolve_prior_explicit，当前允许记忆、禁止业务变更；实际查询、7字面候选、16片段及旧事项送达Editor | Editor以length结束，正式content=null；未提交，原保存仍incomplete，r2仍是标签失败。状态属性仍曾被建成condition |
+
+补存Editor实际输入7361tokens、输出8192tokens、total15553；输出是已确认HTTP响应，
+不是unknown，也不是来源未进入维护。Root读取正式响应及草稿统计，没有执行草稿或重试，
+没有观察到前述Reader同型尾部周期，不能把这次失败归为已确认的同一循环或服务端故障。
+后两条回答如实区分了“当前标签已完成”和“现有r2尚未同步”，未将失败说成保存完成；
+本轮允许保存后的失败也未误述成用户禁止保存。
+
+Root读完10条完整自然答案、实际来源／正式提案／前后状态与业务效果，未新增数值重评分。
+子代理只做离线开发复核。最后只读消息实际使用了保留Agent回答＋追加真实查询回执的路径：
+原candidate对应原Agent HTTP，追加后全文对应实际公开Source／最后AI／交付事件，两链PASS。
+整段全文作为单份模型HTTP的核对仍UNKNOWN；追加段不是新增生成。来源链成立不证明完整
+语义质量、持久记忆已同步或用户任务完成。首链6条的未追加路径另行通过，未冒称覆盖True分支。
+
+闭合Host为47生成／47响应、555572 known及charged tokens，27embedding／1387tokens，
+Judge0、新unknown0。逐响应、实际usage与连续账本差额一致；生成与embedding响应分开计数。
+闭合账本48035requests／211256910known／211533606charged／1950621embedding tokens，
+unknown6均为历史量，预算未重置、没有新增上限。下方18:55“Host运行中”保留为当时快照。
+
+### 五方法各277：真实预测已经启动，尚无方法成绩
+
+`tools/run_edit_suite.py`从冻结807目录串行运行，Root实际PID1579386／tool session20792，
+新根`artifacts/post118/five-methods-four-dev277-807eacb-v1`，配置为同名
+`.config.json`，runtime为`artifacts/post118/runtime-five-methods-four-dev277-807eacb-v1`。
+19:18:56 UTC只读观察：B0保存1/277完整会话，其余方法尚未开始；无arm／suite终态、
+无Judge。9个确认生成响应均stop、43899known tokens，另1个在途请求；
+5embedding响应447tokens。实时账本unknown7是历史6＋一个在途reservation，
+不能称为新增已闭合失败。该观察不是发布时实时监控，不依据它重启旧任务。
+
+B0／B1／B2／M／Append-only各自独立空库，四开发用户65／77／62／73会话，
+每臂277、计划总计1385；首用户65是各自277子集，不另跑或重复计数。
+Qwen家族、BGE普通dense K10、staged／extract_then_edit、temperature=1、
+thinking=true、65536context／32768输出预留／512余量、source4096／body8192、
+连续预算及其余实际268参数保持。新正式输出两容器合同来自807，不把结果记成268。
+
+只显式启用`halumem.reader_failure_policy="record_confirmed_length"`：
+已确认最终Reader length且usage完整时保留null缺答和原件，不送Judge、不补草稿、不重试，
+全部QA机会仍在。选择／Writer／容量／预算／unknown等其他失败仍停止；失败arm原终态和
+未执行方法分列，不补零或续跑失败尾段。预测与独立评分分开，运行代码和配置不热改。
+原始正文、gold、HTTP／reasoning、数据库、私有配置与日志均保持ignored。
+
+### 实际合同差异与工程检查
+
+Host补存实际HTTP没有native response_format。静态代码显示：维护回调收到schema，
+但model.invoke未传；native bridge也未转发该显式参数。benchmark已沿既有Client接口
+传递schema。这是共同生成合同的接线差异，已交独立开发处理；本快照未集成或运行其修复。
+对齐合同不保证截断消失，不同时扩大预算、修改采样或增审核循环，不回填本次Host结果。
+
+`2f5ca726`自身Fast `37828396129` FAILED，Full `37828396179` skipped；
+Lab fast、external、边界与conformance成功，Foundation下一组116通过／1失败：
+一个既有条件依赖fixture缺必填外层creates。测试修复`76d763d`只为6个正反例补creates=[]，
+保留records-only旧解码、旧{}、依赖／共享条件／删除／支持断言；2直接检查、Ruff及diff通过，
+0真实HTTP。新头CI单独核对，其他提交CI不借用，冻结807未修改。
+
+当前方法反思：把已知schema落实到实际请求，比再追加“必须保存”警告更直接；抽取中的
+自由释义仍可能先损坏模态，更多正式提案不能解决这一问题；业务观察是属性／经历，
+不因条件接口可用而应强制成为condition。后续改进仍在同一MemoryService与既有编辑器内。
+
+本轮尚无最终候选或稳定方法优势，16保留用户未用于开发，Product仍NO_GO。原计划的
+native／drift与recovery／必要消融及更紧预算、最终保留集、外部任务、同候选完整Host回归和
+冻结后新故事、六项最终交付继续执行。公开报告、局部检查和当前预测启动均不表示完整任务完成。
+
 ## 有限方法诊断闭合与共同接口收敛：2026-10-08 18:55:54 UTC／北京时间2026-10-09 02:55:54
 
 本段是固定报告快照。实际诊断预测仍冻结于`26893e2857a2d84b1215495054f900e8870d199f`，
