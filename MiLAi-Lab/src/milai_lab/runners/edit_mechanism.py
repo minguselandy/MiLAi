@@ -70,6 +70,8 @@ def require_completed_external(root: Path, arms: list[str]) -> None:
 
 def full_answer_payload(case: dict[str, Any], hypothesis: str) -> dict[str, Any]:
     """Evaluator-only original complete histories; no selected evidence substitute."""
+    if not isinstance(hypothesis, str):
+        raise ValueError("Full-answer audit requires a complete textual answer")
     history = longmemeval_history(case)
     return {
         "question": case["question"],

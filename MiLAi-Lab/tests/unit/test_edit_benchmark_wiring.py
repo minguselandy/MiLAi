@@ -28,7 +28,13 @@ from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
-from milai_lab.runners.edit_benchmarks import BenchmarkRun, reader_messages, source_batches
+from milai_lab.runners.edit_benchmarks import (
+    BenchmarkRun,
+    UnconfirmedModelOutcome,
+    reader_messages,
+    run,
+    source_batches,
+)
 
 
 def test_reader_shared_metadata_preserves_each_actual_source_and_time() -> None:
@@ -350,20 +356,45 @@ def test_real_store_formation_revision_and_restart_without_replaying_writer(tmp_
     assert len(calls) == 2
 
 
-def test_incomplete_response_remains_failed_and_charged_on_resume(tmp_path: Path) -> None:
+def test_incomplete_response_remains_failed_and_charged_on_resume(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
     class Tokenizer:
         def apply_chat_template(self, *args: object, **kwargs: object) -> list[int]:
             return [1, 2]
+
+        def encode(self, text: str, *, add_special_tokens: bool) -> list[int]:
+            return list(range(len(text)))
 
     attempts = []
 
     def provider(request: httpx.Request) -> httpx.Response:
         attempts.append(request)
+        messages = json.loads(request.read())["messages"]
+        payload = json.loads(messages[-1]["content"]) if len(messages) > 1 else {}
+        if "delivery" in payload:
+            assert "synthetic-answer" not in str(payload)
+            delivery = payload["delivery"]
+            source = delivery["sources"][0]
+            old = delivery["records"][0] if delivery["records"] else None
+            proposal = {
+                "action": "rewrite" if old else "create",
+                "units": [{"text": source["text"], "evidence": [source["evidence_id"]]}],
+            }
+            if old:
+                proposal.update(target_record=old["record_id"], base_revision=old["revision"])
+            content = json.dumps({"proposals": [proposal]})
+            finish = "stop"
+        else:
+            finish = (
+                "length" if not payload or payload["question"] == "BlueProject first?" else "stop"
+            )
+            content = "partial" if finish == "length" else payload["memories"][0]["content"]
         return httpx.Response(
             200,
             json={
-                "choices": [{"finish_reason": "length", "message": {"content": "partial"}}],
-                "usage": {"total_tokens": 9},
+                "choices": [{"finish_reason": finish, "message": {"content": content}}],
+                "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9},
             },
         )
 
@@ -384,9 +415,133 @@ def test_incomplete_response_remains_failed_and_charged_on_resume(tmp_path: Path
         write_json(tmp_path / "http" / "b" / "request.json", {"attempt": "original"})
         with pytest.raises(RuntimeError, match="do not blindly repeat"):
             execution.call("b", [], structured=False)
-    assert len(attempts) == 1
-    assert budget.state["generation_requests"] == 1
-    assert budget.state["generation"]["known_tokens"] == 9
+        assert len(attempts) == 1
+
+        sessions = []
+        for ordinal, day in enumerate(("Monday", "Tuesday")):
+            stamp = f"Jan 0{ordinal + 1}, 2030, 09:00:00"
+            questions = ["BlueProject first?", "BlueProject second?"] if ordinal == 0 else [
+                "BlueProject after?",
+            ]
+            sessions.append({
+                "start_time": stamp, "end_time": stamp,
+                "dialogue": [{"role": "user", "content": "BlueProject " + day,
+                              "timestamp": stamp}],
+                "memory_points": [],
+                "questions": [{"question": question, "answer": "synthetic-answer", "evidence": []}
+                              for question in questions],
+            })
+        dataset = tmp_path / "synthetic.jsonl"
+        dataset.write_text(json.dumps({"uuid": "synthetic", "sessions": sessions}) + "\n")
+        execution.root = tmp_path / "history"
+        execution.settings.update(arm="B0", source_tokens=4096, retrieval_limit=10,
+            halumem={"path": str(dataset), "users": ["synthetic"],
+                     "official_checkout": str(tmp_path / "synthetic-author")})
+        with pytest.raises(ValueError, match="incomplete: length"):
+            execution.halumem("predict")
+        assert not (execution.root / "predictions/halumem/synthetic/0/complete.json").exists()
+        assert len(attempts) == 3  # Initial check, committed Writer, failed first Reader.
+        execution.settings["halumem"]["reader_failure_policy"] = "record_confirmed_length"
+        assert execution.halumem("predict") == {
+            "status": "PREDICTIONS_SAVED", "sessions": 2, "judge_calls": 0,
+            "complete_answers": 2, "known_reader_failures": 1,
+        }
+        assert len(attempts) == 6
+        prediction_path = execution.root / "predictions/halumem/synthetic/0/complete.json"
+        first_prediction = read_json(prediction_path)
+        failed = first_prediction["prediction"]["questions"][0]
+        assert failed["hypothesis"] is None
+        assert failed["reader_failure"]["finish_reason"] == "length"
+        for key in ("response_ref", "failure_ref"):
+            assert (execution.root / failed["reader_failure"][key]).exists()
+        final_prediction = read_json(
+            execution.root / "predictions/halumem/synthetic/1/complete.json"
+        )
+        assert len(final_prediction["state"]) == 1
+        assert final_prediction["state"][0]["value"]["revision"] == 2
+        assert "Tuesday" in final_prediction["state"][0]["value"]["content"]
+
+        scored_questions = []
+
+        class Official:
+            def __init__(self, *args: Any) -> None:
+                pass
+
+            def score(self, name: str, *args: str) -> dict[str, Any]:
+                if name == "question":
+                    assert isinstance(args[-1], str)
+                    scored_questions.append(args[0])
+                    return {"evaluation_result": "Correct" if len(scored_questions) == 1
+                            else "original-invalid-label"}
+                return {"accuracy_score": 2}
+
+            def aggregate_results(self, records: dict[str, Any]) -> dict[str, Any]:
+                return copy.deepcopy(records)
+
+        monkeypatch.setattr("milai_lab.runners.edit_benchmarks.HaluMemOfficial", Official)
+        original = prediction_path.read_bytes()
+        unmarked = copy.deepcopy(first_prediction)
+        unmarked["prediction"]["questions"][0].pop("reader_failure")
+        write_json(prediction_path, unmarked)
+        with pytest.raises(ValueError, match="lacks a complete answer or failure"):
+            execution.halumem("score")
+        assert not scored_questions
+        prediction_path.write_bytes(original)
+        scored = execution.halumem("score")["question_answering_records"]
+        assert len(scored) == 3 and scored[0]["result_type"] is None
+        assert scored[0]["system_response"] is None
+        assert scored[0]["reader_failure"] == failed["reader_failure"]
+        assert scored[1]["result_type"] == "Correct"
+        assert scored[2]["result_type"] == "original-invalid-label"
+        assert scored_questions == ["BlueProject second?", "BlueProject after?"]
+        assert len(attempts) == 6 and prediction_path.read_bytes() == original
+
+        execution.budget = budget
+        execution.before = copy.deepcopy(budget.state)
+        monkeypatch.setattr(execution, "close", lambda: None)
+        monkeypatch.setattr("milai_lab.runners.edit_benchmarks.BenchmarkRun",
+                            lambda *args, **kwargs: execution)
+        execution.settings["experiment_name"] = "synthetic-length"
+        run(execution.settings, execution.root, "halumem", "predict")
+        assert read_json(execution.root / "terminal-predict.json")["prediction_summary"] == {
+            "status": "PREDICTIONS_SAVED", "sessions": 2, "judge_calls": 0,
+            "complete_answers": 2, "known_reader_failures": 1,
+        }
+        assert len(attempts) == 6
+
+        execution.root = tmp_path / "stopped"
+        monkeypatch.setattr(execution, "maintain", lambda *args: [])
+        selection_response = (
+            execution.root / "http/halumem/synthetic/0/qa/0/view/select-0/response.json"
+        )
+        write_json(selection_response, {
+            "choices": [{"finish_reason": "length"}],
+            "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9},
+        })
+        for error in (ValueError("Provider output incomplete: length"),
+                      ValueError("Context unavailable without loss: 2048 input tokens"),
+                      BudgetExceeded("synthetic budget"), UnconfirmedModelOutcome("unknown")):
+            def failed_answer(*args: Any, error: Exception = error) -> str:
+                raise error
+
+            monkeypatch.setattr(execution, "answer", failed_answer)
+            with pytest.raises(type(error), match=str(error)):
+                execution.halumem("predict")
+        incomplete_usage = {
+            "choices": [{"finish_reason": "length", "message": {"content": "partial"}}],
+            "usage": {"total_tokens": 9},
+        }
+        final_response = execution.root / "http/halumem/synthetic/0/qa/0/response.json"
+        write_json(final_response, incomplete_usage)
+        monkeypatch.setattr(execution, "answer",
+                            lambda *args: execution.completed_content(incomplete_usage))
+        with pytest.raises(ValueError, match="incomplete: length"):
+            execution.halumem("predict")
+        assert not final_response.with_name("failure.json").exists()
+        assert not (execution.root / "predictions/halumem/synthetic/0/complete.json").exists()
+        assert len(attempts) == 6
+    assert budget.state["generation_requests"] == 6
+    assert budget.state["generation"]["known_tokens"] == 54
     assert read_json(tmp_path / "http" / "a" / "failure.json")["type"] == "ValueError"
 
 

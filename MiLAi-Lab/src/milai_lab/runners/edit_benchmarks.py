@@ -1774,13 +1774,47 @@ class BenchmarkRun:
                         generated = session.get("is_generated_qa_session", False)
                         if not generated:
                             for qordinal, qa in enumerate(session.get("questions", [])):
-                                answer = self.answer(
-                                    service, qa["question"], session["end_time"],
-                                    f"{key}/qa/{qordinal}",
-                                )
-                                predicted["questions"].append(
-                                    {"question": qa["question"], "hypothesis": answer}
-                                )
+                                qa_key = f"{key}/qa/{qordinal}"
+                                question_prediction: dict[str, Any] = {"question": qa["question"]}
+                                try:
+                                    question_prediction["hypothesis"] = self.answer(
+                                        service, qa["question"], session["end_time"], qa_key,
+                                    )
+                                except ValueError as error:
+                                    if selection.get("reader_failure_policy") != (
+                                        "record_confirmed_length"
+                                    ) or str(error) != "Provider output incomplete: length":
+                                        raise
+                                    folder = self.root / "http" / qa_key
+                                    response_path = folder / "response.json"
+                                    response = (
+                                        read_json(response_path) if response_path.exists() else {}
+                                    )
+                                    choices = response.get("choices", [])
+                                    usage = response.get("usage")
+                                    if (
+                                        not choices or choices[0].get("finish_reason") != "length"
+                                        or not isinstance(usage, dict)
+                                        or not all(
+                                            type(usage.get(name)) is int and usage[name] >= 0
+                                            for name in (
+                                                "prompt_tokens", "completion_tokens", "total_tokens"
+                                            )
+                                        )
+                                    ):
+                                        raise
+                                    failure_path = folder / "failure.json"
+                                    if not failure_path.exists():
+                                        write_json(failure_path, {
+                                            "type": type(error).__name__, "message": str(error),
+                                        })
+                                    question_prediction.update(hypothesis=None, reader_failure={
+                                        "type": type(error).__name__, "message": str(error),
+                                        "finish_reason": "length",
+                                        "response_ref": str(response_path.relative_to(self.root)),
+                                        "failure_ref": str(failure_path.relative_to(self.root)),
+                                    })
+                                predicted["questions"].append(question_prediction)
                         # Author-required reference retrieval is evaluator-only.
                         # It runs after predictions; saved material is not fed to a Writer/Reader.
                         update_retrieval = [
@@ -1889,16 +1923,26 @@ class BenchmarkRun:
                             }
                         )
                     for qordinal, qa in enumerate(session.get("questions", [])):
-                        answer = predicted["questions"][qordinal]["hypothesis"]
-                        result = self._safe_score(
-                            official,
-                            opportunities,
-                            "question",
-                            qa["question"],
-                            qa["answer"],
-                            "\n".join(e["memory_content"] for e in qa["evidence"]),
-                            answer,
-                        )
+                        question_prediction = predicted["questions"][qordinal]
+                        answer = question_prediction["hypothesis"]
+                        reader_failure = question_prediction.get("reader_failure")
+                        if (answer is None and isinstance(reader_failure, dict)
+                                and reader_failure.get("finish_reason") == "length"):
+                            result = {}
+                        elif isinstance(answer, str):
+                            result = self._safe_score(
+                                official,
+                                opportunities,
+                                "question",
+                                qa["question"],
+                                qa["answer"],
+                                "\n".join(e["memory_content"] for e in qa["evidence"]),
+                                answer,
+                            )
+                        else:
+                            raise ValueError(
+                                "Saved HaluMem hypothesis lacks a complete answer or failure"
+                            )
                         records["question_answering_records"].append(
                             {
                                 **qa,
@@ -1906,6 +1950,8 @@ class BenchmarkRun:
                                 "ssession_id": ordinal,
                                 "system_response": answer,
                                 "result_type": result.get("evaluation_result"),
+                                **({"reader_failure": copy.deepcopy(reader_failure)}
+                                   if answer is None else {}),
                             }
                         )
                     predictions.append(predicted)
@@ -1927,7 +1973,14 @@ class BenchmarkRun:
                         flush=True,
                     )
         if phase == "predict":
-            return {"status": "PREDICTIONS_SAVED", "sessions": len(predictions), "judge_calls": 0}
+            questions = [qa for prediction in predictions for qa in prediction["questions"]]
+            return {
+                "status": "PREDICTIONS_SAVED", "sessions": len(predictions), "judge_calls": 0,
+                "complete_answers": sum(isinstance(qa["hypothesis"], str) for qa in questions),
+                "known_reader_failures": sum(
+                    qa["hypothesis"] is None and bool(qa.get("reader_failure")) for qa in questions
+                ),
+            }
         assert official is not None
         result = official.aggregate_results(records)
         opportunities["unscored_updates"] = (
@@ -2083,8 +2136,11 @@ def run(
     execution = BenchmarkRun(settings, root, phase=phase)
     terminal = root / ("terminal.json" if phase == "all" else f"terminal-{phase}.json")
     try:
+        prediction_summary = {}
         if benchmark in {"halumem", "all"}:
-            execution.halumem(phase)
+            halumem_result = execution.halumem(phase)
+            if phase == "predict":
+                prediction_summary["prediction_summary"] = halumem_result
         if benchmark in {"longmemeval", "all"}:
             execution.longmemeval(phase)
         write_json(
@@ -2101,6 +2157,7 @@ def run(
                 - execution.before["generation_requests"],
                 "new_known_tokens": execution.budget.state["generation"]["known_tokens"]
                 - execution.before["generation"]["known_tokens"],
+                **prediction_summary,
             },
         )
     except Exception as error:

@@ -68,6 +68,10 @@ def user_metrics(records: dict[str, Any], counts: dict[str, int]) -> dict[str, A
     valid_questions = [
         row for row in questions if row["result_type"] in {"Correct", "Hallucination", "Omission"}
     ]
+    reader_failures = [
+        row for row in questions
+        if row.get("system_response") is None and row.get("reader_failure")
+    ]
     valid_accuracy = [row for row in accuracy if row["memory_accuracy_score"] in {0, 1, 2}]
     correct_updates = sum(row["memory_update_type"] == "Correct" for row in updates)
     correct_questions = sum(row["result_type"] == "Correct" for row in questions)
@@ -96,6 +100,9 @@ def user_metrics(records: dict[str, Any], counts: dict[str, int]) -> dict[str, A
             "update_unscored_opportunities": counts["total_updates"] - len(updates),
             "qa_opportunities": len(questions),
             "qa_valid_judgments": len(valid_questions),
+            "qa_complete_answers": len(questions) - len(reader_failures),
+            "qa_known_reader_failures": len(reader_failures),
+            "qa_invalid_judgments": len(questions) - len(valid_questions) - len(reader_failures),
         },
         "update_information_condition": "reference-guided read-only retrieval; separate from QA",
     }

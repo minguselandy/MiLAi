@@ -92,6 +92,8 @@ def test_all_opportunities_include_empty_update_retrieval_and_invalid_judgments(
         "question_answering_records": [
             {"result_type": "Correct"},
             {"result_type": None},
+            {"result_type": None, "system_response": None,
+             "reader_failure": {"finish_reason": "length"}},
         ],
     }
     metrics = user_metrics(records, {"total_updates": 4, "empty_update_retrieval": 2})
@@ -99,7 +101,11 @@ def test_all_opportunities_include_empty_update_retrieval_and_invalid_judgments(
     assert metrics["update_correct_scored"] == 0.5
     assert metrics["update_correct_valid"] == 1
     assert metrics["denominators"]["update_unscored_opportunities"] == 2
-    assert metrics["qa_correct_all"] == 0.5 and metrics["qa_correct_valid"] == 1
+    assert metrics["qa_correct_all"] == 1 / 3 and metrics["qa_correct_valid"] == 1
+    assert metrics["denominators"]["qa_opportunities"] == 3
+    assert metrics["denominators"]["qa_complete_answers"] == 2
+    assert metrics["denominators"]["qa_known_reader_failures"] == 1
+    assert metrics["denominators"]["qa_invalid_judgments"] == 1
     assert metrics["formed_memory_accuracy_all"] == 0.5
     assert metrics["formation_recall_all"] == 0.5
 

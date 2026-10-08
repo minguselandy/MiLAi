@@ -520,6 +520,8 @@ def test_full_answer_audit_keeps_every_original_session_and_exact_answer(tmp_pat
         "answer_session_ids": ["later"],
     }
     payload = full_answer_payload(original, "Once weekly. An unsupported cause.")
+    with pytest.raises(ValueError, match="requires a complete textual answer"):
+        full_answer_payload(original, None)  # type: ignore[arg-type]
     assert payload["answer"] == "Once weekly. An unsupported cause."
     assert payload["full_history_sessions"] == 3
     assert [r["session_id"] for r in payload["full_observed_history"]] == [
