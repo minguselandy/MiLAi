@@ -13,7 +13,7 @@ from typing import Any
 
 from milai_lab.contracts.memory import EpisodeDescription
 from milai_lab.memory.functional_state import FunctionalRejection
-from milai_lab.memory.service import MemoryService
+from milai_lab.memory.service import MemoryService, _lexical_tokens
 
 
 class EpisodeIndex:
@@ -188,6 +188,25 @@ class EpisodeIndex:
                 break
             offset += 100
         return selected
+
+    def source_matches(self, query: str) -> dict[str, int]:
+        """Match unchecked descriptions to their currently visible original sources.
+
+        Scores locate source bodies, never turn descriptions into factual evidence.
+        Repeated descriptions or episodes do not multiply the same source's score.
+        """
+        tokens = _lexical_tokens(query)
+        if not tokens:
+            return {}
+        matches: dict[str, int] = {}
+        for episode in self.select(limit=None):
+            for description in episode["descriptions"]:
+                terms = set(_lexical_tokens(description["text"], include_cjk_unigrams=True))
+                score = sum(token in terms for token in tokens)
+                if score:
+                    for ref in description["source_refs"]:
+                        matches[ref] = max(matches.get(ref, 0), score)
+        return matches
 
     def associated_records(self, episode_id: str) -> list[dict[str, Any]]:
         """Follow provenance to actual current records, rather than copied summaries."""
