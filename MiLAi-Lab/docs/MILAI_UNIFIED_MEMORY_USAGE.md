@@ -11,6 +11,83 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 14:12:21 UTC：参考输入首轮被模板拒绝，修正消息拼装
+
+冻结`d3669bf2a31e29340a82367bffa016819e947ce2`的独立四消息Host已闭合，进程退出0，
+实际为1 COMPLETED／1 FAILED／2 NOT_RUN。首次消息形成r1及带部分业务结果的r2，但仍有
+`EDIT_APPEND_CONDITION_TARGET_INVALID`；第二条在HTTP之前被本地Qwen模板拒绝：
+`System message must be at the beginning.` 后两条没有运行，所以尚无此候选的纯补存分类结果。
+
+根因是本次输入拼装添加了第二条System消息。合成测试的简单模板允许它，因此没有发现；
+实际模板不同。本次仅把参考材料并入原System、保留当前User全文及原一次调用，不增加
+校验框架、重试或修改冻结d366源码。两个直接流程、Ruff及单源mypy再次通过；实际本地
+Qwen模板离线检查通过，apply_chat_template与HostCapacity均计1799 tokens；同一窄probe
+仍确认省略、当前全文、合法空动作和缓存0调用。不能当模型效果；修正版尚无真实HTTP，
+须另冻结／独立空库。
+
+首轮实际11个生成响应（4 tool_calls＋7 stop），122095 known／charged tokens；
+4 embedding／260 tokens、新unknown0。第二条generation_calls=1只是本地额度记录，
+无vllm_response、无第12次生成HTTP。连续账本47392 requests／206399806 known／
+206676502 charged／embedding1938493、历史unknown6，与确认差额一致。
+Root读取首条完整交付及保存内容，未Judge；业务仅预订部分完成，保存语义未经确认。
+原失败产物保留，不续跑或覆盖。本计划全部剩余范围仍active，下面时点保持历史。
+
+## 2026-10-08 14:02:51 UTC：两项运行已闭合，保存分类仍未改善
+
+基础main为`e1424cc0f2a7fc2bbc9c6213827a4ad3bf80151a`；[PR115](
+https://github.com/minguselandy/MiLAi/pull/115)已合并。受测源码`b6d03c6`的Fast
+`37784334748`及合并main的Fast `37785621886`成功，未观察这两头Full。
+报告、开发和以下两项实际冻结运行分开记录；下面旧时间块保持历史原样。
+
+**保存意图列表简化尚未解决真实断点。** 冻结`35628d7`、原已曝光四消息故事、独立空库的
+Host复核退出0，四次执行COMPLETED。Root读完四个实际交付答案；没有Judge或独立语义确认。
+实际业务只有一次预订、一次标签完成；另一次标签journal身份被拒、executed=false、
+effect=none，不能计为第二次业务效果。
+
+第一次User请求形成r1，但Tool结果维护先遇到`EDIT_CHANGED_ASSERTION_REQUIRES_NEW_EVIDENCE`、
+`EDIT_APPEND_CONDITION_TARGET_INVALID`，再遇到一个Editor截断响应。后来标签完成，
+明确“只补保存实际结果、不再办理业务”的全文实际送达分类器，却仍返回`memory_requests=[]`，
+maintenance=[]、没有Editor，当前记忆仍为r1的原要求。最后只读回答能分开业务结果与旧保存内容，
+但把包装配置也说成已经办理，不能称四条语义通过。正式结果和旧失败未回填。
+
+分类器四次实际请求均temperature=0、thinking=false、tool_choice=required；这是既有
+declaration专项配置，普通Host为temperature=1、thinking=true。二者任务和输入不同，
+没有隔离证据证明采样设置或服务端导致误分类。后续Agent获得实际材料后理解需要补存，
+但执行边界已被分类关闭；不能把模型误判表述为用户禁止保存。
+
+| 已闭合运行 | 实际范围 | 已确认成本／边界 |
+|---|---|---|
+| 冻结356 Host | 1 case／4 message；4执行COMPLETED，保存未闭合 | 26生成、293730 known／charged tokens；14 tool_calls＋11 stop＋1 length；8 embedding／354 tokens；Judge0、新unknown0 |
+| 冻结721 staged五方法连续历史 | B0保存32/277会话、85个问题预测；33维护、88个完整Reader响应 | FAILED／exit1；274生成均stop、2878867 known tokens；219 embedding／14835 tokens；其他四法未运行、score未开始 |
+
+721最早实际异常是作者retrieval统计的SQLite搜索中`database or disk is full`；finally的
+COMMIT将终态异常覆盖成`cannot commit - no transaction is active`。根分区／默认tmp已满，
+/cra仍有空间。这是运行失败，不是失败Reader HTTP或方法语义结论。最后3个Reader回答已产生，
+但该会话没有完整预测；不将88响应全部当成已保存预测。Root完整读取该队列17个答案，
+来源审计仍不完整。原失败根、源码、配置及终态保留，不重启或拼接成完整轨迹。
+新Host运行使用/cra上的TMPDIR与SQLITE_TMPDIR；未改变算法或扩展预算。
+
+闭合全局账本：47381 requests、206277711 known、206554407 charged，
+embedding1938233 tokens；unknown6均为历史量，新增0。721启动前47081请求至其闭合47355，
+增量274／2878867；再至356闭合，增量26／293730、embedding354，与确认文件完全一致。
+这两项成本不能重复计入旧报告。固定观察时没有真实模型runner在运行。
+
+**下一候选只接通既有参考输入。** fresh Host v8在同一次分类调用中复用最多12张可见原
+应用请求卡，投递原要求、分项状态及实际User片段；不投递旧execution权限或完整运行日志。
+参考正文沿用ordinary_material_tokens，优先容纳近期完整卡、保留所选原顺序，并明确省略数。
+当前全文单独交付并决定请求与限制，原任务不能授权当前业务；既有有界续办仍核对实际身份。
+已保存六／七字段v8决定0模型原样重放，v7不变，输出schema与维护合同不变。
+此入口覆盖已登记应用原请求，不能声称已覆盖所有纯语义保存待办。
+
+本候选真实HTTP为0，分类及语义改善未验证。直接受影响检查与正常续办／只读流程只验证
+接线、可见性及权限：14项既有检查通过，额度改动后复查2项直接流程；另一个无HTTP机械
+probe确认省略正文不送达、当前全文不变、合法[]及缓存0调用。Ruff、单源mypy和包依赖
+边界通过；三位subagent分工只读／机械核对，Root集成。不追认356或旧e978成功。
+读取目的、复合条款保持、正式空输出及条件
+操作仍是独立工作。完整同版五方法／65与277连续历史、native／drift／recovery、消融与紧预算、
+最终冻结后16保留用户、外部任务、完整Host135case／192message与新增故事及六项交付仍未完成。
+任务active，16保留用户未用，无最终候选／方法优势，Product NO_GO。
+
 ## 2026-10-08 12:09:27 UTC：当前问题、已修边界与连续历史进度
 
 **当前主要瓶颈是保存意图分类、正式变化落实、来源与限定保持，以及后续读取是否使用了

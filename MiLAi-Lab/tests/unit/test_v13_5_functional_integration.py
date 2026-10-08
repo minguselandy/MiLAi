@@ -988,7 +988,8 @@ def test_complete_request_mode_reuses_saved_legacy_decision_without_reclassifica
         native_declaration=True, write_mode_declaration=True, action_mode_declaration=True,
         operation_mode_declaration=True, reference_mode_declaration=True,
         independent_capabilities=True, memory_continuation=True,
-        application_workflow="reservation_v1")
+        application_workflow="reservation_v1",
+        referenced_requests=[{"request_id": "new-reference-not-used-for-cached-decision"}])
     assert path.read_bytes() == before
     assert result["protocol"] == "native_complete_requests_v8"
     assert result["memory_write_request"] == "none"
@@ -5609,6 +5610,17 @@ def test_host_save_continuation_registers_new_tool_batch_after_known_writer_fail
         names = {tool["function"]["name"] for tool in wire.get("tools", [])}
         if names == {"classify_current_request"}:
             readonly = wire["messages"][-1]["content"] == read_text
+            references = json.loads(wire["messages"][0]["content"].split(
+                "VISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n", 1)[1])[
+                    "requests"]
+            assert len(references) == 1 and references[0]["request_id"] == original_id
+            assert references[0]["requirements"]["save_result"]
+            assert references[0]["progress"]["business"] == "completed"
+            assert references[0]["progress"]["memory"] in {"pending", "failed", "committed"}
+            assert [row["content"] for row in wire["messages"] if row["role"] == "user"] == [
+                read_text if readonly else save_text]
+            assert any("save the actual outcome" in part["content"]
+                       for part in references[0]["user_fragments"])
             return native_call("classify_current_request", "mode-" + str(ordinal),
                 memory_requests=[] if readonly else ["continue_prior"], allow_forgetting=False,
                 business_action_request="none", business_operations=[], application_requests=[],

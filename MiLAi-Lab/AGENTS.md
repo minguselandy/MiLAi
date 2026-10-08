@@ -1,3 +1,41 @@
+# Development handoff: 2026-10-08 single-System reference input
+
+PR116 initiald366 is frozen; actualHost CLOSED/exit0 but1COMPLETED/1FAILED/2NOT_RUN.
+Second message failed beforeHTTP: Qwen template rejects second System. Initial synthetic
+template missed it. Root merged reference data into original System only; no hotedit,
+old-root retry or new gate.2direct checks/Ruff/single-source mypy pass; actual local
+Qwen template/count_messages probe passes1799tokens/0HTTP, corrected realHTTP0.
+Do not claim save-only improvement.
+d366 actual11generation122095/4embedding260/newunknown0; local failed generation_calls1
+is not an HTTP. Currentledger47392/206399806known/206676502charged/embed1938493/unknown6.
+356save failure/721diskfull failure preserved. Next run must freeze corrected commit,
+fresh empty banks, Root serial HTTP, /cra TMPDIR and SQLITE_TMPDIR, same ledger.
+Full goal active/incomplete,16unused,no final candidate,Product NO_GO. Older blocks historical.
+
+# Development handoff: 2026-10-08 visible request interpretation
+
+Base main e1424cc/PR115 merged; b6 ownFast37784334748/mainFast37785621886 passed,
+no Full observed. Frozen721 is FAILED/exit1, not live: B0 predictions32/277/questions85,
+maintenance33/Reader88; first SQLite disk-full error masked by COMMIT.274generation/
+2878867known,219embedding14835,newunknown0. Other four methods unrun; no score.
+Frozen356 Host CLOSED/exit0/4COMPLETED but pure-save class memory_requests=[];
+no Editor/r1 still original request. First Tool maintenance two rejections + one
+truncation. Actualbusiness1reserve+1label;26generation293730/8embedding354/newunknown0.
+Root read all4 delivered answers; do not call semantic passes or list simplification fixed.
+Current ledger47381/206277711known/206554407charged/embed1938233/unknown6historical.
+No real runner at14:02:51UTC; recheck before scheduling. Original roots/source/config
+untouched; new TMPDIR and SQLITE_TMPDIR must use /cra (root/defaulttmp is full).
+Fresh v8 candidate reuses visible original application cards in same classification;
+current input alone supplies restrictions; no old execution rights or extra model call.
+Existing material limit/explicit omission, old cached v8 and v7 preserved;0real candidate
+HTTP, actual effect UNVERIFIED. Application cards do not cover all semantic-only pending.
+14affected checks/2direct post-limit rechecks/1noHTTP omission+cache probe pass;
+Ruff/single-source mypy/package boundary pass. No extra benchmark or semantic pass claim.
+Root central integration/serial model ownership; agents isolated mechanical/read checks.
+Read purpose/Editor semantics remain next work; full goal active/incomplete with original
+experiments and six deliveries,16 reserved unused,no final candidate,Product NO_GO.
+All older timed handoffs below are historical; never restart from an old live snapshot.
+
 # Development handoff: 2026-10-08 work progress projection
 
 Base main38c56f6/PR114 merged;356 ownFast and mainFast passed, no Full observed.
