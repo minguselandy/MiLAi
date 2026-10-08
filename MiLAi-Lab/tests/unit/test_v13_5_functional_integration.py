@@ -255,7 +255,7 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                 seen["edit"] -= 1
                 return {"role": "assistant", "content": json.dumps({
                     "record_ids": [frame["directory"][0]["record_id"]],
-                    "create": False, "done": True})}
+                    "done": True})}
             if "continuation_request" not in frame:
                 return {"role": "assistant", "content": "{}"}
             assert frame["continuation_request"]["content"] == continue_text

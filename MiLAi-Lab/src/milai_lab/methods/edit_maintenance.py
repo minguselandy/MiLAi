@@ -357,23 +357,22 @@ def _maintain_views(
             directory_refs = [_directory_ref(service.read(ref["record_id"])) for ref in remaining]
             directory = [record_candidate(ref["record_id"], ref["revision"], ref["matter"])
                          for ref in directory_refs]
-            schema = {
+            schema: dict[str, Any] = {
                 "type": "object", "additionalProperties": False,
                 "properties": {
                     "record_ids": {"type": "array", "uniqueItems": True, "items": {
                         "type": "string", "enum": [ref["record_id"] for ref in directory]
                     }} if directory else {"type": "array", "maxItems": 0},
-                    "create": {"type": "boolean"} if create_available
-                    else {"type": "boolean", "enum": [False]},
                     "done": {"type": "boolean"},
-                }, "required": ["record_ids", "create", "done"],
+                }, "required": ["record_ids", "done"],
             }
             messages = [{"role": "system", "content": (
                 "Select actual whole matters to open for this source's maintenance. "
                 "The directory is a locating hint, not evidence. Related targets can be "
-                "selected together. create opens one scope for new matters; do not select "
-                "it for duplication. Empty selection and done are allowed when no justified "
-                "maintenance remains. No record must be selected. Return the supplied schema."
+                "selected together. The first work also lets the existing editor consider "
+                "new matters from the current source; later work does not create them again. "
+                "Empty selection is allowed. Set done when no further old matters need opening. "
+                "No record must be selected. Return the supplied schema."
             )}, {"role": "user", "content": json.dumps({
                 "observed_date": date, "sources": delivery["sources"],
                 "prior_context": method.context_projection(state.get("prior_context", [])),
@@ -384,17 +383,26 @@ def _maintain_views(
                               for item in state["work_items"]],
                 "response_schema": schema,
             }, ensure_ascii=False, separators=(",", ":"))}]
-            if "selection" not in state:
+            saved_selection = "selection" in state
+            if not saved_selection:
                 state["selection"] = call(f"select:{len(state['work_items'])}", messages, schema)
                 state["phase"] = "views"
                 save()
             selection = state["selection"]
-            Draft202012Validator(schema).validate(selection)
+            legacy_selection = saved_selection and "create" in selection
+            validation_schema = schema
+            if legacy_selection:
+                # A response already saved under the old selection contract keeps
+                # its original creation decision; issued work/mappings are unchanged.
+                validation_schema = {**schema, "properties": {
+                    **schema["properties"], "create": {"type": "boolean"}},
+                    "required": [*schema["required"], "create"]}
+            Draft202012Validator(validation_schema).validate(selection)
             identifiers = list(dict.fromkeys(selection["record_ids"]))
             available = {ref["record_id"]: ref for ref in directory_refs}
             if any(identifier not in available for identifier in identifiers):
                 raise FunctionalRejection("EDIT_VIEW_SELECTION_UNAVAILABLE")
-            create = bool(selection["create"])
+            create = bool(selection["create"]) if legacy_selection else create_available
             if create and not create_available:
                 raise FunctionalRejection("EDIT_VIEW_CREATE_SCOPE_ALREADY_PROCESSED")
             if not identifiers and not create:

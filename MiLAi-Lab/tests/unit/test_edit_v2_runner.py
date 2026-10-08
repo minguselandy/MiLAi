@@ -1220,7 +1220,7 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
             marker = next(row for row in payload["directory"]
                           if row["description"] == "Marker")
             content = json.dumps({"record_ids": [marker["record_id"]],
-                                  "create": False, "done": True})
+                                  "done": True})
         else:
             calls.append("edit")
             assert "A later report says green." not in json.dumps(payload)

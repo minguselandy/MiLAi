@@ -2359,12 +2359,14 @@ def test_state_view_opens_whole_targets_and_continues_after_durable_commit(tmp_p
                 return {"changes": []}
             if stage.startswith("select:"):
                 assert "The marker is blue." not in canonical(packet)
-                if packet["processed"]:
-                    assert schema["properties"]["create"] == {"type": "boolean", "enum": [False]}
+                assert set(schema["properties"]) == {"record_ids", "done"}
                 return {"record_ids": [packet["directory"][0]["record_id"]],
-                        "create": not packet["processed"], "done": len(packet["directory"]) == 1}
+                        "done": len(packet["directory"]) == 1}
             record = packet["delivery"]["records"][0]
             assert len(packet["delivery"]["records"]) == 1
+            create_allowed = any(variant["properties"]["action"]["const"] == "create"
+                                 for variant in schema["properties"]["proposals"]["items"]["oneOf"])
+            assert create_allowed == (not opened_records)
             opened_records.append(copy.deepcopy(record))
             old = record["units"][0]["text"]
             return {"proposals": [{"action": "edit", "target": "r1", "edits": [{
@@ -2436,12 +2438,17 @@ def test_staged_selection_keeps_unknown_and_allows_explicit_empty_result(tmp_pat
         pending = resume_maintenance(memory.writer, delivery, prior_request_id="unknown", **options)
         assert pending["status"] == "incomplete" and calls == ["select:0"]
         assert pending["memory_view"]["pending_refs"] == ["unknown:select:0"]
-        options["model_call"] = lambda stage, messages, schema: {
-            "record_ids": [], "create": False, "done": True,
-        }
+        def empty(stage, messages, schema):
+            calls.append(stage)
+            if stage.startswith("select:"):
+                return {"record_ids": [], "done": True}
+            return {"proposals": []}
+
+        options["model_call"] = empty
         completed = resume_maintenance(memory.writer, delivery, prior_request_id="unknown",
                                        new_attempt_id="empty", **options)
         assert completed["status"] == "completed" and completed["receipts"] == []
+        assert calls == ["select:0", "select:0", "edit:empty:work:0"]
         assert memory.service.read(saved["id"])["value"]["revision"] == 1
         original = maintain_event(memory.writer, delivery, request_id="unknown",
                                   execute=False, **options)
@@ -2494,7 +2501,7 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
                 target = "Marker color" if not packet["processed"] else "Alarm tone"
                 return {"record_ids": [next(row["record_id"] for row in packet["directory"]
                                             if row["description"] == target)],
-                        "create": False, "done": target == "Alarm tone"}
+                        "done": target == "Alarm tone"}
             if stage.endswith("work:1"):
                 return {}  # This completed scope has no semantic receipt.
             return {"records": {"r1": {"action": "edit", "edits": [{
