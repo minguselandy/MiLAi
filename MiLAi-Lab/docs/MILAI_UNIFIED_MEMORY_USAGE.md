@@ -11,6 +11,44 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 08:00:24 UTC：受影响续办闭合，冻结共同M候选开始集中预测
+
+最新开发源码为d62f0b457b8b497146b7bd96b043124597e3c912；PR107仍open draft、main64f006f。
+ce14dd7受影响复核在07:50:41 UTC闭合8次执行，Root阅读8个完整答案并核对实际状态及回执，
+不称8次语义通过。旧来源拒绝未复现；整体和北区例外的通知均实际改为两天，次数和季度保留。
+只补保存被解释为explicit／resolve_prior_explicit，business_action_request为none、operations空；
+实际新提交r3／r4，业务仍恰一次预订和一次补标签，之后只读没有维护。
+50生成／529,361 known、30embedding／1,473tokens，新unknown0、Judge0，21 tool_calls＋29 stop。
+原首次条件目标拒绝、部分维护不完整仍保留；已存“启动发货”缺少业务证据，后续更正标签时继承，
+整体次数仍被推给南区。有效提交和已登记请求闭合不能据此称保存语义完全正确。
+
+有限[配对入口](../tools/run_edit_change_pairs.py)现在同时提供`writer-views`与`reader-views`。
+Writer复用原四个实际前态及原delivery记录的K10候选，三种展示均用同一B0／I2编辑器、
+single_pass和既有legacy Reader；固定池是可选择目录，不被误当已经打开的工作。
+原来源与目标支持在相同合法范围内可读，初始Writer无新检索／抽取，提交后Reader仍按实际状态
+使用共同检索、所有HTTP与encoder记费。原prepare／execute／两recipe compare协议保留。
+Reader比较固定实际已保存池；这两项均尚未执行真实比较，不是方法对照成绩。
+复用一项SQLite配对检查：实际before和候选池相同、非目标保持、prepared字节不变；
+合成transport的52次累计生成全部计量。原分项提交中断检查也通过；共同维护源strict mypy、
+三文件Ruff及CLI帮助通过。工具strict mypy剩四项原错误；移除重构后冗余cast，没有新增类型错误。
+
+集中候选从独立冻结d62f0b4源码、新空库启动，仅M／extract_then_edit／I2／state_driven，
+四个已曝光开发用户各前八会话；原Qwen3.6、BGE-m3、dense K10、窗口／输出预算不变。
+产物artifacts/state-view/prefix8-d62f0b4-v1，Python PID3145901，tool session15141；
+固定观察时0/32预测、2个完整Reader响应，尚无terminal-predict／score或Judge。
+不要由此快照重启；以实际PID、产物和终态为准。旧4e中断队列不恢复，原件及unknown保留。
+d62f0b4自身[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37746491786)仍in_progress，
+[Full](https://github.com/minguselandy/MiLAi/actions/runs/37746491914)skipped；上次报告8785510自身
+[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37745079867)成功，不借给d62。
+
+本轮反思参考原始方法：[MemGPT v2](https://arxiv.org/html/2310.08560v2)明确要求外部内容进入
+当前上下文后才能使用；[Mem0 v1 §2.1](https://arxiv.org/html/2504.19413v1)将候选映射为
+ADD／UPDATE／DELETE／NOOP；[SimpleMem v3](https://arxiv.org/abs/2601.02553v3)将内容压缩与
+按意图规划检索分列。对本项目的推断是：可达性、实际交付和语义动作落实须分别观察；
+这些论文不证明MiLAi当前语义已正确，也不为新增常驻审核器或关系平台提供效果证据。
+先完成一个候选，再用固定池比较判断是否保留D2；原全部长历史、强简单／Append-only、
+保留／外部、完整Host及六项交付继续未完成。16保留未用于开发，Product NO_GO。
+
 ## 2026-10-08 07:40 UTC：三条真实Host链闭合，保留语义失败并修复续办接线
 
 本节为固定观察。main仍为64f006f；[PR107](https://github.com/minguselandy/MiLAi/pull/107)

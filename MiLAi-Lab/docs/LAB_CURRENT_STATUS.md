@@ -1,5 +1,16 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 08:00:24 UTC／北京时间16:00:24：冻结共同候选开始集中预测。**
+
+开发及新候选冻结d62f0b4，PR107 open draft、main64f006f。ce14受影响8执行闭合，通知两天
+和只补保存实际提交，业务恰一次预订＋一次补标签、后续只读零维护；范围误推、无依据发货和
+部分保存仍保留。50生成529361known／30embedding1473tokens，新增unknown0、Judge0，非8语义通过。
+Writer／Reader固定实际池D0／D1／D2入口均已接通、真实比较0；窄SQLite检查、共同源类型／Ruff通过，
+工具mypy四项既有错误。M-only前八候选已在新空库启动，PID3145901／session15141，0/32预测、
+2完整Reader、无terminal或score；实际冻结不热改，先核对PID再安排HTTP。d62自身Fast37746491786
+in_progress、Full skipped；878报告自身Fast成功。完整目标active，16未用，Product NO_GO。
+详见[当前报告](MILAI_UNIFIED_MEMORY_USAGE.md)。下方均为固定历史观察。
+
 **2026-10-08 07:40 UTC／北京时间15:40：真实三链闭合，执行与语义分开记录。**
 
 PR107 open draft、main64f006f；开发ce14dd7、完整三链实际冻结d4756a0。
