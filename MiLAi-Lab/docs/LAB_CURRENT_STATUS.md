@@ -1,5 +1,16 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 04:21:12 UTC／北京时间12:21:12：普通Episode描述查询入口已接通。**
+
+新源码136328e按已有描述找到其实际来源，复用普通Host的search/read/forget；描述仍为
+unchecked索引，不是事实或新的主体关联。116功能检查、类型／格式／包边界及普通M/I2
+SQLite重开读取／遗忘例通过，0真实模型与encoder调用，自己的远端CI待核对。
+benchmark的语义库dense与include_raw=False不变；当前实际运行仍冻结4e，B0／B1各32
+预测闭合，B2为25/32[8,8,8,1]、M／Append未启动、PID仍在、无score/Judge或整个退出。
+Root这次已读200完整答案、来源审计部分、无重评分；正式空输出与变化落实仍是断点。
+完整目标active，16保留未用、single_verdict_v1未准入、Product NO_GO。
+详细实现及冻结边界见[报告](MILAI_UNIFIED_MEMORY_USAGE.md)；以下均为原固定历史观察。
+
 **2026-10-08 03:42:06 UTC／北京时间11:42:06：B0、B1预测闭合，日期误拒修复已合并。**
 
 main6b719f0、PR102／103已合并；日期源码5e20511自身Fast成功，未观察到该头Full。

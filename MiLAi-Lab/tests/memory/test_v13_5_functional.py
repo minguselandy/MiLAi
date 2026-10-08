@@ -16,6 +16,7 @@ import pytest
 from langgraph.store.sqlite import SqliteStore
 from pydantic import ValidationError
 
+from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import FunctionalRejection, canonical, namespace
 from milai_lab.memory.service import MemoryService
@@ -35,7 +36,9 @@ def deny_network(monkeypatch: pytest.MonkeyPatch) -> None:
 
 
 @contextmanager
-def opened(root: Path, owner: str = "alice", **options: Any) -> Iterator[FunctionalMemory]:
+def opened(
+    root: Path, owner: str = "alice", *, memory_profile: str = "ordinary", **options: Any
+) -> Iterator[FunctionalMemory]:
     with SqliteStore.from_conn_string(str(root / "store.sqlite")) as store:
         service = MemoryService(
             store,
@@ -43,6 +46,7 @@ def opened(root: Path, owner: str = "alice", **options: Any) -> Iterator[Functio
             owner,
             root / "service.lock",
             functional_contract="functional_v1",
+            memory_profile=memory_profile,
         )
         yield FunctionalMemory(service, len, **options)
 
@@ -301,6 +305,62 @@ def test_read_only_raw_searches_are_not_formation_and_snapshot_counts_stay_fixed
         assert refused["status"] == "read_limit_exhausted" and not refused["ok"]
         assert_read_delivery(refused)
         assert len(memory.service.records()) == 1
+
+
+def test_episode_description_matches_keep_source_links_and_revocation_on_reopen(
+    tmp_path: Path,
+) -> None:
+    with opened(tmp_path, memory_profile="unified_v1") as memory:
+        meeting = turn(memory, text="We agreed to meet Friday at 14:00.")
+        preparation = turn(memory, "preparation", "Bring printed copies.")
+        turn(memory, "raw-only", "Cobalt planning meeting.")
+        episodes = EpisodeIndex(memory.service)
+        episode = episodes.register("meeting", [meeting, preparation], descriptions=[
+            {"kind": "event", "basis": "reported", "text": "Cobalt planning meeting",
+             "source_refs": [meeting]},
+            {"kind": "context", "basis": "inferred", "text": "Cobalt",
+             "source_refs": [meeting]},
+            {"kind": "context", "basis": "reported", "text": "Travel preparation",
+             "source_refs": [preparation]},
+        ])
+        episodes.register("same-meeting", [meeting], descriptions=[
+            {"kind": "event", "basis": "reported", "text": "Cobalt planning meeting",
+             "source_refs": [meeting]},
+        ])
+        assert episodes.source_matches("CObalt PLANNING") == {meeting: 2}
+        assert episodes.source_matches("travel") == {preparation: 1}
+        assert episodes.source_matches("printed") == {}
+        assert episodes.source_matches("  ") == {}
+        found = memory.service.search("CObalt PLANNING")
+        original = next(row for row in found["raw_events"] if row["event_id"] == meeting)
+        assert original["content"] == "We agreed to meet Friday at 14:00."
+        assert original["role"] == "user"
+        semantic_only = memory.service.search("cobalt planning", include_raw=False)
+        assert semantic_only["records"] == [] and semantic_only["raw_events"] == []
+        assert episodes.read("meeting") == {k: v for k, v in episode.items() if k != "replayed"}
+        assert all(d["content_verification"] == "unchecked" for d in episode["descriptions"])
+        assert memory.service.records() == []
+    with opened(tmp_path, owner="bob", memory_profile="unified_v1") as other:
+        assert EpisodeIndex(other.service).source_matches("cobalt travel") == {}
+        assert other.service.search("cobalt planning")["raw_events"] == []
+    with opened(tmp_path, memory_profile="unified_v1") as memory:
+        episodes = EpisodeIndex(memory.service)
+        assert episodes.source_matches("cobalt planning") == {meeting: 2}
+        assert any(row["event_id"] == meeting
+                   for row in memory.service.search("cobalt planning")["raw_events"])
+        turn(memory, "forget", "Forget the Friday arrangement.")
+        forgotten = invoke(memory, "forget_memory", {"fragment_handles": handles(memory, meeting)},
+                           "forget-meeting", cfg("forget"))
+        assert forgotten["ok"]
+        assert memory.service.source(preparation) is not None
+        assert episodes.read("meeting") is None
+        assert episodes.source_matches("cobalt travel") == {}
+        assert all(row["event_id"] != meeting
+                   for row in memory.service.search("cobalt planning")["raw_events"])
+    with opened(tmp_path, memory_profile="unified_v1") as memory:
+        assert EpisodeIndex(memory.service).source_matches("cobalt travel") == {}
+        assert all(row["event_id"] != meeting
+                   for row in memory.service.search("cobalt planning")["raw_events"])
 
 
 def test_read_delivery_metadata_is_budgeted_for_mixed_immutable_pages(tmp_path: Path) -> None:

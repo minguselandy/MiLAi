@@ -2634,6 +2634,11 @@ class MemoryService:
         raw = self.sources() if include_raw else []
         if self.functional_contract == "functional_v1":
             raw = [event for event in raw if event["role"] != "assistant"]
+        episode_matches: dict[str, int] = {}
+        if include_raw and tokens and self.memory_profile == "unified_v1":
+            from milai_lab.memory.episodes import EpisodeIndex
+
+            episode_matches = EpisodeIndex(self).source_matches(query)
         linked_text: dict[str, str] = {}
         relation: dict[str, Any] = {}
 
@@ -2793,9 +2798,14 @@ class MemoryService:
                 (row for row in records if row["ok"] and (enumerate_bank or rank(row))),
                 key=lambda row: (-rank(row), row["id"]),
             )[:limit]
+        def raw_rank(row: dict[str, Any]) -> int:
+            # Episode descriptions locate original sources; they are not evidence
+            # and do not alter the semantic-record candidate pool or dense scores.
+            return max(rank(row), episode_matches.get(row["event_id"], 0))
+
         raw = sorted(
-            (row for row in raw if enumerate_bank or rank(row)),
-            key=lambda row: (-rank(row), row["event_id"]),
+            (row for row in raw if enumerate_bank or raw_rank(row)),
+            key=lambda row: (-raw_rank(row), row["event_id"]),
         )[:limit]
         return {
             "ok": True,
