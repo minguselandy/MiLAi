@@ -771,10 +771,12 @@ def resume_maintenance(
         method, delivery, request_id=prior_request_id, execute=False, **options
     )
     state = copy.deepcopy(prior.value)
-    retry_completed = (
-        state["phase"] == "complete" and has_pending_save(state) and new_attempt_id is not None
-    )
-    if state["phase"] == "complete" and (not retry_completed or not execute):
+
+    def retry_completed() -> bool:
+        return (state["phase"] == "complete" and has_pending_save(state)
+                and new_attempt_id is not None)
+
+    if state["phase"] == "complete" and (not retry_completed() or not execute):
         return {**original, "replayed": True}
 
     reconciliation: list[dict[str, Any]] = []
@@ -821,7 +823,7 @@ def resume_maintenance(
         service.store.put(ns, key, state, index=False)
         original = maintain_event(method, delivery, request_id=prior_request_id,
                                   execute=False, **options)
-        if state["phase"] == "complete" and not retry_completed:
+        if state["phase"] == "complete" and not retry_completed():
             return {**original, "replayed": True, "reconciliation": reconciliation}
         if execute and new_attempt_id is None and state["phase"] == "views" and (
             not pending or all(service.store.get(
@@ -830,7 +832,7 @@ def resume_maintenance(
         ):
             return {**maintain_event(method, delivery, request_id=prior_request_id, **options),
                     "reconciliation": reconciliation}
-    elif state.get("batches") and not retry_completed:
+    elif state.get("batches") and not retry_completed():
         index = state["next_batch"]
         child_id = f"{prior_request_id}:batch:{index}"
         child = service.store.get(ns, json.dumps([session, child_id], ensure_ascii=False))
@@ -856,7 +858,7 @@ def resume_maintenance(
                 original = maintain_event(
                     method, delivery, request_id=prior_request_id, execute=False, **options
                 )
-                if state["phase"] == "complete" and not retry_completed:
+                if state["phase"] == "complete" and not retry_completed():
                     return {**original, "replayed": True, "reconciliation": reconciliation}
     else:
         for index in range(len(state.get("proposals", []))):
@@ -893,7 +895,7 @@ def resume_maintenance(
             original = maintain_event(
                 method, delivery, request_id=prior_request_id, execute=False, **options
             )
-            if state["phase"] == "complete" and not retry_completed:
+            if state["phase"] == "complete" and not retry_completed():
                 return {**original, "replayed": True, "reconciliation": reconciliation}
 
     if not execute or new_attempt_id is None:
@@ -923,10 +925,10 @@ def resume_maintenance(
         if "work_items" in state:
             confirmed_work = [copy.deepcopy(work) for work in state["work_items"]
                               if work.get("status") == "completed" and (
-                                  not retry_completed
+                                  not retry_completed()
                                   or _has_semantic_receipt(work["result"]["receipts"])
                               )]
-            if not retry_completed or confirmed_work:
+            if not retry_completed() or confirmed_work:
                 replacement.update(
                     phase="views", directory=copy.deepcopy(state["directory"]),
                     work_items=confirmed_work,
@@ -935,19 +937,19 @@ def resume_maintenance(
                 )
                 for work in state["work_items"]:
                     if work.get("status") != "completed" or (
-                        retry_completed and not _has_semantic_receipt(work["result"]["receipts"])
+                        retry_completed() and not _has_semantic_receipt(work["result"]["receipts"])
                     ):
                         _append_work(replacement, new_attempt_id, work["records"],
                                      create=work["create"], done=work["done"])
         if state.get("batches"):
             confirmed = {
                 str(index): state["batch_results"][str(index)]
-                for index in range(state["next_batch"]) if not retry_completed
+                for index in range(state["next_batch"]) if not retry_completed()
                 or _has_semantic_receipt(state["batch_results"][str(index)]["receipts"])
             }
             replacement.update(
                 phase="batches", batches=copy.deepcopy(state["batches"]),
-                batch_results=confirmed, next_batch=0 if retry_completed else state["next_batch"],
+                batch_results=confirmed, next_batch=0 if retry_completed() else state["next_batch"],
                 receipts=[receipt for batch in confirmed.values() for receipt in batch["receipts"]],
             )
             for index in range(state["next_batch"]):
