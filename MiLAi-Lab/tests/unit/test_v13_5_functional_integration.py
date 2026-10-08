@@ -403,7 +403,7 @@ def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
                 "action": "create", "matter": "User's local marker",
                 "clauses": [{"text": "User reports the local marker is blue.",
                              "evidence": [evidence],
-                             "assertion": {"source": evidence, "kind": "reported"},
+                             "assertion": {"source_evidence": evidence, "kind": "reported"},
                              **({"conditions": []} if arm in {"B2", "M"} else {})}],
             })
         assert ordinal == 3
