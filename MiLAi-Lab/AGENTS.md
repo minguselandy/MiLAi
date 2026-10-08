@@ -1,3 +1,48 @@
+# Live handoff: 2026-10-08 20:59:44 UTC development990, frozen807 continues
+
+Development 990638806eb290f0996173b3d209699250e00944 reduces the B0/source_metadata
+generation contract: no from_unit; explicit keep may reuse actual delivered target content text.
+Legacy from_unit duplicate checks, changed-text/new-e checks, attribution and B2 bindings stay.
+Root two existing B0/B2 SQLite flows, Ruff three files and strict mypy two sources passed; 0 HTTP.
+This is not a semantic result and does not backfill frozen807 event24/26 rejections.
+Actual807 PID1579386 still runs; B0 31/277 at this time, other four unrun, no terminals/Judge.
+Cost below remains fixed20:42; do not infer new cost from progress. No hot changes or new real
+dispatch while this process owns the serial model resource. Root read0–29 all79 full answers,
+selected raw evidence only, no numerical regrade or independent confirmation.
+Three-chain18-message next input is PREPARED, source/output null. Full original scope active;
+do not mark complete/pause at publication, CI, partial execution or Product NO_GO.
+
+# Live handoff: 2026-10-08 20:42:03 UTC fixed actual807, developmentfd7 support reused
+
+Fixedactual807 PID1579386/session20792 stillfive277predict;B0saved27/277/allfirstuser/68answers,
+otherarmsunrun/noterminal/Judge.219stop2230044known=chargedDelta/182embedding12773,
+ledger48254/213486954known/213763650charged/embed1963394/unknown6history/noinflightatSample.
+Inspectliveprocess/terminal/ledgerbeforeanydispatch;Rootalone serialHTTP,nohot807/failedtailrestart.
+Latestdevelopmentfd7a9db4f534ae5403b596f5715d9c41e6e401ed reuseexplicitkeep ownunit support
+inrewritewhenkeep_supportomitted;nofrom_unitfill/no[]override/stricttextroleassertionrelationguards
+unchanged.1existingSQLiteflow/Ruff/sourceMypy passed. Rootreadonlyactualbankbackup/before32/
+original20formal decode1proposal6units(5kept)/0apply/HTTP;frozen807rejectionretained,nosemanticproof.
+Actual18formalomitted oldnon-targetcommunication/decisionfacts;19trueemptycandidate-delivered;
+notfixedbykeep.27sessions49commit/6reject/1no_change,2trueempty,6incompletebatches;new2unit
+supportbindingrejectsin24–26 undernarrowofflineworkerreview,no guardrelaxation.
+Laterworkerlocatedbothduplicatefrom_unit:24splitsoldcompoundu10twice/26u1fiveitems;
+actuale/sourceassertion/oldrelationsempty,notkeepfailure/fd7notfixoldpayload. StaticB0field
+effectreviewonly,notgenerationchangeorautomaticoldfielddrop;relationshipidentitystays.
+Rootsubsequentlyread0–26all68completeanswers+selectedsources/formal/state/Readerrequests,
+nonumericregrade/independentconfirm.12/13unchangeddeliveredname treatedmiddle-component;
+22samepattern/r1delivered.17identitynotselected;21savedassertion-supportscope unconfirmed
+formationcause,notallReadererrorsareselection. No namekeyword/promptstack/samplingchange.
+Laterallrefscheck:18r2firstunit has2actualsupports(stress/opportunity),notonlyprimary;
+primaryreportsclockisnotonset. Extractorfirstwroteinitiated/completed/time=null,Editor taking;
+no whole-dialog absence claim,Reader reportedtakingnot automaticallysame-daystarted.
+c342ownFast37836711875success(8success4skip)/Full37836711756skipped,newheadCIseparate.
+Ignoredhost-three-flows-development-next-v1-inputs only3originalcase18msgs/config/controls/
+sourceoutputnull/0HTTPDB;prepare/step existing,notoldfailedtail. Rootnotdispatchafteractual
+unconfirmedtransport;unknownledger/allProviderErrornotinflightproof,no newwrapper/gates.
+Candidate8Editor/native/drift/external28/fullHost135case192msgs/finalholdout confirmations
+stillunrun/preparedonly. No finalcandidate/stableadvantage/ProductNO_GO,originalsixdeliveries
+active;reportpublication/CIisnotfullgoalcompletion. Lowerblocks fixedhistoricalobservations.
+
 # Live handoff: 2026-10-08 20:02:53 UTC development223 capability fixed, actual807 running
 
 Latestdevelopment22335ec6b8ace108798effbd7499ce9a168ce073 correctsstaged selection allowance
