@@ -595,7 +595,7 @@ def maintain_event(
         if state["phase"] == "batches":
             while state["next_batch"] < len(state["batches"]):
                 index = state["next_batch"]
-                if str(index) in state["batch_results"]:
+                if state["batch_results"].get(str(index), {}).get("status") == "completed":
                     state["next_batch"] += 1
                     save()
                     continue
