@@ -9,10 +9,11 @@ Record scope is retained on updates; scope-only patches are not exposed.
 from __future__ import annotations
 
 import copy
+import json
 from collections.abc import Callable
 from typing import Annotated, Any, Literal
 
-from langchain_core.messages import ToolMessage
+from langchain_core.messages import BaseMessage, ToolMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
 from pydantic import Field, ValidationError
@@ -46,6 +47,7 @@ from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.edit_maintenance import (
     MaintenanceRecipe,
     ModelCall,
+    has_pending_save,
     maintain_event,
     resume_maintenance,
 )
@@ -275,6 +277,280 @@ class FunctionalEditMemory(FunctionalMemory):
                 merged.append(delivered)
         self.service.store.put(namespace(self.service), key, {"items": merged}, index=False)
 
+    def _model_items(self, config: RunnableConfig) -> list[dict[str, Any]]:
+        """Current material, separately from the durable archive of actual reads."""
+        stored = self.service.store.get(
+            namespace(self.service), self._writer_key(config, "edit-writer-delivery:")
+        )
+        archive = stored.value["items"] if stored else []
+        if self.memory_view_mode == "legacy":
+            return copy.deepcopy(archive)
+        current_ref = self._binding(config)["source_ref"]
+        # Current public input and actual business results remain available when
+        # switching a semantic matter. Earlier support only returns when selected.
+        current = [item for item in archive if item["type"] == "fragment" and (
+            item["source_ref"] == current_ref or (item.get("role") == "tool"
+            and item.get("delivery_kind") != "redelivered_support")
+        )]
+        resident = self.resident_items(config)
+        current_handles = {item["fragment_handle"] for item in current}
+        for item in resident:
+            if item["type"] == "fragment" and item["source_ref"] != current_ref \
+                    and item["fragment_handle"] not in current_handles:
+                item["delivery_kind"] = "redelivered_support"
+        items: dict[str, dict[str, Any]] = {}
+        for item in [*copy.deepcopy(current), *resident]:
+            identity = canonical([self._progress_identity(item), item.get("version_view")])
+            items.setdefault(identity, item)
+        return list(items.values())
+
+    def model_material(
+        self, config: RunnableConfig, *, for_write: bool = False
+    ) -> dict[str, Any]:
+        """Project actual resident material immediately before a model call.
+
+        Answering through the shared maintenance recipe does not issue another
+        editor map. Direct I2 writing explicitly requests the current target map.
+        Full conversation and read receipts remain in their original checkpoints.
+        """
+        if self.memory_view_mode == "legacy":
+            bound = self._binding(config)
+            if for_write:
+                return self.writer_context(
+                    bound["session"], bound["message_id"], bound["config_version"]
+                )
+            return self.context(bound["session"], bound["message_id"], bound["config_version"])
+        items = self._model_items(config)
+        material = {
+            "ok": True, "schema": "functional_material_v1", "kind": "resident",
+            "items": items, **self._read_only_metadata(items),
+            "memory_view": self.view_state(config), "read_progress": self.read_progress(config),
+        }
+        page_ends: dict[str, int] = {}
+        for ref in material["memory_view"]["resident_refs"]:
+            page_ends[ref["snapshot_id"]] = max(
+                page_ends.get(ref["snapshot_id"], 0), ref["unit_index"] + 1
+            )
+        continuations = []
+        for snapshot_id, end in page_ends.items():
+            snapshot = self.service.store.get(namespace(self.service), snapshot_id)
+            if snapshot is not None and not snapshot.value["kind"].endswith("_catalog") \
+                    and end < len(snapshot.value["items"]):
+                continuations.append({
+                    "tool": "read_page" if self.read_interface == "explicit_selectors_v1"
+                    else "read_memory",
+                    "arguments": {"cursor": snapshot_id + ":" + str(end)},
+                })
+        if continuations:
+            material["continuations"] = continuations
+        bound = self._binding(config)
+        ordinary = self.service.store.get(namespace(self.service), "ordinary:" + reference_key(
+            [bound["session"], bound["message_id"], self.forget_epoch]
+        ))
+        if ordinary is not None and ordinary.value.get("catalog_snapshot"):
+            directory = self._page(ordinary.value["catalog_snapshot"], 0, bound)
+            material["candidates"] = directory.get("candidates", [])
+            material["candidate_scope"] = "navigation_only_not_body_read_or_fact_support"
+            material["next_cursor"] = directory.get("next_cursor")
+        if for_write and self.interface_version != "v1":
+            packet = self._writer_packet(config, material)
+            packet["memory_view"] = material["memory_view"]
+            if "candidates" in material:
+                packet["candidates"] = material["candidates"]
+                packet["candidate_scope"] = material["candidate_scope"]
+            if continuations:
+                packet["continuations"] = continuations
+            return packet
+        return material
+
+    def project_model_messages(
+        self, config: RunnableConfig, messages: list[BaseMessage]
+    ) -> list[BaseMessage]:
+        """Evict old read bodies from temporary input, retaining every tool pair.
+
+        The caller adds model_material to the current system input. Tool results
+        keep their actual identities, cursors and progress, while business and
+        mutation receipts pass through unchanged. This never alters the journal.
+        """
+        if self.memory_view_mode == "legacy":
+            return list(messages)
+        self._binding(config)
+        projected: list[BaseMessage] = []
+        for message in messages:
+            if not isinstance(message, ToolMessage) or message.name not in self.read_tool_names:
+                projected.append(message)
+                continue
+            try:
+                result = json.loads(str(message.content))
+            except (TypeError, ValueError):
+                projected.append(message)
+                continue
+            if not isinstance(result, dict) or not result.get("items"):
+                projected.append(message)
+                continue
+            result = copy.deepcopy(result)
+            result["read_identities"] = [self._progress_identity(item) for item in result["items"]]
+            result["items"] = []
+            result["material_location"] = "current_resident_view_or_original_read_reference"
+            projected.append(message.model_copy(update={"content": canonical(result)}))
+        return projected
+
+    def pending_maintenance(self, config: RunnableConfig) -> list[dict[str, Any]]:
+        """Visible explicit save checkpoints, referenced rather than duplicated."""
+        self._binding(config)
+        result = []
+        ns = (*self.service.namespace, "edit_maintenance")
+        checkpoints = self.service.store.search(ns, limit=10000)
+        referenced: set[tuple[str, str]] = set()
+        for stored in checkpoints:
+            session, request_id = json.loads(stored.key)
+            state = stored.value
+            referenced.update((session, work["request_id"])
+                              for work in state.get("work_items", []))
+            referenced.update((session, f"{request_id}:batch:{index}")
+                              for index in range(len(state.get("batches", []))))
+            if "prior_request_id" in state:
+                referenced.add((state.get("prior_session", session), state["prior_request_id"]))
+        for stored in checkpoints:
+            state = stored.value
+            if not has_pending_save(state):
+                continue
+            session, request_id = json.loads(stored.key)
+            if (session, request_id) in referenced:
+                continue
+            sources = state["binding"]["sources"]
+            if not sources or any(self.service.source(row["source_ref"]) is None
+                                  for row in sources):
+                continue
+            receipts = state.get("receipts", [])
+            result.append({
+                "request_id": request_id, "session": session,
+                "source_refs": list(dict.fromkeys(row["source_ref"] for row in sources)),
+                "maintenance_phase": state["phase"],
+                "confirmed_receipt_count": sum(bool(row.get("ok")) for row in receipts),
+                "checkpoint": {"namespace": list(ns), "key": stored.key},
+                "recovery": "inspect_original_receipts_before_explicit_new_attempt",
+            })
+        return result
+
+    def maintain_prior(
+        self,
+        config: RunnableConfig,
+        *,
+        prior_session: str,
+        prior_request_id: str,
+        model_call: ModelCall,
+        allowed: bool,
+        new_attempt_id: str | None = None,
+        execute: bool = True,
+        fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Continue an actual explicit save under the current public request.
+
+        The old session is only the identity for its checkpoint and receipts.
+        An explicitly requested new attempt belongs to the current session and
+        uses this request's permissions and trigger. Original facts retain their
+        actual sources and dates; the continuation is not recaptured as evidence.
+        """
+        bound = self._binding(config)
+        if execute and not allowed:
+            return {"status": "not_permitted", "phase": "permission", "receipts": [],
+                    "unprocessed": [], "semantic_write_performed": False}
+        prior = self.service.store.get(
+            (*self.service.namespace, "edit_maintenance"),
+            json.dumps([prior_session, prior_request_id], ensure_ascii=False),
+        )
+        if prior is None or not prior.value.get("memory_save_requested"):
+            raise FunctionalRejection("EDIT_MAINTENANCE_EXPLICIT_SAVE_UNAVAILABLE")
+        state = prior.value
+        sources = state["binding"]["sources"]
+        delivery = self.writer.prepare(
+            list(dict.fromkeys(source["source_ref"] for source in sources)), "",
+            selected_records=[], source_ranges=[{
+                key: source[key] for key in ("source_ref", "start", "end")
+            } for source in sources], redelivered_ranges=[],
+        )
+        delivery.update(
+            prior_context=copy.deepcopy(state.get("prior_context", [])),
+            replay=True, new_independent_support=False,
+        )
+        current = self.service.source(bound["source_ref"])
+        if current is None:
+            raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
+        continuation = {"source_ref": current["event_id"], **{
+            key: current[key] for key in ("role", "observed_at", "content")
+        }}
+        continuation["purpose"] = "current_request_control_not_memory_evidence"
+
+        def messages_for_current(messages: list[dict[str, str]]) -> list[dict[str, str]]:
+            projected = copy.deepcopy(messages)
+            packet = json.loads(projected[-1]["content"])
+            packet["continuation_request"] = continuation
+            projected[-1]["content"] = json.dumps(
+                packet, ensure_ascii=False, separators=(",", ":")
+            )
+            projected[0]["content"] += (
+                " Follow the actual current continuation request's scope and limits. "
+                "It controls this attempt and is not an extra evidence alias for the "
+                "original remembered facts. Original source identity and dates remain."
+            )
+            return projected
+
+        def call(stage: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
+            return model_call(stage, messages_for_current(messages), schema)
+
+        def capacity(messages: list[dict[str, str]]) -> bool:
+            return fit(messages_for_current(messages)) if fit is not None else True
+
+        return self.maintain_delivery(
+            config, delivery, request_id=prior_request_id, prior_request_id=prior_request_id,
+            prior_session=prior_session, new_attempt_id=new_attempt_id,
+            date=state["date"], recipe=state["binding"]["recipe"], model_call=call,
+            allowed=allowed, execute=execute, fit=capacity if fit is not None else None,
+            prepare_delivery=prepare_delivery,
+            selected_record_ids=state["binding"].get("selected_record_ids"),
+            memory_save_requested=True,
+        )
+
+    def _commit(
+        self, session: str, operation_id: str, proposal: dict[str, Any]
+    ) -> dict[str, Any]:
+        receipt = super()._commit(session, operation_id, proposal)
+        if self.memory_view_mode == "legacy" or not receipt.get("ok") \
+                or receipt.get("status") != "committed":
+            return receipt
+        bound = proposal["trigger_binding"]
+        config: RunnableConfig = {"configurable": {
+            "user_id": self.service.owner, "v13_session": bound["session"],
+            "v13_turn_id": bound["message_id"], "v13_config_version": bound["config_version"],
+        }}
+        selected = proposal["action"] == "create" or any(
+            ref.get("kind") == "record" and ref.get("id") == receipt["id"]
+            and ref.get("view") == "current_at_snapshot"
+            for ref in self.view_state(config)["resident_refs"]
+        )
+        if selected:
+            self._refresh_current(config, receipt["id"])
+        return receipt
+
+    def _refresh_current(self, config: RunnableConfig, record_id: str) -> None:
+        """Refresh only a target actually selected by a read or committed operation."""
+        row = self.service.read(record_id)
+        if not row.get("ok"):
+            return
+        current_refs = [ref for ref in self.view_state(config)["resident_refs"]
+                        if ref.get("kind") == "record" and ref.get("id") == record_id
+                        and ref.get("view") == "current_at_snapshot"]
+        if current_refs and all(ref["revision"] == row["value"]["revision"]
+                                for ref in current_refs):
+            return
+        bound = self._binding(config)
+        snapshot = self._snapshot(bound, self._record_units(row), "committed_current")
+        page = self._page(snapshot, 0, bound)
+        self._cache_writer_items(config, page.get("items", []))
+        self._note_view_page(config, page, keep_resident=True, refresh_current=True)
+
     def _remember_page(self, config: RunnableConfig, result: dict[str, Any]) -> None:
         if result.get("ok"):
             self.note_delivered_fragment_handles(
@@ -377,13 +653,30 @@ class FunctionalEditMemory(FunctionalMemory):
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
         prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
         prior_request_id: str | None = None,
+        prior_session: str | None = None,
         new_attempt_id: str | None = None,
+        memory_save_requested: bool = False,
     ) -> dict[str, Any]:
         """Bind a current event or explicit consolidation to the ordinary Host commits."""
-        if not allowed:
+        if not allowed and (execute or prior_request_id is None):
             return {"status": "not_permitted", "phase": "permission", "receipts": [],
                     "unprocessed": [], "semantic_write_performed": False}
         bound = self._binding(config)
+        if self.memory_view_mode != "legacy" and selected_record_ids is None \
+                and prior_request_id is None:
+            checkpoint = self.service.store.get(
+                (*self.service.namespace, "edit_maintenance"),
+                json.dumps([bound["session"], request_id], ensure_ascii=False),
+            )
+            if checkpoint is not None:
+                selected_record_ids = checkpoint.value["binding"].get("selected_record_ids")
+            else:
+                selected = list(dict.fromkeys(
+                    item["record_id"] for item in self.resident_items(config)
+                    if item["type"] == "record" and item["version_view"] == "current_at_snapshot"
+                ))
+                if selected:
+                    selected_record_ids = selected
 
         def commit(
             operation_id: str, proposal: dict[str, Any], mapping: dict[str, Any]
@@ -399,6 +692,8 @@ class FunctionalEditMemory(FunctionalMemory):
             receipt = self.apply_writer_proposal(config, operation_id, proposal)
             if receipt.get("ok") and (receipt.get("status") == "committed"
                                      or receipt.get("original_status") == "committed"):
+                if self.memory_view_mode != "legacy":
+                    self._refresh_current(config, receipt["id"])
                 self.service.store.delete(
                     namespace(self.service), "ordinary:" + reference_key(
                         [bound["session"], bound["message_id"], self.forget_epoch]
@@ -406,21 +701,45 @@ class FunctionalEditMemory(FunctionalMemory):
                 )
             return receipt
 
+        def selected_delivery(located: dict[str, Any]) -> dict[str, Any]:
+            prepared = prepare_delivery(located) if prepare_delivery is not None else located
+            if self.memory_view_mode != "legacy":
+                units = [unit for record in prepared["records"]
+                         for unit in self._record_units(self.service.read(
+                             record["record_id"], record["revision"]
+                         ))]
+                if units:
+                    snapshot = self._snapshot(bound, units, "maintenance_selected")
+                    page = self._page(snapshot, 0, bound)
+                    self._cache_writer_items(config, page.get("items", []))
+                    self._note_view_page(config, page)
+                else:
+                    state = self.view_state(config)
+                    self.focus_view(config, focus=state["focus"], read_goal=state["read_goal"],
+                                    resident_refs=[], pending_refs=state["pending_refs"])
+            return prepared
+
         options: dict[str, Any] = {
-            "session": bound["session"], "date": date, "recipe": recipe,
+            "session": prior_session if prior_session is not None else bound["session"],
+            "date": date, "recipe": recipe,
             "model_call": model_call, "commit": commit, "selected_record_ids": selected_record_ids,
-            "fit": fit, "prepare_delivery": prepare_delivery,
+            "fit": fit, "prepare_delivery": selected_delivery,
+            "memory_view_mode": self.memory_view_mode,
+            "memory_save_requested": memory_save_requested,
         }
         if prior_request_id is not None:
-            return resume_maintenance(
+            result = resume_maintenance(
                 self.writer, delivery, prior_request_id=prior_request_id,
-                new_attempt_id=new_attempt_id if execute else None, **options,
+                new_attempt_id=new_attempt_id,
+                new_attempt_session=bound["session"], execute=execute, **options,
             )
-        if new_attempt_id is not None:
-            raise FunctionalRejection("EDIT_MAINTENANCE_PRIOR_REQUEST_REQUIRED")
-        return maintain_event(
-            self.writer, delivery, request_id=request_id, execute=execute, **options
-        )
+        else:
+            if new_attempt_id is not None:
+                raise FunctionalRejection("EDIT_MAINTENANCE_PRIOR_REQUEST_REQUIRED")
+            result = maintain_event(
+                self.writer, delivery, request_id=request_id, execute=execute, **options
+            )
+        return result
 
     def maintain_sources(
         self,
@@ -432,6 +751,8 @@ class FunctionalEditMemory(FunctionalMemory):
         execute: bool = True,
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
         prior_request_fragments: list[dict[str, Any]] | None = None,
+        skip_source_refs: list[str] | None = None,
+        memory_save_requested: bool = False,
     ) -> list[dict[str, Any]]:
         """Maintain current user input and actually delivered tool sources once each.
 
@@ -454,6 +775,8 @@ class FunctionalEditMemory(FunctionalMemory):
         )
         results = []
         for ref in dict.fromkeys(refs):
+            if ref in (skip_source_refs or []):
+                continue
             source = self.service.source(ref)
             if source is None:
                 continue
@@ -489,6 +812,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 config, delivery, request_id=request_id,
                 date=source.get("occurred_at") or source["observed_at"], recipe=recipe,
                 model_call=model_call, allowed=allowed, execute=execute, fit=fit,
+                memory_save_requested=memory_save_requested,
             ))
         return results
 
@@ -515,10 +839,7 @@ class FunctionalEditMemory(FunctionalMemory):
         return self._writer_packet(config, page)
 
     def _writer_packet(self, config: RunnableConfig, page: dict[str, Any]) -> dict[str, Any]:
-        stored = self.service.store.get(
-            namespace(self.service), self._writer_key(config, "edit-writer-delivery:")
-        )
-        items = stored.value["items"] if stored else []
+        items = self._model_items(config)
         sources: list[dict[str, Any]] = []
         redelivered: list[dict[str, Any]] = []
         redelivered_handles = {
@@ -555,6 +876,9 @@ class FunctionalEditMemory(FunctionalMemory):
                     }
                 )
             elif item["type"] == "record":
+                if self.memory_view_mode != "legacy" \
+                        and item.get("version_view") != "current_at_snapshot":
+                    continue
                 groups.setdefault((item["record_id"], item["revision"]), []).append(item)
         records: list[dict[str, Any]] = []
         unprocessed: list[dict[str, Any]] = []

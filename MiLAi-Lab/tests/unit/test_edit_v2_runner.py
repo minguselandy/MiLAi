@@ -1163,6 +1163,8 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
             current = service.capture_user("new", "change", "The marker is now red.")["source_ref"]
             delivery = method.prepare([current], "", selected_records=[], redelivered_ranges=[])
             before = service.records()
+            delivery = method.prepare([current], "Marker", selected_records=before,
+                                      redelivered_ranges=[])
             write_json(folder / "before.json", before)
             marker = next(row for row in before
                           if row["value"]["edit_state"]["matter_description"] == "Marker")
@@ -1211,6 +1213,14 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
             content = json.dumps({"changes": [{
                 "subject": "Marker", "statement": "The marker is now red.",
                 "evidence": ["e1"], "time": None, "scope": None}]})
+        elif "directory" in payload:
+            calls.append("select")
+            assert {row["description"] for row in payload["directory"]} == {
+                "Marker", "Poster"}
+            marker = next(row for row in payload["directory"]
+                          if row["description"] == "Marker")
+            content = json.dumps({"record_ids": [marker["record_id"]],
+                                  "done": True})
         else:
             calls.append("edit")
             assert "A later report says green." not in json.dumps(payload)
@@ -1256,3 +1266,90 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
                           == "Poster")
             assert before[poster] == after[poster]
             assert result["answers"][0]["answer"] == "Red."
+
+    view_output = tmp_path / "writer-views"
+    driver["compare_writer_views"](prepared, config, view_output, "fixture-only")
+    assert calls.count("extract") == 4  # No extraction added to the delivery-only comparison.
+    assert calls.count("select") == 8
+    for ordinal in driver["ORDINALS"]:
+        assert (prepared / str(ordinal) / "memory.sqlite").read_bytes() == originals[ordinal]
+        results = [read_json(view_output / mode / "cases" / str(ordinal) / "result.json")
+                   for mode in ("legacy", "staged", "state_driven")]
+        assert results[0]["before"] == results[1]["before"] == results[2]["before"]
+        assert results[0]["candidate_record_ids"] == results[1]["candidate_record_ids"] \
+            == results[2]["candidate_record_ids"]
+        for result in results:
+            assert result["maintenance"]["status"] == "completed"
+            before = {r["id"]: r["value"] for r in result["before"]}
+            after = {r["id"]: r["value"] for r in result["after"]}
+            poster = next(k for k, v in before.items() if v["edit_state"]["matter_description"]
+                          == "Poster")
+            assert before[poster] == after[poster]
+            assert result["answers"][0]["answer"] == "Red."
+    assert budget.state["generation_requests"] == 52
+
+
+def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path, monkeypatch):
+    from milai_lab.harness.artifact_io import write_json
+    from milai_lab.runners.edit_benchmarks import reader_messages
+
+    driver = runpy.run_path(str(Path(__file__).parents[2] / "tools/run_edit_change_pairs.py"))
+    compare = driver["compare_reader_views"]
+    baseline, output = tmp_path / "baseline", tmp_path / "comparison"
+    key = "halumem/owner/0/qa/0"
+    memories = [{"record_id": record, "revision": 1, "matter_description": matter,
+                 "content": text, "scope": {"weekday_only": True}}
+                for record, matter, text in [
+                    ("actual-marker", "Marker", "The marker is red on weekdays."),
+                    ("actual-poster", "Poster", "The poster is small on weekdays."),
+                ]]
+    write_json(baseline / "http" / key / "retrieval.json", memories)
+    write_json(baseline / "http" / key / "request.json", {
+        "messages": reader_messages("Compare the marker and poster.", "2030-01-01", memories)})
+    inputs = {p.name: p.read_bytes() for p in (baseline / "http" / key).iterdir()}
+    config = tmp_path / "config.json"
+    write_json(config, {"model": {"max_tokens": 100}, "context_tokens": 65536,
+                        "interface_version": "I2", "additional_reads": 2})
+    budget = RunBudget(RunLimits(generation_requests=6), tmp_path / "budget.json")
+    final_ids = {}
+
+    def factory(settings, root):
+        run = execution(root, "M")
+        run.settings, run.budget, run.before = settings, budget, copy.deepcopy(budget.state)
+
+        def provider(request):
+            wire = json.loads(request.read())
+            packet = json.loads(wire["messages"][1]["content"])
+            if "candidates" in packet:
+                assert {row["record_id"] for row in packet["candidates"]} == {
+                    "actual-marker", "actual-poster"}
+                first = not packet["opened_ids"]
+                content = json.dumps({"record_ids": ["actual-marker" if first else "actual-poster"],
+                                      "keep_resident": not first, "done": not first})
+            else:
+                final_ids[settings["memory_view_mode"]] = [
+                    m["record_id"] for m in packet["memories"]]
+                assert all(m["scope"] == {"weekday_only": True} for m in packet["memories"])
+                content = "Reported only the delivered matters."
+            return httpx.Response(200, json={"choices": [{"finish_reason": "stop", "message": {
+                "content": content}}], "usage": {"total_tokens": 8}})
+
+        run.client = VLLMClient(VLLMConfig("http://synthetic.invalid/v1", "synthetic",
+            max_tokens=100, max_calls=3), budget=budget, transport=httpx.MockTransport(provider))
+
+        def close():
+            run.client.close()
+            write_json(root / "accounting-end.json", budget.state)
+
+        run.close = close
+        return run
+
+    monkeypatch.setitem(compare.__globals__, "BenchmarkRun", factory)
+    compare(baseline, config, output, "fixture-only", [key])
+    assert final_ids == {"legacy": ["actual-marker", "actual-poster"], "staged": ["actual-marker"],
+                         "state_driven": ["actual-marker", "actual-poster"]}
+    for mode, requests in (("legacy", 1), ("staged", 2), ("state_driven", 3)):
+        assert read_json(output / mode / "terminal.json")["generation_requests"] == requests
+        assert read_json(output / mode / "http" / key / "retrieval.json") == memories
+    assert {p.name: p.read_bytes() for p in (baseline / "http" / key).iterdir()} == inputs
+    assert budget.state["generation_requests"] == 6

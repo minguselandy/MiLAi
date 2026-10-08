@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import json
+import sqlite3
+
 import pytest
 
 from milai_lab.analysis.edit_results import (
@@ -9,10 +12,60 @@ from milai_lab.analysis.edit_results import (
     longmemeval_categories,
     paired_interval,
     receipt_effect,
+    recipe_writer_operations,
     user_metrics,
     writer_operations,
 )
 from milai_lab.harness.artifact_io import write_json
+
+
+def test_view_audit_counts_actual_calls_and_child_effects_once(tmp_path):
+    request_id = "halumem/owner/0:batch:0"
+    http_key = "maintenance/halumem/owner/0/batch-0"
+    receipt = {"ok": True, "id": "actual-record", "revision": 1,
+               "status": "committed", "effect": "memory_only"}
+    binding = {"sources": [{"source_ref": "actual-source", "start": 0, "end": 10}]}
+    bank = tmp_path / "banks/owner/memory.sqlite"
+    bank.parent.mkdir(parents=True)
+    with sqlite3.connect(bank) as connection:
+        connection.execute("CREATE TABLE store (prefix TEXT, key TEXT, value TEXT)")
+        for suffix, state in (
+            ("", {"phase": "views", "work_items": [{}, {}], "receipts": [receipt],
+                  "unprocessed": [{"phase": "views", "reason": "EDIT_MODEL_CALL_LIMIT_REACHED"}]}),
+            (":work:0", {"phase": "complete", "proposals": [{"action": "create"}],
+                         "receipts": [receipt], "unprocessed": []}),
+            (":work:1", {"phase": "edit_pending", "receipts": [], "unprocessed": []}),
+        ):
+            connection.execute("INSERT INTO store VALUES (?, ?, ?)", (
+                "audit.owner.edit_maintenance",
+                json.dumps(["original-session", request_id + suffix]),
+                json.dumps({**state, "binding": binding}),
+            ))
+    calls = []
+    for suffix, stage, path in (
+        ("", "extract", "extract"),
+        ("", "select:0", "select/work-0"),
+        (":work:0", "edit:" + request_id + ":work:0", "edit/work-0"),
+        ("", "select:1", "select/work-1"),
+        (":work:1", "edit:" + request_id + ":work:1", "edit/work-1"),
+    ):
+        key = http_key + "/" + path
+        calls.append({"request_id": request_id + suffix, "stage": stage, "http_key": key})
+        write_json(tmp_path / "http" / key / "request.json", {})
+        if suffix != ":work:1":
+            write_json(tmp_path / "http" / key / "response.json", {})
+    write_json(tmp_path / "maintenance/halumem/owner/0/batch-0-calls.json", calls)
+    result = recipe_writer_operations(tmp_path, "owner", [0])
+    counts = result["counts"]
+    assert counts["recorded_extraction_requests"] == 1
+    assert counts["recorded_selection_requests"] == counts["confirmed_selection_responses"] == 2
+    assert counts["recorded_writer_requests"] == 2 and counts["confirmed_writer_responses"] == 1
+    assert counts["view_containers"] == 1 and counts["planned_work_items"] == 2
+    assert counts["confirmed_committed_operations"] == 1
+    assert result["committed_actions"] == {"create": 1}
+    assert result["requests_without_confirmed_responses"] == 1
+    assert result["pending_prepared_batches"] == 1
+    assert result["first_attempt_selection_failures"] == {"EDIT_MODEL_CALL_LIMIT_REACHED": 1}
 
 
 def test_paired_user_resampling_does_not_turn_calls_into_independent_users():

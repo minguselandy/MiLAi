@@ -157,6 +157,9 @@ REQUEST_MODE_DECLARATION: dict[str, Any] = {
 
 REQUEST_WRITE_MODE_PROMPT = """Classify only the current request before reading history.
 Call classify_current_request once, with no explanation. It executes no operation.
+Classify each requested effect independently. Restrictions apply to the named work:
+excluding business actions or already-completed saves leaves a separately requested
+unfinished memory save permitted.
 Select memory_write_request:
 - none: only reading/recalling/comparing facts, preferences, history or status.
   Needing an answer FROM memory is not a request to WRITE memory. A proposition
@@ -271,14 +274,14 @@ CONTINUATION_OPERATIONS_DECLARATION: dict[str, Any] = {
 
 REQUEST_CONTINUATION_MODE_PROMPT = REQUEST_REFERENCE_MODE_PROMPT + """
 Separately declare memory_continuation_request:
-- none: the current input does not ask to continue earlier unfinished work, or limits
-  continuation to business actions, asks only for information, or excludes saving memory.
+- none: the current input asks for no memory continuation, limits continuation to
+  business actions, or restricts all memory work to reading.
 - resolve_prior_explicit: the current input asks to finish still-authorized prior work
   and permits continuing an unfinished explicit save/archive/update request within it.
   This includes a general continuation whose prior memory work cannot be identified
   without history. It does not itself grant a memory write or assert that work is pending.
-Do not infer a prior save request before reading its actual original. A current no-save,
-read-only, or business-only restriction takes precedence. Memory continuation can be
+Read the actual original before identifying a prior save request. A current restriction
+on all memory saving takes precedence. Memory continuation can be
 requested even when business_operations are already concrete, or no business action
 is requested. Keep memory_write_request about assertions/requests in the CURRENT input.
 """
@@ -287,7 +290,7 @@ _continuation_parameters = REQUEST_CONTINUATION_MODE_DECLARATION["function"]["pa
 _continuation_parameters["properties"]["memory_continuation_request"] = {
     "type": "string", "enum": ["none", "resolve_prior_explicit"],
     "description": "Current permission to resolve prior explicit unfinished memory work; "
-                   "none for pure queries, business-only continuation or any no-save restriction."}
+                   "none for pure queries, business-only continuation or exclusion of all saving."}
 _continuation_parameters["required"].append("memory_continuation_request")
 CONTINUATION_MEMORY_DECLARATION = json.loads(json.dumps(CONTINUATION_OPERATIONS_DECLARATION))
 _continuation_memory_parameters = CONTINUATION_MEMORY_DECLARATION["function"]["parameters"]
@@ -488,6 +491,7 @@ def prepare(
         "edit_interface_version",
         "edit_features",
         "maintenance_recipe",
+        "memory_view_mode",
         "memory_profile",
         "memory_ranking",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
@@ -497,6 +501,8 @@ def prepare(
                          + ",".join(sorted(set(settings) - allowed)))
     if settings.get("memory_profile", "ordinary") not in {"ordinary", "unified_v1"}:
         raise ValueError("FUNCTIONAL_MEMORY_PROFILE_INVALID")
+    if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
+        raise ValueError("FUNCTIONAL_MEMORY_VIEW_MODE_INVALID")
     if settings.get("memory_ranking", "dense") not in {"dense", "activation"}:
         raise ValueError("MEMORY_RANKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
@@ -1270,6 +1276,12 @@ def continuation_operations(
             resumed_memory_request={"fragment_handles": handles,
                 "source_refs": list(dict.fromkeys(row["source_ref"] for row in selected)),
                 "semantic_correctness": "unchecked", "completion": "not_proven_by_resolution"})
+        selected_refs = {fragment["source_ref"] for fragment in selected}
+        resolved["prior_maintenance_requests"] = [
+            {name: card[name] for name in ("session", "request_id", "checkpoint")}
+            for card in material.get("pending_maintenance", [])
+            if selected_refs.intersection(card["source_refs"])
+        ]
     trace({"event": "functional_continuation_resolution", **resolved})
     return resolved
 
@@ -2013,6 +2025,7 @@ def message(
                 capacity.text_tokens,
                 read_limit=settings["additional_reads"],
                 material_limit=settings["ordinary_material_tokens"],
+                memory_view_mode=settings.get("memory_view_mode", "legacy"),
                 formation_interface=settings.get("formation_interface", "content_and_scope_v1"),
                 read_interface=settings.get("read_interface", "combined_selectors_v1"),
                 recent_context=settings.get("recent_context", "disabled"),
@@ -2234,6 +2247,32 @@ def message(
                                 if part["fragment_handle"] not in delivered:
                                     material["items"].append({"type": "fragment", **part})
                                     delivered.add(part["fragment_handle"])
+                    if (isinstance(memory, FunctionalEditMemory)
+                            and memory.memory_view_mode != "legacy"):
+                        pending = memory.pending_maintenance(cfg)
+                        material["pending_maintenance"] = pending
+                        delivered = {row.get("fragment_handle") for row in material["items"]}
+                        refs = [ref for card in pending for ref in card["source_refs"]]
+                        refs.extend(candidate["source_ref"]
+                                    for candidate in material.get("candidates", [])
+                                    if candidate["type"] == "source_candidate"
+                                    and candidate["role"] == "user")
+                        for ref in dict.fromkeys(refs):
+                            if ref == capture["source_ref"]:
+                                continue
+                            parts = service.source_fragments(ref, max_chars=memory.fragment_chars)
+                            if not parts or parts[0]["role"] != "user":
+                                continue
+                            part = parts[0]
+                            if part["fragment_handle"] in delivered:
+                                continue
+                            proposed = {**material, "items": [
+                                *material["items"], {"type": "fragment", **part,
+                                                    "input_relation": "archived_source"}]}
+                            if capacity.text_tokens(json.dumps(proposed, ensure_ascii=False)) \
+                                    <= settings["ordinary_material_tokens"]:
+                                material = proposed
+                                delivered.add(part["fragment_handle"])
                     trace({"event": "functional_material_delivery", "material": material,
                            "consumer": "continuation_reference_resolution"})
                     mode = continuation_operations(
@@ -2313,10 +2352,24 @@ def message(
 
             def maintain_current(execute: bool) -> list[dict[str, Any]]:
                 assert isinstance(memory, FunctionalEditMemory)
-                return memory.maintain_sources(
+                results = [memory.maintain_prior(
+                    cfg, prior_session=prior["session"], prior_request_id=prior["request_id"],
+                    new_attempt_id="maintenance-resume:" + json.dumps([
+                        session, message_id, freeze["config_version"],
+                        prior["session"], prior["request_id"],
+                    ], ensure_ascii=False, separators=(",", ":")),
+                    model_call=maintenance_call, allowed=maintenance_allowed,
+                    execute=execute, fit=maintenance_fit,
+                ) for prior in (mode or {}).get("prior_maintenance_requests", [])]
+                skip_current = bool(results and mode
+                                    and mode.get("current_memory_write_request") == "none")
+                return [*results, *memory.maintain_sources(
                     cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                     model_call=maintenance_call, allowed=maintenance_allowed, execute=execute,
-                    fit=maintenance_fit, prior_request_fragments=prior_request_fragments())
+                    fit=maintenance_fit, prior_request_fragments=prior_request_fragments(),
+                    skip_source_refs=[capture["source_ref"]] if skip_current else None,
+                    memory_save_requested=bool(memory.memory_view_mode != "legacy"
+                                               and mode and mode["requires_memory_result"]))]
 
             def context_hook(
                 state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
@@ -2450,6 +2503,13 @@ def message(
                         material = memory.writer_context(
                             session, message_id, freeze["config_version"], query=content
                         )
+                    if memory.memory_view_mode != "legacy":
+                        material = memory.model_material(config, for_write=(
+                            not maintenance_recipe and not for_finalization
+                            and bool({"save_memory", "update_memory"}.intersection(allowed_tools))
+                        ))
+                        wire_messages = memory.project_model_messages(config, wire_messages)
+                        material["pending_maintenance"] = memory.pending_maintenance(config)
                 trace({"event": "functional_material_delivery", "material": material})
                 trace({"event": "functional_memory_effects", "effects": effects})
                 refresh_requests()
@@ -2814,12 +2874,7 @@ def message(
                 # Recover receipts from the same Store without starting new work.
                 memory.context(session, message_id, freeze["config_version"], query=content)
                 _note_edit_tool_delivery(memory, cfg, messages)
-                output["maintenance"] = memory.maintain_sources(
-                    cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
-                    model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
-                    fit=maintenance_fit,
-                    prior_request_fragments=prior_request_fragments(),
-                )
+                output["maintenance"] = maintain_current(False)
             if (messages and isinstance(messages[-1], AIMessage) and not messages[-1].tool_calls
                     and final_delivery(messages[-1].content)["status"] == "available"):
                 refresh_requests(acknowledged_messages=messages)
@@ -3119,12 +3174,7 @@ def message(
             if "maintenance_call" in locals() and isinstance(memory, FunctionalEditMemory):
                 try:
                     if maintenance_recipe:
-                        output["maintenance"] = memory.maintain_sources(
-                            cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
-                            model_call=maintenance_call, allowed=maintenance_allowed, execute=False,
-                            fit=maintenance_fit,
-                            prior_request_fragments=prior_request_fragments(),
-                        )
+                        output["maintenance"] = maintain_current(False)
                 except Exception as snapshot_error:
                     output["maintenance_snapshot_error"] = (
                         type(snapshot_error).__name__ + ":" + str(snapshot_error)

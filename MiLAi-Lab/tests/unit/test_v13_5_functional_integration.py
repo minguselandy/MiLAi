@@ -73,6 +73,7 @@ def prepared(
     maintenance_recipe: str | None = None,
     read_exhaustion: str | None = None,
     memory_profile: str = "ordinary",
+    memory_view_mode: str = "legacy",
     support_contract: str = "legacy",
     support_input: bool = False,
     bounded_reproposal: bool = False,
@@ -98,6 +99,7 @@ def prepared(
         "profile": "functional_v1", "host": asdict(host),
         "memory_method": memory_method,
         "memory_profile": memory_profile,
+        "memory_view_mode": memory_view_mode,
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
         "failure_delivery": "receipt_status_v4" if format_failure_receipts else
@@ -208,6 +210,96 @@ def scripted(
     return wires
 
 
+def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, complete_requests=True,
+        direct_response=True, phase_thinking=True, current_delivery=True,
+        memory_profile="unified_v1", memory_view_mode="state_driven",
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        maintenance_recipe="extract_then_edit", edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope")})
+    original_text = "Remember that I use a teal marker for the calendar."
+    continue_text = "Continue only the unfinished saving of my earlier calendar preference."
+    read_text = "Only inspect the saved preference; do not save or perform business."
+    correction_text = "Change my earlier calendar marker preference to green and save it."
+    seen = {"extract": 0, "edit": 0, "resolve": 0}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {t["function"]["name"] for t in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            text = wire["messages"][-1]["content"]
+            return native_call("classify_current_request", "mode-" + str(ordinal),
+                memory_write_request="explicit" if text in {original_text, correction_text}
+                else "none",
+                allow_forgetting=False, business_action_request="none", business_operations=[],
+                memory_continuation_request="resolve_prior_explicit"
+                if text in {continue_text, correction_text} else "none",
+                application_continuation_request="none", application_requests=[])
+        if names == {"resolve_continuation_operations"}:
+            seen["resolve"] += 1
+            material = json.loads(wire["messages"][-1]["content"])["archived_reference_material"]
+            assert len(material["pending_maintenance"]) == (1 if seen["resolve"] == 1 else 0)
+            part = next(row for row in material["items"] if row.get("content") == original_text)
+            return native_call("resolve_continuation_operations", "resolve",
+                business_operations=[], prior_request_ids=[],
+                prior_memory_request_fragments=[part["fragment_handle"]])
+        if not names:
+            if "Extract brief candidate propositions" in wire["messages"][0]["content"]:
+                seen["extract"] += 1
+                return {"role": "assistant", "content": json.dumps({"changes": []})}
+            seen["edit"] += 1
+            frame = json.loads(wire["messages"][-1]["content"])
+            if "directory" in frame:
+                seen["edit"] -= 1
+                return {"role": "assistant", "content": json.dumps({
+                    "record_ids": [frame["directory"][0]["record_id"]],
+                    "done": True})}
+            if "continuation_request" not in frame:
+                return {"role": "assistant", "content": "{}"}
+            assert frame["continuation_request"]["content"] == continue_text
+            packet = frame["delivery"]
+            evidence = next(row for row in packet["evidence"] if row["text"] == original_text)
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "User's calendar marker", "clauses": [{
+                    "text": "User uses a teal calendar marker.", "evidence": [evidence["id"]],
+                    "conditions": [], "assertion": {"source": evidence["id"], "kind": "reported"},
+                }]}], "records": {}})}
+        return {"role": "assistant", "content": "Report the actual saved result."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = {"bank": "pure-save", "owner": "alice"}
+    first = functional.message(root, **common, session="original", message_id="save",
+                               content=original_text)
+    assert first["status"] == "COMPLETED", first.get("error")
+    assert first["records"] == [] and len(first["maintenance"]) == 1
+    continued = functional.message(root, **common, session="current", message_id="continue",
+                                   content=continue_text)
+    assert continued["status"] == "COMPLETED", continued.get("error")
+    assert len(continued["records"]) == 1 and seen == {"extract": 1, "edit": 2, "resolve": 1}
+    assert continued["request_mode"]["prior_maintenance_requests"]
+    assert len(continued["maintenance"]) == 1
+    assert continued["operation_status"]["semantic_memory"]["status"] == "committed"
+    count = len(wires)
+    readonly = functional.message(root, **common, session="reopened", message_id="read",
+                                  content=read_text)
+    assert readonly["status"] == "COMPLETED", readonly.get("error")
+    assert readonly["maintenance"] == [] and readonly["records"] == continued["records"]
+    assert seen == {"extract": 1, "edit": 2, "resolve": 1}
+    assert len(wires) - count == 2  # Current declaration and normal Host answer.
+    count = len(wires)
+    replay = functional.message(root, **common, session="current", message_id="continue",
+                                content=continue_text, resume=True)
+    assert replay["records"] == continued["records"] and len(wires) == count
+    corrected = functional.message(root, **common, session="correction", message_id="change",
+                                   content=correction_text)
+    assert corrected["status"] == "COMPLETED", corrected.get("error")
+    assert corrected["request_mode"]["resumed_memory_request"]["fragment_handles"]
+    assert corrected["request_mode"]["prior_maintenance_requests"] == []
+    assert seen == {"extract": 2, "edit": 3, "resolve": 2}
+
+
 def tool(action: str, **args: Any) -> dict[str, Any]:
     return {"calls": [{"name": action, "arguments": args}]}
 
@@ -237,16 +329,19 @@ def message(root: Path, **kwargs: Any) -> dict[str, Any]:
                               **kwargs)
 
 
-@pytest.mark.parametrize("arm,memory_profile", [
-    ("B0", "ordinary"), ("B1", "ordinary"), ("B2", "ordinary"), ("M", "ordinary"),
-    ("M", "unified_v1"),
+@pytest.mark.parametrize("arm,memory_profile,memory_view_mode", [
+    ("B0", "ordinary", "legacy"), ("B1", "ordinary", "legacy"),
+    ("B2", "ordinary", "legacy"), ("M", "ordinary", "legacy"),
+    ("M", "unified_v1", "legacy"), ("M", "unified_v1", "state_driven"),
 ])
 def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, arm: str, memory_profile: str,
+    memory_view_mode: str,
 ) -> None:
     root = prepared(
         tmp_path, native=True, request_interpretation=True,
         memory_profile=memory_profile,
+        memory_view_mode=memory_view_mode,
         memory_method="milai_edit_" + arm.lower() + "_v1", edit_interface_version="I2",
         edit_features={name: True for name in (
             "matter_organization", "semantic_operations", "bound_references",
@@ -282,6 +377,9 @@ def test_next_edit_contract_reaches_normal_host_wire_and_statement_time(
             })
         assert ordinal == 3
         assert actual_tool_receipt(wire)["status"] == "committed"
+        if memory_view_mode != "legacy":
+            assert any(ref["kind"] == "record" and ref["revision"] == 1
+                       for ref in materials(wire)["memory_view"]["resident_refs"])
         return {"role": "assistant", "content": "Saved your reported marker."}
 
     wires = scripted(monkeypatch, reply, native=True)

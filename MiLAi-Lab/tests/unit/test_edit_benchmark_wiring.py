@@ -347,6 +347,81 @@ def test_incomplete_response_remains_failed_and_charged_on_resume(tmp_path: Path
     assert read_json(tmp_path / "http" / "a" / "failure.json")["type"] == "ValueError"
 
 
+def test_shared_reader_switches_reloads_fixed_pool_without_capturing_qa(tmp_path: Path) -> None:
+    class ReaderTokenizer:
+        def apply_chat_template(self, *args: object, **kwargs: object) -> list[int]:
+            return [1, 2]
+
+    execution = BenchmarkRun.__new__(BenchmarkRun)
+    execution.root, execution.settings = tmp_path, {"retrieval_limit": 10}
+
+    def seed_call(key: str, messages: list[dict[str, str]], *, structured: bool) -> str:
+        source = json.loads(messages[1]["content"])["new_sources"][0]["source_ref"]
+        return json.dumps({"operations": [
+            {"target_record": None, "content": body, "kind": "semantic",
+             "scope": {}, "source_refs": [source]}
+            for body in ("The marker is blue.", "The alarm is soft.")
+        ]})
+
+    execution.call = seed_call
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = MemoryService(
+            store, ("reader-view-example", "owner"), "owner", tmp_path / "bank.lock",
+            mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+        )
+        execution.maintain(service, ObservedSession(
+            "save", "2030-01-01", ({"role": "user", "content":
+            "The marker is blue. The alarm is soft.", "timestamp": "2030-01-01"},),
+        ), "save")
+        before, source_count = copy.deepcopy(service.records()), len(service.sources())
+        identifiers = {row["value"]["content"]: row["id"] for row in before}
+        marker, alarm = identifiers["The marker is blue."], identifiers["The alarm is soft."]
+        execution.settings = {"retrieval_limit": 10, "memory_view_mode": "state_driven",
+                              "context_tokens": 4096, "model": {"max_tokens": 100}}
+        execution.tokenizer = ReaderTokenizer()
+        execution.call = BenchmarkRun.call.__get__(execution)
+        payloads = []
+
+        def provider(request: httpx.Request) -> httpx.Response:
+            wire = json.loads(request.read())
+            payload = json.loads(wire["messages"][1]["content"])
+            payloads.append(payload)
+            bodies = [memory["content"] for memory in payload["memories"]]
+            index = len(payloads)
+            if index == 1:
+                assert bodies == []
+                selected, keep, done = [marker], False, False
+            elif index == 2:
+                assert bodies == ["The marker is blue."]
+                selected, keep, done = [alarm], False, False
+            elif index == 3:
+                assert bodies == ["The alarm is soft."]
+                selected, keep, done = [marker], False, False
+            elif index == 4:
+                assert bodies == ["The marker is blue."]
+                selected, keep, done = [alarm], True, True
+            else:
+                assert index == 5 and set(bodies) == set(identifiers)
+            content = json.dumps({"record_ids": selected, "keep_resident": keep, "done": done}) \
+                if index < 5 else "The marker is blue and the alarm is soft."
+            return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
+                "message": {"content": content}}], "usage": {"total_tokens": 9}})
+
+        budget = RunBudget(RunLimits(generation_requests=5), tmp_path / "budget.json")
+        with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100, max_calls=5),
+                         transport=httpx.MockTransport(provider), budget=budget) as client:
+            execution.client = client
+            answer = execution.answer(service, "Describe the marker and alarm.", "2030-01-02", "qa")
+            assert execution.answer(service, "Describe the marker and alarm.", "2030-01-02", "qa") \
+                == answer
+        assert len(payloads) == 5 and budget.state["generation_requests"] == 5
+        assert service.records() == before and len(service.sources()) == source_count
+        state = read_json(tmp_path / "http/qa/memory-view.json")
+        assert state["steps"] == 4 and state["complete"]
+        assert {ref["id"] for ref in state["resident_refs"]} == {marker, alarm}
+        assert all("content" not in ref for ref in state["resident_refs"])
+
+
 class CharacterTokenizer:
     def encode(self, text: str, *, add_special_tokens: bool) -> list[int]:
         return list(range(len(text)))

@@ -1,5 +1,71 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 08:46:08 UTC／北京时间16:46:08：冻结候选继续，定位并修复导航误限新建。**
+
+PR107 open、ready、尚未合并，main64f006f；新开发733fa72，实际运行仍冻结d62f0b4。
+PID3145901继续预测，15/32[8,7,0,0]、32完整Reader，无终态／score／Judge。
+153生成请求／152响应／1334117 known、78embedding／5170tokens，另1在途；账本差额一致，
+unknown7为历史6＋在途1，不能称新增闭合失败。Root已读32完整答案、来源审计部分、无重评分。
+首用户原1的五条候选已送达，但selector create=false使新建数组maxItems=0，Editor只对旧资料
+no_change；不是客户端吞输出或已证明Editor漏写。733使选择器只选旧事项，首次编辑保留新建
+及合法空结果，已发旧工作不改。五项受影响检查、源strict mypy／Ruff／包边界通过，修复实际0HTTP。
+54b2aaf自身Fast成功／Full skipped；733自身远端CI待发布核对，不能借用。Reader身份关联、
+限定／来源与变化落实仍待评价；两项固定池比较实际0。完整目标active，16未用，Product NO_GO。
+详见[当前报告](MILAI_UNIFIED_MEMORY_USAGE.md)。下方均为固定历史观察。
+
+**2026-10-08 08:00:24 UTC／北京时间16:00:24：冻结共同候选开始集中预测。**
+
+开发及新候选冻结d62f0b4，PR107 open draft、main64f006f。ce14受影响8执行闭合，通知两天
+和只补保存实际提交，业务恰一次预订＋一次补标签、后续只读零维护；范围误推、无依据发货和
+部分保存仍保留。50生成529361known／30embedding1473tokens，新增unknown0、Judge0，非8语义通过。
+Writer／Reader固定实际池D0／D1／D2入口均已接通、真实比较0；窄SQLite检查、共同源类型／Ruff通过，
+工具mypy四项既有错误。M-only前八候选已在新空库启动，PID3145901／session15141，0/32预测、
+2完整Reader、无terminal或score；实际冻结不热改，先核对PID再安排HTTP。d62自身Fast37746491786
+in_progress、Full skipped；878报告自身Fast成功。完整目标active，16未用，Product NO_GO。
+详见[当前报告](MILAI_UNIFIED_MEMORY_USAGE.md)。下方均为固定历史观察。
+
+**2026-10-08 07:40 UTC／北京时间15:40：真实三链闭合，执行与语义分开记录。**
+
+PR107 open draft、main64f006f；开发ce14dd7、完整三链实际冻结d4756a0。
+18次尝试17 COMPLETED／1 FAILED，Root阅读17个完整答案，选定来源与回执审计，未另评分。
+97生成898449known／49embedding2118tokens，新unknown0、Judge0；业务恰一次预订＋一次补标签，
+遗忘后实际记录不可见。但更正来源解析失败、只补保存误判、整体次数误推、保存历史混淆及截断保留。
+ce14在原额度内交付可见旧User片段并区分限制范围；新空库两个受影响片段8消息已启动、未终态。
+新增固定实际池的Reader D0／D1／D2入口、实际0；Writer比较未接通。两窄检查／类型／Ruff／边界通过，
+工具单独mypy五项既有错误保留。d475自身Fast成功；ce14自身Fast37744739546 in_progress，Full skipped。
+完整候选／同前态效果及原长历史／保留／外部／完整Host／六交付仍未完成；16未用，Product NO_GO。
+详见[当前报告](MILAI_UNIFIED_MEMORY_USAGE.md)。下方均为固定历史观察。
+
+**2026-10-08 07:15 UTC／北京时间15:15：按“继续”恢复状态视图目标。**
+
+PR107仍open draft；开发与新真实Host流程冻结d4756a0，main64f006f。共同Reader选择／切换／
+重装、stage计数、当前权限下纯保存跨会话续办及新尝试反馈已接通；九项窄检查、类型／格式／
+依赖边界通过。自身Fast37742073430仍in_progress，Full37742073455 skipped。
+首个18e3935真实试验两条后停止：一条截断却声称保存，一条提交后原选择绑定变化。
+8生成48473known／2embedding37tokens，unknown新增0、Judge0；原件保留。d475只修绑定不重试旧请求。
+新三个正常链共18消息串行在新空库执行，观察时第一条闭合提交；“尽量→严格”的语义强化保留。
+未有三链终态、完整候选或D0／D1／D2效果结论。旧4e中断任务不恢复，16保留未用、Product NO_GO。
+下方暂停与旧时点均为历史；详细版本、检查及失败见[报告](MILAI_UNIFIED_MEMORY_USAGE.md)。
+
+**2026-10-08 06:30:20 UTC／北京时间14:30:20：发布当前视图开发，完成提交后暂停。**
+
+main64f006f、PR83–106已合并；PR106受测头8155d2c自身Fast成功。新源码230ed2b在独立
+feat/lab-state-driven-view-20261008分支以draft发布，尚未合并／验证真实方法效果。
+按状态视图计划已合流：实际候选目录与引用工作集、普通Host每轮驻留投影、选中完整事项
+后维护、分项提交中断的原回执恢复。唯一模式memory_view_mode默认legacy；新Host及
+仅Writer视图的M前八配置已准备、实际0。Root10项直接检查、六源strict mypy、Ruff、包
+边界通过；脚本transport／真实SQLite不是独立语义确认。benchmark Reader导航、stage
+分析闭合、纯保存跨会话权限绑定与complete空输出后的补保存仍未完成，不能宣布共同D2
+候选工程完成。用户最新要求发布后暂停；发布完成后不自动继续开发、测试或真实模型任务。
+
+旧运行冻结4e已在05:15:53 UTC退出-2，PID1675659不存在；B0／B1／B2各32预测闭合，
+M23/32[8,8,7,0]、Append未启动、score/Judge0。M第三用户原7 qa/8保存请求未确认，
+不重启／盲重试。连续账本46,041 requests／195,934,499 known／196,211,195 charged，
+unknown6（此前5＋中断1），embedding1,899,002；本批开发没有新增真实调用。Root263
+完整答案、来源审计部分，无重评分。旧505负结果、原无效标签和下方原时点保留。
+完整目标暂停而未完成，16保留未用，Product NO_GO。
+详见[阶段交接、检查与完整未完范围](MILAI_UNIFIED_MEMORY_USAGE.md)。以下均为固定历史观察。
+
 **2026-10-08 05:10:24 UTC／北京时间13:10:24：三臂预测闭合，空维护反馈修正。**
 
 main bafced5、PR83–105已合并；PR105自身Fast成功、既有分类不要求Full。运行仍冻结4e：

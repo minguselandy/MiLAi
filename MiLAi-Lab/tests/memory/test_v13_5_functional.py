@@ -20,6 +20,7 @@ from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.functional_state import FunctionalRejection, canonical, namespace
 from milai_lab.memory.service import MemoryService
+from milai_lab.memory.working_set import empty_view, select_view_refs
 
 CONFIG_VERSION = "synthetic-v1"
 
@@ -85,6 +86,101 @@ def invoke(
         {"name": tool, "args": args, "id": call, "type": "tool_call"}, config=config or cfg()
     )
     return json.loads(response.content)
+
+
+def test_state_driven_catalog_switch_reopen_reload_and_forget(tmp_path: Path) -> None:
+    options = {"memory_view_mode": "state_driven", "read_limit": 20,
+               "read_interface": "explicit_selectors_v1"}
+    with opened(tmp_path, **options) as memory:
+        atlas_ref = turn(memory, text="Atlas uses two visits weekly; holidays pause the plan.")
+        atlas = memory.save(cfg(), "atlas-save",
+                            "Atlas uses two visits weekly; holidays pause the plan.",
+                            handles(memory, atlas_ref))
+        orchid_ref = turn(memory, "orchid", "Orchid keeps an evening review, date undecided.")
+        orchid = memory.save(cfg("orchid"), "orchid-save",
+                             "Orchid keeps an evening review, date undecided.",
+                             handles(memory, orchid_ref))
+        turn(memory, "query", "Compare the Atlas and Orchid arrangements.")
+        config = cfg("query")
+        directory = memory.context("s", "query", CONFIG_VERSION)
+        assert directory["delivered_semantic_record_count"] == 0
+        assert {item["record_id"] for item in directory["candidates"]
+                if item["type"] == "record_candidate"} == {atlas["id"], orchid["id"]}
+        assert all(item["type"] == "fragment" for item in directory["items"])
+        assert "read_handle" not in canonical(directory["candidates"])
+        search = invoke(memory, "search_memory", {"query": "Atlas"}, "catalog", config)
+        assert search["items"] == [] and search["delivered_units"] == 0
+        assert search["delivered_raw_fragment_count"] == 0
+        first = invoke(memory, "read_memory", {"record_id": atlas["id"]}, "atlas", config)
+        assert "holidays pause" in first["items"][0]["content"]
+        invoke(memory, "read_memory", {"record_id": orchid["id"]}, "orchid", config)
+        assert {item["record_id"] for item in memory.resident_items(config)} == {orchid["id"]}
+        invoke(memory, "read_memory", {"record_id": atlas["id"], "keep_resident": True},
+               "both", config)
+        assert {item["record_id"] for item in memory.resident_items(config)} == {
+            atlas["id"], orchid["id"]}
+        state = memory.view_state(config)
+        assert set(state) == {"focus", "read_goal", "resident_refs", "pending_refs"}
+        assert "content" not in canonical(state)
+        memory.focus_view(config, focus=orchid["id"], read_goal="current", resident_refs=[
+            ref for ref in state["resident_refs"] if ref["id"] == orchid["id"]])
+        assert memory.service.store.get(namespace(memory.service), first["snapshot_id"])
+    with opened(tmp_path, **options) as memory:
+        memory.context("s", "query", CONFIG_VERSION)
+        config = cfg("query")
+        assert {item["record_id"] for item in memory.resident_items(config)
+                if item["type"] == "record"} == {orchid["id"]}
+        reloaded = invoke(memory, "read_memory", {"record_id": atlas["id"]}, "reload", config)
+        assert reloaded["items"] == first["items"]
+        invoke(memory, "read_source", {"source_ref": atlas_ref}, "original", config)
+        assert {item["type"] for item in memory.resident_items(config)} == {"record", "fragment"}
+        old_refs = memory.view_state(config)["resident_refs"]
+        forgotten = memory.service.forget(
+            "s", "query", fragment_handles=handles(memory, atlas_ref))
+        assert forgotten["ok"]
+        turn(memory, "after", "Show the remaining Orchid arrangement.")
+        memory.focus_view(cfg("after"), resident_refs=old_refs)
+        assert memory.resident_items(cfg("after")) == []
+        visible = invoke(memory, "read_memory", {"record_id": orchid["id"]}, "remaining",
+                         cfg("after"))
+        assert visible["ok"] and "date undecided" in visible["items"][0]["content"]
+
+
+def test_state_view_current_refresh_and_fixed_pool_selection(tmp_path: Path) -> None:
+    with opened(tmp_path, memory_view_mode="state_driven", read_limit=10,
+                read_interface="explicit_selectors_v1") as memory:
+        original = turn(memory, text="Atlas visits twice weekly; holidays pause visits.")
+        saved = memory.save(cfg(), "save", "Atlas visits twice weekly; holidays pause visits.",
+                            handles(memory, original))
+        correction = turn(memory, "change", "Atlas now visits three times weekly; holidays pause.")
+        config = cfg("change")
+        before = invoke(memory, "read_memory", {"record_id": saved["id"]}, "before", config)
+        old_handle = before["items"][0]["read_handle"]
+        revised = memory.update(config, "revise", old_handle, [{"field": "content", "op": "set",
+            "value": "Atlas visits three times weekly; holidays pause visits.",
+            "fragment_handles": handles(memory, correction)}])
+        assert revised["ok"] and revised["revision"] == 2
+        current = invoke(memory, "read_memory", {"record_id": saved["id"]}, "current", config)
+        assert {ref["revision"] for ref in memory.view_state(config)["resident_refs"]
+                if ref["kind"] == "record"} == {2}
+        history = invoke(memory, "read_memory_revision",
+                         {"record_id": saved["id"], "revision": 1}, "history", config)
+        pool = [*current["view_refs"], *history["view_refs"]]
+        state = select_view_refs(empty_view(), pool, [{"id": saved["id"], "view": "current"}])
+        assert {ref["revision"] for ref in state["resident_refs"]} == {2}
+        state = select_view_refs(state, pool,
+                                 [{"id": saved["id"], "revision": 1, "view": "saved_history"}])
+        assert {(ref["revision"], ref["view"]) for ref in state["resident_refs"]} == {
+            (2, "current_at_snapshot"), (1, "historical_exact_revision")}
+        state = select_view_refs(empty_view(), pool, [{"id": "outside-fixed-pool"}])
+        assert state["resident_refs"] == []
+        bound = memory._binding(config)
+        search = invoke(memory, "search_memory", {"query": "holidays"}, "explore", config)
+        assert memory._binding(config) == bound and search["delivered_units"] == 0
+        assert all(len(candidate["description"]) <= memory.fragment_chars
+                   for candidate in search["candidates"] if candidate["type"] == "source_candidate")
+        with pytest.raises(FunctionalRejection, match="PUBLIC_QUERY_CHANGED"):
+            memory.context("s", "change", CONFIG_VERSION, query="holidays")
 
 
 def test_support_context_keeps_selected_bodies_separate_from_exact_record_and_old_support(

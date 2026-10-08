@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any, Literal, cast
 
 import httpx
+from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 from langgraph.store.sqlite import SqliteStore
 from pydantic import ValidationError
 from transformers import AutoTokenizer
@@ -40,6 +41,12 @@ from milai_lab.memory.edit_units import (
 from milai_lab.memory.functional_state import FunctionalRejection, resolve_fragment
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
+from milai_lab.memory.working_set import (
+    empty_view,
+    item_ref,
+    record_candidate,
+    select_view_refs,
+)
 from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import MaintenanceRecipe, maintain_event
@@ -427,6 +434,8 @@ class BenchmarkRun:
         self, settings: dict[str, Any], root: Path, *, phase: str = "all"
     ) -> None:
         self.settings, self.root, self.phase = settings, root, phase
+        if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
+            raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
         root.mkdir(parents=True, exist_ok=True)
         self.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
             settings["tokenizer_path"],
@@ -1012,6 +1021,10 @@ class BenchmarkRun:
             ) -> dict[str, Any]:
                 http_folder = f"maintenance/{key}/batch-{batch_index}"
                 active_request_id = f"{key}:batch:{batch_index}"
+                stage_name, _, work_ref = stage.partition(":")
+                stage_path = stage_name
+                if work_ref:
+                    stage_path += f"/work-{work_ref.rsplit(':', 1)[-1]}"
                 calls_path = folder / f"batch-{batch_index}-calls.json"
                 calls: list[dict[str, Any]] = []
                 if service.memory_profile == "unified_v1":
@@ -1028,15 +1041,26 @@ class BenchmarkRun:
                         child_index = checkpoint.value["next_batch"]
                         active_request_id += f":batch:{child_index}"
                         http_folder += f"/subbatch-{child_index}"
+                    if work_ref:
+                        if stage_name == "edit":
+                            active_request_id = work_ref
                     calls = read_json(calls_path) if calls_path.exists() else []
+                    http_key = http_folder + "/" + stage_path
+                    if self.settings.get("memory_view_mode", "legacy") != "legacy":
+                        recorded = {item["http_key"] for item in calls if (
+                            self.root / "http" / item["http_key"] / "request.json"
+                        ).exists()}
+                        if (http_key not in recorded
+                                and len(recorded) >= self.client.config.max_calls):
+                            raise FunctionalRejection("EDIT_MODEL_CALL_LIMIT_REACHED")
                     calls.append({"request_id": active_request_id, "stage": stage,
-                                  "http_key": http_folder + "/" + stage,
+                                  "http_key": http_folder + "/" + stage_path,
                                   "response_saved": False})
                     write_json(calls_path, calls)
                 response = self.call(
-                    http_folder + "/" + stage, messages, structured=True,
+                    http_folder + "/" + stage_path, messages, structured=True,
                     response_format={"type": "json_schema", "json_schema": {
-                        "name": "milai_" + stage, "schema": schema}},
+                        "name": "milai_" + stage_name, "schema": schema}},
                 )
                 if calls:
                     calls[-1]["response_saved"] = True
@@ -1047,6 +1071,7 @@ class BenchmarkRun:
                 method, delivery, session=observed.session_id, request_id=request_id,
                 date=observed.date,
                 recipe=cast(MaintenanceRecipe, self.settings["maintenance_recipe"]),
+                memory_view_mode=self.settings.get("memory_view_mode", "legacy"),
                 model_call=call, retrieval_limit=self.settings["retrieval_limit"], fit=self._fits,
                 prepare_delivery=lambda located: self._old_support_plan(
                     method, located, located["records"], observed.date, allow_create=True
@@ -1478,7 +1503,11 @@ class BenchmarkRun:
                     "revision": row["value"]["revision"],
                     "revision_evidence": read_revision_evidence(service, row["value"]),
                     **({"record_id": row["id"]}
-                       if service.memory_profile == "unified_v1" else {}),
+                       if service.memory_profile == "unified_v1"
+                       or self.settings.get("memory_view_mode", "legacy") != "legacy" else {}),
+                    **({"matter_description": (row["value"].get("edit_state") or {}).get(
+                        "matter_description", row["value"]["scope"]
+                    )} if self.settings.get("memory_view_mode", "legacy") != "legacy" else {}),
                     **({"applicability": (
                         EditMemory.revision_view(
                             row["value"], query_time=date,
@@ -1500,19 +1529,109 @@ class BenchmarkRun:
             ]
             write_json(snapshot, memories)
         cached_response = (snapshot.parent / "response.json").exists()
-        answer = self.call(
-            key,
-            reader_messages(question, date, memories),
-            structured=False,
-        )
+        answer, used_memories = self.answer_material(question, date, key, memories)
         if service.memory_profile == "unified_v1":
             from milai_lab.memory.activation import ActivationIndex
 
             index = ActivationIndex(service)
-            for memory in memories:
+            for memory in used_memories:
                 if "record_id" in memory:
                     index.record_use(memory["record_id"], request_id=key, cached=cached_response)
         return answer
+
+    def answer_material(
+        self, question: str, date: str, key: str, memories: list[dict[str, Any]],
+    ) -> tuple[str, list[dict[str, Any]]]:
+        """Shared Reader over an actual retained retrieval snapshot, without new search.
+
+        The ordinary caller owns retrieval and access. The finite view comparison
+        uses the exact saved pool, so changing delivery cannot add sources or facts.
+        """
+        if self.settings.get("memory_view_mode", "legacy") == "legacy":
+            return self.call(
+                key, reader_messages(question, date, memories), structured=False
+            ), memories
+        return self._answer_view(question, date, key, memories)
+
+    def _answer_view(
+        self, question: str, date: str, key: str, memories: list[dict[str, Any]],
+    ) -> tuple[str, list[dict[str, Any]]]:
+        """Read the fixed actual pool with the same reference state as ordinary Host.
+
+        QA is a read request, never a new source. The saved retrieval remains the
+        only candidate pool; whole selected records retain the original Reader's
+        conditions, revision evidence and scope. Every navigation call uses call()
+        and the original model call allowance, reserving one call for the answer.
+        """
+        mode = self.settings["memory_view_mode"]
+        path = self.root / "http" / key / "memory-view.json"
+        state = read_json(path) if path.exists() else {
+            **empty_view(), "steps": 0, "complete": False, "opened_ids": [],
+        }
+        refs = [item_ref({
+            "type": "record", "record_id": memory["record_id"],
+            "revision": memory["revision"], "version_view": "current_at_snapshot",
+            "content_range": [0, len(memory["content"])],
+        }, key + "/retrieval.json", index) for index, memory in enumerate(memories)]
+        directory = [record_candidate(
+            memory["record_id"], memory["revision"],
+            memory.get("matter_description", memory["scope"]), len(memory["content"]),
+        ) for memory in memories]
+        schema = {
+            "type": "object", "additionalProperties": False,
+            "properties": {
+                "record_ids": {"type": "array", "uniqueItems": True, "items": {
+                    "type": "string", "enum": [memory["record_id"] for memory in memories]
+                }} if memories else {"type": "array", "maxItems": 0},
+                "keep_resident": {"type": "boolean"}, "done": {"type": "boolean"},
+            }, "required": ["record_ids", "keep_resident", "done"],
+        }
+        call_limit = self.client.config.max_calls
+        if call_limit < 1:
+            raise FunctionalRejection("READ_MODEL_CALL_LIMIT_REACHED")
+        read_limit = min(self.settings.get("additional_reads", call_limit - 1), call_limit - 1)
+
+        def resident() -> list[dict[str, Any]]:
+            return [memories[ref["unit_index"]] for ref in state["resident_refs"]]
+
+        while memories and not state["complete"] and state["steps"] < read_limit:
+            messages = reader_messages(question, date, resident())
+            messages[0]["content"] += (
+                "\nThis call selects actual whole matters to read before answering. "
+                "Directory descriptions locate records; they are not evidence. Select "
+                "record_ids to open. Selecting another matter replaces the resident body; "
+                "keep_resident retains selected bodies for a comparison. Previously opened "
+                "bodies can be loaded again. Select all necessary matters before a final "
+                "comparison; old read identities do not contain their details. Set done "
+                "when the selected material suffices or no justified reading remains. "
+                "Return only the supplied selection schema, not the final answer."
+            )
+            payload = json.loads(messages[1]["content"])
+            payload.update(memory_view_state={name: state[name] for name in empty_view()},
+                           candidates=directory, opened_ids=state["opened_ids"],
+                           remaining_reads=read_limit - state["steps"], response_schema=schema)
+            messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+            selected = parse_object(self.call(
+                f"{key}/view/select-{state['steps']}", messages, structured=True,
+                response_format={"type": "json_schema", "json_schema": {
+                    "name": "milai_reader_select", "schema": schema,
+                }},
+            ), reject_duplicate_keys=True)
+            Draft202012Validator(schema).validate(selected)
+            state.update(select_view_refs(
+                state, refs, [{"id": identifier} for identifier in selected["record_ids"]],
+                keep_resident=selected["keep_resident"],
+            ))
+            state["steps"] += 1
+            state["opened_ids"] = list(dict.fromkeys([
+                *state["opened_ids"], *selected["record_ids"],
+            ]))
+            state["complete"] = mode == "staged" or selected["done"] or not selected["record_ids"]
+            write_json(path, state)
+        state["complete"] = True
+        write_json(path, state)
+        answer = self.call(key, reader_messages(question, date, resident()), structured=False)
+        return answer, [memory for memory in memories if memory["record_id"] in state["opened_ids"]]
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:
         """Audit actual memory values around gold-guided, evaluator-only retrieval.
