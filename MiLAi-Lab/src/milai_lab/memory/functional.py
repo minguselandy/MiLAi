@@ -16,7 +16,7 @@ from typing import Annotated, Any, Literal, cast
 from langchain_core.messages import ToolMessage
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, create_model
 
 from milai_lab.memory.functional_maintenance import bounded_support_review
 from milai_lab.memory.functional_state import (
@@ -33,6 +33,7 @@ from milai_lab.memory.functional_state import (
     scope_leaves,
 )
 from milai_lab.memory.service import MemoryService, _lexical_tokens
+from milai_lab.memory.working_set import admit_refs, catalog_candidates, empty_view, item_ref
 
 
 class SavedAssertion(BaseModel):
@@ -151,6 +152,26 @@ class SupportContextSelector(ReadSelector):
     read_handle: str | None = None
 
 
+class ResidentRecordSelector(RecordSelector):
+    keep_resident: bool = False
+
+
+class ResidentRevisionSelector(RevisionSelector):
+    keep_resident: bool = False
+
+
+class ResidentSourceSelector(SourceSelector):
+    keep_resident: bool = False
+
+
+class ResidentFragmentSelector(FragmentSelector):
+    keep_resident: bool = False
+
+
+class ResidentPageSelector(PageSelector):
+    keep_resident: bool = False
+
+
 class ReadSelectorTool(StructuredTool):
     """Preserve the selector model's constraints in the model-visible schema."""
 
@@ -179,6 +200,7 @@ class FunctionalMemory:
         formation_interface: str = "content_and_scope_v1",
         read_interface: str = "combined_selectors_v1",
         recent_context: str = "disabled",
+        memory_view_mode: str = "legacy",
         existing_confirmation: bool = False,
         support_context: bool = False,
         semantic_reproposal_policy: str = "message_limit_only",
@@ -225,6 +247,9 @@ class FunctionalMemory:
         if recent_context not in {"disabled", "session_events_v1", "bank_recent_v2"}:
             raise FunctionalRejection("V13_5_RECENT_CONTEXT_INVALID")
         self.recent_context = recent_context
+        if memory_view_mode not in {"legacy", "staged", "state_driven"}:
+            raise FunctionalRejection("FUNCTIONAL_MEMORY_VIEW_MODE_INVALID")
+        self.memory_view_mode = memory_view_mode
         self.read_limit, self.material_limit, self.fragment_chars = (
             read_limit,
             material_limit,
@@ -248,6 +273,8 @@ class FunctionalMemory:
             self.policy["semantic_reproposal_policy"] = semantic_reproposal_policy
         if recent_context != "disabled":
             self.policy["recent_context"] = recent_context
+        if memory_view_mode != "legacy":
+            self.policy["memory_view_mode"] = memory_view_mode
         if revision_support_review is not None:
             self.policy["revision_support_review"] = "selected_originals_v1"
         if formation_support_review is not None:
@@ -357,6 +384,73 @@ class FunctionalMemory:
                     body_page_tool="read_page" if explicit else "read_memory",
                 )
         return units
+
+    def _view_key(self, config: RunnableConfig) -> str:
+        bound = self._binding(config)
+        return "memory-view:" + reference_key([bound["session"], bound["message_id"]])
+
+    def view_state(self, config: RunnableConfig) -> dict[str, Any]:
+        """Return reference-only selection; read coverage remains in existing read receipts."""
+        stored = self.service.store.get(namespace(self.service), self._view_key(config))
+        return copy.deepcopy(stored.value) if stored else empty_view()
+
+    def focus_view(
+        self, config: RunnableConfig, *, focus: Any = None, read_goal: str | None = None,
+        resident_refs: list[dict[str, Any]] | None = None,
+        pending_refs: list[Any] | None = None,
+    ) -> dict[str, Any]:
+        state = self.view_state(config)
+        state["focus"], state["read_goal"] = focus, read_goal
+        if resident_refs is not None:
+            state["resident_refs"] = copy.deepcopy(resident_refs)
+        if pending_refs is not None:
+            state["pending_refs"] = copy.deepcopy(pending_refs)
+        self.service.store.put(namespace(self.service), self._view_key(config), state, index=False)
+        return copy.deepcopy(state)
+
+    def _note_view_page(
+        self, config: RunnableConfig, result: dict[str, Any], *,
+        keep_resident: bool = False, refresh_current: bool = False,
+    ) -> None:
+        if self.memory_view_mode == "legacy" or not result.get("ok"):
+            return
+        refs = result.get("view_refs", [])
+        if not refs:
+            return
+        state = self.view_state(config)
+        if refresh_current:
+            affected = {ref["id"] for ref in refs if ref["kind"] == "record"}
+            state["resident_refs"] = [
+                ref for ref in state["resident_refs"]
+                if ref["kind"] != "record" or ref["id"] not in affected
+                or ref["view"] != "current_at_snapshot"
+            ]
+        state = admit_refs(state, refs, keep_resident=keep_resident or refresh_current)
+        self.service.store.put(namespace(self.service), self._view_key(config), state, index=False)
+
+    def resident_items(self, config: RunnableConfig) -> list[dict[str, Any]]:
+        """Reload delivered units through original Source/record visibility boundaries."""
+        items = []
+        for ref in self.view_state(config)["resident_refs"]:
+            snapshot = self.service.store.get(namespace(self.service), ref["snapshot_id"])
+            if snapshot is None:
+                continue
+            unit = copy.deepcopy(snapshot.value["items"][ref["unit_index"]])
+            if unit["type"] == "fragment":
+                try:
+                    self.service.source_fragment(unit["fragment_handle"])
+                except ValueError:
+                    continue
+            else:
+                row = self.service.read(unit["record_id"], unit["revision"])
+                if not row.get("ok"):
+                    continue
+                if unit["version_view"] == "current_at_snapshot":
+                    current = self.service.read(unit["record_id"])
+                    if current.get("ok") and current["value"]["revision"] != unit["revision"]:
+                        unit["version_view"] = "historical_exact_revision"
+            items.append(unit)
+        return items
 
     def _deduplicate(self, units: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Subtract only already delivered intervals of this exact Source/body version."""
@@ -530,8 +624,11 @@ class FunctionalMemory:
             raise FunctionalRejection("V13_5_CURSOR_RANGE_INVALID")
         chosen: list[dict[str, Any]] = []
         skipped: list[dict[str, Any]] = []
+        directory = value["kind"].endswith("_catalog")
 
         def packet(end: int) -> dict[str, Any]:
+            bodies = [unit for unit in chosen if not unit["type"].endswith("_candidate")]
+            candidates = [unit for unit in chosen if unit["type"].endswith("_candidate")]
             return {
                 "ok": True,
                 "schema": "functional_material_v1",
@@ -553,9 +650,17 @@ class FunctionalMemory:
                     if value["kind"] == "support_context"
                     else {}
                 ),
-                "items": chosen,
+                "items": bodies,
+                **({
+                    "candidates": candidates,
+                    "candidate_count": len(candidates),
+                    "candidate_scope": "navigation_only_not_body_read_or_fact_support",
+                } if directory else {}),
+                **({
+                    "view_refs": [item_ref(unit, key, items.index(unit)) for unit in bodies],
+                } if self.memory_view_mode != "legacy" else {}),
                 "start": start,
-                "delivered_units": len(chosen),
+                "delivered_units": len(bodies),
                 "total_units": len(items),
                 "omitted_units": len(items) - end + len(skipped),
                 "skipped_units": skipped,
@@ -566,7 +671,7 @@ class FunctionalMemory:
                 "material_limit": self.material_limit,
                 "semantic_support": "unchecked",
                 "business_authority": False,
-                **self._read_only_metadata(chosen),
+                **self._read_only_metadata(bodies),
                 "delivery_status": ("partial_with_omissions" if skipped else "partial")
                 if end < len(items)
                 else ("snapshot_end_with_omissions" if skipped else "complete_snapshot"),
@@ -587,7 +692,10 @@ class FunctionalMemory:
 
         end = start
         for index, unit in enumerate(items[start:], start):
-            if unit["type"] == "fragment":
+            if unit["type"] == "source_candidate":
+                if self.service.source(unit["source_ref"]) is None:
+                    raise FunctionalIntegrityError("V13_5_SNAPSHOT_SOURCE_CHANGED")
+            elif unit["type"] == "fragment":
                 actual = self.service.source_fragment(unit["fragment_handle"])
                 if actual["source_ref"] != unit["source_ref"] or actual.get(
                     "source_revision", 1
@@ -633,7 +741,7 @@ class FunctionalMemory:
             raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
         refs = [
             ref
-            for unit in chosen
+            for unit in chosen if not unit["type"].endswith("_candidate")
             for ref in ([unit["source_ref"]] if unit["type"] == "fragment" else unit["source_refs"])
         ]
         with self.service._locked():
@@ -715,7 +823,29 @@ class FunctionalMemory:
             )
         else:
             snapshot = cached.value["snapshot"]
-        return self._page(snapshot, 0, bound)
+        if self.memory_view_mode == "legacy":
+            return self._page(snapshot, 0, bound)
+        cached = self.service.store.get(namespace(self.service), key)
+        assert cached is not None
+        catalog_snapshot = cached.value.get("catalog_snapshot")
+        if catalog_snapshot is None:
+            stored = self.service.store.get(namespace(self.service), snapshot)
+            assert stored is not None
+            current = [unit for unit in stored.value["items"] if unit.get("source_ref") == ref]
+            candidates = catalog_candidates([
+                unit for unit in stored.value["items"] if unit.get("source_ref") != ref
+            ])
+            catalog_snapshot = self._snapshot(bound, current + candidates, "ordinary_catalog")
+            self.service.store.put(namespace(self.service), key, {
+                **cached.value, "catalog_snapshot": catalog_snapshot,
+            }, index=False)
+        page = self._page(catalog_snapshot, 0, bound)
+        config: RunnableConfig = {"configurable": {
+            "user_id": self.service.owner, "v13_session": session,
+            "v13_turn_id": turn_id, "v13_config_version": config_version,
+        }}
+        self._note_view_page(config, page)
+        return page
 
     def _source_support(self, version: dict[str, Any]) -> dict[str, list[str]]:
         if "functional_support" in version:
@@ -1306,7 +1436,11 @@ class FunctionalMemory:
                 if previous["forget_epoch"] != self.forget_epoch:
                     raise FunctionalRejection("V13_5_READ_REPLAY_REVOKED")
                 if "result" in previous:
-                    return cast(dict[str, Any], previous["result"])
+                    replay = cast(dict[str, Any], previous["result"])
+                    self._note_view_page(
+                        config, replay, keep_resident=arguments.get("keep_resident", False)
+                    )
+                    return replay
                 raise FunctionalIntegrityError("V13_5_READ_OUTCOME_UNKNOWN")
             if len(state["calls"]) >= self.read_limit:
                 exhausted = {
@@ -1348,6 +1482,9 @@ class FunctionalMemory:
             result = {**result, **self._read_only_metadata([])}
             if self.token_count(canonical(result)) > self.material_limit:
                 raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
+        self._note_view_page(
+            config, result, keep_resident=arguments.get("keep_resident", False)
+        )
         try:
             with self.service._locked():
                 current = self.service.store.get(namespace(self.service), key)
@@ -1602,6 +1739,8 @@ class FunctionalMemory:
             Record units are existing versions, possibly partial bodies. Counts refer
             only to delivered items. Search never saves or updates: confirm a semantic
             write only from a successful save_memory/update_memory receipt.
+            In a staged/state-driven view, candidates only navigate: open selected
+            record_id/source_ref with the existing read tools for its actual body.
             """
             return message(
                 "search_memory",
@@ -1611,7 +1750,13 @@ class FunctionalMemory:
                     tool_call_id,
                     {"tool": "search_memory", "query": query},
                     lambda bound: self._page(
-                        self._snapshot(bound, self._search_units(query), "explicit_search"),
+                        self._snapshot(
+                            bound,
+                            self._search_units(query) if self.memory_view_mode == "legacy"
+                            else catalog_candidates(self._search_units(query)),
+                            "explicit_search" if self.memory_view_mode == "legacy"
+                            else "explicit_search_catalog",
+                        ),
                         0,
                         bound,
                     ),
@@ -1699,6 +1844,7 @@ class FunctionalMemory:
             cursor: str | None = None,
             history: bool = False,
             history_cursor: str | None = None,
+            keep_resident: bool = False,
         ) -> ToolMessage:
             """Read current/exact historical revision, or a previously issued cursor.
 
@@ -1722,6 +1868,8 @@ class FunctionalMemory:
                     "cursor": cursor,
                     "history": history,
                     "history_cursor": history_cursor,
+                    **({"keep_resident": keep_resident}
+                       if self.memory_view_mode != "legacy" else {}),
                 },
             )
 
@@ -1768,6 +1916,7 @@ class FunctionalMemory:
             fragment_handle: str | None = None,
             source_ref: str | None = None,
             cursor: str | None = None,
+            keep_resident: bool = False,
         ) -> ToolMessage:
             """Read an issued exact fragment or a full public source group, continuing its cursor.
 
@@ -1785,6 +1934,8 @@ class FunctionalMemory:
                     "fragment_handle": fragment_handle,
                     "source_ref": source_ref,
                     "cursor": cursor,
+                    **({"keep_resident": keep_resident}
+                       if self.memory_view_mode != "legacy" else {}),
                 },
             )
 
@@ -1793,6 +1944,7 @@ class FunctionalMemory:
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
+            keep_resident: bool = False,
         ) -> ToolMessage:
             """Read the current version of an issued record ID, without changing it.
 
@@ -1802,7 +1954,9 @@ class FunctionalMemory:
             Every read uses the shared explicit read allowance; it is not a save.
             """
             return record_read(
-                config, tool_call_id, {"tool": "read_memory", "record_id": record_id}
+                config, tool_call_id, {"tool": "read_memory", "record_id": record_id,
+                    **({"keep_resident": keep_resident}
+                       if self.memory_view_mode != "legacy" else {})}
             )
 
         def read_memory_history(
@@ -1810,6 +1964,7 @@ class FunctionalMemory:
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
+            keep_resident: bool = False,
         ) -> ToolMessage:
             """Read original stored revision bodies for one issued record ID.
 
@@ -1820,7 +1975,9 @@ class FunctionalMemory:
             return record_read(
                 config,
                 tool_call_id,
-                {"tool": "read_memory_history", "record_id": record_id, "history": True},
+                {"tool": "read_memory_history", "record_id": record_id, "history": True,
+                    **({"keep_resident": keep_resident}
+                       if self.memory_view_mode != "legacy" else {})},
             )
 
         def read_memory_revision(
@@ -1829,6 +1986,7 @@ class FunctionalMemory:
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
+            keep_resident: bool = False,
         ) -> ToolMessage:
             """Read one exact stored historical revision without making it current.
 
@@ -1839,7 +1997,9 @@ class FunctionalMemory:
             return record_read(
                 config,
                 tool_call_id,
-                {"tool": "read_memory_revision", "record_id": record_id, "revision": revision},
+                {"tool": "read_memory_revision", "record_id": record_id, "revision": revision,
+                    **({"keep_resident": keep_resident}
+                       if self.memory_view_mode != "legacy" else {})},
             )
 
         def read_source_group(
@@ -1847,6 +2007,7 @@ class FunctionalMemory:
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
+            keep_resident: bool = False,
         ) -> ToolMessage:
             """Read a full original source group using its issued source_ref.
 
@@ -1855,7 +2016,9 @@ class FunctionalMemory:
             and state omissions. Uses the shared read allowance, never a semantic save.
             """
             return source_read(
-                config, tool_call_id, {"tool": "read_source", "source_ref": source_ref}
+                config, tool_call_id, {"tool": "read_source", "source_ref": source_ref,
+                    **({"keep_resident": keep_resident}
+                       if self.memory_view_mode != "legacy" else {})}
             )
 
         def read_fragment(
@@ -1863,6 +2026,7 @@ class FunctionalMemory:
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
+            keep_resident: bool = False,
         ) -> ToolMessage:
             """Read the exact original fragment identified by an issued fragment_handle.
 
@@ -1871,7 +2035,9 @@ class FunctionalMemory:
             semantic formation and uses the shared explicit read allowance.
             """
             return source_read(
-                config, tool_call_id, {"tool": "read_fragment", "fragment_handle": fragment_handle}
+                config, tool_call_id, {"tool": "read_fragment", "fragment_handle": fragment_handle,
+                    **({"keep_resident": keep_resident}
+                       if self.memory_view_mode != "legacy" else {})}
             )
 
         def read_page(
@@ -1879,6 +2045,7 @@ class FunctionalMemory:
             config: RunnableConfig,
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
+            keep_resident: bool = False,
         ) -> ToolMessage:
             """Continue an issued next_cursor from ordinary material or any explicit read.
 
@@ -1886,7 +2053,9 @@ class FunctionalMemory:
             snapshot, never fresh latest results. Visibility revocation still applies.
             Uses the shared explicit read allowance and never writes semantic records.
             """
-            return record_read(config, tool_call_id, {"tool": "read_page", "cursor": cursor})
+            return record_read(config, tool_call_id, {"tool": "read_page", "cursor": cursor,
+                **({"keep_resident": keep_resident}
+                   if self.memory_view_mode != "legacy" else {})})
 
         def read_support_context(
             fragment_handles: list[str],
@@ -2219,23 +2388,49 @@ class FunctionalMemory:
             if self.existing_confirmation
             else ()
         )
+
+        def combined_read_tool(function: Callable[..., Any]) -> StructuredTool:
+            tool = StructuredTool.from_function(function)
+            if self.memory_view_mode == "legacy":
+                schema = cast(type[BaseModel], tool.args_schema)
+                fields: Any = {
+                    name: (field.annotation, copy.deepcopy(field))
+                    for name, field in schema.model_fields.items() if name != "keep_resident"
+                }
+                tool.args_schema = create_model(schema.__name__, **fields)
+            return tool
+
+        resident = self.memory_view_mode != "legacy"
         read_tools = (
             (
                 ReadSelectorTool.from_function(
-                    read_current_memory, name="read_memory", args_schema=RecordSelector
+                    read_current_memory, name="read_memory",
+                    args_schema=ResidentRecordSelector if resident else RecordSelector
                 ),
-                ReadSelectorTool.from_function(read_memory_history, args_schema=RecordSelector),
-                ReadSelectorTool.from_function(read_memory_revision, args_schema=RevisionSelector),
                 ReadSelectorTool.from_function(
-                    read_source_group, name="read_source", args_schema=SourceSelector
+                    read_memory_history,
+                    args_schema=ResidentRecordSelector if resident else RecordSelector,
                 ),
-                ReadSelectorTool.from_function(read_fragment, args_schema=FragmentSelector),
-                ReadSelectorTool.from_function(read_page, args_schema=PageSelector),
+                ReadSelectorTool.from_function(
+                    read_memory_revision,
+                    args_schema=ResidentRevisionSelector if resident else RevisionSelector,
+                ),
+                ReadSelectorTool.from_function(
+                    read_source_group, name="read_source",
+                    args_schema=ResidentSourceSelector if resident else SourceSelector,
+                ),
+                ReadSelectorTool.from_function(
+                    read_fragment,
+                    args_schema=ResidentFragmentSelector if resident else FragmentSelector,
+                ),
+                ReadSelectorTool.from_function(
+                    read_page, args_schema=ResidentPageSelector if resident else PageSelector,
+                ),
             )
             if self.read_interface == "explicit_selectors_v1"
             else (
-                StructuredTool.from_function(read_memory),
-                StructuredTool.from_function(read_source),
+                combined_read_tool(read_memory),
+                combined_read_tool(read_source),
             )
         )
         return (
