@@ -2408,6 +2408,10 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
 @pytest.mark.parametrize("query_time,calendar_context,expected", [
     ("Oct 07, 2025, 10:00:00", "team-calendar", "within_explicit_limits"),
     ("Oct 09, 2025, 10:00:00", "team-calendar", "expired"),
+    ("September 30, 2025", "team-calendar", "before_explicit_start"),
+    ("October 1, 2025", "team-calendar", "within_explicit_limits"),
+    ("Oct 7, 2025", "team-calendar", "within_explicit_limits"),
+    ("October 8, 2025", "team-calendar", "expired"),
     ("Oct 07, 2025, 10:00:00", None, "time_context_unresolved"),
     ("Oct 07, 2025, 10:00:00", "different-calendar", "time_context_unresolved"),
     (None, None, "time_context_unresolved"),
@@ -2429,8 +2433,8 @@ def test_reader_uses_one_explicit_query_clock_and_only_declared_calendar(
             "action": "create", "matter": "Temporary reminder preference", "units": [{
                 "text": "Quiet reminders apply only during the stated interval.",
                 "evidence": ["e1"], "assertion": {"source": "e1", "kind": "reported",
-                    "applicability": {"effective_from": "2025-10-01",
-                                      "effective_until": "2025-10-08"}},
+                    "applicability": {"effective_from": "October 1, 2025",
+                                      "effective_until": "Oct 8, 2025"}},
             }],
         }, conditioned=True)
         saved = json.loads(invoke(memory, "save_memory", {"proposal": proposal}, "save").content)
@@ -2460,6 +2464,8 @@ def test_reader_uses_one_explicit_query_clock_and_only_declared_calendar(
             assert temporal["time_values"]["query_time"]["timezone_known"] == (
                 query_time is None
             )
+            assert temporal["time_values"]["effective_from"]["precision"] == "day"
+            assert "event_at" not in temporal["time_values"]
         assert len(calls) == (2 if query_time is None else 0)
         assert memory.service.read(saved["id"])["value"] == before
     with opened(tmp_path, **options) as memory:
