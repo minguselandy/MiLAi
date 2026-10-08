@@ -11,6 +11,33 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 04:21:12 UTC：普通Host的Episode描述召回接通
+
+新源码`136328e61a8fa64c179061c69a5e416cff0d51a1`在main e4906dc之后补齐任务卡中的
+“正常查询从Episode回到真实来源”：unified_v1普通查询用已有description.text的词法
+匹配定位该描述自身的source_refs，再经既有raw_events／fragment／read_source路径交付
+实际原文。相同来源的重复描述取最大匹配分数，不累加；索引描述仍为unchecked，
+不是新的事实、独立支持或自动主体关联。查询只读取，不生成语义记录或扩大权限。
+
+没有增加公共Schema／DTO／工具、Store命名空间、encoder调用或另一事实库。现有owner、
+来源可见性、Assistant独立raw过滤和遗忘路径沿用；任一关联来源撤回后，原Episode仍
+整体隐藏。semantic-record的dense排序、预算及benchmark include_raw=False保持原合同。
+正常Host的来源召回行为改变，旧profile不启用此入口，不将这项变化归入旧冻结成绩。
+
+116项既有功能记忆文件检查、两项受影响源strict mypy、三文件Ruff及包依赖边界通过。
+实际普通M／I2工具与SQLite示例验证：重开后用仅存在于描述的查询词找到原文，显式读取
+原文，遗忘后重开不可访问；空语义库不调用encoder、语义记录仍为0，真实模型HTTP0。
+首次示例手工传入与已绑定请求不同的query被既有PUBLIC_QUERY_CHANGED拒绝；改用正常
+请求绑定后通过，没有放宽该检查。自己的远端CI尚待发布核对，真实语义效果未验证。
+
+本节固定04:21:12 UTC／北京时间12:21:12：PID1675659仍在执行冻结4e五方法预测，
+B0／B1各32预测闭合，B2为[8,8,8,1]、25/32，M／Append未启动，无整个process-exit或
+新评分、Judge0。新源码没有进入该运行。Root已读这次B0／B1共146及B2前三用户54个
+完整答案，合计200；来源审计部分、无新增数值评分或独立确认。B2已有身份仍会出现
+候选送达后的正式空输出，当前变化落实的语义断点尚未解决。五方法评分、候选65／277、
+保留／外部／完整Host与六项最终交付仍未完成；16保留未用，Product NO_GO。
+原快照、原505负结果与原始无效标签保留；本次源码回退基点e4906dc。
+
 ## 2026-10-08 03:42:06 UTC：B1预测闭合，日期合同修复与来源转换断点
 
 本节固定于2026-10-08 03:42:06 UTC／北京时间11:42:06。发布前main为
