@@ -1,5 +1,18 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 11:41:12 UTC／北京时间19:41:12：操作调用呈现修复，保存分类失败保留。**
+
+新e978更名公开operation_call_started，原journal／业务权限／实际效果／unknown不变。
+原业务四消息同state_driven配置、新空库闭合4执行：恰一次预订＋一次补标签，此故事未再误存
+发货；不是4语义通过。首条条件目标拒绝仍在；只补保存被分类为none而无维护，r2未更新。
+最后只读自然答案区分当前标签成功与已存初始失败，本轮没有再次实时业务查询。
+22生成（10 stop＋12 tool_calls）210516known／10embedding678tokens，新unknown0；固定账本
+47081 requests／203105114known／203381810charged／embedding1923044／历史unknown6。
+Root及两位subagent核对，未新增评分，原件ignored。三项窄检查、源类型／Ruff／依赖边界通过，
+自身CI待发布；新的共同五方法采用staged配置准备连续历史，不称D1已获因果优势。
+分类、正式变化落实、支持与非目标保持仍待解决，原完整范围active、16未用、Product NO_GO。
+见[报告](MILAI_UNIFIED_MEMORY_USAGE.md)及[问题表](MILAI_BUILD_FIRST_ISSUES.md)。下方保留固定历史。
+
 **2026-10-08 11:17:10 UTC／北京时间19:17:10：候选评分与两项交付比较均闭合，当前问题整理发布。**
 
 实际M候选冻结d62，预测与评分均退出0：四用户各8会话，32/32、73完整答案；更新Correct16/72

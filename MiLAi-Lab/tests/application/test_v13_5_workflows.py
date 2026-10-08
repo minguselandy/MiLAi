@@ -1335,7 +1335,9 @@ def test_live_query_includes_bounded_owner_object_original_attempt_receipts(
         assert history['omitted_earlier_count'] == (3 if workflow == 'reservation' else 4)
         assert all(r['operation'] == name and r['effect'] == 'none'
                    and r['result_status'] == expected and not r['same_public_message']
+                   and r['operation_call_started']
                    for r in history['items'])
+        assert all('dispatch_started' not in r for r in history['items'])
         assert 'unrelated' not in json.dumps(history)
         assert not any('args' in r or 'content' in r for r in history['items'])
         source = service.source(json.loads(queried.content)['source_ref'])
@@ -1372,6 +1374,8 @@ def test_query_attempt_history_preserves_unknown_and_filters_foreign_owner(tmp_p
         assert len(history['items']) == 1
         assert history['items'][0]['effect'] == 'unknown'
         assert history['items'][0]['receipt_status'] == 'pending'
+        assert history['items'][0]['operation_call_started'] is True
+        assert 'dispatch_started' not in history['items'][0]
         assert 'result_status' not in history['items'][0]
         assert 'FOREIGN_PRIVATE_RESULT' not in json.dumps(current)
         original_after = read_json(app.journal.path)[original['journal_key']]

@@ -11,6 +11,40 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 11:41:12 UTC：操作调用呈现修复，保存分类失败单列
+
+新源码 `e9788910e7d7b709e71ed8f5843af8f7c5d87853` 仅把普通业务查询的公开
+operation_history.dispatch_started更名为operation_call_started，仍取原executed值。
+它表示原工具调用已开始，业务效果继续由effect／result_status表示。内部journal、原native_result、
+业务身份、权限及unknown不改变；新查询的公开JSON子键改变，原已保存回执／错误记忆不自动重写。
+这是Lab候选呈现修复，Product API／Schema及编辑算子不变。父版本main471ee1a，回滚该源码提交即可。
+
+复用已有业务故事全部四条原消息、标签服务恢复control、新空库和原state_driven配置，跨四个
+CLI进程运行；仅改上述呈现，原ce14结果保留。四次执行均COMPLETED，进程退出0，不是四条
+语义通过。实际业务恰一次预订＋一次补标签，最终标签成功，没有发货业务效果；实际r1→r2保存
+原要求与初次部分失败，此后r2逐值不变。新来源、保存内容和最终反馈在此已曝光故事中均未再
+把调用开始当成发货。一次随机故事不能证明普遍消除此类误解。
+
+首条EDIT_APPEND_CONDITION_TARGET_INVALID仍保留。“只补保存”消息本次仍未保存：最早断点
+是请求分类的正式输出将memory_write_request／memory_continuation_request均判为none，程序
+随后按声明关闭维护。该消息maintenance=[]，没有Editor调用，不能归为Editor空提案，也不能
+通过自动恢复旧写权限使其completed。最后只读答案准确区分实际标签成功与仅存初次失败；本轮
+只调用read_memory，利用先前已可见来源／反馈，没有再次实时查询。前两条及保存条的自然执行
+候选未交付，最终反馈另存；最后一条自然答复实际保留。Host保存文本不证明用户已经收到。
+
+Root读完四条完整最终反馈并检查实际记录与业务DB；两位subagent只读核对实际HTTP投递、
+分类、回执及成本，新增HTTP0，非独立确认。真实流程22生成／210516known与charged tokens，
+finish_reason为10 stop＋12 tool_calls、0length；BGE10次／678tokens，Judge0、新unknown0。
+连续账本固定闭合为47081 requests、203105114 known、203381810 charged、embedding1923044、
+历史unknown6，与该流程前固定账本差额一致。未重置预算或扩大上限，原件继续ignored。
+
+三项既有受影响SQLite检查、该源strict mypy、Ruff、包与工具依赖边界通过；mock检查不代替
+真实语义证据。新源码自身远端CI发布后另核，不借用父main或旧候选CI。后续共同五方法配置
+采用staged，沿用原recipe、六Features、K10及预算，各自空库起跑四开发用户连续历史；D2仍可选，
+不称D1随机结果已证明优势。既有proposal-list与record容器还改变生成引用范围和执行顺序，
+不拿该Feature当作只隔离显式空输出的单一因素。分类／变化落实／支持／非目标保持仍需改进。
+16保留用户未用，最终方法与Product准入均未确定；原完整范围继续未完成。下方固定历史不改。
+
 ## 2026-10-08 11:17:10 UTC：当前问题与真实交付比较闭合
 
 实际候选仍冻结 `d62f0b457b8b497146b7bd96b043124597e3c912`：M／extract_then_edit／I2，

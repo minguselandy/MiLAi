@@ -1,0 +1,69 @@
+{
+  "experiment_name": "milai-staged-four-dev-v1",
+  "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "tokenizer_path": "/cra/qwen36-35B",
+  "context_tokens": 65536,
+  "retrieval_limit": 10,
+  "model": {
+    "base_url": "http://127.0.0.1:7862/v1",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 1.0,
+    "max_tokens": 32768,
+    "timeout": 300,
+    "enable_thinking": true
+  },
+  "source_tokens": 4096,
+  "chronological_order": "timestamp",
+  "method_version": "milai_edit_v2",
+  "config_version": "milai-staged-four-dev-v1",
+  "working_sets": false,
+  "interface_version": "I2",
+  "edit_features": {
+    "matter_organization": true,
+    "semantic_operations": true,
+    "bound_references": true,
+    "single_record_changes": true,
+    "source_metadata": true,
+    "temporal_scope": true
+  },
+  "source_body_tokens": 8192,
+  "embedding": {
+    "base_url": "http://127.0.0.1:7861/v1/",
+    "model": "bge-m3",
+    "temperature": 0,
+    "max_tokens": 4096,
+    "timeout": 180,
+    "tool_mode": "json_action",
+    "max_calls": 12,
+    "enable_thinking": false
+  },
+  "embedding_capacity": {
+    "tokenizer_path": "/data/models/embed/tokenizer.json",
+    "context_tokens": 8192
+  },
+  "embedding_dimension": 1024,
+  "embedding_batch_size": 16,
+  "halumem": {
+    "path": "/cra/memory/mx_memory/reference-sources/milai-edit/data/HaluMem-Medium.jsonl",
+    "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/HaluMem",
+    "users": [
+      "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "8ece194a-885c-8e0c-359e-93a97220252c",
+      "6106afc1-6ad6-c821-3f0f-b491e3e0b833",
+      "5c005ed8-0d18-99f8-a20e-6a776a7ea30a"
+    ]
+  },
+  "arms": [
+    "B0",
+    "B1",
+    "B2",
+    "M",
+    "Append-only"
+  ],
+  "maintenance_recipe": "extract_then_edit",
+  "evidence_kind": "DEVELOPMENT_STATE_VIEW_CANDIDATE_UNVALIDATED",
+  "memory_profile": "unified_v1",
+  "memory_ranking": "dense",
+  "calendar_context": "history-calendar",
+  "memory_view_mode": "staged"
+}
