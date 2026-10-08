@@ -811,7 +811,7 @@ class MechanismRun(BenchmarkRun):
                         with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
                             service = MemoryService(
                                 store,
-                                ("edit", "controlled", owner, variant, arm),
+                                ("edit", "controlled", variant, arm, owner),
                                 owner,
                                 bank / "memory.lock",
                                 mutation_contract="event_bound_v1",

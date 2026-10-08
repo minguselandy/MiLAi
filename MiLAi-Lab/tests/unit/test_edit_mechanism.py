@@ -472,6 +472,63 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
                     (item.namespace, item.key): item.value
                     for item in store.search((), limit=100000)
                 } == original_banks[arm]
+        if artifact_layout == "recipe":
+            run.settings["controlled"] = {"arms": ["M"]}
+            manifest = tmp_path / "controlled.json"
+            write_json(manifest, {"cases": [{
+                "source_cluster": "controlled-alice", "variants": ["en"], "events": [{
+                    "event_id": str(step), "review": label,
+                    "wordings": {"en": [{"role": "user", "content": text}]},
+                    "diagnostic_questions": {"en": label["diagnostic_question"]},
+                } for step, text in enumerate([
+                    "Twice weekly; holidays paused.", "Once weekly; holidays paused.",
+                ])],
+            }]})
+
+            def maintain_observed(service, observed, key):
+                assert service.namespace == ("edit", "controlled", "en", "M", "controlled-alice")
+                assert service.memory_profile == "unified_v1" and service.memory_ranking == "dense"
+                assert service.semantic_retriever.embeddings is run.retrieval_embeddings
+                captured = service.capture_user(
+                    observed.session_id, "user", observed.turns[0]["content"],
+                    occurred_at=observed.date,
+                )
+                service.bind_source_boundary(observed.session_id, "user", [captured["source_ref"]])
+                method = EditMemory(service, "M", interface_version="I2")
+                delivery = method.prepare([captured["source_ref"]], "weekly")
+                view = method.writer_view(delivery)
+                unit = {"text": observed.turns[0]["content"], "evidence": ["e1"]}
+                proposal = {"action": "edit", "target": "r1", "edits": [{
+                    "operation": "replace", "target_unit": "u1", **unit,
+                }]} if key.endswith("step-1") else {"action": "create", "units": [unit]}
+                receipt = method.apply(
+                    observed.session_id, key, method.decode_proposal(proposal, view["mapping"]),
+                )
+                assert receipt["ok"]
+                write_json(
+                    run.root / "maintenance" / key / "complete.json", {"receipts": [receipt]},
+                )
+
+            monkeypatch.setattr(run, "maintain", maintain_observed)
+            monkeypatch.setattr(run, "answer", original_answer)
+            controlled = run.run_controlled(manifest)
+            assert len(controlled["records"]) == 2
+            assert all(r["reader_probe"]["status"] == "ANSWERED" for r in controlled["records"])
+            current = read_json(run.root / (
+                "http/controlled/controlled-alice/en/M/step-1/reader/retrieval.json"
+            ))[0]
+            assert current["revision_evidence"][0]["content"] == "Once weekly; holidays paused."
+            assert current["revision_evidence"][0]["role"] == "user"
+            checkpoints = {
+                path: path.read_bytes() for path in (
+                    run.root / "controlled/controlled-alice/en/M"
+                ).glob("step-*/complete.json")
+            }
+            count = run.budget.state["generation_requests"]
+            run.run_controlled(manifest)
+            assert run.budget.state["generation_requests"] == count == 54
+            assert all(path.read_bytes() == saved for path, saved in checkpoints.items())
+            assert "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE" not in json.dumps(requests)
     finally:
         run.client.close()
 
