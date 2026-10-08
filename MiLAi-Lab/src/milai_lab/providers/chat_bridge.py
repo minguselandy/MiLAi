@@ -294,7 +294,8 @@ class VLLMChatModel(BaseChatModel):
         with scope:
             if native:
                 receipt = self.client.chat(
-                    prepared.messages, tools=tools, tool_choice=kwargs.get("tool_choice")
+                    prepared.messages, tools=tools, tool_choice=kwargs.get("tool_choice"),
+                    response_format=kwargs.get("response_format"),
                 )
             else:
                 receipt = self.client.chat(

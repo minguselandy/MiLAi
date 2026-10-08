@@ -5247,14 +5247,25 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         if ordinal == 1:
+            assert "response_format" not in wire
             return intent_reply(memory=True, business=False)
         system = wire["messages"][0]["content"]
         if "Extract brief candidate propositions" in system:
             stages.append("extract")
+            assert wire["response_format"]["type"] == "json_schema"
+            formal = wire["response_format"]["json_schema"]
+            assert formal["name"] == "milai_extract"
+            assert formal["schema"]["required"] == ["changes"]
             # Empty hints must still allow the editor to use original evidence.
             return {"role": "assistant", "content": json.dumps({"changes": []})}
         if not wire.get("tools"):
             stages.append("edit")
+            assert wire["response_format"]["type"] == "json_schema"
+            formal = wire["response_format"]["json_schema"]
+            assert formal["name"] == "milai_edit"
+            assert formal["schema"]["required"] == ["creates", "records"]
+            assert formal["schema"]["properties"]["creates"].get("minItems", 0) == 0
+            assert formal["schema"]["properties"]["records"].get("minProperties", 0) == 0
             packet = json.loads(wire["messages"][-1]["content"])["delivery"]
             assert "Remember the local marker is blue." in json.dumps(packet)
             evidence = packet["evidence"][0]["id"]
@@ -5267,6 +5278,7 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
             return {"role": "assistant", "content": json.dumps({"creates": [{
                 "action": "create", "matter": "User's marker", "clauses": [clause],
             }], "records": {}})}
+        assert "response_format" not in wire
         assert not {"save_memory", "update_memory", "confirm_existing_memory"}.intersection(
             t["function"]["name"] for t in wire.get("tools", []))
         assert memory_effects(wire)["maintenance"][0]["semantic_write_performed"]

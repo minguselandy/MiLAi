@@ -2460,7 +2460,11 @@ def message(
             def maintenance_call(
                 stage: str, messages: list[dict[str, str]], schema: dict[str, Any]
             ) -> dict[str, Any]:
-                response = model.invoke(messages, tools=[], tool_choice="none")
+                response = model.invoke(
+                    messages, tools=[], tool_choice="none",
+                    response_format={"type": "json_schema", "json_schema": {
+                        "name": "milai_" + stage.partition(":")[0], "schema": schema}},
+                )
                 if not isinstance(response, AIMessage) or not isinstance(response.content, str):
                     raise ValueError("FUNCTIONAL_MAINTENANCE_RESPONSE_MISSING")
                 value = parse_object(response.content, reject_duplicate_keys=True)
