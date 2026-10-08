@@ -11,7 +11,7 @@ import json
 import socket
 from dataclasses import asdict
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import httpx
 import pytest
@@ -230,12 +230,14 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
         names = {t["function"]["name"] for t in wire.get("tools", [])}
         if names == {"classify_current_request"}:
             text = wire["messages"][-1]["content"]
+            schema = wire["tools"][0]["function"]["parameters"]
+            assert set(schema["required"]) == {
+                "memory_requests", "allow_forgetting", "business_action_request",
+                "business_operations", "application_continuation_request", "application_requests"}
             return native_call("classify_current_request", "mode-" + str(ordinal),
-                memory_write_request="explicit" if text in {original_text, correction_text}
-                else "none",
+                memory_requests=(["explicit"] if text in {original_text, correction_text} else [])
+                + (["continue_prior"] if text in {continue_text, correction_text} else []),
                 allow_forgetting=False, business_action_request="none", business_operations=[],
-                memory_continuation_request="resolve_prior_explicit"
-                if text in {continue_text, correction_text} else "none",
                 application_continuation_request="none", application_requests=[])
         if names == {"resolve_continuation_operations"}:
             seen["resolve"] += 1
@@ -297,6 +299,8 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
     assert corrected["status"] == "COMPLETED", corrected.get("error")
     assert corrected["request_mode"]["resumed_memory_request"]["fragment_handles"]
     assert corrected["request_mode"]["prior_maintenance_requests"] == []
+    assert corrected["request_mode"]["current_memory_write_request"] == "explicit"
+    assert corrected["request_mode"]["memory_requests"] == ["explicit", "continue_prior"]
     assert seen == {"extract": 2, "edit": 3, "resolve": 2}
 
 
@@ -961,6 +965,37 @@ def test_focused_request_mode_removes_mutations_and_survives_resume(
     assert restored["generation_calls"] == 3  # One interpretation, two Agent requests.
     assert restored["request_mode"] == denied["request_mode"]
     assert restored["request_mode"]["semantic_correctness"] == "unchecked"
+
+
+def test_complete_request_mode_reuses_saved_legacy_decision_without_reclassification(
+    tmp_path: Path,
+) -> None:
+    class UnusedModel:
+        def invoke(self, *args: Any, **kwargs: Any) -> AIMessage:
+            pytest.fail("A saved current-request decision must not invoke the model.")
+
+    path = tmp_path / "request-mode.json"
+    binding = {"source_ref": "original-source", "session": "original", "turn_id": "save"}
+    decision = {"memory_write_request": "none", "memory_continuation_request":
+        "resolve_prior_explicit", "allow_forgetting": False, "business_action_request": "none",
+        "business_operations": [], "application_requests": [],
+        "application_continuation_request": "resolve_prior_request"}
+    write_json(path, {"binding": binding, "attempts": 1, "decision": decision})
+    before = path.read_bytes()
+    result = functional.request_mode(
+        cast(functional.LangMemRecipeChatModel, UnusedModel()), path, binding,
+        "Only finish saving the earlier actual result.", 1, lambda event: None,
+        native_declaration=True, write_mode_declaration=True, action_mode_declaration=True,
+        operation_mode_declaration=True, reference_mode_declaration=True,
+        independent_capabilities=True, memory_continuation=True,
+        application_workflow="reservation_v1")
+    assert path.read_bytes() == before
+    assert result["protocol"] == "native_complete_requests_v8"
+    assert result["memory_write_request"] == "none"
+    assert result["memory_continuation_request"] == "resolve_prior_explicit"
+    assert result["application_continuation_request"] == "resolve_prior_request"
+    assert not result["allow_memory_maintenance"] and not result["requires_memory_result"]
+    assert "memory_requests" not in result
 
 
 @pytest.mark.parametrize("write_request", ["none", "new_assertion", "explicit"])
@@ -5276,13 +5311,12 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
             current = wire["messages"][-1]["content"]
             first = current == initial_text
             return native_call("classify_current_request", "mode-" + str(ordinal),
-                memory_write_request="explicit" if first or continuation == "empty_save"
-                else "none", allow_forgetting=False,
+                memory_requests=(["explicit"] if first or continuation == "empty_save" else [])
+                + (["continue_prior"] if not first
+                   and continuation in {"complete", "empty_save"} else []), allow_forgetting=False,
                 business_action_request="perform" if first else
                 "none" if continuation == "readonly" else "continue_if_unfinished",
                 business_operations=["reserve_and_label", "complete_label"] if first else [],
-                memory_continuation_request="resolve_prior_explicit" if not first
-                and continuation in {"complete", "empty_save"} else "none",
                 application_continuation_request="none" if first else "resolve_prior_request",
                 application_requests=[{"target": {"item_key": "teal pack"}, "actions": [{
                     "operation": "reserve_and_label", "arguments": {
@@ -5428,10 +5462,9 @@ def test_host_request_reconciles_original_shared_commit_after_response_loss(
         if names == {"classify_current_request"}:
             first = "Reserve" in wire["messages"][-1]["content"]
             return native_call("classify_current_request", "mode-" + str(ordinal),
-                memory_write_request="explicit" if first else "none", allow_forgetting=False,
+                memory_requests=["explicit"] if first else [], allow_forgetting=False,
                 business_action_request="perform" if first else "none",
                 business_operations=["reserve_and_label"] if first else [],
-                memory_continuation_request="none",
                 application_continuation_request="none" if first else "resolve_prior_request",
                 application_requests=[{"target": {"item_key": "violet pack"}, "actions": [{
                     "operation": "reserve_and_label", "arguments": {
@@ -5577,9 +5610,8 @@ def test_host_save_continuation_registers_new_tool_batch_after_known_writer_fail
         if names == {"classify_current_request"}:
             readonly = wire["messages"][-1]["content"] == read_text
             return native_call("classify_current_request", "mode-" + str(ordinal),
-                memory_write_request="none" if readonly else "explicit", allow_forgetting=False,
+                memory_requests=[] if readonly else ["continue_prior"], allow_forgetting=False,
                 business_action_request="none", business_operations=[], application_requests=[],
-                memory_continuation_request="none" if readonly else "resolve_prior_explicit",
                 application_continuation_request="resolve_prior_request")
         if names == {"resolve_continuation_operations"}:
             frame = json.loads(wire["messages"][-1]["content"])

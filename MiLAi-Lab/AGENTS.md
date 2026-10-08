@@ -1,3 +1,17 @@
+# Development handoff: 2026-10-08 memory intent candidate
+
+Base main6bfe088/PR113 is merged; the old fixed report below remains historical.
+New Host v8 declarations use one memory_requests effect list; current save/fact and
+prior save continuation can coexist. Derive existing internal flags; prior resolution
+does not grant rights. Cached old v8 decisions replay unchanged/0model, v7 unchanged.
+20 affected checks plus one direct readonly flow, Ruff/types/package boundary pass;
+0real HTTP, actual e978 classification/semantic improvement UNVERIFIED. See current
+docs/MILAI_BUILD_FIRST_ISSUES.md. Root alone integrates source and serial real HTTP.
+Frozen721 continuous predict PID4027428 remains live (12:48UTC B0 21/277; others
+unstarted, no terminal/score). Never hotedit/restart or parallelize from this snapshot.
+Existing agents may run isolated mechanical checks; no reviewer/new model/platform.
+Full goal active/incomplete,16 reserved unused,no final candidate,Product NO_GO.
+
 # Fixed handoff: 2026-10-08 12:09:27 UTC
 
 User requests a current issues publication; this change is documents/handoff only.

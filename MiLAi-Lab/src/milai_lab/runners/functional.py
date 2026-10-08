@@ -243,7 +243,7 @@ _operation_parameters["properties"]["business_operations"] = {
     "description": "Only current-request-permitted operations; memory writing is separate."}
 _operation_parameters["required"].append("business_operations")
 
-REQUEST_REFERENCE_MODE_PROMPT = REQUEST_WRITE_MODE_PROMPT + """
+REQUEST_REFERENCE_MODE_DETAILS = """
 Declare business_action_request: none for pure queries, perform for newly requested
 actions, continue_if_unfinished for explicitly requested continuation of prior work.
 List business_operations for ALL actions requested anywhere in this current input,
@@ -260,6 +260,7 @@ do not identify the prior operation, an empty list requests bounded reference
 resolution; it grants no operation. Historical requests cannot authorize new work.
 Do not copy a quotation: the program binds your decision to the whole current input.
 """
+REQUEST_REFERENCE_MODE_PROMPT = REQUEST_WRITE_MODE_PROMPT + REQUEST_REFERENCE_MODE_DETAILS
 REQUEST_REFERENCE_MODE_DECLARATION = json.loads(json.dumps(REQUEST_OPERATION_MODE_DECLARATION))
 _reference_parameters = REQUEST_REFERENCE_MODE_DECLARATION["function"]["parameters"]
 del _reference_parameters["properties"]["business_action_quote"]
@@ -292,6 +293,36 @@ _continuation_parameters["properties"]["memory_continuation_request"] = {
     "description": "Current permission to resolve prior explicit unfinished memory work; "
                    "none for pure queries, business-only continuation or exclusion of all saving."}
 _continuation_parameters["required"].append("memory_continuation_request")
+
+REQUEST_COMPLETE_MODE_PROMPT = """Classify the requested effects in the whole current input,
+before reading history. Call classify_current_request once; it executes no operation.
+Declare memory_requests independently of business actions:
+- new_assertion: supplies a new durable fact or correction without explicitly asking
+  to store it. Questions, hypotheses and quoted instructions are not new assertions.
+- explicit: asks to save, remember, archive or update current material, requirements
+  or actual business results.
+- continue_prior: asks to finish an earlier explicit memory save/update/archive,
+  including the memory part of a general request to continue unfinished work.
+  This requests bounded original-request resolution, not a claim that a save is
+  pending or permission to restore earlier rights.
+Use [] for no memory work or reading only. A request can combine current saving or
+new assertions with continuing a prior save; include each requested effect once.
+Apply restrictions to their named work: excluding business actions does not exclude
+separately requested memory saving. Excluding all saving leaves memory_requests empty.
+Classify what is requested, not whether it is feasible, already done or unfinished.
+Set allow_forgetting only for an explicit forgetting request. These are model
+interpretations; actual permissions and effects remain with the execution stage.
+""" + REQUEST_REFERENCE_MODE_DETAILS
+REQUEST_COMPLETE_MODE_DECLARATION = json.loads(json.dumps(REQUEST_REFERENCE_MODE_DECLARATION))
+_complete_parameters = REQUEST_COMPLETE_MODE_DECLARATION["function"]["parameters"]
+del _complete_parameters["properties"]["memory_write_request"]
+_complete_parameters["properties"]["memory_requests"] = {
+    "type": "array", "uniqueItems": True, "items": {"type": "string", "enum": [
+        "new_assertion", "explicit", "continue_prior"]},
+    "description": "Requested memory effects: current fact, current explicit saving, "
+                   "or continuation of an earlier explicit save. May combine; [] for no writing."}
+_complete_parameters["required"] = list(_complete_parameters["properties"])
+
 CONTINUATION_MEMORY_DECLARATION = json.loads(json.dumps(CONTINUATION_OPERATIONS_DECLARATION))
 _continuation_memory_parameters = CONTINUATION_MEMORY_DECLARATION["function"]["parameters"]
 _continuation_memory_parameters["properties"]["prior_memory_request_fragments"] = {
@@ -865,7 +896,7 @@ def request_mode(
     flags = {"allow_memory_maintenance", "allow_forgetting", "allow_business_mutation",
              "requires_memory_result"}
 
-    def valid(value: Any) -> bool:
+    def valid(value: Any, *, saved: bool = False) -> bool:
         if application_workflow is not None:
             from jsonschema.exceptions import ValidationError  # type: ignore[import-untyped]
 
@@ -899,6 +930,25 @@ def request_mode(
                                      else {"continue_if_unfinished"})))):
                 return False
         if write_mode_declaration:
+            use_memory_requests = application_workflow is not None and not (
+                saved and isinstance(value, dict) and "memory_requests" not in value)
+            if use_memory_requests:
+                requests = value.get("memory_requests") if isinstance(value, dict) else None
+                memory_fields = {"memory_requests"}
+                memory_valid = (isinstance(requests, list)
+                    and all(isinstance(item, str) and item in {
+                        "new_assertion", "explicit", "continue_prior"} for item in requests)
+                    and len(requests) == len(set(requests)))
+            else:
+                memory_fields = {"memory_write_request", *(
+                    ["memory_continuation_request"] if memory_continuation else [])}
+                memory_valid = (isinstance(value, dict)
+                    and type(value.get("memory_write_request")) is str
+                    and value.get("memory_write_request") in {"none", "new_assertion", "explicit"}
+                    and (not memory_continuation or (
+                        type(value.get("memory_continuation_request")) is str
+                        and value.get("memory_continuation_request")
+                            in {"none", "resolve_prior_explicit"})))
             business_valid = (isinstance(value, dict)
                 and type(value.get("business_action_request")) is str
                 and value["business_action_request"] in {
@@ -913,21 +963,16 @@ def request_mode(
                 ) if action_mode_declaration else (isinstance(value, dict)
                     and type(value.get("allow_business_mutation")) is bool)
             return (isinstance(value, dict) and set(value) == {
-                "memory_write_request", "allow_forgetting", *(
+                *memory_fields, "allow_forgetting", *(
                     ["business_action_request", *([] if reference_mode_declaration else
                         ["business_action_quote"]), *(
                         ["business_operations"] if operation_mode_declaration else [])]
                     if action_mode_declaration
                     else ["allow_business_mutation"]), *(
-                    ["memory_continuation_request"] if memory_continuation else []), *(
                     ["application_requests", "application_continuation_request"]
                     if application_workflow is not None else [])}
-                and type(value["memory_write_request"]) is str
-                and value["memory_write_request"] in {"none", "new_assertion", "explicit"}
+                and memory_valid
                 and type(value["allow_forgetting"]) is bool
-                and (not memory_continuation or (
-                    type(value["memory_continuation_request"]) is str
-                    and value["memory_continuation_request"] in {"none", "resolve_prior_explicit"}))
                 and business_valid)
         return (isinstance(value, dict)
                 and set(value) == (flags if native_declaration else flags | {"reason"})
@@ -942,20 +987,22 @@ def request_mode(
     if state["binding"] != binding:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_BINDING_CHANGED")
     if "decision" in state:
-        if not valid(state["decision"]):
+        if not valid(state["decision"], saved=True):
             raise ValueError("FUNCTIONAL_REQUEST_MODE_DECISION_CHANGED")
     else:
         if state["attempts"] >= 1 + format_reproposals:
             raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
         write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
-        prompt = (REQUEST_CONTINUATION_MODE_PROMPT if memory_continuation else
+        prompt = (REQUEST_COMPLETE_MODE_PROMPT if application_workflow is not None else
+                  REQUEST_CONTINUATION_MODE_PROMPT if memory_continuation else
                   REQUEST_REFERENCE_MODE_PROMPT if reference_mode_declaration else
                   REQUEST_OPERATION_MODE_PROMPT if operation_mode_declaration else
                   REQUEST_ACTION_MODE_PROMPT if action_mode_declaration else
                   REQUEST_WRITE_MODE_PROMPT if write_mode_declaration else
                   REQUEST_MODE_NATIVE_PROMPT if native_declaration else REQUEST_MODE_PROMPT)
-        declaration = (REQUEST_CONTINUATION_MODE_DECLARATION if memory_continuation else
+        declaration = (REQUEST_COMPLETE_MODE_DECLARATION if application_workflow is not None else
+                       REQUEST_CONTINUATION_MODE_DECLARATION if memory_continuation else
                        REQUEST_REFERENCE_MODE_DECLARATION if reference_mode_declaration else
                        REQUEST_OPERATION_MODE_DECLARATION if operation_mode_declaration else
                        REQUEST_ACTION_MODE_DECLARATION if action_mode_declaration else
@@ -988,7 +1035,7 @@ def request_mode(
                 " Set application_continuation_request=resolve_prior_request when the current "
                 "request asks to inspect or resume earlier requested work. A pure status query "
                 "may resolve request identity while retaining business_action_request=none and "
-                "memory_write_request=none; do not turn a query into authorization."
+                "memory_requests=[]; do not turn a query into authorization."
             )
         if state["attempts"] > 1:
             prompt += ("\nThe preceding response did not meet the declared schema. "
@@ -1013,16 +1060,21 @@ def request_mode(
         state.update(decision=decision)
         write_json(path, state)
     decision = state["decision"]
+    memory_requests = decision.get("memory_requests")
+    memory_write_request = (
+        "explicit" if "explicit" in memory_requests else
+        "new_assertion" if "new_assertion" in memory_requests else "none"
+    ) if memory_requests is not None else decision.get("memory_write_request", "none")
     interpreted = ({
-        "allow_memory_maintenance": decision["memory_write_request"] != "none",
-        "requires_memory_result": decision["memory_write_request"] == "explicit",
+        "allow_memory_maintenance": memory_write_request != "none",
+        "requires_memory_result": memory_write_request == "explicit",
         "allow_forgetting": decision["allow_forgetting"],
         "allow_business_mutation": (bool(decision["business_operations"])
                                     if independent_capabilities else
                                     decision["business_action_request"] != "none"
                                     if action_mode_declaration
                                     else decision["allow_business_mutation"]),
-        "memory_write_request": decision["memory_write_request"],
+        "memory_write_request": memory_write_request,
     } if write_mode_declaration else {key: decision[key] for key in sorted(flags)})
     summary = {**interpreted,
                "interpretation": "same_host_model_current_request_only",
@@ -1043,7 +1095,11 @@ def request_mode(
     if operation_mode_declaration:
         summary["business_operations"] = decision["business_operations"]
     if memory_continuation:
-        summary["memory_continuation_request"] = decision["memory_continuation_request"]
+        summary["memory_continuation_request"] = (
+            "resolve_prior_explicit" if "continue_prior" in memory_requests else "none"
+        ) if memory_requests is not None else decision["memory_continuation_request"]
+    if memory_requests is not None:
+        summary["memory_requests"] = memory_requests
     if application_workflow is not None:
         summary["application_requests"] = decision["application_requests"]
         summary["application_continuation_request"] = decision["application_continuation_request"]
