@@ -658,6 +658,8 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         rewritten_condition["from_unit"] = condition["id"]
         generated = copy.deepcopy(rewrite)
         generated.pop("target")
+        generated_assertion = generated["clauses"][0]["conditions"][0]["assertion"]
+        generated_assertion["source_evidence"] = generated_assertion.pop("source")
         Draft202012Validator(view["schema"]).validate({"creates": [], "records": {"r1": generated}})
 
         missing_identity = copy.deepcopy(rewrite)
