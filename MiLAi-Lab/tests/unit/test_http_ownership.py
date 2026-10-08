@@ -268,13 +268,17 @@ except HttpOwnershipError as e:
 
 
 def test_reentry_close_and_duplicate_budget_rejected(tmp_path: Path) -> None:
-    settings, host, _, _ = seed(tmp_path)
+    settings, host, _, initial = seed(tmp_path)
     with http_budget_scope(settings) as budget:
         assert budget is not None and budget.http_owner is not None
         owner = budget.http_owner
-        seen = []
+        seen, events = [], []
 
         def transport(request: httpx.Request) -> httpx.Response:
+            assert owner.mutex.locked()
+            assert budget.state["generation_requests"] == (
+                initial["generation_requests"] + len(seen) + 1
+            )
             with pytest.raises(HttpOwnershipError, match="REENTRY"):
                 client.chat([])
             with pytest.raises(HttpOwnershipError, match="REQUEST_ACTIVE"):
@@ -282,7 +286,9 @@ def test_reentry_close_and_duplicate_budget_rejected(tmp_path: Path) -> None:
             seen.append(json.loads(request.content))
             return response()
 
-        client = VLLMClient(host, budget=budget, transport=httpx.MockTransport(transport))
+        client = VLLMClient(
+            host, budget=budget, emit=events.append, transport=httpx.MockTransport(transport)
+        )
         with pytest.raises(HttpOwnershipError, match="SECOND_BUDGET"):
             RunBudget(budget.limits, budget.path, http_owner=owner)
         with pytest.raises(HttpOwnershipError, match="CLIENTS_STILL_OPEN"):
@@ -290,7 +296,27 @@ def test_reentry_close_and_duplicate_budget_rejected(tmp_path: Path) -> None:
         with pytest.raises(HttpOwnershipError, match="OUTSIDE_REQUEST"):
             budget.reserve("chat/completions", {"messages": [], "max_tokens": 8})
         client.chat([])
-        assert len(seen) == 1
+        client.chat([], presence_penalty=0)
+        client.chat([], presence_penalty=1.5)
+        default_wire = {
+            "model": host.model,
+            "messages": [],
+            "temperature": host.temperature,
+            "max_tokens": host.max_tokens,
+        }
+        assert seen == [
+            default_wire,
+            {**default_wire, "presence_penalty": 0},
+            {**default_wire, "presence_penalty": 1.5},
+        ]
+        assert [event["request"] for event in events] == seen
+        assert all(event["event"] == "vllm_response" for event in events)
+        assert budget.state["generation_requests"] == initial["generation_requests"] + 3
+        assert budget.state["generation"]["known_tokens"] == (
+            initial["generation"]["known_tokens"] + 15
+        )
+        assert budget.state["generation"]["unknown_usage"] == initial["generation"]["unknown_usage"]
+        assert asdict(host) == settings["http_ownership_domain"]["clients"][0]
         client.close()
         with pytest.raises(HttpOwnershipError, match="CLIENT_CLOSED"):
             client.chat([])
