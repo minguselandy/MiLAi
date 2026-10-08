@@ -329,8 +329,9 @@ class EditMemory:
             )
             if self.features.source_metadata:
                 instruction += (
-                    "Exact unchanged text/role with from_unit=u# and assertion={keep:h#} "
-                    "for that same unit reuses its own support without repeating keep_support. "
+                    "With from_unit=u# and assertion={keep:h#} for that same old unit, "
+                    "omit text to reuse its actual text, or repeat it exactly. This also reuses "
+                    "its own support without repeating keep_support. "
                     "Bindings still select their separate relation support. "
                 )
             instruction += "Changed text still selects actual e evidence. "
@@ -1617,6 +1618,12 @@ class EditMemory:
         origins: list[set[str]] = []
         explicit_origins: set[str] = set()
         for item in proposal.get("units", []):
+            if proposal["action"] == "rewrite" and "text" not in item:
+                support = bound["support"].get(item["assertion"]["keep"])
+                if (support is None or support["record"] != target
+                        or support.get("unit") != item["from_unit"]):
+                    raise FunctionalRejection("EDIT_ASSERTION_UNIT_BINDING_INVALID")
+                item["text"] = alias_unit(item["from_unit"])["text"]
             handles, kept = supports(item)
             origin = {support["unit"] for support in kept if "unit" in support}
             if len(origin) != len(kept) or len(origin) > 1:

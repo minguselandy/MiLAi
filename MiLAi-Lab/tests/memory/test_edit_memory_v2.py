@@ -618,7 +618,8 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
     with opened(tmp_path, "B2") as (service, _):
         method = EditMemory(service, "B2", interface_version="I2", features=NEXT_FEATURES)
         view, old_source = next_request(
-            service, method, "form", "Use quiet reminders only during gallery hours."
+            service, method, "form", "Use quiet reminders only for my own reminders "
+            "during gallery hours."
         )
         create = {
             "action": "create", "matter": "Reminder sound",
@@ -629,13 +630,18 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
                     "text": "During gallery hours.", "evidence": ["e1"],
                     "assertion": {"source": "e1", "kind": "reported"},
                     "binding": {"evidence": ["e1"]},
+                }, {
+                    "text": "Only for my own reminders.", "evidence": ["e1"],
+                    "assertion": {"source": "e1", "kind": "reported"},
+                    "binding": {"evidence": ["e1"]},
                 }],
             }],
         }
         saved = method.apply("s", "form", method.decode_proposal(create, view["mapping"]))
         original = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
         view, new_source = next_request(
-            service, method, "change", "The reminder rule now applies during evening hours.",
+            service, method, "change", "The reminder rule now applies during evening hours. "
+            "Use haptic backup for reminders.",
             [service.read(saved["id"])], allow_create=False,
         )
         clause = view["packet"]["records"][0]["clauses"][0]
@@ -704,18 +710,50 @@ def test_whole_rewrite_unit_identity_preserves_link_after_supported_condition_ch
         with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
             method.decode_proposal(duplicated, view["mapping"])
 
-        result = method.apply("s", "change", method.decode_proposal(rewrite, view["mapping"]))
+        retained = copy.deepcopy(rewrite)
+        retained["clauses"][0].pop("text")
+        unchanged_condition = clause["conditions"][1]
+        retained["clauses"][0]["conditions"].append({
+            "from_unit": unchanged_condition["id"], "evidence": [],
+            "assertion": {"keep": unchanged_condition["support"][0]},
+            "binding": {"evidence": [],
+                        "keep_support": unchanged_condition["binding"]["support"]},
+        })
+        retained["clauses"].append({
+            "text": "Use haptic backup for reminders.", "evidence": ["e1"],
+            "assertion": {"source_evidence": "e1", "kind": "reported"}, "conditions": [],
+        })
+        wrong_keep = copy.deepcopy(retained)
+        wrong_keep["clauses"][0]["assertion"] = {"keep": condition["support"][0]}
+        with pytest.raises(FunctionalRejection, match="ASSERTION_UNIT_BINDING_INVALID"):
+            method.decode_proposal(wrong_keep, view["mapping"])
+        public_retained = copy.deepcopy(retained)
+        public_retained.pop("target")
+        condition_assertion = public_retained["clauses"][0]["conditions"][0]["assertion"]
+        condition_assertion["source_evidence"] = condition_assertion.pop("source")
+        Draft202012Validator(view["schema"]).validate(
+            {"creates": [], "records": {"r1": public_retained}}
+        )
+        result = method.apply("s", "change", method.decode_proposal(retained, view["mapping"]))
         assert result["ok"] and result["revision"] == 2
         current = service.read(saved["id"])["value"]["edit_state"]
         assert [u["text"] for u in current["units"]] == [
-            "Use quiet reminders.", "During evening hours."
+            "Use quiet reminders.", "During evening hours.", "Only for my own reminders.",
+            "Use haptic backup for reminders.",
         ]
-        assert len(current["relations"]) == 1
-        assert current["relations"][0]["relation_type"] == "modifies"
+        assert len(current["relations"]) == 2
+        assert all(r["relation_type"] == "modifies" for r in current["relations"])
         assert current["units"][0]["assertion"] == original["units"][0]["assertion"]
         assert current["units"][0]["evidence_refs"] == original["units"][0]["evidence_refs"]
+        assert current["units"][2]["text"] == original["units"][2]["text"]
+        assert current["units"][2]["role"] == original["units"][2]["role"] == "condition"
+        assert current["units"][2]["assertion"] == original["units"][2]["assertion"]
+        assert current["units"][2]["assertion"]["role"] == "user"
+        assert current["units"][2]["evidence_refs"] == original["units"][2]["evidence_refs"]
         assert {r["source_ref"] for r in current["units"][1]["evidence_refs"]} == {new_source}
-        assert {r["source_ref"] for r in current["relations"][0]["evidence_refs"]} == {old_source}
+        assert {r["source_ref"] for r in current["units"][3]["evidence_refs"]} == {new_source}
+        assert all({r["source_ref"] for r in edge["evidence_refs"]} == {old_source}
+                   for edge in current["relations"])
         assert service.read(saved["id"], 1)["value"]["edit_state"] == original
         record_id = saved["id"]
     with opened(tmp_path, "B2") as (service, _):

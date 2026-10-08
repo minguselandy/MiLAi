@@ -406,6 +406,17 @@ def feature_proposal_schema(
                         }:
                             item["properties"]["assertion"] = copy.deepcopy(current_assertion)
                         item["required"].append("assertion")
+
+    def retained_text(item: dict[str, Any]) -> None:
+        if not features.source_metadata or "from_unit" not in item["properties"]:
+            return
+        item["required"].remove("text")
+        item["anyOf"] = [
+            {"required": ["text"]},
+            {"required": ["from_unit"],
+             "properties": {"assertion": {"required": ["keep"]}}},
+        ]
+
     for variant in variants:
         fields = variant["properties"]
         if "units" not in fields:
@@ -422,6 +433,7 @@ def feature_proposal_schema(
         fields["clauses"] = {**unit, "items": clause}
         variant["required"] = ["clauses" if key == "units" else key for key in variant["required"]]
         if arm not in {"B2", "M"}:
+            retained_text(clause)
             continue
         relation = fields.pop("relations")["items"]
         binding = _object(
@@ -441,6 +453,7 @@ def feature_proposal_schema(
             ]
             if prior_conditions:
                 condition["properties"]["from_unit"] = reference("u", prior_conditions)
+        retained_text(condition)
         condition["properties"]["binding"] = copy.deepcopy(binding)
         condition["required"].append("binding")
         clause["properties"]["conditions"] = {
@@ -506,6 +519,7 @@ def feature_proposal_schema(
                 "items": orphan,
                 **({"maxItems": 0} if not orphan_support else {}),
             }
+        retained_text(clause)
         scoped = copy.deepcopy(clause)
         scoped["properties"]["conditions"]["minItems"] = 1
         scoped["properties"]["overrides"]["minItems"] = 1
