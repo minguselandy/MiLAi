@@ -381,29 +381,55 @@ def test_shared_reader_switches_reloads_fixed_pool_without_capturing_qa(tmp_path
         execution.tokenizer = ReaderTokenizer()
         execution.call = BenchmarkRun.call.__get__(execution)
         payloads = []
+        question = (
+            "Describe the current marker and alarm, and distinguish original wording "
+            "from what was saved earlier."
+        )
+        date = "2030-01-02"
+        history_goal = "Identify actual saved history relevant to this question."
+        mixed_goal = "Compare current arrangements, original wording and actual saved history."
 
         def provider(request: httpx.Request) -> httpx.Response:
             wire = json.loads(request.read())
             payload = json.loads(wire["messages"][1]["content"])
             payloads.append(payload)
+            assert payload["question"] == question and payload["date"] == date
+            assert payload["memory_view"] == "retained_state"
             bodies = [memory["content"] for memory in payload["memories"]]
             index = len(payloads)
             if index == 1:
                 assert bodies == []
+                assert payload["memory_view_state"]["read_goal"] is None
                 selected, keep, done = [marker], False, False
             elif index == 2:
                 assert bodies == ["The marker is blue."]
+                assert payload["memory_view_state"]["read_goal"] == history_goal
                 selected, keep, done = [alarm], False, False
             elif index == 3:
                 assert bodies == ["The alarm is soft."]
-                selected, keep, done = [marker], False, False
+                assert payload["memory_view_state"]["read_goal"] == history_goal
+                selected, keep, done = [marker, alarm], False, False
             elif index == 4:
-                assert bodies == ["The marker is blue."]
-                selected, keep, done = [alarm], True, True
+                assert set(bodies) == set(identifiers)
+                assert payload["memory_view_state"]["read_goal"] == mixed_goal
+                selected, keep, done = [], True, True
             else:
                 assert index == 5 and set(bodies) == set(identifiers)
-            content = json.dumps({"record_ids": selected, "keep_resident": keep, "done": done}) \
-                if index < 5 else "The marker is blue and the alarm is soft."
+                assert payload["read_goal"] == mixed_goal
+                assert {memory["revision"] for memory in payload["memories"]} == {1}
+            if index < 5:
+                selection = {"record_ids": selected, "keep_resident": keep, "done": done}
+                if index == 1:
+                    selection["read_goal"] = history_goal
+                elif index == 3:
+                    selection["read_goal"] = mixed_goal
+                elif index == 4:
+                    selection["read_goal"] = None
+                content = json.dumps(selection)
+            else:
+                content = (
+                    "The marker is blue and the alarm is soft; older saved versions are absent."
+                )
             return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
                 "message": {"content": content}}], "usage": {"total_tokens": 9}})
 
@@ -411,15 +437,69 @@ def test_shared_reader_switches_reloads_fixed_pool_without_capturing_qa(tmp_path
         with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100, max_calls=5),
                          transport=httpx.MockTransport(provider), budget=budget) as client:
             execution.client = client
-            answer = execution.answer(service, "Describe the marker and alarm.", "2030-01-02", "qa")
-            assert execution.answer(service, "Describe the marker and alarm.", "2030-01-02", "qa") \
-                == answer
+            answer = execution.answer(service, question, date, "qa")
+            assert execution.answer(service, question, date, "qa") == answer
         assert len(payloads) == 5 and budget.state["generation_requests"] == 5
         assert service.records() == before and len(service.sources()) == source_count
         state = read_json(tmp_path / "http/qa/memory-view.json")
         assert state["steps"] == 4 and state["complete"]
+        assert state["read_goal"] == mixed_goal
         assert {ref["id"] for ref in state["resident_refs"]} == {marker, alarm}
+        assert all(ref["view"] == "current_at_snapshot" for ref in state["resident_refs"])
         assert all("content" not in ref for ref in state["resident_refs"])
+
+
+def test_shared_reader_staged_accepts_legacy_selection_without_extra_reads(tmp_path: Path) -> None:
+    class ReaderTokenizer:
+        def apply_chat_template(self, *args: object, **kwargs: object) -> list[int]:
+            return [1, 2]
+
+    execution = BenchmarkRun.__new__(BenchmarkRun)
+    execution.root, execution.settings = tmp_path, {
+        "memory_view_mode": "staged", "context_tokens": 4096, "model": {"max_tokens": 100},
+    }
+    execution.tokenizer = ReaderTokenizer()
+    question, date, key = "What marker applies on weekdays?", "2030-01-02", "qa"
+    memories = [{"record_id": "actual-marker", "revision": 2,
+                 "matter_description": "Marker", "content": "The marker is blue on weekdays.",
+                 "scope": {"weekday_only": True}, "revision_evidence": []}]
+    snapshot = tmp_path / "http" / key / "retrieval.json"
+    write_json(snapshot, memories)
+    original = snapshot.read_bytes()
+    payloads = []
+
+    def provider(request: httpx.Request) -> httpx.Response:
+        payload = json.loads(json.loads(request.read())["messages"][1]["content"])
+        payloads.append(payload)
+        assert payload["question"] == question and payload["date"] == date
+        assert payload["memory_view"] == "retained_state"
+        if len(payloads) == 1:
+            assert payload["memories"] == []
+            assert payload["memory_view_state"]["read_goal"] is None
+            assert set(payload["response_schema"]["required"]) == {
+                "record_ids", "keep_resident", "done"}
+            content = json.dumps({"record_ids": ["actual-marker"],
+                                  "keep_resident": False, "done": False})
+        else:
+            assert len(payloads) == 2 and payload["memories"] == memories
+            assert "read_goal" not in payload
+            content = "The marker is blue on weekdays."
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
+            "message": {"content": content}}], "usage": {"total_tokens": 9}})
+
+    budget = RunBudget(RunLimits(generation_requests=2), tmp_path / "budget.json")
+    with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100, max_calls=5),
+                     transport=httpx.MockTransport(provider), budget=budget) as client:
+        execution.client = client
+        answer, used = execution.answer_material(question, date, key, memories)
+        assert execution.answer_material(question, date, key, memories) == (answer, used)
+    assert len(payloads) == 2 and budget.state["generation_requests"] == 2
+    assert used == memories and snapshot.read_bytes() == original
+    state = read_json(tmp_path / "http" / key / "memory-view.json")
+    assert state["steps"] == 1 and state["complete"] and state["read_goal"] is None
+    assert len(state["resident_refs"]) == 1
+    assert state["resident_refs"][0]["view"] == "current_at_snapshot"
+    assert state["resident_refs"][0]["revision"] == 2
 
 
 class CharacterTokenizer:

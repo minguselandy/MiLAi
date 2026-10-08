@@ -1,5 +1,23 @@
 # MiLAi Lab 当前状态
 
+**2026-10-08 14:35:31 UTC／北京时间22:35:31：纯补存进入维护，完整语义保存仍失败。**
+
+PR116已合并main51f58ee；61受测Fast37791385445成功、Full37791385453 skipped，
+main自身Fast37793638897此时运行。真实61四执行COMPLETED／exit0，纯补存continue_prior并
+进入维护；业务只有1预订＋1标签完成。Editor却引用原User要求写入错误取消，当前“不重做”
+控制并非新证据；实际结果抽取截断。2提交＋3incomplete，纯补存partial，不记语义通过。
+Root读四个交付答案与保存单元，无Judge；首次部分成功说成整体失败、普通事实当condition、
+反馈混合旧禁止与当前允许但失败的问题保留。24生成314207／10 embedding916，新unknown0。
+账本47416 requests／206714013 known／206990709 charged／embedding1939409，历史unknown6。
+
+新开发仅保持当前问题的read_goal：显式声明／省略继承，不由当前卡或历史材料反推；Host
+读取与共同benchmark复用同一工作集，legacy／额度／权限／实际引用和固定池范围保持。
+5直接机械检查、三源mypy、六文件Ruff及包边界通过，0真实P1 HTTP，不称历史语义改善。
+此时无真实runner；旧356／d366／721终态保留，不重启，后续tmp用/cra。完整任务active，
+五方法长历史及原六项交付仍未完成，16保留未用、无最终候选、Product NO_GO。
+详见[当前报告](MILAI_UNIFIED_MEMORY_USAGE.md)和[问题表](MILAI_BUILD_FIRST_ISSUES.md)。
+下方均为原固定时间块。
+
 **2026-10-08 14:12:21 UTC／北京时间22:12:21：原请求参考首轮接线失败，修正版未实跑。**
 
 冻结d366四消息为1 COMPLETED／1 FAILED／2 NOT_RUN，第二条多System消息被本地Qwen

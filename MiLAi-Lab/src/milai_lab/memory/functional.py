@@ -154,22 +154,32 @@ class SupportContextSelector(ReadSelector):
 
 class ResidentRecordSelector(RecordSelector):
     keep_resident: bool = False
+    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
+                                "may combine applicable state, original wording and saved history.")
 
 
 class ResidentRevisionSelector(RevisionSelector):
     keep_resident: bool = False
+    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
+                                "may combine applicable state, original wording and saved history.")
 
 
 class ResidentSourceSelector(SourceSelector):
     keep_resident: bool = False
+    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
+                                "may combine applicable state, original wording and saved history.")
 
 
 class ResidentFragmentSelector(FragmentSelector):
     keep_resident: bool = False
+    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
+                                "may combine applicable state, original wording and saved history.")
 
 
 class ResidentPageSelector(PageSelector):
     keep_resident: bool = False
+    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
+                                "may combine applicable state, original wording and saved history.")
 
 
 class ReadSelectorTool(StructuredTool):
@@ -411,11 +421,12 @@ class FunctionalMemory:
     def _note_view_page(
         self, config: RunnableConfig, result: dict[str, Any], *,
         keep_resident: bool = False, refresh_current: bool = False,
+        read_goal: str | None = None,
     ) -> None:
         if self.memory_view_mode == "legacy" or not result.get("ok"):
             return
         refs = result.get("view_refs", [])
-        if not refs:
+        if not refs and read_goal is None:
             return
         state = self.view_state(config)
         if refresh_current:
@@ -425,7 +436,8 @@ class FunctionalMemory:
                 if ref["kind"] != "record" or ref["id"] not in affected
                 or ref["view"] != "current_at_snapshot"
             ]
-        state = admit_refs(state, refs, keep_resident=keep_resident or refresh_current)
+        state = admit_refs(state, refs, keep_resident=keep_resident or refresh_current,
+                           read_goal=read_goal)
         self.service.store.put(namespace(self.service), self._view_key(config), state, index=False)
 
     def resident_items(self, config: RunnableConfig) -> list[dict[str, Any]]:
@@ -1438,7 +1450,8 @@ class FunctionalMemory:
                 if "result" in previous:
                     replay = cast(dict[str, Any], previous["result"])
                     self._note_view_page(
-                        config, replay, keep_resident=arguments.get("keep_resident", False)
+                        config, replay, keep_resident=arguments.get("keep_resident", False),
+                        read_goal=arguments.get("read_goal"),
                     )
                     return replay
                 raise FunctionalIntegrityError("V13_5_READ_OUTCOME_UNKNOWN")
@@ -1483,7 +1496,8 @@ class FunctionalMemory:
             if self.token_count(canonical(result)) > self.material_limit:
                 raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
         self._note_view_page(
-            config, result, keep_resident=arguments.get("keep_resident", False)
+            config, result, keep_resident=arguments.get("keep_resident", False),
+            read_goal=arguments.get("read_goal"),
         )
         try:
             with self.service._locked():
@@ -1845,6 +1859,7 @@ class FunctionalMemory:
             history: bool = False,
             history_cursor: str | None = None,
             keep_resident: bool = False,
+            read_goal: str | None = None,
         ) -> ToolMessage:
             """Read current/exact historical revision, or a previously issued cursor.
 
@@ -1868,7 +1883,8 @@ class FunctionalMemory:
                     "cursor": cursor,
                     "history": history,
                     "history_cursor": history_cursor,
-                    **({"keep_resident": keep_resident}
+                    **({"keep_resident": keep_resident,
+                       **({"read_goal": read_goal} if read_goal is not None else {})}
                        if self.memory_view_mode != "legacy" else {}),
                 },
             )
@@ -1917,6 +1933,7 @@ class FunctionalMemory:
             source_ref: str | None = None,
             cursor: str | None = None,
             keep_resident: bool = False,
+            read_goal: str | None = None,
         ) -> ToolMessage:
             """Read an issued exact fragment or a full public source group, continuing its cursor.
 
@@ -1934,7 +1951,8 @@ class FunctionalMemory:
                     "fragment_handle": fragment_handle,
                     "source_ref": source_ref,
                     "cursor": cursor,
-                    **({"keep_resident": keep_resident}
+                    **({"keep_resident": keep_resident,
+                       **({"read_goal": read_goal} if read_goal is not None else {})}
                        if self.memory_view_mode != "legacy" else {}),
                 },
             )
@@ -1945,6 +1963,7 @@ class FunctionalMemory:
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
             keep_resident: bool = False,
+            read_goal: str | None = None,
         ) -> ToolMessage:
             """Read the current version of an issued record ID, without changing it.
 
@@ -1955,7 +1974,8 @@ class FunctionalMemory:
             """
             return record_read(
                 config, tool_call_id, {"tool": "read_memory", "record_id": record_id,
-                    **({"keep_resident": keep_resident}
+                    **({"keep_resident": keep_resident,
+                       **({"read_goal": read_goal} if read_goal is not None else {})}
                        if self.memory_view_mode != "legacy" else {})}
             )
 
@@ -1965,6 +1985,7 @@ class FunctionalMemory:
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
             keep_resident: bool = False,
+            read_goal: str | None = None,
         ) -> ToolMessage:
             """Read original stored revision bodies for one issued record ID.
 
@@ -1976,7 +1997,8 @@ class FunctionalMemory:
                 config,
                 tool_call_id,
                 {"tool": "read_memory_history", "record_id": record_id, "history": True,
-                    **({"keep_resident": keep_resident}
+                    **({"keep_resident": keep_resident,
+                       **({"read_goal": read_goal} if read_goal is not None else {})}
                        if self.memory_view_mode != "legacy" else {})},
             )
 
@@ -1987,6 +2009,7 @@ class FunctionalMemory:
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
             keep_resident: bool = False,
+            read_goal: str | None = None,
         ) -> ToolMessage:
             """Read one exact stored historical revision without making it current.
 
@@ -1998,7 +2021,8 @@ class FunctionalMemory:
                 config,
                 tool_call_id,
                 {"tool": "read_memory_revision", "record_id": record_id, "revision": revision,
-                    **({"keep_resident": keep_resident}
+                    **({"keep_resident": keep_resident,
+                       **({"read_goal": read_goal} if read_goal is not None else {})}
                        if self.memory_view_mode != "legacy" else {})},
             )
 
@@ -2008,6 +2032,7 @@ class FunctionalMemory:
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
             keep_resident: bool = False,
+            read_goal: str | None = None,
         ) -> ToolMessage:
             """Read a full original source group using its issued source_ref.
 
@@ -2017,7 +2042,8 @@ class FunctionalMemory:
             """
             return source_read(
                 config, tool_call_id, {"tool": "read_source", "source_ref": source_ref,
-                    **({"keep_resident": keep_resident}
+                    **({"keep_resident": keep_resident,
+                       **({"read_goal": read_goal} if read_goal is not None else {})}
                        if self.memory_view_mode != "legacy" else {})}
             )
 
@@ -2027,6 +2053,7 @@ class FunctionalMemory:
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
             keep_resident: bool = False,
+            read_goal: str | None = None,
         ) -> ToolMessage:
             """Read the exact original fragment identified by an issued fragment_handle.
 
@@ -2036,7 +2063,8 @@ class FunctionalMemory:
             """
             return source_read(
                 config, tool_call_id, {"tool": "read_fragment", "fragment_handle": fragment_handle,
-                    **({"keep_resident": keep_resident}
+                    **({"keep_resident": keep_resident,
+                       **({"read_goal": read_goal} if read_goal is not None else {})}
                        if self.memory_view_mode != "legacy" else {})}
             )
 
@@ -2046,6 +2074,7 @@ class FunctionalMemory:
             *,
             tool_call_id: Annotated[str, InjectedToolCallId],
             keep_resident: bool = False,
+            read_goal: str | None = None,
         ) -> ToolMessage:
             """Continue an issued next_cursor from ordinary material or any explicit read.
 
@@ -2054,7 +2083,8 @@ class FunctionalMemory:
             Uses the shared explicit read allowance and never writes semantic records.
             """
             return record_read(config, tool_call_id, {"tool": "read_page", "cursor": cursor,
-                **({"keep_resident": keep_resident}
+                **({"keep_resident": keep_resident,
+                       **({"read_goal": read_goal} if read_goal is not None else {})}
                    if self.memory_view_mode != "legacy" else {})})
 
         def read_support_context(
@@ -2395,7 +2425,8 @@ class FunctionalMemory:
                 schema = cast(type[BaseModel], tool.args_schema)
                 fields: Any = {
                     name: (field.annotation, copy.deepcopy(field))
-                    for name, field in schema.model_fields.items() if name != "keep_resident"
+                    for name, field in schema.model_fields.items()
+                    if name not in {"keep_resident", "read_goal"}
                 }
                 tool.args_schema = create_model(schema.__name__, **fields)
             return tool
@@ -2433,6 +2464,14 @@ class FunctionalMemory:
                 combined_read_tool(read_source),
             )
         )
+        if resident:
+            for read_tool in read_tools:
+                read_tool.description += (
+                    " Optional read_goal states why the current question needs this read, "
+                    "possibly combining applicability, original wording and saved history. "
+                    "Omitting it inherits that purpose; opening a source, version or page "
+                    "does not change the purpose, evidence or permissions."
+                )
         return (
             save_tool,
             update_tool,

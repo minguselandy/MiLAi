@@ -25,15 +25,19 @@ def item_ref(item: dict[str, Any], snapshot_id: str, unit_index: int) -> dict[st
 
 
 def admit_refs(
-    state: dict[str, Any], refs: list[dict[str, Any]], *, keep_resident: bool = False
+    state: dict[str, Any], refs: list[dict[str, Any]], *, keep_resident: bool = False,
+    read_goal: str | None = None,
 ) -> dict[str, Any]:
     """Continue one matter's pages; switch matters unless explicitly retained.
 
     Sources opened beside a matter are its selected original evidence. Opening
     another matter replaces that whole selection; neither path changes archives.
     """
+    current = copy.deepcopy(state)
+    if read_goal is not None:
+        current["read_goal"] = read_goal
     if not refs:
-        return copy.deepcopy(state)
+        return current
     previous = state["resident_refs"]
     records = {ref["id"] for ref in refs if ref["kind"] == "record"}
     same_matter = bool(records) and records == {
@@ -67,14 +71,8 @@ def admit_refs(
         ]
         merged.append(copy.deepcopy(ref))
     return {
-        **copy.deepcopy(state),
+        **current,
         "focus": list(records) if records else state.get("focus") or refs[0]["id"],
-        "read_goal": "current_and_saved_history" if any(
-            ref["view"] == "historical_exact_revision" for ref in merged
-        ) else (
-            state.get("read_goal") if supporting_source else
-            ("current" if records else "original_source")
-        ),
         "resident_refs": merged,
     }
 
@@ -82,6 +80,7 @@ def admit_refs(
 def select_view_refs(
     state: dict[str, Any], available_refs: list[dict[str, Any]],
     selections: list[dict[str, Any]], *, keep_resident: bool = False,
+    read_goal: str | None = None,
 ) -> dict[str, Any]:
     """Open selected identities from one actual pool, without bodies or another controller.
 
@@ -102,7 +101,7 @@ def select_view_refs(
             and all(ref.get(key) == selection[key]
                     for key in ("revision", "range", "unit_id") if key in selection)
         )
-    return admit_refs(state, selected, keep_resident=keep_resident)
+    return admit_refs(state, selected, keep_resident=keep_resident, read_goal=read_goal)
 
 
 def catalog_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
