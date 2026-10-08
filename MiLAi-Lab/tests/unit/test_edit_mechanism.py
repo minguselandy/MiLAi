@@ -231,11 +231,12 @@ def test_three_tables_keep_unassessed_and_no_delta_in_fixed_opportunities() -> N
 
 @pytest.mark.parametrize("artifact_layout", ["legacy", "recipe"])
 def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
-    tmp_path: Path, artifact_layout: str,
+    tmp_path: Path, artifact_layout: str, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Synthetic engineering fixture; no actual model or scientific score proof."""
     suite = tmp_path / "suite"
     original = {}
+    original_banks = {}
     arms = ["B0", "B1", "B2", "M"]
     for arm in arms:
         root = suite / arm
@@ -259,6 +260,7 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
             method = EditMemory(service, arm, interface_version="I2")
             for step, text in enumerate([
                 "Twice weekly; holidays paused.", "Once weekly; holidays paused.",
+                "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE weekly.",
             ]):
                 session = f"halumem:alice:session:{step}"
                 captured = service.capture_user(
@@ -284,6 +286,13 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
                     session, f"actual:{step}", method.decode_proposal(proposal, view["mapping"])
                 )
                 assert receipt["ok"]
+                if step == 2:
+                    future_record = method.apply(session, "future-only", method.decode_proposal(
+                        {"action": "create", "units": [{"text": text, "evidence": ["e1"]}]},
+                        view["mapping"],
+                    ))
+                    assert future_record["ok"]
+                    continue
                 folder = root / "maintenance/halumem/alice" / str(step)
                 if artifact_layout == "recipe":
                     write_json(folder / "complete.json", {"receipts": [receipt], "batches": [{
@@ -304,8 +313,11 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
                 write_json(root / "evaluation/halumem/alice" / str(step) / "complete.json", {
                     "counts": {"formed_sessions": 1}, "records": {},
                 })
-            service.capture_user("future", "unrelated", "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE")
             original[arm] = copy.deepcopy(service.records())
+            original_banks[arm] = {
+                (item.namespace, item.key): copy.deepcopy(item.value)
+                for item in store.search((), limit=100000)
+            }
     case = {"uuid": "alice", "session": 1, "memory_ordinal": 0,
             "date": "2030-01-02", "observed_dialogue": [
                 {"role": "user", "content": "Once weekly; holidays paused."},
@@ -359,6 +371,67 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
     run.settings = {"mechanism": {"arms": arms}, "drift": {"arms": arms},
                     "interface_version": "I2",
                     "model": {"max_tokens": 100}, "context_tokens": 65536, "retrieval_limit": 10}
+    if artifact_layout == "recipe":
+        class LocalEmbeddings(Embeddings):
+            def embed_documents(self, texts: list[str]) -> list[list[float]]:
+                assert "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE" not in str(texts)
+                return [[1.0, 0.0] if "Once weekly" in text else [0.0, 1.0] for text in texts]
+
+            def embed_query(self, text: str) -> list[float]:
+                return [1.0, 0.0]
+
+        run.retrieval_embeddings = LocalEmbeddings()
+        run.settings.update(memory_profile="unified_v1", memory_ranking="dense",
+                            embedding_dimension=2, maintenance_recipe="extract_then_edit")
+    original_answer = run.answer
+    probe_inputs = []
+
+    def inspect_answer(service, question, date, key):
+        arm, variant = key.split("/")[2:4]
+        assert service.namespace == ("edit", arm, arm, "alice")
+        assert service.source_backlinks == "disabled"
+        before, after, _ = snapshots(suite, arm, "alice", 1)
+        expected = controls(before, after, variant)
+        assert record_index(service.records()) == record_index(expected)
+        revisions = {r["id"]: r["value"]["revision"] for r in expected}
+        for record in expected:
+            metadata = service.store.get(service.namespace, record["id"]).value["_v13_1"]
+            assert all(v["revision"] <= record["value"]["revision"] for v in metadata["history"])
+            assert service.read(record["id"], record["value"]["revision"] + 1)["ok"] is False
+        for candidate in service._rows(service.candidates_namespace):
+            bound = candidate["value"]
+            assert bound["record_id"] in revisions
+            assert bound["revision"] <= revisions[bound["record_id"]]
+            assert service.candidate(candidate["id"]) is not None
+        original_search = service.search
+
+        def search(*args, **kwargs):
+            assert kwargs["include_raw"] is False
+            material = original_search(*args, **kwargs)
+            assert material["raw_events"] == []
+            return material
+
+        monkeypatch.setattr(service, "search", search)
+        answer = original_answer(service, question, date, key)
+        material = read_json(run.root / "http" / key / "retrieval.json")
+        if artifact_layout == "recipe":
+            assert {m["record_id"] for m in material} == set(revisions)
+            assert {m["content"] for m in material} == {
+                r["value"]["content"] for r in expected
+            }
+            if variant == "NeverWrite":
+                assert "Once weekly" not in str(material)
+            elif arm in {"B1", "M"}:
+                current = next(m for m in material if m["revision"] == 2)
+                assert current["revision_evidence"][0]["content"] == (
+                    "Once weekly; holidays paused."
+                )
+                assert current["revision_evidence"][0]["role"] == "user"
+                assert current["revision_evidence"][0]["source_revision"] == 1
+        probe_inputs.append(material)
+        return answer
+
+    monkeypatch.setattr(run, "answer", inspect_answer)
     run.tokenizer = Tokenizer()
     run.budget = RunBudget(RunLimits(), tmp_path / "budget.json")
     run.client = VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100),
@@ -366,6 +439,7 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
     try:
         result = run.run_native(suite, selection, review)
         assert result["metrics"]["M/Actual"]["opportunities"] == 1
+        assert len(probe_inputs) == 12
         assert len(requests) == 40
         count = run.budget.state["generation_requests"]
         run.run_native(suite, selection, review)
@@ -394,6 +468,10 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
                 service = MemoryService(store, ("edit", arm, arm, "alice"), "alice",
                                         bank / "memory.lock")
                 assert record_index(service.records()) == record_index(original[arm])
+                assert {
+                    (item.namespace, item.key): item.value
+                    for item in store.search((), limit=100000)
+                } == original_banks[arm]
     finally:
         run.client.close()
 
