@@ -1520,6 +1520,19 @@ class EditMemory:
             return unit  # type: ignore[no-any-return]
 
         def supports(item: dict[str, Any]) -> tuple[list[str], list[dict[str, Any]]]:
+            retained_unit = (
+                item.get("from_unit") if proposal["action"] == "rewrite"
+                else item.get("target_unit") if item.get("operation") == "replace" else None
+            )
+            if (
+                self.features.source_metadata
+                and retained_unit
+                and "keep_support" not in item
+                and (kept_alias := item.get("assertion", {}).get("keep"))
+            ):
+                support = bound["support"].get(kept_alias)
+                if support is not None and support.get("unit") == retained_unit:
+                    item["keep_support"] = [kept_alias]
             handles, kept = [], []
             for alias in item.get("evidence", []):
                 evidence = bound["evidence"].get(alias)
@@ -1602,16 +1615,6 @@ class EditMemory:
         origins: list[set[str]] = []
         explicit_origins: set[str] = set()
         for item in proposal.get("units", []):
-            if (
-                proposal["action"] == "rewrite"
-                and self.features.source_metadata
-                and "from_unit" in item
-                and "keep_support" not in item
-                and (kept_alias := item["assertion"].get("keep"))
-            ):
-                support = bound["support"].get(kept_alias)
-                if support is not None and support.get("unit") == item["from_unit"]:
-                    item["keep_support"] = [kept_alias]
             handles, kept = supports(item)
             origin = {support["unit"] for support in kept if "unit" in support}
             if len(origin) != len(kept) or len(origin) > 1:

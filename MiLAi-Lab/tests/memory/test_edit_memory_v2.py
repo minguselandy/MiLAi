@@ -902,6 +902,32 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         assert (
             method.decode_envelope({"records": {"r1": legacy_edit}}, view["mapping"])[0] == decoded
         )
+        # A local target and its explicitly kept attribution identify the same
+        # unchanged unit; retaining that h does not need a second declaration.
+        edit["edits"].append({
+            "operation": "replace", "target_unit": clause["id"], "text": clause["text"],
+            "evidence": [], "assertion": {"keep": clause["support"][0]},
+        })
+        assert validator.is_valid({"records": {"r1": edit}})
+        decoded = method.decode_envelope({"records": {"r1": edit}}, view["mapping"])[0]
+        explicit = copy.deepcopy(edit)
+        explicit["edits"][-1]["keep_support"] = clause["support"]
+        assert method.decode_envelope({"records": {"r1": explicit}}, view["mapping"])[0] == decoded
+        explicit_empty = copy.deepcopy(edit)
+        explicit_empty["edits"][-1].update(evidence=["e1"], keep_support=[])
+        with pytest.raises(FunctionalRejection, match="ASSERTION_SUPPORT_NOT_KEPT"):
+            method.decode_envelope({"records": {"r1": explicit_empty}}, view["mapping"])
+        cross_unit = copy.deepcopy(edit)
+        cross_unit["edits"][-1].update(
+            evidence=["e1"], assertion={"keep": clause["conditions"][0]["support"][0]},
+        )
+        with pytest.raises(FunctionalRejection, match="ASSERTION_SUPPORT_NOT_KEPT"):
+            method.decode_envelope({"records": {"r1": cross_unit}}, view["mapping"])
+        changed = copy.deepcopy(edit)
+        changed["edits"][-1].update(text="User reports loud reminders.", evidence=["e1"])
+        with pytest.raises(FunctionalRejection, match="CHANGED_ASSERTION_REQUIRES_NEW_EVIDENCE"):
+            method.decode_envelope({"records": {"r1": changed}}, view["mapping"])
+        assert service.read(saved["id"])["value"]["edit_state"] == baseline
         revised = method.apply("s", "scope", decoded)
         state = copy.deepcopy(service.read(saved["id"])["value"]["edit_state"])
         assert revised["revision"] == 2 and state["units"][0] == baseline["units"][0]
