@@ -1366,7 +1366,7 @@ def operation_status(
                            if batch["phase"].endswith("_pending") else "not_committed",
                            "phase": batch["phase"], "unprocessed": batch["unprocessed"]})
         elif not batch["receipts"]:
-            memory.append({"tool": "maintain_event", "status": "no_change", "effect": "none"})
+            memory.append({"tool": "maintain_event", "status": "not_committed", "effect": "none"})
     semantic_states = {row["status"] for row in memory}
     semantic = ("unknown" if "unknown" in semantic_states else
                 "partial" if "committed" in semantic_states and "not_committed" in semantic_states
