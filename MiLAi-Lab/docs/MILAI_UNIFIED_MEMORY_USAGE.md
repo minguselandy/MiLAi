@@ -11,6 +11,67 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 集中预测已失败，已保存部分独立评分：2026-10-08 17:44:06 UTC／北京时间2026-10-09 01:44:06
+
+**冻结268预测已FAILED／exit1，停在16/32完整会话；新开发修复不能回填该运行。**
+已闭合的前两位开发用户各8会话，完整自然答案20＋12＝32；第三用户原0维护已完成，
+首个Reader输出length，第三／第四用户没有完整会话预测。完整预测分布8／8／0／0，
+17份维护记录不能称17份预测，未执行部分不补零，也没有完整M成绩或同版方法排名。
+
+截断Reader实际输入1320tokens、输出32768tokens，不能归因于输入超限。原正式截断响应、
+预测FAILED终态、stderr和第三用户已保存状态保留，不执行reasoning或截断正文补造答案。
+另有三次正常stop的正式Editor{}（首用户原3、第二用户原1／7）；其中第二用户原1已有
+职业Source送达却未提交，后续岗位问题回答未知。材料小／交付成功／正常stop均不保证变化落实。
+
+| 268已闭合预测事实 | 实际值 |
+|---|---:|
+| Extractor／Writer选择／Editor | 17／14／17响应 |
+| Reader选择／最终Reader | 33／33响应，其中最终32stop、1length |
+| 生成响应及成本 | 114；1,087,982 known／charged tokens；113stop＋1length |
+| 实际维护回执 | 50committed＋1rejected；拒绝为EDIT_ASSERTION_SUPPORT_NOT_KEPT |
+| 编码器 | 94响应／7,490tokens |
+| Judge／新增unknown | 0／0；历史unknown仍6 |
+
+逐响应汇总与连续账本差额一致：闭合账本47651requests、209382224known、209658920charged、
+embedding1949234；这些是预测结束成本，不含随后评分或之前0dd的独立成本，不能重复相加。
+提交回执不证明语义保持。Root读完上述32个完整自然答案，没有另造数值重评分。
+
+### 只评分已保存范围，不重跑方法
+
+在新的`artifacts/post118/prefix8-m-26893e2-score-saved16-v1`根，声明只选前两位已完成
+用户的16份预测／32答案，复制已保存预测、author update_retrieval和只读SQLite备份。
+仍从冻结268源码执行既有`run_edit_suite.py --phase score`，仅评估选择与输出身份单列；
+不修改原预测配置／终态，不重跑Writer／Reader／encoder，不拼接剩余历史。
+17:40:53 UTC启动，PID1218852／session7233；本固定时点确认26个Judge响应、
+1/16份完整评估，尚无score终态。该子范围完成也不等于原32会话成功。
+原作者无效标签继续保留；必须待实际原件与终态核对后再发布部分汇总，不按进程存在推定效果。
+
+### 最新开发与CI失败定位
+
+算法`fcb2798`与评估适配`8d09fef`、生成fixture`dcad5fb`不在实际268内：
+
+- Reader与Writer只有实际存在可选evidence_links才展示evidence_status。缺评估不再由程序
+  变成insufficient；Primary Source、原角色／时间、保留支持、显式支持／反对及空links分类
+  不变，不把reported判成外部事实。既有投影检查及相关Ruff／类型通过，0HTTP。
+- 7fc报告头自身Fast37815674964失败：Foundation526通过、10项失败，Lab fast与external
+  成功，Full37815674947 skipped。6项是fresh生成fixture仍用旧source，而新合同要求
+  source_evidence；4项是evaluator旧metadata精确比较不认识显式False查询附录标志。
+  已分别更新生成样例与既有评估兼容，未放宽支持／权限、未改实际保存或旧Source解码。
+- 合流22项直接受影响检查、Ruff／相关严格类型通过；不回填7fc或268CI成功。附录True
+  分支仍明确UNKNOWN，需要分别核原候选HTTP与程序回执，不能把合成全文当模型原文。
+
+这些修复消除程序误导和合同错配，尚未证明真实Reader姓名／收入归属、业务补存或语义保持
+改善。下一步只对已曝光输入准备省略字段与显式空容器的有限单因素诊断，两case、两表达、
+固定两次重复，最多8生成；仍允许no-op、不改采样／模型／检索，不并发占用当前score资源。
+
+[Mem0原论文](https://arxiv.org/html/2504.19413v1)以ADD／UPDATE／DELETE／NOOP表达更新选择，
+为明确表示“不改”提供先例；本轮只检验已有输出表达，不引入新分类器或事实库。
+[vLLM官方文档](https://docs.vllm.ai/en/latest/features/structured_outputs/)支持推理与结构化输出
+配合；目前正式{}本来合法，未有证据认定服务端故障，合法输出与语义完成仍需分开。
+
+PR119仍open／draft未合并；本报告头CI另核。16保留用户未用于开发，完整原计划、同版五方法
+277连续历史、最终确认与六项交付继续，Product NO_GO。下面17:17运行中等块均为历史时点。
+
 ## 集中开发诊断运行中：2026-10-08 17:17:53 UTC／北京时间2026-10-09 01:17:53
 
 **冻结268的M／staged前八会话预测正在串行运行，尚无评分或方法优势结论。**

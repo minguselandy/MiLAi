@@ -1,3 +1,27 @@
+# Live handoff: 2026-10-08 17:44:06 UTC predict FAILED; saved16 partial score RUNNING
+
+Frozen268 predict PID1021934 exited1; terminal-predict FAILED Provider output incomplete:length.
+16/32savedpredictions(8,8,0,0),17maintenance,32completeanswers;thirduser0firstReader
+1320input/32768outputlength. Preserve partial answer/DB/terminal; no tailrestart or zero
+for unrun sessions. Closed114gen1087982known/charged,94embedding7490,Judge0/newunknown0,
+ledger47651/209382224known/209658920charged/embed1949234/historyunknown6.
+New independent score root artifacts/post118/prefix8-m-26893e2-score-saved16-v1,
+config sibling .config.json, frozen source268 same, only2completeusers/16predictions/32QA.
+Copied saved predictions/author retrieval/readonlySQLite backups; no Writer/Reader/encoder.
+ScorePID1218852/session7233 started17:40:53UTC;1/16eval,26confirmedJudge,no terminal at
+observation. Root alone realHTTP; inspect currentPID/files/terminal before new work,
+not fixed snapshot. Partial score completion is not full32completion. Score log siblings.
+Latest code fcb projection omits undeclared evidence_status;explicitlinks/source/support
+unchanged,0HTTP. dcad freshsource_evidence fixture/8d evaluatorFalse metadata compatibility;
+22directintegration/audit checks+Ruff/types pass. True appended receipt remainsUNKNOWN:
+wholeprogram+Agentanswer cannot matchoriginalAgentHTTP asifraw. No new platform/gates.
+7fc ownFast37815674964 FAILED Foundation526pass10fixtures/contracts;Lab/externalpassed,
+Full37815674947skipped. New ownCIseparate; old268CI notbackfilled.
+Threeworkers offline diagnostics/preparation only. Eightgeneration framingdiagnostic
+onlyPREPARED;no diagnosticmodelcalls/no proddefaultadoption/reasoningexecute/nonemptyforce.
+Latestmethods notin268,32Rootfullanswers read/no numericregrading. Full originalscope
+sixdeliveriesactive,16reservedunused/ProductNO_GO. Lowerblocks historical.
+
 # Live handoff: 2026-10-08 17:17:53 UTC frozen diagnosis RUNNING
 
 Frozen26893e2857a2d84b1215495054f900e8870d199f M/staged/prefix8 predict started16:49:21,
