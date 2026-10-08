@@ -11,6 +11,52 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 10:24:17 UTC：三位subagent并行复核，语义断点与正式评分分开
+
+用户明确要求subagent并行测试效果。复用三位开发Agent，只读核查实际模型产物及保存状态；
+新增模型／encoder／Judge调用0，没有改变运行输入或重新评分。Root继续串行调度真实HTTP。
+这是同开发团队的补充复核，不是独立确认。[PR108](https://github.com/minguselandy/MiLAi/pull/108)
+已于10:11:45 UTC合并，main2d9baa05b5a4f7963cb89d9226fbcebed31dae72；受测头97a71f3自身
+[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37760353122)及合并main自身[Fast](
+https://github.com/minguselandy/MiLAi/actions/runs/37761866635)均成功；该头未观察到Full结果。
+候选评分仍冻结d62／PID3552053，18/32[8,8,2,0]，273Judge响应／795622known，另1在途，
+尚无terminal-score。修复后的Writer和Reader有限比较均未开始真实调用。
+
+| 已闭合用户，原作者标签 | 更新Correct／全部机会 | 更新valid | QA Correct／全部问题 | QA valid |
+|---|---:|---:|---:|---:|
+| 第一用户前8会话 | 10/19 | 17 | 12/20 | 18 |
+| 第二用户前8会话 | 1/15 | 12 | 4/12 | 12 |
+
+第二用户更新中的2个Omitted和1个null按原无效标签保留，不改名为Omission。表为当前运行子集，
+不发布四用户总体分数或跨版本优势。形成指标沿用既有interference过滤，不能直接用原记录行数。
+
+Writer机械覆盖全部33来源batch／40编辑work，来源语义复核15个batch。初始姓名在用户1／3／4
+实际保存、用户2未保存；首次就业有的先被导航关闭新建，有的新建可用仍为空。实际局部损伤：
+第一用户原3整条change_value丢失旧百万目标；原4修改犬种时丢失同条款中的其他宠物，另一条
+否定内容仍保留。零单元删除不能证明非目标语义保持。第二用户原3的提案把Assistant精确金额
+归给User并丢季节限定，但整项被拒，旧r1完全不变，不能称错误落库。后期换岗／健康实际落实、
+旧单元逐值保留也有正例；部分可能性被加强为明确计划仍保留。40个Editor最大输入17428，
+本轮无Writer容量失败。7次新建可用的空提案不能因733修复就记为解决。
+
+Reader复核全部73份完整答案与161次选择：所选正文均实际进入后续输入，未发现越池、选后未开
+或版本错配。34题最后打开整个非空池；另有换出／重装，重复选择不自动算浪费。第一用户原4 q0
+身份卡在池内却未选；第三用户原7的历史问题把后来的计划写进主答案再补时间限定；第一用户原7
+旧版动机存在于保存历史，但当前pool只有新版，属于固定材料缺口，不能靠目录补出历史。
+维护123生成／1820056known与Reader234生成／1489978known是357生成总成本的互斥子集，
+不重复加账。Reader复核曾显示一条已曝光作者evidence，已丢弃；未用于输入、补充证据、预声明
+案例选择或新标签，完整原始来源独立审计仍未完成。
+
+Host复核d475的18结果／17自然候选及ce14的8执行，真实业务仍恰一次预订和一次补标签。
+ce14纯保存r3只修改续办要求，实际query来源使r4才更新标签结果；r4继承了无业务依据的发货
+断言。操作历史dispatch_started表示调用开始，被抽取／编辑解释成运输发货；后续最小改进应
+明确呈现操作进度，保留原journal、身份和权限。原Tool拒绝与旧query零回执各自仍在，
+结构completed／coverage unchecked不能代表所有保存完成。部分自然文本是未交付候选，
+不得当逐字最终反馈；原Host报告据此补充边界。ce14未跑撤销／历史结尾及遗忘，不能称其已修复。
+
+四个Writer实际前态离线预览全部fit，最大20389tokens，共同旧范围没有预算省略；原声明固定
+池及来源仍保留。先完成当前评分和D0／D1／D2比较，再依据实际质量与累计调用做减法；不因
+这些复核扩展常驻审核器、主体平台或编辑算子。16保留未用，完整目标active，Product NO_GO。
+
 ## 2026-10-08 09:55:23 UTC：冻结预测闭合，同源范围比较入口修正
 
 本节为固定观察。[PR107](https://github.com/minguselandy/MiLAi/pull/107)已于09:01:29 UTC合并，
@@ -25,10 +71,12 @@ https://github.com/minguselandy/MiLAi/actions/runs/37753781615)成功，不称Fu
 共32/32预测、33个来源batch、73个完整自然答案。Root读完全部73个答案，选定来源、
 正式输出和回执审计仍为部分；没有另造数值重评分或独立审计全部HTTP／reasoning。
 正常stop与进程闭合不表示语义通过。40个编辑工作中24次真实空提案；46个实际回执为
-40提交（31新建、9局部编辑）、1 no_change、5拒绝，无重放。另3个来源batch维护不完整，
+40提交（31新建、9局部编辑）、1 no_change、5拒绝，无重放。4个来源batch维护不完整，
 选择阶段1次EDIT_VIEW_CREATE_SCOPE_ALREADY_PROCESSED单列；空提案以编辑工作为单位，
 不能与来源batch或该选择失败合并。拒绝含2次EDIT_APPEND_CONDITION_TARGET_INVALID及
-3次EDIT_EVIDENCE_LINK_NOT_SELECTED，原失败保留。
+3次EDIT_EVIDENCE_LINK_NOT_SELECTED，原失败保留。本段计数勘误：初稿将分析器的3个不完整
+编辑leaf误写成来源batch数；33个来源根结果实际29 completed／4 incomplete，包含另1个
+导航阶段失败。原始结果和checkpoint一致，未改实验或标签。
 
 | 闭合预测，阶段互斥 | 确认响应 | known tokens |
 |---|---:|---:|
