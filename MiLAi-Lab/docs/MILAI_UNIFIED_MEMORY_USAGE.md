@@ -11,6 +11,91 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 06:30:20 UTC：状态视图阶段提交，发布后按用户要求暂停
+
+本节固定于06:30:20 UTC／北京时间14:30:20，区分新开发源码、旧实验和发布状态。
+发布基线main为`64f006ffd690f3a16d7a93fb39f7087a88aabb8f`，PR83–106已合并。
+[PR106](https://github.com/minguselandy/MiLAi/pull/106)于06:11:58 UTC合并，受测头
+`8155d2c2f8426af2c7df60ca81ea55071be21d31`自身[Fast](
+https://github.com/minguselandy/MiLAi/actions/runs/37731193509)成功；不把其CI归给本批新源码。
+本批集成源码为`230ed2b043c7d57b989868ea8fdfe03a6f139bb0`，分支
+`feat/lab-state-driven-view-20261008`；作为独立draft发布，新源码尚未合并main，
+自己的远端CI待发布后观察。用户最新要求“提交完成后暂停任务执行”，因此本次只完成
+当前批次合流、必要检查和交接，不启动真实模型试验，不把暂停记作完整目标完成。
+
+**新开发按[状态视图计划](MILAI_STATE_DRIVEN_MEMORY_VIEW_BUILD_PLAN.md)及其引用的
+[逐步披露计划](MILAI_PROGRESSIVE_DISCLOSURE_MEMORY_DEVELOPMENT_PLAN.md)推进。**两份输入
+按原文保存，canonical checkout中的用户原件没有修改。一个逻辑MemoryService、实际来源、
+记录版本、读取权限、旧编辑器、业务回执及连续账本继续共用；默认`legacy`，新增的唯一
+公开模式项为`memory_view_mode: legacy | staged | state_driven`。
+
+| 本批模块 | 已接通的行为 | 当前证据和边界 |
+|---|---|---|
+| 读取工作集 | 轻量实际候选目录；focus／read_goal／resident_refs／pending_refs仅存实际引用；事项切换、续页、显式保留、重装和遗忘复用原读取工具 | SQLite目录→读取→切换→重开→重装→遗忘例通过；目录不是已读正文或事实支持 |
+| 模型输入与Writer | 每次Host调用前投影当前驻留正文；直接I2写入只映射实际读完的当前目标；当前User／真实Tool来源保留；提交刷新当前版本，已交付历史版本仍可定位 | 原持久消息和已读存档保留；临时旧读取正文换为读取身份，工具调用／结果配对及业务回执保留；真实模型效果未验证 |
+| 共同维护 | 两种原recipe、五种原编辑方法共用maintain_event；新模式一次抽取，先定位再打开完整事项和支持；工作项身份先持久化，再经原提交边界执行 | 实际SQLite两事项例在首次提交后中断，重开核对原回执，仅继续另一事项，各版本1→2；未知调用保留、不自动重发 |
+| 中央入口与配置 | 普通Host接入模式及每轮投影；共同benchmark Writer接入模式，selection／分项editor使用独立HTTP日志路径和原费用账本；当前明确保存意图可标记原checkpoint | 普通Host新模式接线检查通过；benchmark Reader仍是既有一次完整K10输入，尚未接入新工作集导航；不能宣称共同D2候选已完成 |
+
+本批添加[普通Host配置](../configs/milai-state-driven-functional-v1.json)和
+[仅准备的M前八会话配置](../configs/milai-state-driven-prefix8-v1.json)。沿用Qwen3.6生成家族、
+BGE-m3普通dense、既有K10、上下文／输出／读取／调用额度、原I2及抽取配方。后者明确标记
+`DEVELOPMENT_WRITER_VIEW_ONLY_READER_PENDING`，未启动；配置出现不等于最终候选冻结或准入。
+D1与D2的选择次数／工作项策略已经有代码，尚无同实际前态的效果对照。
+
+**必须保留的未完成接线与断点：**
+
+- benchmark Reader的新视图、共同选择调用的结果分析／完整成本展示、同前态D0／D1／D2
+  比较入口尚未完成。已保存HTTP与连续费用计量不能替代分析器对全部新增stage的闭合审计。
+- `pending_maintenance`仅定位当前owner可见的原显式保存checkpoint与来源引用，不携带旧写权限。
+  中央Host已可显示这些引用；跨会话纯保存续办的原session／新权限绑定仍未证明接通。
+- 显式保存若正式输出为空，原checkpoint可能为complete、实际未提交；现有
+  `resume_maintenance`会在该phase提前返回。列出pending不表示“继续保存”已能补办。
+  有回执的部分提交恢复例通过，不覆盖这个语义空输出分支。
+- 计划要求的三个真实连续Host故事、完整开发候选和同前态视图／编辑比较均未执行。
+  当前没有新方法分数或“更短输入提高正确率”的证据，空提案仍合法，不强制非空。
+
+Root合流后运行10项直接检查：工作集正常链、分项维护中断／unknown、驻留／修订／历史，
+以及普通Host原五种设置和新M／unified／state_driven接线；均通过。六个受影响源文件
+strict mypy、九个改动Python文件Ruff、包依赖边界、git diff检查通过。首次Ruff仅发现
+Root新增共享helper的import顺序，已修正。两个配置JSON可读，两份计划与原件逐字相同。
+这些检查使用脚本化transport与实际SQLite；本批真实generation／encoder／Judge均为0。
+Worker C曾扩大到整文件检查时遇到/tmp所在根盘满（Errno28），未完成该套检查；随后
+一次整文件重跑在14项通过后主动中断，均不记整套通过。最终只保留窄检查，Root临时库
+位于本分支ignored artifacts，没有清理别人的临时目录或旧实验。各模块单独检查与Root
+合流检查范围重叠，不把其计数相加为独立确认。
+
+**旧4e运行已按此前用户暂停要求停止，不是仍在途。**冻结源码为
+`4e4609917c1b0ce6e3aa14b3f885df6854c364c1`，新日期、Episode、空维护反馈和本批视图
+均未进入它。PID1675659于05:15:53.207085 UTC退出，实际exit_code=-2；暂停观察记录
+保留在ignored区域。本次再核对没有活跃实验客户端，没有重启或覆盖结果。
+
+| 旧4e各自连续独立历史 | 保存预测／分布 | 当前终态和评分 |
+|---|---|---|
+| B0／B1／B2 | 各32／32，[8,8,8,8]，各73完整答案 | 各预测COMPLETED_EXPERIMENT_PHASE，尚未评分 |
+| M | 23／32，[8,8,7,0] | 未有整臂终态；第三用户原7的qa/8只有保存请求，没有确认响应 |
+| Append-only | 未启动 | 不记零分，未有终态或评分 |
+
+三闭合臂417生成／6,360,293 known，628embedding／220,725 tokens，是旧4e总费用的
+子集；Root已读263完整答案、来源审计部分，没有新数值重评分。下方05:10时点M22及
+“PID仍存活”保留为历史，不再作为实时情况。旧505三闭合臂的原作者负结果也保留：
+更新B0／B1／B2为31／27／26 Correct（各72机会），QA为43／33／34（各73问题），
+原无效标签保留；B2当前实现落后与条件机制的因果作用未分离，不能因新工程模块而回填。
+
+连续账本仍为原ser-v20；暂停后至本节观察没有变化：46,041生成请求，195,934,499 known，
+196,211,195 charged，generation unknown6（此前5＋本次中断未确认1）；embedding
+known／charged均1,899,002，unknown0。从旧4e启动前到暂停的账本差额为518请求、
+517确认响应、8,029,491 known、8,114,699 charged及275,779 embedding tokens。
+这些是旧运行成本，本批开发真实调用为0，三闭合臂及人工复核子集不重复计费。
+未知请求保持原件，不盲重试，不重置预算，也不把全局unknown称为本批模型失败。
+
+**反思与续办顺序。**此次将“已读存档”与“下一轮驻留正文”分开，是处理一次呈现和
+变化落实的工程准备；它尚未证明能消除正式空输出、主体关联、来源错归属或限定损坏。
+恢复任务后先补齐上述少数转换断点和三个正常用户链，再冻结一个完整候选，完成有区分力
+的同前态D0／D1／D2诊断；保留共同简单与Append-only强对照。不要在暂停期间自动启动
+旧运行、新配置或新增审核Agent。65／277连续历史、native／drift／recovery、必要消融
+及固定更紧预算、16保留、外部描述性任务及实际适配器、同一候选Host135case／192message
+与冻结后新故事、六项交付继续未完成。16保留用户未用于开发，Product仍为NO_GO。
+
 ## 2026-10-08 05:10:24 UTC：三臂预测闭合，空维护反馈与语义断点分开
 
 本节固定于05:10:24 UTC／北京时间13:10:24，发布前main为`bafced5`，PR83–105已合并。
