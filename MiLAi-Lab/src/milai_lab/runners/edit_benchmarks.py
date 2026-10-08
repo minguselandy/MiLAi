@@ -541,6 +541,7 @@ class BenchmarkRun:
         *,
         structured: bool,
         response_format: dict[str, Any] | None = None,
+        presence_penalty: float | None = None,
     ) -> str:
         folder = self.root / "http" / key
         cached = folder / "response.json"
@@ -567,10 +568,15 @@ class BenchmarkRun:
                 "structured": structured,
                 "prompt_tokens": tokens,
                 "response_format": selected_format,
+                **({"presence_penalty": presence_penalty}
+                   if presence_penalty is not None else {}),
             },
         )
         try:
-            response = self.client.chat(messages, response_format=selected_format)
+            sampling: dict[str, Any] = (
+                {"presence_penalty": presence_penalty} if presence_penalty is not None else {}
+            )
+            response = self.client.chat(messages, response_format=selected_format, **sampling)
             write_json(cached, response)
             return self.completed_content(response)
         except Exception as error:
