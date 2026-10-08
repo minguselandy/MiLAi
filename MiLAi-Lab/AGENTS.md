@@ -1,3 +1,84 @@
+# Fixed experiment publication: 2026-10-08 15:15:56 UTC
+
+User requests current experiment summary and GitHub submission. This is four
+reports/handoff only; no new model/score/source/tests/config/workflow changes.
+Frozen38 Host CLOSED/exit0/all4COMPLETED; actual business1reserve+1complete_label,
+save-only/readonly no business effects. r1/r2/r3 three committed receipts and two
+incomplete maintenance results; r3 stores final real outcome, application structure
+completed with semantic_coverage unchecked. r2 wrongly revises original request
+and retracts packaging/label requirements; current save-only control remains condition.
+First two Tool editors rejected content+attach_to with existing condition error.
+Do not call four semantic passes or current save pending. Candidate delivery claim
+is not in actual Host final text, which reports destination configuration only.
+
+38 maintain_prior change was NOT exercised: prior_maintenance_requests=[] and
+Current maintenance scope appears zero times in actual four HTTP traces. Current
+continuation went through ordinary current User maintenance; do not attribute r3
+to the new projection or equate this path with old61. P1 read_goal actually used by
+two read_memory calls, each followed by two inheriting material deliveries; new
+User views start independent. Wiring evidence, not quality/causal confirmation.
+Root read all4 delivered texts/three revision bodies/selected sources+proposals;
+three existing agents read-only audited. Raw evidence stays ignored, no Judge.
+30gen431135known/charged (15tool_calls+15stop),13embed683,newunknown0;
+ledger47446/207145148known/207421844charged/embed1940092/historygenunknown6.
+Recent five closed runs365gen4040034known/254embed17048; do not add subsets again.
+721 FAILED32/277+85QA,other4unrun/noscore;505/d62/9a scores unchanged.
+No actual runner now. Original frozen roots/source/config/outputs remain; no restart,
+hot edit, budget reset or unknown replay. Inspect live state before any later dispatch.
+
+main b3/PR116+117 merged. PR118 parent report8d ownFast37796882896 success,
+Full37796882927 skipped; new report head needs its own remote verification.
+Current goal tool reports paused; this user-authorized publication does not restart
+execution. Full original task remains INCOMPLETE, same-version277/holdout/external/
+Host/six deliveries remain,16unused,no finalcandidate,Product NO_GO. Older blocks
+are historical snapshots and do not authorize dispatch from stale observations.
+
+# Fixed experiment publication: 2026-10-08 14:52:48 UTC
+
+User requests experiment summary and GitHub submission. This follow-up changes only
+four reports/handoff, not source/tests/config/workflow, and starts no model or score.
+main b3/PR116+117 merged, own/main Fast passed;61 Full skipped,no797 Full observed.
+PR118 source38 ownFast37795955212 in_progress at snapshot; new report head must be
+verified separately. Frozen38 independent four-message root is PREPARED/HTTP0,
+no results/no real runner; actual source remains38 despite subsequent document commit.
+Do not dispatch from this snapshot without current ownership/terminal inspection.
+
+505 B0/B1/B2 closed update31/27/26 of72,QA43/33/34 of73;M/Append partial notzero.
+d62 M closed32predict+score:16/72valid63,30/73valid70;not cross-version ranking.
+9a Reader/Writer finite comparisons closed;no multi-round causal advantage.
+721 FAILED32saved predictions/85questions,33maintenance/88Reader,othersunrun/noscore;
+356 fourCOMPLETED/saveclass[];d3661COMPLETED/1FAILED/2NOT_RUN/templatepreHTTP;
+61 fourCOMPLETED/continue_prior/false cancellation+resultlength/savepartial.
+Four recent runs total335gen3608899known/charged,241embed16365,newunknown0.
+Ledger47416/206714013known/206990709charged/embed1939409/historyunknown6,no in-flight.
+Original roots/source/config/results/invalid labels stay;no overwrites/restarts/reset.
+Three existing agents only read-check existing evidence;Root integrates/ownsserialHTTP.
+Root356+61 fourdeliveredanswers each,72117 answers;full private/source independent
+audit not claimed. SamefamilyJudge/devreview not independent confirmation.
+Full goal active/incomplete,originalsame-version277/holdout/external/Host/sixdeliveries
+remain,16unused,no finalcandidate,Product NO_GO. All earlier blocks are historical.
+
+# Development handoff: 2026-10-08 14:50:21 UTC maintenance instruction scope
+
+PR117 merged main b3;797 own Fast37794118847/main Fast37795630102 success;
+no797 Full observed. Frozen61 facts/costs unchanged. Confirmed positive original
+Extractor candidates were reused; cancellation first appears in Editor, not a new
+Extractor. Existing not-evidence notice was already supplied. The source-shaped
+current control may confuse semantics; this is a hypothesis, not proven causality.
+New candidate puts exact current continuation text as a JSON string in original
+single System maintenance scope. Human delivery/candidates/mapping/date/replay stay;
+actual current Source, trigger, permissions, checkpoints and budgets stay. Call/fit
+share one projection. No new model stage, retry, keyword gate or completion state.
+Two directly affected existing SQLite/synthetic Host checks, Ruff/single-source
+strict mypy/package boundary pass. Actual Editor input local template projection
+3621 tokens/one System/delivery+candidate equality/0HTTP. Real effect UNVERIFIED;
+no new real task. P1 history and whole save semantics remain unverified separately.
+Original 356/d366/721/61 outputs untouched, same ledger; inspect live ownership before
+dispatch and use /cra TMPDIR+SQLITE_TMPDIR. Root integrates, three existing agents
+only isolated checks/read audit; no reviewer or additional generation family.
+Full goal active/incomplete with original scope/six deliveries,16unused,no final
+candidate,Product NO_GO. Older handoffs are historical, never restart from snapshots.
+
 # Development handoff: 2026-10-08 14:35:31 UTC read purpose and closed61
 
 PR116 merged main51f58ee;61 ownFast37791385445 success,Full37791385453 skipped;

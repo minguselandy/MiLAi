@@ -488,22 +488,11 @@ class FunctionalEditMemory(FunctionalMemory):
         current = self.service.source(bound["source_ref"])
         if current is None:
             raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
-        continuation = {"source_ref": current["event_id"], **{
-            key: current[key] for key in ("role", "observed_at", "content")
-        }}
-        continuation["purpose"] = "current_request_control_not_memory_evidence"
-
         def messages_for_current(messages: list[dict[str, str]]) -> list[dict[str, str]]:
             projected = copy.deepcopy(messages)
-            packet = json.loads(projected[-1]["content"])
-            packet["continuation_request"] = continuation
-            projected[-1]["content"] = json.dumps(
-                packet, ensure_ascii=False, separators=(",", ":")
-            )
             projected[0]["content"] += (
-                " Follow the actual current continuation request's scope and limits. "
-                "It controls this attempt and is not an extra evidence alias for the "
-                "original remembered facts. Original source identity and dates remain."
+                "\nCurrent maintenance scope (instructions for this attempt, "
+                "not fact evidence):\n" + json.dumps(current["content"], ensure_ascii=False)
             )
             return projected
 

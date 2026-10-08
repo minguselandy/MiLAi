@@ -3031,6 +3031,11 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
                "maintenance_recipe": "extract_then_edit"}
     calls, fitted = [], []
     original_text = "Remember quiet reminders only on weekdays."
+    original_packet = {}
+    current_text = (
+        'Continue only saving the earlier reminder. No business action.\n'
+        'Keep the original "weekdays" limit.'
+    )
     with opened(tmp_path, **options) as memory:
         original_ref = memory.service.capture_user(
             "s", "u", original_text, occurred_at="2026-10-01",
@@ -3039,6 +3044,8 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
 
         def first(stage, messages, schema):
             calls.append(stage)
+            if stage != "extract":
+                original_packet.update(json.loads(messages[-1]["content"]))
             return {"changes": []} if stage == "extract" else {}
 
         initial = memory.maintain_sources(
@@ -3058,17 +3065,31 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
             v13_session="new-session", v13_config_version="current-config-v2",
         )
         current_ref = memory.service.capture_user(
-            "new-session", "resume",
-            "Continue only saving the earlier reminder. No business action.",
+            "new-session", "resume", current_text,
         )["source_ref"]
         memory.context("new-session", "resume", "current-config-v2")
 
         def inspect(messages):
+            assert [message["role"] for message in messages] == ["system", "user"]
+            scope = (
+                "\nCurrent maintenance scope (instructions for this attempt, "
+                "not fact evidence):\n"
+            )
+            system = messages[0]["content"]
+            assert system.count(scope) == 1
+            assert json.loads(system.split(scope, 1)[1]) == current_text
             packet = json.loads(messages[-1]["content"])
-            assert packet["continuation_request"]["source_ref"] == current_ref
-            assert packet["continuation_request"]["purpose"].endswith("not_memory_evidence")
+            assert "continuation_request" not in packet
+            assert json.dumps(current_text, ensure_ascii=False) not in canonical(packet)
+            assert current_ref not in canonical(packet["delivery"])
+            assert packet["delivery"] == original_packet["delivery"]
+            assert packet["change_candidates"] == original_packet["change_candidates"] == []
             assert packet["replay"] and not packet["new_independent_support"]
+            assert [e["id"] for e in packet["delivery"]["evidence"]] == ["e1"]
+            assert [e["source"] for e in packet["delivery"]["evidence"]] == ["s1"]
             assert all(e["text"] == original_text for e in packet["delivery"]["evidence"])
+            assert len(packet["delivery"]["source_table"]) == 1
+            assert packet["delivery"]["source_table"][0]["role"] == "user"
             assert packet["delivery"]["source_table"][0]["occurred_at"] == "2026-10-01"
 
         def fit(messages):
@@ -3092,16 +3113,18 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
         assert denied["status"] == "not_permitted" and len(calls) == count
         inspected = memory.maintain_prior(current_cfg, allowed=False, execute=False, **args)
         assert inspected["receipts"] == [] and len(calls) == count
+        assert fitted == []
         assert memory.service.store.get(ns, json.dumps(["new-session", "resume-save"])) is None
         result = memory.maintain_prior(current_cfg, allowed=True, **args)
         assert result["status"] == "completed" and result["prior_session"] == "s"
-        assert calls.count("extract") == 1
+        assert calls.count("extract") == 1 and len(calls) == count + 1
         assert memory.service.store.get(ns, old_key).value == old_checkpoint
         row = memory.service.records()[0]
         assert row["value"]["source_refs"] == [original_ref]
         attempt = memory.service.store.get(
             ns, json.dumps(["new-session", "resume-save"], ensure_ascii=False)
         ).value
+        assert attempt["date"] == old_checkpoint["date"]
         operation = attempt["work_items"][0]["request_id"] + ":proposal:0"
         receipt = memory.service.operation_receipt("new-session", operation)
         assert receipt["ok"] and row["value"]["revision"] == 1
@@ -3114,6 +3137,11 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
         assert len(memory.service.sources()) == 2
         assert memory.pending_maintenance(current_cfg) == []
         before = copy.deepcopy(memory.service.records())
+        counts = len(calls), len(fitted)
     with opened(tmp_path, **options) as memory:
         memory.context("new-session", "resume", "current-config-v2")
+        replayed = memory.maintain_prior(current_cfg, allowed=True, **args)
+        assert replayed["status"] == "completed" and replayed["receipts"] == result["receipts"]
+        assert (len(calls), len(fitted)) == counts
+        assert memory.service.store.get(ns, old_key).value == old_checkpoint
         assert memory.service.records() == before and memory.pending_maintenance(current_cfg) == []
