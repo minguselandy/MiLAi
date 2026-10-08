@@ -11,6 +11,121 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 2026-10-08 11:17:10 UTC：当前问题与真实交付比较闭合
+
+实际候选仍冻结 `d62f0b457b8b497146b7bd96b043124597e3c912`：M／extract_then_edit／I2，
+六项既有EditFeatures，state_driven，普通BGE-m3 dense cosine K10。只使用既有
+Qwen3.6-35B-A3B-FP8，thinking=true／temperature=1；context65536，输出预留32768、
+余量512，输入上限32256，source4096／source_body8192，working_sets=false，每题／来源
+沿用12次生成上限。733新建能力与9a共同来源范围修复不在此候选中。
+
+terminal-predict与terminal-score均为COMPLETED_EXPERIMENT_PHASE，两个原进程退出0；
+四个开发用户各8会话，32预测／32评分、73完整答案。原作者口径完整汇总如下：
+
+| 四用户前8会话，同冻结M | 更新Correct／全部机会 | 更新valid | QA Correct／全部问题 | QA valid |
+|---|---:|---:|---:|---:|
+| 第一用户 | 10/19 | 17 | 12/20 | 18 |
+| 第二用户 | 1/15 | 12 | 4/12 | 12 |
+| 第三用户 | 2/20 | 18 | 7/22 | 21 |
+| 第四用户 | 3/18 | 16 | 7/19 | 19 |
+| 合计 | 16/72（22.22%） | 63 | 30/73（41.10%） | 70 |
+
+更新原标签为Correct16／Omission46／Hallucination1／Omitted2／null7；后两类9项无效原样保留，
+不改名成Omission或真实错误。QA为Correct30／Omission25／Hallucination15／null3。valid口径
+分别16/63（25.40%）、30/70（42.86%）。formation reference439／valid412，原始468行中的
+29条interference不算reference；formed outputs40／valid32。原作者recall(all)31.44%、
+weighted accuracy(all)71.25%、extraction F1=0.4783，含各自全部分母。
+单臂没有同版方法优势或条件机制因果结论，同家族Judge及开发团队复核均非独立确认。
+完整闭合包含4个incomplete Source root和3个incomplete Editor leaf，不能称全部维护成功。
+
+| 候选阶段，互斥累计成本 | 生成请求／确认响应 | known tokens |
+|---|---:|---:|
+| 预测（抽取／选择／Editor／Reader） | 357/357 | 3310034 |
+| 保存产物评分，只有Judge | 426/426 | 1239622 |
+| 候选合计 | 783/783 | 4549656 |
+
+全部783生成stop，embedding183次／11273tokens，新增unknown0。所有966生成／embedding HTTP
+请求与响应配对，差额0。固定评分闭合账本（10:48:56 UTC、后续比较前）为46979 requests、
+201960438 known、202237134 charged、embedding1913903、历史unknown6；对预测前闭合账本的
+请求／known／charged／embedding差额与上述文件一致。没有重置预算或扩大上限。
+这是闭合候选成本，不是之后比较期间的实时账本。
+
+有限交付比较单独冻结 `9a59832d05e6898bc52788764b5b981be1e22a07`，不与d62轨迹拼接。
+Reader固定同一实际持久状态、四个已声明问题与原saved pool、同模型与每题12次生成额度；
+不重新搜索、维护、抽取或编码，不给D2增加来源。四题涉及未知中间名、计划与完成、
+带日期偏好及缺失历史工资；每模式4个完整回答，共12份。Root及subagent阅读完整答案，
+保留效果分析，不另造数值评分或套用原73题标签。
+
+| 固定池Reader | 生成请求／响应 | known tokens | 峰值输入 |
+|---|---:|---:|---:|
+| D0 legacy，一次性交付 | 4/4 | 36341 | 12178 |
+| D1 staged，一次选择后完成 | 8/8 | 32362 | 4344 |
+| D2 state_driven | 12/12 | 63415 | 8880 |
+
+24生成均stop、合计132118known，embedding／Judge0、新unknown0。D1与D2四题第一次选择request
+逐值相同；D2第二次均没有新增／替换正文，两次保留同卡完成、两次空选择完成。D1偏好题只打开
+偏好卡，未协调姓名；D2首轮选到身份卡而协调，D0也做到。这个差异不能归因多轮探索。
+三种回答均保留未知中间名、计划不等于完成、工资材料不足；D2工资答复把“没有特定工资”扩成
+“没有就业历史”过宽，实际输入另有新角色转变。未发现越池或实际投递差异，完整来源独立审计
+仍非全部完成。四个暴露案例的一次随机运行不能证明广泛优势。
+
+Writer比较同样从9a冻结源码运行，使用原B0真实历史的原3／6／7／4，实际before为
+16／20／20／16事项，各模式独立副本，固定原K10 pool与共同旧来源范围；当前原文、角色及
+引用范围实际完整送达。Editor共用B0／I2／五项既有Features／single_pass，共同legacy Reader
+依据各自实际after正常检索，11题／模式、33份完整答案；该读取与状态编码照实计费。
+没有新Writer检索、抽取、Judge或理想旧卡；协议不等于d62 M候选，也不是旧recipe比较。
+
+| 固定前态Writer | Editor次数／真实空提案 | 新建／重写提交 | 全阶段生成 | known tokens | Editor／全阶段峰值输入 |
+|---|---:|---:|---:|---:|---:|
+| D0 legacy | 4/3 | 0/1 | 15 | 210969 | 20389/20389 |
+| D1 staged | 4/0 | 1/4 | 19 | 284888 | 16155/21485 |
+| D2 state_driven | 5/5 | 0/0 | 22 | 306185 | 15401/21485 |
+
+各模式4case／11答案齐，进程退出0；56生成均stop、802042known，embedding42次／8463tokens，
+新增unknown0，实际请求／响应一致。维护为10次选择＋13次Editor，8个空提案、6提交，
+0拒绝／no_change／重放／容量失败；共同Reader33次。操作数不是语义通过数。
+Editor峰值减小但选择阶段使D1／D2全阶段峰值高于D0，不能只拿Editor输入宣传整体节约。
+
+D0原3／6／7无状态变化，原4保存新日期偏好，四条旧宠物正文及支持逐句保留，Reader协调新旧；
+不因它采用追加含义而判无效。D1原3新增变化计划并保持旧目标，原6保存真实收到面试／offer，
+保留旧计划，但本次他人帮助事件仍漏写；原7落实换岗与健康改善并进入答案，却将未明确的新
+行业写成本人报告，重写也未显式延续部分旧目标。那些目标仍在其他卡／旧版本中，不能称全库
+删除。原4保存新偏好、保留非目标宠物及否定，尚漏与新互动的关联。共同Reader的未知中间名、
+朋友姓名、血型及兄弟信息边界保留；旧任职背景与本次来源日期仍有过度概括，维护未形成的事件不怪到Reader。
+
+D2原6确实打开两组事项、两次Editor仍空；所有旧值未变。尤其原7与原4，D1／D2首次选择
+及Editor的request.json整体值完全相同（含messages／schema／prompt_tokens），却分别产生
+修改和空输出。temperature=1下这次输出分歧不能归为视图或多轮机制的因果收益。D2四个case
+均未保存新变化，Reader在实际缺材料时保留未知；不把这种谨慎回答当端到端任务成功。
+
+两项9a比较合计80生成／934160known、42embedding／8463tokens、Judge0，全部闭合。
+比较后固定账本47059 requests、202894598 known、203171294 charged、
+embedding1922366、历史unknown6；与候选评分闭合账本的差额逐项一致。两版本的候选与诊断
+合计成本为863生成／5483816known、225embedding／19736tokens，不能合成总体准确率。
+Root阅读12＋33份新完整答案，三位subagent并行核对成本、来源与状态、实际投递及语义效果，
+分析本身新增HTTP0；完整原始来源独立审计未全部完成，未另造通过率。原件、私有配置、
+HTTP／reasoning／DB／日志及subagent分析保持ignored，不上传GitHub。
+
+目前没有证据支持把多轮D2当效果更佳默认；后续优先复用简单交付与一次选择，保留D2作为
+确实需要继续读时的可选路径，不扩大读取或审核框架。该次有限随机观察尚未选定最终候选，
+也未更改公开Host配置或编辑算子。最急迫的问题仍是正式变化落实、支持强度和未改语义保持，
+完整清单见[当前问题](MILAI_BUILD_FIRST_ISSUES.md)。16保留用户未用于开发；同版五方法、
+65／277连续历史、native／drift／recovery、消融及更紧预算、冻结后保留／外部／完整Host
+与六项交付继续未完成，Product NO_GO。
+
+本次提交仅更新三个既有报告，不修改源码、测试、workflow、私有配置或冻结实验。
+发布父版本main f71ab3e40edf890466ed25b35fa0403fdf9f63b5／[PR109](
+https://github.com/minguselandy/MiLAi/pull/109)，其受测头eacc6d0自身[Fast](
+https://github.com/minguselandy/MiLAi/actions/runs/37763634584)及main自身[Fast](
+https://github.com/minguselandy/MiLAi/actions/runs/37764055884)成功，未观察到eacc Full。
+d62自身[Fast](https://github.com/minguselandy/MiLAi/actions/runs/37746491786)成功、[Full](
+https://github.com/minguselandy/MiLAi/actions/runs/37746491914)skipped；9a源码包含在PR108受测头97a71f3，
+没有观察到9a单独的workflow结果，不借用其他提交CI。新报告提交的自身CI在PR中另外核对，
+CI不是方法效果验证。原505的B2低于B0这一负结果继续保留，不能用本轮单臂或修复洗掉。
+复现入口为既有[run_edit_change_pairs.py](../tools/run_edit_change_pairs.py)的reader-views／writer-views，
+使用绝对输入／配置路径和新输出目录；同冻结输入首次结果不覆盖、不重试unknown。
+下方固定历史观察及原无效标签全部保留。
+
 ## 2026-10-08 10:24:17 UTC：三位subagent并行复核，语义断点与正式评分分开
 
 用户明确要求subagent并行测试效果。复用三位开发Agent，只读核查实际模型产物及保存状态；
