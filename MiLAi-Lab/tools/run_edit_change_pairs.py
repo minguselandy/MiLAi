@@ -369,7 +369,7 @@ def _compare_writers(
         settings.update(
             experiment_name=("milai-build-first-writer-pairs-" if fixed_pool
                              else "milai-build-first-recipe-pairs-") + condition,
-            config_version="milai-build-first-writer-pairs-v1" if fixed_pool
+            config_version="milai-build-first-writer-pairs-v2" if fixed_pool
                            else "milai-build-first-recipe-pairs-v1", maintenance_recipe=recipe,
         )
         if fixed_pool:
@@ -423,6 +423,28 @@ def _compare_writers(
                     method = EditMemory(service, "B0", interface_version="I2",
                                         features=EditFeatures.from_settings(settings["edit_features"]))
                     calls: list[str] = []
+                    delivery = copy.deepcopy(case["delivery"])
+                    pool = [r["record_id"] for r in delivery["records"]] if fixed_pool else None
+                    support_plan: dict[str, Any] = {}
+                    allowed_ranges: list[dict[str, Any]] = []
+                    range_fields = ("source_ref", "source_revision", "start", "end")
+                    if fixed_pool:
+                        # Allocate once against the full actual pool. A selected
+                        # subset must not gain bodies omitted by the common D0
+                        # budget, including on a later work after a commit.
+                        _, support_plan = run._old_support_plan(
+                            method, delivery, delivery["records"], case["date"],
+                            allow_create=True,
+                        )
+                        allowed_ranges = support_plan.get(
+                            "selected_ranges", method.target_support_ranges([
+                                {"ok": True, "value": record}
+                                for record in delivery["records"]
+                            ]),
+                        )
+                        delivery["materialize_selected_support"] = True
+                    allowed_keys = {tuple(part[key] for key in range_fields)
+                                    for part in allowed_ranges}
 
                     def call(
                         stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
@@ -442,15 +464,18 @@ def _compare_writers(
                     def prepare_delivery(
                         delivery: dict[str, Any], execution: BenchmarkRun = run,
                         editor: EditMemory = method, date: str = case["date"],
+                        fields: tuple[str, ...] = range_fields,
+                        permitted: set[tuple[Any, ...]] = allowed_keys,
                     ) -> dict[str, Any]:
+                        if fixed_pool:
+                            return {**delivery, "redelivered_sources": [
+                                source for source in delivery.get("redelivered_sources", [])
+                                if tuple(source[key] for key in fields) in permitted
+                            ]}
                         return execution._old_support_plan(
                             editor, delivery, delivery["records"], date, allow_create=True
                         )[0]
 
-                    delivery = copy.deepcopy(case["delivery"])
-                    pool = [r["record_id"] for r in delivery["records"]] if fixed_pool else None
-                    if fixed_pool:
-                        delivery["materialize_selected_support"] = True
                     result = maintain_event(
                         method, delivery, session=case["session"],
                         request_id=f"{'writer' if fixed_pool else 'recipe'}-pair:{ordinal}",
@@ -463,7 +488,9 @@ def _compare_writers(
                     row: dict[str, Any] = {
                         "ordinal": ordinal, "before": before,
                         "maintenance": result, "answers": [],
-                        **({"candidate_record_ids": pool, "writer_view_mode": view_mode}
+                        **({"candidate_record_ids": pool, "writer_view_mode": view_mode,
+                            "allowed_support_ranges": allowed_ranges,
+                            "old_support_plan": support_plan}
                            if fixed_pool else {}),
                     }
                     # Retain the actual first maintenance outcome even if a later

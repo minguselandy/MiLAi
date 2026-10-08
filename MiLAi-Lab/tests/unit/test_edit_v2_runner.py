@@ -1147,16 +1147,18 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
         with SqliteStore.from_conn_string(str(folder / "memory.sqlite")) as store:
             service = driver["service_for"](store, folder, "owner")
             method = EditMemory(service, "B0", interface_version="I2", features=features)
-            old = service.capture_user("old", "save", "The marker is blue. The poster is small.")[
+            old = service.capture_user("old", "marker", "The marker is blue.")["source_ref"]
+            poster_source = service.capture_user("old", "poster", "The poster is small.")[
                 "source_ref"]
-            service.bind_source_boundary("old", "save", [old])
-            view = method.writer_request(method.prepare([old], "", selected_records=[]))
+            service.bind_source_boundary("old", "save", [old, poster_source])
+            view = method.writer_request(method.prepare([old, poster_source], "",
+                                                        selected_records=[]))
             proposals = method.decode_envelope({"creates": [
                 {"action": "create", "matter": matter, "clauses": [{
-                    "text": text, "evidence": ["e1"],
-                    "assertion": {"source": "e1", "kind": "reported"}}]}
-                for matter, text in [("Marker", "The marker is blue."),
-                                     ("Poster", "The poster is small.")]
+                    "text": text, "evidence": [evidence],
+                    "assertion": {"source": evidence, "kind": "reported"}}]}
+                for matter, text, evidence in [("Marker", "The marker is blue.", "e1"),
+                                               ("Poster", "The poster is small.", "e2")]
             ], "records": {}}, view["mapping"])
             for index, proposal in enumerate(proposals):
                 assert method.apply("old", f"save:{index}", proposal)["ok"]
@@ -1165,6 +1167,8 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
             before = service.records()
             delivery = method.prepare([current], "Marker", selected_records=before,
                                       redelivered_ranges=[])
+            delivery["records"].sort(
+                key=lambda record: record["edit_state"]["matter_description"] != "Poster")
             write_json(folder / "before.json", before)
             marker = next(row for row in before
                           if row["value"]["edit_state"]["matter_description"] == "Marker")
@@ -1199,6 +1203,7 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
     config = tmp_path / "config.json"
     write_json(config, settings)
     calls = []
+    checking_fixed_scope = False
     budget = RunBudget(RunLimits(), tmp_path / "synthetic-budget.json")
 
     def provider(request):
@@ -1225,6 +1230,11 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
             calls.append("edit")
             assert "A later report says green." not in json.dumps(payload)
             packet = payload["delivery"]
+            if checking_fixed_scope:
+                # The full pool spent its old-body budget on Poster. Selecting
+                # only Marker may still read its saved state, but must not gain
+                # the omitted original Marker source body.
+                assert "The marker is blue." not in json.dumps(packet["evidence"])
             record = next(row for row in packet["records"] if row["matter"] == "Marker")
             assert record["clauses"][0]["text"] == "The marker is blue."
             content = json.dumps({"creates": [], "records": {record["id"]: {
@@ -1268,6 +1278,9 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
             assert result["answers"][0]["answer"] == "Red."
 
     view_output = tmp_path / "writer-views"
+    settings["source_body_tokens"] = len("The marker is now red.") + len("The poster is small.")
+    write_json(config, settings)
+    checking_fixed_scope = True
     driver["compare_writer_views"](prepared, config, view_output, "fixture-only")
     assert calls.count("extract") == 4  # No extraction added to the delivery-only comparison.
     assert calls.count("select") == 8
@@ -1278,6 +1291,13 @@ def test_recipe_pair_cli_copies_equal_actual_banks_and_keeps_preparation_unchang
         assert results[0]["before"] == results[1]["before"] == results[2]["before"]
         assert results[0]["candidate_record_ids"] == results[1]["candidate_record_ids"] \
             == results[2]["candidate_record_ids"]
+        assert results[0]["allowed_support_ranges"] == results[1]["allowed_support_ranges"] \
+            == results[2]["allowed_support_ranges"]
+        assert results[0]["old_support_plan"] == results[1]["old_support_plan"] \
+            == results[2]["old_support_plan"]
+        assert len(results[0]["allowed_support_ranges"]) == 1
+        assert results[0]["old_support_plan"]["omitted_ranges"][0]["reason"] \
+            == "shared_source_body_budget"
         for result in results:
             assert result["maintenance"]["status"] == "completed"
             before = {r["id"]: r["value"] for r in result["before"]}
