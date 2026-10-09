@@ -1400,6 +1400,76 @@ def test_read_receipt_persistence_failure_keeps_unknown_and_actual_replay(
                 invoke(memory, "read_source", args, "read")
 
 
+def test_forget_rejected_handles_have_no_visibility_effect_then_valid_handle_revokes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.memory.functional_state import visibility
+    from milai_lab.runners.functional import operation_status
+
+    with opened(tmp_path) as memory:
+        ref = turn(memory, text="A local marker preference.")
+        hs = handles(memory, ref)
+        saved = memory.save(cfg(), "save", "A local marker preference.", hs)
+        stale = memory.service.read(saved["id"])["candidate_handle"]
+        updated = memory.update(cfg(), "update", stale, [{
+            "field": "content", "op": "set", "value": "The revised local marker preference.",
+        }], hs)
+        assert updated["ok"] and updated["revision"] == 2
+        current = memory.service.read(saved["id"])["candidate_handle"]
+        assert current != stale and memory.service.candidate(stale) is not None
+        trigger = turn(memory, "forget", "Forget the local marker preference.")
+        before = visibility(memory.service)
+        assert before["epoch"] == 0 and before["records"] == before["sources"] == []
+        original = memory.service.store.put
+        writes: list[tuple[tuple[str, ...], str]] = []
+
+        def put(ns: tuple[str, ...], key: str, value: Any, **kwargs: Any) -> None:
+            writes.append((ns, key))
+            original(ns, key, value, **kwargs)
+
+        monkeypatch.setattr(memory.service.store, "put", put)
+        receipts = []
+        for call_id, handle, reason in (
+            ("invalid", "read:never-issued", "read_handle_invalid"),
+            ("stale", stale, "revision_conflict"),
+        ):
+            receipt = memory.service.forget("s", call_id, handle)
+            assert receipt == {"ok": False, "status": "rejected", "reason": reason,
+                               "effect": "none", "phase": "pre_mutation_contract"}
+            receipts.append(receipt)
+            assert writes == [] and visibility(memory.service) == before
+            assert memory.service.forget_epoch == 0 and memory.service.forgotten_source_refs() == []
+            assert (memory.service.source(ref) is not None
+                    and memory.service.source(trigger) is not None)
+            assert memory.service.read(saved["id"])["value"]["revision"] == 2
+
+        # Project the actual receipts through the existing paired-operation API.
+        # An old rejected receipt lacking an effect still carries no such certainty.
+        progress = {str(index): {"identity": {
+            "owner": "alice", "thread_id": "probe", "session": "s", "turn_id": "forget",
+            "name": "forget_memory", "call_id": str(index),
+        }, "semantic_maintenance": receipt} for index, receipt in enumerate([
+            *receipts, {"ok": False, "status": "rejected", "reason": "read_handle_invalid"},
+        ])}
+        status = operation_status({"owner": "alice", "session": "s", "message_id": "forget",
+                                   "world": {"receipt_progress": progress}},
+                                  thread_id="probe", execution_started=True)
+        assert [row["status"] for row in status["visibility"]["operations"]] == [
+            "not_committed", "not_committed", "unknown"]
+
+        forgotten = memory.service.forget("s", "valid", current)
+        assert forgotten["ok"] and forgotten["effect"] == "visibility_only"
+        assert forgotten["forget_epoch"] == 1
+        assert writes == [(namespace(memory.service), "visibility")]
+        assert memory.service.read(saved["id"])["status"] == "visibility_revoked"
+        assert memory.service.source(ref) is None and memory.service.source(trigger) is None
+        assert set(memory.service.forgotten_source_refs()) == {ref, trigger}
+    with opened(tmp_path) as reopened:
+        assert reopened.service.forget_epoch == 1
+        assert reopened.service.read(saved["id"])["status"] == "visibility_revoked"
+        assert reopened.service.source(ref) is None and reopened.service.source(trigger) is None
+
+
 def test_forget_value_error_after_visibility_commit_is_unknown_not_no_effect(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
