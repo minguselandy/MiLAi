@@ -325,9 +325,15 @@ Use [] for no memory work or reading only. A request can combine current saving 
 new assertions with continuing a prior save; include each requested effect once.
 Apply restrictions to their named work: excluding business actions does not exclude
 separately requested memory saving. Excluding all saving leaves memory_requests empty.
+Continuing only the saving of an earlier request's already executed result is
+continue_prior. Querying current state and skipping already saved parts constrain
+execution; they do not cancel the requested saving. If further application actions
+are excluded, business_action_request is none.
 Classify what is requested, not whether it is feasible, already done or unfinished.
-Set allow_forgetting only for an explicit forgetting request. These are model
-interpretations; actual permissions and effects remain with the execution stage.
+Set allow_forgetting only for an explicit request to forget/remove stored memory.
+Forgetting/removal alone is not a new semantic save. Declare separately requested
+saving in memory_requests. These are model interpretations; actual permissions and
+effects remain with the execution stage.
 Declare business_action_request: none when no external application effect is
 requested (including memory-only work and pure queries), perform only for newly
 requested real application effects, continue_if_unfinished for explicitly requested
