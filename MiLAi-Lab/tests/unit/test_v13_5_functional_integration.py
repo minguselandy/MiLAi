@@ -5624,6 +5624,128 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
         assert stages == ["scope", "invalid-business-plan"]
 
 
+def test_shared_maintenance_keeps_early_commit_when_later_source_read_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import sqlite3
+
+    from milai_lab.methods.functional_edit_memory import FunctionalEditMemory
+
+    root = prepared(tmp_path, native=True, request_interpretation=True,
+                    memory_method="milai_edit_m_v1", edit_interface_version="I2",
+                    maintenance_recipe="single_pass", edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")})
+    fault: dict[str, Any] = {"active": False, "source_ref": None, "reads": 0}
+    committed: list[dict[str, Any]] = []
+    original_sources = FunctionalEditMemory.maintain_sources
+    original_delivery = FunctionalEditMemory.maintain_delivery
+    original_get = SqliteStore.get
+
+    def maintain_sources(self: FunctionalEditMemory, *args: Any, **kwargs: Any) -> Any:
+        fault["active"] = True
+        try:
+            return original_sources(self, *args, **kwargs)
+        finally:
+            fault["active"] = False
+
+    def maintain_delivery(self: FunctionalEditMemory, *args: Any, **kwargs: Any) -> Any:
+        result = original_delivery(self, *args, **kwargs)
+        receipts = [receipt for receipt in result["receipts"]
+                    if receipt.get("status") == "committed"]
+        if receipts and not committed:
+            # Arm only after the real Writer returned its actual committed receipt.
+            tool_sources = [source for source in self.service.sources()
+                            if source["role"] == "tool"]
+            assert len(tool_sources) == 2
+            other = [source for source in tool_sources
+                     if source["event_id"] not in result["source_refs"]]
+            assert len(other) == 1 and len(receipts) == 1
+            committed.extend(receipts)
+            fault["source_ref"] = other[0]["event_id"]
+        return result
+
+    def get(store: SqliteStore, namespace: tuple[str, ...], key: str, **kwargs: Any) -> Any:
+        if (fault["active"] and namespace[-1] == "v13_1_sources"
+                and key == fault["source_ref"]):
+            fault["reads"] += 1
+            raise sqlite3.OperationalError("INJECTED_LATER_SOURCE_READ_ERROR")
+        return original_get(store, namespace, key, **kwargs)
+
+    monkeypatch.setattr(FunctionalEditMemory, "maintain_sources", maintain_sources)
+    monkeypatch.setattr(FunctionalEditMemory, "maintain_delivery", maintain_delivery)
+    monkeypatch.setattr(SqliteStore, "get", get)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True, business=False)
+        if not wire.get("tools"):
+            delivery = json.loads(wire["messages"][-1]["content"])["delivery"]
+            assert len(delivery["source_table"]) == 1
+            source = delivery["source_table"][0]
+            if source["role"] == "user":
+                assert ordinal == 2
+                return {"role": "assistant", "content": json.dumps({
+                    "creates": [], "records": {}})}
+            assert ordinal == 4 and source["role"] == "tool"
+            observation = json.loads(delivery["evidence"][0]["text"])
+            assert observation["status"] == "not_found"
+            evidence = delivery["evidence"][0]["id"]
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "Observed reservation lookup", "clauses": [{
+                    "text": f"Lookup found no reservation for {observation['item_key']}.",
+                    "conditions": [], "evidence": [evidence],
+                    "assertion": {"source": evidence, "kind": "observed"},
+                }],
+            }], "records": {}})}
+        assert ordinal == 3
+        names = {tool["function"]["name"] for tool in wire["tools"]}
+        assert not names & functional.BUSINESS_MUTATIONS
+        first = native_call("get_reservation", "lookup-first", item_key="first probe")
+        second = native_call("get_reservation", "lookup-second", item_key="second probe")
+        return {**first, "tool_calls": first["tool_calls"] + second["tool_calls"]}
+
+    wires = scripted(monkeypatch, reply, native=True)  # Also forbids real socket connections.
+    args = dict(bank="failed-maintenance", owner="alice", session="session", message_id="lookup",
+                content="Look up first probe and second probe and save the observed results. "
+                        "Do not change reservations.")
+    result = functional.message(root, **args)
+    assert result["status"] == "FAILED" and result["error"] == "INJECTED_LATER_SOURCE_READ_ERROR"
+    assert result["error_type"] == "OperationalError" and fault["reads"] == 2
+    assert result["maintenance_snapshot_error"] == (
+        "OperationalError:INJECTED_LATER_SOURCE_READ_ERROR")
+    assert len(committed) == 1 and len(wires) == 4
+    receipt = committed[0]
+    kept = [actual for batch in result["maintenance"] for actual in batch["receipts"]
+            if actual.get("id") == receipt["id"]]
+    assert kept == [receipt]
+    operations = result["operation_status"]["semantic_memory"]["operations"]
+    assert [operation["revision"] for operation in operations
+            if operation.get("id") == receipt["id"] and operation["status"] == "committed"] == [1]
+    assert result["operation_status"]["business"]["status"] == "not_executed"
+    assert len(result["operation_status"]["business"]["observations"]) == 2
+    assert result["world"]["world"]["attempts"] == []
+    assert result["world"]["world"]["reservations"] == []
+
+    database = next(root.glob("banks/*/memory.sqlite"))
+    with sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True) as connection:
+        row = connection.execute("SELECT value FROM store WHERE key=?", (receipt["id"],)).fetchone()
+    value = json.loads(row[0])
+    assert value["_v13_1"]["revision"] == 1 and len(value["_v13_1"]["history"]) == 1
+    assert len(result["records"]) == 1 and result["records"][0]["id"] == receipt["id"]
+    trace_path = next(root.glob("banks/*/*-trace-0.jsonl"))
+    events = [json.loads(line) for line in trace_path.read_text().splitlines()]
+    failure_at = next(index for index, event in enumerate(events)
+                      if event.get("event") == "functional_failure")
+    assert any(actual.get("id") == receipt["id"] and actual.get("revision") == 1
+               for event in events[:failure_at]
+               if event.get("event") == "functional_maintenance_result"
+               for batch in event["batches"] for actual in batch["receipts"])
+    # Reading the terminal result cannot retry HTTP, semantic writes, or business work.
+    assert functional.message(root, **args) == result and len(wires) == 4
+    assert fault["reads"] == 2 and len(committed) == 1
+
+
 @pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
 @pytest.mark.parametrize("no_save", [False, True])
 def test_shared_host_delivers_selected_prior_request_beyond_recent_context(
