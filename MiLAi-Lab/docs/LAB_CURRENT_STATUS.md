@@ -1,5 +1,19 @@
 # MiLAi Lab 当前状态
 
+**2026-10-09 08:38:00 UTC／北京时间2026-10-09 16:38:00：开发1416，可选v9真实四次正常输出闭合，纯保存P0仍未解决。**
+
+原两个User输入、false／T0／8192，逐阶段执行：纯保存scope错perform，CURRENT又编造
+业务计划且结构许可true；真实业务scope及字面参数正确。4请求／4响应均tool_calls，
+3595known＝charged，无业务、SourceCapture、DB／apply、encoder或Judge、新unknown0。
+5项正常SQLite／合成流程、Ruff／strict mypy通过，默认v8及旧缓存保持；不是语义通过。
+新原规则8＋业务6仅request_mode切v9，14NOT_RUN，runtime为空；M277未启动。
+
+17范围1131生成／12045911known＝charged、766embedding／68774tokens；连续账本49166／
+223302821known／223579517charged／2019395embedding，6历史unknown，本固定采样无在途。
+1416自身Fast37903023943 success、Full37903023927 skipped，新报告CI单独核对。
+完整六交付active／incomplete、16保留用户语义未用、无最终候选／ProductNO_GO。
+详见[最新正式结果及剩余范围](MILAI_UNIFIED_MEMORY_USAGE.md)。以下固定历史保留。
+
 **2026-10-09 07:47:12 UTC／北京时间2026-10-09 15:47:12：开发08ce，纯保存业务P0与新增后删除已定位，有限生成诊断闭合。**
 
 d754新Host9执行COMPLETED后因未要求预订／标签停止，11NOT_RUN；首6两事项保存与只读完整值

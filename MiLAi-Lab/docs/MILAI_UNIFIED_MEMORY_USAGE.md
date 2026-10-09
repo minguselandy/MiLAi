@@ -11,6 +11,79 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 当前请求任务拆分与实际负结果：2026-10-09 08:38:00 UTC／北京时间2026-10-09 16:38:00
+
+本段为最新固定观察，下方07:47等历史与首次失败保持。最新开发、该诊断冻结源码与本报告
+父版本均为`1416a02f0c9ac911f596193365e25a46f472bc6c`。本次采样全部已知实际模型任务
+闭合，无在途；完整[post117／118计划](MILAI_POST_117_118_FUNCTION_FIRST_DEVELOPMENT_EXPERIMENT_PLAN.md)
+与六项交付仍active／incomplete，PR119 open／draft／未合并，Product NO_GO。
+
+### 可选v9已接线，默认v8与旧缓存保持
+
+`current_request_native_v9`先声明memory_requests、allow_forgetting、business_action_request、
+application_continuation_request四个范围字段；只有合法perform才调用既有
+continuation_operations的CURRENT分支解析当前User中的具体应用请求。首次范围阶段没有
+application_requests参数生成；未闭合／空计划没有业务执行权限。当前计划与原请求续办
+分别持久化，旧v8完整缓存按原协议验证，不重新分类。只复用现有服务、模型与解析器。
+
+5项直接既有SQLite／合成transport流程通过，覆盖纯保存、业务分项恢复、重开与旧缓存；
+Ruff、相关strict mypy与diff通过，0真实HTTP。它们证明正常接口与持久路径，语义效果由
+下述真实调用另记。默认record／dense K10、原模型家族及默认v8没有改为新候选。
+
+### 原两输入各两阶段：正常结束仍错误授权
+
+冻结1416，复用08ce封存的两个实际首次User输入，false／T0、8192输出及required保持。
+Root逐阶段检查正式结果后派发下一步；每阶段首次输出保留，无重试。
+
+| 实际输入／阶段 | 首次正式结果 | 输入／输出tokens | known |
+|---|---|---:|---:|
+| 纯保存／scope | memory explicit正确，但business_action_request错为perform；尚无具体计划，程序许可false | 911／74 | 985 |
+| 纯保存／CURRENT | 编造预订目标、reserve_and_label与参数；结构编译后allow_business_mutation=true | 725／84 | 809 |
+| 真实预订／scope | explicit保存＋perform，与原当前请求相符；尚无具体计划 | 915／74 | 989 |
+| 真实预订／CURRENT | 目标、数量3、目的地及包装与原User字面参数相符 | 729／83 | 812 |
+| **合计** | **4请求／4响应，全部tool_calls** | **3280／315** | **3595** |
+
+所有实际wire等于冻结投影及发出前保存wire，User正文保持；四份完整正式输出由Root阅读。
+无业务执行器、SourceCapture、记忆DB／apply、encoder或Judge，无新增unknown；不是Host
+语义通过或独立评分。此有限观察改变了任务／schema及阶段数，不是只改变格式的单因素
+实验；不能把真实业务成功解析当作纯保存已改善或总体效果结论。
+
+**两步生成尚未解决纯保存误业务。**程序能阻止未闭合／空计划，但模型仍在两个阶段给出
+错误业务含义和虚构参数。参数齐全、schema合法及程序许可不能替代当前User的实际授权。
+本次没有执行该错误计划。继续定位应用动作说明与生成任务的语义，不增加关键词授权、
+审核Agent、强制非空或从reasoning补操作；CURRENT本来就只接收原User全文，没有注入scope
+DTO。System／tool对“已接受业务范围”的预设是待检验线索，不是已确认根因。
+
+### Host14只准备，旧效果与新源码分别保留
+
+新`host-rules-business-1416a02-v9-v1`含原规则8＋业务6消息，controls逐值保持；配置唯一
+差异request_mode v8→v9，声明disabled／greedy_v1与edit=false、staged、record保持。
+完整冻结源码与普通CLI prepare已闭合，本地首次模板906／915／729可容纳；仅input-freeze、
+runtime为空，14消息均NOT_RUN，0HTTP。上述P0仍在，因此没有进入该Host复核；M277也未启动。
+旧08ce inherit／inherit准备根、d754实际未要求业务与随后例外删除、760容量失败全部原样保留。
+
+### 固定成本、CI与完整范围
+
+| 非重叠实际范围 | 生成请求／响应 | known＝charged增量 | embedding请求／响应 | embedding tokens |
+|---|---:|---:|---:|---:|
+| 07:47报告16范围 | 1127 | 12042316 | 766 | 68774 |
+| 1416 v9两输入两阶段 | 4 | 3595 | 0 | 0 |
+| **17范围合计** | **1131** | **12045911** | **766** | **68774** |
+
+连续账本固定为49166 requests／223302821 known／223579517 charged／2019395 embedding
+ tokens；从原48035／211256910／211533606／1950621的差额一致。Judge0、新闭合unknown0，
+6个generation unknown为历史量，embedding unknown0；未重置账本或新增限额，子集不重复累计。
+私有固定采样publication-observation-20261009-083800-native-v9.json、原正文／gold／HTTP／reasoning／DB／配置／日志均ignored。
+
+1416自身[Fast37903023943](https://github.com/minguselandy/MiLAi/actions/runs/37903023943) success、
+[Full37903023927](https://github.com/minguselandy/MiLAi/actions/runs/37903023927) skipped；0948报告
+自身Fast成功、Full skipped。新报告CI推送后另核，不借用其他提交或声称Full21/21。
+
+同版五方法各277独立历史与首65子集、native／drift／recovery／必要消融／固定紧预算、
+最终冻结后的16保留用户、外部28／1354及旧10答案审计、三个实际外部适配器、最终同候选
+Host135case／192message与冻结后实质性故事及六交付仍未完成。旧无效标签、全部机会分母、
+版本边界和Root／同家族Judge非独立性保持；五条主线、一个MemoryService与Product NO_GO不变。
+
 ## 当前功能与请求生成诊断：2026-10-09 07:47:12 UTC／北京时间2026-10-09 15:47:12
 
 本段覆盖下方旧当前判断，固定历史与首次失败全部保持。原

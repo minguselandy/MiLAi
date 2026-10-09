@@ -1,3 +1,45 @@
+# Live handoff: 2026-10-09 08:38:00 UTC／北京时间2026-10-09 16:38:00, optional native v9 closed negative diagnostic
+
+Latest development/execution/report parent1416a02f0c9ac911f596193365e25a46f472bc6c;
+fullsource artifacts/post118/source-1416a02/MiLAi-Lab. PR119 open draft/unmerged;
+full post117/118 goal/sixdeliveries ACTIVE/incomplete. Root alone serial actual Qwen/BGE/Judge,
+user authorizes offline parallel agents. All actual modeltasks closed at this fixedsample,
+inspect actualowner/PIDs/terminal/ledger before newdispatch. No modeltaskabsence implies pause.
+
+Optional current_request_native_v9: fourfields scope first, actuallegalperform resolves CURRENT
+parameters via existingcontinuation_operations; beforeclosed/nonemptyplan no businesspermission.
+Defaultv8/oldcompletecache preserved, current/originalresolution distinctcheckpoints. Five narrow
+SQLite/scriptedtransport checks/Ruff/strictmypy/diff pass0actualHTTP. APIwiring is not semanticproof.
+
+native-scope-plan-two-actual-inputs-v9-v1/execution CLOSED_TWO_INPUT_DIAGNOSTIC:4Rootselected
+stages4requests/responses/alltool_calls/3595known=charged; false/T0/max8192/required,0retry/
+business/SourceCapture/DB/apply/encoder/Judge/newunknown. BothoriginalUser/wires exactlypreserved.
+Memoryscope911+74 wrongperform; CURRENT725+84 fabricatedreservation/arguments thenpermissiontrue.
+Businessscope915+74 correctperform; CURRENT729+83 literal3+target/destination/packingmatchUser.
+Root all4fullformalread, no reasoningexecution/regrade/independentconfirmation/exhaustiveaudit.
+Split taskFAILED to resolve purememoryP0; shape/compiledpermission not currentUserauthorization.
+ActualCURRENT Human already originalUseronly/no scopeDTO; System/tool acceptedbusinesspremise
+and missingactionsemantics are candidateexplanations, no confirmeddecoderfailure. Do not add
+keywords/reviewers/forcednonempty/retryloops or execute reasoningdrafts.
+
+host-rules-business-1416a02-v9-v1 PREPARED_NOT_EXECUTED, originalrules8+business6/controls exact,
+onlyconfigrequest_modev8->v9; disabled/greedy_v1/editfalse/staged/record unchanged. NewRootonly
+inputfreeze/runtimeempty/14NOT_RUN; CLIprepare andlocalfirsttemplates906/915/729fit0HTTP/DB.
+Root execute_one_host_1416_v9.py merelyprepared. P0unresolved: do not blindlydispatch Host14/
+old08inherit14/M277 or restart oldfailedtails. Preserve d754unrequestedrealbusiness and r2->r3->r4
+exceptiondeletion, old760capacityfails, old08modefailures; no backfill semanticfixes.
+
+17nonoverlap actualcohorts1131gen/12045911known=chargedDelta/766emb68774,Judge0/newunknown0.
+Ledger49166requests/223302821known/223579517charged/2019395embedding,6historicalgenunknown/
+encoder0/noinflight/limitsunchanged. Old503/939 subsets notdoublecounted. Snapshotpublication-observation-20261009-083800-native-v9.json.
+Allraw/gold/reasoning/HTTP/DB/config/log ignored. TMPDIR/SQLITE_TMPDIR under/cra beforeimports,
+root/tmpfull. Source1416 ownFast37903023943 success/Full37903023927 skipped; report ownCI afterpush.
+
+Complete sameversionfive277/first65subset/native32-12-4/drift/recovery/Mablation/tight28160/
+finalfreezeTHEN16semanticunused/external28-1354/old10audit/threeactualadapters/finalHost135-192/
+newpostfreezestories/sixdeliveries remain. Keepinvalidlabels/allopportunitydenominators/version
+bounds/Root-familyJudgenonindependence/oneMemoryService/fivedirections/ProductNO_GO.
+
 # Live handoff: 2026-10-09 07:47:12 UTC／北京时间2026-10-09 15:47:12, native diagnostics and functional P0
 
 Overrides older RUNNING/PREPARED claims, preserves fixed history. Development/report parent
