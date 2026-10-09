@@ -114,6 +114,10 @@ Ruff、依赖边界及旧八事项真实模板复算通过。没有把重复检�
 开发分支另合入`e41787a`：仅两处已知写入前遗忘拒绝返回effect=none，验证及异常路径不变。
 开发者5项窄检查和Root合流后1项真实SQLite检查通过（重叠）；写入后回执丢失仍为unconfirmed，
 裸旧rejected回执仍为unknown。该补丁未进入冻结`1cfb400`，不改写实验身份或历史结果。
+开发分支又合入`0d297ad`：仅澄清既有CURRENT提示，纯补存仍是记忆续办，查询/跳过已存
+是执行限制，禁止应用动作时业务为空；纯遗忘不额外要求新语义保存。schema与授权程序未改。
+16项既有mock/SQLite检查、Ruff/类型通过；Root合流后复查1项纯保存恢复通过（重叠）。
+实际模型语义未复验；当前冻结对照仍不含该开发补丁。
 
 ## 下一项工作与仍未完成范围
 
@@ -137,14 +141,17 @@ QA另19 Hallucination、8 Omission、2 invalid；更新另19 Omission、2原标�
 同家族Judge和开发者来源核查不是独立确认。一处实际用户原话收入为18000，而参考答案为20000；
 Reader按原话回答被作者Judge判Hallucination。保留原标签，同时单列参考/来源冲突，
 不以gold纠正Source。Editor此前把同一用户证据改为20000仍是另一项来源忠实性错误。
-当前只运行预先固定7个已完成来源切片的thinking单变量对照，每设置各两次、28提案全部保留。
-PID1678314/session57500，输出`artifacts/global-function-first/editor-thinking-1cfb400-matched-v1`；
-不运行Store或提交，不把schema合法当正式编译通过，不自动选最好答案或采用新配置。
+预先固定7个已完成来源切片的thinking单变量对照已于23:01 UTC核对闭合，
+每设置各两次、28提案全部保留：28gen/527243 known=charged、28stop、新unknown0、0emb/0Judge。
+False14份220425 known/6683 output，True14份306818 known/93104 output；
+True峰值输出9747，4份超过Host8192额度，不能直接据此变更Host模式。
+输出`artifacts/global-function-first/editor-thinking-1cfb400-matched-v1`，来源提案审查尚在进行。
+不运行Store或提交，不把28/28 wire schema合法当正式编译通过，不自动选最好答案或采用配置。
 工程错误与普通语义失败分别定位；unknown HTTP、未知写入/业务效果和 Store 故障停止相关路径，
 不盲重试。新 benchmark 预先声明按题保存成功及已知只读缺答，缺答保留在全部机会分母。
 
 四开发用户前8会话已从各自空库形成，实际分母为32会话/73QA/72原生更新；
-统一评分补充已闭合，当前仅来源提案对照，不用于跨版本排名。
+统一评分补充及来源提案对照已闭合，当前待全部提案审查，不用于跨版本排名。
 最终仍需同版五方法各277会话（合计1385）、
 原 native32/12会话/4用户、drift/recovery、必要 M 消融与紧预算、最终冻结后的16保留用户、
 LongMemEval、RawRAG/RollingSummary/A-MEM真实适配，以及 Host135case/192message 和新故事。

@@ -42,11 +42,15 @@ no simultaneous models; original interruption retained. Supplement21gen/96531 kn
 newunknown0/0emb. CombinedJudge677actual/676responses/2812589known/2859968charged/newunknown1.
 All32predictions/73answers match pre-score backup; original individual checkpoints unchanged.
 QA44/73Correct/valid71,update48/72Correct/valid67; invalid tags/denominators retained, no ranking.
-Root Source-only thinking matched control RUNNING/PID1678314/session57500 on source-1cfb400;
+Root Source-only thinking matched control CLOSED/reconciled23:01UTC on source-1cfb400;
 root editor-thinking-1cfb400-matched-v1, runtime editor-thinking-1cfb400-matched-runtime-v1.
 Predeclared7oldEditor requests,False/True2freshreps=28; exact messages/wire schema/T1/budget retained.
 Proposal-only,noStore/commit/noQA/gold,alloutputs retained; source developer reviews only those7inputs.
-Recovery developer independently clarifies existing CURRENT prompt; no schema/authority expansion.
+28gen/527243known=charged/28stop,newunknown0/0emb/0Judge; originalunknown7 retained.
+False14:220425known/6683output,True14:306818known/93104output;Truepeak9747/4outputs>Host8192.
+Source review still pending; no automatic adoption or compiler/commit claim from28wire-valid outputs.
+Recovery developer CURRENT prompt33079fd=>Root0d297ad;8lines clarification,no schema/authority expansion.
+16existingmock/SQLite+Ruff/typepass;Root1overlapSQLite flowpass. Actual semantics unverified;notin1cf.
 Do not adopt or dispatch main five methods before control close/reconciliation and candidate freeze.
 Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.
 Historical observations below are fixed snapshots; inspect actual PID/lease/terminal before dispatch.
