@@ -249,9 +249,9 @@ class VLLMChatModel(BaseChatModel):
                     wire["reasoning_content"] = reasoning
         selected_communication = communication_profile(self.tool_schema_communication)
         if native and selected_communication != "legacy":
-            wire_messages = _protocol_messages(
-                wire_messages, shape_guidance(tools, selected_communication)
-            )
+            guidance = shape_guidance(tools, selected_communication)
+            if guidance:
+                wire_messages = _protocol_messages(wire_messages, guidance)
             tools = present_catalog(tools, selected_communication)
         selected_save = profile("tool_save_communication", self.tool_save_communication)
         if native and selected_save != "legacy":

@@ -255,6 +255,7 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
             assert wire["tool_choice"] == declaration_choice
             assert wire["chat_template_kwargs"] == {"enable_thinking": False}
             assert wire["temperature"] == (1.0 if declaration_choice == "auto" else 0.0)
+            assert "[shape_feedback_v1]" not in json.dumps(wire, ensure_ascii=False)
         elif declaration_choice == "auto":
             assert wire["chat_template_kwargs"] == {"enable_thinking": True}
             assert wire["temperature"] == 1.0
