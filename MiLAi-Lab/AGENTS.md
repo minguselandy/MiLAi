@@ -1,8 +1,13 @@
 # Current handoff: global function-first integration, 2026-10-10 Asia/Shanghai
 
 User explicitly requests full execution of docs/MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md.
-Candidate config: configs/milai-global-function-first.json (v3 selected; freeze/dispatch pending).
+Candidate config: configs/milai-global-function-first.json (v3 frozen5019968).
 One integrator plus three source developers; historical v2 experiments remain frozen at 1cfb400.
+Host20v3 actually RUNNING from23:12:49UTC, dispatcherPID1769141, root host20-5019968-v3;
+source source-5019968/MiLAi-Lab, runtime host20-5019968-runtime-v3. Inspect current PID/native terminal.
+An earlier dispatcher setup failed before ledger read/HTTP (0 calls); artifact preserved, path corrected.
+Actual start ledger50718requests/234320429known/234644504charged/2083114embedding,unknown7/0.
+Full5 main PREPARED ONLY in five-dev277-5019968-v3-prepared; no main banks or actual HTTP yet.
 Shared Reader projection/flat literal metadata, real complete-request planning, independent memory after
 known CURRENT schema/length failure, faithful candidates and cumulative confirmed receipts are integrated.
 Root exact old-eight replay: 32446 -> 30520 input <=32256, 8/8 exact-rendered, all original evidence
@@ -55,7 +60,7 @@ coverage in these fixed slices. Unsupported non-target edits, omissions, clocks 
 Host Editor staysFalse at8192; True control is not admitted there (4/14outputs exceeded8192).
 Recovery developer CURRENT prompt33079fd=>Root0d297ad;8lines clarification,no schema/authority expansion.
 16existingmock/SQLite+Ruff/typepass;Root1overlapSQLite flowpass. Actual semantics unverified;notin1cf.
-Next: freeze v3 including e41787a/0d297ad, rerun original Host20 from empty banks with unchanged
+Next: close/reconcile/review v3 original Host20 from empty banks with unchanged
 fixture/controls, then all five full development methods from empty banks. Predict all arms before score.
 Do not hot-edit frozen runs, splice old prefixes or add new Reader/Source prompt knobs in this candidate.
 Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.

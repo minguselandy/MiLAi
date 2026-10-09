@@ -3,7 +3,11 @@
 当前按用户提供的[全局修复与功能优先规划](MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md)
 执行，集成分支为 `feat/lab-global-function-first-20261009`。第一版源码 `bbe77e9`
 的真实 Host20 已闭合；历史修复候选 `milai-global-function-first-v2` 冻结源码为 `1cfb400`。
-当前选择 `milai-global-function-first-v3`，待冻结后从空库复验Host20并运行完整五方法。
+当前选择 `milai-global-function-first-v3`，冻结源码为`5019968`。
+2026-10-09 23:12:49 UTC已从空库开始复验原Host20，实际调度PID1769141；
+输出`artifacts/global-function-first/host20-5019968-v3`，runtime为`host20-5019968-runtime-v3`。
+完整五方法在`five-dev277-5019968-v3-prepared`准备完成、仍为0 HTTP；Host闭合后调度。
+运行时看最新PID与原生execution终态，本文RUNNING只描述这个固定时点。
 原Host20新空库运行在2026-10-09 17:56:46 UTC停止：13 COMPLETED、7 NOT_RUN。
 两次遗忘拒绝回执缺少effect字段，汇总保守标成unknown；独立代码边界及只读数据库核对
 确认仅这两次属于写入前无效果拒绝，原STOPPED结果保持原样。18:04:32 UTC启动单独补充运行，
@@ -160,7 +164,7 @@ Root选择benchmark Editor thinking=True作为v3唯一模型配置变更：初�
 跨单元keep、模态增强、主体及时间问题，不能宣称全面改善或正式编译通过。
 Host保持False，避免将32768输出对照直接套入8192入口；Reader、温度、预算和Source提示不变。
 v3同时纳入已闭合工程检查的CURRENT提示与两处写入前拒绝回执修复。
-下一步在新冻结源码上复用原Host20输入/control，再从空库串行运行全部五方法预测，
+新冻结源码已复用原Host20输入/control开始运行；闭合后从空库串行运行全部五方法预测，
 待五方法预测全存后统一评分。旧v2完整主实验准备仍为0 HTTP，不复用其银行或结果。
 最终仍需同版五方法各277会话（合计1385）、
 原 native32/12会话/4用户、drift/recovery、必要 M 消融与紧预算、最终冻结后的16保留用户、
