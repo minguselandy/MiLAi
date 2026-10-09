@@ -3,8 +3,14 @@
 当前按用户提供的[全局修复与功能优先规划](MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md)
 执行，集成分支为 `feat/lab-global-function-first-20261009`。第一版源码 `bbe77e9`
 的真实 Host20 已闭合；修复候选 `milai-global-function-first-v2` 冻结源码为 `1cfb400`。
-原Host20新空库运行在2026-10-09 17:46:37 UTC启动，PID560998，尚未闭合。
-实际结果位于 ignored `artifacts/global-function-first/host20-1cfb400-v2`；调度前核对其终态与PID。
+原Host20新空库运行在2026-10-09 17:56:46 UTC停止：13 COMPLETED、7 NOT_RUN。
+两次遗忘拒绝回执缺少effect字段，汇总保守标成unknown；独立代码边界及只读数据库核对
+确认仅这两次属于写入前无效果拒绝，原STOPPED结果保持原样。18:04:32 UTC启动单独补充运行，
+仅处理尚未尝试的7条新输入，仍使用同一冻结源码，已于18:11:41 UTC闭合：5 COMPLETED、2 FAILED。
+原20条输入各尝试一次，分段总计18 COMPLETED、2 FAILED。四用户前缀M于18:14 UTC启动，
+PID667365，源码仍为`1cfb400`，输出`artifacts/global-function-first/prefix8-1cfb400-v2/M`，尚未闭合。
+实际结果位于 ignored `artifacts/global-function-first/host20-1cfb400-v2`，原运行与补充运行
+各自保留execution/results/accounting；调度前核对实际终态与PID。
 旧失败、费用和历次运行观察完整保留在[历史状态页](MILAI_UNIFIED_MEMORY_USAGE_HISTORY_THROUGH_20261009.md)，
 其中“RUNNING”均为原时点快照，不作为当前进程状态。
 
@@ -67,8 +73,18 @@ fixture/control不变，每个新消息单独CLI进程；失败消息未重试�
 历史首版完整5单元为6027/6020，均包含表及说明；历史仍需分页。零HTTP还原检查保持所有字段，
 不改变页额度、正文、范围、实际选择器或原文权限。
 当前补丁还处理已知截断的独立保存、无issued旧请求时的确定空选择，以及真实保存回执反馈。
-Source提示将明确值与实际状态比对，未知起效日期保持未知。第二版真实调用正在运行，
-原始答案和附加回执分存；本节的闭合问题表与费用仍仅描述第一版。
+Source提示将明确值与实际状态比对，未知起效日期保持未知。第二版前13条实际调用为
+71 generation / 565201 known=charged、1246 embedding tokens、新unknown0、Judge0。
+补充段另31 generation / 336871 known=charged、610 embedding tokens。合计逐响应核对为
+102 generation / 902072 known=charged、50 embedding / 1856 tokens；stop61、tool_calls39、length2，
+新增unknown0、Judge0，原停止和补充终态分别保留。更正链首次仍补造季度日期并被拒绝；
+后续明确通知值实际提交，但Reader仍把整体频率
+错误赋给未单独规定的分组。有效遗忘实际撤销一个事项及9个来源；未形成事项的初始Source
+仍可见，不能据此宣称全部关联原话已遗忘。补充链已实际形成一次部分预订和一次单独补标签，
+只有一份预订、两次业务尝试；其纯保存请求却被CURRENT误解成业务续办，未取得保存许可。
+业务遗忘在已确认length前提交r3语义撤销，未调用forget_memory或撤销可见性；原话/历史仍可读。
+重开模型把retracted误报成已清除，不能算成功遗忘。上述普通语义
+失败保留，不以COMPLETED冒充验收。原始答案和附加回执分存；前表费用仍仅描述第一版。
 
 旧 M36 (`36b0401`) 仍为 FAILED：21 个完整会话预测/46 答案，末会话另有2个实际响应，
 qa2 在 HTTP 前因32446输入终止。22份维护结果中17 completed/5 incomplete，
@@ -83,14 +99,18 @@ qa2 在 HTTP 前因32446输入终止。22份维护结果中17 completed/5 incomp
 第二版请求修复19项检查、合流后的共同投影及正常Host10项检查通过（包含重叠复查）；
 三项新Reader检查与Source开发者12项既有检查另有闭合记录。六个受影响源码严格类型、
 Ruff、依赖边界及旧八事项真实模板复算通过。没有把重复检查累加为新样本。
+开发分支另合入`e41787a`：仅两处已知写入前遗忘拒绝返回effect=none，验证及异常路径不变。
+开发者5项窄检查和Root合流后1项真实SQLite检查通过（重叠）；写入后回执丢失仍为unconfirmed，
+裸旧rejected回执仍为unknown。该补丁未进入冻结`1cfb400`，不改写实验身份或历史结果。
 
 ## 下一项工作与仍未完成范围
 
-先完成正在运行的原三链20消息，保留实际限制和原恢复control，闭合后阅读全文与真实回执。
+原三链20输入及两段成本已核对，实际限制、原恢复control与失败均保留。先闭合四用户前缀预测，
+再使用原评分入口统一评分；当前未运行Judge，没有方法优势结论。
 工程错误与普通语义失败分别定位；unknown HTTP、未知写入/业务效果和 Store 故障停止相关路径，
 不盲重试。新 benchmark 预先声明按题保存成功及已知只读缺答，缺答保留在全部机会分母。
 
-四开发用户前8会话已准备但0实际prefix HTTP，实际分母为32会话/73QA/72原生更新；
+四开发用户前8会话正在从各自空库形成，实际分母为32会话/73QA/72原生更新；
 预测全部收集后统一评分，不用于跨版本排名。最终仍需同版五方法各277会话（合计1385）、
 原 native32/12会话/4用户、drift/recovery、必要 M 消融与紧预算、最终冻结后的16保留用户、
 LongMemEval、RawRAG/RollingSummary/A-MEM真实适配，以及 Host135case/192message 和新故事。

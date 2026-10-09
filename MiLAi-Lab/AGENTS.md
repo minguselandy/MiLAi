@@ -13,10 +13,22 @@ CURRENT length blocked correction; scope length blocked forget; needless prior r
 Current first page4/5 (not first-unit skip); history17 =5+7+5 semantic units. Editor invented onset and
 omitted explicit retained value correction. Repairs integrated, Root19 request/10 projection+Host checks
 passed (overlap not extra samples), six owned source type/Ruff and dependency boundaries pass.
-Exact current5 Host packet6593/6587 within8192; history still paginated. Original Host20 v2 RUNNING
-17:46:37 UTC/PID560998, root artifacts/global-function-first/host20-1cfb400-v2/source archive source-1cfb400.
-No live-source edits/retries; inspect terminal+PID before dispatch. Prefix8 same frozen version PREPARED
-0HTTP:32sessions/73QA/72updates; collect predictions then unified score after Host20 closes.
+Exact current5 Host packet6593/6587 within8192; history still paginated. Original Host20 v2 STOPPED
+17:56:46 UTC after13 COMPLETED/7 NOT_RUN;71gen/565201 known,1246embtokens,newunknown0.
+Two old forget receipts lacked effect; independent source-boundary/readonly registry audit proves only
+these two pre-mutation rejections had no effect. Original STOPPED retained in host20-1cfb400-v2.
+Supplement ONLY seven never-attempted inputs CLOSED18:11:41 UTC, same immutable source-1cfb400;
+5 COMPLETED/2 confirmed length. Segmented total20 each once:18 COMPLETED/2 FAILED,
+102gen/902072 known=charged,50emb/1856tokens,finish61stop39tool_calls2length,newunknown0/Judge0.
+Separate original/supplement terminal preserved; closed-response-reconciliation.json confirms ledger.
+Business actual partial reservation then label-only recovery:one reservation/two business attempts.
+Explicit save-only misclassified as business continuation: no authorized memory commit. Business forget
+only semantic r3 retraction before length, zero nativeforget calls; sources/history still visible.
+Correction valid forget revoked1record/9sources but initial unformed Source stays visible; no full-pass claim.
+Live-only e41787a fixes these two forget receipts; new SQLite check passes, NOT in frozen experiment.
+Prefix8 same frozen version RUNNING18:14 UTC/PID667365/session79899:32sessions/73QA/72updates;
+root prefix8-1cfb400-v2/M, runtime prefix8-1cfb400-runtime-v2. Collect predictions then unified original
+score; no simultaneous models/Judge. Inspect actual terminal+PID before dispatch.
 Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.
 Historical observations below are fixed snapshots; inspect actual PID/lease/terminal before dispatch.
 
