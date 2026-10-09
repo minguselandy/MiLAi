@@ -25,6 +25,7 @@ from milai_lab.memory.edit_units import (
     render_revision_view,
     render_state,
     source_evidence,
+    tool_source_origin,
     validate_applicability,
     writer_projection,
     writer_proposal_schema,
@@ -1098,6 +1099,7 @@ class EditMemory:
                     "role": actual["role"],
                     "observed_at": actual["observed_at"],
                     "occurred_at": actual.get("occurred_at"),
+                    **({"origin": origin} if (origin := tool_source_origin(actual)) else {}),
                     **({"calendar_context": actual["calendar_context"]}
                        if "calendar_context" in actual else {}),
                 }

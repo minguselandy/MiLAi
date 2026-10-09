@@ -1269,6 +1269,15 @@ def writer_proposal_schema(
     return {"oneOf": variants}
 
 
+def tool_source_origin(source: dict[str, Any]) -> str | None:
+    """Show an exact bounded tool identifier, never an internal path or body."""
+    origin = source.get("origin")
+    if source.get("role") == "tool" and isinstance(origin, str) \
+            and re.fullmatch(r"[A-Za-z0-9_.:-]{1,64}", origin):
+        return origin
+    return None
+
+
 def writer_projection(
     delivery: dict[str, Any],
     profile: str,
@@ -1328,6 +1337,8 @@ def writer_projection(
                 attributes[-1]["role"] = row.get("role", "unknown")
                 attributes[-1]["body_delivered"] = key[0] in delivered_sources
                 attributes[-1]["occurred_at"] = row.get("occurred_at")
+                if origin := tool_source_origin(row):
+                    attributes[-1]["origin"] = origin
                 if "calendar_context" in row:
                     attributes[-1]["calendar_context"] = row["calendar_context"]
             if classify_delivery:

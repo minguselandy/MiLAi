@@ -848,6 +848,21 @@ def test_next_contract_actual_enums_no_unavailable_branches_and_legacy_envelope(
         assert '"edit"' not in schema_text and '"no_change"' not in schema_text
         assert '"not"' not in schema_text
         assert view["schema"]["properties"]["records"]["properties"] == {}
+        user_ref = view["mapping"]["evidence"]["e1"]["source_ref"]
+        tool_ref = service.capture_tool(
+            "s", "query", "get_reservation", '{"ok":false,"status":"not_found"}', None,
+        )["source_ref"]
+        actual_source = copy.deepcopy(service.source(tool_ref))
+        mixed = method.prepare([user_ref, tool_ref], "", selected_records=[])
+        editor = method.writer_view(mixed, request_id="mixed-origins")
+        source_table = editor["packet"]["source_table"]
+        assert [row["role"] for row in source_table] == ["user", "tool"]
+        assert "origin" not in source_table[0]
+        assert source_table[1]["origin"] == actual_source["origin"] == "get_reservation"
+        extract = method.change_request(mixed, "2026-10-09")
+        extract_table = json.loads(extract["messages"][1]["content"])["delivery"]["source_table"]
+        assert extract_table == [{**row, "delivery_kinds": ["current"]} for row in source_table]
+        assert service.source(tool_ref) == actual_source
         with pytest.raises(FunctionalRejection, match="ENVELOPE_INVALID"):
             method.envelope_proposals(
                 {"creates": [], "records": {"r1": {"action": "no_change"}}}, view["mapping"]
