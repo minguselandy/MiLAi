@@ -84,6 +84,7 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
     """Quote already delivered, visibility-filtered record parts without new reads."""
     calls: dict[str, str] = {}
     items: list[dict[str, Any]] = []
+    omitted_record_body = False
     for message in messages:
         if isinstance(message, AIMessage):
             for call in message.tool_calls:
@@ -101,6 +102,12 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
             if (isinstance(packet, dict) and packet.get("schema") == "functional_material_v1"
                     and packet.get("ok") is not False):
                 items.extend(packet.get("items", []))
+                omitted_record_body |= any(
+                    unit.get("type") == "record"
+                    and unit.get("reason") == "unit_exceeds_material_limit"
+                    and unit.get("snapshot_body_delivered") is False
+                    for unit in packet.get("skipped_units", [])
+                )
     if material.get("schema") == "functional_material_v1":
         items.extend(material.get("items", []))
     lines = []
@@ -126,6 +133,8 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
         remaining -= len(excerpt)
         if remaining == 0:
             break
+    if omitted_record_body:
+        lines.append("部分保存内容因读取材料额度未送达; 未读到不表示未保存。")
     return lines
 
 

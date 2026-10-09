@@ -2947,7 +2947,8 @@ def test_shared_maintenance_delivers_selected_prior_request_beyond_recent_source
 
 
 def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path):
-    options = {"interface_version": "I2", "features": NEXT_FEATURES,
+    options = {"interface_version": "I2",
+               "features": EditFeatures(True, True, True, True, True, temporal_scope=True),
                "memory_profile": "unified_v1"}
     saved = []
     with opened(tmp_path, **options) as memory:
@@ -2972,6 +2973,21 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         assert all(item["type"] == "fragment" for item in directory["items"])
         a_args = {"record_id": saved[0], "read_goal": "original_source"}
         a = invoke(memory, "read_memory", a_args, "open-a")
+        a_page = json.loads(a.content)
+        a_row = memory.service.read(saved[0])["value"]
+        assert a_page["delivery_status"] == "complete_snapshot" and not a_page["skipped_units"]
+        assert [item["content"] for item in a_page["items"]] == [
+            unit["text"] for unit in a_row["edit_state"]["units"]
+        ]
+        assert all("revision_view" not in item for item in a_page["items"])
+        assert a_page["items"][0]["edit_unit"]["evidence_refs"] == (
+            a_row["edit_state"]["units"][0]["evidence_refs"])
+        assert a_page["items"][0]["edit_unit"]["assertion"] == (
+            a_row["edit_state"]["units"][0]["assertion"])
+        assert a_page["items"][0]["stored_history"]["revisions"] == [1]
+        revision_evidence = a_page["items"][0]["revision_evidence"]
+        assert revision_evidence and all("content" not in part for part in revision_evidence)
+        assert revision_evidence[0]["role"] == "user"
         assert memory.view_state(cfg())["read_goal"] == "original_source"
         first_refs = memory.view_state(cfg())["resident_refs"]
         b = invoke(memory, "read_memory", {"record_id": saved[1]}, "open-b")
@@ -2986,7 +3002,9 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
                           read_goal=material["memory_view"]["read_goal"],
                           resident_refs=first_refs)
         original_ref = memory.service.read(saved[0])["value"]["source_ref"]
-        original = json.loads(invoke(memory, "read_source", {"source_ref": original_ref},
+        original_read = revision_evidence[0]["read"]
+        assert original_read == {"tool": "read_source", "arguments": {"source_ref": original_ref}}
+        original = json.loads(invoke(memory, original_read["tool"], original_read["arguments"],
                                      "original-words").content)
         assert original["ok"] and all(item["source_ref"] == original_ref
                                       for item in original["items"])
@@ -3048,6 +3066,17 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
             "read_goal": "current_and_saved_history",
         }, "current-and-history").content)
         assert mixed["ok"]
+        assert mixed["delivery_status"] == "complete_snapshot" and not mixed["skipped_units"]
+        history_read = mixed["items"][0]["stored_history"]["read"]
+        old_and_current = json.loads(invoke(memory, history_read["tool"],
+            history_read["arguments"], "all-saved-history").content)
+        assert {item["revision"] for item in old_and_current["items"]} == {1, 2}
+        assert all(item["version_view"] == "historical_exact_revision"
+                   for item in old_and_current["items"])
+        assert {item["content"] for item in old_and_current["items"]} == {
+            "Use quiet reminders only on weekdays.", "Use written reminders only on weekdays.",
+        }
+        assert memory.service.records() == before
         assert memory.model_material(cfg())["memory_view"]["read_goal"] == (
             "current_and_saved_history")
         memory.service.capture_user("s", "next", "Only inspect the invoice arrangement.")

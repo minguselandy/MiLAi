@@ -1270,7 +1270,7 @@ class FunctionalEditMemory(FunctionalMemory):
             query_calendar_context=self.query_calendar_context,
             version_time=row["value"].get("committed_at") if self.features.temporal_scope else None,
             include_temporal=self.features.temporal_scope,
-        ) if self.maintenance_recipe else {}
+        ) if self.maintenance_recipe or self.memory_view_mode != "legacy" else {}
         result = []
         for unit in state["units"]:
             text = unit["text"]
@@ -1322,8 +1322,24 @@ class FunctionalEditMemory(FunctionalMemory):
         if "stored_history" in ordinary[0]:
             result[0]["stored_history"] = ordinary[0]["stored_history"]
         if self.features.enabled:
-            result[0]["revision_evidence"] = read_revision_evidence(self.service, row["value"])
-        if self.features.temporal_scope:
+            evidence = read_revision_evidence(self.service, row["value"])
+            if self.memory_view_mode != "legacy":
+                # A revision's originals are not another copy of its semantic
+                # body. Keep the selected ranges and source metadata; the existing
+                # source tool reads original wording under the same visibility
+                # and page allowance when the current question needs it.
+                evidence = [
+                    {**{key: value for key, value in part.items() if key != "content"},
+                     "read": {"tool": "read_source",
+                              "arguments": {"source_ref": part["source_ref"]}}}
+                    for part in evidence
+                ]
+            result[0]["revision_evidence"] = evidence
+        if self.features.temporal_scope and self.memory_view_mode == "legacy":
+            # New views already deliver each unit's actual applicability, clocks,
+            # support and direct relations. Repeating the entire revision here
+            # can prevent its first semantic unit from fitting into an ordinary
+            # read. Saved version identities remain in stored_history above.
             result[0]["revision_view"] = self.writer.revision_view(
                 row["value"], query_time=query_time,
                 query_calendar_context=self.query_calendar_context,

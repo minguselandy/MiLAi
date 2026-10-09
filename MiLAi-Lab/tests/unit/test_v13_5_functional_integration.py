@@ -4177,6 +4177,18 @@ def test_receipt_response_reports_read_saved_content_without_a_new_write(tmp_pat
         assert body in context_only
         unpaired = str(business_response([receipt], effects, material).content)
         assert body not in unpaired
+        omitted = json.loads(receipt.content)
+        omitted['omitted_units'] = 1
+        omitted['skipped_units'] = [{'type': 'record', 'unit_index': 0,
+            'reason': 'unit_exceeds_material_limit', 'snapshot_body_delivered': False}]
+        # Real temporary projection moves delivered bodies to resident material,
+        # retaining the paired read receipt's explicit omission metadata.
+        omitted['items'] = []
+        omission_receipt = receipt.model_copy(update={'content': json.dumps(omitted)})
+        warning = '部分保存内容因读取材料额度未送达; 未读到不表示未保存。'
+        warned = str(business_response([messages[0], omission_receipt], effects, packet).content)
+        assert warning in warned and body in warned
+        assert warning not in str(business_response([omission_receipt], effects, material).content)
         mismatched = ToolMessage(name='search_memory', tool_call_id='read-saved',
                                  content=receipt.content)
         assert body not in str(business_response(
