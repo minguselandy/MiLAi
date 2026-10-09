@@ -186,6 +186,13 @@ v3同时纳入已闭合工程检查的CURRENT提示与两处写入前拒绝回�
 固定Native32的原选择与Root来源审查已逐字节复制到`native32-5019968-v3-prepared`，
 drift配置位于`drift277-5019968-v3-prepared`；两者仍0 HTTP、无BenchmarkRun/银行构造，
 待全部同版预测和评分闭合再调度，不把准备文件当实际结果。
+原固定LongMemEval28题及作者callback适配配置保存在`external28-5019968-v3-prepared`，
+既有相关语言/措辞/独立顺序控制在`controlled-5019968-v3-prepared`；两者均0 HTTP，
+待开发证据与最终候选冻结，若最终源码改变则另建配置，不能把当前准备当确认结果。
+四开发用户的实际元数据已复核为每法277会话/705QA/595更新，均无generated-QA会话。
+Root的一次元数据命令在uuid过滤前解码了所有JSONL行，只输出四开发用户计数；
+未对未选用户语义审查/调参、未传入方法Worker。该程序解析事实和随后仅选中行加载的复核
+保存在`development-metadata-validation.json`，不宣称保留用户从未被程序解析。
 最终仍需同版五方法各277会话（合计1385）、
 原 native32/12会话/4用户、drift/recovery、必要 M 消融与紧预算、最终冻结后的16保留用户、
 LongMemEval、RawRAG/RollingSummary/A-MEM真实适配，以及 Host135case/192message 和新故事。
