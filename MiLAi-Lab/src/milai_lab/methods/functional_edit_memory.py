@@ -42,7 +42,7 @@ from milai_lab.memory.functional_state import (
     reference_key,
     scope_leaves,
 )
-from milai_lab.memory.reader_projection import project_record
+from milai_lab.memory.reader_projection import expand_record, project_record
 from milai_lab.memory.working_set import read_evidence_basis
 from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
@@ -1267,13 +1267,13 @@ class FunctionalEditMemory(FunctionalMemory):
         ) if self.features.temporal_scope else None
         projection = None
         if self.memory_view_mode != "legacy":
-            projection = project_record({
+            projection = expand_record(project_record({
                 "content": row["value"]["content"],
                 "applicability": self.writer.revision_view(
                     row["value"], query_time=query_time,
                     query_calendar_context=self.query_calendar_context,
                 ),
-            }, edit_state=state)
+            }, edit_state=state))
             applicability = {
                 unit["unit_id"]: unit for unit in projection["applicability"]["units"]
             }
