@@ -976,9 +976,13 @@ def test_cache_tracks_current_body_and_withdrawal_without_erasing_history(tmp_pa
         assert {key: value for key, value in rows[0].items()
                 if key != "retrieval_navigation"} == service.read("z")
         assert rows[0]["retrieval_navigation"] == {
-            "unit_id": "u1", "excerpt": "Green tea.", "truncated": False,
+            "key_kind": "unit", "unit_id": "u1", "excerpt": "Green tea.", "truncated": False,
         }
-        assert "retrieval_navigation" not in rows[1]  # Whole-key win, no guessed unit.
+        assert rows[1]["retrieval_navigation"] == {
+            "key_kind": "whole", "excerpt": "\nMusic interests.", "truncated": False,
+        }
+        assert {key: value for key, value in rows[1].items()
+                if key != "retrieval_navigation"} == service.read("b")
         assert "retrieval_navigation" not in service.read("z")["value"]
         keys = semantic_keys(rows[0]["value"], granularity="record_units")
         assert len(keys) == 4

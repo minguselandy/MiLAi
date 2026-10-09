@@ -166,12 +166,14 @@ class SemanticRetriever:
             winner = max(range(len(scores)), key=scores.__getitem__)
             cosine_scores[key] = scores[winner]
             unit = entries[key][winner][1]
-            if self.granularity == "record_units" and unit is not None:
+            if self.granularity == "record_units":
                 # Navigation only, outside the stored value/support. The first
                 # maximum wins, so a whole-key tie never invents a unit hit.
-                text = unit["text"]
+                text = texts[winner] if unit is None else unit["text"]
                 navigation[key] = {
-                    **({"unit_id": unit["unit_id"]} if "unit_id" in unit else {}),
+                    "key_kind": "whole" if unit is None else "unit",
+                    **({"unit_id": unit["unit_id"]}
+                       if unit is not None and "unit_id" in unit else {}),
                     "excerpt": text[:240], "truncated": len(text) > 240,
                 }
 

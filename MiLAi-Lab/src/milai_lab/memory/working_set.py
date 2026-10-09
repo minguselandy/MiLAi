@@ -152,8 +152,11 @@ def record_candidate(
 ) -> dict[str, Any]:
     """One actual candidate for Host and controlled pools; a description is navigation."""
     if navigation is not None:
+        key_description = (
+            "whole-record search key" if navigation.get("key_kind") == "whole" else "stored unit"
+        )
         description = (
-            f"{description}\nCosine-winning stored unit excerpt (navigation only; "
+            f"{description}\nCosine-winning {key_description} excerpt (navigation only; "
             "open the complete record for evidence): "
             + navigation["excerpt"] + ("…" if navigation["truncated"] else "")
         )

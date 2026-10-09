@@ -2727,20 +2727,26 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
 
     from langchain_core.embeddings import Embeddings
 
-    from milai_lab.memory.retrieval import SemanticRetriever
+    from milai_lab.memory.retrieval import SemanticRetriever, semantic_keys, semantic_text
 
     class NavigationVectors(Embeddings):
+        def __init__(self) -> None:
+            self.documents: list[str] = []
+            self.query_vector = [1.0, 0.0]
+
         def embed_documents(self, texts: list[str]) -> list[list[float]]:
+            self.documents.extend(texts)
             return [[1.0, 0.0] if "modifies:" in text else [0.0, 1.0] for text in texts]
 
         def embed_query(self, text: str) -> list[float]:
-            return [1.0, 0.0]
+            return self.query_vector
 
     with opened(tmp_path, arm="M", interface_version="I2",
                 maintenance_recipe="extract_then_edit", memory_view_mode="state_driven",
                 read_interface="explicit_selectors_v1") as memory:
+        vectors = NavigationVectors()
         memory.service.semantic_retriever = SemanticRetriever(
-            NavigationVectors(), 2, granularity="record_units",
+            vectors, 2, granularity="record_units",
         )
         before = copy.deepcopy(memory.service.read(saved["id"])["value"])
         turn(memory, "navigation", "What project visits apply this quarter?")
@@ -2757,6 +2763,26 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
         }
         material = memory.model_material(cfg("navigation"))
         assert all("retrieval_navigation" not in item for item in material["items"])
+        assert memory.service.read(saved["id"])["value"] == before
+        assert vectors.documents == list(semantic_keys(before, granularity="record_units"))
+
+        vectors.query_vector = [0.0, 1.0]
+        turn(memory, "whole-navigation", "Read the whole project arrangement.")
+        directory = memory.context("s", "whole-navigation", "functional-m-test-v1")
+        candidate = next(item for item in directory["candidates"]
+                         if item.get("record_id") == saved["id"])
+        whole = semantic_text(before)
+        assert "Cosine-winning whole-record search key excerpt" in candidate["description"]
+        assert candidate["description"].endswith(whole[:240] + ("…" if len(whole) > 240 else ""))
+        assert all(item["type"] != "record" for item in directory["items"])
+        read = json.loads(invoke(memory, "read_memory", {"record_id": saved["id"]},
+                                 "open-whole", "whole-navigation").content)
+        assert read["ok"] and {unit["content"] for unit in read["items"]} == {
+            unit["text"] for unit in before["edit_state"]["units"]
+        }
+        material = memory.model_material(cfg("whole-navigation"))
+        assert all("retrieval_navigation" not in item for item in material["items"])
+        assert vectors.documents == list(semantic_keys(before, granularity="record_units"))
         assert memory.service.read(saved["id"])["value"] == before
 
 
