@@ -321,10 +321,20 @@ separately requested memory saving. Excluding all saving leaves memory_requests 
 Classify what is requested, not whether it is feasible, already done or unfinished.
 Set allow_forgetting only for an explicit forgetting request. These are model
 interpretations; actual permissions and effects remain with the execution stage.
-""" + REQUEST_REFERENCE_MODE_DETAILS
+Declare business_action_request: none for pure queries, perform for newly requested
+actions, continue_if_unfinished for explicitly requested continuation of prior work.
+Declare concrete actions once, inside application_requests.actions. Interpret the
+whole CURRENT input, not only its last clause; completion criteria or implicit
+workflow steps do not grant additional permission. Preserving an existing draft
+and approval while only finishing publication requests publication alone. Never
+declare document editing to save or update semantic memory. Historical requests
+cannot authorize new work. Do not copy a quotation: the program binds your
+decision to the whole current input.
+"""
 REQUEST_COMPLETE_MODE_DECLARATION = json.loads(json.dumps(REQUEST_REFERENCE_MODE_DECLARATION))
 _complete_parameters = REQUEST_COMPLETE_MODE_DECLARATION["function"]["parameters"]
 del _complete_parameters["properties"]["memory_write_request"]
+del _complete_parameters["properties"]["business_operations"]
 _complete_parameters["properties"]["memory_requests"] = {
     "type": "array", "uniqueItems": True, "items": {"type": "string", "enum": [
         "new_assertion", "explicit", "continue_prior"]},
@@ -923,7 +933,17 @@ def request_mode(
     flags = {"allow_memory_maintenance", "allow_forgetting", "allow_business_mutation",
              "requires_memory_result"}
 
+    def explicit_operations(value: dict[str, Any]) -> list[str]:
+        # Called only after the existing application schema has validated actions.
+        # Completion criteria may contain other steps; those are not permission.
+        return list(dict.fromkeys(action["operation"]
+            for item in value["application_requests"] for action in item["actions"]))
+
     def valid(value: Any, *, saved: bool = False) -> bool:
+        action_declaration = (not saved and application_workflow is not None
+            and isinstance(value, dict) and "memory_requests" in value
+            and "business_operations" not in value)
+        operations = value.get("business_operations") if isinstance(value, dict) else None
         if application_workflow is not None:
             from jsonschema.exceptions import ValidationError  # type: ignore[import-untyped]
 
@@ -938,13 +958,14 @@ def request_mode(
                     application_workflow, value["application_requests"], save_result=False)
             except (ValidationError, ValueError, TypeError):
                 return False
+            if action_declaration:
+                operations = explicit_operations(value)
             if plans and (value.get("business_action_request") == "none" or any(
-                action["operation"] not in value.get("business_operations", [])
+                action["operation"] not in (operations or [])
                 for item in value["application_requests"] for action in item["actions"]
             )):
                 return False
         if operation_mode_declaration:
-            operations = value.get("business_operations") if isinstance(value, dict) else None
             if (not isinstance(operations, list)
                     or not all(isinstance(op, str) and op in BUSINESS_MUTATIONS
                                for op in operations)
@@ -993,7 +1014,8 @@ def request_mode(
                 *memory_fields, "allow_forgetting", *(
                     ["business_action_request", *([] if reference_mode_declaration else
                         ["business_action_quote"]), *(
-                        ["business_operations"] if operation_mode_declaration else [])]
+                        ["business_operations"] if operation_mode_declaration
+                        and not action_declaration else [])]
                     if action_mode_declaration
                     else ["allow_business_mutation"]), *(
                     ["application_requests", "application_continuation_request"]
@@ -1114,6 +1136,9 @@ def request_mode(
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID") from error
         if not valid(decision):
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
+        if (application_workflow is not None and isinstance(decision, dict)
+                and "business_operations" not in decision):
+            decision = {**decision, "business_operations": explicit_operations(decision)}
         state.update(decision=decision)
         if references:
             state["reference_request_ids"] = [row["request_id"] for row in references]

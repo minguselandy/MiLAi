@@ -247,11 +247,12 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                 assert "requirements" not in references["requests"][0]
             assert set(schema["required"]) == {
                 "memory_requests", "allow_forgetting", "business_action_request",
-                "business_operations", "application_continuation_request", "application_requests"}
+                "application_continuation_request", "application_requests"}
+            assert "business_operations" not in schema["properties"]
             return native_call("classify_current_request", "mode-" + str(ordinal),
                 memory_requests=(["explicit"] if text in {original_text, correction_text} else [])
                 + (["continue_prior"] if text in {continue_text, correction_text} else []),
-                allow_forgetting=False, business_action_request="none", business_operations=[],
+                allow_forgetting=False, business_action_request="none",
                 application_continuation_request="none", application_requests=[])
         if names == {"resolve_continuation_operations"}:
             seen["resolve"] += 1
@@ -309,6 +310,7 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
     assert continued["capture"]["source_ref"] not in \
         continued["records"][0]["value"]["source_refs"]
     assert continued["request_mode"]["prior_maintenance_requests"]
+    assert continued["request_mode"]["business_operations"] == []
     assert len(continued["maintenance"]) == 1
     assert continued["operation_status"]["semantic_memory"]["status"] == "committed"
     assert continued["operation_status"]["business"]["operations"] == []
@@ -1027,6 +1029,82 @@ def test_complete_request_mode_reuses_saved_legacy_decision_without_reclassifica
     assert result["application_continuation_request"] == "resolve_prior_request"
     assert not result["allow_memory_maintenance"] and not result["requires_memory_result"]
     assert "memory_requests" not in result
+
+    current = "Reserve and label the teal and blue packs; do not save anything."
+    current_decision = {"memory_requests": [], "allow_forgetting": False,
+        "business_action_request": "perform", "application_continuation_request": "none",
+        "application_requests": [{"target": {"item_key": color + " pack"}, "actions": [{
+            "operation": "reserve_and_label", "arguments": {
+                "quantity": 1, "destination": "local", "packing": "box"}}]}
+            for color in ("teal", "blue")]}
+    calls = []
+
+    class DeclaredModel:
+        def invoke(self, messages: Any, **kwargs: Any) -> AIMessage:
+            from jsonschema import validate
+
+            calls.append(messages)
+            schema = kwargs["tools"][0]["function"]["parameters"]
+            assert "business_operations" not in schema["properties"]
+            assert "business_operations" not in schema["required"]
+            validate(current_decision, schema)
+            return AIMessage(content="", tool_calls=[{
+                "name": "classify_current_request", "id": "current-mode",
+                "args": current_decision}])
+
+    arguments = {"native_declaration": True, "write_mode_declaration": True,
+        "action_mode_declaration": True, "operation_mode_declaration": True,
+        "reference_mode_declaration": True, "independent_capabilities": True,
+        "memory_continuation": True, "application_workflow": "reservation_v1"}
+    current_path = tmp_path / "current-mode.json"
+    actual = functional.request_mode(
+        cast(functional.LangMemRecipeChatModel, DeclaredModel()), current_path, binding,
+        current, 1, lambda event: None, **arguments)
+    assert actual["business_operations"] == ["reserve_and_label"]
+    assert actual["allow_business_mutation"] and not actual["allow_memory_maintenance"]
+    assert actual["application_requests"] == current_decision["application_requests"]
+    plans = functional.compile_application_requests(
+        "reservation_v1", actual["application_requests"], save_result=False)
+    assert all([step["operation"] for step in plan["steps"]]
+               == ["reserve_and_label", "complete_label"] for plan in plans)
+    assert "business_operations" not in current_decision
+    saved = read_json(current_path)
+    assert saved["decision"] == {**current_decision, "business_operations": ["reserve_and_label"]}
+    before = current_path.read_bytes()
+    replay = functional.request_mode(
+        cast(functional.LangMemRecipeChatModel, UnusedModel()), current_path, binding,
+        current, 1, lambda event: None, **arguments)
+    assert replay == actual and current_path.read_bytes() == before and len(calls) == 1
+
+    conflicting = {**current_decision, "business_operations": ["create_or_update_draft"]}
+
+    class ConflictingModel:
+        def invoke(self, *args: Any, **kwargs: Any) -> AIMessage:
+            return AIMessage(content="", tool_calls=[{
+                "name": "classify_current_request", "id": "old-conflict",
+                "args": conflicting}])
+
+    conflict_path = tmp_path / "conflict-mode.json"
+    with pytest.raises(functional.IncompleteChatResponse,
+                       match="FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"):
+        functional.request_mode(
+            cast(functional.LangMemRecipeChatModel, ConflictingModel()), conflict_path, binding,
+            current, 1, lambda event: None, **arguments)
+    assert read_json(conflict_path) == {"binding": binding, "attempts": 1}
+    write_json(conflict_path, {"binding": binding, "attempts": 1, "decision": conflicting})
+    before = conflict_path.read_bytes()
+    with pytest.raises(ValueError, match="FUNCTIONAL_REQUEST_MODE_DECISION_CHANGED"):
+        functional.request_mode(
+            cast(functional.LangMemRecipeChatModel, UnusedModel()), conflict_path, binding,
+            current, 1, lambda event: None, **arguments)
+    assert conflict_path.read_bytes() == before
+    write_json(conflict_path, {"binding": binding, "attempts": 1, "decision": current_decision})
+    before = conflict_path.read_bytes()
+    with pytest.raises(ValueError, match="FUNCTIONAL_REQUEST_MODE_DECISION_CHANGED"):
+        functional.request_mode(
+            cast(functional.LangMemRecipeChatModel, UnusedModel()), conflict_path, binding,
+            current, 1, lambda event: None, **arguments)
+    assert conflict_path.read_bytes() == before  # Only a new response may derive operations.
 
 
 @pytest.mark.parametrize("write_request", ["none", "new_assertion", "explicit"])
