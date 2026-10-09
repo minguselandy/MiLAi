@@ -338,6 +338,12 @@ def feature_proposal_schema(
             if not ops:
                 variants.remove(variant)
     if features.source_metadata:
+        # Relation support remains available for bindings, but cannot retain a
+        # unit's attribution. Saved proposals keep their original decode schema.
+        assertion_support = [
+            alias for alias in refs["h"]
+            if not for_generation or "unit" in mapping["support"][alias]
+        ]
         assertion = {
             "oneOf": [
                 _object(
@@ -347,7 +353,7 @@ def feature_proposal_schema(
                     },
                     ["source_evidence", "kind"],
                 ),
-                _object({"keep": reference("h")}, ["keep"]),
+                _object({"keep": reference("h", assertion_support)}, ["keep"]),
             ]
         }
         if features.temporal_scope:
@@ -380,7 +386,7 @@ def feature_proposal_schema(
             for v in assertion["oneOf"]
             if (("source_evidence" in v["properties"] or "source" in v["properties"])
                 and refs["e"])
-            or ("keep" in v["properties"] and refs["h"])
+            or ("keep" in v["properties"] and assertion_support)
         ]
         current_assertions = [v for v in assertion["oneOf"] if "keep" not in v["properties"]]
         current_assertion = (

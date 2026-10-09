@@ -965,6 +965,16 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         explicit = copy.deepcopy(edit)
         explicit["edits"][-1]["keep_support"] = clause["support"]
         assert method.decode_envelope({"records": {"r1": explicit}}, view["mapping"])[0] == decoded
+        relation_support = next(
+            alias for alias, support in view["mapping"]["support"].items() if "unit" not in support
+        )
+        relation_attribution = copy.deepcopy(explicit)
+        relation_attribution["edits"][-1].update(
+            keep_support=[relation_support], assertion={"keep": relation_support},
+        )
+        assert not validator.is_valid({"creates": [], "records": {"r1": relation_attribution}})
+        with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):
+            method.decode_envelope({"records": {"r1": relation_attribution}}, view["mapping"])
         explicit_empty = copy.deepcopy(edit)
         explicit_empty["edits"][-1].update(evidence=["e1"], keep_support=[])
         with pytest.raises(FunctionalRejection, match="ASSERTION_SUPPORT_NOT_KEPT"):
