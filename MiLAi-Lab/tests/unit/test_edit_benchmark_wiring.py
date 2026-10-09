@@ -25,7 +25,7 @@ from milai_lab.datasets.edit_benchmarks import (
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget, RunLimits
 from milai_lab.memory.edit_units import evidence_status, render_revision_view, writer_projection
-from milai_lab.memory.retrieval import SemanticRetriever
+from milai_lab.memory.retrieval import SemanticRetriever, semantic_keys
 from milai_lab.memory.service import MemoryService
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
@@ -911,6 +911,75 @@ def test_cache_tracks_current_body_and_withdrawal_without_erasing_history(tmp_pa
             service.read("a", 1)["value"]["edit_state"]["units"][0]["text"]
             == "Green tea is preferred."
         )
+
+        class GranularVectors(Vectors):
+            def embed_documents(self, texts: list[str]) -> list[list[float]]:
+                self.documents.extend(texts)
+                return [
+                    [0.0, 1.0] if "FILLER" in text else
+                    [1.0, 0.0] if "Green tea." in text else [0.6, 0.8]
+                    for text in texts
+                ]
+
+        def qualified(key: str) -> None:
+            seed(service, key, "Green tea. Only on weekdays. FILLER")
+            item = store.get(service.namespace, key)
+            assert item is not None
+            current = item.value["_v13_1"]["current"]
+            current["edit_state"] = {
+                "matter_description": "Refreshment choice",
+                "units": [
+                    {"unit_id": "u1", "role": "content", "text": "Green tea."},
+                    {"unit_id": "u2", "role": "condition", "text": "Only on weekdays."},
+                    {"unit_id": "u3", "role": "content", "text": "FILLER"},
+                ],
+                "relations": [{"source_unit": "u2", "target_unit": "u1",
+                               "relation_type": "modifies"}],
+            }
+            item.value["_v13_1"]["history"] = [current]
+            store.put(service.namespace, key, item.value, index=False)
+
+        qualified("z")
+        granular_vectors = GranularVectors()
+        service.semantic_retriever = SemanticRetriever(granular_vectors, 2)
+        assert [row["id"] for row in service.search(
+            "refreshment", limit=2, include_raw=False,
+        )["records"]] == ["b", "z"]
+
+        service.semantic_retriever = SemanticRetriever(
+            granular_vectors, 2, granularity="record_units",
+        )
+        rows = service.search("refreshment", limit=2, include_raw=False)["records"]
+        assert [row["id"] for row in rows] == ["z", "b"]
+        assert rows[0] == service.read("z")  # Complete revision, including the other clauses.
+        keys = semantic_keys(rows[0]["value"], granularity="record_units")
+        assert len(keys) == 4
+        assert keys[1] == (
+            "Refreshment choice\nGreen tea.\nmodifies: Only on weekdays. -> Green tea."
+        )
+        embedded = len(granular_vectors.documents)
+        service.search("refreshment", limit=2, include_raw=False)
+        assert len(granular_vectors.documents) == embedded
+
+        qualified("c")
+        rows = service.search("refreshment", limit=2, include_raw=False)["records"]
+        assert [row["id"] for row in rows] == ["c", "z"]  # Ties use record IDs; K counts records.
+        item = store.get(service.namespace, "z")
+        assert item is not None
+        old = item.value["_v13_1"]["current"]
+        current = copy.deepcopy(old)
+        current["revision"] = 2
+        current["edit_state"]["units"][0]["text"] = "Music interests."
+        item.value["_v13_1"]["current"] = current
+        item.value["_v13_1"]["history"] = [old, current]
+        store.put(service.namespace, "z", item.value, index=False)
+        embedded = len(granular_vectors.documents)
+        rows = service.search("refreshment", limit=3, include_raw=False)["records"]
+        assert [row["id"] for row in rows] == ["c", "b", "z"]
+        # Refresh whole + both linked unit keys; retain the unaffected unit's vector.
+        assert len(granular_vectors.documents) - embedded == 3
+        assert rows[-1] == service.read("z") and rows[-1]["value"]["revision"] == 2
+        assert service.read("z", 1)["value"]["edit_state"]["units"][0]["text"] == "Green tea."
 
 
 def test_embedding_failure_is_not_silent_lexical_success_or_a_memory_write(tmp_path: Path) -> None:
