@@ -1,3 +1,57 @@
+# Live handoff: 2026-10-09 13:47:26 UTC／北京时间21:47:26, M36 concentrated prediction RUNNING
+
+Latest development f8fb3ac68d1e61288c51639698e175c87105df44; actualM/Host frozen36b0401c6e89276640903e3201ad6dba6f4b7c66.
+M PID4170100/session24661; inspect current PID, outputs, terminal/lease before any modeldispatch;
+DO NOTrestart old snapshots. Actualsource artifacts/post118/source-36b0401/MiLAi-Lab.
+Mroot artifacts/post118/m-four-dev277-36b0401-record-units-edit-false-v1; runtime separate same stem.
+At fixed13:47:26 saved4/277 predictions/9completeanswers [4,0,0,0], maintenance5; NOterminal-predict/score/Judge.
+OneM/I2/extract_then_edit/staged/record_units/denseK10; editFalse1, otherstagesTrue1;
+context65536/output32768/margin512/input32256/Source4096/body8192/failfast unchanged.
+Fourdev65/77/62/73 independentemptybanks; first65subset, record/other4methods NOT dispatched.
+No hot source/config changes, no blind unknown retry/budgetreset. Root alone serial actualQwen/BGE/Judge;
+user authorizes threeofflineagents only. Fullgoal ACTIVE/incomplete/ProductNO_GO, no finalcandidate/advantage.
+
+Closed28 cutoff13:36:10.065244: business6 source36 5COMPLETED1FAILED0NOTRUN;
+42chat565164known/13encoder899,21stop21tool_calls; chat+encoder rawvllm_response55 not55generation.
+Actual oneauthorizedreservepartial+onecomplete_labelsuccess/noextraorrepeatbusiness.
+m2 memory-only scopewrongperform/currentplain[] rejected beforeacceptedplan/permission/Editor; noretry.
+m3 firstunit11711>8192 actuallyomitted, fourconditionsdelivered and omissionflags retained;
+answer falsely inferred onlyfourstored. m4 actualretractu1..u5 COMMITTEDr4 BEFOREfirstforget,
+finalmaintenance[] is laterboundary, not0commit. Fouruniquecommitsr1-r4;7forget6reject1visibility,
+1record4Sourcesrevoked,2laterToolmaintroots locate EDIT_RECORD_UNAVAILABLE incomplete.
+m5 reopened0visible/nohiddenreformation/worldunchanged but wrong historicalabsenceclaim.
+Rootsixfullformal/natural/finalread, m4earlypreviewmisreading corrected againstactualtrace receipts.
+No reasoningexecution/newnumericregrade/independentconfirmation. Toolattemptunknown !=usageunknown.
+
+Closed26 E JSONscope2oldfailedinputsFalse/True2rep 8stop15192known,False3970True11222;
+allreadonlycorrect/forgetallowed, Falseextraexplicitmaintenance; originalTruelengthnotreproduced/notrepairproof.
+Closed27 actualdad navigation24answers48stop309176known;no_nav144314/nav164862;0emb/Judge/apply.
+SameactualunitK10pool, onlycatalogexcerpt; memberopening differs; exactsameSelectorinput repetitionvaries.
+IMPORTANT32qa1 targets rank15/16 OUTSIDEK10, earlierpooldeliveredclaimcorrected;37qa0rank20outside.
+Rootall24answers8scopeformalread; M onlyfirst3answersread atsnapshot.
+
+28nonoverlap1377gen14096230known=chargedDelta850emb73610/Judge0/newunknown0;
+fixedledger49412requests225353140known225629836charged2024231emb, historicalunknown6/0/limitsunchanged.
+fixedfacts closed28-facts-20261009-133610.json; Mstarted13:39:02afterendexactchain,
+Mongoingcost EXCLUDED fromclosed28. publication-observation-20261009-m36-concentrated-start.json.
+Raw/gold/HTTP/reasoning/DB/privateconfig/log remainignored; TMPDIR/SQLITE_TMPDIR /cra BEFOREimports,
+root/tmpfull. /cra49%used at13:42, no automaticcleaning/newpercallinventory/SHA gate.
+
+fef4603 CURRENT contract Nativeapplication_requests=[] explicit; originalparser/schema/cache/auto/permissions
+unchanged, plain[]stillrejected; localQwentemplate823/oneexistingSQLiteflow. f8fb3ac staged/state_driven
+fullunitbody/support/relations/applicability/history preserved; duplicatewhole revision_view omitted,
+originalevidence nowactualrangeref+read_source;legacyunchanged/8192same/notbyte-losslessclaim.
+Actualr3copy offlineold11711/newpages7233/7150=5units0skip;history[1,2,3]scaffoldnotoriginalhistoryDB.
+Twoexistingchecks/Ruff/strictmypy/template7280 pass0HTTP; Rootintegrated5fileRuff+twoSQLiteflowspass.
+BothnewHostfixes EXCLUDEDfromfrozen36 and notactualHostvalidated. OwnCIafterpushseparate;36anddad
+Fastsuccess/Fullskipped. PR119open/draft/unmerged, no borrowingCI or Full21/21claims.
+
+Continue concentratedM and deferredscore underRootserialresources; offlinereflection/code canprogress.
+Allsameversionfive277/first65subset/native32-12-4/drift-recovery/Mablation/tight/finalfreezeTHEN16semanticunused/
+external28-1354/old10fullaudit/threeadapters/finalHost135-192/newsubstantialstories/sixdeliveriesunfinished.
+Keepinvalidlabels/allopportunity-valid/source-time/owner-speaker-subject/familyJudgeRootnonindependence;
+Append-only canbesuccessfulwithoutUPDATE, memorytext nevercreatesbusinessauthority.
+
 # Live handoff: 2026-10-09 12:12:11 UTC／北京时间2026-10-09 20:12:11, closed E20 / 25 nonoverlap ranges
 
 ActualHost frozen e0f6119df2962a52af1048d9f03da2bcd20faded;

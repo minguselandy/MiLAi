@@ -11,6 +11,113 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 集中候选已启动；业务六消息和两项诊断闭合：2026-10-09 13:47:26 UTC／北京时间21:47:26
+
+当前开发为`f8fb3ac68d1e61288c51639698e175c87105df44`；下表实际冻结版本分别记录。
+本报告运行观察固定于13:47:26，**闭合成本固定于13:36:10**，不把之后在途M纳入已闭合成本。
+原历史、失败、无效标签保留。[post117／118完整计划](
+MILAI_POST_117_118_FUNCTION_FIRST_DEVELOPMENT_EXPERIMENT_PLAN.md)及六项交付仍active／incomplete；
+PR119 open／draft／未合并，Product NO_GO，没有最终候选或稳定方法优势。
+
+### 当前状态与证据范围
+
+| 范围／实际源码 | 已形成的实际结果 | 可以确认的边界 |
+|---|---|---|
+| 两个旧E失败输入的JSON scope模式比较／e0f6119 | False与True各4次，8正式JSON均stop，0业务／DB／encoder／Judge | 原length本包未复现；False输出较少，但遗忘两次增加不必要explicit维护，不能称语义全面改善 |
+| 固定池目录导航六题、两条件、各两重复／dad79e7 | 24完整答案、48stop；无新encoder／Writer／apply／Judge | 同实际record_units K10池，目录增加实际获胜unit摘录；打开成员和自然答案不固定，没有稳定收益结论 |
+| 原业务六消息独立空库／36b0401 | 5执行COMPLETED、1FAILED，全部6已尝试 | 恰一次授权预订与一次补标签；补存仍失败，读取及历史解释有缺口，不是5条语义通过 |
+| 四开发用户连续M／36b0401 | 13:39:02准入；13:47:26保存4/277预测、9完整答案，分布[4,0,0,0] | 正在predict，无terminal-predict；Judge及其他方法未启动，完成答案数不等于正确数 |
+| 后续Host修复／fef4603＋f8fb3ac | 当前空动作Native合同、完整单元分页和实际遗漏反馈已经合流 | 直接SQLite／Ruff／相关类型／本地Qwen模板通过，0新真实Host；不在上述36b运行内 |
+
+M实际Python PID4170100，工具session24661只作交接参考；跨对话先核对实际PID、产物及终态。
+冻结cwd为artifacts/post118/source-36b0401/MiLAi-Lab，运行根
+m-four-dev277-36b0401-record-units-edit-false-v1；不重启或热改。
+选定唯一M／I2／extract_then_edit／staged／record_units／dense K10候选，Editor False／T1，
+Selector／抽取／Reader继承True／T1。context65536、输出32768、余量512、输入上限32256，
+source4096／body8192；沿用原fail-fast、Qwen家族、BGE-m3与连续账本。
+四用户65／77／62／73各自空库独立轨迹，首65已经包含在277内；没有并行派发record候选或五方法。
+这是组合开发候选，不是单因素优势实验，更不是最终冻结；16保留用户语义仍未用于开发。
+
+### 业务六消息：正确实际状态、错误请求与不完整读取分开
+
+36b共同Source投影首次实际交付Tool的已有origin（查询或操作名称）；当前默认配置不改。
+该版本还包含Keep合同和其他共同修复，随机单次故事不能归因于origin唯一因素。
+原六消息与标签服务恢复control复用，逐消息Root复核；普通已知失败之后只继续原独立消息，
+没有Root重试、重做业务、截断片段执行、unknown重发或热修改。
+
+| 原消息 | 实际路径 | 剩余问题 |
+|---|---|---|
+| 0请求预订并保存 | get_reservation not_found；一次reserve_and_label仅标签失败；r1→r2→r3实际提交 | 查询缺失没有再被写成预订操作失败，r3正文正确为reserved_label_failed；但初次请求措辞强化、复合断言支持选择仍有缺口 |
+| 1只补标签 | 先核对已存在对象，原服务恢复后一次complete_label；业务完成 | 本轮不写记忆，旧r3完整值不变；不能说已保存最终标签结果 |
+| 2不重做业务、只补保存 | scope误perform＋continue_prior；CURRENT正式plain []正常stop但不合工具协议，FAILED | FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID；没有接受业务计划、许可、Editor或提交，不是合法no-op |
+| 3只读实际与保存结果 | 原操作核对业务完成；主单元11711tokens超过8192，被实际跳过，只送达四个条件 | 概括“只保存四个参数”错误；不是完整主正文送达后忽略。实际遗漏标记在临时模型投影中保留 |
+| 4遗忘 | 正式五个retract实际提交r4，之后7次forget调用：6拒绝、1可见性撤回 | 1记录／4Sources不可见；两Tool来源维护root仍locate EDIT_RECORD_UNAVAILABLE；删除永久性／全部来源措辞过强 |
+| 5遗忘后重开只读 | 0可见记录、无恢复／新语义维护／业务效果；实际业务仍完成 | 本轮未提交的来源回执被错误推广为原来未保存，缺失与历史解释仍不准确 |
+
+**提交计数按实际回执去重为4（r1–r4）**。Root初次依据最终maintenance=[]误将消息4看成预览，
+后按trace中当前visit5／m4的committed r4、及后续首个forget调用顺序更正；原结果不改。
+可见性撤回、清空语义单元和物理／备份删除仍有区别，不以一次visibility证明所有副本删除。
+工具尝试的unknown标签与HTTP usageunknown分开；本包HTTP全部已确认，无新增unknown。
+Root已读全部六消息形成的完整正式语义内容、自然候选和最终反馈；未用reasoning草稿或另造数值评分。
+
+### 目录导航：检索、选择和答案不能合并判因
+
+导航只在unit键实际胜出时附最多240字符原unit文本；whole胜出或同分whole时不猜单元。
+两条件相同编码缓存、keys、排序、版本与K10候选池；选中后仍读完整实际事项和支持，最终Reader
+不把导航元数据当来源。没有新增编码、摘要事实、身份合并或对照组额外原文。
+
+无导航24生成为144314known，导航24生成为164862known，后者多20548；这里只是故障集有限观察。
+同条件两重复Selector请求完全相同，事件33及37的打开成员仍变化，不能把这种随机差异算作机制作用。
+事件37饮品qa1两条件均实际打开并使用新饮品；qa0所需文章仍排20，池内导航不能补回。
+**事件32 qa1新接触／探索事项排名15／16，实际池外**：Root早期“在池但未打开”的推断已明确更正。
+事件32 qa0导航条件两次多开探索事项，但该事项whole键胜出、没有unit摘录，不能直接宣称摘录因果。
+事件33即使打开10事项也缺精确事件。六题两重复不估计总体准确率；没有独立Judge确认或新数值重评分。
+
+### 两项通用修复，保持变化与旧内容的职责
+
+fef4603明确CURRENT在无需当前业务动作时仍调用既有Native工具，返回application_requests=[]；
+不将范围解释的perform当作必须构造非空业务。原schema／parser／缓存／权限／auto／采样保持，
+plain []仍拒绝，不新增关键词授权、强制非空、审核或自动重试。
+既有纯保存续办与SQLite重开流程通过；实际安装Qwen模板823tokens，只增加26，0HTTP。
+它尚未证明修好了scope误判或随机工具格式失败。
+
+f8fb3ac的staged／state_driven读取保留每个实际单元正文、断言及支持、直接关系、适用性及有界
+保存历史入口；取消首项重复整份revision_view，把原文evidence改为实际来源范围／角色／时间／ref
+及既有read_source入口。legacy保持；临时输入形状确实改变，**不称逐字段字节无损压缩**。
+只读权限、持久状态和8192材料额度保持，没有静默截正文或新增事实库。
+实际匹配读取回执发生unit_exceeds_material_limit时，现有反馈说明“未送达不表示未保存”。
+
+离线复制实际r3值精确复现旧11711；新投影两页7233／7150，合计五完整单元、0skip，正常cursor分页。
+不是五单元在一页，也不保证后续整个Host轨迹可容纳。当前值及单元语义字段不变；history身份
+使用有界[1,2,3]脚手架，没有读取原历史DB来制造旧正文。实际Qwen单System两消息模板7280。
+两个既有SQLite流程、Ruff、相关strict mypy通过；Root合流再检查5文件Ruff及两个直接保存／续办／
+重开流程，无真实HTTP。完整新Host效果待M串行资源释放后验证，不回填36b负结果。
+
+### 固定闭合成本与尚在运行的范围
+
+| 新非重叠范围 | 生成请求／响应 | known＝charged增量 | encoder请求／tokens |
+|---|---:|---:|---:|
+| 26：E原两失败输入JSON模式比较 | 8／8 | 15192 | 0／0 |
+| 27：六题目录导航 | 48／48 | 309176 | 0／0 |
+| 28：36b原业务六消息 | 42／42 | 565164 | 13／899 |
+
+28为21stop＋21tool_calls，0length；encoder13请求与13响应。原trace的55个vllm_response包括
+42chat＋13encoder，不能全部当生成；7个forget工具尝试不是7次新增HTTP重试。
+至13:36:10累计28非重叠范围**1377生成／14096230known＝charged增量，850encoder／73610tokens**。
+固定连续账本49412requests／225353140known／225629836charged／2024231embedding，历史unknown6／0，
+新unknown／Judge0，limits未改。此前20消息、首6／14、后续各消息／阶段都是相应整批子集，不重加。
+第28end与M启动前账本完全衔接；**M在途请求与成本没有计入本闭合表**，不把reservation当闭合失败。
+私有输入、gold、HTTP、reasoning、DB、配置、日志及固定事实审计保持ignored；只发布汇总与代码。
+
+36b自身Fast37930196250 success、Full37930196088 skipped；dad自身Fast37928671454 success、
+Full37928671550 skipped（12:40:11观察）。fef／f8及本报告CI推送后单独核对；不借其他提交，
+不称Full21/21或语义通过。默认record／native v8／普通Host thinking保持，选择staged候选不扩大总架构。
+
+当前优先完成本M集中连续观察与评分；再按真实断点收敛，并保留强Append-only与同版B0／B1／B2／M对照。
+同版五方法各277、native32／12／4、drift／recovery、必要M消融／固定更紧预算、最终冻结后16保留用户、
+外部28问题／1354历史出现及旧10完整答案／三适配器、最终Host135case／192message及新故事、六交付
+均未完成。五方向和一个逻辑MemoryService保持；记忆文字不创造业务事实或许可。
+
 ## 三条完整Host链路已执行，语义仍未闭合：2026-10-09 12:12:11 UTC／北京时间2026-10-09 20:12:11
 
 本段固定运行及成本观察，下方历史保留。实际冻结源码为
