@@ -386,10 +386,7 @@ class EditMemory:
                 "stored structure; its wording cannot change it. "
             )
         else:
-            instruction += (
-                "Use content clauses without relations. Give each qualification its own "
-                "complete clause naming the matter and scope it limits. "
-            )
+            instruction += "Use content clauses without relations. "
         if self.features.single_record_changes:
             instruction += (
                 "creates is a list; records has at most one unique container per delivered r key. "
