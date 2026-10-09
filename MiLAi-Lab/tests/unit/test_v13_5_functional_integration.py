@@ -68,6 +68,7 @@ def prepared(
     explicit_reads: bool = False,
     memory_continuation: bool = False,
     complete_requests: bool = False,
+    scope_requests: bool = False,
     memory_method: str = "functional_v1",
     edit_interface_version: str = "v1",
     edit_features: dict[str, bool] | None = None,
@@ -143,7 +144,8 @@ def prepared(
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
-        "request_mode": "current_request_native_v8" if complete_requests else
+        "request_mode": "current_request_native_v9" if scope_requests else
+        "current_request_native_v8" if complete_requests else
         "current_request_native_v7" if memory_continuation else
         "current_request_native_v6" if independent_capabilities else
         "current_request_native_v5" if reference_mode_declaration else
@@ -215,10 +217,11 @@ def scripted(
     return wires
 
 
+@pytest.mark.parametrize("scope_requests", [False, True])
 def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, scope_requests: bool,
 ) -> None:
-    root = prepared(tmp_path, native=True, complete_requests=True,
+    root = prepared(tmp_path, native=True, complete_requests=True, scope_requests=scope_requests,
         direct_response=True, phase_thinking=True, current_delivery=True,
         memory_profile="unified_v1", memory_view_mode="state_driven",
         memory_method="milai_edit_m_v1", edit_interface_version="I2",
@@ -253,13 +256,16 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                 assert not {"namespace", "bank", "owner", "fragment_handle"}.intersection(part)
             assert set(schema["required"]) == {
                 "memory_requests", "allow_forgetting", "business_action_request",
-                "application_continuation_request", "application_requests"}
+                "application_continuation_request", *(
+                    [] if scope_requests else ["application_requests"])}
             assert "business_operations" not in schema["properties"]
+            assert ("application_requests" in schema["properties"]) is not scope_requests
             return native_call("classify_current_request", "mode-" + str(ordinal),
                 memory_requests=(["explicit"] if text in {original_text, correction_text} else [])
                 + (["continue_prior"] if text in {continue_text, correction_text} else []),
                 allow_forgetting=False, business_action_request="none",
-                application_continuation_request="none", application_requests=[])
+                application_continuation_request="none",
+                **({} if scope_requests else {"application_requests": []}))
         if names == {"resolve_continuation_operations"}:
             seen["resolve"] += 1
             material = json.loads(wire["messages"][-1]["content"])["archived_reference_material"]
@@ -317,6 +323,8 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
         continued["records"][0]["value"]["source_refs"]
     assert continued["request_mode"]["prior_maintenance_requests"]
     assert continued["request_mode"]["business_operations"] == []
+    assert continued["request_mode"]["application_requests"] == []
+    assert not list((root / "banks").glob("*/*-current-operations.json"))
     assert len(continued["maintenance"]) == 1
     assert continued["operation_status"]["semantic_memory"]["status"] == "committed"
     assert continued["operation_status"]["business"]["operations"] == []
@@ -1035,6 +1043,14 @@ def test_complete_request_mode_reuses_saved_legacy_decision_without_reclassifica
     assert result["application_continuation_request"] == "resolve_prior_request"
     assert not result["allow_memory_maintenance"] and not result["requires_memory_result"]
     assert "memory_requests" not in result
+    scoped_cache = functional.request_mode(
+        cast(functional.LangMemRecipeChatModel, UnusedModel()), path, binding,
+        "Only finish saving the earlier actual result.", 1, lambda event: None,
+        native_declaration=True, write_mode_declaration=True, action_mode_declaration=True,
+        operation_mode_declaration=True, reference_mode_declaration=True,
+        independent_capabilities=True, memory_continuation=True,
+        application_workflow="reservation_v1", scope_only=True)
+    assert scoped_cache == result and path.read_bytes() == before
 
     current = "Reserve and label the teal and blue packs; do not save anything."
     current_decision = {"memory_requests": [], "allow_forgetting": False,
@@ -1081,6 +1097,10 @@ def test_complete_request_mode_reuses_saved_legacy_decision_without_reclassifica
         cast(functional.LangMemRecipeChatModel, UnusedModel()), current_path, binding,
         current, 1, lambda event: None, **arguments)
     assert replay == actual and current_path.read_bytes() == before and len(calls) == 1
+    scoped_cache = functional.request_mode(
+        cast(functional.LangMemRecipeChatModel, UnusedModel()), current_path, binding,
+        current, 1, lambda event: None, scope_only=True, **arguments)
+    assert scoped_cache == actual and current_path.read_bytes() == before and len(calls) == 1
 
     conflicting = {**current_decision, "business_operations": ["create_or_update_draft"]}
 
@@ -5513,11 +5533,18 @@ def test_shared_host_delivers_selected_prior_request_beyond_recent_context(
 
 
 @pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
-@pytest.mark.parametrize("continuation", ["complete", "no_save", "readonly", "empty_save"])
+@pytest.mark.parametrize("continuation,scope_requests", [
+    pytest.param("complete", False, id="complete"),
+    pytest.param("no_save", False, id="no_save"),
+    pytest.param("readonly", False, id="readonly"),
+    pytest.param("empty_save", False, id="empty_save"),
+    pytest.param("complete", True, id="complete-scoped"),
+])
 def test_complete_host_request_survives_partial_effect_and_new_session(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str, continuation: str,
+    scope_requests: bool,
 ) -> None:
-    root = prepared(tmp_path, native=True, complete_requests=True,
+    root = prepared(tmp_path, native=True, complete_requests=True, scope_requests=scope_requests,
         direct_response=True, phase_thinking=True, current_delivery=True,
         memory_profile="unified_v1", memory_method="milai_edit_m_v1",
         edit_interface_version="I2", maintenance_recipe=recipe,
@@ -5533,7 +5560,7 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     }[continuation]
     reserved = {"item_key": "teal pack", "quantity": 1,
                 "destination": "local", "packing": "box"}
-    seen = {"reserve": 0, "label": 0, "saved": 0, "unchanged": 0}
+    seen = {"reserve": 0, "label": 0, "saved": 0, "unchanged": 0, "current_plan": 0}
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         names = {t["function"]["name"] for t in wire.get("tools", [])}
@@ -5553,19 +5580,32 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
                 assert part["source_ref"] and part["source_revision"] == 1
                 assert part["observed_at"]
                 assert not {"namespace", "bank", "owner", "fragment_handle"}.intersection(part)
+            if scope_requests:
+                assert set(wire["tools"][0]["function"]["parameters"]["properties"]) == {
+                    "memory_requests", "allow_forgetting", "business_action_request",
+                    "application_continuation_request"}
             return native_call("classify_current_request", "mode-" + str(ordinal),
                 memory_requests=(["explicit"] if first or continuation == "empty_save" else [])
                 + (["continue_prior"] if not first
                    and continuation in {"complete", "empty_save"} else []), allow_forgetting=False,
                 business_action_request="perform" if first else
                 "none" if continuation == "readonly" else "continue_if_unfinished",
-                business_operations=["reserve_and_label", "complete_label"] if first else [],
                 application_continuation_request="none" if first else "resolve_prior_request",
-                application_requests=[{"target": {"item_key": "teal pack"}, "actions": [{
-                    "operation": "reserve_and_label", "arguments": {
-                        key: value for key, value in reserved.items() if key != "item_key"}}]}]
-                if first else [])
+                **({} if scope_requests else {
+                    "business_operations": ["reserve_and_label", "complete_label"] if first else [],
+                    "application_requests": [{"target": {"item_key": "teal pack"}, "actions": [{
+                        "operation": "reserve_and_label", "arguments": {
+                            key: value for key, value in reserved.items() if key != "item_key"}}]}]
+                    if first else []}))
         if names == {"resolve_continuation_operations"}:
+            schema = wire["tools"][0]["function"]["parameters"]
+            if set(schema["properties"]) == {"application_requests"}:
+                assert scope_requests and wire["messages"][-1]["content"] == initial_text
+                seen["current_plan"] += 1
+                return native_call("resolve_continuation_operations", "current-plan",
+                    application_requests=[{"target": {"item_key": "teal pack"}, "actions": [{
+                        "operation": "reserve_and_label", "arguments": {
+                            key: value for key, value in reserved.items() if key != "item_key"}}]}])
             frame = json.loads(wire["messages"][-1]["content"])
             cards = frame["archived_reference_material"]["registered_application_requests"]
             assert len(cards) == 1
@@ -5621,6 +5661,7 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
                       content=initial_text, initial_world={"label_available": False})
     first = functional.message(root, **first_args)
     assert first["status"] == "COMPLETED", first.get("error")
+    assert seen["current_plan"] == int(scope_requests)
     original = first["application_requests"][0]
     assert not original["complete"] and original["memory"]["status"] == "pending"
     assert original["business"]["status"] == "partial"
@@ -5639,6 +5680,7 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     assert second["status"] == "COMPLETED", second.get("error")
     progress = second["application_requests"][0]
     assert progress["request_id"] == original["request_id"]
+    assert seen["current_plan"] == int(scope_requests)
     assert seen["reserve"] == 1 and seen["label"] == int(continuation != "readonly")
     assert len(second["world"]["world"]["attempts"]) == 1 + int(continuation != "readonly")
     assert progress["feedback"]["status"] == "delivered"
