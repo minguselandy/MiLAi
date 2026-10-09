@@ -33,6 +33,7 @@ _STATUS = {
     "none": "没有产生新效果", "observed": "仅查询观察",
     "no_effect": "没有产生新效果", "completed": "列出的操作已完成",
     "not_executed": "未执行新的业务操作",
+    "not_requested": "本轮未要求办理", "visibility_revoked": "可见性已撤销",
 }
 _FIELDS = {
     "item_key": "物品", "quantity": "数量", "reservation_id": "预订编号",
@@ -110,11 +111,18 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
                 )
     if material.get("schema") == "functional_material_v1":
         items.extend(material.get("items", []))
+        omitted_record_body |= any(
+            unit.get("type") == "record"
+            and unit.get("snapshot_body_delivered") is False
+            for unit in material.get("skipped_units", [])
+        )
     lines = []
     seen = set()
     remaining = 1000
     for unit in items:
-        if unit.get("type") != "record" or not unit.get("content"):
+        if (unit.get("type") != "record" or not unit.get("content")
+                or unit.get("status") == "visibility_revoked"
+                or unit.get("source_visibility") == "visibility_revoked"):
             continue
         identity = (unit["record_id"], unit["revision"],
                     unit.get("edit_unit", {}).get("unit_id"), tuple(unit.get("content_range", [])))
@@ -187,7 +195,9 @@ def business_response(
     for unit in material.get("items", []):
         ref = unit.get("source_ref")
         if (unit.get("type") != "fragment" or unit.get("role") != "tool"
-                or unit.get("origin") not in _TOOLS or ref in source_refs or ref in historical):
+                or unit.get("origin") not in _TOOLS or ref in source_refs or ref in historical
+                or unit.get("status") == "visibility_revoked"
+                or unit.get("source_visibility") == "visibility_revoked"):
             continue
         try:
             old = json.loads(unit.get("content", ""))
@@ -234,6 +244,7 @@ def business_response(
             "pending": "尚未确认", "committed": "提交已确认", "failed": "未确认成功",
             "not_requested": "未要求", "delivered": "Host已收到进度",
             "semantic_unknown": "提交结果未知", "model_unknown": "模型响应未知",
+            "visibility_revoked": "可见性已撤销",
         }
         business_status = request["business"]["status"]
         execution_status = request["business"]["execution"]["status"]
@@ -260,8 +271,15 @@ def business_response(
             paragraphs.append(attempt_label + _STATUS.get(operation["status"],
                               _text(operation["status"])) +
                               "; 此次尝试未确认撤销效果, 其他尝试的结果分别列出。")
-    if effects["raw_event"]["status"] == "stored":
-        paragraphs.append("本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。")
+    raw = effects["raw_event"]
+    if raw["status"] == "stored":
+        paragraphs.append(
+            "本轮原始消息曾记录, 当前可见性已撤销。原始消息记录与语义记忆提交分别计数。"
+            if raw.get("source_visibility") == "visibility_revoked" else
+            "本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。"
+        )
+    elif raw["status"] == "visibility_revoked":
+        paragraphs.append("本轮原始消息的可见性已撤销; 本轮无法据此确认语义保存内容。")
     if execution_stop:
         paragraphs.append("执行已停止: 追加读取额度已用完; 未继续办理剩余工作。已确认的效果保留。")
     return AIMessage(content="\n\n".join(paragraphs))

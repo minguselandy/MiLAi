@@ -43,7 +43,7 @@ def initial_request_progress(requirements: Mapping[str, Any]) -> dict[str, Any]:
     """Initialize existing request items without discovery, effects or callbacks."""
     return {
         "business": {
-            "status": "pending",
+            "status": "pending" if requirements["steps"] else "not_requested",
             "execution": _initial_execution(),
             "steps": [{"id": step["id"], "status": "pending", "attempts": []}
                       for step in requirements["steps"]],
@@ -78,6 +78,8 @@ def _business_status(business: dict[str, Any]) -> str:
         return "current_state_changed"
     if "unknown" in statuses:
         return "business_unknown"
+    if not statuses:
+        return "not_requested"
     if statuses <= {"completed"}:
         return "completed"
     return "partial" if "completed" in statuses else "incomplete"
@@ -98,7 +100,9 @@ def resume_request(
 ) -> dict[str, Any]:
     """Continue full request requirements using the existing receipt progress.
 
-    Requirements contain target, steps, save_result and feedback. Each step has
+    Requirements contain steps, save_result and feedback, plus a target when
+    business steps exist. An empty business plan skips discovery and leaves
+    independently authorized memory and feedback work available. Each step has
     id, operation, arguments, completed (literal observed fields), and optionally
     arguments_from_state (argument -> actual observed field). The caller supplies
     this trusted plan; it is neither model inference nor application permission.
@@ -158,113 +162,128 @@ def resume_request(
                  "allowed_operations": sorted(adapter.allowed_operations),
                  "readonly": bool(controls.get("readonly", False))}
     business["execution"] = execution
-    discovery_id = request_id + ":discover:" + str(len(state["discoveries"]) + 1)
-    state["discoveries"].append({"attempt_id": discovery_id, "status": "pending"})
-    persist()
-    try:
-        observed = adapter.discover(requirements["target"], attempt_id=discovery_id)
-    except Exception as error:
-        state["discoveries"][-1].update(status="unknown", error=str(error))
-        state["business"]["status"] = "observation_unknown"
-        execution["status"] = "observation_unknown"
-        persist()
-        return snapshot_result()
-    state["discoveries"][-1].update(status="complete", result=observed)
-    actual = observed.get("current_state") or {}
-    business["observation"] = observed
-    business["status"] = "pending"
-    if observed.get("unknown_effects"):
-        business["status"] = "business_unknown"
-        execution["status"] = "outcome_unknown"
-        persist()
-        return snapshot_result()
-    execution["status"] = "not_needed"
-    _observed_business_steps(requirements, business, observed)
-    for step, progress in zip(requirements["steps"], business["steps"], strict=True):
-        if progress["status"] == "completed":
-            continue
-        # Confirmed effects cannot be repeated merely because later state changed.
-        if progress["status"] == "superseded":
-            execution["status"] = "current_state_changed"
-            break
-        if controls.get("readonly", False):
-            execution["status"] = "observed_only"
-            break
-        if step["operation"] not in adapter.allowed_operations:
-            execution["status"] = "not_authorized_current_request"
-            break
-        if not execute_business:
-            execution["status"] = "pending_host_execution"
-            break
-        missing = [
-            argument
-            for argument, field in step.get("arguments_from_state", {}).items()
-            if field not in actual and argument not in step.get("arguments", {})
-        ]
-        if missing:
-            execution["status"] = "missing_observed_arguments"
-            progress.update(status="incomplete", missing_observed_arguments=missing)
-            break
-        arguments = {
-            **step.get("arguments", {}),
-            **{
-                argument: actual[field]
-                for argument, field in step.get("arguments_from_state", {}).items()
-                if field in actual
-            },
-        }
-        attempt_id = request_id + ":" + step["id"] + ":" + str(len(progress["attempts"]) + 1)
-        attempt: dict[str, Any] = {"attempt_id": attempt_id, "status": "unknown"}
-        progress["attempts"].append(attempt)
+    if requirements["steps"]:
+        discovery_id = request_id + ":discover:" + str(len(state["discoveries"]) + 1)
+        state["discoveries"].append({"attempt_id": discovery_id, "status": "pending"})
         persist()
         try:
-            ref = (
-                VerifiedObjectRef(**observed["object_ref"]) if observed.get("object_ref") else None
-            )
-            result = adapter.execute(step["operation"], arguments, attempt_id=attempt_id, ref=ref)
+            observed = adapter.discover(requirements["target"], attempt_id=discovery_id)
         except Exception as error:
-            attempt["error"] = str(error)
-            progress["status"], business["status"] = "unknown", "business_unknown"
+            state["discoveries"][-1].update(status="unknown", error=str(error))
+            state["business"]["status"] = "observation_unknown"
+            execution["status"] = "observation_unknown"
+            persist()
+            return snapshot_result()
+        state["discoveries"][-1].update(status="complete", result=observed)
+        actual = observed.get("current_state") or {}
+        business["observation"] = observed
+        business["status"] = "pending"
+        if observed.get("unknown_effects"):
+            business["status"] = "business_unknown"
             execution["status"] = "outcome_unknown"
-            break
-        attempt.update(status="complete", result=result)
-        observed = result
-        actual = result.get("current_state") or actual
-        if result.get("executed"):
-            _observed_business_steps(requirements, business, observed)
-        execution["status"] = "attempted" if result.get("executed") else result["status"]
-        if not result.get("executed") or not result.get("receipt", {}).get("ok"):
-            break
-    business["status"] = _business_status(business)
-    execution["can_execute"] = bool(
-        not execution["readonly"]
-        and business["status"] not in {"business_unknown", "current_state_changed"}
-        and execution["status"] in {"pending_host_execution", "attempted"}
-        and any(
-            progress["status"] != "completed" and step["operation"] in adapter.allowed_operations
-            for step, progress in zip(requirements["steps"], business["steps"], strict=True)
+            persist()
+            return snapshot_result()
+        execution["status"] = "not_needed"
+        _observed_business_steps(requirements, business, observed)
+        for step, progress in zip(requirements["steps"], business["steps"], strict=True):
+            if progress["status"] == "completed":
+                continue
+            # Confirmed effects cannot be repeated merely because later state changed.
+            if progress["status"] == "superseded":
+                execution["status"] = "current_state_changed"
+                break
+            if controls.get("readonly", False):
+                execution["status"] = "observed_only"
+                break
+            if step["operation"] not in adapter.allowed_operations:
+                execution["status"] = "not_authorized_current_request"
+                break
+            if not execute_business:
+                execution["status"] = "pending_host_execution"
+                break
+            missing = [
+                argument
+                for argument, field in step.get("arguments_from_state", {}).items()
+                if field not in actual and argument not in step.get("arguments", {})
+            ]
+            if missing:
+                execution["status"] = "missing_observed_arguments"
+                progress.update(status="incomplete", missing_observed_arguments=missing)
+                break
+            arguments = {
+                **step.get("arguments", {}),
+                **{
+                    argument: actual[field]
+                    for argument, field in step.get("arguments_from_state", {}).items()
+                    if field in actual
+                },
+            }
+            attempt_id = request_id + ":" + step["id"] + ":" + str(len(progress["attempts"]) + 1)
+            attempt: dict[str, Any] = {"attempt_id": attempt_id, "status": "unknown"}
+            progress["attempts"].append(attempt)
+            persist()
+            try:
+                ref = (
+                    VerifiedObjectRef(**observed["object_ref"])
+                    if observed.get("object_ref") else None
+                )
+                result = adapter.execute(
+                    step["operation"], arguments, attempt_id=attempt_id, ref=ref
+                )
+            except Exception as error:
+                attempt["error"] = str(error)
+                progress["status"], business["status"] = "unknown", "business_unknown"
+                execution["status"] = "outcome_unknown"
+                break
+            attempt.update(status="complete", result=result)
+            observed = result
+            actual = result.get("current_state") or actual
+            if result.get("executed"):
+                _observed_business_steps(requirements, business, observed)
+            execution["status"] = "attempted" if result.get("executed") else result["status"]
+            if not result.get("executed") or not result.get("receipt", {}).get("ok"):
+                break
+        business["status"] = _business_status(business)
+        execution["can_execute"] = bool(
+            not execution["readonly"]
+            and business["status"] not in {"business_unknown", "current_state_changed"}
+            and execution["status"] in {"pending_host_execution", "attempted"}
+            and any(
+                progress["status"] != "completed"
+                and step["operation"] in adapter.allowed_operations
+                for step, progress in zip(requirements["steps"], business["steps"], strict=True)
+            )
         )
-    )
-    persist()
+        persist()
+    else:
+        business["status"] = "not_requested"
+        execution["status"] = "not_needed"
+        persist()
 
     memory = state["memory"]
     readonly = controls.get("readonly", False)
     can_save = not readonly and controls.get("allow_memory", False)
-    if requirements.get("save_result") and memory["status"] != "committed":
-        if business["status"] == "completed":
+    if requirements.get("save_result"):
+        if can_save:
             memory.pop("current_permission", None)
+        else:
+            memory["current_permission"] = "not_authorized_current_request"
+        if memory["status"] != "committed" and (
+            business["status"] in {"completed", "not_requested"}
+            or memory["status"] == "semantic_unknown"
+        ):
             _resume_memory(
                 request_id,
                 state,
                 controls,
-                save_result if can_save else None,
+                save_result if can_save and business["status"] in {
+                    "completed", "not_requested"
+                } else None,
                 reconcile_memory,
                 persist,
                 snapshot_result,
                 semantic_attempt_binding,
             )
-        if not can_save and memory["status"] != "committed":
-            memory["current_permission"] = "not_authorized_current_request"
     if requirements.get("feedback", True) and controls.get("allow_feedback", True) and feedback:
         final_input = snapshot_result()
         old = state["feedback"]
@@ -374,7 +393,7 @@ def _resume_result(
         )
     )
     complete = (
-        state["business"]["status"] == "completed"
+        state["business"]["status"] in {"completed", "not_requested"}
         and state["memory"]["status"]
         in {
             "committed",

@@ -325,6 +325,77 @@ def has_semantic_receipt(receipts: list[dict[str, Any]]) -> bool:
     )
 
 
+def merge_maintenance_results(
+    *groups: list[dict[str, Any]],
+    source_visible: Callable[[str], bool] | None = None,
+) -> list[dict[str, Any]]:
+    """Retain this public request's actual maintenance outcomes across refreshes.
+
+    Callers supply only batches associated with the current public request,
+    including its explicitly selected continuations. An empty later preview does
+    not undo an earlier operation receipt. Exact request IDs and proposal slots
+    identify progress; unrelated requests never share confirmation. This is a
+    result projection, not new execution state or permission to resume a batch.
+    Visibility withdrawal retains body-free effect receipts while removing the
+    cached directory descriptions that could otherwise redisclose old content.
+    """
+    result: list[dict[str, Any]] = []
+    positions: dict[str, int] = {}
+    for group in groups:
+        for value in group:
+            current = copy.deepcopy(value)
+            request_id = current.get("request_id")
+            if not isinstance(request_id, str):
+                if current not in result:
+                    result.append(current)
+                continue
+            if request_id not in positions:
+                positions[request_id] = len(result)
+                result.append(current)
+                continue
+            index = positions[request_id]
+            previous = result[index]
+            if set(previous.get("source_refs", [])) != set(current.get("source_refs", [])):
+                raise ValueError("EDIT_MAINTENANCE_RESULT_SOURCES_CHANGED")
+            # Inspection may produce a start/permission preview without having
+            # observed the old checkpoint. Such a preview has no contrary effect.
+            if current.get("phase") in {"start", "permission"} and not current.get("receipts"):
+                continue
+            receipts = current.setdefault("receipts", [])
+            for slot, receipt in enumerate(previous.get("receipts", [])):
+                if slot >= len(receipts):
+                    receipts.append(receipt)
+                elif has_semantic_receipt([receipt]):
+                    # Replayed no_change or a later visibility limit cannot turn
+                    # the original, confirmed operation into a fresh non-effect.
+                    receipts[slot] = receipt
+            if "batches" in previous or "batches" in current:
+                current["batches"] = merge_maintenance_results(
+                    previous.get("batches", []), current.get("batches", [])
+                )
+            current["semantic_write_performed"] = bool(
+                previous.get("semantic_write_performed") or current.get("semantic_write_performed")
+            )
+            result[index] = current
+    if source_visible is not None:
+        for batch in result:
+            if any(not source_visible(ref) for ref in batch.get("source_refs", [])):
+                batch["source_visibility"] = "visibility_revoked"
+                batch.pop("memory_view", None)
+                batch["receipts"] = [{key: receipt[key] for key in (
+                    "ok", "status", "id", "revision", "source_ref", "effect",
+                    "replayed", "original_status",
+                ) if key in receipt} for receipt in batch.get("receipts", [])]
+                batch["unprocessed"] = [{key: item[key] for key in (
+                    "operation_id", "phase", "batch",
+                ) if key in item} for item in batch.get("unprocessed", [])]
+            if "batches" in batch:
+                batch["batches"] = merge_maintenance_results(
+                    batch["batches"], source_visible=source_visible
+                )
+    return result
+
+
 def has_pending_save(state: dict[str, Any]) -> bool:
     """An explicit save is pending when any actual work scope lacks confirmation."""
     if not state.get("memory_save_requested"):
