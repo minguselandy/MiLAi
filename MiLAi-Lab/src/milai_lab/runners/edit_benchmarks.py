@@ -154,6 +154,17 @@ def reader_messages(
             if (isinstance(view, dict)
                     and view.get("representation") in {"plain_v1", "conditioned_v1"}):
                 memory["applicability"] = _reader_applicability(view)
+                # Evidence keeps its full literal body/range. Reuse only exact
+                # source metadata already declared in this same revision view.
+                sources = memory["applicability"].get("source_table", {})
+                for evidence in memory.get("revision_evidence", []):
+                    source = sources.get(evidence.get("source_ref"), {})
+                    for field in (
+                        "source_revision", "role", "occurred_at", "observed_at", "calendar_context",
+                    ):
+                        if (evidence.get(field) is not None and field in source
+                                and evidence[field] == source[field]):
+                            evidence.pop(field)
                 projected = True
     metadata: list[tuple[dict[str, Any] | list[Any], str | int, str, str]] = [
         (unit, field, field, json.dumps(unit[field], ensure_ascii=False, separators=(",", ":")))
@@ -242,7 +253,8 @@ def reader_messages(
     if projected:
         instructions += (
             "\nAbsent source role, revision, raw dates and calendar come from source_table "
-            "under assertion.source_ref. Absent temporal report/capture dates come from "
+            "under assertion.source_ref or revision_evidence.source_ref in the same memory. "
+            "Absent temporal report/capture dates come from "
             "assertion.occurred_at/observed_at, using that source_table only for absent "
             "assertion fields. Absent query/version dates and query calendar come from the "
             "enclosing view. Explicit values, including null, override these defaults. "

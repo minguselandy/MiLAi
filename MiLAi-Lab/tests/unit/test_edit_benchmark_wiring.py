@@ -140,7 +140,15 @@ def test_reader_semantic_projection_keeps_limits_and_explicit_unknown_overrides(
     memories = [{
         "record_id": "actual-record", "revision": 1,
         "content": "Plan two rounds per shift. Only during January.",
-        "revision_evidence": [{"role": "user", "content": "Original plan with its limits."}],
+        "revision_evidence": [
+            {**{key: value for key, value in source.items() if key != "kind"},
+             "content": "Original plan with its limits.", "range": [0, 31]},
+            {**{key: value for key, value in source.items() if key != "kind"},
+             "source_revision": None, "role": "assistant", "occurred_at": None,
+             "observed_at": "2026-01-01T12:03:00Z", "calendar_context": None,
+             "content": "Different observed support, including explicit unknowns."},
+            {"source_ref": "another-source", "role": "user", "content": "Other support."},
+        ],
         "applicability": view,
     }]
     before = copy.deepcopy(memories)
@@ -160,7 +168,12 @@ def test_reader_semantic_projection_keeps_limits_and_explicit_unknown_overrides(
     projected = row["applicability"]
     assert memories == before
     assert row["content"] == before[0]["content"]
-    assert row["revision_evidence"] == before[0]["revision_evidence"]
+    evidence = row["revision_evidence"]
+    assert evidence[0] == {"source_ref": source["source_ref"],
+                           "content": "Original plan with its limits.", "range": [0, 31]}
+    assert evidence[1:] == before[0]["revision_evidence"][1:]
+    assert {**projected["source_table"][source["source_ref"]], **evidence[0]} == (
+        before[0]["revision_evidence"][0])
     assert [unit["text"] for unit in projected["units"]] == [unit["text"] for unit in view["units"]]
     for key in ("relations", "historical_units", "future_units", "unresolved_units"):
         assert projected[key] == view[key]
