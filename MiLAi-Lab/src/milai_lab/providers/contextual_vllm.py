@@ -149,8 +149,11 @@ class VLLMClient:
         response_format: dict[str, Any] | None = None,
         top_p: float | None = None,
         presence_penalty: float | None = None,
+        enable_thinking: bool | None = None,
     ) -> dict[str, Any]:
         self._check_owner()
+        if enable_thinking is not None and type(enable_thinking) is not bool:
+            raise ValueError("enable_thinking must be a boolean or None")
         request: dict[str, Any] = {
             "model": self.config.model,
             "messages": [dict(message) for message in messages],
@@ -158,6 +161,7 @@ class VLLMClient:
             "max_tokens": self.config.max_tokens,
         }
         thinking = (
+            enable_thinking if enable_thinking is not None else
             self.capacity.enable_thinking
             if self.capacity is not None
             else self.config.enable_thinking
@@ -183,6 +187,8 @@ class VLLMClient:
                     request["messages"],
                     self.config.max_tokens,
                     request.get("tools"),
+                    **({"enable_thinking": enable_thinking}
+                       if enable_thinking is not None else {}),
                 )
             except CapacityExceeded as error:
                 if self.emit:

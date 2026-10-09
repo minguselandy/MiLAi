@@ -80,6 +80,7 @@ def test_explicit_thinking_mode_matches_tokenizer_and_wire(capacity: HostCapacit
     assert enabled.identity["enable_thinking"] is True
     assert capacity.identity["enable_thinking"] is False
     wires: list[dict[str, object]] = []
+    events: list[dict[str, Any]] = []
 
     def respond(request: httpx.Request) -> httpx.Response:
         wires.append(json.loads(request.content))
@@ -89,10 +90,26 @@ def test_explicit_thinking_mode_matches_tokenizer_and_wire(capacity: HostCapacit
     with VLLMClient(
         VLLMConfig("http://fixture/v1", "pinned-local-host", max_tokens=24,
                    enable_thinking=True),
-        capacity=enabled, transport=transport,
+        capacity=enabled, transport=transport, emit=lambda event: events.append(deepcopy(event)),
     ) as client:
         client.chat(messages)
+        client.chat(messages, enable_thinking=False)
+        client.chat(messages, enable_thinking=True)
+        client.chat(messages)
     assert wires[0]["chat_template_kwargs"] == {"enable_thinking": True}
+    assert wires[1]["chat_template_kwargs"] == {"enable_thinking": False}
+    assert wires[2:] == [wires[0], wires[0]]
+    requests = [event for event in events if event["event"] == "vllm_response"]
+    assert len(requests) == 4
+    for event in requests:
+        thinking = event["request"]["chat_template_kwargs"]["enable_thinking"]
+        counted = enabled.tokenizer.apply_chat_template(
+            messages, tokenize=True, add_generation_prompt=True, enable_thinking=thinking,
+        )
+        assert enabled.count_messages(messages, enable_thinking=thinking) == len(counted)
+        assert event["capacity"]["prompt_tokens"] == len(counted)
+        assert event["capacity"]["identity"]["enable_thinking"] is thinking
+    assert enabled.enable_thinking is True and enabled.identity["enable_thinking"] is True
     with pytest.raises(ValueError, match="HOST_CAPACITY_THINKING_MODE_MISMATCH"):
         VLLMClient(
             VLLMConfig("http://fixture/v1", "pinned-local-host", enable_thinking=False),
