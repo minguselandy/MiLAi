@@ -5805,10 +5805,14 @@ def test_host_save_continuation_registers_actual_tool_batch_after_unconfirmed_sa
         if not tools:
             current = next(m["content"] for m in wire["messages"] if m["role"] == "user")
             if current == save_text:
-                attempt = request_row()["request_progress"]["memory"]["attempts"][0]
-                assert attempt["status"] == "failed"
-                assert attempt["receipt"]["status"] == "result_save_unconfirmed"
-                assert attempt == failed[0]
+                progress = request_row()["request_progress"]
+                assert progress["memory"]["attempts"][0] == failed[0]
+                assert progress["memory"]["attempts"][1]["status"] == "committed"
+                observation = progress["business"]["observation"]
+                delivered = json.loads(observation["delivery_response"]["content"])
+                assert delivered["source_ref"] == observation["source_ref"]
+                assert delivered["source_fragment_index"]
+                return {"role": "assistant", "content": "Reported the actually saved result."}
             return native_call("get_reservation", "query-" + str(ordinal), item_key="amber pack")
         return {"role": "assistant", "content": "Reported actual business and memory receipts."}
 

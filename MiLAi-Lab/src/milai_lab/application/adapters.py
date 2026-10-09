@@ -343,5 +343,6 @@ class SandboxApplicationAdapter:
             },
             "raw_capture": payload.get("raw_capture"),
             "observation_projection": payload.get("observation_projection"),
+            "delivery_response": result.model_dump(mode="json"),
             "semantic_maintenance": {"status": "not_requested"},
         }
