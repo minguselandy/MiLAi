@@ -1454,20 +1454,22 @@ def continuation_operations(
             prompt = (
                 "Interpret the whole CURRENT user input using the declared application "
                 "operation descriptions. Return one "
-                "resolve_continuation_operations call with application_requests: one target "
-                "with its requested actions and literal parameters. Include only the requested "
-                "workflow stages; reserve_and_label already includes labeling. Completion "
-                "criteria or implicit steps do not authorize more actions. Use [] when no "
-                "application action is requested or literal target/parameters cannot be "
-                "resolved from this input. Original-request "
-                "continuation is resolved separately, not by creating a new plan from history. "
+                "resolve_continuation_operations call. A nonempty application_requests contains "
+                "one target with its requested actions and literal parameters. Include only "
+                "the requested workflow stages; reserve_and_label already includes labeling. "
+                "Completion criteria or implicit steps do not authorize more actions. Submit the "
+                "same call with application_requests=[] when no CURRENT application action is "
+                "requested or literal target/parameters cannot be resolved from this input; "
+                "the earlier scope interpretation does not require a nonempty plan. "
+                "Original-request continuation is resolved separately, not by creating a new "
+                "plan from history. "
                 "The program compiles this plan and binds actual identities after queries. "
                 "Requested saving is separate from application actions and their actual results."
             )
             declaration = {"type": "function", "function": {
                 "name": "resolve_continuation_operations",
-                "description": "Interpret the CURRENT input as literal requests for the "
-                               "available application operations.",
+                "description": "Submit the CURRENT application's literal plan, or "
+                               "application_requests=[] for no resolved CURRENT action.",
                 "parameters": {"type": "object", "additionalProperties": False,
                     "properties": {"application_requests": application_requests_schema(
                         cast(str, application_workflow))}, "required": ["application_requests"]}}}

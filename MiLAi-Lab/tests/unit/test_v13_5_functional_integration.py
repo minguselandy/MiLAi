@@ -260,6 +260,8 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
         "\nCurrent maintenance scope (instructions for this attempt, not fact evidence):\n"
     )
     continuation_scopes = []
+    empty_current_plan = json_scope_requests and not json_declaration_disabled
+    current_plans = []
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         names = {t["function"]["name"] for t in wire.get("tools", [])}
@@ -312,13 +314,21 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                 "memory_requests": (["explicit"] if text in {original_text, correction_text}
                                     else [])
                 + (["continue_prior"] if text in {continue_text, correction_text} else []),
-                "allow_forgetting": False, "business_action_request": "none",
+                "allow_forgetting": False,
+                "business_action_request": "perform"
+                    if empty_current_plan and text == continue_text else "none",
                 "application_continuation_request": "none",
                 **({} if scope_requests else {"application_requests": []})}
             if json_scope:
                 return {"role": "assistant", "content": json.dumps(decision)}
             return native_call("classify_current_request", "mode-" + str(ordinal), **decision)
         if names == {"resolve_continuation_operations"}:
+            schema = wire["tools"][0]["function"]["parameters"]
+            if set(schema["properties"]) == {"application_requests"}:
+                assert empty_current_plan and wire["messages"][-1]["content"] == continue_text
+                current_plans.append(continue_text)
+                return native_call("resolve_continuation_operations", "current-empty",
+                                   application_requests=[])
             seen["resolve"] += 1
             material = json.loads(wire["messages"][-1]["content"])["archived_reference_material"]
             assert len(material["pending_maintenance"]) == (1 if seen["resolve"] == 1 else 0)
@@ -376,7 +386,12 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
     assert continued["request_mode"]["prior_maintenance_requests"]
     assert continued["request_mode"]["business_operations"] == []
     assert continued["request_mode"]["application_requests"] == []
-    assert not list((root / "banks").glob("*/*-current-operations.json"))
+    current_paths = list((root / "banks").glob("*/*-current-operations.json"))
+    assert len(current_paths) == int(empty_current_plan)
+    assert current_plans == ([continue_text] if empty_current_plan else [])
+    assert not continued["request_mode"]["allow_business_mutation"]
+    if current_paths:
+        assert json.loads(current_paths[0].read_text())["decision"] == {"application_requests": []}
     assert len(continued["maintenance"]) == 1
     assert continued["operation_status"]["semantic_memory"]["status"] == "committed"
     assert continued["operation_status"]["business"]["operations"] == []
