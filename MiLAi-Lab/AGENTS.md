@@ -1,7 +1,8 @@
 # Current handoff: global function-first integration, 2026-10-10 Asia/Shanghai
 
 User explicitly requests full execution of docs/MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md.
-Candidate config: configs/milai-global-function-first.json (v2 frozen 1cfb400); one integrator plus three source developers.
+Candidate config: configs/milai-global-function-first.json (v3 selected; freeze/dispatch pending).
+One integrator plus three source developers; historical v2 experiments remain frozen at 1cfb400.
 Shared Reader projection/flat literal metadata, real complete-request planning, independent memory after
 known CURRENT schema/length failure, faithful candidates and cumulative confirmed receipts are integrated.
 Root exact old-eight replay: 32446 -> 30520 input <=32256, 8/8 exact-rendered, all original evidence
@@ -48,10 +49,15 @@ Predeclared7oldEditor requests,False/True2freshreps=28; exact messages/wire sche
 Proposal-only,noStore/commit/noQA/gold,alloutputs retained; source developer reviews only those7inputs.
 28gen/527243known=charged/28stop,newunknown0/0emb/0Judge; originalunknown7 retained.
 False14:220425known/6683output,True14:306818known/93104output;Truepeak9747/4outputs>Host8192.
-Source review still pending; no automatic adoption or compiler/commit claim from28wire-valid outputs.
+Source review CLOSED28/28, all outputs retained; no compiler/commit claim from28wire-valid outputs.
+Root selects benchmark Editor thinking=True at unchanged32768 output for better Source formation/value
+coverage in these fixed slices. Unsupported non-target edits, omissions, clocks and subject errors remain.
+Host Editor staysFalse at8192; True control is not admitted there (4/14outputs exceeded8192).
 Recovery developer CURRENT prompt33079fd=>Root0d297ad;8lines clarification,no schema/authority expansion.
 16existingmock/SQLite+Ruff/typepass;Root1overlapSQLite flowpass. Actual semantics unverified;notin1cf.
-Do not adopt or dispatch main five methods before control close/reconciliation and candidate freeze.
+Next: freeze v3 including e41787a/0d297ad, rerun original Host20 from empty banks with unchanged
+fixture/controls, then all five full development methods from empty banks. Predict all arms before score.
+Do not hot-edit frozen runs, splice old prefixes or add new Reader/Source prompt knobs in this candidate.
 Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.
 Historical observations below are fixed snapshots; inspect actual PID/lease/terminal before dispatch.
 

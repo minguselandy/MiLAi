@@ -2,7 +2,8 @@
 
 当前按用户提供的[全局修复与功能优先规划](MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md)
 执行，集成分支为 `feat/lab-global-function-first-20261009`。第一版源码 `bbe77e9`
-的真实 Host20 已闭合；修复候选 `milai-global-function-first-v2` 冻结源码为 `1cfb400`。
+的真实 Host20 已闭合；历史修复候选 `milai-global-function-first-v2` 冻结源码为 `1cfb400`。
+当前选择 `milai-global-function-first-v3`，待冻结后从空库复验Host20并运行完整五方法。
 原Host20新空库运行在2026-10-09 17:56:46 UTC停止：13 COMPLETED、7 NOT_RUN。
 两次遗忘拒绝回执缺少effect字段，汇总保守标成unknown；独立代码边界及只读数据库核对
 确认仅这两次属于写入前无效果拒绝，原STOPPED结果保持原样。18:04:32 UTC启动单独补充运行，
@@ -25,7 +26,8 @@
 
 当前一个配置文件 `configs/milai-global-function-first.json` 提供 functional 和 benchmark
 两个入口。Host 维持原 JSON v9 当前请求、staged/record、8192 输出、24 次消息调用额度；
-benchmark 维持 staged/record_units、K10、65536 上下文、32768 输出、512 余量。
+benchmark 维持 staged/record_units、K10、65536 上下文、32768 输出、512 余量；
+v3只将benchmark Editor thinking开启，Host Editor仍关闭。两入口其他阶段配置不变。
 两入口共用既有 Qwen3.6/BGE 服务和原连续账本，保持各自原来的读取权限。
 
 - `memory/reader_projection.py` 是纯投影。实际单元替代整版正文必须有精确渲染证明；
@@ -117,7 +119,7 @@ Ruff、依赖边界及旧八事项真实模板复算通过。没有把重复检�
 开发分支又合入`0d297ad`：仅澄清既有CURRENT提示，纯补存仍是记忆续办，查询/跳过已存
 是执行限制，禁止应用动作时业务为空；纯遗忘不额外要求新语义保存。schema与授权程序未改。
 16项既有mock/SQLite检查、Ruff/类型通过；Root合流后复查1项纯保存恢复通过（重叠）。
-实际模型语义未复验；当前冻结对照仍不含该开发补丁。
+实际模型语义未复验；历史冻结对照不含该补丁，新v3候选将纳入上述两个工程修复。
 
 ## 下一项工作与仍未完成范围
 
@@ -145,13 +147,21 @@ Reader按原话回答被作者Judge判Hallucination。保留原标签，同时�
 每设置各两次、28提案全部保留：28gen/527243 known=charged、28stop、新unknown0、0emb/0Judge。
 False14份220425 known/6683 output，True14份306818 known/93104 output；
 True峰值输出9747，4份超过Host8192额度，不能直接据此变更Host模式。
-输出`artifacts/global-function-first/editor-thinking-1cfb400-matched-v1`，来源提案审查尚在进行。
+输出`artifacts/global-function-first/editor-thinking-1cfb400-matched-v1`，来源审查已闭合28/28。
 不运行Store或提交，不把28/28 wire schema合法当正式编译通过，不自动选最好答案或采用配置。
 工程错误与普通语义失败分别定位；unknown HTTP、未知写入/业务效果和 Store 故障停止相关路径，
 不盲重试。新 benchmark 预先声明按题保存成功及已知只读缺答，缺答保留在全部机会分母。
 
 四开发用户前8会话已从各自空库形成，实际分母为32会话/73QA/72原生更新；
-统一评分补充及来源提案对照已闭合，当前待全部提案审查，不用于跨版本排名。
+统一评分补充及来源提案对照、全部提案审查已闭合，不用于跨版本排名。
+Root选择benchmark Editor thinking=True作为v3唯一模型配置变更：初始形成两次均覆盖五类原话，
+金额冲突两次均使用用户e3的18000，False两次都把assistant e2的20000写成用户报告。
+这项选择依据已曝光Source切片，不依据参考答案；True仍有空提案、非目标计划替换、
+跨单元keep、模态增强、主体及时间问题，不能宣称全面改善或正式编译通过。
+Host保持False，避免将32768输出对照直接套入8192入口；Reader、温度、预算和Source提示不变。
+v3同时纳入已闭合工程检查的CURRENT提示与两处写入前拒绝回执修复。
+下一步在新冻结源码上复用原Host20输入/control，再从空库串行运行全部五方法预测，
+待五方法预测全存后统一评分。旧v2完整主实验准备仍为0 HTTP，不复用其银行或结果。
 最终仍需同版五方法各277会话（合计1385）、
 原 native32/12会话/4用户、drift/recovery、必要 M 消融与紧预算、最终冻结后的16保留用户、
 LongMemEval、RawRAG/RollingSummary/A-MEM真实适配，以及 Host135case/192message 和新故事。

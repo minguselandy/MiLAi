@@ -1,5 +1,5 @@
 {
-  "candidate_version": "milai-global-function-first-v2",
+  "candidate_version": "milai-global-function-first-v3",
   "entrypoints": {
     "functional": {
       "profile": "functional_v1",
@@ -72,8 +72,8 @@
         "Host request progress distinguishes structural completion from semantic coverage; Host response checkpoint does not prove user receipt.",
         "Literal observation candidates preserve actual public Tool spans; they are program projections, not LLM formation success or proof of semantic completeness."
       ],
-      "revision": "milai-global-function-first-v2",
-      "change_intent": "Shared exact Reader metadata and complete-request capacity; independent memory after known CURRENT schema/truncation failure; program-determined empty issued choices; faithful Source values/clocks and original cumulative effect receipts.",
+      "revision": "milai-global-function-first-v3",
+      "change_intent": "Retain shared literal Reader projection, complete-request capacity and independent memory boundaries; clarify CURRENT save-only continuation and forget-only scope, and preserve known pre-mutation rejection effect receipts. Host Editor remains non-thinking at its existing 8192 output limit.",
       "request_mode": "current_request_json_v9",
       "business_attempt_policy": "fresh_query_with_history_v3",
       "formation_interface": "anchored_assertion_v3",
@@ -96,7 +96,7 @@
       "formation_support_review": "disabled",
       "support_review_comparison": "disabled",
       "read_interface": "explicit_selectors_v1",
-      "config_version": "milai-global-function-first-v2",
+      "config_version": "milai-global-function-first-v3",
       "memory_method": "milai_edit_m_v1",
       "edit_interface_version": "I2",
       "embedding": {
@@ -135,7 +135,7 @@
       "request_failure_policy": "independent_memory"
     },
     "benchmark": {
-      "experiment_name": "milai-global-function-first-v2",
+      "experiment_name": "milai-global-function-first-v3",
       "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
       "tokenizer_path": "/cra/qwen36-35B",
       "context_tokens": 65536,
@@ -151,7 +151,7 @@
       "source_tokens": 4096,
       "chronological_order": "timestamp",
       "method_version": "milai_edit_v2",
-      "config_version": "milai-global-function-first-v2",
+      "config_version": "milai-global-function-first-v3",
       "working_sets": false,
       "interface_version": "I2",
       "edit_features": {
@@ -198,7 +198,7 @@
         "Append-only"
       ],
       "maintenance_recipe": "extract_then_edit",
-      "evidence_kind": "DEVELOPMENT_GLOBAL_FUNCTION_CANDIDATE_UNVALIDATED",
+      "evidence_kind": "DEVELOPMENT_GLOBAL_FUNCTION_CANDIDATE_SOURCE_ONLY_SELECTED_UNVALIDATED",
       "memory_profile": "unified_v1",
       "memory_ranking": "dense",
       "calendar_context": "history-calendar",
@@ -206,7 +206,7 @@
       "reader_projection": "semantic_units_v1",
       "retrieval_granularity": "record_units",
       "stage_enable_thinking": {
-        "edit": false
+        "edit": true
       }
     }
   }
