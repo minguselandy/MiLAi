@@ -626,6 +626,10 @@ class FunctionalMemory:
             },
         }
 
+    def _project_read_packet(self, packet: dict[str, Any]) -> dict[str, Any]:
+        """Project exactly this delivered page before counting its full cost."""
+        return packet
+
     def _page(self, key: str, start: int, binding: dict[str, Any]) -> dict[str, Any]:
         stored = self.service.store.get(namespace(self.service), key)
         if stored is None:
@@ -652,7 +656,7 @@ class FunctionalMemory:
                 for candidate in candidates:
                     if candidate["read"]["arguments"].get("revision") is not None:
                         candidate["read"]["tool"] = "read_memory_revision"
-            return {
+            return self._project_read_packet({
                 "ok": True,
                 "schema": "functional_material_v1",
                 "snapshot_id": key,
@@ -712,7 +716,7 @@ class FunctionalMemory:
                         if u["type"] == "fragment"
                     }.values()
                 ),
-            }
+            })
 
         end = start
         for index, unit in enumerate(items[start:], start):
