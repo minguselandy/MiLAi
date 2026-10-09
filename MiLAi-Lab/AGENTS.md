@@ -1,3 +1,61 @@
+# Live handoff: 2026-10-09 00:41:51 UTC, actual807 long-history prefix and publication
+
+User requests a current experiment summary and GitHub publication. Update only the four
+existing report/handoff documents; keep private snapshot and originals ignored. This does
+not pause or complete the original post117/118 plan or any of its six research deliveries.
+Report parent is 2a1c6203cc35f9c1fded37d7527906fb54d19644. Development source remains
+2e31f280b34f0bfbc0ebffa4617aeb0ea83639ed; actual running source remains
+807eacbf2e7f6a07c4b4cf19185c2b2cc6e4af67. PR119 stays open draft.
+
+At the fixed sample, PID1579386 Rl / session20792 is live; B0 has 62/277 saved sessions,
+156 question opportunities and 156 complete nonempty answers, no null/empty answers.
+Other four methods have not started, no arm/suite terminal or Judge. Five independent
+277-session histories include each first-owner65 subset; do not duplicate it.
+Saved original indices are 0–60 plus62. Actual time-order tail is
+55,56,57,58,59,60,62,61,63,64: original61 is later, not skipped. Poll by membership in
+complete_indices_read, not maximum index. Root read all156 full natural answers; selected
+raw review only, no numeric regrade, independent confirmation or exhaustive HTTP/DB audit.
+Original60 genuinely has zero QA; author update retrieval still precedes prediction write.
+
+Original57 Movie r3→r4 (9→15 units) committed, but qa0 K10 lacks Movie/FilmMarathon;
+qa1/2 open and receive full Movie r4/current User supports. FilmMarathon is rejected
+current_boundary_source_required, r1 unchanged, maintenance incomplete despite prediction.
+Earlier pool gaps32/37/47/52, selection gaps8/9, formal empty51, rejection49/52 and
+Assistant attribution/unsupported old-claim changes remain separate. No new protocol/default.
+Only actual supported timing/name/strength may be asserted; reported_at is not onset.
+
+Fixed current-run cost: 503 generation requests/responses, all stop, 5,522,005 known =
+charged delta; 409 embedding requests/responses,34,639 tokens; Judge0,new closed unknown0,
+no active reservation at this sample. Global ledger48,538 requests/216,778,915 known/
+217,055,611 charged/1,985,260 embedding,6 historical unknown. All deltas reconcile.
+Ignored publication-observation-20261009-004151.json fixes this sample; earlier20:42 and
+in-flight snapshots remain historical. Budget is continuous, no reset or extra limits.
+
+Reader fixed six questions/three pools/two reverse repeats remains PREPARED: 18 qualified
+pools in temporary SQLite backups,6 dense equal originals,72 real local templates fit;
+original bank read-only, temporary DB writes only,0 actual model/encoder/Judge/ledger.
+Future36 answers/<=72 generations use2e31 for all conditions and actual807 prior states.
+Host2e31 v1 three18/v2 three20 prepare exit0; v2 appends rule-chain forget/read-only reopen,
+original18/config/controls preserved, onlyinput-freeze and emptyruntime,0HTTP/business/DB.
+Fixed8 Editor candidate-delivery diagnostic also unrun. Do not expand from new57 cases.
+Inspect live PID/terminal/ledger before any dispatch; Root alone serial Qwen/BGE/Judge.
+Never hot-edit frozen source/config, restart old failed tails or blindly retry unknown.
+
+268 partial16 score CLOSED update15/34 valid31,QA22/32 valid29; its32 predict FAILED.
+807 Host10 execution CLOSED but save-only length leaves original memory pending.
+Neither is a complete current five-method result or cross-version ranking.
+2e31 keep-only generation passed affected offline checks; actual service/semantics unverified.
+Parent2a1 ownFast37860378439 success(8success/4skip),Full37860378429 skipped;
+new report's own CI is separate, no borrowed Full21 claim.
+
+Full five277 prediction/score,native32/drift/recovery/necessary M ablation,one tight
+context61440/input28160,16 heldout after final freeze,external28/1354/old10 audit and
+RawRAG/RollingSummary/actual A-MEM callback,final Host135/192 plus post-freeze new stories,
+all six deliveries remain active/incomplete. Old807 parsed unselected JSON before discard;
+16 users are semantically unused, not a claim that their bytes were never parsed.
+No final candidate/stable advantage/Product admission. Live own queue is verified wait,
+not blocked. No performance measurement/causal conclusion from event60 timestamps.
+
 # Live handoff: 2026-10-08 23:29:44 UTC actual807 continues, recent-source gaps and rechecks prepared
 
 Development2e31 unchanged; frozen807 PID1579386/session20792 live,B0saved54/277/135answers,
