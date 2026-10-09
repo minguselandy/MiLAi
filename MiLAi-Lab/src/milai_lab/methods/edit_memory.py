@@ -250,7 +250,9 @@ class EditMemory:
             "Every r/u/e/h must be a candidate in THIS request. "
             "Only e has actually delivered body; "
             "h is EXISTING_SUPPORT_ONLY and cannot prove a changed claim or synonymous rewrite. "
-            "Copy retained text and role exactly when using only its own h. Changed claims and "
+            + ("" if self.arm == "B0" and self.features.source_metadata else
+               "Copy retained text and role exactly when using only its own h. ")
+            + "Changed claims and "
             "new relations require new e. Applicability and entailment are your decision, not "
             "certified by a source ID. Preserve subject, time, negation, "
             "qualification and uncertainty. Use one independently revisable assertion per "
@@ -459,6 +461,7 @@ class EditMemory:
                     retained["assertion"] = {"keep": f"h{index}"}
                     if self.arm == "B0":
                         retained.pop("text")
+                        retained.pop("evidence")
                         retained.pop("keep_support")
                 correction["units"].append(retained)
             if self.conditioned:
@@ -557,6 +560,7 @@ class EditMemory:
                 )
                 if self.arm == "B0" and keep_attribution:
                     result.pop("text")
+                    result.pop("evidence")
                     result.pop("keep_support", None)
             return result
 

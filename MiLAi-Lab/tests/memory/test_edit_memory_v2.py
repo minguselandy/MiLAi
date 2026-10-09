@@ -1126,6 +1126,7 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
         }
         if arm == "B0":
             retained.pop("text")
+            retained.pop("evidence")
             retained.pop("keep_support")
         public = clause_proposal(
             {"action": "rewrite", "target": "r1", "units": [retained]},
@@ -1146,11 +1147,23 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
             ])
             assert "from_unit" not in json.dumps(partial["schema"])
             assert "from_unit" not in method.instructions()
+            assert "Copy retained text and role exactly" not in method.instructions()
             generated = copy.deepcopy(public)
             generated.pop("target")
             Draft202012Validator(partial["schema"]).validate(
                 {"creates": [], "records": {"r1": generated}}
             )
+            assert generated["clauses"][0] == {"assertion": {"keep": "h1"}}
+            Draft202012Validator(partial["schema"]).validate({"creates": [], "records": {}})
+            assert method.decode_envelope({}, partial["mapping"]) == []
+            empty_evidence = copy.deepcopy(generated)
+            empty_evidence["clauses"][1]["evidence"] = []
+            assert not Draft202012Validator(partial["schema"]).is_valid(
+                {"creates": [], "records": {"r1": empty_evidence}}
+            )
+            with pytest.raises(FunctionalRejection, match="EDIT_EVIDENCE_REQUIRED"):
+                method.decode_proposal({**empty_evidence, "target": "r1"}, partial["mapping"])
+            assert empty_evidence["clauses"][1]["evidence"] == []
             repeated = copy.deepcopy(generated)
             repeated["clauses"][0]["text"] = "User reports quiet reminders."
             assert not Draft202012Validator(partial["schema"]).is_valid(
@@ -1170,9 +1183,17 @@ def test_next_contract_rewrite_and_withdraw_are_separate_and_keep_assertion_exac
             method.decode_proposal(changed, partial["mapping"])
         decoded = method.decode_proposal(public, partial["mapping"])
         if arm == "B0":
+            explicit_arrays = copy.deepcopy(public)
+            explicit_arrays["clauses"][0]["evidence"] = []
+            assert method.decode_proposal(explicit_arrays, partial["mapping"]) == decoded
+            empty_support = copy.deepcopy(explicit_arrays)
+            empty_support["clauses"][0]["keep_support"] = []
+            with pytest.raises(FunctionalRejection, match="EDIT_EVIDENCE_REQUIRED"):
+                method.decode_proposal(empty_support, partial["mapping"])
             legacy = copy.deepcopy(public)
             legacy["clauses"][0]["text"] = "User reports quiet reminders."
             legacy["clauses"][0]["from_unit"] = "u1"
+            legacy["clauses"][0]["evidence"] = []
             assert method.decode_proposal(legacy, partial["mapping"]) == decoded
             legacy["clauses"][1]["from_unit"] = "u1"
             with pytest.raises(FunctionalRejection, match="UNIT_SUPPORT_BINDING_INVALID"):

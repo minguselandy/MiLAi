@@ -420,6 +420,8 @@ def feature_proposal_schema(
                 if "keep" in selected["properties"]:
                     choice["properties"].pop("text")
                     choice["required"].remove("text")
+                    choice["properties"].pop("evidence")
+                    choice["required"].remove("evidence")
                 choices.append(choice)
             item.clear()
             item["oneOf"] = choices
@@ -432,6 +434,9 @@ def feature_proposal_schema(
         ]
         if keep_only:
             item["anyOf"][1].pop("required")
+            # Accept the new reference-only keep as well as existing explicit arrays.
+            item["required"].remove("evidence")
+            item["anyOf"][0]["required"].append("evidence")
 
     for variant in variants:
         fields = variant["properties"]
@@ -444,6 +449,8 @@ def feature_proposal_schema(
             prior_contents = [
                 alias for alias in refs["u"] if mapping["units"][alias]["role"] == "content"
             ]
+            if arm == "B0" and features.source_metadata and for_generation:
+                clause["properties"]["evidence"]["minItems"] = 1
             if prior_contents and not (arm == "B0" and features.source_metadata and for_generation):
                 clause["properties"]["from_unit"] = reference("u", prior_contents)
         fields["clauses"] = {**unit, "items": clause}
