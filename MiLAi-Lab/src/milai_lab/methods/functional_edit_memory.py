@@ -42,6 +42,7 @@ from milai_lab.memory.functional_state import (
     reference_key,
     scope_leaves,
 )
+from milai_lab.memory.reader_projection import project_record
 from milai_lab.memory.working_set import read_evidence_basis
 from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
@@ -1264,13 +1265,27 @@ class FunctionalEditMemory(FunctionalMemory):
         query_time = (
             self.query_time if self.query_time is not None else self.service.clock().isoformat()
         ) if self.features.temporal_scope else None
-        applicability = read_applicability(
-            state,
-            query_time=query_time,
-            query_calendar_context=self.query_calendar_context,
-            version_time=row["value"].get("committed_at") if self.features.temporal_scope else None,
-            include_temporal=self.features.temporal_scope,
-        ) if self.maintenance_recipe or self.memory_view_mode != "legacy" else {}
+        projection = None
+        if self.memory_view_mode != "legacy":
+            projection = project_record({
+                "content": row["value"]["content"],
+                "applicability": self.writer.revision_view(
+                    row["value"], query_time=query_time,
+                    query_calendar_context=self.query_calendar_context,
+                ),
+            }, edit_state=state)
+            applicability = {
+                unit["unit_id"]: unit for unit in projection["applicability"]["units"]
+            }
+        else:
+            applicability = read_applicability(
+                state,
+                query_time=query_time,
+                query_calendar_context=self.query_calendar_context,
+                version_time=row["value"].get("committed_at")
+                if self.features.temporal_scope else None,
+                include_temporal=self.features.temporal_scope,
+            ) if self.maintenance_recipe else {}
         result = []
         for unit in state["units"]:
             text = unit["text"]
@@ -1297,7 +1312,7 @@ class FunctionalEditMemory(FunctionalMemory):
                         "method_arm": row["value"].get("method_arm", self.arm),
                     }
                 )
-                if self.features.enabled:
+                if self.features.enabled or projection is not None:
                     if "matter_description" in state:
                         result[-1]["edit_matter_description"] = state["matter_description"]
                     if "assertion" in unit:
@@ -1307,18 +1322,42 @@ class FunctionalEditMemory(FunctionalMemory):
                     if start == 0 and unit["unit_id"] in revision_scope:
                         result[-1]["revision_scope"] = revision_scope[unit["unit_id"]]
                 if start == 0 and unit["unit_id"] in applicability:
+                    meaning = applicability[unit["unit_id"]]
+                    if projection is not None:
+                        # Actual text and assertion/support are delivered above.
+                        # Related units use their delivered IDs, without copying
+                        # those bodies again into applicability.
+                        meaning = {key: value for key, value in meaning.items()
+                                   if key not in {"text", "role", "evidence_refs", "assertion",
+                                                  "local_exception"}}
                     result[-1]["applicability"] = {
                         "view": view, "basis": "stored_direct_relations_only",
-                        **applicability[unit["unit_id"]],
+                        **copy.deepcopy(meaning),
                     }
         result = result or [
             {
                 **record,
+                **({"content": "", "content_range": [0, 0], "content_total_codepoints": 0}
+                   if projection is not None else {}),
                 "edit_representation": state["representation"],
                 "edit_unit_count": 0,
                 "edit_relation_count": 0,
             }
         ]
+        if projection is not None:
+            result[0]["content_projection"] = projection["content_projection"]
+            result[0]["revision_context"] = {
+                key: copy.deepcopy(value) for key, value in projection["applicability"].items()
+                if key != "units"
+            }
+            if "content" in projection:
+                # Exact renderer equality did not prove this stored expression
+                # redundant. Preserve its existing fragments and page rules.
+                result.extend({
+                    **{key: value for key, value in item.items() if key != "stored_history"},
+                    "content_projection": "retained_unproven",
+                    "retained_rendered_expression": True,
+                } for item in ordinary)
         if "stored_history" in ordinary[0]:
             result[0]["stored_history"] = ordinary[0]["stored_history"]
         if self.features.enabled:
