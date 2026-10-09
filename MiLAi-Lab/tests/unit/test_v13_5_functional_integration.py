@@ -5334,7 +5334,7 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
                     edit_features={name: True for name in (
                         "matter_organization", "semantic_operations", "bound_references",
                         "single_record_changes", "source_metadata")},
-                    maintenance_recipe=recipe,
+                    maintenance_recipe=recipe, memory_view_mode="staged",
                     stage_enable_thinking={"extract": True, "edit": True})
     stages = []
 
@@ -5376,7 +5376,13 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
         assert "response_format" not in wire
         assert not {"save_memory", "update_memory", "confirm_existing_memory"}.intersection(
             t["function"]["name"] for t in wire.get("tools", []))
-        assert memory_effects(wire)["maintenance"][0]["semantic_write_performed"]
+        feedback = memory_effects(wire)["maintenance"][0]
+        assert feedback["semantic_write_performed"]
+        assert feedback["receipts"][0]["status"] == "committed"
+        assert feedback["batches"][0]["receipts"] == [
+            {"receipt_ref": "#/maintenance/0/receipts/0"}]
+        assert feedback["batches"][0]["status"] == "completed"
+        assert feedback["batches"][0]["unprocessed"] == []
         current_records = [item for item in materials(wire)["items"] if item["type"] == "record"]
         assert current_records and "User reports the local marker is blue." in json.dumps(
             current_records)
@@ -5391,6 +5397,12 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
         assert first["records"][0]["value"]["method_version"] == memory_method
         assert first["records"][0]["value"]["method_arm"] == "Append-only"
     assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    full = first["maintenance"][0]
+    assert full["batches"][0]["receipts"] == full["receipts"]
+    # A child-only result is still delivered in full, not replaced by a missing parent.
+    child_only = {**full, "receipts": []}
+    projected = functional._model_memory_effects({"maintenance": [child_only]})
+    assert projected["maintenance"][0]["batches"][0]["receipts"] == full["receipts"]
     trace_path = next(root.glob("banks/*/*-trace-0.jsonl"))
     events = [json.loads(line) for line in trace_path.read_text().splitlines()]
     for event in (item for item in events if item.get("event") == "vllm_response"):

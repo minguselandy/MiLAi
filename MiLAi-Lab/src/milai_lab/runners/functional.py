@@ -17,6 +17,7 @@ import unicodedata
 import uuid
 from collections.abc import Callable
 from contextlib import AbstractContextManager, ExitStack
+from copy import deepcopy
 from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any, Literal, cast
@@ -1679,6 +1680,28 @@ def memory_effects(messages: list[Any]) -> dict[str, Any]:
     }
 
 
+def _model_memory_effects(effects: dict[str, Any]) -> dict[str, Any]:
+    """Reference exact parent receipts in model input; keep audit results intact."""
+    projected = deepcopy(effects)
+
+    def project_batches(
+        result: dict[str, Any], references: list[tuple[str, dict[str, Any]]]
+    ) -> None:
+        for batch in result.get("batches", []):
+            batch["receipts"] = [
+                next(({"receipt_ref": ref} for ref, original in references
+                      if receipt == original), receipt)
+                for receipt in batch.get("receipts", [])
+            ]
+            project_batches(batch, references)
+
+    for index, result in enumerate(projected.get("maintenance", [])):
+        references = [(f"#/maintenance/{index}/receipts/{receipt_index}", receipt)
+                      for receipt_index, receipt in enumerate(result.get("receipts", []))]
+        project_batches(result, references)
+    return projected
+
+
 def seed_sources(
     service: MemoryService, rows: list[dict[str, Any]], path: Path,
     *, preserve_occurrence: bool = False,
@@ -2822,7 +2845,7 @@ def message(
                                 ensure_ascii=False, separators=(",", ":")) if tracker else "")
                             + "".join("\n" + str(row.content) for row in completion_feedback)
                             + "\n"
-                            + json.dumps(effects, ensure_ascii=False)
+                            + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
                             + "\n"
                             + json.dumps(material, ensure_ascii=False)
                         ),
