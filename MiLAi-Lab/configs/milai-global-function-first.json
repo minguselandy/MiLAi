@@ -1,5 +1,5 @@
 {
-  "candidate_version": "milai-global-function-first-v1",
+  "candidate_version": "milai-global-function-first-v2",
   "entrypoints": {
     "functional": {
       "profile": "functional_v1",
@@ -72,8 +72,8 @@
         "Host request progress distinguishes structural completion from semantic coverage; Host response checkpoint does not prove user receipt.",
         "Literal observation candidates preserve actual public Tool spans; they are program projections, not LLM formation success or proof of semantic completeness."
       ],
-      "revision": "milai-global-function-first-v1",
-      "change_intent": "Shared semantic Reader projection, actual complete-request capacity, independent memory after confirmed CURRENT schema failure, faithful Source candidates and complete effect receipts.",
+      "revision": "milai-global-function-first-v2",
+      "change_intent": "Shared exact Reader metadata and complete-request capacity; independent memory after known CURRENT schema/truncation failure; program-determined empty issued choices; faithful Source values/clocks and original cumulative effect receipts.",
       "request_mode": "current_request_json_v9",
       "business_attempt_policy": "fresh_query_with_history_v3",
       "formation_interface": "anchored_assertion_v3",
@@ -96,7 +96,7 @@
       "formation_support_review": "disabled",
       "support_review_comparison": "disabled",
       "read_interface": "explicit_selectors_v1",
-      "config_version": "milai-global-function-first-v1",
+      "config_version": "milai-global-function-first-v2",
       "memory_method": "milai_edit_m_v1",
       "edit_interface_version": "I2",
       "embedding": {
@@ -135,7 +135,7 @@
       "request_failure_policy": "independent_memory"
     },
     "benchmark": {
-      "experiment_name": "milai-global-function-first-v1",
+      "experiment_name": "milai-global-function-first-v2",
       "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
       "tokenizer_path": "/cra/qwen36-35B",
       "context_tokens": 65536,
@@ -151,7 +151,7 @@
       "source_tokens": 4096,
       "chronological_order": "timestamp",
       "method_version": "milai_edit_v2",
-      "config_version": "milai-global-function-first-v1",
+      "config_version": "milai-global-function-first-v2",
       "working_sets": false,
       "interface_version": "I2",
       "edit_features": {

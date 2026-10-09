@@ -1,12 +1,20 @@
 # Current handoff: global function-first integration, 2026-10-10 Asia/Shanghai
 
 User explicitly requests full execution of docs/MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md.
-Candidate config: configs/milai-global-function-first-v1.json; one integrator plus three source developers.
+Candidate config: configs/milai-global-function-first.json (v2 selected for frozen run); one integrator plus three source developers.
 Shared Reader projection/flat literal metadata, real complete-request planning, independent memory after
-confirmed CURRENT schema failure, faithful candidates and cumulative confirmed receipts are integrated.
+known CURRENT schema/length failure, faithful candidates and cumulative confirmed receipts are integrated.
 Root exact old-eight replay: 32446 -> 30520 input <=32256, 8/8 exact-rendered, all original evidence
-bodies/ranges remain literal, zero actual HTTP. Offline fit is not model or semantic success.
-Next: freeze candidate and run original 6+8+6 Host20 with unchanged fixture and real recovery controls.
+bodies/ranges remain literal. Separate actual read-only call on frozen bbe77e9 completed stop:
+30520 input/2166 output/32686 known; 0emb/0Judge/newunknown0. No Writer/Selector retry.
+Frozen bbe77e9 Host20 CLOSED 17:19:01 UTC: 20 attempted,17 COMPLETED/3 FAILED;
+99gen/784557 known,35emb/1532tokens,newunknown0. COMPLETED does not certify semantics.
+CURRENT length blocked correction; scope length blocked forget; needless prior resolver blocked business.
+Current first page4/5 (not first-unit skip); history17 =5+7+5 semantic units. Editor invented onset and
+omitted explicit retained value correction. Repairs integrated, Root19 request/10 projection+Host checks
+passed (overlap not extra samples), six owned source type/Ruff and dependency boundaries pass.
+Exact current5 Host packet6593/6587 within8192; history still paginated. Next: freeze once, then run
+original Host20 with unchanged controls, followed by four development prefixes and unified scoring.
 Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.
 Historical observations below are fixed snapshots; inspect actual PID/lease/terminal before dispatch.
 

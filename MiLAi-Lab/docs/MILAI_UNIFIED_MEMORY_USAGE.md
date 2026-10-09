@@ -1,14 +1,14 @@
 # 统一记忆功能候选与当前执行状态
 
 当前按用户提供的[全局修复与功能优先规划](MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md)
-执行，候选为 `milai-global-function-first-v1`，集成分支为
-`feat/lab-global-function-first-20261009`。工程修改已合流，真实 Host20 尚未开始。
+执行，集成分支为 `feat/lab-global-function-first-20261009`。第一版源码 `bbe77e9`
+的真实 Host20 已闭合；已定位修复合入同一 `milai-global-function-first-v2` 候选，选定下一轮冻结运行。
 旧失败、费用和历次运行观察完整保留在[历史状态页](MILAI_UNIFIED_MEMORY_USAGE_HISTORY_THROUGH_20261009.md)，
 其中“RUNNING”均为原时点快照，不作为当前进程状态。
 
 ## 当前实现与入口
 
-一个配置文件 `configs/milai-global-function-first-v1.json` 提供 functional 和 benchmark
+当前一个配置文件 `configs/milai-global-function-first.json` 提供 functional 和 benchmark
 两个入口。Host 维持原 JSON v9 当前请求、staged/record、8192 输出、24 次消息调用额度；
 benchmark 维持 staged/record_units、K10、65536 上下文、32768 输出、512 余量。
 两入口共用既有 Qwen3.6/BGE 服务和原连续账本，保持各自原来的读取权限。
@@ -19,7 +19,7 @@ benchmark 维持 staged/record_units、K10、65536 上下文、32768 输出、51
 - 完整请求容量使用部署的真实 Qwen 模板和阶段 thinking。逐条成本只作提示，
   联合容量另算。超限保留全部所选引用、未交付状态及整事项页面计划；
   benchmark 当前不执行该页面计划，已知 HTTP 前超限记录缺答后继续自然历史。
-- 已确认 CURRENT 业务 schema 失败时，只有独立明确的当前保存范围才继续记忆工作，
+- 已确认 CURRENT 业务 schema 或 length 失败且用量已知时，只有独立明确的当前保存范围才继续记忆工作，
   业务分支不取得执行许可。纯保存恢复不发现或重办业务；当前只读不继承旧写权限。
 - 完成信息累积实际保存回执，每个已返回批次立即进入 trace；原文捕获、语义提交、
   未完成业务和遗忘分项表达。原始模型答案与程序附加反馈分别保存。
@@ -30,7 +30,7 @@ benchmark 维持 staged/record_units、K10、65536 上下文、32768 输出、51
 
 ```bash
 PYTHONPATH=src python tools/run_functional.py prepare \
-  --config configs/milai-global-function-first-v1.json \
+  --config configs/milai-global-function-first.json \
   --root artifacts/global-function-first/personal
 PYTHONPATH=src python tools/run_functional.py message \
   --root artifacts/global-function-first/personal --bank personal --owner example \
@@ -45,7 +45,27 @@ PYTHONPATH=src python tools/run_functional.py message \
 原失败八事项经实际 Qwen thinking 模板、原问题和 read_goal 独立复算：
 **32446 → 30520 input tokens，限额仍为 32256**。8/8 有整版渲染证明，
 56 个单元、39 段原证据正文/范围、14 项正条件及562项时间字段通过还原核对。
-这是 0 HTTP 的容量和材料检查，不是新模型语义结果。
+该材料检查为 0 HTTP。另在第一版冻结源码上执行一次真实只读 Reader：
+正式 stop，实际输入30520，输出2166（含thinking），合计32686 known/charged；
+0 embedding、0 Judge、新unknown0。原始模型答案已保存，语义正确性尚未统一评分。
+
+第一版原三链20消息在2026-10-09 17:19:01 UTC闭合，20/20实际尝试，
+17 COMPLETED / 3 FAILED。逐响应核对为99 generation / 784557 known=charged，
+35 embedding / 1532 tokens；stop53、tool_calls44、length2，新unknown0，Judge0。
+fixture/control不变，每个新消息单独CLI进程；失败消息未重试，旧运行未热改。
+
+| 原链 | 结构完成 | 真实断点与范围 |
+|---|---:|---|
+| 保存、切换、重开6消息 | 6/6 | 两项实际保存，后续只读无语义或业务写入；不据此推出完整语义验收 |
+| 更正、历史、遗忘8消息 | 6/8 | 两次确认length；Editor首次补造起效日期、漏改明确通知值；Reader错误继承未规定分组频率、误解查询缺失 |
+| 业务、结果保存、遗忘6消息 | 5/6 | 首请求在多余旧请求解析阶段schema失败、尚无业务效果；故未验证原本的部分业务续办链。后续确实撤销8个来源可见性 |
+
+更正链当前读第一页实际送4/5单元，第5加入后约8922>8192；首单元已送达，
+历史17项确为三个版本5+7+5语义单元。共用元数据补丁的完整当前页为6593/6587，
+历史首版完整5单元为6027/6020，均包含表及说明；历史仍需分页。零HTTP还原检查保持所有字段，
+不改变页额度、正文、范围、实际选择器或原文权限。
+当前补丁还处理已知截断的独立保存、无issued旧请求时的确定空选择，以及真实保存回执反馈。
+Source提示将明确值与实际状态比对，未知起效日期保持未知。以上新补丁尚无真实模型结果。
 
 旧 M36 (`36b0401`) 仍为 FAILED：21 个完整会话预测/46 答案，末会话另有2个实际响应，
 qa2 在 HTTP 前因32446输入终止。22份维护结果中17 completed/5 incomplete，
@@ -54,13 +74,16 @@ qa2 在 HTTP 前因32446输入终止。22份维护结果中17 completed/5 incomp
 原全局账本固定闭合值49574请求/227101922 known/227378618 charged、2042879 embedding，
 历史 generation unknown6；不重置或把后续实时账本差额误记成旧 M 成本。
 
-本次集成后29项受影响正常 SQLite/模拟 HTTP 检查通过；受影响文件 Ruff、严格类型检查
+第一版集成后29项受影响正常 SQLite/模拟 HTTP 检查通过；受影响文件 Ruff、严格类型检查
 及 package/tools 依赖边界通过。检查记录在本地 ignored 验证产物中保存。
 模拟调用不计真实模型样本，也不宣称完整仓库或远端 Full 通过。
+第二版请求修复19项检查、合流后的共同投影及正常Host10项检查通过（包含重叠复查）；
+三项新Reader检查与Source开发者12项既有检查另有闭合记录。六个受影响源码严格类型、
+Ruff、依赖边界及旧八事项真实模板复算通过。没有把重复检查累加为新样本。
 
 ## 下一项工作与仍未完成范围
 
-先冻结本候选，再让原三链20消息从各自空库真实运行，保留实际限制和原恢复control。
+先闭合当前受影响正常流程检查并冻结修复候选，再让原三链20消息从各自空库真实运行，保留实际限制和原恢复control。
 工程错误与普通语义失败分别定位；unknown HTTP、未知写入/业务效果和 Store 故障停止相关路径，
 不盲重试。新 benchmark 预先声明按题保存成功及已知只读缺答，缺答保留在全部机会分母。
 

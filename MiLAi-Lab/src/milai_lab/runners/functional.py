@@ -99,7 +99,11 @@ from milai_lab.runners.functional_request_progress import (
     reconcile_shared_result,
     scoped_memory_receipt,
 )
-from milai_lab.runners.functional_response import business_response, unattempted_continuations
+from milai_lab.runners.functional_response import (
+    business_response,
+    memory_receipt_summary,
+    unattempted_continuations,
+)
 
 LAB = Path(__file__).resolve().parents[3]
 
@@ -1374,6 +1378,17 @@ def continuation_operations(
                 and (resolve_business
                      or value["business_operations"] == mode["business_operations"]))
 
+    if ("decision" not in state and request_protocol and not current_plan
+            and not resolve_business and not resolve_memory
+            and not material.get("registered_application_requests")):
+        # Every output is fixed by the accepted current scope and the actually
+        # issued choices. No model can select an unissued request. This does not
+        # establish that no earlier request exists outside the delivered view.
+        state.update(material=material, decision={
+            "business_operations": list(mode["business_operations"]),
+            "prior_memory_request_fragments": [], "prior_request_ids": [],
+        }, resolution_basis="current_scope_and_no_issued_request_choices")
+        write_json(path, state)
     if "decision" in state:
         if not valid(state["decision"]):
             raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_DECISION_CHANGED")
@@ -1546,6 +1561,8 @@ def continuation_operations(
             "snapshot_id": bound["snapshot_id"],
             "attempt_id": path.stem,
             "semantic_correctness": "unchecked",
+            **({"resolution_basis": state["resolution_basis"]}
+               if state.get("resolution_basis") else {}),
         },
     }
     if mode["protocol"] == "native_independent_capabilities_v6" or memory_protocol:
@@ -2607,11 +2624,15 @@ def message(
                             settings.get("request_failure_policy") == "independent_memory"
                             and part.get("part") == "business_plan"
                             and part.get("status") == "failed" and part.get("effect") == "none"
-                            and part.get("error")
-                            == "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID"
+                            and part.get("error") in {
+                                "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID",
+                                "VLLM_CHAT_TRUNCATED"}
+                            and part.get("usage_confirmation") == "known"
                             and part.get("accepted_scope") == mode
                             and previous.get("capture", {}).get("source_ref")
                             == capture["source_ref"])), None)
+                    planning_unknown_before = tuple(
+                        budget.state[kind]["unknown_usage"] for kind in ("generation", "embedding"))
                     try:
                         if failure is None:
                             mode = continuation_operations(
@@ -2630,13 +2651,19 @@ def message(
                         ) or mode.get("memory_continuation_request") == "resolve_prior_explicit"
                         source = service.source(capture["source_ref"])
                         if (settings.get("request_failure_policy") != "independent_memory"
-                                or str(error) != "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID"
+                                or str(error) not in {
+                                    "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID",
+                                    "VLLM_CHAT_TRUNCATED"}
+                                or tuple(budget.state[kind]["unknown_usage"]
+                                         for kind in ("generation", "embedding"))
+                                != planning_unknown_before
                                 or not independent_memory or source is None
                                 or source["role"] != "user"):
                             raise
                         failure = {
                             "part": "business_plan", "status": "failed", "effect": "none",
                             "error_type": type(error).__name__, "error": str(error),
+                            "usage_confirmation": "known",
                             "accepted_scope": deepcopy(mode),
                             "attempt_ref": f"{identity}-current-operations.json",
                             "memory_reference_resolution": "still_required"
@@ -2883,7 +2910,7 @@ def message(
                                    "request_id": prior["request_id"],
                                    "source_visibility": "visibility_revoked", "effect": "none"})
                             continue
-                    observe_result(memory.maintain_prior(
+                    prior_result = memory.maintain_prior(
                         cfg, prior_session=prior["session"], prior_request_id=prior["request_id"],
                         new_attempt_id="maintenance-resume:" + json.dumps([
                             session, message_id, freeze["config_version"],
@@ -2893,7 +2920,17 @@ def message(
                         execute=execute, fit=maintenance_fit,
                         stage_fit=maintenance_stage_fit if settings.get("stage_enable_thinking")
                         else None,
-                    ))
+                    )
+                    if (not execute and prior_result.get("request_id") == prior["request_id"]
+                            and prior_result.get("phase") == "complete"
+                            and not prior_result.get("receipts")):
+                        # Inspecting the earlier empty attempt is not an attempt
+                        # by this continuation. Its original trace stays intact;
+                        # the authorized new attempt reports its own outcome.
+                        trace({"event": "functional_prior_maintenance_preview",
+                               "request_id": prior["request_id"], "effect": "none"})
+                    else:
+                        observe_result(prior_result)
                 skip_current = bool(mode and mode.get(
                     "current_memory_write_request", mode.get("memory_write_request")) == "none")
                 memory.maintain_sources(
@@ -3639,6 +3676,10 @@ def message(
                         raise IncompleteChatResponse("FUNCTIONAL_AGENT_FINAL_UNAVAILABLE")
                     observations_appended = bool(effects["business"]["observations"])
                     request_failures_appended = bool(effects.get("request_part_failures"))
+                    memory_receipts_appended = bool(
+                        settings.get("request_failure_policy") == "independent_memory"
+                        and mode and mode["requires_memory_result"]
+                        and effects["semantic_memory"]["operations"])
                     if observations_appended or request_failures_appended:
                         # A query alone does not define the user's whole task.
                         # Preserve the answer and separately report its actual
@@ -3647,12 +3688,16 @@ def message(
                             include_business=observations_appended, include_memory_feedback=False)
                         final = final.model_copy(update={
                             "content": str(final.content) + "\n\n" + str(observed.content)})
+                    if memory_receipts_appended:
+                        final = final.model_copy(update={"content": str(final.content)
+                            + "\n\n" + memory_receipt_summary(effects)})
                     output["finalization"] = {
                         "status": "agent_response_retained", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": True,
                         "protocol": "agent_response_v1", "model_generation": False,
                         "observation_receipts_appended": observations_appended,
-                        "request_failures_appended": request_failures_appended}
+                        "request_failures_appended": request_failures_appended,
+                        "memory_receipts_appended": memory_receipts_appended}
                     trace(
                         {
                             "event": "functional_agent_finalization",

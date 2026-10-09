@@ -218,9 +218,11 @@ def scripted(
         payload = action if native else {"role": "assistant", "content": json.dumps(action)}
         finish = payload.pop("_test_finish_reason",
                              "tool_calls" if payload.get("tool_calls") else "stop")
+        usage = payload.pop("_test_usage",
+                            {"prompt_tokens": 7, "completion_tokens": 5, "total_tokens": 12})
         return httpx.Response(200, json={"id": "mechanical-response-" + str(len(wires)),
             "choices": [{"finish_reason": finish, "message": payload}],
-            "usage": {"prompt_tokens": 7, "completion_tokens": 5, "total_tokens": 12}})
+            "usage": usage})
 
     class ScriptedClient(FunctionalVLLMClient):
         def __init__(self, *args: Any, **kwargs: Any) -> None:
@@ -5551,8 +5553,10 @@ def test_shared_maintenance_obeys_readonly_request_mode(tmp_path, monkeypatch, m
 @pytest.mark.parametrize("policy,memory_allowed", [
     ("independent_memory", True), ("independent_memory", False), ("fail_fast", True),
 ])
+@pytest.mark.parametrize("outcome", ["schema", "length", "unknown_schema", "unknown_length"])
 def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, policy: str, memory_allowed: bool,
+    outcome: str,
 ) -> None:
     root = prepared(tmp_path, native=True, scope_requests=True,
                     request_failure_policy=policy, direct_response=True, phase_thinking=True,
@@ -5575,8 +5579,13 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
             stages.append("invalid-business-plan")
             # Confirmed response uses the continuation schema, not CURRENT's
             # application_requests schema. It grants no operation permission.
-            return native_call("resolve_continuation_operations", "bad-plan",
-                               business_operations=[])
+            response = native_call("resolve_continuation_operations", "bad-plan",
+                                   business_operations=[])
+            if outcome.endswith("length"):
+                response["_test_finish_reason"] = "length"
+            if outcome.startswith("unknown"):
+                response["_test_usage"] = None
+            return response
         if not names:
             stages.append("save")
             assert policy == "independent_memory" and memory_allowed
@@ -5601,7 +5610,7 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
                 content="Remember that I use a blue marker; also handle the business request.")
     result = functional.message(root, **args)
     assert result["world"]["world"]["attempts"] == []
-    if policy == "independent_memory" and memory_allowed:
+    if policy == "independent_memory" and memory_allowed and not outcome.startswith("unknown"):
         assert result["status"] == "COMPLETED", result.get("error")
         assert len(result["records"]) == 1
         assert result["operation_status"]["semantic_memory"]["status"] == "committed"
@@ -5610,7 +5619,9 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
         assert result["request_mode"]["business_operations"] == []
         assert result["request_mode"]["allow_business_mutation"] is False
         assert result["finalization"]["request_failures_appended"] is True
+        assert result["finalization"]["memory_receipts_appended"] is True
         assert "业务请求解析未完成" in result["final_answer"]
+        assert "已确认 1 项提交" in result["final_answer"]
         assert result["execution_candidate_answer"] == (
             "Your marker preference was saved; the business plan remains incomplete.")
         assert stages == ["scope", "invalid-business-plan", "save", "answer"]
@@ -5619,9 +5630,65 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
         assert again["records"] == result["records"] and len(wires) == calls
     else:
         assert result["status"] == "FAILED"
-        assert result["error"] == "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID"
+        assert result["error"] == ("VLLM_CHAT_TRUNCATED" if outcome.endswith("length")
+                                    else "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID")
         assert result["records"] == []
         assert stages == ["scope", "invalid-business-plan"]
+        assert result["budget_after"]["generation"]["unknown_usage"] == int(
+            outcome.startswith("unknown"))
+
+
+def test_no_issued_prior_choices_preserves_current_save_and_reports_its_real_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, scope_requests=True,
+                    request_failure_policy="independent_memory", direct_response=True,
+                    phase_thinking=True, memory_method="milai_edit_m_v1",
+                    edit_interface_version="I2", maintenance_recipe="single_pass",
+                    memory_view_mode="staged", memory_profile="unified_v1",
+                    edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")})
+    stages = []
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {tool["function"]["name"] for tool in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            stages.append("scope")
+            return native_call("classify_current_request", "scope",
+                memory_requests=["explicit"], allow_forgetting=False,
+                business_action_request="none",
+                application_continuation_request="resolve_prior_request")
+        assert names != {"resolve_continuation_operations"}, "No request ID was issued to select"
+        if not names:
+            stages.append("save")
+            delivery = json.loads(wire["messages"][-1]["content"])["delivery"]
+            evidence = delivery["evidence"][0]["id"]
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "Calendar marker preference", "clauses": [{
+                    "text": "User uses a green marker.", "evidence": [evidence],
+                    "conditions": [], "assertion": {"source": evidence, "kind": "reported"},
+                }],
+            }], "records": {}})}
+        stages.append("answer")
+        assert not {"reserve_and_label", "complete_label", "cancel_reservation"}.intersection(names)
+        return {"role": "assistant", "content": "Prepared to save the preference."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank="no-prior-choices", owner="alice", session="s", message_id="save",
+                content="Remember that my calendar marker is green.")
+    result = functional.message(root, **args)
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert len(result["records"]) == 1 and result["world"]["world"]["attempts"] == []
+    assert stages == ["scope", "save", "answer"]
+    assert result["request_mode"]["reference_resolution"]["attempts"] == 0
+    assert result["request_mode"]["prior_request_ids"] == []
+    assert result["execution_candidate_answer"] == "Prepared to save the preference."
+    assert "本轮语义记忆: 已提交" in result["final_answer"]
+    assert "已确认 1 项提交" in result["final_answer"]
+    calls = len(wires)
+    again = functional.message(root, **args, resume=True)
+    assert again["records"] == result["records"] and len(wires) == calls
 
 
 def test_shared_maintenance_keeps_early_commit_when_later_source_read_fails(

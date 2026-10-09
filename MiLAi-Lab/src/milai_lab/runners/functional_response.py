@@ -146,6 +146,16 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
     return lines
 
 
+def memory_receipt_summary(effects: dict[str, Any]) -> str:
+    """Report actual save progress without copying stored bodies or tool IDs."""
+    semantic = effects["semantic_memory"]
+    status = str(semantic["status"])
+    committed = sum(row.get("status") == "committed" for row in semantic["operations"])
+    return ("本轮语义记忆: " + _STATUS.get(status, status)
+            + (", 已确认 " + str(committed) + " 项提交" if committed else "")
+            + "。这里只确认保存回执, 不确认全部请求或语义覆盖。")
+
+
 def business_response(
     messages: list[Any], effects: dict[str, Any], material: dict[str, Any],
     *, execution_stop: dict[str, Any] | None = None,
