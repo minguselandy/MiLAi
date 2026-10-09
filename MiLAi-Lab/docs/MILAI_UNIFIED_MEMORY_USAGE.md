@@ -11,6 +11,103 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 三条完整Host链路已执行，语义仍未闭合：2026-10-09 12:12:11 UTC／北京时间2026-10-09 20:12:11
+
+本段固定运行及成本观察，下方历史保留。实际冻结源码为
+`e0f6119df2962a52af1048d9f03da2bcd20faded`，原三故事6＋8＋6共20消息均已尝试；
+终态`CLOSED_FUNCTIONAL_EXECUTION_WITH_FAILURES`，**18执行COMPLETED＋2FAILED，0NOT_RUN**。
+这不是18条语义通过。本报告父版本`dad79e7d238c111a85d8b659291af2fc1136c9f7`包含
+之后的合同与导航开发，不能回填E运行。闭合时无在途；完整
+[post117／118计划](MILAI_POST_117_118_FUNCTION_FIRST_DEVELOPMENT_EXPERIMENT_PLAN.md)
+及六项研究交付继续active／incomplete，PR119 open／draft／未合并，Product NO_GO。
+
+### 实际候选及工程开发分列
+
+E候选使用可选`current_request_json_v9`：范围声明走正式JSON，既有四字段、原请求引用、
+checkpoint、CURRENT工具与权限合同复用；默认native v8不变。声明和普通Agent为True／T1，
+Editor为显式False／T1，record／dense K10、staged、输出8192及既有24调用边界。
+原fixture及业务恢复control保持，标签服务由原control在业务消息1自动恢复一次，未人工重复。
+每消息独立进程，普通语义失败保留后继续原独立消息，没有重试、执行截断片段或热改源码。
+
+| 对象 | 已完成的开发／验证 | 实际新模型身份 |
+|---|---|---|
+| e0f6119 | 可选JSON声明；4项既有流程、Ruff／strict mypy、真实本地模板 | 两输入4次scope诊断＋本20消息 |
+| efc144c | JSON声明允许既有disabled／inherit配置，实际wire与容量共同使用False／T1 | 仅3项既有流程及模板，0真实Host |
+| 513cf52 | 新生成assertion.keep只列同记录实际unit支持，排除关系支持；旧decode／compiler不变 | 2项既有SQLite正常流程、模板；0真实编辑 |
+| dad79e7 | 可选record_units保留实际获胜单元，目录给最多240字符原文导航；最终读取仍完整事项 | 3项直接流程、Ruff／strict mypy、实际Qwen模板；0真实QA |
+
+dad导航不增加编码、改变keys／cosine排序／K10，不写Store或改变matter正文；whole键胜出或
+同分whole不猜单元。它只让目录显示实际命中线索，不构成来源证据，也不证明已改善选择。
+默认record／生成家族／dense编码器保持。较早12Keep与36＋24Reader真实结果保持其原版本。
+
+### 三故事实际结果与未完成语义
+
+| 故事 | 执行终态 | 已确认事实 | 仍存在的缺口 |
+|---|---:|---|---|
+| 两事项保存、只读及重开 | 6COMPLETED | 两实际事项形成，后四消息完整旧值及业务world保持；重开能回到原User来源 | 部分回答把“尽量”强化为严格执行，缺失判断仍有范围扩大 |
+| 一般规则、例外、更正、撤销、历史、遗忘重开 | 8COMPLETED | 一般事项和北区例外形成；合法撤销保留原一般单元；实际history／r2到达；遗忘撤回1记录及11来源 | 两天更正整项拒绝，当前仍一天；曾误说更正已保存；季度区间生成错误 |
+| 业务部分完成、补标签、只补保存、只读、遗忘重开 | 4COMPLETED＋2FAILED | 实际仅一次reserve_and_label和一次complete_label，无重复或未要求的业务效果；补存确有r5提交 | r5仍错误声称预订失败；只读和遗忘在声明阶段截断，遗忘未执行，最后记忆仍可读 |
+
+**本轮没有观察到旧Host的纯保存假业务计划或未要求业务效果**，但三个已曝光故事、一次轨迹
+不能证明该风险普遍消除。规则只读曾用记忆ID作get_reservation并得到not_found，属于无关
+查询，不记为预订效果。业务消息2正确进入原显式保存续办，当前不允许业务变更；1项实际
+提交及3项incomplete维护分别保留。原结果保存提交确认不等于其语义正确。
+
+规则初次Editor把10月9日报告时点的“本季度”写成7–9月；Extractor没有生成该绝对区间。
+实际Reader视图为time_context_unresolved，没有共享名义日历，**不能称程序已判过期**。
+两天更正另提出重写北区条件，同时用relation h10作assertion.keep，整项因
+EDIT_ASSERTION_SUPPORT_NOT_KEPT拒绝。513排除关系候选只修生成合同；改了正文却继承旧断言
+仍是独立语义问题，不把新修复或离线可编译算作E成功。撤销阶段自然回答曾称两天已保存，
+实际r3仍一天；后续history读取已正确区分实际保存与尚未保存的要求。
+
+业务错误最早在**第一次查询后的Extractor**：get_reservation的not_found／空history被译为
+预订未完成，随后Editor写“预订失败／物品不存在”。真实reserve稍后创建预订，仅标签失败；
+补标签后实际对象已完成。消息2的Editor已收到当前ID、created、found及两项真实操作历史，
+仍写reservation attempt failed。当前合法Tool角色和引用不能证明这句正确。离线核查指出
+已保存Source.origin尚未进入共同source属性／source_table；运行历史又与普通字面字段同列。这是
+下一项通用输入简化方向，尚无其因果或效果结论，不新建审核／事实库／权限。
+
+两次失败分别为业务消息3只读、4遗忘：输入941／944，输出均8192，finish=length。
+正式正文有none／memory前缀，第四字段及闭JSON未完成，随后分别重复106611／12537空白。
+reasoning仅统计长度，未执行或当提案；**不是仅推理过长，也不是输入容量失败或合法no-op**。
+无实际forget调用，所以最后重开正确报告记忆仍可读；它没有恢复已经隐藏的记忆。该回答
+正确取得实时业务结果，但对旧保存错误的解释仍不完整。下一项有限对照保持原两输入、
+System／schema、T1与预算，只改变thinking；不是原请求重试或自动扩大写许可。
+
+Root逐消息读取全部已形成正式语义内容、完整自然候选与最终反馈，核对实际提交和前后值。
+两条长重复空白只验证完整尾部及计数，不宣称逐字符人工阅读；未使用私有reasoning草稿、
+未数值重评分或独立确认。旧807第二用户61答案现也已完整阅读，连同首用户164共225；
+仍是Root开发复核，不表示全部来源／HTTP／DB已独立审计，807 FAILED94不回填。
+
+### 整批成本，不重复计入子集
+
+| E实际范围 | 生成请求／响应 | known＝charged增量 | embedding请求／tokens |
+|---|---:|---:|---:|
+| 首6 | 24／24 | 151105 | 17／593 |
+| 规则8 | 51／51 | 481957 | 22／1021 |
+| 业务6 | 27／27 | 337668 | 17／1607 |
+| 全20 | **102／102** | **970730** | **56／3221** |
+
+63stop＋37tool_calls＋2length。实际10次提交＝4新建＋6修订，1次拒绝；1次可见性撤回涉及
+1记录／11来源，业务遗忘0。提交、stop及执行终态均不代表语义通过。第24范围是此前E两输入
+4JSON scope／9914known、0encoder／CURRENT／业务／DB／Judge；其纯保存两次none＋explicit，
+真实业务两次中一次误continue_if_unfinished，另一次仍要求无依据原请求解析，不能称全面修好。
+
+新增完整E20为第25非重叠范围；25范围累计**1279生成／13206698known＝charged增量，
+837embedding／72711tokens**，Judge0、新unknown0。固定连续账本49314requests／
+224463608known／224740304charged／2023332embedding；generation unknown6全为历史，
+embedding unknown0，预算未重置或加限。首6／首14／业务前缀已经属于本20，不再次相加。
+原始正文、gold、HTTP、reasoning、DB、私有配置及日志均ignored；固定采样为
+publication-observation-20261009-e0f20.json。
+
+实际E自身Fast37920479803 success／Full37920479778 skipped；513自身Fast37927120860 success／
+Full37927120893 skipped。开发dad在12:18:32 UTC观察Fast37928671454 in_progress、
+Full37928671550 skipped，报告CI另核。不借其他提交、不称Full21/21或记忆效果通过。
+M277仍仅配置准备；后续集中一个候选，不因每个小改重启五条长历史。同版五方法各277
+（首65为子集）、native32／12／4、drift与recovery、必要M消融和固定紧预算、最终冻结后16
+保留用户、外部28／1354及旧10答案／三个适配器、最终Host135／192及新故事、六项交付
+均未完成。保留无效标签、全部机会／valid分母及同家族Judge／Root非独立性。
+
 ## 模式配对已闭合，声明语义仍失败：2026-10-09 10:49:41 UTC／北京时间2026-10-09 18:49:41
 
 本段是最新固定观察，下方历史保留。开发、本报告父版本及本轮scope实际冻结源码为
