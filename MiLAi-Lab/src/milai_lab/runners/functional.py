@@ -716,9 +716,6 @@ def prepare(
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
     if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
         raise ValueError("FUNCTIONAL_REQUEST_MODE_NATIVE_REQUIRED")
-    if (settings.get("request_mode") == "current_request_json_v9"
-            and settings.get("declaration_thinking", "inherit") != "inherit"):
-        raise ValueError("FUNCTIONAL_JSON_SCOPE_REQUIRES_INHERITED_DECLARATION")
     if settings.get("request_mode") in {
         "current_request_native_v8", "current_request_native_v9", "current_request_json_v9",
     } and (

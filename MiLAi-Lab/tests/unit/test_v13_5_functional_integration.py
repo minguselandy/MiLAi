@@ -71,6 +71,7 @@ def prepared(
     complete_requests: bool = False,
     scope_requests: bool = False,
     json_scope_requests: bool = False,
+    declaration_thinking: str | None = None,
     declaration_tool_choice: str | None = None,
     declaration_sampling: str | None = None,
     memory_method: str = "functional_v1",
@@ -130,7 +131,8 @@ def prepared(
         else "message_limit_only",
         "tool_catalog_errors": "bounded_feedback_v1" if catalog_feedback else "legacy",
         "read_interface": "explicit_selectors_v1" if explicit_reads else "combined_selectors_v1",
-        "declaration_thinking": "disabled" if phase_thinking and not json_scope_requests
+        "declaration_thinking": declaration_thinking if declaration_thinking is not None else
+                                "disabled" if phase_thinking and not json_scope_requests
                                 else "inherit",
         "declaration_sampling": declaration_sampling if declaration_sampling is not None
                                 else "greedy_v1" if direct_response else "inherit",
@@ -225,18 +227,22 @@ def scripted(
     return wires
 
 
-@pytest.mark.parametrize("scope_requests,declaration_choice,json_scope_requests", [
-    pytest.param(False, "required", False, id="False"),
-    pytest.param(True, "required", False, id="True"),
-    pytest.param(True, "auto", False, id="True-auto"),
-    pytest.param(True, "auto", True, id="True-json"),
+@pytest.mark.parametrize(
+    "scope_requests,declaration_choice,json_scope_requests,json_declaration_disabled", [
+    pytest.param(False, "required", False, False, id="False"),
+    pytest.param(True, "required", False, False, id="True"),
+    pytest.param(True, "auto", False, False, id="True-auto"),
+    pytest.param(True, "auto", True, False, id="True-json"),
+    pytest.param(True, "auto", True, True, id="True-json-disabled-T1"),
 ])
 def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, scope_requests: bool, declaration_choice: str,
     json_scope_requests: bool,
+    json_declaration_disabled: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, complete_requests=True, scope_requests=scope_requests,
         json_scope_requests=json_scope_requests,
+        declaration_thinking="disabled" if json_declaration_disabled else None,
         declaration_tool_choice=declaration_choice,
         declaration_sampling="inherit" if declaration_choice == "auto" else None,
         direct_response=True, phase_thinking=True, current_delivery=True,
@@ -259,9 +265,12 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
         names = {t["function"]["name"] for t in wire.get("tools", [])}
         json_scope = wire.get("response_format", {}).get("json_schema", {}).get(
             "name") == "milai_request_scope"
-        if names in ({"classify_current_request"}, {"resolve_continuation_operations"}):
-            assert wire["tool_choice"] == declaration_choice
-            assert wire["chat_template_kwargs"] == {"enable_thinking": json_scope_requests}
+        if (json_scope or names in (
+                {"classify_current_request"}, {"resolve_continuation_operations"})):
+            if not json_scope:
+                assert wire["tool_choice"] == declaration_choice
+            assert wire["chat_template_kwargs"] == {"enable_thinking":
+                json_scope_requests and not json_declaration_disabled}
             assert wire["temperature"] == (1.0 if declaration_choice == "auto" else 0.0)
             assert "[shape_feedback_v1]" not in json.dumps(wire, ensure_ascii=False)
         elif declaration_choice == "auto":
@@ -391,6 +400,15 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
     assert corrected["request_mode"]["current_memory_write_request"] == "explicit"
     assert corrected["request_mode"]["memory_requests"] == ["explicit", "continue_prior"]
     assert seen == {"extract": 2, "edit": 3, "resolve": 2}
+    if json_scope_requests:
+        scope_events = [event for path in (root / "banks").glob("*/*-trace-*.jsonl")
+                        for line in path.read_text().splitlines()
+                        if (event := json.loads(line)).get("event") == "vllm_response"
+                        and event["request"].get("response_format", {}).get("json_schema", {}).get(
+                            "name") == "milai_request_scope"]
+        assert len(scope_events) == 4
+        assert all(event["capacity"]["identity"]["enable_thinking"]
+                   is (not json_declaration_disabled) for event in scope_events)
 
 
 def tool(action: str, **args: Any) -> dict[str, Any]:
