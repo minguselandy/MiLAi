@@ -322,8 +322,10 @@ separately requested memory saving. Excluding all saving leaves memory_requests 
 Classify what is requested, not whether it is feasible, already done or unfinished.
 Set allow_forgetting only for an explicit forgetting request. These are model
 interpretations; actual permissions and effects remain with the execution stage.
-Declare business_action_request: none for pure queries, perform for newly requested
-actions, continue_if_unfinished for explicitly requested continuation of prior work.
+Declare business_action_request: none when no external application effect is
+requested (including memory-only work and pure queries), perform only for newly
+requested real application effects, continue_if_unfinished for explicitly requested
+continuation of prior application work.
 Declare concrete actions once, inside application_requests.actions. Interpret the
 whole CURRENT input, not only its last clause; completion criteria or implicit
 workflow steps do not grant additional permission. Preserving an existing draft
@@ -1072,8 +1074,9 @@ def request_mode(
             }
             parameters["required"].append("application_continuation_request")
             prompt += (
-                "\nAlso declare application_requests, one target with its requested actions and "
-                "literal parameters from the CURRENT user input. Include all requested workflow "
+                "\nDeclare application_requests only when the CURRENT user input requests a change "
+                "to an external application object: one target with its requested actions and "
+                "literal parameters. Otherwise use an empty list. Include all requested workflow "
                 "stages. reserve_and_label already includes labeling; do not add a second "
                 "complete_label action for it. Do not invent a reservation ID, document version, "
                 "completed field, outcome or permission. This is an intent interpretation; the "
