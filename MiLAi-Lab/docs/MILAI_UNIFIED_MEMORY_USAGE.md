@@ -12,7 +12,7 @@
 源码仍为`1cfb400`，输出`artifacts/global-function-first/prefix8-1cfb400-v2/M`；
 原Judge评分进程在最后会话中消失，22:38 UTC核验为31/32会话已评分；
 655份Judge响应均stop，第656请求有请求/账本预留、无响应，原终态缺失，不能标成完成。
-22:42 UTC单独启动评分补充（PID1654285/session58720），只发送从未尝试的657—677项；
+22:42 UTC单独启动评分补充，只发送从未尝试的657—677项，22:47 UTC已闭合并对账；
 第656项保留invalid/unconfirmed，不重试、不猜标签，原中断输出和费用完整保留。
 补充目录为`artifacts/global-function-first/prefix8-1cfb400-v2-score-supplement/M`，
 同一冻结源码/配置，重用全部原预测和31份已完成评价，不重做Writer、Reader或embedding。
@@ -125,13 +125,27 @@ Ruff、依赖边界及旧八事项真实模板复算通过。没有把重复检�
 656生成请求/2716058 known/2763437 charged tokens、0 embedding，新增unknown1。
 其中655已保存响应用量完全对应known；未知第656项保留47379预留tokens，原历史unknown6
 因此成为7。服务运行/排队均0，日志没有可恢复答案或精确用量，不据此改写unknown。
-单独评分补充只处理21个未发请求，保留unknown项及全部机会分母；费用另行对账，
-原中断不因补充完成改成原生COMPLETED。未闭合分数不构成方法优势结论。
+单独评分补充21生成/96531 known=charged、21stop、新unknown0、0 embedding；
+起点等于原中断固定账本，全部32预测/73答案与评分前备份相同，原检查点未变。
+合计Judge实际677请求、676保存响应、2812589 known/2859968 charged、新unknown1；
+原中断不因补充完成改成原生COMPLETED，未知项没有重试。
+
+统一结果为QA **44/73 Correct（有效71）**、更新 **48/72 Correct（有效67）**。
+QA另19 Hallucination、8 Omission、2 invalid；更新另19 Omission、2原标签Omitted和3空标签，
+后两种均保留invalid，不改写成Omission。540原生记忆点分成468形成/72更新记录，
+另82准确性记录；作者形成主分母439另排除29 interference，不能用439替代原540机会。
+同家族Judge和开发者来源核查不是独立确认。一处实际用户原话收入为18000，而参考答案为20000；
+Reader按原话回答被作者Judge判Hallucination。保留原标签，同时单列参考/来源冲突，
+不以gold纠正Source。Editor此前把同一用户证据改为20000仍是另一项来源忠实性错误。
+当前只运行预先固定7个已完成来源切片的thinking单变量对照，每设置各两次、28提案全部保留。
+PID1678314/session57500，输出`artifacts/global-function-first/editor-thinking-1cfb400-matched-v1`；
+不运行Store或提交，不把schema合法当正式编译通过，不自动选最好答案或采用新配置。
 工程错误与普通语义失败分别定位；unknown HTTP、未知写入/业务效果和 Store 故障停止相关路径，
 不盲重试。新 benchmark 预先声明按题保存成功及已知只读缺答，缺答保留在全部机会分母。
 
 四开发用户前8会话已从各自空库形成，实际分母为32会话/73QA/72原生更新；
-当前统一评分补充，不用于跨版本排名。最终仍需同版五方法各277会话（合计1385）、
+统一评分补充已闭合，当前仅来源提案对照，不用于跨版本排名。
+最终仍需同版五方法各277会话（合计1385）、
 原 native32/12会话/4用户、drift/recovery、必要 M 消融与紧预算、最终冻结后的16保留用户、
 LongMemEval、RawRAG/RollingSummary/A-MEM真实适配，以及 Host135case/192message 和新故事。
 六项最终交付和方法选择均未完成，Product 仍为 NO_GO。工程可用、模型语义与科研优势分开判断。

@@ -33,12 +33,21 @@ Original Score INTERRUPTED: PID911285/session32765 absent, no terminal/end;31/32
 655 saved stop Judge responses, request656 has no response. Fixed observed ledger:656 requests,
 2716058 known/2763437 charged, newunknown1 (47379 reservation),0emb; historicalunknown6=>7 retained.
 Services running/waiting0 and logs provide no recoverable answer/usage. Never retry unknown656.
-Supplement Score RUNNING/PID1654285/session58720 from22:42UTC, same config/source-1cfb400;
+Supplement Score CLOSED/reconciled22:47UTC, same config/source-1cfb400;
 root prefix8-1cfb400-v2-score-supplement/M, runtime prefix8-1cfb400-score-supplement-runtime-v2.
 Copies original32 predictions/banks/31 evaluations and cached Judges; original outputs unchanged.
 Unknown656 gets invalid/unconfirmed, full denominator retained; only untouched keys657..677 dispatch.
 Original full aggregate stays predictions-frozen-before-score.json. No Writer/Reader/embedding replay,
-no simultaneous models; preserve original interruption even if supplement closes. Inspect PID/terminal.
+no simultaneous models; original interruption retained. Supplement21gen/96531 known=charged/21stop,
+newunknown0/0emb. CombinedJudge677actual/676responses/2812589known/2859968charged/newunknown1.
+All32predictions/73answers match pre-score backup; original individual checkpoints unchanged.
+QA44/73Correct/valid71,update48/72Correct/valid67; invalid tags/denominators retained, no ranking.
+Root Source-only thinking matched control RUNNING/PID1678314/session57500 on source-1cfb400;
+root editor-thinking-1cfb400-matched-v1, runtime editor-thinking-1cfb400-matched-runtime-v1.
+Predeclared7oldEditor requests,False/True2freshreps=28; exact messages/wire schema/T1/budget retained.
+Proposal-only,noStore/commit/noQA/gold,alloutputs retained; source developer reviews only those7inputs.
+Recovery developer independently clarifies existing CURRENT prompt; no schema/authority expansion.
+Do not adopt or dispatch main five methods before control close/reconciliation and candidate freeze.
 Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.
 Historical observations below are fixed snapshots; inspect actual PID/lease/terminal before dispatch.
 
