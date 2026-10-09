@@ -111,7 +111,16 @@ def reconcile_shared_result(
             saved = service.store.get((*service.namespace, "edit_maintenance"),
                 json.dumps([original["session"], prior["request_id"]], ensure_ascii=False))
             if saved is None:
+                # Inspection may register a start preview before any checkpoint
+                # or model call exists. Preserve that original unissued scope.
+                if prior.get("phase") == "start":
+                    continue
                 return None
+            if saved.value["phase"] == "start":
+                # A registered observation without an issued maintenance call
+                # remains pending. It is not an unknown original operation to
+                # reconcile and cannot obscure another batch's actual receipt.
+                continue
             binding = saved.value["binding"]
             ranges = [{k: s[k] for k in ("source_ref", "start", "end")}
                       for s in binding["sources"]]

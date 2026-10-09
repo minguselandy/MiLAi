@@ -5515,7 +5515,7 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     }[continuation]
     reserved = {"item_key": "teal pack", "quantity": 1,
                 "destination": "local", "packing": "box"}
-    seen = {"reserve": 0, "label": 0, "saved": 0}
+    seen = {"reserve": 0, "label": 0, "saved": 0, "unchanged": 0}
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         names = {t["function"]["name"] for t in wire.get("tools", [])}
@@ -5558,11 +5558,18 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
             envelope: dict[str, Any] = {"creates": [], "records": {}}
             if continuation == "complete" and completed_evidence:
                 evidence = completed_evidence[0]["id"]
-                envelope["creates"] = [{"action": "create", "matter": "Teal pack outcome",
-                    "clauses": [{"text": "The teal pack was reserved and its label created.",
-                                 "evidence": [evidence], "conditions": [],
-                                 "assertion": {"source": evidence, "kind": "observed"}}]}]
-                seen["saved"] += 1
+                outcome = "The teal pack was reserved and its label created."
+                existing = next((row for row in packet["records"]
+                    if row.get("matter") == "Teal pack outcome"
+                    and any(clause["text"] == outcome for clause in row["clauses"])), None)
+                if existing is not None:
+                    envelope["records"][existing["id"]] = {"action": "no_change"}
+                    seen["unchanged"] += 1
+                else:
+                    envelope["creates"] = [{"action": "create", "matter": "Teal pack outcome",
+                        "clauses": [{"text": outcome, "evidence": [evidence], "conditions": [],
+                                     "assertion": {"source": evidence, "kind": "observed"}}]}]
+                    seen["saved"] += 1
             return {"role": "assistant", "content": json.dumps(envelope)}
         current = next(m["content"] for m in wire["messages"] if m["role"] == "user")
         tools = [m for m in wire["messages"] if m["role"] == "tool"]
@@ -5613,6 +5620,9 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     if continuation == "complete":
         assert progress["complete"] and progress["memory"]["status"] == "committed"
         assert seen["saved"] == 1 and len(second["records"]) == 1
+        assert seen["unchanged"] >= 1
+        assert second["records"][0]["value"]["edit_state"]["units"][0]["text"] == (
+            "The teal pack was reserved and its label created.")
         assert progress["semantic_coverage"] == "unchecked"
     else:
         assert not progress["complete"] and second["records"] == []
@@ -5647,6 +5657,7 @@ def test_host_request_reconciles_original_shared_commit_after_response_loss(
     operation_receipt = MemoryService.operation_receipt
     lost = []
     lookup_available = False
+    maintenance_calls = []
 
     def receipt_lookup(self, session, operation_id):
         if operation_id in lost and not lookup_available:
@@ -5689,6 +5700,7 @@ def test_host_request_reconciles_original_shared_commit_after_response_loss(
                 business_operations=[], prior_memory_request_fragments=[],
                 prior_request_ids=[card["request_id"]])
         if not names:
+            maintenance_calls.append(ordinal)
             if "Extract brief candidate propositions" in wire["messages"][0]["content"]:
                 return {"role": "assistant", "content": json.dumps({"changes": []})}
             packet = json.loads(wire["messages"][-1]["content"])["delivery"]
@@ -5716,6 +5728,7 @@ def test_host_request_reconciles_original_shared_commit_after_response_loss(
     assert old["memory"]["attempts"][0]["error"] == "ACTUAL_COMMIT_RESPONSE_LOST"
     assert len(first["world"]["world"]["attempts"]) == 1
     count = len(wires)
+    writer_count = len(maintenance_calls)
     lookup_available = True
     second = functional.message(root, bank="loss-bank", owner="alice", session="readonly",
         message_id="inspect", content="Only inspect progress of the original request; do not save.")
@@ -5726,7 +5739,27 @@ def test_host_request_reconciles_original_shared_commit_after_response_loss(
     assert current["memory"]["attempts"] == old["memory"]["attempts"]
     assert second["records"] == first["records"] and second["maintenance"] == []
     assert len(second["world"]["world"]["attempts"]) == 1
+    assert len(maintenance_calls) == writer_count
     assert len(wires) - count == 3  # declaration, bounded reference, actual Host response
+    freeze = functional.frozen(root)
+    bank_root = next(root.glob("banks/*"))
+    with SqliteStore.from_conn_string(str(bank_root / "memory.sqlite")) as store:
+        service = MemoryService(store,
+            ("functional", freeze["run_id"], "loss-bank", "alice"), "alice",
+            bank_root / "memory.lock", functional_contract="functional_v1",
+            memory_profile="unified_v1")
+        receipt = operation_receipt(service, "original", lost[0])
+        assert receipt["ok"] and receipt["status"] == "committed"
+        assert receipt in current["memory"]["reconciliation"]["receipts"]
+        batches = old["memory"]["attempts"][0]["binding"]["maintenance"]
+        states = {batch["request_id"]: store.get(
+            (*service.namespace, "edit_maintenance"), json.dumps(
+                ["original", batch["request_id"]], ensure_ascii=False)) for batch in batches}
+        pending = [batch for batch in batches if states[batch["request_id"]] is None]
+        assert len(pending) == 1 and pending[0]["phase"] == "start"
+        assert pending[0]["receipts"] == []
+        assert all(item.value["phase"] == "complete" for item in states.values()
+                   if item is not None)
 
 
 def test_host_save_continuation_registers_actual_tool_batch_after_unconfirmed_save(
