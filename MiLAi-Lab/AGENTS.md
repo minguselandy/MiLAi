@@ -20,6 +20,11 @@ Frozen5019968 only; arms serial B0/B1/B2/M/Append-only, each277sessions/705QA/59
 all1385/3525/2975. Startledger50840requests/235986661known/236310736charged/2086685emb,unknown7/0.
 Inspect actual PID/root-execution-predict.json/arm terminals; launch is not completion.
 No automatic restart or scoring; all five predictions before separate uniform phase score.
+Fixed23:48UTC observation: runnerPID matches, ownerOWNED, B0first5sessions/12QA checkpoints,
+5maintenancecompleted/20uniquecommits/noQA missing or receipt rejection; other4arms NOT_STARTED.
+Live unknown+1 is an in-flight reservation, not closed unknown. Use ignored
+inspect_five_dev277_5019968_progress.py for compact PID/phase/cost checks; do not dump full ledger/world.
+Native32/drift/external28/controlled v3 configs PREPARED ONLY,0HTTP; no final confirmation freeze.
 Shared Reader projection/flat literal metadata, real complete-request planning, independent memory after
 known CURRENT schema/length failure, faithful candidates and cumulative confirmed receipts are integrated.
 Root exact old-eight replay: 32446 -> 30520 input <=32256, 8/8 exact-rendered, all original evidence
