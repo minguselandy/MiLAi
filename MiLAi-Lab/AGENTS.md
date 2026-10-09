@@ -1,3 +1,49 @@
+# Live handoff: 2026-10-09 10:05:35 UTC／北京时间2026-10-09 18:05:35, native auto diagnostic versus actual Host P0
+
+Development/report parent and actualHost freeze7d722d5062cc8da81746a75190bdeb5534f619a1,
+full artifacts/post118/source-7d722d5/MiLAi-Lab. Diagnostic20/21 actualb89d764; earlier18/19
+actual1416. PR119 open/draft/unmerged; fullgoal/sixdeliveries ACTIVE/incomplete/ProductNO_GO.
+Root alone serial actualQwen/BGE/Judge; user authorizes offline parallel agents. At fixedsample
+allmodeltasksclosed/noinflight; inspect actualowner/PIDs/terminal/ledger before nextdispatch.
+
+host-rules-business-7d722d5-v9-auto-t1-v1 ROOT_STOPPED_AFTER_UNSUPPORTED_APPLICATION_PLAN:
+2executionCOMPLETED/12NOT_RUN; STOP before rulesm2. Original rules8/business6+controls kept;
+False/T1/auto declaration, AgentTrue/T1, editfalse/staged/record/8192/24calls unchanged.
+m0purememorycorrect/r1saved; timefromreportday/noquarterend,textquarterretained. m1wrongperform+
+fabricatedCURRENT North reserve_and_label/quantity1/system_database/updated_rule -> permission
+andbusinesspending; actual0reserve/label/2get_reservationqueries/worldunchanged. Selector[];
+Editorcreatesonly, oldr1 wholevalue EXACTsame, newexception per_member unsupported. FutureReader
+coordinationunrun; don't intrinsicallyrejectappend. Rootall13formal/2fullanswers/state/journalread,
+noreasoningexecution/regrade/Judge/independent/exhaustiveaudit. 13gen104244known/8emb325;
+7stop6toolcalls0length/newunknown0. No further steps or oldtail/retry/rollback.
+
+Same7d host-switch-reopen-7d722d5-v9-auto-t1-v1 originalfirst6 PREPAREDonly/0HTTP; all20 only2
+attempted. M277 new m-four-dev277-7d722d5-edit-false-prepared-v1 onlyconfig/nooutput/runtime/
+dispatch; compared760 stage.edit=false added, extract/readerTrue/T1/32768/input32256/staged/
+record unchanged. Four277/first65subset; noheldoutsemanticsread. Don't assumeadmitted/running.
+
+b89 required2inputs4calls3941known:stillpureperform+fakeplan. b89samewire onlychoiceauto3calls
+3055known: pure none/CURRENT NOT_NEEDED actual, genuine literalbusinessparameterscorrect,
+alltoolcalls/0business/SourceCapture/DB/apply/encoder/Judge/newunknown. Finiteonce/input, notstable
+default/causeproof. 1416 T1diagnostic4/3541 CURRENTpure[] notstable; itsHost2/10gen51226/7emb391
+againpendingfakebusiness0mutation. Oldfailure/versionfacts remain, noeffectbackfill.
+
+ActualHostscope differs fromauto bare diagnostic by existingshape_feedback_v1 System374chars/
+description229chars; User/params/False/T1/auto same, temperatureint/floatserializedseparately.
+No confirmedcausaldecoderfault. Offline generalcontractsubtraction inprogress only: no irrelevant
+support/UNUSABLE instructions ontools withoutfield_support; schemaparser/permissions/supporttools
+retain. It is NOT in actual22. 7d4narrowSQLite/scripted/Ruff/strictmypy/localQwen pass0HTTP;
+ownFast37913477253 success/Full37913477240 skipped later10:06checked, newreportCIseparate.
+Defaultv8/recorddenseK10/HostTrueT1 unchanged, sharedschemaannotations notbyteidentical.
+Serverversionread-only0.27.1; matchedofficialtool docs do notproveparserflags/semanticfault.
+
+22nonoverlap1165gen/12211918known=chargedDelta/781emb69490,Judge0/newunknown0;
+ledger49200/223468828known/223745524charged/2020111emb,histunknown6/0/limitsunchanged.
+Snapshotpublication-observation-20261009-100535-native-auto-host.json; raw/gold/HTTP/reasoning/DB/config/log ignored. TMPDIR/SQLITE_TMPDIR on/cra
+beforeimports; root/tmpfull. Allsameversionfive277/native32-12-4/drift/recovery/Mablation/tight28160/
+finalfreezeTHEN16semanticunused/external28-1354/old10audit/threeadapters/finalHost135-192/newstories/
+sixdeliveries incomplete. Keepinvalidlabels/allopportunity-valid/version/nonindependence bounds.
+
 # Live handoff: 2026-10-09 08:38:00 UTC／北京时间2026-10-09 16:38:00, optional native v9 closed negative diagnostic
 
 Latest development/execution/report parent1416a02f0c9ac911f596193365e25a46f472bc6c;

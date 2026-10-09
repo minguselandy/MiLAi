@@ -11,6 +11,101 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 请求生成与普通Host复核：2026-10-09 10:05:35 UTC／北京时间2026-10-09 18:05:35
+
+本段覆盖旧“当前”描述，固定历史和首次失败保留。最新开发、本报告父版本及本轮Host实际
+冻结源码为`7d722d5062cc8da81746a75190bdeb5534f619a1`，完整冻结目录
+`artifacts/post118/source-7d722d5/MiLAi-Lab`。本固定采样全部实际模型任务闭合，无在途；
+完整[post117／118计划](MILAI_POST_117_118_FUNCTION_FIRST_DEVELOPMENT_EXPERIMENT_PLAN.md)
+与六项交付active／incomplete，PR119 open／draft／未合并，Product NO_GO。
+
+### 工程接通与实际源码分别记录
+
+`b89d764`复用应用动作的真实公开描述，删除CURRENT“已接受业务范围”的前提；没有增加对象
+事实或授权。`7d722d5`让声明非思考模式与auto／required独立配置，并在实际请求投影中重新
+计算声明容量，避免auto意外继承普通Host的thinking。4项直接既有SQLite／合成transport
+流程、Ruff、相关strict mypy及本地真实模板通过，0实际HTTP；这些不是语义改善证据。
+
+默认native v8、record／dense K10及普通Host True／T1保持；共享动作schema新增描述，wire
+注解并非完全不变。新的可选v9／False／T1／auto候选不因小诊断正例而晋升默认。
+
+### 有限诊断有正例，普通链路仍失败
+
+| 实际冻结范围 | 首次观察及边界 | 生成／known |
+|---|---|---:|
+| `1416a02`原两输入，声明False／T1／required | 相对T0仅温度变化；纯保存scope仍perform，CURRENT这次为空；真实预订解析正确，0业务效果 | 4／3541 |
+| `1416a02`新空库规则链前2消息 | 第2条再次虚构业务计划并进入pending，只有2次查询，0预订／标签；2执行闭合、12NOT_RUN | 10／51226 |
+| `b89d764`原两输入，False／T1／required | 动作说明与任务前提修正后，纯保存仍perform＋虚构计划；0业务／记忆效果 | 4／3941 |
+| `b89d764`同wire只把required改auto | 纯保存scope返回none，CURRENT实际NOT_NEEDED；真实预订scope和字面参数正确；3正常tool_calls，0业务／记忆效果 | 3／3055 |
+| `7d722d5`普通Host规则链前2消息 | 第1条纯保存正确，第2条又perform＋虚构计划；0预订／标签；Root在m2之前停止 | 13／104244 |
+
+每个有限条件仅一次／输入，不估计稳定性或泛化。auto诊断只有3份实际响应，没有第四次纯
+保存CURRENT；少一阶段只是该次实际分支。随后普通Host负例必须保留，不能宣布auto修好P0。
+服务只读`/version`观察为vLLM0.27.1；[该版本官方工具调用文档](
+https://docs.vllm.ai/en/v0.27.1/features/tool_calling/#constrained-decoding-behavior)
+说明required与auto的解码约束不同，但不证明本轮错误是服务端缺陷。实际parser启动参数尚未审计。
+
+### 7d普通Host：业务、持久状态和反馈分开
+
+原规则8＋业务6消息保持，独立空库；声明False／T1／auto，普通Agent True／T1、Editor
+false、staged／record、8192输出和24调用上限保持。m0保存整体每周三次、提前一天通知及
+地区尚无独立次数；结构化时间仅从报告日开始，没有完整季度区间，正文仍保留“本季度”。
+
+m1仅要求新增北区每周一次例外及保留整体安排，却被分类为perform，CURRENT虚构预订
+target／reserve_and_label／quantity／destination／packing。程序接受计划并显示业务pending；
+实际世界完整值保持，仅两次get_reservation查询，**0reserve、0label**。这是错误许可／待办
+解释，不是已发生未要求的业务效果；d754先前实际一次预订与一次标签的失败另保留。
+
+m1的Selector返回空record_ids，Editor未打开旧事项，新建了带季度及通知条件的例外卡。
+旧r1完整value严格保持，不是修改后损坏；新增applicability.quantity_scope=per_member没有
+User依据。追加本身不判错误，但没有后续Reader观察，不能证明两卡当前范围可正确协调。
+执行候选答案说已保存例外，最终回执反馈还暴露了错误业务pending，两者分别保留。
+
+Root读两条完整自然反馈、全部13份正式生成、实际前后状态与业务journal，没有执行reasoning
+草稿或新增数值重评分。终态ROOT_STOPPED_AFTER_UNSUPPORTED_APPLICATION_PLAN：2执行
+COMPLETED、12NOT_RUN，不是2条语义通过。13HTTP均正常（7stop／6tool_calls／0length），
+104244known；8embedding／325tokens；Judge0、新unknown0。
+
+同7d配置的原首链6条已另根准备，未运行，因此原三故事20消息仅2次尝试。M277新配置也只
+准备：相对旧760新增edit=false，extract／reader仍True／T1；四用户277、首65只计一次，
+没有实际预测或评分，未读取保留集。旧失败尾部和准备根没有重启、覆盖或热改。
+
+### 方法反思与下一步
+
+实际Host比auto诊断多一层shape_feedback_v1通用包装：System前置374字符、工具描述追加
+229字符；原User、参数schema与False／T1／auto相同，temperature的int／float序列化另记。
+这是可定位的输入差异，不是已确认因果。当前仅离线开发通用合同减法：没有field_support
+的工具不重复接收无关支持／占位示例说明；原schema、解析、权限和有支持字段工具的说明
+继续保留。它尚未进入上述实际运行。不新增关键词授权、审核Agent、重试循环或新事实库。
+
+检索多键的有限正例与遗漏、12个引用式Keep的实际保持及错误新支持继续有效；不把旧运行
+归到新修复。先完成同候选三条功能链，再集中预测／必要评分及有限机制对照，不继续扩架构。
+
+### 固定成本与完整剩余范围
+
+| 非重叠实际范围 | 生成请求／响应 | known＝charged增量 | embedding请求／响应 | embedding tokens |
+|---|---:|---:|---:|---:|
+| 08:38报告原17范围 | 1131 | 12045911 | 766 | 68774 |
+| 1416 False／T1两输入 | 4 | 3541 | 0 | 0 |
+| 1416 False／T1 Host前2 | 10 | 51226 | 7 | 391 |
+| b89 required两输入 | 4 | 3941 | 0 | 0 |
+| b89 auto实际3阶段 | 3 | 3055 | 0 | 0 |
+| 7d Host前2 | 13 | 104244 | 8 | 325 |
+| **22范围合计** | **1165** | **12211918** | **781** | **69490** |
+
+连续账本固定49200requests／223468828known／223745524charged／2020111embedding tokens，
+与原基点差额一致。6个generation unknown是历史量，embedding unknown0，无新增在途或
+闭合unknown，未重置预算／新增限额，子集不重复累计。私有采样publication-observation-20261009-100535-native-auto-host.json及原正文、gold、
+HTTP、reasoning、DB、配置、日志均ignored。随后10:06核对7d自身
+[Fast37913477253](https://github.com/minguselandy/MiLAi/actions/runs/37913477253) success、
+[Full37913477240](https://github.com/minguselandy/MiLAi/actions/runs/37913477240) skipped，
+新报告CI推送后另核，不借其他提交，也不称Full21/21。
+
+同版五方法各277历史、native／drift／recovery／必要消融／紧预算、最终冻结后的16保留用户、
+外部28／1354及旧10答案审计／三个真实适配器、最终同候选Host135case／192message和冻结后
+新故事、六交付均未完成。保留无效标签、全部机会与valid分母、源码版本及Root／同家族Judge
+非独立性；五条主线、一个逻辑MemoryService和Product NO_GO保持。
+
 ## 当前请求任务拆分与实际负结果：2026-10-09 08:38:00 UTC／北京时间2026-10-09 16:38:00
 
 本段为最新固定观察，下方07:47等历史与首次失败保持。最新开发、该诊断冻结源码与本报告

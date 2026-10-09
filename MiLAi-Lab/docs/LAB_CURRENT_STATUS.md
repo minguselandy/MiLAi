@@ -1,5 +1,20 @@
 # MiLAi Lab 当前状态
 
+**2026-10-09 10:05:35 UTC／北京时间2026-10-09 18:05:35：7d普通Host因错误业务计划停止，auto诊断正例尚未泛化。**
+
+最新开发／报告父7d722d5；b89 auto两输入3tool_calls／3055known、纯保存none＋CURRENT
+NOT_NEEDED，与7d实际Host两消息不同。7d m0规则已保存；m1scope perform＋虚构计划，实际
+0reserve／label、2query，旧r1完整value保持，新例外卡带无依据per_member。Root读全部13正式
+生成和两完整自然反馈，m2前停止。终态2执行COMPLETED／12NOT_RUN；独立原首链6与M277
+仅准备，三故事20尚未完成。无数值重评分／独立确认或效果准入。
+
+7d Host13生成／104244known（7stop6tool_calls0length）、8emb325；22范围1165／12211918、
+781emb69490；连续账本49200／223468828known／223745524charged／2020111embedding。
+新Judge／unknown0，历史unknown6／0，本固定采样无在途。7d自身Fast37913477253 success、
+Full37913477240 skipped。额外shape包装已定位，只作离线合同减法，未回填实际成绩。
+完整六交付active／incomplete，16保留用户语义未用，无最终候选／ProductNO_GO。
+详见[最新正式结果与边界](MILAI_UNIFIED_MEMORY_USAGE.md)。以下固定历史保持。
+
 **2026-10-09 08:38:00 UTC／北京时间2026-10-09 16:38:00：开发1416，可选v9真实四次正常输出闭合，纯保存P0仍未解决。**
 
 原两个User输入、false／T0／8192，逐阶段执行：纯保存scope错perform，CURRENT又编造
