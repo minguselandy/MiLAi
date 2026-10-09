@@ -1151,7 +1151,9 @@ class EditMemory:
             payload["change_candidates"] = change_candidates
             empty_instruction += (
                 " change_candidates are temporary locating hints; decide what to persist "
-                "from the original delivered sources and actual old state."
+                "from the original delivered sources and actual old state. A candidate can "
+                "misstate its source even when its source ID matches; it supplies no extra "
+                "evidence. Preserve the source's actual subject, attribution and modal strength."
             )
         return [
             {
@@ -1166,6 +1168,8 @@ class EditMemory:
                 "single long unit or create duplicate records for the same matter. "
                 "Return the supplied envelope. At most one proposal per existing target in "
                 "this request; combine dependent changes in that target's single proposal. "
+                "A removal needs evidence of that cancellation. Redelivering a source that "
+                "affirmed an old rule does not support a new retraction of that rule. "
                 + empty_instruction
                 + (" Candidates marked actual_source_literal are program-projected fields of "
                    "the actual Tool source, not LLM semantic formation. Their observation time "
@@ -1249,10 +1253,14 @@ class EditMemory:
                 {
                     "role": "system",
                     "content": (
-                        "Extract brief candidate propositions from this current event for "
-                        "memory maintenance. Preserve the subject, who asserts it, report or "
-                        "inference status, plans versus completed changes, qualifications and "
-                        "explicit time/scope. Select the actual supporting e fragments. Use "
+                        "Extract candidate statements and change cues from the current sources "
+                        "for memory maintenance. Preserve the subject, who asserts it, report or "
+                        "inference status, modal strength, qualifications and explicit time/scope. "
+                        "Considering a course remains considering; wishing to reduce work hours "
+                        "remains a wish; a plan does not imply a completed change. An assistant's "
+                        "suggested income remains an assistant suggestion, not a user's report. "
+                        "Stay close to the source wording when summarizing would strengthen it. "
+                        "Select the actual supporting e fragments. Use "
                         "null when time/scope is unspecified. Include independently stated "
                         "new facts and changes; omit social acknowledgments and bare queries. "
                         "These candidates locate affected old matters for the existing editor; "
