@@ -2725,6 +2725,40 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
         assert current[0]["applicability"]["text"] == general["text"]
         assert memory.service.read(saved["id"])["value"] == before_read
 
+    from langchain_core.embeddings import Embeddings
+
+    from milai_lab.memory.retrieval import SemanticRetriever
+
+    class NavigationVectors(Embeddings):
+        def embed_documents(self, texts: list[str]) -> list[list[float]]:
+            return [[1.0, 0.0] if "modifies:" in text else [0.0, 1.0] for text in texts]
+
+        def embed_query(self, text: str) -> list[float]:
+            return [1.0, 0.0]
+
+    with opened(tmp_path, arm="M", interface_version="I2",
+                maintenance_recipe="extract_then_edit", memory_view_mode="state_driven",
+                read_interface="explicit_selectors_v1") as memory:
+        memory.service.semantic_retriever = SemanticRetriever(
+            NavigationVectors(), 2, granularity="record_units",
+        )
+        before = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        turn(memory, "navigation", "What project visits apply this quarter?")
+        directory = memory.context("s", "navigation", "functional-m-test-v1")
+        candidate = next(item for item in directory["candidates"]
+                         if item.get("record_id") == saved["id"])
+        assert "Cosine-winning stored unit excerpt" in candidate["description"]
+        assert candidate["description"].endswith(general["text"])
+        assert all(item["type"] != "record" for item in directory["items"])
+        read = json.loads(invoke(memory, "read_memory", {"record_id": saved["id"]},
+                                 "open-complete", "navigation").content)
+        assert read["ok"] and {unit["content"] for unit in read["items"]} == {
+            unit["text"] for unit in before["edit_state"]["units"]
+        }
+        material = memory.model_material(cfg("navigation"))
+        assert all("retrieval_navigation" not in item for item in material["items"])
+        assert memory.service.read(saved["id"])["value"] == before
+
 
 @pytest.mark.parametrize("query_time,calendar_context,expected", [
     ("Oct 07, 2025, 10:00:00", "team-calendar", "within_explicit_limits"),

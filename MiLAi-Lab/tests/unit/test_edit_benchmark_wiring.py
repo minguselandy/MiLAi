@@ -682,7 +682,9 @@ def test_shared_reader_staged_accepts_legacy_selection_without_extra_reads(tmp_p
     question, date, key = "What marker applies on weekdays?", "2030-01-02", "qa"
     memories = [{"record_id": "actual-marker", "revision": 2,
                  "matter_description": "Marker", "content": "The marker is blue on weekdays.",
-                 "scope": {"weekday_only": True}, "revision_evidence": []}]
+                 "scope": {"weekday_only": True}, "revision_evidence": [],
+                 "retrieval_navigation": {"unit_id": "actual-unit",
+                     "excerpt": "The marker is blue on weekdays.", "truncated": False}}]
     snapshot = tmp_path / "http" / key / "retrieval.json"
     write_json(snapshot, memories)
     original = snapshot.read_bytes()
@@ -695,13 +697,20 @@ def test_shared_reader_staged_accepts_legacy_selection_without_extra_reads(tmp_p
         assert payload["memory_view"] == "retained_state"
         if len(payloads) == 1:
             assert payload["memories"] == []
+            description = payload["candidates"][0]["description"]
+            assert description.startswith("Marker\nCosine-winning stored unit excerpt")
+            assert "navigation only; open the complete record for evidence" in description
+            assert description.endswith(memories[0]["content"])
             assert payload["memory_view_state"]["read_goal"] is None
             assert set(payload["response_schema"]["required"]) == {
                 "record_ids", "keep_resident", "done"}
             content = json.dumps({"record_ids": ["actual-marker"],
                                   "keep_resident": False, "done": False})
         else:
-            assert len(payloads) == 2 and payload["memories"] == memories
+            assert len(payloads) == 2 and payload["memories"] == [
+                {key: value for key, value in memories[0].items() if key != "retrieval_navigation"}
+            ]
+            assert "candidates" not in payload and "retrieval_navigation" not in repr(payload)
             assert "read_goal" not in payload
             content = "The marker is blue on weekdays."
         return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
@@ -964,7 +973,13 @@ def test_cache_tracks_current_body_and_withdrawal_without_erasing_history(tmp_pa
         )
         rows = service.search("refreshment", limit=2, include_raw=False)["records"]
         assert [row["id"] for row in rows] == ["z", "b"]
-        assert rows[0] == service.read("z")  # Complete revision, including the other clauses.
+        assert {key: value for key, value in rows[0].items()
+                if key != "retrieval_navigation"} == service.read("z")
+        assert rows[0]["retrieval_navigation"] == {
+            "unit_id": "u1", "excerpt": "Green tea.", "truncated": False,
+        }
+        assert "retrieval_navigation" not in rows[1]  # Whole-key win, no guessed unit.
+        assert "retrieval_navigation" not in service.read("z")["value"]
         keys = semantic_keys(rows[0]["value"], granularity="record_units")
         assert len(keys) == 4
         assert keys[1] == (
@@ -991,7 +1006,10 @@ def test_cache_tracks_current_body_and_withdrawal_without_erasing_history(tmp_pa
         assert [row["id"] for row in rows] == ["c", "b", "z"]
         # Refresh whole + both linked unit keys; retain the unaffected unit's vector.
         assert len(granular_vectors.documents) - embedded == 3
-        assert rows[-1] == service.read("z") and rows[-1]["value"]["revision"] == 2
+        assert {key: value for key, value in rows[-1].items()
+                if key != "retrieval_navigation"} == service.read("z")
+        assert rows[-1]["value"]["revision"] == 2
+        assert rows[-1]["retrieval_navigation"]["excerpt"] == "Music interests."
         assert service.read("z", 1)["value"]["edit_state"]["units"][0]["text"] == "Green tea."
 
 

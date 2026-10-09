@@ -147,6 +147,8 @@ def reader_messages(
 ) -> list[dict[str, str]]:
     """Common Reader over actual retained records or observed source messages."""
     delivered = copy.deepcopy(memories)
+    for memory in delivered:
+        memory.pop("retrieval_navigation", None)
     projected = False
     if memory_view == "retained_state":
         for memory in delivered:
@@ -1552,6 +1554,8 @@ class BenchmarkRun:
                     "scope": row["value"]["scope"],
                     "revision": row["value"]["revision"],
                     "revision_evidence": read_revision_evidence(service, row["value"]),
+                    **({"retrieval_navigation": row["retrieval_navigation"]}
+                       if "retrieval_navigation" in row else {}),
                     **({"record_id": row["id"]}
                        if service.memory_profile == "unified_v1"
                        or self.settings.get("memory_view_mode", "legacy") != "legacy" else {}),
@@ -1629,6 +1633,7 @@ class BenchmarkRun:
         directory = [record_candidate(
             memory["record_id"], memory["revision"],
             memory.get("matter_description", memory["scope"]), len(memory["content"]),
+            navigation=memory.get("retrieval_navigation"),
         ) for memory in memories]
         schema = {
             "type": "object", "additionalProperties": False,

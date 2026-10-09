@@ -20,14 +20,14 @@ def semantic_text(value: dict[str, Any]) -> str:
     return str(value.get("content", ""))
 
 
-def semantic_keys(
+def _semantic_entries(
     value: dict[str, Any], *, granularity: Literal["record", "record_units"] = "record"
-) -> tuple[str, ...]:
-    """Disposable search keys; none becomes a record, source or Reader material."""
+) -> tuple[tuple[str, dict[str, Any] | None], ...]:
+    """Keep each unchanged key's actual unit, with no unit for the whole key."""
     whole = semantic_text(value)
     state = value.get("edit_state")
     if granularity == "record" or not isinstance(state, dict):
-        return (whole,)
+        return ((whole, None),)
 
     units = state["units"]
     texts: dict[str, str] = {
@@ -45,15 +45,23 @@ def semantic_keys(
         if target != source:
             linked.setdefault(target, []).append(link)
 
-    keys = [whole]
+    entries: dict[str, dict[str, Any] | None] = {whole: None}
     for unit in units:
-        keys.append(
+        text = (
             "\n".join(
                 [state.get("matter_description", ""), unit["text"],
                  *linked.get(unit.get("unit_id", ""), [])]
             )
         )
-    return tuple(dict.fromkeys(keys))
+        entries.setdefault(text, unit)
+    return tuple(entries.items())
+
+
+def semantic_keys(
+    value: dict[str, Any], *, granularity: Literal["record", "record_units"] = "record"
+) -> tuple[str, ...]:
+    """Disposable search keys; none becomes a record, source or Reader material."""
+    return tuple(text for text, _ in _semantic_entries(value, granularity=granularity))
 
 
 def merge_candidates(
@@ -112,10 +120,11 @@ class SemanticRetriever:
     ) -> list[dict[str, Any]]:
         if not records:
             return []
-        keys = {
-            row["id"]: semantic_keys(row["value"], granularity=self.granularity)
+        entries = {
+            row["id"]: _semantic_entries(row["value"], granularity=self.granularity)
             for row in records
         }
+        keys = {key: tuple(text for text, _ in items) for key, items in entries.items()}
         bodies = {key: texts[0] for key, texts in keys.items()}
         unit_keys = dict.fromkeys(
             (key, text) for key, texts in keys.items() for text in texts[1:]
@@ -144,15 +153,27 @@ class SemanticRetriever:
         if ranking == "dense_activation" and activation_score is None:
             raise ValueError("RETRIEVAL_ACTIVATION_CALLBACK_REQUIRED")
 
-        cosine_scores = {
-            key: max(
+        cosine_scores: dict[str, float] = {}
+        navigation: dict[str, dict[str, Any]] = {}
+        for key, texts in keys.items():
+            scores = [
                 sum(a * b for a, b in zip(query_vector, vector, strict=True))
                 for vector in [
                     self._vectors[key][1],
                     *[self._unit_vectors[(key, text)] for text in texts[1:]],
                 ]
-            ) for key, texts in keys.items()
-        }
+            ]
+            winner = max(range(len(scores)), key=scores.__getitem__)
+            cosine_scores[key] = scores[winner]
+            unit = entries[key][winner][1]
+            if self.granularity == "record_units" and unit is not None:
+                # Navigation only, outside the stored value/support. The first
+                # maximum wins, so a whole-key tie never invents a unit hit.
+                text = unit["text"]
+                navigation[key] = {
+                    **({"unit_id": unit["unit_id"]} if "unit_id" in unit else {}),
+                    "excerpt": text[:240], "truncated": len(text) > 240,
+                }
 
         def order(row: dict[str, Any]) -> tuple[Any, ...]:
             cosine = cosine_scores[row["id"]]
@@ -165,6 +186,11 @@ class SemanticRetriever:
             else list({row["id"]: row for row in records}.values())
         )
         selected = sorted(candidates, key=order)[:limit]
+        if navigation:
+            selected = [
+                {**row, "retrieval_navigation": navigation[row["id"]]}
+                if row["id"] in navigation else row for row in selected
+            ]
         return (
             [{**row, "dense_score": cosine_scores[row["id"]]} for row in selected]
             if include_scores else selected

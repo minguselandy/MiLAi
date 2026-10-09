@@ -1328,6 +1328,11 @@ class FunctionalEditMemory(FunctionalMemory):
                 row["value"], query_time=query_time,
                 query_calendar_context=self.query_calendar_context,
             )
+        if self.memory_view_mode != "legacy" and "retrieval_navigation" in row:
+            # Only the catalog uses this query-specific hint. Explicit reads use
+            # service.read() and keep the complete original body/support.
+            for item in result:
+                item["retrieval_navigation"] = row["retrieval_navigation"]
         return result
 
     def _record_basis(self, source_refs: list[str]) -> str:

@@ -140,6 +140,7 @@ def catalog_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 identity[1], identity[2],
                 item.get("edit_matter_description", item["content"]),
                 sum(body_sizes.values()), view=item.get("version_view", "current_at_snapshot"),
+                navigation=item.get("retrieval_navigation"),
             ))
     return candidates
 
@@ -147,8 +148,15 @@ def catalog_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def record_candidate(
     record_id: str, revision: int, description: Any, body_codepoints: int = 0, *,
     view: str = "current_at_snapshot",
+    navigation: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """One actual candidate for Host and controlled pools; a description is navigation."""
+    if navigation is not None:
+        description = (
+            f"{description}\nCosine-winning stored unit excerpt (navigation only; "
+            "open the complete record for evidence): "
+            + navigation["excerpt"] + ("…" if navigation["truncated"] else "")
+        )
     return {
         "type": "record_candidate", "record_id": record_id, "revision": revision,
         "version_view": view, "description": description, "body_codepoints": body_codepoints,
