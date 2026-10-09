@@ -1,5 +1,17 @@
 # MiLAi Lab 当前状态
 
+**2026-10-09 10:49:41 UTC／北京时间2026-10-09 18:49:41：01声明模式配对闭合，纯保存语义误判仍在。**
+
+开发／报告父与scope实际源01edeaf；最后Host仍7d，旧运行不回填。两输入／两模式／各两次，
+8tool_calls、0length／14136known，False4333、True9803；纯保存两模式均perform。
+0CURRENT／业务／SourceCapture／语义DB／embedding／Judge／重试／新unknown。
+Root读全部正式输出，未独立评分；JSON正文候选仅离线开发，不改变默认或权限。
+
+23范围1173生成／12226054known、781emb69490；连续账本49208／223482964known／
+223759660charged／2020111embedding，历史unknown6／0、无在途。01自身Fast成功／Full skipped；
+三链20、M277、最终保留／外部／Host及六交付未完成，ProductNO_GO。
+详见[最新正式结果与边界](MILAI_UNIFIED_MEMORY_USAGE.md)。下方固定历史保留。
+
 **2026-10-09 10:05:35 UTC／北京时间2026-10-09 18:05:35：7d普通Host因错误业务计划停止，auto诊断正例尚未泛化。**
 
 最新开发／报告父7d722d5；b89 auto两输入3tool_calls／3055known、纯保存none＋CURRENT

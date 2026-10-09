@@ -11,6 +11,74 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 模式配对已闭合，声明语义仍失败：2026-10-09 10:49:41 UTC／北京时间2026-10-09 18:49:41
+
+本段是最新固定观察，下方历史保留。开发、本报告父版本及本轮scope实际冻结源码为
+`01edeaf1c0ee136c2803bf5773ef30833b17a267`；普通Host最后实际运行仍是`7d722d5`，
+没有把新源码回填到旧Host。采样时全部真实任务闭合、无在途；完整
+[post117／118计划](MILAI_POST_117_118_FUNCTION_FIRST_DEVELOPMENT_EXPERIMENT_PLAN.md)
+与六项交付active／incomplete，PR119 open／draft／未合并，Product NO_GO。
+
+### 通用合同减法已经实现，尚无语义修好结论
+
+`01edeaf`使没有实际field_support的工具保留原领域描述和schema，不再接收无关支持示例
+及空System说明；真正的支持字段工具保持原指导。6项直接既有检查、Ruff、相关strict mypy、
+本地实际SDK目录比较通过，0真实HTTP。schema、解析、权限、默认native v8及普通Host
+True／T1、record／dense K10保持。这是输入合同简化，不是新的授权或方法效果证明。
+
+### 原两输入、两模式、各两次固定观察
+
+复用已曝光的纯保存例外与真实预订输入，不补理想旧状态。Scope只有四个范围字段，
+两模式均T1／auto／max8192，actual wire仅enable_thinking不同；每输入／模式预先固定两次，
+第二轮反序，Root逐次执行，不是失败触发的重试。完整原User、领域System与schema相同。
+
+| 模式 | 请求／响应 | known＝charged增量 | 实际正式结果 |
+|---|---:|---:|---|
+| thinking=false | 4 | 4333 | 两次纯保存仍perform；两次真实业务perform |
+| thinking=true | 4 | 9803 | 两次纯保存仍perform；两次真实业务perform |
+| 合计 | 8 | 14136 | 8tool_calls、0length，均形成正式范围输出 |
+
+纯保存要求新增北区活动例外并保留整体安排，没有预订／标签要求；其perform是未获支持的
+业务解释。真实预订的perform符合当前要求，但本包只看scope，未评估具体参数或业务完成。
+全部8actual请求与离线投影一致；Root读全部正式输出及原两User，不使用reasoning草稿、
+不另造数值评分或独立确认。正式输出完整和schema合法均不能抵消该语义失败。
+
+终态CLOSED_SCOPE_MODE_DIAGNOSTIC。**CURRENT、业务、SourceCapture、语义DB／apply、
+embedding、Judge和重试均0**，没有签发具体操作权限或真实业务效果。无新unknown。
+这里只隔离thinking at T1，不复现两模式完整官方推荐采样配置；两个故障选取输入也不估计
+整体准确率、泛化或解码器根因。通用说明删减及增加推理都未在本例建立稳定修复。
+
+### 下一步只改变声明生成任务，不扩架构
+
+现有request_mode已能解析正式JSON正文，但旧current_request_v1缺少v9原请求／续办能力。
+下一候选在同四字段validator、checkpoint、原引用和权限边界上复用该路径，scope生成JSON，
+后续CURRENT仍走现有解析；仅离线开发、0真实调用，默认不变。不增加关键词授权、审核
+Agent、强制非空或重试循环。JSON格式本身不证明语义正确，须由新版本实际验证。
+
+此前6题dense／BM25／交错各两重复的36完整答案，以及record／record_units两重复的24答案
+均已完成：饮品有检索与读取正例，猫题仍池外、部分体育池内未打开；不能继续列为未运行，
+也不能宣布整体方法优势。e663实际12Keep保留旧正文／断言／角色／支持，但新复合条款支持
+和模态仍有缺口。上述旧版本证据与本轮声明诊断分开，不新增生成模型／竞争事实库。
+
+原三故事20消息完整候选尚未完成；01源码的两份声明模式配置仅准备，未选择和运行。
+M277配置也未准入／预测，旧807 FAILED94／225答案不重启或回填。先接好一个正常Host候选，
+再集中自然历史与必要对照，避免每个小改重复五条277轨迹。
+
+### 固定账本及边界
+
+新增第23范围8生成／14136known，合计**1173生成／12226054known＝charged增量，
+781embedding／69490tokens**。连续账本49208requests／223482964known／223759660charged／
+2020111embedding；6generation unknown为历史量，embedding unknown0，无在途、未重置预算
+或增加限额。原子集不重复累计，私有采样publication-observation-20261009-scope-mode-pairs.json和全部正文、gold、HTTP、reasoning、
+数据库、配置、日志均ignored。
+
+实际源码01自身[Fast37916328977](https://github.com/minguselandy/MiLAi/actions/runs/37916328977)
+success、[Full37916328921](https://github.com/minguselandy/MiLAi/actions/runs/37916328921)
+skipped；本报告CI另核，不借其他提交，不称Full21/21或语义通过。
+同版五方法各277、native／drift／recovery／消融／紧预算、最终冻结后的16保留用户、外部28／
+1354与旧10答案审计／三个适配器、最终Host135／192及新故事、六交付均未完成。保留无效
+标签、机会／valid分母和Root／同家族Judge非独立性；五主线和一个MemoryService继续有效。
+
 ## 请求生成与普通Host复核：2026-10-09 10:05:35 UTC／北京时间2026-10-09 18:05:35
 
 本段覆盖旧“当前”描述，固定历史和首次失败保留。最新开发、本报告父版本及本轮Host实际
