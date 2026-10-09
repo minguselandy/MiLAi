@@ -26,9 +26,13 @@ Explicit save-only misclassified as business continuation: no authorized memory 
 only semantic r3 retraction before length, zero nativeforget calls; sources/history still visible.
 Correction valid forget revoked1record/9sources but initial unformed Source stays visible; no full-pass claim.
 Live-only e41787a fixes these two forget receipts; new SQLite check passes, NOT in frozen experiment.
-Prefix8 same frozen version RUNNING18:14 UTC/PID667365/session79899:32sessions/73QA/72updates;
-root prefix8-1cfb400-v2/M, runtime prefix8-1cfb400-runtime-v2. Collect predictions then unified original
-score; no simultaneous models/Judge. Inspect actual terminal+PID before dispatch.
+Prefix8 same frozen version prediction CLOSED, reconciled19:19 UTC:32sessions/73answers/72updates,
+no known readonly missing;23maintenance completed/9incomplete,82unique confirmed commits.
+237gen/2159360 known=charged,214emb/36847tokens,237stop,newunknown0;historicalunknown6/0 unchanged.
+Score now RUNNING/PID911285/session32765, same config and immutable source-1cfb400;
+root prefix8-1cfb400-v2/M, runtime prefix8-1cfb400-runtime-v2. Original full aggregate preserved in
+predictions-frozen-before-score.json; individual checkpoints unchanged. Unified original Judge only,
+no Writer/Reader redo or simultaneous models. Inspect actual terminal+PID before dispatch.
 Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.
 Historical observations below are fixed snapshots; inspect actual PID/lease/terminal before dispatch.
 

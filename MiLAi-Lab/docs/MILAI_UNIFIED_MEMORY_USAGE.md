@@ -8,7 +8,9 @@
 确认仅这两次属于写入前无效果拒绝，原STOPPED结果保持原样。18:04:32 UTC启动单独补充运行，
 仅处理尚未尝试的7条新输入，仍使用同一冻结源码，已于18:11:41 UTC闭合：5 COMPLETED、2 FAILED。
 原20条输入各尝试一次，分段总计18 COMPLETED、2 FAILED。四用户前缀M于18:14 UTC启动，
-PID667365，源码仍为`1cfb400`，输出`artifacts/global-function-first/prefix8-1cfb400-v2/M`，尚未闭合。
+19:19 UTC已核对预测闭合：32/32会话、73/73回答、72原生更新机会，无已知只读缺答。
+源码仍为`1cfb400`，输出`artifacts/global-function-first/prefix8-1cfb400-v2/M`；
+统一原Judge评分已启动，PID911285/session32765，配置不变，不重做Writer或Reader。
 实际结果位于 ignored `artifacts/global-function-first/host20-1cfb400-v2`，原运行与补充运行
 各自保留execution/results/accounting；调度前核对实际终态与PID。
 旧失败、费用和历次运行观察完整保留在[历史状态页](MILAI_UNIFIED_MEMORY_USAGE_HISTORY_THROUGH_20261009.md)，
@@ -110,13 +112,17 @@ Ruff、依赖边界及旧八事项真实模板复算通过。没有把重复检�
 
 ## 下一项工作与仍未完成范围
 
-原三链20输入及两段成本已核对，实际限制、原恢复control与失败均保留。先闭合四用户前缀预测，
-再使用原评分入口统一评分；当前未运行Judge，没有方法优势结论。
+原三链20输入及两段成本已核对，实际限制、原恢复control与失败均保留。四用户前缀预测已闭合，
+逐响应与固定账本核对为237生成/2159360 known=charged、214 embedding/36847tokens；
+237响应均stop，Reader峰值输入28778，新unknown0，原历史unknown6/0不变。
+32份维护结果为23 completed/9 incomplete，82去重实际提交、12拒绝，普通语义失败保留。
+全部32会话/73回答及逐题检查点先保存，另备份完整aggregate；当前使用原评分入口统一Judge，
+其费用单独核对，未闭合分数不构成方法优势结论。
 工程错误与普通语义失败分别定位；unknown HTTP、未知写入/业务效果和 Store 故障停止相关路径，
 不盲重试。新 benchmark 预先声明按题保存成功及已知只读缺答，缺答保留在全部机会分母。
 
-四开发用户前8会话正在从各自空库形成，实际分母为32会话/73QA/72原生更新；
-预测全部收集后统一评分，不用于跨版本排名。最终仍需同版五方法各277会话（合计1385）、
+四开发用户前8会话已从各自空库形成，实际分母为32会话/73QA/72原生更新；
+当前统一评分，不用于跨版本排名。最终仍需同版五方法各277会话（合计1385）、
 原 native32/12会话/4用户、drift/recovery、必要 M 消融与紧预算、最终冻结后的16保留用户、
 LongMemEval、RawRAG/RollingSummary/A-MEM真实适配，以及 Host135case/192message 和新故事。
 六项最终交付和方法选择均未完成，Product 仍为 NO_GO。工程可用、模型语义与科研优势分开判断。
