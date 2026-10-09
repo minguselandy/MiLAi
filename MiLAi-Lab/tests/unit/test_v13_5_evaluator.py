@@ -229,6 +229,67 @@ def test_retained_agent_answer_requires_original_http_and_delivery(
     assert (linkage["status"] == "PASS") is (fault == "none")
     assert pack["acceptance_evidence_complete"] is (fault == "none")
     assert pack["semantic_verdict"] == "UNREVIEWED"
+    if fault == "none":
+        # Current Host records whether real query receipts were appended. False
+        # preserves the original HTTP contract, including the delivery trace.
+        metadata["observation_receipts_appended"] = False
+        delivery["observation_receipts_appended"] = False
+        save(bank / f"{identity}-attempt-0.json", row)
+        save(bank / f"{identity}-result.json", row)
+        trace.write_text("".join(json.dumps(e) + "\n" for e in events))
+        current = EVAL.evaluate(root, cohort="L2")["case_packs"][0]
+        assert current["acceptance_evidence_complete"] is True
+        assert current["semantic_verdict"] == "UNREVIEWED"
+        metadata["observation_receipts_appended"] = True
+        delivery["observation_receipts_appended"] = True
+        save(bank / f"{identity}-attempt-0.json", row)
+        save(bank / f"{identity}-result.json", row)
+        trace.write_text("".join(json.dumps(e) + "\n" for e in events))
+        appended = EVAL.evaluate(root, cohort="L2")["case_packs"][0]
+        assert appended["acceptance_evidence_complete"] is False
+        unlinked = appended["messages"][0]["attempts"][0]["actual_http_linkage"]
+        assert unlinked["status"] == "UNKNOWN"
+        assert unlinked["actual_http"] == {
+            "status": "UNKNOWN", "reason": "missing_execution_candidate_answer"}
+
+        # Link the original HTTP candidate separately from the complete captured
+        # public answer. Capturing the suffix does not validate its meaning.
+        text = "Saved.\n\nCurrent query receipt: not_found."
+        freeze["run_id"] = "run"
+        identity_parts = [["functional", "run", row["bank"], row["owner"]],
+                          row["session"], row["message_id"] + ":final", "assistant"]
+        ref = "src-" + EVAL.text_hash(json.dumps(identity_parts, ensure_ascii=False,
+            sort_keys=True, separators=(",", ":"), allow_nan=False))
+        row.update(execution_candidate_answer="Saved.", final_answer=text,
+            final_capture=dict(ok=True, source_ref=ref),
+            messages=[dict(type="ai", content="Saved."), dict(type="ai", content=text)])
+        row["sources"].append(dict(event_id=ref, owner=row["owner"], session=row["session"],
+            role="assistant", origin="public_assistant_message", content=text,
+            content_sha256=EVAL.text_hash(text)))
+        delivery["final_text_sha256"] = EVAL.text_hash(text)
+        save(root / "input-freeze.json", freeze)
+        save(bank / f"{identity}-attempt-0.json", row)
+        save(bank / f"{identity}-result.json", row)
+        trace.write_text("".join(json.dumps(e) + "\n" for e in events))
+        linked_pack = EVAL.evaluate(root, cohort="L2")["case_packs"][0]
+        linked = linked_pack["messages"][0]["attempts"][0]["actual_http_linkage"]
+        assert linked_pack["acceptance_evidence_complete"] is True
+        assert linked_pack["semantic_verdict"] == "UNREVIEWED"
+        assert linked["status"] == linked["actual_http"]["status"] == "PASS"
+        assert linked["captured_public_delivery"]["status"] == "PASS"
+        assert linked["candidate_retained"] is True
+        assert "UNREVIEWED" in linked["limitation"]
+        assert EVAL.final_linkage(text, events)["status"] == "UNKNOWN"
+        missing_candidate = dict(row)
+        missing_candidate.pop("execution_candidate_answer")
+        assert EVAL.retained_agent_final_linkage(
+            missing_candidate, events, freeze)["status"] == "UNKNOWN"
+        assert EVAL.retained_agent_final_linkage(row, [delivery], freeze)["status"] == "UNKNOWN"
+        assert EVAL.retained_agent_final_linkage(row, events[:-1], freeze)["status"] == "FAIL"
+        assert EVAL.retained_agent_final_linkage(
+            dict(row, sources=[]), events, freeze)["status"] == "FAIL"
+        assert EVAL.retained_agent_final_linkage(
+            dict(row, execution_candidate_answer=text), events, freeze)["status"] == "FAIL"
 
 
 def test_resumed_failure_is_retained_and_latest_not_double_charged(tmp_path: Path) -> None:

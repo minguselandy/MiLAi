@@ -84,6 +84,7 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
     """Quote already delivered, visibility-filtered record parts without new reads."""
     calls: dict[str, str] = {}
     items: list[dict[str, Any]] = []
+    omitted_record_body = False
     for message in messages:
         if isinstance(message, AIMessage):
             for call in message.tool_calls:
@@ -101,6 +102,12 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
             if (isinstance(packet, dict) and packet.get("schema") == "functional_material_v1"
                     and packet.get("ok") is not False):
                 items.extend(packet.get("items", []))
+                omitted_record_body |= any(
+                    unit.get("type") == "record"
+                    and unit.get("reason") == "unit_exceeds_material_limit"
+                    and unit.get("snapshot_body_delivered") is False
+                    for unit in packet.get("skipped_units", [])
+                )
     if material.get("schema") == "functional_material_v1":
         items.extend(material.get("items", []))
     lines = []
@@ -126,12 +133,17 @@ def _saved_content_lines(messages: list[Any], material: dict[str, Any]) -> list[
         remaining -= len(excerpt)
         if remaining == 0:
             break
+    if omitted_record_body:
+        lines.append("部分保存内容因读取材料额度未送达; 未读到不表示未保存。")
     return lines
 
 
 def business_response(
     messages: list[Any], effects: dict[str, Any], material: dict[str, Any],
     *, execution_stop: dict[str, Any] | None = None,
+    current_mode: dict[str, Any] | None = None,
+    include_business: bool = True,
+    include_memory_feedback: bool = True,
 ) -> AIMessage:
     """Use matched delivered receipts and current-message journal identities only."""
     business = effects["business"]
@@ -163,13 +175,14 @@ def business_response(
             source_refs.add(body.get("source_ref", ""))
             targets.update((k, receipt[k]) for k in ("item_key", "title")
                            if isinstance(receipt.get(k), str))
-    paragraphs = ["本轮业务结果: " + _STATUS.get(business["status"], business["status"]) +
-                  "。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。"]
+    paragraphs = (["本轮业务结果: " + _STATUS.get(business["status"], business["status"]) +
+                   "。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。"]
+                  if include_business else [])
     for name, receipt in receipts:
         paragraphs.append(_TOOLS[name] + ": \n\n" + "\n".join(
             "- " + line for line in _receipt_lines(receipt)))
-    if not receipts:
-        paragraphs.append("本轮没有可交付的业务结果回执; 不能确认所请求的业务已完成。")
+    if include_business and not receipts:
+        paragraphs.append("本轮未取得新的业务回执。")
     historical = set()
     for unit in material.get("items", []):
         ref = unit.get("source_ref")
@@ -185,12 +198,24 @@ def business_response(
         historical.add(ref)
         paragraphs.append("历史原始回执 (不代表当前状态): \n\n" + "\n".join(
             "- " + line for line in _receipt_lines(old)))
+    if not include_memory_feedback:
+        return AIMessage(content="\n\n".join(paragraphs))
     saved_content = _saved_content_lines(messages, material)
     paragraphs.extend(saved_content)
     if saved_content and not effects.get("application_requests"):
         paragraphs.append("原请求是否已全部完成尚未核对。")
     semantic = effects["semantic_memory"]
-    paragraphs.append("本轮语义记忆: " + _STATUS.get(semantic["status"], semantic["status"]) + "。")
+    paragraphs.append("本轮语义记忆: " + _STATUS.get(semantic["status"], semantic["status"])
+                      + "。这里只报告列出的回执, 不确认全部请求或语义覆盖。")
+    if current_mode is not None:
+        allowed = current_mode["allow_memory_maintenance"]
+        paragraphs.append("本轮保存许可: " + ("当前允许记忆维护" if allowed
+                                               else "当前未获允许") + "。")
+        if allowed and semantic["status"] in {"not_committed", "partial", "unknown"}:
+            if semantic["operations"]:
+                paragraphs.append("本轮已尝试记忆维护; 列出的未提交或未知结果不能确认保存成功。")
+            else:
+                paragraphs.append("本轮没有可确认的记忆维护尝试回执, 尚不能确认保存完成。")
     for operation in semantic["operations"]:
         paragraphs.append("记忆操作: " + _text({k: operation[k] for k in (
             "tool", "id", "revision", "status") if k in operation}))
@@ -212,11 +237,16 @@ def business_response(
         }
         business_status = request["business"]["status"]
         execution_status = request["business"]["execution"]["status"]
-        memory_status = request["memory"].get("current_permission", request["memory"]["status"])
+        memory_status = request["memory"]["status"]
+        permission = request["memory"].get("current_permission")
+        if current_mode is not None:
+            permission = ("当前允许记忆维护" if current_mode["allow_memory_maintenance"]
+                          else "not_authorized_current_request")
         feedback_status = request["feedback"]["status"]
         paragraphs.append("原请求进度: 业务" + labels.get(business_status, business_status)
             + "; 本次执行" + labels.get(execution_status, execution_status)
             + "; 实际结果保存" + labels.get(memory_status, memory_status)
+            + ("; 保存许可" + labels.get(permission, permission) if permission else "")
             + "; 反馈" + labels.get(feedback_status, feedback_status)
             + "。回执进度与语义正确性分别记录。")
     for number, operation in enumerate(effects.get("visibility", {}).get("operations", []), 1):

@@ -1,5 +1,376 @@
 # MiLAi Lab 当前状态
 
+**2026-10-09 14:33:01 UTC／北京时间22:33:01：M已容量FAILED，当前无真实模型runner。**
+
+实际冻结36b，session24661 exit1／PID4170100不存在；21/277完整预测46答案，另2Reader响应，
+final Reader共48。原21qa2选择8/10后32446输入超32256，在最终HTTP前失败；没有该Reader响应。
+维护22文件=17completed＋5incomplete、43提交／6拒绝，无Judge／评分／方法排名。Root读全部48
+完整正式自然Reader答案，不是数值重评分或独立确认；原语义问题及无效标签不删除。
+
+最新开发409的导航与fef／f8 Host修复不回填36。f8分页投影只进入普通Host，未进入benchmark
+_answer_view，M容量修复尚未完成。409原三链20完成CLI prepare，0真实Host消息／HTTP；只准备，
+不依据旧PID或下面运行中快照重启。报告更新不改算法、配置、权限或实验输入。
+
+闭合成本固定14:29:46：M162stop／1748782known＝charged、140encoder／18648；累计29范围
+1539生成／15845012known、990encoder／92258。全局49574requests／227101922known／227378618
+charged／2042879emb，历史unknown6／0、新unknown／Judge0、limits不变，无在途。
+25ce747自身Fast仍in_progress／Full skipped（14:33:01）；新报告CI另核。PR119 open／draft／未合并。
+全任务／六交付active／incomplete，ProductNO_GO。详见[闭合事实与后续范围](MILAI_UNIFIED_MEMORY_USAGE.md)。
+下方固定历史保持。
+
+**2026-10-09 14:21:38 UTC／北京时间22:21:38：集中M仍运行，早期语义断点已分层定位。**
+
+实际冻结36b；固定21/277预测、46完整答案，[21,0,0,0]，维护21文件中17completed／4incomplete，
+无预测终态／Judge／其他方法。PID4170100、session24661，先核对实际状态，不重启或热改。
+Root已读首用户原0–20全部46答案；有限原件复核确认池内未打开身份、Extractor语气强化、
+旧来源错误撤销被拒和最终Reader补出未知姓名成分。无新数值重评分／独立确认。
+
+最新开发4099839为record_units目录增加实际获胜whole-key摘录，最多240字符；不增加编码、
+改变keys／cosine排序／K10或完整读取，不猜unit／别名，不改默认record，0真实效果且不在M36。
+直接检查／Ruff／相关mypy／真实本地模板及Root一个SQLite完整读取流程通过。
+闭合成本仍固定13:36:10的28范围，M在途不混入；b9报告自身Fast成功、Full skipped，新头CI另核。
+新Host三链20仅离线准备，待Root串行资源释放；完整五方法／最终保留外部Host／六交付未完成，
+PR119 open／draft／未合并，ProductNO_GO。详见[当前结果与版本](MILAI_UNIFIED_MEMORY_USAGE.md)。
+下方固定历史保留。
+
+**2026-10-09 13:47:26 UTC／北京时间21:47:26：新M集中运行中；业务六消息和导航／模式诊断闭合。**
+
+实际M与业务冻结36b；最新开发f8fb3ac含fef CURRENT空动作合同和新读取／遗漏反馈，不回填36。
+M独立record_units／staged／EditFalse1、四用户277（65包含其中），已保存4预测／9完整答案，
+无预测终态／Judge／其他方法；PID4170100，session24661只作参考，继续前读实际终态，不重启。
+业务六消息5执行完成＋1CURRENT失败，实际恰一次预订和一次补标签；补存未完成。r3主单元
+11711>8192被跳过，回答误作未保存；后续读取修复只离线两页验证，0新真实Host效果。
+遗忘前实际提交r4（不能凭最终maintenance=[]判零），再撤回1记录／4Sources，末条零可见无恢复，
+仍有从未保存措辞错误。模式8JSON均stop但extra维护／历史原失败保留；导航24完整答案无稳定优势。
+
+28闭合成本固定13:36:10：1377生成14096230known、850emb73610；账本49412／225353140known／
+225629836charged／2024231emb，历史unknown6／0、新Judge／unknown0。M之后在途不混入闭合表。
+Root读六Host全部正式语义和完整自然／final、24导航答案、8scope正式输出；M仅session0三答案已读。
+新源直接检查通过不代表方法通过；PR119 open／draft／未合并。最终候选、五方法、保留／外部／
+完整Host与六交付未完成，ProductNO_GO。详见[当前结果与方法反思](MILAI_UNIFIED_MEMORY_USAGE.md)。
+下方固定历史保留。
+
+**2026-10-09 12:12:11 UTC／北京时间2026-10-09 20:12:11：E三故事20全部尝试，18执行完成＋2声明截断，语义仍失败。**
+
+实际冻结e0f6119；后续开发／报告父dad79e7（efc的False JSON接线、513 unit Keep合同、dad
+导航均不在E内）。业务仅一次预订及一次补标签；原保存续办进入维护并提交r5，但仍错误
+写预订失败。只读／遗忘分类正式JSON重复空白length，遗忘未执行，最后重开实际仍可读。
+规则两天更正被拒、当前仍一天，季度绝对范围生成错误；实际time_context_unresolved不是过期。
+首6两事项及重开来源有正例，合法撤销／保存历史／规则遗忘有实效，不能称18语义通过。
+
+E102生成／970730known、56embedding／3221，10提交（4新建6修订）／1拒绝／1可见性撤回；
+25非重叠1279生成／13206698known、837embedding／72711。固定账本49314请求／224463608
+known／224740304charged／2023332embedding，历史unknown6／0、新Judge／unknown0，无在途。
+Root读20所有形成的完整自然答案和正式语义内容，重复空白仅验证计数；旧807全部225答案
+现已读完，未重评分、未回填或独立确认。dad导航仅工程0真实QA、默认record保持。
+三链执行收尾不是完整任务完成：M277准备未运行，最终保留／外部／Host及六交付仍未完成。
+PR119 open／draft／未合并，ProductNO_GO。详见[正式结果与源码边界](MILAI_UNIFIED_MEMORY_USAGE.md)。
+下方固定历史保留。
+
+**2026-10-09 10:49:41 UTC／北京时间2026-10-09 18:49:41：01声明模式配对闭合，纯保存语义误判仍在。**
+
+开发／报告父与scope实际源01edeaf；最后Host仍7d，旧运行不回填。两输入／两模式／各两次，
+8tool_calls、0length／14136known，False4333、True9803；纯保存两模式均perform。
+0CURRENT／业务／SourceCapture／语义DB／embedding／Judge／重试／新unknown。
+Root读全部正式输出，未独立评分；JSON正文候选仅离线开发，不改变默认或权限。
+
+23范围1173生成／12226054known、781emb69490；连续账本49208／223482964known／
+223759660charged／2020111embedding，历史unknown6／0、无在途。01自身Fast成功／Full skipped；
+三链20、M277、最终保留／外部／Host及六交付未完成，ProductNO_GO。
+详见[最新正式结果与边界](MILAI_UNIFIED_MEMORY_USAGE.md)。下方固定历史保留。
+
+**2026-10-09 10:05:35 UTC／北京时间2026-10-09 18:05:35：7d普通Host因错误业务计划停止，auto诊断正例尚未泛化。**
+
+最新开发／报告父7d722d5；b89 auto两输入3tool_calls／3055known、纯保存none＋CURRENT
+NOT_NEEDED，与7d实际Host两消息不同。7d m0规则已保存；m1scope perform＋虚构计划，实际
+0reserve／label、2query，旧r1完整value保持，新例外卡带无依据per_member。Root读全部13正式
+生成和两完整自然反馈，m2前停止。终态2执行COMPLETED／12NOT_RUN；独立原首链6与M277
+仅准备，三故事20尚未完成。无数值重评分／独立确认或效果准入。
+
+7d Host13生成／104244known（7stop6tool_calls0length）、8emb325；22范围1165／12211918、
+781emb69490；连续账本49200／223468828known／223745524charged／2020111embedding。
+新Judge／unknown0，历史unknown6／0，本固定采样无在途。7d自身Fast37913477253 success、
+Full37913477240 skipped。额外shape包装已定位，只作离线合同减法，未回填实际成绩。
+完整六交付active／incomplete，16保留用户语义未用，无最终候选／ProductNO_GO。
+详见[最新正式结果与边界](MILAI_UNIFIED_MEMORY_USAGE.md)。以下固定历史保持。
+
+**2026-10-09 08:38:00 UTC／北京时间2026-10-09 16:38:00：开发1416，可选v9真实四次正常输出闭合，纯保存P0仍未解决。**
+
+原两个User输入、false／T0／8192，逐阶段执行：纯保存scope错perform，CURRENT又编造
+业务计划且结构许可true；真实业务scope及字面参数正确。4请求／4响应均tool_calls，
+3595known＝charged，无业务、SourceCapture、DB／apply、encoder或Judge、新unknown0。
+5项正常SQLite／合成流程、Ruff／strict mypy通过，默认v8及旧缓存保持；不是语义通过。
+新原规则8＋业务6仅request_mode切v9，14NOT_RUN，runtime为空；M277未启动。
+
+17范围1131生成／12045911known＝charged、766embedding／68774tokens；连续账本49166／
+223302821known／223579517charged／2019395embedding，6历史unknown，本固定采样无在途。
+1416自身Fast37903023943 success、Full37903023927 skipped，新报告CI单独核对。
+完整六交付active／incomplete、16保留用户语义未用、无最终候选／ProductNO_GO。
+详见[最新正式结果及剩余范围](MILAI_UNIFIED_MEMORY_USAGE.md)。以下固定历史保留。
+
+**2026-10-09 07:47:12 UTC／北京时间2026-10-09 15:47:12：开发08ce，纯保存业务P0与新增后删除已定位，有限生成诊断闭合。**
+
+d754新Host9执行COMPLETED后因未要求预订／标签停止，11NOT_RUN；首6两事项保存与只读完整值
+保持有正例。北区例外第一Editor已写r2、第二r3仍有，第三才删除；最终r4单位／关系等于r1。
+删除所引用是真实User新增要求，不是假来源；结构合法与含义正确分开，不称9条语义通过。
+08ce明确外部业务范围，但false／T0仍误分类纯保存；true／T0两次length无正式分类，true／T1：
+纯保存仍length且无正式分类；真实预订tool_calls及字面参数正确，未执行业务。诊断无业务／SourceCapture／DB／encoder／Judge；T1首驱动0HTTP拒绝保留。
+新14消息规则／业务Host仅PREPARED，既有声明inherit／inherit，edit=false，其余原样；M277未启动。
+
+16范围1,127生成／12,042,316known＝charged、766embedding／68774tokens；全局49,162请求／
+223,299,226known／223,575,922charged／2,019,395embedding，6历史unknown，当前无在途。
+08ce自身Fast37899091260 success、Full37899091248 skipped，新报告CI另核。原Keep／检索有限正例与旧负结果保持。
+完整六交付active／incomplete、16保留用户语义未用、无最终候选／ProductNO_GO；不因没有
+模型进程暂停任务。详见[完整事实、版本和剩余范围](MILAI_UNIFIED_MEMORY_USAGE.md)。以下历史保留。
+
+**2026-10-09 06:33:18 UTC／北京时间2026-10-09 14:33:18：开发d754，12个非重叠诊断范围闭合，下一Host候选准备。**
+
+六题两检索粒度／两重复共24完整答案已闭合，饮品一题有实际召回与读取正例，猫题仍漏；
+默认record／dense K10保持。b209同来源元数据继承让旧容量输入35092→31518，一次独立Reader
+完成；807原FAILED94/277及225答案不回填。760 B0重抄旧文、keep0、缺支持拒绝；新e663真实
+声明12Keep／三重写全部提交，保留语义字段一致、29整个事项不变，但新条款支持缺口／模态强化
+仍存在。全量重写重新建立unit ID，不将ID不同认成语义损坏，也不自动补回模型遗漏旧单元。
+
+760三故事20消息只尝试17：16COMPLETED、1FAILED、3NOT_RUN；不是语义通过率。
+规则保存错误触发未要求的业务，分类引用去routing元数据只是候选修复。业务链m2实际r3→r4
+补存成功／无重复业务，最后Host58870>56832在HTTP前FAILED，没有自然答案。d754只对模型
+effects引用重复子回执，原件全保留，离线降52850；真实效果待新独立三链20验证，edit=false
+为显式候选、不换默认、不作单因素模式优势。固定采样尚无新模型执行。
+
+12项合计1083生成／11,721,738 known＝charged、739embedding／67,601tokens，Judge0／
+新unknown0；全局49,118请求／222,978,648known／223,255,344charged／2,018,222embedding，
+6历史unknown、无真实runner／在途。760自身Fast成功、Full skipped；新源码／报告CI另核。
+Root完整阅读新增24＋1答案／2提案／16Host反馈，未数值重评或独立审计全部私有原件。
+完整五方法277／16保留／native／外部／Host135/192和六交付仍active／incomplete，ProductNO_GO。
+详见[完整结果、源码与剩余范围](MILAI_UNIFIED_MEMORY_USAGE.md)。以下旧当前均为固定历史。
+
+**2026-10-09 05:02:06 UTC／北京时间2026-10-09 13:02:06：集中复核已闭合，开发11cebbf，全部已知真实任务退出。**
+
+当前源码含可选整事项＋单元检索键、extract／edit／reader阶段thinking与实际容量接线，以及
+适配器实际查询ToolMessage交付修复；默认record／thinking／K10及原公开配置未改。
+807长历史B0 FAILED／exit1，94/277会话、225完整答案；其余四法未开始，无新Judge／总分。
+第一用户65／164QA是94及277子集，Root读全部164答案，第二用户61答案尚未全部复核。
+Reader2e31三池36完整答案、72生成已闭合；两失败输入thinking8次均stop，原截断未复现。
+2e31三故事20消息为15COMPLETED／1FAILED／4NOT_RUN，纯记忆分类及只补保存仍有断点。
+
+11ce独立六消息补存链执行闭合，实际r3→r4更新已有Tool单元，三User单元全部字段不变；
+一次预订／一次实际标签，重开读到全部四单元及实际查询。原应用请求结构完成，但维护汇总
+仍1completed＋2incomplete:start；遗忘后最后回答误称“从未保存”、未用可用业务查询。
+f097多键六题只做编码排名，一饮品进入K10、猫未补回，无新QA。B0两次36,220 tokens均stop，
+9creates／records空；首次驱动漏来源边界全部拒，新副本同formal离线9提交成功、0HTTP。
+没有rewrite／keep，引用保留合同的真实效果仍未验证；这些结果不拼为方法排名或正确率。
+新建条款另核来源属性均匹配，仍有模态强化及具体计划漏写；旧候选强化与新正式输出分开。
+
+七项闭合范围939生成／10,349,676 known=charged，689 embedding／65,095 tokens，Judge0／
+新unknown0；全局48,974请求／221,606,586 known／221,883,282 charged／2,015,716 embedding，
+generation unknown6历史、encoder0，无在途。直接相关检查通过；新增提交CI推送后另核，
+不借1dd Fast成功／Full skipped。完整六交付active／incomplete，16语义未用，无最终候选／
+稳定优势／Product准入。详见[完整结果、入口与未完成范围](MILAI_UNIFIED_MEMORY_USAGE.md)。
+下方00:41与较早记录是固定历史，本次发布不暂停或完成原任务。
+
+**2026-10-09 00:41:51 UTC／北京时间08:41:51：实际807 B0 62/277，156完整答案，尚无评分。**
+
+固定采样PID1579386/session20792仍运行；B1／B2／M／Append-only未开始，无arm／suite终态。
+五法各自277独立历史，首用户65为子集。已保存原0–60加62，原61时间顺序在62之后，不能
+记漏跑；原60实际零QA。Root读全部156完整自然答案，原件仅选定复核，无数值重评或独立确认。
+开发源码仍2e31，与实际冻结807分开。原57电影r4已保存，qa0却在K10外，另两题完整送达；
+其他维护空提案、拒绝及Assistant归属错误分别保留，保存预测不等于维护／语义成功。
+
+本轮前缀503生成均stop／5,522,005 known=charged增量，409 embedding／34,639，
+Judge0、新unknown0，采样时无在途；全局48,538请求／216,778,915 known／217,055,611 charged／
+1,985,260 embedding，6项unknown均历史量，差额已核。旧20:42成本保持为历史。268保存16
+会话评分闭合（更新15/34 valid31、QA22/32 valid29），807 Host十次执行闭合但原保存仍pending，
+均不混为当前五方法效果。Reader六题三池两重复、Host2e31三链20及固定8 Editor均准备而未执行。
+父2a1自身Fast 8成功／4skip、Full skipped，本次报告CI另核。只更新四文档，完整六交付仍
+active／incomplete、16用户语义未用、无最终候选／Product NO_GO；本次发布不暂停任务。
+详见[完整实验汇总与版本边界](MILAI_UNIFIED_MEMORY_USAGE.md)，下方固定历史保留。
+
+**2026-10-08 23:29:44 UTC／北京时间2026-10-09 07:29:44：实际807 B0 54/277，开发2e31复核准备。**
+
+PID1579386/session20792仍运行，135完整答案，其余四法未开始，无终态／Judge。Root读
+原0–53全部135答案，无数值重评；原47／52近期事项已保存却在相关K10外。原49严格保留
+改文拒绝、Assistant精确值归属、原51空提案与52当前健康漏写分别保留；当前计划投递有
+正例，不记语义全部通过。Reader六题三池两重复包18池资格／72模板容纳已核，真实比较0；
+独立2e31 Host v1三链18、v2三链20 prepare均完成，v2补同链规则遗忘／重开，0HTTP／DB。
+原990及18消息准备保留，不替代最终Host回归。临时Reader资格库有写入、原库只读；
+prepare账本在途，成本仍固定20:42。父e683自身Fast 8成功／4skip、Full skipped，新报告
+CI另核。完整范围及六交付active／16语义未用／Product NO_GO，详见[当前原件与准备状态](MILAI_UNIFIED_MEMORY_USAGE.md)。
+
+**2026-10-08 22:17:56 UTC／北京时间2026-10-09 06:17:56：实际807 B0 44/277，离线检索对照闭合。**
+
+开发源码仍2e31；实际PID1579386仍运行，其他四法未开始，无arm／suite终态／Judge。
+Root读原0–43全部113答案，无新评分。Agent C实际43会话／109题固定BM25／普通交错K10
+离线对照0HTTP／DB，体育／饮品可达性有局部改变，猫病例未解决；无实际Reader效果，
+不改dense默认或运行配置。Root核公式和计数；父报告836自身Fast成功（8成功／4skip），
+Full skipped，本报告提交CI另核。成本仍固定20:42，完整范围及六交付active／16语义未用／
+Product NO_GO。详见[有限机制结果与实时观察边界](MILAI_UNIFIED_MEMORY_USAGE.md)。历史保持。
+
+**2026-10-08 21:56:50 UTC／北京时间2026-10-09 05:56:50：开发2e31f28，实际807 B0 42/277。**
+
+新B0保留旧keep不再生成正文，新正文选source_evidence；旧解码、B2、creates及局部编辑保持。
+两既有SQLite流程／Ruff／相关类型通过，真实模板离线渲染通过，0新增HTTP、语义待测。
+原32／37普通查询漏掉已提交的新事项首先在K10池；43原实际向量复算复现两题顺序。
+原25改文无所选e仍拒；原31／35不存在程序expired标记，不改正确时间规则。
+Root读原0–40全部106答案，无数值重评分／独立确认。PID1579386仍运行，其余四法未开始，
+无终态／Judge，未热改或重启。下方20:42成本保持固定；三链18已prepare工程990、0HTTP／DB，
+紧预算仅预选一个input28160、最终身份未绑定。完整范围及六交付active／16语义未用／NO_GO；
+详见[最新实现、检索断点和边界](MILAI_UNIFIED_MEMORY_USAGE.md)。下方固定历史保留。
+
+**2026-10-08 20:59:44 UTC／北京时间2026-10-09 04:59:44：开发9906388，实际807 B0 31/277。**
+
+普通B0/source_metadata新生成省去不参与持久状态的from_unit，显式keep可省text并由程序
+读取实际旧content；来源／归属／改文和旧身份重复检查保持，B2关系合同保持。
+两个既有SQLite流程、Ruff三文件和两个源码strict mypy通过，0真实HTTP；未证明语义收益。
+原24／26拒绝不回填，原18语义遗漏／原19空提案仍未解决。
+
+预测进程PID1579386仍运行，其余四法未开始，无终态／Judge；最新进度不是已评分结果，
+下方成本仍固定20:42。Root读原0–29全部79完整答案，无新评分。新18消息三链仅准备，
+无最终候选／稳定方法优势／Product准入；完整六交付仍active，详见[报告](MILAI_UNIFIED_MEMORY_USAGE.md)。
+
+**2026-10-08 20:42:03 UTC／北京时间2026-10-09 04:42:03：实际807继续，开发fd7支持简化。**
+
+固定B0预测27/277、68完整答案，其余四法未开始，无终态／Judge；PID1579386仍运行。
+219生成均stop／2230044known＝charged差额、182embedding12773；全局48254requests／
+213486954known／213763650charged／1963394embedding，unknown6为历史，采样时无本轮在途。
+不把之后进度归到本快照，不重置账本、不热改807；五条独立277与65子集保持。
+
+fd7a9db在rewrite中复用显式同target旧unit keep支持，减少缺重复字段的误拒；逐字／角色／
+归属／关系、显式[]及改变正文需新e保持。既有SQLite流程、Ruff／源码类型通过，Root真实
+before32事项＋原20同formal离线decode 1提案6units成功，0HTTP/apply；原807拒绝不回填。
+原18已送达旧语义在正式rewrite漏掉，原19候选到达但真实空，二者未修。
+随后原24/26两项绑定拒绝确认是多条新内容重复同一from_unit，且旧关系为空；非keep缺失。
+只核普通B0字段的实际作用，不宽关系身份或改旧结果。
+
+Root随后读原0–26全部68答案，无新评分／独立确认。已送达姓名在原12/13被解释为未声明
+中间名，原22同型输出；原17主体卡未打开、原21正式开始卡未打开。休假首条实际有压力＋
+机会两片段，主来源不是全部支持；completed最早在Extractor候选，尚无确切强化原因。
+不是全部选择失败，
+不以来源合法证明推断。27会话49提交／6拒／1no_change，另2真实空，6batch不完整。
+
+c342自身Fast success（8成功／4skip）／Full skipped，新头另核。原三链18消息新输入包只
+PREPARED/source/output null，0HTTP/DB，复用prepare/step；Root按实际响应区分已知失败与
+未确认传输后停发，不加wrapper。其余native/外部/完整Host等仍待实际执行，16确认未开始，
+六项完整范围active，无最终候选／稳定优势，Product NO_GO。详见[真实断点及成本](MILAI_UNIFIED_MEMORY_USAGE.md)。下方固定历史。
+
+**2026-10-08 20:02:53 UTC：最新开发22335ec，冻结807连续历史继续。**
+
+staged只呈现一次选择预算／能力，state_driven原多轮／目录／DTO保持；既有固定池检查、
+Ruff／类型通过，0HTTP，原两题语义未复测。下段19:57开发中是历史观察，工程状态见本段。
+模型资源仍由冻结807预测占用，不同时另起诊断或Host。发布不表示完整目标完成。
+
+**2026-10-08 19:57:36 UTC／北京时间2026-10-09 03:57:36：同版连续历史运行，最新开发与效果分开。**
+
+实际807 PID1579386／session20792仍运行；固定B0完整14/277、其他方法未开始、无终态／Judge。
+121stop响应1136517known＋1在途、93embedding6563；账本48157requests／212393427known／
+212716288charged／1957184embedding，unknown7为历史6＋在途，预算未重置。首用户65属于277，
+五臂独立历史1385计划未闭合。报告之后检查PID／产物，不按本快照重新启动。
+
+Root读原0–10全部29自然答案、选定原件，无新数值评分。原3正式重写非空，旧条款添加currently
+但未选新e导致整项拒绝；原8活动／原9游戏已在top10却被一次staged排除；原9身份声明已送达，
+不能归为初始姓名漏写。最新807ac24允许明确同单元keep省text，原文由程序保留，变化证据仍需；
+688／849恢复native真实资格与新controlled owner绑定，0HTTP，Native32仍未运行。staged一次能力
+与remaining_reads=11合同错配正开发中，不宣称效果修好。Root3直接检查／Ruff／四源类型通过。
+
+旧807加载器先整行JSON解码未选用户再丢弃，16不能称原字节／解析从未触达；代码数据流未让
+其进入开发owner／Store／模型／评分，非全历史HTTP独立审计。51a未来先选uuid再解码正文，
+不回写历史事实。保留集确认尚未开始。a178自身Fast success／Full skipped，后续CI另核。
+候选对照8调用、规则／遗忘12消息及外部/native/完整Host输入仅准备；无最终候选／稳定优势，
+六项完整交付active，Product NO_GO。详见[当前版本与实际断点](MILAI_UNIFIED_MEMORY_USAGE.md)。下方为固定历史。
+
+**2026-10-08 19:22:33 UTC：Host共同生成schema接线已修，实际五方法仍冻结807。**
+
+最新开发8bf3f23将维护schema沿原invoke/client进入native request，缺省Agent请求保持；
+一个既有SQLite保存→重开流程、真实模板离线渲染／Ruff／相关类型通过，0真实HTTP。
+不证明截断已解决，实际807 Host失败及当前五方法预测不回填／不热改。另两原case12消息
+仅PREPARED／未选source/output，含规则撤销及业务遗忘，不是旧失败尾段。下方为固定观察。
+
+**2026-10-08 19:20:19 UTC／北京时间2026-10-09 03:20:19：Host10闭合，五方法277已启动。**
+
+实际807 Host2链10次execution COMPLETED／driver退出0；补存分类及实际来源已经进入Editor，
+但7361输入／8192输出length、正式null、0提交，r2未同步。业务仅1预订＋1补标签；
+回答如实区分当前已完成与保存旧失败。Root读10答案，无新增数值重评分，追加查询的实际
+candidate HTTP与公开交付两链通过仅为provenance。闭合47生成555572known／27embedding1387，
+新unknown0；闭合账本48035／211256910known／211533606charged，历史unknown6。
+
+同冻结807五方法各277新根 five-methods-four-dev277-807eacb-v1，PID1579386／session20792；
+19:18:56观察B0完整1/277、其余未开始、无终态／Judge，9生成43899known＋1在途。
+Root独占串行资源，不热改／重启；已知最终Reader缺答保留null机会，其他失败仍停止。
+2f5自身Fast失败1旧外层fixture、Full skipped，76d测试仅6样例补creates，2直接通过。
+Host schema未上wire的静态差异独立开发中，未集成／未复跑，不回填807。完整范围／16未用／
+NO_GO保持，详见[实际结果与运行边界](MILAI_UNIFIED_MEMORY_USAGE.md)。下方固定历史。
+
+**2026-10-08 18:55:54 UTC／北京时间2026-10-09 02:55:54：两项有限诊断闭合，新Host运行。**
+
+实际268预测FAILED／16完整预测，saved16同源score闭合，更新15/34(valid31)、QA22/32(valid29)。
+Editor两实际输入×两容器表达×两重复共8生成／180076known，7stop1length；显式容器4提案，
+仍有模态强化／遗漏，0apply／Reader／Judge。Reader两个实际输入presence0／1.5各4调用，
+8stop／17641known，原循环未重现；中间名未知保持、时间措辞仍有问题，不改默认采样。
+新开发及Host冻结807eacb：新生成明返creates/records、两者可空，旧{}解码／inner合同保持；
+6直接检查＋Ruff／相关类型通过，不把提案增多当方法效果。新Host2链10消息18:55:30启动，
+PID1501670／session7180／尚无保存结果或总终态，Root独占串行HTTP，不能按快照重启。
+b88自身Fast失败9旧生成fixture／摘要期望，Lab／external成功、Full skipped；1cbd精确修复
+9直接检查通过，新头CI另核。诊断闭合账本47988／210701338known，Host在途另计。
+五方法各277配置仅准备（65/77/62/73），16未用／完整六交付active／Product NO_GO。
+详见[实际版本、语义反思及下一步](MILAI_UNIFIED_MEMORY_USAGE.md)。下方为固定历史。
+
+**2026-10-08 18:26:47 UTC／北京时间2026-10-09 02:26:47：部分评分闭合，有限诊断准备。**
+
+实际268预测仍FAILED／16完整会话32完整答案；同冻结源码saved16独立score已退出0，
+16/16评估（8／8）、321Judge stop／1121397known、新unknown0／0编码，score终态完成。
+合计更新15/34(valid31)、QA22/32(valid29)，原无效保留，不是完整四用户成绩。新源码a000已另冻：
+局部保留支持继承、Agent HTTP／公开交付分开审计、显式已知Reader length缺答继续策略，
+默认fail-fast／采样保持，直接检查通过／0真实HTTP。正式空输出与语义损坏仍未解决。
+两个各8生成的单因素包、Host10消息输入仅PREPARED；串行lease已释放，Root下一步串行执行，
+不可按此旧快照重启。86 ownFast失败1生成fixture、Lab／external成功、Full skipped；
+683直接修复通过，新头CI另核。PR119 draft，原完整范围／六交付继续，16未用／NO_GO。
+详见[版本、成本与反思](MILAI_UNIFIED_MEMORY_USAGE.md)。下方为固定历史。
+
+**2026-10-08 17:44:06 UTC／北京时间2026-10-09 01:44:06：预测FAILED，已保存部分独立score。**
+
+冻结268四用户prefix8 M staged预测exit1／FAILED，16/32完整预测（8／8／0／0），17维护、
+32完整答案；第三用户首个Reader输入1320／输出32768length，原件保留，不重启或补零。
+预测114生成1087982known／94embedding7490／Judge0／新增unknown0。新根仅对前两用户
+已保存16预测／32答案独立score，PID1218852，从同268源码，无Writer／Reader／encoder重跑；
+本时点Judge响应26、完整评估1/16，无评分终态，不是原32闭合。新fcb去除缺省insufficient
+推断，dcad／8d适配生成fixture与评估合同；合流22直接检查通过，0HTTP，不回填旧CI。
+7fc自身Fast失败（Foundation526通过、10合同／fixture失败），Lab fast／external成功、Full
+skipped；新报告CI另核。PR119 draft，完整任务继续、16未用／Product NO_GO。详见
+[失败、部分范围与版本边界](MILAI_UNIFIED_MEMORY_USAGE.md)。下方均为固定历史。
+
+**2026-10-08 17:17:53 UTC／北京时间2026-10-09 01:17:53：冻结集中诊断运行中。**
+
+268 M／staged／四开发用户前八会话predict已于16:49:21启动，PID1021934；11/32完整预测
+（8／3／0／0）、11维护、29QA响应，Judge0／无终态。新轨迹仍有正式空Editor；无数值效果
+结论。开发源码8cf／测试b342加入证据片段字段及问答附查询回执，直接工程检查通过，不热改
+实际268。268 ownFast37811162750失败（Foundation535通过、1旧调用计数），Full skipped；
+d49直接修正通过，新报告CI另核验。闭合0dd与在途成本分开，PR119 open draft；完整计划
+active、16未用、Product NO_GO。详见[运行与版本边界](MILAI_UNIFIED_MEMORY_USAGE.md)。
+下方固定历史不用于重新调度。
+
+**2026-10-08 16:45:00 UTC／北京时间2026-10-09 00:45:00：首轮功能诊断闭合，修正后准备集中诊断。**
+
+实际0dd三条既有链17/18执行：16 COMPLETED、1遗忘FAILED、1 NOT_RUN；Source／正式输出／
+状态与最终交付分开。业务仅1预订＋1补标签；例外schema拒、更正借旧证据、撤销Extractor
+length、结果补存Source未进维护、renderer遮蔽及遗忘Host length仍保留，不是16语义通过。
+91生成1149094known／44embedding1652，Judge0／新增unknown0；账本47537／208294242known／
+208570938charged／embed1941744／历史unknown6，无真实runner。新开发268已另冻：SDK归组、
+前绑定、统一replace旧名兼容、实际请求观察接入维护及失败反馈已直接检查，尚未真实复跑。
+268四开发prefix8 M staged配置已准备，无新预测／评分；Host两项专属变化不归此benchmark。
+PR119 open draft；268 ownFast37811162750在跑／Full37811162730 skipped，不借CI。详见
+[首轮事实、正常入口与后续范围](MILAI_UNIFIED_MEMORY_USAGE.md)。完整计划执行中，16未用于开发、
+无最终候选／Product NO_GO；下方保留原固定历史。
+
+**2026-10-08 16:02:17 UTC／北京时间2026-10-09 00:02:17：功能优先完整计划执行中。**
+
+PR118已合并main518（aad own Fast成功／Full skipped，main own Fast成功）；Root＋三独立
+开发agent已合流范围／纯记忆待办、真实字段结果维护、局部编辑生成合同、历史导航／读取解释、
+当前反馈及运行目录／事务清理。新普通Host配置为milai-post118-function-first-v1，默认staged；
+相关直接检查通过，真实Qwen模板25机械输入单System/count一致、峰值11532，真实候选HTTP0。
+无真实runner，账本47446／207145148known／207421844charged／embed1940092／历史unknown6。
+下一步冻结候选，Root串行复用三条既有连续故事；不是语义通过、最终候选或研究完成。
+原范围／六交付、16保留未用和Product NO_GO保持。详见[候选与正常用法](MILAI_UNIFIED_MEMORY_USAGE.md)
+及[当前问题](MILAI_BUILD_FIRST_ISSUES.md)。下方都是各自固定历史，旧暂停／PID不用于当前调度。
+
 **2026-10-08 15:15:56 UTC／北京时间23:15:56：38 Host闭合，结果保存与语义问题并列。**
 
 冻结38四消息均COMPLETED／exit0；实际业务恰一次预订＋一次标签完成，补存／只读零

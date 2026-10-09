@@ -33,7 +33,7 @@ def visible_verified_ref(service: Any, ref: VerifiedObjectRef) -> VerifiedObject
     return VerifiedObjectRef(**issued)
 
 
-def observation_profile(workflow: str) -> ObservationProfile:
+def observation_profile(workflow: str, *, maintenance: bool = False) -> ObservationProfile:
     """Only public receipt structure; no correctness plans or hidden task metadata.
 
     document_version orders the document's content, not approval/publication
@@ -43,13 +43,19 @@ def observation_profile(workflow: str) -> ObservationProfile:
     if workflow == "reservation_v1":
         return ObservationProfile(
             profile_id=workflow,
-            adapter_version="1",
+            adapter_version="2" if maintenance else "1",
             application="ApplicationWorld.reservation",
             origins=("reserve_and_label", "get_reservation", "complete_label"),
             object_id_path=("reservation_id",),
             fields=(
                 ObservationField("status", ("status",), "string"),
                 ObservationField("label_status", ("label_status",), "string"),
+                *((ObservationField("item_key", ("item_key",), "string"),
+                   ObservationField("quantity", ("quantity",), "integer"),
+                   ObservationField("destination", ("destination",), "string"),
+                   ObservationField("packing", ("packing",), "string"),
+                   ObservationField("operation_history", ("operation_history",), "json"))
+                  if maintenance else ()),
             ),
         )
     if workflow == "document_publication_v1":
@@ -57,7 +63,7 @@ def observation_profile(workflow: str) -> ObservationProfile:
 
         return ObservationProfile(
             profile_id=workflow,
-            adapter_version="1",
+            adapter_version="2" if maintenance else "1",
             application="ApplicationWorld.document",
             origins=tuple(DOCUMENT_NAMES),
             object_id_path=("document_id",),
@@ -71,7 +77,10 @@ def observation_profile(workflow: str) -> ObservationProfile:
                     version_domain=("document_content" if name == "document_version" else None),
                 )
                 for name, dtype in RECEIPT_PROFILES[workflow]["fields"].items()
-            ),
+            ) + ((ObservationField("title", ("title",), "string"),
+                  ObservationField("operation_history", ("operation_history",), "json"))
+                 if maintenance else ()),
+            unstructured_paths=(("content",),) if maintenance else (),
         )
     raise ValueError("V13_OBSERVATION_WORKFLOW_INVALID")
 

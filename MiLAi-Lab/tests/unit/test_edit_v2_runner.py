@@ -111,20 +111,20 @@ def test_temporary_changes_locate_then_use_existing_editor_without_becoming_memo
             assert packet["evidence"][1]["text"].startswith("Review Thursday")
             record = next(r for r in packet["records"] if r["matter"] == "Review schedule")
             clause = {"text": "User reports review Thursday.", "evidence": ["e2"],
-                      "assertion": {"source": "e2", "kind": "reported"}}
+                      "assertion": {"source_evidence": "e2", "kind": "reported"}}
             if arm in {"B0", "B2"}:
                 change = {"action": "rewrite", "clauses": [
                     {**clause, **({"conditions": []} if arm == "B2" else {})}
                 ]}
             else:
                 change = {"action": "edit", "edits": [{
-                    **clause, "operation": "change_value" if arm == "M" else "replace",
+                    **clause, "operation": "replace",
                     "target_unit": record["clauses"][0]["id"],
                 }]}
             envelope = {"creates": [{
                 "action": "create", "matter": "Ceramics plan", "clauses": [{
                     "text": "User plans ceramics Friday.", "evidence": ["e2"],
-                    "assertion": {"source": "e2", "kind": "reported"},
+                    "assertion": {"source_evidence": "e2", "kind": "reported"},
                     **({"conditions": []} if arm in {"B2", "M"} else {}),
                 }],
             }], "records": {record["id"]: change}}
@@ -274,6 +274,28 @@ def test_context_admission_matches_transported_thinking_mode(tmp_path: Path) -> 
                 response = read_json(tmp_path / "http" / key / "response.json")
                 assert saved["prompt_tokens"] == response["usage"]["prompt_tokens"]
 
+    run.settings["model"] = {"max_tokens": 1, "enable_thinking": True}
+    run.settings["stage_enable_thinking"] = {"reader": False}
+    with VLLMClient(
+        VLLMConfig("http://local.invalid/v1", "synthetic", max_tokens=1, enable_thinking=True),
+        transport=httpx.MockTransport(provider),
+    ) as client:
+        run.client = client
+        assert not run._fits(messages, enable_thinking=run.stage_thinking("reader"))
+        sent_before = len(sent)
+        with pytest.raises(ValueError, match="Context unavailable without loss"):
+            run.call("explicit-nonthinking-too-large", messages, structured=False,
+                     enable_thinking=run.stage_thinking("reader"))
+        assert len(sent) == sent_before
+        run.settings["context_tokens"] = nonthinking_count + 1 + 512
+        assert run.call("explicit-nonthinking", messages, structured=False,
+                        enable_thinking=run.stage_thinking("reader")) == "answer"
+        saved = read_json(tmp_path / "http/explicit-nonthinking/request.json")
+        wire = sent[-1]
+        assert wire["chat_template_kwargs"]["enable_thinking"] is False
+        assert saved["enable_thinking"] is False and saved["prompt_tokens"] == nonthinking_count
+        assert client.config.enable_thinking is True
+
 
 def observation(session: str, text: str) -> ObservedSession:
     return ObservedSession(
@@ -398,7 +420,7 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
         )
         requests.append(packet)
         evidence = packet["evidence"][0]["id"]
-        assertion = {"source": evidence, "kind": "reported"}
+        assertion = {"source_evidence": evidence, "kind": "reported"}
         if not packet["records"]:
             assert schema["properties"]["records"]["properties"] == {}
             envelope = {
@@ -425,7 +447,7 @@ def test_next_contract_uses_actual_schema_and_keeps_separate_matter_state(
                 ]}
             else:
                 change = {"action": "edit", "edits": [
-                    {"operation": "change_value" if arm == "M" else "replace",
+                    {"operation": "replace",
                      "target_unit": unit["id"], "text": "Project schedule Thursday",
                      "evidence": [evidence], "assertion": assertion}
                 ]}
@@ -962,7 +984,10 @@ def test_predict_then_score_reuses_saved_answers_and_diagnostic_retrieval(tmp_pa
                     transport=httpx.MockTransport(provider)) as client:
         run.client = client
         predicted = run.halumem("predict")
-        assert predicted == {"status": "PREDICTIONS_SAVED", "sessions": 1, "judge_calls": 0}
+        assert predicted == {
+            "status": "PREDICTIONS_SAVED", "sessions": 1, "judge_calls": 0,
+            "complete_answers": 1, "known_reader_failures": 0,
+        }
         assert judge_calls == []
         snapshot = run.root / "predictions/halumem/alice/0/complete.json"
         original = snapshot.read_bytes()
@@ -1332,6 +1357,7 @@ def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path,
                         "interface_version": "I2", "additional_reads": 2})
     budget = RunBudget(RunLimits(generation_requests=6), tmp_path / "budget.json")
     final_ids = {}
+    selection_budgets = {}
 
     def factory(settings, root):
         run = execution(root, "M")
@@ -1343,6 +1369,17 @@ def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path,
             if "candidates" in packet:
                 assert {row["record_id"] for row in packet["candidates"]} == {
                     "actual-marker", "actual-poster"}
+                mode = settings["memory_view_mode"]
+                selection_budgets.setdefault(mode, []).append(packet["remaining_reads"])
+                system = wire["messages"][0]["content"]
+                if mode == "staged":
+                    assert "This call is the one selection before the final answer." in system
+                    assert "selected whole matters are delivered directly" in system
+                    assert "Previously opened bodies can be loaded again." not in system
+                    assert "Selecting another matter replaces the resident body" not in system
+                else:
+                    assert "Previously opened bodies can be loaded again." in system
+                    assert "Selecting another matter replaces the resident body" in system
                 first = not packet["opened_ids"]
                 content = json.dumps({"record_ids": ["actual-marker" if first else "actual-poster"],
                                       "keep_resident": not first, "done": not first})
@@ -1368,8 +1405,13 @@ def test_reader_view_cli_keeps_saved_pool_and_accounts_every_selection(tmp_path,
     compare(baseline, config, output, "fixture-only", [key])
     assert final_ids == {"legacy": ["actual-marker", "actual-poster"], "staged": ["actual-marker"],
                          "state_driven": ["actual-marker", "actual-poster"]}
+    assert selection_budgets == {"staged": [1], "state_driven": [2, 1]}
     for mode, requests in (("legacy", 1), ("staged", 2), ("state_driven", 3)):
-        assert read_json(output / mode / "terminal.json")["generation_requests"] == requests
+        terminal = read_json(output / mode / "terminal.json")
+        assert terminal["generation_requests"] == requests
+        assert terminal["generation_known_tokens"] == requests * 8
+        assert terminal["new_generation_unknown"] == 0
+        assert terminal["embedding_known_tokens"] == 0
         assert read_json(output / mode / "http" / key / "retrieval.json") == memories
     assert {p.name: p.read_bytes() for p in (baseline / "http" / key).iterdir()} == inputs
     assert budget.state["generation_requests"] == 6

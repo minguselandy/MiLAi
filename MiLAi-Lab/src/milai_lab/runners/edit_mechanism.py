@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import copy
 import json
+import sqlite3
 from collections.abc import Callable
 from pathlib import Path
 from typing import Any, TypeVar
@@ -70,6 +71,8 @@ def require_completed_external(root: Path, arms: list[str]) -> None:
 
 def full_answer_payload(case: dict[str, Any], hypothesis: str) -> dict[str, Any]:
     """Evaluator-only original complete histories; no selected evidence substitute."""
+    if not isinstance(hypothesis, str):
+        raise ValueError("Full-answer audit requires a complete textual answer")
     history = longmemeval_history(case)
     return {
         "question": case["question"],
@@ -300,20 +303,18 @@ def grounded_ranges(
     return result
 
 
-def restore_current(service: MemoryService, rows: list[dict[str, Any]]) -> None:
+def restore_current(
+    service: MemoryService, rows: list[dict[str, Any]], *,
+    original_ids: dict[str, str] | None = None,
+) -> None:
     """Materialize exact own-formed current values solely for historical Reader probes."""
-    old = {item.key for item in service.store.search(service.namespace, limit=100000)}
-    desired = {row["id"] for row in rows if row.get("ok")}
-    for key in old - desired:
-        service.store.delete(service.namespace, key)
+    restored = {}
     for row in rows:
         if not row.get("ok"):
             continue
         value = copy.deepcopy(row["value"])
-        service.store.put(
-            service.namespace,
-            row["id"],
-            {
+        if original_ids is None:
+            raw = {
                 "content": value["content"],
                 "_v13_1": {
                     "revision": value["revision"],
@@ -322,9 +323,44 @@ def restore_current(service: MemoryService, rows: list[dict[str, Any]]) -> None:
                     "proposals": {},
                     "owner": service.owner,
                 },
-            },
-            index=False,
-        )
+            }
+        else:
+            item = service.store.get(service.namespace, original_ids[row["id"]])
+            if item is None:
+                raise ValueError("Historical Reader record missing from its actual bank")
+            raw = copy.deepcopy(item.value)
+            metadata = raw["_v13_1"]
+            if value not in metadata["history"]:
+                raise ValueError("Historical Reader value differs from its actual saved revision")
+            metadata["history"] = [
+                version for version in metadata["history"]
+                if version["revision"] <= value["revision"]
+            ]
+            metadata["current"] = value
+            metadata["revision"] = value["revision"]
+            metadata["proposals"] = {
+                key: proposal for key, proposal in metadata["proposals"].items()
+                if proposal["receipt"].get("revision", 0) <= value["revision"]
+            }
+            raw["content"] = value["content"]
+        restored[row["id"]] = raw
+    # Capture original rows before deleting: RetainAll explicitly copies an old
+    # version under a control ID, while its original record may be absent now.
+    old = {item.key for item in service.store.search(service.namespace, limit=100000)}
+    for key in old - restored.keys():
+        service.store.delete(service.namespace, key)
+    for identity, raw in restored.items():
+        service.store.put(service.namespace, identity, raw, index=False)
+    if original_ids is not None:
+        revisions = {identity: raw["_v13_1"]["revision"] for identity, raw in restored.items()}
+        # Grants for future or absent records belong to the original trajectory,
+        # not this independent Reader state. Preserve actual past grants.
+        for candidate in service._rows(service.candidates_namespace):
+            bound = candidate["value"]
+            if bound["record_id"] not in revisions or (
+                bound["revision"] > revisions[bound["record_id"]]
+            ):
+                service.store.delete(service.candidates_namespace, candidate["id"])
 
 
 class MechanismRun(BenchmarkRun):
@@ -362,16 +398,37 @@ class MechanismRun(BenchmarkRun):
             }
 
     def probe(
-        self, owner: str, state: list[dict[str, Any]], question: str, date: str, key: str
+        self, owner: str, state: list[dict[str, Any]], question: str, date: str, key: str, *,
+        source_bank: Path | None = None, source_namespace: tuple[str, ...] | None = None,
+        retained_ids: dict[str, str] | None = None,
     ) -> dict[str, Any]:
         bank = self.root / "reader-state" / key
         bank.mkdir(parents=True, exist_ok=True)
         try:
+            if source_bank is not None:
+                if source_namespace is None:
+                    raise ValueError("Historical Reader requires its original bank namespace")
+                # Issued fragments bind the original logical bank. A read-only
+                # backup preserves that qualification without issuing new evidence.
+                with (
+                    sqlite3.connect(
+                        source_bank.resolve().as_uri() + "?mode=ro", uri=True
+                    ) as source,
+                    sqlite3.connect(bank / "memory.sqlite") as destination,
+                ):
+                    source.backup(destination)
             with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
                 service = MemoryService(
-                    store, ("edit", "mechanism", owner), owner, bank / "memory.lock"
+                    store, source_namespace or ("edit", "mechanism", owner),
+                    owner, bank / "memory.lock",
+                    semantic_retriever=self._semantic_retriever(),
+                    memory_profile=self.settings.get("memory_profile", "ordinary"),
+                    memory_ranking=self.settings.get("memory_ranking", "dense"),
                 )
-                restore_current(service, state)
+                restore_current(service, state, original_ids={
+                    row["id"]: (retained_ids or {}).get(row["id"], row["id"])
+                    for row in state if row.get("ok")
+                } if source_bank is not None else None)
                 answer = self.answer(service, question, date, key + "/reader")
             return {"status": "ANSWERED", "answer": answer}
         except ValueError as error:
@@ -398,6 +455,7 @@ class MechanismRun(BenchmarkRun):
             for arm in arms:
                 before, after, availability = snapshots(suite, arm, case["uuid"], case["session"])
                 old_sources = prior_evidence(suite, arm, case["uuid"], before)
+                actual_config = read_json(suite / arm / "actual-config.json")
                 for variant in VARIANTS:
                     key = f"native/{index:03d}/{arm}/{variant}"
                     done = self.root / key / "complete.json"
@@ -475,7 +533,13 @@ class MechanismRun(BenchmarkRun):
                             "actual_after_cited_ranges": cited_after,
                         }
                     probe = self.probe(
-                        case["uuid"], state, label["diagnostic_question"], case["date"], key
+                        case["uuid"], state, label["diagnostic_question"], case["date"], key,
+                        source_bank=suite / arm / "banks" / case["uuid"] / "memory.sqlite",
+                        source_namespace=("edit", arm, actual_config["arm"], case["uuid"]),
+                        retained_ids={
+                            "retained:" + row["id"] + ":revision:" + str(row["value"]["revision"]):
+                            row["id"] for row in before if row.get("ok")
+                        } if variant == "RetainAll" else None,
                     )
                     answer = (
                         self.assess(
@@ -747,11 +811,14 @@ class MechanismRun(BenchmarkRun):
                         with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
                             service = MemoryService(
                                 store,
-                                ("edit", "controlled", owner, variant, arm),
+                                ("edit", "controlled", variant, arm, owner),
                                 owner,
                                 bank / "memory.lock",
                                 mutation_contract="event_bound_v1",
                                 candidate_contract="read_handle_v1",
+                                semantic_retriever=self._semantic_retriever(),
+                                memory_profile=self.settings.get("memory_profile", "ordinary"),
+                                memory_ranking=self.settings.get("memory_ranking", "dense"),
                             )
                             for step, (event, observed) in enumerate(
                                 zip(events, history, strict=True)
@@ -807,7 +874,11 @@ class MechanismRun(BenchmarkRun):
                                     else None,
                                 )
                                 question = event["diagnostic_questions"][wording]
-                                probe = self.probe(owner, after, question, observed.date, key)
+                                probe = self.probe(
+                                    owner, after, question, observed.date, key,
+                                    source_bank=bank / "memory.sqlite",
+                                    source_namespace=service.namespace,
+                                )
                                 answer = (
                                     self.assess(
                                         key + "/answer-judge",

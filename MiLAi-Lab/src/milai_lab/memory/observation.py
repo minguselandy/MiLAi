@@ -43,6 +43,7 @@ def profile_identity(profile: ObservationProfile) -> str:
     ):
         raise ObservationError("invalid_profile")
     paths = [profile.object_id_path, profile.objects_path, profile.unknown_path]
+    paths.extend(profile.unstructured_paths)
     paths.extend(
         path
         for path in (profile.owner_path, profile.resource_version_path, profile.valid_time_path)
@@ -203,6 +204,91 @@ def derive_observations(
             else:
                 derived[observation_id] = observed
     return [derived[key] for key in sorted(derived)], "observed"
+
+
+def _json_ranges(text: str) -> dict[tuple[str, ...], tuple[int, int]]:
+    """Locate original JSON members; no reserialized prose becomes evidence."""
+    decoder = json.JSONDecoder()
+    ranges: dict[tuple[str, ...], tuple[int, int]] = {}
+
+    def whitespace(position: int) -> int:
+        while position < len(text) and text[position].isspace():
+            position += 1
+        return position
+
+    def visit(position: int, path: tuple[str, ...]) -> int:
+        position = whitespace(position)
+        start = position
+        if text[position] == "{":
+            position = whitespace(position + 1)
+            while text[position] != "}":
+                member_start = position
+                key, position = decoder.raw_decode(text, position)
+                position = whitespace(position)
+                child_path = (*path, key)
+                position = visit(position + 1, child_path)
+                ranges[child_path] = (member_start, position)
+                position = whitespace(position)
+                if text[position] == ",":
+                    position = whitespace(position + 1)
+            end = position + 1
+        elif text[position] == "[":
+            index = 0
+            position = whitespace(position + 1)
+            while text[position] != "]":
+                position = visit(position, (*path, str(index)))
+                index += 1
+                position = whitespace(position)
+                if text[position] == ",":
+                    position = whitespace(position + 1)
+            end = position + 1
+        else:
+            _, end = decoder.raw_decode(text, position)
+        ranges[path] = (start, end)
+        return end
+
+    visit(0, ())
+    return ranges
+
+
+def maintenance_projection(
+    source: dict[str, Any], profile: ObservationProfile, text: str
+) -> dict[str, Any]:
+    """Public field literals and exact original spans, without semantic formation.
+
+    Profile-declared prose stays an original extraction input. Unmapped material
+    remains in the Source, not a second observation or a fabricated summary.
+    """
+    observations, outcome = derive_observations(source, profile)
+    if outcome != "observed" or not observations:
+        return {"outcome": outcome, "observations": []}
+    ranges = _json_ranges(text)
+
+    def path_for(pointer: str) -> tuple[str, ...]:
+        return tuple(part.replace("~1", "/").replace("~0", "~")
+                     for part in pointer[1:].split("/"))
+
+    material = []
+    object_paths: set[tuple[str, ...]] = set()
+    for observation in observations:
+        paths = [path_for(pointer) for pointer in observation["field_paths"]]
+        field_path = next(field.path for field in profile.fields
+                          if field.name == observation["field"])
+        prefixes = [path[:len(path) - len(field_path)] for path in paths]
+        object_paths.update(prefixes)
+        identity_paths = [(*prefix, *profile.object_id_path) for prefix in prefixes]
+        identity_paths.extend(
+            (*prefix, *path) for prefix in prefixes for path in (
+                profile.resource_version_path, profile.valid_time_path
+            ) if path is not None
+        )
+        spans = [ranges[path] for path in dict.fromkeys([*identity_paths, *paths])
+                 if path in ranges]
+        material.append({**observation, "ranges": spans})
+    prose = [ranges[path] for prefix in sorted(object_paths)
+             for declared in profile.unstructured_paths
+             if (path := (*prefix, *declared)) in ranges]
+    return {"outcome": outcome, "observations": material, "unstructured_ranges": prose}
 
 
 def observation_view(observations: list[dict[str, Any]]) -> list[dict[str, Any]]:

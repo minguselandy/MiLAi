@@ -33,7 +33,13 @@ from milai_lab.memory.functional_state import (
     scope_leaves,
 )
 from milai_lab.memory.service import MemoryService, _lexical_tokens
-from milai_lab.memory.working_set import admit_refs, catalog_candidates, empty_view, item_ref
+from milai_lab.memory.working_set import (
+    admit_refs,
+    catalog_candidates,
+    empty_view,
+    item_ref,
+    read_evidence_basis,
+)
 
 
 class SavedAssertion(BaseModel):
@@ -640,7 +646,12 @@ class FunctionalMemory:
 
         def packet(end: int) -> dict[str, Any]:
             bodies = [unit for unit in chosen if not unit["type"].endswith("_candidate")]
-            candidates = [unit for unit in chosen if unit["type"].endswith("_candidate")]
+            candidates = [copy.deepcopy(unit) for unit in chosen
+                          if unit["type"].endswith("_candidate")]
+            if self.read_interface == "explicit_selectors_v1":
+                for candidate in candidates:
+                    if candidate["read"]["arguments"].get("revision") is not None:
+                        candidate["read"]["tool"] = "read_memory_revision"
             return {
                 "ok": True,
                 "schema": "functional_material_v1",
@@ -670,6 +681,7 @@ class FunctionalMemory:
                 } if directory else {}),
                 **({
                     "view_refs": [item_ref(unit, key, items.index(unit)) for unit in bodies],
+                    "reading_basis": read_evidence_basis(bodies),
                 } if self.memory_view_mode != "legacy" else {}),
                 "start": start,
                 "delivered_units": len(bodies),

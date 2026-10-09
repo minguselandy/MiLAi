@@ -1012,6 +1012,8 @@ class MemoryService:
             adapters_ns = (*self.namespace, "observation_adapters")
             adapter = self.store.get(adapters_ns, profile_version)
             definition = json.loads(_json(asdict(profile)))
+            if not profile.unstructured_paths:
+                definition.pop("unstructured_paths")
             if adapter is not None and adapter.value["definition"] != definition:
                 return {
                     "ok": False,

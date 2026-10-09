@@ -10,13 +10,19 @@ from pathlib import Path
 from typing import Any
 
 import pytest
+from jsonschema import Draft202012Validator
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.application.document_publication import DocumentPublicationWorld
 from milai_lab.application.refs import observation_profile
 from milai_lab.application.world import ApplicationWorld
 from milai_lab.contracts.memory import ObservationField, ObservationProfile
+from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.append_memory import AppendMemory
+from milai_lab.methods.edit_features import EditFeatures
+from milai_lab.methods.edit_maintenance import maintain_event
+from milai_lab.methods.edit_memory import EditMemory
 
 
 @contextmanager
@@ -268,12 +274,12 @@ def test_unknown_does_not_clear_confirmed_history_or_invent_no_effect(tmp_path: 
         assert len(field_view(service, "label")["history"]) == 1
 
 
-def test_real_reservation_partial_failure_is_projected_from_actual_receipt_without_writer(
+def test_real_reservation_literal_maintenance_keeps_source_and_unchanged_units(
     tmp_path: Path,
 ) -> None:
     world = ApplicationWorld(tmp_path / "world.sqlite", False)
     try:
-        with opened(tmp_path) as service:
+        with opened(tmp_path, candidate_contract="read_handle_v1") as service:
             body = world.reserve_and_label("alice", "public-item", 1, "desk", "box")
             source = capture(service, "actual", body, "reserve_and_label")
             assert (
@@ -285,6 +291,100 @@ def test_real_reservation_partial_failure_is_projected_from_actual_receipt_witho
             assert obj["fields"]["status"]["literal_value"] == "reserved_label_failed"
             assert obj["fields"]["status"]["selection"] == "unordered_observations"
             assert service.records() == []
+            raw = dict(service.source(source))
+            profile = observation_profile("reservation_v1", maintenance=True)
+            assert profile.adapter_version == "2"
+            method = EditMemory(service, "M", interface_version="I2",
+                                features=EditFeatures(True, True, True, True, True))
+            service.bind_source_boundary("s1", "save", [source])
+            first = method.observation_delivery(
+                method.prepare([source], "", selected_records=[]), [profile]
+            )
+            assert service.source(source) == raw and service.records() == []
+            assert all(row["text"] == body[row["start"]:row["end"]]
+                       for row in first["sources"])
+            assert first["result_maintenance"]["extraction_source_ranges"] == []
+            calls = []
+
+            def model(stage, messages, schema):
+                calls.append(stage)
+                assert stage.startswith("edit:")  # Known fields never call Extractor.
+                payload = json.loads(messages[1]["content"])
+                candidates = {row["field"]: row for row in payload["change_candidates"]}
+                assert all(row["basis"] == "actual_source_literal"
+                           and not row["current_verified"] for row in candidates.values())
+                packet = payload["delivery"]
+
+                def assertion(field):
+                    row = candidates[field]
+                    return {"text": "Reservation " + field + "=" + json.dumps(row["literal_value"]),
+                            "evidence": row["evidence"],
+                            "assertion": {"source": row["evidence"][-1], "kind": "observed"}}
+
+                if not packet["records"]:
+                    return {"creates": [{"action": "create", "matter": "Reservation result",
+                            "clauses": [{**assertion(field), "conditions": []}
+                                        for field in ("status", "label_status", "quantity")]}]}
+                record = packet["records"][0]
+                label = next(row for row in record["clauses"] if "label_status" in row["text"])
+                appended = {**assertion("packing"), "operation": "append", "role": "content"}
+                wrong = {"action": "edit", "target": record["id"],
+                         "edits": [{**appended, "attach_to": [label["id"]]}]}
+                assert not Draft202012Validator(schema).is_valid(
+                    {"records": {record["id"]: {k: v for k, v in wrong.items() if k != "target"}}}
+                )
+                # An old invalid output still reaches the original rejection;
+                # the new generation restriction never converts it to a condition.
+                mapping = method.load_mapping("edit-map:" + stage.split(":", 1)[1])
+                decoded = method.decode_proposal(wrong, mapping)
+                with pytest.raises(FunctionalRejection, match="APPEND_CONDITION_TARGET_INVALID"):
+                    method.apply("s1", "legacy-invalid", decoded)
+                return {"records": {record["id"]: {"action": "edit", "edits": [
+                    {**assertion("label_status"), "operation": "change_value",
+                     "target_unit": label["id"]}, appended,
+                ]}}}
+
+            options = dict(session="s1", date="2026-10-08", recipe="extract_then_edit",
+                           memory_view_mode="staged", model_call=model)
+            saved = maintain_event(method, first, request_id="save", selected_record_ids=[],
+                                   **options)
+            assert saved["status"] == "completed" and len(saved["receipts"]) == 1
+            record_id = saved["receipts"][0]["id"]
+            baseline = service.read(record_id)["value"]["edit_state"]
+            world.set_label_available("restore", True)
+            assert json.loads(world.complete_label("alice", json.loads(body)["reservation_id"]))[
+                "label_status"] == "created"
+            final_source = capture(service, "query", world.get_reservation("alice", "public-item"),
+                                   "get_reservation")
+            service.bind_source_boundary("s1", "update", [final_source])
+            current = method.observation_delivery(
+                method.prepare([final_source], "", selected_records=[]), [profile]
+            )
+            updated = maintain_event(method, current, request_id="update",
+                                     selected_record_ids=[record_id], **options)
+            assert updated["status"] == "completed" and len(updated["receipts"]) == 1
+            state = service.read(record_id)["value"]["edit_state"]
+            assert state["units"][0] == baseline["units"][0]
+            assert state["units"][2] == baseline["units"][2]
+            assert state["units"][3]["role"] == "content" and state["relations"] == []
+            assert service.read(record_id, 1)["value"]["edit_state"] == baseline
+            assert len(calls) == 2
+            assert world.snapshot()["attempts"][-1]["operation"] == "complete_label"
+            append = AppendMemory(service, features=method.features)
+            view = append.writer_request(current, request_id="append-interface")
+            assert append.decode_envelope({"creates": [], "records": {}}, view["mapping"]) == []
+            original_ranges = [{k: row[k] for k in ("source_ref", "start", "end")}
+                               for row in current["sources"]]
+        with opened(tmp_path, candidate_contract="read_handle_v1") as service:
+            method = EditMemory(service, "M", interface_version="I2",
+                                features=EditFeatures(True, True, True, True, True))
+            delivery = method.prepare([final_source], "", selected_records=[],
+                                      source_ranges=original_ranges)
+            replayed = maintain_event(method, delivery, request_id="update",
+                                      selected_record_ids=[record_id], **options)
+            assert replayed["status"] == "completed" and len(calls) == 2
+            assert service.read(record_id)["value"]["edit_state"] == state
+            assert service.source(source) == raw
     finally:
         world.close()
 

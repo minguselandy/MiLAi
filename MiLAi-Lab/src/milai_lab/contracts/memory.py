@@ -155,3 +155,4 @@ class ObservationProfile:
     completeness: Literal["partial", "complete"] = "partial"
     unknown_path: tuple[str, ...] = ("status",)
     unknown_values: tuple[str, ...] = ("ORIGINAL_CALL_OUTCOME_UNKNOWN",)
+    unstructured_paths: tuple[tuple[str, ...], ...] = ()

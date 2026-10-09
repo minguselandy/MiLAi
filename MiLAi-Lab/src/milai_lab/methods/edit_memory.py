@@ -12,6 +12,7 @@ from typing import Any, Literal
 
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 
+from milai_lab.contracts.memory import ObservationProfile
 from milai_lab.memory.edit_units import (
     ARM_OPERATIONS,
     OPERATION_INSTRUCTIONS,
@@ -24,11 +25,13 @@ from milai_lab.memory.edit_units import (
     render_revision_view,
     render_state,
     source_evidence,
+    tool_source_origin,
     validate_applicability,
     writer_projection,
     writer_proposal_schema,
 )
 from milai_lab.memory.functional_state import FunctionalRejection, body_text, resolve_fragment
+from milai_lab.memory.observation import maintenance_projection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import (
     EditFeatures,
@@ -73,13 +76,15 @@ class EditMemory:
         return self.arm
 
     def proposal_schema(
-        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None
+        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None,
+        for_generation: bool = True,
     ) -> dict[str, Any]:
         if self.interface_version == "v1":
             return EditProposal.model_json_schema()
         if self.features.enabled:
             schema = feature_proposal_schema(
-                self.arm, self.features, mapping or {}, allow_create=allow_create
+                self.arm, self.features, mapping or {}, allow_create=allow_create,
+                for_generation=for_generation,
             )
             if self.features.bound_references and mapping and mapping.get("records"):
                 variants = [
@@ -89,7 +94,8 @@ class EditMemory:
                 ]
                 for target in mapping["records"]:
                     scoped = feature_proposal_schema(
-                        self.arm, self.features, mapping, allow_create=False, target=target
+                        self.arm, self.features, mapping, allow_create=False, target=target,
+                        for_generation=for_generation,
                     )
                     for variant in scoped.get("oneOf", []):
                         variant["properties"]["target"] = {"type": "string", "const": target}
@@ -98,14 +104,18 @@ class EditMemory:
                         variants.append(variant)
                 return {"oneOf": variants}
             return schema
-        return writer_proposal_schema(self.arm, allow_create=allow_create)
+        return writer_proposal_schema(
+            self.arm, allow_create=allow_create, for_generation=for_generation
+        )
 
     def envelope_schema(
-        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None
+        self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None,
+        for_generation: bool = True,
     ) -> dict[str, Any]:
         if self.features.enabled:
             return feature_envelope_schema(
-                self.arm, self.features, mapping or {}, allow_create=allow_create
+                self.arm, self.features, mapping or {}, allow_create=allow_create,
+                for_generation=for_generation,
             )
         return {
             "type": "object",
@@ -115,7 +125,9 @@ class EditMemory:
                 "proposals": {
                     "type": "array",
                     "minItems": 0,
-                    "items": self.proposal_schema(allow_create=allow_create),
+                    "items": self.proposal_schema(
+                        allow_create=allow_create, for_generation=for_generation
+                    ),
                 }
             },
         }
@@ -222,7 +234,7 @@ class EditMemory:
 
     def _feature_instructions(self, *, allow_create: bool) -> str:
         empty = (
-            '{}'
+            '{"creates":[],"records":{}}'
             if self.features.single_record_changes
             else '{"proposals":[]}'
         )
@@ -239,7 +251,9 @@ class EditMemory:
             "Every r/u/e/h must be a candidate in THIS request. "
             "Only e has actually delivered body; "
             "h is EXISTING_SUPPORT_ONLY and cannot prove a changed claim or synonymous rewrite. "
-            "Copy retained text and role exactly when using only its own h. Changed claims and "
+            + ("" if self.arm == "B0" and self.features.source_metadata else
+               "Copy retained text and role exactly when using only its own h. ")
+            + "Changed claims and "
             "new relations require new e. Applicability and entailment are your decision, not "
             "certified by a source ID. Preserve subject, time, negation, "
             "qualification and uncertainty. Use one independently revisable assertion per "
@@ -259,7 +273,8 @@ class EditMemory:
             )
         if self.features.source_metadata:
             instruction += (
-                "Every generated unit or text edit selects assertion={source:e#,kind:reported|"
+                "Every generated unit or text edit selects "
+                "assertion={source_evidence:e#,kind:reported|"
                 "inferred|observed|uncertain} from that item's new evidence. The service records "
                 "the ACTUAL speaker role and occurrence time; this does not certify truth. "
                 "Preserve assertion ownership in wording too: a user's report is a user report; "
@@ -309,33 +324,43 @@ class EditMemory:
                 "No hidden body is filled in. retract_record is a separate entire-record "
                 "withdrawal with new actual e evidence and no replacement body. "
                 "No local edits are available. "
-                "In a rewrite, from_unit=u# identifies which delivered unit the generated "
-                "clause or condition continues, independently of evidence. Each prior unit "
-                "has at most one such continuation, with the same role. It permits retaining "
-                "the existing binding after a supported value change; it retains no old text "
-                "or support by itself. "
             )
+            if self.arm != "B0" or not self.features.source_metadata:
+                instruction += (
+                    "In a rewrite, from_unit=u# identifies which delivered unit the generated "
+                    "clause or condition continues, independently of evidence. Each prior unit "
+                    "has at most one such continuation, with the same role. It permits retaining "
+                    "the existing binding after a supported value change; it retains no old text "
+                    "or support by itself. "
+                )
             if self.features.source_metadata:
                 instruction += (
-                    "Exact unchanged text/role with from_unit=u# and assertion={keep:h#} "
-                    "for that same unit reuses its own support without repeating keep_support. "
+                    "For an unchanged old content clause, assertion={keep:h#} selects its "
+                    "actual text, support and attribution. Return this keep reference without "
+                    "text; keep_support need not be repeated. New or changed text selects "
+                    "assertion={source_evidence:e#,kind:reported/inferred/observed/uncertain}. "
+                    if self.arm == "B0" else
+                    "With from_unit=u# and assertion={keep:h#} for that same old unit, "
+                    "omit text to reuse its actual text, or repeat it exactly. This also reuses "
+                    "its own support without repeating keep_support. Exact old text with "
+                    "assertion={keep:h#} also reuses its support without from_unit. "
                     "Bindings still select their separate relation support. "
                 )
             instruction += "Changed text still selects actual e evidence. "
         elif self.arm == "M" and self.features.semantic_operations:
             instruction += (
-                "Within one record container use change_value for same-scope content, "
-                "add_exception for a local scoped alternative, "
-                "remove_exception for an existing local alternative, "
-                "or change_condition for a shared condition. add_exception retains its general "
-                "rule and only attaches explicitly selected shared_conditions. remove_exception "
+                "Within one record container use replace for same-scope changes to a delivered "
+                "content or condition unit; its actual role and linked units/edges remain. "
+                "Use add_exception for a local scoped alternative and remove_exception for an "
+                "existing local alternative. "
+                "add_exception retains its general rule and only attaches explicitly selected "
+                "shared_conditions. remove_exception "
                 "removes that alternative and its exclusive condition nodes, preserving general "
                 "rules/shared conditions; it cannot reconstruct an already lost general rule. "
-                "change_condition keeps actual linked units and edges. append/retract remain "
-                "available for other local formation/removal. Dependent changes to delivered units "
+                "append/retract remain available for other local formation/removal. "
+                "Dependent changes to delivered units "
                 "belong in the same ordered edits list; the record commits once. "
-                "Use the actual delivered role: change_value selects content, change_condition "
-                "selects condition, and shared_conditions selects only existing condition units. "
+                "shared_conditions selects only existing condition units. "
                 "A content clause mentioning a prerequisite has no condition binding. Do not "
                 "select it as a shared condition. With supporting new e, append a condition "
                 "with explicit attach_to targets and retract the obsolete clause when justified; "
@@ -362,15 +387,13 @@ class EditMemory:
                 "stored structure; its wording cannot change it. "
             )
         else:
-            instruction += (
-                "Use content clauses without relations. Give each qualification its own "
-                "complete clause naming the matter and scope it limits. "
-            )
+            instruction += "Use content clauses without relations. "
         if self.features.single_record_changes:
             instruction += (
                 "creates is a list; records has at most one unique container per delivered r key. "
                 "Never repeat a record or split its dependent changes across containers. "
-                "Omit creates or records when empty. An existing change always names its r key "
+                "Return both creates and records; use [] and {} respectively when empty. "
+                "An existing change always names its r key "
                 "in records, even when only one record was delivered; never return a bare edit. "
             )
         instruction += (
@@ -399,7 +422,7 @@ class EditMemory:
         for formed_unit in formation_units:
             formed_unit["evidence"] = ["e1"]
             if self.features.source_metadata:
-                formed_unit["assertion"] = {"source": "e1", "kind": "reported"}
+                formed_unit["assertion"] = {"source_evidence": "e1", "kind": "reported"}
         create: dict[str, Any] = {"action": "create", "units": formation_units}
         if self.conditioned:
             create["relations"] = [
@@ -416,7 +439,7 @@ class EditMemory:
             "keep_support": ["h1"],
         }
         if self.features.source_metadata:
-            change["assertion"] = {"source": "e1", "kind": "reported"}
+            change["assertion"] = {"source_evidence": "e1", "kind": "reported"}
         if self.arm in {"B0", "B2"}:
             correction: dict[str, Any] = {
                 "action": "rewrite",
@@ -434,6 +457,10 @@ class EditMemory:
                 }
                 if self.features.source_metadata:
                     retained["assertion"] = {"keep": f"h{index}"}
+                    if self.arm == "B0":
+                        retained.pop("text")
+                        retained.pop("evidence")
+                        retained.pop("keep_support")
                 correction["units"].append(retained)
             if self.conditioned:
                 correction["relations"] = [
@@ -452,9 +479,7 @@ class EditMemory:
                 "edits": [
                     {
                         **change,
-                        "operation": "change_value"
-                        if self.arm == "M" and self.features.semantic_operations
-                        else "replace",
+                        "operation": "replace",
                         "target_unit": "u1",
                     }
                 ],
@@ -463,7 +488,8 @@ class EditMemory:
         def envelope(proposal: dict[str, Any], *, created: bool) -> dict[str, Any]:
             proposal = clause_proposal(proposal, conditioned=self.conditioned)
             if self.features.single_record_changes:
-                return {"creates": [proposal]} if created else {"records": {"r1": proposal}}
+                return {"creates": [proposal] if created else [],
+                        "records": {} if created else {"r1": proposal}}
             return {"proposals": [proposal if created else {**proposal, "target": "r1"}]}
 
         instruction += (
@@ -476,7 +502,7 @@ class EditMemory:
                 "inclusive to April 8 exclusive, with a framework-declared Source calendar. "
                 "Date condition fragment in that content's conditions[]: "
                 '{"text":"Only from April 1 inclusive to April 8 exclusive.",'
-                '"evidence":["e1"],"assertion":{"source":"e1","kind":"reported",'
+                '"evidence":["e1"],"assertion":{"source_evidence":"e1","kind":"reported",'
                 '"applicability":{"effective_from":"2025-04-01",'
                 '"effective_until":"2025-04-08"}},"binding":{"evidence":["e1"]}}. '
             )
@@ -527,8 +553,13 @@ class EditMemory:
                 result["keep_support"] = [support]
             if self.features.source_metadata:
                 result["assertion"] = (
-                    {"keep": support} if keep_attribution else {"source": "e1", "kind": "reported"}
+                    {"keep": support} if keep_attribution
+                    else {"source_evidence": "e1", "kind": "reported"}
                 )
+                if self.arm == "B0" and keep_attribution:
+                    result.pop("text")
+                    result.pop("evidence")
+                    result.pop("keep_support", None)
             return result
 
         def example_relation(
@@ -702,7 +733,7 @@ class EditMemory:
                     "edits": [
                         example_edit(
                             cutoff,
-                            "change_condition" if self.features.semantic_operations else "replace",
+                            "replace",
                             "u3",
                         )
                     ],
@@ -978,6 +1009,72 @@ class EditMemory:
             self._source_attributes(delivery)
         return delivery
 
+    def observation_delivery(
+        self, delivery: dict[str, Any], profiles: list[ObservationProfile]
+    ) -> dict[str, Any]:
+        """Opt-in public field candidates over exact original JSON member ranges.
+
+        The original Tool Source remains readable. Deterministic candidates are
+        neither semantic records nor independent evidence; the editor still
+        decides which assertions to form. Unmatched sources retain extraction.
+        """
+        self._require_v2()
+        projected = copy.deepcopy(delivery)
+        sources, changes, extraction_ranges = [], [], []
+        for row in delivery["sources"]:
+            actual = self.service.source(row["source_ref"])
+            if actual is None:
+                raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
+            profile = next((p for p in profiles if actual["role"] == "tool"
+                            and actual["origin"] in p.origins), None)
+            text = body_text(actual)
+            projection = (maintenance_projection(actual, profile, text)
+                          if profile is not None and row["start"] == 0 and row["end"] == len(text)
+                          else {"observations": []})
+            observations = projection["observations"]
+            if not observations:
+                sources.append(copy.deepcopy(row))
+                extraction_ranges.append({k: row[k] for k in ("source_ref", "start", "end")})
+                continue
+            spans = list(dict.fromkeys(
+                [span for observation in observations for span in observation["ranges"]]
+                + projection["unstructured_ranges"]
+            ))
+            fragments = self.prepare(
+                [row["source_ref"]], "", selected_records=[],
+                source_ranges=[{"source_ref": row["source_ref"], "start": start, "end": end}
+                               for start, end in spans],
+            )["sources"]
+            sources.extend(fragments)
+            by_span = {(fragment["start"], fragment["end"]): fragment for fragment in fragments}
+            extraction_ranges.extend(
+                {k: by_span[span][k] for k in ("source_ref", "start", "end")}
+                for span in projection["unstructured_ranges"]
+            )
+            for observation in observations:
+                changes.append({
+                    "basis": "actual_source_literal",
+                    "subject": (observation["object_ref"]["application"] + " "
+                                + observation["object_ref"]["external_id"]),
+                    "statement": observation["field"] + "=" + json.dumps(
+                        observation["literal_value"], ensure_ascii=False, separators=(",", ":")
+                    ),
+                    "field": observation["field"],
+                    "field_paths": observation["field_paths"],
+                    "literal_value": observation["literal_value"],
+                    "observed_at": observation["observed_at"],
+                    "resource_version": observation["resource_version"],
+                    "version_domain": observation["version_domain"],
+                    "current_verified": False,
+                    "evidence": [by_span[span]["evidence_id"] for span in observation["ranges"]],
+                    "time": None, "scope": None,
+                })
+        projected.update(sources=sources, result_maintenance={
+            "mode": "literal_observations_v1", "literal_changes": changes,
+            "extraction_source_ranges": extraction_ranges,
+        })
+        return projected
+
     def _source_attributes(self, delivery: dict[str, Any]) -> None:
         refs = [
             source["source_ref"]
@@ -1002,6 +1099,7 @@ class EditMemory:
                     "role": actual["role"],
                     "observed_at": actual["observed_at"],
                     "occurred_at": actual.get("occurred_at"),
+                    **({"origin": origin} if (origin := tool_source_origin(actual)) else {}),
                     **({"calendar_context": actual["calendar_context"]}
                        if "calendar_context" in actual else {}),
                 }
@@ -1062,11 +1160,18 @@ class EditMemory:
                 + " Group distinct topics into separate records. Preserve dates and roles. "
                 "In every arm, form one independently stated clause per unit. In plain memory "
                 "keep its qualifications in that clause; in conditioned memory explicitly link "
-                "the same content and qualifications. Do not pack independent matters into a "
+                "actual applicability limits, not ordinary quantities, attributes or observed "
+                "states. Keep each independently mutable value self-contained with its subject "
+                "and still-applicable qualifications. Do not pack independent matters into a "
                 "single long unit or create duplicate records for the same matter. "
                 "Return the supplied envelope. At most one proposal per existing target in "
                 "this request; combine dependent changes in that target's single proposal. "
-                + empty_instruction,
+                + empty_instruction
+                + (" Candidates marked actual_source_literal are program-projected fields of "
+                   "the actual Tool source, not LLM semantic formation. Their observation time "
+                   "is not a guarantee of live state. Preserve separate component outcomes."
+                   if any(change.get("basis") == "actual_source_literal"
+                          for change in change_candidates or []) else ""),
             },
             {
                 "role": "user",
@@ -1097,6 +1202,12 @@ class EditMemory:
         are selectable evidence for a candidate change.
         """
         self._require_v2()
+        projection = delivery.get("result_maintenance")
+        if projection is not None:
+            extraction = {(row["source_ref"], row["start"], row["end"])
+                          for row in projection["extraction_source_ranges"]}
+            delivery = {**delivery, "sources": [row for row in delivery["sources"]
+                        if (row["source_ref"], row["start"], row["end"]) in extraction]}
         packet, mapping = writer_projection(
             {**delivery, "records": [], "redelivered_sources": []},
             self.interface_version,
@@ -1349,7 +1460,9 @@ class EditMemory:
             return [copy.deepcopy(proposal) for proposal in envelope["proposals"]]
         errors = list(
             Draft202012Validator(
-                self.envelope_schema(allow_create=bound["allow_create"], mapping=bound)
+                self.envelope_schema(
+                    allow_create=bound["allow_create"], mapping=bound, for_generation=False
+                )
             ).iter_errors(envelope)
         )
         if errors:
@@ -1391,7 +1504,9 @@ class EditMemory:
         bound = self.load_mapping(mapping if isinstance(mapping, str) else mapping["mapping_id"])
         if not isinstance(mapping, str) and mapping != bound:
             raise FunctionalRejection("EDIT_MAPPING_CHANGED")
-        schema = self.proposal_schema(allow_create=bound["allow_create"], mapping=bound)
+        schema = self.proposal_schema(
+            allow_create=bound["allow_create"], mapping=bound, for_generation=False
+        )
         if self.features.enabled and "oneOf" not in schema:
             raise FunctionalRejection("EDIT_PUBLIC_ACTION_UNAVAILABLE")
         errors = list(Draft202012Validator(schema).iter_errors(proposal))
@@ -1426,6 +1541,22 @@ class EditMemory:
             return unit  # type: ignore[no-any-return]
 
         def supports(item: dict[str, Any]) -> tuple[list[str], list[dict[str, Any]]]:
+            retained_unit = (
+                item.get("from_unit") if proposal["action"] == "rewrite"
+                else item.get("target_unit") if item.get("operation") == "replace" else None
+            )
+            if (
+                self.features.source_metadata
+                and "keep_support" not in item
+                and (kept_alias := item.get("assertion", {}).get("keep"))
+            ):
+                support = bound["support"].get(kept_alias)
+                if support is not None and support.get("unit") and (
+                    support["unit"] == retained_unit
+                    or (proposal["action"] == "rewrite" and not retained_unit
+                        and support["record"] == target)
+                ):
+                    item["keep_support"] = [kept_alias]
             handles, kept = [], []
             for alias in item.get("evidence", []):
                 evidence = bound["evidence"].get(alias)
@@ -1508,16 +1639,18 @@ class EditMemory:
         origins: list[set[str]] = []
         explicit_origins: set[str] = set()
         for item in proposal.get("units", []):
-            if (
-                proposal["action"] == "rewrite"
-                and self.features.source_metadata
-                and "from_unit" in item
-                and "keep_support" not in item
-                and (kept_alias := item["assertion"].get("keep"))
-            ):
-                support = bound["support"].get(kept_alias)
-                if support is not None and support.get("unit") == item["from_unit"]:
-                    item["keep_support"] = [kept_alias]
+            if proposal["action"] == "rewrite" and "text" not in item:
+                support = bound["support"].get(item["assertion"]["keep"])
+                retained_unit = item.get("from_unit")
+                if self.arm == "B0" and retained_unit is None and support is not None:
+                    retained_unit = support.get("unit")
+                if (support is None or support["record"] != target
+                        or not retained_unit or support.get("unit") != retained_unit):
+                    raise FunctionalRejection("EDIT_ASSERTION_UNIT_BINDING_INVALID")
+                prior_unit = alias_unit(retained_unit)
+                if self.arm == "B0" and prior_unit["role"] != "content":
+                    raise FunctionalRejection("EDIT_ASSERTION_UNIT_BINDING_INVALID")
+                item["text"] = prior_unit["text"]
             handles, kept = supports(item)
             origin = {support["unit"] for support in kept if "unit" in support}
             if len(origin) != len(kept) or len(origin) > 1:

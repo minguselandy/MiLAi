@@ -25,9 +25,19 @@ from milai_lab.methods.edit_memory import EditMemory
 
 MaintenanceRecipe = Literal["single_pass", "extract_then_edit"]
 ModelCall = Callable[[str, list[dict[str, str]], dict[str, Any]], dict[str, Any]]
+StageFit = Callable[[str, list[dict[str, str]]], bool]
 Commit = Callable[[str, dict[str, Any], dict[str, Any]], dict[str, Any]]
 CandidateMode = Literal["combined_dense", "per_candidate_dense"]
 MemoryViewMode = Literal["legacy", "staged", "state_driven"]
+
+
+def _fits(
+    stage: str, messages: list[dict[str, str]],
+    fit: Callable[[list[dict[str, str]]], bool] | None, stage_fit: StageFit | None,
+) -> bool:
+    if stage_fit is not None:
+        return stage_fit(stage, messages)
+    return fit(messages) if fit is not None else True
 
 
 def parse_object(text: str, *, reject_duplicate_keys: bool = False) -> dict[str, Any]:
@@ -112,7 +122,7 @@ def _located_delivery(
         prior_context=copy.deepcopy(delivery.get("prior_context", [])),
         candidate_changes=changes,
     )
-    for key in ("episode_context", "replay", "new_independent_support"):
+    for key in ("episode_context", "replay", "new_independent_support", "result_maintenance"):
         if key in delivery:
             located[key] = copy.deepcopy(delivery[key])
     return prepare_delivery(located) if prepare_delivery is not None else located
@@ -192,7 +202,8 @@ def plan_source_batches(
     *,
     date: str,
     recipe: MaintenanceRecipe,
-    fit: Callable[[list[dict[str, str]]], bool],
+    fit: Callable[[list[dict[str, str]]], bool] | None,
+    stage_fit: StageFit | None = None,
     retrieval_limit: int = 10,
     selected_record_ids: list[str] | None = None,
     candidate_mode: CandidateMode = "combined_dense",
@@ -216,7 +227,7 @@ def plan_source_batches(
         trial = {**delivery, "sources": sources}
         if recipe == "extract_then_edit":
             request = method.change_request(trial, date)
-            if not fit(_replay_context(request["messages"], trial)):
+            if not _fits("extract", _replay_context(request["messages"], trial), fit, stage_fit):
                 return False
         preview_delivery = _located_delivery(
             method, trial, None, retrieval_limit=retrieval_limit,
@@ -224,10 +235,10 @@ def plan_source_batches(
             prepare_delivery=prepare_delivery, selected_records=selected,
         )
         request = method.preview_writer_request(preview_delivery)
-        return fit(_replay_context(method.edit_messages(
+        return _fits("edit", _replay_context(method.edit_messages(
             request["packet"], date, allow_create=True, schema=request["schema"],
             prior_context=delivery.get("prior_context", []),
-        ), trial))
+        ), trial), fit, stage_fit)
 
     if fits(delivery["sources"]):
         return [delivery]
@@ -348,6 +359,7 @@ def _maintain_views(
     session: str, request_id: str, date: str, recipe: MaintenanceRecipe,
     memory_view_mode: MemoryViewMode, model_call: ModelCall, commit: Commit | None,
     retrieval_limit: int, fit: Callable[[list[dict[str, str]]], bool] | None,
+    stage_fit: StageFit | None,
     prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None,
     candidate_mode: CandidateMode, save: Callable[[], None],
     call: Callable[[str, list[dict[str, str]], dict[str, Any]], Any],
@@ -450,6 +462,8 @@ def _maintain_views(
                 "changes": copy.deepcopy(state["changes"]),
                 "prior_context": copy.deepcopy(state.get("prior_context", [])), "date": date,
                 "allow_create": pending["create"],
+                **({"result_maintenance": copy.deepcopy(state["result_maintenance"])}
+                   if "result_maintenance" in state else {}),
                 **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
             }, index=False)
             save()
@@ -464,6 +478,7 @@ def _maintain_views(
             method, {**delivery, "materialize_selected_support": True},
             session=session, request_id=child_id, date=date, recipe=recipe,
             model_call=work_call, commit=commit, retrieval_limit=retrieval_limit, fit=fit,
+            stage_fit=stage_fit,
             prepare_delivery=prepare_delivery, candidate_mode=candidate_mode,
             selected_record_ids=[ref["record_id"] for ref in pending["records"]],
             batch_sources=False,
@@ -488,6 +503,7 @@ def maintain_event(
     commit: Commit | None = None,
     retrieval_limit: int = 10,
     fit: Callable[[list[dict[str, str]]], bool] | None = None,
+    stage_fit: StageFit | None = None,
     prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
     execute: bool = True,
     selected_record_ids: list[str] | None = None,
@@ -519,6 +535,13 @@ def maintain_event(
             raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
     ns = (*service.namespace, "edit_maintenance")
     key = json.dumps([session, request_id], ensure_ascii=False)
+    prior = service.store.get(ns, key)
+    if prior is not None and "result_maintenance" in prior.value:
+        # A continuation reopens the original field ranges without re-projecting
+        # the Source or repeating any already confirmed extraction.
+        delivery = {**delivery, "result_maintenance": copy.deepcopy(
+            prior.value["result_maintenance"]
+        )}
     binding = {
         "recipe": recipe, "arm": method.method_name, "interface": method.interface_version,
         "features": method.features.settings(),
@@ -533,13 +556,16 @@ def maintain_event(
         binding["memory_view_mode"] = memory_view_mode
     if candidate_record_ids is not None:
         binding["candidate_record_ids"] = list(dict.fromkeys(candidate_record_ids))
+    if "result_maintenance" in delivery:
+        binding["result_maintenance_mode"] = delivery["result_maintenance"]["mode"]
     locating_ids = selected_record_ids if selected_record_ids is not None else candidate_record_ids
-    prior = service.store.get(ns, key)
     state: dict[str, Any] = copy.deepcopy(prior.value) if prior else {
         "binding": binding, "phase": "start", "receipts": [], "unprocessed": [],
         "prior_context": copy.deepcopy(delivery.get("prior_context", [])),
         "date": date,
         **({"memory_save_requested": True} if memory_save_requested else {}),
+        **({"result_maintenance": copy.deepcopy(delivery["result_maintenance"])}
+           if "result_maintenance" in delivery else {}),
     }
     date = state.get("date", date)
     if state["binding"] != binding:
@@ -580,6 +606,10 @@ def maintain_event(
             **({"episode_index": copy.deepcopy(state["episode_index"])}
                if "episode_index" in state else {}),
             **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
+            **({"result_maintenance_mode": state["result_maintenance"]["mode"],
+                "literal_observation_candidate_count": len(
+                    state["result_maintenance"]["literal_changes"]
+                )} if "result_maintenance" in state else {}),
             **({"batches": copy.deepcopy(batches), "source_batch_count": 1,
                 "memory_view": {
                     "mode": memory_view_mode,
@@ -600,7 +630,7 @@ def maintain_event(
         return result()
 
     def call(stage: str, messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
-        if fit is not None and not fit(messages):
+        if not _fits(stage, messages, fit, stage_fit):
             raise FunctionalRejection("EDIT_MAINTENANCE_REQUEST_EXCEEDS_CAPACITY")
         state["phase"] = stage.split(":", 1)[0] + "_pending"
         if memory_view_mode != "legacy":
@@ -610,11 +640,13 @@ def maintain_event(
         return model_call(stage, messages, schema)
 
     try:
-        if memory_view_mode == "legacy" and state["phase"] == "start" and fit is not None and (
+        if memory_view_mode == "legacy" and state["phase"] == "start" \
+                and (fit is not None or stage_fit is not None) \
+                and "result_maintenance" not in state and (
             batch_sources if batch_sources is not None else service.memory_profile == "unified_v1"
         ):
             batches = plan_source_batches(
-                method, delivery, date=date, recipe=recipe, fit=fit,
+                method, delivery, date=date, recipe=recipe, fit=fit, stage_fit=stage_fit,
                 retrieval_limit=retrieval_limit, selected_record_ids=locating_ids,
                 candidate_mode=candidate_mode, prepare_delivery=prepare_delivery,
             )
@@ -632,7 +664,8 @@ def maintain_event(
                     method, state["batches"][index], session=session,
                     request_id=f"{request_id}:batch:{index}", date=date, recipe=recipe,
                     model_call=model_call, commit=commit, retrieval_limit=retrieval_limit,
-                    fit=fit, prepare_delivery=prepare_delivery, execute=execute,
+                    fit=fit, stage_fit=stage_fit, prepare_delivery=prepare_delivery,
+                    execute=execute,
                     selected_record_ids=locating_ids, candidate_mode=candidate_mode,
                     batch_sources=False,
                     memory_save_requested=state.get("memory_save_requested", False),
@@ -651,16 +684,22 @@ def maintain_event(
             save()
             return result()
         if state["phase"] == "start":
+            literal_changes = copy.deepcopy(
+                state.get("result_maintenance", {}).get("literal_changes", [])
+            )
             if recipe == "extract_then_edit":
                 request = method.change_request(
                     {**delivery, "prior_context": state.get("prior_context", [])}, date
                 )
-                envelope = call(
+                # Fields already literal under a public profile need no second
+                # generation. Prose still uses the same existing extractor.
+                envelope = (call(
                     "extract", _replay_context(request["messages"], delivery), request["schema"]
-                )
-                state["changes"] = method.decode_changes(envelope, request)
+                ) if "result_maintenance" not in state or request["mapping"]["evidence"]
+                    else {"changes": []})
+                state["changes"] = [*literal_changes, *method.decode_changes(envelope, request)]
             else:
-                state["changes"] = None
+                state["changes"] = literal_changes if "result_maintenance" in state else None
             state["phase"] = "locate"
             save()
         if state["phase"] == "locate":
@@ -697,7 +736,8 @@ def maintain_event(
                 method, delivery, state, session=session, request_id=request_id,
                 date=date, recipe=recipe, memory_view_mode=memory_view_mode,
                 model_call=model_call, commit=commit, retrieval_limit=retrieval_limit,
-                fit=fit, prepare_delivery=prepare_delivery, candidate_mode=candidate_mode,
+                fit=fit, stage_fit=stage_fit,
+                prepare_delivery=prepare_delivery, candidate_mode=candidate_mode,
                 save=save, call=call,
             )
             if state["phase"] == "complete" and service.memory_profile == "unified_v1":
@@ -761,6 +801,7 @@ def resume_maintenance(
     commit: Commit | None = None,
     retrieval_limit: int = 10,
     fit: Callable[[list[dict[str, str]]], bool] | None = None,
+    stage_fit: StageFit | None = None,
     prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
     selected_record_ids: list[str] | None = None,
     candidate_mode: CandidateMode = "combined_dense",
@@ -790,7 +831,7 @@ def resume_maintenance(
     options: dict[str, Any] = {
         "session": session, "date": prior.value.get("date", date),
         "recipe": recipe, "model_call": model_call,
-        "commit": commit, "retrieval_limit": retrieval_limit, "fit": fit,
+        "commit": commit, "retrieval_limit": retrieval_limit, "fit": fit, "stage_fit": stage_fit,
         "prepare_delivery": prepare_delivery, "selected_record_ids": selected_record_ids,
         "candidate_mode": candidate_mode,
         "memory_view_mode": memory_view_mode,
@@ -959,6 +1000,8 @@ def resume_maintenance(
             "prior_context": copy.deepcopy(state.get("prior_context", [])),
             "prior_request_id": prior_request_id,
             "date": state.get("date", date),
+            **({"result_maintenance": copy.deepcopy(state["result_maintenance"])}
+               if "result_maintenance" in state else {}),
             **({"memory_save_requested": True} if state.get("memory_save_requested") else {}),
             **({"prior_session": session} if attempt_session != session else {}),
         }

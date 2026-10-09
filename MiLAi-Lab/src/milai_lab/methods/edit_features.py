@@ -155,8 +155,11 @@ def feature_proposal_schema(
     *,
     allow_create: bool,
     target: str | None = None,
+    for_generation: bool = False,
 ) -> dict[str, Any]:
-    schema = copy.deepcopy(writer_proposal_schema(arm, allow_create=allow_create))
+    schema = copy.deepcopy(writer_proposal_schema(
+        arm, allow_create=allow_create, for_generation=for_generation
+    ))
     refs = {
         "r": list(mapping.get("records", {})),
         "u": [
@@ -197,6 +200,20 @@ def feature_proposal_schema(
 
     walk(schema)
     variants = schema["oneOf"]
+    for variant in variants:
+        if "edits" not in variant["properties"]:
+            continue
+        for operation in variant["properties"]["edits"]["items"]["oneOf"]:
+            append_fields = operation["properties"]
+            if append_fields["operation"]["const"] != "append" \
+                    or append_fields["role"].get("const") != "condition":
+                continue
+            content = [alias for alias in refs["u"]
+                       if mapping["units"][alias]["role"] == "content"]
+            append_fields["attach_to"] = {
+                "type": "array", "items": reference("u", content),
+                **({"maxItems": 0} if not content else {}),
+            }
     variants[:] = [
         v
         for v in variants
@@ -250,12 +267,15 @@ def feature_proposal_schema(
         ]
         general = [alias for alias in content if alias not in exceptions]
         ops = []
-        for operation, candidates in (
-            ("change_value", content),
+        operations = [
+            ("replace", refs["u"]),
             ("add_exception", general),
             ("remove_exception", exceptions),
-            ("change_condition", conditions),
-        ):
+        ]
+        if not for_generation:
+            # Previously saved proposals keep their original role-bound names.
+            operations.extend([("change_value", content), ("change_condition", conditions)])
+        for operation, candidates in operations:
             if not candidates or (
                 not refs["e"] and operation in {"add_exception", "remove_exception"}
             ):
@@ -269,7 +289,7 @@ def feature_proposal_schema(
             if operation != "remove_exception":
                 fields["text"] = {"type": "string", "minLength": 1}
                 required.append("text")
-            if operation in {"change_value", "change_condition"}:
+            if operation in {"replace", "change_value", "change_condition"}:
                 fields["evidence"]["minItems"] = 0
                 fields["keep_support"] = {"type": "array", "items": reference("h")}
             if operation == "add_exception":
@@ -318,16 +338,22 @@ def feature_proposal_schema(
             if not ops:
                 variants.remove(variant)
     if features.source_metadata:
+        # Relation support remains available for bindings, but cannot retain a
+        # unit's attribution. Saved proposals keep their original decode schema.
+        assertion_support = [
+            alias for alias in refs["h"]
+            if not for_generation or "unit" in mapping["support"][alias]
+        ]
         assertion = {
             "oneOf": [
                 _object(
                     {
-                        "source": reference("e"),
+                        "source_evidence": reference("e"),
                         "kind": {"enum": ["reported", "inferred", "observed", "uncertain"]},
                     },
-                    ["source", "kind"],
+                    ["source_evidence", "kind"],
                 ),
-                _object({"keep": reference("h")}, ["keep"]),
+                _object({"keep": reference("h", assertion_support)}, ["keep"]),
             ]
         }
         if features.temporal_scope:
@@ -348,12 +374,25 @@ def feature_proposal_schema(
                 },
                 [],
             )
+        if not for_generation:
+            legacy_assertion = copy.deepcopy(assertion["oneOf"][0])
+            legacy_assertion["properties"]["source"] = legacy_assertion["properties"].pop(
+                "source_evidence"
+            )
+            legacy_assertion["required"] = ["source", "kind"]
+            assertion["oneOf"].insert(1, legacy_assertion)
         assertion["oneOf"] = [
             v
             for v in assertion["oneOf"]
-            if ("source" in v["properties"] and refs["e"])
-            or ("keep" in v["properties"] and refs["h"])
+            if (("source_evidence" in v["properties"] or "source" in v["properties"])
+                and refs["e"])
+            or ("keep" in v["properties"] and assertion_support)
         ]
+        current_assertions = [v for v in assertion["oneOf"] if "keep" not in v["properties"]]
+        current_assertion = (
+            current_assertions[0] if len(current_assertions) == 1
+            else {"oneOf": current_assertions}
+        )
         for variant in variants:
             fields = variant["properties"]
             if "units" in fields:
@@ -361,9 +400,7 @@ def feature_proposal_schema(
                 item["properties"]["assertion"] = copy.deepcopy(assertion)
                 item["required"].append("assertion")
                 if fields["action"]["const"] == "create":
-                    item["properties"]["assertion"] = next(
-                        v for v in assertion["oneOf"] if "source" in v["properties"]
-                    )
+                    item["properties"]["assertion"] = copy.deepcopy(current_assertion)
             if "edits" in fields:
                 for item in fields["edits"]["items"]["oneOf"]:
                     if "text" in item["properties"]:
@@ -373,10 +410,40 @@ def feature_proposal_schema(
                             "change_value",
                             "change_condition",
                         }:
-                            item["properties"]["assertion"] = next(
-                                v for v in assertion["oneOf"] if "source" in v["properties"]
-                            )
+                            item["properties"]["assertion"] = copy.deepcopy(current_assertion)
                         item["required"].append("assertion")
+
+    def retained_text(item: dict[str, Any], *, keep_only: bool = False) -> None:
+        if not features.source_metadata or (
+            not keep_only and "from_unit" not in item["properties"]
+        ):
+            return
+        if keep_only and for_generation:
+            choices = []
+            for selected in item["properties"]["assertion"]["oneOf"]:
+                choice = copy.deepcopy(item)
+                choice["properties"]["assertion"] = copy.deepcopy(selected)
+                if "keep" in selected["properties"]:
+                    choice["properties"].pop("text")
+                    choice["required"].remove("text")
+                    choice["properties"].pop("evidence")
+                    choice["required"].remove("evidence")
+                choices.append(choice)
+            item.clear()
+            item["oneOf"] = choices
+            return
+        item["required"].remove("text")
+        item["anyOf"] = [
+            {"required": ["text"]},
+            {"required": ["from_unit"],
+             "properties": {"assertion": {"required": ["keep"]}}},
+        ]
+        if keep_only:
+            item["anyOf"][1].pop("required")
+            # Accept the new reference-only keep as well as existing explicit arrays.
+            item["required"].remove("evidence")
+            item["anyOf"][0]["required"].append("evidence")
+
     for variant in variants:
         fields = variant["properties"]
         if "units" not in fields:
@@ -388,11 +455,15 @@ def feature_proposal_schema(
             prior_contents = [
                 alias for alias in refs["u"] if mapping["units"][alias]["role"] == "content"
             ]
-            if prior_contents:
+            if arm == "B0" and features.source_metadata and for_generation:
+                clause["properties"]["evidence"]["minItems"] = 1
+            if prior_contents and not (arm == "B0" and features.source_metadata and for_generation):
                 clause["properties"]["from_unit"] = reference("u", prior_contents)
         fields["clauses"] = {**unit, "items": clause}
         variant["required"] = ["clauses" if key == "units" else key for key in variant["required"]]
         if arm not in {"B2", "M"}:
+            retained_text(clause, keep_only=arm == "B0"
+                          and fields["action"]["const"] == "rewrite" and bool(prior_contents))
             continue
         relation = fields.pop("relations")["items"]
         binding = _object(
@@ -412,6 +483,7 @@ def feature_proposal_schema(
             ]
             if prior_conditions:
                 condition["properties"]["from_unit"] = reference("u", prior_conditions)
+        retained_text(condition)
         condition["properties"]["binding"] = copy.deepcopy(binding)
         condition["required"].append("binding")
         clause["properties"]["conditions"] = {
@@ -477,6 +549,7 @@ def feature_proposal_schema(
                 "items": orphan,
                 **({"maxItems": 0} if not orphan_support else {}),
             }
+        retained_text(clause)
         scoped = copy.deepcopy(clause)
         scoped["properties"]["conditions"]["minItems"] = 1
         scoped["properties"]["overrides"]["minItems"] = 1
@@ -496,8 +569,11 @@ def feature_envelope_schema(
     mapping: dict[str, Any],
     *,
     allow_create: bool,
+    for_generation: bool = True,
 ) -> dict[str, Any]:
-    full = feature_proposal_schema(arm, features, mapping, allow_create=allow_create)
+    full = feature_proposal_schema(
+        arm, features, mapping, allow_create=allow_create, for_generation=for_generation
+    )
     if not features.single_record_changes:
         return _object(
             {
@@ -514,7 +590,8 @@ def feature_envelope_schema(
     containers = {}
     for target in mapping.get("records", {}):
         variants = feature_proposal_schema(
-            arm, features, mapping, allow_create=False, target=target
+            arm, features, mapping, allow_create=False, target=target,
+            for_generation=for_generation,
         )["oneOf"]
         for variant in variants:
             variant["properties"].pop("target", None)
@@ -524,7 +601,9 @@ def feature_envelope_schema(
         {
             "creates": {
                 "type": "array",
-                "description": "New matters only. Omit when there are none.",
+                "description": ("New matters only. Return [] when there are none."
+                                if for_generation else
+                                "New matters only. Omit when there are none."),
                 "default": [],
                 "items": create[0] if create else False,
                 **({"maxItems": 0} if not create else {}),
@@ -532,11 +611,12 @@ def feature_envelope_schema(
             "records": {
                 **_object(containers, []),
                 "description": "Existing matters keyed by their explicit delivered r alias. "
-                "Omit when there are no existing-matter changes.",
+                + ("Return {} when there are no existing-matter changes." if for_generation else
+                   "Omit when there are no existing-matter changes."),
                 "default": {},
             },
         },
-        [],
+        ["creates", "records"] if for_generation else [],
     )
 
 
@@ -545,6 +625,11 @@ def compile_semantic_operations(
 ) -> dict[str, Any]:
     """Structural compilation only. The model chooses meaning and applicability."""
     result = compile_clause_proposal(proposal)
+    for item in [*result.get("units", []), *result.get("edits", [])]:
+        assertion = item.get("assertion")
+        if assertion and "source_evidence" in assertion:
+            # Reuse the existing attribution path with the exact selected fragment.
+            assertion["source"] = assertion.pop("source_evidence")
     if result["action"] == "retract_record":
         return {
             "action": "rewrite",

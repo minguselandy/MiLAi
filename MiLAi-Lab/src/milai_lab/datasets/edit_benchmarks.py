@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
@@ -17,10 +18,18 @@ class ObservedSession:
 
 
 def halumem_users(path: Path, selected: list[str]) -> list[dict[str, Any]]:
+    """Decode selected rows only; the public JSONL puts uuid in its first field."""
     wanted = set(selected)
     users = []
+    decoder = json.JSONDecoder()
     with path.open(encoding="utf-8") as stream:
         for line in stream:
+            head = re.match(r'\s*\{\s*"uuid"\s*:\s*', line)
+            if head is None:
+                raise ValueError("HaluMem rows must put uuid in the first JSON field")
+            user_id, _ = decoder.raw_decode(line, head.end())
+            if user_id not in wanted:
+                continue
             user = json.loads(line)
             if user["uuid"] in wanted:
                 users.append(user)

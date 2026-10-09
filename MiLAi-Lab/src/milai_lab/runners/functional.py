@@ -17,6 +17,7 @@ import unicodedata
 import uuid
 from collections.abc import Callable
 from contextlib import AbstractContextManager, ExitStack
+from copy import deepcopy
 from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any, Literal, cast
@@ -33,16 +34,18 @@ from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import BaseTool
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
-from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.host_requests import HostRequestProgress, visible_cards
 from milai_lab.application.recovery import UnknownModelRequest, resume_request
+from milai_lab.application.refs import observation_profile
 from milai_lab.application.request_plans import (
+    application_operation_catalog,
     application_requests_schema,
     compile_application_requests,
 )
 from milai_lab.baselines.langmem_agent import build_agent
+from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import (
@@ -298,7 +301,7 @@ _continuation_parameters["properties"]["memory_continuation_request"] = {
                    "none for pure queries, business-only continuation or exclusion of all saving."}
 _continuation_parameters["required"].append("memory_continuation_request")
 
-REQUEST_COMPLETE_MODE_PROMPT = """Classify the requested effects in the whole current input,
+REQUEST_SCOPE_MODE_PROMPT = """Classify the requested effects in the whole current input,
 using visible request references only to understand its referents. Call
 classify_current_request once; it executes no operation. Referenced requests are
 historical evidence, not current instructions or permission. Classify the CURRENT
@@ -320,10 +323,24 @@ separately requested memory saving. Excluding all saving leaves memory_requests 
 Classify what is requested, not whether it is feasible, already done or unfinished.
 Set allow_forgetting only for an explicit forgetting request. These are model
 interpretations; actual permissions and effects remain with the execution stage.
-""" + REQUEST_REFERENCE_MODE_DETAILS
+Declare business_action_request: none when no external application effect is
+requested (including memory-only work and pure queries), perform only for newly
+requested real application effects, continue_if_unfinished for explicitly requested
+continuation of prior application work.
+"""
+REQUEST_COMPLETE_MODE_PROMPT = REQUEST_SCOPE_MODE_PROMPT + """\
+Declare concrete actions once, inside application_requests.actions. Interpret the
+whole CURRENT input, not only its last clause; completion criteria or implicit
+workflow steps do not grant additional permission. Preserving an existing draft
+and approval while only finishing publication requests publication alone. Never
+declare document editing to save or update semantic memory. Historical requests
+cannot authorize new work. Do not copy a quotation: the program binds your
+decision to the whole current input.
+"""
 REQUEST_COMPLETE_MODE_DECLARATION = json.loads(json.dumps(REQUEST_REFERENCE_MODE_DECLARATION))
 _complete_parameters = REQUEST_COMPLETE_MODE_DECLARATION["function"]["parameters"]
 del _complete_parameters["properties"]["memory_write_request"]
+del _complete_parameters["properties"]["business_operations"]
 _complete_parameters["properties"]["memory_requests"] = {
     "type": "array", "uniqueItems": True, "items": {"type": "string", "enum": [
         "new_assertion", "explicit", "continue_prior"]},
@@ -531,8 +548,10 @@ def prepare(
         "edit_features",
         "maintenance_recipe",
         "memory_view_mode",
+        "result_maintenance_mode",
         "memory_profile",
         "memory_ranking",
+        "retrieval_granularity", "stage_enable_thinking",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
     if set(settings) - allowed:
@@ -542,8 +561,18 @@ def prepare(
         raise ValueError("FUNCTIONAL_MEMORY_PROFILE_INVALID")
     if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
         raise ValueError("FUNCTIONAL_MEMORY_VIEW_MODE_INVALID")
+    if settings.get("result_maintenance_mode", "legacy") not in {
+        "legacy", "literal_observations_v1",
+    }:
+        raise ValueError("FUNCTIONAL_RESULT_MAINTENANCE_MODE_INVALID")
     if settings.get("memory_ranking", "dense") not in {"dense", "activation"}:
         raise ValueError("MEMORY_RANKING_INVALID")
+    if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
+        raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
+    stage_modes = settings.get("stage_enable_thinking", {})
+    if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
+            or any(type(value) is not bool for value in stage_modes.values())):
+        raise ValueError("STAGE_ENABLE_THINKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
             and settings["memory_method"] not in FUNCTIONAL_ARMS):
         raise ValueError("FUNCTIONAL_MEMORY_METHOD_INVALID")
@@ -672,8 +701,7 @@ def prepare(
         raise ValueError("FUNCTIONAL_REASONING_HISTORY_REQUIRES_NATIVE")
     if settings.get("declaration_thinking") == "disabled" and (
             host.tool_mode != "native" or host.enable_thinking is not True
-            or settings.get("capacity", {}).get("enable_thinking") is not True
-            or settings.get("declaration_tool_choice") != "required"):
+            or settings.get("capacity", {}).get("enable_thinking") is not True):
         raise ValueError("FUNCTIONAL_DECLARATION_THINKING_INCONSISTENT")
     if settings.get("request_mode", "disabled") not in {
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",
@@ -682,11 +710,15 @@ def prepare(
         "current_request_native_v6",
         "current_request_native_v7",
         "current_request_native_v8",
+        "current_request_native_v9",
+        "current_request_json_v9",
     }:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
     if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
         raise ValueError("FUNCTIONAL_REQUEST_MODE_NATIVE_REQUIRED")
-    if settings.get("request_mode") == "current_request_native_v8" and (
+    if settings.get("request_mode") in {
+        "current_request_native_v8", "current_request_native_v9", "current_request_json_v9",
+    } and (
         settings.get("memory_profile") != "unified_v1" or not settings.get("maintenance_recipe")
     ):
         raise ValueError("FUNCTIONAL_COMPLETE_REQUEST_REQUIRES_UNIFIED_MAINTENANCE")
@@ -810,6 +842,7 @@ def finalize_response(
     resume: bool,
     remaining_reproposals: int,
     trace: Trace,
+    enable_thinking: bool | None = None,
 ) -> tuple[AIMessage, dict[str, Any]]:
     """One declared response stage, without tools; persist reservation and result.
 
@@ -863,7 +896,9 @@ def finalize_response(
         state.update(attempts=state["attempts"] + 1, status="reserved_before_dispatch",
                      tools_available=False, execution_candidate_delivered=False)
         write_json(path, state)
-        answer = model.invoke(prompt, tools=[], tool_choice="none")
+        sampling: dict[str, Any] = ({"enable_thinking": enable_thinking}
+                                   if enable_thinking is not None else {})
+        answer = model.invoke(prompt, tools=[], tool_choice="none", **sampling)
         if (not isinstance(answer, AIMessage) or answer.tool_calls or answer.invalid_tool_calls
                 or final_delivery(answer.content)["status"] != "available"):
             state.update(status="unusable_response",
@@ -895,19 +930,51 @@ def request_mode(
     independent_capabilities: bool = False,
     memory_continuation: bool = False,
     application_workflow: str | None = None,
+    scope_only: bool = False,
     referenced_requests: list[dict[str, Any]] | None = None,
     reference_fit: Callable[[str], bool] | None = None,
 ) -> dict[str, Any]:
     """Persist one focused model interpretation; catalog enforcement is deterministic.
 
-    V8 can refer to the existing visible original requests. Current input alone
+    V8/V9 can refer to the existing visible original requests. Current input alone
     supplies requested effects and restrictions. The call shares the actual
     provider, ledger and quota, and is never a semantic correctness oracle.
+    V9 declares scopes first; concrete current actions use the operations entry.
     """
     flags = {"allow_memory_maintenance", "allow_forgetting", "allow_business_mutation",
              "requires_memory_result"}
 
+    def explicit_operations(value: dict[str, Any]) -> list[str]:
+        # Called only after the existing application schema has validated actions.
+        # Completion criteria may contain other steps; those are not permission.
+        return list(dict.fromkeys(action["operation"]
+            for item in value["application_requests"] for action in item["actions"]))
+
     def valid(value: Any, *, saved: bool = False) -> bool:
+        if scope_only and (not saved or (isinstance(value, dict)
+                                        and "application_requests" not in value)):
+            # Saved full V8 decisions keep their original validation and meaning.
+            if not isinstance(value, dict) or set(value) != {
+                "memory_requests", "allow_forgetting", "business_action_request",
+                "application_continuation_request",
+            }:
+                return False
+            requests = value["memory_requests"]
+            return (isinstance(requests, list)
+                and all(isinstance(item, str) and item in {
+                    "new_assertion", "explicit", "continue_prior"} for item in requests)
+                and len(requests) == len(set(requests))
+                and type(value["allow_forgetting"]) is bool
+                and isinstance(value["business_action_request"], str)
+                and value["business_action_request"] in {
+                    "none", "perform", "continue_if_unfinished"}
+                and isinstance(value["application_continuation_request"], str)
+                and value["application_continuation_request"] in {
+                    "none", "resolve_prior_request"})
+        action_declaration = (not saved and application_workflow is not None
+            and isinstance(value, dict) and "memory_requests" in value
+            and "business_operations" not in value)
+        operations = value.get("business_operations") if isinstance(value, dict) else None
         if application_workflow is not None:
             from jsonschema.exceptions import ValidationError  # type: ignore[import-untyped]
 
@@ -922,13 +989,14 @@ def request_mode(
                     application_workflow, value["application_requests"], save_result=False)
             except (ValidationError, ValueError, TypeError):
                 return False
+            if action_declaration:
+                operations = explicit_operations(value)
             if plans and (value.get("business_action_request") == "none" or any(
-                action["operation"] not in value.get("business_operations", [])
+                action["operation"] not in (operations or [])
                 for item in value["application_requests"] for action in item["actions"]
             )):
                 return False
         if operation_mode_declaration:
-            operations = value.get("business_operations") if isinstance(value, dict) else None
             if (not isinstance(operations, list)
                     or not all(isinstance(op, str) and op in BUSINESS_MUTATIONS
                                for op in operations)
@@ -977,7 +1045,8 @@ def request_mode(
                 *memory_fields, "allow_forgetting", *(
                     ["business_action_request", *([] if reference_mode_declaration else
                         ["business_action_quote"]), *(
-                        ["business_operations"] if operation_mode_declaration else [])]
+                        ["business_operations"] if operation_mode_declaration
+                        and not action_declaration else [])]
                     if action_mode_declaration
                     else ["allow_business_mutation"]), *(
                     ["application_requests", "application_continuation_request"]
@@ -1005,13 +1074,19 @@ def request_mode(
             raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
         write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
-        prompt = (REQUEST_COMPLETE_MODE_PROMPT if application_workflow is not None else
+        prompt = (REQUEST_SCOPE_MODE_PROMPT if scope_only else
+                  REQUEST_COMPLETE_MODE_PROMPT if application_workflow is not None else
                   REQUEST_CONTINUATION_MODE_PROMPT if memory_continuation else
                   REQUEST_REFERENCE_MODE_PROMPT if reference_mode_declaration else
                   REQUEST_OPERATION_MODE_PROMPT if operation_mode_declaration else
                   REQUEST_ACTION_MODE_PROMPT if action_mode_declaration else
                   REQUEST_WRITE_MODE_PROMPT if write_mode_declaration else
                   REQUEST_MODE_NATIVE_PROMPT if native_declaration else REQUEST_MODE_PROMPT)
+        if scope_only and not native_declaration:
+            prompt = prompt.replace(
+                "Call\nclassify_current_request once; it executes no operation.",
+                "Return exactly one JSON object matching the response schema. This declaration\n"
+                "executes no operation.")
         declaration = (REQUEST_COMPLETE_MODE_DECLARATION if application_workflow is not None else
                        REQUEST_CONTINUATION_MODE_DECLARATION if memory_continuation else
                        REQUEST_REFERENCE_MODE_DECLARATION if reference_mode_declaration else
@@ -1022,9 +1097,10 @@ def request_mode(
         if application_workflow is not None:
             declaration = json.loads(json.dumps(declaration))
             parameters = declaration["function"]["parameters"]
-            parameters["properties"]["application_requests"] = application_requests_schema(
-                application_workflow)
-            parameters["required"].append("application_requests")
+            if not scope_only:
+                parameters["properties"]["application_requests"] = application_requests_schema(
+                    application_workflow)
+                parameters["required"].append("application_requests")
             parameters["properties"]["application_continuation_request"] = {
                 "type": "string", "enum": ["none", "resolve_prior_request"],
                 "description": "CURRENT request asks to inspect or resume an original registered "
@@ -1032,34 +1108,67 @@ def request_mode(
                                "permission."
             }
             parameters["required"].append("application_continuation_request")
-            prompt += (
-                "\nAlso declare application_requests, one target with its requested actions and "
-                "literal parameters from the CURRENT user input. Include all requested workflow "
-                "stages. reserve_and_label already includes labeling; do not add a second "
-                "complete_label action for it. Do not invent a reservation ID, document version, "
-                "completed field, outcome or permission. This is an intent interpretation; the "
-                "program compiles completion criteria and binds actual identities after queries. "
-                "For a reference to earlier work whose target/parameters are absent here, use "
-                "an empty list; the separate bounded continuation resolves the original registered "
-                "request. Pure queries also use an empty list. Do not create a new task from "
-                "history. Saving the actual result is separately controlled by the memory request."
-                " Set application_continuation_request=resolve_prior_request when the current "
-                "request asks to inspect or resume earlier requested work. A pure status query "
-                "may resolve request identity while retaining business_action_request=none and "
-                "memory_requests=[]; do not turn a query into authorization."
-            )
+            if scope_only:
+                prompt += ("\nAPPLICATION OPERATIONS:\n" + json.dumps(
+                    application_operation_catalog(application_workflow),
+                    ensure_ascii=False, separators=(",", ":")) + "\n")
+                prompt += (
+                    "Set application_continuation_request=resolve_prior_request when the CURRENT "
+                    "request asks to inspect or resume earlier requested work. A pure status "
+                    "query may resolve request identity while retaining "
+                    "business_action_request=none "
+                    "and memory_requests=[]; resolving identity grants no permission."
+                )
+            else:
+                prompt += (
+                    "\nDeclare application_requests only when the CURRENT user input requests "
+                    "a change "
+                    "to an external application object: one target with its requested actions and "
+                    "literal parameters. Otherwise use an empty list. Include all requested "
+                    "workflow "
+                    "stages. reserve_and_label already includes labeling; do not add a second "
+                    "complete_label action for it. Do not invent a reservation ID, document "
+                    "version, "
+                    "completed field, outcome or permission. This is an intent interpretation; the "
+                    "program compiles completion criteria and binds actual identities after "
+                    "queries. "
+                    "For a reference to earlier work whose target/parameters are absent here, use "
+                    "an empty list; the separate bounded continuation resolves the original "
+                    "registered "
+                    "request. Pure queries also use an empty list. Do not create a new task from "
+                    "history. Saving the actual result is separately controlled by the memory "
+                    "request."
+                    " Set application_continuation_request=resolve_prior_request when the current "
+                    "request asks to inspect or resume earlier requested work. A pure status query "
+                    "may resolve request identity while retaining business_action_request=none and "
+                    "memory_requests=[]; do not turn a query into authorization."
+                )
         if state["attempts"] > 1:
             prompt += ("\nThe preceding response did not meet the declared schema. "
                        "Use exactly the declared fields, enum values and types; no extra fields. "
                        + ("Return one classify_current_request call." if native_declaration
                           else "Return one valid JSON object."))
-        candidates = [{
-            "request_id": card["request_id"],
-            "requirements": card["requirements"],
-            "progress": {part: card["progress"][part]["status"]
-                         for part in ("business", "memory", "feedback")},
-            "user_fragments": card["user_fragments"],
-        } for card in (referenced_requests or [])] if application_workflow is not None else []
+        candidates = []
+        if application_workflow is not None:
+            for card in referenced_requests or []:
+                # Classification identifies requested effects, not read targets.
+                # Full issued handles stay in the original card for resolution.
+                fragments = [{key: value for key, value in part.items()
+                              if key not in {"namespace", "bank", "owner", "fragment_handle"}}
+                             for part in card["user_fragments"]]
+                if card.get("kind") == "memory_maintenance":
+                    candidates.append({**{key: card[key] for key in (
+                        "kind", "request_id", "maintenance_phase", "pending_refs",
+                        "confirmed_receipt_count",
+                    )}, "user_fragments": fragments})
+                else:
+                    candidates.append({
+                        "request_id": card["request_id"],
+                        "requirements": card["requirements"],
+                        "progress": {part: card["progress"][part]["status"]
+                                     for part in ("business", "memory", "feedback")},
+                        "user_fragments": fragments,
+                    })
         references: list[dict[str, Any]] = []
         omitted = 0
         for reference in reversed(candidates):
@@ -1074,9 +1183,14 @@ def request_mode(
                 "\nVISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n"
                 + json.dumps({"requests": references, "omitted_reference_count": omitted},
                              ensure_ascii=False, separators=(",", ":")))
+        generation_options: dict[str, Any] = ({"response_format": {
+            "type": "json_schema", "json_schema": {
+                "name": "milai_request_scope", "schema": declaration["function"]["parameters"]}}}
+            if scope_only and not native_declaration else {})
         response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=content)],
             tools=[declaration] if native_declaration else [],
-            tool_choice=declaration_tool_choice if native_declaration else "none")
+            tool_choice=declaration_tool_choice if native_declaration else "none",
+            **generation_options)
         try:
             if native_declaration:
                 decision = (response.tool_calls[0]["args"] if isinstance(response, AIMessage)
@@ -1089,11 +1203,16 @@ def request_mode(
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID") from error
         if not valid(decision):
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
+        if (application_workflow is not None and not scope_only and isinstance(decision, dict)
+                and "business_operations" not in decision):
+            decision = {**decision, "business_operations": explicit_operations(decision)}
         state.update(decision=decision)
         if references:
             state["reference_request_ids"] = [row["request_id"] for row in references]
         write_json(path, state)
     decision = state["decision"]
+    scope_decision = scope_only and "application_requests" not in decision
+    operations = decision.get("business_operations", [])
     memory_requests = decision.get("memory_requests")
     memory_write_request = (
         "explicit" if "explicit" in memory_requests else
@@ -1103,7 +1222,7 @@ def request_mode(
         "allow_memory_maintenance": memory_write_request != "none",
         "requires_memory_result": memory_write_request == "explicit",
         "allow_forgetting": decision["allow_forgetting"],
-        "allow_business_mutation": (bool(decision["business_operations"])
+        "allow_business_mutation": (bool(operations)
                                     if independent_capabilities else
                                     decision["business_action_request"] != "none"
                                     if action_mode_declaration
@@ -1113,7 +1232,8 @@ def request_mode(
     summary = {**interpreted,
                "interpretation": "same_host_model_current_request_with_visible_references"
                if state.get("reference_request_ids") else "same_host_model_current_request_only",
-               "protocol": "native_complete_requests_v8" if application_workflow is not None else
+               "protocol": "native_scope_requests_v9" if scope_decision else
+               "native_complete_requests_v8" if application_workflow is not None else
                "native_continuation_capabilities_v7" if memory_continuation else
                "native_independent_capabilities_v6" if independent_capabilities else
                "native_reference_declaration_v5" if reference_mode_declaration else
@@ -1128,7 +1248,7 @@ def request_mode(
         if not reference_mode_declaration:
             summary["business_action_quote"] = decision["business_action_quote"]
     if operation_mode_declaration:
-        summary["business_operations"] = decision["business_operations"]
+        summary["business_operations"] = operations
     if memory_continuation:
         summary["memory_continuation_request"] = (
             "resolve_prior_explicit" if "continue_prior" in memory_requests else "none"
@@ -1136,13 +1256,13 @@ def request_mode(
     if memory_requests is not None:
         summary["memory_requests"] = memory_requests
     if application_workflow is not None:
-        summary["application_requests"] = decision["application_requests"]
+        summary["application_requests"] = decision.get("application_requests", [])
         summary["application_continuation_request"] = decision["application_continuation_request"]
         if state.get("reference_request_ids"):
             summary["reference_request_ids"] = state["reference_request_ids"]
     if independent_capabilities:
         summary["business_declaration_status"] = (
-            "concrete_operations" if decision["business_operations"] else
+            "concrete_operations" if operations else
             "none" if decision["business_action_request"] == "none" else
             "unresolved_no_business_permission")
     trace({"event": "functional_request_mode", **summary, "attempt_id": path.stem})
@@ -1161,16 +1281,27 @@ def continuation_operations(
     *,
     declaration_tool_choice: str = "auto",
     source_fragment: Callable[[str], dict[str, Any]] | None = None,
+    application_workflow: str | None = None,
 ) -> dict[str, Any]:
-    """Resolve references only after a current-only continuation decision.
+    """Resolve the accepted current scope using its original request binding.
 
     Uses the ordinary bounded delivery, not a full checkpoint or evaluator world.
     V5/V6 preserve memory permissions. V7 can resume an explicitly requested memory
     task only when the current declaration permits resolution and actual delivered
     archived user fragments identify it. No historical source grants new business
     or forgetting permission. Request identity is not semantic authorization proof.
+    V9's CURRENT branch supplies literal application parameters after perform;
+    neither this stage nor its compiled plan proves effects or target identity.
     """
-    request_protocol = mode["protocol"] == "native_complete_requests_v8"
+    request_protocol = mode["protocol"] in {
+        "native_complete_requests_v8", "native_scope_requests_v9",
+    }
+    current_plan = (application_workflow is not None
+                    and mode["protocol"] == "native_scope_requests_v9"
+                    and mode["business_action_request"] == "perform"
+                    and not mode["business_operations"])
+    if application_workflow is not None and not current_plan:
+        raise ValueError("FUNCTIONAL_CURRENT_OPERATIONS_SCOPE_REQUIRED")
     memory_protocol = request_protocol or mode["protocol"] == "native_continuation_capabilities_v7"
     resolve_business = (mode["business_action_request"] == "continue_if_unfinished"
                         and not mode["business_operations"])
@@ -1179,14 +1310,15 @@ def continuation_operations(
     resolve_request = request_protocol and (
         mode["business_action_request"] == "continue_if_unfinished" or resolve_memory
         or mode.get("application_continuation_request") == "resolve_prior_request")
-    if not resolve_business and not resolve_memory and not resolve_request:
+    if not current_plan and not resolve_business and not resolve_memory and not resolve_request:
         raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_NOT_REQUESTED")
     bound = {**binding, "snapshot_id": material.get("snapshot_id"), "mode_attempt_id": path.stem}
     if memory_protocol:
-        bound["resolution_contract"] = "explicit_resolution_scope_v1"
+        bound["resolution_contract"] = ("current_application_plan_v1" if current_plan else
+                                        "explicit_resolution_scope_v1")
     state: dict[str, Any] = (read_json(path) if path.exists()
                              else {"binding": bound, "attempts": 0})
-    if request_protocol and "decision" in state:
+    if request_protocol and not current_plan and "decision" in state:
         # A later maintenance commit can refresh the ordinary Reader view. The
         # already delivered resolution keeps its own snapshot and original input;
         # current source visibility and registered request bindings are rechecked.
@@ -1196,6 +1328,17 @@ def continuation_operations(
         raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_BINDING_CHANGED")
 
     def valid(value: Any) -> bool:
+        if current_plan:
+            from jsonschema.exceptions import ValidationError
+
+            if not isinstance(value, dict) or set(value) != {"application_requests"}:
+                return False
+            try:
+                compile_application_requests(cast(str, application_workflow),
+                                             value["application_requests"], save_result=False)
+            except (ValidationError, ValueError, TypeError):
+                return False
+            return True
         if not (isinstance(value, dict) and set(value) == {"business_operations", *(
                     ["prior_memory_request_fragments"] if memory_protocol else []), *(
                     ["prior_request_ids"] if request_protocol else [])}
@@ -1229,7 +1372,7 @@ def continuation_operations(
         if state["attempts"] >= 1 + remaining:
             raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
-        if request_protocol:
+        if request_protocol and not current_plan:
             state["material"] = material
         write_json(path, state)
         prompt = (
@@ -1248,7 +1391,7 @@ def continuation_operations(
                  "archived_reference_material": material}
         declaration = (CONTINUATION_MEMORY_DECLARATION if memory_protocol else
                        CONTINUATION_OPERATIONS_DECLARATION)
-        if memory_protocol:
+        if memory_protocol and not current_plan:
             prompt = (
                 "Identify the prior work referenced by the CURRENT continuation. Return one "
                 "resolve_continuation_operations call using only the delivered archived material. "
@@ -1287,7 +1430,7 @@ def continuation_operations(
                                        else "keep_current_list",
                 "prior_memory_request_fragments": "resolve_from_prior_request" if resolve_memory
                                                   else "empty_required"}
-        if request_protocol:
+        if request_protocol and not current_plan:
             declaration = json.loads(json.dumps(declaration))
             parameters = declaration["function"]["parameters"]
             parameters["properties"]["prior_request_ids"] = {
@@ -1307,8 +1450,31 @@ def continuation_operations(
                 "permits it; otherwise keep that list empty. The execution stage queries actual "
                 "state, uses current permissions, and retains original failures."
             )
-        response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=json.dumps(
-            frame, ensure_ascii=False))],
+        if current_plan:
+            prompt = (
+                "Interpret the whole CURRENT user input using the declared application "
+                "operation descriptions. Return one "
+                "resolve_continuation_operations call. A nonempty application_requests contains "
+                "one target with its requested actions and literal parameters. Include only "
+                "the requested workflow stages; reserve_and_label already includes labeling. "
+                "Completion criteria or implicit steps do not authorize more actions. Submit the "
+                "same call with application_requests=[] when no CURRENT application action is "
+                "requested or literal target/parameters cannot be resolved from this input; "
+                "the earlier scope interpretation does not require a nonempty plan. "
+                "Original-request continuation is resolved separately, not by creating a new "
+                "plan from history. "
+                "The program compiles this plan and binds actual identities after queries. "
+                "Requested saving is separate from application actions and their actual results."
+            )
+            declaration = {"type": "function", "function": {
+                "name": "resolve_continuation_operations",
+                "description": "Submit the CURRENT application's literal plan, or "
+                               "application_requests=[] for no resolved CURRENT action.",
+                "parameters": {"type": "object", "additionalProperties": False,
+                    "properties": {"application_requests": application_requests_schema(
+                        cast(str, application_workflow))}, "required": ["application_requests"]}}}
+        response = model.invoke([SystemMessage(content=prompt), HumanMessage(
+            content=content if current_plan else json.dumps(frame, ensure_ascii=False))],
             tools=[declaration], tool_choice=declaration_tool_choice)
         decision = (response.tool_calls[0]["args"] if isinstance(response, AIMessage)
             and len(response.tool_calls) == 1 and not response.invalid_tool_calls
@@ -1317,6 +1483,23 @@ def continuation_operations(
             raise IncompleteChatResponse("FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID")
         state.update(decision=decision)
         write_json(path, state)
+    if current_plan:
+        requests = state["decision"]["application_requests"]
+        operations = list(dict.fromkeys(action["operation"]
+            for item in requests for action in item["actions"]))
+        resolved = {
+            **mode, "application_requests": requests, "business_operations": operations,
+            "allow_business_mutation": bool(operations),
+            "business_declaration_status": "resolved_concrete_operations" if operations
+                                           else "unresolved_no_business_permission",
+            "interpretation": "current_request_with_literal_application_plan",
+            "format_reproposals_used": mode["format_reproposals_used"]
+                                       + max(0, state["attempts"] - 1),
+            "current_operation_resolution": {"attempts": state["attempts"],
+                "attempt_id": path.stem, "semantic_correctness": "unchecked"},
+        }
+        trace({"event": "functional_current_operation_resolution", **resolved})
+        return resolved
     handles = state["decision"].get("prior_memory_request_fragments", [])
     selected = []
     if handles:
@@ -1370,10 +1553,19 @@ def continuation_operations(
                 "source_refs": list(dict.fromkeys(row["source_ref"] for row in selected)),
                 "semantic_correctness": "unchecked", "completion": "not_proven_by_resolution"})
         selected_refs = {fragment["source_ref"] for fragment in selected}
+        result_request_refs = {
+            card["binding"]["source_ref"]
+            for card in material.get("registered_application_requests", [])
+            if card["request_id"] in prior_request_ids and card["requirements"]["save_result"]
+        }
         resolved["prior_maintenance_requests"] = [
             {name: card[name] for name in ("session", "request_id", "checkpoint")}
             for card in material.get("pending_maintenance", [])
             if selected_refs.intersection(card["source_refs"])
+            # The selected application result uses an actual Tool observation.
+            # Its original User plan remains context, rather than another result
+            # save attempt. Unrelated memory-only work retains its own checkpoint.
+            and not set(card["source_refs"]).issubset(result_request_refs)
         ]
     trace({"event": "functional_continuation_resolution", **resolved})
     return resolved
@@ -1613,6 +1805,28 @@ def memory_effects(messages: list[Any]) -> dict[str, Any]:
         "and read-only search hits do not confirm semantic saving. An existing semantic record "
         "may satisfy a request without a new write; assess its actual delivered content.",
     }
+
+
+def _model_memory_effects(effects: dict[str, Any]) -> dict[str, Any]:
+    """Reference exact parent receipts in model input; keep audit results intact."""
+    projected = deepcopy(effects)
+
+    def project_batches(
+        result: dict[str, Any], references: list[tuple[str, dict[str, Any]]]
+    ) -> None:
+        for batch in result.get("batches", []):
+            batch["receipts"] = [
+                next(({"receipt_ref": ref} for ref, original in references
+                      if receipt == original), receipt)
+                for receipt in batch.get("receipts", [])
+            ]
+            project_batches(batch, references)
+
+    for index, result in enumerate(projected.get("maintenance", [])):
+        references = [(f"#/maintenance/{index}/receipts/{receipt_index}", receipt)
+                      for receipt_index, receipt in enumerate(result.get("receipts", []))]
+        project_batches(result, references)
+    return projected
 
 
 def seed_sources(
@@ -2048,7 +2262,10 @@ def message(
                     settings["embedding_capacity"], dimension=settings["embedding_dimension"],
                     batch_size=settings["embedding_batch_size"],
                 )
-                retriever = SemanticRetriever(embeddings, settings["embedding_dimension"])
+                retriever = SemanticRetriever(
+                    embeddings, settings["embedding_dimension"],
+                    granularity=settings.get("retrieval_granularity", "record"),
+                )
             service = MemoryService(
                 store,
                 namespace,
@@ -2085,21 +2302,15 @@ def message(
             if not capture.get("ok"):
                 raise ValueError("FUNCTIONAL_SOURCE_CAPTURE_UNAVAILABLE:" + str(capture))
             service.bind_source_boundary(session, message_id, [capture["source_ref"]])
-            if settings.get("failure_delivery") in {
-                "receipt_status_v2",
-                "receipt_status_v3",
-                "receipt_status_v4",
-            }:
-                # Bind the incoming event before classification, without retrieving
-                # anything. A pre-Agent failure delivery must inherit this input's
-                # visibility, never the preceding public turn's exposure.
-                service.bind_public_turn(
-                    session,
-                    message_id,
-                    capture["source_ref"],
-                    config_version=freeze["config_version"],
-                    phase="start",
-                )
+            # Bind the captured event before classification or pending-request
+            # lookup. Neither step retrieves memory or creates semantic facts.
+            service.bind_public_turn(
+                session,
+                message_id,
+                capture["source_ref"],
+                config_version=freeze["config_version"],
+                phase="start",
+            )
             capacity = HostCapacity(settings["capacity"])
 
             def support_review(evidence: dict[str, Any], delivered: Callable[[], None]) -> None:
@@ -2256,8 +2467,16 @@ def message(
                         session=session, message_id=message_id)
                     if blocked is not None:
                         raise _VisibilityReplayRevoked(blocked)
-                    if settings["request_mode"] == "current_request_native_v8":
-                        request_cards = visible_cards(app, service, capture["source_ref"])
+                    if settings["request_mode"] in {
+                        "current_request_native_v8", "current_request_native_v9",
+                        "current_request_json_v9",
+                    }:
+                        request_cards = visible_cards(
+                            app, service, capture["source_ref"],
+                            pending_maintenance=(memory.pending_maintenance(cfg)
+                                                 if isinstance(memory, FunctionalEditMemory)
+                                                 else None),
+                        )
                 mode = request_mode(
                     model,
                     mode_path,
@@ -2279,6 +2498,7 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
                     },
                     write_mode_declaration=settings["request_mode"]
                     in {
@@ -2289,6 +2509,8 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     action_mode_declaration=settings["request_mode"]
                     in {
@@ -2298,6 +2520,8 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     operation_mode_declaration=settings["request_mode"]
                     in {
@@ -2306,6 +2530,8 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     reference_mode_declaration=settings["request_mode"]
                     in {
@@ -2313,31 +2539,60 @@ def message(
                         "current_request_native_v6",
                         "current_request_native_v7",
                         "current_request_native_v8",
+                        "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     independent_capabilities=settings["request_mode"]
                     in {"current_request_native_v6", "current_request_native_v7",
-                        "current_request_native_v8"},
+                        "current_request_native_v8", "current_request_native_v9",
+                        "current_request_json_v9"},
                     memory_continuation=settings["request_mode"] in {
-                        "current_request_native_v7", "current_request_native_v8"},
+                        "current_request_native_v7", "current_request_native_v8",
+                        "current_request_native_v9", "current_request_json_v9"},
                     application_workflow=(app.workflow if settings["request_mode"]
-                                          == "current_request_native_v8" else None),
+                        in {"current_request_native_v8", "current_request_native_v9",
+                            "current_request_json_v9"} else None),
+                    scope_only=settings["request_mode"] in {
+                        "current_request_native_v9", "current_request_json_v9"},
                     referenced_requests=request_cards,
                     reference_fit=lambda text: capacity.text_tokens(text)
                     <= settings["ordinary_material_tokens"],
                     declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
                 )
+                if mode["protocol"] == "native_scope_requests_v9":
+                    output["request_mode"] = mode
+                if (mode["protocol"] == "native_scope_requests_v9"
+                        and mode["business_action_request"] == "perform"):
+                    blocked = _visibility_replay(
+                        service, read_json(result_path) if result_path.exists() else {},
+                        session=session, message_id=message_id)
+                    if blocked is not None:
+                        raise _VisibilityReplayRevoked(blocked)
+                    mode = continuation_operations(
+                        model, bank_root / f"{identity}-current-operations.json",
+                        {"source_ref": capture["source_ref"], "source_revision": 1,
+                         "config_version": freeze["config_version"]},
+                        content, mode, {}, settings["format_reproposals"], trace,
+                        declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
+                        application_workflow=app.workflow,
+                    )
+                    output["request_mode"] = mode
                 if settings["request_mode"] in {
                     "current_request_native_v5",
                     "current_request_native_v6",
                     "current_request_native_v7",
                     "current_request_native_v8",
+                    "current_request_native_v9",
+                    "current_request_json_v9",
                 } and (
                     (
                         mode["business_action_request"] == "continue_if_unfinished"
                         and not mode["business_operations"]
                     )
                     or mode.get("memory_continuation_request") == "resolve_prior_explicit"
-                    or (settings["request_mode"] == "current_request_native_v8"
+                    or (settings["request_mode"] in {
+                            "current_request_native_v8", "current_request_native_v9",
+                            "current_request_json_v9"}
                         and (mode["business_action_request"] == "continue_if_unfinished"
                              or mode["application_continuation_request"]
                              == "resolve_prior_request"))
@@ -2353,11 +2608,22 @@ def message(
                     material = memory.context(
                         session, message_id, freeze["config_version"], query=content
                     )
-                    if settings["request_mode"] == "current_request_native_v8":
+                    if settings["request_mode"] in {
+                        "current_request_native_v8", "current_request_native_v9",
+                        "current_request_json_v9",
+                    }:
                         cards = (request_cards if request_cards is not None else
-                                 visible_cards(app, service, capture["source_ref"]))
+                                 visible_cards(
+                                     app, service, capture["source_ref"],
+                                     pending_maintenance=(memory.pending_maintenance(cfg)
+                                                          if isinstance(memory,
+                                                                        FunctionalEditMemory)
+                                                          else None),
+                                 ))
                         material = {**material, "items": list(material.get("items", [])),
-                                    "registered_application_requests": cards}
+                                    "registered_application_requests": [
+                                        card for card in cards
+                                        if card.get("kind") != "memory_maintenance"]}
                         delivered = {row.get("fragment_handle") for row in material["items"]}
                         for card in cards:
                             for part in card["user_fragments"]:
@@ -2429,7 +2695,15 @@ def message(
             def maintenance_call(
                 stage: str, messages: list[dict[str, str]], schema: dict[str, Any]
             ) -> dict[str, Any]:
-                response = model.invoke(messages, tools=[], tool_choice="none")
+                response = model.invoke(
+                    messages, tools=[], tool_choice="none",
+                    response_format={"type": "json_schema", "json_schema": {
+                        "name": "milai_" + stage.partition(":")[0], "schema": schema}},
+                    **({"enable_thinking": settings["stage_enable_thinking"][
+                        stage.partition(":")[0]]}
+                       if stage.partition(":")[0] in settings.get("stage_enable_thinking", {})
+                       else {}),
+                )
                 if not isinstance(response, AIMessage) or not isinstance(response.content, str):
                     raise ValueError("FUNCTIONAL_MAINTENANCE_RESPONSE_MISSING")
                 value = parse_object(response.content, reject_duplicate_keys=True)
@@ -2440,6 +2714,14 @@ def message(
             def maintenance_fit(messages: list[dict[str, str]]) -> bool:
                 try:
                     capacity.check(messages)
+                except CapacityExceeded:
+                    return False
+                return True
+
+            def maintenance_stage_fit(stage: str, messages: list[dict[str, str]]) -> bool:
+                try:
+                    capacity.check(messages, enable_thinking=settings.get(
+                        "stage_enable_thinking", {}).get(stage.partition(":")[0]))
                 except CapacityExceeded:
                     return False
                 return True
@@ -2477,16 +2759,28 @@ def message(
                     ], ensure_ascii=False, separators=(",", ":")),
                     model_call=maintenance_call, allowed=maintenance_allowed,
                     execute=execute, fit=maintenance_fit,
+                    stage_fit=maintenance_stage_fit if settings.get("stage_enable_thinking")
+                    else None,
                 ) for prior in (mode or {}).get("prior_maintenance_requests", [])]
-                skip_current = bool(results and mode
-                                    and mode.get("current_memory_write_request") == "none")
+                skip_current = bool(mode and mode.get(
+                    "current_memory_write_request", mode.get("memory_write_request")) == "none")
                 return [*results, *memory.maintain_sources(
                     cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                     model_call=maintenance_call, allowed=maintenance_allowed, execute=execute,
-                    fit=maintenance_fit, prior_request_fragments=prior_request_fragments(),
+                    fit=maintenance_fit,
+                    stage_fit=maintenance_stage_fit if settings.get("stage_enable_thinking")
+                    else None,
+                    prior_request_fragments=prior_request_fragments(),
                     skip_source_refs=[capture["source_ref"]] if skip_current else None,
                     memory_save_requested=bool(memory.memory_view_mode != "legacy"
-                                               and mode and mode["requires_memory_result"]))]
+                                               and mode and mode["requires_memory_result"]),
+                    maintenance_scope=content,
+                    prepare_source_delivery=(
+                        (lambda delivery: memory.writer.observation_delivery(
+                            delivery, [observation_profile(app.workflow, maintenance=True)]))
+                        if settings.get("result_maintenance_mode", "legacy")
+                        == "literal_observations_v1" else None),
+                )]
 
             def context_hook(
                 state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
@@ -2596,6 +2890,28 @@ def message(
                         execute_maintenance = not for_finalization and forgotten_at is None
                         dispatched = False
                         if tracker is not None:
+                            # Request recovery already queries the selected object.
+                            # Admit that actual observation before preparing its
+                            # maintenance binding; Agent ToolMessages are only one
+                            # producer of source deliveries.
+                            refresh_requests()
+                            if execute_maintenance and mode and mode["requires_memory_result"]:
+                                for _, request_row in tracker.rows():
+                                    progress = request_row["request_progress"]
+                                    attempts = progress["memory"]["attempts"]
+                                    if progress["business"]["status"] != "completed" or (
+                                        progress["memory"]["status"] == "committed"
+                                    ) or (
+                                        attempts and attempts[-1].get("binding", {}).get(
+                                            "source_ref") == capture["source_ref"]
+                                    ):
+                                        continue
+                                    observation = progress["business"].get("observation", {})
+                                    if "delivery_response" in observation:
+                                        _note_edit_tool_delivery(memory, config, [
+                                            ToolMessage.model_validate(
+                                                observation["delivery_response"])
+                                        ])
                             # Record original semantic bindings before the shared
                             # Writer can commit or lose its response. These are
                             # the actual source batch IDs, without another Writer.
@@ -2698,7 +3014,7 @@ def message(
                                 ensure_ascii=False, separators=(",", ":")) if tracker else "")
                             + "".join("\n" + str(row.content) for row in completion_feedback)
                             + "\n"
-                            + json.dumps(effects, ensure_ascii=False)
+                            + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
                             + "\n"
                             + json.dumps(material, ensure_ascii=False)
                         ),
@@ -2732,7 +3048,9 @@ def message(
             request_binding = {"session": session, "turn_id": message_id,
                                "config_version": freeze["config_version"],
                                "source_ref": capture["source_ref"]}
-            if mode and mode["protocol"] == "native_complete_requests_v8" and adapter is not None:
+            if (mode and mode["protocol"] in {
+                "native_complete_requests_v8", "native_scope_requests_v9",
+            } and adapter is not None):
                 tracker = HostRequestProgress(app, adapter, service, request_binding, mode,
                     compile_application_requests(app.workflow, mode["application_requests"],
                                                  save_result=mode["requires_memory_result"]),
@@ -2814,7 +3132,8 @@ def message(
                                      != capture["source_ref"]
                                      and mode.get("current_memory_write_request",
                                          mode["memory_write_request"]) == "explicit"))},
-                        save_result=save_result, reconcile_memory=reconcile,
+                        save_result=save_result if perform_maintenance else None,
+                        reconcile_memory=reconcile,
                         feedback=feedback if acknowledged_messages is not None else None,
                         semantic_attempt_binding={**request_binding,
                                                   "maintenance": new_batches or batches})
@@ -3030,7 +3349,7 @@ def message(
                 # Necessary condition only: one receipt does not prove that every
                 # requested item, its meaning or the final prose is correct.
                 effects = memory_effects(current)
-                if maintenance_recipe and output.get("maintenance") and not (
+                if maintenance_recipe and not (
                     mode and mode["allow_forgetting"]
                 ):
                     return False
@@ -3135,7 +3454,10 @@ def message(
                     "receipt_or_agent_response_v1",
                 } and (
                     effects["business"]["operations"]
-                    or effects["business"]["observations"]
+                    or (effects["business"]["observations"]
+                        and settings.get("finalization") != "receipt_or_agent_response_v1")
+                    or (effects.get("application_requests")
+                        and settings.get("finalization") == "receipt_or_agent_response_v1")
                     or (
                         settings.get("finalization") == "receipt_business_response_v1"
                         and mode
@@ -3147,10 +3469,18 @@ def message(
                         and effects["visibility"]["operations"]
                     )
                     or output.get("execution_stop")
+                    or (
+                        mode and mode["requires_memory_result"]
+                        and effects["semantic_memory"]["status"]
+                        in {"not_committed", "partial", "unknown"}
+                    )
                 ):
                     final = business_response(response_input, effects,
                         json.loads(str(response_input[0].content).splitlines()[-1]),
-                        execution_stop=output.get("execution_stop"))
+                        execution_stop=output.get("execution_stop"), current_mode=mode,
+                        include_business=bool(effects["business"]["operations"]
+                            or effects["business"]["observations"]
+                            or effects.get("application_requests")))
                     output["finalization"] = {"status": "response_rendered", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": False,
                         "protocol": "receipt_business_response_v1", "model_generation": False}
@@ -3169,10 +3499,20 @@ def message(
                     if (not isinstance(final, AIMessage) or final.tool_calls
                             or final_delivery(final.content)["status"] != "available"):
                         raise IncompleteChatResponse("FUNCTIONAL_AGENT_FINAL_UNAVAILABLE")
+                    observations_appended = bool(effects["business"]["observations"])
+                    if observations_appended:
+                        # A query alone does not define the user's whole task.
+                        # Preserve the answer and separately report its actual
+                        # matched observations, without a new model call.
+                        observed = business_response(response_input, effects, {},
+                            include_memory_feedback=False)
+                        final = final.model_copy(update={
+                            "content": str(final.content) + "\n\n" + str(observed.content)})
                     output["finalization"] = {
                         "status": "agent_response_retained", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": True,
-                        "protocol": "agent_response_v1", "model_generation": False}
+                        "protocol": "agent_response_v1", "model_generation": False,
+                        "observation_receipts_appended": observations_appended}
                     trace(
                         {
                             "event": "functional_agent_finalization",
@@ -3185,7 +3525,8 @@ def message(
                         model, bank_root / f"{identity}-finalization.json", response_input, effects,
                         resume=resume, remaining_reproposals=settings["format_reproposals"]
                         - len(format_failures(messages)) - mode_reproposals - completion_used
-                        - answer_repairs - continuation_used, trace=trace)
+                        - answer_repairs - continuation_used, trace=trace,
+                        enable_thinking=settings.get("stage_enable_thinking", {}).get("reader"))
                 output["execution_candidate_answer"] = messages[-1].content
                 # Do not alter the completed execution checkpoint. The response has
                 # its own durable receipt, so restart cannot repeat business work.
@@ -3346,7 +3687,8 @@ def message(
             # to COMPLETED. Only already delivered, paired receipts are rendered.
             evidence = (agent.get_state(cfg).values.get("messages", [])
                         if "agent" in locals() else [])
-            final = business_response(evidence, output["operation_status"], {})
+            final = business_response(evidence, output["operation_status"], {},
+                                      current_mode=output.get("request_mode"))
             output["final_answer"] = (
                 ("请求未完成, 执行已停止; 以下是已确认的操作状态。" if known_incomplete else
                  "回答协议失败, 执行已停止; 以下是已确认的操作状态。") +

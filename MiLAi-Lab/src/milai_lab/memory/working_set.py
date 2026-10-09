@@ -124,6 +124,7 @@ def catalog_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
             candidates.append({
                 "type": "source_candidate", "source_ref": identity[1],
                 "source_revision": identity[2], "role": item["role"],
+                "version_view": "original_source",
                 "observed_at": item["observed_at"],
                 "description": item["content"],
                 "body_codepoints": item["source_total_codepoints"],
@@ -139,6 +140,7 @@ def catalog_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 identity[1], identity[2],
                 item.get("edit_matter_description", item["content"]),
                 sum(body_sizes.values()), view=item.get("version_view", "current_at_snapshot"),
+                navigation=item.get("retrieval_navigation"),
             ))
     return candidates
 
@@ -146,10 +148,43 @@ def catalog_candidates(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def record_candidate(
     record_id: str, revision: int, description: Any, body_codepoints: int = 0, *,
     view: str = "current_at_snapshot",
+    navigation: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """One actual candidate for Host and controlled pools; a description is navigation."""
+    if navigation is not None:
+        key_description = (
+            "whole-record search key" if navigation.get("key_kind") == "whole" else "stored unit"
+        )
+        description = (
+            f"{description}\nCosine-winning {key_description} excerpt (navigation only; "
+            "open the complete record for evidence): "
+            + navigation["excerpt"] + ("…" if navigation["truncated"] else "")
+        )
     return {
         "type": "record_candidate", "record_id": record_id, "revision": revision,
         "version_view": view, "description": description, "body_codepoints": body_codepoints,
-        "read": {"tool": "read_memory", "arguments": {"record_id": record_id}},
+        "read": {"tool": "read_memory", "arguments": {
+            "record_id": record_id,
+            **({"revision": revision} if view == "historical_exact_revision" else {}),
+        }},
     }
+
+
+def read_evidence_basis(items: list[dict[str, Any]]) -> dict[str, str]:
+    """Describe only material actually opened, independently of the request's purpose."""
+    meanings = {
+        "current_at_snapshot": (
+            "Current stored interpretation; use its scope and applicability for the queried time."
+        ),
+        "original_source": (
+            "Original wording with speaker and source time; not a saved semantic revision."
+        ),
+        "historical_exact_revision": (
+            "Actual saved revision; committed_at is storage time, not when a fact was valid."
+        ),
+    }
+    views = dict.fromkeys(
+        "original_source" if item["type"] == "fragment" else item.get("version_view")
+        for item in items if item["type"] in {"record", "fragment"}
+    )
+    return {view: meanings[view] for view in views if view in meanings}

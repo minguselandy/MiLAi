@@ -423,25 +423,16 @@ def hidden_program_capture(
     return cast(dict[str, Any], events[0])
 
 
-def program_final_linkage(
+def captured_public_delivery_linkage(
     row: dict[str, Any], events: list[dict[str, Any]], freeze: dict[str, Any],
+    metadata: dict[str, Any], event_name: str,
     captured_source: dict[str, Any] | None = None,
     *, response_id: str | None = None,
 ) -> dict[str, Any]:
-    """Bind a program-rendered delivery to its captured public assistant event.
-
-    This is provenance, not validation of task completion or the renderer's meaning.
-    Old cohorts have source capture but no explicit render text hash; retain that
-    narrower provenance scope instead of pretending there was a model response.
-    """
-    metadata = {"status": "response_rendered", "attempts": 0, "tools_available": False,
-                "execution_candidate_delivered": False,
-                "protocol": "receipt_business_response_v1", "model_generation": False}
+    """Link a delivered public answer to its actual capture and delivery event."""
     policy = freeze.get("config", {}).get("finalization")
-    if (policy not in {"receipt_business_response_v1", "receipt_business_response_v2",
-                      "receipt_business_response_v3", "receipt_or_agent_response_v1"}
-            or row.get("finalization") != metadata or not freeze.get("run_id")):
-        return {"status": "UNKNOWN", "reason": "unrecognized_program_final_contract"}
+    if not freeze.get("run_id"):
+        return {"status": "UNKNOWN", "reason": "missing_public_delivery_run_identity"}
     answer = row.get("final_answer")
     if not isinstance(answer, str) or not answer.strip():
         return {"status": "FAIL", "reason": "missing_program_text"}
@@ -466,7 +457,7 @@ def program_final_linkage(
         "origin": "public_assistant_message", "content": answer,
         **({} if ordinary else {"content_sha256": text_hash(answer)}),
     }.items())
-    renders = [e for e in events if e.get("event") == "functional_receipt_finalization"]
+    renders = [e for e in events if e.get("event") == event_name]
     matched = matched and len(renders) == 1 and all(
         renders[0].get(k) == v for k, v in metadata.items())
     if matched and ordinary:
@@ -483,7 +474,7 @@ def program_final_linkage(
     if "final_capture" in row:
         matched = matched and row["final_capture"].get("ok") is True and (
             row["final_capture"].get("source_ref") == source_ref)
-    return {"status": yes_no(bool(matched)), "method": "captured_program_delivery",
+    return {"status": yes_no(bool(matched)), "method": "captured_public_delivery",
             "hidden_source_checked_in_readonly_sqlite": bool(hidden),
             "source_ref": source_ref, "render_text_hash_recorded": bool(
                 renders and "final_text_sha256" in renders[0]),
@@ -491,14 +482,49 @@ def program_final_linkage(
                           "semantics still require separate review. No model final HTTP expected."}
 
 
+def program_final_linkage(
+    row: dict[str, Any], events: list[dict[str, Any]], freeze: dict[str, Any],
+    captured_source: dict[str, Any] | None = None,
+    *, response_id: str | None = None,
+) -> dict[str, Any]:
+    """Bind a program-rendered delivery to its captured public assistant event.
+
+    This is provenance, not validation of task completion or the renderer's meaning.
+    Old cohorts have source capture but no explicit render text hash; retain that
+    narrower provenance scope instead of pretending there was a model response.
+    """
+    metadata = {"status": "response_rendered", "attempts": 0, "tools_available": False,
+                "execution_candidate_delivered": False,
+                "protocol": "receipt_business_response_v1", "model_generation": False}
+    policy = freeze.get("config", {}).get("finalization")
+    if (policy not in {"receipt_business_response_v1", "receipt_business_response_v2",
+                      "receipt_business_response_v3", "receipt_or_agent_response_v1"}
+            or row.get("finalization") != metadata or not freeze.get("run_id")):
+        return {"status": "UNKNOWN", "reason": "unrecognized_program_final_contract"}
+    result = captured_public_delivery_linkage(
+        row, events, freeze, metadata, "functional_receipt_finalization", captured_source,
+        response_id=response_id)
+    return {**result, "method": "captured_program_delivery"} if "method" in result else result
+
+
 def retained_agent_final_linkage(
     row: dict[str, Any], events: list[dict[str, Any]], freeze: dict[str, Any],
-    *, response_id: str | None = None,
+    *, response_id: str | None = None, captured_source: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """No new finalization generation still requires the actual Agent HTTP text."""
     metadata = {"status": "agent_response_retained", "attempts": 0,
                 "tools_available": False, "execution_candidate_delivered": True,
                 "protocol": "agent_response_v1", "model_generation": False}
+    finalization = row.get("finalization")
+    appended = False
+    if isinstance(finalization, dict) and "observation_receipts_appended" in finalization:
+        # Old retained deliveries omit this field. Explicit False still means
+        # the whole delivered answer must match the original Agent HTTP text.
+        # An appended program receipt is not additional model-generated text.
+        appended = finalization["observation_receipts_appended"]
+        if type(appended) is not bool:
+            return {"status": "UNKNOWN", "reason": "unrecognized_retained_agent_contract"}
+        metadata["observation_receipts_appended"] = appended
     if (freeze.get("config", {}).get("finalization") != "receipt_or_agent_response_v1"
             or row.get("finalization") != metadata):
         return {"status": "UNKNOWN", "reason": "unrecognized_retained_agent_contract"}
@@ -508,6 +534,27 @@ def retained_agent_final_linkage(
     delivery = [e for e in events if e.get("event") == "functional_agent_finalization"]
     messages = row.get("messages", [])
     ordinary = ordinary_inputs(freeze)
+    if appended:
+        candidate = row.get("execution_candidate_answer")
+        provider = (final_linkage(candidate, events, ordinary=ordinary)
+                    if isinstance(candidate, str) and candidate.strip() else {
+                        "status": "UNKNOWN", "reason": "missing_execution_candidate_answer"})
+        retained = None if provider.get("reason") == "missing_execution_candidate_answer" else (
+            len(messages) >= 2 and messages[-2].get("type") == "ai"
+            and messages[-2].get("content") == candidate and not messages[-2].get("tool_calls")
+            and answer.startswith(candidate + "\n\n") and bool(answer[len(candidate) + 2:]))
+        public = captured_public_delivery_linkage(
+            row, events, freeze, metadata, "functional_agent_finalization", captured_source,
+            response_id=response_id)
+        statuses = {provider["status"], public["status"]}
+        status = ("FAIL" if retained is False or "FAIL" in statuses else
+                  "PASS" if retained is True and statuses == {"PASS"} else "UNKNOWN")
+        return {"status": status, "method": "retained_agent_with_captured_public_delivery",
+                "actual_http": provider, "captured_public_delivery": public,
+                "candidate_retained": retained,
+                "limitation": "Candidate actual HTTP and captured public delivery provenance "
+                              "only; appended text is not model HTTP. Query/effect meaning, "
+                              "answer correctness and task completion remain UNREVIEWED."}
     matched = (len(delivery) == 1
                and all(delivery[0].get(k) == v for k, v in metadata.items())
                and (response_id is not None and delivery[0].get("response_id") == response_id
@@ -586,7 +633,10 @@ def evaluate_attempt(
     program = row.get("finalization", {}).get("model_generation") is False and not retained
     response_id = path.name.split("-attempt-", 1)[0]
     if retained:
-        linkage = retained_agent_final_linkage(row, events, freeze, response_id=response_id)
+        linkage = retained_agent_final_linkage(
+            row, events, freeze, response_id=response_id,
+            captured_source=(hidden_program_capture(reader, path.parent, row)
+                if row["finalization"].get("observation_receipts_appended") is True else None))
     elif program:
         linkage = program_final_linkage(
             row, events, freeze, hidden_program_capture(reader, path.parent, row),

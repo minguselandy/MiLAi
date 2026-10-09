@@ -249,9 +249,9 @@ class VLLMChatModel(BaseChatModel):
                     wire["reasoning_content"] = reasoning
         selected_communication = communication_profile(self.tool_schema_communication)
         if native and selected_communication != "legacy":
-            wire_messages = _protocol_messages(
-                wire_messages, shape_guidance(tools, selected_communication)
-            )
+            guidance = shape_guidance(tools, selected_communication)
+            if guidance:
+                wire_messages = _protocol_messages(wire_messages, guidance)
             tools = present_catalog(tools, selected_communication)
         selected_save = profile("tool_save_communication", self.tool_save_communication)
         if native and selected_save != "legacy":
@@ -292,9 +292,13 @@ class VLLMChatModel(BaseChatModel):
             else nullcontext()
         )
         with scope:
+            thinking = ({"enable_thinking": kwargs["enable_thinking"]}
+                        if kwargs.get("enable_thinking") is not None else {})
             if native:
                 receipt = self.client.chat(
-                    prepared.messages, tools=tools, tool_choice=kwargs.get("tool_choice")
+                    prepared.messages, tools=tools, tool_choice=kwargs.get("tool_choice"),
+                    response_format=kwargs.get("response_format"),
+                    **thinking,
                 )
             else:
                 receipt = self.client.chat(
@@ -307,6 +311,7 @@ class VLLMChatModel(BaseChatModel):
                             "schema": prepared.schema,
                         },
                     },
+                    **thinking,
                 )
             if self.delivery_observer is not None:
                 self.delivery_observer.record_delivery(prepared, receipt, self.calls_in_message)

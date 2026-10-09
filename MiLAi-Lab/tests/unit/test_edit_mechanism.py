@@ -9,6 +9,7 @@ from pathlib import Path
 
 import httpx
 import pytest
+from langchain_core.embeddings import Embeddings
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.analysis.edit_mechanism import (
@@ -20,6 +21,7 @@ from milai_lab.analysis.edit_views import record_index
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.edit_units import render_state
+from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_memory import EditMemory
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
@@ -58,7 +60,9 @@ def row(text: str, revision: int = 1, identity: str = "saved-record") -> dict:
     }
 
 
-def test_controls_retain_actual_revisions_without_ideal_initialization(tmp_path: Path) -> None:
+def test_controls_retain_actual_revisions_without_ideal_initialization(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
     before = [row("Current rule: twice weekly, holidays paused.")]
     after = [row("Current rule: once weekly, holidays paused.", 2)]
     original = copy.deepcopy((before, after))
@@ -78,6 +82,50 @@ def test_controls_retain_actual_revisions_without_ideal_initialization(tmp_path:
         restore_current(service, after)
         assert len(service.records()) == 1
         assert service.read("saved-record")["value"] == after[0]["value"]
+    class LocalEmbeddings(Embeddings):
+        def embed_documents(self, texts: list[str]) -> list[list[float]]:
+            return [[1.0, 0.0] if "once weekly" in text else [0.0, 1.0] for text in texts]
+
+        def embed_query(self, text: str) -> list[float]:
+            return [1.0, 0.0]
+
+    run = MechanismRun.__new__(MechanismRun)
+    run.root = tmp_path / "assessment"
+    run.settings = {"retrieval_limit": 10}
+    ordinary_answer = run.answer
+    probes = []
+    requests = []
+
+    def inspect_answer(service, question, date, key):
+        probes.append(service)
+        if run.settings.get("memory_profile") == "unified_v1":
+            assert service.memory_profile == "unified_v1" and service.memory_ranking == "dense"
+            assert isinstance(service.semantic_retriever, SemanticRetriever)
+            assert service.semantic_retriever.embeddings is run.retrieval_embeddings
+        else:
+            assert service.memory_profile == "ordinary" and service.semantic_retriever is None
+        return ordinary_answer(service, question, date, key)
+
+    def answer_call(key, messages, **kwargs):
+        requests.append(messages)
+        return "Once weekly; holidays paused."
+
+    monkeypatch.setattr(run, "answer", inspect_answer)
+    monkeypatch.setattr(run, "call", answer_call)
+    assert run.probe("alice", retained, "weekly", "2030-01-01", "ordinary")["status"] == (
+        "ANSWERED"
+    )
+    run.retrieval_embeddings = LocalEmbeddings()
+    run.settings.update(memory_profile="unified_v1", memory_ranking="dense", embedding_dimension=2)
+    assert run.probe("alice", retained, "weekly", "2030-01-01", "configured")["status"] == (
+        "ANSWERED"
+    )
+    material = read_json(run.root / "http/configured/reader/retrieval.json")
+    assert [memory["content"] for memory in material] == [
+        after[0]["value"]["content"], before[0]["value"]["content"],
+    ]
+    assert all("record_id" in memory for memory in material)
+    assert len(probes) == len(requests) == 2
     assert (before, after) == original
 
 
@@ -183,11 +231,12 @@ def test_three_tables_keep_unassessed_and_no_delta_in_fixed_opportunities() -> N
 
 @pytest.mark.parametrize("artifact_layout", ["legacy", "recipe"])
 def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
-    tmp_path: Path, artifact_layout: str,
+    tmp_path: Path, artifact_layout: str, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     """Synthetic engineering fixture; no actual model or scientific score proof."""
     suite = tmp_path / "suite"
     original = {}
+    original_banks = {}
     arms = ["B0", "B1", "B2", "M"]
     for arm in arms:
         root = suite / arm
@@ -211,6 +260,7 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
             method = EditMemory(service, arm, interface_version="I2")
             for step, text in enumerate([
                 "Twice weekly; holidays paused.", "Once weekly; holidays paused.",
+                "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE weekly.",
             ]):
                 session = f"halumem:alice:session:{step}"
                 captured = service.capture_user(
@@ -236,6 +286,13 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
                     session, f"actual:{step}", method.decode_proposal(proposal, view["mapping"])
                 )
                 assert receipt["ok"]
+                if step == 2:
+                    future_record = method.apply(session, "future-only", method.decode_proposal(
+                        {"action": "create", "units": [{"text": text, "evidence": ["e1"]}]},
+                        view["mapping"],
+                    ))
+                    assert future_record["ok"]
+                    continue
                 folder = root / "maintenance/halumem/alice" / str(step)
                 if artifact_layout == "recipe":
                     write_json(folder / "complete.json", {"receipts": [receipt], "batches": [{
@@ -256,8 +313,11 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
                 write_json(root / "evaluation/halumem/alice" / str(step) / "complete.json", {
                     "counts": {"formed_sessions": 1}, "records": {},
                 })
-            service.capture_user("future", "unrelated", "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE")
             original[arm] = copy.deepcopy(service.records())
+            original_banks[arm] = {
+                (item.namespace, item.key): copy.deepcopy(item.value)
+                for item in store.search((), limit=100000)
+            }
     case = {"uuid": "alice", "session": 1, "memory_ordinal": 0,
             "date": "2030-01-02", "observed_dialogue": [
                 {"role": "user", "content": "Once weekly; holidays paused."},
@@ -311,6 +371,67 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
     run.settings = {"mechanism": {"arms": arms}, "drift": {"arms": arms},
                     "interface_version": "I2",
                     "model": {"max_tokens": 100}, "context_tokens": 65536, "retrieval_limit": 10}
+    if artifact_layout == "recipe":
+        class LocalEmbeddings(Embeddings):
+            def embed_documents(self, texts: list[str]) -> list[list[float]]:
+                assert "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE" not in str(texts)
+                return [[1.0, 0.0] if "Once weekly" in text else [0.0, 1.0] for text in texts]
+
+            def embed_query(self, text: str) -> list[float]:
+                return [1.0, 0.0]
+
+        run.retrieval_embeddings = LocalEmbeddings()
+        run.settings.update(memory_profile="unified_v1", memory_ranking="dense",
+                            embedding_dimension=2, maintenance_recipe="extract_then_edit")
+    original_answer = run.answer
+    probe_inputs = []
+
+    def inspect_answer(service, question, date, key):
+        arm, variant = key.split("/")[2:4]
+        assert service.namespace == ("edit", arm, arm, "alice")
+        assert service.source_backlinks == "disabled"
+        before, after, _ = snapshots(suite, arm, "alice", 1)
+        expected = controls(before, after, variant)
+        assert record_index(service.records()) == record_index(expected)
+        revisions = {r["id"]: r["value"]["revision"] for r in expected}
+        for record in expected:
+            metadata = service.store.get(service.namespace, record["id"]).value["_v13_1"]
+            assert all(v["revision"] <= record["value"]["revision"] for v in metadata["history"])
+            assert service.read(record["id"], record["value"]["revision"] + 1)["ok"] is False
+        for candidate in service._rows(service.candidates_namespace):
+            bound = candidate["value"]
+            assert bound["record_id"] in revisions
+            assert bound["revision"] <= revisions[bound["record_id"]]
+            assert service.candidate(candidate["id"]) is not None
+        original_search = service.search
+
+        def search(*args, **kwargs):
+            assert kwargs["include_raw"] is False
+            material = original_search(*args, **kwargs)
+            assert material["raw_events"] == []
+            return material
+
+        monkeypatch.setattr(service, "search", search)
+        answer = original_answer(service, question, date, key)
+        material = read_json(run.root / "http" / key / "retrieval.json")
+        if artifact_layout == "recipe":
+            assert {m["record_id"] for m in material} == set(revisions)
+            assert {m["content"] for m in material} == {
+                r["value"]["content"] for r in expected
+            }
+            if variant == "NeverWrite":
+                assert "Once weekly" not in str(material)
+            elif arm in {"B1", "M"}:
+                current = next(m for m in material if m["revision"] == 2)
+                assert current["revision_evidence"][0]["content"] == (
+                    "Once weekly; holidays paused."
+                )
+                assert current["revision_evidence"][0]["role"] == "user"
+                assert current["revision_evidence"][0]["source_revision"] == 1
+        probe_inputs.append(material)
+        return answer
+
+    monkeypatch.setattr(run, "answer", inspect_answer)
     run.tokenizer = Tokenizer()
     run.budget = RunBudget(RunLimits(), tmp_path / "budget.json")
     run.client = VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100),
@@ -318,6 +439,7 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
     try:
         result = run.run_native(suite, selection, review)
         assert result["metrics"]["M/Actual"]["opportunities"] == 1
+        assert len(probe_inputs) == 12
         assert len(requests) == 40
         count = run.budget.state["generation_requests"]
         run.run_native(suite, selection, review)
@@ -346,6 +468,67 @@ def test_actual_four_arm_native_delta_state_pipeline_is_read_only_and_accounted(
                 service = MemoryService(store, ("edit", arm, arm, "alice"), "alice",
                                         bank / "memory.lock")
                 assert record_index(service.records()) == record_index(original[arm])
+                assert {
+                    (item.namespace, item.key): item.value
+                    for item in store.search((), limit=100000)
+                } == original_banks[arm]
+        if artifact_layout == "recipe":
+            run.settings["controlled"] = {"arms": ["M"]}
+            manifest = tmp_path / "controlled.json"
+            write_json(manifest, {"cases": [{
+                "source_cluster": "controlled-alice", "variants": ["en"], "events": [{
+                    "event_id": str(step), "review": label,
+                    "wordings": {"en": [{"role": "user", "content": text}]},
+                    "diagnostic_questions": {"en": label["diagnostic_question"]},
+                } for step, text in enumerate([
+                    "Twice weekly; holidays paused.", "Once weekly; holidays paused.",
+                ])],
+            }]})
+
+            def maintain_observed(service, observed, key):
+                assert service.namespace == ("edit", "controlled", "en", "M", "controlled-alice")
+                assert service.memory_profile == "unified_v1" and service.memory_ranking == "dense"
+                assert service.semantic_retriever.embeddings is run.retrieval_embeddings
+                captured = service.capture_user(
+                    observed.session_id, "user", observed.turns[0]["content"],
+                    occurred_at=observed.date,
+                )
+                service.bind_source_boundary(observed.session_id, "user", [captured["source_ref"]])
+                method = EditMemory(service, "M", interface_version="I2")
+                delivery = method.prepare([captured["source_ref"]], "weekly")
+                view = method.writer_view(delivery)
+                unit = {"text": observed.turns[0]["content"], "evidence": ["e1"]}
+                proposal = {"action": "edit", "target": "r1", "edits": [{
+                    "operation": "replace", "target_unit": "u1", **unit,
+                }]} if key.endswith("step-1") else {"action": "create", "units": [unit]}
+                receipt = method.apply(
+                    observed.session_id, key, method.decode_proposal(proposal, view["mapping"]),
+                )
+                assert receipt["ok"]
+                write_json(
+                    run.root / "maintenance" / key / "complete.json", {"receipts": [receipt]},
+                )
+
+            monkeypatch.setattr(run, "maintain", maintain_observed)
+            monkeypatch.setattr(run, "answer", original_answer)
+            controlled = run.run_controlled(manifest)
+            assert len(controlled["records"]) == 2
+            assert all(r["reader_probe"]["status"] == "ANSWERED" for r in controlled["records"])
+            current = read_json(run.root / (
+                "http/controlled/controlled-alice/en/M/step-1/reader/retrieval.json"
+            ))[0]
+            assert current["revision_evidence"][0]["content"] == "Once weekly; holidays paused."
+            assert current["revision_evidence"][0]["role"] == "user"
+            checkpoints = {
+                path: path.read_bytes() for path in (
+                    run.root / "controlled/controlled-alice/en/M"
+                ).glob("step-*/complete.json")
+            }
+            count = run.budget.state["generation_requests"]
+            run.run_controlled(manifest)
+            assert run.budget.state["generation_requests"] == count == 54
+            assert all(path.read_bytes() == saved for path, saved in checkpoints.items())
+            assert "FUTURE_MUST_NOT_ENTER_NATIVE_JUDGE" not in json.dumps(requests)
     finally:
         run.client.close()
 
@@ -520,6 +703,8 @@ def test_full_answer_audit_keeps_every_original_session_and_exact_answer(tmp_pat
         "answer_session_ids": ["later"],
     }
     payload = full_answer_payload(original, "Once weekly. An unsupported cause.")
+    with pytest.raises(ValueError, match="requires a complete textual answer"):
+        full_answer_payload(original, None)  # type: ignore[arg-type]
     assert payload["answer"] == "Once weekly. An unsupported cause."
     assert payload["full_history_sessions"] == 3
     assert [r["session_id"] for r in payload["full_observed_history"]] == [

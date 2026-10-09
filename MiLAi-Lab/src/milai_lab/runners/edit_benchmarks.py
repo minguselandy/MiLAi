@@ -13,7 +13,6 @@ from typing import Any, Literal, cast
 
 import httpx
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
-from langgraph.store.sqlite import SqliteStore
 from pydantic import ValidationError
 from transformers import AutoTokenizer
 
@@ -23,6 +22,7 @@ from milai_lab.analysis.edit_official import (
     fixed_native_categories,
 )
 from milai_lab.analysis.edit_views import maintenance_views, record_index
+from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.datasets.edit_benchmarks import (
     ObservedSession,
     halumem_session,
@@ -147,6 +147,8 @@ def reader_messages(
 ) -> list[dict[str, str]]:
     """Common Reader over actual retained records or observed source messages."""
     delivered = copy.deepcopy(memories)
+    for memory in delivered:
+        memory.pop("retrieval_navigation", None)
     projected = False
     if memory_view == "retained_state":
         for memory in delivered:
@@ -154,6 +156,17 @@ def reader_messages(
             if (isinstance(view, dict)
                     and view.get("representation") in {"plain_v1", "conditioned_v1"}):
                 memory["applicability"] = _reader_applicability(view)
+                # Evidence keeps its full literal body/range. Reuse only exact
+                # source metadata already declared in this same revision view.
+                sources = memory["applicability"].get("source_table", {})
+                for evidence in memory.get("revision_evidence", []):
+                    source = sources.get(evidence.get("source_ref"), {})
+                    for field in (
+                        "source_revision", "role", "occurred_at", "observed_at", "calendar_context",
+                    ):
+                        if (evidence.get(field) is not None and field in source
+                                and evidence[field] == source[field]):
+                            evidence.pop(field)
                 projected = True
     metadata: list[tuple[dict[str, Any] | list[Any], str | int, str, str]] = [
         (unit, field, field, json.dumps(unit[field], ensure_ascii=False, separators=(",", ":")))
@@ -242,7 +255,8 @@ def reader_messages(
     if projected:
         instructions += (
             "\nAbsent source role, revision, raw dates and calendar come from source_table "
-            "under assertion.source_ref. Absent temporal report/capture dates come from "
+            "under assertion.source_ref or revision_evidence.source_ref in the same memory. "
+            "Absent temporal report/capture dates come from "
             "assertion.occurred_at/observed_at, using that source_table only for absent "
             "assertion fields. Absent query/version dates and query calendar come from the "
             "enclosing view. Explicit values, including null, override these defaults. "
@@ -436,6 +450,12 @@ class BenchmarkRun:
         self.settings, self.root, self.phase = settings, root, phase
         if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
             raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
+        if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
+            raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
+        stage_modes = settings.get("stage_enable_thinking", {})
+        if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
+                or any(type(value) is not bool for value in stage_modes.values())):
+            raise ValueError("STAGE_ENABLE_THINKING_INVALID")
         root.mkdir(parents=True, exist_ok=True)
         self.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
             settings["tokenizer_path"],
@@ -522,15 +542,25 @@ class BenchmarkRun:
         if getattr(self, "retrieval_embeddings", None) is None:
             return None
         assert self.retrieval_embeddings is not None
-        return SemanticRetriever(self.retrieval_embeddings, self.settings["embedding_dimension"])
+        return SemanticRetriever(
+            self.retrieval_embeddings, self.settings["embedding_dimension"],
+            granularity=self.settings.get("retrieval_granularity", "record"),
+        )
 
-    def input_tokens(self, messages: list[dict[str, str]]) -> int:
+    def stage_thinking(self, stage: str) -> bool | None:
+        return cast(bool | None, self.settings.get("stage_enable_thinking", {}).get(
+            stage.partition(":")[0]))
+
+    def input_tokens(
+        self, messages: list[dict[str, str]], *, enable_thinking: bool | None = None,
+    ) -> int:
         return len(
             self.tokenizer.apply_chat_template(
                 messages,
                 tokenize=True,
                 add_generation_prompt=True,
-                enable_thinking=self.settings["model"].get("enable_thinking"),
+                enable_thinking=(self.settings["model"].get("enable_thinking")
+                                 if enable_thinking is None else enable_thinking),
             )
         )
 
@@ -541,6 +571,8 @@ class BenchmarkRun:
         *,
         structured: bool,
         response_format: dict[str, Any] | None = None,
+        presence_penalty: float | None = None,
+        enable_thinking: bool | None = None,
     ) -> str:
         folder = self.root / "http" / key
         cached = folder / "response.json"
@@ -552,7 +584,9 @@ class BenchmarkRun:
             if self.settings.get("interface_version", "v1") != "v1":
                 raise UnconfirmedModelOutcome(message)
             raise RuntimeError(message)
-        tokens = self.input_tokens(messages)
+        tokens = self.input_tokens(messages, **(
+            {"enable_thinking": enable_thinking} if enable_thinking is not None else {}
+        ))
         if tokens + self.settings["model"]["max_tokens"] + 512 > self.settings["context_tokens"]:
             raise ValueError(f"Context unavailable without loss: {tokens} input tokens")
         selected_format = (
@@ -567,10 +601,19 @@ class BenchmarkRun:
                 "structured": structured,
                 "prompt_tokens": tokens,
                 "response_format": selected_format,
+                **({"presence_penalty": presence_penalty}
+                   if presence_penalty is not None else {}),
+                **({"enable_thinking": enable_thinking}
+                   if enable_thinking is not None else {}),
             },
         )
         try:
-            response = self.client.chat(messages, response_format=selected_format)
+            sampling: dict[str, Any] = (
+                {"presence_penalty": presence_penalty} if presence_penalty is not None else {}
+            )
+            if enable_thinking is not None:
+                sampling["enable_thinking"] = enable_thinking
+            response = self.client.chat(messages, response_format=selected_format, **sampling)
             write_json(cached, response)
             return self.completed_content(response)
         except Exception as error:
@@ -859,9 +902,13 @@ class BenchmarkRun:
             change_candidates=change_candidates,
         )
 
-    def _fits(self, messages: list[dict[str, str]]) -> bool:
+    def _fits(
+        self, messages: list[dict[str, str]], *, enable_thinking: bool | None = None,
+    ) -> bool:
         return bool(
-            self.input_tokens(messages) + self.settings["model"]["max_tokens"] + 512
+            self.input_tokens(messages, **(
+                {"enable_thinking": enable_thinking} if enable_thinking is not None else {}
+            )) + self.settings["model"]["max_tokens"] + 512
             <= self.settings["context_tokens"]
         )
 
@@ -941,7 +988,7 @@ class BenchmarkRun:
                 change_candidates=request.get("change_candidates"),
                 prior_context=delivery.get("prior_context"),
             )
-            if not self._fits(messages):
+            if not self._fits(messages, enable_thinking=self.stage_thinking("edit")):
                 omitted.append({**part, "reason": "complete_request_capacity", "tokens": cost})
                 continue
             subset = trial
@@ -1061,6 +1108,8 @@ class BenchmarkRun:
                     http_folder + "/" + stage_path, messages, structured=True,
                     response_format={"type": "json_schema", "json_schema": {
                         "name": "milai_" + stage_name, "schema": schema}},
+                    **({"enable_thinking": self.stage_thinking(stage_name)}
+                       if self.stage_thinking(stage_name) is not None else {}),
                 )
                 if calls:
                     calls[-1]["response_saved"] = True
@@ -1073,6 +1122,9 @@ class BenchmarkRun:
                 recipe=cast(MaintenanceRecipe, self.settings["maintenance_recipe"]),
                 memory_view_mode=self.settings.get("memory_view_mode", "legacy"),
                 model_call=call, retrieval_limit=self.settings["retrieval_limit"], fit=self._fits,
+                stage_fit=(lambda stage, messages: self._fits(
+                    messages, enable_thinking=self.stage_thinking(stage)))
+                if self.settings.get("stage_enable_thinking") else None,
                 prepare_delivery=lambda located: self._old_support_plan(
                     method, located, located["records"], observed.date, allow_create=True
                 )[0],
@@ -1502,6 +1554,8 @@ class BenchmarkRun:
                     "scope": row["value"]["scope"],
                     "revision": row["value"]["revision"],
                     "revision_evidence": read_revision_evidence(service, row["value"]),
+                    **({"retrieval_navigation": row["retrieval_navigation"]}
+                       if "retrieval_navigation" in row else {}),
                     **({"record_id": row["id"]}
                        if service.memory_profile == "unified_v1"
                        or self.settings.get("memory_view_mode", "legacy") != "legacy" else {}),
@@ -1548,8 +1602,11 @@ class BenchmarkRun:
         uses the exact saved pool, so changing delivery cannot add sources or facts.
         """
         if self.settings.get("memory_view_mode", "legacy") == "legacy":
+            sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
+                                       if self.stage_thinking("reader") is not None else {})
             return self.call(
-                key, reader_messages(question, date, memories), structured=False
+                key, reader_messages(question, date, memories), structured=False,
+                **sampling,
             ), memories
         return self._answer_view(question, date, key, memories)
 
@@ -1576,6 +1633,7 @@ class BenchmarkRun:
         directory = [record_candidate(
             memory["record_id"], memory["revision"],
             memory.get("matter_description", memory["scope"]), len(memory["content"]),
+            navigation=memory.get("retrieval_navigation"),
         ) for memory in memories]
         schema = {
             "type": "object", "additionalProperties": False,
@@ -1593,6 +1651,8 @@ class BenchmarkRun:
         if call_limit < 1:
             raise FunctionalRejection("READ_MODEL_CALL_LIMIT_REACHED")
         read_limit = min(self.settings.get("additional_reads", call_limit - 1), call_limit - 1)
+        if mode == "staged":
+            read_limit = min(read_limit, 1)
 
         def resident() -> list[dict[str, Any]]:
             return [memories[ref["unit_index"]] for ref in state["resident_refs"]]
@@ -1600,6 +1660,16 @@ class BenchmarkRun:
         while memories and not state["complete"] and state["steps"] < read_limit:
             messages = reader_messages(question, date, resident())
             messages[0]["content"] += (
+                "\nThis call is the one selection before the final answer. "
+                "Directory descriptions locate records; they are not evidence. Select "
+                "record_ids to open together. After this selection, the selected whole "
+                "matters are delivered directly for the final answer. keep_resident and "
+                "done retain the selection schema but do not add another selection. "
+                "read_goal states what this question asks to establish; it is not the type "
+                "of material opened. It may combine purposes and remains in force unless "
+                "explicitly changed. A purpose does not make absent history available. "
+                "Return only the supplied selection schema, not the final answer."
+                if mode == "staged" else
                 "\nThis call selects actual whole matters to read before answering. "
                 "Directory descriptions locate records; they are not evidence. Select "
                 "record_ids to open. Selecting another matter replaces the resident body; "
@@ -1647,7 +1717,9 @@ class BenchmarkRun:
             payload = json.loads(messages[1]["content"])
             payload["read_goal"] = state["read_goal"]
             messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
-        answer = self.call(key, messages, structured=False)
+        sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
+                                   if self.stage_thinking("reader") is not None else {})
+        answer = self.call(key, messages, structured=False, **sampling)
         return answer, [memory for memory in memories if memory["record_id"] in state["opened_ids"]]
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:
@@ -1774,13 +1846,47 @@ class BenchmarkRun:
                         generated = session.get("is_generated_qa_session", False)
                         if not generated:
                             for qordinal, qa in enumerate(session.get("questions", [])):
-                                answer = self.answer(
-                                    service, qa["question"], session["end_time"],
-                                    f"{key}/qa/{qordinal}",
-                                )
-                                predicted["questions"].append(
-                                    {"question": qa["question"], "hypothesis": answer}
-                                )
+                                qa_key = f"{key}/qa/{qordinal}"
+                                question_prediction: dict[str, Any] = {"question": qa["question"]}
+                                try:
+                                    question_prediction["hypothesis"] = self.answer(
+                                        service, qa["question"], session["end_time"], qa_key,
+                                    )
+                                except ValueError as error:
+                                    if selection.get("reader_failure_policy") != (
+                                        "record_confirmed_length"
+                                    ) or str(error) != "Provider output incomplete: length":
+                                        raise
+                                    folder = self.root / "http" / qa_key
+                                    response_path = folder / "response.json"
+                                    response = (
+                                        read_json(response_path) if response_path.exists() else {}
+                                    )
+                                    choices = response.get("choices", [])
+                                    usage = response.get("usage")
+                                    if (
+                                        not choices or choices[0].get("finish_reason") != "length"
+                                        or not isinstance(usage, dict)
+                                        or not all(
+                                            type(usage.get(name)) is int and usage[name] >= 0
+                                            for name in (
+                                                "prompt_tokens", "completion_tokens", "total_tokens"
+                                            )
+                                        )
+                                    ):
+                                        raise
+                                    failure_path = folder / "failure.json"
+                                    if not failure_path.exists():
+                                        write_json(failure_path, {
+                                            "type": type(error).__name__, "message": str(error),
+                                        })
+                                    question_prediction.update(hypothesis=None, reader_failure={
+                                        "type": type(error).__name__, "message": str(error),
+                                        "finish_reason": "length",
+                                        "response_ref": str(response_path.relative_to(self.root)),
+                                        "failure_ref": str(failure_path.relative_to(self.root)),
+                                    })
+                                predicted["questions"].append(question_prediction)
                         # Author-required reference retrieval is evaluator-only.
                         # It runs after predictions; saved material is not fed to a Writer/Reader.
                         update_retrieval = [
@@ -1889,16 +1995,26 @@ class BenchmarkRun:
                             }
                         )
                     for qordinal, qa in enumerate(session.get("questions", [])):
-                        answer = predicted["questions"][qordinal]["hypothesis"]
-                        result = self._safe_score(
-                            official,
-                            opportunities,
-                            "question",
-                            qa["question"],
-                            qa["answer"],
-                            "\n".join(e["memory_content"] for e in qa["evidence"]),
-                            answer,
-                        )
+                        question_prediction = predicted["questions"][qordinal]
+                        answer = question_prediction["hypothesis"]
+                        reader_failure = question_prediction.get("reader_failure")
+                        if (answer is None and isinstance(reader_failure, dict)
+                                and reader_failure.get("finish_reason") == "length"):
+                            result = {}
+                        elif isinstance(answer, str):
+                            result = self._safe_score(
+                                official,
+                                opportunities,
+                                "question",
+                                qa["question"],
+                                qa["answer"],
+                                "\n".join(e["memory_content"] for e in qa["evidence"]),
+                                answer,
+                            )
+                        else:
+                            raise ValueError(
+                                "Saved HaluMem hypothesis lacks a complete answer or failure"
+                            )
                         records["question_answering_records"].append(
                             {
                                 **qa,
@@ -1906,6 +2022,8 @@ class BenchmarkRun:
                                 "ssession_id": ordinal,
                                 "system_response": answer,
                                 "result_type": result.get("evaluation_result"),
+                                **({"reader_failure": copy.deepcopy(reader_failure)}
+                                   if answer is None else {}),
                             }
                         )
                     predictions.append(predicted)
@@ -1927,7 +2045,14 @@ class BenchmarkRun:
                         flush=True,
                     )
         if phase == "predict":
-            return {"status": "PREDICTIONS_SAVED", "sessions": len(predictions), "judge_calls": 0}
+            questions = [qa for prediction in predictions for qa in prediction["questions"]]
+            return {
+                "status": "PREDICTIONS_SAVED", "sessions": len(predictions), "judge_calls": 0,
+                "complete_answers": sum(isinstance(qa["hypothesis"], str) for qa in questions),
+                "known_reader_failures": sum(
+                    qa["hypothesis"] is None and bool(qa.get("reader_failure")) for qa in questions
+                ),
+            }
         assert official is not None
         result = official.aggregate_results(records)
         opportunities["unscored_updates"] = (
@@ -2083,8 +2208,11 @@ def run(
     execution = BenchmarkRun(settings, root, phase=phase)
     terminal = root / ("terminal.json" if phase == "all" else f"terminal-{phase}.json")
     try:
+        prediction_summary = {}
         if benchmark in {"halumem", "all"}:
-            execution.halumem(phase)
+            halumem_result = execution.halumem(phase)
+            if phase == "predict":
+                prediction_summary["prediction_summary"] = halumem_result
         if benchmark in {"longmemeval", "all"}:
             execution.longmemeval(phase)
         write_json(
@@ -2101,6 +2229,7 @@ def run(
                 - execution.before["generation_requests"],
                 "new_known_tokens": execution.budget.state["generation"]["known_tokens"]
                 - execution.before["generation"]["known_tokens"],
+                **prediction_summary,
             },
         )
     except Exception as error:

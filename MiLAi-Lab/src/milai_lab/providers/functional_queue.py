@@ -112,11 +112,15 @@ class FunctionalVLLMClient(VLLMClient):
             raise ValueError("FUNCTIONAL_GENERATION_CAPACITY_REQUIRED")
         self._check_owner()
         catalog = request.get("tools", [])
+        response_format = request.get("response_format") or {}
         if (
             self.declaration_capacity is not None
-            and request.get("tool_choice") == "required"
-            and len(catalog) == 1
-            and catalog[0].get("function", {}).get("name") in self.declaration_tool_names
+            and ((request.get("tool_choice") in ("auto", "required")
+                  and len(catalog) == 1
+                  and catalog[0].get("function", {}).get("name") in self.declaration_tool_names)
+                 or (not catalog and response_format.get("type") == "json_schema"
+                     and response_format.get("json_schema", {}).get("name")
+                     == "milai_request_scope"))
         ):
             # Runner opts in exact public declaration phases. The initial host
             # check remains conservative; recompute the actual final wire template

@@ -728,9 +728,10 @@ def read_applicability(
                 scope_status="requires_source_interpretation" if bound or declared.get("scope")
                 else "not_declared",
                 quantity_scope=declared.get("quantity_scope", "unspecified"),
-                evidence_status=evidence_status(unit.get("assertion") or {}),
                 semantic_support="unchecked",
             )
+            if "evidence_links" in (unit.get("assertion") or {}):
+                result["evidence_status"] = evidence_status(unit["assertion"])
             if declared.get("quantity_scope") == "overall":
                 result["member_quantities"] = "not_implied_by_overall_total"
         return result
@@ -1150,7 +1151,9 @@ def clause_record_view(record: dict[str, Any]) -> None:
         state["unresolved_conditions"] = unresolved
 
 
-def writer_proposal_schema(arm: str, *, allow_create: bool = True) -> dict[str, Any]:
+def writer_proposal_schema(
+    arm: str, *, allow_create: bool = True, for_generation: bool = False
+) -> dict[str, Any]:
     """Thin legal proposals: no model-issued persistent IDs or revisions."""
     if arm not in ARM_OPERATIONS:
         raise ValueError("EDIT_ARM_INVALID")
@@ -1239,6 +1242,14 @@ def writer_proposal_schema(arm: str, *, allow_create: bool = True) -> dict[str, 
                 fields["role"] = role
             if operation == "append":
                 fields["attach_to"] = refs("u")
+                if for_generation:
+                    # Preserve old decoding/rejection; constrain only new output
+                    # to the content/condition operation the executor accepts.
+                    fields["role"] = {"const": "content"}
+                    fields["attach_to"] = {"type": "array", "maxItems": 0}
+                    edits.append(obj(fields, required))
+                    fields = {**fields, "role": {"const": "condition"}, "attach_to": refs("u")}
+                    required = [*required, "role"]
             if operation == "override":
                 fields["condition"] = text
                 fields["shared_conditions"] = refs("u")
@@ -1256,6 +1267,15 @@ def writer_proposal_schema(arm: str, *, allow_create: bool = True) -> dict[str, 
         )
     variants.append(obj({"action": {"const": "no_change"}, "target": ref("r")}, ["action"]))
     return {"oneOf": variants}
+
+
+def tool_source_origin(source: dict[str, Any]) -> str | None:
+    """Show an exact bounded tool identifier, never an internal path or body."""
+    origin = source.get("origin")
+    if source.get("role") == "tool" and isinstance(origin, str) \
+            and re.fullmatch(r"[A-Za-z0-9_.:-]{1,64}", origin):
+        return origin
+    return None
 
 
 def writer_projection(
@@ -1317,6 +1337,8 @@ def writer_projection(
                 attributes[-1]["role"] = row.get("role", "unknown")
                 attributes[-1]["body_delivered"] = key[0] in delivered_sources
                 attributes[-1]["occurred_at"] = row.get("occurred_at")
+                if origin := tool_source_origin(row):
+                    attributes[-1]["origin"] = origin
                 if "calendar_context" in row:
                     attributes[-1]["calendar_context"] = row["calendar_context"]
             if classify_delivery:
@@ -1367,17 +1389,17 @@ def writer_projection(
                         public_units[-1]["assertion"]["applicability"] = copy.deepcopy(
                             assertion["applicability"]
                         )
-                    if features.get("temporal_scope") and assertion:
+                    if (features.get("temporal_scope") and assertion
+                            and "evidence_links" in assertion):
                         public_units[-1]["assertion"]["evidence_status"] = evidence_status(
                             assertion
                         )
-                        if "evidence_links" in assertion:
-                            public_units[-1]["assertion"]["evidence_links"] = {
-                                stance: [{"source": source_id(ref),
-                                          "range": [ref["start"], ref["end"]]}
-                                         for ref in linked]
-                                for stance, linked in assertion["evidence_links"].items()
-                            }
+                        public_units[-1]["assertion"]["evidence_links"] = {
+                            stance: [{"source": source_id(ref),
+                                      "range": [ref["start"], ref["end"]]}
+                                     for ref in linked]
+                            for stance, linked in assertion["evidence_links"].items()
+                        }
 
             def support_id(
                 item: dict[str, Any], binding: dict[str, Any], record_alias: str = record_alias

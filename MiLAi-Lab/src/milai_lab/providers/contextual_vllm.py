@@ -148,8 +148,12 @@ class VLLMClient:
         tool_choice: str | None = None,
         response_format: dict[str, Any] | None = None,
         top_p: float | None = None,
+        presence_penalty: float | None = None,
+        enable_thinking: bool | None = None,
     ) -> dict[str, Any]:
         self._check_owner()
+        if enable_thinking is not None and type(enable_thinking) is not bool:
+            raise ValueError("enable_thinking must be a boolean or None")
         request: dict[str, Any] = {
             "model": self.config.model,
             "messages": [dict(message) for message in messages],
@@ -157,6 +161,7 @@ class VLLMClient:
             "max_tokens": self.config.max_tokens,
         }
         thinking = (
+            enable_thinking if enable_thinking is not None else
             self.capacity.enable_thinking
             if self.capacity is not None
             else self.config.enable_thinking
@@ -168,6 +173,8 @@ class VLLMClient:
             request["tool_choice"] = tool_choice or "auto"
         if top_p is not None:
             request["top_p"] = top_p
+        if presence_penalty is not None:
+            request["presence_penalty"] = presence_penalty
         selected_format = (
             response_format if response_format is not None else self.config.response_format
         )
@@ -180,6 +187,8 @@ class VLLMClient:
                     request["messages"],
                     self.config.max_tokens,
                     request.get("tools"),
+                    **({"enable_thinking": enable_thinking}
+                       if enable_thinking is not None else {}),
                 )
             except CapacityExceeded as error:
                 if self.emit:

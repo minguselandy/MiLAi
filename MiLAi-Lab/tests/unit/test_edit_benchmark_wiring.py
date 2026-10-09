@@ -18,17 +18,24 @@ from milai_lab.analysis.edit_official import LongMemEvalOfficial, author_functio
 from milai_lab.datasets.edit_benchmarks import (
     ObservedSession,
     halumem_session,
+    halumem_users,
     history_components,
     longmemeval_history,
 )
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget, RunLimits
-from milai_lab.memory.edit_units import render_revision_view
-from milai_lab.memory.retrieval import SemanticRetriever
+from milai_lab.memory.edit_units import evidence_status, render_revision_view, writer_projection
+from milai_lab.memory.retrieval import SemanticRetriever, semantic_keys
 from milai_lab.memory.service import MemoryService
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
-from milai_lab.runners.edit_benchmarks import BenchmarkRun, reader_messages, source_batches
+from milai_lab.runners.edit_benchmarks import (
+    BenchmarkRun,
+    UnconfirmedModelOutcome,
+    reader_messages,
+    run,
+    source_batches,
+)
 
 
 def test_reader_shared_metadata_preserves_each_actual_source_and_time() -> None:
@@ -133,7 +140,15 @@ def test_reader_semantic_projection_keeps_limits_and_explicit_unknown_overrides(
     memories = [{
         "record_id": "actual-record", "revision": 1,
         "content": "Plan two rounds per shift. Only during January.",
-        "revision_evidence": [{"role": "user", "content": "Original plan with its limits."}],
+        "revision_evidence": [
+            {**{key: value for key, value in source.items() if key != "kind"},
+             "content": "Original plan with its limits.", "range": [0, 31]},
+            {**{key: value for key, value in source.items() if key != "kind"},
+             "source_revision": None, "role": "assistant", "occurred_at": None,
+             "observed_at": "2026-01-01T12:03:00Z", "calendar_context": None,
+             "content": "Different observed support, including explicit unknowns."},
+            {"source_ref": "another-source", "role": "user", "content": "Other support."},
+        ],
         "applicability": view,
     }]
     before = copy.deepcopy(memories)
@@ -153,7 +168,12 @@ def test_reader_semantic_projection_keeps_limits_and_explicit_unknown_overrides(
     projected = row["applicability"]
     assert memories == before
     assert row["content"] == before[0]["content"]
-    assert row["revision_evidence"] == before[0]["revision_evidence"]
+    evidence = row["revision_evidence"]
+    assert evidence[0] == {"source_ref": source["source_ref"],
+                           "content": "Original plan with its limits.", "range": [0, 31]}
+    assert evidence[1:] == before[0]["revision_evidence"][1:]
+    assert {**projected["source_table"][source["source_ref"]], **evidence[0]} == (
+        before[0]["revision_evidence"][0])
     assert [unit["text"] for unit in projected["units"]] == [unit["text"] for unit in view["units"]]
     for key in ("relations", "historical_units", "future_units", "unresolved_units"):
         assert projected[key] == view[key]
@@ -179,24 +199,75 @@ def test_reader_semantic_projection_keeps_limits_and_explicit_unknown_overrides(
         assert bound["from"] == "2026-01-01" and bound["until"] == "2026-02-01"
         assert bound["from_time"]["precision"] == "day"
         assert bound["from_time"]["timezone_known"] is False
-        assert actual["evidence_status"] == "insufficient"
+        assert "evidence_status" not in actual
         assert actual["semantic_support"] == "unchecked"
     assert "including null" in messages[0]["content"]
     assert "unlimited validity" in messages[0]["content"]
 
+    # Optional stance links do not replace an actual report's primary Source or
+    # retained support. Missing links are undeclared, not evidence against it.
+    original_text = "Plan two rounds per shift. Only during January."
+    support = {"evidence_id": "actual-user-fragment",
+               "source_ref": source["source_ref"], "source_revision": 1,
+               "start": 0, "end": len(original_text)}
+    retained = copy.deepcopy(state)
+    for item in [*retained["units"], *retained["relations"]]:
+        item["evidence_refs"] = [support]
 
-def test_observed_input_excludes_reference_and_future_material() -> None:
-    observed = halumem_session(
-        "u",
-        0,
-        {
-            "start_time": "Jan 01, 2025, 10:00:00",
-            "dialogue": [{"role": "user", "content": "actual speech", "timestamp": "now"}],
-            "persona_info": "secret persona",
-            "memory_points": ["gold"],
-            "questions": [{"question": "future question", "answer": "gold answer"}],
-        },
-    )
+    def writer_input() -> tuple[dict[str, Any], dict[str, Any]]:
+        return writer_projection({
+            "records": [{"edit_state": retained}],
+            "redelivered_sources": [{**source, **support, "text": original_text}],
+        }, "I2", "M", allow_create=False,
+            features={"source_metadata": True, "temporal_scope": True})
+
+    packet, mapping = writer_input()
+    assert packet["records"][0]["clauses"][0]["assertion"] == {
+        "kind": "reported", "source": "s1", "applicability": {"scope": "each shift"},
+    }
+    assert packet["source_table"][0]["role"] == "user"
+    assert packet["source_table"][0]["occurred_at"] == source["occurred_at"]
+    assert mapping["units"]["u1"]["assertion"] == state["units"][0]["assertion"]
+    assert mapping["units"]["u1"]["evidence_refs"] == [support]
+    assert packet["historical_support"][0]["ranges"] == [{
+        "source": "s1", "range": [0, len(original_text)],
+    }]
+    assert evidence_status(source) == "insufficient"  # Existing helper contract stays.
+    for links, status in [
+        ({"supports": [support]}, "supported"),
+        ({"opposes": [support]}, "opposed"),
+        ({"supports": [support], "opposes": [support]}, "both"),
+        ({}, "insufficient"),
+    ]:
+        retained["units"][0]["assertion"]["evidence_links"] = links
+        linked = render_revision_view(retained, query_time="2026-02-02")
+        assert linked["units"][0]["evidence_status"] == status
+        assert linked["units"][0]["assertion"]["source_ref"] == source["source_ref"]
+        packet, mapping = writer_input()
+        assert packet["records"][0]["clauses"][0]["assertion"]["evidence_status"] == status
+        assert mapping["units"]["u1"]["evidence_refs"] == [support]
+
+
+def test_observed_input_excludes_reference_and_future_material(tmp_path: Path) -> None:
+    raw = {
+        "start_time": "Jan 01, 2025, 10:00:00",
+        "dialogue": [{"role": "user", "content": "actual speech", "timestamp": "now"}],
+        "persona_info": "secret persona",
+        "memory_points": ["gold"],
+        "questions": [{"question": "future question", "answer": "gold answer"}],
+    }
+    first = {"uuid": "u", "sessions": [raw]}
+    second = {"uuid": "later", "sessions": [{**raw, "start_time": "Jan 02, 2025, 10:00:00"}]}
+    dataset = tmp_path / "selected.jsonl"
+    # The unselected body is deliberately not JSON: even decoding it would fail.
+    dataset.write_text('{"uuid":"other","body":UNSELECTED_BODY_WITH_u}\n'
+                       + json.dumps(first) + "\n" + json.dumps(second) + "\n")
+    users = halumem_users(dataset, ["later", "u"])
+    assert users == [first, second]  # Original file order and full selected values.
+    with pytest.raises(ValueError, match="HaluMem users missing") as error:
+        halumem_users(dataset, ["missing-z", "u", "missing-a"])
+    assert str(error.value) == "HaluMem users missing: ['missing-a', 'missing-z']"
+    observed = halumem_session(users[0]["uuid"], 0, users[0]["sessions"][0])
     assert observed.turns == ({"role": "user", "content": "actual speech", "timestamp": "now"},)
     assert "gold" not in repr(observed)
 
@@ -307,20 +378,45 @@ def test_real_store_formation_revision_and_restart_without_replaying_writer(tmp_
     assert len(calls) == 2
 
 
-def test_incomplete_response_remains_failed_and_charged_on_resume(tmp_path: Path) -> None:
+def test_incomplete_response_remains_failed_and_charged_on_resume(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
     class Tokenizer:
         def apply_chat_template(self, *args: object, **kwargs: object) -> list[int]:
             return [1, 2]
+
+        def encode(self, text: str, *, add_special_tokens: bool) -> list[int]:
+            return list(range(len(text)))
 
     attempts = []
 
     def provider(request: httpx.Request) -> httpx.Response:
         attempts.append(request)
+        messages = json.loads(request.read())["messages"]
+        payload = json.loads(messages[-1]["content"]) if len(messages) > 1 else {}
+        if "delivery" in payload:
+            assert "synthetic-answer" not in str(payload)
+            delivery = payload["delivery"]
+            source = delivery["sources"][0]
+            old = delivery["records"][0] if delivery["records"] else None
+            proposal = {
+                "action": "rewrite" if old else "create",
+                "units": [{"text": source["text"], "evidence": [source["evidence_id"]]}],
+            }
+            if old:
+                proposal.update(target_record=old["record_id"], base_revision=old["revision"])
+            content = json.dumps({"proposals": [proposal]})
+            finish = "stop"
+        else:
+            finish = (
+                "length" if not payload or payload["question"] == "BlueProject first?" else "stop"
+            )
+            content = "partial" if finish == "length" else payload["memories"][0]["content"]
         return httpx.Response(
             200,
             json={
-                "choices": [{"finish_reason": "length", "message": {"content": "partial"}}],
-                "usage": {"total_tokens": 9},
+                "choices": [{"finish_reason": finish, "message": {"content": content}}],
+                "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9},
             },
         )
 
@@ -341,9 +437,133 @@ def test_incomplete_response_remains_failed_and_charged_on_resume(tmp_path: Path
         write_json(tmp_path / "http" / "b" / "request.json", {"attempt": "original"})
         with pytest.raises(RuntimeError, match="do not blindly repeat"):
             execution.call("b", [], structured=False)
-    assert len(attempts) == 1
-    assert budget.state["generation_requests"] == 1
-    assert budget.state["generation"]["known_tokens"] == 9
+        assert len(attempts) == 1
+
+        sessions = []
+        for ordinal, day in enumerate(("Monday", "Tuesday")):
+            stamp = f"Jan 0{ordinal + 1}, 2030, 09:00:00"
+            questions = ["BlueProject first?", "BlueProject second?"] if ordinal == 0 else [
+                "BlueProject after?",
+            ]
+            sessions.append({
+                "start_time": stamp, "end_time": stamp,
+                "dialogue": [{"role": "user", "content": "BlueProject " + day,
+                              "timestamp": stamp}],
+                "memory_points": [],
+                "questions": [{"question": question, "answer": "synthetic-answer", "evidence": []}
+                              for question in questions],
+            })
+        dataset = tmp_path / "synthetic.jsonl"
+        dataset.write_text(json.dumps({"uuid": "synthetic", "sessions": sessions}) + "\n")
+        execution.root = tmp_path / "history"
+        execution.settings.update(arm="B0", source_tokens=4096, retrieval_limit=10,
+            halumem={"path": str(dataset), "users": ["synthetic"],
+                     "official_checkout": str(tmp_path / "synthetic-author")})
+        with pytest.raises(ValueError, match="incomplete: length"):
+            execution.halumem("predict")
+        assert not (execution.root / "predictions/halumem/synthetic/0/complete.json").exists()
+        assert len(attempts) == 3  # Initial check, committed Writer, failed first Reader.
+        execution.settings["halumem"]["reader_failure_policy"] = "record_confirmed_length"
+        assert execution.halumem("predict") == {
+            "status": "PREDICTIONS_SAVED", "sessions": 2, "judge_calls": 0,
+            "complete_answers": 2, "known_reader_failures": 1,
+        }
+        assert len(attempts) == 6
+        prediction_path = execution.root / "predictions/halumem/synthetic/0/complete.json"
+        first_prediction = read_json(prediction_path)
+        failed = first_prediction["prediction"]["questions"][0]
+        assert failed["hypothesis"] is None
+        assert failed["reader_failure"]["finish_reason"] == "length"
+        for key in ("response_ref", "failure_ref"):
+            assert (execution.root / failed["reader_failure"][key]).exists()
+        final_prediction = read_json(
+            execution.root / "predictions/halumem/synthetic/1/complete.json"
+        )
+        assert len(final_prediction["state"]) == 1
+        assert final_prediction["state"][0]["value"]["revision"] == 2
+        assert "Tuesday" in final_prediction["state"][0]["value"]["content"]
+
+        scored_questions = []
+
+        class Official:
+            def __init__(self, *args: Any) -> None:
+                pass
+
+            def score(self, name: str, *args: str) -> dict[str, Any]:
+                if name == "question":
+                    assert isinstance(args[-1], str)
+                    scored_questions.append(args[0])
+                    return {"evaluation_result": "Correct" if len(scored_questions) == 1
+                            else "original-invalid-label"}
+                return {"accuracy_score": 2}
+
+            def aggregate_results(self, records: dict[str, Any]) -> dict[str, Any]:
+                return copy.deepcopy(records)
+
+        monkeypatch.setattr("milai_lab.runners.edit_benchmarks.HaluMemOfficial", Official)
+        original = prediction_path.read_bytes()
+        unmarked = copy.deepcopy(first_prediction)
+        unmarked["prediction"]["questions"][0].pop("reader_failure")
+        write_json(prediction_path, unmarked)
+        with pytest.raises(ValueError, match="lacks a complete answer or failure"):
+            execution.halumem("score")
+        assert not scored_questions
+        prediction_path.write_bytes(original)
+        scored = execution.halumem("score")["question_answering_records"]
+        assert len(scored) == 3 and scored[0]["result_type"] is None
+        assert scored[0]["system_response"] is None
+        assert scored[0]["reader_failure"] == failed["reader_failure"]
+        assert scored[1]["result_type"] == "Correct"
+        assert scored[2]["result_type"] == "original-invalid-label"
+        assert scored_questions == ["BlueProject second?", "BlueProject after?"]
+        assert len(attempts) == 6 and prediction_path.read_bytes() == original
+
+        execution.budget = budget
+        execution.before = copy.deepcopy(budget.state)
+        monkeypatch.setattr(execution, "close", lambda: None)
+        monkeypatch.setattr("milai_lab.runners.edit_benchmarks.BenchmarkRun",
+                            lambda *args, **kwargs: execution)
+        execution.settings["experiment_name"] = "synthetic-length"
+        run(execution.settings, execution.root, "halumem", "predict")
+        assert read_json(execution.root / "terminal-predict.json")["prediction_summary"] == {
+            "status": "PREDICTIONS_SAVED", "sessions": 2, "judge_calls": 0,
+            "complete_answers": 2, "known_reader_failures": 1,
+        }
+        assert len(attempts) == 6
+
+        execution.root = tmp_path / "stopped"
+        monkeypatch.setattr(execution, "maintain", lambda *args: [])
+        selection_response = (
+            execution.root / "http/halumem/synthetic/0/qa/0/view/select-0/response.json"
+        )
+        write_json(selection_response, {
+            "choices": [{"finish_reason": "length"}],
+            "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9},
+        })
+        for error in (ValueError("Provider output incomplete: length"),
+                      ValueError("Context unavailable without loss: 2048 input tokens"),
+                      BudgetExceeded("synthetic budget"), UnconfirmedModelOutcome("unknown")):
+            def failed_answer(*args: Any, error: Exception = error) -> str:
+                raise error
+
+            monkeypatch.setattr(execution, "answer", failed_answer)
+            with pytest.raises(type(error), match=str(error)):
+                execution.halumem("predict")
+        incomplete_usage = {
+            "choices": [{"finish_reason": "length", "message": {"content": "partial"}}],
+            "usage": {"total_tokens": 9},
+        }
+        final_response = execution.root / "http/halumem/synthetic/0/qa/0/response.json"
+        write_json(final_response, incomplete_usage)
+        monkeypatch.setattr(execution, "answer",
+                            lambda *args: execution.completed_content(incomplete_usage))
+        with pytest.raises(ValueError, match="incomplete: length"):
+            execution.halumem("predict")
+        assert not final_response.with_name("failure.json").exists()
+        assert not (execution.root / "predictions/halumem/synthetic/0/complete.json").exists()
+        assert len(attempts) == 6
+    assert budget.state["generation_requests"] == 6
+    assert budget.state["generation"]["known_tokens"] == 54
     assert read_json(tmp_path / "http" / "a" / "failure.json")["type"] == "ValueError"
 
 
@@ -462,7 +682,9 @@ def test_shared_reader_staged_accepts_legacy_selection_without_extra_reads(tmp_p
     question, date, key = "What marker applies on weekdays?", "2030-01-02", "qa"
     memories = [{"record_id": "actual-marker", "revision": 2,
                  "matter_description": "Marker", "content": "The marker is blue on weekdays.",
-                 "scope": {"weekday_only": True}, "revision_evidence": []}]
+                 "scope": {"weekday_only": True}, "revision_evidence": [],
+                 "retrieval_navigation": {"unit_id": "actual-unit",
+                     "excerpt": "The marker is blue on weekdays.", "truncated": False}}]
     snapshot = tmp_path / "http" / key / "retrieval.json"
     write_json(snapshot, memories)
     original = snapshot.read_bytes()
@@ -475,13 +697,20 @@ def test_shared_reader_staged_accepts_legacy_selection_without_extra_reads(tmp_p
         assert payload["memory_view"] == "retained_state"
         if len(payloads) == 1:
             assert payload["memories"] == []
+            description = payload["candidates"][0]["description"]
+            assert description.startswith("Marker\nCosine-winning stored unit excerpt")
+            assert "navigation only; open the complete record for evidence" in description
+            assert description.endswith(memories[0]["content"])
             assert payload["memory_view_state"]["read_goal"] is None
             assert set(payload["response_schema"]["required"]) == {
                 "record_ids", "keep_resident", "done"}
             content = json.dumps({"record_ids": ["actual-marker"],
                                   "keep_resident": False, "done": False})
         else:
-            assert len(payloads) == 2 and payload["memories"] == memories
+            assert len(payloads) == 2 and payload["memories"] == [
+                {key: value for key, value in memories[0].items() if key != "retrieval_navigation"}
+            ]
+            assert "candidates" not in payload and "retrieval_navigation" not in repr(payload)
             assert "read_goal" not in payload
             content = "The marker is blue on weekdays."
         return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
@@ -704,6 +933,88 @@ def test_cache_tracks_current_body_and_withdrawal_without_erasing_history(tmp_pa
             service.read("a", 1)["value"]["edit_state"]["units"][0]["text"]
             == "Green tea is preferred."
         )
+
+        class GranularVectors(Vectors):
+            def embed_documents(self, texts: list[str]) -> list[list[float]]:
+                self.documents.extend(texts)
+                return [
+                    [0.0, 1.0] if "FILLER" in text else
+                    [1.0, 0.0] if "Green tea." in text else [0.6, 0.8]
+                    for text in texts
+                ]
+
+        def qualified(key: str) -> None:
+            seed(service, key, "Green tea. Only on weekdays. FILLER")
+            item = store.get(service.namespace, key)
+            assert item is not None
+            current = item.value["_v13_1"]["current"]
+            current["edit_state"] = {
+                "matter_description": "Refreshment choice",
+                "units": [
+                    {"unit_id": "u1", "role": "content", "text": "Green tea."},
+                    {"unit_id": "u2", "role": "condition", "text": "Only on weekdays."},
+                    {"unit_id": "u3", "role": "content", "text": "FILLER"},
+                ],
+                "relations": [{"source_unit": "u2", "target_unit": "u1",
+                               "relation_type": "modifies"}],
+            }
+            item.value["_v13_1"]["history"] = [current]
+            store.put(service.namespace, key, item.value, index=False)
+
+        qualified("z")
+        granular_vectors = GranularVectors()
+        service.semantic_retriever = SemanticRetriever(granular_vectors, 2)
+        assert [row["id"] for row in service.search(
+            "refreshment", limit=2, include_raw=False,
+        )["records"]] == ["b", "z"]
+
+        service.semantic_retriever = SemanticRetriever(
+            granular_vectors, 2, granularity="record_units",
+        )
+        rows = service.search("refreshment", limit=2, include_raw=False)["records"]
+        assert [row["id"] for row in rows] == ["z", "b"]
+        assert {key: value for key, value in rows[0].items()
+                if key != "retrieval_navigation"} == service.read("z")
+        assert rows[0]["retrieval_navigation"] == {
+            "key_kind": "unit", "unit_id": "u1", "excerpt": "Green tea.", "truncated": False,
+        }
+        assert rows[1]["retrieval_navigation"] == {
+            "key_kind": "whole", "excerpt": "\nMusic interests.", "truncated": False,
+        }
+        assert {key: value for key, value in rows[1].items()
+                if key != "retrieval_navigation"} == service.read("b")
+        assert "retrieval_navigation" not in service.read("z")["value"]
+        keys = semantic_keys(rows[0]["value"], granularity="record_units")
+        assert len(keys) == 4
+        assert keys[1] == (
+            "Refreshment choice\nGreen tea.\nmodifies: Only on weekdays. -> Green tea."
+        )
+        embedded = len(granular_vectors.documents)
+        service.search("refreshment", limit=2, include_raw=False)
+        assert len(granular_vectors.documents) == embedded
+
+        qualified("c")
+        rows = service.search("refreshment", limit=2, include_raw=False)["records"]
+        assert [row["id"] for row in rows] == ["c", "z"]  # Ties use record IDs; K counts records.
+        item = store.get(service.namespace, "z")
+        assert item is not None
+        old = item.value["_v13_1"]["current"]
+        current = copy.deepcopy(old)
+        current["revision"] = 2
+        current["edit_state"]["units"][0]["text"] = "Music interests."
+        item.value["_v13_1"]["current"] = current
+        item.value["_v13_1"]["history"] = [old, current]
+        store.put(service.namespace, "z", item.value, index=False)
+        embedded = len(granular_vectors.documents)
+        rows = service.search("refreshment", limit=3, include_raw=False)["records"]
+        assert [row["id"] for row in rows] == ["c", "b", "z"]
+        # Refresh whole + both linked unit keys; retain the unaffected unit's vector.
+        assert len(granular_vectors.documents) - embedded == 3
+        assert {key: value for key, value in rows[-1].items()
+                if key != "retrieval_navigation"} == service.read("z")
+        assert rows[-1]["value"]["revision"] == 2
+        assert rows[-1]["retrieval_navigation"]["excerpt"] == "Music interests."
+        assert service.read("z", 1)["value"]["edit_state"]["units"][0]["text"] == "Green tea."
 
 
 def test_embedding_failure_is_not_silent_lexical_success_or_a_memory_write(tmp_path: Path) -> None:

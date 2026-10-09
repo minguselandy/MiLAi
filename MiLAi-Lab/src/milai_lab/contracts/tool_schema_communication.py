@@ -67,7 +67,7 @@ def present_catalog(tools: list[dict[str, Any]], setting: Any = "legacy") -> lis
         function = item["function"]
         parameters = function.get("parameters", {})
         properties = parameters.get("properties", {})
-        if _MARKER in function.get("description", ""):
+        if "field_support" not in properties or _MARKER in function.get("description", ""):
             continue
         guidance = (
             _MARKER + " arguments contains actual parameter values matching this "
@@ -151,6 +151,8 @@ def shape_guidance(tools: list[dict[str, Any]], setting: Any = "legacy") -> str:
         if "candidate_handle" in properties:
             arguments["candidate_handle"] = "<UNUSABLE_ACTUALLY_READ_HANDLE>"
         examples.append({"name": function["name"], "arguments": arguments})
+    if not examples:
+        return ""
     guidance = (
         "\n" + _MARKER + " Public argument-shape guide: use the actual parameters and "
         "their types/enums, independently of support metadata. All examples contain "
