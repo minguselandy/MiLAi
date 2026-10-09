@@ -29,10 +29,16 @@ Live-only e41787a fixes these two forget receipts; new SQLite check passes, NOT 
 Prefix8 same frozen version prediction CLOSED, reconciled19:19 UTC:32sessions/73answers/72updates,
 no known readonly missing;23maintenance completed/9incomplete,82unique confirmed commits.
 237gen/2159360 known=charged,214emb/36847tokens,237stop,newunknown0;historicalunknown6/0 unchanged.
-Score now RUNNING/PID911285/session32765, same config and immutable source-1cfb400;
-root prefix8-1cfb400-v2/M, runtime prefix8-1cfb400-runtime-v2. Original full aggregate preserved in
-predictions-frozen-before-score.json; individual checkpoints unchanged. Unified original Judge only,
-no Writer/Reader redo or simultaneous models. Inspect actual terminal+PID before dispatch.
+Original Score INTERRUPTED: PID911285/session32765 absent, no terminal/end;31/32 session evaluations,
+655 saved stop Judge responses, request656 has no response. Fixed observed ledger:656 requests,
+2716058 known/2763437 charged, newunknown1 (47379 reservation),0emb; historicalunknown6=>7 retained.
+Services running/waiting0 and logs provide no recoverable answer/usage. Never retry unknown656.
+Supplement Score RUNNING/PID1654285/session58720 from22:42UTC, same config/source-1cfb400;
+root prefix8-1cfb400-v2-score-supplement/M, runtime prefix8-1cfb400-score-supplement-runtime-v2.
+Copies original32 predictions/banks/31 evaluations and cached Judges; original outputs unchanged.
+Unknown656 gets invalid/unconfirmed, full denominator retained; only untouched keys657..677 dispatch.
+Original full aggregate stays predictions-frozen-before-score.json. No Writer/Reader/embedding replay,
+no simultaneous models; preserve original interruption even if supplement closes. Inspect PID/terminal.
 Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.
 Historical observations below are fixed snapshots; inspect actual PID/lease/terminal before dispatch.
 
