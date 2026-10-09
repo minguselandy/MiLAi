@@ -3188,7 +3188,7 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
         memory.context("new-session", "mixed", "current-config-v2")
         mixed_cfg = copy.deepcopy(current_cfg)
         mixed_cfg["configurable"]["v13_turn_id"] = "mixed"
-        mixed_calls, mixed_fits = [], []
+        mixed_calls, mixed_fits, mixed_fit_stages = [], [], []
 
         def mixed_fit(messages):
             assert [m["role"] for m in messages] == ["system", "user"]
@@ -3196,6 +3196,10 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
                 "not fact evidence):\n", 1)[1]) == mixed_text
             mixed_fits.append(copy.deepcopy(messages))
             return True
+
+        def mixed_stage_fit(stage, messages):
+            mixed_fit_stages.append(stage.partition(":")[0])
+            return mixed_fit(messages)
 
         def mixed_save(stage, messages, schema):
             assert messages == mixed_fits[-1]
@@ -3215,9 +3219,10 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
             }]}}}
 
         mixed_args = dict(recipe="extract_then_edit", model_call=mixed_save,
-                          fit=mixed_fit, maintenance_scope=mixed_text)
+                          stage_fit=mixed_stage_fit, maintenance_scope=mixed_text)
         updated = memory.maintain_sources(mixed_cfg, allowed=True, **mixed_args)
         assert updated[0]["status"] == "completed" and len(mixed_calls) == 3
+        assert mixed_fit_stages == ["extract", "select", "edit"]
         current = memory.service.read(row["id"])["value"]
         assert current["revision"] == 2
         assert current["edit_state"]["units"][0]["assertion"]["source_ref"] == mixed_ref

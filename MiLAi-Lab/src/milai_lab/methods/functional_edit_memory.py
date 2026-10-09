@@ -48,6 +48,7 @@ from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.edit_maintenance import (
     MaintenanceRecipe,
     ModelCall,
+    StageFit,
     has_pending_save,
     maintain_event,
     pending_work_refs,
@@ -456,6 +457,7 @@ class FunctionalEditMemory(FunctionalMemory):
         new_attempt_id: str | None = None,
         execute: bool = True,
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        stage_fit: StageFit | None = None,
         prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Continue an actual explicit save under the current public request.
@@ -494,7 +496,7 @@ class FunctionalEditMemory(FunctionalMemory):
             config, delivery, request_id=prior_request_id, prior_request_id=prior_request_id,
             prior_session=prior_session, new_attempt_id=new_attempt_id,
             date=state["date"], recipe=state["binding"]["recipe"], model_call=model_call,
-            allowed=allowed, execute=execute, fit=fit,
+            allowed=allowed, execute=execute, fit=fit, stage_fit=stage_fit,
             prepare_delivery=prepare_delivery,
             selected_record_ids=state["binding"].get("selected_record_ids"),
             memory_save_requested=True, maintenance_scope=current["content"],
@@ -657,6 +659,7 @@ class FunctionalEditMemory(FunctionalMemory):
         execute: bool = True,
         selected_record_ids: list[str] | None = None,
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        stage_fit: StageFit | None = None,
         prepare_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
         prior_request_id: str | None = None,
         prior_session: str | None = None,
@@ -733,11 +736,16 @@ class FunctionalEditMemory(FunctionalMemory):
             return fit(self.maintenance_messages(messages, maintenance_scope)) \
                 if fit is not None else True
 
+        def stage_capacity(stage: str, messages: list[dict[str, str]]) -> bool:
+            return stage_fit(stage, self.maintenance_messages(messages, maintenance_scope)) \
+                if stage_fit is not None else capacity(messages)
+
         options: dict[str, Any] = {
             "session": prior_session if prior_session is not None else bound["session"],
             "date": date, "recipe": recipe,
             "model_call": call, "commit": commit, "selected_record_ids": selected_record_ids,
             "fit": capacity if fit is not None else None, "prepare_delivery": selected_delivery,
+            "stage_fit": stage_capacity if stage_fit is not None else None,
             "memory_view_mode": self.memory_view_mode,
             "memory_save_requested": memory_save_requested,
         }
@@ -764,6 +772,7 @@ class FunctionalEditMemory(FunctionalMemory):
         allowed: bool,
         execute: bool = True,
         fit: Callable[[list[dict[str, str]]], bool] | None = None,
+        stage_fit: StageFit | None = None,
         prior_request_fragments: list[dict[str, Any]] | None = None,
         skip_source_refs: list[str] | None = None,
         memory_save_requested: bool = False,
@@ -829,7 +838,8 @@ class FunctionalEditMemory(FunctionalMemory):
             results.append(self.maintain_delivery(
                 config, delivery, request_id=request_id,
                 date=source.get("occurred_at") or source["observed_at"], recipe=recipe,
-                model_call=model_call, allowed=allowed, execute=execute, fit=fit,
+                model_call=model_call, allowed=allowed, execute=execute,
+                fit=fit, stage_fit=stage_fit,
                 memory_save_requested=memory_save_requested, maintenance_scope=maintenance_scope,
             ))
         return results
