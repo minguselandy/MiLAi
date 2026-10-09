@@ -1,3 +1,28 @@
+# Current handoff: global function-first integration, 2026-10-10 Asia/Shanghai
+
+User explicitly requests full execution of docs/MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md.
+Candidate config: configs/milai-global-function-first-v1.json; one integrator plus three source developers.
+Shared Reader projection/flat literal metadata, real complete-request planning, independent memory after
+confirmed CURRENT schema failure, faithful candidates and cumulative confirmed receipts are integrated.
+Root exact old-eight replay: 32446 -> 30520 input <=32256, 8/8 exact-rendered, all original evidence
+bodies/ranges remain literal, zero actual HTTP. Offline fit is not model or semantic success.
+Next: freeze candidate and run original 6+8+6 Host20 with unchanged fixture and real recovery controls.
+Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.
+Historical observations below are fixed snapshots; inspect actual PID/lease/terminal before dispatch.
+
+Root alone serializes actual Qwen/BGE/Judge on the original continuous ledger; no resets, new services,
+blind unknown retries or live-source edits. Lab only; no Product/Archive writes, gold/future QA/holdout
+in runtime or method-worker inputs. Source capture, semantic receipts, business effects and feedback
+remain separate. Forgotten bodies cannot return through trace/cache/reopen. Save-only cannot repeat
+business; current readonly cannot inherit prior write permission. Stop related work on Store/unknown
+side-effect failures and retain earliest error and already confirmed effects. Raw/private artifacts ignored.
+Full plan and six deliverables remain active/incomplete; no Product or research advantage claim.
+
+# Historical handoffs and operating constraints
+
+All following dated states are historical evidence. Latest explicit user scope above supersedes their
+phase scheduling; their standing data, ownership, permission and failure-preservation boundaries remain.
+
 # Live handoff: 2026-10-09 14:33:01 UTC／北京时间22:33:01, M36 FAILED / Host20 PREPARED only
 
 ActualM36b0401c6e89276640903e3201ad6dba6f4b7c66; development4099839a3aac4ea4d8294183f9677896d07b4a40;

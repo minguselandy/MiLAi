@@ -779,6 +779,7 @@ class FunctionalEditMemory(FunctionalMemory):
         memory_save_requested: bool = False,
         maintenance_scope: str | None = None,
         prepare_source_delivery: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
+        result_observer: Callable[[dict[str, Any]], None] | None = None,
     ) -> list[dict[str, Any]]:
         """Maintain current user input and actually delivered tool sources once each.
 
@@ -836,13 +837,16 @@ class FunctionalEditMemory(FunctionalMemory):
                 [bound["session"], bound["message_id"], bound["config_version"], ref]
             )
 
-            results.append(self.maintain_delivery(
+            result = self.maintain_delivery(
                 config, delivery, request_id=request_id,
                 date=source.get("occurred_at") or source["observed_at"], recipe=recipe,
                 model_call=model_call, allowed=allowed, execute=execute,
                 fit=fit, stage_fit=stage_fit,
                 memory_save_requested=memory_save_requested, maintenance_scope=maintenance_scope,
-            ))
+            )
+            results.append(result)
+            if result_observer is not None:
+                result_observer(result)
         return results
 
     def writer_context(

@@ -1078,6 +1078,104 @@ def test_each_embedding_batch_is_recorded_before_http_and_billed_once(tmp_path: 
     assert len(list((tmp_path / "http/embedding").glob("*/response.json"))) == 2
 
 
+@pytest.mark.parametrize("unknown_answer", [False, True])
+def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_stops(
+    tmp_path: Path, unknown_answer: bool,
+) -> None:
+    class MeasuredTokenizer:
+        def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
+            return [0] * (500 if "capacity_probe" in str(messages) else 2)
+
+        def encode(self, text: str, **kwargs: Any) -> list[int]:
+            return list(range(len(text)))
+
+    attempts = []
+
+    def provider(request: httpx.Request) -> httpx.Response:
+        attempts.append(request)
+        payload = json.loads(json.loads(request.read())["messages"][-1]["content"])
+        if "delivery" in payload:
+            assert "private-gold-answer" not in str(payload)
+            source = payload["delivery"]["sources"][0]
+            old = payload["delivery"]["records"]
+            proposal = {"action": "rewrite" if old else "create", "units": [{
+                "text": source["text"], "evidence": [source["evidence_id"]],
+            }]}
+            if old:
+                proposal.update(target_record=old[0]["record_id"],
+                                base_revision=old[0]["revision"])
+            content = json.dumps({"proposals": [proposal]})
+        elif payload["question"] == "BlueProject unknown_probe":
+            raise httpx.ReadError("Original answer unknown", request=request)
+        else:
+            content = payload["memories"][0]["content"]
+        return httpx.Response(200, json={
+            "choices": [{"finish_reason": "stop", "message": {"content": content}}],
+            "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9},
+        })
+
+    sessions = []
+    for ordinal, day in enumerate(("Monday", "Tuesday")):
+        stamp = f"Jan 0{ordinal + 1}, 2030, 09:00:00"
+        questions = (["BlueProject capacity_probe", "BlueProject first complete"]
+                     + (["BlueProject unknown_probe"] if unknown_answer else [])) \
+            if ordinal == 0 else ["BlueProject later complete"]
+        sessions.append({
+            "start_time": stamp, "end_time": stamp,
+            "dialogue": [{"role": "user", "content": "BlueProject " + day, "timestamp": stamp}],
+            "memory_points": [],
+            "questions": [{"question": question, "answer": "private-gold-answer", "evidence": []}
+                          for question in questions],
+        })
+    dataset = tmp_path / "synthetic.jsonl"
+    dataset.write_text(json.dumps({"uuid": "synthetic", "sessions": sessions}) + "\n")
+    execution = BenchmarkRun.__new__(BenchmarkRun)
+    execution.root = tmp_path / "history"
+    execution.settings = {
+        "context_tokens": 1024, "model": {"max_tokens": 100}, "arm": "B0",
+        "source_tokens": 4096, "retrieval_limit": 10,
+        "halumem": {"path": str(dataset), "users": ["synthetic"],
+                    "reader_failure_policy": "record_known_readonly_failure"},
+    }
+    execution.tokenizer = MeasuredTokenizer()
+    budget = RunBudget(RunLimits(), tmp_path / "budget.json")
+    with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100),
+                    transport=httpx.MockTransport(provider), budget=budget) as client:
+        execution.client = client
+        if unknown_answer:
+            with pytest.raises(httpx.ReadError, match="Original answer unknown"):
+                execution.halumem("predict")
+        else:
+            assert execution.halumem("predict") == {
+                "status": "PREDICTIONS_SAVED", "sessions": 2, "judge_calls": 0,
+                "complete_answers": 2, "known_reader_failures": 1,
+            }
+        first = read_json(execution.root / "predictions/halumem/synthetic/0/qa/0/complete.json")
+        assert first["hypothesis"] is None
+        assert first["reader_failure"]["phase"] == "before_http"
+        assert first["reader_failure"]["request_sent"] is False
+        assert (execution.root / first["reader_failure"]["capacity_ref"]).exists()
+        assert not (execution.root / "http/halumem/synthetic/0/qa/0/request.json").exists()
+        answer_path = execution.root / "predictions/halumem/synthetic/0/qa/1/complete.json"
+        original = answer_path.read_bytes()
+        assert "Monday" in read_json(answer_path)["hypothesis"]
+        if unknown_answer:
+            assert len(attempts) == 3 and budget.state["generation"]["unknown_usage"] == 1
+            assert not (execution.root / "predictions/halumem/synthetic/0/complete.json").exists()
+            with pytest.raises(RuntimeError, match="do not blindly repeat"):
+                execution.halumem("predict")
+            assert len(attempts) == 3 and budget.state["generation"]["unknown_usage"] == 1
+        else:
+            assert len(attempts) == 4 and budget.state["generation"]["unknown_usage"] == 0
+            later = read_json(execution.root / "predictions/halumem/synthetic/1/complete.json")
+            assert later["state"][0]["value"]["revision"] == 2
+            assert "Tuesday" in later["prediction"]["questions"][0]["hypothesis"]
+            assert execution.halumem("predict")["known_reader_failures"] == 1
+            assert len(attempts) == 4
+        assert answer_path.read_bytes() == original
+    assert budget.state["generation_requests"] == len(attempts)
+
+
 def test_embedding_budget_rejection_is_recorded_as_not_sent(tmp_path: Path) -> None:
     tokenizer = Tokenizer(WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.save(str(tmp_path / "tokenizer.json"))

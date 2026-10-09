@@ -380,15 +380,21 @@ def merge_maintenance_results(
     if source_visible is not None:
         for batch in result:
             if any(not source_visible(ref) for ref in batch.get("source_refs", [])):
-                batch["source_visibility"] = "visibility_revoked"
-                batch.pop("memory_view", None)
-                batch["receipts"] = [{key: receipt[key] for key in (
+                retained = {key: batch[key] for key in (
+                    "request_id", "source_refs", "status", "phase", "outcome",
+                    "semantic_write_performed", "memory_save_requested", "batches",
+                    "unprocessed_count",
+                ) if key in batch}
+                retained["source_visibility"] = "visibility_revoked"
+                retained["receipts"] = [{key: receipt[key] for key in (
                     "ok", "status", "id", "revision", "source_ref", "effect",
                     "replayed", "original_status",
                 ) if key in receipt} for receipt in batch.get("receipts", [])]
-                batch["unprocessed"] = [{key: item[key] for key in (
+                retained["unprocessed"] = [{key: item[key] for key in (
                     "operation_id", "phase", "batch",
                 ) if key in item} for item in batch.get("unprocessed", [])]
+                batch.clear()
+                batch.update(retained)
             if "batches" in batch:
                 batch["batches"] = merge_maintenance_results(
                     batch["batches"], source_visible=source_visible

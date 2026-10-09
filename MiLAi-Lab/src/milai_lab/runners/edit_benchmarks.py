@@ -31,7 +31,7 @@ from milai_lab.datasets.edit_benchmarks import (
     longmemeval_cases,
     longmemeval_history,
 )
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import entrypoint_settings, read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.edit_units import (
     read_applicability,
@@ -44,6 +44,7 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.memory.working_set import (
     empty_view,
     item_ref,
+    plan_delivery,
     record_candidate,
     select_view_refs,
 )
@@ -144,8 +145,28 @@ def reader_messages(
     memories: list[dict[str, Any]],
     *,
     memory_view: str = "retained_state",
+    projection: str = "legacy",
 ) -> list[dict[str, str]]:
     """Common Reader over actual retained records or observed source messages."""
+    if projection == "semantic_units_v1":
+        from milai_lab.memory.reader_projection import PROJECTION_INSTRUCTIONS, project_material
+
+        return [
+            {"role": "system", "content": READER_PROMPT +
+             "\nSemantic units preserve each stored claim with its actual supports, "
+             "assertion, temporal scope and direct relations. A missing rendered content "
+             "copy means the actual units exactly represented it; it does not mean no "
+             "memory was saved. Original revision_evidence remains literal evidence. "
+             "Explicit unknown dates or limits remain unknown. A person's reported full "
+             "name does not establish an unreported middle name or other component. "
+             + PROJECTION_INSTRUCTIONS},
+            {"role": "user", "content": json.dumps({
+                "question": question, "date": date, "memory_view": memory_view,
+                **project_material(memories),
+            }, ensure_ascii=False, separators=(",", ":"))},
+        ]
+    if projection != "legacy":
+        raise ValueError("Unknown Reader projection")
     delivered = copy.deepcopy(memories)
     for memory in delivered:
         memory.pop("retrieval_navigation", None)
@@ -285,6 +306,15 @@ def reader_messages(
 
 class UnconfirmedModelOutcome(RuntimeError):
     """A sent model request has no confirmed original response; never silently continue."""
+
+
+class ReadCapacityUnavailable(ValueError):
+    """A complete request was measured and refused before any HTTP dispatch."""
+
+    def __init__(self, receipt: dict[str, Any]) -> None:
+        super().__init__(
+            f"Context unavailable without loss: {receipt['input_tokens']} input tokens")
+        self.receipt = receipt
 
 
 def source_batches(
@@ -452,6 +482,12 @@ class BenchmarkRun:
             raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
         if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
             raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
+        if settings.get("reader_projection", "legacy") not in {"legacy", "semantic_units_v1"}:
+            raise ValueError("READER_PROJECTION_INVALID")
+        if settings.get("halumem", {}).get("reader_failure_policy", "fail_fast") not in {
+            "fail_fast", "record_confirmed_length", "record_known_readonly_failure",
+        }:
+            raise ValueError("READER_FAILURE_POLICY_INVALID")
         stage_modes = settings.get("stage_enable_thinking", {})
         if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
                 or any(type(value) is not bool for value in stage_modes.values())):
@@ -588,7 +624,12 @@ class BenchmarkRun:
             {"enable_thinking": enable_thinking} if enable_thinking is not None else {}
         ))
         if tokens + self.settings["model"]["max_tokens"] + 512 > self.settings["context_tokens"]:
-            raise ValueError(f"Context unavailable without loss: {tokens} input tokens")
+            receipt = {"stage": key, "input_tokens": tokens,
+                       "input_token_limit": self.settings["context_tokens"]
+                                            - self.settings["model"]["max_tokens"] - 512,
+                       "request_sent": False, "phase": "before_http"}
+            write_json(folder / "capacity.json", receipt)
+            raise ReadCapacityUnavailable(receipt)
         selected_format = (
             generation_schema(response_format)
             if response_format
@@ -1540,6 +1581,14 @@ class BenchmarkRun:
         )
         return extracted
 
+    def _reader_messages(
+        self, question: str, date: str, memories: list[dict[str, Any]],
+    ) -> list[dict[str, str]]:
+        return reader_messages(
+            question, date, memories,
+            projection=self.settings.get("reader_projection", "legacy"),
+        )
+
     def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
         snapshot = self.root / "http" / key / "retrieval.json"
         if snapshot.exists():
@@ -1581,6 +1630,13 @@ class BenchmarkRun:
                 }
                 for row in records
             ]
+            if self.settings.get("reader_projection") == "semantic_units_v1":
+                from milai_lab.memory.reader_projection import project_record
+
+                memories = [project_record(
+                    {**memory, "record_content_chars": len(memory["content"])},
+                    edit_state=row["value"].get("edit_state"),
+                ) for memory, row in zip(memories, records, strict=True)]
             write_json(snapshot, memories)
         cached_response = (snapshot.parent / "response.json").exists()
         answer, used_memories = self.answer_material(question, date, key, memories)
@@ -1605,7 +1661,7 @@ class BenchmarkRun:
             sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
                                        if self.stage_thinking("reader") is not None else {})
             return self.call(
-                key, reader_messages(question, date, memories), structured=False,
+                key, self._reader_messages(question, date, memories), structured=False,
                 **sampling,
             ), memories
         return self._answer_view(question, date, key, memories)
@@ -1628,13 +1684,25 @@ class BenchmarkRun:
         refs = [item_ref({
             "type": "record", "record_id": memory["record_id"],
             "revision": memory["revision"], "version_view": "current_at_snapshot",
-            "content_range": [0, len(memory["content"])],
+            "content_range": [0, memory.get(
+                "record_content_chars", len(memory.get("content", "")))],
         }, key + "/retrieval.json", index) for index, memory in enumerate(memories)]
         directory = [record_candidate(
             memory["record_id"], memory["revision"],
-            memory.get("matter_description", memory["scope"]), len(memory["content"]),
+            memory.get("matter_description", memory["scope"]),
+            memory.get("record_content_chars", len(memory.get("content", ""))),
             navigation=memory.get("retrieval_navigation"),
         ) for memory in memories]
+        input_limit = 0
+        reader_thinking = self.stage_thinking("reader")
+        if self.settings.get("reader_projection") == "semantic_units_v1":
+            input_limit = (self.settings["context_tokens"]
+                           - self.settings["model"]["max_tokens"] - 512)
+            for candidate, memory in zip(directory, memories, strict=True):
+                candidate["single_record_input_tokens"] = self.input_tokens(
+                    self._reader_messages(question, date, [memory]),
+                    enable_thinking=reader_thinking,
+                )
         schema = {
             "type": "object", "additionalProperties": False,
             "properties": {
@@ -1658,7 +1726,7 @@ class BenchmarkRun:
             return [memories[ref["unit_index"]] for ref in state["resident_refs"]]
 
         while memories and not state["complete"] and state["steps"] < read_limit:
-            messages = reader_messages(question, date, resident())
+            messages = self._reader_messages(question, date, resident())
             messages[0]["content"] += (
                 "\nThis call is the one selection before the final answer. "
                 "Directory descriptions locate records; they are not evidence. Select "
@@ -1686,6 +1754,13 @@ class BenchmarkRun:
             payload.update(memory_view_state={name: state[name] for name in empty_view()},
                            candidates=directory, opened_ids=state["opened_ids"],
                            remaining_reads=read_limit - state["steps"], response_schema=schema)
+            if self.settings.get("reader_projection") == "semantic_units_v1":
+                payload["input_token_limit"] = input_limit
+                payload["capacity_note"] = (
+                    "single_record_input_tokens measures that matter with this question and "
+                    "the actual Reader template. Joint request cost is measured after selection; "
+                    "individual costs are not additive."
+                )
             messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
             selected = parse_object(self.call(
                 f"{key}/view/select-{state['steps']}", messages, structured=True,
@@ -1707,19 +1782,43 @@ class BenchmarkRun:
             write_json(path, state)
         state["complete"] = True
         write_json(path, state)
-        messages = reader_messages(question, date, resident())
-        if state["read_goal"] is not None:
-            messages[0]["content"] += (
-                " read_goal describes this question's purpose, not the provenance or "
-                "validity of the supplied memories. It does not establish that requested "
-                "history is available; use the actual supplied evidence."
+        def final_messages(selected_refs: list[dict[str, Any]]) -> list[dict[str, str]]:
+            result = self._reader_messages(
+                question, date, [memories[ref["unit_index"]] for ref in selected_refs],
             )
-            payload = json.loads(messages[1]["content"])
-            payload["read_goal"] = state["read_goal"]
-            messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+            if state["read_goal"] is not None:
+                result[0]["content"] += (
+                    " read_goal describes this question's purpose, not the provenance or "
+                    "validity of the supplied memories. It does not establish that requested "
+                    "history is available; use the actual supplied evidence."
+                )
+                payload = json.loads(result[1]["content"])
+                payload["read_goal"] = state["read_goal"]
+                result[1]["content"] = json.dumps(
+                    payload, ensure_ascii=False, separators=(",", ":"))
+            return result
+
+        messages = final_messages(state["resident_refs"])
+        if self.settings.get("reader_projection") == "semantic_units_v1":
+            delivery = plan_delivery(state["resident_refs"], lambda selected: self.input_tokens(
+                final_messages(selected), enable_thinking=reader_thinking,
+            ) <= input_limit)
+            delivery.update(
+                input_token_limit=input_limit,
+                joint_input_tokens=self.input_tokens(messages, enable_thinking=reader_thinking),
+                read_goal=state["read_goal"],
+                body_delivered=False,
+            )
+            state["delivery_plan"] = delivery
+            state["pending_refs"] = ([] if delivery["fits_together"]
+                                     else copy.deepcopy(delivery["selected_refs"]))
+            write_json(path, state)
         sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
                                    if self.stage_thinking("reader") is not None else {})
         answer = self.call(key, messages, structured=False, **sampling)
+        if "delivery_plan" in state:
+            state["delivery_plan"]["body_delivered"] = True
+            write_json(path, state)
         return answer, [memory for memory in memories if memory["record_id"] in state["opened_ids"]]
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:
@@ -1734,6 +1833,47 @@ class BenchmarkRun:
         if check and before != record_index(service.records()):
             raise RuntimeError("Reference-guided scorer retrieval mutated actual memory")
         return [row["value"]["content"] for row in rows]
+
+    def _known_reader_failure(self, error: ValueError, key: str) -> dict[str, Any] | None:
+        """Record only a proven unsent request or a confirmed incomplete response.
+
+        This is called from QA only. Business, maintenance, transport unknowns
+        and Store failures retain their original stop behavior. The run's frozen
+        policy determines whether subsequent questions/history may proceed.
+        """
+        policy = self.settings["halumem"].get("reader_failure_policy", "fail_fast")
+        if isinstance(error, ReadCapacityUnavailable) and policy == "record_known_readonly_failure":
+            receipt = error.receipt
+            capacity_path = self.root / "http" / receipt["stage"] / "capacity.json"
+            return {"type": type(error).__name__, "message": str(error),
+                    "phase": "before_http", "request_sent": False,
+                    "input_tokens": receipt["input_tokens"],
+                    "input_token_limit": receipt["input_token_limit"],
+                    "capacity_ref": str(capacity_path.relative_to(self.root)),
+                    **({"delivery_plan_ref": str((self.root / "http" / key / "memory-view.json"
+                                                  ).relative_to(self.root))}
+                       if (self.root / "http" / key / "memory-view.json").exists() else {})}
+        if policy not in {"record_confirmed_length", "record_known_readonly_failure"} or (
+            str(error) != "Provider output incomplete: length"
+        ):
+            return None
+        folder = self.root / "http" / key
+        response_path = folder / "response.json"
+        response = read_json(response_path) if response_path.exists() else {}
+        choices = response.get("choices", [])
+        usage = response.get("usage")
+        if (not choices or choices[0].get("finish_reason") != "length"
+                or not isinstance(usage, dict)
+                or not all(type(usage.get(name)) is int and usage[name] >= 0 for name in (
+                    "prompt_tokens", "completion_tokens", "total_tokens"))):
+            return None
+        failure_path = folder / "failure.json"
+        if not failure_path.exists():
+            write_json(failure_path, {"type": type(error).__name__, "message": str(error)})
+        return {"type": type(error).__name__, "message": str(error),
+                "finish_reason": "length", "phase": "confirmed_response",
+                "response_ref": str(response_path.relative_to(self.root)),
+                "failure_ref": str(failure_path.relative_to(self.root))}
 
     def halumem(self, phase: str = "all") -> dict[str, Any]:
         selection = self.settings["halumem"]
@@ -1847,45 +1987,28 @@ class BenchmarkRun:
                         if not generated:
                             for qordinal, qa in enumerate(session.get("questions", [])):
                                 qa_key = f"{key}/qa/{qordinal}"
+                                question_path = self.root / "predictions" / qa_key / "complete.json"
+                                checkpoint_questions = selection.get("reader_failure_policy") == (
+                                    "record_known_readonly_failure")
+                                if checkpoint_questions and question_path.exists():
+                                    saved_question = read_json(question_path)
+                                    if saved_question["question"] != qa["question"]:
+                                        raise ValueError("Saved Reader question changed")
+                                    predicted["questions"].append(saved_question)
+                                    continue
                                 question_prediction: dict[str, Any] = {"question": qa["question"]}
                                 try:
                                     question_prediction["hypothesis"] = self.answer(
                                         service, qa["question"], session["end_time"], qa_key,
                                     )
                                 except ValueError as error:
-                                    if selection.get("reader_failure_policy") != (
-                                        "record_confirmed_length"
-                                    ) or str(error) != "Provider output incomplete: length":
+                                    failure = self._known_reader_failure(error, qa_key)
+                                    if failure is None:
                                         raise
-                                    folder = self.root / "http" / qa_key
-                                    response_path = folder / "response.json"
-                                    response = (
-                                        read_json(response_path) if response_path.exists() else {}
-                                    )
-                                    choices = response.get("choices", [])
-                                    usage = response.get("usage")
-                                    if (
-                                        not choices or choices[0].get("finish_reason") != "length"
-                                        or not isinstance(usage, dict)
-                                        or not all(
-                                            type(usage.get(name)) is int and usage[name] >= 0
-                                            for name in (
-                                                "prompt_tokens", "completion_tokens", "total_tokens"
-                                            )
-                                        )
-                                    ):
-                                        raise
-                                    failure_path = folder / "failure.json"
-                                    if not failure_path.exists():
-                                        write_json(failure_path, {
-                                            "type": type(error).__name__, "message": str(error),
-                                        })
-                                    question_prediction.update(hypothesis=None, reader_failure={
-                                        "type": type(error).__name__, "message": str(error),
-                                        "finish_reason": "length",
-                                        "response_ref": str(response_path.relative_to(self.root)),
-                                        "failure_ref": str(failure_path.relative_to(self.root)),
-                                    })
+                                    question_prediction.update(hypothesis=None,
+                                                               reader_failure=failure)
+                                if checkpoint_questions:
+                                    write_json(question_path, question_prediction)
                                 predicted["questions"].append(question_prediction)
                         # Author-required reference retrieval is evaluator-only.
                         # It runs after predictions; saved material is not fed to a Writer/Reader.
@@ -1999,7 +2122,10 @@ class BenchmarkRun:
                         answer = question_prediction["hypothesis"]
                         reader_failure = question_prediction.get("reader_failure")
                         if (answer is None and isinstance(reader_failure, dict)
-                                and reader_failure.get("finish_reason") == "length"):
+                                and (reader_failure.get("finish_reason") == "length" or (
+                                    reader_failure.get("phase") == "before_http"
+                                    and reader_failure.get("request_sent") is False
+                                    and reader_failure.get("type") == "ReadCapacityUnavailable"))):
                             result = {}
                         elif isinstance(answer, str):
                             result = self._safe_score(
@@ -2205,6 +2331,7 @@ def run(
     settings: dict[str, Any], root: Path, benchmark: str,
     phase: Literal["all", "predict", "score"] = "all",
 ) -> None:
+    settings = entrypoint_settings(settings, "benchmark")
     execution = BenchmarkRun(settings, root, phase=phase)
     terminal = root / ("terminal.json" if phase == "all" else f"terminal-{phase}.json")
     try:

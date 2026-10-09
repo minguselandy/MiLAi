@@ -186,6 +186,9 @@ def business_response(
     paragraphs = (["本轮业务结果: " + _STATUS.get(business["status"], business["status"]) +
                    "。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。"]
                   if include_business else [])
+    if effects.get("request_part_failures"):
+        paragraphs.append("本轮业务请求解析未完成, 没有由该分支取得新的执行许可。"
+                          "独立记忆工作的回执另列, 不代表原请求全部完成。")
     for name, receipt in receipts:
         paragraphs.append(_TOOLS[name] + ": \n\n" + "\n".join(
             "- " + line for line in _receipt_lines(receipt)))

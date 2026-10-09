@@ -1253,7 +1253,7 @@ class EditMemory:
                 {
                     "role": "system",
                     "content": (
-                        "Extract candidate statements and change cues from the current sources "
+                        "Extract brief candidate propositions and change cues from current sources "
                         "for memory maintenance. Preserve the subject, who asserts it, report or "
                         "inference status, modal strength, qualifications and explicit time/scope. "
                         "Considering a course remains considering; wishing to reduce work hours "

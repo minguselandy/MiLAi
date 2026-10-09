@@ -3,11 +3,47 @@
 from __future__ import annotations
 
 import copy
+from collections.abc import Callable
 from typing import Any
 
 
 def empty_view() -> dict[str, Any]:
     return {"focus": None, "read_goal": None, "resident_refs": [], "pending_refs": []}
+
+
+def plan_delivery(
+    selected_refs: list[dict[str, Any]],
+    fits: Callable[[list[dict[str, Any]]], bool],
+) -> dict[str, Any]:
+    """Plan whole semantic matters using the caller's complete request cost.
+
+    The selected order and every reference remain explicit, including a matter
+    that cannot fit alone. Pages are delivery choices, never summaries or proof
+    that their bodies have already reached a model. Previously read references
+    remain loadable through the same caller-owned snapshot.
+    """
+    selected = copy.deepcopy(selected_refs)
+    if fits(selected):
+        return {"selected_refs": selected, "pages": [selected] if selected else [],
+                "unavailable_refs": [], "fits_together": True}
+    pages: list[list[dict[str, Any]]] = []
+    page: list[dict[str, Any]] = []
+    unavailable = []
+    for ref in selected:
+        if fits([*page, ref]):
+            page.append(ref)
+            continue
+        if page:
+            pages.append(page)
+            page = []
+        if fits([ref]):
+            page = [ref]
+        else:
+            unavailable.append(ref)
+    if page:
+        pages.append(page)
+    return {"selected_refs": selected, "pages": pages,
+            "unavailable_refs": unavailable, "fits_together": False}
 
 
 def item_ref(item: dict[str, Any], snapshot_id: str, unit_index: int) -> dict[str, Any]:
