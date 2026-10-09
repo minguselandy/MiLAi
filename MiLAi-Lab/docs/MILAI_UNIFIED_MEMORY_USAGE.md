@@ -11,6 +11,74 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 当前实验闭合：M容量失败，下一版Host仅准备；2026-10-09 14:33:01 UTC／北京时间22:33:01
+
+本次状态核查固定于14:33:01，**闭合成本固定于14:29:46.727955 UTC**。
+实际M源码仍为`36b0401c6e89276640903e3201ad6dba6f4b7c66`；最新开发
+`4099839a3aac4ea4d8294183f9677896d07b4a40`、前报告`25ce747`分别记录。
+M工具session24661退出1、PID4170100不存在，terminal-predict为FAILED。
+不依据下方旧“运行中”快照重启，不热改、重试或拼接失败后缀。
+
+### 预测、实际响应与失败身份
+
+| 项目 | 当前实际事实 |
+|---|---|
+| 完整预测 | 首用户原0–20共21/277份，完整自然答案46；四用户分布[21,0,0,0] |
+| 最后部分会话 | 原21已确认qa0／qa1两个final Reader响应，但整个会话预测没有保存；最终Reader总响应48，不把额外2条当完整预测 |
+| 最早终止断点 | 原21 qa2的staged Selector正常结束，打开8/10事项；最终输入32446>32256，超190tokens，在写最终HTTP request前raise |
+| 实际终态 | Context unavailable without loss；对应最终Reader request／response不存在，不是模型收到材料后答错或输出length |
+| 维护结果 | 22份文件=17status completed＋5incomplete；43去重提交、6拒绝，拒绝均current_boundary_source_required |
+| 尚未运行 | 本M的Judge／score、其余三用户及其他方法；不能将未运行记零，也没有本轮准确率或排名 |
+
+第22次维护虽incomplete，仍有4项create提交及1项拒绝。维护状态、预测保存、提交成功和语义
+正确分层保留；不能把本轮失败泛化为所有前21维护都没有执行，也不能把43提交当43语义通过。
+Root已读前21会话46自然答案及最后额外2条完整正式答案；原3／4和姓名的有限原件诊断见下节。
+未数值重评分，未执行reasoning或恢复其操作，不算独立确认。
+
+**新的接线核查：**36→409的benchmark runners/edit_benchmarks.py没有改动。
+f8的分页减重复在普通Host FunctionalEditMemory／functional_response中，尚未进入该
+benchmark _answer_view，不能将其离线Host可容纳证据称为本次M容量已修复。
+后续按原八份事项、冻结reader_messages和实际Qwen模板离线精确复算32446；确认正文与结构视图
+有重复，但尚未验证可安全省去对应投影。没有删已选事项、减少K10、扩大预算、摘要替换原文或新HTTP复跑。
+容量是本次终止原因；池内未打开、抽取强化、错误撤销和最终答案推断仍是独立语义问题。
+
+### 本轮成本与连续账本
+
+| M36阶段 | 确认生成请求／响应 | known tokens |
+|---|---:|---:|
+| Extractor | 22／22 | 305476 |
+| Writer Selector | 21／21 | 415047 |
+| Editor | 22／22 | 437629 |
+| Reader Selector | 49／49 | 187443 |
+| 最终Reader | 48／48 | 403187 |
+| 合计 | **162／162** | **1748782** |
+
+162均stop，length0、保存的HTTP错误0；140encoder请求／响应，18648tokens。
+最后qa2只产生容量异常，没有最终Reader HTTP或对应费用；Selector费用已经包含，不重加。
+相对13:36:10闭合28的账本增量为162请求／1748782known＝charged、18648encoder tokens，
+文件汇总与固定账本差额一致。历史unknown仍generation6／embedding0，新增unknown／Judge0，
+原limits未改；闭合后无在途reservation，未重置预算。
+
+**累计29非重叠范围：1539生成／15845012known＝charged增量，990encoder／92258tokens。**
+固定全局账本49574requests／227101922known／227378618charged／2042879embedding。
+48Reader、前21的46答案、各环节和早期前缀均是本M子集，不能在162之外再相加。
+原始正文、gold、HTTP、reasoning、DB、配置、日志与闭合事实审计继续ignored，只发布汇总。
+
+### 开发、GitHub与下一步
+
+409目录改进和fef／f8 Host修复已发布；本次只更新报告，不更改算法、配置或旧运行。
+原三链6＋8＋6共20消息及恢复controls已按409完整源码完成CLI prepare；JSON scope／General
+TrueT1、Editor FalseT1、staged／record／denseK10、8192及原24调用边界保持。
+**0真实Host消息／HTTP／encoder／Judge**，尚无新保存闭环效果；没有因本轮总结再派发实验。
+这组Host用默认record，不把其将来结果当record_units导航效果。
+
+前报告25ce747自身Fast37944216898在14:33:01仍in_progress，Full37944216795 skipped；
+本报告新头CI推送后单独核对，不借别版CI或称Full21/21。PR119 open／draft／未合并。
+继续基于已确认断点收敛共同读取与实际保存，然后集中评分及同版强简单对照；不每补丁跑五条277。
+完整五方法各277／首65子集、native／drift／recovery、必要消融／更紧预算、冻结后16保留用户、
+外部任务与三适配器、最终Host135／192及新故事、六交付均未完成，Product NO_GO。
+下面各固定快照作为历史保留，不代表当前仍有真实模型进程。
+
 ## M早期语义断点与目录改进：2026-10-09 14:21:38 UTC／北京时间22:21:38
 
 本段固定运行观察为14:21:38；实际M仍冻结于

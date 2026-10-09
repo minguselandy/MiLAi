@@ -1,3 +1,39 @@
+# Live handoff: 2026-10-09 14:33:01 UTC／北京时间22:33:01, M36 FAILED / Host20 PREPARED only
+
+ActualM36b0401c6e89276640903e3201ad6dba6f4b7c66; development4099839a3aac4ea4d8294183f9677896d07b4a40;
+previousreport25ce7477a831e12667362d55d7557cd7429edc39. Session24661 EXIT1/PID4170100 ABSENT,
+M/terminal-predict FAILED Context unavailable without loss32446input>32256. No live model/ownerfree;
+alwaysinspectactual before futuredispatch, neverrestart/patch/splice oldM or trustolderRUNNINGsnapshots.
+21savedcompletepredictions(0..20)/46answers; partial21qa0/1 finalresponses2 =>48finalReaderresponses total.
+21qa2 selectorstop/opened8of10; finalrequest/responseABSENT, failurePREHTTP/notmodelanswererror/length.
+22maintenancefiles17completed+5incomplete;43uniquecommits6rejectedcurrent_boundary_source_required;
+partialevent21 has4creates1reject despiteincomplete. NoJudge/score/othermethods; missingdoesnotmeanzero.
+Root readall48fullformalnaturalReaderanswers, no numericregrade/independentconfirmation/reasoningproposal.
+
+Criticalwiring: 36=>409 runners/edit_benchmarks.py unchanged; f8 compactpaging lives ONLY ordinaryHost
+FunctionalEditMemory/functional_response, NOT benchmark_answer_view. Mfailure notfixed byofflineHostpages.
+Offline exactfailureinput reconstruction CLOSED reproduces32446 usingoriginal8/10/Qwentemplate;
+literalrenderedtext/structuredunits duplicateconfirmed but deletionnotvalidated. No fix/modelretry claimed;
+no changedK10/fullselectedmaterial/outputbudget/Source/HTTP.
+Capacityterminaldoesnotoverridesemanticpool-selection/modalstrength/rejectedfalse-retract/nameinference gaps.
+
+Closed29cost fixed14:29:46.727955 UTC: M162genALLstop/1748782known=charged/140emb18648tokens,
+extract22/305476,Writerselect21/415047,edit22/437629,Readerselect49/187443,finalReader48/403187;
+length0/savedHTTPerrors0/newunknown0/Judge0. Fixedend49574requests227101922known227378618charged
+2042879emb/histunknown6/0/limitsunchanged/noinflight; cumulative29=1539gen15845012known/990emb92258.
+Use root-accounting-predict-end-fixed-20261009-142946.json + closed29facts, neverlaterliveledger forMcost.
+Stages/48Readers/46savedanswers/partial2/prefixes are subsets, not extra gencharges.
+
+Host20 completeSource409 frozenartifacts/post118/source-4099839/MiLAi-Lab; root
+host-three-flows20-4099839-json-v1/runtime separate same stem. CLIpreparecomplete/admission14:31:16,
+NO realstep/modeldispatch. Usercurrentsteering summarize/publish before anynewdispatch.
+Original6+8+6fixture/controls retained/jsonScopeGeneralTrueT1/EditFalseT1/staged/recordK10/8192/24;
+Hostdefaultrecord means notnavigationeffectcomparison. Input/control inspectionfilelookup failed0HTTP,
+corrected by reading actualprepared fixture/root input-freeze; no failedrealrun/retry.
+25ownFast37944216898in_progress/Full37944216795skipped14:33:01; ownnewreportCI separate.
+PrivateSource/gold/HTTP/reasoning/DB/config/log/facts ignored; offlineagentsnoactualmodels, Rootserialowner.
+Fullpost117/118goal/sixdeliveriesACTIVE/incomplete/no finalcandidate/stableadvantage/ProductNO_GO.
+
 # Live handoff: 2026-10-09 14:21:38 UTC／北京时间22:21:38, M36 RUNNING / whole-key navigation development
 
 Latestdevelopment4099839a3aac4ea4d8294183f9677896d07b4a40; actualM36 unchanged.

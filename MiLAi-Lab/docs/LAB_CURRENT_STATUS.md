@@ -1,5 +1,23 @@
 # MiLAi Lab 当前状态
 
+**2026-10-09 14:33:01 UTC／北京时间22:33:01：M已容量FAILED，当前无真实模型runner。**
+
+实际冻结36b，session24661 exit1／PID4170100不存在；21/277完整预测46答案，另2Reader响应，
+final Reader共48。原21qa2选择8/10后32446输入超32256，在最终HTTP前失败；没有该Reader响应。
+维护22文件=17completed＋5incomplete、43提交／6拒绝，无Judge／评分／方法排名。Root读全部48
+完整正式自然Reader答案，不是数值重评分或独立确认；原语义问题及无效标签不删除。
+
+最新开发409的导航与fef／f8 Host修复不回填36。f8分页投影只进入普通Host，未进入benchmark
+_answer_view，M容量修复尚未完成。409原三链20完成CLI prepare，0真实Host消息／HTTP；只准备，
+不依据旧PID或下面运行中快照重启。报告更新不改算法、配置、权限或实验输入。
+
+闭合成本固定14:29:46：M162stop／1748782known＝charged、140encoder／18648；累计29范围
+1539生成／15845012known、990encoder／92258。全局49574requests／227101922known／227378618
+charged／2042879emb，历史unknown6／0、新unknown／Judge0、limits不变，无在途。
+25ce747自身Fast仍in_progress／Full skipped（14:33:01）；新报告CI另核。PR119 open／draft／未合并。
+全任务／六交付active／incomplete，ProductNO_GO。详见[闭合事实与后续范围](MILAI_UNIFIED_MEMORY_USAGE.md)。
+下方固定历史保持。
+
 **2026-10-09 14:21:38 UTC／北京时间22:21:38：集中M仍运行，早期语义断点已分层定位。**
 
 实际冻结36b；固定21/277预测、46完整答案，[21,0,0,0]，维护21文件中17completed／4incomplete，
