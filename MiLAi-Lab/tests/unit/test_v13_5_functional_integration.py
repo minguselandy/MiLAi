@@ -20,6 +20,7 @@ from langgraph.store.sqlite import SqliteStore
 from tokenizers import Tokenizer, models, pre_tokenizers
 from transformers import PreTrainedTokenizerFast
 
+from milai_lab.application.tools import BUSINESS_SCHEMAS
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.contextual_vllm import VLLMConfig
@@ -260,6 +261,12 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                     [] if scope_requests else ["application_requests"])}
             assert "business_operations" not in schema["properties"]
             assert ("application_requests" in schema["properties"]) is not scope_requests
+            if scope_requests:
+                catalog = json.loads(wire["messages"][0]["content"].split(
+                    "APPLICATION OPERATIONS:\n", 1)[1].split("\n", 1)[0])
+                assert catalog == [{"name": entry["function"]["name"],
+                    "description": entry["function"]["description"]}
+                    for entry in BUSINESS_SCHEMAS]
             return native_call("classify_current_request", "mode-" + str(ordinal),
                 memory_requests=(["explicit"] if text in {original_text, correction_text} else [])
                 + (["continue_prior"] if text in {continue_text, correction_text} else []),
@@ -5601,6 +5608,17 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
             schema = wire["tools"][0]["function"]["parameters"]
             if set(schema["properties"]) == {"application_requests"}:
                 assert scope_requests and wire["messages"][-1]["content"] == initial_text
+                request_properties = schema["properties"]["application_requests"]["items"][
+                    "properties"]
+                public = {entry["function"]["name"]: entry["function"]
+                          for entry in BUSINESS_SCHEMAS}
+                assert request_properties["target"]["description"] == public[
+                    "get_reservation"]["description"]
+                actions = request_properties["actions"]["items"]["oneOf"]
+                assert {action["properties"]["operation"]["const"]: action["description"]
+                        for action in actions} == {
+                    name: entry["description"] for name, entry in public.items()
+                    if name != "get_reservation"}
                 seen["current_plan"] += 1
                 return native_call("resolve_continuation_operations", "current-plan",
                     application_requests=[{"target": {"item_key": "teal pack"}, "actions": [{

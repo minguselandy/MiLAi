@@ -17,21 +17,31 @@ from milai_lab.application.document_publication import document_schemas
 from milai_lab.application.tools import BUSINESS_SCHEMAS
 
 
+def _application_contract(workflow: str) -> tuple[list[dict[str, Any]], str, str]:
+    workflow = {"reservation": "reservation_v1", "document": "document_publication_v1"}.get(
+        workflow, workflow
+    )
+    if workflow == "reservation_v1":
+        return BUSINESS_SCHEMAS, "get_reservation", "item_key"
+    if workflow == "document_publication_v1":
+        return document_schemas(), "get_document_status", "title"
+    raise ValueError("APPLICATION_REQUEST_WORKFLOW_INVALID")
+
+
+def application_operation_catalog(workflow: str) -> list[dict[str, str]]:
+    """Project the public operation meanings without parameters or object state."""
+    schemas, _, _ = _application_contract(workflow)
+    return [{"name": schema["function"]["name"],
+             "description": schema["function"]["description"]} for schema in schemas]
+
+
 def application_requests_schema(workflow: str) -> dict[str, Any]:
     """The native declaration's array schema, derived from existing tool inputs.
 
     Target literals occur once. Arguments omit the target and fields that must
     come from a real lookup: reservation_id and document_version.
     """
-    workflow = {"reservation": "reservation_v1", "document": "document_publication_v1"}.get(
-        workflow, workflow
-    )
-    if workflow == "reservation_v1":
-        schemas, query, target_field = BUSINESS_SCHEMAS, "get_reservation", "item_key"
-    elif workflow == "document_publication_v1":
-        schemas, query, target_field = document_schemas(), "get_document_status", "title"
-    else:
-        raise ValueError("APPLICATION_REQUEST_WORKFLOW_INVALID")
+    schemas, query, target_field = _application_contract(workflow)
     actions = []
     target = {}
     for schema in schemas:
@@ -39,6 +49,7 @@ def application_requests_schema(workflow: str) -> dict[str, Any]:
         parameters = deepcopy(schema["function"]["parameters"])
         if name == query:
             target = parameters
+            target["description"] = schema["function"]["description"]
             target["properties"][target_field]["minLength"] = 1
             continue
         for field in (target_field, "reservation_id", "document_version"):
@@ -50,6 +61,7 @@ def application_requests_schema(workflow: str) -> dict[str, Any]:
                 definition["minLength"] = 1
         actions.append({
             "type": "object", "additionalProperties": False,
+            "description": schema["function"]["description"],
             "properties": {"operation": {"const": name}, "arguments": parameters},
             "required": ["operation", "arguments"],
         })

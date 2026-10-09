@@ -40,6 +40,7 @@ from milai_lab.application.host_requests import HostRequestProgress, visible_car
 from milai_lab.application.recovery import UnknownModelRequest, resume_request
 from milai_lab.application.refs import observation_profile
 from milai_lab.application.request_plans import (
+    application_operation_catalog,
     application_requests_schema,
     compile_application_requests,
 )
@@ -1103,6 +1104,9 @@ def request_mode(
             }
             parameters["required"].append("application_continuation_request")
             if scope_only:
+                prompt += ("\nAPPLICATION OPERATIONS:\n" + json.dumps(
+                    application_operation_catalog(application_workflow),
+                    ensure_ascii=False, separators=(",", ":")) + "\n")
                 prompt += (
                     "Set application_continuation_request=resolve_prior_request when the CURRENT "
                     "request asks to inspect or resume earlier requested work. A pure status "
@@ -1438,20 +1442,22 @@ def continuation_operations(
             )
         if current_plan:
             prompt = (
-                "Resolve the literal application plan in the whole CURRENT user input. Its "
-                "requested scope was classified separately. Return one "
+                "Interpret the whole CURRENT user input using the declared application "
+                "operation descriptions. Return one "
                 "resolve_continuation_operations call with application_requests: one target "
                 "with its requested actions and literal parameters. Include only the requested "
                 "workflow stages; reserve_and_label already includes labeling. Completion "
-                "criteria or implicit steps do not authorize more actions. Use [] if literal "
-                "target/parameters cannot be resolved from this input. Original-request "
+                "criteria or implicit steps do not authorize more actions. Use [] when no "
+                "application action is requested or literal target/parameters cannot be "
+                "resolved from this input. Original-request "
                 "continuation is resolved separately, not by creating a new plan from history. "
                 "The program compiles this plan and binds actual identities after queries. "
                 "Requested saving is separate from application actions and their actual results."
             )
             declaration = {"type": "function", "function": {
                 "name": "resolve_continuation_operations",
-                "description": "Resolve the literal plan for the accepted CURRENT business scope.",
+                "description": "Interpret the CURRENT input as literal requests for the "
+                               "available application operations.",
                 "parameters": {"type": "object", "additionalProperties": False,
                     "properties": {"application_requests": application_requests_schema(
                         cast(str, application_workflow))}, "required": ["application_requests"]}}}
