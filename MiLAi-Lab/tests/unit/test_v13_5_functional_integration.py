@@ -70,6 +70,7 @@ def prepared(
     memory_continuation: bool = False,
     complete_requests: bool = False,
     scope_requests: bool = False,
+    json_scope_requests: bool = False,
     declaration_tool_choice: str | None = None,
     declaration_sampling: str | None = None,
     memory_method: str = "functional_v1",
@@ -129,7 +130,8 @@ def prepared(
         else "message_limit_only",
         "tool_catalog_errors": "bounded_feedback_v1" if catalog_feedback else "legacy",
         "read_interface": "explicit_selectors_v1" if explicit_reads else "combined_selectors_v1",
-        "declaration_thinking": "disabled" if phase_thinking else "inherit",
+        "declaration_thinking": "disabled" if phase_thinking and not json_scope_requests
+                                else "inherit",
         "declaration_sampling": declaration_sampling if declaration_sampling is not None
                                 else "greedy_v1" if direct_response else "inherit",
         "capability_delivery": "actual_catalog_v1" if actual_capabilities else "legacy",
@@ -149,7 +151,8 @@ def prepared(
         "http_ownership_domain": {"deployment_id": "mechanical-local-test",
                                    "clients": [asdict(host)]},
         "system_prompt": "Mechanical integration probe. Use issued evidence and actual receipts.",
-        "request_mode": "current_request_native_v9" if scope_requests else
+        "request_mode": "current_request_json_v9" if json_scope_requests else
+        "current_request_native_v9" if scope_requests else
         "current_request_native_v8" if complete_requests else
         "current_request_native_v7" if memory_continuation else
         "current_request_native_v6" if independent_capabilities else
@@ -222,15 +225,18 @@ def scripted(
     return wires
 
 
-@pytest.mark.parametrize("scope_requests,declaration_choice", [
-    pytest.param(False, "required", id="False"),
-    pytest.param(True, "required", id="True"),
-    pytest.param(True, "auto", id="True-auto"),
+@pytest.mark.parametrize("scope_requests,declaration_choice,json_scope_requests", [
+    pytest.param(False, "required", False, id="False"),
+    pytest.param(True, "required", False, id="True"),
+    pytest.param(True, "auto", False, id="True-auto"),
+    pytest.param(True, "auto", True, id="True-json"),
 ])
 def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, scope_requests: bool, declaration_choice: str,
+    json_scope_requests: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, complete_requests=True, scope_requests=scope_requests,
+        json_scope_requests=json_scope_requests,
         declaration_tool_choice=declaration_choice,
         declaration_sampling="inherit" if declaration_choice == "auto" else None,
         direct_response=True, phase_thinking=True, current_delivery=True,
@@ -251,17 +257,25 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         names = {t["function"]["name"] for t in wire.get("tools", [])}
+        json_scope = wire.get("response_format", {}).get("json_schema", {}).get(
+            "name") == "milai_request_scope"
         if names in ({"classify_current_request"}, {"resolve_continuation_operations"}):
             assert wire["tool_choice"] == declaration_choice
-            assert wire["chat_template_kwargs"] == {"enable_thinking": False}
+            assert wire["chat_template_kwargs"] == {"enable_thinking": json_scope_requests}
             assert wire["temperature"] == (1.0 if declaration_choice == "auto" else 0.0)
             assert "[shape_feedback_v1]" not in json.dumps(wire, ensure_ascii=False)
         elif declaration_choice == "auto":
             assert wire["chat_template_kwargs"] == {"enable_thinking": True}
             assert wire["temperature"] == 1.0
-        if names == {"classify_current_request"}:
+        if json_scope or names == {"classify_current_request"}:
             text = wire["messages"][-1]["content"]
-            schema = wire["tools"][0]["function"]["parameters"]
+            if json_scope:
+                assert json_scope_requests and not names
+                assert "tools" not in wire and "tool_choice" not in wire
+                assert "classify_current_request once" not in wire["messages"][0]["content"]
+                schema = wire["response_format"]["json_schema"]["schema"]
+            else:
+                schema = wire["tools"][0]["function"]["parameters"]
             if text == continue_text:
                 references = json.loads(wire["messages"][0]["content"].split(
                     "VISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n", 1)[1])
@@ -285,12 +299,16 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                 assert catalog == [{"name": entry["function"]["name"],
                     "description": entry["function"]["description"]}
                     for entry in BUSINESS_SCHEMAS]
-            return native_call("classify_current_request", "mode-" + str(ordinal),
-                memory_requests=(["explicit"] if text in {original_text, correction_text} else [])
+            decision = {
+                "memory_requests": (["explicit"] if text in {original_text, correction_text}
+                                    else [])
                 + (["continue_prior"] if text in {continue_text, correction_text} else []),
-                allow_forgetting=False, business_action_request="none",
-                application_continuation_request="none",
-                **({} if scope_requests else {"application_requests": []}))
+                "allow_forgetting": False, "business_action_request": "none",
+                "application_continuation_request": "none",
+                **({} if scope_requests else {"application_requests": []})}
+            if json_scope:
+                return {"role": "assistant", "content": json.dumps(decision)}
+            return native_call("classify_current_request", "mode-" + str(ordinal), **decision)
         if names == {"resolve_continuation_operations"}:
             seen["resolve"] += 1
             material = json.loads(wire["messages"][-1]["content"])["archived_reference_material"]

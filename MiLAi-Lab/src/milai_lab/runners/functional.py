@@ -711,12 +711,16 @@ def prepare(
         "current_request_native_v7",
         "current_request_native_v8",
         "current_request_native_v9",
+        "current_request_json_v9",
     }:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
     if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
         raise ValueError("FUNCTIONAL_REQUEST_MODE_NATIVE_REQUIRED")
+    if (settings.get("request_mode") == "current_request_json_v9"
+            and settings.get("declaration_thinking", "inherit") != "inherit"):
+        raise ValueError("FUNCTIONAL_JSON_SCOPE_REQUIRES_INHERITED_DECLARATION")
     if settings.get("request_mode") in {
-        "current_request_native_v8", "current_request_native_v9",
+        "current_request_native_v8", "current_request_native_v9", "current_request_json_v9",
     } and (
         settings.get("memory_profile") != "unified_v1" or not settings.get("maintenance_recipe")
     ):
@@ -1081,6 +1085,11 @@ def request_mode(
                   REQUEST_ACTION_MODE_PROMPT if action_mode_declaration else
                   REQUEST_WRITE_MODE_PROMPT if write_mode_declaration else
                   REQUEST_MODE_NATIVE_PROMPT if native_declaration else REQUEST_MODE_PROMPT)
+        if scope_only and not native_declaration:
+            prompt = prompt.replace(
+                "Call\nclassify_current_request once; it executes no operation.",
+                "Return exactly one JSON object matching the response schema. This declaration\n"
+                "executes no operation.")
         declaration = (REQUEST_COMPLETE_MODE_DECLARATION if application_workflow is not None else
                        REQUEST_CONTINUATION_MODE_DECLARATION if memory_continuation else
                        REQUEST_REFERENCE_MODE_DECLARATION if reference_mode_declaration else
@@ -1177,9 +1186,14 @@ def request_mode(
                 "\nVISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n"
                 + json.dumps({"requests": references, "omitted_reference_count": omitted},
                              ensure_ascii=False, separators=(",", ":")))
+        generation_options: dict[str, Any] = ({"response_format": {
+            "type": "json_schema", "json_schema": {
+                "name": "milai_request_scope", "schema": declaration["function"]["parameters"]}}}
+            if scope_only and not native_declaration else {})
         response = model.invoke([SystemMessage(content=prompt), HumanMessage(content=content)],
             tools=[declaration] if native_declaration else [],
-            tool_choice=declaration_tool_choice if native_declaration else "none")
+            tool_choice=declaration_tool_choice if native_declaration else "none",
+            **generation_options)
         try:
             if native_declaration:
                 decision = (response.tool_calls[0]["args"] if isinstance(response, AIMessage)
@@ -2456,6 +2470,7 @@ def message(
                         raise _VisibilityReplayRevoked(blocked)
                     if settings["request_mode"] in {
                         "current_request_native_v8", "current_request_native_v9",
+                        "current_request_json_v9",
                     }:
                         request_cards = visible_cards(
                             app, service, capture["source_ref"],
@@ -2496,6 +2511,7 @@ def message(
                         "current_request_native_v7",
                         "current_request_native_v8",
                         "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     action_mode_declaration=settings["request_mode"]
                     in {
@@ -2506,6 +2522,7 @@ def message(
                         "current_request_native_v7",
                         "current_request_native_v8",
                         "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     operation_mode_declaration=settings["request_mode"]
                     in {
@@ -2515,6 +2532,7 @@ def message(
                         "current_request_native_v7",
                         "current_request_native_v8",
                         "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     reference_mode_declaration=settings["request_mode"]
                     in {
@@ -2523,16 +2541,20 @@ def message(
                         "current_request_native_v7",
                         "current_request_native_v8",
                         "current_request_native_v9",
+                        "current_request_json_v9",
                     },
                     independent_capabilities=settings["request_mode"]
                     in {"current_request_native_v6", "current_request_native_v7",
-                        "current_request_native_v8", "current_request_native_v9"},
+                        "current_request_native_v8", "current_request_native_v9",
+                        "current_request_json_v9"},
                     memory_continuation=settings["request_mode"] in {
                         "current_request_native_v7", "current_request_native_v8",
-                        "current_request_native_v9"},
+                        "current_request_native_v9", "current_request_json_v9"},
                     application_workflow=(app.workflow if settings["request_mode"]
-                        in {"current_request_native_v8", "current_request_native_v9"} else None),
-                    scope_only=settings["request_mode"] == "current_request_native_v9",
+                        in {"current_request_native_v8", "current_request_native_v9",
+                            "current_request_json_v9"} else None),
+                    scope_only=settings["request_mode"] in {
+                        "current_request_native_v9", "current_request_json_v9"},
                     referenced_requests=request_cards,
                     reference_fit=lambda text: capacity.text_tokens(text)
                     <= settings["ordinary_material_tokens"],
@@ -2562,6 +2584,7 @@ def message(
                     "current_request_native_v7",
                     "current_request_native_v8",
                     "current_request_native_v9",
+                    "current_request_json_v9",
                 } and (
                     (
                         mode["business_action_request"] == "continue_if_unfinished"
@@ -2569,7 +2592,8 @@ def message(
                     )
                     or mode.get("memory_continuation_request") == "resolve_prior_explicit"
                     or (settings["request_mode"] in {
-                            "current_request_native_v8", "current_request_native_v9"}
+                            "current_request_native_v8", "current_request_native_v9",
+                            "current_request_json_v9"}
                         and (mode["business_action_request"] == "continue_if_unfinished"
                              or mode["application_continuation_request"]
                              == "resolve_prior_request"))
@@ -2587,6 +2611,7 @@ def message(
                     )
                     if settings["request_mode"] in {
                         "current_request_native_v8", "current_request_native_v9",
+                        "current_request_json_v9",
                     }:
                         cards = (request_cards if request_cards is not None else
                                  visible_cards(
