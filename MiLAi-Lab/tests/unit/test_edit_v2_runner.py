@@ -274,6 +274,28 @@ def test_context_admission_matches_transported_thinking_mode(tmp_path: Path) -> 
                 response = read_json(tmp_path / "http" / key / "response.json")
                 assert saved["prompt_tokens"] == response["usage"]["prompt_tokens"]
 
+    run.settings["model"] = {"max_tokens": 1, "enable_thinking": True}
+    run.settings["stage_enable_thinking"] = {"reader": False}
+    with VLLMClient(
+        VLLMConfig("http://local.invalid/v1", "synthetic", max_tokens=1, enable_thinking=True),
+        transport=httpx.MockTransport(provider),
+    ) as client:
+        run.client = client
+        assert not run._fits(messages, enable_thinking=run.stage_thinking("reader"))
+        sent_before = len(sent)
+        with pytest.raises(ValueError, match="Context unavailable without loss"):
+            run.call("explicit-nonthinking-too-large", messages, structured=False,
+                     enable_thinking=run.stage_thinking("reader"))
+        assert len(sent) == sent_before
+        run.settings["context_tokens"] = nonthinking_count + 1 + 512
+        assert run.call("explicit-nonthinking", messages, structured=False,
+                        enable_thinking=run.stage_thinking("reader")) == "answer"
+        saved = read_json(tmp_path / "http/explicit-nonthinking/request.json")
+        wire = sent[-1]
+        assert wire["chat_template_kwargs"]["enable_thinking"] is False
+        assert saved["enable_thinking"] is False and saved["prompt_tokens"] == nonthinking_count
+        assert client.config.enable_thinking is True
+
 
 def observation(session: str, text: str) -> ObservedSession:
     return ObservedSession(

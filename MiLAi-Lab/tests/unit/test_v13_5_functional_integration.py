@@ -47,6 +47,7 @@ def prepared(
     independent_capabilities: bool = False,
     operation_completion: bool = False,
     phase_thinking: bool = False,
+    stage_enable_thinking: dict[str, bool] | None = None,
     reasoning_history: bool = False,
     direct_response: bool = False,
     actual_capabilities: bool = False,
@@ -99,6 +100,8 @@ def prepared(
     settings = {
         "profile": "functional_v1", "host": asdict(host),
         "memory_method": memory_method,
+        **({"stage_enable_thinking": stage_enable_thinking}
+           if stage_enable_thinking is not None else {}),
         "memory_profile": memory_profile,
         "memory_view_mode": memory_view_mode,
         "result_maintenance_mode": result_maintenance_mode,
@@ -3230,15 +3233,20 @@ def test_declared_forget_is_maintenance_and_visibility_stop_keeps_terminal_accou
     assert any(a['message_id'] == 'forget' and a['status'] == result['status'] for a in attempts)
 
 
+@pytest.mark.parametrize("reader_thinking", [None, False])
 def test_phase_thinking_uses_actual_templates_and_one_shared_admission(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, reader_thinking: bool | None,
 ) -> None:
     root = prepared(tmp_path, native=True, readonly_finalization=True,
         independent_capabilities=True, current_delivery=True, fresh_completion=True,
-        operation_completion=True, phase_thinking=True)
+        operation_completion=True, phase_thinking=True,
+        stage_enable_thinking={"reader": reader_thinking} if reader_thinking is not None else None)
+
+    def expected_thinking(ordinal: int) -> bool:
+        return ordinal != 1 and not (ordinal == 4 and reader_thinking is False)
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
-        assert wire['chat_template_kwargs']['enable_thinking'] is (ordinal != 1)
+        assert wire['chat_template_kwargs']['enable_thinking'] is expected_thinking(ordinal)
         if ordinal == 1:
             assert wire['tool_choice'] == 'required'
             return native_call('classify_current_request', 'mode',
@@ -3262,7 +3270,7 @@ def test_phase_thinking_uses_actual_templates_and_one_shared_admission(
     responses = [e for e in events if e.get('event') == 'vllm_response']
     assert len(responses) == 4
     for index, event in enumerate(responses):
-        thinking = index != 0
+        thinking = expected_thinking(index + 1)
         assert event['request']['chat_template_kwargs']['enable_thinking'] is thinking
         assert event['capacity']['identity']['enable_thinking'] is thinking
     assert result['budget_after']['generation_requests'] == 4
@@ -5242,7 +5250,8 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
                     edit_features={name: True for name in (
                         "matter_organization", "semantic_operations", "bound_references",
                         "single_record_changes", "source_metadata")},
-                    maintenance_recipe=recipe)
+                    maintenance_recipe=recipe,
+                    stage_enable_thinking={"extract": True, "edit": True})
     stages = []
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
@@ -5252,6 +5261,7 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
         system = wire["messages"][0]["content"]
         if "Extract brief candidate propositions" in system:
             stages.append("extract")
+            assert wire["chat_template_kwargs"]["enable_thinking"] is True
             assert wire["response_format"]["type"] == "json_schema"
             formal = wire["response_format"]["json_schema"]
             assert formal["name"] == "milai_extract"
@@ -5260,6 +5270,7 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
             return {"role": "assistant", "content": json.dumps({"changes": []})}
         if not wire.get("tools"):
             stages.append("edit")
+            assert wire["chat_template_kwargs"]["enable_thinking"] is True
             assert wire["response_format"]["type"] == "json_schema"
             formal = wire["response_format"]["json_schema"]
             assert formal["name"] == "milai_edit"
@@ -5296,6 +5307,14 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
         assert first["records"][0]["value"]["method_version"] == memory_method
         assert first["records"][0]["value"]["method_arm"] == "Append-only"
     assert first["operation_status"]["semantic_memory"]["status"] == "committed"
+    trace_path = next(root.glob("banks/*/*-trace-0.jsonl"))
+    events = [json.loads(line) for line in trace_path.read_text().splitlines()]
+    for event in (item for item in events if item.get("event") == "vllm_response"):
+        wire = event["request"]
+        stage = wire.get("response_format", {}).get("json_schema", {}).get("name")
+        expected = stage in {"milai_extract", "milai_edit"}
+        assert wire["chat_template_kwargs"]["enable_thinking"] is expected
+        assert event["capacity"]["identity"]["enable_thinking"] is expected
     calls = len(wires)
     again = message(root, resume=True)
     assert again["status"] == "COMPLETED", again

@@ -436,6 +436,12 @@ class BenchmarkRun:
         self.settings, self.root, self.phase = settings, root, phase
         if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
             raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
+        if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
+            raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
+        stage_modes = settings.get("stage_enable_thinking", {})
+        if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
+                or any(type(value) is not bool for value in stage_modes.values())):
+            raise ValueError("STAGE_ENABLE_THINKING_INVALID")
         root.mkdir(parents=True, exist_ok=True)
         self.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
             settings["tokenizer_path"],
@@ -522,15 +528,25 @@ class BenchmarkRun:
         if getattr(self, "retrieval_embeddings", None) is None:
             return None
         assert self.retrieval_embeddings is not None
-        return SemanticRetriever(self.retrieval_embeddings, self.settings["embedding_dimension"])
+        return SemanticRetriever(
+            self.retrieval_embeddings, self.settings["embedding_dimension"],
+            granularity=self.settings.get("retrieval_granularity", "record"),
+        )
 
-    def input_tokens(self, messages: list[dict[str, str]]) -> int:
+    def stage_thinking(self, stage: str) -> bool | None:
+        return cast(bool | None, self.settings.get("stage_enable_thinking", {}).get(
+            stage.partition(":")[0]))
+
+    def input_tokens(
+        self, messages: list[dict[str, str]], *, enable_thinking: bool | None = None,
+    ) -> int:
         return len(
             self.tokenizer.apply_chat_template(
                 messages,
                 tokenize=True,
                 add_generation_prompt=True,
-                enable_thinking=self.settings["model"].get("enable_thinking"),
+                enable_thinking=(self.settings["model"].get("enable_thinking")
+                                 if enable_thinking is None else enable_thinking),
             )
         )
 
@@ -542,6 +558,7 @@ class BenchmarkRun:
         structured: bool,
         response_format: dict[str, Any] | None = None,
         presence_penalty: float | None = None,
+        enable_thinking: bool | None = None,
     ) -> str:
         folder = self.root / "http" / key
         cached = folder / "response.json"
@@ -553,7 +570,9 @@ class BenchmarkRun:
             if self.settings.get("interface_version", "v1") != "v1":
                 raise UnconfirmedModelOutcome(message)
             raise RuntimeError(message)
-        tokens = self.input_tokens(messages)
+        tokens = self.input_tokens(messages, **(
+            {"enable_thinking": enable_thinking} if enable_thinking is not None else {}
+        ))
         if tokens + self.settings["model"]["max_tokens"] + 512 > self.settings["context_tokens"]:
             raise ValueError(f"Context unavailable without loss: {tokens} input tokens")
         selected_format = (
@@ -570,12 +589,16 @@ class BenchmarkRun:
                 "response_format": selected_format,
                 **({"presence_penalty": presence_penalty}
                    if presence_penalty is not None else {}),
+                **({"enable_thinking": enable_thinking}
+                   if enable_thinking is not None else {}),
             },
         )
         try:
             sampling: dict[str, Any] = (
                 {"presence_penalty": presence_penalty} if presence_penalty is not None else {}
             )
+            if enable_thinking is not None:
+                sampling["enable_thinking"] = enable_thinking
             response = self.client.chat(messages, response_format=selected_format, **sampling)
             write_json(cached, response)
             return self.completed_content(response)
@@ -865,9 +888,13 @@ class BenchmarkRun:
             change_candidates=change_candidates,
         )
 
-    def _fits(self, messages: list[dict[str, str]]) -> bool:
+    def _fits(
+        self, messages: list[dict[str, str]], *, enable_thinking: bool | None = None,
+    ) -> bool:
         return bool(
-            self.input_tokens(messages) + self.settings["model"]["max_tokens"] + 512
+            self.input_tokens(messages, **(
+                {"enable_thinking": enable_thinking} if enable_thinking is not None else {}
+            )) + self.settings["model"]["max_tokens"] + 512
             <= self.settings["context_tokens"]
         )
 
@@ -947,7 +974,7 @@ class BenchmarkRun:
                 change_candidates=request.get("change_candidates"),
                 prior_context=delivery.get("prior_context"),
             )
-            if not self._fits(messages):
+            if not self._fits(messages, enable_thinking=self.stage_thinking("edit")):
                 omitted.append({**part, "reason": "complete_request_capacity", "tokens": cost})
                 continue
             subset = trial
@@ -1067,6 +1094,8 @@ class BenchmarkRun:
                     http_folder + "/" + stage_path, messages, structured=True,
                     response_format={"type": "json_schema", "json_schema": {
                         "name": "milai_" + stage_name, "schema": schema}},
+                    **({"enable_thinking": self.stage_thinking(stage_name)}
+                       if self.stage_thinking(stage_name) is not None else {}),
                 )
                 if calls:
                     calls[-1]["response_saved"] = True
@@ -1079,6 +1108,9 @@ class BenchmarkRun:
                 recipe=cast(MaintenanceRecipe, self.settings["maintenance_recipe"]),
                 memory_view_mode=self.settings.get("memory_view_mode", "legacy"),
                 model_call=call, retrieval_limit=self.settings["retrieval_limit"], fit=self._fits,
+                stage_fit=(lambda stage, messages: self._fits(
+                    messages, enable_thinking=self.stage_thinking(stage)))
+                if self.settings.get("stage_enable_thinking") else None,
                 prepare_delivery=lambda located: self._old_support_plan(
                     method, located, located["records"], observed.date, allow_create=True
                 )[0],
@@ -1554,8 +1586,11 @@ class BenchmarkRun:
         uses the exact saved pool, so changing delivery cannot add sources or facts.
         """
         if self.settings.get("memory_view_mode", "legacy") == "legacy":
+            sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
+                                       if self.stage_thinking("reader") is not None else {})
             return self.call(
-                key, reader_messages(question, date, memories), structured=False
+                key, reader_messages(question, date, memories), structured=False,
+                **sampling,
             ), memories
         return self._answer_view(question, date, key, memories)
 
@@ -1665,7 +1700,9 @@ class BenchmarkRun:
             payload = json.loads(messages[1]["content"])
             payload["read_goal"] = state["read_goal"]
             messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
-        answer = self.call(key, messages, structured=False)
+        sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
+                                   if self.stage_thinking("reader") is not None else {})
+        answer = self.call(key, messages, structured=False, **sampling)
         return answer, [memory for memory in memories if memory["record_id"] in state["opened_ids"]]
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:

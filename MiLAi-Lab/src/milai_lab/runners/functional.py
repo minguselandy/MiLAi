@@ -535,6 +535,7 @@ def prepare(
         "result_maintenance_mode",
         "memory_profile",
         "memory_ranking",
+        "retrieval_granularity", "stage_enable_thinking",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
     if set(settings) - allowed:
@@ -550,6 +551,12 @@ def prepare(
         raise ValueError("FUNCTIONAL_RESULT_MAINTENANCE_MODE_INVALID")
     if settings.get("memory_ranking", "dense") not in {"dense", "activation"}:
         raise ValueError("MEMORY_RANKING_INVALID")
+    if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
+        raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
+    stage_modes = settings.get("stage_enable_thinking", {})
+    if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
+            or any(type(value) is not bool for value in stage_modes.values())):
+        raise ValueError("STAGE_ENABLE_THINKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
             and settings["memory_method"] not in FUNCTIONAL_ARMS):
         raise ValueError("FUNCTIONAL_MEMORY_METHOD_INVALID")
@@ -816,6 +823,7 @@ def finalize_response(
     resume: bool,
     remaining_reproposals: int,
     trace: Trace,
+    enable_thinking: bool | None = None,
 ) -> tuple[AIMessage, dict[str, Any]]:
     """One declared response stage, without tools; persist reservation and result.
 
@@ -869,7 +877,9 @@ def finalize_response(
         state.update(attempts=state["attempts"] + 1, status="reserved_before_dispatch",
                      tools_available=False, execution_candidate_delivered=False)
         write_json(path, state)
-        answer = model.invoke(prompt, tools=[], tool_choice="none")
+        sampling: dict[str, Any] = ({"enable_thinking": enable_thinking}
+                                   if enable_thinking is not None else {})
+        answer = model.invoke(prompt, tools=[], tool_choice="none", **sampling)
         if (not isinstance(answer, AIMessage) or answer.tool_calls or answer.invalid_tool_calls
                 or final_delivery(answer.content)["status"] != "available"):
             state.update(status="unusable_response",
@@ -2072,7 +2082,10 @@ def message(
                     settings["embedding_capacity"], dimension=settings["embedding_dimension"],
                     batch_size=settings["embedding_batch_size"],
                 )
-                retriever = SemanticRetriever(embeddings, settings["embedding_dimension"])
+                retriever = SemanticRetriever(
+                    embeddings, settings["embedding_dimension"],
+                    granularity=settings.get("retrieval_granularity", "record"),
+                )
             service = MemoryService(
                 store,
                 namespace,
@@ -2464,6 +2477,10 @@ def message(
                     messages, tools=[], tool_choice="none",
                     response_format={"type": "json_schema", "json_schema": {
                         "name": "milai_" + stage.partition(":")[0], "schema": schema}},
+                    **({"enable_thinking": settings["stage_enable_thinking"][
+                        stage.partition(":")[0]]}
+                       if stage.partition(":")[0] in settings.get("stage_enable_thinking", {})
+                       else {}),
                 )
                 if not isinstance(response, AIMessage) or not isinstance(response.content, str):
                     raise ValueError("FUNCTIONAL_MAINTENANCE_RESPONSE_MISSING")
@@ -2475,6 +2492,14 @@ def message(
             def maintenance_fit(messages: list[dict[str, str]]) -> bool:
                 try:
                     capacity.check(messages)
+                except CapacityExceeded:
+                    return False
+                return True
+
+            def maintenance_stage_fit(stage: str, messages: list[dict[str, str]]) -> bool:
+                try:
+                    capacity.check(messages, enable_thinking=settings.get(
+                        "stage_enable_thinking", {}).get(stage.partition(":")[0]))
                 except CapacityExceeded:
                     return False
                 return True
@@ -2512,13 +2537,18 @@ def message(
                     ], ensure_ascii=False, separators=(",", ":")),
                     model_call=maintenance_call, allowed=maintenance_allowed,
                     execute=execute, fit=maintenance_fit,
+                    stage_fit=maintenance_stage_fit if settings.get("stage_enable_thinking")
+                    else None,
                 ) for prior in (mode or {}).get("prior_maintenance_requests", [])]
                 skip_current = bool(mode and mode.get(
                     "current_memory_write_request", mode.get("memory_write_request")) == "none")
                 return [*results, *memory.maintain_sources(
                     cfg, recipe=cast(MaintenanceRecipe, maintenance_recipe),
                     model_call=maintenance_call, allowed=maintenance_allowed, execute=execute,
-                    fit=maintenance_fit, prior_request_fragments=prior_request_fragments(),
+                    fit=maintenance_fit,
+                    stage_fit=maintenance_stage_fit if settings.get("stage_enable_thinking")
+                    else None,
+                    prior_request_fragments=prior_request_fragments(),
                     skip_source_refs=[capture["source_ref"]] if skip_current else None,
                     memory_save_requested=bool(memory.memory_view_mode != "legacy"
                                                and mode and mode["requires_memory_result"]),
@@ -3271,7 +3301,8 @@ def message(
                         model, bank_root / f"{identity}-finalization.json", response_input, effects,
                         resume=resume, remaining_reproposals=settings["format_reproposals"]
                         - len(format_failures(messages)) - mode_reproposals - completion_used
-                        - answer_repairs - continuation_used, trace=trace)
+                        - answer_repairs - continuation_used, trace=trace,
+                        enable_thinking=settings.get("stage_enable_thinking", {}).get("reader"))
                 output["execution_candidate_answer"] = messages[-1].content
                 # Do not alter the completed execution checkpoint. The response has
                 # its own durable receipt, so restart cannot repeat business work.
