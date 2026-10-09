@@ -42,7 +42,12 @@ from milai_lab.memory.functional_state import (
     reference_key,
     scope_leaves,
 )
-from milai_lab.memory.reader_projection import expand_record, project_record
+from milai_lab.memory.reader_projection import (
+    expand_host_packet,
+    expand_record,
+    project_host_packet,
+    project_record,
+)
 from milai_lab.memory.working_set import read_evidence_basis
 from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
@@ -374,7 +379,7 @@ class FunctionalEditMemory(FunctionalMemory):
             if continuations:
                 packet["continuations"] = continuations
             return packet
-        return material
+        return project_host_packet(material)
 
     def project_model_messages(
         self, config: RunnableConfig, messages: list[BaseMessage]
@@ -404,6 +409,8 @@ class FunctionalEditMemory(FunctionalMemory):
             result = copy.deepcopy(result)
             result["read_identities"] = [self._progress_identity(item) for item in result["items"]]
             result["items"] = []
+            result.pop("metadata_table", None)
+            result.pop("projection_instructions", None)
             result["material_location"] = "current_resident_view_or_original_read_reference"
             projected.append(message.model_copy(update={"content": canonical(result)}))
         return projected
@@ -557,22 +564,23 @@ class FunctionalEditMemory(FunctionalMemory):
         bound = self._binding(config)
         snapshot = self._snapshot(bound, self._record_units(row), "committed_current")
         page = self._page(snapshot, 0, bound)
-        self._cache_writer_items(config, page.get("items", []))
+        self._cache_writer_items(config, expand_host_packet(page).get("items", []))
         self._note_view_page(config, page, keep_resident=True, refresh_current=True)
 
     def _remember_page(self, config: RunnableConfig, result: dict[str, Any]) -> None:
         if result.get("ok"):
+            delivered = expand_host_packet(result)
             self.note_delivered_fragment_handles(
                 config,
                 [
                     unit["fragment_handle"]
-                    for unit in result.get("items", [])
+                    for unit in delivered.get("items", [])
                     if unit.get("type") == "fragment"
                 ],
                 redelivered=True,
             )
             if self.interface_version != "v1":
-                self._cache_writer_items(config, result.get("items", []), redelivered=True)
+                self._cache_writer_items(config, delivered.get("items", []), redelivered=True)
 
     @staticmethod
     def _progress_identity(item: dict[str, Any]) -> list[Any]:
@@ -722,7 +730,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 if units:
                     snapshot = self._snapshot(bound, units, "maintenance_selected")
                     page = self._page(snapshot, 0, bound)
-                    self._cache_writer_items(config, page.get("items", []))
+                    self._cache_writer_items(config, expand_host_packet(page).get("items", []))
                     self._note_view_page(config, page)
                 else:
                     state = self.view_state(config)
@@ -872,6 +880,7 @@ class FunctionalEditMemory(FunctionalMemory):
         return self._writer_packet(config, page)
 
     def _writer_packet(self, config: RunnableConfig, page: dict[str, Any]) -> dict[str, Any]:
+        page = expand_host_packet(page)
         items = self._model_items(config)
         sources: list[dict[str, Any]] = []
         redelivered: list[dict[str, Any]] = []
@@ -1253,6 +1262,9 @@ class FunctionalEditMemory(FunctionalMemory):
             _kept_support=kept,
             _edit_metadata=decoded.get("_edit_metadata"),
         )
+
+    def _project_read_packet(self, packet: dict[str, Any]) -> dict[str, Any]:
+        return project_host_packet(packet) if self.memory_view_mode != "legacy" else packet
 
     def _record_units(
         self, row: dict[str, Any], view: str = "current_at_snapshot"

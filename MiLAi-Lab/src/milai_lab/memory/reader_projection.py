@@ -44,6 +44,9 @@ _METADATA_STRINGS = {
     "source_unit", "target_unit", "unit_id", "current_unit_id", "relation_id",
     "source_key",
 }
+_HOST_CLOCKS = {
+    "occurred_at", "observed_at", "reported_at", "captured_at", "query_time", "version_time",
+}
 
 
 def _reader_diagnostics(view: dict[str, Any]) -> None:
@@ -77,21 +80,27 @@ def _reader_diagnostics(view: dict[str, Any]) -> None:
                 unit.pop(field)
 
 
-def _share_metadata(record: dict[str, Any]) -> None:
+def _share_metadata(
+    record: dict[str, Any], *, extra_objects: set[str] | None = None,
+    string_fields: set[str] | None = None, literal_fields: set[str] | None = None,
+) -> None:
     """Share exact repeated values in one flat table, never inside table entries."""
     counts: Counter[str] = Counter()
+    object_fields = _METADATA_OBJECTS | (extra_objects or set())
+    strings = _METADATA_STRINGS if string_fields is None else string_fields
+    literal = {"scope"} | (literal_fields or set())
 
     def encoded(value: Any, field: str) -> str | None:
         eligible = (
-            (field in _METADATA_OBJECTS and isinstance(value, (dict, list)))
-            or (field in _METADATA_STRINGS and isinstance(value, str))
+            (field in object_fields and isinstance(value, (dict, list)))
+            or (field in strings and isinstance(value, str))
         )
         if not eligible:
             return None
         return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
     def count(value: Any, field: str = "") -> None:
-        if field == "scope" and isinstance(value, dict):
+        if field in literal:
             return
         key = encoded(value, field)
         if key is not None:
@@ -109,7 +118,7 @@ def _share_metadata(record: dict[str, Any]) -> None:
     uses: Counter[int] = Counter()
 
     def share(value: Any, field: str = "") -> Any:
-        if field == "scope" and isinstance(value, dict):
+        if field in literal:
             return value
         key = encoded(value, field)
         if key is not None and counts[key] > 1 and len(key) >= 20:
@@ -132,10 +141,10 @@ def _share_metadata(record: dict[str, Any]) -> None:
 
     def restore_single(value: Any, field: str = "") -> Any:
         if isinstance(value, dict):
-            if field == "scope":
+            if field in literal:
                 return value
             if (set(value) == {"meta"} and field in (
-                _METADATA_OBJECTS | _METADATA_STRINGS | {"source_description"}
+                object_fields | strings | {"source_description"}
             ) and uses[value["meta"]] < 2):
                 return table[str(value["meta"])]
             return {key: restore_single(item,
@@ -190,17 +199,22 @@ def _group_metadata(view: dict[str, Any]) -> None:
                 temporal[name] = values
 
 
-def expand_record(record: dict[str, Any]) -> dict[str, Any]:
-    """Expand direct metadata for adapters needing literal tool IDs or paging."""
+def _expand_metadata(
+    record: dict[str, Any], *, extra_objects: set[str] | None = None,
+    string_fields: set[str] | None = None, literal_fields: set[str] | None = None,
+) -> dict[str, Any]:
     result = copy.deepcopy(record)
     table = result.pop("metadata_table", {})
+    object_fields = _METADATA_OBJECTS | (extra_objects or set())
+    strings = _METADATA_STRINGS if string_fields is None else string_fields
+    literal = {"scope"} | (literal_fields or set())
 
     def expand(value: Any, field: str = "") -> Any:
         if isinstance(value, dict):
-            if field == "scope":
+            if field in literal:
                 return value
             if set(value) == {"meta"} and field in (
-                _METADATA_OBJECTS | _METADATA_STRINGS | {"source_description"}
+                object_fields | strings | {"source_description"}
             ):
                 return copy.deepcopy(table[str(value["meta"])])
             return {key: expand(item, "source_description" if field == "source_table" else key)
@@ -210,18 +224,19 @@ def expand_record(record: dict[str, Any]) -> dict[str, Any]:
                     for item in value]
         return value
 
-    result = cast(dict[str, Any], expand(result))
-    view = result.get("applicability")
-    if isinstance(view, dict):
-        for name in ("query_context", "interpretation_context"):
-            if name in view:
-                view.update(view.pop(name))
-    if isinstance(view, dict) and isinstance(view.get("source_table"), list):
+    return cast(dict[str, Any], expand(result))
+
+
+def _ungroup_metadata(view: dict[str, Any]) -> None:
+    for name in ("query_context", "interpretation_context"):
+        if name in view:
+            view.update(view.pop(name))
+    if isinstance(view.get("source_table"), list):
         view["source_table"] = {
             source["source_key"]: source["source_metadata"]
             for source in view["source_table"]
         }
-    for unit in view.get("units", []) if isinstance(view, dict) else []:
+    for unit in view.get("units", []):
         for field, groups in (
             ("assertion", ("source_metadata",)),
             ("temporal", ("query_context", "applicability_metadata")),
@@ -233,6 +248,75 @@ def expand_record(record: dict[str, Any]) -> dict[str, Any]:
             if field == "temporal" and "report_source" in values:
                 source = values.pop("report_source")
                 values.update(reported_at=source["occurred_at"], captured_at=source["observed_at"])
+
+
+def expand_record(record: dict[str, Any]) -> dict[str, Any]:
+    """Expand direct metadata for adapters needing literal tool IDs or paging."""
+    result = _expand_metadata(record)
+    view = result.get("applicability")
+    if isinstance(view, dict):
+        _ungroup_metadata(view)
+    return result
+
+
+def _host_metadata(item: dict[str, Any], *, group: bool) -> None:
+    transform = _group_metadata if group else _ungroup_metadata
+    context = item.get("revision_context")
+    if isinstance(context, dict):
+        transform(context)
+    edit_unit = item.get("edit_unit") or {}
+    applicability = item.get("applicability") or {}
+    # Operate only on these existing values. No absent assertion or temporal
+    # field is supplied by a source-table default.
+    statement = {}
+    if "assertion" in edit_unit:
+        statement["assertion"] = edit_unit["assertion"]
+    if "temporal" in applicability:
+        statement["temporal"] = applicability["temporal"]
+    transform({"units": [statement]})
+
+
+def project_host_packet(packet: dict[str, Any]) -> dict[str, Any]:
+    """Share exact metadata in this delivered Host page before counting its cost.
+
+    Bodies, ranges, source/record/unit identities and tool arguments stay literal.
+    Complete repeated support arrays share one literal value; nothing is removed
+    or acquired from another page. The table and its instructions are part of the
+    returned packet and its capacity cost.
+    """
+    result = copy.deepcopy(packet)
+    if "metadata_table" in result:
+        return result
+    records = [item for item in result.get("items", []) if item.get("type") == "record"]
+    if not records:
+        return result
+    for item in records:
+        _host_metadata(item, group=True)
+    shared = {"items": records}
+    _share_metadata(
+        shared, extra_objects={"evidence_refs"}, string_fields=_HOST_CLOCKS,
+        literal_fields={"read", "arguments"},
+    )
+    if "metadata_table" not in shared:
+        return copy.deepcopy(packet)
+    projected = iter(shared["items"])
+    result["items"] = [next(projected) if item.get("type") == "record" else item
+                       for item in result["items"]]
+    result["metadata_table"] = shared["metadata_table"]
+    result["projection_instructions"] = PROJECTION_INSTRUCTIONS
+    return result
+
+
+def expand_host_packet(packet: dict[str, Any]) -> dict[str, Any]:
+    """Restore only the actual current packet for Writer delivery accounting."""
+    result = _expand_metadata(
+        packet, extra_objects={"evidence_refs"}, string_fields=_HOST_CLOCKS,
+        literal_fields={"read", "arguments"},
+    )
+    result.pop("projection_instructions", None)
+    for item in result.get("items", []):
+        if item.get("type") == "record":
+            _host_metadata(item, group=False)
     return result
 
 
