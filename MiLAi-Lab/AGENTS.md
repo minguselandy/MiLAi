@@ -1,3 +1,53 @@
+# Live handoff: 2026-10-09 07:47:12 UTC／北京时间2026-10-09 15:47:12, native diagnostics and functional P0
+
+Overrides older RUNNING/PREPARED claims, preserves fixed history. Development/report parent
+08ce00ec401e3421a469c30d93171f0f6bade399; remote PR119 open draft/unmerged. Full post117/118
+plan/six deliveries ACTIVE/incomplete, no final candidate/stable advantage/Product admission.
+Root alone serial actual Qwen/BGE/Judge; user authorizes multiple offline agents only.
+All actual tasks closed at fixed sample; inspect PID/terminal/ledger before next dispatch.
+
+d754 newHost20 CLOSED ROOT_STOPPED_AFTER_UNREQUESTED_BUSINESS_EFFECT:9executionCOMPLETED,
+11NOT_RUN,38HTTP285166known/27emb1173,21stop17toolcalls/Judge0/newunknown0. First6two records
+saved/last4read-only wholevalues unchanged/boundedunknown positive. Rulem0savedr1; m1onlyUser+System
+no priorrefs/routing still invented reserve/label actual once each. FirstEdit savedNorth r2,
+secondr3keptNorth, thirdremove_exception removedto r4;units/relations strictsameasr1,metadata/revnot.
+e10 actualoriginalm1 User ADD+KEEP fragment redelivered, not Tool/fake/missing. Publicturnboundary
+accumulatesUser+Tool, batchbindingnotreset; structurevalid doesnotprove supporteddeletionmeaning.
+Alreadyissuedm2read-only finished, then no furthersteps/M; do not restart/revert/overwriteoldroot.
+Rootread all9formal deliveries/3fullEditors/actuale10, no regrade/independent/exhaustiveaudit.
+
+08ce nativeactualtwoinputs:external-effectdefinition false/T0 2tool_calls3422known,
+purememory stillwrongperform, businessliteralcorrect. Samewire onlymode true/T0 2length19528known,
+inputs1570/1574 eachoutput8192,noformaltoolcalls/content; reasoningstatsnotexecution.
+SameTruewire onlyT0->T1 v2 2calls12462known,finishlength／tool_calls; 纯保存仍length且无正式分类；真实预订tool_calls及字面参数正确，未执行业务.
+Allclassification-only/noapp/apply/SourceCapture/DB/encoder/Judge/retry. T1v1preHTTP
+HTTP_OWNER_CLIENT_NOT_ALLOWED0requests/tokens/unknown retained; Python1==1.0 skippedactualDTO
+canonical registration. v2onlyignoreddrivercanonical/normalized_config/freeze_fieldsactualDTO,
+source08/runtimeownershipchecksunchanged, originalwiresretained; not retryofissuedmodelcall.
+Thinkingfalse/T0 is optional disabled+greedy config, NOT hardcoded. Hostinherit/inherit alters
+declarationgroup thinking/temp (classify+continuation nowreviewersdisabled), edit=false/Agent/
+8192/24callsunchanged. No classify-onlystage configneeded. Preparedrules8/business6 root
+host-rules-business-08ce00e-native-inherit-v1 onlyinputfreeze/runtimeempty/0HTTP; Rootmustdecide
+admissionafteractualdiagnostics; stopP0permessage. ExistingpreparedM277NOTRUNNING/notblinddispatch.
+
+12Keepactualoldtext/role/assertion/supportpreserved/fullrewriteIDsrecreated, omittednotautofilled.
+Olde31deliveredwrongnewsupportandcandidatefirstmodalmerge remain. Laterplaininstructiondelete
+no newsemanticevidence; defaultrecord/denseK10/modelthinkingtrue unchanged.
+16nonoverlapactualcohorts1127gen/12042316known=chargedDelta,766emb68774,Judge0/newunknown0.
+Ledger49162requests/223299226known/223575922charged/2019395emb,
+6historicalgenunknown/emb0/noinflight/limitsunchanged. ZeroHTTPfailurecount0; seven939 andold503
+are subsets/notreadd. Snapshotpublication-observation-20261009-074712-native-diagnostics.json; allraw/gold/reasoning/HTTP/DB/config/logignored.
+08ce自身Fast37899091260 success、Full37899091248 skipped; 69ownFastsuccess/Fullskip notborrowed, newreportCIverifyafterpush.
+Affectednormalflows/Ruff/relatedstrictmypy/diff passed, no docs/singlelineextra testframework.
+TMPDIR/SQLITE_TMPDIR on/cra beforeimports; root/tmpfull, ignoredpytestbasetemp.
+
+Allsameversionfive277 independent595update705QA(first65subset142/164),native32/12/4,
+drift/recovery/necessaryMablation/tightinput28160,finalfreezeTHEN16semanticunused,external28/1354/
+old10audit/RawRAG/RollingSummary/actualA-MEMcallback,Host135/192+substantialpostfreezestories,
+sixdeliveriesINCOMPLETE. LegacyloaderdecodeddiscardedunselectedJSON, notbytesneverparsed.
+Keepinvalidlabels/allopportunitydenominators/versionboundaries/Root-familyJudgenonindependence,
+oneMemoryService/fivedirections/ProductNO_GO. No pause/complete from publication or CI.
+
 # Live handoff: 2026-10-09 06:33:18 UTC, closed12 and developmentd754
 
 This overrides historical RUNNING/PREPARED claims below. Latest development/report parent:

@@ -1,5 +1,20 @@
 # MiLAi Lab 当前状态
 
+**2026-10-09 07:47:12 UTC／北京时间2026-10-09 15:47:12：开发08ce，纯保存业务P0与新增后删除已定位，有限生成诊断闭合。**
+
+d754新Host9执行COMPLETED后因未要求预订／标签停止，11NOT_RUN；首6两事项保存与只读完整值
+保持有正例。北区例外第一Editor已写r2、第二r3仍有，第三才删除；最终r4单位／关系等于r1。
+删除所引用是真实User新增要求，不是假来源；结构合法与含义正确分开，不称9条语义通过。
+08ce明确外部业务范围，但false／T0仍误分类纯保存；true／T0两次length无正式分类，true／T1：
+纯保存仍length且无正式分类；真实预订tool_calls及字面参数正确，未执行业务。诊断无业务／SourceCapture／DB／encoder／Judge；T1首驱动0HTTP拒绝保留。
+新14消息规则／业务Host仅PREPARED，既有声明inherit／inherit，edit=false，其余原样；M277未启动。
+
+16范围1,127生成／12,042,316known＝charged、766embedding／68774tokens；全局49,162请求／
+223,299,226known／223,575,922charged／2,019,395embedding，6历史unknown，当前无在途。
+08ce自身Fast37899091260 success、Full37899091248 skipped，新报告CI另核。原Keep／检索有限正例与旧负结果保持。
+完整六交付active／incomplete、16保留用户语义未用、无最终候选／ProductNO_GO；不因没有
+模型进程暂停任务。详见[完整事实、版本和剩余范围](MILAI_UNIFIED_MEMORY_USAGE.md)。以下历史保留。
+
 **2026-10-09 06:33:18 UTC／北京时间2026-10-09 14:33:18：开发d754，12个非重叠诊断范围闭合，下一Host候选准备。**
 
 六题两检索粒度／两重复共24完整答案已闭合，饮品一题有实际召回与读取正例，猫题仍漏；

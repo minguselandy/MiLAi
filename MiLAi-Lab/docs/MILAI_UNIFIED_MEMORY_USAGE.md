@@ -11,6 +11,109 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 当前功能与请求生成诊断：2026-10-09 07:47:12 UTC／北京时间2026-10-09 15:47:12
+
+本段覆盖下方旧当前判断，固定历史与首次失败全部保持。原
+[post117／118功能优先计划](MILAI_POST_117_118_FUNCTION_FIRST_DEVELOPMENT_EXPERIMENT_PLAN.md)
+及六项完整交付仍active／incomplete。无最终候选、稳定方法优势或Product准入。
+本固定采样所有实际模型任务已闭合；新规则／业务14消息仅PREPARED，M277未启动。
+多Agent只做离线开发／准备／复核，Root独占串行Qwen／BGE／Judge。
+
+| 版本身份 | 当前含义 |
+|---|---|
+| 最新开发／报告父版本 `08ce00ec401e3421a469c30d93171f0f6bade399` | 删除plain限定拆分的矛盾指令；v8业务意图明确仅指外部应用效果，纯记忆工作无应用请求。后者实际false/T0仍失败，不能称故障已修复 |
+| `d754d9c` | 新三链20消息候选，显式edit=false；实际9次执行闭合后因P0停止，11未运行 |
+| `08ce00e` | 同两个实际分类输入的false/T0、true/T0、true/T1三种有限条件；只分类，无业务／记忆效果 |
+| `69ebd50` | 上一固定06:33报告，12个实际范围。其后观察不能回写此快照 |
+
+### 正常链路有正例，但纯保存仍触发未要求业务
+
+d754复用原20消息与全部控制，独立空库，仅显式Editor非思考；其他Host配置保持。
+9次尝试均execution COMPLETED，因未要求的业务效果终止后续，另11NOT_RUN；不是9条语义通过。
+38次生成HTTP／响应（21stop、17tool_calls），285,166 known＝charged；27embedding／1,173tokens，
+Judge0、新unknown0。Root读全部9个完整自然反馈，不新增数值评分。
+
+首链6消息实际形成骑行和独立午间偏好两个事项；末四只读重开，两个完整记录值保持。
+本次未知雨具反馈限定在取到的材料，没有扩大成从未保存；属于这条已曝光正常链路的正例。
+第二链m0已保存一般频率、通知及地区未声明独立次数。m1明确只新增北区例外，却被native
+分类成perform／reserve_and_label，模型拼造业务参数，产生一次实际预订与一次标签。
+该首次分类只有System＋当前User，没有旧请求引用或routing身份材料；去掉routing不能
+充分解决这项失败，不把引用元数据继续当作唯一根因。原业务结果不撤销／重放／覆盖。
+
+### 北区例外先被正确新增，随后又被删除：不是最初未写
+
+m1第一次Editor已将北区例外保存为r2；第二次维护后的r3仍有例外；第三次
+remove_exception才删除，最终r4的单位和关系与原r1严格相等。整个记录的版本与元数据
+不同，不能说整个dict回滚。已发出的m2只读随后闭合，读取的是r4的缺例外状态。
+Root先完成在途m2，再停止所有后续步骤；独立业务故事6消息完全未运行。
+
+第三次删除引用e10为实际送达的原m1 User“新增例外、保留整体”片段，不是假来源、
+Tool结果或缺失引用。来源边界按同一公共消息累计User＋Tool，而非每次维护batch重置。
+真实例外目标与合法引用足以通过现有结构合同，引用文字却不支持撤销；引用可见、当前
+维护许可、断言语义相关性分别记录。不增加语义审核循环、关键词授权或新的来源门禁。
+Root读三份完整Editor正式提案和实际e10来源，非独立确认或全部私有原件审计。
+
+### 有限生成诊断：清楚定义不足，模式与采样分别观察
+
+固定两个实际首次输入：纯记忆新增例外、真实预订保存。新v8只明确外部业务效果范围，
+原User、schema、tools、required choice及8192输出保持；模型不接业务执行器、SourceCapture或DB。
+
+| 条件与改变 | 首次正式结果 | 实际成本 |
+|---|---|---:|
+| 新定义、false／T0 | 两次tool_calls；纯保存仍错误perform并拼造业务参数，真实业务参数正确 | 2生成／3,422known |
+| 同wire仅false→true，T0保持 | 两次length、正式content空且tool_calls null；输入1570／1574均小，输出各8192 | 2生成／19,528known |
+| 同true wire仅T0→T1 | 纯保存仍length且无正式分类；真实预订tool_calls及字面参数正确，未执行业务；finish length／tool_calls | 2生成／12,462known |
+
+三条件各一次／输入，只是两项已曝光有限诊断，不估计泛化、稳定优势或默认选择；旧失败保留。
+两次true／T0只统计reasoning字符，未读取为执行指令或补出正式分类。新的T1首驱动在
+客户端登记处被HTTP前拒，0生成／token／新unknown；其v1终态原样保留。
+原因是驱动用Python等值判断1与1.0，却未按实际DTO序列化身份登记；新v2只按既有
+canonical／normalized_config登记真实DTO，并以freeze_fields无网络核对。运行时所有权不放宽，
+实际生成wire与原T1准备相同；没有重试已经发出的模型请求。
+
+原Host false／T0来自可选declaration_thinking=disabled＋declaration_sampling=greedy_v1，
+不是全局不可配置硬编码。既有inherit／inherit让声明组继承Host true／T1；当前支持复核
+关闭，实际影响分类与续办，Editor edit=false、普通Agent及8192／24调用等原额度不变。
+新规则8＋业务6只复用此配置，独立空库，其他参数及原fixtures／controls完整保持。
+它是组合功能候选，不把改变thinking和温度说成单因素，也不新增classify模式接口。
+[Qwen官方模型卡](https://huggingface.co/Qwen/Qwen3.6-35B-A3B-FP8/blob/main/README.md)
+支持显式thinking控制及按模式采样；官方建议不是MiLAi效果证明，本地可读参考ignored保存。
+
+### 引用式保留与检索继续保留贡献边界
+
+此前e663实际12个Keep只输出assertion.keep，程序按已交付旧单元原样复用text／role／
+assertion／evidence_refs，不重新生成正文和支持；完整重写重建unit ID、保留集合仍由模型
+选择，不自动补回遗漏。旧体育e31确已送达，模型仍给复合旧偏好错选拳击来源；考虑与计划
+也已在抽取候选中合并，不能把全部强化归到Editor。后续删plain矛盾句不归入旧e663效果。
+整事项＋单元键的饮品有限正例、猫题仍漏及池内选择缺口保持；不改默认record／dense K10。
+
+### 固定成本、检查与剩余范围
+
+| 互不重叠实际范围 | 生成请求／响应 | known＝charged增量 | embedding请求／响应 | embedding tokens |
+|---|---:|---:|---:|---:|
+| 上一06:33报告12范围 | 1083 | 11,721,738 | 739 | 67,601 |
+| d754新Host9消息 | 38 | 285,166 | 27 | 1,173 |
+| 08ce定义false／T0 | 2 | 3,422 | 0 | 0 |
+| 08ce同wire true／T0 | 2 | 19,528 | 0 | 0 |
+| 08ce同wire true／T1 v2 | 2 | 12,462 | 0 | 0 |
+| **16范围合计** | **1,127** | **12,042,316** | **766** | **68,774** |
+
+连续账本从48035／211256910known／211533606charged／1950621embedding到固定
+**49,162请求／223,299,226known／223,575,922charged／2,019,395embedding**，各差额一致。
+Judge0、新闭合unknown0；全局6个generation unknown均历史量，encoder unknown0，无在途。
+零HTTP驱动失败不虚增调用，旧七范围939与807子集503不重复累计。预算未重置或新增限额。
+原正文、gold、reasoning、HTTP、DB、配置和日志继续ignored；快照为publication-observation-20261009-074712-native-diagnostics.json。
+
+两项源码只跑直接受影响的既有正常SQLite流程、Ruff／相关strict mypy／diff；新诊断真实
+模板与DTO登记另核，未为文档或单句改动新增测试体系。08ce自身Fast37899091260 success、Full37899091248 skipped；
+69自身Fast成功／Full skipped，不能借给08或新报告。新报告CI推送后另核，无Full21/21结论。
+
+同版五方法各277独立历史／595更新／705QA及首65子集、native32／12／4、drift／recovery、
+必要M消融和固定紧预算仍未完成；最终冻结后才用16保留用户。外部28／1354及原10答案审计、
+RawRAG／RollingSummary／实际A-MEM callback、最终Host135case／192message与冻结后新故事、
+六项完整交付保持。当前首要为让纯保存正确进入维护并保留真正变化，五条主线、一个
+MemoryService和Product NO_GO不变；当前无模型进程不等于任务暂停或完成。
+
 ## 当前开发与真实复核：2026-10-09 06:33:18 UTC／北京时间2026-10-09 14:33:18
 
 本段覆盖下方旧“当前／运行／待验证”判断，下方固定快照与首次失败保持。原
