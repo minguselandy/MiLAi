@@ -126,7 +126,8 @@ Ruff、依赖边界及旧八事项真实模板复算通过。没有把重复检�
 开发分支又合入`0d297ad`：仅澄清既有CURRENT提示，纯补存仍是记忆续办，查询/跳过已存
 是执行限制，禁止应用动作时业务为空；纯遗忘不额外要求新语义保存。schema与授权程序未改。
 16项既有mock/SQLite检查、Ruff/类型通过；Root合流后复查1项纯保存恢复通过（重叠）。
-实际模型语义未复验；历史冻结对照不含该补丁，新v3候选将纳入上述两个工程修复。
+合流时实际模型语义尚未复验；历史`1cfb400`对照不含该补丁，v3已纳入上述两个工程修复，
+其实际结果见下段。
 
 v3原三链Host20实际全部尝试、20 COMPLETED，仅表示结构结束。122生成/1666232 known=charged、
 63 embedding/3571 tokens；61stop、61tool_calls、无length，新增unknown0、Judge0。
@@ -182,6 +183,9 @@ Host保持False，避免将32768输出对照直接套入8192入口；Reader、�
 v3同时纳入已闭合工程检查的CURRENT提示与两处写入前拒绝回执修复。
 新冻结源码已复用原Host20输入/control闭合并保留全部失败；同版五方法完整预测已启动，
 待五方法预测全存后统一评分。旧v2完整主实验准备仍为0 HTTP，不复用其银行或结果。
+固定Native32的原选择与Root来源审查已逐字节复制到`native32-5019968-v3-prepared`，
+drift配置位于`drift277-5019968-v3-prepared`；两者仍0 HTTP、无BenchmarkRun/银行构造，
+待全部同版预测和评分闭合再调度，不把准备文件当实际结果。
 最终仍需同版五方法各277会话（合计1385）、
 原 native32/12会话/4用户、drift/recovery、必要 M 消融与紧预算、最终冻结后的16保留用户、
 LongMemEval、RawRAG/RollingSummary/A-MEM真实适配，以及 Host135case/192message 和新故事。
