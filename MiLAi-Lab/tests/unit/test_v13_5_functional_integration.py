@@ -245,6 +245,12 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                     "VISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n", 1)[1])
                 assert references["requests"][0]["kind"] == "memory_maintenance"
                 assert "requirements" not in references["requests"][0]
+                part = references["requests"][0]["user_fragments"][0]
+                assert part["content"] == original_text and part["role"] == "user"
+                assert part["source_ref"] and part["source_revision"] == 1
+                assert part["observed_at"] and (part["start"], part["end"]) == (
+                    0, len(original_text))
+                assert not {"namespace", "bank", "owner", "fragment_handle"}.intersection(part)
             assert set(schema["required"]) == {
                 "memory_requests", "allow_forgetting", "business_action_request",
                 "application_continuation_request", "application_requests"}
@@ -5522,6 +5528,19 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
         if names == {"classify_current_request"}:
             current = wire["messages"][-1]["content"]
             first = current == initial_text
+            if not first:
+                references = json.loads(wire["messages"][0]["content"].split(
+                    "VISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n", 1)[1])
+                card = next(card for card in references["requests"]
+                            if card.get("kind") != "memory_maintenance")
+                assert card["request_id"] and card["progress"]["business"] == "partial"
+                assert card["requirements"]["target"] == {"item_key": "teal pack"}
+                assert card["requirements"]["steps"][0]["arguments"] == reserved
+                part = card["user_fragments"][0]
+                assert part["content"] == initial_text and part["role"] == "user"
+                assert part["source_ref"] and part["source_revision"] == 1
+                assert part["observed_at"]
+                assert not {"namespace", "bank", "owner", "fragment_handle"}.intersection(part)
             return native_call("classify_current_request", "mode-" + str(ordinal),
                 memory_requests=(["explicit"] if first or continuation == "empty_save" else [])
                 + (["continue_prior"] if not first

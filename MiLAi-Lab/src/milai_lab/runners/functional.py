@@ -1094,18 +1094,23 @@ def request_mode(
         candidates = []
         if application_workflow is not None:
             for card in referenced_requests or []:
+                # Classification identifies requested effects, not read targets.
+                # Full issued handles stay in the original card for resolution.
+                fragments = [{key: value for key, value in part.items()
+                              if key not in {"namespace", "bank", "owner", "fragment_handle"}}
+                             for part in card["user_fragments"]]
                 if card.get("kind") == "memory_maintenance":
-                    candidates.append({key: card[key] for key in (
+                    candidates.append({**{key: card[key] for key in (
                         "kind", "request_id", "maintenance_phase", "pending_refs",
-                        "confirmed_receipt_count", "user_fragments",
-                    )})
+                        "confirmed_receipt_count",
+                    )}, "user_fragments": fragments})
                 else:
                     candidates.append({
                         "request_id": card["request_id"],
                         "requirements": card["requirements"],
                         "progress": {part: card["progress"][part]["status"]
                                      for part in ("business", "memory", "feedback")},
-                        "user_fragments": card["user_fragments"],
+                        "user_fragments": fragments,
                     })
         references: list[dict[str, Any]] = []
         omitted = 0
