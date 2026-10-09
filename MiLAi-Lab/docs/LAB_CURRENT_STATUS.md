@@ -1,5 +1,29 @@
 # MiLAi Lab 当前状态
 
+**2026-10-09 05:02:06 UTC／北京时间2026-10-09 13:02:06：集中复核已闭合，开发11cebbf，全部已知真实任务退出。**
+
+当前源码含可选整事项＋单元检索键、extract／edit／reader阶段thinking与实际容量接线，以及
+适配器实际查询ToolMessage交付修复；默认record／thinking／K10及原公开配置未改。
+807长历史B0 FAILED／exit1，94/277会话、225完整答案；其余四法未开始，无新Judge／总分。
+第一用户65／164QA是94及277子集，Root读全部164答案，第二用户61答案尚未全部复核。
+Reader2e31三池36完整答案、72生成已闭合；两失败输入thinking8次均stop，原截断未复现。
+2e31三故事20消息为15COMPLETED／1FAILED／4NOT_RUN，纯记忆分类及只补保存仍有断点。
+
+11ce独立六消息补存链执行闭合，实际r3→r4更新已有Tool单元，三User单元全部字段不变；
+一次预订／一次实际标签，重开读到全部四单元及实际查询。原应用请求结构完成，但维护汇总
+仍1completed＋2incomplete:start；遗忘后最后回答误称“从未保存”、未用可用业务查询。
+f097多键六题只做编码排名，一饮品进入K10、猫未补回，无新QA。B0两次36,220 tokens均stop，
+9creates／records空；首次驱动漏来源边界全部拒，新副本同formal离线9提交成功、0HTTP。
+没有rewrite／keep，引用保留合同的真实效果仍未验证；这些结果不拼为方法排名或正确率。
+新建条款另核来源属性均匹配，仍有模态强化及具体计划漏写；旧候选强化与新正式输出分开。
+
+七项闭合范围939生成／10,349,676 known=charged，689 embedding／65,095 tokens，Judge0／
+新unknown0；全局48,974请求／221,606,586 known／221,883,282 charged／2,015,716 embedding，
+generation unknown6历史、encoder0，无在途。直接相关检查通过；新增提交CI推送后另核，
+不借1dd Fast成功／Full skipped。完整六交付active／incomplete，16语义未用，无最终候选／
+稳定优势／Product准入。详见[完整结果、入口与未完成范围](MILAI_UNIFIED_MEMORY_USAGE.md)。
+下方00:41与较早记录是固定历史，本次发布不暂停或完成原任务。
+
 **2026-10-09 00:41:51 UTC／北京时间08:41:51：实际807 B0 62/277，156完整答案，尚无评分。**
 
 固定采样PID1579386/session20792仍运行；B1／B2／M／Append-only未开始，无arm／suite终态。

@@ -11,6 +11,218 @@ MILAI_BUILD_FIRST_DEVELOPMENT_AND_EXPERIMENT_PLAN.md)继续有效。
 保留当前普通ID及旧实验边界。[整合记录](GITHUB_INTEGRATION_20261007.md)说明冲突决定、
 版本和验证；工程合并不表示真实模型效果已验证，`single_verdict_v1`仍未准入。
 
+## 当前开发与集中复核：2026-10-09 05:02:06 UTC／北京时间2026-10-09 13:02:06
+
+本段替代下方“仍在运行／仅PREPARED”的旧当前判断；下方固定快照和首次失败保持为历史。
+原[post117／118功能优先计划](MILAI_POST_117_118_FUNCTION_FIRST_DEVELOPMENT_EXPERIMENT_PLAN.md)
+及六项完整研究交付仍未完成，没有最终候选、稳定方法优势或Product准入。本次以正常链路和
+已曝光有限输入推进，开发Agent各自离线，所有真实Qwen／BGE调用由Root独占串行执行。
+
+| 身份 | 本次实际范围 |
+|---|---|
+| 最新开发源码 `11cebbfda3db7b6ede77a5e7ea6f4b3cf1b6b2c9` | 可选整事项＋单元检索键、按阶段thinking配置、容量与HTTP共用模式，以及adapter实际查询回执接入维护 |
+| 长历史冻结 `807eacbf2e7f6a07c4b4cf19185c2b2cc6e4af67` | B0自然历史失败终态；不是正在运行，不包含后续修复 |
+| Reader／模式／三链Host冻结 `2e31f280b34f0bfbc0ebffa4617aeb0ea83639ed` | 六题三池两重复、两个旧失败输入的模式比较、三故事20消息；各自输出独立 |
+| 多键排名及B0引用式生成冻结 `f097e255623dc204cd4e9eab5a7e427be0512692` | 新索引代码只用已形成807状态，后续Host delivery修复不在此冻结内 |
+| 六消息保存接线复核冻结 `11cebbf` | 独立空库、原业务故事子集、原配置；不是旧失败尾部重启或最终Host回归 |
+
+### 已交付的最小共同实现
+
+`retrieval_granularity="record_units"`复用已有matter、unit正文及明确的直接关系构成检索键，
+同时保留整体事项键，以各键最大cosine聚合为记录分数。K10按记录去重，仍返回完整实际事项与
+版本；索引键不进入事实支持或Store。未调用新的命题抽取模型，不推断主体别名，不扩大K。
+默认`record`的旧文本、缓存和排序保持；本轮效果有得有失，因此没有修改默认检索。
+
+`stage_enable_thinking`可分别设置`extract`、`edit`、`reader`的布尔值；未设置时沿用原模型配置。
+当前模式同时进入真实模板、容量预览和HTTP请求，不把显式false当作缺省，也不热改provider
+配置。Host的reader设置只作用于已有专用finalize_response，不改变普通带工具Agent或Selector；
+benchmark最终Reader可单独配置。没有根据题号或私有答案自动切模式，没有新模型部署。
+
+普通Host恢复适配器现在保留实际ToolMessage的既有`delivery_response`。实际查询早已发生，
+修复让它沿既有来源／片段登记进入共同Writer；权限、原操作身份、current User跳过规则及业务
+动作都不增加。旧失败保留，独立运行验证接线与语义分别记录。
+
+### 可复用的配置入口
+
+Host与共同benchmark的原配置顶层可分别添加以下独立候选项，其他模型、预算和schema保持；
+示例不表示已选定默认组合，也不用于改变正在运行或旧冻结根：
+
+```json
+{"retrieval_granularity": "record_units"}
+```
+
+```json
+{"stage_enable_thinking": {"edit": false}}
+```
+
+普通使用继续沿现有tools/run_functional.py的prepare／message，集中比较沿
+tools/run_edit_suite.py的predict／score；使用新输出目录、实际source-version及
+--runtime-dir，运行环境在导入SQLite前设置TMPDIR／SQLITE_TMPDIR。
+完整旧配置不改；原Reader池、模式比较、多键与B0输入／首次输出在各ignored根保存，
+可读的原件用于复核，不将私有正文／gold／reasoning／HTTP／数据库上传GitHub。
+
+### 长历史实际终态：807 B0失败，其他四法未开始
+
+原session20792退出1、PID1579386不存在；03:52:48 UTC闭合观察的terminal-predict为FAILED，
+首故障是第二用户原29／qa5最终Reader投影35092 tokens超过32256输入限额。这次最终Reader
+HTTP没有发出，不是模型看过输入后答错；先前该会话的局部响应没有形成完整预测。
+
+实际保存**94/277会话、225个完整非空答案**：首用户65／164QA，第二用户29／61QA；
+第二用户剩余历史及后两用户不能用该计数补满。B1、B2、M、Append-only尚未开始，
+无suite终态、Judge或本轮分数。
+Root读首用户全部164自然答案，第二用户61个尚未全部复核；选定来源／HTTP／DB审计不能称为
+全部原件或独立确认。首65是本次94及计划277的子集，不再次加总或另跑。
+
+成本闭合为747生成请求／响应，全部stop，8,589,897 known＝charged增量；620 embedding／
+54,529 tokens，Judge0，新增已闭合unknown0。旧容量失败保留，不续旧尾部、不用11ce回填807。
+
+### 三池Reader比较已完成：命中、打开和使用仍是三层
+
+实际807的原32三题、33一题、37两题，dense／BM25／交错各K10，在2e31下两次反序重复：
+**36完整自然答案、72生成响应全部stop、425,904 known＝charged**；0 Writer／Extractor／
+encoder／apply／Judge／重试、新unknown0。Root读全部36答案，没有新增数值评分。
+
+原37qa1饮品r3在BM25和交错中两次均进入池、被打开并实际送达，回答取得低糖探索及旧茶事实；
+dense均缺该事项。原32qa1两条猫事实各池仍未进入。原33体育进入BM25／交错，却未被Selector
+打开；原37qa0饮品进入BM25，Selector仍选空。相同池的重复也产生不同选择，不能归为池机制
+因果优势。一个交错回答把较新报告日泛化到较早茶事实及未来计划；实际输入的三个时间保持，
+最早确认在最终回答措辞。没有把池命中、更多材料或有限故障集解释为总体准确率。
+
+### Thinking有限比较已完成：短输出不等于语义更正确
+
+两个旧length输入分别为268 Reader和807补存Editor；保留原wire、温度、输出限额和格式，仅
+显式thinking true／false，各两次反序重复。**8次响应均stop、44,435 known＝charged**；
+0新encoder／Judge／实际apply／业务效果／重试、新unknown0。true的四次累计26,352 tokens，
+false四次18,083；原截断在两种模式下都未复现，不能认定非思考修好了旧循环或部署故障。
+
+四个Reader正式答案均区分实际来源年份与问题中的不符前提，未由Judge重新判分。四个Editor中
+三份通过原公共schema，一份true重复多出binding而失败；true的围栏JSON可被现有parse_object
+接受，不能误记为格式无效。未在实际before编译／提交这些输出；其中仍有将lookup状态混入
+业务断言的风险。没有执行推理草稿，按阶段模式只是候选配置，默认thinking保持。
+
+### 三链Host真实结果与实际保存断点
+
+2e31／原配置／M／extract_then_edit／staged三故事20消息，CLI退出0，实际为**15COMPLETED／
+1FAILED／4NOT_RUN**，不是15条语义通过。73生成（45tool_calls／28stop）、714,879 known＝
+charged；39 embedding／1,750 tokens，Judge0、新unknown0。
+
+骑行范围与独立午间偏好这条六消息链执行闭合，可在重开读取。规则故事前三条实际形成总体
+三次／提前一天／地区范围，并新增北区一次例外；旧复合“北南无单独频率”仍留在旧支持单元，
+不能以没有删除单元证明协调成功。Reader补出可能沿用总体的解释，来源没有直接说明。
+第四条“改提前通知为两天”被分类成业务动作，schema本身合法，但business_operations与
+application_requests不一致，执行合同在Editor前拒绝；后四条未运行，无其撤销／历史／遗忘证据。
+
+业务链真实为一次预订及一次补标签，无重复。明确“只补保存”获得当前维护许可，恢复适配器
+实际get_reservation查询成功，但返回观察漏传delivery_response；真实Tool没有进入Writer，
+maintenance=[]／0Editor，r2仍是原请求属性，原保存项pending、完整请求incomplete。
+11ce接线修复不回填此结果。遗忘实际撤回所选记录及五来源，并非清空全部历史；之后Agent
+四次wire均可用get_reservation，却只搜索三次并误称只读不能查询业务。这是选择／回答错误；
+搜索到的独立User来源不在实际撤回名单，不能统一记为泄漏或声称全部Source都不受影响。
+
+### 六消息保存接线复核：结果更新、重开可读，遗忘后回答仍失败
+
+11ce／独立空库／原业务故事六消息／原配置，实际**6COMPLETED**，不是6条语义通过。
+37生成（25tool_calls／12stop）、538,341 known＝charged；17 embedding／1,715 tokens，
+Judge0、新unknown0。真实业务仍只有一次预订、一次补标签；另一次同轮调用被现有边界阻止，
+没有实际业务效果，不能计成第三次业务完成。
+
+明确“只补保存”现在取得并登记实际查询Tool Source，Editor将**同一第四个Tool单元**从
+标签not_created／reserved_label_failed更新为created／label_created，记录r3→r4；没有新增
+单元，前三个User单元全部字段不变。新主断言指向实际Tool查询来源，旧支持保留为历史，
+新支持来自本次实际查询，不由User要求证明业务已完成。重开只读取得全部四个r4单元及真实
+业务查询结果。原应用请求结构上complete，业务、记忆和反馈有回执；维护汇总仍为
+1completed＋2incomplete:start，后两项没有自身Editor／提交，不能称所有维护工作闭合。
+
+遗忘实际撤回一记录及五Source；最后只读消息的两次Agent wire都有get_reservation，实际仅
+选择一次search_memory，没有业务查询。答案把当前零可见记录错误解释为“从未保存”，与
+真实r1–r4提交矛盾。来源可见性保持不等于回答正确，也不表示遗忘撤销了实际业务。
+Root读全部六个正式答案并核选定前后状态／提案／来源，属于开发复核，没有新增数值评分。
+
+
+### 多键排名诊断闭合：只证明实际排名变化
+
+f097编码208个已有单元上下文键，共13请求／13响应、7,101 embedding tokens；0生成、
+Selector／Reader／apply／Judge／DB访问、新unknown0。原整体事项及查询向量全部复用，六题
+原默认K10全部复现，三状态38／38／43事项；max聚合后仍是十条完整记录，无同事项重复占位。
+
+原37饮品一题34→20仍池外，另一题12→7进入K10；原32qa1猫两事项13／15→15／16仍池外，
+其余已确认猫目标没有新增命中。饮品有14键，是当时中位数的3.5倍，保留键数以观察机会增益；
+这并非已测出的大卡偏差，也没有新自然答案或QA结论。检索粒度候选值得保留，不升级为新默认。
+
+### B0正式生成两次闭合：新建可提交，引用保留分支未触发
+
+f097使用807原0／原3的实际当前来源、抽取候选及原before，B0／I2／staged；真实输入4753／
+17941，输出上限32768，thinking=true、temperature=1。**2响应均stop、36,220 known＝charged**；
+0 encoder／Extractor／Selector／Reader／Judge／重试、新unknown0。输入重新使用本冻结的
+公共schema和edit_messages生成，不把旧System改名冒作新接口。
+
+两份正式输出分别creates5／4、records均为空；9项可解码，但首次有限驱动遗漏普通维护
+已有的bind_source_boundary，9次提交均被current_boundary_source_required拒绝，原before
+和after不变。这是执行入口漏接，不是模型返回空对象或记忆方法拒绝了合法新断言。
+
+在**新的独立before副本**，仅通过该公开方法绑定原current来源边界，原3的五个历史重投来源
+没有升为current，再应用同一首次formal，9项committed，事项数0→5、16→20。0新HTTP／账本
+调用，不重发Editor、不放宽提交检查、不修改原库或首次九份拒绝。离线提交仍不等于语义通过。
+
+本次没有rewrite或assertion.keep生成，因而**不能宣称B0／B2引用保留合同已获真实验证**；
+M的Host局部替换也不能替代该分支。Root读两份完整正式提案；没有新Reader效果、Judge或总分。
+
+补充离线核对9新建／23条款，实际选中来源的角色、报告／捕获时间及来源版本均匹配，
+仍发现“考虑→计划”和“计划行为→现有习惯”两处强化。前者在原807抽取候选已经出现，
+不能独归新Editor；后者最早在首次formal。具体研究、自护和讨论计划未明确进入新建输出，
+概括的福祉目标仍保留。原16事项值未变，也没有Reader结果；不把来源属性正确或新建计数
+当作形成覆盖、变化落实或追加策略优劣的证明。该开发复核0新增HTTP／评分，原件保持。
+
+
+### 固定成本、验证与未完成范围
+
+以下七项是互不重叠的闭合范围；00:41报告的503生成／5,522,005 tokens属于807的
+747生成子集，不能再次相加。各项known均等于本项charged增量，不重置连续账本。
+
+| 闭合范围 | 生成请求／响应 | known tokens | embedding请求／响应 | embedding tokens |
+|---|---:|---:|---:|---:|
+| 807长历史实际失败根 | 747 | 8,589,897 | 620 | 54,529 |
+| 2e31三池Reader | 72 | 425,904 | 0 | 0 |
+| 2e31两输入thinking比较 | 8 | 44,435 | 0 | 0 |
+| 2e31三链20消息Host | 73 | 714,879 | 39 | 1,750 |
+| f097多键排名 | 0 | 0 | 13 | 7,101 |
+| 11ce六消息补存Host | 37 | 538,341 | 17 | 1,715 |
+| f097两次B0正式生成 | 2 | 36,220 | 0 | 0 |
+| **合计** | **939** | **10,349,676** | **689** | **65,095** |
+
+该合计不是准确率，也不包含此前268预测／评分、旧807十消息Host或历史同版结果。
+连续账本由48,035／211,256,910 known／211,533,606 charged／1,950,621 embedding tokens
+推进到**48,974生成请求／221,606,586 known／221,883,282 charged／2,015,716 embedding tokens**。
+Judge0、新增已闭合generation／embedding unknown均0；全局generation unknown6为历史量，
+encoder unknown0。各响应汇总与账本差额相等，限额未重置／增设；全部已知真实runner退出，
+本固定采样没有在途模型任务。ignored publication-observation-20261009-closed.json保存采样。
+
+
+已跑直接受影响的provider、retrieval、adapter SQLite流程和Root接线检查；Ruff、相关strict
+mypy、活动包／工具依赖边界和diff检查通过。正常流程验证包含显式false的真实模板／HTTP、
+跨进程读写及保存续办，没有把合成transport效果计为真实模型结果。旧报告1dd768a自身
+Fast37866713807 success、Full37866713813 skipped；
+本次新增源码与报告的CI在推送后单独核对，本固定采样尚未推送，不能借用旧CI或写成Full通过。
+
+设计参考保留一手链接及ignored本地可读文件／获取时点／版本／hash：[Dense X Retrieval](
+https://aclanthology.org/2024.emnlp-main.845/)启发检索粒度；[Trustcall](
+https://github.com/hinthornw/trustcall)启发减少旧内容重生成，不引入它的重试循环；[Qwen官方模型卡](
+https://huggingface.co/Qwen/Qwen3.6-35B-A3B-FP8/blob/main/README.md)支持显式thinking布尔控制。
+这些是设计依据，不是MiLAi效果证据或完整论文算法复现。
+
+当前主要断点仍是：候选池缺件、池内不选择、正式空提案／截断、来源归属与非目标损伤、
+时间／历史解释，以及分类和完整请求恢复转换；不统一归为上下文长度。继续保持一个逻辑
+MemoryService和五条主线，程序处理真实来源、版本、权限和效果，模型完成语义选择。
+
+同版本五方法独立277历史／595更新／705QA、首65子集、native32／12会话／4用户、drift与
+recovery、必要M入口消融及固定紧预算尚未完整闭合；最终候选冻结后16保留用户、LongMemEval
+28问题／1354历史出现及原10答案审计、RawRAG／RollingSummary／实际A-MEM callback、同候选
+Host135case／192message和冻结后新实质故事仍未完成。16用户语义未用于开发，不声称旧loader
+没有解析其原JSON字节。全部机会与valid分母、同家族Judge与Root开发复核保持区分；业务效果
+和提交成功不等于语义正确。原六项最终交付完整保留，Product仍NO_GO。
+
+---
+
 ## 当前实验汇总：2026-10-09 00:41:51 UTC／北京时间08:41:51
 
 本次按用户要求整理并发布实验情况，仅更新四份文档／交接文件；父报告为

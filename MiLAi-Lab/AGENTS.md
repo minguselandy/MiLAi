@@ -1,3 +1,70 @@
+# Live handoff: 2026-10-09 05:02:06 UTC, closed diagnostics and development11ce
+
+This overrides lower historical RUNNING/PREPARED snapshots. Latest development/report parent:
+11cebbfda3db7b6ede77a5e7ea6f4b3cf1b6b2c9. Source changes are committed; publish reports and
+push this branch to existing open draft PR119, verify exact remote head and its own CI.
+Current full post117/118 plan and all six deliveries stay active/incomplete; no pause/completion,
+final candidate, stable method advantage or Product admission. No real runner is currently live.
+User explicitly authorized multiple offline development agents; Root alone serial real Qwen/BGE/Judge.
+
+Development: optional retrieval_granularity record_units (whole+existing self-contained unit keys,
+maxcosine aggregated by record, full rows, no source/gold guess); stage_enable_thinking extract/edit/
+reader boolean via actual template/capacity/HTTP; defaults unchanged, selectors/general tool Agent
+unchanged.11ce only preserves existing adapter delivery_response into original Tool Source path,
+does not add business permission/action, Source identity, observation Store or retry platform.
+Affected existing checks, Ruff/strict mypy/package/tool boundaries passed; source CI separate.
+
+Actual807 long-history CLOSED FAILED/exec20792exit1/PID1579386absent; second-owner original29
+qa5 finalReader35092>32256 preHTTP,94saved/225fullanswers (first65/164+second29/61). Others unrun,
+no suite/Judge/newscore/restart.747stop8589897known,620emb54529,newunknown0. Root first-user all164
+read; second61 not fully reviewed.65subset, preserve actual source time order and originals.
+Actual2e31 Reader6questions3pools2repeats CLOSED36answers72stop425904known,0encoder/Judge/apply;
+Root all36read, sparse beverage positive, cats unresolved, selector omissions/time wording failures.
+Thinking2failedinputs2modes2repeats CLOSED8stop44435known,0apply; oldlength neither mode reproduced,
+false lower finite output not general advantage; original wire otherwise retained, no reasoning execution.
+Actual2e31 Host20 CLOSED15COMPLETED/1FAILED/4NOT_RUN;73gen714879known/39emb1750. Fourth notice
+correction cross-field classification mismatch beforeEditor; old business save permitted+actual adapter
+lookup but no delivery_response so0Editor/r2stale. All16 formal deliveries read, no numeric grade.
+
+Actualf097 record_units6ranking CLOSED13emb7101,208newunittexts,0gen/DB/Judge. Default6top10 reproduced,
+onebeverage12->7/other34->20,cat13/15->15/16stillout,full matters preserved; relations0 in actual states,
+relation endpoint path effect not tested. More keys potential opportunity, no newReader/QA/default switch.
+Actual11ce business6 CLOSED6COMPLETED/exec29299exit0,37gen538341known/17emb1715. One actualreserve
+and one actualcomplete_label, extra same-turn blocked attempt effectnone. Save-onlyr3->r4 replaces SAME
+4th Tool unit not_created->created,new actual Tool primarySource; 3User units entire dict identical.
+Reopen receives all4r4+liveactualquery. Original application request structurally complete, aggregate
+maintenance1completed+2incomplete:start (no ownEditor/receipt). Forget1record5Sources; lastm5 TWO
+Agent requests have get_reservation yet only1search, no query, wrongly says never saved from0visible.
+Root all6formal answers read; selected support/state/effects review, not independent/numeric score.
+
+Actualf097 B0two CLOSEDexec63484exit0,2stop36220known/0emb/Judge/Reader. Before0/16,creates5/4,
+records{} both,NOrewrite/keep so actual kept-unit contract untested. First9apply REJECTED because
+finite driver omitted existing public bind_source_boundary; first before/after unchanged/results kept.
+Separate offline originalbefore branches bind originalcurrent12/60 (historical5 explicitlyexcluded),
+samefirstformalapply9committed,0->5/16->20,0newHTTP/client/ledger/originalwrite/guardrelaxation.
+Ignored C boundary-offline summary in native-shared-reader-binding worktree preserves both identities;
+not method repair, semantic pass, new answer, backfill or claimed B2 keep execution.
+Bounded offline9creates/23clauses source metadata match, but two modal upgrades: consideration->plan
+already in old807hint, plan->presenthabit first formal; some specific plans absent, general goal kept.
+Original16values unchanged, noReader/score; source metadata correctness does not prove semantic quality.
+
+Seven nonoverlap cohorts total939generation/10349676known=chargedDelta,689emb65095tokens,Judge0,
+newclosedunknown0. Continuous ledger48974requests/221606586known/221883282charged/2015716emb,
+genunknown6historical/embunknown0/noinflight, limits unchanged.00:41 report503/5522005 is747subset.
+Ignored publication-observation-20261009-closed.json fixes this sample. Do not restart older failed roots,
+blind retry unknown, hot-edit frozen source/config or parallel models. TMPDIR/SQLITE_TMPDIR on /cra
+before SQLite import; default /tmp is full. All private raw/gold/config/logs/DB remain ignored.
+1dd ownFast37866713807success/Full37866713813skipped; new pushed report/source CI separately verify.
+
+Remaining full same-version five277 histories595updates705QA (first65subset142/164), native32/12/4,
+drift/recovery/necessaryMablation/onefixedtightinput28160; finalfreeze then16semanticunused heldout,
+external28/1354/old10audit/RawRAG/RollingSummary/actualA-MEMcallback; finalsamecandidateHost135/192
+plus substantial new post-freeze stories and all six deliveries incomplete. Legacy loader parsed
+unselected rawJSON, not claim their bytes never decoded. Preserve negative labels/invalid denominators,
+version boundaries, Root/familyJudge non-independence, no Product GO or final candidate.
+Detailed public report: [MILAI_UNIFIED_MEMORY_USAGE.md](docs/MILAI_UNIFIED_MEMORY_USAGE.md).
+All lower blocks are fixed historical observations, never live restart instructions.
+
 # Live handoff: 2026-10-09 00:41:51 UTC, actual807 long-history prefix and publication
 
 User requests a current experiment summary and GitHub publication. Update only the four
