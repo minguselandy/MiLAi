@@ -34,18 +34,23 @@ benchmark 维持 staged/record_units、K10、65536 上下文、32768 输出、51
 - Extractor/Editor 保留考虑、愿望、计划、说话者与主体；候选仅作线索，Source 才是依据。
   既有引用 keep、原文 Episode 和局部算子继续复用。
 
-正常使用入口示例（从 MiLAi-Lab 执行；不包含自动模型派发）：
+正常使用入口示例（从 MiLAi-Lab 执行；使用已安装的Lab环境）：
 
 ```bash
-PYTHONPATH=src python tools/run_functional.py prepare \
+MILAI_PYTHON=/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python
+PYTHONPATH=src "$MILAI_PYTHON" tools/run_functional.py \
+  --runtime-dir artifacts/global-function-first/personal-runtime prepare \
   --config configs/milai-global-function-first.json \
   --root artifacts/global-function-first/personal
-PYTHONPATH=src python tools/run_functional.py message \
+PYTHONPATH=src "$MILAI_PYTHON" tools/run_functional.py \
+  --runtime-dir artifacts/global-function-first/personal-runtime message \
   --root artifacts/global-function-first/personal --bank personal --owner example \
   --session example --message-id save-1 --text '请记住，我的午休提醒用静音模式。'
 ```
 
-第一条只 prepare；第二条是真实功能调用，会使用现有服务和账本。原实验配置与
+解释器路径可替换为已安装Lab依赖的环境。runtime目录在导入SQLite等模块前设定；
+当前机器的系统`python`不可用、默认临时盘已满，工作树复用原checkout的`.venv`。
+prepare只准备；message是真实功能调用，会使用现有服务和账本。原实验配置与
 默认 fail-fast 保持兼容，不把旧请求重新解释成新策略。
 
 ## 已闭合验证与旧实验
