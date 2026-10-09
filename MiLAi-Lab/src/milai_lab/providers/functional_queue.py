@@ -114,7 +114,7 @@ class FunctionalVLLMClient(VLLMClient):
         catalog = request.get("tools", [])
         if (
             self.declaration_capacity is not None
-            and request.get("tool_choice") == "required"
+            and request.get("tool_choice") in ("auto", "required")
             and len(catalog) == 1
             and catalog[0].get("function", {}).get("name") in self.declaration_tool_names
         ):

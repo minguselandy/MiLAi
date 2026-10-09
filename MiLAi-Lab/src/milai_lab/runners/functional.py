@@ -701,8 +701,7 @@ def prepare(
         raise ValueError("FUNCTIONAL_REASONING_HISTORY_REQUIRES_NATIVE")
     if settings.get("declaration_thinking") == "disabled" and (
             host.tool_mode != "native" or host.enable_thinking is not True
-            or settings.get("capacity", {}).get("enable_thinking") is not True
-            or settings.get("declaration_tool_choice") != "required"):
+            or settings.get("capacity", {}).get("enable_thinking") is not True):
         raise ValueError("FUNCTIONAL_DECLARATION_THINKING_INCONSISTENT")
     if settings.get("request_mode", "disabled") not in {
         "disabled", "current_request_v1", "current_request_native_v1", "current_request_native_v2",

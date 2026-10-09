@@ -70,6 +70,8 @@ def prepared(
     memory_continuation: bool = False,
     complete_requests: bool = False,
     scope_requests: bool = False,
+    declaration_tool_choice: str | None = None,
+    declaration_sampling: str | None = None,
     memory_method: str = "functional_v1",
     edit_interface_version: str = "v1",
     edit_features: dict[str, bool] | None = None,
@@ -113,7 +115,8 @@ def prepared(
         "receipt_status_v3" if fresh_completion else
         "receipt_status_v2" if current_delivery else
         "receipt_status_v1" if failure_receipts else "unavailable_v1",
-        "declaration_tool_choice": "required" if current_delivery else "auto",
+        "declaration_tool_choice": declaration_tool_choice if declaration_tool_choice is not None
+                                   else "required" if current_delivery else "auto",
         "completion_tool_choice": "required_until_attempt_v1" if receipt_completion else
         "required_once" if required_completion else "auto",
         "existing_confirmation": "explicit_no_change_v1" if existing_confirmation else "disabled",
@@ -127,7 +130,8 @@ def prepared(
         "tool_catalog_errors": "bounded_feedback_v1" if catalog_feedback else "legacy",
         "read_interface": "explicit_selectors_v1" if explicit_reads else "combined_selectors_v1",
         "declaration_thinking": "disabled" if phase_thinking else "inherit",
-        "declaration_sampling": "greedy_v1" if direct_response else "inherit",
+        "declaration_sampling": declaration_sampling if declaration_sampling is not None
+                                else "greedy_v1" if direct_response else "inherit",
         "capability_delivery": "actual_catalog_v1" if actual_capabilities else "legacy",
         "reasoning_history": "current_turn_native_v1" if reasoning_history else "discard",
         "recent_context": "bank_recent_v2" if operation_completion else
@@ -218,11 +222,17 @@ def scripted(
     return wires
 
 
-@pytest.mark.parametrize("scope_requests", [False, True])
+@pytest.mark.parametrize("scope_requests,declaration_choice", [
+    pytest.param(False, "required", id="False"),
+    pytest.param(True, "required", id="True"),
+    pytest.param(True, "auto", id="True-auto"),
+])
 def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, scope_requests: bool,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, scope_requests: bool, declaration_choice: str,
 ) -> None:
     root = prepared(tmp_path, native=True, complete_requests=True, scope_requests=scope_requests,
+        declaration_tool_choice=declaration_choice,
+        declaration_sampling="inherit" if declaration_choice == "auto" else None,
         direct_response=True, phase_thinking=True, current_delivery=True,
         memory_profile="unified_v1", memory_view_mode="state_driven",
         memory_method="milai_edit_m_v1", edit_interface_version="I2",
@@ -241,6 +251,13 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         names = {t["function"]["name"] for t in wire.get("tools", [])}
+        if names in ({"classify_current_request"}, {"resolve_continuation_operations"}):
+            assert wire["tool_choice"] == declaration_choice
+            assert wire["chat_template_kwargs"] == {"enable_thinking": False}
+            assert wire["temperature"] == (1.0 if declaration_choice == "auto" else 0.0)
+        elif declaration_choice == "auto":
+            assert wire["chat_template_kwargs"] == {"enable_thinking": True}
+            assert wire["temperature"] == 1.0
         if names == {"classify_current_request"}:
             text = wire["messages"][-1]["content"]
             schema = wire["tools"][0]["function"]["parameters"]
