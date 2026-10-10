@@ -1,5 +1,13 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+Latest fixed13:49:16.651712UTC: same frozen d503 E1 RootRUNNING/live session48904,
+H24complete sessions/54QA=27answers+27known capacitymissing; first3users complete8sessions each,
+per-userQA20/12/22, answers9/9/9, missing11/3/13. Fourthuser not yet complete atthat snapshot.
+All27missing confirmedbefore_http/request_sentFalse, input59259-114828>32256.
+Raw32/73answers/resourcesclosed unchanged; MNOT_STARTED/Judge0, no unifiedscore orranking.
+Current document6d20db5a ownFast38054268907SUCCESS/Full38054268941SKIPPED; nexthead needsownCI.
+Original continuousledger/source/config preserved. Do not restart a live handle due observationtimeout.
+
 Latest additional fixed observation13:01:28.121684UTC on the same frozen d503 full E1:
 H10complete sessions/26QA checkpoints=15answers+11missing; firstuser8complete sessions/20QA=
 9answers+11missing, seconduser2complete sessions/6answers, otherusersNOT_STARTED. MiLAiNOT_STARTED,
