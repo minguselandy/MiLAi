@@ -26,12 +26,17 @@ from milai_lab.memory.functional_state import (
     FunctionalRejection,
     FunctionalReviewRejection,
     canonical,
+    commit_request_targets,
     fragment_support,
     namespace,
     note_exposure,
+    project_request_targets,
     reference_key,
+    request_target_mapping,
+    resolve_request_target,
     scope_leaves,
 )
+from milai_lab.memory.reader_projection import expand_host_packet
 from milai_lab.memory.service import MemoryService, _lexical_tokens
 from milai_lab.memory.working_set import (
     admit_refs,
@@ -156,6 +161,15 @@ class PageSelector(ReadSelector):
 class SupportContextSelector(ReadSelector):
     fragment_handles: list[str] = Field(min_length=1)
     read_handle: str | None = None
+
+
+class ForgetTargetSelector(ReadSelector):
+    targets: list[str] = Field(
+        min_length=1,
+        description="Copy targets from this request's delivered items. Select at most one record "
+                    "and any explicitly selected original Sources; do not construct identifiers.",
+    )
+    scope: Literal["record", "record_and_sources"] = "record_and_sources"
 
 
 class ResidentRecordSelector(RecordSelector):
@@ -344,6 +358,85 @@ class FunctionalMemory:
         if bound is None:
             raise FunctionalRejection("V13_5_ACTUAL_PUBLIC_TURN_REQUIRED")
         return bound
+
+    def bind_request_targets(
+        self, config: RunnableConfig, packet: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Bind a trusted final delivery, never a model-supplied packet or preview."""
+        return self._bind_request_targets(self._binding(config), packet)
+
+    def _bind_request_targets(
+        self, binding: dict[str, Any], packet: dict[str, Any]
+    ) -> dict[str, Any]:
+        if self.memory_view_mode == "legacy" or not packet.get("ok"):
+            return packet
+        mapping = request_target_mapping(self.service, binding)
+        scope = packet.get("target_scope")
+        if scope is not None:
+            if not isinstance(scope, str) or len(scope) != 13 or scope[0] != "q" or any(
+                char not in "0123456789abcdef" for char in scope[1:]
+            ):
+                raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_SCOPE_INVALID")
+            if mapping["targets"] and scope != mapping["scope"]:
+                raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_SCOPE_CHANGED")
+            mapping["scope"] = scope
+        result, planned = project_request_targets(mapping, expand_host_packet(packet))
+        result = self._project_read_packet(result)
+        if self.token_count(canonical(result)) > self.material_limit:
+            raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
+        for target in set(planned["targets"]) - set(mapping["targets"]):
+            row = planned["targets"][target]
+            if row["kind"] == "delivered_record":
+                bound = self.service.candidate(row["credentials"]["read_handle"])
+                if bound is None or any(
+                    bound[key] != value for key, value in row["identity"].items()
+                ):
+                    raise FunctionalRejection("V13_5_REQUEST_TARGET_RECORD_NOT_ISSUED")
+            else:
+                fragment = self.service.source_fragment(row["credentials"]["fragment_handle"])
+                if any(fragment[key] != value for key, value in row["identity"].items()):
+                    raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_SOURCE_CHANGED")
+        if planned["targets"]:
+            commit_request_targets(self.service, planned)
+        return result
+
+    def _deliver_request_targets(
+        self, binding: dict[str, Any], packet: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Final base delivery hook; adapters may defer it until their own receipt is saved."""
+        return self._bind_request_targets(binding, packet)
+
+    def resolve_request_target(
+        self, config: RunnableConfig, target: str, *, kind: str | None = None
+    ) -> dict[str, Any]:
+        """Return only the bound identity/credentials; callers retain their operation checks."""
+        return resolve_request_target(self.service, self._binding(config), target, kind=kind)
+
+    def forget_targets(
+        self, config: RunnableConfig, operation_id: str, targets: list[str], *,
+        scope: str = "record_and_sources",
+    ) -> dict[str, Any]:
+        """Translate explicit request targets into the unchanged exact forget contract."""
+        if (
+            not isinstance(targets, list) or not targets
+            or not all(isinstance(target, str) for target in targets)
+            or len(set(targets)) != len(targets)
+        ):
+            raise FunctionalRejection("V13_5_REQUEST_TARGET_SELECTION_REQUIRED")
+        binding = self._binding(config)
+        selected = [resolve_request_target(self.service, binding, target) for target in targets]
+        records = [row for row in selected if row["kind"] == "delivered_record"]
+        sources = [row for row in selected if row["kind"] == "delivered_source"]
+        if len(records) > 1 or len(records) + len(sources) != len(selected):
+            raise FunctionalRejection("V13_5_FORGET_EXACTLY_ONE_RECORD_OR_SOURCES_REQUIRED")
+        fragments = [row["credentials"]["fragment_handle"] for row in sources]
+        return self.service.forget(
+            binding["session"], operation_id,
+            records[0]["credentials"]["read_handle"] if records else None,
+            scope=scope,
+            fragment_handles=fragments if not records else None,
+            additional_fragment_handles=fragments if records and fragments else None,
+        )
 
     def _record_units(
         self,
@@ -647,6 +740,10 @@ class FunctionalMemory:
         chosen: list[dict[str, Any]] = []
         skipped: list[dict[str, Any]] = []
         directory = value["kind"].endswith("_catalog")
+        target_mapping = (
+            request_target_mapping(self.service, binding)
+            if self.memory_view_mode != "legacy" else None
+        )
 
         def packet(end: int) -> dict[str, Any]:
             bodies = [unit for unit in chosen if not unit["type"].endswith("_candidate")]
@@ -656,7 +753,7 @@ class FunctionalMemory:
                 for candidate in candidates:
                     if candidate["read"]["arguments"].get("revision") is not None:
                         candidate["read"]["tool"] = "read_memory_revision"
-            return self._project_read_packet({
+            result = {
                 "ok": True,
                 "schema": "functional_material_v1",
                 "snapshot_id": key,
@@ -716,7 +813,10 @@ class FunctionalMemory:
                         if u["type"] == "fragment"
                     }.values()
                 ),
-            })
+            }
+            if target_mapping is not None:
+                result, _ = project_request_targets(target_mapping, result)
+            return self._project_read_packet(result)
 
         end = start
         for index, unit in enumerate(items[start:], start):
@@ -852,7 +952,7 @@ class FunctionalMemory:
         else:
             snapshot = cached.value["snapshot"]
         if self.memory_view_mode == "legacy":
-            return self._page(snapshot, 0, bound)
+            return self._deliver_request_targets(bound, self._page(snapshot, 0, bound))
         cached = self.service.store.get(namespace(self.service), key)
         assert cached is not None
         catalog_snapshot = cached.value.get("catalog_snapshot")
@@ -873,7 +973,7 @@ class FunctionalMemory:
             "v13_turn_id": turn_id, "v13_config_version": config_version,
         }}
         self._note_view_page(config, page)
-        return page
+        return self._deliver_request_targets(bound, page)
 
     def _source_support(self, version: dict[str, Any]) -> dict[str, list[str]]:
         if "functional_support" in version:
@@ -1469,7 +1569,7 @@ class FunctionalMemory:
                         config, replay, keep_resident=arguments.get("keep_resident", False),
                         read_goal=arguments.get("read_goal"),
                     )
-                    return replay
+                    return self._deliver_request_targets(bound, replay)
                 raise FunctionalIntegrityError("V13_5_READ_OUTCOME_UNKNOWN")
             if len(state["calls"]) >= self.read_limit:
                 exhausted = {
@@ -1515,6 +1615,15 @@ class FunctionalMemory:
             config, result, keep_resident=arguments.get("keep_resident", False),
             read_goal=arguments.get("read_goal"),
         )
+        try:
+            result = self._deliver_request_targets(bound, result)
+        except Exception as error:
+            result = {
+                "ok": False, "status": "read_outcome_unknown",
+                "error_type": type(error).__name__, "phase": "target_delivery_persistence",
+                "read_state_effect": "unconfirmed", "retryable": False,
+                **self._read_only_metadata([]),
+            }
         try:
             with self.service._locked():
                 current = self.service.store.get(namespace(self.service), key)
@@ -2163,6 +2272,23 @@ class FunctionalMemory:
                 ),
             )
 
+        def forget_request_targets(
+            targets: list[str], config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            scope: Literal["record", "record_and_sources"] = "record_and_sources",
+        ) -> ToolMessage:
+            """Forget explicitly selected targets copied from this request's delivered items.
+
+            Select at most one delivered_record target, and any delivered_source targets
+            for other original copies. A source selection revokes that whole Source.
+            record_and_sources hides the record, support/history/raw fallbacks and derived
+            assistant outputs; record alone retains source visibility. This is visibility
+            revocation, not physical erasure. Navigation-only targets cannot be forgotten.
+            """
+            return message("forget_memory", tool_call_id, mutation(
+                lambda: self.forget_targets(config, tool_call_id, targets, scope=scope)
+            ))
+
         def update_assertion(
             read_handle: str,
             changes: list[ReplacementChange],
@@ -2503,5 +2629,8 @@ class FunctionalMemory:
                 if self.support_context
                 else ()
             ),
-            StructuredTool.from_function(forget_memory),
+            StructuredTool.from_function(forget_memory)
+            if self.memory_view_mode == "legacy" else ReadSelectorTool.from_function(
+                forget_request_targets, name="forget_memory", args_schema=ForgetTargetSelector
+            ),
         )

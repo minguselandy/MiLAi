@@ -2379,3 +2379,205 @@ def test_explicit_read_shared_budget_identity_and_owner_survive_reopen(tmp_path:
         result = invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'foreign',
                         cfg(owner='bob'))
         assert not result['ok'] and 'Personal record' not in canonical(result)
+
+
+def test_request_targets_forget_exact_record_survives_reopen_and_rejects_old_turn(
+    tmp_path: Path,
+) -> None:
+    options = {'memory_view_mode': 'state_driven', 'read_interface': 'explicit_selectors_v1'}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='A private toy marker is blue.')
+        saved = memory.save(cfg(), 'save', 'A private toy marker is blue.', handles(memory, ref))
+        turn(memory, 'forget', 'Forget the saved marker.')
+        config = cfg('forget')
+        directory = memory.context('s', 'forget', CONFIG_VERSION)
+        assert all('target' not in item for item in directory['candidates'])
+        body = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'read', config)
+        target = body['items'][0]['target']
+        bound = memory.resolve_request_target(config, target)
+        assert bound == {'kind': 'delivered_record',
+                         'identity': {'record_id': saved['id'], 'revision': 1},
+                         'credentials': {'read_handle': body['items'][0]['read_handle']}}
+        assert body['items'][0]['target_kind'] == 'delivered_record'
+        tool = next(tool for tool in memory.tools() if tool.name == 'forget_memory')
+        schema = tool.tool_call_schema
+        assert set(schema['properties']) == {'targets', 'scope'}
+        assert schema['additionalProperties'] is False
+        with pytest.raises(ValidationError):
+            invoke(memory, 'forget_memory', {'read_handle': bound['credentials']['read_handle']},
+                   'raw-selector', config)
+        forged = invoke(memory, 'forget_memory', {'targets': [target + 'x']}, 'forged', config)
+        assert forged['effect'] == 'none' and forged['phase'] == 'pre_mutation_contract'
+        assert memory.service.forget_epoch == 0
+    with opened(tmp_path, **options) as memory:
+        memory.context('s', 'forget', CONFIG_VERSION)
+        config = cfg('forget')
+        assert memory.resolve_request_target(config, target) == bound
+        removed = invoke(memory, 'forget_memory', {'targets': [target]}, 'remove', config)
+        assert removed['effect'] == 'visibility_only' and removed['physical_erasure'] is False
+        assert removed['revoked_ids'] == [saved['id']]
+        assert invoke(memory, 'forget_memory', {'targets': [target]}, 'remove', config)['replayed']
+    with opened(tmp_path, **options) as memory:
+        assert memory.service.forget_epoch == 1
+        assert memory.service.source(ref) is None
+        turn(memory, 'later', 'Show the marker.')
+        later = cfg('later')
+        result = invoke(memory, 'forget_memory', {'targets': [target]}, 'old-target', later)
+        assert result['reason'] == 'V13_5_REQUEST_TARGET_NOT_DELIVERED'
+        assert result['effect'] == 'none' and memory.service.forget_epoch == 1
+        record = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'query', later)
+        assert not record['ok']
+        assert memory.service.read(saved['id'])['status'] == 'visibility_revoked'
+    with opened(tmp_path, owner='bob', **options) as foreign:
+        turn(foreign, 'later', 'Unrelated request.')
+        with pytest.raises(FunctionalRejection, match='REQUEST_TARGET_NOT_DELIVERED'):
+            foreign.resolve_request_target(cfg('later', 'bob'), target)
+
+
+def test_request_targets_explicit_sources_and_record_keep_exact_selection(tmp_path: Path) -> None:
+    options = {'memory_view_mode': 'state_driven', 'read_interface': 'explicit_selectors_v1'}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='Marker is blue.')
+        saved = memory.save(cfg(), 'save', 'Marker is blue.', handles(memory, ref))
+        copy_ref = turn(memory, 'copy', 'Marker is blue, separately supplied.')
+        turn(memory, 'forget', 'Forget both original copies.')
+        config = cfg('forget')
+        record = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'record', config)
+        source = invoke(memory, 'read_source', {'source_ref': copy_ref}, 'original', config)
+        record_target = record['items'][0]['target']
+        source_target = source['items'][0]['target']
+        selection = memory.resolve_request_target(config, source_target)
+        assert selection['identity']['source_ref'] == copy_ref
+        assert selection['credentials'] == {
+            'fragment_handle': source['items'][0]['fragment_handle']}
+        rejected = invoke(memory, 'forget_memory', {'targets': [record_target, source_target],
+                          'scope': 'record'}, 'bad-scope', config)
+        assert rejected['effect'] == 'none' and memory.service.forget_epoch == 0
+        removed = invoke(memory, 'forget_memory', {'targets': [record_target, source_target]},
+                         'remove', config)
+        assert removed['ok'] and removed['scope_counts']['explicit_support_sources'] == 2
+        assert {ref, copy_ref}.issubset(removed['revoked_source_refs'])
+    with opened(tmp_path, **options) as memory:
+        assert memory.service.source(copy_ref) is None
+        assert memory.service.read(saved['id'])['status'] == 'visibility_revoked'
+        raw = turn(memory, 'raw', 'An unformed raw source.')
+        packet = memory.context('s', 'raw', CONFIG_VERSION)
+        target = next(item['target'] for item in packet['items'] if item['source_ref'] == raw)
+        removed = invoke(memory, 'forget_memory', {'targets': [target]}, 'raw-remove', cfg('raw'))
+        assert removed['revoked_ids'] == [] and removed['effect'] == 'visibility_only'
+        assert memory.service.source(raw) is None
+
+
+def test_request_targets_stale_revision_and_multiple_records_never_change_visibility(
+    tmp_path: Path,
+) -> None:
+    options = {'memory_view_mode': 'state_driven', 'read_interface': 'explicit_selectors_v1',
+               'read_limit': 6}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='Marker can be blue or green.')
+        saved = memory.save(cfg(), 'save', 'Marker is blue.', handles(memory, ref))
+        before = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'before')
+        stale = before['items'][0]['target']
+        handle = before['items'][0]['read_handle']
+        assert memory.update(cfg(), 'update', handle, [{
+            'field': 'content', 'op': 'set', 'value': 'Marker is green.'
+        }], handles(memory, ref))['ok']
+        after = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'after')
+        current = after['items'][0]['target']
+        assert current != stale
+        rejected = invoke(memory, 'forget_memory', {'targets': [stale]}, 'stale')
+        assert rejected['reason'] == 'revision_conflict' and rejected['effect'] == 'none'
+        rejected = invoke(memory, 'forget_memory', {'targets': [stale, current]}, 'two-records')
+        assert rejected['reason'] == 'V13_5_FORGET_EXACTLY_ONE_RECORD_OR_SOURCES_REQUIRED'
+        assert rejected['effect'] == 'none' and memory.service.forget_epoch == 0
+        assert memory.service.read(saved['id'])['value']['revision'] == 2
+        removed = invoke(memory, 'forget_memory', {'targets': [current]}, 'current')
+        assert removed['effect'] == 'visibility_only' and removed['revoked_ids'] == [saved['id']]
+
+
+def test_request_targets_page_preview_and_omission_do_not_issue_credentials(tmp_path: Path) -> None:
+    from milai_lab.memory.functional_state import request_target_mapping
+
+    options = {'memory_view_mode': 'state_driven', 'read_interface': 'explicit_selectors_v1'}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='Marker with an explicit long body.')
+        saved = memory.save(cfg(), 'save', 'Marker with an explicit long body.',
+                            handles(memory, ref))
+        config = cfg()
+        binding = memory._binding(config)
+        old = request_target_mapping(memory.service, binding)
+        units = memory._record_units(memory.service.read(saved['id']))
+        units[0]['content'] = 'x' * (memory.material_limit + 1)
+        snapshot = memory._snapshot(binding, units, 'synthetic_oversized_record')
+        preview = memory._page(snapshot, 0, binding)
+        assert preview['items'] == []
+        assert preview['skipped_units'][0]['snapshot_body_delivered'] is False
+        delivered = memory.bind_request_targets(config, preview)
+        assert delivered['items'] == []
+        assert request_target_mapping(memory.service, binding) == old
+        assert all(row['kind'] != 'delivered_record' for row in old['targets'].values())
+        real = memory._page(memory._snapshot(binding, memory._record_units(
+            memory.service.read(saved['id'])), 'synthetic_valid_record'), 0, binding)
+        target = real['items'][0]['target']
+        with pytest.raises(FunctionalRejection, match='REQUEST_TARGET_NOT_DELIVERED'):
+            memory.resolve_request_target(config, target)
+        delivered = memory.bind_request_targets(config, real)
+        assert memory.resolve_request_target(config, target)['credentials'] == {
+            'read_handle': delivered['items'][0]['read_handle']}
+
+
+def test_request_targets_delivery_store_failure_stays_unknown_and_does_not_retry(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import sqlite3
+
+    from milai_lab.memory.functional_state import request_target_mapping
+
+    options = {'memory_view_mode': 'state_driven', 'read_interface': 'explicit_selectors_v1'}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, text='Marker is blue.')
+        saved = memory.save(cfg(), 'save', 'Marker is blue.', handles(memory, ref))
+        old = request_target_mapping(memory.service, memory._binding(cfg()))
+        original_put = memory.service.store.put
+        attempts = []
+
+        def failed_put(ns, key, value, **kwargs):
+            if ns == namespace(memory.service) and key.startswith('request-targets:'):
+                attempts.append(key)
+                raise sqlite3.OperationalError('synthetic target delivery failure')
+            return original_put(ns, key, value, **kwargs)
+
+        monkeypatch.setattr(memory.service.store, 'put', failed_put)
+        args = {'record_id': saved['id']}
+        result = invoke(memory, 'read_memory', args, 'read')
+        assert result['status'] == 'read_outcome_unknown'
+        assert result['read_state_effect'] == 'unconfirmed'
+        assert result['phase'] == 'target_delivery_persistence' and 'items' not in result
+        assert invoke(memory, 'read_memory', args, 'read') == result
+        assert len(attempts) == 1
+        assert request_target_mapping(memory.service, memory._binding(cfg())) == old
+        guessed = old['scope'] + ':' + str(len(old['targets']) + 1)
+        rejected = invoke(memory, 'forget_memory', {'targets': [guessed]}, 'unissued')
+        assert rejected['effect'] == 'none' and memory.service.forget_epoch == 0
+        assert memory.service.read(saved['id'])['value']['revision'] == 1
+
+
+def test_request_targets_navigation_without_credentials_is_never_a_forget_selection(
+    tmp_path: Path,
+) -> None:
+    from milai_lab.memory.functional_state import (
+        add_request_target,
+        commit_request_targets,
+        request_target_mapping,
+    )
+
+    with opened(tmp_path, memory_view_mode='state_driven') as memory:
+        ref = turn(memory, text='Marker is blue.')
+        saved = memory.save(cfg(), 'save', 'Marker is blue.', handles(memory, ref))
+        mapping = request_target_mapping(memory.service, memory._binding(cfg()))
+        target = add_request_target(mapping, {'kind': 'read_only_navigation',
+                                   'identity': {'record_id': saved['id']}, 'credentials': {}})
+        commit_request_targets(memory.service, mapping)
+        assert memory.resolve_request_target(cfg(), target)['credentials'] == {}
+        rejected = invoke(memory, 'forget_memory', {'targets': [target]}, 'navigation')
+        assert rejected['effect'] == 'none' and memory.service.forget_epoch == 0

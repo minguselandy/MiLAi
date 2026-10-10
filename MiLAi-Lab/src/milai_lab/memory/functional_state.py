@@ -6,7 +6,9 @@ provenance only, never semantic support or permission for a business mutation.
 
 from __future__ import annotations
 
+import copy
 import json
+import uuid
 from typing import Any, cast
 
 
@@ -64,6 +66,142 @@ def body_text(event: dict[str, Any]) -> str:
 
 def namespace(service: Any) -> tuple[str, ...]:
     return (*service.namespace, "v13_5_functional")
+
+
+def request_target_mapping(service: Any, binding: dict[str, Any]) -> dict[str, Any]:
+    """Load an exact request's reference table, or prepare an unissued table.
+
+    Preparing a table never writes or registers a credential. The random request
+    nonce prevents a target from another turn/bank being interpreted as an ordinal
+    in this turn. The complete owner/bank/public-turn binding is also checked.
+    """
+    key = "request-targets:" + reference_key([binding["session"], binding["message_id"]])
+    stored = service.store.get(namespace(service), key)
+    if stored is None:
+        return {
+            "owner": service.owner, "bank": list(service.namespace),
+            "binding": copy.deepcopy(binding), "scope": "q" + uuid.uuid4().hex[:12],
+            "targets": {},
+        }
+    value = stored.value
+    if (
+        value.get("owner") != service.owner
+        or value.get("bank") != list(service.namespace)
+        or value.get("binding") != binding
+        or not isinstance(value.get("scope"), str)
+        or not isinstance(value.get("targets"), dict)
+    ):
+        raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_BINDING_CHANGED")
+    return copy.deepcopy(cast(dict[str, Any], value))
+
+
+def add_request_target(mapping: dict[str, Any], row: dict[str, Any]) -> str:
+    """Plan one exact reference without issuing it; navigation has no credentials."""
+    kind = row.get("kind")
+    credentials = row.get("credentials")
+    expected = {"delivered_record": "read_handle", "delivered_source": "fragment_handle"}
+    if (
+        kind not in {*expected, "read_only_navigation"}
+        or not isinstance(row.get("identity"), dict)
+        or not isinstance(credentials, dict)
+        or (kind == "read_only_navigation" and credentials)
+        or (kind in expected and (
+            set(credentials) != {expected[kind]}
+            or not isinstance(credentials.get(expected[kind]), str)
+            or not credentials[expected[kind]]
+        ))
+    ):
+        raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_CREDENTIAL_INVALID")
+    for target, old in mapping["targets"].items():
+        if old == row:
+            return str(target)
+        if credentials and old.get("credentials") == credentials:
+            raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_IDENTITY_CHANGED")
+    target = mapping["scope"] + ":" + str(len(mapping["targets"]) + 1)
+    mapping["targets"][target] = copy.deepcopy(row)
+    return str(target)
+
+
+def project_request_targets(
+    mapping: dict[str, Any], packet: dict[str, Any]
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Pure preview over selected body items; never sign omitted/catalog evidence."""
+    planned = copy.deepcopy(mapping)
+    result = copy.deepcopy(packet)
+    for item in result.get("items", []):
+        if item.get("type") == "record" and isinstance(item.get("read_handle"), str):
+            row = {
+                "kind": "delivered_record",
+                "identity": {"record_id": item["record_id"], "revision": item["revision"]},
+                "credentials": {"read_handle": item["read_handle"]},
+            }
+        elif item.get("type") == "fragment" and isinstance(item.get("fragment_handle"), str):
+            row = {
+                "kind": "delivered_source",
+                "identity": {key: item[key] for key in (
+                    "source_ref", "source_revision", "start", "end"
+                ) if key in item},
+                "credentials": {"fragment_handle": item["fragment_handle"]},
+            }
+        else:
+            continue
+        item["target"] = add_request_target(planned, row)
+        item["target_kind"] = row["kind"]
+    result["target_scope"] = mapping["scope"]
+    return result, planned
+
+
+def commit_request_targets(service: Any, mapping: dict[str, Any]) -> None:
+    """Register the final delivered table in the existing Store, never rebind it."""
+    if (
+        mapping.get("owner") != service.owner
+        or mapping.get("bank") != list(service.namespace)
+        or not isinstance(mapping.get("binding"), dict)
+        or not isinstance(mapping.get("scope"), str)
+        or not isinstance(mapping.get("targets"), dict)
+        or any(not isinstance(target, str) or not target.startswith(mapping["scope"] + ":")
+               for target in mapping["targets"])
+    ):
+        raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_BINDING_CHANGED")
+    binding = mapping["binding"]
+    key = "request-targets:" + reference_key([binding["session"], binding["message_id"]])
+    scope_key = "request-target-scope:" + mapping["scope"]
+    scope_binding = {"owner": service.owner, "bank": list(service.namespace), "binding": binding}
+    with service._locked():
+        old = service.store.get(namespace(service), key)
+        issued_scope = service.store.get(namespace(service), scope_key)
+        if issued_scope is not None and issued_scope.value != scope_binding:
+            raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_SCOPE_COLLISION")
+        if old is not None and (
+            old.value.get("scope") != mapping["scope"]
+            or any(mapping["targets"].get(target) != row
+                   for target, row in old.value["targets"].items())
+            or any(old.value.get(field) != mapping[field] for field in ("owner", "bank", "binding"))
+        ):
+            raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_REBINDING")
+        if old is not None and old.value == mapping:
+            return
+        try:
+            if issued_scope is None:
+                service.store.put(namespace(service), scope_key, scope_binding, index=False)
+            service.store.put(namespace(service), key, mapping, index=False)
+        except Exception as error:
+            raise FunctionalOperationError("target_binding_commit", error) from error
+
+
+def resolve_request_target(
+    service: Any, binding: dict[str, Any], target: str, *, kind: str | None = None
+) -> dict[str, Any]:
+    """Resolve only this request's exact reference; service still validates effects."""
+    mapping = request_target_mapping(service, binding)
+    if not isinstance(target, str) or not target.startswith(mapping["scope"] + ":"):
+        raise FunctionalRejection("V13_5_REQUEST_TARGET_NOT_DELIVERED")
+    row = mapping["targets"].get(target)
+    if row is None:
+        raise FunctionalRejection("V13_5_REQUEST_TARGET_NOT_DELIVERED")
+    if kind is not None and row.get("kind") != kind:
+        raise FunctionalRejection("V13_5_REQUEST_TARGET_KIND_INVALID")
+    return copy.deepcopy(cast(dict[str, Any], row))
 
 
 def visibility(service: Any) -> dict[str, Any]:
