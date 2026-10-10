@@ -9,6 +9,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import socket
+from copy import deepcopy
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, cast
@@ -1910,6 +1911,107 @@ def test_memory_effects_uses_paired_current_receipts_without_promoting_reads_or_
     assert final["raw_capture_is_semantic_save"] is False
     assert final["reads_perform_semantic_writes"] is False
     assert secret not in json.dumps(final)
+
+
+@pytest.mark.parametrize("tool_commit,shared_commit", [(False, True), (True, False), (True, True)])
+def test_model_effects_count_shared_and_tool_commits_once(
+    tool_commit: bool, shared_commit: bool,
+) -> None:
+    committed = {"ok": True, "status": "committed", "effect": "memory_only",
+                 "id": "actual-record", "revision": 1,
+                 "content_verification": "unchecked", "fields_verification": "unchecked"}
+    messages: list[Any] = [HumanMessage(content="Save the supplied material.")]
+    if tool_commit:
+        for ref in ["actual-tool", "duplicate-tool"]:
+            messages.extend([
+                AIMessage(content="", tool_calls=[{
+                    "name": "save_memory", "id": ref, "args": {}}]),
+                ToolMessage(name="save_memory", tool_call_id=ref, content=json.dumps(committed)),
+            ])
+    # A known unavailable extra call must not erase a shared maintenance effect.
+    messages.extend([
+        AIMessage(content="", tool_calls=[{
+            "name": "save_memory", "id": "unavailable-tool", "args": {}}]),
+        ToolMessage(name="save_memory", tool_call_id="unavailable-tool", status="error",
+                    content=json.dumps({"ok": False, "status": "rejected", "effect": "none",
+                                        "reason": "tool_unavailable"})),
+    ])
+    effects = functional.memory_effects(messages)
+    if shared_commit:
+        batch = {"status": "completed", "phase": "complete", "receipts": [committed],
+                 "semantic_write_performed": True, "unprocessed": []}
+        effects["maintenance"] = [{**batch, "batches": [deepcopy(batch)]}, deepcopy(batch)]
+    original = deepcopy(effects)
+    projected = functional._model_memory_effects(effects)
+    expected = "actual-tool" if tool_commit else "#/maintenance/0/receipts/0"
+    assert projected["confirmed_semantic_commit_count"] == 1
+    assert projected["confirmed_semantic_commit_receipt_refs"] == [expected]
+    assert projected["mutation_receipts"] == original["mutation_receipts"]
+    assert projected["semantic_completion"] == "unchecked"
+    assert projected["raw_capture_is_semantic_save"] is False
+    assert effects == original
+    if shared_commit:
+        assert projected["maintenance"][0]["receipts"] == [committed]
+        assert projected["maintenance"][0]["batches"][0]["receipts"] == [
+            {"receipt_ref": "#/maintenance/0/receipts/0"}]
+        assert "missing save/update tool" in projected["interpretation"]
+
+
+def test_model_effects_do_not_upgrade_no_change_rejections_or_unknown_outcomes() -> None:
+    base = {"ok": True, "status": "committed", "effect": "memory_only",
+            "id": "actual-record", "revision": 1, "content_verification": "unchecked"}
+    receipts = [
+        {**base, "status": "no_change", "effect": "none"},
+        {**base, "status": "no_change", "replayed": True, "original_status": "committed"},
+        {**base, "ok": False, "status": "rejected", "effect": "none"},
+        {**base, "ok": False, "status": "outcome_unknown", "effect": "unconfirmed"},
+        {**base, "id": None}, {**base, "revision": True},
+        {**base, "status": "visibility_revoked", "effect": "visibility_only"},
+    ]
+    effects = functional.memory_effects([HumanMessage(content="Save all requested material.")])
+    effects["maintenance"] = [{"status": "incomplete", "phase": "commit",
+                               "memory_save_requested": True, "receipts": receipts,
+                               "semantic_write_performed": True,
+                               "unprocessed": [{"phase": "commit"}]}]
+    # The legacy audit can remember an earlier commit through no_change/replay;
+    # the model's commit count still requires an actual committed receipt.
+    effects["mutation_receipts"] = [
+        {**receipt, "tool": "save_memory", "transport_status": "success",
+         "receipt_ref": f"actual-{index}"} for index, receipt in enumerate(receipts)
+    ] + [{**base, "tool": "save_memory", "transport_status": "error", "receipt_ref": "failed"}]
+    effects["confirmed_semantic_commit_count"] = 1
+    effects["confirmed_semantic_commit_receipt_refs"] = ["actual-1"]
+    original = deepcopy(effects)
+    projected = functional._model_memory_effects(effects)
+    assert projected["confirmed_semantic_commit_count"] == 0
+    assert projected["confirmed_semantic_commit_receipt_refs"] == []
+    assert projected["maintenance"] == original["maintenance"]
+    assert projected["mutation_receipts"] == original["mutation_receipts"]
+    assert projected["semantic_completion"] == "unchecked"
+    assert effects == original
+
+
+def test_model_effects_count_child_only_and_distinct_versions_without_completing_request() -> None:
+    committed = {"ok": True, "status": "committed", "effect": "memory_only",
+                 "id": "actual-record", "revision": 1}
+    effects = functional.memory_effects([
+        HumanMessage(content="Save the supplied material."),
+        AIMessage(content="", tool_calls=[{"name": "save_memory", "id": "actual", "args": {}}]),
+        ToolMessage(name="save_memory", tool_call_id="actual", content=json.dumps(committed)),
+    ])
+    revision_two = {**committed, "revision": 2, "content_verification": "unchecked"}
+    child = {"status": "completed", "receipts": [committed, revision_two]}
+    effects["maintenance"] = [{"status": "incomplete", "phase": "editor_pending", "receipts": [],
+                               "unprocessed": [{"phase": "editor_pending"}],
+                               "batches": [{**child, "batches": [deepcopy(child)]}]}]
+    original = deepcopy(effects)
+    projected = functional._model_memory_effects(effects)
+    assert projected["confirmed_semantic_commit_count"] == 2
+    assert projected["confirmed_semantic_commit_receipt_refs"] == [
+        "actual", "#/maintenance/0/batches/0/receipts/1"]
+    assert projected["maintenance"] == original["maintenance"]
+    assert projected["semantic_completion"] == "unchecked"
+    assert effects == original
 
 
 def test_public_agent_catalog_carries_per_field_correction_selections(

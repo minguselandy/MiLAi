@@ -2013,22 +2013,59 @@ def memory_effects(messages: list[Any]) -> dict[str, Any]:
 def _model_memory_effects(effects: dict[str, Any]) -> dict[str, Any]:
     """Reference exact parent receipts in model input; keep audit results intact."""
     projected = deepcopy(effects)
+    confirmed: list[str] = []
+    versions: set[tuple[str, int]] = set()
+
+    def confirm(ref: str, receipt: dict[str, Any]) -> None:
+        record_id, revision = receipt.get("id"), receipt.get("revision")
+        if (receipt.get("ok") is not True or receipt.get("status") != "committed"
+                or receipt.get("effect") != "memory_only"
+                or not isinstance(record_id, str) or not record_id
+                or type(revision) is not int or revision < 1):
+            return
+        version = (record_id, revision)
+        if version not in versions:
+            versions.add(version)
+            confirmed.append(ref)
+
+    for receipt in projected.get("mutation_receipts", []):
+        ref = receipt.get("receipt_ref")
+        if (receipt.get("transport_status") == "success"
+                and receipt.get("tool") in {"save_memory", "update_memory"}
+                and isinstance(ref, str) and ref):
+            confirm(ref, receipt)
 
     def project_batches(
-        result: dict[str, Any], references: list[tuple[str, dict[str, Any]]]
+        result: dict[str, Any], references: list[tuple[str, dict[str, Any]]], path: str,
     ) -> None:
-        for batch in result.get("batches", []):
+        for index, batch in enumerate(result.get("batches", [])):
+            batch_path = f"{path}/batches/{index}"
+            for receipt_index, receipt in enumerate(batch.get("receipts", [])):
+                confirm(f"{batch_path}/receipts/{receipt_index}", receipt)
             batch["receipts"] = [
                 next(({"receipt_ref": ref} for ref, original in references
                       if receipt == original), receipt)
                 for receipt in batch.get("receipts", [])
             ]
-            project_batches(batch, references)
+            project_batches(batch, references, batch_path)
 
     for index, result in enumerate(projected.get("maintenance", [])):
         references = [(f"#/maintenance/{index}/receipts/{receipt_index}", receipt)
                       for receipt_index, receipt in enumerate(result.get("receipts", []))]
-        project_batches(result, references)
+        for ref, receipt in references:
+            confirm(ref, receipt)
+        project_batches(result, references, f"#/maintenance/{index}")
+    projected["confirmed_semantic_commit_receipt_refs"] = confirmed
+    projected["confirmed_semantic_commit_count"] = len(confirmed)
+    if projected.get("maintenance"):
+        projected["interpretation"] = (
+            "Actual Agent tool receipts and shared maintenance receipts confirm listed write "
+            "effects. Repeated receipts for one record/version count once; no_change, rejection "
+            "and unknown receipts are not commits. A missing save/update tool or a rejected "
+            "extra call does not undo a shared maintenance commit. Raw capture and read-only "
+            "hits do not confirm saving. Commit receipts do not verify content, fields or "
+            "completion of the whole request."
+        )
     return projected
 
 
@@ -3284,6 +3321,8 @@ def message(
                     )
                     capability_text = (
                         "CURRENT EXECUTION CAPABILITIES: " + json.dumps(active) + ". "
+                        "This catalog limits the Agent's next actions; it does not report "
+                        "already completed effects. "
                         "Only these tools are available in this phase. An earlier request or "
                         "an earlier phase cannot enable a missing tool. "
                     )
