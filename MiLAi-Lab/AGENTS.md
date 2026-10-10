@@ -7,9 +7,17 @@ worktrees under the plan's one-integrator/three-developer rule. No new model age
 New interaction code is not in frozen5019968. Actual models remain Root-only on its live ledger.
 Verify three normal continuous flows before any new long-history variant; SQLite/scripted success
 does not certify model semantic reliability. Original model/final feedback/effects stay separate.
-Fixed05:09:22UTC main observation: B0 62sessions/156QA checkpoints,155answers/1known missing,
-other4notstarted/Judge0. Actual missing56/qa1 is preHTTP32957>32256; originalnull/capacity/plan
-retained, no retry or denominator removal. Plan remains unexecuted by benchmark.
+Fixed05:48:46UTC main observation: B0 67sessions/170QA checkpoints,168answers/2known missing,
+other4notstarted/Judge0. Actual missing56/qa1 is preHTTP32957>32256,64/qa0 is35279>32256;
+originalnull/capacity/plan retained, no retry or denominator removal. Frozen5019968 does not execute pages.
+543gen/6536501known/6612322charged,68165embtokens,1gen reservation in-flight; not phase closure.
+New capacity continuation source dc4f182 reuses the same Reader and fixed pool; normal staged1+1.
+Full page requests are measured with actual selector parameters; original refs remain, final actual
+bodies reopen, no draft evidence/newAgent/modules/flags. All stages share original allowance and cache;
+request/noresponse remains unknown/no retry. Confirmedlength input delivery differs from valid selection.
+ReadDeliveryIncomplete preserves budget/unavailable reasons and null denominator; final overflow genuine.
+Reader/wiring/view/projection39PASS (9new cases), strict types/Ruff/matrix/boundariesPASS;0real models.
+2d32dc1 Fast38026697455 SUCCESS/Full38026697450 SKIPPED belongs only to that head, not new commits.
 Interaction integration includes all three normal Host/SQLite scripted flows, not model acceptance.
 Integrated interaction source40bf7aa; final three normal Host flow checks3PASS, no new real models.
 Local memory/Editor/app group378PASS; Host/view/projection first350PASS/2projection expectationFAIL,
