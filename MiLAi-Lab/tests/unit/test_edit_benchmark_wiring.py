@@ -31,6 +31,8 @@ from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 from milai_lab.runners.edit_benchmarks import (
     BenchmarkRun,
+    ReadCapacityUnavailable,
+    ReadDeliveryIncomplete,
     UnconfirmedModelOutcome,
     reader_messages,
     run,
@@ -729,6 +731,210 @@ def test_shared_reader_staged_accepts_legacy_selection_without_extra_reads(tmp_p
     assert len(state["resident_refs"]) == 1
     assert state["resident_refs"][0]["view"] == "current_at_snapshot"
     assert state["resident_refs"][0]["revision"] == 2
+
+
+@pytest.mark.parametrize("case", [
+    "reopen", "selector_overflow", "selection_continue", "final_overflow", "unavailable",
+    "call_limit", "response_before_progress", "unknown", "length",
+])
+def test_reader_executes_capacity_pages_and_reopens_only_actual_evidence(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, case: str,
+) -> None:
+    class LiteralTokenizer:
+        def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
+            return [0] * len(json.dumps(messages, ensure_ascii=False))
+
+    execution = BenchmarkRun.__new__(BenchmarkRun)
+    execution.root, execution.settings = tmp_path, {"retrieval_limit": 10}
+    bodies = ["Weekdays: the marker is blue. " + "a" * (30000 if case == "unavailable" else 10000),
+              "Weekend-only alarm: soft. " + "b" * 10000]
+
+    def seed(key: str, messages: list[dict[str, str]], *, structured: bool) -> str:
+        source = json.loads(messages[1]["content"])["new_sources"][0]["source_ref"]
+        return json.dumps({"operations": [{
+            "target_record": None, "content": bodies[int(key.split("/")[0])], "kind": "semantic",
+            "scope": {}, "source_refs": [source],
+        }]})
+
+    execution.call = seed
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = MemoryService(
+            store, ("capacity-pages", "owner"), "owner", tmp_path / "bank.lock",
+            mutation_contract="event_bound_v1", candidate_contract="read_handle_v1")
+        for ordinal, body in enumerate(bodies):
+            execution.maintain(service, ObservedSession(
+                str(ordinal), "2030-01-01", ({"role": "user", "content": body,
+                                            "timestamp": "2030-01-01"},),
+            ), str(ordinal))
+        before = copy.deepcopy(service.records())
+        original_sources = copy.deepcopy(service.sources())
+        by_content = {row["value"]["content"]: row for row in before}
+        memories = [{
+            "record_id": by_content[body]["id"], "revision": 1, "content": body,
+            "scope": {}, "matter_description": f"Actual matter {ordinal}",
+            "revision_evidence": [{"role": "user", "content": body}],
+        } for ordinal, body in enumerate(bodies)]
+        identifiers = [memory["record_id"] for memory in memories]
+        snapshot = tmp_path / "http/qa/retrieval.json"
+        write_json(snapshot, memories)
+        snapshot_bytes = snapshot.read_bytes()
+        execution.settings = {
+            "memory_view_mode": "state_driven" if case == "selector_overflow" else "staged",
+            "reader_projection": "semantic_units_v1", "context_tokens": 30612,
+            "model": {"max_tokens": 100}, "interface_version": "event_bound_v1",
+            "halumem": {"reader_failure_policy": "record_known_readonly_failure"},
+        }
+        execution.tokenizer = LiteralTokenizer()
+        execution.call = BenchmarkRun.call.__get__(execution)
+        attempts: list[dict[str, Any]] = []
+
+        def provider(request: httpx.Request) -> httpx.Response:
+            wire = json.loads(request.read())
+            payload = json.loads(wire["messages"][1]["content"])
+            attempts.append(payload)
+            assert payload["question"] == "What marker applies on weekdays?"
+            assert payload["date"] == "2030-01-02"
+            assert len(json.dumps(wire["messages"], ensure_ascii=False)) <= 30000
+            if "final_reopen_refs" in payload:
+                page = payload["memories"]
+                assert len(page) == 1
+                actual = next(memory for memory in memories if memory["record_id"] == page[0][
+                    "record_id"])
+                assert page[0] == actual
+                assert "content" not in repr(payload["pending_refs"])
+                if case == "unknown":
+                    raise httpx.ReadError("Page outcome unknown", request=request)
+                selected = ([identifiers[1]] if case == "final_overflow"
+                            and page[0]["record_id"] == identifiers[1] else [identifiers[0]])
+                content = json.dumps({"record_ids": selected, "keep_resident": True,
+                                      "done": case != "selection_continue" or len(attempts) == 4})
+            elif "candidates" in payload:
+                assert payload["memories"] == [] and len(attempts) == 1
+                content = json.dumps({"record_ids": identifiers, "keep_resident": False,
+                                      "done": case != "selector_overflow"})
+            else:
+                assert payload["memories"] == [memories[0]]
+                assert "final_reopen_refs" not in payload and "candidates" not in payload
+                assert bodies[1] not in repr(wire)
+                content = "On weekdays, the marker is blue."
+            finish = "length" if case == "length" and "final_reopen_refs" in payload else "stop"
+            return httpx.Response(200, json={"choices": [{"finish_reason": finish,
+                "message": {"content": content}}], "usage": {
+                    "prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9}})
+
+        expected_calls = 5 if case == "selection_continue" else 4
+        budget = RunBudget(RunLimits(generation_requests=expected_calls), tmp_path / "budget.json")
+        with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100,
+                                  max_calls=3 if case == "call_limit" else expected_calls),
+                        transport=httpx.MockTransport(provider), budget=budget) as client:
+            execution.client = client
+            def answer() -> str:
+                return execution.answer(service, "What marker applies on weekdays?",
+                                        "2030-01-02", "qa")
+
+            state_path = tmp_path / "http/qa/memory-view.json"
+            if case == "response_before_progress":
+                original_write = write_json
+
+                def interrupted_write(path: Path, value: Any) -> None:
+                    if path == state_path and len(value.get("capacity_continuation", {}).get(
+                            "pages", [])) == 1:
+                        raise RuntimeError("Response saved before progress write")
+                    original_write(path, value)
+
+                monkeypatch.setattr("milai_lab.runners.edit_benchmarks.write_json",
+                                    interrupted_write)
+                with pytest.raises(RuntimeError, match="before progress write"):
+                    answer()
+                assert len(attempts) == 2
+                assert (tmp_path / "http/qa/view/page-0/response.json").exists()
+                state = read_json(state_path)
+                assert state["steps"] == 1 and state["capacity_continuation"]["pages"] == []
+                monkeypatch.setattr("milai_lab.runners.edit_benchmarks.write_json", original_write)
+            if case == "unknown":
+                with pytest.raises(UnconfirmedModelOutcome, match="unconfirmed"):
+                    answer()
+                with pytest.raises(UnconfirmedModelOutcome, match="do not blindly repeat"):
+                    answer()
+                assert len(attempts) == 2 and budget.state["generation"]["unknown_usage"] == 1
+            elif case == "length":
+                with pytest.raises(ValueError, match="incomplete: length") as failure:
+                    answer()
+                known = execution._known_reader_failure(failure.value, "qa")
+                assert known is not None and known["phase"] == "confirmed_response"
+                assert known["response_ref"] == "http/qa/view/page-0/response.json"
+                assert len(attempts) == 2 and budget.state["generation"]["unknown_usage"] == 0
+            elif case in {"unavailable", "call_limit"}:
+                with pytest.raises(ReadDeliveryIncomplete) as incomplete:
+                    answer()
+                known = execution._known_reader_failure(incomplete.value, "qa")
+                assert known is not None and known["phase"] == "before_final_http"
+                assert known["reason"] == ("read_call_limit" if case == "call_limit"
+                                           else "whole_matter_unavailable")
+                assert "input_tokens" not in known and len(attempts) == 2
+                class Official:
+                    def __init__(self, *args: Any) -> None:
+                        pass
+
+                    def score(self, *args: Any) -> dict[str, Any]:
+                        raise AssertionError("A known missing answer must not call the Judge")
+
+                    def aggregate_results(self, records: dict[str, Any]) -> dict[str, Any]:
+                        return records
+
+                dataset = tmp_path / "score-synthetic.jsonl"
+                dataset.write_text(json.dumps({"uuid": "score-only", "sessions": [{
+                    "start_time": "Jan 02, 2030, 09:00:00",
+                    "end_time": "Jan 02, 2030, 09:00:00", "dialogue": [], "memory_points": [],
+                    "questions": [{"question": "What marker applies on weekdays?",
+                                   "answer": "synthetic-unused-reference", "evidence": []}],
+                }]}) + "\n")
+                execution.settings["halumem"].update(path=str(dataset), users=["score-only"],
+                                                     official_checkout=str(tmp_path / "official"))
+                execution.settings["interface_version"] = "v1"
+                write_json(tmp_path / "predictions/halumem/score-only/0/complete.json", {
+                    "prediction": {"uuid": "score-only", "session": 0, "extracted_memories": [],
+                                   "questions": [{"question": "What marker applies on weekdays?",
+                                                  "hypothesis": None, "reader_failure": known}]},
+                    "state": before, "update_retrieval": [],
+                })
+                monkeypatch.setattr("milai_lab.runners.edit_benchmarks.HaluMemOfficial", Official)
+                scored = execution.halumem("score")["question_answering_records"]
+                assert len(scored) == 1 and scored[0]["system_response"] is None
+                assert scored[0]["result_type"] is None and scored[0]["reader_failure"] == known
+                assert len(attempts) == 2
+            elif case == "final_overflow":
+                with pytest.raises(ReadCapacityUnavailable) as capacity:
+                    answer()
+                known = execution._known_reader_failure(capacity.value, "qa")
+                assert known is not None and known["phase"] == "before_http"
+                assert capacity.value.receipt["stage"] == "qa" and len(attempts) == 3
+            else:
+                assert answer() == "On weekdays, the marker is blue."
+                assert answer() == "On weekdays, the marker is blue."
+                assert len(attempts) == expected_calls
+                assert budget.state["generation_requests"] == expected_calls
+            state = read_json(state_path)
+            continuation = state["capacity_continuation"]
+            assert state["delivery_plan"]["selected_refs"] == continuation["selected_refs"]
+            assert continuation["evidence_sufficiency"] == "unchecked"
+            if case in {"reopen", "selector_overflow", "response_before_progress",
+                        "selection_continue"}:
+                assert [ref["id"] for ref in continuation["delivered_page_refs"]] == identifiers
+                assert [ref["id"] for ref in continuation["final_refs"]] == [identifiers[0]]
+                assert not state["pending_refs"] and continuation["final_body_delivered"]
+            else:
+                assert not continuation["final_body_delivered"]
+                if case == "length":
+                    assert len(continuation["delivered_page_refs"]) == 1
+                    assert continuation["pages"] == [] and state["steps"] == 1
+                if case == "unknown":
+                    assert continuation["delivered_page_refs"] == []
+                if case != "length":
+                    assert state["pending_refs"]
+                assert not (tmp_path / "http/qa/request.json").exists()
+        assert service.records() == before and service.sources() == original_sources
+        assert snapshot.read_bytes() == snapshot_bytes
 
 
 class CharacterTokenizer:
