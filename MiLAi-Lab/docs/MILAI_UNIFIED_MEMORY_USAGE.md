@@ -1,5 +1,62 @@
 # 统一记忆功能候选与当前执行状态
 
+## 2026-10-10：基线对齐开发，真实比较尚未执行
+
+用户已继续执行[基线对齐、薄适配与方法有效性规划](MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md)，
+并明确使用一名集成者和三名开发者。当前集成分支为
+`feat/lab-baseline-alignment-integration-20261010`，本次接线开发以 `d1d300a` 为基线，
+维护K10和原生资源闭合修复继续合流，尚未冻结最终候选；
+共同设置见[本地协议卡](MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md)与
+`configs/milai-baseline-alignment-local-v1.json`。新分支尚未推送或新建 PR，未进入原 `5019968` 运行。
+
+| 首轮后端 | 已接通能力 | 实际结果边界 |
+|---|---|---|
+| RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 接线和持久路径已检查；未执行 E0/E1，不称作者模型分数复现 |
+| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 原生服务尚未启动，内部模型请求接入原连续账本仍待完成；无实际原生闭环或 QA，未观测用量不填零 |
+| MiLAi-memory-only | 薄门面复用原 Source、MemoryService、维护 recipe 和 Reader；首轮直接读取实际语义状态及已有支持 | 接线已完成，实际形成、更正和 QA 尚未在新配置运行；不经过普通 Host 业务分类，也未增加原文检索兜底 |
+
+首轮按 source-only 在线前缀准备：四个既有开发用户各前八会话，**每臂32会话、73 QA、72原生更新机会**，
+三臂共219个主 QA 输出机会。各后端／用户独立空库；每会话实际写入完成后仅答该会话问题，
+persona、gold、更新标签、未来会话和测试答案不进入方法输入或回写历史。
+维护候选 K10 保持原设置，与可计数后端 QA20、隔离更新评价 K10 分开；Hindsight 使用原生 token 预算，不能称 K20。
+共同 Reader 为既有 Qwen，thinking=True、output32768、context65536、margin512，完整输入限额32256；
+首轮不调用二次 Selector。RawRAG/Hindsight 没有真实会话抽取输出或可隔离的参考查询时，对应形成／更新指标为 N/A，
+不补造输出或让参考检索改变正常方法状态。三个后端预测结束后再独立评分。
+先前离线准备采用维护候选K20，实际模型调用为0；恢复K10后将在新根重新prepare，
+不同配置的准备不复用，不将其当成最终候选冻结或实际实验结果。
+
+新增适配、准备与离线检查的**实际 Qwen／BGE／Judge 调用均为0**；E0、E1及最新42消息 Host流程
+尚未真实运行，也没有新语义分数。Host工具复用两条已曝光故事，各3次重复，共6故事运行／42消息，
+覆盖保存→更正→历史、业务续办→只补保存→新实时查询、遗忘→重开→查询三个共享流程。
+原模型候选、完整公开交付和实际操作回执分存；旧 `5019968` 两故事14消息的只读整理不算新候选验收，
+COMPLETED或脚本通过均不自动授予语义通过。
+
+Root最终受影响合组139项通过（9项公共入口＋4项后端＋35项wiring＋91项evaluator）；
+先前133项及Root／Native复查含重叠，不另行相加。8个源码严格类型、全Lab Ruff、
+267源码／6 packages／80 optional登记矩阵及active-package DAG通过。
+Tools边界发现新Host helper的动态导入有3个unresolved，正改为静态可解析的原评价器导入，边界仍待复查，未放宽规则。
+上述均为工程检查，不是语义样本或真实模型验收。
+原 `5540ac8` 的 [Fast 38028952446](https://github.com/minguselandy/MiLAi/actions/runs/38028952446)
+成功，[Full 38028952475](https://github.com/minguselandy/MiLAi/actions/runs/38028952475) skipped，
+只属于该旧 head，不能转作当前新代码的 CI 结果。
+
+原五方法固定观察为 **2026-10-10 07:53:54.506308 UTC／北京时间15:53:54.506308**：
+PID1854770匹配、原 HTTP 租约 OWNED、源码仍为 `5019968`；B0 保存98个完整会话，
+242题检查点＝240答案＋2已知缺答，其他四臂 NOT_STARTED、Judge0。
+维护97 completed＋2 incomplete，205笔唯一确认提交，`current_boundary_source_required`拒绝3次。
+生成780请求、9628792 known＝charged、embedding104963 tokens；该观察时点在途和新增 unknown 均为0。
+这些是运行前缀和固定时点成本，阶段仍未闭合，没有本轮方法排名。原缺答、拒绝和费用保留，不热改、重启或拼接新源码。
+
+资源释放且 Root 明确调度后优先 E0／E1，普通 Host 功能线可继续；全部旧科研待办不再成为新任务的永久前置。
+真实调用仍由 Root 在原连续账本串行调度，未知结果不盲重试。新候选尚未冻结确认，E2主要断点诊断、
+必要E3对比、长历史／保留用户／外部迁移及真实Host功能结果仍待完成；没有方法优势或 Product ready 结论。
+原生失败若已确认 drained，记录 FAILED／resources_settled=true；超时或状态未知则保留 RESOURCE_UNSETTLED，
+不把失败写成成功，也不在资源未确认释放时推进下一臂。
+
+## 先前功能优先协议与固定观察（保留）
+
+以下内容保留原时点结果；当前执行顺序以上述新规划与协议为准。
+
 当前按用户提供的[全局修复与功能优先规划](MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md)
 执行，集成分支为 `feat/lab-global-function-first-20261009`。第一版源码 `bbe77e9`
 的真实 Host20 已闭合；历史修复候选 `milai-global-function-first-v2` 冻结源码为 `1cfb400`。

@@ -2,7 +2,33 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
-## 2026-10-10：当前开发入口
+## 2026-10-10：当前基线对齐入口
+
+当前执行[基线对齐与方法有效性规划](MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md)，
+共同设置见[协议卡](MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md)，最新实现和结果以
+[统一使用与实验报告](MILAI_UNIFIED_MEMORY_USAGE.md)为准。新接线开发基于 `d1d300a`，维护K10与资源闭合修复继续合流；已接通
+RawRAG-local、Hindsight-native-local-recall和MiLAi-memory-only，配置为
+`configs/milai-baseline-alignment-local-v1.json`。每臂按source-only在线前缀准备32会话／73 QA／72更新机会，
+直接交付共同Reader；维护候选K10保持原设置，QA20与隔离更新评价K10分开，Hindsight token预算另列。
+旧离线准备曾使用维护K20且0模型；恢复K10后将新根重prepare，不复用不同配置准备。
+
+| 当前工作 | 已完成与仍待实际证据 |
+|---|---|
+| 强简单与独立外部参照 | RawRAG原文BM25与官方Hindsight retain/recall薄适配已接线；Hindsight服务未启动，内部模型请求转接原账本仍待完成，E0/E1未执行，没有外部通过或方法排名 |
+| MiLAi纯记忆与直接读取 | 复用现有维护链和Reader，首轮读取实际语义状态及已有支持；隔离参考查询，不补原文兜底，真实新配置效果待比较 |
+| 三个Host连续流程 | 原两故事各3重复／42消息已准备，原模型／公开反馈／实际效果分列；尚无新真实语义验收，三类共享流程不计作三个独立来源 |
+
+新适配和准备实际模型调用均为0。Root最终受影响合组139项通过；8源码严格类型、全LabRuff、
+267源码／6 packages／80 optional矩阵与active-package DAG通过，Tools动态导入边界仍待修复／复查。
+旧133项和复查有重叠，检查数量不等于实验样本或语义成功数。新分支尚未推送／建PR，
+旧 `5540ac8` Fast成功、Full skipped仅属于旧head。
+固定观察 **2026-10-10 07:53:54.506308 UTC／北京时间15:53:54.506308**：原PID1854770／租约OWNED／源码5019968；
+B0 98完整会话、242 QA检查点＝240答案＋2缺答，其他四臂未开始、Judge0；阶段未闭合。
+原五方法保留，不热修改。资源释放后Root优先调度E0/E1，不以全部旧科研待办永久前置，
+不逐提示补丁重跑五方法长历史。原缺答、失败、费用及来源冲突保持原样。
+已确认drained的原生失败保留FAILED和资源已闭合标记；超时／状态未知保留RESOURCE_UNSETTLED，停止后续资源调度。
+
+## 2026-10-10：先前功能优先入口（固定05:48:46 UTC）
 
 最新版本、实验结果、成本及固定观察时点以
 [统一使用与实验报告](MILAI_UNIFIED_MEMORY_USAGE.md)为准。交互收敛开发基于 PR #120 已发布的

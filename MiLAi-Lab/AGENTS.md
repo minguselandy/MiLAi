@@ -1,4 +1,59 @@
-# Current handoff: global function-first integration, 2026-10-10 Asia/Shanghai
+# Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
+
+User explicitly resumed execution of
+docs/MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md with subagents.
+One integrator plus three developers: Root owns common contracts/config/resource scheduling/results;
+A RawRAG/Hindsight, B pure MiLAi/direct delivery, C Host/offline outcomes/docs, separate worktrees.
+Current branch feat/lab-baseline-alignment-integration-20261010; wiring developed from d1d300a.
+MaintenanceK10/resource-close fixes continue integration; no final candidate freeze yet.
+Read docs/MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md and
+configs/milai-baseline-alignment-local-v1.json for actual new settings.
+RawRAG-local, Hindsight-native-local-recall and MiLAi-memory-only entries are wired.
+Source-only online first8 of each4 development users: per-arm32sessions/73QA/72update opportunities,
+219 main QA opportunities across3backends; isolated backend/user banks, no old bank suffixes.
+ObservedSession only; no persona/gold/update labels/future history or test-answer write-back.
+Maintenance poolK10 keeps the original setting, separate from count-based QA20 and
+evaluator-only updateK10 in isolated views or N/A. Earlier offline preparation used maintenanceK20,
+models0; prepare a new root after restoringK10, do not reuse a changed-configuration preparation.
+Hindsight uses actual token budgets, never relabelledK20. Reader thinkingTrue/output32768,
+context65536/margin512/full input32256; first comparison direct/no second Selector.
+MiLAi reuses Source/MemoryService/recipe with actual semantic state and existing supports;
+no ordinary Host business classifier or additional raw-search fallback in its main arm.
+RawRAG/Hindsight unsupported session output/reference evaluation remain N/A; no synthetic exports.
+Official Hindsight retain/recall retains complete actual returns and native quiescence handling;
+service NOT_STARTED, no real native completion/QA proven. Unobserved internal usage is not zero.
+Native internal model requests are not yet connected to the original continuous ledger;
+complete that necessary integration before real scheduling, no native resource/accounting pass claim.
+New adaptation/preparation actual Qwen/BGE/Judge calls0; E0/E1 NOT_RUN.
+Existing2exposed Host stories repeated3times=6storyruns/42messages,3correlated flow checks;
+prepared only, no new real semantic acceptance. CLI delegates original Host/step/control boundaries,
+no resume/unknown retry or permission changes. Model/public delivery/effects remain separate.
+Old501 two-story14message readonly summary is historical, not new interaction acceptance.
+Final affected group139PASS=9root+4backend+35wiring+91evaluator; previous133/rechecks overlap,
+never add overlapping runs as samples. 8sources strict types/fullLabRuffPASS;
+matrix267sources/6packages/80optional and active-packageDAGPASS.
+Tools boundary found3unresolved dynamic Hosthelper imports; static original evaluator import repair
+and boundary recheck pending, no relaxed boundary rules or all-gates-pass claim.
+Mechanical checks and COMPLETED never prove semantics or method advantage.
+New branch not pushed/no new PR. Old5540ac8 own Fast38028952446 SUCCESS/Full38028952475 SKIPPED
+applies only to that old head, not new commits.
+Fixed2026-10-10T07:53:54.506308Z observation: PID1854770/HTTPleaseOWNED/source5019968;
+B0 98complete sessions/242QA checkpoints=240answers+2known missing;
+maintenance97completed+2incomplete/205unique confirmed commits/3current_boundary_source_required rejects.
+780gen/9628792known=charged/104963embedding tokens, observedinflight0/newunknown0;
+other4NOT_STARTED/Judge0. Prefix observation is not phase closure or method ranking.
+Preserve original501run/source/config/results/costs; no hot edits, restart or new prefix splicing.
+When resources are free and Root explicitly schedules, prioritize new E0/E1; completion of every
+old research stage is not a permanent prerequisite. Host function work remains authorized.
+Root alone serializes real Qwen/BGE/Judge on original continuous ledger; no resets/unknown retries.
+Drained native failure remains FAILED/resources_settled=true; timeout/status uncertainty stays
+RESOURCE_UNSETTLED and stops further resource dispatch, never promoted to success.
+Keep one logical MiLAi MemoryService/five directions; external isolated stores are comparison arms.
+Stop related work on unknown effect/Store/corruption/owner leak, preserve first failure and effects.
+Full E0-E4/confirmation/external/Host scope remains incomplete; Product NO_GO/no advantage claim.
+Private Sources/QA/gold/HTTP/traces/banks remain ignored. No Product/Archive implementation edits.
+
+# Historical handoff: global function-first integration, 2026-10-10 Asia/Shanghai
 
 Latest user steering keeps one MemoryService and prioritizes request-local actual targets,
 read_goal evidence needs/fresh original app queries, and affected semantics in the existing Editor.
