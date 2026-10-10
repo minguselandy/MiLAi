@@ -3,7 +3,10 @@
 from __future__ import annotations
 
 import copy
+import os
+import socket
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import pytest
@@ -267,6 +270,80 @@ def test_native_close_attempts_all_banks_and_releases_only_settled_resources(
         receipt = read_json(tmp_path / "resource-unsettled.json")
         assert receipt["original_lease_released"] is False
         assert [row["owner"] for row in receipt["backend_errors"]] == ["one"]
+
+
+@pytest.mark.parametrize("operation", ["ingest", "retrieve"])
+def test_native_usage_failure_stops_before_common_reader(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, operation: str,
+) -> None:
+    from milai_lab.datasets.edit_benchmarks import ObservedSession
+    from milai_lab.integrations.memory.hindsight import HindsightIngestionIncomplete
+
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(configuration(), BACKENDS[1])
+    execution.root = tmp_path
+    execution._native_bridge = SimpleNamespace(failure={
+        "reason": "native_usage_unconfirmed", "resources_settled": True,
+    })
+    backend = ActualReturnBackend()
+    monkeypatch.setattr(execution, "_backend", lambda _: backend)
+    reader_calls = []
+    monkeypatch.setattr(execution, "answer_material", lambda *_: reader_calls.append(True))
+    with pytest.raises(HindsightIngestionIncomplete, match="native_usage_unconfirmed"):
+        if operation == "ingest":
+            execution.maintain(None, ObservedSession("s1", "2025-01-01", []), "first")
+        else:
+            execution.answer(None, "question", "2025-01-01", "first")
+    assert not reader_calls
+    receipt = "ingestion.json" if operation == "ingest" else "retrieval.json"
+    assert (tmp_path / "native/first" / receipt).exists()
+
+
+def test_detached_native_database_process_prevents_resource_release(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.integrations.memory.hindsight import HindsightIngestionIncomplete
+
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.root = tmp_path
+    execution.backends = {}
+    execution._native_uid = 12345
+    execution._native_process = SimpleNamespace(
+        poll=lambda: 0, wait=lambda **_: 0, returncode=0,
+    )
+    released = []
+    monkeypatch.setattr(execution, "_uid_processes", lambda _: [98765])
+    monkeypatch.setattr(edit_benchmarks.BenchmarkRun, "close", lambda _: released.append(True))
+    with pytest.raises(HindsightIngestionIncomplete, match="database_processes_still_running"):
+        execution.close()
+    assert not released and execution._resources_settled is False
+    saved = read_json(tmp_path / "native-service/closed.json")
+    assert saved["remaining_uid_processes"] == [98765] and not saved["processes_closed"]
+    assert read_json(tmp_path / "resource-unsettled.json")["original_lease_released"] is False
+
+
+def test_cached_dispatch_does_not_skip_unclosed_native_service(tmp_path: Path) -> None:
+    config = configuration()
+    write_json(tmp_path / "alignment-prepared.json", {
+        "configuration": config, "bank_ids": {backend: {} for backend in BACKENDS},
+    })
+    write_json(tmp_path / BACKENDS[1] / "native-service/started.json", {"pid": 98765})
+    with pytest.raises(ValueError, match="Previous native service closure is unconfirmed"):
+        run_alignment_arm(config, tmp_path, BACKENDS[0], "predict")
+    assert not (tmp_path / BACKENDS[0] / "actual-config.json").exists()
+
+
+def test_native_readiness_checks_actual_listener_owner() -> None:
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution._native_process = SimpleNamespace(pid=os.getpid())
+    execution._native_uid = os.getuid()
+    with socket.socket() as listener:
+        listener.bind(("127.0.0.1", 0))
+        listener.listen()
+        port = listener.getsockname()[1]
+        assert execution._native_listener_is_owned(port)
+        execution._native_uid += 1
+        assert not execution._native_listener_is_owned(port)
 
 
 def test_reference_query_effects_and_later_state_stay_outside_session_view(

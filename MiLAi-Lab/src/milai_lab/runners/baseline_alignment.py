@@ -7,20 +7,95 @@ The backend sees ObservedSession only; gold remains in the inherited evaluator.
 from __future__ import annotations
 
 import copy
+import os
+import pwd
+import socket
 import sqlite3
+import subprocess
+import time
 import uuid
 from collections import Counter
 from pathlib import Path
 from typing import Any, cast
 
+import httpx
+
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.contracts.memory_backend import MemoryBackend, MemorySession
 from milai_lab.datasets.edit_benchmarks import ObservedSession, halumem_time, halumem_users
 from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.integrations.memory.hindsight import (
+    HindsightIngestionIncomplete,
+    HindsightModelBridge,
+)
 from milai_lab.memory.service import MemoryService
 from milai_lab.runners.edit_benchmarks import BenchmarkRun, reader_messages
 
 BACKENDS = ("RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only")
+
+# The official env factory omits OpenAIEmbeddings.max_retries in 0.10.3.
+# Its public constructor supplies that option without altering native retrieval.
+NATIVE_SERVICE_SCRIPT = """
+import asyncio, os, sys
+import uvicorn
+from hindsight_api import MemoryEngine
+from hindsight_api.api import create_app
+from hindsight_api.config import HindsightConfig
+from hindsight_api.engine.embeddings import OpenAIEmbeddings
+
+async def serve():
+    config = HindsightConfig.from_env()
+    config.validate()
+    config.configure_logging()
+    embeddings = OpenAIEmbeddings(
+        api_key=os.environ['HINDSIGHT_API_EMBEDDINGS_OPENAI_API_KEY'],
+        model=config.embeddings_openai_model,
+        base_url=config.embeddings_openai_base_url,
+        dimensions=config.embeddings_openai_dimensions,
+        batch_size=config.embeddings_openai_batch_size,
+        query_prefix=config.embeddings_query_prefix,
+        passage_prefix=config.embeddings_passage_prefix,
+        max_retries=0,
+    )
+    embeddings.max_concurrent_requests = config.embeddings_max_concurrent_requests
+    memory = MemoryEngine(embeddings=embeddings, skip_llm_verification=True,
+                          run_migrations=config.run_migrations_on_startup)
+    app = create_app(memory=memory, http_api_enabled=True,
+                     mcp_api_enabled=False, initialize_memory=True)
+    server = uvicorn.Server(uvicorn.Config(
+        app, host='127.0.0.1', port=int(sys.argv[1]), workers=1,
+        loop='asyncio', ws='wsproto', timeout_keep_alive=30,
+        timeout_graceful_shutdown=5,
+    ))
+    try:
+        await server.serve()
+    except BaseException as primary:
+        try:
+            await memory.close()
+        except BaseException as cleanup:
+            primary.add_note(f'Native cleanup also failed: {cleanup}')
+        raise
+    if not server.started:
+        await memory.close()
+
+asyncio.run(serve())
+"""
+
+
+def _native_uid_processes(uid: int) -> list[int]:
+    """Include detached PostgreSQL children of the dedicated service user."""
+    active = []
+    for entry in Path("/proc").iterdir():
+        if entry.name.isdecimal():
+            try:
+                rows = (entry / "status").read_text().splitlines()
+                fields = {row.partition(":")[0]: row.partition(":")[2].strip()
+                          for row in rows if row.startswith(("Uid:", "State:"))}
+                if int(fields["Uid"].split()[0]) == uid and not fields["State"].startswith("Z"):
+                    active.append(int(entry.name))
+            except FileNotFoundError:
+                pass
+    return active
 
 
 def alignment_settings(config: dict[str, Any], backend: str) -> dict[str, Any]:
@@ -110,6 +185,162 @@ class AlignmentRun(BenchmarkRun):
         super().__init__(settings, root, phase=phase)
         self.backends: dict[str, MemoryBackend] = {}
         self._resources_settled = False
+        self._native_bridge: HindsightModelBridge | None = None
+        self._native_process: subprocess.Popen[bytes] | None = None
+        self._native_uid: int | None = None
+
+    @staticmethod
+    def _uid_processes(uid: int) -> list[int]:
+        return _native_uid_processes(uid)
+
+    def _check_native_transport(self) -> None:
+        bridge = getattr(self, "_native_bridge", None)
+        if bridge is not None and bridge.failure is not None:
+            raise HindsightIngestionIncomplete(
+                f"native_model_bridge:{bridge.failure['reason']}",
+                resources_settled=bridge.failure["resources_settled"] is True,
+            )
+
+    def _native_listener_is_owned(self, port: int) -> bool:
+        assert self._native_process is not None
+        sockets = set()
+        try:
+            for path in (Path("/proc") / str(self._native_process.pid) / "fd").iterdir():
+                try:
+                    sockets.add(path.readlink().name)
+                except FileNotFoundError:
+                    pass
+        except FileNotFoundError:
+            return False
+        for row in Path("/proc/net/tcp").read_text().splitlines()[1:]:
+            fields = row.split()
+            if (fields[1] == f"0100007F:{port:04X}" and fields[3] == "0A"
+                    and int(fields[7]) == self._native_uid
+                    and f"socket:[{fields[9]}]" in sockets):
+                return True
+        return False
+
+    def _start_native_service(self) -> None:
+        """Start the isolated public native application behind the owned ledger."""
+        if self._native_process is not None:
+            self._check_native_transport()
+            if self._native_process.poll() is not None:
+                raise HindsightIngestionIncomplete("native_service_exited")
+            return
+        native = self.settings["alignment"]["hindsight_service"]
+        url = httpx.URL(self.settings["alignment"]["hindsight"]["base_url"])
+        if (url.scheme != "http" or url.host != "127.0.0.1" or url.port is None
+                or url.path != "/"):
+            raise ValueError("Native service requires its explicit loopback API port")
+        with socket.socket() as availability:
+            availability.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            availability.bind(("127.0.0.1", url.port))
+        executable = Path(native["executable"]).resolve(strict=True)
+        if executable.name != "hindsight-api":
+            raise ValueError("Native service requires its declared official CLI executable")
+        account = pwd.getpwnam(native["unix_user"])
+        home = Path(account.pw_dir).resolve(strict=True)
+        if (account.pw_uid == 0 or home != Path(native["home"]).resolve(strict=True)
+                or home.stat().st_uid != account.pw_uid or self._uid_processes(account.pw_uid)):
+            raise ValueError("Native service needs its idle dedicated nonroot user and actual home")
+        if self.retrieval_embedding_client is None:
+            raise ValueError("Native service requires the existing metered embedding client")
+        folder = self.root / "native-service"
+        folder.mkdir(mode=0o700)
+        os.chown(folder, account.pw_uid, account.pw_gid)
+        (folder / ".env").write_text("")
+        os.chown(folder / ".env", account.pw_uid, account.pw_gid)
+        temporary = folder / "tmp"
+        temporary.mkdir(mode=0o700)
+        os.chown(temporary, account.pw_uid, account.pw_gid)
+        env = {"PATH": f"{executable.parent}:{os.defpath}", "LANG": "C.UTF-8",
+               "TMPDIR": str(temporary.resolve()), "SQLITE_TMPDIR": str(temporary.resolve())}
+        # Root declares the frozen local executable; no shell or user-source arguments.
+        installed = subprocess.run(  # noqa: S603
+            [str(executable.parent / "python"), "-c",
+             "from importlib.metadata import version; print(version('hindsight-api-slim'))"],
+            env=env, cwd=folder, user=account.pw_uid, group=account.pw_gid, extra_groups=[],
+            check=True, capture_output=True, timeout=15,
+        ).stdout.decode().strip()
+        if installed != native["version"]:
+            raise ValueError("Native service distribution differs from the declared version")
+        bridge = HindsightModelBridge(
+            folder / "model-http", generation_client=self.client,
+            embedding_client=self.retrieval_embedding_client,
+            generation_output_bound=self.settings["context_tokens"],
+        ).start()
+        self._native_bridge = bridge
+        identity = f"milai_{uuid.uuid4().hex}"
+        env.update(native["environment"])
+        env.update({
+            "HINDSIGHT_API_DATABASE_URL": f"pg0://{identity}",
+            "HINDSIGHT_API_DATABASE_SCHEMA": identity,
+            "HINDSIGHT_API_LLM_MODEL": self.settings["model"]["model"],
+            "HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL": self.settings["embedding"]["model"],
+            "HINDSIGHT_API_LLM_BASE_URL": bridge.base_url,
+            "HINDSIGHT_API_EMBEDDINGS_OPENAI_BASE_URL": bridge.base_url,
+            "HINDSIGHT_API_LLM_API_KEY": bridge.api_key,
+            "HINDSIGHT_API_EMBEDDINGS_OPENAI_API_KEY": bridge.api_key,
+        })
+        write_json(folder / "configuration.json", {
+            "distribution": native["distribution"], "version": installed,
+            "executable": str(executable),
+            "entrypoint": "official MemoryEngine/create_app; explicit native embedding retries=0",
+            "unix_user": account.pw_name, "uid": account.pw_uid, "home": str(home),
+            "environment": {key: value for key, value in env.items() if "API_KEY" not in key},
+            "dot_env": "program entrypoint uses explicit environment; no dotenv loading",
+            "phase": self.phase,
+            "models": "original clients and shared continuous ledger; no independent budget",
+        })
+        (folder / "service.py").write_text(NATIVE_SERVICE_SCRIPT)
+        os.chown(folder / "service.py", account.pw_uid, account.pw_gid)
+        with (folder / "service.log").open("ab") as log:
+            self._native_process = subprocess.Popen(  # noqa: S603
+                [str(executable.parent / "python"), str((folder / "service.py").resolve()),
+                 str(url.port)],
+                cwd=folder, env=env, user=account.pw_uid, group=account.pw_gid,
+                extra_groups=[], start_new_session=True, stdout=log, stderr=subprocess.STDOUT,
+            )
+        self._native_uid = account.pw_uid
+        write_json(folder / "started.json", {"pid": self._native_process.pid,
+                                               "uid": account.pw_uid, "instance": identity})
+        deadline = time.monotonic() + native["startup_timeout"]
+        with httpx.Client(timeout=2, trust_env=False) as probe:
+            while time.monotonic() < deadline:
+                self._check_native_transport()
+                if self._native_process.poll() is not None:
+                    raise HindsightIngestionIncomplete("native_service_startup_failed")
+                try:
+                    response = probe.get(str(url.join("/health")))
+                    if (response.is_success and response.json().get("status") == "healthy"
+                            and self._native_listener_is_owned(url.port)):
+                        write_json(folder / "ready.json", response.json())
+                        return
+                except (httpx.TransportError, ValueError):
+                    pass
+                time.sleep(0.25)
+        raise HindsightIngestionIncomplete("native_service_startup_timeout")
+
+    def _close_native_service(self) -> None:
+        process = getattr(self, "_native_process", None)
+        if process is not None:
+            if process.poll() is None:
+                process.terminate()
+            try:
+                process.wait(timeout=90)
+            except subprocess.TimeoutExpired as error:
+                raise HindsightIngestionIncomplete("native_service_close_timeout") from error
+            assert self._native_uid is not None
+            remaining = self._uid_processes(self._native_uid)
+            write_json(self.root / "native-service/closed.json", {
+                "returncode": process.returncode, "remaining_uid_processes": remaining,
+                "processes_closed": not remaining,
+            })
+            if remaining:
+                raise HindsightIngestionIncomplete("native_database_processes_still_running")
+        bridge = getattr(self, "_native_bridge", None)
+        if bridge is not None:
+            bridge.close()
 
     def _backend(self, service: MemoryService) -> MemoryBackend:
         owner = service.owner
@@ -127,6 +358,7 @@ class AlignmentRun(BenchmarkRun):
         elif backend == "Hindsight-native-local-recall":
             from milai_lab.integrations.memory.hindsight import HindsightBackend
 
+            self._start_native_service()
             value = HindsightBackend(
                 location, bank_id=self.settings["alignment_bank_ids"][owner],
                 **self.settings["alignment"]["hindsight"],
@@ -156,6 +388,7 @@ class AlignmentRun(BenchmarkRun):
         self._evaluation_key = key
         receipt = self._backend(service).ingest(observed, key=key)
         write_json(self.root / "native" / key / "ingestion.json", receipt)
+        self._check_native_transport()
         if (not receipt["completed"]
                 and self.settings["alignment_backend"] != "MiLAi-memory-only"):
             raise RuntimeError("Native ingestion not completed; current QA cannot proceed")
@@ -173,6 +406,7 @@ class AlignmentRun(BenchmarkRun):
                 question, date, key=key, limit=self.settings["alignment"]["qa_top_k"],
             )
             write_json(path, retrieval)
+        self._check_native_transport()
         # The actual return is retained intact. Common transport only renders
         # those materials; no additional extractor, selector or identity binding.
         cached_response = (self.root / "http" / key / "response.json").exists()
@@ -269,8 +503,6 @@ class AlignmentRun(BenchmarkRun):
         return common
 
     def close(self) -> None:
-        from milai_lab.integrations.memory.hindsight import HindsightIngestionIncomplete
-
         self._resources_settled = False
         failures: list[tuple[str, BaseException]] = []
         for owner, backend in self.backends.items():
@@ -278,6 +510,10 @@ class AlignmentRun(BenchmarkRun):
                 backend.close()
             except BaseException as error:
                 failures.append((owner, error))
+        try:
+            self._close_native_service()
+        except BaseException as error:
+            failures.append(("native-service", error))
         if failures:
             if all(isinstance(error, HindsightIngestionIncomplete) and error.resources_settled
                    for _, error in failures):
@@ -310,6 +546,18 @@ def run_alignment_arm(config: dict[str, Any], root: Path, backend: str, phase: s
     for selected in config["alignment"]["backends"]:
         if (root / selected / "resource-unsettled.json").exists():
             raise ValueError("Native resource closure is unconfirmed; Root must resolve it first")
+        native_root = root / selected / "native-service"
+        if (native_root / "started.json").exists():
+            closed = native_root / "closed.json"
+            if not closed.exists() or read_json(closed).get("processes_closed") is not True:
+                raise ValueError("Previous native service closure is unconfirmed; Root must inspect"
+                                 " before dispatch")
+    try:
+        native_uid = pwd.getpwnam(config["alignment"]["hindsight_service"]["unix_user"]).pw_uid
+    except KeyError:
+        native_uid = None
+    if native_uid is not None and _native_uid_processes(native_uid):
+        raise ValueError("Dedicated native service processes still exist; Root must resolve them")
     settings["alignment_bank_ids"] = prepared["bank_ids"][backend]
     output = root / backend
     terminal = output / f"terminal-{phase}.json"

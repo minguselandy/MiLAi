@@ -1,62 +1,61 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
 User explicitly resumed execution of
-docs/MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md with subagents.
-One integrator plus three developers: Root owns common contracts/config/resource scheduling/results;
-A RawRAG/Hindsight, B pure MiLAi/direct delivery, C Host/offline outcomes/docs, separate worktrees.
-Current branch feat/lab-baseline-alignment-integration-20261010; wiring developed from d1d300a.
-MaintenanceK10/resource-close fixes continue integration; no final candidate freeze yet.
-Read docs/MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md and
-configs/milai-baseline-alignment-local-v1.json for actual new settings.
-RawRAG-local, Hindsight-native-local-recall and MiLAi-memory-only entries are wired.
-Source-only online first8 of each4 development users: per-arm32sessions/73QA/72update opportunities,
-219 main QA opportunities across3backends; isolated backend/user banks, no old bank suffixes.
-ObservedSession only; no persona/gold/update labels/future history or test-answer write-back.
-Maintenance poolK10 keeps the original setting, separate from count-based QA20 and
-evaluator-only updateK10 in isolated views or N/A. Earlier offline preparation used maintenanceK20,
-models0; correctedK10 prepared in a new root with32/73/72opportunities and12isolatedbankIDs,
-network disabled/no banks or clients. Do not reuse a changed-configuration preparation.
-Hindsight uses actual token budgets, never relabelledK20. Reader thinkingTrue/output32768,
-context65536/margin512/full input32256; first comparison direct/no second Selector.
-MiLAi reuses Source/MemoryService/recipe with actual semantic state and existing supports;
-no ordinary Host business classifier or additional raw-search fallback in its main arm.
-RawRAG/Hindsight unsupported session output/reference evaluation remain N/A; no synthetic exports.
-Official Hindsight retain/recall retains complete actual returns and native quiescence handling;
-service NOT_STARTED, no real native completion/QA proven. Unobserved internal usage is not zero.
-Native internal model requests are not yet connected to the original continuous ledger;
-complete that necessary integration before real scheduling, no native resource/accounting pass claim.
-New adaptation/preparation actual Qwen/BGE/Judge calls0; E0/E1 NOT_RUN.
-Existing2exposed Host stories repeated3times=6storyruns/42messages,3correlated flow checks;
-prepared only, no new real semantic acceptance. CLI delegates original Host/step/control boundaries,
-no resume/unknown retry or permission changes. Model/public delivery/effects remain separate.
-Old501 two-story14message readonly summary is historical, not new interaction acceptance.
-Final affected group139PASS=9root+4backend+35wiring+91evaluator; previous133/rechecks overlap,
-never add overlapping runs as samples. 8sources strict types/fullLabRuffPASS;
-matrix267sources/6packages/80optional and active-packageDAGPASS.
-Tools boundary initially found3unresolved dynamic file loads; literal original evaluator module
-imports now pass boundary11files/20dependencies/6historicalprivate. Original3Hosthelper checks
-and its strict types recheckedPASS; overlapping checks are not new experiment samples.
-Mechanical checks and COMPLETED never prove semantics or method advantage.
-New branch not pushed/no new PR. Old5540ac8 own Fast38028952446 SUCCESS/Full38028952475 SKIPPED
-applies only to that old head, not new commits.
-Fixed2026-10-10T07:53:54.506308Z observation: PID1854770/HTTPleaseOWNED/source5019968;
-B0 98complete sessions/242QA checkpoints=240answers+2known missing;
-maintenance97completed+2incomplete/205unique confirmed commits/3current_boundary_source_required rejects.
-780gen/9628792known=charged/104963embedding tokens, observedinflight0/newunknown0;
-other4NOT_STARTED/Judge0. Prefix observation is not phase closure or method ranking.
-Later fixed08:13:32.501788Z: samePID/lease/source; B0 103sessions/248QA=246answers+2missing,
-maintenance102completed+2incomplete/208commits/3boundaryrejects;808gen/9993045known/10037745charged,
-109071embtokens/1inflightgen reservation, not closedunknown; other4NOT_STARTED/Judge0.
-Preserve original501run/source/config/results/costs; no hot edits, restart or new prefix splicing.
-When resources are free and Root explicitly schedules, prioritize new E0/E1; completion of every
-old research stage is not a permanent prerequisite. Host function work remains authorized.
-Root alone serializes real Qwen/BGE/Judge on original continuous ledger; no resets/unknown retries.
-Drained native failure remains FAILED/resources_settled=true; timeout/status uncertainty stays
-RESOURCE_UNSETTLED and stops further resource dispatch, never promoted to success.
-Keep one logical MiLAi MemoryService/five directions; external isolated stores are comparison arms.
-Stop related work on unknown effect/Store/corruption/owner leak, preserve first failure and effects.
-Full E0-E4/confirmation/external/Host scope remains incomplete; Product NO_GO/no advantage claim.
-Private Sources/QA/gold/HTTP/traces/banks remain ignored. No Product/Archive implementation edits.
+ docs/MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md with subagents.
+One integrator plus three developers; Root owns contracts/config/resource scheduling/results,
+A RawRAG/Hindsight, B MiLAi/direct delivery, C Host/docs, separate worktrees.
+Current branch feat/lab-baseline-alignment-integration-20261010, draft PR121 stacked on120:
+https://github.com/minguselandy/MiLAi/pull/121; open/draft/unmerged.
+Published6d0446f ownFast38037419742SUCCESS; later bridge/managed commits require their own CI,
+not that prior result. Local latest native HTTP repair a0ec3bc, managed lifecycle still integrating;
+no final candidate freeze. Read local protocol/config/native deployment docs.
+Source-only first8 of each4 development users: per-arm32sessions/73QA/72updates,219mainQA max.
+12independent backend/user bankIDs; only ObservedSession(session_id/date/role/content/timestamp).
+No persona/gold/update labels/future history or answer write-back. Keep maintenanceK10;
+separateQA20/evaluatorUpdateK10. Native H token budgets are not relabelledK20.
+Earlier K20 offline prep and correctedK10 prep are zero-model history, not frozen experiments.
+New native-service configuration needs another empty preparation root; changed config never reused.
+Reader thinkingTrue/output32768/context65536/margin512/input32256; direct/no secondSelector.
+MiLAi reuses actual Source/MemoryService/recipe/semantic state/existing supports; no ordinary
+Host business classifier/raw-search fallback. Unsupported H/R session exports/reference metricsN/A.
+Native retain/recall complete actual responses and actual quiescence checks remain native.
+Native model requests now use original clients/exact same continuous RunBudget via loopback bridge;
+no new ledger/client, parameter rewriting/retries/refunds for unknown usage.
+Native embedding serial, crash receipt reopening, closed HTTP errors and non2xx legitimate usage
+are fixed. Check bridge.failure after each native operation BEFORE ordinary Reader calls.
+Managed native application uses official public MemoryEngine/OpenAIEmbeddings/create_app/uvicorn.
+0.10.3 env factory omits embeddings max_retries; direct native max_retries=0 is required,
+not just EMBEDDINGS_MAX_RETRIES=0. Explicit env, same-loop startup failure cleanup;
+this is declared local deployment adaptation, not unchanged author CLI/crossencoder reproduction.
+Qwen/BGE/rrf,retainT0.1/consolidationT0.0,thinkingTrue/output32768/dim1024/batch16 declared separately.
+Dedicated nonroot user UID996/actual ignored /cra home and full Python3.11.13 prepared,0models;
+server installation pending, API/DB NOT_STARTED. Do not claim runtime/semantic native success.
+New pg0 instance/schema isolates oldqueues, actualAPI PID/UID readiness checked.
+Allbanks close -> native service terminate/wait -> detachedPG UID residual check -> bridge close
+-> original clients/accounting/lease. Old started without closed evidence/live dedicatedUID blocks
+new dispatch, including cached predictions; marker/resource uncertainty is not OSflock proof.
+Raw native actual development Source1 ingestion/close/reopen/retrieval preserved original roles/time
+and full body,1actual return,0models; Common Reader/JudgeNOT_RUN, E0three-way not complete.
+Two verification-script expectation errors retained, readonly corrected receipts only,no replay.
+New E1/Host actual Qwen/BGE/Judge0. Existing2exposed Hoststories repeated3=6storyruns42messages,
+3correlated flow checks; prepared only, no semantic acceptance. Existing Hoststep/evaluator reused.
+Latest affected combined207PASS=14root+17backend+35wiring+91evaluator+50budget/capacity/Owner;
+prior139/133/rechecks overlap, never add as samples.10file stricttypes,active src/tests/toolsRuff,
+matrix267sources/6canonicalpackages/80optional,activeDAG andtools11files/20deps/6grandfatheredPASS.
+A broad Ruff dot scan wrongly included archives; correct existingCI active ranges pass,no archive edits.
+Fixed08:43:37.902469Z: originalPID1854770/leaseOWNED/frozen5019968/RUNNING;
+B0 107complete sessions/268QA=266answers+2knownmissing,106completed+2incomplete maintenance,
+218unique confirmedcommits/3current_boundary_source_required rejects;
+859gen/10527628known=charged/115344embeddingtokens,observedinflight0;other4NOT_STARTED/Judge0.
+This is a prefix snapshot, not closure/method ranking. Preserve oldsource/config/results/costs;
+no hot edits/restart/newprefix splicing. Root alone serializes real Qwen/BGE/Judge on originalledger.
+When resourcesfree and explicitly scheduled, prioritize E0/E1; not all old research a prerequisite.
+Known drained failure staysFAILED/resources_settledTrue; uncertainty staysRESOURCE_UNSETTLED,
+stop related dispatch, preserve primary+cleanup failures and actual effects,no unknown retry.
+FullE0-E4/attribution/confirmation/external/realHost remain incomplete; goalACTIVE, ProductNO_GO.
+One logical MiLAi MemoryService/five directions; external native stores are only comparisonarms.
+PrivateSources/QA/gold/HTTP/traces/DBs/.env/dependencies/interpreters remain ignored.
+No Product/Archive implementation changes or formalholdout semantic reads.
 
 # Historical handoff: global function-first integration, 2026-10-10 Asia/Shanghai
 

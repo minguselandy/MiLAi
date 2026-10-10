@@ -7,12 +7,15 @@
 `feat/lab-baseline-alignment-integration-20261010`，本次接线开发以 `d1d300a` 为基线，
 维护K10和原生资源闭合修复已合流（`7517387`），尚未冻结最终候选；
 共同设置见[本地协议卡](MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md)与
-`configs/milai-baseline-alignment-local-v1.json`。新分支尚未推送或新建 PR，未进入原 `5019968` 运行。
+`configs/milai-baseline-alignment-local-v1.json`。开发分支已发布为叠加于 #120 的
+[草稿 PR #121](https://github.com/minguselandy/MiLAi/pull/121)，未合并，未进入原 `5019968` 运行。
+`6d0446f` 自身 [Fast 38037419742](https://github.com/minguselandy/MiLAi/actions/runs/38037419742)
+成功；后续桥接和托管改动的 CI 须按新 head 另行核对，不能沿用该结果。
 
 | 首轮后端 | 已接通能力 | 实际结果边界 |
 |---|---|---|
-| RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 接线和持久路径已检查；未执行 E0/E1，不称作者模型分数复现 |
-| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 原生服务尚未启动，内部模型请求接入原连续账本仍待完成；无实际原生闭环或 QA，未观测用量不填零 |
+| RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 已在1个真实开发来源会话完成实际入库、重开和原文检索；共同Reader尚未运行，E0三方闭环和E1仍待完成，不称作者模型分数复现 |
+| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 内部模型HTTP已接入原客户端／同一连续账本，托管生命周期已接线；独立用户／解释器已离线准备，服务／DB仍未启动，无实际原生闭环或 QA |
 | MiLAi-memory-only | 薄门面复用原 Source、MemoryService、维护 recipe 和 Reader；首轮直接读取实际语义状态及已有支持 | 接线已完成，实际形成、更正和 QA 尚未在新配置运行；不经过普通 Host 业务分类，也未增加原文检索兜底 |
 
 首轮按 source-only 在线前缀准备：四个既有开发用户各前八会话，**每臂32会话、73 QA、72原生更新机会**，
@@ -26,6 +29,24 @@ persona、gold、更新标签、未来会话和测试答案不进入方法输入
 不同配置的准备不复用，不将其当成最终候选冻结或实际实验结果。
 新准备根为 ignored `artifacts/baseline-alignment/e1-local-v1-maintenance10-prepared`，
 网络连接禁用，确认每臂32／73／72机会及12个独立bank标识，未初始化银行或模型客户端。
+该准备早于托管服务配置；最终新配置须使用另一空根重新prepare，不能复用不同配置的旧准备。
+
+Hindsight模型转接保留完整原生请求和响应，通过原VLLMClient／RunBudget预留及核对实际usage，
+不另建账本，不改写原生参数。已修复native embedding覆盖原HTTP序号、崩溃遗留重开、
+完整HTTP错误与未知费用混淆、非2xx合法usage未记账四处断点；未知不退款、不重试。
+每次native ingest／retrieve后、共同Reader之前核对运输失败，已成功的原生动作也不能绕过未知费用停止条件。
+托管服务使用独立非root UID／实际home、新pg0实例／schema和实际API监听归属；
+全部bank关闭后再关闭服务，核对脱离进程组的PG残留，最后关闭bridge和原客户端／租约。
+旧started没有实际closed证据或UID残留时，缓存预测和后续arm也不能绕过。
+官方0.10.3的OpenAI embedding环境factory漏传max_retries，现通过原生公开构造参数明确设0；
+使用MemoryEngine／create_app程序入口及同一事件循环的启动失败清理，不称原CLI运行。
+本地Qwen／BGE、rrf、retain0.1／consolidation0.0、thinkingTrue／output32768等差异明确报告，
+不称作者默认重排或纯同模型算法优势。见[准确部署约定](MILAI_BASELINE_ALIGNMENT_NATIVE_DEPLOYMENT_20261010.md)。
+
+RawRAG实际检查根为ignored `e0-raw-native-a0ec3bc`：既有开发用户第一来源会话入库、关闭、
+重开、实际原文查询，返回1项；角色／日期／逐轮时间／完整正文原样保持，模型0。
+共同Reader／Judge未运行；两个校验脚本的字段／tuple-list预期错误保留，随后只读核对原回执，
+没有重新入库、检索或模型重放。这是原生持久与查询证据，不是E0三方闭环或QA正确率。
 
 新增适配、准备与离线检查的**实际 Qwen／BGE／Judge 调用均为0**；E0、E1及最新42消息 Host流程
 尚未真实运行，也没有新语义分数。Host工具复用两条已曝光故事，各3次重复，共6故事运行／42消息，
@@ -35,13 +56,14 @@ COMPLETED或脚本通过均不自动授予语义通过。
 `0cd1f37` 源码下重新调用原Host prepare：三个根均完成准备，42消息全部NOT_RUN，
 银行尚未创建；子进程socket连接禁用，实际新模型0。早先准备和检查脚本失败保留，不改成模型样本。
 
-Root最终受影响合组139项通过（9项公共入口＋4项后端＋35项wiring＋91项evaluator）；
-先前133项及Root／Native复查含重叠，不另行相加。8个源码严格类型、全Lab Ruff、
+Root最新受影响合组207项通过（14项公共入口＋17项后端＋35项wiring＋91项evaluator＋50项预算／容量／Owner）；
+先前139／133项及Root／Native复查含重叠，不另行相加。10个文件严格类型、活动src／tests／tools Ruff、
 267源码／6 packages／80 optional登记矩阵及active-package DAG通过。
 Tools边界首检发现新Host helper动态文件加载有3个unresolved；现使用可静态定位的原评价器模块导入，
 边界复查通过（11文件／20依赖／6历史私有），未放宽规则。原3个Host helper用例及严格类型复查通过，
 重复检查不另计入139或实验样本。
 上述均为工程检查，不是语义样本或真实模型验收。
+一次Ruff检查误扫data／studies归档范围，活动范围按原CI重查通过，归档未修改。
 原 `5540ac8` 的 [Fast 38028952446](https://github.com/minguselandy/MiLAi/actions/runs/38028952446)
 成功，[Full 38028952475](https://github.com/minguselandy/MiLAi/actions/runs/38028952475) skipped，
 只属于该旧 head，不能转作当前新代码的 CI 结果。
@@ -58,6 +80,12 @@ B0已有103完整会话、248题检查点＝246答案＋2缺答；维护102 comp
 208笔唯一确认提交、原边界拒绝3次；其他四臂未开始，Judge0。
 生成808请求、9993045 known／10037745 charged、embedding109071 tokens；1生成预留在途，
 不是已闭合unknown失败或阶段结算。前一观察原样保留，两者均不是方法分数。
+
+较新固定观察 **08:43:37.902469 UTC／北京时间16:43:37.902469**：同一PID／租约／冻结源码匹配，
+B0 107完整会话、268题检查点＝266答案＋2缺答；维护106 completed＋2 incomplete，
+218笔唯一确认提交、原边界拒绝3次；其他四臂未开始，Judge0。
+859生成请求、10527628 known＝charged、embedding115344 tokens；该时点无在途差额。
+原运行继续保存，仍未闭合，不能当作五方法排名。
 
 资源释放且 Root 明确调度后优先 E0／E1，普通 Host 功能线可继续；全部旧科研待办不再成为新任务的永久前置。
 真实调用仍由 Root 在原连续账本串行调度，未知结果不盲重试。新候选尚未冻结确认，E2主要断点诊断、

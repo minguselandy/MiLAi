@@ -18,6 +18,19 @@
 | 失败/评分 | 逐题保存；已知只读缺答保留全部机会，unknown 不重试；三个后端预测结束后独立评分，原官方标签不改 |
 | 费用/资源 | 原连续账本、Root 串行 Qwen/BGE/Judge；外部内部用量缺失记未观测，不填零 |
 
+Hindsight本地原生配置：官方0.10.3，Qwen/BGE通过原VLLMClient与同一RunBudget转接；
+retain temperature0.1、consolidation0.0、两阶段输出32768、thinkingTrue、embedding1024／batch16、
+原生rrf重排。这些本地配置差异另列，不能称作者默认crossencoder或同模型纯算法比较。
+实际部署使用公开MemoryEngine/OpenAIEmbeddings/create_app，明确embedding SDK max_retries=0；
+该版本环境factory遗漏这个参数，不能仅凭EMBEDDINGS_MAX_RETRIES=0宣称生效。
+见[准确部署约定](MILAI_BASELINE_ALIGNMENT_NATIVE_DEPLOYMENT_20261010.md)。Root持有原租约后才
+启动专属非root用户的新pg0实例，核对实际API监听PID／UID及关闭后残留进程；没有新预算或记忆模块。
+本地用户／解释器已离线准备，服务和DB尚未启动，E0共同Reader与E1仍未运行。
+
+RawRAG在既有开发用户的第一真实会话完成实际入库、关闭、重开和原文查询：1来源会话、
+1实际返回，角色／日期／逐轮时间和完整正文保持。仅原生持久／查询路径确认、0模型；
+共同Reader／Judge未运行，不记为三后端E0闭环完成或QA语义通过。
+
 薄接口只需 ingest/retrieve/close。所有后端复用既有 ObservedSession 或结构等价的字段接口；retrieve 返回 materials（供 Reader 的原样文本/时间/实际 ID）、native_return（完整实际后端返回）、returned_count、source_mapping、usage。材料不经过额外抽取、摘要或 Selector；可选 session_output 仅来自实际会话原生输出。公共类型由 Root 管理。
 
 调度：07:05:31 UTC 实际确认原五方法 PID1854770 运行、HTTP 租约占用，B0 89/277会话/219 QA检查点（217答案+2缺答），其余未开始。开发/离线检查可以并行；不启动新的真实模型调用、不热改旧运行。资源释放后新任务优先 E0/E1，无须将全部旧科研待办作为永久前置。

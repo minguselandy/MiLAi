@@ -7,14 +7,22 @@
 
 ## 官方入口与配置来源
 
-原生前台入口为安装环境的 `bin/hindsight-api`，公开 entry point 为
+官方 CLI 的前台入口为安装环境的 `bin/hindsight-api`，公开 entry point 为
 `hindsight_api.main:main`。独立服务以 `--host 127.0.0.1 --port <独立端口> --workers 1`
 启动。配置定义在该版本安装包的 `hindsight_api/config.py`，初始化和退出路径分别在
 `engine/memory_engine.py`、`main.py` 与 `pg0.py`。安装依赖使用官方
 `hindsight-api-slim[embedded-db]==0.10.3`； SDK、pg0 和其实际依赖版本须保存到运行环境清单。
 一般配置说明见[官方部署资料](https://hindsight.vectorize.io/developer/deployment/configuration)。
 
-该版本 CLI 调用 `load_dotenv(find_dotenv(usecwd=True), override=True)`。
+当前本地集成改用官方公开程序入口：`MemoryEngine(embeddings=OpenAIEmbeddings(...,
+max_retries=0))` → `create_app` → `uvicorn.Server`。该版本环境 factory 的 OpenAI 分支
+没有传递 `embeddings_max_retries`，原生 SDK 默认重试3次，因此仅设置下方环境变量为0
+不能证明实际关闭重试。公开构造参数将其明确设为0，保留原生提取、批处理、召回和重排。
+这是声明的本地部署适配，不称原 CLI 的原样运行。程序入口使用显式环境、不加载 dotenv；
+在同一事件循环保留启动失败的 `memory.close()` 清理，并由 Root 核对真实 UID 残留进程。
+当前专属用户和完整解释器已离线准备，API／DB尚未启动，不能据此宣称原生闭环完成。
+
+该版本官方 CLI 调用 `load_dotenv(find_dotenv(usecwd=True), override=True)`。
 从当前目录向上发现的 `.env` 会覆盖已导出的环境变量。因此运行目录及祖先中的 `.env`
 必须受本次冻结配置控制。真实 URL、短期 bridge key、环境文件和进程产物只放 ignored 目录。
 清理继承的旧 Hindsight / provider 配置，并保存实际有效配置；不能仅根据父进程导出的值
@@ -98,11 +106,15 @@ HINDSIGHT_API_ENABLE_OBSERVATIONS=true
 HINDSIGHT_API_ENABLE_AUTO_CONSOLIDATION=true
 ```
 
+`HINDSIGHT_API_EMBEDDINGS_MAX_RETRIES=0` 是声明值；本地实际 SDK 禁用重试的依据是
+上述原生 `OpenAIEmbeddings(max_retries=0)` 构造参数，不能仅引用这个环境变量。
+
 原生 retain 的默认实际 temperature 是 `0.1`，consolidation 为 `0.0`；不能用全局
 `HINDSIGHT_API_LLM_TEMPERATURE=0` 覆盖后还宣称保留作者原设置。
 thinking / schema / tools 等依原生设置与显式冻结的 `HINDSIGHT_API_LLM_EXTRA_BODY` 传递，
 bridge 不重写。留存输出上限 32768 是本地资源配置；省略 output limit 的原生请求只使用
 已验证的部署有限上界做账本预留，不把预留值写回实际 HTTP。
+本地配置明确传递 `chat_template_kwargs.enable_thinking=true`，不同阶段参数仍分别报告。
 
 显式 dimensions=1024 避免未知模型的初始化 test embedding；skip verification 禁用 LLM
 启动探针；rrf 不初始化神经重排模型。单 worker slot 必须将 consolidation reserved slots
