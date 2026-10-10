@@ -1,5 +1,18 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+Latest additional fixed observation13:01:28.121684UTC on the same frozen d503 full E1:
+H10complete sessions/26QA checkpoints=15answers+11missing; firstuser8complete sessions/20QA=
+9answers+11missing, seconduser2complete sessions/6answers, otherusersNOT_STARTED. MiLAiNOT_STARTED,
+RootRUNNING, Judge0. All11missing are known before_http/request_sentFalse capacity failures,
+79724-114828input tokens>32256; preserve original materials/null denominators and continue frozenhistory.
+Do not mistake arm checkpoints from an unfinished nextuser for the firstuser's denominator.
+Actual firstmissing input79758 reconstructed readonly; results89/sourcefacts66/chunks16/extras1.
+Native budgets count text, not full JSON IDs/scores/metadata. Native->material->Reader field/ordering
+preservation confirmed on one successful response. Explicit offline H metadata mapping with existing
+share primitive gives49326tokens and exact expansion equality, stilloverlimit; current projection
+remains79758, no source/config hotpatch or actualmodels in this diagnosis. Not a solved capacity claim.
+Documenthead76dd2890 ownFast38052504548SUCCESS/Full38052504534SKIPPED; laterhead needsownCI.
+
 Latest fixed observation2026-10-10T12:31:19.727600UTC: new full E1 is RUNNING on frozen
 d50351a876c98260b8e60a4f4481a98b8bab0ef3, parent617762/worker617767; root
 artifacts/baseline-alignment/e1-local-v1-known-no-text-v3-prepared, runtime sibling.
