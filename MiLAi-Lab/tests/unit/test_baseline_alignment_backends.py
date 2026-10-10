@@ -6,21 +6,26 @@ import json
 import sqlite3
 import threading
 from collections.abc import Callable
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
 from unittest.mock import Mock
 
+import httpx
 import pytest
 
 from milai_lab.baselines.rawrag_local import RawRAGLocal
+from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits, http_budget_scope
 from milai_lab.integrations.memory.hindsight import (
     HindsightBackend,
     HindsightIngestionIncomplete,
+    HindsightModelBridge,
     UnconfirmedHindsightOperation,
     project_recall,
 )
+from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 
 
 @dataclass(frozen=True)
@@ -260,3 +265,167 @@ def test_hindsight_unconfirmed_operation_is_not_retried_after_reopen(tmp_path: P
             backend.retrieve("drink?", first.date, key="new-qa", limit=20)
         backend.close()
     assert calls == 1
+
+
+def bridge_settings(tmp_path: Path) -> tuple[dict[str, Any], VLLMConfig, VLLMConfig]:
+    generation = VLLMConfig("http://127.0.0.1:9/v1/", "synthetic-qwen", max_tokens=4)
+    embedding = VLLMConfig("http://127.0.0.1:10/v1/", "synthetic-bge")
+    ledger = tmp_path / "synthetic-original-budget.json"
+    seed = RunBudget(RunLimits(generation_requests=10), ledger)
+    write_json(ledger, seed.state)
+    return ({"budget_path": str(ledger),
+             "http_ownership_profile": "serialized_ledger_owner_v1",
+             "http_ownership_domain": {
+                 "deployment_id": "synthetic-native-test",
+                 "clients": [asdict(generation), asdict(embedding)],
+             }}, generation, embedding)
+
+
+def test_native_model_bridge_preserves_wire_and_uses_exact_original_owner(tmp_path: Path) -> None:
+    settings, generation_config, embedding_config = bridge_settings(tmp_path)
+    wires: list[dict[str, Any]] = []
+    entered, release = threading.Event(), threading.Event()
+    responses: list[httpx.Response] = []
+
+    def upstream(request: httpx.Request) -> httpx.Response:
+        body = json.loads(request.content)
+        wires.append(body)
+        if len(wires) == 1:
+            entered.set()
+            assert release.wait(3)
+        response = httpx.Response(200, json={
+            "opaque_native": {"untouched": ["b", "a"]},
+            "data": [{"index": 1, "embedding": "native-base64"},
+                     {"index": 0, "embedding": "second-native-base64"}],
+            "choices": [{"index": 0, "message": {"role": "assistant", "content": "actual"}}],
+            "usage": {"prompt_tokens": 2, "completion_tokens": 3, "total_tokens": 5}
+            if request.url.path.endswith("chat/completions")
+            else {"prompt_tokens": 2, "total_tokens": 2},
+        })
+        responses.append(response)
+        return response
+
+    original = {"model": generation_config.model,
+                "messages": [{"role": "user", "content": "original native question"}],
+                "max_completion_tokens": 8, "temperature": 0.75,
+                "chat_template_kwargs": {"enable_thinking": True},
+                "tools": [{"type": "function", "function": {"name": "native",
+                           "parameters": {"type": "array", "uniqueItems": True}}}],
+                "response_format": {"type": "json_object"}, "seed": 29, "n": 2}
+    embedded = {"model": embedding_config.model, "input": ["literal", "other"],
+                "dimensions": 1024, "encoding_format": "base64"}
+    with http_budget_scope(settings) as budget:
+        assert budget is not None and budget.http_owner is not None
+        generation = VLLMClient(generation_config, budget=budget,
+                                transport=httpx.MockTransport(upstream))
+        embedding = VLLMClient(embedding_config, budget=budget,
+                               transport=httpx.MockTransport(upstream))
+        bridge = HindsightModelBridge(
+            tmp_path / "http", generation_client=generation,
+            embedding_client=embedding, generation_output_bound=32,
+        ).start()
+        returned: list[httpx.Response] = []
+        errors: list[BaseException] = []
+
+        def call(route: str, body: dict[str, Any]) -> None:
+            try:
+                returned.append(httpx.post(
+                    bridge.base_url + route, json=body,
+                    headers={"Authorization": f"Bearer {bridge.api_key}"}, timeout=5,
+                ))
+            except BaseException as error:
+                errors.append(error)
+
+        first = threading.Thread(target=call, args=("/chat/completions", original))
+        second = threading.Thread(target=call, args=("/embeddings", embedded))
+        try:
+            first.start()
+            assert entered.wait(3)
+            second.start()
+            assert len(wires) == 1  # Both routes share the original serialized owner.
+            release.set()
+            for thread in (first, second):
+                thread.join(timeout=5)
+                assert not thread.is_alive()
+            assert not errors and len(returned) == 2
+            assert wires == [original, embedded]
+            assert sorted(row.content for row in returned) == sorted(
+                row.content for row in responses
+            )
+            omitted = {"model": generation_config.model,
+                       "messages": [{"role": "user", "content": "native omitted limit"}]}
+            call("/chat/completions", omitted)
+            assert wires[-1] == omitted and "max_tokens" not in wires[-1]
+            first_trace = read_json(tmp_path / "http/000001/transport.json")
+            assert first_trace["request"] == original
+            assert json.loads(first_trace["request_body"]) == original
+            assert first_trace["accounting_request"]["max_tokens"] == 16
+            assert first_trace["receipt"] == responses[0].json()
+            omitted_trace = read_json(tmp_path / "http/000003/transport.json")
+            assert omitted_trace["accounting_request"]["max_tokens"] == 32
+            assert omitted_trace["usage_confirmed"] is True
+            assert budget.state["generation_requests"] == 2
+            assert budget.state["generation"]["known_tokens"] == 10
+            assert budget.state["embedding"]["known_tokens"] == 2
+            assert budget.state["generation"]["unknown_usage"] == 0
+            assert bridge.failure is None
+            assert httpx.post(bridge.base_url + "/rerank", json=original).status_code == 404
+            assert httpx.post(bridge.base_url + "/embeddings", json=embedded).status_code == 401
+            assert len(wires) == 3
+        finally:
+            release.set()
+            bridge.close()
+            generation.close()
+            embedding.close()
+
+
+@pytest.mark.parametrize("failure", ["missing_usage", "http_unknown"])
+def test_native_model_bridge_stops_new_requests_and_retains_reservation(
+    tmp_path: Path, failure: str,
+) -> None:
+    settings, generation_config, embedding_config = bridge_settings(tmp_path)
+    calls = 0
+
+    def upstream(request: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        if failure == "http_unknown":
+            raise httpx.ReadTimeout("a model may have received the request", request=request)
+        return httpx.Response(200, json={"choices": [], "opaque_native": {"usage_absent": True}})
+
+    with http_budget_scope(settings) as budget:
+        assert budget is not None
+        generation = VLLMClient(generation_config, budget=budget,
+                                transport=httpx.MockTransport(upstream))
+        embedding = VLLMClient(embedding_config, budget=budget,
+                               transport=httpx.MockTransport(upstream))
+        bridge = HindsightModelBridge(tmp_path / "http", generation_client=generation,
+                                      embedding_client=embedding).start()
+        url = bridge.base_url
+        headers = {"Authorization": f"Bearer {bridge.api_key}"}
+        request = {"model": generation_config.model, "messages": [], "max_tokens": 8}
+        try:
+            first = httpx.post(url + "/chat/completions", json=request, headers=headers)
+            assert first.status_code == (200 if failure == "missing_usage" else 502)
+            assert bridge.failure is not None
+            assert httpx.post(url + "/embeddings", headers=headers, json={
+                "model": embedding_config.model, "input": ["must not be sent"],
+            }).status_code == 503
+            assert calls == 1 and budget.state["generation_requests"] == 1
+            assert budget.state["generation"]["unknown_usage"] == 1
+            assert budget.state["generation"]["known_tokens"] == 0
+            assert budget.state["generation"]["charged_tokens"] > 8
+            assert budget.state["embedding"]["charged_tokens"] == 0
+            trace = read_json(tmp_path / "http/000001/transport.json")
+            assert trace["request"] == request
+            if failure == "missing_usage":
+                assert trace["receipt"] == first.json() and "usage" not in first.json()
+                assert trace["usage_confirmed"] is False
+            else:
+                assert trace["exception"]["type"] == "ReadTimeout"
+        finally:
+            with pytest.raises(HindsightIngestionIncomplete) as closed:
+                bridge.close()
+            assert closed.value.resources_settled is (failure == "missing_usage")
+            generation.close()
+            embedding.close()

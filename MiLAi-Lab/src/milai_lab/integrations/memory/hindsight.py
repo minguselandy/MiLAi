@@ -14,17 +14,25 @@ presentation so saved responses can be projected again without another call.
 from __future__ import annotations
 
 import asyncio
+import base64
 import json
+import secrets
 import sqlite3
 import time
 from collections.abc import Callable
 from datetime import datetime
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from importlib import import_module
 from importlib.metadata import version
 from pathlib import Path
+from socket import socket
+from threading import Lock, Thread
 from typing import Any, Protocol, cast
+from urllib.parse import urlsplit
 
 from milai_lab.contracts.memory_backend import IngestionResult, MemorySession, RetrievalResult
+from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.providers.contextual_vllm import VLLMClient
 
 SDK_VERSION = "0.10.3"
 
@@ -46,6 +54,181 @@ class HindsightIngestionIncomplete(RuntimeError):
     def __init__(self, message: str, *, resources_settled: bool = False) -> None:
         super().__init__(message)
         self.resources_settled = resources_settled
+
+
+class HindsightModelBridge:
+    """Two loopback model routes using Root's exact clients and original ledger.
+
+    Root starts the native service separately, with its LLM/embedding base URLs
+    set to base_url and keys set to api_key. This bridge never creates a model
+    client or budget, adds retries, changes model parameters, or serves rerank.
+    Root must declare native rrf for the first local adaptation. Artifacts contain
+    complete actual model HTTP, including requests that consume no new budget.
+    """
+
+    def __init__(
+        self, root: str | Path, *, generation_client: VLLMClient,
+        embedding_client: VLLMClient, generation_output_bound: int | None = None,
+    ) -> None:
+        if (generation_client.budget is None
+                or generation_client.budget is not embedding_client.budget):
+            raise ValueError("HINDSIGHT_BRIDGE_EXACT_SHARED_BUDGET_REQUIRED")
+        for client in (generation_client, embedding_client):
+            url = urlsplit(client.config.base_url)
+            if (url.scheme != "http" or url.hostname != "127.0.0.1"
+                    or url.username is not None or url.password is not None
+                    or url.query or url.fragment or url.path.rstrip("/") != "/v1"):
+                raise ValueError("HINDSIGHT_BRIDGE_FIXED_LOOPBACK_CLIENT_REQUIRED")
+        owner = generation_client.budget.http_owner
+        if owner is not None:
+            owner.assert_budget(generation_client.budget)
+        if generation_output_bound is not None and (
+            type(generation_output_bound) is not int or generation_output_bound <= 0
+        ):
+            raise ValueError("HINDSIGHT_BRIDGE_OUTPUT_BOUND_INVALID")
+        self.root = Path(root)
+        self.root.mkdir(parents=True, exist_ok=True)
+        self.clients = {"/v1/chat/completions": generation_client,
+                        "/v1/embeddings": embedding_client}
+        self.generation_output_bound = generation_output_bound
+        self.api_key = secrets.token_urlsafe(32)
+        self._lock = Lock()
+        self._server: ThreadingHTTPServer | None = None
+        self._worker: Thread | None = None
+        self._closed = False
+        self._serial = max((int(path.name) for path in self.root.iterdir()
+                            if path.is_dir() and path.name.isdecimal()), default=0)
+        blocked = self.root / "transport-blocked.json"
+        self.failure: dict[str, Any] | None = read_json(blocked) if blocked.exists() else None
+
+    @property
+    def base_url(self) -> str:
+        if self._server is None or self._closed:
+            raise ValueError("HINDSIGHT_BRIDGE_NOT_RUNNING")
+        return f"http://127.0.0.1:{self._server.server_port}/v1"
+
+    def start(self) -> HindsightModelBridge:
+        bridge = self
+
+        class Server(ThreadingHTTPServer):
+            def get_request(self) -> tuple[socket, Any]:
+                connection, address = super().get_request()
+                connection.settimeout(10.0)
+                return connection, address
+
+        class Handler(BaseHTTPRequestHandler):
+            def log_message(self, format: str, *args: Any) -> None:
+                pass
+
+            def do_POST(self) -> None:
+                if self.path not in bridge.clients:
+                    self.reply(404, b'{"error":"unsupported model route"}')
+                    return
+                if self.headers.get("Authorization") != f"Bearer {bridge.api_key}":
+                    self.reply(401, b'{"error":"bridge authorization required"}')
+                    return
+                try:
+                    length = int(self.headers.get("Content-Length", "0"))
+                    if length <= 0 or self.headers.get("Transfer-Encoding") is not None:
+                        raise ValueError("HINDSIGHT_BRIDGE_BODY_INVALID")
+                    self.connection.settimeout(10.0)
+                    body = self.rfile.read(length)
+                    if len(body) != length:
+                        raise ValueError("HINDSIGHT_BRIDGE_BODY_INCOMPLETE")
+                    status, response = bridge._forward(self.path, body, list(self.headers.items()))
+                    self.reply(status, response)
+                except (ValueError, KeyError):
+                    self.reply(400, b'{"error":"invalid native model request"}')
+                except (OSError, TimeoutError):
+                    # No upstream retry. A completed model response remains in
+                    # the artifacts even if the native caller disconnected.
+                    return
+
+            def reply(self, status: int, body: bytes) -> None:
+                self.send_response(status)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+        with self._lock:
+            if self._closed or self._server is not None or self.failure is not None:
+                raise ValueError("HINDSIGHT_BRIDGE_ALREADY_CLOSED_OR_BLOCKED")
+            self._server = Server(("127.0.0.1", 0), Handler)
+            self._worker = Thread(target=self._server.serve_forever,
+                                  kwargs={"poll_interval": 0.05}, daemon=True)
+            self._worker.start()
+        return self
+
+    def _forward(
+        self, path: str, body: bytes, headers: list[tuple[str, str]],
+    ) -> tuple[int, bytes]:
+        with self._lock:
+            self._serial += 1
+            folder = self.root / f"{self._serial:06d}"
+            folder.mkdir()
+            write_json(folder / "native-request.json", {
+                "path": path, "headers": headers, "body": body.decode("utf-8"),
+            })
+            if self._closed or self.failure is not None:
+                write_json(folder / "rejected.json", {"request_sent": False,
+                                                       "reason": "bridge already stopped"})
+                return 503, b'{"error":"native model bridge stopped"}'
+            event: dict[str, Any] = {}
+            invoked = False
+
+            def observed(value: dict[str, Any]) -> None:
+                event.update(value)
+                write_json(folder / "transport.json", value)
+                if "receipt" in value:
+                    write_json(folder / "native-response.json", value["receipt"])
+
+            try:
+                request = json.loads(body)
+                if not isinstance(request, dict):
+                    raise ValueError("HINDSIGHT_BRIDGE_JSON_OBJECT_REQUIRED")
+                invoked = True
+                self.clients[path].native_post(
+                    path.removeprefix("/v1/"), request,
+                    generation_output_bound=self.generation_output_bound, on_event=observed,
+                )
+                if event.get("usage_confirmed") is not True:
+                    self._block(folder, "native_usage_unconfirmed", resources_settled=True)
+            except Exception as error:
+                write_json(folder / "failure.json", {"type": type(error).__name__,
+                                                       "message": str(error)})
+                self._block(folder, type(error).__name__,
+                            resources_settled=not invoked or event.get("request_sent") is False)
+            if "response_body_base64" in event:
+                return event["http_status"], base64.b64decode(event["response_body_base64"])
+            return 502, b'{"error":"native model request unconfirmed or refused"}'
+
+    def _block(self, folder: Path, reason: str, *, resources_settled: bool) -> None:
+        self.failure = {"reason": reason, "attempt": folder.name,
+                        "resources_settled": resources_settled,
+                        "no_automatic_retry": True}
+        write_json(self.root / "transport-blocked.json", self.failure)
+
+    def close(self) -> None:
+        with self._lock:
+            self._closed = True
+        try:
+            if self._server is not None:
+                self._server.shutdown()
+                self._server.server_close()
+            if self._worker is not None:
+                self._worker.join(timeout=5)
+                if self._worker.is_alive():
+                    raise HindsightIngestionIncomplete("native_model_bridge_close_unconfirmed")
+        except BaseException as error:
+            if isinstance(error, HindsightIngestionIncomplete):
+                error.resources_settled = False
+            raise
+        if self.failure is not None:
+            raise HindsightIngestionIncomplete(
+                f"native_model_bridge:{self.failure['reason']}",
+                resources_settled=self.failure["resources_settled"] is True,
+            )
 
 
 class _OfficialClient:
