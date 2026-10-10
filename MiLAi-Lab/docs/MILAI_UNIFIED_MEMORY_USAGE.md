@@ -5,7 +5,7 @@
 用户已继续执行[基线对齐、薄适配与方法有效性规划](MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md)，
 并明确使用一名集成者和三名开发者。当前集成分支为
 `feat/lab-baseline-alignment-integration-20261010`，本次接线开发以 `d1d300a` 为基线，
-维护K10和原生资源闭合修复继续合流，尚未冻结最终候选；
+维护K10和原生资源闭合修复已合流（`7517387`），尚未冻结最终候选；
 共同设置见[本地协议卡](MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md)与
 `configs/milai-baseline-alignment-local-v1.json`。新分支尚未推送或新建 PR，未进入原 `5019968` 运行。
 
@@ -22,19 +22,25 @@ persona、gold、更新标签、未来会话和测试答案不进入方法输入
 共同 Reader 为既有 Qwen，thinking=True、output32768、context65536、margin512，完整输入限额32256；
 首轮不调用二次 Selector。RawRAG/Hindsight 没有真实会话抽取输出或可隔离的参考查询时，对应形成／更新指标为 N/A，
 不补造输出或让参考检索改变正常方法状态。三个后端预测结束后再独立评分。
-先前离线准备采用维护候选K20，实际模型调用为0；恢复K10后将在新根重新prepare，
+先前离线准备采用维护候选K20，实际模型调用为0；恢复K10后已在新根重新prepare，
 不同配置的准备不复用，不将其当成最终候选冻结或实际实验结果。
+新准备根为 ignored `artifacts/baseline-alignment/e1-local-v1-maintenance10-prepared`，
+网络连接禁用，确认每臂32／73／72机会及12个独立bank标识，未初始化银行或模型客户端。
 
 新增适配、准备与离线检查的**实际 Qwen／BGE／Judge 调用均为0**；E0、E1及最新42消息 Host流程
 尚未真实运行，也没有新语义分数。Host工具复用两条已曝光故事，各3次重复，共6故事运行／42消息，
 覆盖保存→更正→历史、业务续办→只补保存→新实时查询、遗忘→重开→查询三个共享流程。
 原模型候选、完整公开交付和实际操作回执分存；旧 `5019968` 两故事14消息的只读整理不算新候选验收，
 COMPLETED或脚本通过均不自动授予语义通过。
+`0cd1f37` 源码下重新调用原Host prepare：三个根均完成准备，42消息全部NOT_RUN，
+银行尚未创建；子进程socket连接禁用，实际新模型0。早先准备和检查脚本失败保留，不改成模型样本。
 
 Root最终受影响合组139项通过（9项公共入口＋4项后端＋35项wiring＋91项evaluator）；
 先前133项及Root／Native复查含重叠，不另行相加。8个源码严格类型、全Lab Ruff、
 267源码／6 packages／80 optional登记矩阵及active-package DAG通过。
-Tools边界发现新Host helper的动态导入有3个unresolved，正改为静态可解析的原评价器导入，边界仍待复查，未放宽规则。
+Tools边界首检发现新Host helper动态文件加载有3个unresolved；现使用可静态定位的原评价器模块导入，
+边界复查通过（11文件／20依赖／6历史私有），未放宽规则。原3个Host helper用例及严格类型复查通过，
+重复检查不另计入139或实验样本。
 上述均为工程检查，不是语义样本或真实模型验收。
 原 `5540ac8` 的 [Fast 38028952446](https://github.com/minguselandy/MiLAi/actions/runs/38028952446)
 成功，[Full 38028952475](https://github.com/minguselandy/MiLAi/actions/runs/38028952475) skipped，
@@ -46,6 +52,12 @@ PID1854770匹配、原 HTTP 租约 OWNED、源码仍为 `5019968`；B0 保存98�
 维护97 completed＋2 incomplete，205笔唯一确认提交，`current_boundary_source_required`拒绝3次。
 生成780请求、9628792 known＝charged、embedding104963 tokens；该观察时点在途和新增 unknown 均为0。
 这些是运行前缀和固定时点成本，阶段仍未闭合，没有本轮方法排名。原缺答、拒绝和费用保留，不热改、重启或拼接新源码。
+
+较新固定观察 **08:13:32.501788 UTC／北京时间16:13:32.501788**：同一PID／租约／冻结源码仍匹配，
+B0已有103完整会话、248题检查点＝246答案＋2缺答；维护102 completed＋2 incomplete，
+208笔唯一确认提交、原边界拒绝3次；其他四臂未开始，Judge0。
+生成808请求、9993045 known／10037745 charged、embedding109071 tokens；1生成预留在途，
+不是已闭合unknown失败或阶段结算。前一观察原样保留，两者均不是方法分数。
 
 资源释放且 Root 明确调度后优先 E0／E1，普通 Host 功能线可继续；全部旧科研待办不再成为新任务的永久前置。
 真实调用仍由 Root 在原连续账本串行调度，未知结果不盲重试。新候选尚未冻结确认，E2主要断点诊断、

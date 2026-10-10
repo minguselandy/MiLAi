@@ -14,7 +14,8 @@ Source-only online first8 of each4 development users: per-arm32sessions/73QA/72u
 ObservedSession only; no persona/gold/update labels/future history or test-answer write-back.
 Maintenance poolK10 keeps the original setting, separate from count-based QA20 and
 evaluator-only updateK10 in isolated views or N/A. Earlier offline preparation used maintenanceK20,
-models0; prepare a new root after restoringK10, do not reuse a changed-configuration preparation.
+models0; correctedK10 prepared in a new root with32/73/72opportunities and12isolatedbankIDs,
+network disabled/no banks or clients. Do not reuse a changed-configuration preparation.
 Hindsight uses actual token budgets, never relabelledK20. Reader thinkingTrue/output32768,
 context65536/margin512/full input32256; first comparison direct/no second Selector.
 MiLAi reuses Source/MemoryService/recipe with actual semantic state and existing supports;
@@ -32,8 +33,9 @@ Old501 two-story14message readonly summary is historical, not new interaction ac
 Final affected group139PASS=9root+4backend+35wiring+91evaluator; previous133/rechecks overlap,
 never add overlapping runs as samples. 8sources strict types/fullLabRuffPASS;
 matrix267sources/6packages/80optional and active-packageDAGPASS.
-Tools boundary found3unresolved dynamic Hosthelper imports; static original evaluator import repair
-and boundary recheck pending, no relaxed boundary rules or all-gates-pass claim.
+Tools boundary initially found3unresolved dynamic file loads; literal original evaluator module
+imports now pass boundary11files/20dependencies/6historicalprivate. Original3Hosthelper checks
+and its strict types recheckedPASS; overlapping checks are not new experiment samples.
 Mechanical checks and COMPLETED never prove semantics or method advantage.
 New branch not pushed/no new PR. Old5540ac8 own Fast38028952446 SUCCESS/Full38028952475 SKIPPED
 applies only to that old head, not new commits.
@@ -42,6 +44,9 @@ B0 98complete sessions/242QA checkpoints=240answers+2known missing;
 maintenance97completed+2incomplete/205unique confirmed commits/3current_boundary_source_required rejects.
 780gen/9628792known=charged/104963embedding tokens, observedinflight0/newunknown0;
 other4NOT_STARTED/Judge0. Prefix observation is not phase closure or method ranking.
+Later fixed08:13:32.501788Z: samePID/lease/source; B0 103sessions/248QA=246answers+2missing,
+maintenance102completed+2incomplete/208commits/3boundaryrejects;808gen/9993045known/10037745charged,
+109071embtokens/1inflightgen reservation, not closedunknown; other4NOT_STARTED/Judge0.
 Preserve original501run/source/config/results/costs; no hot edits, restart or new prefix splicing.
 When resources are free and Root explicitly schedules, prioritize new E0/E1; completion of every
 old research stage is not a permanent prerequisite. Host function work remains authorized.

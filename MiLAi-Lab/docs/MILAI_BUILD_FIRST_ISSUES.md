@@ -10,7 +10,8 @@
 RawRAG-local、Hindsight-native-local-recall和MiLAi-memory-only，配置为
 `configs/milai-baseline-alignment-local-v1.json`。每臂按source-only在线前缀准备32会话／73 QA／72更新机会，
 直接交付共同Reader；维护候选K10保持原设置，QA20与隔离更新评价K10分开，Hindsight token预算另列。
-旧离线准备曾使用维护K20且0模型；恢复K10后将新根重prepare，不复用不同配置准备。
+旧离线准备曾使用维护K20且0模型；恢复K10后已新根重prepare，12个独立bank标识，
+每臂32／73／72机会，未创建银行或模型客户端，不复用不同配置准备。
 
 | 当前工作 | 已完成与仍待实际证据 |
 |---|---|
@@ -19,13 +20,16 @@ RawRAG-local、Hindsight-native-local-recall和MiLAi-memory-only，配置为
 | 三个Host连续流程 | 原两故事各3重复／42消息已准备，原模型／公开反馈／实际效果分列；尚无新真实语义验收，三类共享流程不计作三个独立来源 |
 
 新适配和准备实际模型调用均为0。Root最终受影响合组139项通过；8源码严格类型、全LabRuff、
-267源码／6 packages／80 optional矩阵与active-package DAG通过，Tools动态导入边界仍待修复／复查。
+267源码／6 packages／80 optional矩阵与active-package DAG通过；Tools首检3处文件加载未解析，
+改为可定位的原评价器模块导入后边界复查通过，原3个Host用例复查通过，不放宽规则。
 旧133项和复查有重叠，检查数量不等于实验样本或语义成功数。新分支尚未推送／建PR，
 旧 `5540ac8` Fast成功、Full skipped仅属于旧head。
 固定观察 **2026-10-10 07:53:54.506308 UTC／北京时间15:53:54.506308**：原PID1854770／租约OWNED／源码5019968；
 B0 98完整会话、242 QA检查点＝240答案＋2缺答，其他四臂未开始、Judge0；阶段未闭合。
 原五方法保留，不热修改。资源释放后Root优先调度E0/E1，不以全部旧科研待办永久前置，
 不逐提示补丁重跑五方法长历史。原缺答、失败、费用及来源冲突保持原样。
+较新08:13:32.501788 UTC固定观察：B0 103会话／248题检查点＝246答案＋2缺答，
+其他四臂未开始／Judge0，1生成预留在途。原阶段仍未闭合，不是方法排名。
 已确认drained的原生失败保留FAILED和资源已闭合标记；超时／状态未知保留RESOURCE_UNSETTLED，停止后续资源调度。
 
 ## 2026-10-10：先前功能优先入口（固定05:48:46 UTC）
