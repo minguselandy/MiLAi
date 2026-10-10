@@ -1,5 +1,21 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+Latest actual suite closure14:02:48.871164UTC: frozen d503 E1 STOPPED, parent617762/worker617767
+exited; Raw32sessions/73answers/resourcesclosed, H27sessions/63QA=36answers+27capacitymissing,
+HterminalFAILED/resources_settledTrue with native_completion_deadline at fourthuser/session3.
+Actual retain succeeded; subsequent consolidation exceeded the adapter300s overall wait, then completed
+14:02:46.598UTC during closure. Saved close state pending/processing0, API/PGclosed/UID996 residual0,
+original leaseFREE. Suite285gen/3557201known=charged/49018emb/newunknown0/0/limits unchanged/Judge0.
+Preserve this failed root and all original effects; no native retry, terminal rewrite or prefix splice.
+Root explicitly dispatched the untouched M arm at14:08:49.044761UTC, same frozenD/config/manifest
+bankIDs/originalledger, separate root-execution-milai-predict.json and runtime/ledger snapshots.
+Parent1056248/worker1056253/live session35332; fixed14:10:24UTC M0complete sessions/1QAanswer.
+Original suiteSTOPPED remains unchanged; this is first M dispatch, not a failed-H restart.
+Frozen CLI --backend supports this independent prediction. Existing score gate still requires all3
+PREDICTIONS_SAVED and HFAILED blocks it; do not dispatch score supervisor or claim full comparison.
+Host42 remains prepared/notdispatched; E2-E4/semantic acceptance incomplete, goalACTIVE.
+Earlier running observations below retain their original timestamps and are superseded by this closure.
+
 Latest fixed13:49:16.651712UTC: same frozen d503 E1 RootRUNNING/live session48904,
 H24complete sessions/54QA=27answers+27known capacitymissing; first3users complete8sessions each,
 per-userQA20/12/22, answers9/9/9, missing11/3/13. Fourthuser not yet complete atthat snapshot.
