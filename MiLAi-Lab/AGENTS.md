@@ -20,11 +20,25 @@ Frozen5019968 only; arms serial B0/B1/B2/M/Append-only, each277sessions/705QA/59
 all1385/3525/2975. Startledger50840requests/235986661known/236310736charged/2086685emb,unknown7/0.
 Inspect actual PID/root-execution-predict.json/arm terminals; launch is not completion.
 No automatic restart or scoring; all five predictions before separate uniform phase score.
-Fixed23:48UTC observation: runnerPID matches, ownerOWNED, B0first5sessions/12QA checkpoints,
-5maintenancecompleted/20uniquecommits/noQA missing or receipt rejection; other4arms NOT_STARTED.
+Fixed2026-10-10 00:12:36UTC observation: runnerPID matches, ownerOWNED, B0first13sessions/35QA checkpoints,
+13maintenancecompleted/32uniquecommits/noQA missing or receipt rejection; other4arms NOT_STARTED.
 Live unknown+1 is an in-flight reservation, not closed unknown. Use ignored
 inspect_five_dev277_5019968_progress.py for compact PID/phase/cost checks; do not dump full ledger/world.
 Native32/drift/external28/controlled v3 configs PREPARED ONLY,0HTTP; no final confirmation freeze.
+Reserved16 config is PREPARED ONLY from original UUID/settings, no held-out dataset loader or semantic read.
+M tighter-context protocol is PREPARED ONLY: same first8/user, context65536=>49152,
+output32768/margin512 unchanged, complete input32256=>15872; baseline comes from full main M,
+never another baseline run. Main/uniform scores and necessary development selection precede admission.
+Host135 historical public inputs copied byte-identically to host135-historical-inputs-prepared-v1:
+135cases/192messages/145raw Sources/1064ordered candidates,0HTTP/no bank initialization.
+No Host method selected or new post-freeze stories authored; controls stay evaluator-only.
+Source-only Host forget contract audit is isolated under host-forget-contract-5019968-source-only;
+developer sees delivered literal handles, schemas/arguments and body-free status only, no full trace/DB.
+Actual business read_source status=read_limit_exhausted, limit3. Audit CLOSED in review.json:
+15forget calls=2confirmed visibility effects+13knownnone rejections;
+business10allrejected/zero actualforget, no call uses an exact delivered read_handle.
+Model selector misuse/expected read exhaustion, no normal-use wiring defect established/no source fix.
+11JSON mechanical checks only,0HTTP/Store writes/replay/pytest; not independent model confirmation.
 Shared Reader projection/flat literal metadata, real complete-request planning, independent memory after
 known CURRENT schema/length failure, faithful candidates and cumulative confirmed receipts are integrated.
 Root exact old-eight replay: 32446 -> 30520 input <=32256, 8/8 exact-rendered, all original evidence
