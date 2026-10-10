@@ -4,11 +4,14 @@ import json
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any
 
+import httpx
 import pytest
 
-from milai_lab.harness.contextual_artifacts import BudgetExceeded
-from milai_lab.providers.functional_queue import FunctionalQueue
+from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget, RunLimits
+from milai_lab.providers.contextual_vllm import VLLMConfig
+from milai_lab.providers.functional_queue import FunctionalQueue, FunctionalVLLMClient
 
 
 def test_unknown_reservation_survives_independent_process(tmp_path: Path) -> None:
@@ -65,3 +68,45 @@ def test_durable_counter_cannot_drop_earlier_unknown_reservation(tmp_path: Path)
     path.write_text(json.dumps(corrupt))
     with pytest.raises(ValueError, match="FUNCTIONAL_QUEUE_STATE_INVALID"):
         gate.reserve({}, {"total_reserved_tokens": 40})
+
+
+@pytest.mark.parametrize("confirmed_usage", [True, False])
+def test_queued_native_accounting_and_transport_receipt_are_preserved(
+    tmp_path: Path, confirmed_usage: bool,
+) -> None:
+    wire = {"model": "fixture", "messages": [], "max_completion_tokens": 2}
+    accounting = {**wire, "max_tokens": 2}
+    capacity = {"prompt_tokens": 3, "output_reserve_tokens": 2, "total_reserved_tokens": 5}
+    events: list[dict[str, Any]] = []
+    actual_requests: list[dict[str, Any]] = []
+    budget = RunBudget(RunLimits(generation_requests=2, generation_tokens=100),
+                       tmp_path / "budget.json")
+
+    def complete(request: httpx.Request) -> httpx.Response:
+        actual_requests.append(json.loads(request.content))
+        usage = {"prompt_tokens": 3, "completion_tokens": 2, "total_tokens": 5}
+        if not confirmed_usage:
+            usage["total_tokens"] = 4
+        return httpx.Response(200, json={"choices": [], "usage": usage})
+
+    with FunctionalVLLMClient(
+        VLLMConfig("http://fixture/v1", "fixture", max_tokens=2), budget=budget,
+        transport=httpx.MockTransport(complete),
+    ) as client:
+        client.queue = FunctionalQueue(tmp_path / "admission.json", requests=1,
+                                       reserved_tokens=5)
+        client._post("chat/completions", wire, capacity_receipt=capacity,
+                     accounting_request=accounting, on_event=events.append)
+        with pytest.raises(BudgetExceeded, match="FUNCTIONAL_QUEUE_BUDGET_EXHAUSTED"):
+            client._post("chat/completions", wire, capacity_receipt=capacity,
+                         accounting_request=accounting, on_event=events.append)
+
+    assert actual_requests == [wire]
+    assert events[-1]["usage_confirmed"] is confirmed_usage
+    assert events[-1]["accounting_request"] == accounting
+    assert json.loads(events[-1]["request_body"]) == wire
+    assert budget.state["generation_requests"] == 1
+    assert budget.state["generation"]["known_tokens"] == (5 if confirmed_usage else 0)
+    assert budget.state["generation"]["charged_tokens"] == 5
+    assert budget.state["generation"]["unknown_usage"] == (0 if confirmed_usage else 1)
+    assert json.loads((tmp_path / "admission.json").read_text())["requests"] == 1

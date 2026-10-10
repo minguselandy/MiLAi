@@ -6,15 +6,18 @@ One integrator plus three developers; Root owns contracts/config/resource schedu
 A RawRAG/Hindsight, B MiLAi/direct delivery, C Host/docs, separate worktrees.
 Current branch feat/lab-baseline-alignment-integration-20261010, draft PR121 stacked on120:
 https://github.com/minguselandy/MiLAi/pull/121; open/draft/unmerged.
-Published6d0446f ownFast38037419742SUCCESS; later bridge/managed commits require their own CI,
-not that prior result. Local latest native HTTP repair a0ec3bc, managed lifecycle still integrating;
+Published4f859be ownFast38040183066FAIL/Full38040183074SKIPPED: inherited FunctionalVLLMClient
+missed new accounting_request/on_event parameters. Root forwards them without weakening queue;
+48queue/budget/Owner checks and full232source strict typesPASS; repairhead ownCI still required.
+Prior6d0446f Fast38037419742SUCCESS belongs only to that head. Managed lifecycle integrated;
 no final candidate freeze. Read local protocol/config/native deployment docs.
 Source-only first8 of each4 development users: per-arm32sessions/73QA/72updates,219mainQA max.
 12independent backend/user bankIDs; only ObservedSession(session_id/date/role/content/timestamp).
 No persona/gold/update labels/future history or answer write-back. Keep maintenanceK10;
 separateQA20/evaluatorUpdateK10. Native H token budgets are not relabelledK20.
 Earlier K20 offline prep and correctedK10 prep are zero-model history, not frozen experiments.
-New native-service configuration needs another empty preparation root; changed config never reused.
+Managed4f859be configuration prepared in new e1-local-v1-managed-4f859be-prepared emptyroot:
+networkdisabled,32/73/72perarm,12opaqueIDs,0clients/banks/models; changed config never reused.
 Reader thinkingTrue/output32768/context65536/margin512/input32256; direct/no secondSelector.
 MiLAi reuses actual Source/MemoryService/recipe/semantic state/existing supports; no ordinary
 Host business classifier/raw-search fallback. Unsupported H/R session exports/reference metricsN/A.
@@ -48,6 +51,10 @@ B0 107complete sessions/268QA=266answers+2knownmissing,106completed+2incomplete 
 218unique confirmedcommits/3current_boundary_source_required rejects;
 859gen/10527628known=charged/115344embeddingtokens,observedinflight0;other4NOT_STARTED/Judge0.
 This is a prefix snapshot, not closure/method ranking. Preserve oldsource/config/results/costs;
+New fixed09:23:35.049588Z samePID/lease/source: B0 113 complete sessions / 281 QA in completed sessions,
+284QAcheckpoints=282answers+2missing (3fromunfinishedsession),112completed+2incomplete maintenance,
+226uniquecommits/3originalrejects,912gen/11124152known=charged/120009emb,0inflight;
+other4NOT_STARTED/Judge0. Not a closed phase or method ranking.
 no hot edits/restart/newprefix splicing. Root alone serializes real Qwen/BGE/Judge on originalledger.
 When resourcesfree and explicitly scheduled, prioritize E0/E1; not all old research a prerequisite.
 Known drained failure staysFAILED/resources_settledTrue; uncertainty staysRESOURCE_UNSETTLED,

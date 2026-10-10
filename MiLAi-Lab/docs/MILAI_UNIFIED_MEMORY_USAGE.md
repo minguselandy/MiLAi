@@ -10,7 +10,11 @@
 `configs/milai-baseline-alignment-local-v1.json`。开发分支已发布为叠加于 #120 的
 [草稿 PR #121](https://github.com/minguselandy/MiLAi/pull/121)，未合并，未进入原 `5019968` 运行。
 `6d0446f` 自身 [Fast 38037419742](https://github.com/minguselandy/MiLAi/actions/runs/38037419742)
-成功；后续桥接和托管改动的 CI 须按新 head 另行核对，不能沿用该结果。
+成功；`4f859be` 自身 [Fast 38040183066](https://github.com/minguselandy/MiLAi/actions/runs/38040183066)
+失败，Foundation发现FunctionalVLLMClient未同步父类新增的accounting_request／on_event参数。
+现已同步并转交原运输逻辑，48项队列／预算／Owner检查和全目录232源码严格类型检查通过；
+新修复head仍须核对自己的CI。该头 [Full 38040183074](https://github.com/minguselandy/MiLAi/actions/runs/38040183074)
+为skipped，不能写成通过。
 
 | 首轮后端 | 已接通能力 | 实际结果边界 |
 |---|---|---|
@@ -29,7 +33,10 @@ persona、gold、更新标签、未来会话和测试答案不进入方法输入
 不同配置的准备不复用，不将其当成最终候选冻结或实际实验结果。
 新准备根为 ignored `artifacts/baseline-alignment/e1-local-v1-maintenance10-prepared`，
 网络连接禁用，确认每臂32／73／72机会及12个独立bank标识，未初始化银行或模型客户端。
-该准备早于托管服务配置；最终新配置须使用另一空根重新prepare，不能复用不同配置的旧准备。
+该准备早于托管服务配置；`4f859be`下已在另一空根
+`artifacts/baseline-alignment/e1-local-v1-managed-4f859be-prepared`重新prepare。
+网络连接禁用，同样确认每臂32／73／72机会及12个独立bank标识，未初始化银行或模型客户端；
+不是最终候选冻结，不复用不同配置的旧准备。
 
 Hindsight模型转接保留完整原生请求和响应，通过原VLLMClient／RunBudget预留及核对实际usage，
 不另建账本，不改写原生参数。已修复native embedding覆盖原HTTP序号、崩溃遗留重开、
@@ -63,6 +70,8 @@ Tools边界首检发现新Host helper动态文件加载有3个unresolved；现�
 边界复查通过（11文件／20依赖／6历史私有），未放宽规则。原3个Host helper用例及严格类型复查通过，
 重复检查不另计入139或实验样本。
 上述均为工程检查，不是语义样本或真实模型验收。
+队列接口修复后的48项检查包含2个新增边界：完整原生请求及独立记账副本正确转交，
+合法usage结算／不合法usage保留预留，第二次请求仍被原队列额度拒绝；其余检查与旧组有重叠，不能相加。
 一次Ruff检查误扫data／studies归档范围，活动范围按原CI重查通过，归档未修改。
 原 `5540ac8` 的 [Fast 38028952446](https://github.com/minguselandy/MiLAi/actions/runs/38028952446)
 成功，[Full 38028952475](https://github.com/minguselandy/MiLAi/actions/runs/38028952475) skipped，
@@ -86,6 +95,12 @@ B0 107完整会话、268题检查点＝266答案＋2缺答；维护106 completed
 218笔唯一确认提交、原边界拒绝3次；其他四臂未开始，Judge0。
 859生成请求、10527628 known＝charged、embedding115344 tokens；该时点无在途差额。
 原运行继续保存，仍未闭合，不能当作五方法排名。
+
+较新固定观察 **09:23:35.049588 UTC／北京时间17:23:35.049588**：同一PID／租约／冻结源码匹配，
+B0 113完整会话，完整会话中281题；另有当前未完成会话的3题检查点，合计284检查点＝282答案＋2缺答。
+维护112 completed＋2 incomplete、226笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
+912生成请求、11124152 known＝charged、embedding120009 tokens；该时点无在途差额。
+这仍是未闭合前缀，检查点数不能替代已完成会话题数或语义分数。
 
 资源释放且 Root 明确调度后优先 E0／E1，普通 Host 功能线可继续；全部旧科研待办不再成为新任务的永久前置。
 真实调用仍由 Root 在原连续账本串行调度，未知结果不盲重试。新候选尚未冻结确认，E2主要断点诊断、

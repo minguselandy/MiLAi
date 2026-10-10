@@ -12,6 +12,8 @@ RawRAG-local、Hindsight-native-local-recall和MiLAi-memory-only，配置为
 直接交付共同Reader；维护候选K10保持原设置，QA20与隔离更新评价K10分开，Hindsight token预算另列。
 旧离线准备曾使用维护K20且0模型；恢复K10后已新根重prepare，12个独立bank标识，
 每臂32／73／72机会，未创建银行或模型客户端，不复用不同配置准备。
+托管配置已在`e1-local-v1-managed-4f859be-prepared`新空根重新prepare，网络禁用、0模型；
+同样确认上述机会及12个独立bank标识，不称最终候选冻结。
 
 | 当前工作 | 已完成与仍待实际证据 |
 |---|---|
@@ -24,7 +26,9 @@ RawRAG-local、Hindsight-native-local-recall和MiLAi-memory-only，配置为
 改为可定位的原评价器模块导入后边界复查通过，原3个Host用例复查通过，不放宽规则。
 旧139／133项和复查有重叠，检查数量不等于实验样本或语义成功数。新分支已发布
 [草稿PR121](https://github.com/minguselandy/MiLAi/pull/121)，未合并；`6d0446f`自身Fast38037419742成功，
-后续桥接／托管改动按新head另核CI。
+`4f859be`自身Fast38040183066失败：队列客户端未同步父类新增记账／回执参数。
+现已修复，48项队列／预算／Owner检查及全目录232源码严格类型通过，新head CI仍须另核；
+该头Full38040183074为skipped。
 旧 `5540ac8` Fast成功、Full skipped仅属于旧head。
 固定观察 **2026-10-10 07:53:54.506308 UTC／北京时间15:53:54.506308**：原PID1854770／租约OWNED／源码5019968；
 B0 98完整会话、242 QA检查点＝240答案＋2缺答，其他四臂未开始、Judge0；阶段未闭合。
@@ -39,6 +43,9 @@ B0 98完整会话、242 QA检查点＝240答案＋2缺答，其他四臂未开�
 不是monkeypatch或新检索模块。准确设置与未启动边界见[部署约定](MILAI_BASELINE_ALIGNMENT_NATIVE_DEPLOYMENT_20261010.md)。
 较新08:43:37.902469 UTC：B0 107会话／268题＝266答案＋2缺答，其他4臂未开始／Judge0；
 旧PID／原租约仍占用，859生成／10527628 known＝charged／115344 embedding，未闭合、无方法排名。
+较新09:23:35.049588 UTC：B0 113完整会话／其中281题，284 QA检查点＝282答案＋2缺答；
+3检查点属于当前未完成会话，其他4臂未开始／Judge0。912生成／11124152 known＝charged／
+120009 embedding，阶段未闭合，仍占用原资源。
 
 ## 2026-10-10：先前功能优先入口（固定05:48:46 UTC）
 
