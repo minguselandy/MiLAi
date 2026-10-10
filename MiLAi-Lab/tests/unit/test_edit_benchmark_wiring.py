@@ -5,10 +5,12 @@ from __future__ import annotations
 import copy
 import json
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import httpx
 import pytest
+from jsonschema.exceptions import ValidationError as JsonSchemaValidationError
 from langchain_core.embeddings import Embeddings
 from langgraph.store.sqlite import SqliteStore
 from tokenizers import Tokenizer
@@ -27,6 +29,7 @@ from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget, Ru
 from milai_lab.memory.edit_units import evidence_status, render_revision_view, writer_projection
 from milai_lab.memory.retrieval import SemanticRetriever, semantic_keys
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.milai_memory_only import MiLAiMemoryBackend
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 from milai_lab.runners.edit_benchmarks import (
@@ -360,9 +363,31 @@ def test_real_store_formation_revision_and_restart_without_replaying_writer(tmp_
             "tomorrow",
             ({"role": "user", "content": "BlueProject Tuesday", "timestamp": "tomorrow"},),
         )
-        execution.maintain(service, first, "1")
+        backend = MiLAiMemoryBackend(
+            maintain=lambda session, key: execution.maintain(
+                service, ObservedSession(session.session_id, session.date, session.turns), key,
+            ),
+            retrieve=lambda question, date, key, limit: execution.retrieve_material(
+                service, question, date, key, limit=limit,
+            ),
+            maintenance_result=lambda key: read_json(
+                tmp_path / "maintenance" / key / "complete.json"),
+            retrieval_native=lambda key: read_json(
+                tmp_path / "http" / key / "retrieval-native.json"),
+        )
+        first_result = backend.ingest(first, key="1")
+        assert first_result["session_output"] == ["BlueProject Monday"]
+        assert first_result["completed"] and first_result["usage"] == {"observation": "unobserved"}
+        before_query = copy.deepcopy(service.records())
+        first_read = backend.retrieve("BlueProject", "today", key="q1", limit=20)
+        assert first_read["returned_count"] == 1
+        assert first_read["materials"][0]["content"] == "BlueProject Monday"
+        assert first_read["native_return"]["records"][0]["value"]["content"] == "BlueProject Monday"
+        assert service.records() == before_query and len(service.sources()) == 1
         first_id = service.records()[0]["id"]
-        execution.maintain(service, second, "2")
+        second_result = backend.ingest(second, key="2")
+        assert second_result["session_output"] == ["BlueProject Tuesday"]
+        assert second_result["native_return"] == read_json(tmp_path / "maintenance/2/complete.json")
         assert service.records()[0]["id"] == first_id
         assert service.records()[0]["value"]["revision"] == 2
         assert len(service.records()[0]["value"]["source_refs"]) == 2
@@ -377,6 +402,15 @@ def test_real_store_formation_revision_and_restart_without_replaying_writer(tmp_
         )
         assert execution.maintain(service, second, "2") == ["BlueProject Tuesday"]
         assert service.read(first_id)["value"]["revision"] == 2
+        current = execution.retrieve_material(service, "BlueProject", "tomorrow", "q2", limit=20)
+        assert current[0]["content"] == "BlueProject Tuesday"
+        native = read_json(tmp_path / "http/q2/retrieval-native.json")
+        assert len(native["records"][0]["value"]["source_refs"]) == 2
+        assert execution.retrieve_material(service, "BlueProject", "today", "q1", limit=20) == (
+            first_read["materials"])
+        with pytest.raises(ValueError, match="Saved retrieval request changed"):
+            execution.retrieve_material(service, "BlueProject", "today", "q1", limit=10)
+        assert len(service.sources()) == 2
     assert len(calls) == 2
 
 
@@ -731,6 +765,333 @@ def test_shared_reader_staged_accepts_legacy_selection_without_extra_reads(tmp_p
     assert len(state["resident_refs"]) == 1
     assert state["resident_refs"][0]["view"] == "current_at_snapshot"
     assert state["resident_refs"][0]["revision"] == 2
+
+
+@pytest.mark.parametrize("outcome", ["answer", "capacity", "unknown"])
+def test_direct_reader_delivers_whole_pool_without_selector_or_retry(
+    tmp_path: Path, outcome: str,
+) -> None:
+    class LiteralTokenizer:
+        def apply_chat_template(
+            self, messages: list[dict[str, str]], **kwargs: object,
+        ) -> list[int]:
+            assert kwargs["enable_thinking"] is True
+            return [1] * sum(len(message["content"]) for message in messages)
+
+    execution = BenchmarkRun.__new__(BenchmarkRun)
+    execution.root = tmp_path
+    execution.settings = {
+        "memory_view_mode": "direct", "interface_version": "v3",
+        "context_tokens": 8192, "model": {"max_tokens": 128},
+        "stage_enable_thinking": {"reader": True},
+        "halumem": {"reader_failure_policy": "record_known_readonly_failure"},
+    }
+    execution.tokenizer = LiteralTokenizer()
+    memories = [{
+        "record_id": "actual-rule", "revision": 2,
+        "content": "North four times from February; South unchanged, twice in January.",
+        "scope": {"north": "February", "south": "January"},
+        "revision_evidence": [
+            {"source_ref": "source-before", "role": "user", "content":
+             "Both districts twice in January.", "range": [0, 31]},
+            {"source_ref": "source-change", "role": "user", "content":
+             "North four from February; South unchanged.", "range": [0, 42]},
+        ],
+    }, {"record_id": "actual-exception", "revision": 1,
+        "content": "Only the first week has a holiday exception.",
+        "scope": {"first_week_only": True}, "revision_evidence": []}]
+    before = copy.deepcopy(memories)
+    question, date, key = "Which rules and exceptions apply?", "2030-02-01", "qa"
+    complete_messages = execution._reader_messages(question, date, memories)
+    exact_tokens = execution.input_tokens(complete_messages, enable_thinking=True)
+    if outcome == "capacity":
+        execution.settings["context_tokens"] = exact_tokens + 128 + 512 - 1
+    attempts = []
+
+    def provider(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.read())
+        attempts.append(wire)
+        assert wire["messages"] == complete_messages
+        assert json.loads(wire["messages"][1]["content"])["memories"] == memories
+        assert "response_format" not in wire
+        if outcome == "unknown":
+            raise httpx.ReadTimeout("Original direct response is unknown", request=request)
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
+            "message": {"content": "The delivered district rules retain their limits."}}],
+            "usage": {"prompt_tokens": exact_tokens, "completion_tokens": 9,
+                      "total_tokens": exact_tokens + 9}})
+
+    budget = RunBudget(RunLimits(generation_requests=1), tmp_path / "budget.json")
+    with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=128, max_calls=1),
+                     transport=httpx.MockTransport(provider), budget=budget) as client:
+        execution.client = client
+        if outcome == "capacity":
+            with pytest.raises(ReadCapacityUnavailable) as caught:
+                execution.answer_material(question, date, key, memories)
+            failure = execution._known_reader_failure(caught.value, key)
+            assert failure is not None and not failure["request_sent"]
+            assert failure["input_tokens"] == exact_tokens
+            assert failure["input_token_limit"] == exact_tokens - 1
+            assert not (tmp_path / "http/qa/request.json").exists()
+        elif outcome == "unknown":
+            with pytest.raises(UnconfirmedModelOutcome):
+                execution.answer_material(question, date, key, memories)
+            with pytest.raises(UnconfirmedModelOutcome):
+                execution.answer_material(question, date, key, memories)
+            assert not (tmp_path / "http/qa/response.json").exists()
+        else:
+            result = execution.answer_material(question, date, key, memories)
+            assert result[1] == memories
+            assert execution.answer_material(question, date, key, memories) == result
+        assert len(attempts) == (0 if outcome == "capacity" else 1)
+        assert budget.state["generation_requests"] == len(attempts)
+    assert memories == before
+    assert not (tmp_path / "http/qa/view").exists()
+    assert not (tmp_path / "http/qa/memory-view.json").exists()
+
+
+def snapshot_materials(backend: str, body_size: int) -> list[dict[str, Any]]:
+    """Fabricated examples of actual backend shapes, including missing native versions."""
+    bodies = [f"Report {index}. " + chr(65 + index) * body_size + f" END_{index}"
+              for index in range(2)]
+    if backend == "RawRAG-local":
+        return [{"id": f"exchange-{index}", "session_id": f"session-{index}",
+                 "date": "2030-01-01", "turn_range": [0, 1], "score": 0.5,
+                 "text": json.dumps([{"role": "user", "content": body,
+                                      "timestamp": "2030-01-01"}]),
+                 "provenance": "original_exchange", "truncated": False}
+                for index, body in enumerate(bodies)]
+    if backend == "Hindsight-native-local-recall":
+        return [{"id": "native-fact", "text": bodies[0], "fact_type": "world",
+                 "occurred_start": "2030-01-01", "provenance": "retrieved_memory"},
+                {"text": bodies[1], "native_collection": "chunks",
+                 "native_collection_key": "native-chunk", "truncated": True,
+                 "provenance": "native_source_chunk"},
+                {"provenance": "native_recall_metadata",
+                 "native_fields": {"trace": {"strategy": "native"}}}]
+    return [{"record_id": f"stored-{index}", "revision": index + 1, "content": body,
+             "scope": {"reported": True}, "revision_evidence": []}
+            for index, body in enumerate(bodies)]
+
+
+@pytest.fixture
+def snapshot_reader(tmp_path: Path) -> BenchmarkRun:
+    """Use the real request/cache boundary with a Python model double, no HTTP or DB."""
+    from milai_lab.runners.baseline_alignment import AlignmentRun
+
+    class LiteralTokenizer:
+        def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
+            assert kwargs["enable_thinking"] is True
+            return [0] * len(json.dumps(messages, ensure_ascii=False))
+
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.root = tmp_path
+    execution.settings = {
+        "memory_view_mode": "direct", "reader_projection": "semantic_units_v1",
+        "context_tokens": 30612, "model": {"max_tokens": 100, "enable_thinking": False},
+        "stage_enable_thinking": {"reader": True}, "interface_version": "event_bound_v1",
+        "halumem": {"reader_failure_policy": "record_known_readonly_failure"},
+        "alignment_backend": "MiLAi-memory-only",
+    }
+    execution.tokenizer = LiteralTokenizer()
+    execution.client = SimpleNamespace(config=SimpleNamespace(max_calls=4))
+    return execution
+
+
+@pytest.mark.parametrize("backend", [
+    "RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only",
+])
+@pytest.mark.parametrize("mode", ["direct", "staged", "state_driven"])
+def test_snapshot_reader_pages_and_reopens_actual_entries(
+    snapshot_reader: BenchmarkRun, backend: str, mode: str,
+) -> None:
+    execution = snapshot_reader
+    execution.settings.update(alignment_backend=backend, memory_view_mode=mode)
+    memories = snapshot_materials(backend, 18000)
+    original = copy.deepcopy(memories)
+    snapshot_id = "native/qa/retrieval.json"
+    snapshot = execution.root / snapshot_id
+    write_json(snapshot, {"materials": memories, "native_return": {"actual": True}})
+    before = snapshot.read_bytes()
+    attempts: list[dict[str, Any]] = []
+
+    def chat(messages: list[dict[str, str]], response_format: Any, **sampling: Any) -> Any:
+        assert sampling == {"enable_thinking": True}
+        assert execution.input_tokens(messages, enable_thinking=True) <= 30000
+        payload = json.loads(messages[1]["content"])
+        attempts.append(payload)
+        if response_format is not None:
+            assert "record_ids" not in payload["response_schema"]["properties"]
+            assert "item_indices" in payload["response_schema"]["properties"]
+            for candidate in payload["candidates"]:
+                index = candidate["item_index"]
+                assert payload["retrieval_snapshot"] == {
+                    "snapshot_id": snapshot_id, "collection": "materials",
+                }
+                assert "read_ref" not in candidate
+                assert candidate["navigation_only"] and len(candidate["literal_excerpt"]) <= 384
+                assert "END_" not in candidate["literal_excerpt"]
+                assert all(original[index][field] == value
+                           for field, value in candidate["native_metadata"].items())
+                if backend != "MiLAi-memory-only":
+                    assert "revision" not in candidate["native_metadata"]
+                    assert "record_id" not in candidate["native_metadata"]
+            if "final_reopen_item_indices" in payload:
+                assert payload["memories"] and payload["pending_item_indices"]
+                assert payload["memories"] == [original[index]
+                                               for index in payload["memory_item_indices"]]
+                assert [candidate["item_index"] for candidate in payload["candidates"]] == (
+                    payload["memory_item_indices"])
+                indices = [0]
+            else:
+                assert payload["memories"] == [] and payload["undelivered_item_indices"]
+                indices = list(range(len(memories)))
+            content = json.dumps({"item_indices": indices, "keep_resident": False, "done": True})
+        else:
+            assert payload["memories"] == [original[0]]
+            assert payload["memory_item_indices"] == [0]
+            assert "END_0" in repr(payload["memories"]) and "END_1" not in repr(payload)
+            assert "candidates" not in payload and "literal_excerpt" not in repr(payload)
+            content = "Only the complete reopened first report supports this answer."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}],
+                "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9}}
+
+    execution.client.chat = chat
+    first = execution.answer_material("What was reported?", "2030-01-02", "qa", memories,
+                                      snapshot_id=snapshot_id)
+    assert first[1] == original
+    assert len(attempts) == (3 if mode == "direct" else 4)
+    state = read_json(execution.root / "http/qa/memory-view.json")
+    continuation = state["capacity_continuation"]
+    assert {ref["item_index"] for ref in continuation["delivered_page_refs"]} == set(
+        range(len(memories)))
+    assert continuation["final_body_delivered"] and not continuation["pending_refs"]
+    assert continuation["final_refs"] == [
+        {"snapshot_id": snapshot_id, "collection": "materials", "item_index": 0}]
+    assert execution.answer_material("What was reported?", "2030-01-02", "qa", memories,
+                                     snapshot_id=snapshot_id) == first
+    assert len(attempts) == (3 if mode == "direct" else 4)
+    assert snapshot.read_bytes() == before and memories == original
+    assert not (execution.root / "banks").exists()
+
+
+@pytest.mark.parametrize("backend", [
+    "RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only",
+])
+def test_snapshot_direct_reader_fitting_pool_keeps_one_original_call(
+    snapshot_reader: BenchmarkRun, backend: str,
+) -> None:
+    execution = snapshot_reader
+    execution.settings["alignment_backend"] = backend
+    memories = snapshot_materials(backend, 20)
+    memories[0]["native_turns"] = ({"role": "user", "content": "original tuple on serialization"},)
+    serialized = json.loads(json.dumps(memories))
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    calls = []
+
+    def chat(messages: Any, response_format: Any, **kwargs: Any) -> Any:
+        assert response_format is None and kwargs == {"enable_thinking": True}
+        payload = json.loads(messages[1]["content"])
+        assert payload["memories"] == serialized and "candidates" not in payload
+        calls.append(payload)
+        return {"choices": [{"finish_reason": "stop", "message": {"content": "actual return"}}]}
+
+    execution.client.chat = chat
+    assert execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                     snapshot_id=snapshot_id) == ("actual return", serialized)
+    assert len(calls) == 1
+
+
+@pytest.mark.parametrize("mode", ["staged", "state_driven"])
+def test_snapshot_reader_pages_when_initial_navigation_exceeds_capacity(
+    snapshot_reader: BenchmarkRun, mode: str,
+) -> None:
+    execution = snapshot_reader
+    execution.settings["memory_view_mode"] = mode
+    memories = [{"id": f"report-{index}", "text": f"Original report {index}: " + "T" * 300,
+                 "provenance": "retrieved_memory"} for index in range(75)]
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    attempts = []
+
+    def chat(messages: Any, response_format: Any, **sampling: Any) -> Any:
+        assert execution.input_tokens(messages, enable_thinking=True) <= 30000
+        payload = json.loads(messages[1]["content"])
+        attempts.append(payload)
+        if response_format is not None:
+            assert "final_reopen_item_indices" in payload
+            indices = payload["memory_item_indices"]
+            assert [row["item_index"] for row in payload["candidates"]] == indices
+            assert payload["memories"] == [memories[index] for index in indices]
+            assert payload["response_schema"]["properties"]["item_indices"]["items"][
+                "enum"] == list(range(75))
+            content = json.dumps({"item_indices": [74], "keep_resident": False, "done": True})
+        else:
+            assert payload["memory_item_indices"] == [74] and payload["memories"] == [memories[74]]
+            content = "Complete original last report reopened."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}],
+                "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9}}
+
+    execution.client.chat = chat
+    assert execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                     snapshot_id=snapshot_id)[1] == memories
+    state = read_json(execution.root / "http/qa/memory-view.json")
+    assert state["selector_needs_pages"] and len(attempts) <= 4
+    continuation = state["capacity_continuation"]
+    assert [ref["item_index"] for ref in continuation["delivered_page_refs"]] == list(range(75))
+    assert not continuation["pending_refs"] and continuation["final_body_delivered"]
+
+
+@pytest.mark.parametrize("failure", ["index", "unknown", "call_limit", "snapshot"])
+def test_snapshot_reader_rejects_invalid_selection_and_keeps_unfinished_scope(
+    snapshot_reader: BenchmarkRun, failure: str,
+) -> None:
+    execution = snapshot_reader
+    execution.settings["alignment_backend"] = "RawRAG-local"
+    memories = snapshot_materials("RawRAG-local", 18000)
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    calls = []
+    if failure == "call_limit":
+        execution.client.config.max_calls = 2
+
+    def chat(messages: Any, **kwargs: Any) -> Any:
+        payload = json.loads(messages[1]["content"])
+        calls.append(payload)
+        assert "final_reopen_item_indices" in payload
+        if failure == "unknown":
+            raise RuntimeError("synthetic unconfirmed page")
+        return {"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({
+            "item_indices": [99 if failure == "index" else 0],
+            "keep_resident": False, "done": True,
+        })}}], "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9}}
+
+    execution.client.chat = chat
+    if failure == "snapshot":
+        memories[0]["text"] = "unsaved body"
+        with pytest.raises(ValueError, match="materials changed"):
+            execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                      snapshot_id=snapshot_id)
+        assert calls == [] and not (execution.root / "http").exists()
+        return
+    error = {"index": JsonSchemaValidationError, "unknown": UnconfirmedModelOutcome,
+             "call_limit": ReadDeliveryIncomplete}[failure]
+    with pytest.raises(error) as caught:
+        execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                  snapshot_id=snapshot_id)
+    if failure == "unknown":
+        with pytest.raises(UnconfirmedModelOutcome, match="do not blindly repeat"):
+            execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                      snapshot_id=snapshot_id)
+    if failure == "call_limit":
+        receipt = execution._known_reader_failure(caught.value, "qa")
+        assert receipt is not None and receipt["reason"] == "read_call_limit"
+    assert len(calls) == 1 and not (execution.root / "http/qa/request.json").exists()
+    state = read_json(execution.root / "http/qa/memory-view.json")
+    assert state["pending_refs"] and not state["capacity_continuation"]["final_body_delivered"]
+    assert "content" not in repr(state["pending_refs"]) and "text" not in repr(
+        state["pending_refs"])
 
 
 @pytest.mark.parametrize("case", [
@@ -1285,12 +1646,14 @@ def test_each_embedding_batch_is_recorded_before_http_and_billed_once(tmp_path: 
 
 
 @pytest.mark.parametrize("unknown_answer", [False, True])
+@pytest.mark.parametrize("failure_kind", ["capacity", "no_text", "whole_material"])
 def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_stops(
-    tmp_path: Path, unknown_answer: bool,
+    tmp_path: Path, unknown_answer: bool, failure_kind: str, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     class MeasuredTokenizer:
         def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
-            return [0] * (500 if "capacity_probe" in str(messages) else 2)
+            return [0] * (500 if any(probe in str(messages) for probe in (
+                "capacity_probe", "whole_material_probe")) else 2)
 
         def encode(self, text: str, **kwargs: Any) -> list[int]:
             return list(range(len(text)))
@@ -1313,17 +1676,21 @@ def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_sto
             content = json.dumps({"proposals": [proposal]})
         elif payload["question"] == "BlueProject unknown_probe":
             raise httpx.ReadError("Original answer unknown", request=request)
+        elif payload["question"] == "BlueProject no_text_probe":
+            content = None
         else:
             content = payload["memories"][0]["content"]
         return httpx.Response(200, json={
-            "choices": [{"finish_reason": "stop", "message": {"content": content}}],
+            "choices": [{"finish_reason": "stop", "message": {
+                "content": content, "reasoning": "Reasoning is not the final answer",
+            }}],
             "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9},
         })
 
     sessions = []
     for ordinal, day in enumerate(("Monday", "Tuesday")):
         stamp = f"Jan 0{ordinal + 1}, 2030, 09:00:00"
-        questions = (["BlueProject capacity_probe", "BlueProject first complete"]
+        questions = ([f"BlueProject {failure_kind}_probe", "BlueProject first complete"]
                      + (["BlueProject unknown_probe"] if unknown_answer else [])) \
             if ordinal == 0 else ["BlueProject later complete"]
         sessions.append({
@@ -1344,6 +1711,23 @@ def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_sto
                     "reader_failure_policy": "record_known_readonly_failure"},
     }
     execution.tokenizer = MeasuredTokenizer()
+    if failure_kind == "whole_material":
+        execution.settings["memory_view_mode"] = "direct"
+        original_answer = execution.answer
+
+        def answer_material_probe(
+            service: MemoryService, question: str, date: str, key: str,
+        ) -> str:
+            if "whole_material_probe" not in question:
+                return original_answer(service, question, date, key)
+            materials = [{"id": "actual-synthetic-item", "text": "BlueProject Monday"}]
+            snapshot_id = f"native/{key}/retrieval.json"
+            write_json(execution.root / snapshot_id, {"materials": materials})
+            return execution.answer_material(
+                question, date, key, materials, snapshot_id=snapshot_id,
+            )[0]
+
+        monkeypatch.setattr(execution, "answer", answer_material_probe)
     budget = RunBudget(RunLimits(), tmp_path / "budget.json")
     with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100),
                     transport=httpx.MockTransport(provider), budget=budget) as client:
@@ -1358,28 +1742,89 @@ def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_sto
             }
         first = read_json(execution.root / "predictions/halumem/synthetic/0/qa/0/complete.json")
         assert first["hypothesis"] is None
-        assert first["reader_failure"]["phase"] == "before_http"
-        assert first["reader_failure"]["request_sent"] is False
-        assert (execution.root / first["reader_failure"]["capacity_ref"]).exists()
-        assert not (execution.root / "http/halumem/synthetic/0/qa/0/request.json").exists()
+        if failure_kind == "capacity":
+            assert first["reader_failure"]["phase"] == "before_http"
+            assert first["reader_failure"]["request_sent"] is False
+            assert (execution.root / first["reader_failure"]["capacity_ref"]).exists()
+            assert not (execution.root / "http/halumem/synthetic/0/qa/0/request.json").exists()
+        elif failure_kind == "whole_material":
+            assert first["reader_failure"]["phase"] == "before_final_http"
+            assert first["reader_failure"]["reason"] == "whole_material_unavailable"
+            assert first["reader_failure"]["request_sent"] is False
+            assert (execution.root / first["reader_failure"]["delivery_plan_ref"]).exists()
+            assert not (execution.root / "http/halumem/synthetic/0/qa/0/request.json").exists()
+        else:
+            assert first["reader_failure"]["phase"] == "confirmed_response"
+            assert first["reader_failure"]["reason"] == "no_textual_answer"
+            response = read_json(execution.root / first["reader_failure"]["response_ref"])
+            assert response["choices"][0]["message"]["content"] is None
+            assert response["choices"][0]["finish_reason"] == "stop"
         answer_path = execution.root / "predictions/halumem/synthetic/0/qa/1/complete.json"
         original = answer_path.read_bytes()
         assert "Monday" in read_json(answer_path)["hypothesis"]
         if unknown_answer:
-            assert len(attempts) == 3 and budget.state["generation"]["unknown_usage"] == 1
+            assert len(attempts) == 3 + (failure_kind == "no_text")
+            assert budget.state["generation"]["unknown_usage"] == 1
             assert not (execution.root / "predictions/halumem/synthetic/0/complete.json").exists()
             with pytest.raises(RuntimeError, match="do not blindly repeat"):
                 execution.halumem("predict")
-            assert len(attempts) == 3 and budget.state["generation"]["unknown_usage"] == 1
+            assert len(attempts) == 3 + (failure_kind == "no_text")
+            assert budget.state["generation"]["unknown_usage"] == 1
         else:
-            assert len(attempts) == 4 and budget.state["generation"]["unknown_usage"] == 0
+            assert len(attempts) == 4 + (failure_kind == "no_text")
+            assert budget.state["generation"]["unknown_usage"] == 0
             later = read_json(execution.root / "predictions/halumem/synthetic/1/complete.json")
             assert later["state"][0]["value"]["revision"] == 2
             assert "Tuesday" in later["prediction"]["questions"][0]["hypothesis"]
             assert execution.halumem("predict")["known_reader_failures"] == 1
-            assert len(attempts) == 4
+            assert len(attempts) == 4 + (failure_kind == "no_text")
+            scored_questions = []
+
+            class Official:
+                def __init__(self, *args: Any) -> None:
+                    pass
+
+                def score(self, name: str, *args: str) -> dict[str, Any]:
+                    if name == "question":
+                        scored_questions.append(args[0])
+                        assert "_probe" not in args[0]
+                        return {"evaluation_result": "Correct"}
+                    return {"accuracy_score": 2}
+
+                def aggregate_results(self, records: dict[str, Any]) -> dict[str, Any]:
+                    return copy.deepcopy(records)
+
+            monkeypatch.setattr("milai_lab.runners.edit_benchmarks.HaluMemOfficial", Official)
+            execution.settings["halumem"]["official_checkout"] = str(tmp_path)
+            scored = execution.halumem("score")["question_answering_records"]
+            assert len(scored) == 3 and len(scored_questions) == 2
+            assert scored[0]["system_response"] is None and scored[0]["result_type"] is None
+            assert scored[0]["reader_failure"] == first["reader_failure"]
+            assert len(attempts) == 4 + (failure_kind == "no_text")
         assert answer_path.read_bytes() == original
     assert budget.state["generation_requests"] == len(attempts)
+
+
+def test_nontext_reader_requires_confirmed_usage_and_declared_failure_policy(
+    tmp_path: Path,
+) -> None:
+    execution = BenchmarkRun.__new__(BenchmarkRun)
+    execution.root = tmp_path
+    execution.settings = {"halumem": {"reader_failure_policy": "record_known_readonly_failure"}}
+    response = {"choices": [{"finish_reason": "stop", "message": {"content": None}}]}
+    path = tmp_path / "http/qa/response.json"
+    for usage in (None, {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 10},
+                  {"prompt_tokens": False, "completion_tokens": 7, "total_tokens": 7}):
+        write_json(path, {**response, "usage": usage})
+        assert execution._known_reader_failure(
+            ValueError("Provider returned no textual answer"), "qa") is None
+    write_json(path, {**response, "usage": {
+        "prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9,
+    }})
+    for policy in ("fail_fast", "record_confirmed_length"):
+        execution.settings["halumem"]["reader_failure_policy"] = policy
+        assert execution._known_reader_failure(
+            ValueError("Provider returned no textual answer"), "qa") is None
 
 
 def test_embedding_budget_rejection_is_recorded_as_not_sent(tmp_path: Path) -> None:

@@ -61,6 +61,113 @@ def setup_run(tmp_path: Path) -> tuple[Path, Path, str]:
     return root, bank, EVAL.canonical_hash(["s1", "m1"])
 
 
+def host_flows_tool() -> Any:
+    specification = importlib.util.spec_from_file_location(
+        "baseline_host_flows", Path(__file__).parents[2] / "tools/run_baseline_host_flows.py")
+    assert specification is not None and specification.loader is not None
+    module = importlib.util.module_from_spec(specification)
+    specification.loader.exec_module(module)
+    return module
+
+
+def test_host_flow_summary_keeps_candidates_program_feedback_and_all_attempts(
+    tmp_path: Path,
+) -> None:
+    tool = host_flows_tool()
+    root = tmp_path / "flows"
+    cases = [{"case_id": name, "owner": "owner-a", "workflow": "reservation", "messages": [
+        {"session_id": "s", "message_id": "m", "content": "Actual user request."},
+    ]} for name in tool.STORIES]
+    save(root / "input-freeze.json", {
+        "schema": "functional_run_inputs_v2", "config_version": "host-v1",
+        "config": {"config_version": "host-v1", "finalization": "receipt_or_agent_response_v1"},
+        "source_version": {"implementation_version": "host-source-v1"},
+        "fixture": {"cases": cases},
+    })
+    bank = root / "banks" / "stored-bank"
+    save(root / "bank-index.json", [{"identity": {"bank": cases[0]["case_id"], "owner": "owner-a"},
+                                     "id": bank.name}])
+    save(bank / "message-index.json", [{"identity": {"session": "s", "message_id": "m"},
+                                        "id": "stored-message"}])
+    for number, status in enumerate(("FAILED", "COMPLETED")):
+        model = "An unsupported model claim."
+        row = {"bank": cases[0]["case_id"], "owner": "owner-a", "session": "s", "message_id": "m",
+               "content": "Actual user request.", "workflow": "reservation", "attempt": number,
+               "process_id": 10 + number, "status": status, "sources": [], "records": [],
+               "snapshot_before_close": True, "budget_before": budget(number, number * 10),
+               "budget_after": budget(number + 1, (number + 1) * 10),
+               "execution_candidate_answer": model,
+               "final_answer": model + "\n\nReceipt: no effect.",
+               "finalization": {"protocol": "agent_response_v1", "model_generation": False,
+                                "memory_receipts_appended": True},
+               "operation_status": {"semantic_memory": {
+                   "status": "not_committed", "operations": []}},
+               "messages": [], "error_category": "provider_protocol" if number == 0 else None}
+        save(bank / f"stored-message-attempt-{number}.json", row)
+        save(bank / "stored-message-result.json", row)
+        response = {"choices": [{"message": {"content": model}}]}
+        event = {"event": "vllm_response", "http_status": 200, "receipt": response,
+                 "response_text": json.dumps(response), "usage": {"total_tokens": 10}}
+        bank.joinpath(f"stored-message-trace-{number}.jsonl").write_text(json.dumps(event) + "\n")
+    before = {str(path): path.read_bytes() for path in root.rglob("*") if path.is_file()}
+    result = tool.summary([root])
+    assert result["planned_messages"] == 2 and result["retained_attempts"] == 2
+    assert result["message_execution_counts"] == {"COMPLETED": 1, "NOT_RUN": 1}
+    assert result["source_groups"] == sorted(tool.STORIES)
+    assert result["first_recorded_runtime_failure"]["message_index"] == 0
+    saved = result["messages"][0]["attempts"]
+    assert [row["execution_status"] for row in saved] == ["FAILED", "COMPLETED"]
+    assert saved[1]["raw_model_answer"] == "An unsupported model claim."
+    assert saved[1]["raw_model_http_linkage"]["status"] == "PASS"
+    assert saved[1]["public_delivery"].endswith("Receipt: no effect.")
+    assert saved[1]["actual_effect"]["semantic_memory"]["status"] == "not_committed"
+    assert saved[1]["semantic_correctness"] == "unchecked"
+    assert before == {str(path): path.read_bytes() for path in root.rglob("*") if path.is_file()}
+
+
+@pytest.mark.parametrize("last_result", [{"status": "UNKNOWN"}, []])
+def test_host_flow_dispatch_retains_known_failure_and_stops_all_repeats_on_unknown(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, last_result: Any,
+) -> None:
+    import subprocess
+
+    tool = host_flows_tool()
+    root = tmp_path / "queue"
+    ledger = tmp_path / "budget.json"
+    save(ledger, {**budget(0, 0), "limits": {"generation": 1000}})
+    save(root / "protocol.json", {"status": "PREPARED_NOT_DISPATCHED"})
+    fixture = {"cases": [{"case_id": name, "messages": [
+        {"session_id": "s", "message_id": str(index), "content": "Actual message."}
+        for index in range(count)
+    ]} for name, count in zip(tool.STORIES, (8, 6), strict=True)]}
+    for repeat in range(1, 4):
+        save(root / f"rep-{repeat}" / "input-freeze.json", {
+            "config": {"budget_path": str(ledger)}, "fixture": fixture,
+            "evaluator_controls": {}, "source_version": {"implementation_version": "host-source"},
+        })
+    calls = []
+
+    def original_step(arguments: list[str], runtime: Path, output: Path) -> Any:
+        calls.append(arguments)
+        result = ({"status": "FAILED", "error_category": "request_capacity"},
+                  {"status": "COMPLETED"}, last_result)[len(calls) - 1]
+        save(output.with_suffix(".stdout.json"), result)
+        return subprocess.CompletedProcess(arguments, 0, json.dumps(result), "")
+
+    monkeypatch.setattr(tool, "cli", original_step)
+    result = tool.serial_run(root, "Root owns a free resource; execute the declared repeats")
+    assert len(calls) == 3 and all("--resume" not in call for call in calls)
+    assert result["status"] == "STOPPED" and result["attempted_messages"] == 3
+    assert result["stop_reason"] == "UNKNOWN"
+    rows = json.loads(root.joinpath("results.json").read_text())["results"]
+    assert len(rows) == 42
+    assert [row["status"] for row in rows[:3]] == ["FAILED", "COMPLETED", "UNKNOWN"]
+    assert all(row["status"] == "NOT_RUN" for row in rows[3:])
+    with pytest.raises(ValueError, match="no automatic restart"):
+        tool.serial_run(root, "Never blindly retry the unknown call")
+    assert len(calls) == 3
+
+
 def attempt(
     bank: Path, identity: str, number: int = 0, *, status: str = "COMPLETED", owner: str = "owner-a"
 ) -> dict[str, Any]:

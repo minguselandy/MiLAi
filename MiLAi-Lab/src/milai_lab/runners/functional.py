@@ -2013,22 +2013,59 @@ def memory_effects(messages: list[Any]) -> dict[str, Any]:
 def _model_memory_effects(effects: dict[str, Any]) -> dict[str, Any]:
     """Reference exact parent receipts in model input; keep audit results intact."""
     projected = deepcopy(effects)
+    confirmed: list[str] = []
+    versions: set[tuple[str, int]] = set()
+
+    def confirm(ref: str, receipt: dict[str, Any]) -> None:
+        record_id, revision = receipt.get("id"), receipt.get("revision")
+        if (receipt.get("ok") is not True or receipt.get("status") != "committed"
+                or receipt.get("effect") != "memory_only"
+                or not isinstance(record_id, str) or not record_id
+                or type(revision) is not int or revision < 1):
+            return
+        version = (record_id, revision)
+        if version not in versions:
+            versions.add(version)
+            confirmed.append(ref)
+
+    for receipt in projected.get("mutation_receipts", []):
+        ref = receipt.get("receipt_ref")
+        if (receipt.get("transport_status") == "success"
+                and receipt.get("tool") in {"save_memory", "update_memory"}
+                and isinstance(ref, str) and ref):
+            confirm(ref, receipt)
 
     def project_batches(
-        result: dict[str, Any], references: list[tuple[str, dict[str, Any]]]
+        result: dict[str, Any], references: list[tuple[str, dict[str, Any]]], path: str,
     ) -> None:
-        for batch in result.get("batches", []):
+        for index, batch in enumerate(result.get("batches", [])):
+            batch_path = f"{path}/batches/{index}"
+            for receipt_index, receipt in enumerate(batch.get("receipts", [])):
+                confirm(f"{batch_path}/receipts/{receipt_index}", receipt)
             batch["receipts"] = [
                 next(({"receipt_ref": ref} for ref, original in references
                       if receipt == original), receipt)
                 for receipt in batch.get("receipts", [])
             ]
-            project_batches(batch, references)
+            project_batches(batch, references, batch_path)
 
     for index, result in enumerate(projected.get("maintenance", [])):
         references = [(f"#/maintenance/{index}/receipts/{receipt_index}", receipt)
                       for receipt_index, receipt in enumerate(result.get("receipts", []))]
-        project_batches(result, references)
+        for ref, receipt in references:
+            confirm(ref, receipt)
+        project_batches(result, references, f"#/maintenance/{index}")
+    projected["confirmed_semantic_commit_receipt_refs"] = confirmed
+    projected["confirmed_semantic_commit_count"] = len(confirmed)
+    if projected.get("maintenance"):
+        projected["interpretation"] = (
+            "Actual Agent tool receipts and shared maintenance receipts confirm listed write "
+            "effects. Repeated receipts for one record/version count once; no_change, rejection "
+            "and unknown receipts are not commits. A missing save/update tool or a rejected "
+            "extra call does not undo a shared maintenance commit. Raw capture and read-only "
+            "hits do not confirm saving. Commit receipts do not verify content, fields or "
+            "completion of the whole request."
+        )
     return projected
 
 
@@ -3284,6 +3321,8 @@ def message(
                     )
                     capability_text = (
                         "CURRENT EXECUTION CAPABILITIES: " + json.dumps(active) + ". "
+                        "This catalog limits the Agent's next actions; it does not report "
+                        "already completed effects. "
                         "Only these tools are available in this phase. An earlier request or "
                         "an earlier phase cannot enable a missing tool. "
                     )
@@ -3294,12 +3333,9 @@ def message(
                             "plainly when it prevents an answer. Available business tools still "
                             "follow the current request permissions. "
                         )
-                    if maintenance_recipe:
-                        capability_text += (
-                            "The shared maintenance recipe reports its actual results below. "
-                            "The Agent does not need a save/update tool to confirm those receipts. "
-                        )
-                    elif not {"save_memory", "update_memory"}.intersection(active):
+                    if not maintenance_recipe and not {
+                        "save_memory", "update_memory"
+                    }.intersection(active):
                         capability_text += (
                             "Memory saving/updating is unavailable in this phase. Do not search "
                             "or read repeatedly to try to enable it. Report the actually observed "
@@ -3322,15 +3358,25 @@ def message(
                             # this checkpointed ID; IDs do not enter provider text.
                             id=(identity + ":required-memory-proposal"
                                 if require_proposal else None),
-                            content=capability_text + settings["system_prompt"]
+                            content=settings["system_prompt"]
                             + ("\n" + memory.instructions()
                                if isinstance(memory, FunctionalEditMemory)
                                and not maintenance_recipe else "")
+                            + "\nACTUAL EFFECTS AND RECEIPT EVIDENCE:\n"
+                            + "Confirmed receipts establish the listed effects, even when a "
+                              "save/update tool is absent now or an extra call is rejected. "
+                              "Commit counts do not verify content, fields or the whole request. "
+                              "Keep committed, unchanged, rejected and unknown outcomes distinct."
                             + ("\nMemory maintenance for this event is handled by the shared "
                                "recipe. Use its actual receipts below to report saved, unchanged "
                                "or unfinished work. Raw capture is not a semantic save. "
                                "Do not duplicate maintenance through other tools."
                                if maintenance_recipe else "")
+                            + "\n" + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
+                            + "\nCURRENT TOOLS AND ACTION LIMITS:\n"
+                            + capability_text
+                            + "Use only the tools actually supplied for this phase. This limits "
+                              "next actions; it cannot establish that a prior effect did not occur."
                             + (MAINTENANCE_LIMIT_PROMPT if not for_finalization
                                and settings.get("semantic_reproposal_policy")
                                == "maintenance_two_proposals_v1"
@@ -3340,14 +3386,22 @@ def message(
                                and settings.get("support_input") == "selected_sources_v1"
                                and {"save_memory", "update_memory"}.intersection(allowed_tools)
                                else "")
+                            + "\nCURRENT REQUEST PROGRESS AND OUTSTANDING WORK:\n"
+                            + "Request interpretation describes intent, not completed effects. "
+                              "Use actual progress, pending calls, unprocessed maintenance and "
+                              "reading gaps to identify unfinished or unknown work. A confirmed "
+                              "operation does not prove unattempted parts; semantic completion "
+                              "remains unchecked."
                             + (("\nPersisted current-request interpretation: " if capability_text
                                 else "\nCurrent request interpretation and enforced tool limits: ")
                                + json.dumps(mode, ensure_ascii=False) if mode else "")
                             + ("\n" + PROGRESS_PREFIX + json.dumps(request_progress,
                                 ensure_ascii=False, separators=(",", ":")) if tracker else "")
+                            + ("\nCurrent request part failures: " + json.dumps(
+                                output["request_part_failures"], ensure_ascii=False)
+                               if output.get("request_part_failures") else "")
                             + "".join("\n" + str(row.content) for row in completion_feedback)
-                            + "\n"
-                            + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
+                            + "\nDelivered memory evidence and reading requirements:"
                             + "\n"
                             + json.dumps(material, ensure_ascii=False)
                         ),

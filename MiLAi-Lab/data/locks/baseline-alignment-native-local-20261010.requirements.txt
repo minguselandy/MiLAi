@@ -1,0 +1,4 @@
+# Optional research backends only. Keep these out of the Lab core environment.
+# Hindsight's native server is deployed separately; this installs its official SDK.
+hindsight-client==0.10.3
+rank-bm25==0.2.2

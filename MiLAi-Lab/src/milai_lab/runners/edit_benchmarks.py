@@ -44,8 +44,10 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.memory.working_set import (
     empty_view,
     item_ref,
+    material_ref,
     plan_delivery,
     record_candidate,
+    select_material_refs,
     select_view_refs,
 )
 from milai_lab.methods.append_memory import AppendMemory
@@ -482,11 +484,23 @@ def adjacent_source_context(
 
 
 class BenchmarkRun:
+    @property
+    def session_output_supported(self) -> bool:
+        """Native adapters may lack actual per-session extraction output."""
+        return True
+
+    @property
+    def reference_retrieval_supported(self) -> bool:
+        """A reference-guided state view must be isolated from future method work."""
+        return True
+
     def __init__(
         self, settings: dict[str, Any], root: Path, *, phase: str = "all"
     ) -> None:
         self.settings, self.root, self.phase = settings, root, phase
-        if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
+        if settings.get("memory_view_mode", "legacy") not in {
+            "legacy", "direct", "staged", "state_driven",
+        }:
             raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
         if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
             raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
@@ -1169,7 +1183,10 @@ class BenchmarkRun:
                 method, delivery, session=observed.session_id, request_id=request_id,
                 date=observed.date,
                 recipe=cast(MaintenanceRecipe, self.settings["maintenance_recipe"]),
-                memory_view_mode=self.settings.get("memory_view_mode", "legacy"),
+                # Direct is a Reader delivery factor. Reuse the existing staged
+                # maintenance path rather than inventing another write recipe.
+                memory_view_mode=("staged" if self.settings.get("memory_view_mode") == "direct"
+                                  else self.settings.get("memory_view_mode", "legacy")),
                 model_call=call, retrieval_limit=self.settings["retrieval_limit"], fit=self._fits,
                 stage_fit=(lambda stage, messages: self._fits(
                     messages, enable_thinking=self.stage_thinking(stage)))
@@ -1597,14 +1614,32 @@ class BenchmarkRun:
             projection=self.settings.get("reader_projection", "legacy"),
         )
 
-    def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
+    def retrieve_material(
+        self, service: MemoryService, question: str, date: str, key: str,
+        *, limit: int | None = None,
+    ) -> list[dict[str, Any]]:
+        """The original saved retrieval and evidence projection, without a Reader.
+
+        This is the shared pure-memory adapter boundary. It neither captures the
+        question as a Source nor selects or summarizes the actual returned pool.
+        A saved pool remains authoritative on resume, including its original
+        query/date/limit when the new adapter records that request alongside it.
+        """
         snapshot = self.root / "http" / key / "retrieval.json"
+        request_path = snapshot.with_name("retrieval-request.json")
+        if snapshot.exists() and not request_path.exists() and limit is None:
+            # Original frozen artifacts predate the adapter request envelope.
+            # Reopen their actual pool without reconstructing a new retrieval.
+            return cast(list[dict[str, Any]], read_json(snapshot))
+        requested_limit: int = self.settings["retrieval_limit"] if limit is None else limit
+        request = {"question": question, "date": date, "limit": requested_limit}
+        if request_path.exists() and read_json(request_path) != request:
+            raise ValueError("Saved retrieval request changed; use a new key")
         if snapshot.exists():
             memories = read_json(snapshot)
         else:
-            records = service.search(
-                question, limit=self.settings["retrieval_limit"], include_raw=False
-            )["records"]
+            native = service.search(question, limit=requested_limit, include_raw=False)
+            records = native["records"]
             memories = [
                 {
                     "content": row["value"]["content"],
@@ -1645,7 +1680,17 @@ class BenchmarkRun:
                     {**memory, "record_content_chars": len(memory["content"])},
                     edit_state=row["value"].get("edit_state"),
                 ) for memory, row in zip(memories, records, strict=True)]
+            # New explicit adapter calls retain the native result as well as the
+            # existing Reader snapshot. Legacy paths keep their artifact shape.
+            if limit is not None:
+                write_json(request_path, request)
+                write_json(snapshot.with_name("retrieval-native.json"), native)
             write_json(snapshot, memories)
+        return cast(list[dict[str, Any]], memories)
+
+    def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
+        memories = self.retrieve_material(service, question, date, key)
+        snapshot = self.root / "http" / key / "retrieval.json"
         cached_response = (snapshot.parent / "response.json").exists()
         answer, used_memories = self.answer_material(question, date, key, memories)
         if service.memory_profile == "unified_v1":
@@ -1659,13 +1704,21 @@ class BenchmarkRun:
 
     def answer_material(
         self, question: str, date: str, key: str, memories: list[dict[str, Any]],
+        *, snapshot_id: str | None = None,
     ) -> tuple[str, list[dict[str, Any]]]:
         """Shared Reader over an actual retained retrieval snapshot, without new search.
 
         The ordinary caller owns retrieval and access. The finite view comparison
         uses the exact saved pool, so changing delivery cannot add sources or facts.
+        Ordinary direct delivery sends the entire pool to the original measured call;
+        an oversized request retains its known unsent failure, without truncation
+        or a Selector. Staged/state_driven retain their existing page continuation.
+        An explicit native snapshot uses read-only array positions for all backends;
+        direct delivery pages only when the complete original pool does not fit.
         """
-        if self.settings.get("memory_view_mode", "legacy") == "legacy":
+        if snapshot_id is not None:
+            return self._answer_view(question, date, key, memories, snapshot_id=snapshot_id)
+        if self.settings.get("memory_view_mode", "legacy") in {"legacy", "direct"}:
             sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
                                        if self.stage_thinking("reader") is not None else {})
             return self.call(
@@ -1676,8 +1729,9 @@ class BenchmarkRun:
 
     def _answer_view(
         self, question: str, date: str, key: str, memories: list[dict[str, Any]],
+        *, snapshot_id: str | None = None,
     ) -> tuple[str, list[dict[str, Any]]]:
-        """Read the fixed actual pool with the same reference state as ordinary Host.
+        """Read one fixed pool using record references or read-only snapshot positions.
 
         QA is a read request, never a new source. The saved retrieval remains the
         only candidate pool; whole selected records retain the original Reader's
@@ -1685,43 +1739,84 @@ class BenchmarkRun:
         and the original model call allowance, reserving one call for the answer.
         """
         mode = self.settings["memory_view_mode"]
+        material_pool = snapshot_id is not None
+        if snapshot_id is not None:
+            location = Path(snapshot_id)
+            if location.is_absolute() or ".." in location.parts:
+                raise ValueError("READ_MATERIAL_SNAPSHOT_PATH_INVALID")
+            saved = read_json(self.root / location)["materials"]
+            if saved != json.loads(json.dumps(memories, ensure_ascii=False)):
+                raise ValueError("Saved retrieval materials changed; use a new key")
+            memories = saved
         path = self.root / "http" / key / "memory-view.json"
         state = read_json(path) if path.exists() else {
             **empty_view(), "steps": 0, "complete": False, "opened_ids": [],
         }
-        refs = [item_ref({
+        if material_pool and path.exists() and state.get("retrieval_snapshot") != snapshot_id:
+            raise ValueError("Reader retrieval snapshot changed; use a new key")
+        refs = ([material_ref(snapshot_id, index) for index in range(len(memories))]
+                if snapshot_id is not None else [item_ref({
             "type": "record", "record_id": memory["record_id"],
             "revision": memory["revision"], "version_view": "current_at_snapshot",
             "content_range": [0, memory.get(
                 "record_content_chars", len(memory.get("content", "")))],
-        }, key + "/retrieval.json", index) for index, memory in enumerate(memories)]
-        directory = [record_candidate(
+        }, key + "/retrieval.json", index) for index, memory in enumerate(memories)])
+        if material_pool:
+            state["retrieval_snapshot"] = snapshot_id
+            state.setdefault("opened_indices", [])
+            if not path.exists() and mode == "direct":
+                state.update(resident_refs=copy.deepcopy(refs), complete=True,
+                             opened_indices=list(range(len(memories))))
+
+        def material_candidate(index: int, memory: dict[str, Any]) -> dict[str, Any]:
+            text = memory.get("text", memory.get("content"))
+            if not isinstance(text, str):
+                text = json.dumps(memory, ensure_ascii=False, separators=(",", ":"))
+            return {
+                "item_index": index, "navigation_only": True,
+                "literal_excerpt": text[:384], "excerpt_truncated": len(text) > 384,
+                "native_metadata": {field: copy.deepcopy(memory[field]) for field in (
+                    "id", "record_id", "session_id", "revision", "provenance", "date",
+                    "occurred_at", "occurred_start", "occurred_end", "observed_at",
+                    "reported_at", "committed_at", "timestamp", "range", "turn_range",
+                    "native_collection", "native_collection_key",
+                    "truncated",
+                ) if field in memory},
+            }
+
+        directory = ([material_candidate(index, memory) for index, memory in enumerate(memories)]
+                     if material_pool else [record_candidate(
             memory["record_id"], memory["revision"],
             memory.get("matter_description", memory["scope"]),
             memory.get("record_content_chars", len(memory.get("content", ""))),
             navigation=memory.get("retrieval_navigation"),
-        ) for memory in memories]
+        ) for memory in memories])
         input_limit = 0
         reader_thinking = self.stage_thinking("reader")
-        if self.settings.get("reader_projection") == "semantic_units_v1":
+        if material_pool or self.settings.get("reader_projection") == "semantic_units_v1":
             input_limit = (self.settings["context_tokens"]
                            - self.settings["model"]["max_tokens"] - 512)
             for candidate, memory in zip(directory, memories, strict=True):
-                candidate["single_record_input_tokens"] = self.input_tokens(
+                candidate["single_material_input_tokens" if material_pool
+                          else "single_record_input_tokens"] = self.input_tokens(
                     self._reader_messages(question, date, [memory]),
                     enable_thinking=reader_thinking,
                 )
+        selection_field = "item_indices" if material_pool else "record_ids"
+        opened_field = "opened_indices" if material_pool else "opened_ids"
         schema = {
             "type": "object", "additionalProperties": False,
             "properties": {
-                "record_ids": {"type": "array", "uniqueItems": True, "items": {
-                    "type": "string", "enum": [memory["record_id"] for memory in memories]
+                selection_field: {"type": "array", "uniqueItems": True, "items": {
+                    "type": "integer" if material_pool else "string",
+                    "enum": list(range(len(memories))) if material_pool
+                    else [memory["record_id"] for memory in memories],
                 }} if memories else {"type": "array", "maxItems": 0},
                 "keep_resident": {"type": "boolean"}, "done": {"type": "boolean"},
                 "read_goal": {"type": ["string", "null"], "description":
                     "Purpose of this question, possibly combining current applicability, "
                     "original wording and actual saved history; omission inherits the purpose."},
-            }, "required": ["record_ids", "keep_resident", "done"],
+            }, "required": [selection_field, "keep_resident", "done"],
         }
         call_limit = self.client.config.max_calls
         if call_limit < 1:
@@ -1732,12 +1827,40 @@ class BenchmarkRun:
         if mode == "staged":
             read_limit = min(read_limit, 1)
 
+        def selected_material(selected_refs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+            if material_pool:
+                for ref in selected_refs:
+                    index = ref.get("item_index")
+                    if (type(index) is not int or not 0 <= index < len(refs)
+                            or ref != refs[index]):
+                        raise ValueError("READ_MATERIAL_REFERENCE_UNAVAILABLE")
+            return [memories[ref["item_index" if material_pool else "unit_index"]]
+                    for ref in selected_refs]
+
+        def select_refs(current: dict[str, Any], selected: dict[str, Any]) -> dict[str, Any]:
+            if material_pool:
+                return select_material_refs(
+                    current, refs, selected[selection_field],
+                    keep_resident=selected["keep_resident"], read_goal=selected.get("read_goal"),
+                )
+            return select_view_refs(
+                current, refs, [{"id": identifier} for identifier in selected[selection_field]],
+                keep_resident=selected["keep_resident"], read_goal=selected.get("read_goal"),
+            )
+
         def resident() -> list[dict[str, Any]]:
-            return [memories[ref["unit_index"]] for ref in state["resident_refs"]]
+            return selected_material(state["resident_refs"])
 
         while memories and not state["complete"] and state["steps"] < read_limit:
             messages = self._reader_messages(question, date, resident())
             messages[0]["content"] += (
+                "\nSelect item_indices from this fixed retrieval snapshot to read. "
+                "Candidate metadata and literal excerpts are navigation, never answer evidence. "
+                "Indices locate whole original entries and grant no write or forget authority. "
+                "Selecting replaces the resident entries unless keep_resident=true. "
+                "read_goal states the question's purpose, not evidence sufficiency. "
+                "Return only the supplied selection schema."
+                if material_pool else
                 "\nThis call is the one selection before the final answer. "
                 "Directory descriptions locate records; they are not evidence. Select "
                 "record_ids to open together. After this selection, the selected whole "
@@ -1762,18 +1885,38 @@ class BenchmarkRun:
             )
             payload = json.loads(messages[1]["content"])
             payload.update(memory_view_state={name: state[name] for name in empty_view()},
-                           candidates=directory, opened_ids=state["opened_ids"],
+                           candidates=directory, **{opened_field: state[opened_field]},
                            remaining_reads=read_limit - state["steps"], response_schema=schema)
-            if self.settings.get("reader_projection") == "semantic_units_v1":
+            if material_pool:
+                payload["memory_view_state"] = {
+                    "focus": state["focus"], "read_goal": state["read_goal"],
+                    "resident_item_indices": [ref["item_index"] for ref in state["resident_refs"]],
+                    "pending_item_indices": [ref["item_index"] for ref in state["pending_refs"]],
+                }
+                payload["retrieval_snapshot"] = {"snapshot_id": snapshot_id,
+                                                 "collection": "materials"}
+                payload["memory_item_indices"] = [ref["item_index"]
+                                                  for ref in state["resident_refs"]]
+                payload["undelivered_item_indices"] = [
+                    ref["item_index"] for ref in refs
+                    if ref["item_index"] not in state[opened_field]
+                ]
+            if material_pool or self.settings.get("reader_projection") == "semantic_units_v1":
                 payload["input_token_limit"] = input_limit
                 payload["capacity_note"] = (
+                    "single_material_input_tokens measures one whole original entry with "
+                    "the actual question and Reader template; joint costs are not additive."
+                    if material_pool else
                     "single_record_input_tokens measures that matter with this question and "
                     "the actual Reader template. Joint request cost is measured after selection; "
                     "individual costs are not additive."
                 )
             messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
-            if (input_limit and self.input_tokens(messages) > input_limit
-                    and state["resident_refs"]):
+            if (input_limit and self.input_tokens(messages, **(
+                    {"enable_thinking": reader_thinking} if material_pool else {})) > input_limit
+                    and (state["resident_refs"] or material_pool)):
+                if material_pool and not state["resident_refs"]:
+                    state["resident_refs"] = copy.deepcopy(refs)
                 state["selector_needs_pages"] = True
                 break
             state["active_stage"] = f"{key}/view/select-{state['steps']}"
@@ -1783,25 +1926,35 @@ class BenchmarkRun:
                 response_format={"type": "json_schema", "json_schema": {
                     "name": "milai_reader_select", "schema": schema,
                 }},
+                **({"enable_thinking": reader_thinking} if material_pool else {}),
             ), reject_duplicate_keys=True)
             Draft202012Validator(schema).validate(selected)
-            state.update(select_view_refs(
-                state, refs, [{"id": identifier} for identifier in selected["record_ids"]],
-                keep_resident=selected["keep_resident"],
-                read_goal=selected.get("read_goal"),
-            ))
+            state.update(select_refs(state, selected))
             state["steps"] += 1
-            state["opened_ids"] = list(dict.fromkeys([
-                *state["opened_ids"], *selected["record_ids"],
+            state[opened_field] = list(dict.fromkeys([
+                *state[opened_field], *selected[selection_field],
             ]))
-            state["complete"] = mode == "staged" or selected["done"] or not selected["record_ids"]
+            state["complete"] = (mode == "staged" or selected["done"]
+                                 or not selected[selection_field])
             write_json(path, state)
         state["complete"] = True
         write_json(path, state)
         def final_messages(selected_refs: list[dict[str, Any]]) -> list[dict[str, str]]:
             result = self._reader_messages(
-                question, date, [memories[ref["unit_index"]] for ref in selected_refs],
+                question, date, selected_material(selected_refs),
             )
+            if material_pool:
+                result[0]["content"] += (
+                    " memory_item_indices aligns one-to-one with the supplied memories. "
+                    "Each index locates that complete entry in retrieval_snapshot; "
+                    "snapshot positions grant no write or forget authority."
+                )
+                payload = json.loads(result[1]["content"])
+                payload["retrieval_snapshot"] = {"snapshot_id": snapshot_id,
+                                                 "collection": "materials"}
+                payload["memory_item_indices"] = [ref["item_index"] for ref in selected_refs]
+                result[1]["content"] = json.dumps(
+                    payload, ensure_ascii=False, separators=(",", ":"))
             if state["read_goal"] is not None:
                 result[0]["content"] += (
                     " read_goal describes this question's purpose, not the provenance or "
@@ -1815,7 +1968,7 @@ class BenchmarkRun:
             return result
 
         messages = final_messages(state["resident_refs"])
-        if self.settings.get("reader_projection") == "semantic_units_v1":
+        if material_pool or self.settings.get("reader_projection") == "semantic_units_v1":
             if "capacity_continuation" not in state:
                 delivery = plan_delivery(state["resident_refs"], lambda selected: self.input_tokens(
                     final_messages(selected), enable_thinking=reader_thinking,
@@ -1842,6 +1995,16 @@ class BenchmarkRun:
                 def page_messages(page_refs: list[dict[str, Any]]) -> list[dict[str, str]]:
                     result = final_messages(page_refs)
                     result[0]["content"] += (
+                        "\nRead this actual whole-entry page from the fixed retrieval snapshot. "
+                        "Only bodies in this input are evidence; directory excerpts, references "
+                        "and earlier responses contain no answer evidence. Select item_indices "
+                        "to reopen complete original entries for the final answer. keep_resident "
+                        "merges with final_reopen_item_indices. Candidate navigation covers "
+                        "only this page; pending_item_indices lists entries still to be read. "
+                        "done cannot skip any still-pending page. "
+                        "References grant no write or forget authority. Return only the supplied "
+                        "selection schema, never an answer or factual summary."
+                        if material_pool else
                         "\nThis request needs paged delivery. This is a continuation "
                         "of the same Reader selection, with one actual whole-matter page. "
                         "Only memories in this input contain evidence. The directory and "
@@ -1855,12 +2018,22 @@ class BenchmarkRun:
                     )
                     payload = json.loads(result[1]["content"])
                     payload.update(
-                        candidates=directory, response_schema=schema,
-                        final_reopen_refs=continuation["final_refs"],
-                        pending_refs=continuation["pending_refs"],
+                        response_schema=schema,
                         remaining_reads=total_read_limit - state["steps"],
                         input_token_limit=input_limit,
                     )
+                    if material_pool:
+                        payload.update(
+                            candidates=[directory[ref["item_index"]] for ref in page_refs],
+                            final_reopen_item_indices=[ref["item_index"]
+                                                       for ref in continuation["final_refs"]],
+                            pending_item_indices=[ref["item_index"]
+                                                  for ref in continuation["pending_refs"]],
+                        )
+                    else:
+                        payload.update(candidates=directory,
+                                       final_reopen_refs=continuation["final_refs"],
+                                       pending_refs=continuation["pending_refs"])
                     result[1]["content"] = json.dumps(
                         payload, ensure_ascii=False, separators=(",", ":"))
                     return result
@@ -1877,13 +2050,17 @@ class BenchmarkRun:
                     if active is None:
                         page_plan = plan_delivery(
                             continuation["pending_refs"],
-                            lambda chosen: self.input_tokens(page_messages(chosen)) <= input_limit,
+                            lambda chosen: self.input_tokens(page_messages(chosen), **(
+                                {"enable_thinking": reader_thinking} if material_pool else {}
+                            )) <= input_limit,
                         )
                         continuation["page_plan"] = page_plan
                         if not page_plan["pages"] and continuation["pending_refs"]:
-                            continuation["incomplete_reason"] = "whole_matter_unavailable"
+                            continuation["incomplete_reason"] = (
+                                "whole_material_unavailable" if material_pool
+                                else "whole_matter_unavailable")
                             write_json(path, state)
-                            raise ReadDeliveryIncomplete("whole_matter_unavailable")
+                            raise ReadDeliveryIncomplete(continuation["incomplete_reason"])
                         active = {"refs": page_plan["pages"][0] if page_plan["pages"] else [],
                                   "stage": f"{key}/view/page-{len(continuation['pages'])}"}
                         continuation["active_page"] = active
@@ -1911,6 +2088,7 @@ class BenchmarkRun:
                             response_format={"type": "json_schema", "json_schema": {
                                 "name": "milai_reader_select", "schema": schema,
                             }},
+                            **({"enable_thinking": reader_thinking} if material_pool else {}),
                         )
                     except ValueError:
                         note_confirmed_input(active)
@@ -1927,12 +2105,7 @@ class BenchmarkRun:
                     ]
                     selection_state = {**empty_view(), "resident_refs": continuation["final_refs"],
                                        "read_goal": state["read_goal"]}
-                    chosen = select_view_refs(
-                        selection_state, refs,
-                        [{"id": identifier} for identifier in selected["record_ids"]],
-                        keep_resident=selected["keep_resident"],
-                        read_goal=selected.get("read_goal"),
-                    )
+                    chosen = select_refs(selection_state, selected)
                     continuation["final_refs"] = chosen["resident_refs"]
                     state["read_goal"] = chosen["read_goal"]
                     continuation["selection_complete"] = selected["done"]
@@ -1968,9 +2141,16 @@ class BenchmarkRun:
                 state["capacity_continuation"]["final_body_delivered"] = True
             write_json(path, state)
         if "capacity_continuation" in state:
+            if material_pool:
+                delivered = state["capacity_continuation"]["delivered_page_refs"]
+                indices = {ref["item_index"] for ref in [*delivered, *state["resident_refs"]]}
+                return answer, [memory for index, memory in enumerate(memories) if index in indices]
             delivered_ids = {ref["id"] for ref in state["capacity_continuation"][
                 "delivered_page_refs"] + state["resident_refs"]}
             return answer, [memory for memory in memories if memory["record_id"] in delivered_ids]
+        if material_pool:
+            return answer, [memory for index, memory in enumerate(memories)
+                            if index in state[opened_field]]
         return answer, [memory for memory in memories if memory["record_id"] in state["opened_ids"]]
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:
@@ -1986,14 +2166,17 @@ class BenchmarkRun:
             raise RuntimeError("Reference-guided scorer retrieval mutated actual memory")
         return [row["value"]["content"] for row in rows]
 
-    def _known_reader_failure(self, error: ValueError, key: str) -> dict[str, Any] | None:
-        """Record only a proven unsent request or a confirmed incomplete response.
+    def _known_reader_failure(
+        self, error: ValueError, key: str, *, policy: str | None = None,
+    ) -> dict[str, Any] | None:
+        """Record a proven unsent request or confirmed unusable Reader response.
 
         This is called from QA only. Business, maintenance, transport unknowns
         and Store failures retain their original stop behavior. The run's frozen
         policy determines whether subsequent questions/history may proceed.
         """
-        policy = self.settings["halumem"].get("reader_failure_policy", "fail_fast")
+        if policy is None:
+            policy = self.settings["halumem"].get("reader_failure_policy", "fail_fast")
         view_path = self.root / "http" / key / "memory-view.json"
         if isinstance(error, ReadDeliveryIncomplete) and policy == "record_known_readonly_failure":
             if (not view_path.exists() or (view_path.parent / "request.json").exists()
@@ -2015,9 +2198,11 @@ class BenchmarkRun:
                     **({"delivery_plan_ref": str((self.root / "http" / key / "memory-view.json"
                                                   ).relative_to(self.root))}
                        if (self.root / "http" / key / "memory-view.json").exists() else {})}
-        if policy not in {"record_confirmed_length", "record_known_readonly_failure"} or (
-            str(error) != "Provider output incomplete: length"
-        ):
+        no_text = (policy == "record_known_readonly_failure"
+                   and str(error) == "Provider returned no textual answer")
+        length = (policy in {"record_confirmed_length", "record_known_readonly_failure"}
+                  and str(error) == "Provider output incomplete: length")
+        if not (length or no_text):
             return None
         view = read_json(view_path) if view_path.exists() else {}
         stage = view.get("active_stage", key)
@@ -2028,16 +2213,22 @@ class BenchmarkRun:
         response = read_json(response_path) if response_path.exists() else {}
         choices = response.get("choices", [])
         usage = response.get("usage")
-        if (not choices or choices[0].get("finish_reason") != "length"
+        finish = "stop" if no_text else "length"
+        if (not choices or choices[0].get("finish_reason") != finish
                 or not isinstance(usage, dict)
                 or not all(type(usage.get(name)) is int and usage[name] >= 0 for name in (
-                    "prompt_tokens", "completion_tokens", "total_tokens"))):
+                    "prompt_tokens", "completion_tokens", "total_tokens"))
+                or usage["prompt_tokens"] + usage["completion_tokens"] != usage["total_tokens"]):
+            return None
+        if no_text and (not isinstance(choices[0].get("message"), dict)
+                        or isinstance(choices[0]["message"].get("content"), str)):
             return None
         failure_path = folder / "failure.json"
         if not failure_path.exists():
             write_json(failure_path, {"type": type(error).__name__, "message": str(error)})
         return {"type": type(error).__name__, "message": str(error),
-                "finish_reason": "length", "phase": "confirmed_response",
+                "finish_reason": finish, "phase": "confirmed_response",
+                **({"reason": "no_textual_answer"} if no_text else {}),
                 "response_ref": str(response_path.relative_to(self.root)),
                 "failure_ref": str(failure_path.relative_to(self.root))}
 
@@ -2180,7 +2371,8 @@ class BenchmarkRun:
                         # It runs after predictions; saved material is not fed to a Writer/Reader.
                         update_retrieval = [
                             self._score_retrieval(service, memory["memory_content"])
-                            if not generated and memory["is_update"] == "True"
+                            if self.reference_retrieval_supported and not generated
+                            and memory["is_update"] == "True"
                             and memory.get("original_memories") else []
                             for memory in session.get("memory_points", [])
                         ]
@@ -2215,6 +2407,8 @@ class BenchmarkRun:
                             opportunities["total_updates"] += 1
                             if not memory.get("original_memories"):
                                 opportunities["updates_missing_original"] += 1
+                            if not self.reference_retrieval_supported:
+                                continue
                         if memory["is_update"] == "True" and memory.get("original_memories"):
                             retrieved = saved_prediction["update_retrieval"][mordinal]
                             if not retrieved:
@@ -2240,6 +2434,8 @@ class BenchmarkRun:
                             }:
                                 opportunities["valid_scored_updates"] += 1
                         else:
+                            if not self.session_output_supported:
+                                continue
                             result = (
                                 self._safe_score(
                                     official,
@@ -2289,6 +2485,10 @@ class BenchmarkRun:
                         reader_failure = question_prediction.get("reader_failure")
                         if (answer is None and isinstance(reader_failure, dict)
                                 and (reader_failure.get("finish_reason") == "length" or (
+                                    reader_failure.get("phase") == "confirmed_response"
+                                    and reader_failure.get("finish_reason") == "stop"
+                                    and reader_failure.get("reason") == "no_textual_answer"
+                                ) or (
                                     reader_failure.get("phase") == "before_http"
                                     and reader_failure.get("request_sent") is False
                                     and reader_failure.get("type") == "ReadCapacityUnavailable"
@@ -2297,7 +2497,8 @@ class BenchmarkRun:
                                     and reader_failure.get("request_sent") is False
                                     and reader_failure.get("type") == "ReadDeliveryIncomplete"
                                     and reader_failure.get("reason") in {
-                                        "read_call_limit", "whole_matter_unavailable"}))):
+                                        "read_call_limit", "whole_matter_unavailable",
+                                        "whole_material_unavailable"}))):
                             result = {}
                         elif isinstance(answer, str):
                             result = self._safe_score(
@@ -2419,12 +2620,16 @@ class BenchmarkRun:
         predictions = []
         for case in longmemeval_cases(Path(selection["path"]), selection["questions"]):
             owner = case["question_id"]
-            bank = self.root / "banks" / owner
+            bank_ids = self.settings.get("alignment_bank_ids")
+            bank_id = bank_ids[owner] if bank_ids is not None else owner
+            bank = self.root / "banks" / bank_id
+            namespace = (("edit", self.root.name, "ordinary", owner) if bank_ids is None else
+                         ("edit", self.root.name, "ordinary", bank_id, owner))
             bank.mkdir(parents=True, exist_ok=True)
             with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
                 service = MemoryService(
                     store,
-                    ("edit", self.root.name, "ordinary", owner),
+                    namespace,
                     owner,
                     bank / "memory.lock",
                     mutation_contract="event_bound_v1",
@@ -2435,8 +2640,11 @@ class BenchmarkRun:
                 )
                 history = longmemeval_history(case)
                 prediction_path = self.root / "predictions/longmemeval" / owner / "complete.json"
+                reader_failure: dict[str, Any] | None = None
                 if prediction_path.exists():
-                    answer = read_json(prediction_path)["hypothesis"]
+                    saved = read_json(prediction_path)
+                    answer = saved["hypothesis"]
+                    reader_failure = saved.get("reader_failure")
                 else:
                     if phase == "score":
                         raise ValueError(f"Prediction not saved: longmemeval/{owner}")
@@ -2453,20 +2661,53 @@ class BenchmarkRun:
                             ),
                             flush=True,
                         )
-                    answer = self.answer(
-                        service, case["question"], case["question_date"],
-                        f"longmemeval/{owner}/answer",
-                    )
+                    key = f"longmemeval/{owner}/answer"
+                    try:
+                        answer = self.answer(service, case["question"], case["question_date"], key)
+                    except ValueError as error:
+                        reader_failure = self._known_reader_failure(
+                            error, key, policy=selection.get("reader_failure_policy", "fail_fast"),
+                        )
+                        if reader_failure is None or reader_failure.get("phase") not in {
+                            "before_http", "before_final_http", "confirmed_response",
+                        }:
+                            raise
+                        answer = None
                     write_json(prediction_path, {
                         "question_id": owner, "hypothesis": answer, "state": service.records(),
+                        **({"reader_failure": reader_failure}
+                           if reader_failure is not None else {}),
                     })
+                known_missing = answer is None and isinstance(reader_failure, dict) and (
+                    (reader_failure.get("phase") == "confirmed_response"
+                     and reader_failure.get("finish_reason") == "length") or (
+                        reader_failure.get("phase") == "confirmed_response"
+                        and reader_failure.get("finish_reason") == "stop"
+                        and reader_failure.get("reason") == "no_textual_answer"
+                    ) or (
+                        reader_failure.get("phase") == "before_http"
+                        and reader_failure.get("request_sent") is False
+                        and reader_failure.get("type") == "ReadCapacityUnavailable"
+                    ) or (
+                        reader_failure.get("phase") == "before_final_http"
+                        and reader_failure.get("request_sent") is False
+                        and reader_failure.get("type") == "ReadDeliveryIncomplete"
+                        and reader_failure.get("reason") in {
+                            "read_call_limit", "whole_matter_unavailable",
+                            "whole_material_unavailable"}
+                    )
+                )
+                if not isinstance(answer, str) and not known_missing:
+                    raise ValueError(
+                        "Saved LongMemEval hypothesis lacks an answer or known failure")
+                failure_fields = ({"reader_failure": reader_failure} if known_missing else {})
                 if phase == "predict":
                     predictions.append({"question_id": owner, "hypothesis": answer,
-                                        "question_type": case["question_type"]})
+                                        "question_type": case["question_type"], **failure_fields})
                     write_json(self.root / "longmemeval-predictions.json", predictions)
                     continue
                 assert official is not None
-                verdict = self.call(
+                verdict = None if known_missing else self.call(
                     f"longmemeval/{owner}/judge",
                     [{"role": "user", "content": official.make_prompt(case, answer)}],
                     structured=False,
@@ -2477,8 +2718,9 @@ class BenchmarkRun:
                         "hypothesis": answer,
                         "question_type": case["question_type"],
                         "official_verdict": verdict,
-                        "autoeval_label": official.label(verdict),
+                        "autoeval_label": official.label(verdict) if verdict is not None else None,
                         "history_sessions": len(history),
+                        **failure_fields,
                         "source_condition": (
                             "shared-history descriptive development; not independent holdout"
                         ),

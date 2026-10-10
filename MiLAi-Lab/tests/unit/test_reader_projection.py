@@ -14,6 +14,7 @@ from langchain_core.messages import ToolMessage
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.memory.functional_state import (
+    FunctionalRejection,
     canonical,
     namespace,
     project_request_targets,
@@ -147,7 +148,9 @@ def test_sqlite_writer_only_expands_delivered_page_and_resident_model_material(
 ) -> None:
     memory, config, record_id = saved_memory
     units = memory._record_units(memory.service.read(record_id))
-    memory.material_limit = memory.policy["material_limit"] = 6000
+    # Keep a partial snapshot with room for the resident wrapper after exact
+    # relation sharing. This test still requires a real unread continuation.
+    memory.material_limit = memory.policy["material_limit"] = 5600
     bound = memory._binding(config)
     snapshot = memory._snapshot(bound, units, "record_read")
     page = memory.bind_request_targets(config, memory._page(snapshot, 0, bound))
@@ -164,6 +167,7 @@ def test_sqlite_writer_only_expands_delivered_page_and_resident_model_material(
         {"items": units[:page["delivered_units"]], "forget_epoch": memory.forget_epoch})
     assert actual_records == expected["items"]
     material = memory.model_material(config)
+    assert _tokens(canonical(material)) <= memory.material_limit
     resident = [item for item in expand_host_packet(material)["items"] if item["type"] == "record"]
     assert resident == actual_records
     assert material["metadata_table"]
@@ -177,12 +181,60 @@ def test_sqlite_writer_only_expands_delivered_page_and_resident_model_material(
     assert "metadata_table" not in receipt and "projection_instructions" not in receipt
 
 
+def test_sqlite_resident_capacity_counts_current_source_targets_and_full_wrapper(
+    saved_memory: tuple[FunctionalEditMemory, dict[str, Any], str],
+) -> None:
+    memory, config, record_id = saved_memory
+    before = memory.service.read(record_id)
+    units = memory._record_units(before)
+    memory.material_limit = memory.policy["material_limit"] = 8192
+    bound = memory._binding(config)
+    current = [{"type": "fragment", **part} for part in memory.service.source_fragments(
+        bound["source_ref"], max_chars=memory.fragment_chars,
+    )]
+    source_snapshot = memory._snapshot(bound, current, "current_input")
+    source_page = memory.bind_request_targets(config, memory._page(source_snapshot, 0, bound))
+    memory._remember_page(config, source_page)
+    memory._note_view_page(config, source_page)
+    record_snapshot = memory._snapshot(bound, units, "record_read")
+    page = memory.bind_request_targets(config, memory._page(record_snapshot, 0, bound))
+    assert page["delivered_units"] == len(units)
+    memory._remember_page(config, page)
+    memory._note_view_page(config, page)
+
+    material = memory.model_material(config)
+    expanded = expand_host_packet(material)
+    cost = _tokens(canonical(material))
+    assert cost <= 8192 < _tokens(canonical(expanded))
+    source_item = {"type": "fragment", **memory.service.source_fragment(
+        current[0]["fragment_handle"],
+    ), **{field: source_page["items"][0][field] for field in ("target", "target_kind")}}
+    assert expanded["items"] == [source_item,
+                                 *expand_host_packet(page)["items"]]
+    assert material["memory_view"]["resident_refs"] and material["read_progress"]
+    assert material["target_scope"] == page["target_scope"] == source_page["target_scope"]
+    assert material["items"][0] == source_item
+    for projected, original in zip(material["items"][1:], expanded["items"][1:], strict=True):
+        for field in ("record_id", "read_handle", "revision", "content", "content_range",
+                      "target", "target_kind"):
+            assert projected[field] == original[field]
+        assert projected["edit_unit"]["unit_id"] == original["edit_unit"]["unit_id"]
+    items_cost = _tokens(canonical({key: material[key] for key in (
+        "items", "metadata_table", "projection_instructions",
+    )}))
+    memory.material_limit = memory.policy["material_limit"] = cost - 1
+    assert items_cost < memory.material_limit
+    with pytest.raises(FunctionalRejection, match="V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT"):
+        memory.model_material(config)
+    assert memory.service.read(record_id)["value"] == before["value"]
+
+
 def test_host_projection_keeps_conflicting_unknowns_raw_source_and_selectors() -> None:
     source = {"type": "fragment", "content": "Literal source body.", "start": 3, "end": 23,
               "source_ref": "literal-source", "fragment_handle": "literal-fragment"}
     item = {
         "type": "record", "record_id": "literal-record", "read_handle": "literal-read",
-        "content": "Literal stored unit.", "content_range": [0, 20],
+        "content": "Literal stored unit.", "content_range": [0, 20], "revision_context": None,
         "edit_unit": {"unit_id": "literal-unit", "role": "content", "evidence_refs": [{
             "evidence_id": "literal-fragment", "source_ref": "literal-source",
             "source_revision": 1, "start": 3, "end": 23,
@@ -209,3 +261,85 @@ def test_host_projection_keeps_conflicting_unknowns_raw_source_and_selectors() -
     assert projected["items"][0]["revision_evidence"] == item["revision_evidence"]
     assert project_host_packet(projected) == projected
     assert original["items"][0]["edit_unit"]["assertion"]["role"] is None
+
+
+def test_host_relation_sharing_keeps_direction_type_unknown_fields_and_literal_handles() -> None:
+    forward = {
+        "relation_id": "actual-relation-identity-0123456789",
+        "source_unit": "actual-source-unit-identity-0123456789",
+        "target_unit": "actual-target-unit-identity-0123456789",
+        "relation_type": "modifies", "evidence_refs": [{
+            "evidence_id": "actual-fragment-identity-0123456789", "start": 0, "end": 20,
+        }], "unknown_relation_field": {"meaning": None},
+    }
+    backward = {**copy.deepcopy(forward), "source_unit": forward["target_unit"],
+                "target_unit": forward["source_unit"]}
+    exception = {**copy.deepcopy(forward), "relation_type": "overrides"}
+    relations = [forward, backward, exception]
+    record = {
+        "type": "record", "record_id": "literal-record", "read_handle": "literal-read",
+        "revision": 2, "target": "q0123456789abc:1", "target_kind": "delivered_record",
+        "content": "Literal unit body.", "content_range": [0, 18],
+        "edit_unit": {"unit_id": "literal-unit", "role": "content"},
+        "edit_relations": copy.deepcopy(relations),
+        "revision_context": {"relations": copy.deepcopy(relations)},
+        "stored_history": {"read": {"tool": "read_memory_revision", "arguments": {
+            "target": "q0123456789abc:2", "revision": 1,
+        }}},
+    }
+    source = {"type": "fragment", "content": "Literal original body.", "start": 4, "end": 26,
+              "fragment_handle": "literal-fragment", "target": "q0123456789abc:3"}
+    original = {"ok": True, "kind": "resident", "items": [record, source],
+                "memory_view": {"read_goal": "Read the applicable saved version."},
+                "read_progress": {"read": 2}, "continuations": [{
+                    "tool": "read_page", "arguments": {"target": "q0123456789abc:4"},
+                }], "target_scope": "q0123456789abc", "material_limit": 8192}
+    before = copy.deepcopy(original)
+    projected = project_host_packet(original)
+    assert original == before and expand_host_packet(projected) == original
+    assert _tokens(canonical(projected)) < _tokens(canonical(original))
+    row = projected["items"][0]
+    for field in ("record_id", "read_handle", "revision", "target", "target_kind",
+                  "content", "content_range", "edit_unit", "stored_history"):
+        assert row[field] == record[field]
+    assert projected["items"][1] == source
+    assert projected["continuations"] == original["continuations"]
+    references = [relation["relation_metadata"] for relation in row["edit_relations"]]
+    assert len({reference["meta"] for reference in references}) == 3
+    assert references == [relation["relation_metadata"]
+                          for relation in row["revision_context"]["relations"]]
+    for relation, reference in zip(relations, references, strict=True):
+        assert projected["metadata_table"][str(reference["meta"])] == {
+            field: relation[field] for field in (
+                "relation_id", "source_unit", "target_unit", "relation_type",
+            )
+        }
+
+    def has_reference(value: Any) -> bool:
+        if isinstance(value, dict):
+            return set(value) == {"meta"} or any(has_reference(v) for v in value.values())
+        return isinstance(value, list) and any(has_reference(v) for v in value)
+
+    assert not has_reference(list(projected["metadata_table"].values()))
+    assert project_host_packet(projected) == projected
+
+
+@pytest.mark.parametrize("location", ["edit_relations", "revision_context"])
+@pytest.mark.parametrize("literal", [{"meta": 0}, {"relation_type": None}, None])
+def test_host_relation_metadata_name_collision_stays_literal(
+    location: str, literal: Any,
+) -> None:
+    relation = {"relation_id": "literal-relation", "source_unit": "literal-source-unit",
+                "target_unit": "literal-target-unit", "relation_type": "modifies",
+                "relation_metadata": copy.deepcopy(literal)}
+    record = {"type": "record", "record_id": "literal-record", "read_handle": "literal-read",
+              "edit_unit": {"unit_id": "literal-unit"}, "content": "Original body."}
+    if location == "edit_relations":
+        record[location] = [relation]
+    else:
+        record[location] = {"relations": [relation]}
+    original = {"items": [record, copy.deepcopy(record)]}
+    before = copy.deepcopy(original)
+    assert project_host_packet(original) == before
+    assert expand_host_packet(original) == before
+    assert original == before

@@ -242,7 +242,7 @@ jobs:
           --ignore=tests/memory/test_edit_memory_v2.py \
           --ignore=tests/unit/test_edit_v2_runner.py \
           --ignore=tests/unit/test_edit_development_history.py \
-          --ignore=tests/unit/test_edit_views.py \
+          --ignore=tests/unit/test_edit_views.py --ignore=tests/unit/test_baseline_alignment.py --ignore=tests/unit/test_baseline_alignment_backends.py --ignore=tests/unit/test_baseline_alignment_arm_entry.py \
           --junitxml="${{ github.workspace }}/lab-test-results/junit.xml"
       - name: Upload Lab pytest evidence
         if: always()
@@ -294,6 +294,11 @@ jobs:
           uv run --no-sync pytest -q tests/application/test_v13_5_workflows.py tests/memory/test_v13_5_functional.py tests/unit/test_v13_5_functional_integration.py tests/unit/test_v13_5_visibility_replay.py tests/unit/test_edit_benchmark_wiring.py tests/memory/test_edit_foundation.py tests/memory/test_edit_memory.py tests/memory/test_edit_common_recovery.py
           uv run --no-sync pytest -q -m 'not local_artifacts' tests/integrations/test_amem_contracts.py
           uv run --no-sync pytest -q tests/memory/test_functional_edit_memory.py tests/unit/test_reader_projection.py tests/unit/test_edit_external.py
+          uv pip install --python .venv/bin/python --target "$RUNNER_TEMP/milai-baseline-alignment-native" -r data/locks/baseline-alignment-native-local-20261010.requirements.txt
+          (
+            export PYTHONPATH="${PWD}/src:$RUNNER_TEMP/milai-baseline-alignment-native"
+            uv run --no-sync pytest -q tests/unit/test_baseline_alignment.py tests/unit/test_baseline_alignment_backends.py tests/unit/test_baseline_alignment_arm_entry.py
+          )
           uv run --no-sync pytest -q tests/unit/test_edit_mechanism.py
           uv run --no-sync pytest -q tests/memory/test_edit_memory_v2.py tests/unit/test_edit_v2_runner.py tests/unit/test_edit_development_history.py tests/unit/test_edit_views.py
           uv run --no-sync python tools/prepare_sealed_regression.py --destination "$RUNNER_TEMP/milai-sealed-r52"
