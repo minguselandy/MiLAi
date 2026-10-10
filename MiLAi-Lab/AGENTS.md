@@ -48,6 +48,10 @@ Actual business read_source status=read_limit_exhausted, limit3. Audit CLOSED in
 business10allrejected/zero actualforget, no call uses an exact delivered read_handle.
 Model selector misuse/expected read exhaustion, no normal-use wiring defect established/no source fix.
 11JSON mechanical checks only,0HTTP/Store writes/replay/pytest; not independent model confirmation.
+Readonly business3 query audit CLOSED in host-readonly-business-query-contract-5019968-v3.json:
+get_reservation appears in all8actual catalogs, final remaining catalog onlythat query;0formal query calls.
+Model omitted available fresh-query capability, no missing-tool/permission wiring defect established;
+0new HTTP/source edits/replay. Prior state and saved query Sources are not fresh-query completion.
 Shared Reader projection/flat literal metadata, real complete-request planning, independent memory after
 known CURRENT schema/length failure, faithful candidates and cumulative confirmed receipts are integrated.
 Root exact old-eight replay: 32446 -> 30520 input <=32256, 8/8 exact-rendered, all original evidence
