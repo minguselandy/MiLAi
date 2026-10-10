@@ -25,6 +25,11 @@ Fixed2026-10-10 00:12:36UTC observation: runnerPID matches, ownerOWNED, B0first1
 Live unknown+1 is an in-flight reservation, not closed unknown. Use ignored
 inspect_five_dev277_5019968_progress.py for compact PID/phase/cost checks; do not dump full ledger/world.
 Native32/drift/external28/controlled v3 configs PREPARED ONLY,0HTTP; no final confirmation freeze.
+Native/drift static entry review in native-drift-runner-review-5019968-v3.json:9code files equal
+frozen5019968,30shared config values equal main;32items/12sessions/4users matched,0runner/bank/HTTP.
+Native uses actual own before/after and degeneration controls, then isolated Reader+Judge/embeddings;
+no Editor formation replay. Original bank backup retains trajectory data physically: actual probe
+retrieval/evidence still require later inspection. This static review does not close Native/drift.
 Reserved16 config is PREPARED ONLY from original UUID/settings, no held-out dataset loader or semantic read.
 M tighter-context protocol is PREPARED ONLY: same first8/user, context65536=>49152,
 output32768/margin512 unchanged, complete input32256=>15872; baseline comes from full main M,

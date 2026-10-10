@@ -188,6 +188,14 @@ v3同时纳入已闭合工程检查的CURRENT提示与两处写入前拒绝回�
 固定Native32的原选择与Root来源审查已逐字节复制到`native32-5019968-v3-prepared`，
 drift配置位于`drift277-5019968-v3-prepared`；两者仍0 HTTP、无BenchmarkRun/银行构造，
 待全部同版预测和评分闭合再调度，不把准备文件当实际结果。
+Native/drift入口静态核对已保存在`native-drift-runner-review-5019968-v3.json`：
+9份相关代码与冻结源码逐字节一致，两配置的30项共同设置与本次主实验一致；
+固定选择/来源审查再次对应32事项、12会话、4用户，未构造runner、未读取银行、0 HTTP。
+Native使用各方法真实维护前后状态，Actual/NeverWrite/RetainAll为退化控制；
+后续实际成本包含隔离状态Reader、embedding及Judge，不新增Editor形成调用。
+隔离Reader复制原银行并还原实际保存版本，原主实验银行不写入；完整复制仍含原轨迹数据，
+这次静态核对不能代替后续实际读取包/来源范围核验。漂移沿各方法自己的完整会话顺序读取维护结果。
+全部五方法预测及统一评分闭合后才调度；该核对不是Native/drift结果或独立研究确认。
 原固定LongMemEval28题及作者callback适配配置保存在`external28-5019968-v3-prepared`，
 既有相关语言/措辞/独立顺序控制在`controlled-5019968-v3-prepared`；两者均0 HTTP，
 待开发证据与最终候选冻结，若最终源码改变则另建配置，不能把当前准备当确认结果。
