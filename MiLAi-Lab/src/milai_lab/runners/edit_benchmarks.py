@@ -2576,7 +2576,7 @@ class BenchmarkRun:
                         "hypothesis": answer,
                         "question_type": case["question_type"],
                         "official_verdict": verdict,
-                        "autoeval_label": official.label(verdict) if verdict is not None else False,
+                        "autoeval_label": official.label(verdict) if verdict is not None else None,
                         "history_sessions": len(history),
                         **failure_fields,
                         "source_condition": (

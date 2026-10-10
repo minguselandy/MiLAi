@@ -253,7 +253,7 @@ def test_longmemeval_all_history_precedes_qa_and_known_missing_skips_judge(
     monkeypatch.setattr(execution, "call", judge)
     execution.phase = "score"
     scored = execution.longmemeval("score")
-    assert len(scored) == 2 and [row["autoeval_label"] for row in scored] == [False, True]
+    assert len(scored) == 2 and [row["autoeval_label"] for row in scored] == [None, True]
     assert scored[0]["hypothesis"] is None and scored[0]["official_verdict"] is None
     assert judged == ["longmemeval/case-b/judge"]
     assert previous_events == [backend.events for _, backend in constructed] and len(delivered) == 2

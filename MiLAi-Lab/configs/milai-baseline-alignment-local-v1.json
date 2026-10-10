@@ -201,6 +201,41 @@
       "retrieval_granularity": "record_units",
       "stage_enable_thinking": {
         "edit": true
+      },
+      "longmemeval": {
+        "path": "/cra/memory/mx_memory/reference-sources/milai-edit/data/longmemeval_s_cleaned.json",
+        "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/LongMemEval",
+        "questions": [
+          "01493427",
+          "031748ae",
+          "06db6396",
+          "07741c44",
+          "031748ae_abs",
+          "00ca467f",
+          "0100672e",
+          "078150f1",
+          "099778bb",
+          "09ba9854_abs",
+          "0e5e2d1a",
+          "1568498a",
+          "16c90bf4",
+          "18dcd5a5",
+          "06878be2",
+          "06f04340",
+          "07b6f563",
+          "09d032c9",
+          "001be529",
+          "0862e8bf",
+          "118b2229",
+          "15745da0",
+          "0862e8bf_abs",
+          "08f4fc43",
+          "0bb5a684",
+          "0bc8ad92",
+          "0bc8ad93",
+          "982b5123_abs"
+        ],
+        "reader_failure_policy": "record_known_readonly_failure"
       }
     }
   },
