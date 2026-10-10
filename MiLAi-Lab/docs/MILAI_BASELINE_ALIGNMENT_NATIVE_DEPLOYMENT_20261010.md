@@ -6,6 +6,13 @@
 较新的实际空实例已启动并关闭 API / DB，仍没有调用 Qwen、BGE 或 Judge，来源入库与语义闭环尚未运行。
 服务部署、原 HTTP 租约和真实模型调度由 Root 管理。
 
+**完成等待已单独声明（修复`12b87716`）：** `HindsightBackend(completion_timeout=...)`
+保持默认300秒；alignment配置中的`hindsight.completion_timeout=1800`由原factory直接传入。
+这涵盖retain后多个内部整理调用的累计时间；模型HTTP超时仍300秒，status轮询与关闭合同保持。
+Root的40相关检查、Ruff与严格类型通过，均为无真实模型／API／PG的接线和期限验证。
+新冻结源与新12银行标识已离线prepare，但新实验未派发；运行中的M和旧失败银行保持冻结D。
+不把延长等待称作实际语义成功，也不回填原容量缺答。实际条件和资源闭合以新的运行回执为准。
+
 **最新实际E1终态（2026-10-10 14:02:48 UTC）：** 原生臂在27完整会话／63题后因
 `native_completion_deadline`停止。第四用户第4会话的同步retain实际成功，后续consolidation
 超过薄适配器硬编码300秒整体等待；该时间涵盖多个内部调用，与单次模型HTTP timeout300不是

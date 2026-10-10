@@ -1,5 +1,16 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+Native completion fix integrated as12b87716f399cadd0c63c6db21f4639fb2f1511e:
+backend completion_timeout defaults300; local alignment explicitly1800; modelHTTP timeout stays300.
+Actual Root40narrowchecks/Ruff3files/strictmypy1source/diffcheckPASS,0realmodels/API/PG.
+Fresh frozen source-12b8771 and e1-local-v1-completion-1800-v4-prepared admitted offline:
+32sessions/73QA/72updates perarm,12newopaqueIDs,0banks/clients/models; NOT_DISPATCHED.
+Never reuse failedHbank, truncate its actualmaterials or splice priorpredictions into this cohort.
+CurrentM stays frozenD/live session35332; fixed14:23:54UTC7sessions/12answers/0missing.
+Host42 remains frozenD/prepared. Root schedules Host afterM actualclosure, then freshE1 serially;
+no new realmodel dispatch during the liveM owner. Native waitfix does not solve Hcapacitymissing.
+All3freshprediction/resourceclosures still precede explicit uniformscoring; E2-E4 remain incomplete.
+
 Latest actual suite closure14:02:48.871164UTC: frozen d503 E1 STOPPED, parent617762/worker617767
 exited; Raw32sessions/73answers/resourcesclosed, H27sessions/63QA=36answers+27capacitymissing,
 HterminalFAILED/resources_settledTrue with native_completion_deadline at fourthuser/session3.
