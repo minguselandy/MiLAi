@@ -1,13 +1,34 @@
-# Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
+# Current handoff: resources released, experiment analysis and publication, 2026-10-11 Asia/Shanghai
 
-Latest actual dispatch15:39:28.925854UTC: freshE1 frozen12b87716, parent1409356/worker1409430,
-live exec28217, e1-local-v1-completion-1800-v4-prepared. Rawrunning/H-Mnotstarted at15:40UTC;
-32sessions/73QA/72updates perarm,12freshIDs, completion1800/HTTP300/originalledger unchanged.
-FailedHostreview statusREVIEWED_STOPPED_ACTUAL_ARTIFACTS:2actualattempts/40NOT_RUN/sdkreopen1,
-effects known/resources closed; this enables independentE1, not fullHost acceptance. A1 rev2 also
-retains an outdated generalstatement alongside a new exception; currentstate conflict confirmed,
-unrunA2Reader outcome unknown. OfflineA wrapperfix/C feedbackfix, no secondrealmodelowner.
-Latest published6c5ed57e ownFast38064307049in_progress/Full38064307038SKIPPED at15:40UTC.
+Latest user steering: “整理当前实验情况，提交到github上”; then “释放实验资源，分析实验情况和存在问题”.
+Root sent SIGINT to fresh E1 worker1409430 at2026-10-10T16:28:18.136541UTC.
+Parent1409356 recorded STOPPED at16:28:29.162082UTC/workerreturncode-2.
+Actual release verified16:32:01.116603UTC: parent/worker/API1461436/PG1462197 gone,
+nativeUID996active0/APIlistenerclosed/originalHTTP OwnerleaseFREE/newunknown0/0/limitsunchanged.
+H terminal FAILED has KeyboardInterrupt, close_errorNone/resources_settledTrue; usercancel, not new native timeout.
+All sources/effects/predictions/null denominators/costs preserved. Do not restart this cancelled root,
+dispatch prepared Host, score incomplete comparison or schedule new realmodel experiments after this steering.
+
+FreshE1 frozen12b87716f399cadd0c63c6db21f4639fb2f1511e,
+root e1-local-v1-completion-1800-v4-prepared. Raw32complete sessions/73answers/resourcesclosed;
+H6complete sessions/12QA=9answers+3known before_http capacitymissing81471/81775/82771>32256,
+request_sentFalse; MNOT_STARTED/Judge0. Rootstage140gen/1902918known=charged/14024emb/newunknown0/0.
+Rawstage73gen/1060957known=charged/0emb; H58nativegen+232emb confirmed bridge receipts+9commonReadergen.
+No three-arm ranking. Earlier D M32/73=53answers+20missing remains a separate run, never splice it.
+
+Engineering739deaeef25d74afc750888dfabc92cc5ea771a4 contains Cfeedback84fac247 and
+Host exact one-hop directed relation sharing. Root complete saved-packet reconstruction8548->7731<8192,
+5records+1fragment/fullwrapper/expansionequal/operationrefsliteral/originalDBhashunchanged/0HTTP/models/DB.
+Original unsent packet had no deliverytrace; saved-state reconstruction, not actualReader acceptance.
+Root604affected tests PASS552.27s/Ruff4files/strictmypy2sources/diffcheckPASS; syntheticSQLite only.
+ActualA0inputcount0->1/unchangedreceipt, model effect pending. OldHost1COMPLETED/1FAILED/40NOT_RUN;
+A1 rev2 outdated generalstatement/newexception conflict confirmed, unrunA2Reader unknown.
+New source-739deae-host-engineering and host-flows-739deaee-engineering-v2-prepared are PREPARED_NOT_DISPATCHED,
+originalconfig/fixture/controlsbytes preserved/original8+6x3=42/0actualbanks/models; no run authorized now.
+c404 ownFast38066195600SUCCESS/Full38066195629SKIPPED; previousd1 corecollection failure retained,
+newarmtest now owned by existingFoundation/Fast/Full/matrix without losing coverage.
+E2-E4/finalcandidate/fullHostand6publicSDKreopens remain incomplete; do not mark the full goal achieved.
+Earlier fixed observations below retain their original timestamps and failures, not current state.
 
 Latest actual M closure15:20:43.343931UTC: frozenD32sessions/73QA=53answers+20known
 before_http capacitymissing, input35532-42854>32256/request_sentFalse. PREDICTIONS_SAVED,
