@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Callable, Mapping, Sequence
+from copy import copy
 from dataclasses import asdict
 from types import SimpleNamespace
 from typing import TYPE_CHECKING, Any, Protocol, cast
@@ -40,7 +41,10 @@ class ApplicationAdapter(Protocol):
         ref: VerifiedObjectRef | None = None,
     ) -> dict[str, Any]: ...
 
-    def observe(self, ref: VerifiedObjectRef, *, attempt_id: str) -> dict[str, Any]: ...
+    def observe(
+        self, ref: VerifiedObjectRef, *, attempt_id: str,
+        request: Any | None = None, execute: Callable[[Any], Any] | None = None,
+    ) -> dict[str, Any]: ...
 
     def discover(self, target: Mapping[str, Any], *, attempt_id: str) -> dict[str, Any]: ...
 
@@ -238,7 +242,10 @@ class SandboxApplicationAdapter:
             return self._denied("verified_object_reference_required")
         return self._call(operation, arguments, attempt_id)
 
-    def observe(self, ref: VerifiedObjectRef, *, attempt_id: str) -> dict[str, Any]:
+    def observe(
+        self, ref: VerifiedObjectRef, *, attempt_id: str,
+        request: Any | None = None, execute: Callable[[Any], Any] | None = None,
+    ) -> dict[str, Any]:
         """Return a new actual observation without upgrading the old reference."""
         if not self.can_read:
             return self._denied("access_revoked")
@@ -246,7 +253,9 @@ class SandboxApplicationAdapter:
         if resolved is None:
             return self._denied("object_reference_scope_mismatch_or_missing")
         _issued, target = resolved
-        return self.lookup(target, attempt_id=attempt_id)
+        if request is None and execute is None:
+            return self.lookup(target, attempt_id=attempt_id)
+        return self._call(self.query, target, attempt_id, request=request, execute=execute)
 
     def _target_for_ref(
         self,
@@ -302,15 +311,37 @@ class SandboxApplicationAdapter:
         name: str,
         arguments: Mapping[str, Any],
         attempt_id: str,
+        *,
+        request: Any | None = None,
+        execute: Callable[[Any], Any] | None = None,
     ) -> dict[str, Any]:
-        call = {"name": name, "args": dict(arguments), "id": attempt_id, "type": "tool_call"}
-        request = SimpleNamespace(
-            tool_call=call,
-            state={"messages": [AIMessage(content="", id=attempt_id)]},
-            runtime=SimpleNamespace(config=self.runtime_config),
-        )
         tool = next(tool for tool in self.app.tools if tool.name == name)
-        result = self.wrapper(request, lambda _: tool.invoke(call))
+        if request is None:
+            native_request = SimpleNamespace(
+                tool_call={"name": name, "args": dict(arguments), "id": attempt_id,
+                           "type": "tool_call"},
+                state={"messages": [AIMessage(content="", id=attempt_id)]},
+                runtime=SimpleNamespace(config=self.runtime_config),
+            )
+        else:
+            if (request.tool_call.get("name") != name
+                    or request.tool_call.get("id") != attempt_id
+                    or request.runtime.config["configurable"].get("thread_id")
+                    != self.runtime_config["configurable"]["thread_id"]):
+                raise ValueError("APPLICATION_ADAPTER_CALL_SCOPE_CHANGED")
+            # Identity and runtime stay those of the original Host generation.
+            # Only the issued object's native query arguments replace its short
+            # selector; the model checkpoint retains the original selection.
+            call = {**request.tool_call, "args": dict(arguments)}
+            override = getattr(request, "override", None)
+            if callable(override):
+                native_request = override(tool_call=call, tool=tool)
+            else:
+                native_request = copy(request)
+                native_request.tool_call, native_request.tool = call, tool
+        result = self.wrapper(
+            native_request, execute or (lambda current: tool.invoke(current.tool_call))
+        )
         if not isinstance(result, ToolMessage):
             raise TypeError("APPLICATION_ADAPTER_TOOL_RECEIPT_REQUIRED")
         payload = json.loads(str(result.content))
@@ -323,8 +354,8 @@ class SandboxApplicationAdapter:
             else None
         )
         row = self.app.journal.entry_for_call(
-            self.runtime_config["configurable"]["thread_id"],
-            attempt_id,
+            native_request.runtime.config["configurable"]["thread_id"],
+            native_request.state["messages"][-1].id,
             attempt_id,
         )
         return {

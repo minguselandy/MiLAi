@@ -27,6 +27,7 @@ from milai_lab.application.request_plans import compile_application_requests, pr
 from milai_lab.contracts.memory import VerifiedObjectRef
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.functional_faults import FunctionalFaults, InjectedInterruption
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.working_set import empty_view, read_requirement_status
@@ -186,6 +187,136 @@ def test_lost_query_response_does_not_become_fresh_evidence_or_retry(tmp_path: P
                 if isinstance(row, dict) and row.get("name") == "get_reservation"]
         assert len(rows) == 1 and rows[0]["status"] == "pending"
         assert rows[0]["executed"] is True and rows[0]["effect"] == "none"
+
+
+def test_toolnode_object_query_preserves_original_call_and_runs_after_journal_intent(
+    tmp_path: Path,
+) -> None:
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, "reservation")
+        created = json.loads(call(wrapper, "reserve_and_label", reserve_args(), "create").content)
+        source_ref = created["source_ref"]
+        ref = VerifiedObjectRef(**service.source(source_ref)["object_ref"])
+        adapter = app.adapter(service, "session", "message", runtime_config=config())
+        requests, natives = [], []
+
+        def wrap(request: Any, execute: Any) -> ToolMessage:
+            requests.append(request)
+
+            def native(current: Any) -> Any:
+                row = app.journal.entry_for_call(config()["configurable"]["thread_id"],
+                                                "actual-generation", "selected-query")
+                assert row["status"] == "pending" and "result" not in row
+                assert current.state is request.state and current.runtime is request.runtime
+                assert current.tool_call["args"] == {"item_key": "mechanical item"}
+                assert request.tool_call["args"] == {"target": "request-issued-source"}
+                natives.append(current)
+                return execute(current)
+
+            observed = app.observe_delivered(adapter, ref, delivered_source_refs=[source_ref],
+                attempt_id=request.tool_call["id"], request=request, execute=native)
+            return ToolMessage.model_validate(observed["delivery_response"])
+
+        graph = StateGraph(MessagesState)
+        graph.add_node("tools", ToolNode(app.tools, wrap_tool_call=wrap))
+        graph.set_entry_point("tools")
+        graph.set_finish_point("tools")
+        native_call = {"name": "get_reservation", "args": {"target": "request-issued-source"},
+                       "id": "selected-query", "type": "tool_call"}
+        before = app.world.snapshot()
+        result = graph.compile().invoke({"messages": [AIMessage(
+            content="", id="actual-generation", tool_calls=[native_call])]}, config())
+        delivery = result["messages"][-1]
+        assert delivery.tool_call_id == "selected-query"
+        assert receipt(delivery)["status"] == "found"
+        original = app.journal.entry_for_call(config()["configurable"]["thread_id"],
+                                             "actual-generation", "selected-query")
+        assert original["args"] == {"item_key": "mechanical item"}
+        assert app.journal.entry_for_call(config()["configurable"]["thread_id"],
+                                         "selected-query", "selected-query") is None
+        replay = app.observe_delivered(adapter, ref, delivered_source_refs=[source_ref],
+            attempt_id="selected-query", request=requests[0],
+            execute=lambda _: pytest.fail("A completed query must not execute twice."))
+        # The graph assigns its own reducer message ID after wrapper delivery.
+        assert replay["delivery_response"] == delivery.model_copy(
+            update={"id": None}).model_dump(mode="json")
+        assert len(natives) == 1 and app.world.snapshot() == before
+
+
+@pytest.mark.parametrize("boundary", ["after_journal_intent_before_native",
+                                      "after_native_before_journal_complete"])
+def test_toolnode_short_query_recovers_by_original_identity_after_reopen(
+    tmp_path: Path, boundary: str,
+) -> None:
+    control = {"one_shot_fault": {"message_index": 0, "boundary": boundary,
+                                 "target_operation": "get_reservation"}}
+    faults = FunctionalFaults(tmp_path / "fault.json", control, 0)
+    scope = FoundationScope("run", "arm", "alice", "session")
+
+    def graph_for(app: Any, service: Any, saver: Any, reference: Any) -> Any:
+        adapter = app.adapter(service, "session", "message", runtime_config=config())
+
+        def wrap(request: Any, execute: Any) -> ToolMessage:
+            def native(current: Any) -> Any:
+                assert app.journal.entry_for_call(config()["configurable"]["thread_id"],
+                    "actual-generation", "faulted-query")["status"] == "pending"
+                faults.before_native(current)
+                return execute(current)
+
+            observed = app.observe_delivered(adapter, reference,
+                delivered_source_refs=[reference.source_ref], attempt_id=request.tool_call["id"],
+                request=request, execute=native)
+            return ToolMessage.model_validate(observed["delivery_response"])
+
+        graph = StateGraph(MessagesState)
+        graph.add_node("tools", ToolNode(app.tools, wrap_tool_call=wrap))
+        graph.set_entry_point("tools")
+        graph.set_finish_point("tools")
+        return graph.compile(checkpointer=saver)
+
+    with ExitStack() as stack:
+        app, service, _ = opened(stack, tmp_path, "reservation", response_hook=faults.after_native)
+        wrapper = app.call_wrapper(service, "session", "message")
+        created = json.loads(call(wrapper, "reserve_and_label", reserve_args(), "create").content)
+        ref = VerifiedObjectRef(**service.source(created["source_ref"])["object_ref"])
+        saver = stack.enter_context(SqliteSaver.from_conn_string(
+            str(tmp_path / "query-checkpoint")))
+        agent = graph_for(app, service, saver, ref)
+        native_call = {"name": "get_reservation", "args": {"target": "request-issued-source"},
+                       "id": "faulted-query", "type": "tool_call"}
+        before = app.world.snapshot()
+        with pytest.raises(InjectedInterruption):
+            agent.invoke({"messages": [AIMessage(content="", id="actual-generation",
+                         tool_calls=[native_call])]}, config(), durability="sync")
+        original = app.journal.entry_for_call(config()["configurable"]["thread_id"],
+                                             "actual-generation", "faulted-query")
+        assert original["status"] == "pending" and original["effect"] == "none"
+        assert original["args"] == {"item_key": "mechanical item"}
+        assert app.world.snapshot() == before
+        assert wrapper.fresh_query_evidence([created["source_ref"]]) == []
+
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, "reservation")
+        saver = stack.enter_context(SqliteSaver.from_conn_string(
+            str(tmp_path / "query-checkpoint")))
+        agent = graph_for(app, service, saver, ref)
+        app.recover_pending(agent, scope, wrapper)
+        state = agent.get_state(config())
+        assert not state.next
+        result = json.loads(state.values["messages"][-1].content)
+        assert result["status"] == "ORIGINAL_CALL_OUTCOME_UNKNOWN"
+        assert result["original_receipt"] is None
+        assert result["query_receipt"]["status"] == "found"
+        assert result["observed_effect"] == "none"
+        assert app.journal.entry_for_call(config()["configurable"]["thread_id"],
+                                         "actual-generation", "faulted-query") == original
+        queries = [row for row in app.journal._entries().values()
+                   if isinstance(row, dict) and row.get("name") == "get_reservation"]
+        assert len(queries) == 2
+        assert sorted(row["status"] for row in queries) == ["complete", "pending"]
+        fresh = wrapper.fresh_query_evidence([result["query_source"]["source_ref"]])
+        assert len(fresh) == 1
+        assert app.world.snapshot() == before
 
 
 @pytest.mark.parametrize('workflow', ['reservation', 'document'])

@@ -342,6 +342,8 @@ class FunctionalApplication:
         *,
         delivered_source_refs: Sequence[str],
         attempt_id: str,
+        request: Any | None = None,
+        execute: Callable[[Any], Any] | None = None,
     ) -> dict[str, Any]:
         """Query an actually delivered verified object through the original adapter.
 
@@ -350,6 +352,8 @@ class FunctionalApplication:
         the adapter still checks its issued identity, owner, visibility and
         current read permission. This performs one ordinary journaled query,
         never a business mutation or a silent refresh of an old receipt.
+        A supplied Host request retains its original generation/call identity;
+        its execute callback runs only after the journal persists intent.
         """
         if adapter.app is not self or adapter.owner != self.owner:
             raise ValueError("FUNCTIONAL_APPLICATION_ADAPTER_SCOPE_CHANGED")
@@ -365,7 +369,7 @@ class FunctionalApplication:
                     "operations": sorted(adapter.allowed_operations),
                 },
             }
-        return adapter.observe(ref, attempt_id=attempt_id)
+        return adapter.observe(ref, attempt_id=attempt_id, request=request, execute=execute)
 
     def snapshot(self) -> dict[str, Any]:
         """Evaluator/diagnostic sidecar; never a Host tool or authorization source."""
