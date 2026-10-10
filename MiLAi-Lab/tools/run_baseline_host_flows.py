@@ -223,9 +223,14 @@ def summary(roots: list[Path]) -> dict[str, Any]:
     if len(roots) != len(set(roots)):
         raise ValueError("Duplicate run roots are not additional repetitions")
     existing = evaluator()
-    messages, first_failure = [], None
+    messages, runs, first_failure = [], [], None
     for repeat, run_root in enumerate(roots, 1):
         evaluated = existing.evaluate(run_root, cohort="HOST_CONTINUOUS_FLOWS")
+        freeze = read(run_root / "input-freeze.json")
+        runs.append({"repeat": repeat, "root": str(run_root),
+                     "source_version": freeze.get("source_version"),
+                     "config_version": freeze.get("config_version"),
+                     "scope": "Stored run versions; summary does not replay these inputs."})
         if not set(STORIES) <= {case["case_id"] for case in evaluated["case_packs"]}:
             raise ValueError("Both declared stories are required; preserve the planned scope")
         for case in evaluated["case_packs"]:
@@ -280,6 +285,7 @@ def summary(roots: list[Path]) -> dict[str, Any]:
     return {
         "schema": "baseline_host_flow_summary_v1", "new_model_calls": 0,
         "roots": [str(path.resolve()) for path in roots], "flow_checks": list(FLOW_CHECKS),
+        "runs": runs,
         "planned_messages": len(messages),
         "retained_attempts": sum(len(m["attempts"]) for m in messages),
         "message_execution_counts": dict(Counter(m["execution_status"] for m in messages)),
