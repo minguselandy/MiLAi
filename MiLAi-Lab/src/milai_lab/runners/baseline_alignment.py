@@ -260,6 +260,10 @@ class AlignmentRun(BenchmarkRun):
                 or deployment.get("distribution") != native["distribution"]):
             raise ValueError("Native persistence deployment owner or version changed")
         environment = deployment["environment"]
+        if (environment.get("HINDSIGHT_API_LLM_MODEL") != self.settings["model"]["model"]
+                or environment.get("HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL")
+                != self.settings["embedding"]["model"]):
+            raise ValueError("Native persistence model changed")
         runtime_keys = {"HINDSIGHT_API_DATABASE_URL", "HINDSIGHT_API_DATABASE_SCHEMA",
                         "HINDSIGHT_API_LLM_MODEL", "HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL",
                         "HINDSIGHT_API_LLM_BASE_URL", "HINDSIGHT_API_EMBEDDINGS_OPENAI_BASE_URL"}

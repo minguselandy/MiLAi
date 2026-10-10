@@ -114,12 +114,21 @@ def test_native_persistence_restores_identity_only_after_successful_closure(tmp_
                   "distribution": native["distribution"], "environment": {
                       **native["environment"], "HINDSIGHT_API_DATABASE_URL": database,
                       "HINDSIGHT_API_DATABASE_SCHEMA": "milai_saved",
+                      "HINDSIGHT_API_LLM_MODEL": execution.settings["model"]["model"],
+                      "HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL": (
+                          execution.settings["embedding"]["model"]),
                   }}
     write_json(previous / "configuration.json", deployment)
     write_json(previous / "started.json", {"instance": "milai_saved"})
     assert execution._restored_native_database(previous, 996, home) == ("milai_saved", database)
     with pytest.raises(ValueError, match="owner or version"):
         execution._restored_native_database(previous, 997, home)
+    deployment["environment"]["HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL"] = "another-model"
+    write_json(previous / "configuration.json", deployment)
+    with pytest.raises(ValueError, match="model changed"):
+        execution._restored_native_database(previous, 996, home)
+    deployment["environment"]["HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL"] = (
+        execution.settings["embedding"]["model"])
     deployment["environment"]["HINDSIGHT_API_EMBEDDINGS_OPENAI_DIMENSIONS"] = "1024"
     write_json(previous / "configuration.json", deployment)
     with pytest.raises(ValueError, match="configuration changed"):

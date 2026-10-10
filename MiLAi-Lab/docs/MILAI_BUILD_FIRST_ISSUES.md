@@ -2,7 +2,12 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
-最新E0实际运行于11:24:29 UTC STOPPED：冻结`fa86b95`，RawRAG3共同Reader答案，Hindsight
+最新正常E0冻结`28bf2410`于11:44:12 UTC闭合：三臂各3答案，共9；资源已确认关闭，Judge0。
+13生成／80220 known＝charged／1046 embedding、新unknown0／0、limits不变。原生BGE维度发现与
+后续请求均实际200，M实际5条revision1记录。重开／来源时间验收尚未完成，不称QA正确或方法排名。
+只读审查发现恢复入口遗漏Qwen／BGE模型ID绑定，已在原函数补齐拒绝配置漂移；主预测源码不热改。
+
+前次E0实际运行于11:24:29 UTC STOPPED：冻结`fa86b95`，RawRAG3共同Reader答案，Hindsight
 retain因实际BGE HTTP400（不支持显式dimensions1024）失败、QA0，M未开始／Judge0。
 真实API／PG已关闭、UID996残留0；4生成17015 known＝charged，embedding known0／charged1243／
 新增unknown1，失败银行／原HTTP／费用均保留、不退款或续接。

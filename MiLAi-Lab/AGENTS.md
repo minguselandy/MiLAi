@@ -1,5 +1,12 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+New E0 frozen28bf2410 closed all3 predictions at11:44:12.842289UTC: 3answers each/9total,
+allresources_settledTrue;13gen/80220 known=charged,1046emb,newunknown0/0,limits unchanged/Judge0.
+Native startup discovery and laterBGE actualHTTP200, dimensions absent. M5actualrecords revision1,
+original source_refs strings retained. NotQA correctness or E0 persistence acceptance yet.
+Readonly agent review identified missing modelID guard on restore; now explicitly reject either
+Qwen/BGE modelID drift. Main E0 source28 remains frozen; next restored-query source declared separately.
+
 Latest actual E0 on frozenfa86b95 STOPPED at11:24:29UTC, resources settled: RawRAG3answers,
 Hindsight retain failed before QA with actual BGE HTTP400 (explicit dimensions1024 unsupported),
 M NOT_STARTED/Judge0. All4gen receipts known17015=charged; embedding known0/charged1243/newunknown1.

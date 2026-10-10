@@ -1,5 +1,9 @@
 # 本地基线对齐协议 v1
 
+最新实际E0主预测冻结`28bf2410`，11:44:12 UTC三臂各3答案／全部资源闭合；13生成／
+80220 known＝charged／1046 embedding／新增unknown0／0。M5条实际revision1记录，Judge0。
+重开及来源时间验收未完成；恢复入口另补模型ID绑定，主预测原源码不变，不称QA正确或方法排名。
+
 首次实际E0（冻结`fa86b95`）11:24:29 UTC停止：RawRAG3答案，Hindsight retain实际BGE400，
 M未开始、Judge0，资源真实闭合；失败根和embedding unknown1／charged1243保留，不退款或重放。
 当前配置省略原生OpenAI DIMENSIONS；官方0.10.3启动发现实际维度，后续不发送dimensions，
