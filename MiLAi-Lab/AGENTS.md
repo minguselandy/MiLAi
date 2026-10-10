@@ -1,5 +1,15 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+Latest actual E0 on frozenfa86b95 STOPPED at11:24:29UTC, resources settled: RawRAG3answers,
+Hindsight retain failed before QA with actual BGE HTTP400 (explicit dimensions1024 unsupported),
+M NOT_STARTED/Judge0. All4gen receipts known17015=charged; embedding known0/charged1243/newunknown1.
+No refund/retry/old-bank recovery: preserve failed root e0-one-source-socket-v1-prepared and all receipts.
+Public native0.10.3 dimensions=None discovers bge-m3 dimension once at startup, then omits dimensions;
+new configuration removes OPENAI_DIMENSIONS and must use fresh roots/banks. Actual startup probe is paid
+through the same original bridge/ledger; old zero-model empty deployment remains historical.
+Native persistence reopen restores only a successfully closed deployment in a separate audit root,
+same DB/schema/home/bank, new bridge, no retain/Reader replay; failed or unsettled roots rejected.
+
 User explicitly resumed execution of
  docs/MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md with subagents.
 One integrator plus three developers; Root owns contracts/config/resource scheduling/results,

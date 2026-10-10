@@ -1,5 +1,11 @@
 # 本地基线对齐协议 v1
 
+首次实际E0（冻结`fa86b95`）11:24:29 UTC停止：RawRAG3答案，Hindsight retain实际BGE400，
+M未开始、Judge0，资源真实闭合；失败根和embedding unknown1／charged1243保留，不退款或重放。
+当前配置省略原生OpenAI DIMENSIONS；官方0.10.3启动发现实际维度，后续不发送dimensions，
+其每次启动的真实BGE调用纳入原账本。新配置必须使用新根／银行，不能拼接首次RawRAG前缀。
+E0重开证据使用成功闭合的同一DB／schema／银行与独立日志、新bridge，只查询、不再次retain／Reader。
+
 执行范围为计划 E0–E4 与现有 Host 连续流程；本卡记录新配置，不改变冻结 5019968。Root 负责公共合同、配置、串行资源与最终结果，三个开发者分别负责 RawRAG/Hindsight、MiLAi 纯记忆/交付、Host/结果。
 
 | 项目 | 首轮共同条件 |

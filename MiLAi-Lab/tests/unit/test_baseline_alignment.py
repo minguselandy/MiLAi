@@ -97,6 +97,45 @@ def test_prepare_keeps_qa_and_update_budgets_and_opaque_isolation(
     assert settings["maintenance_recipe"] == "extract_then_edit"
 
 
+def test_native_persistence_restores_identity_only_after_successful_closure(tmp_path: Path) -> None:
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(configuration(), "Hindsight-native-local-recall")
+    native = execution.settings["alignment"]["hindsight_service"]
+    previous = tmp_path / "old-arm/native-service"
+    home = tmp_path / "home"
+    database = "pg0://milai_saved?unix_socket_directories=%2Fcra%2Fsocket"
+    write_json(previous.parent / "terminal-predict.json", {
+        "status": "PREDICTIONS_SAVED", "resources_settled": True,
+    })
+    write_json(previous / "closed.json", {
+        "processes_closed": True, "remaining_uid_processes": [],
+    })
+    deployment = {"uid": 996, "home": str(home), "version": native["version"],
+                  "distribution": native["distribution"], "environment": {
+                      **native["environment"], "HINDSIGHT_API_DATABASE_URL": database,
+                      "HINDSIGHT_API_DATABASE_SCHEMA": "milai_saved",
+                  }}
+    write_json(previous / "configuration.json", deployment)
+    write_json(previous / "started.json", {"instance": "milai_saved"})
+    assert execution._restored_native_database(previous, 996, home) == ("milai_saved", database)
+    with pytest.raises(ValueError, match="owner or version"):
+        execution._restored_native_database(previous, 997, home)
+    deployment["environment"]["HINDSIGHT_API_EMBEDDINGS_OPENAI_DIMENSIONS"] = "1024"
+    write_json(previous / "configuration.json", deployment)
+    with pytest.raises(ValueError, match="configuration changed"):
+        execution._restored_native_database(previous, 996, home)
+    deployment["environment"].pop("HINDSIGHT_API_EMBEDDINGS_OPENAI_DIMENSIONS")
+    deployment["environment"]["HINDSIGHT_API_DATABASE_SCHEMA"] = "different"
+    write_json(previous / "configuration.json", deployment)
+    with pytest.raises(ValueError, match="instance and schema"):
+        execution._restored_native_database(previous, 996, home)
+    write_json(previous.parent / "terminal-predict.json", {
+        "status": "FAILED", "resources_settled": True,
+    })
+    with pytest.raises(ValueError, match="confirmed predictions and closure"):
+        execution._restored_native_database(previous, 996, home)
+
+
 def test_existing_online_loop_delivers_only_current_observed_prefix(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:

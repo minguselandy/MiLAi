@@ -1,6 +1,16 @@
 # 统一记忆功能候选与当前执行状态
 
-## 2026-10-10：基线对齐开发，真实比较尚未执行
+## 2026-10-10：基线对齐 E0 首次实际运行失败，公开配置修复
+
+**新 E0 实际终态（11:24:29 UTC／北京时间19:24:29）**：冻结`fa86b95`，每臂1来源会话／3 QA。
+RawRAG完成3答案并关闭；Hindsight实际retain在BGE HTTP400处失败，尚无QA；MiLAi未开始，Judge0。
+原因是原生请求发送了`dimensions=1024`，本地非Matryoshka的BGE端点拒绝此参数。
+API／PG关闭、UID996残留0，失败根和HTTP保留；不称三方闭环或排名，也不继续该失败银行。
+本阶段4生成请求、17015 known＝charged；embedding known0／charged1243／新增unknown1，未退款。
+当前公开配置移除`HINDSIGHT_API_EMBEDDINGS_OPENAI_DIMENSIONS`：官方0.10.3将用一次实际
+启动请求发现维度，后续省略该参数。启动调用须沿原账本计费；新配置使用全新根和银行验证。
+持久性重开仅接受成功预测且真实闭合的原生部署，同一DB／schema／银行、独立日志与新bridge，
+不重放Source或Reader；当前失败Hindsight银行不具备该验收资格。
 
 **当前调度状态（11:15:33 UTC／北京时间19:15:33）**：用户明确要求“取消退出原实验”，
 原冻结5019968五方法已退出。HTTP结算后向worker1854771发送SIGINT，父进程1854770于
@@ -36,8 +46,8 @@
 
 | 首轮后端 | 已接通能力 | 实际结果边界 |
 |---|---|---|
-| RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 已在1个真实开发来源会话完成实际入库、重开和原文检索；共同Reader尚未运行，E0三方闭环和E1仍待完成，不称作者模型分数复现 |
-| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 独立安装及实际空API／DB启动、健康与关闭已确认，模型请求0；Source入库／共同Reader／评分未运行，无实际语义闭环或 QA |
+| RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 原生入库／重开／查询已确认；首次实际E0保存3共同Reader答案，未评分，不称QA正确或三方闭环 |
+| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 首次实际E0 retain因BGE维度参数HTTP400失败，QA0；已关闭资源并保留未知费用，公开配置修复待实测 |
 | MiLAi-memory-only | 薄门面复用原 Source、MemoryService、维护 recipe 和 Reader；首轮直接读取实际语义状态及已有支持 | 接线已完成，实际形成、更正和 QA 尚未在新配置运行；不经过普通 Host 业务分类，也未增加原文检索兜底 |
 
 首轮按 source-only 在线前缀准备：四个既有开发用户各前八会话，**每臂32会话、73 QA、72原生更新机会**，

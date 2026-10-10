@@ -107,7 +107,7 @@ HINDSIGHT_API_EMBEDDINGS_PROVIDER=openai
 HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL=bge-m3
 HINDSIGHT_API_EMBEDDINGS_OPENAI_BASE_URL=<BRIDGE_BASE_URL>
 HINDSIGHT_API_EMBEDDINGS_OPENAI_API_KEY=<BRIDGE_API_KEY>
-HINDSIGHT_API_EMBEDDINGS_OPENAI_DIMENSIONS=1024
+# 不设置 OPENAI_DIMENSIONS；原生启动发现 BGE 的实际默认维度，费用进入原账本
 HINDSIGHT_API_EMBEDDINGS_OPENAI_BATCH_SIZE=16
 HINDSIGHT_API_EMBEDDINGS_MAX_CONCURRENT_REQUESTS=1
 HINDSIGHT_API_EMBEDDINGS_MAX_RETRIES=0
@@ -143,8 +143,14 @@ bridge 不重写。留存输出上限 32768 是本地资源配置；省略 outpu
 因此不能将所有Hindsight内部调用称为output32768，或将其与共同Reader温度1.0合称相同完整配置；
 实际wire、调用数和usage仍以运行回执为准。
 
-显式 dimensions=1024 避免未知模型的初始化 test embedding；skip verification 禁用 LLM
-启动探针；rrf 不初始化神经重排模型。单 worker slot 必须将 consolidation reserved slots
+首次实际E0于11:24:29 UTC因BGE不支持显式`dimensions=1024`而失败：retain返回实际HTTP错误，
+尚无Hindsight QA。原失败银行、完整HTTP及unknown费用保留，资源已真实关闭，不续接或退款。
+当前省略`HINDSIGHT_API_EMBEDDINGS_OPENAI_DIMENSIONS`，公开构造参数成为`dimensions=None`。
+实际安装0.10.3的`embeddings.py`初始化对未知模型发送一次`input=["test"]`，不含dimensions；
+发现结果只存`_dimension`，后续仍不发送dimensions。每次新服务实例（包括重开）须支付
+这一真实BGE调用，经原bridge／原连续账本计费，不能再称启动模型请求0。
+先前显式1024安装与空部署核对仅说明旧配置可加载、API／DB可启动，不证明BGE请求兼容。
+skip verification 禁用 LLM启动探针；rrf 不初始化神经重排模型。单 worker slot 必须将 consolidation reserved slots
 设为 0，保留可供 graph / vector maintenance 使用的 shared slot。设为 1 虽通过配置校验，
 却会使其余任务拿不到 shared slot。这里使用原生 rrf，属于声明的本地适配，不能写成作者
 默认 crossencoder 的严格复现。真实吞吐、费用和语义效果仍待实际原生运行观察。
@@ -165,3 +171,8 @@ maintenance。薄适配通过公开 bank stats（refresh）及 pending / process
 HTTP，但仍停止新请求并保留原错误 / 未核定费用预留，不代表原生服务已经闭合。
 重开时，历史已 dispatch 却没有完整响应或合法 usage 的实际 transport 阻止 bridge 启动，
 不重试、不退款、不构造 usage。原生资料和回传顺序保持原样。
+
+E0持久性检查使用`_start_native_service(restore_from=原native-service目录)`，只接受原预测
+PREDICTIONS_SAVED／resources_settled及实际processes_closed、UID无残留，并核对原owner／home／
+版本／声明环境／DB实例和schema。独立审计根保留新模型HTTP，新bridge替换旧URL/key；
+同一实际PG数据和bank仅重新recall，不重复retain、Reader或评分，也不复用旧recall缓存。

@@ -2,6 +2,14 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
+最新E0实际运行于11:24:29 UTC STOPPED：冻结`fa86b95`，RawRAG3共同Reader答案，Hindsight
+retain因实际BGE HTTP400（不支持显式dimensions1024）失败、QA0，M未开始／Judge0。
+真实API／PG已关闭、UID996残留0；4生成17015 known＝charged，embedding known0／charged1243／
+新增unknown1，失败银行／原HTTP／费用均保留、不退款或续接。
+最小公开配置修复为移除OPENAI_DIMENSIONS，接受原生每次启动一次真实维度发现并沿原账本计费；
+全新配置／根／银行另行验证。成功闭合后可在独立审计目录重开同一实际DB／schema，仅查询、
+不重放retain／Reader；失败或未闭合部署不可作为持久性成功证据。
+
 ## 2026-10-10：当前基线对齐入口
 
 用户已要求“取消退出原实验”。11:15:01 UTC原冻结5019968五方法STOPPED，两实际进程消失，

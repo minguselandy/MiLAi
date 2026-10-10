@@ -242,7 +242,39 @@ class AlignmentRun(BenchmarkRun):
         os.chown(directory, uid, gid)
         return f"pg0://{identity}?{urlencode({'unix_socket_directories': str(directory)})}"
 
-    def _start_native_service(self) -> None:
+    def _restored_native_database(
+        self, previous: Path, uid: int, home: Path,
+    ) -> tuple[str, str]:
+        """Reopen a successfully closed deployment without replaying ingestion."""
+        terminal = read_json(previous.parent / "terminal-predict.json")
+        closed = read_json(previous / "closed.json")
+        deployment = read_json(previous / "configuration.json")
+        native = self.settings["alignment"]["hindsight_service"]
+        if (terminal.get("status") != "PREDICTIONS_SAVED"
+                or terminal.get("resources_settled") is not True
+                or closed.get("processes_closed") is not True
+                or closed.get("remaining_uid_processes") != []):
+            raise ValueError("Native persistence requires confirmed predictions and closure")
+        if (deployment.get("uid") != uid or deployment.get("home") != str(home)
+                or deployment.get("version") != native["version"]
+                or deployment.get("distribution") != native["distribution"]):
+            raise ValueError("Native persistence deployment owner or version changed")
+        environment = deployment["environment"]
+        runtime_keys = {"HINDSIGHT_API_DATABASE_URL", "HINDSIGHT_API_DATABASE_SCHEMA",
+                        "HINDSIGHT_API_LLM_MODEL", "HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL",
+                        "HINDSIGHT_API_LLM_BASE_URL", "HINDSIGHT_API_EMBEDDINGS_OPENAI_BASE_URL"}
+        declared = {key: value for key, value in environment.items()
+                    if key.startswith("HINDSIGHT_API_") and key not in runtime_keys}
+        if declared != native["environment"]:
+            raise ValueError("Native persistence configuration changed")
+        identity = str(read_json(previous / "started.json")["instance"])
+        database_url = str(environment["HINDSIGHT_API_DATABASE_URL"])
+        if (environment["HINDSIGHT_API_DATABASE_SCHEMA"] != identity
+                or database_url.partition("?")[0] != f"pg0://{identity}"):
+            raise ValueError("Native persistence instance and schema disagree")
+        return identity, database_url
+
+    def _start_native_service(self, *, restore_from: Path | None = None) -> None:
         """Start the isolated public native application behind the owned ledger."""
         if self._native_process is not None:
             self._check_native_transport()
@@ -267,6 +299,13 @@ class AlignmentRun(BenchmarkRun):
             raise ValueError("Native service needs its idle dedicated nonroot user and actual home")
         if self.retrieval_embedding_client is None:
             raise ValueError("Native service requires the existing metered embedding client")
+        if restore_from is None:
+            identity = f"milai_{uuid.uuid4().hex}"
+            database_url = self._native_database_url(identity, account.pw_uid, account.pw_gid)
+        else:
+            identity, database_url = self._restored_native_database(
+                restore_from, account.pw_uid, home,
+            )
         folder = self.root / "native-service"
         folder.mkdir(mode=0o700)
         os.chown(folder, account.pw_uid, account.pw_gid)
@@ -286,8 +325,6 @@ class AlignmentRun(BenchmarkRun):
         ).stdout.decode().strip()
         if installed != native["version"]:
             raise ValueError("Native service distribution differs from the declared version")
-        identity = f"milai_{uuid.uuid4().hex}"
-        database_url = self._native_database_url(identity, account.pw_uid, account.pw_gid)
         bridge = HindsightModelBridge(
             folder / "model-http", generation_client=self.client,
             embedding_client=self.retrieval_embedding_client,
@@ -313,6 +350,7 @@ class AlignmentRun(BenchmarkRun):
             "environment": {key: value for key, value in env.items() if "API_KEY" not in key},
             "dot_env": "program entrypoint uses explicit environment; no dotenv loading",
             "phase": self.phase,
+            "restored_from": str(restore_from) if restore_from is not None else None,
             "models": "original clients and shared continuous ledger; no independent budget",
         })
         (folder / "service.py").write_text(NATIVE_SERVICE_SCRIPT)
