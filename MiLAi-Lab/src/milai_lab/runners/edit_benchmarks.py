@@ -2033,7 +2033,7 @@ class BenchmarkRun:
         return [row["value"]["content"] for row in rows]
 
     def _known_reader_failure(self, error: ValueError, key: str) -> dict[str, Any] | None:
-        """Record only a proven unsent request or a confirmed incomplete response.
+        """Record a proven unsent request or confirmed unusable Reader response.
 
         This is called from QA only. Business, maintenance, transport unknowns
         and Store failures retain their original stop behavior. The run's frozen
@@ -2061,9 +2061,11 @@ class BenchmarkRun:
                     **({"delivery_plan_ref": str((self.root / "http" / key / "memory-view.json"
                                                   ).relative_to(self.root))}
                        if (self.root / "http" / key / "memory-view.json").exists() else {})}
-        if policy not in {"record_confirmed_length", "record_known_readonly_failure"} or (
-            str(error) != "Provider output incomplete: length"
-        ):
+        no_text = (policy == "record_known_readonly_failure"
+                   and str(error) == "Provider returned no textual answer")
+        length = (policy in {"record_confirmed_length", "record_known_readonly_failure"}
+                  and str(error) == "Provider output incomplete: length")
+        if not (length or no_text):
             return None
         view = read_json(view_path) if view_path.exists() else {}
         stage = view.get("active_stage", key)
@@ -2074,16 +2076,22 @@ class BenchmarkRun:
         response = read_json(response_path) if response_path.exists() else {}
         choices = response.get("choices", [])
         usage = response.get("usage")
-        if (not choices or choices[0].get("finish_reason") != "length"
+        finish = "stop" if no_text else "length"
+        if (not choices or choices[0].get("finish_reason") != finish
                 or not isinstance(usage, dict)
                 or not all(type(usage.get(name)) is int and usage[name] >= 0 for name in (
-                    "prompt_tokens", "completion_tokens", "total_tokens"))):
+                    "prompt_tokens", "completion_tokens", "total_tokens"))
+                or usage["prompt_tokens"] + usage["completion_tokens"] != usage["total_tokens"]):
+            return None
+        if no_text and (not isinstance(choices[0].get("message"), dict)
+                        or isinstance(choices[0]["message"].get("content"), str)):
             return None
         failure_path = folder / "failure.json"
         if not failure_path.exists():
             write_json(failure_path, {"type": type(error).__name__, "message": str(error)})
         return {"type": type(error).__name__, "message": str(error),
-                "finish_reason": "length", "phase": "confirmed_response",
+                "finish_reason": finish, "phase": "confirmed_response",
+                **({"reason": "no_textual_answer"} if no_text else {}),
                 "response_ref": str(response_path.relative_to(self.root)),
                 "failure_ref": str(failure_path.relative_to(self.root))}
 
@@ -2340,6 +2348,10 @@ class BenchmarkRun:
                         reader_failure = question_prediction.get("reader_failure")
                         if (answer is None and isinstance(reader_failure, dict)
                                 and (reader_failure.get("finish_reason") == "length" or (
+                                    reader_failure.get("phase") == "confirmed_response"
+                                    and reader_failure.get("finish_reason") == "stop"
+                                    and reader_failure.get("reason") == "no_textual_answer"
+                                ) or (
                                     reader_failure.get("phase") == "before_http"
                                     and reader_failure.get("request_sent") is False
                                     and reader_failure.get("type") == "ReadCapacityUnavailable"

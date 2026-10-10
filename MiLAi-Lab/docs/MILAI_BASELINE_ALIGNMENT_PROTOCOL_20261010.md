@@ -1,5 +1,11 @@
 # 本地基线对齐协议 v1
 
+首次E1冻结`9a9b84b`于11:58:52 UTC停止：Raw15答案，第16实际Reader stop却contentnull、
+usage完整；H／M未开始、资源闭合、Judge0。原失败及195662 known＝charged费用保留。
+既有record_known_readonly_failure现也记录这种完整非文本stop响应，usage须整数非负且相加一致；
+保留null及全部机会、无Judge，不使用reasoning补答案。其余旧策略和unknown仍停止。
+修订版全新银行运行，输入／来源／Reader／预算／K不变，不拼接旧前缀。
+
 当前E0接通闭环11:55:06 UTC完成：主预测`28bf2410`，独立实际重开查询`9a9b84b`，同一银行、
 新检索日志，无Source／维护／Reader重放；Raw原文、H10事实ID／来源时间、M5记录／版本／Source核对。
 验证脚本的原时间格式误读失败保留，修正0HTTP／账本不变／查询重放0，非模型补跑。

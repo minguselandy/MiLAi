@@ -2,6 +2,13 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
+最新E1于11:58:52 UTC停止，冻结`9a9b84b`：Raw7完整会话／15答案，第16Reader响应
+stop／content=null／reasoning有内容／usage完整；H／M未开始、Judge0，资源闭合。
+16生成／195662 known＝charged／0 embedding／新unknown0／0，原结果／费用保留，不回填或拼接。
+已有known-readonly策略补上该无文本缺答，只有实际完整且usage一致的响应才允许继续，
+不把reasoning充作最终答案；未知仍停。37相关检查＋1usage／policy拒绝检查、类型／Ruff通过。
+下一E1使用新空银行，输入／模型／thinking／额度／K不变；这项修复不是QA正确率提升证据。
+
 最新11:55:06 UTC：正常E0入库／查询／重开／来源时间闭合，主预测`28bf2410`／独立重开`9a9b84b`。
 Raw原文保持，H同一DB的10事实ID／来源与时间保持且UID残留0，M5记录／版本／Source绑定保持。
 主预测13生成／80220 known＝charged／1046 embedding；重开0生成／263 embedding，均新unknown0／0。

@@ -1400,8 +1400,9 @@ def test_each_embedding_batch_is_recorded_before_http_and_billed_once(tmp_path: 
 
 
 @pytest.mark.parametrize("unknown_answer", [False, True])
+@pytest.mark.parametrize("failure_kind", ["capacity", "no_text"])
 def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_stops(
-    tmp_path: Path, unknown_answer: bool,
+    tmp_path: Path, unknown_answer: bool, failure_kind: str, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     class MeasuredTokenizer:
         def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
@@ -1428,17 +1429,21 @@ def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_sto
             content = json.dumps({"proposals": [proposal]})
         elif payload["question"] == "BlueProject unknown_probe":
             raise httpx.ReadError("Original answer unknown", request=request)
+        elif payload["question"] == "BlueProject no_text_probe":
+            content = None
         else:
             content = payload["memories"][0]["content"]
         return httpx.Response(200, json={
-            "choices": [{"finish_reason": "stop", "message": {"content": content}}],
+            "choices": [{"finish_reason": "stop", "message": {
+                "content": content, "reasoning": "Reasoning is not the final answer",
+            }}],
             "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9},
         })
 
     sessions = []
     for ordinal, day in enumerate(("Monday", "Tuesday")):
         stamp = f"Jan 0{ordinal + 1}, 2030, 09:00:00"
-        questions = (["BlueProject capacity_probe", "BlueProject first complete"]
+        questions = ([f"BlueProject {failure_kind}_probe", "BlueProject first complete"]
                      + (["BlueProject unknown_probe"] if unknown_answer else [])) \
             if ordinal == 0 else ["BlueProject later complete"]
         sessions.append({
@@ -1473,28 +1478,83 @@ def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_sto
             }
         first = read_json(execution.root / "predictions/halumem/synthetic/0/qa/0/complete.json")
         assert first["hypothesis"] is None
-        assert first["reader_failure"]["phase"] == "before_http"
-        assert first["reader_failure"]["request_sent"] is False
-        assert (execution.root / first["reader_failure"]["capacity_ref"]).exists()
-        assert not (execution.root / "http/halumem/synthetic/0/qa/0/request.json").exists()
+        if failure_kind == "capacity":
+            assert first["reader_failure"]["phase"] == "before_http"
+            assert first["reader_failure"]["request_sent"] is False
+            assert (execution.root / first["reader_failure"]["capacity_ref"]).exists()
+            assert not (execution.root / "http/halumem/synthetic/0/qa/0/request.json").exists()
+        else:
+            assert first["reader_failure"]["phase"] == "confirmed_response"
+            assert first["reader_failure"]["reason"] == "no_textual_answer"
+            response = read_json(execution.root / first["reader_failure"]["response_ref"])
+            assert response["choices"][0]["message"]["content"] is None
+            assert response["choices"][0]["finish_reason"] == "stop"
         answer_path = execution.root / "predictions/halumem/synthetic/0/qa/1/complete.json"
         original = answer_path.read_bytes()
         assert "Monday" in read_json(answer_path)["hypothesis"]
         if unknown_answer:
-            assert len(attempts) == 3 and budget.state["generation"]["unknown_usage"] == 1
+            assert len(attempts) == 3 + (failure_kind == "no_text")
+            assert budget.state["generation"]["unknown_usage"] == 1
             assert not (execution.root / "predictions/halumem/synthetic/0/complete.json").exists()
             with pytest.raises(RuntimeError, match="do not blindly repeat"):
                 execution.halumem("predict")
-            assert len(attempts) == 3 and budget.state["generation"]["unknown_usage"] == 1
+            assert len(attempts) == 3 + (failure_kind == "no_text")
+            assert budget.state["generation"]["unknown_usage"] == 1
         else:
-            assert len(attempts) == 4 and budget.state["generation"]["unknown_usage"] == 0
+            assert len(attempts) == 4 + (failure_kind == "no_text")
+            assert budget.state["generation"]["unknown_usage"] == 0
             later = read_json(execution.root / "predictions/halumem/synthetic/1/complete.json")
             assert later["state"][0]["value"]["revision"] == 2
             assert "Tuesday" in later["prediction"]["questions"][0]["hypothesis"]
             assert execution.halumem("predict")["known_reader_failures"] == 1
-            assert len(attempts) == 4
+            assert len(attempts) == 4 + (failure_kind == "no_text")
+            scored_questions = []
+
+            class Official:
+                def __init__(self, *args: Any) -> None:
+                    pass
+
+                def score(self, name: str, *args: str) -> dict[str, Any]:
+                    if name == "question":
+                        scored_questions.append(args[0])
+                        assert "_probe" not in args[0]
+                        return {"evaluation_result": "Correct"}
+                    return {"accuracy_score": 2}
+
+                def aggregate_results(self, records: dict[str, Any]) -> dict[str, Any]:
+                    return copy.deepcopy(records)
+
+            monkeypatch.setattr("milai_lab.runners.edit_benchmarks.HaluMemOfficial", Official)
+            execution.settings["halumem"]["official_checkout"] = str(tmp_path)
+            scored = execution.halumem("score")["question_answering_records"]
+            assert len(scored) == 3 and len(scored_questions) == 2
+            assert scored[0]["system_response"] is None and scored[0]["result_type"] is None
+            assert scored[0]["reader_failure"] == first["reader_failure"]
+            assert len(attempts) == 4 + (failure_kind == "no_text")
         assert answer_path.read_bytes() == original
     assert budget.state["generation_requests"] == len(attempts)
+
+
+def test_nontext_reader_requires_confirmed_usage_and_declared_failure_policy(
+    tmp_path: Path,
+) -> None:
+    execution = BenchmarkRun.__new__(BenchmarkRun)
+    execution.root = tmp_path
+    execution.settings = {"halumem": {"reader_failure_policy": "record_known_readonly_failure"}}
+    response = {"choices": [{"finish_reason": "stop", "message": {"content": None}}]}
+    path = tmp_path / "http/qa/response.json"
+    for usage in (None, {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 10},
+                  {"prompt_tokens": False, "completion_tokens": 7, "total_tokens": 7}):
+        write_json(path, {**response, "usage": usage})
+        assert execution._known_reader_failure(
+            ValueError("Provider returned no textual answer"), "qa") is None
+    write_json(path, {**response, "usage": {
+        "prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9,
+    }})
+    for policy in ("fail_fast", "record_confirmed_length"):
+        execution.settings["halumem"]["reader_failure_policy"] = policy
+        assert execution._known_reader_failure(
+            ValueError("Provider returned no textual answer"), "qa") is None
 
 
 def test_embedding_budget_rejection_is_recorded_as_not_sent(tmp_path: Path) -> None:

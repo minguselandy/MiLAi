@@ -1,5 +1,16 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+First E1 source9a9b84b STOPPED at11:58:52.944657UTC: Raw7complete sessions/15QA checkpoints
+with answers,16HTTP responses; currentfirstuser/session7/qa3 actualstop/contentnull/reasoning present,
+usage26663prompt+969completion=27632total, no finaltext. H/M NOT_STARTED/Judge0/resources settled.
+Rootcost16gen/195662known=charged/0emb/newunknown0/0,limits unchanged; originalFAILED root/receipts kept.
+Minimal existing QA failure policy now records only this proven nontext/stop response with complete
+consistent nonnegative integerusage under record_known_readonly_failure, keepsnull denominator and
+does not sendreasoning asanswer. failfast/record_confirmed_length/unknown remainstop; Judge skipsmissing.
+Source/Evidence/Reader model/thinking/output/K unchanged; next fullE1 usesfresh roots/banks,no prefix splice.
+Wiring37checks +1newusage/policyreject checkPASS,1source stricttypes/RuffPASS; actualsaved stop/null
+response recognized readonly with0HTTP/unchangedledger, oldroot stillFAILED. Notsemantic acceptance.
+
 Current E0 acceptance CLOSED at11:55:06UTC: main28bf2410 all3 arms/9answers, separate real restored
 queries source9a9b84b, same originalbanks/no retain/maintenance/Reader; Raw1originalexchange unchanged,
 H10actualnativefactIDs/document/time unchanged andactualUID996 closed, M5records/revisions/source refs
