@@ -43,6 +43,10 @@ class UnconfirmedHindsightOperation(RuntimeError):
 class HindsightIngestionIncomplete(RuntimeError):
     """The saved native response does not certify synchronous completion."""
 
+    def __init__(self, message: str, *, resources_settled: bool = False) -> None:
+        super().__init__(message)
+        self.resources_settled = resources_settled
+
 
 class _OfficialClient:
     """Public SDK HTTP-info methods preserve the actual complete response JSON.
@@ -280,7 +284,9 @@ class HindsightBackend:
             if all(count == 0 for count in counts):
                 # Drain actual work before reporting a known permanent failure.
                 if any(count > 0 for count in failures):
-                    raise HindsightIngestionIncomplete(f"{stage}:native_background_failure")
+                    raise HindsightIngestionIncomplete(
+                        f"{stage}:native_background_failure", resources_settled=True,
+                    )
                 return status
             time.sleep(min(1.0, max(0.0, deadline - time.monotonic())))
 
@@ -363,6 +369,13 @@ class HindsightBackend:
                 self._wait_native("close")
         finally:
             try:
-                self.client.close()
-            finally:
-                self.db.close()
+                try:
+                    self.client.close()
+                finally:
+                    self.db.close()
+            except BaseException as error:
+                # A drained native failure certifies closure only when both
+                # local resources close successfully as well.
+                if isinstance(error, HindsightIngestionIncomplete):
+                    error.resources_settled = False
+                raise

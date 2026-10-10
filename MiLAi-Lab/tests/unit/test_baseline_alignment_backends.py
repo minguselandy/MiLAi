@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import json
+import sqlite3
 import threading
+from collections.abc import Callable
 from dataclasses import dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
+from unittest.mock import Mock
 
 import pytest
 
@@ -178,10 +181,46 @@ def test_official_hindsight_sdk_wire_reopen_and_saved_response_projection(
         assert len(status_calls) == 18  # Both writes, cached write, pending poll and both closes.
         background_failed = True
         backend = HindsightBackend(tmp_path, bank_id="h-u1-r1", base_url=url)
-        with pytest.raises(HindsightIngestionIncomplete, match="native_background_failure"):
+        with pytest.raises(
+            HindsightIngestionIncomplete, match="native_background_failure",
+        ) as failed:
             backend.ingest(second, key="ingest/1")
-        with pytest.raises(HindsightIngestionIncomplete, match="native_background_failure"):
+        assert failed.value.resources_settled is True
+        with pytest.raises(
+            HindsightIngestionIncomplete, match="native_background_failure",
+        ) as failed:
             backend.close()
+        assert failed.value.resources_settled is True
+        with pytest.raises(sqlite3.ProgrammingError, match="closed database"):
+            backend.db.execute("SELECT 1")
+        for resource_name in ("client", "db"):
+            backend = HindsightBackend(tmp_path, bank_id="h-u1-r1", base_url=url)
+            resource = getattr(backend, resource_name)
+            wrapper = Mock(wraps=resource)
+            original_close = resource.close
+
+            def fail_cleanup(close: Callable[[], None] = original_close) -> None:
+                close()
+                raise HindsightIngestionIncomplete("cleanup_failed", resources_settled=True)
+
+            wrapper.close.side_effect = fail_cleanup
+            monkeypatch.setattr(backend, resource_name, wrapper)
+            with pytest.raises(HindsightIngestionIncomplete, match="cleanup_failed") as failed:
+                backend.close()
+            assert failed.value.resources_settled is False
+            with pytest.raises(sqlite3.ProgrammingError, match="closed database"):
+                backend.db.execute("SELECT 1")
+        backend = HindsightBackend(tmp_path, bank_id="h-u1-r1", base_url=url)
+
+        def unconfirmed_status(bank_id: str, *, timeout: float) -> dict[str, Any]:
+            raise TimeoutError("native completion is unknown")
+
+        monkeypatch.setattr(backend.client, "status", unconfirmed_status)
+        with pytest.raises(
+            HindsightIngestionIncomplete, match="native_status_unconfirmed",
+        ) as failed:
+            backend.close()
+        assert failed.value.resources_settled is False
         assert len(requests) == 3  # Known failure must not trigger another retain/recall.
     finally:
         server.shutdown()
