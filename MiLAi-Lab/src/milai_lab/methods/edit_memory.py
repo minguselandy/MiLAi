@@ -47,6 +47,15 @@ METHOD_VERSION = "milai_edit_v1"
 V2_METHOD_VERSION = "milai_edit_v2"
 InterfaceVersion = Literal["v1", "I1", "I2"]
 
+REVISION_MEANING_INSTRUCTIONS = (
+    "Use the whole delivered matter to check linked conditions, exceptions and old overview "
+    "statements, including those without explicit edges. A local revision covers all supported "
+    "changes in their meaning; preserve unaffected scopes within mixed claims rather than "
+    "keeping obsolete wording. Changed wording needs current correction evidence and any "
+    "necessary redelivered old Source bodies, never h alone. Combine dependent changes in "
+    "that target's single proposal. "
+)
+
 
 class EditMemory:
     """Ordinary full rewrite, plain local edit, and a controlled representation pair."""
@@ -1170,14 +1179,9 @@ class EditMemory:
                 "and still-applicable qualifications. Do not pack independent matters into a "
                 "single long unit or create duplicate records for the same matter. "
                 "Return the supplied envelope. At most one proposal per existing target in "
-                "this request. Use the whole delivered matter to check linked conditions, "
-                "exceptions and old overview statements, including those without explicit "
-                "edges. A local revision covers all supported changes in their meaning; "
-                "preserve unaffected scopes within mixed claims rather than keeping obsolete "
-                "wording. Changed wording needs current correction evidence and any necessary "
-                "redelivered old Source bodies, never h alone. Combine dependent changes in "
-                "that target's single proposal. "
-                "A removal needs evidence of that cancellation. Redelivering a source that "
+                "this request. "
+                + REVISION_MEANING_INSTRUCTIONS
+                + "A removal needs evidence of that cancellation. Redelivering a source that "
                 "affirmed an old rule does not support a new retraction of that rule. "
                 "Compare every explicit current Source value with actual delivered state, "
                 "including values the Source says to retain. If they differ, use a supported "

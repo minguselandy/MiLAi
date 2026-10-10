@@ -20,7 +20,7 @@ from contextlib import AbstractContextManager, ExitStack
 from copy import deepcopy
 from dataclasses import asdict, replace
 from pathlib import Path
-from typing import Any, Literal, cast
+from typing import Annotated, Any, Literal, cast
 
 import httpx
 from langchain_core.messages import (
@@ -31,9 +31,10 @@ from langchain_core.messages import (
     ToolMessage,
 )
 from langchain_core.runnables import RunnableConfig
-from langchain_core.tools import BaseTool
+from langchain_core.tools import BaseTool, InjectedToolCallId
 from langchain_core.utils.function_calling import convert_to_openai_tool
 from langgraph.checkpoint.sqlite import SqliteSaver
+from pydantic import ConfigDict, Field, create_model, model_validator
 
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.host_requests import HostRequestProgress, visible_cards
@@ -46,6 +47,7 @@ from milai_lab.application.request_plans import (
 )
 from milai_lab.baselines.langmem_agent import build_agent
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
+from milai_lab.contracts.memory import VerifiedObjectRef
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import entrypoint_settings, read_json, write_json
 from milai_lab.harness.contextual_artifacts import (
@@ -57,11 +59,12 @@ from milai_lab.harness.contextual_artifacts import (
 )
 from milai_lab.harness.functional_faults import FunctionalFaults
 from milai_lab.memory.activation import ActivationIndex
-from milai_lab.memory.functional import FunctionalMemory
+from milai_lab.memory.functional import FunctionalMemory, ReadSelector, ReadSelectorTool
 from milai_lab.memory.functional_state import FunctionalIntegrityError as FunctionalIntegrityError
 from milai_lab.memory.functional_state import FunctionalRejection, visibility
 from milai_lab.memory.functional_state import namespace as functional_namespace
 from milai_lab.memory.functional_state import reference_key as functional_reference_key
+from milai_lab.memory.reader_projection import expand_host_packet
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
@@ -450,6 +453,150 @@ def _thread_reference(
     rows.append({"identity": identity, "id": reference})
     write_json(index, rows)
     return reference
+
+
+def _delivered_tool_source_refs(messages: list[Any]) -> list[str]:
+    """Select captured sources actually present in this tool delivery frame."""
+    refs: list[str] = []
+    for row in messages:
+        if not isinstance(row, ToolMessage):
+            continue
+        try:
+            body = json.loads(str(row.content))
+        except (TypeError, ValueError):
+            continue
+        if not isinstance(body, dict):
+            continue
+        capture = body.get("raw_capture")
+        if isinstance(capture, dict) and capture.get("ok") and body.get(
+            "business_outcome"
+        ) in {"confirmed", "partial", "known_no_effect", "observed"}:
+            source_ref = body.get("source_ref")
+            if isinstance(source_ref, str) and source_ref not in refs:
+                refs.append(source_ref)
+        query = body.get("query_source")
+        if isinstance(query, dict) and query.get("origin") in {
+            "get_reservation", "get_document_status"
+        }:
+            source_ref = query.get("source_ref")
+            if isinstance(source_ref, str) and source_ref not in refs:
+                refs.append(source_ref)
+    return refs
+
+
+def _business_query_targets(
+    memory: FunctionalMemory, config: RunnableConfig, material: dict[str, Any],
+    app: FunctionalApplication,
+) -> list[dict[str, Any]]:
+    """Advertise only delivered Source targets with actual verified object metadata."""
+    targets = []
+    seen = set()
+    expanded = expand_host_packet(material)
+    for item in [*expanded.get("items", []), *expanded.get("request_targets", [])]:
+        target = item.get("target")
+        if item.get("target_kind") != "delivered_source" or target in seen:
+            continue
+        resolved = memory.resolve_request_target(config, target, kind="delivered_source")
+        source = memory.service.source(resolved["identity"]["source_ref"])
+        ref = source.get("object_ref") if source is not None else None
+        if not isinstance(ref, dict) or ref.get("owner") != app.owner or ref.get(
+            "application"
+        ) != app.observation_profile.application:
+            continue
+        seen.add(target)
+        targets.append({"target": target, "object_id": ref["external_id"],
+                        "query": "get_document_status" if app.workflow == "document_publication_v1"
+                        else "get_reservation", "basis": "delivered_verified_object",
+                        "observation": "requires_new_query_not_a_live_state_claim"})
+    return targets
+
+
+def _observe_query_target(
+    memory: FunctionalMemory, app: FunctionalApplication, adapter: Any,
+    config: RunnableConfig, target: str, call_id: str, name: str,
+    *, request: Any = None, execute: Callable[[Any], Any] | None = None,
+) -> ToolMessage:
+    try:
+        resolved = memory.resolve_request_target(config, target, kind="delivered_source")
+        source_ref = resolved["identity"]["source_ref"]
+        source = memory.service.source(source_ref)
+        if source is None or not isinstance(source.get("object_ref"), dict):
+            raise FunctionalRejection("FUNCTIONAL_DELIVERED_VERIFIED_OBJECT_REQUIRED")
+        ref = VerifiedObjectRef(**source["object_ref"])
+    except (FunctionalRejection, TypeError, ValueError) as error:
+        return ToolMessage(name=name, tool_call_id=call_id, status="error", content=json.dumps(
+            {"ok": False, "status": "query_target_rejected", "reason": str(error),
+             "effect": "none", "retryable": False}, ensure_ascii=False,
+        ))
+    observed = app.observe_delivered(
+        adapter, ref, delivered_source_refs=[source_ref], attempt_id=call_id,
+        request=request, execute=execute,
+    )
+    delivery = observed.get("delivery_response")
+    if not isinstance(delivery, dict):
+        return ToolMessage(name=name, tool_call_id=call_id, status="error", content=json.dumps(
+            {"ok": False, "status": observed["status"], "effect": observed["business_effect"],
+             "executed": observed["executed"], "retryable": False}, ensure_ascii=False,
+        ))
+    return ToolMessage.model_validate(delivery).model_copy(
+        update={"name": name, "tool_call_id": call_id},
+    )
+
+
+def _query_reference_catalog(
+    memory: FunctionalMemory, app: FunctionalApplication, adapter: Any,
+    targets: list[dict[str, Any]], tools: tuple[BaseTool, ...],
+) -> tuple[BaseTool, ...]:
+    """Use the existing query tool name with an actually issued object target."""
+    def replacement(original: BaseTool) -> BaseTool:
+        issued = [row["target"] for row in targets if row["query"] == original.name]
+        if not issued:
+            return original
+
+        lookup_key = "title" if original.name == "get_document_status" else "item_key"
+
+        class QuerySelectorBase(ReadSelector):
+            target: str | None = None
+            model_config = ConfigDict(extra="forbid", strict=True, json_schema_extra={
+                "oneOf": [
+                    {"required": ["target"], "properties": {lookup_key: {"type": "null"}}},
+                    {"required": [lookup_key], "properties": {"target": {"type": "null"}}},
+                ],
+            })
+
+            @model_validator(mode="after")
+            def one_selector(self) -> Any:
+                if (self.target is None) == (getattr(self, lookup_key) is None):
+                    raise ValueError("one_delivered_target_or_public_lookup_required")
+                return self
+
+        fields: dict[str, Any] = {
+            "target": (str | None, Field(default=None, min_length=1,
+                                         json_schema_extra={"enum": [*issued, None]})),
+            lookup_key: (str | None, Field(default=None, min_length=1)),
+        }
+        query_selector = create_model("QuerySelector", __base__=QuerySelectorBase, **fields)
+
+        def query(
+            config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
+            target: str | None = None, **arguments: Any,
+        ) -> ToolMessage:
+            if target is not None:
+                return _observe_query_target(memory, app, adapter, config, target,
+                                             tool_call_id, original.name)
+            observed = adapter.lookup({lookup_key: arguments[lookup_key]}, attempt_id=tool_call_id)
+            return ToolMessage.model_validate(observed["delivery_response"])
+
+        return ReadSelectorTool.from_function(
+            query, name=original.name, args_schema=query_selector,
+            description=("Obtain a new actual business observation for one delivered verified "
+                         "object target. Select target from business_observation_targets; the "
+                         "program resolves its actual identity. A saved Source is an old receipt, "
+                         "not this query. Query status and object state remain separate; this "
+                         "read performs no business mutation. For a different object use the "
+                         "original public lookup argument instead of target."),
+        )
+    return tuple(replacement(tool) for tool in tools)
 
 
 def _note_edit_tool_delivery(
@@ -2864,6 +3011,7 @@ def message(
                             for tool in (*selected_memory, *selected_business)]
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
             read_exhausted = False
+            business_query_targets: list[dict[str, Any]] = []
 
             def maintain_current(execute: bool) -> list[dict[str, Any]]:
                 assert isinstance(memory, FunctionalEditMemory)
@@ -2962,7 +3110,7 @@ def message(
             def context_hook(
                 state: dict[str, Any], config: RunnableConfig, *, for_finalization: bool = False
             ) -> dict[str, Any]:
-                nonlocal read_exhausted
+                nonlocal read_exhausted, business_query_targets
                 messages = list(state["messages"])
                 blocked = _visibility_replay(service, {
                     "status": "PENDING", "messages": [row.model_dump(mode="json")
@@ -3117,8 +3265,16 @@ def message(
                         material = memory.model_material(config, for_write=(
                             not maintenance_recipe and not for_finalization
                             and bool({"save_memory", "update_memory"}.intersection(allowed_tools))
+                        ), fresh_observations=call_wrapper.fresh_query_evidence(
+                            _delivered_tool_source_refs(wire_messages)
                         ))
                         wire_messages = memory.project_model_messages(config, wire_messages)
+                business_query_targets = (
+                    _business_query_targets(memory, config, material, app)
+                    if memory.memory_view_mode != "legacy" and adapter is not None else []
+                )
+                if business_query_targets:
+                    material["business_observation_targets"] = business_query_targets
                 trace({"event": "functional_material_delivery", "material": material})
                 trace({"event": "functional_memory_effects", "effects": effects})
                 refresh_requests()
@@ -3331,6 +3487,33 @@ def message(
                     faults.before_native(current)
                     return execute(current)
 
+                if (memory.memory_view_mode != "legacy" and adapter is not None
+                        and request.tool_call["name"] in {"get_reservation", "get_document_status"}
+                        and "target" in request.tool_call["args"]):
+                    arguments = request.tool_call["args"]
+                    lookup_key = ("title" if request.tool_call["name"] == "get_document_status"
+                                  else "item_key")
+                    selected = {key: value for key, value in arguments.items() if value is not None}
+                    if (selected.keys() == {lookup_key} and arguments["target"] is None
+                            and set(arguments) <= {"target", lookup_key}):
+                        request = request.override(
+                            tool_call={**request.tool_call, "args": selected})
+                    elif (set(arguments) - {"target", lookup_key}
+                          or selected.keys() != {"target"}
+                          or not isinstance(selected["target"], str)):
+                        return ToolMessage(name=request.tool_call["name"],
+                            tool_call_id=request.tool_call["id"], status="error",
+                            content=json.dumps({"ok": False, "status": "query_target_rejected",
+                                "reason": "one_delivered_target_required", "effect": "none",
+                                "retryable": False}))
+                    else:
+                        try:
+                            return _observe_query_target(memory, app, adapter, cfg,
+                                selected["target"], request.tool_call["id"],
+                                request.tool_call["name"], request=request, execute=native)
+                        finally:
+                            if tracker is not None:
+                                tracker.dirty = True
                 if adapter is not None and request.tool_call["name"] in app.tool_names:
                     if tracker is not None:
                         return tracker.wrap_call(request, native)
@@ -3359,17 +3542,23 @@ def message(
                     memory.writer_tools(config) if isinstance(memory, FunctionalEditMemory)
                     else memory.tools()
                 )
+                business_catalog = (
+                    _query_reference_catalog(memory, app, adapter,
+                                             business_query_targets, selected_business)
+                    if memory.memory_view_mode != "legacy" and adapter is not None
+                    else selected_business
+                )
                 catalog = tuple(tool for tool in memory_catalog
                                 if tool.name in allowed_tools and (
                                     not read_exhausted or tool.name not in memory.read_tool_names
-                                )) + selected_business
+                                )) + business_catalog
                 trace({"event": "functional_bound_tool_catalog",
                        "tools": [convert_to_openai_tool(tool) for tool in catalog]})
                 return catalog
 
             tools_provider = current_tool_catalog if edit_features.enabled or (
                 settings.get("read_exhaustion") == "answer_from_delivered_v1"
-            ) else None
+            ) or memory.memory_view_mode != "legacy" else None
             if service.memory_profile == "unified_v1" and model.delivery_observer is not None:
                 model.delivery_observer = _MemoryUseDelivery(
                     model.delivery_observer, service,

@@ -48,7 +48,7 @@ from milai_lab.memory.reader_projection import (
     project_host_packet,
     project_record,
 )
-from milai_lab.memory.working_set import read_evidence_basis
+from milai_lab.memory.working_set import read_evidence_basis, read_requirement_status
 from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.edit_maintenance import (
@@ -60,7 +60,12 @@ from milai_lab.methods.edit_maintenance import (
     pending_work_refs,
     resume_maintenance,
 )
-from milai_lab.methods.edit_memory import Arm, EditMemory, InterfaceVersion
+from milai_lab.methods.edit_memory import (
+    REVISION_MEANING_INSTRUCTIONS,
+    Arm,
+    EditMemory,
+    InterfaceVersion,
+)
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
 FUNCTIONAL_B0_METHOD = "milai_edit_b0_v1"
@@ -160,8 +165,15 @@ class FunctionalEditMemory(FunctionalMemory):
             self.policy["edit_features"] = canonical(self.features.settings())
 
     def instructions(self) -> str:
+        writer_instructions = self.writer.instructions() + " " + REVISION_MEANING_INSTRUCTIONS
+        reader_instructions = (
+            "Reader and forget use targets actually delivered in this request; a navigation "
+            "target does not grant permission to revise or forget unread text. "
+            if self.memory_view_mode != "legacy" else
+            "Read/confirmation/history/forget still use the existing Reader contracts. "
+        )
         if self.interface_version != "v1":
-            return self.writer.instructions() + (
+            return writer_instructions + (
                 "Functional tool arguments replace the proposals envelope. For a supported "
                 "durable new fact use save_memory when formation is warranted; for an actual "
                 "correction use update_memory with the applicable delivered target and evidence. "
@@ -173,14 +185,14 @@ class FunctionalEditMemory(FunctionalMemory):
                 "Functional save_memory takes proposal=create and optional scope. "
                 "update_memory takes proposal with target=r# from the latest writer packet. "
                 "Do not pass read_handle, persistent IDs, mapping IDs, or base_revision to these "
-                "writer tools. Read/confirmation/history/forget still use the existing Reader "
-                "contracts. Record scope stays unchanged on updates. A partial record is "
+                "writer tools. " + reader_instructions
+                + "Record scope stays unchanged on updates. A partial record is "
                 "unprocessed until all its text units have actually been read; the Host never "
                 "completes a replacement using unseen text. Memory receipts prove no business "
                 "outcome. Support review remains an optional caller callback. "
             )
         if not self.local:
-            return self.writer.instructions() + (
+            return writer_instructions + (
                 "The functional tool signatures replace the proposal envelope: save_memory "
                 "takes units/relations/scope; update_memory takes an actual read_handle and the "
                 "entire replacement units/relations. Include all retained text, qualifications "
@@ -202,7 +214,7 @@ class FunctionalEditMemory(FunctionalMemory):
             if self.conditioned
             else "keep conditions and qualifications in the selected plain text units. "
         )
-        return self.writer.instructions() + (
+        return writer_instructions + (
             "The functional tool signatures replace the proposal envelope: use save_memory "
             "with units/relations/scope, or update_memory with an actual read_handle and edits. "
             "Do not send action/target_record/base_revision to these tools. Copy edit_unit.unit_id "
@@ -314,7 +326,8 @@ class FunctionalEditMemory(FunctionalMemory):
         return list(items.values())
 
     def model_material(
-        self, config: RunnableConfig, *, for_write: bool = False
+        self, config: RunnableConfig, *, for_write: bool = False,
+        fresh_observations: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Project actual resident material immediately before a model call.
 
@@ -338,6 +351,7 @@ class FunctionalEditMemory(FunctionalMemory):
                     view["pending_refs"].append(ref)
         material = {
             "ok": True, "schema": "functional_material_v1", "kind": "resident",
+            "forget_epoch": self.forget_epoch,
             "items": items, **self._read_only_metadata(items),
             "reading_basis": read_evidence_basis(items),
             "memory_view": view, "read_progress": self.read_progress(config),
@@ -360,6 +374,9 @@ class FunctionalEditMemory(FunctionalMemory):
                 })
         if continuations:
             material["continuations"] = continuations
+        material["reading_requirement"] = read_requirement_status(
+            view, items, continuations=continuations, fresh_observations=fresh_observations,
+        )
         bound = self._binding(config)
         ordinary = self.service.store.get(namespace(self.service), "ordinary:" + reference_key(
             [bound["session"], bound["message_id"], self.forget_epoch]
@@ -369,17 +386,29 @@ class FunctionalEditMemory(FunctionalMemory):
             material["candidates"] = directory.get("candidates", [])
             material["candidate_scope"] = "navigation_only_not_body_read_or_fact_support"
             material["next_cursor"] = directory.get("next_cursor")
+        material = self.bind_request_targets(config, material)
         if for_write and self.interface_version != "v1":
             packet = self._writer_packet(config, material)
             packet["memory_view"] = material["memory_view"]
             packet["pending_maintenance"] = pending
+            packet["reading_requirement"] = material["reading_requirement"]
             if "candidates" in material:
                 packet["candidates"] = material["candidates"]
                 packet["candidate_scope"] = material["candidate_scope"]
             if continuations:
-                packet["continuations"] = continuations
+                packet["continuations"] = material["continuations"]
+            if "next_target" in material:
+                packet["reader"]["next_target"] = material["next_target"]
+            packet["target_scope"] = material["target_scope"]
+            packet["request_targets"] = [
+                {key: item[key] for key in ("target", "target_kind", "record_id", "revision",
+                                           "source_ref", "source_revision", "start", "end",
+                                           "stored_history", "revision_evidence")
+                 if key in item}
+                for item in expand_host_packet(material).get("items", []) if "target" in item
+            ]
             return packet
-        return project_host_packet(material)
+        return material
 
     def project_model_messages(
         self, config: RunnableConfig, messages: list[BaseMessage]
@@ -1061,44 +1090,23 @@ class FunctionalEditMemory(FunctionalMemory):
         result["required_packet_tokens"] = required
         return result
 
-    def context(
-        self, session: str, turn_id: str, config_version: str, *, query: str | None = None
+    def _deliver_request_targets(
+        self, binding: dict[str, Any], packet: dict[str, Any], *, from_tool: bool = False,
     ) -> dict[str, Any]:
-        result = super().context(session, turn_id, config_version, query=query)
+        """Persist adapter delivery before the base read caches or issues its targets."""
+        if not packet.get("ok"):
+            return packet
         config: RunnableConfig = {
                 "configurable": {
                     "user_id": self.service.owner,
-                    "v13_session": session,
-                    "v13_turn_id": turn_id,
-                    "v13_config_version": config_version,
+                    "v13_session": binding["session"],
+                    "v13_turn_id": binding["message_id"],
+                    "v13_config_version": binding["config_version"],
                 }
             }
-        self._remember_page(config, result)
-        self._note_read_progress(config, result, from_tool=False)
-        return result
-
-    def _read(
-        self,
-        config: RunnableConfig,
-        call_id: str,
-        arguments: dict[str, Any],
-        action: Callable[[dict[str, Any]], dict[str, Any]],
-    ) -> dict[str, Any]:
-        result = super()._read(config, call_id, arguments, action)
-        try:
-            self._remember_page(config, result)
-            self._note_read_progress(config, result, from_tool=True)
-        except Exception as error:
-            return {
-                "ok": False,
-                "status": "read_outcome_unknown",
-                "effect": "unconfirmed",
-                "phase": "fragment_delivery_persistence",
-                "error_type": type(error).__name__,
-                "delivered_raw_fragment_count": 0,
-                "recovery": "same_operation_id_only",
-            }
-        return result
+        self._remember_page(config, packet)
+        self._note_read_progress(config, packet, from_tool=from_tool)
+        return self._bind_request_targets(binding, packet)
 
     def _require_delivered(self, handles: list[str]) -> dict[str, Any]:
         support = fragment_support(self.service, handles)

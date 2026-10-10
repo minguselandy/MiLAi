@@ -2622,6 +2622,9 @@ def test_request_targets_navigation_without_credentials_is_never_a_forget_select
 
 
 def test_request_targets_exact_history_index_body_pages_and_structured_goal(tmp_path: Path) -> None:
+    from milai_lab.memory.functional_state import project_request_targets, request_target_mapping
+    from milai_lab.memory.working_set import read_requirement_status
+
     options = {'memory_view_mode': 'state_driven', 'material_limit': 5500,
                'fragment_chars': 120, 'read_limit': 8}
     goal = {'purpose': 'Compare saved wording with originals and the current state.',
@@ -2644,6 +2647,15 @@ def test_request_targets_exact_history_index_body_pages_and_structured_goal(tmp_
         current = invoke(memory, 'read_memory', {'target': target, 'read_goal': goal}, 'current')
         assert current['items'] and current['next_target']
         assert memory.view_state(cfg())['read_goal'] == goal
+        continuation = {'tool': 'read_memory', 'arguments': {'cursor': current['next_cursor']}}
+        requirement = read_requirement_status(memory.view_state(cfg()), current['items'],
+                                             continuations=[continuation])
+        projected, _ = project_request_targets(
+            request_target_mapping(memory.service, memory._binding(cfg())),
+            {**current, 'continuations': [continuation], 'reading_requirement': requirement})
+        assert projected['reading_requirement']['continuations'] == projected['continuations']
+        assert projected['continuations'][0]['tool'] == 'read_page'
+        assert projected['continuations'][0]['arguments'] == {'target': current['next_target']}
         admission_key = 'read-admission:' + reference_key(['s', 'u'])
         admission = memory.service.store.get(namespace(memory.service), admission_key)
         assert admission is not None

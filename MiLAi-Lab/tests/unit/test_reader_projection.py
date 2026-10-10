@@ -13,7 +13,12 @@ import pytest
 from langchain_core.messages import ToolMessage
 from langgraph.store.sqlite import SqliteStore
 
-from milai_lab.memory.functional_state import canonical, namespace
+from milai_lab.memory.functional_state import (
+    canonical,
+    namespace,
+    project_request_targets,
+    request_target_mapping,
+)
 from milai_lab.memory.reader_projection import (
     PROJECTION_INSTRUCTIONS,
     expand_host_packet,
@@ -112,14 +117,17 @@ def test_sqlite_page_counts_full_projection_and_keeps_all_five_semantic_units(
         legacy_cost.setattr(memory, "_project_read_packet", lambda packet: packet)
         expanded_page = memory._page(snapshot, 0, bound)
     assert expanded_page["delivered_units"] < 5
-    page = memory._page(snapshot, 0, bound)
+    page = memory.bind_request_targets(config, memory._page(snapshot, 0, bound))
     assert page["delivered_units"] == page["total_units"] == 5
     assert page["delivery_status"] == "complete_snapshot"
     assert page["omitted_units"] == 0 and page["next_cursor"] is None
     assert _tokens(canonical(page)) <= 8192
     assert page["projection_instructions"] == PROJECTION_INSTRUCTIONS
     assert page["metadata_table"]
-    assert expand_host_packet(page)["items"] == units
+    # Navigation is projected before metadata sharing; preview signs nothing.
+    expected, planned = project_request_targets(request_target_mapping(memory.service, bound),
+        {"items": units, "forget_epoch": memory.forget_epoch})
+    assert expand_host_packet(page)["items"] == expected["items"]
     assert memory.service.store.get(namespace(memory.service), snapshot).value["items"] == units
     assert memory.service.read(record_id)["value"] == before["value"]
     for original, projected in zip(units, page["items"], strict=True):
@@ -129,8 +137,9 @@ def test_sqlite_page_counts_full_projection_and_keeps_all_five_semantic_units(
         assert projected["content"] == original["content"]
         assert projected["content_range"] == original["content_range"]
         if "revision_evidence" in original:
-            assert projected["revision_evidence"][0]["read"] == \
-                original["revision_evidence"][0]["read"]
+            navigation = planned["targets"][projected["revision_evidence"][0]["target"]]
+            assert navigation["identity"]["read"] == original["revision_evidence"][0]["read"]
+            assert navigation["kind"] == "read_only_navigation" and navigation["credentials"] == {}
 
 
 def test_sqlite_writer_only_expands_delivered_page_and_resident_model_material(
@@ -141,7 +150,7 @@ def test_sqlite_writer_only_expands_delivered_page_and_resident_model_material(
     memory.material_limit = memory.policy["material_limit"] = 6000
     bound = memory._binding(config)
     snapshot = memory._snapshot(bound, units, "record_read")
-    page = memory._page(snapshot, 0, bound)
+    page = memory.bind_request_targets(config, memory._page(snapshot, 0, bound))
     assert 0 < page["delivered_units"] < len(units)
     assert page["next_cursor"] is not None
     memory._remember_page(config, page)
@@ -151,7 +160,9 @@ def test_sqlite_writer_only_expands_delivered_page_and_resident_model_material(
     ).value["items"]
     actual_records = [item for item in cached if item["type"] == "record"]
     assert actual_records == expand_host_packet(page)["items"]
-    assert actual_records == units[:page["delivered_units"]]
+    expected, _ = project_request_targets(request_target_mapping(memory.service, bound),
+        {"items": units[:page["delivered_units"]], "forget_epoch": memory.forget_epoch})
+    assert actual_records == expected["items"]
     material = memory.model_material(config)
     resident = [item for item in expand_host_packet(material)["items"] if item["type"] == "record"]
     assert resident == actual_records

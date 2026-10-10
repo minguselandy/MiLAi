@@ -244,6 +244,8 @@ def project_request_targets(
             row = planned["targets"].get(continuation["target"])
             if row is None or row["kind"] != "read_only_navigation":
                 raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_CONTINUATION_NOT_ISSUED")
+    if isinstance(result.get("reading_requirement"), dict) and "continuations" in result:
+        result["reading_requirement"]["continuations"] = copy.deepcopy(result["continuations"])
     result["target_scope"] = mapping["scope"]
     return result, planned
 

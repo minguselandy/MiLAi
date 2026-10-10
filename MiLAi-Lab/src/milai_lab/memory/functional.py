@@ -1053,7 +1053,9 @@ class FunctionalMemory:
             "user_id": self.service.owner, "v13_session": session,
             "v13_turn_id": turn_id, "v13_config_version": config_version,
         }}
-        self._note_view_page(config, page)
+        # Refreshing the public-input directory is not a new matter selection.
+        # Retain actual pages selected by a preceding read in this request.
+        self._note_view_page(config, page, keep_resident=True)
         return self._deliver_request_targets(bound, page)
 
     def _source_support(self, version: dict[str, Any]) -> dict[str, list[str]]:
