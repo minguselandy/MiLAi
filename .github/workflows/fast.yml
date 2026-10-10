@@ -235,7 +235,7 @@ jobs:
             --ignore=tests/memory/test_edit_memory_v2.py \
             --ignore=tests/unit/test_edit_v2_runner.py \
             --ignore=tests/unit/test_edit_development_history.py \
-            --ignore=tests/unit/test_edit_views.py --ignore=tests/unit/test_baseline_alignment.py --ignore=tests/unit/test_baseline_alignment_backends.py
+            --ignore=tests/unit/test_edit_views.py --ignore=tests/unit/test_baseline_alignment.py --ignore=tests/unit/test_baseline_alignment_backends.py --ignore=tests/unit/test_baseline_alignment_arm_entry.py
           uv run --no-sync python tools/check_legacy_archive.py
           uv build
 
@@ -300,7 +300,7 @@ jobs:
           uv pip install --python .venv/bin/python --target "$RUNNER_TEMP/milai-baseline-alignment-native" -r data/locks/baseline-alignment-native-local-20261010.requirements.txt
           (
             export PYTHONPATH="${PWD}/src:$RUNNER_TEMP/milai-baseline-alignment-native"
-            uv run --no-sync pytest -q tests/unit/test_baseline_alignment.py tests/unit/test_baseline_alignment_backends.py
+            uv run --no-sync pytest -q tests/unit/test_baseline_alignment.py tests/unit/test_baseline_alignment_backends.py tests/unit/test_baseline_alignment_arm_entry.py
           )
           uv run --no-sync pytest -q tests/unit/test_edit_mechanism.py
           uv run --no-sync pytest -q tests/memory/test_edit_memory_v2.py tests/unit/test_edit_v2_runner.py tests/unit/test_edit_development_history.py tests/unit/test_edit_views.py
