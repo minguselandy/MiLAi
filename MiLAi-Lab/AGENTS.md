@@ -20,10 +20,16 @@ Frozen5019968 only; arms serial B0/B1/B2/M/Append-only, each277sessions/705QA/59
 all1385/3525/2975. Startledger50840requests/235986661known/236310736charged/2086685emb,unknown7/0.
 Inspect actual PID/root-execution-predict.json/arm terminals; launch is not completion.
 No automatic restart or scoring; all five predictions before separate uniform phase score.
-Fixed2026-10-10 00:12:36UTC observation: runnerPID matches, ownerOWNED, B0first13sessions/35QA checkpoints,
-13maintenancecompleted/32uniquecommits/noQA missing or receipt rejection; other4arms NOT_STARTED.
+Fixed2026-10-10 00:44:39UTC observation: runnerPID matches, ownerOWNED, B0first21complete sessions/46QA,
+59QA checkpoints include currentpartial session,22maintenancecompleted/42uniquecommits;
+noQA missing or receipt rejection; other4arms NOT_STARTED.
 Live unknown+1 is an in-flight reservation, not closed unknown. Use ignored
 inspect_five_dev277_5019968_progress.py for compact PID/phase/cost checks; do not dump full ledger/world.
+Readonly stage usage helper inspect_five_dev277_5019968_usage.py --snapshot saves ignored actual counters.
+Fixed00:43:05UTC:179gen responses/1966687known,153emb/23143tokens agree with live ledger known;
+1gen pending, not phase closure. All179 planned input counts equal actualprompt_tokens;
+peaks Extract13781/Writer-select25711/Editor32223/Reader-select2942/Reader22084 <=32256.
+Only saved response metadata,0new calls/bank/dataset; no future capacity/semantic advantage claim.
 Native32/drift/external28/controlled v3 configs PREPARED ONLY,0HTTP; no final confirmation freeze.
 Native/drift static entry review in native-drift-runner-review-5019968-v3.json:9code files equal
 frozen5019968,30shared config values equal main;32items/12sessions/4users matched,0runner/bank/HTTP.
