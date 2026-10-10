@@ -172,34 +172,47 @@ class ForgetTargetSelector(ReadSelector):
     scope: Literal["record", "record_and_sources"] = "record_and_sources"
 
 
-class ResidentRecordSelector(RecordSelector):
+class StructuredReadGoal(BaseModel):
+    """Declared reading purpose and evidence needs, never a sufficiency verdict."""
+
+    model_config = ConfigDict(extra="forbid", strict=True)
+    purpose: str = Field(min_length=1)
+    evidence: list[Literal[
+        "current_interpretation", "saved_history", "original_source", "live_business"
+    ]]
+
+
+def normalize_read_goal(
+    value: str | dict[str, Any] | StructuredReadGoal | None,
+) -> str | dict[str, Any] | None:
+    if value is None or isinstance(value, str):
+        return value
+    goal = value if isinstance(value, StructuredReadGoal) \
+        else StructuredReadGoal.model_validate(value)
+    return goal.model_dump(mode="json")
+
+
+class ResidentTargetSelector(ReadSelector):
+    target: str = Field(
+        min_length=1, description="Copy an actual target from this request's material.",
+    )
     keep_resident: bool = False
-    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
-                                "may combine applicable state, original wording and saved history.")
+    read_goal: str | StructuredReadGoal | None = Field(
+        default=None, description="Reading purpose and explicit evidence needs; this declaration "
+                                  "does not certify coverage, sufficient evidence or permission.",
+    )
 
 
-class ResidentRevisionSelector(RevisionSelector):
+class ResidentRevisionTargetSelector(ResidentTargetSelector):
+    revision: int | None = Field(default=None, ge=1, description="Exact revision when selecting "
+                                "from a current record target; omit for an exact revision target.")
+
+
+class ResidentSupportTargetSelector(ReadSelector):
+    targets: list[str] = Field(min_length=1, description="Delivered exact Source targets and "
+                             "at most one delivered record target; navigation is insufficient.")
     keep_resident: bool = False
-    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
-                                "may combine applicable state, original wording and saved history.")
-
-
-class ResidentSourceSelector(SourceSelector):
-    keep_resident: bool = False
-    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
-                                "may combine applicable state, original wording and saved history.")
-
-
-class ResidentFragmentSelector(FragmentSelector):
-    keep_resident: bool = False
-    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
-                                "may combine applicable state, original wording and saved history.")
-
-
-class ResidentPageSelector(PageSelector):
-    keep_resident: bool = False
-    read_goal: str | None = Field(default=None, description="Purpose of reading for this request; "
-                                "may combine applicable state, original wording and saved history.")
+    read_goal: str | StructuredReadGoal | None = None
 
 
 class ReadSelectorTool(StructuredTool):
@@ -331,7 +344,7 @@ class FunctionalMemory:
     @property
     def read_tool_names(self) -> frozenset[str]:
         names = {"search_memory", "read_memory", "read_source"}
-        if self.read_interface == "explicit_selectors_v1":
+        if self.read_interface == "explicit_selectors_v1" or self.memory_view_mode != "legacy":
             names.update(
                 {"read_memory_history", "read_memory_revision", "read_fragment", "read_page"}
             )
@@ -370,6 +383,9 @@ class FunctionalMemory:
     ) -> dict[str, Any]:
         if self.memory_view_mode == "legacy" or not packet.get("ok"):
             return packet
+        packet = {**packet, "forget_epoch": packet.get("forget_epoch", self.forget_epoch)}
+        if packet["forget_epoch"] != self.forget_epoch:
+            raise FunctionalRejection("V13_5_REQUEST_TARGET_REVOKED")
         mapping = request_target_mapping(self.service, binding)
         scope = packet.get("target_scope")
         if scope is not None:
@@ -392,7 +408,7 @@ class FunctionalMemory:
                     bound[key] != value for key, value in row["identity"].items()
                 ):
                     raise FunctionalRejection("V13_5_REQUEST_TARGET_RECORD_NOT_ISSUED")
-            else:
+            elif row["kind"] == "delivered_source":
                 fragment = self.service.source_fragment(row["credentials"]["fragment_handle"])
                 if any(fragment[key] != value for key, value in row["identity"].items()):
                     raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_SOURCE_CHANGED")
@@ -401,7 +417,7 @@ class FunctionalMemory:
         return result
 
     def _deliver_request_targets(
-        self, binding: dict[str, Any], packet: dict[str, Any]
+        self, binding: dict[str, Any], packet: dict[str, Any], *, from_tool: bool = False,
     ) -> dict[str, Any]:
         """Final base delivery hook; adapters may defer it until their own receipt is saved."""
         return self._bind_request_targets(binding, packet)
@@ -411,6 +427,68 @@ class FunctionalMemory:
     ) -> dict[str, Any]:
         """Return only the bound identity/credentials; callers retain their operation checks."""
         return resolve_request_target(self.service, self._binding(config), target, kind=kind)
+
+    def _resolve_read_target(
+        self, binding: dict[str, Any], request: dict[str, Any],
+    ) -> dict[str, Any]:
+        row = resolve_request_target(self.service, binding, request["target"])
+        identity, kind, tool = row["identity"], row["kind"], request["tool"]
+        if kind == "read_only_navigation" and identity.get("forget_epoch", self.forget_epoch) \
+                != self.forget_epoch:
+            raise FunctionalRejection("V13_5_REQUEST_TARGET_REVOKED")
+        if tool in {"read_memory", "read_memory_history", "read_memory_revision"}:
+            if "record_id" not in identity or (
+                kind == "read_only_navigation" and identity.get("read", {}).get("tool")
+                not in {"read_memory", "read_memory_history", "read_memory_revision"}
+            ):
+                raise FunctionalRejection("V13_5_REQUEST_TARGET_KIND_INVALID")
+            if tool == "read_memory" and identity.get("version_view") \
+                    == "historical_exact_revision":
+                raise FunctionalRejection("V13_5_REQUEST_TARGET_KIND_INVALID")
+            selectors: dict[str, Any] = {"record_id": identity["record_id"]}
+            if tool == "read_memory_history":
+                selectors["history"] = True
+            elif tool == "read_memory_revision":
+                revision = request.get("revision")
+                exact = kind == "delivered_record" or identity.get("version_view") \
+                    == "historical_exact_revision"
+                if exact and revision is not None and revision != identity.get("revision"):
+                    raise FunctionalRejection("V13_5_REQUEST_TARGET_REVISION_CHANGED")
+                revision = identity.get("revision") if revision is None else revision
+                if type(revision) is not int or revision < 1:
+                    raise FunctionalRejection("V13_5_EXACT_REVISION_REQUIRED")
+                selectors["revision"] = revision
+            return {**request, **selectors}
+        if tool == "read_source" and "source_ref" in identity and (
+            kind == "delivered_source" or (kind == "read_only_navigation"
+            and identity.get("read", {}).get("tool") == "read_source")
+        ):
+            return {**request, "source_ref": identity["source_ref"]}
+        if tool == "read_fragment" and kind == "delivered_source":
+            return {**request, "fragment_handle": row["credentials"]["fragment_handle"]}
+        if tool == "read_page" and kind == "read_only_navigation" \
+                and identity.get("read", {}).get("tool") == "read_page":
+            return {**request, **identity["read"]["arguments"]}
+        raise FunctionalRejection("V13_5_REQUEST_TARGET_KIND_INVALID")
+
+    def _history_index_page(
+        self, binding: dict[str, Any], record_id: str, cursor: str,
+    ) -> dict[str, Any]:
+        index = self.service.history_index(record_id, cursor=cursor)
+        if not index.get("ok"):
+            return index
+        packet = {
+            "schema": "functional_material_v1", "ok": True,
+            "kind": "stored_history_index", "record_id": record_id,
+            "stored_history": index, "items": [], "delivered_units": 0,
+            "view_refs": [], "reading_basis": {},
+            "forget_epoch": self.forget_epoch, **self._read_only_metadata([]),
+        }
+        packet, _ = project_request_targets(request_target_mapping(self.service, binding), packet)
+        packet = self._project_read_packet(packet)
+        if self.token_count(canonical(packet)) > self.material_limit:
+            raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
+        return packet
 
     def forget_targets(
         self, config: RunnableConfig, operation_id: str, targets: list[str], *,
@@ -469,7 +547,8 @@ class FunctionalMemory:
         ]
         if view == "current_at_snapshot":
             index = self.service.history_index(row["id"])
-            explicit = self.read_interface == "explicit_selectors_v1"
+            explicit = self.read_interface == "explicit_selectors_v1" \
+                or self.memory_view_mode != "legacy"
             # A bounded index exposes actual saved revision identities, not old
             # bodies or captured requests. The existing read tools fetch those
             # bodies under the same owner, visibility, budget and cursor rules.
@@ -504,12 +583,13 @@ class FunctionalMemory:
         return copy.deepcopy(stored.value) if stored else empty_view()
 
     def focus_view(
-        self, config: RunnableConfig, *, focus: Any = None, read_goal: str | None = None,
+        self, config: RunnableConfig, *, focus: Any = None,
+        read_goal: str | dict[str, Any] | StructuredReadGoal | None = None,
         resident_refs: list[dict[str, Any]] | None = None,
         pending_refs: list[Any] | None = None,
     ) -> dict[str, Any]:
         state = self.view_state(config)
-        state["focus"], state["read_goal"] = focus, read_goal
+        state["focus"], state["read_goal"] = focus, normalize_read_goal(read_goal)
         if resident_refs is not None:
             state["resident_refs"] = copy.deepcopy(resident_refs)
         if pending_refs is not None:
@@ -520,7 +600,7 @@ class FunctionalMemory:
     def _note_view_page(
         self, config: RunnableConfig, result: dict[str, Any], *,
         keep_resident: bool = False, refresh_current: bool = False,
-        read_goal: str | None = None,
+        read_goal: str | dict[str, Any] | StructuredReadGoal | None = None,
     ) -> None:
         if self.memory_view_mode == "legacy" or not result.get("ok"):
             return
@@ -535,8 +615,9 @@ class FunctionalMemory:
                 if ref["kind"] != "record" or ref["id"] not in affected
                 or ref["view"] != "current_at_snapshot"
             ]
-        state = admit_refs(state, refs, keep_resident=keep_resident or refresh_current,
-                           read_goal=read_goal)
+        state = admit_refs(state, refs, keep_resident=keep_resident or refresh_current)
+        if read_goal is not None:
+            state["read_goal"] = normalize_read_goal(read_goal)
         self.service.store.put(namespace(self.service), self._view_key(config), state, index=False)
 
     def resident_items(self, config: RunnableConfig) -> list[dict[str, Any]]:
@@ -1551,7 +1632,46 @@ class FunctionalMemory:
         action: Callable[[dict[str, Any]], dict[str, Any]],
     ) -> dict[str, Any]:
         bound = self._binding(config)
+        if "read_goal" in arguments:
+            arguments = {**arguments, "read_goal": normalize_read_goal(arguments["read_goal"])}
         key = "read-admission:" + reference_key([bound["session"], bound["message_id"]])
+
+        def unknown(error: Exception, phase: str) -> dict[str, Any]:
+            result = {
+                "ok": False, "status": "read_outcome_unknown",
+                "error_type": type(error).__name__, "phase": phase,
+                "read_state_effect": "unconfirmed", "retryable": False,
+                **self._read_only_metadata([]),
+            }
+            if self.token_count(canonical(result)) > self.material_limit:
+                raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT") from error
+            return result
+
+        def persist(result: dict[str, Any]) -> None:
+            with self.service._locked():
+                current = self.service.store.get(namespace(self.service), key)
+                assert current is not None
+                current.value["calls"][call_id]["result"] = result
+                self.service.store.put(namespace(self.service), key, current.value, index=False)
+
+        def deliver(result: dict[str, Any]) -> dict[str, Any]:
+            # A cached unknown is never a new delivery or permission to retry.
+            if not result.get("ok"):
+                return result
+            try:
+                self._note_view_page(
+                    config, result, keep_resident=arguments.get("keep_resident", False),
+                    read_goal=arguments.get("read_goal"),
+                )
+                result = self._deliver_request_targets(bound, result, from_tool=True)
+            except Exception as error:
+                result = unknown(error, "target_delivery_persistence")
+            try:
+                persist(result)
+            except Exception as error:
+                return unknown(error, "read_receipt_persistence")
+            return result
+
         with self.service._locked():
             old = self.service.store.get(namespace(self.service), key)
             state = old.value if old else {"binding": bound, "policy": self.policy, "calls": {}}
@@ -1565,11 +1685,7 @@ class FunctionalMemory:
                     raise FunctionalRejection("V13_5_READ_REPLAY_REVOKED")
                 if "result" in previous:
                     replay = cast(dict[str, Any], previous["result"])
-                    self._note_view_page(
-                        config, replay, keep_resident=arguments.get("keep_resident", False),
-                        read_goal=arguments.get("read_goal"),
-                    )
-                    return self._deliver_request_targets(bound, replay)
+                    return deliver(replay)
                 raise FunctionalIntegrityError("V13_5_READ_OUTCOME_UNKNOWN")
             if len(state["calls"]) >= self.read_limit:
                 exhausted = {
@@ -1611,55 +1727,44 @@ class FunctionalMemory:
             result = {**result, **self._read_only_metadata([])}
             if self.token_count(canonical(result)) > self.material_limit:
                 raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
-        self._note_view_page(
-            config, result, keep_resident=arguments.get("keep_resident", False),
-            read_goal=arguments.get("read_goal"),
-        )
+        # Persist the original result before any adapter remembers evidence or
+        # signs targets. An acknowledgement loss cannot certify its delivery.
         try:
-            result = self._deliver_request_targets(bound, result)
+            persist(result)
         except Exception as error:
-            result = {
-                "ok": False, "status": "read_outcome_unknown",
-                "error_type": type(error).__name__, "phase": "target_delivery_persistence",
-                "read_state_effect": "unconfirmed", "retryable": False,
-                **self._read_only_metadata([]),
-            }
-        try:
-            with self.service._locked():
-                current = self.service.store.get(namespace(self.service), key)
-                assert current is not None
-                current.value["calls"][call_id]["result"] = result
-                self.service.store.put(namespace(self.service), key, current.value, index=False)
-        except Exception as error:
-            result = {
-                "ok": False,
-                "status": "read_outcome_unknown",
-                "error_type": type(error).__name__,
-                "phase": "read_receipt_persistence",
-                "read_state_effect": "unconfirmed",
-                "retryable": False,
-                **self._read_only_metadata([]),
-            }
-            if self.token_count(canonical(result)) > self.material_limit:
-                raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT") from error
-        return result
+            return unknown(error, "read_receipt_persistence")
+        return deliver(result)
 
     def read_support_context(
         self,
         config: RunnableConfig,
         call_id: str,
-        fragment_handles: list[str],
+        fragment_handles: list[str] | None = None,
         read_handle: str | None = None,
+        *, targets: list[str] | None = None, keep_resident: bool = False,
+        read_goal: str | dict[str, Any] | StructuredReadGoal | None = None,
     ) -> dict[str, Any]:
         """Present actual selected sources and an optional exact target without writing."""
 
         def action(bound: dict[str, Any]) -> dict[str, Any]:
             if not self.support_context:
                 raise FunctionalRejection("V13_5_SUPPORT_CONTEXT_DISABLED")
-            fragment_support(self.service, fragment_handles)  # Validate all before exposing any.
+            selected_fragments, selected_record = fragment_handles or [], read_handle
+            if targets is not None:
+                selected = [
+                    resolve_request_target(self.service, bound, target) for target in targets
+                ]
+                records = [row for row in selected if row['kind'] == 'delivered_record']
+                sources = [row for row in selected if row['kind'] == 'delivered_source']
+                if len(records) > 1 or len(records) + len(sources) != len(selected):
+                    raise FunctionalRejection("V13_5_REQUEST_TARGET_KIND_INVALID")
+                selected_fragments = [row['credentials']['fragment_handle'] for row in sources]
+                selected_record = records[0]['credentials']['read_handle'] if records else None
+            # Exact fragment selections remain exact; navigation never expands them.
+            fragment_support(self.service, selected_fragments)
             units = []
-            if read_handle is not None:
-                candidate = self.service.candidate(read_handle)
+            if selected_record is not None:
+                candidate = self.service.candidate(selected_record)
                 if candidate is None:
                     raise FunctionalRejection("V13_5_READ_HANDLE_INVALID")
                 row = self.service.read(candidate["record_id"], candidate["revision"])
@@ -1688,18 +1793,21 @@ class FunctionalMemory:
                     unit["prior_field_support_identity"] = prior
             units.extend(
                 {"type": "fragment", **self.service.source_fragment(handle)}
-                for handle in fragment_handles
+                for handle in selected_fragments
             )
             return self._page(self._snapshot(bound, units, "support_context"), 0, bound)
 
         return self._read(
             config,
             call_id,
-            {
+            ({"tool": "read_support_context", "targets": targets,
+              "keep_resident": keep_resident,
+              **({"read_goal": normalize_read_goal(read_goal)} if read_goal is not None else {})}
+             if targets is not None else {
                 "tool": "read_support_context",
                 "read_handle": read_handle,
                 "fragment_handles": fragment_handles,
-            },
+            }),
             action,
         )
 
@@ -1907,12 +2015,16 @@ class FunctionalMemory:
             tool_call_id: str,
             request: dict[str, Any],
         ) -> ToolMessage:
-            record_id, revision, cursor = (
-                request.get(k) for k in ("record_id", "revision", "cursor")
-            )
-            history, history_cursor = request.get("history", False), request.get("history_cursor")
-
             def action(bound: dict[str, Any]) -> dict[str, Any]:
+                selected = self._resolve_read_target(bound, request) \
+                    if "target" in request else request
+                record_id, revision, cursor = (
+                    selected.get(k) for k in ("record_id", "revision", "cursor")
+                )
+                history = selected.get("history", False)
+                history_cursor = selected.get("history_cursor")
+                if "index_cursor" in selected:
+                    return self._history_index_page(bound, str(record_id), selected["index_cursor"])
                 if cursor is not None:
                     if (
                         record_id is not None
@@ -2019,11 +2131,12 @@ class FunctionalMemory:
             tool_call_id: str,
             request: dict[str, Any],
         ) -> ToolMessage:
-            fragment_handle, source_ref, cursor = (
-                request.get(k) for k in ("fragment_handle", "source_ref", "cursor")
-            )
-
             def action(bound: dict[str, Any]) -> dict[str, Any]:
+                selected = self._resolve_read_target(bound, request) \
+                    if "target" in request else request
+                fragment_handle, source_ref, cursor = (
+                    selected.get(k) for k in ("fragment_handle", "source_ref", "cursor")
+                )
                 if sum(x is not None for x in (fragment_handle, source_ref, cursor)) != 1:
                     raise FunctionalRejection("V13_5_EXACTLY_ONE_SOURCE_SELECTOR_REQUIRED")
                 if cursor is not None:
@@ -2574,30 +2687,82 @@ class FunctionalMemory:
             return tool
 
         resident = self.memory_view_mode != "legacy"
+
+        def target_read_tool(name: str, description: str) -> StructuredTool:
+            def read_target(
+                target: str, config: RunnableConfig, *,
+                tool_call_id: Annotated[str, InjectedToolCallId],
+                keep_resident: bool = False,
+                read_goal: str | StructuredReadGoal | None = None,
+                revision: int | None = None,
+            ) -> ToolMessage:
+                """Read one exactly bound request target through the original read allowance."""
+                request: dict[str, Any] = {
+                    "tool": name, "target": target, "keep_resident": keep_resident,
+                }
+                if read_goal is not None:
+                    request["read_goal"] = normalize_read_goal(read_goal)
+                if revision is not None:
+                    request["revision"] = revision
+                reader = source_read if name in {"read_source", "read_fragment"} else record_read
+                return reader(config, tool_call_id, request)
+
+            return ReadSelectorTool.from_function(
+                read_target, name=name, description=description,
+                args_schema=ResidentRevisionTargetSelector if name == "read_memory_revision"
+                else ResidentTargetSelector,
+            )
+
+        def read_support_targets(
+            targets: list[str], config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId], keep_resident: bool = False,
+            read_goal: str | StructuredReadGoal | None = None,
+        ) -> ToolMessage:
+            """Read exactly delivered Source fragments beside at most one delivered record.
+
+            Navigation targets supply no body credentials. This working view performs no
+            semantic write or sufficiency judgement and uses the shared read allowance.
+            """
+            return message("read_support_context", tool_call_id, self.read_support_context(
+                config, tool_call_id, targets=targets, keep_resident=keep_resident,
+                read_goal=read_goal,
+            ))
+
         read_tools = (
+            tuple(target_read_tool(name, description) for name, description in (
+                ("read_memory", "Read the current version using an actual record target."),
+                ("read_memory_history", "Read the original stored versions using a record target; "
+                 "old bodies remain historical. Continue actual next_target with read_page."),
+                ("read_memory_revision", "Read one exact revision using its revision target, "
+                 "or a current record navigation target and exact revision integer."),
+                ("read_source", "Read a full original Source using its actual Source target."),
+                ("read_fragment", "Read an exact original fragment using its Source target."),
+                ("read_page", "Continue this request's actual next_target or index_next_target; "
+                 "its original snapshot and visibility checks remain in force."),
+            )) if resident else
             (
                 ReadSelectorTool.from_function(
                     read_current_memory, name="read_memory",
-                    args_schema=ResidentRecordSelector if resident else RecordSelector
+                    args_schema=RecordSelector
                 ),
                 ReadSelectorTool.from_function(
                     read_memory_history,
-                    args_schema=ResidentRecordSelector if resident else RecordSelector,
+                    args_schema=RecordSelector,
                 ),
                 ReadSelectorTool.from_function(
                     read_memory_revision,
-                    args_schema=ResidentRevisionSelector if resident else RevisionSelector,
+                    args_schema=RevisionSelector,
                 ),
                 ReadSelectorTool.from_function(
                     read_source_group, name="read_source",
-                    args_schema=ResidentSourceSelector if resident else SourceSelector,
+                    args_schema=SourceSelector,
                 ),
                 ReadSelectorTool.from_function(
                     read_fragment,
-                    args_schema=ResidentFragmentSelector if resident else FragmentSelector,
+                    args_schema=FragmentSelector,
                 ),
                 ReadSelectorTool.from_function(
-                    read_page, args_schema=ResidentPageSelector if resident else PageSelector,
+                    read_page, args_schema=PageSelector,
                 ),
             )
             if self.read_interface == "explicit_selectors_v1"
@@ -2624,6 +2789,9 @@ class FunctionalMemory:
                 (
                     ReadSelectorTool.from_function(
                         read_support_context, args_schema=SupportContextSelector
+                    ) if not resident else ReadSelectorTool.from_function(
+                        read_support_targets, name="read_support_context",
+                        args_schema=ResidentSupportTargetSelector,
                     ),
                 )
                 if self.support_context

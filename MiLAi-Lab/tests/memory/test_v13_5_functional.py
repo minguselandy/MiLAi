@@ -93,6 +93,17 @@ def invoke(
     return json.loads(response.content)
 
 
+def packet_target(
+    packet: dict[str, Any], *, record_id: str | None = None, source_ref: str | None = None,
+) -> str:
+    """Copy an actually delivered target; do not read or manufacture a selector."""
+    key, identifier = ("record_id", record_id) if record_id is not None \
+        else ("source_ref", source_ref)
+    return str(next(item["target"] for item in [*packet.get("items", []),
+                                               *packet.get("candidates", [])]
+                    if item.get(key) == identifier and "target" in item))
+
+
 def test_state_driven_catalog_switch_reopen_reload_and_forget(tmp_path: Path) -> None:
     options = {"memory_view_mode": "state_driven", "read_limit": 20,
                "read_interface": "explicit_selectors_v1"}
@@ -116,13 +127,15 @@ def test_state_driven_catalog_switch_reopen_reload_and_forget(tmp_path: Path) ->
         search = invoke(memory, "search_memory", {"query": "Atlas"}, "catalog", config)
         assert search["items"] == [] and search["delivered_units"] == 0
         assert search["delivered_raw_fragment_count"] == 0
-        first = invoke(memory, "read_memory", {"record_id": atlas["id"]}, "atlas", config)
+        atlas_target = packet_target(directory, record_id=atlas["id"])
+        orchid_target = packet_target(directory, record_id=orchid["id"])
+        first = invoke(memory, "read_memory", {"target": atlas_target}, "atlas", config)
         assert "holidays pause" in first["items"][0]["content"]
         assert set(first["reading_basis"]) == {"current_at_snapshot"}
         assert search["reading_basis"] == {}
-        invoke(memory, "read_memory", {"record_id": orchid["id"]}, "orchid", config)
+        invoke(memory, "read_memory", {"target": orchid_target}, "orchid", config)
         assert {item["record_id"] for item in memory.resident_items(config)} == {orchid["id"]}
-        invoke(memory, "read_memory", {"record_id": atlas["id"], "keep_resident": True},
+        invoke(memory, "read_memory", {"target": atlas_target, "keep_resident": True},
                "both", config)
         assert {item["record_id"] for item in memory.resident_items(config)} == {
             atlas["id"], orchid["id"]}
@@ -137,9 +150,10 @@ def test_state_driven_catalog_switch_reopen_reload_and_forget(tmp_path: Path) ->
         config = cfg("query")
         assert {item["record_id"] for item in memory.resident_items(config)
                 if item["type"] == "record"} == {orchid["id"]}
-        reloaded = invoke(memory, "read_memory", {"record_id": atlas["id"]}, "reload", config)
+        reloaded = invoke(memory, "read_memory", {"target": atlas_target}, "reload", config)
         assert reloaded["items"] == first["items"]
-        original = invoke(memory, "read_source", {"source_ref": atlas_ref}, "original", config)
+        original = invoke(memory, "read_source", {"target": packet_target(search,
+                          source_ref=atlas_ref)}, "original", config)
         assert set(original["reading_basis"]) == {"original_source"}
         assert {item["type"] for item in memory.resident_items(config)} == {"record", "fragment"}
         old_refs = memory.view_state(config)["resident_refs"]
@@ -149,7 +163,9 @@ def test_state_driven_catalog_switch_reopen_reload_and_forget(tmp_path: Path) ->
         turn(memory, "after", "Show the remaining Orchid arrangement.")
         memory.focus_view(cfg("after"), resident_refs=old_refs)
         assert memory.resident_items(cfg("after")) == []
-        visible = invoke(memory, "read_memory", {"record_id": orchid["id"]}, "remaining",
+        directory = memory.context("s", "after", CONFIG_VERSION)
+        visible = invoke(memory, "read_memory", {"target": packet_target(directory,
+                         record_id=orchid["id"])}, "remaining",
                          cfg("after"))
         assert visible["ok"] and "date undecided" in visible["items"][0]["content"]
 
@@ -162,21 +178,24 @@ def test_state_view_current_refresh_and_fixed_pool_selection(tmp_path: Path) -> 
                             handles(memory, original))
         correction = turn(memory, "change", "Atlas now visits three times weekly; holidays pause.")
         config = cfg("change")
-        before = invoke(memory, "read_memory", {"record_id": saved["id"]}, "before", config)
+        directory = memory.context("s", "change", CONFIG_VERSION)
+        target = packet_target(directory, record_id=saved["id"])
+        before = invoke(memory, "read_memory", {"target": target}, "before", config)
         old_handle = before["items"][0]["read_handle"]
         revised = memory.update(config, "revise", old_handle, [{"field": "content", "op": "set",
             "value": "Atlas visits three times weekly; holidays pause visits.",
             "fragment_handles": handles(memory, correction)}])
         assert revised["ok"] and revised["revision"] == 2
-        current = invoke(memory, "read_memory", {"record_id": saved["id"]}, "current", config)
+        current = invoke(memory, "read_memory", {"target": target}, "current", config)
         assert {ref["revision"] for ref in memory.view_state(config)["resident_refs"]
                 if ref["kind"] == "record"} == {2}
         history = invoke(memory, "read_memory_revision",
-                         {"record_id": saved["id"], "revision": 1}, "history", config)
+                         {"target": target, "revision": 1}, "history", config)
         assert set(history["reading_basis"]) == {"historical_exact_revision"}
-        catalog = memory._page(memory._snapshot(memory._binding(config),
+        catalog = memory.bind_request_targets(config, memory._page(
+            memory._snapshot(memory._binding(config),
             catalog_candidates(history["items"]), "saved_history_catalog"),
-            0, memory._binding(config))
+            0, memory._binding(config)))
         read = catalog["candidates"][0]["read"]
         reopened = invoke(memory, read["tool"], read["arguments"], "history-catalog", config)
         assert reopened["items"][0]["revision"] == 1
@@ -1573,24 +1592,30 @@ def test_m14_forget_revokes_old_handles_snapshot_raw_and_replay_cache(
 def test_history_body_cursor_stays_on_issued_versions_after_later_update(
     tmp_path: Path, explicit: bool,
 ) -> None:
-    with opened(tmp_path, material_limit=3500, fragment_chars=300, read_limit=20,
+    with opened(tmp_path, material_limit=5000 if explicit else 3500,
+                fragment_chars=300, read_limit=20,
                 read_interface="explicit_selectors_v1" if explicit
                 else "combined_selectors_v1",
                 memory_view_mode="state_driven" if explicit else "legacy") as memory:
-        ref = turn(memory)
+        ref = turn(memory, "seed" if explicit else "u")
         hs = handles(memory, ref)
-        saved = memory.save(cfg(), "save", "version1 " * 30, hs)
+        config = cfg("seed" if explicit else "u")
+        saved = memory.save(config, "save", "version1 " * 30, hs)
         for index in range(2, 9):
             row = memory.service.read(saved["id"])
             result = memory.update(
-                cfg(),
+                config,
                 str(index),
                 row["candidate_handle"],
                 [{"field": "content", "op": "set", "value": f"version{index} " * 30}],
                 hs,
             )
             assert result["ok"]
-        current = invoke(memory, "read_memory", {"record_id": saved["id"],
+        if explicit:
+            turn(memory, "u", "Show the stored version history.")
+            directory = invoke(memory, "search_memory", {"query": "version8"}, "catalog")
+        current = invoke(memory, "read_memory", {**({"target": packet_target(directory,
+            record_id=saved["id"])} if explicit else {"record_id": saved["id"]}),
             **({"read_goal": "saved_history"} if explicit else {})}, "current")
         if explicit:
             assert memory.view_state(cfg())["read_goal"] == "saved_history"
@@ -1627,7 +1652,8 @@ def test_history_body_cursor_stays_on_issued_versions_after_later_update(
         while page["next_cursor"]:
             index += 1
             page = invoke(memory, "read_page" if explicit else "read_memory",
-                          {"cursor": page["next_cursor"]}, f"page{index}")
+                          {"target": page["next_target"]} if explicit
+                          else {"cursor": page["next_cursor"]}, f"page{index}")
             assert page["snapshot_id"] == first["snapshot_id"]
             if explicit:
                 assert memory.view_state(cfg())["read_goal"] == "saved_history"
@@ -2336,47 +2362,53 @@ def test_explicit_read_shared_budget_identity_and_owner_survive_reopen(tmp_path:
     options = {"read_interface": "explicit_selectors_v1", "memory_view_mode": "state_driven"}
     admission_key = "read-admission:" + reference_key(["s", "u"])
     with opened(tmp_path, **options) as memory:
-        ref = turn(memory, text='Personal record with original support.')
+        ref = turn(memory, 'seed', text='Personal record with original support.')
         fragment = handles(memory, ref)[0]
-        saved = memory.save(cfg(), 'save', 'Personal record with original support.', [fragment])
+        saved = memory.save(cfg('seed'), 'save', 'Personal record with original support.',
+                            [fragment])
+        turn(memory, text='Read the personal record with its original support.')
+        directory = memory.context('s', 'u', CONFIG_VERSION)
+        record_target = packet_target(directory, record_id=saved['id'])
+        source_target = packet_target(directory, source_ref=ref)
         current = memory.service.read(saved['id'])
-        original = invoke(memory, 'read_source', {'source_ref': ref}, 'first')
+        original = invoke(memory, 'read_source', {'target': source_target}, 'first')
         admission = memory.service.store.get(namespace(memory.service), admission_key)
         assert admission is not None
         omitted_arguments = admission.value['calls']['first']['arguments']
-        assert omitted_arguments == {'tool': 'read_source', 'source_ref': ref,
+        assert omitted_arguments == {'tool': 'read_source', 'target': source_target,
                                      'keep_resident': False}
         exact = invoke(memory, 'read_memory_revision',
-                       {'record_id': saved['id'], 'revision': 1,
+                       {'target': record_target, 'revision': 1,
                         'read_goal': 'saved_history'}, 'second')
         assert original['ok'] and exact['items'][0]['revision'] == 1
         assert exact['items'][0]['version_view'] == 'historical_exact_revision'
         assert memory.view_state(cfg())['read_goal'] == 'saved_history'
         with pytest.raises(FunctionalRejection, match='READ_CALL_CHANGED'):
-            invoke(memory, 'read_source', {'source_ref': ref, 'read_goal': 'original_source'},
+            invoke(memory, 'read_source', {'target': source_target, 'read_goal': 'original_source'},
                    'first')
         with pytest.raises(FunctionalRejection, match='OWNER_MISMATCH'):
-            invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'wrong-owner',
+            invoke(memory, 'read_memory_history', {'target': record_target}, 'wrong-owner',
                    cfg(owner='bob'))
         with pytest.raises(FunctionalRejection, match='READ_CALL_CHANGED'):
-            invoke(memory, 'read_memory', {'record_id': saved['id']}, 'second')
+            invoke(memory, 'read_memory', {'target': record_target}, 'second')
     with opened(tmp_path, **options) as memory:
         memory.context('s', 'u', CONFIG_VERSION)
-        assert invoke(memory, 'read_source', {'source_ref': ref}, 'first') == original
+        assert invoke(memory, 'read_source', {'target': source_target}, 'first') == original
         admission = memory.service.store.get(namespace(memory.service), admission_key)
         assert admission is not None and len(admission.value['calls']) == 2
         assert admission.value['calls']['first']['arguments'] == omitted_arguments
         assert memory.view_state(cfg())['read_goal'] == 'saved_history'
-        assert invoke(memory, 'read_fragment', {'fragment_handle': fragment}, 'third')['ok']
+        assert invoke(memory, 'read_fragment', {'target': original['items'][0]['target']},
+                      'third')['ok']
         assert memory.view_state(cfg())['read_goal'] == 'saved_history'
-        exhausted = invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'fourth')
+        exhausted = invoke(memory, 'read_memory_history', {'target': record_target}, 'fourth')
         assert exhausted['status'] == 'read_limit_exhausted'
         assert memory.service.read(saved['id'])['value'] == current['value']
         assert memory.service.history_index(saved['id'])['revisions'] == [1]
     with opened(tmp_path, owner='bob', **options) as memory:
         memory.service.capture_user('s', 'u', 'Unrelated user asks about history.')
         memory.context('s', 'u', CONFIG_VERSION)
-        result = invoke(memory, 'read_memory_history', {'record_id': saved['id']}, 'foreign',
+        result = invoke(memory, 'read_memory_history', {'target': record_target}, 'foreign',
                         cfg(owner='bob'))
         assert not result['ok'] and 'Personal record' not in canonical(result)
 
@@ -2391,8 +2423,10 @@ def test_request_targets_forget_exact_record_survives_reopen_and_rejects_old_tur
         turn(memory, 'forget', 'Forget the saved marker.')
         config = cfg('forget')
         directory = memory.context('s', 'forget', CONFIG_VERSION)
-        assert all('target' not in item for item in directory['candidates'])
-        body = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'read', config)
+        assert all(item['target_kind'] == 'read_only_navigation'
+                   for item in directory['candidates'])
+        body = invoke(memory, 'read_memory', {'target': packet_target(directory,
+                      record_id=saved['id'])}, 'read', config)
         target = body['items'][0]['target']
         bound = memory.resolve_request_target(config, target)
         assert bound == {'kind': 'delivered_record',
@@ -2425,7 +2459,7 @@ def test_request_targets_forget_exact_record_survives_reopen_and_rejects_old_tur
         result = invoke(memory, 'forget_memory', {'targets': [target]}, 'old-target', later)
         assert result['reason'] == 'V13_5_REQUEST_TARGET_NOT_DELIVERED'
         assert result['effect'] == 'none' and memory.service.forget_epoch == 1
-        record = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'query', later)
+        record = invoke(memory, 'read_memory', {'target': target}, 'query', later)
         assert not record['ok']
         assert memory.service.read(saved['id'])['status'] == 'visibility_revoked'
     with opened(tmp_path, owner='bob', **options) as foreign:
@@ -2442,8 +2476,11 @@ def test_request_targets_explicit_sources_and_record_keep_exact_selection(tmp_pa
         copy_ref = turn(memory, 'copy', 'Marker is blue, separately supplied.')
         turn(memory, 'forget', 'Forget both original copies.')
         config = cfg('forget')
-        record = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'record', config)
-        source = invoke(memory, 'read_source', {'source_ref': copy_ref}, 'original', config)
+        directory = invoke(memory, 'search_memory', {'query': 'Marker'}, 'catalog', config)
+        record = invoke(memory, 'read_memory', {'target': packet_target(directory,
+                        record_id=saved['id'])}, 'record', config)
+        source = invoke(memory, 'read_source', {'target': packet_target(directory,
+                        source_ref=copy_ref)}, 'original', config)
         record_target = record['items'][0]['target']
         source_target = source['items'][0]['target']
         selection = memory.resolve_request_target(config, source_target)
@@ -2476,13 +2513,15 @@ def test_request_targets_stale_revision_and_multiple_records_never_change_visibi
     with opened(tmp_path, **options) as memory:
         ref = turn(memory, text='Marker can be blue or green.')
         saved = memory.save(cfg(), 'save', 'Marker is blue.', handles(memory, ref))
-        before = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'before')
+        catalog = invoke(memory, 'search_memory', {'query': 'Marker'}, 'catalog')
+        navigation = packet_target(catalog, record_id=saved['id'])
+        before = invoke(memory, 'read_memory', {'target': navigation}, 'before')
         stale = before['items'][0]['target']
         handle = before['items'][0]['read_handle']
         assert memory.update(cfg(), 'update', handle, [{
             'field': 'content', 'op': 'set', 'value': 'Marker is green.'
         }], handles(memory, ref))['ok']
-        after = invoke(memory, 'read_memory', {'record_id': saved['id']}, 'after')
+        after = invoke(memory, 'read_memory', {'target': navigation}, 'after')
         current = after['items'][0]['target']
         assert current != stale
         rejected = invoke(memory, 'forget_memory', {'targets': [stale]}, 'stale')
@@ -2512,10 +2551,15 @@ def test_request_targets_page_preview_and_omission_do_not_issue_credentials(tmp_
         preview = memory._page(snapshot, 0, binding)
         assert preview['items'] == []
         assert preview['skipped_units'][0]['snapshot_body_delivered'] is False
+        assert request_target_mapping(memory.service, binding) == old
         delivered = memory.bind_request_targets(config, preview)
         assert delivered['items'] == []
-        assert request_target_mapping(memory.service, binding) == old
-        assert all(row['kind'] != 'delivered_record' for row in old['targets'].values())
+        alternate = delivered['skipped_units'][0]['alternative']['target']
+        row = memory.resolve_request_target(config, alternate)
+        assert row['kind'] == 'read_only_navigation' and row['credentials'] == {}
+        assert row['identity']['source_ref'] == ref
+        assert all(row['kind'] != 'delivered_record' for row in request_target_mapping(
+            memory.service, binding)['targets'].values())
         real = memory._page(memory._snapshot(binding, memory._record_units(
             memory.service.read(saved['id'])), 'synthetic_valid_record'), 0, binding)
         target = real['items'][0]['target']
@@ -2537,6 +2581,8 @@ def test_request_targets_delivery_store_failure_stays_unknown_and_does_not_retry
     with opened(tmp_path, **options) as memory:
         ref = turn(memory, text='Marker is blue.')
         saved = memory.save(cfg(), 'save', 'Marker is blue.', handles(memory, ref))
+        catalog = invoke(memory, 'search_memory', {'query': 'Marker'}, 'catalog')
+        target = packet_target(catalog, record_id=saved['id'])
         old = request_target_mapping(memory.service, memory._binding(cfg()))
         original_put = memory.service.store.put
         attempts = []
@@ -2548,7 +2594,7 @@ def test_request_targets_delivery_store_failure_stays_unknown_and_does_not_retry
             return original_put(ns, key, value, **kwargs)
 
         monkeypatch.setattr(memory.service.store, 'put', failed_put)
-        args = {'record_id': saved['id']}
+        args = {'target': target}
         result = invoke(memory, 'read_memory', args, 'read')
         assert result['status'] == 'read_outcome_unknown'
         assert result['read_state_effect'] == 'unconfirmed'
@@ -2565,19 +2611,141 @@ def test_request_targets_delivery_store_failure_stays_unknown_and_does_not_retry
 def test_request_targets_navigation_without_credentials_is_never_a_forget_selection(
     tmp_path: Path,
 ) -> None:
-    from milai_lab.memory.functional_state import (
-        add_request_target,
-        commit_request_targets,
-        request_target_mapping,
-    )
-
     with opened(tmp_path, memory_view_mode='state_driven') as memory:
         ref = turn(memory, text='Marker is blue.')
         saved = memory.save(cfg(), 'save', 'Marker is blue.', handles(memory, ref))
-        mapping = request_target_mapping(memory.service, memory._binding(cfg()))
-        target = add_request_target(mapping, {'kind': 'read_only_navigation',
-                                   'identity': {'record_id': saved['id']}, 'credentials': {}})
-        commit_request_targets(memory.service, mapping)
+        catalog = invoke(memory, 'search_memory', {'query': 'Marker'}, 'catalog')
+        target = packet_target(catalog, record_id=saved['id'])
         assert memory.resolve_request_target(cfg(), target)['credentials'] == {}
         rejected = invoke(memory, 'forget_memory', {'targets': [target]}, 'navigation')
         assert rejected['effect'] == 'none' and memory.service.forget_epoch == 0
+
+
+def test_request_targets_exact_history_index_body_pages_and_structured_goal(tmp_path: Path) -> None:
+    options = {'memory_view_mode': 'state_driven', 'material_limit': 5500,
+               'fragment_chars': 120, 'read_limit': 8}
+    goal = {'purpose': 'Compare saved wording with originals and the current state.',
+            'evidence': ['current_interpretation', 'saved_history', 'original_source',
+                         'live_business']}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, 'seed', 'Toy marker has stored numbered versions.')
+        saved = memory.save(cfg('seed'), 'save', 'Toy marker version 1.', handles(memory, ref))
+        for revision in range(2, 9):
+            row = memory.service.read(saved['id'])
+            assert memory.update(cfg('seed'), str(revision), row['candidate_handle'], [{
+                'field': 'content', 'op': 'set',
+                'value': f'Toy marker version {revision}. ' * 80,
+            }], handles(memory, ref))['ok']
+        turn(memory, 'u', 'Read the toy marker and its saved history.')
+        directory = memory.context('s', 'u', CONFIG_VERSION)
+        target = packet_target(directory, record_id=saved['id'])
+        navigation = memory.resolve_request_target(cfg(), target)
+        assert navigation['kind'] == 'read_only_navigation' and navigation['credentials'] == {}
+        current = invoke(memory, 'read_memory', {'target': target, 'read_goal': goal}, 'current')
+        assert current['items'] and current['next_target']
+        assert memory.view_state(cfg())['read_goal'] == goal
+        admission_key = 'read-admission:' + reference_key(['s', 'u'])
+        admission = memory.service.store.get(namespace(memory.service), admission_key)
+        assert admission is not None
+        assert admission.value['calls']['current']['arguments']['read_goal'] == goal
+        assert set(current['reading_basis']) == {'current_at_snapshot'}
+        tool = next(tool for tool in memory.tools() if tool.name == 'read_memory')
+        assert set(tool.tool_call_schema['properties']) == {'target', 'keep_resident', 'read_goal'}
+        for bad in [
+            {'purpose': 'Read', 'evidence': ['unknown_category']},
+            {**goal, 'sufficient': True},
+        ]:
+            with pytest.raises(ValidationError):
+                invoke(memory, 'read_memory', {'target': target, 'read_goal': bad}, 'bad-goal')
+        history = current['items'][0]['stored_history']
+        assert [entry['revision'] for entry in history['revision_targets']] == list(range(1, 7))
+        exact_target = history['revision_targets'][0]['target']
+        assert memory.resolve_request_target(cfg(), exact_target)['credentials'] == {}
+        none = invoke(memory, 'forget_memory', {'targets': [exact_target]}, 'unread-history')
+        assert none['effect'] == 'none' and memory.service.forget_epoch == 0
+        old = invoke(memory, 'read_memory_revision', {'target': exact_target}, 'old')
+        assert old['items'][0]['revision'] == 1
+        assert old['items'][0]['content'] == 'Toy marker version 1.'
+        changed = invoke(memory, 'read_memory_revision', {'target': exact_target, 'revision': 2},
+                         'changed-revision')
+        assert changed['reason'] == 'V13_5_REQUEST_TARGET_REVISION_CHANGED'
+        index = invoke(memory, 'read_page', {'target': history['index_next_target']}, 'index')
+        assert index['items'] == [] and index['reading_basis'] == {}
+        assert index['stored_history']['revisions'] == [7, 8]
+        assert [entry['revision'] for entry in index['stored_history']['revision_targets']] == [
+            7, 8]
+        assert all(memory.resolve_request_target(cfg(), entry['target'])['credentials'] == {}
+                   for entry in index['stored_history']['revision_targets'])
+        assert memory.view_state(cfg())['read_goal'] == goal
+        row = memory.service.read(saved['id'])
+        assert memory.update(cfg(), 'later', row['candidate_handle'], [{
+            'field': 'content', 'op': 'set', 'value': 'Toy marker version 9.',
+        }], handles(memory, ref))['ok']
+        page = invoke(memory, 'read_page', {'target': current['next_target']}, 'page')
+        assert page['snapshot_id'] == current['snapshot_id']
+        assert page['items'] and {item['revision'] for item in page['items']} == {8}
+        forged = invoke(memory, 'read_page', {'target': current['next_target'] + 'x'}, 'forged')
+        assert forged['reason'] == 'V13_5_REQUEST_TARGET_NOT_DELIVERED'
+        assert memory.service.forget_epoch == 0
+    with opened(tmp_path, **options) as memory:
+        memory.context('s', 'u', CONFIG_VERSION)
+        assert invoke(memory, 'read_memory', {'target': target, 'read_goal': goal},
+                      'current') == current
+        assert memory.view_state(cfg())['read_goal'] == goal
+        turn(memory, 'later', 'Read the toy marker again.')
+        denied = invoke(memory, 'read_page', {'target': current['next_target']}, 'old-request',
+                        cfg('later'))
+        assert denied['reason'] == 'V13_5_REQUEST_TARGET_NOT_DELIVERED'
+
+
+@pytest.mark.parametrize('after_put', [False, True])
+def test_request_targets_original_read_receipt_precedes_delivery_hook(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, after_put: bool,
+) -> None:
+    from milai_lab.memory.functional_state import request_target_mapping
+
+    options = {'memory_view_mode': 'state_driven'}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, 'seed', 'Toy marker is blue.')
+        saved = memory.save(cfg('seed'), 'save', 'Toy marker is blue.', handles(memory, ref))
+        turn(memory, 'u', 'Read the toy marker.')
+        directory = memory.context('s', 'u', CONFIG_VERSION)
+        target = packet_target(directory, record_id=saved['id'])
+        before = request_target_mapping(memory.service, memory._binding(cfg()))
+        original_put = memory.service.store.put
+        original_hook = memory._deliver_request_targets
+        hooks = []
+
+        def hook(binding, packet, *, from_tool=False):
+            if from_tool:
+                hooks.append(packet)
+            return original_hook(binding, packet, from_tool=from_tool)
+
+        def failed_put(ns, key, value, **kwargs):
+            receipt = key.startswith('read-admission:') and 'result' in value['calls'].get(
+                'read', {})
+            if receipt and not after_put:
+                raise OSError('synthetic original receipt before-put failure')
+            original_put(ns, key, value, **kwargs)
+            if receipt:
+                raise OSError('synthetic original receipt after-put acknowledgement loss')
+
+        monkeypatch.setattr(memory, '_deliver_request_targets', hook)
+        monkeypatch.setattr(memory.service.store, 'put', failed_put)
+        failed = invoke(memory, 'read_memory', {'target': target}, 'read')
+        assert failed['status'] == 'read_outcome_unknown'
+        assert failed['phase'] == 'read_receipt_persistence' and not hooks
+        assert request_target_mapping(memory.service, memory._binding(cfg())) == before
+        monkeypatch.setattr(memory.service.store, 'put', original_put)
+    with opened(tmp_path, **options) as memory:
+        memory.context('s', 'u', CONFIG_VERSION)
+        before = request_target_mapping(memory.service, memory._binding(cfg()))
+        if after_put:
+            delivered = invoke(memory, 'read_memory', {'target': target}, 'read')
+            assert delivered['ok'] and delivered['items'][0]['content'] == 'Toy marker is blue.'
+            assert memory.resolve_request_target(cfg(), delivered['items'][0]['target'])[
+                'credentials'] == {'read_handle': delivered['items'][0]['read_handle']}
+        else:
+            with pytest.raises(ValueError, match='READ_OUTCOME_UNKNOWN'):
+                invoke(memory, 'read_memory', {'target': target}, 'read')
+            assert request_target_mapping(memory.service, memory._binding(cfg())) == before

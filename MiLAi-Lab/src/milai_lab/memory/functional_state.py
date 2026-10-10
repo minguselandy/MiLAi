@@ -125,9 +125,40 @@ def add_request_target(mapping: dict[str, Any], row: dict[str, Any]) -> str:
 def project_request_targets(
     mapping: dict[str, Any], packet: dict[str, Any]
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    """Pure preview over selected body items; never sign omitted/catalog evidence."""
+    """Pure preview of actual body credentials and credential-free navigation."""
     planned = copy.deepcopy(mapping)
     result = copy.deepcopy(packet)
+
+    def navigation(tool: str, arguments: dict[str, Any], **identity: Any) -> str:
+        if "forget_epoch" in packet:
+            identity["forget_epoch"] = packet["forget_epoch"]
+        return add_request_target(planned, {
+            "kind": "read_only_navigation", "credentials": {},
+            "identity": {**identity, "read": {"tool": tool, "arguments": arguments}},
+        })
+
+    def history(index: dict[str, Any], record_id: str) -> None:
+        if isinstance(index.get("read"), dict):
+            target = navigation("read_memory_history", {"record_id": record_id},
+                                record_id=record_id)
+            index["target"], index["target_kind"] = target, "read_only_navigation"
+            index["read"] = {"tool": "read_memory_history", "arguments": {"target": target}}
+        index["revision_targets"] = [
+            {"revision": revision, "target": navigation(
+                "read_memory_revision", {"record_id": record_id, "revision": revision},
+                record_id=record_id, revision=revision, version_view="historical_exact_revision",
+            ), "target_kind": "read_only_navigation"}
+            for revision in index.get("revisions", []) if type(revision) is int and revision > 0
+        ]
+        cursor = index.get("index_next_cursor", index.get("next_cursor"))
+        if isinstance(cursor, str) and cursor:
+            index["index_next_target"] = navigation(
+                "read_page", {"record_id": record_id, "index_cursor": cursor},
+                record_id=record_id, cursor=cursor,
+            )
+        if "revision_tool" in index:
+            index["revision_tool"], index["body_page_tool"] = "read_memory_revision", "read_page"
+
     for item in result.get("items", []):
         if item.get("type") == "record" and isinstance(item.get("read_handle"), str):
             row = {
@@ -147,6 +178,72 @@ def project_request_targets(
             continue
         item["target"] = add_request_target(planned, row)
         item["target_kind"] = row["kind"]
+        if isinstance(item.get("stored_history"), dict):
+            history(item["stored_history"], item["record_id"])
+        for evidence in item.get("revision_evidence", []):
+            descriptor = evidence.get("read", {})
+            if descriptor.get("tool") == "read_source" and isinstance(
+                evidence.get("source_ref"), str
+            ):
+                identity = {key: evidence[key] for key in (
+                    "source_ref", "source_revision"
+                ) if key in evidence}
+                target = navigation("read_source", {"source_ref": evidence["source_ref"]},
+                                    **identity)
+                evidence["target"], evidence["target_kind"] = target, "read_only_navigation"
+                evidence["read"] = {"tool": "read_source", "arguments": {"target": target}}
+
+    for candidate in result.get("candidates", []):
+        if candidate.get("type") == "record_candidate":
+            record_id = candidate["record_id"]
+            identity = {key: candidate[key] for key in (
+                "record_id", "revision", "version_view"
+            ) if key in candidate}
+            exact = candidate.get("version_view") == "historical_exact_revision"
+            tool = "read_memory_revision" if exact else "read_memory"
+            arguments = {"record_id": record_id}
+            if exact:
+                arguments["revision"] = candidate["revision"]
+        elif candidate.get("type") == "source_candidate":
+            tool, arguments = "read_source", {"source_ref": candidate["source_ref"]}
+            identity = {key: candidate[key] for key in (
+                "source_ref", "source_revision", "version_view"
+            ) if key in candidate}
+        else:
+            continue
+        target = navigation(tool, arguments, **identity)
+        candidate["target"], candidate["target_kind"] = target, "read_only_navigation"
+        candidate["read"] = {"tool": tool, "arguments": {"target": target}}
+
+    if isinstance(result.get("stored_history"), dict) and isinstance(result.get("record_id"), str):
+        history(result["stored_history"], result["record_id"])
+
+    for skipped in result.get("skipped_units", []):
+        alternate = skipped.get("alternative")
+        if isinstance(alternate, dict) and alternate.get("tool") == "read_source" \
+                and isinstance(alternate.get("source_ref"), str):
+            target = navigation("read_source", {"source_ref": alternate["source_ref"]},
+                                source_ref=alternate["source_ref"])
+            alternate["target"], alternate["target_kind"] = target, "read_only_navigation"
+            alternate["arguments"] = {"target": target}
+
+    cursor = result.get("next_cursor")
+    if isinstance(cursor, str) and cursor:
+        result["next_target"] = navigation("read_page", {"cursor": cursor}, cursor=cursor)
+        result["next_target_kind"] = "read_only_navigation"
+    for continuation in result.get("continuations", []):
+        cursor = continuation.get("next_cursor", continuation.get(
+            "cursor", continuation.get("arguments", {}).get("cursor")
+        ))
+        if isinstance(cursor, str) and cursor:
+            target = navigation("read_page", {"cursor": cursor}, cursor=cursor)
+            continuation["cursor"] = cursor
+            continuation["target"], continuation["target_kind"] = target, "read_only_navigation"
+            continuation["tool"], continuation["arguments"] = "read_page", {"target": target}
+        elif isinstance(continuation.get("target"), str):
+            row = planned["targets"].get(continuation["target"])
+            if row is None or row["kind"] != "read_only_navigation":
+                raise FunctionalIntegrityError("V13_5_REQUEST_TARGET_CONTINUATION_NOT_ISSUED")
     result["target_scope"] = mapping["scope"]
     return result, planned
 
