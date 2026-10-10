@@ -1745,7 +1745,7 @@ class BenchmarkRun:
             if location.is_absolute() or ".." in location.parts:
                 raise ValueError("READ_MATERIAL_SNAPSHOT_PATH_INVALID")
             saved = read_json(self.root / location)["materials"]
-            if saved != memories:
+            if saved != json.loads(json.dumps(memories, ensure_ascii=False)):
                 raise ValueError("Saved retrieval materials changed; use a new key")
             memories = saved
         path = self.root / "http" / key / "memory-view.json"
@@ -1773,7 +1773,7 @@ class BenchmarkRun:
             if not isinstance(text, str):
                 text = json.dumps(memory, ensure_ascii=False, separators=(",", ":"))
             return {
-                "item_index": index, "read_ref": refs[index], "navigation_only": True,
+                "item_index": index, "navigation_only": True,
                 "literal_excerpt": text[:384], "excerpt_truncated": len(text) > 384,
                 "native_metadata": {field: copy.deepcopy(memory[field]) for field in (
                     "id", "record_id", "session_id", "revision", "provenance", "date",
@@ -1888,8 +1888,19 @@ class BenchmarkRun:
                            candidates=directory, **{opened_field: state[opened_field]},
                            remaining_reads=read_limit - state["steps"], response_schema=schema)
             if material_pool:
-                payload["undelivered_refs"] = [ref for ref in refs
-                                               if ref["item_index"] not in state[opened_field]]
+                payload["memory_view_state"] = {
+                    "focus": state["focus"], "read_goal": state["read_goal"],
+                    "resident_item_indices": [ref["item_index"] for ref in state["resident_refs"]],
+                    "pending_item_indices": [ref["item_index"] for ref in state["pending_refs"]],
+                }
+                payload["retrieval_snapshot"] = {"snapshot_id": snapshot_id,
+                                                 "collection": "materials"}
+                payload["memory_item_indices"] = [ref["item_index"]
+                                                  for ref in state["resident_refs"]]
+                payload["undelivered_item_indices"] = [
+                    ref["item_index"] for ref in refs
+                    if ref["item_index"] not in state[opened_field]
+                ]
             if material_pool or self.settings.get("reader_projection") == "semantic_units_v1":
                 payload["input_token_limit"] = input_limit
                 payload["capacity_note"] = (
@@ -1903,7 +1914,9 @@ class BenchmarkRun:
             messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
             if (input_limit and self.input_tokens(messages, **(
                     {"enable_thinking": reader_thinking} if material_pool else {})) > input_limit
-                    and state["resident_refs"]):
+                    and (state["resident_refs"] or material_pool)):
+                if material_pool and not state["resident_refs"]:
+                    state["resident_refs"] = copy.deepcopy(refs)
                 state["selector_needs_pages"] = True
                 break
             state["active_stage"] = f"{key}/view/select-{state['steps']}"
@@ -1930,6 +1943,18 @@ class BenchmarkRun:
             result = self._reader_messages(
                 question, date, selected_material(selected_refs),
             )
+            if material_pool:
+                result[0]["content"] += (
+                    " memory_item_indices aligns one-to-one with the supplied memories. "
+                    "Each index locates that complete entry in retrieval_snapshot; "
+                    "snapshot positions grant no write or forget authority."
+                )
+                payload = json.loads(result[1]["content"])
+                payload["retrieval_snapshot"] = {"snapshot_id": snapshot_id,
+                                                 "collection": "materials"}
+                payload["memory_item_indices"] = [ref["item_index"] for ref in selected_refs]
+                result[1]["content"] = json.dumps(
+                    payload, ensure_ascii=False, separators=(",", ":"))
             if state["read_goal"] is not None:
                 result[0]["content"] += (
                     " read_goal describes this question's purpose, not the provenance or "
@@ -1974,7 +1999,9 @@ class BenchmarkRun:
                         "Only bodies in this input are evidence; directory excerpts, references "
                         "and earlier responses contain no answer evidence. Select item_indices "
                         "to reopen complete original entries for the final answer. keep_resident "
-                        "merges with final_reopen_refs. done cannot skip any still-pending page. "
+                        "merges with final_reopen_item_indices. Candidate navigation covers "
+                        "only this page; pending_item_indices lists entries still to be read. "
+                        "done cannot skip any still-pending page. "
                         "References grant no write or forget authority. Return only the supplied "
                         "selection schema, never an answer or factual summary."
                         if material_pool else
@@ -1991,12 +2018,22 @@ class BenchmarkRun:
                     )
                     payload = json.loads(result[1]["content"])
                     payload.update(
-                        candidates=directory, response_schema=schema,
-                        final_reopen_refs=continuation["final_refs"],
-                        pending_refs=continuation["pending_refs"],
+                        response_schema=schema,
                         remaining_reads=total_read_limit - state["steps"],
                         input_token_limit=input_limit,
                     )
+                    if material_pool:
+                        payload.update(
+                            candidates=[directory[ref["item_index"]] for ref in page_refs],
+                            final_reopen_item_indices=[ref["item_index"]
+                                                       for ref in continuation["final_refs"]],
+                            pending_item_indices=[ref["item_index"]
+                                                  for ref in continuation["pending_refs"]],
+                        )
+                    else:
+                        payload.update(candidates=directory,
+                                       final_reopen_refs=continuation["final_refs"],
+                                       pending_refs=continuation["pending_refs"])
                     result[1]["content"] = json.dumps(
                         payload, ensure_ascii=False, separators=(",", ":"))
                     return result

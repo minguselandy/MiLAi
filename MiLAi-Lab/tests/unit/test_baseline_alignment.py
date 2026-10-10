@@ -183,7 +183,12 @@ def test_longmemeval_all_history_precedes_qa_and_known_missing_skips_judge(
     monkeypatch.setattr(factory_module, factory_name, construct)
     delivered = []
 
-    def answer(question: str, date: str, key: str, materials: list[dict[str, Any]]) -> Any:
+    def answer(
+        question: str, date: str, key: str, materials: list[dict[str, Any]], *, snapshot_id: str,
+    ) -> Any:
+        assert snapshot_id == f"native/{key}/retrieval.json"
+        assert read_json(execution.root / snapshot_id)["materials"] == json.loads(
+            json.dumps(materials))
         assert date == "2024/01/03 (Wed) 10:00"
         assert [row["session_id"] for row in materials] == ["shared", f"late-{question[-1]}"]
         delivered.append(copy.deepcopy(materials))
@@ -504,7 +509,12 @@ def test_existing_online_loop_delivers_only_current_observed_prefix(
     monkeypatch.setattr(execution, "_semantic_retriever", lambda: None)
     delivered = []
 
-    def answer(question: str, date: str, key: str, materials: list[dict[str, Any]]) -> Any:
+    def answer(
+        question: str, date: str, key: str, materials: list[dict[str, Any]], *, snapshot_id: str,
+    ) -> Any:
+        assert snapshot_id == f"native/{key}/retrieval.json"
+        assert read_json(execution.root / snapshot_id)["materials"] == json.loads(
+            json.dumps(materials))
         delivered.append(copy.deepcopy(materials))
         return "scripted answer", materials
 

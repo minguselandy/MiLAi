@@ -925,9 +925,10 @@ def test_snapshot_reader_pages_and_reopens_actual_entries(
             assert "item_indices" in payload["response_schema"]["properties"]
             for candidate in payload["candidates"]:
                 index = candidate["item_index"]
-                assert candidate["read_ref"] == {
-                    "snapshot_id": snapshot_id, "collection": "materials", "item_index": index,
+                assert payload["retrieval_snapshot"] == {
+                    "snapshot_id": snapshot_id, "collection": "materials",
                 }
+                assert "read_ref" not in candidate
                 assert candidate["navigation_only"] and len(candidate["literal_excerpt"]) <= 384
                 assert "END_" not in candidate["literal_excerpt"]
                 assert all(original[index][field] == value
@@ -935,16 +936,20 @@ def test_snapshot_reader_pages_and_reopens_actual_entries(
                 if backend != "MiLAi-memory-only":
                     assert "revision" not in candidate["native_metadata"]
                     assert "record_id" not in candidate["native_metadata"]
-            if "final_reopen_refs" in payload:
-                assert payload["memories"] and payload["pending_refs"]
-                assert all(memory in original for memory in payload["memories"])
+            if "final_reopen_item_indices" in payload:
+                assert payload["memories"] and payload["pending_item_indices"]
+                assert payload["memories"] == [original[index]
+                                               for index in payload["memory_item_indices"]]
+                assert [candidate["item_index"] for candidate in payload["candidates"]] == (
+                    payload["memory_item_indices"])
                 indices = [0]
             else:
-                assert payload["memories"] == [] and payload["undelivered_refs"]
+                assert payload["memories"] == [] and payload["undelivered_item_indices"]
                 indices = list(range(len(memories)))
             content = json.dumps({"item_indices": indices, "keep_resident": False, "done": True})
         else:
             assert payload["memories"] == [original[0]]
+            assert payload["memory_item_indices"] == [0]
             assert "END_0" in repr(payload["memories"]) and "END_1" not in repr(payload)
             assert "candidates" not in payload and "literal_excerpt" not in repr(payload)
             content = "Only the complete reopened first report supports this answer."
@@ -979,6 +984,8 @@ def test_snapshot_direct_reader_fitting_pool_keeps_one_original_call(
     execution = snapshot_reader
     execution.settings["alignment_backend"] = backend
     memories = snapshot_materials(backend, 20)
+    memories[0]["native_turns"] = ({"role": "user", "content": "original tuple on serialization"},)
+    serialized = json.loads(json.dumps(memories))
     snapshot_id = "native/qa/retrieval.json"
     write_json(execution.root / snapshot_id, {"materials": memories})
     calls = []
@@ -986,14 +993,54 @@ def test_snapshot_direct_reader_fitting_pool_keeps_one_original_call(
     def chat(messages: Any, response_format: Any, **kwargs: Any) -> Any:
         assert response_format is None and kwargs == {"enable_thinking": True}
         payload = json.loads(messages[1]["content"])
-        assert payload["memories"] == memories and "candidates" not in payload
+        assert payload["memories"] == serialized and "candidates" not in payload
         calls.append(payload)
         return {"choices": [{"finish_reason": "stop", "message": {"content": "actual return"}}]}
 
     execution.client.chat = chat
     assert execution.answer_material("Query", "2030-01-02", "qa", memories,
-                                     snapshot_id=snapshot_id) == ("actual return", memories)
+                                     snapshot_id=snapshot_id) == ("actual return", serialized)
     assert len(calls) == 1
+
+
+@pytest.mark.parametrize("mode", ["staged", "state_driven"])
+def test_snapshot_reader_pages_when_initial_navigation_exceeds_capacity(
+    snapshot_reader: BenchmarkRun, mode: str,
+) -> None:
+    execution = snapshot_reader
+    execution.settings["memory_view_mode"] = mode
+    memories = [{"id": f"report-{index}", "text": f"Original report {index}: " + "T" * 300,
+                 "provenance": "retrieved_memory"} for index in range(75)]
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    attempts = []
+
+    def chat(messages: Any, response_format: Any, **sampling: Any) -> Any:
+        assert execution.input_tokens(messages, enable_thinking=True) <= 30000
+        payload = json.loads(messages[1]["content"])
+        attempts.append(payload)
+        if response_format is not None:
+            assert "final_reopen_item_indices" in payload
+            indices = payload["memory_item_indices"]
+            assert [row["item_index"] for row in payload["candidates"]] == indices
+            assert payload["memories"] == [memories[index] for index in indices]
+            assert payload["response_schema"]["properties"]["item_indices"]["items"][
+                "enum"] == list(range(75))
+            content = json.dumps({"item_indices": [74], "keep_resident": False, "done": True})
+        else:
+            assert payload["memory_item_indices"] == [74] and payload["memories"] == [memories[74]]
+            content = "Complete original last report reopened."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}],
+                "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9}}
+
+    execution.client.chat = chat
+    assert execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                     snapshot_id=snapshot_id)[1] == memories
+    state = read_json(execution.root / "http/qa/memory-view.json")
+    assert state["selector_needs_pages"] and len(attempts) <= 4
+    continuation = state["capacity_continuation"]
+    assert [ref["item_index"] for ref in continuation["delivered_page_refs"]] == list(range(75))
+    assert not continuation["pending_refs"] and continuation["final_body_delivered"]
 
 
 @pytest.mark.parametrize("failure", ["index", "unknown", "call_limit", "snapshot"])
@@ -1012,7 +1059,7 @@ def test_snapshot_reader_rejects_invalid_selection_and_keeps_unfinished_scope(
     def chat(messages: Any, **kwargs: Any) -> Any:
         payload = json.loads(messages[1]["content"])
         calls.append(payload)
-        assert "final_reopen_refs" in payload
+        assert "final_reopen_item_indices" in payload
         if failure == "unknown":
             raise RuntimeError("synthetic unconfirmed page")
         return {"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({
