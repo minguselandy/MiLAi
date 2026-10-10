@@ -550,16 +550,74 @@ def test_existing_online_loop_delivers_only_current_observed_prefix(
     assert official["overall_score"]["memory_extraction_f1"] is None
 
 
-def test_score_requires_all_declared_predictions(tmp_path: Path) -> None:
+@pytest.mark.parametrize("peer_status", [None, "FAILED", "PREDICTIONS_SAVED"])
+def test_completed_backend_scores_without_waiting_for_peer_predictions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, peer_status: str | None,
+) -> None:
+    from milai_lab.runners import baseline_alignment
+
     config = configuration()
     write_json(tmp_path / "alignment-prepared.json", {
         "configuration": config,
         "bank_ids": {backend: {} for backend in BACKENDS},
     })
-    write_json(tmp_path / BACKENDS[0] / "terminal-predict.json", {"status": "PREDICTIONS_SAVED"})
-    with pytest.raises(ValueError, match="Every declared backend"):
+    prediction = tmp_path / BACKENDS[0] / "terminal-predict.json"
+    write_json(prediction, {"status": "PREDICTIONS_SAVED", "resources_settled": True})
+    original = prediction.read_bytes()
+    peer = tmp_path / BACKENDS[1] / "terminal-predict.json"
+    if peer_status is not None:
+        write_json(peer, {"status": peer_status, "resources_settled": True})
+    events = []
+
+    class Execution:
+        def __init__(self, _: Any, output: Path, *, phase: str) -> None:
+            assert output == tmp_path / BACKENDS[0] and phase == "score"
+
+        def halumem(self, phase: str) -> dict[str, int]:
+            assert phase == "score"
+            events.append("scored_existing_predictions")
+            return {"complete_answers": 2}
+
+        def close(self) -> None:
+            assert not (tmp_path / BACKENDS[0] / "terminal-score.json").exists()
+            events.append("closed")
+
+    monkeypatch.setattr(baseline_alignment, "AlignmentRun", Execution)
+    run_alignment_arm(config, tmp_path, BACKENDS[0], "score")
+    assert events == ["scored_existing_predictions", "closed"]
+    assert prediction.read_bytes() == original
+    assert read_json(tmp_path / BACKENDS[0] / "terminal-score.json")["status"] == "SCORED"
+    assert not (tmp_path / BACKENDS[1] / "terminal-score.json").exists()
+    assert not (tmp_path / BACKENDS[2] / "terminal-score.json").exists()
+
+
+@pytest.mark.parametrize("prediction", [
+    None,
+    {"status": "FAILED", "resources_settled": True},
+    {"status": "PREDICTIONS_SAVED", "resources_settled": False},
+    {"status": "PREDICTIONS_SAVED"},
+])
+def test_score_rejects_selected_backend_incomplete_or_unsettled_predictions(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, prediction: dict[str, Any] | None,
+) -> None:
+    from milai_lab.runners import baseline_alignment
+
+    config = configuration()
+    write_json(tmp_path / "alignment-prepared.json", {
+        "configuration": config,
+        "bank_ids": {backend: {} for backend in BACKENDS},
+    })
+    if prediction is not None:
+        write_json(tmp_path / BACKENDS[0] / "terminal-predict.json", prediction)
+
+    def no_clients(*_: Any, **__: Any) -> None:
+        raise AssertionError("Incomplete or unsettled predictions must stop before clients")
+
+    monkeypatch.setattr(baseline_alignment, "AlignmentRun", no_clients)
+    with pytest.raises(ValueError, match="Selected backend"):
         run_alignment_arm(config, tmp_path, BACKENDS[0], "score")
     assert not (tmp_path / BACKENDS[0] / "actual-config.json").exists()
+    assert not (tmp_path / BACKENDS[0] / "terminal-score.json").exists()
 
 
 def test_success_terminal_requires_resource_closure(

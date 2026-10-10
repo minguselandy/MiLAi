@@ -650,7 +650,10 @@ def run_alignment_arm(
         raise ValueError("Comparison configuration differs from its preparation")
     if prepared.get("benchmark", "halumem") != benchmark:
         raise ValueError("Comparison benchmark differs from its preparation")
-    for selected in config["alignment"]["backends"]:
+    # Scoring consumes this backend's saved predictions. Unfinished peer arms
+    # do not change its Judge policy or authorize a cross-backend comparison.
+    resource_backends = config["alignment"]["backends"] if phase == "predict" else [backend]
+    for selected in resource_backends:
         if (root / selected / "resource-unsettled.json").exists():
             raise ValueError("Native resource closure is unconfirmed; Root must resolve it first")
         native_root = root / selected / "native-service"
@@ -672,10 +675,12 @@ def run_alignment_arm(
     if terminal.exists():
         raise ValueError("Closed arm/phase already exists; do not repeat")
     if phase == "score":
-        for selected in config["alignment"]["backends"]:
-            prior = root / selected / "terminal-predict.json"
-            if not prior.exists() or read_json(prior)["status"] != "PREDICTIONS_SAVED":
-                raise ValueError("Every declared backend must close predictions before scoring")
+        prior = output / "terminal-predict.json"
+        prediction = read_json(prior) if prior.exists() else {}
+        if prediction.get("status") != "PREDICTIONS_SAVED":
+            raise ValueError("Selected backend must close predictions before scoring")
+        if prediction.get("resources_settled") is not True:
+            raise ValueError("Selected backend resource closure is unconfirmed; do not score")
     execution = AlignmentRun(settings, output, phase=phase)
     result: dict[str, Any] | None = None
     run_error: BaseException | None = None
