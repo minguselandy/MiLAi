@@ -5,10 +5,12 @@ from __future__ import annotations
 import copy
 import json
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 
 import httpx
 import pytest
+from jsonschema.exceptions import ValidationError as JsonSchemaValidationError
 from langchain_core.embeddings import Embeddings
 from langgraph.store.sqlite import SqliteStore
 from tokenizers import Tokenizer
@@ -846,6 +848,203 @@ def test_direct_reader_delivers_whole_pool_without_selector_or_retry(
     assert memories == before
     assert not (tmp_path / "http/qa/view").exists()
     assert not (tmp_path / "http/qa/memory-view.json").exists()
+
+
+def snapshot_materials(backend: str, body_size: int) -> list[dict[str, Any]]:
+    """Fabricated examples of actual backend shapes, including missing native versions."""
+    bodies = [f"Report {index}. " + chr(65 + index) * body_size + f" END_{index}"
+              for index in range(2)]
+    if backend == "RawRAG-local":
+        return [{"id": f"exchange-{index}", "session_id": f"session-{index}",
+                 "date": "2030-01-01", "turn_range": [0, 1], "score": 0.5,
+                 "text": json.dumps([{"role": "user", "content": body,
+                                      "timestamp": "2030-01-01"}]),
+                 "provenance": "original_exchange", "truncated": False}
+                for index, body in enumerate(bodies)]
+    if backend == "Hindsight-native-local-recall":
+        return [{"id": "native-fact", "text": bodies[0], "fact_type": "world",
+                 "occurred_start": "2030-01-01", "provenance": "retrieved_memory"},
+                {"text": bodies[1], "native_collection": "chunks",
+                 "native_collection_key": "native-chunk", "truncated": True,
+                 "provenance": "native_source_chunk"},
+                {"provenance": "native_recall_metadata",
+                 "native_fields": {"trace": {"strategy": "native"}}}]
+    return [{"record_id": f"stored-{index}", "revision": index + 1, "content": body,
+             "scope": {"reported": True}, "revision_evidence": []}
+            for index, body in enumerate(bodies)]
+
+
+@pytest.fixture
+def snapshot_reader(tmp_path: Path) -> BenchmarkRun:
+    """Use the real request/cache boundary with a Python model double, no HTTP or DB."""
+    from milai_lab.runners.baseline_alignment import AlignmentRun
+
+    class LiteralTokenizer:
+        def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
+            assert kwargs["enable_thinking"] is True
+            return [0] * len(json.dumps(messages, ensure_ascii=False))
+
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.root = tmp_path
+    execution.settings = {
+        "memory_view_mode": "direct", "reader_projection": "semantic_units_v1",
+        "context_tokens": 30612, "model": {"max_tokens": 100, "enable_thinking": False},
+        "stage_enable_thinking": {"reader": True}, "interface_version": "event_bound_v1",
+        "halumem": {"reader_failure_policy": "record_known_readonly_failure"},
+        "alignment_backend": "MiLAi-memory-only",
+    }
+    execution.tokenizer = LiteralTokenizer()
+    execution.client = SimpleNamespace(config=SimpleNamespace(max_calls=4))
+    return execution
+
+
+@pytest.mark.parametrize("backend", [
+    "RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only",
+])
+@pytest.mark.parametrize("mode", ["direct", "staged", "state_driven"])
+def test_snapshot_reader_pages_and_reopens_actual_entries(
+    snapshot_reader: BenchmarkRun, backend: str, mode: str,
+) -> None:
+    execution = snapshot_reader
+    execution.settings.update(alignment_backend=backend, memory_view_mode=mode)
+    memories = snapshot_materials(backend, 18000)
+    original = copy.deepcopy(memories)
+    snapshot_id = "native/qa/retrieval.json"
+    snapshot = execution.root / snapshot_id
+    write_json(snapshot, {"materials": memories, "native_return": {"actual": True}})
+    before = snapshot.read_bytes()
+    attempts: list[dict[str, Any]] = []
+
+    def chat(messages: list[dict[str, str]], response_format: Any, **sampling: Any) -> Any:
+        assert sampling == {"enable_thinking": True}
+        assert execution.input_tokens(messages, enable_thinking=True) <= 30000
+        payload = json.loads(messages[1]["content"])
+        attempts.append(payload)
+        if response_format is not None:
+            assert "record_ids" not in payload["response_schema"]["properties"]
+            assert "item_indices" in payload["response_schema"]["properties"]
+            for candidate in payload["candidates"]:
+                index = candidate["item_index"]
+                assert candidate["read_ref"] == {
+                    "snapshot_id": snapshot_id, "collection": "materials", "item_index": index,
+                }
+                assert candidate["navigation_only"] and len(candidate["literal_excerpt"]) <= 384
+                assert "END_" not in candidate["literal_excerpt"]
+                assert all(original[index][field] == value
+                           for field, value in candidate["native_metadata"].items())
+                if backend != "MiLAi-memory-only":
+                    assert "revision" not in candidate["native_metadata"]
+                    assert "record_id" not in candidate["native_metadata"]
+            if "final_reopen_refs" in payload:
+                assert payload["memories"] and payload["pending_refs"]
+                assert all(memory in original for memory in payload["memories"])
+                indices = [0]
+            else:
+                assert payload["memories"] == [] and payload["undelivered_refs"]
+                indices = list(range(len(memories)))
+            content = json.dumps({"item_indices": indices, "keep_resident": False, "done": True})
+        else:
+            assert payload["memories"] == [original[0]]
+            assert "END_0" in repr(payload["memories"]) and "END_1" not in repr(payload)
+            assert "candidates" not in payload and "literal_excerpt" not in repr(payload)
+            content = "Only the complete reopened first report supports this answer."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}],
+                "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9}}
+
+    execution.client.chat = chat
+    first = execution.answer_material("What was reported?", "2030-01-02", "qa", memories,
+                                      snapshot_id=snapshot_id)
+    assert first[1] == original
+    assert len(attempts) == (3 if mode == "direct" else 4)
+    state = read_json(execution.root / "http/qa/memory-view.json")
+    continuation = state["capacity_continuation"]
+    assert {ref["item_index"] for ref in continuation["delivered_page_refs"]} == set(
+        range(len(memories)))
+    assert continuation["final_body_delivered"] and not continuation["pending_refs"]
+    assert continuation["final_refs"] == [
+        {"snapshot_id": snapshot_id, "collection": "materials", "item_index": 0}]
+    assert execution.answer_material("What was reported?", "2030-01-02", "qa", memories,
+                                     snapshot_id=snapshot_id) == first
+    assert len(attempts) == (3 if mode == "direct" else 4)
+    assert snapshot.read_bytes() == before and memories == original
+    assert not (execution.root / "banks").exists()
+
+
+@pytest.mark.parametrize("backend", [
+    "RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only",
+])
+def test_snapshot_direct_reader_fitting_pool_keeps_one_original_call(
+    snapshot_reader: BenchmarkRun, backend: str,
+) -> None:
+    execution = snapshot_reader
+    execution.settings["alignment_backend"] = backend
+    memories = snapshot_materials(backend, 20)
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    calls = []
+
+    def chat(messages: Any, response_format: Any, **kwargs: Any) -> Any:
+        assert response_format is None and kwargs == {"enable_thinking": True}
+        payload = json.loads(messages[1]["content"])
+        assert payload["memories"] == memories and "candidates" not in payload
+        calls.append(payload)
+        return {"choices": [{"finish_reason": "stop", "message": {"content": "actual return"}}]}
+
+    execution.client.chat = chat
+    assert execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                     snapshot_id=snapshot_id) == ("actual return", memories)
+    assert len(calls) == 1
+
+
+@pytest.mark.parametrize("failure", ["index", "unknown", "call_limit", "snapshot"])
+def test_snapshot_reader_rejects_invalid_selection_and_keeps_unfinished_scope(
+    snapshot_reader: BenchmarkRun, failure: str,
+) -> None:
+    execution = snapshot_reader
+    execution.settings["alignment_backend"] = "RawRAG-local"
+    memories = snapshot_materials("RawRAG-local", 18000)
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    calls = []
+    if failure == "call_limit":
+        execution.client.config.max_calls = 2
+
+    def chat(messages: Any, **kwargs: Any) -> Any:
+        payload = json.loads(messages[1]["content"])
+        calls.append(payload)
+        assert "final_reopen_refs" in payload
+        if failure == "unknown":
+            raise RuntimeError("synthetic unconfirmed page")
+        return {"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({
+            "item_indices": [99 if failure == "index" else 0],
+            "keep_resident": False, "done": True,
+        })}}], "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9}}
+
+    execution.client.chat = chat
+    if failure == "snapshot":
+        memories[0]["text"] = "unsaved body"
+        with pytest.raises(ValueError, match="materials changed"):
+            execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                      snapshot_id=snapshot_id)
+        assert calls == [] and not (execution.root / "http").exists()
+        return
+    error = {"index": JsonSchemaValidationError, "unknown": UnconfirmedModelOutcome,
+             "call_limit": ReadDeliveryIncomplete}[failure]
+    with pytest.raises(error) as caught:
+        execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                  snapshot_id=snapshot_id)
+    if failure == "unknown":
+        with pytest.raises(UnconfirmedModelOutcome, match="do not blindly repeat"):
+            execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                      snapshot_id=snapshot_id)
+    if failure == "call_limit":
+        receipt = execution._known_reader_failure(caught.value, "qa")
+        assert receipt is not None and receipt["reason"] == "read_call_limit"
+    assert len(calls) == 1 and not (execution.root / "http/qa/request.json").exists()
+    state = read_json(execution.root / "http/qa/memory-view.json")
+    assert state["pending_refs"] and not state["capacity_continuation"]["final_body_delivered"]
+    assert "content" not in repr(state["pending_refs"]) and "text" not in repr(
+        state["pending_refs"])
 
 
 @pytest.mark.parametrize("case", [

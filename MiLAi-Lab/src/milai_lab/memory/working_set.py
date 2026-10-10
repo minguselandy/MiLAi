@@ -64,6 +64,31 @@ def item_ref(item: dict[str, Any], snapshot_id: str, unit_index: int) -> dict[st
     }
 
 
+def material_ref(snapshot_id: str, item_index: int) -> dict[str, Any]:
+    """Locate one actual retrieval entry; this reference grants no operation rights."""
+    return {"snapshot_id": snapshot_id, "collection": "materials", "item_index": item_index}
+
+
+def select_material_refs(
+    state: dict[str, Any], available_refs: list[dict[str, Any]], item_indices: list[int], *,
+    keep_resident: bool = False, read_goal: str | dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Select array positions from one fixed pool without inventing record identities."""
+    selected = []
+    for index in item_indices:
+        if type(index) is not int or not 0 <= index < len(available_refs):
+            raise ValueError("READ_MATERIAL_INDEX_UNAVAILABLE")
+        selected.append(copy.deepcopy(available_refs[index]))
+    merged = copy.deepcopy(state["resident_refs"]) if keep_resident else []
+    if any(ref not in available_refs for ref in merged):
+        raise ValueError("READ_MATERIAL_REFERENCE_UNAVAILABLE")
+    merged.extend(ref for ref in selected if ref not in merged)
+    return {
+        **state, "resident_refs": merged,
+        "read_goal": copy.deepcopy(read_goal if read_goal is not None else state.get("read_goal")),
+    }
+
+
 def admit_refs(
     state: dict[str, Any], refs: list[dict[str, Any]], *, keep_resident: bool = False,
     read_goal: str | dict[str, Any] | None = None,

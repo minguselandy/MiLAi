@@ -508,10 +508,13 @@ class AlignmentRun(BenchmarkRun):
             )
             write_json(path, retrieval)
         self._check_native_transport()
-        # The actual return is retained intact. Common transport only renders
-        # those materials; no additional extractor, selector or identity binding.
+        # The actual return is retained intact. The common Reader resolves only
+        # read-only positions in this saved pool, without a new retrieval.
         cached_response = (self.root / "http" / key / "response.json").exists()
-        answer, used = self.answer_material(question, date, key, retrieval["materials"])
+        answer, used = self.answer_material(
+            question, date, key, retrieval["materials"],
+            snapshot_id=str(path.relative_to(self.root)),
+        )
         if (self.settings["alignment_backend"] == "MiLAi-memory-only"
                 and service.memory_profile == "unified_v1"):
             from milai_lab.memory.activation import ActivationIndex
