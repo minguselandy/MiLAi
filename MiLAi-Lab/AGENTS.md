@@ -1,5 +1,24 @@
 # Current handoff: global function-first integration, 2026-10-10 Asia/Shanghai
 
+Latest user steering keeps one MemoryService and prioritizes request-local actual targets,
+read_goal evidence needs/fresh original app queries, and affected semantics in the existing Editor.
+Root integrates methods/runner/docs; A app/working_set, B Editor, C functional/state, independent
+worktrees under the plan's one-integrator/three-developer rule. No new model agents/modules/flags.
+New interaction code is not in frozen5019968. Actual models remain Root-only on its live ledger.
+Verify three normal continuous flows before any new long-history variant; SQLite/scripted success
+does not certify model semantic reliability. Original model/final feedback/effects stay separate.
+Fixed05:09:22UTC main observation: B0 62sessions/156QA checkpoints,155answers/1known missing,
+other4notstarted/Judge0. Actual missing56/qa1 is preHTTP32957>32256; originalnull/capacity/plan
+retained, no retry or denominator removal. Plan remains unexecuted by benchmark.
+Interaction integration includes all three normal Host/SQLite scripted flows, not model acceptance.
+Integrated interaction source40bf7aa; final three normal Host flow checks3PASS, no new real models.
+Local memory/Editor/app group378PASS; Host/view/projection first350PASS/2projection expectationFAIL,
+actual target binding preserves full original semantic comparisons; projection3recheckPASS.
+Final structured navigation/state/receipt11 and legacy Host contract6 rechecksPASS, overlaps not samples.
+Changed8sources strict types/Ruff/matrix262sources/both boundariesPASS;0actual HTTP/models.
+Directory refresh now retains actual selected Source; unknown read receipts never certify delivery.
+Read counters/PID live before any dispatch; ordinary missing-answer policy continues frozen.
+
 User explicitly requests full execution of docs/MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md.
 Candidate config: configs/milai-global-function-first.json (v3 frozen5019968).
 One integrator plus three source developers; historical v2 experiments remain frozen at 1cfb400.
