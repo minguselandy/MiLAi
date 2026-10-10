@@ -1,5 +1,27 @@
 # 本地基线对齐协议 v1
 
+**最新离线交付条件：工程源码dda926f6，2026-10-11北京时间01:33:34。真实实验／Judge保持停止。**
+Hindsight完整native_return继续存档；hindsight_evidence_v1只把已识别的诊断分数／trace／统计留在存档，
+Reader事实、主体、时间、来源、限定、实体观察和未知字段保持。删除内容逐路径登记，不改形成／召回算法。
+共同读取使用实际保存快照＋materials下标；外部材料无需record_id／revision，引用不取得修改或遗忘权限。
+direct可容纳时一次回答，超限时执行已有分页／原文重开；staged／state_driven使用同一材料合同。
+快照在模型输入中共享一次，正文与memory_item_indices对齐，续读目录只含当页；内部完整引用和全池枚举保持。
+导航目录超限且工作集为空时，也将实际全池交给原分页循环。done不能跳过待交付页。
+max_calls仍默认12，预留最终回答；未交付／不可容纳／超调用额度按原缺答合同报告，不静默截断事实。
+
+三份真实H返回的离线固定合成问题回放为185／185／184条、各4页＋一次完整原文重开，
+最大完整页输入32,255≤32,256、5次脚本调用＜12；原返回与快照保持，0真实模型／HTTP／DB／Judge。
+新整池direct请求76,044／76,479／76,697仍超限；不能只靠移出诊断字段宣称容量已解决。
+第一次全目录包装的离线失败保留。脚本选择下标0不使用QA／gold，不构成答案或证据充分性验证。
+
+显式score现在只要求**所选实验臂**PREDICTIONS_SAVED且resources_settled=true；
+其他臂FAILED／未开始不再永久阻止完整产物的质量反馈，原服务／租约关闭要求不放宽。
+同一Judge／提示／标签／机会分母保持，缺答无Judge；比较排名另要求范围和配置可比。
+当前Judge仍0，用户停止继续约束实际调度。本条件不是冻结12b的全臂评分门槛，也不回填旧运行。
+Host输入效果／工具／进度分块属于新的工程条件；旧42消息准备根仍739，不自动派发或复用为新源码。
+Root96＋3＋6相关检查、Ruff10文件／严格类型5源码通过，实际效能／E2–E4仍待验证。
+最新分析与资源复核见[统一报告](MILAI_UNIFIED_MEMORY_USAGE.md)。以下运行快照均为各自原时点。
+
 当前终态：2026-10-10 16:28:29 UTC／北京时间10月11日00:28:29，本次E1按用户要求STOPPED；
 16:32:01 UTC核验父worker／原生API／PG退出、专属UID残留0、原HTTP Owner租约FREE。
 新unknown0／0、limits不变，实际效果与费用保留。H终态FAILED由KeyboardInterrupt触发，
@@ -107,10 +129,10 @@ E0重开证据使用成功闭合的同一DB／schema／银行与独立日志、�
 | 维护 | MiLAi 写入候选保持原 K10；QA20 显式传参，不改变维护池 |
 | 更新评价 | 参考查询仅在冻结的只读会话视图，K10；不支持隔离或真实会话输出则 N/A |
 | Reader | 既有 Qwen3.6-35B-A3B-FP8，temperature=1、output=32768、thinking=True、context=65536、margin=512；实际完整输入上限 32256 |
-| 交付 | 首轮直接读取，无二次 Selector；staged 为独立因素，保留真实范围和缺答 |
+| 交付 | 冻结12b首轮direct；新dda条件可容纳时一次Reader，超限才分页／原文重开；staged另列，不改池与原文 |
 | 来源 | 各后端按原生输出交付；原文与 retrieved_memory 分开。MiLAi 主臂采用实际语义状态及其已有支持，不增加独立原文搜索兜底 |
 | 持久/隔离 | 各后端/用户/重复独立 bank；会话 ID 稳定，Hindsight document_id 对应会话；问题/答案不写回 |
-| 失败/评分 | 逐题保存；已知只读缺答保留全部机会，unknown 不重试；三个后端预测结束后独立评分，原官方标签不改 |
+| 失败/评分 | 逐题保存；已知缺答保留全部机会，unknown不重试；新入口允许完整且资源闭合的所选臂显式评分，旧冻结全臂门槛保留历史含义；可比结果才能排名 |
 | 费用/资源 | 原连续账本、Root 串行 Qwen/BGE/Judge；外部内部用量缺失记未观测，不填零 |
 
 Hindsight本地原生配置：官方0.10.3，Qwen/BGE通过原VLLMClient与同一RunBudget转接；
@@ -129,7 +151,7 @@ RawRAG在既有开发用户的第一真实会话完成实际入库、关闭、�
 1实际返回，角色／日期／逐轮时间和完整正文保持。仅原生持久／查询路径确认、0模型；
 共同Reader／Judge未运行，不记为三后端E0闭环完成或QA语义通过。
 
-薄接口只需 ingest/retrieve/close。所有后端复用既有 ObservedSession 或结构等价的字段接口；retrieve 返回 materials（供 Reader 的原样文本/时间/实际 ID）、native_return（完整实际后端返回）、returned_count、source_mapping、usage。材料不经过额外抽取、摘要或 Selector；可选 session_output 仅来自实际会话原生输出。公共类型由 Root 管理。
+薄接口只需 ingest/retrieve/close。所有后端复用既有 ObservedSession 或结构等价的字段接口；retrieve返回materials（Reader证据视图）、native_return（完整实际后端存档）、returned_count、source_mapping、usage。H新视图仅分离已识别诊断字段；原文／限定／来源／顺序保持，不增加抽取或摘要Agent。共同Reader的显式分页按实际快照下标续读和重开，可选session_output仅来自实际会话原生输出。公共类型由Root管理。
 
 历史调度：07:05:31 UTC原五方法PID1854770运行、HTTP租约占用。用户随后明确要求
 “取消退出原实验”；11:15:01 UTC原运行STOPPED、两进程消失、原租约FREE、新增unknown0／0。

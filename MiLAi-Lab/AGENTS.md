@@ -1,4 +1,59 @@
-# Current handoff: resources released, experiment analysis and publication, 2026-10-11 Asia/Shanghai
+# Current handoff: offline P0/P1 material delivery integrated, real experiments still stopped, 2026-10-11 Asia/Shanghai
+
+Latest detailed human steering requests four small packages with existing subagents:
+native archive vs Reader view; actual external snapshot positions for shared pagination;
+independent explicit score of a completed arm; Host effects/capabilities/progress separation.
+It explicitly keeps actual experiments stopped and forbids automatic Judge dispatch without new running authorization.
+Root integrated source dda926f6c2a23871a34b3cd438e3f60c9d7255e6. Draft/open/unmerged PR121 stays stacked on120;
+merged main518aee4190f3abdd6f902baeb59454f49cd0b22b. No actual models/Judge/nativeAPI/PG/Host dispatched.
+
+H evidence view d8d9a062 (source f437a6bc) keeps the independent exact native_return archive;
+hindsight_evidence_v1 lists actual archive-only diagnostic JSON pointers. Known finite scores/trace/public statistics
+are archive-only; all evidence bodies/clocks/subject/context/source links/entity observations/unknown extensions stay.
+Actual saved3returns: 104results/64sourcefacts/76entities each;16/16/15chunks;185/185/184material entries.
+Old common JSON81044/81345/82344 -> new74905/75340/75562; stillover32256, not a solved direct-capacity claim.
+Same IDs/text sourcefacts have different entities/tags/metadata, no semantic dedup. Original hashes unchanged/noQA/gold/DB.
+
+Generic snapshot reader 7b92c56e (source87370d89), followed by Root dda926f6, uses explicit
+{snapshot_id,collection:materials,item_index} internally for all3backends, no fake record/revision/credentials.
+Validate caller materials using write_json's actual JSON representation; use saved array thereafter.
+Fit direct retains one original Reader call; overflow reuses existing plan_delivery/pages/original body final reopen.
+staged/state_driven use full-pool item_indices schema, not MiLAi record_ids. Read-only positions grant no mutations.
+First actual185-entry offline replay still failed before a page: full directory and repeated refs overfilled input.
+Root compact input shares retrieval_snapshot once, aligns memory_item_indices with memories, gives page-only candidates
+and numeric final_reopen/pending indices; internal full refs/original bodies/global enum/permissions unchanged.
+Initial selector with empty resident and overlimit navigation now enters the same existing pagination over actual full refs.
+Legacy caller without explicit snapshot_id retains prior direct/record behavior and failures.
+
+Root actual3savedH-return replay uses local original Qwen tokenizer/full template/fixed synthetic question/date,
+no original QA/gold. Compact direct whole76044/76479/76697 stillover32256, then4scripted bodypages each:
+all185/185/184 entries in order, final original entry0 reopened,5scripted calls each < max_calls12.
+Page peaks32255/32187/31967 <=32256; original hashes/snapshot bytes unchanged, HTTPconfirmedpages0,
+new realmodel/Judge/HTTP/DB0. Fixed scripted choice is NOT semantic sufficiency, genuine delivery or efficacy.
+Old repeated-directory failure receipts and new page-cost receipts stay ignored under existing baseline-alignment artifacts.
+
+Root score gate5acd45f5 allows explicit score only when selected arm PREDICTIONS_SAVED/resources_settledTrue;
+failed/notstarted peer arms no longer block its artifacts. Original global resource/lease safety, Judge/rules/null denominators
+and no predict replay remain. Cross-arm rankings require compatible scope/settings/results; actual Judge0 and human stop stands.
+Host c049bb7d (source39779b64) orders actualeffects/receipts, currenttools/actionlimits, requestprogress/outstanding work
+inside the same SystemMessage. Absent current save tool cannot deny prior commit; commit counts do not verify content/task.
+No post-LLM correction, forced writes, domain deletion rules, source mutations, new checker or memory module.
+Old total statement was actually delivered to Editor and multiple edits were allowed; old rev2 conflict is semantic choice,
+not proven missing delivery. Actual raw answer/public delivery/state remain separate; appended contradiction still failure.
+
+Root integrated96checks PASS8.69s + pureHprojection3 PASS1.25s + Hosteffect/catalog6 PASS3.62s;
+Ruff10files/strictmypy5sources/diffcheckPASS, temporary synthetic SQLite/fake model only, no originalDB access.
+Resource recheck17:33:34.102246UTC: cancelled parent1409356/worker1409430/API1461436/PG1462197 absent,
+nativeUID996active0/port8888listener0/originalOwnerleaseFREE; shared model servers not changed.
+Real frozen12b Raw32/73/0missing; H6/12=9answers+3unsentmissing81471/81775/82771; MNOT_STARTED/Judge0.
+Cancelled root/effects/costs/nulls unchanged; don't restart/patch/splice. Existing prepared Host739 lacks this new Host context,
+so don't relabel it as latest source or dispatch it. FullHost/sixSDKreopens/E2-E4/finalcandidate remain incomplete.
+Previous published582 ownFast38068354242SUCCESS/Full38068354248SKIPPED; next published head needs its OWN CI.
+Only Lab internal Reader input/runner behavior changed; Product/Archive/public Schema/API/permission/Canonical unchanged.
+Engineering rollback reference58292061. Five principles/one logical MemoryService/CANDIDATE/NO_GO remain.
+Current report/protocol/issues entries carry this new offline condition; older records below retain historical scope.
+
+# Previous handoff: resources released, experiment analysis and publication, 2026-10-11 Asia/Shanghai
 
 Latest user steering: “整理当前实验情况，提交到github上”; then “释放实验资源，分析实验情况和存在问题”.
 Root sent SIGINT to fresh E1 worker1409430 at2026-10-10T16:28:18.136541UTC.
