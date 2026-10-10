@@ -1,5 +1,19 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+Current E0 acceptance CLOSED at11:55:06UTC: main28bf2410 all3 arms/9answers, separate real restored
+queries source9a9b84b, same originalbanks/no retain/maintenance/Reader; Raw1originalexchange unchanged,
+H10actualnativefactIDs/document/time unchanged andactualUID996 closed, M5records/revisions/source refs
+and originalreport/capture/commit times confirmed. Persistence0gen/263emb/newunknown0/0/limits unchanged.
+Initial verification wrongly parsed literal original Source time asISO; FAILED receipt preserved;
+corrected readonly originalSource verification0HTTP/unchangedledger/queries replayed0, not model rerun.
+Main normal E0 cost13gen/80220known=charged/1046emb; +persistence totalemb1309, Judge0/notQA correctness.
+E1 actualDISPATCHED source9a9b84bd83fc002932ef559cc85509cd3befd485 onfresh prepared12banks,
+each32sessions/73QA/72updates,serial Raw/H/M; parent546823/worker546828, root
+e1-local-v1-native-dimension-v2-prepared/runtime sibling; originalcontinuousledger, no auto retry/score.
+Wait all3successful prediction closures before explicit uniformscore; unknown stops, no refund.
+Do not restart cancelled501 or failedfa E0; preserve all source/config/query/closure/error receipts.
+FullE1-E4/actualHost42 incomplete, goalACTIVE/ProductNO_GO; no new methodsuperiority claim.
+
 New E0 frozen28bf2410 closed all3 predictions at11:44:12.842289UTC: 3answers each/9total,
 allresources_settledTrue;13gen/80220 known=charged,1046emb,newunknown0/0,limits unchanged/Judge0.
 Native startup discovery and laterBGE actualHTTP200, dimensions absent. M5actualrecords revision1,

@@ -1,8 +1,21 @@
 # 统一记忆功能候选与当前执行状态
 
-## 2026-10-10：基线对齐 E0 预测闭合，重开验收待完成
+## 2026-10-10：E0 入库／查询／重开闭合，E1 三方预测已启动
 
-**最新 E0 实际预测闭合（11:44:12 UTC／北京时间19:44:12）**：冻结`28bf2410`，
+**最新 E0 接通核对（11:55:06 UTC／北京时间19:55:06）**：主预测冻结`28bf2410`，
+重开查询冻结`9a9b84b`，同一实际银行、独立日志、新检索请求，不再送Source／维护／Reader。
+RawRAG原会话、角色与时间保持；Hindsight重开同一实际PG实例／schema，10个原事实ID、
+来源document_id与时间字段保持，关闭后UID996残留0；M5条实际记录／revision／来源绑定保持，
+原报告时间、捕获时间与提交时间分别核对。这里只证明接通与持久，不证明事实生效时间推断或QA正确率。
+重开阶段0生成／263 embedding／新增unknown0／0；加主预测为13生成／80220 known＝charged／
+1309 embedding，Judge0。首个核查脚本误把原始日期字符串当ISO而失败，原失败回执保留；
+更正仅只读核对已保存的新检索及原Source，网络0、账本不变、查询重放0。
+
+**E1 已实际启动**：冻结`9a9b84bd83fc002932ef559cc85509cd3befd485`，父546823／worker546828，
+全新独立银行，每臂32会话／73 QA／72更新机会，RawRAG→Hindsight→MiLAi串行预测。
+仍用原连续账本；三臂预测及资源闭合后才另行统一评分。当前没有E1终态或方法排名，E2–E4及实际Host待完成。
+
+**此前 E0 实际预测闭合（11:44:12 UTC／北京时间19:44:12）**：冻结`28bf2410`，
 三后端各1会话／3答案，合计9答案；全部资源已确认关闭，Judge0，未宣称答案正确或方法排名。
 13生成请求、80220 known＝charged、embedding1046 tokens，新增unknown0／0、原limits不变。
 Hindsight实际启动维度发现及后续BGE均HTTP200，原请求不含dimensions；MiLAi实际形成5条revision1记录。
@@ -53,9 +66,9 @@ API／PG关闭、UID996残留0，失败根和HTTP保留；不称三方闭环或�
 
 | 首轮后端 | 已接通能力 | 实际结果边界 |
 |---|---|---|
-| RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 原生入库／重开／查询已确认；首次实际E0保存3共同Reader答案，未评分，不称QA正确或三方闭环 |
-| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 首次实际E0 retain因BGE维度参数HTTP400失败，QA0；已关闭资源并保留未知费用，公开配置修复待实测 |
-| MiLAi-memory-only | 薄门面复用原 Source、MemoryService、维护 recipe 和 Reader；首轮直接读取实际语义状态及已有支持 | 接线已完成，实际形成、更正和 QA 尚未在新配置运行；不经过普通 Host 业务分类，也未增加原文检索兜底 |
+| RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 正常E0实际入库／3答案／重开原文已闭合，未评分；E1正在运行 |
+| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 正常E0实际retain／3答案／同一DB重开查询及关闭已确认；此前400失败与未知费用保留 |
+| MiLAi-memory-only | 薄门面复用原 Source、MemoryService、维护 recipe 和 Reader；首轮直接读取实际语义状态及已有支持 | 正常E0实际5记录／3答案／重开Source与版本核对已闭合；本样例无更新，不代表更正已验证；无原文检索兜底 |
 
 首轮按 source-only 在线前缀准备：四个既有开发用户各前八会话，**每臂32会话、73 QA、72原生更新机会**，
 三臂共219个主 QA 输出机会。各后端／用户独立空库；每会话实际写入完成后仅答该会话问题，
