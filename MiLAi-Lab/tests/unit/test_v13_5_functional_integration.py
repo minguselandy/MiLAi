@@ -23,6 +23,7 @@ from transformers import PreTrainedTokenizerFast
 from milai_lab.application.tools import BUSINESS_SCHEMAS
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+from milai_lab.memory.reader_projection import expand_host_packet
 from milai_lab.providers.contextual_vllm import VLLMConfig
 from milai_lab.providers.functional_queue import FunctionalVLLMClient
 from milai_lab.runners import functional
@@ -71,6 +72,7 @@ def prepared(
     complete_requests: bool = False,
     scope_requests: bool = False,
     json_scope_requests: bool = False,
+    request_failure_policy: str | None = None,
     declaration_thinking: str | None = None,
     declaration_tool_choice: str | None = None,
     declaration_sampling: str | None = None,
@@ -110,6 +112,8 @@ def prepared(
            if stage_enable_thinking is not None else {}),
         "memory_profile": memory_profile,
         "memory_view_mode": memory_view_mode,
+        **({"request_failure_policy": request_failure_policy}
+           if request_failure_policy is not None else {}),
         "result_maintenance_mode": result_maintenance_mode,
         "source_selection": "inline_receipt_units_v2" if receipt_units else
         "inline_fragments_v1" if inline_fragments else "index_v1",
@@ -215,9 +219,11 @@ def scripted(
         payload = action if native else {"role": "assistant", "content": json.dumps(action)}
         finish = payload.pop("_test_finish_reason",
                              "tool_calls" if payload.get("tool_calls") else "stop")
+        usage = payload.pop("_test_usage",
+                            {"prompt_tokens": 7, "completion_tokens": 5, "total_tokens": 12})
         return httpx.Response(200, json={"id": "mechanical-response-" + str(len(wires)),
             "choices": [{"finish_reason": finish, "message": payload}],
-            "usage": {"prompt_tokens": 7, "completion_tokens": 5, "total_tokens": 12}})
+            "usage": usage})
 
     class ScriptedClient(FunctionalVLLMClient):
         def __init__(self, *args: Any, **kwargs: Any) -> None:
@@ -5545,6 +5551,269 @@ def test_shared_maintenance_obeys_readonly_request_mode(tmp_path, monkeypatch, m
     assert result["records"] == [] and result["maintenance"] == [] and len(wires) == 2
 
 
+@pytest.mark.parametrize("policy,memory_allowed", [
+    ("independent_memory", True), ("independent_memory", False), ("fail_fast", True),
+])
+@pytest.mark.parametrize("outcome", ["schema", "length", "unknown_schema", "unknown_length"])
+def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, policy: str, memory_allowed: bool,
+    outcome: str,
+) -> None:
+    root = prepared(tmp_path, native=True, scope_requests=True,
+                    request_failure_policy=policy, direct_response=True, phase_thinking=True,
+                    memory_method="milai_edit_m_v1", edit_interface_version="I2",
+                    edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")},
+                    maintenance_recipe="single_pass", memory_view_mode="staged",
+                    memory_profile="unified_v1")
+    stages = []
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {tool["function"]["name"] for tool in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            stages.append("scope")
+            return native_call("classify_current_request", "scope",
+                memory_requests=["explicit"] if memory_allowed else [], allow_forgetting=False,
+                business_action_request="perform", application_continuation_request="none")
+        if names == {"resolve_continuation_operations"}:
+            stages.append("invalid-business-plan")
+            # Confirmed response uses the continuation schema, not CURRENT's
+            # application_requests schema. It grants no operation permission.
+            response = native_call("resolve_continuation_operations", "bad-plan",
+                                   business_operations=[])
+            if outcome.endswith("length"):
+                response["_test_finish_reason"] = "length"
+            if outcome.startswith("unknown"):
+                response["_test_usage"] = None
+            return response
+        if not names:
+            stages.append("save")
+            assert policy == "independent_memory" and memory_allowed
+            delivery = json.loads(wire["messages"][-1]["content"])["delivery"]
+            evidence = delivery["evidence"][0]["id"]
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "Marker preference", "clauses": [{
+                    "text": "User uses a blue marker.", "evidence": [evidence],
+                    "conditions": [], "assertion": {"source": evidence, "kind": "reported"},
+                }],
+            }], "records": {}})}
+        stages.append("answer")
+        assert not {"reserve_and_label", "complete_label", "cancel_reservation"}.intersection(
+            names)
+        mode_line = wire["messages"][0]["content"]
+        assert "failed_no_business_permission" in mode_line
+        return {"role": "assistant", "content": (
+            "Your marker preference was saved; the business plan remains incomplete.")}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank="independent", owner="alice", session="s", message_id="save",
+                content="Remember that I use a blue marker; also handle the business request.")
+    result = functional.message(root, **args)
+    assert result["world"]["world"]["attempts"] == []
+    if policy == "independent_memory" and memory_allowed and not outcome.startswith("unknown"):
+        assert result["status"] == "COMPLETED", result.get("error")
+        assert len(result["records"]) == 1
+        assert result["operation_status"]["semantic_memory"]["status"] == "committed"
+        assert result["operation_status"]["request_completion"] == "incomplete"
+        assert result["operation_status"]["request_part_failures"][0]["effect"] == "none"
+        assert result["request_mode"]["business_operations"] == []
+        assert result["request_mode"]["allow_business_mutation"] is False
+        assert result["finalization"]["request_failures_appended"] is True
+        assert result["finalization"]["memory_receipts_appended"] is True
+        assert "业务请求解析未完成" in result["final_answer"]
+        assert "已确认 1 项提交" in result["final_answer"]
+        assert result["execution_candidate_answer"] == (
+            "Your marker preference was saved; the business plan remains incomplete.")
+        assert stages == ["scope", "invalid-business-plan", "save", "answer"]
+        calls = len(wires)
+        again = functional.message(root, **args, resume=True)
+        assert again["records"] == result["records"] and len(wires) == calls
+    else:
+        assert result["status"] == "FAILED"
+        assert result["error"] == ("VLLM_CHAT_TRUNCATED" if outcome.endswith("length")
+                                    else "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID")
+        assert result["records"] == []
+        assert stages == ["scope", "invalid-business-plan"]
+        assert result["budget_after"]["generation"]["unknown_usage"] == int(
+            outcome.startswith("unknown"))
+
+
+def test_no_issued_prior_choices_preserves_current_save_and_reports_its_real_receipt(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, scope_requests=True,
+                    request_failure_policy="independent_memory", direct_response=True,
+                    phase_thinking=True, memory_method="milai_edit_m_v1",
+                    edit_interface_version="I2", maintenance_recipe="single_pass",
+                    memory_view_mode="staged", memory_profile="unified_v1",
+                    edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")})
+    stages = []
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {tool["function"]["name"] for tool in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            stages.append("scope")
+            return native_call("classify_current_request", "scope",
+                memory_requests=["explicit"], allow_forgetting=False,
+                business_action_request="none",
+                application_continuation_request="resolve_prior_request")
+        assert names != {"resolve_continuation_operations"}, "No request ID was issued to select"
+        if not names:
+            stages.append("save")
+            delivery = json.loads(wire["messages"][-1]["content"])["delivery"]
+            evidence = delivery["evidence"][0]["id"]
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "Calendar marker preference", "clauses": [{
+                    "text": "User uses a green marker.", "evidence": [evidence],
+                    "conditions": [], "assertion": {"source": evidence, "kind": "reported"},
+                }],
+            }], "records": {}})}
+        stages.append("answer")
+        assert not {"reserve_and_label", "complete_label", "cancel_reservation"}.intersection(names)
+        return {"role": "assistant", "content": "Prepared to save the preference."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank="no-prior-choices", owner="alice", session="s", message_id="save",
+                content="Remember that my calendar marker is green.")
+    result = functional.message(root, **args)
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert len(result["records"]) == 1 and result["world"]["world"]["attempts"] == []
+    assert stages == ["scope", "save", "answer"]
+    assert result["request_mode"]["reference_resolution"]["attempts"] == 0
+    assert result["request_mode"]["prior_request_ids"] == []
+    assert result["execution_candidate_answer"] == "Prepared to save the preference."
+    assert "本轮语义记忆: 已提交" in result["final_answer"]
+    assert "已确认 1 项提交" in result["final_answer"]
+    calls = len(wires)
+    again = functional.message(root, **args, resume=True)
+    assert again["records"] == result["records"] and len(wires) == calls
+
+
+def test_shared_maintenance_keeps_early_commit_when_later_source_read_fails(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    import sqlite3
+
+    from milai_lab.methods.functional_edit_memory import FunctionalEditMemory
+
+    root = prepared(tmp_path, native=True, request_interpretation=True,
+                    memory_method="milai_edit_m_v1", edit_interface_version="I2",
+                    maintenance_recipe="single_pass", edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")})
+    fault: dict[str, Any] = {"active": False, "source_ref": None, "reads": 0}
+    committed: list[dict[str, Any]] = []
+    original_sources = FunctionalEditMemory.maintain_sources
+    original_delivery = FunctionalEditMemory.maintain_delivery
+    original_get = SqliteStore.get
+
+    def maintain_sources(self: FunctionalEditMemory, *args: Any, **kwargs: Any) -> Any:
+        fault["active"] = True
+        try:
+            return original_sources(self, *args, **kwargs)
+        finally:
+            fault["active"] = False
+
+    def maintain_delivery(self: FunctionalEditMemory, *args: Any, **kwargs: Any) -> Any:
+        result = original_delivery(self, *args, **kwargs)
+        receipts = [receipt for receipt in result["receipts"]
+                    if receipt.get("status") == "committed"]
+        if receipts and not committed:
+            # Arm only after the real Writer returned its actual committed receipt.
+            tool_sources = [source for source in self.service.sources()
+                            if source["role"] == "tool"]
+            assert len(tool_sources) == 2
+            other = [source for source in tool_sources
+                     if source["event_id"] not in result["source_refs"]]
+            assert len(other) == 1 and len(receipts) == 1
+            committed.extend(receipts)
+            fault["source_ref"] = other[0]["event_id"]
+        return result
+
+    def get(store: SqliteStore, namespace: tuple[str, ...], key: str, **kwargs: Any) -> Any:
+        if (fault["active"] and namespace[-1] == "v13_1_sources"
+                and key == fault["source_ref"]):
+            fault["reads"] += 1
+            raise sqlite3.OperationalError("INJECTED_LATER_SOURCE_READ_ERROR")
+        return original_get(store, namespace, key, **kwargs)
+
+    monkeypatch.setattr(FunctionalEditMemory, "maintain_sources", maintain_sources)
+    monkeypatch.setattr(FunctionalEditMemory, "maintain_delivery", maintain_delivery)
+    monkeypatch.setattr(SqliteStore, "get", get)
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return intent_reply(memory=True, business=False)
+        if not wire.get("tools"):
+            delivery = json.loads(wire["messages"][-1]["content"])["delivery"]
+            assert len(delivery["source_table"]) == 1
+            source = delivery["source_table"][0]
+            if source["role"] == "user":
+                assert ordinal == 2
+                return {"role": "assistant", "content": json.dumps({
+                    "creates": [], "records": {}})}
+            assert ordinal == 4 and source["role"] == "tool"
+            observation = json.loads(delivery["evidence"][0]["text"])
+            assert observation["status"] == "not_found"
+            evidence = delivery["evidence"][0]["id"]
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "Observed reservation lookup", "clauses": [{
+                    "text": f"Lookup found no reservation for {observation['item_key']}.",
+                    "conditions": [], "evidence": [evidence],
+                    "assertion": {"source": evidence, "kind": "observed"},
+                }],
+            }], "records": {}})}
+        assert ordinal == 3
+        names = {tool["function"]["name"] for tool in wire["tools"]}
+        assert not names & functional.BUSINESS_MUTATIONS
+        first = native_call("get_reservation", "lookup-first", item_key="first probe")
+        second = native_call("get_reservation", "lookup-second", item_key="second probe")
+        return {**first, "tool_calls": first["tool_calls"] + second["tool_calls"]}
+
+    wires = scripted(monkeypatch, reply, native=True)  # Also forbids real socket connections.
+    args = dict(bank="failed-maintenance", owner="alice", session="session", message_id="lookup",
+                content="Look up first probe and second probe and save the observed results. "
+                        "Do not change reservations.")
+    result = functional.message(root, **args)
+    assert result["status"] == "FAILED" and result["error"] == "INJECTED_LATER_SOURCE_READ_ERROR"
+    assert result["error_type"] == "OperationalError" and fault["reads"] == 2
+    assert result["maintenance_snapshot_error"] == (
+        "OperationalError:INJECTED_LATER_SOURCE_READ_ERROR")
+    assert len(committed) == 1 and len(wires) == 4
+    receipt = committed[0]
+    kept = [actual for batch in result["maintenance"] for actual in batch["receipts"]
+            if actual.get("id") == receipt["id"]]
+    assert kept == [receipt]
+    operations = result["operation_status"]["semantic_memory"]["operations"]
+    assert [operation["revision"] for operation in operations
+            if operation.get("id") == receipt["id"] and operation["status"] == "committed"] == [1]
+    assert result["operation_status"]["business"]["status"] == "not_executed"
+    assert len(result["operation_status"]["business"]["observations"]) == 2
+    assert result["world"]["world"]["attempts"] == []
+    assert result["world"]["world"]["reservations"] == []
+
+    database = next(root.glob("banks/*/memory.sqlite"))
+    with sqlite3.connect(f"file:{database.resolve()}?mode=ro", uri=True) as connection:
+        row = connection.execute("SELECT value FROM store WHERE key=?", (receipt["id"],)).fetchone()
+    value = json.loads(row[0])
+    assert value["_v13_1"]["revision"] == 1 and len(value["_v13_1"]["history"]) == 1
+    assert len(result["records"]) == 1 and result["records"][0]["id"] == receipt["id"]
+    trace_path = next(root.glob("banks/*/*-trace-0.jsonl"))
+    events = [json.loads(line) for line in trace_path.read_text().splitlines()]
+    failure_at = next(index for index, event in enumerate(events)
+                      if event.get("event") == "functional_failure")
+    assert any(actual.get("id") == receipt["id"] and actual.get("revision") == 1
+               for event in events[:failure_at]
+               if event.get("event") == "functional_maintenance_result"
+               for batch in event["batches"] for actual in batch["receipts"])
+    # Reading the terminal result cannot retry HTTP, semantic writes, or business work.
+    assert functional.message(root, **args) == result and len(wires) == 4
+    assert fault["reads"] == 2 and len(committed) == 1
+
+
 @pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
 @pytest.mark.parametrize("no_save", [False, True])
 def test_shared_host_delivers_selected_prior_request_beyond_recent_context(
@@ -6123,3 +6392,270 @@ def test_host_save_continuation_registers_actual_tool_batch_after_unconfirmed_sa
         result["memory"]["attempts"])
     assert readonly["records"] == saved["records"] and readonly["world"]["world"] == original_world
     assert len(wires) - count == 4  # declaration, reference, query and response; no Writer
+
+
+def test_host_correction_and_exact_history_use_delivered_request_targets(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True, explicit_reads=True,
+        memory_profile="unified_v1", memory_view_mode="state_driven",
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata")})
+    texts = {"save": "Use quiet reminders only on weekdays.",
+             "correct": "Use written reminders only on weekdays.",
+             "history": "What reminders were actually saved before the correction?"}
+    seen: dict[str, Any] = {"phase": "save", "mutated": set(), "opened": set(),
+                            "historical": False}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        phase = seen["phase"]
+        names = {item["function"]["name"] for item in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            return intent_reply(memory=phase in {"save", "correct"})
+        material = materials(wire)
+        if phase != "save" and phase not in seen["opened"]:
+            candidate = next(item for item in material["candidates"]
+                             if item.get("record_id") == seen["record_id"])
+            seen["opened"].add(phase)
+            return native_call("read_memory", "open-" + phase, target=candidate["target"],
+                read_goal={"purpose": texts[phase], "evidence": ["current_interpretation"]
+                           + (["saved_history"] if phase == "history" else [])})
+        if phase in {"save", "correct"}:
+            if phase not in seen["mutated"]:
+                packet = material["writer_packet"]
+                evidence = next(item["id"] for item in packet["evidence"]
+                                if item["text"] == texts[phase])
+                assertion = {"source_evidence": evidence, "kind": "reported"}
+                seen["mutated"].add(phase)
+                if phase == "save":
+                    return native_call("save_memory", "save-reminders", proposal={
+                        "action": "create", "matter": "Reminder delivery", "clauses": [{
+                            "text": texts[phase], "evidence": [evidence], "conditions": [],
+                            "assertion": assertion}]})
+                assert len(packet["records"]) == 1
+                return native_call("update_memory", "correct-reminders", proposal={
+                    "action": "edit", "target": "r1", "edits": [{
+                        "operation": "replace", "target_unit": "u1",
+                        "text": texts[phase], "evidence": [evidence], "assertion": assertion}]})
+            assert actual_tool_receipt(wire)["status"] == "committed"
+            return {"role": "assistant", "content": "Saved the reported wording."}
+        items = expand_host_packet(material)["items"]
+        if not seen["historical"]:
+            current = next(item for item in items if item.get("record_id") == seen["record_id"])
+            target = next(row["target"] for row in current["stored_history"]["revision_targets"]
+                          if row["revision"] == 1)
+            assert "saved_history" in material["reading_requirement"]["pending_evidence"]
+            seen["historical"] = True
+            return native_call("read_memory_revision", "read-before-correction", target=target)
+        assert {(item["revision"], item["version_view"], item["content"]) for item in items
+                if item["type"] == "record"} == {
+            (1, "historical_exact_revision", texts["save"]),
+            (2, "current_at_snapshot", texts["correct"])}
+        assert material["reading_requirement"]["pending_evidence"] == []
+        assert material["reading_requirement"]["answer_sufficiency"] == "unchecked"
+        return {"role": "assistant", "content": texts["save"]}
+
+    scripted(monkeypatch, reply, native=True)
+    results = []
+    for phase, text in texts.items():
+        seen["phase"] = phase
+        result = functional.message(root, bank="revision-target-bank", owner="alice",
+                                    session=phase, message_id=phase, content=text)
+        assert result["status"] == "COMPLETED", (phase, result.get("error"))
+        seen["record_id"] = result["records"][0]["id"]
+        results.append(result)
+    saved, corrected, historical = results
+    assert saved["records"][0]["value"]["revision"] == 1
+    assert corrected["records"][0]["value"]["revision"] == 2
+    assert historical["records"] == corrected["records"]
+    assert historical["world"]["world"] == saved["world"]["world"]
+
+
+def test_delivered_object_target_connects_business_save_only_and_fresh_query(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True,
+        memory_profile="unified_v1", memory_view_mode="state_driven", explicit_reads=True,
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata")})
+    texts = {
+        "business": "Reserve and label the amber pack; do not save memory yet.",
+        "save": "Only save the actual amber pack result; do not repeat its business operation.",
+        "query": "Obtain a fresh observation of the actual amber pack; do not mutate or save.",
+    }
+    seen: dict[str, Any] = {"phase": "business", "reads": set(), "saved": False}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        phase = seen["phase"]
+        names = {entry["function"]["name"] for entry in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            return intent_reply(memory=phase == "save", business=phase == "business")
+        material = materials(wire)
+        if phase == "business":
+            if "source_ref" not in seen:
+                return native_call("reserve_and_label", "reserve-actual", item_key="amber pack",
+                    quantity=1, destination="local", packing="box")
+            raise AssertionError("BUSINESS_OPERATION_MUST_NOT_REPEAT")
+        if phase not in seen["reads"]:
+            candidates = [item for item in material["candidates"]
+                          if item.get("source_ref") == seen["source_ref"]]
+            assert candidates, {"phase": phase, "candidates": material["candidates"]}
+            candidate = candidates[0]
+            seen["reads"].add(phase)
+            return native_call("read_source", "read-" + phase, target=candidate["target"],
+                read_goal={"purpose": texts[phase], "evidence": ["original_source"]
+                           + (["live_business"] if phase == "query" else [])})
+        if phase == "save":
+            if not seen["saved"]:
+                assert actual_tool_receipt(wire)["ok"], actual_tool_receipt(wire)
+                packet = material["writer_packet"]
+                tool_sources = {source["id"] for source in packet["source_table"]
+                                if source["role"] == "tool"}
+                matches = [item["id"] for item in packet["evidence"]
+                    if item["source"] in tool_sources
+                    and '"label_status":"created"' in item["text"].replace(" ", "")]
+                assert matches, packet
+                evidence = matches[0]
+                seen["saved"] = True
+                return native_call("save_memory", "save-actual", proposal={
+                    "action": "create", "matter": "Amber pack outcome", "clauses": [{
+                        "text": "The amber pack was reserved and its label created.",
+                        "conditions": [], "evidence": [evidence],
+                        "assertion": {"source_evidence": evidence, "kind": "observed"}}]})
+            assert actual_tool_receipt(wire)["status"] == "committed"
+            assert material["request_targets"]
+            return {"role": "assistant", "content": "Saved the observed outcome."}
+        requirement = material["reading_requirement"]
+        if not requirement["fresh_observations"]:
+            assert "live_business" in requirement["pending_evidence"]
+            target = next(item for item in material["business_observation_targets"]
+                          if item["object_id"] == seen["reservation_id"])["target"]
+            query_schema = next(item["function"]["parameters"] for item in wire["tools"]
+                                if item["function"]["name"] == "get_reservation")
+            assert set(query_schema["properties"]) == {"target", "item_key"}
+            assert len(query_schema["oneOf"]) == 2
+            assert target in query_schema["properties"]["target"]["enum"]
+            return native_call("get_reservation", "fresh-query", target=target)
+        receipt = actual_tool_receipt(wire)
+        assert receipt["receipt"]["status"] == "found"
+        assert receipt["receipt"]["label_status"] == "created"
+        assert requirement["pending_evidence"] == []
+        assert requirement["answer_sufficiency"] == "unchecked"
+        assert all(row["turn_id"] == "query" for row in requirement["fresh_observations"])
+        return {"role": "assistant", "content": "The fresh query observed label status created."}
+
+    def with_business_result(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if seen["phase"] == "business" and any(row["role"] == "tool"
+                                                for row in wire["messages"]):
+            result = actual_tool_receipt(wire)
+            seen["source_ref"] = result["source_ref"]
+            seen["reservation_id"] = result["receipt"]["reservation_id"]
+            assert result["receipt"]["label_status"] == "created"
+            assert materials(wire)["business_observation_targets"]
+            return {"role": "assistant", "content": "Reserved and labeled; memory is unsaved."}
+        return reply(wire, ordinal)
+
+    wires = scripted(monkeypatch, with_business_result, native=True)
+    results = []
+    for phase, text in texts.items():
+        seen["phase"] = phase
+        result = functional.message(root, bank="object-bank", owner="alice", session=phase,
+                                    message_id=phase, content=text)
+        assert result["status"] == "COMPLETED", (phase, result.get("error"))
+        results.append(result)
+    business, saved, queried = results
+    assert business["records"] == [] and len(saved["records"]) == 1
+    assert queried["records"] == saved["records"]
+    assert business["world"]["world"] == saved["world"]["world"] == queried["world"]["world"]
+    journal = queried["world"]["journal"].values()
+    assert sum(row["name"] == "reserve_and_label" and row["executed"] for row in journal) == 1
+    assert sum(row["name"] == "get_reservation" and row["executed"] for row in journal) == 1
+    calls = len(wires)
+    again = functional.message(root, bank="object-bank", owner="alice", session="query",
+                               message_id="query", content=texts["query"], resume=True)
+    assert len(wires) == calls and again["usage"] == []
+    for key in ("status", "records", "world", "final_answer", "messages", "operation_status"):
+        assert again[key] == queried[key]
+
+
+def test_host_forget_uses_delivered_target_and_reopen_keeps_original_body_hidden(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, request_interpretation=True, explicit_reads=True,
+        memory_profile="unified_v1", memory_view_mode="state_driven",
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata")})
+    seen: dict[str, Any] = {"phase": "save", "opened": False, "forgotten": False}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        phase = seen["phase"]
+        names = {item["function"]["name"] for item in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            return intent_reply(memory=phase == "save", forgetting=phase == "forget")
+        packet = materials(wire)
+        if phase == "save":
+            if "saved" not in seen:
+                evidence = packet["writer_packet"]["evidence"][0]["id"]
+                seen["saved"] = True
+                return native_call("save_memory", "save-preference", proposal={
+                    "action": "create", "matter": "Synthetic marker preference", "clauses": [{
+                        "text": "User reports MECHANICAL_TARGET_FORGET as their marker.",
+                        "evidence": [evidence], "conditions": [],
+                        "assertion": {"source_evidence": evidence, "kind": "reported"}}]})
+            assert actual_tool_receipt(wire)["status"] == "committed"
+            return {"role": "assistant", "content": "Saved the reported preference."}
+        if phase == "forget" and not seen["opened"]:
+            candidate = next(item for item in packet["candidates"]
+                             if item["type"] == "record_candidate")
+            assert candidate["target_kind"] == "read_only_navigation"
+            seen["opened"] = True
+            return native_call("read_memory", "open-preference", target=candidate["target"])
+        if phase == "forget" and not seen["forgotten"]:
+            record = next(item for item in expand_host_packet(packet)["items"]
+                          if item["type"] == "record")
+            schema = next(item["function"]["parameters"] for item in wire["tools"]
+                          if item["function"]["name"] == "forget_memory")
+            assert set(schema["properties"]) == {"targets", "scope"}
+            assert record["target_kind"] == "delivered_record"
+            seen["forgotten"] = True
+            return native_call("forget_memory", "forget-preference", targets=[record["target"]],
+                               scope="record_and_sources")
+        if phase == "forget":
+            receipt = actual_tool_receipt(wire)
+            assert receipt["status"] == "visibility_revoked"
+            assert receipt["effect"] == "visibility_only"
+        assert "MECHANICAL_TARGET_FORGET" not in json.dumps(wire)
+        assert not any(item.get("record_id") == seen["record_id"]
+                       for item in packet.get("candidates", []))
+        return {"role": "assistant", "content": "Visibility is revoked; audit bytes are retained."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank="forget-target-bank", owner="alice")
+    saved = functional.message(root, **common, session="save", message_id="save",
+        content="Remember my marker is MECHANICAL_TARGET_FORGET.")
+    assert saved["status"] == "COMPLETED", saved.get("error")
+    seen["record_id"] = saved["records"][0]["id"]
+    seen["phase"] = "forget"
+    args = dict(session="forget", message_id="forget",
+                content="Forget the earlier marker preference.")
+    forgotten = functional.message(root, **common, **args)
+    assert forgotten["status"] == "COMPLETED", forgotten.get("error")
+    assert all(row["status"] == "visibility_revoked" and "value" not in row
+               for row in forgotten["records"])
+    count = len(wires)
+    replay = functional.message(root, **common, **args, resume=True)
+    assert replay["status"] == "VISIBILITY_REVOKED" and replay["final_answer"] is None
+    assert replay["messages"] == [] and replay["historical_artifact_retained"]
+    assert "MECHANICAL_TARGET_FORGET" not in json.dumps(replay)
+    assert len(wires) == count
+    seen["phase"] = "inspect"
+    reopened = functional.message(root, **common, session="inspect", message_id="inspect",
+                                 content="What marker preference is still available?")
+    assert reopened["status"] == "COMPLETED", reopened.get("error")
+    assert all(row["status"] == "visibility_revoked" for row in reopened["records"])

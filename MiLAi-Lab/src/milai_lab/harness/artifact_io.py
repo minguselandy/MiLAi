@@ -36,6 +36,16 @@ def read_json(path: Path) -> Any:
     return json.loads(path.read_text())
 
 
+def entrypoint_settings(settings: dict[str, Any], name: str) -> dict[str, Any]:
+    """Select an existing entry's settings from one declared candidate file."""
+    if "entrypoints" not in settings:
+        return settings
+    selected = settings["entrypoints"][name]
+    if not isinstance(selected, dict):
+        raise ValueError("ENTRYPOINT_SETTINGS_INVALID")
+    return dict(selected)
+
+
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".tmp")

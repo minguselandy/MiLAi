@@ -29,6 +29,7 @@ MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/observation.py",
     "src/milai_lab/memory/presentation.py",
     "src/milai_lab/memory/read_tools.py",
+    "src/milai_lab/memory/reader_projection.py",
     "src/milai_lab/memory/retrieval.py",
     "src/milai_lab/memory/service.py",
     "src/milai_lab/memory/service_tools.py",

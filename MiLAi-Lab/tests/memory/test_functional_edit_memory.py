@@ -27,6 +27,7 @@ from milai_lab.memory.functional_state import (
     namespace,
     reference_key,
 )
+from milai_lab.memory.reader_projection import expand_host_packet
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.functional_edit_memory import (
@@ -2756,7 +2757,7 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
         assert "Cosine-winning stored unit excerpt" in candidate["description"]
         assert candidate["description"].endswith(general["text"])
         assert all(item["type"] != "record" for item in directory["items"])
-        read = json.loads(invoke(memory, "read_memory", {"record_id": saved["id"]},
+        read = json.loads(invoke(memory, "read_memory", {"target": candidate["target"]},
                                  "open-complete", "navigation").content)
         assert read["ok"] and {unit["content"] for unit in read["items"]} == {
             unit["text"] for unit in before["edit_state"]["units"]
@@ -2775,7 +2776,7 @@ def test_shared_reader_expands_actual_exception_and_history_without_inheriting_s
         assert "Cosine-winning whole-record search key excerpt" in candidate["description"]
         assert candidate["description"].endswith(whole[:240] + ("…" if len(whole) > 240 else ""))
         assert all(item["type"] != "record" for item in directory["items"])
-        read = json.loads(invoke(memory, "read_memory", {"record_id": saved["id"]},
+        read = json.loads(invoke(memory, "read_memory", {"target": candidate["target"]},
                                  "open-whole", "whole-navigation").content)
         assert read["ok"] and {unit["content"] for unit in read["items"]} == {
             unit["text"] for unit in before["edit_state"]["units"]
@@ -2997,9 +2998,12 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         directory = memory.context("s", "u", "functional-m-test-v1")
         assert directory["candidates"]
         assert all(item["type"] == "fragment" for item in directory["items"])
-        a_args = {"record_id": saved[0], "read_goal": "original_source"}
+        a_target = next(item["target"] for item in directory["candidates"]
+                        if item.get("record_id") == saved[0])
+        a_args = {"target": a_target, "read_goal": "original_source"}
         a = invoke(memory, "read_memory", a_args, "open-a")
-        a_page = json.loads(a.content)
+        # Compare actual metadata values after resolving the shared wire table.
+        a_page = expand_host_packet(json.loads(a.content))
         a_row = memory.service.read(saved[0])["value"]
         assert a_page["delivery_status"] == "complete_snapshot" and not a_page["skipped_units"]
         assert [item["content"] for item in a_page["items"]] == [
@@ -3016,7 +3020,9 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         assert revision_evidence[0]["role"] == "user"
         assert memory.view_state(cfg())["read_goal"] == "original_source"
         first_refs = memory.view_state(cfg())["resident_refs"]
-        b = invoke(memory, "read_memory", {"record_id": saved[1]}, "open-b")
+        b_args = {"target": next(item["target"] for item in directory["candidates"]
+                                if item.get("record_id") == saved[1])}
+        b = invoke(memory, "read_memory", b_args, "open-b")
         material = memory.model_material(cfg())
         assert material["memory_view"]["read_goal"] == "original_source"
         assert {item["record_id"] for item in material["items"] if item["type"] == "record"} == {
@@ -3029,7 +3035,12 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
                           resident_refs=first_refs)
         original_ref = memory.service.read(saved[0])["value"]["source_ref"]
         original_read = revision_evidence[0]["read"]
-        assert original_read == {"tool": "read_source", "arguments": {"source_ref": original_ref}}
+        assert original_read["tool"] == "read_source"
+        original_target = memory.resolve_request_target(cfg(), original_read["arguments"]["target"])
+        assert original_target["kind"] == "read_only_navigation"
+        assert original_target["credentials"] == {}
+        assert original_target["identity"]["read"] == {
+            "tool": "read_source", "arguments": {"source_ref": original_ref}}
         original = json.loads(invoke(memory, original_read["tool"], original_read["arguments"],
                                      "original-words").content)
         assert original["ok"] and all(item["source_ref"] == original_ref
@@ -3037,8 +3048,10 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         assert memory.view_state(cfg())["read_goal"] == "original_source"
         writer = memory.model_material(cfg(), for_write=True)["writer_packet"]
         assert len(writer["records"]) == 1 and "weekday" in canonical(writer)
-        history = json.loads(invoke(memory, "read_memory", {
-            "record_id": saved[0], "revision": 1, "keep_resident": True,
+        revision_target = next(item["target"] for item in
+            a_page["items"][0]["stored_history"]["revision_targets"] if item["revision"] == 1)
+        history = json.loads(invoke(memory, "read_memory_revision", {
+            "target": revision_target, "keep_resident": True,
         }, "saved-history").content)
         assert history["ok"]
         assert memory.view_state(cfg())["read_goal"] == "original_source"
@@ -3062,7 +3075,7 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         assert memory.model_material(cfg())["memory_view"]["read_goal"] == "original_source"
         calls = [{"name": "read_memory", "args": args,
                   "id": call_id, "type": "tool_call"}
-                 for args, call_id in zip((a_args, {"record_id": saved[1]}),
+                 for args, call_id in zip((a_args, b_args),
                                          ("open-a", "open-b"), strict=True)]
         business_receipt = ToolMessage(name="get_reservation", tool_call_id="business",
                                        content='{"business_outcome":"confirmed"}')
@@ -3088,7 +3101,9 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         ).value["items"]
         assert {item["record_id"] for item in archive if item["type"] == "record"} == set(saved)
         mixed = json.loads(invoke(memory, "read_memory", {
-            "record_id": saved[0], "keep_resident": True,
+            "target": next(item["target"] for item in expand_host_packet(material)["items"]
+                           if item.get("record_id") == saved[0] and item.get("revision") == 2),
+            "keep_resident": True,
             "read_goal": "current_and_saved_history",
         }, "current-and-history").content)
         assert mixed["ok"]

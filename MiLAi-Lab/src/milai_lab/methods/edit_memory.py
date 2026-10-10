@@ -47,6 +47,15 @@ METHOD_VERSION = "milai_edit_v1"
 V2_METHOD_VERSION = "milai_edit_v2"
 InterfaceVersion = Literal["v1", "I1", "I2"]
 
+REVISION_MEANING_INSTRUCTIONS = (
+    "Use the whole delivered matter to check linked conditions, exceptions and old overview "
+    "statements, including those without explicit edges. A local revision covers all supported "
+    "changes in their meaning; preserve unaffected scopes within mixed claims rather than "
+    "keeping obsolete wording. Changed wording needs current correction evidence and any "
+    "necessary redelivered old Source bodies, never h alone. Combine dependent changes in "
+    "that target's single proposal. "
+)
+
 
 class EditMemory:
     """Ordinary full rewrite, plain local edit, and a controlled representation pair."""
@@ -301,7 +310,10 @@ class EditMemory:
                 "shared calendar_context permits nominal ordering of timezone-unknown values; "
                 "it does not supply a physical timezone. Do not generate calendar_context. "
                 "Report/capture/version clocks are service metadata, "
-                "never inferred onset. Explicit retrospective reports may explain the past; "
+                "never inferred onset. Preserve relative time wording unless the Source supplies "
+                "anchored applicability boundaries; omit unknown effective_from/effective_until "
+                "instead of copying observed_date or observed_at. "
+                "Explicit retrospective reports may explain the past; "
                 "unspecified dates stay unknown and a plan's date does not prove completion. "
                 "Keep independently changeable limits/scopes as separate conditions with "
                 "their own support; exact kept units retain prior applicability. "
@@ -1151,7 +1163,9 @@ class EditMemory:
             payload["change_candidates"] = change_candidates
             empty_instruction += (
                 " change_candidates are temporary locating hints; decide what to persist "
-                "from the original delivered sources and actual old state."
+                "from the original delivered sources and actual old state. A candidate can "
+                "misstate its source even when its source ID matches; it supplies no extra "
+                "evidence. Preserve the source's actual subject, attribution and modal strength."
             )
         return [
             {
@@ -1165,7 +1179,13 @@ class EditMemory:
                 "and still-applicable qualifications. Do not pack independent matters into a "
                 "single long unit or create duplicate records for the same matter. "
                 "Return the supplied envelope. At most one proposal per existing target in "
-                "this request; combine dependent changes in that target's single proposal. "
+                "this request. "
+                + REVISION_MEANING_INSTRUCTIONS
+                + "A removal needs evidence of that cancellation. Redelivering a source that "
+                "affirmed an old rule does not support a new retraction of that rule. "
+                "Compare every explicit current Source value with actual delivered state, "
+                "including values the Source says to retain. If they differ, use a supported "
+                "same-scope change. An uncommitted prior request does not establish stored state. "
                 + empty_instruction
                 + (" Candidates marked actual_source_literal are program-projected fields of "
                    "the actual Tool source, not LLM semantic formation. Their observation time "
@@ -1249,12 +1269,19 @@ class EditMemory:
                 {
                     "role": "system",
                     "content": (
-                        "Extract brief candidate propositions from this current event for "
-                        "memory maintenance. Preserve the subject, who asserts it, report or "
-                        "inference status, plans versus completed changes, qualifications and "
-                        "explicit time/scope. Select the actual supporting e fragments. Use "
+                        "Extract brief candidate propositions and change cues from current sources "
+                        "for memory maintenance. Preserve the subject, who asserts it, report or "
+                        "inference status, modal strength, qualifications and explicit time/scope. "
+                        "Considering a course remains considering; wishing to reduce work hours "
+                        "remains a wish; a plan does not imply a completed change. An assistant's "
+                        "suggested income remains an assistant suggestion, not a user's report. "
+                        "Stay close to the source wording when summarizing would strengthen it. "
+                        "Select the actual supporting e fragments. Use "
                         "null when time/scope is unspecified. Include independently stated "
                         "new facts and changes; omit social acknowledgments and bare queries. "
+                        "Keep each candidate self-contained with its explicit values and "
+                        "qualifications, including statements of what to retain. Such statements "
+                        "do not establish that stored state already matches them. "
                         "These candidates locate affected old matters for the existing editor; "
                         "they are not memory, verified facts or instructions to execute. The "
                         "editor can reject them or recognize a restatement. Return changes=[] "

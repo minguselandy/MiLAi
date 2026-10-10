@@ -31,7 +31,7 @@ from milai_lab.datasets.edit_benchmarks import (
     longmemeval_cases,
     longmemeval_history,
 )
-from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.harness.artifact_io import entrypoint_settings, read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.edit_units import (
     read_applicability,
@@ -44,6 +44,7 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.memory.working_set import (
     empty_view,
     item_ref,
+    plan_delivery,
     record_candidate,
     select_view_refs,
 )
@@ -144,8 +145,28 @@ def reader_messages(
     memories: list[dict[str, Any]],
     *,
     memory_view: str = "retained_state",
+    projection: str = "legacy",
 ) -> list[dict[str, str]]:
     """Common Reader over actual retained records or observed source messages."""
+    if projection == "semantic_units_v1":
+        from milai_lab.memory.reader_projection import PROJECTION_INSTRUCTIONS, project_material
+
+        return [
+            {"role": "system", "content": READER_PROMPT +
+             "\nSemantic units preserve each stored claim with its actual supports, "
+             "assertion, temporal scope and direct relations. A missing rendered content "
+             "copy means the actual units exactly represented it; it does not mean no "
+             "memory was saved. Original revision_evidence remains literal evidence. "
+             "Explicit unknown dates or limits remain unknown. A person's reported full "
+             "name does not establish an unreported middle name or other component. "
+             + PROJECTION_INSTRUCTIONS},
+            {"role": "user", "content": json.dumps({
+                "question": question, "date": date, "memory_view": memory_view,
+                **project_material(memories),
+            }, ensure_ascii=False, separators=(",", ":"))},
+        ]
+    if projection != "legacy":
+        raise ValueError("Unknown Reader projection")
     delivered = copy.deepcopy(memories)
     for memory in delivered:
         memory.pop("retrieval_navigation", None)
@@ -285,6 +306,23 @@ def reader_messages(
 
 class UnconfirmedModelOutcome(RuntimeError):
     """A sent model request has no confirmed original response; never silently continue."""
+
+
+class ReadCapacityUnavailable(ValueError):
+    """A complete request was measured and refused before any HTTP dispatch."""
+
+    def __init__(self, receipt: dict[str, Any]) -> None:
+        super().__init__(
+            f"Context unavailable without loss: {receipt['input_tokens']} input tokens")
+        self.receipt = receipt
+
+
+class ReadDeliveryIncomplete(ValueError):
+    """Known pending evidence prevents an unsent final answer, without an unknown retry."""
+
+    def __init__(self, reason: str) -> None:
+        super().__init__("Reader delivery incomplete: " + reason)
+        self.reason = reason
 
 
 def source_batches(
@@ -452,6 +490,12 @@ class BenchmarkRun:
             raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
         if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
             raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
+        if settings.get("reader_projection", "legacy") not in {"legacy", "semantic_units_v1"}:
+            raise ValueError("READER_PROJECTION_INVALID")
+        if settings.get("halumem", {}).get("reader_failure_policy", "fail_fast") not in {
+            "fail_fast", "record_confirmed_length", "record_known_readonly_failure",
+        }:
+            raise ValueError("READER_FAILURE_POLICY_INVALID")
         stage_modes = settings.get("stage_enable_thinking", {})
         if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
                 or any(type(value) is not bool for value in stage_modes.values())):
@@ -588,7 +632,12 @@ class BenchmarkRun:
             {"enable_thinking": enable_thinking} if enable_thinking is not None else {}
         ))
         if tokens + self.settings["model"]["max_tokens"] + 512 > self.settings["context_tokens"]:
-            raise ValueError(f"Context unavailable without loss: {tokens} input tokens")
+            receipt = {"stage": key, "input_tokens": tokens,
+                       "input_token_limit": self.settings["context_tokens"]
+                                            - self.settings["model"]["max_tokens"] - 512,
+                       "request_sent": False, "phase": "before_http"}
+            write_json(folder / "capacity.json", receipt)
+            raise ReadCapacityUnavailable(receipt)
         selected_format = (
             generation_schema(response_format)
             if response_format
@@ -1540,6 +1589,14 @@ class BenchmarkRun:
         )
         return extracted
 
+    def _reader_messages(
+        self, question: str, date: str, memories: list[dict[str, Any]],
+    ) -> list[dict[str, str]]:
+        return reader_messages(
+            question, date, memories,
+            projection=self.settings.get("reader_projection", "legacy"),
+        )
+
     def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
         snapshot = self.root / "http" / key / "retrieval.json"
         if snapshot.exists():
@@ -1581,6 +1638,13 @@ class BenchmarkRun:
                 }
                 for row in records
             ]
+            if self.settings.get("reader_projection") == "semantic_units_v1":
+                from milai_lab.memory.reader_projection import project_record
+
+                memories = [project_record(
+                    {**memory, "record_content_chars": len(memory["content"])},
+                    edit_state=row["value"].get("edit_state"),
+                ) for memory, row in zip(memories, records, strict=True)]
             write_json(snapshot, memories)
         cached_response = (snapshot.parent / "response.json").exists()
         answer, used_memories = self.answer_material(question, date, key, memories)
@@ -1605,7 +1669,7 @@ class BenchmarkRun:
             sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
                                        if self.stage_thinking("reader") is not None else {})
             return self.call(
-                key, reader_messages(question, date, memories), structured=False,
+                key, self._reader_messages(question, date, memories), structured=False,
                 **sampling,
             ), memories
         return self._answer_view(question, date, key, memories)
@@ -1628,13 +1692,25 @@ class BenchmarkRun:
         refs = [item_ref({
             "type": "record", "record_id": memory["record_id"],
             "revision": memory["revision"], "version_view": "current_at_snapshot",
-            "content_range": [0, len(memory["content"])],
+            "content_range": [0, memory.get(
+                "record_content_chars", len(memory.get("content", "")))],
         }, key + "/retrieval.json", index) for index, memory in enumerate(memories)]
         directory = [record_candidate(
             memory["record_id"], memory["revision"],
-            memory.get("matter_description", memory["scope"]), len(memory["content"]),
+            memory.get("matter_description", memory["scope"]),
+            memory.get("record_content_chars", len(memory.get("content", ""))),
             navigation=memory.get("retrieval_navigation"),
         ) for memory in memories]
+        input_limit = 0
+        reader_thinking = self.stage_thinking("reader")
+        if self.settings.get("reader_projection") == "semantic_units_v1":
+            input_limit = (self.settings["context_tokens"]
+                           - self.settings["model"]["max_tokens"] - 512)
+            for candidate, memory in zip(directory, memories, strict=True):
+                candidate["single_record_input_tokens"] = self.input_tokens(
+                    self._reader_messages(question, date, [memory]),
+                    enable_thinking=reader_thinking,
+                )
         schema = {
             "type": "object", "additionalProperties": False,
             "properties": {
@@ -1650,7 +1726,9 @@ class BenchmarkRun:
         call_limit = self.client.config.max_calls
         if call_limit < 1:
             raise FunctionalRejection("READ_MODEL_CALL_LIMIT_REACHED")
-        read_limit = min(self.settings.get("additional_reads", call_limit - 1), call_limit - 1)
+        total_read_limit = min(
+            self.settings.get("additional_reads", call_limit - 1), call_limit - 1)
+        read_limit = total_read_limit
         if mode == "staged":
             read_limit = min(read_limit, 1)
 
@@ -1658,7 +1736,7 @@ class BenchmarkRun:
             return [memories[ref["unit_index"]] for ref in state["resident_refs"]]
 
         while memories and not state["complete"] and state["steps"] < read_limit:
-            messages = reader_messages(question, date, resident())
+            messages = self._reader_messages(question, date, resident())
             messages[0]["content"] += (
                 "\nThis call is the one selection before the final answer. "
                 "Directory descriptions locate records; they are not evidence. Select "
@@ -1686,9 +1764,22 @@ class BenchmarkRun:
             payload.update(memory_view_state={name: state[name] for name in empty_view()},
                            candidates=directory, opened_ids=state["opened_ids"],
                            remaining_reads=read_limit - state["steps"], response_schema=schema)
+            if self.settings.get("reader_projection") == "semantic_units_v1":
+                payload["input_token_limit"] = input_limit
+                payload["capacity_note"] = (
+                    "single_record_input_tokens measures that matter with this question and "
+                    "the actual Reader template. Joint request cost is measured after selection; "
+                    "individual costs are not additive."
+                )
             messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+            if (input_limit and self.input_tokens(messages) > input_limit
+                    and state["resident_refs"]):
+                state["selector_needs_pages"] = True
+                break
+            state["active_stage"] = f"{key}/view/select-{state['steps']}"
+            write_json(path, state)
             selected = parse_object(self.call(
-                f"{key}/view/select-{state['steps']}", messages, structured=True,
+                state["active_stage"], messages, structured=True,
                 response_format={"type": "json_schema", "json_schema": {
                     "name": "milai_reader_select", "schema": schema,
                 }},
@@ -1707,19 +1798,179 @@ class BenchmarkRun:
             write_json(path, state)
         state["complete"] = True
         write_json(path, state)
-        messages = reader_messages(question, date, resident())
-        if state["read_goal"] is not None:
-            messages[0]["content"] += (
-                " read_goal describes this question's purpose, not the provenance or "
-                "validity of the supplied memories. It does not establish that requested "
-                "history is available; use the actual supplied evidence."
+        def final_messages(selected_refs: list[dict[str, Any]]) -> list[dict[str, str]]:
+            result = self._reader_messages(
+                question, date, [memories[ref["unit_index"]] for ref in selected_refs],
             )
-            payload = json.loads(messages[1]["content"])
-            payload["read_goal"] = state["read_goal"]
-            messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+            if state["read_goal"] is not None:
+                result[0]["content"] += (
+                    " read_goal describes this question's purpose, not the provenance or "
+                    "validity of the supplied memories. It does not establish that requested "
+                    "history is available; use the actual supplied evidence."
+                )
+                payload = json.loads(result[1]["content"])
+                payload["read_goal"] = state["read_goal"]
+                result[1]["content"] = json.dumps(
+                    payload, ensure_ascii=False, separators=(",", ":"))
+            return result
+
+        messages = final_messages(state["resident_refs"])
+        if self.settings.get("reader_projection") == "semantic_units_v1":
+            if "capacity_continuation" not in state:
+                delivery = plan_delivery(state["resident_refs"], lambda selected: self.input_tokens(
+                    final_messages(selected), enable_thinking=reader_thinking,
+                ) <= input_limit)
+                delivery.update(
+                    input_token_limit=input_limit,
+                    joint_input_tokens=self.input_tokens(messages, enable_thinking=reader_thinking),
+                    read_goal=state["read_goal"], body_delivered=False,
+                )
+                state["delivery_plan"] = delivery
+                state["pending_refs"] = ([] if delivery["fits_together"]
+                                         else copy.deepcopy(delivery["selected_refs"]))
+            write_json(path, state)
+            if ("capacity_continuation" in state or state.get("selector_needs_pages")
+                    or not state["delivery_plan"]["fits_together"]):
+                continuation = state.setdefault("capacity_continuation", {
+                    "selected_refs": copy.deepcopy(state["delivery_plan"]["selected_refs"]),
+                    "pending_refs": copy.deepcopy(state["delivery_plan"]["selected_refs"]),
+                    "delivered_page_refs": [], "final_refs": [], "pages": [],
+                    "selection_complete": False, "final_body_delivered": False,
+                    "evidence_sufficiency": "unchecked",
+                })
+
+                def page_messages(page_refs: list[dict[str, Any]]) -> list[dict[str, str]]:
+                    result = final_messages(page_refs)
+                    result[0]["content"] += (
+                        "\nThis request needs paged delivery. This is a continuation "
+                        "of the same Reader selection, with one actual whole-matter page. "
+                        "Only memories in this input contain evidence. The directory and "
+                        "references locate bodies; earlier responses contain no evidence. "
+                        "Use record_ids to select actual snapshot bodies to reopen together "
+                        "for the final answer. keep_resident merges with final_reopen_refs, "
+                        "not with this page. Set done when that final selection is ready. "
+                        "All originally selected pages still need delivery even if done=true. "
+                        "Do not generate an answer or a factual summary; return the original "
+                        "selection schema. A read_goal does not establish available history."
+                    )
+                    payload = json.loads(result[1]["content"])
+                    payload.update(
+                        candidates=directory, response_schema=schema,
+                        final_reopen_refs=continuation["final_refs"],
+                        pending_refs=continuation["pending_refs"],
+                        remaining_reads=total_read_limit - state["steps"],
+                        input_token_limit=input_limit,
+                    )
+                    result[1]["content"] = json.dumps(
+                        payload, ensure_ascii=False, separators=(",", ":"))
+                    return result
+
+                while (continuation["pending_refs"] or not continuation["selection_complete"]):
+                    if not continuation["pending_refs"]:
+                        continuation["pending_refs"] = copy.deepcopy(continuation["final_refs"])
+                    state["pending_refs"] = copy.deepcopy(continuation["pending_refs"])
+                    if state["steps"] >= total_read_limit:
+                        continuation["incomplete_reason"] = "read_call_limit"
+                        write_json(path, state)
+                        raise ReadDeliveryIncomplete("read_call_limit")
+                    active = continuation.get("active_page")
+                    if active is None:
+                        page_plan = plan_delivery(
+                            continuation["pending_refs"],
+                            lambda chosen: self.input_tokens(page_messages(chosen)) <= input_limit,
+                        )
+                        continuation["page_plan"] = page_plan
+                        if not page_plan["pages"] and continuation["pending_refs"]:
+                            continuation["incomplete_reason"] = "whole_matter_unavailable"
+                            write_json(path, state)
+                            raise ReadDeliveryIncomplete("whole_matter_unavailable")
+                        active = {"refs": page_plan["pages"][0] if page_plan["pages"] else [],
+                                  "stage": f"{key}/view/page-{len(continuation['pages'])}"}
+                        continuation["active_page"] = active
+                    state["active_stage"] = active["stage"]
+                    write_json(path, state)
+                    def note_confirmed_input(active_page: dict[str, Any]) -> None:
+                        folder = self.root / "http" / active_page["stage"]
+                        if not ((folder / "request.json").exists()
+                                and (folder / "response.json").exists()):
+                            return
+                        response = read_json(folder / "response.json")
+                        if (not response.get("choices") or response["choices"][0].get(
+                                "finish_reason") not in {"stop", "length"}):
+                            return
+                        delivered = continuation["delivered_page_refs"]
+                        delivered.extend(ref for ref in active_page["refs"] if ref not in delivered)
+                        confirmed = continuation.setdefault("confirmed_input_pages", [])
+                        if active_page not in confirmed:
+                            confirmed.append(copy.deepcopy(active_page))
+                        write_json(path, state)
+
+                    try:
+                        response_text = self.call(
+                            active["stage"], page_messages(active["refs"]), structured=True,
+                            response_format={"type": "json_schema", "json_schema": {
+                                "name": "milai_reader_select", "schema": schema,
+                            }},
+                        )
+                    except ValueError:
+                        note_confirmed_input(active)
+                        raise
+                    note_confirmed_input(active)
+                    selected = parse_object(response_text, reject_duplicate_keys=True)
+                    Draft202012Validator(schema).validate(selected)
+                    state["steps"] += 1
+                    continuation["pages"].append(copy.deepcopy(active))
+                    list_refs = continuation["delivered_page_refs"]
+                    list_refs.extend(ref for ref in active["refs"] if ref not in list_refs)
+                    continuation["pending_refs"] = [
+                        ref for ref in continuation["pending_refs"] if ref not in active["refs"]
+                    ]
+                    selection_state = {**empty_view(), "resident_refs": continuation["final_refs"],
+                                       "read_goal": state["read_goal"]}
+                    chosen = select_view_refs(
+                        selection_state, refs,
+                        [{"id": identifier} for identifier in selected["record_ids"]],
+                        keep_resident=selected["keep_resident"],
+                        read_goal=selected.get("read_goal"),
+                    )
+                    continuation["final_refs"] = chosen["resident_refs"]
+                    state["read_goal"] = chosen["read_goal"]
+                    continuation["selection_complete"] = selected["done"]
+                    for ref in chosen["resident_refs"]:
+                        if ref not in continuation["selected_refs"]:
+                            continuation["selected_refs"].append(copy.deepcopy(ref))
+                        if (ref not in list_refs and ref not in continuation["pending_refs"]):
+                            continuation["pending_refs"].append(copy.deepcopy(ref))
+                    del continuation["active_page"]
+                    state["pending_refs"] = copy.deepcopy(continuation["pending_refs"])
+                    write_json(path, state)
+                state["resident_refs"] = copy.deepcopy(continuation["final_refs"])
+                messages = final_messages(state["resident_refs"])
+                messages[0]["content"] += (
+                    " Only the actual bodies supplied again in this final input are answer "
+                    "evidence. Earlier pages and directory identities do not supply omitted "
+                    "facts. Explicitly state any remaining evidence limitation. Page delivery "
+                    "does not prove answer sufficiency."
+                )
+                continuation["final_input_tokens"] = self.input_tokens(
+                    messages, enable_thinking=reader_thinking)
+                if continuation["final_input_tokens"] > input_limit:
+                    state["pending_refs"] = copy.deepcopy(continuation["final_refs"])
+                write_json(path, state)
         sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
                                    if self.stage_thinking("reader") is not None else {})
+        state["active_stage"] = key
+        write_json(path, state)
         answer = self.call(key, messages, structured=False, **sampling)
+        if "delivery_plan" in state:
+            state["delivery_plan"]["body_delivered"] = True
+            if "capacity_continuation" in state:
+                state["capacity_continuation"]["final_body_delivered"] = True
+            write_json(path, state)
+        if "capacity_continuation" in state:
+            delivered_ids = {ref["id"] for ref in state["capacity_continuation"][
+                "delivered_page_refs"] + state["resident_refs"]}
+            return answer, [memory for memory in memories if memory["record_id"] in delivered_ids]
         return answer, [memory for memory in memories if memory["record_id"] in state["opened_ids"]]
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:
@@ -1734,6 +1985,61 @@ class BenchmarkRun:
         if check and before != record_index(service.records()):
             raise RuntimeError("Reference-guided scorer retrieval mutated actual memory")
         return [row["value"]["content"] for row in rows]
+
+    def _known_reader_failure(self, error: ValueError, key: str) -> dict[str, Any] | None:
+        """Record only a proven unsent request or a confirmed incomplete response.
+
+        This is called from QA only. Business, maintenance, transport unknowns
+        and Store failures retain their original stop behavior. The run's frozen
+        policy determines whether subsequent questions/history may proceed.
+        """
+        policy = self.settings["halumem"].get("reader_failure_policy", "fail_fast")
+        view_path = self.root / "http" / key / "memory-view.json"
+        if isinstance(error, ReadDeliveryIncomplete) and policy == "record_known_readonly_failure":
+            if (not view_path.exists() or (view_path.parent / "request.json").exists()
+                    or read_json(view_path).get("capacity_continuation", {}).get(
+                        "incomplete_reason") != error.reason):
+                return None
+            return {"type": type(error).__name__, "message": str(error),
+                    "phase": "before_final_http", "request_sent": False,
+                    "reason": error.reason,
+                    "delivery_plan_ref": str(view_path.relative_to(self.root))}
+        if isinstance(error, ReadCapacityUnavailable) and policy == "record_known_readonly_failure":
+            receipt = error.receipt
+            capacity_path = self.root / "http" / receipt["stage"] / "capacity.json"
+            return {"type": type(error).__name__, "message": str(error),
+                    "phase": "before_http", "request_sent": False,
+                    "input_tokens": receipt["input_tokens"],
+                    "input_token_limit": receipt["input_token_limit"],
+                    "capacity_ref": str(capacity_path.relative_to(self.root)),
+                    **({"delivery_plan_ref": str((self.root / "http" / key / "memory-view.json"
+                                                  ).relative_to(self.root))}
+                       if (self.root / "http" / key / "memory-view.json").exists() else {})}
+        if policy not in {"record_confirmed_length", "record_known_readonly_failure"} or (
+            str(error) != "Provider output incomplete: length"
+        ):
+            return None
+        view = read_json(view_path) if view_path.exists() else {}
+        stage = view.get("active_stage", key)
+        if stage != key and not stage.startswith(key + "/view/"):
+            return None
+        folder = self.root / "http" / stage
+        response_path = folder / "response.json"
+        response = read_json(response_path) if response_path.exists() else {}
+        choices = response.get("choices", [])
+        usage = response.get("usage")
+        if (not choices or choices[0].get("finish_reason") != "length"
+                or not isinstance(usage, dict)
+                or not all(type(usage.get(name)) is int and usage[name] >= 0 for name in (
+                    "prompt_tokens", "completion_tokens", "total_tokens"))):
+            return None
+        failure_path = folder / "failure.json"
+        if not failure_path.exists():
+            write_json(failure_path, {"type": type(error).__name__, "message": str(error)})
+        return {"type": type(error).__name__, "message": str(error),
+                "finish_reason": "length", "phase": "confirmed_response",
+                "response_ref": str(response_path.relative_to(self.root)),
+                "failure_ref": str(failure_path.relative_to(self.root))}
 
     def halumem(self, phase: str = "all") -> dict[str, Any]:
         selection = self.settings["halumem"]
@@ -1847,45 +2153,28 @@ class BenchmarkRun:
                         if not generated:
                             for qordinal, qa in enumerate(session.get("questions", [])):
                                 qa_key = f"{key}/qa/{qordinal}"
+                                question_path = self.root / "predictions" / qa_key / "complete.json"
+                                checkpoint_questions = selection.get("reader_failure_policy") == (
+                                    "record_known_readonly_failure")
+                                if checkpoint_questions and question_path.exists():
+                                    saved_question = read_json(question_path)
+                                    if saved_question["question"] != qa["question"]:
+                                        raise ValueError("Saved Reader question changed")
+                                    predicted["questions"].append(saved_question)
+                                    continue
                                 question_prediction: dict[str, Any] = {"question": qa["question"]}
                                 try:
                                     question_prediction["hypothesis"] = self.answer(
                                         service, qa["question"], session["end_time"], qa_key,
                                     )
                                 except ValueError as error:
-                                    if selection.get("reader_failure_policy") != (
-                                        "record_confirmed_length"
-                                    ) or str(error) != "Provider output incomplete: length":
+                                    failure = self._known_reader_failure(error, qa_key)
+                                    if failure is None:
                                         raise
-                                    folder = self.root / "http" / qa_key
-                                    response_path = folder / "response.json"
-                                    response = (
-                                        read_json(response_path) if response_path.exists() else {}
-                                    )
-                                    choices = response.get("choices", [])
-                                    usage = response.get("usage")
-                                    if (
-                                        not choices or choices[0].get("finish_reason") != "length"
-                                        or not isinstance(usage, dict)
-                                        or not all(
-                                            type(usage.get(name)) is int and usage[name] >= 0
-                                            for name in (
-                                                "prompt_tokens", "completion_tokens", "total_tokens"
-                                            )
-                                        )
-                                    ):
-                                        raise
-                                    failure_path = folder / "failure.json"
-                                    if not failure_path.exists():
-                                        write_json(failure_path, {
-                                            "type": type(error).__name__, "message": str(error),
-                                        })
-                                    question_prediction.update(hypothesis=None, reader_failure={
-                                        "type": type(error).__name__, "message": str(error),
-                                        "finish_reason": "length",
-                                        "response_ref": str(response_path.relative_to(self.root)),
-                                        "failure_ref": str(failure_path.relative_to(self.root)),
-                                    })
+                                    question_prediction.update(hypothesis=None,
+                                                               reader_failure=failure)
+                                if checkpoint_questions:
+                                    write_json(question_path, question_prediction)
                                 predicted["questions"].append(question_prediction)
                         # Author-required reference retrieval is evaluator-only.
                         # It runs after predictions; saved material is not fed to a Writer/Reader.
@@ -1999,7 +2288,16 @@ class BenchmarkRun:
                         answer = question_prediction["hypothesis"]
                         reader_failure = question_prediction.get("reader_failure")
                         if (answer is None and isinstance(reader_failure, dict)
-                                and reader_failure.get("finish_reason") == "length"):
+                                and (reader_failure.get("finish_reason") == "length" or (
+                                    reader_failure.get("phase") == "before_http"
+                                    and reader_failure.get("request_sent") is False
+                                    and reader_failure.get("type") == "ReadCapacityUnavailable"
+                                ) or (
+                                    reader_failure.get("phase") == "before_final_http"
+                                    and reader_failure.get("request_sent") is False
+                                    and reader_failure.get("type") == "ReadDeliveryIncomplete"
+                                    and reader_failure.get("reason") in {
+                                        "read_call_limit", "whole_matter_unavailable"}))):
                             result = {}
                         elif isinstance(answer, str):
                             result = self._safe_score(
@@ -2205,6 +2503,7 @@ def run(
     settings: dict[str, Any], root: Path, benchmark: str,
     phase: Literal["all", "predict", "score"] = "all",
 ) -> None:
+    settings = entrypoint_settings(settings, "benchmark")
     execution = BenchmarkRun(settings, root, phase=phase)
     terminal = root / ("terminal.json" if phase == "all" else f"terminal-{phase}.json")
     try:

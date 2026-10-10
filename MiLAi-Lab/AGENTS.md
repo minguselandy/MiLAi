@@ -1,3 +1,182 @@
+# Current handoff: global function-first integration, 2026-10-10 Asia/Shanghai
+
+Latest user steering keeps one MemoryService and prioritizes request-local actual targets,
+read_goal evidence needs/fresh original app queries, and affected semantics in the existing Editor.
+Root integrates methods/runner/docs; A app/working_set, B Editor, C functional/state, independent
+worktrees under the plan's one-integrator/three-developer rule. No new model agents/modules/flags.
+New interaction code is not in frozen5019968. Actual models remain Root-only on its live ledger.
+Verify three normal continuous flows before any new long-history variant; SQLite/scripted success
+does not certify model semantic reliability. Original model/final feedback/effects stay separate.
+Fixed05:48:46UTC main observation: B0 67sessions/170QA checkpoints,168answers/2known missing,
+other4notstarted/Judge0. Actual missing56/qa1 is preHTTP32957>32256,64/qa0 is35279>32256;
+originalnull/capacity/plan retained, no retry or denominator removal. Frozen5019968 does not execute pages.
+543gen/6536501known/6612322charged,68165embtokens,1gen reservation in-flight; not phase closure.
+New capacity continuation source dc4f182 reuses the same Reader and fixed pool; normal staged1+1.
+Full page requests are measured with actual selector parameters; original refs remain, final actual
+bodies reopen, no draft evidence/newAgent/modules/flags. All stages share original allowance and cache;
+request/noresponse remains unknown/no retry. Confirmedlength input delivery differs from valid selection.
+ReadDeliveryIncomplete preserves budget/unavailable reasons and null denominator; final overflow genuine.
+Reader/wiring/view/projection39PASS (9new cases), strict types/Ruff/matrix/boundariesPASS;0real models.
+2d32dc1 Fast38026697455 SUCCESS/Full38026697450 SKIPPED belongs only to that head, not new commits.
+Interaction integration includes all three normal Host/SQLite scripted flows, not model acceptance.
+Integrated interaction source40bf7aa; final three normal Host flow checks3PASS, no new real models.
+Local memory/Editor/app group378PASS; Host/view/projection first350PASS/2projection expectationFAIL,
+actual target binding preserves full original semantic comparisons; projection3recheckPASS.
+Final structured navigation/state/receipt11 and legacy Host contract6 rechecksPASS, overlaps not samples.
+Changed8sources strict types/Ruff/matrix262sources/both boundariesPASS;0actual HTTP/models.
+Directory refresh now retains actual selected Source; unknown read receipts never certify delivery.
+Read counters/PID live before any dispatch; ordinary missing-answer policy continues frozen.
+
+User explicitly requests full execution of docs/MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md.
+Candidate config: configs/milai-global-function-first.json (v3 frozen5019968).
+One integrator plus three source developers; historical v2 experiments remain frozen at 1cfb400.
+Host20v3 CLOSED/reconciled23:33:00UTC: all20attempted/20COMPLETED structurally;
+root host20-5019968-v3, source source-5019968/MiLAi-Lab, runtime host20-5019968-runtime-v3.
+122gen/1666232known=charged,63emb/3571tokens,61stop61tool_calls,newunknown0/0Judge.
+Root formal/effect review20closed. Pure-save CURRENT correctlycontinue_prior/businessFalse,actualr3,
+save progress confirmed; one reservation/two actual business attempts/labelCreated throughout.
+Correction forget only,no semantic pre-save;3knownnone rejections+2visibilityrevokes,body hidden afterreopen.
+Business forget only,but10knownnone invalid/unissued targets,zero actualforget;record/history remain visible.
+Other failures: subgroup inherits overall3,old current absence not corrected,history10/24only,wrongversion,
+queryfound promoted to reservationstate,readonly business3 lacks fresh appquery. COMPLETED is not PASS.
+An earlier dispatcher setup failed before ledger read/HTTP (0 calls); artifact preserved, path corrected.
+Actual start ledger50718requests/234320429known/234644504charged/2083114embedding,unknown7/0.
+Full5 main PREDICTION DISPATCHED, PID1854770; root five-dev277-5019968-v3,
+prepared config five-dev277-5019968-v3-prepared/config.json; runtime five-dev277-5019968-runtime-v3.
+Frozen5019968 only; arms serial B0/B1/B2/M/Append-only, each277sessions/705QA/595updates,
+all1385/3525/2975. Startledger50840requests/235986661known/236310736charged/2086685emb,unknown7/0.
+Inspect actual PID/root-execution-predict.json/arm terminals; launch is not completion.
+No automatic restart or scoring; all five predictions before separate uniform phase score.
+Fixed2026-10-10 01:50:36UTC observation: runnerPID matches, ownerOWNED, B0first37complete sessions/100QA,
+100QA checkpoints,37maintenancecompleted/63uniquecommits;
+noQA missing or receipt rejection; other4arms NOT_STARTED.
+Live unknown+1 is an in-flight reservation, not closed unknown. Use ignored
+inspect_five_dev277_5019968_progress.py for compact PID/phase/cost checks; do not dump full ledger/world.
+Readonly stage usage helper inspect_five_dev277_5019968_usage.py --snapshot saves ignored actual counters.
+Fixed01:50:07UTC:312gen responses/3440007known,259emb/36120tokens agree with live ledger known;
+1gen pending, not phase closure. All312 planned input counts equal actualprompt_tokens;
+peaks Extract13781/Writer-select25711/Editor32223/Reader-select2942/Reader28511 <=32256.
+At01:50:36UTC313gen requests/3471370known=charged,newunknown0; fixed observations are not phase ends.
+User explicitly requests experiment summary and submission to GitHub on2026-10-10.
+Published integration branch62afc649b5519ab26da8ae4eb527cdd0f7aa6b6b and draftPR120 stacked on119;
+remote head/body verified, no merge or main interruption. Initial Fast38014947469 Lab gate failed
+SOURCE_REGISTRATION_DRIFT:memory: reader_projection.py missing from source_identity registration.
+One-line registration repair passes matrix262sources/6canonicalpackages,15existing ownership/request
+checks, fullLab Ruff and changed-file strict types; frozen5019968 runtime/old identities stay untouched.
+SecondFast38015194385 passes registration/boundaries/Ruff/Core types, then collection misses
+langchain_core for newSQLite projection tests. Route test_reader_projection.py to existing Foundation
+in Lab matrix and both shared Fast/Full commands; all3cases retained and executed, no skip.
+Updated verification matrix covers262sources/78optional test files; runtime5019968 remains untouched.
+Local existing SQLite/projection/external group143PASS/1FAIL because old resident test compares a
+shared wire metadata reference with a full assertion. Expand actual metadata before strict comparison;
+same existing single test recheckPASS, other reopen/history/non-target/state assertions retained.
+First failure preserved, no real model calls; do not count repeated test as another experiment.
+ThirdFast38015684756 Core/externalPASS, Foundation556PASS/4FAIL: retained-agent offline evaluator
+does not recognize new request_failures_appended/memory_receipts_appended bool fields.
+tools/v13_5_evaluate.py now strictly checks all3optional bool flags; anyTrue separately binds original
+actualHTTP candidate and captured public delivery, false/absent retains oldHTTP contract.
+88provenance checks+8normal Host=>offline-evaluator SQLite/scripted cases/Ruff/strict typesPASS;
+missing/forged/nonbool evidence still fails and semantic UNREVIEWED.0real models/no old result mutation.
+Only saved response metadata,0new calls/bank/dataset; no future capacity/semantic advantage claim.
+Native32/drift/external28/controlled v3 configs PREPARED ONLY,0HTTP; no final confirmation freeze.
+Native/drift static entry review in native-drift-runner-review-5019968-v3.json:9code files equal
+frozen5019968,30shared config values equal main;32items/12sessions/4users matched,0runner/bank/HTTP.
+Native uses actual own before/after and degeneration controls, then isolated Reader+Judge/embeddings;
+no Editor formation replay. Original bank backup retains trajectory data physically: actual probe
+retrieval/evidence still require later inspection. This static review does not close Native/drift.
+Original external full-answer10 audit PREPARED ONLY at external-full-answer10-5019968-v3-prepared:
+10fixed IDs subset of original28,4external arms/40rows,manifest byte-identical;0HTTP/loader/runner/bank.
+Original evaluator T0/thinkingFalse/output8192/context retained; no Reader/Editor replay or official
+label replacement. Requires final candidate and all external predictions+uniform scores closed.
+Reserved16 config is PREPARED ONLY from original UUID/settings, no held-out dataset loader or semantic read.
+M tighter-context protocol is PREPARED ONLY: same first8/user, context65536=>49152,
+output32768/margin512 unchanged, complete input32256=>15872; baseline comes from full main M,
+never another baseline run. Main/uniform scores and necessary development selection precede admission.
+Host135 historical public inputs copied byte-identically to host135-historical-inputs-prepared-v1:
+135cases/192messages/145raw Sources/1064ordered candidates,0HTTP/no bank initialization.
+No Host method selected or new post-freeze stories authored; controls stay evaluator-only.
+Source-only Host forget contract audit is isolated under host-forget-contract-5019968-source-only;
+developer sees delivered literal handles, schemas/arguments and body-free status only, no full trace/DB.
+Actual business read_source status=read_limit_exhausted, limit3. Audit CLOSED in review.json:
+15forget calls=2confirmed visibility effects+13knownnone rejections;
+business10allrejected/zero actualforget, no call uses an exact delivered read_handle.
+Model selector misuse/expected read exhaustion, no normal-use wiring defect established/no source fix.
+11JSON mechanical checks only,0HTTP/Store writes/replay/pytest; not independent model confirmation.
+Readonly business3 query audit CLOSED in host-readonly-business-query-contract-5019968-v3.json:
+get_reservation appears in all8actual catalogs, final remaining catalog onlythat query;0formal query calls.
+Model omitted available fresh-query capability, no missing-tool/permission wiring defect established;
+0new HTTP/source edits/replay. Prior state and saved query Sources are not fresh-query completion.
+Shared Reader projection/flat literal metadata, real complete-request planning, independent memory after
+known CURRENT schema/length failure, faithful candidates and cumulative confirmed receipts are integrated.
+Root exact old-eight replay: 32446 -> 30520 input <=32256, 8/8 exact-rendered, all original evidence
+bodies/ranges remain literal. Separate actual read-only call on frozen bbe77e9 completed stop:
+30520 input/2166 output/32686 known; 0emb/0Judge/newunknown0. No Writer/Selector retry.
+Frozen bbe77e9 Host20 CLOSED 17:19:01 UTC: 20 attempted,17 COMPLETED/3 FAILED;
+99gen/784557 known,35emb/1532tokens,newunknown0. COMPLETED does not certify semantics.
+CURRENT length blocked correction; scope length blocked forget; needless prior resolver blocked business.
+Current first page4/5 (not first-unit skip); history17 =5+7+5 semantic units. Editor invented onset and
+omitted explicit retained value correction. Repairs integrated, Root19 request/10 projection+Host checks
+passed (overlap not extra samples), six owned source type/Ruff and dependency boundaries pass.
+Exact current5 Host packet6593/6587 within8192; history still paginated. Original Host20 v2 STOPPED
+17:56:46 UTC after13 COMPLETED/7 NOT_RUN;71gen/565201 known,1246embtokens,newunknown0.
+Two old forget receipts lacked effect; independent source-boundary/readonly registry audit proves only
+these two pre-mutation rejections had no effect. Original STOPPED retained in host20-1cfb400-v2.
+Supplement ONLY seven never-attempted inputs CLOSED18:11:41 UTC, same immutable source-1cfb400;
+5 COMPLETED/2 confirmed length. Segmented total20 each once:18 COMPLETED/2 FAILED,
+102gen/902072 known=charged,50emb/1856tokens,finish61stop39tool_calls2length,newunknown0/Judge0.
+Separate original/supplement terminal preserved; closed-response-reconciliation.json confirms ledger.
+Business actual partial reservation then label-only recovery:one reservation/two business attempts.
+Explicit save-only misclassified as business continuation: no authorized memory commit. Business forget
+only semantic r3 retraction before length, zero nativeforget calls; sources/history still visible.
+Correction valid forget revoked1record/9sources but initial unformed Source stays visible; no full-pass claim.
+Live-only e41787a fixes these two forget receipts; new SQLite check passes, NOT in frozen experiment.
+Prefix8 same frozen version prediction CLOSED, reconciled19:19 UTC:32sessions/73answers/72updates,
+no known readonly missing;23maintenance completed/9incomplete,82unique confirmed commits.
+237gen/2159360 known=charged,214emb/36847tokens,237stop,newunknown0;historicalunknown6/0 unchanged.
+Original Score INTERRUPTED: PID911285/session32765 absent, no terminal/end;31/32 session evaluations,
+655 saved stop Judge responses, request656 has no response. Fixed observed ledger:656 requests,
+2716058 known/2763437 charged, newunknown1 (47379 reservation),0emb; historicalunknown6=>7 retained.
+Services running/waiting0 and logs provide no recoverable answer/usage. Never retry unknown656.
+Supplement Score CLOSED/reconciled22:47UTC, same config/source-1cfb400;
+root prefix8-1cfb400-v2-score-supplement/M, runtime prefix8-1cfb400-score-supplement-runtime-v2.
+Copies original32 predictions/banks/31 evaluations and cached Judges; original outputs unchanged.
+Unknown656 gets invalid/unconfirmed, full denominator retained; only untouched keys657..677 dispatch.
+Original full aggregate stays predictions-frozen-before-score.json. No Writer/Reader/embedding replay,
+no simultaneous models; original interruption retained. Supplement21gen/96531 known=charged/21stop,
+newunknown0/0emb. CombinedJudge677actual/676responses/2812589known/2859968charged/newunknown1.
+All32predictions/73answers match pre-score backup; original individual checkpoints unchanged.
+QA44/73Correct/valid71,update48/72Correct/valid67; invalid tags/denominators retained, no ranking.
+Root Source-only thinking matched control CLOSED/reconciled23:01UTC on source-1cfb400;
+root editor-thinking-1cfb400-matched-v1, runtime editor-thinking-1cfb400-matched-runtime-v1.
+Predeclared7oldEditor requests,False/True2freshreps=28; exact messages/wire schema/T1/budget retained.
+Proposal-only,noStore/commit/noQA/gold,alloutputs retained; source developer reviews only those7inputs.
+28gen/527243known=charged/28stop,newunknown0/0emb/0Judge; originalunknown7 retained.
+False14:220425known/6683output,True14:306818known/93104output;Truepeak9747/4outputs>Host8192.
+Source review CLOSED28/28, all outputs retained; no compiler/commit claim from28wire-valid outputs.
+Root selects benchmark Editor thinking=True at unchanged32768 output for better Source formation/value
+coverage in these fixed slices. Unsupported non-target edits, omissions, clocks and subject errors remain.
+Host Editor staysFalse at8192; True control is not admitted there (4/14outputs exceeded8192).
+Recovery developer CURRENT prompt33079fd=>Root0d297ad;8lines clarification,no schema/authority expansion.
+16existingmock/SQLite+Ruff/typepass;Root1overlapSQLite flowpass. Actual semantics unverified;notin1cf.
+Next: supervise/reconcile all five full development predictions from empty method/user banks,
+then separate uniform phase score. Original Host20 fixture/control and all failures retained.
+Do not hot-edit frozen runs, splice old prefixes or add new Reader/Source prompt knobs in this candidate.
+Actual current run/source/closed results belong in docs/MILAI_UNIFIED_MEMORY_USAGE.md.
+Historical observations below are fixed snapshots; inspect actual PID/lease/terminal before dispatch.
+
+Root alone serializes actual Qwen/BGE/Judge on the original continuous ledger; no resets, new services,
+blind unknown retries or live-source edits. Lab only; no Product/Archive writes, gold/future QA/holdout
+in runtime or method-worker inputs. Source capture, semantic receipts, business effects and feedback
+remain separate. Forgotten bodies cannot return through trace/cache/reopen. Save-only cannot repeat
+business; current readonly cannot inherit prior write permission. Stop related work on Store/unknown
+side-effect failures and retain earliest error and already confirmed effects. Raw/private artifacts ignored.
+Full plan and six deliverables remain active/incomplete; no Product or research advantage claim.
+
+# Historical handoffs and operating constraints
+
+All following dated states are historical evidence. Latest explicit user scope above supersedes their
+phase scheduling; their standing data, ownership, permission and failure-preservation boundaries remain.
+
 # Live handoff: 2026-10-09 14:33:01 UTC／北京时间22:33:01, M36 FAILED / Host20 PREPARED only
 
 ActualM36b0401c6e89276640903e3201ad6dba6f4b7c66; development4099839a3aac4ea4d8294183f9677896d07b4a40;

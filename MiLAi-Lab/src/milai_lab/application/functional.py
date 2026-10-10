@@ -14,7 +14,7 @@ import uuid
 from collections.abc import Callable, Mapping, Sequence
 from copy import deepcopy
 from pathlib import Path
-from typing import Any, BinaryIO, Self
+from typing import TYPE_CHECKING, Any, BinaryIO, Self
 
 from langchain_core.messages import AIMessage, ToolMessage
 from langchain_core.tools import BaseTool
@@ -35,6 +35,9 @@ from milai_lab.application.tools import BUSINESS_NAMES, _business_tools, documen
 from milai_lab.application.world import ApplicationWorld
 from milai_lab.contracts.memory import ObservationProfile, VerifiedObjectRef
 from milai_lab.harness.artifact_io import read_json, write_json
+
+if TYPE_CHECKING:
+    from milai_lab.application.adapters import SandboxApplicationAdapter
 
 
 class ReceiptProgressJournal:
@@ -332,6 +335,42 @@ class FunctionalApplication:
             agent, scope, self.journal, self.world, runtime, application_workflow=self.workflow
         )
 
+    def observe_delivered(
+        self,
+        adapter: SandboxApplicationAdapter,
+        ref: VerifiedObjectRef,
+        *,
+        delivered_source_refs: Sequence[str],
+        attempt_id: str,
+        request: Any | None = None,
+        execute: Callable[[Any], Any] | None = None,
+    ) -> dict[str, Any]:
+        """Query an actually delivered verified object through the original adapter.
+
+        The Host resolves its current request's short target before calling this
+        thin entry. Only caller-confirmed delivery can select the reference;
+        the adapter still checks its issued identity, owner, visibility and
+        current read permission. This performs one ordinary journaled query,
+        never a business mutation or a silent refresh of an old receipt.
+        A supplied Host request retains its original generation/call identity;
+        its execute callback runs only after the journal persists intent.
+        """
+        if adapter.app is not self or adapter.owner != self.owner:
+            raise ValueError("FUNCTIONAL_APPLICATION_ADAPTER_SCOPE_CHANGED")
+        if ref.source_ref not in delivered_source_refs:
+            return {
+                "status": "object_reference_not_delivered_current_request",
+                "executed": False,
+                "business_effect": "none",
+                "object_ref": None,
+                "current_state": None,
+                "permissions": {
+                    "can_read": adapter.can_read,
+                    "operations": sorted(adapter.allowed_operations),
+                },
+            }
+        return adapter.observe(ref, attempt_id=attempt_id, request=request, execute=execute)
+
     def snapshot(self) -> dict[str, Any]:
         """Evaluator/diagnostic sidecar; never a Host tool or authorization source."""
         return {
@@ -454,6 +493,59 @@ class FunctionalCallWrapper:
         if getattr(self.service, "functional_contract", "legacy") != "functional_v1":
             return
         self.service.note_tool_delivery(self.session, self.turn_id, source_refs)
+
+    def fresh_query_evidence(self, delivered_source_refs: Sequence[str]) -> list[dict[str, Any]]:
+        """Describe only actual, delivered queries captured in this public request.
+
+        Delivery comes from the caller's current frame, not mere presence in a
+        Source archive. A ready response, old query, mutation receipt or pending
+        call cannot satisfy a new-observation requirement. Receipt and Source
+        bytes are checked against the original complete executed journal row.
+        This returns provenance only; query status is not an object's state.
+        """
+        delivered = set(delivered_source_refs)
+        observations = []
+        for progress in self.app.progress.snapshot().values():
+            identity = progress["identity"]
+            source_ref = progress.get("raw_capture", {}).get("source_ref")
+            if (
+                identity.get("owner") != self.app.owner
+                or identity.get("session") != self.session
+                or identity.get("turn_id") != self.turn_id
+                or identity.get("name") not in {"get_reservation", "get_document_status"}
+                or source_ref not in delivered
+                or "delivery_response" not in progress
+            ):
+                continue
+            row = self.app.journal.entry_for_call(
+                identity["thread_id"], identity["generation_id"], identity["call_id"]
+            )
+            source = self.service.source(source_ref)
+            public_turn = row.get("public_turn") if row is not None else None
+            if (
+                row is None or row.get("status") != "complete"
+                or row.get("executed") is not True or row.get("effect") != "observed"
+                or row.get("owner") != self.app.owner or row.get("name") != identity["name"]
+                or (public_turn is not None and (
+                    public_turn.get("session") != self.session
+                    or public_turn.get("turn_id") != self.turn_id
+                ))
+                or source_ref != self.service.event_id(
+                    self.session, "application:" + row["journal_key"], "tool"
+                )
+                or source is None or source.get("owner") != self.app.owner
+                or source.get("role") != "tool" or source.get("origin") != row["name"]
+                or source.get("content") != row["result"]["content"]
+                or progress.get("business_receipt") != row["result"]
+            ):
+                continue
+            observations.append({
+                "source_ref": source_ref, "operation": row["name"],
+                "journal_key": row["journal_key"], "session": self.session,
+                "turn_id": self.turn_id, "business_effect": "observed",
+                "basis": "actual_current_request_query_receipt",
+            })
+        return observations
 
     def query_source_delivery(self, query_journal_key: str) -> dict[str, Any]:
         """Attach only the captured actual discovery source, never an original receipt."""

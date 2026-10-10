@@ -1708,11 +1708,13 @@ class MemoryService:
             if candidate_handle is not None:
                 bound = self.candidate(candidate_handle)
                 if bound is None:
-                    return {"ok": False, "status": "rejected", "reason": "read_handle_invalid"}
+                    return {"ok": False, "status": "rejected", "reason": "read_handle_invalid",
+                            "effect": "none", "phase": "pre_mutation_contract"}
                 item = self.store.get(self.namespace, bound["record_id"])
                 metadata = item.value["_v13_1"] if item is not None else None
                 if metadata is None or metadata["revision"] != bound["revision"]:
-                    return {"ok": False, "status": "rejected", "reason": "revision_conflict"}
+                    return {"ok": False, "status": "rejected", "reason": "revision_conflict",
+                            "effect": "none", "phase": "pre_mutation_contract"}
                 refs = list(
                     dict.fromkeys(
                         ref
