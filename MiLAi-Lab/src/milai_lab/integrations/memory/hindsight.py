@@ -16,6 +16,7 @@ from __future__ import annotations
 import asyncio
 import json
 import sqlite3
+import time
 from collections.abc import Callable
 from datetime import datetime
 from importlib import import_module
@@ -31,6 +32,7 @@ SDK_VERSION = "0.10.3"
 class HindsightClient(Protocol):
     def retain(self, **kwargs: Any) -> Any: ...
     def recall(self, **kwargs: Any) -> Any: ...
+    def status(self, bank_id: str, *, timeout: float) -> dict[str, Any]: ...
     def close(self) -> Any: ...
 
 
@@ -88,6 +90,23 @@ class _OfficialClient:
             kwargs["bank_id"], request, _request_timeout=300.0,
         ))
         return cast(dict[str, Any], json.loads(response.raw_data))
+
+    def status(self, bank_id: str, *, timeout: float) -> dict[str, Any]:
+        async def read() -> dict[str, Any]:
+            stats = await self.native.banks.get_agent_stats_with_http_info(
+                bank_id, refresh=True, _request_timeout=timeout,
+            )
+            pending = await self.native.operations.list_operations_with_http_info(
+                bank_id, status="pending", limit=1, _request_timeout=timeout,
+            )
+            processing = await self.native.operations.list_operations_with_http_info(
+                bank_id, status="processing", limit=1, _request_timeout=timeout,
+            )
+            return {"bank_stats": json.loads(stats.raw_data),
+                    "pending": json.loads(pending.raw_data),
+                    "processing": json.loads(processing.raw_data)}
+
+        return self.loop.run_until_complete(asyncio.wait_for(read(), timeout))
 
     def close(self) -> None:
         try:
@@ -183,12 +202,15 @@ class HindsightBackend:
         recall_budget: str = "mid", include_chunks: bool = True,
         max_chunk_tokens: int = 8192, include_source_facts: bool = True,
         max_source_facts_tokens: int = 4096, client: HindsightClient | None = None,
+        on_status: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if not bank_id or not base_url:
             raise ValueError("HINDSIGHT_BANK_OR_URL_INVALID")
         self.root = Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
         self.bank_id = bank_id
+        self.on_status = on_status
+        self.last_status: dict[str, Any] | None = None
         self.recall_options = {
             "max_tokens": recall_max_tokens, "budget": recall_budget,
             "include_chunks": include_chunks, "max_chunk_tokens": max_chunk_tokens,
@@ -200,6 +222,10 @@ class HindsightBackend:
         self.db.execute(
             "CREATE TABLE IF NOT EXISTS operations (kind TEXT NOT NULL, key TEXT NOT NULL, "
             "request TEXT NOT NULL, response TEXT, PRIMARY KEY (kind, key))"
+        )
+        self.db.execute(
+            "CREATE TABLE IF NOT EXISTS status_checks "
+            "(ordinal INTEGER PRIMARY KEY, stage TEXT NOT NULL, response TEXT NOT NULL)"
         )
         binding = json.dumps({"bank_id": bank_id, "base_url": base_url,
                               "sdk_version": SDK_VERSION, "recall": self.recall_options})
@@ -217,6 +243,46 @@ class HindsightBackend:
                 self.db.close()
                 raise
         self.client = client
+
+    def _wait_native(self, stage: str) -> dict[str, Any]:
+        """Observe real public completion state; do not retry retain or recall.
+
+        Each poll is a fresh read, not a guessed completion after fixed sleep.
+        A 300s total deadline and one-second maximum interval let Root observe
+        progress while the native worker retains its original model lease.
+        """
+        deadline = time.monotonic() + 300.0
+        while True:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                raise HindsightIngestionIncomplete(f"{stage}:native_completion_deadline")
+            try:
+                status = self.client.status(self.bank_id, timeout=remaining)
+            except Exception as error:
+                raise HindsightIngestionIncomplete(f"{stage}:native_status_unconfirmed") from error
+            self.last_status = status
+            self.db.execute(
+                "INSERT INTO status_checks (stage, response) VALUES (?, ?)",
+                (stage, json.dumps(status, ensure_ascii=False)),
+            )
+            self.db.commit()
+            if self.on_status is not None:
+                self.on_status(status)
+            stats, pending, processing = (status["bank_stats"], status["pending"],
+                                          status["processing"])
+            counts = [stats.get("pending_operations"), stats.get("pending_consolidation"),
+                      pending.get("total"), processing.get("total")]
+            failures = [stats.get("failed_operations"), stats.get("failed_consolidation")]
+            if (any(type(count) is not int or count < 0 for count in [*counts, *failures])
+                    or any(row.get("bank_id") != self.bank_id
+                           for row in (stats, pending, processing))):
+                raise HindsightIngestionIncomplete(f"{stage}:native_status_fields_unconfirmed")
+            if all(count == 0 for count in counts):
+                # Drain actual work before reporting a known permanent failure.
+                if any(count > 0 for count in failures):
+                    raise HindsightIngestionIncomplete(f"{stage}:native_background_failure")
+                return status
+            time.sleep(min(1.0, max(0.0, deadline - time.monotonic())))
 
     def _call(
         self, kind: str, key: str, request: dict[str, Any], invoke: Callable[[], Any],
@@ -274,8 +340,12 @@ class HindsightBackend:
         if (native.get("bank_id") != self.bank_id or native.get("success") is not True
                 or native.get("async") is not False):
             raise HindsightIngestionIncomplete(f"retain:{key}")
+        # A cached confirmed retain may safely re-read status, never re-send it.
+        status = self._wait_native(f"retain:{key}")
+        usage = _usage(native)
+        usage["native_completion"] = status
         return {"session_id": session.session_id, "completed": True, "native_return": native,
-                "session_output": None, "usage": _usage(native)}
+                "session_output": None, "usage": usage}
 
     def retrieve(self, question: str, date: str, *, key: str, limit: int) -> RetrievalResult:
         # Hindsight has token budgets, not top-k: never truncate native output to limit.
@@ -288,6 +358,11 @@ class HindsightBackend:
 
     def close(self) -> None:
         try:
-            self.client.close()
+            attempted = self.db.execute("SELECT 1 FROM operations LIMIT 1").fetchone()
+            if attempted is not None:
+                self._wait_native("close")
         finally:
-            self.db.close()
+            try:
+                self.client.close()
+            finally:
+                self.db.close()

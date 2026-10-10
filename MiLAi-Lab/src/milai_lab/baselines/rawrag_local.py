@@ -123,7 +123,7 @@ class RawRAGLocal:
                       for index in np.argsort(scores)[::-1][:limit]]
         materials = [
             {"id": row["id"], "session_id": row["session_id"], "date": row["date"],
-             "text": json.dumps(row["turns"], ensure_ascii=False), "turns": row["turns"],
+             "text": json.dumps(row["turns"], ensure_ascii=False),
              "turn_range": row["turn_range"], "score": row["score"],
              "provenance": "original_exchange", "truncated": False}
             for row in ranked

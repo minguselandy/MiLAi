@@ -14,6 +14,7 @@ import pytest
 from milai_lab.baselines.rawrag_local import RawRAGLocal
 from milai_lab.integrations.memory.hindsight import (
     HindsightBackend,
+    HindsightIngestionIncomplete,
     UnconfirmedHindsightOperation,
     project_recall,
 )
@@ -47,7 +48,8 @@ def test_rawrag_original_prefix_persists_without_character_truncation(
     old = backend.retrieve("tea", first.date, key="qa/0", limit=20)
     assert old["returned_count"] == 1
     assert old["materials"][0]["session_id"] == "s1"
-    assert old["materials"][0]["turns"] == list(first.turns)
+    assert json.loads(old["materials"][0]["text"]) == list(first.turns)
+    assert "turns" not in old["materials"][0]
     assert len(old["materials"][0]["text"]) > 16000
     assert old["materials"][0]["truncated"] is False
     backend.ingest(future, key="ingest/1")
@@ -60,14 +62,40 @@ def test_rawrag_original_prefix_persists_without_character_truncation(
         RawRAGLocal(tmp_path, bank_id="raw-u2-r1", granularity=granularity)
 
 
-def test_official_hindsight_sdk_wire_reopen_and_saved_response_projection(tmp_path: Path) -> None:
+def test_official_hindsight_sdk_wire_reopen_and_saved_response_projection(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
     requests: list[tuple[str, dict[str, Any]]] = []
     documents: dict[str, dict[str, Any]] = {}
     returned: list[dict[str, Any]] = []
+    status_calls: list[str] = []
+    background_failed = False
+    monkeypatch.setattr("milai_lab.integrations.memory.hindsight.time.sleep", lambda seconds: None)
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, format: str, *args: Any) -> None:
             pass
+
+        def do_GET(self) -> None:
+            status_calls.append(self.path)
+            if "/stats" in self.path:
+                response = {"bank_id": "h-u1-r1", "total_nodes": len(documents),
+                            "total_links": 0, "total_documents": len(documents),
+                            "nodes_by_fact_type": {}, "links_by_link_type": {},
+                            "links_by_fact_type": {}, "links_breakdown": {},
+                            "pending_operations": 0, "failed_operations": 0,
+                            "pending_consolidation": int(len(status_calls) == 1),
+                            "failed_consolidation": int(background_failed)}
+            else:
+                assert "/operations?" in self.path
+                response = {"bank_id": "h-u1-r1", "total": 0, "limit": 1, "offset": 0,
+                            "operations": []}
+            encoded = json.dumps(response).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Length", str(len(encoded)))
+            self.end_headers()
+            self.wfile.write(encoded)
 
         def do_POST(self) -> None:
             body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
@@ -114,11 +142,18 @@ def test_official_hindsight_sdk_wire_reopen_and_saved_response_projection(tmp_pa
     first = session("s1", "Jan 01, 2024, 10:00:00", "coffee")
     second = session("s2", "Jan 02, 2024, 10:00:00", "tea instead")
     try:
-        backend = HindsightBackend(tmp_path, bank_id="h-u1-r1", base_url=url)
-        backend.ingest(first, key="ingest/0")
+        observed: list[dict[str, Any]] = []
+        backend = HindsightBackend(tmp_path, bank_id="h-u1-r1", base_url=url,
+                                   on_status=observed.append)
+        ingested = backend.ingest(first, key="ingest/0")
+        assert ingested["completed"]
+        assert ingested["usage"]["native_completion"]["bank_stats"]["pending_consolidation"] == 0
+        assert [row["bank_stats"]["pending_consolidation"] for row in observed] == [1, 0]
         backend.ingest(second, key="ingest/1")
         backend.close()
         backend = HindsightBackend(tmp_path, bank_id="h-u1-r1", base_url=url)
+        # The confirmed retain reuses its response but observes fresh completion.
+        backend.ingest(second, key="ingest/1")
         result = backend.retrieve("drink?", second.date, key="qa/1", limit=20)
         assert result["returned_count"] == 2  # Native facts, not manufactured K20.
         assert result["native_return"] == returned[0]
@@ -140,6 +175,14 @@ def test_official_hindsight_sdk_wire_reopen_and_saved_response_projection(tmp_pa
         assert requests[-1][1]["query_timestamp"] == "2024-01-02T10:00:00"
         assert "tags" not in requests[0][1]["items"][0]
         backend.close()
+        assert len(status_calls) == 18  # Both writes, cached write, pending poll and both closes.
+        background_failed = True
+        backend = HindsightBackend(tmp_path, bank_id="h-u1-r1", base_url=url)
+        with pytest.raises(HindsightIngestionIncomplete, match="native_background_failure"):
+            backend.ingest(second, key="ingest/1")
+        with pytest.raises(HindsightIngestionIncomplete, match="native_background_failure"):
+            backend.close()
+        assert len(requests) == 3  # Known failure must not trigger another retain/recall.
     finally:
         server.shutdown()
         server.server_close()
@@ -157,6 +200,13 @@ def test_hindsight_unconfirmed_operation_is_not_retried_after_reopen(tmp_path: P
 
         def recall(self, **kwargs: Any) -> Any:
             raise AssertionError("no recall admitted after an unconfirmed write")
+
+        def status(self, bank_id: str, *, timeout: float) -> dict[str, Any]:
+            return {"bank_stats": {"bank_id": bank_id, "pending_operations": 0,
+                                   "pending_consolidation": 0, "failed_operations": 0,
+                                   "failed_consolidation": 0},
+                    "pending": {"bank_id": bank_id, "total": 0},
+                    "processing": {"bank_id": bank_id, "total": 0}}
 
         def close(self) -> None:
             pass
