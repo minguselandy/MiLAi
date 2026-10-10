@@ -44,6 +44,12 @@ Local existing SQLite/projection/external group143PASS/1FAIL because old residen
 shared wire metadata reference with a full assertion. Expand actual metadata before strict comparison;
 same existing single test recheckPASS, other reopen/history/non-target/state assertions retained.
 First failure preserved, no real model calls; do not count repeated test as another experiment.
+ThirdFast38015684756 Core/externalPASS, Foundation556PASS/4FAIL: retained-agent offline evaluator
+does not recognize new request_failures_appended/memory_receipts_appended bool fields.
+tools/v13_5_evaluate.py now strictly checks all3optional bool flags; anyTrue separately binds original
+actualHTTP candidate and captured public delivery, false/absent retains oldHTTP contract.
+88provenance checks+8normal Host=>offline-evaluator SQLite/scripted cases/Ruff/strict typesPASS;
+missing/forged/nonbool evidence still fails and semantic UNREVIEWED.0real models/no old result mutation.
 Only saved response metadata,0new calls/bank/dataset; no future capacity/semantic advantage claim.
 Native32/drift/external28/controlled v3 configs PREPARED ONLY,0HTTP; no final confirmation freeze.
 Native/drift static entry review in native-drift-runner-review-5019968-v3.json:9code files equal

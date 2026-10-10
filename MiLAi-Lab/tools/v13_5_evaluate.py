@@ -35,6 +35,9 @@ STAGES = (
     "accounting",
 )
 TERMINALS = {"COMPLETED", "FAILED", "BUDGET_EXHAUSTED", "PROVIDER_ERROR", "UNKNOWN", "NOT_RUN"}
+_RETAINED_RECEIPT_FIELDS = (
+    "observation_receipts_appended", "request_failures_appended", "memory_receipts_appended",
+)
 
 
 def ordinary_inputs(freeze: dict[str, Any]) -> bool:
@@ -517,14 +520,17 @@ def retained_agent_final_linkage(
                 "protocol": "agent_response_v1", "model_generation": False}
     finalization = row.get("finalization")
     appended = False
-    if isinstance(finalization, dict) and "observation_receipts_appended" in finalization:
-        # Old retained deliveries omit this field. Explicit False still means
-        # the whole delivered answer must match the original Agent HTTP text.
-        # An appended program receipt is not additional model-generated text.
-        appended = finalization["observation_receipts_appended"]
-        if type(appended) is not bool:
-            return {"status": "UNKNOWN", "reason": "unrecognized_retained_agent_contract"}
-        metadata["observation_receipts_appended"] = appended
+    if isinstance(finalization, dict):
+        # Legacy deliveries omit these fields. Only explicit boolean True selects
+        # separate candidate/public-delivery linkage for appended program text.
+        for field in _RETAINED_RECEIPT_FIELDS:
+            if field not in finalization:
+                continue
+            value = finalization[field]
+            if type(value) is not bool:
+                return {"status": "UNKNOWN", "reason": "unrecognized_retained_agent_contract"}
+            metadata[field] = value
+            appended |= value
     if (freeze.get("config", {}).get("finalization") != "receipt_or_agent_response_v1"
             or row.get("finalization") != metadata):
         return {"status": "UNKNOWN", "reason": "unrecognized_retained_agent_contract"}
@@ -636,7 +642,8 @@ def evaluate_attempt(
         linkage = retained_agent_final_linkage(
             row, events, freeze, response_id=response_id,
             captured_source=(hidden_program_capture(reader, path.parent, row)
-                if row["finalization"].get("observation_receipts_appended") is True else None))
+                if any(row["finalization"].get(field) is True
+                       for field in _RETAINED_RECEIPT_FIELDS) else None))
     elif program:
         linkage = program_final_linkage(
             row, events, freeze, hidden_program_capture(reader, path.parent, row),

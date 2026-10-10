@@ -183,10 +183,13 @@ def test_ordinary_hidden_capture_uses_actual_sqlite_source_revision(
     assert database.read_bytes() == before and not (tmp_path / "memory.sqlite-shm").exists()
 
 
+@pytest.mark.parametrize("receipt_field", [
+    "observation_receipts_appended", "request_failures_appended", "memory_receipts_appended",
+])
 @pytest.mark.parametrize("fault", ["none", "provider_text", "missing_http", "delivery_hash",
                                   "missing_delivery", "checkpoint_text", "metadata", "policy"])
 def test_retained_agent_answer_requires_original_http_and_delivery(
-    tmp_path: Path, fault: str,
+    tmp_path: Path, fault: str, receipt_field: str,
 ) -> None:
     root, bank, identity = setup_run(tmp_path)
     row = attempt(bank, identity)
@@ -230,18 +233,21 @@ def test_retained_agent_answer_requires_original_http_and_delivery(
     assert pack["acceptance_evidence_complete"] is (fault == "none")
     assert pack["semantic_verdict"] == "UNREVIEWED"
     if fault == "none":
-        # Current Host records whether real query receipts were appended. False
+        # Current Host records whether program feedback was appended. False
         # preserves the original HTTP contract, including the delivery trace.
-        metadata["observation_receipts_appended"] = False
-        delivery["observation_receipts_appended"] = False
+        metadata[receipt_field] = False
+        delivery[receipt_field] = False
         save(bank / f"{identity}-attempt-0.json", row)
         save(bank / f"{identity}-result.json", row)
         trace.write_text("".join(json.dumps(e) + "\n" for e in events))
         current = EVAL.evaluate(root, cohort="L2")["case_packs"][0]
         assert current["acceptance_evidence_complete"] is True
         assert current["semantic_verdict"] == "UNREVIEWED"
-        metadata["observation_receipts_appended"] = True
-        delivery["observation_receipts_appended"] = True
+        malformed = {**row, "finalization": {**metadata, receipt_field: "false"}}
+        assert EVAL.retained_agent_final_linkage(malformed, events, freeze) == {
+            "status": "UNKNOWN", "reason": "unrecognized_retained_agent_contract"}
+        metadata[receipt_field] = True
+        delivery[receipt_field] = True
         save(bank / f"{identity}-attempt-0.json", row)
         save(bank / f"{identity}-result.json", row)
         trace.write_text("".join(json.dumps(e) + "\n" for e in events))
