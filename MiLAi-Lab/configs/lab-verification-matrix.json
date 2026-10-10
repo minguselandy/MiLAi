@@ -117,7 +117,9 @@
     "tests/memory/test_edit_memory_v2.py",
     "tests/unit/test_edit_v2_runner.py",
     "tests/unit/test_edit_development_history.py",
-    "tests/unit/test_edit_views.py"
+    "tests/unit/test_edit_views.py",
+    "tests/unit/test_baseline_alignment.py",
+    "tests/unit/test_baseline_alignment_backends.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -197,7 +199,9 @@
     "tests/memory/test_edit_memory_v2.py",
     "tests/unit/test_edit_v2_runner.py",
     "tests/unit/test_edit_development_history.py",
-    "tests/unit/test_edit_views.py"
+    "tests/unit/test_edit_views.py",
+    "tests/unit/test_baseline_alignment.py",
+    "tests/unit/test_baseline_alignment_backends.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",

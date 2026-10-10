@@ -8,8 +8,10 @@ from typing import Any
 
 import pytest
 
+from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.contracts.memory_backend import IngestionResult, MemorySession, RetrievalResult
 from milai_lab.harness.artifact_io import read_json, write_json
+from milai_lab.memory.service import MemoryService
 from milai_lab.runners import edit_benchmarks
 from milai_lab.runners.baseline_alignment import (
     BACKENDS,
@@ -122,6 +124,31 @@ def test_existing_online_loop_delivers_only_current_observed_prefix(
     assert [row["session"] for row in saved] == [1, 0]
     assert all(row["extracted_memories"] == [] for row in saved)
     assert not (tmp_path / "http").exists()
+    prior_events = copy.deepcopy(backend.events)
+
+    class OfficialLabels:
+        def __init__(self, *_: Any) -> None:
+            pass
+
+        def score(self, name: str, *_: str) -> dict[str, str]:
+            assert name == "question", "Unsupported extraction/update must not be invented"
+            return {"evaluation_result": "Correct"}
+
+        def aggregate_results(self, records: dict[str, Any]) -> dict[str, Any]:
+            assert records["memory_integrity_records"] == []
+            assert records["memory_accuracy_records"] == []
+            assert records["memory_update_records"] == []
+            return {**records, "overall_score": {}}
+
+    monkeypatch.setattr(edit_benchmarks, "HaluMemOfficial", OfficialLabels)
+    scored = execution.halumem("score")
+    assert scored["correct"] == 2 and scored["opportunities"] == 2
+    assert scored["labels"] == {"Correct": 2}
+    assert scored["backend_capabilities"] == {"session_output": "N/A",
+                                               "reference_update_state": "N/A"}
+    assert backend.events == prior_events and len(delivered) == 2
+    official = read_json(tmp_path / "halumem-official-results.json")
+    assert official["overall_score"]["memory_extraction_f1"] is None
 
 
 def test_score_requires_all_declared_predictions(tmp_path: Path) -> None:
@@ -134,3 +161,35 @@ def test_score_requires_all_declared_predictions(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="Every declared backend"):
         run_alignment_arm(config, tmp_path, BACKENDS[0], "score")
     assert not (tmp_path / BACKENDS[0] / "actual-config.json").exists()
+
+
+def test_reference_query_effects_and_later_state_stay_outside_session_view(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(configuration(), "MiLAi-memory-only")
+    execution.root, execution._evaluation_key = tmp_path, "session/current"
+    monkeypatch.setattr(execution, "_semantic_retriever", lambda: None)
+    namespace = ("edit", "aligned", "M", "opaque-owner")
+    cache = (*namespace, "reference-query-cache")
+    observed_stores = []
+
+    def reference_search(self: Any, service: MemoryService, query: str) -> list[str]:
+        observed_stores.append(service.store)
+        row = service.store.get(namespace, "source-version")
+        assert row is not None
+        service.store.put(cache, query, {"reference_only": True}, index=False)
+        return [row.value["body"]]
+
+    monkeypatch.setattr(edit_benchmarks.BenchmarkRun, "_score_retrieval", reference_search)
+    with SqliteStore.from_conn_string(str(tmp_path / "actual.sqlite")) as store:
+        original = MemoryService(store, namespace, "opaque-owner", tmp_path / "actual.lock",
+                                 mutation_contract="event_bound_v1",
+                                 candidate_contract="read_handle_v1")
+        store.put(namespace, "source-version", {"body": "actual current source"}, index=False)
+        assert execution._score_retrieval(original, "reference A") == ["actual current source"]
+        assert store.get(cache, "reference A") is None
+        store.put(namespace, "source-version", {"body": "later arrived source"}, index=False)
+        assert execution._score_retrieval(original, "reference B") == ["actual current source"]
+        assert store.get(cache, "reference B") is None
+        assert all(observed is not store for observed in observed_stores)

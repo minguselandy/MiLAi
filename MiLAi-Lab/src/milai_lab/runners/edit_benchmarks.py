@@ -482,6 +482,16 @@ def adjacent_source_context(
 
 
 class BenchmarkRun:
+    @property
+    def session_output_supported(self) -> bool:
+        """Native adapters may lack actual per-session extraction output."""
+        return True
+
+    @property
+    def reference_retrieval_supported(self) -> bool:
+        """A reference-guided state view must be isolated from future method work."""
+        return True
+
     def __init__(
         self, settings: dict[str, Any], root: Path, *, phase: str = "all"
     ) -> None:
@@ -2216,7 +2226,8 @@ class BenchmarkRun:
                         # It runs after predictions; saved material is not fed to a Writer/Reader.
                         update_retrieval = [
                             self._score_retrieval(service, memory["memory_content"])
-                            if not generated and memory["is_update"] == "True"
+                            if self.reference_retrieval_supported and not generated
+                            and memory["is_update"] == "True"
                             and memory.get("original_memories") else []
                             for memory in session.get("memory_points", [])
                         ]
@@ -2251,6 +2262,8 @@ class BenchmarkRun:
                             opportunities["total_updates"] += 1
                             if not memory.get("original_memories"):
                                 opportunities["updates_missing_original"] += 1
+                            if not self.reference_retrieval_supported:
+                                continue
                         if memory["is_update"] == "True" and memory.get("original_memories"):
                             retrieved = saved_prediction["update_retrieval"][mordinal]
                             if not retrieved:
@@ -2276,6 +2289,8 @@ class BenchmarkRun:
                             }:
                                 opportunities["valid_scored_updates"] += 1
                         else:
+                            if not self.session_output_supported:
+                                continue
                             result = (
                                 self._safe_score(
                                     official,

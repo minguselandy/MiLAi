@@ -7,16 +7,18 @@ The backend sees ObservedSession only; gold remains in the inherited evaluator.
 from __future__ import annotations
 
 import copy
+import sqlite3
 import uuid
 from collections import Counter
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
+from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.contracts.memory_backend import MemoryBackend, MemorySession
 from milai_lab.datasets.edit_benchmarks import ObservedSession, halumem_time, halumem_users
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.service import MemoryService
-from milai_lab.runners.edit_benchmarks import BenchmarkRun
+from milai_lab.runners.edit_benchmarks import BenchmarkRun, reader_messages
 
 BACKENDS = ("RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only")
 
@@ -25,7 +27,7 @@ def alignment_settings(config: dict[str, Any], backend: str) -> dict[str, Any]:
     """One explicit configuration per arm, retaining the ordinary maintenance recipe."""
     if backend not in config["alignment"]["backends"] or backend not in BACKENDS:
         raise ValueError("Unknown declared alignment backend")
-    settings = copy.deepcopy(config["entrypoints"]["benchmark"])
+    settings = cast(dict[str, Any], copy.deepcopy(config["entrypoints"]["benchmark"]))
     settings.pop("arms", None)
     settings.update(arm="M", alignment_backend=backend, alignment=config["alignment"])
     settings["retrieval_limit"] = config["alignment"]["qa_top_k"]
@@ -95,13 +97,13 @@ class AlignmentRun(BenchmarkRun):
 
     @property
     def session_output_supported(self) -> bool:
-        return self.settings["alignment_backend"] == "MiLAi-memory-only"
+        return str(self.settings["alignment_backend"]) == "MiLAi-memory-only"
 
     @property
     def reference_retrieval_supported(self) -> bool:
         # Raw source retrieval is not an exported semantic memory state. Native
         # Hindsight recall is not declared to be side-effect-free or cloneable.
-        return self.settings["alignment_backend"] == "MiLAi-memory-only"
+        return str(self.settings["alignment_backend"]) == "MiLAi-memory-only"
 
     def __init__(self, settings: dict[str, Any], root: Path, *, phase: str) -> None:
         super().__init__(settings, root, phase=phase)
@@ -137,11 +139,19 @@ class AlignmentRun(BenchmarkRun):
             def retrieve(question: str, date: str, key: str, limit: int) -> list[dict[str, Any]]:
                 return self.retrieve_material(service, question, date, key, limit=limit)
 
-            value = MiLAiMemoryBackend(maintain=maintain, retrieve=retrieve)
+            value = MiLAiMemoryBackend(
+                maintain=maintain, retrieve=retrieve,
+                maintenance_result=lambda key: read_json(
+                    self.root / "maintenance" / key / "complete.json"),
+                retrieval_native=lambda key: read_json(
+                    self.root / "http" / key / "retrieval-native.json"),
+                usage=lambda: dict(self.budget.state),
+            )
         self.backends[owner] = value
         return value
 
     def maintain(self, service: MemoryService, observed: ObservedSession, key: str) -> list[str]:
+        self._evaluation_key = key
         receipt = self._backend(service).ingest(observed, key=key)
         write_json(self.root / "native" / key / "ingestion.json", receipt)
         if (not receipt["completed"]
@@ -163,13 +173,54 @@ class AlignmentRun(BenchmarkRun):
             write_json(path, retrieval)
         # The actual return is retained intact. Common transport only renders
         # those materials; no additional extractor, selector or identity binding.
-        answer, _ = self.answer_material(question, date, key, retrieval["materials"])
+        cached_response = (self.root / "http" / key / "response.json").exists()
+        answer, used = self.answer_material(question, date, key, retrieval["materials"])
+        if (self.settings["alignment_backend"] == "MiLAi-memory-only"
+                and service.memory_profile == "unified_v1"):
+            from milai_lab.memory.activation import ActivationIndex
+
+            index = ActivationIndex(service)
+            for material in used:
+                if "record_id" in material:
+                    index.record_use(material["record_id"], request_id=key, cached=cached_response)
         return answer
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:
         if not self.reference_retrieval_supported:
             return []
-        return super()._score_retrieval(service, query)
+        # Reference text can issue handles and populate search caches. Preserve
+        # the actual session state once and perform these evaluator-only reads
+        # in its own Store; none of those effects re-enter the method bank.
+        folder = self.root / "evaluation-views" / self._evaluation_key
+        folder.mkdir(parents=True, exist_ok=True)
+        database = folder / "memory.sqlite"
+        if not database.exists():
+            with sqlite3.connect(database) as destination:
+                service.store.conn.backup(destination)
+            write_json(folder / "view.json", {
+                "session_key": self._evaluation_key, "owner": service.owner,
+                "namespace": list(service.namespace), "purpose": "evaluator-only-update-K10",
+                "source": "actual session state after current predictions; no future ingestion",
+            })
+        with SqliteStore.from_conn_string(str(database)) as store:
+            isolated = MemoryService(
+                store, service.namespace, service.owner, folder / "memory.lock",
+                mutation_contract=service.mutation_contract,
+                candidate_contract=service.candidate_contract,
+                semantic_retriever=self._semantic_retriever(),
+                memory_profile=service.memory_profile, memory_ranking=service.memory_ranking,
+            )
+            return super()._score_retrieval(isolated, query)
+
+    def _reader_messages(
+        self, question: str, date: str, memories: list[dict[str, Any]],
+    ) -> list[dict[str, str]]:
+        return reader_messages(
+            question, date, memories,
+            memory_view=("source_history" if self.settings["alignment_backend"] == "RawRAG-local"
+                         else "retained_state"),
+            projection=self.settings.get("reader_projection", "legacy"),
+        )
 
     def halumem(self, phase: str = "all") -> dict[str, Any]:
         result = super().halumem(phase)

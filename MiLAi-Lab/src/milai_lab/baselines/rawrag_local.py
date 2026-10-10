@@ -109,10 +109,11 @@ class RawRAGLocal:
         ranked: list[dict[str, Any]] = []
         if units:
             # Optional dependency; importing the Lab core never imports this package.
+            from importlib import import_module
             from importlib.metadata import version
 
             import numpy as np
-            from rank_bm25 import BM25Okapi  # type: ignore[import-not-found]
+            BM25Okapi = import_module("rank_bm25").BM25Okapi
 
             if version("rank-bm25") != BM25_VERSION:
                 raise ValueError("RAWRAG_BM25_VERSION_CHANGED")
