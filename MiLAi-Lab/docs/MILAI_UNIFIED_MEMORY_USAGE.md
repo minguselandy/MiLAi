@@ -45,6 +45,14 @@
 本轮提交仅包含Lab实现、配置、必要检查和整理后的文档；原始Source、QA/gold、Reasoning、
 HTTP/trace、银行与本地运行产物保持ignored。Product仍为NO_GO，六项最终交付仍未完成。
 
+本轮已推送开发分支并创建叠加在PR119之上的[草稿PR120](https://github.com/minguselandy/MiLAi/pull/120)，
+首份汇总提交为`62afc649b5519ab26da8ae4eb527cdd0f7aa6b6b`，远端head及正文已核对。
+首轮Fast `38014947469` 的Lab gate因新增`reader_projection.py`未进入既有源码登记清单而失败；
+已补充该一项登记。修复后本地矩阵覆盖262源码/6个canonical package，15项既有源码所有权/
+请求架构检查、全Lab Ruff与该文件严格类型检查通过；远端后续CI按自身运行身份另行确认，
+不借用旧CI或宣称Full全部通过。登记改变仅用于发布树的身份/验证覆盖，未回填旧请求身份，
+正在执行的源码归档、配置与实际结果仍冻结在`5019968`。
+
 原Host20新空库运行在2026-10-09 17:56:46 UTC停止：13 COMPLETED、7 NOT_RUN。
 两次遗忘拒绝回执缺少effect字段，汇总保守标成unknown；独立代码边界及只读数据库核对
 确认仅这两次属于写入前无效果拒绝，原STOPPED结果保持原样。18:04:32 UTC启动单独补充运行，

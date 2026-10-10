@@ -30,8 +30,12 @@ Fixed01:50:07UTC:312gen responses/3440007known,259emb/36120tokens agree with liv
 1gen pending, not phase closure. All312 planned input counts equal actualprompt_tokens;
 peaks Extract13781/Writer-select25711/Editor32223/Reader-select2942/Reader28511 <=32256.
 At01:50:36UTC313gen requests/3471370known=charged,newunknown0; fixed observations are not phase ends.
-User explicitly requests experiment summary and submission to GitHub on2026-10-10; publish the
-integration branch and a draft PR stacked on119. This does not authorize merging or stopping main.
+User explicitly requests experiment summary and submission to GitHub on2026-10-10.
+Published integration branch62afc649b5519ab26da8ae4eb527cdd0f7aa6b6b and draftPR120 stacked on119;
+remote head/body verified, no merge or main interruption. Initial Fast38014947469 Lab gate failed
+SOURCE_REGISTRATION_DRIFT:memory: reader_projection.py missing from source_identity registration.
+One-line registration repair passes matrix262sources/6canonicalpackages,15existing ownership/request
+checks, fullLab Ruff and changed-file strict types; frozen5019968 runtime/old identities stay untouched.
 Only saved response metadata,0new calls/bank/dataset; no future capacity/semantic advantage claim.
 Native32/drift/external28/controlled v3 configs PREPARED ONLY,0HTTP; no final confirmation freeze.
 Native/drift static entry review in native-drift-runner-review-5019968-v3.json:9code files equal
