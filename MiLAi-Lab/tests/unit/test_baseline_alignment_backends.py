@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import json
 import sqlite3
 import threading
@@ -282,6 +283,8 @@ def bridge_settings(tmp_path: Path) -> tuple[dict[str, Any], VLLMConfig, VLLMCon
 
 
 def test_native_model_bridge_preserves_wire_and_uses_exact_original_owner(tmp_path: Path) -> None:
+    from milai_lab.runners.edit_benchmarks import BenchmarkRun
+
     settings, generation_config, embedding_config = bridge_settings(tmp_path)
     wires: list[dict[str, Any]] = []
     entered, release = threading.Event(), threading.Event()
@@ -314,11 +317,16 @@ def test_native_model_bridge_preserves_wire_and_uses_exact_original_owner(tmp_pa
                 "response_format": {"type": "json_object"}, "seed": 29, "n": 2}
     embedded = {"model": embedding_config.model, "input": ["literal", "other"],
                 "dimensions": 1024, "encoding_format": "base64"}
+    runner = BenchmarkRun.__new__(BenchmarkRun)
+    runner.root, runner._embedding_serial = tmp_path / "runner", 1
+    old_trace = runner.root / "http/embedding/000001/transport.json"
+    write_json(old_trace, {"receipt": "previous ordinary embedding"})
+    old_bytes = old_trace.read_bytes()
     with http_budget_scope(settings) as budget:
         assert budget is not None and budget.http_owner is not None
         generation = VLLMClient(generation_config, budget=budget,
                                 transport=httpx.MockTransport(upstream))
-        embedding = VLLMClient(embedding_config, budget=budget,
+        embedding = VLLMClient(embedding_config, emit=runner._embedding_trace, budget=budget,
                                transport=httpx.MockTransport(upstream))
         bridge = HindsightModelBridge(
             tmp_path / "http", generation_client=generation,
@@ -368,6 +376,13 @@ def test_native_model_bridge_preserves_wire_and_uses_exact_original_owner(tmp_pa
             assert budget.state["generation"]["known_tokens"] == 10
             assert budget.state["embedding"]["known_tokens"] == 2
             assert budget.state["generation"]["unknown_usage"] == 0
+            assert runner._embedding_serial == 2 and old_trace.read_bytes() == old_bytes
+            new_embedding = runner.root / "http/embedding/000002"
+            assert read_json(new_embedding / "request.json") == {
+                "model": embedding_config.model, "input": embedded["input"],
+            }
+            assert read_json(new_embedding / "response.json") == responses[1].json()
+            assert read_json(new_embedding / "transport.json")["request"] == embedded
             assert bridge.failure is None
             assert httpx.post(bridge.base_url + "/rerank", json=original).status_code == 404
             assert httpx.post(bridge.base_url + "/embeddings", json=embedded).status_code == 401
@@ -375,6 +390,124 @@ def test_native_model_bridge_preserves_wire_and_uses_exact_original_owner(tmp_pa
         finally:
             release.set()
             bridge.close()
+            generation.close()
+            embedding.close()
+
+
+@pytest.mark.parametrize("status", [400, 429, 500])
+@pytest.mark.parametrize("has_usage", [True, False])
+def test_native_model_bridge_preserves_http_errors_and_actual_usage(
+    tmp_path: Path, status: int, has_usage: bool,
+) -> None:
+    settings, generation_config, embedding_config = bridge_settings(tmp_path)
+    receipt: dict[str, Any] = {"error": {"native": "actual error"}, "opaque": ["b", "a"]}
+    if has_usage:
+        receipt["usage"] = {"prompt_tokens": 2, "completion_tokens": 3, "total_tokens": 5}
+    calls = 0
+
+    def upstream(request: httpx.Request) -> httpx.Response:
+        nonlocal calls
+        calls += 1
+        return httpx.Response(status, json=receipt)
+
+    with http_budget_scope(settings) as budget:
+        assert budget is not None
+        generation = VLLMClient(generation_config, budget=budget,
+                                transport=httpx.MockTransport(upstream))
+        embedding = VLLMClient(embedding_config, budget=budget,
+                               transport=httpx.MockTransport(upstream))
+        bridge = HindsightModelBridge(tmp_path / "http", generation_client=generation,
+                                      embedding_client=embedding).start()
+        headers = {"Authorization": f"Bearer {bridge.api_key}"}
+        try:
+            response = httpx.post(bridge.base_url + "/chat/completions", headers=headers,
+                                  json={"model": generation_config.model,
+                                        "messages": [], "max_tokens": 8})
+            assert response.status_code == status and response.json() == receipt
+            trace = read_json(tmp_path / "http/000001/transport.json")
+            assert trace["receipt"] == receipt and trace["http_status"] == status
+            assert trace["exception"]["type"] == "HTTPStatusError"
+            assert trace["usage_confirmed"] is has_usage
+            assert bridge.failure is not None and bridge.failure["resources_settled"] is True
+            assert httpx.post(bridge.base_url + "/chat/completions", headers=headers,
+                              json={"model": generation_config.model,
+                                    "messages": [], "max_tokens": 8}).status_code == 503
+            assert calls == 1 and budget.state["generation_requests"] == 1
+            assert budget.state["generation"]["unknown_usage"] == (0 if has_usage else 1)
+            assert budget.state["generation"]["known_tokens"] == (5 if has_usage else 0)
+            if has_usage:
+                assert budget.state["generation"]["charged_tokens"] == 5
+            else:
+                assert budget.state["generation"]["charged_tokens"] > 8
+        finally:
+            with pytest.raises(HindsightIngestionIncomplete) as closed:
+                bridge.close()
+            assert closed.value.resources_settled is True
+            generation.close()
+            embedding.close()
+
+
+@pytest.mark.parametrize("receipt_state", [
+    "request_only", "usage_missing", "confirmed", "http_error",
+])
+def test_native_model_bridge_reopen_checks_crash_receipts_before_dispatch(
+    tmp_path: Path, receipt_state: str,
+) -> None:
+    settings, generation_config, embedding_config = bridge_settings(tmp_path)
+    folder = tmp_path / "http/000001"
+    saved: dict[str, Any] = {"event": "vllm_request", "path": "chat/completions",
+                             "request_sent": True}
+    if receipt_state != "request_only":
+        receipt: dict[str, Any] = {"choices": [], "opaque": "actual native response"}
+        if receipt_state in {"confirmed", "http_error"}:
+            receipt["usage"] = {"prompt_tokens": 2, "completion_tokens": 3, "total_tokens": 5}
+        saved.update(http_status=200, response_body_base64=base64.b64encode(
+            json.dumps(receipt).encode()).decode(), receipt=receipt,
+                     usage_confirmed=receipt_state in {"confirmed", "http_error"})
+        if receipt_state == "http_error":
+            saved.update(event="vllm_error", http_status=500,
+                         exception={"type": "HTTPStatusError", "message": "original HTTP error"})
+    write_json(folder / "transport.json", saved)
+    actual_bytes = (folder / "transport.json").read_bytes()
+    # A previous process reserved this request, then exited before ledger finish.
+    old_budget = RunBudget(RunLimits(generation_requests=10), Path(settings["budget_path"]))
+    old_budget.reserve("chat/completions", {"model": generation_config.model,
+                       "messages": [], "max_tokens": 8})
+
+    def upstream(request: httpx.Request) -> httpx.Response:
+        raise AssertionError("recovery never replays a model request")
+
+    with http_budget_scope(settings) as budget:
+        assert budget is not None
+        original_budget = json.dumps(budget.state, sort_keys=True)
+        assert budget.state["generation"]["unknown_usage"] == 1
+        assert budget.state["generation"]["charged_tokens"] > 8
+        generation = VLLMClient(generation_config, budget=budget,
+                                transport=httpx.MockTransport(upstream))
+        embedding = VLLMClient(embedding_config, budget=budget,
+                               transport=httpx.MockTransport(upstream))
+        bridge = HindsightModelBridge(tmp_path / "http", generation_client=generation,
+                                      embedding_client=embedding)
+        try:
+            if receipt_state == "confirmed":
+                bridge.start()
+                assert bridge.failure is None
+            else:
+                with pytest.raises(ValueError, match="BLOCKED"):
+                    bridge.start()
+                assert bridge.failure is not None
+                assert bridge.failure["resources_settled"] is (receipt_state != "request_only")
+                assert read_json(tmp_path / "http/transport-blocked.json") == bridge.failure
+            assert (folder / "transport.json").read_bytes() == actual_bytes
+            assert json.dumps(budget.state, sort_keys=True) == original_budget
+            assert not (tmp_path / "http/000002").exists()
+        finally:
+            if receipt_state == "confirmed":
+                bridge.close()
+            else:
+                with pytest.raises(HindsightIngestionIncomplete) as closed:
+                    bridge.close()
+                assert closed.value.resources_settled is (receipt_state != "request_only")
             generation.close()
             embedding.close()
 

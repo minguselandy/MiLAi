@@ -270,6 +270,9 @@ class VLLMClient:
                       isinstance(row, list) and all(type(token) is int for token in row)
                   ) for row in inputs)):
                 raise ValueError("NATIVE_EMBEDDING_INPUT_INVALID")
+            if self.emit:
+                self.emit({"event": "embedding_request", "model": request["model"],
+                           "input": inputs})
         return self._post(path, request, capacity_receipt=capacity_receipt,
                           accounting_request=accounting, on_event=on_event)
 
@@ -361,13 +364,19 @@ class VLLMClient:
             event["wall_seconds"] = time.monotonic() - started
             event["http_status"] = response.status_code
             event["response_text"] = response.text
-            response.raise_for_status()
-            receipt: dict[str, Any] = response.json()
+            if accounting_request is None:
+                response.raise_for_status()
+            try:
+                receipt: dict[str, Any] = response.json()
+            except ValueError:
+                # Preserve the actual HTTP error for a non-JSON error body.
+                response.raise_for_status()
+                raise
             event["receipt"] = receipt
-            if accounting_request is not None and not isinstance(receipt, dict):
-                raise ValueError("NATIVE_RESPONSE_OBJECT_REQUIRED")
-            event["usage"] = receipt.get("usage", "unknown")
             if accounting_request is not None:
+                event["usage"] = (
+                    receipt.get("usage", "unknown") if isinstance(receipt, dict) else "unknown"
+                )
                 usage = event["usage"]
                 fields = ("prompt_tokens", "completion_tokens", "total_tokens") if (
                     path == "chat/completions"
@@ -377,6 +386,11 @@ class VLLMClient:
                     and all(type(usage.get(field)) is int and usage[field] >= 0 for field in fields)
                     and usage["total_tokens"] == sum(usage[field] for field in fields[:-1])
                 )
+                response.raise_for_status()
+                if not isinstance(receipt, dict):
+                    raise ValueError("NATIVE_RESPONSE_OBJECT_REQUIRED")
+            else:
+                event["usage"] = receipt.get("usage", "unknown")
             if capacity_receipt is not None:
                 usage = event["usage"]
                 actual_prompt = usage.get("prompt_tokens") if isinstance(usage, dict) else None

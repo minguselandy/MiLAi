@@ -100,6 +100,19 @@ class HindsightModelBridge:
                             if path.is_dir() and path.name.isdecimal()), default=0)
         blocked = self.root / "transport-blocked.json"
         self.failure: dict[str, Any] | None = read_json(blocked) if blocked.exists() else None
+        if self.failure is None:
+            for folder in sorted(self.root.iterdir()):
+                trace = folder / "transport.json"
+                if not folder.name.isdecimal() or not folder.is_dir() or not trace.exists():
+                    continue
+                event = read_json(trace)
+                if event.get("request_sent") is True and (
+                    not self._response_recorded(event) or event.get("usage_confirmed") is not True
+                    or event.get("event") == "vllm_error"
+                ):
+                    self._block(folder, "saved_native_response_unconfirmed",
+                                resources_settled=self._response_recorded(event))
+                    break
 
     @property
     def base_url(self) -> str:
@@ -198,10 +211,22 @@ class HindsightModelBridge:
                 write_json(folder / "failure.json", {"type": type(error).__name__,
                                                        "message": str(error)})
                 self._block(folder, type(error).__name__,
-                            resources_settled=not invoked or event.get("request_sent") is False)
+                            resources_settled=not invoked or event.get("request_sent") is False
+                            or self._response_recorded(event))
             if "response_body_base64" in event:
                 return event["http_status"], base64.b64decode(event["response_body_base64"])
             return 502, b'{"error":"native model request unconfirmed or refused"}'
+
+    @staticmethod
+    def _response_recorded(event: dict[str, Any]) -> bool:
+        status, body = event.get("http_status"), event.get("response_body_base64")
+        if type(status) is not int or not 100 <= status <= 599 or not isinstance(body, str):
+            return False
+        try:
+            base64.b64decode(body, validate=True)
+        except ValueError:
+            return False
+        return True
 
     def _block(self, folder: Path, reason: str, *, resources_settled: bool) -> None:
         self.failure = {"reason": reason, "attempt": folder.name,
