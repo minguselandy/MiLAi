@@ -1,5 +1,24 @@
 # 本地基线对齐协议 v1
 
+最新：冻结D的M15:20:43 UTC预测／资源闭合，32会话／73机会＝53答案＋20发送前容量缺答；
+输入35,532–42,854＞32,256，原材料及null保留，新unknown0／0、原limits不变。H仍FAILED、
+套件STOPPED，原score gate未满足，Judge0；答案数量不是正确率。Root15:22:50 UTC启动原Host42，
+15:25:04 UTC因材料包装超限停止，1COMPLETED／1FAILED／40NOT_RUN；首条真实保存但回答错误，
+第二条真实维护提交后失败。原D／功能配置／账本不变，新unknown0／0、limits不变，实际进程退出，
+租约FREE；公开SDK独立重开确认当前rev2／旧rev1，0模型。完整Host验收仍未完成。
+新1800秒三方根保持冻结12b／尚未派发；Root完成失败Host效果与资源核查后可独立串行调度，
+同时离线修复Host，不重启失败根、热改输入或拼接前缀。
+
+后续入口复用原定义：MiLAi选择单个`entrypoints.benchmark.arm`，合法B0／B1／B2／M／Append-only，
+默认M；其他后端仍M占位。必要E3各臂使用独立配置／根／银行，B2／M保持同一features及读取条件。
+现有配置已登记原28个LongMemEval cleaned case；实际执行配置另声明
+`history_protocol=longmemeval-complete-history`，CLI显式`--benchmark longmemeval`。
+prepare登记真实case机会及来源重叠组，实际bank路径／namespace使用独立opaque映射且末尾仍owner；
+完整公开历史完成后才交当前问题。方法不接触has_answer／answer_session_ids／答案，QA不写回。
+已确认容量／length／非文本缺答保留null、全部机会分母、官方标签null、无Judge；未知仍停止。
+普通LME默认fail-fast及原路径保持，原HaluMem行为不变。集成66检查／Ruff／严格类型通过，
+无真实模型／API／PG；这是薄入口验证，E3／E4实际未运行，不称28／500题成绩。
+
 新增部署等待条件（`12b87716`）：HindsightBackend默认完成等待300秒，local-v1显式1800秒；
 单次模型HTTP期限仍300秒，不改变原生算法／材料／Reader／K／额度／重试。40相关检查、
 Ruff／严格类型通过、0真实调用。新源及独立空根离线prepare确认每臂32／73／72机会、12新标识、

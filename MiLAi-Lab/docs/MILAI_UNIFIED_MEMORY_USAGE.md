@@ -1,5 +1,42 @@
 # 统一记忆功能候选与当前执行状态
 
+## 2026-10-10：M 预测闭合，Host 第二条容量失败停止
+
+冻结`d50351a8`的独立M于15:20:43 UTC／北京时间23:20:43正常闭合，32会话／73 QA机会：
+53答案、20缺答，`PREDICTIONS_SAVED / resources_settled=true`，原父／worker已退出。
+四用户答案／机会分别为20／20、12／12、12／22、9／19；这不是正确率。
+20缺答全部是发送前容量失败，输入35,532–42,854＞32,256，`request_sent=false`；
+实际材料、null及对应分母保留。阶段费用148生成／2,609,788 known＝charged／342,083 embedding，
+新增unknown0／0、原limits不变。原套件STOPPED及H失败保持，Judge0，没有完整三方评分或排名。
+
+只读核查第一用户八次维护确认一项最早漏写：第六次的新限定／计划已被提取并实际交付Editor，
+但Editor返回空提案、提交回执为空、`semantic_write_performed=false`；前后21条保存态完全一致，
+到第八次该Source仍未绑定语义记录。核查只使用实际Source、维护HTTP和保存快照，未读QA／gold；
+这是已交付信息未形成语义版本的证据，不是本轮QA标签或全部后续错误的归因。
+
+Root在M及原生资源真实闭合、原租约FREE后，于15:22:50 UTC启动冻结D的Host原42消息，
+15:25:04 UTC因`V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT`停止：1条COMPLETED、1条FAILED、
+40条NOT_RUN。两条原故事各重复三次的范围保留，未执行部分不能记为通过。
+第一条真实提交revision1，模型却调用未提供的保存工具并回答无法保存；程序追加实际提交回执，
+原错误仍在，原模型答案及完整交付均失败。第二条维护真实提交revision2后才在材料包装处失败，
+不能将其写成没有保存。实际模型输入已包含维护提交回执，失败不是回执未送达。
+本阶段9生成／54,816 known＝charged／299 embedding、新unknown0／0、原limits不变。
+父及两条消息进程退出，原租约FREE、原生UID残留0；新进程通过公开SDK重开同一银行，
+确认当前revision2及旧revision1仍在，0模型调用。完整历史／遗忘／实时查询与六次重开验收未完成。
+旧失败根和全部效果保留；后续修复在新根集中运行，不自动重启或重放已提交维护。
+
+后续必要入口已补齐：仅MiLAi后端读取既有单个`benchmark.arm`，默认M，复用五臂原方法；
+外部后端不受该选择影响。LongMemEval复用现有完整历史循环、每case实际opaque bank与owner隔离，
+显式`--benchmark longmemeval`及`longmemeval-complete-history`，现有配置登记原28个cleaned case。
+确认的容量／length／非文本只读缺答保留null及分母，跳过Judge，官方标签保持null；未知仍停止。
+普通旧LME默认fail-fast及路径保持。集成分支66相关检查、Ruff五文件、严格类型三源码、diff检查通过，
+验证未调用真实模型／原生API／PG；临时合成SQLite不代表实际迁移实验。E3／E4尚未运行。
+
+新E1仍冻结`12b87716`、1800秒完成等待，仅离线准备；失败Host的效果／资源核查闭合后，
+Root可串行调度独立三方实验，同时离线修复Host。全新空根、不热改D或拼接旧预测。
+E2–E4及完整Host语义验收仍未完成，Goal ACTIVE。
+已发布`f40375f0`自身Fast38059816718成功、Full38059816721 skipped；后续提交需核对各自CI。
+
 ## 2026-10-10：完成等待修复已合流，新三方配置仅离线准备
 
 修复提交`12b87716`为原生后端增加独立`completion_timeout`，默认保持300秒；本地对齐配置

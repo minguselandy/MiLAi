@@ -3,7 +3,8 @@
 本页记录独立原生服务的入口、配置和部署验证边界。核查对象为实际
 `hindsight-api-slim==0.10.3`、`hindsight-client==0.10.3` 和 `pg0-embedded==0.15.2`。
 先前独立安装、禁网配置核查及机械 fixture 没有启动 Hindsight / PostgreSQL。
-较新的实际空实例已启动并关闭 API / DB，仍没有调用 Qwen、BGE 或 Judge，来源入库与语义闭环尚未运行。
+10:06 UTC的历史空实例已启动并关闭API／DB，那个部署检查没有调用模型或送Source。
+后续E0已完成实际入库／查询／重开；本页下列E1终态记录真实原生调用及整理超时，不能将空部署状态当当前状态。
 服务部署、原 HTTP 租约和真实模型调度由 Root 管理。
 
 **完成等待已单独声明（修复`12b87716`）：** `HindsightBackend(completion_timeout=...)`

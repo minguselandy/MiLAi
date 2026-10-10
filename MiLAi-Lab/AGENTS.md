@@ -1,5 +1,33 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+Latest actual M closure15:20:43.343931UTC: frozenD32sessions/73QA=53answers+20known
+before_http capacitymissing, input35532-42854>32256/request_sentFalse. PREDICTIONS_SAVED,
+resources_settledTrue, parent1056248/worker1056253gone;148gen/2609788known=charged/342083emb,
+newunknown0/0/limits unchanged/original suite bytes unchanged. Original HFAILED/suiteSTOPPED,
+Judge0; original score supervisor remains forbidden by the three-arm gate, no ranking.
+Source-only firstuser8-maintenance audit confirms ordinal5 extracted/delivered novel information,
+empty Editor proposal/no receipts/no semantic write/21before-after identical; no QA/gold audit.
+Do not optimize a prompt against that case or call structural completed semantic success.
+Root dispatched frozenD Host42 at15:22:50.384727UTC; STOPPED15:25:04.132170UTC after2attempts:
+A0COMPLETED/A1FAILED/40NOT_RUN. A0actuallycommittedrev1 but model claimed unabletosave;
+program appended receipt while keeping contradictory answer: rawmodelFAIL/publicdeliveryFAIL.
+A1actuallycommittedrev2 before V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT; not a failedsave or42passes.
+Original42scope/repeats/config/ledger preserved. Stage9gen/54816known=charged/299emb,
+newunknown0/0/limitsunchanged. Parent1345352/messagePIDs1345358/1348655gone, originalleaseFREE,
+nativeUID996residual0; newprocesspublicSDKexport seescurrentrev2/oldrev1 with0modelcalls.
+Root/C review both actualattempts and40NOT_RUN; fullsixtrajectory/SDKforgetacceptance stillpending.
+Fix blocker offline; use a freshdeclaredHostroot, never restart this failedroot or replaycommits.
+New arm entry fcac9a70 and LME entry965cbe5a integrated; Root13c56497 adds existing28selection
+and keeps no-Judge missing autoeval_labelNone rather than false official judgment. Root66related
+checks/Ruff5files/strictmypy3sources/diffcheckPASS,0realmodels/nativeAPI/PG; syntheticSQLite only.
+DefaultHaluMem/M unchanged; LME explicitcomplete-history/independent actual opaque banks,
+full legal history beforequery/noQA writeback; legacyLME defaultfailfast/path unchanged.
+New E1 stays source12b/prepared0models, fresh independent12IDs; private Root dispatch/scoring
+commands prepared only, no auto scheduler. Root may schedule independentE1 after actual failedHost
+effects/resource review closes; engineering fix can proceed offline, no overlap of modelowners.
+E2-E4/incremental comparisons/final candidate remain incomplete. PublishedF403ownFastSUCCESS/
+FullSKIPPED; next published head needs its own CI. Product/Schema/API/permissions unchanged.
+
 Native completion fix integrated as12b87716f399cadd0c63c6db21f4639fb2f1511e:
 backend completion_timeout defaults300; local alignment explicitly1800; modelHTTP timeout stays300.
 Actual Root40narrowchecks/Ruff3files/strictmypy1source/diffcheckPASS,0realmodels/API/PG.
