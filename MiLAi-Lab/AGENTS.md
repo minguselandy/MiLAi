@@ -1,5 +1,14 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+Latest actual dispatch15:39:28.925854UTC: freshE1 frozen12b87716, parent1409356/worker1409430,
+live exec28217, e1-local-v1-completion-1800-v4-prepared. Rawrunning/H-Mnotstarted at15:40UTC;
+32sessions/73QA/72updates perarm,12freshIDs, completion1800/HTTP300/originalledger unchanged.
+FailedHostreview statusREVIEWED_STOPPED_ACTUAL_ARTIFACTS:2actualattempts/40NOT_RUN/sdkreopen1,
+effects known/resources closed; this enables independentE1, not fullHost acceptance. A1 rev2 also
+retains an outdated generalstatement alongside a new exception; currentstate conflict confirmed,
+unrunA2Reader outcome unknown. OfflineA wrapperfix/C feedbackfix, no secondrealmodelowner.
+Latest published6c5ed57e ownFast38064307049in_progress/Full38064307038SKIPPED at15:40UTC.
+
 Latest actual M closure15:20:43.343931UTC: frozenD32sessions/73QA=53answers+20known
 before_http capacitymissing, input35532-42854>32256/request_sentFalse. PREDICTIONS_SAVED,
 resources_settledTrue, parent1056248/worker1056253gone;148gen/2609788known=charged/342083emb,
