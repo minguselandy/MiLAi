@@ -30,6 +30,10 @@ frozen5019968,30shared config values equal main;32items/12sessions/4users matche
 Native uses actual own before/after and degeneration controls, then isolated Reader+Judge/embeddings;
 no Editor formation replay. Original bank backup retains trajectory data physically: actual probe
 retrieval/evidence still require later inspection. This static review does not close Native/drift.
+Original external full-answer10 audit PREPARED ONLY at external-full-answer10-5019968-v3-prepared:
+10fixed IDs subset of original28,4external arms/40rows,manifest byte-identical;0HTTP/loader/runner/bank.
+Original evaluator T0/thinkingFalse/output8192/context retained; no Reader/Editor replay or official
+label replacement. Requires final candidate and all external predictions+uniform scores closed.
 Reserved16 config is PREPARED ONLY from original UUID/settings, no held-out dataset loader or semantic read.
 M tighter-context protocol is PREPARED ONLY: same first8/user, context65536=>49152,
 output32768/margin512 unchanged, complete input32256=>15872; baseline comes from full main M,

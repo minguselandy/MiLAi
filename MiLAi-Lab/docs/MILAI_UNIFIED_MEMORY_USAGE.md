@@ -199,6 +199,12 @@ Native使用各方法真实维护前后状态，Actual/NeverWrite/RetainAll为�
 原固定LongMemEval28题及作者callback适配配置保存在`external28-5019968-v3-prepared`，
 既有相关语言/措辞/独立顺序控制在`controlled-5019968-v3-prepared`；两者均0 HTTP，
 待开发证据与最终候选冻结，若最终源码改变则另建配置，不能把当前准备当确认结果。
+原定10题完整答案审查的配置与原选择manifest已准备在
+`external-full-answer10-5019968-v3-prepared`：题目仍为原28题中的固定10题，四外部方法共40审查行。
+保留原评价器temperature=0、thinking=False、8192输出及上下文/数据设置，
+与形成/Reader候选的32768输出模式分别计量；评价现成完整答案与原完整历史，不重跑Reader/Editor。
+仅复制选择metadata，未加载LongMemEval正文、问题或参考答案；0 HTTP、无runner/银行构造。
+全部外部预测与官方统一评分闭合后才调度，不替换官方标签；同家族Judge及重叠来源不构成独立确认。
 原16保留用户的UUID与配置已复制到`reserved16-5019968-v3-prepared`，仅准备，
 未调用数据加载器或读取保留用户语义；原B1/B2/M范围暂存，最终方法和比较范围尚未选定。
 固定紧预算协议位于`m-tight-context-5019968-v3-prepared`：M同四开发用户前8会话，
