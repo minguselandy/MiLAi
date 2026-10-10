@@ -30,7 +30,8 @@ def alignment_settings(config: dict[str, Any], backend: str) -> dict[str, Any]:
     settings = cast(dict[str, Any], copy.deepcopy(config["entrypoints"]["benchmark"]))
     settings.pop("arms", None)
     settings.update(arm="M", alignment_backend=backend, alignment=config["alignment"])
-    settings["retrieval_limit"] = config["alignment"]["qa_top_k"]
+    # Maintenance retains its original candidate limit. QA passes its separate
+    # explicit limit to the backend; aligning answers must not change writing.
     settings["memory_view_mode"] = config["alignment"]["delivery"]
     return settings
 
@@ -108,6 +109,7 @@ class AlignmentRun(BenchmarkRun):
     def __init__(self, settings: dict[str, Any], root: Path, *, phase: str) -> None:
         super().__init__(settings, root, phase=phase)
         self.backends: dict[str, MemoryBackend] = {}
+        self._resources_settled = False
 
     def _backend(self, service: MemoryService) -> MemoryBackend:
         owner = service.owner
@@ -267,11 +269,34 @@ class AlignmentRun(BenchmarkRun):
         return common
 
     def close(self) -> None:
-        try:
-            for backend in self.backends.values():
+        from milai_lab.integrations.memory.hindsight import HindsightIngestionIncomplete
+
+        self._resources_settled = False
+        failures: list[tuple[str, BaseException]] = []
+        for owner, backend in self.backends.items():
+            try:
                 backend.close()
-        finally:
-            super().close()
+            except BaseException as error:
+                failures.append((owner, error))
+        if failures:
+            if all(isinstance(error, HindsightIngestionIncomplete) and error.resources_settled
+                   for _, error in failures):
+                super().close()
+                self._resources_settled = True
+                raise failures[0][1]
+            write_json(self.root / "resource-unsettled.json", {
+                "status": "RESOURCE_UNSETTLED",
+                "backend_errors": [
+                    {"owner": owner, "type": type(error).__name__, "message": str(error)}
+                    for owner, error in failures
+                ],
+                "original_lease_released": False,
+                "next_dispatch": "Root must confirm native work has stopped or completed",
+                "process_exit": "The OS may release the lease; this is not native completion",
+            })
+            raise failures[0][1]
+        super().close()
+        self._resources_settled = True
 
 
 def run_alignment_arm(config: dict[str, Any], root: Path, backend: str, phase: str) -> None:
@@ -282,6 +307,9 @@ def run_alignment_arm(config: dict[str, Any], root: Path, backend: str, phase: s
     prepared = read_json(root / "alignment-prepared.json")
     if prepared["configuration"] != config:
         raise ValueError("Comparison configuration differs from its preparation")
+    for selected in config["alignment"]["backends"]:
+        if (root / selected / "resource-unsettled.json").exists():
+            raise ValueError("Native resource closure is unconfirmed; Root must resolve it first")
     settings["alignment_bank_ids"] = prepared["bank_ids"][backend]
     output = root / backend
     terminal = output / f"terminal-{phase}.json"
@@ -293,18 +321,45 @@ def run_alignment_arm(config: dict[str, Any], root: Path, backend: str, phase: s
             if not prior.exists() or read_json(prior)["status"] != "PREDICTIONS_SAVED":
                 raise ValueError("Every declared backend must close predictions before scoring")
     execution = AlignmentRun(settings, output, phase=phase)
+    result: dict[str, Any] | None = None
+    run_error: BaseException | None = None
+    close_error: BaseException | None = None
     try:
         result = execution.halumem(phase)
-        write_json(terminal, {
-            "status": "PREDICTIONS_SAVED" if phase == "predict" else "SCORED",
-            "phase": phase, "backend": backend, "result": result,
-        })
     except BaseException as error:
+        run_error = error
+    try:
+        execution.close()
+    except BaseException as error:
+        close_error = error
+        if (not getattr(execution, "_resources_settled", False)
+                and not (output / "resource-unsettled.json").exists()):
+            write_json(output / "resource-unsettled.json", {
+                "status": "RESOURCE_UNSETTLED",
+                "error": {"type": type(error).__name__, "message": str(error)},
+                "next_dispatch": "Root must confirm resource closure before another dispatch",
+            })
+    if run_error is not None or close_error is not None:
+        resources_settled = bool(getattr(execution, "_resources_settled", False))
         write_json(terminal, {
-            "status": "FAILED", "phase": phase, "backend": backend,
-            "error": {"type": type(error).__name__, "message": str(error)},
+            "status": ("RESOURCE_UNSETTLED"
+                       if close_error is not None and not resources_settled else "FAILED"),
+            "phase": phase, "backend": backend,
+            "resources_settled": resources_settled,
+            "error": ({"type": type(run_error).__name__, "message": str(run_error)}
+                      if run_error is not None else None),
+            "close_error": ({"type": type(close_error).__name__, "message": str(close_error)}
+                            if close_error is not None else None),
+            "saved_outputs": result,
             "no_automatic_retry": True,
         })
-        raise
-    finally:
-        execution.close()
+        if run_error is not None:
+            if close_error is not None:
+                run_error.add_note(f"Resource closure also failed: {close_error}")
+            raise run_error
+        assert close_error is not None
+        raise close_error
+    write_json(terminal, {
+        "status": "PREDICTIONS_SAVED" if phase == "predict" else "SCORED",
+        "phase": phase, "backend": backend, "result": result, "resources_settled": True,
+    })

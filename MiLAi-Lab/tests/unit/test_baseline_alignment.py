@@ -57,6 +57,7 @@ class ActualReturnBackend:
                 "usage": {"status": "unobserved"}}
 
     def retrieve(self, question: str, date: str, *, key: str, limit: int) -> RetrievalResult:
+        assert limit == 20
         self.events.append((question, len(self.history)))
         return {"materials": copy.deepcopy(self.history), "native_return": self.history,
                 "returned_count": len(self.history), "source_mapping": "original-sessions",
@@ -85,7 +86,10 @@ def test_prepare_keeps_qa_and_update_budgets_and_opaque_isolation(
     other = prepare_alignment(config, tmp_path / "independent")
     assert other["bank_ids"] != first["bank_ids"]
     settings = alignment_settings(config, "MiLAi-memory-only")
-    assert settings["retrieval_limit"] == 20 and settings["alignment"]["update_top_k"] == 10
+    assert (settings["retrieval_limit"]
+            == config["entrypoints"]["benchmark"]["retrieval_limit"] == 10)
+    assert settings["alignment"]["qa_top_k"] == 20
+    assert settings["alignment"]["update_top_k"] == 10
     assert settings["memory_view_mode"] == "direct"
     assert settings["maintenance_recipe"] == "extract_then_edit"
 
@@ -161,6 +165,108 @@ def test_score_requires_all_declared_predictions(tmp_path: Path) -> None:
     with pytest.raises(ValueError, match="Every declared backend"):
         run_alignment_arm(config, tmp_path, BACKENDS[0], "score")
     assert not (tmp_path / BACKENDS[0] / "actual-config.json").exists()
+
+
+def test_success_terminal_requires_resource_closure(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.runners import baseline_alignment
+
+    config = configuration()
+    write_json(tmp_path / "alignment-prepared.json", {
+        "configuration": config, "bank_ids": {backend: {} for backend in BACKENDS},
+    })
+    terminal = tmp_path / BACKENDS[0] / "terminal-predict.json"
+    events = []
+
+    class Execution:
+        def __init__(self, *_: Any, **__: Any) -> None:
+            pass
+
+        def halumem(self, _: str) -> dict[str, int]:
+            events.append("predicted")
+            return {"complete_answers": 2}
+
+        def close(self) -> None:
+            assert not terminal.exists()
+            events.append("closed")
+
+    monkeypatch.setattr(baseline_alignment, "AlignmentRun", Execution)
+    run_alignment_arm(config, tmp_path, BACKENDS[0], "predict")
+    assert events == ["predicted", "closed"]
+    assert read_json(terminal)["status"] == "PREDICTIONS_SAVED"
+
+
+@pytest.mark.parametrize("primary_failure", [False, True])
+def test_unsettled_close_retains_errors_and_stops_next_dispatch(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, primary_failure: bool,
+) -> None:
+    from milai_lab.runners import baseline_alignment
+
+    config = configuration()
+    write_json(tmp_path / "alignment-prepared.json", {
+        "configuration": config, "bank_ids": {backend: {} for backend in BACKENDS},
+    })
+    started = []
+
+    class Execution:
+        def __init__(self, *_: Any, **__: Any) -> None:
+            started.append(True)
+
+        def halumem(self, _: str) -> dict[str, int]:
+            if primary_failure:
+                raise ValueError("ingestion result unknown")
+            return {"complete_answers": 2}
+
+        def close(self) -> None:
+            raise RuntimeError("native status unconfirmed")
+
+    monkeypatch.setattr(baseline_alignment, "AlignmentRun", Execution)
+    with pytest.raises(ValueError if primary_failure else RuntimeError):
+        run_alignment_arm(config, tmp_path, BACKENDS[0], "predict")
+    terminal = read_json(tmp_path / BACKENDS[0] / "terminal-predict.json")
+    assert terminal["status"] == "RESOURCE_UNSETTLED"
+    assert terminal["close_error"]["message"] == "native status unconfirmed"
+    assert (terminal["error"]["message"] == "ingestion result unknown"
+            if primary_failure else terminal["error"] is None)
+    with pytest.raises(ValueError, match="resource closure is unconfirmed"):
+        run_alignment_arm(config, tmp_path, BACKENDS[1], "predict")
+    assert started == [True]
+
+
+@pytest.mark.parametrize("settled", [False, True])
+def test_native_close_attempts_all_banks_and_releases_only_settled_resources(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, settled: bool,
+) -> None:
+    from milai_lab.integrations.memory.hindsight import HindsightIngestionIncomplete
+
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.root = tmp_path
+    closed, released = [], []
+
+    class Bank:
+        def __init__(self, owner: str, fail: bool) -> None:
+            self.owner, self.fail = owner, fail
+
+        def close(self) -> None:
+            closed.append(self.owner)
+            if self.fail:
+                raise HindsightIngestionIncomplete("native completion failed",
+                                                  resources_settled=settled)
+
+    execution.backends = {"one": Bank("one", True), "two": Bank("two", False)}
+    monkeypatch.setattr(edit_benchmarks.BenchmarkRun, "close", lambda _: released.append(True))
+    with pytest.raises(HindsightIngestionIncomplete, match="native completion failed"):
+        execution.close()
+    assert closed == ["one", "two"]
+    assert execution._resources_settled is settled
+    if settled:
+        assert released == [True] and not (tmp_path / "resource-unsettled.json").exists()
+    else:
+        assert not released
+        receipt = read_json(tmp_path / "resource-unsettled.json")
+        assert receipt["original_lease_released"] is False
+        assert [row["owner"] for row in receipt["backend_errors"]] == ["one"]
 
 
 def test_reference_query_effects_and_later_state_stay_outside_session_view(

@@ -10,13 +10,13 @@ from __future__ import annotations
 
 import argparse
 import fcntl
-import importlib.util
 import json
 import os
 import subprocess
 import sys
 from collections import Counter
 from datetime import UTC, datetime
+from importlib import import_module
 from pathlib import Path
 from typing import Any
 
@@ -209,12 +209,11 @@ def serial_run(root: Path, schedule_note: str) -> dict[str, Any]:
 
 
 def evaluator() -> Any:
-    specification = importlib.util.spec_from_file_location(
-        "existing_functional_evaluator", LAB / "tools/v13_5_evaluate.py")
-    assert specification is not None and specification.loader is not None
-    module = importlib.util.module_from_spec(specification)
-    specification.loader.exec_module(module)
-    return module
+    try:
+        return import_module("tools.v13_5_evaluate")
+    except ModuleNotFoundError:
+        # Direct CLI execution places tools/, rather than the Lab root, on sys.path.
+        return import_module("v13_5_evaluate")
 
 
 def summary(roots: list[Path]) -> dict[str, Any]:

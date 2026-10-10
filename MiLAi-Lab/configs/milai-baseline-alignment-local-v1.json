@@ -139,7 +139,7 @@
       "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
       "tokenizer_path": "/cra/qwen36-35B",
       "context_tokens": 65536,
-      "retrieval_limit": 20,
+      "retrieval_limit": 10,
       "model": {
         "base_url": "http://127.0.0.1:7862/v1",
         "model": "Qwen3.6-35B-A3B-FP8",
