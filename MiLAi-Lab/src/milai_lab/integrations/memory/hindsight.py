@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import asyncio
 import base64
+import copy
 import json
 import math
 import secrets
@@ -36,6 +37,11 @@ from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.providers.contextual_vllm import VLLMClient
 
 SDK_VERSION = "0.10.3"
+RECALL_READER_VIEW_VERSION = "hindsight_evidence_v1"
+_RECALL_SCORE_FIELDS = {"final", "reranker", "semantic", "keyword"}
+_NATIVE_USAGE_FIELDS = {
+    "input_tokens", "output_tokens", "total_tokens", "cached_tokens", "thoughts_tokens",
+}
 
 
 class HindsightClient(Protocol):
@@ -361,22 +367,64 @@ def _usage(response: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-def project_recall(response: dict[str, Any]) -> RetrievalResult:
-    """Project one saved native response with all text, order and fields intact.
+def _pointer_child(path: str, field: str) -> str:
+    return path + "/" + field.replace("~", "~0").replace("/", "~1")
 
-    Facts remain retrieved memories. Raw chunks and contributing facts keep
-    their native IDs/truncation flags; no claim of verified user/tool identity
-    is synthesized. Auxiliary collections retain native insertion order.
+
+def _reader_fact(
+    row: dict[str, Any], path: str, archive_only: list[str],
+) -> dict[str, Any]:
+    """Remove only publicly defined diagnostic scores, keeping extensions literal."""
+    result = copy.deepcopy(row)
+    scores = result.get("scores")
+    if "scores" in result and scores is None:
+        result.pop("scores")
+        archive_only.append(path + "/scores")
+    elif isinstance(scores, dict):
+        known = [field for field, value in scores.items() if field in _RECALL_SCORE_FIELDS
+                 and (value is None or (type(value) in {int, float} and math.isfinite(value)))]
+        if known and len(known) == len(scores):
+            result.pop("scores")
+            archive_only.append(path + "/scores")
+        else:
+            for field in known:
+                scores.pop(field)
+                archive_only.append(_pointer_child(path + "/scores", field))
+    return result
+
+
+def _native_statistics(name: str, value: Any) -> bool:
+    """Recognize public token counters/timings without hiding unknown content."""
+    if value is None:
+        return True
+    if not isinstance(value, dict):
+        return False
+    return (name != "usage" or set(value) <= _NATIVE_USAGE_FIELDS) and all(
+        type(count) is int and count >= 0 for count in value.values()
+    )
+
+
+def project_recall(response: dict[str, Any]) -> RetrievalResult:
+    """Separate the full native archive from its deterministic evidence view.
+
+    Retain every fact/chunk/observation body, subject, clock, context, native
+    identity, source link and limitation in native order. Known diagnostic
+    scores, trace and actual public internal statistics stay in native_return;
+    usage.reader_view lists their actual archive-only JSON pointers. Unknown
+    extensions remain literal. No source identity or completeness is inferred.
+    This view is not a claim that the whole return fits one Reader request.
     """
     native = _native_json(response)
     results = native.get("results")
     if not isinstance(results, list):
         raise ValueError("HINDSIGHT_NATIVE_RESULTS_INVALID")
     materials: list[dict[str, Any]] = []
-    for row in results:
+    archive_only: list[str] = []
+    for index, row in enumerate(results):
         if not isinstance(row, dict) or not isinstance(row.get("text"), str):
             raise ValueError("HINDSIGHT_NATIVE_RESULT_TEXT_INVALID")
-        materials.append({**row, "provenance": "retrieved_memory"})
+        materials.append({**_reader_fact(row, f"/results/{index}", archive_only),
+                          "provenance": "retrieved_memory"})
     for collection, provenance in (("chunks", "native_source_chunk"),
                                    ("source_facts", "retrieved_source_fact")):
         rows = native.get(collection)
@@ -387,17 +435,33 @@ def project_recall(response: dict[str, Any]) -> RetrievalResult:
         for native_id, row in rows.items():
             if not isinstance(row, dict) or not isinstance(row.get("text"), str):
                 raise ValueError("HINDSIGHT_NATIVE_AUXILIARY_TEXT_INVALID")
-            materials.append({**row, "native_collection": collection,
+            projected = (
+                _reader_fact(row, _pointer_child("/" + collection, native_id), archive_only)
+                if collection == "source_facts" else copy.deepcopy(row)
+            )
+            materials.append({**projected, "native_collection": collection,
                               "native_collection_key": native_id, "provenance": provenance})
-    # Entities/trace and all other native fields are retained as actual metadata,
-    # not transformed into extra answer facts. The Reader receives them as well.
-    extras = {name: value for name, value in native.items()
-              if name not in {"results", "chunks", "source_facts"}}
+    # Entity observations are facts, not diagnostics. Preserve the complete
+    # entities table and all other native fields, including unknown extensions.
+    extras = {}
+    for name, value in native.items():
+        if name in {"results", "chunks", "source_facts"}:
+            continue
+        if name == "trace" or (name in {"store_stages", "usage"}
+                               and _native_statistics(name, value)):
+            archive_only.append(_pointer_child("", name))
+        else:
+            extras[name] = copy.deepcopy(value)
     if extras:
         materials.append({"provenance": "native_recall_metadata", "native_fields": extras})
+    usage = _usage(native)
+    usage["reader_view"] = {
+        "version": RECALL_READER_VIEW_VERSION, "archive_only_fields": archive_only,
+        "archive": "native_return", "entry_locator": "materials array position",
+    }
     return {"materials": materials, "native_return": native, "returned_count": len(results),
             "source_mapping": "native_document_chunk_and_source_fact_ids_when_returned",
-            "usage": _usage(native)}
+            "usage": usage}
 
 
 class HindsightBackend:

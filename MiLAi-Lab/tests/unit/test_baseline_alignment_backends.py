@@ -44,6 +44,121 @@ def session(identifier: str, date: str, text: str) -> Session:
     ))
 
 
+def test_project_recall_keeps_evidence_order_and_independent_full_archive() -> None:
+    fact = {
+        "id": "fact-1", "text": "North has four visits after May; South is unchanged.",
+        "type": "world", "entities": [{"id": "entity-1", "name": "North"}],
+        "context": "The change applies only after May.",
+        "occurred_start": "2024-05-01T00:00:00Z", "occurred_end": None,
+        "mentioned_at": "2024-04-10T10:00:00Z", "document_id": "session-1",
+        "metadata": {"role": "user", "extension": ["literal", {"scope": "North"}]},
+        "chunk_id": "chunk-1", "tags": ["north"], "source_fact_ids": ["source/fact~1"],
+        "scores": {"final": 0.7, "reranker": None, "semantic": 0.6, "keyword": 0.5},
+        "attachments": None, "native_extension": {"qualifier": "after May only"},
+    }
+    other_fact = {"id": "fact-2", "text": "South has no separate schedule.", "scores": None}
+    source_fact = {**fact, "entities": None, "tags": None, "scores": None,
+                   "metadata": {"role": "user", "source_scope": "both regions"}}
+    chunk = {
+        "id": "chunk-1", "text": '[{"role":"user","time":"April","content":"change"}]',
+        "chunk_index": 0, "truncated": True, "attachments": [{"id": "attachment-1"}],
+        "native_extension": {"source_time": "April"},
+    }
+    second_chunk = {"id": "chunk-2", "text": "Earlier discussion.", "truncated": False}
+    entities = {"North": {
+        "entity_id": "entity-1", "canonical_name": "North",
+        "observations": [{"text": "Only North changes in May.", "mentioned_at": None,
+                          "native_extension": {"scope": "North"}}],
+    }}
+    native = {
+        "results": [fact, other_fact], "trace": {"debug": ["native stages"]},
+        "entities": entities, "chunks": {"second": second_chunk, "first": chunk},
+        "source_facts": {"source/fact~1": source_fact},
+        "store_stages": {"search_us": 14},
+        "usage": {"input_tokens": 8, "output_tokens": 3, "total_tokens": 11},
+        "source_facts_truncated": True, "native_extension": {"limit": "through May"},
+    }
+    original = json.loads(json.dumps(native))
+    result = project_recall(native)
+    materials = result["materials"]
+    assert native == original and result["native_return"] == original
+    assert result["returned_count"] == 2 and len(materials) == 6
+    assert [row.get("id") for row in materials] == [
+        "fact-1", "fact-2", "chunk-2", "chunk-1", "fact-1", None,
+    ]
+    assert materials[0] == {**{k: v for k, v in fact.items() if k != "scores"},
+                            "provenance": "retrieved_memory"}
+    assert list(materials[0]) == [k for k in fact if k != "scores"] + ["provenance"]
+    assert materials[1] == {"id": "fact-2", "text": other_fact["text"],
+                            "provenance": "retrieved_memory"}
+    assert materials[2] == {**second_chunk, "native_collection": "chunks",
+                            "native_collection_key": "second", "provenance": "native_source_chunk"}
+    assert materials[3] == {**chunk, "native_collection": "chunks",
+                            "native_collection_key": "first", "provenance": "native_source_chunk"}
+    # Same ID and text cannot justify merging different subject/source fields.
+    assert materials[4] == {**{k: v for k, v in source_fact.items() if k != "scores"},
+                            "native_collection": "source_facts",
+                            "native_collection_key": "source/fact~1",
+                            "provenance": "retrieved_source_fact"}
+    assert materials[5] == {"provenance": "native_recall_metadata", "native_fields": {
+        "entities": entities, "source_facts_truncated": True,
+        "native_extension": native["native_extension"],
+    }}
+    assert result["usage"]["reader_view"] == {
+        "version": "hindsight_evidence_v1", "archive_only_fields": [
+            "/results/0/scores", "/results/1/scores", "/source_facts/source~1fact~01/scores",
+            "/trace", "/store_stages", "/usage",
+        ], "archive": "native_return", "entry_locator": "materials array position",
+    }
+    assert result["usage"]["native"] == original["usage"]
+    assert result["usage"]["generation"] == "reported_native_usage"
+    assert result["usage"]["embedding"] == "unobserved"
+    assert result == project_recall(json.loads(json.dumps(result["native_return"])))
+    materials[0]["metadata"]["extension"].append("changed Reader copy")
+    materials[5]["native_fields"]["entities"]["North"]["observations"][0]["text"] = "changed"
+    assert result["native_return"] == original and native == original
+
+
+def test_project_recall_preserves_unknown_score_fields_and_nonstatistical_extensions() -> None:
+    scores = {"semantic": 0.5, "extension": {"qualification": "only North"},
+              "final": None, "keyword": True}
+    native = {
+        "results": [{"id": "f1", "text": "A qualified rule.", "scores": scores},
+                    {"id": "f2", "text": "A second rule.", "scores": "literal extension"}],
+        "chunks": {}, "source_facts": {}, "trace": None,
+        "usage": {"input_tokens": 4, "native_extension": "a factual constraint"},
+        "store_stages": {"time_us": 5, "native_extension": "a factual condition"},
+        "entities": {}, "source_facts_truncated": False,
+        "native_extension": {"explicit_empty": [], "clock": None},
+    }
+    result = project_recall(native)
+    assert result["materials"][0]["scores"] == {
+        "extension": {"qualification": "only North"}, "keyword": True,
+    }
+    assert result["materials"][1]["scores"] == "literal extension"
+    extras = result["materials"][2]["native_fields"]
+    assert extras == {k: v for k, v in native.items()
+                      if k not in {"results", "chunks", "source_facts", "trace"}}
+    assert result["usage"]["reader_view"]["archive_only_fields"] == [
+        "/results/0/scores/semantic", "/results/0/scores/final", "/trace",
+    ]
+    assert result["native_return"] == native
+
+
+def test_project_recall_registers_no_undelivered_fields_when_diagnostics_are_absent() -> None:
+    native = {"results": [{"text": "The complete statement.", "metadata": None}],
+              "entities": {}, "source_facts_truncated": False}
+    result = project_recall(native)
+    assert result["usage"]["reader_view"]["archive_only_fields"] == []
+    assert result["usage"]["native"] is None
+    assert result["usage"]["generation"] == "unobserved"
+    assert result["native_return"] == native
+    assert result["materials"][0]["metadata"] is None
+    assert result["materials"][1]["native_fields"] == {
+        "entities": {}, "source_facts_truncated": False,
+    }
+
+
 @pytest.mark.parametrize("granularity", ["session", "turn"])
 def test_rawrag_original_prefix_persists_without_character_truncation(
     tmp_path: Path, granularity: Any,
