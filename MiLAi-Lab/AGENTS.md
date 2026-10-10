@@ -8,7 +8,8 @@ Current branch feat/lab-baseline-alignment-integration-20261010, draft PR121 sta
 https://github.com/minguselandy/MiLAi/pull/121; open/draft/unmerged.
 Published4f859be ownFast38040183066FAIL/Full38040183074SKIPPED: inherited FunctionalVLLMClient
 missed new accounting_request/on_event parameters. Root forwards them without weakening queue;
-48queue/budget/Owner checks and full232source strict typesPASS; repairhead ownCI still required.
+48queue/budget/Owner checks and full232source strict typesPASS; e71440c ownFast38041375106SUCCESS,
+Full38041375109SKIPPED. Laterhead requires its own CI; never label skipped Full as pass.
 Prior6d0446f Fast38037419742SUCCESS belongs only to that head. Managed lifecycle integrated;
 no final candidate freeze. Read local protocol/config/native deployment docs.
 Source-only first8 of each4 development users: per-arm32sessions/73QA/72updates,219mainQA max.
@@ -32,7 +33,15 @@ not just EMBEDDINGS_MAX_RETRIES=0. Explicit env, same-loop startup failure clean
 this is declared local deployment adaptation, not unchanged author CLI/crossencoder reproduction.
 Qwen/BGE/rrf,retainT0.1/consolidationT0.0,thinkingTrue/output32768/dim1024/batch16 declared separately.
 Dedicated nonroot user UID996/actual ignored /cra home and full Python3.11.13 prepared,0models;
-server installation pending, API/DB NOT_STARTED. Do not claim runtime/semantic native success.
+native install192packages completed; actual UID996 blocked-network config admissionPASS:
+api0.10.3/pg0 0.15.2/Python3.11.13,dim1024/retry0/concurrency1/batch16,worker1/consolidation floor0,
+noHOMEoverride/networkattempt0/models0; actualversions/receipts ignored native-installed-admission-e71440c.
+API/DB NOT_STARTED. Earlier download timeouts/probe script field errors preserved, not model samples.
+Native developer read-only installed audit:36env all parsed; retain/mainconsol32768 not universal:
+consolidate_dedup omits output limit, original bridge context65536 reservation only/no wire change.
+Native adaptive consolidation bisection remains; SDKretry0 does not imply1modelcall per operation.
+E0 one-source-e71440c empty preparation:1session/3QA/0updates perarm,3opaqueIDs,0models/API/DB,
+Reader/JudgeNOT_RUN; separate from E1, no final candidate freeze or closed-loop acceptance.
 New pg0 instance/schema isolates oldqueues, actualAPI PID/UID readiness checked.
 Allbanks close -> native service terminate/wait -> detachedPG UID residual check -> bridge close
 -> original clients/accounting/lease. Old started without closed evidence/live dedicatedUID blocks
@@ -55,6 +64,9 @@ New fixed09:23:35.049588Z samePID/lease/source: B0 113 complete sessions / 281 Q
 284QAcheckpoints=282answers+2missing (3fromunfinishedsession),112completed+2incomplete maintenance,
 226uniquecommits/3originalrejects,912gen/11124152known=charged/120009emb,0inflight;
 other4NOT_STARTED/Judge0. Not a closed phase or method ranking.
+New fixed09:34:15.186451Z samePID/lease/source: B0 114complete sessions/284QA=282answers+2missing,
+allcheckpoints in completed sessions;113completed+2incomplete maintenance,233uniquecommits/3rejects,
+915gen/11206683known=charged/121707emb,0inflight;other4NOT_STARTED/Judge0,originalstillRUNNING.
 no hot edits/restart/newprefix splicing. Root alone serializes real Qwen/BGE/Judge on originalledger.
 When resourcesfree and explicitly scheduled, prioritize E0/E1; not all old research a prerequisite.
 Known drained failure staysFAILED/resources_settledTrue; uncertainty staysRESOURCE_UNSETTLED,

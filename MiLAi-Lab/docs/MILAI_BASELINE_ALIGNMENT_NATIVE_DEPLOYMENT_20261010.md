@@ -2,7 +2,7 @@
 
 本页记录独立原生服务的入口、配置和资源边界，不是实验结果。核查对象为实际
 `hindsight-api-slim==0.10.3`、`hindsight-client==0.10.3` 和 `pg0-embedded==0.15.2`。
-本次只读核查及机械 fixture 没有启动 Hindsight / PostgreSQL，没有调用 Qwen、BGE 或 Judge。
+本次独立安装、禁网配置核查及机械 fixture 没有启动 Hindsight / PostgreSQL，没有调用 Qwen、BGE 或 Judge。
 服务部署、原 HTTP 租约和真实模型调度由 Root 管理。
 
 ## 官方入口与配置来源
@@ -20,7 +20,11 @@ max_retries=0))` → `create_app` → `uvicorn.Server`。该版本环境 factory
 不能证明实际关闭重试。公开构造参数将其明确设为0，保留原生提取、批处理、召回和重排。
 这是声明的本地部署适配，不称原 CLI 的原样运行。程序入口使用显式环境、不加载 dotenv；
 在同一事件循环保留启动失败的 `memory.close()` 清理，并由 Root 核对真实 UID 残留进程。
-当前专属用户和完整解释器已离线准备，API／DB尚未启动，不能据此宣称原生闭环完成。
+当前专属用户、完整解释器及独立192包安装已完成。实际UID996禁网核对了
+API0.10.3／pg0 0.15.2／Python3.11.13、维度1024／native embedding重试0／并发1／batch16、
+worker槽1／consolidation保留0，未覆盖HOME；官方pg0二进制help可执行。
+实际依赖清单及回执位于ignored `artifacts/baseline-alignment/native-installed-admission-e71440c`。
+网络／模型请求0，API／DB尚未启动，不能据此宣称原生闭环完成。
 
 该版本官方 CLI 调用 `load_dotenv(find_dotenv(usecwd=True), override=True)`。
 从当前目录向上发现的 `.env` 会覆盖已导出的环境变量。因此运行目录及祖先中的 `.env`
@@ -115,6 +119,12 @@ thinking / schema / tools 等依原生设置与显式冻结的 `HINDSIGHT_API_LL
 bridge 不重写。留存输出上限 32768 是本地资源配置；省略 output limit 的原生请求只使用
 已验证的部署有限上界做账本预留，不把预留值写回实际 HTTP。
 本地配置明确传递 `chat_template_kwargs.enable_thinking=true`，不同阶段参数仍分别报告。
+已按实际安装包只读核对36个声明环境变量，均有解析路径；温度、thinking及阶段重试／并发设置
+由原生配置继承。32768控制retain和主consolidation batch，并不覆盖全部原生生成：
+原生consolidate_dedup调用未给output limit，bridge仅按部署context65536做有限费用预留，
+不将其写回请求。consolidation保留原生自适应二分，retry0／attempts1也不等于整个操作只有一次生成。
+因此不能将所有Hindsight内部调用称为output32768，或将其与共同Reader温度1.0合称相同完整配置；
+实际wire、调用数和usage仍以运行回执为准。
 
 显式 dimensions=1024 避免未知模型的初始化 test embedding；skip verification 禁用 LLM
 启动探针；rrf 不初始化神经重排模型。单 worker slot 必须将 consolidation reserved slots

@@ -13,13 +13,14 @@
 成功；`4f859be` 自身 [Fast 38040183066](https://github.com/minguselandy/MiLAi/actions/runs/38040183066)
 失败，Foundation发现FunctionalVLLMClient未同步父类新增的accounting_request／on_event参数。
 现已同步并转交原运输逻辑，48项队列／预算／Owner检查和全目录232源码严格类型检查通过；
-新修复head仍须核对自己的CI。该头 [Full 38040183074](https://github.com/minguselandy/MiLAi/actions/runs/38040183074)
-为skipped，不能写成通过。
+修复提交`e71440c`自身 [Fast 38041375106](https://github.com/minguselandy/MiLAi/actions/runs/38041375106)
+成功，[Full 38041375109](https://github.com/minguselandy/MiLAi/actions/runs/38041375109)为skipped。
+旧`4f859be`的Full38040183074亦为skipped；后续提交仍按自己的head核对，不沿用旧CI。
 
 | 首轮后端 | 已接通能力 | 实际结果边界 |
 |---|---|---|
 | RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 已在1个真实开发来源会话完成实际入库、重开和原文检索；共同Reader尚未运行，E0三方闭环和E1仍待完成，不称作者模型分数复现 |
-| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 内部模型HTTP已接入原客户端／同一连续账本，托管生命周期已接线；独立用户／解释器已离线准备，服务／DB仍未启动，无实际原生闭环或 QA |
+| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 内部模型HTTP及托管生命周期已接线，独立安装和专属用户禁网配置检查已完成；API／DB未启动，无实际原生闭环或 QA |
 | MiLAi-memory-only | 薄门面复用原 Source、MemoryService、维护 recipe 和 Reader；首轮直接读取实际语义状态及已有支持 | 接线已完成，实际形成、更正和 QA 尚未在新配置运行；不经过普通 Host 业务分类，也未增加原文检索兜底 |
 
 首轮按 source-only 在线前缀准备：四个既有开发用户各前八会话，**每臂32会话、73 QA、72原生更新机会**，
@@ -49,6 +50,19 @@ Hindsight模型转接保留完整原生请求和响应，通过原VLLMClient／R
 使用MemoryEngine／create_app程序入口及同一事件循环的启动失败清理，不称原CLI运行。
 本地Qwen／BGE、rrf、retain0.1／consolidation0.0、thinkingTrue／output32768等差异明确报告，
 不称作者默认重排或纯同模型算法优势。见[准确部署约定](MILAI_BASELINE_ALIGNMENT_NATIVE_DEPLOYMENT_20261010.md)。
+
+独立安装已完成192个依赖包，实际专属UID996下禁网核对通过：API包0.10.3、pg0 0.15.2、
+Python3.11.13，native embedding维度1024／重试0／并发1／batch16；worker槽1、consolidation保留0。
+未设置HOME覆盖；网络尝试和模型请求均0，API／DB／来源入库均未发生。
+实际版本清单和核对回执保存在ignored `native-installed-admission-e71440c`；前两次下载超时及
+核对脚本的字段预期错误保留，不计作模型样本。安装与配置可加载不等于原生功能验收。
+E0普通闭环已在`e0-one-source-e71440c-prepared`一次性空根prepare：首个既有开发来源，
+每臂1会话／3 QA／0更新机会，3独立bank标识；禁网、0模型／API／DB，Reader／Judge未运行。
+E0与E1银行分开，未提前授予三方闭环或最终候选冻结。
+开发者按实际安装包只读复核36个声明环境变量，全部有解析路径；保留原生配置差异。
+retain及主consolidation output32768不覆盖原生dedup省略output limit的调用；该请求只按65536预留费用，
+不改wire。原生consolidation自适应二分仍可产生多个子batch请求，retry0不等于一次完整操作只调用模型一次。
+实际成本与效果仍待运行观察，细节见上述部署约定。
 
 RawRAG实际检查根为ignored `e0-raw-native-a0ec3bc`：既有开发用户第一来源会话入库、关闭、
 重开、实际原文查询，返回1项；角色／日期／逐轮时间／完整正文原样保持，模型0。
@@ -101,6 +115,12 @@ B0 113完整会话，完整会话中281题；另有当前未完成会话的3题�
 维护112 completed＋2 incomplete、226笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
 912生成请求、11124152 known＝charged、embedding120009 tokens；该时点无在途差额。
 这仍是未闭合前缀，检查点数不能替代已完成会话题数或语义分数。
+
+较新固定观察 **09:34:15.186451 UTC／北京时间17:34:15.186451**：同一PID／租约／冻结源码匹配，
+B0 114完整会话／284题检查点＝282答案＋2缺答，全部检查点已进入完整会话。
+维护113 completed＋2 incomplete、233笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
+915生成请求、11206683 known＝charged、embedding121707 tokens；该时点无在途差额。
+原长历史仍运行，新E0／E1实际预测仍待资源释放。
 
 资源释放且 Root 明确调度后优先 E0／E1，普通 Host 功能线可继续；全部旧科研待办不再成为新任务的永久前置。
 真实调用仍由 Root 在原连续账本串行调度，未知结果不盲重试。新候选尚未冻结确认，E2主要断点诊断、
