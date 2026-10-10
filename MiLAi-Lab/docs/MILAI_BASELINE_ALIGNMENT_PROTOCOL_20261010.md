@@ -36,7 +36,10 @@ RawRAG在既有开发用户的第一真实会话完成实际入库、关闭、�
 
 薄接口只需 ingest/retrieve/close。所有后端复用既有 ObservedSession 或结构等价的字段接口；retrieve 返回 materials（供 Reader 的原样文本/时间/实际 ID）、native_return（完整实际后端返回）、returned_count、source_mapping、usage。材料不经过额外抽取、摘要或 Selector；可选 session_output 仅来自实际会话原生输出。公共类型由 Root 管理。
 
-调度：07:05:31 UTC 实际确认原五方法 PID1854770 运行、HTTP 租约占用，B0 89/277会话/219 QA检查点（217答案+2缺答），其余未开始。开发/离线检查可以并行；不启动新的真实模型调用、不热改旧运行。资源释放后新任务优先 E0/E1，无须将全部旧科研待办作为永久前置。
+历史调度：07:05:31 UTC原五方法PID1854770运行、HTTP租约占用。用户随后明确要求
+“取消退出原实验”；11:15:01 UTC原运行STOPPED、两进程消失、原租约FREE、新增unknown0／0。
+原预测／费用／状态保留且不重启或拼接。资源阻碍已解除；Root按冻结`fa86b95`和已核对配置
+优先执行E0／E1，无须将全部旧科研待办作为永久前置。
 
 最新固定观察与当前开发范围见[现有报告](MILAI_UNIFIED_MEMORY_USAGE.md)。恢复维护K10后的新根准备
 确认每臂32／73／72机会、12个独立bank标识，网络禁用且0实际模型；它不是最终确认冻结。

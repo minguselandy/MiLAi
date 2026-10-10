@@ -2,6 +2,16 @@
 
 ## 2026-10-10：基线对齐开发，真实比较尚未执行
 
+**当前调度状态（11:15:33 UTC／北京时间19:15:33）**：用户明确要求“取消退出原实验”，
+原冻结5019968五方法已退出。HTTP结算后向worker1854771发送SIGINT，父进程1854770于
+11:15:01.896455 UTC记录STOPPED；实际两进程消失、原租约FREE，新增unknown0／0，原limits不变。
+已有来源／状态／预测／回执／费用完整保留，未重启、退款、热改、删除、拼接或评分。
+末尾保留126完整会话及其中306 QA；另有未完成会话8检查点，合计314检查点＝311答案＋3缺答。
+维护125 completed＋2 incomplete、246笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
+闭合成本为1010生成请求、12496217 known＝charged、embedding134668 tokens；这是取消后的前缀，
+不是五方法完成或方法排名。中断与资源关闭回执保存于ignored `cancel-five-dev277-5019968-user-20261010`。
+下方原运行中快照保留原时点含义，当前资源阻碍已解除；下一步按已固定`fa86b95`源码执行E0／E1。
+
 用户已继续执行[基线对齐、薄适配与方法有效性规划](MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md)，
 并明确使用一名集成者和三名开发者。当前集成分支为
 `feat/lab-baseline-alignment-integration-20261010`，本次接线开发以 `d1d300a` 为基线，
@@ -19,6 +29,10 @@
 `67a013d`自身[Fast 38042193588](https://github.com/minguselandy/MiLAi/actions/runs/38042193588)
 成功，[Full 38042193596](https://github.com/minguselandy/MiLAi/actions/runs/38042193596)为skipped；
 本次 socket 修复的远端状态以 PR 当前提交自身检查为准。
+`fa86b95`自身[Fast 38044020175](https://github.com/minguselandy/MiLAi/actions/runs/38044020175)
+成功，[Full 38044019322](https://github.com/minguselandy/MiLAi/actions/runs/38044019322)为skipped；
+该提交CI确认全目录232源码类型及32项后端检查通过。源码归档及E0／E1实际模块导入已禁网核对，
+配置与准备清单一致；它是本次开发执行版本，不称最终确认候选。
 
 | 首轮后端 | 已接通能力 | 实际结果边界 |
 |---|---|---|

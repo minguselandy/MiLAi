@@ -6,6 +6,18 @@ One integrator plus three developers; Root owns contracts/config/resource schedu
 A RawRAG/Hindsight, B MiLAi/direct delivery, C Host/docs, separate worktrees.
 Current branch feat/lab-baseline-alignment-integration-20261010, draft PR121 stacked on120:
 https://github.com/minguselandy/MiLAi/pull/121; open/draft/unmerged.
+Latest steering: user explicitly said “取消退出原实验”. Root cancelled the old frozen5019968
+five-method run at a settled HTTP boundary, SIGINT worker1854771 on2026-10-10 11:15:00UTC.
+Parent1854770 recorded STOPPED at11:15:01.896455UTC/workerreturncode-2; bothPIDs gone,
+actual original leaseFREE, newunknown0/0, originallimits unchanged. No source hotpatch, ledger reset,
+refund, restart, scoring, deletion or prefix splicing. Keep original outputs/cancellation/closure receipts.
+Final original scope: B0 126complete sessions/306QA in those sessions;314checkpoints=311answers+3missing,
+8checkpoints in unfinished session;125completed+2incomplete maintenance/246uniquecommits/3rejects.
+1010gen/12496217known=charged/134668emb,other4NOT_STARTED/Judge0; cancelled prefix, no methodranking.
+The earlier “original running/resources occupied” snapshots below are historical.
+E0/E1 execution source frozenfa86b95; source/config admission ignored source-fa86b95 and prepared roots.
+fa86b95 ownFast38044020175SUCCESS/Full38044019322SKIPPED, CI type232 and32backend checksPASS.
+Resource blocker resolved; Root next dispatches E0 on that exact source/config/originalledger.
 Published4f859be ownFast38040183066FAIL/Full38040183074SKIPPED: inherited FunctionalVLLMClient
 missed new accounting_request/on_event parameters. Root forwards them without weakening queue;
 48queue/budget/Owner checks and full232source strict typesPASS; e71440c ownFast38041375106SUCCESS,
@@ -81,7 +93,8 @@ allcheckpoints in completed sessions;113completed+2incomplete maintenance,233uni
 New fixed10:06:37.367066Z samePID/lease/source: B0 118complete sessions/294QA=292answers+2missing,
 116completed+2incomplete maintenance/239uniquecommits/3rejects,947gen/11677880known=charged/
 126109emb,0inflight;other4NOT_STARTED/Judge0. Actual1854770/1854771 stilllive/resourcesbusy.
-no hot edits/restart/newprefix splicing. Root alone serializes real Qwen/BGE/Judge on originalledger.
+No hot edits/restart/newprefix splicing. User-cancelled original run stays stopped; Root alone
+serializes new real Qwen/BGE/Judge on originalledger.
 When resourcesfree and explicitly scheduled, prioritize E0/E1; not all old research a prerequisite.
 Known drained failure staysFAILED/resources_settledTrue; uncertainty staysRESOURCE_UNSETTLED,
 stop related dispatch, preserve primary+cleanup failures and actual effects,no unknown retry.

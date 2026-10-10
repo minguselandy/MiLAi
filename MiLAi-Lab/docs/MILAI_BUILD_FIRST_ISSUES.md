@@ -4,6 +4,12 @@
 
 ## 2026-10-10：当前基线对齐入口
 
+用户已要求“取消退出原实验”。11:15:01 UTC原冻结5019968五方法STOPPED，两实际进程消失，
+原租约FREE、新增unknown0／0、费用及全部既有产物保留；末尾126完整会话／其中306 QA，
+314总检查点＝311答案＋3缺答，另8项属于未完成会话，其他四臂未开始／Judge0。
+旧运行中快照均为历史；资源阻碍已解除，Root接下来按冻结`fa86b95`执行E0／E1，不续接旧银行。
+该源码自身Fast38044020175成功、Full38044019322 skipped，尚无新E0／E1语义结果。
+
 当前执行[基线对齐与方法有效性规划](MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md)，
 共同设置见[协议卡](MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md)，最新实现和结果以
 [统一使用与实验报告](MILAI_UNIFIED_MEMORY_USAGE.md)为准。新接线开发基于 `d1d300a`，维护K10与资源闭合修复继续合流；已接通
