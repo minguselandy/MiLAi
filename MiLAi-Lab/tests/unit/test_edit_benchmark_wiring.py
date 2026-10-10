@@ -27,6 +27,7 @@ from milai_lab.harness.contextual_artifacts import BudgetExceeded, RunBudget, Ru
 from milai_lab.memory.edit_units import evidence_status, render_revision_view, writer_projection
 from milai_lab.memory.retrieval import SemanticRetriever, semantic_keys
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.milai_memory_only import MiLAiMemoryBackend
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 from milai_lab.runners.edit_benchmarks import (
@@ -360,9 +361,31 @@ def test_real_store_formation_revision_and_restart_without_replaying_writer(tmp_
             "tomorrow",
             ({"role": "user", "content": "BlueProject Tuesday", "timestamp": "tomorrow"},),
         )
-        execution.maintain(service, first, "1")
+        backend = MiLAiMemoryBackend(
+            maintain=lambda session, key: execution.maintain(
+                service, ObservedSession(session.session_id, session.date, session.turns), key,
+            ),
+            retrieve=lambda question, date, key, limit: execution.retrieve_material(
+                service, question, date, key, limit=limit,
+            ),
+            maintenance_result=lambda key: read_json(
+                tmp_path / "maintenance" / key / "complete.json"),
+            retrieval_native=lambda key: read_json(
+                tmp_path / "http" / key / "retrieval-native.json"),
+        )
+        first_result = backend.ingest(first, key="1")
+        assert first_result["session_output"] == ["BlueProject Monday"]
+        assert first_result["completed"] and first_result["usage"] == {"observation": "unobserved"}
+        before_query = copy.deepcopy(service.records())
+        first_read = backend.retrieve("BlueProject", "today", key="q1", limit=20)
+        assert first_read["returned_count"] == 1
+        assert first_read["materials"][0]["content"] == "BlueProject Monday"
+        assert first_read["native_return"]["records"][0]["value"]["content"] == "BlueProject Monday"
+        assert service.records() == before_query and len(service.sources()) == 1
         first_id = service.records()[0]["id"]
-        execution.maintain(service, second, "2")
+        second_result = backend.ingest(second, key="2")
+        assert second_result["session_output"] == ["BlueProject Tuesday"]
+        assert second_result["native_return"] == read_json(tmp_path / "maintenance/2/complete.json")
         assert service.records()[0]["id"] == first_id
         assert service.records()[0]["value"]["revision"] == 2
         assert len(service.records()[0]["value"]["source_refs"]) == 2
@@ -377,6 +400,15 @@ def test_real_store_formation_revision_and_restart_without_replaying_writer(tmp_
         )
         assert execution.maintain(service, second, "2") == ["BlueProject Tuesday"]
         assert service.read(first_id)["value"]["revision"] == 2
+        current = execution.retrieve_material(service, "BlueProject", "tomorrow", "q2", limit=20)
+        assert current[0]["content"] == "BlueProject Tuesday"
+        native = read_json(tmp_path / "http/q2/retrieval-native.json")
+        assert len(native["records"][0]["value"]["source_refs"]) == 2
+        assert execution.retrieve_material(service, "BlueProject", "today", "q1", limit=20) == (
+            first_read["materials"])
+        with pytest.raises(ValueError, match="Saved retrieval request changed"):
+            execution.retrieve_material(service, "BlueProject", "today", "q1", limit=10)
+        assert len(service.sources()) == 2
     assert len(calls) == 2
 
 
@@ -731,6 +763,89 @@ def test_shared_reader_staged_accepts_legacy_selection_without_extra_reads(tmp_p
     assert len(state["resident_refs"]) == 1
     assert state["resident_refs"][0]["view"] == "current_at_snapshot"
     assert state["resident_refs"][0]["revision"] == 2
+
+
+@pytest.mark.parametrize("outcome", ["answer", "capacity", "unknown"])
+def test_direct_reader_delivers_whole_pool_without_selector_or_retry(
+    tmp_path: Path, outcome: str,
+) -> None:
+    class LiteralTokenizer:
+        def apply_chat_template(
+            self, messages: list[dict[str, str]], **kwargs: object,
+        ) -> list[int]:
+            assert kwargs["enable_thinking"] is True
+            return [1] * sum(len(message["content"]) for message in messages)
+
+    execution = BenchmarkRun.__new__(BenchmarkRun)
+    execution.root = tmp_path
+    execution.settings = {
+        "memory_view_mode": "direct", "interface_version": "v3",
+        "context_tokens": 8192, "model": {"max_tokens": 128},
+        "stage_enable_thinking": {"reader": True},
+        "halumem": {"reader_failure_policy": "record_known_readonly_failure"},
+    }
+    execution.tokenizer = LiteralTokenizer()
+    memories = [{
+        "record_id": "actual-rule", "revision": 2,
+        "content": "North four times from February; South unchanged, twice in January.",
+        "scope": {"north": "February", "south": "January"},
+        "revision_evidence": [
+            {"source_ref": "source-before", "role": "user", "content":
+             "Both districts twice in January.", "range": [0, 31]},
+            {"source_ref": "source-change", "role": "user", "content":
+             "North four from February; South unchanged.", "range": [0, 42]},
+        ],
+    }, {"record_id": "actual-exception", "revision": 1,
+        "content": "Only the first week has a holiday exception.",
+        "scope": {"first_week_only": True}, "revision_evidence": []}]
+    before = copy.deepcopy(memories)
+    question, date, key = "Which rules and exceptions apply?", "2030-02-01", "qa"
+    complete_messages = execution._reader_messages(question, date, memories)
+    exact_tokens = execution.input_tokens(complete_messages, enable_thinking=True)
+    if outcome == "capacity":
+        execution.settings["context_tokens"] = exact_tokens + 128 + 512 - 1
+    attempts = []
+
+    def provider(request: httpx.Request) -> httpx.Response:
+        wire = json.loads(request.read())
+        attempts.append(wire)
+        assert wire["messages"] == complete_messages
+        assert json.loads(wire["messages"][1]["content"])["memories"] == memories
+        assert "response_format" not in wire
+        if outcome == "unknown":
+            raise httpx.ReadTimeout("Original direct response is unknown", request=request)
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop",
+            "message": {"content": "The delivered district rules retain their limits."}}],
+            "usage": {"prompt_tokens": exact_tokens, "completion_tokens": 9,
+                      "total_tokens": exact_tokens + 9}})
+
+    budget = RunBudget(RunLimits(generation_requests=1), tmp_path / "budget.json")
+    with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=128, max_calls=1),
+                     transport=httpx.MockTransport(provider), budget=budget) as client:
+        execution.client = client
+        if outcome == "capacity":
+            with pytest.raises(ReadCapacityUnavailable) as caught:
+                execution.answer_material(question, date, key, memories)
+            failure = execution._known_reader_failure(caught.value, key)
+            assert failure is not None and not failure["request_sent"]
+            assert failure["input_tokens"] == exact_tokens
+            assert failure["input_token_limit"] == exact_tokens - 1
+            assert not (tmp_path / "http/qa/request.json").exists()
+        elif outcome == "unknown":
+            with pytest.raises(UnconfirmedModelOutcome):
+                execution.answer_material(question, date, key, memories)
+            with pytest.raises(UnconfirmedModelOutcome):
+                execution.answer_material(question, date, key, memories)
+            assert not (tmp_path / "http/qa/response.json").exists()
+        else:
+            result = execution.answer_material(question, date, key, memories)
+            assert result[1] == memories
+            assert execution.answer_material(question, date, key, memories) == result
+        assert len(attempts) == (0 if outcome == "capacity" else 1)
+        assert budget.state["generation_requests"] == len(attempts)
+    assert memories == before
+    assert not (tmp_path / "http/qa/view").exists()
+    assert not (tmp_path / "http/qa/memory-view.json").exists()
 
 
 @pytest.mark.parametrize("case", [

@@ -486,7 +486,9 @@ class BenchmarkRun:
         self, settings: dict[str, Any], root: Path, *, phase: str = "all"
     ) -> None:
         self.settings, self.root, self.phase = settings, root, phase
-        if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
+        if settings.get("memory_view_mode", "legacy") not in {
+            "legacy", "direct", "staged", "state_driven",
+        }:
             raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
         if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
             raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
@@ -1169,7 +1171,10 @@ class BenchmarkRun:
                 method, delivery, session=observed.session_id, request_id=request_id,
                 date=observed.date,
                 recipe=cast(MaintenanceRecipe, self.settings["maintenance_recipe"]),
-                memory_view_mode=self.settings.get("memory_view_mode", "legacy"),
+                # Direct is a Reader delivery factor. Reuse the existing staged
+                # maintenance path rather than inventing another write recipe.
+                memory_view_mode=("staged" if self.settings.get("memory_view_mode") == "direct"
+                                  else self.settings.get("memory_view_mode", "legacy")),
                 model_call=call, retrieval_limit=self.settings["retrieval_limit"], fit=self._fits,
                 stage_fit=(lambda stage, messages: self._fits(
                     messages, enable_thinking=self.stage_thinking(stage)))
@@ -1597,14 +1602,32 @@ class BenchmarkRun:
             projection=self.settings.get("reader_projection", "legacy"),
         )
 
-    def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
+    def retrieve_material(
+        self, service: MemoryService, question: str, date: str, key: str,
+        *, limit: int | None = None,
+    ) -> list[dict[str, Any]]:
+        """The original saved retrieval and evidence projection, without a Reader.
+
+        This is the shared pure-memory adapter boundary. It neither captures the
+        question as a Source nor selects or summarizes the actual returned pool.
+        A saved pool remains authoritative on resume, including its original
+        query/date/limit when the new adapter records that request alongside it.
+        """
         snapshot = self.root / "http" / key / "retrieval.json"
+        request_path = snapshot.with_name("retrieval-request.json")
+        if snapshot.exists() and not request_path.exists() and limit is None:
+            # Original frozen artifacts predate the adapter request envelope.
+            # Reopen their actual pool without reconstructing a new retrieval.
+            return cast(list[dict[str, Any]], read_json(snapshot))
+        requested_limit: int = self.settings["retrieval_limit"] if limit is None else limit
+        request = {"question": question, "date": date, "limit": requested_limit}
+        if request_path.exists() and read_json(request_path) != request:
+            raise ValueError("Saved retrieval request changed; use a new key")
         if snapshot.exists():
             memories = read_json(snapshot)
         else:
-            records = service.search(
-                question, limit=self.settings["retrieval_limit"], include_raw=False
-            )["records"]
+            native = service.search(question, limit=requested_limit, include_raw=False)
+            records = native["records"]
             memories = [
                 {
                     "content": row["value"]["content"],
@@ -1645,7 +1668,17 @@ class BenchmarkRun:
                     {**memory, "record_content_chars": len(memory["content"])},
                     edit_state=row["value"].get("edit_state"),
                 ) for memory, row in zip(memories, records, strict=True)]
+            # New explicit adapter calls retain the native result as well as the
+            # existing Reader snapshot. Legacy paths keep their artifact shape.
+            if limit is not None:
+                write_json(request_path, request)
+                write_json(snapshot.with_name("retrieval-native.json"), native)
             write_json(snapshot, memories)
+        return cast(list[dict[str, Any]], memories)
+
+    def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
+        memories = self.retrieve_material(service, question, date, key)
+        snapshot = self.root / "http" / key / "retrieval.json"
         cached_response = (snapshot.parent / "response.json").exists()
         answer, used_memories = self.answer_material(question, date, key, memories)
         if service.memory_profile == "unified_v1":
@@ -1664,8 +1697,11 @@ class BenchmarkRun:
 
         The ordinary caller owns retrieval and access. The finite view comparison
         uses the exact saved pool, so changing delivery cannot add sources or facts.
+        Direct delivery sends that entire pool to the original measured call;
+        an oversized request retains its known unsent failure, without truncation
+        or a Selector. Staged/state_driven retain their existing page continuation.
         """
-        if self.settings.get("memory_view_mode", "legacy") == "legacy":
+        if self.settings.get("memory_view_mode", "legacy") in {"legacy", "direct"}:
             sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
                                        if self.stage_thinking("reader") is not None else {})
             return self.call(
