@@ -16,6 +16,7 @@ from __future__ import annotations
 import asyncio
 import base64
 import json
+import math
 import secrets
 import sqlite3
 import time
@@ -414,13 +415,17 @@ class HindsightBackend:
         recall_budget: str = "mid", include_chunks: bool = True,
         max_chunk_tokens: int = 8192, include_source_facts: bool = True,
         max_source_facts_tokens: int = 4096, client: HindsightClient | None = None,
+        completion_timeout: float = 300.0,
         on_status: Callable[[dict[str, Any]], None] | None = None,
     ) -> None:
         if not bank_id or not base_url:
             raise ValueError("HINDSIGHT_BANK_OR_URL_INVALID")
+        if not math.isfinite(completion_timeout) or completion_timeout <= 0:
+            raise ValueError("HINDSIGHT_COMPLETION_TIMEOUT_INVALID")
         self.root = Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
         self.bank_id = bank_id
+        self.completion_timeout = completion_timeout
         self.on_status = on_status
         self.last_status: dict[str, Any] | None = None
         self.recall_options = {
@@ -460,10 +465,12 @@ class HindsightBackend:
         """Observe real public completion state; do not retry retain or recall.
 
         Each poll is a fresh read, not a guessed completion after fixed sleep.
-        A 300s total deadline and one-second maximum interval let Root observe
-        progress while the native worker retains its original model lease.
+        The total deadline covers all native work, including multiple internal
+        model calls; each model HTTP timeout remains independently configured.
+        The one-second maximum interval lets Root observe progress while the
+        native worker retains its original model lease.
         """
-        deadline = time.monotonic() + 300.0
+        deadline = time.monotonic() + self.completion_timeout
         while True:
             remaining = deadline - time.monotonic()
             if remaining <= 0:

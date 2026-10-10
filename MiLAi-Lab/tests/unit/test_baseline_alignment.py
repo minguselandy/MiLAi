@@ -97,6 +97,33 @@ def test_prepare_keeps_qa_and_update_budgets_and_opaque_isolation(
     assert settings["maintenance_recipe"] == "extract_then_edit"
 
 
+def test_native_completion_wait_is_forwarded_separately_from_model_http_timeout(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.integrations.memory import hindsight
+
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(configuration(), BACKENDS[1])
+    execution.settings["alignment_bank_ids"] = {"opaque-owner": "h-u1-r1"}
+    execution.root, execution.backends = tmp_path, {}
+    backend, received = ActualReturnBackend(), []
+
+    def construct(root: Path, **kwargs: Any) -> ActualReturnBackend:
+        received.append((root, kwargs))
+        return backend
+
+    monkeypatch.setattr(hindsight, "HindsightBackend", construct)
+    monkeypatch.setattr(execution, "_start_native_service", lambda: None)
+    assert execution._backend(SimpleNamespace(owner="opaque-owner")) is backend
+    assert received == [(tmp_path / "native-banks/opaque-owner", {
+        "bank_id": "h-u1-r1", **execution.settings["alignment"]["hindsight"],
+    })]
+    assert received[0][1]["completion_timeout"] == 1800
+    assert execution.settings["model"]["timeout"] == 300
+    assert execution.settings["alignment"]["hindsight_service"]["environment"][
+        "HINDSIGHT_API_LLM_TIMEOUT"] == "300"
+
+
 def test_native_persistence_restores_identity_only_after_successful_closure(tmp_path: Path) -> None:
     execution = AlignmentRun.__new__(AlignmentRun)
     execution.settings = alignment_settings(configuration(), "Hindsight-native-local-recall")

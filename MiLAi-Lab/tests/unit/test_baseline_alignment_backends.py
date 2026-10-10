@@ -10,6 +10,7 @@ from collections.abc import Callable
 from dataclasses import asdict, dataclass
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from types import SimpleNamespace
 from typing import Any
 from unittest.mock import Mock
 
@@ -266,6 +267,92 @@ def test_hindsight_unconfirmed_operation_is_not_retried_after_reopen(tmp_path: P
             backend.retrieve("drink?", first.date, key="new-qa", limit=20)
         backend.close()
     assert calls == 1
+
+
+@pytest.mark.parametrize(("completion_timeout", "completion_after", "completed"), [
+    (None, 324.0, False),
+    (1800.0, 324.0, True),
+    (1800.0, 1801.0, False),
+])
+def test_hindsight_completion_deadline_covers_cumulative_native_work_and_close(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    completion_timeout: float | None, completion_after: float, completed: bool,
+) -> None:
+    clock = SimpleNamespace(now=0.0)
+
+    def sleep(seconds: float) -> None:
+        clock.now += seconds
+
+    monkeypatch.setattr("milai_lab.integrations.memory.hindsight.time", SimpleNamespace(
+        monotonic=lambda: clock.now, sleep=sleep,
+    ))
+    timeouts: list[float] = []
+    writes, closes = [], []
+
+    class Native:
+        def retain(self, **kwargs: Any) -> dict[str, Any]:
+            writes.append(kwargs)
+            return {"success": True, "bank_id": kwargs["bank_id"], "async": False}
+
+        def recall(self, **kwargs: Any) -> Any:
+            raise AssertionError("completion polling must not dispatch recall")
+
+        def status(self, bank_id: str, *, timeout: float) -> dict[str, Any]:
+            timeouts.append(timeout)
+            # Public reads consume elapsed time while original native work progresses.
+            clock.now += min(60.0, max(0.0, completion_after - clock.now), timeout)
+            pending = int(clock.now < completion_after)
+            return {"bank_stats": {"bank_id": bank_id, "pending_operations": 0,
+                                   "pending_consolidation": pending, "failed_operations": 0,
+                                   "failed_consolidation": 0},
+                    "pending": {"bank_id": bank_id, "total": 0},
+                    "processing": {"bank_id": bank_id, "total": pending}}
+
+        def close(self) -> None:
+            closes.append(True)
+
+    options = {} if completion_timeout is None else {"completion_timeout": completion_timeout}
+    backend = HindsightBackend(tmp_path, bank_id="h-u1-r1", base_url="http://fixture",
+                               client=Native(), **options)
+    first = session("s1", "2024-01-01T10:00:00", "coffee")
+    deadline_error = None
+    if completed:
+        ingested = backend.ingest(first, key="ingest/0")
+        assert ingested["completed"] is True
+        assert ingested["usage"]["native_completion"]["processing"]["total"] == 0
+        assert clock.now == completion_after > 300.0
+    else:
+        with pytest.raises(
+            HindsightIngestionIncomplete, match="native_completion_deadline",
+        ) as error:
+            backend.ingest(first, key="ingest/0")
+        deadline_error = error.value
+        assert deadline_error.resources_settled is False
+        assert clock.now == (300.0 if completion_timeout is None else completion_timeout)
+        assert backend.last_status is not None and backend.last_status["processing"]["total"] == 1
+    assert timeouts[0] == (300.0 if completion_timeout is None else completion_timeout)
+    assert all(timeout > 0 for timeout in timeouts) and len(timeouts) > 1
+    assert len(writes) == 1 and not closes
+    assert backend.db.execute("SELECT COUNT(*) FROM status_checks").fetchone()[0] == len(timeouts)
+    # Closing observes the remaining original work; it never re-sends retain.
+    backend.close()
+    assert clock.now == completion_after and closes == [True] and len(writes) == 1
+    assert backend.last_status is not None and backend.last_status["processing"]["total"] == 0
+    if deadline_error is not None:
+        # Cleanup cannot turn ingestion into success.
+        assert deadline_error.resources_settled is False
+    with pytest.raises(sqlite3.ProgrammingError, match="closed database"):
+        backend.db.execute("SELECT 1")
+
+
+@pytest.mark.parametrize("timeout", [0.0, float("nan"), float("inf")])
+def test_hindsight_completion_deadline_requires_a_positive_finite_bound(
+    tmp_path: Path, timeout: float,
+) -> None:
+    with pytest.raises(ValueError, match="COMPLETION_TIMEOUT_INVALID"):
+        HindsightBackend(tmp_path, bank_id="h-u1-r1", base_url="http://fixture",
+                         client=Mock(), completion_timeout=timeout)
+    assert not (tmp_path / "hindsight-journal.sqlite3").exists()
 
 
 def bridge_settings(tmp_path: Path) -> tuple[dict[str, Any], VLLMConfig, VLLMConfig]:

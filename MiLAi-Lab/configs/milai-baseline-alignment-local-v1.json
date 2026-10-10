@@ -223,6 +223,7 @@
     },
     "hindsight": {
       "base_url": "http://127.0.0.1:8888",
+      "completion_timeout": 1800,
       "recall_max_tokens": 4096,
       "recall_budget": "mid",
       "include_chunks": true,
