@@ -2497,7 +2497,8 @@ class BenchmarkRun:
                                     and reader_failure.get("request_sent") is False
                                     and reader_failure.get("type") == "ReadDeliveryIncomplete"
                                     and reader_failure.get("reason") in {
-                                        "read_call_limit", "whole_matter_unavailable"}))):
+                                        "read_call_limit", "whole_matter_unavailable",
+                                        "whole_material_unavailable"}))):
                             result = {}
                         elif isinstance(answer, str):
                             result = self._safe_score(
@@ -2668,7 +2669,7 @@ class BenchmarkRun:
                             error, key, policy=selection.get("reader_failure_policy", "fail_fast"),
                         )
                         if reader_failure is None or reader_failure.get("phase") not in {
-                            "before_http", "confirmed_response",
+                            "before_http", "before_final_http", "confirmed_response",
                         }:
                             raise
                         answer = None
@@ -2687,6 +2688,13 @@ class BenchmarkRun:
                         reader_failure.get("phase") == "before_http"
                         and reader_failure.get("request_sent") is False
                         and reader_failure.get("type") == "ReadCapacityUnavailable"
+                    ) or (
+                        reader_failure.get("phase") == "before_final_http"
+                        and reader_failure.get("request_sent") is False
+                        and reader_failure.get("type") == "ReadDeliveryIncomplete"
+                        and reader_failure.get("reason") in {
+                            "read_call_limit", "whole_matter_unavailable",
+                            "whole_material_unavailable"}
                     )
                 )
                 if not isinstance(answer, str) and not known_missing:

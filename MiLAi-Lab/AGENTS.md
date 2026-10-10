@@ -1,4 +1,18 @@
-# Current handoff: offline P0/P1 material delivery integrated, real experiments still stopped, 2026-10-11 Asia/Shanghai
+# Current handoff: user resumed actual baseline work, 2026-10-11 Asia/Shanghai
+
+Human explicitly said “继续” at 2026-10-10 22:51 UTC, revoking the previous real-run stop.
+Root resumes the original full baseline-alignment plan with the existing three developers and serial original ledger.
+Canceled 12b runs and banks remain terminal; fresh source/root predictions precede explicit scoring and Host42.
+Before dispatch, the shared material reader's whole_material_unavailable missing-answer reason was found absent
+from HaluMem scoring and LME before_final_http handling. Root repaired these existing branches; 19 relevant
+predict-to-score/no-Judge missing and unknown-stop checks, Ruff3files and strictmypy1source passed with no models.
+Old f536 prepared E1 bank IDs were declarations only and are not reused as this repaired-source cohort.
+Host f536 v4 remains PREPARED_NOT_DISPATCHED; its functional code is unchanged by the benchmark scoring repair.
+The real dispatch source/root/time and actual counts are recorded by Root in ignored existing artifacts;
+the report is updated from those actual observations, never by relabeling old predictions.
+The previous stopped handoffs below retain their historical timestamps and do not block the new human authorization.
+
+# Previous handoff: offline P0/P1 material delivery integrated, real experiments still stopped, 2026-10-11 Asia/Shanghai
 
 Latest detailed human steering requests four small packages with existing subagents:
 native archive vs Reader view; actual external snapshot positions for shared pagination;

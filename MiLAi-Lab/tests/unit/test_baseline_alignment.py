@@ -26,7 +26,7 @@ from milai_lab.runners.baseline_alignment import (
     prepare_alignment,
     run_alignment_arm,
 )
-from milai_lab.runners.edit_benchmarks import ReadCapacityUnavailable
+from milai_lab.runners.edit_benchmarks import ReadCapacityUnavailable, ReadDeliveryIncomplete
 
 
 def configuration() -> dict[str, Any]:
@@ -143,6 +143,8 @@ def test_longmemeval_prepare_isolates_cases_and_preserves_legacy_manifest(
 
 @pytest.mark.parametrize("backend_name, failure_kind", [
     (BACKENDS[0], "capacity"), (BACKENDS[1], "length"), (BACKENDS[2], "no_text"),
+    (BACKENDS[0], "read_call_limit"), (BACKENDS[1], "whole_material_unavailable"),
+    (BACKENDS[2], "whole_matter_unavailable"),
 ])
 def test_longmemeval_all_history_precedes_qa_and_known_missing_skips_judge(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, synthetic_longmemeval: dict[str, Any],
@@ -199,6 +201,13 @@ def test_longmemeval_all_history_precedes_qa_and_known_missing_skips_judge(
                            "request_sent": False, "phase": "before_http"}
                 write_json(folder / "capacity.json", receipt)
                 raise ReadCapacityUnavailable(receipt)
+            if failure_kind in {
+                "read_call_limit", "whole_material_unavailable", "whole_matter_unavailable",
+            }:
+                write_json(folder / "memory-view.json", {
+                    "capacity_continuation": {"incomplete_reason": failure_kind},
+                })
+                raise ReadDeliveryIncomplete(failure_kind)
             write_json(folder / "response.json", {
                 "choices": [{"finish_reason": "length" if failure_kind == "length" else "stop",
                              "message": {"content": None}}],
@@ -269,6 +278,7 @@ def test_longmemeval_all_history_precedes_qa_and_known_missing_skips_judge(
 
 @pytest.mark.parametrize("failure_kind", [
     "default_fail_fast", "unknown", "bad_usage", "maintain", "unverified_saved",
+    "unverified_delivery_sent", "unverified_delivery_reason",
 ])
 def test_longmemeval_unconfirmed_or_maintenance_failure_stops(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, synthetic_longmemeval: dict[str, Any],
@@ -280,9 +290,15 @@ def test_longmemeval_unconfirmed_or_maintenance_failure_stops(
         execution.settings["longmemeval"].pop("reader_failure_policy")
         execution.settings["halumem"]["reader_failure_policy"] = "record_known_readonly_failure"
     execution.root, execution.phase = tmp_path, "predict"
-    if failure_kind == "unverified_saved":
+    if failure_kind.startswith("unverified_"):
+        failure = ({"finish_reason": "length"} if failure_kind == "unverified_saved" else {
+            "phase": "before_final_http", "type": "ReadDeliveryIncomplete",
+            "request_sent": failure_kind == "unverified_delivery_sent",
+            "reason": ("whole_material_unavailable" if failure_kind == "unverified_delivery_sent"
+                       else "unknown_delivery_outcome"),
+        })
         write_json(tmp_path / "predictions/longmemeval/case-a/complete.json", {
-            "hypothesis": None, "reader_failure": {"finish_reason": "length"},
+            "hypothesis": None, "reader_failure": failure,
         })
     monkeypatch.setattr(execution, "_semantic_retriever", lambda: None)
     maintained = []
@@ -311,10 +327,11 @@ def test_longmemeval_unconfirmed_or_maintenance_failure_stops(
     monkeypatch.setattr(execution, "answer", answer)
     with pytest.raises(ValueError):
         execution.longmemeval("predict")
-    expected = {"maintain": ["shared"], "unverified_saved": []}
-    assert maintained == expected.get(failure_kind, ["shared", "late-a"])
+    expected = [] if failure_kind.startswith("unverified_") else (
+        ["shared"] if failure_kind == "maintain" else ["shared", "late-a"])
+    assert maintained == expected
     assert (tmp_path / "predictions/longmemeval/case-a/complete.json").exists() is (
-        failure_kind == "unverified_saved")
+        failure_kind.startswith("unverified_"))
 
 
 def test_longmemeval_missing_bank_mapping_stops_before_clients_or_native_writes(
