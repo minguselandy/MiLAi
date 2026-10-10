@@ -12,6 +12,18 @@ The real dispatch source/root/time and actual counts are recorded by Root in ign
 the report is updated from those actual observations, never by relabeling old predictions.
 The previous stopped handoffs below retain their historical timestamps and do not block the new human authorization.
 
+Actual fresh E1 source6ab512cb355bdcd71ab2cea45f65ff4ce13818a0 started22:58:54UTC under
+artifacts/baseline-alignment/e1-local-v1-evidence-6ab512cb-v7-prepared. Root parent3324026/worker3324034,
+live unified session27554; do not restart it or hotpatch its frozen source/config.
+Fixed23:28:03UTC: Raw32sessions/73answers/0missing PREDICTIONS_SAVED/resources_settledTrue;
+73gen/1061690known=charged/0emb/newunknown0/0/limitsunchanged. H4sessions/9answers/0missing,
+native started+ready and still running; saved9views direct, actual paging/finalreopen not yet evidenced.
+MNOT_STARTED/Judge0. Native API/PG are intentionally live for this authorized new run; old idle-UID release
+checks apply only before dispatch/after closure. Preserve original shared model servers and serial Owner.
+Root explicit score entry is prepared but not executed while predict owns resources; then Host f536 v4 original42
+and6separate-process SDKreopens follow verified resource closure. All actual E2/E3/E4 obligations remain.
+6ab ownFast38093439981SUCCESS/Full38093439911SKIPPED; new published heads require their own CI.
+
 # Previous handoff: offline P0/P1 material delivery integrated, real experiments still stopped, 2026-10-11 Asia/Shanghai
 
 Latest detailed human steering requests four small packages with existing subagents:
