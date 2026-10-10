@@ -105,7 +105,10 @@ def alignment_settings(config: dict[str, Any], backend: str) -> dict[str, Any]:
         raise ValueError("Unknown declared alignment backend")
     settings = cast(dict[str, Any], copy.deepcopy(config["entrypoints"]["benchmark"]))
     settings.pop("arms", None)
-    settings.update(arm="M", alignment_backend=backend, alignment=config["alignment"])
+    arm = settings.get("arm", "M") if backend == "MiLAi-memory-only" else "M"
+    if arm not in ("B0", "B1", "B2", "M", "Append-only"):
+        raise ValueError("Unknown declared MiLAi maintenance arm")
+    settings.update(arm=arm, alignment_backend=backend, alignment=config["alignment"])
     # Maintenance retains its original candidate limit. QA passes its separate
     # explicit limit to the backend; aligning answers must not change writing.
     settings["memory_view_mode"] = config["alignment"]["delivery"]
