@@ -29,6 +29,7 @@ from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.service import MemoryService
+from milai_lab.memory.working_set import empty_view, read_requirement_status
 
 
 def opened(stack: ExitStack, root: Path, workflow: str, **kwargs: Any) -> tuple[Any, Any, Any]:
@@ -84,6 +85,107 @@ def host_call(
 def host_binding(service: Any, session: str = "session", turn: str = "message") -> dict[str, Any]:
     return {"source_ref": service.event_id(session, turn, "user"), "session": session,
             "turn_id": turn, "config_version": "plan-v1"}
+
+
+@pytest.mark.parametrize("workflow", ["reservation", "document"])
+def test_delivered_object_observation_is_a_new_read_without_business_mutation(
+    tmp_path: Path, workflow: str,
+) -> None:
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, workflow)
+        if workflow == "reservation":
+            call(wrapper, "reserve_and_label", reserve_args(), "create")
+            query, arguments = "get_reservation", {"item_key": "mechanical item"}
+        else:
+            call(wrapper, "create_or_update_draft", draft_args(), "create")
+            query, arguments = "get_document_status", {"title": "mechanical draft"}
+        old_query = json.loads(call(wrapper, query, arguments, "old-query").content)
+        old_source = old_query["source_ref"]
+        ref = VerifiedObjectRef(**service.source(old_source)["object_ref"])
+        service.capture_user("session", "next", "Read the actual current object again.")
+        adapter = app.adapter(service, "session", "next", can_read=True)
+        assert adapter.wrapper.fresh_query_evidence([old_source]) == []
+        before_world, before_journal = app.world.snapshot(), len(app.journal._entries())
+        result = app.observe_delivered(adapter, ref, delivered_source_refs=[old_source],
+                                       attempt_id="new-query")
+        assert result["executed"] is True and result["operation"] == query
+        assert result["business_effect"] == "observed"
+        assert result["source_ref"] != old_source
+        assert result["semantic_maintenance"] == {"status": "not_requested"}
+        assert app.world.snapshot() == before_world
+        assert len(app.journal._entries()) == before_journal + 1
+        assert adapter.wrapper.fresh_query_evidence([old_source]) == []
+        fresh = adapter.wrapper.fresh_query_evidence([old_source, result["source_ref"]])
+        assert len(fresh) == 1 and fresh[0]["source_ref"] == result["source_ref"]
+        assert fresh[0]["turn_id"] == "next"
+        state = {**empty_view(), "read_goal": {"purpose": "Check current object state.",
+                                             "evidence": ["live_business"]}}
+        previous = read_requirement_status(state, [{"type": "fragment", "origin": query}])
+        assert previous["pending_evidence"] == ["live_business"]
+        current = read_requirement_status(state, [], fresh_observations=fresh)
+        assert current["pending_evidence"] == []
+        assert current["answer_sufficiency"] == "unchecked"
+        # A captured but no longer visible query is no longer deliverable evidence.
+        FunctionalMemory(service, len).context("session", "next", "reading-test-v1")
+        service.forget("session", "forget-query", fragment_handles=[
+            part["fragment_handle"] for part in service.source_fragments(result["source_ref"])
+        ])
+        assert adapter.wrapper.fresh_query_evidence([result["source_ref"]]) == []
+
+
+@pytest.mark.parametrize("denial", ["undelivered", "forged", "foreign_owner", "read_revoked",
+                                    "source_revoked"])
+def test_short_object_observation_keeps_delivery_identity_and_permissions(
+    tmp_path: Path, denial: str,
+) -> None:
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, "reservation")
+        original = json.loads(call(wrapper, "reserve_and_label", reserve_args(), "create").content)
+        source_ref = original["source_ref"]
+        reference = dict(service.source(source_ref)["object_ref"])
+        if denial == "forged":
+            reference["id"] += "-not-issued"
+        elif denial == "foreign_owner":
+            reference["owner"] = "bob"
+        adapter = app.adapter(service, "session", "message", can_read=denial != "read_revoked")
+        if denial == "source_revoked":
+            FunctionalMemory(service, len).context("session", "message", "reading-test-v1")
+            service.forget("session", "hide-source", fragment_handles=[
+                part["fragment_handle"] for part in service.source_fragments(source_ref)
+            ])
+        before_world, before_journal = app.world.snapshot(), len(app.journal._entries())
+        result = app.observe_delivered(adapter, VerifiedObjectRef(**reference),
+            delivered_source_refs=[] if denial == "undelivered" else [source_ref],
+            attempt_id="forbidden-query")
+        assert result["executed"] is False and result["business_effect"] == "none"
+        assert result["current_state"] is None
+        assert app.world.snapshot() == before_world
+        assert len(app.journal._entries()) == before_journal
+
+
+def test_lost_query_response_does_not_become_fresh_evidence_or_retry(tmp_path: Path) -> None:
+    def lost(row: dict[str, Any], message: ToolMessage) -> None:
+        if row["name"] == "get_reservation":
+            raise OSError("Query response was not delivered.")
+
+    with ExitStack() as stack:
+        app, service, wrapper = opened(stack, tmp_path, "reservation", response_hook=lost)
+        original = json.loads(call(wrapper, "reserve_and_label", reserve_args(), "create").content)
+        source_ref = original["source_ref"]
+        ref = VerifiedObjectRef(**service.source(source_ref)["object_ref"])
+        service.capture_user("session", "next", "Get a fresh observation of the same object.")
+        adapter = app.adapter(service, "session", "next")
+        before_world = app.world.snapshot()
+        for error in (OSError, UnknownBusinessAction):
+            with pytest.raises(error):
+                app.observe_delivered(adapter, ref, delivered_source_refs=[source_ref],
+                                      attempt_id="lost-query")
+        assert app.world.snapshot() == before_world
+        assert adapter.wrapper.fresh_query_evidence([source_ref]) == []
+        rows = [row for row in app.journal._entries().values()
+                if isinstance(row, dict) and row.get("name") == "get_reservation"]
+        assert len(rows) == 1 and rows[0]["status"] == "pending"
+        assert rows[0]["executed"] is True and rows[0]["effect"] == "none"
 
 
 @pytest.mark.parametrize('workflow', ['reservation', 'document'])

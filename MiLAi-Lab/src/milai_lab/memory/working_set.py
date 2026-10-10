@@ -6,6 +6,10 @@ import copy
 from collections.abc import Callable
 from typing import Any
 
+EVIDENCE_TYPES = (
+    "current_interpretation", "saved_history", "original_source", "live_business",
+)
+
 
 def empty_view() -> dict[str, Any]:
     return {"focus": None, "read_goal": None, "resident_refs": [], "pending_refs": []}
@@ -62,7 +66,7 @@ def item_ref(item: dict[str, Any], snapshot_id: str, unit_index: int) -> dict[st
 
 def admit_refs(
     state: dict[str, Any], refs: list[dict[str, Any]], *, keep_resident: bool = False,
-    read_goal: str | None = None,
+    read_goal: str | dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Continue one matter's pages; switch matters unless explicitly retained.
 
@@ -71,7 +75,7 @@ def admit_refs(
     """
     current = copy.deepcopy(state)
     if read_goal is not None:
-        current["read_goal"] = read_goal
+        current["read_goal"] = copy.deepcopy(read_goal)
     if not refs:
         return current
     previous = state["resident_refs"]
@@ -116,7 +120,7 @@ def admit_refs(
 def select_view_refs(
     state: dict[str, Any], available_refs: list[dict[str, Any]],
     selections: list[dict[str, Any]], *, keep_resident: bool = False,
-    read_goal: str | None = None,
+    read_goal: str | dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Open selected identities from one actual pool, without bodies or another controller.
 
@@ -224,3 +228,59 @@ def read_evidence_basis(items: list[dict[str, Any]]) -> dict[str, str]:
         for item in items if item["type"] in {"record", "fragment"}
     )
     return {view: meanings[view] for view in views if view in meanings}
+
+
+def read_requirement_status(
+    state: dict[str, Any],
+    actual_items: list[dict[str, Any]],
+    *,
+    continuations: list[dict[str, Any]] | None = None,
+    fresh_observations: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    """Compare explicit evidence needs with actual delivery, never infer sufficiency.
+
+    A legacy prose goal is retained without guessing evidence types from words.
+    ``fresh_observations`` must come from the application's actual current-turn
+    query receipt check; original tool Sources and old receipt bodies are not new
+    observations. The caller also supplies its real, still-unread continuations.
+    Seeing a view type says nothing about whether the requested revision, range,
+    conditions or all pages needed to answer the question have been delivered.
+    """
+    goal = state.get("read_goal")
+    explicit = isinstance(goal, dict)
+    structured = goal if isinstance(goal, dict) else {}
+    declared = structured.get("evidence", [])
+    required = list(dict.fromkeys(
+        kind for kind in declared if kind in EVIDENCE_TYPES
+    )) if isinstance(declared, list) else []
+    view_types = {
+        "current_at_snapshot": "current_interpretation",
+        "historical_exact_revision": "saved_history",
+        "original_source": "original_source",
+    }
+    delivered = set(view_types[view] for view in read_evidence_basis(actual_items))
+    observations = copy.deepcopy(fresh_observations or [])
+    if observations:
+        delivered.add("live_business")
+    unread = copy.deepcopy(continuations or [])
+    pending = [kind for kind in required if kind not in delivered]
+    return {
+        "purpose": structured.get("purpose") if explicit else goal,
+        "required_evidence": required,
+        "delivered_evidence": [kind for kind in EVIDENCE_TYPES if kind in delivered],
+        "pending_evidence": pending,
+        "continuations": unread,
+        "pending_refs": copy.deepcopy(state.get("pending_refs", [])),
+        "fresh_observations": observations,
+        "status": "purpose_untyped" if not explicit else "needs_evidence" if pending
+        else "has_delivery_gaps" if unread else "evidence_types_delivered",
+        "coverage": "delivery_only",
+        "answer_sufficiency": "unchecked",
+        "instruction": (
+            "Use pending_evidence and actual continuations to choose the next read. "
+            "A delivered evidence type does not prove that the required revision, "
+            "all pages or every condition has been obtained. Original Sources and "
+            "past application receipts cannot satisfy a need for live_business; "
+            "obtain a new actual query observation in this public request."
+        ),
+    }
