@@ -1945,3 +1945,148 @@ def test_balanced_formation_then_local_exception_and_supported_cancel_keep_gener
         assert canceled["ok"] and canceled["id"] == saved["id"] and canceled["revision"] == 3
         assert service.read(saved["id"])["value"]["edit_state"] == original
         assert service.read(saved["id"], 2)["value"]["edit_state"] == state
+
+def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(tmp_path):
+    """Authored proposals exercise the real Source/SQLite path, not model semantics."""
+    initial_text = (
+        "During this quarter, checklist reminders are disabled by default. "
+        "South and North currently have no checklist reminders. "
+        "I am considering optional coordinator training. "
+        "The previous quarter used printed checklists."
+    )
+    correction_text = (
+        "For North only during this quarter, the rule is now weekly checklist reminders. "
+        "South stays unchanged."
+    )
+    features = EditFeatures(True, True, True, True, True, True)
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", features=features)
+        initial, initial_ref = next_request(service, method, "initial", initial_text)
+        create = {
+            "action": "create",
+            "matter": "Exhibition checklist reminders",
+            "units": [
+                next_unit("Checklist reminders are disabled by default."),
+                next_unit("During this quarter.", role="condition"),
+                next_unit("During this quarter, South and North have no checklist reminders."),
+                next_unit("The user is considering optional coordinator training."),
+                next_unit("The user reports that the previous quarter used printed checklists."),
+            ],
+            "relations": [
+                {"source": 1, "target": 0, "relation_type": "modifies", "evidence": ["e1"]}
+            ],
+        }
+        saved = method.apply(
+            "s", "save-initial", method.decode_envelope(
+                {"creates": [clause_proposal(create, conditioned=True)], "records": {}},
+                initial["mapping"],
+            )[0],
+        )
+        assert saved["ok"] and saved["revision"] == 1
+        before_row = service.read(saved["id"])
+        before = copy.deepcopy(before_row["value"])
+        baseline = before["edit_state"]
+        new_ref = service.capture_user(
+            "s", "north", correction_text, occurred_at="2025-03-11T10:00:00Z"
+        )["source_ref"]
+        service.bind_source_boundary("s", "north", [new_ref])
+        delivery = method.prepare(
+            [new_ref], correction_text, selected_records=[before_row],
+            redelivered_ranges=method.target_support_ranges([before_row]),
+        )
+        request = method.writer_request(delivery, request_id="north", allow_create=False)
+        messages = method.edit_messages(
+            request["packet"], "2026-10-10", allow_create=False, schema=request["schema"]
+        )
+        actual_input = json.loads(messages[1]["content"])["delivery"]
+        assert actual_input == request["packet"]
+        assert [(e["text"], e["delivery_kind"]) for e in actual_input["evidence"]] == [
+            (correction_text, "current"), (initial_text, "redelivered_support")
+        ]
+        record = actual_input["records"][0]
+        assert [c["id"] for c in record["clauses"]] == ["u1", "u3", "u4", "u5"]
+        assert record["clauses"][0]["conditions"][0]["id"] == "u2"
+        assert record["clauses"][1]["text"] == baseline["units"][2]["text"]
+        assert record["clauses"][1]["conditions"] == []
+        assert set(request["mapping"]["units"]) == {"u1", "u2", "u3", "u4", "u5"}
+        assert all(h["use"] == "EXISTING_SUPPORT_ONLY"
+                   for h in actual_input["historical_support"])
+
+        # Rewording the combined old scope cannot use an exact-keep assertion.
+        split_text = "During this quarter, South has no checklist reminders."
+        with pytest.raises(FunctionalRejection, match="CHANGED_CLAIM_REQUIRES_NEW_EVIDENCE"):
+            method.decode_envelope(
+                {"records": {"r1": {"action": "edit", "edits": [{
+                    "operation": "replace", "target_unit": "u3", "text": split_text,
+                    "evidence": [], "assertion": {"keep": "h3"},
+                }]}}}, request["mapping"],
+            )
+        old_only = method.decode_envelope(
+            {"records": {"r1": {"action": "edit", "edits": [{
+                "operation": "retract", "target_unit": "u3", "evidence": ["e2"],
+            }]}}}, request["mapping"],
+        )[0]
+        rejected = method.apply("s", "old-affirmation-only", old_only)
+        assert not rejected["ok"] and rejected["reason"] == "current_boundary_source_required"
+        assert service.read(saved["id"])["value"] == before
+
+        proposal = {"records": {"r1": {"action": "edit", "edits": [
+            {
+                "operation": "add_exception", "target_unit": "u1",
+                "text": "Checklist reminders run weekly.", "condition": "Only in North.",
+                "shared_conditions": ["u2"], "evidence": ["e1"],
+                "assertion": {"source_evidence": "e1", "kind": "reported"},
+            },
+            {
+                "operation": "replace", "target_unit": "u3", "text": split_text,
+                "evidence": ["e1", "e2"],
+                "assertion": {"source_evidence": "e1", "kind": "inferred"},
+            },
+        ]}}}
+        decoded = method.decode_envelope(proposal, request["mapping"])
+        assert len(decoded) == 1
+        revised = method.apply("s", "revise-north-and-overview", decoded[0])
+        assert revised["ok"] and revised["id"] == saved["id"] and revised["revision"] == 2
+        current = copy.deepcopy(service.read(saved["id"])["value"])
+        state = current["edit_state"]
+        for index in (0, 1, 3, 4):
+            assert state["units"][index] == baseline["units"][index]
+        assert state["relations"][0] == baseline["relations"][0]
+        assert state["units"][2]["unit_id"] == baseline["units"][2]["unit_id"]
+        assert state["units"][2]["text"] == split_text
+        assert {r["source_ref"] for r in state["units"][2]["evidence_refs"]} == {
+            initial_ref, new_ref
+        }
+        assertion = state["units"][2]["assertion"]
+        assert assertion["source_ref"] == new_ref and assertion["role"] == "user"
+        assert assertion["kind"] == "inferred"
+        assert assertion["occurred_at"] == "2025-03-11T10:00:00Z"
+        assert assertion["observed_at"] == service.source(new_ref)["observed_at"]
+        assert all("applicability" not in u["assertion"] for u in state["units"])
+        general, shared = baseline["units"][:2]
+        exception, north_scope = state["units"][5:]
+        edges = {(r["source_unit"], r["relation_type"], r["target_unit"])
+                 for r in state["relations"]}
+        assert edges == {
+            (shared["unit_id"], "modifies", general["unit_id"]),
+            (shared["unit_id"], "modifies", exception["unit_id"]),
+            (north_scope["unit_id"], "modifies", exception["unit_id"]),
+            (exception["unit_id"], "overrides", general["unit_id"]),
+        }
+        assert {part["content"] for part in read_revision_evidence(service, current)} == {
+            initial_text, correction_text
+        }
+        assert service.read(saved["id"], 1)["value"] == before
+
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", features=features)
+        assert service.read(saved["id"])["value"] == current
+        assert service.read(saved["id"], 1)["value"] == before
+        current_view = method.revision_view(service.read(saved["id"])["value"])
+        history_view = method.revision_view(service.read(saved["id"], 1)["value"])
+        assert len(current_view["units"]) == 7 and len(history_view["units"]) == 5
+        assert any(u["kind"] == "scoped_exception" for u in current_view["units"])
+        assert not any(u.get("kind") == "scoped_exception" for u in history_view["units"])
+        assert [part["content"] for part in read_revision_evidence(service, before)] == [
+            initial_text
+        ]
