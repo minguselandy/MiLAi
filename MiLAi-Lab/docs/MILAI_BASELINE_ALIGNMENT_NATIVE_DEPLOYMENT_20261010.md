@@ -1,8 +1,9 @@
 # Hindsight 0.10.3 原生服务的本地部署约定
 
-本页记录独立原生服务的入口、配置和资源边界，不是实验结果。核查对象为实际
+本页记录独立原生服务的入口、配置和部署验证边界。核查对象为实际
 `hindsight-api-slim==0.10.3`、`hindsight-client==0.10.3` 和 `pg0-embedded==0.15.2`。
-本次独立安装、禁网配置核查及机械 fixture 没有启动 Hindsight / PostgreSQL，没有调用 Qwen、BGE 或 Judge。
+先前独立安装、禁网配置核查及机械 fixture 没有启动 Hindsight / PostgreSQL。
+较新的实际空实例已启动并关闭 API / DB，仍没有调用 Qwen、BGE 或 Judge，来源入库与语义闭环尚未运行。
 服务部署、原 HTTP 租约和真实模型调度由 Root 管理。
 
 ## 官方入口与配置来源
@@ -24,7 +25,16 @@ max_retries=0))` → `create_app` → `uvicorn.Server`。该版本环境 factory
 API0.10.3／pg0 0.15.2／Python3.11.13、维度1024／native embedding重试0／并发1／batch16、
 worker槽1／consolidation保留0，未覆盖HOME；官方pg0二进制help可执行。
 实际依赖清单及回执位于ignored `artifacts/baseline-alignment/native-installed-admission-e71440c`。
-网络／模型请求0，API／DB尚未启动，不能据此宣称原生闭环完成。
+该安装核查阶段网络／模型请求0、API／DB未启动；较新的实际空部署结果见下文。
+
+2026-10-10 10:06:04 UTC，新的空实例实际返回 `status=healthy`、`database=connected`，
+实际 API 监听 PID／UID 核对通过。10:06:05 UTC 关闭回执确认专属 UID996 无存活进程，
+原生关闭日志亦记录 PostgreSQL 停止；API 由 SIGTERM 退出（returncode=-15）。
+两类模型 URL 均指向本地拒绝所有请求的 HTTP probe，实际请求0；未连接上游、未打开原账本、
+未送 Source、未运行 Reader／Judge。回执保存在 ignored
+`native-empty-deployment-pg-socket-fixed-traversable`，基于 `67a013d` 加本次未提交 socket 修复，
+不称冻结候选或 E0 三方语义闭环。首次实际启动的 `/tmp` 锁文件失败及随后验证父目录
+遍历权限错误各有独立失败根，均无模型请求，未覆盖或重放。
 
 该版本官方 CLI 调用 `load_dotenv(find_dotenv(usecwd=True), override=True)`。
 从当前目录向上发现的 `.env` 会覆盖已导出的环境变量。因此运行目录及祖先中的 `.env`
@@ -48,6 +58,13 @@ pg0 公开 Python SDK 支持 `Pg0(data_dir=...)`，但 Hindsight 0.10.3 的 embe
 instance name、账号、端口和 PostgreSQL config，不传 `data_dir`。`pg0://` 的 query 参数
 进入 `postgresql.conf`，不能用它虚构数据或缓存目录配置。
 
+本地 `/tmp` 已满，实际 PostgreSQL 首次启动因 `/tmp/.s.PGSQL.5434.lock` 无空间失败；
+`TMPDIR` 不改变其 Unix socket 目录。本次通过上述公开 query 配置传递非空
+`unix_socket_directories`，连接仍使用原生 TCP URI。配置 `socket_root` 指向短的 ignored
+`/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/pg0-sockets`；根及每实例独立子目录为
+专属 UID996／0700，父目录实际可遍历。最大 socket 路径实算91字节，程序在创建目录或
+启动服务前拒绝达到 Linux 108字节限制的路径；不复用实例。实际空部署已验证此修复。
+
 PostgreSQL 不能以 root 用户运行，见[pg0 官方说明](https://github.com/vectorize-io/pg0#postgresql-cannot-run-as-root)。
 使用实际非 root 服务用户及其独立、可写的真实 passwd home；已有专属用户可以复用。
 若 Root 创建专属实验用户，其真实 home 放在本次 ignored 目录，并按实际 UID 执行服务。
@@ -66,7 +83,7 @@ Hindsight，安装缓存仍位于该用户的 `~/.pg0/installation`，而 DB 生
 
 ```dotenv
 HINDSIGHT_API_DATABASE_BACKEND=postgresql
-HINDSIGHT_API_DATABASE_URL=pg0://<唯一实例>
+HINDSIGHT_API_DATABASE_URL=pg0://<唯一实例>?unix_socket_directories=<URL编码的短socket路径>
 HINDSIGHT_API_DATABASE_SCHEMA=<唯一合法schema>
 HINDSIGHT_API_VECTOR_EXTENSION=pgvector
 HINDSIGHT_API_TEXT_SEARCH_EXTENSION=native

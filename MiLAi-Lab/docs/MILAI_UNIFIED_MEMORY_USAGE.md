@@ -16,11 +16,14 @@
 修复提交`e71440c`自身 [Fast 38041375106](https://github.com/minguselandy/MiLAi/actions/runs/38041375106)
 成功，[Full 38041375109](https://github.com/minguselandy/MiLAi/actions/runs/38041375109)为skipped。
 旧`4f859be`的Full38040183074亦为skipped；后续提交仍按自己的head核对，不沿用旧CI。
+`67a013d`自身[Fast 38042193588](https://github.com/minguselandy/MiLAi/actions/runs/38042193588)
+成功，[Full 38042193596](https://github.com/minguselandy/MiLAi/actions/runs/38042193596)为skipped；
+本次 socket 修复的远端状态以 PR 当前提交自身检查为准。
 
 | 首轮后端 | 已接通能力 | 实际结果边界 |
 |---|---|---|
 | RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 已在1个真实开发来源会话完成实际入库、重开和原文检索；共同Reader尚未运行，E0三方闭环和E1仍待完成，不称作者模型分数复现 |
-| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 内部模型HTTP及托管生命周期已接线，独立安装和专属用户禁网配置检查已完成；API／DB未启动，无实际原生闭环或 QA |
+| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 独立安装及实际空API／DB启动、健康与关闭已确认，模型请求0；Source入库／共同Reader／评分未运行，无实际语义闭环或 QA |
 | MiLAi-memory-only | 薄门面复用原 Source、MemoryService、维护 recipe 和 Reader；首轮直接读取实际语义状态及已有支持 | 接线已完成，实际形成、更正和 QA 尚未在新配置运行；不经过普通 Host 业务分类，也未增加原文检索兜底 |
 
 首轮按 source-only 在线前缀准备：四个既有开发用户各前八会话，**每臂32会话、73 QA、72原生更新机会**，
@@ -53,12 +56,24 @@ Hindsight模型转接保留完整原生请求和响应，通过原VLLMClient／R
 
 独立安装已完成192个依赖包，实际专属UID996下禁网核对通过：API包0.10.3、pg0 0.15.2、
 Python3.11.13，native embedding维度1024／重试0／并发1／batch16；worker槽1、consolidation保留0。
-未设置HOME覆盖；网络尝试和模型请求均0，API／DB／来源入库均未发生。
+该安装核查未设置HOME覆盖，网络尝试和模型请求均0，API／DB／来源入库均未发生。
 实际版本清单和核对回执保存在ignored `native-installed-admission-e71440c`；前两次下载超时及
 核对脚本的字段预期错误保留，不计作模型样本。安装与配置可加载不等于原生功能验收。
 E0普通闭环已在`e0-one-source-e71440c-prepared`一次性空根prepare：首个既有开发来源，
 每臂1会话／3 QA／0更新机会，3独立bank标识；禁网、0模型／API／DB，Reader／Judge未运行。
 E0与E1银行分开，未提前授予三方闭环或最终候选冻结。
+随后实际空部署发现PostgreSQL仍将socket锁文件写到已满`/tmp`，五次原生PG启动尝试均失败，
+0模型请求；通过公开pg0 query配置`unix_socket_directories`指向专属UID可写短`/cra`路径。
+2026-10-10 **10:06:04 UTC／北京时间18:06:04**，新空实例实际健康、database connected、
+API监听PID／UID核对通过；10:06:05 UTC关闭后实际UID996存活进程0。
+原生API由SIGTERM退出（-15），PG停止日志与实际残留检查一致。
+模型URL均为本地拒绝所有请求的probe，实际请求0；未连接上游、未开原账本、未送Source，
+Reader／Judge未运行。实际根为ignored `native-empty-deployment-pg-socket-fixed-traversable`，
+基于`67a013d`加当时未提交socket修复。此前锁文件失败及验证父目录遍历权限错误各有独立回执，
+不覆盖失败，不算E0三方闭环或语义样本。
+socket配置变化后，新的`e1-local-v1-socket-prepared`／`e0-one-source-socket-v1-prepared`
+各自重新prepare，机会仍为每臂32／73／72与1／3／0，独立标识12与3。
+网络禁用、0模型／bank／客户端／账本／API／DB；不同配置准备不复用，尚未冻结最终候选。
 开发者按实际安装包只读复核36个声明环境变量，全部有解析路径；保留原生配置差异。
 retain及主consolidation output32768不覆盖原生dedup省略output limit的调用；该请求只按65536预留费用，
 不改wire。原生consolidation自适应二分仍可产生多个子batch请求，retry0不等于一次完整操作只调用模型一次。
@@ -84,6 +99,9 @@ Tools边界首检发现新Host helper动态文件加载有3个unresolved；现�
 边界复查通过（11文件／20依赖／6历史私有），未放宽规则。原3个Host helper用例及严格类型复查通过，
 重复检查不另计入139或实验样本。
 上述均为工程检查，不是语义样本或真实模型验收。
+socket修复另核对32项公共入口／后端检查、1源码严格类型及受影响文件Ruff通过；
+与旧合组有重叠，不累加为新实验样本。开发者只读确认公开pg0配置／TCP连接／路径长度和
+权限及失败时UID清理边界，没有额外API／DB／模型调用。
 队列接口修复后的48项检查包含2个新增边界：完整原生请求及独立记账副本正确转交，
 合法usage结算／不合法usage保留预留，第二次请求仍被原队列额度拒绝；其余检查与旧组有重叠，不能相加。
 一次Ruff检查误扫data／studies归档范围，活动范围按原CI重查通过，归档未修改。
@@ -121,6 +139,12 @@ B0 114完整会话／284题检查点＝282答案＋2缺答，全部检查点已�
 维护113 completed＋2 incomplete、233笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
 915生成请求、11206683 known＝charged、embedding121707 tokens；该时点无在途差额。
 原长历史仍运行，新E0／E1实际预测仍待资源释放。
+
+较新固定观察 **10:06:37.367066 UTC／北京时间18:06:37.367066**：同一PID／租约／冻结源码匹配，
+B0 118完整会话／294题检查点＝292答案＋2缺答；维护116 completed＋2 incomplete，
+239笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
+947生成请求、11677880 known＝charged、embedding126109 tokens；该时点无在途差额。
+这仍是未闭合运行前缀，无新方法排名；原PID1854770／1854771实际存活，原模型资源仍被占用。
 
 资源释放且 Root 明确调度后优先 E0／E1，普通 Host 功能线可继续；全部旧科研待办不再成为新任务的永久前置。
 真实调用仍由 Root 在原连续账本串行调度，未知结果不盲重试。新候选尚未冻结确认，E2主要断点诊断、

@@ -25,7 +25,10 @@ retain temperature0.1、consolidation0.0、两阶段输出32768、thinkingTrue�
 该版本环境factory遗漏这个参数，不能仅凭EMBEDDINGS_MAX_RETRIES=0宣称生效。
 见[准确部署约定](MILAI_BASELINE_ALIGNMENT_NATIVE_DEPLOYMENT_20261010.md)。Root持有原租约后才
 启动专属非root用户的新pg0实例，核对实际API监听PID／UID及关闭后残留进程；没有新预算或记忆模块。
-本地用户／解释器已离线准备，服务和DB尚未启动，E0共同Reader与E1仍未运行。
+本地用户／解释器已准备；10:06:04 UTC 实际空实例API／DB健康、监听归属正确，
+10:06:05 UTC关闭后UID残留0，两类模型URL为拒绝全部请求的本地probe，实际模型请求0。
+通过公开pg0 query将Unix socket目录放到短的专属`/cra`路径，解决实际`/tmp`锁文件无空间失败；
+未送Source、未开原账本，E0共同Reader与E1仍未运行。
 
 RawRAG在既有开发用户的第一真实会话完成实际入库、关闭、重开和原文查询：1来源会话、
 1实际返回，角色／日期／逐轮时间和完整正文保持。仅原生持久／查询路径确认、0模型；
@@ -37,6 +40,9 @@ RawRAG在既有开发用户的第一真实会话完成实际入库、关闭、�
 
 最新固定观察与当前开发范围见[现有报告](MILAI_UNIFIED_MEMORY_USAGE.md)。恢复维护K10后的新根准备
 确认每臂32／73／72机会、12个独立bank标识，网络禁用且0实际模型；它不是最终确认冻结。
+socket配置加入后再次使用独立空根：`e1-local-v1-socket-prepared`与
+`e0-one-source-socket-v1-prepared`，分别确认每臂32／73／72与1／3／0机会、12与3独立标识，
+均未创建bank或客户端、未开账本、未启动API／DB，不复用旧配置准备。
 预测／评分成功终态在实际后端和原资源正常关闭后发布；已drained失败仍为FAILED，
 闭合未知保留RESOURCE_UNSETTLED和原错误，Root确认原生服务停止或完成前不调度下一方法。
 

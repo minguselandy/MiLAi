@@ -237,6 +237,7 @@
       "executable": "artifacts/baseline-alignment/hindsight-native-0.10.3-venv/bin/hindsight-api",
       "unix_user": "milai-hindsight-align",
       "home": "/cra/memory/mx_memory/MiLAi-worktrees/baseline-alignment-integration-20261010/MiLAi-Lab/artifacts/baseline-alignment/native-service-home",
+      "socket_root": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/pg0-sockets",
       "startup_timeout": 600,
       "environment": {
         "HINDSIGHT_API_DATABASE_BACKEND": "postgresql",

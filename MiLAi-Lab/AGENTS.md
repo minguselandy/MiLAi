@@ -36,7 +36,18 @@ Dedicated nonroot user UID996/actual ignored /cra home and full Python3.11.13 pr
 native install192packages completed; actual UID996 blocked-network config admissionPASS:
 api0.10.3/pg0 0.15.2/Python3.11.13,dim1024/retry0/concurrency1/batch16,worker1/consolidation floor0,
 noHOMEoverride/networkattempt0/models0; actualversions/receipts ignored native-installed-admission-e71440c.
-API/DB NOT_STARTED. Earlier download timeouts/probe script field errors preserved, not model samples.
+At installation admission API/DB NOT_STARTED. Later actual empty deployment now confirmed:
+10:06:04UTC healthy API/database connected and listenerPID/UID owned;10:06:05UTC closure UID996 residual0,
+API SIGTERM returncode-15/PG stopped. Both model URLs deny-all local probe: actualHTTP/model0,
+no upstream/Source/Reader/Judge/originalledger. This is deployment, not E0 semantic completion.
+Initial actual PG startup failed writing full /tmp socket lock (5nativePG attempts/0model); fix uses public
+pg0 nonempty unix_socket_directories query/TCP connection, short ignored /cra socket_root UID996/0700.
+Max socket path91bytes;>=108 rejected beforecreation. Next probe parent traverse0700 error preserved;
+successful newprobe parent0711. All actual receipts/private logs ignored native-empty-deployment-*.
+Based67a013d plus then-uncommitted socketfix, not finalfreeze. Earlier download/config script errors preserved.
+New config uses fresh e1-local-v1-socket-prepared/e0-one-source-socket-v1-prepared:
+perarm32/73/72 +12IDs and1/3/0 +3IDs, networkdisabled/clients0/banks0/models0/ledger0/API0/DB0;
+never reuse changed configuration manifests. Socketfix32narrowtests/type1source/RuffPASS overlap old groups.
 Native developer read-only installed audit:36env all parsed; retain/mainconsol32768 not universal:
 consolidate_dedup omits output limit, original bridge context65536 reservation only/no wire change.
 Native adaptive consolidation bisection remains; SDKretry0 does not imply1modelcall per operation.
@@ -67,6 +78,9 @@ other4NOT_STARTED/Judge0. Not a closed phase or method ranking.
 New fixed09:34:15.186451Z samePID/lease/source: B0 114complete sessions/284QA=282answers+2missing,
 allcheckpoints in completed sessions;113completed+2incomplete maintenance,233uniquecommits/3rejects,
 915gen/11206683known=charged/121707emb,0inflight;other4NOT_STARTED/Judge0,originalstillRUNNING.
+New fixed10:06:37.367066Z samePID/lease/source: B0 118complete sessions/294QA=292answers+2missing,
+116completed+2incomplete maintenance/239uniquecommits/3rejects,947gen/11677880known=charged/
+126109emb,0inflight;other4NOT_STARTED/Judge0. Actual1854770/1854771 stilllive/resourcesbusy.
 no hot edits/restart/newprefix splicing. Root alone serializes real Qwen/BGE/Judge on originalledger.
 When resourcesfree and explicitly scheduled, prioritize E0/E1; not all old research a prerequisite.
 Known drained failure staysFAILED/resources_settledTrue; uncertainty staysRESOURCE_UNSETTLED,

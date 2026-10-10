@@ -346,6 +346,16 @@ def test_native_readiness_checks_actual_listener_owner() -> None:
         assert not execution._native_listener_is_owned(port)
 
 
+def test_native_database_socket_path_rejects_before_creating_directories(tmp_path: Path) -> None:
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(configuration(), BACKENDS[1])
+    socket_root = tmp_path / ("long-directory-" * 12)
+    execution.settings["alignment"]["hindsight_service"]["socket_root"] = str(socket_root)
+    with pytest.raises(ValueError, match="Unix socket path is too long"):
+        execution._native_database_url("test-instance", os.getuid(), os.getgid())
+    assert not socket_root.exists()
+
+
 def test_reference_query_effects_and_later_state_stay_outside_session_view(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:

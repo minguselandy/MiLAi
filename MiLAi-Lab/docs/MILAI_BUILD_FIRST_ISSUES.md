@@ -17,7 +17,7 @@ RawRAG-local、Hindsight-native-local-recall和MiLAi-memory-only，配置为
 
 | 当前工作 | 已完成与仍待实际证据 |
 |---|---|
-| 强简单与独立外部参照 | RawRAG在1实际来源会话确认入库／重开／完整原文查询，Reader未运行；Hindsight原HTTP账本转接及托管已接线，192包安装和UID996禁网配置核对已完成，API／DB未启动。E0三方闭环／E1未完成，无外部语义通过或方法排名 |
+| 强简单与独立外部参照 | RawRAG在1实际来源会话确认入库／重开／完整原文查询，Reader未运行；Hindsight192包安装、UID996配置与实际空API／DB健康／关闭已确认，模型请求0。Source入库／共同Reader／评分未运行，E0三方闭环／E1未完成，无方法排名 |
 | MiLAi纯记忆与直接读取 | 复用现有维护链和Reader，首轮读取实际语义状态及已有支持；隔离参考查询，不补原文兜底，真实新配置效果待比较 |
 | 三个Host连续流程 | 原两故事各3重复／42消息已准备，原模型／公开反馈／实际效果分列；尚无新真实语义验收，三类共享流程不计作三个独立来源 |
 
@@ -41,7 +41,12 @@ B0 98完整会话、242 QA检查点＝240答案＋2缺答，其他四臂未开�
 新增实际边界已接线：native动作后未知usage阻止Reader；完整HTTP错误保留实际合法usage；
 崩溃旧started／残留专属UID不能因缓存而绕过；API readiness核对实际监听归属。
 0.10.3官方OpenAI embedding环境factory忽略重试字段，已改用原生公开构造参数设0，
-不是monkeypatch或新检索模块。准确设置与未启动边界见[部署约定](MILAI_BASELINE_ALIGNMENT_NATIVE_DEPLOYMENT_20261010.md)。
+不是monkeypatch或新检索模块。准确设置与部署验证边界见[部署约定](MILAI_BASELINE_ALIGNMENT_NATIVE_DEPLOYMENT_20261010.md)。
+实际启动发现已满`/tmp`不能写PG socket锁，通过公开pg0 query改用专属UID可写短`/cra`目录。
+10:06:04 UTC空实例实际database connected且监听归属正确；10:06:05 UTC关闭后UID996残留0，
+上游／Source／原账本／Reader／Judge均未使用。失败根和0模型请求回执保留。
+socket配置变化后E0／E1各用新空根prepare，机会和独立bank标识不变，不复用不同配置准备。
+本次相关32项检查、1源码类型及Ruff通过，检查数量与旧组重叠，不作为语义样本。
 较新08:43:37.902469 UTC：B0 107会话／268题＝266答案＋2缺答，其他4臂未开始／Judge0；
 旧PID／原租约仍占用，859生成／10527628 known＝charged／115344 embedding，未闭合、无方法排名。
 较新09:23:35.049588 UTC：B0 113完整会话／其中281题，284 QA检查点＝282答案＋2缺答；
@@ -49,6 +54,8 @@ B0 98完整会话、242 QA检查点＝240答案＋2缺答，其他四臂未开�
 120009 embedding，阶段未闭合，仍占用原资源。
 较新09:34:15.186451 UTC：B0 114完整会话／284题＝282答案＋2缺答，其他4臂未开始／Judge0；
 915生成／11206683 known＝charged／121707 embedding，无在途差额，原阶段仍未闭合。
+较新10:06:37.367066 UTC：B0 118完整会话／294题＝292答案＋2缺答，其他4臂未开始／Judge0；
+947生成／11677880 known＝charged／126109 embedding，阶段未闭合，原资源继续占用。
 
 ## 2026-10-10：先前功能优先入口（固定05:48:46 UTC）
 

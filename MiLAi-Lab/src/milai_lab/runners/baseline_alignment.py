@@ -17,6 +17,7 @@ import uuid
 from collections import Counter
 from pathlib import Path
 from typing import Any, cast
+from urllib.parse import urlencode
 
 import httpx
 
@@ -220,6 +221,27 @@ class AlignmentRun(BenchmarkRun):
                 return True
         return False
 
+    def _native_database_url(self, identity: str, uid: int, gid: int) -> str:
+        """pg0's public GUC route keeps socket locks off the full system /tmp."""
+        socket_root = Path(self.settings["alignment"]["hindsight_service"]["socket_root"])
+        if not socket_root.is_absolute():
+            raise ValueError("Native PostgreSQL socket root must be absolute")
+        socket_root = socket_root.resolve()
+        directory = socket_root / uuid.uuid4().hex[:16]
+        # Linux sockaddr_un.sun_path includes its terminating byte. Use the
+        # maximum port spelling before creating any directories or service.
+        if len(os.fsencode(str(directory))) + len(b"/.s.PGSQL.65535") >= 108:
+            raise ValueError("Native PostgreSQL Unix socket path is too long")
+        if socket_root.exists():
+            if not socket_root.is_dir() or socket_root.stat().st_uid != uid:
+                raise ValueError("Native PostgreSQL socket root has a different owner")
+        else:
+            socket_root.mkdir(mode=0o700, parents=True)
+            os.chown(socket_root, uid, gid)
+        directory.mkdir(mode=0o700)
+        os.chown(directory, uid, gid)
+        return f"pg0://{identity}?{urlencode({'unix_socket_directories': str(directory)})}"
+
     def _start_native_service(self) -> None:
         """Start the isolated public native application behind the owned ledger."""
         if self._native_process is not None:
@@ -264,16 +286,17 @@ class AlignmentRun(BenchmarkRun):
         ).stdout.decode().strip()
         if installed != native["version"]:
             raise ValueError("Native service distribution differs from the declared version")
+        identity = f"milai_{uuid.uuid4().hex}"
+        database_url = self._native_database_url(identity, account.pw_uid, account.pw_gid)
         bridge = HindsightModelBridge(
             folder / "model-http", generation_client=self.client,
             embedding_client=self.retrieval_embedding_client,
             generation_output_bound=self.settings["context_tokens"],
         ).start()
         self._native_bridge = bridge
-        identity = f"milai_{uuid.uuid4().hex}"
         env.update(native["environment"])
         env.update({
-            "HINDSIGHT_API_DATABASE_URL": f"pg0://{identity}",
+            "HINDSIGHT_API_DATABASE_URL": database_url,
             "HINDSIGHT_API_DATABASE_SCHEMA": identity,
             "HINDSIGHT_API_LLM_MODEL": self.settings["model"]["model"],
             "HINDSIGHT_API_EMBEDDINGS_OPENAI_MODEL": self.settings["embedding"]["model"],
