@@ -450,8 +450,16 @@ def actual_tool_receipt(wire: dict[str, Any]) -> dict[str, Any]:
 
 def memory_effects(wire: dict[str, Any]) -> dict[str, Any]:
     system = next(row["content"] for row in wire["messages"] if row["role"] == "system")
-    summary = json.loads(system.splitlines()[-2])
-    assert summary["schema"] == "functional_memory_effects_v1"
+    summaries = []
+    for line in system.splitlines():
+        try:
+            value = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(value, dict) and value.get("schema") == "functional_memory_effects_v1":
+            summaries.append(value)
+    assert len(summaries) == 1
+    summary = summaries[0]
     assert summary["scope"] == "visible_checkpoint_of_current_public_message"
     return summary
 
@@ -5545,7 +5553,7 @@ def test_explicit_history_tool_delivers_withdrawn_versions_without_new_write(
 def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str, memory_method: str,
 ) -> None:
-    root = prepared(tmp_path, native=True, request_interpretation=True,
+    root = prepared(tmp_path, native=True, request_interpretation=True, actual_capabilities=True,
                     memory_method=memory_method, edit_interface_version="I2",
                     edit_features={name: True for name in (
                         "matter_organization", "semantic_operations", "bound_references",
@@ -5592,7 +5600,21 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
         assert "response_format" not in wire
         assert not {"save_memory", "update_memory", "confirm_existing_memory"}.intersection(
             t["function"]["name"] for t in wire.get("tools", []))
-        feedback = memory_effects(wire)["maintenance"][0]
+        effects = memory_effects(wire)
+        assert effects["confirmed_semantic_commit_count"] == 1
+        assert effects["confirmed_semantic_commit_receipt_refs"] == ["#/maintenance/0/receipts/0"]
+        assert effects["semantic_completion"] == "unchecked"
+        effect_at = system.index("ACTUAL EFFECTS AND RECEIPT EVIDENCE:")
+        capability_at = system.index("CURRENT TOOLS AND ACTION LIMITS:")
+        progress_at = system.index("CURRENT REQUEST PROGRESS AND OUTSTANDING WORK:")
+        assert effect_at < system.index(json.dumps(effects, ensure_ascii=False)) < capability_at
+        assert capability_at < progress_at
+        assert "Commit counts do not verify content, fields or the whole request." in system
+        assert "save/update tool is absent now or an extra call is rejected." in system
+        active, _ = json.JSONDecoder().raw_decode(
+            system.split("CURRENT EXECUTION CAPABILITIES: ", 1)[1])
+        assert active == sorted(t["function"]["name"] for t in wire["tools"])
+        feedback = effects["maintenance"][0]
         assert feedback["semantic_write_performed"]
         assert feedback["receipts"][0]["status"] == "committed"
         assert feedback["batches"][0]["receipts"] == [
@@ -5705,6 +5727,16 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
             names)
         mode_line = wire["messages"][0]["content"]
         assert "failed_no_business_permission" in mode_line
+        effects = memory_effects(wire)
+        assert effects["confirmed_semantic_commit_count"] == 1
+        assert effects["semantic_completion"] == "unchecked"
+        failures = json.loads(mode_line.split("Current request part failures: ", 1)[1]
+                              .splitlines()[0])
+        assert len(failures) == 1
+        assert failures[0]["part"] == "business_plan"
+        assert failures[0]["status"] == "failed" and failures[0]["effect"] == "none"
+        assert mode_line.index("CURRENT REQUEST PROGRESS AND OUTSTANDING WORK:") < (
+            mode_line.index("Current request part failures: "))
         return {"role": "assistant", "content": (
             "Your marker preference was saved; the business plan remains incomplete.")}
 
@@ -6004,6 +6036,7 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     scope_requests: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, complete_requests=True, scope_requests=scope_requests,
+        actual_capabilities=True,
         direct_response=True, phase_thinking=True, current_delivery=True,
         memory_profile="unified_v1", memory_method="milai_edit_m_v1",
         edit_interface_version="I2", maintenance_recipe=recipe,
@@ -6113,6 +6146,16 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
                     seen["saved"] += 1
             return {"role": "assistant", "content": json.dumps(envelope)}
         current = next(m["content"] for m in wire["messages"] if m["role"] == "user")
+        system = wire["messages"][0]["content"]
+        frames = [line[len(functional.PROGRESS_PREFIX):] for line in system.splitlines()
+                  if line.startswith(functional.PROGRESS_PREFIX)]
+        assert len(frames) == 1
+        frame = json.loads(frames[0])
+        assert len(frame) == 1 and frame[0]["request_id"]
+        assert memory_effects(wire)["semantic_completion"] == "unchecked"
+        assert system.index("CURRENT TOOLS AND ACTION LIMITS:") < system.index(
+            "CURRENT REQUEST PROGRESS AND OUTSTANDING WORK:") < system.index(
+                functional.PROGRESS_PREFIX)
         tools = [m for m in wire["messages"] if m["role"] == "tool"]
         if not tools:
             if current == initial_text:

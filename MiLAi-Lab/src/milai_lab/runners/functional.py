@@ -3333,12 +3333,9 @@ def message(
                             "plainly when it prevents an answer. Available business tools still "
                             "follow the current request permissions. "
                         )
-                    if maintenance_recipe:
-                        capability_text += (
-                            "The shared maintenance recipe reports its actual results below. "
-                            "The Agent does not need a save/update tool to confirm those receipts. "
-                        )
-                    elif not {"save_memory", "update_memory"}.intersection(active):
+                    if not maintenance_recipe and not {
+                        "save_memory", "update_memory"
+                    }.intersection(active):
                         capability_text += (
                             "Memory saving/updating is unavailable in this phase. Do not search "
                             "or read repeatedly to try to enable it. Report the actually observed "
@@ -3361,15 +3358,25 @@ def message(
                             # this checkpointed ID; IDs do not enter provider text.
                             id=(identity + ":required-memory-proposal"
                                 if require_proposal else None),
-                            content=capability_text + settings["system_prompt"]
+                            content=settings["system_prompt"]
                             + ("\n" + memory.instructions()
                                if isinstance(memory, FunctionalEditMemory)
                                and not maintenance_recipe else "")
+                            + "\nACTUAL EFFECTS AND RECEIPT EVIDENCE:\n"
+                            + "Confirmed receipts establish the listed effects, even when a "
+                              "save/update tool is absent now or an extra call is rejected. "
+                              "Commit counts do not verify content, fields or the whole request. "
+                              "Keep committed, unchanged, rejected and unknown outcomes distinct."
                             + ("\nMemory maintenance for this event is handled by the shared "
                                "recipe. Use its actual receipts below to report saved, unchanged "
                                "or unfinished work. Raw capture is not a semantic save. "
                                "Do not duplicate maintenance through other tools."
                                if maintenance_recipe else "")
+                            + "\n" + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
+                            + "\nCURRENT TOOLS AND ACTION LIMITS:\n"
+                            + capability_text
+                            + "Use only the tools actually supplied for this phase. This limits "
+                              "next actions; it cannot establish that a prior effect did not occur."
                             + (MAINTENANCE_LIMIT_PROMPT if not for_finalization
                                and settings.get("semantic_reproposal_policy")
                                == "maintenance_two_proposals_v1"
@@ -3379,14 +3386,22 @@ def message(
                                and settings.get("support_input") == "selected_sources_v1"
                                and {"save_memory", "update_memory"}.intersection(allowed_tools)
                                else "")
+                            + "\nCURRENT REQUEST PROGRESS AND OUTSTANDING WORK:\n"
+                            + "Request interpretation describes intent, not completed effects. "
+                              "Use actual progress, pending calls, unprocessed maintenance and "
+                              "reading gaps to identify unfinished or unknown work. A confirmed "
+                              "operation does not prove unattempted parts; semantic completion "
+                              "remains unchecked."
                             + (("\nPersisted current-request interpretation: " if capability_text
                                 else "\nCurrent request interpretation and enforced tool limits: ")
                                + json.dumps(mode, ensure_ascii=False) if mode else "")
                             + ("\n" + PROGRESS_PREFIX + json.dumps(request_progress,
                                 ensure_ascii=False, separators=(",", ":")) if tracker else "")
+                            + ("\nCurrent request part failures: " + json.dumps(
+                                output["request_part_failures"], ensure_ascii=False)
+                               if output.get("request_part_failures") else "")
                             + "".join("\n" + str(row.content) for row in completion_feedback)
-                            + "\n"
-                            + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
+                            + "\nDelivered memory evidence and reading requirements:"
                             + "\n"
                             + json.dumps(material, ensure_ascii=False)
                         ),
