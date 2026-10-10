@@ -1,8 +1,32 @@
 # 统一记忆功能候选与当前执行状态
 
-## 2026-10-10：E0 闭合，E1 首次运行停于 Reader 无文本响应
+## 2026-10-10：新版 E1 运行中，RawRAG 预测已闭合
 
-**最新 E1 终态（11:58:52 UTC／北京时间19:58:52）**：冻结`9a9b84b`，RawRAG完成7会话，
+**固定观察：12:31:19 UTC／北京时间20:31:19。** 本轮源码冻结为
+`d50351a876c98260b8e60a4f4481a98b8bab0ef3`，12:15:22 UTC 从全新12个银行启动，
+父617762／worker617767仍在运行，顺序为RawRAG→Hindsight→MiLAi。仍用原连续账本，
+不接续旧前缀、不自动重试或评分；每臂32会话／73 QA／72更新机会及原输入配置保持。
+
+| 后端 | 本时点实际进度 | 结论边界 |
+|---|---|---|
+| RawRAG-local | 32完整会话，73 QA检查点／73答案／0缺答，预测与资源已闭合 | 尚未评分，不代表73题正确 |
+| Hindsight-native-local-recall | 1完整会话，4 QA检查点／4答案 | 仍在预测，未闭合 |
+| MiLAi-memory-only | 尚未开始 | 不填零分 |
+
+RawRAG已闭合阶段费用为73生成请求、1060772 known＝charged tokens、embedding0、
+新增unknown0／0、原limits不变；其他臂运行中的预留不作为终态unknown报告。
+只有三臂成功预测且资源实际闭合后才另行统一评分，当前Judge0，无本轮方法排名。
+本执行源码自身[Fast 38051194461](https://github.com/minguselandy/MiLAi/actions/runs/38051194461)
+成功，[Full 38051194427](https://github.com/minguselandy/MiLAi/actions/runs/38051194427)为skipped。
+
+Host已在新根`host-flows-d50351a-actual-v1`按同一源码重新prepare，保留原两故事8＋6消息、
+各3次重复／共42消息；尚无bank、results、execution或模型调用。Host8192／thinking=True、
+Editor8192／thinking=False保持原功能配置；benchmark的32768／direct／QA20不迁入Host。
+E2–E4及实际Host连续流程仍待完成。原五方法已按用户要求退出，原结果和费用完整保留。
+
+### 先前接通与失败记录（按各自时点解释）
+
+**首次 E1 终态（11:58:52 UTC／北京时间19:58:52）**：冻结`9a9b84b`，RawRAG完成7会话，
 保存15个QA答案；第16个Reader响应为`stop`但`content=null`，reasoning有内容，实际usage完整：
 26663 prompt＋969 completion＝27632 total。Hindsight／MiLAi尚未开始，Judge0，资源已闭合。
 本阶段16生成请求／195662 known＝charged／embedding0／新增unknown0／0／原limits不变；

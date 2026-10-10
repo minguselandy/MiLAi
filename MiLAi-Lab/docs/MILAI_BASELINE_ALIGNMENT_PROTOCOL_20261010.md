@@ -1,5 +1,13 @@
 # 本地基线对齐协议 v1
 
+当前运行固定观察12:31:19 UTC：完整新E1冻结`d50351a876c98260b8e60a4f4481a98b8bab0ef3`，
+12:15:22 UTC在全新12银行启动，Raw32完整会话／73答案／0缺答且资源已闭合，
+H1完整会话／4答案仍运行，M未开始。原连续账本，三臂成功闭合后统一评分，当前Judge0。
+Raw阶段73生成／1060772 known＝charged／embedding0／新unknown0／0，limits不变。
+该源码自身Fast38051194461成功、Full38051194427 skipped；不是QA正确率或方法优势证据。
+Host同源码新根已准备原42消息，尚未执行；Host／Editor原功能额度与thinking保持。
+下列接通、失败和部署观察保留各自原时点含义，不是当前运行的实时状态。
+
 首次E1冻结`9a9b84b`于11:58:52 UTC停止：Raw15答案，第16实际Reader stop却contentnull、
 usage完整；H／M未开始、资源闭合、Judge0。原失败及195662 known＝charged费用保留。
 既有record_known_readonly_failure现也记录这种完整非文本stop响应，usage须整数非负且相加一致；

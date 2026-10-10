@@ -1,5 +1,20 @@
 # Current handoff: baseline alignment integration, 2026-10-10 Asia/Shanghai
 
+Latest fixed observation2026-10-10T12:31:19.727600UTC: new full E1 is RUNNING on frozen
+d50351a876c98260b8e60a4f4481a98b8bab0ef3, parent617762/worker617767; root
+artifacts/baseline-alignment/e1-local-v1-known-no-text-v3-prepared, runtime sibling.
+RawRAG32complete sessions/73answers/0missing, PREDICTIONS_SAVED/resources_settledTrue;
+73generation requests/1060772known=charged/0embedding/newunknown0/0/limits unchanged.
+Hindsight1complete session/4answers, stillrunning; MiLAiNOT_STARTED/Judge0.
+All12banks fresh, same originalcontinuousledger; no oldprefix splice, no automatic retry/score.
+Only score after all3successful prediction/resource closures; in-flight reservation is not terminalunknown.
+d503 ownFast38051194461SUCCESS/Full38051194427SKIPPED; laterhead requires its own CI.
+Host source d503 fresh root host-flows-d50351a-actual-v1 nowPREPARED_NOT_DISPATCHED:
+same original8+6messages x3=42, no banks/results/execution/modelcalls; actualrun stillpending.
+Functional Host8192/thinkingTrue and Editor8192/thinkingFalse unchanged; benchmark32768/direct/QA20
+does not change Host settings. E2-E4 and realHost/semantic acceptance remain incomplete, goalACTIVE.
+The observations below retain their original timestamps; failedfirstE1 is not the current run.
+
 First E1 source9a9b84b STOPPED at11:58:52.944657UTC: Raw7complete sessions/15QA checkpoints
 with answers,16HTTP responses; currentfirstuser/session7/qa3 actualstop/contentnull/reasoning present,
 usage26663prompt+969completion=27632total, no finaltext. H/M NOT_STARTED/Judge0/resources settled.
