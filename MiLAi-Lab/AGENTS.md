@@ -20,15 +20,18 @@ Frozen5019968 only; arms serial B0/B1/B2/M/Append-only, each277sessions/705QA/59
 all1385/3525/2975. Startledger50840requests/235986661known/236310736charged/2086685emb,unknown7/0.
 Inspect actual PID/root-execution-predict.json/arm terminals; launch is not completion.
 No automatic restart or scoring; all five predictions before separate uniform phase score.
-Fixed2026-10-10 00:44:39UTC observation: runnerPID matches, ownerOWNED, B0first21complete sessions/46QA,
-59QA checkpoints include currentpartial session,22maintenancecompleted/42uniquecommits;
+Fixed2026-10-10 01:50:36UTC observation: runnerPID matches, ownerOWNED, B0first37complete sessions/100QA,
+100QA checkpoints,37maintenancecompleted/63uniquecommits;
 noQA missing or receipt rejection; other4arms NOT_STARTED.
 Live unknown+1 is an in-flight reservation, not closed unknown. Use ignored
 inspect_five_dev277_5019968_progress.py for compact PID/phase/cost checks; do not dump full ledger/world.
 Readonly stage usage helper inspect_five_dev277_5019968_usage.py --snapshot saves ignored actual counters.
-Fixed00:43:05UTC:179gen responses/1966687known,153emb/23143tokens agree with live ledger known;
-1gen pending, not phase closure. All179 planned input counts equal actualprompt_tokens;
-peaks Extract13781/Writer-select25711/Editor32223/Reader-select2942/Reader22084 <=32256.
+Fixed01:50:07UTC:312gen responses/3440007known,259emb/36120tokens agree with live ledger known;
+1gen pending, not phase closure. All312 planned input counts equal actualprompt_tokens;
+peaks Extract13781/Writer-select25711/Editor32223/Reader-select2942/Reader28511 <=32256.
+At01:50:36UTC313gen requests/3471370known=charged,newunknown0; fixed observations are not phase ends.
+User explicitly requests experiment summary and submission to GitHub on2026-10-10; publish the
+integration branch and a draft PR stacked on119. This does not authorize merging or stopping main.
 Only saved response metadata,0new calls/bank/dataset; no future capacity/semantic advantage claim.
 Native32/drift/external28/controlled v3 configs PREPARED ONLY,0HTTP; no final confirmation freeze.
 Native/drift static entry review in native-drift-runner-review-5019968-v3.json:9code files equal
