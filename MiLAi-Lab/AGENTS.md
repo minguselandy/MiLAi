@@ -24,6 +24,18 @@ Root explicit score entry is prepared but not executed while predict owns resour
 and6separate-process SDKreopens follow verified resource closure. All actual E2/E3/E4 obligations remain.
 6ab ownFast38093439981SUCCESS/Full38093439911SKIPPED; new published heads require their own CI.
 
+New actual first paged H case (same owner/session4/qa0) reviewed23:33:59/23:44UTC:
+5confirmed pages62/46/53/10/10=171unique/181cumulative, last10 reread is Reader selection progression,
+not HTTP/native retry. Final10 originals exact/pending0/final_bodyTrue;6HTTP/peak32066/totalinput125528/output11237.
+Source-only/noGold audit confirms necessary identity/time/current original chunks delivered on page1,
+then keep_residentFalse replaces prior candidates with unrelated final10. Final answer declines because final
+evidence lacks those bodies; actual question NOT completed, don't call semantic success or officialHallucination.
+Pool/delivery sufficient for a bounded answer, final workset insufficient; roles need preserving too.
+Fixed23:42:39UTC H6sessions/12textanswers/0engineeringmissing/3pageddeliveryclosed;MNOT_STARTED/Judge0.
+Current6ab frozen run must continue unchanged. B investigates existing final-workset organization read-only;
+no new selector/checker/modules, no forced correct indices/all-retain/budget increase or case-specific model dispatch.
+Reporthead35abf714 ownFast38095208647SUCCESS/Full38095208654SKIPPED. Later heads require own CI.
+
 # Previous handoff: offline P0/P1 material delivery integrated, real experiments still stopped, 2026-10-11 Asia/Shanghai
 
 Latest detailed human steering requests four small packages with existing subagents:
