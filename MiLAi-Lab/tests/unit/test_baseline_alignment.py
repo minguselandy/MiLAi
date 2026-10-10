@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import copy
+import json
 import os
+import runpy
 import socket
+import sys
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -23,6 +26,7 @@ from milai_lab.runners.baseline_alignment import (
     prepare_alignment,
     run_alignment_arm,
 )
+from milai_lab.runners.edit_benchmarks import ReadCapacityUnavailable
 
 
 def configuration() -> dict[str, Any]:
@@ -68,6 +72,319 @@ class ActualReturnBackend:
 
     def close(self) -> None:
         pass
+
+
+@pytest.fixture
+def synthetic_longmemeval(monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
+    """Only fabricated histories, evaluator markers and case identifiers."""
+    from milai_lab.runners import baseline_alignment
+
+    cases = [{
+        "question_id": f"case-{suffix}", "question": f"query {suffix}",
+        "question_date": "2024/01/03 (Wed) 10:00", "question_type": "single-session-user",
+        "answer": "PRIVATE ANSWER", "answer_session_ids": ["shared"],
+        "haystack_session_ids": [f"late-{suffix}", "shared"],
+        "haystack_dates": ["2024/01/02 (Tue) 10:00", "2024/01/01 (Mon) 10:00"],
+        "haystack_sessions": [[
+            {"role": "user", "content": f"public late {suffix}", "has_answer": True},
+            {"role": "assistant", "content": f"public response {suffix}", "has_answer": False},
+        ], [{"role": "user", "content": "public shared exchange", "has_answer": False}]],
+    } for suffix in ("a", "b")]
+
+    def selected(_: Path, ids: list[str]) -> list[dict[str, Any]]:
+        return copy.deepcopy([case for case in cases if case["question_id"] in ids])
+
+    monkeypatch.setattr(baseline_alignment, "longmemeval_cases", selected)
+    monkeypatch.setattr(edit_benchmarks, "longmemeval_cases", selected)
+    config = configuration()
+    config["alignment"]["history_protocol"] = "longmemeval-complete-history"
+    config["entrypoints"]["benchmark"]["longmemeval"] = {
+        "path": "synthetic-only.json", "official_checkout": "synthetic-official",
+        "questions": [case["question_id"] for case in cases],
+        "reader_failure_policy": "record_known_readonly_failure",
+    }
+    config["entrypoints"]["benchmark"]["halumem"]["reader_failure_policy"] = "fail_fast"
+    return config
+
+
+def test_longmemeval_prepare_isolates_cases_and_preserves_legacy_manifest(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, synthetic_longmemeval: dict[str, Any],
+) -> None:
+    from milai_lab.runners import baseline_alignment
+
+    root = tmp_path / "longmemeval"
+    manifest = prepare_alignment(synthetic_longmemeval, root, benchmark="longmemeval")
+    assert manifest["benchmark"] == "longmemeval"
+    assert manifest["protocol"]["history_protocol"] == "longmemeval-complete-history"
+    assert manifest["per_backend_opportunities"] == {"sessions": 4, "qa": 2}
+    assert manifest["history_components"] == [["case-a", "case-b"]]
+    assert manifest["native_update_evaluation"] == "N/A"
+    assert manifest["per_case_opportunities"]["case-a"]["session_ids"] == ["shared", "late-a"]
+    banks = {value for owners in manifest["bank_ids"].values() for value in owners.values()}
+    assert len(banks) == 6 and all("case-" not in value for value in banks)
+    other = prepare_alignment(synthetic_longmemeval, tmp_path / "other", benchmark="longmemeval")
+    assert banks.isdisjoint(value for owners in other["bank_ids"].values()
+                            for value in owners.values())
+    assert not (root / "banks").exists() and not (root / "http").exists()
+    with pytest.raises(ValueError, match="benchmark differs"):
+        prepare_alignment(synthetic_longmemeval, root)
+    with pytest.raises(ValueError, match="online prefix"):
+        prepare_alignment(synthetic_longmemeval, tmp_path / "wrong-protocol")
+
+    monkeypatch.setattr(baseline_alignment, "halumem_users", lambda *_: [source_user()])
+    old_root, config = tmp_path / "legacy", configuration()
+    legacy = prepare_alignment(config, old_root)
+    legacy.pop("benchmark")
+    write_json(old_root / "alignment-prepared.json", legacy)
+    assert prepare_alignment(config, old_root) == legacy
+    with pytest.raises(ValueError, match="benchmark differs"):
+        prepare_alignment(config, old_root, benchmark="longmemeval")
+
+
+@pytest.mark.parametrize("backend_name, failure_kind", [
+    (BACKENDS[0], "capacity"), (BACKENDS[1], "length"), (BACKENDS[2], "no_text"),
+])
+def test_longmemeval_all_history_precedes_qa_and_known_missing_skips_judge(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, synthetic_longmemeval: dict[str, Any],
+    backend_name: str, failure_kind: str,
+) -> None:
+    from milai_lab.baselines import rawrag_local
+    from milai_lab.integrations.memory import hindsight
+    from milai_lab.methods import milai_memory_only
+
+    manifest = prepare_alignment(synthetic_longmemeval, tmp_path / "prepared",
+                                 benchmark="longmemeval")
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(synthetic_longmemeval, backend_name)
+    execution.settings["alignment_bank_ids"] = manifest["bank_ids"][backend_name]
+    execution.root, execution.phase, execution.backends = tmp_path / "run", "predict", {}
+    monkeypatch.setattr(execution, "_semantic_retriever", lambda: None)
+    monkeypatch.setattr(execution, "_start_native_service", lambda: None)
+    constructed: list[tuple[dict[str, Any], ActualReturnBackend]] = []
+    namespaces: dict[str, tuple[str, ...]] = {}
+    actual_factory = execution._backend
+
+    def backend_for(service: MemoryService) -> Any:
+        namespaces[service.owner] = service.namespace
+        return actual_factory(service)
+
+    monkeypatch.setattr(execution, "_backend", backend_for)
+
+    def construct(*_: Any, **kwargs: Any) -> ActualReturnBackend:
+        value = ActualReturnBackend()
+        constructed.append((kwargs, value))
+        return value
+
+    factory_module, factory_name = {
+        BACKENDS[0]: (rawrag_local, "RawRAGLocal"),
+        BACKENDS[1]: (hindsight, "HindsightBackend"),
+        BACKENDS[2]: (milai_memory_only, "MiLAiMemoryBackend"),
+    }[backend_name]
+    monkeypatch.setattr(factory_module, factory_name, construct)
+    delivered = []
+
+    def answer(question: str, date: str, key: str, materials: list[dict[str, Any]]) -> Any:
+        assert date == "2024/01/03 (Wed) 10:00"
+        assert [row["session_id"] for row in materials] == ["shared", f"late-{question[-1]}"]
+        delivered.append(copy.deepcopy(materials))
+        if question == "query a":
+            folder = execution.root / "http" / key
+            if failure_kind == "capacity":
+                receipt = {"stage": key, "input_tokens": 40000, "input_token_limit": 32256,
+                           "request_sent": False, "phase": "before_http"}
+                write_json(folder / "capacity.json", receipt)
+                raise ReadCapacityUnavailable(receipt)
+            write_json(folder / "response.json", {
+                "choices": [{"finish_reason": "length" if failure_kind == "length" else "stop",
+                             "message": {"content": None}}],
+                "usage": {"prompt_tokens": 12, "completion_tokens": 3, "total_tokens": 15},
+            })
+            raise ValueError("Provider output incomplete: length" if failure_kind == "length"
+                             else "Provider returned no textual answer")
+        return "scripted answer", materials
+
+    monkeypatch.setattr(execution, "answer_material", answer)
+    predicted = execution.longmemeval("predict")
+    assert [row["hypothesis"] for row in predicted] == [None, "scripted answer"]
+    assert "reader_failure" in predicted[0] and "reader_failure" not in predicted[1]
+    assert len(constructed) == 2
+    assert {path.name for path in (execution.root / "banks").iterdir()} == set(
+        manifest["bank_ids"][backend_name].values())
+    for index, (kwargs, backend) in enumerate(constructed):
+        suffix = "ab"[index]
+        owner = f"case-{suffix}"
+        assert namespaces[owner] == (
+            "edit", "run", "ordinary", manifest["bank_ids"][backend_name][owner], owner,
+        )
+        assert backend.events == [("ingest", 1), ("ingest", 2), (f"query {suffix}", 2)]
+        assert [row["date"] for row in backend.history] == [
+            "2024/01/01 (Mon) 10:00", "2024/01/02 (Tue) 10:00",
+        ]
+        assert [turn["role"] for turn in backend.history[1]["turns"]] == ["user", "assistant"]
+        for row in backend.history:
+            assert set(row) == {"session_id", "date", "turns"}
+            assert all(set(turn) == {"role", "content", "timestamp"} for turn in row["turns"])
+            assert all(turn["timestamp"] == row["date"] for turn in row["turns"])
+        assert "PRIVATE" not in repr(backend.history) and "query" not in repr(backend.history)
+        assert "scripted answer" not in repr(backend.history)
+        if backend_name != BACKENDS[2]:
+            assert kwargs["bank_id"] == manifest["bank_ids"][backend_name][f"case-{suffix}"]
+    previous_events = [copy.deepcopy(backend.events) for _, backend in constructed]
+    judged = []
+
+    class Official:
+        def __init__(self, _: Path) -> None:
+            pass
+
+        @staticmethod
+        def make_prompt(case: dict[str, Any], hypothesis: str) -> str:
+            assert case["question_id"] == "case-b" and hypothesis == "scripted answer"
+            return "synthetic judge prompt"
+
+        @staticmethod
+        def label(verdict: str) -> bool:
+            return verdict == "yes"
+
+    def judge(key: str, *_: Any, **__: Any) -> str:
+        judged.append(key)
+        return "yes"
+
+    monkeypatch.setattr(edit_benchmarks, "LongMemEvalOfficial", Official)
+    monkeypatch.setattr(execution, "call", judge)
+    execution.phase = "score"
+    scored = execution.longmemeval("score")
+    assert len(scored) == 2 and [row["autoeval_label"] for row in scored] == [False, True]
+    assert scored[0]["hypothesis"] is None and scored[0]["official_verdict"] is None
+    assert judged == ["longmemeval/case-b/judge"]
+    assert previous_events == [backend.events for _, backend in constructed] and len(delivered) == 2
+    assert [json.loads(line)["hypothesis"] for line in (
+        execution.root / "longmemeval-hypotheses.jsonl").read_text().splitlines()
+    ] == [None, "scripted answer"]
+
+
+@pytest.mark.parametrize("failure_kind", [
+    "default_fail_fast", "unknown", "bad_usage", "maintain", "unverified_saved",
+])
+def test_longmemeval_unconfirmed_or_maintenance_failure_stops(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, synthetic_longmemeval: dict[str, Any],
+    failure_kind: str,
+) -> None:
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(synthetic_longmemeval, BACKENDS[0])
+    if failure_kind == "default_fail_fast":
+        execution.settings["longmemeval"].pop("reader_failure_policy")
+        execution.settings["halumem"]["reader_failure_policy"] = "record_known_readonly_failure"
+    execution.root, execution.phase = tmp_path, "predict"
+    if failure_kind == "unverified_saved":
+        write_json(tmp_path / "predictions/longmemeval/case-a/complete.json", {
+            "hypothesis": None, "reader_failure": {"finish_reason": "length"},
+        })
+    monkeypatch.setattr(execution, "_semantic_retriever", lambda: None)
+    maintained = []
+
+    def maintain(service: MemoryService, session: MemorySession, key: str) -> list[str]:
+        assert service.namespace == ("edit", tmp_path.name, "ordinary", "case-a")
+        maintained.append(session.session_id)
+        if failure_kind == "maintain":
+            raise ValueError("Provider output incomplete: length")
+        return []
+
+    def answer(_: MemoryService, question: str, date: str, key: str) -> str:
+        if failure_kind == "default_fail_fast":
+            raise ReadCapacityUnavailable({
+                "stage": key, "input_tokens": 40000, "input_token_limit": 32256,
+            })
+        if failure_kind == "bad_usage":
+            write_json(tmp_path / "http" / key / "response.json", {
+                "choices": [{"finish_reason": "length"}],
+                "usage": {"prompt_tokens": 12, "completion_tokens": 3, "total_tokens": 99},
+            })
+            raise ValueError("Provider output incomplete: length")
+        raise ValueError("Unknown transport outcome")
+
+    monkeypatch.setattr(execution, "maintain", maintain)
+    monkeypatch.setattr(execution, "answer", answer)
+    with pytest.raises(ValueError):
+        execution.longmemeval("predict")
+    expected = {"maintain": ["shared"], "unverified_saved": []}
+    assert maintained == expected.get(failure_kind, ["shared", "late-a"])
+    assert (tmp_path / "predictions/longmemeval/case-a/complete.json").exists() is (
+        failure_kind == "unverified_saved")
+
+
+def test_longmemeval_missing_bank_mapping_stops_before_clients_or_native_writes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, synthetic_longmemeval: dict[str, Any],
+) -> None:
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(synthetic_longmemeval, BACKENDS[0])
+    execution.settings["alignment_bank_ids"] = {}
+    execution.root = tmp_path
+    monkeypatch.setattr(execution, "_semantic_retriever", lambda: pytest.fail("client created"))
+    monkeypatch.setattr(execution, "_backend", lambda _: pytest.fail("native backend created"))
+    with pytest.raises(KeyError, match="case-a"):
+        execution.longmemeval("predict")
+    assert not (tmp_path / "banks").exists()
+
+
+def test_longmemeval_dispatch_records_benchmark_and_closes_before_terminal(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, synthetic_longmemeval: dict[str, Any],
+) -> None:
+    from milai_lab.runners import baseline_alignment
+
+    prepare_alignment(synthetic_longmemeval, tmp_path, benchmark="longmemeval")
+    terminal = tmp_path / BACKENDS[0] / "terminal-predict.json"
+    events = []
+
+    class Execution:
+        def __init__(self, settings: dict[str, Any], *_: Any, **__: Any) -> None:
+            assert settings["alignment_benchmark"] == "longmemeval"
+            assert set(settings["alignment_bank_ids"]) == {"case-a", "case-b"}
+
+        def longmemeval(self, phase: str) -> list[dict[str, Any]]:
+            assert phase == "predict"
+            events.append("predicted")
+            return [{"hypothesis": None}, {"hypothesis": "synthetic answer"}]
+
+        def close(self) -> None:
+            assert not terminal.exists()
+            events.append("closed")
+
+    monkeypatch.setattr(baseline_alignment, "AlignmentRun", Execution)
+    monkeypatch.setattr(baseline_alignment, "_native_uid_processes", lambda _: [])
+    with pytest.raises(ValueError, match="benchmark differs"):
+        run_alignment_arm(synthetic_longmemeval, tmp_path, BACKENDS[0], "predict")
+    assert events == []
+    run_alignment_arm(synthetic_longmemeval, tmp_path, BACKENDS[0], "predict",
+                      benchmark="longmemeval")
+    assert events == ["predicted", "closed"]
+    result = read_json(terminal)
+    assert result["benchmark"] == "longmemeval" and result["resources_settled"] is True
+    assert result["result"] == {"benchmark": "longmemeval", "cases": 2,
+                                "complete_answers": 1, "missing_answers": 1, "judge_calls": 0}
+
+
+@pytest.mark.parametrize("benchmark", [None, "longmemeval"])
+def test_alignment_cli_forwards_explicit_or_default_benchmark(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, benchmark: str | None,
+) -> None:
+    from milai_lab.runners import baseline_alignment
+
+    config_path = tmp_path / "config.json"
+    write_json(config_path, configuration())
+    calls = []
+    monkeypatch.setattr(baseline_alignment, "prepare_alignment", lambda *args, **kwargs: (
+        calls.append(("prepare", kwargs["benchmark"]))))
+    monkeypatch.setattr(baseline_alignment, "run_alignment_arm", lambda *args, **kwargs: (
+        calls.append(("predict", kwargs["benchmark"]))))
+    argv = ["run_baseline_alignment.py", str(config_path), str(tmp_path / "out"),
+            "--phase", "predict", "--backend", BACKENDS[0]]
+    if benchmark is not None:
+        argv.extend(["--benchmark", benchmark])
+    monkeypatch.setattr(sys, "argv", argv)
+    tool = Path(__file__).parents[2] / "tools/run_baseline_alignment.py"
+    main = runpy.run_path(str(tool))["main"]
+    main()
+    assert calls == [("prepare", benchmark or "halumem"), ("predict", benchmark or "halumem")]
 
 
 def test_prepare_keeps_qa_and_update_budgets_and_opaque_isolation(

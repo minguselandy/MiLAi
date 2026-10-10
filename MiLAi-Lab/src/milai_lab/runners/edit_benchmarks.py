@@ -2032,14 +2032,17 @@ class BenchmarkRun:
             raise RuntimeError("Reference-guided scorer retrieval mutated actual memory")
         return [row["value"]["content"] for row in rows]
 
-    def _known_reader_failure(self, error: ValueError, key: str) -> dict[str, Any] | None:
+    def _known_reader_failure(
+        self, error: ValueError, key: str, *, policy: str | None = None,
+    ) -> dict[str, Any] | None:
         """Record a proven unsent request or confirmed unusable Reader response.
 
         This is called from QA only. Business, maintenance, transport unknowns
         and Store failures retain their original stop behavior. The run's frozen
         policy determines whether subsequent questions/history may proceed.
         """
-        policy = self.settings["halumem"].get("reader_failure_policy", "fail_fast")
+        if policy is None:
+            policy = self.settings["halumem"].get("reader_failure_policy", "fail_fast")
         view_path = self.root / "http" / key / "memory-view.json"
         if isinstance(error, ReadDeliveryIncomplete) and policy == "record_known_readonly_failure":
             if (not view_path.exists() or (view_path.parent / "request.json").exists()
@@ -2482,12 +2485,16 @@ class BenchmarkRun:
         predictions = []
         for case in longmemeval_cases(Path(selection["path"]), selection["questions"]):
             owner = case["question_id"]
-            bank = self.root / "banks" / owner
+            bank_ids = self.settings.get("alignment_bank_ids")
+            bank_id = bank_ids[owner] if bank_ids is not None else owner
+            bank = self.root / "banks" / bank_id
+            namespace = (("edit", self.root.name, "ordinary", owner) if bank_ids is None else
+                         ("edit", self.root.name, "ordinary", bank_id, owner))
             bank.mkdir(parents=True, exist_ok=True)
             with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
                 service = MemoryService(
                     store,
-                    ("edit", self.root.name, "ordinary", owner),
+                    namespace,
                     owner,
                     bank / "memory.lock",
                     mutation_contract="event_bound_v1",
@@ -2498,8 +2505,11 @@ class BenchmarkRun:
                 )
                 history = longmemeval_history(case)
                 prediction_path = self.root / "predictions/longmemeval" / owner / "complete.json"
+                reader_failure: dict[str, Any] | None = None
                 if prediction_path.exists():
-                    answer = read_json(prediction_path)["hypothesis"]
+                    saved = read_json(prediction_path)
+                    answer = saved["hypothesis"]
+                    reader_failure = saved.get("reader_failure")
                 else:
                     if phase == "score":
                         raise ValueError(f"Prediction not saved: longmemeval/{owner}")
@@ -2516,20 +2526,46 @@ class BenchmarkRun:
                             ),
                             flush=True,
                         )
-                    answer = self.answer(
-                        service, case["question"], case["question_date"],
-                        f"longmemeval/{owner}/answer",
-                    )
+                    key = f"longmemeval/{owner}/answer"
+                    try:
+                        answer = self.answer(service, case["question"], case["question_date"], key)
+                    except ValueError as error:
+                        reader_failure = self._known_reader_failure(
+                            error, key, policy=selection.get("reader_failure_policy", "fail_fast"),
+                        )
+                        if reader_failure is None or reader_failure.get("phase") not in {
+                            "before_http", "confirmed_response",
+                        }:
+                            raise
+                        answer = None
                     write_json(prediction_path, {
                         "question_id": owner, "hypothesis": answer, "state": service.records(),
+                        **({"reader_failure": reader_failure}
+                           if reader_failure is not None else {}),
                     })
+                known_missing = answer is None and isinstance(reader_failure, dict) and (
+                    (reader_failure.get("phase") == "confirmed_response"
+                     and reader_failure.get("finish_reason") == "length") or (
+                        reader_failure.get("phase") == "confirmed_response"
+                        and reader_failure.get("finish_reason") == "stop"
+                        and reader_failure.get("reason") == "no_textual_answer"
+                    ) or (
+                        reader_failure.get("phase") == "before_http"
+                        and reader_failure.get("request_sent") is False
+                        and reader_failure.get("type") == "ReadCapacityUnavailable"
+                    )
+                )
+                if not isinstance(answer, str) and not known_missing:
+                    raise ValueError(
+                        "Saved LongMemEval hypothesis lacks an answer or known failure")
+                failure_fields = ({"reader_failure": reader_failure} if known_missing else {})
                 if phase == "predict":
                     predictions.append({"question_id": owner, "hypothesis": answer,
-                                        "question_type": case["question_type"]})
+                                        "question_type": case["question_type"], **failure_fields})
                     write_json(self.root / "longmemeval-predictions.json", predictions)
                     continue
                 assert official is not None
-                verdict = self.call(
+                verdict = None if known_missing else self.call(
                     f"longmemeval/{owner}/judge",
                     [{"role": "user", "content": official.make_prompt(case, answer)}],
                     structured=False,
@@ -2540,8 +2576,9 @@ class BenchmarkRun:
                         "hypothesis": answer,
                         "question_type": case["question_type"],
                         "official_verdict": verdict,
-                        "autoeval_label": official.label(verdict),
+                        "autoeval_label": official.label(verdict) if verdict is not None else False,
                         "history_sessions": len(history),
+                        **failure_fields,
                         "source_condition": (
                             "shared-history descriptive development; not independent holdout"
                         ),

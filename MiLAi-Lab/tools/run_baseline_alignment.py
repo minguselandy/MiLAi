@@ -14,6 +14,7 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--phase", choices=("prepare", "predict", "score"), required=True)
     parser.add_argument("--backend", help="One declared backend; omitted means serial suite")
+    parser.add_argument("--benchmark", choices=("halumem", "longmemeval"), default="halumem")
     parser.add_argument("--runtime-dir", type=Path)
     args = parser.parse_args()
     if args.runtime_dir is not None:
@@ -21,12 +22,12 @@ def main() -> None:
     from milai_lab.runners.baseline_alignment import prepare_alignment, run_alignment_arm
 
     config = read_json(args.config)
-    prepare_alignment(config, args.output)
+    prepare_alignment(config, args.output, benchmark=args.benchmark)
     if args.phase == "prepare":
         return
     backends = [args.backend] if args.backend else config["alignment"]["backends"]
     for backend in backends:
-        run_alignment_arm(config, args.output, backend, args.phase)
+        run_alignment_arm(config, args.output, backend, args.phase, benchmark=args.benchmark)
 
 
 if __name__ == "__main__":

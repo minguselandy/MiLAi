@@ -23,7 +23,14 @@ import httpx
 
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.contracts.memory_backend import MemoryBackend, MemorySession
-from milai_lab.datasets.edit_benchmarks import ObservedSession, halumem_time, halumem_users
+from milai_lab.datasets.edit_benchmarks import (
+    ObservedSession,
+    halumem_time,
+    halumem_users,
+    history_components,
+    longmemeval_cases,
+    longmemeval_history,
+)
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.integrations.memory.hindsight import (
     HindsightIngestionIncomplete,
@@ -33,6 +40,7 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.runners.edit_benchmarks import BenchmarkRun, reader_messages
 
 BACKENDS = ("RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only")
+BENCHMARKS = ("halumem", "longmemeval")
 
 # The official env factory omits OpenAIEmbeddings.max_retries in 0.10.3.
 # Its public constructor supplies that option without altering native retrieval.
@@ -115,47 +123,69 @@ def alignment_settings(config: dict[str, Any], backend: str) -> dict[str, Any]:
     return settings
 
 
-def prepare_alignment(config: dict[str, Any], root: Path) -> dict[str, Any]:
+def prepare_alignment(
+    config: dict[str, Any], root: Path, *, benchmark: str = "halumem",
+) -> dict[str, Any]:
     """Declare actual development opportunities without banks or model clients."""
+    if benchmark not in BENCHMARKS:
+        raise ValueError("Unknown declared alignment benchmark")
     path = root / "alignment-prepared.json"
     if path.exists():
         manifest = read_json(path)
         if manifest["configuration"] != config:
             raise ValueError("Prepared comparison changed; use a distinct output root")
+        if manifest.get("benchmark", "halumem") != benchmark:
+            raise ValueError("Prepared comparison benchmark differs; use a distinct output root")
         return dict(manifest)
     alignment = config["alignment"]
-    if alignment["source_policy"] != "source-only" or alignment["history_protocol"] != (
-        "halumem-online-prefix"
-    ):
-        raise ValueError("First comparison requires the declared source-only online prefix")
+    protocol = ("halumem-online-prefix" if benchmark == "halumem"
+                else "longmemeval-complete-history")
+    if alignment["source_policy"] != "source-only" or alignment["history_protocol"] != protocol:
+        if benchmark == "halumem":
+            raise ValueError("First comparison requires the declared source-only online prefix")
+        raise ValueError("LongMemEval requires the declared source-only complete-history protocol")
     if alignment["delivery"] not in {"direct", "staged", "state_driven"}:
         raise ValueError("Unknown declared delivery")
     if alignment["qa_top_k"] != 20 or alignment["update_top_k"] != 10:
         raise ValueError("First comparison declares QA20 and evaluator-only update10")
     settings = config["entrypoints"]["benchmark"]
-    selection = settings["halumem"]
-    users = halumem_users(Path(selection["path"]), selection["users"])
     opportunities: dict[str, Any] = {}
-    for user in users:
-        ordered = sorted(enumerate(user["sessions"]), key=lambda pair: (
-            halumem_time(pair[1]["start_time"]), pair[0],
-        ))[:selection["session_prefix"]]
-        opportunities[user["uuid"]] = {
-            "session_ordinals": [ordinal for ordinal, _ in ordered],
-            "sessions": len(ordered),
-            "qa": sum(len(session.get("questions", [])) for _, session in ordered
-                      if not session.get("is_generated_qa_session", False)),
-            "native_updates": sum(
-                memory["is_update"] == "True" for _, session in ordered
-                if not session.get("is_generated_qa_session", False)
-                for memory in session.get("memory_points", [])),
-        }
+    cases: list[dict[str, Any]] = []
+    fields: tuple[str, ...]
+    if benchmark == "halumem":
+        selection = settings["halumem"]
+        users = halumem_users(Path(selection["path"]), selection["users"])
+        for user in users:
+            ordered = sorted(enumerate(user["sessions"]), key=lambda pair: (
+                halumem_time(pair[1]["start_time"]), pair[0],
+            ))[:selection["session_prefix"]]
+            opportunities[user["uuid"]] = {
+                "session_ordinals": [ordinal for ordinal, _ in ordered],
+                "sessions": len(ordered),
+                "qa": sum(len(session.get("questions", [])) for _, session in ordered
+                          if not session.get("is_generated_qa_session", False)),
+                "native_updates": sum(
+                    memory["is_update"] == "True" for _, session in ordered
+                    if not session.get("is_generated_qa_session", False)
+                    for memory in session.get("memory_points", [])),
+            }
+        scope, fields = "per_user_opportunities", ("sessions", "qa", "native_updates")
+    else:
+        selection = settings["longmemeval"]
+        cases = longmemeval_cases(Path(selection["path"]), selection["questions"])
+        for case in cases:
+            history = longmemeval_history(case)
+            opportunities[case["question_id"]] = {
+                "session_ids": [observed.session_id for observed in history],
+                "sessions": len(history), "qa": 1,
+            }
+        scope, fields = "per_case_opportunities", ("sessions", "qa")
     manifest = {
-        "status": "PREPARED_ZERO_MODEL", "protocol": alignment,
-        "configuration": config, "per_user_opportunities": opportunities,
+        "status": "PREPARED_ZERO_MODEL", "benchmark": benchmark, "protocol": alignment,
+        "configuration": config, scope: opportunities,
         "per_backend_opportunities": {
             field: sum(row[field] for row in opportunities.values())
-            for field in ("sessions", "qa", "native_updates")
+            for field in fields
         },
         "native_and_common_answers": "separate",
         "bank_ids": {
@@ -166,6 +196,9 @@ def prepare_alignment(config: dict[str, Any], root: Path) -> dict[str, Any]:
         "reference_queries": "evaluator-only isolated view or N/A",
         "repetitions": 1, "models_called": 0,
     }
+    if benchmark == "longmemeval":
+        manifest.update(history_components=history_components(cases),
+                        native_update_evaluation="N/A")
     if root.exists() and any(root.iterdir()):
         raise ValueError("New comparison requires an empty output root")
     write_json(path, manifest)
@@ -603,14 +636,20 @@ class AlignmentRun(BenchmarkRun):
         self._resources_settled = True
 
 
-def run_alignment_arm(config: dict[str, Any], root: Path, backend: str, phase: str) -> None:
+def run_alignment_arm(
+    config: dict[str, Any], root: Path, backend: str, phase: str, *, benchmark: str = "halumem",
+) -> None:
     """One explicit arm/phase dispatch; no automatic scoring or retries."""
+    if benchmark not in BENCHMARKS:
+        raise ValueError("Unknown declared alignment benchmark")
     if phase not in {"predict", "score"}:
         raise ValueError("Predict and score require separate explicit dispatch")
     settings = alignment_settings(config, backend)
     prepared = read_json(root / "alignment-prepared.json")
     if prepared["configuration"] != config:
         raise ValueError("Comparison configuration differs from its preparation")
+    if prepared.get("benchmark", "halumem") != benchmark:
+        raise ValueError("Comparison benchmark differs from its preparation")
     for selected in config["alignment"]["backends"]:
         if (root / selected / "resource-unsettled.json").exists():
             raise ValueError("Native resource closure is unconfirmed; Root must resolve it first")
@@ -627,6 +666,7 @@ def run_alignment_arm(config: dict[str, Any], root: Path, backend: str, phase: s
     if native_uid is not None and _native_uid_processes(native_uid):
         raise ValueError("Dedicated native service processes still exist; Root must resolve them")
     settings["alignment_bank_ids"] = prepared["bank_ids"][backend]
+    settings["alignment_benchmark"] = benchmark
     output = root / backend
     terminal = output / f"terminal-{phase}.json"
     if terminal.exists():
@@ -641,7 +681,20 @@ def run_alignment_arm(config: dict[str, Any], root: Path, backend: str, phase: s
     run_error: BaseException | None = None
     close_error: BaseException | None = None
     try:
-        result = execution.halumem(phase)
+        if benchmark == "halumem":
+            result = execution.halumem(phase)
+        else:
+            predictions = execution.longmemeval(phase)
+            result = {
+                "benchmark": benchmark, "cases": len(predictions),
+                "complete_answers": sum(isinstance(row["hypothesis"], str) for row in predictions),
+                "missing_answers": sum(row["hypothesis"] is None for row in predictions),
+                "judge_calls": sum(isinstance(row.get("official_verdict"), str)
+                                   for row in predictions),
+            }
+            if phase == "score":
+                result.update(correct=sum(row["autoeval_label"] is True for row in predictions),
+                              opportunities=len(predictions))
     except BaseException as error:
         run_error = error
     try:
@@ -661,6 +714,7 @@ def run_alignment_arm(config: dict[str, Any], root: Path, backend: str, phase: s
             "status": ("RESOURCE_UNSETTLED"
                        if close_error is not None and not resources_settled else "FAILED"),
             "phase": phase, "backend": backend,
+            "benchmark": benchmark,
             "resources_settled": resources_settled,
             "error": ({"type": type(run_error).__name__, "message": str(run_error)}
                       if run_error is not None else None),
@@ -677,5 +731,6 @@ def run_alignment_arm(config: dict[str, Any], root: Path, backend: str, phase: s
         raise close_error
     write_json(terminal, {
         "status": "PREDICTIONS_SAVED" if phase == "predict" else "SCORED",
-        "phase": phase, "backend": backend, "result": result, "resources_settled": True,
+        "phase": phase, "backend": backend, "benchmark": benchmark,
+        "result": result, "resources_settled": True,
     })
