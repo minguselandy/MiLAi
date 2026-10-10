@@ -27,6 +27,7 @@ from milai_lab.memory.functional_state import (
     namespace,
     reference_key,
 )
+from milai_lab.memory.reader_projection import expand_host_packet
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.functional_edit_memory import (
@@ -2999,7 +3000,8 @@ def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path)
         assert all(item["type"] == "fragment" for item in directory["items"])
         a_args = {"record_id": saved[0], "read_goal": "original_source"}
         a = invoke(memory, "read_memory", a_args, "open-a")
-        a_page = json.loads(a.content)
+        # Compare actual metadata values after resolving the shared wire table.
+        a_page = expand_host_packet(json.loads(a.content))
         a_row = memory.service.read(saved[0])["value"]
         assert a_page["delivery_status"] == "complete_snapshot" and not a_page["skipped_units"]
         assert [item["content"] for item in a_page["items"]] == [

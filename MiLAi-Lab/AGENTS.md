@@ -36,6 +36,14 @@ remote head/body verified, no merge or main interruption. Initial Fast3801494746
 SOURCE_REGISTRATION_DRIFT:memory: reader_projection.py missing from source_identity registration.
 One-line registration repair passes matrix262sources/6canonicalpackages,15existing ownership/request
 checks, fullLab Ruff and changed-file strict types; frozen5019968 runtime/old identities stay untouched.
+SecondFast38015194385 passes registration/boundaries/Ruff/Core types, then collection misses
+langchain_core for newSQLite projection tests. Route test_reader_projection.py to existing Foundation
+in Lab matrix and both shared Fast/Full commands; all3cases retained and executed, no skip.
+Updated verification matrix covers262sources/78optional test files; runtime5019968 remains untouched.
+Local existing SQLite/projection/external group143PASS/1FAIL because old resident test compares a
+shared wire metadata reference with a full assertion. Expand actual metadata before strict comparison;
+same existing single test recheckPASS, other reopen/history/non-target/state assertions retained.
+First failure preserved, no real model calls; do not count repeated test as another experiment.
 Only saved response metadata,0new calls/bank/dataset; no future capacity/semantic advantage claim.
 Native32/drift/external28/controlled v3 configs PREPARED ONLY,0HTTP; no final confirmation freeze.
 Native/drift static entry review in native-drift-runner-review-5019968-v3.json:9code files equal

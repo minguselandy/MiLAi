@@ -42,8 +42,9 @@
 强简单对照。Host20v3的业务恢复只创建一笔预订，标签续办未重复预订，纯保存确实写入r3；
 但业务遗忘10次目标选择均遭已知无效果拒绝，正文/历史仍可见；规则例外、非目标保持、
 历史读取和实时业务查询也有失败。普通语义失败保留并继续既定实验，不能据冒烟宣布功能全过。
-本轮提交仅包含Lab实现、配置、必要检查和整理后的文档；原始Source、QA/gold、Reasoning、
-HTTP/trace、银行与本地运行产物保持ignored。Product仍为NO_GO，六项最终交付仍未完成。
+本轮提交包含Lab实现、配置、必要检查和整理后的文档，另调整共享CI中的Lab测试归属；
+Product/Archive实现未修改。原始Source、QA/gold、Reasoning、HTTP/trace、银行与本地运行产物
+保持ignored。Product仍为NO_GO，六项最终交付仍未完成。
 
 本轮已推送开发分支并创建叠加在PR119之上的[草稿PR120](https://github.com/minguselandy/MiLAi/pull/120)，
 首份汇总提交为`62afc649b5519ab26da8ae4eb527cdd0f7aa6b6b`，远端head及正文已核对。
@@ -52,6 +53,14 @@ HTTP/trace、银行与本地运行产物保持ignored。Product仍为NO_GO，六
 请求架构检查、全Lab Ruff与该文件严格类型检查通过；远端后续CI按自身运行身份另行确认，
 不借用旧CI或宣称Full全部通过。登记改变仅用于发布树的身份/验证覆盖，未回填旧请求身份，
 正在执行的源码归档、配置与实际结果仍冻结在`5019968`。
+第二轮Fast `38015194385`已通过登记、边界、Ruff与Core类型检查，随后在收集投影SQLite测试时
+发现Core环境没有该测试所需的`langchain_core`。已将`test_reader_projection.py`登记到
+既有Foundation测试组，并同时更新Fast/Full的Core分组及Foundation实际pytest命令；
+三项投影测试全部保留且仍执行，不用skip或放宽依赖边界绕过检查。更新后的矩阵已通过，
+optional测试归属78项；此改动不改变方法、模型、预算或正在运行的归档。
+对应既有SQLite/投影/外部适配测试组首次143通过、1失败：旧状态视图用例直接比较共享元数据
+引用和完整断言。现解出共享表后仍严格比较全部断言字段，原重开、历史、非目标和状态不变
+断言均保留；该单项复查通过，首次失败仍保留，不将重复检查计作新样本。没有模型HTTP调用。
 
 原Host20新空库运行在2026-10-09 17:56:46 UTC停止：13 COMPLETED、7 NOT_RUN。
 两次遗忘拒绝回执缺少effect字段，汇总保守标成unknown；独立代码边界及只读数据库核对
