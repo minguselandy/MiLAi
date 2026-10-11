@@ -1,3 +1,31 @@
+# Current handoff: fbc Host14 closed; full-wrapper paging work continues, 2026-10-11 16:59 UTC
+
+Goal remains FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011, fullscope active; no goal completion.
+Actual frozen/published fbc458e0e7a0e0c5e3e36ef56c8e8a7a16e7cd62; ownFast38156429157SUCCESS/Full38156429120SKIPPED.
+Host artifacts/function-first-small/host14-fbc458e0-v2 CLOSED16:55:43UTC, parent3069838/CLI3069839 absent, rc0/leaseFREE.
+14attempted=6COMPLETED+8FAILED(allknownwrappercapacity),noNOT_RUN.76gen624528known=charged/4256emb/newunknown0/0/limitsunchanged.
+Do not treat COMPLETED assemantic success: independentmeaningloss/tool-source misattribution/history-business confusion/forgetfail remain.
+Partial positive: one actualreservation then one labelcompletion/no duplicate businessmutation; Sourcebytes/Store intact.
+Two independent SDKexports3136580/3136766rc0: current1recordeachrev4/rev2,source16/29,ledgerunchanged.
+Root root-sdk-visible-after-unfulfilled-forget.json checks actualpriorrecords/current+oldrev/history_index/supportSource:
+2recordIDs+4Sources perbank; currentfoundandoldfound/historyavailable/8Sourcesaccessible. No successfulforgetreceipt exists.
+No successbinding or forgethelper dispatch; SDKread/index can writehandles/snapshots, not physicallyreadonly;0modelHTTP.
+C final14source audit ongoing/soon ROOT/root-host-source-review.json; no needre-audit finished cases.
+A finald17b7d67 integrated3bd88571, proven_page7348 but oldnextwholepacket9082>8192 fixed byactualfullwrapperpaging.
+Onlyfor_writeFalse; Writeroriginalbody/targets/cursors/capacity unchanged. First4units8166, next2units5971, oldpagecanreopen;
+6independentlyaffectedchecks/Ruff/mypy2PASS. No further duplicates of this implementation/review/tests needed.
+Use existing pagination with actualfullwrapperfit and capacity-only body换出/reopen, preserveexplicitkeep, noaddedcalls/selector/window.
+Navigation-onlyforget nowBODY_READ_REQUIRED with read_memory/read_source guidance; multipleactualrecords oldcardinality refusal.
+Samepermissions/noautoread/retry. Next freshfrozen candidate normalHost14 (both stories usechangedpacking), then samecandidateM32/73.
+Oldad/fbcM prepared-onlyroots stayunrun; create one freshnewM root after finalsourcefreeze, no predictionbank reuse.
+Actualfbcsource/run immutable; oldad3/14failure and oldHost42unrun retained. NewM q32-fbc458e0-v2 onlyPREPARED32/73/72,
+no banks/models. Do not dispatch until final Host packing candidate integrated/declared and SDK/model resources free.
+Roothelpers root_predict.py/root_score.py prepared only. Next scope stays lightweight, notfivearms/277/LME/holdouts/oldHost42.
+Rawreuse confirmed; formal6samequestions predeclared q-source-sample-20261012.json, Rawhalf nowq-source-review-raw-half.json:
+4existingreviews reused+2Correctnew;5sourcefaithful/1unsupportednumber, official3Correct/3Hunchanged; newMhalfPENDING.
+No correctedaccuracy or inventedsemantic acceptance. Maintain five principles/one logicalMemoryService/originalledgerunknown8/1.
+Root onlyactualmodel/HTTP/DB; allagentsoffline. Publish/push authorized/no merge. Currentdocs changes uncommitted, preserve them.
+
 # Current handoff: first Host14 stopped on capacity; function-first work continues, 2026-10-11 16:33 UTC
 
 User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011.md.

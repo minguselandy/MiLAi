@@ -1,5 +1,15 @@
 # Build-first 当前问题
 
+**最新完整轻量Host观察：fbc458e0，16:55:43 UTC闭合。** 全14尝试，6工程COMPLETED／8已知容量FAILED；
+源码自身Fast通过、Full skipped。Source主体/支持误归、独立范围丢失、历史入口混淆和遗忘未完成均实际存在；
+也有真实预订一次→只补标签一次、无重复业务mutation的局部正例。76生成／624,528tokens／4,256embedding，
+新unknown0／0、资源闭合。两银行实际SDK当前/历史/支持Source仍可访问，不能声称遗忘通过。
+现有工具页预算未覆盖后续完整Host包（保存纯读例7348→9082>8192），已将既有分页/可重开工作集接到
+完整包装计量（3bd88571，仅for_write=False，显式keep保持；Writer原合同不改）。同原快照首4单元8166、
+后2单元5971可执行；六个直接相关检查通过，实际新条件仍需验证。遗忘导航拒绝准确提示先读，不放宽权限。新M尚未派发，正式Q Raw半侧6题已完成，
+同题新M半侧和73题配对仍待结果。已有审查与先前适配不重复。
+
+
 **2026-10-12迁移更新（实际核查10月11日16:07 UTC）：** M6ab评分09:21:34 UTC正常闭合，
 49／73 Correct、14 Hallucination、3 Omission、7invalid、0missing；更新37／72 Correct。
 706Judge生成／2,556,437 known＝charged，新增unknown0／0、资源闭合、原父worker退出。

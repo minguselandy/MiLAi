@@ -1,5 +1,14 @@
 # 本地基线对齐协议 v1
 
+**功能优先轻量轮更新：** fbc458e0 Host14于16:55:43 UTC全部尝试且资源闭合，6工程COMPLETED／
+8已知包装容量FAILED；无完整功能通过结论。76生成／624,528tokens／4,256embedding、新unknown0／0，
+两银行公共SDK仍可读当前／旧版／历史／Source，遗忘未完成。fbc自身Fast成功，Full skipped。
+新开发3bd88571明确为Host容量工作集变化：原_page以完整model_material计量，超限时仅在Host读取
+路径换出当前正文到既有pending/cursor、可重开，显式keep=True保持原拒绝；for_write及Writer容量合同不改。
+导航forget仍拒绝，只准确提示先读正文。新条件拟用独立银行验证原14消息，原3/14和14/14结果/费用保留，
+不是同条件重复或自动重试。新M尚未派发；Raw direct/Reader/Judge不受Host修复影响，既有冻结55/73复用。
+
+
 **2026-10-12迁移更新：** 冻结6ab M独立评分已于10月11日09:21:34 UTC闭合，实际父worker
 16:07 UTC核查不存在，returncode0／resources_settled=true／新unknown0／0／原limits不变。
 M官方49／73（14H、3O、7invalid、0missing），更新37／72；Raw55／73，所有机会分母保留。
