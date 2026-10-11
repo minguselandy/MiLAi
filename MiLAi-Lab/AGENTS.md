@@ -1,4 +1,4 @@
-# Current handoff: function-first lightweight plan active, 2026-10-11 16:18 UTC
+# Current handoff: first Host14 stopped on capacity; function-first work continues, 2026-10-11 16:33 UTC
 
 User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011.md.
 Current scope: develop/integrate A Reader, B maintenance, C Host; then one Host14 and newM32sessions/73QA/72updates,
@@ -13,10 +13,23 @@ Root fixed171poolb498 E2 started16:09:26 and CLOSED16:11:41UTC, parent2942313/wo
 0emb/newunknown0/0/limitsunchanged/leaseFREE. Mainquestion supported; reporting/occurrence and role compression caveat.
 Evidence: existing e2-first-real-paging-b498f628 root-execution.json/run-once/terminal.json/root-source-review.json.
 Development B5c83ee51/A1a98a0b9/C8651e22d integrated. Root repeats/config/docs ready; narrow checks passed.
-New config configs/milai-function-first-small-v1.json; Host14/newM notdispatched. Freeze actual candidate after integration.
+Candidatead348a9a pushed/frozen; Host14 started16:26:35 and STOPPED16:29:09UTC after3attempts (2COMPLETED/1FAILED),11NOT_RUN.
+Third purequery V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT before final; input_or_runtime caused undeclared_failure stop.
+Root3011232/CLI3011233/messagePIDs gone; actualCLIrc0 differs from STOPPED.17gen141829known=charged/395emb/newunknown0/0/leaseFREE.
+rev1save/rev2exception real; oldcurrentoverview stillstale. One SDKexportprocess3029222rc0 confirmscurrentrev2/5Sources,
+secondbankabsent; no forget accepted. Root helpers/logs in artifacts/function-first-small/host14-ad348a9a-v1.
+Do not restart or hotpatch stoppedroot. W5capacityfix integratede80fb7cb from8e6eea1b; model_material onlyomits2repeatreadtrace arrays, durabletrace retained.
+ActualerrornowFAILED/request_capacity, so ordinaryfailure remainsvisible withoutundeclared globalstop.
+2affectednormalchecks/Ruff/strictmypy2PASS; do not repeat completedaudit/tests. Next freshfrozenHost14, then newM.
+NewM q32-ad348a9a-v1 onlyprepared32/73/72/no banks; root_predict.py/root_score.py prepared only, DO NOT dispatch while Host unresolved.
+Raw reuse confirmed (configs/direct calls/Judge), no rerun needed. New config configs/milai-function-first-small-v1.json.
+Actualnewcandidate after minimalcapacityfix needs fresh Host/Q roots; oldad prepared/failed states retained.
 NewQ sample predeclared artifacts/function-first-small/q-source-sample-20261012.json: oldRaw first3Correct/first3nonCorrect,
 same6 in newM. Earlier old6ab symmetric12 is different supplementary sample; do not conflate or adjust population accuracy.
-01408464 ownFast38122310218SUCCESS/Full38122310216SKIPPED; new published head needs ownCI. No merge authorized.
+014ownFastSUCCESS/FullSKIPPED; ad348a9aFast38155334906FAILED(2oldtestschema expectations/642pass),Full38155334910SKIPPED.
+Test-only304f939f precise optionalresponse_scope expectation fixed;2failedparamsPASS. Newhead needs ownCI/no merge.
+Capacity reconstruction actualsavedread6568; nextwrapper8479->7978 afteronly2duplicated read_progress arrays omit frommodel;
+allbodies/source/conditions/navigation/persistenttrace retained. This is offline reconstruction, not actual sentrequest.
 Five principles/one logical MemoryService/source-only/QA20/maintenanceK10/original unknown8/1 and Hreservation retained.
 
 # Previous handoff: M predictions closed, selected score running, 2026-10-11 07:40 UTC
