@@ -1,4 +1,20 @@
-# Current handoff: migration observed interrupted source6ab, 2026-10-11 06:04 UTC
+# Current handoff: Raw scored, first untouched M running, 2026-10-11 06:22:51 UTC
+
+Raw frozen6ab explicit score CLOSED06:21:16UTC: Correct55/73/Hallucination17/invalid1/missing0,
+73Judgegen/179908known=charged/0emb/newunknown0/0/limitsunchanged/resources_settledTrue/parentsgone.
+Independent source/reference audit pending; preserve official labels and whole opportunity denominator.
+Root first untouched M dispatch06:22:23UTC, frozen6ab/originalconfig/manifestbanks/32sessions73QA72updates,
+parent776063/worker776066 exist; observed06:22:51UTC0complete sessions/0QA. Detached supervisor is
+artifacts/baseline-alignment/run_e1_6ab512cb_milai_first.py; original suite rootrecord remains staleRUNNING.
+Do not restart live M, interrupted H or original supervisor; M doesn't include latest workset repair.
+M closure then explicit score, then original Host42/sixSDKreopens; those remain NOT_DISPATCHED.
+Repair publishedb498f628 ownFast38117143162SUCCESS/Full38117143093SKIPPED. Report heads need ownCI.
+One fixed171pool Reader E2 prepared only, source-b498f628-reader-e2, repeat1/samequestion/model/budget,
+no retain/Writer/gold indices; not dispatched. RootSDKreopen script prepared only in originalHostv4 root.
+Original generationunknown8/embeddingunknown1 and lastHreservation110954 remain; newphaseunknown must0.
+No full three-arm/Host/necessary E3/frozenE4 conclusion yet. Current report/protocol/issues give exact bounds.
+
+# Previous handoff: migration observed interrupted source6ab, 2026-10-11 06:04 UTC
 
 Human continue/publication/resource-release authorization remains. Do not repeat completed adapters or tests.
 Root verified06:00:50UTC: original parent3324026/worker3324034 absent, original root stillRUNNING/stale,
