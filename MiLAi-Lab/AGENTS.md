@@ -1,3 +1,28 @@
+# Current handoff: newM first prediction live, 2026-10-11T17:37:12.072597+00:00
+
+Actual frozen d2774634ce2c67470ae53d486d9612adf3ac7bf8, source artifacts/function-first-small/source-d2774634/MiLAi-Lab.
+Actual Q root artifacts/function-first-small/q32-d2774634-v3, parent3279447/worker3279449, started2026-10-11T17:33:25.987473+00:00.
+Root actual PID check17:34:49UTC confirmslive; inspect root-execution-predict.json and PIDs; never repeat on tooltimeout or migration.
+32sessions/73QA/72updates, original conditions/independent banks/ledger; predict only/no auto Judge. Source/config frozen unchanged.
+After PREDICTIONS_SAVED/resources_settledTrue, worker+parentgone, phaseunknown0/0/limitsunchanged/leaseFREE, Root manually invokes
+prepared root_score.py --backend MiLAi-memory-only from integrationLAB. Do not rerun predictions or ad/fbc prepared roots/H.
+Host14d277 CLOSED17:27:41UTC, all14attempted12COMPLETED/2FAILED(wrapper1/truncated1),13publictexts incl programfailure.
+91gen754819known=charged/1850emb/newunknown0/0/limitsunchanged/leaseFREE/oldPIDs3192016+3192030gone.
+Actual d277 Host businessmutations0; don't splice fbc reserve/labelpositive. Formation/source/scope/feedbacksemantic failures retained.
+SDK2exports3262097/3262327rc0; helper2receipt-bound checksPASS(17+8observations),notwhole-taskPASS.
+Firststoryactualrecord+11Sources revoked; current/readrev1,2,3,5/history/Source all denied; extraactualrev4read also denied.
+Secondresultrecord+5Sources revoked but requestedoriginalrequestrecordrev2/history/UserSource still accessible: fullscopeFAIL.
+Artifacts inhost14-d2774634-v3: root-sdk-forget-bindings.json(2checks+additionalrev4evidence),root-sdk-forget-summary.json,
+root-sdk-additional-scope-checks.json. No moreSDK/DB work during newM; SDKfinished beforeM,ledgerunchanged.
+C finalhostSource report pending/soon ROOT/root-host-source-review.json; use existing work notnewaudit. No sourceedits/Hostreruns planned.
+B offline only formal6samequestion M Sourcehalf when ready -> artifacts/function-first-small/q-source-review-milai-source-half.json;
+Rawhalf alreadycomplete q-source-review-raw-half.json; source first/Judge later, disclose oldreference/developerexposure, no correctedaccuracy.
+Finalpending: close newMpredict, explicit score, exact73pair table/peruser/cost, Sourcehalf+Judge relation, existingdocs/issues+PR/push/ownCI.
+Actuald277ownFast38158540274SUCCESS/Full38158540267SKIPPED. Laterdocheads mustcheckownCI, not runtimeSourceidentity.
+User lightweight plan remains active, no fullgoalcompletion. OldHost42/sixSDK/five277/LME/holdouts deferred, notgates.
+OnlyRoot actualmodelHTTPDB; originalunknown8/1 and H110954reservation persist, never reset/refund or demand globalzero.
+Publish/pushauthorized; noPRmerge. Keep originaluserworktree/untrackedplans/frozenartifacts untouched.
+
 # Current handoff: fbc Host14 closed; full-wrapper paging work continues, 2026-10-11 16:59 UTC
 
 Goal remains FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011, fullscope active; no goal completion.

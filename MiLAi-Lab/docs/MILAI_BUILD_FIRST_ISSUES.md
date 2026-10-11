@@ -1,5 +1,13 @@
 # Build-first 当前问题
 
+**当前d2774634：** Host14全部尝试并于17:27:41 UTC闭合，12COMPLETED／2FAILED、13公开文本，
+91生成／754,819tokens／1,850embedding、新unknown0／0。交付改善不等于整体语义通过；形成、来源支持、
+范围推断和业务分类错误仍在。本轮业务无mutation，不借旧轮业务成功结果。
+实际SDK验证第一故事当前/历史rev1–5/11Source撤销；第二仅结果record/5Source撤销，请求record和原话仍可读，
+整项遗忘不完整。实际候选Fast成功／Full skipped。新M同d277于17:33:25 UTC首次启动，32／73／72，
+原条件/独立银行/连续账本，不重新派发旧准备根；结果与评分待闭合，Raw冻结55／73复用。
+
+
 **最新完整轻量Host观察：fbc458e0，16:55:43 UTC闭合。** 全14尝试，6工程COMPLETED／8已知容量FAILED；
 源码自身Fast通过、Full skipped。Source主体/支持误归、独立范围丢失、历史入口混淆和遗忘未完成均实际存在；
 也有真实预订一次→只补标签一次、无重复业务mutation的局部正例。76生成／624,528tokens／4,256embedding，
