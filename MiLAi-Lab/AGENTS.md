@@ -1,27 +1,36 @@
-# Current handoff: newM first prediction live, 2026-10-11T17:37:12.072597+00:00
+# Current handoff: newM predictions CLOSED, first independent score RUNNING, 2026-10-11T18:58:56 UTC
 
-Actual frozen d2774634ce2c67470ae53d486d9612adf3ac7bf8, source artifacts/function-first-small/source-d2774634/MiLAi-Lab.
-Actual Q root artifacts/function-first-small/q32-d2774634-v3, parent3279447/worker3279449, started2026-10-11T17:33:25.987473+00:00.
-Root actual PID check17:34:49UTC confirmslive; inspect root-execution-predict.json and PIDs; never repeat on tooltimeout or migration.
-32sessions/73QA/72updates, original conditions/independent banks/ledger; predict only/no auto Judge. Source/config frozen unchanged.
-After PREDICTIONS_SAVED/resources_settledTrue, worker+parentgone, phaseunknown0/0/limitsunchanged/leaseFREE, Root manually invokes
-prepared root_score.py --backend MiLAi-memory-only from integrationLAB. Do not rerun predictions or ad/fbc prepared roots/H.
-Host14d277 CLOSED17:27:41UTC, all14attempted12COMPLETED/2FAILED(wrapper1/truncated1),13publictexts incl programfailure.
+User lightweight plan remains active; no goal completion. OldHost42/sixSDK/five277/LME/holdouts deferred, not gates.
+Actual frozen source d2774634ce2c67470ae53d486d9612adf3ac7bf8 at artifacts/function-first-small/source-d2774634/MiLAi-Lab.
+Actual Q root artifacts/function-first-small/q32-d2774634-v3. Predict started17:33:25, CLOSED18:58:16.210795UTC,
+32sessions/73QA=72text+1knownmissing; user1/session7/qa6 confirmed stop/no_textual_answer; no retry/reasoning salvage.
+206gen/3514415known=charged/246904emb/newunknown0/0/limitsunchanged/rc0/resources_settledTrue.
+Oldparent3279447/worker3279449 absent; Root18:58:38UTC leaseFREE and liveledger==end verified.
+Root FIRST selected saved-arm score started18:58:51.119479UTC, parent3612261/worker3612262 actualalive18:58:56UTC.
+Run script ROOT/root_score.py --backend MiLAi-memory-only, cwd integrationLAB; originalledger/frozend277/config unchanged.
+Do NOT restart score or predictions on migration/timeout/oldtoolhandles. Inspect actualPIDs and root-execution-score-MiLAi-memory-only.json.
+Score stdout/stderr separate score-MiLAi-memory-only-{stdout,stderr}.log; parent root-score-supervisor-private.log.
+Score includes formation/accuracy/update/QA; >73calls is expected. At closure inspect returncode/resources/endledger/limits/phaseunknown/PIDs/lease.
+OnlyRoot actualmodelHTTPDB; historicalunknown8/1 and H110954reservation persist; never reset/refund/demand globalzero.
+A predictioncost/delivery summary COMPLETE ROOT/root-prediction-cost-delivery-summary.json; excludes Judge via predictclosed_at.
+Input2846679/output667736;562embeddingreceipts246904;17pagedQA/38confirmedpages/peak32231/finalempty1(U4S7Q4),no semantic label.
+Knownmissing U1S7Q6 direct20items/27169input/confirmedstop; bodyflagfalse does not mean no body delivered.
+A adding reusedRaw input/output from savedreceipts only; no modelHTTPDB.
+Finalpending: close score, officialall73/peruser/invalid/missing/update/formation/cost, exact73Raw/M pairtable, attach Judge relation to fixed6source audit,
+existingdocs/issues/PR/push/ownCI. No repeat development/tests/audits or forced semantics pass. Normal current-config save/query example now in report.
+
+Host14d277 CLOSED17:27:41UTC14attempted12COMPLETED/2FAILED(wrapper1/truncated1),13publictexts incl programfailure.
 91gen754819known=charged/1850emb/newunknown0/0/limitsunchanged/leaseFREE/oldPIDs3192016+3192030gone.
 Actual d277 Host businessmutations0; don't splice fbc reserve/labelpositive. Formation/source/scope/feedbacksemantic failures retained.
 SDK2exports3262097/3262327rc0; helper2receipt-bound checksPASS(17+8observations),notwhole-taskPASS.
-Firststoryactualrecord+11Sources revoked; current/readrev1,2,3,5/history/Source all denied; extraactualrev4read also denied.
+Firststoryrecord+11Sources revoked; current/readrev1,2,3,5/history/Source denied; extraactualrev4read denied too.
 Secondresultrecord+5Sources revoked but requestedoriginalrequestrecordrev2/history/UserSource still accessible: fullscopeFAIL.
-Artifacts inhost14-d2774634-v3: root-sdk-forget-bindings.json(2checks+additionalrev4evidence),root-sdk-forget-summary.json,
-root-sdk-additional-scope-checks.json. No moreSDK/DB work during newM; SDKfinished beforeM,ledgerunchanged.
-C finalhostSource report pending/soon ROOT/root-host-source-review.json; use existing work notnewaudit. No sourceedits/Hostreruns planned.
-B offline only formal6samequestion M Sourcehalf when ready -> artifacts/function-first-small/q-source-review-milai-source-half.json;
-Rawhalf alreadycomplete q-source-review-raw-half.json; source first/Judge later, disclose oldreference/developerexposure, no correctedaccuracy.
-Finalpending: close newMpredict, explicit score, exact73pair table/peruser/cost, Sourcehalf+Judge relation, existingdocs/issues+PR/push/ownCI.
-Actuald277ownFast38158540274SUCCESS/Full38158540267SKIPPED. Laterdocheads mustcheckownCI, not runtimeSourceidentity.
-User lightweight plan remains active, no fullgoalcompletion. OldHost42/sixSDK/five277/LME/holdouts deferred, notgates.
-OnlyRoot actualmodelHTTPDB; originalunknown8/1 and H110954reservation persist, never reset/refund or demand globalzero.
-Publish/pushauthorized; noPRmerge. Keep originaluserworktree/untrackedplans/frozenartifacts untouched.
+C final14HostSource audit COMPLETE at ROOT/root-host-source-review.json; reuse notreaudit. No further Host reruns/source edits planned.
+B formal6samequestion sourcehalves COMPLETE/FROZEN-before-newJudge in artifacts/function-first-small/q-source-review-{raw-half,milai-source-half}.json.
+Raw5faithful/1unsupportednumber; M4faithful/1nonverbatimquote/1unmarked-contextualsalaryinference(underdetermined,notprovenfalse).
+All6direct,notpaginationtest. History/exposure/implementationauthor disclosed; Judge relation separate/no correctedaccuracy.
+Actuald277Fast38158540274SUCCESS/Full38158540267SKIPPED. Priorreportf4cFast38160422606SUCCESS/Full38160422648SKIPPED.
+Laterdocheads need ownCI. Publish/pushauthorized; noPRmerge. Preserve originaluserworktree/untrackedplans/frozenartifacts.
 
 # Current handoff: fbc Host14 closed; full-wrapper paging work continues, 2026-10-11 16:59 UTC
 

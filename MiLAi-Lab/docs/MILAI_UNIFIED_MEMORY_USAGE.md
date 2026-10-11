@@ -9,7 +9,20 @@
 重试平台、全树哈希门禁或大测试矩阵；真实模型继续由Root沿原账本串行。
 
 
-**当前冻结候选d2774634：Host14与SDK已闭合，新M首次预测17:33:25 UTC启动。**
+**当前冻结候选d2774634：Host14／SDK及新M预测已闭合，18:58:51 UTC首次独立评分。**
+新M预测17:33:25启动、18:58:16 UTC闭合：32会话、73 QA检查点，72个文本答案、1个已知缺答。
+第一用户session7／QA6正常stop却无final文本，已有响应及用量回执，保留null与全部机会，不取推理草稿、
+不重试，也不自行赋Hallucination标签。returncode0、resources_settled=true，原父3279447／worker3279449
+退出；Root于18:58:38 UTC核对原租约FREE、live账本等于预测end、原limits不变、新unknown0／0。
+预测206次生成，3,514,415 known＝charged tokens，embedding246,904；历史unknown8／1保持。
+206个生成回执合计输入2,846,679／输出667,736；562个embedding回执与246,904同样匹配阶段账目。
+生成分组为Extractor33／维护选择29／Editor33／QA最终73／QA页选择38次，既有调用原样计费。
+17题实际分页、38确认且接受的页面，峰值32,231≤32,256。1题最终正文为空（第四用户session7／QA4），
+仅作交付记录，未新增语义判定；缺答题属于direct且实际输入已交付20条材料，其body flag为false不等于没有发送正文。
+Root随后沿原入口仅评分已保存新M，父3612261／worker3612262，18:58:56 UTC实际存活；
+仍使用d277源码与原配置，没有预测重放或其他臂派发。尚无新M完整质量成绩，评分包括形成／准确性／更新／QA，
+其调用数不以73为上限。独立评分闭合后才报告质量、同73题配对及评分成本。
+
 Host于17:27:41 UTC闭合：14已尝试，12工程COMPLETED／2FAILED（1包装容量、1VLLM_CHAT_TRUNCATED），
 13个公开文本包含截断后的程序失败反馈；工程状态与模型原答案／任务完成分开。91生成／754,819
 known＝charged／1,850embedding，新unknown0／0、原limits不变；父3192016／CLI3192030退出、leaseFREE。
@@ -28,15 +41,20 @@ known＝charged／1,850embedding，新unknown0／0、原limits不变；父319201
 Root确认Host／SDK进程退出、账本与Host end相同、原租约可用后，首次派发新M：
 冻结源码仍d2774634，根q32-d2774634-v3，父3279447／worker3279449，32会话／73QA／72更新机会、
 独立空银行、Source-only时间前缀、QA20／维护和隔离更新K10、原Reader／预算保持。
-未派发旧ad/fbc准备根、不重跑旧M、不续接H、不自动评分。当前只有预测进行中，没有新M质量成绩。
-Raw既有冻结55／73按已核对条件复用；正式同六题来源审查已完成Raw半侧，新M半侧在对应产物就绪后
-先审来源再看Judge；不借旧异题12样本替代。预测／资源闭合后显式独立评分并报告同73题配对。
+未派发旧ad/fbc准备根、不重跑旧M、不续接H；预测闭合后的评分由Root另行显式派发。
+Raw既有冻结55／73按已核对条件复用；正式同六题来源判断已在新M评分之前完成并冻结：
+旧Raw按题序前3Correct／前3非Correct，六题中5来源一致、1数值不支持；新M同六题中4来源一致、
+1核心含义有据但直接引语并非逐字、1金额／主体／报告日有据但职务工资归属属于未明确标注的语境推断。
+最后一项记范围未定，不判已证伪；标签澄清保留history。六题均direct，不能用于证明分页效果。
+审查者披露既往Raw参考接触及实现作者身份，不称盲审；来源判断与后续Judge理由分开，不改官方标签、
+不估计修正总体准确率，也不借旧异题12样本替代。预测／资源闭合后显式独立评分并报告同73题配对。
 
 实际候选d2774634自身Fast38158540274 **SUCCESS**、Full38158540267 **SKIPPED**。
+报告头f4c026ba自身Fast38160422606 **SUCCESS**、Full38160422648 **SKIPPED**；
 后续文档头不是运行源码，需另核对自身CI。以下候选版本与观察保留各自时间和费用。
 
 
-**最新完整Host轮：fbc458e0于16:41:19启动、16:55:43 UTC资源闭合。** 原14消息全部尝试，
+**历史Host轮：fbc458e0于16:41:19启动、16:55:43 UTC资源闭合。** 原14消息全部尝试，
 工程状态6 COMPLETED／8 FAILED，8项均为已知材料包装容量失败，无未运行消息；不把6条COMPLETED
 计为6条任务成功。76生成／624,528 known＝charged／4,256embedding，新增unknown0／0、limits不变。
 父3069838／CLI3069839退出、真实CLI rc0、原租约FREE。原ad首轮3／14失败和141,829成本另列保留。
@@ -160,7 +178,28 @@ Raw复用检查完成：配置与少量实际调用一致，73请求均为原dir
 实际输入分别26,771／16,396／22,544／29,241，Reader／问题日期／合法Source及Judge设置不变。
 A只改Raw未进入的容量分支，B/C只影响维护／Host，可复用既有冻结55／73，不伪装为新头重新跑。
 
-一个正常运行入口（在已安装依赖的Lab环境中，显式创建新根；prepare不会派发模型）：
+本轮普通保存→查询示例（在Lab目录执行，使用独立新根；命令是用法说明，未为文档再次派发）：
+
+```bash
+MILAI_PYTHON=/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python
+PYTHONPATH=src "$MILAI_PYTHON" tools/run_functional.py \
+  --runtime-dir artifacts/function-first-small/example-runtime prepare \
+  --config configs/milai-function-first-small-v1.json \
+  --root artifacts/function-first-small/example
+PYTHONPATH=src "$MILAI_PYTHON" tools/run_functional.py \
+  --runtime-dir artifacts/function-first-small/example-runtime message \
+  --root artifacts/function-first-small/example --bank personal --owner example \
+  --session example --message-id save-1 --text '请记住，我的午休提醒用静音模式。'
+PYTHONPATH=src "$MILAI_PYTHON" tools/run_functional.py \
+  --runtime-dir artifacts/function-first-small/example-runtime message \
+  --root artifacts/function-first-small/example --bank personal --owner example \
+  --session example --message-id query-1 --text '我之前要求午休提醒用什么模式？'
+```
+
+prepare只准备；message会使用现有服务和连续账本。两次message是独立进程、同一已准备银行。
+示例的成功与否看实际回执、保存内容和回答，命令可用不代表本轮全部语义问题已解决。
+
+Host实验入口（另需已有ignored故事材料；prepare不会派发模型）：
 
 ```bash
 export PYTHONPATH="$PWD/src"

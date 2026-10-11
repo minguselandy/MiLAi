@@ -1,13 +1,16 @@
 # 本地基线对齐协议 v1
 
-**当前实际运行：新M冻结d2774634，17:33:25 UTC首次独立预测。** 同四用户前八会话32／73／72，
-Source-only、QA20、维护／隔离更新K10及原Reader模型/预算不变；资源闭合后独立score，不提前排名。
+**当前实际运行：新M冻结d2774634，18:58:51 UTC首次独立score。** 预测17:33:25启动、18:58:16 UTC
+资源闭合，32会话／73机会＝72文本＋1已确认stop无final文本缺答；rc0、原父worker退出、leaseFREE，
+206生成／3,514,415 known＝charged／246,904embedding，新unknown0／0、limits不变。
+同四用户前八会话32／73／72，Source-only、QA20、维护／隔离更新K10及原Reader模型/预算不变；
+只评分已保存产物，父3612261／worker3612262实际启动，不重放预测，不提前排名或补缺答。
 Raw旧冻结55／73复用条件已核对。d277 Host14此前全部尝试，12COMPLETED／2FAILED（13公开文本含程序反馈），
 资源闭合、newunknown0／0；公开SDK第一故事撤销范围通过，第二遗漏请求record/原话，整体语义仍有失败。
 同一运行源码不改；新报告头不代替运行源码；旧ad/fbc准备M根仍未派发。d277自身Fast成功，Full skipped。
 
 
-**功能优先轻量轮更新：** fbc458e0 Host14于16:55:43 UTC全部尝试且资源闭合，6工程COMPLETED／
+**历史功能优先轻量轮观察：** fbc458e0 Host14于16:55:43 UTC全部尝试且资源闭合，6工程COMPLETED／
 8已知包装容量FAILED；无完整功能通过结论。76生成／624,528tokens／4,256embedding、新unknown0／0，
 两银行公共SDK仍可读当前／旧版／历史／Source，遗忘未完成。fbc自身Fast成功，Full skipped。
 新开发3bd88571明确为Host容量工作集变化：原_page以完整model_material计量，超限时仅在Host读取
