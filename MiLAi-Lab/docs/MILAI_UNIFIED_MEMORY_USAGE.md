@@ -1,5 +1,97 @@
 # 统一记忆功能候选与当前执行状态
 
+## 2026-10-12：功能优先轻量候选开发，旧评分与单题诊断闭合
+
+用户新启用《功能优先开发与轻量对照实验规划（20261011）》，本轮按A读取、B维护、C普通Host
+并行开发，再合流同一候选：**两故事各一次14消息Host，以及新M的一次32会话／73QA对照**。
+旧Host42、六次独立SDK重开、五法277、完整LongMemEval与保留用户确认后置，保留原未完成状态，
+不作为本轮前置。已有评分与已派发诊断保持原源码完成。先接通正常路径，不增加新Agent阶段、
+重试平台、全树哈希门禁或大测试矩阵；真实模型继续由Root沿原账本串行。
+
+**迁移核查：10月11日16:07 UTC；评分实际闭合：09:21:34 UTC。** 冻结6ab的保存预测已完成
+首次独立评分，returncode=0、resources_settled=true，父1071578／worker1071580均不存在。
+706次Judge生成，2,556,437 known＝charged tokens，embedding0；阶段新增unknown0／0、limits不变。
+这包含形成、准确性、更新与QA的评分，不是706个独立QA样本。预测未重跑、答案与官方标签未修改。
+本次派发前原连续账本与评分end逐字义相同、Owner租约FREE、专属native UID无活动进程；
+历史generation unknown8／embedding unknown1和H最后110,954预占保持。
+
+| 同一开发前缀 | Correct／全部机会 | 其他官方标签 | 有效判断口径（不替代主列） |
+|---|---:|---|---:|
+| RawRAG-local | 55／73＝75.3% | Hallucination17、invalid1、missing0 | 55／72＝76.4% |
+| MiLAi-memory-only（6ab） | 49／73＝67.1% | Hallucination14、Omission3、invalid7、missing0 | 49／66＝74.2% |
+
+四用户M分别14／20、10／12、15／22、10／19，较Raw的Correct数差为−1／−1／−1／−3。
+本前缀M官方主指标少6题；四个开发用户只支持描述性比较。Raw的session top20通常涵盖全部已到达
+历史，是原文保留参照；H没有完整结果，不能称完整三方排名，也不据此泛化长历史或算法优劣。
+
+M官方更新Correct37／72＝51.4%，Hallucination2、Omission26、invalid7；有效口径37／65＝56.9%。
+隔离更新检索空结果0、未评分0。官方形成recall(all)=70.6%（valid78.1%），weighted recall(all)=77.6%；
+形成主分母439／有效397，另有29项干扰记忆；accuracy weighted(all)=81.7%（valid95.5%，104／有效89），
+作者聚合extraction F1=82.8%（target accuracy(all)=100%与recall(all)的调和值）。
+保留作者聚合及动态分母，不当作全条目准确率；Raw形成／更新仍N/A。
+这些参考指标与来源忠实性分别报告，不能用高形成F1否定实际维护漏写、主体或独立旧属性损伤。
+
+### 已完成的三题空最终工作集来源审查
+
+直接使用07:53:58 UTC已保存审查，未重复派发。三题均为第四用户session7：QA2先提名相关材料0，
+下一页空选择且keep_resident=false使其丢失，最终拒答未完成有来源支持的有限回答；QA6两页均未提名，
+实际全池缺问题所需字段，带边界的未知回答有依据，不能据此认定形成／检索失败或强制留一条；
+QA7先漏选已交付核心材料，后又丢失已提名后页候选，未提供池内可支持的有限计划。三题不能统一
+归为同一个替换bug。其余七题尚未作同等语义审查。0模型／HTTP／DB，92份原产物hash保持；
+未新读M Judge／gold／画像／未来，但审查者此前接触过Raw gold且QA7重叠，不宣称完全盲审。
+按QA0–9排序的最终原文条数为1／4／0／9／4／4／0／0／8／3；前报告条数使用文件遍历顺序。
+
+Root于16:09:26 UTC首次派发已准备b498固定171条真实材料池一次诊断（父2942313／worker2942314）。
+原问题／日期／Reader／Source／32,256完整输入／12调用预算不变，只验证已有累积提名接口；
+没有native retain、Writer、新检索、gold下标或重试。该单次诊断16:11:41 UTC正常闭合，returncode0、
+资源闭合、父worker退出、原租约可用，新增unknown0／0、limits不变。4个实际页60／44／46／21
+交付全部171条，最终完整重开22条，首批4个提名保持、末页空提名未清空；最终22原件与实际池逐项一致。
+峰值32,047、最终13,226 input tokens；5生成共131,226输入＋13,338输出＝144,564 known＝charged，
+embedding0。complete中的delivered_material_count171是全程已读数量，不是最终22条正文数量。
+较旧病例6调用／136,765tokens，新例少1调用但多7,799tokens，不称成本降低。
+
+新答案直接回应有来源支持的偏好方向与日期问题，原当前对话确已进入最终正文，解决该例原先
+“证据已读却最终拒答”的断点。解释压缩了历史assistant阐释与用户认同，并将变化放在报告日期附近，
+实际来源只确定报告时间及近期经历；不宣称所有发生时间／说话者归属均已精确验证。未赋Judge标签，
+没有新模型审查或重跑；一个已暴露随机单例只支持诊断观察，不能证明普遍语义收益。
+
+新增候选A/B/C已合流。容量页向原选择调用反馈完整最终模板的联合tokens／余量；待送页完成后仍
+超限，在原剩余额度内显式drop，不截正文或加调用，短池direct不改；空最终集合只表示当前材料不足。
+B沿原Extractor／Editor区分主体、事件时钟、语气与复合旧属性，候选置于动作schema前，聚焦真实变化。
+C在原v9分类中加入可选response_scope；仅整项答复是窄保存状态且已有真实回执时，交付原程序回执摘要。
+复杂解释、旧decision及无回执查询保持普通回答；原错误模型草稿保留，程序确认不升级为模型语义成功。
+Root给旧Host脚本增加prepare --repeats（默认3，新根用1）；循环、总数和summary来自已声明次数，旧42根不改。
+新配置configs/milai-function-first-small-v1.json以Raw/M为主，不要求H服务；Host与benchmark原模型和阶段设置分开保持。
+A的17项窄检查、B和C各6项既有相关检查及各自Ruff／单源码类型检查通过，未派发真实服务。
+Root合流后一次正常链检查7项通过（保存重开、更正历史、业务补存实时核对、遗忘重开），重复次数与结果保留5项通过。
+这些检查用合成来源／临时SQLite，保留已有弃用警告；不是对真实14消息或新M语义的替代。两项实际运行仍待派发。
+
+一个正常运行入口（在已安装依赖的Lab环境中，显式创建新根；prepare不会派发模型）：
+
+```bash
+export PYTHONPATH="$PWD/src"
+python tools/run_baseline_host_flows.py prepare \
+  --root artifacts/function-first-small/host14-v1 \
+  --config configs/milai-function-first-small-v1.json \
+  --fixture artifacts/baseline-alignment/host-flows-f536734-offline-v4-prepared/inputs/fixture.json \
+  --controls artifacts/baseline-alignment/host-flows-f536734-offline-v4-prepared/inputs/controls.json \
+  --source-version "$(git rev-parse HEAD)" --repeats 1
+python tools/run_baseline_host_flows.py serial-run \
+  --root artifacts/function-first-small/host14-v1 --schedule-note "Root确认原资源闭合后的首次单轮派发"
+```
+
+已有根不重复运行；实际执行固定到记录的候选源码目录。基准用同配置的run_baseline_alignment.py，
+predict与score分开显式指定--backend MiLAi-memory-only，不省略backend启动全队列。
+
+旧候选有限对称来源审查已完成：前三开发用户各取每臂最早Correct与非Correct，共12项；两臂各3Correct
+均来源一致，Raw3非Correct沿既有来源结论，M3非Correct分别为时间适用语气过强、来源一致但Judge{}、
+Reader视图忠实却遗漏原会话可支持的有限回答。0新增请求、原产物保持；这不是新Q规定的同题样本。
+新Q已在预测前固定旧Raw按题序首3Correct＋首3非Correct，同六题审新M，保留此前参考接触边界，
+不估计总体来源准确率、不改官方分数。新Q还将报告同73题的四格配对及invalid／缺答。
+
+01408464自身Fast38122310218已SUCCESS，Full38122310216为SKIPPED；后续新头核查自己的CI。
+以下为各自历史时点的观察，不能用其中的RUNNING／待审查覆盖本次闭合证据。
+
 ## 2026-10-11：MiLAi预测闭合、独立评分开始，真实维护与阅读问题仍存在
 
 **预测闭合07:36:53 UTC，评分首次启动07:38:45 UTC；以下交付核查固定07:40:27 UTC。**

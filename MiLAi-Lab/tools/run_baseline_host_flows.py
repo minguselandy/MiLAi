@@ -56,7 +56,9 @@ def cli(arguments: list[str], runtime: Path, output: Path) -> subprocess.Complet
 
 
 def prepare(root: Path, config: Path, fixture: Path, controls: Path,
-            source_version: str) -> dict[str, Any]:
+            source_version: str, repeats: int = REPEATS) -> dict[str, Any]:
+    if repeats < 1:
+        raise ValueError("Repeat count must be positive")
     root, config, fixture, controls = (
         path.resolve() for path in (root, config, fixture, controls))
     if root.exists():
@@ -73,9 +75,9 @@ def prepare(root: Path, config: Path, fixture: Path, controls: Path,
     inputs.joinpath("config.json").write_bytes(config.read_bytes())
     manifest = {
         "schema": "baseline_host_flows_v1", "status": "PREPARING",
-        "repeat_count_predeclared": REPEATS, "source_version": source_version,
-        "stories": list(STORIES), "story_runs": len(STORIES) * REPEATS,
-        "flow_checks": list(FLOW_CHECKS), "planned_messages": 14 * REPEATS,
+        "repeat_count_predeclared": repeats, "source_version": source_version,
+        "stories": list(STORIES), "story_runs": len(STORIES) * repeats,
+        "flow_checks": list(FLOW_CHECKS), "planned_messages": 14 * repeats,
         "original_fixture": str(fixture.resolve()),
         "independence": "Three flow checks share two stories; repetitions are not new tasks.",
         "ordinary_failure_policy": "Keep known protocol/capacity/format failures and continue.",
@@ -83,7 +85,7 @@ def prepare(root: Path, config: Path, fixture: Path, controls: Path,
         "automatic_dispatch_or_retry": False, "semantic_correctness": "unchecked",
     }
     write(root / "protocol.json", manifest)
-    for repeat in range(1, REPEATS + 1):
+    for repeat in range(1, repeats + 1):
         prepared = root / f"rep-{repeat}"
         child = cli([
             "prepare", "--root", str(prepared), "--config", str(inputs / "config.json"),
@@ -140,8 +142,9 @@ def serial_run(root: Path, schedule_note: str) -> dict[str, Any]:
     protocol = read(root / "protocol.json")
     if protocol["status"] != "PREPARED_NOT_DISPATCHED" or (root / "execution.json").exists():
         raise ValueError("Existing dispatch or incomplete preparation; no automatic restart")
+    repeats = protocol["repeat_count_predeclared"]
     freezes = [read(root / f"rep-{repeat}" / "input-freeze.json")
-               for repeat in range(1, REPEATS + 1)]
+               for repeat in range(1, repeats + 1)]
     for repeat, freeze in enumerate(freezes, 1):
         if ([case["case_id"] for case in freeze["fixture"]["cases"]] != list(STORIES)
                 or [len(case["messages"]) for case in freeze["fixture"]["cases"]] != [8, 6]
@@ -160,7 +163,8 @@ def serial_run(root: Path, schedule_note: str) -> dict[str, Any]:
     execution = {
         "status": "RUNNING", "pid": os.getpid(), "schedule_note": schedule_note,
         "started_at": datetime.now(UTC).isoformat(), "source_version": freezes[0]["source_version"],
-        "planned_messages": 42, "repeats": REPEATS, "story_runs": len(STORIES) * REPEATS,
+        "planned_messages": 14 * repeats, "repeats": repeats,
+        "story_runs": len(STORIES) * repeats,
         "semantic_correctness": "unchecked", "automatic_restart_or_unknown_retry": False,
     }
     write(root / "accounting-before.json", before)
@@ -304,6 +308,8 @@ def main() -> None:
     parser.add_argument("--fixture", type=Path)
     parser.add_argument("--controls", type=Path)
     parser.add_argument("--source-version")
+    parser.add_argument("--repeats", type=int, default=REPEATS,
+                        help="prepare only: repetitions per story (default: 3)")
     parser.add_argument("--schedule-note", help="Root's explicit resource/scheduling decision")
     parser.add_argument("--run-root", type=Path, action="append", default=[])
     parser.add_argument("--output", type=Path, help="Private offline summary under artifacts/")
@@ -313,14 +319,17 @@ def main() -> None:
             args.root, args.config, args.fixture, args.controls, args.source_version,
         )):
             parser.error("prepare requires root/config/fixture/controls/source-version")
-        result = prepare(args.root, args.config, args.fixture, args.controls, args.source_version)
+        result = prepare(args.root, args.config, args.fixture, args.controls,
+                         args.source_version, args.repeats)
     elif args.command == "serial-run":
         if args.root is None or args.schedule_note is None:
             parser.error("serial-run requires root and Root's schedule-note")
         result = serial_run(args.root, args.schedule_note)
     else:
-        roots = args.run_root or ([args.root / f"rep-{repeat}" for repeat in range(1, REPEATS + 1)]
-                                 if args.root is not None else [])
+        roots = args.run_root
+        if not roots and args.root is not None:
+            repeats = read(args.root / "protocol.json")["repeat_count_predeclared"]
+            roots = [args.root / f"rep-{repeat}" for repeat in range(1, repeats + 1)]
         if not roots or args.output is None:
             parser.error("summary requires root or run-root, plus a private output path")
         result = summary(roots)

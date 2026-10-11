@@ -1,4 +1,25 @@
-# Current handoff: M predictions closed, selected score running, 2026-10-11 07:40 UTC
+# Current handoff: function-first lightweight plan active, 2026-10-11 16:18 UTC
+
+User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011.md.
+Current scope: develop/integrate A Reader, B maintenance, C Host; then one Host14 and newM32sessions/73QA/72updates,
+compare eligible savedRaw55/73; no automatic H/five-arm/277/LME/holdout runs. OldHost42/sixSDK/E3-E4 remain incomplete
+and deferred by explicit new plan, not gates. Do not dispatch old prepared f536Host42 or its root_host_supervisor.py.
+No new retry/monitoring platforms, full-tree hashes or broad test matrices. Root alone dispatches models on original ledger.
+M6ab score CLOSED09:21:34UTC/returncode0/resources_settledTrue; original PIDs absent16:07UTC.
+OfficialQA49/73 Correct,14H/3O/7invalid/0missing; update37/72;706Judgegen/2556437known=charged/0emb/newunknown0/0.
+Threeemptyworkset review alreadydone/reused; Q2lostnomination,Q6poolmissingfield,Q7unselectedthenlost; no repeat audit.
+Root fixed171poolb498 E2 started16:09:26 and CLOSED16:11:41UTC, parent2942313/worker2942314gone.
+4pages60/44/46/21,final22exactoriginals/firstnomineesretained/lastemptyselectionkept;5gen/144564known=charged,
+0emb/newunknown0/0/limitsunchanged/leaseFREE. Mainquestion supported; reporting/occurrence and role compression caveat.
+Evidence: existing e2-first-real-paging-b498f628 root-execution.json/run-once/terminal.json/root-source-review.json.
+Development B5c83ee51/A1a98a0b9/C8651e22d integrated. Root repeats/config/docs ready; narrow checks passed.
+New config configs/milai-function-first-small-v1.json; Host14/newM notdispatched. Freeze actual candidate after integration.
+NewQ sample predeclared artifacts/function-first-small/q-source-sample-20261012.json: oldRaw first3Correct/first3nonCorrect,
+same6 in newM. Earlier old6ab symmetric12 is different supplementary sample; do not conflate or adjust population accuracy.
+01408464 ownFast38122310218SUCCESS/Full38122310216SKIPPED; new published head needs ownCI. No merge authorized.
+Five principles/one logical MemoryService/source-only/QA20/maintenanceK10/original unknown8/1 and Hreservation retained.
+
+# Previous handoff: M predictions closed, selected score running, 2026-10-11 07:40 UTC
 
 ActualM frozen6ab CLOSED07:36:53UTC32sessions/73textanswers/0knownmissing/PREDICTIONS_SAVED/resources_settledTrue,
 parent776063/worker776066gone;189gen/3270303known=charged/261612emb/newunknown0/0/limitsunchanged/leaseFREE.

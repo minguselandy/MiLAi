@@ -126,8 +126,9 @@ def test_host_flow_summary_keeps_candidates_program_feedback_and_all_attempts(
 
 
 @pytest.mark.parametrize("last_result", [{"status": "UNKNOWN"}, []])
+@pytest.mark.parametrize("repeats", [1, 3])
 def test_host_flow_dispatch_retains_known_failure_and_stops_all_repeats_on_unknown(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, last_result: Any,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, last_result: Any, repeats: int,
 ) -> None:
     import subprocess
 
@@ -135,12 +136,13 @@ def test_host_flow_dispatch_retains_known_failure_and_stops_all_repeats_on_unkno
     root = tmp_path / "queue"
     ledger = tmp_path / "budget.json"
     save(ledger, {**budget(0, 0), "limits": {"generation": 1000}})
-    save(root / "protocol.json", {"status": "PREPARED_NOT_DISPATCHED"})
+    save(root / "protocol.json", {"status": "PREPARED_NOT_DISPATCHED",
+                                  "repeat_count_predeclared": repeats})
     fixture = {"cases": [{"case_id": name, "messages": [
         {"session_id": "s", "message_id": str(index), "content": "Actual message."}
         for index in range(count)
     ]} for name, count in zip(tool.STORIES, (8, 6), strict=True)]}
-    for repeat in range(1, 4):
+    for repeat in range(1, repeats + 1):
         save(root / f"rep-{repeat}" / "input-freeze.json", {
             "config": {"budget_path": str(ledger)}, "fixture": fixture,
             "evaluator_controls": {}, "source_version": {"implementation_version": "host-source"},
@@ -160,7 +162,7 @@ def test_host_flow_dispatch_retains_known_failure_and_stops_all_repeats_on_unkno
     assert result["status"] == "STOPPED" and result["attempted_messages"] == 3
     assert result["stop_reason"] == "UNKNOWN"
     rows = json.loads(root.joinpath("results.json").read_text())["results"]
-    assert len(rows) == 42
+    assert len(rows) == result["planned_messages"] == 14 * repeats
     assert [row["status"] for row in rows[:3]] == ["FAILED", "COMPLETED", "UNKNOWN"]
     assert all(row["status"] == "NOT_RUN" for row in rows[3:])
     with pytest.raises(ValueError, match="no automatic restart"):
