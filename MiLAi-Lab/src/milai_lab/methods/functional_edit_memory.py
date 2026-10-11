@@ -39,7 +39,9 @@ from milai_lab.memory.functional_state import (
     canonical,
     fragment_support,
     namespace,
+    project_request_targets,
     reference_key,
+    request_target_mapping,
     scope_leaves,
 )
 from milai_lab.memory.reader_projection import (
@@ -48,7 +50,7 @@ from milai_lab.memory.reader_projection import (
     project_host_packet,
     project_record,
 )
-from milai_lab.memory.working_set import read_evidence_basis, read_requirement_status
+from milai_lab.memory.working_set import item_ref, read_evidence_basis, read_requirement_status
 from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures, decorate_state
 from milai_lab.methods.edit_maintenance import (
@@ -325,6 +327,121 @@ class FunctionalEditMemory(FunctionalMemory):
             items.setdefault(identity, item)
         return list(items.values())
 
+    def _resident_continuations(
+        self, view: dict[str, Any], *, include_pending: bool = True,
+    ) -> list[dict[str, Any]]:
+        starts: dict[str, int] = {}
+        for ref in view["resident_refs"]:
+            starts[ref["snapshot_id"]] = max(
+                starts.get(ref["snapshot_id"], 0), ref["unit_index"] + 1)
+        for ref in view["pending_refs"] if include_pending else []:
+            if isinstance(ref, dict) and "snapshot_id" in ref and "unit_index" in ref:
+                starts[ref["snapshot_id"]] = min(
+                    starts.get(ref["snapshot_id"], ref["unit_index"]), ref["unit_index"])
+        continuations = []
+        for snapshot_id, start in starts.items():
+            snapshot = self.service.store.get(namespace(self.service), snapshot_id)
+            if snapshot is not None and not snapshot.value["kind"].endswith("_catalog") \
+                    and start < len(snapshot.value["items"]):
+                continuations.append({
+                    "tool": "read_page" if self.read_interface == "explicit_selectors_v1"
+                    else "read_memory",
+                    "arguments": {"cursor": snapshot_id + ":" + str(start)},
+                })
+        return continuations
+
+    def _fit_model_material(
+        self, config: RunnableConfig, material: dict[str, Any],
+        fresh_observations: list[dict[str, Any]] | None,
+    ) -> dict[str, Any]:
+        """Page a selected snapshot against the complete resident envelope.
+
+        The tool page and the following Host input have different wrappers. Use
+        the same final target/projection cost before changing temporary bodies;
+        originals and read receipts remain in their existing snapshots.
+        """
+        bound = self._binding(config)
+        mapping = request_target_mapping(self.service, bound)
+
+        def tokens(packet: dict[str, Any]) -> int:
+            projected, _ = project_request_targets(mapping, packet)
+            return self.token_count(canonical(self._project_read_packet(projected)))
+
+        if tokens(material) <= self.material_limit:
+            return material
+        view = material["memory_view"]
+        admission_key = "read-admission:" + reference_key([bound["session"], bound["message_id"]])
+        admission = self.service.store.get(namespace(self.service), admission_key)
+        latest = next((call for call in reversed(list(admission.value["calls"].values()))
+                       if call.get("result", {}).get("view_refs")
+                       and any(ref in view["resident_refs"]
+                               for ref in call["result"]["view_refs"])
+                       and not call["result"].get("kind", "").endswith("_catalog")), None) \
+            if admission else None
+        # Explicit retention is a model choice, not permission to silently evict
+        # a requested comparison. The unchanged final capacity refusal applies.
+        if latest and latest["arguments"].get("keep_resident"):
+            return material
+        focused = [ref for ref in view["resident_refs"]
+                   if ref["id"] in (view["focus"] if isinstance(view["focus"], list)
+                                    else [view["focus"]])]
+        if latest:
+            snapshot_id = latest["result"]["snapshot_id"]
+            start = latest["result"]["start"]
+        elif focused:
+            snapshot_id = focused[-1]["snapshot_id"]
+            start = min(ref["unit_index"] for ref in focused
+                        if ref["snapshot_id"] == snapshot_id)
+        else:
+            return material
+        snapshot = self.service.store.get(namespace(self.service), snapshot_id)
+        if snapshot is None or snapshot.value["kind"].endswith("_catalog"):
+            return material
+        pool_refs = [item_ref(unit, snapshot_id, index)
+                     for index, unit in enumerate(snapshot.value["items"])]
+        fixed = [item for item in material["items"] if item["type"] == "fragment" and (
+            item["source_ref"] == bound["source_ref"] or (item.get("role") == "tool"
+            and item.get("delivery_kind") != "redelivered_support"))]
+
+        def identity(ref: Any) -> str:
+            # Existing pending maintenance also uses source/attempt strings.
+            if not isinstance(ref, dict) or "snapshot_id" not in ref:
+                return canonical(ref)
+            return canonical([ref.get(name) for name in (
+                "kind", "id", "revision", "view", "range", "unit_id")])
+
+        fixed_ids = {item["source_ref"] for item in fixed}
+        fixed_refs = [ref for ref in view["resident_refs"]
+                      if ref["kind"] == "source" and ref["id"] in fixed_ids]
+
+        def resident_packet(page: dict[str, Any]) -> dict[str, Any]:
+            bodies = {canonical(self._progress_identity(item)): copy.deepcopy(item)
+                      for item in [*fixed, *expand_host_packet(page)["items"]]}
+            resident = [*fixed_refs, *page["view_refs"]]
+            opened = {identity(ref) for ref in resident}
+            pending = {identity(ref): copy.deepcopy(ref) for ref in [
+                *view["pending_refs"], *view["resident_refs"], *pool_refs,
+            ] if identity(ref) not in opened}
+            selected_view = {**view, "resident_refs": resident,
+                             "pending_refs": list(pending.values())}
+            actual = list(bodies.values())
+            following = self._resident_continuations(selected_view)
+            packet = {**material, "items": actual, **self._read_only_metadata(actual),
+                      "memory_view": selected_view, "reading_basis": read_evidence_basis(actual),
+                      "reading_requirement": read_requirement_status(
+                          selected_view, actual, continuations=following,
+                          fresh_observations=fresh_observations),
+                      "delivery_status": "partial" if pending else "complete_snapshot",
+                      "skipped_units": page["skipped_units"]}
+            packet.pop("continuations", None)
+            if following:
+                packet["continuations"] = following
+            return packet
+
+        page = self._page(snapshot_id, start, bound,
+                          packet_tokens=lambda packet: tokens(resident_packet(packet)))
+        return resident_packet(page)
+
     def model_material(
         self, config: RunnableConfig, *, for_write: bool = False,
         fresh_observations: list[dict[str, Any]] | None = None,
@@ -363,21 +480,7 @@ class FunctionalEditMemory(FunctionalMemory):
             "memory_view": view, "read_progress": progress,
             "pending_maintenance": pending,
         }
-        page_ends: dict[str, int] = {}
-        for ref in material["memory_view"]["resident_refs"]:
-            page_ends[ref["snapshot_id"]] = max(
-                page_ends.get(ref["snapshot_id"], 0), ref["unit_index"] + 1
-            )
-        continuations = []
-        for snapshot_id, end in page_ends.items():
-            snapshot = self.service.store.get(namespace(self.service), snapshot_id)
-            if snapshot is not None and not snapshot.value["kind"].endswith("_catalog") \
-                    and end < len(snapshot.value["items"]):
-                continuations.append({
-                    "tool": "read_page" if self.read_interface == "explicit_selectors_v1"
-                    else "read_memory",
-                    "arguments": {"cursor": snapshot_id + ":" + str(end)},
-                })
+        continuations = self._resident_continuations(view, include_pending=not for_write)
         if continuations:
             material["continuations"] = continuations
         material["reading_requirement"] = read_requirement_status(
@@ -392,7 +495,17 @@ class FunctionalEditMemory(FunctionalMemory):
             material["candidates"] = directory.get("candidates", [])
             material["candidate_scope"] = "navigation_only_not_body_read_or_fact_support"
             material["next_cursor"] = directory.get("next_cursor")
-        material = self.bind_request_targets(config, material)
+        # Direct Writer calls expand a different packet below. Preserve their
+        # complete selected Source/target contract and existing capacity check.
+        fitted = material if for_write else self._fit_model_material(
+            config, material, fresh_observations)
+        material = self.bind_request_targets(config, fitted)
+        if fitted["memory_view"] != view:
+            chosen = fitted["memory_view"]
+            self.focus_view(config, focus=chosen["focus"], read_goal=chosen["read_goal"],
+                            resident_refs=chosen["resident_refs"],
+                            pending_refs=chosen["pending_refs"])
+        continuations = material.get("continuations", [])
         if for_write and self.interface_version != "v1":
             packet = self._writer_packet(config, material)
             packet["memory_view"] = material["memory_view"]

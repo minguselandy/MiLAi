@@ -230,19 +230,68 @@ def test_sqlite_resident_capacity_counts_current_source_targets_and_full_wrapper
                       "target", "target_kind"):
             assert projected[field] == original[field]
         assert projected["edit_unit"]["unit_id"] == original["edit_unit"]["unit_id"]
-    items_cost = _tokens(canonical({key: material[key] for key in (
-        "items", "metadata_table", "projection_instructions",
-    )}))
-    memory.material_limit = memory.policy["material_limit"] = cost - 1
-    assert items_cost < memory.material_limit
-    with pytest.raises(
-        FunctionalRejection, match="V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT",
-    ) as failure:
-        memory.model_material(config)
-    assert _status(failure.value) == ("FAILED", "request_capacity")
+    assert _status(FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")) == (
+        "FAILED", "request_capacity")
     assert _status(FunctionalRejection("OTHER_CONTRACT_REJECTION")) == (
         "FAILED", "input_or_runtime")
     assert memory.service.read(record_id)["value"] == before["value"]
+
+
+def test_resident_paging_measures_final_wrapper_and_can_reopen_previous_page(
+    saved_memory: tuple[FunctionalEditMemory, dict[str, Any], str],
+) -> None:
+    memory, config, record_id = saved_memory
+    memory.material_limit = memory.policy["material_limit"] = 6500
+    bound = memory._binding(config)
+    memory.context(bound["session"], bound["message_id"], bound["config_version"])
+    original = memory.service.read(record_id)
+    snapshot = memory._snapshot(bound, memory._record_units(original), "record_read")
+
+    def read(call_id: str, start: int, *, keep: bool = False) -> dict[str, Any]:
+        return memory._read(config, call_id, {"tool": "read_memory", "keep_resident": keep},
+                            lambda binding: memory._page(snapshot, start, binding))
+
+    first = read("first", 0)
+    assert first["ok"]
+    packet = memory.model_material(config)
+    assert _tokens(canonical(packet)) <= memory.material_limit
+    assert packet["memory_view"]["pending_refs"] and packet["continuations"]
+    first_ids = {item["edit_unit"]["unit_id"] for item in packet["items"]
+                 if item["type"] == "record"}
+    pending = packet["memory_view"]["pending_refs"]
+    next_start = min(ref["unit_index"] for ref in pending if ref["snapshot_id"] == snapshot)
+    later = read("later", next_start)
+    assert later["ok"]
+    packet = memory.model_material(config)
+    assert _tokens(canonical(packet)) <= memory.material_limit
+    later_ids = {item["edit_unit"]["unit_id"] for item in packet["items"]
+                 if item["type"] == "record"}
+    assert later_ids - first_ids
+    assert read("reopen", 0)["ok"]
+    reopened = memory.model_material(config)
+    assert _tokens(canonical(reopened)) <= memory.material_limit
+    assert first_ids <= {item["edit_unit"]["unit_id"] for item in reopened["items"]
+                         if item["type"] == "record"}
+    assert memory.service.read(record_id)["value"] == original["value"]
+    assert memory.service.store.get(namespace(memory.service), snapshot).value["items"]
+
+
+def test_explicit_resident_keep_is_not_silently_evicted_for_capacity(
+    saved_memory: tuple[FunctionalEditMemory, dict[str, Any], str],
+) -> None:
+    memory, config, record_id = saved_memory
+    memory.material_limit = memory.policy["material_limit"] = 6500
+    bound = memory._binding(config)
+    memory.context(bound["session"], bound["message_id"], bound["config_version"])
+    snapshot = memory._snapshot(bound, memory._record_units(memory.service.read(record_id)),
+                                "record_read")
+    result = memory._read(config, "keep", {"tool": "read_memory", "keep_resident": True},
+                          lambda binding: memory._page(snapshot, 0, binding))
+    assert result["ok"]
+    before = memory.view_state(config)
+    with pytest.raises(FunctionalRejection, match="V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT"):
+        memory.model_material(config)
+    assert memory.view_state(config) == before
 
 
 def test_host_projection_keeps_conflicting_unknowns_raw_source_and_selectors() -> None:

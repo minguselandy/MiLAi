@@ -2558,6 +2558,10 @@ def test_request_targets_page_preview_and_omission_do_not_issue_credentials(tmp_
         row = memory.resolve_request_target(config, alternate)
         assert row['kind'] == 'read_only_navigation' and row['credentials'] == {}
         assert row['identity']['source_ref'] == ref
+        denied = invoke(memory, 'forget_memory', {'targets': [alternate]}, 'navigation-forget')
+        assert denied['reason'].startswith('V13_5_FORGET_BODY_READ_REQUIRED:')
+        assert 'read_memory/read_source' in denied['reason']
+        assert denied['effect'] == 'none' and memory.service.forget_epoch == 0
         assert all(row['kind'] != 'delivered_record' for row in request_target_mapping(
             memory.service, binding)['targets'].values())
         real = memory._page(memory._snapshot(binding, memory._record_units(
@@ -2568,6 +2572,8 @@ def test_request_targets_page_preview_and_omission_do_not_issue_credentials(tmp_
         delivered = memory.bind_request_targets(config, real)
         assert memory.resolve_request_target(config, target)['credentials'] == {
             'read_handle': delivered['items'][0]['read_handle']}
+        removed = invoke(memory, 'forget_memory', {'targets': [target]}, 'delivered-forget')
+        assert removed['effect'] == 'visibility_only' and removed['revoked_ids'] == [saved['id']]
 
 
 def test_request_targets_delivery_store_failure_stays_unknown_and_does_not_retry(

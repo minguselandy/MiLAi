@@ -505,7 +505,12 @@ class FunctionalMemory:
         selected = [resolve_request_target(self.service, binding, target) for target in targets]
         records = [row for row in selected if row["kind"] == "delivered_record"]
         sources = [row for row in selected if row["kind"] == "delivered_source"]
-        if len(records) > 1 or len(records) + len(sources) != len(selected):
+        if len(records) + len(sources) != len(selected):
+            raise FunctionalRejection(
+                "V13_5_FORGET_BODY_READ_REQUIRED: navigation targets grant no forget authority; "
+                "first use read_memory/read_source and select the resulting delivered target"
+            )
+        if len(records) > 1:
             raise FunctionalRejection("V13_5_FORGET_EXACTLY_ONE_RECORD_OR_SOURCES_REQUIRED")
         fragments = [row["credentials"]["fragment_handle"] for row in sources]
         return self.service.forget(
@@ -804,7 +809,10 @@ class FunctionalMemory:
         """Project exactly this delivered page before counting its full cost."""
         return packet
 
-    def _page(self, key: str, start: int, binding: dict[str, Any]) -> dict[str, Any]:
+    def _page(
+        self, key: str, start: int, binding: dict[str, Any], *,
+        packet_tokens: Callable[[dict[str, Any]], int] | None = None,
+    ) -> dict[str, Any]:
         stored = self.service.store.get(namespace(self.service), key)
         if stored is None:
             raise FunctionalRejection("V13_5_SNAPSHOT_NOT_ISSUED_OR_CHANGED")
@@ -899,6 +907,10 @@ class FunctionalMemory:
                 result, _ = project_request_targets(target_mapping, result)
             return self._project_read_packet(result)
 
+        def required_tokens(result: dict[str, Any]) -> int:
+            own = self.token_count(canonical(result))
+            return max(own, packet_tokens(result)) if packet_tokens is not None else own
+
         end = start
         for index, unit in enumerate(items[start:], start):
             if unit["type"] == "source_candidate":
@@ -915,7 +927,7 @@ class FunctionalMemory:
                 if not row["ok"] or row["value"]["revision"] != unit["revision"]:
                     raise FunctionalIntegrityError("V13_5_SNAPSHOT_RECORD_UNAVAILABLE")
             chosen.append(unit)
-            required = self.token_count(canonical(packet(index + 1)))
+            required = required_tokens(packet(index + 1))
             if required > self.material_limit:
                 chosen.pop()
                 if chosen or skipped:
@@ -946,7 +958,7 @@ class FunctionalMemory:
                 )
             end = index + 1
         result = packet(end)
-        if self.token_count(canonical(result)) > self.material_limit:
+        if required_tokens(result) > self.material_limit:
             raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
         refs = [
             ref
