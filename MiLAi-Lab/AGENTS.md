@@ -2,7 +2,10 @@
 
 Raw frozen6ab explicit score CLOSED06:21:16UTC: Correct55/73/Hallucination17/invalid1/missing0,
 73Judgegen/179908known=charged/0emb/newunknown0/0/limitsunchanged/resources_settledTrue/parentsgone.
-Independent source/reference audit pending; preserve official labels and whole opportunity denominator.
+Independent source-first/reference audit CLOSED06:40:17UTC: 17Hlabels=10sourcefaithful/7unsupported,
+invalid1sourcefaithful but Judge finalJSON{} no evaluation_result. 16narrower-reference Judge reasons
+include6answers with ownsourceproblems;1referenceplan-as-done conflict separate/axesoverlap.
+55Correct not audited/no adjusted accuracy; officiallabels/denominator unchanged/0newmodelsHTTPDB.
 Root first untouched M dispatch06:22:23UTC, frozen6ab/originalconfig/manifestbanks/32sessions73QA72updates,
 parent776063/worker776066 exist; observed06:22:51UTC0complete sessions/0QA. Detached supervisor is
 artifacts/baseline-alignment/run_e1_6ab512cb_milai_first.py; original suite rootrecord remains staleRUNNING.
