@@ -1207,6 +1207,94 @@ def test_snapshot_pages_preserve_nominations_until_explicit_drop_and_reopen_prio
 
 
 @pytest.mark.parametrize("call_limit", [3, 4])
+@pytest.mark.parametrize("backend", [
+    "RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only",
+])
+def test_snapshot_final_union_cost_allows_explicit_drop_within_existing_reads(
+    snapshot_reader: BenchmarkRun, backend: str, call_limit: int,
+) -> None:
+    execution = snapshot_reader
+    execution.settings["alignment_backend"] = backend
+    execution.client.config.max_calls = call_limit
+    memories = snapshot_materials(backend, 18000)
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    selections = []
+    final_calls = []
+
+    def chat(messages: Any, response_format: Any, **kwargs: Any) -> Any:
+        payload = json.loads(messages[1]["content"])
+        if response_format is not None:
+            selections.append(payload)
+            capacity = payload["final_reopen_capacity"]
+            assert capacity["remaining_input_tokens"] == 30000 - capacity["input_tokens"]
+            if payload["pending_item_indices"]:
+                assert capacity["fits_together"]
+                content = {"item_indices": [len(selections) - 1], "done": True,
+                           "read_goal": "Compare the reported claims without losing their scope."}
+            else:
+                assert not capacity["fits_together"]
+                assert payload["memories"] == [] and payload["memory_item_indices"] == []
+                assert payload["final_reopen_item_indices"] == [0, 1]
+                assert capacity["input_tokens"] != sum(
+                    row["single_material_input_tokens"]
+                    for row in payload["final_reopen_candidates"])
+                assert payload["remaining_reads"] == 1
+                content = {"item_indices": [], "drop_item_indices": [1], "done": True}
+            return {"choices": [{"finish_reason": "stop", "message": {
+                "content": json.dumps(content)}}]}
+        assert payload["memories"] == memories[:1] and payload["memory_item_indices"] == [0]
+        assert "final_reopen_capacity" not in payload and "final_reopen_candidates" not in payload
+        # The earlier feedback for [0] must include this exact final template and read goal.
+        assert selections[1]["final_reopen_capacity"]["input_tokens"] == execution.input_tokens(
+            messages, enable_thinking=True)
+        final_calls.append(payload)
+        return {"choices": [{"finish_reason": "stop", "message": {"content": "Original zero."}}]}
+
+    execution.client.chat = chat
+    if call_limit == 3:
+        with pytest.raises(ReadDeliveryIncomplete, match="read_call_limit") as caught:
+            execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                      snapshot_id=snapshot_id)
+        assert execution._known_reader_failure(caught.value, "qa")["request_sent"] is False
+        assert len(selections) == 2 and final_calls == []
+        assert not (execution.root / "http/qa/request.json").exists()
+    else:
+        assert execution.answer_material("Query", "2030-01-02", "qa", memories,
+                                         snapshot_id=snapshot_id)[0] == "Original zero."
+        assert len(selections) == 3 and len(final_calls) == 1
+    state = read_json(execution.root / "http/qa/memory-view.json")
+    continuation = state["capacity_continuation"]
+    assert not continuation["pending_refs"]
+    assert len(continuation["delivered_page_refs"]) == len(memories)
+    assert continuation["final_reopen_capacity"]["fits_together"] is (call_limit == 4)
+    assert continuation["final_body_delivered"] is (call_limit == 4)
+    if call_limit == 3:
+        assert continuation["incomplete_detail"] == "final_candidates_exceed_input_limit"
+
+
+def test_snapshot_empty_final_set_limits_unknown_to_current_read(
+    snapshot_reader: BenchmarkRun,
+) -> None:
+    execution = snapshot_reader
+    memories = snapshot_materials("RawRAG-local", 18000)
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+
+    def chat(messages: Any, response_format: Any, **kwargs: Any) -> Any:
+        if response_format is not None:
+            content = json.dumps({"item_indices": [], "done": True})
+        else:
+            assert json.loads(messages[1]["content"])["memories"] == []
+            assert "does not establish that information was never saved" in messages[0]["content"]
+            content = "The current reading obtained insufficient material."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}]}
+
+    execution.client.chat = chat
+    execution.answer_material("Query", "2030-01-02", "qa", memories, snapshot_id=snapshot_id)
+
+
+@pytest.mark.parametrize("call_limit", [3, 4])
 def test_snapshot_page_budget_includes_selected_navigation_and_reserves_final_call(
     snapshot_reader: BenchmarkRun, call_limit: int,
 ) -> None:

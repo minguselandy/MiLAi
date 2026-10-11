@@ -2001,6 +2001,24 @@ class BenchmarkRun:
                                        "after nominations are merged; omission removes nothing.",
                     }
 
+                def reopened_messages(
+                    selected_refs: list[dict[str, Any]],
+                ) -> list[dict[str, str]]:
+                    result = final_messages(selected_refs)
+                    result[0]["content"] += (
+                        " Only the actual bodies supplied again in this final input are answer "
+                        "evidence. Earlier pages and directory identities do not supply omitted "
+                        "facts. Explicitly state any remaining evidence limitation. Page delivery "
+                        "does not prove answer sufficiency."
+                    )
+                    if material_pool and not selected_refs:
+                        result[0]["content"] += (
+                            " No evidence bodies were reopened for this answer. This only means "
+                            "the current reading obtained insufficient material; it does not "
+                            "establish that information was never saved."
+                        )
+                    return result
+
                 def page_messages(page_refs: list[dict[str, Any]]) -> list[dict[str, str]]:
                     result = final_messages(page_refs)
                     result[0]["content"] += (
@@ -2017,6 +2035,13 @@ class BenchmarkRun:
                         "without changing memory or skipping pending pages. Candidate navigation "
                         "covers this page; pending_item_indices lists entries still to be read. "
                         "done cannot skip any still-pending page. "
+                        "final_reopen_capacity measures the complete final answer input for the "
+                        "current nominations, including its actual template and read_goal; "
+                        "individual entry costs are not additive. Negative remaining_input_tokens "
+                        "means the nominations cannot be reopened together. Use explicit drops "
+                        "to keep the necessary whole evidence within that limit, preserving its "
+                        "subject, time and conditions. After all pending pages, an empty page "
+                        "may ask you to reduce the nominations using the same remaining reads. "
                         "References grant no write or forget authority. Return only the supplied "
                         "selection schema, never an answer or factual summary."
                         if material_pool else
@@ -2044,6 +2069,7 @@ class BenchmarkRun:
                                                        for ref in continuation["final_refs"]],
                             final_reopen_candidates=[directory[ref["item_index"]]
                                                      for ref in continuation["final_refs"]],
+                            final_reopen_capacity=continuation["final_reopen_capacity"],
                             pending_item_indices=[ref["item_index"]
                                                   for ref in continuation["pending_refs"]],
                         )
@@ -2055,12 +2081,30 @@ class BenchmarkRun:
                         payload, ensure_ascii=False, separators=(",", ":"))
                     return result
 
-                while (continuation["pending_refs"] or not continuation["selection_complete"]):
-                    if not continuation["pending_refs"]:
+                while True:
+                    final_too_large = False
+                    if material_pool:
+                        final_tokens = self.input_tokens(
+                            reopened_messages(continuation["final_refs"]),
+                            enable_thinking=reader_thinking,
+                        )
+                        continuation["final_reopen_capacity"] = {
+                            "input_tokens": final_tokens, "input_token_limit": input_limit,
+                            "remaining_input_tokens": input_limit - final_tokens,
+                            "fits_together": final_tokens <= input_limit,
+                        }
+                        final_too_large = final_tokens > input_limit
+                    if (not continuation["pending_refs"] and continuation["selection_complete"]
+                            and not final_too_large):
+                        break
+                    if not continuation["pending_refs"] and not final_too_large:
                         continuation["pending_refs"] = copy.deepcopy(continuation["final_refs"])
                     state["pending_refs"] = copy.deepcopy(continuation["pending_refs"])
                     if state["steps"] >= total_read_limit:
                         continuation["incomplete_reason"] = "read_call_limit"
+                        if final_too_large:
+                            continuation["incomplete_detail"] = (
+                                "final_candidates_exceed_input_limit")
                         write_json(path, state)
                         raise ReadDeliveryIncomplete("read_call_limit")
                     active = continuation.get("active_page")
@@ -2141,13 +2185,7 @@ class BenchmarkRun:
                     state["pending_refs"] = copy.deepcopy(continuation["pending_refs"])
                     write_json(path, state)
                 state["resident_refs"] = copy.deepcopy(continuation["final_refs"])
-                messages = final_messages(state["resident_refs"])
-                messages[0]["content"] += (
-                    " Only the actual bodies supplied again in this final input are answer "
-                    "evidence. Earlier pages and directory identities do not supply omitted "
-                    "facts. Explicitly state any remaining evidence limitation. Page delivery "
-                    "does not prove answer sufficiency."
-                )
+                messages = reopened_messages(state["resident_refs"])
                 continuation["final_input_tokens"] = self.input_tokens(
                     messages, enable_thinking=reader_thinking)
                 if continuation["final_input_tokens"] > input_limit:
