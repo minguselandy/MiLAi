@@ -946,7 +946,10 @@ def test_snapshot_reader_pages_and_reopens_actual_entries(
             else:
                 assert payload["memories"] == [] and payload["undelivered_item_indices"]
                 indices = list(range(len(memories)))
-            content = json.dumps({"item_indices": indices, "keep_resident": False, "done": True})
+            selection = {"item_indices": indices, "done": True}
+            if "final_reopen_item_indices" not in payload:
+                selection["keep_resident"] = False
+            content = json.dumps(selection)
         else:
             assert payload["memories"] == [original[0]]
             assert payload["memory_item_indices"] == [0]
@@ -1004,6 +1007,42 @@ def test_snapshot_direct_reader_fitting_pool_keeps_one_original_call(
 
 
 @pytest.mark.parametrize("mode", ["staged", "state_driven"])
+def test_snapshot_without_paging_keeps_resident_replacement_contract(
+    snapshot_reader: BenchmarkRun, mode: str,
+) -> None:
+    execution = snapshot_reader
+    execution.settings["memory_view_mode"] = mode
+    execution.client.config.max_calls = 12
+    memories = snapshot_materials("RawRAG-local", 20)
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    selections = []
+
+    def chat(messages: Any, response_format: Any, **kwargs: Any) -> Any:
+        payload = json.loads(messages[1]["content"])
+        if response_format is not None:
+            index = len(selections)
+            assert payload["memories"] == ([] if index == 0 else [memories[0]])
+            assert "keep_resident" in payload["response_schema"]["required"]
+            assert "drop_item_indices" not in payload["response_schema"]["properties"]
+            selections.append(index)
+            content = json.dumps({"item_indices": [index], "keep_resident": False,
+                                  "done": index == 1})
+        else:
+            expected = 0 if mode == "staged" else 1
+            assert payload["memory_item_indices"] == [expected]
+            assert payload["memories"] == [memories[expected]]
+            content = "Only the last resident selection supplies the final evidence."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}]}
+
+    execution.client.chat = chat
+    execution.answer_material("Query", "2030-01-02", "qa", memories, snapshot_id=snapshot_id)
+    state = read_json(execution.root / "http/qa/memory-view.json")
+    assert selections == ([0] if mode == "staged" else [0, 1])
+    assert "capacity_continuation" not in state
+
+
+@pytest.mark.parametrize("mode", ["staged", "state_driven"])
 def test_snapshot_reader_pages_when_initial_navigation_exceeds_capacity(
     snapshot_reader: BenchmarkRun, mode: str,
 ) -> None:
@@ -1026,7 +1065,7 @@ def test_snapshot_reader_pages_when_initial_navigation_exceeds_capacity(
             assert payload["memories"] == [memories[index] for index in indices]
             assert payload["response_schema"]["properties"]["item_indices"]["items"][
                 "enum"] == list(range(75))
-            content = json.dumps({"item_indices": [74], "keep_resident": False, "done": True})
+            content = json.dumps({"item_indices": [74], "done": True})
         else:
             assert payload["memory_item_indices"] == [74] and payload["memories"] == [memories[74]]
             content = "Complete original last report reopened."
@@ -1043,7 +1082,188 @@ def test_snapshot_reader_pages_when_initial_navigation_exceeds_capacity(
     assert not continuation["pending_refs"] and continuation["final_body_delivered"]
 
 
-@pytest.mark.parametrize("failure", ["index", "unknown", "call_limit", "snapshot"])
+@pytest.mark.parametrize("backend", [
+    "RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only",
+])
+@pytest.mark.parametrize("resume", [False, True])
+def test_snapshot_pages_preserve_nominations_until_explicit_drop_and_reopen_prior_entry(
+    snapshot_reader: BenchmarkRun, monkeypatch: pytest.MonkeyPatch, backend: str, resume: bool,
+) -> None:
+    from milai_lab.runners import edit_benchmarks
+
+    execution = snapshot_reader
+    execution.settings["alignment_backend"] = backend
+    execution.client.config.max_calls = 12
+    examples = snapshot_materials(backend, 18000)
+    memories = [copy.deepcopy(examples[index % 2]) for index in range(4)]
+    for index, memory in enumerate(memories):
+        identity = "record_id" if backend == "MiLAi-memory-only" else "id"
+        memory[identity] = f"actual-entry-{index}"
+        memory["reported_at"] = f"2030-01-{index + 1:02d}"
+    original = copy.deepcopy(memories)
+    snapshot_id = "native/qa/retrieval.json"
+    snapshot = execution.root / snapshot_id
+    write_json(snapshot, {"materials": memories})
+    before = snapshot.read_bytes()
+    state_path = execution.root / "http/qa/memory-view.json"
+    attempts: list[dict[str, Any]] = []
+    goal = "Compare actual report dates and retained wording."
+
+    def chat(messages: Any, response_format: Any, **sampling: Any) -> Any:
+        assert sampling == {"enable_thinking": True}
+        tokens = execution.input_tokens(messages, enable_thinking=True)
+        assert tokens <= 30000
+        payload = json.loads(messages[1]["content"])
+        attempts.append(payload)
+        if response_format is not None:
+            page = len(attempts) - 1
+            assert payload["memory_item_indices"] == [page]
+            assert payload["memories"] == [original[page]]
+            previous = [[], [0], [0], [0, 2]][page]
+            assert payload["final_reopen_item_indices"] == previous
+            navigation = payload["final_reopen_candidates"]
+            assert [candidate["item_index"] for candidate in navigation] == previous
+            for candidate in navigation:
+                entry = original[candidate["item_index"]]
+                assert candidate["navigation_only"]
+                assert candidate["literal_excerpt"] == entry.get("text", entry.get("content"))[:384]
+                assert "END_" not in candidate["literal_excerpt"]
+                assert all(entry[field] == value
+                           for field, value in candidate["native_metadata"].items())
+                assert candidate["native_metadata"]["reported_at"] == entry["reported_at"]
+                assert "read_handle" not in candidate and "fragment_handles" not in candidate
+                if backend != "MiLAi-memory-only":
+                    assert "revision" not in candidate["native_metadata"]
+            if page:
+                assert payload["read_goal"] == goal
+                assert navigation[0]["native_metadata"]["reported_at"] == original[previous[0]][
+                    "reported_at"]
+                without_navigation = copy.deepcopy(messages)
+                compact = dict(payload)
+                del compact["final_reopen_candidates"]
+                without_navigation[1]["content"] = json.dumps(
+                    compact, ensure_ascii=False, separators=(",", ":"))
+                assert execution.input_tokens(without_navigation, enable_thinking=True) < tokens
+            properties = payload["response_schema"]["properties"]
+            assert "keep_resident" not in properties
+            assert properties["item_indices"]["items"]["enum"] == list(range(4))
+            assert properties["drop_item_indices"]["items"]["enum"] == list(range(4))
+            selections = [
+                {"item_indices": [0], "done": False, "read_goal": goal},
+                {"item_indices": [], "done": True},
+                {"item_indices": [2], "done": True},
+                {"item_indices": [1], "drop_item_indices": [0, 2], "done": True},
+            ]
+            content = json.dumps(selections[page])
+        else:
+            assert len(attempts) == 5
+            assert payload["memory_item_indices"] == [1]
+            assert payload["memories"] == [original[1]]
+            assert payload["read_goal"] == goal
+            assert "candidates" not in payload and "final_reopen_candidates" not in payload
+            assert "END_1" in repr(payload["memories"])
+            content = "The complete originally saved second entry is the final evidence."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}],
+                "usage": {"prompt_tokens": tokens, "completion_tokens": 7,
+                          "total_tokens": tokens + 7}}
+
+    execution.client.chat = chat
+    if resume:
+        actual_write = edit_benchmarks.write_json
+        interrupted = False
+
+        def save_progress(destination: Path, value: Any) -> None:
+            nonlocal interrupted
+            actual_write(destination, value)
+            continuation = (value.get("capacity_continuation", {})
+                            if destination == state_path else {})
+            if (not interrupted and len(continuation.get("pages", [])) == 2
+                    and "active_page" not in continuation):
+                interrupted = True
+                raise RuntimeError("synthetic process ended after saved page progress")
+
+        monkeypatch.setattr(edit_benchmarks, "write_json", save_progress)
+        with pytest.raises(RuntimeError, match="after saved page progress"):
+            execution.answer_material("Compare reports", "2030-01-05", "qa", memories,
+                                      snapshot_id=snapshot_id)
+        saved = read_json(state_path)
+        assert saved["steps"] == 2 and saved["read_goal"] == goal
+        assert [ref["item_index"] for ref in saved["capacity_continuation"]["final_refs"]] == [0]
+        assert len(attempts) == 2
+    answer, used = execution.answer_material("Compare reports", "2030-01-05", "qa", memories,
+                                             snapshot_id=snapshot_id)
+    assert used == original and len(attempts) == 5
+    state = read_json(state_path)
+    continuation = state["capacity_continuation"]
+    final_ref = {"snapshot_id": snapshot_id, "collection": "materials", "item_index": 1}
+    assert continuation["final_refs"] == state["resident_refs"] == [final_ref]
+    assert [ref["item_index"] for ref in continuation["delivered_page_refs"]] == list(range(4))
+    assert continuation["final_body_delivered"] and not continuation["pending_refs"]
+    assert state["steps"] == 4 and execution.client.config.max_calls == 12
+    assert snapshot.read_bytes() == before and memories == original
+    assert execution.answer_material("Compare reports", "2030-01-05", "qa", memories,
+                                     snapshot_id=snapshot_id) == (answer, used)
+    assert len(attempts) == 5 and not (execution.root / "banks").exists()
+
+
+@pytest.mark.parametrize("call_limit", [3, 4])
+def test_snapshot_page_budget_includes_selected_navigation_and_reserves_final_call(
+    snapshot_reader: BenchmarkRun, call_limit: int,
+) -> None:
+    class NavigationTokenizer:
+        def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
+            payload = json.loads(messages[1]["content"])
+            return [0] * (100 + 6000 * len(payload["memories"])
+                          + 1000 * len(payload.get("final_reopen_candidates", [])))
+
+    execution = snapshot_reader
+    execution.tokenizer = NavigationTokenizer()
+    execution.settings["context_tokens"] = 13612
+    execution.client.config.max_calls = call_limit
+    memories = [{"id": f"actual-{index}", "text": f"Whole original {index}.",
+                 "reported_at": f"2030-01-{index + 1:02d}"} for index in range(4)]
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    attempts = []
+
+    def chat(messages: Any, response_format: Any, **kwargs: Any) -> Any:
+        payload = json.loads(messages[1]["content"])
+        attempts.append(payload)
+        assert execution.input_tokens(messages, enable_thinking=True) <= 13000
+        if response_format is not None:
+            selected = [0, 1] if len(attempts) == 1 else []
+            content = json.dumps({"item_indices": selected, "done": True})
+        else:
+            assert payload["memory_item_indices"] == [0, 1]
+            assert payload["memories"] == memories[:2]
+            content = "Only the two nominated original entries support the final answer."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}]}
+
+    execution.client.chat = chat
+    if call_limit == 3:
+        with pytest.raises(ReadDeliveryIncomplete, match="read_call_limit") as caught:
+            execution.answer_material("Query", "2030-01-05", "qa", memories,
+                                      snapshot_id=snapshot_id)
+        receipt = execution._known_reader_failure(caught.value, "qa")
+        assert receipt is not None and receipt["reason"] == "read_call_limit"
+        assert len(attempts) == 2 and not (execution.root / "http/qa/request.json").exists()
+    else:
+        assert execution.answer_material("Query", "2030-01-05", "qa", memories,
+                                         snapshot_id=snapshot_id)[1] == memories
+        assert len(attempts) == 4
+    state = read_json(execution.root / "http/qa/memory-view.json")
+    continuation = state["capacity_continuation"]
+    assert continuation["final_refs"] == [
+        {"snapshot_id": snapshot_id, "collection": "materials", "item_index": index}
+        for index in (0, 1)]
+    assert [len(page["refs"]) for page in continuation["pages"]] == (
+        [2, 1] if call_limit == 3 else [2, 1, 1])
+    assert continuation["final_body_delivered"] is (call_limit == 4)
+    assert [ref["item_index"] for ref in continuation["pending_refs"]] == (
+        [3] if call_limit == 3 else [])
+
+
+@pytest.mark.parametrize("failure", ["index", "drop_index", "unknown", "call_limit", "snapshot"])
 def test_snapshot_reader_rejects_invalid_selection_and_keeps_unfinished_scope(
     snapshot_reader: BenchmarkRun, failure: str,
 ) -> None:
@@ -1064,7 +1284,7 @@ def test_snapshot_reader_rejects_invalid_selection_and_keeps_unfinished_scope(
             raise RuntimeError("synthetic unconfirmed page")
         return {"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({
             "item_indices": [99 if failure == "index" else 0],
-            "keep_resident": False, "done": True,
+            "drop_item_indices": [99] if failure == "drop_index" else [], "done": True,
         })}}], "usage": {"prompt_tokens": 2, "completion_tokens": 7, "total_tokens": 9}}
 
     execution.client.chat = chat
@@ -1075,7 +1295,8 @@ def test_snapshot_reader_rejects_invalid_selection_and_keeps_unfinished_scope(
                                       snapshot_id=snapshot_id)
         assert calls == [] and not (execution.root / "http").exists()
         return
-    error = {"index": JsonSchemaValidationError, "unknown": UnconfirmedModelOutcome,
+    error = {"index": JsonSchemaValidationError, "drop_index": JsonSchemaValidationError,
+             "unknown": UnconfirmedModelOutcome,
              "call_limit": ReadDeliveryIncomplete}[failure]
     with pytest.raises(error) as caught:
         execution.answer_material("Query", "2030-01-02", "qa", memories,

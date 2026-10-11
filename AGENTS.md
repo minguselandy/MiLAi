@@ -3,6 +3,10 @@
 本文件只规定单仓库的跨 bundle 工作规则。具体产品、研究和 Archive 命令以各自目录的
 README、`pyproject.toml`、锁文件和 CI 为准。
 
+当前 Lab 基线对齐任务的迁移状态和串行调度约束见 `MiLAi-Lab/AGENTS.md`，实际观察见
+`MiLAi-Lab/docs/MILAI_UNIFIED_MEMORY_USAGE.md`。先核查进程与产物；迁移丢失执行句柄不授权
+重启实验，开发头也不替代运行中的冻结源码身份。已有独立评分、分页和 Host 适配不重复开发。
+
 ## 权威顺序
 
 1. `SOURCE_OF_TRUTH.md`、`REPO_MAP.md` 和本文件的边界规则；

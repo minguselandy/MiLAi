@@ -1,5 +1,56 @@
 # 统一记忆功能候选与当前执行状态
 
+## 2026-10-11：迁移核查发现运行中断，分页工作集修复待实际验证
+
+**固定核查：06:00:50 UTC／北京时间14:00:50；专属资源闭合：06:04:01 UTC。**
+磁盘根记录仍为RUNNING，但原supervisor／worker均已不存在，最后实验文件停在00:11:32 UTC。
+没有发现仍在执行预测的进程；不因旧会话句柄不可用而重启。原冻结源码仍为
+`6ab512cb355bdcd71ab2cea45f65ff4ce13818a0`，原根记录、配置、预测及银行均保留。
+进程退出原因和退出码未取得，不能写为用户取消、正常完成或原生服务超时。
+
+| 本轮冻结6ab产物 | 核查结果 | 结论边界 |
+|---|---|---|
+| RawRAG-local | 32完整会话／73文本答案／0缺答，PREDICTIONS_SAVED且resources_settled=true | 尚未评分；本轮73生成／1,061,690 known＝charged／0 embedding |
+| Hindsight-native-local-recall | 7完整会话，19个QA检查点＝18文本答案＋1已知缺答；没有终态 | 另一个QA停在分页请求，没有文本答案或最终交付；不称完整73题结果 |
+| MiLAi-memory-only | 尚未首次派发 | 不借用旧M结果，不补零 |
+| Judge／Host42 | 尚未派发；f536 v4仍为PREPARED_NOT_DISPATCHED | 完整Host、六次独立SDK重开及语义验收待执行 |
+
+已知缺答为read_call_limit，before_final_http、request_sent=false：11页已确认、254条选择、
+仍有1条pending，selection_complete=false、final_body_delivered=false、evidence_sufficiency=unchecked。
+这属于现有读取预算内未完成交付，保留机会和null，不加次数、不重试，不当作文本答案或语义通过。
+另一个未完成QA的第4页有request、无response；4页已确认、38条pending且未最终交付。
+请求文件和发送前预占不能证明HTTP实际发送或服务端完成，该次状态仍unknown。
+
+截至核查，原连续账本相对本轮起点增加216个生成请求，3,717,429 known、3,828,383 charged，
+15,903 embedding known；新增unknown为generation 1／embedding 0，limits不变。
+差额110,954恰为最后未确认分页请求的保守预占，保留原收费与unknown，不退款或重置。
+H原生桥60个生成、233个embedding均有确认回执；共同Reader有83个请求、82个响应。
+这是截至中断的实际账目，不是完整H阶段成本，也不能将本轮新增unknown归为历史unknown。
+
+Root在原租约下用公共SDK只核查已建银行的状态，pending_operations／pending_consolidation／
+pending.total／processing.total均为0，账本字节不变；原模型桥端口已关闭。
+确认原父worker消失、服务身份属于本轮孤儿后，按已有释放授权关闭专属H服务。
+06:04:01 UTC核验专属UID活动0、API监听关闭、原租约可用、账本不变；共享模型服务保持。
+随后现有Qwen运行／等待指标均为0。最后Reader发送与响应仍未确认，不据此重跑H或清除unknown。
+只在资源安全时显式评分完整保存的臂，或首次派发未运行臂；不回填中断前缀为三方比较。
+
+本次开发修复限定于material_pool容量分页：页级schema去掉keep_resident；item_indices提名
+默认累积，只有明确drop_item_indices才从最终重开工作集移除。每页提供final_reopen_candidates，
+复用原目录中的真实身份／时间／来源、最多384字符原文摘录与单条完整输入成本。
+导航不是答案证据，最终仍重开完整原件；导航和schema计入原完整输入预算。
+全池引用范围、direct可容纳时的一次回答、非分页／旧record／staged原keep合同、max_calls和
+最终调用预留、原文快照、owner／版本／权限及unknown停止保持。drop不删除记忆或授予修改权限。
+没有增加模型阶段、选择器、全量自动保留、gold下标或重试；原冻结6ab完全不含该修复。
+
+前序33项针对性单元测试、两文件Ruff及源文件strict mypy通过，本轮离线复核已有pytest工件与
+当前diff一致，未重复开发或重跑这些测试。仅Lab内部页级输入schema改变，Product／Archive、
+公开API／权限／Canonical不变；真实模型语义效果尚未验证。候选导航会消耗原预算，
+最终重开仍不可容纳时保持缺答合同。工程回退到38fb7b85，发布后的新头须核对自身CI。
+本轮diff检查通过；现有边界检查器在待提交的6,564条tracked路径及干净导出源码上通过。
+原工作树检查命中ignored的uv-cache空文件.git标记；该本地缓存保持，没有放宽检查器或删除缓存。
+继续完成实际评分、原Host连续任务、六次SDK重开，再按主要断点选择一项E2；必要E3和候选E4
+仍未完成。以下观察按其原时间解释，不能把早先RUNNING或0新增unknown当作当前状态。
+
 ## 2026-10-11：用户恢复完整计划，新三方预测已实际启动
 
 用户于10月10日22:51 UTC明确“继续”，恢复原基线对齐开发与实验计划。Root继续沿用原连续账本与

@@ -1991,6 +1991,15 @@ class BenchmarkRun:
                     "selection_complete": False, "final_body_delivered": False,
                     "evidence_sufficiency": "unchecked",
                 })
+                page_schema: dict[str, Any] = copy.deepcopy(schema) if material_pool else schema
+                if material_pool:
+                    del page_schema["properties"]["keep_resident"]
+                    page_schema["required"].remove("keep_resident")
+                    page_schema["properties"]["drop_item_indices"] = {
+                        **copy.deepcopy(page_schema["properties"]["item_indices"]),
+                        "description": "Explicitly remove entries from the final read working set "
+                                       "after nominations are merged; omission removes nothing.",
+                    }
 
                 def page_messages(page_refs: list[dict[str, Any]]) -> list[dict[str, str]]:
                     result = final_messages(page_refs)
@@ -1998,9 +2007,15 @@ class BenchmarkRun:
                         "\nRead this actual whole-entry page from the fixed retrieval snapshot. "
                         "Only bodies in this input are evidence; directory excerpts, references "
                         "and earlier responses contain no answer evidence. Select item_indices "
-                        "to reopen complete original entries for the final answer. keep_resident "
-                        "merges with final_reopen_item_indices. Candidate navigation covers "
-                        "only this page; pending_item_indices lists entries still to be read. "
+                        "from the full snapshot to nominate complete originals for final "
+                        "reopening. "
+                        "Nominations add to final_reopen_item_indices; an empty nomination retains "
+                        "them. final_reopen_candidates shows their original navigation so you can "
+                        "keep the question's necessary evidence across pages. Explicit "
+                        "drop_item_indices removes entries from that read working set after "
+                        "merging, "
+                        "without changing memory or skipping pending pages. Candidate navigation "
+                        "covers this page; pending_item_indices lists entries still to be read. "
                         "done cannot skip any still-pending page. "
                         "References grant no write or forget authority. Return only the supplied "
                         "selection schema, never an answer or factual summary."
@@ -2018,7 +2033,7 @@ class BenchmarkRun:
                     )
                     payload = json.loads(result[1]["content"])
                     payload.update(
-                        response_schema=schema,
+                        response_schema=page_schema,
                         remaining_reads=total_read_limit - state["steps"],
                         input_token_limit=input_limit,
                     )
@@ -2027,6 +2042,8 @@ class BenchmarkRun:
                             candidates=[directory[ref["item_index"]] for ref in page_refs],
                             final_reopen_item_indices=[ref["item_index"]
                                                        for ref in continuation["final_refs"]],
+                            final_reopen_candidates=[directory[ref["item_index"]]
+                                                     for ref in continuation["final_refs"]],
                             pending_item_indices=[ref["item_index"]
                                                   for ref in continuation["pending_refs"]],
                         )
@@ -2086,7 +2103,7 @@ class BenchmarkRun:
                         response_text = self.call(
                             active["stage"], page_messages(active["refs"]), structured=True,
                             response_format={"type": "json_schema", "json_schema": {
-                                "name": "milai_reader_select", "schema": schema,
+                                "name": "milai_reader_select", "schema": page_schema,
                             }},
                             **({"enable_thinking": reader_thinking} if material_pool else {}),
                         )
@@ -2095,7 +2112,7 @@ class BenchmarkRun:
                         raise
                     note_confirmed_input(active)
                     selected = parse_object(response_text, reject_duplicate_keys=True)
-                    Draft202012Validator(schema).validate(selected)
+                    Draft202012Validator(page_schema).validate(selected)
                     state["steps"] += 1
                     continuation["pages"].append(copy.deepcopy(active))
                     list_refs = continuation["delivered_page_refs"]
@@ -2105,7 +2122,13 @@ class BenchmarkRun:
                     ]
                     selection_state = {**empty_view(), "resident_refs": continuation["final_refs"],
                                        "read_goal": state["read_goal"]}
-                    chosen = select_refs(selection_state, selected)
+                    chosen = select_refs(selection_state, {
+                        **selected, "keep_resident": True,
+                    }) if material_pool else select_refs(selection_state, selected)
+                    if material_pool:
+                        dropped = set(selected.get("drop_item_indices", []))
+                        chosen["resident_refs"] = [ref for ref in chosen["resident_refs"]
+                                                   if ref["item_index"] not in dropped]
                     continuation["final_refs"] = chosen["resident_refs"]
                     state["read_goal"] = chosen["read_goal"]
                     continuation["selection_complete"] = selected["done"]

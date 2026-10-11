@@ -1,4 +1,26 @@
-# Current handoff: user resumed actual baseline work, 2026-10-11 Asia/Shanghai
+# Current handoff: migration observed interrupted source6ab, 2026-10-11 06:04 UTC
+
+Human continue/publication/resource-release authorization remains. Do not repeat completed adapters or tests.
+Root verified06:00:50UTC: original parent3324026/worker3324034 absent, original root stillRUNNING/stale,
+lastrequest00:11:32UTC; actual exitcause/returncode unknown. Original frozen6ab/config/rootrecord unchanged.
+Raw32sessions/73textanswers/PREDICTIONS_SAVED/resources_settledTrue; H7sessions/19QAcheckpoints=
+18textanswers+1knownread_call_limit, another QA pagerequest noresponse/nofinal; Hnotterminal/Mnotstarted/Judge0.
+Actual ledger delta216gen/3717429known/3828383charged/15903emb; newunknown generation1/embedding0,
+limitsunchanged. Lastpage110954 conservative reservation persists; pre-send reservation is not dispatch proof.
+Root publicSDKstatus06:03:11UTC confirmed native pending/consolidation/processing0, ledger unchanged.
+Orphan native bridge alreadyclosed; Root06:04:01UTC SIGTERM exact ownedAPI after parentabsence/statusproof,
+UID996active0/APIlistenerclosed/originalleaseFREE/ledgerunchanged. SharedQwen metricsrunning/waiting0.
+Recovery evidence stays ignored in original root; don't relabel missingterminal, clearunknown or retry/restartH.
+Safe completedarm scoring and firstdispatch of unrunarm remain authorized after actualresourceclosure.
+Existing material_pool pageworkset repair reviewed: nominationsaccumulate/explicitdrop/priororiginalnavigation,
+samebudget/wholeoriginalfinalreopen/nonpagingkeep unchanged; previous33tests/Ruff2/mypy1 passed,
+this migration reviewed existing artifacts only, no repeated development/testing or genuinesemantic validation.
+Commit/push reviewed repair and existing reports to draftPR121; no merge; newhead needs ownCI.
+Hostf536v4 original42/sixSDKreopens stillunrun; SDKread/history_index/source must verify revokedvisibility,
+not just emptyexport. E2singlemajorbreak/E3necessarycomparison/E4frozencandidate stillpending.
+See current docs/MILAI_UNIFIED_MEMORY_USAGE.md, issues and alignmentprotocol for exact source/time boundaries.
+
+# Previous handoff: user resumed actual baseline work, 2026-10-11 Asia/Shanghai
 
 Human explicitly said “继续” at 2026-10-10 22:51 UTC, revoking the previous real-run stop.
 Root resumes the original full baseline-alignment plan with the existing three developers and serial original ledger.
