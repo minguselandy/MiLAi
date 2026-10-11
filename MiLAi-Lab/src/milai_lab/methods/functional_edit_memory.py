@@ -349,12 +349,18 @@ class FunctionalEditMemory(FunctionalMemory):
             for ref in card["pending_refs"]:
                 if ref not in view["pending_refs"]:
                     view["pending_refs"].append(ref)
+        progress = self.read_progress(config)
+        # The durable read trace retains every identity and page. The model
+        # already has current references/continuations below; repeating the
+        # trace arrays can displace the complete evidence it just read.
+        progress.pop("delivered_identities", None)
+        progress.pop("snapshot_pages", None)
         material = {
             "ok": True, "schema": "functional_material_v1", "kind": "resident",
             "forget_epoch": self.forget_epoch,
             "items": items, **self._read_only_metadata(items),
             "reading_basis": read_evidence_basis(items),
-            "memory_view": view, "read_progress": self.read_progress(config),
+            "memory_view": view, "read_progress": progress,
             "pending_maintenance": pending,
         }
         page_ends: dict[str, int] = {}

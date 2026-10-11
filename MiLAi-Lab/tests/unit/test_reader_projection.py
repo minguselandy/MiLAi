@@ -184,6 +184,8 @@ def test_sqlite_writer_only_expands_delivered_page_and_resident_model_material(
 def test_sqlite_resident_capacity_counts_current_source_targets_and_full_wrapper(
     saved_memory: tuple[FunctionalEditMemory, dict[str, Any], str],
 ) -> None:
+    from milai_lab.runners.functional import _status
+
     memory, config, record_id = saved_memory
     before = memory.service.read(record_id)
     units = memory._record_units(before)
@@ -196,13 +198,22 @@ def test_sqlite_resident_capacity_counts_current_source_targets_and_full_wrapper
     source_page = memory.bind_request_targets(config, memory._page(source_snapshot, 0, bound))
     memory._remember_page(config, source_page)
     memory._note_view_page(config, source_page)
+    memory._note_read_progress(config, source_page, from_tool=False)
     record_snapshot = memory._snapshot(bound, units, "record_read")
     page = memory.bind_request_targets(config, memory._page(record_snapshot, 0, bound))
     assert page["delivered_units"] == len(units)
     memory._remember_page(config, page)
     memory._note_view_page(config, page)
+    memory._note_read_progress(config, page, from_tool=True)
+    full_progress = memory.read_progress(config)
+    assert full_progress["delivered_identities"] and full_progress["snapshot_pages"]
 
     material = memory.model_material(config)
+    assert material["read_progress"] == {
+        key: value for key, value in full_progress.items()
+        if key not in {"delivered_identities", "snapshot_pages"}
+    }
+    assert memory.read_progress(config) == full_progress
     expanded = expand_host_packet(material)
     cost = _tokens(canonical(material))
     assert cost <= 8192 < _tokens(canonical(expanded))
@@ -224,8 +235,13 @@ def test_sqlite_resident_capacity_counts_current_source_targets_and_full_wrapper
     )}))
     memory.material_limit = memory.policy["material_limit"] = cost - 1
     assert items_cost < memory.material_limit
-    with pytest.raises(FunctionalRejection, match="V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT"):
+    with pytest.raises(
+        FunctionalRejection, match="V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT",
+    ) as failure:
         memory.model_material(config)
+    assert _status(failure.value) == ("FAILED", "request_capacity")
+    assert _status(FunctionalRejection("OTHER_CONTRACT_REJECTION")) == (
+        "FAILED", "input_or_runtime")
     assert memory.service.read(record_id)["value"] == before["value"]
 
 

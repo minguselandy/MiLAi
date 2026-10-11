@@ -979,7 +979,9 @@ def _status(error: Exception) -> tuple[str, str]:
         return "BUDGET_EXHAUSTED", "budget"
     if isinstance(error, httpx.HTTPError):
         return "PROVIDER_ERROR", "provider"
-    if isinstance(error, CapacityExceeded):
+    if isinstance(error, CapacityExceeded) or (
+        isinstance(error, FunctionalRejection) and text == "V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT"
+    ):
         return "FAILED", "request_capacity"
     if "UNKNOWN" in text or isinstance(error, OSError):
         return "UNKNOWN", "storage_or_business_unknown"
