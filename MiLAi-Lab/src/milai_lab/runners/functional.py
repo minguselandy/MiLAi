@@ -1121,10 +1121,14 @@ def request_mode(
         if scope_only and (not saved or (isinstance(value, dict)
                                         and "application_requests" not in value)):
             # Saved full V8 decisions keep their original validation and meaning.
-            if not isinstance(value, dict) or set(value) != {
+            if not isinstance(value, dict) or set(value) - {"response_scope"} != {
                 "memory_requests", "allow_forgetting", "business_action_request",
                 "application_continuation_request",
-            }:
+            } or not isinstance(value.get("response_scope", "substantive"), str) or (
+                value.get("response_scope", "substantive") not in {
+                    "memory_status_only", "substantive",
+                }
+            ):
                 return False
             requests = value["memory_requests"]
             return (isinstance(requests, list)
@@ -1276,6 +1280,23 @@ def request_mode(
             }
             parameters["required"].append("application_continuation_request")
             if scope_only:
+                # Existing saved V9 decisions omit this field and retain their
+                # ordinary answer path without another classification call.
+                parameters["properties"]["response_scope"] = {
+                    "type": "string", "enum": ["memory_status_only", "substantive"],
+                    "description": "memory_status_only only when the whole requested reply "
+                    "is a narrow save-status confirmation; substantive for explanation, recall, "
+                    "comparison, saved content/history, business status or any other answer."
+                }
+                prompt += (
+                    "\nDeclare response_scope=memory_status_only only when the whole requested "
+                    "reply needs solely confirmation of memory saving. A save request that also "
+                    "asks for an explanation, recalled content, history, a comparison or another "
+                    "task needs substantive. Pure reading/querying can always receive a "
+                    "substantive answer. This declares reply scope, never that a save happened "
+                    "or that its meaning is correct; only actual receipts establish effects. "
+                    "When unclear or omitted, substantive applies."
+                )
                 prompt += ("\nAPPLICATION OPERATIONS:\n" + json.dumps(
                     application_operation_catalog(application_workflow),
                     ensure_ascii=False, separators=(",", ":")) + "\n")
@@ -1422,6 +1443,8 @@ def request_mode(
         ) if memory_requests is not None else decision["memory_continuation_request"]
     if memory_requests is not None:
         summary["memory_requests"] = memory_requests
+    if "response_scope" in decision:
+        summary["response_scope"] = decision["response_scope"]
     if application_workflow is not None:
         summary["application_requests"] = decision.get("application_requests", [])
         summary["application_continuation_request"] = decision["application_continuation_request"]
@@ -3871,7 +3894,32 @@ def message(
                 # can be reused. The model sees exactly the same bounded material.
                 response_input = context_hook({"messages": messages}, cfg,
                     for_finalization=True)["llm_input_messages"]
-                if settings.get("finalization") in {
+                receipt_status_only = (
+                    settings.get("finalization") == "receipt_or_agent_response_v1"
+                    and mode and mode.get("response_scope") == "memory_status_only"
+                    and mode["business_action_request"] == "none" and not mode["allow_forgetting"]
+                    and effects["semantic_memory"]["status"] in {"committed", "no_change"}
+                    and effects["semantic_memory"]["operations"]
+                    and not any((effects["business"]["operations"],
+                                 effects["business"]["observations"],
+                                 effects["visibility"]["operations"],
+                                 effects.get("application_requests"),
+                                 effects.get("request_part_failures"),
+                                 output.get("execution_stop")))
+                )
+                if receipt_status_only:
+                    # The undelivered model draft remains in execution_candidate_answer.
+                    # Render only confirmed listed effects, not content fidelity or
+                    # complete semantic coverage, without a corrective model call.
+                    final = AIMessage(content=memory_receipt_summary(effects))
+                    output["finalization"] = {
+                        "status": "response_rendered", "attempts": 0,
+                        "tools_available": False, "execution_candidate_delivered": False,
+                        "protocol": "receipt_business_response_v1", "model_generation": False,
+                    }
+                    trace({"event": "functional_receipt_finalization",
+                           **output["finalization"], "response_id": identity})
+                elif settings.get("finalization") in {
                     "receipt_business_response_v1",
                     "receipt_business_response_v2",
                     "receipt_business_response_v3",

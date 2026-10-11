@@ -5773,8 +5773,9 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
             outcome.startswith("unknown"))
 
 
-def test_no_issued_prior_choices_preserves_current_save_and_reports_its_real_receipt(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+@pytest.mark.parametrize("response_scope", [None, "memory_status_only", "substantive"])
+def test_current_save_reports_receipts_without_replacing_substantive_answers(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, response_scope: str | None,
 ) -> None:
     root = prepared(tmp_path, native=True, scope_requests=True,
                     request_failure_policy="independent_memory", direct_response=True,
@@ -5785,15 +5786,24 @@ def test_no_issued_prior_choices_preserves_current_save_and_reports_its_real_rec
                         "matter_organization", "semantic_operations", "bound_references",
                         "single_record_changes", "source_metadata")})
     stages = []
+    draft = ("I cannot save because no save tool is available."
+             if response_scope == "memory_status_only" else
+             "A green calendar marker distinguishes these entries from other categories."
+             if response_scope == "substantive" else "Prepared to save the preference.")
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         names = {tool["function"]["name"] for tool in wire.get("tools", [])}
         if names == {"classify_current_request"}:
             stages.append("scope")
+            schema = wire["tools"][0]["function"]["parameters"]
+            assert schema["properties"]["response_scope"]["enum"] == [
+                "memory_status_only", "substantive"]
             return native_call("classify_current_request", "scope",
                 memory_requests=["explicit"], allow_forgetting=False,
                 business_action_request="none",
-                application_continuation_request="resolve_prior_request")
+                application_continuation_request=("resolve_prior_request"
+                    if response_scope is None else "none"),
+                **({"response_scope": response_scope} if response_scope is not None else {}))
         assert names != {"resolve_continuation_operations"}, "No request ID was issued to select"
         if not names:
             stages.append("save")
@@ -5807,23 +5817,68 @@ def test_no_issued_prior_choices_preserves_current_save_and_reports_its_real_rec
             }], "records": {}})}
         stages.append("answer")
         assert not {"reserve_and_label", "complete_label", "cancel_reservation"}.intersection(names)
-        return {"role": "assistant", "content": "Prepared to save the preference."}
+        return {"role": "assistant", "content": draft}
 
     wires = scripted(monkeypatch, reply, native=True)
     args = dict(bank="no-prior-choices", owner="alice", session="s", message_id="save",
-                content="Remember that my calendar marker is green.")
+                content="Remember that my calendar marker is green." + (
+                    " Also explain why a distinct marker is useful."
+                    if response_scope == "substantive" else ""))
     result = functional.message(root, **args)
     assert result["status"] == "COMPLETED", result.get("error")
     assert len(result["records"]) == 1 and result["world"]["world"]["attempts"] == []
     assert stages == ["scope", "save", "answer"]
-    assert result["request_mode"]["reference_resolution"]["attempts"] == 0
-    assert result["request_mode"]["prior_request_ids"] == []
-    assert result["execution_candidate_answer"] == "Prepared to save the preference."
+    if response_scope is None:
+        assert result["request_mode"]["reference_resolution"]["attempts"] == 0
+        assert result["request_mode"]["prior_request_ids"] == []
+        assert "response_scope" not in result["request_mode"]
+    assert result["execution_candidate_answer"] == draft
+    if response_scope == "memory_status_only":
+        assert draft not in result["final_answer"]
+        assert result["finalization"]["protocol"] == "receipt_business_response_v1"
+        assert result["finalization"]["execution_candidate_delivered"] is False
+    else:
+        assert draft in result["final_answer"]
+        assert result["finalization"]["execution_candidate_delivered"] is True
     assert "本轮语义记忆: 已提交" in result["final_answer"]
     assert "已确认 1 项提交" in result["final_answer"]
     calls = len(wires)
     again = functional.message(root, **args, resume=True)
     assert again["records"] == result["records"] and len(wires) == calls
+    assert again["request_mode"] == result["request_mode"]
+    assert again["final_answer"] == result["final_answer"]
+    assert again["execution_candidate_answer"] == draft
+
+
+def test_narrow_memory_status_without_receipt_keeps_ordinary_query_answer(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, scope_requests=True, direct_response=True,
+                    phase_thinking=True, memory_method="milai_edit_m_v1",
+                    edit_interface_version="I2", maintenance_recipe="single_pass",
+                    memory_view_mode="staged", memory_profile="unified_v1",
+                    edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")})
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {tool["function"]["name"] for tool in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            return native_call("classify_current_request", "scope", memory_requests=[],
+                allow_forgetting=False, business_action_request="none",
+                application_continuation_request="none", response_scope="memory_status_only")
+        assert not {"save_memory", "update_memory", "forget_memory"}.intersection(names)
+        return {"role": "assistant", "content": "I have no save receipt for that request."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank="status-query", owner="alice", session="s",
+                                message_id="query", content="Was my earlier request saved?")
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert result["capture"]["ok"] and result["records"] == []
+    assert result["operation_status"]["semantic_memory"]["operations"] == []
+    assert result["final_answer"] == "I have no save receipt for that request."
+    assert result["finalization"]["protocol"] == "agent_response_v1"
+    assert len(wires) == 2
 
 
 def test_shared_maintenance_keeps_early_commit_when_later_source_read_fails(
