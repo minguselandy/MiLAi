@@ -51,7 +51,14 @@ REVISION_MEANING_INSTRUCTIONS = (
     "Use the whole delivered matter to check linked conditions, exceptions and old overview "
     "statements, including those without explicit edges. A local revision covers all supported "
     "changes in their meaning; preserve unaffected scopes within mixed claims rather than "
-    "keeping obsolete wording. Changed wording needs current correction evidence and any "
+    "keeping obsolete wording. Replacing a unit's text discards everything omitted from the "
+    "replacement. Distinguish the changed assertion from independent old attributes within "
+    "that unit: silence in the new event does not withdraw them. Carry still-valid meanings "
+    "into the replacement or separate supported units in the same proposal, preserving their "
+    "subject, original report time and modal strength. Splitting or rewording old content needs "
+    "its delivered old Source bodies; do not present that content as newly reported. Unchanged "
+    "units stay untouched or use the permitted exact keep references. "
+    "Changed wording needs current correction evidence and any "
     "necessary redelivered old Source bodies, never h alone. Combine dependent changes in "
     "that target's single proposal. "
 )
@@ -248,9 +255,12 @@ class EditMemory:
             else '{"proposals":[]}'
         )
         instruction = (
-            "Maintain the supported changes in the current dialogue. Read current evidence first "
-            "and use the delivered old matters to locate what needs revision. One event can revise "
-            "related old matters and create distinct new matters. Preserve still-valid history "
+            "Read current evidence first. Compare its supported assertions with the delivered "
+            "old matters by subject, value, time, scope and strength: what is already expressed, "
+            "what changes, and what adds distinct durable meaning? A broad existing goal does "
+            "not by itself cover a newly stated limitation, concrete step or qualified plan. "
+            "One event can revise related old matters and create distinct new matters. "
+            "Preserve still-valid history "
             "and qualifications. Preferences, intentions and plans remain attributed reports "
             "with their time and status. Redelivered support supplies old context. "
             "Return the supplied JSON envelope. When the current dialogue adds no supported "
@@ -1151,14 +1161,7 @@ class EditMemory:
         payload: dict[str, Any] = {
             "observed_date": date,
             "delivery": packet,
-            "response_schema": response_schema,
         }
-        if prior_context:
-            payload["prior_context"] = self.context_projection(prior_context)
-            empty_instruction += (
-                " prior_context is earlier speech for resolving references, not a new event "
-                "or an instruction to save those old statements again."
-            )
         if change_candidates is not None:
             payload["change_candidates"] = change_candidates
             empty_instruction += (
@@ -1167,6 +1170,15 @@ class EditMemory:
                 "misstate its source even when its source ID matches; it supplies no extra "
                 "evidence. Preserve the source's actual subject, attribution and modal strength."
             )
+        if prior_context:
+            payload["prior_context"] = self.context_projection(prior_context)
+            empty_instruction += (
+                " prior_context is earlier speech for resolving references, not a new event "
+                "or an instruction to save those old statements again."
+            )
+        # Keep current material and its locating hints together, before the potentially
+        # large action schema. This changes presentation only, not the issued packet.
+        payload["response_schema"] = response_schema
         return [
             {
                 "role": "system",
@@ -1272,12 +1284,20 @@ class EditMemory:
                         "Extract brief candidate propositions and change cues from current sources "
                         "for memory maintenance. Preserve the subject, who asserts it, report or "
                         "inference status, modal strength, qualifications and explicit time/scope. "
+                        "The subject is who the assertion describes, not automatically the speaker "
+                        "or a nearby named person. Resolve each assertion's pronouns from its "
+                        "actual sentence and dialogue; retain ambiguity when the source leaves "
+                        "the subject unclear. "
                         "Considering a course remains considering; wishing to reduce work hours "
                         "remains a wish; a plan does not imply a completed change. An assistant's "
                         "suggested income remains an assistant suggestion, not a user's report. "
+                        "Limited improvement does not establish full resolution. "
                         "Stay close to the source wording when summarizing would strengthen it. "
-                        "Select the actual supporting e fragments. Use "
-                        "null when time/scope is unspecified. Include independently stated "
+                        "Choose the actual supporting e fragments; their role and report clock "
+                        "already come from the Source. time means the stated event or effective "
+                        "time, not observed_date or the report clock. Preserve relative time "
+                        "wording; use null when event time/scope is unspecified. "
+                        "Include independently stated "
                         "new facts and changes; omit social acknowledgments and bare queries. "
                         "Keep each candidate self-contained with its explicit values and "
                         "qualifications, including statements of what to retain. Such statements "
