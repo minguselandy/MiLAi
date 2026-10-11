@@ -1,38 +1,56 @@
-# Current handoff: newM predictions CLOSED, first independent score RUNNING, 2026-10-11T18:58:56 UTC
+# Current handoff: lightweight experiments closed, 2026-10-11 20:40:51 UTC
 
-User lightweight plan remains active; no goal completion. OldHost42/sixSDK/five277/LME/holdouts deferred, not gates.
-Actual frozen source d2774634ce2c67470ae53d486d9612adf3ac7bf8 at artifacts/function-first-small/source-d2774634/MiLAi-Lab.
-Actual Q root artifacts/function-first-small/q32-d2774634-v3. Predict started17:33:25, CLOSED18:58:16.210795UTC,
-32sessions/73QA=72text+1knownmissing; user1/session7/qa6 confirmed stop/no_textual_answer; no retry/reasoning salvage.
-206gen/3514415known=charged/246904emb/newunknown0/0/limitsunchanged/rc0/resources_settledTrue.
-Oldparent3279447/worker3279449 absent; Root18:58:38UTC leaseFREE and liveledger==end verified.
-Root FIRST selected saved-arm score started18:58:51.119479UTC, parent3612261/worker3612262 actualalive18:58:56UTC.
-Run script ROOT/root_score.py --backend MiLAi-memory-only, cwd integrationLAB; originalledger/frozend277/config unchanged.
-Do NOT restart score or predictions on migration/timeout/oldtoolhandles. Inspect actualPIDs and root-execution-score-MiLAi-memory-only.json.
-Score stdout/stderr separate score-MiLAi-memory-only-{stdout,stderr}.log; parent root-score-supervisor-private.log.
-Score includes formation/accuracy/update/QA; >73calls is expected. At closure inspect returncode/resources/endledger/limits/phaseunknown/PIDs/lease.
-OnlyRoot actualmodelHTTPDB; historicalunknown8/1 and H110954reservation persist; never reset/refund/demand globalzero.
-A predictioncost/delivery summary COMPLETE ROOT/root-prediction-cost-delivery-summary.json; excludes Judge via predictclosed_at.
-Input2846679/output667736;562embeddingreceipts246904;17pagedQA/38confirmedpages/peak32231/finalempty1(U4S7Q4),no semantic label.
-Knownmissing U1S7Q6 direct20items/27169input/confirmedstop; bodyflagfalse does not mean no body delivered.
-A adding reusedRaw input/output from savedreceipts only; no modelHTTPDB.
-Finalpending: close score, officialall73/peruser/invalid/missing/update/formation/cost, exact73Raw/M pairtable, attach Judge relation to fixed6source audit,
-existingdocs/issues/PR/push/ownCI. No repeat development/tests/audits or forced semantics pass. Normal current-config save/query example now in report.
+The active scope is MILAI_FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011.
+A/B/C/D development, the final candidate Host14, two actual SDK reopens, new M32/73 prediction,
+its first independent score, fixed-six source/Judge review and full73 paired analysis are complete.
+The implementation is connected; functionality still has semantic gaps; no net QA benefit is supported.
+Do not turn ordinary failures into a new prompt-tuning/rerun loop. Old Host42/sixSDK/five277/LME/holdouts
+remain deferred with their original incomplete status. Do not resume them from this handoff.
 
-Host14d277 CLOSED17:27:41UTC14attempted12COMPLETED/2FAILED(wrapper1/truncated1),13publictexts incl programfailure.
-91gen754819known=charged/1850emb/newunknown0/0/limitsunchanged/leaseFREE/oldPIDs3192016+3192030gone.
-Actual d277 Host businessmutations0; don't splice fbc reserve/labelpositive. Formation/source/scope/feedbacksemantic failures retained.
-SDK2exports3262097/3262327rc0; helper2receipt-bound checksPASS(17+8observations),notwhole-taskPASS.
-Firststoryrecord+11Sources revoked; current/readrev1,2,3,5/history/Source denied; extraactualrev4read denied too.
-Secondresultrecord+5Sources revoked but requestedoriginalrequestrecordrev2/history/UserSource still accessible: fullscopeFAIL.
-C final14HostSource audit COMPLETE at ROOT/root-host-source-review.json; reuse notreaudit. No further Host reruns/source edits planned.
-B formal6samequestion sourcehalves COMPLETE/FROZEN-before-newJudge in artifacts/function-first-small/q-source-review-{raw-half,milai-source-half}.json.
-Raw5faithful/1unsupportednumber; M4faithful/1nonverbatimquote/1unmarked-contextualsalaryinference(underdetermined,notprovenfalse).
-All6direct,notpaginationtest. History/exposure/implementationauthor disclosed; Judge relation separate/no correctedaccuracy.
-Actuald277Fast38158540274SUCCESS/Full38158540267SKIPPED. Priorreportf4cFast38160422606SUCCESS/Full38160422648SKIPPED.
-Laterdocheads need ownCI. Publish/pushauthorized; noPRmerge. Preserve originaluserworktree/untrackedplans/frozenartifacts.
+Runtime source: d2774634ce2c67470ae53d486d9612adf3ac7bf8, artifacts/function-first-small/source-d2774634/MiLAi-Lab.
+Q root: artifacts/function-first-small/q32-d2774634-v3. Prediction closed18:58:16UTC, score closed20:39:55.607067UTC.
+Predict32sessions/73QA:72text+1known no_textual_answer (U1/S7/Q6, confirmed stop; original null retained).
+Predict206gen input2846679/output667736/total3514415 known=charged;562embedding receipts/246904tokens.
+Score689Judge requests/responses:input1509149/output905049/total2414198 known=charged;embedding0.
+Both phases rc0/resources_settled true/newunknown0/0/limits unchanged. Predict PIDs3279447/3279449 gone;
+score PIDs3612261/3612262 gone. Root20:40:51UTC verified original leaseFREE and liveledger==score end.
+No models remain to dispatch for this scope. Shared model service was not stopped. Original ledger and
+historical unknown8/1 plus H110954 reservation persist; never reset/refund or demand globalzero.
 
-# Current handoff: fbc Host14 closed; full-wrapper paging work continues, 2026-10-11 16:59 UTC
+Official M QA43/73 (58.9%),16H/5O/8invalid/1missing; valid43/64 secondary only. Per-user11/20,10/12,11/22,11/19.
+Reused frozen6ab Raw55/73 (75.3%),17H/1invalid/0missing. Same73 pairs:bothC40/rawOnly15/mOnly3/bothNonC15.
+RawOnly15 includes6M invalid; bothNonC15 includesRaw invalid1/M invalid2/M missing1. Do not attribute all gap to algorithm errors.
+M update33/72 C,1H/33O/5invalid; valid33/67. Author formation recall(all)57.4%,weighted64.5%,439/valid397;
+accuracy weighted(all)74.2%,91/valid72; extraction F1 72.9% is the existing author aggregate, not source fidelity.
+Artifacts: root-paired-qa-summary.json, root-prediction-cost-delivery-summary.json (includes independent_score and reused_raw_baseline),
+common-qa-results.json, halumem-official-results.json and terminal-score.json in the existing run/backend roots.
+Root paired exact user/session/question/QA ordinal and scored system_response against saved hypothesis; all73 match.
+A completed cost metadata reconciliation; C independently checked all73 labels/counts and plan closeout; no repeated source audit is needed.
+
+Prediction mechanical delivery:17pagedQA/38confirmed pages/peak32231/finalempty1(U4/S7/Q4, official Omission; no new source audit).
+Knownmissing U1/S7/Q6 direct20items/27169input/confirmedstop; bodyflagfalse does not mean no body was sent.
+Fixed six source halves and Judge relation complete in artifacts/function-first-small/q-source-review-*.json.
+Raw source5faithful/1unsupportednumber; M4faithful/1nonverbatimquote/1unmarked-contextual salary inference (scope undetermined).
+Official sample Raw3C/3H; M2C/1H/3invalid. Three actual stop final{} confirmed; no reasoning salvage/rescore.
+One officialC retains quotation defect; officialH does not erase actual numerical Source support or resolve attribution scope.
+Original source judgments/history remain; developer/prior reference exposure disclosed, no blind or corrected population accuracy claim.
+
+Host14d277 closed17:27:41UTC:14attempted,12engineering COMPLETED/2FAILED (wrapper1/truncated1),12model final drafts/13public texts.
+91gen754819tokens/1850embedding,unknown delta0/0; owned PIDs3192016/3192030 gone and original lease released.
+Actual d277 business mutations0; do not splice fbc reserve/label positives. Source/formation/old meaning/feedback gaps remain.
+Two SDK export processes3262097/3262327 exited0. First record+11Sources revoked; current/knownrev1-5/history/Source denied,
+but later never-saved explanation wrong. Second resultrecord+5Sources revoked; requested original requestrecord/history/UserSource
+still accessible, so fullscope FAIL. All source review and actual SDK receipts in host14-d2774634-v3; no further DB reopen needed.
+
+Final deliverables remain existing docs/MILAI_UNIFIED_MEMORY_USAGE.md, docs/MILAI_BUILD_FIRST_ISSUES.md,
+docs/MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md and configs/milai-function-first-small-v1.json.
+Normal save/query and Host commands use the project Python; examples were not dispatched again.
+Publishing/push authorized; no PR merge. PR121 remains draft/open on PR120 base; its metadata holds final publication/own-head CI receipts.
+Runtime d277 Fast38158540274 SUCCESS/Full38158540267 SKIPPED; prior report1b5ea6a0 Fast38166243189 SUCCESS/Full38166243192 SKIPPED.
+Each new document head must be checked on its own; do not substitute old CI or runtime identity. No private source/answers/headers/DB in Git.
+Preserve original user worktree/untracked plans and frozen artifacts. Only Root may coordinate any subsequently authorized real model/HTTP/DB run.
+
+# Historical handoff: fbc Host14 closed; full-wrapper paging work continues, 2026-10-11 16:59 UTC
 
 Goal remains FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011, fullscope active; no goal completion.
 Actual frozen/published fbc458e0e7a0e0c5e3e36ef56c8e8a7a16e7cd62; ownFast38156429157SUCCESS/Full38156429120SKIPPED.
