@@ -6128,9 +6128,13 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
                 assert part["observed_at"]
                 assert not {"namespace", "bank", "owner", "fragment_handle"}.intersection(part)
             if scope_requests:
-                assert set(wire["tools"][0]["function"]["parameters"]["properties"]) == {
+                schema = wire["tools"][0]["function"]["parameters"]
+                assert set(schema["properties"]) == {
                     "memory_requests", "allow_forgetting", "business_action_request",
-                    "application_continuation_request"}
+                    "application_continuation_request", "response_scope"}
+                assert set(schema["required"]) == set(schema["properties"]) - {"response_scope"}
+                assert schema["properties"]["response_scope"]["enum"] == [
+                    "memory_status_only", "substantive"]
             return native_call("classify_current_request", "mode-" + str(ordinal),
                 memory_requests=(["explicit"] if first or continuation == "empty_save" else [])
                 + (["continue_prior"] if not first
@@ -6279,6 +6283,12 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     replay = functional.message(root, **followup_args, resume=True)
     assert replay["status"] == "COMPLETED" and len(wires) == calls
     assert replay["records"] == second["records"]
+    if scope_requests:
+        # These original V9 replies intentionally omit the optional field.
+        # Their saved decisions keep the substantive path without reclassification.
+        assert "response_scope" not in second["request_mode"]
+        assert second["request_mode"].get("response_scope", "substantive") == "substantive"
+        assert replay["request_mode"] == second["request_mode"]
 
 
 @pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
