@@ -2,6 +2,17 @@
 
 此表同时记录已发现的工程缺口和待验证范围；未执行不记作通过。原实验失败及原始标签继续保留。
 
+**M实际预测07:36:53 UTC闭合，独立score07:38:45 UTC启动。** 本轮6ab32会话／73文本答案／0缺答，
+资源闭合、父worker退出，189生成／3,270,303 known＝charged／261,612 embedding，新unknown0／0、limits不变。
+M官方质量反馈待闭合；Raw55／73及源审保持，H中断unknown及预占不清，仍无完整三方排名。
+10份M实际分页视图／21确认页／峰值32,251，pending0且final_body=true，但3题最终工作集为空，
+非空hypothesis不证明问题完成，源池与选择的最早断点尚在离线核查。
+本轮维护固定26事件／85提交／2空提案，12事件定向来源审查确认：已交付7条新计划候选后空提案，
+主体错配、强度提升、旧总述未同步、replace丢失独立旧属性；也有两次append保持旧单位／非目标的正例。
+Source／历史保留不抹掉当前语义损伤，不据提交数或COMPLETED判通过，不赋官方标签或推QA影响。
+审查0新模型／HTTP／DB／代码，保存于既有ignored目录。完整证据边界见[统一报告](MILAI_UNIFIED_MEMORY_USAGE.md)。
+M评分及资源闭合后原Host42／六SDK重开，单项E2／必要E3／冻结E4仍未完成，下面观察按其原时点解释。
+
 **最新固定进展：2026-10-11 06:22:51 UTC。** Raw已06:21:16 UTC完成官方评分与资源闭合：
 Correct55／73＝75.3%、Hallucination17、invalid1、missing0；invalid不移出主分母，形成／更新N/A。
 评分73 Judge生成／179,908 known＝charged／0 embedding，新unknown0／0、limits不变；

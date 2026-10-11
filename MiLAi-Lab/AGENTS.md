@@ -1,4 +1,21 @@
-# Current handoff: Raw scored, first untouched M running, 2026-10-11 06:22:51 UTC
+# Current handoff: M predictions closed, selected score running, 2026-10-11 07:40 UTC
+
+ActualM frozen6ab CLOSED07:36:53UTC32sessions/73textanswers/0knownmissing/PREDICTIONS_SAVED/resources_settledTrue,
+parent776063/worker776066gone;189gen/3270303known=charged/261612emb/newunknown0/0/limitsunchanged/leaseFREE.
+Root explicitMscore RUNNING07:38:45UTC parent1071578/worker1071580, originalscore_e1_6ab512cb_resumed.py,
+savedpredictionsonly/no nativeAPI/no newpredictbanks/no retry. Don't restart this live scorer or interruptedH.
+M73views include10realpagedQA/21confirmedpages/peak32251/pending0/finalbodyTrue; finalworksets4,3,9,1,0,0,4,0,4,8.
+Threeemptyfinalsets stilltextanswers; sourcepool/workset/taskcompletion review pending, not semantic passes.
+Source maintenance audit fixed26events/85commits/2emptyproposals; targeted12events(noGold/QAvalues/DB/model):
+firstreviewedbreakUser1session5 received7newplan nominees+Source butemptyEditor/no receipts/23oldvaluesunchanged;
+User1s6twoappendoldunits/non-targets preserved;User1s7strengthening/stale oldtotal;User3s0subjectmismatch;
+User3s3replace losesindependentoldattribute. Source/historyretention separate from currentsemanticdamage.
+No officiallabels/QAimpact assigned; Root scores then originalHost42/sixSDKreopens, stillNOT_DISPATCHED.
+Raw official55/73 sourceaudit unchanged, interruptedHunknown/reservation preserved, no fullthree-arm ranking.
+Current reporthead1b ownFast38119054030SUCCESS/Full38119054029SKIPPED; nexthead needs ownCI.
+E2fixed171poolb498prepared/no dispatch, no retain/Writer; necessary E3 and frozen E4 stillpending.
+
+# Previous handoff: Raw scored, first untouched M running, 2026-10-11 06:22:51 UTC
 
 Raw frozen6ab explicit score CLOSED06:21:16UTC: Correct55/73/Hallucination17/invalid1/missing0,
 73Judgegen/179908known=charged/0emb/newunknown0/0/limitsunchanged/resources_settledTrue/parentsgone.

@@ -1,5 +1,14 @@
 # 本地基线对齐协议 v1
 
+**当前串行阶段：M6ab预测07:36:53 UTC闭合，独立score07:38:45 UTC首次启动。** 32会话／73文本
+答案／0缺答、resources_settled=true，189生成／3,270,303 known＝charged／261,612 embedding，
+新增unknown0／0、原limits不变；仅评分保存产物，原H未知请求／预占保留。Raw55／73官方及源审不变。
+M真实10分页／21确认页／峰值32,251≤32,256，pending0、final_body=true，3题最终工作集空；
+文本输出与真实问题完成分列。26维护事件中的12项定向Source审查已确认漏写、主体／模态／旧总述／
+非目标保持问题及两次append正例，不直接转成官方标签、QA影响或全量语义通过。
+M评分闭合后首次派发原Host42／六SDK重开；固定池E2仅准备，必要E3及冻结E4仍待执行。
+实际M不含b498新页级合同，不热改实验；详见[统一报告](MILAI_UNIFIED_MEMORY_USAGE.md)。
+
 **后续串行调度：2026-10-11 06:22:51 UTC固定观察。** 资源安全后，原冻结6ab的完整Raw已于
 06:21:16 UTC独立评分闭合：Correct55／73、Hallucination17、invalid1、missing0，全部机会保留。
 73 Judge生成／179,908 known＝charged／0 embedding，新unknown0／0、limits不变；形成／更新N/A，
