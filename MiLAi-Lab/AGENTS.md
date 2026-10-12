@@ -16,7 +16,9 @@ Natural employment and food v1 CLOSED, both ordinaryreplace, old results kept; a
 d6f628f9 fixes that event early-return wiring, 16disabled prompts byte-identical; real guided food followup CLOSED
 at18:27:49UTC, reused actualseed/control, patch_text selected, but sharedpredicate semantics of otherfoods weakened.
 bb49ef92 generic sharedpredicate/negation/scope guide repair merged/model-reviewed;8patch checks PASS.
-Frozen source-bb49ef92 and natural-local-patch-scope-v3 prepared from same originalseed; not yet dispatched.
+Frozen source-bb49ef92 and natural-local-patch-scope-v3 prepared from same originalseed.
+Sixth supervisor513866/tool session85694 WAITING for fifth405940 to exit and J1 score rc0, then one patch-only
+run_scope task automatically; inspect natural-local-patch-scope-v3-process.json before dispatching anything else.
 run_patch_scope_followup.py performs patch-only; after actualresult choose v3 if patch selected, otherwise v2
 for run_natural_version_reader.py two current/history Readercalls. This driver is prepared/reviewed; zeroHTTP
 input construction current9581/history8399tokens passed with real turns/clocks/nofuture historicalsupport.
@@ -52,7 +54,7 @@ S0 published-checkpoint pilot2 config prepared: U2S0Q0direct +U1S4Q2paged, same 
 Do not add another llm_probe24 matrix; realCPU boundedpilot first, then decide fixed24 by actual evidence/cost.
 Root to inspect new download handle before action; no endpoint/inference yet. Do not restart from stale timeout alone.
 When Root starts CPU run, add actual containerIP to process NO_PROXY AND no_proxy while preserving127.0.0.1.
-No real rankerHTTP during fifth serialqueue. Need bounded realMemSifter pilot, then selectedS0 R0/R1 decision;
+No real rankerHTTP during fifth/sixth serialqueue or the subsequent two Reader calls. Need bounded realMemSifter pilot, then selectedS0 R0/R1 decision;
 CPU speed still unmeasured. Do not treat4B and35B tokens as equalprice. Only promising candidate goes73/longhistory.
 
 No remote push/merge for this task; local commits/frozen experiments reviewable. No new goal pause/block condition.
