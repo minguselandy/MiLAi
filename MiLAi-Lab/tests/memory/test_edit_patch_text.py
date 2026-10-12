@@ -12,12 +12,14 @@ import pytest
 from jsonschema import Draft202012Validator
 from langgraph.store.sqlite import SqliteStore
 
-from milai_lab.memory.edit_units import read_revision_evidence
+from milai_lab.memory.edit_units import read_retained_support, read_revision_evidence
 from milai_lab.memory.functional_state import FunctionalRejection
+from milai_lab.memory.reader_projection import expand_record
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures, compile_semantic_operations
 from milai_lab.methods.edit_maintenance import maintain_event
 from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.runners.edit_benchmarks import BenchmarkRun
 
 FEATURES = EditFeatures(True, True, True, True, True, temporal_scope=True, patch_text=True)
 ORIGINAL = "Project A needs three reminders weekly; Project B needs one; confirm external notices."
@@ -116,7 +118,37 @@ def test_patch_maintenance_preserves_other_requirements_support_and_history(tmp_
         assert current["edit_state"]["relations"] == before["edit_state"]["relations"]
         # Retained support is not falsely promoted to this revision's new witness.
         assert {row["source_ref"] for row in read_revision_evidence(service, current)} == {new_ref}
+        retained = read_retained_support(service, current)
+        assert {row["source_ref"] for row in retained} == {old_ref}
+        assert retained[0]["support_role"] == "retained_support"
+        assert retained[0]["content"] == ORIGINAL + " Only on weekdays."
+        assert read_retained_support(service, before) == []
         assert service.read(record_id, 1)["value"] == before
+        execution = BenchmarkRun.__new__(BenchmarkRun)
+        execution.settings = {
+            "edit_features": FEATURES.settings(), "memory_view_mode": "direct",
+            "maintenance_recipe": "single_pass", "reader_projection": "semantic_units_v1",
+            "evidence_variant": "S2", "context_tokens": 100000, "model": {"max_tokens": 1000},
+        }
+        execution.input_tokens = lambda messages, **kwargs: len(json.dumps(messages))
+        semantic = execution._record_materials(service, [service.read(record_id)], "2026-10-13")
+        expanded = expand_record(semantic[0])
+        assert expanded["retained_support"] == retained
+        assert {row["source_ref"] for row in expanded["revision_evidence"]} == {new_ref}
+        native = {"source_materials": []}
+        materials = execution._source_first_materials(
+            service, "What are the current reminder requirements?", "2026-10-13",
+            native, semantic, snapshot_id="synthetic/current",
+        )
+        originals = [row for row in materials if row["kind"] == "original_source"]
+        assert {span["source_ref"] for row in originals for span in row["source_ranges"]} == {
+            old_ref, new_ref,
+        }
+        assert native["material_assembly"]["linked_original_candidates"] == 2
+        assert native["material_assembly"]["semantic_materials"] == 1
+        assert {row["source_ref"] for row in expand_record(materials[-1])["retained_support"]} == {
+            old_ref,
+        }
         assert maintain_event(
             method, delivery, session="s", request_id="update", date="2026-10-13",
             recipe="single_pass", model_call=writer, selected_record_ids=[record_id],
@@ -125,6 +157,7 @@ def test_patch_maintenance_preserves_other_requirements_support_and_history(tmp_
     with opened(tmp_path, arm) as (service, _):
         assert service.read(record_id)["value"] == current
         assert service.read(record_id, 1)["value"] == before
+        assert read_retained_support(service, service.read(record_id)["value"]) == retained
 
 
 @pytest.mark.parametrize("text,old_text", [
