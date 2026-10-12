@@ -1,35 +1,50 @@
 # Current task: evidence development plan, 2026-10-13
 
-The user activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261012.md.
-This supersedes older scheduling and approval gates below. Develop first; no SHA checks or new review platform.
-Root current worktree: /cra/memory/mx_memory/MiLAi-worktrees/evidence-development-20261013.
-Base f964292a includes PR121. Original integration dirty documents and user main plans are preserved.
-Root alone owns real HTTP on original continuous ledger; existing shared services unchanged.
-The original b558 prediction is now verified terminal rc0 (32 sessions,71 answers,2known missing),
-parent1446814/worker1446815 gone; all older RUNNING handoffs below are historical.
-Use docs/MILAI_EVIDENCE_DEVELOPMENT_20261013.md for implemented A/B/C and pending real experiments.
-A6 frozen f9f01661 S0/S1/S2 plus llm_probe predict+firstQA score now CLOSED, each6/6answers;
-S0 5C/6, S1 4C/6, S2 3C/6; latest ranked score is in its terminal-score.json. No rescore.
-Synthetic patch mechanism closed2calls, actualpatch selected, bothbefore/after/history preserved;
-no quality gain claim. No new unknown usage at serial release (original8generation/1embedding).
-Previous goal turn was progress (A/B/C code and actual pilots), not a wait-only restatement.
-Natural employment comparison now CLOSED: seed2gen13761, replace3gen21073+emb209,
-patch-enabled3gen16368+emb215; BOTH chose ordinaryreplace, three nontargetvalues/history preserved.
-Original S2/J1 pilot CLOSED: S2 1C/2+invalid1; J1-v1 missing1+invalid1. Do not rescore/restart.
-J1v2 fixes actual oversized final nominations (separate cumulative/admitted sets, same budget, no empty-loop).
-Frozen79749893 J1v2 two predict/score CLOSED2answers/2C, finalsemantics2 and1, zero newmaintenance/retrieval.
-New explicit optional ranker provider wired lazily, no deployed MemSifter found; real trials remain llm_probe.
-CURRENT LIVE tool session27870, supervisor98764, run_fourth.py. Last child112485 natural-local-update-v1
-started17:07:06UTC (inspect current actual PID; may advance). Then serial S0→S1→S2 screen24 predict/score.
-Actual artifacts/evidence-development/*-process.json + terminal files + /proc are authoritative.
-Do not duplicate or hotedit source-f9f01661/source-c9f2b68e/source-79749893. Root alone realHTTP.
-24 selection fixed before new results; config source79749893, each4users×6, original13direct/11paged.
-Ranked24 and J1v2 screen24 still await the closed screen/pilot decision, not automatically dispatched.
-S0/S1/S2 replay uses saved per-question original recalls and bank copies to reopen exact old sources/versions;
-never query final bank for early questions. No maintenance, shared recall or ActivationIndex repeated.
-Current deployed ranker trial is llm_probe only, with budgeted batch/interleave behavior; checkpoint not deployed.
-patch_text is opt-in and retains old sources separately from current witnesses. Full goal ACTIVE/incomplete.
-No remote push/merge performed for this new task. Local commits and frozen runs remain reviewable.
+User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261012.md.
+This supersedes older scheduling/approval gates below. Develop first; no SHA checks or new review platform.
+Root tree /cra/memory/mx_memory/MiLAi-worktrees/evidence-development-20261013, base f964292a includes PR121.
+Original main/integration dirty plans preserved. Product/Archive untouched. Full goal ACTIVE/incomplete.
+Root alone owns real model HTTP with original continuous budget.json and serial owner lock; unknown floor8gen/1emb retained.
+Original b558 CLOSED32sessions/73QA=71answers+2missing; replay uses exact saved prefix recalls, no final-bank search,
+no new maintenance/recall/ActivationIndex feedback. Original1201witness fragments verified prefix-visible, noHTTP.
+
+A/B/C/D code integrated; latest code319b6878. Details/results docs/MILAI_EVIDENCE_DEVELOPMENT_20261013.md.
+Six S0/S1/S2/llm_probe CLOSED with first scores5/6,4/6,3/6,6/6; first5 ranking skipped, no MemSifter claim.
+Original73 and fixed24 linked additions0: S0/S1 pool-equivalent, stochastic score deltas not linked gain.
+Synthetic patch actually selected, bothmechanism conditions preserve target/nontarget/history, no benefit claim.
+Natural employment and food v1 CLOSED, both ordinaryreplace, old results kept; actual event prompt missed patchguide.
+d6f628f9 fixes that event early-return wiring, 16disabled prompts byte-identical; real guided food followup CLOSED
+at18:27:49UTC, reused actualseed/control, patch_text selected, but sharedpredicate semantics of otherfoods weakened.
+Agent patch_text reviewing generic sharedpredicate/negation/scope guide repair; no parser or per-example answerprompt.
+
+Original S2/J1pilot CLOSED1C/2+invalid1 versus missing1+invalid1. J1v2 budget repair CLOSED2C/2.
+Budget repair preserves cumulative nominations separately from admitted set, whole original sources first,
+complete-wrapper budget, no empty-page repairloops. Allpages delivered; selection completion != evidence sufficient.
+319b6878 makes explicit budgeted_nominations_v2 available to all snapshot material conditions for fair S0control;
+record-reference mode unaffected. Independent lazy ranker model/tokenizer/window uses same ledger, no false checkpointlabel.
+
+Original frozen79749893 fixed24 S0/S1/S2 predict+firstscore all CLOSED18C/24,18C/24,16C/24.
+Counts/paired/cost summaries use immutable per-question prediction/evaluation checkpoints, not mutable score index.
+S0missing1, S1missing0, S2missing1; invalid1/1/4 preserved. Fixed4usersx6,13direct/11paged, old failures retained.
+S2 no demonstrated quality/cost value; do not expand originalS2 or rescore labels.
+CURRENT LIVE run_fifth.py supervisor405940, tool session96165, frozen319b6878.
+Latest verifiedchild411595 S0-budgeted-screen24-v2 predict, started18:27:49UTC. Inspect actualPID/terminal:
+artifacts/evidence-development/*-process.json. Serial queue follows S0score then J1-budgeted24predict/score.
+Natural-local-patch-guided-v2 was first fifth task and CLOSED rc0. Do not duplicate or alter frozen source/configs.
+Frozen source-f9f01661/source-c9f2b68e/source-79749893/source-319b6878 immutable. TMPDIR E/runtime on/cra.
+No root/tmp space; use/cra or/data, do not delete unrelated data. Existing shared GPU services unchanged.
+
+MemSifter actualcheckpoint NOT yet loaded/deployed. All4GPUsfull; CPU route reviewed in existing bge-reranker
+container (torch2.7.0/transformers4.52.4),8threads,FP32,forcedCPUFlashSDPA,32kcontext/4096output.
+Worker /data/models/milai-memsifter-4b-20261013/serve_memsifter_cpu.py; exact official4B weights download to/checkpoint.
+Initial hostdownload PID296644/session82739 CLOSED rc1: network IncompleteRead at~3.3GiB, no completed weightshards.
+Agent ranking_adapter authorized one resume of same non-model transfer, keep partialbytes/noSHA/no from-zero restart.
+Root to inspect new download handle before action; no endpoint/inference yet. Do not restart from stale timeout alone.
+When Root starts CPU run, add actual containerIP to process NO_PROXY AND no_proxy while preserving127.0.0.1.
+No real rankerHTTP during fifth serialqueue. Need bounded realMemSifter pilot, then selectedS0 R0/R1 decision;
+CPU speed still unmeasured. Do not treat4B and35B tokens as equalprice. Only promising candidate goes73/longhistory.
+
+No remote push/merge for this task; local commits/frozen experiments reviewable. No new goal pause/block condition.
 
 # Current handoff: dynamic-memory plan active, 2026-10-12
 
