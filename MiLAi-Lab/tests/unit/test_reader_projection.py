@@ -23,7 +23,9 @@ from milai_lab.memory.functional_state import (
 from milai_lab.memory.reader_projection import (
     PROJECTION_INSTRUCTIONS,
     expand_host_packet,
+    expand_record,
     project_host_packet,
+    project_material,
 )
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
@@ -34,6 +36,40 @@ def _tokens(text: str) -> int:
     # A portable mechanical counter. The closed-artifact Qwen probe separately
     # verifies the production 8192-token boundary with its actual tokenizer.
     return (len(text) + 3) // 4
+
+
+def test_original_source_turns_share_exact_metadata_without_changing_rawrag() -> None:
+    turns = [{
+        "source_ref": f"source-original-turn-identifier-{index}", "source_revision": 1,
+        "session_id": "actual-public-session", "role": role, "origin": "public_" + role,
+        "content": content, "timestamp": "2030-01-01T10:00:00+00:00",
+        "observed_at": "2030-01-02T11:00:00+00:00", "occurred_at": None,
+        "range": [0, len(content)], "source_total_codepoints": len(content),
+    } for index, (role, content) in enumerate([
+        ("user", 'Literal body with {"meta": 0}; a tentative plan, not an effect.'),
+        ("assistant", "A separate original reply, not another user statement."),
+    ])]
+    source = {
+        "kind": "original_source", "provenance": "original_exchange", "id": "actual-exchange",
+        "session_id": "actual-public-session", "text": json.dumps(turns, ensure_ascii=False),
+        "source_ranges": [{"source_ref": turn["source_ref"], "source_revision": 1,
+                           "start": 0, "end": len(turn["content"])} for turn in turns],
+        "truncated": False,
+    }
+    before = copy.deepcopy(source)
+    projected = project_material([source])
+    assert "text" not in projected["memories"][0]
+    assert projected["metadata_table"]
+    assert isinstance(projected["memories"][0]["turns"][0]["source_ref"], dict)
+    expanded = expand_record({**projected["memories"][0],
+                              "metadata_table": projected["metadata_table"]})
+    assert expanded == {**{key: value for key, value in source.items() if key != "text"},
+                        "turns": turns}
+    assert source == before
+    raw = {"id": "raw-session", "session_id": "actual-public-session", "date": "2030-01-01",
+           "text": source["text"], "turn_range": [0, 2], "score": 0.5,
+           "provenance": "original_exchange", "truncated": False}
+    assert project_material([raw]) == {"memories": [raw]}
 
 
 @pytest.fixture

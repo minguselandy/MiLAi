@@ -377,6 +377,11 @@ def project_material(records: list[dict[str, Any]]) -> dict[str, Any]:
     memories = [expand_record(project_record(record)) for record in records]
     for memory in memories:
         memory.pop("retrieval_navigation", None)
+        if memory.get("kind") == "original_source" and isinstance(memory.get("text"), str):
+            # This opt-in Source material already contains serialized original
+            # turns. Expose that same structure to the existing exact metadata
+            # sharing; original RawRAG text remains opaque and unchanged.
+            memory["turns"] = json.loads(memory.pop("text"))
         view = memory.get("applicability")
         if isinstance(view, dict):
             _group_metadata(view)
