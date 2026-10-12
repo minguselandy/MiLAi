@@ -1,6 +1,6 @@
 # 统一记忆功能候选与当前执行状态
 
-## 2026-10-12：Host14 已闭合，Q 接线错误已停止并修复中
+## 2026-10-12：Host14 已闭合，修复后新 Q 首次运行
 
 新候选 `configs/milai-dynamic-memory-small-v1.json` 将可见原始 Source 的检索独立于语义形成。
 复用既有交流分段与 BM25 0.2.2；普通安装正式声明同版依赖。Raw 保留原来仅用户正文的索引，
@@ -44,7 +44,7 @@ Host成本：54生成请求／回执，输入415,718＋输出67,675＝483,393 kn
 
 新M11c4于03:32:00 UTC首次启动，但Root发现新增benchmark `functional_v1` 合同未绑定真实public turn，
 前5会话的提案均被 `public_turn_required_or_mismatched` 拒绝，语义提交为0。这是Root集成遗漏，不能归给模型语义选择，
-也不能把原文能回答的部分结果当完整MiLAi候选。此前只读／空提案测试遗漏了实际维护提交链，正在补创建—更正—检索检查。
+也不能把原文能回答的部分结果当完整MiLAi候选。此前只读／空提案测试遗漏了实际维护提交链，已补创建—更正—检索检查。
 
 Root在03:46:09 UTC暂停worker并确认账本回到历史unknown8／1、无在途模型请求后，发送SIGINT／SIGCONT，
 原runner于03:46:10.258100 UTC闭合：STOPPED／returncode−2，terminal为FAILED KeyboardInterrupt、resources_settled=true，
@@ -55,8 +55,17 @@ close_error=null、新unknown0／0、limits不变、leaseFREE、live账本=end�
 其余61QA为NOT_RUN，不计缺答或错误。36／36生成回执，输入425,481＋输出105,462＝530,943 known＝charged，
 embedding0，阶段849.796秒。12题最终交付累计26条原文／0语义、508个Source范围（跨题重复计）；
 3题分页／13确认页／峰值31,988≤32,256，最终空集0、实际池外查询0。**不评分、不作为方法效果结论。**
-修复仅补真实公开轮次绑定，不放宽服务权限；之后使用新冻结身份和独立空银行，沿原同六题声明。
+修复已使用真实turn:N User Source绑定，逐批选已到达的最近User；无前置User仅保留原Source并记维护未完成。
+真实临时Store＋scripted模型的创建→更正→非目标／历史保持→原文和语义检索及边界检查3项通过，Ruff／strict mypy通过，
+0实际模型／HTTP／原银行操作，MemoryService权限不变。
 Host源码不涉及本次benchmark绑定修复，已发生的Host失败与SDK证据保持，不为一般语义失败重跑Host。
+
+修复后实际源码冻结为 `b558a7a8d3c7d8e871547476117b55563fbb0ea9`，新根
+`artifacts/dynamic-memory-small/q32-b558a7a8-v2` 于04:01:10.363550 UTC首次派发，父1446814／worker1446815实际存活。
+新银行重新从合法前缀到达，旧11c4银行／答案不复用或续接；相同六题声明保持。旧36调用费用单列，未退款。
+从11c4至b558的唯一运行代码变化在benchmark维护绑定，Raw、Reader、模型配置及QA Judge未改，已增量确认原复用证据。
+本次仍是预测进行中、尚未评分，无完整质量结论。b558自身Fast38201895441成功、Full38201895477跳过。
+
 
 Raw6ab复用已完成实际核对：73／73完整Reader消息逐字符串一致，73／73原分段／BM25排序／实际材料一致，
 所有旧Raw均direct（峰值29,259＜32,256）；模型关键设置与73份QA Judge模板／解析合同一致。没有重新派发Raw。
@@ -70,7 +79,8 @@ Raw来源半边复用六份已有判断（仅补一题任务覆盖），官方4C
 
 ### 新候选普通使用与显式整理
 
-以下命令在所选源码的 `MiLAi-Lab` 目录运行；示例本身没有额外派发。
+以下命令在所选Git checkout的 `MiLAi-Lab` 目录运行；示例本身没有额外派发。
+若使用导出的冻结源码，`--source-version`须填对应冻结记录的commit，不能读取外层开发树的Git头。
 使用独立新根，实际实验不得重复使用已执行根。普通保存和查询沿同一 MemoryService：
 
 ```bash

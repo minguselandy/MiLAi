@@ -1,5 +1,21 @@
 # Current handoff: dynamic-memory plan active, 2026-10-12
 
+CURRENT LIVE UPDATE 2026-10-12 04:01 UTC: goal ACTIVE; corrected Q b558 FIRST dispatch running, do not duplicate/restart.
+Actual frozen source b558a7a8d3c7d8e871547476117b55563fbb0ea9, artifacts/dynamic-memory-small/source-b558a7a8/MiLAi-Lab.
+Separate freeze source-freeze-q-v2.json; old source-freeze.json still11c4, intentionally unchanged. Newroot q32-b558a7a8-v2.
+root-execution-predict RUNNING started04:01:10.363550UTC; parent1446814/worker1446815 actuallyalive04:01:34UTC.
+Original ledger/limits/floor8+1/Hreservation preserved; predispatchleaseFREE/liveledger==11c4end. RootonlymodelHTTPDBserial.
+Publicturnfix b558: actualUserturn:N capture+perbatch latestarrivedUser, nofakeUserforAssistant-only.3fullchainchecks/Ruff/mypyPASS.
+Only runtime diff from11c4 isBenchmarkmaintain_recipe; Host code/Reader/Raw/QA Judge unchanged, existingHost14+twoSDK evidence reused not re-run.
+Raw incrementalaudit raw-reuse-audit-b558a7a8.json reuses73exactcomparison; originalsame6sample unchanged.
+A newSourcehalf q-source-review-milai-b558a7a8-half.json; old11c4partial preserved separately. Sourceaxis before newJudge.
+B fixed3natural events new q-maintenance-source-review-b558a7a8.json +firstvalidcommitcheck, noQA/gold/DB.
+D newroot cost/delivery summary; oldpartial11c4 root-prediction-cost-delivery-summary closed,notcompleteM/noJudge.
+b558published PR121head, ownFast38201895441SUCCESS/Full38201895477SKIPPED; prior199ownFast38200474159SUCCESS/Full38200474173SKIPPED.
+Next observefirstactualmaintenancecommit, continue32/73; afterfullpredictionterminal/resources/PIDclosure explicit root_score.py QA-only once.
+Do not score/resume11c4 stoppedQ. Do not automatically redoHost semanticfailures. Finalpair73/cost/delivery/fixed6/3maintenance stillrequired.
+All lower LIVE/URGENT states are historical. Frozen code/config/answers never edited.
+
 URGENT UPDATE 2026-10-12 03:46 UTC: Q11c4 STOPPED by Root for proven benchmark wiring defect, not user cancellation or algorithm failure.
 Newfunctional_v1 service contract rejected ALL maintenance with public_turn_required_or_mismatched; Root failed to bind actual public turns.
 5fullsessions/12savedQAalltext; no semanticcommit, embedding0. NOT a complete M candidate/effectiveness result, no Judge dispatch.
