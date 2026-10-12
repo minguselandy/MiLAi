@@ -459,6 +459,18 @@ class EditMemory:
                 + ", ".join(ARM_OPERATIONS[self.arm])
                 + ". Untouched units/support stay verbatim. "
             )
+        if self.features.patch_text and self.arm in {"B1", "M"}:
+            instruction += (
+                "For one value or short phrase change inside a delivered content unit, use "
+                "patch_text with target_unit, old_text and new_text. Copy old_text exactly "
+                "and include enough context to match uniquely within that unit. A patched "
+                "unit has only this one edit in the proposal. The service "
+                "replaces that occurrence and preserves all remaining text and the target's "
+                "own delivered h support. Select current evidence and a current assertion; "
+                "assertion.keep is unavailable because the text changes. Explicitly retain "
+                "or update supported applicability in the current assertion. Use existing "
+                "edits for changes of subject, scope, attribution or cross-unit structure. "
+            )
         if self.conditioned:
             instruction += (
                 "Keep the value in content and express explicit applicability, limits and "

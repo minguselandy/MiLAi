@@ -20,6 +20,7 @@ class EditFeatures:
     single_record_changes: bool = False
     source_metadata: bool = False
     temporal_scope: bool = False
+    patch_text: bool = False
 
     @classmethod
     def from_settings(cls, settings: dict[str, Any]) -> EditFeatures:
@@ -31,6 +32,8 @@ class EditFeatures:
     def __post_init__(self) -> None:
         if self.temporal_scope and not self.source_metadata:
             raise ValueError("EDIT_TEMPORAL_SCOPE_REQUIRES_SOURCE_METADATA")
+        if self.patch_text and not self.source_metadata:
+            raise ValueError("EDIT_PATCH_TEXT_REQUIRES_SOURCE_METADATA")
 
     @property
     def enabled(self) -> bool:
@@ -41,6 +44,8 @@ class EditFeatures:
         # Existing frozen writer maps keep their original five-feature shape.
         if not self.temporal_scope:
             settings.pop("temporal_scope")
+        if not self.patch_text:
+            settings.pop("patch_text")
         return settings
 
 
@@ -337,6 +342,21 @@ def feature_proposal_schema(
                         op["properties"]["target_unit"] = {"type": "null"}
             if not ops:
                 variants.remove(variant)
+    if features.patch_text and refs["e"]:
+        content = [alias for alias in refs["u"] if mapping["units"][alias]["role"] == "content"]
+        for variant in variants:
+            if "edits" not in variant["properties"] or not content:
+                continue
+            variant["properties"]["edits"]["items"]["oneOf"].append(_object(
+                {
+                    "operation": {"const": "patch_text"},
+                    "target_unit": reference("u", content),
+                    "old_text": {"type": "string", "minLength": 1},
+                    "new_text": {"type": "string", "minLength": 1},
+                    "evidence": {"type": "array", "minItems": 1, "items": reference("e")},
+                },
+                ["operation", "target_unit", "old_text", "new_text", "evidence"],
+            ))
     if features.source_metadata:
         # Relation support remains available for bindings, but cannot retain a
         # unit's attribution. Saved proposals keep their original decode schema.
@@ -403,7 +423,10 @@ def feature_proposal_schema(
                     item["properties"]["assertion"] = copy.deepcopy(current_assertion)
             if "edits" in fields:
                 for item in fields["edits"]["items"]["oneOf"]:
-                    if "text" in item["properties"]:
+                    if item["properties"]["operation"]["const"] == "patch_text":
+                        item["properties"]["assertion"] = copy.deepcopy(current_assertion)
+                        item["required"].append("assertion")
+                    elif "text" in item["properties"]:
                         item["properties"]["assertion"] = copy.deepcopy(assertion)
                         if item["properties"]["operation"]["const"] not in {
                             "replace",
@@ -625,6 +648,27 @@ def compile_semantic_operations(
 ) -> dict[str, Any]:
     """Structural compilation only. The model chooses meaning and applicability."""
     result = compile_clause_proposal(proposal)
+    target_counts = Counter(item.get("target_unit") for item in result.get("edits", []))
+    for item in result.get("edits", []):
+        if item["operation"] != "patch_text":
+            continue
+        target = item["target_unit"]
+        if target_counts[target] > 1:
+            raise FunctionalRejection("EDIT_PATCH_TEXT_TARGET_REPEATED")
+        unit = mapping["units"].get(target)
+        if unit is None or unit["record"] != result["target"] or unit["role"] != "content":
+            raise FunctionalRejection("EDIT_SHORT_UNIT_UNAVAILABLE")
+        old_text = item.pop("old_text")
+        text = unit["text"]
+        start = text.find(old_text)
+        if start < 0 or text.find(old_text, start + 1) >= 0:
+            raise FunctionalRejection("EDIT_PATCH_TEXT_MATCH_NOT_UNIQUE")
+        item["text"] = text[:start] + item.pop("new_text") + text[start + len(old_text):]
+        item["operation"] = "replace"
+        item["keep_support"] = [
+            alias for alias, support in mapping["support"].items()
+            if support["record"] == result["target"] and support.get("unit") == target
+        ]
     for item in [*result.get("units", []), *result.get("edits", [])]:
         assertion = item.get("assertion")
         if assertion and "source_evidence" in assertion:
