@@ -83,6 +83,12 @@ The audit explicitly leaves overallcompletion false pendingB settlement. C inter
 are evidenced but naturalsemanticprotection is contradicted; never relabel C semanticacceptance as passed.
 Final B may be successful or its actualfailure/partial outcome; do not inventcompletion, force24, or ignore
 pending/unknown costs. Re-evaluate overallplancloseout only after actualreceipts/terminal/resourceclosure.
+Update20:26:28UTC: sameactualCPU619948/caller623471 live, firstrequest stillcomputing after~61min.
+FrozenHTTPtimeout7200s starts at request dispatch around19:24:xxUTC; do not interpret earlier polls as timeout.
+NarrowC attribution audit confirmed unsupportedtime already in Extractor rawchanges[1].time and Writerraw
+assertion.applicability.event_at. Compiler/binding onlycopies it; separate occurred_at is actualreport metadata.
+No deterministic programdefault/overwrite defect found; do not add guessed datefilter or resume same-example
+prompt loop. This finding is recorded in report/f70ea130; no newtest/modelHTTP was required.
 No newgoalblock/pause; current wait is verifiedactiveCPUinference, not a missingpermission/resourcepretext.
 
 No remote push/merge for this task; local commits/frozen experiments reviewable. No new goal pause/block condition.
