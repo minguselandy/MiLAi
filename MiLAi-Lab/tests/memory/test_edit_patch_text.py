@@ -34,13 +34,16 @@ def no_network(monkeypatch):
 
 
 @contextmanager
-def opened(path, arm="M"):
+def opened(path, arm="M", maintenance_mode="legacy"):
     with SqliteStore.from_conn_string(str(path / "patch.sqlite")) as store:
         service = MemoryService(
             store, ("patch", "alice"), "alice", path / "lock",
             mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
         )
-        yield service, EditMemory(service, arm, interface_version="I2", features=FEATURES)
+        yield service, EditMemory(
+            service, arm, interface_version="I2", features=FEATURES,
+            maintenance_mode=maintenance_mode,
+        )
 
 
 def delivered(service, method, key, text, records=()):
@@ -78,8 +81,11 @@ def patch(record="r1", unit="u1", evidence="e1", old_text="three", new_text="two
 
 
 @pytest.mark.parametrize("arm", ["B1", "M"])
-def test_patch_maintenance_preserves_other_requirements_support_and_history(tmp_path, arm):
-    with opened(tmp_path, arm) as (service, method):
+@pytest.mark.parametrize("maintenance_mode", ["legacy", "event_delta_v1"])
+def test_patch_maintenance_preserves_other_requirements_support_and_history(
+    tmp_path, arm, maintenance_mode,
+):
+    with opened(tmp_path, arm, maintenance_mode) as (service, method):
         record_id, old_ref = seed(service, method)
         before = copy.deepcopy(service.read(record_id)["value"])
         delivery, new_ref = delivered(
@@ -90,6 +96,10 @@ def test_patch_maintenance_preserves_other_requirements_support_and_history(tmp_
 
         def writer(stage, messages, schema):
             assert stage == "edit" and "patch_text" in messages[0]["content"]
+            assert "old_text and new_text" in messages[0]["content"]
+            assert "own delivered h support" in messages[0]["content"]
+            if maintenance_mode == "event_delta_v1":
+                assert messages[0]["content"].startswith("Maintain the meaning changed")
             packet = json.loads(messages[1]["content"])["delivery"]
             record = packet["records"][0]
             evidence = packet["evidence"][0]["id"]

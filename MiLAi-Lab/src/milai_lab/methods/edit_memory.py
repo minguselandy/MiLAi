@@ -65,6 +65,18 @@ REVISION_MEANING_INSTRUCTIONS = (
     "that target's single proposal. "
 )
 
+PATCH_TEXT_INSTRUCTIONS = (
+    "For one value or short phrase change inside a delivered content unit, use "
+    "patch_text with target_unit, old_text and new_text. Copy old_text exactly "
+    "and include enough context to match uniquely within that unit. A patched "
+    "unit has only this one edit in the proposal. The service "
+    "replaces that occurrence and preserves all remaining text and the target's "
+    "own delivered h support. Select current evidence and a current assertion; "
+    "assertion.keep is unavailable because the text changes. Explicitly retain "
+    "or update supported applicability in the current assertion. Use existing "
+    "edits for changes of subject, scope, attribution or cross-unit structure. "
+)
+
 
 class EditMemory:
     """Ordinary full rewrite, plain local edit, and a controlled representation pair."""
@@ -291,6 +303,8 @@ class EditMemory:
                 "replace changes the whole selected unit text. Preserve its still-valid "
                 "independent meanings there or in supported separate units in the same edit. "
             )
+        if self.features.patch_text and self.arm in {"B1", "M"}:
+            instruction += PATCH_TEXT_INSTRUCTIONS
         if self.features.source_metadata:
             instruction += (
                 "For new text choose assertion={source_evidence:e#,kind:reported|inferred|"
@@ -460,17 +474,7 @@ class EditMemory:
                 + ". Untouched units/support stay verbatim. "
             )
         if self.features.patch_text and self.arm in {"B1", "M"}:
-            instruction += (
-                "For one value or short phrase change inside a delivered content unit, use "
-                "patch_text with target_unit, old_text and new_text. Copy old_text exactly "
-                "and include enough context to match uniquely within that unit. A patched "
-                "unit has only this one edit in the proposal. The service "
-                "replaces that occurrence and preserves all remaining text and the target's "
-                "own delivered h support. Select current evidence and a current assertion; "
-                "assertion.keep is unavailable because the text changes. Explicitly retain "
-                "or update supported applicability in the current assertion. Use existing "
-                "edits for changes of subject, scope, attribution or cross-unit structure. "
-            )
+            instruction += PATCH_TEXT_INSTRUCTIONS
         if self.conditioned:
             instruction += (
                 "Keep the value in content and express explicit applicability, limits and "
