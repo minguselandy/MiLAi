@@ -7,6 +7,7 @@ import fcntl
 import json
 import re
 from collections import Counter
+from collections.abc import Callable
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Literal, cast
@@ -54,7 +55,7 @@ from milai_lab.methods.append_memory import AppendMemory
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import MaintenanceRecipe, maintain_event
 from milai_lab.methods.edit_maintenance import parse_object as parse_object
-from milai_lab.methods.edit_memory import Arm, EditMemory
+from milai_lab.methods.edit_memory import Arm, EditMemory, MaintenanceMode
 from milai_lab.providers.contextual_vllm import VLLMClient, VLLMConfig, generation_schema
 from milai_lab.providers.embedding_capacity import MeteredEmbeddings
 
@@ -506,6 +507,17 @@ class BenchmarkRun:
             raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
         if settings.get("reader_projection", "legacy") not in {"legacy", "semantic_units_v1"}:
             raise ValueError("READER_PROJECTION_INVALID")
+        if settings.get("source_access", "semantic_only") not in {
+            "semantic_only", "independent_v1",
+        }:
+            raise ValueError("SOURCE_ACCESS_INVALID")
+        if settings.get("source_access") == "independent_v1" and any(
+            type(settings.get(name)) is not int or settings[name] < 1
+            for name in ("source_top_k", "semantic_top_k")
+        ):
+            raise ValueError("SOURCE_RETRIEVAL_LIMIT_INVALID")
+        if settings.get("maintenance_mode", "legacy") not in {"legacy", "event_delta_v1"}:
+            raise ValueError("MAINTENANCE_MODE_INVALID")
         if settings.get("halumem", {}).get("reader_failure_policy", "fail_fast") not in {
             "fail_fast", "record_confirmed_length", "record_known_readonly_failure",
         }:
@@ -834,7 +846,10 @@ class BenchmarkRun:
                 "empty_turns": [i for i, turn in enumerate(observed.turns) if not turn["content"]],
             },
         )
-        method = EditMemory(service, cast(Arm, self.settings["arm"]))
+        method = EditMemory(
+            service, cast(Arm, self.settings["arm"]),
+            maintenance_mode=cast(MaintenanceMode, self.settings.get("maintenance_mode", "legacy")),
+        )
         all_receipts: list[dict[str, Any]] = []
         changed: dict[str, str] = {}
         for batch_ordinal, batch in enumerate(batches):
@@ -1080,11 +1095,14 @@ class BenchmarkRun:
             return list(read_json(done)["extracted_memories"])
         features = EditFeatures.from_settings(self.settings.get("edit_features", {}))
         method = (
-            AppendMemory(service, features=features)
+            AppendMemory(service, features=features, maintenance_mode=cast(
+                MaintenanceMode, self.settings.get("maintenance_mode", "legacy")))
             if self.settings["arm"] == "Append-only"
             else EditMemory(
                 service, cast(Arm, self.settings["arm"]),
                 interface_version=self.settings["interface_version"], features=features,
+                maintenance_mode=cast(
+                    MaintenanceMode, self.settings.get("maintenance_mode", "legacy")),
             )
         )
         refs = []
@@ -1246,7 +1264,9 @@ class BenchmarkRun:
             refs.append(receipt["source_ref"])
         interface = self.settings["interface_version"]
         method = EditMemory(
-            service, cast(Arm, self.settings["arm"]), interface_version=interface, features=features
+            service, cast(Arm, self.settings["arm"]), interface_version=interface,
+            features=features,
+            maintenance_mode=cast(MaintenanceMode, self.settings.get("maintenance_mode", "legacy")),
         )
         use_working_sets = bool(self.settings.get("working_sets", False))
         batches = (natural_source_batches if use_working_sets else source_batches)(
@@ -1613,8 +1633,188 @@ class BenchmarkRun:
     ) -> list[dict[str, str]]:
         return reader_messages(
             question, date, memories,
+            memory_view=("source_history" if self.settings.get("source_access") == "independent_v1"
+                         else "retained_state"),
             projection=self.settings.get("reader_projection", "legacy"),
         )
+
+    def _material_messages(
+        self, question: str, date: str, materials: list[dict[str, Any]],
+        *, snapshot_id: str | None, item_indices: list[int], read_goal: str | None = None,
+    ) -> list[dict[str, str]]:
+        """The exact final Reader template, also used for whole-input admission."""
+        result = self._reader_messages(question, date, materials)
+        if snapshot_id is not None:
+            result[0]["content"] += (
+                " memory_item_indices aligns one-to-one with the supplied memories. "
+                "Each index locates that complete entry in retrieval_snapshot; "
+                "snapshot positions grant no write or forget authority."
+            )
+            payload = json.loads(result[1]["content"])
+            payload["retrieval_snapshot"] = {"snapshot_id": snapshot_id,
+                                             "collection": "materials"}
+            payload["memory_item_indices"] = item_indices
+            result[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+        if read_goal is not None:
+            result[0]["content"] += (
+                " read_goal describes this question's purpose, not the provenance or "
+                "validity of the supplied memories. It does not establish that requested "
+                "history is available; use the actual supplied evidence."
+            )
+            payload = json.loads(result[1]["content"])
+            payload["read_goal"] = read_goal
+            result[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+        return result
+
+    def _record_materials(
+        self, service: MemoryService, records: list[dict[str, Any]], date: str,
+    ) -> list[dict[str, Any]]:
+        """Project actual selected revisions with their existing original supports."""
+        memories = [
+            {
+                "content": row["value"]["content"],
+                "scope": row["value"]["scope"],
+                "revision": row["value"]["revision"],
+                "revision_evidence": read_revision_evidence(service, row["value"]),
+                **({"retrieval_navigation": row["retrieval_navigation"]}
+                   if "retrieval_navigation" in row else {}),
+                **({"record_id": row["id"]}
+                   if service.memory_profile == "unified_v1"
+                   or self.settings.get("memory_view_mode", "legacy") != "legacy" else {}),
+                **({"matter_description": (row["value"].get("edit_state") or {}).get(
+                    "matter_description", row["value"]["scope"]
+                )} if self.settings.get("memory_view_mode", "legacy") != "legacy" else {}),
+                **({"applicability": (
+                    EditMemory.revision_view(
+                        row["value"], query_time=date,
+                        query_calendar_context=self.settings.get("calendar_context"),
+                    )
+                    if self.settings.get("edit_features", {}).get("temporal_scope")
+                    else {
+                        "view": "current_at_snapshot", "basis": "stored_direct_relations_only",
+                        "statements": list(
+                            read_applicability(row["value"]["edit_state"]).values()
+                        ),
+                    }
+                )} if self.settings.get("maintenance_recipe")
+                   and row["value"].get("edit_state") else {}),
+                **({"revision_scope": read_revision_scope(service, row["id"], row["value"])}
+                   if any(self.settings.get("edit_features", {}).values()) else {}),
+            }
+            for row in records
+        ]
+        if self.settings.get("reader_projection") == "semantic_units_v1":
+            from milai_lab.memory.reader_projection import project_record
+
+            memories = [project_record(
+                {**memory, "record_content_chars": len(memory["content"])},
+                edit_state=row["value"].get("edit_state"),
+            ) for memory, row in zip(memories, records, strict=True)]
+        return memories
+
+    def _live_materials(
+        self, service: MemoryService, materials: list[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
+        """Reopen the same sources/revisions; never search or change snapshot positions."""
+        result = service.read_source_materials(materials)
+        for index, material in enumerate(materials):
+            if material.get("kind") == "semantic_view":
+                actual = service.read(material["record_id"], material["revision"])
+                if not actual["ok"]:
+                    result[index] = {
+                        "kind": "semantic_view", "record_id": material["record_id"],
+                        "revision": material["revision"], "content": "",
+                        "visibility": actual["status"], "body_delivered": False,
+                    }
+            elif "delivery_fragment" in material:
+                result[index]["delivery_fragment"] = copy.deepcopy(material["delivery_fragment"])
+        return result
+
+    def _source_first_materials(
+        self, service: MemoryService, question: str, date: str,
+        native: dict[str, Any], semantic: list[dict[str, Any]], *, snapshot_id: str,
+    ) -> list[dict[str, Any]]:
+        """Original exchanges first, linked original ranges next, optional explanations last."""
+        from milai_lab.memory.reader_projection import expand_record, merge_source_ranges
+
+        originals = list(native["source_materials"])
+        covered = [span for material in originals for span in material["source_ranges"]]
+        support = merge_source_ranges([
+            {field: evidence[field] for field in ("source_ref", "source_revision", "start", "end")}
+            for memory in semantic for evidence in expand_record(memory)["revision_evidence"]
+        ])
+        linked = []
+        for span in support:
+            if any(old["source_ref"] == span["source_ref"]
+                   and old["source_revision"] == span["source_revision"]
+                   and old["start"] <= span["start"] and old["end"] >= span["end"]
+                   for old in covered):
+                continue
+            source = service.source(span["source_ref"])
+            if source is not None:
+                linked.append({
+                    "kind": "original_source", "id": (
+                        f"{span['source_ref']}:{span['source_revision']}:{span['start']}:{span['end']}"
+                    ), "session_id": source["session"], "turn_range": [0, 1],
+                    "source_ranges": [span],
+                })
+        linked = service.read_source_materials(linked)
+        originals.extend(linked)
+        input_limit: int = (
+            self.settings["context_tokens"] - self.settings["model"]["max_tokens"] - 512
+        )
+
+        def fits(items: list[dict[str, Any]]) -> bool:
+            return self.input_tokens(self._material_messages(
+                question, date, items, snapshot_id=snapshot_id,
+                item_indices=list(range(len(items))),
+            ), enable_thinking=self.stage_thinking("reader")) <= input_limit
+
+        # A long original is represented by every actual fragment, not a prefix.
+        # This is still the initial fixed pool. Existing paging chooses which
+        # whole ranges to reopen; it neither searches outside the pool nor grows
+        # the Reader's call allowance.
+        materials = []
+        fragmented = 0
+        for material in originals:
+            if fits([material]):
+                materials.append(material)
+                continue
+            descriptors: list[dict[str, Any]] = []
+            for ordinal, span in enumerate(material["source_ranges"]):
+                for fragment in service.source_fragments(span["source_ref"]):
+                    start, end = max(span["start"], fragment["start"]), min(
+                        span["end"], fragment["end"])
+                    if start < end:
+                        descriptors.append({
+                            "kind": "original_source",
+                            "id": f"{material['id']}:fragment:{len(descriptors)}",
+                            "session_id": material["session_id"],
+                            "turn_range": [material["turn_range"][0] + ordinal,
+                                           material["turn_range"][0] + ordinal + 1],
+                            "source_ranges": [{**span, "start": start, "end": end}],
+                        })
+            pieces = service.read_source_materials(descriptors)
+            for ordinal, piece in enumerate(pieces):
+                piece["delivery_fragment"] = {
+                    "parent_id": material["id"], "ordinal": ordinal, "count": len(pieces),
+                }
+            materials.extend(pieces)
+            fragmented += 1
+        original_count = len(materials)
+        for memory in semantic:
+            explanation = {**memory, "kind": "semantic_view"}
+            if fits([*materials, explanation]):
+                materials.append(explanation)
+        native["material_assembly"] = {
+            "policy": "originals_then_linked_sources_then_fitting_semantic_views",
+            "independent_original_candidates": len(native["source_materials"]),
+            "linked_original_candidates": len(linked), "fragmented_originals": fragmented,
+            "original_materials": original_count, "semantic_candidates": len(semantic),
+            "semantic_materials": len(materials) - original_count,
+            "input_token_limit": input_limit, "benchmark_pool_outside_queries": 0,
+        }
+        return materials
 
     def retrieve_material(
         self, service: MemoryService, question: str, date: str, key: str,
@@ -1635,56 +1835,32 @@ class BenchmarkRun:
             return cast(list[dict[str, Any]], read_json(snapshot))
         requested_limit: int = self.settings["retrieval_limit"] if limit is None else limit
         request = {"question": question, "date": date, "limit": requested_limit}
+        independent = self.settings.get("source_access") == "independent_v1"
+        if independent:
+            request.update(source_access="independent_v1",
+                           source_top_k=self.settings["source_top_k"],
+                           semantic_top_k=self.settings["semantic_top_k"])
         if request_path.exists() and read_json(request_path) != request:
             raise ValueError("Saved retrieval request changed; use a new key")
         if snapshot.exists():
             memories = read_json(snapshot)
         else:
-            native = service.search(question, limit=requested_limit, include_raw=False)
+            native = (service.search_evidence(
+                question, source_limit=self.settings["source_top_k"],
+                semantic_limit=self.settings["semantic_top_k"],
+            ) if independent else service.search(
+                question, limit=requested_limit, include_raw=False))
             records = native["records"]
-            memories = [
-                {
-                    "content": row["value"]["content"],
-                    "scope": row["value"]["scope"],
-                    "revision": row["value"]["revision"],
-                    "revision_evidence": read_revision_evidence(service, row["value"]),
-                    **({"retrieval_navigation": row["retrieval_navigation"]}
-                       if "retrieval_navigation" in row else {}),
-                    **({"record_id": row["id"]}
-                       if service.memory_profile == "unified_v1"
-                       or self.settings.get("memory_view_mode", "legacy") != "legacy" else {}),
-                    **({"matter_description": (row["value"].get("edit_state") or {}).get(
-                        "matter_description", row["value"]["scope"]
-                    )} if self.settings.get("memory_view_mode", "legacy") != "legacy" else {}),
-                    **({"applicability": (
-                        EditMemory.revision_view(
-                            row["value"], query_time=date,
-                            query_calendar_context=self.settings.get("calendar_context"),
-                        )
-                        if self.settings.get("edit_features", {}).get("temporal_scope")
-                        else {
-                            "view": "current_at_snapshot", "basis": "stored_direct_relations_only",
-                            "statements": list(
-                                read_applicability(row["value"]["edit_state"]).values()
-                            ),
-                        }
-                    )} if self.settings.get("maintenance_recipe")
-                       and row["value"].get("edit_state") else {}),
-                    **({"revision_scope": read_revision_scope(service, row["id"], row["value"])}
-                       if any(self.settings.get("edit_features", {}).values()) else {}),
-                }
-                for row in records
-            ]
-            if self.settings.get("reader_projection") == "semantic_units_v1":
-                from milai_lab.memory.reader_projection import project_record
-
-                memories = [project_record(
-                    {**memory, "record_content_chars": len(memory["content"])},
-                    edit_state=row["value"].get("edit_state"),
-                ) for memory, row in zip(memories, records, strict=True)]
+            memories = self._record_materials(service, records, date)
+            if independent:
+                pool_id = (f"native/{key}/retrieval.json" if self.settings.get("alignment_backend")
+                           else f"http/{key}/retrieval-materials.json")
+                memories = self._source_first_materials(
+                    service, question, date, native, memories, snapshot_id=pool_id,
+                )
             # New explicit adapter calls retain the native result as well as the
             # existing Reader snapshot. Legacy paths keep their artifact shape.
-            if limit is not None:
+            if limit is not None or independent:
                 write_json(request_path, request)
                 write_json(snapshot.with_name("retrieval-native.json"), native)
             write_json(snapshot, memories)
@@ -1694,19 +1870,29 @@ class BenchmarkRun:
         memories = self.retrieve_material(service, question, date, key)
         snapshot = self.root / "http" / key / "retrieval.json"
         cached_response = (snapshot.parent / "response.json").exists()
-        answer, used_memories = self.answer_material(question, date, key, memories)
+        if self.settings.get("source_access") == "independent_v1":
+            pool = snapshot.with_name("retrieval-materials.json")
+            if not pool.exists():
+                write_json(pool, {"materials": memories})
+            answer, used_memories = self.answer_material(
+                question, date, key, memories, snapshot_id=str(pool.relative_to(self.root)),
+                material_reader=lambda items: self._live_materials(service, items),
+            )
+        else:
+            answer, used_memories = self.answer_material(question, date, key, memories)
         if service.memory_profile == "unified_v1":
             from milai_lab.memory.activation import ActivationIndex
 
             index = ActivationIndex(service)
             for memory in used_memories:
-                if "record_id" in memory:
+                if "record_id" in memory and memory.get("body_delivered") is not False:
                     index.record_use(memory["record_id"], request_id=key, cached=cached_response)
         return answer
 
     def answer_material(
         self, question: str, date: str, key: str, memories: list[dict[str, Any]],
         *, snapshot_id: str | None = None,
+        material_reader: Callable[[list[dict[str, Any]]], list[dict[str, Any]]] | None = None,
     ) -> tuple[str, list[dict[str, Any]]]:
         """Shared Reader over an actual retained retrieval snapshot, without new search.
 
@@ -1719,19 +1905,23 @@ class BenchmarkRun:
         direct delivery pages only when the complete original pool does not fit.
         """
         if snapshot_id is not None:
-            return self._answer_view(question, date, key, memories, snapshot_id=snapshot_id)
+            return self._answer_view(question, date, key, memories, snapshot_id=snapshot_id,
+                                     material_reader=material_reader)
         if self.settings.get("memory_view_mode", "legacy") in {"legacy", "direct"}:
+            if material_reader is not None:
+                memories = material_reader(memories)
             sampling: dict[str, Any] = ({"enable_thinking": self.stage_thinking("reader")}
                                        if self.stage_thinking("reader") is not None else {})
             return self.call(
                 key, self._reader_messages(question, date, memories), structured=False,
                 **sampling,
             ), memories
-        return self._answer_view(question, date, key, memories)
+        return self._answer_view(question, date, key, memories, material_reader=material_reader)
 
     def _answer_view(
         self, question: str, date: str, key: str, memories: list[dict[str, Any]],
         *, snapshot_id: str | None = None,
+        material_reader: Callable[[list[dict[str, Any]]], list[dict[str, Any]]] | None = None,
     ) -> tuple[str, list[dict[str, Any]]]:
         """Read one fixed pool using record references or read-only snapshot positions.
 
@@ -1783,10 +1973,14 @@ class BenchmarkRun:
                     "reported_at", "committed_at", "timestamp", "range", "turn_range",
                     "native_collection", "native_collection_key",
                     "truncated",
-                ) if field in memory},
+                ) if field in memory} | (
+                    {field: copy.deepcopy(memory[field]) for field in ("kind", "visibility")
+                     if field in memory} if material_reader is not None else {}
+                ),
             }
 
-        directory = ([material_candidate(index, memory) for index, memory in enumerate(memories)]
+        visible = material_reader(memories) if material_reader is not None else memories
+        directory = ([material_candidate(index, memory) for index, memory in enumerate(visible)]
                      if material_pool else [record_candidate(
             memory["record_id"], memory["revision"],
             memory.get("matter_description", memory["scope"]),
@@ -1798,12 +1992,23 @@ class BenchmarkRun:
         if material_pool or self.settings.get("reader_projection") == "semantic_units_v1":
             input_limit = (self.settings["context_tokens"]
                            - self.settings["model"]["max_tokens"] - 512)
-            for candidate, memory in zip(directory, memories, strict=True):
+            for candidate, memory in zip(directory, visible, strict=True):
                 candidate["single_material_input_tokens" if material_pool
                           else "single_record_input_tokens"] = self.input_tokens(
                     self._reader_messages(question, date, [memory]),
                     enable_thinking=reader_thinking,
                 )
+
+        def current_directory() -> list[dict[str, Any]]:
+            if material_reader is None or not material_pool:
+                return directory
+            # Navigation excerpts obey the same current visibility as bodies.
+            live = material_reader(memories)
+            return [{**material_candidate(index, memory),
+                     "single_material_input_tokens": self.input_tokens(
+                         self._reader_messages(question, date, [memory]),
+                         enable_thinking=reader_thinking)}
+                    for index, memory in enumerate(live)]
         selection_field = "item_indices" if material_pool else "record_ids"
         opened_field = "opened_indices" if material_pool else "opened_ids"
         schema = {
@@ -1836,8 +2041,9 @@ class BenchmarkRun:
                     if (type(index) is not int or not 0 <= index < len(refs)
                             or ref != refs[index]):
                         raise ValueError("READ_MATERIAL_REFERENCE_UNAVAILABLE")
-            return [memories[ref["item_index" if material_pool else "unit_index"]]
-                    for ref in selected_refs]
+            selected = [memories[ref["item_index" if material_pool else "unit_index"]]
+                        for ref in selected_refs]
+            return material_reader(selected) if material_reader is not None else selected
 
         def select_refs(current: dict[str, Any], selected: dict[str, Any]) -> dict[str, Any]:
             if material_pool:
@@ -1887,7 +2093,7 @@ class BenchmarkRun:
             )
             payload = json.loads(messages[1]["content"])
             payload.update(memory_view_state={name: state[name] for name in empty_view()},
-                           candidates=directory, **{opened_field: state[opened_field]},
+                           candidates=current_directory(), **{opened_field: state[opened_field]},
                            remaining_reads=read_limit - state["steps"], response_schema=schema)
             if material_pool:
                 payload["memory_view_state"] = {
@@ -1942,32 +2148,12 @@ class BenchmarkRun:
         state["complete"] = True
         write_json(path, state)
         def final_messages(selected_refs: list[dict[str, Any]]) -> list[dict[str, str]]:
-            result = self._reader_messages(
+            return self._material_messages(
                 question, date, selected_material(selected_refs),
+                snapshot_id=snapshot_id,
+                item_indices=[ref["item_index"] for ref in selected_refs] if material_pool else [],
+                read_goal=state["read_goal"],
             )
-            if material_pool:
-                result[0]["content"] += (
-                    " memory_item_indices aligns one-to-one with the supplied memories. "
-                    "Each index locates that complete entry in retrieval_snapshot; "
-                    "snapshot positions grant no write or forget authority."
-                )
-                payload = json.loads(result[1]["content"])
-                payload["retrieval_snapshot"] = {"snapshot_id": snapshot_id,
-                                                 "collection": "materials"}
-                payload["memory_item_indices"] = [ref["item_index"] for ref in selected_refs]
-                result[1]["content"] = json.dumps(
-                    payload, ensure_ascii=False, separators=(",", ":"))
-            if state["read_goal"] is not None:
-                result[0]["content"] += (
-                    " read_goal describes this question's purpose, not the provenance or "
-                    "validity of the supplied memories. It does not establish that requested "
-                    "history is available; use the actual supplied evidence."
-                )
-                payload = json.loads(result[1]["content"])
-                payload["read_goal"] = state["read_goal"]
-                result[1]["content"] = json.dumps(
-                    payload, ensure_ascii=False, separators=(",", ":"))
-            return result
 
         messages = final_messages(state["resident_refs"])
         if material_pool or self.settings.get("reader_projection") == "semantic_units_v1":
@@ -2065,11 +2251,12 @@ class BenchmarkRun:
                         input_token_limit=input_limit,
                     )
                     if material_pool:
+                        live_directory = current_directory()
                         payload.update(
-                            candidates=[directory[ref["item_index"]] for ref in page_refs],
+                            candidates=[live_directory[ref["item_index"]] for ref in page_refs],
                             final_reopen_item_indices=[ref["item_index"]
                                                        for ref in continuation["final_refs"]],
-                            final_reopen_candidates=[directory[ref["item_index"]]
+                            final_reopen_candidates=[live_directory[ref["item_index"]]
                                                      for ref in continuation["final_refs"]],
                             final_reopen_capacity=continuation["final_reopen_capacity"],
                             pending_item_indices=[ref["item_index"]
@@ -2207,13 +2394,13 @@ class BenchmarkRun:
             if material_pool:
                 delivered = state["capacity_continuation"]["delivered_page_refs"]
                 indices = {ref["item_index"] for ref in [*delivered, *state["resident_refs"]]}
-                return answer, [memory for index, memory in enumerate(memories) if index in indices]
+                return answer, selected_material([refs[index] for index in sorted(indices)])
             delivered_ids = {ref["id"] for ref in state["capacity_continuation"][
                 "delivered_page_refs"] + state["resident_refs"]}
             return answer, [memory for memory in memories if memory["record_id"] in delivered_ids]
         if material_pool:
-            return answer, [memory for index, memory in enumerate(memories)
-                            if index in state[opened_field]]
+            return answer, selected_material([refs[index] for index in range(len(memories))
+                                               if index in state[opened_field]])
         return answer, [memory for memory in memories if memory["record_id"] in state["opened_ids"]]
 
     def _score_retrieval(self, service: MemoryService, query: str) -> list[str]:
@@ -2338,6 +2525,8 @@ class BenchmarkRun:
                     bank / "memory.lock",
                     mutation_contract="event_bound_v1",
                     candidate_contract="read_handle_v1",
+                    functional_contract=("functional_v1" if self.settings.get("source_access")
+                                         == "independent_v1" else "legacy"),
                     semantic_retriever=self._semantic_retriever(),
                     memory_profile=self.settings.get("memory_profile", "ordinary"),
                     memory_ranking=self.settings.get("memory_ranking", "dense"),
@@ -2704,6 +2893,8 @@ class BenchmarkRun:
                     bank / "memory.lock",
                     mutation_contract="event_bound_v1",
                     candidate_contract="read_handle_v1",
+                    functional_contract=("functional_v1" if self.settings.get("source_access")
+                                         == "independent_v1" else "legacy"),
                     semantic_retriever=self._semantic_retriever(),
                     memory_profile=self.settings.get("memory_profile", "ordinary"),
                     memory_ranking=self.settings.get("memory_ranking", "dense"),

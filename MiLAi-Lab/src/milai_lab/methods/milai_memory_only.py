@@ -21,11 +21,13 @@ class MiLAiMemoryBackend:
         retrieve: Callable[[str, str, str, int], list[dict[str, Any]]],
         maintenance_result: Callable[[str], dict[str, Any]] | None = None,
         retrieval_native: Callable[[str], Any] | None = None,
+        source_mapping: str = "actual_retained_state_and_revision_evidence",
         usage: Callable[[], dict[str, Any]] | None = None,
         close: Callable[[], None] | None = None,
     ) -> None:
         self._maintain, self._retrieve = maintain, retrieve
         self._maintenance_result, self._retrieval_native = maintenance_result, retrieval_native
+        self._source_mapping = source_mapping
         self._usage, self._close = usage, close
 
     def _before(self) -> dict[str, Any] | None:
@@ -55,7 +57,7 @@ class MiLAiMemoryBackend:
         native = self._retrieval_native(key) if self._retrieval_native is not None else materials
         return {"materials": materials, "native_return": native,
                 "returned_count": len(materials),
-                "source_mapping": "actual_retained_state_and_revision_evidence",
+                "source_mapping": self._source_mapping,
                 "usage": self._observed_usage(before)}
 
     def close(self) -> None:

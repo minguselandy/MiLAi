@@ -8,6 +8,7 @@ import os
 import runpy
 import socket
 import sys
+from itertools import pairwise
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -677,6 +678,127 @@ def test_qa_only_scores_saved_answers_without_memory_judges_or_reference_retriev
     else:
         assert calls == ["memory_integrity", "update_memory", "memory_accuracy",
                          "question", "question"]
+
+
+def source_reader(
+    root: Path, monkeypatch: pytest.MonkeyPatch,
+) -> tuple[AlignmentRun, list[list[dict[str, str]]]]:
+    config = configuration()
+    config["entrypoints"]["benchmark"].update(
+        source_access="independent_v1", source_top_k=20, semantic_top_k=10,
+    )
+    settings = alignment_settings(config, "MiLAi-memory-only")
+    assert "source_access" not in alignment_settings(config, "RawRAG-local")
+    settings["context_tokens"] = 12000
+    settings["model"]["max_tokens"] = 1000
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings, execution.root, execution.phase = settings, root, "predict"
+    execution.backends = {}
+    execution.budget = SimpleNamespace(state={})
+    execution.client = SimpleNamespace(config=SimpleNamespace(max_calls=12))
+    monkeypatch.setattr(execution, "input_tokens", lambda messages, **_: len(json.dumps(messages)))
+    sent: list[list[dict[str, str]]] = []
+
+    def call(key: str, messages: list[dict[str, str]], **kwargs: Any) -> str:
+        assert not kwargs.get("structured"), "This short source pool should be direct"
+        sent.append(copy.deepcopy(messages))
+        return "scripted reader reply"
+
+    monkeypatch.setattr(execution, "call", call)
+    return execution, sent
+
+
+def test_independent_source_reaches_reader_after_noop_and_cached_pool_respects_forget(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    execution, sent = source_reader(tmp_path / "run", monkeypatch)
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("dynamic-source", "owner"), "owner", tmp_path / "lock",
+                                functional_contract="functional_v1", memory_profile="unified_v1")
+        captured = service.capture_user("first", "turn:0", "ORIGINAL_BLUE_DETAIL",
+                                        occurred_at="2030-01-01")
+        service.record_no_change("first", "no-op", {"changes": []})
+        assert not service.records()
+        assert execution.answer(service, "Which detail?", "2030-01-02", "question") == (
+            "scripted reader reply")
+        assert len(sent) == 1 and "ORIGINAL_BLUE_DETAIL" in repr(sent[0])
+        snapshot = read_json(execution.root / "native/question/retrieval.json")
+        assert snapshot["source_mapping"] == "independent_original_sources_and_retained_views"
+        assert len(snapshot["materials"]) == 1
+        native = snapshot["native_return"]
+        assert native["source_retrieval"]["requested_count"] == 20
+        assert native["semantic_retrieval"]["requested_count"] == 10
+        assert native["material_assembly"]["semantic_materials"] == 0
+        assert len(service.sources()) == 1  # QA and the Reader reply were not captured.
+        # A later-arriving report has an earlier stated date; reopening this
+        # question's actual pool must not silently search the later bank state.
+        service.capture_user("later", "turn:0", "LATER_RED_DETAIL", occurred_at="1990-01-01")
+        assert "LATER_RED_DETAIL" not in repr(execution._live_materials(
+            service, snapshot["materials"]))
+        handle = service.source_fragments(captured["source_ref"])[0]["fragment_handle"]
+        assert service.forget("first", "forget", fragment_handles=[handle])["ok"]
+        execution.answer(service, "Which detail?", "2030-01-02", "question")
+        assert len(sent) == 2 and "ORIGINAL_BLUE_DETAIL" not in repr(sent[-1])
+        assert "LATER_RED_DETAIL" not in repr(sent[-1])
+        assert "unavailable" in repr(sent[-1])
+        assert read_json(execution.root / "native/question/retrieval.json") == snapshot
+
+
+def test_long_original_uses_complete_existing_fragments_in_initial_fixed_pool(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    execution, sent = source_reader(tmp_path / "run", monkeypatch)
+    body = "long original words " * 1500 + "COMPLETE_TAIL"
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("dynamic-source", "owner"), "owner", tmp_path / "lock",
+                                functional_contract="functional_v1", memory_profile="unified_v1")
+        receipt = service.capture_user("first", "turn:0", body)
+        materials = execution.retrieve_material(service, "original", "2030-01-02", "long", limit=20)
+        assert len(materials) > 1 and sent == []
+        spans = [span for item in materials for span in item["source_ranges"]]
+        assert {span["source_ref"] for span in spans} == {receipt["source_ref"]}
+        assert spans[0]["start"] == 0 and spans[-1]["end"] == len(body)
+        assert all(left["end"] == right["start"] for left, right in pairwise(spans))
+        restored = "".join(turn["content"] for item in materials
+                           for turn in json.loads(item["text"]))
+        assert restored == body
+        assert all(item["delivery_fragment"]["count"] == len(materials) for item in materials)
+        assert all(execution.input_tokens(execution._material_messages(
+            "original", "2030-01-02", [m], snapshot_id="native/long/retrieval.json",
+            item_indices=[index],
+        )) <= 10488 for index, m in enumerate(materials))
+        native = read_json(execution.root / "http/long/retrieval-native.json")
+        assert native["material_assembly"]["fragmented_originals"] == 1
+        assert native["material_assembly"]["benchmark_pool_outside_queries"] == 0
+
+
+def test_optional_semantic_view_cannot_force_originals_into_paging(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    execution, sent = source_reader(tmp_path / "run", monkeypatch)
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("dynamic-source", "owner"), "owner", tmp_path / "lock",
+                                functional_contract="functional_v1", memory_profile="unified_v1")
+        service.capture_user("first", "turn:0", "Original weekday marker report.")
+        native = service.search_sources("marker")
+        original = native["source_materials"]
+        semantic = {"content": "Interpretation " * 60, "scope": "marker",
+                    "record_id": "explanation", "revision": 1, "revision_evidence": []}
+        combined = [*original, {**semantic, "kind": "semantic_view"}]
+        body_cost = execution.input_tokens(execution._reader_messages("marker", "", combined))
+        wrapped_cost = execution.input_tokens(execution._material_messages(
+            "marker", "", combined, snapshot_id="native/question/retrieval.json",
+            item_indices=list(range(len(combined))),
+        ))
+        assert body_cost < wrapped_cost
+        execution.settings["context_tokens"] = body_cost + 1000 + 512
+        result = execution._source_first_materials(
+            service, "marker", "", native, [semantic],
+            snapshot_id="native/question/retrieval.json",
+        )
+        assert result == original and not sent
+        assert native["material_assembly"]["semantic_candidates"] == 1
+        assert native["material_assembly"]["semantic_materials"] == 0
 
 
 @pytest.mark.parametrize("peer_status", [None, "FAILED", "PREDICTIONS_SAVED"])

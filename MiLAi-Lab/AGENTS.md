@@ -1,4 +1,43 @@
-# Current handoff: lightweight experiments closed, 2026-10-11 20:40:51 UTC
+# Current handoff: dynamic-memory plan active, 2026-10-12
+
+User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DYNAMIC_MEMORY_FUNCTION_FIRST_PLAN_20261012.md.
+The prior lightweight goal is complete; its d277 results and all old artifacts remain immutable. This is new authorized development.
+Scope: A independent visible Source retrieval; B event-driven local revision/Tool scope; C Host evidence-gap reads and explicit bounded consolidation;
+D Host request/forget/recovery integration. Then one new Host14 + two corresponding SDK reopens, one new M32/73 + QA-only score.
+Reuse Raw6ab55/73 only if actual Reader/data/ranking/model/Judge path unchanged. At most one optional diagnostic after Q; no large matrix.
+Full676-line plan read by Root. Original user worktree has only existing untracked plans; do not edit or publish those inputs.
+W0 actual original leaseFREE/unknown8+1; no old run script processes found. No new model/HTTP/real bank operations dispatched yet.
+Only Root coordinates real generation/embedding/DB on original /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Never reset/refund historical unknown8/1 or H110954 reservation. Temporary synthetic SQLite tests are allowed offline for developers.
+
+Integration worktree remains baseline-alignment-integration-20261010, started from07380a68; PR121 stilldraft/open/no merge authorization.
+Three new independent trees (all based07380a68):
+- dynamic-memory-source-20261012: agent /root/symmetric_source_review, MemoryService/retrieval/episodes/reader_projection/shared Raw ranking.
+- dynamic-memory-maintenance-20261012: agent /root/minimal_maintenance_fix, edit_memory/edit_maintenance/consolidation and memory_operations callback.
+- dynamic-memory-host-20261012: agent /root/supervisor_evidence, functional runner/functional_edit_memory/application and Host read/forget scope.
+Agents commit locally, Root cherry-picks; no shared source writers. Root owns benchmark runners, QA-only, config, docs and real dispatch.
+
+Root implemented halumem.evaluation_mode='qa_only' (old defaultall): skips memory Judges and reference-guided update retrieval,
+uses unchanged QA prompt/label parser, preserves knownmissing no-Judge and invalid{}, leaves unevaluated memory metrics None.
+Existing author combined aggregation divides absent memory denominators before QA, so small QA aggregation uses same C/H/O/valid rules.
+Six related checks pass (including unchanged default/full and selected-arm scoring), Ruff3files and strictmypy2sources pass,0realrequests.
+New candidate config milai-dynamic-memory-small-v1.json must be added only with all actual behavior wired; no invented CLI --qa-only.
+
+Agreed forthcoming interfaces: A search_sources/search_evidence(source_limit20,semantic_limit10; independent from updateK),
+source_refs is optional exact arrived-ID allowlist; current Source body not Episode description is indexed. Raw segmentation/ranking unchanged.
+A read_source_materials is one-in/one-out live Source projection with stable id/order, no old text on revoked ranges; preserve frozen pool indices.
+B maintenance_mode='event_delta_v1' vs oldlegacy; Host passes execution_only_origins from registered Tool/Observation contracts, not keywords.
+Host source_access='independent_v1'/source_top_k20/semantic_top_k10 and max_evidence_queries2 share old read/call budget;
+automatic discover/refresh cannot supply free extra live queries. New message real-time request requires a real current observation.
+Existing memory_operations consolidate/reconcile remains the explicit path; mainQ auto consolidation off, benchmark pool-outside search off.
+A/B/D已合流；Root已接入benchmark独立原文、关联来源、完整长文分片、实时可见性和完整模板容量。
+新配置configs/milai-dynamic-memory-small-v1.json已落盘，Host20/10/maxqueries2/event_delta_v1；benchmark20/10/event_delta_v1/qa_only。
+Root新增与共同Reader相关27检查、Host联合6检查、Ruff/四源码strictmypy、uv锁和Lab两边界PASS；全部离线。
+仍须提交冻结候选、核对Raw复用与预声明跨用户<=6样本，然后按Host14→两SDK→新M32/73→QA-only首次串行派发。
+未有本候选真实模型或银行结果；不要从历史d277拷贝结果。
+Do not replay old completed audits or scores; do not count engineering completion as semantic success or raw access gain as revision gain.
+
+# Historical handoff: lightweight experiments closed, 2026-10-11 20:40:51 UTC
 
 The active scope is MILAI_FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011.
 A/B/C/D development, the final candidate Host14, two actual SDK reopens, new M32/73 prediction,

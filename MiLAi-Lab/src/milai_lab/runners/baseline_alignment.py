@@ -117,6 +117,9 @@ def alignment_settings(config: dict[str, Any], backend: str) -> dict[str, Any]:
     if arm not in ("B0", "B1", "B2", "M", "Append-only"):
         raise ValueError("Unknown declared MiLAi maintenance arm")
     settings.update(arm=arm, alignment_backend=backend, alignment=config["alignment"])
+    if backend != "MiLAi-memory-only":
+        for name in ("source_access", "source_top_k", "semantic_top_k", "maintenance_mode"):
+            settings.pop(name, None)
     # Maintenance retains its original candidate limit. QA passes its separate
     # explicit limit to the backend; aligning answers must not change writing.
     settings["memory_view_mode"] = config["alignment"]["delivery"]
@@ -480,6 +483,9 @@ class AlignmentRun(BenchmarkRun):
                     self.root / "maintenance" / key / "complete.json"),
                 retrieval_native=lambda key: read_json(
                     self.root / "http" / key / "retrieval-native.json"),
+                source_mapping=("independent_original_sources_and_retained_views"
+                                if self.settings.get("source_access") == "independent_v1"
+                                else "actual_retained_state_and_revision_evidence"),
                 usage=lambda: dict(self.budget.state),
             )
         self.backends[owner] = value
@@ -511,17 +517,25 @@ class AlignmentRun(BenchmarkRun):
         # The actual return is retained intact. The common Reader resolves only
         # read-only positions in this saved pool, without a new retrieval.
         cached_response = (self.root / "http" / key / "response.json").exists()
-        answer, used = self.answer_material(
-            question, date, key, retrieval["materials"],
-            snapshot_id=str(path.relative_to(self.root)),
-        )
+        if (self.settings["alignment_backend"] == "MiLAi-memory-only"
+                and self.settings.get("source_access") == "independent_v1"):
+            answer, used = self.answer_material(
+                question, date, key, retrieval["materials"],
+                snapshot_id=str(path.relative_to(self.root)),
+                material_reader=lambda items: self._live_materials(service, items),
+            )
+        else:
+            answer, used = self.answer_material(
+                question, date, key, retrieval["materials"],
+                snapshot_id=str(path.relative_to(self.root)),
+            )
         if (self.settings["alignment_backend"] == "MiLAi-memory-only"
                 and service.memory_profile == "unified_v1"):
             from milai_lab.memory.activation import ActivationIndex
 
             index = ActivationIndex(service)
             for material in used:
-                if "record_id" in material:
+                if "record_id" in material and material.get("body_delivered") is not False:
                     index.record_use(material["record_id"], request_id=key, cached=cached_response)
         return answer
 
@@ -547,6 +561,7 @@ class AlignmentRun(BenchmarkRun):
                 store, service.namespace, service.owner, folder / "memory.lock",
                 mutation_contract=service.mutation_contract,
                 candidate_contract=service.candidate_contract,
+                functional_contract=service.functional_contract,
                 semantic_retriever=self._semantic_retriever(),
                 memory_profile=service.memory_profile, memory_ranking=service.memory_ranking,
             )
@@ -558,6 +573,7 @@ class AlignmentRun(BenchmarkRun):
         return reader_messages(
             question, date, memories,
             memory_view=("source_history" if self.settings["alignment_backend"] == "RawRAG-local"
+                         or self.settings.get("source_access") == "independent_v1"
                          else "retained_state"),
             projection=self.settings.get("reader_projection", "legacy"),
         )
