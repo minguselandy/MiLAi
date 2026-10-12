@@ -16,13 +16,12 @@ Natural employment and food v1 CLOSED, both ordinaryreplace, old results kept; a
 d6f628f9 fixes that event early-return wiring, 16disabled prompts byte-identical; real guided food followup CLOSED
 at18:27:49UTC, reused actualseed/control, patch_text selected, but sharedpredicate semantics of otherfoods weakened.
 bb49ef92 generic sharedpredicate/negation/scope guide repair merged/model-reviewed;8patch checks PASS.
-Frozen source-bb49ef92 and natural-local-patch-scope-v3 prepared from same originalseed.
-Sixth supervisor513866/tool session85694 WAITING for fifth405940 to exit and J1 score rc0, then one patch-only
-run_scope task automatically; inspect natural-local-patch-scope-v3-process.json before dispatching anything else.
-run_patch_scope_followup.py performs patch-only; after actualresult choose v3 if patch selected, otherwise v2
-for run_natural_version_reader.py two current/history Readercalls. This driver is prepared/reviewed; zeroHTTP
-input construction current9581/history8399tokens passed with real turns/clocks/nofuture historicalsupport.
-No more same-example prompt iterations if v3 still fails; keep patch opt-in.
+Frozen source-bb49ef92 natural-local-patch-scope-v3 CLOSED19:14:34UTC rc0, actualpatch1,
+3gen20346+2emb933. Sharedpredicate meaning STILL damaged; event_at wrongly precise. No more same-case
+prompt edits. Oldh/currentwitness/historyr1/6otherunits preserved, but semanticjointsuccess NOT counted.
+Two actualReader calls natural-current-history-v3 CLOSED19:16:00UTC rc0, both source-correct fixedqueries,
+actualcurrentr2+9sources and historicalr1+7seed sources, nofuture. Reader2gen23396, noemb/Judge/newunknown.
+Correct source-assisted answers do not excuse wrong storedpredicate. Full audit in E/natural-local-patch-v3-final-review.json.
 
 Original S2/J1pilot CLOSED1C/2+invalid1 versus missing1+invalid1. J1v2 budget repair CLOSED2C/2.
 Budget repair preserves cumulative nominations separately from admitted set, whole original sources first,
@@ -34,13 +33,16 @@ Original frozen79749893 fixed24 S0/S1/S2 predict+firstscore all CLOSED18C/24,18C
 Counts/paired/cost summaries use immutable per-question prediction/evaluation checkpoints, not mutable score index.
 S0missing1, S1missing0, S2missing1; invalid1/1/4 preserved. Fixed4usersx6,13direct/11paged, old failures retained.
 S2 no demonstrated quality/cost value; do not expand originalS2 or rescore labels.
-CURRENT LIVE run_fifth.py supervisor405940, tool session96165, frozen319b6878.
-S0-budgeted24 predict+score CLOSED16C/24,4H4invalid,24answers,59calls1,263,186tokens/881.1seconds.
-Native S0 stays18C/24: compare J1 against BOTH matchedbudgeted16 and stronger native18.
-Budgeted fixed13direct=11C unchanged,11paged7->5C;17empty pages->0,one missing->C.
-Latest verifiedchild482250 J1-budgeted-screen24-v2 predict, started18:46:44UTC. Inspect actualPID/terminal:
-artifacts/evidence-development/*-process.json. Remaining serial queue is J1-budgeted24predict/score.
-Natural-local-patch-guided-v2 was first fifth task and CLOSED rc0. Do not duplicate or alter frozen source/configs.
+Fifth supervisor405940/session96165 CLOSED19:13:20UTC, sixth513866/session85694 CLOSED,
+Reader588878/588879 session52908 CLOSED; all actualPIDs gone. No current model requests.
+S0-budgeted24 CLOSED16C/24,4H4invalid,24answers,59calls1,263,186tokens/881.1seconds.
+J1-budgeted24 CLOSED16C/24,4H3invalid1knownlength,65calls1,565,815tokens/1374.1seconds.
+Against matchedS0 candidateonly5/controlonly5 net0; versus nativeS0 2/4 net-2; originalS2 4/4 net0.
+J1 is23.96% moretokens thanmatched and15.39% morethannative.18questions actuallyfinalsemantic52items.
+No73/longhistory/training signal forJ1 ororiginalS2: stop expansion, retain opt-in code/defaultbehavior.
+S0 budgetrepair removes17empty pages and repairs1missing but overallpaged7->5C, noqualitywin.
+Original8generation/1embedding unknownfloor unchanged through twoReaders. Root only modelHTTP.
+Actual artifacts/evidence-development/*-process.json + terminals + /proc authoritative; no duplicates.
 Frozen source-f9f01661/source-c9f2b68e/source-79749893/source-319b6878 immutable. TMPDIR E/runtime on/cra.
 No root/tmp space; use/cra or/data, do not delete unrelated data. Existing shared GPU services unchanged.
 
@@ -54,7 +56,9 @@ S0 published-checkpoint pilot2 config prepared: U2S0Q0direct +U1S4Q2paged, same 
 Do not add another llm_probe24 matrix; realCPU boundedpilot first, then decide fixed24 by actual evidence/cost.
 Root to inspect new download handle before action; no endpoint/inference yet. Do not restart from stale timeout alone.
 When Root starts CPU run, add actual containerIP to process NO_PROXY AND no_proxy while preserving127.0.0.1.
-No real rankerHTTP during fifth/sixth serialqueue or the subsequent two Reader calls. Need bounded realMemSifter pilot, then selectedS0 R0/R1 decision;
+All prior serial tasks closed. Next Root may load completed CPU weights and run prepared ranker pilot.
+run_memsifter_pilot.py is prepared NOT RUN; it explicitly adds privatehost+127.0.0.1 to both NO_PROXY/no_proxy,
+then uses frozen319 predict and firstscore with originalledger, no retries. Verify endpoint ready first. Need bounded realMemSifter pilot, then selectedS0 R0/R1 decision;
 CPU speed still unmeasured. Do not treat4B and35B tokens as equalprice. Only promising candidate goes73/longhistory.
 
 No remote push/merge for this task; local commits/frozen experiments reviewable. No new goal pause/block condition.
