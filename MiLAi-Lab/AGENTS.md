@@ -66,6 +66,16 @@ No hashes/no tokenizerpatch. Actualusage should be checked in returned receipt. 
 After pilot closes: full2 label/coverage, actualrank/page/final canonicalindices, permodel/stage costs, runtimeCPU/wall,
 load once/RSSmax; monetarycost and Reader GPUtime unmeasured. Only useful signal would justify24/73/longhistory.
 Agent ranking_adapter assigned read-only actualranker/cost audit; no other agent authorized realHTTP.
+Latest observation19:53:25UTC: firstCPUrank23035input stillactive, no response, no failure. Do not restart,
+score partial results, change parameters or launch another model. HTTPtimeout7200s is frozen; inspect actual
+response/failure/ownedPIDs when it settles. Current pending ledgerreservation is not a new closed unknown.
+Given firstcall>27min versus pairedR0 paged70.69s, Root decided NO24 expansion on currentCPU; finish this
+predeclaredpilot and firstscore, report actualreceipt costs/limits, then stop only ownedCPUworker.
+Matched2R0 is1C+1invalid,5calls84354tokens/80.03s; directinvalid1 belongsranking_skipped and cannot supply
+ranker qualitygain. ActualR1 direct already answered4933tokens/7.48s, not yetscored. Full24 denominators differ.
+On closure need paired2 table + candidateownscore, actualrank/pages/final sourceindices, permodelcost,
+CPU/wall/loadonce/RSSmax, strict same-pool evidence, independentmodelaudit, finaldocs/localcommit.
+All A/C/D realwork is closed; do not reopen rejected variants or repeat same-food prompt edits.
 No newgoalblock/pause; current wait is verifiedactiveCPUinference, not a missingpermission/resourcepretext.
 
 No remote push/merge for this task; local commits/frozen experiments reviewable. No new goal pause/block condition.
