@@ -64,10 +64,12 @@ class SandboxApplicationAdapter:
         allowed_operations: Sequence[str] = (),
         can_read: bool = True,
         runtime_config: Mapping[str, Any] | None = None,
+        reuse_current_observations: bool = False,
     ) -> None:
         self.app, self.service = app, service
         self.owner, self.session, self.turn_id = app.owner, session, turn_id
         self.can_read, self.allowed_operations = can_read, frozenset(allowed_operations)
+        self.reuse_current_observations = reuse_current_observations
         self.query = (
             "get_document_status"
             if app.workflow == "document_publication_v1"
@@ -287,7 +289,9 @@ class SandboxApplicationAdapter:
 
     def discover(self, target: Mapping[str, Any], *, attempt_id: str) -> dict[str, Any]:
         """A real journaled read reconciles pending effects, preserving unknown calls."""
-        result = self.lookup(target, attempt_id=attempt_id)
+        result = self._current_discovery(target) if self.reuse_current_observations else None
+        if result is None:
+            result = self.lookup(target, attempt_id=attempt_id)
         unresolved = []
         for row in self.app.journal._entries().values():
             if (
@@ -302,6 +306,41 @@ class SandboxApplicationAdapter:
                     unresolved.append(row["journal_key"])
         result["unknown_effects"] = unresolved
         return result
+
+    def _current_discovery(self, target: Mapping[str, Any]) -> dict[str, Any] | None:
+        """Reuse an actual query in this turn only until the next object operation.
+
+        Progress refresh is not another evidence query. Explicit lookup/observe
+        still execute a new query; a new public message cannot reuse this one.
+        A later mutation or unknown call prevents reuse of the older observation.
+        """
+        if not self.can_read:
+            return None
+        for row in reversed(list(self.app.journal._entries().values())):
+            if (not isinstance(row, dict) or row.get("owner") != self.owner
+                    or row.get("target") != dict(target)):
+                continue
+            turn = row.get("public_turn", {})
+            if (turn.get("session") != self.session or turn.get("turn_id") != self.turn_id
+                    or row.get("name") != self.query or row.get("status") != "complete"
+                    or not row.get("executed")):
+                return None
+            saved = next((item for item in self.app.progress.snapshot().values()
+                if all(item["identity"].get(field) == row.get(field)
+                       for field in ("thread_id", "generation_id", "call_id", "name"))), None)
+            source_ref = (saved or {}).get("raw_capture", {}).get("source_ref")
+            if not source_ref or not self.source_visible(source_ref):
+                return None
+            request = SimpleNamespace(
+                tool_call={"name": self.query, "args": row["args"], "id": row["call_id"],
+                           "type": "tool_call"},
+                state={"messages": [AIMessage(content="", id=row["generation_id"])]},
+                runtime=SimpleNamespace(config=self.runtime_config),
+            )
+            result = self._call(self.query, row["args"], row["call_id"], request=request)
+            result["reused_current_observation"] = True
+            return result
+        return None
 
     def source_visible(self, source_ref: str) -> bool:
         return bool(self.can_read and self.service.source(source_ref) is not None)
@@ -366,8 +405,9 @@ class SandboxApplicationAdapter:
             "receipt": receipt,
             "source_ref": source_ref,
             "object_ref": asdict(ref) if ref else None,
-            "current_state": receipt,
-            "business_effect": row["effect"] if row else "unknown",
+            "current_state": receipt if row and row.get("executed") else None,
+            "business_effect": row["effect"] if row else
+                "none" if receipt.get("effect") == "none" else "unknown",
             "permissions": {
                 "can_read": self.can_read,
                 "operations": sorted(self.allowed_operations),

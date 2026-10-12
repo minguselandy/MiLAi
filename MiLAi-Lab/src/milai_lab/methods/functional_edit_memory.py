@@ -129,6 +129,7 @@ class FunctionalEditMemory(FunctionalMemory):
         interface_version: InterfaceVersion = "v1",
         features: EditFeatures | None = None,
         maintenance_recipe: MaintenanceRecipe | None = None,
+        maintenance_mode: Literal["legacy", "event_delta_v1"] = "legacy",
         query_time: str | None = None,
         query_calendar_context: str | None = None,
         **kwargs: Any,
@@ -141,10 +142,12 @@ class FunctionalEditMemory(FunctionalMemory):
         if arm == "Append-only":
             if interface_version != "I2" or maintenance_recipe is None:
                 raise ValueError("FUNCTIONAL_APPEND_REQUIRES_I2_MAINTENANCE_RECIPE")
-            self.writer = AppendMemory(self.service, features=features or EditFeatures())
+            self.writer = AppendMemory(self.service, features=features or EditFeatures(),
+                                       maintenance_mode=maintenance_mode)
         else:
             self.writer = EditMemory(
-                self.service, arm, interface_version=interface_version, features=features
+                self.service, arm, interface_version=interface_version, features=features,
+                maintenance_mode=maintenance_mode,
             )
         self.features = self.writer.features
         self.interface_version = interface_version
@@ -153,6 +156,8 @@ class FunctionalEditMemory(FunctionalMemory):
         self.query_calendar_context = query_calendar_context
         if maintenance_recipe is not None:
             self.policy["maintenance_recipe"] = maintenance_recipe
+        if maintenance_mode != "legacy":
+            self.policy["maintenance_mode"] = maintenance_mode
         self.conditioned = arm in {"B2", "M"}
         self.local = arm in {"B1", "M"}
         self.memory_method = next(name for name, value in FUNCTIONAL_ARMS.items() if value == arm)

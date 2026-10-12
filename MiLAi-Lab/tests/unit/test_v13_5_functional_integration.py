@@ -88,6 +88,7 @@ def prepared(
     support_contract: str = "legacy",
     support_input: bool = False,
     bounded_reproposal: bool = False,
+    dynamic_memory: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -188,6 +189,9 @@ def prepared(
     }
     if edit_interface_version != "v1":
         settings["edit_interface_version"] = edit_interface_version
+    if dynamic_memory:
+        settings.update(source_access="independent_v1", source_top_k=20, semantic_top_k=10,
+                        max_evidence_queries=2, maintenance_mode="event_delta_v1")
     if edit_features is not None:
         settings["edit_features"] = edit_features
     if maintenance_recipe is not None:
@@ -6869,3 +6873,83 @@ def test_host_forget_uses_delivered_target_and_reopen_keeps_original_body_hidden
                                  content="What marker preference is still available?")
     assert reopened["status"] == "COMPLETED", reopened.get("error")
     assert all(row["status"] == "visibility_revoked" for row in reopened["records"])
+
+
+def test_dynamic_host_reads_unformed_source_and_explicitly_consolidates_once(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.runners import memory_operations
+
+    root = prepared(tmp_path, native=True, scope_requests=True, direct_response=True,
+        phase_thinking=True, dynamic_memory=True, memory_method="milai_edit_m_v1",
+        edit_interface_version="I2", maintenance_recipe="single_pass",
+        memory_view_mode="staged", memory_profile="unified_v1",
+        edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope")})
+    original = "Remember: I use an amber marker only on weekdays. Do not reserve anything."
+    query = "What marker did I report? Only read the original; do not save or do business."
+    state = {"consolidating": False}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {item["function"]["name"] for item in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            text = wire["messages"][-1]["content"]
+            return native_call("classify_current_request", "scope-" + str(ordinal),
+                memory_requests=["explicit"] if text == original else [], allow_forgetting=False,
+                business_action_request="none", application_continuation_request="none",
+                response_scope="substantive", read_goal={
+                    "purpose": "Read the user's original marker report",
+                    "evidence": ["original_source"]},
+                forbidden_operations=["business_mutation"] + (
+                    ["memory_write"] if text == query else []))
+        if not names:
+            frame = json.loads(wire["messages"][-1]["content"])
+            delivery = frame["delivery"]
+            assert "change_candidates" in delivery
+            if not state["consolidating"]:
+                return {"role": "assistant", "content": '{"creates":[],"records":{}}'}
+            evidence = next(row["id"] for row in delivery["evidence"] if row["text"] == original)
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "Marker preference", "clauses": [{
+                    "text": "The user reports using an amber marker only on weekdays.",
+                    "evidence": [evidence], "conditions": [],
+                    "assertion": {"source_evidence": evidence, "kind": "reported"}}]}],
+                "records": {}})}
+        assert not set(functional.BUSINESS_MUTATIONS).intersection(names)
+        packet = expand_host_packet(materials(wire))
+        assert packet["reading_requirement"]["required_evidence"] == ["original_source"]
+        current = next(m["content"] for m in wire["messages"] if m["role"] == "user")
+        if current == query:
+            assert "save_memory" not in names and "update_memory" not in names
+            assert any(item.get("content") == original for item in packet["items"])
+            return {"role": "assistant", "content": "You reported an amber marker on weekdays."}
+        return {"role": "assistant", "content": "Original captured; no semantic record committed."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    monkeypatch.setattr(memory_operations, "FunctionalVLLMClient", functional.FunctionalVLLMClient)
+    common = {"bank": "dynamic-host", "owner": "alice"}
+    saved = functional.message(root, **common, session="save", message_id="first", content=original)
+    assert saved["status"] == "COMPLETED", saved.get("error")
+    assert saved["records"] == [] and saved["capture"]["ok"]
+    count = len(wires)
+    queried = functional.message(root, **common, session="query", message_id="read", content=query)
+    assert queried["status"] == "COMPLETED", queried.get("error")
+    assert queried["records"] == [] and queried["maintenance"] == []
+    assert len(wires) - count == 2  # Existing classification and direct answer, no selector/query.
+    assert queried["final_answer"] == "You reported an amber marker on weekdays."
+    assert queried["request_mode"]["forbidden_operations"] == ["business_mutation", "memory_write"]
+    state["consolidating"] = True
+    episodes = [saved["capture"]["episode_id"]]
+    arguments = {**common, "session": "organize", "request_id": "explicit-once",
+        "text": "Organize the original marker report; do not perform any business operation.",
+        "operation": "consolidate", "episode_ids": episodes}
+    organized = memory_operations.run(root, **arguments)
+    assert organized["status"] == "completed", organized
+    assert organized["business_operations_executed"] == 0
+    assert organized["semantic_write_performed"] is True
+    assert organized["source_refs"] == [saved["capture"]["source_ref"]]
+    assert organized["new_independent_support"] is False
+    count = len(wires)
+    repeated = memory_operations.run(root, **arguments)
+    assert repeated["status"] == "completed" and len(wires) == count

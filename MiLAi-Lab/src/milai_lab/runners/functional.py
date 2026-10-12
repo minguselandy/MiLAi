@@ -39,7 +39,7 @@ from pydantic import ConfigDict, Field, create_model, model_validator
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.host_requests import HostRequestProgress, visible_cards
 from milai_lab.application.recovery import UnknownModelRequest, resume_request
-from milai_lab.application.refs import observation_profile
+from milai_lab.application.refs import maintenance_observation_profiles, observation_profile
 from milai_lab.application.request_plans import (
     application_operation_catalog,
     application_requests_schema,
@@ -59,7 +59,12 @@ from milai_lab.harness.contextual_artifacts import (
 )
 from milai_lab.harness.functional_faults import FunctionalFaults
 from milai_lab.memory.activation import ActivationIndex
-from milai_lab.memory.functional import FunctionalMemory, ReadSelector, ReadSelectorTool
+from milai_lab.memory.functional import (
+    FunctionalMemory,
+    ReadSelector,
+    ReadSelectorTool,
+    StructuredReadGoal,
+)
 from milai_lab.memory.functional_state import FunctionalIntegrityError as FunctionalIntegrityError
 from milai_lab.memory.functional_state import FunctionalRejection, visibility
 from milai_lab.memory.functional_state import namespace as functional_namespace
@@ -341,6 +346,28 @@ Declare business_action_request: none when no external application effect is
 requested (including memory-only work and pure queries), perform only for newly
 requested real application effects, continue_if_unfinished for explicitly requested
 continuation of prior application work.
+"""
+REQUEST_PARTS_MODE_PROMPT = """Interpret the whole CURRENT request once. Call
+classify_current_request; it performs no work. Keep these parts separate:
+1. business_action_request: perform for requested application actions,
+continue_if_unfinished for continuing them, none only when no application effect
+is requested. Asking to save an action's result does not replace that action.
+2. memory_requests: new_assertion for a supplied durable assertion, explicit for
+requested saving/updating, continue_prior for unfinished prior saving. Use [] for
+queries or forgetting alone. Do not save execution controls as domain facts.
+3. read_goal: what must be established, using current_interpretation,
+original_source, saved_history, or live_business. A current record cannot prove
+what a previous version contained; a saved receipt is not a fresh business query.
+Use null when no reading purpose is requested.
+4. forbidden_operations: explicit CURRENT exclusions only. business_mutation
+for no new business actions, memory_write for no saving/editing, forget_memory
+for no visibility revocation, or exact registered application operation names.
+Apply an exclusion to its named work, not to the whole request. Skipping already
+saved or completed work does not prohibit separately requested unfinished work.
+Forgetting needs allow_forgetting=true but is not a semantic save. Its targets
+must cover the authorized request/result/source/history scope after actual reads.
+Visible old requests resolve references; they never restore excluded permission.
+Classify intent without deciding feasibility or claiming work already completed.
 """
 REQUEST_COMPLETE_MODE_PROMPT = REQUEST_SCOPE_MODE_PROMPT + """\
 Declare concrete actions once, inside application_requests.actions. Interpret the
@@ -711,6 +738,8 @@ def prepare(
         "memory_profile",
         "memory_ranking",
         "retrieval_granularity", "stage_enable_thinking",
+        "source_access", "source_top_k", "semantic_top_k", "max_evidence_queries",
+        "maintenance_mode",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
     if set(settings) - allowed:
@@ -720,6 +749,18 @@ def prepare(
         raise ValueError("FUNCTIONAL_MEMORY_PROFILE_INVALID")
     if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
         raise ValueError("FUNCTIONAL_MEMORY_VIEW_MODE_INVALID")
+    if settings.get("source_access", "legacy") not in {"legacy", "independent_v1"} or any(
+        type(settings.get(key, default)) is not int or settings.get(key, default) < 1
+        for key, default in (("source_top_k", 20), ("semantic_top_k", 10))
+    ):
+        raise ValueError("FUNCTIONAL_SOURCE_RETRIEVAL_INVALID")
+    if "max_evidence_queries" in settings and (
+        type(settings["max_evidence_queries"]) is not int
+        or not 0 <= settings["max_evidence_queries"] <= 2
+    ):
+        raise ValueError("FUNCTIONAL_EVIDENCE_QUERY_LIMIT_INVALID")
+    if settings.get("maintenance_mode", "legacy") not in {"legacy", "event_delta_v1"}:
+        raise ValueError("FUNCTIONAL_MAINTENANCE_MODE_INVALID")
     if settings.get("result_maintenance_mode", "legacy") not in {
         "legacy", "literal_observations_v1",
     }:
@@ -1100,6 +1141,7 @@ def request_mode(
     memory_continuation: bool = False,
     application_workflow: str | None = None,
     scope_only: bool = False,
+    request_parts: bool = False,
     referenced_requests: list[dict[str, Any]] | None = None,
     reference_fit: Callable[[str], bool] | None = None,
 ) -> dict[str, Any]:
@@ -1123,7 +1165,9 @@ def request_mode(
         if scope_only and (not saved or (isinstance(value, dict)
                                         and "application_requests" not in value)):
             # Saved full V8 decisions keep their original validation and meaning.
-            if not isinstance(value, dict) or set(value) - {"response_scope"} != {
+            optional = {"response_scope", *({"read_goal", "forbidden_operations"}
+                                           if request_parts else set())}
+            if not isinstance(value, dict) or set(value) - optional != {
                 "memory_requests", "allow_forgetting", "business_action_request",
                 "application_continuation_request",
             } or not isinstance(value.get("response_scope", "substantive"), str) or (
@@ -1132,6 +1176,20 @@ def request_mode(
                 }
             ):
                 return False
+            if request_parts:
+                goal = value.get("read_goal")
+                try:
+                    if goal is not None:
+                        StructuredReadGoal.model_validate(goal)
+                except ValueError:
+                    return False
+                forbidden = value.get("forbidden_operations", [])
+                if (not isinstance(forbidden, list)
+                        or any(not isinstance(op, str) or op not in {
+                            "memory_write", "forget_memory", "business_mutation",
+                            *BUSINESS_MUTATIONS} for op in forbidden)
+                        or len(forbidden) != len(set(forbidden))):
+                    return False
             requests = value["memory_requests"]
             return (isinstance(requests, list)
                 and all(isinstance(item, str) and item in {
@@ -1247,7 +1305,8 @@ def request_mode(
             raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
         write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
-        prompt = (REQUEST_SCOPE_MODE_PROMPT if scope_only else
+        prompt = (REQUEST_PARTS_MODE_PROMPT if scope_only and request_parts else
+                  REQUEST_SCOPE_MODE_PROMPT if scope_only else
                   REQUEST_COMPLETE_MODE_PROMPT if application_workflow is not None else
                   REQUEST_CONTINUATION_MODE_PROMPT if memory_continuation else
                   REQUEST_REFERENCE_MODE_PROMPT if reference_mode_declaration else
@@ -1260,6 +1319,9 @@ def request_mode(
                 "Call\nclassify_current_request once; it executes no operation.",
                 "Return exactly one JSON object matching the response schema. This declaration\n"
                 "executes no operation.")
+            if request_parts:
+                prompt = prompt.replace("Call\nclassify_current_request; it performs no work.",
+                    "Return one JSON object matching the response schema; it performs no work.")
         declaration = (REQUEST_COMPLETE_MODE_DECLARATION if application_workflow is not None else
                        REQUEST_CONTINUATION_MODE_DECLARATION if memory_continuation else
                        REQUEST_REFERENCE_MODE_DECLARATION if reference_mode_declaration else
@@ -1282,6 +1344,13 @@ def request_mode(
             }
             parameters["required"].append("application_continuation_request")
             if scope_only:
+                if request_parts:
+                    parameters["properties"]["read_goal"] = {"anyOf": [
+                        StructuredReadGoal.model_json_schema(), {"type": "null"}]}
+                    parameters["properties"]["forbidden_operations"] = {
+                        "type": "array", "uniqueItems": True, "items": {"type": "string",
+                            "enum": ["memory_write", "forget_memory", "business_mutation",
+                                     *sorted(BUSINESS_MUTATIONS)]}}
                 # Existing saved V9 decisions omit this field and retain their
                 # ordinary answer path without another classification call.
                 parameters["properties"]["response_scope"] = {
@@ -1447,6 +1516,9 @@ def request_mode(
         summary["memory_requests"] = memory_requests
     if "response_scope" in decision:
         summary["response_scope"] = decision["response_scope"]
+    for key in ("read_goal", "forbidden_operations"):
+        if key in decision:
+            summary[key] = decision[key]
     if application_workflow is not None:
         summary["application_requests"] = decision.get("application_requests", [])
         summary["application_continuation_request"] = decision["application_continuation_request"]
@@ -2604,12 +2676,17 @@ def message(
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
                 memory_options["features"] = edit_features
                 memory_options["maintenance_recipe"] = settings.get("maintenance_recipe")
+                memory_options["maintenance_mode"] = settings.get("maintenance_mode", "legacy")
                 memory_options["query_time"] = query_time
                 memory_options["query_calendar_context"] = query_calendar_context
             memory = memory_class(
                 service,
                 capacity.text_tokens,
                 read_limit=settings["additional_reads"],
+                source_access=settings.get("source_access", "legacy"),
+                source_top_k=settings.get("source_top_k", 20),
+                semantic_top_k=settings.get("semantic_top_k", 10),
+                max_evidence_queries=settings.get("max_evidence_queries"),
                 material_limit=settings["ordinary_material_tokens"],
                 memory_view_mode=settings.get("memory_view_mode", "legacy"),
                 formation_interface=settings.get("formation_interface", "content_and_scope_v1"),
@@ -2819,6 +2896,7 @@ def message(
                             "current_request_json_v9"} else None),
                     scope_only=settings["request_mode"] in {
                         "current_request_native_v9", "current_request_json_v9"},
+                    request_parts=settings.get("source_access") == "independent_v1",
                     referenced_requests=request_cards,
                     reference_fit=lambda text: capacity.text_tokens(text)
                     <= settings["ordinary_material_tokens"],
@@ -2994,6 +3072,20 @@ def message(
                         declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
                         source_fragment=service.source_fragment,
                     )
+                forbidden = set(mode.get("forbidden_operations", []))
+                if "memory_write" in forbidden:
+                    mode["allow_memory_maintenance"] = False
+                if "forget_memory" in forbidden:
+                    mode["allow_forgetting"] = False
+                if forbidden and "business_operations" in mode:
+                    mode["business_operations"] = [op for op in mode["business_operations"]
+                        if op not in forbidden and "business_mutation" not in forbidden]
+                    mode["allow_business_mutation"] = bool(mode["business_operations"])
+                if mode.get("read_goal") is not None and memory.memory_view_mode != "legacy":
+                    view = memory.view_state(cfg)
+                    if view["read_goal"] is None:
+                        memory.focus_view(cfg, focus=view["focus"], read_goal=mode["read_goal"])
+                memory.forget_requested = bool(mode["allow_forgetting"])
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {
@@ -3074,6 +3166,17 @@ def message(
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
             read_exhausted = False
             business_query_targets: list[dict[str, Any]] = []
+
+            def available_tool_names(config: RunnableConfig) -> set[str]:
+                names = allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
+                if memory.max_evidence_queries is not None:
+                    allowance = memory.read_allowance(config)
+                    if allowance["reads_remaining"] == 0:
+                        names -= set(memory.read_tool_names) | {
+                            "get_reservation", "get_document_status"}
+                    elif allowance["evidence_queries_remaining"] == 0:
+                        names -= {"search_memory", "get_reservation", "get_document_status"}
+                return names
 
             def maintain_current(execute: bool) -> list[dict[str, Any]]:
                 assert isinstance(memory, FunctionalEditMemory)
@@ -3162,7 +3265,10 @@ def message(
                     maintenance_scope=content,
                     prepare_source_delivery=(
                         (lambda delivery: memory.writer.observation_delivery(
-                            delivery, [observation_profile(app.workflow, maintenance=True)]))
+                            delivery, maintenance_observation_profiles(app.workflow)
+                            if settings.get("maintenance_mode") == "event_delta_v1" else
+                            [observation_profile(app.workflow, maintenance=True)],
+                            execution_only_origins=tuple(tool.name for tool in memory.tools())))
                         if settings.get("result_maintenance_mode", "legacy")
                         == "literal_observations_v1" else None),
                     result_observer=observe_result,
@@ -3341,9 +3447,7 @@ def message(
                 trace({"event": "functional_memory_effects", "effects": effects})
                 refresh_requests()
                 if settings.get("capability_delivery") == "actual_catalog_v1":
-                    active = [] if for_finalization else sorted(
-                        allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
-                    )
+                    active = [] if for_finalization else sorted(available_tool_names(config))
                     capability_text = (
                         "CURRENT EXECUTION CAPABILITIES: " + json.dumps(active) + ". "
                         "This catalog limits the Agent's next actions; it does not report "
@@ -3400,6 +3504,11 @@ def message(
                             + "\n" + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
                             + "\nCURRENT TOOLS AND ACTION LIMITS:\n"
                             + capability_text
+                            + ("Shared reading allowance: " + json.dumps(
+                                memory.read_allowance(config)) + ". New source searches and "
+                                "business queries share this allowance with body/history "
+                                "reads and pagination. A denial is not evidence of nonexistence.\n"
+                                if memory.max_evidence_queries is not None else "")
                             + "Use only the tools actually supplied for this phase. This limits "
                               "next actions; it cannot establish that a prior effect did not occur."
                             + (MAINTENANCE_LIMIT_PROMPT if not for_finalization
@@ -3412,6 +3521,15 @@ def message(
                                and {"save_memory", "update_memory"}.intersection(allowed_tools)
                                else "")
                             + "\nCURRENT REQUEST PROGRESS AND OUTSTANDING WORK:\n"
+                            + ("For this forgetting request, consider the authorized temporary "
+                               "set of result records, original requests, their Source links and "
+                               "saved history. Related navigation is not authorization: open "
+                               "actual targets before selecting effects. Source revocation here "
+                               "covers whole Sources, not excerpts; preserve unrelated contents "
+                               "and report a remaining Source limitation when only record scope "
+                               "is authorized. After revocation, unavailable does not mean never "
+                               "saved.\n" if memory.forget_requested
+                               and memory.source_access == "independent_v1" else "")
                             + "Request interpretation describes intent, not completed effects. "
                               "Use actual progress, pending calls, unprocessed maintenance and "
                               "reading gaps to identify unfinished or unknown work. A confirmed "
@@ -3443,11 +3561,16 @@ def message(
                                          in {"inline_fragments_v1", "inline_receipt_units_v2"}),
                 complete_receipt_units=(settings.get("source_selection")
                                         == "inline_receipt_units_v2"),
+                evidence_query=(lambda request, execute: memory.query_observation(
+                    cfg, request.tool_call["id"], request.tool_call["name"],
+                    request.tool_call["args"], execute))
+                if settings.get("max_evidence_queries") is not None else None,
             )
             adapter = None
             if service.memory_profile == "unified_v1":
                 adapter = app.adapter(
                     service, session, message_id, runtime_config=cfg,
+                    reuse_current_observations=settings.get("max_evidence_queries") is not None,
                     allowed_operations=tuple(
                         tool.name for tool in selected_business
                         if tool.name not in {"get_reservation", "get_document_status"}
@@ -3627,10 +3750,9 @@ def message(
                     if memory.memory_view_mode != "legacy" and adapter is not None
                     else selected_business
                 )
-                catalog = tuple(tool for tool in memory_catalog
-                                if tool.name in allowed_tools and (
-                                    not read_exhausted or tool.name not in memory.read_tool_names
-                                )) + business_catalog
+                available = available_tool_names(config)
+                catalog = tuple(tool for tool in memory_catalog if tool.name in available) + tuple(
+                    tool for tool in business_catalog if tool.name in available)
                 trace({"event": "functional_bound_tool_catalog",
                        "tools": [convert_to_openai_tool(tool) for tool in catalog]})
                 return catalog
