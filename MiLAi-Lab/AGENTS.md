@@ -3,7 +3,7 @@
 User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261012.md.
 This supersedes older scheduling/approval gates below. Develop first; no SHA checks or new review platform.
 Root tree /cra/memory/mx_memory/MiLAi-worktrees/evidence-development-20261013, base f964292a includes PR121.
-Original main/integration dirty plans preserved. Product/Archive untouched. Full goal ACTIVE/incomplete.
+Original main/integration dirty plans preserved. Product/Archive untouched. Finite development/execution COMPLETE with explicit negative/partial outcomes; no pending required experiment. Positive quality claims remain unproven as detailed below.
 Root alone owns real model HTTP with original continuous budget.json and serial owner lock; unknown floor now9gen/1emb retained after CPU timeout (original8gen/1emb unchanged through earlier branches).
 Original b558 CLOSED32sessions/73QA=71answers+2missing; replay uses exact saved prefix recalls, no final-bank search,
 no new maintenance/recall/ActivationIndex feedback. Original1201witness fragments verified prefix-visible, noHTTP.
@@ -60,20 +60,22 @@ CPUprestop cumulativeuser17408.62/sys22248.84/elapsed7334.60s, peakRSS2748033433
 not perrequest receipt. Inputlocal/server23035 match, no confirmed output or finishreason.
 Root alreadydecided no24expansion currentCPU; not generalized toofficialGPU/BF16. No currentmodelrequests.
 
-Narrow runtime diagnostic prepared E/allocator_probe.py: existingTorch DynamicCache cat+repeat_kv, same FP32
-shapes8KV/32queryheads/23035length/128dim,8threads, no weights/model/attention/HTTP. Runserial freshprocess
-only afterownedworkerexit. Default firstprobe failed before tensors because dladdr returned executable-relative
-symbolname; ranking_adapter examining realowner/PLT mapping and repairing diagnostic, no modelcalls authorized.
-Potential existingRay jemalloc LD_PRELOAD is sole intendedfactor; no newframework/quantization/backendpatch.
-Do not launch new model until actualcomponent evidence + modelreview justify. If justified use newpaged-onlyroot;
-originalfailedreservation and oldv1 remain. No automatic retry of originalcondition. No more samefoodprompt edits.
+Narrow runtime diagnostic CLOSED, no weights/model/attention/HTTP. E/allocator-probe-{default,jemalloc}.json:
+same FP32/8threads/8KV/32heads/23035length/128dim,2warmups3measuredsteps; all fullvaluechecks pass.
+Default0.146252s/step,minflt691181; Rayjemalloc0.154690s/step,minflt691096. No evidence to rerun model
+with defaultpreload; Root ends CPU FP32 path, no newmodel/24matrix. Not end-to-end or universalallocatorclaim.
+Firstprobe rejected mallocPLT identity beforetensors; originalscript-v1 andstderr retained. Fixed usingactual
+CPUallocatorposix_memalign owner, two independentmodelreviews passed. Comparison E/allocator-probe-comparison.json.
+E/development-final-resource-accounting.json confirms original ledger lockFREE, owned5PIDs gone21:33:15UTC,
+generationunknown9/embeddingunknown1 retained. No currentmodelcalls or queuedreruns. Allrealbranches settled.
 
 All A/C/D realwork closed. C semanticjointsuccess NOT met; correct source-assisted Reader does not excuse stored
 sharedpredicate damage. event_at alreadywrong in Extractor rawchanges[1].time andWriterrawassertion; compiler
 onlycopies, occurred_at separatelyreportmetadata. No deterministic timestamp default bug; no speculative filter.
 Independentplan audit E/development-plan-final-audit-preparation.json covers68requirements/14checklistitems;
-finitefailedexperiments may close plan execution without claiming Csemanticacceptance. Finalaudit stillpending
-Bdiagnosis/result/cost report. No73/longhistory/training signal inA/D; keep these conditional branches NOT_RUN.
+finitefailedexperiments close plan execution without claiming Csemanticacceptance. Final report wording and
+CPUdiagnosis/cost independently reviewed; Bdiagnosis/result/cost report written. No73/longhistory/training
+signal inA/D; keep these conditional branches NOT_RUN. No auto-continuation or rerun needed for this plan.
 
 No remote push/merge for this task; local commits/frozen experiments reviewable. No new goal pause/block condition.
 
