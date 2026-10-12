@@ -2422,6 +2422,10 @@ class BenchmarkRun:
                         "selection schema. A read_goal does not establish available history."
                     )
                     if joint_budgeted:
+                        result[0]["content"] = result[0]["content"].replace(
+                            " After all pending pages, an empty page may ask you to reduce "
+                            "the nominations using the same remaining reads.", "",
+                        )
                         result[0]["content"] += (
                             " Your nominations are admitted under the measured final-input "
                             "budget, whole original sources before optional semantic views. "
