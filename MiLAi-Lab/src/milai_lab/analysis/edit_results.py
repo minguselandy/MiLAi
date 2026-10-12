@@ -28,6 +28,163 @@ def ratio(numerator: float, denominator: int) -> float | None:
     return numerator / denominator if denominator else None
 
 
+def _evidence_checkpoint_costs(costs: list[dict[str, Any]]) -> dict[str, Any]:
+    """Sum completed checkpoint costs; unfinished HTTP work is outside this scope."""
+    result: dict[str, Any] = {
+        "models": {}, "stages": {}, "embedding_tokens": 0, "elapsed_seconds": 0.0,
+    }
+    for cost in costs:
+        groups = [(result["models"], cost.get("models", {}))]
+        for stage, models in cost.get("stages", {}).items():
+            groups.append((result["stages"].setdefault(stage, {}), models))
+        for target, models in groups:
+            for model, usage in models.items():
+                total = target.setdefault(model, {
+                    "calls": 0, "input_tokens": 0, "output_tokens": 0,
+                })
+                for field in total:
+                    total[field] += usage[field]
+        result["embedding_tokens"] += cost.get("embedding_tokens", 0)
+        result["elapsed_seconds"] += cost["elapsed_seconds"]
+    result["checkpoint_count"] = len(costs)
+    return result
+
+
+def evidence_replay_summary(root: Path) -> dict[str, Any]:
+    """Summarize one replay backend from fixed selection and per-question checkpoints.
+
+    Mutable progress tables and dataset/reference aggregates are never read. Only
+    identity, execution, labels and costs leave this function, not answer/gold text.
+    ``executed`` includes a started question without a prediction checkpoint;
+    ``unfinished`` counts these plus saved predictions still awaiting evaluation.
+    It does not assert a process is currently running.
+    """
+    config = read_json(root / "actual-config.json")
+    replay = config["evidence_replay"]
+    counts = dict.fromkeys((
+        "planned", "executed", "answered", "missing", "not_run", "unfinished_predictions",
+        "pending_score", "scored", "correct", "invalid",
+    ), 0)
+    labels: Counter[str] = Counter()
+    rows = []
+    prediction_costs, judge_costs = [], []
+    for item in replay["questions"]:
+        key = f"halumem/{item['owner']}/{item['session']}/qa/{item['question']}"
+        prediction_path = root / "predictions" / key / "complete.json"
+        evaluation_path = root / "evaluation" / key / "complete.json"
+        counts["planned"] += 1
+        row: dict[str, Any] = {
+            "question_id": key, "owner": item["owner"], "session": item["session"],
+            "question": item["question"], "official_label": None, "label": "unscored",
+            "scored": False,
+        }
+        if not prediction_path.exists():
+            started = ((root / "native" / key / "retrieval.json").exists()
+                       or (root / "http" / key).is_dir())
+            row["execution"] = "unfinished" if started else "not_run"
+            counts["executed"] += started
+            counts["unfinished_predictions" if started else "not_run"] += 1
+            rows.append(row)
+            continue
+        prediction = read_json(prediction_path)
+        execution = prediction["execution"]
+        if execution not in {"answered", "missing"}:
+            raise ValueError("Replay prediction checkpoint lacks a completed execution")
+        row["execution"] = execution
+        counts["executed"] += 1
+        counts[execution] += 1
+        prediction_costs.append(prediction["prediction_cost"])
+        if evaluation_path.exists():
+            evaluation = read_json(evaluation_path)
+            label = evaluation["record"]["result_type"]
+            normalized = ("missing" if execution == "missing" else label
+                          if label in {"Correct", "Hallucination", "Omission"} else "invalid")
+            row.update(scored=True, official_label=label, label=normalized)
+            labels[normalized] += 1
+            counts["scored"] += 1
+            counts["correct"] += normalized == "Correct"
+            counts["invalid"] += normalized == "invalid"
+            judge_costs.append(evaluation["judge_cost"])
+        else:
+            counts["pending_score"] += 1
+        rows.append(row)
+    counts["unfinished"] = counts["unfinished_predictions"] + counts["pending_score"]
+    terminal_path = root / "terminal-score.json"
+    terminal = read_json(terminal_path) if terminal_path.exists() else {}
+    score_complete = (counts["scored"] == counts["planned"]
+                      and terminal.get("status") == "SCORED"
+                      and terminal.get("resources_settled") is True)
+    prediction_cost = _evidence_checkpoint_costs(prediction_costs)
+    prediction_cost.update(
+        scope="saved complete prediction checkpoints; unfinished attempts excluded",
+        unfinished_questions_excluded=counts["unfinished_predictions"],
+        coverage_complete_for_executed=counts["unfinished_predictions"] == 0,
+    )
+    judge_cost = _evidence_checkpoint_costs(judge_costs)
+    judge_cost.update(
+        scope="saved evaluation checkpoints; any unfinished Judge request excluded",
+        pending_evaluations_excluded=counts["pending_score"],
+        coverage_complete_for_planned=score_complete,
+    )
+    return {
+        "root": str(root), "status": "COMPLETED" if score_complete else "INCOMPLETE",
+        "experiment_name": config.get("experiment_name"),
+        "variant": config.get("evidence_variant", "S2"),
+        "reader_ranking": config.get("reader_ranking", "native"),
+        "joint_selection": config.get("joint_selection"),
+        "shared_source_run": replay["source_run"],
+        "counts": counts, "labels": dict(labels), "questions": rows,
+        "score_terminal_status": terminal.get("status"), "score_complete": score_complete,
+        "correct_ratio_all_opportunities": (
+            ratio(counts["correct"], counts["planned"]) if score_complete else None),
+        "scored_subset": {
+            "correct": counts["correct"], "opportunities": counts["scored"],
+            "correct_ratio": ratio(counts["correct"], counts["scored"]),
+            "planned_coverage": ratio(counts["scored"], counts["planned"]),
+            "scope": "completed evaluations only; includes invalid and known missing answers",
+        },
+        "prediction_cost": prediction_cost, "judge_cost": judge_cost,
+        "shared_cost": "Original formation/retrieval reused once; not duplicated per replay arm",
+    }
+
+
+def evidence_replay_comparison(control_root: Path, candidate_root: Path) -> dict[str, Any]:
+    """Pair completed official evaluations only, with explicit planned coverage."""
+    control = evidence_replay_summary(control_root)
+    candidate = evidence_replay_summary(candidate_root)
+    left = {row["question_id"]: row for row in control["questions"]}
+    right = {row["question_id"]: row for row in candidate["questions"]}
+    planned = left.keys() & right.keys()
+    scored = sorted(key for key in planned if left[key]["scored"] and right[key]["scored"])
+    candidate_only = [key for key in scored if right[key]["label"] == "Correct"
+                      and left[key]["label"] != "Correct"]
+    control_only = [key for key in scored if left[key]["label"] == "Correct"
+                    and right[key]["label"] != "Correct"]
+    both_correct = sum(left[key]["label"] == right[key]["label"] == "Correct" for key in scored)
+    return {
+        "control": control, "candidate": candidate,
+        "same_shared_source_run": control["shared_source_run"] == candidate["shared_source_run"],
+        "paired_coverage": {
+            "planned_common": len(planned), "completed_scored_common": len(scored),
+            "planned_common_ratio": ratio(len(scored), len(planned)),
+            "control_planned_ratio": ratio(len(scored), len(left)),
+            "candidate_planned_ratio": ratio(len(scored), len(right)),
+            "not_paired_question_ids": sorted(planned - set(scored)),
+        },
+        "paired_scored": {
+            "candidate_only_correct": len(candidate_only),
+            "control_only_correct": len(control_only), "both_correct": both_correct,
+            "both_noncorrect": len(scored) - both_correct - len(candidate_only) - len(control_only),
+            "net_correct": len(candidate_only) - len(control_only),
+            "candidate_only_question_ids": candidate_only,
+            "control_only_question_ids": control_only,
+            "scope": "completed scored intersection only; no effect assigned to unscored questions",
+        } if scored else None,
+        "full_comparison_complete": (control["score_complete"] and candidate["score_complete"]
+                                     and left.keys() == right.keys()),
+    }
+
+
 def paired_interval(
     first: Sequence[float], second: Sequence[float], *, seed: int = 20261004, repeats: int = 10000
 ) -> dict[str, Any]:
