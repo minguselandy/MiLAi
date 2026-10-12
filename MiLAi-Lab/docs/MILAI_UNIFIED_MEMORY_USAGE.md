@@ -32,6 +32,67 @@ Ruff、锁文件及 Lab 两项依赖边界通过。首次检查未设置集成 P
 旧 d277 的43／73、Raw55／73及下列结果均保持历史身份，不填入新候选。
 
 
+### 新候选普通使用与显式整理
+
+以下命令在所选源码的 `MiLAi-Lab` 目录运行；示例本身没有额外派发。
+使用独立新根，实际实验不得重复使用已执行根。普通保存和查询沿同一 MemoryService：
+
+```bash
+MILAI_PYTHON=/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python
+MILAI_CONFIG=configs/milai-dynamic-memory-small-v1.json
+MILAI_DEMO=artifacts/dynamic-memory/example-v1
+MILAI_RUNTIME="$PWD/artifacts/dynamic-memory/example-runtime"
+mkdir -p "$MILAI_RUNTIME"
+export PYTHONPATH="$PWD/src"
+"$MILAI_PYTHON" tools/run_functional.py --runtime-dir "$MILAI_RUNTIME" prepare \
+  --root "$MILAI_DEMO" --config "$MILAI_CONFIG" --source-version "$(git rev-parse HEAD)"
+"$MILAI_PYTHON" tools/run_functional.py --runtime-dir "$MILAI_RUNTIME" message \
+  --root "$MILAI_DEMO" --bank personal --owner example --session example \
+  --message-id save-1 --text '请记住，我的午休提醒用静音模式。' > "$MILAI_DEMO/save-1.json"
+"$MILAI_PYTHON" tools/run_functional.py --runtime-dir "$MILAI_RUNTIME" message \
+  --root "$MILAI_DEMO" --bank personal --owner example --session example \
+  --message-id query-1 --text '只查询：我之前要求午休提醒用什么模式？'
+```
+
+原文捕获、语义提交与问题完成分别查看实际回执。显式整理从真实捕获回执取得 Episode 身份；
+不是新增来源、业务操作或写后自动审核，合法结果也可能是空提案：
+
+```bash
+MILAI_EPISODE_ID="$("$MILAI_PYTHON" -c \
+  'import json,sys; print(json.load(open(sys.argv[1]))["capture"]["episode_id"])' \
+  "$MILAI_DEMO/save-1.json")"
+TMPDIR="$MILAI_RUNTIME" SQLITE_TMPDIR="$MILAI_RUNTIME" \
+"$MILAI_PYTHON" tools/run_memory_operations.py \
+  --root "$MILAI_DEMO" --bank personal --owner example --session example \
+  --request-id organize-1 --operation consolidate --episode-id "$MILAI_EPISODE_ID" --limit 1 \
+  --text '请整理本次选中的提醒约定原始记录。'
+```
+
+`run_memory_operations.py` 没有 `--runtime-dir`；启动前指定临时目录。
+也可用 `run_functional.py episodes --root ... --bank ... --owner ...` 查看真实 Episode 身份。
+重复同一整理 request-id 使用原回执，新的整理要求使用新 request-id，不把读取当自动写入。
+
+### Host14 与 QA-only 实验入口
+
+Host 使用既有 `tools/run_baseline_host_flows.py prepare`，传新 `--root`、上述 `--config`、
+原 `--fixture`／`--controls`、真实 `--source-version` 和 `--repeats 1`；然后在资源闭合后
+显式 `serial-run --root ... --schedule-note "实际串行核查说明"`。重复次数只在 prepare 声明，
+原8+6消息保持；控制文件仍仅供评价，不进入Host。实际冻结源码11c4e826，Host根为
+`artifacts/dynamic-memory-small/host14-11c4e826`，不能用开发头替代其身份。
+
+QA-only通过配置生效，没有 `--qa-only` CLI参数。以下展示原入口，三个阶段依次执行，
+预测和资源闭合后才评分；实际运行由Root supervisor保存退出码和stderr，不重试：
+
+```bash
+MILAI_Q_ROOT=artifacts/dynamic-memory/q32-v1
+"$MILAI_PYTHON" tools/run_baseline_alignment.py "$MILAI_CONFIG" "$MILAI_Q_ROOT" \
+  --phase prepare --benchmark halumem --runtime-dir "$MILAI_RUNTIME"
+"$MILAI_PYTHON" tools/run_baseline_alignment.py "$MILAI_CONFIG" "$MILAI_Q_ROOT" \
+  --phase predict --backend MiLAi-memory-only --benchmark halumem --runtime-dir "$MILAI_RUNTIME"
+"$MILAI_PYTHON" tools/run_baseline_alignment.py "$MILAI_CONFIG" "$MILAI_Q_ROOT" \
+  --phase score --backend MiLAi-memory-only --benchmark halumem --runtime-dir "$MILAI_RUNTIME"
+```
+
 ## 2026-10-12：功能优先轻量轮结果
 
 **功能候选已接通并完成本轮轻量观察，整体语义仍有缺口，未证明方法增益。** 实际运行源码为
