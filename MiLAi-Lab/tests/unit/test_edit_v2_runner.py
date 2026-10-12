@@ -11,11 +11,13 @@ from typing import Any
 import httpx
 import pytest
 from jsonschema import Draft202012Validator
+from langchain_core.embeddings import Embeddings
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.datasets.edit_benchmarks import ObservedSession
 from milai_lab.harness.artifact_io import read_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_memory import EditMemory
@@ -842,6 +844,162 @@ def test_shared_recipe_benchmark_persists_predictions_without_repeating_calls(tm
     stage = "extraction" if recipe == "extract_then_edit" else "writer"
     assert summary[f"first_attempt_{stage}_failures"] == {"context_unavailable_before_http": 1}
     assert summary["requests_without_confirmed_responses"] == 0
+
+
+def test_independent_benchmark_recipe_commits_edits_and_retrieves_both_routes(tmp_path):
+    """Actual new-mode contracts; scripted choices do not certify model semantics."""
+    run = execution(tmp_path, "M")
+    run.settings.update(
+        config_version="synthetic-dynamic-v1", maintenance_recipe="extract_then_edit",
+        maintenance_mode="event_delta_v1", memory_profile="unified_v1",
+        memory_view_mode="direct", source_access="independent_v1", source_top_k=20,
+        semantic_top_k=10, reader_projection="semantic_units_v1", source_tokens=40,
+        edit_features=EditFeatures(True, True, True, True, True, True).settings(),
+    )
+    seed_text = "Use paper labels. Keep box tracking."
+    correction_text = "Use linen labels now."
+    events = [
+        ObservedSession("first", "2030-01-01", tuple(
+            {"role": role, "content": text, "timestamp": "2030-01-01"}
+            for role, text in (("user", seed_text), ("assistant", "Noted."),
+                               ("user", "Keep box tracking."),
+                               ("assistant", "An assistant note with no new user request."))
+        )),
+        ObservedSession("second", "2030-01-02", (
+            {"role": "user", "content": correction_text, "timestamp": "2030-01-02"},
+            {"role": "assistant", "content": "Noted.", "timestamp": "2030-01-02"},
+        )),
+    ]
+
+    class Vectors(Embeddings):
+        def __init__(self):
+            self.documents = []
+
+        def embed_documents(self, texts):
+            self.documents.extend(texts)
+            return [[1.0, 0.0] for _ in texts]
+
+        def embed_query(self, text):
+            return [1.0, 0.0]
+
+    vectors = Vectors()
+    calls = []
+    active = events[0]
+    expected_triggers = []
+
+    def provider(request):
+        wire = json.loads(request.content)
+        payload = json.loads(wire["messages"][1]["content"])
+        calls.append(payload)
+        bound = service.public_turn(active.session_id)
+        assert bound and bound["message_id"] in expected_triggers
+        assert bound["source_ref"] == service.event_id(
+            active.session_id, bound["message_id"], "user")
+        if "directory" in payload:
+            envelope = {"record_ids": [row["record_id"] for row in payload["directory"]],
+                        "done": True}
+        else:
+            packet = payload["delivery"]
+            actual_turns = [int(service.source(ref["source_ref"])["capture_key"].split(":")[-1])
+                            for ref in current_sources[batch_index]]
+            assert bound["message_id"] == expected_triggers[batch_index]
+            assert int(bound["message_id"].split(":")[-1]) <= max(actual_turns)
+            current = packet["evidence"]
+            changing = next((e for e in current if e["text"] in {
+                seed_text, correction_text}), None)
+            if "changes" in payload["response_schema"]["properties"]:
+                envelope = {"changes": ([{
+                    "subject": "Labels", "statement": changing["text"],
+                    "evidence": [changing["id"]], "time": None, "scope": None,
+                }] if changing else [])}
+            elif changing is None:
+                envelope = {"creates": [], "records": {}}
+            elif changing["text"] == seed_text:
+                envelope = {"creates": [{"action": "create", "matter": "Label handling",
+                    "clauses": [{"text": text, "conditions": [],
+                                 "evidence": [changing["id"]],
+                                 "assertion": {"source_evidence": changing["id"],
+                                               "kind": "reported"}}
+                                for text in ("Labels are paper.", "Box tracking is required.")]
+                }], "records": {}}
+            else:
+                record = packet["records"][0]
+                envelope = {"creates": [], "records": {record["id"]: {
+                    "action": "edit", "edits": [{"operation": "replace",
+                        "target_unit": record["clauses"][0]["id"], "text": "Labels are linen.",
+                        "evidence": [changing["id"]], "assertion": {
+                            "source_evidence": changing["id"], "kind": "reported"}}]}}}
+        return httpx.Response(200, json={"choices": [{"finish_reason": "stop", "message": {
+            "content": json.dumps(envelope)}}], "usage": {"total_tokens": 8}})
+
+    # Observe the real batch/public-turn binding at the ordinary transport boundary.
+    original_call = run.call
+    batch_index = 0
+    current_sources = []
+
+    def call(key, messages, **kwargs):
+        nonlocal batch_index
+        batch_index = int(key.split("/batch-", 1)[1].split("/", 1)[0])
+        return original_call(key, messages, **kwargs)
+
+    run.call = call
+    with VLLMClient(VLLMConfig("http://synthetic/v1", "test", max_tokens=100),
+                    transport=httpx.MockTransport(provider)) as client, \
+            SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        run.client = client
+        service = MemoryService(
+            store, ("dynamic", "alice"), "alice", tmp_path / "lock",
+            mutation_contract="event_bound_v1", candidate_contract="read_handle_v1",
+            functional_contract="functional_v1", memory_profile="unified_v1",
+            semantic_retriever=SemanticRetriever(vectors, 2),
+        )
+        assert service.support_contract == "direct_support_v1"
+        for event_index, active in enumerate(events):
+            batches = natural_source_batches(active, run.tokenizer, run.settings["source_tokens"])
+            expected_triggers = ["turn:" + str(max(i for i in range(batch[-1]["turn"] + 1)
+                                                  if active.turns[i]["role"] == "user"))
+                                 for batch in batches]
+            current_sources = [[{"source_ref": service.event_id(
+                active.session_id, f"turn:{part['turn']}", active.turns[part["turn"]]["role"])}
+                for part in batch] for batch in batches]
+            key = f"halumem/alice/{event_index}"
+            changed = run.maintain(service, active, key)
+            complete = read_json(tmp_path / "maintenance" / key / "complete.json")
+            assert len(changed) == 1 and complete["status"] == "completed"
+            assert complete["unprocessed"] == []
+            committed = [r for r in complete["receipts"] if r["status"] == "committed"]
+            assert len(committed) == 1 and committed[0]["effect"] == "memory_only"
+            record = service.read(committed[0]["id"])["value"]
+            assert record["revision"] == event_index + 1
+            assert set(record["field_support"]) == {"content", "scope", "basis", "kind"}
+            if event_index == 0:
+                initial = copy.deepcopy(record)
+                assert expected_triggers[0] == "turn:0" and expected_triggers[-1] == "turn:2"
+            else:
+                assert record["edit_state"]["units"][1] == initial["edit_state"]["units"][1]
+                assert service.read(committed[0]["id"], 1)["value"] == initial
+            before_calls = len(calls)
+            assert run.maintain(service, active, key) == changed and len(calls) == before_calls
+
+        before_sources = service.sources()
+        materials = run.retrieve_material(service, "linen labels", "2030-01-02", "check")
+        assert {m["kind"] for m in materials} >= {"original_source", "semantic_view"}
+        assert any(m.get("record_id") == committed[0]["id"] for m in materials)
+        assert service.sources() == before_sources and vectors.documents
+        orphan = ObservedSession("assistant-only", "2030-01-03", (
+            {"role": "assistant", "content": "A historical assistant note.",
+             "timestamp": "2030-01-03"},
+        ))
+        before = service.records()
+        assert run.maintain(service, orphan, "halumem/alice/2") == []
+        gap = read_json(tmp_path / "maintenance/halumem/alice/2/complete.json")
+        assert gap["status"] == "incomplete"
+        assert gap["unprocessed"] == [{"phase": "public_turn_binding",
+                                        "reason": "public_user_source_required"}]
+        assert service.public_turn(orphan.session_id) is None
+        assert service.records() == before and len(calls) == before_calls
+        assert [s["role"] for s in service.sources() if s["session"] == orphan.session_id] == [
+            "assistant"]
 
 
 def test_shared_benchmark_source_and_reader_use_declared_nominal_calendar(tmp_path):

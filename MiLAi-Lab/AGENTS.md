@@ -1,5 +1,21 @@
 # Current handoff: dynamic-memory plan active, 2026-10-12
 
+URGENT UPDATE 2026-10-12 03:46 UTC: Q11c4 STOPPED by Root for proven benchmark wiring defect, not user cancellation or algorithm failure.
+Newfunctional_v1 service contract rejected ALL maintenance with public_turn_required_or_mismatched; Root failed to bind actual public turns.
+5fullsessions/12savedQAalltext; no semanticcommit, embedding0. NOT a complete M candidate/effectiveness result, no Judge dispatch.
+root-stop-boundary-audit.json records SIGSTOP+stableledgerfloor8/1 before SIGINT/SIGCONT at03:46:09UTC, so no outstandingmodelcall interrupted.
+Formal root-execution-predict STOPPED03:46:10.258100UTC rc-2, terminalFAILED KeyboardInterrupt/resources_settledtrue/close_errornull.
+36gen530943known=charged/embedding0/newunknown0/0/limitsunchanged;parent1336488/worker1336489gone;leaseFREE/liveledger=end.
+Stderr confirms interrupt during backlink_candidates SQLite search, not HTTP. Frozen source/old bank/answers/cost remain immutable.
+B /root/minimal_maintenance_fix now EXCLUSIVELY editing integration edit_benchmarks.py +relatedtests for actual publicturnbinding.
+Root ownsdocs/helpers/publish. Must add maintain_recipe validcreate→retrieval ordinary test (earlier onlyno-op/read missed this integration).
+Never weakenMemoryService check, inventUserSource or resumeoldQ. After narrowfix/newcommit/freeze, use freshQbanks/newcondition; same6predeclaredsample.
+Host11c4+twoSDKactualresults remain valid unchanged Host source; benchmark-only wiringfix does not authorize redoingHost for semantic failures.
+A preserved first3sourceaxis asPARTIAL_SOURCE_REVIEW_HELD_WRITER_BINDING_BLOCK_REPORTED; no newJudge/continued oldaudit.
+D closing partialQcost/delivery; B3natural-event audit PENDING held until proper newQ. Goal stillACTIVE/fullscope, no completion.
+Latest publishedhead199ac39a14e766c86b1b8aff6322265f4631a11b ownFast38200474159RUNNING/Full38200474173SKIPPED at03:46.
+Older LIVE UPDATE below is historical; DO NOT restart its Q or score it.
+
 LIVE UPDATE 2026-10-12 03:33 UTC: dynamic goal ACTIVE, do not mark complete; actual Q FIRST prediction running.
 Frozen runtime11c4e826af350e4769c38e78c8239013e3b33606 at artifacts/dynamic-memory-small/source-11c4e826/MiLAi-Lab.
 Q artifacts/dynamic-memory-small/q32-11c4e826 started03:32:00.461863UTC, parent1336488/worker1336489 alive03:33:06UTC.

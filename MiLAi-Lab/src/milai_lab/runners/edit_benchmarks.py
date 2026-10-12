@@ -1106,6 +1106,7 @@ class BenchmarkRun:
             )
         )
         refs = []
+        user_turns = []
         for index, turn in enumerate(observed.turns):
             capture = service.capture_user if turn["role"] == "user" else service.capture_assistant
             receipt = capture(observed.session_id, f"turn:{index}", turn["content"],
@@ -1114,6 +1115,13 @@ class BenchmarkRun:
             if not receipt["ok"]:
                 raise RuntimeError("Original source capture unconfirmed")
             refs.append(receipt["source_ref"])
+            if turn["role"] == "user":
+                user_turns.append(index)
+                if service.support_contract == "direct_support_v1":
+                    service.bind_public_turn(
+                        observed.session_id, f"turn:{index}", receipt["source_ref"],
+                        config_version=self.settings["config_version"], phase="start",
+                    )
         batches = natural_source_batches(observed, self.tokenizer, self.settings["source_tokens"])
         results, changed = [], {}
         for index, batch in enumerate(batches):
@@ -1122,6 +1130,15 @@ class BenchmarkRun:
             selected_refs = list(dict.fromkeys(p["source_ref"] for p in spans))
             request_id = f"{key}:batch:{index}"
             service.bind_source_boundary(observed.session_id, request_id, selected_refs)
+            trigger_turn = next((turn for turn in reversed(user_turns)
+                                 if turn <= batch[-1]["turn"]), None)
+            if service.support_contract == "direct_support_v1" and trigger_turn is not None:
+                # Source capture covers the whole arrived session. Rebind to this
+                # batch's actual User, not a later User captured by the loop above.
+                service.bind_public_turn(
+                    observed.session_id, f"turn:{trigger_turn}", refs[trigger_turn],
+                    config_version=self.settings["config_version"], phase="start",
+                )
             delivery = method.prepare(selected_refs, "", source_ranges=spans,
                                       selected_records=[], redelivered_ranges=[])
             cutoff = min(source["observed_at"] for source in delivery["sources"])
@@ -1199,22 +1216,33 @@ class BenchmarkRun:
                     write_json(calls_path, calls)
                 return parse_object(response, reject_duplicate_keys=True)
 
-            result = maintain_event(
-                method, delivery, session=observed.session_id, request_id=request_id,
-                date=observed.date,
-                recipe=cast(MaintenanceRecipe, self.settings["maintenance_recipe"]),
-                # Direct is a Reader delivery factor. Reuse the existing staged
-                # maintenance path rather than inventing another write recipe.
-                memory_view_mode=("staged" if self.settings.get("memory_view_mode") == "direct"
-                                  else self.settings.get("memory_view_mode", "legacy")),
-                model_call=call, retrieval_limit=self.settings["retrieval_limit"], fit=self._fits,
-                stage_fit=(lambda stage, messages: self._fits(
-                    messages, enable_thinking=self.stage_thinking(stage)))
-                if self.settings.get("stage_enable_thinking") else None,
-                prepare_delivery=lambda located: self._old_support_plan(
-                    method, located, located["records"], observed.date, allow_create=True
-                )[0],
-            )
+            if service.support_contract == "direct_support_v1" and trigger_turn is None:
+                result = {
+                    "status": "incomplete", "phase": "public_turn_binding",
+                    "recipe": self.settings["maintenance_recipe"], "request_id": request_id,
+                    "date": observed.date, "source_refs": selected_refs, "receipts": [],
+                    "semantic_write_performed": False,
+                    "unprocessed": [{"phase": "public_turn_binding",
+                                     "reason": "public_user_source_required"}],
+                }
+            else:
+                result = maintain_event(
+                    method, delivery, session=observed.session_id, request_id=request_id,
+                    date=observed.date,
+                    recipe=cast(MaintenanceRecipe, self.settings["maintenance_recipe"]),
+                    # Direct is a Reader delivery factor. Reuse the existing staged
+                    # maintenance path rather than inventing another write recipe.
+                    memory_view_mode=("staged" if self.settings.get("memory_view_mode") == "direct"
+                                      else self.settings.get("memory_view_mode", "legacy")),
+                    model_call=call, retrieval_limit=self.settings["retrieval_limit"],
+                    fit=self._fits,
+                    stage_fit=(lambda stage, messages: self._fits(
+                        messages, enable_thinking=self.stage_thinking(stage)))
+                    if self.settings.get("stage_enable_thinking") else None,
+                    prepare_delivery=lambda located: self._old_support_plan(
+                        method, located, located["records"], observed.date, allow_create=True
+                    )[0],
+                )
             results.append(result)
             write_json(folder / f"batch-{index}-result.json", result)
             write_json(folder / f"batch-{index}-after.json", service.records())
