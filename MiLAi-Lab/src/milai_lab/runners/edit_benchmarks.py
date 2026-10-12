@@ -525,7 +525,7 @@ class BenchmarkRun:
             raise ValueError("READER_FAILURE_POLICY_INVALID")
         if settings.get("halumem", {}).get("evaluation_mode", "all") not in {"all", "qa_only"}:
             raise ValueError("HALUMEM_EVALUATION_MODE_INVALID")
-        if settings.get("evidence_variant", "S2") not in {"S0", "S1", "S2"}:
+        if settings.get("evidence_variant", "S2") not in {"S0", "S1", "S2", "J1"}:
             raise ValueError("EVIDENCE_VARIANT_INVALID")
         if settings.get("reader_ranking", "native") not in {"native", "llm_probe", "memsifter"}:
             raise ValueError("READER_RANKING_INVALID")
@@ -1849,13 +1849,16 @@ class BenchmarkRun:
             material_origins.extend([origin] * len(pieces))
             fragmented += 1
         original_count = len(materials)
-        for memory in (semantic if variant == "S2" else []):
+        for memory in (semantic if variant in {"S2", "J1"} else []):
             explanation = {**memory, "kind": "semantic_view"}
-            if fits([*materials, explanation]):
+            # J1 lets the same Reader budget choose originals and explanations
+            # together. S2 retains its original pre-pagination append condition.
+            if variant == "J1" or fits([*materials, explanation]):
                 materials.append(explanation)
                 material_origins.append("semantic_view")
         native["material_assembly"] = {
-            "policy": "originals_then_linked_sources_then_fitting_semantic_views",
+            "policy": ("joint_original_and_semantic_candidates" if variant == "J1"
+                       else "originals_then_linked_sources_then_fitting_semantic_views"),
             "evidence_variant": variant, "material_origins": material_origins,
             "independent_original_candidates": len(native["source_materials"]),
             "linked_original_candidates": len(linked), "fragmented_originals": fragmented,
