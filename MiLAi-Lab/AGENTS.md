@@ -8,14 +8,19 @@ Root alone owns real model HTTP with original continuous budget.json and serial 
 Original b558 CLOSED32sessions/73QA=71answers+2missing; replay uses exact saved prefix recalls, no final-bank search,
 no new maintenance/recall/ActivationIndex feedback. Original1201witness fragments verified prefix-visible, noHTTP.
 
-A/B/C/D code integrated; latest code319b6878. Details/results docs/MILAI_EVIDENCE_DEVELOPMENT_20261013.md.
+A/B/C/D code integrated; latest codebb49ef92 (sharedpredicate patchguide). Details/results docs/MILAI_EVIDENCE_DEVELOPMENT_20261013.md.
 Six S0/S1/S2/llm_probe CLOSED with first scores5/6,4/6,3/6,6/6; first5 ranking skipped, no MemSifter claim.
 Original73 and fixed24 linked additions0: S0/S1 pool-equivalent, stochastic score deltas not linked gain.
 Synthetic patch actually selected, bothmechanism conditions preserve target/nontarget/history, no benefit claim.
 Natural employment and food v1 CLOSED, both ordinaryreplace, old results kept; actual event prompt missed patchguide.
 d6f628f9 fixes that event early-return wiring, 16disabled prompts byte-identical; real guided food followup CLOSED
 at18:27:49UTC, reused actualseed/control, patch_text selected, but sharedpredicate semantics of otherfoods weakened.
-Agent patch_text reviewing generic sharedpredicate/negation/scope guide repair; no parser or per-example answerprompt.
+bb49ef92 generic sharedpredicate/negation/scope guide repair merged/model-reviewed;8patch checks PASS.
+Frozen source-bb49ef92 and natural-local-patch-scope-v3 prepared from same originalseed; not yet dispatched.
+run_patch_scope_followup.py performs patch-only; after actualresult choose v3 if patch selected, otherwise v2
+for run_natural_version_reader.py two current/history Readercalls. This driver is prepared/reviewed; zeroHTTP
+input construction current9581/history8399tokens passed with real turns/clocks/nofuture historicalsupport.
+No more same-example prompt iterations if v3 still fails; keep patch opt-in.
 
 Original S2/J1pilot CLOSED1C/2+invalid1 versus missing1+invalid1. J1v2 budget repair CLOSED2C/2.
 Budget repair preserves cumulative nominations separately from admitted set, whole original sources first,
@@ -28,8 +33,11 @@ Counts/paired/cost summaries use immutable per-question prediction/evaluation ch
 S0missing1, S1missing0, S2missing1; invalid1/1/4 preserved. Fixed4usersx6,13direct/11paged, old failures retained.
 S2 no demonstrated quality/cost value; do not expand originalS2 or rescore labels.
 CURRENT LIVE run_fifth.py supervisor405940, tool session96165, frozen319b6878.
-Latest verifiedchild411595 S0-budgeted-screen24-v2 predict, started18:27:49UTC. Inspect actualPID/terminal:
-artifacts/evidence-development/*-process.json. Serial queue follows S0score then J1-budgeted24predict/score.
+S0-budgeted24 predict+score CLOSED16C/24,4H4invalid,24answers,59calls1,263,186tokens/881.1seconds.
+Native S0 stays18C/24: compare J1 against BOTH matchedbudgeted16 and stronger native18.
+Budgeted fixed13direct=11C unchanged,11paged7->5C;17empty pages->0,one missing->C.
+Latest verifiedchild482250 J1-budgeted-screen24-v2 predict, started18:46:44UTC. Inspect actualPID/terminal:
+artifacts/evidence-development/*-process.json. Remaining serial queue is J1-budgeted24predict/score.
 Natural-local-patch-guided-v2 was first fifth task and CLOSED rc0. Do not duplicate or alter frozen source/configs.
 Frozen source-f9f01661/source-c9f2b68e/source-79749893/source-319b6878 immutable. TMPDIR E/runtime on/cra.
 No root/tmp space; use/cra or/data, do not delete unrelated data. Existing shared GPU services unchanged.
@@ -38,7 +46,10 @@ MemSifter actualcheckpoint NOT yet loaded/deployed. All4GPUsfull; CPU route revi
 container (torch2.7.0/transformers4.52.4),8threads,FP32,forcedCPUFlashSDPA,32kcontext/4096output.
 Worker /data/models/milai-memsifter-4b-20261013/serve_memsifter_cpu.py; exact official4B weights download to/checkpoint.
 Initial hostdownload PID296644/session82739 CLOSED rc1: network IncompleteRead at~3.3GiB, no completed weightshards.
-Agent ranking_adapter authorized one resume of same non-model transfer, keep partialbytes/noSHA/no from-zero restart.
+Agent ranking_adapter resumed same non-model transfer, PID447213/session42915. First shard complete
+4,988,241,952bytes; second still downloading. Inspect same process, keep partialbytes/noSHA/no restart.
+S0 published-checkpoint pilot2 config prepared: U2S0Q0direct +U1S4Q2paged, same budgetedcontrol/source319.
+Do not add another llm_probe24 matrix; realCPU boundedpilot first, then decide fixed24 by actual evidence/cost.
 Root to inspect new download handle before action; no endpoint/inference yet. Do not restart from stale timeout alone.
 When Root starts CPU run, add actual containerIP to process NO_PROXY AND no_proxy while preserving127.0.0.1.
 No real rankerHTTP during fifth serialqueue. Need bounded realMemSifter pilot, then selectedS0 R0/R1 decision;
