@@ -1,5 +1,27 @@
 # Current handoff: dynamic-memory plan active, 2026-10-12
 
+LIVE UPDATE 2026-10-12 03:33 UTC: dynamic goal ACTIVE, do not mark complete; actual Q FIRST prediction running.
+Frozen runtime11c4e826af350e4769c38e78c8239013e3b33606 at artifacts/dynamic-memory-small/source-11c4e826/MiLAi-Lab.
+Q artifacts/dynamic-memory-small/q32-11c4e826 started03:32:00.461863UTC, parent1336488/worker1336489 alive03:33:06UTC.
+Root-execution-predict.json/ledger/actualPID authoritative; no score dispatched, no prediction replay. Prepared32/73/72, QA-only mode.
+Original continuous ledgerunknown8/1/H110954 retained; live pendingunknown+1 is provisional; closed-phase delta must bechecked.
+Host artifacts/dynamic-memory-small/host14-11c4e826 CLOSED03:29:22.448767UTC, rc0/newunknown0/0/limitsunchanged/leaseFREE.
+Hostparent1286678/worker1286680gone;14attempted=6COMPLETED/8FAILED(wrapper5/emptyresponse3),6draft/9publictext.
+Unique semanticcommits2(rev1/2),businessmutation0,newget_reservation1,forgetsuccess0. Actual Source8fragments delivered with semantic empty.
+Cost54gen input415718/output67675/total483393known=charged;18embedding/776;618.43sec. root-accounting-summary.json reconciled.
+Two SDK exports1328559/1328732rc0/gone;root-sdk-exports-summary.json ledgerbytesunchanged,stderr onlydependencywarnings.
+Root root-sdk-visible-after-unfulfilled-forget.json current/rev1-2/history +11/9 priorSources remain accessible,rawsearch/rangereopen too.
+No successfulforget receipt; no successbinding. SDK read/index metadata can write, notphysicalreadonly. D hostsource review complete.
+Predeclared6sample +raw-reuse-audit.json in dynamic-memory-small: Raw73/73 exactmessages/material/rank/QAJudge same; reused noRawdispatch.
+SampleU1S0Q0/1/2,U2S0Q0,U3S2Q0,U4S7Q3;4users/directpaged/all4pairs. Rawhalf completed via priorreviews (4C/2H officialkept).
+A /root/symmetric_source_review nowreviewing same6newM Source-only as available; freezeSourceaxis before newJudge. Priorreferenceexposure disclosed.
+B /root/minimal_maintenance_fix fixed3naturalmaintenanceevents U1S5/U3S0/U3S3, waiting actualcomplete;0DB/HTTP/gold. NotD-editdiagnostic.
+Publishedd558415f2cdedad8037b28f830399d6929a59d85 ownFast38199213097SUCCESS/Full38199213104SKIPPED;PR121draft/open/no merge.
+Runtime11c4coreCI failed testmisownership(noLangGraph core); d558onlyCI/docs routes newtestfoundation; no algorithm change. Never claim11c4ownCIpass.
+Next continueactualQ;afterterminal/PIDgone/resourcesafe root_score.py --backend MiLAi-memory-only --schedule-note actualclosure, onceQA-only.
+Then all73labels/paired/peruser/cost/delivery +fixed6Source/Judgerelation +3maintenanceobservations, decideatmostoneoptionalD-read/D-editifneeded.
+Do not resume oldHost42/E3/E4/b498/oldcomprehensive scoring. No frozen source edits or semantic-chasing reruns.
+
 User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DYNAMIC_MEMORY_FUNCTION_FIRST_PLAN_20261012.md.
 The prior lightweight goal is complete; its d277 results and all old artifacts remain immutable. This is new authorized development.
 Scope: A independent visible Source retrieval; B event-driven local revision/Tool scope; C Host evidence-gap reads and explicit bounded consolidation;
