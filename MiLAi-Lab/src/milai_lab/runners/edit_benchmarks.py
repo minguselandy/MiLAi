@@ -510,6 +510,8 @@ class BenchmarkRun:
             "fail_fast", "record_confirmed_length", "record_known_readonly_failure",
         }:
             raise ValueError("READER_FAILURE_POLICY_INVALID")
+        if settings.get("halumem", {}).get("evaluation_mode", "all") not in {"all", "qa_only"}:
+            raise ValueError("HALUMEM_EVALUATION_MODE_INVALID")
         stage_modes = settings.get("stage_enable_thinking", {})
         if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
                 or any(type(value) is not bool for value in stage_modes.values())):
@@ -2295,6 +2297,7 @@ class BenchmarkRun:
 
     def halumem(self, phase: str = "all") -> dict[str, Any]:
         selection = self.settings["halumem"]
+        qa_only = selection.get("evaluation_mode", "all") == "qa_only"
         users = halumem_users(Path(selection["path"]), selection["users"])
         official = HaluMemOfficial(
             Path(selection["official_checkout"]),
@@ -2432,7 +2435,7 @@ class BenchmarkRun:
                         # It runs after predictions; saved material is not fed to a Writer/Reader.
                         update_retrieval = [
                             self._score_retrieval(service, memory["memory_content"])
-                            if self.reference_retrieval_supported and not generated
+                            if not qa_only and self.reference_retrieval_supported and not generated
                             and memory["is_update"] == "True"
                             and memory.get("original_memories") else []
                             for memory in session.get("memory_points", [])
@@ -2462,14 +2465,16 @@ class BenchmarkRun:
                         )
                         continue
                     for mordinal, memory in enumerate(session["memory_points"]):
-                        item = {**copy.deepcopy(memory), "uuid": owner, "ssession_id": ordinal}
-                        retrieved: list[str] = []
                         if memory["is_update"] == "True":
                             opportunities["total_updates"] += 1
                             if not memory.get("original_memories"):
                                 opportunities["updates_missing_original"] += 1
                             if not self.reference_retrieval_supported:
                                 continue
+                        if qa_only:
+                            continue
+                        item = {**copy.deepcopy(memory), "uuid": owner, "ssession_id": ordinal}
+                        retrieved: list[str] = []
                         if memory["is_update"] == "True" and memory.get("original_memories"):
                             retrieved = saved_prediction["update_retrieval"][mordinal]
                             if not retrieved:
@@ -2510,36 +2515,37 @@ class BenchmarkRun:
                             )
                             item["memory_integrity_score"] = self._score_int(result.get("score"))
                             records["memory_integrity_records"].append(item)
-                    dialogue_lines = []
-                    for turn in session["dialogue"]:
-                        dialogue_lines.append(
-                            f"[{turn['timestamp']}]{turn['role']}: {turn['content']}"
+                    if not qa_only:
+                        dialogue_lines = []
+                        for turn in session["dialogue"]:
+                            dialogue_lines.append(
+                                f"[{turn['timestamp']}]{turn['role']}: {turn['content']}"
+                            )
+                            if turn["role"] == "assistant":
+                                dialogue_lines.append("")
+                        dialogue = "\n".join(dialogue_lines)
+                        gold = "\n".join(
+                            m["memory_content"]
+                            for m in session["memory_points"]
+                            if m["memory_source"] != "interference"
                         )
-                        if turn["role"] == "assistant":
-                            dialogue_lines.append("")
-                    dialogue = "\n".join(dialogue_lines)
-                    gold = "\n".join(
-                        m["memory_content"]
-                        for m in session["memory_points"]
-                        if m["memory_source"] != "interference"
-                    )
-                    for memory in extracted:
-                        result = self._safe_score(
-                            official, opportunities, "memory_accuracy", dialogue, gold, memory
-                        )
-                        records["memory_accuracy_records"].append(
-                            {
-                                "uuid": owner,
-                                "ssession_id": ordinal,
-                                "memory_content": memory,
-                                "memory_accuracy_score": self._score_int(
-                                    result.get("accuracy_score")
-                                ),
-                                "is_included_in_golden_memories": result.get(
-                                    "is_included_in_golden_memories", "false"
-                                ),
-                            }
-                        )
+                        for memory in extracted:
+                            result = self._safe_score(
+                                official, opportunities, "memory_accuracy", dialogue, gold, memory
+                            )
+                            records["memory_accuracy_records"].append(
+                                {
+                                    "uuid": owner,
+                                    "ssession_id": ordinal,
+                                    "memory_content": memory,
+                                    "memory_accuracy_score": self._score_int(
+                                        result.get("accuracy_score")
+                                    ),
+                                    "is_included_in_golden_memories": result.get(
+                                        "is_included_in_golden_memories", "false"
+                                    ),
+                                }
+                            )
                     for qordinal, qa in enumerate(session.get("questions", [])):
                         question_prediction = predicted["questions"][qordinal]
                         answer = question_prediction["hypothesis"]
@@ -2614,7 +2620,8 @@ class BenchmarkRun:
                 ),
             }
         assert official is not None
-        result = official.aggregate_results(records)
+        result = (official.aggregate_qa_results(records) if qa_only
+                  else official.aggregate_results(records))
         opportunities["unscored_updates"] = (
             opportunities["total_updates"] - opportunities["scored_updates"]
         )
@@ -2623,6 +2630,8 @@ class BenchmarkRun:
         )
         result["supplemental_denominators"] = opportunities
         result["information_condition"] = (
+            "QA-only; no reference-guided update retrieval or memory evaluation"
+            if qa_only else
             "update retrieval is reference-guided, read-only; Writer and QA are not"
         )
         result["evidence_kind"] = self.settings.get(

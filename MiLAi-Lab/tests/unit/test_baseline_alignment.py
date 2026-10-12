@@ -577,6 +577,108 @@ def test_existing_online_loop_delivers_only_current_observed_prefix(
     assert official["overall_score"]["memory_extraction_f1"] is None
 
 
+@pytest.mark.parametrize("qa_only", [False, True])
+def test_qa_only_scores_saved_answers_without_memory_judges_or_reference_retrieval(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, qa_only: bool,
+) -> None:
+    from milai_lab.analysis.edit_official import HaluMemOfficial
+
+    settings = alignment_settings(configuration(), "MiLAi-memory-only")
+    settings["halumem"].update(users=["opaque-owner"],
+                               reader_failure_policy="record_known_readonly_failure")
+    if qa_only:
+        settings["halumem"]["evaluation_mode"] = "qa_only"
+    user = source_user()
+    session = user["sessions"][1]
+    user["sessions"] = [session]
+    session["memory_points"].append({
+        **session["memory_points"][0], "is_update": "True",
+        "memory_content": "PRIVATE UPDATE", "original_memories": ["PRIVATE OLD"],
+    })
+    session["questions"] = [
+        {**session["questions"][0], "question": f"query {index}"} for index in range(3)
+    ]
+    monkeypatch.setattr(edit_benchmarks, "halumem_users", lambda *_: [user])
+
+    class Backend(ActualReturnBackend):
+        def ingest(self, session: MemorySession, *, key: str) -> IngestionResult:
+            result = super().ingest(session, key=key)
+            result["session_output"] = ["current source assertion"]
+            return result
+
+    backend = Backend()
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings, execution.root, execution.phase = settings, tmp_path, "predict"
+    execution.backends = {}
+    monkeypatch.setattr(execution, "_backend", lambda _: backend)
+    monkeypatch.setattr(execution, "_semantic_retriever", lambda: None)
+    reference_queries: list[str] = []
+
+    def reference_retrieval(_: Any, query: str) -> list[str]:
+        assert not qa_only, "QA-only prediction must not issue reference-guided searches"
+        reference_queries.append(query)
+        return ["current value for evaluation"]
+
+    def answer(
+        question: str, date: str, key: str, materials: list[dict[str, Any]], *, snapshot_id: str,
+    ) -> Any:
+        if key.endswith("/2"):
+            write_json(tmp_path / "http" / key / "response.json", {
+                "choices": [{"finish_reason": "stop", "message": {"content": None}}],
+                "usage": {"prompt_tokens": 2, "completion_tokens": 1, "total_tokens": 3},
+            })
+            raise ValueError("Provider returned no textual answer")
+        return "saved answer", materials
+
+    monkeypatch.setattr(execution, "_score_retrieval", reference_retrieval)
+    monkeypatch.setattr(execution, "answer_material", answer)
+    predicted = execution.halumem("predict")
+    assert predicted["complete_answers"] == 2 and predicted["known_reader_failures"] == 1
+    assert reference_queries == ([] if qa_only else ["PRIVATE UPDATE"])
+    before = copy.deepcopy(backend.events)
+    calls: list[str] = []
+
+    class Official:
+        def __init__(self, *_: Any) -> None:
+            pass
+
+        def score(self, name: str, *_: str) -> dict[str, Any]:
+            calls.append(name)
+            if qa_only:
+                assert name == "question", "Only the selected QA task may call Judge"
+            if name == "question":
+                return {"evaluation_result": "Correct"} if calls.count(name) == 1 else {}
+            return {"evaluation_result": "Correct", "score": 2, "accuracy_score": 2}
+
+        aggregate_qa_results = staticmethod(HaluMemOfficial.aggregate_qa_results)
+
+        def aggregate_results(self, records: dict[str, Any]) -> dict[str, Any]:
+            assert not qa_only
+            return {**records, "overall_score": {}}
+
+    monkeypatch.setattr(edit_benchmarks, "HaluMemOfficial", Official)
+    scored = execution.halumem("score")
+    assert backend.events == before, "Scoring saved answers must not repeat formation or reading"
+    assert calls.count("question") == 2  # The confirmed no-text answer never calls Judge.
+    assert scored["correct"] == 1 and scored["opportunities"] == 3 and scored["missing"] == 1
+    assert scored["labels"] == {"Correct": 1, "invalid": 1}
+    result = read_json(tmp_path / "halumem-official-results.json")
+    counts = result["supplemental_denominators"]
+    assert counts["total_updates"] == 1
+    assert counts["scored_updates"] == (0 if qa_only else 1)
+    assert counts["unscored_updates"] == (1 if qa_only else 0)
+    if qa_only:
+        assert calls == ["question", "question"]
+        assert result["memory_integrity_records"] == result["memory_accuracy_records"] == []
+        assert result["memory_update_records"] == []
+        assert result["overall_score"]["memory_update"] is None
+        assert result["overall_score"]["question_answering"]["correct_qa_ratio(all)"] == 1 / 3
+        assert result["overall_score"]["question_answering"]["qa_valid_num"] == 1
+    else:
+        assert calls == ["memory_integrity", "update_memory", "memory_accuracy",
+                         "question", "question"]
+
+
 @pytest.mark.parametrize("peer_status", [None, "FAILED", "PREDICTIONS_SAVED"])
 def test_completed_backend_scores_without_waiting_for_peer_predictions(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, peer_status: str | None,
