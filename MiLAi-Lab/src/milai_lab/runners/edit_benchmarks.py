@@ -499,7 +499,13 @@ class BenchmarkRun:
     def __init__(
         self, settings: dict[str, Any], root: Path, *, phase: str = "all"
     ) -> None:
+        if "ranker" in settings:
+            settings = {**settings, "ranker": {
+                **settings["ranker"], "model": asdict(VLLMConfig(**settings["ranker"]["model"])),
+            }}
         self.settings, self.root, self.phase = settings, root, phase
+        self.ranker_client: VLLMClient | None = None
+        self.ranker_tokenizer: Any = None
         if settings.get("memory_view_mode", "legacy") not in {
             "legacy", "direct", "staged", "state_driven",
         }:
@@ -588,6 +594,9 @@ class BenchmarkRun:
     def close(self) -> None:
         name = "accounting-end.json" if self.phase == "all" else f"accounting-{self.phase}-end.json"
         write_json(self.root / name, self.budget.state)
+        ranker_client = getattr(self, "ranker_client", None)
+        if ranker_client is not None:
+            ranker_client.close()
         embedding_client = getattr(self, "retrieval_embedding_client", None)
         if embedding_client is not None:
             embedding_client.close()
@@ -630,13 +639,22 @@ class BenchmarkRun:
 
     def input_tokens(
         self, messages: list[dict[str, str]], *, enable_thinking: bool | None = None,
+        ranker: bool | None = False,
     ) -> int:
+        settings = self.settings["ranker"] if ranker else self.settings
+        tokenizer = self.tokenizer
+        if ranker:
+            if self.ranker_tokenizer is None:
+                self.ranker_tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
+                    settings["tokenizer_path"], local_files_only=True,
+                )
+            tokenizer = self.ranker_tokenizer
         return len(
-            self.tokenizer.apply_chat_template(
+            tokenizer.apply_chat_template(
                 messages,
                 tokenize=True,
                 add_generation_prompt=True,
-                enable_thinking=(self.settings["model"].get("enable_thinking")
+                enable_thinking=(settings["model"].get("enable_thinking")
                                  if enable_thinking is None else enable_thinking),
             )
         )
@@ -650,6 +668,7 @@ class BenchmarkRun:
         response_format: dict[str, Any] | None = None,
         presence_penalty: float | None = None,
         enable_thinking: bool | None = None,
+        ranker: bool | None = False,
     ) -> str:
         folder = self.root / "http" / key
         cached = folder / "response.json"
@@ -661,13 +680,17 @@ class BenchmarkRun:
             if self.settings.get("interface_version", "v1") != "v1":
                 raise UnconfirmedModelOutcome(message)
             raise RuntimeError(message)
-        tokens = self.input_tokens(messages, **(
+        settings = self.settings["ranker"] if ranker else self.settings
+        token_settings: dict[str, Any] = (
             {"enable_thinking": enable_thinking} if enable_thinking is not None else {}
-        ))
-        if tokens + self.settings["model"]["max_tokens"] + 512 > self.settings["context_tokens"]:
+        )
+        if ranker:
+            token_settings["ranker"] = True
+        tokens = self.input_tokens(messages, **token_settings)
+        if tokens + settings["model"]["max_tokens"] + 512 > settings["context_tokens"]:
             receipt = {"stage": key, "input_tokens": tokens,
-                       "input_token_limit": self.settings["context_tokens"]
-                                            - self.settings["model"]["max_tokens"] - 512,
+                       "input_token_limit": settings["context_tokens"]
+                                            - settings["model"]["max_tokens"] - 512,
                        "request_sent": False, "phase": "before_http"}
             write_json(folder / "capacity.json", receipt)
             raise ReadCapacityUnavailable(receipt)
@@ -676,6 +699,11 @@ class BenchmarkRun:
             if response_format
             else ({"type": "json_object"} if structured else None)
         )
+        client = self.client
+        if ranker:
+            if self.ranker_client is None:
+                self.ranker_client = VLLMClient(VLLMConfig(**settings["model"]), budget=self.budget)
+            client = self.ranker_client
         write_json(
             folder / "request.json",
             {
@@ -683,6 +711,9 @@ class BenchmarkRun:
                 "structured": structured,
                 "prompt_tokens": tokens,
                 "response_format": selected_format,
+                **({"provider": "ranker", "model": settings["model"]["model"],
+                    "max_tokens": settings["model"]["max_tokens"],
+                    "context_tokens": settings["context_tokens"]} if ranker else {}),
                 **({"presence_penalty": presence_penalty}
                    if presence_penalty is not None else {}),
                 **({"enable_thinking": enable_thinking}
@@ -695,7 +726,7 @@ class BenchmarkRun:
             )
             if enable_thinking is not None:
                 sampling["enable_thinking"] = enable_thinking
-            response = self.client.chat(messages, response_format=selected_format, **sampling)
+            response = client.chat(messages, response_format=selected_format, **sampling)
             write_json(cached, response)
             return self.completed_content(response)
         except Exception as error:
@@ -1978,12 +2009,16 @@ class BenchmarkRun:
         self, question: str, date: str, key: str, memories: list[dict[str, Any]],
         snapshot_id: str | None,
     ) -> list[int]:
-        """Rank actual originals once; keep the saved pool and its indices unchanged."""
+        """Rank canonical originals with the main client or an explicit lazy ranker.
+
+        Optional ``ranker`` settings supply model, tokenizer_path and context_tokens;
+        its client uses the same ledger and existing request/cache path as the Reader.
+        """
         mode = self.settings.get("reader_ranking", "native")
         order = list(range(len(memories)))
         if mode == "native":
             return order
-        if mode == "memsifter":
+        if mode == "memsifter" and "ranker" not in self.settings:
             raise ValueError("MemSifter checkpoint is not configured; use explicit llm_probe")
         path = self.root / "http" / key / "ranking.json"
         if path.exists():
@@ -1993,6 +2028,14 @@ class BenchmarkRun:
         )
         limit = self.settings["context_tokens"] - self.settings["model"]["max_tokens"] - 512
         fits = self.input_tokens(messages, enable_thinking=self.stage_thinking("reader")) <= limit
+        ranking_settings = self.settings.get("ranker", self.settings)
+        ranking_limit = (ranking_settings["context_tokens"]
+                         - ranking_settings["model"]["max_tokens"] - 512)
+        ranking_options: dict[str, Any] = (
+            {"ranker": True, "enable_thinking":
+             ranking_settings["model"].get("enable_thinking")}
+            if "ranker" in self.settings else {"enable_thinking": self.stage_thinking("reader")}
+        )
         batch_orders: list[list[int]] = []
         request_paths: list[str] = []
         if not fits:
@@ -2000,14 +2043,14 @@ class BenchmarkRun:
 
             # The real long-prefix probe exceeds one input. Partition whole originals
             # using the existing budget planner, rank each batch once, then interleave
-            # nominations. This is an explicit wiring probe, not checkpoint evaluation
-            # or a claim that local ranks provide a global relevance score.
+            # nominations. Record this capacity adaptation explicitly; local ranks
+            # do not provide a global relevance score for the whole pool.
             positions = [{"item_index": index} for index in order]
             batches = plan_delivery(positions, lambda selected: self.input_tokens(
                 ranking_messages(question, date, [memories[ref["item_index"]]
                                                   for ref in selected], mode=mode),
-                enable_thinking=self.stage_thinking("reader"),
-            ) <= limit)["pages"]
+                **ranking_options,
+            ) <= ranking_limit)["pages"]
             if sum(map(len, batches)) != len(memories):
                 raise ReadDeliveryIncomplete("whole_ranking_material_unavailable")
             ranking_calls = sum(len(batch) > 1 for batch in batches)
@@ -2021,8 +2064,8 @@ class BenchmarkRun:
                 request_paths.append(f"http/{key}/ranking/batch-{ordinal}/request.json")
                 def call_rank(prompts: list[dict[str, str]], ordinal: int = ordinal) -> str:
                     return self.call(
-                        f"{key}/ranking/batch-{ordinal}", prompts, structured=True,
-                        enable_thinking=self.stage_thinking("reader"),
+                        f"{key}/ranking/batch-{ordinal}", prompts, structured=mode == "llm_probe",
+                        **ranking_options,
                     )
 
                 local_order = rank_materials(
@@ -2033,7 +2076,9 @@ class BenchmarkRun:
             order = [batch[index] for index in range(max(map(len, batch_orders), default=0))
                      for batch in batch_orders if index < len(batch)]
         write_json(path, {
-            "reader_ranking": mode, "model": self.settings["model"]["model"],
+            "reader_ranking": mode, "model": ranking_settings["model"]["model"],
+            "ranking_provider": "ranker" if "ranker" in self.settings else "reader",
+            "ranking_input_token_limit": ranking_limit,
             "rank_order": order, "ranking_skipped": fits,
             "skip_reason": "complete_reader_input_fits" if fits else None,
             "candidate_pool_size": len(memories), "ranking_calls": len(request_paths),
