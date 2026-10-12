@@ -8,7 +8,10 @@ Root alone owns real HTTP on original continuous ledger; existing shared service
 The original b558 prediction is now verified terminal rc0 (32 sessions,71 answers,2known missing),
 parent1446814/worker1446815 gone; all older RUNNING handoffs below are historical.
 Use docs/MILAI_EVIDENCE_DEVELOPMENT_20261013.md for implemented A/B/C and pending real experiments.
-New real dispatch currently zero; inspect actual artifacts/PIDs before starting or continuing.
+New A6 dispatch frozen f9f01661 is running under tool session56553, supervisor4141288.
+Artifacts/evidence-development/{s0,s1,s2}-six-v1-process.json gives actual child PID and exit;
+S0 has terminal6/6answered rc0, S1 active at last observation. Recheck process, not this handoff.
+Do not edit source-f9f01661 or launch competing model calls. run_first.py serializes S0→S1→S2 prediction.
 S0/S1/S2 replay uses saved per-question original recalls and bank copies to reopen exact old sources/versions;
 never query final bank for early questions. No maintenance, shared recall or ActivationIndex repeated.
 Current ranker is llm_probe only, with explicit budgeted batch/interleave behavior; checkpoint not deployed.
