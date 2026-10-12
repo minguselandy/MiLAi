@@ -46,20 +46,27 @@ Actual artifacts/evidence-development/*-process.json + terminals + /proc authori
 Frozen source-f9f01661/source-c9f2b68e/source-79749893/source-319b6878 immutable. TMPDIR E/runtime on/cra.
 No root/tmp space; use/cra or/data, do not delete unrelated data. Existing shared GPU services unchanged.
 
-MemSifter actualcheckpoint NOT yet loaded/deployed. All4GPUsfull; CPU route reviewed in existing bge-reranker
-container (torch2.7.0/transformers4.52.4),8threads,FP32,forcedCPUFlashSDPA,32kcontext/4096output.
-Worker /data/models/milai-memsifter-4b-20261013/serve_memsifter_cpu.py; exact official4B weights download to/checkpoint.
-Initial hostdownload PID296644/session82739 CLOSED rc1: network IncompleteRead at~3.3GiB, no completed weightshards.
-Agent ranking_adapter resumed same non-model transfer, PID447213/session42915. First shard complete
-4,988,241,952bytes; second still downloading. Inspect same process, keep partialbytes/noSHA/no restart.
-S0 published-checkpoint pilot2 config prepared: U2S0Q0direct +U1S4Q2paged, same budgetedcontrol/source319.
-Do not add another llm_probe24 matrix; realCPU boundedpilot first, then decide fixed24 by actual evidence/cost.
-Root to inspect new download handle before action; no endpoint/inference yet. Do not restart from stale timeout alone.
-When Root starts CPU run, add actual containerIP to process NO_PROXY AND no_proxy while preserving127.0.0.1.
-All prior serial tasks closed. Next Root may load completed CPU weights and run prepared ranker pilot.
-run_memsifter_pilot.py is prepared NOT RUN; it explicitly adds privatehost+127.0.0.1 to both NO_PROXY/no_proxy,
-then uses frozen319 predict and firstscore with originalledger, no retries. Verify endpoint ready first. Need bounded realMemSifter pilot, then selectedS0 R0/R1 decision;
-CPU speed still unmeasured. Do not treat4B and35B tokens as equalprice. Only promising candidate goes73/longhistory.
+MemSifter publishedcheckpoint now downloaded and CPU endpoint STARTED; current realpilot RUNNING.
+Official download resume session42915/PID447213 CLOSED rc0 at19:23:14UTC; bothshards total8,822,894,504bytes,
+no.incomplete, noSHA. Original attemptfailure preserved. Weights /data/models/milai-memsifter-4b-20261013/checkpoint.
+CPUworker existingbge-reranker container,torch2.7.0/transformers4.52.4,8threads FP32 forcedCPUFlashSDPA,
+32kcontext/4096output. Load17.97s,peakRSS22,241,255,424bytes,CUDAfalse. ExistingGPUservices unchanged.
+Ownedserver wrapper619925/dockerclient619927, tool15974; actualworker hostPID619948/containerPID748.
+Server stdout/stderr and process files E/memsifter-cpu-server-*. On eventual ownedserver shutdown, normalize
+process metadata generation_dispatched -> generation_dispatched_at_server_start (wrapper records launchmoment);
+actualgeneration receipts are in the pilot, not this startupflag. Stop only ourworker after all actualcalls settle.
+CURRENT REAL queue: run_memsifter_pilot.py session55929/supervisor623426/worker623471, frozen319b6878,
+started19:24:36UTC; predict thenfirstscore serial; no retry. ActualE/s0-memsifter-pilot-v1-*-process.json authoritative.
+Pilot2 fixed U2S0Q0direct (already answered, ranking skipped) +U1S4Q2paged (first actualCPUrequest23035input live).
+Rankbatches[0] singleton skip,[1,2]23035,[3,4]12833, owninputbudget28160, allcalls count12total allowance.
+R0 is closedS0-budgeted24 matchingquestions; nativeS0 remainsstronger simplequalityreference. No newprobe24matrix.
+NO_PROXY AND no_proxy privatehost172.17.0.4 +localhost preserved in NEW pilot process; do not modifyactiveenv.
+First source modeltwo localtokenizers compared29prompts fulltokenIDarrays identical; genericregexwarning retained.
+No hashes/no tokenizerpatch. Actualusage should be checked in returned receipt. Ranker CPUprecision differspublishedBF16.
+After pilot closes: full2 label/coverage, actualrank/page/final canonicalindices, permodel/stage costs, runtimeCPU/wall,
+load once/RSSmax; monetarycost and Reader GPUtime unmeasured. Only useful signal would justify24/73/longhistory.
+Agent ranking_adapter assigned read-only actualranker/cost audit; no other agent authorized realHTTP.
+No newgoalblock/pause; current wait is verifiedactiveCPUinference, not a missingpermission/resourcepretext.
 
 No remote push/merge for this task; local commits/frozen experiments reviewable. No new goal pause/block condition.
 
