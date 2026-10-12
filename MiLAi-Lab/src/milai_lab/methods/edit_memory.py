@@ -75,6 +75,12 @@ PATCH_TEXT_INSTRUCTIONS = (
     "assertion.keep is unavailable because the text changes. Explicitly retain "
     "or update supported applicability in the current assertion. Use existing "
     "edits for changes of subject, scope, attribution or cross-unit structure. "
+    "If old_text includes a shared predicate, negation or scope governing unchanged "
+    "coordinated items, new_text must explicitly preserve its meaning for those items. "
+    "Read the complete patched unit: unchanged characters alone do not preserve meaning. "
+    "If a local replacement cannot preserve it, use ordinary replace or split into "
+    "supported units. Preserve the source's reported tense, degree and uncertainty; "
+    "a report clock does not establish the event or effective time. "
 )
 
 

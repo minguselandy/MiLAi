@@ -98,6 +98,8 @@ def test_patch_maintenance_preserves_other_requirements_support_and_history(
             assert stage == "edit" and "patch_text" in messages[0]["content"]
             assert "old_text and new_text" in messages[0]["content"]
             assert "own delivered h support" in messages[0]["content"]
+            assert "shared predicate, negation or scope" in messages[0]["content"]
+            assert "ordinary replace or split" in messages[0]["content"]
             if maintenance_mode == "event_delta_v1":
                 assert messages[0]["content"].startswith("Maintain the meaning changed")
             packet = json.loads(messages[1]["content"])["delivery"]
