@@ -2558,6 +2558,10 @@ def test_request_targets_page_preview_and_omission_do_not_issue_credentials(tmp_
         row = memory.resolve_request_target(config, alternate)
         assert row['kind'] == 'read_only_navigation' and row['credentials'] == {}
         assert row['identity']['source_ref'] == ref
+        denied = invoke(memory, 'forget_memory', {'targets': [alternate]}, 'navigation-forget')
+        assert denied['reason'].startswith('V13_5_FORGET_BODY_READ_REQUIRED:')
+        assert 'read_memory/read_source' in denied['reason']
+        assert denied['effect'] == 'none' and memory.service.forget_epoch == 0
         assert all(row['kind'] != 'delivered_record' for row in request_target_mapping(
             memory.service, binding)['targets'].values())
         real = memory._page(memory._snapshot(binding, memory._record_units(
@@ -2568,6 +2572,8 @@ def test_request_targets_page_preview_and_omission_do_not_issue_credentials(tmp_
         delivered = memory.bind_request_targets(config, real)
         assert memory.resolve_request_target(config, target)['credentials'] == {
             'read_handle': delivered['items'][0]['read_handle']}
+        removed = invoke(memory, 'forget_memory', {'targets': [target]}, 'delivered-forget')
+        assert removed['effect'] == 'visibility_only' and removed['revoked_ids'] == [saved['id']]
 
 
 def test_request_targets_delivery_store_failure_stays_unknown_and_does_not_retry(
@@ -2761,3 +2767,144 @@ def test_request_targets_original_read_receipt_precedes_delivery_hook(
             with pytest.raises(ValueError, match='READ_OUTCOME_UNKNOWN'):
                 invoke(memory, 'read_memory', {'target': target}, 'read')
             assert request_target_mapping(memory.service, memory._binding(cfg())) == before
+
+
+def test_independent_source_query_budget_and_fresh_business_observation(tmp_path: Path) -> None:
+    from types import SimpleNamespace
+
+    from milai_lab.application.functional import FunctionalApplication
+    from milai_lab.application.recovery import resume_request
+
+    with opened(tmp_path, memory_profile="unified_v1", source_access="independent_v1",
+                memory_view_mode="staged", read_interface="explicit_selectors_v1",
+                max_evidence_queries=2, read_limit=3, material_limit=40000) as memory:
+        original = turn(memory, "first", "My independent marker is amber; no semantic record yet.")
+        turn(memory, "query", "Find that marker, query the parcel and reserve one if missing.")
+        config = {**cfg("query"), "max_concurrency": 1}
+        config["configurable"]["thread_id"] = "dynamic-query"
+        assert memory.service.records() == []
+        assert any(item.get("source_ref") == original
+                   for item in memory.resident_items(config))
+        tools = {tool.name: tool for tool in memory.tools()}
+        searched = tools["search_memory"].invoke({"name": "search_memory", "id": "search",
+            "type": "tool_call", "args": {"query": "independent marker",
+                "read_goal": {"purpose": "Find the unformed original report",
+                              "evidence": ["original_source"]}}}, config=config)
+        assert json.loads(searched.content)["ok"]
+        with FunctionalApplication.open(tmp_path / "app", "reservation", "alice") as app:
+            adapter = app.adapter(memory.service, "s", "query", runtime_config=config,
+                                  allowed_operations=["reserve_and_label"],
+                                  reuse_current_observations=True)
+            adapter.wrapper = app.call_wrapper(memory.service, "s", "query",
+                runtime_config=config, evidence_query=lambda request, execute:
+                    memory.query_observation(config, request.tool_call["id"],
+                        request.tool_call["name"], request.tool_call["args"], execute))
+            first = adapter.discover({"item_key": "synthetic parcel"}, attempt_id="lookup")
+            assert first["executed"] and first["status"] == "not_found"
+            repeated = adapter.discover({"item_key": "synthetic parcel"}, attempt_id="refresh")
+            assert repeated["reused_current_observation"] is True
+            assert repeated["source_ref"] == first["source_ref"]
+            assert memory.read_allowance(config) == {
+                "reads_remaining": 1, "evidence_queries_remaining": 0}
+            reserved = adapter.execute("reserve_and_label", {"item_key": "synthetic parcel",
+                "quantity": 1, "destination": "desk", "packing": "box"}, attempt_id="reserve")
+            assert reserved["executed"]
+            after_change = adapter.discover({"item_key": "synthetic parcel"},
+                                            attempt_id="after-change")
+            assert after_change["status"] == "evidence_query_limit_exhausted"
+            assert after_change["executed"] is False and after_change["business_effect"] == "none"
+            assert after_change["current_state"] is None
+            assert len(app.world.snapshot()["reservations"]) == 1
+            progress = resume_request(app, adapter, "bounded-progress", requirements={
+                "target": {"item_key": "synthetic parcel"}, "steps": [{
+                    "id": "reserve", "operation": "reserve_and_label", "arguments": {},
+                    "completed": {"label_status": "created"}}],
+                "save_result": False, "feedback": False},
+                current={"readonly": True}, execute_business=False)
+            assert progress["business"]["execution"]["status"] == "evidence_query_limit_exhausted"
+            assert progress["business"]["status"] not in {"business_unknown", "observation_unknown"}
+            recovery_query = SimpleNamespace(tool_call={
+                "id": "recovery-query", "name": "get_reservation",
+                "args": {"item_key": "synthetic parcel"}})
+            blocked_recovery = adapter.wrapper.run_tool(
+                recovery_query, lambda request: pytest.fail("Recovery must share query admission"))
+            assert json.loads(blocked_recovery.content)["status"] == (
+                "evidence_query_limit_exhausted")
+            # A body read uses the remaining original read slot; queries do not
+            # acquire a separate two-call budget and pages are not free.
+            fragment = next(item for item in memory.resident_items(config)
+                            if item.get("source_ref") == original)
+            delivered = memory.bind_request_targets(config, {"ok": True, "items": [fragment]})
+            target = delivered["items"][0]["target"]
+            body = tools["read_source"].invoke({"name": "read_source", "id": "body",
+                "type": "tool_call", "args": {"target": target}}, config=config)
+            assert json.loads(body.content)["ok"]
+            exhausted = tools["read_source"].invoke({"name": "read_source", "id": "more-body",
+                "type": "tool_call", "args": {"target": target}}, config=config)
+            assert json.loads(exhausted.content)["status"] == "read_limit_exhausted"
+            turn(memory, "next", "Query the actual parcel now; do not mutate it.")
+            next_config = {**cfg("next"), "max_concurrency": 1}
+            next_config["configurable"]["thread_id"] = "dynamic-next"
+            fresh_adapter = app.adapter(memory.service, "s", "next", runtime_config=next_config,
+                                        reuse_current_observations=True)
+            fresh_adapter.wrapper = app.call_wrapper(memory.service, "s", "next",
+                runtime_config=next_config, evidence_query=lambda request, execute:
+                    memory.query_observation(next_config, request.tool_call["id"],
+                        request.tool_call["name"], request.tool_call["args"], execute))
+            fresh = fresh_adapter.discover({"item_key": "synthetic parcel"}, attempt_id="fresh")
+            assert fresh["executed"] and fresh["status"] == "found"
+            assert fresh["source_ref"] != first["source_ref"]
+            assert not fresh.get("reused_current_observation")
+
+
+def test_independent_forget_preserves_shared_source_until_whole_selection(tmp_path: Path) -> None:
+    with opened(tmp_path, memory_profile="unified_v1", source_access="independent_v1",
+                memory_view_mode="staged", material_limit=40000) as memory:
+        ref = turn(memory, "saved", "Use an amber marker. The independent alarm stays quiet.")
+        fragments = handles(memory, ref)
+        first = memory.save(cfg("saved"), "save-marker", "Use an amber marker.", fragments)
+        other = memory.save(cfg("saved"), "save-alarm", "The independent alarm stays quiet.",
+                            fragments)
+        turn(memory, "forget-one", "Forget only the marker; preserve the independent alarm.")
+        config = cfg("forget-one")
+        memory.forget_requested = True
+        # Existing Source relationships reveal both real records for scope
+        # selection; navigation never grants forget authority.
+        related = memory._search_units("amber marker")
+        assert {first["id"], other["id"]} <= {r["record_id"] for r in related
+                                              if r["type"] == "record"}
+        current = memory.service.read(first["id"])
+        body = memory._record_units(current)
+        packet = memory.bind_request_targets(config, {"ok": True, "items": body + [
+            {"type": "fragment", **x} for x in memory.service.source_fragments(ref)]})
+        record_target = packet["items"][0]["target"]
+        source_targets = [r["target"] for r in packet["items"] if r["type"] == "fragment"]
+        with pytest.raises(FunctionalRejection, match="SHARED_SOURCE_SCOPE_REQUIRED"):
+            memory.forget_targets(config, "too-wide", [record_target, *source_targets])
+        assert memory.service.source(ref) is not None and memory.service.read(other["id"])["ok"]
+        receipt = memory.forget_targets(config, "record-only", [record_target], scope="record")
+        assert receipt["status"] == "visibility_revoked" and receipt["revoked_source_refs"] == []
+        assert memory.service.read(other["id"])["ok"] and memory.service.source(ref) is not None
+        # An explicit later request covers the entire original Source. Both
+        # ordinary raw search and reopens obey the same resulting visibility.
+        trigger = turn(memory, "forget-whole", "Forget the whole original message and its records.")
+        config = cfg("forget-whole")
+        packet = memory.bind_request_targets(config, {"ok": True, "items": [
+            {"type": "fragment", **x} for source_ref in (ref, trigger)
+            for x in memory.service.source_fragments(source_ref)]})
+        targets = [r["target"] for r in packet["items"]]
+        partial = memory.bind_request_targets(config, {"ok": True, "items": [{
+            "type": "fragment", **memory.service.source_fragment_range(ref, 0, 10)}]})
+        with pytest.raises(FunctionalRejection, match="WHOLE_SOURCE_SELECTION_REQUIRED"):
+            memory.forget_targets(config, "partial-source", [
+                partial["items"][0]["target"], targets[-1]])
+        done = memory.forget_targets(config, "whole-source", targets)
+        assert done["status"] == "visibility_revoked"
+        repeated = memory.forget_targets(config, "whole-source", targets)
+        assert repeated["replayed"] is True and repeated["forget_epoch"] == done["forget_epoch"]
+        assert memory.service.source(ref) is None and not memory.service.read(other["id"])["ok"]
+    with opened(tmp_path, memory_profile="unified_v1", source_access="independent_v1",
+                memory_view_mode="staged", material_limit=40000) as memory:
+        turn(memory, "reopen", "Which marker or alarm reports remain accessible?")
+        assert all(item.get("source_ref") != ref for item in memory._search_units("amber quiet"))
+        assert memory.service.source(ref) is None

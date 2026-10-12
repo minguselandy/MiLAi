@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import base64
 import time
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import asdict, dataclass
@@ -213,15 +214,80 @@ class VLLMClient:
         data = response["data"]
         return [list(item["embedding"]) for item in sorted(data, key=lambda item: item["index"])]
 
+    def native_post(
+        self, path: str, request: dict[str, Any], *,
+        generation_output_bound: int | None = None, on_event: Emit | None = None,
+    ) -> dict[str, Any]:
+        """Meter an original native JSON request without projecting its parameters.
+
+        Only the accounting copy normalizes max_completion_tokens or an explicit
+        deployment output bound to RunBudget's max_tokens field. The actual wire
+        keeps every original field. Streaming requires a different receipt contract
+        and is rejected. Unknown native usage keeps the original reservation.
+        """
+        if on_event:
+            on_event({"event": "vllm_native_validation", "path": path,
+                      "request": request, "request_sent": False})
+        self._check_owner()
+        if path not in {"chat/completions", "embeddings"} or self.budget is None:
+            raise ValueError("NATIVE_POST_REQUIRES_ORIGINAL_BUDGET_AND_ROUTE")
+        if request.get("model") != self.config.model:
+            raise HttpOwnershipError("HTTP_OWNER_REQUEST_DOMAIN_CHANGED")
+        accounting = dict(request)
+        capacity_receipt = None
+        if path == "chat/completions":
+            if request.get("stream", False) is not False:
+                raise ValueError("NATIVE_STREAMING_NOT_SUPPORTED")
+            if not isinstance(request.get("messages"), list):
+                raise ValueError("NATIVE_MESSAGES_REQUIRED")
+            explicit = [request[field] for field in ("max_tokens", "max_completion_tokens")
+                        if request.get(field) is not None]
+            if len(explicit) == 2 and explicit[0] != explicit[1]:
+                raise ValueError("NATIVE_OUTPUT_LIMIT_AMBIGUOUS")
+            output = explicit[0] if explicit else generation_output_bound
+            if type(output) is not int or output <= 0:
+                raise ValueError("NATIVE_FINITE_OUTPUT_BOUND_REQUIRED")
+            choices = request.get("n", 1)
+            if type(choices) is not int or choices <= 0:
+                raise ValueError("NATIVE_GENERATION_COUNT_INVALID")
+            accounting["max_tokens"] = output * choices
+            # A bound for an omitted limit is a ledger upper bound, not a
+            # generation setting or a capacity reservation sent to the server.
+            if self.capacity is not None and explicit:
+                template = request.get("chat_template_kwargs") or {}
+                capacity_receipt = self.capacity.check(
+                    request["messages"], output, request.get("tools"),
+                    enable_thinking=template.get("enable_thinking"),
+                )
+        else:
+            inputs = request.get("input")
+            if isinstance(inputs, str):
+                accounting["input"] = [inputs]
+            elif isinstance(inputs, list) and inputs and all(type(row) is int for row in inputs):
+                accounting["input"] = [inputs]
+            elif (not isinstance(inputs, list) or not inputs
+                  or not all(isinstance(row, str) or (
+                      isinstance(row, list) and all(type(token) is int for token in row)
+                  ) for row in inputs)):
+                raise ValueError("NATIVE_EMBEDDING_INPUT_INVALID")
+            if self.emit:
+                self.emit({"event": "embedding_request", "model": request["model"],
+                           "input": inputs})
+        return self._post(path, request, capacity_receipt=capacity_receipt,
+                          accounting_request=accounting, on_event=on_event)
+
     def _post(
         self,
         path: str,
         request: dict[str, Any],
         *,
         capacity_receipt: dict[str, Any] | None = None,
+        accounting_request: dict[str, Any] | None = None,
+        on_event: Emit | None = None,
     ) -> dict[str, Any]:
         if self._http_owner is None:
-            return self._post_request(path, request, capacity_receipt=capacity_receipt)
+            return self._post_request(path, request, capacity_receipt=capacity_receipt,
+                                      accounting_request=accounting_request, on_event=on_event)
         self._check_owner()
         actual_url = str(self._client.build_request("POST", path).url)
         with self._http_owner.request(
@@ -233,7 +299,8 @@ class VLLMClient:
             actual_url,
             request.get("model"),
         ):
-            return self._post_request(path, request, capacity_receipt=capacity_receipt)
+            return self._post_request(path, request, capacity_receipt=capacity_receipt,
+                                      accounting_request=accounting_request, on_event=on_event)
 
     def _post_request(
         self,
@@ -241,12 +308,20 @@ class VLLMClient:
         request: dict[str, Any],
         *,
         capacity_receipt: dict[str, Any] | None = None,
+        accounting_request: dict[str, Any] | None = None,
+        on_event: Emit | None = None,
     ) -> dict[str, Any]:
+        def emit(event: dict[str, Any]) -> None:
+            if self.emit:
+                self.emit(event)
+            if on_event:
+                on_event(event)
+
         try:
             reservation = (
                 self.budget.reserve(
                     path,
-                    request,
+                    request if accounting_request is None else accounting_request,
                     generation_holdback_tokens=(
                         self.generation_holdback_tokens if path == "chat/completions" else 0
                     ),
@@ -263,29 +338,59 @@ class VLLMClient:
                 else None
             )
         except BudgetExceeded as error:
-            if self.emit:
-                self.emit(
-                    {
-                        "event": "vllm_budget_rejected",
-                        "path": path,
-                        "request_sent": False,
-                        "reason": str(error),
-                    }
-                )
+            emit({"event": "vllm_budget_rejected", "path": path,
+                  "request_sent": False, "reason": str(error)})
             raise
         started = time.monotonic()
         event: dict[str, Any] = {"event": "vllm_request", "path": path, "request": request}
         if capacity_receipt is not None:
             event["capacity"] = capacity_receipt
         try:
-            response = self._client.post(path, json=request)
+            if accounting_request is None:
+                response = self._client.post(path, json=request)
+            else:
+                wire = self._client.build_request("POST", path, json=request)
+                event.update({"request_url": str(wire.url), "request_method": wire.method,
+                              "request_headers": list(wire.headers.multi_items()),
+                              "request_body": wire.content.decode("utf-8"),
+                              "accounting_request": accounting_request,
+                              "accounting_scope": "reservation_upper_bound_not_actual_usage",
+                              "request_sent": True})
+                if on_event:
+                    on_event(event)
+                response = self._client.send(wire)
+                event["response_headers"] = list(response.headers.multi_items())
+                event["response_body_base64"] = base64.b64encode(response.content).decode("ascii")
             event["wall_seconds"] = time.monotonic() - started
             event["http_status"] = response.status_code
             event["response_text"] = response.text
-            response.raise_for_status()
-            receipt: dict[str, Any] = response.json()
+            if accounting_request is None:
+                response.raise_for_status()
+            try:
+                receipt: dict[str, Any] = response.json()
+            except ValueError:
+                # Preserve the actual HTTP error for a non-JSON error body.
+                response.raise_for_status()
+                raise
             event["receipt"] = receipt
-            event["usage"] = receipt.get("usage", "unknown")
+            if accounting_request is not None:
+                event["usage"] = (
+                    receipt.get("usage", "unknown") if isinstance(receipt, dict) else "unknown"
+                )
+                usage = event["usage"]
+                fields = ("prompt_tokens", "completion_tokens", "total_tokens") if (
+                    path == "chat/completions"
+                ) else ("prompt_tokens", "total_tokens")
+                event["usage_confirmed"] = (
+                    isinstance(usage, dict)
+                    and all(type(usage.get(field)) is int and usage[field] >= 0 for field in fields)
+                    and usage["total_tokens"] == sum(usage[field] for field in fields[:-1])
+                )
+                response.raise_for_status()
+                if not isinstance(receipt, dict):
+                    raise ValueError("NATIVE_RESPONSE_OBJECT_REQUIRED")
+            else:
+                event["usage"] = receipt.get("usage", "unknown")
             if capacity_receipt is not None:
                 usage = event["usage"]
                 actual_prompt = usage.get("prompt_tokens") if isinstance(usage, dict) else None
@@ -309,16 +414,17 @@ class VLLMClient:
                     ),
                 }
             event["event"] = "vllm_response"
-            if self.emit:
-                self.emit(event)
+            emit(event)
             return receipt
         except (httpx.HTTPError, ValueError) as exc:
             event.setdefault("wall_seconds", time.monotonic() - started)
             event["exception"] = {"type": type(exc).__name__, "message": str(exc)}
             event["event"] = "vllm_error"
-            if self.emit:
-                self.emit(event)
+            emit(event)
             raise
         finally:
             if self.budget is not None and reservation is not None:
-                self.budget.finish(reservation, event.get("usage"))
+                usage = event.get("usage") if (
+                    accounting_request is None or event.get("usage_confirmed") is True
+                ) else None
+                self.budget.finish(reservation, usage)

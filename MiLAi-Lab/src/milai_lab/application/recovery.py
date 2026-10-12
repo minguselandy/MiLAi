@@ -175,85 +175,94 @@ def resume_request(
             persist()
             return snapshot_result()
         state["discoveries"][-1].update(status="complete", result=observed)
-        actual = observed.get("current_state") or {}
-        business["observation"] = observed
-        business["status"] = "pending"
-        if observed.get("unknown_effects"):
-            business["status"] = "business_unknown"
-            execution["status"] = "outcome_unknown"
-            persist()
-            return snapshot_result()
-        execution["status"] = "not_needed"
-        _observed_business_steps(requirements, business, observed)
-        for step, progress in zip(requirements["steps"], business["steps"], strict=True):
-            if progress["status"] == "completed":
-                continue
-            # Confirmed effects cannot be repeated merely because later state changed.
-            if progress["status"] == "superseded":
-                execution["status"] = "current_state_changed"
-                break
-            if controls.get("readonly", False):
-                execution["status"] = "observed_only"
-                break
-            if step["operation"] not in adapter.allowed_operations:
-                execution["status"] = "not_authorized_current_request"
-                break
-            if not execute_business:
-                execution["status"] = "pending_host_execution"
-                break
-            missing = [
-                argument
-                for argument, field in step.get("arguments_from_state", {}).items()
-                if field not in actual and argument not in step.get("arguments", {})
-            ]
-            if missing:
-                execution["status"] = "missing_observed_arguments"
-                progress.update(status="incomplete", missing_observed_arguments=missing)
-                break
-            arguments = {
-                **step.get("arguments", {}),
-                **{
-                    argument: actual[field]
-                    for argument, field in step.get("arguments_from_state", {}).items()
-                    if field in actual
-                },
-            }
-            attempt_id = request_id + ":" + step["id"] + ":" + str(len(progress["attempts"]) + 1)
-            attempt: dict[str, Any] = {"attempt_id": attempt_id, "status": "unknown"}
-            progress["attempts"].append(attempt)
-            persist()
-            try:
-                ref = (
-                    VerifiedObjectRef(**observed["object_ref"])
-                    if observed.get("object_ref") else None
-                )
-                result = adapter.execute(
-                    step["operation"], arguments, attempt_id=attempt_id, ref=ref
-                )
-            except Exception as error:
-                attempt["error"] = str(error)
-                progress["status"], business["status"] = "unknown", "business_unknown"
+        if not observed.get("executed") and observed.get("status") in {
+            "read_limit_exhausted", "evidence_query_limit_exhausted",
+        }:
+            # Admission did not dispatch a query. Keep confirmed earlier effects
+            # and leave fresh observation unfinished, never not_found. Independent
+            # authorized saving/feedback below may still use confirmed old effects.
+            execution["status"] = observed["status"]
+        else:
+            actual = observed.get("current_state") or {}
+            business["observation"] = observed
+            business["status"] = "pending"
+            if observed.get("unknown_effects"):
+                business["status"] = "business_unknown"
                 execution["status"] = "outcome_unknown"
-                break
-            attempt.update(status="complete", result=result)
-            observed = result
-            actual = result.get("current_state") or actual
-            if result.get("executed"):
-                _observed_business_steps(requirements, business, observed)
-            execution["status"] = "attempted" if result.get("executed") else result["status"]
-            if not result.get("executed") or not result.get("receipt", {}).get("ok"):
-                break
-        business["status"] = _business_status(business)
-        execution["can_execute"] = bool(
-            not execution["readonly"]
-            and business["status"] not in {"business_unknown", "current_state_changed"}
-            and execution["status"] in {"pending_host_execution", "attempted"}
-            and any(
-                progress["status"] != "completed"
-                and step["operation"] in adapter.allowed_operations
-                for step, progress in zip(requirements["steps"], business["steps"], strict=True)
+                persist()
+                return snapshot_result()
+            execution["status"] = "not_needed"
+            _observed_business_steps(requirements, business, observed)
+            for step, progress in zip(requirements["steps"], business["steps"], strict=True):
+                if progress["status"] == "completed":
+                    continue
+                # Confirmed effects cannot be repeated merely because later state changed.
+                if progress["status"] == "superseded":
+                    execution["status"] = "current_state_changed"
+                    break
+                if controls.get("readonly", False):
+                    execution["status"] = "observed_only"
+                    break
+                if step["operation"] not in adapter.allowed_operations:
+                    execution["status"] = "not_authorized_current_request"
+                    break
+                if not execute_business:
+                    execution["status"] = "pending_host_execution"
+                    break
+                missing = [
+                    argument
+                    for argument, field in step.get("arguments_from_state", {}).items()
+                    if field not in actual and argument not in step.get("arguments", {})
+                ]
+                if missing:
+                    execution["status"] = "missing_observed_arguments"
+                    progress.update(status="incomplete", missing_observed_arguments=missing)
+                    break
+                arguments = {
+                    **step.get("arguments", {}),
+                    **{
+                        argument: actual[field]
+                        for argument, field in step.get("arguments_from_state", {}).items()
+                        if field in actual
+                    },
+                }
+                attempt_id = (request_id + ":" + step["id"] + ":"
+                              + str(len(progress["attempts"]) + 1))
+                attempt: dict[str, Any] = {"attempt_id": attempt_id, "status": "unknown"}
+                progress["attempts"].append(attempt)
+                persist()
+                try:
+                    ref = (
+                        VerifiedObjectRef(**observed["object_ref"])
+                        if observed.get("object_ref") else None
+                    )
+                    result = adapter.execute(
+                        step["operation"], arguments, attempt_id=attempt_id, ref=ref
+                    )
+                except Exception as error:
+                    attempt["error"] = str(error)
+                    progress["status"], business["status"] = "unknown", "business_unknown"
+                    execution["status"] = "outcome_unknown"
+                    break
+                attempt.update(status="complete", result=result)
+                observed = result
+                actual = result.get("current_state") or actual
+                if result.get("executed"):
+                    _observed_business_steps(requirements, business, observed)
+                execution["status"] = "attempted" if result.get("executed") else result["status"]
+                if not result.get("executed") or not result.get("receipt", {}).get("ok"):
+                    break
+            business["status"] = _business_status(business)
+            execution["can_execute"] = bool(
+                not execution["readonly"]
+                and business["status"] not in {"business_unknown", "current_state_changed"}
+                and execution["status"] in {"pending_host_execution", "attempted"}
+                and any(
+                    progress["status"] != "completed"
+                    and step["operation"] in adapter.allowed_operations
+                    for step, progress in zip(requirements["steps"], business["steps"], strict=True)
+                )
             )
-        )
         persist()
     else:
         business["status"] = "not_requested"

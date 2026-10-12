@@ -39,7 +39,7 @@ from pydantic import ConfigDict, Field, create_model, model_validator
 from milai_lab.application.functional import FunctionalApplication
 from milai_lab.application.host_requests import HostRequestProgress, visible_cards
 from milai_lab.application.recovery import UnknownModelRequest, resume_request
-from milai_lab.application.refs import observation_profile
+from milai_lab.application.refs import maintenance_observation_profiles, observation_profile
 from milai_lab.application.request_plans import (
     application_operation_catalog,
     application_requests_schema,
@@ -59,7 +59,12 @@ from milai_lab.harness.contextual_artifacts import (
 )
 from milai_lab.harness.functional_faults import FunctionalFaults
 from milai_lab.memory.activation import ActivationIndex
-from milai_lab.memory.functional import FunctionalMemory, ReadSelector, ReadSelectorTool
+from milai_lab.memory.functional import (
+    FunctionalMemory,
+    ReadSelector,
+    ReadSelectorTool,
+    StructuredReadGoal,
+)
 from milai_lab.memory.functional_state import FunctionalIntegrityError as FunctionalIntegrityError
 from milai_lab.memory.functional_state import FunctionalRejection, visibility
 from milai_lab.memory.functional_state import namespace as functional_namespace
@@ -341,6 +346,28 @@ Declare business_action_request: none when no external application effect is
 requested (including memory-only work and pure queries), perform only for newly
 requested real application effects, continue_if_unfinished for explicitly requested
 continuation of prior application work.
+"""
+REQUEST_PARTS_MODE_PROMPT = """Interpret the whole CURRENT request once. Call
+classify_current_request; it performs no work. Keep these parts separate:
+1. business_action_request: perform for requested application actions,
+continue_if_unfinished for continuing them, none only when no application effect
+is requested. Asking to save an action's result does not replace that action.
+2. memory_requests: new_assertion for a supplied durable assertion, explicit for
+requested saving/updating, continue_prior for unfinished prior saving. Use [] for
+queries or forgetting alone. Do not save execution controls as domain facts.
+3. read_goal: what must be established, using current_interpretation,
+original_source, saved_history, or live_business. A current record cannot prove
+what a previous version contained; a saved receipt is not a fresh business query.
+Use null when no reading purpose is requested.
+4. forbidden_operations: explicit CURRENT exclusions only. business_mutation
+for no new business actions, memory_write for no saving/editing, forget_memory
+for no visibility revocation, or exact registered application operation names.
+Apply an exclusion to its named work, not to the whole request. Skipping already
+saved or completed work does not prohibit separately requested unfinished work.
+Forgetting needs allow_forgetting=true but is not a semantic save. Its targets
+must cover the authorized request/result/source/history scope after actual reads.
+Visible old requests resolve references; they never restore excluded permission.
+Classify intent without deciding feasibility or claiming work already completed.
 """
 REQUEST_COMPLETE_MODE_PROMPT = REQUEST_SCOPE_MODE_PROMPT + """\
 Declare concrete actions once, inside application_requests.actions. Interpret the
@@ -711,6 +738,8 @@ def prepare(
         "memory_profile",
         "memory_ranking",
         "retrieval_granularity", "stage_enable_thinking",
+        "source_access", "source_top_k", "semantic_top_k", "max_evidence_queries",
+        "maintenance_mode",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
     if set(settings) - allowed:
@@ -720,6 +749,18 @@ def prepare(
         raise ValueError("FUNCTIONAL_MEMORY_PROFILE_INVALID")
     if settings.get("memory_view_mode", "legacy") not in {"legacy", "staged", "state_driven"}:
         raise ValueError("FUNCTIONAL_MEMORY_VIEW_MODE_INVALID")
+    if settings.get("source_access", "legacy") not in {"legacy", "independent_v1"} or any(
+        type(settings.get(key, default)) is not int or settings.get(key, default) < 1
+        for key, default in (("source_top_k", 20), ("semantic_top_k", 10))
+    ):
+        raise ValueError("FUNCTIONAL_SOURCE_RETRIEVAL_INVALID")
+    if "max_evidence_queries" in settings and (
+        type(settings["max_evidence_queries"]) is not int
+        or not 0 <= settings["max_evidence_queries"] <= 2
+    ):
+        raise ValueError("FUNCTIONAL_EVIDENCE_QUERY_LIMIT_INVALID")
+    if settings.get("maintenance_mode", "legacy") not in {"legacy", "event_delta_v1"}:
+        raise ValueError("FUNCTIONAL_MAINTENANCE_MODE_INVALID")
     if settings.get("result_maintenance_mode", "legacy") not in {
         "legacy", "literal_observations_v1",
     }:
@@ -979,7 +1020,9 @@ def _status(error: Exception) -> tuple[str, str]:
         return "BUDGET_EXHAUSTED", "budget"
     if isinstance(error, httpx.HTTPError):
         return "PROVIDER_ERROR", "provider"
-    if isinstance(error, CapacityExceeded):
+    if isinstance(error, CapacityExceeded) or (
+        isinstance(error, FunctionalRejection) and text == "V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT"
+    ):
         return "FAILED", "request_capacity"
     if "UNKNOWN" in text or isinstance(error, OSError):
         return "UNKNOWN", "storage_or_business_unknown"
@@ -1098,6 +1141,7 @@ def request_mode(
     memory_continuation: bool = False,
     application_workflow: str | None = None,
     scope_only: bool = False,
+    request_parts: bool = False,
     referenced_requests: list[dict[str, Any]] | None = None,
     reference_fit: Callable[[str], bool] | None = None,
 ) -> dict[str, Any]:
@@ -1121,11 +1165,31 @@ def request_mode(
         if scope_only and (not saved or (isinstance(value, dict)
                                         and "application_requests" not in value)):
             # Saved full V8 decisions keep their original validation and meaning.
-            if not isinstance(value, dict) or set(value) != {
+            optional = {"response_scope", *({"read_goal", "forbidden_operations"}
+                                           if request_parts else set())}
+            if not isinstance(value, dict) or set(value) - optional != {
                 "memory_requests", "allow_forgetting", "business_action_request",
                 "application_continuation_request",
-            }:
+            } or not isinstance(value.get("response_scope", "substantive"), str) or (
+                value.get("response_scope", "substantive") not in {
+                    "memory_status_only", "substantive",
+                }
+            ):
                 return False
+            if request_parts:
+                goal = value.get("read_goal")
+                try:
+                    if goal is not None:
+                        StructuredReadGoal.model_validate(goal)
+                except ValueError:
+                    return False
+                forbidden = value.get("forbidden_operations", [])
+                if (not isinstance(forbidden, list)
+                        or any(not isinstance(op, str) or op not in {
+                            "memory_write", "forget_memory", "business_mutation",
+                            *BUSINESS_MUTATIONS} for op in forbidden)
+                        or len(forbidden) != len(set(forbidden))):
+                    return False
             requests = value["memory_requests"]
             return (isinstance(requests, list)
                 and all(isinstance(item, str) and item in {
@@ -1241,7 +1305,8 @@ def request_mode(
             raise ValueError("FUNCTIONAL_REQUEST_MODE_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
         write_json(path, state)  # Reserve before dispatch; failures do not refund a call.
-        prompt = (REQUEST_SCOPE_MODE_PROMPT if scope_only else
+        prompt = (REQUEST_PARTS_MODE_PROMPT if scope_only and request_parts else
+                  REQUEST_SCOPE_MODE_PROMPT if scope_only else
                   REQUEST_COMPLETE_MODE_PROMPT if application_workflow is not None else
                   REQUEST_CONTINUATION_MODE_PROMPT if memory_continuation else
                   REQUEST_REFERENCE_MODE_PROMPT if reference_mode_declaration else
@@ -1254,6 +1319,9 @@ def request_mode(
                 "Call\nclassify_current_request once; it executes no operation.",
                 "Return exactly one JSON object matching the response schema. This declaration\n"
                 "executes no operation.")
+            if request_parts:
+                prompt = prompt.replace("Call\nclassify_current_request; it performs no work.",
+                    "Return one JSON object matching the response schema; it performs no work.")
         declaration = (REQUEST_COMPLETE_MODE_DECLARATION if application_workflow is not None else
                        REQUEST_CONTINUATION_MODE_DECLARATION if memory_continuation else
                        REQUEST_REFERENCE_MODE_DECLARATION if reference_mode_declaration else
@@ -1276,6 +1344,30 @@ def request_mode(
             }
             parameters["required"].append("application_continuation_request")
             if scope_only:
+                if request_parts:
+                    parameters["properties"]["read_goal"] = {"anyOf": [
+                        StructuredReadGoal.model_json_schema(), {"type": "null"}]}
+                    parameters["properties"]["forbidden_operations"] = {
+                        "type": "array", "uniqueItems": True, "items": {"type": "string",
+                            "enum": ["memory_write", "forget_memory", "business_mutation",
+                                     *sorted(BUSINESS_MUTATIONS)]}}
+                # Existing saved V9 decisions omit this field and retain their
+                # ordinary answer path without another classification call.
+                parameters["properties"]["response_scope"] = {
+                    "type": "string", "enum": ["memory_status_only", "substantive"],
+                    "description": "memory_status_only only when the whole requested reply "
+                    "is a narrow save-status confirmation; substantive for explanation, recall, "
+                    "comparison, saved content/history, business status or any other answer."
+                }
+                prompt += (
+                    "\nDeclare response_scope=memory_status_only only when the whole requested "
+                    "reply needs solely confirmation of memory saving. A save request that also "
+                    "asks for an explanation, recalled content, history, a comparison or another "
+                    "task needs substantive. Pure reading/querying can always receive a "
+                    "substantive answer. This declares reply scope, never that a save happened "
+                    "or that its meaning is correct; only actual receipts establish effects. "
+                    "When unclear or omitted, substantive applies."
+                )
                 prompt += ("\nAPPLICATION OPERATIONS:\n" + json.dumps(
                     application_operation_catalog(application_workflow),
                     ensure_ascii=False, separators=(",", ":")) + "\n")
@@ -1422,6 +1514,11 @@ def request_mode(
         ) if memory_requests is not None else decision["memory_continuation_request"]
     if memory_requests is not None:
         summary["memory_requests"] = memory_requests
+    if "response_scope" in decision:
+        summary["response_scope"] = decision["response_scope"]
+    for key in ("read_goal", "forbidden_operations"):
+        if key in decision:
+            summary[key] = decision[key]
     if application_workflow is not None:
         summary["application_requests"] = decision.get("application_requests", [])
         summary["application_continuation_request"] = decision["application_continuation_request"]
@@ -2013,22 +2110,59 @@ def memory_effects(messages: list[Any]) -> dict[str, Any]:
 def _model_memory_effects(effects: dict[str, Any]) -> dict[str, Any]:
     """Reference exact parent receipts in model input; keep audit results intact."""
     projected = deepcopy(effects)
+    confirmed: list[str] = []
+    versions: set[tuple[str, int]] = set()
+
+    def confirm(ref: str, receipt: dict[str, Any]) -> None:
+        record_id, revision = receipt.get("id"), receipt.get("revision")
+        if (receipt.get("ok") is not True or receipt.get("status") != "committed"
+                or receipt.get("effect") != "memory_only"
+                or not isinstance(record_id, str) or not record_id
+                or type(revision) is not int or revision < 1):
+            return
+        version = (record_id, revision)
+        if version not in versions:
+            versions.add(version)
+            confirmed.append(ref)
+
+    for receipt in projected.get("mutation_receipts", []):
+        ref = receipt.get("receipt_ref")
+        if (receipt.get("transport_status") == "success"
+                and receipt.get("tool") in {"save_memory", "update_memory"}
+                and isinstance(ref, str) and ref):
+            confirm(ref, receipt)
 
     def project_batches(
-        result: dict[str, Any], references: list[tuple[str, dict[str, Any]]]
+        result: dict[str, Any], references: list[tuple[str, dict[str, Any]]], path: str,
     ) -> None:
-        for batch in result.get("batches", []):
+        for index, batch in enumerate(result.get("batches", [])):
+            batch_path = f"{path}/batches/{index}"
+            for receipt_index, receipt in enumerate(batch.get("receipts", [])):
+                confirm(f"{batch_path}/receipts/{receipt_index}", receipt)
             batch["receipts"] = [
                 next(({"receipt_ref": ref} for ref, original in references
                       if receipt == original), receipt)
                 for receipt in batch.get("receipts", [])
             ]
-            project_batches(batch, references)
+            project_batches(batch, references, batch_path)
 
     for index, result in enumerate(projected.get("maintenance", [])):
         references = [(f"#/maintenance/{index}/receipts/{receipt_index}", receipt)
                       for receipt_index, receipt in enumerate(result.get("receipts", []))]
-        project_batches(result, references)
+        for ref, receipt in references:
+            confirm(ref, receipt)
+        project_batches(result, references, f"#/maintenance/{index}")
+    projected["confirmed_semantic_commit_receipt_refs"] = confirmed
+    projected["confirmed_semantic_commit_count"] = len(confirmed)
+    if projected.get("maintenance"):
+        projected["interpretation"] = (
+            "Actual Agent tool receipts and shared maintenance receipts confirm listed write "
+            "effects. Repeated receipts for one record/version count once; no_change, rejection "
+            "and unknown receipts are not commits. A missing save/update tool or a rejected "
+            "extra call does not undo a shared maintenance commit. Raw capture and read-only "
+            "hits do not confirm saving. Commit receipts do not verify content, fields or "
+            "completion of the whole request."
+        )
     return projected
 
 
@@ -2542,12 +2676,17 @@ def message(
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
                 memory_options["features"] = edit_features
                 memory_options["maintenance_recipe"] = settings.get("maintenance_recipe")
+                memory_options["maintenance_mode"] = settings.get("maintenance_mode", "legacy")
                 memory_options["query_time"] = query_time
                 memory_options["query_calendar_context"] = query_calendar_context
             memory = memory_class(
                 service,
                 capacity.text_tokens,
                 read_limit=settings["additional_reads"],
+                source_access=settings.get("source_access", "legacy"),
+                source_top_k=settings.get("source_top_k", 20),
+                semantic_top_k=settings.get("semantic_top_k", 10),
+                max_evidence_queries=settings.get("max_evidence_queries"),
                 material_limit=settings["ordinary_material_tokens"],
                 memory_view_mode=settings.get("memory_view_mode", "legacy"),
                 formation_interface=settings.get("formation_interface", "content_and_scope_v1"),
@@ -2757,6 +2896,7 @@ def message(
                             "current_request_json_v9"} else None),
                     scope_only=settings["request_mode"] in {
                         "current_request_native_v9", "current_request_json_v9"},
+                    request_parts=settings.get("source_access") == "independent_v1",
                     referenced_requests=request_cards,
                     reference_fit=lambda text: capacity.text_tokens(text)
                     <= settings["ordinary_material_tokens"],
@@ -2932,6 +3072,20 @@ def message(
                         declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
                         source_fragment=service.source_fragment,
                     )
+                forbidden = set(mode.get("forbidden_operations", []))
+                if "memory_write" in forbidden:
+                    mode["allow_memory_maintenance"] = False
+                if "forget_memory" in forbidden:
+                    mode["allow_forgetting"] = False
+                if forbidden and "business_operations" in mode:
+                    mode["business_operations"] = [op for op in mode["business_operations"]
+                        if op not in forbidden and "business_mutation" not in forbidden]
+                    mode["allow_business_mutation"] = bool(mode["business_operations"])
+                if mode.get("read_goal") is not None and memory.memory_view_mode != "legacy":
+                    view = memory.view_state(cfg)
+                    if view["read_goal"] is None:
+                        memory.focus_view(cfg, focus=view["focus"], read_goal=mode["read_goal"])
+                memory.forget_requested = bool(mode["allow_forgetting"])
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {
@@ -3012,6 +3166,17 @@ def message(
             trace({"event": "functional_tool_catalog", "tools": tool_catalog})
             read_exhausted = False
             business_query_targets: list[dict[str, Any]] = []
+
+            def available_tool_names(config: RunnableConfig) -> set[str]:
+                names = allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
+                if memory.max_evidence_queries is not None:
+                    allowance = memory.read_allowance(config)
+                    if allowance["reads_remaining"] == 0:
+                        names -= set(memory.read_tool_names) | {
+                            "get_reservation", "get_document_status"}
+                    elif allowance["evidence_queries_remaining"] == 0:
+                        names -= {"search_memory", "get_reservation", "get_document_status"}
+                return names
 
             def maintain_current(execute: bool) -> list[dict[str, Any]]:
                 assert isinstance(memory, FunctionalEditMemory)
@@ -3100,7 +3265,10 @@ def message(
                     maintenance_scope=content,
                     prepare_source_delivery=(
                         (lambda delivery: memory.writer.observation_delivery(
-                            delivery, [observation_profile(app.workflow, maintenance=True)]))
+                            delivery, maintenance_observation_profiles(app.workflow)
+                            if settings.get("maintenance_mode") == "event_delta_v1" else
+                            [observation_profile(app.workflow, maintenance=True)],
+                            execution_only_origins=tuple(tool.name for tool in memory.tools())))
                         if settings.get("result_maintenance_mode", "legacy")
                         == "literal_observations_v1" else None),
                     result_observer=observe_result,
@@ -3279,11 +3447,11 @@ def message(
                 trace({"event": "functional_memory_effects", "effects": effects})
                 refresh_requests()
                 if settings.get("capability_delivery") == "actual_catalog_v1":
-                    active = [] if for_finalization else sorted(
-                        allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
-                    )
+                    active = [] if for_finalization else sorted(available_tool_names(config))
                     capability_text = (
                         "CURRENT EXECUTION CAPABILITIES: " + json.dumps(active) + ". "
+                        "This catalog limits the Agent's next actions; it does not report "
+                        "already completed effects. "
                         "Only these tools are available in this phase. An earlier request or "
                         "an earlier phase cannot enable a missing tool. "
                     )
@@ -3294,12 +3462,9 @@ def message(
                             "plainly when it prevents an answer. Available business tools still "
                             "follow the current request permissions. "
                         )
-                    if maintenance_recipe:
-                        capability_text += (
-                            "The shared maintenance recipe reports its actual results below. "
-                            "The Agent does not need a save/update tool to confirm those receipts. "
-                        )
-                    elif not {"save_memory", "update_memory"}.intersection(active):
+                    if not maintenance_recipe and not {
+                        "save_memory", "update_memory"
+                    }.intersection(active):
                         capability_text += (
                             "Memory saving/updating is unavailable in this phase. Do not search "
                             "or read repeatedly to try to enable it. Report the actually observed "
@@ -3322,15 +3487,30 @@ def message(
                             # this checkpointed ID; IDs do not enter provider text.
                             id=(identity + ":required-memory-proposal"
                                 if require_proposal else None),
-                            content=capability_text + settings["system_prompt"]
+                            content=settings["system_prompt"]
                             + ("\n" + memory.instructions()
                                if isinstance(memory, FunctionalEditMemory)
                                and not maintenance_recipe else "")
+                            + "\nACTUAL EFFECTS AND RECEIPT EVIDENCE:\n"
+                            + "Confirmed receipts establish the listed effects, even when a "
+                              "save/update tool is absent now or an extra call is rejected. "
+                              "Commit counts do not verify content, fields or the whole request. "
+                              "Keep committed, unchanged, rejected and unknown outcomes distinct."
                             + ("\nMemory maintenance for this event is handled by the shared "
                                "recipe. Use its actual receipts below to report saved, unchanged "
                                "or unfinished work. Raw capture is not a semantic save. "
                                "Do not duplicate maintenance through other tools."
                                if maintenance_recipe else "")
+                            + "\n" + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
+                            + "\nCURRENT TOOLS AND ACTION LIMITS:\n"
+                            + capability_text
+                            + ("Shared reading allowance: " + json.dumps(
+                                memory.read_allowance(config)) + ". New source searches and "
+                                "business queries share this allowance with body/history "
+                                "reads and pagination. A denial is not evidence of nonexistence.\n"
+                                if memory.max_evidence_queries is not None else "")
+                            + "Use only the tools actually supplied for this phase. This limits "
+                              "next actions; it cannot establish that a prior effect did not occur."
                             + (MAINTENANCE_LIMIT_PROMPT if not for_finalization
                                and settings.get("semantic_reproposal_policy")
                                == "maintenance_two_proposals_v1"
@@ -3340,14 +3520,31 @@ def message(
                                and settings.get("support_input") == "selected_sources_v1"
                                and {"save_memory", "update_memory"}.intersection(allowed_tools)
                                else "")
+                            + "\nCURRENT REQUEST PROGRESS AND OUTSTANDING WORK:\n"
+                            + ("For this forgetting request, consider the authorized temporary "
+                               "set of result records, original requests, their Source links and "
+                               "saved history. Related navigation is not authorization: open "
+                               "actual targets before selecting effects. Source revocation here "
+                               "covers whole Sources, not excerpts; preserve unrelated contents "
+                               "and report a remaining Source limitation when only record scope "
+                               "is authorized. After revocation, unavailable does not mean never "
+                               "saved.\n" if memory.forget_requested
+                               and memory.source_access == "independent_v1" else "")
+                            + "Request interpretation describes intent, not completed effects. "
+                              "Use actual progress, pending calls, unprocessed maintenance and "
+                              "reading gaps to identify unfinished or unknown work. A confirmed "
+                              "operation does not prove unattempted parts; semantic completion "
+                              "remains unchecked."
                             + (("\nPersisted current-request interpretation: " if capability_text
                                 else "\nCurrent request interpretation and enforced tool limits: ")
                                + json.dumps(mode, ensure_ascii=False) if mode else "")
                             + ("\n" + PROGRESS_PREFIX + json.dumps(request_progress,
                                 ensure_ascii=False, separators=(",", ":")) if tracker else "")
+                            + ("\nCurrent request part failures: " + json.dumps(
+                                output["request_part_failures"], ensure_ascii=False)
+                               if output.get("request_part_failures") else "")
                             + "".join("\n" + str(row.content) for row in completion_feedback)
-                            + "\n"
-                            + json.dumps(_model_memory_effects(effects), ensure_ascii=False)
+                            + "\nDelivered memory evidence and reading requirements:"
                             + "\n"
                             + json.dumps(material, ensure_ascii=False)
                         ),
@@ -3364,11 +3561,16 @@ def message(
                                          in {"inline_fragments_v1", "inline_receipt_units_v2"}),
                 complete_receipt_units=(settings.get("source_selection")
                                         == "inline_receipt_units_v2"),
+                evidence_query=(lambda request, execute: memory.query_observation(
+                    cfg, request.tool_call["id"], request.tool_call["name"],
+                    request.tool_call["args"], execute))
+                if settings.get("max_evidence_queries") is not None else None,
             )
             adapter = None
             if service.memory_profile == "unified_v1":
                 adapter = app.adapter(
                     service, session, message_id, runtime_config=cfg,
+                    reuse_current_observations=settings.get("max_evidence_queries") is not None,
                     allowed_operations=tuple(
                         tool.name for tool in selected_business
                         if tool.name not in {"get_reservation", "get_document_status"}
@@ -3548,10 +3750,9 @@ def message(
                     if memory.memory_view_mode != "legacy" and adapter is not None
                     else selected_business
                 )
-                catalog = tuple(tool for tool in memory_catalog
-                                if tool.name in allowed_tools and (
-                                    not read_exhausted or tool.name not in memory.read_tool_names
-                                )) + business_catalog
+                available = available_tool_names(config)
+                catalog = tuple(tool for tool in memory_catalog if tool.name in available) + tuple(
+                    tool for tool in business_catalog if tool.name in available)
                 trace({"event": "functional_bound_tool_catalog",
                        "tools": [convert_to_openai_tool(tool) for tool in catalog]})
                 return catalog
@@ -3817,7 +4018,32 @@ def message(
                 # can be reused. The model sees exactly the same bounded material.
                 response_input = context_hook({"messages": messages}, cfg,
                     for_finalization=True)["llm_input_messages"]
-                if settings.get("finalization") in {
+                receipt_status_only = (
+                    settings.get("finalization") == "receipt_or_agent_response_v1"
+                    and mode and mode.get("response_scope") == "memory_status_only"
+                    and mode["business_action_request"] == "none" and not mode["allow_forgetting"]
+                    and effects["semantic_memory"]["status"] in {"committed", "no_change"}
+                    and effects["semantic_memory"]["operations"]
+                    and not any((effects["business"]["operations"],
+                                 effects["business"]["observations"],
+                                 effects["visibility"]["operations"],
+                                 effects.get("application_requests"),
+                                 effects.get("request_part_failures"),
+                                 output.get("execution_stop")))
+                )
+                if receipt_status_only:
+                    # The undelivered model draft remains in execution_candidate_answer.
+                    # Render only confirmed listed effects, not content fidelity or
+                    # complete semantic coverage, without a corrective model call.
+                    final = AIMessage(content=memory_receipt_summary(effects))
+                    output["finalization"] = {
+                        "status": "response_rendered", "attempts": 0,
+                        "tools_available": False, "execution_candidate_delivered": False,
+                        "protocol": "receipt_business_response_v1", "model_generation": False,
+                    }
+                    trace({"event": "functional_receipt_finalization",
+                           **output["finalization"], "response_id": identity})
+                elif settings.get("finalization") in {
                     "receipt_business_response_v1",
                     "receipt_business_response_v2",
                     "receipt_business_response_v3",

@@ -11,7 +11,7 @@ import copy
 from collections.abc import Sequence
 from typing import Any, Protocol
 
-from milai_lab.memory.edit_units import issue_evidence
+from milai_lab.memory.edit_units import issue_evidence, tool_source_origin
 from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional_state import FunctionalRejection, body_text
 
@@ -84,6 +84,9 @@ def _delivery_sources(index: EpisodeIndex, refs: list[str]) -> list[dict[str, An
                 "role": event["role"],
                 "observed_at": event["observed_at"],
                 "occurred_at": event.get("occurred_at"),
+                **({"calendar_context": event["calendar_context"]}
+                   if "calendar_context" in event else {}),
+                **({"origin": origin} if (origin := tool_source_origin(event)) else {}),
                 "text": text,
                 "body_delivered": True,
                 "semantic_support": "unchecked",

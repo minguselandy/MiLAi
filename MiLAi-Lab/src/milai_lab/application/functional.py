@@ -313,6 +313,7 @@ class FunctionalApplication:
         allowed_operations: Sequence[str] = (),
         can_read: bool = True,
         runtime_config: Mapping[str, Any] | None = None,
+        reuse_current_observations: bool = False,
     ) -> Any:
         """Bind current permissions to the normal actual application adapter."""
         from milai_lab.application.adapters import SandboxApplicationAdapter
@@ -325,6 +326,7 @@ class FunctionalApplication:
             allowed_operations=allowed_operations,
             can_read=can_read,
             runtime_config=runtime_config,
+            reuse_current_observations=reuse_current_observations,
         )
 
     def recover_pending(self, agent: Any, scope: Any, runtime: Any) -> None:
@@ -393,6 +395,7 @@ class FunctionalApplication:
         memory_mutation_names: Sequence[str] = ("save_memory", "update_memory", "forget_memory"),
         inline_fragment_content: bool = False,
         complete_receipt_units: bool = False,
+        evidence_query: Callable[[Any, Callable[[], ToolMessage]], ToolMessage] | None = None,
     ) -> FunctionalCallWrapper:
         """Wrap ToolNode calls before delivery, with no model/network calls here.
 
@@ -437,6 +440,7 @@ class FunctionalApplication:
             frozenset(memory_mutation_names),
             inline_fragment_content,
             complete_receipt_units,
+            evidence_query,
         )
 
 
@@ -452,6 +456,7 @@ class FunctionalCallWrapper:
         memory_mutation_names: frozenset[str],
         inline_fragment_content: bool = False,
         complete_receipt_units: bool = False,
+        evidence_query: Callable[[Any, Callable[[], ToolMessage]], ToolMessage] | None = None,
     ) -> None:
         if service.owner != app.owner or not session or not turn_id:
             raise ValueError("FUNCTIONAL_MEMORY_SCOPE_INVALID")
@@ -463,6 +468,7 @@ class FunctionalCallWrapper:
         self.memory_mutation_names = memory_mutation_names
         self.inline_fragment_content = inline_fragment_content
         self.complete_receipt_units = complete_receipt_units
+        self.evidence_query = evidence_query
 
     def _source_fragment_index(self, source_ref: str) -> list[dict[str, Any]]:
         if getattr(self.service, "functional_contract", "legacy") != "functional_v1":
@@ -701,10 +707,19 @@ class FunctionalCallWrapper:
     def __call__(self, request: Any, execute: Callable[[Any], Any]) -> Any:
         name = request.tool_call["name"]
         if name in self.app.tool_names:
+            def query_or_operation() -> ToolMessage:
+                response = self.app.journal(request, execute)
+                if not isinstance(response, ToolMessage):
+                    raise TypeError("FUNCTIONAL_APPLICATION_EXPECTED_TOOL_MESSAGE")
+                return self.capture(request, response)
+
+            if self.evidence_query is not None and name in {
+                "get_reservation", "get_document_status",
+            }:
+                return self.evidence_query(request, query_or_operation)
             response = self.app.journal(request, execute)
-            return (
-                self.capture(request, response) if isinstance(response, ToolMessage) else response
-            )
+            return (self.capture(request, response)
+                    if isinstance(response, ToolMessage) else response)
         if name not in self.memory_mutation_names:
             return execute(request)
         key = self.app.progress.begin(self._identity(request))
@@ -749,6 +764,16 @@ class FunctionalCallWrapper:
     def run_tool(
         self, request: Any, execute: Callable[[Any], Any], business_journal: Any = None
     ) -> Any:
+        if self.evidence_query is not None and request.tool_call["name"] in {
+            "get_reservation", "get_document_status",
+        }:
+            def recovered_query() -> ToolMessage:
+                response = execute(request)
+                if not isinstance(response, ToolMessage):
+                    raise TypeError("FUNCTIONAL_APPLICATION_EXPECTED_TOOL_MESSAGE")
+                return self.capture(request, response, wrap=False)
+
+            return self.evidence_query(request, recovered_query)
         response = execute(request)
         return (
             self.capture(request, response, wrap=False)

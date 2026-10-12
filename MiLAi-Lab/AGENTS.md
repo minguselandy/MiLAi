@@ -1,4 +1,630 @@
-# Current handoff: global function-first integration, 2026-10-10 Asia/Shanghai
+# Current handoff: dynamic-memory plan active, 2026-10-12
+
+CURRENT LIVE UPDATE 2026-10-12 04:01 UTC: goal ACTIVE; corrected Q b558 FIRST dispatch running, do not duplicate/restart.
+Actual frozen source b558a7a8d3c7d8e871547476117b55563fbb0ea9, artifacts/dynamic-memory-small/source-b558a7a8/MiLAi-Lab.
+Separate freeze source-freeze-q-v2.json; old source-freeze.json still11c4, intentionally unchanged. Newroot q32-b558a7a8-v2.
+root-execution-predict RUNNING started04:01:10.363550UTC; parent1446814/worker1446815 actuallyalive04:01:34UTC.
+Original ledger/limits/floor8+1/Hreservation preserved; predispatchleaseFREE/liveledger==11c4end. RootonlymodelHTTPDBserial.
+Publicturnfix b558: actualUserturn:N capture+perbatch latestarrivedUser, nofakeUserforAssistant-only.3fullchainchecks/Ruff/mypyPASS.
+Only runtime diff from11c4 isBenchmarkmaintain_recipe; Host code/Reader/Raw/QA Judge unchanged, existingHost14+twoSDK evidence reused not re-run.
+Raw incrementalaudit raw-reuse-audit-b558a7a8.json reuses73exactcomparison; originalsame6sample unchanged.
+A newSourcehalf q-source-review-milai-b558a7a8-half.json; old11c4partial preserved separately. Sourceaxis before newJudge.
+B fixed3natural events new q-maintenance-source-review-b558a7a8.json +firstvalidcommitcheck, noQA/gold/DB.
+D newroot cost/delivery summary; oldpartial11c4 root-prediction-cost-delivery-summary closed,notcompleteM/noJudge.
+b558published PR121head, ownFast38201895441SUCCESS/Full38201895477SKIPPED; prior199ownFast38200474159SUCCESS/Full38200474173SKIPPED.
+Next observefirstactualmaintenancecommit, continue32/73; afterfullpredictionterminal/resources/PIDclosure explicit root_score.py QA-only once.
+Do not score/resume11c4 stoppedQ. Do not automatically redoHost semanticfailures. Finalpair73/cost/delivery/fixed6/3maintenance stillrequired.
+All lower LIVE/URGENT states are historical. Frozen code/config/answers never edited.
+
+URGENT UPDATE 2026-10-12 03:46 UTC: Q11c4 STOPPED by Root for proven benchmark wiring defect, not user cancellation or algorithm failure.
+Newfunctional_v1 service contract rejected ALL maintenance with public_turn_required_or_mismatched; Root failed to bind actual public turns.
+5fullsessions/12savedQAalltext; no semanticcommit, embedding0. NOT a complete M candidate/effectiveness result, no Judge dispatch.
+root-stop-boundary-audit.json records SIGSTOP+stableledgerfloor8/1 before SIGINT/SIGCONT at03:46:09UTC, so no outstandingmodelcall interrupted.
+Formal root-execution-predict STOPPED03:46:10.258100UTC rc-2, terminalFAILED KeyboardInterrupt/resources_settledtrue/close_errornull.
+36gen530943known=charged/embedding0/newunknown0/0/limitsunchanged;parent1336488/worker1336489gone;leaseFREE/liveledger=end.
+Stderr confirms interrupt during backlink_candidates SQLite search, not HTTP. Frozen source/old bank/answers/cost remain immutable.
+B /root/minimal_maintenance_fix now EXCLUSIVELY editing integration edit_benchmarks.py +relatedtests for actual publicturnbinding.
+Root ownsdocs/helpers/publish. Must add maintain_recipe validcreate→retrieval ordinary test (earlier onlyno-op/read missed this integration).
+Never weakenMemoryService check, inventUserSource or resumeoldQ. After narrowfix/newcommit/freeze, use freshQbanks/newcondition; same6predeclaredsample.
+Host11c4+twoSDKactualresults remain valid unchanged Host source; benchmark-only wiringfix does not authorize redoingHost for semantic failures.
+A preserved first3sourceaxis asPARTIAL_SOURCE_REVIEW_HELD_WRITER_BINDING_BLOCK_REPORTED; no newJudge/continued oldaudit.
+D closing partialQcost/delivery; B3natural-event audit PENDING held until proper newQ. Goal stillACTIVE/fullscope, no completion.
+Latest publishedhead199ac39a14e766c86b1b8aff6322265f4631a11b ownFast38200474159RUNNING/Full38200474173SKIPPED at03:46.
+Older LIVE UPDATE below is historical; DO NOT restart its Q or score it.
+
+LIVE UPDATE 2026-10-12 03:33 UTC: dynamic goal ACTIVE, do not mark complete; actual Q FIRST prediction running.
+Frozen runtime11c4e826af350e4769c38e78c8239013e3b33606 at artifacts/dynamic-memory-small/source-11c4e826/MiLAi-Lab.
+Q artifacts/dynamic-memory-small/q32-11c4e826 started03:32:00.461863UTC, parent1336488/worker1336489 alive03:33:06UTC.
+Root-execution-predict.json/ledger/actualPID authoritative; no score dispatched, no prediction replay. Prepared32/73/72, QA-only mode.
+Original continuous ledgerunknown8/1/H110954 retained; live pendingunknown+1 is provisional; closed-phase delta must bechecked.
+Host artifacts/dynamic-memory-small/host14-11c4e826 CLOSED03:29:22.448767UTC, rc0/newunknown0/0/limitsunchanged/leaseFREE.
+Hostparent1286678/worker1286680gone;14attempted=6COMPLETED/8FAILED(wrapper5/emptyresponse3),6draft/9publictext.
+Unique semanticcommits2(rev1/2),businessmutation0,newget_reservation1,forgetsuccess0. Actual Source8fragments delivered with semantic empty.
+Cost54gen input415718/output67675/total483393known=charged;18embedding/776;618.43sec. root-accounting-summary.json reconciled.
+Two SDK exports1328559/1328732rc0/gone;root-sdk-exports-summary.json ledgerbytesunchanged,stderr onlydependencywarnings.
+Root root-sdk-visible-after-unfulfilled-forget.json current/rev1-2/history +11/9 priorSources remain accessible,rawsearch/rangereopen too.
+No successfulforget receipt; no successbinding. SDK read/index metadata can write, notphysicalreadonly. D hostsource review complete.
+Predeclared6sample +raw-reuse-audit.json in dynamic-memory-small: Raw73/73 exactmessages/material/rank/QAJudge same; reused noRawdispatch.
+SampleU1S0Q0/1/2,U2S0Q0,U3S2Q0,U4S7Q3;4users/directpaged/all4pairs. Rawhalf completed via priorreviews (4C/2H officialkept).
+A /root/symmetric_source_review nowreviewing same6newM Source-only as available; freezeSourceaxis before newJudge. Priorreferenceexposure disclosed.
+B /root/minimal_maintenance_fix fixed3naturalmaintenanceevents U1S5/U3S0/U3S3, waiting actualcomplete;0DB/HTTP/gold. NotD-editdiagnostic.
+Publishedd558415f2cdedad8037b28f830399d6929a59d85 ownFast38199213097SUCCESS/Full38199213104SKIPPED;PR121draft/open/no merge.
+Runtime11c4coreCI failed testmisownership(noLangGraph core); d558onlyCI/docs routes newtestfoundation; no algorithm change. Never claim11c4ownCIpass.
+Next continueactualQ;afterterminal/PIDgone/resourcesafe root_score.py --backend MiLAi-memory-only --schedule-note actualclosure, onceQA-only.
+Then all73labels/paired/peruser/cost/delivery +fixed6Source/Judgerelation +3maintenanceobservations, decideatmostoneoptionalD-read/D-editifneeded.
+Do not resume oldHost42/E3/E4/b498/oldcomprehensive scoring. No frozen source edits or semantic-chasing reruns.
+
+User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DYNAMIC_MEMORY_FUNCTION_FIRST_PLAN_20261012.md.
+The prior lightweight goal is complete; its d277 results and all old artifacts remain immutable. This is new authorized development.
+Scope: A independent visible Source retrieval; B event-driven local revision/Tool scope; C Host evidence-gap reads and explicit bounded consolidation;
+D Host request/forget/recovery integration. Then one new Host14 + two corresponding SDK reopens, one new M32/73 + QA-only score.
+Reuse Raw6ab55/73 only if actual Reader/data/ranking/model/Judge path unchanged. At most one optional diagnostic after Q; no large matrix.
+Full676-line plan read by Root. Original user worktree has only existing untracked plans; do not edit or publish those inputs.
+W0 actual original leaseFREE/unknown8+1; no old run script processes found. No new model/HTTP/real bank operations dispatched yet.
+Only Root coordinates real generation/embedding/DB on original /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Never reset/refund historical unknown8/1 or H110954 reservation. Temporary synthetic SQLite tests are allowed offline for developers.
+
+Integration worktree remains baseline-alignment-integration-20261010, started from07380a68; PR121 stilldraft/open/no merge authorization.
+Three new independent trees (all based07380a68):
+- dynamic-memory-source-20261012: agent /root/symmetric_source_review, MemoryService/retrieval/episodes/reader_projection/shared Raw ranking.
+- dynamic-memory-maintenance-20261012: agent /root/minimal_maintenance_fix, edit_memory/edit_maintenance/consolidation and memory_operations callback.
+- dynamic-memory-host-20261012: agent /root/supervisor_evidence, functional runner/functional_edit_memory/application and Host read/forget scope.
+Agents commit locally, Root cherry-picks; no shared source writers. Root owns benchmark runners, QA-only, config, docs and real dispatch.
+
+Root implemented halumem.evaluation_mode='qa_only' (old defaultall): skips memory Judges and reference-guided update retrieval,
+uses unchanged QA prompt/label parser, preserves knownmissing no-Judge and invalid{}, leaves unevaluated memory metrics None.
+Existing author combined aggregation divides absent memory denominators before QA, so small QA aggregation uses same C/H/O/valid rules.
+Six related checks pass (including unchanged default/full and selected-arm scoring), Ruff3files and strictmypy2sources pass,0realrequests.
+New candidate config milai-dynamic-memory-small-v1.json must be added only with all actual behavior wired; no invented CLI --qa-only.
+
+Agreed forthcoming interfaces: A search_sources/search_evidence(source_limit20,semantic_limit10; independent from updateK),
+source_refs is optional exact arrived-ID allowlist; current Source body not Episode description is indexed. Raw segmentation/ranking unchanged.
+A read_source_materials is one-in/one-out live Source projection with stable id/order, no old text on revoked ranges; preserve frozen pool indices.
+B maintenance_mode='event_delta_v1' vs oldlegacy; Host passes execution_only_origins from registered Tool/Observation contracts, not keywords.
+Host source_access='independent_v1'/source_top_k20/semantic_top_k10 and max_evidence_queries2 share old read/call budget;
+automatic discover/refresh cannot supply free extra live queries. New message real-time request requires a real current observation.
+Existing memory_operations consolidate/reconcile remains the explicit path; mainQ auto consolidation off, benchmark pool-outside search off.
+A/B/D已合流；Root已接入benchmark独立原文、关联来源、完整长文分片、实时可见性和完整模板容量。
+新配置configs/milai-dynamic-memory-small-v1.json已落盘，Host20/10/maxqueries2/event_delta_v1；benchmark20/10/event_delta_v1/qa_only。
+Root新增与共同Reader相关27检查、Host联合6检查、Ruff/四源码strictmypy、uv锁和Lab两边界PASS；全部离线。
+仍须提交冻结候选、核对Raw复用与预声明跨用户<=6样本，然后按Host14→两SDK→新M32/73→QA-only首次串行派发。
+未有本候选真实模型或银行结果；不要从历史d277拷贝结果。
+Do not replay old completed audits or scores; do not count engineering completion as semantic success or raw access gain as revision gain.
+
+# Historical handoff: lightweight experiments closed, 2026-10-11 20:40:51 UTC
+
+The active scope is MILAI_FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011.
+A/B/C/D development, the final candidate Host14, two actual SDK reopens, new M32/73 prediction,
+its first independent score, fixed-six source/Judge review and full73 paired analysis are complete.
+The implementation is connected; functionality still has semantic gaps; no net QA benefit is supported.
+Do not turn ordinary failures into a new prompt-tuning/rerun loop. Old Host42/sixSDK/five277/LME/holdouts
+remain deferred with their original incomplete status. Do not resume them from this handoff.
+
+Runtime source: d2774634ce2c67470ae53d486d9612adf3ac7bf8, artifacts/function-first-small/source-d2774634/MiLAi-Lab.
+Q root: artifacts/function-first-small/q32-d2774634-v3. Prediction closed18:58:16UTC, score closed20:39:55.607067UTC.
+Predict32sessions/73QA:72text+1known no_textual_answer (U1/S7/Q6, confirmed stop; original null retained).
+Predict206gen input2846679/output667736/total3514415 known=charged;562embedding receipts/246904tokens.
+Score689Judge requests/responses:input1509149/output905049/total2414198 known=charged;embedding0.
+Both phases rc0/resources_settled true/newunknown0/0/limits unchanged. Predict PIDs3279447/3279449 gone;
+score PIDs3612261/3612262 gone. Root20:40:51UTC verified original leaseFREE and liveledger==score end.
+No models remain to dispatch for this scope. Shared model service was not stopped. Original ledger and
+historical unknown8/1 plus H110954 reservation persist; never reset/refund or demand globalzero.
+
+Official M QA43/73 (58.9%),16H/5O/8invalid/1missing; valid43/64 secondary only. Per-user11/20,10/12,11/22,11/19.
+Reused frozen6ab Raw55/73 (75.3%),17H/1invalid/0missing. Same73 pairs:bothC40/rawOnly15/mOnly3/bothNonC15.
+RawOnly15 includes6M invalid; bothNonC15 includesRaw invalid1/M invalid2/M missing1. Do not attribute all gap to algorithm errors.
+M update33/72 C,1H/33O/5invalid; valid33/67. Author formation recall(all)57.4%,weighted64.5%,439/valid397;
+accuracy weighted(all)74.2%,91/valid72; extraction F1 72.9% is the existing author aggregate, not source fidelity.
+Artifacts: root-paired-qa-summary.json, root-prediction-cost-delivery-summary.json (includes independent_score and reused_raw_baseline),
+common-qa-results.json, halumem-official-results.json and terminal-score.json in the existing run/backend roots.
+Root paired exact user/session/question/QA ordinal and scored system_response against saved hypothesis; all73 match.
+A completed cost metadata reconciliation; C independently checked all73 labels/counts and plan closeout; no repeated source audit is needed.
+
+Prediction mechanical delivery:17pagedQA/38confirmed pages/peak32231/finalempty1(U4/S7/Q4, official Omission; no new source audit).
+Knownmissing U1/S7/Q6 direct20items/27169input/confirmedstop; bodyflagfalse does not mean no body was sent.
+Fixed six source halves and Judge relation complete in artifacts/function-first-small/q-source-review-*.json.
+Raw source5faithful/1unsupportednumber; M4faithful/1nonverbatimquote/1unmarked-contextual salary inference (scope undetermined).
+Official sample Raw3C/3H; M2C/1H/3invalid. Three actual stop final{} confirmed; no reasoning salvage/rescore.
+One officialC retains quotation defect; officialH does not erase actual numerical Source support or resolve attribution scope.
+Original source judgments/history remain; developer/prior reference exposure disclosed, no blind or corrected population accuracy claim.
+
+Host14d277 closed17:27:41UTC:14attempted,12engineering COMPLETED/2FAILED (wrapper1/truncated1),12model final drafts/13public texts.
+91gen754819tokens/1850embedding,unknown delta0/0; owned PIDs3192016/3192030 gone and original lease released.
+Actual d277 business mutations0; do not splice fbc reserve/label positives. Source/formation/old meaning/feedback gaps remain.
+Two SDK export processes3262097/3262327 exited0. First record+11Sources revoked; current/knownrev1-5/history/Source denied,
+but later never-saved explanation wrong. Second resultrecord+5Sources revoked; requested original requestrecord/history/UserSource
+still accessible, so fullscope FAIL. All source review and actual SDK receipts in host14-d2774634-v3; no further DB reopen needed.
+
+Final deliverables remain existing docs/MILAI_UNIFIED_MEMORY_USAGE.md, docs/MILAI_BUILD_FIRST_ISSUES.md,
+docs/MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md and configs/milai-function-first-small-v1.json.
+Normal save/query and Host commands use the project Python; examples were not dispatched again.
+Publishing/push authorized; no PR merge. PR121 remains draft/open on PR120 base; its metadata holds final publication/own-head CI receipts.
+Runtime d277 Fast38158540274 SUCCESS/Full38158540267 SKIPPED; prior report1b5ea6a0 Fast38166243189 SUCCESS/Full38166243192 SKIPPED.
+Each new document head must be checked on its own; do not substitute old CI or runtime identity. No private source/answers/headers/DB in Git.
+Preserve original user worktree/untracked plans and frozen artifacts. Only Root may coordinate any subsequently authorized real model/HTTP/DB run.
+
+# Historical handoff: fbc Host14 closed; full-wrapper paging work continues, 2026-10-11 16:59 UTC
+
+Goal remains FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011, fullscope active; no goal completion.
+Actual frozen/published fbc458e0e7a0e0c5e3e36ef56c8e8a7a16e7cd62; ownFast38156429157SUCCESS/Full38156429120SKIPPED.
+Host artifacts/function-first-small/host14-fbc458e0-v2 CLOSED16:55:43UTC, parent3069838/CLI3069839 absent, rc0/leaseFREE.
+14attempted=6COMPLETED+8FAILED(allknownwrappercapacity),noNOT_RUN.76gen624528known=charged/4256emb/newunknown0/0/limitsunchanged.
+Do not treat COMPLETED assemantic success: independentmeaningloss/tool-source misattribution/history-business confusion/forgetfail remain.
+Partial positive: one actualreservation then one labelcompletion/no duplicate businessmutation; Sourcebytes/Store intact.
+Two independent SDKexports3136580/3136766rc0: current1recordeachrev4/rev2,source16/29,ledgerunchanged.
+Root root-sdk-visible-after-unfulfilled-forget.json checks actualpriorrecords/current+oldrev/history_index/supportSource:
+2recordIDs+4Sources perbank; currentfoundandoldfound/historyavailable/8Sourcesaccessible. No successfulforgetreceipt exists.
+No successbinding or forgethelper dispatch; SDKread/index can writehandles/snapshots, not physicallyreadonly;0modelHTTP.
+C final14source audit ongoing/soon ROOT/root-host-source-review.json; no needre-audit finished cases.
+A finald17b7d67 integrated3bd88571, proven_page7348 but oldnextwholepacket9082>8192 fixed byactualfullwrapperpaging.
+Onlyfor_writeFalse; Writeroriginalbody/targets/cursors/capacity unchanged. First4units8166, next2units5971, oldpagecanreopen;
+6independentlyaffectedchecks/Ruff/mypy2PASS. No further duplicates of this implementation/review/tests needed.
+Use existing pagination with actualfullwrapperfit and capacity-only body换出/reopen, preserveexplicitkeep, noaddedcalls/selector/window.
+Navigation-onlyforget nowBODY_READ_REQUIRED with read_memory/read_source guidance; multipleactualrecords oldcardinality refusal.
+Samepermissions/noautoread/retry. Next freshfrozen candidate normalHost14 (both stories usechangedpacking), then samecandidateM32/73.
+Oldad/fbcM prepared-onlyroots stayunrun; create one freshnewM root after finalsourcefreeze, no predictionbank reuse.
+Actualfbcsource/run immutable; oldad3/14failure and oldHost42unrun retained. NewM q32-fbc458e0-v2 onlyPREPARED32/73/72,
+no banks/models. Do not dispatch until final Host packing candidate integrated/declared and SDK/model resources free.
+Roothelpers root_predict.py/root_score.py prepared only. Next scope stays lightweight, notfivearms/277/LME/holdouts/oldHost42.
+Rawreuse confirmed; formal6samequestions predeclared q-source-sample-20261012.json, Rawhalf nowq-source-review-raw-half.json:
+4existingreviews reused+2Correctnew;5sourcefaithful/1unsupportednumber, official3Correct/3Hunchanged; newMhalfPENDING.
+No correctedaccuracy or inventedsemantic acceptance. Maintain five principles/one logicalMemoryService/originalledgerunknown8/1.
+Root onlyactualmodel/HTTP/DB; allagentsoffline. Publish/push authorized/no merge. Currentdocs changes uncommitted, preserve them.
+
+# Current handoff: first Host14 stopped on capacity; function-first work continues, 2026-10-11 16:33 UTC
+
+User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_FUNCTION_FIRST_LIGHTWEIGHT_DEVELOPMENT_EXPERIMENT_PLAN_20261011.md.
+Current scope: develop/integrate A Reader, B maintenance, C Host; then one Host14 and newM32sessions/73QA/72updates,
+compare eligible savedRaw55/73; no automatic H/five-arm/277/LME/holdout runs. OldHost42/sixSDK/E3-E4 remain incomplete
+and deferred by explicit new plan, not gates. Do not dispatch old prepared f536Host42 or its root_host_supervisor.py.
+No new retry/monitoring platforms, full-tree hashes or broad test matrices. Root alone dispatches models on original ledger.
+M6ab score CLOSED09:21:34UTC/returncode0/resources_settledTrue; original PIDs absent16:07UTC.
+OfficialQA49/73 Correct,14H/3O/7invalid/0missing; update37/72;706Judgegen/2556437known=charged/0emb/newunknown0/0.
+Threeemptyworkset review alreadydone/reused; Q2lostnomination,Q6poolmissingfield,Q7unselectedthenlost; no repeat audit.
+Root fixed171poolb498 E2 started16:09:26 and CLOSED16:11:41UTC, parent2942313/worker2942314gone.
+4pages60/44/46/21,final22exactoriginals/firstnomineesretained/lastemptyselectionkept;5gen/144564known=charged,
+0emb/newunknown0/0/limitsunchanged/leaseFREE. Mainquestion supported; reporting/occurrence and role compression caveat.
+Evidence: existing e2-first-real-paging-b498f628 root-execution.json/run-once/terminal.json/root-source-review.json.
+Development B5c83ee51/A1a98a0b9/C8651e22d integrated. Root repeats/config/docs ready; narrow checks passed.
+Candidatead348a9a pushed/frozen; Host14 started16:26:35 and STOPPED16:29:09UTC after3attempts (2COMPLETED/1FAILED),11NOT_RUN.
+Third purequery V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT before final; input_or_runtime caused undeclared_failure stop.
+Root3011232/CLI3011233/messagePIDs gone; actualCLIrc0 differs from STOPPED.17gen141829known=charged/395emb/newunknown0/0/leaseFREE.
+rev1save/rev2exception real; oldcurrentoverview stillstale. One SDKexportprocess3029222rc0 confirmscurrentrev2/5Sources,
+secondbankabsent; no forget accepted. Root helpers/logs in artifacts/function-first-small/host14-ad348a9a-v1.
+Do not restart or hotpatch stoppedroot. W5capacityfix integratede80fb7cb from8e6eea1b; model_material onlyomits2repeatreadtrace arrays, durabletrace retained.
+ActualerrornowFAILED/request_capacity, so ordinaryfailure remainsvisible withoutundeclared globalstop.
+2affectednormalchecks/Ruff/strictmypy2PASS; do not repeat completedaudit/tests. Next freshfrozenHost14, then newM.
+NewM q32-ad348a9a-v1 onlyprepared32/73/72/no banks; root_predict.py/root_score.py prepared only, DO NOT dispatch while Host unresolved.
+Raw reuse confirmed (configs/direct calls/Judge), no rerun needed. New config configs/milai-function-first-small-v1.json.
+Actualnewcandidate after minimalcapacityfix needs fresh Host/Q roots; oldad prepared/failed states retained.
+NewQ sample predeclared artifacts/function-first-small/q-source-sample-20261012.json: oldRaw first3Correct/first3nonCorrect,
+same6 in newM. Earlier old6ab symmetric12 is different supplementary sample; do not conflate or adjust population accuracy.
+014ownFastSUCCESS/FullSKIPPED; ad348a9aFast38155334906FAILED(2oldtestschema expectations/642pass),Full38155334910SKIPPED.
+Test-only304f939f precise optionalresponse_scope expectation fixed;2failedparamsPASS. Newhead needs ownCI/no merge.
+Capacity reconstruction actualsavedread6568; nextwrapper8479->7978 afteronly2duplicated read_progress arrays omit frommodel;
+allbodies/source/conditions/navigation/persistenttrace retained. This is offline reconstruction, not actual sentrequest.
+Five principles/one logical MemoryService/source-only/QA20/maintenanceK10/original unknown8/1 and Hreservation retained.
+
+# Previous handoff: M predictions closed, selected score running, 2026-10-11 07:40 UTC
+
+ActualM frozen6ab CLOSED07:36:53UTC32sessions/73textanswers/0knownmissing/PREDICTIONS_SAVED/resources_settledTrue,
+parent776063/worker776066gone;189gen/3270303known=charged/261612emb/newunknown0/0/limitsunchanged/leaseFREE.
+Root explicitMscore RUNNING07:38:45UTC parent1071578/worker1071580, originalscore_e1_6ab512cb_resumed.py,
+savedpredictionsonly/no nativeAPI/no newpredictbanks/no retry. Don't restart this live scorer or interruptedH.
+M73views include10realpagedQA/21confirmedpages/peak32251/pending0/finalbodyTrue; finalworksets4,3,9,1,0,0,4,0,4,8.
+Threeemptyfinalsets stilltextanswers; sourcepool/workset/taskcompletion review pending, not semantic passes.
+Source maintenance audit fixed26events/85commits/2emptyproposals; targeted12events(noGold/QAvalues/DB/model):
+firstreviewedbreakUser1session5 received7newplan nominees+Source butemptyEditor/no receipts/23oldvaluesunchanged;
+User1s6twoappendoldunits/non-targets preserved;User1s7strengthening/stale oldtotal;User3s0subjectmismatch;
+User3s3replace losesindependentoldattribute. Source/historyretention separate from currentsemanticdamage.
+No officiallabels/QAimpact assigned; Root scores then originalHost42/sixSDKreopens, stillNOT_DISPATCHED.
+Raw official55/73 sourceaudit unchanged, interruptedHunknown/reservation preserved, no fullthree-arm ranking.
+Current reporthead1b ownFast38119054030SUCCESS/Full38119054029SKIPPED; nexthead needs ownCI.
+E2fixed171poolb498prepared/no dispatch, no retain/Writer; necessary E3 and frozen E4 stillpending.
+
+# Previous handoff: Raw scored, first untouched M running, 2026-10-11 06:22:51 UTC
+
+Raw frozen6ab explicit score CLOSED06:21:16UTC: Correct55/73/Hallucination17/invalid1/missing0,
+73Judgegen/179908known=charged/0emb/newunknown0/0/limitsunchanged/resources_settledTrue/parentsgone.
+Independent source-first/reference audit CLOSED06:40:17UTC: 17Hlabels=10sourcefaithful/7unsupported,
+invalid1sourcefaithful but Judge finalJSON{} no evaluation_result. 16narrower-reference Judge reasons
+include6answers with ownsourceproblems;1referenceplan-as-done conflict separate/axesoverlap.
+55Correct not audited/no adjusted accuracy; officiallabels/denominator unchanged/0newmodelsHTTPDB.
+Root first untouched M dispatch06:22:23UTC, frozen6ab/originalconfig/manifestbanks/32sessions73QA72updates,
+parent776063/worker776066 exist; observed06:22:51UTC0complete sessions/0QA. Detached supervisor is
+artifacts/baseline-alignment/run_e1_6ab512cb_milai_first.py; original suite rootrecord remains staleRUNNING.
+Do not restart live M, interrupted H or original supervisor; M doesn't include latest workset repair.
+M closure then explicit score, then original Host42/sixSDKreopens; those remain NOT_DISPATCHED.
+Repair publishedb498f628 ownFast38117143162SUCCESS/Full38117143093SKIPPED. Report heads need ownCI.
+One fixed171pool Reader E2 prepared only, source-b498f628-reader-e2, repeat1/samequestion/model/budget,
+no retain/Writer/gold indices; not dispatched. RootSDKreopen script prepared only in originalHostv4 root.
+Original generationunknown8/embeddingunknown1 and lastHreservation110954 remain; newphaseunknown must0.
+No full three-arm/Host/necessary E3/frozenE4 conclusion yet. Current report/protocol/issues give exact bounds.
+
+# Previous handoff: migration observed interrupted source6ab, 2026-10-11 06:04 UTC
+
+Human continue/publication/resource-release authorization remains. Do not repeat completed adapters or tests.
+Root verified06:00:50UTC: original parent3324026/worker3324034 absent, original root stillRUNNING/stale,
+lastrequest00:11:32UTC; actual exitcause/returncode unknown. Original frozen6ab/config/rootrecord unchanged.
+Raw32sessions/73textanswers/PREDICTIONS_SAVED/resources_settledTrue; H7sessions/19QAcheckpoints=
+18textanswers+1knownread_call_limit, another QA pagerequest noresponse/nofinal; Hnotterminal/Mnotstarted/Judge0.
+Actual ledger delta216gen/3717429known/3828383charged/15903emb; newunknown generation1/embedding0,
+limitsunchanged. Lastpage110954 conservative reservation persists; pre-send reservation is not dispatch proof.
+Root publicSDKstatus06:03:11UTC confirmed native pending/consolidation/processing0, ledger unchanged.
+Orphan native bridge alreadyclosed; Root06:04:01UTC SIGTERM exact ownedAPI after parentabsence/statusproof,
+UID996active0/APIlistenerclosed/originalleaseFREE/ledgerunchanged. SharedQwen metricsrunning/waiting0.
+Recovery evidence stays ignored in original root; don't relabel missingterminal, clearunknown or retry/restartH.
+Safe completedarm scoring and firstdispatch of unrunarm remain authorized after actualresourceclosure.
+Existing material_pool pageworkset repair reviewed: nominationsaccumulate/explicitdrop/priororiginalnavigation,
+samebudget/wholeoriginalfinalreopen/nonpagingkeep unchanged; previous33tests/Ruff2/mypy1 passed,
+this migration reviewed existing artifacts only, no repeated development/testing or genuinesemantic validation.
+Commit/push reviewed repair and existing reports to draftPR121; no merge; newhead needs ownCI.
+Hostf536v4 original42/sixSDKreopens stillunrun; SDKread/history_index/source must verify revokedvisibility,
+not just emptyexport. E2singlemajorbreak/E3necessarycomparison/E4frozencandidate stillpending.
+See current docs/MILAI_UNIFIED_MEMORY_USAGE.md, issues and alignmentprotocol for exact source/time boundaries.
+
+# Previous handoff: user resumed actual baseline work, 2026-10-11 Asia/Shanghai
+
+Human explicitly said “继续” at 2026-10-10 22:51 UTC, revoking the previous real-run stop.
+Root resumes the original full baseline-alignment plan with the existing three developers and serial original ledger.
+Canceled 12b runs and banks remain terminal; fresh source/root predictions precede explicit scoring and Host42.
+Before dispatch, the shared material reader's whole_material_unavailable missing-answer reason was found absent
+from HaluMem scoring and LME before_final_http handling. Root repaired these existing branches; 19 relevant
+predict-to-score/no-Judge missing and unknown-stop checks, Ruff3files and strictmypy1source passed with no models.
+Old f536 prepared E1 bank IDs were declarations only and are not reused as this repaired-source cohort.
+Host f536 v4 remains PREPARED_NOT_DISPATCHED; its functional code is unchanged by the benchmark scoring repair.
+The real dispatch source/root/time and actual counts are recorded by Root in ignored existing artifacts;
+the report is updated from those actual observations, never by relabeling old predictions.
+The previous stopped handoffs below retain their historical timestamps and do not block the new human authorization.
+
+Actual fresh E1 source6ab512cb355bdcd71ab2cea45f65ff4ce13818a0 started22:58:54UTC under
+artifacts/baseline-alignment/e1-local-v1-evidence-6ab512cb-v7-prepared. Root parent3324026/worker3324034,
+live unified session27554; do not restart it or hotpatch its frozen source/config.
+Fixed23:28:03UTC: Raw32sessions/73answers/0missing PREDICTIONS_SAVED/resources_settledTrue;
+73gen/1061690known=charged/0emb/newunknown0/0/limitsunchanged. H4sessions/9answers/0missing,
+native started+ready and still running; saved9views direct, actual paging/finalreopen not yet evidenced.
+MNOT_STARTED/Judge0. Native API/PG are intentionally live for this authorized new run; old idle-UID release
+checks apply only before dispatch/after closure. Preserve original shared model servers and serial Owner.
+Root explicit score entry is prepared but not executed while predict owns resources; then Host f536 v4 original42
+and6separate-process SDKreopens follow verified resource closure. All actual E2/E3/E4 obligations remain.
+6ab ownFast38093439981SUCCESS/Full38093439911SKIPPED; new published heads require their own CI.
+
+New actual first paged H case (same owner/session4/qa0) reviewed23:33:59/23:44UTC:
+5confirmed pages62/46/53/10/10=171unique/181cumulative, last10 reread is Reader selection progression,
+not HTTP/native retry. Final10 originals exact/pending0/final_bodyTrue;6HTTP/peak32066/totalinput125528/output11237.
+Source-only/noGold audit confirms necessary identity/time/current original chunks delivered on page1,
+then keep_residentFalse replaces prior candidates with unrelated final10. Final answer declines because final
+evidence lacks those bodies; actual question NOT completed, don't call semantic success or officialHallucination.
+Pool/delivery sufficient for a bounded answer, final workset insufficient; roles need preserving too.
+Fixed23:42:39UTC H6sessions/12textanswers/0engineeringmissing/3pageddeliveryclosed;MNOT_STARTED/Judge0.
+Current6ab frozen run must continue unchanged. B investigates existing final-workset organization read-only;
+no new selector/checker/modules, no forced correct indices/all-retain/budget increase or case-specific model dispatch.
+Reporthead35abf714 ownFast38095208647SUCCESS/Full38095208654SKIPPED. Later heads require own CI.
+
+# Previous handoff: offline P0/P1 material delivery integrated, real experiments still stopped, 2026-10-11 Asia/Shanghai
+
+Latest detailed human steering requests four small packages with existing subagents:
+native archive vs Reader view; actual external snapshot positions for shared pagination;
+independent explicit score of a completed arm; Host effects/capabilities/progress separation.
+It explicitly keeps actual experiments stopped and forbids automatic Judge dispatch without new running authorization.
+Root integrated source dda926f6c2a23871a34b3cd438e3f60c9d7255e6. Draft/open/unmerged PR121 stays stacked on120;
+merged main518aee4190f3abdd6f902baeb59454f49cd0b22b. No actual models/Judge/nativeAPI/PG/Host dispatched.
+
+H evidence view d8d9a062 (source f437a6bc) keeps the independent exact native_return archive;
+hindsight_evidence_v1 lists actual archive-only diagnostic JSON pointers. Known finite scores/trace/public statistics
+are archive-only; all evidence bodies/clocks/subject/context/source links/entity observations/unknown extensions stay.
+Actual saved3returns: 104results/64sourcefacts/76entities each;16/16/15chunks;185/185/184material entries.
+Old common JSON81044/81345/82344 -> new74905/75340/75562; stillover32256, not a solved direct-capacity claim.
+Same IDs/text sourcefacts have different entities/tags/metadata, no semantic dedup. Original hashes unchanged/noQA/gold/DB.
+
+Generic snapshot reader 7b92c56e (source87370d89), followed by Root dda926f6, uses explicit
+{snapshot_id,collection:materials,item_index} internally for all3backends, no fake record/revision/credentials.
+Validate caller materials using write_json's actual JSON representation; use saved array thereafter.
+Fit direct retains one original Reader call; overflow reuses existing plan_delivery/pages/original body final reopen.
+staged/state_driven use full-pool item_indices schema, not MiLAi record_ids. Read-only positions grant no mutations.
+First actual185-entry offline replay still failed before a page: full directory and repeated refs overfilled input.
+Root compact input shares retrieval_snapshot once, aligns memory_item_indices with memories, gives page-only candidates
+and numeric final_reopen/pending indices; internal full refs/original bodies/global enum/permissions unchanged.
+Initial selector with empty resident and overlimit navigation now enters the same existing pagination over actual full refs.
+Legacy caller without explicit snapshot_id retains prior direct/record behavior and failures.
+
+Root actual3savedH-return replay uses local original Qwen tokenizer/full template/fixed synthetic question/date,
+no original QA/gold. Compact direct whole76044/76479/76697 stillover32256, then4scripted bodypages each:
+all185/185/184 entries in order, final original entry0 reopened,5scripted calls each < max_calls12.
+Page peaks32255/32187/31967 <=32256; original hashes/snapshot bytes unchanged, HTTPconfirmedpages0,
+new realmodel/Judge/HTTP/DB0. Fixed scripted choice is NOT semantic sufficiency, genuine delivery or efficacy.
+Old repeated-directory failure receipts and new page-cost receipts stay ignored under existing baseline-alignment artifacts.
+
+Root score gate5acd45f5 allows explicit score only when selected arm PREDICTIONS_SAVED/resources_settledTrue;
+failed/notstarted peer arms no longer block its artifacts. Original global resource/lease safety, Judge/rules/null denominators
+and no predict replay remain. Cross-arm rankings require compatible scope/settings/results; actual Judge0 and human stop stands.
+Host c049bb7d (source39779b64) orders actualeffects/receipts, currenttools/actionlimits, requestprogress/outstanding work
+inside the same SystemMessage. Absent current save tool cannot deny prior commit; commit counts do not verify content/task.
+No post-LLM correction, forced writes, domain deletion rules, source mutations, new checker or memory module.
+Old total statement was actually delivered to Editor and multiple edits were allowed; old rev2 conflict is semantic choice,
+not proven missing delivery. Actual raw answer/public delivery/state remain separate; appended contradiction still failure.
+
+Root integrated96checks PASS8.69s + pureHprojection3 PASS1.25s + Hosteffect/catalog6 PASS3.62s;
+Ruff10files/strictmypy5sources/diffcheckPASS, temporary synthetic SQLite/fake model only, no originalDB access.
+Resource recheck17:33:34.102246UTC: cancelled parent1409356/worker1409430/API1461436/PG1462197 absent,
+nativeUID996active0/port8888listener0/originalOwnerleaseFREE; shared model servers not changed.
+Real frozen12b Raw32/73/0missing; H6/12=9answers+3unsentmissing81471/81775/82771; MNOT_STARTED/Judge0.
+Cancelled root/effects/costs/nulls unchanged; don't restart/patch/splice. Existing prepared Host739 lacks this new Host context,
+so don't relabel it as latest source or dispatch it. FullHost/sixSDKreopens/E2-E4/finalcandidate remain incomplete.
+Previous published582 ownFast38068354242SUCCESS/Full38068354248SKIPPED; next published head needs its OWN CI.
+Only Lab internal Reader input/runner behavior changed; Product/Archive/public Schema/API/permission/Canonical unchanged.
+Engineering rollback reference58292061. Five principles/one logical MemoryService/CANDIDATE/NO_GO remain.
+Current report/protocol/issues entries carry this new offline condition; older records below retain historical scope.
+
+# Previous handoff: resources released, experiment analysis and publication, 2026-10-11 Asia/Shanghai
+
+Latest user steering: “整理当前实验情况，提交到github上”; then “释放实验资源，分析实验情况和存在问题”.
+Root sent SIGINT to fresh E1 worker1409430 at2026-10-10T16:28:18.136541UTC.
+Parent1409356 recorded STOPPED at16:28:29.162082UTC/workerreturncode-2.
+Actual release verified16:32:01.116603UTC: parent/worker/API1461436/PG1462197 gone,
+nativeUID996active0/APIlistenerclosed/originalHTTP OwnerleaseFREE/newunknown0/0/limitsunchanged.
+H terminal FAILED has KeyboardInterrupt, close_errorNone/resources_settledTrue; usercancel, not new native timeout.
+All sources/effects/predictions/null denominators/costs preserved. Do not restart this cancelled root,
+dispatch prepared Host, score incomplete comparison or schedule new realmodel experiments after this steering.
+
+FreshE1 frozen12b87716f399cadd0c63c6db21f4639fb2f1511e,
+root e1-local-v1-completion-1800-v4-prepared. Raw32complete sessions/73answers/resourcesclosed;
+H6complete sessions/12QA=9answers+3known before_http capacitymissing81471/81775/82771>32256,
+request_sentFalse; MNOT_STARTED/Judge0. Rootstage140gen/1902918known=charged/14024emb/newunknown0/0.
+Rawstage73gen/1060957known=charged/0emb; H58nativegen+232emb confirmed bridge receipts+9commonReadergen.
+No three-arm ranking. Earlier D M32/73=53answers+20missing remains a separate run, never splice it.
+
+Engineering739deaeef25d74afc750888dfabc92cc5ea771a4 contains Cfeedback84fac247 and
+Host exact one-hop directed relation sharing. Root complete saved-packet reconstruction8548->7731<8192,
+5records+1fragment/fullwrapper/expansionequal/operationrefsliteral/originalDBhashunchanged/0HTTP/models/DB.
+Original unsent packet had no deliverytrace; saved-state reconstruction, not actualReader acceptance.
+Root604affected tests PASS552.27s/Ruff4files/strictmypy2sources/diffcheckPASS; syntheticSQLite only.
+ActualA0inputcount0->1/unchangedreceipt, model effect pending. OldHost1COMPLETED/1FAILED/40NOT_RUN;
+A1 rev2 outdated generalstatement/newexception conflict confirmed, unrunA2Reader unknown.
+New source-739deae-host-engineering and host-flows-739deaee-engineering-v2-prepared are PREPARED_NOT_DISPATCHED,
+originalconfig/fixture/controlsbytes preserved/original8+6x3=42/0actualbanks/models; no run authorized now.
+c404 ownFast38066195600SUCCESS/Full38066195629SKIPPED; previousd1 corecollection failure retained,
+newarmtest now owned by existingFoundation/Fast/Full/matrix without losing coverage.
+E2-E4/finalcandidate/fullHostand6publicSDKreopens remain incomplete; do not mark the full goal achieved.
+Earlier fixed observations below retain their original timestamps and failures, not current state.
+
+Latest actual M closure15:20:43.343931UTC: frozenD32sessions/73QA=53answers+20known
+before_http capacitymissing, input35532-42854>32256/request_sentFalse. PREDICTIONS_SAVED,
+resources_settledTrue, parent1056248/worker1056253gone;148gen/2609788known=charged/342083emb,
+newunknown0/0/limits unchanged/original suite bytes unchanged. Original HFAILED/suiteSTOPPED,
+Judge0; original score supervisor remains forbidden by the three-arm gate, no ranking.
+Source-only firstuser8-maintenance audit confirms ordinal5 extracted/delivered novel information,
+empty Editor proposal/no receipts/no semantic write/21before-after identical; no QA/gold audit.
+Do not optimize a prompt against that case or call structural completed semantic success.
+Root dispatched frozenD Host42 at15:22:50.384727UTC; STOPPED15:25:04.132170UTC after2attempts:
+A0COMPLETED/A1FAILED/40NOT_RUN. A0actuallycommittedrev1 but model claimed unabletosave;
+program appended receipt while keeping contradictory answer: rawmodelFAIL/publicdeliveryFAIL.
+A1actuallycommittedrev2 before V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT; not a failedsave or42passes.
+Original42scope/repeats/config/ledger preserved. Stage9gen/54816known=charged/299emb,
+newunknown0/0/limitsunchanged. Parent1345352/messagePIDs1345358/1348655gone, originalleaseFREE,
+nativeUID996residual0; newprocesspublicSDKexport seescurrentrev2/oldrev1 with0modelcalls.
+Root/C review both actualattempts and40NOT_RUN; fullsixtrajectory/SDKforgetacceptance stillpending.
+Fix blocker offline; use a freshdeclaredHostroot, never restart this failedroot or replaycommits.
+New arm entry fcac9a70 and LME entry965cbe5a integrated; Root13c56497 adds existing28selection
+and keeps no-Judge missing autoeval_labelNone rather than false official judgment. Root66related
+checks/Ruff5files/strictmypy3sources/diffcheckPASS,0realmodels/nativeAPI/PG; syntheticSQLite only.
+DefaultHaluMem/M unchanged; LME explicitcomplete-history/independent actual opaque banks,
+full legal history beforequery/noQA writeback; legacyLME defaultfailfast/path unchanged.
+New E1 stays source12b/prepared0models, fresh independent12IDs; private Root dispatch/scoring
+commands prepared only, no auto scheduler. Root may schedule independentE1 after actual failedHost
+effects/resource review closes; engineering fix can proceed offline, no overlap of modelowners.
+E2-E4/incremental comparisons/final candidate remain incomplete. PublishedF403ownFastSUCCESS/
+FullSKIPPED; next published head needs its own CI. Product/Schema/API/permissions unchanged.
+
+Native completion fix integrated as12b87716f399cadd0c63c6db21f4639fb2f1511e:
+backend completion_timeout defaults300; local alignment explicitly1800; modelHTTP timeout stays300.
+Actual Root40narrowchecks/Ruff3files/strictmypy1source/diffcheckPASS,0realmodels/API/PG.
+Fresh frozen source-12b8771 and e1-local-v1-completion-1800-v4-prepared admitted offline:
+32sessions/73QA/72updates perarm,12newopaqueIDs,0banks/clients/models; NOT_DISPATCHED.
+Never reuse failedHbank, truncate its actualmaterials or splice priorpredictions into this cohort.
+CurrentM stays frozenD/live session35332; fixed14:23:54UTC7sessions/12answers/0missing.
+Host42 remains frozenD/prepared. Root schedules Host afterM actualclosure, then freshE1 serially;
+no new realmodel dispatch during the liveM owner. Native waitfix does not solve Hcapacitymissing.
+All3freshprediction/resourceclosures still precede explicit uniformscoring; E2-E4 remain incomplete.
+
+Latest actual suite closure14:02:48.871164UTC: frozen d503 E1 STOPPED, parent617762/worker617767
+exited; Raw32sessions/73answers/resourcesclosed, H27sessions/63QA=36answers+27capacitymissing,
+HterminalFAILED/resources_settledTrue with native_completion_deadline at fourthuser/session3.
+Actual retain succeeded; subsequent consolidation exceeded the adapter300s overall wait, then completed
+14:02:46.598UTC during closure. Saved close state pending/processing0, API/PGclosed/UID996 residual0,
+original leaseFREE. Suite285gen/3557201known=charged/49018emb/newunknown0/0/limits unchanged/Judge0.
+Preserve this failed root and all original effects; no native retry, terminal rewrite or prefix splice.
+Root explicitly dispatched the untouched M arm at14:08:49.044761UTC, same frozenD/config/manifest
+bankIDs/originalledger, separate root-execution-milai-predict.json and runtime/ledger snapshots.
+Parent1056248/worker1056253/live session35332; fixed14:10:24UTC M0complete sessions/1QAanswer.
+Original suiteSTOPPED remains unchanged; this is first M dispatch, not a failed-H restart.
+Frozen CLI --backend supports this independent prediction. Existing score gate still requires all3
+PREDICTIONS_SAVED and HFAILED blocks it; do not dispatch score supervisor or claim full comparison.
+Host42 remains prepared/notdispatched; E2-E4/semantic acceptance incomplete, goalACTIVE.
+Earlier running observations below retain their original timestamps and are superseded by this closure.
+
+Latest fixed13:49:16.651712UTC: same frozen d503 E1 RootRUNNING/live session48904,
+H24complete sessions/54QA=27answers+27known capacitymissing; first3users complete8sessions each,
+per-userQA20/12/22, answers9/9/9, missing11/3/13. Fourthuser not yet complete atthat snapshot.
+All27missing confirmedbefore_http/request_sentFalse, input59259-114828>32256.
+Raw32/73answers/resourcesclosed unchanged; MNOT_STARTED/Judge0, no unifiedscore orranking.
+Current document6d20db5a ownFast38054268907SUCCESS/Full38054268941SKIPPED; nexthead needsownCI.
+Original continuousledger/source/config preserved. Do not restart a live handle due observationtimeout.
+
+Latest additional fixed observation13:01:28.121684UTC on the same frozen d503 full E1:
+H10complete sessions/26QA checkpoints=15answers+11missing; firstuser8complete sessions/20QA=
+9answers+11missing, seconduser2complete sessions/6answers, otherusersNOT_STARTED. MiLAiNOT_STARTED,
+RootRUNNING, Judge0. All11missing are known before_http/request_sentFalse capacity failures,
+79724-114828input tokens>32256; preserve original materials/null denominators and continue frozenhistory.
+Do not mistake arm checkpoints from an unfinished nextuser for the firstuser's denominator.
+Actual firstmissing input79758 reconstructed readonly; results89/sourcefacts66/chunks16/extras1.
+Native budgets count text, not full JSON IDs/scores/metadata. Native->material->Reader field/ordering
+preservation confirmed on one successful response. Explicit offline H metadata mapping with existing
+share primitive gives49326tokens and exact expansion equality, stilloverlimit; current projection
+remains79758, no source/config hotpatch or actualmodels in this diagnosis. Not a solved capacity claim.
+Documenthead76dd2890 ownFast38052504548SUCCESS/Full38052504534SKIPPED; laterhead needsownCI.
+
+Latest fixed observation2026-10-10T12:31:19.727600UTC: new full E1 is RUNNING on frozen
+d50351a876c98260b8e60a4f4481a98b8bab0ef3, parent617762/worker617767; root
+artifacts/baseline-alignment/e1-local-v1-known-no-text-v3-prepared, runtime sibling.
+RawRAG32complete sessions/73answers/0missing, PREDICTIONS_SAVED/resources_settledTrue;
+73generation requests/1060772known=charged/0embedding/newunknown0/0/limits unchanged.
+Hindsight1complete session/4answers, stillrunning; MiLAiNOT_STARTED/Judge0.
+All12banks fresh, same originalcontinuousledger; no oldprefix splice, no automatic retry/score.
+Only score after all3successful prediction/resource closures; in-flight reservation is not terminalunknown.
+d503 ownFast38051194461SUCCESS/Full38051194427SKIPPED; laterhead requires its own CI.
+Host source d503 fresh root host-flows-d50351a-actual-v1 nowPREPARED_NOT_DISPATCHED:
+same original8+6messages x3=42, no banks/results/execution/modelcalls; actualrun stillpending.
+Functional Host8192/thinkingTrue and Editor8192/thinkingFalse unchanged; benchmark32768/direct/QA20
+does not change Host settings. E2-E4 and realHost/semantic acceptance remain incomplete, goalACTIVE.
+The observations below retain their original timestamps; failedfirstE1 is not the current run.
+
+First E1 source9a9b84b STOPPED at11:58:52.944657UTC: Raw7complete sessions/15QA checkpoints
+with answers,16HTTP responses; currentfirstuser/session7/qa3 actualstop/contentnull/reasoning present,
+usage26663prompt+969completion=27632total, no finaltext. H/M NOT_STARTED/Judge0/resources settled.
+Rootcost16gen/195662known=charged/0emb/newunknown0/0,limits unchanged; originalFAILED root/receipts kept.
+Minimal existing QA failure policy now records only this proven nontext/stop response with complete
+consistent nonnegative integerusage under record_known_readonly_failure, keepsnull denominator and
+does not sendreasoning asanswer. failfast/record_confirmed_length/unknown remainstop; Judge skipsmissing.
+Source/Evidence/Reader model/thinking/output/K unchanged; next fullE1 usesfresh roots/banks,no prefix splice.
+Wiring37checks +1newusage/policyreject checkPASS,1source stricttypes/RuffPASS; actualsaved stop/null
+response recognized readonly with0HTTP/unchangedledger, oldroot stillFAILED. Notsemantic acceptance.
+
+Current E0 acceptance CLOSED at11:55:06UTC: main28bf2410 all3 arms/9answers, separate real restored
+queries source9a9b84b, same originalbanks/no retain/maintenance/Reader; Raw1originalexchange unchanged,
+H10actualnativefactIDs/document/time unchanged andactualUID996 closed, M5records/revisions/source refs
+and originalreport/capture/commit times confirmed. Persistence0gen/263emb/newunknown0/0/limits unchanged.
+Initial verification wrongly parsed literal original Source time asISO; FAILED receipt preserved;
+corrected readonly originalSource verification0HTTP/unchangedledger/queries replayed0, not model rerun.
+Main normal E0 cost13gen/80220known=charged/1046emb; +persistence totalemb1309, Judge0/notQA correctness.
+E1 actualDISPATCHED source9a9b84bd83fc002932ef559cc85509cd3befd485 onfresh prepared12banks,
+each32sessions/73QA/72updates,serial Raw/H/M; parent546823/worker546828, root
+e1-local-v1-native-dimension-v2-prepared/runtime sibling; originalcontinuousledger, no auto retry/score.
+Wait all3successful prediction closures before explicit uniformscore; unknown stops, no refund.
+Do not restart cancelled501 or failedfa E0; preserve all source/config/query/closure/error receipts.
+FullE1-E4/actualHost42 incomplete, goalACTIVE/ProductNO_GO; no new methodsuperiority claim.
+
+New E0 frozen28bf2410 closed all3 predictions at11:44:12.842289UTC: 3answers each/9total,
+allresources_settledTrue;13gen/80220 known=charged,1046emb,newunknown0/0,limits unchanged/Judge0.
+Native startup discovery and laterBGE actualHTTP200, dimensions absent. M5actualrecords revision1,
+original source_refs strings retained. NotQA correctness or E0 persistence acceptance yet.
+Readonly agent review identified missing modelID guard on restore; now explicitly reject either
+Qwen/BGE modelID drift. Main E0 source28 remains frozen; next restored-query source declared separately.
+
+Latest actual E0 on frozenfa86b95 STOPPED at11:24:29UTC, resources settled: RawRAG3answers,
+Hindsight retain failed before QA with actual BGE HTTP400 (explicit dimensions1024 unsupported),
+M NOT_STARTED/Judge0. All4gen receipts known17015=charged; embedding known0/charged1243/newunknown1.
+No refund/retry/old-bank recovery: preserve failed root e0-one-source-socket-v1-prepared and all receipts.
+Public native0.10.3 dimensions=None discovers bge-m3 dimension once at startup, then omits dimensions;
+new configuration removes OPENAI_DIMENSIONS and must use fresh roots/banks. Actual startup probe is paid
+through the same original bridge/ledger; old zero-model empty deployment remains historical.
+Native persistence reopen restores only a successfully closed deployment in a separate audit root,
+same DB/schema/home/bank, new bridge, no retain/Reader replay; failed or unsettled roots rejected.
+
+User explicitly resumed execution of
+ docs/MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md with subagents.
+One integrator plus three developers; Root owns contracts/config/resource scheduling/results,
+A RawRAG/Hindsight, B MiLAi/direct delivery, C Host/docs, separate worktrees.
+Current branch feat/lab-baseline-alignment-integration-20261010, draft PR121 stacked on120:
+https://github.com/minguselandy/MiLAi/pull/121; open/draft/unmerged.
+Latest steering: user explicitly said “取消退出原实验”. Root cancelled the old frozen5019968
+five-method run at a settled HTTP boundary, SIGINT worker1854771 on2026-10-10 11:15:00UTC.
+Parent1854770 recorded STOPPED at11:15:01.896455UTC/workerreturncode-2; bothPIDs gone,
+actual original leaseFREE, newunknown0/0, originallimits unchanged. No source hotpatch, ledger reset,
+refund, restart, scoring, deletion or prefix splicing. Keep original outputs/cancellation/closure receipts.
+Final original scope: B0 126complete sessions/306QA in those sessions;314checkpoints=311answers+3missing,
+8checkpoints in unfinished session;125completed+2incomplete maintenance/246uniquecommits/3rejects.
+1010gen/12496217known=charged/134668emb,other4NOT_STARTED/Judge0; cancelled prefix, no methodranking.
+The earlier “original running/resources occupied” snapshots below are historical.
+E0/E1 execution source frozenfa86b95; source/config admission ignored source-fa86b95 and prepared roots.
+fa86b95 ownFast38044020175SUCCESS/Full38044019322SKIPPED, CI type232 and32backend checksPASS.
+Resource blocker resolved; Root next dispatches E0 on that exact source/config/originalledger.
+Published4f859be ownFast38040183066FAIL/Full38040183074SKIPPED: inherited FunctionalVLLMClient
+missed new accounting_request/on_event parameters. Root forwards them without weakening queue;
+48queue/budget/Owner checks and full232source strict typesPASS; e71440c ownFast38041375106SUCCESS,
+Full38041375109SKIPPED. Laterhead requires its own CI; never label skipped Full as pass.
+Prior6d0446f Fast38037419742SUCCESS belongs only to that head. Managed lifecycle integrated;
+no final candidate freeze. Read local protocol/config/native deployment docs.
+Source-only first8 of each4 development users: per-arm32sessions/73QA/72updates,219mainQA max.
+12independent backend/user bankIDs; only ObservedSession(session_id/date/role/content/timestamp).
+No persona/gold/update labels/future history or answer write-back. Keep maintenanceK10;
+separateQA20/evaluatorUpdateK10. Native H token budgets are not relabelledK20.
+Earlier K20 offline prep and correctedK10 prep are zero-model history, not frozen experiments.
+Managed4f859be configuration prepared in new e1-local-v1-managed-4f859be-prepared emptyroot:
+networkdisabled,32/73/72perarm,12opaqueIDs,0clients/banks/models; changed config never reused.
+Reader thinkingTrue/output32768/context65536/margin512/input32256; direct/no secondSelector.
+MiLAi reuses actual Source/MemoryService/recipe/semantic state/existing supports; no ordinary
+Host business classifier/raw-search fallback. Unsupported H/R session exports/reference metricsN/A.
+Native retain/recall complete actual responses and actual quiescence checks remain native.
+Native model requests now use original clients/exact same continuous RunBudget via loopback bridge;
+no new ledger/client, parameter rewriting/retries/refunds for unknown usage.
+Native embedding serial, crash receipt reopening, closed HTTP errors and non2xx legitimate usage
+are fixed. Check bridge.failure after each native operation BEFORE ordinary Reader calls.
+Managed native application uses official public MemoryEngine/OpenAIEmbeddings/create_app/uvicorn.
+0.10.3 env factory omits embeddings max_retries; direct native max_retries=0 is required,
+not just EMBEDDINGS_MAX_RETRIES=0. Explicit env, same-loop startup failure cleanup;
+this is declared local deployment adaptation, not unchanged author CLI/crossencoder reproduction.
+Qwen/BGE/rrf,retainT0.1/consolidationT0.0,thinkingTrue/output32768/dim1024/batch16 declared separately.
+Dedicated nonroot user UID996/actual ignored /cra home and full Python3.11.13 prepared,0models;
+native install192packages completed; actual UID996 blocked-network config admissionPASS:
+api0.10.3/pg0 0.15.2/Python3.11.13,dim1024/retry0/concurrency1/batch16,worker1/consolidation floor0,
+noHOMEoverride/networkattempt0/models0; actualversions/receipts ignored native-installed-admission-e71440c.
+At installation admission API/DB NOT_STARTED. Later actual empty deployment now confirmed:
+10:06:04UTC healthy API/database connected and listenerPID/UID owned;10:06:05UTC closure UID996 residual0,
+API SIGTERM returncode-15/PG stopped. Both model URLs deny-all local probe: actualHTTP/model0,
+no upstream/Source/Reader/Judge/originalledger. This is deployment, not E0 semantic completion.
+Initial actual PG startup failed writing full /tmp socket lock (5nativePG attempts/0model); fix uses public
+pg0 nonempty unix_socket_directories query/TCP connection, short ignored /cra socket_root UID996/0700.
+Max socket path91bytes;>=108 rejected beforecreation. Next probe parent traverse0700 error preserved;
+successful newprobe parent0711. All actual receipts/private logs ignored native-empty-deployment-*.
+Based67a013d plus then-uncommitted socketfix, not finalfreeze. Earlier download/config script errors preserved.
+New config uses fresh e1-local-v1-socket-prepared/e0-one-source-socket-v1-prepared:
+perarm32/73/72 +12IDs and1/3/0 +3IDs, networkdisabled/clients0/banks0/models0/ledger0/API0/DB0;
+never reuse changed configuration manifests. Socketfix32narrowtests/type1source/RuffPASS overlap old groups.
+Native developer read-only installed audit:36env all parsed; retain/mainconsol32768 not universal:
+consolidate_dedup omits output limit, original bridge context65536 reservation only/no wire change.
+Native adaptive consolidation bisection remains; SDKretry0 does not imply1modelcall per operation.
+E0 one-source-e71440c empty preparation:1session/3QA/0updates perarm,3opaqueIDs,0models/API/DB,
+Reader/JudgeNOT_RUN; separate from E1, no final candidate freeze or closed-loop acceptance.
+New pg0 instance/schema isolates oldqueues, actualAPI PID/UID readiness checked.
+Allbanks close -> native service terminate/wait -> detachedPG UID residual check -> bridge close
+-> original clients/accounting/lease. Old started without closed evidence/live dedicatedUID blocks
+new dispatch, including cached predictions; marker/resource uncertainty is not OSflock proof.
+Raw native actual development Source1 ingestion/close/reopen/retrieval preserved original roles/time
+and full body,1actual return,0models; Common Reader/JudgeNOT_RUN, E0three-way not complete.
+Two verification-script expectation errors retained, readonly corrected receipts only,no replay.
+New E1/Host actual Qwen/BGE/Judge0. Existing2exposed Hoststories repeated3=6storyruns42messages,
+3correlated flow checks; prepared only, no semantic acceptance. Existing Hoststep/evaluator reused.
+Latest affected combined207PASS=14root+17backend+35wiring+91evaluator+50budget/capacity/Owner;
+prior139/133/rechecks overlap, never add as samples.10file stricttypes,active src/tests/toolsRuff,
+matrix267sources/6canonicalpackages/80optional,activeDAG andtools11files/20deps/6grandfatheredPASS.
+A broad Ruff dot scan wrongly included archives; correct existingCI active ranges pass,no archive edits.
+Fixed08:43:37.902469Z: originalPID1854770/leaseOWNED/frozen5019968/RUNNING;
+B0 107complete sessions/268QA=266answers+2knownmissing,106completed+2incomplete maintenance,
+218unique confirmedcommits/3current_boundary_source_required rejects;
+859gen/10527628known=charged/115344embeddingtokens,observedinflight0;other4NOT_STARTED/Judge0.
+This is a prefix snapshot, not closure/method ranking. Preserve oldsource/config/results/costs;
+New fixed09:23:35.049588Z samePID/lease/source: B0 113 complete sessions / 281 QA in completed sessions,
+284QAcheckpoints=282answers+2missing (3fromunfinishedsession),112completed+2incomplete maintenance,
+226uniquecommits/3originalrejects,912gen/11124152known=charged/120009emb,0inflight;
+other4NOT_STARTED/Judge0. Not a closed phase or method ranking.
+New fixed09:34:15.186451Z samePID/lease/source: B0 114complete sessions/284QA=282answers+2missing,
+allcheckpoints in completed sessions;113completed+2incomplete maintenance,233uniquecommits/3rejects,
+915gen/11206683known=charged/121707emb,0inflight;other4NOT_STARTED/Judge0,originalstillRUNNING.
+New fixed10:06:37.367066Z samePID/lease/source: B0 118complete sessions/294QA=292answers+2missing,
+116completed+2incomplete maintenance/239uniquecommits/3rejects,947gen/11677880known=charged/
+126109emb,0inflight;other4NOT_STARTED/Judge0. Actual1854770/1854771 stilllive/resourcesbusy.
+No hot edits/restart/newprefix splicing. User-cancelled original run stays stopped; Root alone
+serializes new real Qwen/BGE/Judge on originalledger.
+When resourcesfree and explicitly scheduled, prioritize E0/E1; not all old research a prerequisite.
+Known drained failure staysFAILED/resources_settledTrue; uncertainty staysRESOURCE_UNSETTLED,
+stop related dispatch, preserve primary+cleanup failures and actual effects,no unknown retry.
+FullE0-E4/attribution/confirmation/external/realHost remain incomplete; goalACTIVE, ProductNO_GO.
+One logical MiLAi MemoryService/five directions; external native stores are only comparisonarms.
+PrivateSources/QA/gold/HTTP/traces/DBs/.env/dependencies/interpreters remain ignored.
+No Product/Archive implementation changes or formalholdout semantic reads.
+
+# Historical handoff: global function-first integration, 2026-10-10 Asia/Shanghai
 
 Latest user steering keeps one MemoryService and prioritizes request-local actual targets,
 read_goal evidence needs/fresh original app queries, and affected semantics in the existing Editor.

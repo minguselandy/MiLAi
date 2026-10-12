@@ -1946,7 +1946,10 @@ def test_balanced_formation_then_local_exception_and_supported_cancel_keep_gener
         assert service.read(saved["id"])["value"]["edit_state"] == original
         assert service.read(saved["id"], 2)["value"]["edit_state"] == state
 
-def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(tmp_path):
+@pytest.mark.parametrize("maintenance_mode", ["legacy", "event_delta_v1"])
+def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(
+    tmp_path, maintenance_mode,
+):
     """Authored proposals exercise the real Source/SQLite path, not model semantics."""
     initial_text = (
         "During this quarter, checklist reminders are disabled by default. "
@@ -1960,7 +1963,8 @@ def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(t
     )
     features = EditFeatures(True, True, True, True, True, True)
     with opened(tmp_path) as (service, _):
-        method = EditMemory(service, "M", interface_version="I2", features=features)
+        method = EditMemory(service, "M", interface_version="I2", features=features,
+                            maintenance_mode=maintenance_mode)
         initial, initial_ref = next_request(service, method, "initial", initial_text)
         create = {
             "action": "create",
@@ -1999,8 +2003,15 @@ def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(t
             request["packet"], "2026-10-10", allow_create=False, schema=request["schema"]
         )
         actual_input = json.loads(messages[1]["content"])["delivery"]
-        assert actual_input == request["packet"]
-        assert [(e["text"], e["delivery_kind"]) for e in actual_input["evidence"]] == [
+        if maintenance_mode == "legacy":
+            assert actual_input == request["packet"]
+        else:
+            assert actual_input["records"] == request["packet"]["records"]
+            assert actual_input["source_table"] == request["packet"]["source_table"]
+            assert list(actual_input).index("evidence") < list(actual_input).index(
+                "change_candidates") < list(actual_input).index("records")
+        bodies = [*actual_input["evidence"], *actual_input.get("redelivered_support", [])]
+        assert [(e["text"], e["delivery_kind"]) for e in bodies] == [
             (correction_text, "current"), (initial_text, "redelivered_support")
         ]
         record = actual_input["records"][0]
@@ -2079,7 +2090,8 @@ def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(t
         assert service.read(saved["id"], 1)["value"] == before
 
     with opened(tmp_path) as (service, _):
-        method = EditMemory(service, "M", interface_version="I2", features=features)
+        method = EditMemory(service, "M", interface_version="I2", features=features,
+                            maintenance_mode=maintenance_mode)
         assert service.read(saved["id"])["value"] == current
         assert service.read(saved["id"], 1)["value"] == before
         current_view = method.revision_view(service.read(saved["id"])["value"])

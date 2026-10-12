@@ -619,6 +619,10 @@ def maintain_event(
         delivery = {**delivery, "result_maintenance": copy.deepcopy(
             prior.value["result_maintenance"]
         )}
+    execution_refs = delivery.get("result_maintenance", {}).get("execution_source_refs", [])
+    for ref in execution_refs:
+        if service.source(ref) is None:
+            raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
     binding = {
         "recipe": recipe, "arm": method.method_name, "interface": method.interface_version,
         "features": method.features.settings(),
@@ -635,10 +639,15 @@ def maintain_event(
         binding["candidate_record_ids"] = list(dict.fromkeys(candidate_record_ids))
     if "result_maintenance" in delivery:
         binding["result_maintenance_mode"] = delivery["result_maintenance"]["mode"]
+    if method.maintenance_mode != "legacy":
+        binding["maintenance_mode"] = method.maintenance_mode
+    if execution_refs:
+        binding["execution_source_refs"] = execution_refs
     locating_ids = selected_record_ids if selected_record_ids is not None else candidate_record_ids
     state: dict[str, Any] = copy.deepcopy(prior.value) if prior else {
         "binding": binding, "phase": "start", "receipts": [], "unprocessed": [],
-        "prior_context": copy.deepcopy(delivery.get("prior_context", [])),
+        "prior_context": (copy.deepcopy(delivery.get("prior_context", []))
+                          if sources or not execution_refs else []),
         "date": date,
         **({"memory_save_requested": True} if memory_save_requested else {}),
         **({"result_maintenance": copy.deepcopy(delivery["result_maintenance"])}
@@ -663,7 +672,9 @@ def maintain_event(
             "phase": state["phase"], "recipe": recipe,
             "request_id": request_id,
             "date": date,
-            "source_refs": list(dict.fromkeys(s["source_ref"] for s in sources)),
+            "source_refs": list(dict.fromkeys([
+                *(s["source_ref"] for s in sources), *execution_refs,
+            ])),
             "receipts": copy.deepcopy(state["receipts"]),
             "unprocessed": copy.deepcopy(state["unprocessed"]) + (
                 [{"phase": state["phase"], "reason": "model_outcome_unconfirmed"}]
@@ -675,6 +686,8 @@ def maintain_event(
                 and (r.get("status") == "committed" or r.get("original_status") == "committed")
                 for r in state["receipts"]
             ),
+            **({"outcome": state["outcome"]} if "outcome" in state else {}),
+            **({"execution_source_refs": list(execution_refs)} if execution_refs else {}),
             **({"batches": copy.deepcopy(batches),
                 "source_batch_count": len(state["batches"])} if "batches" in state else {}),
             **({"prior_request_id": state["prior_request_id"]}
@@ -698,6 +711,9 @@ def maintain_event(
                 }} if "work_items" in state else {}),
         }
 
+    if execute and state["phase"] == "start" and not sources and execution_refs:
+        state.update(phase="complete", outcome="no_domain_observation")
+        save()
     if execute and state["phase"] == "complete" and service.memory_profile == "unified_v1" \
             and "episode_index" not in state:
         state["episode_index"] = _index_episode_descriptions(method, sources, state["receipts"])

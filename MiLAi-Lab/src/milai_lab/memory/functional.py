@@ -35,6 +35,7 @@ from milai_lab.memory.functional_state import (
     request_target_mapping,
     resolve_request_target,
     scope_leaves,
+    visibility,
 )
 from milai_lab.memory.reader_projection import expand_host_packet
 from milai_lab.memory.service import MemoryService, _lexical_tokens
@@ -239,6 +240,10 @@ class FunctionalMemory:
         read_limit: int = 3,
         material_limit: int = 8192,
         fragment_chars: int = 1200,
+        source_access: str = "legacy",
+        source_top_k: int = 20,
+        semantic_top_k: int = 10,
+        max_evidence_queries: int | None = None,
         retrieval_candidates: list[dict[str, Any]] | None = None,
         formation_interface: str = "content_and_scope_v1",
         read_interface: str = "combined_selectors_v1",
@@ -257,6 +262,18 @@ class FunctionalMemory:
         if any(type(v) is not int or v < 1 for v in (read_limit, material_limit, fragment_chars)):
             raise FunctionalRejection("V13_5_FUNCTIONAL_LIMIT_INVALID")
         self.service, self.token_count = service, token_count
+        if source_access not in {"legacy", "independent_v1"} or any(
+            type(value) is not int or value < 1 for value in (source_top_k, semantic_top_k)
+        ):
+            raise FunctionalRejection("FUNCTIONAL_SOURCE_RETRIEVAL_INVALID")
+        if max_evidence_queries is not None and (
+            type(max_evidence_queries) is not int or not 0 <= max_evidence_queries <= 2
+        ):
+            raise FunctionalRejection("FUNCTIONAL_EVIDENCE_QUERY_LIMIT_INVALID")
+        self.source_access = source_access
+        self.source_top_k, self.semantic_top_k = source_top_k, semantic_top_k
+        self.max_evidence_queries = max_evidence_queries
+        self.forget_requested = False
         if formation_interface not in {
             "content_and_scope_v1",
             "unified_assertion_v1",
@@ -306,6 +323,11 @@ class FunctionalMemory:
             if retrieval_candidates is not None
             else "service_search",
         }
+        if source_access != "legacy":
+            self.policy.update(source_access=source_access, source_top_k=source_top_k,
+                               semantic_top_k=semantic_top_k)
+        if max_evidence_queries is not None:
+            self.policy["max_evidence_queries"] = max_evidence_queries
         if formation_interface != "content_and_scope_v1":
             self.policy["formation_interface"] = formation_interface
         if read_interface != "combined_selectors_v1":
@@ -505,9 +527,54 @@ class FunctionalMemory:
         selected = [resolve_request_target(self.service, binding, target) for target in targets]
         records = [row for row in selected if row["kind"] == "delivered_record"]
         sources = [row for row in selected if row["kind"] == "delivered_source"]
-        if len(records) > 1 or len(records) + len(sources) != len(selected):
+        if len(records) + len(sources) != len(selected):
+            raise FunctionalRejection(
+                "V13_5_FORGET_BODY_READ_REQUIRED: navigation targets grant no forget authority; "
+                "first use read_memory/read_source and select the resulting delivered target"
+            )
+        if len(records) > 1:
             raise FunctionalRejection("V13_5_FORGET_EXACTLY_ONE_RECORD_OR_SOURCES_REQUIRED")
         fragments = [row["credentials"]["fragment_handle"] for row in sources]
+        if (self.source_access == "independent_v1" and scope == "record_and_sources"
+                and reference_key([binding["session"], operation_id])
+                not in visibility(self.service)["operations"]):
+            # The service's existing contract revokes whole Sources. A selected
+            # fragment cannot silently authorize unexamined/unselected ranges.
+            ranges: dict[str, list[tuple[int, int]]] = {}
+            for handle in fragments:
+                part = self.service.source_fragment(handle)
+                ranges.setdefault(part["source_ref"], []).append((part["start"], part["end"]))
+            required = set(ranges)
+            required.add(binding["source_ref"])
+            if records:
+                required.update(self._record_source_refs(
+                    records[0]["identity"]["record_id"], require_complete=True))
+                linked = self.service.backlink_candidates(sorted(required), limit=100)
+                if any(row.get("ok") and row["id"] != records[0]["identity"]["record_id"]
+                       for row in linked):
+                    raise FunctionalRejection(
+                        "V13_5_FORGET_SHARED_SOURCE_SCOPE_REQUIRED: original Sources also support "
+                        "an unselected record. Use record scope to preserve those Sources, or "
+                        "explicitly select complete Source bodies without a record target only "
+                        "when the user authorizes that entire Source and its linked records. "
+                        "Partial Source revocation is not supported by this contract."
+                    )
+            for ref in required:
+                source = self.service.source(ref)
+                if source is None:
+                    continue
+                end = 0
+                for start, stop in sorted(ranges.get(ref, [])):
+                    if start > end:
+                        break
+                    end = max(end, stop)
+                if end != len(source["content"]):
+                    raise FunctionalRejection(
+                        "V13_5_FORGET_WHOLE_SOURCE_SELECTION_REQUIRED: this contract cannot "
+                        "revoke only part of a Source. Read and explicitly select its complete "
+                        "body only when the user authorizes all of it; otherwise use record "
+                        "scope and report that original Sources remain accessible."
+                    )
         return self.service.forget(
             binding["session"], operation_id,
             records[0]["credentials"]["read_handle"] if records else None,
@@ -515,6 +582,27 @@ class FunctionalMemory:
             fragment_handles=fragments if not records else None,
             additional_fragment_handles=fragments if records and fragments else None,
         )
+
+    def _record_source_refs(self, record_id: str, *, require_complete: bool = False) -> list[str]:
+        """Inspect the selected record's real version links, never infer semantic scope."""
+        refs: list[str] = []
+        cursor = None
+        while True:
+            index = self.service.history_index(record_id, cursor=cursor)
+            if not index.get("ok"):
+                if require_complete:
+                    raise FunctionalRejection("V13_5_FORGET_SOURCE_SCOPE_UNAVAILABLE")
+                break
+            for revision in index.get("revisions", []):
+                row = self.service.read(record_id, revision)
+                if row.get("ok"):
+                    refs.extend(self.service._version_source_refs(row["value"]))
+                elif require_complete:
+                    raise FunctionalRejection("V13_5_FORGET_SOURCE_SCOPE_UNAVAILABLE")
+            cursor = index.get("next_cursor")
+            if not cursor:
+                break
+        return list(dict.fromkeys(refs))
 
     def _record_units(
         self,
@@ -703,7 +791,26 @@ class FunctionalMemory:
                 if self.service.source(row["source_ref"]) is not None
             ]
             return self._deduplicate(current + fragments)
-        result = self.service.search(query, limit=100, include_raw=True)
+        result = (self.service.search_evidence(
+            query, source_limit=self.source_top_k, semantic_limit=self.semantic_top_k
+        ) if self.source_access == "independent_v1" else
+            self.service.search(query, limit=100, include_raw=True))
+        if self.source_access == "independent_v1" and self.forget_requested:
+            related_refs = [event["event_id"] for event in result["raw_events"]]
+            related_refs.extend(ref for row in result["records"] if row.get("ok")
+                                for ref in self._record_source_refs(row["id"]))
+            existing = {row["id"] for row in result["records"]}
+            related = [row for row in self.service.backlink_candidates(
+                list(dict.fromkeys(related_refs)), limit=100)
+                if row.get("ok") and row["id"] not in existing]
+            result["records"] = [*result["records"], *related]
+            related_refs.extend(ref for row in related
+                                for ref in self._record_source_refs(row["id"]))
+            original_refs = {row["event_id"] for row in result["raw_events"]}
+            result["raw_events"] = [*result["raw_events"], *(
+                source for ref in dict.fromkeys(related_refs)
+                if ref not in original_refs and (source := self.service.source(ref)) is not None
+            )]
         units: list[dict[str, Any]] = []
         refs = []
         for notice in result.get("withdrawals", []):
@@ -713,15 +820,25 @@ class FunctionalMemory:
             units.extend(self._record_units(row))
             if row.get("ok"):
                 refs.extend(row["value"].get("source_refs", [row["value"]["source_ref"]]))
-        refs.extend(event["event_id"] for event in result["raw_events"])
+        refs = list(dict.fromkeys([
+            *(event["event_id"] for event in result["raw_events"]), *refs
+        ])) if self.source_access == "independent_v1" else [
+            *refs, *(event["event_id"] for event in result["raw_events"])
+        ]
+        source_units: list[dict[str, Any]] = []
         for ref in dict.fromkeys(refs):
             if ref != current_ref and self.service.source(ref) is not None:
-                units.extend(
+                source_units.extend(
                     {"type": "fragment", **fragment}
                     for fragment in self.service.source_fragments(
                         ref, max_chars=self.fragment_chars
                     )
                 )
+        if self.source_access == "independent_v1":
+            # The source branch ranks actual original exchanges independently.
+            # Semantic interpretations never displace their original bodies here.
+            return self._deduplicate(current + source_units + units)
+        units.extend(source_units)
         terms = set(_lexical_tokens(query))
         # Score actual body paragraphs, never opaque IDs, dates or metadata headers.
         # Stable ties retain public source/paragraph order. Full groups remain reachable.
@@ -804,7 +921,10 @@ class FunctionalMemory:
         """Project exactly this delivered page before counting its full cost."""
         return packet
 
-    def _page(self, key: str, start: int, binding: dict[str, Any]) -> dict[str, Any]:
+    def _page(
+        self, key: str, start: int, binding: dict[str, Any], *,
+        packet_tokens: Callable[[dict[str, Any]], int] | None = None,
+    ) -> dict[str, Any]:
         stored = self.service.store.get(namespace(self.service), key)
         if stored is None:
             raise FunctionalRejection("V13_5_SNAPSHOT_NOT_ISSUED_OR_CHANGED")
@@ -899,6 +1019,10 @@ class FunctionalMemory:
                 result, _ = project_request_targets(target_mapping, result)
             return self._project_read_packet(result)
 
+        def required_tokens(result: dict[str, Any]) -> int:
+            own = self.token_count(canonical(result))
+            return max(own, packet_tokens(result)) if packet_tokens is not None else own
+
         end = start
         for index, unit in enumerate(items[start:], start):
             if unit["type"] == "source_candidate":
@@ -915,7 +1039,7 @@ class FunctionalMemory:
                 if not row["ok"] or row["value"]["revision"] != unit["revision"]:
                     raise FunctionalIntegrityError("V13_5_SNAPSHOT_RECORD_UNAVAILABLE")
             chosen.append(unit)
-            required = self.token_count(canonical(packet(index + 1)))
+            required = required_tokens(packet(index + 1))
             if required > self.material_limit:
                 chosen.pop()
                 if chosen or skipped:
@@ -946,7 +1070,7 @@ class FunctionalMemory:
                 )
             end = index + 1
         result = packet(end)
-        if self.token_count(canonical(result)) > self.material_limit:
+        if required_tokens(result) > self.material_limit:
             raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
         refs = [
             ref
@@ -1021,15 +1145,26 @@ class FunctionalMemory:
                     ]
                 recent_ids = {unit["record_id"] for unit in recent_records}
                 units = self._deduplicate(
-                    current
-                    + recent_records
-                    + fragments
+                    [*units, *fragments, *recent_records]
+                    if self.source_access == "independent_v1" else
+                    current + recent_records + fragments
                     + [unit for unit in units if unit.get("record_id") not in recent_ids]
                 )
             snapshot = self._snapshot(bound, units, "ordinary")
             self.service.store.put(
                 namespace(self.service), key, {"snapshot": snapshot}, index=False
             )
+            if self.source_access == "independent_v1" and self.memory_view_mode != "legacy":
+                # Initial recall is the ordinary initial evidence pool, not an
+                # extra model query/selector. Short originals arrive directly;
+                # unfit bodies retain the same real snapshot/cursor for paid reads.
+                config: RunnableConfig = {"configurable": {
+                    "user_id": self.service.owner, "v13_session": session,
+                    "v13_turn_id": turn_id, "v13_config_version": config_version,
+                }}
+                initial_page = self._page(snapshot, 0, bound)
+                self._note_view_page(config, initial_page, keep_resident=True)
+                self._deliver_request_targets(bound, initial_page)
         else:
             snapshot = cached.value["snapshot"]
         if self.memory_view_mode == "legacy":
@@ -1049,7 +1184,7 @@ class FunctionalMemory:
                 **cached.value, "catalog_snapshot": catalog_snapshot,
             }, index=False)
         page = self._page(catalog_snapshot, 0, bound)
-        config: RunnableConfig = {"configurable": {
+        config = {"configurable": {
             "user_id": self.service.owner, "v13_session": session,
             "v13_turn_id": turn_id, "v13_config_version": config_version,
         }}
@@ -1632,6 +1767,7 @@ class FunctionalMemory:
         call_id: str,
         arguments: dict[str, Any],
         action: Callable[[dict[str, Any]], dict[str, Any]],
+        *, deliver_material: bool = True,
     ) -> dict[str, Any]:
         bound = self._binding(config)
         if "read_goal" in arguments:
@@ -1645,7 +1781,7 @@ class FunctionalMemory:
                 "read_state_effect": "unconfirmed", "retryable": False,
                 **self._read_only_metadata([]),
             }
-            if self.token_count(canonical(result)) > self.material_limit:
+            if deliver_material and self.token_count(canonical(result)) > self.material_limit:
                 raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT") from error
             return result
 
@@ -1657,6 +1793,8 @@ class FunctionalMemory:
                 self.service.store.put(namespace(self.service), key, current.value, index=False)
 
         def deliver(result: dict[str, Any]) -> dict[str, Any]:
+            if not deliver_material:
+                return result
             # A cached unknown is never a new delivery or permission to retry.
             if not result.get("ok"):
                 return result
@@ -1699,6 +1837,14 @@ class FunctionalMemory:
                 if self.token_count(canonical(exhausted)) > self.material_limit:
                     raise FunctionalRejection("V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT")
                 return exhausted
+            query = arguments.get("tool") in {"search_memory", "business_query"}
+            if query and self.max_evidence_queries is not None and sum(
+                call["arguments"].get("tool") in {"search_memory", "business_query"}
+                for call in state["calls"].values()
+            ) >= self.max_evidence_queries:
+                return {"ok": False, "status": "evidence_query_limit_exhausted",
+                        "effect": "none", "retryable": False,
+                        "limit": self.max_evidence_queries, **self._read_only_metadata([])}
             state["calls"][call_id] = {"arguments": arguments, "forget_epoch": self.forget_epoch}
             self.service.store.put(namespace(self.service), key, state, index=False)
         try:
@@ -1723,7 +1869,7 @@ class FunctionalMemory:
                 "read_state_effect": "unconfirmed",
                 "retryable": False,
             }
-        if result.get("schema") != "functional_material_v1":
+        if deliver_material and result.get("schema") != "functional_material_v1":
             # Failed reads delivered no items; zero is a delivery count, not a
             # claim that the owner has no records or that the lookup succeeded.
             result = {**result, **self._read_only_metadata([])}
@@ -1736,6 +1882,33 @@ class FunctionalMemory:
         except Exception as error:
             return unknown(error, "read_receipt_persistence")
         return deliver(result)
+
+    def read_allowance(self, config: RunnableConfig) -> dict[str, int | None]:
+        """The original per-message admission owns both reads and new queries."""
+        bound = self._binding(config)
+        key = "read-admission:" + reference_key([bound["session"], bound["message_id"]])
+        stored = self.service.store.get(namespace(self.service), key)
+        calls = stored.value["calls"] if stored else {}
+        queries = sum(call["arguments"].get("tool") in {"search_memory", "business_query"}
+                      for call in calls.values())
+        return {"reads_remaining": max(0, self.read_limit - len(calls)),
+                "evidence_queries_remaining": None if self.max_evidence_queries is None else
+                max(0, self.max_evidence_queries - queries)}
+
+    def query_observation(
+        self, config: RunnableConfig, call_id: str, tool_name: str,
+        arguments: dict[str, Any], execute: Callable[[], ToolMessage],
+    ) -> ToolMessage:
+        """Charge an existing registered application query without turning it into memory."""
+        result = self._read(
+            config, call_id, {"tool": "business_query", "name": tool_name, "args": arguments},
+            lambda bound: {"ok": True, "query_response": execute().model_dump(mode="json")},
+            deliver_material=False,
+        )
+        if "query_response" in result:
+            return ToolMessage.model_validate(result["query_response"])
+        return ToolMessage(name=tool_name, tool_call_id=call_id, status="error",
+                           content=canonical({**result, "effect": "none"}))
 
     def read_support_context(
         self,
@@ -1980,7 +2153,8 @@ class FunctionalMemory:
             return message("update_memory", tool_call_id, mutation(patch))
 
         def search_memory(
-            query: str, config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId]
+            query: str, config: RunnableConfig, *, tool_call_id: Annotated[str, InjectedToolCallId],
+            read_goal: str | StructuredReadGoal | None = None,
         ) -> ToolMessage:
             """Search owner material read-only; units paginate a fixed snapshot.
 
@@ -1997,7 +2171,9 @@ class FunctionalMemory:
                 self._read(
                     config,
                     tool_call_id,
-                    {"tool": "search_memory", "query": query},
+                    {"tool": "search_memory", "query": query,
+                     **({"read_goal": normalize_read_goal(read_goal)}
+                        if read_goal is not None else {})},
                     lambda bound: self._page(
                         self._snapshot(
                             bound,

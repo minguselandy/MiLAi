@@ -1,4 +1,4 @@
-"""Ordinary dense retrieval over visible current memory records."""
+"""Ordinary retrieval over original exchanges and visible current memory records."""
 
 from __future__ import annotations
 
@@ -8,6 +8,45 @@ from typing import Any, Literal
 from langchain_core.embeddings import Embeddings
 
 from milai_lab.memory.embeddings import normalized
+
+BM25_VERSION = "0.2.2"
+
+
+def raw_exchange_units(
+    session_id: str, date: str, turns: list[dict[str, Any]], *,
+    granularity: Literal["session", "turn"] = "session",
+) -> list[dict[str, Any]]:
+    """The existing RawRAG session/whole-exchange boundaries, without text cuts."""
+    if granularity == "session":
+        return [{"id": session_id, "session_id": session_id, "date": date,
+                 "turns": turns, "index_text": " ".join(
+                     row["content"] for row in turns if row["role"] == "user"),
+                 "turn_range": [0, len(turns)]}]
+    starts = [i for i, row in enumerate(turns) if row["role"] == "user"]
+    return [{"id": f"{session_id}_{start + 1}", "session_id": session_id,
+             "date": date, "turns": turns[start:end], "index_text": turns[start]["content"],
+             "turn_range": [start, end]}
+            for start, end in zip(starts, [*starts[1:], len(turns)], strict=True)]
+
+
+def flat_bm25_rank(
+    units: list[dict[str, Any]], query: str, limit: int,
+) -> list[dict[str, Any]]:
+    """Reuse RawRAG's pinned tokenizer, BM25 and NumPy tie ordering exactly."""
+    if not units:
+        return []
+    from importlib import import_module
+    from importlib.metadata import version
+
+    import numpy as np
+
+    bm25_type = import_module("rank_bm25").BM25Okapi
+    if version("rank-bm25") != BM25_VERSION:
+        raise ValueError("RAWRAG_BM25_VERSION_CHANGED")
+    bm25 = bm25_type([row["index_text"].split(" ") for row in units])
+    scores = bm25.get_scores(query.split(" "))
+    return [{**units[int(index)], "score": float(scores[index])}
+            for index in np.argsort(scores)[::-1][:limit]]
 
 
 def semantic_text(value: dict[str, Any]) -> str:

@@ -7,14 +7,18 @@ from typing import Any
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
-from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.methods.edit_memory import EditMemory, MaintenanceMode
 
 
 class AppendMemory(EditMemory):
     """Plain factual records; corrections are new reports, never silent rewrites."""
 
-    def __init__(self, service: MemoryService, *, features: EditFeatures) -> None:
-        super().__init__(service, "B0", interface_version="I2", features=features)
+    def __init__(
+        self, service: MemoryService, *, features: EditFeatures,
+        maintenance_mode: MaintenanceMode = "legacy",
+    ) -> None:
+        super().__init__(service, "B0", interface_version="I2", features=features,
+                         maintenance_mode=maintenance_mode)
         self.method_version = "milai_fact_append_v1"
 
     @property

@@ -85,6 +85,27 @@ def observation_profile(workflow: str, *, maintenance: bool = False) -> Observat
     raise ValueError("V13_OBSERVATION_WORKFLOW_INVALID")
 
 
+def maintenance_observation_profiles(workflow: str) -> list[ObservationProfile]:
+    """Registered object observations, then the exact public lookup-result contract.
+
+    A negative lookup concerns its actual queried key, not an existing reservation
+    or document. This projection issues no business object reference or authority.
+    """
+    workflow = {"reservation": "reservation_v1", "document": "document_publication_v1"}.get(
+        workflow, workflow)
+    profile = observation_profile(workflow, maintenance=True)
+    query, key = (("get_document_status", "title")
+                  if workflow == "document_publication_v1" else ("get_reservation", "item_key"))
+    lookup = ObservationProfile(
+        profile_id=workflow + "_lookup", adapter_version="1",
+        application=profile.application + ".lookup", origins=(query,),
+        object_id_path=(key,),
+        fields=(ObservationField("status", ("status",), "string"),
+                ObservationField("ok", ("ok",), "boolean")),
+    )
+    return [profile, lookup]
+
+
 def verified_reservation_ref(
     world: ApplicationWorld,
     owner: str,

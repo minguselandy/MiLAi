@@ -1,5 +1,1133 @@
 # 统一记忆功能候选与当前执行状态
 
+## 2026-10-12：Host14 已闭合，修复后新 Q 首次运行
+
+新候选 `configs/milai-dynamic-memory-small-v1.json` 将可见原始 Source 的检索独立于语义形成。
+复用既有交流分段与 BM25 0.2.2；普通安装正式声明同版依赖。Raw 保留原来仅用户正文的索引，
+新 MiLAi 索引所有实际来源角色，因此是新的证据条件，不能称为只改修订策略。
+
+benchmark 原文候选20与语义候选10分别检索，维护 K10 保持。优先交付原文及未被覆盖的真实关联来源；
+只有完整最终请求仍可容纳时才附带语义解释。单份长原文用原有 Source fragment 范围完整展开到固定池，
+不以截取前缀冒充完整来源。池外补检关闭，原 direct／必要分页、最多12调用及最终预留保持。
+每次交付重新检查当前 Source／记录可见性；旧快照和导航不能恢复撤销正文，晚到来源不进入旧池。
+
+维护使用 `maintenance_mode=event_delta_v1`，由当前原文、候选及相关旧含义组成一个事件任务；
+引用式 keep 保持，未涉及含义不要求重抄。已注册 Tool 只按实际 ObservationProfile 投影领域观察；
+纯执行回执保留 Source，不触发无领域事实的编辑。未注册 Tool 和同批用户来源不被关键词过滤。
+Host 原分类调用同时表达读取目的与当前禁止操作；最多2次新证据查询共享原3次补读额度。
+当前消息已确认的实际查询可供进度使用，新消息或业务变更后的实时要求仍需新观察。
+遗忘沿原记录／来源合同；共享来源或未完整读取的来源不能被局部片段隐式整份撤销，暂不支持部分 Source 撤销。
+
+新评价显式设置 `entrypoints.benchmark.halumem.evaluation_mode="qa_only"`，复用原 QA 提示和解析，
+最多对73机会各评分一次；已知缺答不调用 Judge，空 JSON 保留 invalid，形成／更新指标为未评价。
+旧配置默认综合评价不变。主 Q 不自动整理；显式整理仍用已有 consolidate／reconcile 入口。
+
+集成离线检查：无语义提交后原文可答、完整长文覆盖、快照到达边界与遗忘、完整包装容量、
+Host 查询额度和显式整理正常链通过；共同 Reader 受影响回归27项通过，Root四源码严格mypy、
+Ruff、锁文件及 Lab 两项依赖边界通过。首次检查未设置集成 PYTHONPATH 导致导入失败，修正入口后通过；
+不将该失败记作运行实验。上述均为程序验证；真实Host观察见下，**Q尚未取得质量结论**。
+
+实际源码冻结为 `11c4e826af350e4769c38e78c8239013e3b33606`。Host14于03:19:04–03:29:22 UTC执行，
+两个原故事各一次，6工程COMPLETED／8FAILED（包装容量5、正常stop空响应3）；6模型最终草稿／9公开文本。
+真实唯一语义提交2次（同一记录rev1／2），业务mutation0、实际新get_reservation查询1、成功forget0。
+第二故事在没有语义记录时实际交付8个原文片段，证明独立原文通路已运行；不能因此称整个请求完成。
+旧总述未随例外修订、变更支持绑定拒绝、当前业务请求误分、使用未交付长ID及包装超限仍存在。
+第一故事要求保留历史时曾出现5次错误forget尝试，均被合法目标／正文检查拒绝，没有产生撤销效果。
+正常查询里的空提案不被自动判为维护失败；模型错误草稿和实际公开反馈分开审查。
+
+Host成本：54生成请求／回执，输入415,718＋输出67,675＝483,393 known＝charged；18 embedding回执／776tokens，
+实际618.43秒。returncode0、newunknown0／0、原limits不变、leaseFREE，父1286678／worker1286680已退出。
+两个独立SDK export子进程1328559／1328732均rc0并退出；stderr只有既有依赖警告，账本字节不变。
+随后公共SDK观察当前／rev1–2／历史／Source及原文检索、先前Source范围重开：第一银行记录与11条先前来源仍可达，
+第二没有先前语义记录但9条先前来源仍可达。**整项遗忘未完成**，没有成功回执，不伪造成功binding。
+范围重开描述符来自实际先前Source身份与正文，不冒称旧Reader缓存；SDK read／history可写凭据和分页元数据，非物理只读。
+
+新M11c4于03:32:00 UTC首次启动，但Root发现新增benchmark `functional_v1` 合同未绑定真实public turn，
+前5会话的提案均被 `public_turn_required_or_mismatched` 拒绝，语义提交为0。这是Root集成遗漏，不能归给模型语义选择，
+也不能把原文能回答的部分结果当完整MiLAi候选。此前只读／空提案测试遗漏了实际维护提交链，已补创建—更正—检索检查。
+
+Root在03:46:09 UTC暂停worker并确认账本回到历史unknown8／1、无在途模型请求后，发送SIGINT／SIGCONT，
+原runner于03:46:10.258100 UTC闭合：STOPPED／returncode−2，terminal为FAILED KeyboardInterrupt、resources_settled=true，
+close_error=null、新unknown0／0、limits不变、leaseFREE、live账本=end。stderr确认中断位于本地backlink SQLite读取；
+父1336488／worker1336489已退出。原冻结源码、银行、答案、拒绝与费用全部保留，不是用户取消，不自动重启。
+
+部分运行保存5完成会话／12非空QA，U1/S5仅完成一次extract请求、会话未完成，另26会话未启动；
+其余61QA为NOT_RUN，不计缺答或错误。36／36生成回执，输入425,481＋输出105,462＝530,943 known＝charged，
+embedding0，阶段849.796秒。12题最终交付累计26条原文／0语义、508个Source范围（跨题重复计）；
+3题分页／13确认页／峰值31,988≤32,256，最终空集0、实际池外查询0。**不评分、不作为方法效果结论。**
+修复已使用真实turn:N User Source绑定，逐批选已到达的最近User；无前置User仅保留原Source并记维护未完成。
+真实临时Store＋scripted模型的创建→更正→非目标／历史保持→原文和语义检索及边界检查3项通过，Ruff／strict mypy通过，
+0实际模型／HTTP／原银行操作，MemoryService权限不变。
+Host源码不涉及本次benchmark绑定修复，已发生的Host失败与SDK证据保持，不为一般语义失败重跑Host。
+
+修复后实际源码冻结为 `b558a7a8d3c7d8e871547476117b55563fbb0ea9`，新根
+`artifacts/dynamic-memory-small/q32-b558a7a8-v2` 于04:01:10.363550 UTC首次派发，父1446814／worker1446815实际存活。
+新银行重新从合法前缀到达，旧11c4银行／答案不复用或续接；相同六题声明保持。旧36调用费用单列，未退款。
+从11c4至b558的唯一运行代码变化在benchmark维护绑定，Raw、Reader、模型配置及QA Judge未改，已增量确认原复用证据。
+本次仍是预测进行中、尚未评分，无完整质量结论。b558自身Fast38201895441成功、Full38201895477跳过。
+
+
+Raw6ab复用已完成实际核对：73／73完整Reader消息逐字符串一致，73／73原分段／BM25排序／实际材料一致，
+所有旧Raw均direct（峰值29,259＜32,256）；模型关键设置与73份QA Judge模板／解析合同一致。没有重新派发Raw。
+Q前预声明同六题为U1/S0/Q0、Q1、Q2，U2/S0/Q0，U3/S2/Q0，U4/S7/Q3（会话／题均零起），
+按旧元数据机械最小覆盖并按题序补足：覆盖4用户、旧direct／paged及双方C／仅Raw／仅M／双方非C四类。
+Raw来源半边复用六份已有判断（仅补一题任务覆盖），官方4C／2H保留；新M11c4来源半边前三题已保留，因接线错误停止而暂停其余审查；后续新候选同题单列、先于新Judge冻结。
+已披露标签与既往参考接触及实现作者身份，不称盲审、不把来源一致折算成修正总体准确率。
+
+运行源码11c4的CI core作业因新测试误入无LangGraph依赖作业而失败；开发头d558415f仅修正原验证矩阵／CI归属并补文档，
+自身Fast38199213097成功、Full38199213104跳过，不声称11c4自身通过，也不借旧CI证明新头。
+
+### 新候选普通使用与显式整理
+
+以下命令在所选Git checkout的 `MiLAi-Lab` 目录运行；示例本身没有额外派发。
+若使用导出的冻结源码，`--source-version`须填对应冻结记录的commit，不能读取外层开发树的Git头。
+使用独立新根，实际实验不得重复使用已执行根。普通保存和查询沿同一 MemoryService：
+
+```bash
+MILAI_PYTHON=/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python
+MILAI_CONFIG=configs/milai-dynamic-memory-small-v1.json
+MILAI_DEMO=artifacts/dynamic-memory/example-v1
+MILAI_RUNTIME="$PWD/artifacts/dynamic-memory/example-runtime"
+mkdir -p "$MILAI_RUNTIME"
+export PYTHONPATH="$PWD/src"
+"$MILAI_PYTHON" tools/run_functional.py --runtime-dir "$MILAI_RUNTIME" prepare \
+  --root "$MILAI_DEMO" --config "$MILAI_CONFIG" --source-version "$(git rev-parse HEAD)"
+"$MILAI_PYTHON" tools/run_functional.py --runtime-dir "$MILAI_RUNTIME" message \
+  --root "$MILAI_DEMO" --bank personal --owner example --session example \
+  --message-id save-1 --text '请记住，我的午休提醒用静音模式。' > "$MILAI_DEMO/save-1.json"
+"$MILAI_PYTHON" tools/run_functional.py --runtime-dir "$MILAI_RUNTIME" message \
+  --root "$MILAI_DEMO" --bank personal --owner example --session example \
+  --message-id query-1 --text '只查询：我之前要求午休提醒用什么模式？'
+```
+
+原文捕获、语义提交与问题完成分别查看实际回执。显式整理从真实捕获回执取得 Episode 身份；
+不是新增来源、业务操作或写后自动审核，合法结果也可能是空提案：
+
+```bash
+MILAI_EPISODE_ID="$("$MILAI_PYTHON" -c \
+  'import json,sys; print(json.load(open(sys.argv[1]))["capture"]["episode_id"])' \
+  "$MILAI_DEMO/save-1.json")"
+TMPDIR="$MILAI_RUNTIME" SQLITE_TMPDIR="$MILAI_RUNTIME" \
+"$MILAI_PYTHON" tools/run_memory_operations.py \
+  --root "$MILAI_DEMO" --bank personal --owner example --session example \
+  --request-id organize-1 --operation consolidate --episode-id "$MILAI_EPISODE_ID" --limit 1 \
+  --text '请整理本次选中的提醒约定原始记录。'
+```
+
+`run_memory_operations.py` 没有 `--runtime-dir`；启动前指定临时目录。
+也可用 `run_functional.py episodes --root ... --bank ... --owner ...` 查看真实 Episode 身份。
+重复同一整理 request-id 使用原回执，新的整理要求使用新 request-id，不把读取当自动写入。
+
+### Host14 与 QA-only 实验入口
+
+Host 使用既有 `tools/run_baseline_host_flows.py prepare`，传新 `--root`、上述 `--config`、
+原 `--fixture`／`--controls`、真实 `--source-version` 和 `--repeats 1`；然后在资源闭合后
+显式 `serial-run --root ... --schedule-note "实际串行核查说明"`。重复次数只在 prepare 声明，
+原8+6消息保持；控制文件仍仅供评价，不进入Host。实际冻结源码11c4e826，Host根为
+`artifacts/dynamic-memory-small/host14-11c4e826`，不能用开发头替代其身份。
+
+QA-only通过配置生效，没有 `--qa-only` CLI参数。以下展示原入口，三个阶段依次执行，
+预测和资源闭合后才评分；实际运行由Root supervisor保存退出码和stderr，不重试：
+
+```bash
+MILAI_Q_ROOT=artifacts/dynamic-memory/q32-v1
+"$MILAI_PYTHON" tools/run_baseline_alignment.py "$MILAI_CONFIG" "$MILAI_Q_ROOT" \
+  --phase prepare --benchmark halumem --runtime-dir "$MILAI_RUNTIME"
+"$MILAI_PYTHON" tools/run_baseline_alignment.py "$MILAI_CONFIG" "$MILAI_Q_ROOT" \
+  --phase predict --backend MiLAi-memory-only --benchmark halumem --runtime-dir "$MILAI_RUNTIME"
+"$MILAI_PYTHON" tools/run_baseline_alignment.py "$MILAI_CONFIG" "$MILAI_Q_ROOT" \
+  --phase score --backend MiLAi-memory-only --benchmark halumem --runtime-dir "$MILAI_RUNTIME"
+```
+
+## 2026-10-12：功能优先轻量轮结果
+
+**功能候选已接通并完成本轮轻量观察，整体语义仍有缺口，未证明方法增益。** 实际运行源码为
+`d2774634ce2c67470ae53d486d9612adf3ac7bf8`，开发／报告头不替代它。按用户新启用的功能优先计划，
+完成A读取、B形成／修订、C普通Host、D配置与入口合流；运行两条原故事各一次的Host14，
+再从独立空银行运行新MiLAi的32会话／73QA／72更新机会，与符合条件的既有Raw比较。
+旧Host42、六次SDK重开、五法277、完整LongMemEval与保留用户仍按原状态后置，未改写成通过。
+本轮没有新增检索器、记忆模块、检查Agent、写后LLM纠错或自动重试平台。
+
+### 正式质量与全部73题配对
+
+新M保存预测的首次独立评分于2026-10-11 **20:39:55 UTC**闭合。主口径保留全部73个机会：
+
+| 方法／实际来源 | Correct／73 | Hallucination | Omission | invalid | 缺答 | 有效Judge口径（仅辅助） |
+|---|---:|---:|---:|---:|---:|---:|
+| RawRAG-local，复用冻结6ab预测 | 55／73＝75.3% | 17 | 0 | 1 | 0 | 55／72＝76.4% |
+| 新MiLAi-memory-only，冻结d277 | 43／73＝58.9% | 16 | 5 | 8 | 1 | 43／64＝67.2% |
+
+按用户、会话、实际问题文本与保存的QA序号匹配73题，双方用于评分的文本均与各自保存hypothesis一致：
+
+| 同一题的官方结果 | MiLAi Correct | MiLAi非Correct | 合计 |
+|---|---:|---:|---:|
+| Raw Correct | 40 | 15 | 55 |
+| Raw非Correct | 3 | 15 | 18 |
+| 合计 | 43 | 30 | 73 |
+
+非Correct包含invalid和缺答，未移出配对。“仅Raw Correct”的15题中有6题M invalid；
+“双方非Correct”的15题中另含Raw invalid1、M invalid2及M缺答1。不能把全部12题主指标差额
+都归因于记忆算法的语义错误，也不能用来源审查补成官方Correct。四个开发用户的历史相互分组，
+73题不是73条独立历史；不作显著性、长期泛化或单一算子的因果结论。
+
+| 配置顺序 | QA机会 | Raw Correct | 新M Correct | 新M invalid／缺答 |
+|---|---:|---:|---:|---:|
+| 用户1 | 20 | 15 | 11 | 4／1 |
+| 用户2 | 12 | 11 | 10 | 0／0 |
+| 用户3 | 22 | 16 | 11 | 3／0 |
+| 用户4 | 19 | 13 | 11 | 1／0 |
+
+新M官方更新Correct **33／72＝45.8%**，Hallucination1、Omission33、invalid5；有效口径33／67＝49.3%。
+隔离更新空检索0、未评分0。形成recall(all)=57.4%（valid63.5%），weighted recall(all)=64.5%，
+主分母439／有效397，另有29项干扰记忆；accuracy weighted(all)=74.2%（valid93.8%，91／有效72）。
+作者聚合extraction F1=72.9%，使用target accuracy(all)=100%与recall(all)的调和值；
+不当作所有保存内容的来源准确率。Raw形成／更新为N/A。旧6ab M的49／73、更新37／72保留为历史，
+不是本轮配对一侧；多项工程条件变化不用于证明某个提示或算子的单独作用。
+
+### 实际成本与资源闭合
+
+下表为实际token用量，Raw列是已发生的复用基线成本，本轮没有重新派发Raw：
+
+| 阶段 | 生成次数 | 输入tokens | 输出tokens | 生成合计（known＝charged） | embedding tokens |
+|---|---:|---:|---:|---:|---:|
+| Raw原预测 | 73 | 968,069 | 93,621 | 1,061,690 | 0 |
+| Raw原独立QA评分 | 73 | 73,257 | 106,651 | 179,908 | 0 |
+| 新M预测 | 206 | 2,846,679 | 667,736 | 3,514,415 | 246,904 |
+| 新M独立评分 | 689 | 1,509,149 | 905,049 | 2,414,198 | 0 |
+
+新M预测生成tokens为Raw的3.31倍；本轮官方QA没有体现相应收益。M评分额外包含形成、准确性和更新，
+不能把689与Raw的73次仅QA评分当作相同评价工作量的效率比较。689个Judge请求、响应和完整usage
+均匹配，预测562个embedding回执也与账目一致。预测和评分阶段各自新增unknown0／0、原limits不变；
+历史generation unknown8／embedding unknown1及H最后110,954保守预占保留，不清除或当作确认消耗。
+
+预测17:33:25启动、18:58:16 UTC闭合，returncode0、resources_settled=true，父3279447／worker3279449退出。
+Root在原资源闭合后18:58:51 UTC首次显式评分保存产物；20:39:55 UTC正常闭合，returncode0、
+resources_settled=true。20:40:51 UTC核查父3612261／worker3612262均不存在、原租约FREE、live账本等于score end。
+没有预测重放、重评分、native服务派发或其他臂模型任务；共享模型服务保持运行。
+
+预测保存32会话／73检查点，其中72个非空文本、1个已确认stop却无final文本的缺答
+（用户1／session7／QA6）。保留null、机会和原回执，不取reasoning补答案；该题实际direct输入已交付20条材料，
+body flag为false不表示没有发送正文。206次生成分为Extractor33／维护选择29／Editor33／QA最终73／页选择38。
+17题分页、38确认并接受的页，峰值32,231≤32,256；用户4／session7／QA4最终正文为空，官方为Omission，
+本轮没有对它再做来源语义审查，不从空集合独自推断最早原因。分页交付与任务完成分别计量。
+
+### Host14与两次实际SDK重开
+
+同一d277候选Host于17:27:41 UTC闭合：14条全部尝试，12工程COMPLETED／2FAILED
+（1包装容量、1VLLM_CHAT_TRUNCATED）；12份模型最终原稿、13份公开文本，额外一份为程序失败反馈。
+91生成／754,819 known＝charged／1,850embedding，新增unknown0／0、limits不变；父3192016／CLI3192030退出、租约FREE。
+形成漏写／无依据生效日、分区频次过推断、正确撤销后又被无关Tool来源维护破坏、历史解释与实际状态不符仍存在。
+业务首次分类遗漏明确请求，后续解析截断，**本轮无实际预订／补标签／取消**，不能借fbc上一轮业务正例补足。
+
+两独立SDK export进程3262097／3262327均退出0，账本不变。第一故事实际撤销1记录／11Source：
+当前、已知revision1–5（含中间rev4）、history_index及11Source均不可读；残余4Source仅先前问题及遗忘后的问题／回答，
+不含旧安排断言。该范围的可见性撤销通过，但后续模型称“从未保存”仍错误。第二故事仅撤销结果记录／5Source，
+回执范围内检查通过；用户要求覆盖的请求记录rev2、历史和原User请求仍可访问，**整项遗忘不完整**。
+不以空export证明遗忘，不把局部SDK检查通过当整条任务通过，也不宣称物理擦除；SDK读可签发句柄和维护分页快照。
+
+真实包装容量断点已在原路径做最小修复并复测：完整Host包参与既有分页计量，换出正文可按原快照重开，
+只作用于for_write=False，显式keep与Writer合同保持；导航遗忘拒绝准确提示先读正文，不增加权限或自动读取。
+较前两候选，若干交付得以完成，但当前仍有2条工程失败和上述语义缺口。ad与fbc的失败、实际效果和费用完整保留，
+不同候选不算同条件独立重复，不挑最好一次。本轮不继续改提示、重跑小前缀或扩大旧长历史矩阵追求全通过。
+
+### 固定同六题的来源与官方评价
+
+预测前按旧Raw题序固定前3Correct／前3非Correct，同题共12答案。来源判断先于新M Judge读取完成：
+Raw六题中5来源一致、1数值不支持；新M同六题中4来源一致、1核心含义有据但直接引语并非逐字、
+1金额／主体／报告日有据但职务工资归属属于未明确标注的语境推断。最后一项记范围未定，不判已证伪；
+澄清history保留。六题均direct，不能证明分页效果。审查者披露既往Raw参考接触及实现作者身份，不称盲审。
+
+19:28:25 UTC完成六题Judge关联，之后与最终标签再次核对一致：Raw官方3Correct／3Hallucination；
+新M2Correct／1Hallucination／3invalid。三个样本invalid均是正常stop的最终空JSON{}，缺标签与正式理由，
+Root核对原响应后仍保留invalid，不从reasoning补标签或重评分。一个官方Correct仍保留非逐字直接引语缺陷；
+另一个Correct的Judge理由使用了较宽参考范围，不能替代Reader实际交付范围。
+数值题虽然被判Hallucination，实际Source支持数值／本人／报告日；职务工资归属范围未定仍保留，
+既不据Judge否定真实数值来源，也不把该题升级为来源完全忠实。两份评分前来源文件保持，关系另存于原ignored目录。
+分层六题全来自同一开发用户，不估计总体来源率或修正准确率；官方标签、来源忠实与完整任务完成是不同评价轴。
+
+### 本轮交付与边界
+
+本轮交付为同一逻辑MemoryService上的可运行代码、`configs/milai-function-first-small-v1.json`、
+下文普通保存→查询示例、现有问题表与本报告。Source-only、QA20、维护／隔离更新K10、原Reader及预算保持；
+Host与benchmark继续保留各自不同的模型阶段设置。已完成直接相关检查与正常链检查，具体记录见下方历史实施段；
+这些检查不替代本次真实语义结果。运行源码d277自身Fast38158540274成功、Full38158540267跳过；
+中间报告头1b5ea6a0自身Fast38166243189成功、Full38166243192跳过，最终文档头另核对自身CI并记入PR #121。
+
+结论限定为：工程路径已接通，普通流程仍不全面可靠，本开发前缀未显示相对Raw的净收益。
+Raw在前八会话通常拿到全部已到达原会话，是原文保留参照，不是长历史检索成绩。
+已证实的维护影响范围、来源限定、Host任务解释、遗忘范围与反馈缺口留在现有问题表；
+本轮不把工程闭合升级为产品GO、Schema冻结或研究结论。五条方向与单一逻辑MemoryService保持；
+模型负责语义选择，程序负责真实身份、权限、版本和实际效果。记忆文字不创造业务现实。
+
+以下为各自固定时点的历史观察，保留原源码、费用、失败和未运行状态。
+
+**历史Host轮：fbc458e0于16:41:19启动、16:55:43 UTC资源闭合。** 原14消息全部尝试，
+工程状态6 COMPLETED／8 FAILED，8项均为已知材料包装容量失败，无未运行消息；不把6条COMPLETED
+计为6条任务成功。76生成／624,528 known＝charged／4,256embedding，新增unknown0／0、limits不变。
+父3069838／CLI3069839退出、真实CLI rc0、原租约FREE。原ad首轮3／14失败和141,829成本另列保留。
+
+| 连续能力 | 本轮实际观察 | 结论 |
+|---|---|---|
+| 保存／更正 | 首条内容和反馈忠实；后续一次拒绝、两次真实修订并存，旧独立范围被撤销，另有User内容错误归给不支持它的Tool not_found来源 | 提交与原Source字节存在，不证明语义忠实或非目标保持 |
+| 通知更正／撤销例外 | 实际新通知与撤销有提交且保持部分旧含义，但最终包装超限 | 持久局部正例，公开任务未完成 |
+| 实际保存历史 | 将记忆ID用于业务查询，以not_found推断记忆不可访问；未取得所问实际历史 | 文本完整／COMPLETED仍是语义失败 |
+| 业务部分完成→继续 | 真实预订一次，标签首次已知失败；随后当次查询并补标签一次，无重复预订 | 局部续办与真实效果反馈正例 |
+| 只补保存 | 没有新增业务mutation，实际结果记忆更新且保留数量等；却把标签失败误写为预订失败，最终无公开答案 | 内容与交付仍失败，不能用progress completed代替 |
+| 遗忘→重开 | 第一故事7次导航target遗忘请求均在变更前拒绝；第二故事只作语义撤回，无visibility_revoked回执；随后混淆不可交付与已遗忘、业务错误键not_found与已取消 | 两银行均未完成请求范围的可见性撤销，真实业务未取消 |
+
+遗忘拒绝来源已定位：短target存在却仅为read_only_navigation，没有先读取正文取得delivered_record/source。
+适配未漏传合法凭据；旧EXACTLY_ONE错误同时覆盖导航无权与多记录，反馈不够直接。不会自动读取／
+替换目标或扩大权限；后续最小反馈改动仅明确先读正文，保留原拒绝。无Store字节损坏、越权或重复业务mutation证据。
+
+两银行独立SDK export进程3136580／3136766均退出0；当前各1条记录（rev4／rev2）、Sources16／29。
+另按实际遗忘前快照，对每银行2个记录的当前及已知旧revision、history_index和4条实际支持Source观察：
+当前各有found，另一记录虽retracted但旧rev仍found；4个历史索引均available，8条所查Source均可访问。
+不构造成功遗忘binding，不从空export推断撤销；模型账本保持，0新模型／HTTP。SDK读可签发句柄／
+建立历史分页快照，不称物理只读。实现作者的逐14消息Source审查与Root实际SDK观察分别保存在原ignored根。
+
+本轮再次容量失败暴露共同缺口：已有_page只计工具返回，没有覆盖后续完整model_material。
+纯读病例实际成功页7,348／8,192，包含当前Source／目录／目标／read_goal的下一包离线重建为9,082；
+上轮进度数组摘要仍在，不能再把这次归为同一重复数组。现有分页与最终包装的预算衔接已合流3bd88571：
+仅Host读取for_write=False超限时，以完整最终包计量原_page；沿当前焦点或最近实际读取的原快照切页，
+换出正文保留在既有pending／cursor中。没有新selector／调用／窗口；显式keep=True不可容纳时仍拒绝，
+不悄悄丢弃模型要求保留的材料。Writer保留原Source、目标、continuations与_writer_packet容量合同。
+保存纯读例离线得到首4完整单元8,166、后2单元5,971≤8,192；旧页可重开，原快照／来源／目录保持。
+这是Host容量工作集条件变化，不能只称格式精简。导航遗忘拒绝另准确说明BODY_READ_REQUIRED、先read
+取得已交付正文target；多个正文记录继续原拒绝，权限没有放宽，也没有自动读取／替换目标／重试。
+六个独立直接相关检查（包含Writer正常重开）、Ruff／两源码strict mypy通过；Root合流后7项既有正常链再次通过，保留原弃用警告。均为合成临时库，0实际模型／原银行DB。
+该共同装包路径影响两条故事的读取与最终反馈，下一步以独立空银行对原14消息作一次新条件验证，
+保留前两候选3／14与14／14的全部结果及费用，不将三版本当同条件独立重复或挑最好一次。
+新M只prepare，尚未创建预测银行或派发模型；验证后使用同一候选首次32／73自然历史，不填旧49／73。
+
+fbc458e0自身Fast38156429157 **SUCCESS**，Full38156429120 **SKIPPED**。工程CI通过与上述实际失败分开。
+
+**迁移核查：10月11日16:07 UTC；评分实际闭合：09:21:34 UTC。** 冻结6ab的保存预测已完成
+首次独立评分，returncode=0、resources_settled=true，父1071578／worker1071580均不存在。
+706次Judge生成，2,556,437 known＝charged tokens，embedding0；阶段新增unknown0／0、limits不变。
+这包含形成、准确性、更新与QA的评分，不是706个独立QA样本。预测未重跑、答案与官方标签未修改。
+本次派发前原连续账本与评分end逐字义相同、Owner租约FREE、专属native UID无活动进程；
+历史generation unknown8／embedding unknown1和H最后110,954预占保持。
+
+| 同一开发前缀 | Correct／全部机会 | 其他官方标签 | 有效判断口径（不替代主列） |
+|---|---:|---|---:|
+| RawRAG-local | 55／73＝75.3% | Hallucination17、invalid1、missing0 | 55／72＝76.4% |
+| MiLAi-memory-only（6ab） | 49／73＝67.1% | Hallucination14、Omission3、invalid7、missing0 | 49／66＝74.2% |
+
+四用户M分别14／20、10／12、15／22、10／19，较Raw的Correct数差为−1／−1／−1／−3。
+本前缀M官方主指标少6题；四个开发用户只支持描述性比较。Raw的session top20通常涵盖全部已到达
+历史，是原文保留参照；H没有完整结果，不能称完整三方排名，也不据此泛化长历史或算法优劣。
+
+M官方更新Correct37／72＝51.4%，Hallucination2、Omission26、invalid7；有效口径37／65＝56.9%。
+隔离更新检索空结果0、未评分0。官方形成recall(all)=70.6%（valid78.1%），weighted recall(all)=77.6%；
+形成主分母439／有效397，另有29项干扰记忆；accuracy weighted(all)=81.7%（valid95.5%，104／有效89），
+作者聚合extraction F1=82.8%（target accuracy(all)=100%与recall(all)的调和值）。
+保留作者聚合及动态分母，不当作全条目准确率；Raw形成／更新仍N/A。
+这些参考指标与来源忠实性分别报告，不能用高形成F1否定实际维护漏写、主体或独立旧属性损伤。
+
+### 已完成的三题空最终工作集来源审查
+
+直接使用07:53:58 UTC已保存审查，未重复派发。三题均为第四用户session7：QA2先提名相关材料0，
+下一页空选择且keep_resident=false使其丢失，最终拒答未完成有来源支持的有限回答；QA6两页均未提名，
+实际全池缺问题所需字段，带边界的未知回答有依据，不能据此认定形成／检索失败或强制留一条；
+QA7先漏选已交付核心材料，后又丢失已提名后页候选，未提供池内可支持的有限计划。三题不能统一
+归为同一个替换bug。其余七题尚未作同等语义审查。0模型／HTTP／DB，92份原产物hash保持；
+未新读M Judge／gold／画像／未来，但审查者此前接触过Raw gold且QA7重叠，不宣称完全盲审。
+按QA0–9排序的最终原文条数为1／4／0／9／4／4／0／0／8／3；前报告条数使用文件遍历顺序。
+
+Root于16:09:26 UTC首次派发已准备b498固定171条真实材料池一次诊断（父2942313／worker2942314）。
+原问题／日期／Reader／Source／32,256完整输入／12调用预算不变，只验证已有累积提名接口；
+没有native retain、Writer、新检索、gold下标或重试。该单次诊断16:11:41 UTC正常闭合，returncode0、
+资源闭合、父worker退出、原租约可用，新增unknown0／0、limits不变。4个实际页60／44／46／21
+交付全部171条，最终完整重开22条，首批4个提名保持、末页空提名未清空；最终22原件与实际池逐项一致。
+峰值32,047、最终13,226 input tokens；5生成共131,226输入＋13,338输出＝144,564 known＝charged，
+embedding0。complete中的delivered_material_count171是全程已读数量，不是最终22条正文数量。
+较旧病例6调用／136,765tokens，新例少1调用但多7,799tokens，不称成本降低。
+
+新答案直接回应有来源支持的偏好方向与日期问题，原当前对话确已进入最终正文，解决该例原先
+“证据已读却最终拒答”的断点。解释压缩了历史assistant阐释与用户认同，并将变化放在报告日期附近，
+实际来源只确定报告时间及近期经历；不宣称所有发生时间／说话者归属均已精确验证。未赋Judge标签，
+没有新模型审查或重跑；一个已暴露随机单例只支持诊断观察，不能证明普遍语义收益。
+
+新增候选A/B/C已合流。容量页向原选择调用反馈完整最终模板的联合tokens／余量；待送页完成后仍
+超限，在原剩余额度内显式drop，不截正文或加调用，短池direct不改；空最终集合只表示当前材料不足。
+B沿原Extractor／Editor区分主体、事件时钟、语气与复合旧属性，候选置于动作schema前，聚焦真实变化。
+C在原v9分类中加入可选response_scope；仅整项答复是窄保存状态且已有真实回执时，交付原程序回执摘要。
+复杂解释、旧decision及无回执查询保持普通回答；原错误模型草稿保留，程序确认不升级为模型语义成功。
+Root给旧Host脚本增加prepare --repeats（默认3，新根用1）；循环、总数和summary来自已声明次数，旧42根不改。
+新配置configs/milai-function-first-small-v1.json以Raw/M为主，不要求H服务；Host与benchmark原模型和阶段设置分开保持。
+A的17项窄检查、B和C各6项既有相关检查及各自Ruff／单源码类型检查通过，未派发真实服务。
+Root合流后一次正常链检查7项通过（保存重开、更正历史、业务补存实时核对、遗忘重开），重复次数与结果保留5项通过。
+这些检查用合成来源／临时SQLite，保留已有弃用警告；不是对真实14消息或新M语义的替代。
+
+**首个实际Host14：冻结ad348a9a，16:26:35启动，16:29:09 UTC停止。** 计划14，已尝试3：
+前2条COMPLETED，第3条纯查询FAILED／V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT，余11条NOT_RUN。
+现有调度器将input_or_runtime归为undeclared_failure而停止，Root没有吞掉错误或自动重试。
+实际rev1保存和rev2添加例外均发生；rev2仍保留过时的全局总述，不能用真实提交或窄回执说维护完整。
+第3条Source已捕获、无语义提交／业务动作；历史读取没有完成。Root只针对实际包装容量断点做后续最小修复，
+不加ordinary_material_tokens8192、模型窗口或调用预算；已运行源码、结果和银行不热改或续跑。
+本阶段17生成／141,829 known＝charged／395embedding，新unknown0／0、limits不变。
+父3011232／CLI3011233及消息进程退出，原租约FREE；CLI真实退出码0与执行状态STOPPED分别保留，
+不是正常语义完成。独立SDK新进程3029222 export退出0，确认1条当前rev2／5Sources，账本不变；
+另一故事银行不存在，标NOT_RUN_BANK_ABSENT。没有遗忘效果或两故事验收，不以export充当遗忘证明。
+
+保存产物与原装包函数的离线重建定位：成功read页6,568／8,192，下一轮完整resident含5语义单元、
+1当前Source、5候选及工作集，却又携带完整read_progress的delivered_identities／snapshot_pages，
+重建成本8,479。模型包只保留既有进度摘要、持久读取轨迹仍完整后为7,978；原正文／来源／条件／
+目标／目录保持。原失败包未落成线上request，8,479→7,978明确是离线重建，不冒充真实发送。
+最小修复已合流e80fb7cb：只在Host模型包省去这两数组，read_progress正常内部读法与持久轨迹保持。
+同一个明确包装容量错误准确归request_capacity，仍FAILED并保留回执；不以改分类代替装包修复。
+保存包重建、两个直接相关正常路径、Ruff／两源码strict mypy通过，未访问原银行或派发模型。
+接下来用新候选与独立空银行执行完整14消息，不续跑旧3消息前缀；本次是针对真实阻断的必要修复验证，
+并非对同版本失败自动重试或选最好一次。新M在功能流程资源闭合后首次派发。
+
+新M同候选独立根只prepare：32／73／72、尚无银行和预测；待修复后按实际新候选另声明，旧准备不改成运行。
+Raw复用检查完成：配置与少量实际调用一致，73请求均为原direct，无选择页；四用户末会话QA0的
+实际输入分别26,771／16,396／22,544／29,241，Reader／问题日期／合法Source及Judge设置不变。
+A只改Raw未进入的容量分支，B/C只影响维护／Host，可复用既有冻结55／73，不伪装为新头重新跑。
+
+本轮普通保存→查询示例（在Lab目录执行，使用独立新根；命令是用法说明，未为文档再次派发）：
+
+```bash
+MILAI_PYTHON=/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python
+PYTHONPATH=src "$MILAI_PYTHON" tools/run_functional.py \
+  --runtime-dir artifacts/function-first-small/example-runtime prepare \
+  --config configs/milai-function-first-small-v1.json \
+  --root artifacts/function-first-small/example
+PYTHONPATH=src "$MILAI_PYTHON" tools/run_functional.py \
+  --runtime-dir artifacts/function-first-small/example-runtime message \
+  --root artifacts/function-first-small/example --bank personal --owner example \
+  --session example --message-id save-1 --text '请记住，我的午休提醒用静音模式。'
+PYTHONPATH=src "$MILAI_PYTHON" tools/run_functional.py \
+  --runtime-dir artifacts/function-first-small/example-runtime message \
+  --root artifacts/function-first-small/example --bank personal --owner example \
+  --session example --message-id query-1 --text '我之前要求午休提醒用什么模式？'
+```
+
+prepare只准备；message会使用现有服务和连续账本。两次message是独立进程、同一已准备银行。
+示例的成功与否看实际回执、保存内容和回答，命令可用不代表本轮全部语义问题已解决。
+
+Host实验入口（沿用上面的MILAI_PYTHON；另需已有ignored故事材料，prepare不会派发模型）：
+
+```bash
+export PYTHONPATH="$PWD/src"
+"$MILAI_PYTHON" tools/run_baseline_host_flows.py prepare \
+  --root artifacts/function-first-small/host14-v1 \
+  --config configs/milai-function-first-small-v1.json \
+  --fixture artifacts/baseline-alignment/host-flows-f536734-offline-v4-prepared/inputs/fixture.json \
+  --controls artifacts/baseline-alignment/host-flows-f536734-offline-v4-prepared/inputs/controls.json \
+  --source-version "$(git rev-parse HEAD)" --repeats 1
+"$MILAI_PYTHON" tools/run_baseline_host_flows.py serial-run \
+  --root artifacts/function-first-small/host14-v1 --schedule-note "Root确认原资源闭合后的首次单轮派发"
+```
+
+已有根不重复运行；实际执行固定到记录的候选源码目录。基准用同配置的run_baseline_alignment.py，
+predict与score分开显式指定--backend MiLAi-memory-only，不省略backend启动全队列。
+
+旧候选有限对称来源审查已完成：前三开发用户各取每臂最早Correct与非Correct，共12项；两臂各3Correct
+均来源一致，Raw3非Correct沿既有来源结论，M3非Correct分别为时间适用语气过强、来源一致但Judge{}、
+Reader视图忠实却遗漏原会话可支持的有限回答。0新增请求、原产物保持；这不是新Q规定的同题样本。
+新Q已在预测前固定旧Raw按题序首3Correct＋首3非Correct，同六题审新M，保留此前参考接触边界，
+不估计总体来源准确率、不改官方分数。新Q还将报告同73题的四格配对及invalid／缺答。
+
+01408464自身Fast38122310218已SUCCESS，Full38122310216为SKIPPED。候选ad348a9a的
+Fast38155334906 FAILED：foundation中2个既有mock还精确限定旧v9分类字段，未含新增可选response_scope；
+其余642项及边界／Lab fast通过。测试已精确补字段／enum和optional约束，两失败参数复测通过，
+旧decision缺省及重开无新分类调用仍验证；生产逻辑未因测试修改。Full38155334910为SKIPPED。
+下一源码头仍核查自己的CI，不重跑旧头以覆盖失败记录。
+以下为各自历史时点的观察，不能用其中的RUNNING／待审查覆盖本次闭合证据。
+
+## 2026-10-11：MiLAi预测闭合、独立评分开始，真实维护与阅读问题仍存在
+
+**预测闭合07:36:53 UTC，评分首次启动07:38:45 UTC；以下交付核查固定07:40:27 UTC。**
+本轮M始终冻结6ab512cb，原四用户／银行、QA20／维护K10、Source-only前缀及预算不变。
+32会话／73文本答案／0已知缺答完整保存，PREDICTIONS_SAVED、resources_settled=true；
+父776063／worker776066退出、原租约可用，189生成／3,270,303 known＝charged／261,612 embedding，
+新增unknown0／0、limits不变。原H最后只读请求的unknown及110,954预占未清除或退款。
+独立M评分父1071578／worker1071580实际运行，仅消费保存产物，不重跑预测或创建预测银行。
+Raw官方55／73及其来源审查保持，M质量结果待评分闭合；当前不作三方排名。
+
+M的73份Reader视图中10份发生实际容量分页：21个确认页，峰值输入32,251≤32,256，
+pending均0、final_body_delivered均true；其最终原文工作集数量为4／3／9／1／0／0／4／0／4／8。
+三个空最终工作集仍有文本输出，不能据此称用户问题完成。源池是否充分、之前提名是否被替换、
+原回答是否完成要求正按实际Source／池／请求作离线审查，不能只从材料条数推定。
+本轮实际源码不含b498累积提名修复，已有真实分页也不证明新的接口语义效果。
+
+### 本轮来源维护审查：效果与语义分开
+
+审查固定盘点26个已闭合维护事件（8／8／8／2），不冒充整臂32个事件的全量语义验收。
+85次真实提交＝79 create＋6 edit，其中2 append／4 replace；两次空提案、unprocessed=0。
+定向来源语义审查12个事件（其中一个核查旧Source支持），没有读取Gold／persona／QA值或未来，
+0新模型／HTTP／实际DB、0方法修改。初始四份会话检查点仅探测顶层键名，其值未作语义证据。
+
+| 实际来源事件（开发顺序及session索引） | 可证结果 | 未验证边界 |
+|---|---|---|
+| 用户1／5 | 7条带计划限定的候选及完整原文实际送达Editor；空提案／无回执，23条旧值逐项不变，新限定未形成 | 这是已审查前缀最早确认断点，不直接赋官方更新标签或推算QA影响 |
+| 用户1／6 | 两次append落实新增陈述，各目标4个旧单位完整保留为5单位，21条非目标记录不变 | 局部正例，不是全部变化与保持均通过 |
+| 用户1／7 | 新状态实际创建，已送达的旧当前总述未改；原文改善被加强为解决 | 后续冲突和问答影响未判定，提交不证明语义正确 |
+| 用户3／0 | 主体限定错配从Extractor传播到实际提交 | 不能归为Reader未交付；未读取QA或Gold判断影响 |
+| 用户3／3 | replace落实状态变化，却从当前合并单位丢掉未被新Source撤销的独立旧属性 | 原Source／历史保留与当前语义损伤分列，不声称物理擦除 |
+
+完整Source、Editor输入、模型提案、回执和before／after证明上述断点，不能把它们归为工具未提供，
+也不借旧D空提案、旧Host冲突或工程COMPLETED代替本轮证据。实际持久效果、含义正确和任务完成继续分存。
+当前候选继续冻结取质量反馈，不增加事后纠错或新模块。M评分／资源闭合后首次执行原Host42及六次SDK重开；
+单项固定池E2仍只准备，必要E3及候选E4未完成。当前发布头须核对自身CI，以下旧观察保留原时点。
+
+## 2026-10-11：Raw取得完整官方质量反馈，MiLAi首次独立预测已启动
+
+**Raw评分闭合：06:21:16 UTC；M启动：06:22:23 UTC，观察：06:22:51 UTC。**
+沿原冻结6ab和保存预测，Raw的73个QA机会完成官方评分：Correct55、Hallucination17、invalid1、
+missing0，全部机会正确率55／73＝75.3%。invalid保留在分母；有效判断口径55／72＝76.4%另列，
+不以有效分母替换主结果。官方标签保持，17个Hallucination尚不能全部认定为已证实事实编造，
+独立来源／参考冲突审查待完成。形成与更新指标为N/A，不能补成0或假造抽取输出。
+
+**来源审查于06:40:17 UTC完成，原评分不改。** 对17个官方Hallucination与1个invalid先审实际
+交付原文、输出、主体／角色／时间／模态，再读取参考及Judge：17个Hallucination中10项来源一致、
+7项有实质不支持部分；invalid的回答来源一致。7项涉及数值1、姓名扩展1、时间／直接引语归属3、
+模态强化2；未另确认把历史assistant解释直接转写为用户原话。该审查只覆盖18项，未审55个Correct，
+不能由此推算全部73题的真实正确率，也不能认定来源一致等于外部世界事实已验证。
+16个Judge理由涉及参考记忆点比实际已交付原文范围窄，其中10项来源一致、6项自身仍有来源问题；
+不能把16项当成全正确或改官方标签。另确认1项Source-reference conflict：参考证据把仍在设想的
+方案写成已实施；实际外部效果未经验证。另1项参考边界未能确认冲突，这些轴可重叠、不能相加。
+唯一invalid的Judge正常stop，最终内容为有效JSON空对象{}，缺evaluation_result，官方读取为None；
+不是Reader缺答，不从reasoning补标签、不再调用Judge。18项均为原完整直接交付及正常Reader响应，
+不能归因为分页或材料未送达。审查新增模型／HTTP／实际DB0、方法修改0，129份原产物未变；
+只保存到既有ignored Raw目录，公开不输出原问题／答案／私有正文，不计算修正准确率。
+
+| 开发用户（原配置顺序） | Correct／QA机会 | 缺答／invalid |
+|---|---:|---:|
+| 1 | 15／20 | 0／1 |
+| 2 | 11／12 | 0／0 |
+| 3 | 16／22 | 0／0 |
+| 4 | 13／19 | 0／0 |
+
+评分为独立首次73次Judge生成／179,908 known＝charged tokens／0 embedding；新增unknown0／0，
+limits不变，父worker退出、所选臂SCORED／resources_settled=true、原租约可用。
+没有重跑预测、创建新预测银行、恢复H或改变官方回答。Raw预测成本仍为73生成／1,061,690，
+评分成本另列；小前缀原文参照不能升级为完整长历史检索成绩或方法排名。
+
+Root随后首次启动原E1中未使用的MiLAi臂，仍冻结`6ab512cb355bdcd71ab2cea45f65ff4ce13818a0`，
+原config、manifest银行、32／73／72机会及连续账本不变；父776063／worker776066存在，
+06:22:51 UTC尚无完整会话或QA检查点。原套件RUNNING陈旧记录保留，另存首次M调度证据。
+该M不包含最新工作集修复，不借用较早53答案＋20缺答，不续接H，不自动评分或重试。
+M完整预测及资源闭合后再独立评分；原42消息Host／六次SDK重开随后串行执行，尚未派发。
+SDK脚本只准备，遗忘须据实际目标／回执／历史验公共可见性，仍需分别判断模型、公开交付和持久效果。
+
+工作集修复已推送并远端核对为`b498f62856d44b4791f028d561013ac8c9c99333`，
+该头自身[Fast 38117143162](https://github.com/minguselandy/MiLAi/actions/runs/38117143162)成功，
+[Full 38117143093](https://github.com/minguselandy/MiLAi/actions/runs/38117143093)skipped。
+固定真实171条池的单项Reader诊断已离线准备为b498新条件，原问题／日期／模型与12调用预算、
+32,256完整输入上限保持、重复固定一次；尚未派发，不运行native retain／Writer、不指定gold材料。
+该工程能力尚无实际语义效果证据；后续报告头须核查自身CI。完整三方结果、Host验收、必要E3和
+冻结E4仍未完成，目标不能因一次评分或push而收口。以下观察保留其原时点。
+
+## 2026-10-11：迁移核查发现运行中断，分页工作集修复待实际验证
+
+**固定核查：06:00:50 UTC／北京时间14:00:50；专属资源闭合：06:04:01 UTC。**
+磁盘根记录仍为RUNNING，但原supervisor／worker均已不存在，最后实验文件停在00:11:32 UTC。
+没有发现仍在执行预测的进程；不因旧会话句柄不可用而重启。原冻结源码仍为
+`6ab512cb355bdcd71ab2cea45f65ff4ce13818a0`，原根记录、配置、预测及银行均保留。
+进程退出原因和退出码未取得，不能写为用户取消、正常完成或原生服务超时。
+
+| 本轮冻结6ab产物 | 核查结果 | 结论边界 |
+|---|---|---|
+| RawRAG-local | 32完整会话／73文本答案／0缺答，PREDICTIONS_SAVED且resources_settled=true | 尚未评分；本轮73生成／1,061,690 known＝charged／0 embedding |
+| Hindsight-native-local-recall | 7完整会话，19个QA检查点＝18文本答案＋1已知缺答；没有终态 | 另一个QA停在分页请求，没有文本答案或最终交付；不称完整73题结果 |
+| MiLAi-memory-only | 尚未首次派发 | 不借用旧M结果，不补零 |
+| Judge／Host42 | 尚未派发；f536 v4仍为PREPARED_NOT_DISPATCHED | 完整Host、六次独立SDK重开及语义验收待执行 |
+
+已知缺答为read_call_limit，before_final_http、request_sent=false：11页已确认、254条选择、
+仍有1条pending，selection_complete=false、final_body_delivered=false、evidence_sufficiency=unchecked。
+这属于现有读取预算内未完成交付，保留机会和null，不加次数、不重试，不当作文本答案或语义通过。
+另一个未完成QA的第4页有request、无response；4页已确认、38条pending且未最终交付。
+请求文件和发送前预占不能证明HTTP实际发送或服务端完成，该次状态仍unknown。
+
+截至核查，原连续账本相对本轮起点增加216个生成请求，3,717,429 known、3,828,383 charged，
+15,903 embedding known；新增unknown为generation 1／embedding 0，limits不变。
+差额110,954恰为最后未确认分页请求的保守预占，保留原收费与unknown，不退款或重置。
+H原生桥60个生成、233个embedding均有确认回执；共同Reader有83个请求、82个响应。
+这是截至中断的实际账目，不是完整H阶段成本，也不能将本轮新增unknown归为历史unknown。
+
+Root在原租约下用公共SDK只核查已建银行的状态，pending_operations／pending_consolidation／
+pending.total／processing.total均为0，账本字节不变；原模型桥端口已关闭。
+确认原父worker消失、服务身份属于本轮孤儿后，按已有释放授权关闭专属H服务。
+06:04:01 UTC核验专属UID活动0、API监听关闭、原租约可用、账本不变；共享模型服务保持。
+随后现有Qwen运行／等待指标均为0。最后Reader发送与响应仍未确认，不据此重跑H或清除unknown。
+只在资源安全时显式评分完整保存的臂，或首次派发未运行臂；不回填中断前缀为三方比较。
+
+本次开发修复限定于material_pool容量分页：页级schema去掉keep_resident；item_indices提名
+默认累积，只有明确drop_item_indices才从最终重开工作集移除。每页提供final_reopen_candidates，
+复用原目录中的真实身份／时间／来源、最多384字符原文摘录与单条完整输入成本。
+导航不是答案证据，最终仍重开完整原件；导航和schema计入原完整输入预算。
+全池引用范围、direct可容纳时的一次回答、非分页／旧record／staged原keep合同、max_calls和
+最终调用预留、原文快照、owner／版本／权限及unknown停止保持。drop不删除记忆或授予修改权限。
+没有增加模型阶段、选择器、全量自动保留、gold下标或重试；原冻结6ab完全不含该修复。
+
+前序33项针对性单元测试、两文件Ruff及源文件strict mypy通过，本轮离线复核已有pytest工件与
+当前diff一致，未重复开发或重跑这些测试。仅Lab内部页级输入schema改变，Product／Archive、
+公开API／权限／Canonical不变；真实模型语义效果尚未验证。候选导航会消耗原预算，
+最终重开仍不可容纳时保持缺答合同。工程回退到38fb7b85，发布后的新头须核对自身CI。
+本轮diff检查通过；现有边界检查器在待提交的6,564条tracked路径及干净导出源码上通过。
+原工作树检查命中ignored的uv-cache空文件.git标记；该本地缓存保持，没有放宽检查器或删除缓存。
+继续完成实际评分、原Host连续任务、六次SDK重开，再按主要断点选择一项E2；必要E3和候选E4
+仍未完成。以下观察按其原时间解释，不能把早先RUNNING或0新增unknown当作当前状态。
+
+## 2026-10-11：用户恢复完整计划，新三方预测已实际启动
+
+用户于10月10日22:51 UTC明确“继续”，恢复原基线对齐开发与实验计划。Root继续沿用原连续账本与
+串行资源所有权；已取消12b运行及旧银行保留终态。新预测采用新的源码冻结及独立银行，不拼接旧前缀。
+派发前发现共同分页保存的whole_material_unavailable缺答未被HaluMem评分完整接受，LME也漏掉
+before_final_http已知缺答。现已补齐原分支：合法缺答保留机会分母、官方标签为空且不调Judge，
+未知结果及维护／Store失败仍停止。19项相关预测→评分检查、Ruff3文件、严格类型1源码通过，0真实模型。
+新三方于10月10日22:58:54 UTC实际启动，源码冻结为`6ab512cb355bdcd71ab2cea45f65ff4ce13818a0`，
+新根为`e1-local-v1-evidence-6ab512cb-v7-prepared`，12个独立新银行；每臂32会话／73题／72更新机会。
+沿用已声明的hindsight_evidence_v1和共同材料分页，不改原生形成／召回算法、模型、额度、K或时间前缀。
+**固定快照：10月10日23:28:03 UTC／北京时间10月11日07:28:03；不是后续实时状态。**
+
+| 本轮新运行 | 实际产物 | 结论边界 |
+|---|---|---|
+| RawRAG-local | 32会话／73文本答案／0缺答，PREDICTIONS_SAVED、resources_settled=true | 尚无Judge，不是73题全正确 |
+| Hindsight-native-local-recall | 4会话／9文本答案／0缺答，原生服务已started且ready，预测仍运行 | 已保存9份Reader视图均direct；尚无真实分页或最终重开证据 |
+| MiLAi-memory-only | 尚未开始 | 不补零、不借用旧M结果 |
+| Judge／Host42 | Judge尚未派发；f536 v4原42消息准备根尚未派发 | Root按原账本串行调度，预测／评分资源闭合后执行Host；完整功能未验收 |
+
+Raw本轮费用73生成请求／1,061,690 known＝charged tokens／0 embedding；新增unknown0／0、limits不变。
+不沿用已取消12b的1,060,957或较早D的1,060,772。H尚未闭合，当前不报告其完整阶段费用或资源释放。
+当前H原生API／PG属于已获恢复授权的新运行，旧停止时点的“资源已释放”不能用来描述本次活动资源。
+
+首份实际H返回中10条results、1条chunk、5条source_facts和9个实体形成17条共同材料；
+非诊断字段与原顺序保持，仅15处scores及trace留在完整存档，实体观察本次0。
+该题17条正文实际完整送达，23:13:07 UTC保存响应：输入6,695／输出602 tokens，stop。
+这是材料传递证据，尚未核查回答语义；1次Reader调用，分页确认0、最终原文重开0，原max_calls=12保持。
+
+派发前修复的源码自身[Fast 38093439981](https://github.com/minguselandy/MiLAi/actions/runs/38093439981)成功；
+[Full 38093439911](https://github.com/minguselandy/MiLAi/actions/runs/38093439911)为skipped，不写成Full通过。
+PR #121仍draft、未合并；main仍518aee4。Host功能源码未被这次benchmark缺答修复改变，
+准备根f536 v4包含最新效果／工具／进度输入组织，不借用更早739准备根。
+三臂可比评分、完整Host与六次SDK重开、E2主要断点诊断、必要E3和候选E4仍未完成；完整目标保持进行中。
+以下“真实实验保持停止”是此前停止时点的记录，已被本次用户恢复指令取代，不改写历史失败或评分结果。
+
+### 真实分页补充：交付已闭合，最终工作集仍丢失必要证据
+
+23:33:59 UTC核查首个实际超限题：5个确认页分别62／46／53／10／10条，
+覆盖171条不同材料、累计181次条目交付。末页重读10条来自Reader多轮选择推进，非HTTP或retain重试。
+最终10条原文与保存快照逐字段、正文、顺序精确相等，pending=0、final_body_delivered=true，文本答案已保存。
+共6次Reader HTTP，低于原max_calls=12；页输入峰值32,066≤32,256，最终输入8,020。
+累计输入125,528／输出11,237／usage136,765，不能只据最后一次输入变短宣布整体费用下降。
+
+23:44 UTC完成该题无Gold来源审查：问题所需的主体关联、旧日期状态、当日原文和说话角色
+已在检索池及实际第二页中出现；当日9个chunk逐条对应已到达Raw原文、覆盖52条实际turn。
+该题第二页选择了10条相关材料；第三页只显示其下标，未重现已选内容或导航，
+随后keep_resident=false已将相关选择整体替掉。之后又换为末页十条，
+最终只剩九条无关来源事实和一条观察为空的实体表，
+必要证据没有保留到最终回答。最终模型按仅使用最终正文的合同拒绝作出确定结论，
+未确认它编造相反事实；但读取选择流程没有完成用户问题，不能将这题的文本答案计为语义成功。
+最早已确认断点是“必要证据已交付，却从最终工作集丢失”，不是未召回、字段投影丢失或分页未执行。
+问题和read_goal仍在，不能归因于读取目的完全消失。keep_resident是模型必填选择，
+不是程序漏参数时的默认行为；当前页提名与整个最终工作集替换复用同一操作，旧选择又只显示下标。
+相关原文仍需区分用户表达与历史助手概括，不把后者强化成用户逐字声明。
+此审查未查看参考答案、未来会话或persona，0新增模型／HTTP／DB，不赋官方标签或推断方法排名。
+
+23:42:39 UTC本轮实际前缀为Raw32／73文本答案／0工程缺答且资源闭合；
+H6会话／12文本答案／0工程缺答，其中3题真实分页与原文交付闭合；M未开始、Judge0。
+“0工程缺答”只指没有已知无文本／容量缺答，不保证模型回答了问题。当前运行继续冻结6ab512cb，
+不热改、回填或针对该题派发新模型。下一步先完成现有预测／评分，再按主要断点评价现有工作集组织。
+报告提交35abf714自身Fast38095208647已成功、Full38095208654 skipped；后续提交另核对自身CI。
+
+## 2026-10-11：离线修复材料交付与单臂评分入口，真实实验保持停止
+
+**最新工程源码：`dda926f6c2a23871a34b3cd438e3f60c9d7255e6`；资源复核：10月10日17:33:34 UTC／北京时间10月11日01:33:34。**
+PR #121仍为draft、未合并；已合并main仍为`518aee4`。最近真实三方运行仍冻结`12b87716`，
+本节的新呈现条件没有回填旧实验。取消实验的父／worker／原生API／PG均不存在，专属UID残留0、
+8888监听0、原HTTP Owner租约FREE；共享模型服务保持原状。本次只做离线开发和保存产物的复算，
+新增真实模型／Judge／原生服务调用均0，没有重启失败银行、派发准备好的Host或删除原产物。
+
+当前实际成果保持：RawRAG32会话／73答案／0缺答；Hindsight6会话／12题＝9答案＋3容量缺答；
+本次MiLAi未开始、Judge0。较早独立M的53答案＋20容量缺答和旧Host的两次真实保存仍单列。
+**三方未完成可比评分，不能判断MiLAi方法优势。当前首先阻断的是材料交付和运行流程，语义维护也有独立失败。**
+
+### 四个小工作包的实际进展
+
+| 工作 | 当前实现与离线证据 | 尚未证明 |
+|---|---|---|
+| 原生存档与Reader视图分开 | `hindsight_evidence_v1`保留完整native_return；仅把已识别的诊断分数、trace和统计移出默认Reader，逐字段登记archive-only路径；实体观察、时间、主体、来源联系、限定与未知扩展保留 | 移出诊断字段后整池仍超限；不是Hindsight回答能力成绩 |
+| 三后端共同只读分页 | 材料引用为保存快照＋materials实际下标，RawRAG／H／M无需伪造record_id或revision；复用既有分页、工作集和最终原文重开，三种delivery的合成材料检查通过 | 真实模型是否稳定选择充分证据、所有长期材料是否可读 |
+| 完整单臂独立评分 | 显式score只要求所选臂PREDICTIONS_SAVED且resources_settled=true，其他臂FAILED／未开始不再阻止；仍用同一Judge、标签、全部机会分母与原费用合同 | 未调度Judge，不能将完整答案数量当正确率或形成跨臂排名 |
+| Host效果与下一步行动分开 | 输入依次呈现实际效果／回执、当前工具与操作限制、请求进度／未完成工作；工具缺席不能否认已提交效果，提交数不证明内容或整项任务完成 | 原“无法保存”错误是否被真实模型修复；过时总述与局部例外冲突仍待语义验收 |
+
+能容纳的direct材料仍直接进入一次Reader；超限才复用共同分页。分页只返回真实下标选择，
+不生成事实摘要；最后按下标重开实际原文。导航摘录不是答案证据，done不能跳过待送页。
+只读位置引用不取得MiLAi修改／遗忘权限；原owner、版本、范围、可见性合同保持。
+这是新的交付条件，不是对冻结12b中三次容量缺答的“恢复成功”。
+
+### 三份真实H超限返回的字段与分页复算
+
+三份返回各有104条results、64条source_facts、76个实体；chunks为16／16／15。
+实体观察在这三份原件中为空，但有事实内容的观察仍在新合同中保留。
+64条source_facts的ID／正文与world事实重复，其实体、标签及部分metadata不同，未据正文相同删除。
+逐条results.text、source_facts.text与chunks.text的原文token计数之和为14,333／14,312／14,325，
+保留重复、不含context及JSON包装；分别为3,268＋2,044＋9,021／9,000／9,013。
+context另有2,680，实体观察正文本次0；这些分项不是去重事实数、完整语义预算或完整请求成本。
+
+| 保存返回 | 旧共同材料JSON | 新共同材料JSON | 固定合成问题下，完整新direct请求 | 离线页数／最大页输入 |
+|---|---:|---:|---:|---:|
+| qa0 | 81,044 | 74,905 | 76,044 | 4／32,255 |
+| qa1 | 81,345 | 75,340 | 76,479 | 4／32,187 |
+| qa2 | 82,344 | 75,562 | 76,697 | 4／31,967 |
+
+前两列是共同材料JSON，不是完整请求；原题实际被拒输入81,471／81,775／82,771保持原记录。
+后两列使用本地原Qwen tokenizer、完整Reader模板和固定合成问题／日期，未读取原QA或gold。
+第一次通用分页复算仍失败：重复长引用和全185条目录使页面在正文交付前不可容纳。
+修复后模型输入共享一次快照标识、以memory_item_indices对齐正文、页面仅展示当页目录；
+内部完整引用、全池枚举、原文和权限未改变，初始空工作集的导航超限也进入同一分页循环。
+
+修复后的185／185／184条材料均按原顺序经过4个脚本正文页，再重开条目0的完整原文；
+每份总计5次脚本调用，低于原max_calls=12（预留最终回答），最大页32,255≤32,256。
+QA top20是检索项数，不是20次模型调用额度。脚本选择固定下标、不生成真实回答，
+confirmed HTTP页面0，真实模型／Judge／HTTP／DB调用0；原返回哈希与新快照字节保持。
+这证明这三份实际材料的包装与续读控制流可容纳，不证明真实交付、证据充分性或语义正确。
+离线失败与成功回执、原字段分解均保存到ignored的既有artifacts目录，没有新增报告体系。
+
+### 仍须保留的实验与语义边界
+
+RawRAG当前按session索引、每用户前8会话、QA top20且无阈值，通常交付全部已到达会话；
+本轮是原文信息保留参照，尚未检验长历史候选淘汰。H本地Qwen／BGE／RRF加共同Reader的配置
+未使用完整reflect回答流程，不称论文最优端到端复现。旧M20／73容量缺答的全机会正确率上界为53／73≈72.6%，
+这是算术上界，不是已测准确率；缺答不得移出分母。
+
+旧Host rev2过时总述实际已送达Editor，原合同也允许同一事项内多个编辑；模型仅新增例外，
+不能把该冲突归因于程序未交付旧总述。此次输入组织不增加事后LLM纠错、领域删除规则或强制写入。
+模型原答案、系统最终交付、实际持久效果仍分存评价；错误答案后追加正确回执不能算无矛盾交付。
+原42消息准备根仍冻结739deaee，不包含本节新Host输入组织，不能直接当作新源码候选派发。
+
+Root集成检查96项通过，另3项纯H投影和6项Host效果／工具目录检查通过；Ruff10文件、
+strict mypy5源码与diff检查通过。三个开发分工按材料呈现、公共读取合同、Host状态执行，Root维护公共合同。
+检查仅用脚本替身／临时合成SQLite；没有读取原数据库或启动真实模型。
+前一发布头58292061自身[Fast 38068354242](https://github.com/minguselandy/MiLAi/actions/runs/38068354242)成功，
+[Full 38068354248](https://github.com/minguselandy/MiLAi/actions/runs/38068354248)为skipped；本次发布头的自身CI在PR核对。
+只改Lab内部呈现与运行入口，Product／Archive、公开Schema／权限／Canonical不变，运行旧产物不改。
+工程修复可按提交回退到58292061；完整Host／六次SDK重开／E2–E4仍未完成，Product仍CANDIDATE／NO_GO。
+**真实实验保持停止。显式单臂评分入口已经可用，但需要新的运行授权才派发Judge；完整方法比较仍待可比数据。**
+
+以下停止快照及更早记录保留其原时点与原源码含义。
+
+## 2026-10-11：按用户要求停止实验、释放资源，整理当前结论
+
+**实际停止：2026-10-10 16:28:29 UTC／北京时间10月11日00:28:29；资源核验：16:32:01 UTC。**
+用户要求“释放实验资源，分析实验情况和存在问题”后，Root于16:28:18 UTC向当前E1 worker发送SIGINT。
+原有关闭路径完成已派发原生工作并退出；父／worker、原生API和PostgreSQL进程均已退出，
+API监听关闭、专属UID残留0、原连续账本HTTP Owner租约FREE。
+新增generation／embedding unknown均0，limits不变，原预测、缺答、来源、实际效果和费用全部保留。
+套件为STOPPED；H终态字段FAILED的原因为KeyboardInterrupt，close_error为空、resources_settled=true，
+这是用户取消，不是本次再次出现原生完成等待超时。未重启、退款、自动评分或派发新Host。
+
+本次E1仍冻结`12b87716f399cadd0c63c6db21f4639fb2f1511e`，12个新银行标识；
+每臂计划32会话／73 QA／72更新机会，来源、共同Reader、QA20、维护／隔离更新K10及原连续账本保持。
+本地原生完成等待1800秒、单次模型HTTP300秒分别声明。
+
+| 工作／运行 | 当前实际结果 | 结论边界 |
+|---|---|---|
+| E0接通与实际重开 | 三臂各3预测；原文／原生事实／语义记录和来源时间保持，资源闭合 | 证明接线与持久，不证明QA正确或时间推断正确 |
+| 本次E1 RawRAG | 32完整会话／73答案／0缺答，PREDICTIONS_SAVED、资源闭合 | 无Judge，不是73题全正确 |
+| 本次E1 Hindsight | 6完整会话／12题检查点＝9答案＋3容量缺答；后续未完成部分保持未运行 | 被用户取消的前缀，不能构成整臂成绩 |
+| 本次E1 MiLAi | 未开始 | 不补零、不拼入旧M预测 |
+| 较早冻结D独立M | 32会话／73题＝53答案＋20发送前容量缺答，资源闭合 | 与本次不同运行；旧H失败阻止原三方统一评分，Judge0 |
+| 较早冻结D Host42 | 1COMPLETED／1FAILED／40NOT_RUN，实际两次保存、资源已闭合 | 首条错误反馈，第二条提交后包装超限；COMPLETED不代表语义通过 |
+| 新Host工程配置 | 新源码739deaee、原8＋6消息各三次，共42条，离线prepare成功 | 原配置／fixture／controls完整字节保持，实际银行0／模型0，未派发 |
+
+本次E1闭合费用：140生成请求／1,902,918 known＝charged tokens／14,024 embedding tokens。
+其中Raw阶段73生成／1,060,957 known＝charged／0 embedding；本轮H实际58次原生生成、232次embedding
+桥接回执全部usage确认，另有9次共同Reader生成。费用包含接通与维护，不只计算已答QA。
+不沿用旧D的Raw费用1,060,772，也不把未知累计值清零；这里报告的是本次新增unknown0／0。
+所有实际材料、HTTP、数据库和私有Source保持ignored，公开报告只记录汇总与证据边界。
+
+### 当前已经确认的问题
+
+1. **完整证据交付仍是主要工程断点。** 本次H三题分别需要81,471／81,775／82,771输入tokens，
+   超过共同Reader的32,256上限；全部before_http、request_sent=false，null与原分母保留。
+   较早M也有20题35,532–42,854超限。共同投影已修复旧八事项断点，但没有解决全部长期输入；
+   原生正文预算也不能覆盖完整JSON的ID、scores和元数据。已声明分页计划而未执行，不算功能完成。
+2. **信息送达与实际语义维护之间仍有缺口。** 旧M的Source-only审查确认：首用户第六次的新限定／计划
+   已提取并送到Editor，Editor却返回空提案、无提交回执；前后21条状态一致，到第八次仍未绑定该Source。
+   此证据未使用QA／gold，证明一次维护漏写；不能代替QA标签，也不能把所有空提案都判错。
+3. **实际保存与模型反馈、局部变化与旧含义仍不一致。** 旧Host首条真实提交rev1，模型却回答无法保存；
+   程序追加回执仍保留原矛盾。第二条真实提交rev2后才包装失败，不能称未保存；rev2仍同时保留过时的
+   “两区均无单独安排”总述与新增北区例外。未执行的第三条Reader结果未知，完整遗忘、历史与实时链也未验收。
+4. **当前数据不足以支持方法排名。** 本次三方未全部闭合，Judge0；旧D与本次不拼接。
+   benchmark Editor thinking=True／输出32768与普通Host Editor thinking=False／输出8192保持分列。
+   五臂、LME完整历史与原28case入口已接线，E3／E4实际未运行；入口存在和检查通过不是实验成绩。
+
+### 本轮已完成的工程修复及其边界
+
+Host反馈修复`84fac247`按实际成功提交汇总维护／工具回执，按记录和版本去重；
+no_change、拒绝、unknown不计新增提交。两份旧A0实际输入离线重投影的确认数均0→1，原回执保持。
+这修复了程序状态表达，但模型输入原本也已有实际维护回执，不能据此保证模型已正确理解。
+
+Host投影修复`739deaee`只在既有单层表共享完全相同的有向关系元数据，方向／类型／身份保留，
+操作目标和句柄保持literal，同名原字段保守原样返回；benchmark投影及共同说明未改。
+旧A1保存态完整生产路径重建为5记录单元＋1当前Source片段：8,548→7,731 tokens，
+低于原8192限额461 tokens，全部wrapper计入、展开值完全相等，Root独立重投影确认。
+原拒绝前完整包没有交付trace，因此这是保存态重建，不是实际Reader成功或全局容量解决。
+
+两项修复合流后604项读取／编辑／权限／Host检查通过，Ruff四文件、strict mypy两源码通过；
+无真实模型／原生API／PG调用，测试使用临时合成SQLite，原Host数据库哈希不变。
+新Host根仅完成准备，原42条流程与六次独立公开SDK重开仍未运行；SDK读取会签发凭据，
+重开核查应记录该元数据效果，不能称物理只读。
+
+`d1d96b5f`自身Fast38064907618曾因新增五臂测试被无LangGraph的core环境误收集而失败；
+`c404d423`把测试接入既有Foundation组，同步Fast／Full列表和矩阵，覆盖未取消。
+c404自身Fast38066195600成功，Full38066195629 skipped。后续提交须核对各自CI，Full跳过不称通过。
+
+后续优先保留现有架构：先完成实际必要证据的续读，再让一次局部编辑看到完整受影响语义，
+并用原三个连续流程确认保存反馈、历史／实时证据和遗忘效果。复用已有短target、read_goal与工具，
+不重复建设共同Reader、单元检索或增加新检查器／记忆模块。
+**当前按用户要求不再调度实验。E2–E4和完整Host验收仍未完成，没有最终候选或方法优势结论。**
+
+以下保留10月10日各旧时点的运行、失败与费用；当前状态以上述停止与资源核验为准。
+
+## 2026-10-10：M 预测闭合，Host 第二条容量失败停止
+
+冻结`d50351a8`的独立M于15:20:43 UTC／北京时间23:20:43正常闭合，32会话／73 QA机会：
+53答案、20缺答，`PREDICTIONS_SAVED / resources_settled=true`，原父／worker已退出。
+四用户答案／机会分别为20／20、12／12、12／22、9／19；这不是正确率。
+20缺答全部是发送前容量失败，输入35,532–42,854＞32,256，`request_sent=false`；
+实际材料、null及对应分母保留。阶段费用148生成／2,609,788 known＝charged／342,083 embedding，
+新增unknown0／0、原limits不变。原套件STOPPED及H失败保持，Judge0，没有完整三方评分或排名。
+
+只读核查第一用户八次维护确认一项最早漏写：第六次的新限定／计划已被提取并实际交付Editor，
+但Editor返回空提案、提交回执为空、`semantic_write_performed=false`；前后21条保存态完全一致，
+到第八次该Source仍未绑定语义记录。核查只使用实际Source、维护HTTP和保存快照，未读QA／gold；
+这是已交付信息未形成语义版本的证据，不是本轮QA标签或全部后续错误的归因。
+
+Root在M及原生资源真实闭合、原租约FREE后，于15:22:50 UTC启动冻结D的Host原42消息，
+15:25:04 UTC因`V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT`停止：1条COMPLETED、1条FAILED、
+40条NOT_RUN。两条原故事各重复三次的范围保留，未执行部分不能记为通过。
+第一条真实提交revision1，模型却调用未提供的保存工具并回答无法保存；程序追加实际提交回执，
+原错误仍在，原模型答案及完整交付均失败。第二条维护真实提交revision2后才在材料包装处失败，
+不能将其写成没有保存。实际模型输入已包含维护提交回执，失败不是回执未送达。
+本阶段9生成／54,816 known＝charged／299 embedding、新unknown0／0、原limits不变。
+父及两条消息进程退出，原租约FREE、原生UID残留0；新进程通过公开SDK重开同一银行，
+确认当前revision2及旧revision1仍在，0模型调用。完整历史／遗忘／实时查询与六次重开验收未完成。
+旧失败根和全部效果保留；后续修复在新根集中运行，不自动重启或重放已提交维护。
+
+后续必要入口已补齐：仅MiLAi后端读取既有单个`benchmark.arm`，默认M，复用五臂原方法；
+外部后端不受该选择影响。LongMemEval复用现有完整历史循环、每case实际opaque bank与owner隔离，
+显式`--benchmark longmemeval`及`longmemeval-complete-history`，现有配置登记原28个cleaned case。
+确认的容量／length／非文本只读缺答保留null及分母，跳过Judge，官方标签保持null；未知仍停止。
+普通旧LME默认fail-fast及路径保持。集成分支66相关检查、Ruff五文件、严格类型三源码、diff检查通过，
+验证未调用真实模型／原生API／PG；临时合成SQLite不代表实际迁移实验。E3／E4尚未运行。
+
+新E1仍冻结`12b87716`、1800秒完成等待，仅离线准备；失败Host的效果／资源核查闭合后，
+Root可串行调度独立三方实验，同时离线修复Host。全新空根、不热改D或拼接旧预测。
+E2–E4及完整Host语义验收仍未完成，Goal ACTIVE。
+已发布`f40375f0`自身Fast38059816718成功、Full38059816721 skipped；后续提交需核对各自CI。
+
+## 2026-10-10：完成等待修复已合流，新三方配置仅离线准备
+
+修复提交`12b87716`为原生后端增加独立`completion_timeout`，默认保持300秒；本地对齐配置
+显式1800秒，模型单次HTTP超时仍300秒。原生retain／recall／整理算法、材料、Reader、K、
+生成与embedding预算、重试0保持。集成后40项相关检查、Ruff三文件、严格类型一源码通过，
+本项核查没有真实模型、原生API或PG调用；不把模拟324秒检查称为原生实测修复。
+
+同一提交的新冻结源`source-12b8771`已在独立`e1-local-v1-completion-1800-v4-prepared`完成
+离线prepare：每臂32会话／73题／72更新机会、12新银行标识，实际银行／模型调用均0，尚未派发。
+当前M继续使用冻结`d50351a8`；固定14:23:54 UTC／北京时间22:23:54，已有7完整会话／12答案／
+0缺答，执行会话35332存活。原套件停止和H失败终态不变，Judge0，当前无统一方法排名。
+
+Root后续先完成M及其资源闭合，再执行已准备的原42消息Host流程与逐条语义／独立SDK重开核查，
+之后从新空银行集中运行1800秒配置。当前H的27容量缺答仍是未解决断点，等待修复不能填补它们。
+新增配置不拼旧前缀或恢复失败银行；全三臂预测闭合后再显式统一评分。E2–E4及实际Host尚未完成。
+
+## 2026-10-10：E1 原生整理超时停止，MiLAi 单臂独立启动
+
+**套件终态：14:02:48 UTC／北京时间22:02:48。** 冻结`d50351a8`的E1为`STOPPED`，
+原父617762／worker617767均已退出。RawRAG完成32会话／73答案、资源闭合；Hindsight保存
+27完整会话／63 QA检查点＝36答案＋27发送前容量缺答，其余10题尚未执行，不能填零或形成排名。
+
+Hindsight在第四用户第4会话的retain成功后，后续consolidation仍在处理；适配器的
+300秒整体完成等待触发`native_completion_deadline`。原生整理于14:02:46.598 UTC在关闭阶段
+实际完成，保存的最后状态pending／processing均为0；API／PG已关闭，UID996残留0，原租约FREE。
+该整理实际约323.27秒，其中五次串行模型调用各约53–75秒、合计318.35秒，全部单次调用成功；
+不是同步retain失败或单次模型HTTP超时。
+原方法终态仍为`FAILED / resources_settled=true`，不把随后排空改写为本会话QA成功。
+套件闭合费用285生成／3557201 known＝charged／49018 embedding、新unknown0／0、原limits不变，Judge0。
+
+**独立M调度：14:08:49 UTC／北京时间22:08:49。** Root使用原冻结CLI的`--backend MiLAi-memory-only`
+首次启动尚未使用的M银行，沿用同一源码、配置、原manifest银行标识与连续账本；独立调度／runtime／
+账本前后回执，不覆盖套件`STOPPED`、重启H或拼接前缀。父1056248／worker1056253，执行会话35332。
+固定14:10:24 UTC已有1个QA答案、尚无完整会话，本阶段费用待自身闭合，不能混入上述套件终态费用。
+
+现有统一评分入口要求三臂均`PREDICTIONS_SAVED`，H失败仍阻止评分；评分未启动、没有完整三方结果。
+Host原42消息仍准备完成但未执行。后续只修原生整体等待与单次HTTP超时的区分，冻结实验不热改；
+容量缺答、真实语义验证及E2–E4仍待处理。原501五方法按用户要求取消退出的记录继续保留。
+
+### 此前固定观察（已由上述终态更新）
+
+**较新固定观察：13:49:16 UTC／北京时间21:49:16。** 同一冻结`d50351a8`预测进程与
+执行会话48904仍存活。Hindsight前三用户的八会话前缀已完成，全臂24会话／54 QA检查点＝
+27答案＋27缺答；尚未闭合整个方法，第四用户继续按自然顺序处理。
+
+| Hindsight 开发用户 | 完整会话 | QA机会 | 答案 | 缺答 |
+|---|---:|---:|---:|---:|
+| 1 | 8 | 20 | 9 | 11 |
+| 2 | 8 | 12 | 9 | 3 |
+| 3 | 8 | 22 | 9 | 13 |
+
+27缺答均确认是发送前容量失败，输入59,259–114,828＞32,256；没有Reader HTTP请求，
+原材料／null分母保留。RawRAG仍为32会话／73答案、资源已闭合；M未开始、Judge0。
+答案数不等于正确数，当前无统一评分或方法排名。报告头`6d20db5a`自身
+[Fast 38054268907](https://github.com/minguselandy/MiLAi/actions/runs/38054268907)成功，
+[Full 38054268941](https://github.com/minguselandy/MiLAi/actions/runs/38054268941)为skipped。
+
+**后续固定观察：13:01:28 UTC／北京时间21:01:28。** 同一冻结`d50351a8`运行继续，
+Hindsight全臂10完整会话／26 QA检查点＝15答案＋11缺答；首用户8完整会话／20题＝
+9答案＋11缺答，第二用户2完整会话／6答案，其他用户尚未开始。MiLAi尚未开始，Judge0。
+首用户11缺答全部为`before_http`／`request_sent=false`的容量失败，输入79,724–114,828
+tokens超过32,256，原材料及null分母保留，未发送Reader请求或热修改冻结输入。
+全臂检查点可能包含后续用户，不能当成首用户题数。
+
+一份真实失败材料的只读重建精确得到79,758 tokens：89 results、66 source facts、16 chunks
+及附加元数据共172材料。results正文仅3,245 tokens，完整事实行为35,776；其余开销主要是
+ID、scores、metadata与时间字段。官方原生预算计算正文，不能覆盖完整返回JSON的所有开销。
+66 source facts的ID／正文虽与world结果重复，整行字段不同，不能直接合并；16 chunks正文
+互不相同，其中一份已被原生截断，不能删除后声称保留了全部原始范围。
+使用既有精确共享原语、显式H字段映射的离线演算得到49,326 tokens，展开值完全相等，
+但仍超限；这不是冻结投影的实际效果，也未解决该题。另一份正常返回到实际Reader输入
+已核对字段、顺序、正文和时间保持；两项核对均0 API／DB／模型调用，未读参考答案。
+文档提交`76dd2890`自身[Fast 38052504548](https://github.com/minguselandy/MiLAi/actions/runs/38052504548)
+成功，[Full 38052504534](https://github.com/minguselandy/MiLAi/actions/runs/38052504534)为skipped。
+
+**固定观察：12:31:19 UTC／北京时间20:31:19。** 本轮源码冻结为
+`d50351a876c98260b8e60a4f4481a98b8bab0ef3`，12:15:22 UTC 从全新12个银行启动，
+父617762／worker617767仍在运行，顺序为RawRAG→Hindsight→MiLAi。仍用原连续账本，
+不接续旧前缀、不自动重试或评分；每臂32会话／73 QA／72更新机会及原输入配置保持。
+
+| 后端 | 本时点实际进度 | 结论边界 |
+|---|---|---|
+| RawRAG-local | 32完整会话，73 QA检查点／73答案／0缺答，预测与资源已闭合 | 尚未评分，不代表73题正确 |
+| Hindsight-native-local-recall | 1完整会话，4 QA检查点／4答案 | 仍在预测，未闭合 |
+| MiLAi-memory-only | 尚未开始 | 不填零分 |
+
+RawRAG已闭合阶段费用为73生成请求、1060772 known＝charged tokens、embedding0、
+新增unknown0／0、原limits不变；其他臂运行中的预留不作为终态unknown报告。
+只有三臂成功预测且资源实际闭合后才另行统一评分，当前Judge0，无本轮方法排名。
+本执行源码自身[Fast 38051194461](https://github.com/minguselandy/MiLAi/actions/runs/38051194461)
+成功，[Full 38051194427](https://github.com/minguselandy/MiLAi/actions/runs/38051194427)为skipped。
+
+Host已在新根`host-flows-d50351a-actual-v1`按同一源码重新prepare，保留原两故事8＋6消息、
+各3次重复／共42消息；尚无bank、results、execution或模型调用。Host8192／thinking=True、
+Editor8192／thinking=False保持原功能配置；benchmark的32768／direct／QA20不迁入Host。
+E2–E4及实际Host连续流程仍待完成。原五方法已按用户要求退出，原结果和费用完整保留。
+
+### 先前接通与失败记录（按各自时点解释）
+
+**首次 E1 终态（11:58:52 UTC／北京时间19:58:52）**：冻结`9a9b84b`，RawRAG完成7会话，
+保存15个QA答案；第16个Reader响应为`stop`但`content=null`，reasoning有内容，实际usage完整：
+26663 prompt＋969 completion＝27632 total。Hindsight／MiLAi尚未开始，Judge0，资源已闭合。
+本阶段16生成请求／195662 known＝charged／embedding0／新增unknown0／0／原limits不变；
+失败根、原响应和费用保留，不回填答案、重试该题或拼接为新版结果。
+修订仅在既有QA缺答策略下识别这种完整且用量一致的无文本响应，保留null及全部机会，
+不从reasoning拼答案；fail-fast、仅length策略和未知响应仍停止。后续新E1从空银行运行，
+Reader模型／thinking／额度／K与来源不变。相关37检查及新增usage／策略拒绝1项通过，
+严格类型／Ruff通过；对原实际响应的只读识别网络0／账本不变，原终态仍FAILED。
+
+**最新 E0 接通核对（11:55:06 UTC／北京时间19:55:06）**：主预测冻结`28bf2410`，
+重开查询冻结`9a9b84b`，同一实际银行、独立日志、新检索请求，不再送Source／维护／Reader。
+RawRAG原会话、角色与时间保持；Hindsight重开同一实际PG实例／schema，10个原事实ID、
+来源document_id与时间字段保持，关闭后UID996残留0；M5条实际记录／revision／来源绑定保持，
+原报告时间、捕获时间与提交时间分别核对。这里只证明接通与持久，不证明事实生效时间推断或QA正确率。
+重开阶段0生成／263 embedding／新增unknown0／0；加主预测为13生成／80220 known＝charged／
+1309 embedding，Judge0。首个核查脚本误把原始日期字符串当ISO而失败，原失败回执保留；
+更正仅只读核对已保存的新检索及原Source，网络0、账本不变、查询重放0。
+
+**此前 E1 启动记录**：冻结`9a9b84bd83fc002932ef559cc85509cd3befd485`，父546823／worker546828，
+全新独立银行，每臂32会话／73 QA／72更新机会，RawRAG→Hindsight→MiLAi串行预测。
+仍用原连续账本；三臂预测及资源闭合后才另行统一评分。当前没有E1终态或方法排名，E2–E4及实际Host待完成。
+
+**此前 E0 实际预测闭合（11:44:12 UTC／北京时间19:44:12）**：冻结`28bf2410`，
+三后端各1会话／3答案，合计9答案；全部资源已确认关闭，Judge0，未宣称答案正确或方法排名。
+13生成请求、80220 known＝charged、embedding1046 tokens，新增unknown0／0、原limits不变。
+Hindsight实际启动维度发现及后续BGE均HTTP200，原请求不含dimensions；MiLAi实际形成5条revision1记录。
+下一步以独立审计目录重开同一实际状态，使用新检索请求核对来源与时间；不重放retain／维护／Reader。
+恢复入口补充Qwen／BGE模型ID一致性核对，重开检查源码另行声明；主预测`28bf2410`不热修改。
+
+**前次 E0 实际失败（11:24:29 UTC／北京时间19:24:29）**：冻结`fa86b95`，每臂1来源会话／3 QA。
+RawRAG完成3答案并关闭；Hindsight实际retain在BGE HTTP400处失败，尚无QA；MiLAi未开始，Judge0。
+原因是原生请求发送了`dimensions=1024`，本地非Matryoshka的BGE端点拒绝此参数。
+API／PG关闭、UID996残留0，失败根和HTTP保留；不称三方闭环或排名，也不继续该失败银行。
+本阶段4生成请求、17015 known＝charged；embedding known0／charged1243／新增unknown1，未退款。
+当前公开配置移除`HINDSIGHT_API_EMBEDDINGS_OPENAI_DIMENSIONS`：官方0.10.3将用一次实际
+启动请求发现维度，后续省略该参数。启动调用须沿原账本计费；新配置使用全新根和银行验证。
+持久性重开仅接受成功预测且真实闭合的原生部署，同一DB／schema／银行、独立日志与新bridge，
+不重放Source或Reader；当前失败Hindsight银行不具备该验收资格。
+
+**当前调度状态（11:15:33 UTC／北京时间19:15:33）**：用户明确要求“取消退出原实验”，
+原冻结5019968五方法已退出。HTTP结算后向worker1854771发送SIGINT，父进程1854770于
+11:15:01.896455 UTC记录STOPPED；实际两进程消失、原租约FREE，新增unknown0／0，原limits不变。
+已有来源／状态／预测／回执／费用完整保留，未重启、退款、热改、删除、拼接或评分。
+末尾保留126完整会话及其中306 QA；另有未完成会话8检查点，合计314检查点＝311答案＋3缺答。
+维护125 completed＋2 incomplete、246笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
+闭合成本为1010生成请求、12496217 known＝charged、embedding134668 tokens；这是取消后的前缀，
+不是五方法完成或方法排名。中断与资源关闭回执保存于ignored `cancel-five-dev277-5019968-user-20261010`。
+下方原运行中快照保留原时点含义，当前资源阻碍已解除；下一步按已固定`fa86b95`源码执行E0／E1。
+
+用户已继续执行[基线对齐、薄适配与方法有效性规划](MILAI_BASELINE_ALIGNMENT_ADAPTATION_AND_EFFECTIVENESS_PLAN_20261010.md)，
+并明确使用一名集成者和三名开发者。当前集成分支为
+`feat/lab-baseline-alignment-integration-20261010`，本次接线开发以 `d1d300a` 为基线，
+维护K10和原生资源闭合修复已合流（`7517387`），尚未冻结最终候选；
+共同设置见[本地协议卡](MILAI_BASELINE_ALIGNMENT_PROTOCOL_20261010.md)与
+`configs/milai-baseline-alignment-local-v1.json`。开发分支已发布为叠加于 #120 的
+[草稿 PR #121](https://github.com/minguselandy/MiLAi/pull/121)，未合并，未进入原 `5019968` 运行。
+`6d0446f` 自身 [Fast 38037419742](https://github.com/minguselandy/MiLAi/actions/runs/38037419742)
+成功；`4f859be` 自身 [Fast 38040183066](https://github.com/minguselandy/MiLAi/actions/runs/38040183066)
+失败，Foundation发现FunctionalVLLMClient未同步父类新增的accounting_request／on_event参数。
+现已同步并转交原运输逻辑，48项队列／预算／Owner检查和全目录232源码严格类型检查通过；
+修复提交`e71440c`自身 [Fast 38041375106](https://github.com/minguselandy/MiLAi/actions/runs/38041375106)
+成功，[Full 38041375109](https://github.com/minguselandy/MiLAi/actions/runs/38041375109)为skipped。
+旧`4f859be`的Full38040183074亦为skipped；后续提交仍按自己的head核对，不沿用旧CI。
+`67a013d`自身[Fast 38042193588](https://github.com/minguselandy/MiLAi/actions/runs/38042193588)
+成功，[Full 38042193596](https://github.com/minguselandy/MiLAi/actions/runs/38042193596)为skipped；
+本次 socket 修复的远端状态以 PR 当前提交自身检查为准。
+`fa86b95`自身[Fast 38044020175](https://github.com/minguselandy/MiLAi/actions/runs/38044020175)
+成功，[Full 38044019322](https://github.com/minguselandy/MiLAi/actions/runs/38044019322)为skipped；
+该提交CI确认全目录232源码类型及32项后端检查通过。源码归档及E0／E1实际模块导入已禁网核对，
+配置与准备清单一致；它是本次开发执行版本，不称最终确认候选。
+
+| 首轮后端 | 已接通能力 | 实际结果边界 |
+|---|---|---|
+| RawRAG-local | 原文完整会话的本地 BM25 检索，保留实际角色和时间；直接交付共同 Reader，不经过 Editor 或 Selector | 正常E0实际入库／3答案／重开原文已闭合，未评分；E1正在运行 |
+| Hindsight-native-local-recall | 官方 SDK／原生 retain、recall，独立 bank 和稳定会话 document_id；确认实际原生完成状态，完整返回与共同 Reader 分开保存 | 正常E0实际retain／3答案／同一DB重开查询及关闭已确认；此前400失败与未知费用保留 |
+| MiLAi-memory-only | 薄门面复用原 Source、MemoryService、维护 recipe 和 Reader；首轮直接读取实际语义状态及已有支持 | 正常E0实际5记录／3答案／重开Source与版本核对已闭合；本样例无更新，不代表更正已验证；无原文检索兜底 |
+
+首轮按 source-only 在线前缀准备：四个既有开发用户各前八会话，**每臂32会话、73 QA、72原生更新机会**，
+三臂共219个主 QA 输出机会。各后端／用户独立空库；每会话实际写入完成后仅答该会话问题，
+persona、gold、更新标签、未来会话和测试答案不进入方法输入或回写历史。
+维护候选 K10 保持原设置，与可计数后端 QA20、隔离更新评价 K10 分开；Hindsight 使用原生 token 预算，不能称 K20。
+共同 Reader 为既有 Qwen，thinking=True、output32768、context65536、margin512，完整输入限额32256；
+首轮不调用二次 Selector。RawRAG/Hindsight 没有真实会话抽取输出或可隔离的参考查询时，对应形成／更新指标为 N/A，
+不补造输出或让参考检索改变正常方法状态。三个后端预测结束后再独立评分。
+先前离线准备采用维护候选K20，实际模型调用为0；恢复K10后已在新根重新prepare，
+不同配置的准备不复用，不将其当成最终候选冻结或实际实验结果。
+新准备根为 ignored `artifacts/baseline-alignment/e1-local-v1-maintenance10-prepared`，
+网络连接禁用，确认每臂32／73／72机会及12个独立bank标识，未初始化银行或模型客户端。
+该准备早于托管服务配置；`4f859be`下已在另一空根
+`artifacts/baseline-alignment/e1-local-v1-managed-4f859be-prepared`重新prepare。
+网络连接禁用，同样确认每臂32／73／72机会及12个独立bank标识，未初始化银行或模型客户端；
+不是最终候选冻结，不复用不同配置的旧准备。
+
+Hindsight模型转接保留完整原生请求和响应，通过原VLLMClient／RunBudget预留及核对实际usage，
+不另建账本，不改写原生参数。已修复native embedding覆盖原HTTP序号、崩溃遗留重开、
+完整HTTP错误与未知费用混淆、非2xx合法usage未记账四处断点；未知不退款、不重试。
+每次native ingest／retrieve后、共同Reader之前核对运输失败，已成功的原生动作也不能绕过未知费用停止条件。
+托管服务使用独立非root UID／实际home、新pg0实例／schema和实际API监听归属；
+全部bank关闭后再关闭服务，核对脱离进程组的PG残留，最后关闭bridge和原客户端／租约。
+旧started没有实际closed证据或UID残留时，缓存预测和后续arm也不能绕过。
+官方0.10.3的OpenAI embedding环境factory漏传max_retries，现通过原生公开构造参数明确设0；
+使用MemoryEngine／create_app程序入口及同一事件循环的启动失败清理，不称原CLI运行。
+本地Qwen／BGE、rrf、retain0.1／consolidation0.0、thinkingTrue／output32768等差异明确报告，
+不称作者默认重排或纯同模型算法优势。见[准确部署约定](MILAI_BASELINE_ALIGNMENT_NATIVE_DEPLOYMENT_20261010.md)。
+
+独立安装已完成192个依赖包，实际专属UID996下禁网核对通过：API包0.10.3、pg0 0.15.2、
+Python3.11.13，native embedding维度1024／重试0／并发1／batch16；worker槽1、consolidation保留0。
+该安装核查未设置HOME覆盖，网络尝试和模型请求均0，API／DB／来源入库均未发生。
+实际版本清单和核对回执保存在ignored `native-installed-admission-e71440c`；前两次下载超时及
+核对脚本的字段预期错误保留，不计作模型样本。安装与配置可加载不等于原生功能验收。
+E0普通闭环已在`e0-one-source-e71440c-prepared`一次性空根prepare：首个既有开发来源，
+每臂1会话／3 QA／0更新机会，3独立bank标识；禁网、0模型／API／DB，Reader／Judge未运行。
+E0与E1银行分开，未提前授予三方闭环或最终候选冻结。
+随后实际空部署发现PostgreSQL仍将socket锁文件写到已满`/tmp`，五次原生PG启动尝试均失败，
+0模型请求；通过公开pg0 query配置`unix_socket_directories`指向专属UID可写短`/cra`路径。
+2026-10-10 **10:06:04 UTC／北京时间18:06:04**，新空实例实际健康、database connected、
+API监听PID／UID核对通过；10:06:05 UTC关闭后实际UID996存活进程0。
+原生API由SIGTERM退出（-15），PG停止日志与实际残留检查一致。
+模型URL均为本地拒绝所有请求的probe，实际请求0；未连接上游、未开原账本、未送Source，
+Reader／Judge未运行。实际根为ignored `native-empty-deployment-pg-socket-fixed-traversable`，
+基于`67a013d`加当时未提交socket修复。此前锁文件失败及验证父目录遍历权限错误各有独立回执，
+不覆盖失败，不算E0三方闭环或语义样本。
+socket配置变化后，新的`e1-local-v1-socket-prepared`／`e0-one-source-socket-v1-prepared`
+各自重新prepare，机会仍为每臂32／73／72与1／3／0，独立标识12与3。
+网络禁用、0模型／bank／客户端／账本／API／DB；不同配置准备不复用，尚未冻结最终候选。
+开发者按实际安装包只读复核36个声明环境变量，全部有解析路径；保留原生配置差异。
+retain及主consolidation output32768不覆盖原生dedup省略output limit的调用；该请求只按65536预留费用，
+不改wire。原生consolidation自适应二分仍可产生多个子batch请求，retry0不等于一次完整操作只调用模型一次。
+实际成本与效果仍待运行观察，细节见上述部署约定。
+
+RawRAG实际检查根为ignored `e0-raw-native-a0ec3bc`：既有开发用户第一来源会话入库、关闭、
+重开、实际原文查询，返回1项；角色／日期／逐轮时间／完整正文原样保持，模型0。
+共同Reader／Judge未运行；两个校验脚本的字段／tuple-list预期错误保留，随后只读核对原回执，
+没有重新入库、检索或模型重放。这是原生持久与查询证据，不是E0三方闭环或QA正确率。
+
+新增适配、准备与离线检查的**实际 Qwen／BGE／Judge 调用均为0**；E0、E1及最新42消息 Host流程
+尚未真实运行，也没有新语义分数。Host工具复用两条已曝光故事，各3次重复，共6故事运行／42消息，
+覆盖保存→更正→历史、业务续办→只补保存→新实时查询、遗忘→重开→查询三个共享流程。
+原模型候选、完整公开交付和实际操作回执分存；旧 `5019968` 两故事14消息的只读整理不算新候选验收，
+COMPLETED或脚本通过均不自动授予语义通过。
+`0cd1f37` 源码下重新调用原Host prepare：三个根均完成准备，42消息全部NOT_RUN，
+银行尚未创建；子进程socket连接禁用，实际新模型0。早先准备和检查脚本失败保留，不改成模型样本。
+
+Root最新受影响合组207项通过（14项公共入口＋17项后端＋35项wiring＋91项evaluator＋50项预算／容量／Owner）；
+先前139／133项及Root／Native复查含重叠，不另行相加。10个文件严格类型、活动src／tests／tools Ruff、
+267源码／6 packages／80 optional登记矩阵及active-package DAG通过。
+Tools边界首检发现新Host helper动态文件加载有3个unresolved；现使用可静态定位的原评价器模块导入，
+边界复查通过（11文件／20依赖／6历史私有），未放宽规则。原3个Host helper用例及严格类型复查通过，
+重复检查不另计入139或实验样本。
+上述均为工程检查，不是语义样本或真实模型验收。
+socket修复另核对32项公共入口／后端检查、1源码严格类型及受影响文件Ruff通过；
+与旧合组有重叠，不累加为新实验样本。开发者只读确认公开pg0配置／TCP连接／路径长度和
+权限及失败时UID清理边界，没有额外API／DB／模型调用。
+队列接口修复后的48项检查包含2个新增边界：完整原生请求及独立记账副本正确转交，
+合法usage结算／不合法usage保留预留，第二次请求仍被原队列额度拒绝；其余检查与旧组有重叠，不能相加。
+一次Ruff检查误扫data／studies归档范围，活动范围按原CI重查通过，归档未修改。
+原 `5540ac8` 的 [Fast 38028952446](https://github.com/minguselandy/MiLAi/actions/runs/38028952446)
+成功，[Full 38028952475](https://github.com/minguselandy/MiLAi/actions/runs/38028952475) skipped，
+只属于该旧 head，不能转作当前新代码的 CI 结果。
+
+原五方法固定观察为 **2026-10-10 07:53:54.506308 UTC／北京时间15:53:54.506308**：
+PID1854770匹配、原 HTTP 租约 OWNED、源码仍为 `5019968`；B0 保存98个完整会话，
+242题检查点＝240答案＋2已知缺答，其他四臂 NOT_STARTED、Judge0。
+维护97 completed＋2 incomplete，205笔唯一确认提交，`current_boundary_source_required`拒绝3次。
+生成780请求、9628792 known＝charged、embedding104963 tokens；该观察时点在途和新增 unknown 均为0。
+这些是运行前缀和固定时点成本，阶段仍未闭合，没有本轮方法排名。原缺答、拒绝和费用保留，不热改、重启或拼接新源码。
+
+较新固定观察 **08:13:32.501788 UTC／北京时间16:13:32.501788**：同一PID／租约／冻结源码仍匹配，
+B0已有103完整会话、248题检查点＝246答案＋2缺答；维护102 completed＋2 incomplete，
+208笔唯一确认提交、原边界拒绝3次；其他四臂未开始，Judge0。
+生成808请求、9993045 known／10037745 charged、embedding109071 tokens；1生成预留在途，
+不是已闭合unknown失败或阶段结算。前一观察原样保留，两者均不是方法分数。
+
+较新固定观察 **08:43:37.902469 UTC／北京时间16:43:37.902469**：同一PID／租约／冻结源码匹配，
+B0 107完整会话、268题检查点＝266答案＋2缺答；维护106 completed＋2 incomplete，
+218笔唯一确认提交、原边界拒绝3次；其他四臂未开始，Judge0。
+859生成请求、10527628 known＝charged、embedding115344 tokens；该时点无在途差额。
+原运行继续保存，仍未闭合，不能当作五方法排名。
+
+较新固定观察 **09:23:35.049588 UTC／北京时间17:23:35.049588**：同一PID／租约／冻结源码匹配，
+B0 113完整会话，完整会话中281题；另有当前未完成会话的3题检查点，合计284检查点＝282答案＋2缺答。
+维护112 completed＋2 incomplete、226笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
+912生成请求、11124152 known＝charged、embedding120009 tokens；该时点无在途差额。
+这仍是未闭合前缀，检查点数不能替代已完成会话题数或语义分数。
+
+较新固定观察 **09:34:15.186451 UTC／北京时间17:34:15.186451**：同一PID／租约／冻结源码匹配，
+B0 114完整会话／284题检查点＝282答案＋2缺答，全部检查点已进入完整会话。
+维护113 completed＋2 incomplete、233笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
+915生成请求、11206683 known＝charged、embedding121707 tokens；该时点无在途差额。
+原长历史仍运行，新E0／E1实际预测仍待资源释放。
+
+较新固定观察 **10:06:37.367066 UTC／北京时间18:06:37.367066**：同一PID／租约／冻结源码匹配，
+B0 118完整会话／294题检查点＝292答案＋2缺答；维护116 completed＋2 incomplete，
+239笔唯一确认提交、原边界拒绝3次；其他四臂未开始、Judge0。
+947生成请求、11677880 known＝charged、embedding126109 tokens；该时点无在途差额。
+这仍是未闭合运行前缀，无新方法排名；原PID1854770／1854771实际存活，原模型资源仍被占用。
+
+资源释放且 Root 明确调度后优先 E0／E1，普通 Host 功能线可继续；全部旧科研待办不再成为新任务的永久前置。
+真实调用仍由 Root 在原连续账本串行调度，未知结果不盲重试。新候选尚未冻结确认，E2主要断点诊断、
+必要E3对比、长历史／保留用户／外部迁移及真实Host功能结果仍待完成；没有方法优势或 Product ready 结论。
+原生失败若已确认 drained，记录 FAILED／resources_settled=true；超时或状态未知则保留 RESOURCE_UNSETTLED，
+不把失败写成成功，也不在资源未确认释放时推进下一臂。
+
+## 先前功能优先协议与固定观察（保留）
+
+以下内容保留原时点结果；当前执行顺序以上述新规划与协议为准。
+
 当前按用户提供的[全局修复与功能优先规划](MILAI_GLOBAL_REPAIR_AND_FUNCTION_FIRST_PLAN_20261009.md)
 执行，集成分支为 `feat/lab-global-function-first-20261009`。第一版源码 `bbe77e9`
 的真实 Host20 已闭合；历史修复候选 `milai-global-function-first-v2` 冻结源码为 `1cfb400`。

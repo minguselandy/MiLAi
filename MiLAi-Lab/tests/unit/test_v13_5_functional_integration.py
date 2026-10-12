@@ -9,6 +9,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import socket
+from copy import deepcopy
 from dataclasses import asdict
 from pathlib import Path
 from typing import Any, cast
@@ -87,6 +88,7 @@ def prepared(
     support_contract: str = "legacy",
     support_input: bool = False,
     bounded_reproposal: bool = False,
+    dynamic_memory: bool = False,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -187,6 +189,9 @@ def prepared(
     }
     if edit_interface_version != "v1":
         settings["edit_interface_version"] = edit_interface_version
+    if dynamic_memory:
+        settings.update(source_access="independent_v1", source_top_k=20, semantic_top_k=10,
+                        max_evidence_queries=2, maintenance_mode="event_delta_v1")
     if edit_features is not None:
         settings["edit_features"] = edit_features
     if maintenance_recipe is not None:
@@ -449,8 +454,16 @@ def actual_tool_receipt(wire: dict[str, Any]) -> dict[str, Any]:
 
 def memory_effects(wire: dict[str, Any]) -> dict[str, Any]:
     system = next(row["content"] for row in wire["messages"] if row["role"] == "system")
-    summary = json.loads(system.splitlines()[-2])
-    assert summary["schema"] == "functional_memory_effects_v1"
+    summaries = []
+    for line in system.splitlines():
+        try:
+            value = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(value, dict) and value.get("schema") == "functional_memory_effects_v1":
+            summaries.append(value)
+    assert len(summaries) == 1
+    summary = summaries[0]
     assert summary["scope"] == "visible_checkpoint_of_current_public_message"
     return summary
 
@@ -1910,6 +1923,107 @@ def test_memory_effects_uses_paired_current_receipts_without_promoting_reads_or_
     assert final["raw_capture_is_semantic_save"] is False
     assert final["reads_perform_semantic_writes"] is False
     assert secret not in json.dumps(final)
+
+
+@pytest.mark.parametrize("tool_commit,shared_commit", [(False, True), (True, False), (True, True)])
+def test_model_effects_count_shared_and_tool_commits_once(
+    tool_commit: bool, shared_commit: bool,
+) -> None:
+    committed = {"ok": True, "status": "committed", "effect": "memory_only",
+                 "id": "actual-record", "revision": 1,
+                 "content_verification": "unchecked", "fields_verification": "unchecked"}
+    messages: list[Any] = [HumanMessage(content="Save the supplied material.")]
+    if tool_commit:
+        for ref in ["actual-tool", "duplicate-tool"]:
+            messages.extend([
+                AIMessage(content="", tool_calls=[{
+                    "name": "save_memory", "id": ref, "args": {}}]),
+                ToolMessage(name="save_memory", tool_call_id=ref, content=json.dumps(committed)),
+            ])
+    # A known unavailable extra call must not erase a shared maintenance effect.
+    messages.extend([
+        AIMessage(content="", tool_calls=[{
+            "name": "save_memory", "id": "unavailable-tool", "args": {}}]),
+        ToolMessage(name="save_memory", tool_call_id="unavailable-tool", status="error",
+                    content=json.dumps({"ok": False, "status": "rejected", "effect": "none",
+                                        "reason": "tool_unavailable"})),
+    ])
+    effects = functional.memory_effects(messages)
+    if shared_commit:
+        batch = {"status": "completed", "phase": "complete", "receipts": [committed],
+                 "semantic_write_performed": True, "unprocessed": []}
+        effects["maintenance"] = [{**batch, "batches": [deepcopy(batch)]}, deepcopy(batch)]
+    original = deepcopy(effects)
+    projected = functional._model_memory_effects(effects)
+    expected = "actual-tool" if tool_commit else "#/maintenance/0/receipts/0"
+    assert projected["confirmed_semantic_commit_count"] == 1
+    assert projected["confirmed_semantic_commit_receipt_refs"] == [expected]
+    assert projected["mutation_receipts"] == original["mutation_receipts"]
+    assert projected["semantic_completion"] == "unchecked"
+    assert projected["raw_capture_is_semantic_save"] is False
+    assert effects == original
+    if shared_commit:
+        assert projected["maintenance"][0]["receipts"] == [committed]
+        assert projected["maintenance"][0]["batches"][0]["receipts"] == [
+            {"receipt_ref": "#/maintenance/0/receipts/0"}]
+        assert "missing save/update tool" in projected["interpretation"]
+
+
+def test_model_effects_do_not_upgrade_no_change_rejections_or_unknown_outcomes() -> None:
+    base = {"ok": True, "status": "committed", "effect": "memory_only",
+            "id": "actual-record", "revision": 1, "content_verification": "unchecked"}
+    receipts = [
+        {**base, "status": "no_change", "effect": "none"},
+        {**base, "status": "no_change", "replayed": True, "original_status": "committed"},
+        {**base, "ok": False, "status": "rejected", "effect": "none"},
+        {**base, "ok": False, "status": "outcome_unknown", "effect": "unconfirmed"},
+        {**base, "id": None}, {**base, "revision": True},
+        {**base, "status": "visibility_revoked", "effect": "visibility_only"},
+    ]
+    effects = functional.memory_effects([HumanMessage(content="Save all requested material.")])
+    effects["maintenance"] = [{"status": "incomplete", "phase": "commit",
+                               "memory_save_requested": True, "receipts": receipts,
+                               "semantic_write_performed": True,
+                               "unprocessed": [{"phase": "commit"}]}]
+    # The legacy audit can remember an earlier commit through no_change/replay;
+    # the model's commit count still requires an actual committed receipt.
+    effects["mutation_receipts"] = [
+        {**receipt, "tool": "save_memory", "transport_status": "success",
+         "receipt_ref": f"actual-{index}"} for index, receipt in enumerate(receipts)
+    ] + [{**base, "tool": "save_memory", "transport_status": "error", "receipt_ref": "failed"}]
+    effects["confirmed_semantic_commit_count"] = 1
+    effects["confirmed_semantic_commit_receipt_refs"] = ["actual-1"]
+    original = deepcopy(effects)
+    projected = functional._model_memory_effects(effects)
+    assert projected["confirmed_semantic_commit_count"] == 0
+    assert projected["confirmed_semantic_commit_receipt_refs"] == []
+    assert projected["maintenance"] == original["maintenance"]
+    assert projected["mutation_receipts"] == original["mutation_receipts"]
+    assert projected["semantic_completion"] == "unchecked"
+    assert effects == original
+
+
+def test_model_effects_count_child_only_and_distinct_versions_without_completing_request() -> None:
+    committed = {"ok": True, "status": "committed", "effect": "memory_only",
+                 "id": "actual-record", "revision": 1}
+    effects = functional.memory_effects([
+        HumanMessage(content="Save the supplied material."),
+        AIMessage(content="", tool_calls=[{"name": "save_memory", "id": "actual", "args": {}}]),
+        ToolMessage(name="save_memory", tool_call_id="actual", content=json.dumps(committed)),
+    ])
+    revision_two = {**committed, "revision": 2, "content_verification": "unchecked"}
+    child = {"status": "completed", "receipts": [committed, revision_two]}
+    effects["maintenance"] = [{"status": "incomplete", "phase": "editor_pending", "receipts": [],
+                               "unprocessed": [{"phase": "editor_pending"}],
+                               "batches": [{**child, "batches": [deepcopy(child)]}]}]
+    original = deepcopy(effects)
+    projected = functional._model_memory_effects(effects)
+    assert projected["confirmed_semantic_commit_count"] == 2
+    assert projected["confirmed_semantic_commit_receipt_refs"] == [
+        "actual", "#/maintenance/0/batches/0/receipts/1"]
+    assert projected["maintenance"] == original["maintenance"]
+    assert projected["semantic_completion"] == "unchecked"
+    assert effects == original
 
 
 def test_public_agent_catalog_carries_per_field_correction_selections(
@@ -5443,7 +5557,7 @@ def test_explicit_history_tool_delivers_withdrawn_versions_without_new_write(
 def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, recipe: str, memory_method: str,
 ) -> None:
-    root = prepared(tmp_path, native=True, request_interpretation=True,
+    root = prepared(tmp_path, native=True, request_interpretation=True, actual_capabilities=True,
                     memory_method=memory_method, edit_interface_version="I2",
                     edit_features={name: True for name in (
                         "matter_organization", "semantic_operations", "bound_references",
@@ -5490,7 +5604,21 @@ def test_shared_maintenance_saves_then_reopens_without_host_duplicate(
         assert "response_format" not in wire
         assert not {"save_memory", "update_memory", "confirm_existing_memory"}.intersection(
             t["function"]["name"] for t in wire.get("tools", []))
-        feedback = memory_effects(wire)["maintenance"][0]
+        effects = memory_effects(wire)
+        assert effects["confirmed_semantic_commit_count"] == 1
+        assert effects["confirmed_semantic_commit_receipt_refs"] == ["#/maintenance/0/receipts/0"]
+        assert effects["semantic_completion"] == "unchecked"
+        effect_at = system.index("ACTUAL EFFECTS AND RECEIPT EVIDENCE:")
+        capability_at = system.index("CURRENT TOOLS AND ACTION LIMITS:")
+        progress_at = system.index("CURRENT REQUEST PROGRESS AND OUTSTANDING WORK:")
+        assert effect_at < system.index(json.dumps(effects, ensure_ascii=False)) < capability_at
+        assert capability_at < progress_at
+        assert "Commit counts do not verify content, fields or the whole request." in system
+        assert "save/update tool is absent now or an extra call is rejected." in system
+        active, _ = json.JSONDecoder().raw_decode(
+            system.split("CURRENT EXECUTION CAPABILITIES: ", 1)[1])
+        assert active == sorted(t["function"]["name"] for t in wire["tools"])
+        feedback = effects["maintenance"][0]
         assert feedback["semantic_write_performed"]
         assert feedback["receipts"][0]["status"] == "committed"
         assert feedback["batches"][0]["receipts"] == [
@@ -5603,6 +5731,16 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
             names)
         mode_line = wire["messages"][0]["content"]
         assert "failed_no_business_permission" in mode_line
+        effects = memory_effects(wire)
+        assert effects["confirmed_semantic_commit_count"] == 1
+        assert effects["semantic_completion"] == "unchecked"
+        failures = json.loads(mode_line.split("Current request part failures: ", 1)[1]
+                              .splitlines()[0])
+        assert len(failures) == 1
+        assert failures[0]["part"] == "business_plan"
+        assert failures[0]["status"] == "failed" and failures[0]["effect"] == "none"
+        assert mode_line.index("CURRENT REQUEST PROGRESS AND OUTSTANDING WORK:") < (
+            mode_line.index("Current request part failures: "))
         return {"role": "assistant", "content": (
             "Your marker preference was saved; the business plan remains incomplete.")}
 
@@ -5639,8 +5777,9 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
             outcome.startswith("unknown"))
 
 
-def test_no_issued_prior_choices_preserves_current_save_and_reports_its_real_receipt(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+@pytest.mark.parametrize("response_scope", [None, "memory_status_only", "substantive"])
+def test_current_save_reports_receipts_without_replacing_substantive_answers(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, response_scope: str | None,
 ) -> None:
     root = prepared(tmp_path, native=True, scope_requests=True,
                     request_failure_policy="independent_memory", direct_response=True,
@@ -5651,15 +5790,24 @@ def test_no_issued_prior_choices_preserves_current_save_and_reports_its_real_rec
                         "matter_organization", "semantic_operations", "bound_references",
                         "single_record_changes", "source_metadata")})
     stages = []
+    draft = ("I cannot save because no save tool is available."
+             if response_scope == "memory_status_only" else
+             "A green calendar marker distinguishes these entries from other categories."
+             if response_scope == "substantive" else "Prepared to save the preference.")
 
     def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
         names = {tool["function"]["name"] for tool in wire.get("tools", [])}
         if names == {"classify_current_request"}:
             stages.append("scope")
+            schema = wire["tools"][0]["function"]["parameters"]
+            assert schema["properties"]["response_scope"]["enum"] == [
+                "memory_status_only", "substantive"]
             return native_call("classify_current_request", "scope",
                 memory_requests=["explicit"], allow_forgetting=False,
                 business_action_request="none",
-                application_continuation_request="resolve_prior_request")
+                application_continuation_request=("resolve_prior_request"
+                    if response_scope is None else "none"),
+                **({"response_scope": response_scope} if response_scope is not None else {}))
         assert names != {"resolve_continuation_operations"}, "No request ID was issued to select"
         if not names:
             stages.append("save")
@@ -5673,23 +5821,68 @@ def test_no_issued_prior_choices_preserves_current_save_and_reports_its_real_rec
             }], "records": {}})}
         stages.append("answer")
         assert not {"reserve_and_label", "complete_label", "cancel_reservation"}.intersection(names)
-        return {"role": "assistant", "content": "Prepared to save the preference."}
+        return {"role": "assistant", "content": draft}
 
     wires = scripted(monkeypatch, reply, native=True)
     args = dict(bank="no-prior-choices", owner="alice", session="s", message_id="save",
-                content="Remember that my calendar marker is green.")
+                content="Remember that my calendar marker is green." + (
+                    " Also explain why a distinct marker is useful."
+                    if response_scope == "substantive" else ""))
     result = functional.message(root, **args)
     assert result["status"] == "COMPLETED", result.get("error")
     assert len(result["records"]) == 1 and result["world"]["world"]["attempts"] == []
     assert stages == ["scope", "save", "answer"]
-    assert result["request_mode"]["reference_resolution"]["attempts"] == 0
-    assert result["request_mode"]["prior_request_ids"] == []
-    assert result["execution_candidate_answer"] == "Prepared to save the preference."
+    if response_scope is None:
+        assert result["request_mode"]["reference_resolution"]["attempts"] == 0
+        assert result["request_mode"]["prior_request_ids"] == []
+        assert "response_scope" not in result["request_mode"]
+    assert result["execution_candidate_answer"] == draft
+    if response_scope == "memory_status_only":
+        assert draft not in result["final_answer"]
+        assert result["finalization"]["protocol"] == "receipt_business_response_v1"
+        assert result["finalization"]["execution_candidate_delivered"] is False
+    else:
+        assert draft in result["final_answer"]
+        assert result["finalization"]["execution_candidate_delivered"] is True
     assert "本轮语义记忆: 已提交" in result["final_answer"]
     assert "已确认 1 项提交" in result["final_answer"]
     calls = len(wires)
     again = functional.message(root, **args, resume=True)
     assert again["records"] == result["records"] and len(wires) == calls
+    assert again["request_mode"] == result["request_mode"]
+    assert again["final_answer"] == result["final_answer"]
+    assert again["execution_candidate_answer"] == draft
+
+
+def test_narrow_memory_status_without_receipt_keeps_ordinary_query_answer(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, scope_requests=True, direct_response=True,
+                    phase_thinking=True, memory_method="milai_edit_m_v1",
+                    edit_interface_version="I2", maintenance_recipe="single_pass",
+                    memory_view_mode="staged", memory_profile="unified_v1",
+                    edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")})
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {tool["function"]["name"] for tool in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            return native_call("classify_current_request", "scope", memory_requests=[],
+                allow_forgetting=False, business_action_request="none",
+                application_continuation_request="none", response_scope="memory_status_only")
+        assert not {"save_memory", "update_memory", "forget_memory"}.intersection(names)
+        return {"role": "assistant", "content": "I have no save receipt for that request."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank="status-query", owner="alice", session="s",
+                                message_id="query", content="Was my earlier request saved?")
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert result["capture"]["ok"] and result["records"] == []
+    assert result["operation_status"]["semantic_memory"]["operations"] == []
+    assert result["final_answer"] == "I have no save receipt for that request."
+    assert result["finalization"]["protocol"] == "agent_response_v1"
+    assert len(wires) == 2
 
 
 def test_shared_maintenance_keeps_early_commit_when_later_source_read_fails(
@@ -5902,6 +6095,7 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     scope_requests: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, complete_requests=True, scope_requests=scope_requests,
+        actual_capabilities=True,
         direct_response=True, phase_thinking=True, current_delivery=True,
         memory_profile="unified_v1", memory_method="milai_edit_m_v1",
         edit_interface_version="I2", maintenance_recipe=recipe,
@@ -5938,9 +6132,13 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
                 assert part["observed_at"]
                 assert not {"namespace", "bank", "owner", "fragment_handle"}.intersection(part)
             if scope_requests:
-                assert set(wire["tools"][0]["function"]["parameters"]["properties"]) == {
+                schema = wire["tools"][0]["function"]["parameters"]
+                assert set(schema["properties"]) == {
                     "memory_requests", "allow_forgetting", "business_action_request",
-                    "application_continuation_request"}
+                    "application_continuation_request", "response_scope"}
+                assert set(schema["required"]) == set(schema["properties"]) - {"response_scope"}
+                assert schema["properties"]["response_scope"]["enum"] == [
+                    "memory_status_only", "substantive"]
             return native_call("classify_current_request", "mode-" + str(ordinal),
                 memory_requests=(["explicit"] if first or continuation == "empty_save" else [])
                 + (["continue_prior"] if not first
@@ -6011,6 +6209,16 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
                     seen["saved"] += 1
             return {"role": "assistant", "content": json.dumps(envelope)}
         current = next(m["content"] for m in wire["messages"] if m["role"] == "user")
+        system = wire["messages"][0]["content"]
+        frames = [line[len(functional.PROGRESS_PREFIX):] for line in system.splitlines()
+                  if line.startswith(functional.PROGRESS_PREFIX)]
+        assert len(frames) == 1
+        frame = json.loads(frames[0])
+        assert len(frame) == 1 and frame[0]["request_id"]
+        assert memory_effects(wire)["semantic_completion"] == "unchecked"
+        assert system.index("CURRENT TOOLS AND ACTION LIMITS:") < system.index(
+            "CURRENT REQUEST PROGRESS AND OUTSTANDING WORK:") < system.index(
+                functional.PROGRESS_PREFIX)
         tools = [m for m in wire["messages"] if m["role"] == "tool"]
         if not tools:
             if current == initial_text:
@@ -6079,6 +6287,12 @@ def test_complete_host_request_survives_partial_effect_and_new_session(
     replay = functional.message(root, **followup_args, resume=True)
     assert replay["status"] == "COMPLETED" and len(wires) == calls
     assert replay["records"] == second["records"]
+    if scope_requests:
+        # These original V9 replies intentionally omit the optional field.
+        # Their saved decisions keep the substantive path without reclassification.
+        assert "response_scope" not in second["request_mode"]
+        assert second["request_mode"].get("response_scope", "substantive") == "substantive"
+        assert replay["request_mode"] == second["request_mode"]
 
 
 @pytest.mark.parametrize("recipe", ["single_pass", "extract_then_edit"])
@@ -6659,3 +6873,83 @@ def test_host_forget_uses_delivered_target_and_reopen_keeps_original_body_hidden
                                  content="What marker preference is still available?")
     assert reopened["status"] == "COMPLETED", reopened.get("error")
     assert all(row["status"] == "visibility_revoked" for row in reopened["records"])
+
+
+def test_dynamic_host_reads_unformed_source_and_explicitly_consolidates_once(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.runners import memory_operations
+
+    root = prepared(tmp_path, native=True, scope_requests=True, direct_response=True,
+        phase_thinking=True, dynamic_memory=True, memory_method="milai_edit_m_v1",
+        edit_interface_version="I2", maintenance_recipe="single_pass",
+        memory_view_mode="staged", memory_profile="unified_v1",
+        edit_features={name: True for name in (
+            "matter_organization", "semantic_operations", "bound_references",
+            "single_record_changes", "source_metadata", "temporal_scope")})
+    original = "Remember: I use an amber marker only on weekdays. Do not reserve anything."
+    query = "What marker did I report? Only read the original; do not save or do business."
+    state = {"consolidating": False}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {item["function"]["name"] for item in wire.get("tools", [])}
+        if names == {"classify_current_request"}:
+            text = wire["messages"][-1]["content"]
+            return native_call("classify_current_request", "scope-" + str(ordinal),
+                memory_requests=["explicit"] if text == original else [], allow_forgetting=False,
+                business_action_request="none", application_continuation_request="none",
+                response_scope="substantive", read_goal={
+                    "purpose": "Read the user's original marker report",
+                    "evidence": ["original_source"]},
+                forbidden_operations=["business_mutation"] + (
+                    ["memory_write"] if text == query else []))
+        if not names:
+            frame = json.loads(wire["messages"][-1]["content"])
+            delivery = frame["delivery"]
+            assert "change_candidates" in delivery
+            if not state["consolidating"]:
+                return {"role": "assistant", "content": '{"creates":[],"records":{}}'}
+            evidence = next(row["id"] for row in delivery["evidence"] if row["text"] == original)
+            return {"role": "assistant", "content": json.dumps({"creates": [{
+                "action": "create", "matter": "Marker preference", "clauses": [{
+                    "text": "The user reports using an amber marker only on weekdays.",
+                    "evidence": [evidence], "conditions": [],
+                    "assertion": {"source_evidence": evidence, "kind": "reported"}}]}],
+                "records": {}})}
+        assert not set(functional.BUSINESS_MUTATIONS).intersection(names)
+        packet = expand_host_packet(materials(wire))
+        assert packet["reading_requirement"]["required_evidence"] == ["original_source"]
+        current = next(m["content"] for m in wire["messages"] if m["role"] == "user")
+        if current == query:
+            assert "save_memory" not in names and "update_memory" not in names
+            assert any(item.get("content") == original for item in packet["items"])
+            return {"role": "assistant", "content": "You reported an amber marker on weekdays."}
+        return {"role": "assistant", "content": "Original captured; no semantic record committed."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    monkeypatch.setattr(memory_operations, "FunctionalVLLMClient", functional.FunctionalVLLMClient)
+    common = {"bank": "dynamic-host", "owner": "alice"}
+    saved = functional.message(root, **common, session="save", message_id="first", content=original)
+    assert saved["status"] == "COMPLETED", saved.get("error")
+    assert saved["records"] == [] and saved["capture"]["ok"]
+    count = len(wires)
+    queried = functional.message(root, **common, session="query", message_id="read", content=query)
+    assert queried["status"] == "COMPLETED", queried.get("error")
+    assert queried["records"] == [] and queried["maintenance"] == []
+    assert len(wires) - count == 2  # Existing classification and direct answer, no selector/query.
+    assert queried["final_answer"] == "You reported an amber marker on weekdays."
+    assert queried["request_mode"]["forbidden_operations"] == ["business_mutation", "memory_write"]
+    state["consolidating"] = True
+    episodes = [saved["capture"]["episode_id"]]
+    arguments = {**common, "session": "organize", "request_id": "explicit-once",
+        "text": "Organize the original marker report; do not perform any business operation.",
+        "operation": "consolidate", "episode_ids": episodes}
+    organized = memory_operations.run(root, **arguments)
+    assert organized["status"] == "completed", organized
+    assert organized["business_operations_executed"] == 0
+    assert organized["semantic_write_performed"] is True
+    assert organized["source_refs"] == [saved["capture"]["source_ref"]]
+    assert organized["new_independent_support"] is False
+    count = len(wires)
+    repeated = memory_operations.run(root, **arguments)
+    assert repeated["status"] == "completed" and len(wires) == count

@@ -47,6 +47,31 @@ _METADATA_STRINGS = {
 _HOST_CLOCKS = {
     "occurred_at", "observed_at", "reported_at", "captured_at", "query_time", "version_time",
 }
+_HOST_RELATION_FIELDS = {"relation_id", "source_unit", "target_unit", "relation_type"}
+_HOST_METADATA_OBJECTS = {"evidence_refs", "relation_metadata"}
+
+
+def merge_source_ranges(ranges: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Union actual ranges only within one Source identity and revision.
+
+    Text equality, descriptions and semantic-record identities do not merge
+    sources. Callers still resolve current visibility and original bodies.
+    """
+    groups: dict[tuple[str, int], list[tuple[int, int]]] = {}
+    for span in ranges:
+        groups.setdefault((span["source_ref"], span["source_revision"]), []).append(
+            (span["start"], span["end"]))
+    result: list[dict[str, Any]] = []
+    for (source_ref, revision), spans in groups.items():
+        merged: list[tuple[int, int]] = []
+        for start, end in sorted(spans):
+            if merged and start <= merged[-1][1]:
+                merged[-1] = (merged[-1][0], max(end, merged[-1][1]))
+            else:
+                merged.append((start, end))
+        result.extend({"source_ref": source_ref, "source_revision": revision,
+                       "start": start, "end": end} for start, end in merged)
+    return result
 
 
 def _reader_diagnostics(view: dict[str, Any]) -> None:
@@ -264,6 +289,19 @@ def _host_metadata(item: dict[str, Any], *, group: bool) -> None:
     context = item.get("revision_context")
     if isinstance(context, dict):
         transform(context)
+    # The same directed relation is delivered at its endpoint units and in the
+    # revision context. Keep its identity, endpoints and type together as one
+    # exact value; evidence stays separate so table entries never refer to one
+    # another. Operation handles and edit_unit.unit_id remain literal.
+    for relation in [*item.get("edit_relations", []),
+                     *(context.get("relations", []) if isinstance(context, dict) else [])]:
+        if group:
+            values = {field: relation.pop(field)
+                      for field in list(relation) if field in _HOST_RELATION_FIELDS}
+            if values:
+                relation["relation_metadata"] = values
+        elif "relation_metadata" in relation:
+            relation.update(relation.pop("relation_metadata"))
     edit_unit = item.get("edit_unit") or {}
     applicability = item.get("applicability") or {}
     # Operate only on these existing values. No absent assertion or temporal
@@ -290,11 +328,19 @@ def project_host_packet(packet: dict[str, Any]) -> dict[str, Any]:
     records = [item for item in result.get("items", []) if item.get("type") == "record"]
     if not records:
         return result
+    # An existing field is original data, even when it resembles our alias.
+    # Preserve the whole packet rather than guessing or overwriting that value.
+    if any("relation_metadata" in relation for item in records for relation in [
+        *item.get("edit_relations", []),
+        *(item["revision_context"].get("relations", [])
+          if isinstance(item.get("revision_context"), dict) else []),
+    ]):
+        return result
     for item in records:
         _host_metadata(item, group=True)
     shared = {"items": records}
     _share_metadata(
-        shared, extra_objects={"evidence_refs"}, string_fields=_HOST_CLOCKS,
+        shared, extra_objects=_HOST_METADATA_OBJECTS, string_fields=_HOST_CLOCKS,
         literal_fields={"read", "arguments"},
     )
     if "metadata_table" not in shared:
@@ -309,8 +355,10 @@ def project_host_packet(packet: dict[str, Any]) -> dict[str, Any]:
 
 def expand_host_packet(packet: dict[str, Any]) -> dict[str, Any]:
     """Restore only the actual current packet for Writer delivery accounting."""
+    if "metadata_table" not in packet:
+        return copy.deepcopy(packet)
     result = _expand_metadata(
-        packet, extra_objects={"evidence_refs"}, string_fields=_HOST_CLOCKS,
+        packet, extra_objects=_HOST_METADATA_OBJECTS, string_fields=_HOST_CLOCKS,
         literal_fields={"read", "arguments"},
     )
     result.pop("projection_instructions", None)
@@ -329,6 +377,11 @@ def project_material(records: list[dict[str, Any]]) -> dict[str, Any]:
     memories = [expand_record(project_record(record)) for record in records]
     for memory in memories:
         memory.pop("retrieval_navigation", None)
+        if memory.get("kind") == "original_source" and isinstance(memory.get("text"), str):
+            # This opt-in Source material already contains serialized original
+            # turns. Expose that same structure to the existing exact metadata
+            # sharing; original RawRAG text remains opaque and unchanged.
+            memory["turns"] = json.loads(memory.pop("text"))
         view = memory.get("applicability")
         if isinstance(view, dict):
             _group_metadata(view)

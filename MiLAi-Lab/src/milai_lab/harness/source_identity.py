@@ -7,6 +7,7 @@ CONTRACT_SOURCE_FILES = (
     "src/milai_lab/contracts/common_boundary.py",
     "src/milai_lab/contracts/correction_relation.py",
     "src/milai_lab/contracts/memory.py",
+    "src/milai_lab/contracts/memory_backend.py",
     "src/milai_lab/contracts/operations.py",
     "src/milai_lab/contracts/protocol.py",
     "src/milai_lab/contracts/public_memory_contracts.py",
@@ -47,6 +48,7 @@ INTEGRATION_SOURCE_FILES = (
     "src/milai_lab/integrations/__init__.py",
     "src/milai_lab/integrations/memory/__init__.py",
     "src/milai_lab/integrations/memory/amem.py",
+    "src/milai_lab/integrations/memory/hindsight.py",
     "src/milai_lab/integrations/memory/mem0.py",
     "src/milai_lab/integrations/memory/simplemem.py",
 )

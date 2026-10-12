@@ -104,6 +104,38 @@ class HaluMemOfficial:
             results["official_aggregation_error"] = "ZeroDivisionError: absent prefix denominator"
         return results
 
+    @staticmethod
+    def aggregate_qa_results(records: dict[str, Any]) -> dict[str, Any]:
+        """Use the author's QA label/denominator rules without absent memory tasks.
+
+        The combined upstream aggregator divides by memory denominators before
+        reaching QA. A QA-only run has no such observations, rather than zero
+        memory quality. Judge prompts and label parsing are unchanged.
+        """
+        labels = ("Correct", "Hallucination", "Omission")
+        questions = records["question_answering_records"]
+        counts: Counter[str] = Counter()
+        for item in questions:
+            item["is_valid"] = item["result_type"] in labels
+            if item["is_valid"]:
+                counts[item["result_type"]] += 1
+        total, valid = len(questions), sum(counts.values())
+        metrics: dict[str, Any] = {"qa_num": total, "qa_valid_num": valid}
+        for label in labels:
+            name = label.lower() + "_qa_ratio"
+            metrics[name + "(all)"] = counts[label] / total if total else None
+            metrics[name + "(valid)"] = counts[label] / valid if valid else None
+        return {
+            **records,
+            "overall_score": {
+                "memory_integrity": None, "memory_accuracy": None,
+                "memory_extraction_f1": None, "memory_update": None,
+                "memory_type_accuracy": None, "question_answering": metrics,
+            },
+            "evaluation_mode": "qa_only",
+            "not_evaluated": ["memory_integrity", "memory_accuracy", "memory_update"],
+        }
+
 
 class LongMemEvalOfficial:
     def __init__(self, checkout: Path) -> None:

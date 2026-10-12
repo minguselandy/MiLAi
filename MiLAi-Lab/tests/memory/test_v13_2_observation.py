@@ -17,9 +17,11 @@ from milai_lab.application.document_publication import DocumentPublicationWorld
 from milai_lab.application.refs import observation_profile
 from milai_lab.application.world import ApplicationWorld
 from milai_lab.contracts.memory import ObservationField, ObservationProfile
+from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.append_memory import AppendMemory
+from milai_lab.methods.consolidation import consolidate
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import maintain_event
 from milai_lab.methods.edit_memory import EditMemory
@@ -274,8 +276,9 @@ def test_unknown_does_not_clear_confirmed_history_or_invent_no_effect(tmp_path: 
         assert len(field_view(service, "label")["history"]) == 1
 
 
+@pytest.mark.parametrize("maintenance_mode", ["legacy", "event_delta_v1"])
 def test_real_reservation_literal_maintenance_keeps_source_and_unchanged_units(
-    tmp_path: Path,
+    tmp_path: Path, maintenance_mode: str,
 ) -> None:
     world = ApplicationWorld(tmp_path / "world.sqlite", False)
     try:
@@ -295,7 +298,8 @@ def test_real_reservation_literal_maintenance_keeps_source_and_unchanged_units(
             profile = observation_profile("reservation_v1", maintenance=True)
             assert profile.adapter_version == "2"
             method = EditMemory(service, "M", interface_version="I2",
-                                features=EditFeatures(True, True, True, True, True))
+                                features=EditFeatures(True, True, True, True, True),
+                                maintenance_mode=maintenance_mode)
             service.bind_source_boundary("s1", "save", [source])
             first = method.observation_delivery(
                 method.prepare([source], "", selected_records=[]), [profile]
@@ -310,7 +314,8 @@ def test_real_reservation_literal_maintenance_keeps_source_and_unchanged_units(
                 calls.append(stage)
                 assert stage.startswith("edit:")  # Known fields never call Extractor.
                 payload = json.loads(messages[1]["content"])
-                candidates = {row["field"]: row for row in payload["change_candidates"]}
+                candidates = {row["field"]: row for row in payload["delivery"].get(
+                    "change_candidates", payload.get("change_candidates", []))}
                 assert all(row["basis"] == "actual_source_literal"
                            and not row["current_verified"] for row in candidates.values())
                 packet = payload["delivery"]
@@ -377,7 +382,8 @@ def test_real_reservation_literal_maintenance_keeps_source_and_unchanged_units(
                                for row in current["sources"]]
         with opened(tmp_path, candidate_contract="read_handle_v1") as service:
             method = EditMemory(service, "M", interface_version="I2",
-                                features=EditFeatures(True, True, True, True, True))
+                                features=EditFeatures(True, True, True, True, True),
+                                maintenance_mode=maintenance_mode)
             delivery = method.prepare([final_source], "", selected_records=[],
                                       source_ranges=original_ranges)
             replayed = maintain_event(method, delivery, request_id="update",
@@ -387,6 +393,138 @@ def test_real_reservation_literal_maintenance_keeps_source_and_unchanged_units(
             assert service.source(source) == raw
     finally:
         world.close()
+
+
+def test_event_scoped_tools_preserve_user_correction_and_replay_original_sources(
+    tmp_path: Path,
+) -> None:
+    """Registered result structure, not status wording, controls this ordinary chain."""
+    with opened(tmp_path, candidate_contract="read_handle_v1") as service:
+        method = EditMemory(service, "M", interface_version="I2",
+                            features=EditFeatures(True, True, True, True, True, True),
+                            maintenance_mode="event_delta_v1")
+        user = service.capture_user("s1", "seed", "Use paper labels. Keep box tracking.")[
+            "source_ref"]
+        service.bind_source_boundary("s1", "seed", [user])
+        initial = method.writer_request(method.prepare([user], "", selected_records=[]))
+        proposal = {"creates": [{"action": "create", "matter": "Label handling", "clauses": [
+            {"text": text, "conditions": [], "evidence": ["e1"],
+             "assertion": {"source_evidence": "e1", "kind": "reported"}}
+            for text in ("Labels are paper.", "Box tracking is required.")
+        ]}], "records": {}}
+        receipt = method.apply("s1", "seed-record",
+                               method.decode_envelope(proposal, initial["mapping"])[0])
+        before = service.read(receipt["id"])["value"]
+
+        def no_model(*args, **kwargs):
+            raise AssertionError("Execution receipt must not reinterpret old User context")
+
+        profile = synthetic_profile()
+        for key, origin in (("read-receipt", "read_memory"), ("no-object", "inspect_objects")):
+            ref = capture(service, key, {"status": "not_found", "objects": []}, origin)
+            service.bind_source_boundary("s1", key, [ref])
+            delivery = method.prepare([ref], "", selected_records=[])
+            delivery["prior_context"] = method.prepare([user], "", selected_records=[])[
+                "sources"]
+            projected = method.observation_delivery(
+                delivery, [profile], execution_only_origins=("read_memory",)
+            )
+            assert projected["sources"] == [] and service.source(ref) is not None
+            result = maintain_event(method, projected, session="s1", request_id=key,
+                                    date="2026-01-01", recipe="extract_then_edit",
+                                    model_call=no_model)
+            assert result["status"] == "completed" and result["outcome"] == "no_domain_observation"
+            assert not result["semantic_write_performed"] and result["source_refs"] == [ref]
+            assert service.read(receipt["id"])["value"] == before
+
+        lookup = ObservationProfile(
+            profile_id="inventory_lookup", adapter_version="1", application="InventoryLookup",
+            origins=("inspect_objects",), object_id_path=("query",),
+            fields=(ObservationField("exists", ("exists",), "boolean"),),
+        )
+        negative = service.capture_tool(
+            "s1", "lookup", "inspect_objects", json.dumps({"query": "A", "exists": False}),
+            None, occurred_at="2026-01-01", calendar_context="public-calendar",
+        )["source_ref"]
+        original = service.source(negative)
+        projected = method.observation_delivery(
+            method.prepare([negative], "", selected_records=[]), [profile, lookup]
+        )
+        change = projected["result_maintenance"]["literal_changes"][0]
+        assert change["subject"] == "InventoryLookup A" and change["literal_value"] is False
+        assert projected["result_maintenance"]["extraction_source_ranges"] == []
+        assert "execution_source_refs" not in projected["result_maintenance"]
+        service.bind_source_boundary("s1", "lookup", [negative])
+
+        def save_lookup(stage, messages, schema):
+            assert stage == "edit"  # A real negative field is not dropped or re-extracted.
+            packet = json.loads(messages[1]["content"])["delivery"]
+            cue = packet["change_candidates"][0]
+            return {"creates": [{"action": "create", "matter": "Inventory lookup A",
+                    "clauses": [{"text": "Inventory lookup reports A does not exist.",
+                                 "conditions": [], "evidence": cue["evidence"],
+                                 "assertion": {"source_evidence": cue["evidence"][-1],
+                                               "kind": "observed"}}]}], "records": {}}
+
+        saved = maintain_event(method, projected, session="s1", request_id="lookup",
+                               date="2026-01-01", recipe="extract_then_edit",
+                               model_call=save_lookup, selected_record_ids=[])
+        assert saved["semantic_write_performed"] and service.source(negative) == original
+        assert service.read(receipt["id"])["value"] == before
+
+        correction = service.capture_user("s1", "change", "Use linen labels now.")["source_ref"]
+        service.bind_source_boundary("s1", "change", [correction, ref])
+        mixed = method.observation_delivery(
+            method.prepare([correction, ref], "", selected_records=[]), [profile, lookup],
+        )
+        assert [row["source_ref"] for row in mixed["sources"]] == [correction]
+        stages = []
+
+        def correct(stage, messages, schema):
+            stages.append(stage)
+            packet = json.loads(messages[1]["content"])["delivery"]
+            if stage == "extract":
+                return {"changes": [{"subject": "Labels", "statement": "Use linen labels now.",
+                                     "time": None, "scope": None, "evidence": ["e1"]}]}
+            record = packet["records"][0]
+            return {"creates": [], "records": {record["id"]: {"action": "edit", "edits": [{
+                "operation": "replace", "target_unit": record["clauses"][0]["id"],
+                "text": "Labels are linen.", "evidence": ["e1"],
+                "assertion": {"source_evidence": "e1", "kind": "reported"},
+            }]}}}
+
+        changed = maintain_event(method, mixed, session="s1", request_id="change",
+                                 date="2026-01-01", recipe="extract_then_edit", model_call=correct,
+                                 selected_record_ids=[receipt["id"]])
+        assert changed["semantic_write_performed"] and stages == ["extract", "edit"]
+        state = service.read(receipt["id"])["value"]["edit_state"]
+        assert state["units"][1] == before["edit_state"]["units"][1]
+        unknown = capture(service, "external", {"status": "not_found"}, "unregistered_tool")
+        unclassified = method.observation_delivery(
+            method.prepare([unknown], "", selected_records=[]), [profile, lookup]
+        )
+        assert unclassified["sources"][0]["role"] == "tool"
+        assert unclassified["result_maintenance"]["literal_changes"] == []
+
+        index = EpisodeIndex(service)
+        index.register("lookup-episode", [negative])
+        replay_calls = []
+
+        def replay(**kwargs):
+            replay_calls.append(kwargs)
+            delivery = kwargs["delivery"]
+            assert delivery["replay"] and not delivery["new_independent_support"]
+            source = delivery["sources"][0]
+            assert source["source_ref"] == negative and source["origin"] == "inspect_objects"
+            assert source["calendar_context"] == "public-calendar"
+            return {"status": "completed", "receipts": [], "semantic_write_performed": False}
+
+        options = {"request_id": "organize", "maintain": replay,
+                   "episode_ids": ["lookup-episode"]}
+        organized = consolidate(index, **options)
+        assert organized["status"] == "completed" and not organized["semantic_write_performed"]
+        assert consolidate(index, **options)["replayed"] and len(replay_calls) == 1
+        assert service.source(negative) == original
 
 
 def test_actual_document_content_version_does_not_order_approval_or_publication(
