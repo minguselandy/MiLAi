@@ -2101,9 +2101,9 @@ class BenchmarkRun:
         and the original model call allowance, reserving one call for the answer.
         """
         mode = self.settings["memory_view_mode"]
-        joint_budgeted = (self.settings.get("evidence_variant") == "J1"
-                          and self.settings.get("joint_selection") == "budgeted_nominations_v2")
         material_pool = snapshot_id is not None
+        joint_budgeted = (material_pool and self.settings.get("joint_selection")
+                          == "budgeted_nominations_v2")
         if snapshot_id is not None:
             location = Path(snapshot_id)
             if location.is_absolute() or ".." in location.parts:
