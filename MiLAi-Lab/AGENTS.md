@@ -12,14 +12,22 @@ A6 frozen f9f01661 S0/S1/S2 plus llm_probe predict+firstQA score now CLOSED, eac
 S0 5C/6, S1 4C/6, S2 3C/6; latest ranked score is in its terminal-score.json. No rescore.
 Synthetic patch mechanism closed2calls, actualpatch selected, bothbefore/after/history preserved;
 no quality gain claim. No new unknown usage at serial release (original8generation/1embedding).
-CURRENT LIVE: tool session22144, supervisor7845, natural-update-v1 child11792 at16:40:42UTC.
-run_third.py sequence: rankedscore(done)→natural seed+replace+patch→S2/J1 two-question predict→score.
-Inspect artifacts/evidence-development/*-process.json AND actual PID before HTTP. Never duplicate.
-Frozen source-f9f01661/source-c9f2b68e immutable; rootdevelopment may continue separately.
-Fixed24 configs are prepared ignored artifacts, NOT dispatched yet. See screen24-selection.json.
+Previous goal turn was progress (A/B/C code and actual pilots), not a wait-only restatement.
+Natural employment comparison now CLOSED: seed2gen13761, replace3gen21073+emb209,
+patch-enabled3gen16368+emb215; BOTH chose ordinaryreplace, three nontargetvalues/history preserved.
+Original S2/J1 pilot CLOSED: S2 1C/2+invalid1; J1-v1 missing1+invalid1. Do not rescore/restart.
+J1v2 fixes actual oversized final nominations (separate cumulative/admitted sets, same budget, no empty-loop).
+Frozen79749893 J1v2 two predict/score CLOSED2answers/2C, finalsemantics2 and1, zero newmaintenance/retrieval.
+New explicit optional ranker provider wired lazily, no deployed MemSifter found; real trials remain llm_probe.
+CURRENT LIVE tool session27870, supervisor98764, run_fourth.py. Last child112485 natural-local-update-v1
+started17:07:06UTC (inspect current actual PID; may advance). Then serial S0→S1→S2 screen24 predict/score.
+Actual artifacts/evidence-development/*-process.json + terminal files + /proc are authoritative.
+Do not duplicate or hotedit source-f9f01661/source-c9f2b68e/source-79749893. Root alone realHTTP.
+24 selection fixed before new results; config source79749893, each4users×6, original13direct/11paged.
+Ranked24 and J1v2 screen24 still await the closed screen/pilot decision, not automatically dispatched.
 S0/S1/S2 replay uses saved per-question original recalls and bank copies to reopen exact old sources/versions;
 never query final bank for early questions. No maintenance, shared recall or ActivationIndex repeated.
-Current ranker is llm_probe only, with explicit budgeted batch/interleave behavior; checkpoint not deployed.
+Current deployed ranker trial is llm_probe only, with budgeted batch/interleave behavior; checkpoint not deployed.
 patch_text is opt-in and retains old sources separately from current witnesses. Full goal ACTIVE/incomplete.
 No remote push/merge performed for this new task. Local commits and frozen runs remain reviewable.
 
