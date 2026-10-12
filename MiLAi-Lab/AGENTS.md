@@ -1,3 +1,20 @@
+# Current task: evidence development plan, 2026-10-13
+
+The user activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261012.md.
+This supersedes older scheduling and approval gates below. Develop first; no SHA checks or new review platform.
+Root current worktree: /cra/memory/mx_memory/MiLAi-worktrees/evidence-development-20261013.
+Base f964292a includes PR121. Original integration dirty documents and user main plans are preserved.
+Root alone owns real HTTP on original continuous ledger; existing shared services unchanged.
+The original b558 prediction is now verified terminal rc0 (32 sessions,71 answers,2known missing),
+parent1446814/worker1446815 gone; all older RUNNING handoffs below are historical.
+Use docs/MILAI_EVIDENCE_DEVELOPMENT_20261013.md for implemented A/B/C and pending real experiments.
+New real dispatch currently zero; inspect actual artifacts/PIDs before starting or continuing.
+S0/S1/S2 replay uses saved per-question original recalls and bank copies to reopen exact old sources/versions;
+never query final bank for early questions. No maintenance, shared recall or ActivationIndex repeated.
+Current ranker is llm_probe only, with explicit budgeted batch/interleave behavior; checkpoint not deployed.
+patch_text is opt-in and retains old sources separately from current witnesses. Full goal ACTIVE/incomplete.
+No remote push/merge performed for this new task. Local commits and frozen runs remain reviewable.
+
 # Current handoff: dynamic-memory plan active, 2026-10-12
 
 CURRENT LIVE UPDATE 2026-10-12 04:01 UTC: goal ACTIVE; corrected Q b558 FIRST dispatch running, do not duplicate/restart.

@@ -123,6 +123,21 @@ def read_revision_evidence(service: Any, version: dict[str, Any]) -> list[dict[s
     return result
 
 
+def read_retained_support(service: Any, version: dict[str, Any]) -> list[dict[str, Any]]:
+    """Reopen current units' retained sources separately from this revision's witnesses."""
+    witnesses = version.get("revision_evidence")
+    if witnesses is None:
+        witnesses = [handle for edit in version.get("edit_operations", [])
+                     for handle in edit["evidence"]]
+    handles = list(dict.fromkeys(
+        ref["evidence_id"] for unit in (version.get("edit_state") or {}).get("units", [])
+        for ref in unit["evidence_refs"] if ref["evidence_id"] not in witnesses
+    ))
+    return [dict(item, support_role="retained_support") for item in read_revision_evidence(
+        service, {"revision_evidence": handles},
+    )]
+
+
 def read_revision_scope(
     service: Any, record_id: str, version: dict[str, Any]
 ) -> list[dict[str, Any]]:

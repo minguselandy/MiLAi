@@ -22,6 +22,7 @@ if TYPE_CHECKING:
 
 def _cost(folder: Path, elapsed: float) -> dict[str, Any]:
     models: dict[str, Any] = {}
+    stages: dict[str, Any] = {}
     for path in folder.rglob("response.json"):
         response = read_json(path)
         usage = response["usage"]
@@ -31,7 +32,16 @@ def _cost(folder: Path, elapsed: float) -> dict[str, Any]:
         row["calls"] += 1
         row["input_tokens"] += usage["prompt_tokens"]
         row["output_tokens"] += usage["completion_tokens"]
-    return {"models": models, "embedding_tokens": 0, "elapsed_seconds": elapsed}
+        relative = path.relative_to(folder).parts
+        stage = "ranking" if "ranking" in relative else "paging" if "view" in relative else "answer"
+        stage_row = stages.setdefault(stage, {}).setdefault(response["model"], {
+            "calls": 0, "input_tokens": 0, "output_tokens": 0,
+        })
+        stage_row["calls"] += 1
+        stage_row["input_tokens"] += usage["prompt_tokens"]
+        stage_row["output_tokens"] += usage["completion_tokens"]
+    return {"models": models, "stages": stages, "embedding_tokens": 0,
+            "elapsed_seconds": elapsed}
 
 
 def _copied_bank(source: Path, destination: Path) -> None:
@@ -77,9 +87,8 @@ def _predict(
             "evidence_variant": execution.settings.get("evidence_variant", "S2"),
         })
         failure = None
-        used: list[dict[str, Any]] = []
         try:
-            answer, used = execution.answer_material(
+            answer, _ = execution.answer_material(
                 question, date, key, materials, snapshot_id=snapshot_id,
                 material_reader=lambda items: execution._live_materials(service, items),
             )
@@ -97,6 +106,9 @@ def _predict(
                 or view_path.with_name("request.json").exists()):
             final_indices = []
         final = [materials[index] for index in final_indices]
+        delivered_indices = {ref["item_index"] for ref in view.get(
+            "capacity_continuation", {}).get("delivered_page_refs", [])}
+        delivered_indices.update(final_indices)
         assembly = native["material_assembly"]
         origins = assembly.get("material_origins")
         result = {
@@ -105,7 +117,7 @@ def _predict(
             "source_snapshot": str(original), "source_bank": str(source / "banks" / owner),
             "source_state": "saved arrival-prefix records and original ranges; no new search",
             "evidence": {
-                "pool": len(materials), "read": len(used), "final": len(final),
+                "pool": len(materials), "read": len(delivered_indices), "final": len(final),
                 "linked_candidates": assembly["linked_original_candidates"],
                 "semantic_candidates": assembly["semantic_candidates"],
                 "semantic_in_pool": assembly["semantic_materials"],

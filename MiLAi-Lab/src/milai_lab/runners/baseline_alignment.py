@@ -172,6 +172,17 @@ def prepare_alignment(
                     if not session.get("is_generated_qa_session", False)
                     for memory in session.get("memory_points", [])),
             }
+        if settings.get("evidence_replay"):
+            selected = settings["evidence_replay"]["questions"]
+            opportunities = {
+                owner: {
+                    "session_ordinals": sorted({item["session"] for item in selected
+                                                if item["owner"] == owner}),
+                    "sessions": len({item["session"] for item in selected
+                                     if item["owner"] == owner}),
+                    "qa": sum(item["owner"] == owner for item in selected), "native_updates": 0,
+                } for owner in dict.fromkeys(item["owner"] for item in selected)
+            }
         scope, fields = "per_user_opportunities", ("sessions", "qa", "native_updates")
     else:
         selection = settings["longmemeval"]
@@ -579,6 +590,10 @@ class AlignmentRun(BenchmarkRun):
         )
 
     def halumem(self, phase: str = "all") -> dict[str, Any]:
+        if self.settings.get("evidence_replay"):
+            from milai_lab.runners.evidence_replay import replay_halumem
+
+            return replay_halumem(self, phase)
         result = super().halumem(phase)
         if phase == "predict":
             return result

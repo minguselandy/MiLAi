@@ -1087,3 +1087,52 @@ def test_reference_query_effects_and_later_state_stay_outside_session_view(
         assert execution._score_retrieval(original, "reference B") == ["actual current source"]
         assert store.get(cache, "reference B") is None
         assert all(observed is not store for observed in observed_stores)
+
+
+def test_evidence_variants_deliver_original_linked_and_semantic_material(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    execution, sent = source_reader(tmp_path / "run", monkeypatch)
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("evidence", "owner"), "owner", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        first = service.capture_user("first", "turn:0", "INDEPENDENT_BLUE")
+        second = service.capture_user("second", "turn:0", "LINKED_YELLOW")
+        native = service.search_sources("BLUE", source_refs=[first["source_ref"]])
+        span = service.source_fragment_range(second["source_ref"], 0, len("LINKED_YELLOW"))
+        semantic = {"record_id": "interpretation", "revision": 1, "content": "STATE_GREEN",
+                    "scope": {}, "revision_evidence": [span]}
+        for variant, expected in (("S0", (True, False, False)), ("S1", (True, True, False)),
+                                  ("S2", (True, True, True))):
+            execution.settings["evidence_variant"] = variant
+            pool_id = f"native/{variant}/retrieval.json"
+            material = execution._source_first_materials(
+                service, "Which?", "", native, [semantic], snapshot_id=pool_id,
+            )
+            write_json(execution.root / pool_id, {"materials": material})
+            execution.answer_material("Which?", "", variant, material, snapshot_id=pool_id)
+            actual = tuple(marker in repr(sent[-1]) for marker in
+                           ("INDEPENDENT_BLUE", "LINKED_YELLOW", "STATE_GREEN"))
+            assert actual == expected
+            assert native["material_assembly"]["evidence_variant"] == variant
+        assert not service.records()  # Reading neither forms nor captures semantic assertions.
+
+
+def test_s0_captures_sources_without_semantic_formation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.datasets.edit_benchmarks import ObservedSession
+
+    execution, sent = source_reader(tmp_path / "run", monkeypatch)
+    execution.settings["evidence_variant"] = "S0"
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("s0", "owner"), "owner", tmp_path / "lock",
+                                functional_contract="functional_v1", memory_profile="unified_v1")
+        observed = ObservedSession("arrived", "2030-01-01", [
+            {"role": "user", "content": "ORIGINAL_BLUE", "timestamp": "2030-01-01"},
+            {"role": "assistant", "content": "Reported.", "timestamp": "2030-01-01"},
+        ])
+        assert execution.maintain_recipe(service, observed, "arrived") == []
+        assert len(service.sources()) == 2 and not service.records() and not sent
+        execution.answer(service, "Which detail?", "2030-01-02", "question")
+        assert "ORIGINAL_BLUE" in repr(sent[-1])

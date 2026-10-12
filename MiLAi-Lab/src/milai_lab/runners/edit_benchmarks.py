@@ -36,6 +36,7 @@ from milai_lab.harness.artifact_io import entrypoint_settings, read_json, write_
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.memory.edit_units import (
     read_applicability,
+    read_retained_support,
     read_revision_evidence,
     read_revision_scope,
 )
@@ -524,6 +525,10 @@ class BenchmarkRun:
             raise ValueError("READER_FAILURE_POLICY_INVALID")
         if settings.get("halumem", {}).get("evaluation_mode", "all") not in {"all", "qa_only"}:
             raise ValueError("HALUMEM_EVALUATION_MODE_INVALID")
+        if settings.get("evidence_variant", "S2") not in {"S0", "S1", "S2"}:
+            raise ValueError("EVIDENCE_VARIANT_INVALID")
+        if settings.get("reader_ranking", "native") not in {"native", "llm_probe", "memsifter"}:
+            raise ValueError("READER_RANKING_INVALID")
         stage_modes = settings.get("stage_enable_thinking", {})
         if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
                 or any(type(value) is not bool for value in stage_modes.values())):
@@ -1122,6 +1127,10 @@ class BenchmarkRun:
                         observed.session_id, f"turn:{index}", receipt["source_ref"],
                         config_version=self.settings["config_version"], phase="start",
                     )
+        if self.settings.get("evidence_variant") == "S0":
+            write_json(done, {"extracted_memories": [], "source_refs": refs,
+                              "maintenance": "source_capture_only"})
+            return []
         batches = natural_source_batches(observed, self.tokenizer, self.settings["source_tokens"])
         results, changed = [], {}
         for index, batch in enumerate(batches):
@@ -1704,6 +1713,8 @@ class BenchmarkRun:
                 "scope": row["value"]["scope"],
                 "revision": row["value"]["revision"],
                 "revision_evidence": read_revision_evidence(service, row["value"]),
+                **({"retained_support": read_retained_support(service, row["value"])}
+                   if self.settings.get("edit_features", {}).get("patch_text") else {}),
                 **({"retrieval_navigation": row["retrieval_navigation"]}
                    if "retrieval_navigation" in row else {}),
                 **({"record_id": row["id"]}
@@ -1765,11 +1776,14 @@ class BenchmarkRun:
         """Original exchanges first, linked original ranges next, optional explanations last."""
         from milai_lab.memory.reader_projection import expand_record, merge_source_ranges
 
+        variant = self.settings.get("evidence_variant", "S2")
         originals = list(native["source_materials"])
         covered = [span for material in originals for span in material["source_ranges"]]
         support = merge_source_ranges([
             {field: evidence[field] for field in ("source_ref", "source_revision", "start", "end")}
-            for memory in semantic for evidence in expand_record(memory)["revision_evidence"]
+            for memory in (semantic if variant != "S0" else [])
+            for evidence in [*expand_record(memory)["revision_evidence"],
+                             *expand_record(memory).get("retained_support", [])]
         ])
         linked = []
         for span in support:
@@ -1803,10 +1817,14 @@ class BenchmarkRun:
         # whole ranges to reopen; it neither searches outside the pool nor grows
         # the Reader's call allowance.
         materials = []
+        material_origins = []
         fragmented = 0
-        for material in originals:
+        for ordinal, material in enumerate(originals):
+            origin = ("independent_original" if ordinal < len(native["source_materials"])
+                      else "linked_source")
             if fits([material]):
                 materials.append(material)
+                material_origins.append(origin)
                 continue
             descriptors: list[dict[str, Any]] = []
             for ordinal, span in enumerate(material["source_ranges"]):
@@ -1828,14 +1846,17 @@ class BenchmarkRun:
                     "parent_id": material["id"], "ordinal": ordinal, "count": len(pieces),
                 }
             materials.extend(pieces)
+            material_origins.extend([origin] * len(pieces))
             fragmented += 1
         original_count = len(materials)
-        for memory in semantic:
+        for memory in (semantic if variant == "S2" else []):
             explanation = {**memory, "kind": "semantic_view"}
             if fits([*materials, explanation]):
                 materials.append(explanation)
+                material_origins.append("semantic_view")
         native["material_assembly"] = {
             "policy": "originals_then_linked_sources_then_fitting_semantic_views",
+            "evidence_variant": variant, "material_origins": material_origins,
             "independent_original_candidates": len(native["source_materials"]),
             "linked_original_candidates": len(linked), "fragmented_originals": fragmented,
             "original_materials": original_count, "semantic_candidates": len(semantic),
@@ -1868,17 +1889,21 @@ class BenchmarkRun:
             request.update(source_access="independent_v1",
                            source_top_k=self.settings["source_top_k"],
                            semantic_top_k=self.settings["semantic_top_k"])
+            if "evidence_variant" in self.settings:
+                request["evidence_variant"] = self.settings["evidence_variant"]
         if request_path.exists() and read_json(request_path) != request:
             raise ValueError("Saved retrieval request changed; use a new key")
         if snapshot.exists():
             memories = read_json(snapshot)
         else:
-            native = (service.search_evidence(
+            native = (service.search_sources(question, limit=self.settings["source_top_k"])
+                      if independent and self.settings.get("evidence_variant") == "S0"
+                      else service.search_evidence(
                 question, source_limit=self.settings["source_top_k"],
                 semantic_limit=self.settings["semantic_top_k"],
             ) if independent else service.search(
                 question, limit=requested_limit, include_raw=False))
-            records = native["records"]
+            records = native.get("records", [])
             memories = self._record_materials(service, records, date)
             if independent:
                 pool_id = (f"native/{key}/retrieval.json" if self.settings.get("alignment_backend")
@@ -1908,7 +1933,7 @@ class BenchmarkRun:
             )
         else:
             answer, used_memories = self.answer_material(question, date, key, memories)
-        if service.memory_profile == "unified_v1":
+        if service.memory_profile == "unified_v1" and not self.settings.get("evidence_replay"):
             from milai_lab.memory.activation import ActivationIndex
 
             index = ActivationIndex(service)
@@ -1946,6 +1971,75 @@ class BenchmarkRun:
             ), memories
         return self._answer_view(question, date, key, memories, material_reader=material_reader)
 
+    def _rank_materials(
+        self, question: str, date: str, key: str, memories: list[dict[str, Any]],
+        snapshot_id: str | None,
+    ) -> list[int]:
+        """Rank actual originals once; keep the saved pool and its indices unchanged."""
+        mode = self.settings.get("reader_ranking", "native")
+        order = list(range(len(memories)))
+        if mode == "native":
+            return order
+        if mode == "memsifter":
+            raise ValueError("MemSifter checkpoint is not configured; use explicit llm_probe")
+        path = self.root / "http" / key / "ranking.json"
+        if path.exists():
+            return cast(list[int], read_json(path)["rank_order"])
+        messages = self._material_messages(
+            question, date, memories, snapshot_id=snapshot_id, item_indices=order,
+        )
+        limit = self.settings["context_tokens"] - self.settings["model"]["max_tokens"] - 512
+        fits = self.input_tokens(messages, enable_thinking=self.stage_thinking("reader")) <= limit
+        batch_orders: list[list[int]] = []
+        request_paths: list[str] = []
+        if not fits:
+            from milai_lab.methods.material_ranking import rank_materials, ranking_messages
+
+            # The real long-prefix probe exceeds one input. Partition whole originals
+            # using the existing budget planner, rank each batch once, then interleave
+            # nominations. This is an explicit wiring probe, not checkpoint evaluation
+            # or a claim that local ranks provide a global relevance score.
+            positions = [{"item_index": index} for index in order]
+            batches = plan_delivery(positions, lambda selected: self.input_tokens(
+                ranking_messages(question, date, [memories[ref["item_index"]]
+                                                  for ref in selected], mode=mode),
+                enable_thinking=self.stage_thinking("reader"),
+            ) <= limit)["pages"]
+            if sum(map(len, batches)) != len(memories):
+                raise ReadDeliveryIncomplete("whole_ranking_material_unavailable")
+            ranking_calls = sum(len(batch) > 1 for batch in batches)
+            if ranking_calls > self.client.config.max_calls - 2:
+                raise ReadDeliveryIncomplete("ranking_call_limit")
+            for ordinal, batch in enumerate(batches):
+                positions_in_batch = [ref["item_index"] for ref in batch]
+                if len(batch) == 1:
+                    batch_orders.append(positions_in_batch)
+                    continue
+                request_paths.append(f"http/{key}/ranking/batch-{ordinal}/request.json")
+                def call_rank(prompts: list[dict[str, str]], ordinal: int = ordinal) -> str:
+                    return self.call(
+                        f"{key}/ranking/batch-{ordinal}", prompts, structured=True,
+                        enable_thinking=self.stage_thinking("reader"),
+                    )
+
+                local_order = rank_materials(
+                    question, date, [memories[index] for index in positions_in_batch],
+                    call_rank, mode=mode,
+                )
+                batch_orders.append([positions_in_batch[index] for index in local_order])
+            order = [batch[index] for index in range(max(map(len, batch_orders), default=0))
+                     for batch in batch_orders if index < len(batch)]
+        write_json(path, {
+            "reader_ranking": mode, "model": self.settings["model"]["model"],
+            "rank_order": order, "ranking_skipped": fits,
+            "skip_reason": "complete_reader_input_fits" if fits else None,
+            "candidate_pool_size": len(memories), "ranking_calls": len(request_paths),
+            "batch_orders": batch_orders,
+            "merge_policy": "interleave_fixed_budget_batch_nominations",
+            "request_paths": request_paths,
+        })
+        return order
+
     def _answer_view(
         self, question: str, date: str, key: str, memories: list[dict[str, Any]],
         *, snapshot_id: str | None = None,
@@ -1968,6 +2062,8 @@ class BenchmarkRun:
             if saved != json.loads(json.dumps(memories, ensure_ascii=False)):
                 raise ValueError("Saved retrieval materials changed; use a new key")
             memories = saved
+        visible = material_reader(memories) if material_reader is not None else memories
+        rank_order = self._rank_materials(question, date, key, visible, snapshot_id)
         path = self.root / "http" / key / "memory-view.json"
         state = read_json(path) if path.exists() else {
             **empty_view(), "steps": 0, "complete": False, "opened_ids": [],
@@ -1981,11 +2077,12 @@ class BenchmarkRun:
             "content_range": [0, memory.get(
                 "record_content_chars", len(memory.get("content", "")))],
         }, key + "/retrieval.json", index) for index, memory in enumerate(memories)])
+        ordered_refs = [refs[index] for index in rank_order]
         if material_pool:
             state["retrieval_snapshot"] = snapshot_id
             state.setdefault("opened_indices", [])
             if not path.exists() and mode == "direct":
-                state.update(resident_refs=copy.deepcopy(refs), complete=True,
+                state.update(resident_refs=copy.deepcopy(ordered_refs), complete=True,
                              opened_indices=list(range(len(memories))))
 
         def material_candidate(index: int, memory: dict[str, Any]) -> dict[str, Any]:
@@ -2007,7 +2104,6 @@ class BenchmarkRun:
                 ),
             }
 
-        visible = material_reader(memories) if material_reader is not None else memories
         directory = ([material_candidate(index, memory) for index, memory in enumerate(visible)]
                      if material_pool else [record_candidate(
             memory["record_id"], memory["revision"],
@@ -2056,8 +2152,11 @@ class BenchmarkRun:
         call_limit = self.client.config.max_calls
         if call_limit < 1:
             raise FunctionalRejection("READ_MODEL_CALL_LIMIT_REACHED")
+        ranking_path = self.root / "http" / key / "ranking.json"
+        ranking_calls = read_json(ranking_path)["ranking_calls"] if ranking_path.exists() else 0
+        remaining_reads = max(0, call_limit - 1 - ranking_calls)
         total_read_limit = min(
-            self.settings.get("additional_reads", call_limit - 1), call_limit - 1)
+            self.settings.get("additional_reads", remaining_reads), remaining_reads)
         read_limit = total_read_limit
         if mode == "staged":
             read_limit = min(read_limit, 1)
@@ -2134,7 +2233,7 @@ class BenchmarkRun:
                 payload["memory_item_indices"] = [ref["item_index"]
                                                   for ref in state["resident_refs"]]
                 payload["undelivered_item_indices"] = [
-                    ref["item_index"] for ref in refs
+                    ref["item_index"] for ref in ordered_refs
                     if ref["item_index"] not in state[opened_field]
                 ]
             if material_pool or self.settings.get("reader_projection") == "semantic_units_v1":
@@ -2152,7 +2251,7 @@ class BenchmarkRun:
                     {"enable_thinking": reader_thinking} if material_pool else {})) > input_limit
                     and (state["resident_refs"] or material_pool)):
                 if material_pool and not state["resident_refs"]:
-                    state["resident_refs"] = copy.deepcopy(refs)
+                    state["resident_refs"] = copy.deepcopy(ordered_refs)
                 state["selector_needs_pages"] = True
                 break
             state["active_stage"] = f"{key}/view/select-{state['steps']}"

@@ -2165,3 +2165,32 @@ def test_embedding_budget_rejection_is_recorded_as_not_sent(tmp_path: Path) -> N
     assert failure["event"] == "vllm_budget_rejected" and failure["request_sent"] is False
     assert budget.state["embedding"]["charged_tokens"] == 0
     assert budget.state["embedding"]["unknown_usage"] == 0
+
+
+def test_rank_order_controls_direct_page_order_without_changing_item_indices(
+    snapshot_reader: BenchmarkRun, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    execution = snapshot_reader
+    memories = snapshot_materials("MiLAi-memory-only", 18000)
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    monkeypatch.setattr(execution, "_rank_materials", lambda *args: [1, 0])
+    pages = []
+
+    def chat(messages: Any, response_format: Any, **sampling: Any) -> Any:
+        payload = json.loads(messages[1]["content"])
+        assert payload["memories"] == [memories[i] for i in payload["memory_item_indices"]]
+        if response_format is not None:
+            pages.append(payload["memory_item_indices"])
+            content = json.dumps({"item_indices": [1], "done": True})
+        else:
+            assert payload["memory_item_indices"] == [1]
+            content = "Actual second entry."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}],
+                "usage": {"prompt_tokens": 20, "completion_tokens": 5, "total_tokens": 25}}
+
+    execution.client.chat = chat
+    answer, _ = execution.answer_material("Which report?", "", "qa", memories,
+                                          snapshot_id=snapshot_id)
+    assert answer == "Actual second entry." and pages == [[1], [0]]
+    assert read_json(execution.root / snapshot_id)["materials"] == memories
