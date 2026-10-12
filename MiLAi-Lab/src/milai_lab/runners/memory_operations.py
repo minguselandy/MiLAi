@@ -24,6 +24,7 @@ from milai_lab.application.recovery import (
     UnknownSemanticCommit,
     resume_request,
 )
+from milai_lab.application.refs import maintenance_observation_profiles
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunLimits, Trace, entry_budget, http_budget_scope
 from milai_lab.memory.episodes import EpisodeIndex
@@ -32,6 +33,7 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.methods.consolidation import consolidate
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import MaintenanceRecipe, parse_object
+from milai_lab.methods.edit_memory import MaintenanceMode
 from milai_lab.methods.functional_edit_memory import FUNCTIONAL_ARMS, FunctionalEditMemory
 from milai_lab.methods.langmem_recipe import LangMemRecipeChatModel
 from milai_lab.providers.contextual_capacity import CapacityExceeded, HostCapacity
@@ -145,6 +147,7 @@ def run(
         memory = FunctionalEditMemory(
             service, capacity.text_tokens, arm=arm, interface_version="I2", features=features,
             maintenance_recipe=settings.get("maintenance_recipe", "single_pass"),
+            maintenance_mode=cast(MaintenanceMode, settings.get("maintenance_mode", "legacy")),
             read_limit=settings["additional_reads"],
             material_limit=settings["ordinary_material_tokens"],
         )
@@ -154,6 +157,14 @@ def run(
             "v13_config_version": freeze["config_version"],
         }})
         recipe = cast(MaintenanceRecipe, settings.get("maintenance_recipe", "single_pass"))
+
+        def source_delivery(delivery: dict[str, Any]) -> dict[str, Any]:
+            if memory.writer.maintenance_mode != "event_delta_v1":
+                return delivery
+            return memory.writer.observation_delivery(
+                delivery, maintenance_observation_profiles(workflow),
+                execution_only_origins=[tool.name for tool in memory.tools()],
+            )
 
         def fit(messages: list[dict[str, str]]) -> bool:
             try:
@@ -183,7 +194,7 @@ def run(
                 selected_record_ids=record_ids or None, allowed=True,
                 prior_request_id=prior_request_id, new_attempt_id=new_attempt_id,
             )
-            return memory.maintain_delivery(config, delivery, **kwargs)
+            return memory.maintain_delivery(config, source_delivery(delivery), **kwargs)
 
         def reconcile_consolidation(*, request_id: str) -> dict[str, Any] | None:
             saved = service.store.get(
@@ -230,7 +241,8 @@ def run(
                 )
                 try:
                     outcome = memory.maintain_delivery(
-                        config, delivery, request_id=operation_id, date=service.clock().isoformat(),
+                        config, source_delivery(delivery), request_id=operation_id,
+                        date=service.clock().isoformat(),
                         recipe=recipe, model_call=call, fit=fit, allowed=True,
                     )
                 except Exception as error:

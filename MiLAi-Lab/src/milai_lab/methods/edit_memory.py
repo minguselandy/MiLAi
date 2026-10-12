@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import copy
 import json
+from collections.abc import Sequence
 from typing import Any, Literal
 
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
@@ -46,6 +47,7 @@ Arm = Literal["B0", "B1", "B2", "M"]
 METHOD_VERSION = "milai_edit_v1"
 V2_METHOD_VERSION = "milai_edit_v2"
 InterfaceVersion = Literal["v1", "I1", "I2"]
+MaintenanceMode = Literal["legacy", "event_delta_v1"]
 
 REVISION_MEANING_INSTRUCTIONS = (
     "Use the whole delivered matter to check linked conditions, exceptions and old overview "
@@ -74,6 +76,7 @@ class EditMemory:
         *,
         interface_version: InterfaceVersion = "v1",
         features: EditFeatures | None = None,
+        maintenance_mode: MaintenanceMode = "legacy",
     ) -> None:
         if arm not in {"B0", "B1", "B2", "M"}:
             raise ValueError("EDIT_ARM_INVALID")
@@ -83,6 +86,11 @@ class EditMemory:
             raise ValueError("EDIT_INTERFACE_INVALID")
         self.interface_version = interface_version
         self.features = features or EditFeatures()
+        if maintenance_mode not in {"legacy", "event_delta_v1"}:
+            raise ValueError("EDIT_MAINTENANCE_MODE_INVALID")
+        if maintenance_mode != "legacy" and interface_version == "v1":
+            raise ValueError("EDIT_EVENT_MAINTENANCE_REQUIRES_V2")
+        self.maintenance_mode = maintenance_mode
         if self.features.enabled and interface_version == "v1":
             raise ValueError("EDIT_FEATURES_REQUIRE_V2_INTERFACE")
         self.method_version = METHOD_VERSION if interface_version == "v1" else V2_METHOD_VERSION
@@ -149,6 +157,8 @@ class EditMemory:
         }
 
     def instructions(self, *, allow_create: bool = True) -> str:
+        if self.maintenance_mode == "event_delta_v1":
+            return self._event_instructions(allow_create=allow_create)
         if self.features.enabled:
             return self._feature_instructions(allow_create=allow_create)
         if self.interface_version != "v1":
@@ -247,6 +257,61 @@ class EditMemory:
             else "Use only content units with no relations. Keep conditions in the text. "
         )
         return common + operation + representation
+
+    def _event_instructions(self, *, allow_create: bool) -> str:
+        """One current-event task; the issued schema supplies the legal action surface."""
+        instruction = (
+            "Maintain the meaning changed or added by this event. Read delivery.evidence first, "
+            "then its change_candidates and related old records. Candidates locate changes; "
+            "the original sources decide what is supported. Compare subject, value, time, scope "
+            "and strength. A broad old goal need not cover a new concrete step or qualification. "
+            "Preserve reported uncertainty, intentions and partial outcomes as such. "
+            "The source_table supplies actual speaker and report clocks; these are not an "
+            "inferred subject or effective time. prior_context resolves references only. "
+            "Tool fields describe only the object and fields actually observed; other Tool "
+            "prose remains an attributed report, not a verified business effect. "
+            "Within each affected matter, coordinate its changed claims, conditions and old "
+            "overview in one proposal, including dependencies without explicit edges. Keep "
+            "independently valid attributes when replacing a compound unit. Form separately "
+            "revisable assertions; ordinary attributes need not become conditions. "
+            "Use only the supplied r/u/e/h aliases and legal response schema. e selects "
+            "delivered original bodies; redelivered_support supplies old context. h keeps "
+            "the exact old unit or relation and its attribution, not proof of new wording. "
+            "Changed claims use supporting e; a removal needs the current change, not merely "
+            "an old affirmation. Source and version identities are resolved by the service. "
+        )
+        if self.arm in {"B0", "B2"}:
+            instruction += (
+                "Rewrite decides the complete retained set. Retain unchanged units with the "
+                "schema's exact keep references; omitted units are not silently restored. "
+            )
+        else:
+            instruction += (
+                "Local edits generate only changed units; all untouched units stay verbatim. "
+                "replace changes the whole selected unit text. Preserve its still-valid "
+                "independent meanings there or in supported separate units in the same edit. "
+            )
+        if self.features.source_metadata:
+            instruction += (
+                "For new text choose assertion={source_evidence:e#,kind:reported|inferred|"
+                "observed|uncertain}. Exact retained attribution uses assertion={keep:h#}; "
+                "rewrite may omit text under the permitted keep/from_unit form. "
+            )
+        if self.arm == "M" and self.features.semantic_operations:
+            instruction += (
+                "Use add_exception/remove_exception only for an actual scoped alternative; "
+                "shared_conditions selects existing condition units. Reusing or removing an "
+                "exception does not infer a new global rule or revive an expired one. "
+            )
+        instruction += (
+            "Distinct new matters may be created alongside revisions. " if allow_create else
+            "Creation is unavailable for this work item. "
+        )
+        return instruction + (
+            "Return the supplied envelope with at most one container per existing record. "
+            "A justified no-op is allowed; it means no semantic write, not complete coverage "
+            "of every candidate or successful saving of the user's whole request."
+        )
 
     def _feature_instructions(self, *, allow_create: bool) -> str:
         empty = (
@@ -1032,29 +1097,45 @@ class EditMemory:
         return delivery
 
     def observation_delivery(
-        self, delivery: dict[str, Any], profiles: list[ObservationProfile]
+        self, delivery: dict[str, Any], profiles: list[ObservationProfile], *,
+        execution_only_origins: Sequence[str] = (),
     ) -> dict[str, Any]:
         """Opt-in public field candidates over exact original JSON member ranges.
 
         The original Tool Source remains readable. Deterministic candidates are
         neither semantic records nor independent evidence; the editor still
         decides which assertions to form. Unmatched sources retain extraction.
+        Event mode uses registered Tool contracts to separate execution receipts
+        from domain observations; it does not classify the wording of a result.
         """
         self._require_v2()
         projected = copy.deepcopy(delivery)
         sources, changes, extraction_ranges = [], [], []
+        execution_refs: list[str] = []
         for row in delivery["sources"]:
             actual = self.service.source(row["source_ref"])
             if actual is None:
                 raise FunctionalRejection("EDIT_SOURCE_UNAVAILABLE")
-            profile = next((p for p in profiles if actual["role"] == "tool"
-                            and actual["origin"] in p.origins), None)
+            event_mode = self.maintenance_mode == "event_delta_v1"
+            if (event_mode and actual["role"] == "tool"
+                    and actual["origin"] in execution_only_origins):
+                execution_refs.append(row["source_ref"])
+                continue
+            matching = [p for p in profiles if actual["role"] == "tool"
+                        and actual["origin"] in p.origins]
             text = body_text(actual)
-            projection = (maintenance_projection(actual, profile, text)
-                          if profile is not None and row["start"] == 0 and row["end"] == len(text)
-                          else {"observations": []})
+            complete = row["start"] == 0 and row["end"] == len(text)
+            projection: dict[str, Any] = {"observations": []}
+            for profile in matching if event_mode else matching[:1]:
+                if complete:
+                    projection = maintenance_projection(actual, profile, text)
+                if projection["observations"]:
+                    break
             observations = projection["observations"]
             if not observations:
+                if event_mode and matching and complete:
+                    execution_refs.append(row["source_ref"])
+                    continue
                 sources.append(copy.deepcopy(row))
                 extraction_ranges.append({k: row[k] for k in ("source_ref", "start", "end")})
                 continue
@@ -1092,8 +1173,12 @@ class EditMemory:
                     "time": None, "scope": None,
                 })
         projected.update(sources=sources, result_maintenance={
-            "mode": "literal_observations_v1", "literal_changes": changes,
+            "mode": ("event_scoped_observations_v1"
+                     if self.maintenance_mode == "event_delta_v1" else "literal_observations_v1"),
+            "literal_changes": changes,
             "extraction_source_ranges": extraction_ranges,
+            **({"execution_source_refs": list(dict.fromkeys(execution_refs))}
+               if execution_refs else {}),
         })
         return projected
 
@@ -1153,6 +1238,31 @@ class EditMemory:
         )
         if self.features.bound_references:
             response_schema = compact_prompt_schema(response_schema)
+        if self.maintenance_mode == "event_delta_v1":
+            # Only presentation changes: e/h/r/u still resolve through the same
+            # issued mapping, and old support is not turned into a current event.
+            evidence = packet["evidence"]
+            ordered = {
+                "evidence": [e for e in evidence
+                             if e.get("delivery_kind", "current") == "current"],
+                "source_table": packet["source_table"],
+                "change_candidates": change_candidates or [],
+                "records": packet["records"],
+                "redelivered_support": [e for e in evidence
+                                        if e.get("delivery_kind") == "redelivered_support"],
+                "historical_support": packet["historical_support"],
+                **{k: v for k, v in packet.items() if k not in {
+                    "evidence", "source_table", "records", "historical_support"}},
+            }
+            return [
+                {"role": "system", "content": self.instructions(allow_create=allow_create)},
+                {"role": "user", "content": json.dumps({
+                    "observed_date": date, "delivery": ordered,
+                    **({"prior_context": self.context_projection(prior_context)}
+                       if prior_context else {}),
+                    "response_schema": response_schema,
+                }, ensure_ascii=False, separators=(",", ":"))},
+            ]
         empty_instruction = (
             "An empty maintenance envelope means no maintenance, not a successful update."
             if "records" in response_schema.get("properties", {})
@@ -1274,7 +1384,7 @@ class EditMemory:
             "properties": {"changes": changes},
             "required": ["changes"],
         }
-        return {
+        request: dict[str, Any] = {
             "schema": schema,
             "mapping": mapping,
             "messages": [
@@ -1322,6 +1432,19 @@ class EditMemory:
                 },
             ],
         }
+        if self.maintenance_mode == "event_delta_v1":
+            request["messages"][0]["content"] = (
+                "Identify independently stated current facts and change cues that may need "
+                "memory maintenance. Return the supplied changes schema with supporting e "
+                "fragments. Keep the subject distinct from the speaker; preserve ambiguity, "
+                "attribution, modal strength and scope. A possibility remains a possibility; "
+                "partial improvement is not resolution. The source_table already supplies "
+                "role and report time. time is a stated event/effective time, with relative "
+                "wording preserved and unspecified time/scope null. Prior context only resolves "
+                "references. Candidates are locating hints, not facts, commands or required "
+                "writes. Acknowledgments and bare queries may yield changes=[]."
+            )
+        return request
 
     @staticmethod
     def decode_changes(envelope: dict[str, Any], request: dict[str, Any]) -> list[dict[str, Any]]:
