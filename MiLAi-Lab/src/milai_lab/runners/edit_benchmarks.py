@@ -2056,6 +2056,8 @@ class BenchmarkRun:
         and the original model call allowance, reserving one call for the answer.
         """
         mode = self.settings["memory_view_mode"]
+        joint_budgeted = (self.settings.get("evidence_variant") == "J1"
+                          and self.settings.get("joint_selection") == "budgeted_nominations_v2")
         material_pool = snapshot_id is not None
         if snapshot_id is not None:
             location = Path(snapshot_id)
@@ -2374,6 +2376,14 @@ class BenchmarkRun:
                         "Do not generate an answer or a factual summary; return the original "
                         "selection schema. A read_goal does not establish available history."
                     )
+                    if joint_budgeted:
+                        result[0]["content"] += (
+                            " Your nominations are admitted under the measured final-input "
+                            "budget, whole original sources before optional semantic views. "
+                            "The next final_reopen_item_indices shows the admitted set. "
+                            "After all actual pool pages, answer from that bounded set. "
+                            "Budget exclusion changes only delivery, not stored memories."
+                        )
                     payload = json.loads(result[1]["content"])
                     payload.update(
                         response_schema=page_schema,
@@ -2392,6 +2402,12 @@ class BenchmarkRun:
                             pending_item_indices=[ref["item_index"]
                                                   for ref in continuation["pending_refs"]],
                         )
+                        if joint_budgeted:
+                            nominated = continuation.get("nominated_refs", [])
+                            payload["nominated_item_indices"] = [ref["item_index"]
+                                                                 for ref in nominated]
+                            payload["budget_excluded_item_indices"] = [ref["item_index"]
+                                for ref in nominated if ref not in continuation["final_refs"]]
                     else:
                         payload.update(candidates=directory,
                                        final_reopen_refs=continuation["final_refs"],
@@ -2483,7 +2499,10 @@ class BenchmarkRun:
                     continuation["pending_refs"] = [
                         ref for ref in continuation["pending_refs"] if ref not in active["refs"]
                     ]
-                    selection_state = {**empty_view(), "resident_refs": continuation["final_refs"],
+                    previous_nominations = (continuation.setdefault(
+                        "nominated_refs", copy.deepcopy(continuation["final_refs"]))
+                        if joint_budgeted else continuation["final_refs"])
+                    selection_state = {**empty_view(), "resident_refs": previous_nominations,
                                        "read_goal": state["read_goal"]}
                     chosen = select_refs(selection_state, {
                         **selected, "keep_resident": True,
@@ -2492,14 +2511,35 @@ class BenchmarkRun:
                         dropped = set(selected.get("drop_item_indices", []))
                         chosen["resident_refs"] = [ref for ref in chosen["resident_refs"]
                                                    if ref["item_index"] not in dropped]
-                    continuation["final_refs"] = chosen["resident_refs"]
                     state["read_goal"] = chosen["read_goal"]
+                    if joint_budgeted:
+                        nominated = chosen["resident_refs"]
+                        continuation["nominated_refs"] = copy.deepcopy(nominated)
+                        prioritized = sorted(nominated, key=lambda ref: memories[
+                            ref["item_index"]].get("kind") == "semantic_view")
+                        admitted: list[dict[str, Any]] = []
+                        for ref in prioritized:
+                            if self.input_tokens(reopened_messages([*admitted, ref]),
+                                                 enable_thinking=reader_thinking) <= input_limit:
+                                admitted.append(ref)
+                        continuation.setdefault("budget_admissions", []).append({
+                            "stage": active["stage"], "nominated_refs": copy.deepcopy(nominated),
+                            "admitted_refs": copy.deepcopy(admitted),
+                            "excluded_refs": [ref for ref in nominated if ref not in admitted],
+                            "policy": "whole_nominated_sources_before_semantic_views",
+                        })
+                        chosen["resident_refs"] = admitted
+                    continuation["final_refs"] = chosen["resident_refs"]
                     continuation["selection_complete"] = selected["done"]
                     for ref in chosen["resident_refs"]:
                         if ref not in continuation["selected_refs"]:
                             continuation["selected_refs"].append(copy.deepcopy(ref))
                         if (ref not in list_refs and ref not in continuation["pending_refs"]):
                             continuation["pending_refs"].append(copy.deepcopy(ref))
+                    if joint_budgeted and not continuation["pending_refs"]:
+                        # Every pool page was actually delivered. Use the bounded
+                        # nominations instead of repeating empty-body repair calls.
+                        continuation["selection_complete"] = True
                     del continuation["active_page"]
                     state["pending_refs"] = copy.deepcopy(continuation["pending_refs"])
                     write_json(path, state)

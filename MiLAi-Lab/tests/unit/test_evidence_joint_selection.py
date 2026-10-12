@@ -8,6 +8,8 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
+import pytest
+
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.service import MemoryService
@@ -110,3 +112,78 @@ def test_joint_pool_delivers_excluded_semantic_view_with_its_actual_source(tmp_p
             "delivered_page_refs"]} == {0, 1, 2, 3}
         assert read_json(execution.root / snapshot_id)["materials"] == joint
         assert not service.records()  # This is a Reader mechanism test, not model formation.
+
+
+@pytest.mark.parametrize("release_capacity", [False, True])
+def test_joint_budget_admits_whole_nominations_without_empty_repair_calls(
+    tmp_path: Path, release_capacity: bool,
+) -> None:
+    """Repeated oversized nominations were a real unsent-final failure in J1's pilot."""
+    from milai_lab.runners.edit_benchmarks import ReadDeliveryIncomplete
+
+    class LiteralTokenizer:
+        def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
+            return [0] * len(json.dumps(messages))
+
+    memories = [{"kind": "original_source", "id": f"source-{index}",
+                 "session_id": f"session-{index}", "date": "2030-01-01",
+                 "turn_range": [0, 1], "text": json.dumps([
+                     {"role": "user", "content": f"ORIGINAL_{index} " + "x" * 18000}])}
+                for index in range(2)]
+    memories.append({"kind": "semantic_view", "record_id": "state", "revision": 1,
+                     "content": "The first report states a decision, not completed retirement.",
+                     "scope": {}, "revision_evidence": []})
+    snapshot_id = "native/joint/retrieval.json"
+    policies = (["budgeted_nominations_v2"] if release_capacity
+                else [None, "budgeted_nominations_v2"])
+    for policy in policies:
+        execution = BenchmarkRun.__new__(BenchmarkRun)
+        execution.root = tmp_path / (policy or "original")
+        execution.settings = {
+            "evidence_variant": "J1", "joint_selection": policy,
+            "memory_view_mode": "direct", "context_tokens": 30000,
+            "model": {"max_tokens": 100, "enable_thinking": True}, "interface_version": "I2",
+        }
+        execution.tokenizer = LiteralTokenizer()
+        execution.client = SimpleNamespace(config=SimpleNamespace(max_calls=5))
+        write_json(execution.root / snapshot_id, {"materials": memories})
+        pages: list[list[int]] = []
+
+        def chat(
+            messages: Any, response_format: Any, *, execution: BenchmarkRun = execution,
+            pages: list[list[int]] = pages, **kwargs: Any,
+        ) -> dict[str, Any]:
+            payload = json.loads(messages[1]["content"])
+            assert execution.input_tokens(messages) <= 29388
+            if response_format is not None:
+                pages.append(payload["memory_item_indices"])
+                content = ('{"item_indices":[],"drop_item_indices":[0],"done":false}'
+                           if release_capacity and len(pages) > 1 else
+                           '{"item_indices":[0,1,2],"done":false}')
+            else:
+                expected = [1, 2] if release_capacity else [0, 2]
+                assert payload["memory_item_indices"] == expected
+                assert payload["memories"] == [memories[index] for index in expected]
+                content = "The report states a decision."
+            return {"choices": [{"finish_reason": "stop", "message": {"content": content}}],
+                    "usage": {"prompt_tokens": 20, "completion_tokens": 5, "total_tokens": 25}}
+
+        execution.client.chat = chat
+        if policy is None:
+            with pytest.raises(ReadDeliveryIncomplete, match="read_call_limit"):
+                execution.answer_material("Which status?", "", "joint", memories,
+                                          snapshot_id=snapshot_id)
+        else:
+            answer, _ = execution.answer_material("Which status?", "", "joint", memories,
+                                                  snapshot_id=snapshot_id)
+            assert answer == "The report states a decision."
+            assert all(pages) and set(index for page in pages for index in page) == {0, 1, 2}
+            view = read_json(execution.root / "http/joint/memory-view.json")
+            admission = view["capacity_continuation"]["budget_admissions"][-1]
+            assert [ref["item_index"] for ref in admission["excluded_refs"]] == (
+                [] if release_capacity else [1])
+            if release_capacity:
+                assert [ref["item_index"] for ref in view["capacity_continuation"][
+                    "budget_admissions"][0]["excluded_refs"]] == [1]
+            assert view["capacity_continuation"]["final_input_tokens"] <= 29388
+        assert read_json(execution.root / snapshot_id)["materials"] == memories
