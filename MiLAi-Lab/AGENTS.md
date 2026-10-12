@@ -4,7 +4,7 @@ User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPE
 This supersedes older scheduling/approval gates below. Develop first; no SHA checks or new review platform.
 Root tree /cra/memory/mx_memory/MiLAi-worktrees/evidence-development-20261013, base f964292a includes PR121.
 Original main/integration dirty plans preserved. Product/Archive untouched. Full goal ACTIVE/incomplete.
-Root alone owns real model HTTP with original continuous budget.json and serial owner lock; unknown floor8gen/1emb retained.
+Root alone owns real model HTTP with original continuous budget.json and serial owner lock; unknown floor now9gen/1emb retained after CPU timeout (original8gen/1emb unchanged through earlier branches).
 Original b558 CLOSED32sessions/73QA=71answers+2missing; replay uses exact saved prefix recalls, no final-bank search,
 no new maintenance/recall/ActivationIndex feedback. Original1201witness fragments verified prefix-visible, noHTTP.
 
@@ -46,50 +46,34 @@ Actual artifacts/evidence-development/*-process.json + terminals + /proc authori
 Frozen source-f9f01661/source-c9f2b68e/source-79749893/source-319b6878 immutable. TMPDIR E/runtime on/cra.
 No root/tmp space; use/cra or/data, do not delete unrelated data. Existing shared GPU services unchanged.
 
-MemSifter publishedcheckpoint now downloaded and CPU endpoint STARTED; current realpilot RUNNING.
-Official download resume session42915/PID447213 CLOSED rc0 at19:23:14UTC; bothshards total8,822,894,504bytes,
-no.incomplete, noSHA. Original attemptfailure preserved. Weights /data/models/milai-memsifter-4b-20261013/checkpoint.
-CPUworker existingbge-reranker container,torch2.7.0/transformers4.52.4,8threads FP32 forcedCPUFlashSDPA,
-32kcontext/4096output. Load17.97s,peakRSS22,241,255,424bytes,CUDAfalse. ExistingGPUservices unchanged.
-Ownedserver wrapper619925/dockerclient619927, tool15974; actualworker hostPID619948/containerPID748.
-Server stdout/stderr and process files E/memsifter-cpu-server-*. On eventual ownedserver shutdown, normalize
-process metadata generation_dispatched -> generation_dispatched_at_server_start (wrapper records launchmoment);
-actualgeneration receipts are in the pilot, not this startupflag. Stop only ourworker after all actualcalls settle.
-CURRENT REAL queue: run_memsifter_pilot.py session55929/supervisor623426/worker623471, frozen319b6878,
-started19:24:36UTC; predict thenfirstscore serial; no retry. ActualE/s0-memsifter-pilot-v1-*-process.json authoritative.
-Pilot2 fixed U2S0Q0direct (already answered, ranking skipped) +U1S4Q2paged (first actualCPUrequest23035input live).
-Rankbatches[0] singleton skip,[1,2]23035,[3,4]12833, owninputbudget28160, allcalls count12total allowance.
-R0 is closedS0-budgeted24 matchingquestions; nativeS0 remainsstronger simplequalityreference. No newprobe24matrix.
-NO_PROXY AND no_proxy privatehost172.17.0.4 +localhost preserved in NEW pilot process; do not modifyactiveenv.
-First source modeltwo localtokenizers compared29prompts fulltokenIDarrays identical; genericregexwarning retained.
-No hashes/no tokenizerpatch. Actualusage should be checked in returned receipt. Ranker CPUprecision differspublishedBF16.
-After pilot closes: full2 label/coverage, actualrank/page/final canonicalindices, permodel/stage costs, runtimeCPU/wall,
-load once/RSSmax; monetarycost and Reader GPUtime unmeasured. Only useful signal would justify24/73/longhistory.
-Agent ranking_adapter assigned read-only actualranker/cost audit; no other agent authorized realHTTP.
-Latest observation19:53:25UTC: firstCPUrank23035input stillactive, no response, no failure. Do not restart,
-score partial results, change parameters or launch another model. HTTPtimeout7200s is frozen; inspect actual
-response/failure/ownedPIDs when it settles. Current pending ledgerreservation is not a new closed unknown.
-Given firstcall>27min versus pairedR0 paged70.69s, Root decided NO24 expansion on currentCPU; finish this
-predeclaredpilot and firstscore, report actualreceipt costs/limits, then stop only ownedCPUworker.
-Matched2R0 is1C+1invalid,5calls84354tokens/80.03s; directinvalid1 belongsranking_skipped and cannot supply
-ranker qualitygain. ActualR1 direct already answered4933tokens/7.48s, not yetscored. Full24 denominators differ.
-On closure need paired2 table + candidateownscore, actualrank/pages/final sourceindices, permodelcost,
-CPU/wall/loadonce/RSSmax, strict same-pool evidence, independentmodelaudit, finaldocs/localcommit.
-All A/C/D realwork is closed; do not reopen rejected variants or repeat same-food prompt edits.
-Update20:09:56UTC: actualCPU619948 and caller623471 stilllive, firstrequest stillnoresponse; verifiedwait.
-This goalturn made progress: observedcheckpoint repo revision from existingmetadata (noSHAchecks), and
-independentfullplan audit68requirements/14checklistitems. Rootcopy E/development-plan-final-audit-preparation.json.
-The audit explicitly leaves overallcompletion false pendingB settlement. C interface/finite experiment actions
-are evidenced but naturalsemanticprotection is contradicted; never relabel C semanticacceptance as passed.
-Final B may be successful or its actualfailure/partial outcome; do not inventcompletion, force24, or ignore
-pending/unknown costs. Re-evaluate overallplancloseout only after actualreceipts/terminal/resourceclosure.
-Update20:26:28UTC: sameactualCPU619948/caller623471 live, firstrequest stillcomputing after~61min.
-FrozenHTTPtimeout7200s starts at request dispatch around19:24:xxUTC; do not interpret earlier polls as timeout.
-NarrowC attribution audit confirmed unsupportedtime already in Extractor rawchanges[1].time and Writerraw
-assertion.applicability.event_at. Compiler/binding onlycopies it; separate occurred_at is actualreport metadata.
-No deterministic programdefault/overwrite defect found; do not add guessed datefilter or resume same-example
-prompt loop. This finding is recorded in report/f70ea130; no newtest/modelHTTP was required.
-No newgoalblock/pause; current wait is verifiedactiveCPUinference, not a missingpermission/resourcepretext.
+MemSifter official checkpoint downloaded at19:23:14UTC; files8,822,894,504bytes, noSHA. Existingmetadata
+repo revision cec4c7eb82fade1faf800204b7031892031f6660 is identity only. Path /data/models/milai-memsifter-4b-20261013/checkpoint.
+CPU FP32 pilot-v1 FAILED21:24:49UTC at frozen7200s ReadTimeout; direct prediction complete4933tokens/7.4815s
+and ranking_skipped, notscored. First rank batch23035input dispatched/noresponse; secondbatch/pagedReader/Judge NOT_RUN.
+ActualR0 twoquestions=1C+1invalid,5calls84354tokens/80.0341s. No full2qualityratio, no rankerqualityclaim.
+Original failure preserved; generation delta2requests/known4933/charged72526/unknown+1/reservation67593.
+Globalledgergenunknown9/embunknown1; do not refund unknown or reuse old result root for retry.
+Ownedworker619948/container748 SIGTERM after callerexit, gone21:25:55UTC; serverwrapper session15974 EXIT143,
+pilot55929 EXIT1; stopreceipt E/memsifter-cpu-owned-stop.json. Shared GPUservices unchanged.
+Server startupflag normalized generation_dispatched_at_server_start:false, actualgeneration_started_requests1/completed0.
+CPUprestop cumulativeuser17408.62/sys22248.84/elapsed7334.60s, peakRSS27480334336bytes includingload17.9656s;
+not perrequest receipt. Inputlocal/server23035 match, no confirmed output or finishreason.
+Root alreadydecided no24expansion currentCPU; not generalized toofficialGPU/BF16. No currentmodelrequests.
+
+Narrow runtime diagnostic prepared E/allocator_probe.py: existingTorch DynamicCache cat+repeat_kv, same FP32
+shapes8KV/32queryheads/23035length/128dim,8threads, no weights/model/attention/HTTP. Runserial freshprocess
+only afterownedworkerexit. Default firstprobe failed before tensors because dladdr returned executable-relative
+symbolname; ranking_adapter examining realowner/PLT mapping and repairing diagnostic, no modelcalls authorized.
+Potential existingRay jemalloc LD_PRELOAD is sole intendedfactor; no newframework/quantization/backendpatch.
+Do not launch new model until actualcomponent evidence + modelreview justify. If justified use newpaged-onlyroot;
+originalfailedreservation and oldv1 remain. No automatic retry of originalcondition. No more samefoodprompt edits.
+
+All A/C/D realwork closed. C semanticjointsuccess NOT met; correct source-assisted Reader does not excuse stored
+sharedpredicate damage. event_at alreadywrong in Extractor rawchanges[1].time andWriterrawassertion; compiler
+onlycopies, occurred_at separatelyreportmetadata. No deterministic timestamp default bug; no speculative filter.
+Independentplan audit E/development-plan-final-audit-preparation.json covers68requirements/14checklistitems;
+finitefailedexperiments may close plan execution without claiming Csemanticacceptance. Finalaudit stillpending
+Bdiagnosis/result/cost report. No73/longhistory/training signal inA/D; keep these conditional branches NOT_RUN.
 
 No remote push/merge for this task; local commits/frozen experiments reviewable. No new goal pause/block condition.
 
