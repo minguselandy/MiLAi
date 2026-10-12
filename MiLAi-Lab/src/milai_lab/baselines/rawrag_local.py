@@ -17,8 +17,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 from milai_lab.contracts.memory_backend import IngestionResult, MemorySession, RetrievalResult
-
-BM25_VERSION = "0.2.2"
+from milai_lab.memory.retrieval import BM25_VERSION, flat_bm25_rank, raw_exchange_units
 
 
 class RawRAGLocal:
@@ -87,40 +86,15 @@ class RawRAGLocal:
             "SELECT session_id, date, turns FROM sessions ORDER BY ordinal"
         ):
             turns = json.loads(serialized)
-            if self.granularity == "session":
-                units.append({"id": session_id, "session_id": session_id, "date": date,
-                              "turns": turns,
-                              "index_text": " ".join(
-                                  row["content"] for row in turns if row["role"] == "user"),
-                              "turn_range": [0, len(turns)]})
-            else:
-                starts = [i for i, row in enumerate(turns) if row["role"] == "user"]
-                for start, end in zip(starts, [*starts[1:], len(turns)], strict=True):
-                    units.append({"id": f"{session_id}_{start + 1}", "session_id": session_id,
-                                  "date": date, "turns": turns[start:end],
-                                  "index_text": turns[start]["content"],
-                                  "turn_range": [start, end]})
+            units.extend(raw_exchange_units(session_id, date, turns,
+                                             granularity=self.granularity))
         return units
 
     def retrieve(self, question: str, date: str, *, key: str, limit: int) -> RetrievalResult:
         if type(limit) is not int or limit < 1:
             raise ValueError("RAWRAG_RETURN_LIMIT_INVALID")
         units = self._units()
-        ranked: list[dict[str, Any]] = []
-        if units:
-            # Optional dependency; importing the Lab core never imports this package.
-            from importlib import import_module
-            from importlib.metadata import version
-
-            import numpy as np
-            BM25Okapi = import_module("rank_bm25").BM25Okapi
-
-            if version("rank-bm25") != BM25_VERSION:
-                raise ValueError("RAWRAG_BM25_VERSION_CHANGED")
-            bm25 = BM25Okapi([row["index_text"].split(" ") for row in units])
-            scores = bm25.get_scores(question.split(" "))
-            ranked = [{**units[int(index)], "score": float(scores[index])}
-                      for index in np.argsort(scores)[::-1][:limit]]
+        ranked = flat_bm25_rank(units, question, limit)
         materials = [
             {"id": row["id"], "session_id": row["session_id"], "date": row["date"],
              "text": json.dumps(row["turns"], ensure_ascii=False),

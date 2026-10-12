@@ -51,6 +51,29 @@ _HOST_RELATION_FIELDS = {"relation_id", "source_unit", "target_unit", "relation_
 _HOST_METADATA_OBJECTS = {"evidence_refs", "relation_metadata"}
 
 
+def merge_source_ranges(ranges: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Union actual ranges only within one Source identity and revision.
+
+    Text equality, descriptions and semantic-record identities do not merge
+    sources. Callers still resolve current visibility and original bodies.
+    """
+    groups: dict[tuple[str, int], list[tuple[int, int]]] = {}
+    for span in ranges:
+        groups.setdefault((span["source_ref"], span["source_revision"]), []).append(
+            (span["start"], span["end"]))
+    result: list[dict[str, Any]] = []
+    for (source_ref, revision), spans in groups.items():
+        merged: list[tuple[int, int]] = []
+        for start, end in sorted(spans):
+            if merged and start <= merged[-1][1]:
+                merged[-1] = (merged[-1][0], max(end, merged[-1][1]))
+            else:
+                merged.append((start, end))
+        result.extend({"source_ref": source_ref, "source_revision": revision,
+                       "start": start, "end": end} for start, end in merged)
+    return result
+
+
 def _reader_diagnostics(view: dict[str, Any]) -> None:
     """Keep the old Reader's semantic clock information and explicit unknowns.
 

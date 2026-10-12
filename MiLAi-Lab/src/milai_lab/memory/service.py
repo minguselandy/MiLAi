@@ -8,18 +8,19 @@ not concurrently mutate this isolated namespace. No cross-system exactly-once.
 
 from __future__ import annotations
 
+import copy
 import fcntl
 import json
 import threading
 import time
 import unicodedata
 import uuid
-from collections.abc import Callable, Iterator
+from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
 from dataclasses import asdict
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, cast
+from typing import Any, Literal, cast
 
 from langgraph.store.sqlite import SqliteStore
 
@@ -46,7 +47,12 @@ from milai_lab.memory.observation import (
 from milai_lab.memory.observation import (
     observation_view as field_observation_view,
 )
-from milai_lab.memory.retrieval import SemanticRetriever, semantic_text
+from milai_lab.memory.retrieval import (
+    SemanticRetriever,
+    flat_bm25_rank,
+    raw_exchange_units,
+    semantic_text,
+)
 
 
 def _json(value: Any) -> str:
@@ -1855,6 +1861,167 @@ class MemoryService:
             episode_ids=episode_ids, pending_only=pending_only, limit=limit
         )
 
+    def read_source_materials(
+        self, materials: Sequence[dict[str, Any]],
+    ) -> list[dict[str, Any]]:
+        """Reopen selected original ranges under current Source visibility.
+
+        Cached text is never evidence here. Overlap within each item is merged
+        by Source identity/version; separate sources with identical wording stay
+        separate. Item order/identity stays fixed, including empty unavailable
+        markers. No operation credential is issued by this read-only material.
+        """
+        from milai_lab.memory.functional_state import body_text
+        from milai_lab.memory.reader_projection import merge_source_ranges
+
+        result = []
+        with self._locked():
+            for material in materials:
+                if material.get("kind") != "original_source":
+                    result.append(copy.deepcopy(material))
+                    continue
+                spans = merge_source_ranges([
+                    *material["source_ranges"], *material.get("unavailable_source_ranges", []),
+                ])
+                turns, actual_ranges, unavailable = [], [], []
+                partial = False
+                for span in spans:
+                    event = self.source(span["source_ref"])
+                    if event is None or event.get("source_revision", 1) != span["source_revision"]:
+                        unavailable.append(dict(span))
+                        continue
+                    body = body_text(event)
+                    start, end = span["start"], span["end"]
+                    if not 0 <= start <= end <= len(body):
+                        raise FunctionalRejection("SOURCE_MATERIAL_RANGE_UNAVAILABLE")
+                    partial = partial or start != 0 or end != len(body)
+                    turn = {
+                        "source_ref": event["event_id"], "source_revision": span["source_revision"],
+                        "session_id": event["session"], "role": event["role"],
+                        "origin": event["origin"], "content": body[start:end],
+                        "timestamp": event.get("occurred_at", event["observed_at"]),
+                        "observed_at": event["observed_at"],
+                        "occurred_at": event.get("occurred_at"),
+                        "range": [start, end], "source_total_codepoints": len(body),
+                    }
+                    if "calendar_context" in event:
+                        turn["calendar_context"] = event["calendar_context"]
+                    turns.append(turn)
+                    actual_ranges.append(dict(span))
+                result.append({
+                    "kind": "original_source", "provenance": "original_exchange",
+                    "id": material["id"], "session_id": material["session_id"],
+                    "date": turns[0]["timestamp"] if turns else material.get("date"),
+                    "turn_range": material["turn_range"],
+                    "text": json.dumps(turns, ensure_ascii=False),
+                    "source_ranges": actual_ranges, "unavailable_source_ranges": unavailable,
+                    "score": material.get("score"), "truncated": partial or bool(unavailable),
+                    "coverage": "selected_visible_source_ranges", "body_delivered": bool(turns),
+                    "visibility": "partial" if turns and unavailable else
+                                  "visible" if turns else "unavailable",
+                })
+        return result
+
+    def search_sources(
+        self, query: str, limit: int = 20, *,
+        granularity: Literal["session", "turn"] = "session",
+        source_refs: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Independently rank arrived original text with the existing flat BM25.
+
+        Source storage, rather than semantic formation or Episode descriptions,
+        owns the pool. An optional ordered Source allowlist is an arrival-prefix
+        boundary, never an effective-date test. Without one, the pool is exactly
+        the currently captured visible Sources in this owner bank.
+        """
+        from milai_lab.memory.functional_state import body_text
+
+        if type(limit) is not int or limit < 1 or granularity not in {"session", "turn"}:
+            raise ValueError("SOURCE_RETRIEVAL_LIMIT_OR_GRANULARITY_INVALID")
+        with self._locked():
+            visible = {source["event_id"]: source for source in self.sources()}
+            ordered = list(visible) if source_refs is None else list(dict.fromkeys(source_refs))
+            sessions: dict[str, list[dict[str, Any]]] = {}
+            for ref in ordered:
+                if ref in visible:
+                    source = visible[ref]
+                    group = source.get("session") or source["event_id"]
+                    sessions.setdefault(group, []).append(source)
+            units = []
+            for session_id, sources in sessions.items():
+                # Benchmark captures already have exact public turn ordinals.
+                # Host exchanges retain their existing capture order; fact dates
+                # never reorder arrival or fill an absent session association.
+                if all(source["capture_key"].startswith("turn:")
+                       and source["capture_key"][5:].isdecimal() for source in sources):
+                    sources.sort(key=lambda source: int(source["capture_key"][5:]))
+                turns = [{"role": source["role"], "content": body_text(source),
+                          "timestamp": source.get("occurred_at", source["observed_at"]),
+                          "source_ref": source["event_id"],
+                          "source_revision": source.get("source_revision", 1)}
+                         for source in sources]
+                first_user = next((index for index, turn in enumerate(turns)
+                                   if turn["role"] == "user"), len(turns))
+                selected = []
+                if granularity == "turn" and first_user:
+                    # Original Tool/assistant material without a user anchor is
+                    # still a real Source range, not an invented user exchange.
+                    prefix = raw_exchange_units(session_id, turns[0]["timestamp"],
+                                                turns[:first_user])[0]
+                    prefix["id"] = session_id + "_source_prefix"
+                    selected.append(prefix)
+                if granularity == "session" or first_user < len(turns):
+                    selected.extend(raw_exchange_units(session_id, turns[0]["timestamp"], turns,
+                                                       granularity=granularity))
+                for unit in selected:
+                    # All actual Source wording is searchable, including original
+                    # Tool observations. RawRAG's own user-only keys stay unchanged.
+                    unit["index_text"] = " ".join(turn["content"] for turn in unit["turns"])
+                units.extend(selected)
+            ranked = flat_bm25_rank(units, query, limit)
+            descriptors = [{"kind": "original_source", **{key: unit[key] for key in (
+                "id", "session_id", "date", "turn_range", "score")},
+                "source_ranges": [{"source_ref": turn["source_ref"],
+                                   "source_revision": turn["source_revision"],
+                                   "start": 0, "end": len(turn["content"])}
+                                  for turn in unit["turns"]]} for unit in ranked]
+            materials = self.read_source_materials(descriptors)
+            selected_refs = dict.fromkeys(span["source_ref"]
+                                          for material in materials
+                                          for span in material["source_ranges"])
+            raw_events = [event for ref in selected_refs
+                          if (event := self.source(ref)) is not None]
+        return {
+            "ok": True, "raw_events": raw_events, "source_materials": materials,
+            "source_retrieval": {
+                "retrieval": "source_flat_bm25", "granularity": granularity,
+                "index_text": "all_original_source_roles", "requested_count": limit,
+                "indexed_count": len(units), "returned_count": len(materials),
+                "visible_source_count": sum(ref in visible for ref in ordered),
+                "returned_source_count": len(raw_events),
+                "prefix": "explicit_source_ids" if source_refs is not None else "captured_visible",
+            },
+        }
+
+    def search_evidence(
+        self, query: str, *, source_limit: int = 20, semantic_limit: int = 10,
+        granularity: Literal["session", "turn"] = "session",
+        source_refs: Sequence[str] | None = None,
+    ) -> dict[str, Any]:
+        """Two independent quotas; original evidence is not gated by semantic hits."""
+        with self._locked():
+            originals = self.search_sources(query, source_limit, granularity=granularity,
+                                            source_refs=source_refs)
+            semantic = self.search(query, limit=semantic_limit, include_raw=False,
+                                   source_refs=source_refs)
+            records = semantic["records"]
+        return {**semantic, **originals, "records": records,
+                "retrieval": "independent_source_and_semantic",
+                "status": "found" if records or originals["source_materials"] else "no_results",
+                "semantic_retrieval": {"retrieval": semantic["retrieval"],
+                                       "requested_count": semantic_limit,
+                                       "returned_count": len(records)}}
+
     def index_source_episodes(self) -> dict[str, Any]:
         """Add episode indices for visible older sources without recapturing them."""
         from milai_lab.memory.episodes import EpisodeIndex
@@ -2612,12 +2779,13 @@ class MemoryService:
         return [self.read(row["id"]) for row in self._rows(self.namespace)]
 
     def search(
-        self, query: str, limit: int = 10, *, dense: bool = False, include_raw: bool = True
+        self, query: str, limit: int = 10, *, dense: bool = False, include_raw: bool = True,
+        source_refs: Sequence[str] | None = None,
     ) -> dict[str, Any]:
         if not 1 <= limit <= 100:
             raise ValueError("V13_SEARCH_LIMIT_INVALID")
         degradation = None
-        if dense and self.semantic_retriever is None:
+        if dense and self.semantic_retriever is None and source_refs is None:
             try:
                 page = self.store.search(self.namespace, query=query, limit=limit)
                 rows = [self.read(item.key) for item in page if item.namespace == self.namespace]
@@ -2636,10 +2804,19 @@ class MemoryService:
         enumerate_bank = not query.strip()
         records = self.records()
         raw = self.sources() if include_raw else []
+        allowed_sources = set(source_refs) if source_refs is not None else None
+        if allowed_sources is not None:
+            # Apply arrival restrictions before ranking/embedding, so a later
+            # supported record cannot crowd out or influence this prefix.
+            records = [row for row in records if row.get("value")
+                       and row["value"].get("source_ref") and
+                       set(self._version_source_refs(row["value"])) <= allowed_sources]
+            raw = [source for source in raw if source["event_id"] in allowed_sources]
         if self.functional_contract == "functional_v1":
             raw = [event for event in raw if event["role"] != "assistant"]
         episode_matches: dict[str, int] = {}
-        if include_raw and tokens and self.memory_profile == "unified_v1":
+        if include_raw and tokens and self.memory_profile == "unified_v1" \
+                and allowed_sources is None:
             from milai_lab.memory.episodes import EpisodeIndex
 
             episode_matches = EpisodeIndex(self).source_matches(query)
@@ -2664,6 +2841,9 @@ class MemoryService:
 
         if self.source_backlinks == "enabled" and tokens:
             all_sources = raw if include_raw else self.sources()
+            if allowed_sources is not None:
+                all_sources = [source for source in all_sources
+                               if source["event_id"] in allowed_sources]
             matching_sources = [
                 event
                 for event in all_sources
