@@ -240,8 +240,10 @@ S0/S1、额外排序、patch及J1由显式设置选择；未指定的材料条�
 | 结果与资源 | 旧标签、失败、逐题checkpoint、模型分项成本和未知用量均保留 | 无成功保证、独立Judge或未见用户泛化声明 |
 
 开发分支有可回退的独立提交：集成入口f9f01661、预算策略089e6637／319b6878、独立ranker
-b38d7bff、实际event指南修复d6f628f9、通用patch范围指南bb49ef92。代码与报告仅本地提交，
-未push或merge，也未声称远端CI验证。原用户工作树和未提交计划文档保持。
+b38d7bff、实际event指南修复d6f628f9、通用patch范围指南bb49ef92，有限实验收尾0e4f8da0。
+用户随后授权提交GitHub，代码与报告已推送至
+[`feat/lab-evidence-development-20261013`](https://github.com/minguselandy/MiLAi/tree/feat/lab-evidence-development-20261013)。
+未合并main，也未声称远端CI验证。原用户工作树和未提交计划文档保持。
 详细逐项审查、原始产物与主要对照均位于ignored `artifacts/evidence-development/`，
 原始私有正文、数据库、模型、运行日志不提交Git。报告记录可复查入口，失败不从比较中删除。
 
