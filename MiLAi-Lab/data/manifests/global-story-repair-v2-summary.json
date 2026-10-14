@@ -1,0 +1,115 @@
+{
+  "runtime_code": "4c988f10",
+  "cost": {
+    "chat/completions": {
+      "calls": 32,
+      "wall_seconds": 337.8600545823574,
+      "prompt_tokens": 371592,
+      "total_tokens": 415901,
+      "completion_tokens": 44309
+    },
+    "embeddings": {
+      "calls": 22,
+      "wall_seconds": 1.157495361752808,
+      "prompt_tokens": 1527,
+      "total_tokens": 1527,
+      "completion_tokens": 0
+    }
+  },
+  "messages": [
+    {
+      "message_id": "followup-before-effective",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance": [],
+      "read_tools": [
+        "read_memory",
+        "read_evidence"
+      ]
+    },
+    {
+      "message_id": "followup-reopen-after-forget",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance": [],
+      "read_tools": [
+        "read_memory",
+        "read_source",
+        "read_memory_history"
+      ]
+    },
+    {
+      "message_id": "followup-event-9",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance": [
+        "incomplete"
+      ],
+      "read_tools": [
+        "read_memory"
+      ]
+    },
+    {
+      "message_id": "followup-saved-history",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance": [],
+      "read_tools": [
+        "read_source",
+        "read_source",
+        "read_source"
+      ]
+    },
+    {
+      "message_id": "followup-forget-finance",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance": [],
+      "read_tools": [
+        "read_source",
+        "read_source"
+      ]
+    },
+    {
+      "message_id": "followup-after-effective",
+      "status": "COMPLETED",
+      "error": null,
+      "maintenance": [],
+      "read_tools": [
+        "read_memory",
+        "read_memory"
+      ]
+    }
+  ],
+  "resources_settled": true,
+  "study": "global-story-repair-v2",
+  "planned": 6,
+  "attempted": 6,
+  "host_completed": 6,
+  "acceptance": "PARTIAL",
+  "new_unknown": {
+    "generation": 0,
+    "embedding": 0
+  },
+  "semantic_correction": "incomplete: fresh edit output truncated at8192; not committed",
+  "history_query": "three rejected source reads, then known null final; one readonly compact recovery honestly reports missing history",
+  "forget": "five rejected proposals, then one actual visibility-only record_and_sources commit",
+  "state_review": {
+    "finance_id": "6f831331-9169-5bf0-a662-14d3d2c670bf",
+    "notifier_id": "aa1c2836-8e95-5484-a4bd-234189405509",
+    "finance_current_hidden": true,
+    "finance_history_hidden": true,
+    "finance_support_hidden": true,
+    "notifier_current_unchanged": true,
+    "notifier_all_prior_versions_readable": true,
+    "physical_erasure": false,
+    "effect": "visibility_only"
+  },
+  "reopen_answer_limit": "final answer overstates that tool rejection itself proves inaccessible history; direct copied-bank audit separately confirms actual visibility",
+  "setup_v1": {
+    "status": "failed_before_model",
+    "error": "GENERATION_ADMISSION_STATE_INCOMPATIBLE",
+    "calls": 0
+  },
+  "artifact_root": "artifacts/global-development/story-repair-v2"
+}

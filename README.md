@@ -28,7 +28,7 @@ Archive  → MiLAi-Artifact-Archive/README.md
 
 ## 当前 Lab 开发
 
-开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`，当前正常故事运行源 `dbc3bda8`，维护源绑定 `be7c5e6f`。
+开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`，当前代码 `6c0de441`，维护源绑定 `be7c5e6f`。
 执行[全局开发规划](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。
 [开发记录与运行方式](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md)包含实际查询结果和成本。
 
@@ -36,8 +36,10 @@ Archive  → MiLAi-Artifact-Archive/README.md
 Benchmark 明确使用 S0。20 条同库查询已运行：10 条机制来源 Top-1 为 10/10，
 一位已暴露开发用户的 32 会话、10 条查询 Top-1 为 9/10。这是来源召回结果，尚非答案质量。
 B 固定8题首次评分为控制3/8、证据包5/8，预测tokens下降68.8%；仍有缺答和评分分歧。
-C 源绑定修复已通过12事件、同前态recipe与两条自然更新的有限检查；完整Host17消息故事正在执行。
-下一项是完成正常链、按需视图查询和两段长期前缀比较；保留用户确认尚未运行。
+C 源绑定修复已通过12事件、同前态recipe与两条自然更新的有限检查；完整Host故事首轮在16/17条闭合，未通过历史读取与遗忘验收。
+目录/正文容量修复后，实际副本中遗忘成功且7个通知历史版本保留；更正截断、Reader规则混淆仍未解决。
+`6c0de441`接通证据包历史导航；D四题比较不支持整条视图的质量/成本优势。
+两段长期前缀比较已串行启动；后续选择最终候选并进行保留用户确认。
 完整计划仍在执行；训练与 Product 适配按规划中的实际收益条件推进。
 
 - [代码结构与项目地图](MiLAi-Lab/docs/PROJECT_MAP.md)
