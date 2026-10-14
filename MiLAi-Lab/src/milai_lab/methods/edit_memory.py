@@ -129,6 +129,8 @@ class EditMemory:
             raise ValueError("EDIT_INTERFACE_INVALID")
         self.interface_version = interface_version
         self.features = features or EditFeatures()
+        if self.features.dependency_updates and (arm != "M" or interface_version != "I2"):
+            raise ValueError("DEPENDENCY_UPDATES_REQUIRE_M_I2")
         if maintenance_mode not in {"legacy", "event_delta_v1"}:
             raise ValueError("EDIT_MAINTENANCE_MODE_INVALID")
         if maintenance_mode != "legacy" and interface_version == "v1":
@@ -1281,6 +1283,24 @@ class EditMemory:
         change_candidates: list[dict[str, Any]] | None = None,
         prior_context: list[dict[str, Any]] | None = None,
     ) -> list[dict[str, str]]:
+        if "dependency_regions" in packet:
+            # The extra phase predicts scope; the existing editor still decides
+            # the actual semantic delta and commits through the usual service.
+            messages = self.edit_messages(
+                {key: value for key, value in packet.items() if key != "dependency_regions"},
+                date, allow_create=allow_create, schema=schema,
+                change_candidates=change_candidates, prior_context=prior_context)
+            regional_payload = json.loads(messages[1]["content"])
+            regional_payload["dependency_regions"] = packet["dependency_regions"]
+            messages[1]["content"] = json.dumps(
+                regional_payload, ensure_ascii=False, separators=(",", ":"))
+            messages[0]["content"] += (
+                " Reconsider affected_units using the original sources. Read-only units are "
+                "context, not edit targets. Reachability does not require a change or a "
+                "retraction: retain claims when their remaining support or scope still holds. "
+                "New independently supported claims may be appended; do not duplicate old "
+                "read-only claims to evade the modification region.")
+            return messages
         response_schema = (
             schema if schema is not None else self.envelope_schema(allow_create=allow_create)
         )

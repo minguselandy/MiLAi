@@ -1,3 +1,11 @@
+# 2026-10-14 方法架构 v3：新研究目标执行中
+
+当前工作分支 `feat/lab-method-architecture-20261014`，基于 `8293a4e7`。
+新目标见 [执行记录](MILAI_METHOD_ARCHITECTURE_EXECUTION_20261014.md)。
+影响区域/只读上下文和历史补证首切片已开发；两臂新故事 prepare 完成，真实模型调用 0。
+旧 GLOBAL 确认继续保持暂停，其活进程占有原账本串行锁；已向用户询问是否结束旧暂停进程来释放锁，尚未执行。新研究目标保持 active/incomplete。
+以下原 GLOBAL 状态为前一目标的记录，不代表新架构目标已暂停或已完成。
+
 # MiLAi Lab 当前状态
 
 2026-10-14，实验已按用户明确要求暂停，目标状态为`paused`。完整规划尚未完成。开发分支 `feat/lab-global-development-20261014`；最新方法代码

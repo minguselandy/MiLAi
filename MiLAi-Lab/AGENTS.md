@@ -1,3 +1,16 @@
+# Active architecture research task, 2026-10-14
+
+User activated docs/MILAI_METHOD_ARCHITECTURE_EXPERIMENT_PLAN_20261014_v3.md.
+This is a NEW active goal in feat/lab-method-architecture-20261014, based on
+8293a4e7. The GLOBAL confirmation below remains paused; do not confuse its
+historical paused goal with this active research task. No subagents or SHA checks.
+Read docs/MILAI_METHOD_ARCHITECTURE_EXECUTION_20261014.md for current evidence.
+Shared continuous ledger and serial HTTP ownership remain. At this checkpoint
+PIDs 1376965 and 1626865 are actually stopped and the owner lock is actually held.
+No new model request has been sent. Develop/test/prepare independently; do not
+bypass the lock, reset accounting, or silently resume/kill the old queue.
+Full W0-W5/E0-E5 scope remains; first code/tests do not complete the goal.
+
 # Current handoff: experiments PAUSED by explicit user request, 2026-10-14
 
 GLOBAL goal status is PAUSED at the user’s explicit request. Full plan remains incomplete.

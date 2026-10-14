@@ -22,6 +22,7 @@ class EditFeatures:
     temporal_scope: bool = False
     patch_text: bool = False
     proposition_updates: bool = False
+    dependency_updates: bool = False
 
     @classmethod
     def from_settings(cls, settings: dict[str, Any]) -> EditFeatures:
@@ -49,6 +50,8 @@ class EditFeatures:
             settings.pop("patch_text")
         if not self.proposition_updates:
             settings.pop("proposition_updates")
+        if not self.dependency_updates:
+            settings.pop("dependency_updates")
         return settings
 
 

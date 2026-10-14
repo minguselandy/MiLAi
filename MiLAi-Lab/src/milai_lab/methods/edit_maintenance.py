@@ -21,6 +21,7 @@ from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.retrieval import merge_candidates
 from milai_lab.memory.working_set import record_candidate
+from milai_lab.methods.dependency_memory import impact_request, plan_regions, scoped_edit_schema
 from milai_lab.methods.edit_memory import EditMemory
 
 MaintenanceRecipe = Literal["single_pass", "extract_then_edit"]
@@ -687,6 +688,9 @@ def maintain_event(
                 for r in state["receipts"]
             ),
             **({"outcome": state["outcome"]} if "outcome" in state else {}),
+            **({"dependency_selection": copy.deepcopy(state["dependency_selection"]),
+                "dependency_regions": copy.deepcopy(state["dependency_regions"])}
+               if "dependency_regions" in state else {}),
             **({"execution_source_refs": list(execution_refs)} if execution_refs else {}),
             **({"batches": copy.deepcopy(batches),
                 "source_batch_count": len(state["batches"])} if "batches" in state else {}),
@@ -857,14 +861,28 @@ def maintain_event(
             return result()
         if state["phase"] == "edit":
             view = state["view"]
+            packet, schema = view["packet"], view["schema"]
+            if method.features.dependency_updates and view["mapping"]["units"]:
+                if "dependency_selection" not in state:
+                    request = impact_request(packet, view["mapping"], date)
+                    selection = call("impact", request["messages"], request["schema"])
+                    Draft202012Validator(request["schema"]).validate(selection)
+                    state.update(dependency_selection=selection,
+                                 dependency_regions=plan_regions(view["mapping"], selection),
+                                 phase="edit")
+                    save()
+                packet = {**packet, "dependency_regions": state["dependency_regions"]}
+                schema = scoped_edit_schema(schema, state["dependency_regions"])
             messages = method.edit_messages(
-                view["packet"], date, allow_create=state.get("allow_create", True),
-                schema=view["schema"],
+                packet, date, allow_create=state.get("allow_create", True),
+                schema=schema,
                 change_candidates=(method.writer_changes(state["changes"], view["mapping"])
                                    if state["changes"] is not None else None),
                 prior_context=state.get("prior_context", []),
             )
-            envelope = call("edit", _replay_context(messages, delivery), view["schema"])
+            envelope = call("edit", _replay_context(messages, delivery), schema)
+            if method.features.dependency_updates:
+                Draft202012Validator(schema).validate(envelope)
             state.update(
                 proposals=method.envelope_proposals(envelope, view["mapping"]),
                 phase="commit",

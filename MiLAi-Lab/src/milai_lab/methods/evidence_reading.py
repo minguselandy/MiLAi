@@ -14,6 +14,7 @@ from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.memory.retrieval import flat_bm25_rank, merge_candidates
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.working_set import material_ref, plan_delivery
+from milai_lab.methods.dependency_memory import query_support
 from milai_lab.methods.edit_maintenance import parse_object
 from milai_lab.methods.edit_memory import EditMemory
 
@@ -43,6 +44,7 @@ def build_evidence_packs(
     tokenization: Literal["rawrag_space", "unicode_v1"] = "unicode_v1",
     calendar_context: str | None = None,
     source_scope: dict[str, Any] | None = None,
+    dependency_selections: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Split only the captured pool; keep complete exchanges and one preceding exchange.
 
@@ -82,24 +84,47 @@ def build_evidence_packs(
     ranked = flat_bm25_rank(source_packs, question, len(source_packs),
                            tokenization=tokenization)
     semantic = []
+    selected_records = list(records)
     for row in records:
+        selection = (dependency_selections or {}).get(row["id"], {})
+        for revision in dict.fromkeys(selection.get("history_revisions", [])):
+            if revision == row["value"]["revision"]:
+                continue
+            historical = service.read(row["id"], revision)
+            if historical["ok"]:
+                selected_records.append({**historical, "historical_selection": True})
+    for row in selected_records:
         version = row["value"]
         state = version.get("edit_state")
         if not state:
             continue
         hit = row.get("retrieval_navigation", {}).get("unit_id")
-        ids, relations = (unit_closure(state, hit) if hit else
+        selection = (dependency_selections or {}).get(row["id"])
+        historical = row.get("historical_selection", False)
+        ids, relations = (query_support(state, selection["roots"],
+                                       excluded=selection["excluded"])
+                          if selection is not None and not historical else
+                          unit_closure(state, hit) if hit else
                           ([unit["unit_id"] for unit in state["units"]],
                            state.get("relations", [])))
+        if not ids and selection is not None and not selection["history_revisions"]:
+            continue
         selected_units = [unit for unit in state["units"] if unit["unit_id"] in ids]
         handles = list(dict.fromkeys(ref["evidence_id"] for item in [*selected_units, *relations]
                                     for ref in item["evidence_refs"]))
+        if historical or (selection is not None and selection["history_revisions"]):
+            # A retraction's witness may no longer support any surviving unit.
+            handles = list(dict.fromkeys([*handles, *version.get("revision_evidence", []),
+                                         *(ref for edit in version.get("edit_operations", [])
+                                           for ref in edit["evidence"])]))
         view = EditMemory.revision_view(version, query_time=date,
                                        query_calendar_context=calendar_context)
         view["units"] = [unit for unit in view["units"] if unit["unit_id"] in ids]
         view["relations"] = copy.deepcopy(relations)
         semantic.append({
-            "kind": "semantic_view", "id": row["id"], "record_id": row["id"],
+            "kind": "semantic_view",
+            "id": f"{row['id']}:history:{version['revision']}" if historical else row["id"],
+            "record_id": row["id"],
             "revision": version["revision"], "scope": version["scope"],
             "matter_description": state.get("matter_description", version["scope"]),
             "applicability": view, "selected_unit_ids": ids,
@@ -109,6 +134,8 @@ def build_evidence_packs(
             "revision_evidence": read_revision_evidence(service, {"revision_evidence": handles}),
             "index_text": "\n".join(unit["text"] for unit in selected_units),
             "pack_kind": "supported_semantic_units",
+            **({"dependency_selection": copy.deepcopy(selection)} if selection is not None else {}),
+            **({"version_view": "historical_exact_revision"} if historical else {}),
         })
     packs = merge_candidates([[item for item in ranked if not item["scope_only"]], semantic])
     packs.extend(item for item in ranked if item["scope_only"])
@@ -120,6 +147,74 @@ def build_evidence_packs(
                 span for item in [*originals, *additional] for span in item["source_ranges"]]),
         }
     return packs
+
+
+def dependency_read_request(
+    service: MemoryService, question: str, date: str, records: list[dict[str, Any]], *,
+    calendar_context: str | None = None,
+) -> dict[str, Any]:
+    """One bounded model decision over actual state and available revision numbers.
+
+    The caller meters this selection with its existing provider and budget. Exact
+    old bodies are opened only after selection, then passed to the common Reader.
+    """
+    records = list({row["id"]: row for row in records if row["value"].get("edit_state")}.values())
+    full = [{key: value for key, value in row.items() if key != "retrieval_navigation"}
+            for row in records]
+    packs = build_evidence_packs(service, question, date, [], full,
+                                calendar_context=calendar_context)
+    bodies = project_packs(open_evidence_packs(service, packs), list(range(len(packs))))
+    properties, mapping, history = {}, {}, {}
+    for index, row in enumerate(records):
+        alias = f"r{index}"
+        units = [unit["unit_id"] for unit in row["value"]["edit_state"]["units"]]
+        revisions, cursor = [], None
+        while True:
+            page = service.history_index(row["id"], cursor=cursor)
+            revisions.extend(page.get("revisions", []))
+            cursor = page.get("next_cursor")
+            if cursor is None:
+                break
+        history[alias] = {"pack": f"e{index}", "revisions": revisions,
+                          "current_revision": row["value"]["revision"]}
+        mapping[alias] = {"record_id": row["id"], "units": units}
+        refs = ({"type": "array", "items": {"type": "integer", "enum": list(range(len(units)))}}
+                if units else {"type": "array", "maxItems": 0})
+        properties[alias] = {
+            "type": "object", "additionalProperties": False,
+            "properties": {"roots": refs, "excluded": copy.deepcopy(refs),
+                           "history_revisions": {"type": "array", "items": {
+                               "type": "integer", "enum": revisions}} if revisions else {
+                                   "type": "array", "maxItems": 0}},
+            "required": ["roots", "excluded", "history_revisions"],
+        }
+    schema = {"type": "object", "additionalProperties": False,
+              "properties": properties, "required": list(properties)}
+    return {"schema": schema, "mapping": mapping, "messages": [
+        {"role": "system", "content": (
+            "Select query roots from actual memory and exclusions that are unnecessary for "
+            "this question's scope. Unit numbers correspond to u0,u1,... in each pack. "
+            "The program opens prerequisites and exceptions of roots, not unrelated sibling "
+            "claims. An alternative support that suffices need not open every alternative. "
+            "For historical saved-state or change explanations, choose actual history_revisions; "
+            "current support alone cannot recover a withdrawn rule or its reason. History "
+            "numbers are navigation, not proof of their contents. Later corrections do not "
+            "rewrite what was saved earlier. These decisions select evidence only; they do "
+            "not update memory or answer the question. Return the supplied schema."
+        )},
+        {"role": "user", "content": json.dumps({"question": question, "query_time": date,
+            "memories": bodies, "history": history, "response_schema": schema},
+            ensure_ascii=False, separators=(",", ":"))},
+    ]}
+
+
+def decode_dependency_reads(request: dict[str, Any], response: dict[str, Any]) -> dict[str, Any]:
+    Draft202012Validator(request["schema"]).validate(response)
+    return {row["record_id"]: {
+        "roots": [row["units"][i] for i in response[alias]["roots"]],
+        "excluded": [row["units"][i] for i in response[alias]["excluded"]],
+        "history_revisions": response[alias]["history_revisions"],
+    } for alias, row in request["mapping"].items()}
 
 
 def open_evidence_packs(
@@ -163,7 +258,11 @@ def open_evidence_packs(
                     root = dependencies["root_unit_id"]
                     old_state = actual["value"]["edit_state"]
                     new_state = current["value"]["edit_state"]
-                    ids, edges = (unit_closure(new_state, root) if root is not None else
+                    selection = item.get("dependency_selection")
+                    ids, edges = (query_support(new_state, selection["roots"],
+                                               excluded=selection["excluded"])
+                                  if selection is not None else
+                                  unit_closure(new_state, root) if root is not None else
                                   ([unit["unit_id"] for unit in new_state["units"]],
                                    new_state["relations"]))
                     old_ids = dependencies["unit_ids"]
@@ -177,9 +276,14 @@ def open_evidence_packs(
                 item["version_view"] = "historical_exact_revision" if changed else "current_units"
                 if changed and refresh_current:
                     root = dependencies["root_unit_id"] if dependencies else None
-                    if root is not None and root not in {
+                    current_ids = {
                         unit["unit_id"] for unit in current["value"]["edit_state"]["units"]
-                    }:
+                    }
+                    selection = item.get("dependency_selection")
+                    retracted = (not set(selection["roots"]) & current_ids
+                                 and not selection["history_revisions"] if selection is not None
+                                 else root is not None and root not in current_ids)
+                    if retracted:
                         result.append({"kind": "semantic_view", "record_id": item["record_id"],
                                        "visibility": "selected_unit_retracted",
                                        "body_delivered": False})
@@ -190,6 +294,8 @@ def open_evidence_packs(
                     item = build_evidence_packs(
                         service, "", view.get("query_time") or "", [], [current],
                         calendar_context=view.get("query_calendar_context"),
+                        dependency_selections=({item["record_id"]: item["dependency_selection"]}
+                                               if "dependency_selection" in item else None),
                     )[0]
                     item.update(version_view="current_at_snapshot",
                                 dependency_status="refreshed_explicit_dependencies")

@@ -541,7 +541,7 @@ class BenchmarkRun:
             raise ValueError("READER_RANKING_INVALID")
         stage_modes = settings.get("stage_enable_thinking", {})
         if (not isinstance(stage_modes, dict)
-                or set(stage_modes) - {"extract", "select", "edit", "reader"}
+                or set(stage_modes) - {"extract", "select", "impact", "edit", "reader"}
                 or any(type(value) is not bool for value in stage_modes.values())):
             raise ValueError("STAGE_ENABLE_THINKING_INVALID")
         root.mkdir(parents=True, exist_ok=True)
@@ -1234,7 +1234,7 @@ class BenchmarkRun:
                         active_request_id += f":batch:{child_index}"
                         http_folder += f"/subbatch-{child_index}"
                     if work_ref:
-                        if stage_name == "edit":
+                        if stage_name in {"edit", "impact"}:
                             active_request_id = work_ref
                     calls = read_json(calls_path) if calls_path.exists() else []
                     http_key = http_folder + "/" + stage_path
@@ -1818,11 +1818,29 @@ class BenchmarkRun:
 
         variant = self.settings.get("evidence_variant", "S2")
         if self.settings.get("evidence_policy") == "question_pack_v1":
-            from milai_lab.methods.evidence_reading import build_evidence_packs
+            from milai_lab.methods.evidence_reading import (
+                build_evidence_packs,
+                decode_dependency_reads,
+                dependency_read_request,
+            )
 
+            records = native.get("records", []) if variant != "S0" else []
+            selections = None
+            if self.settings.get("dependency_reading") and records:
+                if self.client.config.max_calls < 2:
+                    raise ReadDeliveryIncomplete("read_call_limit")
+                request = dependency_read_request(
+                    service, question, date, records,
+                    calendar_context=self.settings.get("calendar_context"))
+                response = self.call(
+                    f"dependency-selection/{snapshot_id}", request["messages"], structured=True,
+                    response_format={"type": "json_schema", "json_schema": {
+                        "name": "dependency_reads", "schema": request["schema"]}})
+                selections = decode_dependency_reads(request, parse_object(response))
+                native["dependency_read_selection"] = selections
             materials = build_evidence_packs(
                 service, question, date, native["source_materials"],
-                native.get("records", []) if variant != "S0" else [],
+                records, dependency_selections=selections,
                 tokenization=self.settings.get("source_tokenization", "unicode_v1"),
                 calendar_context=self.settings.get("calendar_context"),
                 source_scope=native.get("source_scope") or {
@@ -1834,6 +1852,8 @@ class BenchmarkRun:
                     "materials": native["source_materials"],
                 },
             )
+            if selections is not None and materials:
+                materials[0]["pre_read_calls"] = 1
             native["material_assembly"] = {
                 "policy": "question_pack_v1", "evidence_variant": variant,
                 "independent_original_candidates": len(native["source_materials"]),
@@ -2112,7 +2132,10 @@ class BenchmarkRun:
                                                         memory_view="source_history"),
             fits=lambda messages: self.input_tokens(
                 messages, enable_thinking=request_thinking(messages)) <= limit,
-            call=dispatch, save=save, state=state, max_calls=self.client.config.max_calls,
+            call=dispatch, save=save, state=state,
+            max_calls=self.client.config.max_calls - (
+                memories[0].get("pre_read_calls", 0) if memories else
+                int(bool(self.settings.get("dependency_reading")))),
             source_scope=scope,
         )
 
