@@ -317,7 +317,8 @@ def read_question_pack(
             state["active_stage"] = stage
             save(state)
             active_schema = response_schema(indices)
-            response = parse_object(call(stage, messages, active_schema), reject_duplicate_keys=True)
+            response = parse_object(
+                call(stage, messages, active_schema), reject_duplicate_keys=True)
             Draft202012Validator(active_schema).validate(response)
             answer = response["answer"]
             state["task"] = response["task"]
