@@ -1,3 +1,43 @@
+# Current handoff: C bound dates/natural pairs pass scoped review; B8 closed; Host story running
+
+Runtime be7c5e6f source time references/current assertions/target-bound supports (208checks/types/lint/DAG).
+C core-v3 CLOSED12 from empty:12edit90748tokens,19emb1180; independent initial4claims, future A/Zhao,
+exception cancellation and B correction/C scope preserved; no fabricated exact recent event_at.
+Root read states, all9versions from copied bank. SDK finance forget on separate copy hides current/history/
+source; notifier value/history preserved; visibility_only, NOT physical erase. Time word recently remains
+in support but omitted in one compact state clause; instruction wording still sometimes retained.
+C same-actual-before3pairs CLOSED: single3calls24671tokens/6emb1077; extract9calls52484/6emb1073.
+All3before sets equal. Single changes+keep succeed; extract future wrong oldtime ref rejected, keep rewrites
+and loses correction nuance. New natural travel/clothing CLOSED; actual model seed2records, each update
+its own copy. Target1unit each, non-target4/3 +otherrecord unchanged/history exact; no new exacttimes.
+Totalnatural4gen36151tokens/6emb2804 inclseed. Root review, not independent/heldout confirmation.
+
+D a171b814 adds explicit unit/revision/relation dependencies; Host only refreshes affected views,
+actual refreshed support exposure; frozen replay MUST NEVER read the final bank's current version.
+12 direct reading/dependency tests passed, types/lint/boundaries. D real query contribution still pending.
+B read8 queue CLOSED: control3C4H1invalid/33calls712686tokens; pack5C2H1missing/13calls222603.
+2direct6paged,4already-exposedusers, same source pools/question/model/budgets.3candidate-only/1control-only.
+Symmetric Source review shows Judge-extra-detail inconsistencies AND some Assistant attribution; do not
+rewrite labels or claim the entire score delta is causal. Original labels retained.
+Selector length issue: v2 setup rejected select option beforeHTTP (0calls);97bf6e92 fixes allowlist.
+Selector thinking-off v3 CLOSED2: originalmissing->Correct, oldC->H,5calls91752tokens; finalReader unchanged.
+Explicit option only, no global quality claim. See manifests global-read8-v1/global-selector-pilot-v3.
+
+Active actual work: normal17-message global-story-v1, frozen dbc3bda8, own normal CLI.
+Initial exec12382 exited after event6 known null-body; first5COMPLETED, event6 semantic r4 committed,
+exception removed/generalZhao+priorLi preserved, first+one readonly recovery null. Do not retry event6.
+Continuation driver artifacts/global-development/continue_global_story_v1.py is running in exec8326;
+it starts ONLY messages7-17, one existing no-tool resume per confirmed null reply, and stops any other
+failure/unknown. Poll this handle/actual PID and inspect results before scheduling further model HTTP.
+Original all attempts retained. No simultaneous model jobs or hot-edit of frozen source.
+
+Long2 histories x first32 sessions PREPARED_NOT_RUN under artifacts/global-development/long-history-v1.
+Metadata rule: last QA session <=8/20/32; first2non-boundary; actualcheckpoints8/18/32 and8/20/32.
+Amended before any long outcome because initialfirst2shortU1 were onlyboundary; initialprotocol retained.
+No held-out access. Remaining FULLgoal: finish17normalchain, Dvalue,long2prefixcomparisons and costs,
+finalcandidate/holdout,conditionalProduct/F. Do not reduce scope to completed diagnostics.
+No SHA checks/reviewer platform/publication/new services. All earlier blocks below historical.
+
 # Current handoff: range/Host wired, C actual diagnostics fail acceptance, 2026-10-14
 
 Latest runtime f5ef26c9 in global-development-20261014. Full original GLOBAL plan ACTIVE/incomplete.
