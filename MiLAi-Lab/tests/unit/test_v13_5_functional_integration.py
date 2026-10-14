@@ -2523,8 +2523,10 @@ def test_document_w1_continues_memory_with_concrete_publish_permission_and_no_re
 @pytest.mark.parametrize('selection', ['prior', 'current', 'assistant', 'tool', 'undelivered',
     'foreign_owner', 'cached_then_forgotten', 'business_escalation', 'forget_escalation',
     'memory_exclusion'])
+@pytest.mark.parametrize('request_protocol', [False, True])
 def test_continuation_memory_requires_visible_delivered_archived_user_source(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, selection: str,
+    request_protocol: bool,
 ) -> None:
     def denied(*args: Any, **kwargs: Any) -> Any:
         raise AssertionError('REAL_NETWORK_FORBIDDEN')
@@ -2565,6 +2567,10 @@ def test_continuation_memory_requires_visible_delivered_archived_user_source(
             'memory_write_request': 'none', 'allow_memory_maintenance': False,
             'requires_memory_result': False, 'allow_forgetting': False,
             'memory_continuation_request': 'resolve_prior_explicit', 'format_reproposals_used': 0}
+        if request_protocol:
+            mode.update(protocol='native_scope_requests_v9',
+                        application_continuation_request='none')
+            material['registered_application_requests'] = []
         if selection == 'memory_exclusion':
             mode.update(memory_continuation_request='none',
                         business_action_request='continue_if_unfinished')
@@ -2578,6 +2584,8 @@ def test_continuation_memory_requires_visible_delivered_archived_user_source(
                 decision = {'business_operations': ['reserve_and_label']
                             if selection in {'business_escalation', 'memory_exclusion'} else [],
                             'prior_memory_request_fragments': [selected]}
+                if request_protocol:
+                    decision['prior_request_ids'] = []
                 if selection == 'forget_escalation':
                     decision['allow_forgetting'] = True
                 return AIMessage(content='', tool_calls=[{'name': 'resolve_continuation_operations',
@@ -5826,9 +5834,11 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
 
 @pytest.mark.parametrize("response_scope", [None, "memory_status_only", "substantive"])
 @pytest.mark.parametrize("evidence_policy", ["legacy", "question_pack_v1"])
+@pytest.mark.parametrize("unavailable_prior", [False, True])
 def test_current_save_reports_receipts_without_replacing_substantive_answers(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, response_scope: str | None,
     evidence_policy: str,
+    unavailable_prior: bool,
 ) -> None:
     root = prepared(tmp_path, native=True, scope_requests=True,
                     request_failure_policy="independent_memory", direct_response=True,
@@ -5853,7 +5863,8 @@ def test_current_save_reports_receipts_without_replacing_substantive_answers(
             assert schema["properties"]["response_scope"]["enum"] == [
                 "memory_status_only", "substantive"]
             return native_call("classify_current_request", "scope",
-                memory_requests=["explicit"], allow_forgetting=False,
+                memory_requests=["explicit", "continue_prior"] if unavailable_prior
+                                else ["explicit"], allow_forgetting=False,
                 business_action_request="none",
                 application_continuation_request=("resolve_prior_request"
                     if response_scope is None else "none"),
@@ -5887,6 +5898,11 @@ def test_current_save_reports_receipts_without_replacing_substantive_answers(
         assert result["request_mode"]["reference_resolution"]["attempts"] == 0
         assert result["request_mode"]["prior_request_ids"] == []
         assert "response_scope" not in result["request_mode"]
+    if unavailable_prior:
+        assert result["request_mode"]["reference_resolution"]["attempts"] == 0
+        assert result["request_mode"]["reference_resolution"]["resolution_basis"] == (
+            "current_scope_and_no_issued_prior_memory_choices")
+        assert "resumed_memory_request" not in result["request_mode"]
     assert result["execution_candidate_answer"] == (None if shortcut else draft)
     if shortcut:
         assert result["messages"][-1]["response_metadata"]["milai_origin"] == "program_receipt"
@@ -5948,6 +5964,40 @@ def test_narrow_memory_status_without_receipt_keeps_ordinary_query_answer(
     assert result["final_answer"] == "I have no save receipt for that request."
     assert result["finalization"]["protocol"] == "agent_response_v1"
     assert len(wires) == 2
+
+
+def test_empty_prior_memory_choices_do_not_grant_maintenance_permission(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, scope_requests=True, direct_response=True,
+                    phase_thinking=True, memory_method="milai_edit_m_v1",
+                    edit_interface_version="I2", maintenance_recipe="single_pass",
+                    evidence_policy="question_pack_v1", memory_view_mode="staged",
+                    memory_profile="unified_v1", edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")})
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {tool["function"]["name"] for tool in wire.get("tools", [])}
+        if ordinal == 1:
+            return native_call("classify_current_request", "scope",
+                memory_requests=["continue_prior"], allow_forgetting=False,
+                business_action_request="none", application_continuation_request="none",
+                response_scope="memory_status_only")
+        assert ordinal == 2
+        assert not names.intersection({"save_memory", "update_memory", "forget_memory",
+                                       "resolve_continuation_operations"})
+        return {"role": "assistant", "content": "No earlier request source was delivered."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank="empty-prior", owner="alice", session="s",
+                                message_id="continue", content="Continue saving my earlier note.")
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert len(wires) == 2 and result["records"] == []
+    assert result["request_mode"]["allow_memory_maintenance"] is False
+    assert "resumed_memory_request" not in result["request_mode"]
+    assert result["request_mode"]["reference_resolution"]["attempts"] == 0
+    assert result["final_answer"] == "No earlier request source was delivered."
 
 
 @pytest.mark.parametrize("outcome", ["empty", "known_length", "unknown_transport"])

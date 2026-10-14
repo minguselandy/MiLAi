@@ -1638,8 +1638,11 @@ def continuation_operations(
                 and (resolve_business
                      or value["business_operations"] == mode["business_operations"]))
 
+    prior_user_choices = [unit for unit in material.get("items", [])
+                          if unit.get("type") == "fragment" and unit.get("role") == "user"
+                          and unit.get("source_ref") != binding["source_ref"]]
     if ("decision" not in state and request_protocol and not current_plan
-            and not resolve_business and not resolve_memory
+            and not resolve_business and (not resolve_memory or not prior_user_choices)
             and not material.get("registered_application_requests")):
         # Every output is fixed by the accepted current scope and the actually
         # issued choices. No model can select an unissued request. This does not
@@ -1647,7 +1650,8 @@ def continuation_operations(
         state.update(material=material, decision={
             "business_operations": list(mode["business_operations"]),
             "prior_memory_request_fragments": [], "prior_request_ids": [],
-        }, resolution_basis="current_scope_and_no_issued_request_choices")
+        }, resolution_basis=("current_scope_and_no_issued_prior_memory_choices" if resolve_memory
+                             else "current_scope_and_no_issued_request_choices"))
         write_json(path, state)
     if "decision" in state:
         if not valid(state["decision"]):
