@@ -80,6 +80,14 @@ cases, unchangedwording/source/topK1/reads3/material8192. Use source-order-index
 andnormalstory, beforefinalcandidatefreeze; actualbodydelivery is acceptance, not COMPELTEDalone.
 No modelcalls/CLIprepare yet. This is inaddition to2-questiondedupReaderpilot, not a replacement.
 
+Finalconfirmation metadata selection PREDECLARED indata/manifests/global-final-confirmation-selection.json:
+first2existingreservedUUIDs, COMPLETEhistories/no prefix cap, QA atlastbearing session<=1/3,2/3,full,
+first2nonboundary byexistingtype. Noheldoutsemanticcontentopened/modelcall; method/config mustfreeze
+BEFORE readingheldoutcontents. No tuning fromconfirmation, allfirstlabels/missing/invalid retained.
+Costcollector artifacts/global-development/summarize_long_history_v1.py writes comparison.json; counts
+copiedgenerationonce,original+newembedding. AlloldcopiedresponsescomparedbyordinaryJSONequality(nohash).
+Currentlastverified U1full32/U4first26,10QA; wait sameexec77796 andactualPID457631. Fullgoal incomplete.
+
 Closed earlierwork: A20samebankqueries; B8 control3C4H1invalid vs pack5C2H1missing,33calls712686 vs13calls
 222603, Judgeconflictsretained. Selectorpilot2 netqualityzero (repairedmissing,oldC->H). C core-v3 actual12
 updates/9versions,12edit90748+19emb1180; positive scoped butpre-effective oldA requiresSource/history.
