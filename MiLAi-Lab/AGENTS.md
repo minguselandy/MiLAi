@@ -73,6 +73,13 @@ actualduplicatedcontextbefore anynewdedupanswer. Sourcepool ORIGINALlong-history
 source4c, newreader c61. Use run_baseline_alignment prepare then run_dedup_pilot_v1.py (predict/firstscore).
 No freshretrieval/formation/activation, no oldscoreoverwrite. Selectfinalcandidateonlyafter realfeedback.
 
+Fullcompletionaudit addedto existingdevelopmentreport; do not markgoalcomplete fromdiagnosticsalone.
+B3 outstanding: originalpack-context answeredfromlegacydirectory, notactualbody. Predeclared
+host-packs-run-v2/protocol.json +configs/milai-global-host-v2.json reuses BOTH originalrange/context
+cases, unchangedwording/source/topK1/reads3/material8192. Use source-order-index-v1 c61, after currentlong
+andnormalstory, beforefinalcandidatefreeze; actualbodydelivery is acceptance, not COMPELTEDalone.
+No modelcalls/CLIprepare yet. This is inaddition to2-questiondedupReaderpilot, not a replacement.
+
 Closed earlierwork: A20samebankqueries; B8 control3C4H1invalid vs pack5C2H1missing,33calls712686 vs13calls
 222603, Judgeconflictsretained. Selectorpilot2 netqualityzero (repairedmissing,oldC->H). C core-v3 actual12
 updates/9versions,12edit90748+19emb1180; positive scoped butpre-effective oldA requiresSource/history.
