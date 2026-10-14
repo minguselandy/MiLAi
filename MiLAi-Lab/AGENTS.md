@@ -14,7 +14,7 @@ Two exposedusers2f1.../5c005..., first32chronological sessions,2Q at8/18/32 and8
 nonboundary amendment fixed before any outcomes. Beforelong selector thinkingFalse (known length
 operability only); edit/finalReader true,8192output65536window. Bothconfigs/inputs already prepared;
 DO NOT hotedit. Driver stops nonzero, no unknown retry. SourceS0 has no maintenance; candidate S2+pack+C. S0 closed64sessions/12questions:11answers+1knownlengthmissing,
-firstlabels7C3H1invalid1missing.76predictcalls3034404tokens,11Judge34156;emb0/newunknown0.
+firstlabels7C3H1invalid1missing (Judge000005 stop+empty{}, no rescore).76predictcalls3034404tokens,11Judge34156;emb0/newunknown0.
 Predictwall2736.963s,score148.415s (wholephase, not percall). global-long-history-v1-s0-summary.json.
 Prepared source configs/selection are in long-history-v1/protocol.json and initial-protocol.json.
 

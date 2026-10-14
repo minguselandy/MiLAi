@@ -302,5 +302,12 @@
     }
   ],
   "review": "paired source review deferred until both arms closed; no rescore",
-  "artifact_root": "artifacts/global-development/long-history-v1/s0/MiLAi-memory-only"
+  "artifact_root": "artifacts/global-development/long-history-v1/s0/MiLAi-memory-only",
+  "invalid_judge": {
+    "response_ref": "http/halumem/judge/000005/response.json",
+    "finish_reason": "stop",
+    "content": "{}",
+    "reason": "required official label absent",
+    "rescored": false
+  }
 }
