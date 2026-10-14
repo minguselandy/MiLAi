@@ -218,7 +218,7 @@ def read_question_pack(
 
     visible = open_materials(materials, False)
     directory = [pack_candidate(item, i) for i, item in enumerate(visible)]
-    schema = {
+    schema: dict[str, Any] = {
         "type": "object", "additionalProperties": False,
         "properties": {
             "answer": {"type": ["string", "null"]},
