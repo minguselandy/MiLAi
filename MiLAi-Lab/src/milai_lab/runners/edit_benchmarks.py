@@ -2083,12 +2083,20 @@ class BenchmarkRun:
                         item["turn_range"] = item["context_turn_range"]
             return material_reader(selected) if material_reader is not None else selected
 
+        def request_thinking(messages: list[dict[str, str]]) -> bool | None:
+            schema = json.loads(messages[1]["content"]).get("response_schema", {})
+            selection_only = schema.get("properties", {}).get("answer") == {"type": "null"}
+            if selection_only and "select" in self.settings.get("stage_enable_thinking", {}):
+                return self.stage_thinking("select")
+            return thinking
+
         def dispatch(stage: str, messages: list[dict[str, str]], schema: Any) -> str:
             return self.call(key if stage == "answer" else f"{key}/{stage}", messages,
                              structured=schema is not None,
                              response_format=({"type": "json_schema", "json_schema": {
                                  "name": "milai_evidence_read", "schema": schema,
-                             }} if schema is not None else None), enable_thinking=thinking)
+                             }} if schema is not None else None),
+                             enable_thinking=request_thinking(messages))
 
         def save(value: dict[str, Any]) -> None:
             saved = copy.deepcopy(value)
@@ -2101,7 +2109,8 @@ class BenchmarkRun:
             question, date, memories, snapshot_id=snapshot_id, open_materials=reopen,
             messages_for=lambda items: reader_messages(question, date, items,
                                                         memory_view="source_history"),
-            fits=lambda messages: self.input_tokens(messages, enable_thinking=thinking) <= limit,
+            fits=lambda messages: self.input_tokens(
+                messages, enable_thinking=request_thinking(messages)) <= limit,
             call=dispatch, save=save, state=state, max_calls=self.client.config.max_calls,
             source_scope=scope,
         )

@@ -98,11 +98,17 @@ def selection(indices: list[int], *, answer: str | None = None, gap: str | None 
                        "task": task, "candidate_page": 0})
 
 
-def test_lookup_selects_short_pack_and_stops_with_unread_candidates(tmp_path: Path) -> None:
+@pytest.mark.parametrize("selection_thinking", [None, False])
+def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
+    tmp_path: Path, selection_thinking: bool | None,
+) -> None:
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
         packs = large_packs(service)
         run = execution_at(tmp_path)
+        run.settings["stage_enable_thinking"] = {"reader": True}
+        if selection_thinking is not None:
+            run.settings["stage_enable_thinking"]["select"] = selection_thinking
         write_json(tmp_path / "pool.json", {"materials": packs})
         attempts = []
 
@@ -112,11 +118,13 @@ def test_lookup_selects_short_pack_and_stops_with_unread_candidates(tmp_path: Pa
             attempts.append(payload)
             assert payload["question"] == "TOPIC_0 only, retain any limits."
             if len(attempts) == 1:
+                assert kwargs["enable_thinking"] is (True if selection_thinking is None else False)
                 assert payload["memories"] == [] and payload["candidates"]
                 assert payload["response_schema"]["properties"]["answer"] == {"type": "null"}
                 assert kwargs["response_format"]["json_schema"]["schema"]["properties"][
                     "answer"] == {"type": "null"}
                 return selection([0], gap="Need the original statement and its reply.")
+            assert kwargs["enable_thinking"] is True
             assert len(payload["memories"]) == 1
             assert payload["unopened_candidates"] == 3
             assert "source_ref" not in str(payload["memories"])
