@@ -1,0 +1,275 @@
+{
+  "status": "CLOSED_FIRST_SCORES",
+  "initial_source": "c61e680f",
+  "continuation_source": "b1dc47cd",
+  "selection": [
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_length": 8,
+      "source_session": 7,
+      "question_indices": [
+        4,
+        5
+      ],
+      "types": [
+        "Multi-hop Inference",
+        "Multi-hop Inference"
+      ]
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_length": 18,
+      "source_session": 17,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Basic Fact Recall",
+        "Memory Conflict"
+      ]
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_length": 32,
+      "source_session": 31,
+      "question_indices": [
+        1,
+        2
+      ],
+      "types": [
+        "Generalization & Application",
+        "Memory Conflict"
+      ]
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_length": 8,
+      "source_session": 7,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Basic Fact Recall",
+        "Basic Fact Recall"
+      ]
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_length": 20,
+      "source_session": 19,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Basic Fact Recall",
+        "Basic Fact Recall"
+      ]
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_length": 32,
+      "source_session": 31,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Generalization & Application",
+        "Generalization & Application"
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 8,
+      "session_index": 7,
+      "selected_question_index": 0,
+      "original_question_index": 4,
+      "execution": "answered",
+      "first_label": "Hallucination",
+      "reader_failure": null
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 8,
+      "session_index": 7,
+      "selected_question_index": 1,
+      "original_question_index": 5,
+      "execution": "answered",
+      "first_label": "Correct",
+      "reader_failure": null
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 18,
+      "session_index": 17,
+      "selected_question_index": 0,
+      "original_question_index": 0,
+      "execution": "answered",
+      "first_label": "Correct",
+      "reader_failure": null
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 18,
+      "session_index": 17,
+      "selected_question_index": 1,
+      "original_question_index": 1,
+      "execution": "answered",
+      "first_label": "Correct",
+      "reader_failure": null
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 32,
+      "session_index": 31,
+      "selected_question_index": 0,
+      "original_question_index": 1,
+      "execution": "answered",
+      "first_label": "Hallucination",
+      "reader_failure": null
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 32,
+      "session_index": 31,
+      "selected_question_index": 1,
+      "original_question_index": 2,
+      "execution": "answered",
+      "first_label": "Correct",
+      "reader_failure": null
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 8,
+      "session_index": 7,
+      "selected_question_index": 0,
+      "original_question_index": 0,
+      "execution": "answered",
+      "first_label": "invalid",
+      "reader_failure": null
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 8,
+      "session_index": 7,
+      "selected_question_index": 1,
+      "original_question_index": 1,
+      "execution": "answered",
+      "first_label": "invalid",
+      "reader_failure": null
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 20,
+      "session_index": 19,
+      "selected_question_index": 0,
+      "original_question_index": 0,
+      "execution": "answered",
+      "first_label": "Correct",
+      "reader_failure": null
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 20,
+      "session_index": 19,
+      "selected_question_index": 1,
+      "original_question_index": 1,
+      "execution": "answered",
+      "first_label": "Correct",
+      "reader_failure": null
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 32,
+      "session_index": 31,
+      "selected_question_index": 0,
+      "original_question_index": 0,
+      "execution": "answered",
+      "first_label": "Hallucination",
+      "reader_failure": null
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 32,
+      "session_index": 31,
+      "selected_question_index": 1,
+      "original_question_index": 1,
+      "execution": "answered",
+      "first_label": "Omission",
+      "reader_failure": null
+    }
+  ],
+  "labels": {
+    "Hallucination": 3,
+    "Correct": 6,
+    "invalid": 2,
+    "Omission": 1
+  },
+  "cost": {
+    "reading": {
+      "calls": 25,
+      "prompt_tokens": 926131,
+      "total_tokens": 956365,
+      "completion_tokens": 30234
+    },
+    "judge": {
+      "calls": 12,
+      "prompt_tokens": 12332,
+      "total_tokens": 30397,
+      "completion_tokens": 18065
+    }
+  },
+  "embedding": {
+    "calls": 0,
+    "total_tokens": 0
+  },
+  "maintenance": {
+    "calls": 0,
+    "total_tokens": 0
+  },
+  "reused_generation_responses": 18,
+  "original_nine_answers_unchanged": true,
+  "ledger_delta": {
+    "generation": {
+      "known_tokens": 986762,
+      "new_unknown": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "new_unknown": 0
+    }
+  },
+  "interruption": "Known repeated-readtarget validationfailure; actualresponse reused. Preserve initialfailedphase pluscontinuation timing; no stablelatencyclaim.",
+  "artifact_root": "/cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/long-source-pack-resumed-v1/MiLAi-memory-only",
+  "root_review": {
+    "scope": "Paired actual saved outputs and final-input/pool review; no independent review or label changes.",
+    "cases": [
+      {
+        "case": "U4-short-title-and-income",
+        "finding": "Two invalid Judge outputs; candidate answers match control substance (Senior Manager, Assistant-reported20k). Do not interpret invalids as demonstrated answer regressions."
+      },
+      {
+        "case": "U1-full-clothing",
+        "finding": "Smart-casual update exists in ordinary lookup pool including index0, yet candidate opened onlyindex1 older preference. Selectionmiss, not absentSource. Originalcontrol had knownlengthmissing."
+      },
+      {
+        "case": "U4-full-health",
+        "finding": "Planner selectedno bodies and issued claim-containing gap from directory; finalanswer repeated claims about unobserved material and omitted requested strategy. Originalcontrol distinguished Userreports from Assistantrecommendations. Candidate didnot deliverbody; old delivery_plan=true metadata waswrong and isbeingcorrected without replacing originalanswer."
+      },
+      {
+        "case": "U1-full-clothing-correction",
+        "finding": "Both answers correctly reject the casual-attire premise; oldJudgeinvalid vsnewCorrect isnot semanticgain."
+      },
+      {
+        "case": "U1-short-pet",
+        "finding": "Bothanswers preserve some speaker/interpretation distinctions; candidate includesUseropenness selfreport and stressmanagement context. Firstlabels differH/C, kept unchanged."
+      }
+    ],
+    "decision": "Retain source-onlypack as limited efficiencycandidate (68.5%fewerpredictiontokens,0embedding/maintenance), not established qualitywinner. KeepS0 asqualityreference. No automaticS2maintenance or whole-view default."
+  }
+}
