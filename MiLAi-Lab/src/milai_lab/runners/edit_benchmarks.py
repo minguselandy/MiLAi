@@ -540,7 +540,8 @@ class BenchmarkRun:
         if settings.get("reader_ranking", "native") not in {"native", "llm_probe", "memsifter"}:
             raise ValueError("READER_RANKING_INVALID")
         stage_modes = settings.get("stage_enable_thinking", {})
-        if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
+        if (not isinstance(stage_modes, dict)
+                or set(stage_modes) - {"extract", "select", "edit", "reader"}
                 or any(type(value) is not bool for value in stage_modes.values())):
             raise ValueError("STAGE_ENABLE_THINKING_INVALID")
         root.mkdir(parents=True, exist_ok=True)

@@ -771,7 +771,8 @@ def prepare(
     if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
         raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
     stage_modes = settings.get("stage_enable_thinking", {})
-    if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
+    if (not isinstance(stage_modes, dict)
+            or set(stage_modes) - {"extract", "select", "edit", "reader"}
             or any(type(value) is not bool for value in stage_modes.values())):
         raise ValueError("STAGE_ENABLE_THINKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"

@@ -2203,3 +2203,20 @@ def test_rank_order_controls_direct_page_order_without_changing_item_indices(
                                           snapshot_id=snapshot_id)
     assert answer == "Actual second entry." and pages == [[1], [0]]
     assert read_json(execution.root / snapshot_id)["materials"] == memories
+
+
+def test_readpack_selector_configuration_reaches_constructor_resource_setup(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.runners import edit_benchmarks
+
+    settings = read_json(Path(__file__).resolve().parents[2]
+                        / "configs/milai-global-readpack-select-pilot-v3.json")[
+                            "entrypoints"]["benchmark"]
+
+    def resource_boundary(*args: Any, **kwargs: Any) -> None:
+        raise RuntimeError("accepted configuration reached tokenizer setup")
+
+    monkeypatch.setattr(edit_benchmarks.AutoTokenizer, "from_pretrained", resource_boundary)
+    with pytest.raises(RuntimeError, match="accepted configuration"):
+        BenchmarkRun(settings, tmp_path / "run", phase="predict")
