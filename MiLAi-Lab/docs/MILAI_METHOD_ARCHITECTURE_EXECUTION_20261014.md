@@ -127,3 +127,18 @@ $PY tools/run_method_architecture_diagnostic.py configs/milai-method-architectur
 E1 正常 seed 入口已实际尝试准入，进程退出 1：`BenchmarkRun.__init__` 在原 `budget.json.http-owner.lock` 的非阻塞 flock 处得到 `BlockingIOError [Errno 11]`。这发生在模型调用、账本用量预留和种子银行创建之前；新 request 文件数为 0，bank 未创建。错误原件保留为 `artifacts/method-architecture/paired-v1/seed-admission.stderr.log`。这是运行资源阻碍，不是模型形成失败或语义得分。
 
 本次代码本地提交后，将从该提交保存 `paired-source-v1` 源码副本，身份记录在 `artifacts/method-architecture/paired-source-v1.json`。资源解除后实际 seed/compare 应使用该副本的 tools 入口和 PYTHONPATH，原失败准入日志保留；不在真实运行中热改方法。没有 SHA 校验或新的模型服务。
+
+
+## 第四切片：SimpleMem 无 SHA 身份路径（2026-10-15）
+
+`integrations/memory/simplemem.py::dependency_identity` 已去掉源码 SHA 计算、固定历史提交拒绝和 diff 拒绝。现在记录实际 Git 身份、声明的历史身份、工作树改动、Python 模块清单和实际依赖版本。未把不同代码冒称旧身份；真正导入路径、接口、方法参数、owner 和资源约束仍在各自使用处处理。此变更只涉及 Lab 依赖报告字段，不改 Product API、权限或 Canonical 行为，也不迁移旧实验的 scope 文件。
+
+本地原生源码实际身份为 db80b6a，工作树无改动，记录 159 个 Python 模块，没有读取源码正文做摘要。新测试在真实临时 Git 工作树中改变已跟踪模块并加入新模块，同时禁用 SHA 和 read_bytes 调用，证明不同身份/工作树改动会被记录而不会变成校验门禁。
+
+默认实验环境缺少 LanceDB、pylance、pyarrow、dateparser、tantivy。已在 ignored 的 `artifacts/method-architecture/simplemem-env` 创建独立环境，安装仓库现有锁定清单中的 13 项附加依赖，通过只在该环境新增的 .pth 复用已有 runtime。原环境再次核对仍未安装这五项，未被修改；未部署模型或服务。
+
+实际原生 SimpleMem、LanceDB、Tantivy 配合 MockHTTP 验证 20 passed、3 deselected、3 条既有弃用警告，7.48 秒。覆盖原文输入、40/2 窗口、尾部 flush、实际持久 ID、三路检索、有限反思、重开、owner/范围及计量；未运行被排除的 memsyco/merit 测试，也未执行它们的 SHA 路径。Ruff、1 文件 mypy、包 DAG 通过。该 SDK 检查不是新研究的实际模型成绩或作者分数复现。
+
+身份与依赖详情保存在 `artifacts/method-architecture/simplemem-source-identity.json`，交付索引为 `data/manifests/method-architecture-simplemem-identity-checkpoint.json`。E1 冻结副本仍是 9bb7d7e1；它不调用 SimpleMem，原准入失败日志保持。
+
+当前运行阻碍已连续四个目标回合实际复核：1376965/1626865 仍为原确认进程且均为 T，原 ledger owner lock 被占用。正常 E1 seed 准入已在模型调用和银行创建之前退出。结束旧暂停队列的请求尚无答复；没有发信号、旁路账本或重跑旧确认。后续的范围判断、训练选择、机制筛选与迁移必须以真实 E1 反馈继续，不能把已完成的离线准备当作整项研究完成。

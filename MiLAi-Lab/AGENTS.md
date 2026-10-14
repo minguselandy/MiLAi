@@ -20,6 +20,12 @@ Shared continuous ledger and serial HTTP ownership remain. At this checkpoint
 PIDs 1376965 and 1626865 are actually stopped and the owner lock is actually held.
 No new model request has been sent. Develop/test/prepare independently; do not
 bypass the lock, reset accounting, or silently resume/kill the old queue.
+Fourth slice removes SimpleMem SHA/fixed-commit/diff gates; records actual source
+identity and changes. Actual native SDK + LanceDB/Tantivy MockHTTP20passed,
+3deselected. Isolated artifacts/method-architecture/simplemem-env inherits existing
+runtime via its own .pth; 13 locked additions installed there only. Original
+environment untouched, experiment model requests0. Same held paused queue confirmed
+for four goal turns. The next protocol step is real E1, not a larger offline matrix.
 Full W0-W5/E0-E5 scope remains; first code/tests do not complete the goal.
 
 # Current handoff: experiments PAUSED by explicit user request, 2026-10-14

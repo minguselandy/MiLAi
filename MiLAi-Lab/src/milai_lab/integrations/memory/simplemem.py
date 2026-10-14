@@ -1,4 +1,4 @@
-"""Pinned SimpleMem core; native stages with metered injected providers."""
+"""SimpleMem text core; observed source identity and metered injected providers."""
 
 from __future__ import annotations
 
@@ -82,33 +82,27 @@ def validate_simplemem(config: dict[str, Any]) -> dict[str, Any]:
 
 
 def dependency_identity(policy: dict[str, Any]) -> dict[str, Any]:
+    """Record actual code/dependencies without digest or historical-commit gates.
+
+    The native import and interface checks remain at their actual use sites.
+    A configured historical identity is provenance, not permission to relabel
+    different current code as that old implementation.
+    """
     root = Path(policy["source_root"]).resolve()
     actual = subprocess.check_output(  # noqa: S603 - fixed read-only command
         [shutil.which("git") or "/usr/bin/git", "rev-parse", "HEAD"], cwd=root, text=True
     ).strip()
-    if actual != SOURCE_COMMIT:
-        raise ValueError("SIMPLEMEM_SOURCE_NOT_PINNED")
-    if subprocess.run(  # noqa: S603 - fixed read-only source verification
-        [
-            shutil.which("git") or "/usr/bin/git",
-            "diff",
-            "--quiet",
-            SOURCE_COMMIT,
-            "--",
-            "simplemem",
-        ],
-        cwd=root,
-        check=False,
-    ).returncode:
-        raise ValueError("SIMPLEMEM_SOURCE_CHANGED")
-    sources = {
-        str(path.relative_to(root)): hashlib.sha256(path.read_bytes()).hexdigest()
-        for path in sorted((root / "simplemem").rglob("*.py"))
-    }
+    changes = subprocess.check_output(  # noqa: S603 - fixed read-only worktree inventory
+        [shutil.which("git") or "/usr/bin/git", "status", "--short",
+         "--untracked-files=normal", "--", "simplemem"], cwd=root, text=True,
+    ).splitlines()
     return {
         "source_root": str(root),
         "source_commit": actual,
-        "source_sha256": sources,
+        "declared_source_commit": policy.get("source_commit"),
+        "source_changes": changes,
+        "source_modules": [str(path.relative_to(root))
+                           for path in sorted((root / "simplemem").rglob("*.py"))],
         "dependencies": {
             name: importlib.metadata.version(name)
             for name in (
@@ -122,7 +116,7 @@ def dependency_identity(policy: dict[str, Any]) -> dict[str, Any]:
                 "openai",
             )
         },
-        "pipeline": "pinned core writer/LanceDB/Tantivy/planning/reflection; common final reader",
+        "pipeline": "native core writer/LanceDB/Tantivy/planning/reflection; common final reader",
         "embedding_substitution": "bge-m3 API; normalized1024; no local encoder/fallback",
         "transport": "nonstreaming native finite retries; each HTTP shared Budget/admission",
     }
