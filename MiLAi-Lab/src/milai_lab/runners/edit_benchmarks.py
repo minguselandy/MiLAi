@@ -514,6 +514,8 @@ class BenchmarkRun:
             raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
         if settings.get("reader_projection", "legacy") not in {"legacy", "semantic_units_v1"}:
             raise ValueError("READER_PROJECTION_INVALID")
+        if settings.get("evidence_policy", "legacy") not in {"legacy", "question_pack_v1"}:
+            raise ValueError("EVIDENCE_POLICY_INVALID")
         if settings.get("reader_target", "legacy") not in {"legacy", "original_question_v1"}:
             raise ValueError("READER_TARGET_INVALID")
         if settings.get("source_access", "semantic_only") not in {
@@ -1788,6 +1790,10 @@ class BenchmarkRun:
         self, service: MemoryService, materials: list[dict[str, Any]],
     ) -> list[dict[str, Any]]:
         """Reopen the same sources/revisions; never search or change snapshot positions."""
+        if self.settings.get("evidence_policy") == "question_pack_v1":
+            from milai_lab.methods.evidence_reading import open_evidence_packs
+
+            return open_evidence_packs(service, materials)
         result = service.read_source_materials(materials)
         for index, material in enumerate(materials):
             if material.get("kind") == "semantic_view":
@@ -1810,6 +1816,25 @@ class BenchmarkRun:
         from milai_lab.memory.reader_projection import expand_record, merge_source_ranges
 
         variant = self.settings.get("evidence_variant", "S2")
+        if self.settings.get("evidence_policy") == "question_pack_v1":
+            from milai_lab.methods.evidence_reading import build_evidence_packs
+
+            materials = build_evidence_packs(
+                service, question, date, native["source_materials"],
+                native.get("records", []) if variant != "S0" else [],
+                tokenization=self.settings.get("source_tokenization", "unicode_v1"),
+                calendar_context=self.settings.get("calendar_context"),
+            )
+            native["material_assembly"] = {
+                "policy": "question_pack_v1", "evidence_variant": variant,
+                "independent_original_candidates": len(native["source_materials"]),
+                "linked_original_candidates": 0,
+                "semantic_candidates": len(native.get("records", [])),
+                "semantic_materials": sum(item["kind"] == "semantic_view" for item in materials),
+                "material_origins": ["semantic_view" if item["kind"] == "semantic_view"
+                                     else "independent_original" for item in materials],
+            }
+            return materials
         originals = list(native["source_materials"])
         covered = [span for material in originals for span in material["source_ranges"]]
         support = merge_source_ranges([
@@ -2001,6 +2026,10 @@ class BenchmarkRun:
         An explicit native snapshot uses read-only array positions for all backends;
         direct delivery pages only when the complete original pool does not fit.
         """
+        if snapshot_id is not None and self.settings.get("evidence_policy") == "question_pack_v1":
+            return self._answer_evidence_pack(question, date, key, memories,
+                                              snapshot_id=snapshot_id,
+                                              material_reader=material_reader)
         if snapshot_id is not None:
             return self._answer_view(question, date, key, memories, snapshot_id=snapshot_id,
                                      material_reader=material_reader)
@@ -2014,6 +2043,49 @@ class BenchmarkRun:
                 **sampling,
             ), memories
         return self._answer_view(question, date, key, memories, material_reader=material_reader)
+
+    def _answer_evidence_pack(
+        self, question: str, date: str, key: str, memories: list[dict[str, Any]], *,
+        snapshot_id: str,
+        material_reader: Callable[[list[dict[str, Any]]], list[dict[str, Any]]] | None,
+    ) -> tuple[str, list[dict[str, Any]]]:
+        from milai_lab.methods.evidence_reading import read_question_pack
+
+        path = self.root / "http" / key / "memory-view.json"
+        state = read_json(path) if path.exists() else {}
+        limit = self.settings["context_tokens"] - self.settings["model"]["max_tokens"] - 512
+        thinking = self.stage_thinking("reader")
+
+        def reopen(items: list[dict[str, Any]], expand: bool) -> list[dict[str, Any]]:
+            selected = copy.deepcopy(items)
+            if expand:
+                for item in selected:
+                    if "context_source_ranges" in item:
+                        item["source_ranges"] = item["context_source_ranges"]
+                        item["turn_range"] = item["context_turn_range"]
+            return material_reader(selected) if material_reader is not None else selected
+
+        def dispatch(stage: str, messages: list[dict[str, str]], schema: Any) -> str:
+            return self.call(key if stage == "answer" else f"{key}/{stage}", messages,
+                             structured=schema is not None,
+                             response_format=({"type": "json_schema", "json_schema": {
+                                 "name": "milai_evidence_read", "schema": schema,
+                             }} if schema is not None else None), enable_thinking=thinking)
+
+        def save(value: dict[str, Any]) -> None:
+            saved = copy.deepcopy(value)
+            stage = saved.get("active_stage")
+            if stage is not None:
+                saved["active_stage"] = key if stage == "answer" else f"{key}/{stage}"
+            write_json(path, saved)
+
+        return read_question_pack(
+            question, date, memories, snapshot_id=snapshot_id, open_materials=reopen,
+            messages_for=lambda items: reader_messages(question, date, items,
+                                                        memory_view="source_history"),
+            fits=lambda messages: self.input_tokens(messages, enable_thinking=thinking) <= limit,
+            call=dispatch, save=save, state=state, max_calls=self.client.config.max_calls,
+        )
 
     def _rank_materials(
         self, question: str, date: str, key: str, memories: list[dict[str, Any]],
