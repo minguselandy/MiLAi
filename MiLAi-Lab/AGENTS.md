@@ -36,7 +36,7 @@ Afterclose copiedbankaudit: financecurrent/history/supporthidden; notifierexactr
 Reopenmodeloverstates read_rejected as proof; SDK auditseparate.32gen415901+22emb1527,newunknown0.
 
 6c0de441 adds actual record navigation targets/history_read to packcandidates, budgeted and read-only.
-Explicit historicalpacks retain revision whenrefresh_current=True.13relatedtests/types/Ruff/boundaries pass.
+Explicit historicalpacks retain revision whenrefresh_current=True.13relatedtests/types/Ruff/boundaries pass. FullFunctionalHost362tests PASSED276.79s, existingdeprecationwarnings only; exec50666 closed.
 history-navigation-v1 actualunchangedhistoryquestion CLOSED:3successfulreadtools(current/history/exact),
 4thread denied byallowance, initialnull+1readonlyrecovery.5gen93135+3emb215. Correctr1names but WRONG
 conflation of revokedDu exception withgeneralZhaorule; Bcorrectionstilluncommitted. NOT semanticacceptance.
