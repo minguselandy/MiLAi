@@ -1,7 +1,7 @@
 # Current handoff: Host/D diagnostics closed; two-history full comparison RUNNING
 
 Full GLOBAL plan ACTIVE/incomplete. No SHA/content fingerprints, new review platform, publication,
-Product/Archive edits, or subagents. Local method head6c0de441; original user plan files untouched.
+Product/Archive edits, or subagents. Local method headdc360cff; original user plan files untouched.
 Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python. Root owns serial real-model HTTP and
 existing continuous budget.json/owner lock. Never reset unknown floor(gen9/emb1) or restart a live job.
 
@@ -49,6 +49,17 @@ history andcannotexplaincancellation. Originalhistorynamesrightbutclaimactualsav
 supportedhistoryactualr1/r8rightbutmislabelsoriginalUserstatementaslatercorrection. Fullrootreview inmanifest.
 No whole-view quality/costadvantage; limit tooptionalcurrent/exacthistory, openoriginalsforwithdrawal/history,
 no summaryhierarchy. SharedC3formation90748+1180listedseparately, notzero; directcalllatencyunobserved.
+
+Next normal-chain check PREDECLARED_NOT_RUN: global-story-v2/protocol.json and
+configs/milai-global-story-v2.json. Frozen source-global-story-v2/MiLAi-Lab=dc360cff.
+Fresh emptybank, original17messagefixture unchanged, editthinkingFalse only-stagechange,
+Host/finalReader thinkingtrue andsame8192/65536/read/callbudgets. Not a purefactorqualitycomparison.
+Use normal CLI prepare AFTER current longqueue releases model/ledger (avoid budget-before contamination),
+then artifacts/global-development/run_global_story_v2.py (range0..16,one readonly recovery forknownnull).
+No fakebefore/resetoldadmission; originalfailedruns retained. This fullnormalchain remains required.
+dc360cff also gives everypackcandidate executable evidence_read descriptor (12directchecks/Ruff/mypy pass),
+so model neednot invent Source IDs in target-based legacyreadtools. 362fullchecks wereat6c, notrerunfor1field.
+Do not change writer prompts around the oldstory: newtest changesgenerationmode undernewboundcontracts.
 
 Remaining FULLgoal: finish runninglongcomparison and costs/source review, choose/freeze finalcandidate,
 then whole-user holdoutconfirmation (no holdoutaccess yet), conditionalProduct/F decision and finalplan audit.
