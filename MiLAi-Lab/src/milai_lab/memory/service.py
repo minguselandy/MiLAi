@@ -2812,7 +2812,11 @@ class MemoryService:
                 text += " " + str(value.get("content", ""))
             return text
 
-        if self.source_backlinks == "enabled" and tokens:
+        # Dense record ranking does not consume keyword backlink text. Only raw
+        # output and withdrawn-record notices still use the lexical path there.
+        needs_backlinks = (self.semantic_retriever is None or include_raw
+                           or any(row.get("status") == "retracted" for row in records))
+        if self.source_backlinks == "enabled" and tokens and needs_backlinks:
             all_sources = raw if include_raw else self.sources()
             if allowed_sources is not None:
                 all_sources = [source for source in all_sources

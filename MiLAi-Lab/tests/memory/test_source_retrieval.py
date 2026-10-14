@@ -95,6 +95,72 @@ def service_at(store: SqliteStore, root: Path) -> MemoryService:
                          functional_contract="functional_v1", memory_profile="unified_v1")
 
 
+def test_dense_record_search_skips_unused_backlinks_but_keeps_prefix_and_visibility(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from types import SimpleNamespace
+
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        saved, refs = [], []
+        for key, text in (("pine", "PINE_TOKEN cabin preference"),
+                          ("oak", "OAK_TOKEN rail preference")):
+            capture = service.capture_user("s", key, text)
+            refs.append(capture["source_ref"])
+            service.bind_public_turn("s", key, capture["source_ref"],
+                                     config_version="dense-v1", phase="start")
+            fragment = service.source_fragments(capture["source_ref"])[0]
+            cfg = {"configurable": {"user_id": "alice", "v13_session": "s",
+                                    "v13_turn_id": key, "v13_config_version": "dense-v1"}}
+            receipt = FunctionalMemory(service, len).save(
+                cfg, "save-" + key, f"Stored {key} preference.", [fragment["fragment_handle"]])
+            assert receipt["ok"]
+            saved.append(receipt["id"])
+
+        def rank(query: str, records: list[dict[str, Any]], limit: int) -> list[dict[str, Any]]:
+            return sorted(records, key=lambda row: row["id"])[::-1][:limit]
+
+        monkeypatch.setattr(service, "semantic_retriever", SimpleNamespace(rank=rank))
+        # The raw-inclusive path still performs the original backlink discovery.
+        original = service.search("PINE_TOKEN", include_raw=True)
+        assert original["raw_events"]
+        sources, backlinks = service.sources, service.backlink_candidates
+
+        def unused(*args: Any, **kwargs: Any) -> Any:
+            raise AssertionError("Dense current-record search scanned unused source backlinks")
+
+        monkeypatch.setattr(service, "sources", unused)
+        monkeypatch.setattr(service, "backlink_candidates", unused)
+        selected = service.search("PINE_TOKEN", include_raw=False)
+        assert selected["records"] == original["records"]
+        assert selected["raw_events"] == []
+        restricted = service.search("PINE_TOKEN", include_raw=False, source_refs=[refs[0]])
+        assert [row["id"] for row in restricted["records"]] == [saved[0]]
+        target = service.read(saved[0])
+        assert service.forget("s", "forget-pine", scope="record",
+                              candidate_handle=target["candidate_handle"])["ok"]
+        remaining = service.search("PINE_TOKEN", include_raw=False)
+        assert [row["id"] for row in remaining["records"]] == [saved[1]]
+
+        # A withdrawn record still needs lexical matches through original
+        # provenance when the compact stored text lacks the query's source word.
+        monkeypatch.setattr(service, "sources", sources)
+        monkeypatch.setattr(service, "backlink_candidates", backlinks)
+        cancellation = service.capture_user("s", "cancel", "Withdraw the rail preference.")
+        service.bind_public_turn("s", "cancel", cancellation["source_ref"],
+                                 config_version="dense-v1", phase="start")
+        cfg = {"configurable": {"user_id": "alice", "v13_session": "s",
+                                "v13_turn_id": "cancel", "v13_config_version": "dense-v1"}}
+        handle = service.source_fragments(cancellation["source_ref"])[0]["fragment_handle"]
+        current = service.read(saved[1])
+        withdrawn = FunctionalMemory(service, len).update(
+            cfg, "withdraw-oak", current["candidate_handle"], [], [handle], retract=True)
+        assert withdrawn["ok"]
+        found = service.search("OAK_TOKEN", include_raw=False)
+        assert found["records"] == []
+        assert [row["record_id"] for row in found["withdrawals"]] == [saved[1]]
+
+
 def test_unformed_original_prefix_reopen_and_forget_share_one_visibility(tmp_path: Path) -> None:
     body = "orchard original details " * 1000 + "COMPLETE_END"
     with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
