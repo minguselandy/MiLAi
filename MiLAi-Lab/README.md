@@ -1,5 +1,7 @@
 # MiLAi Lab
 
+当前开发执行[2026-10-14 全局规划](docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。检索、证据组合与命题更新已接入共享核心；长期对照显示读取成本下降但自动维护尚未回本，正常Host与最终保留用户确认仍在进行。以[当前状态](docs/LAB_CURRENT_STATUS.md)为准，以下旧阶段说明保留作历史记录。
+
 r52同版本开发实验与140项终态回填已完成，功能验收仍PARTIAL，没有稳定推荐配置，Product NO_GO。原L1为24/24 PASS；新增合同L1 23限定通过／1失败，L2 9／3，L3形成41／16、读取17／13，新L4 9／3。来源、时间范围、行动选择及提供方限制按原结果保留。详见[终态报告](docs/V13_5_R52_TERMINAL_REPORT.md)、[FUNC汇总](docs/V13_5_PROGRESS.md)及[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
 
 当前隔离开发从 PR82 main `fc1c6c9` 执行完整 MiLAi-Edit 计划：公开 benchmark、共同底座清理、B0/B1/B2/M 四臂比较、保留来源确认及一个最终候选的功能回归。E0 接线已完成，实际 E1 正在运行；按用户指令仅使用现有 Qwen3.6 家族。工程检查不代表方法有效或 Product 验收，见[本轮进度](docs/MILAI_EDIT_PROGRESS.md)及[复现说明](docs/MILAI_EDIT_REPRODUCTION.md)。

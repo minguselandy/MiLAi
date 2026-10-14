@@ -1,7 +1,7 @@
 # MiLAi Lab 当前状态
 
 2026-10-14，全局规划继续执行。开发分支 `feat/lab-global-development-20261014`，最新方法代码
-`c61e680f`；[完整开发记录](MILAI_GLOBAL_DEVELOPMENT_20261014.md)保存结果、失败和成本。
+`b530261b`（分类 schema 交付修复验证中）；[完整开发记录](MILAI_GLOBAL_DEVELOPMENT_20261014.md)保存结果、失败和成本。
 
 - A：独立可见原文枚举和 Unicode 分词已实现；同库20题查询验证完成。
 - B：同池8题首次标签控制3/8、证据包5/8，预测tokens下降68.8%；缺答和Judge分歧保留，尚不能证明完整质量收益。
@@ -16,13 +16,14 @@ D四题三臂完成，带支持整条视图总tokens高于原文25.4%，无稳�
 
 确认回执直接交付已接通，最新完整Functional Host集成回归370项通过，Ruff、相关类型与包/工具边界检查通过。
 
-两段32会话历史的短／中／完整前缀对照已启动，冻结源`4c988f10`；
-原候选的无用backlink CPU扫描已定位并修复；在确认所有请求有响应的读取点结束旧进程。
-`artifacts/global-development/long-history-resumed-v1/process.json`记录从实际检查点继续的进程。
-原输出和成本保留，当前实现`51182ead`，不属于新的独立试验。
-S0已闭合：7/12 Correct，另3 Hallucination、1 invalid、1缺答；预测76调用/3,034,404 tokens。
-候选继续运行，暂无两臂完整结论。新增SQLite排序索引已在副本证明有序结果相等，并补到两个运行银行；前期成本保留。证据展开重复正文也已修复；两份真实输入离线重建分别减少约32%和15%的输入tokens，答案质量尚未新测。
-原17条空库Host v3故事已固定edit thinking关闭及直接回执的配置，等待当前队列后运行。
+两段32会话历史对照已闭合：S0为7 Correct、3 Hallucination、1 invalid、1缺答；
+S2+pack+C为7 Correct、5 Hallucination。读取tokens下降71.2%，但全部预测tokens上升19.2%，
+另有248,882 embedding tokens，尚无整体优势。首轮标签、实际来源审查、旧运行与续跑成本均保留。
+更简单的source-only pack候选已声明，尚未运行。去重投影的两题读取及两个Host正文读取检查待运行。
+
+空库故事v3/v4/v5分别暴露不存在的先前来源选择、分类输出截断、错误遗忘意图。
+空候选解析已修复；明确遗忘边界及JSON分类schema已补入模型输入。关闭thinking仍有误分类，
+当前用同一模型更充足推理预算做有限诊断，未降低遗忘或来源边界。
 最终保留用户确认未运行；
 Product适配与训练按实际收益条件推进。本轮未执行SHA或替代指纹校验，未发布或合并远端。
 

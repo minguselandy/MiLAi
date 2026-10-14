@@ -1,120 +1,44 @@
-# Current handoff: CPU bottleneck fixed; long candidate resumed from actual checkpoint
+# Current handoff: long comparison closed; Host classification under investigation
 
-Full GLOBAL plan ACTIVE/incomplete. No SHA/checksum validation, new review platform, publication,
-Product/Archive edits or subagents. Method headc61e680f (Host shortcut84b019a5, navigationdc360cff).
-Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python. Root only serial real-model HTTP with
-existing continuous ledger/owner lock; preserve global unknown floor gen9/emb1.
+Full GLOBAL plan ACTIVE/incomplete. No SHA/checksum gates, subagents, new model deployment,
+publication or merge. Root serial model HTTP with existing continuous ledger/owner lock.
+Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python and PYTHONPATH=src.
+Read docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md and current manifests for results.
 
-LIVE ACTUAL JOB: exec77796 = artifacts/global-development/run_long_history_resumed_v1.py;
-parent457624, currentcandidatepredict PID457631 (verify actualstatus before further dispatch).
-Output long-history-resumed-v1/candidate; frozen source-dense-scan-fix-v1/MiLAi-Lab=51182ead.
-It runs candidate predict then FIRSTscore. Lastverified19sessioncheckpoints/4QA; maintenance18completed+1incomplete atU1session15 (knowneditlength,responseexists), no retry. Dataset/config/questionselection unchanged from long-history-v1,
-2exposedusers x32sessions, checkpoints8/18/32 and8/20/32,2nonboundaryquestions each. Noheldoutsemanticaccess.
-Edit/finalReader thinkingtrue, selectfalse,8192output65536window. Do NOT hotedit/rescore/restartlivejob.
+Long candidate exec77796 CLOSED0 (predict and first score); no long model job remains.
+S0: 7C/3H/1invalid/1missing; S2+pack+C:7C/5H, 12 answers. Candidate-only3/control-only3.
+Prediction S0=3,034,404 tokens; candidate=3,618,479 (+19.2%), incl maintenance2,743,944;
+reading874,535 (-71.2%); embeddings130/248,882 incl old root and rebuild. Candidate Judge35,462.
+Ledger reconciliation exact by ordinary values, new unknown0. Only2/12 final inputs had semantic
+views. Mixed runtime/interruption/index timing retained. Official labels never revised; paired Source
+review identifies both Judge disagreement and actual modality risks. Not an overall winner.
+Source-only pack comparison declared and CLIprepared0HTTP: configs/milai-global-long32-source-pack-v1.json,
+run_long_source_pack_v1.py, same2users/32sessions/12QA. PREDICT_NOT_RUN; no heldout contents opened.
 
-Original exec42506 CLOSED241, parent28805/candidate210418 confirmedgone. S0 CLOSED rc0 bothphases:
-64sessions,11answers+1knownlengthmissing; firstlabels7C3H1invalid1missing (Judge000005 stop+{}).
-76predict3034404tokens,11Judge34156,emb0/newunknown0; phasewall2736.963/148.415s.
-Originalcandidate interrupted09:11:09UTC at confirmedread-only backlinkscan: SIGSTOP, py-spystack,
-all39HTTP requests hadresponses, thenTERM/CONT; no unconfirmedmodelcall.12sessions/2QA retained.
-199/199 10-secondCPU samples in backlink_candidates->_rows,198 inSQLitebatchsearch. Dense ranking did
-not use this lexical text!51182ead skips only include_rawFalse+densecurrent-only path; preserves raw,
-lexical and retracted-record notice matching.17relatedtests/types/Ruff pass. Actualbank bounded4Source
-probe: old2backlinkcalls/3scans5.1206s, new0/1scan1.6521s; exactdenseinputs/fullreturnequal.0HTTP/writes.
-No newindex/cache/schema. Profilingtool py-spy usedthroughuv temporarytoolenv, not project/modelinstall.
+Normal story v3 CLOSED first request failed invalid prior Source; v4 CLOSED first completed,
+second classifier length8192; v5 CLOSED first wrong forgetting flag, 4 clauses actually committed,
+no forgetting effect, FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING. Originals and full costs kept.
+3246dbcd resolves empty actual prior-choice sets without a model; no prior permission granted.
+b530261b restores explicit-only forgetting guidance to REQUEST_PARTS_MODE_PROMPT.
+87851a3a shows JSON classification schema descriptions to model and explains additive
+explicit+new_assertion tags. 5 integration variants/Ruff/mypy passed. scope-canary-v1/v2/v3 CLOSED;
+no-thinking still misclassifies semantic rule withdrawal as forgetting (v3). v4 CLOSED known length:
+first completed, second thinking loop32768,6 notrun.2gen36506,newunknown0. No stage-budget feature added.
+All canaries have0 semantic/business/forget mutations. global-request-scope-diagnostics-v1.json.
+ACTIVE job exec43564: run_global_story_v6.py; frozen source-scope-schema-v1/MiLAi-Lab=87851a3a.
+Original17 messages, fresh bank; existing declaration thinkingFalse/greedyT0, Reader/editor unchanged.
+Continue later original inputs after known failures; one existing null-body readonly recovery allowed;
+stop unknown. Final finite story, no further same-story tuning; report failed acceptance honestly.
+Do not weaken Source/owner/visibility/real-effect boundaries or add keyword intent heuristics.
 
-Continuation is a COPY of actual bank/checkpoints/generationcaches, no idealbefore or newindependenttrial.
-Oldroot untouched. Copiedgenresponses reused, NOT calledagain. Oldhttp/embedding notcopied to avoid
-artifactserialcollision: in-processvectorcache rebuilds throughnewnormalrequests numberedfrom1; old
-embeddingreceipts remainoriginalroot andcontinuousledger. COST: copied+newgen once, old+newembedding,
-originalcandidateaccounting-start tofinalledger, plus bothphasewalltimes. No free restart. See protocol.json
-and oldlong-history-v1/interruption.json/budget-at-interruption.json. Mixedruntime latency explicitlynot
-uniform; final whole-user confirmation mustuseonefrozenruntime. Oldcandidate never had a Judge.
+Next serial work: conclude active normal17-message story; actual2-case Host body
+reads configs/milai-global-host-v2.json / run_host_packs_v2.py; 2-question saved-pool dedup pilot
+configs/milai-global-readpack-dedup-pilot-v1.json / run_dedup_pilot_v1.py. Both latter source c61e680f,
+CLIprepare now completed0HTTP; original protocol-only prepare failures retained in *-preparation roots. Then source-only pack12QA, freeze final
+method, whole-user heldout confirmation (metadata selection manifest; COMPLETE histories, no prefixcap),
+conditional Product/F decision and full completion audit. Do not mark complete before remaining work.
 
-NEXT NORMAL CHAIN: global-story-v3 PREDECLARED_NOT_RUN, runtimec61e680f, sameoriginal17fixture,
-fresh emptybank, editthinkingFalse, Host/finalReader unchangedtrue/8192/65536/read/callbudgets.
-V2 was superseded BEFORE anyCLIprepare/modelrun (0calls); itsprotocol remains. Use source-order-index-v1
-normalCLI prepare withconfigs/milai-global-story-v3.json AFTER currentqueue closes, then
-artifacts/global-development/run_global_story_v3.py. No modelHTTP concurrentwithlongrun.
-84b019a5 skipsredundantHostgeneration only forsharedrecipe+question_pack+explicitmemory_status_only
-withconfirmedcommitted/no_change receipt, nobusiness/forget/requestfailures/progress. SameWriterstillruns,
-programreceipt checkpoint markedmilai_origin, candidate_answerNone; exactreopen/lostresult no newcalls.
-Empty/knownlength fall through; unknownproviderresponse retainsstop. Substantive/legacy unchanged.
-12directchecks+27readingtests/types/Ruff/boundaries pass; FULL370Hostintegration passed288.04s,
-existingdeprecationsonly (log functional-status-shortcut-tests.log, exec43411 CLOSED). Packcandidate
-recordUUIDhidden afterbinding; actualread/historytargets stillresolve. Longfrozen4c prefixneverhotedited.
-
-B expansion duplication FIXED in6763b1c7/ebf793a9 (not active longruntime): several selectedhits expanded
-sameparent and repeated wholebody. project_packs sharedbyBenchmark+Host nowcoalescesexactvisibleparent
-ranges, keepsselectedaliases, globallylabelsSource/revision, reusesexactrepeatedspans acrossoverlap/support.
-DifferentSources/revisions nevermergedbywording; partial/unavailableviews preserved; noimplicitnewassertion
-support.18relatedchecks/Ruff/mypy pass. SavedfirstU1short2actualinputs faithfullyreopened(no newretrieval/
-model/semanticwrite): beforepayloadexactactual, Sourcebodiesevidence sets same; rows248->128 and116->84,
-prompttokens52212->35382 and33819->28895 includingreferenceinstructions. Not newanswerquality/costscore.
-Data/manifests/global-expanded-pack-dedup-v1-summary.json. v3runtime amendedBEFORE anyCLIprepare/model
-run; priorprotocols retained. Do NOT hotedit current51182ead longqueue. Need boundedactualreadfeedback
-fornewprojection before finalcandidatefreeze; alloldoutputs kept. Second10secCPUprofileofcurrentjob had
-0activePython samples duringHTTP, not proof of a new bottleneck; no second interruption authorized by it.
-
-A3 second actualCPU bottleneck confirmed: another199samples at replay_requested->_rows, whole-prefix
-SQLite search sorts allvalues for EVERYpage. Actual52MBbank copy unchangedquery:22.6183s->0.6799s,
-completeorderedrootrows exactequal; indexbuild0.037s. c61e680f TransactionalSqliteStore.setup adds
-nonunique milai_store_updated_at_idx(updated_at DESC), no logicalrecord/schema/API/permission change.
-9sorting/transaction/replaychecks plus52baseline/joint-evidenceintegrationchecks,Ruff/mypy/DAG/tool-boundary pass. Physicalindex applied live WITHOUT restart/codehotedit:
-U1 at10:44:38UTC (8082rows,3semanticrecordvalues/times unchanged); U4 at10:46:21UTC (2712rows,1record
-unchanged). Bothreceipts sqlite-order-index-v1/*-applied.json; keep mixed timing/cost, nofree speedclaim.
-Newrun source-order-index-v1=c61e680f frozen forv3 anddeduppilot. Current51182eadcode unchanged.
-Lastverified U1full32 +U4first16,8QA. KnownU1maintenance15 and29 length failures retained.
-
-NEXT after currentqueue closes: normalCLI prepare/run global-story-v3 using source-order-index-v1,
-configs/milai-global-story-v3.json andoriginal17fixture; run_global_story_v3.py alreadypointsnewsource.
-Then readpack-dedup-pilot-v1 config/protocol PREDECLARED_NOT_RUN,2oldU1shortQA(7/0,7/1) selectedfor
-actualduplicatedcontextbefore anynewdedupanswer. Sourcepool ORIGINALlong-history-v1/candidate snapshots,
-source4c, newreader c61. Use run_baseline_alignment prepare then run_dedup_pilot_v1.py (predict/firstscore).
-No freshretrieval/formation/activation, no oldscoreoverwrite. Selectfinalcandidateonlyafter realfeedback.
-
-Fullcompletionaudit addedto existingdevelopmentreport; do not markgoalcomplete fromdiagnosticsalone.
-B3 outstanding: originalpack-context answeredfromlegacydirectory, notactualbody. Predeclared
-host-packs-run-v2/protocol.json +configs/milai-global-host-v2.json reuses BOTH originalrange/context
-cases, unchangedwording/source/topK1/reads3/material8192. Use source-order-index-v1 c61, after currentlong
-andnormalstory, beforefinalcandidatefreeze; actualbodydelivery is acceptance, not COMPELTEDalone.
-No modelcalls/CLIprepare yet. This is inaddition to2-questiondedupReaderpilot, not a replacement.
-
-Finalconfirmation metadata selection PREDECLARED indata/manifests/global-final-confirmation-selection.json:
-first2existingreservedUUIDs, COMPLETEhistories/no prefix cap, QA atlastbearing session<=1/3,2/3,full,
-first2nonboundary byexistingtype. Noheldoutsemanticcontentopened/modelcall; method/config mustfreeze
-BEFORE readingheldoutcontents. No tuning fromconfirmation, allfirstlabels/missing/invalid retained.
-Costcollector artifacts/global-development/summarize_long_history_v1.py writes comparison.json; counts
-copiedgenerationonce,original+newembedding. AlloldcopiedresponsescomparedbyordinaryJSONequality(nohash).
-Currentlastverified U1full32/U4first26,10QA; wait sameexec77796 andactualPID457631. Fullgoal incomplete.
-
-Closed earlierwork: A20samebankqueries; B8 control3C4H1invalid vs pack5C2H1missing,33calls712686 vs13calls
-222603, Judgeconflictsretained. Selectorpilot2 netqualityzero (repairedmissing,oldC->H). C core-v3 actual12
-updates/9versions,12edit90748+19emb1180; positive scoped butpre-effective oldA requiresSource/history.
-Samebefore recipe single3calls24671 successes vs extract9calls52484 time-source rejection+keepdamage.
-Naturaltravel/clothing4gen36151+6emb2804 inclactualseed:target1each,nontarget4&3+otherrecord/historypreserved.
-
-Originalnormalglobal-story-v1 CLOSED16/17,14Hostcomplete2failed, Bcorrectionedittruncated, historynotread,
-forgetwrapperfailed beforeeffect, lastreopen NOT_RUN.66gen691404+72emb3625. Source4c repairs resident+
-catalog budget14938->7940under8192;13actualbodieskept,cursorretained. story-repair-v1 setupfailed0HTTP;
-v2 CLOSED6Hostcomplete butBedittruncatedagain; history3badreads+null thenhonestcompactrecovery. Forget5
-bindingrejects then1actualvisibility-only commit1record/15Sources. Copiedbankaudit:financecurrent/history/
-supporthidden, notifierexactr7unchanged/all7versionsreadable.32gen415901+22emb1527,newunknown0.
-History-navigation-v1 CLOSEDactualhistoryread3success+4thdenied, firstnull+1readonlyrecovery;5gen93135+
-3emb215. Correctr1names butwrongDu-vs-Zhaoruleconflation andBcorrectionstillnotcommitted. NOTacceptance.
-Do not repeatoldprompts forscore; V3 addsnormalcontrolflow/configfix before anynewfullstoryoutcome.
-
-D state-view-v1 CLOSED4casesx3arms,12gen61857,0emb/Judge/newunknown. Original4calls18432,supported4
-calls23120(+25.4%),bare4calls20305. Before/after source+supported correct; supportedcurrentdepslack
-withdrawalhistory. Originalhistorynamesrightbutfalseactualsavedproof; supportedactualr1/r8rightbut
-misattributesoriginalstatement. Keep optionalcurrent/exacthistory, openoriginalsforwithdrawalexplanation;
-no summaryhierarchy. SharedC3formation90748+1180 separate; directcalllatency unobserved.
-
-Productpubliccontract read-onlyinspected: memory-evidence-context-v1 distinguishes EVIDENCE/
-EVIDENCE_CONTEXT/CANONICAL_STATE. Labstate cannotbe relabeledProductCanonical; no Productchanges/imports.
-RemainingFULLgoal: longcomparisons+pairedsource review+allcosts; fullnormal V3; freezechosen candidate,
-whole-userholdout confirmation; conditionalProduct/F decision; requirementscompletionaudit.
-Use docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md andglobal-*-summary.json. Historicalblocksbelow.
+Historical handoff snapshots below are closed/stale, not current jobs or authorization.
 
 # Current handoff: range/Host wired, C actual diagnostics fail acceptance, 2026-10-14
 
