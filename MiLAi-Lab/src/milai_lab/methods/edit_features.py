@@ -23,6 +23,7 @@ class EditFeatures:
     patch_text: bool = False
     proposition_updates: bool = False
     dependency_updates: bool = False
+    dependency_groups: bool = False
 
     @classmethod
     def from_settings(cls, settings: dict[str, Any]) -> EditFeatures:
@@ -52,6 +53,8 @@ class EditFeatures:
             settings.pop("proposition_updates")
         if not self.dependency_updates:
             settings.pop("dependency_updates")
+        if not self.dependency_groups:
+            settings.pop("dependency_groups")
         return settings
 
 
@@ -632,6 +635,47 @@ def feature_proposal_schema(
         # An override must bind an actual scope to this clause. Ordinary claims
         # may stay unqualified; declared/reused conditions share the same path.
         fields["clauses"]["items"] = {"oneOf": [clause, scoped]}
+    if features.dependency_groups:
+        for variant in variants:
+            fields = variant["properties"]
+            action = fields["action"]["const"]
+            if action not in {"create", "rewrite", "edit"}:
+                continue
+            generated = {"type": "integer", "minimum": 0}
+            group_reference = generated if action != "edit" else {"anyOf": [
+                reference("u"), {"type": "string", "pattern": "^n[0-9]+$"}]}
+            group = _object({
+                "target_unit": copy.deepcopy(group_reference),
+                "alternatives": {"type": "array", "items": {
+                    "type": "array", "minItems": 1, "items": copy.deepcopy(group_reference)}},
+                "evidence": {"type": "array", "minItems": 1, "items": reference("e")},
+            }, ["target_unit", "alternatives", "evidence"])
+            choices = [group]
+            if action == "edit":
+                choices.append(_object({
+                    "operation": {"const": "remove"},
+                    "target_unit": copy.deepcopy(group_reference),
+                    "evidence": copy.deepcopy(group["properties"]["evidence"]),
+                }, ["operation", "target_unit", "evidence"]))
+                fields["edits"]["minItems"] = 0
+                variant["anyOf"] = [
+                    {"properties": {"edits": {"minItems": 1}}},
+                    {"required": ["support_groups"],
+                     "properties": {"support_groups": {"minItems": 1}}},
+                ]
+            fields["support_groups"] = {
+                "type": "array", "items": {"oneOf": choices},
+                "description": (
+                    "Model-inferred support: each inner list is jointly required (AND); "
+                    "outer alternatives are independent sufficient routes (OR). Evidence "
+                    "must support the dependency, not mere co-occurrence. "
+                    + ("References are zero-based clause indexes." if action != "edit" else
+                       "References are old u aliases or n0,n1,... for newly generated units "
+                       "in append/override order (an override adds content then condition). "
+                       "Only listed targets change groups; omission retains existing groups. "
+                       "Empty alternatives means no remaining support route; operation=remove "
+                       "removes the dependency claim when new evidence makes it inapplicable.")),
+            }
     return (
         schema if variants else {"type": "object", "properties": {}, "additionalProperties": False}
     )

@@ -5,6 +5,11 @@ This is a NEW active goal in feat/lab-method-architecture-20261014, based on
 8293a4e7. The GLOBAL confirmation below remains paused; do not confuse its
 historical paused goal with this active research task. No subagents or SHA checks.
 Read docs/MILAI_METHOD_ARCHITECTURE_EXECUTION_20261014.md for current evidence.
+Second slice adds source-bound AND/OR support groups in existing revisions,
+separate dependency_groups switch, group-only commits, whole-conjunct retraction,
+changed-premise markers and query route selection. v2 configs prepared, no real HTTP.
+Shared-before diagnostic, model-formed results, cross-record, policies/training,
+external confirmation and normal Host migration remain incomplete.
 Shared continuous ledger and serial HTTP ownership remain. At this checkpoint
 PIDs 1376965 and 1626865 are actually stopped and the owner lock is actually held.
 No new model request has been sent. Develop/test/prepare independently; do not

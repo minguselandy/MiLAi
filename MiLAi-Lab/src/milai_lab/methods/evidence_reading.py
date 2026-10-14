@@ -9,6 +9,7 @@ from typing import Any, Literal
 
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 
+from milai_lab.memory.dependency_groups import select_support_routes, support_status
 from milai_lab.memory.edit_units import read_revision_evidence
 from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.memory.retrieval import flat_bm25_rank, merge_candidates
@@ -32,6 +33,7 @@ def unit_closure(state: dict[str, Any], unit_id: str) -> tuple[list[str], list[d
             if source == unit_id or (
                     source in selected and relation["relation_type"] == "overrides"):
                 selected.add(target)
+        selected, _ = select_support_routes(state, selected)
         changed = len(selected) != previous
     return ([unit["unit_id"] for unit in state["units"] if unit["unit_id"] in selected],
             [relation for relation in state.get("relations", [])
@@ -102,7 +104,8 @@ def build_evidence_packs(
         selection = (dependency_selections or {}).get(row["id"])
         historical = row.get("historical_selection", False)
         ids, relations = (query_support(state, selection["roots"],
-                                       excluded=selection["excluded"])
+                                       excluded=selection["excluded"],
+                                       support_choices=selection.get("support_choices"))
                           if selection is not None and not historical else
                           unit_closure(state, hit) if hit else
                           ([unit["unit_id"] for unit in state["units"]],
@@ -110,7 +113,11 @@ def build_evidence_packs(
         if not ids and selection is not None and not selection["history_revisions"]:
             continue
         selected_units = [unit for unit in state["units"] if unit["unit_id"] in ids]
-        handles = list(dict.fromkeys(ref["evidence_id"] for item in [*selected_units, *relations]
+        _, groups = select_support_routes(
+            state, set(ids),
+            choices=(selection or {}).get("support_choices") if not historical else None)
+        handles = list(dict.fromkeys(ref["evidence_id"]
+                                    for item in [*selected_units, *relations, *groups]
                                     for ref in item["evidence_refs"]))
         if historical or (selection is not None and selection["history_revisions"]):
             # A retraction's witness may no longer support any surviving unit.
@@ -119,8 +126,20 @@ def build_evidence_packs(
                                            for ref in edit["evidence"])]))
         view = EditMemory.revision_view(version, query_time=date,
                                        query_calendar_context=calendar_context)
+        time_applicability = {
+            unit["unit_id"]: False if unit.get("temporal", {}).get("status") in {
+                "expired", "before_explicit_start", "inconsistent_explicit_limits"} else None
+            for unit in view["units"]
+        }
+        for group in groups:
+            group["selected_routes_time_eligibility"] = (
+                "all_routes_time_ineligible_or_absent"
+                if support_status(group, time_applicability) == "unsupported"
+                else "requires_source_interpretation")
         view["units"] = [unit for unit in view["units"] if unit["unit_id"] in ids]
         view["relations"] = copy.deepcopy(relations)
+        if "support_groups" in state:
+            view["support_groups"] = groups
         semantic.append({
             "kind": "semantic_view",
             "id": f"{row['id']}:history:{version['revision']}" if historical else row["id"],
@@ -130,6 +149,8 @@ def build_evidence_packs(
             "applicability": view, "selected_unit_ids": ids,
             "view_dependencies": {"record_id": row["id"], "revision": version["revision"],
                                   "unit_ids": ids, "root_unit_id": hit,
+                                  **({"support_groups": copy.deepcopy(groups)}
+                                     if "support_groups" in state else {}),
                                   "relation_ids": [edge["relation_id"] for edge in relations]},
             "revision_evidence": read_revision_evidence(service, {"revision_evidence": handles}),
             "index_text": "\n".join(unit["text"] for unit in selected_units),
@@ -164,7 +185,8 @@ def dependency_read_request(
     packs = build_evidence_packs(service, question, date, [], full,
                                 calendar_context=calendar_context)
     bodies = project_packs(open_evidence_packs(service, packs), list(range(len(packs))))
-    properties, mapping, history = {}, {}, {}
+    properties: dict[str, Any] = {}
+    mapping, history = {}, {}
     for index, row in enumerate(records):
         alias = f"r{index}"
         units = [unit["unit_id"] for unit in row["value"]["edit_state"]["units"]]
@@ -188,6 +210,20 @@ def dependency_read_request(
                                    "type": "array", "maxItems": 0}},
             "required": ["roots", "excluded", "history_revisions"],
         }
+        if row["value"]["edit_state"].get("support_groups"):
+            choices = {}
+            for group in row["value"]["edit_state"]["support_groups"]:
+                key = f"u{units.index(group['target_unit'])}"
+                choices[key] = ({"type": "array", "items": {"type": "integer", "enum":
+                    list(range(len(group["alternatives"])))}} if group["alternatives"] else
+                    {"type": "array", "maxItems": 0})
+            properties[alias]["properties"]["support_choices"] = {
+                "type": "object", "additionalProperties": False, "properties": choices,
+                "description": "For each selected derived target, select sufficient alternative "
+                               "route indexes. Every premise in a selected route is opened. "
+                               "Omitted targets retain all routes as candidates.",
+            }
+            properties[alias]["required"].append("support_choices")
     schema = {"type": "object", "additionalProperties": False,
               "properties": properties, "required": list(properties)}
     return {"schema": schema, "mapping": mapping, "messages": [
@@ -214,6 +250,9 @@ def decode_dependency_reads(request: dict[str, Any], response: dict[str, Any]) -
         "roots": [row["units"][i] for i in response[alias]["roots"]],
         "excluded": [row["units"][i] for i in response[alias]["excluded"]],
         "history_revisions": response[alias]["history_revisions"],
+        **({"support_choices": {row["units"][int(target[1:])]: indexes
+                                for target, indexes in response[alias]["support_choices"].items()}}
+           if "support_choices" in response[alias] else {}),
     } for alias, row in request["mapping"].items()}
 
 
@@ -254,13 +293,20 @@ def open_evidence_packs(
             elif current["value"]["revision"] != item["revision"]:
                 dependencies = item.get("view_dependencies")
                 changed = dependencies is None
+                selection = copy.deepcopy(item.get("dependency_selection"))
+                groups_changed = (actual["value"]["edit_state"].get("support_groups")
+                                  != current["value"]["edit_state"].get("support_groups"))
+                if selection is not None and groups_changed:
+                    # Route positions belong to their old revision. Reopen new
+                    # candidates instead of reusing an index for a different OR route.
+                    selection.pop("support_choices", None)
                 if dependencies is not None:
                     root = dependencies["root_unit_id"]
                     old_state = actual["value"]["edit_state"]
                     new_state = current["value"]["edit_state"]
-                    selection = item.get("dependency_selection")
                     ids, edges = (query_support(new_state, selection["roots"],
-                                               excluded=selection["excluded"])
+                                               excluded=selection["excluded"],
+                                               support_choices=selection.get("support_choices"))
                                   if selection is not None else
                                   unit_closure(new_state, root) if root is not None else
                                   ([unit["unit_id"] for unit in new_state["units"]],
@@ -271,6 +317,7 @@ def open_evidence_packs(
                     changed = (ids != old_ids or edges != old_edges or
                                [unit for unit in old_state["units"] if unit["unit_id"] in old_ids]
                                != [unit for unit in new_state["units"] if unit["unit_id"] in ids])
+                    changed = changed or groups_changed
                 item["current_record_revision"] = current["value"]["revision"]
                 item["dependency_status"] = "changed" if changed else "retained_units_unchanged"
                 item["version_view"] = "historical_exact_revision" if changed else "current_units"
@@ -279,7 +326,6 @@ def open_evidence_packs(
                     current_ids = {
                         unit["unit_id"] for unit in current["value"]["edit_state"]["units"]
                     }
-                    selection = item.get("dependency_selection")
                     retracted = (not set(selection["roots"]) & current_ids
                                  and not selection["history_revisions"] if selection is not None
                                  else root is not None and root not in current_ids)
@@ -294,11 +340,13 @@ def open_evidence_packs(
                     item = build_evidence_packs(
                         service, "", view.get("query_time") or "", [], [current],
                         calendar_context=view.get("query_calendar_context"),
-                        dependency_selections=({item["record_id"]: item["dependency_selection"]}
-                                               if "dependency_selection" in item else None),
+                        dependency_selections=({item["record_id"]: selection}
+                                               if selection is not None else None),
                     )[0]
                     item.update(version_view="current_at_snapshot",
                                 dependency_status="refreshed_explicit_dependencies")
+                    if groups_changed:
+                        item["support_selection_status"] = "new_revision_routes_reopened"
             # A retained interpretation never bypasses current support visibility.
             evidence = []
             for span in item["revision_evidence"]:
@@ -345,6 +393,17 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
                                 "target": ids[link["target_unit"]],
                                 "relation_type": link["relation_type"]}
                                for link in view.get("relations", [])]
+        if "support_groups" in view:
+            result["support_groups"] = [{
+                "target": ids[group["target_unit"]],
+                "alternatives": [[ids[uid] for uid in route] for route in group["alternatives"]],
+                "selected_route_indices": group.get("selected_route_indices"),
+                "total_routes": group.get("total_routes", len(group["alternatives"])),
+                "selected_routes_time_eligibility": group.get("selected_routes_time_eligibility"),
+                "changed_premises": [ids[uid] for uid in group.get("changed_premises", [])
+                                     if uid in ids],
+                "semantics": "OR_of_AND; model_interpretation_not_verified_truth",
+            } for group in view["support_groups"]]
     return result
 
 

@@ -67,7 +67,7 @@ def test_region_constrains_actual_editor_and_keeps_other_claims(
                                 source_metadata=True, temporal_scope=True,
                                 proposition_updates=True, dependency_updates=True)
                     if full_features else
-                    EditFeatures(bound_references=True, dependency_updates=True))
+                    EditFeatures(dependency_updates=True))
         method = EditMemory(service, "M", interface_version="I2", features=features)
         changed = service.capture_user("s1", "change", "A now uses Wu. Keep B and approval.")[
             "source_ref"]

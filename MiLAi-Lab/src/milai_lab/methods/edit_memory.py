@@ -14,6 +14,7 @@ from typing import Any, Literal
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 
 from milai_lab.contracts.memory import ObservationProfile
+from milai_lab.memory.dependency_groups import apply_support_groups
 from milai_lab.memory.edit_units import (
     ARM_OPERATIONS,
     OPERATION_INSTRUCTIONS,
@@ -131,6 +132,8 @@ class EditMemory:
         self.features = features or EditFeatures()
         if self.features.dependency_updates and (arm != "M" or interface_version != "I2"):
             raise ValueError("DEPENDENCY_UPDATES_REQUIRE_M_I2")
+        if self.features.dependency_groups and (not self.conditioned or interface_version != "I2"):
+            raise ValueError("DEPENDENCY_GROUPS_REQUIRE_CONDITIONED_I2")
         if maintenance_mode not in {"legacy", "event_delta_v1"}:
             raise ValueError("EDIT_MAINTENANCE_MODE_INVALID")
         if maintenance_mode != "legacy" and interface_version == "v1":
@@ -203,6 +206,20 @@ class EditMemory:
 
     def instructions(self, *, allow_create: bool = True) -> str:
         guidance = PROPOSITION_UPDATE_INSTRUCTIONS if self.features.proposition_updates else ""
+        if self.features.dependency_groups:
+            guidance += (
+                " Record a derived claim's explicit sufficient support routes in support_groups. "
+                "Each inner list is AND, outer alternatives are OR. Preserve uncertain or "
+                "conditional wording in the claims; a graph is a model interpretation, not "
+                "proof. Dependencies require delivered evidence; co-occurrence is insufficient. "
+                "Removing one premise loses its entire AND route, but other routes may remain. "
+                "Never invent a successor value or retract all successors just because one "
+                "support changed. For create/rewrite, group references index clauses before "
+                "condition expansion. For local edits use old u aliases or n0,n1,... counting "
+                "newly appended units; override creates content then its condition. Omitted "
+                "targets retain their groups. An explicit empty alternatives list records no "
+                "remaining route; operation=remove removes that dependency claim itself. "
+            )
         if self.maintenance_mode == "event_delta_v1":
             return self._event_instructions(allow_create=allow_create) + guidance
         if self.features.enabled:
@@ -1010,7 +1027,8 @@ class EditMemory:
             if not row.get("ok") or not isinstance(row.get("value"), dict):
                 raise FunctionalRejection("EDIT_RECORD_UNAVAILABLE")
             state = row["value"].get("edit_state") or {}
-            for item in [*state.get("units", []), *state.get("relations", [])]:
+            for item in [*state.get("units", []), *state.get("relations", []),
+                         *state.get("support_groups", [])]:
                 for ref in item["evidence_refs"]:
                     part = {
                         key: ref[key] for key in ("source_ref", "source_revision", "start", "end")
@@ -1102,7 +1120,8 @@ class EditMemory:
             state = copy.deepcopy(version.get("edit_state"))
             refs = []
             if state:
-                for item in [*state["units"], *state["relations"]]:
+                for item in [*state["units"], *state["relations"],
+                             *state.get("support_groups", [])]:
                     for ref in item["evidence_refs"]:
                         if "evidence_id" not in ref:
                             ref.update(
@@ -1239,7 +1258,8 @@ class EditMemory:
         ]
         for record in delivery.get("records", []):
             state = record.get("edit_state") or {}
-            for item in [*state.get("units", []), *state.get("relations", [])]:
+            for item in [*state.get("units", []), *state.get("relations", []),
+                         *state.get("support_groups", [])]:
                 refs.extend(ref["source_ref"] for ref in item["evidence_refs"])
                 assertion = item.get("assertion")
                 if assertion and "source_ref" in assertion:
@@ -1296,7 +1316,9 @@ class EditMemory:
                 regional_payload, ensure_ascii=False, separators=(",", ":"))
             messages[0]["content"] += (
                 " Reconsider affected_units using the original sources. Read-only units are "
-                "context, not edit targets. Reachability does not require a change or a "
+                "context, not unit-text edit targets. support_update_targets separately permits "
+                "updating a preserved claim's support groups as its premises change. "
+                "Reachability does not require a change or a "
                 "retraction: retain claims when their remaining support or scope still holds. "
                 "New independently supported claims may be appended; do not duplicate old "
                 "read-only claims to evade the modification region.")
@@ -1991,6 +2013,24 @@ class EditMemory:
             raise FunctionalRejection("EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE")
         if proposal.get("revision_evidence"):
             supports({"evidence": proposal["revision_evidence"]})
+        if self.features.dependency_groups and "support_groups" in proposal:
+            def group_reference(value: int | str) -> dict[str, Any]:
+                if isinstance(value, int):
+                    return {"generated": value}
+                if value.startswith("n"):
+                    return {"generated": int(value[1:])}
+                return {"existing": alias_unit(value)["unit_id"]}
+
+            metadata["support_groups"] = []
+            for group in proposal["support_groups"]:
+                handles, _ = supports(group)
+                metadata["support_groups"].append({
+                    "operation": group.get("operation", "set"),
+                    "target": group_reference(group["target_unit"]),
+                    "alternatives": [[group_reference(ref) for ref in route]
+                                     for route in group.get("alternatives", [])],
+                    "evidence_refs": source_evidence(self.service, handles),
+                })
         if self.features.enabled:
             metadata["revision_evidence"] = list(
                 dict.fromkeys(metadata.get("revision_evidence", []))
@@ -2073,7 +2113,9 @@ class EditMemory:
             assert old is not None
             state = old.get("edit_state")
         else:
-            if self.arm not in {"B1", "M"} or parsed.units or parsed.relations or not parsed.edits:
+            if self.arm not in {"B1", "M"} or parsed.units or parsed.relations or (
+                not parsed.edits and not (metadata or {}).get("support_groups")
+            ):
                 raise FunctionalRejection("EDIT_LOCAL_OPERATIONS_REQUIRED")
             assert old is not None
             if "edit_state" not in old:
@@ -2105,6 +2147,10 @@ class EditMemory:
                 old=(old or {}).get("edit_state"),
                 edits=parsed.edits if parsed.action == "edit" else None,
             )
+            if "support_groups" in metadata:
+                apply_support_groups(
+                    state, metadata["support_groups"],
+                    old=(old or {}).get("edit_state") if parsed.action == "edit" else None)
         if parsed.action == "no_change":
             assert old is not None
             refs = old.get("source_refs", [old["source_ref"]])
@@ -2114,7 +2160,8 @@ class EditMemory:
             refs = list(
                 dict.fromkeys(
                     ref["source_ref"]
-                    for item in [*state["units"], *state["relations"]]
+                    for item in [*state["units"], *state["relations"],
+                                 *state.get("support_groups", [])]
                     for ref in item["evidence_refs"]
                 )
             )

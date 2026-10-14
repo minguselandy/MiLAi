@@ -1,0 +1,78 @@
+{
+  "observed_at": "2026-10-14T15:28:58.446231+00:00",
+  "base_commit": "32ffb69f",
+  "branch": "feat/lab-method-architecture-20261014",
+  "previous_goal_turn": "progress: first implementation committed as 32ffb69f",
+  "current_goal_status": "active_incomplete",
+  "new_model_request_files": 0,
+  "paused_processes": {
+    "1376965": "State:\tT (stopped)",
+    "1626865": "State:\tT (stopped)"
+  },
+  "continuous_ledger_owner_lock": "held",
+  "old_process_signals_sent": false,
+  "prepared": {
+    "plain": {
+      "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/continuous-v2/plain/alignment-prepared.json",
+      "status": "PREPARED_ZERO_MODEL",
+      "opportunities": {
+        "sessions": 12,
+        "qa": 12,
+        "native_updates": 0
+      }
+    },
+    "candidate": {
+      "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/continuous-v2/candidate/alignment-prepared.json",
+      "status": "PREPARED_ZERO_MODEL",
+      "opportunities": {
+        "sessions": 12,
+        "qa": 12,
+        "native_updates": 0
+      }
+    }
+  },
+  "implemented": [
+    "source-bound model-output support groups persisted in original record transaction",
+    "AND inside each route, OR across alternative routes",
+    "clause-index binding after condition expansion; generated-unit aliases for local edits",
+    "whole-route removal when a conjunct is retracted; no automatic successor negation",
+    "changed-premise markers until explicit group reinterpretation",
+    "separate unit text mutation region and support update targets",
+    "query whole-route selection and exact historical versions",
+    "invalidate old route selection on changed record groups; retain current visibility enforcement"
+  ],
+  "verification": {
+    "pytest": {
+      "passed": 267,
+      "failed": 0,
+      "warnings": 4,
+      "seconds": 84.52,
+      "command": "PYTHONPATH=src /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python -m pytest tests/unit/test_dependency_groups.py tests/unit/test_dependency_memory.py tests/unit/test_evidence_reading.py tests/unit/test_edit_v2_runner.py tests/memory/test_edit_memory.py tests/memory/test_edit_memory_v2.py tests/memory/test_functional_edit_memory.py -q --tb=short"
+    },
+    "mypy": {
+      "checked_source_files": 6,
+      "status": "pass"
+    },
+    "ruff": "pass",
+    "package_boundary": "pass",
+    "remote_ci": "not_run"
+  },
+  "not_achieved": [
+    "actual model formation and paired source review",
+    "same-before information-equivalent plain diagnostic",
+    "UJS/QA results and complete lifecycle costs",
+    "minimal cross-record slice",
+    "maintenance allocation policies",
+    "2x2 interaction/strong baselines/conditional training",
+    "independent long histories and model size or family confirmation",
+    "external benchmarks and nearest-neighbor reproductions",
+    "normal Host transfer",
+    "paper figures and evidence-backed conclusions"
+  ],
+  "invariants": [
+    "original v1 preparations retained",
+    "old confirmation configuration and outputs untouched",
+    "same continuous ledger, no SHA verification, no subagents, no new service",
+    "Product/Archive unchanged"
+  ]
+}

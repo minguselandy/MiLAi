@@ -15,6 +15,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from milai_lab.memory.dependency_groups import retain_support_groups
 from milai_lab.memory.functional_state import (
     FunctionalRejection,
     body_text,
@@ -210,7 +211,8 @@ def validate_state(state: dict[str, Any], service: Any | None = None) -> None:
             raise FunctionalRejection("EDIT_UNIT_INVALID")
         by_id[unit["unit_id"]] = unit
     conditioned = state["representation"] == "conditioned_v1"
-    if not conditioned and (state["relations"] or any(u["role"] != "content" for u in units)):
+    if not conditioned and (state["relations"] or state.get("support_groups")
+                            or any(u["role"] != "content" for u in units)):
         raise FunctionalRejection("EDIT_PLAIN_REPRESENTATION_REQUIRED")
     relation_ids = set()
     override_sources = set()
@@ -244,7 +246,16 @@ def validate_state(state: dict[str, Any], service: Any | None = None) -> None:
                 for r in state["relations"]
             ):
                 raise FunctionalRejection("EDIT_OVERRIDE_SCOPE_REQUIRED")
-    for item in [*units, *state["relations"]]:
+    group_targets = set()
+    for group in state.get("support_groups", []):
+        target = group["target_unit"]
+        if target not in by_id or by_id[target]["role"] != "content" or target in group_targets:
+            raise FunctionalRejection("EDIT_SUPPORT_TARGET_INVALID")
+        group_targets.add(target)
+        for route in group["alternatives"]:
+            if not route or target in route or not set(route) <= set(by_id):
+                raise FunctionalRejection("EDIT_SUPPORT_ROUTE_INVALID")
+    for item in [*units, *state["relations"], *state.get("support_groups", [])]:
         evidence = item.get("evidence_refs")
         if not isinstance(evidence, list) or not evidence:
             raise FunctionalRejection("EDIT_EVIDENCE_REQUIRED")
@@ -446,6 +457,7 @@ def apply_local(
                     "evidence_refs": evidence,
                 }
             )
+    retain_support_groups(state, old)
     return state
 
 
@@ -868,6 +880,8 @@ def render_revision_view(
         "units": compact_units,
         "source_table": source_table,
         "relations": relations,
+        **({"support_groups": copy.deepcopy(state["support_groups"])}
+           if "support_groups" in state else {}),
         "common_conditions": common_conditions,
         "historical_units": [
             key for key, item in projected.items()
@@ -984,6 +998,17 @@ def render_state(
         ]
         if conditions:
             lines.append("  Applies under: " + "; ".join(conditions))
+    for group in state.get("support_groups", []):
+        routes = [" AND ".join(units[uid]["text"] for uid in route)
+                  for route in group["alternatives"]]
+        lines.append("Support for " + units[group["target_unit"]]["text"] + ": "
+                     + " OR ".join("(" + route + ")" for route in routes)
+                     if routes else "No stored support route for "
+                     + units[group["target_unit"]]["text"])
+        if group.get("changed_premises"):
+            lines.append(
+                "  Premise wording or attribution changed; routes require reinterpretation: "
+                + "; ".join(units[uid]["text"] for uid in group["changed_premises"]))
     return "\n".join(lines)
 
 
@@ -1143,6 +1168,13 @@ def compile_clause_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
             )
         relations.extend(reused_links)
     units.extend({**unit, "role": "condition"} for unit in result.pop("unresolved_conditions", []))
+    for group in result.get("support_groups", []):
+        indexes = [group["target_unit"], *(i for route in group["alternatives"] for i in route)]
+        if any(not 0 <= index < len(content_indexes) for index in indexes):
+            raise FunctionalRejection("EDIT_SUPPORT_CLAUSE_UNAVAILABLE")
+        group["target_unit"] = content_indexes[group["target_unit"]]
+        group["alternatives"] = [[content_indexes[index] for index in route]
+                                 for route in group["alternatives"]]
     result.update(units=units, relations=relations)
     return result
 
@@ -1454,6 +1486,14 @@ def writer_projection(
             "units": public_units,
             "relations": public_relations,
         }
+        if state and "support_groups" in state:
+            public_record["support_groups"] = [{
+                "target_unit": by_id[group["target_unit"]],
+                "alternatives": [[by_id[uid] for uid in route] for route in group["alternatives"]],
+                "support": [support_id(group, {"support_target": by_id[group["target_unit"]]})],
+                **({"changed_premises": [by_id[uid] for uid in group["changed_premises"]]}
+                   if group.get("changed_premises") else {}),
+            } for group in state["support_groups"]]
         if "scope" in record:
             public_record["scope"] = copy.deepcopy(record["scope"])
         if features and features.get("matter_organization"):

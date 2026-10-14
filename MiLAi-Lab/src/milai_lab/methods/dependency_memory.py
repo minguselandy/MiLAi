@@ -1,6 +1,6 @@
 """Directed update regions over actual model-formed memory.
 
-This first slice uses the existing condition/exception relations. It does not
+The mechanism uses condition/exception relations and source-bound support sets. It does not
 infer dependencies from word overlap or turn a reachable node into a deletion.
 Both update context and query support use the same directed relation semantics.
 """
@@ -10,6 +10,8 @@ from __future__ import annotations
 import copy
 import json
 from typing import Any
+
+from milai_lab.memory.dependency_groups import select_support_routes
 
 
 def dependency_region(
@@ -23,6 +25,8 @@ def dependency_region(
     """
     ordered = [unit["unit_id"] for unit in state["units"]]
     edges = state.get("relations", [])
+    support_edges = [(uid, group["target_unit"]) for group in state.get("support_groups", [])
+                     for route in group["alternatives"] for uid in route]
     preserved = set(preserve or []) - set(roots)
     affected = set(roots)
     while True:
@@ -36,6 +40,9 @@ def dependency_region(
             if edge["relation_type"] == "overrides" and target in affected \
                     and source not in preserved:
                 affected.add(source)
+        for source, target in support_edges:
+            if source in affected and target not in preserved:
+                affected.add(target)
         if affected == previous:
             break
     context = set(affected)
@@ -43,6 +50,11 @@ def dependency_region(
         previous = context.copy()
         for edge in edges:
             source, target = edge["source_unit"], edge["target_unit"]
+            if target in context:
+                context.add(source)
+            if source in affected:
+                context.add(target)
+        for source, target in support_edges:
             if target in context:
                 context.add(source)
             if source in affected:
@@ -55,13 +67,19 @@ def dependency_region(
         "read_only_units": [uid for uid in ordered if uid in context - affected],
         "preserved_units": [uid for uid in ordered if uid in preserved],
         "context_units": [uid for uid in ordered if uid in context],
+        "support_update_targets": [uid for uid in ordered if uid in affected or any(
+            source in affected and target == uid for source, target in support_edges)],
         "relations": [copy.deepcopy(edge) for edge in edges
                       if edge["source_unit"] in context and edge["target_unit"] in context],
+        **({"support_groups": [copy.deepcopy(group) for group in state["support_groups"]
+                               if group["target_unit"] in context]}
+           if "support_groups" in state else {}),
     }
 
 
 def query_support(
     state: dict[str, Any], roots: list[str], *, excluded: list[str] | None = None,
+    support_choices: dict[str, list[int]] | None = None,
 ) -> tuple[list[str], list[dict[str, Any]]]:
     """Read prerequisites and scoped alternatives without expanding sibling claims.
 
@@ -79,6 +97,7 @@ def query_support(
             if (source in roots or (edge["relation_type"] == "overrides" and source in selected)) \
                     and target not in omitted:
                 selected.add(target)
+        selected, _ = select_support_routes(state, selected, choices=support_choices)
         if selected == previous:
             break
     return (
@@ -128,6 +147,11 @@ def plan_regions(mapping: dict[str, Any], selection: dict[str, Any]) -> dict[str
                            "target_unit": aliases[edge["target_unit"]],
                            "relation_type": edge["relation_type"]}
                           for edge in original["relations"]],
+            **({"support_groups": [{
+                "target_unit": aliases[group["target_unit"]],
+                "alternatives": [[aliases[uid] for uid in route]
+                                 for route in group["alternatives"]],
+            } for group in original["support_groups"]]} if "support_groups" in original else {}),
         }
         regions[record_id] = dependency_region(
             state, [uid for uid in selection["roots"] if uid in ids],
@@ -142,6 +166,29 @@ def scoped_edit_schema(schema: dict[str, Any], regions: dict[str, Any]) -> dict[
     existing semantics. The normal bound decoder and commit remain authoritative.
     """
     allowed = {uid for region in regions.values() for uid in region["affected_units"]}
+    support_allowed = allowed | {uid for region in regions.values()
+                                 for uid in region.get("support_update_targets", [])}
+
+    def restrict_reference(
+        reference: dict[str, Any], candidates: set[str],
+    ) -> dict[str, Any] | bool:
+        if "anyOf" in reference:
+            alternatives = [restrict_reference(ref, candidates) for ref in reference["anyOf"]]
+            alternatives = [ref for ref in alternatives if ref is not False]
+            return {"anyOf": alternatives} if alternatives else False
+        if "const" in reference and isinstance(reference["const"], str) \
+                and reference["const"] not in candidates:
+            return False
+        if "enum" in reference:
+            reference["enum"] = [uid for uid in reference["enum"] if uid in candidates]
+            if not reference["enum"]:
+                return False
+        elif reference.get("type") == "string" and "const" not in reference \
+                and reference.get("pattern") != "^n[0-9]+$":
+            if not candidates:
+                return False
+            reference["enum"] = sorted(candidates)
+        return reference
 
     def visit(node: Any) -> Any:
         if isinstance(node, list):
@@ -158,15 +205,15 @@ def scoped_edit_schema(schema: dict[str, Any], regions: dict[str, Any]) -> dict[
             else:
                 props["attach_to"] = {"type": "array", "maxItems": 0}
         if "target_unit" in props:
-            reference = props["target_unit"]
-            if "const" in reference and reference["const"] not in allowed:
-                return False
-            if "enum" in reference:
-                reference["enum"] = [uid for uid in reference["enum"] if uid in allowed]
-                if not reference["enum"]:
-                    if "target_unit" in result.get("required", []):
-                        return False
-                    props["target_unit"] = {"type": "null"}
+            group_change = ("alternatives" in props
+                            or props.get("operation", {}).get("const") == "remove")
+            narrowed = restrict_reference(
+                props["target_unit"], support_allowed if group_change else allowed)
+            if narrowed is False:
+                if "target_unit" in result.get("required", []):
+                    return False
+                narrowed = {"type": "null"}
+            props["target_unit"] = narrowed
         for key in ("oneOf", "anyOf"):
             if key in result:
                 result[key] = [child for child in result[key] if child is not False]
