@@ -17,7 +17,9 @@ D四题三臂完成，带支持整条视图总tokens高于原文25.4%，无稳�
 最新完整Functional Host集成回归362项通过，Ruff、相关类型与包/工具边界检查通过。
 
 两段32会话历史的短／中／完整前缀对照已启动，冻结源`4c988f10`；
-`artifacts/global-development/long-history-v1/process.json`记录实际串行进程。原17条空库Host故事另已固定edit thinking关闭的验证配置，等待当前队列后运行。
+`artifacts/global-development/long-history-v1/process.json`记录实际串行进程。
+S0已闭合：7/12 Correct，另3 Hallucination、1 invalid、1缺答；预测76调用/3,034,404 tokens。
+候选正在连续形成，暂无两臂完整结论。原17条空库Host故事另已固定edit thinking关闭的验证配置，等待当前队列后运行。
 最终保留用户确认未运行；
 Product适配与训练按实际收益条件推进。本轮未执行SHA或替代指纹校验，未发布或合并远端。
 

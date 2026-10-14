@@ -6,13 +6,16 @@ Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python. Root owns serial rea
 existing continuous budget.json/owner lock. Never reset unknown floor(gen9/emb1) or restart a live job.
 
 CURRENT ACTUAL JOB: exec42506 = artifacts/global-development/run_long_history_v1.py.
-Four serial steps: S0predict/firstscore, candidatepredict/firstscore. First actual PID28810 is S0predict;
+Four serial steps: S0predict/firstscore, candidatepredict/firstscore. S0 CLOSED both phases rc0;
+current actual PID210418 is candidatepredict, parent28805. S0predict PID28810 andscore200966 gone;
 inspect artifacts/global-development/long-history-v1/process.json, actualprocess and terminal before
 scheduling any other model work. Frozen source-story-repair-v1/MiLAi-Lab =4c988f10, not latest6c.
 Two exposedusers2f1.../5c005..., first32chronological sessions,2Q at8/18/32 and8/20/32. Metadata rule and
 nonboundary amendment fixed before any outcomes. Beforelong selector thinkingFalse (known length
 operability only); edit/finalReader true,8192output65536window. Bothconfigs/inputs already prepared;
-DO NOT hotedit. Driver stops nonzero, no unknown retry. SourceS0 has no maintenance; candidate S2+pack+C.
+DO NOT hotedit. Driver stops nonzero, no unknown retry. SourceS0 has no maintenance; candidate S2+pack+C. S0 closed64sessions/12questions:11answers+1knownlengthmissing,
+firstlabels7C3H1invalid1missing.76predictcalls3034404tokens,11Judge34156;emb0/newunknown0.
+Predictwall2736.963s,score148.415s (wholephase, not percall). global-long-history-v1-s0-summary.json.
 Prepared source configs/selection are in long-history-v1/protocol.json and initial-protocol.json.
 
 A firstslice complete. B8closed3C4H1invalid control vs5C2H1missing pack;33calls712686 vs13calls222603.
