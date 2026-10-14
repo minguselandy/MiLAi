@@ -157,3 +157,53 @@ def test_rank_batches_reserve_reader_and_answer_calls_before_dispatch(tmp_path: 
         execution._rank_materials("Which?", "", "qa", [original(index) for index in range(4)],
                                   "pool.json")
     assert calls == []
+
+
+@pytest.mark.parametrize("body_size,max_calls,reason", [
+    (3000, 3, "ranking_call_limit"),
+    (12000, 12, "whole_ranking_material_unavailable"),
+])
+def test_pre_reader_ranking_failure_is_saved_and_next_question_runs(
+    tmp_path: Path, body_size: int, max_calls: int, reason: str,
+) -> None:
+    execution = reader(tmp_path, max_calls=max_calls)
+    materials = [original(i, body_size) for i in range(4)]
+    write_json(tmp_path / "failed-pool.json", {"materials": materials})
+    calls = []
+
+    def chat(messages: Any, **kwargs: Any) -> dict[str, Any]:
+        calls.append(messages)
+        return response("Next independent question answered.")
+
+    execution.client.chat = chat
+    for _ in range(2):
+        with pytest.raises(ReadDeliveryIncomplete) as error:
+            execution.answer_material("Which?", "", "failed", materials,
+                                      snapshot_id="failed-pool.json")
+        failure = execution._known_reader_failure(
+            error.value, "failed", policy="record_known_readonly_failure")
+        assert failure is not None and failure["reason"] == reason
+        assert failure["request_sent"] is False
+        assert failure["ranking_plan_ref"] == "http/failed/ranking.json"
+        assert "delivery_plan_ref" not in failure
+    assert calls == []
+    assert not (tmp_path / "http/failed/memory-view.json").exists()
+    small = [original(0, 20)]
+    write_json(tmp_path / "next-pool.json", {"materials": small})
+    answer, _ = execution.answer_material("Next?", "", "next", small,
+                                          snapshot_id="next-pool.json")
+    assert answer == "Next independent question answered." and len(calls) == 1
+
+
+def test_original_question_target_is_invariant_to_selection_plan(tmp_path: Path) -> None:
+    execution = reader(tmp_path)
+    execution.settings["reader_target"] = "original_question_v1"
+    question = "Compare the rules before and after October 20; retain the exception."
+    materials = [original(0, 20)]
+    direct = execution._material_messages(question, "2030-01-01", materials,
+                                          snapshot_id="pool.json", item_indices=[0])
+    planned = execution._material_messages(question, "2030-01-01", materials,
+                                           snapshot_id="pool.json", item_indices=[0],
+                                           read_goal="Only describe the latest version.")
+    assert planned == direct
+    assert question in direct[1]["content"] and "read_goal" not in direct[1]["content"]

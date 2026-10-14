@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import time
+import unicodedata
 from collections.abc import Callable, Sequence
 from typing import Any, Literal
 
@@ -10,6 +12,54 @@ from langchain_core.embeddings import Embeddings
 from milai_lab.memory.embeddings import normalized
 
 BM25_VERSION = "0.2.2"
+
+
+def _lexical_tokens(text: str, *, include_cjk_unigrams: bool = False) -> list[str]:
+    """Unicode words plus overlapping Han/kana/Hangul bigrams, without a dictionary.
+
+    Multi-character CJK query runs use bigrams rather than common individual
+    characters. Candidate unigrams also allow an explicitly single-character
+    query. Canonical normalization and case folding apply only to matching;
+    original queries and stored bodies are untouched.
+    """
+    tokens: list[str] = []
+    run: list[str] = []
+    cjk = False
+
+    def flush() -> None:
+        if not run:
+            return
+        if cjk:
+            if include_cjk_unigrams or len(run) == 1:
+                tokens.extend(run)
+            tokens.extend(run[index] + run[index + 1] for index in range(len(run) - 1))
+        else:
+            tokens.append("".join(run))
+        run.clear()
+
+    for character in unicodedata.normalize("NFC", text.casefold()):
+        category = unicodedata.category(character)[0]
+        if category in {"L", "N"}:
+            is_cjk = unicodedata.name(character, "").startswith(
+                (
+                    "CJK UNIFIED",
+                    "CJK COMPATIBILITY",
+                    "HIRAGANA",
+                    "KATAKANA",
+                    "HALFWIDTH KATAKANA",
+                    "HANGUL",
+                )
+            )
+            if run and is_cjk != cjk:
+                flush()
+            cjk = is_cjk
+            run.append(character)
+        elif category == "M" and run:
+            run.append(character)
+        else:
+            flush()
+    flush()
+    return tokens
 
 
 def raw_exchange_units(
@@ -30,23 +80,33 @@ def raw_exchange_units(
 
 
 def flat_bm25_rank(
-    units: list[dict[str, Any]], query: str, limit: int,
+    units: list[dict[str, Any]], query: str, limit: int, *,
+    tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
+    timings: dict[str, float] | None = None,
 ) -> list[dict[str, Any]]:
-    """Reuse RawRAG's pinned tokenizer, BM25 and NumPy tie ordering exactly."""
-    if not units:
-        return []
+    """Pinned RawRAG by default; opt-in Unicode uses identical query/document tokens."""
+    if tokenization not in {"rawrag_space", "unicode_v1"}:
+        raise ValueError("SOURCE_TOKENIZATION_INVALID")
     from importlib import import_module
     from importlib.metadata import version
 
     import numpy as np
 
+    started = time.perf_counter()
     bm25_type = import_module("rank_bm25").BM25Okapi
     if version("rank-bm25") != BM25_VERSION:
         raise ValueError("RAWRAG_BM25_VERSION_CHANGED")
-    bm25 = bm25_type([row["index_text"].split(" ") for row in units])
-    scores = bm25.get_scores(query.split(" "))
-    return [{**units[int(index)], "score": float(scores[index])}
-            for index in np.argsort(scores)[::-1][:limit]]
+    tokenize = _lexical_tokens if tokenization == "unicode_v1" else lambda text: text.split(" ")
+    corpus = [tokenize(row["index_text"]) for row in units]
+    bm25 = bm25_type(corpus) if any(corpus) else None
+    indexed = time.perf_counter()
+    scores = bm25.get_scores(tokenize(query)) if bm25 is not None else np.zeros(len(units))
+    ranked = [{**units[int(index)], "score": float(scores[index])}
+              for index in np.argsort(scores)[::-1][:limit]]
+    if timings is not None:
+        timings.update(index_seconds=indexed - started,
+                       rank_seconds=time.perf_counter() - indexed)
+    return ranked
 
 
 def semantic_text(value: dict[str, Any]) -> str:

@@ -118,7 +118,8 @@ def alignment_settings(config: dict[str, Any], backend: str) -> dict[str, Any]:
         raise ValueError("Unknown declared MiLAi maintenance arm")
     settings.update(arm=arm, alignment_backend=backend, alignment=config["alignment"])
     if backend != "MiLAi-memory-only":
-        for name in ("source_access", "source_top_k", "semantic_top_k", "maintenance_mode"):
+        for name in ("source_access", "source_top_k", "semantic_top_k", "maintenance_mode",
+                     "source_tokenization", "source_granularity"):
             settings.pop(name, None)
     # Maintenance retains its original candidate limit. QA passes its separate
     # explicit limit to the backend; aligning answers must not change writing.

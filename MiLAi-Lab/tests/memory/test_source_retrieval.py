@@ -7,11 +7,87 @@ import json
 from pathlib import Path
 from typing import Any
 
+import pytest
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional import FunctionalMemory
 from milai_lab.memory.service import MemoryService
+
+
+def test_source_query_skips_formation_and_keeps_owner_scope(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        source = service.capture_user("session", "turn:0", "Original source.")
+        other = MemoryService(store, (*service.sources_namespace, "bob"), "bob",
+                              tmp_path / "bob.lock")
+        other.capture_user("session", "turn:0", "Foreign source.")
+        assert service.sources()[0]["formation_status"] == "pending"
+        rows = service._rows
+
+        def source_rows(namespace: tuple[str, ...]) -> list[dict[str, Any]]:
+            assert namespace != service.namespace, "Source search traversed semantic history"
+            return rows(namespace)
+
+        monkeypatch.setattr(service, "_rows", source_rows)
+        found = service.search_sources("Original", tokenization="unicode_v1")
+        assert [row["event_id"] for row in found["raw_events"]] == [source["source_ref"]]
+        assert "formation_status" not in found["raw_events"][0]
+        assert service.read_source_materials(found["source_materials"]) == found["source_materials"]
+        timings = found["source_retrieval"]["timings"]
+        assert set(timings) == {"enumerate_seconds", "assemble_seconds", "index_seconds",
+                                "rank_seconds", "open_seconds", "total_seconds"}
+        assert all(value >= 0 for value in timings.values())
+
+
+def test_unicode_queries_retrieve_original_roles_beyond_first_store_page(tmp_path: Path) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        chinese = service.capture_user("cn", "turn:0", "研发部李明不能审批外部预算,先让赵敏确认。")
+        reply = service.capture_assistant(
+            "cn", "turn:1", "明白,是研发部的李明,不是采购部同名同事。")
+        english = service.capture_user(
+            "en", "turn:0", "Project OMEGA: release 2042, approval pending.")
+        tool = service.capture_tool("tool", "turn:0", "inventory", "仓库乙库存剩余17件。", None)
+        for index in range(105):
+            service.capture_user(f"noise-{index}", "turn:0", f"日常旅行日记 tropical beach {index}")
+        cases = [("研发部李明的预算审批", chinese["source_ref"]),
+                 ("omega RELEASE 2042!", english["source_ref"]),
+                 ("仓库乙剩余库存", tool["source_ref"])]
+        for query, expected in cases:
+            found = service.search_sources(query, limit=1, granularity="turn",
+                                           tokenization="unicode_v1")
+            assert expected in [row["event_id"] for row in found["raw_events"]]
+            assert found["source_retrieval"]["indexed_count"] == 108
+        turns = json.loads(service.search_sources(
+            cases[0][0], limit=1, granularity="turn", tokenization="unicode_v1",
+        )["source_materials"][0]["text"])
+        assert [turn["source_ref"] for turn in turns] == [
+            chinese["source_ref"], reply["source_ref"]]
+        assert "不能" in turns[0]["content"] and "不是采购部" in turns[1]["content"]
+
+
+def test_unicode_normalization_and_legacy_bm25_order() -> None:
+    import numpy as np
+    from rank_bm25 import BM25Okapi
+
+    from milai_lab.memory.retrieval import _lexical_tokens, flat_bm25_rank
+
+    units = [{"id": str(i), "index_text": text} for i, text in enumerate([
+        "Café, 2042! 中文检索", "desert journey", "old report", "ocean trip",
+    ])]
+    assert _lexical_tokens("CAFÉ! 2042 中文检索") == _lexical_tokens("cafe\u0301, 2042 中文检索")
+    assert len(_lexical_tokens("中文检索")) == 3
+    assert flat_bm25_rank(units, "CAFÉ 2042", 1, tokenization="unicode_v1")[0]["id"] == "0"
+    scores = BM25Okapi([row["index_text"].split(" ") for row in units]).get_scores(["trip"])
+    legacy = flat_bm25_rank(units, "trip", 4)
+    assert [row["id"] for row in legacy] == [str(i) for i in np.argsort(scores)[::-1]]
+    assert [row["score"] for row in legacy] == list(sorted(scores, reverse=True))
+    assert flat_bm25_rank([], "", 1, tokenization="unicode_v1") == []
+    punctuation = flat_bm25_rank([{"index_text": "..."}], "!?", 1, tokenization="unicode_v1")
+    assert punctuation[0]["score"] == 0
 
 
 def service_at(store: SqliteStore, root: Path) -> MemoryService:

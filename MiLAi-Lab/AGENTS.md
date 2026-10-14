@@ -1,3 +1,15 @@
+# Current task: global development plan, 2026-10-14
+
+Execute docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md from the evidence-development
+base in this worktree, branch feat/lab-global-development-20261014. The new plan
+supersedes previous completed-plan scheduling and approval gates below. Develop
+A then B and C, shared Host integration and conditional D/E/F as specified. No SHA
+checks, new review platform or model deployment. Preserve old results and defaults;
+new behavior uses explicit configurations. Existing owner/source visibility/version
+boundaries and serial model HTTP/accounting remain. No historical experiment restart.
+Use the existing /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv for local checks.
+Original user plan documents in main stay untouched. Goal active, not yet complete.
+
 # Current task: evidence development plan, 2026-10-13
 
 User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261012.md.

@@ -1955,14 +1955,16 @@ def test_each_embedding_batch_is_recorded_before_http_and_billed_once(tmp_path: 
 
 
 @pytest.mark.parametrize("unknown_answer", [False, True])
-@pytest.mark.parametrize("failure_kind", ["capacity", "no_text", "whole_material"])
+@pytest.mark.parametrize("failure_kind", [
+    "capacity", "no_text", "whole_material", "whole_ranking_material",
+])
 def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_stops(
     tmp_path: Path, unknown_answer: bool, failure_kind: str, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     class MeasuredTokenizer:
         def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
             return [0] * (500 if any(probe in str(messages) for probe in (
-                "capacity_probe", "whole_material_probe")) else 2)
+                "capacity_probe", "whole_material_probe", "whole_ranking_material_probe")) else 2)
 
         def encode(self, text: str, **kwargs: Any) -> list[int]:
             return list(range(len(text)))
@@ -2020,14 +2022,16 @@ def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_sto
                     "reader_failure_policy": "record_known_readonly_failure"},
     }
     execution.tokenizer = MeasuredTokenizer()
-    if failure_kind == "whole_material":
+    if failure_kind in {"whole_material", "whole_ranking_material"}:
         execution.settings["memory_view_mode"] = "direct"
+        if failure_kind == "whole_ranking_material":
+            execution.settings["reader_ranking"] = "llm_probe"
         original_answer = execution.answer
 
         def answer_material_probe(
             service: MemoryService, question: str, date: str, key: str,
         ) -> str:
-            if "whole_material_probe" not in question:
+            if f"{failure_kind}_probe" not in question:
                 return original_answer(service, question, date, key)
             materials = [{"id": "actual-synthetic-item", "text": "BlueProject Monday"}]
             snapshot_id = f"native/{key}/retrieval.json"
@@ -2056,6 +2060,11 @@ def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_sto
             assert first["reader_failure"]["request_sent"] is False
             assert (execution.root / first["reader_failure"]["capacity_ref"]).exists()
             assert not (execution.root / "http/halumem/synthetic/0/qa/0/request.json").exists()
+        elif failure_kind == "whole_ranking_material":
+            assert first["reader_failure"]["reason"] == "whole_ranking_material_unavailable"
+            assert first["reader_failure"]["request_sent"] is False
+            assert (execution.root / first["reader_failure"]["ranking_plan_ref"]).exists()
+            assert not (execution.root / "http/halumem/synthetic/0/qa/0/memory-view.json").exists()
         elif failure_kind == "whole_material":
             assert first["reader_failure"]["phase"] == "before_final_http"
             assert first["reader_failure"]["reason"] == "whole_material_unavailable"

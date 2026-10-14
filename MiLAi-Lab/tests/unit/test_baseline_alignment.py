@@ -744,6 +744,31 @@ def test_independent_source_reaches_reader_after_noop_and_cached_pool_respects_f
         assert read_json(execution.root / "native/question/retrieval.json") == snapshot
 
 
+def test_unicode_source_settings_reach_benchmark_and_host(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.memory.functional import FunctionalMemory
+
+    execution, sent = source_reader(tmp_path / "run", monkeypatch)
+    execution.settings.update(source_tokenization="unicode_v1", source_granularity="turn",
+                              source_top_k=1, evidence_variant="S0")
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("dynamic-source", "owner"), "owner", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        captured = service.capture_user("cn", "turn:0", "研发部李明不能审批外部预算。")
+        for i in range(4):
+            service.capture_user(f"noise-{i}", "turn:0", "旅行计划和海边酒店。")
+        execution.answer(service, "研发部李明预算审批", "2030-01-02", "question")
+        assert len(sent) == 1 and "研发部李明不能审批" in repr(sent[0])
+        snapshot = read_json(execution.root / "native/question/retrieval.json")
+        retrieval = snapshot["native_return"]["source_retrieval"]
+        assert retrieval["tokenization"] == "unicode_v1" and retrieval["granularity"] == "turn"
+        host = FunctionalMemory(service, len, source_access="independent_v1", source_top_k=1,
+                                source_tokenization="unicode_v1", source_granularity="turn")
+        units = host._search_units("研发部李明预算审批")
+        assert {unit["source_ref"] for unit in units} == {captured["source_ref"]}
+
+
 def test_long_original_uses_complete_existing_fragments_in_initial_fixed_pool(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:

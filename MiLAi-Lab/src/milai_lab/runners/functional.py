@@ -739,6 +739,7 @@ def prepare(
         "memory_ranking",
         "retrieval_granularity", "stage_enable_thinking",
         "source_access", "source_top_k", "semantic_top_k", "max_evidence_queries",
+        "source_tokenization", "source_granularity",
         "maintenance_mode",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
@@ -2685,6 +2686,8 @@ def message(
                 read_limit=settings["additional_reads"],
                 source_access=settings.get("source_access", "legacy"),
                 source_top_k=settings.get("source_top_k", 20),
+                source_tokenization=settings.get("source_tokenization", "rawrag_space"),
+                source_granularity=settings.get("source_granularity", "session"),
                 semantic_top_k=settings.get("semantic_top_k", 10),
                 max_evidence_queries=settings.get("max_evidence_queries"),
                 material_limit=settings["ordinary_material_tokens"],

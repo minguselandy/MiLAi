@@ -514,6 +514,8 @@ class BenchmarkRun:
             raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
         if settings.get("reader_projection", "legacy") not in {"legacy", "semantic_units_v1"}:
             raise ValueError("READER_PROJECTION_INVALID")
+        if settings.get("reader_target", "legacy") not in {"legacy", "original_question_v1"}:
+            raise ValueError("READER_TARGET_INVALID")
         if settings.get("source_access", "semantic_only") not in {
             "semantic_only", "independent_v1",
         }:
@@ -1723,7 +1725,7 @@ class BenchmarkRun:
                                              "collection": "materials"}
             payload["memory_item_indices"] = item_indices
             result[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
-        if read_goal is not None:
+        if read_goal is not None and self.settings.get("reader_target") != "original_question_v1":
             result[0]["content"] += (
                 " read_goal describes this question's purpose, not the provenance or "
                 "validity of the supplied memories. It does not establish that requested "
@@ -1923,6 +1925,9 @@ class BenchmarkRun:
             request.update(source_access="independent_v1",
                            source_top_k=self.settings["source_top_k"],
                            semantic_top_k=self.settings["semantic_top_k"])
+            for setting in ("source_tokenization", "source_granularity"):
+                if setting in self.settings:
+                    request[setting] = self.settings[setting]
             if "evidence_variant" in self.settings:
                 request["evidence_variant"] = self.settings["evidence_variant"]
         if request_path.exists() and read_json(request_path) != request:
@@ -1930,11 +1935,16 @@ class BenchmarkRun:
         if snapshot.exists():
             memories = read_json(snapshot)
         else:
-            native = (service.search_sources(question, limit=self.settings["source_top_k"])
+            native = (service.search_sources(
+                question, limit=self.settings["source_top_k"],
+                tokenization=self.settings.get("source_tokenization", "rawrag_space"),
+                granularity=self.settings.get("source_granularity", "session"))
                       if independent and self.settings.get("evidence_variant") == "S0"
                       else service.search_evidence(
                 question, source_limit=self.settings["source_top_k"],
                 semantic_limit=self.settings["semantic_top_k"],
+                tokenization=self.settings.get("source_tokenization", "rawrag_space"),
+                granularity=self.settings.get("source_granularity", "session"),
             ) if independent else service.search(
                 question, limit=requested_limit, include_raw=False))
             records = native.get("records", [])
@@ -2022,7 +2032,10 @@ class BenchmarkRun:
             raise ValueError("MemSifter checkpoint is not configured; use explicit llm_probe")
         path = self.root / "http" / key / "ranking.json"
         if path.exists():
-            return cast(list[int], read_json(path)["rank_order"])
+            saved = read_json(path)
+            if "incomplete_reason" in saved:
+                raise ReadDeliveryIncomplete(saved["incomplete_reason"])
+            return cast(list[int], saved["rank_order"])
         messages = self._material_messages(
             question, date, memories, snapshot_id=snapshot_id, item_indices=order,
         )
@@ -2051,11 +2064,19 @@ class BenchmarkRun:
                                                   for ref in selected], mode=mode),
                 **ranking_options,
             ) <= ranking_limit)["pages"]
-            if sum(map(len, batches)) != len(memories):
-                raise ReadDeliveryIncomplete("whole_ranking_material_unavailable")
             ranking_calls = sum(len(batch) > 1 for batch in batches)
-            if ranking_calls > self.client.config.max_calls - 2:
-                raise ReadDeliveryIncomplete("ranking_call_limit")
+            reason = ("whole_ranking_material_unavailable"
+                      if sum(map(len, batches)) != len(memories) else
+                      "ranking_call_limit" if ranking_calls > self.client.config.max_calls - 2
+                      else None)
+            if reason is not None:
+                write_json(path, {
+                    "reader_ranking": mode, "candidate_pool_size": len(memories),
+                    "incomplete_reason": reason, "ranking_calls": 0,
+                    "planned_ranking_calls": ranking_calls, "request_sent": False,
+                    "ranking_input_token_limit": ranking_limit,
+                })
+                raise ReadDeliveryIncomplete(reason)
             for ordinal, batch in enumerate(batches):
                 positions_in_batch = [ref["item_index"] for ref in batch]
                 if len(batch) == 1:
@@ -2648,6 +2669,15 @@ class BenchmarkRun:
             policy = self.settings["halumem"].get("reader_failure_policy", "fail_fast")
         view_path = self.root / "http" / key / "memory-view.json"
         if isinstance(error, ReadDeliveryIncomplete) and policy == "record_known_readonly_failure":
+            if error.reason in {"whole_ranking_material_unavailable", "ranking_call_limit"}:
+                ranking_path = view_path.with_name("ranking.json")
+                if (not ranking_path.exists()
+                        or read_json(ranking_path).get("incomplete_reason") != error.reason):
+                    return None
+                return {"type": type(error).__name__, "message": str(error),
+                        "phase": "before_final_http", "request_sent": False,
+                        "reason": error.reason,
+                        "ranking_plan_ref": str(ranking_path.relative_to(self.root))}
             if (not view_path.exists() or (view_path.parent / "request.json").exists()
                     or read_json(view_path).get("capacity_continuation", {}).get(
                         "incomplete_reason") != error.reason):
@@ -2973,7 +3003,8 @@ class BenchmarkRun:
                                     and reader_failure.get("type") == "ReadDeliveryIncomplete"
                                     and reader_failure.get("reason") in {
                                         "read_call_limit", "whole_matter_unavailable",
-                                        "whole_material_unavailable"}))):
+                                        "whole_material_unavailable", "ranking_call_limit",
+                                        "whole_ranking_material_unavailable"}))):
                             result = {}
                         elif isinstance(answer, str):
                             result = self._safe_score(
@@ -3174,7 +3205,8 @@ class BenchmarkRun:
                         and reader_failure.get("type") == "ReadDeliveryIncomplete"
                         and reader_failure.get("reason") in {
                             "read_call_limit", "whole_matter_unavailable",
-                            "whole_material_unavailable"}
+                            "whole_material_unavailable", "ranking_call_limit",
+                            "whole_ranking_material_unavailable"}
                     )
                 )
                 if not isinstance(answer, str) and not known_missing:

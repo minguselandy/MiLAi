@@ -242,6 +242,8 @@ class FunctionalMemory:
         fragment_chars: int = 1200,
         source_access: str = "legacy",
         source_top_k: int = 20,
+        source_tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
+        source_granularity: Literal["session", "turn"] = "session",
         semantic_top_k: int = 10,
         max_evidence_queries: int | None = None,
         retrieval_candidates: list[dict[str, Any]] | None = None,
@@ -271,6 +273,7 @@ class FunctionalMemory:
         ):
             raise FunctionalRejection("FUNCTIONAL_EVIDENCE_QUERY_LIMIT_INVALID")
         self.source_access = source_access
+        self.source_tokenization, self.source_granularity = source_tokenization, source_granularity
         self.source_top_k, self.semantic_top_k = source_top_k, semantic_top_k
         self.max_evidence_queries = max_evidence_queries
         self.forget_requested = False
@@ -325,7 +328,9 @@ class FunctionalMemory:
         }
         if source_access != "legacy":
             self.policy.update(source_access=source_access, source_top_k=source_top_k,
-                               semantic_top_k=semantic_top_k)
+                               semantic_top_k=semantic_top_k,
+                               source_tokenization=source_tokenization,
+                               source_granularity=source_granularity)
         if max_evidence_queries is not None:
             self.policy["max_evidence_queries"] = max_evidence_queries
         if formation_interface != "content_and_scope_v1":
@@ -792,7 +797,8 @@ class FunctionalMemory:
             ]
             return self._deduplicate(current + fragments)
         result = (self.service.search_evidence(
-            query, source_limit=self.source_top_k, semantic_limit=self.semantic_top_k
+            query, source_limit=self.source_top_k, semantic_limit=self.semantic_top_k,
+            tokenization=self.source_tokenization, granularity=self.source_granularity,
         ) if self.source_access == "independent_v1" else
             self.service.search(query, limit=100, include_raw=True))
         if self.source_access == "independent_v1" and self.forget_requested:
