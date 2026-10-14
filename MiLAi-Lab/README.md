@@ -1,6 +1,6 @@
 # MiLAi Lab
 
-当前开发执行[2026-10-14 全局规划](docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。检索、证据组合与命题更新已接入共享核心；长期对照显示读取成本下降但自动维护尚未回本，正常Host与最终保留用户确认仍在进行。以[当前状态](docs/LAB_CURRENT_STATUS.md)为准，以下旧阶段说明保留作历史记录。
+当前开发执行[2026-10-14 全局规划](docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。检索、证据组合与命题更新已接入共享核心；长期对照显示读取成本下降但自动维护尚未回本，正常Host仍有验收缺口，最终保留用户确认已按用户要求暂停。以[当前状态](docs/LAB_CURRENT_STATUS.md)为准，以下旧阶段说明保留作历史记录。
 
 r52同版本开发实验与140项终态回填已完成，功能验收仍PARTIAL，没有稳定推荐配置，Product NO_GO。原L1为24/24 PASS；新增合同L1 23限定通过／1失败，L2 9／3，L3形成41／16、读取17／13，新L4 9／3。来源、时间范围、行动选择及提供方限制按原结果保留。详见[终态报告](docs/V13_5_R52_TERMINAL_REPORT.md)、[FUNC汇总](docs/V13_5_PROGRESS.md)及[验收映射](docs/V13_5_REQUIREMENTS_AND_ACCEPTANCE.md)。
 

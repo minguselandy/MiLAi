@@ -1,6 +1,8 @@
-# Current handoff: long comparison closed; Host classification under investigation
+# Current handoff: experiments PAUSED by explicit user request, 2026-10-14
 
-Full GLOBAL plan ACTIVE/incomplete. No SHA/checksum gates, subagents or new model deployment.
+GLOBAL goal status is PAUSED at the user’s explicit request. Full plan remains incomplete.
+Do not resume experiments, dispatch models, or restart this queue without explicit user instruction.
+No SHA/checksum gates, subagents or new model deployment.
 User now explicitly requested current summary+GitHub commit/push; branch publication authorized, not merge. Root serial model HTTP with existing continuous ledger/owner lock.
 Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python and PYTHONPATH=src.
 Read docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md and current manifests for results.
@@ -54,19 +56,28 @@ explicitnull addedboth preserving fullhistory semantics (dd0e5d01), no method/mo
 Afterfreeze selected original2reservedusers COMPLETE66sessionseach (132total), QA6each: U1at19/44/66,
 U2at22/44/66 (short oneMemoryBoundary fallbackperrule). Originalfullusers/QA retainedignoredroot;
 inputdialogue/metadata exactequal. Never tune/rescore/reselect fromconfirmationoutcomes.
-ACTIVE exec81725: prepare botharms thenrun_final_confirmation_v1.py; inspect actualprocess.json
-artifacts/global-development/final-confirmation-v1/process.json. SerialS0predict/score thenpackpredict/score.
-No othermodeljob. Afterclosure: allfirstoutputs/costs/source review, conditionalProduct/Fdecision,
-originalplan requirementaudit, currentdocs/authorizedGitHubpush. Goalstillactive/incomplete.
-FullfrozenHost+evidenceintegration exec62149 CLOSED0:407passed312.72s,existingdeprecationsonly.
-PackageDAG/toolboundary pass. Localmocktests overlappedearlyS0; no stablelatencycomparisonclaim.
-Finalsummary collector ready: artifacts/global-development/summarize_final_confirmation_v1.py,
-runonlyafterbotharms FIRSTscore close; validates132sessioncounts inreport and allcostledgers.
+USER PAUSE at2026-10-14T14:37:21UTC: worker1626865 anddriver1376965 bothSIGSTOP/stateT.
+Unifiedexec81725 remainsattached to the stoppedqueue. No unrecorded modelresponses atpause:
+allrequests have responsefiles, newunknown0. Processes/connections are retained; resources_settledfalse.
+Do NOT sendSIGCONT, terminate/restart or dispatchmoremodels unless user explicitly resumes.
+Authoritativepause artifacts: final-confirmation-v1/pause.json andpause-summary.json;
+tracked data/manifests/global-final-confirmation-v1-pause-summary.json.
+S0 prediction+FIRSTscore CLOSED:132sessions,9answers+3read_call_limit missing;7Correct/2Hallucination/
+3missing.100read3652278tokens+9Judge24602tokens,emb0.
+Pack PAUSED:54sessioncheckpoints,4answers/12planned,8read363114tokens,scoreNOT_RUN.
+Wholeconfirmation ledgeratpause:4039994known generation,embedding0,newunknown0; no resultresampling.
+Resume onlyoriginalstopped processes after inspectingidentity/receipts; do not repeatclosedS0 phases.
+Account for pause duration separately fromactivewalltime. If originalprocesses aregone onfuture
+resume, inspectbanks/transactions/receipts before anydeliberatecontinuation; never inferclosurefromoldfile.
+Allcode frozen8c893af3; completeHost+evidence407passed312.72s; boundaries/Ruff/mypy pass.
+Finalcollector artifacts/global-development/summarize_final_confirmation_v1.py mustNOTrun until
+botharms FIRSTscore close. No fullcomparison/Product/F/finalacceptance decision yet.
+Currentuser alsoauthorized GitHubsubmission: commit/push onlypausedstatus+existingresults now.
 Do not weaken Source/owner/visibility/real-effect boundaries or add keyword intent heuristics.
 
 All predeclared runs above keep firstoutputs andfailures. Fullheldoutmetadata selection remains
 unchanged:2reservedusers, COMPLETEhistories, no prefixcap or contentaccessbefore finalfreeze.
-Goal remainsactive; finite negative results are acceptancefailures, not reasons for endless same-case tuning.
+Goal is PAUSED; finite negative results remain acceptancefailures. Do not resume from historical snapshots.
 
 Historical handoff snapshots below are closed/stale, not current jobs or authorization.
 
