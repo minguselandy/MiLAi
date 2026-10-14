@@ -28,15 +28,16 @@ Archive  → MiLAi-Artifact-Archive/README.md
 
 ## 当前 Lab 开发
 
-开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`，证据包 MVP 代码 `8fe9968d`。
+开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`，范围／Host／更新开发头 `f5ef26c9`。
 执行[全局开发规划](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。
 [开发记录与运行方式](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md)包含实际查询结果和成本。
 
 新配置 `MiLAi-Lab/configs/milai-global-source-v1.json` 接通独立来源枚举和 Unicode 分词；
 Benchmark 明确使用 S0。20 条同库查询已运行：10 条机制来源 Top-1 为 10/10，
 一位已暴露开发用户的 32 会话、10 条查询 Top-1 为 9/10。这是来源召回结果，尚非答案质量。
-B 已接通证据包选择与缺口读取，真实 paged 题交付 7／82 包、2 次调用；首次官方评分 invalid，
-尚无准确率提升结论。下一项是范围覆盖与 Functional Host 共用核心，随后推进 C 和连续故事。
+B 已接通范围覆盖与 Functional Host 共用证据包；真实读取仍有失败和恢复限制。
+C 的两批各12事件已闭合，仍有时间误填和旧断言绑定等语义失败；下一项优先修正生成契约，
+再做真实更新、较大读取切片和完整连续故事，不据当前代码／测试宣布验收完成。
 完整计划仍在执行；训练与 Product 适配按规划中的实际收益条件推进。
 
 - [代码结构与项目地图](MiLAi-Lab/docs/PROJECT_MAP.md)

@@ -184,3 +184,97 @@ B 当前是已接通 MVP，不是全部完成：范围／穷举仅有 task 标�
 C／D、2–4 段连续长历史、最终保留用户与规定的完整状态／撤销／忘记故事仍未完成。
 本轮没有推送或合并。完整目标保持 active，下一项优先补齐范围覆盖和正常 Host 接线，
 再做有限多题比较与 C 的完整命题更新。
+
+## 范围覆盖、Host 共用和 C 的实际更新反馈
+
+`4205c74b` 接通请求时可见 Source 范围和正常 Functional Host。查询可显式保留超出 lookup
+配额的范围描述；普通 lookup 的目录仍按原配额，`task=range` 使用当时捕获的完整范围。
+程序比较实际打开的 Source／revision／原文区间，后到来源不会进入旧问题。小范围（包括
+空范围）可以证明已完整交付；装不下时明确记录排除和缺口，不把 lookup 停止当作完整性。
+这里证明的是当前可见来源的覆盖，不是外部世界或任务答案正确。
+
+Host 的 `read_evidence` 与 Benchmark 复用 `build_evidence_packs`、`open_evidence_packs`、
+`admit_pack_indices`、`project_pack` 和范围比较。Host 继续由其原 Agent 做决策，没有嵌套
+第二个 Reader Agent。新工具沿用现有读取额度和重放身份；保存、历史、忘记与实际业务工具
+保持原边界。所选正文经当前可见性重开，操作定位仍在程序侧。
+
+实际新合成 Host 两题使用 K1 故意触发范围读取：
+
+- 项目枚举真实打开全部 3 条来源，得到 A→李明、B→王芳与外部确认规则。
+- 跨轮条件题打开了澄海上下文；青岚信息却只经旧 `search_memory` 目录到达，未完成该部分
+  新证据包正文读取，不能计为完整 B 交付成功。
+- 两题首次均出现已确认 `stop` 但正文为 null。各沿既有 CLI 做一次无工具、只读回答恢复后，
+  文本可交付且与原文相符。首次失败保持；恢复成功不是首次成功，也不是独立语义评分。
+- 合计 11 次生成／51,680 tokens，embedding 0、新 unknown 0；没有语义记录或业务变更。
+  详细索引 `data/manifests/global-host-packs-v1-summary.json`。
+
+相关检索／范围／Functional 回归 421 项通过；空范围及新直接路径 9 项通过。已运行 Ruff、
+受影响类型与包／tools 边界。`host-packs-v1` 只有 CLI prepare；实际模型根是
+`artifacts/global-development/host-packs-run-v1`，运行源 `4205c74b`，逐 attempt 原件保持。
+
+### C：从实际形成状态开始，不把提交数当联合成功
+
+`a709bb2c` 增加显式 `edit_features.proposition_updates`，默认关闭。
+Editor 指导独立命题、完整受影响表达、保留非目标和限定；Extractor 的既有 time 字段用于
+原话，Writer 不应把报告时钟填成事件时间。配置 `milai-global-propositions-v1.json`
+明确使用 single-pass，保留已有算子与提交边界。195 项 edit／Functional Edit 检查通过。
+合成 12 事件与独立的 evaluator-only review 文件位于 `data/fixtures/milai-global-propositions-v1*`；
+review 内容不进入 Host／Writer。没有手写理想 before。
+
+Host 首次在事件1遇到重复 `new_assertion` 类别标签，被旧接口拒绝，维护未运行。
+`42fe55bd` 仅在模型输入边界合并重复类别／禁止项，仍校验每个值，不处理实际业务动作列表。
+原失败根 `propositions-v1` 保存。新根 `propositions-v2` 真实形成一个6单元记录，事件2保持r1，
+事件3改到r2，事件4保持，事件5添加临时例外到r3。事件3需一次只读回答恢复；事件5原答复及
+一次恢复均为已确认空正文。后续事件6又被 Host 的业务续接引用解析阻断，尚未进入 Editor。
+该连续 Host 只实际尝试到6，不能宣称完成12或 C 验收。
+
+实际事件6的分类同时认可 `memory_requests=[explicit]`，却要求解析没有可用对象的业务续接。
+`f5ef26c9` 让已配置的 `independent_memory` 政策也处理这一确定的无业务许可结果：保存失败
+业务分项，继续当前明确的独立记忆工作；不为缺少原件的旧保存续接开通权限，未知结果仍停止。
+同一提交让 Host 在真实读取额度变成0时立即说明应据已交付材料回答，无须再发一次必拒读取。
+19 项相关接口回归通过，覆盖无记忆许可、fail-fast、未知用量与业务权限；新代码尚无真实 Host
+复核，不把该修复算作已完成正常链。
+
+为了继续研究写入方法，另外通过普通 baseline CLI 调用同一维护核心，使用同12条原始输入、
+各自空银行。原 Host 的失败不被覆盖；两个入口的实际产物与条件分开，不能混称同一结果。
+Core 配置没有 QA 或参考答案，仅运行到达和维护；并非通过跳过 QA 取得准确率。
+
+| Core 条件 | 实际事件 | 生成调用 | 输入／输出 tokens | embedding 调用／tokens | 当前记录／可读历史版本 |
+|---|---:|---:|---:|---:|---:|
+| core-v1（2e8f1895） | 12 | 18（11 edit＋7 select） | 36,862／33,055 | 11／601 | 4／5 |
+| core-v2（f5ef26c9） | 12 | 12（全部 edit） | 48,366／2,236 | 18／2,627 | 1／7 |
+
+core-v1 首次形成和未来更新返回空提案，后续不能当成从理想状态继续；第11事件的 selector
+达到输出上限。core-v2 在完整候选和旧支持能按整体输入预算容纳时直接给 single-pass Editor，
+省去模型选择；不截正文，不降低候选范围。预算不足仍走原选择路径；两个直接回归覆盖两种分支。
+它还澄清空 change_candidates 不等于没有新事实。成本降低没有替代质量要求。
+
+core-v2 **仍未通过 C 的联合成功条件**，已经检查实际 proposal 和状态：
+
+- 初始形成把完整复合叙述与 A/B 等条目重复保存，没有达到可靠的独立命题粒度。
+- 事件3、12因为新文字错误保留旧断言／不匹配支持而被拒绝，分别为
+  `EDIT_UNIT_SUPPORT_BINDING_INVALID`、`EDIT_CHANGED_ASSERTION_REQUIRES_NEW_EVIDENCE`。
+  保留拒绝，未放宽来源绑定来让更新通过。
+- 事件6撤销例外后，A 的未来赵敏安排没有形成正确当前状态；事件9将 B 单元改为陈琴，
+  旧概括仍写王芳，存在同记录矛盾。
+- “最近开始考虑”和“仍在考虑”仍被填入精确 event_at。值已在模型原始提案中，
+  不是程序提交时注入。保留原话提示尚不足以确保时间忠实。
+- 事件2、4、10实际保持版本，SMS 正文的未决定语气保留；但这些局部结果不能抵消以上损伤。
+  在只读复制的银行中分别重开全部5／7个历史版本，均可读；历史可读也不等于当前含义正确。
+
+两个 Core predict 终态均为 `PREDICTIONS_SAVED`、资源已关闭；无新的 Judge／QA 调用，
+没有从已有原文 Reader 的正确性给存储损伤补分。全部逐事件结构与成本在
+`data/manifests/global-propositions-core-v1-v2-summary.json`，原件保留在
+`artifacts/global-development/propositions-core-v1`／`propositions-core-v2`。
+`propositions-v2` 的首次 run、event3恢复、event4–5尾段和event6尝试分别保留，不自动重启。
+
+### 下一步仍围绕原规划
+
+优先修正 C 的生成契约与源支持接线：完整命题与概括分离，新文字不使用旧断言 keep，
+精确时间必须有原文依据。避免继续围绕同一食品例追加提示，也不以关闭校验换取提交。
+随后从真实 before 比较 single-pass／extract-then-edit，并加入真实开发更新来源。
+Host 的独立工作恢复与读取终止修复需实际重查；B 仍需约8–12题同池质量／成本反馈、
+真实缺口扩读与覆盖语义检查。D 的依赖视图、连续长历史、最终保留用户及完整
+保存—更正—历史—撤销例外—忘记故事均未完成。Product／训练仍按规划条件推进。
+截至这个检查点没有活跃模型任务；后续仍核对实际进程与终态，不以旧 PID 作为依据。
+全部新结果和失败均保留，未推送／合并，完整目标继续 active。

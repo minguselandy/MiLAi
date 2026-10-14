@@ -1,3 +1,43 @@
+# Current handoff: range/Host wired, C actual diagnostics fail acceptance, 2026-10-14
+
+Latest runtime f5ef26c9 in global-development-20261014. Full original GLOBAL plan ACTIVE/incomplete.
+No SHA checks, no new audit platform, no Product/Archive changes or publication.
+A done first slice. B scope snapshots and range coverage plus shared pack Host tool implemented;
+421 related checks,9 direct checks passed. Host K1 two synthetic cases first BOTH null-body failures;
+one existing no-tool readonly resume each completed. Range read all3 original sources/2projects;
+context case still uses legacy directory for Qinglan, NOT full B delivery.11gen51680tokens,emb0,newunknown0.
+Root inspected original replies/sources. data/manifests/global-host-packs-v1-summary.json.
+
+C opt-in proposition_updates and single_pass added;195 edit/SDK checks passed.
+Host propositions-v1 failed before Editor on duplicate category tags;42fe55bd normalizes only
+category/restriction sets, never application actions. Same story fresh propositions-v2 formedr1,
+kept event2,r2 event3 (one readonly recovery),kept4,r3 event5 (original+one recovery null),
+event6 failed FUNCTIONAL_CONTINUATION_REFERENCE_UNRESOLVED before Editor. Only6attempted.
+No automatic replay of these failures. Null-body failures known, no business replay/unknown retry.
+f5 now continues explicitly independent memory after known unresolved business continuation,
+and reports actual read allowance exhaustion without a fourth denied read.19 affected checks pass;
+real Host recheck remains required.
+
+Two ordinary benchmark core runs are CLOSED12 each, own empty banks, same authored source events,
+no QA/gold/ideal before. source-propositions-core-v1=>2e8f1895, core-v2=>f5ef26c9.
+Corev1 initial/create/future update omitted;18gen69917tokens(11edit7select),11emb601;
+selector event11 confirmed length.4finalrecords,all5history versions read from copied SQLite.
+Corev2 whole-input-fit single_pass skips selector:12edit50602tokens,18emb2627;1record7versions,
+all7history versions actually readable. BUT C joint success FAILED: compound initial overview,
+event3 invalid support binding/event12 changed assertion kept old provenance, stale overview
+B/Wang vs updated Chen, lost future A/Zhao after exception cancellation, precise event_at
+invented for recently/still considering. Raw model proposals prove time error before compiler.
+Keep events2/4/10 and literal undecided modality are partial positives, never C completion.
+Detailed required facts/costs docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md and core-v1-v2-summary.json.
+All our exec/model jobs now CLOSED; no queued run. Last sessions90049/74036 exited0;
+Host continuation sessions49822/24641 stopped on known recorded failures; do not restart them.
+
+NEXT: fix C generation contracts/source support, not relax commit guards or add another reviewer.
+Consider literal time binding and new-text/old-assertion incompatibility; avoid another food prompt loop.
+Then actual same-before recipe comparison and natural update sources. B broader8-12reads, actual
+context expansion/range semantics, Host recheck, D dependency view,2-4long histories,final holdout,
+full save-correct-history-exception-forget story still outstanding. Original scope not reduced.
+
 # Current handoff: global readpack pilot closed, 2026-10-14
 
 Current worktree global-development-20261014, runtime 8fe9968d. A completed first slice;
