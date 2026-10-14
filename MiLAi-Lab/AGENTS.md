@@ -1,7 +1,7 @@
 # Current handoff: CPU bottleneck fixed; long candidate resumed from actual checkpoint
 
 Full GLOBAL plan ACTIVE/incomplete. No SHA/checksum validation, new review platform, publication,
-Product/Archive edits or subagents. Method head51182ead (Host shortcut84b019a5, navigationdc360cff).
+Product/Archive edits or subagents. Method headebf793a9 (Host shortcut84b019a5, navigationdc360cff).
 Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python. Root only serial real-model HTTP with
 existing continuous ledger/owner lock; preserve global unknown floor gen9/emb1.
 
@@ -31,9 +31,9 @@ originalcandidateaccounting-start tofinalledger, plus bothphasewalltimes. No fre
 and oldlong-history-v1/interruption.json/budget-at-interruption.json. Mixedruntime latency explicitlynot
 uniform; final whole-user confirmation mustuseonefrozenruntime. Oldcandidate never had a Judge.
 
-NEXT NORMAL CHAIN: global-story-v3 PREDECLARED_NOT_RUN, runtime51182ead, sameoriginal17fixture,
+NEXT NORMAL CHAIN: global-story-v3 PREDECLARED_NOT_RUN, runtimeebf793a9, sameoriginal17fixture,
 fresh emptybank, editthinkingFalse, Host/finalReader unchangedtrue/8192/65536/read/callbudgets.
-V2 was superseded BEFORE anyCLIprepare/modelrun (0calls); itsprotocol remains. Use source-dense-scan-fix-v1
+V2 was superseded BEFORE anyCLIprepare/modelrun (0calls); itsprotocol remains. Use source-evidence-dedup-v2
 normalCLI prepare withconfigs/milai-global-story-v3.json AFTER currentqueue closes, then
 artifacts/global-development/run_global_story_v3.py. No modelHTTP concurrentwithlongrun.
 84b019a5 skipsredundantHostgeneration only forsharedrecipe+question_pack+explicitmemory_status_only
@@ -43,6 +43,18 @@ Empty/knownlength fall through; unknownproviderresponse retainsstop. Substantive
 12directchecks+27readingtests/types/Ruff/boundaries pass; FULL370Hostintegration passed288.04s,
 existingdeprecationsonly (log functional-status-shortcut-tests.log, exec43411 CLOSED). Packcandidate
 recordUUIDhidden afterbinding; actualread/historytargets stillresolve. Longfrozen4c prefixneverhotedited.
+
+B expansion duplication FIXED in6763b1c7/ebf793a9 (not active longruntime): several selectedhits expanded
+sameparent and repeated wholebody. project_packs sharedbyBenchmark+Host nowcoalescesexactvisibleparent
+ranges, keepsselectedaliases, globallylabelsSource/revision, reusesexactrepeatedspans acrossoverlap/support.
+DifferentSources/revisions nevermergedbywording; partial/unavailableviews preserved; noimplicitnewassertion
+support.18relatedchecks/Ruff/mypy pass. SavedfirstU1short2actualinputs faithfullyreopened(no newretrieval/
+model/semanticwrite): beforepayloadexactactual, Sourcebodiesevidence sets same; rows248->128 and116->84,
+prompttokens52212->35382 and33819->28895 includingreferenceinstructions. Not newanswerquality/costscore.
+Data/manifests/global-expanded-pack-dedup-v1-summary.json. v3runtime amendedBEFORE anyCLIprepare/model
+run; priorprotocols retained. Do NOT hotedit current51182ead longqueue. Need boundedactualreadfeedback
+fornewprojection before finalcandidatefreeze; alloldoutputs kept. Second10secCPUprofileofcurrentjob had
+0activePython samples duringHTTP, not proof of a new bottleneck; no second interruption authorized by it.
 
 Closed earlierwork: A20samebankqueries; B8 control3C4H1invalid vs pack5C2H1missing,33calls712686 vs13calls
 222603, Judgeconflictsretained. Selectorpilot2 netqualityzero (repairedmissing,oldC->H). C core-v3 actual12

@@ -1,0 +1,76 @@
+{
+  "rows": [
+    {
+      "key": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/7/qa/0",
+      "selected_indices": [
+        2,
+        4,
+        7,
+        80,
+        5
+      ],
+      "expanded_indices": [
+        2,
+        4,
+        7,
+        80,
+        5
+      ],
+      "bodies_before": 5,
+      "bodies_after": 3,
+      "source_rows_before": 248,
+      "source_rows_after": 128,
+      "aliases": [
+        [
+          "e4",
+          "e7"
+        ],
+        [],
+        []
+      ],
+      "literal_evidence_set_equal": true,
+      "before_input_tokens": 52212,
+      "after_input_tokens": 35382,
+      "actual_recorded_input_tokens": 52212,
+      "before_payload_equal": true
+    },
+    {
+      "key": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/7/qa/1",
+      "selected_indices": [
+        65,
+        115,
+        46
+      ],
+      "expanded_indices": [
+        65,
+        115,
+        46
+      ],
+      "bodies_before": 3,
+      "bodies_after": 2,
+      "source_rows_before": 116,
+      "source_rows_after": 84,
+      "aliases": [
+        [
+          "e115"
+        ],
+        []
+      ],
+      "literal_evidence_set_equal": true,
+      "before_input_tokens": 33819,
+      "after_input_tokens": 28895,
+      "actual_recorded_input_tokens": 33819,
+      "before_payload_equal": true
+    }
+  ],
+  "model_calls": 0,
+  "semantic_writes": 0,
+  "fresh_retrieval": 0,
+  "prefix": "saved retrieval snapshot only; no final-bank search",
+  "runtime_code": "ebf793a9",
+  "tests": 18,
+  "ruff": "passed",
+  "mypy": "passed",
+  "quality": "unmeasured: no new model calls or scoring",
+  "scope": "Exact visible parent ranges coalesced; exact repeated source spans reused via stable Source/revision labels. Distinct sources/revisions remain distinct, partial visibility retained, semantic assertion support must be actually opened."
+}
