@@ -3146,6 +3146,12 @@ def message(
                 mode["allow_memory_maintenance"] if tool.name in {
                     "save_memory", "update_memory", "confirm_existing_memory"}
                 else mode["allow_forgetting"] if tool.name == "forget_memory" else True))
+            if (settings.get("evidence_policy") == "question_pack_v1" and mode is not None
+                    and not mode["allow_memory_maintenance"] and not mode["allow_forgetting"]):
+                # Pack lookup already supplies navigation and scoped body reads.
+                # A second search catalog encouraged answering unopened excerpts.
+                # Mutation requests retain legacy target discovery and binding.
+                selected_memory = tuple(t for t in selected_memory if t.name != "search_memory")
             maintenance_recipe = settings.get("maintenance_recipe")
             maintenance_allowed = mode is None or mode["allow_memory_maintenance"]
 

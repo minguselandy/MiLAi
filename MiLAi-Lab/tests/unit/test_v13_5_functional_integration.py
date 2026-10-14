@@ -90,6 +90,7 @@ def prepared(
     bounded_reproposal: bool = False,
     dynamic_memory: bool = False,
     evidence_policy: str = "legacy",
+    source_top_k: int = 20,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -112,6 +113,7 @@ def prepared(
         "profile": "functional_v1", "host": asdict(host),
         "memory_method": memory_method,
         "evidence_policy": evidence_policy,
+        "source_top_k": source_top_k,
         **({"stage_enable_thinking": stage_enable_thinking}
            if stage_enable_thinking is not None else {}),
         "memory_profile": memory_profile,
@@ -192,8 +194,9 @@ def prepared(
     if edit_interface_version != "v1":
         settings["edit_interface_version"] = edit_interface_version
     if dynamic_memory:
-        settings.update(source_access="independent_v1", source_top_k=20, semantic_top_k=10,
-                        max_evidence_queries=2, maintenance_mode="event_delta_v1")
+        settings.update(
+            source_access="independent_v1", source_top_k=source_top_k, semantic_top_k=10,
+            max_evidence_queries=2, maintenance_mode="event_delta_v1")
     if edit_features is not None:
         settings["edit_features"] = edit_features
     if maintenance_recipe is not None:
@@ -3932,6 +3935,51 @@ def test_pack_answer_recovery_uses_plain_actual_evidence_without_operation_histo
     assert recovered["status"] == "COMPLETED" and len(wires) == 3
     assert recovered["records"] == []
     assert recovered["final_answer"] == "No saved club arrangement is available."
+
+
+@pytest.mark.parametrize("policy,forget", [
+    ("question_pack_v1", False), ("question_pack_v1", True), ("legacy", False),
+])
+def test_pack_lookup_opens_bodies_without_a_second_search_catalog(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, policy: str, forget: bool,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, direct_response=True, actual_capabilities=True, phase_thinking=True,
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        memory_view_mode="staged", evidence_policy=policy, source_top_k=1)
+    pack_read = policy == "question_pack_v1" and not forget
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call("classify_current_request", "scope", memory_write_request="none",
+                allow_forgetting=forget, business_action_request="none", business_operations=[])
+        names = {t["function"]["name"] for t in wire.get("tools", [])}
+        assert ("search_memory" in names) is not pack_read
+        assert {"read_source", "read_memory"} <= names
+        if pack_read and ordinal == 2:
+            assert materials(wire)["evidence"] == []
+            return native_call("read_evidence", "open", item_indices=[], task="range")
+        if pack_read:
+            packet = materials(wire)
+            assert packet["range_coverage"]["complete"]
+            bodies = [row["content"] for pack in packet["evidence"]
+                      for row in pack.get("evidence", [])]
+            assert set(bodies) == {
+                "Orion's internal notices need no approval.", "Vega uses a separate approval rule."}
+        return {"role": "assistant", "content": "Read completed."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank="pack-catalog", owner="alice", session="query",
+        message_id="q", content="Forget the Orion note." if forget else
+        "Only read: does Orion need approval?", initial_sources=[{
+            "role": "user", "session_id": "prior", "event_key": "rule",
+            "content": "Orion's internal notices need no approval.",
+        }, {
+            "role": "user", "session_id": "other", "event_key": "rule",
+            "content": "Vega uses a separate approval rule.",
+        }])
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert result["records"] == [] and len(wires) == (3 if pack_read else 2)
 
 
 def test_actual_capability_contract_tracks_restricted_completion_catalog(
