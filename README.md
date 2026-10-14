@@ -26,15 +26,22 @@ Archive  → MiLAi-Artifact-Archive/README.md
 各 bundle 保留自己的 `pyproject.toml`、`uv.lock`、测试和运行说明。根仓库不提交第三方 clone、
 虚拟环境、uv cache、模型/数据下载、日志、运行时状态、wheelhouse 或生成性大文件。
 
-## 当前 Lab 导航
+## 当前 Lab 开发
+
+开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`。
+执行[全局开发规划](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。
+[开发记录与运行方式](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md)包含实际查询结果和成本。
+
+新配置 `MiLAi-Lab/configs/milai-global-source-v1.json` 接通独立来源枚举和 Unicode 分词；
+Benchmark 明确使用 S0。20 条同库查询已运行：10 条机制来源 Top-1 为 10/10，
+一位已暴露开发用户的 32 会话、10 条查询 Top-1 为 9/10。这是来源召回结果，尚非答案质量。
+下一项是 B 的自包含片段、预算内证据选择与必要补读，随后推进 C 和正常 Host 连续故事。
+完整计划仍在执行；训练与 Product 适配按规划中的实际收益条件推进。
 
 - [代码结构与项目地图](MiLAi-Lab/docs/PROJECT_MAP.md)
 - [架构与依赖边界](MiLAi-Lab/docs/LAB_ARCHITECTURE.md)
-- [当前状态与暂停范围](MiLAi-Lab/docs/LAB_CURRENT_STATUS.md)
-- [GitHub 合并记录](MiLAi-Lab/docs/GITHUB_MERGE_AND_STRUCTURE_20260929.md)
-- [最近实验总体报告](MiLAi-Lab/docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)
-
-Lab 开发与架构整理的 #70–#74 已合入 main。代码合并不恢复实验，也不构成 Product 验收。
+- [当前状态](MiLAi-Lab/docs/LAB_CURRENT_STATUS.md)
+- [上一轮真实实验报告](MiLAi-Lab/docs/MILAI_EVIDENCE_DEVELOPMENT_20261013.md)
 
 ## 重组证据
 

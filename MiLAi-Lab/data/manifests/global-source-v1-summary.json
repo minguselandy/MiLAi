@@ -1,0 +1,119 @@
+{
+  "cohort": "10 authored mechanism queries; 10 source-grounded queries over first 32 chronological sessions of one already exposed developer; expected refs fixed before retrieval",
+  "source_counts": {
+    "synthetic": 40,
+    "real32": 1322
+  },
+  "same_space_materials": 20,
+  "comparisons": [
+    {
+      "mode": "legacy",
+      "tokenization": "rawrag_space",
+      "group": "synthetic",
+      "queries": 10,
+      "necessary_source_at_1": 2,
+      "necessary_source_at_3": 2,
+      "necessary_source_at_20": 2,
+      "mean_seconds": 1.1975226424634458,
+      "median_seconds": 1.1974625424481928,
+      "mean_stage_seconds": {}
+    },
+    {
+      "mode": "legacy",
+      "tokenization": "rawrag_space",
+      "group": "real32",
+      "queries": 10,
+      "necessary_source_at_1": 5,
+      "necessary_source_at_3": 8,
+      "necessary_source_at_20": 10,
+      "mean_seconds": 1.425425032619387,
+      "median_seconds": 1.4231262016110122,
+      "mean_stage_seconds": {}
+    },
+    {
+      "mode": "new",
+      "tokenization": "rawrag_space",
+      "group": "synthetic",
+      "queries": 10,
+      "necessary_source_at_1": 2,
+      "necessary_source_at_3": 2,
+      "necessary_source_at_20": 2,
+      "mean_seconds": 0.33565425537526605,
+      "median_seconds": 0.334492358379066,
+      "mean_stage_seconds": {
+        "enumerate_seconds": 0.32870887126773596,
+        "assemble_seconds": 0.00019112899899482728,
+        "index_seconds": 0.0006874280050396919,
+        "rank_seconds": 0.00018519219011068345,
+        "open_seconds": 0.005280589312314987,
+        "total_seconds": 0.3351109616458416
+      }
+    },
+    {
+      "mode": "new",
+      "tokenization": "rawrag_space",
+      "group": "real32",
+      "queries": 10,
+      "necessary_source_at_1": 5,
+      "necessary_source_at_3": 8,
+      "necessary_source_at_20": 10,
+      "mean_seconds": 0.5551505883224308,
+      "median_seconds": 0.5560824694111943,
+      "mean_stage_seconds": {
+        "enumerate_seconds": 0.3268289152532816,
+        "assemble_seconds": 0.0022108473815023897,
+        "index_seconds": 0.014497715327888728,
+        "rank_seconds": 0.0008304707705974578,
+        "open_seconds": 0.20818540267646313,
+        "total_seconds": 0.5534899717196822
+      }
+    },
+    {
+      "mode": "new",
+      "tokenization": "unicode_v1",
+      "group": "synthetic",
+      "queries": 10,
+      "necessary_source_at_1": 10,
+      "necessary_source_at_3": 10,
+      "necessary_source_at_20": 10,
+      "mean_seconds": 0.3310461430810392,
+      "median_seconds": 0.33054353389889,
+      "mean_stage_seconds": {
+        "enumerate_seconds": 0.3234917392022908,
+        "assemble_seconds": 0.00017203018069267273,
+        "index_seconds": 0.0011499707587063312,
+        "rank_seconds": 0.00022530881687998772,
+        "open_seconds": 0.005320459604263306,
+        "total_seconds": 0.3304094381630421
+      }
+    },
+    {
+      "mode": "new",
+      "tokenization": "unicode_v1",
+      "group": "real32",
+      "queries": 10,
+      "necessary_source_at_1": 9,
+      "necessary_source_at_3": 9,
+      "necessary_source_at_20": 10,
+      "mean_seconds": 0.6870022050105036,
+      "median_seconds": 0.6810696828179061,
+      "mean_stage_seconds": {
+        "enumerate_seconds": 0.33181726448237897,
+        "assemble_seconds": 0.002269221842288971,
+        "index_seconds": 0.14120843540877104,
+        "rank_seconds": 0.0010170496068894863,
+        "open_seconds": 0.2076208665035665,
+        "total_seconds": 0.6848267273046076
+      }
+    }
+  ],
+  "model_calls": 0,
+  "embedding_calls": 0,
+  "semantic_writes": 0,
+  "quality_scope": "preidentified necessary source retrieval, not full evidence sufficiency or Reader answer accuracy",
+  "runtime_code": "c33e325d",
+  "runtime_branch": "feat/lab-global-development-20261014",
+  "parent_code": "f86fc5c3",
+  "artifacts": "artifacts/global-development/source-v1",
+  "note": "Queries ran before the first code commit; retrieval source is the committed implementation. No digest or SHA verification performed."
+}
