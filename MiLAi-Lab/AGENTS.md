@@ -1,15 +1,21 @@
 # Active architecture research task, 2026-10-14
 
 User activated docs/MILAI_METHOD_ARCHITECTURE_EXPERIMENT_PLAN_20261014_v3.md.
-This is a NEW active goal in feat/lab-method-architecture-20261014, based on
+This is a NEW incomplete goal in feat/lab-method-architecture-20261014, based on
 8293a4e7. The GLOBAL confirmation below remains paused; do not confuse its
 historical paused goal with this active research task. No subagents or SHA checks.
 Read docs/MILAI_METHOD_ARCHITECTURE_EXECUTION_20261014.md for current evidence.
 Second slice adds source-bound AND/OR support groups in existing revisions,
 separate dependency_groups switch, group-only commits, whole-conjunct retraction,
 changed-premise markers and query route selection. v2 configs prepared, no real HTTP.
-Shared-before diagnostic, model-formed results, cross-record, policies/training,
-external confirmation and normal Host migration remain incomplete.
+Third slice adds tools/run_method_architecture_diagnostic.py with prepare/seed/compare.
+Same actual B1 seed; candidate changes only representation/rendering; one common
+Source arrival before fork; no oracle graph; read-usage feedback disabled. Prepare
+closed0HTTP. Actual seed admission EXIT1 at original owner flock, before
+HTTP/reservation/bank creation; compare NOT_RUN. See paired-v1/seed-admission.stderr.log. 56 affected checks and types/lint/boundaries pass.
+Model-formed results, cross-record, policies/training, external confirmation and
+normal Host migration remain incomplete. Three consecutive turns confirmed the
+same stopped owner queue. Do not replace required real E1 feedback with more mock results.
 Shared continuous ledger and serial HTTP ownership remain. At this checkpoint
 PIDs 1376965 and 1626865 are actually stopped and the owner lock is actually held.
 No new model request has been sent. Develop/test/prepare independently; do not

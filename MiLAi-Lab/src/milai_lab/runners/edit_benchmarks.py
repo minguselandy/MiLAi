@@ -2033,7 +2033,8 @@ class BenchmarkRun:
             )
         else:
             answer, used_memories = self.answer_material(question, date, key, memories)
-        if service.memory_profile == "unified_v1" and not self.settings.get("evidence_replay"):
+        if (service.memory_profile == "unified_v1" and not self.settings.get("evidence_replay")
+                and self.settings.get("read_usage_updates", True)):
             from milai_lab.memory.activation import ActivationIndex
 
             index = ActivationIndex(service)
@@ -2829,7 +2830,14 @@ class BenchmarkRun:
             return None
         view = read_json(view_path) if view_path.exists() else {}
         stage = view.get("active_stage", key)
-        if stage != key and not stage.startswith(key + "/view/"):
+        pool_id = (f"native/{key}/retrieval.json" if self.settings.get("alignment_backend")
+                   else f"http/{key}/retrieval-materials.json")
+        dependency_stage = f"dependency-selection/{pool_id}"
+        if self.settings.get("dependency_reading") and not view_path.exists() and (
+            self.root / "http" / dependency_stage / "response.json"
+        ).exists():
+            stage = dependency_stage
+        if stage != key and not stage.startswith(key + "/view/") and stage != dependency_stage:
             return None
         folder = self.root / "http" / stage
         response_path = folder / "response.json"

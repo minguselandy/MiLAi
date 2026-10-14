@@ -85,3 +85,45 @@ $PY tools/run_baseline_alignment.py configs/milai-method-architecture-plain-v1.j
 本切片不完成 E1：还需要同一真实模型 before 的信息等价普通命题投影和实际两臂原始输出。关系形成准确性、自由文本作用域选择、跨记录部分提交、正常 Host 读取迁移、训练和外部评价仍待执行。B2 全量重写的支持组精确保留接口也尚未作公平性实测，不能凭当前局部编辑测试宣称完整表示矩阵已经就绪。
 
 第二切片最终相关验证：267 passed、4 条既有 LangGraph/LangChain 弃用警告（84.52 秒）；6 源码模块 mypy、Ruff、包 DAG 通过。此前旧机制夹具的 source_ref 失败不在此 267 项中，仍保留首切片的基线复现记录，没有据此声称全仓通过。新模型请求产物仍为 0。机器记录：`data/manifests/method-architecture-support-groups-v2-checkpoint.json`。
+
+
+## 第三切片：同一真实 before 的 E1 入口
+
+`tools/run_method_architecture_diagnostic.py` 提供 prepare、seed、compare 三个显式阶段，复用 BenchmarkRun、维护核心、共同 Reader 和原连续账本。prepare 已完成；seed/compare 未运行。
+
+本次诊断选择普通命题 B1 从第一条原文形成共同种子。两臂复制实际银行，候选只将 plain_v1 类型和相应展示切换为 conditioned_v1，不改命题正文、unit ID、来源、归属、时间、版本号或原始形成身份，不补条件边、支持组或正确答案。所有种子历史版本也只作同样的展示转换，并将原件与投影并列保存。原 seed 银行保留原样。这是受控表示转换；候选起点没有显式图，不能冒称已证明模型独立形成图的能力。各臂从空库独立形成的 v2 轨迹仍是另一条实验线。
+
+更新原文在独立 arrival 副本中只登记一次，再复制给两臂，保证 Source ID、角色、报告时间和捕获时间一致。每臂执行同一次条件变化，随后回答当前/未来、初存版本、非目标三类问题。初存问题的评价依据是实际种子记录，不把理想原文事实替代实际保存状态。查询与 evaluator 字段不进入维护输入；读取使用统计在两臂都关闭。
+
+共享种子成本只记录一次，arm 的维护、影响选择、证据选择、Reader 和 embedding 成本分别从原 HTTP 回执汇总。未知 usage 和无响应请求单列，后者不直接当作已派发；原连续账本仍是计费权威。这不是独立形成系统的完整生命周期对比。工程完成与状态正确、答案正确、来源忠实继续分列，语义字段待真实来源审查。
+
+正常 Benchmark 的依赖选择若已确认 length 或空正文，会沿既有只读失败口径保留缺答；未取得响应回执仍不重试。补充测试覆盖普通入口和 alignment 入口。
+
+```bash
+cd /cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab
+export PYTHONPATH="$PWD/src"
+PY=/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python
+$PY tools/run_method_architecture_diagnostic.py configs/milai-method-architecture-paired-v1.json artifacts/method-architecture/paired-v1 --phase prepare --runtime-dir artifacts/method-architecture/runtime
+# 以下两步尚未执行，需先释放旧暂停队列持有的原账本锁。
+$PY tools/run_method_architecture_diagnostic.py configs/milai-method-architecture-paired-v1.json artifacts/method-architecture/paired-v1 --phase seed --runtime-dir artifacts/method-architecture/runtime
+$PY tools/run_method_architecture_diagnostic.py configs/milai-method-architecture-paired-v1.json artifacts/method-architecture/paired-v1 --phase compare --runtime-dir artifacts/method-architecture/runtime
+```
+
+本切片相关 56 项通过（14.19 秒），3 文件 mypy、Ruff、包/工具依赖边界通过。SQLite 端到端测试使用明确的模型桩，不计真实模型成功。此前 267 项属于第二切片验证，本次不冒称重新运行全套。机器记录为 `method-architecture-paired-v1-checkpoint.json`。
+
+连续三个目标回合实际核验同一阻碍：旧驱动 1376965、工作进程 1626865 均为 T，原账本 owner lock 被占用，结束旧暂停队列的许可尚未收到。旧 S0 109 请求/109 响应，pack 8 请求/8 响应，无缺失响应文件；进程仍未关闭。未发信号、未创建第二账本、未重跑或重新评分旧确认。E1 的下一步需要真实模型反馈，不能用继续增加离线功能或 mock 通过代替。
+
+## 近邻一手输入条件核对
+
+本轮补查了原方案未打开的 PACMI 正文，以及 APEX-MEM 官方论文和 SimpleMem 原论文/作者仓库；没有运行外部方法，也未宣称完整复现。
+
+- PACMI 明确以标注的预更新依赖图为输入，诊断集是固定两跳、六条旧记忆；其传播指标不能直接证明从原文建图的优势。已核对 §1 的 A1–A3、§4、§5 和 Appendix A。我们的模型形成图与正确图上限必须继续分表；本文并未证明 MiLAi 已优于它。[PACMI v1 正文](https://arxiv.org/html/2610.05732v1)
+- APEX-MEM 将对话归入实体/事件属性图，保留追加历史，在查询时消解演变。若在共同条件下适配，需要分别计入构建和多工具读取；当前未从已核验的 ACL 页面及 PDF 确认官方可执行代码入口，不把第三方同名项目当作者系统。[ACL 官方论文](https://aclanthology.org/2026.acl-long.749.pdf)
+- SimpleMem 原论文有压缩、会话内综合和意图检索三个阶段；作者仓库当前还含多模态和演化检索组件。后续必须固定所用文本路径和实际版本，避免拿当前整个仓库当原论文系统。[原论文 v3](https://arxiv.org/html/2601.02553v3)、[作者仓库](https://github.com/aiming-lab/SimpleMem)
+
+本地已有 `integrations/memory/simplemem.py`，但历史 `dependency_identity()` 会计算源码 SHA，因用户要求本轮未调用它。外部实验前应改为实际源码身份与接口检查的无 SHA 路径，再验证可执行性；目前不能称 SimpleMem 已适配到这轮实验。其他 W3–W5、E2–E5、统计、外部确认与论文结果工作仍未完成。
+
+
+E1 正常 seed 入口已实际尝试准入，进程退出 1：`BenchmarkRun.__init__` 在原 `budget.json.http-owner.lock` 的非阻塞 flock 处得到 `BlockingIOError [Errno 11]`。这发生在模型调用、账本用量预留和种子银行创建之前；新 request 文件数为 0，bank 未创建。错误原件保留为 `artifacts/method-architecture/paired-v1/seed-admission.stderr.log`。这是运行资源阻碍，不是模型形成失败或语义得分。
+
+本次代码本地提交后，将从该提交保存 `paired-source-v1` 源码副本，身份记录在 `artifacts/method-architecture/paired-source-v1.json`。资源解除后实际 seed/compare 应使用该副本的 tools 入口和 PYTHONPATH，原失败准入日志保留；不在真实运行中热改方法。没有 SHA 校验或新的模型服务。
