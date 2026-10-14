@@ -17,6 +17,7 @@ from milai_lab.methods.evidence_reading import (
     open_evidence_packs,
     pack_candidate,
     project_pack,
+    project_packs,
     unit_closure,
 )
 from milai_lab.runners.edit_benchmarks import BenchmarkRun
@@ -69,6 +70,39 @@ def test_unit_closure_keeps_conditions_and_exceptions_without_unrelated_shared_t
     assert len(relations) == 3
     assert unit_closure(state, "exception")[0] == ids
     assert "B" in unit_closure(state, "confirm")[0]
+
+
+def test_expanded_hits_share_exact_parent_body_without_merging_distinct_sources(
+    tmp_path: Path,
+) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        for session in ("first", "independent-copy"):
+            service.capture_user(session, "turn:0", "Project A uses the amber marker.")
+            service.capture_assistant(session, "turn:1", "Does this include external notices?")
+            service.capture_user(session, "turn:2", "No. External notices require confirmation.")
+        native = service.search_sources("marker", include_scope=True)
+        packs = build_evidence_packs(service, "marker", "2030-01-01",
+                                     native["source_materials"], [])
+        first = [item for item in packs if item["session_id"] == "first"]
+        other = next(item for item in packs if item["session_id"] == "independent-copy")
+        expanded = open_evidence_packs(service, [*first, other], expand_context=True)
+        projected = project_packs(expanded, [4, 8, 12])
+        assert len(projected) == 2
+        assert projected[0]["label"] == "e4" and projected[0]["also_selected_as"] == ["e8"]
+        assert projected[1]["label"] == "e12" and "also_selected_as" not in projected[1]
+        assert [x["content"] for x in projected[0]["evidence"]] == [
+            x["content"] for x in projected[1]["evidence"]]
+        assert len(projected[0]["evidence"]) == 3
+        assert projected[0]["evidence"][2]["content"].startswith("No.")
+        # Ordinary overlapping hits are not identical full-parent ranges.
+        assert len(project_packs(open_evidence_packs(service, first), [4, 8])) == 2
+        source = first[0]["source_ranges"][0]["source_ref"]
+        handle = service.source_fragments(source)[0]["fragment_handle"]
+        assert service.forget("first", "hide", fragment_handles=[handle])["ok"]
+        hidden = open_evidence_packs(service, first, expand_context=True)
+        assert all(item["visibility"] == "partial" for item in hidden)
+        assert len(project_packs(hidden, [4, 8])) == 2
 
 
 def execution_at(root: Path) -> BenchmarkRun:

@@ -226,7 +226,7 @@ class FunctionalEditMemory(FunctionalMemory):
             open_evidence_packs,
             pack_candidate,
             pack_coverage,
-            project_pack,
+            project_packs,
         )
 
         materials = state["materials"]
@@ -235,8 +235,7 @@ class FunctionalEditMemory(FunctionalMemory):
                     for i in state["selected"]]
         base = {
             "ok": True, "schema": "question_evidence_v1", "operation_effect": "read_only",
-            "evidence": [project_pack(item, index)
-                         for item, index in zip(selected, state["selected"], strict=True)],
+            "evidence": project_packs(selected, state["selected"]),
             "admitted_indices": state["selected"], "excluded_indices": state["excluded"],
             "task": state["task"], "gap": state["gap"],
             "range_coverage": pack_coverage(materials, selected, scope=state["source_scope"]),

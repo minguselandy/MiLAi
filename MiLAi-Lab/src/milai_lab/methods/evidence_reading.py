@@ -242,6 +242,33 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
     return result
 
 
+def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[str, Any]]:
+    """Render one body for exactly repeated visible Source ranges.
+
+    Expanding several hits in one session may reopen the same complete parent.
+    Keep the selected aliases, without repeating that parent in the model input.
+    Different sources, partial visibility and semantic views remain separate.
+    """
+    result = []
+    originals: dict[tuple[tuple[Any, ...], ...], dict[str, Any]] = {}
+    for item, index in zip(items, indices, strict=True):
+        ranges = tuple(tuple(span[key] for key in (
+            "source_ref", "source_revision", "start", "end"))
+            for span in item.get("source_ranges", []))
+        shared = (item["kind"] == "original_source" and bool(ranges)
+                  and item.get("visibility") == "visible"
+                  and item.get("body_delivered") is True
+                  and not item.get("unavailable_source_ranges"))
+        if shared and ranges in originals:
+            originals[ranges].setdefault("also_selected_as", []).append(f"e{index}")
+            continue
+        projected = project_pack(item, index)
+        result.append(projected)
+        if shared:
+            originals[ranges] = projected
+    return result
+
+
 def pack_candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
     """An explicitly incomplete navigation excerpt, never an evidence body."""
     text = item.get("index_text", "") if item.get("body_delivered") is not False else ""
@@ -315,8 +342,7 @@ def read_question_pack(
         return [open_materials([materials[i]], i in state["context_indices"])[0] for i in indices]
 
     def evidence_messages(indices: list[int]) -> list[dict[str, str]]:
-        projected = [project_pack(item, i)
-                     for i, item in zip(indices, opened(indices), strict=True)]
+        projected = project_packs(opened(indices), indices)
         messages = messages_for(projected)
         payload = json.loads(messages[1]["content"])
         payload["source_coverage"] = pack_coverage(materials, opened(indices), scope=source_scope)
