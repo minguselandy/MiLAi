@@ -28,7 +28,7 @@ Archive  → MiLAi-Artifact-Archive/README.md
 
 ## 当前 Lab 开发
 
-开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`，当前代码 `ebf793a9`，维护源绑定 `be7c5e6f`。
+开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`，当前代码 `c61e680f`，维护源绑定 `be7c5e6f`。
 执行[全局开发规划](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。
 [开发记录与运行方式](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md)包含实际查询结果和成本。
 

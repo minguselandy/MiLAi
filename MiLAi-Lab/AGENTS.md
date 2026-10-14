@@ -1,7 +1,7 @@
 # Current handoff: CPU bottleneck fixed; long candidate resumed from actual checkpoint
 
 Full GLOBAL plan ACTIVE/incomplete. No SHA/checksum validation, new review platform, publication,
-Product/Archive edits or subagents. Method headebf793a9 (Host shortcut84b019a5, navigationdc360cff).
+Product/Archive edits or subagents. Method headc61e680f (Host shortcut84b019a5, navigationdc360cff).
 Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python. Root only serial real-model HTTP with
 existing continuous ledger/owner lock; preserve global unknown floor gen9/emb1.
 
@@ -31,9 +31,9 @@ originalcandidateaccounting-start tofinalledger, plus bothphasewalltimes. No fre
 and oldlong-history-v1/interruption.json/budget-at-interruption.json. Mixedruntime latency explicitlynot
 uniform; final whole-user confirmation mustuseonefrozenruntime. Oldcandidate never had a Judge.
 
-NEXT NORMAL CHAIN: global-story-v3 PREDECLARED_NOT_RUN, runtimeebf793a9, sameoriginal17fixture,
+NEXT NORMAL CHAIN: global-story-v3 PREDECLARED_NOT_RUN, runtimec61e680f, sameoriginal17fixture,
 fresh emptybank, editthinkingFalse, Host/finalReader unchangedtrue/8192/65536/read/callbudgets.
-V2 was superseded BEFORE anyCLIprepare/modelrun (0calls); itsprotocol remains. Use source-evidence-dedup-v2
+V2 was superseded BEFORE anyCLIprepare/modelrun (0calls); itsprotocol remains. Use source-order-index-v1
 normalCLI prepare withconfigs/milai-global-story-v3.json AFTER currentqueue closes, then
 artifacts/global-development/run_global_story_v3.py. No modelHTTP concurrentwithlongrun.
 84b019a5 skipsredundantHostgeneration only forsharedrecipe+question_pack+explicitmemory_status_only
@@ -55,6 +55,23 @@ Data/manifests/global-expanded-pack-dedup-v1-summary.json. v3runtime amendedBEFO
 run; priorprotocols retained. Do NOT hotedit current51182ead longqueue. Need boundedactualreadfeedback
 fornewprojection before finalcandidatefreeze; alloldoutputs kept. Second10secCPUprofileofcurrentjob had
 0activePython samples duringHTTP, not proof of a new bottleneck; no second interruption authorized by it.
+
+A3 second actualCPU bottleneck confirmed: another199samples at replay_requested->_rows, whole-prefix
+SQLite search sorts allvalues for EVERYpage. Actual52MBbank copy unchangedquery:22.6183s->0.6799s,
+completeorderedrootrows exactequal; indexbuild0.037s. c61e680f TransactionalSqliteStore.setup adds
+nonunique milai_store_updated_at_idx(updated_at DESC), no logicalrecord/schema/API/permission change.
+9sorting/transaction/replaychecks,Ruff/mypy pass. Physicalindex applied live WITHOUT restart/codehotedit:
+U1 at10:44:38UTC (8082rows,3semanticrecordvalues/times unchanged); U4 at10:46:21UTC (2712rows,1record
+unchanged). Bothreceipts sqlite-order-index-v1/*-applied.json; keep mixed timing/cost, nofree speedclaim.
+Newrun source-order-index-v1=c61e680f frozen forv3 anddeduppilot. Current51182eadcode unchanged.
+Lastverified U1full32 +U4first10,8QA. KnownU1maintenance15 and29 length failures retained.
+
+NEXT after currentqueue closes: normalCLI prepare/run global-story-v3 using source-order-index-v1,
+configs/milai-global-story-v3.json andoriginal17fixture; run_global_story_v3.py alreadypointsnewsource.
+Then readpack-dedup-pilot-v1 config/protocol PREDECLARED_NOT_RUN,2oldU1shortQA(7/0,7/1) selectedfor
+actualduplicatedcontextbefore anynewdedupanswer. Sourcepool ORIGINALlong-history-v1/candidate snapshots,
+source4c, newreader c61. Use run_baseline_alignment prepare then run_dedup_pilot_v1.py (predict/firstscore).
+No freshretrieval/formation/activation, no oldscoreoverwrite. Selectfinalcandidateonlyafter realfeedback.
 
 Closed earlierwork: A20samebankqueries; B8 control3C4H1invalid vs pack5C2H1missing,33calls712686 vs13calls
 222603, Judgeconflictsretained. Selectorpilot2 netqualityzero (repairedmissing,oldC->H). C core-v3 actual12
