@@ -339,6 +339,8 @@ class FunctionalEditMemory(FunctionalMemory):
             For a targeted read, give the actual missing subject/condition/history in gap.
             Empty item_indices requests a candidate page. Use expand_context only for a
             needed earlier exchange; it cannot read sources arriving after this request.
+            New selections have priority; fitting previously opened packs remain resident.
+            Excluded indices report the actual capacity omissions.
             """
             from milai_lab.methods.evidence_reading import admit_pack_indices
 
@@ -348,8 +350,10 @@ class FunctionalEditMemory(FunctionalMemory):
                                              for i in [*item_indices, *(expand_context or [])]):
                     raise FunctionalRejection("EVIDENCE_PACK_INDEX_UNAVAILABLE")
                 state.update(task=task, candidate_page=candidate_page, gap=gap,
-                             expanded=expand_context or [])
-                wanted = list(range(len(state["materials"]))) if task == "range" else item_indices
+                             expanded=list(dict.fromkeys([
+                                 *state["expanded"], *(expand_context or [])])))
+                wanted = (list(range(len(state["materials"]))) if task == "range"
+                          else [*item_indices, *state["selected"]])
                 admission = admit_pack_indices(wanted, lambda indices: self.token_count(canonical(
                     self._evidence_packet({**state, "selected": indices, "excluded": wanted},
                                           directory=[])

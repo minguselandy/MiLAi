@@ -455,7 +455,8 @@ def read_question_pack(
                      range_coverage=direct_scope)
         save(state)
         answer = call("answer", evidence_messages(lookup_indices), None)
-        state.update(answer=answer, complete=True, delivery_plan={"body_delivered": True},
+        state.update(answer=answer, complete=True,
+                     delivery_plan={"body_delivered": bool(lookup_indices)},
                      steps=1, coverage_complete=direct_scope["complete"])
         save(state)
         return answer, opened(lookup_indices)
@@ -536,7 +537,8 @@ def read_question_pack(
         state["steps"] += 1
         if answer is not None:
             coverage = pack_coverage(materials, opened(indices), scope=source_scope)
-            state.update(answer=answer, complete=True, delivery_plan={"body_delivered": True},
+            state.update(answer=answer, complete=True,
+                         delivery_plan={"body_delivered": bool(indices)},
                          range_coverage=coverage, coverage_complete=coverage["complete"])
             save(state)
             return answer, opened(state["opened_indices"])

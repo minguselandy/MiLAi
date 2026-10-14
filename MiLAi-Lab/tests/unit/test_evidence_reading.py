@@ -390,6 +390,70 @@ def test_empty_captured_scope_is_known_empty_without_a_spurious_read(tmp_path: P
         assert answer.startswith("No reports") and calls == ["q"] and used == []
 
 
+def test_final_gap_answer_does_not_report_unopened_bodies_as_delivered(tmp_path: Path) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        packs = large_packs(service)
+        run = execution_at(tmp_path)
+        write_json(tmp_path / "pool.json", {"materials": packs})
+        calls = []
+
+        def call(key: str, messages: Any, **kwargs: Any) -> str:
+            calls.append(key)
+            payload = json.loads(messages[1]["content"])
+            assert payload["memories"] == []
+            return (selection([], gap="No evidence was selected.") if kwargs["structured"]
+                    else "No evidence was opened to answer this question.")
+
+        run.call = call
+        answer, used = run.answer_material("TOPIC_0", "2030-01-01", "q", packs,
+            snapshot_id="pool.json", material_reader=lambda items: run._live_materials(
+                service, items))
+        assert answer.startswith("No evidence") and used == [] and len(calls) == 2
+        saved = read_json(tmp_path / "http/q/memory-view.json")
+        assert saved["complete"] and not saved["delivery_plan"]["body_delivered"]
+
+
+def test_host_retains_prior_context_when_opening_a_second_subject(tmp_path: Path) -> None:
+    from milai_lab.methods.functional_edit_memory import FunctionalEditMemory
+
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        service.capture_user("orion", "0", "Orion's contact is Morgan.")
+        service.capture_user("orion", "1", "They must confirm external notices first.")
+        service.capture_user("vega", "0", "Vega's internal notices need no approval.")
+        service.capture_user("ask", "q", "Compare Orion and Vega notices.")
+        memory = FunctionalEditMemory(
+            service, len, interface_version="I2", evidence_policy="question_pack_v1",
+            source_top_k=1, material_limit=12000, read_limit=3)
+        memory.context("ask", "q", "retain-context")
+        cfg = {"configurable": {"user_id": "alice", "v13_session": "ask",
+                               "v13_turn_id": "q", "v13_config_version": "retain-context"}}
+        tool = next(t for t in memory.tools() if t.name == "read_evidence")
+        _, pool = memory._evidence_pool(cfg)
+        orion = next(i for i, p in enumerate(pool["materials"])
+                     if p["session_id"] == "orion")
+        vega = next(i for i, p in enumerate(pool["materials"])
+                    if p["session_id"] == "vega")
+
+        def read(indices: list[int], call_id: str, expand: list[int]) -> dict[str, Any]:
+            result = tool.invoke({"type": "tool_call", "name": tool.name, "id": call_id,
+                "args": {"item_indices": indices, "expand_context": expand}}, config=cfg)
+            return json.loads(result.content)
+
+        first = read([orion], "first", [orion])
+        assert len(first["evidence"][0]["evidence"]) == 2
+        second = read([vega], "second", [])
+        assert second["admitted_indices"] == [vega, orion]
+        body = memory.model_material(cfg)
+        assert {row["content"] for p in body["evidence"] for row in p.get("evidence", [])} == {
+            "Orion's contact is Morgan.", "They must confirm external notices first.",
+            "Vega's internal notices need no approval."}
+        assert body["range_coverage"]["complete"] and body["excluded_indices"] == []
+        page = read([], "page", [])
+        assert page["evidence"] == body["evidence"]
+
+
 def test_state_views_refresh_only_explicit_changed_dependencies_and_freeze_replays(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
