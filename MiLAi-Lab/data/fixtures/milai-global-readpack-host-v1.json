@@ -1,0 +1,107 @@
+{
+  "kind": "functional_v1",
+  "cases": [
+    {
+      "case_id": "pack-range",
+      "owner": "pack-range-dev",
+      "workflow": "reservation",
+      "initial_world": {},
+      "initial_sources": [
+        {
+          "session_id": "project-a",
+          "event_key": "turn:0",
+          "role": "user",
+          "content": "A项目通知李明。",
+          "occurred_at": "2030-10-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "project-b",
+          "event_key": "turn:0",
+          "role": "user",
+          "content": "B项目通知王芳。",
+          "occurred_at": "2030-10-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "confirm",
+          "event_key": "turn:0",
+          "role": "user",
+          "content": "外部通知必须先确认；不影响内部通知。",
+          "occurred_at": "2030-10-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        }
+      ],
+      "messages": [
+        {
+          "session_id": "query",
+          "message_id": "count",
+          "content": "只查询，不保存：列出此前约定的所有项目及通知对象，一共有几个项目？外部通知还需要什么条件？不要因为只召回一条就把它当作全部。",
+          "occurred_at": "2030-10-14T10:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2030-10-14T10:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        }
+      ]
+    },
+    {
+      "case_id": "pack-context",
+      "owner": "pack-context-dev",
+      "workflow": "reservation",
+      "initial_world": {},
+      "initial_sources": [
+        {
+          "session_id": "notice",
+          "event_key": "turn:0",
+          "role": "user",
+          "content": "项目澄海的外部联系人是周宁。",
+          "occurred_at": "2030-10-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "notice",
+          "event_key": "turn:1",
+          "role": "assistant",
+          "content": "每次外发都需要本人再次确认吗？",
+          "occurred_at": "2030-10-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "notice",
+          "event_key": "turn:2",
+          "role": "user",
+          "content": "对，必须先得到本人明确确认；不要直接发送。",
+          "occurred_at": "2030-10-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "notice",
+          "event_key": "turn:3",
+          "role": "assistant",
+          "content": "我会等明确确认后再发。",
+          "occurred_at": "2030-10-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        },
+        {
+          "session_id": "other",
+          "event_key": "turn:0",
+          "role": "user",
+          "content": "独立项目青岚由陈雨负责内部通知，内部通知无需这个确认。",
+          "occurred_at": "2030-10-14T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        }
+      ],
+      "messages": [
+        {
+          "session_id": "query",
+          "message_id": "contact",
+          "content": "只读取已有信息，不发通知也不保存：澄海项目联系谁，外发前具体有什么要求？青岚项目是否也受这个条件约束？",
+          "occurred_at": "2030-10-14T10:00:00+08:00",
+          "calendar_context": "Asia/Shanghai",
+          "query_time": "2030-10-14T10:00:00+08:00",
+          "query_calendar_context": "Asia/Shanghai"
+        }
+      ]
+    }
+  ]
+}

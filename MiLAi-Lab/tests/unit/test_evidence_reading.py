@@ -85,8 +85,9 @@ def large_packs(service: MemoryService) -> list[dict[str, Any]]:
     for i in range(4):
         service.capture_user(f"session-{i}", "turn:0", f"TOPIC_{i}: " + "text " * 300)
         service.capture_assistant(f"session-{i}", "turn:1", "Acknowledged.")
-    native = service.search_sources("TOPIC_0", tokenization="unicode_v1")
-    return build_evidence_packs(service, "TOPIC_0", "2030-01-01", native["source_materials"], [])
+    native = service.search_sources("TOPIC_0", tokenization="unicode_v1", include_scope=True)
+    return build_evidence_packs(service, "TOPIC_0", "2030-01-01", native["source_materials"], [],
+                                 source_scope=native["source_scope"])
 
 
 def selection(indices: list[int], *, answer: str | None = None, gap: str | None = None,
@@ -135,8 +136,10 @@ def test_small_direct_pool_has_one_call_and_no_selection(tmp_path: Path) -> None
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
         service.capture_user("short", "turn:0", "The passcode is violet; only for today.")
+        native = service.search_sources("passcode", include_scope=True)
         packs = build_evidence_packs(service, "passcode", "2030-01-01",
-                                     service.search_sources("passcode")["source_materials"], [])
+                                     native["source_materials"], [],
+                                     source_scope=native["source_scope"])
         run = execution_at(tmp_path)
         calls = []
 
@@ -203,10 +206,9 @@ def test_budget_exclusions_return_to_reader_and_empty_retry_does_not_loop(tmp_pa
             if len(calls) == 1:
                 return selection([0, 1, 2, 3],
                                  gap="Need comparison of these reports.", task="range")
-            if len(calls) == 2:
-                assert payload["excluded_indices"] and payload["task"] == "range"
-                assert payload["coverage"] == "retrieved_pool_only_not_full_history"
-                return selection(payload["admitted_indices"], gap=None, task="range")
+            assert payload["excluded_indices"]
+            assert not payload["range_coverage"]["complete"]
+            assert payload["coverage"] == "retrieved_pool_only_not_full_history"
             assert not kwargs["structured"]
             assert "No further evidence was requested" in messages[0]["content"]
             return "Partial answer; some reports did not fit."
@@ -216,6 +218,103 @@ def test_budget_exclusions_return_to_reader_and_empty_retry_does_not_loop(tmp_pa
                                         snapshot_id="pool.json",
                                         material_reader=lambda items: run._live_materials(
                                             service, items))
-        assert answer.startswith("Partial") and len(calls) == 3
+        assert answer.startswith("Partial") and len(calls) == 2
         state = read_json(tmp_path / "http/q/memory-view.json")
-        assert state["steps"] == 3 and not state["coverage_complete"]
+        assert state["steps"] == 2 and not state["coverage_complete"]
+
+
+def test_range_reads_captured_scope_beyond_top_k_without_future_sources(tmp_path: Path) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        for i in range(3):
+            service.capture_user(f"notice-{i}", "turn:0", f"Project {i} sends exactly one notice.")
+        native = service.search_sources("Project 0", limit=1, include_scope=True)
+        packs = build_evidence_packs(service, "Count all notices", "2030-01-01",
+                                     native["source_materials"], [],
+                                     source_scope=native["source_scope"])
+        assert len(packs) == 3 and sum(p.get("scope_only", False) for p in packs) == 2
+        service.capture_user("future", "turn:0", "FUTURE_NOTICE was not captured at the query.")
+        run = execution_at(tmp_path)
+        write_json(tmp_path / "pool.json", {"materials": packs})
+        calls = []
+
+        def call(key: str, messages: Any, **kwargs: Any) -> str:
+            payload = json.loads(messages[1]["content"])
+            assert "FUTURE_NOTICE" not in str(messages)
+            calls.append(payload)
+            if len(calls) == 1:
+                assert len(payload["candidates"]) == 1
+                return selection([0], gap="Count every captured notice.", task="range")
+            assert payload["range_coverage"]["complete"]
+            assert len(payload["memories"]) == 3
+            return selection([], answer="Three notices in the captured scope.", task="range")
+
+        run.call = call
+        answer, _ = run.answer_material("Count all notices", "2030-01-01", "q", packs,
+                                        snapshot_id="pool.json",
+                                        material_reader=lambda items: run._live_materials(
+                                            service, items))
+        assert answer.startswith("Three") and len(calls) == 2
+        state = read_json(tmp_path / "http/q/memory-view.json")
+        assert state["coverage_complete"]
+
+
+def test_functional_host_uses_shared_pack_admission_and_read_allowance(tmp_path: Path) -> None:
+    from milai_lab.methods.functional_edit_memory import FunctionalEditMemory
+
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        for i in range(3):
+            service.capture_user(f"notice-{i}", "turn:0", f"Project {i} sends exactly one notice.")
+        query = service.capture_user("ask", "q", "Count the previous project notices.")
+        memory = FunctionalEditMemory(
+            service, lambda text: len(text) // 4, interface_version="I2",
+            evidence_policy="question_pack_v1", source_access="independent_v1",
+            source_tokenization="unicode_v1", source_top_k=1, memory_view_mode="state_driven",
+            material_limit=5000, read_limit=1)
+        memory.context("ask", "q", "pack-host")
+        config = {"configurable": {"user_id": "alice", "v13_session": "ask",
+                                    "v13_turn_id": "q", "v13_config_version": "pack-host"}}
+        first = memory.model_material(config)
+        assert not first["range_coverage"]["complete"] and not first["evidence"]
+        assert len(first["candidates"]) == 1
+        assert query["source_ref"] not in json.dumps(first)
+        tool = next(t for t in memory.tools() if t.name == "read_evidence")
+        result = tool.invoke({"type": "tool_call", "name": "read_evidence", "id": "r1",
+                              "args": {"item_indices": [0], "task": "range",
+                                       "gap": "Need the whole captured scope."}}, config=config)
+        packet = json.loads(result.content)
+        assert packet["ok"] and packet["range_coverage"]["complete"]
+        assert len(packet["evidence"]) == 3
+        assert len(memory.model_material(config)["evidence"]) == 3
+        replay = tool.invoke({"type": "tool_call", "name": "read_evidence", "id": "r1",
+                              "args": {"item_indices": [0], "task": "range",
+                                       "gap": "Need the whole captured scope."}}, config=config)
+        assert replay.content == result.content
+        denied = tool.invoke({"type": "tool_call", "name": "read_evidence", "id": "r2",
+                              "args": {"item_indices": [0]}}, config=config)
+        assert json.loads(denied.content)["status"] == "read_limit_exhausted"
+        projected = memory.project_model_messages(config, [result])
+        assert "evidence" not in json.loads(projected[0].content)
+
+
+def test_empty_captured_scope_is_known_empty_without_a_spurious_read(tmp_path: Path) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        native = service.search_sources("How many reports?", include_scope=True)
+        write_json(tmp_path / "pool.json", {"materials": [], "native_return": native})
+        run = execution_at(tmp_path)
+        calls = []
+
+        def call(key: str, messages: Any, **kwargs: Any) -> str:
+            payload = json.loads(messages[1]["content"])
+            assert not kwargs["structured"]
+            assert payload["source_coverage"]["complete"]
+            assert payload["source_coverage"]["required_source_ranges"] == 0
+            calls.append(key)
+            return "No reports in the currently visible captured scope."
+
+        run.call = call
+        answer, used = run.answer_material("How many reports?", "2030-01-01", "q", [],
+                                           snapshot_id="pool.json")
+        assert answer.startswith("No reports") and calls == ["q"] and used == []

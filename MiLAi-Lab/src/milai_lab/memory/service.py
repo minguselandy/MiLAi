@@ -1878,6 +1878,7 @@ class MemoryService:
         self, query: str, limit: int = 20, *,
         granularity: Literal["session", "turn"] = "session",
         tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
+        include_scope: bool = False,
         source_refs: Sequence[str] | None = None,
     ) -> dict[str, Any]:
         """Rank visible original text without traversing semantic formation history.
@@ -1939,12 +1940,17 @@ class MemoryService:
             ranked = flat_bm25_rank(units, query, limit, tokenization=tokenization,
                                     timings=timings)
             open_started = time.perf_counter()
-            descriptors = [{"kind": "original_source", **{key: unit[key] for key in (
-                "id", "session_id", "date", "turn_range", "score")},
-                "source_ranges": [{"source_ref": turn["source_ref"],
-                                   "source_revision": turn["source_revision"],
-                                   "start": 0, "end": len(turn["content"])}
-                                  for turn in unit["turns"]]} for unit in ranked]
+            def descriptor(unit: dict[str, Any]) -> dict[str, Any]:
+                return {"kind": "original_source", **{key: unit[key] for key in (
+                    "id", "session_id", "date", "turn_range")}, "score": unit.get("score"),
+                    "source_ranges": [{"source_ref": turn["source_ref"],
+                                       "source_revision": turn["source_revision"],
+                                       "start": 0, "end": len(turn["content"])}
+                                      for turn in unit["turns"]]}
+
+            descriptors = [descriptor(unit) for unit in ranked]
+            scope = ({"complete": True, "basis": "captured_visible_arrival_prefix",
+                      "materials": [descriptor(unit) for unit in units]} if include_scope else None)
             materials = self.read_source_materials(descriptors)
             selected_refs = dict.fromkeys(span["source_ref"]
                                           for material in materials
@@ -1955,6 +1961,7 @@ class MemoryService:
         timings["total_seconds"] = time.perf_counter() - started
         return {
             "ok": True, "raw_events": raw_events, "source_materials": materials,
+            **({"source_scope": scope} if scope is not None else {}),
             "source_retrieval": {
                 "retrieval": "source_flat_bm25", "granularity": granularity,
                 "tokenization": tokenization, "timings": timings,
@@ -1970,12 +1977,14 @@ class MemoryService:
         self, query: str, *, source_limit: int = 20, semantic_limit: int = 10,
         granularity: Literal["session", "turn"] = "session",
         tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
+        include_scope: bool = False,
         source_refs: Sequence[str] | None = None,
     ) -> dict[str, Any]:
         """Two independent quotas; original evidence is not gated by semantic hits."""
         with self._locked():
             originals = self.search_sources(query, source_limit, granularity=granularity,
-                                            source_refs=source_refs, tokenization=tokenization)
+                                            source_refs=source_refs, tokenization=tokenization,
+                                            include_scope=include_scope)
             semantic = self.search(query, limit=semantic_limit, include_raw=False,
                                    source_refs=source_refs)
             records = semantic["records"]

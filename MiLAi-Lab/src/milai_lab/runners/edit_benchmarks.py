@@ -1824,6 +1824,14 @@ class BenchmarkRun:
                 native.get("records", []) if variant != "S0" else [],
                 tokenization=self.settings.get("source_tokenization", "unicode_v1"),
                 calendar_context=self.settings.get("calendar_context"),
+                source_scope=native.get("source_scope") or {
+                    "complete": native.get("source_retrieval", {}).get("indexed_count", -1)
+                                == len(native["source_materials"]),
+                    "basis": "captured_visible_arrival_prefix" if native.get(
+                        "source_retrieval", {}).get("indexed_count", -1)
+                        == len(native["source_materials"]) else "retrieved_pool",
+                    "materials": native["source_materials"],
+                },
             )
             native["material_assembly"] = {
                 "policy": "question_pack_v1", "evidence_variant": variant,
@@ -1963,13 +1971,15 @@ class BenchmarkRun:
             native = (service.search_sources(
                 question, limit=self.settings["source_top_k"],
                 tokenization=self.settings.get("source_tokenization", "rawrag_space"),
-                granularity=self.settings.get("source_granularity", "session"))
+                granularity=self.settings.get("source_granularity", "session"),
+                include_scope=self.settings.get("evidence_policy") == "question_pack_v1")
                       if independent and self.settings.get("evidence_variant") == "S0"
                       else service.search_evidence(
                 question, source_limit=self.settings["source_top_k"],
                 semantic_limit=self.settings["semantic_top_k"],
                 tokenization=self.settings.get("source_tokenization", "rawrag_space"),
                 granularity=self.settings.get("source_granularity", "session"),
+                include_scope=self.settings.get("evidence_policy") == "question_pack_v1",
             ) if independent else service.search(
                 question, limit=requested_limit, include_raw=False))
             records = native.get("records", [])
@@ -2055,6 +2065,14 @@ class BenchmarkRun:
         state = read_json(path) if path.exists() else {}
         limit = self.settings["context_tokens"] - self.settings["model"]["max_tokens"] - 512
         thinking = self.stage_thinking("reader")
+        scope = memories[0].get("source_scope") if memories else None
+        if not memories:
+            snapshot = read_json(self.root / snapshot_id)
+            native_path = path.with_name("retrieval-native.json")
+            native = snapshot.get("native_return") or (
+                read_json(native_path) if native_path.exists() else {})
+            if "source_scope" in native:
+                scope = {**native["source_scope"], "required_ranges": []}
 
         def reopen(items: list[dict[str, Any]], expand: bool) -> list[dict[str, Any]]:
             selected = copy.deepcopy(items)
@@ -2085,6 +2103,7 @@ class BenchmarkRun:
                                                         memory_view="source_history"),
             fits=lambda messages: self.input_tokens(messages, enable_thinking=thinking) <= limit,
             call=dispatch, save=save, state=state, max_calls=self.client.config.max_calls,
+            source_scope=scope,
         )
 
     def _rank_materials(

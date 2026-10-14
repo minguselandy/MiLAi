@@ -739,7 +739,7 @@ def prepare(
         "memory_ranking",
         "retrieval_granularity", "stage_enable_thinking",
         "source_access", "source_top_k", "semantic_top_k", "max_evidence_queries",
-        "source_tokenization", "source_granularity",
+        "source_tokenization", "source_granularity", "evidence_policy",
         "maintenance_mode",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
@@ -2673,6 +2673,7 @@ def message(
             memory_class = FunctionalEditMemory if edit_arm is not None else FunctionalMemory
             memory_options: dict[str, Any] = {}
             if memory_class is FunctionalEditMemory:
+                memory_options["evidence_policy"] = settings.get("evidence_policy", "legacy")
                 memory_options["arm"] = edit_arm
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
                 memory_options["features"] = edit_features

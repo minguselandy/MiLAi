@@ -132,6 +132,7 @@ class FunctionalEditMemory(FunctionalMemory):
         maintenance_mode: Literal["legacy", "event_delta_v1"] = "legacy",
         query_time: str | None = None,
         query_calendar_context: str | None = None,
+        evidence_policy: Literal["legacy", "question_pack_v1"] = "legacy",
         **kwargs: Any,
     ) -> None:
         if arm not in FUNCTIONAL_ARMS.values():
@@ -154,6 +155,9 @@ class FunctionalEditMemory(FunctionalMemory):
         self.maintenance_recipe = maintenance_recipe
         self.query_time = query_time
         self.query_calendar_context = query_calendar_context
+        self.evidence_policy = evidence_policy
+        if evidence_policy != "legacy":
+            self.policy["evidence_policy"] = evidence_policy
         if maintenance_recipe is not None:
             self.policy["maintenance_recipe"] = maintenance_recipe
         if maintenance_mode != "legacy":
@@ -170,6 +174,177 @@ class FunctionalEditMemory(FunctionalMemory):
             self.policy["integration_version"] = "functional_edit_v2"
         if self.features.enabled:
             self.policy["edit_features"] = canonical(self.features.settings())
+
+    @property
+    def read_tool_names(self) -> frozenset[str]:
+        return super().read_tool_names | (
+            {"read_evidence"} if self.evidence_policy == "question_pack_v1" else set())
+
+    def _evidence_pool(self, config: RunnableConfig) -> tuple[str, dict[str, Any]]:
+        from milai_lab.methods.evidence_reading import build_evidence_packs
+
+        bound = self._binding(config)
+        key = "evidence-pool:" + reference_key([
+            bound["session"], bound["message_id"], self.forget_epoch])
+        stored = self.service.store.get(namespace(self.service), key)
+        if stored is not None:
+            return key, stored.value
+        current = self.service.source(bound["source_ref"])
+        assert current is not None
+        query = current["content"] if isinstance(current["content"], str) else canonical(
+            current["content"])
+        with self.service._locked():
+            refs = [row["event_id"] for row in self.service._visible_sources()
+                    if row["event_id"] != bound["source_ref"]]
+            native = self.service.search_sources(
+                query, limit=self.source_top_k, source_refs=refs,
+                tokenization=self.source_tokenization, include_scope=True)
+            # Current semantic revisions may legitimately use this message's newly
+            # committed update; excluding the query from raw history must not hide it.
+            records = self.service.search(query, limit=self.semantic_top_k,
+                                          include_raw=False)["records"]
+            materials = build_evidence_packs(
+                self.service, query, self.query_time or "", native["source_materials"],
+                records, tokenization=self.source_tokenization,
+                calendar_context=self.query_calendar_context, source_scope=native["source_scope"])
+        scope = (materials[0]["source_scope"] if materials else {
+            "complete": native["source_scope"]["complete"],
+            "basis": native["source_scope"]["basis"], "required_ranges": [],
+        })
+        state = {"binding": bound, "materials": materials, "source_scope": scope,
+                 "selected": [], "expanded": [],
+                 "excluded": [], "task": "lookup", "candidate_page": 0, "gap": None}
+        self.service.store.put(namespace(self.service), key, state, index=False)
+        return key, state
+
+    def _evidence_packet(
+        self, state: dict[str, Any], *, directory: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        from milai_lab.memory.working_set import plan_delivery
+        from milai_lab.methods.evidence_reading import (
+            open_evidence_packs,
+            pack_candidate,
+            pack_coverage,
+            project_pack,
+        )
+
+        materials = state["materials"]
+        selected = [open_evidence_packs(self.service, [materials[i]],
+                    expand_context=i in state["expanded"])[0] for i in state["selected"]]
+        base = {
+            "ok": True, "schema": "question_evidence_v1", "operation_effect": "read_only",
+            "evidence": [project_pack(item, index)
+                         for item, index in zip(selected, state["selected"], strict=True)],
+            "admitted_indices": state["selected"], "excluded_indices": state["excluded"],
+            "task": state["task"], "gap": state["gap"],
+            "range_coverage": pack_coverage(materials, selected, scope=state["source_scope"]),
+            "instructions": (
+                "Answer the original user request using evidence bodies. Candidates are navigation "
+                "only: select item_indices with read_evidence before asserting their facts. "
+                "Use task=range for counts/enumerations; complete means source coverage, not task "
+                "truth. A top-k lookup cannot establish a full range. expand_context selects packs "
+                "whose earlier captured exchanges are needed for subjects/conditions/negation. "
+                "All reads share the current request allowance. Use existing history tools for "
+                "missing saved versions and actual application tools for live business state."
+            ),
+        }
+        candidates = directory if directory is not None else [
+            pack_candidate(open_evidence_packs(self.service, [item])[0], index)
+            for index, item in enumerate(materials)
+            if state["task"] == "range" or not item.get("scope_only")]
+        pages = plan_delivery(candidates, lambda rows: self.token_count(canonical({
+            **base, "candidates": rows, "candidate_page": state["candidate_page"],
+            "candidate_page_count": len(candidates),
+        })) <= self.material_limit)["pages"]
+        page = state["candidate_page"]
+        return {**base, "candidates": pages[page] if page < len(pages) else [],
+                "candidate_page": page, "candidate_page_count": len(pages)}
+
+    def _note_evidence_exposure(self, state: dict[str, Any]) -> None:
+        from milai_lab.memory.functional_state import note_exposure
+
+        refs: list[str] = []
+        for i in state["selected"]:
+            item = state["materials"][i]
+            ranges = (item.get("context_source_ranges", item.get("source_ranges", []))
+                      if i in state["expanded"] else item.get("source_ranges", []))
+            refs.extend(span["source_ref"] for span in [*ranges, *item.get("revision_evidence", [])]
+                        if self.service.source(span["source_ref"]) is not None)
+        with self.service._locked():
+            note_exposure(self.service, state["binding"]["source_ref"], list(dict.fromkeys(refs)))
+
+    def evidence_material(
+        self, config: RunnableConfig, *, fresh_observations: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        from milai_lab.methods.evidence_reading import open_evidence_packs, pack_coverage
+
+        key, state = self._evidence_pool(config)
+        if not state.get("initialized"):
+            indices = [i for i, item in enumerate(state["materials"]) if not item.get("scope_only")]
+            all_items = open_evidence_packs(self.service, [state["materials"][i] for i in indices])
+            trial = {**state, "selected": indices}
+            coverage = pack_coverage(state["materials"], all_items, scope=state["source_scope"])
+            if (coverage["complete"] and self.token_count(canonical(self._evidence_packet(trial)))
+                    <= self.material_limit):
+                state["selected"] = indices
+            state["initialized"] = True
+            self.service.store.put(namespace(self.service), key, state, index=False)
+        packet = self._evidence_packet(state)
+        self._note_evidence_exposure(state)
+        if fresh_observations:
+            packet["fresh_observations"] = fresh_observations
+        return packet
+
+    def _evidence_tools(self) -> tuple[BaseTool, ...]:
+        if self.evidence_policy != "question_pack_v1":
+            return ()
+
+        def read_evidence(
+            item_indices: list[int], config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            expand_context: list[int] | None = None,
+            task: Literal["lookup", "range"] = "lookup", candidate_page: int = 0,
+            gap: str | None = None,
+        ) -> ToolMessage:
+            """Open complete evidence packs in priority order within the shared read allowance.
+
+            Indices name this request's candidates; no write/forget permission is issued.
+            task=range opens the captured source scope beyond top-k and reports coverage.
+            For a targeted read, give the actual missing subject/condition/history in gap.
+            Empty item_indices requests a candidate page. Use expand_context only for a
+            needed earlier exchange; it cannot read sources arriving after this request.
+            """
+            from milai_lab.methods.evidence_reading import admit_pack_indices
+
+            def action(bound: dict[str, Any]) -> dict[str, Any]:
+                key, state = self._evidence_pool(config)
+                if candidate_page < 0 or any(i < 0 or i >= len(state["materials"])
+                                             for i in [*item_indices, *(expand_context or [])]):
+                    raise FunctionalRejection("EVIDENCE_PACK_INDEX_UNAVAILABLE")
+                state.update(task=task, candidate_page=candidate_page, gap=gap,
+                             expanded=expand_context or [])
+                wanted = list(range(len(state["materials"]))) if task == "range" else item_indices
+                admission = admit_pack_indices(wanted, lambda indices: self.token_count(canonical(
+                    self._evidence_packet({**state, "selected": indices, "excluded": wanted},
+                                          directory=[])
+                )) <= self.material_limit)
+                state.update(selected=admission["admitted_indices"],
+                             excluded=admission["excluded_indices"])
+                self.service.store.put(namespace(self.service), key, state, index=False)
+                packet = self._evidence_packet(state)
+                self._note_evidence_exposure(state)
+                return packet
+
+            result = self._read(config, tool_call_id, {
+                "tool": "read_evidence", "item_indices": item_indices,
+                "expand_context": expand_context, "task": task,
+                "candidate_page": candidate_page, "gap": gap,
+            }, action, deliver_material=False)
+            return ToolMessage(name="read_evidence", tool_call_id=tool_call_id,
+                               content=canonical(result),
+                               status="success" if result.get("ok") else "error")
+
+        return (StructuredTool.from_function(read_evidence),)
 
     def instructions(self) -> str:
         writer_instructions = self.writer.instructions() + " " + REVISION_MEANING_INSTRUCTIONS
@@ -457,6 +632,9 @@ class FunctionalEditMemory(FunctionalMemory):
         editor map. Direct I2 writing explicitly requests the current target map.
         Full conversation and read receipts remain in their original checkpoints.
         """
+        if (self.evidence_policy == "question_pack_v1" and not for_write
+                and not self.forget_requested):
+            return self.evidence_material(config, fresh_observations=fresh_observations)
         if self.memory_view_mode == "legacy":
             bound = self._binding(config)
             if for_write:
@@ -548,6 +726,17 @@ class FunctionalEditMemory(FunctionalMemory):
         self._binding(config)
         projected: list[BaseMessage] = []
         for message in messages:
+            if self.evidence_policy == "question_pack_v1" and isinstance(message, ToolMessage):
+                if message.name == "read_evidence":
+                    receipt = json.loads(str(message.content))
+                    receipt.pop("evidence", None)
+                    receipt.pop("candidates", None)
+                    receipt["material_location"] = "current_evidence_packet"
+                    projected.append(message.model_copy(update={"content": canonical(receipt)}))
+                else:
+                    # Existing explicit history/source tools still deliver their actual bodies.
+                    projected.append(message)
+                continue
             if not isinstance(message, ToolMessage) or message.name not in self.read_tool_names:
                 projected.append(message)
                 continue
@@ -2175,4 +2364,4 @@ class FunctionalEditMemory(FunctionalMemory):
                 and mapping is not None
                 and "oneOf" not in update_schema
             )
-        )
+        ) + self._evidence_tools()

@@ -10,6 +10,7 @@ from typing import Any, Literal
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 
 from milai_lab.memory.edit_units import read_revision_evidence
+from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.memory.retrieval import flat_bm25_rank, merge_candidates
 from milai_lab.memory.service import MemoryService
 from milai_lab.memory.working_set import material_ref, plan_delivery
@@ -41,6 +42,7 @@ def build_evidence_packs(
     records: list[dict[str, Any]], *,
     tokenization: Literal["rawrag_space", "unicode_v1"] = "unicode_v1",
     calendar_context: str | None = None,
+    source_scope: dict[str, Any] | None = None,
 ) -> list[dict[str, Any]]:
     """Split only the captured pool; keep complete exchanges and one preceding exchange.
 
@@ -48,7 +50,11 @@ def build_evidence_packs(
     No later session source, semantic formation or new retrieval enters this pool.
     """
     source_packs = []
-    for material in originals:
+    retrieved_ids = {item["id"] for item in originals}
+    additional = (service.read_source_materials([
+        item for item in source_scope["materials"] if item["id"] not in retrieved_ids
+    ]) if source_scope is not None else [])
+    for material in [*originals, *additional]:
         turns = json.loads(material["text"])
         if not turns:
             continue
@@ -70,6 +76,7 @@ def build_evidence_packs(
                 "context_turn_range": material["turn_range"],
                 "index_text": " ".join(turn["content"] for turn in focused),
                 "pack_kind": "exchange_with_previous_context",
+                "scope_only": material["id"] not in retrieved_ids,
             })
     # Search within the identical original pool. RawRAG's own fixed path is unchanged.
     ranked = flat_bm25_rank(source_packs, question, len(source_packs),
@@ -100,7 +107,16 @@ def build_evidence_packs(
             "index_text": "\n".join(unit["text"] for unit in selected_units),
             "pack_kind": "supported_semantic_units",
         })
-    return merge_candidates([ranked, semantic])
+    packs = merge_candidates([[item for item in ranked if not item["scope_only"]], semantic])
+    packs.extend(item for item in ranked if item["scope_only"])
+    if packs:
+        packs[0]["source_scope"] = {
+            "complete": bool(source_scope and source_scope["complete"]),
+            "basis": source_scope["basis"] if source_scope else "retrieved_pool",
+            "required_ranges": merge_source_ranges([
+                span for item in [*originals, *additional] for span in item["source_ranges"]]),
+        }
+    return packs
 
 
 def open_evidence_packs(
@@ -182,6 +198,39 @@ def pack_candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
             "can_expand_context": bool(item.get("context_source_ranges"))}
 
 
+
+def admit_pack_indices(wanted: list[int], fits: Callable[[list[int]], bool]) -> dict[str, Any]:
+    """Honor model priority and measure the caller's complete input wrapper."""
+    accepted: list[int] = []
+    for index in wanted:
+        if fits([*accepted, index]):
+            accepted.append(index)
+    return {"admitted_indices": accepted,
+            "excluded_indices": [i for i in wanted if i not in accepted]}
+
+
+def pack_coverage(
+    materials: list[dict[str, Any]], opened: list[dict[str, Any]], *,
+    scope: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Compare literal source ranges; never infer that unseen text is irrelevant."""
+    if scope is None:
+        scope = materials[0].get("source_scope", {}) if materials else {}
+    required = scope.get("required_ranges", [])
+    delivered = merge_source_ranges([span for item in opened if item["kind"] == "original_source"
+                                     for span in item["source_ranges"]])
+    missing = [span for span in required if not any(
+        actual["source_ref"] == span["source_ref"]
+        and actual["source_revision"] == span["source_revision"]
+        and actual["start"] <= span["start"] and actual["end"] >= span["end"]
+        for actual in delivered)]
+    return {"scope": scope.get("basis", "retrieved_pool"),
+            "complete": bool(scope.get("complete")) and not missing,
+            "missing_source_ranges": len(missing), "required_source_ranges": len(required),
+            "scope_available": bool(scope.get("complete")),
+            "meaning": "source delivery coverage, not correctness or external-world completeness"}
+
+
 def read_question_pack(
     question: str, date: str, materials: list[dict[str, Any]], *, snapshot_id: str,
     open_materials: Callable[[list[dict[str, Any]], bool], list[dict[str, Any]]],
@@ -189,6 +238,7 @@ def read_question_pack(
     fits: Callable[[list[dict[str, str]]], bool],
     call: Callable[[str, list[dict[str, str]], dict[str, Any] | None], str],
     save: Callable[[dict[str, Any]], None], state: dict[str, Any], max_calls: int,
+    source_scope: dict[str, Any] | None = None,
 ) -> tuple[str, list[dict[str, Any]]]:
     """Select a budgeted pack; reopen more only for a stated evidence gap.
 
@@ -214,7 +264,11 @@ def read_question_pack(
     def evidence_messages(indices: list[int]) -> list[dict[str, str]]:
         projected = [project_pack(item, i)
                      for i, item in zip(indices, opened(indices), strict=True)]
-        return messages_for(projected)
+        messages = messages_for(projected)
+        payload = json.loads(messages[1]["content"])
+        payload["source_coverage"] = pack_coverage(materials, opened(indices), scope=source_scope)
+        messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
+        return messages
 
     visible = open_materials(materials, False)
     directory = [pack_candidate(item, i) for i, item in enumerate(visible)]
@@ -249,6 +303,7 @@ def read_question_pack(
                        evidence_gap=state["gap"], task=state["task"],
                        unopened_candidates=len(materials) - len(state["opened_indices"]),
                        coverage="retrieved_pool_only_not_full_history",
+                       range_coverage=pack_coverage(materials, opened(indices), scope=source_scope),
                        response_schema=response_schema(indices))
         messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
         messages[0]["content"] += (
@@ -268,15 +323,23 @@ def read_question_pack(
         )
         return messages
 
+    answer: str | None
     # A genuinely small complete pool keeps a one-call ordinary answer path.
     all_indices = list(range(len(materials)))
-    if not state["steps"] and fits(evidence_messages(all_indices)):
-        state.update(resident_refs=refs, opened_indices=all_indices, active_stage="answer")
+    lookup_indices = [i for i, item in enumerate(materials) if not item.get("scope_only")]
+    # Only a fully represented scope can bypass task selection: a fitting top-k subset
+    # does not establish that a count/enumeration query has seen the complete range.
+    direct_scope = pack_coverage(materials, opened(lookup_indices), scope=source_scope)
+    if not state["steps"] and direct_scope["complete"] and fits(evidence_messages(lookup_indices)):
+        state.update(resident_refs=[refs[i] for i in lookup_indices],
+                     opened_indices=lookup_indices, active_stage="answer",
+                     range_coverage=direct_scope)
         save(state)
-        answer = call("answer", evidence_messages(all_indices), None)
-        state.update(answer=answer, complete=True, delivery_plan={"body_delivered": True}, steps=1)
+        answer = call("answer", evidence_messages(lookup_indices), None)
+        state.update(answer=answer, complete=True, delivery_plan={"body_delivered": True},
+                     steps=1, coverage_complete=direct_scope["complete"])
         save(state)
-        return answer, visible
+        return answer, opened(lookup_indices)
 
     if state.get("complete") and "answer" in state:
         return state["answer"], opened(state["opened_indices"])
@@ -300,14 +363,18 @@ def read_question_pack(
             )
             payload = json.loads(messages[1]["content"])
             payload.update(evidence_gap=state["gap"], excluded_indices=state["excluded_indices"],
-                           coverage="retrieved_pool_only_not_full_history")
+                           coverage="retrieved_pool_only_not_full_history",
+                           range_coverage=pack_coverage(
+                               materials, opened(indices), scope=source_scope))
             messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
             state["active_stage"] = "answer"
             save(state)
             answer = call("answer", messages, None)
         else:
             page = min(state["candidate_page"], len(catalogs) - 1)
-            candidates = catalogs[page]
+            candidates = [candidate for candidate in catalogs[page]
+                          if state["task"] == "range" or not materials[
+                              candidate["item_index"]].get("scope_only")]
             # Exclude navigation from an evidence-bearing Reader packet when it cannot fit;
             # a further read can revisit that page with a smaller pack.
             messages = packet(indices, candidates)
@@ -322,16 +389,25 @@ def read_question_pack(
             Draft202012Validator(active_schema).validate(response)
             answer = response["answer"]
             state["task"] = response["task"]
+            coverage = pack_coverage(materials, opened(indices), scope=source_scope)
+            state["range_coverage"] = coverage
+            if state["task"] == "range" and not coverage["complete"]:
+                # A catalog nomination or lookup stop cannot certify a whole range.
+                answer = None
+                response["gap"] = "The declared source range has not been fully delivered."
+                response["item_indices"] = all_indices
+                response["expand_context"] = []
             if answer is None:
                 previous = (indices, state["context_indices"], page)
                 state.update(gap=response["gap"], candidate_page=response["candidate_page"],
                              context_indices=response["expand_context"])
                 wanted = response["item_indices"]
-                accepted: list[int] = []
-                for index in wanted:
-                    if fits(packet([*accepted, index], [])):
-                        accepted.append(index)
-                state["excluded_indices"] = [i for i in wanted if i not in accepted]
+                admission = admit_pack_indices(wanted, lambda chosen: fits(packet(chosen, [])))
+                accepted = admission["admitted_indices"]
+                state["excluded_indices"] = admission["excluded_indices"]
+                if state["task"] == "range" and not pack_coverage(
+                        materials, opened(accepted), scope=source_scope)["complete"]:
+                    state["final_only"] = True
                 state["resident_refs"] = [refs[i] for i in accepted]
                 state["opened_indices"] = list(dict.fromkeys([*state["opened_indices"], *accepted]))
                 if ((indices and not response["gap"]) or previous == (
@@ -340,8 +416,9 @@ def read_question_pack(
                     state["final_only"] = True
         state["steps"] += 1
         if answer is not None:
+            coverage = pack_coverage(materials, opened(indices), scope=source_scope)
             state.update(answer=answer, complete=True, delivery_plan={"body_delivered": True},
-                         coverage_complete=False)
+                         range_coverage=coverage, coverage_complete=coverage["complete"])
             save(state)
             return answer, opened(state["opened_indices"])
         save(state)
