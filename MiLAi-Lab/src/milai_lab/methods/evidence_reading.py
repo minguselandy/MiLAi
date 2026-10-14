@@ -146,9 +146,13 @@ def open_evidence_packs(
                 result.append({"kind": "semantic_view", "record_id": item["record_id"],
                                "visibility": actual["status"], "body_delivered": False})
                 continue
-            current = service.read(item["record_id"]) if refresh_current else actual
-            item["version_view"] = "current_at_snapshot"
-            item["dependency_status"] = "current" if refresh_current else "frozen_snapshot"
+            historical = item.get("version_view") == "historical_exact_revision"
+            current = (service.read(item["record_id"])
+                       if refresh_current and not historical else actual)
+            item["version_view"] = ("historical_exact_revision" if historical
+                                    else "current_at_snapshot")
+            item["dependency_status"] = ("frozen_historical" if historical else
+                                         "current" if refresh_current else "frozen_snapshot")
             if not current["ok"]:
                 item["version_view"] = "historical_exact_revision"
                 item["dependency_status"] = "current_unavailable"

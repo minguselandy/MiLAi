@@ -248,24 +248,42 @@ class FunctionalEditMemory(FunctionalMemory):
                 "whose earlier captured exchanges are needed for subjects/conditions/negation. "
                 "If a needed subject/topic is outside the lookup candidates, task=range also "
                 "opens the captured source scope; this does not change the user's question. "
-                "All reads share the current request allowance. Use existing history tools for "
-                "missing saved versions and actual application tools for live business state."
+                "All reads share the current request allowance. A semantic candidate's "
+                "history_read opens actual stored versions; original user statements cannot "
+                "prove what was saved in an earlier revision. Use actual application tools "
+                "for live business state."
             ),
         }
         candidates = directory if directory is not None else [
-            pack_candidate(open_evidence_packs(
-                self.service, [item], refresh_current=True)[0], index)
+            {**pack_candidate(open_evidence_packs(
+                self.service, [item], refresh_current=True)[0], index),
+             **({"type": "record_candidate", "record_id": item["record_id"],
+                 "revision": item["revision"]} if item["kind"] == "semantic_view" else {})}
             for index, item in enumerate(materials)
             if state["task"] == "range" or not item.get("scope_only")]
+        mapping = request_target_mapping(self.service, state["binding"])
+
+        def navigation(packet: dict[str, Any]) -> dict[str, Any]:
+            projected, _ = project_request_targets(
+                mapping, {**packet, "forget_epoch": self.forget_epoch})
+            for candidate in projected["candidates"]:
+                if candidate.get("type") == "record_candidate":
+                    candidate["history_read"] = {"tool": "read_memory_history",
+                                                 "arguments": {"target": candidate["target"]}}
+            return projected
+
         pages = plan_delivery(candidates, lambda rows: self.token_count(canonical({
-            **base, "candidates": rows, "candidate_page": state["candidate_page"],
+            **navigation({**base, "candidates": rows}),
+            "candidate_page": state["candidate_page"],
             "candidate_page_count": len(candidates),
         })) <= self.material_limit)["pages"]
         page = state["candidate_page"]
+        packet = navigation({**base, "candidates": pages[page] if page < len(pages) else [],
+                             "candidate_page": page, "candidate_page_count": len(pages)})
         if note_delivery:
+            packet = self._bind_request_targets(state["binding"], packet)
             self._note_evidence_exposure(state, selected)
-        return {**base, "candidates": pages[page] if page < len(pages) else [],
-                "candidate_page": page, "candidate_page_count": len(pages)}
+        return packet
 
     def _note_evidence_exposure(
         self, state: dict[str, Any], selected: list[dict[str, Any]],

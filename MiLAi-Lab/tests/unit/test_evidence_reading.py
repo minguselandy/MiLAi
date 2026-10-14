@@ -381,6 +381,12 @@ def test_state_views_refresh_only_explicit_changed_dependencies_and_freeze_repla
 
             frozen.setattr(service, "read", old_only)
             original = open_evidence_packs(service, packs)
+            historical = open_evidence_packs(service, [
+                {**packs[1], "version_view": "historical_exact_revision"},
+            ], refresh_current=True)[0]
+            assert historical["version_view"] == "historical_exact_revision"
+            assert historical["dependency_status"] == "frozen_historical"
+            assert historical["revision"] == 1
         assert "B uses blue." in str(project_pack(original[1], 1))
         assert "cyan" not in str(project_pack(original[1], 1))
 
@@ -395,6 +401,33 @@ def test_state_views_refresh_only_explicit_changed_dependencies_and_freeze_repla
         assert updated["revision"] == 3
         assert "After supervisor confirmation." in str(project_pack(updated, 0))
         assert service.read(saved["id"], 1)["ok"]
+
+        service.capture_user("history", "ask", "Read the first saved A and B colors.")
+        host = FunctionalEditMemory(
+            service, len, interface_version="I2", evidence_policy="question_pack_v1",
+            source_access="independent_v1", memory_view_mode="state_driven",
+            read_interface="explicit_selectors_v1", material_limit=30000)
+        host.context("history", "ask", "history-navigation-v1")
+        config = {"configurable": {"user_id": "alice", "v13_session": "history",
+                                    "v13_turn_id": "ask",
+                                    "v13_config_version": "history-navigation-v1"}}
+        material = host.model_material(config)
+        candidate = next(row for row in material["candidates"]
+                         if row["kind"] == "semantic_view")
+        target = candidate["history_read"]["arguments"]["target"]
+        assert candidate["history_read"]["tool"] == "read_memory_history"
+        navigation = host.resolve_request_target(config, target)
+        assert navigation["kind"] == "read_only_navigation"
+        assert navigation["credentials"] == {}
+        tool = next(t for t in host.tools() if t.name == "read_memory_revision")
+        result = tool.invoke({"type": "tool_call", "name": tool.name, "id": "history-read",
+                              "args": {"target": target, "revision": 1}}, config=config)
+        packet = json.loads(result.content)
+        assert packet["ok"]
+        assert "B uses blue." in result.content
+        assert "B uses cyan." not in result.content
+        assert "historical_exact_revision" in result.content
+        assert host.project_model_messages(config, [result])[0].content == result.content
 
 
 def test_answer_only_context_keeps_actual_history_and_effects_not_navigation() -> None:
