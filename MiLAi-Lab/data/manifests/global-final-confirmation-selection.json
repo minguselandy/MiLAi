@@ -1,0 +1,18 @@
+{
+  "status": "WAITING_FOR_FINAL_CANDIDATE_FREEZE",
+  "selection_metadata_only": true,
+  "source_split": "data/manifests/milai-edit-source-split-v1.json",
+  "users": [
+    "ed9b924b-6bc0-67f9-67a1-a36401dd1782",
+    "2f4b4206-20bc-19a5-a5ed-4d110f91f4db"
+  ],
+  "user_rule": "First two reserved UUIDs in the existing pre-exposure split; keep the entire users isolated from development.",
+  "history_scope": "Complete original histories, chronological arrival; no prefix cap.",
+  "question_rule": "After method/config freeze, for each user use the last QA-bearing session at or before one third, two thirds, and the full history. Choose the first two non-boundary questions by existing type metadata, boundary only if fewer than two exist. Retain all original questions/answers; selected QA never enters Writer input.",
+  "arms": "Strong source S0 and one final selected candidate; exact configs pending development conclusions.",
+  "settings_rule": "One frozen implementation and same main Reader/model/context/output/call allowance in both arms; report all formation/index/read/score costs.",
+  "label_policy": "First official labels only; invalid, known missing and not run separate. No tuning, best-of repetition, or label replacement from holdout outcomes.",
+  "scope_of_claim": "Two independent user histories, exploratory confirmation; QA count is not independent user count.",
+  "semantic_content_accessed": false,
+  "model_calls": 0
+}
