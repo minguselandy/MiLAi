@@ -8,7 +8,7 @@ existing continuous ledger/owner lock; preserve global unknown floor gen9/emb1.
 LIVE ACTUAL JOB: exec77796 = artifacts/global-development/run_long_history_resumed_v1.py;
 parent457624, currentcandidatepredict PID457631 (verify actualstatus before further dispatch).
 Output long-history-resumed-v1/candidate; frozen source-dense-scan-fix-v1/MiLAi-Lab=51182ead.
-It runs candidate predict then FIRSTscore. Dataset/config/questionselection unchanged from long-history-v1,
+It runs candidate predict then FIRSTscore. Lastverified19sessioncheckpoints/4QA; maintenance18completed+1incomplete atU1session15 (knowneditlength,responseexists), no retry. Dataset/config/questionselection unchanged from long-history-v1,
 2exposedusers x32sessions, checkpoints8/18/32 and8/20/32,2nonboundaryquestions each. Noheldoutsemanticaccess.
 Edit/finalReader thinkingtrue, selectfalse,8192output65536window. Do NOT hotedit/rescore/restartlivejob.
 
