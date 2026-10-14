@@ -1,3 +1,24 @@
+# Current handoff: global readpack pilot closed, 2026-10-14
+
+Current worktree global-development-20261014, runtime 8fe9968d. A completed first slice;
+B readpack MVP in methods/evidence_reading.py and Benchmark ordinary/replay paths.
+No SHA checks or new audit platform. Full original global plan active/incomplete.
+All current pilot predict/score processes exited and terminal resources_settled=true:
+readpack-v1 2 official Correct, BUT paged answer was directory-only/no delivered body;
+original failure preserved. Fixed v2 re-ran ONLY paged at new root: 7/82 actual packs,
+2 calls/26399 tokens, first Judge {} => invalid retained, no rescore.
+Control fixed-target S0: direct Correct, paged missing after11calls/93917tokens;
+historical native S0 same paged was Correct4calls/79701, not same target conditions.
+No accuracy claim. Root actual-source audit notes mild career-attribution overstatement.
+Total new generation20/149457known, embedding0/newunknown0; floor gen9/emb1 retained.
+Use docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md and global-readpack-pilot-v1-summary.json.
+Frozen code/results stay unchanged; no current model queue. Poll actual handles before any new HTTP.
+Next: explicit range/count coverage (current task flag/partial coverage insufficient),
+actual missing-context read, shared Functional Host entry, then finite broader paired
+reads and C/D true-before updates. Host does NOT yet call new pack core; no false E claim.
+C/D/long2-4histories/final holdout/full save-correct-history-exception-forget story remain.
+No publication/merge performed in this goal. Preserve original main's untracked plans.
+
 # Current task: global development plan, 2026-10-14
 
 Execute docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md from the evidence-development
