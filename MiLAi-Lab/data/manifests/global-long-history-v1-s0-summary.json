@@ -309,5 +309,6 @@
     "content": "{}",
     "reason": "required official label absent",
     "rescored": false
-  }
+  },
+  "candidate_continuation_root": "artifacts/global-development/long-history-resumed-v1/candidate"
 }

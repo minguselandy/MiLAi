@@ -28,7 +28,7 @@ Archive  → MiLAi-Artifact-Archive/README.md
 
 ## 当前 Lab 开发
 
-开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`，当前代码 `dc360cff`，维护源绑定 `be7c5e6f`。
+开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`，当前代码 `51182ead`，维护源绑定 `be7c5e6f`。
 执行[全局开发规划](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。
 [开发记录与运行方式](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md)包含实际查询结果和成本。
 
@@ -39,7 +39,8 @@ B 固定8题首次评分为控制3/8、证据包5/8，预测tokens下降68.8%；
 C 源绑定修复已通过12事件、同前态recipe与两条自然更新的有限检查；完整Host故事首轮在16/17条闭合，未通过历史读取与遗忘验收。
 目录/正文容量修复后，实际副本中遗忘成功且7个通知历史版本保留；更正截断、Reader规则混淆仍未解决。
 `6c0de441`接通证据包历史导航；D四题比较不支持整条视图的质量/成本优势。
-两段长期前缀比较已串行启动；后续选择最终候选并进行保留用户确认。
+两段长期前缀的原文基线已闭合7/12正确，候选因无用历史扫描得到性能修复后正从实际检查点继续。
+保存确认可直接交付确定回执，完整Host回归370项通过；完整正常链v3与保留用户确认仍待完成。
 完整计划仍在执行；训练与 Product 适配按规划中的实际收益条件推进。
 
 - [代码结构与项目地图](MiLAi-Lab/docs/PROJECT_MAP.md)

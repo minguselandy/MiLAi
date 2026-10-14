@@ -1,73 +1,76 @@
-# Current handoff: Host/D diagnostics closed; two-history full comparison RUNNING
+# Current handoff: CPU bottleneck fixed; long candidate resumed from actual checkpoint
 
-Full GLOBAL plan ACTIVE/incomplete. No SHA/content fingerprints, new review platform, publication,
-Product/Archive edits, or subagents. Local method headdc360cff; original user plan files untouched.
-Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python. Root owns serial real-model HTTP and
-existing continuous budget.json/owner lock. Never reset unknown floor(gen9/emb1) or restart a live job.
+Full GLOBAL plan ACTIVE/incomplete. No SHA/checksum validation, new review platform, publication,
+Product/Archive edits or subagents. Method head51182ead (Host shortcut84b019a5, navigationdc360cff).
+Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python. Root only serial real-model HTTP with
+existing continuous ledger/owner lock; preserve global unknown floor gen9/emb1.
 
-CURRENT ACTUAL JOB: exec42506 = artifacts/global-development/run_long_history_v1.py.
-Four serial steps: S0predict/firstscore, candidatepredict/firstscore. S0 CLOSED both phases rc0;
-current actual PID210418 is candidatepredict, parent28805. S0predict PID28810 andscore200966 gone;
-inspect artifacts/global-development/long-history-v1/process.json, actualprocess and terminal before
-scheduling any other model work. Frozen source-story-repair-v1/MiLAi-Lab =4c988f10, not latest6c.
-Two exposedusers2f1.../5c005..., first32chronological sessions,2Q at8/18/32 and8/20/32. Metadata rule and
-nonboundary amendment fixed before any outcomes. Beforelong selector thinkingFalse (known length
-operability only); edit/finalReader true,8192output65536window. Bothconfigs/inputs already prepared;
-DO NOT hotedit. Driver stops nonzero, no unknown retry. SourceS0 has no maintenance; candidate S2+pack+C. S0 closed64sessions/12questions:11answers+1knownlengthmissing,
-firstlabels7C3H1invalid1missing (Judge000005 stop+empty{}, no rescore).76predictcalls3034404tokens,11Judge34156;emb0/newunknown0.
-Predictwall2736.963s,score148.415s (wholephase, not percall). global-long-history-v1-s0-summary.json.
-Prepared source configs/selection are in long-history-v1/protocol.json and initial-protocol.json.
+LIVE ACTUAL JOB: exec77796 = artifacts/global-development/run_long_history_resumed_v1.py;
+parent457624, currentcandidatepredict PID457631 (verify actualstatus before further dispatch).
+Output long-history-resumed-v1/candidate; frozen source-dense-scan-fix-v1/MiLAi-Lab=51182ead.
+It runs candidate predict then FIRSTscore. Dataset/config/questionselection unchanged from long-history-v1,
+2exposedusers x32sessions, checkpoints8/18/32 and8/20/32,2nonboundaryquestions each. Noheldoutsemanticaccess.
+Edit/finalReader thinkingtrue, selectfalse,8192output65536window. Do NOT hotedit/rescore/restartlivejob.
 
-A firstslice complete. B8closed3C4H1invalid control vs5C2H1missing pack;33calls712686 vs13calls222603.
-Judge disagreement preserved. Selectorpilot2 netqualityzero repairedmissing+oldC->H; not qualityclaim.
-C core-v3 actual12updates/9versions positive scoped;12edit90748+19emb1180. Samebefore recipe single3calls
-24671 succeeds changes+keep, extract9calls52484 wrongtime rejection/unwantedkeeprewrite. Naturaltravel/
-clothing4gen36151+6emb2804 inclseed, target1each/non-target4&3plusotherrecord unchanged/history exact.
+Original exec42506 CLOSED241, parent28805/candidate210418 confirmedgone. S0 CLOSED rc0 bothphases:
+64sessions,11answers+1knownlengthmissing; firstlabels7C3H1invalid1missing (Judge000005 stop+{}).
+76predict3034404tokens,11Judge34156,emb0/newunknown0; phasewall2736.963/148.415s.
+Originalcandidate interrupted09:11:09UTC at confirmedread-only backlinkscan: SIGSTOP, py-spystack,
+all39HTTP requests hadresponses, thenTERM/CONT; no unconfirmedmodelcall.12sessions/2QA retained.
+199/199 10-secondCPU samples in backlink_candidates->_rows,198 inSQLitebatchsearch. Dense ranking did
+not use this lexical text!51182ead skips only include_rawFalse+densecurrent-only path; preserves raw,
+lexical and retracted-record notice matching.17relatedtests/types/Ruff pass. Actualbank bounded4Source
+probe: old2backlinkcalls/3scans5.1206s, new0/1scan1.6521s; exactdenseinputs/fullreturnequal.0HTTP/writes.
+No newindex/cache/schema. Profilingtool py-spy usedthroughuv temporarytoolenv, not project/modelinstall.
 
-Normal original global-story-v1 CLOSED16/17,14Hostcompleted2failed. Event6 semantic cancellationcommitted,
-original+one recoverynull; no retry. Event9edittruncated BstillWang. Historyanswer fromSource not actual
-revision. Forgetwrapper failed beforeeffect; lastreopen NOT_RUN.66gen691404+72emb3625,newunknown0.
-4c988f10 fixes full resident/catalog budget14938->7940under8192 on actualcopy,13bodies retained andcursor.
-Also compact answer-only recovery, separate pairedtool messages preserved for programreceipt rendering.
-43related+6recoveryforgetchecks,types/Ruff/boundaries passed. Snapshotdefaults unchanged.
+Continuation is a COPY of actual bank/checkpoints/generationcaches, no idealbefore or newindependenttrial.
+Oldroot untouched. Copiedgenresponses reused, NOT calledagain. Oldhttp/embedding notcopied to avoid
+artifactserialcollision: in-processvectorcache rebuilds throughnewnormalrequests numberedfrom1; old
+embeddingreceipts remainoriginalroot andcontinuousledger. COST: copied+newgen once, old+newembedding,
+originalcandidateaccounting-start tofinalledger, plus bothphasewalltimes. No free restart. See protocol.json
+and oldlong-history-v1/interruption.json/budget-at-interruption.json. Mixedruntime latency explicitlynot
+uniform; final whole-user confirmation mustuseonefrozenruntime. Oldcandidate never had a Judge.
 
-story-repair-v1 setupnewconfigidentity rejected beforeHTTP;0calls, preserved. v2 copies actualoriginalbank
-includingcounters, retains unchangedconfigurationidentity, new6messageIDs. CLOSED6Hostcompleted,
-but newBedit again8192length, notcommitted. History3badsource selectors thennull;1compact recoveryhonestly
-reportsmissing. Forget5bindingrejects thenactual1record_and_sources visibility-only:15sources incl13derived.
-Afterclose copiedbankaudit: financecurrent/history/supporthidden; notifierexactr7unchanged,all7versionsread.
-Reopenmodeloverstates read_rejected as proof; SDK auditseparate.32gen415901+22emb1527,newunknown0.
+NEXT NORMAL CHAIN: global-story-v3 PREDECLARED_NOT_RUN, runtime51182ead, sameoriginal17fixture,
+fresh emptybank, editthinkingFalse, Host/finalReader unchangedtrue/8192/65536/read/callbudgets.
+V2 was superseded BEFORE anyCLIprepare/modelrun (0calls); itsprotocol remains. Use source-dense-scan-fix-v1
+normalCLI prepare withconfigs/milai-global-story-v3.json AFTER currentqueue closes, then
+artifacts/global-development/run_global_story_v3.py. No modelHTTP concurrentwithlongrun.
+84b019a5 skipsredundantHostgeneration only forsharedrecipe+question_pack+explicitmemory_status_only
+withconfirmedcommitted/no_change receipt, nobusiness/forget/requestfailures/progress. SameWriterstillruns,
+programreceipt checkpoint markedmilai_origin, candidate_answerNone; exactreopen/lostresult no newcalls.
+Empty/knownlength fall through; unknownproviderresponse retainsstop. Substantive/legacy unchanged.
+12directchecks+27readingtests/types/Ruff/boundaries pass; FULL370Hostintegration passed288.04s,
+existingdeprecationsonly (log functional-status-shortcut-tests.log, exec43411 CLOSED). Packcandidate
+recordUUIDhidden afterbinding; actualread/historytargets stillresolve. Longfrozen4c prefixneverhotedited.
 
-6c0de441 adds actual record navigation targets/history_read to packcandidates, budgeted and read-only.
-Explicit historicalpacks retain revision whenrefresh_current=True.13relatedtests/types/Ruff/boundaries pass. FullFunctionalHost362tests PASSED276.79s, existingdeprecationwarnings only; exec50666 closed.
-history-navigation-v1 actualunchangedhistoryquestion CLOSED:3successfulreadtools(current/history/exact),
-4thread denied byallowance, initialnull+1readonlyrecovery.5gen93135+3emb215. Correctr1names but WRONG
-conflation of revokedDu exception withgeneralZhaorule; Bcorrectionstilluncommitted. NOT semanticacceptance.
-Do not rerun same history promptagain seeking success.
+Closed earlierwork: A20samebankqueries; B8 control3C4H1invalid vs pack5C2H1missing,33calls712686 vs13calls
+222603, Judgeconflictsretained. Selectorpilot2 netqualityzero (repairedmissing,oldC->H). C core-v3 actual12
+updates/9versions,12edit90748+19emb1180; positive scoped butpre-effective oldA requiresSource/history.
+Samebefore recipe single3calls24671 successes vs extract9calls52484 time-source rejection+keepdamage.
+Naturaltravel/clothing4gen36151+6emb2804 inclactualseed:target1each,nontarget4&3+otherrecord/historypreserved.
 
-D state-view-v1 CLOSED12calls61857,0emb/newunknown/Judge. Fourpredeclaredcases xoriginal/currentwithsupport/
-viewonlydiagnostic usingactualC3r8+r1, notidealseed. Original4calls18432; supported4calls23120(+25.4%),bare4
-calls20305. Before/after sourcesand supportedanswercorrect; supportedcurrentdeps omit revokedexception
-history andcannotexplaincancellation. Originalhistorynamesrightbutclaimactualsavewithoutstoredversion;
-supportedhistoryactualr1/r8rightbutmislabelsoriginalUserstatementaslatercorrection. Fullrootreview inmanifest.
-No whole-view quality/costadvantage; limit tooptionalcurrent/exacthistory, openoriginalsforwithdrawal/history,
-no summaryhierarchy. SharedC3formation90748+1180listedseparately, notzero; directcalllatencyunobserved.
+Originalnormalglobal-story-v1 CLOSED16/17,14Hostcomplete2failed, Bcorrectionedittruncated, historynotread,
+forgetwrapperfailed beforeeffect, lastreopen NOT_RUN.66gen691404+72emb3625. Source4c repairs resident+
+catalog budget14938->7940under8192;13actualbodieskept,cursorretained. story-repair-v1 setupfailed0HTTP;
+v2 CLOSED6Hostcomplete butBedittruncatedagain; history3badreads+null thenhonestcompactrecovery. Forget5
+bindingrejects then1actualvisibility-only commit1record/15Sources. Copiedbankaudit:financecurrent/history/
+supporthidden, notifierexactr7unchanged/all7versionsreadable.32gen415901+22emb1527,newunknown0.
+History-navigation-v1 CLOSEDactualhistoryread3success+4thdenied, firstnull+1readonlyrecovery;5gen93135+
+3emb215. Correctr1names butwrongDu-vs-Zhaoruleconflation andBcorrectionstillnotcommitted. NOTacceptance.
+Do not repeatoldprompts forscore; V3 addsnormalcontrolflow/configfix before anynewfullstoryoutcome.
 
-Next normal-chain check PREDECLARED_NOT_RUN: global-story-v2/protocol.json and
-configs/milai-global-story-v2.json. Frozen source-global-story-v2/MiLAi-Lab=dc360cff.
-Fresh emptybank, original17messagefixture unchanged, editthinkingFalse only-stagechange,
-Host/finalReader thinkingtrue andsame8192/65536/read/callbudgets. Not a purefactorqualitycomparison.
-Use normal CLI prepare AFTER current longqueue releases model/ledger (avoid budget-before contamination),
-then artifacts/global-development/run_global_story_v2.py (range0..16,one readonly recovery forknownnull).
-No fakebefore/resetoldadmission; originalfailedruns retained. This fullnormalchain remains required.
-dc360cff also gives everypackcandidate executable evidence_read descriptor (12directchecks/Ruff/mypy pass),
-so model neednot invent Source IDs in target-based legacyreadtools. 362fullchecks wereat6c, notrerunfor1field.
-Do not change writer prompts around the oldstory: newtest changesgenerationmode undernewboundcontracts.
+D state-view-v1 CLOSED4casesx3arms,12gen61857,0emb/Judge/newunknown. Original4calls18432,supported4
+calls23120(+25.4%),bare4calls20305. Before/after source+supported correct; supportedcurrentdepslack
+withdrawalhistory. Originalhistorynamesrightbutfalseactualsavedproof; supportedactualr1/r8rightbut
+misattributesoriginalstatement. Keep optionalcurrent/exacthistory, openoriginalsforwithdrawalexplanation;
+no summaryhierarchy. SharedC3formation90748+1180 separate; directcalllatency unobserved.
 
-Remaining FULLgoal: finish runninglongcomparison and costs/source review, choose/freeze finalcandidate,
-then whole-user holdoutconfirmation (no holdoutaccess yet), conditionalProduct/F decision and finalplan audit.
-Fullnormalstory NOT accepted because Bcorrection/Readerfailures remain; reportprecisely, don'trepeatprompts.
-Use docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md and global-*-summary.json. Olderblocksbelow arehistory.
+Productpubliccontract read-onlyinspected: memory-evidence-context-v1 distinguishes EVIDENCE/
+EVIDENCE_CONTEXT/CANONICAL_STATE. Labstate cannotbe relabeledProductCanonical; no Productchanges/imports.
+RemainingFULLgoal: longcomparisons+pairedsource review+allcosts; fullnormal V3; freezechosen candidate,
+whole-userholdout confirmation; conditionalProduct/F decision; requirementscompletionaudit.
+Use docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md andglobal-*-summary.json. Historicalblocksbelow.
 
 # Current handoff: range/Host wired, C actual diagnostics fail acceptance, 2026-10-14
 
