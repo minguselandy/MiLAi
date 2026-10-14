@@ -235,6 +235,12 @@ def read_question_pack(
                          "candidate_page"],
     }
 
+    def response_schema(indices: list[int]) -> dict[str, Any]:
+        selected_schema = copy.deepcopy(schema)
+        if not indices:
+            selected_schema["properties"]["answer"] = {"type": "null"}
+        return selected_schema
+
     def packet(indices: list[int], candidates: list[dict[str, Any]]) -> list[dict[str, str]]:
         messages = evidence_messages(indices)
         payload = json.loads(messages[1]["content"])
@@ -243,7 +249,7 @@ def read_question_pack(
                        evidence_gap=state["gap"], task=state["task"],
                        unopened_candidates=len(materials) - len(state["opened_indices"]),
                        coverage="retrieved_pool_only_not_full_history",
-                       response_schema=schema)
+                       response_schema=response_schema(indices))
         messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
         messages[0]["content"] += (
             "\nReturn JSON following response_schema. Candidate excerpts are only navigation; "
@@ -310,8 +316,9 @@ def read_question_pack(
             stage = f"view/pack-{state['steps']}"
             state["active_stage"] = stage
             save(state)
-            response = parse_object(call(stage, messages, schema), reject_duplicate_keys=True)
-            Draft202012Validator(schema).validate(response)
+            active_schema = response_schema(indices)
+            response = parse_object(call(stage, messages, active_schema), reject_duplicate_keys=True)
+            Draft202012Validator(active_schema).validate(response)
             answer = response["answer"]
             state["task"] = response["task"]
             if answer is None:
@@ -326,7 +333,7 @@ def read_question_pack(
                 state["excluded_indices"] = [i for i in wanted if i not in accepted]
                 state["resident_refs"] = [refs[i] for i in accepted]
                 state["opened_indices"] = list(dict.fromkeys([*state["opened_indices"], *accepted]))
-                if (not response["gap"] or previous == (
+                if ((indices and not response["gap"]) or previous == (
                         accepted, state["context_indices"], state["candidate_page"])):
                     # No new evidence or explicit gap: use the remaining final-answer slot.
                     state["final_only"] = True

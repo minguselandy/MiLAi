@@ -111,6 +111,9 @@ def test_lookup_selects_short_pack_and_stops_with_unread_candidates(tmp_path: Pa
             assert payload["question"] == "TOPIC_0 only, retain any limits."
             if len(attempts) == 1:
                 assert payload["memories"] == [] and payload["candidates"]
+                assert payload["response_schema"]["properties"]["answer"] == {"type": "null"}
+                assert kwargs["response_format"]["json_schema"]["schema"]["properties"][
+                    "answer"] == {"type": "null"}
                 return selection([0], gap="Need the original statement and its reply.")
             assert len(payload["memories"]) == 1
             assert payload["unopened_candidates"] == 3
