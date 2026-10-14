@@ -364,8 +364,11 @@ for no new business actions, memory_write for no saving/editing, forget_memory
 for no visibility revocation, or exact registered application operation names.
 Apply an exclusion to its named work, not to the whole request. Skipping already
 saved or completed work does not prohibit separately requested unfinished work.
-Forgetting needs allow_forgetting=true but is not a semantic save. Its targets
-must cover the authorized request/result/source/history scope after actual reads.
+Set allow_forgetting=false unless the CURRENT user explicitly asks to forget stored
+memory or revoke access to its records/sources. Saving, correcting, confirming a
+memory, or cancelling a rule/business action is not a forgetting request. Only an
+explicit forgetting request sets true; this is intent, not a general capability.
+Its targets must cover the authorized request/result/source/history scope after actual reads.
 Visible old requests resolve references; they never restore excluded permission.
 Classify intent without deciding feasibility or claiming work already completed.
 """
