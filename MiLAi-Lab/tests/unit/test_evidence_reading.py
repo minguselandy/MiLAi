@@ -416,6 +416,7 @@ def test_state_views_refresh_only_explicit_changed_dependencies_and_freeze_repla
         material = host.model_material(config)
         candidate = next(row for row in material["candidates"]
                          if row["kind"] == "semantic_view")
+        assert saved["id"] not in json.dumps(candidate)
         target = candidate["history_read"]["arguments"]["target"]
         assert candidate["history_read"]["tool"] == "read_memory_history"
         navigation = host.resolve_request_target(config, target)

@@ -3860,6 +3860,23 @@ def message(
                     # terminal receipt before it can dispatch or generate again.
                     return cast(list[Any], agent.get_state(cfg).values["messages"])
 
+            receipt_status_requested = bool(
+                settings.get("finalization") == "receipt_or_agent_response_v1"
+                and mode and mode.get("response_scope") == "memory_status_only"
+                and mode["business_action_request"] == "none" and not mode["allow_forgetting"]
+            )
+
+            def confirmed_memory_status(effects: dict[str, Any]) -> bool:
+                return bool(receipt_status_requested
+                    and effects["semantic_memory"]["status"] in {"committed", "no_change"}
+                    and effects["semantic_memory"]["operations"]
+                    and not any((effects["business"]["operations"],
+                                 effects["business"]["observations"],
+                                 effects["visibility"]["operations"],
+                                 effects.get("application_requests"),
+                                 effects.get("request_part_failures"),
+                                 output.get("execution_stop"))))
+
             snapshot = agent.get_state(cfg)
             prior = snapshot.values.get("messages", []) if snapshot.values else []
             if prior:
@@ -3880,6 +3897,27 @@ def message(
             app.recover_pending(agent, scope, call_wrapper)
             snapshot = agent.get_state(cfg)
             prior = snapshot.values.get("messages", []) if snapshot.values else []
+            if (not prior and receipt_status_requested and maintenance_recipe
+                    and isinstance(memory, FunctionalEditMemory)
+                    and settings.get("evidence_policy") == "question_pack_v1"
+                    and not request_progress and not output.get("request_part_failures")):
+                # The shared Writer owns this explicit memory-only request.
+                # A confirmed status receipt needs no subsequent Host generation.
+                memory.context(session, message_id, freeze["config_version"], query=content)
+                output["maintenance"] = maintain_current(True)
+                actual = operation_status({**output, "world": app.snapshot()},
+                    thread_id=cfg["configurable"]["thread_id"], execution_started=True)
+                if confirmed_memory_status(actual):
+                    receipt = AIMessage(content=memory_receipt_summary(actual),
+                        id=identity + ":memory-status-receipt",
+                        response_metadata={"milai_origin": "program_receipt"})
+                    agent.update_state(cfg, {"messages": [
+                        HumanMessage(content=content, id=message_id), receipt,
+                    ]}, as_node="agent")
+                    trace({"event": "functional_memory_status_shortcut",
+                           "host_generation": False, "semantic_effects": "confirmed_receipts"})
+                    snapshot = agent.get_state(cfg)
+                    prior = snapshot.values["messages"]
             recovery_path = bank_root / f"{identity}-answer-recovery.json"
             previous_result = read_json(result_path) if result_path.exists() else {}
             invalid_provider_content = (
@@ -4092,24 +4130,13 @@ def message(
                     for_finalization=True)
                 response_input = response_context["llm_input_messages"]
                 receipt_input = response_context.get("receipt_messages", response_input)
-                receipt_status_only = (
-                    settings.get("finalization") == "receipt_or_agent_response_v1"
-                    and mode and mode.get("response_scope") == "memory_status_only"
-                    and mode["business_action_request"] == "none" and not mode["allow_forgetting"]
-                    and effects["semantic_memory"]["status"] in {"committed", "no_change"}
-                    and effects["semantic_memory"]["operations"]
-                    and not any((effects["business"]["operations"],
-                                 effects["business"]["observations"],
-                                 effects["visibility"]["operations"],
-                                 effects.get("application_requests"),
-                                 effects.get("request_part_failures"),
-                                 output.get("execution_stop")))
-                )
-                if receipt_status_only:
+                if confirmed_memory_status(effects):
                     # The undelivered model draft remains in execution_candidate_answer.
                     # Render only confirmed listed effects, not content fidelity or
                     # complete semantic coverage, without a corrective model call.
-                    final = AIMessage(content=memory_receipt_summary(effects))
+                    final = (messages[-1]
+                        if messages[-1].response_metadata.get("milai_origin") == "program_receipt"
+                        else AIMessage(content=memory_receipt_summary(effects)))
                     output["finalization"] = {
                         "status": "response_rendered", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": False,
@@ -4209,7 +4236,9 @@ def message(
                         - len(format_failures(messages)) - mode_reproposals - completion_used
                         - answer_repairs - continuation_used, trace=trace,
                         enable_thinking=settings.get("stage_enable_thinking", {}).get("reader"))
-                output["execution_candidate_answer"] = messages[-1].content
+                output["execution_candidate_answer"] = (
+                    None if messages[-1].response_metadata.get("milai_origin") == "program_receipt"
+                    else messages[-1].content)
                 # Do not alter the completed execution checkpoint. The response has
                 # its own durable receipt, so restart cannot repeat business work.
                 if final is not messages[-1]:

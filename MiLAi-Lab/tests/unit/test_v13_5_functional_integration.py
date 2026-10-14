@@ -5825,13 +5825,16 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
 
 
 @pytest.mark.parametrize("response_scope", [None, "memory_status_only", "substantive"])
+@pytest.mark.parametrize("evidence_policy", ["legacy", "question_pack_v1"])
 def test_current_save_reports_receipts_without_replacing_substantive_answers(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, response_scope: str | None,
+    evidence_policy: str,
 ) -> None:
     root = prepared(tmp_path, native=True, scope_requests=True,
                     request_failure_policy="independent_memory", direct_response=True,
                     phase_thinking=True, memory_method="milai_edit_m_v1",
                     edit_interface_version="I2", maintenance_recipe="single_pass",
+                    evidence_policy=evidence_policy,
                     memory_view_mode="staged", memory_profile="unified_v1",
                     edit_features={name: True for name in (
                         "matter_organization", "semantic_operations", "bound_references",
@@ -5878,12 +5881,15 @@ def test_current_save_reports_receipts_without_replacing_substantive_answers(
     result = functional.message(root, **args)
     assert result["status"] == "COMPLETED", result.get("error")
     assert len(result["records"]) == 1 and result["world"]["world"]["attempts"] == []
-    assert stages == ["scope", "save", "answer"]
+    shortcut = evidence_policy == "question_pack_v1" and response_scope == "memory_status_only"
+    assert stages == (["scope", "save"] if shortcut else ["scope", "save", "answer"])
     if response_scope is None:
         assert result["request_mode"]["reference_resolution"]["attempts"] == 0
         assert result["request_mode"]["prior_request_ids"] == []
         assert "response_scope" not in result["request_mode"]
-    assert result["execution_candidate_answer"] == draft
+    assert result["execution_candidate_answer"] == (None if shortcut else draft)
+    if shortcut:
+        assert result["messages"][-1]["response_metadata"]["milai_origin"] == "program_receipt"
     if response_scope == "memory_status_only":
         assert draft not in result["final_answer"]
         assert result["finalization"]["protocol"] == "receipt_business_response_v1"
@@ -5898,15 +5904,27 @@ def test_current_save_reports_receipts_without_replacing_substantive_answers(
     assert again["records"] == result["records"] and len(wires) == calls
     assert again["request_mode"] == result["request_mode"]
     assert again["final_answer"] == result["final_answer"]
-    assert again["execution_candidate_answer"] == draft
+    assert again["execution_candidate_answer"] == (None if shortcut else draft)
+    if shortcut:
+        # A lost result file must recover the existing receipt checkpoint,
+        # without another Writer or Host generation.
+        for path in root.glob("banks/*/*-result.json"):
+            path.unlink()
+        recovered = functional.message(root, **args, resume=True)
+        assert recovered["status"] == "COMPLETED", recovered.get("error")
+        assert recovered["records"] == result["records"] and len(wires) == calls
+        assert recovered["final_answer"] == result["final_answer"]
+        assert recovered["execution_candidate_answer"] is None
 
 
+@pytest.mark.parametrize("evidence_policy", ["legacy", "question_pack_v1"])
 def test_narrow_memory_status_without_receipt_keeps_ordinary_query_answer(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, evidence_policy: str,
 ) -> None:
     root = prepared(tmp_path, native=True, scope_requests=True, direct_response=True,
                     phase_thinking=True, memory_method="milai_edit_m_v1",
                     edit_interface_version="I2", maintenance_recipe="single_pass",
+                    evidence_policy=evidence_policy,
                     memory_view_mode="staged", memory_profile="unified_v1",
                     edit_features={name: True for name in (
                         "matter_organization", "semantic_operations", "bound_references",
@@ -5930,6 +5948,97 @@ def test_narrow_memory_status_without_receipt_keeps_ordinary_query_answer(
     assert result["final_answer"] == "I have no save receipt for that request."
     assert result["finalization"]["protocol"] == "agent_response_v1"
     assert len(wires) == 2
+
+
+@pytest.mark.parametrize("outcome", ["empty", "known_length", "unknown_transport"])
+def test_memory_status_shortcut_requires_a_confirmed_maintenance_effect(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, outcome: str,
+) -> None:
+    root = prepared(tmp_path, native=True, scope_requests=True, direct_response=True,
+                    phase_thinking=True, memory_method="milai_edit_m_v1",
+                    edit_interface_version="I2", maintenance_recipe="single_pass",
+                    evidence_policy="question_pack_v1", memory_view_mode="staged",
+                    memory_profile="unified_v1", edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata")})
+
+    def reply(wire: dict[str, Any], ordinal: int) -> Any:
+        if ordinal == 1:
+            return native_call("classify_current_request", "scope",
+                memory_requests=["explicit"], allow_forgetting=False,
+                business_action_request="none", application_continuation_request="none",
+                response_scope="memory_status_only")
+        if ordinal == 2:
+            assert not wire.get("tools")
+            if outcome == "unknown_transport":
+                return httpx.ReadTimeout("Unknown edit response")
+            if outcome == "known_length":
+                return {"role": "assistant", "content": "{", "_test_finish_reason": "length"}
+            return {"role": "assistant", "content": '{"creates":[],"records":{}}'}
+        assert ordinal == 3 and wire.get("tools"), "Failed maintenance was repeated or hidden"
+        return {"role": "assistant", "content": "No confirmed saving result is available."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank="status-effects", owner="alice", session="s",
+        message_id="save", content="Remember my marker is green; confirm the saving result.")
+    assert result["status"] == (
+        "PROVIDER_ERROR" if outcome == "unknown_transport" else "COMPLETED"), result.get("error")
+    assert len(wires) == (2 if outcome == "unknown_transport" else 3)
+    assert result["records"] == []
+    assert result.get("execution_candidate_answer") == (
+        None if outcome == "unknown_transport" else "No confirmed saving result is available.")
+    assert result["operation_status"]["semantic_memory"]["status"] != "committed"
+    assert not any(row.get("response_metadata", {}).get("milai_origin") == "program_receipt"
+                   for row in result.get("messages", []))
+    assert result["budget_after"]["generation"]["unknown_usage"] == int(
+        outcome == "unknown_transport")
+
+
+def test_memory_status_shortcut_keeps_exact_no_change_and_version_on_reopen(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, scope_requests=True, direct_response=True,
+                    phase_thinking=True, memory_method="milai_edit_m_v1",
+                    edit_interface_version="I2", maintenance_recipe="single_pass",
+                    evidence_policy="question_pack_v1", memory_view_mode="staged",
+                    memory_profile="unified_v1", edit_features={name: True for name in (
+                        "matter_organization", "semantic_operations", "bound_references",
+                        "single_record_changes", "source_metadata", "proposition_updates")})
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal in {1, 3}:
+            return native_call("classify_current_request", "scope", memory_requests=["explicit"],
+                allow_forgetting=False, business_action_request="none",
+                application_continuation_request="none", response_scope="memory_status_only")
+        assert not wire.get("tools"), "A confirmed memory status invoked the Host"
+        packet = json.loads(wire["messages"][-1]["content"])["delivery"]
+        if ordinal == 4:
+            record = packet["records"][0]
+            return {"role": "assistant", "content": json.dumps({"creates": [], "records": {
+                record["id"]: {"action": "no_change"}}})}
+        assert ordinal == 2
+        evidence = packet["evidence"][0]["id"]
+        return {"role": "assistant", "content": json.dumps({"creates": [{
+            "action": "create", "matter": "Marker", "clauses": [{
+                "text": "User uses a green marker.", "evidence": [evidence], "conditions": [],
+                "assertion": {"source": evidence, "kind": "reported"}}],
+        }], "records": {}})}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    common = dict(bank="status-keep", owner="alice")
+    saved = functional.message(root, **common, session="save", message_id="save",
+                               content="Remember my marker is green.")
+    keep_args = dict(session="keep", message_id="keep",
+                     content="My marker stays green. Confirm it without duplicating it.")
+    kept = functional.message(root, **common, **keep_args)
+    assert saved["status"] == kept["status"] == "COMPLETED", kept.get("error")
+    assert len(wires) == 4
+    assert kept["operation_status"]["semantic_memory"]["status"] == "no_change"
+    assert kept["records"][0]["value"] == saved["records"][0]["value"]
+    assert kept["execution_candidate_answer"] is None
+    replay = functional.message(root, **common, **keep_args, resume=True)
+    assert replay["records"] == kept["records"] and len(wires) == 4
+    assert replay["final_answer"] == kept["final_answer"]
 
 
 def test_shared_maintenance_keeps_early_commit_when_later_source_read_fails(

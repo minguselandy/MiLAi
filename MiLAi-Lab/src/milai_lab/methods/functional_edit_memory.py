@@ -284,6 +284,8 @@ class FunctionalEditMemory(FunctionalMemory):
         if note_delivery:
             packet = self._bind_request_targets(state["binding"], packet)
             self._note_evidence_exposure(state, selected)
+        for candidate in packet["candidates"]:
+            candidate.pop("record_id", None)
         return packet
 
     def _note_evidence_exposure(
