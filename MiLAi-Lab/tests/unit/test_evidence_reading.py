@@ -154,8 +154,9 @@ def selection(indices: list[int], *, answer: str | None = None, gap: str | None 
 
 
 @pytest.mark.parametrize("selection_thinking", [None, False])
+@pytest.mark.parametrize("repeat_target", [False, True])
 def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
-    tmp_path: Path, selection_thinking: bool | None,
+    tmp_path: Path, selection_thinking: bool | None, repeat_target: bool,
 ) -> None:
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
@@ -178,7 +179,9 @@ def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
                 assert payload["response_schema"]["properties"]["answer"] == {"type": "null"}
                 assert kwargs["response_format"]["json_schema"]["schema"]["properties"][
                     "answer"] == {"type": "null"}
-                return selection([0], gap="Need the original statement and its reply.")
+                return selection([0, 0] if repeat_target else [0],
+                    context=[0, 0] if repeat_target else [],
+                    gap="Need the original statement and its reply.")
             assert kwargs["enable_thinking"] is True
             assert len(payload["memories"]) == 1
             assert payload["unopened_candidates"] == 3
@@ -192,7 +195,8 @@ def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
                                                service, items))
         assert answer == "Supported answer." and len(used) == 1 and len(attempts) == 2
         saved = read_json(tmp_path / "http/q/memory-view.json")
-        assert saved["resident_refs"][0]["item_index"] == 0
+        assert [ref["item_index"] for ref in saved["resident_refs"]] == [0]
+        assert saved["context_indices"] == ([0] if repeat_target else [])
         assert saved["delivery_plan"]["body_delivered"]
 
 

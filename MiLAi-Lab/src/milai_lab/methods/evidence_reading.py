@@ -317,6 +317,9 @@ def pack_candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
 
 def admit_pack_indices(wanted: list[int], fits: Callable[[list[int]], bool]) -> dict[str, Any]:
     """Honor model priority and measure the caller's complete input wrapper."""
+    # Repeating a read target does not request another observation or increase
+    # its priority. Keep its first position for both Benchmark and Host callers.
+    wanted = list(dict.fromkeys(wanted))
     accepted: list[int] = []
     for index in wanted:
         if fits([*accepted, index]):
@@ -392,10 +395,10 @@ def read_question_pack(
         "type": "object", "additionalProperties": False,
         "properties": {
             "answer": {"type": ["string", "null"]},
-            "item_indices": {"type": "array", "uniqueItems": True,
+            "item_indices": {"type": "array",
                              "items": {"type": "integer", "enum": list(range(len(materials)))}}
                             if materials else {"type": "array", "maxItems": 0},
-            "expand_context": {"type": "array", "uniqueItems": True,
+            "expand_context": {"type": "array",
                                "items": {"type": "integer", "enum": list(range(len(materials)))}}
                               if materials else {"type": "array", "maxItems": 0},
             "gap": {"type": ["string", "null"]},
@@ -516,7 +519,7 @@ def read_question_pack(
             if answer is None:
                 previous = (indices, state["context_indices"], page)
                 state.update(gap=response["gap"], candidate_page=response["candidate_page"],
-                             context_indices=response["expand_context"])
+                             context_indices=list(dict.fromkeys(response["expand_context"])))
                 wanted = response["item_indices"]
                 admission = admit_pack_indices(wanted, lambda chosen: fits(packet(chosen, [])))
                 accepted = admission["admitted_indices"]
