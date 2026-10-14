@@ -13,7 +13,7 @@ Ledger reconciliation exact by ordinary values, new unknown0. Only2/12 final inp
 views. Mixed runtime/interruption/index timing retained. Official labels never revised; paired Source
 review identifies both Judge disagreement and actual modality risks. Not an overall winner.
 Source-only pack comparison declared and CLIprepared0HTTP: configs/milai-global-long32-source-pack-v1.json,
-run_long_source_pack_v1.py, same2users/32sessions/12QA. PREDICT_NOT_RUN; no heldout contents opened.
+run_long_source_pack_v1.py, same2users/32sessions/12QA. Originalpredict failed; continuation active below; no heldout contents opened.
 
 Normal story v3 CLOSED first request failed invalid prior Source; v4 CLOSED first completed,
 second classifier length8192; v5 CLOSED first wrong forgetting flag, 4 clauses actually committed,
@@ -36,14 +36,17 @@ legacysearchdirectory, stillnotacceptance. Dedup exec24897 CLOSED0 predict/first
 2Judge7763,old2Correct vsnew1invalid/1Hallucination; no qualityclaim. Manifests saved.
 Latest4370ff9e removes search_memory onlyforpure readonly packrequests; mutations/forgetlegacytarget
 lookup retained.4Hostintegration+13evidencechecks,Ruff/mypy passed; actualHost recheck NOTRUN.
-ALL modelqueues CLOSED. exec48577 CLOSED1: long-source-pack-v1 predict knownValidationError on
-non-unique item_indices; resources_settledtrue.51sessioncheckpoints/9savedQA,10thselectionfailed,
-2unattemptedQA; FIRSTscore notrun. See global-long-source-pack-v1-partial-summary.json. Keep raw
-response/caches/costs; no automatic retry. Fix redundant readonly selection handling and deliberately
-continue actualstate without resampling oldselection; no selecting outcomes. Then actual2-case
-Hostcatalog check4370ff9e/newroot; finalmethod freeze/completeheldout histories/conditionalProduct/F.
-Userrequested summary+GitHubpush completed on feat/lab-global-development-20261014; immediatefailure
-status correction beingpushed. GitHubbranch nowexists. Goalactive/incomplete; no unknownblock.
+Originalexec48577 CLOSED1 knownselectionduplicates at51sessions/9QA; oldroot untouched.
+Latestmethodb1dc47cd coalesces duplicate readtargets by firstpriority insharedadmission; expand_context
+also unique; removesuniqueItems rejection only. Types/enums/Sourcevisibility unchanged.15evidencechecks,
+Ruff/mypy passed. ACTIVE exec53109=run_long_source_pack_resumed_v1.py: copiedactualbank/checkpoints and
+18oldgenreplies, sameconfig/data/12QA. Old9answers/failedselection cachedresponse reused, no resampling.
+Source-selection-dedup-v1/MiLAi-Lab=b1dc47cd. Countold+newgen once,0emb; keep bothphase timings.
+Originalterminal retained inoldroot andneworiginal-terminal-predict.json. No othermodelqueue active.
+Hostv3 CLIprepared0HTTP, configs/milai-global-host-v3.json/original2fixture; run_host_packs_v3.py
+uses sourceb1dc47cd aftercurrentprediction+firstscoreclose. Samequestions/topK1/material8192/reads3.
+Then freezechosen candidate andcompleteheldout histories, conditionalProduct/Fdecision, fullaudit.
+Userauthorizedbranchpush persists; lastpushed2b8cc89c, currentmethodb1dc47cd notyetpushed.
 Do not weaken Source/owner/visibility/real-effect boundaries or add keyword intent heuristics.
 
 All predeclared runs above keep firstoutputs andfailures. Fullheldoutmetadata selection remains
