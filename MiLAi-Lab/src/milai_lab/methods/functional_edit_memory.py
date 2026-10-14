@@ -219,6 +219,7 @@ class FunctionalEditMemory(FunctionalMemory):
 
     def _evidence_packet(
         self, state: dict[str, Any], *, directory: list[dict[str, Any]] | None = None,
+        note_delivery: bool = False,
     ) -> dict[str, Any]:
         from milai_lab.memory.working_set import plan_delivery
         from milai_lab.methods.evidence_reading import (
@@ -230,7 +231,8 @@ class FunctionalEditMemory(FunctionalMemory):
 
         materials = state["materials"]
         selected = [open_evidence_packs(self.service, [materials[i]],
-                    expand_context=i in state["expanded"])[0] for i in state["selected"]]
+                    expand_context=i in state["expanded"], refresh_current=True)[0]
+                    for i in state["selected"]]
         base = {
             "ok": True, "schema": "question_evidence_v1", "operation_effect": "read_only",
             "evidence": [project_pack(item, index)
@@ -251,7 +253,8 @@ class FunctionalEditMemory(FunctionalMemory):
             ),
         }
         candidates = directory if directory is not None else [
-            pack_candidate(open_evidence_packs(self.service, [item])[0], index)
+            pack_candidate(open_evidence_packs(
+                self.service, [item], refresh_current=True)[0], index)
             for index, item in enumerate(materials)
             if state["task"] == "range" or not item.get("scope_only")]
         pages = plan_delivery(candidates, lambda rows: self.token_count(canonical({
@@ -259,21 +262,21 @@ class FunctionalEditMemory(FunctionalMemory):
             "candidate_page_count": len(candidates),
         })) <= self.material_limit)["pages"]
         page = state["candidate_page"]
+        if note_delivery:
+            self._note_evidence_exposure(state, selected)
         return {**base, "candidates": pages[page] if page < len(pages) else [],
                 "candidate_page": page, "candidate_page_count": len(pages)}
 
-    def _note_evidence_exposure(self, state: dict[str, Any]) -> None:
+    def _note_evidence_exposure(
+        self, state: dict[str, Any], selected: list[dict[str, Any]],
+    ) -> None:
         from milai_lab.memory.functional_state import note_exposure
 
-        refs: list[str] = []
-        for i in state["selected"]:
-            item = state["materials"][i]
-            ranges = (item.get("context_source_ranges", item.get("source_ranges", []))
-                      if i in state["expanded"] else item.get("source_ranges", []))
-            refs.extend(span["source_ref"] for span in [*ranges, *item.get("revision_evidence", [])]
-                        if self.service.source(span["source_ref"]) is not None)
+        refs = list(dict.fromkeys(span["source_ref"] for item in selected
+                                 for span in [*item.get("source_ranges", []),
+                                              *item.get("support_turns", [])]))
         with self.service._locked():
-            note_exposure(self.service, state["binding"]["source_ref"], list(dict.fromkeys(refs)))
+            note_exposure(self.service, state["binding"]["source_ref"], refs)
 
     def evidence_material(
         self, config: RunnableConfig, *, fresh_observations: list[dict[str, Any]] | None = None,
@@ -283,7 +286,8 @@ class FunctionalEditMemory(FunctionalMemory):
         key, state = self._evidence_pool(config)
         if not state.get("initialized"):
             indices = [i for i, item in enumerate(state["materials"]) if not item.get("scope_only")]
-            all_items = open_evidence_packs(self.service, [state["materials"][i] for i in indices])
+            all_items = open_evidence_packs(self.service, [state["materials"][i] for i in indices],
+                                            refresh_current=True)
             trial = {**state, "selected": indices}
             coverage = pack_coverage(state["materials"], all_items, scope=state["source_scope"])
             if (coverage["complete"] and self.token_count(canonical(self._evidence_packet(trial)))
@@ -291,8 +295,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 state["selected"] = indices
             state["initialized"] = True
             self.service.store.put(namespace(self.service), key, state, index=False)
-        packet = self._evidence_packet(state)
-        self._note_evidence_exposure(state)
+        packet = self._evidence_packet(state, note_delivery=True)
         if fresh_observations:
             packet["fresh_observations"] = fresh_observations
         return packet
@@ -333,8 +336,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 state.update(selected=admission["admitted_indices"],
                              excluded=admission["excluded_indices"])
                 self.service.store.put(namespace(self.service), key, state, index=False)
-                packet = self._evidence_packet(state)
-                self._note_evidence_exposure(state)
+                packet = self._evidence_packet(state, note_delivery=True)
                 return packet
 
             result = self._read(config, tool_call_id, {

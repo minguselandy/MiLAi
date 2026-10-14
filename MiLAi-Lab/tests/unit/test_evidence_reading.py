@@ -7,6 +7,7 @@ from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
 
+import pytest
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.harness.artifact_io import read_json, write_json
@@ -318,3 +319,71 @@ def test_empty_captured_scope_is_known_empty_without_a_spurious_read(tmp_path: P
         answer, used = run.answer_material("How many reports?", "2030-01-01", "q", [],
                                            snapshot_id="pool.json")
         assert answer.startswith("No reports") and calls == ["q"] and used == []
+
+
+def test_state_views_refresh_only_explicit_changed_dependencies_and_freeze_replays(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.functional_edit_memory import FunctionalEditMemory
+
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        memory = FunctionalEditMemory(service, len, interface_version="I2")
+
+        def context(key: str, text: str) -> tuple[dict[str, Any], list[str]]:
+            ref = service.capture_user("story", key, text)["source_ref"]
+            memory.context("story", key, "dependencies-v1")
+            cfg = {"configurable": {"user_id": "alice", "v13_session": "story",
+                                     "v13_turn_id": key, "v13_config_version": "dependencies-v1"}}
+            return cfg, [service.source_fragments(ref)[0]["fragment_handle"]]
+
+        cfg, handles = context("seed", "A uses amber after confirmation; B uses blue.")
+        saved = memory.save_edit(cfg, "save", units=[
+            {"text": "A uses amber.", "role": "content", "evidence": handles},
+            {"text": "After confirmation.", "role": "condition", "evidence": handles},
+            {"text": "B uses blue.", "role": "content", "evidence": handles},
+        ], relations=[{"source": 1, "target": 0, "relation_type": "modifies",
+                        "evidence": handles}])
+        row = service.read(saved["id"])
+        unit_ids = [unit["unit_id"] for unit in row["value"]["edit_state"]["units"]]
+        packs = []
+        for index in (0, 2):
+            selected = {**row, "retrieval_navigation": {"unit_id": unit_ids[index]}}
+            packs.append(build_evidence_packs(service, "colors", "2030-01-01", [], [selected])[0])
+
+        cfg, handles = context("change-b", "B now uses cyan; A stays unchanged.")
+        current = service.read(saved["id"])
+        result = memory.update_edit(cfg, "update-b", current["candidate_handle"], [{
+            "operation": "replace", "target_unit": unit_ids[2],
+            "text": "B uses cyan.", "evidence": handles,
+        }])
+        assert result["ok"]
+        refreshed = open_evidence_packs(service, packs, refresh_current=True)
+        assert refreshed[0]["dependency_status"] == "retained_units_unchanged"
+        assert refreshed[0]["revision"] == 1
+        assert refreshed[1]["dependency_status"] == "refreshed_explicit_dependencies"
+        assert refreshed[1]["revision"] == 2
+        assert "cyan" in str(project_pack(refreshed[1], 1))
+
+        actual_read = service.read
+        with monkeypatch.context() as frozen:
+            def old_only(identifier: str, revision: int | None = None) -> dict[str, Any]:
+                assert revision == 1, "A saved replay inspected the final bank's future revision"
+                return actual_read(identifier, revision)
+
+            frozen.setattr(service, "read", old_only)
+            original = open_evidence_packs(service, packs)
+        assert "B uses blue." in str(project_pack(original[1], 1))
+        assert "cyan" not in str(project_pack(original[1], 1))
+
+        cfg, handles = context("change-condition", "A needs supervisor confirmation.")
+        current = service.read(saved["id"])
+        result = memory.update_edit(cfg, "update-condition", current["candidate_handle"], [{
+            "operation": "replace", "target_unit": unit_ids[1],
+            "text": "After supervisor confirmation.", "evidence": handles,
+        }])
+        assert result["ok"]
+        updated = open_evidence_packs(service, [packs[0]], refresh_current=True)[0]
+        assert updated["revision"] == 3
+        assert "After supervisor confirmation." in str(project_pack(updated, 0))
+        assert service.read(saved["id"], 1)["ok"]

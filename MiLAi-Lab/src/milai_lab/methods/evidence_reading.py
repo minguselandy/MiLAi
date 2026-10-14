@@ -103,6 +103,9 @@ def build_evidence_packs(
             "revision": version["revision"], "scope": version["scope"],
             "matter_description": state.get("matter_description", version["scope"]),
             "applicability": view, "selected_unit_ids": ids,
+            "view_dependencies": {"record_id": row["id"], "revision": version["revision"],
+                                  "unit_ids": ids, "root_unit_id": hit,
+                                  "relation_ids": [edge["relation_id"] for edge in relations]},
             "revision_evidence": read_revision_evidence(service, {"revision_evidence": handles}),
             "index_text": "\n".join(unit["text"] for unit in selected_units),
             "pack_kind": "supported_semantic_units",
@@ -121,6 +124,7 @@ def build_evidence_packs(
 
 def open_evidence_packs(
     service: MemoryService, materials: list[dict[str, Any]], *, expand_context: bool = False,
+    refresh_current: bool = False,
 ) -> list[dict[str, Any]]:
     """Reopen selected exact sources/versions under current visibility, without search."""
     result = []
@@ -142,6 +146,49 @@ def open_evidence_packs(
                 result.append({"kind": "semantic_view", "record_id": item["record_id"],
                                "visibility": actual["status"], "body_delivered": False})
                 continue
+            current = service.read(item["record_id"]) if refresh_current else actual
+            item["version_view"] = "current_at_snapshot"
+            item["dependency_status"] = "current" if refresh_current else "frozen_snapshot"
+            if not current["ok"]:
+                item["version_view"] = "historical_exact_revision"
+                item["dependency_status"] = "current_unavailable"
+            elif current["value"]["revision"] != item["revision"]:
+                dependencies = item.get("view_dependencies")
+                changed = dependencies is None
+                if dependencies is not None:
+                    root = dependencies["root_unit_id"]
+                    old_state = actual["value"]["edit_state"]
+                    new_state = current["value"]["edit_state"]
+                    ids, edges = (unit_closure(new_state, root) if root is not None else
+                                  ([unit["unit_id"] for unit in new_state["units"]],
+                                   new_state["relations"]))
+                    old_ids = dependencies["unit_ids"]
+                    old_edges = [edge for edge in old_state["relations"]
+                                 if edge["relation_id"] in dependencies["relation_ids"]]
+                    changed = (ids != old_ids or edges != old_edges or
+                               [unit for unit in old_state["units"] if unit["unit_id"] in old_ids]
+                               != [unit for unit in new_state["units"] if unit["unit_id"] in ids])
+                item["current_record_revision"] = current["value"]["revision"]
+                item["dependency_status"] = "changed" if changed else "retained_units_unchanged"
+                item["version_view"] = "historical_exact_revision" if changed else "current_units"
+                if changed and refresh_current:
+                    root = dependencies["root_unit_id"] if dependencies else None
+                    if root is not None and root not in {
+                        unit["unit_id"] for unit in current["value"]["edit_state"]["units"]
+                    }:
+                        result.append({"kind": "semantic_view", "record_id": item["record_id"],
+                                       "visibility": "selected_unit_retracted",
+                                       "body_delivered": False})
+                        continue
+                    if root is not None:
+                        current["retrieval_navigation"] = {"unit_id": root, "key_kind": "unit"}
+                    view = item["applicability"]
+                    item = build_evidence_packs(
+                        service, "", view.get("query_time") or "", [], [current],
+                        calendar_context=view.get("query_calendar_context"),
+                    )[0]
+                    item.update(version_view="current_at_snapshot",
+                                dependency_status="refreshed_explicit_dependencies")
             # A retained interpretation never bypasses current support visibility.
             evidence = []
             for span in item["revision_evidence"]:
@@ -174,7 +221,9 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
     if item["kind"] == "semantic_view":
         view = item["applicability"]
         ids = {unit["unit_id"]: f"u{i}" for i, unit in enumerate(view["units"])}
-        result.update(scope=item["scope"], matter=item["matter_description"])
+        result.update(scope=item["scope"], matter=item["matter_description"],
+                      revision=item["revision"], version_view=item.get("version_view"),
+                      dependency_status=item.get("dependency_status"))
         result["units"] = [{"unit": ids[unit["unit_id"]], **{
             key: copy.deepcopy(unit[key]) for key in ("text", "role", "applicability", "temporal")
             if key in unit}, "assertion": {
