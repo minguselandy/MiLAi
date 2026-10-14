@@ -472,3 +472,42 @@ def read_question_pack(
             return answer, opened(state["opened_indices"])
         save(state)
     raise ValueError("READ_PACK_CALL_LIMIT_INVALID")
+
+
+def answer_only_context(
+    question: str, material: dict[str, Any], effects: dict[str, Any],
+    tool_results: list[dict[str, Any]], *, pending: list[dict[str, Any]] | None = None,
+) -> list[dict[str, str]]:
+    """Final prose over actual evidence/effects, without a second operation conversation."""
+    def facts(packet: dict[str, Any]) -> dict[str, Any]:
+        result = copy.deepcopy(packet)
+        for key in ("candidates", "instructions", "next_cursor", "candidate_page",
+                    "candidate_page_count", "memory_view", "read_progress"):
+            result.pop(key, None)
+        if "items" in result:
+            result["items"] = [item for item in result["items"]
+                               if not item.get("type", "").endswith("_candidate")]
+        return result
+
+    return [
+        {"role": "system", "content": (
+            "Answer the original user request directly in the user's language. No tools or "
+            "new actions are available in this answer-only step. Use the delivered evidence "
+            "bodies and confirmed results below; candidate descriptions are not facts. "
+            "Preserve subjects, negation, conditions, source roles and unknown times. Keep "
+            "current interpretations and actually read historical versions distinct. "
+            "A confirmed memory commit is not proof of an external business effect or complete "
+            "semantic accuracy. State any failed, unknown or unfinished requested work plainly. "
+            "Unavailable evidence does not mean it was never saved. Do not reproduce internal "
+            "identifiers or planning details unless the user asked for them. Return the final "
+            "answer, not a plan to read or act later."
+        )},
+        {"role": "user", "content": json.dumps({
+            "question": question, "evidence": facts(material), "confirmed_results": effects,
+            "observed_tool_results": [
+                {"name": row["name"], "result": facts(row["result"])
+                 if row.get("memory_read") and isinstance(row["result"], dict)
+                 else row["result"]} for row in tool_results
+            ], "pending_work": pending or [],
+        }, ensure_ascii=False, separators=(",", ":"))},
+    ]

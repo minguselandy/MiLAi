@@ -677,15 +677,29 @@ class FunctionalEditMemory(FunctionalMemory):
         ordinary = self.service.store.get(namespace(self.service), "ordinary:" + reference_key(
             [bound["session"], bound["message_id"], self.forget_epoch]
         ))
-        if ordinary is not None and ordinary.value.get("catalog_snapshot"):
-            directory = self._page(ordinary.value["catalog_snapshot"], 0, bound)
-            material["candidates"] = directory.get("candidates", [])
-            material["candidate_scope"] = "navigation_only_not_body_read_or_fact_support"
-            material["next_cursor"] = directory.get("next_cursor")
         # Direct Writer calls expand a different packet below. Preserve their
         # complete selected Source/target contract and existing capacity check.
         fitted = material if for_write else self._fit_model_material(
             config, material, fresh_observations)
+        if ordinary is not None and ordinary.value.get("catalog_snapshot"):
+            def with_directory(page: dict[str, Any]) -> dict[str, Any]:
+                return {**fitted, "candidates": page.get("candidates", []),
+                        "candidate_scope": "navigation_only_not_body_read_or_fact_support",
+                        "candidate_delivery_status": page["delivery_status"],
+                        "candidate_skipped_units": page["skipped_units"],
+                        "next_cursor": page.get("next_cursor")}
+
+            mapping = request_target_mapping(self.service, bound)
+
+            def directory_tokens(page: dict[str, Any]) -> int:
+                packet, _ = project_request_targets(mapping, with_directory(page))
+                return self.token_count(canonical(self._project_read_packet(packet)))
+
+            # A directory that fits alone may overflow beside resident bodies.
+            # Page its navigation against the actual final envelope as well.
+            directory = self._page(ordinary.value["catalog_snapshot"], 0, bound,
+                                   packet_tokens=None if for_write else directory_tokens)
+            fitted = with_directory(directory)
         material = self.bind_request_targets(config, fitted)
         if fitted["memory_view"] != view:
             chosen = fitted["memory_view"]

@@ -89,6 +89,7 @@ def prepared(
     support_input: bool = False,
     bounded_reproposal: bool = False,
     dynamic_memory: bool = False,
+    evidence_policy: str = "legacy",
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -110,6 +111,7 @@ def prepared(
     settings = {
         "profile": "functional_v1", "host": asdict(host),
         "memory_method": memory_method,
+        "evidence_policy": evidence_policy,
         **({"stage_enable_thinking": stage_enable_thinking}
            if stage_enable_thinking is not None else {}),
         "memory_profile": memory_profile,
@@ -3880,6 +3882,41 @@ def test_direct_response_failure_and_answer_only_resume_keep_committed_memory(
     assert recovered['status'] == 'COMPLETED' and len(wires) == 4
     assert recovered['final_answer'] == 'The marker was saved.'
     assert len(recovered['records']) == 1 and recovered['records'][0]['value']['revision'] == 1
+
+
+def test_pack_answer_recovery_uses_plain_actual_evidence_without_operation_history(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, readonly_finalization=True,
+        independent_capabilities=True, current_delivery=True, direct_response=True,
+        phase_thinking=True,
+        memory_method="milai_edit_m_v1", edit_interface_version="I2",
+        memory_view_mode="staged", evidence_policy="question_pack_v1")
+    question = "Only answer: do you have any saved club arrangements?"
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call('classify_current_request', 'mode', memory_write_request='none',
+                allow_forgetting=False, business_action_request='none', business_operations=[])
+        if ordinal == 2:
+            return {"role": "assistant", "content": None, "reasoning": "OLD_OPERATION_PLAN"}
+        assert ordinal == 3 and not wire.get("tools")
+        assert [row["role"] for row in wire["messages"]] == ["system", "user"]
+        payload = json.loads(wire["messages"][1]["content"])
+        assert payload["question"] == question
+        assert "candidates" not in payload["evidence"]
+        assert "OLD_OPERATION_PLAN" not in json.dumps(wire)
+        assert payload["confirmed_results"]["mutation_receipts"] == []
+        return {"role": "assistant", "content": "No saved club arrangement is available."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    args = dict(bank="b", owner="alice", session="s", message_id="query", content=question)
+    failed = functional.message(root, **args)
+    assert failed["status"] == "FAILED"
+    recovered = functional.message(root, **args, resume=True)
+    assert recovered["status"] == "COMPLETED" and len(wires) == 3
+    assert recovered["records"] == []
+    assert recovered["final_answer"] == "No saved club arrangement is available."
 
 
 def test_actual_capability_contract_tracks_restricted_completion_catalog(

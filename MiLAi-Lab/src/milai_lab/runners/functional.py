@@ -3528,6 +3528,27 @@ def message(
                         and any(row.id == identity + ":required-memory-receipt"
                                 for row in completion_feedback)
                         and not effects["mutation_receipts"])))
+                if for_finalization and settings.get("evidence_policy") == "question_pack_v1":
+                    from milai_lab.methods.evidence_reading import answer_only_context
+
+                    results = []
+                    for row in wire_messages:
+                        if not isinstance(row, ToolMessage) or row.name == "read_evidence":
+                            continue
+                        try:
+                            body = json.loads(str(row.content))
+                        except ValueError:
+                            body = str(row.content)
+                        results.append({"name": row.name, "result": body,
+                                        "memory_read": row.name in memory.read_tool_names})
+                    final_input = answer_only_context(
+                        content, material, _model_memory_effects(effects), results,
+                        pending=[*request_progress, *output.get("request_part_failures", [])],
+                    )
+                    return {"llm_input_messages": [
+                        SystemMessage(content=final_input[0]["content"]),
+                        HumanMessage(content=final_input[1]["content"]),
+                    ], "receipt_messages": wire_messages, "receipt_material": material}
                 return {
                     "llm_input_messages": [
                         SystemMessage(
@@ -3892,7 +3913,9 @@ def message(
                     repair_history = prior[:-1] if bad_checkpoint_text else prior
                     repair_input = context_hook({"messages": repair_history}, cfg,
                         for_finalization=(settings.get("capability_delivery")
-                                          == "actual_catalog_v1"))[
+                                          == "actual_catalog_v1"
+                                          or settings.get("evidence_policy")
+                                          == "question_pack_v1"))[
                         "llm_input_messages"]
                     repair_input[0] = SystemMessage(content=(
                         "The preceding final response was unusable. Report the already observed "
@@ -4065,8 +4088,10 @@ def message(
                 )
                 # Context hook applies visibility checks before any cached response
                 # can be reused. The model sees exactly the same bounded material.
-                response_input = context_hook({"messages": messages}, cfg,
-                    for_finalization=True)["llm_input_messages"]
+                response_context = context_hook({"messages": messages}, cfg,
+                    for_finalization=True)
+                response_input = response_context["llm_input_messages"]
+                receipt_input = response_context.get("receipt_messages", response_input)
                 receipt_status_only = (
                     settings.get("finalization") == "receipt_or_agent_response_v1"
                     and mode and mode.get("response_scope") == "memory_status_only"
@@ -4120,8 +4145,10 @@ def message(
                         in {"not_committed", "partial", "unknown"}
                     )
                 ):
-                    final = business_response(response_input, effects,
-                        json.loads(str(response_input[0].content).splitlines()[-1]),
+                    final = business_response(receipt_input, effects,
+                        (response_context["receipt_material"]
+                         if settings.get("evidence_policy") == "question_pack_v1" else
+                         json.loads(str(response_input[0].content).splitlines()[-1])),
                         execution_stop=output.get("execution_stop"), current_mode=mode,
                         include_business=bool(effects["business"]["operations"]
                             or effects["business"]["observations"]
@@ -4154,7 +4181,7 @@ def message(
                         # A query alone does not define the user's whole task.
                         # Preserve the answer and separately report its actual
                         # matched observations, without a new model call.
-                        observed = business_response(response_input, effects, {},
+                        observed = business_response(receipt_input, effects, {},
                             include_business=observations_appended, include_memory_feedback=False)
                         final = final.model_copy(update={
                             "content": str(final.content) + "\n\n" + str(observed.content)})

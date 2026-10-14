@@ -395,3 +395,28 @@ def test_state_views_refresh_only_explicit_changed_dependencies_and_freeze_repla
         assert updated["revision"] == 3
         assert "After supervisor confirmation." in str(project_pack(updated, 0))
         assert service.read(saved["id"], 1)["ok"]
+
+
+def test_answer_only_context_keeps_actual_history_and_effects_not_navigation() -> None:
+    from milai_lab.methods.evidence_reading import answer_only_context
+
+    material = {"evidence": [{"label": "e0", "content": "Current rule requires confirmation."}],
+                "candidates": [{"excerpt": "UNOPENED_CANDIDATE"}],
+                "range_coverage": {"complete": False}, "gap": "One source unavailable."}
+    tools = [{"name": "read_memory_revision", "memory_read": True, "result": {
+        "items": [{"type": "record", "version_view": "historical_exact_revision",
+                   "content": "The old rule did not require confirmation."}],
+        "candidates": [{"excerpt": "OTHER_UNOPENED"}]}},
+        {"name": "reserve_and_label", "result": {"status": "partial", "reserved": True,
+                                                    "label_completed": False}}]
+    effects = {"semantic_memory": {"status": "committed"}, "business": {"status": "partial"}}
+    messages = answer_only_context(
+        "What changed and what remains undone?", material, effects, tools)
+    payload = json.loads(messages[1]["content"])
+    assert payload["question"] == "What changed and what remains undone?"
+    assert "UNOPENED" not in messages[1]["content"]
+    assert "old rule did not require" in messages[1]["content"]
+    assert payload["confirmed_results"] == effects
+    assert payload["observed_tool_results"][1]["result"]["label_completed"] is False
+    assert payload["evidence"]["range_coverage"]["complete"] is False
+    assert material["candidates"]  # Projection did not edit the saved packet.
