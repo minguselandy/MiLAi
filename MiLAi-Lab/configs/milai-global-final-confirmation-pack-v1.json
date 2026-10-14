@@ -198,7 +198,8 @@
           "2f4b4206-20bc-19a5-a5ed-4d110f91f4db"
         ],
         "reader_failure_policy": "record_known_readonly_failure",
-        "evaluation_mode": "qa_only"
+        "evaluation_mode": "qa_only",
+        "session_prefix": null
       },
       "maintenance_recipe": "single_pass",
       "evidence_kind": "FINAL_CONFIRMATION_SOURCE_ONLY",

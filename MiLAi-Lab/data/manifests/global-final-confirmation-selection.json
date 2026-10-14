@@ -1,5 +1,5 @@
 {
-  "status": "WAITING_FOR_FINAL_CANDIDATE_FREEZE",
+  "status": "SELECTED_AFTER_FREEZE",
   "selection_metadata_only": true,
   "source_split": "data/manifests/milai-edit-source-split-v1.json",
   "users": [
@@ -13,6 +13,100 @@
   "settings_rule": "One frozen implementation and same main Reader/model/context/output/call allowance in both arms; report all formation/index/read/score costs.",
   "label_policy": "First official labels only; invalid, known missing and not run separate. No tuning, best-of repetition, or label replacement from holdout outcomes.",
   "scope_of_claim": "Two independent user histories, exploratory confirmation; QA count is not independent user count.",
-  "semantic_content_accessed": false,
-  "model_calls": 0
+  "semantic_content_accessed": true,
+  "model_calls": 0,
+  "method_freeze": "data/manifests/global-final-candidate-freeze.json",
+  "selection": [
+    {
+      "owner": "ed9b924b-6bc0-67f9-67a1-a36401dd1782",
+      "history_sessions": 66,
+      "boundary_sessions": 22,
+      "prefix_sessions": 19,
+      "source_session": 18,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Generalization & Application",
+        "Memory Conflict"
+      ]
+    },
+    {
+      "owner": "ed9b924b-6bc0-67f9-67a1-a36401dd1782",
+      "history_sessions": 66,
+      "boundary_sessions": 44,
+      "prefix_sessions": 44,
+      "source_session": 43,
+      "question_indices": [
+        1,
+        2
+      ],
+      "types": [
+        "Generalization & Application",
+        "Memory Conflict"
+      ]
+    },
+    {
+      "owner": "ed9b924b-6bc0-67f9-67a1-a36401dd1782",
+      "history_sessions": 66,
+      "boundary_sessions": 66,
+      "prefix_sessions": 66,
+      "source_session": 65,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Multi-hop Inference",
+        "Multi-hop Inference"
+      ]
+    },
+    {
+      "owner": "2f4b4206-20bc-19a5-a5ed-4d110f91f4db",
+      "history_sessions": 66,
+      "boundary_sessions": 22,
+      "prefix_sessions": 22,
+      "source_session": 21,
+      "question_indices": [
+        2,
+        0
+      ],
+      "types": [
+        "Memory Conflict",
+        "Memory Boundary"
+      ]
+    },
+    {
+      "owner": "2f4b4206-20bc-19a5-a5ed-4d110f91f4db",
+      "history_sessions": 66,
+      "boundary_sessions": 44,
+      "prefix_sessions": 44,
+      "source_session": 43,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Memory Conflict",
+        "Basic Fact Recall"
+      ]
+    },
+    {
+      "owner": "2f4b4206-20bc-19a5-a5ed-4d110f91f4db",
+      "history_sessions": 66,
+      "boundary_sessions": 66,
+      "prefix_sessions": 66,
+      "source_session": 65,
+      "question_indices": [
+        0,
+        1
+      ],
+      "types": [
+        "Memory Conflict",
+        "Memory Conflict"
+      ]
+    }
+  ],
+  "originals_retained": "/cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/final-confirmation-v1/full-users.jsonl"
 }

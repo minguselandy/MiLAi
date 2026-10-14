@@ -31,5 +31,6 @@
   "host_evidence": "Sharedcore actualbodydelivery verified on bothoriginalHostcases; normalstory andsomefinalanswerinterpretation/forgetting remainpartial.",
   "heldout_semantic_content_accessed_before_freeze": false,
   "confirmation_rule": "Complete histories of existing first2reservedusers; predetermined chronological thirds/full QA metadata rule. No method/config/selection tuning or rescoring from confirmation outcomes.",
-  "scope": "Exploratory confirmation over2independentuserhistories; no automaticProductpromotion."
+  "scope": "Exploratory confirmation over2independentuserhistories; no automaticProductpromotion.",
+  "preparation_compatibility_note": "Before any confirmationmodelcall, normalCLIprepare required session_prefix key. Set null inbothconfigs, preserving frozen complete-history/no-cap semantics; missingkey failure retained. No method/model/budget/questionselection changes."
 }
