@@ -95,8 +95,29 @@ def test_expanded_hits_share_exact_parent_body_without_merging_distinct_sources(
             x["content"] for x in projected[1]["evidence"]]
         assert len(projected[0]["evidence"]) == 3
         assert projected[0]["evidence"][2]["content"].startswith("No.")
+        assert projected[0]["evidence"][0]["source"] != projected[1]["evidence"][0]["source"]
         # Ordinary overlapping hits are not identical full-parent ranges.
-        assert len(project_packs(open_evidence_packs(service, first), [4, 8])) == 2
+        overlapping = project_packs(open_evidence_packs(service, first), [4, 8])
+        assert len(overlapping) == 2
+        assert sum(len(item["evidence"]) for item in overlapping) == 3
+        assert overlapping[1]["reused_sources"] or overlapping[0].get("reused_sources")
+        turn = json.loads(expanded[0]["text"])[0]
+        semantic = {"kind": "semantic_view", "revision": 1, "scope": {},
+                    "matter_description": "Marker", "support_turns": [turn],
+                    "applicability": {"units": [{"unit_id": "amber", "text": "A uses amber.",
+                        "role": "content", "assertion": {"source_ref": turn["source_ref"],
+                            "source_revision": 1, "kind": "reported"}}], "relations": []}}
+        combined = project_packs([expanded[0], semantic], [4, 20])
+        source = combined[0]["evidence"][0]["source"]
+        assert combined[1]["evidence"] == [] and combined[1]["reused_sources"] == [source]
+        assert combined[1]["units"][0]["assertion"]["source_ref"] == source
+        semantic["support_turns"] = [{**turn, "source_revision": 2}]
+        different_version = project_packs([expanded[0], semantic], [4, 20])
+        assert different_version[1]["evidence"][0]["source"] != source
+        assert different_version[1]["units"][0]["assertion"]["source_ref"] == "support_not_opened"
+        semantic["support_turns"] = []
+        unopened = project_packs([expanded[0], semantic], [4, 20])
+        assert unopened[1]["units"][0]["assertion"]["source_ref"] == "support_not_opened"
         source = first[0]["source_ranges"][0]["source_ref"]
         handle = service.source_fragments(source)[0]["fragment_handle"]
         assert service.forget("first", "hide", fragment_handles=[handle])["ok"]

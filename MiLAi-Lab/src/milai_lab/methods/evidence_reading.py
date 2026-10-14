@@ -242,15 +242,25 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
     return result
 
 
+SOURCE_REUSE_INSTRUCTIONS = (
+    "Source labels are shared across packs. reused_sources points to evidence already shown; "
+    "also_selected_as lists other selected labels for the same Source ranges. Neither adds "
+    "another observation or event."
+)
+
+
 def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[str, Any]]:
     """Render one body for exactly repeated visible Source ranges.
 
     Expanding several hits in one session may reopen the same complete parent.
     Keep the selected aliases, without repeating that parent in the model input.
+    Global short Source labels also distinguish reused context from new evidence.
     Different sources, partial visibility and semantic views remain separate.
     """
     result = []
     originals: dict[tuple[tuple[Any, ...], ...], dict[str, Any]] = {}
+    sources: dict[tuple[str, int], str] = {}
+    spans: set[tuple[str, int, tuple[int, ...]]] = set()
     for item, index in zip(items, indices, strict=True):
         ranges = tuple(tuple(span[key] for key in (
             "source_ref", "source_revision", "start", "end"))
@@ -263,6 +273,32 @@ def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[
             originals[ranges].setdefault("also_selected_as", []).append(f"e{index}")
             continue
         projected = project_pack(item, index)
+        if "evidence" in projected:
+            turns = (json.loads(item["text"]) if item["kind"] == "original_source"
+                     else item.get("support_turns", []))
+            evidence, local_sources, reused = [], set(), []
+            for turn, body in zip(turns, projected["evidence"], strict=True):
+                source = (turn["source_ref"], turn.get("source_revision", 1))
+                alias = sources.setdefault(source, f"s{len(sources)}")
+                local_sources.add(source)
+                body["source"] = alias
+                span = (*source, tuple(turn["range"]))
+                if span in spans:
+                    if alias not in reused:
+                        reused.append(alias)
+                else:
+                    evidence.append(body)
+                    spans.add(span)
+            projected["evidence"] = evidence
+            if reused:
+                projected["reused_sources"] = reused
+            for original, unit in zip(item.get("applicability", {}).get("units", []),
+                                      projected.get("units", []), strict=True):
+                assertion = original.get("assertion", {})
+                if "source_ref" in assertion:
+                    source = (assertion["source_ref"], assertion.get("source_revision", 1))
+                    unit["assertion"]["source_ref"] = (
+                        sources[source] if source in local_sources else "support_not_opened")
         result.append(projected)
         if shared:
             originals[ranges] = projected
@@ -344,6 +380,7 @@ def read_question_pack(
     def evidence_messages(indices: list[int]) -> list[dict[str, str]]:
         projected = project_packs(opened(indices), indices)
         messages = messages_for(projected)
+        messages[0]["content"] += "\n" + SOURCE_REUSE_INSTRUCTIONS
         payload = json.loads(messages[1]["content"])
         payload["source_coverage"] = pack_coverage(materials, opened(indices), scope=source_scope)
         messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))

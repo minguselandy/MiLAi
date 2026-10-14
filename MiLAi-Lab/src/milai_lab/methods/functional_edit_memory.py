@@ -223,6 +223,7 @@ class FunctionalEditMemory(FunctionalMemory):
     ) -> dict[str, Any]:
         from milai_lab.memory.working_set import plan_delivery
         from milai_lab.methods.evidence_reading import (
+            SOURCE_REUSE_INSTRUCTIONS,
             open_evidence_packs,
             pack_candidate,
             pack_coverage,
@@ -250,7 +251,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 "All reads share the current request allowance. A semantic candidate's "
                 "history_read opens actual stored versions; original user statements cannot "
                 "prove what was saved in an earlier revision. Use actual application tools "
-                "for live business state."
+                "for live business state. " + SOURCE_REUSE_INSTRUCTIONS
             ),
         }
         candidates = directory if directory is not None else [
