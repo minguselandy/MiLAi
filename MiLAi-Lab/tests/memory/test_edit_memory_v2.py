@@ -2102,3 +2102,27 @@ def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(
         assert [part["content"] for part in read_revision_evidence(service, before)] == [
             initial_text
         ]
+
+
+@pytest.mark.parametrize("mode", ["legacy", "event_delta_v1"])
+def test_proposition_recipe_preserves_literal_time_through_extractor_writer_boundary(
+    tmp_path, mode,
+):
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", maintenance_mode=mode,
+                            features=EditFeatures(source_metadata=True, temporal_scope=True,
+                                                  proposition_updates=True))
+        view, delivery = packet(service, method, "consider", "Recently I began considering a move.")
+        request = method.change_request(delivery, "2030-10-14")
+        extracted = method.decode_changes({"changes": [{
+            "subject": "user", "statement": "Recently the user began considering a move.",
+            "evidence": ["e1"], "time": "Recently", "scope": None,
+        }]}, request)
+        candidates = method.writer_changes(extracted, view["mapping"])
+        assert candidates[0]["time"] == "Recently"
+        assert candidates[0]["evidence"] == ["e1"]
+        messages = method.edit_messages(view["packet"], "2030-10-14", allow_create=True,
+                                        change_candidates=candidates)
+        assert "Recently" in messages[1]["content"]
+        assert "event_at" not in candidates[0] and service.records() == []
+        assert "proposition_updates" not in EditFeatures().settings()

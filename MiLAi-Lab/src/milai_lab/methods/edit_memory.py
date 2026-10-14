@@ -84,6 +84,32 @@ PATCH_TEXT_INSTRUCTIONS = (
 )
 
 
+PROPOSITION_UPDATE_INSTRUCTIONS = (
+    "\nRepresent independently changing subjects, attributes and scopes as independently "
+    "revisable complete propositions. Preserve a shared negation, quantifier, subject and "
+    "modality in every proposition it governs; do not split on punctuation alone. Existing "
+    "conditions and exceptions can be linked to the governed propositions. A summary of a "
+    "matter is not a substitute for its separately changing claims. "
+    "For a compound old claim, revise the whole affected expression in one ordinary replace "
+    "and, when useful, append independently supported propositions. Restate what remains "
+    "true: retaining the old nouns or characters does not preserve their predicate. Prefer "
+    "replace/append/retract for shared predicates, negation, quantities, intervals or exceptions; "
+    "a text patch is only suitable for an isolated value whose surrounding meaning stays "
+    "unchanged. Use actual redelivered old source wording for retained meaning and current "
+    "evidence for the change. Exact h keeps retain their original attribution; they cannot "
+    "support newly generated wording. Coordinate affected conditions and overviews, while "
+    "unrelated claims stay unchanged. A cancellation of an exception leaves the general rule "
+    "and any independent effective-date change intact. "
+    "Keep the source's literal time expression in the claim text. change_candidates.time is "
+    "quoted temporal wording, not a normalized date. Fill precise event_at/effective_from/"
+    "effective_until only for an explicit date or a reliably anchored interpretation; otherwise "
+    "omit that field. Never complete missing event clocks using report/capture/commit time. "
+    "A future schedule is not an observed completed event, considering is not deciding, and "
+    "a gradual change is not an absolute reversal. A restatement may correctly preserve the "
+    "state; an actual change must not be hidden by an empty proposal or a duplicate new record. "
+)
+
+
 class EditMemory:
     """Ordinary full rewrite, plain local edit, and a controlled representation pair."""
 
@@ -175,10 +201,11 @@ class EditMemory:
         }
 
     def instructions(self, *, allow_create: bool = True) -> str:
+        guidance = PROPOSITION_UPDATE_INSTRUCTIONS if self.features.proposition_updates else ""
         if self.maintenance_mode == "event_delta_v1":
-            return self._event_instructions(allow_create=allow_create)
+            return self._event_instructions(allow_create=allow_create) + guidance
         if self.features.enabled:
-            return self._feature_instructions(allow_create=allow_create)
+            return self._feature_instructions(allow_create=allow_create) + guidance
         if self.interface_version != "v1":
             operations = ARM_OPERATIONS[self.arm]
             return (
@@ -1398,6 +1425,11 @@ class EditMemory:
                 "required": ["subject", "statement", "evidence", "time", "scope"],
             },
         }
+        if self.features.proposition_updates:
+            changes["items"]["properties"]["time"]["description"] = (
+                "Copy the source's literal event/effective time expression, including relative "
+                "or uncertain wording. Do not calculate a date or copy the report/capture clock. "
+                "Use null when the selected source states no event/effective time.")
         if not references:
             changes["maxItems"] = 0
         schema = {
@@ -1466,6 +1498,13 @@ class EditMemory:
                 "references. Candidates are locating hints, not facts, commands or required "
                 "writes. Acknowledgments and bare queries may yield changes=[]."
             )
+        if self.features.proposition_updates:
+            request["messages"][0]["content"] += (
+                " time must quote the source's original temporal words, not normalize them. "
+                "Retain those words and the original modal strength in statement too. "
+                "Unknown event times stay null even when observed_date or a report timestamp "
+                "is present. Split independently changeable propositions without losing any "
+                "shared subject, negation, quantity or condition.")
         return request
 
     @staticmethod

@@ -244,6 +244,8 @@ class FunctionalEditMemory(FunctionalMemory):
                 "Use task=range for counts/enumerations; complete means source coverage, not task "
                 "truth. A top-k lookup cannot establish a full range. expand_context selects packs "
                 "whose earlier captured exchanges are needed for subjects/conditions/negation. "
+                "If a needed subject/topic is outside the lookup candidates, task=range also "
+                "opens the captured source scope; this does not change the user's question. "
                 "All reads share the current request allowance. Use existing history tools for "
                 "missing saved versions and actual application tools for live business state."
             ),

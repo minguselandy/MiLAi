@@ -1,0 +1,62 @@
+{
+  "kind": "evaluator_only_proposition_review",
+  "not_host_input": true,
+  "case_id": "propositions-notices",
+  "checks": [
+    {
+      "event": 1,
+      "expected": "Independently revisable A, B and shared external confirmation; original history retained."
+    },
+    {
+      "event": 2,
+      "expected": "No duplicate; unchanged facts and revisions unless an explicit useful existing confirmation receipt."
+    },
+    {
+      "event": 3,
+      "expected": "A switches to Zhao only from Oct20; before date Li; B and external rule unchanged."
+    },
+    {
+      "event": 4,
+      "expected": "No semantic write."
+    },
+    {
+      "event": 5,
+      "expected": "Scoped Oct21 Du exception; retain Zhao general rule/effective date and confirmation."
+    },
+    {
+      "event": 6,
+      "expected": "Only exception withdrawn; general future Zhao schedule and B/confirmation intact; exception history readable."
+    },
+    {
+      "event": 7,
+      "expected": "Considering SMS, not decided/enabled; literal recent phrase retained; no exact event_at manufactured from reporting clock."
+    },
+    {
+      "event": 8,
+      "expected": "Distinct finance Li; not merged with A contact; only internal reimbursements."
+    },
+    {
+      "event": 9,
+      "expected": "Current B explains original Chen, previous stored Wang remains as historical record/error; no false new effective date."
+    },
+    {
+      "event": 10,
+      "expected": "Keep existing general confirmation, do not append duplicate."
+    },
+    {
+      "event": 11,
+      "expected": "SMS remains undecided, no sending claim or forced completed transition."
+    },
+    {
+      "event": 12,
+      "expected": "C-only weekend internal confirmation, no generalization to A/B internal notices."
+    }
+  ],
+  "joint_success": [
+    "target meaning",
+    "non-target preservation",
+    "source modality/time fidelity",
+    "actual history readable"
+  ],
+  "before_state": "Actual normal model formation and prior commits; never hand-written ideal semantic state."
+}
