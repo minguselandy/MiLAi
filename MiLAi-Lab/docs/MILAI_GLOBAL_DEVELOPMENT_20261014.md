@@ -557,3 +557,5 @@ Host读取v2两条首次CLI均completed，9生成/43,240 tokens、embedding0。�
 两题去重pilot首次预测/评分闭合：读取4调用/72,673 tokens，首次Judge2调用/7,763 tokens，无新形成/检索/embedding、无新增unknown。旧两题首次标签均Correct，新标签为invalid、Hallucination，不重判。读取成本相对原4调用/118,984 tokens降低38.9%，但不能据此证明质量保持。两臂宠物答复都把较宽的“探索不同宠物行为”归给User，User直接表述仅支持新经历/互动；Judge声称温和/适应性细节虚构，又与实际User原话冲突。职位答复仍混入主要来自Assistant的职业框架。保持官方标签，单列来源忠实审查。见global-host-packs-v2-summary.json和global-readpack-dedup-pilot-v1-summary.json。
 
 原文证据包完整系统比较当前运行中，冻结c61e680f；提交时进度快照为51个会话检查点、9个QA检查点（计划64/12），尚无完整首次评分，不作胜负结论。当前未完成项为新Host读取重验、最终方法选择、完整保留用户确认和最终汇总；正常故事v6已完成有限验证但验收部分失败，不再围绕同一故事反复调参。
+
+阶段提交后的即时状态更正：原文证据包预测已以已知ValidationError闭合，实际选择响应的item_indices重复，资源settled=true；51个会话检查点、9个QA保存，第10题选择失败，最后2题未尝试，首次评分未运行。生成18调用/683866 tokens，embedding0，新增unknown均0；原响应/检查点/成本均保留，没有自动重试。global-long-source-pack-v1-partial-summary.json保存此停止点。下一步处理重复只读候选选择并有意续跑，不能把当前9题当成完整比较或从失败后挑选胜例。当前模型队列均已关闭。

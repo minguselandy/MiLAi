@@ -36,11 +36,14 @@ legacysearchdirectory, stillnotacceptance. Dedup exec24897 CLOSED0 predict/first
 2Judge7763,old2Correct vsnew1invalid/1Hallucination; no qualityclaim. Manifests saved.
 Latest4370ff9e removes search_memory onlyforpure readonly packrequests; mutations/forgetlegacytarget
 lookup retained.4Hostintegration+13evidencechecks,Ruff/mypy passed; actualHost recheck NOTRUN.
-ACTIVE exec48577: run_long_source_pack_v1.py, source-order-index-v1=c61e680f, same2users32sessions12QA.
-Do not launch another modelqueue until actualcompletion. NewHost code does not hotedit frozenbenchmark.
-Next: close source-only comparison andfirstscore, actual2-case Hostcatalog check on4370ff9e,newroot;
-freeze finalmethod, fullheldout histories, conditionalProduct/F decision, finalaudit.
-Userrequested GitHubsummary/push beingcompleted now; report actualbranch/commit andremainingwork.
+ALL modelqueues CLOSED. exec48577 CLOSED1: long-source-pack-v1 predict knownValidationError on
+non-unique item_indices; resources_settledtrue.51sessioncheckpoints/9savedQA,10thselectionfailed,
+2unattemptedQA; FIRSTscore notrun. See global-long-source-pack-v1-partial-summary.json. Keep raw
+response/caches/costs; no automatic retry. Fix redundant readonly selection handling and deliberately
+continue actualstate without resampling oldselection; no selecting outcomes. Then actual2-case
+Hostcatalog check4370ff9e/newroot; finalmethod freeze/completeheldout histories/conditionalProduct/F.
+Userrequested summary+GitHubpush completed on feat/lab-global-development-20261014; immediatefailure
+status correction beingpushed. GitHubbranch nowexists. Goalactive/incomplete; no unknownblock.
 Do not weaken Source/owner/visibility/real-effect boundaries or add keyword intent heuristics.
 
 All predeclared runs above keep firstoutputs andfailures. Fullheldoutmetadata selection remains

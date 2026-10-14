@@ -1,0 +1,32 @@
+{
+  "status": "CLOSED_PARTIAL_PREDICT_FAILURE",
+  "source_code": "c61e680f",
+  "resources_settled": true,
+  "planned_sessions": 64,
+  "completed_session_checkpoints": 51,
+  "planned_qa": 12,
+  "saved_qa_checkpoints": 9,
+  "failed_selection": 1,
+  "remaining_unattempted_qa": 2,
+  "first_score": "NOT_RUN",
+  "error": "ValidationError: non-unique item_indices in actual selection response",
+  "cost": {
+    "calls": 18,
+    "prompt_tokens": 663434,
+    "total_tokens": 683866,
+    "completion_tokens": 20432
+  },
+  "ledger_delta": {
+    "generation": {
+      "known_tokens": 683866,
+      "new_unknown": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "new_unknown": 0
+    }
+  },
+  "retry": false,
+  "artifact_root": "artifacts/global-development/long-source-pack-v1/MiLAi-memory-only",
+  "next_step": "Preserve original response/checkpoints/costs; repair redundant read-only selection handling and resume deliberately from actual state. Do not resample the failed selection or count as completed comparison."
+}
