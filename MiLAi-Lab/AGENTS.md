@@ -36,17 +36,28 @@ legacysearchdirectory, stillnotacceptance. Dedup exec24897 CLOSED0 predict/first
 2Judge7763,old2Correct vsnew1invalid/1Hallucination; no qualityclaim. Manifests saved.
 Latest4370ff9e removes search_memory onlyforpure readonly packrequests; mutations/forgetlegacytarget
 lookup retained.4Hostintegration+13evidencechecks,Ruff/mypy passed; actualHost recheck NOTRUN.
-Originalexec48577 CLOSED1 knownselectionduplicates at51sessions/9QA; oldroot untouched.
-Latestmethodb1dc47cd coalesces duplicate readtargets by firstpriority insharedadmission; expand_context
-also unique; removesuniqueItems rejection only. Types/enums/Sourcevisibility unchanged.15evidencechecks,
-Ruff/mypy passed. ACTIVE exec53109=run_long_source_pack_resumed_v1.py: copiedactualbank/checkpoints and
-18oldgenreplies, sameconfig/data/12QA. Old9answers/failedselection cachedresponse reused, no resampling.
-Source-selection-dedup-v1/MiLAi-Lab=b1dc47cd. Countold+newgen once,0emb; keep bothphase timings.
-Originalterminal retained inoldroot andneworiginal-terminal-predict.json. No othermodelqueue active.
-Hostv3 CLIprepared0HTTP, configs/milai-global-host-v3.json/original2fixture; run_host_packs_v3.py
-uses sourceb1dc47cd aftercurrentprediction+firstscoreclose. Samequestions/topK1/material8192/reads3.
-Then freezechosen candidate andcompleteheldout histories, conditionalProduct/Fdecision, fullaudit.
-Userauthorizedbranchpush persists; lastpushed2b8cc89c, currentmethodb1dc47cd notyetpushed.
+SOURCE-only continuation exec53109 CLOSED0 predict/firstscore:64sessions12answers,6C3H1Omission2invalid.
+25read956365+12Judge30397,maintenance0/emb0/newunknown0.18oldgenresponses/9answers unchanged;
+oldstart-to-finalledger986762exact. S0predict3034404 so-68.5%, butCorrect6vs7. Noqualitywinnerclaim.
+Pairedreview:2invalid answers semantically match controls; clothingupdate presentbutmissed inselection;
+health chose0bodies, gap-derivedclaims/omission. global-long-source-pack-v1-summary.json.
+Hostv3 exec59108 CLOSED actualallSourcesopened but lastreadreplacedneededoldbodies.8c893af3 fixes
+Hostresident retention: newpriority+fittingoldpacks/contexts, candidatepaging keepsbody. EmptyBenchmark
+answer body_delivered=False fix(metadataonly).17evidence+4Hostchecks/Ruff/mypy pass.
+Hostv4 exec56888 CLOSED: finalrange3/context5actualSources. Rangefirstnull thenreadonlyrecovery;
+correctcount/condition but false no-read/permissionclaim. Contextfirstanswercorrect.11gen49409,emb0.
+KeepfullHostacceptancePARTIAL; no more same-storytuning.
+FINAL METHOD/CONFIG FROZEN beforeheldoutaccess:44fb71f8 / source8c893af3 / source-retain-packs-v1.
+Source-only S0legacy vsS0question_pack efficiencycandidate; sameT1/8192/65536/12calls. Frozenconfigs
+configs/milai-global-final-confirmation-{s0,pack}-v1.json. Firstprepare0HTTPfailedmissingprefixkey;
+explicitnull addedboth preserving fullhistory semantics (dd0e5d01), no method/model/budget change.
+Afterfreeze selected original2reservedusers COMPLETE66sessionseach (132total), QA6each: U1at19/44/66,
+U2at22/44/66 (short oneMemoryBoundary fallbackperrule). Originalfullusers/QA retainedignoredroot;
+inputdialogue/metadata exactequal. Never tune/rescore/reselect fromconfirmationoutcomes.
+ACTIVE exec81725: prepare botharms thenrun_final_confirmation_v1.py; inspect actualprocess.json
+artifacts/global-development/final-confirmation-v1/process.json. SerialS0predict/score thenpackpredict/score.
+No othermodeljob. Afterclosure: allfirstoutputs/costs/source review, conditionalProduct/Fdecision,
+originalplan requirementaudit, currentdocs/authorizedGitHubpush. Goalstillactive/incomplete.
 Do not weaken Source/owner/visibility/real-effect boundaries or add keyword intent heuristics.
 
 All predeclared runs above keep firstoutputs andfailures. Fullheldoutmetadata selection remains
