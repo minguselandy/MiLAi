@@ -64,5 +64,8 @@
     "model_calls": 0,
     "running_code_changed": false,
     "scope": "non-unique SQLite ORDER BY index only"
-  }
+  },
+  "additional_integration_tests": 52,
+  "package_boundary": "passed",
+  "tools_boundary": "passed"
 }

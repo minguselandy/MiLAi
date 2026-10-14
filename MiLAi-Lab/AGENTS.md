@@ -60,11 +60,11 @@ A3 second actualCPU bottleneck confirmed: another199samples at replay_requested-
 SQLite search sorts allvalues for EVERYpage. Actual52MBbank copy unchangedquery:22.6183s->0.6799s,
 completeorderedrootrows exactequal; indexbuild0.037s. c61e680f TransactionalSqliteStore.setup adds
 nonunique milai_store_updated_at_idx(updated_at DESC), no logicalrecord/schema/API/permission change.
-9sorting/transaction/replaychecks,Ruff/mypy pass. Physicalindex applied live WITHOUT restart/codehotedit:
+9sorting/transaction/replaychecks plus52baseline/joint-evidenceintegrationchecks,Ruff/mypy/DAG/tool-boundary pass. Physicalindex applied live WITHOUT restart/codehotedit:
 U1 at10:44:38UTC (8082rows,3semanticrecordvalues/times unchanged); U4 at10:46:21UTC (2712rows,1record
 unchanged). Bothreceipts sqlite-order-index-v1/*-applied.json; keep mixed timing/cost, nofree speedclaim.
 Newrun source-order-index-v1=c61e680f frozen forv3 anddeduppilot. Current51182eadcode unchanged.
-Lastverified U1full32 +U4first10,8QA. KnownU1maintenance15 and29 length failures retained.
+Lastverified U1full32 +U4first16,8QA. KnownU1maintenance15 and29 length failures retained.
 
 NEXT after currentqueue closes: normalCLI prepare/run global-story-v3 using source-order-index-v1,
 configs/milai-global-story-v3.json andoriginal17fixture; run_global_story_v3.py alreadypointsnewsource.
