@@ -1,7 +1,7 @@
 # Current handoff: long comparison closed; Host classification under investigation
 
-Full GLOBAL plan ACTIVE/incomplete. No SHA/checksum gates, subagents, new model deployment,
-publication or merge. Root serial model HTTP with existing continuous ledger/owner lock.
+Full GLOBAL plan ACTIVE/incomplete. No SHA/checksum gates, subagents or new model deployment.
+User now explicitly requested current summary+GitHub commit/push; branch publication authorized, not merge. Root serial model HTTP with existing continuous ledger/owner lock.
 Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python and PYTHONPATH=src.
 Read docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md and current manifests for results.
 
@@ -25,18 +25,27 @@ explicit+new_assertion tags. 5 integration variants/Ruff/mypy passed. scope-cana
 no-thinking still misclassifies semantic rule withdrawal as forgetting (v3). v4 CLOSED known length:
 first completed, second thinking loop32768,6 notrun.2gen36506,newunknown0. No stage-budget feature added.
 All canaries have0 semantic/business/forget mutations. global-request-scope-diagnostics-v1.json.
-ACTIVE job exec43564: run_global_story_v6.py; frozen source-scope-schema-v1/MiLAi-Lab=87851a3a.
-Original17 messages, fresh bank; existing declaration thinkingFalse/greedyT0, Reader/editor unchanged.
-Continue later original inputs after known failures; one existing null-body readonly recovery allowed;
-stop unknown. Final finite story, no further same-story tuning; report failed acceptance honestly.
+Normalstory v6 exec43564 CLOSED0, all17 attempted; first15completed+2null failures,2readonly
+recoveries allCLIcompleted but semanticacceptancePARTIAL. 54gen489040+73emb3891, ledgerexact,newunknown0.
+Bcorrection committed; Cscoped rule correct but duplicates commonrule/provenance. Recovery falsely says
+committedcancel notexecuted; historyr1/r3 actuallyread but callswithdrawnDu effective. Forget3rejects,
+0effect. Reopen honest; actualbankbackup4recordvalues unchanged/9versions readable/0revokedSource.
+See global-story-v6-summary.json. No further same-story tuning, never countCLIcompleted as semanticpass.
+Hostv2 exec81913 CLOSED0 both firstCLIcomplete:9gen43240,emb0. Rangeactual3Sources; contextonly
+legacysearchdirectory, stillnotacceptance. Dedup exec24897 CLOSED0 predict/firstscore:4read72673,
+2Judge7763,old2Correct vsnew1invalid/1Hallucination; no qualityclaim. Manifests saved.
+Latest4370ff9e removes search_memory onlyforpure readonly packrequests; mutations/forgetlegacytarget
+lookup retained.4Hostintegration+13evidencechecks,Ruff/mypy passed; actualHost recheck NOTRUN.
+ACTIVE exec48577: run_long_source_pack_v1.py, source-order-index-v1=c61e680f, same2users32sessions12QA.
+Do not launch another modelqueue until actualcompletion. NewHost code does not hotedit frozenbenchmark.
+Next: close source-only comparison andfirstscore, actual2-case Hostcatalog check on4370ff9e,newroot;
+freeze finalmethod, fullheldout histories, conditionalProduct/F decision, finalaudit.
+Userrequested GitHubsummary/push beingcompleted now; report actualbranch/commit andremainingwork.
 Do not weaken Source/owner/visibility/real-effect boundaries or add keyword intent heuristics.
 
-Next serial work: conclude active normal17-message story; actual2-case Host body
-reads configs/milai-global-host-v2.json / run_host_packs_v2.py; 2-question saved-pool dedup pilot
-configs/milai-global-readpack-dedup-pilot-v1.json / run_dedup_pilot_v1.py. Both latter source c61e680f,
-CLIprepare now completed0HTTP; original protocol-only prepare failures retained in *-preparation roots. Then source-only pack12QA, freeze final
-method, whole-user heldout confirmation (metadata selection manifest; COMPLETE histories, no prefixcap),
-conditional Product/F decision and full completion audit. Do not mark complete before remaining work.
+All predeclared runs above keep firstoutputs andfailures. Fullheldoutmetadata selection remains
+unchanged:2reservedusers, COMPLETEhistories, no prefixcap or contentaccessbefore finalfreeze.
+Goal remainsactive; finite negative results are acceptancefailures, not reasons for endless same-case tuning.
 
 Historical handoff snapshots below are closed/stale, not current jobs or authorization.
 
