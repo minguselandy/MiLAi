@@ -289,8 +289,10 @@ def test_functional_host_uses_shared_pack_admission_and_read_allowance(tmp_path:
         assert len(first["candidates"]) == 1
         assert query["source_ref"] not in json.dumps(first)
         tool = next(t for t in memory.tools() if t.name == "read_evidence")
+        navigation = first["candidates"][0]["evidence_read"]
+        assert navigation["tool"] == tool.name
         result = tool.invoke({"type": "tool_call", "name": "read_evidence", "id": "r1",
-                              "args": {"item_indices": [0], "task": "range",
+                              "args": {**navigation["arguments"], "task": "range",
                                        "gap": "Need the whole captured scope."}}, config=config)
         packet = json.loads(result.content)
         assert packet["ok"] and packet["range_coverage"]["complete"]

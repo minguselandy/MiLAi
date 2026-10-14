@@ -257,6 +257,7 @@ class FunctionalEditMemory(FunctionalMemory):
         candidates = directory if directory is not None else [
             {**pack_candidate(open_evidence_packs(
                 self.service, [item], refresh_current=True)[0], index),
+             "evidence_read": {"tool": "read_evidence", "arguments": {"item_indices": [index]}},
              **({"type": "record_candidate", "record_id": item["record_id"],
                  "revision": item["revision"]} if item["kind"] == "semantic_view" else {})}
             for index, item in enumerate(materials)
