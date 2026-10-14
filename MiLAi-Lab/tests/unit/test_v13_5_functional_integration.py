@@ -298,6 +298,13 @@ def test_state_view_pure_save_continues_in_current_session_and_readonly_reopens(
                 assert "tools" not in wire and "tool_choice" not in wire
                 assert "classify_current_request once" not in wire["messages"][0]["content"]
                 schema = wire["response_format"]["json_schema"]["schema"]
+                shown, _ = json.JSONDecoder().raw_decode(
+                    wire["messages"][0]["content"].split("RESPONSE_SCHEMA:\n", 1)[1])
+                from milai_lab.providers.contextual_vllm import generation_schema
+
+                expected_schema = generation_schema({"type": "json_schema", "json_schema": {
+                    "name": "milai_request_scope", "schema": shown}})["json_schema"]["schema"]
+                assert expected_schema == schema
             else:
                 schema = wire["tools"][0]["function"]["parameters"]
             if text == continue_text:

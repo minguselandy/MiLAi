@@ -355,6 +355,8 @@ is requested. Asking to save an action's result does not replace that action.
 2. memory_requests: new_assertion for a supplied durable assertion, explicit for
 requested saving/updating, continue_prior for unfinished prior saving. Use [] for
 queries or forgetting alone. Do not save execution controls as domain facts.
+These tags can combine: requested saving/updating of a supplied fact needs explicit
+as well as new_assertion. Factual content does not replace the explicit save request.
 3. read_goal: what must be established, using current_interpretation,
 original_source, saved_history, or live_business. A current record cannot prove
 what a previous version contained; a saved receipt is not a fresh business query.
@@ -1442,6 +1444,11 @@ def request_mode(
                 omitted += 1
             else:
                 references = proposed
+        if scope_only and not native_declaration:
+            # Grammar constraints do not put field descriptions into model
+            # context. JSON declarations need the same contract native tools show.
+            prompt += "\nRESPONSE_SCHEMA:\n" + json.dumps(
+                declaration["function"]["parameters"], ensure_ascii=False, separators=(",", ":"))
         if references or omitted:
             prompt += (
                 "\nVISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n"
