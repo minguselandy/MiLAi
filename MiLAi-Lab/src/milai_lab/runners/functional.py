@@ -1461,6 +1461,14 @@ def request_mode(
                     and isinstance(response.content, str) and not response.tool_calls else None)
         except ValueError as error:
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID") from error
+        if isinstance(decision, dict):
+            # These fields are category/restriction sets, not ordered application
+            # actions. Repeated tags add no permission or work; normalize once at
+            # the model input boundary and still validate every remaining value.
+            for field in ("memory_requests", "forbidden_operations"):
+                tags = decision.get(field)
+                if isinstance(tags, list) and all(isinstance(tag, str) for tag in tags):
+                    decision[field] = list(dict.fromkeys(tags))
         if not valid(decision):
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
         if (application_workflow is not None and not scope_only and isinstance(decision, dict)

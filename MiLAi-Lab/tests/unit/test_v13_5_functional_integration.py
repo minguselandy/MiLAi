@@ -6953,3 +6953,46 @@ def test_dynamic_host_reads_unformed_source_and_explicitly_consolidates_once(
     count = len(wires)
     repeated = memory_operations.run(root, **arguments)
     assert repeated["status"] == "completed" and len(wires) == count
+
+
+@pytest.mark.parametrize("unknown_tag", [False, True])
+def test_request_scope_normalizes_repeated_categories_but_keeps_permission_checks(
+    tmp_path: Path, unknown_tag: bool,
+) -> None:
+    decision = {
+        "allow_forgetting": False, "business_action_request": "none",
+        "memory_requests": ["new_assertion"] * 5,
+        "application_continuation_request": "none", "read_goal": None,
+        "forbidden_operations": ["business_mutation", "business_mutation", "forget_memory"],
+        "response_scope": "substantive",
+    }
+    if unknown_tag:
+        decision["memory_requests"].append("invented_permission")
+
+    class Model:
+        def invoke(self, *args: Any, **kwargs: Any) -> AIMessage:
+            return AIMessage(content=json.dumps(decision))
+
+    path = tmp_path / "scope.json"
+    arguments = dict(native_declaration=False, write_mode_declaration=True,
+                     action_mode_declaration=True, operation_mode_declaration=True,
+                     reference_mode_declaration=True, independent_capabilities=True,
+                     memory_continuation=True, application_workflow="reservation_v1",
+                     scope_only=True, request_parts=True)
+    model = cast(functional.LangMemRecipeChatModel, Model())
+    if unknown_tag:
+        with pytest.raises(functional.IncompleteChatResponse,
+                           match="FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID"):
+            functional.request_mode(model, path, {"source_ref": "actual-source"},
+                                    "Remember the new rule, no business actions or forgetting.",
+                                    1, lambda event: None, **arguments)
+        assert "decision" not in read_json(path)
+        return
+    result = functional.request_mode(model, path, {"source_ref": "actual-source"},
+                                     "Remember the new rule, no business actions or forgetting.",
+                                     1, lambda event: None, **arguments)
+    assert result["allow_memory_maintenance"]
+    assert not result["allow_business_mutation"] and not result["allow_forgetting"]
+    assert read_json(path)["decision"]["memory_requests"] == ["new_assertion"]
+    assert read_json(path)["decision"]["forbidden_operations"] == [
+        "business_mutation", "forget_memory"]
