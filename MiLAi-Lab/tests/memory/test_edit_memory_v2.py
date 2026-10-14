@@ -2126,3 +2126,52 @@ def test_proposition_recipe_preserves_literal_time_through_extractor_writer_boun
         assert "Recently" in messages[1]["content"]
         assert "event_at" not in candidates[0] and service.records() == []
         assert "proposition_updates" not in EditFeatures().settings()
+
+
+def test_proposition_time_and_changed_assertion_are_bound_before_generation(tmp_path):
+    features = EditFeatures(True, True, True, True, True, True, proposition_updates=True)
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", features=features,
+                            maintenance_mode="event_delta_v1")
+        view, _ = next_request(service, method, "seed", "A sends to Li. B sends to Wang.")
+        created = {"action": "create", "matter": "Contacts", "units": [
+            next_unit("A sends to Li."), next_unit("B sends to Wang.")], "relations": []}
+        saved = method.apply("s", "seed", method.decode_proposal(
+            clause_proposal(created, conditioned=True), view["mapping"]))
+        assert saved["ok"]
+        current, _ = next_request(service, method, "change",
+            "From 2030-10-20 A sends to Zhao; B remains unchanged.", [service.read(saved["id"])])
+        assert current["packet"]["time_choices"][0]["value"] == "2030-10-20"
+        valid = {"action": "edit", "target": "r1", "edits": [{
+            "operation": "replace", "target_unit": "u1", "text": "A sends to Zhao from 2030-10-20.",
+            "evidence": ["e1"], "assertion": {"source_evidence": "e1", "kind": "reported",
+                                              "applicability": {"effective_from": "t1"}},
+        }]}
+        schema = method.proposal_schema(mapping=current["mapping"], for_generation=True)
+        Draft202012Validator(schema).validate(valid)
+        wrong = copy.deepcopy(valid)
+        wrong["edits"][0]["assertion"] = {"keep": "h1"}
+        assert not Draft202012Validator(schema).is_valid(wrong)
+        wrong = copy.deepcopy(valid)
+        wrong["edits"][0]["keep_support"] = ["h2"]
+        assert not Draft202012Validator(schema).is_valid(wrong)
+        wrong = copy.deepcopy(valid)
+        wrong["edits"][0]["assertion"]["applicability"]["effective_from"] = "2030-10-20"
+        assert not Draft202012Validator(schema).is_valid(wrong)
+        receipt = method.apply("s", "change", method.decode_proposal(valid, current["mapping"]))
+        assert receipt["ok"]
+        state = service.read(saved["id"])["value"]["edit_state"]
+        assert state["units"][0]["assertion"]["applicability"] == {"effective_from": "2030-10-20"}
+        assert state["units"][1]["text"] == "B sends to Wang."
+        assert service.read(saved["id"], 1)["ok"]
+        recent, _ = next_request(service, method, "recent", "Recently considering SMS; undecided.",
+                                 [service.read(saved["id"])])
+        assert recent["packet"]["time_choices"] == []
+        append = {"action": "edit", "target": "r1", "edits": [{
+            "operation": "append", "role": "content",
+            "text": "Recently considering SMS; undecided.",
+            "evidence": ["e1"], "assertion": {"source_evidence": "e1", "kind": "reported",
+                                              "applicability": {"event_at": "2030-10-14"}},
+        }]}
+        assert not Draft202012Validator(method.proposal_schema(
+            mapping=recent["mapping"], for_generation=True)).is_valid(append)

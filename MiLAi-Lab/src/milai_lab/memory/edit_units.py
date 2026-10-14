@@ -1549,4 +1549,10 @@ def writer_projection(
     if features and any(features.values()):
         packet["edit_features"] = copy.deepcopy(features)
         draft["edit_features"] = copy.deepcopy(features)
+    if features and features.get("proposition_updates") and features.get("temporal_scope"):
+        from milai_lab.memory.source_times import source_time_choices
+
+        times = source_time_choices(fresh)
+        packet["time_choices"] = times
+        draft["time_choices"] = times
     return packet, draft

@@ -85,32 +85,27 @@ PATCH_TEXT_INSTRUCTIONS = (
 
 
 PROPOSITION_UPDATE_INSTRUCTIONS = (
-    "\nRepresent independently changing subjects, attributes and scopes as independently "
-    "revisable complete propositions. Preserve a shared negation, quantifier, subject and "
-    "modality in every proposition it governs; do not split on punctuation alone. Existing "
-    "conditions and exceptions can be linked to the governed propositions. A summary of a "
-    "matter is not a substitute for its separately changing claims. "
-    "For a compound old claim, revise the whole affected expression in one ordinary replace "
-    "and, when useful, append independently supported propositions. Restate what remains "
-    "true: retaining the old nouns or characters does not preserve their predicate. Prefer "
-    "replace/append/retract for shared predicates, negation, quantities, intervals or exceptions; "
-    "a text patch is only suitable for an isolated value whose surrounding meaning stays "
-    "unchanged. Use actual redelivered old source wording for retained meaning and current "
-    "evidence for the change. Exact h keeps retain their original attribution; they cannot "
-    "support newly generated wording. Coordinate affected conditions and overviews, while "
-    "unrelated claims stay unchanged. A cancellation of an exception leaves the general rule "
-    "and any independent effective-date change intact. "
-    "Keep the source's literal time expression in the claim text. change_candidates.time is "
-    "quoted temporal wording, not a normalized date. Fill precise event_at/effective_from/"
-    "effective_until only for an explicit date or a reliably anchored interpretation; otherwise "
-    "omit that field. Never complete missing event clocks using report/capture/commit time. "
-    "An empty change_candidates list in single-pass means no extracted hints were supplied; "
-    "it does not mean the current source has no facts. An empty old-record directory does not "
-    "satisfy a supplied durable assertion: create its supported propositions when warranted. "
-    "A declared future schedule can be remembered now as a future schedule. "
-    "A future schedule is not an observed completed event, considering is not deciding, and "
-    "a gradual change is not an absolute reversal. A restatement may correctly preserve the "
-    "state; an actual change must not be hidden by an empty proposal or a duplicate new record. "
+    "\nEmit one complete clause for each independently changeable subject, attribute and period. "
+    "The matter label is navigation; do not add a catch-all summary that duplicates sibling "
+    "claims. Independent facts belong in parallel clauses, not conditions of an overview. "
+    "Conditions contain actual prerequisites or scope. Preserve shared negation, quantities, "
+    "subjects and modal strength in every claim they govern. "
+    "An empty change_candidates list means no extracted hints were supplied, not no new facts. "
+    "When the current source supplies a durable claim not already saved, create it even when "
+    "the old-record directory is empty. A restatement or bare acknowledgment may be a no-op. "
+    "Revise the complete affected expression. New wording uses current evidence and a new "
+    "assertion source; assertion.keep is for exact retained text only. Keep unrelated units "
+    "unchanged. Use the delivered old wording/support for retained parts of a compound claim. "
+    "Cancellation removes only the exception, preserving the applicable general rule. "
+    "Keep literal temporal wording in claim text. For precise time fields select time_choices "
+    "references; never regenerate dates or copy report/capture/commit clocks. These choices "
+    "locate temporal wording, not evidence that an event happened. Report-relative candidates "
+    "apply only when the phrase is anchored to this source's report day, not another speaker's "
+    "quoted clock. If the anchor is ambiguous or no supported choice exists, "
+    "omit the precise field. For an entire stated day use from=t# and until=t#:end, whose end "
+    "is exclusive. Different before/after claims need separate clauses and applicability. "
+    "A future schedule remains future, considering remains undecided, and gradual change "
+    "must not become an absolute reversal."
 )
 
 
@@ -1833,9 +1828,15 @@ class EditMemory:
                        if "calendar_context" in actual else {}),
                 }
                 if self.features.temporal_scope and "applicability" in selected:
-                    validate_applicability(selected["applicability"],
+                    applicability = copy.deepcopy(selected["applicability"])
+                    if self.features.proposition_updates:
+                        from milai_lab.memory.source_times import bind_applicability
+
+                        applicability = bind_applicability(
+                            applicability, bound["time_choices"], item.get("evidence", []))
+                    validate_applicability(applicability,
                                            calendar_context=actual.get("calendar_context"))
-                    result["applicability"] = copy.deepcopy(selected["applicability"])
+                    result["applicability"] = applicability
                 if self.features.temporal_scope and "evidence_links" in selected:
                     links = {}
                     for stance, aliases in selected["evidence_links"].items():

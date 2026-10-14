@@ -390,6 +390,22 @@ def feature_proposal_schema(
                 | {"quantity_scope": {"enum": ["overall", "per_member"]}},
                 [],
             )
+            if features.proposition_updates:
+                properties = assertion["oneOf"][0]["properties"]["applicability"]["properties"]
+                dates = [item["id"] for item in mapping.get("time_choices", [])]
+                day_ends = [item["id"] + ":end" for item in mapping.get("time_choices", [])
+                            if "day_end_exclusive" in item]
+                for field in ("event_at", "effective_from", "effective_until"):
+                    if dates:
+                        properties[field] = {
+                            "type": "string",
+                            "enum": dates + (day_ends if field == "effective_until" else []),
+                            "description": "Select a time_choices reference from original wording. "
+                                           "For a whole day, until=t#:end selects the next day's "
+                                           "exclusive boundary. Omit unknown dates.",
+                        }
+                    else:
+                        properties.pop(field)
             assertion["oneOf"][0]["properties"]["evidence_links"] = _object(
                 {
                     stance: {"type": "array", "items": reference("e")}
@@ -431,13 +447,37 @@ def feature_proposal_schema(
                         item["required"].append("assertion")
                     elif "text" in item["properties"]:
                         item["properties"]["assertion"] = copy.deepcopy(assertion)
-                        if item["properties"]["operation"]["const"] not in {
-                            "replace",
-                            "change_value",
-                            "change_condition",
-                        }:
+                        if (features.proposition_updates and for_generation) or (
+                            item["properties"]["operation"]["const"] not in {
+                                "replace", "change_value", "change_condition",
+                            }
+                        ):
                             item["properties"]["assertion"] = copy.deepcopy(current_assertion)
                         item["required"].append("assertion")
+
+    if features.proposition_updates and for_generation:
+        for variant in variants:
+            if "edits" not in variant["properties"]:
+                continue
+            operations = variant["properties"]["edits"]["items"]["oneOf"]
+            bound_operations = []
+            for operation in operations:
+                props = operation["properties"]
+                if props["operation"]["const"] != "replace":
+                    bound_operations.append(operation)
+                    continue
+                for unit in refs["u"]:
+                    choice = copy.deepcopy(operation)
+                    choice["properties"]["target_unit"] = {"const": unit}
+                    supports = [ref for ref in refs["h"]
+                                if mapping["support"][ref].get("unit") == unit]
+                    choice["properties"]["keep_support"] = {
+                        "type": "array", "maxItems": 1 if supports else 0,
+                        "items": reference("h", supports),
+                    }
+                    choice["properties"]["evidence"]["minItems"] = 1
+                    bound_operations.append(choice)
+            variant["properties"]["edits"]["items"]["oneOf"] = bound_operations
 
     def retained_text(item: dict[str, Any], *, keep_only: bool = False) -> None:
         if not features.source_metadata or (
@@ -486,6 +526,11 @@ def feature_proposal_schema(
             if prior_contents and not (arm == "B0" and features.source_metadata and for_generation):
                 clause["properties"]["from_unit"] = reference("u", prior_contents)
         fields["clauses"] = {**unit, "items": clause}
+        if features.proposition_updates:
+            fields["clauses"]["description"] = (
+                "Parallel, independently revisable complete claims: one clause per subject, "
+                "attribute and applicable period. Do not duplicate these in a catch-all summary. "
+                "A different claim is another clause, not a condition of an overview clause.")
         variant["required"] = ["clauses" if key == "units" else key for key in variant["required"]]
         if arm not in {"B2", "M"}:
             retained_text(clause, keep_only=arm == "B0"
