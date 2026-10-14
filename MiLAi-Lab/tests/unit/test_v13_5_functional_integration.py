@@ -5682,7 +5682,9 @@ def test_shared_maintenance_obeys_readonly_request_mode(tmp_path, monkeypatch, m
 @pytest.mark.parametrize("policy,memory_allowed", [
     ("independent_memory", True), ("independent_memory", False), ("fail_fast", True),
 ])
-@pytest.mark.parametrize("outcome", ["schema", "length", "unknown_schema", "unknown_length"])
+@pytest.mark.parametrize("outcome", [
+    "schema", "length", "unknown_schema", "unknown_length", "unresolved",
+])
 def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, policy: str, memory_allowed: bool,
     outcome: str,
@@ -5703,13 +5705,19 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
             stages.append("scope")
             return native_call("classify_current_request", "scope",
                 memory_requests=["explicit"] if memory_allowed else [], allow_forgetting=False,
-                business_action_request="perform", application_continuation_request="none")
+                business_action_request="continue_if_unfinished" if outcome == "unresolved"
+                                        else "perform",
+                application_continuation_request="resolve_prior_request" if outcome == "unresolved"
+                                                 else "none")
         if names == {"resolve_continuation_operations"}:
             stages.append("invalid-business-plan")
             # Confirmed response uses the continuation schema, not CURRENT's
             # application_requests schema. It grants no operation permission.
             response = native_call("resolve_continuation_operations", "bad-plan",
                                    business_operations=[])
+            if outcome == "unresolved":
+                response = native_call("resolve_continuation_operations", "no-reference",
+                    business_operations=[], prior_memory_request_fragments=[], prior_request_ids=[])
             if outcome.endswith("length"):
                 response["_test_finish_reason"] = "length"
             if outcome.startswith("unknown"):
@@ -5770,7 +5778,9 @@ def test_confirmed_business_plan_failure_preserves_only_independent_memory_work(
     else:
         assert result["status"] == "FAILED"
         assert result["error"] == ("VLLM_CHAT_TRUNCATED" if outcome.endswith("length")
-                                    else "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID")
+                                    else "FUNCTIONAL_CONTINUATION_REFERENCE_UNRESOLVED"
+                                    if outcome == "unresolved" else
+                                    "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID")
         assert result["records"] == []
         assert stages == ["scope", "invalid-business-plan"]
         assert result["budget_after"]["generation"]["unknown_usage"] == int(
@@ -6996,3 +7006,32 @@ def test_request_scope_normalizes_repeated_categories_but_keeps_permission_check
     assert read_json(path)["decision"]["memory_requests"] == ["new_assertion"]
     assert read_json(path)["decision"]["forbidden_operations"] == [
         "business_mutation", "forget_memory"]
+
+
+def test_actual_read_allowance_exhaustion_instructs_final_answer_without_an_extra_denial(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+                    current_delivery=True, direct_response=True, phase_thinking=True,
+                    actual_capabilities=True, dynamic_memory=True,
+                    read_exhaustion="answer_from_delivered_v1")
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return native_call("classify_current_request", "mode", memory_write_request="none",
+                               allow_forgetting=False, business_action_request="none",
+                               business_operations=[])
+        if ordinal <= 4:
+            source = next(row["source_ref"] for row in materials(wire)["items"]
+                          if row["type"] == "fragment")
+            return native_call("read_source", f"read-{ordinal}", source_ref=source)
+        assert ordinal == 5
+        assert "read allowance is exhausted" in str(wire["messages"])
+        assert "read_source" not in {t["function"]["name"] for t in wire.get("tools", [])}
+        return {"role": "assistant", "content": "I can only report the evidence already read."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank="bounds", owner="alice", session="s",
+                                message_id="q", content="Read the current captured statement.")
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert result["read_completion"]["reads_remaining"] == 0 and len(wires) == 5

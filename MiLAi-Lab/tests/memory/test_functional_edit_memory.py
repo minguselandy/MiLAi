@@ -3337,3 +3337,41 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
             part["fragment_handle"] for part in memory.service.source_fragments(original_ref)])
         assert visible_cards(None, memory.service, current_ref,
                              pending_maintenance=prior_cards) == []
+
+
+@pytest.mark.parametrize("fits_all", [True, False])
+def test_single_pass_propositions_skip_selector_only_for_complete_fitting_input(tmp_path, fits_all):
+    from milai_lab.methods.edit_maintenance import maintain_event
+
+    features = EditFeatures(True, True, True, True, True, proposition_updates=True)
+    with opened(tmp_path, interface_version="I2", features=features,
+                maintenance_recipe="single_pass", memory_view_mode="staged") as memory:
+        writer_turn(memory, "seed", "User reports quiet reminders.")
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": next_sdk_create()},
+                                  "create", "seed").content)
+        assert saved["ok"]
+        before = memory.service.read(saved["id"])["value"]
+        writer_turn(memory, "next", "Keep the same quiet reminders; no change.")
+        ref = memory._binding(cfg("next"))["source_ref"]
+        delivery = memory.writer.prepare([ref], "", selected_records=[])
+        calls = []
+
+        def call(stage, messages, schema):
+            calls.append(stage)
+            if stage.startswith("select"):
+                return {"record_ids": [saved["id"]], "done": True}
+            body = json.loads(messages[1]["content"])
+            assert body["delivery"]["records"]
+            assert "User reports quiet reminders." in str(body)
+            return {"creates": [], "records": {}}
+
+        result = maintain_event(memory.writer, delivery, session="s", request_id="preserve",
+            date="2030-01-01", recipe="single_pass", model_call=call,
+            candidate_record_ids=[saved["id"]], memory_view_mode="staged",
+            stage_fit=lambda stage, messages: fits_all or stage != "edit")
+        assert memory.service.read(saved["id"])["value"] == before
+        assert len(calls) == 1
+        if fits_all:
+            assert calls[0].startswith("edit:") and result["status"] == "completed"
+        else:
+            assert calls[0].startswith("select:") and result["status"] == "incomplete"

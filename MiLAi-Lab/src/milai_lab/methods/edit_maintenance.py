@@ -808,7 +808,23 @@ def maintain_event(
                     directory=[_directory_ref(row) for row in selected],
                     work_items=[], phase="views",
                 )
-                if selected_record_ids is not None or not selected:
+                direct = selected_record_ids is not None or not selected
+                if not direct and recipe == "single_pass" and method.features.proposition_updates:
+                    located = _located_delivery(
+                        method, {**delivery, "prior_context": state.get("prior_context", [])},
+                        state["changes"], retrieval_limit=retrieval_limit,
+                        selected_record_ids=locating_ids, selected_records=selected,
+                        candidate_mode=candidate_mode, prepare_delivery=prepare_delivery,
+                        materialize_support=True,
+                    )
+                    preview = method.preview_writer_request(located)
+                    direct = _fits("edit", _replay_context(method.edit_messages(
+                        preview["packet"], date, allow_create=True, schema=preview["schema"],
+                        prior_context=state.get("prior_context", []),
+                    ), delivery), fit, stage_fit)
+                    if direct:
+                        state["selection_policy"] = "complete_candidate_input_fits"
+                if direct:
                     _append_work(state, request_id, state["directory"], create=True, done=True)
                 save()
             else:

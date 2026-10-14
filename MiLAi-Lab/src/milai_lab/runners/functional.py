@@ -3068,22 +3068,50 @@ def message(
                                 delivered.add(part["fragment_handle"])
                     trace({"event": "functional_material_delivery", "material": material,
                            "consumer": "continuation_reference_resolution"})
-                    mode = continuation_operations(
-                        model,
-                        bank_root / f"{identity}-continuation-operations.json",
-                        {
-                            "source_ref": capture["source_ref"],
-                            "source_revision": 1,
-                            "config_version": freeze["config_version"],
-                        },
-                        content,
-                        mode,
-                        material,
-                        settings["format_reproposals"],
-                        trace,
-                        declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
-                        source_fragment=service.source_fragment,
-                    )
+                    unknown_before = tuple(budget.state[kind]["unknown_usage"]
+                                           for kind in ("generation", "embedding"))
+                    try:
+                        mode = continuation_operations(
+                            model,
+                            bank_root / f"{identity}-continuation-operations.json",
+                            {
+                                "source_ref": capture["source_ref"],
+                                "source_revision": 1,
+                                "config_version": freeze["config_version"],
+                            },
+                            content,
+                            mode,
+                            material,
+                            settings["format_reproposals"],
+                            trace,
+                            declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
+                            source_fragment=service.source_fragment,
+                        )
+                    except ValueError as error:
+                        if (str(error) != "FUNCTIONAL_CONTINUATION_REFERENCE_UNRESOLVED"
+                                or settings.get("request_failure_policy") != "independent_memory"
+                                or not mode["allow_memory_maintenance"]
+                                or mode["memory_write_request"] not in {"explicit", "new_assertion"}
+                                or mode.get("memory_continuation_request")
+                                == "resolve_prior_explicit"
+                                or tuple(budget.state[kind]["unknown_usage"]
+                                         for kind in ("generation", "embedding"))
+                                != unknown_before):
+                            raise
+                        failure = {
+                            "part": "business_plan", "status": "failed", "effect": "none",
+                            "error_type": type(error).__name__, "error": str(error),
+                            "usage_confirmation": "known", "accepted_scope": deepcopy(mode),
+                            "attempt_ref": f"{identity}-continuation-operations.json",
+                            "memory_reference_resolution": "current_independent_intent",
+                        }
+                        output.setdefault("request_part_failures", []).append(failure)
+                        mode = {**mode, "business_action_request": "none",
+                                "business_operations": [], "application_requests": [],
+                                "application_continuation_request": "none",
+                                "allow_business_mutation": False,
+                                "business_declaration_status": "failed_no_business_permission"}
+                        trace({"event": "functional_request_part_failure", **failure})
                 forbidden = set(mode.get("forbidden_operations", []))
                 if "memory_write" in forbidden:
                     mode["allow_memory_maintenance"] = False
@@ -3180,10 +3208,18 @@ def message(
             business_query_targets: list[dict[str, Any]] = []
 
             def available_tool_names(config: RunnableConfig) -> set[str]:
+                nonlocal read_exhausted
                 names = allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
                 if memory.max_evidence_queries is not None:
                     allowance = memory.read_allowance(config)
                     if allowance["reads_remaining"] == 0:
+                        if settings.get("read_exhaustion") == "answer_from_delivered_v1":
+                            read_exhausted = True
+                            output.setdefault("read_completion", {
+                                "reason": "read_limit_exhausted", "reads_remaining": 0,
+                                "next_step": "answer_from_delivered_material",
+                                "effects_preserved": True,
+                            })
                         names -= set(memory.read_tool_names) | {
                             "get_reservation", "get_document_status"}
                     elif allowance["evidence_queries_remaining"] == 0:
