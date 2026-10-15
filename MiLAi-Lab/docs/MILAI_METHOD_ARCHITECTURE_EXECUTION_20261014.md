@@ -405,3 +405,16 @@ host-v1八条正常Host消息协议已prepare，原账本计数不变，0模型H
 首次费用6生成/33,482 tokens及3embedding/256与原账本一致，新增unknown0。原失败、实际状态、末次空响应、七条未执行完整保留，见method-architecture-host-v1-first-summary.json。不能断言一个guard解释了所有模型错误，但第一次无歧义读取确实被实现拒绝。
 
 修复为：初始池0允许省略编号；真正重建后仍要求当前generation，显式旧编号继续拒绝。25相关检查8.43秒通过，mypy/Ruff通过。后续只读恢复将使用已保存实际bank的独立副本和新查询，声明修复源码与成本，不重试首条未知/失败生成，不把恢复算首次成功。
+
+
+## 只读恢复成功、后续Host答复仍失败
+
+bef02eee冻结为host-source-v2。原bank完整复制到read-recovery-v1，保留namespace、实际版本/回执及原queue reservation，不重置连续账本。新纯查询完成：从真实语义条目回答两凭据有效、柜签蓝色，并区分2026保存时间与2034报告时间。全部record values及业务world逐值不变，maintenance和memory mutation均空。该次使用普通read_memory读取，不是对省略pool_generation路径的真实模型再验证；后者仍只有SQLite测试。恢复费用4生成/22,920 tokens、3embedding/272，账本一致、unknown新增0。原首轮成绩不改，见host-v1-recovery-summary。
+
+随后独立恢复分支仅执行原index1：实际保存资格条目r1并引用台账r1，前序台账no_change。规则、培训和结果仍在一个复合单位，台账的两凭据也合并，故没有完整正确的OR-of-AND证明。选择器成功，但Host搜索后以持久record ID调用read_memory，未使用已签发本次q目标；读取拒绝，后一个工具因额度耗尽不可用。末次无工具模型再次content=None/stop，程序保留已提交效果并返回失败回执。此分支index2-7未运行；原首轮仍为1FAILED+7NOT_RUN。费用7生成/66,631 tokens、6embedding/425，账本一致、unknown新增0。实际模型已执行跨入口绑定和读取选择，但正常完整Host故事尚未跑通。下一步处理真实导航/答复交付，不降低修改/可见性/业务权限，也不覆盖这些失败。见host-v1-continuation-summary。
+
+## W4配对参考扩至五组，尚未训练
+
+新增matched-training-v2三组：跨记录凭据OR共同培训；投影两种供电OR共同风扇及用户报告模态；原件需帘+照度、照片仅需照度的不同范围。普通转换与关系目标接收完全相同的输入、修正事实、命题拆分和来源模态，关系目标额外表达支持组。共5组可审查参考，新增2个OR-of-AND、1个独立范围AND；正图均由来源作者标注，不能当成模型形成成功。
+
+三组两种输出均通过各自实际保存的原生成schema，事实clause数组逐值相同；未修改任何实验bank、没有新模型调用或参数更新。初始展柜标签试用了不存在的时间操作数t1，schema拒绝后保留“目前”原文及来源报告时钟，没有编造事件日期。旧两组是影响/局部更新目标，新三组是形成目标，仍需规范任务特定的训练messages，独立复核标签，并在相同参数/训练token预算下做未见范围和事件顺序评价。见method-architecture-training-pairs-v2，W4尚未完成。

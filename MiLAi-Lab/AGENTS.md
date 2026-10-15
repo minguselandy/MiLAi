@@ -1,19 +1,32 @@
-# Current development: first Host attempt FAILED; read-only recovery next
+# Current evidence: Host recovery succeeds; continuation still fails; all queues closed
 
-GoalACTIVE/incomplete. host-v1 driver1347932/exec11501 CLOSED0; message0 FAILED
-VLLM_CHAT_INVALID_CONTENT after realsemanticcommit and successfuldependencyselection,
-remaining7 NOT_RUN. Frozen804d5fe2 untouched. Originalstate hascredentials+bluelabel,
-but mergescredentials and attachesorganization instruction asvaliditycondition.
-Host omitted pool_generation on unchanged pool0; newguard rejected; thenunissued
-sourceidentifier rejected; finalmodel contentNone/stop. See host-v1-first-summary.
-6gen33482+3emb256 exactledger,newunknown0. No currentmodel job running.
-NEW genericfix permits omitted generation beforefirstpoolrebuild (unambiguous), keeps
-revisedpool checks.25relatedtests8.43s,mypy/Ruff pass. Next freeze repairedsource,
-copyactualbank for oneexplicitread-only recovery query, originalfirstresults unchanged.
-Do not resume/retry originalmessage0 or call sevenNOT_RUN firstattemptsuccess.
-FullHost story, W4matchedlearning,strong/externalcontrols,correctedfullR,extra model/
-longhistories,positivecompleteA/Bstory and finalaudit remain. NoSHA/subagents/newledger.
-Older actualresults follow.
+GoalACTIVE/incomplete. No model job live. host-v1 first exec11501 CLOSED: message0
+FAILED after realledgercommit and successfulselector, remaining7NOT_RUN (frozen804d5fe2).
+Sourcebef02eee permits omitted pool_generation only in initial unchangedpool0;
+25tests8.43s,mypy/Ruffpass. Frozenhost-source-v2, originals untouched.
+Read-only recovery exec62835/driver1376916 CLOSED0: newquery on realbankCOPY COMPLETED,
+answersbothcredentialsvalid/bluelabel, correctsave/reportclock; recordvalues/world
+unchanged, maintenance/mutations0.4gen22920+3emb272 exact. Usesordinaryread_memory,
+not actualread_evidence omitted-gen path; thatfix has SQLite testproof only.
+Post-recovery lane exec53077/driver1396411 CLOSED after originalindex1FAILED.
+Actualqualificationrecordr1 created withforeignledgerbindingr1; ledgerno_change.
+Graph remainscompound/incomplete. Selector succeeded; Hostsearch thenread_memory
+with rawrecordIDs instead ofissuedqtargets rejected; finalcontentNone/stop again.
+Indices2-7 remainNOT_RUN inlane.7gen66631+6emb425 exact. First6gen33482+3emb256.
+AllHostsofar17gen123033+12emb953;newunknown0, original9/1floor retained.
+Reports host-v1-first-summary,host-v1-recovery-summary,host-v1-continuation-summary.
+NEXT fixgenericreadtarget/answerdelivery usability withoutweakeningvisibility,
+mutation or business authority. Inspect _resolve_read_target in memory/functional.py,
+request_target_mapping/project_request_targets in functional_state.py, and dynamic
+current_tool_catalog in runners/functional.py. Do not loosen global mutation resolver
+or blindly restartfirst/continuation. No source change for this secondfailure yet.
+W4 expanded to5reviewablematchedexamples: old2impact/localupdate +new3formation
+(2OR-of-AND,1independentANDscope). Baseline/relationtargets identicalfacts; actualsaved
+schemas validate. Positivegraphs are authoredcorrective labels, notmodelsuccess.
+No training/parameterupdates/heldoutlearningeval; normalization remains. See training-
+pairs-v2. Otherfullscope remains: strong/externalcontrols,fullRcorrectedtest,extra model/
+longhistories,completeA/Bstory,normalHostcompletion,finalscientificaudit. NoSHA/subagents/
+newledger. Older closedcross/factorial evidence follows.
 
 # Current development: cross-record pilot CLOSED; Host support writes migrated
 

@@ -1,0 +1,51 @@
+{
+  "status": "READ_ONLY_RECOVERY_COMPLETED",
+  "source_commit": "bef02eee",
+  "original_first_attempt_status": "FAILED",
+  "bank": "actual original bank copied with namespace, receipts, queue reservations and record identities preserved",
+  "new_query": "只查询，不保存或修改：请查看实际已保存的凭据台账，分别说明许澄的会员卡、借阅凭条状态和柜签颜色。不要仅凭先前请求就声称已经保存。",
+  "final_answer": "\n\n根据实际读取到的已保存凭据台账（记录ID: 9a98338b-e88d-5be1-bc74-097e7908984f，第1版），台账中实际保存了以下3个单元：\n\n**1. 会员卡状态**\n- 保存内容：\"许澄的会员卡及借阅凭条有效。\"\n- 状态：**有效**\n\n**2. 借阅凭条状态**\n- 同上单元中明确记载\n- 状态：**有效**\n\n**3. 柜签颜色**\n- 保存内容：\"凭据柜的标签用蓝色。\"\n- 颜色：**蓝色**\n\n---\n\n**补充说明**：\n- 该凭据台账于 2026-10-15T08:13:34+00:00 保存，报道时间为 2034-07-01T09:00:00+08:00。\n- 台账中还包含一条保存条件单元：\"凭据台账应单独保存，不与后续活动资格记录合并\"。\n- 以上内容均为实际已从语义记忆中读取并确认的已保存记录。",
+  "record_values_unchanged": true,
+  "business_state_unchanged": true,
+  "memory_mutation_receipts": [],
+  "maintenance": [],
+  "source_review": {
+    "core_facts_correct": true,
+    "report_and_save_clock_distinguished": true,
+    "reviewer": "same source author/developer",
+    "note": "answer numbers credential statuses separately while saying they share one unit; actual bank has3units including organization condition; no repaired-state claim"
+  },
+  "reads": "shared dependency selector then ordinary read_memory; this run does not by itself prove the omitted-generation read_evidence path was exercised",
+  "engineering_fix_test": "actual unchanged first-pool read_evidence without generation accepted in SQLite test; changed-pool old indices rejected",
+  "costs": {
+    "generation": {
+      "responses": 4,
+      "tokens": 22920
+    },
+    "embedding": {
+      "responses": 3,
+      "tokens": 272
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 4,
+    "generation": {
+      "known_tokens": 22920,
+      "charged_tokens": 22920,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 272,
+      "charged_tokens": 272,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciled": true,
+  "original_results_untouched": true,
+  "unknown_retry": false,
+  "continuation": "remaining seven source/query messages may execute only in separately reported post-recovery lane; never relabel first7NOT_RUN"
+}
