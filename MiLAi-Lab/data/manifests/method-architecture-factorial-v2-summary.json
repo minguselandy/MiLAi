@@ -1,0 +1,2330 @@
+{
+  "status": "TWO_SYMMETRIC_REPEATS_ALL_FIRST_OUTPUTS_REVIEWED",
+  "source_commit": "5734ade2",
+  "reviewer": "same source author/developer; all72answers and12updates reviewed; not independent/blind or official Judge scores",
+  "same_original_seed_and_arrival": true,
+  "new_seed_calls": 0,
+  "seed_costs": "paid once in original factorial-v1; repeated seed/result costs are references and excluded here",
+  "reports": [
+    {
+      "repeat": 1,
+      "cases": {
+        "exception-withdrawal": {
+          "updates": {
+            "U0": {
+              "maintenance_status": "completed",
+              "unprocessed": [],
+              "receipts": [
+                {
+                  "ok": true,
+                  "status": "committed",
+                  "revision": 3
+                }
+              ],
+              "target_and_preservation_success": true,
+              "source_modality_success": true,
+              "strict_update_joint_success": true,
+              "review": [
+                "撤销例外，保留一般纸本/数字副本/外借规则及原来源。"
+              ],
+              "after_units": [
+                {
+                  "text": "纸本原稿与复印件在室内阅览均戴手套；数字副本不用戴。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:25:39.381671+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f7720840-27ce-49b9-b077-6098422bb73f",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "外借任何纸本都须登记。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:25:39.381671+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f7720840-27ce-49b9-b077-6098422bb73f",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 8465,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 309,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "U1": {
+              "maintenance_status": "completed",
+              "unprocessed": [],
+              "receipts": [
+                {
+                  "ok": true,
+                  "status": "committed",
+                  "revision": 3
+                }
+              ],
+              "target_and_preservation_success": true,
+              "source_modality_success": true,
+              "strict_update_joint_success": true,
+              "review": [
+                "撤销例外，保留一般纸本/数字副本/外借规则及原来源。",
+                "保留孤立的只在公开课期间条件，已无例外目标/活动覆盖边，不计为当前豁免。"
+              ],
+              "after_units": [
+                {
+                  "text": "纸本原稿与复印件在室内阅览均戴手套；数字副本不用戴。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:25:39.381671+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f7720840-27ce-49b9-b077-6098422bb73f",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "外借任何纸本都须登记。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:25:39.381671+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f7720840-27ce-49b9-b077-6098422bb73f",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "只在本次公开课期间",
+                  "role": "condition",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:25:59.224114+00:00",
+                    "occurred_at": "2032-06-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-37313a0c-1460-49ef-9876-952555601301",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "impact": {
+                    "responses": 1,
+                    "known_tokens": 4706,
+                    "unknown_usage_responses": 0
+                  },
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 9009,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 309,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "cells": {
+            "Y00": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "withdrawn",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "混用2026捕获日期与2032报告日期作为用户报告时间。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/exception-withdrawal/Y00/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 16867,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y01": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "withdrawn",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "是否变化先答曾临时调整，后述实际另一个规则；容易混淆题目所问两项未变规则。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/exception-withdrawal/Y01/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 16289,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 14526,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y10": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "withdrawn",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "结尾无持续性变化弱化了两项规则从未改变；其余段落保留未变事实。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/exception-withdrawal/Y10/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 16305,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y11": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "withdrawn",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把2026捕获日期当报告日期，并错误称之后无任何更新；实际报告在2032。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/exception-withdrawal/Y11/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 16773,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 14442,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "seed_reused_reference": "artifacts/method-architecture/factorial-v2-r1/exception-withdrawal/seed/result.json"
+        },
+        "alternative-support": {
+          "updates": {
+            "U0": {
+              "maintenance_status": "completed",
+              "unprocessed": [],
+              "receipts": [
+                {
+                  "ok": true,
+                  "status": "committed",
+                  "revision": 2
+                }
+              ],
+              "target_and_preservation_success": true,
+              "source_modality_success": false,
+              "strict_update_joint_success": false,
+              "review": [
+                "市电失效后保留电池与风扇支持及字幕独立性；没有显式OR支持组。",
+                "新事件单位被标为observed，源仅为用户声明；原seed同样已有observed问题。"
+              ],
+              "after_units": [
+                {
+                  "text": "移动放映车开投影可以用接通的市电，或者有电的电池，任选一种供电",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "两种方式都必须有冷却风扇运转",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "市电插座停用，车上的大电池仍有电、风扇仍正常，投影改走电池供电。字幕屏不受影响。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "observed",
+                    "observed_at": "2026-10-15T04:33:17.362398+00:00",
+                    "occurred_at": "2032-06-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-5ec26b39-b787-477e-88a2-605e279a55dc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "字幕屏单独用小电池，不依赖这套风扇。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 9297,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 229,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "U1": {
+              "maintenance_status": "completed",
+              "unprocessed": [],
+              "receipts": [
+                {
+                  "ok": true,
+                  "status": "committed",
+                  "revision": 2
+                }
+              ],
+              "target_and_preservation_success": true,
+              "source_modality_success": false,
+              "strict_update_joint_success": false,
+              "review": [
+                "市电失效后保留电池与风扇支持及字幕独立性；没有显式OR支持组。",
+                "新事件单位被标为observed，源仅为用户声明；原seed同样已有observed问题。",
+                "保留旧的今天市电接通单位，但其event_at为6月1日；另存6月2日状态，不直接判作无时间的矛盾。"
+              ],
+              "after_units": [
+                {
+                  "text": "移动放映车开投影可以用接通的市电，或者有电的电池，任选一种供电",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "两种方式都必须有冷却风扇运转",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "今天市电接通、电池有电、风扇正常，所以投影可开。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "event_at": "2032-06-01"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "observed",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "字幕屏单独用小电池，不依赖这套风扇。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "市电插座停用，车上的大电池仍有电、风扇仍正常，投影改走电池供电。字幕屏不受影响。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "observed",
+                    "observed_at": "2026-10-15T04:33:17.362398+00:00",
+                    "occurred_at": "2032-06-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-5ec26b39-b787-477e-88a2-605e279a55dc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "impact": {
+                    "responses": 1,
+                    "known_tokens": 4549,
+                    "unknown_usage_responses": 0
+                  },
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 10994,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 229,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "cells": {
+            "Y00": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "remaining-route",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。",
+                    "把运行规则也归于6月2日，原规则报告为6月1日。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "shared-condition",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/alternative-support/Y00/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 14035,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y01": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "remaining-route",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "shared-condition",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/alternative-support/Y01/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 13355,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 13136,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y10": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "remaining-route",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "shared-condition",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/alternative-support/Y10/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 14597,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y11": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "remaining-route",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "shared-condition",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/alternative-support/Y11/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 13523,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 16736,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "seed_reused_reference": "artifacts/method-architecture/factorial-v2-r1/alternative-support/seed/result.json"
+        },
+        "shared-condition": {
+          "updates": {
+            "U0": {
+              "maintenance_status": "incomplete",
+              "unprocessed": [
+                {
+                  "batch": 0,
+                  "operation_id": "update:batch:0:work:0:proposal:0",
+                  "receipt": {
+                    "ok": false,
+                    "status": "rejected",
+                    "reason": "EDIT_SUPPORT_ROUTE_INVALID",
+                    "id": "165a1ba2-dd92-5120-bd68-f268109cedd4",
+                    "revision": 1,
+                    "effect": "none",
+                    "content_verification": "unchecked",
+                    "formation_status": "pending",
+                    "raw_preserved": true
+                  }
+                }
+              ],
+              "receipts": [
+                {
+                  "ok": false,
+                  "status": "rejected",
+                  "reason": "EDIT_SUPPORT_ROUTE_INVALID",
+                  "revision": 1
+                }
+              ],
+              "target_and_preservation_success": false,
+              "source_modality_success": true,
+              "strict_update_joint_success": false,
+              "review": [
+                "规则和无关室内独立性保留。",
+                "更新没有提交，缺少本次新状态；混合Reader从原文仍可能答对。"
+              ],
+              "after_units": [
+                {
+                  "text": "湖边路线同时要求栈桥开放与向导到场。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "屋顶路线只要求向导到场。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "室内标本展示不依赖向导。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "今天两项都满足，所以两条路线都能开展。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "effective_from": "2032-06-01",
+                      "effective_until": "2032-06-02"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 8357,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 180,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "U1": {
+              "maintenance_status": "completed",
+              "unprocessed": [],
+              "receipts": [
+                {
+                  "ok": true,
+                  "status": "committed",
+                  "revision": 2
+                }
+              ],
+              "target_and_preservation_success": true,
+              "source_modality_success": true,
+              "strict_update_joint_success": true,
+              "review": [
+                "规则和无关室内独立性保留。",
+                "追加新的湖边暂停/屋顶继续/室内照常，旧今天单位有6月1日至2日范围；未形成显式支持组。"
+              ],
+              "after_units": [
+                {
+                  "text": "湖边路线同时要求栈桥开放与向导到场。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "屋顶路线只要求向导到场。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "室内标本展示不依赖向导。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "今天两项都满足，所以两条路线都能开展。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "effective_from": "2032-06-01",
+                      "effective_until": "2032-06-02"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "栈桥临时封闭，向导仍已到场。因此湖边路线暂停，屋顶路线可以继续；室内展示照常。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:39:10.344925+00:00",
+                    "occurred_at": "2032-06-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-487ab8e4-907f-4f76-8559-68f7be5cea28",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "impact": {
+                    "responses": 1,
+                    "known_tokens": 3576,
+                    "unknown_usage_responses": 0
+                  },
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 8918,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 180,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "cells": {
+            "Y00": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "prerequisite",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/shared-condition/Y00/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 12248,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y01": {
+              "complete_answers": 3,
+              "core_fact_correct": 2,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "prerequisite",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": false,
+                  "source_review_issues": [
+                    "遗漏当前开放结论；实际末端Reader输入包含完整6月2日室内展示照常原文及正确report_time。答案仍将同日状态当历史而过度拒答。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/shared-condition/Y01/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 8629,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 20777,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y10": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "prerequisite",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/shared-condition/Y10/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 15227,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y11": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "prerequisite",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r1/shared-condition/Y11/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 13446,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 14994,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "seed_reused_reference": "artifacts/method-architecture/factorial-v2-r1/shared-condition/seed/result.json"
+        }
+      },
+      "core_answer_counts": {
+        "Y00": 9,
+        "Y01": 8,
+        "Y10": 9,
+        "Y11": 9
+      },
+      "opportunities_per_cell": 9,
+      "all_attempt_interaction": 0.1111111111111111,
+      "costs": {
+        "maintenance": {
+          "responses": 6,
+          "known_tokens": 55040,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "responses": 12,
+          "known_tokens": 1436,
+          "unknown_usage": 0
+        },
+        "impact": {
+          "responses": 3,
+          "known_tokens": 12831,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "responses": 36,
+          "known_tokens": 171294,
+          "unknown_usage": 0
+        },
+        "evidence_selection": {
+          "responses": 18,
+          "known_tokens": 94611,
+          "unknown_usage": 0
+        }
+      },
+      "ledger_delta": {
+        "generation_requests": 63,
+        "generation": {
+          "known_tokens": 333776,
+          "charged_tokens": 333776,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 1436,
+          "charged_tokens": 1436,
+          "unknown_usage": 0
+        },
+        "unknown_floor": {
+          "generation": 9,
+          "embedding": 1
+        }
+      },
+      "ledger_reconciliation": {
+        "generation_tokens_match": true,
+        "generation_requests_match": true,
+        "embedding_tokens_match": true
+      }
+    },
+    {
+      "repeat": 2,
+      "cases": {
+        "exception-withdrawal": {
+          "updates": {
+            "U0": {
+              "maintenance_status": "completed",
+              "unprocessed": [],
+              "receipts": [
+                {
+                  "ok": true,
+                  "status": "committed",
+                  "revision": 3
+                }
+              ],
+              "target_and_preservation_success": true,
+              "source_modality_success": true,
+              "strict_update_joint_success": true,
+              "review": [
+                "撤销例外，保留一般纸本/数字副本/外借规则及原来源。"
+              ],
+              "after_units": [
+                {
+                  "text": "纸本原稿与复印件在室内阅览均戴手套；数字副本不用戴。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:25:39.381671+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f7720840-27ce-49b9-b077-6098422bb73f",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "外借任何纸本都须登记。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:25:39.381671+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f7720840-27ce-49b9-b077-6098422bb73f",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 6866,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 309,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "U1": {
+              "maintenance_status": "completed",
+              "unprocessed": [],
+              "receipts": [
+                {
+                  "ok": true,
+                  "status": "committed",
+                  "revision": 3
+                }
+              ],
+              "target_and_preservation_success": true,
+              "source_modality_success": true,
+              "strict_update_joint_success": true,
+              "review": [
+                "撤销例外，保留一般纸本/数字副本/外借规则及原来源。"
+              ],
+              "after_units": [
+                {
+                  "text": "纸本原稿与复印件在室内阅览均戴手套；数字副本不用戴。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:25:39.381671+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f7720840-27ce-49b9-b077-6098422bb73f",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "外借任何纸本都须登记。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:25:39.381671+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f7720840-27ce-49b9-b077-6098422bb73f",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "impact": {
+                    "responses": 1,
+                    "known_tokens": 4340,
+                    "unknown_usage_responses": 0
+                  },
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 8570,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 309,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "cells": {
+            "Y00": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把2032-06-03 09:00报告/查询时间等同公开课准确结束时间；原文未给准确结束时刻。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "withdrawn",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/exception-withdrawal/Y00/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 15756,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y01": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把2032-06-03 09:00报告/查询时间等同公开课准确结束时间；原文未给准确结束时刻。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "withdrawn",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把2026捕获日期当报告/发生时间。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把公开课放在2026，虚构至2032的资料空档；实际原文报告在2032。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/exception-withdrawal/Y01/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 16541,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 14156,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y10": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "withdrawn",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把报告日期断言为课程结束边界，且将已交付报告称为未来会记录。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/exception-withdrawal/Y10/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 15362,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y11": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "withdrawn",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "称数字副本/外借规则均已恢复，尽管这两项从未改变。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/exception-withdrawal/Y11/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 15441,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 12103,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "seed_reused_reference": "artifacts/method-architecture/factorial-v2-r2/exception-withdrawal/seed/result.json"
+        },
+        "alternative-support": {
+          "updates": {
+            "U0": {
+              "maintenance_status": "completed",
+              "unprocessed": [],
+              "receipts": [
+                {
+                  "ok": true,
+                  "status": "committed",
+                  "revision": 2
+                }
+              ],
+              "target_and_preservation_success": true,
+              "source_modality_success": false,
+              "strict_update_joint_success": false,
+              "review": [
+                "市电失效后保留电池与风扇支持及字幕独立性；没有显式OR支持组。",
+                "新事件单位被标为observed，源仅为用户声明；原seed同样已有observed问题。",
+                "保留旧的今天市电接通单位，但其event_at为6月1日；另存6月2日状态，不直接判作无时间的矛盾。"
+              ],
+              "after_units": [
+                {
+                  "text": "移动放映车开投影可以用接通的市电，或者有电的电池，任选一种供电",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "两种方式都必须有冷却风扇运转",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "今天市电接通、电池有电、风扇正常，所以投影可开。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "event_at": "2032-06-01"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "observed",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "字幕屏单独用小电池，不依赖这套风扇。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "2032-06-02市电插座停用，投影改走电池供电，风扇正常，字幕屏不受影响。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "observed",
+                    "observed_at": "2026-10-15T04:33:17.362398+00:00",
+                    "occurred_at": "2032-06-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-5ec26b39-b787-477e-88a2-605e279a55dc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 9025,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 229,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "U1": {
+              "maintenance_status": "completed",
+              "unprocessed": [],
+              "receipts": [
+                {
+                  "ok": true,
+                  "status": "committed",
+                  "revision": 2
+                }
+              ],
+              "target_and_preservation_success": true,
+              "source_modality_success": false,
+              "strict_update_joint_success": false,
+              "review": [
+                "市电失效后保留电池与风扇支持及字幕独立性；没有显式OR支持组。",
+                "新事件单位被标为observed，源仅为用户声明；原seed同样已有observed问题。",
+                "保留旧的今天市电接通单位，但其event_at为6月1日；另存6月2日状态，不直接判作无时间的矛盾。"
+              ],
+              "after_units": [
+                {
+                  "text": "移动放映车开投影可以用接通的市电，或者有电的电池，任选一种供电",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "两种方式都必须有冷却风扇运转",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "今天市电接通、电池有电、风扇正常，所以投影可开。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "event_at": "2032-06-01"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "observed",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "字幕屏单独用小电池，不依赖这套风扇。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:32:53.301168+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ce5aca02-4280-4cc0-94bf-e43cf22b3011",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "市电插座停用，车上的大电池仍有电、风扇仍正常，投影改走电池供电。字幕屏不受影响。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "observed",
+                    "observed_at": "2026-10-15T04:33:17.362398+00:00",
+                    "occurred_at": "2032-06-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-5ec26b39-b787-477e-88a2-605e279a55dc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "impact": {
+                    "responses": 1,
+                    "known_tokens": 3571,
+                    "unknown_usage_responses": 0
+                  },
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 9727,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 229,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "cells": {
+            "Y00": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "remaining-route",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "shared-condition",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/alternative-support/Y00/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 14938,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y01": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "remaining-route",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "shared-condition",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/alternative-support/Y01/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 12653,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 14612,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y10": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "remaining-route",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "shared-condition",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/alternative-support/Y10/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 15481,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y11": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "remaining-route",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "shared-condition",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "把用户提供的状态声明表述为现场/直接/实际观察；模型保存的observed标签不能增加原文的证据强度。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/alternative-support/Y11/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 12802,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 18284,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "seed_reused_reference": "artifacts/method-architecture/factorial-v2-r2/alternative-support/seed/result.json"
+        },
+        "shared-condition": {
+          "updates": {
+            "U0": {
+              "maintenance_status": "incomplete",
+              "unprocessed": [
+                {
+                  "batch": 0,
+                  "phase": "edit_pending",
+                  "reason": "Provider output incomplete: length"
+                }
+              ],
+              "receipts": [],
+              "target_and_preservation_success": false,
+              "source_modality_success": true,
+              "strict_update_joint_success": false,
+              "review": [
+                "规则和无关室内独立性保留。",
+                "更新没有提交，缺少本次新状态；混合Reader从原文仍可能答对。"
+              ],
+              "after_units": [
+                {
+                  "text": "湖边路线同时要求栈桥开放与向导到场。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "屋顶路线只要求向导到场。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "室内标本展示不依赖向导。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "今天两项都满足，所以两条路线都能开展。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "effective_from": "2032-06-01",
+                      "effective_until": "2032-06-02"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 13004,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 180,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "U1": {
+              "maintenance_status": "incomplete",
+              "unprocessed": [
+                {
+                  "batch": 0,
+                  "phase": "edit_pending",
+                  "reason": "Provider output incomplete: length"
+                }
+              ],
+              "receipts": [],
+              "target_and_preservation_success": false,
+              "source_modality_success": true,
+              "strict_update_joint_success": false,
+              "review": [
+                "规则和无关室内独立性保留。",
+                "更新没有提交，缺少本次新状态；混合Reader从原文仍可能答对。"
+              ],
+              "after_units": [
+                {
+                  "text": "湖边路线同时要求栈桥开放与向导到场。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "屋顶路线只要求向导到场。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "室内标本展示不依赖向导。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "text": "今天两项都满足，所以两条路线都能开展。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "effective_from": "2032-06-01",
+                      "effective_until": "2032-06-02"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T04:38:41.457539+00:00",
+                    "occurred_at": "2032-06-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-61de2f08-2668-40c8-ad23-6f06f9a05bc4",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "explicit_support_groups": 0,
+              "costs": {
+                "stages": {
+                  "impact": {
+                    "responses": 1,
+                    "known_tokens": 3976,
+                    "unknown_usage_responses": 0
+                  },
+                  "maintenance": {
+                    "responses": 1,
+                    "known_tokens": 12795,
+                    "unknown_usage_responses": 0
+                  },
+                  "embedding": {
+                    "responses": 2,
+                    "known_tokens": 180,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "cells": {
+            "Y00": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "prerequisite",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/shared-condition/Y00/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 11242,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y01": {
+              "complete_answers": 3,
+              "core_fact_correct": 2,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [
+                    "将用户报告混称观测/现场记录，没有额外现场观测依据。"
+                  ],
+                  "reader_failure": null
+                },
+                {
+                  "id": "prerequisite",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": false,
+                  "source_review_issues": [
+                    "遗漏当前开放结论；实际末端Reader输入包含完整6月2日室内展示照常原文及正确report_time。答案将其明确误读为2026年旧报告。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/shared-condition/Y01/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 9240,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 11609,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y10": {
+              "complete_answers": 3,
+              "core_fact_correct": 2,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "prerequisite",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": false,
+                  "source_review_issues": [
+                    "遗漏当前开放结论；实际末端Reader输入包含完整6月2日室内展示照常原文及正确report_time。答案将其明确误读为2026年旧报告。"
+                  ],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/shared-condition/Y10/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 12053,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            },
+            "Y11": {
+              "complete_answers": 3,
+              "core_fact_correct": 3,
+              "opportunities": 3,
+              "record_values_unchanged": true,
+              "answer_reviews": [
+                {
+                  "id": "current",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "prerequisite",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                },
+                {
+                  "id": "preserved",
+                  "core_facts_correct": true,
+                  "source_review_issues": [],
+                  "reader_failure": null
+                }
+              ],
+              "original_answers": "artifacts/method-architecture/factorial-v2-r2/shared-condition/Y11/answers.json",
+              "costs": {
+                "stages": {
+                  "reader": {
+                    "responses": 3,
+                    "known_tokens": 10123,
+                    "unknown_usage_responses": 0
+                  },
+                  "evidence_selection": {
+                    "responses": 3,
+                    "known_tokens": 11079,
+                    "unknown_usage_responses": 0
+                  }
+                },
+                "requests_without_response": [],
+                "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+              }
+            }
+          },
+          "seed_reused_reference": "artifacts/method-architecture/factorial-v2-r2/shared-condition/seed/result.json"
+        }
+      },
+      "core_answer_counts": {
+        "Y00": 9,
+        "Y01": 8,
+        "Y10": 8,
+        "Y11": 9
+      },
+      "opportunities_per_cell": 9,
+      "all_attempt_interaction": 0.2222222222222222,
+      "costs": {
+        "maintenance": {
+          "responses": 6,
+          "known_tokens": 59987,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "responses": 12,
+          "known_tokens": 1436,
+          "unknown_usage": 0
+        },
+        "impact": {
+          "responses": 3,
+          "known_tokens": 11887,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "responses": 36,
+          "known_tokens": 161632,
+          "unknown_usage": 0
+        },
+        "evidence_selection": {
+          "responses": 18,
+          "known_tokens": 81843,
+          "unknown_usage": 0
+        }
+      },
+      "ledger_delta": {
+        "generation_requests": 63,
+        "generation": {
+          "known_tokens": 315349,
+          "charged_tokens": 315349,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 1436,
+          "charged_tokens": 1436,
+          "unknown_usage": 0
+        },
+        "unknown_floor": {
+          "generation": 9,
+          "embedding": 1
+        }
+      },
+      "ledger_reconciliation": {
+        "generation_tokens_match": true,
+        "generation_requests_match": true,
+        "embedding_tokens_match": true
+      }
+    }
+  ],
+  "combined_core_answer_counts": {
+    "Y00": 18,
+    "Y01": 16,
+    "Y10": 17,
+    "Y11": 18
+  },
+  "opportunities_per_cell": 18,
+  "combined_interaction": 0.16666666666666666,
+  "state_counts": {
+    "U0": {
+      "target_and_preservation": 4,
+      "strict_update_joint": 2,
+      "opportunities": 6
+    },
+    "U1": {
+      "target_and_preservation": 5,
+      "strict_update_joint": 3,
+      "opportunities": 6
+    }
+  },
+  "answer_issue_count": 24,
+  "core_error_count": 3,
+  "mechanism_limits": [
+    "all three core errors concern the same indoor-opening query; this is not broad synergy",
+    "all three failed answers received complete current original Source and correct report_time",
+    "r2 shared-condition U0 and U1 both unchanged after Editor length, so that case cannot establish successful dependency-update effect",
+    "no explicit support group in any committed repeat state; no learned graph advantage established",
+    "all-history candidate delivery predates corrected history-selection filtering; not a full corrected R-factor test",
+    "only3authored development histories,2post-cleanup repeats, same actual seeds",
+    "core facts, faithfulness and state UJS kept separate; prior outputs/labels not rewritten"
+  ],
+  "unknown_retry": false
+}

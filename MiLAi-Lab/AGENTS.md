@@ -2,7 +2,9 @@
 
 Goal ACTIVE/incomplete. Both post-cleanup factorial repeats CLOSED0: r1 at
 05:56:57UTC, r2 at06:15:05UTC on2026-10-15. Driver767706/r2worker839224 gone.
-Full review/cost reconciliation of both repeats still pending. Keep original runs
+Both repeats fully reviewed72answers/12updates; costs reconciled649125gen+2872emb.
+Combined coreY00/01/10/11=18/16/17/18 of18;3refusals in same indoor query,
+no graph synergy established. See factorial-v2-summary. Keep original runs
 and their frozen5734ade2 source unchanged; they deliver all historical candidates.
 Cross-record implementation is opt-in and now checked: real foreign record/unit/
 revision bindings, sequential confirmed receipts, global impact regions, actual
@@ -14,7 +16,10 @@ command without PYTHONPATH imported installed source and failed registration; re
 with this worktree src passed277owned sources. No code gate was weakened.
 Cross-v1 control/candidate prepared0HTTP,4events/6QA each; model must form all records
 and links from sources, independent formation, no common-before attribution.
-Next freeze and run cross-v1 serially on original ledger; review both E3 repeats.
+LIVE cross-v1/execution driver1169570,exec4663, frozen8111fd8e; inspect driver/PIDs.
+First prepare path mismatch failed0HTTP, kept separately. Control formed actualforeign
+references but initially ANDed alternative credentials and omitted training premise.
+Candidate still pending at observation. Keep frozen source unchanged.
 Still pending fullR controlled retest, W4, W5Host,strong/external controls, additional
 model+long histories, completeA/Bstory and final scientific audit. NoSHA/subagents/
 newledger. Do not report full goal complete. Older snapshots follow.
