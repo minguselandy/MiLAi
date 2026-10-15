@@ -1,0 +1,233 @@
+{
+  "status": "COMPLETED",
+  "source_version": "08de761d",
+  "models": {
+    "generation": "Qwen3.6-35B-A3B-FP8",
+    "embedding": "bge-m3",
+    "context_tokens": 65536,
+    "output_ceiling": 8192
+  },
+  "stage_wall_seconds": {
+    "plain/predict": 908.6644458770752,
+    "delta/predict": 982.8261330127716,
+    "plain/score": 251.24765276908875,
+    "delta/score": 241.36110091209412
+  },
+  "latency_scope": "Whole CLI stage on the existing shared local services, including IO and embeddings; not pure GPU time or a controlled speedup claim.",
+  "monetary_cost": null,
+  "conditions": {
+    "plain": {
+      "first_qa": {
+        "correct": 21,
+        "opportunities": 24,
+        "missing": 0,
+        "labels": {
+          "Correct": 21,
+          "invalid": 2,
+          "Omission": 1
+        },
+        "per_user": {
+          "innovation-harbor": {
+            "correct": 4,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 0
+          },
+          "innovation-orchid": {
+            "correct": 4,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 0
+          },
+          "innovation-studio": {
+            "correct": 3,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 1
+          },
+          "innovation-grant": {
+            "correct": 4,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 0
+          },
+          "innovation-catalog": {
+            "correct": 3,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 1
+          },
+          "innovation-shared": {
+            "correct": 3,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 0
+          }
+        }
+      },
+      "costs": {
+        "stages": {
+          "maintenance": {
+            "responses": 24,
+            "known_tokens": 154934,
+            "unknown_usage_responses": 0
+          },
+          "reader": {
+            "responses": 24,
+            "known_tokens": 75932,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 24,
+            "known_tokens": 64048,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 61,
+            "known_tokens": 2696,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 230866,
+      "prediction_terminal": "PREDICTIONS_SAVED",
+      "score_terminal": "SCORED"
+    },
+    "delta": {
+      "first_qa": {
+        "correct": 23,
+        "opportunities": 24,
+        "missing": 0,
+        "labels": {
+          "Correct": 23,
+          "invalid": 1
+        },
+        "per_user": {
+          "innovation-harbor": {
+            "correct": 4,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 0
+          },
+          "innovation-orchid": {
+            "correct": 4,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 0
+          },
+          "innovation-studio": {
+            "correct": 4,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 0
+          },
+          "innovation-grant": {
+            "correct": 4,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 0
+          },
+          "innovation-catalog": {
+            "correct": 4,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 0
+          },
+          "innovation-shared": {
+            "correct": 3,
+            "opportunities": 4,
+            "missing": 0,
+            "invalid": 1
+          }
+        }
+      },
+      "costs": {
+        "stages": {
+          "maintenance": {
+            "responses": 24,
+            "known_tokens": 173880,
+            "unknown_usage_responses": 0
+          },
+          "reader": {
+            "responses": 24,
+            "known_tokens": 84641,
+            "unknown_usage_responses": 0
+          },
+          "judge": {
+            "responses": 24,
+            "known_tokens": 62251,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 63,
+            "known_tokens": 3618,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "prediction_generation_tokens": 258521,
+      "prediction_terminal": "PREDICTIONS_SAVED",
+      "score_terminal": "SCORED"
+    }
+  },
+  "ledger_delta": {
+    "generation": {
+      "known_tokens": 615686,
+      "charged_tokens": 615686,
+      "unknown_usage": 0,
+      "requests": 144
+    },
+    "embedding": {
+      "known_tokens": 6314,
+      "charged_tokens": 6314,
+      "unknown_usage": 0
+    }
+  },
+  "receipt_totals": {
+    "generation": {
+      "tokens": 615686,
+      "responses": 144
+    },
+    "embedding": {
+      "tokens": 6314,
+      "responses": 124
+    }
+  },
+  "ledger_minus_receipts": {
+    "generation": 0,
+    "embedding": 0
+  },
+  "exploratory_paired_qa": {
+    "clusters": 6,
+    "unit": "source history chain",
+    "per_chain_rate_difference": {
+      "innovation-harbor": 0.0,
+      "innovation-orchid": 0.0,
+      "innovation-studio": 0.25,
+      "innovation-grant": 0.0,
+      "innovation-catalog": 0.25,
+      "innovation-shared": 0.0
+    },
+    "mean_difference": 0.08333333333333333,
+    "percentile_95_interval": [
+      0.0,
+      0.16666666666666666
+    ],
+    "all_cluster_resamples": 46656,
+    "invalids": "Retained separately; not correct in the all-opportunity denominator.",
+    "limitations": "Author development histories; same-family first Judge; source/reference ambiguities remain. Not a noninferiority test or independent confirmation."
+  },
+  "source_reviews": [
+    "innovation-v4-paired-v2-plain-review.json",
+    "innovation-v4-paired-v2-delta-review.json"
+  ],
+  "source_author_issues": "Weekend/date ambiguity and catalog independence versus uptime are retained in both methods; original first labels unchanged.",
+  "state_result": "Mixed positives and failures; raw-source QA does not prove state success. Full structured source/scope joint audit remains pending.",
+  "decision": "Current delta is not a demonstrated quality-cost advantage: prediction tokens increase and joint state correctness is unproven. Continue query-local allocation and matched learning; no failed-call replay or selective rejudging.",
+  "official_benchmark_claim": false,
+  "parameter_training_completed": false
+}
