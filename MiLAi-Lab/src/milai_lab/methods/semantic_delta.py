@@ -37,13 +37,22 @@ INSTRUCTIONS = (
     "No change is represented by empty creates/changes, not by restating old units."
 )
 
+INDEXED_INSTRUCTIONS = INSTRUCTIONS.replace(
+    "New n names are local to each create/change, old u names refer to delivered units.",
+    "The service supplies record labels and node identities. Numbers in rules refer to "
+    "zero-based positions in this record's nodes or append list. Existing u aliases still "
+    "refer to the delivered old units.",
+).replace("Return the supplied delta schema.", "Return a JSON delta following response_schema.")
+
 
 def _object(fields: dict[str, Any], required: list[str]) -> dict[str, Any]:
     return {"type": "object", "properties": fields, "required": required,
             "additionalProperties": False}
 
 
-def delta_schema(mapping: dict[str, Any], *, allow_create: bool) -> dict[str, Any]:
+def delta_schema(
+    mapping: dict[str, Any], *, allow_create: bool, indexed: bool = False,
+) -> dict[str, Any]:
     evidence = list(mapping.get("evidence", {}))
     e = {"type": "string", "enum": evidence} if evidence else {"type": "string"}
     name = {"type": "string", "minLength": 1}
@@ -62,8 +71,10 @@ def delta_schema(mapping: dict[str, Any], *, allow_create: bool) -> dict[str, An
         "evidence_links": _object({stance: {"type": "array", "items": e}
                                    for stance in ("supports", "opposes")}, [])},
         ["text", "basis", "kind"])
-    new_ref = {"type": "string", "pattern": "^n[0-9]+$"}
-    new_node = _object({**node["properties"], "id": new_ref}, ["id", "text", "basis", "kind"])
+    new_ref = ({"type": "integer", "minimum": 0} if indexed
+               else {"type": "string", "pattern": "^n[0-9]+$"})
+    new_node = (node if indexed else _object({**node["properties"], "id": new_ref},
+                                            ["id", "text", "basis", "kind"]))
 
     def rules(units: list[str] | None = None) -> dict[str, Any]:
         ref = {"anyOf": [new_ref, {"enum": units}]} if units else new_ref
@@ -85,9 +96,10 @@ def delta_schema(mapping: dict[str, Any], *, allow_create: bool) -> dict[str, An
             "withdraw": _object({alias: e for alias in units}, []),
             "rules": rules(list(units))}, [])
     return _object({
-        "creates": {"type": "array", "items": _object({"matter": name,
+        "creates": {"type": "array", "items": _object({
+            **({} if indexed else {"matter": name}),
             "nodes": {"type": "array", "minItems": 1, "items": new_node},
-            "rules": rules()}, ["matter", "nodes"]),
+            "rules": rules()}, ["nodes"] if indexed else ["matter", "nodes"]),
             **({"maxItems": 0} if not allow_create or not evidence else {})},
         "changes": _object(changes, []),
     }, ["creates", "changes"])
@@ -96,19 +108,22 @@ def delta_schema(mapping: dict[str, Any], *, allow_create: bool) -> dict[str, An
 def delta_messages(
     packet: dict[str, Any], date: str, schema: dict[str, Any],
     prior_context: list[dict[str, Any]] | None = None,
+    *, indexed: bool = False,
 ) -> list[dict[str, str]]:
     return [
-        {"role": "system", "content": INSTRUCTIONS},
+        {"role": "system", "content": INDEXED_INSTRUCTIONS if indexed else INSTRUCTIONS},
         {"role": "user", "content": json.dumps({"observed_date": date, "delivery": packet,
             **({"prior_context": prior_context} if prior_context else {}),
             "response_schema": schema}, ensure_ascii=False, separators=(",", ":"))},
     ]
 
 
-def compile_delta(envelope: dict[str, Any], mapping: dict[str, Any]) -> list[dict[str, Any]]:
+def compile_delta(
+    envelope: dict[str, Any], mapping: dict[str, Any], *, indexed: bool = False,
+) -> list[dict[str, Any]]:
     """Normalize once; the existing proposal decoder and commit bind actual effects."""
-    Draft202012Validator(delta_schema(mapping, allow_create=mapping["allow_create"])).validate(
-        envelope)
+    Draft202012Validator(delta_schema(
+        mapping, allow_create=mapping["allow_create"], indexed=indexed)).validate(envelope)
     def claim(node: dict[str, Any]) -> dict[str, Any]:
         return {"text": node["text"], "evidence": list(dict.fromkeys(
             [node["basis"], *node.get("also", [])])),
@@ -119,7 +134,11 @@ def compile_delta(envelope: dict[str, Any], mapping: dict[str, Any]) -> list[dic
     def groups(
         item: dict[str, Any], new: dict[str, int], target: str | None,
     ) -> list[dict[str, Any]]:
-        def resolve(ref: str) -> str | int:
+        def resolve(ref: str | int) -> str | int:
+            if isinstance(ref, int):
+                if not 0 <= ref < len(new):
+                    raise FunctionalRejection("DELTA_RULE_INDEX_UNAVAILABLE")
+                return ref if target is None else f"n{ref}"
             if ref in new:
                 return new[ref] if target is None else f"n{new[ref]}"
             if target is not None and ref in mapping["units"] \
@@ -141,6 +160,8 @@ def compile_delta(envelope: dict[str, Any], mapping: dict[str, Any]) -> list[dic
         return result
 
     def index(nodes: list[dict[str, Any]]) -> dict[str, int]:
+        if indexed:
+            return {f"n{i}": i for i in range(len(nodes))}
         names = {node["id"]: i for i, node in enumerate(nodes)}
         if len(names) != len(nodes):
             raise FunctionalRejection("DELTA_NEW_NAME_REPEATED")
@@ -148,7 +169,8 @@ def compile_delta(envelope: dict[str, Any], mapping: dict[str, Any]) -> list[dic
 
     proposals = []
     for item in envelope["creates"]:
-        proposal: dict[str, Any] = {"action": "create", "matter": item["matter"],
+        proposal: dict[str, Any] = {"action": "create",
+            "matter": "Source claims" if indexed else item["matter"],
             "clauses": [{**claim(node), "conditions": []} for node in item["nodes"]]}
         if item.get("rules"):
             proposal["support_groups"] = groups(item, index(item["nodes"]), None)
@@ -170,3 +192,18 @@ def compile_delta(envelope: dict[str, Any], mapping: dict[str, Any]) -> list[dic
         if edits or item.get("rules"):
             proposals.append(proposal)
     return proposals
+
+
+def indexed_target(envelope: dict[str, Any]) -> dict[str, Any]:
+    """Mechanical conversion of reviewed named-node targets; no semantic correction."""
+    result = copy.deepcopy(envelope)
+    for item, field in [*((item, "nodes") for item in result["creates"]),
+                        *((item, "append") for item in result["changes"].values())]:
+        positions = {node.pop("id"): i for i, node in enumerate(item.get(field, []))}
+        item.pop("matter", None)
+        for rule in item.get("rules", []):
+            rule["target"] = positions.get(rule["target"], rule["target"])
+            if "all" in rule:
+                rule["all"] = [positions.get(ref, ref) for ref in rule["all"]]
+                rule["any"] = [[positions.get(ref, ref) for ref in route] for route in rule["any"]]
+    return result

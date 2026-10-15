@@ -45,15 +45,20 @@ from milai_lab.methods.edit_features import (
     feature_proposal_schema,
 )
 from milai_lab.methods.semantic_delta import (
+    INDEXED_INSTRUCTIONS,
+    compile_delta,
+    delta_messages,
+    delta_schema,
+)
+from milai_lab.methods.semantic_delta import (
     INSTRUCTIONS as DELTA_INSTRUCTIONS,
 )
-from milai_lab.methods.semantic_delta import compile_delta, delta_messages, delta_schema
 
 Arm = Literal["B0", "B1", "B2", "M"]
 METHOD_VERSION = "milai_edit_v1"
 V2_METHOD_VERSION = "milai_edit_v2"
 InterfaceVersion = Literal["v1", "I1", "I2"]
-MaintenanceMode = Literal["legacy", "event_delta_v1", "semantic_delta_v1"]
+MaintenanceMode = Literal["legacy", "event_delta_v1", "semantic_delta_v1", "semantic_delta_v2"]
 
 REVISION_MEANING_INSTRUCTIONS = (
     "Use the whole delivered matter to check linked conditions, exceptions and old overview "
@@ -139,12 +144,14 @@ class EditMemory:
             raise ValueError("DEPENDENCY_UPDATES_REQUIRE_M_I2")
         if self.features.dependency_groups and (not self.conditioned or interface_version != "I2"):
             raise ValueError("DEPENDENCY_GROUPS_REQUIRE_CONDITIONED_I2")
-        if maintenance_mode not in {"legacy", "event_delta_v1", "semantic_delta_v1"}:
+        if maintenance_mode not in {
+            "legacy", "event_delta_v1", "semantic_delta_v1", "semantic_delta_v2",
+        }:
             raise ValueError("EDIT_MAINTENANCE_MODE_INVALID")
         if maintenance_mode != "legacy" and interface_version == "v1":
             raise ValueError("EDIT_EVENT_MAINTENANCE_REQUIRES_V2")
         self.maintenance_mode = maintenance_mode
-        if maintenance_mode == "semantic_delta_v1" and not (
+        if maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"} and not (
             arm == "M" and interface_version == "I2" and self.features.bound_references
             and self.features.source_metadata and self.features.matter_organization
             and self.features.temporal_scope and self.features.proposition_updates
@@ -196,8 +203,9 @@ class EditMemory:
         self, *, allow_create: bool = True, mapping: dict[str, Any] | None = None,
         for_generation: bool = True,
     ) -> dict[str, Any]:
-        if self.maintenance_mode == "semantic_delta_v1" and for_generation:
-            return delta_schema(mapping or {}, allow_create=allow_create)
+        if self.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"} and for_generation:
+            return delta_schema(mapping or {}, allow_create=allow_create,
+                                indexed=self.maintenance_mode == "semantic_delta_v2")
         if self.features.enabled:
             return feature_envelope_schema(
                 self.arm, self.features, mapping or {}, allow_create=allow_create,
@@ -219,8 +227,9 @@ class EditMemory:
         }
 
     def instructions(self, *, allow_create: bool = True) -> str:
-        if self.maintenance_mode == "semantic_delta_v1":
-            return DELTA_INSTRUCTIONS
+        if self.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"}:
+            return (INDEXED_INSTRUCTIONS if self.maintenance_mode == "semantic_delta_v2"
+                    else DELTA_INSTRUCTIONS)
         guidance = PROPOSITION_UPDATE_INSTRUCTIONS if self.features.proposition_updates else ""
         if self.features.dependency_groups:
             guidance += (
@@ -1332,9 +1341,10 @@ class EditMemory:
         change_candidates: list[dict[str, Any]] | None = None,
         prior_context: list[dict[str, Any]] | None = None,
     ) -> list[dict[str, str]]:
-        if self.maintenance_mode == "semantic_delta_v1":
+        if self.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"}:
             return delta_messages(packet, date, schema or self.envelope_schema(
-                allow_create=allow_create), self.context_projection(prior_context or []))
+                allow_create=allow_create), self.context_projection(prior_context or []),
+                indexed=self.maintenance_mode == "semantic_delta_v2")
         if "dependency_regions" in packet:
             # The extra phase predicts scope; the existing editor still decides
             # the actual semantic delta and commits through the usual service.
@@ -1754,8 +1764,9 @@ class EditMemory:
         bound = self.load_mapping(mapping if isinstance(mapping, str) else mapping["mapping_id"])
         if not isinstance(mapping, str) and mapping != bound:
             raise FunctionalRejection("EDIT_MAPPING_CHANGED")
-        if self.maintenance_mode == "semantic_delta_v1":
-            return compile_delta(envelope, bound)
+        if self.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"}:
+            return compile_delta(envelope, bound,
+                                 indexed=self.maintenance_mode == "semantic_delta_v2")
         if not self.features.enabled:
             if (
                 not isinstance(envelope, dict)

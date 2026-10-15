@@ -6,7 +6,7 @@ import argparse
 import json
 import shutil
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from jsonschema import ValidationError  # type: ignore[import-untyped]
 from langgraph.store.sqlite import SqliteStore
@@ -15,11 +15,12 @@ from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import parse_object
-from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.methods.edit_memory import EditMemory, MaintenanceMode
 from prepare_innovation_sft import WRAPPED_INSTRUCTIONS
 
 
-def components(store: SqliteStore, root: Path, case_id: str) -> tuple[MemoryService, EditMemory]:
+def components(store: SqliteStore, root: Path, case_id: str,
+               mode: MaintenanceMode = "semantic_delta_v1") -> tuple[MemoryService, EditMemory]:
     service = MemoryService(
         store,
         ("innovation-learning-eval", case_id),
@@ -31,7 +32,7 @@ def components(store: SqliteStore, root: Path, case_id: str) -> tuple[MemoryServ
         service,
         "M",
         interface_version="I2",
-        maintenance_mode="semantic_delta_v1",
+        maintenance_mode=mode,
         features=EditFeatures(
             matter_organization=True,
             semantic_operations=True,
@@ -53,6 +54,8 @@ def main() -> None:
     parser.add_argument("--phase", choices=("prepare", "apply"), required=True)
     parser.add_argument("--generations", type=Path)
     parser.add_argument("--interface", choices=("wrapped", "native"), default="wrapped")
+    parser.add_argument("--maintenance-mode", choices=("semantic_delta_v1", "semantic_delta_v2"),
+                        default="semantic_delta_v1")
     args = parser.parse_args()
     cases = json.loads(args.cases.read_text())["cases"]
     args.root.mkdir(parents=True, exist_ok=True)
@@ -63,7 +66,8 @@ def main() -> None:
             folder = args.root / "source-banks" / case_id
             folder.mkdir(parents=True, exist_ok=True)
             with SqliteStore.from_conn_string(str(folder / "memory.sqlite")) as store:
-                service, method = components(store, folder, case_id)
+                service, method = components(store, folder, case_id,
+                                              cast(MaintenanceMode, args.maintenance_mode))
                 ref = service.capture_user(
                     "evaluation",
                     case_id,
@@ -101,6 +105,7 @@ def main() -> None:
                         "example_id": case_id,
                         "messages": messages,
                         "interface": args.interface,
+                        "maintenance_mode": args.maintenance_mode,
                         "mapping_id": view["mapping"]["mapping_id"],
                         "actual_before": service.records(),
                     }
@@ -119,7 +124,8 @@ def main() -> None:
             folder = args.root / "applied" / objective / case_id
             shutil.copytree(args.root / "source-banks" / case_id, folder)
             with SqliteStore.from_conn_string(str(folder / "memory.sqlite")) as store:
-                service, method = components(store, folder, case_id)
+                service, method = components(store, folder, case_id,
+                                              cast(MaintenanceMode, args.maintenance_mode))
                 report: dict[str, Any] = {
                     "objective": objective,
                     "case_id": case_id,

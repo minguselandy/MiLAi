@@ -543,7 +543,7 @@ class BenchmarkRun:
         ):
             raise ValueError("SOURCE_RETRIEVAL_LIMIT_INVALID")
         if settings.get("maintenance_mode", "legacy") not in {
-            "legacy", "event_delta_v1", "semantic_delta_v1",
+            "legacy", "event_delta_v1", "semantic_delta_v1", "semantic_delta_v2",
         }:
             raise ValueError("MAINTENANCE_MODE_INVALID")
         if settings.get("halumem", {}).get("reader_failure_policy", "fail_fast") not in {

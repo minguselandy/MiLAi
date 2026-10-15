@@ -13,21 +13,22 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import maintain_event
 from milai_lab.methods.edit_memory import EditMemory
-from milai_lab.methods.semantic_delta import compile_delta
+from milai_lab.methods.semantic_delta import compile_delta, indexed_target
 
 
-def delta_method(service):
-    return EditMemory(service, "M", interface_version="I2", maintenance_mode="semantic_delta_v1",
+def delta_method(service, mode="semantic_delta_v1"):
+    return EditMemory(service, "M", interface_version="I2", maintenance_mode=mode,
         features=EditFeatures(matter_organization=True, bound_references=True,
             source_metadata=True, temporal_scope=True, proposition_updates=True,
             dependency_groups=True, single_record_changes=True))
 
 
-def test_one_call_delta_forms_shared_rule_then_preserves_non_target_and_history(tmp_path):
+@pytest.mark.parametrize("mode", ["semantic_delta_v1", "semantic_delta_v2"])
+def test_one_call_delta_forms_shared_rule_then_preserves_non_target_and_history(tmp_path, mode):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = MemoryService(store, ("delta", "alice"), "alice", tmp_path / "lock",
                                 functional_contract="functional_v1")
-        method = delta_method(service)
+        method = delta_method(service, mode)
         calls = []
 
         def run(key, text, response, rows):
@@ -42,7 +43,7 @@ def test_one_call_delta_forms_shared_rule_then_preserves_non_target_and_history(
                 assert stage == "edit"
                 assert "only the semantic changes" in messages[0]["content"]
                 assert json.loads(messages[1]["content"])["response_schema"] == schema
-                return response
+                return indexed_target(response) if mode == "semantic_delta_v2" else response
 
             return maintain_event(method, delivery, session="s", request_id=key,
                 date="2035-01-01", recipe="single_pass", model_call=model_call,
@@ -127,3 +128,16 @@ def test_text_without_rules_and_no_change_are_legal():
                    "basis": "e1", "kind": "reported"}]}], "changes": {}}, mapping)
     assert "support_groups" not in result[0]
     assert result[0]["clauses"][0]["text"].startswith("No date")
+
+
+def test_indexed_append_binds_generated_units_without_model_names_or_labels():
+    mapping = {"allow_create": True, "evidence": {"e1": {}}, "records": {"r1": {}},
+               "units": {"u1": {"record": "r1"}}}
+    payload = {"creates": [], "changes": {"r1": {
+        "append": [{"text": "Training is complete.", "basis": "e1", "kind": "reported"}],
+        "rules": [{"target": "u1", "all": [0], "any": [[]], "basis": "e1"}]}}}
+    proposal = compile_delta(payload, mapping, indexed=True)[0]
+    assert proposal["support_groups"][0]["alternatives"] == [["n0"]]
+    payload["changes"]["r1"]["rules"][0]["all"] = [1]
+    with pytest.raises(FunctionalRejection, match="DELTA_RULE_INDEX_UNAVAILABLE"):
+        compile_delta(payload, mapping, indexed=True)

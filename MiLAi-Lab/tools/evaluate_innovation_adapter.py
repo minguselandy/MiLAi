@@ -20,6 +20,8 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--threads", type=int, default=4)
     parser.add_argument("--max-new-tokens", type=int, default=1024)
+    parser.add_argument("--objectives", nargs="+",
+                        choices=("base", "imitation", "quality_weighted", "relation_consequence"))
     args = parser.parse_args()
     import torch  # type: ignore[import-not-found]
     from safetensors.torch import load_file  # type: ignore[import-untyped]
@@ -38,7 +40,7 @@ def main() -> None:
     batch = tokenizer(prompts, padding=True, add_special_tokens=False, return_tensors="pt")
     prompt_tokens = batch["attention_mask"].sum(dim=1).tolist()
     args.output.mkdir(parents=True, exist_ok=True)
-    for objective in ["base", *protocol["objectives"]]:
+    for objective in args.objectives or ["base", *protocol["objectives"]]:
         started, cpu_started = time.perf_counter(), time.process_time()
         torch.manual_seed(protocol["seed"])
         model = AutoModelForCausalLM.from_pretrained(
