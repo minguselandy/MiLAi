@@ -264,3 +264,8 @@ U0保留现有条件局部编辑，U1增加已实现的Impact区域。每个实�
 实际SQLite加模型桩验证了：seed只形成一次、U0/U1 before逐值一致、实际arrival身份相同、R0/R1版本/来源池一致、选择调用预扣一次额度、读取不改记录值、评价canary不进Writer、重读已关闭阶段不重复生成。最后相关10项通过（3.56秒）；Ruff、3文件mypy、包DAG/工具边界通过。验证矩阵首次暴露既有文件登记遗漏，补入dependency_groups与source_times，并为新测试登记正确的Foundation/External CI依赖环境；矩阵通过，未降低任何检查标准。未执行远端CI。
 
 该入口源码需独立冻结后，在当前screening-v1队列关闭且原账本资源释放后执行。三案例结果只能作机制诊断，不能凭Y11最高就声称稳定正交互。完整W3维护时机、跨记录、W4匹配训练/增强比较、W5正常Host及独立外部评价仍待推进。
+
+
+2×2实现已提交10c68e54，并以Git archive冻结为`factorial-source-v1`；冻结副本再次prepare成功、模型请求0。串行监督进程247480（exec60980）等待原screening驱动141865完成，只有双方预测/首次评分关闭且资源结清后才启动三案例。异常交接则停止，不另起账本或自动重试未知调用。队列状态与当时进程核验记录在`method-architecture-factorial-v1-queue.json`，实时状态见ignored目录`factorial-v1/queue.json`。
+
+E2途中已观察到实际模型关系：档案室例外形成condition/modifies与exception/overrides两条边，随后撤销例外、保留一般规则；展柜初始状态形成一个AND支持组，但将原件/照片合并为一个派生结论并遗漏照片只需照度的独立规则。前者是实际机制使用，后者仍须结合后续更新判断损伤，不能把图存在直接记为关系正确或方法成功。完整筛选及首次评分仍在运行。

@@ -1,3 +1,28 @@
+# Current queue: E2 LIVE; frozen E3 waiting for its closure (2026-10-15)
+
+Goal ACTIVE/incomplete. Last turn made concrete progress: new factorial runner/test/
+configs/reference, real bank history-pool validation, CI registration repair.
+E2 original exec29617, driver141865, candidate141879 remain LIVE; frozen463b5182.
+Last inspected22/36candidate events. Archive model actually formed2condition/override
+edges and retracted the temporary exception while retaining general rule. Exhibit
+initial state formed1AND supportgroup but merged original/photo conclusions and
+omitted separate photo-only-light rule; no quality claim from graph existence.
+NEW E3 supervisor exec60980, PID247480, WAITING_FOR_SCREENING. It uses frozen10c68e54
+snapshot factorial-source-v1, protocol factorial-v1,3cases/36read opportunities.
+It dispatches automatically ONLY after original E2driver exits and all predict/firstscore
+resources close. On abnormal handoff it stops without model dispatch. Do NOT launch a
+second factorial while this supervisor exists. Inspect queue.json/PIDs/handles first.
+E3 frozen prepare EXIT0; actual model requests0 at queue observation. Source identity
+recorded from Git archive, no SHA. Same actualM seed and commonarrival, U0/U1 once,
+R0/R1 same actualpoststate+Source/historypool, no oracle/repair, feedbackoff.
+Commit10c68e54:10relatedtests(3.56s),Ruff,3filemypy,boundaries/matrix pass. Matrix
+registered missing dependency_groups+pre-existing source_times and assigned new
+CI tests to actual Foundation/External dependency groups; no gate weakened.
+Do not change either frozen snapshot. Complete E2 review/UJS/firstlabels/costs and E3
+raw results; cross-record,W3,W4matched learning,W5Host,strongcontrols/external/extra
+model+longhistory and final scientific audit still outstanding. W3 only discussed,
+no lifecycle-policy implementation yet. All older snapshots below are historical.
+
 # Current execution: E2 screening LIVE, E1 continuous/first scores CLOSED
 
 Goal ACTIVE/incomplete; same user authorization, no subagents/SHA/new ledger/deployment.
