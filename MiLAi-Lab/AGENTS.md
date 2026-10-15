@@ -1,45 +1,44 @@
-# Current innovation-v4 handoff (2026-10-16)
+# Current innovation-v4 handoff (2026-10-16; real training and corrected replay LIVE)
 
-Full user goal ACTIVE/incomplete; no pause/block/complete. Branch feat/lab-innovation-v4-20261015.
-Report: docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md. Do not infer current processes from historical blocks.
-New same-before3arms CLOSED f1d0595d: one actual seed cost5282 once, plain/full/delta maintenance9779/
-18448/7531, Reader11734/12090/12516; full length/no update, QA3/2/3; total14gen77380+emb567 exactledger.
-Short condition CLOSED767c44f7, exec21172 consumed exit0, driver4069550/child4069582 terminal.
-Reused exact seed/arrival; maintenance2048/thinkingFalse, sameReader8192/thinkingTrue, combined condition.
-Plain/full/delta total17688/21789/20377;13gen59854+18emb627 exactledger,newunknown0.
-All9coreQAcorrect but all3jointstatefail: plain invents next-day expiry; full partial update with wrong
-support plus unavailable generated-node rejection; delta duplicates/mutates non-targets and mislabels
-reported facts inferred/observed, episode indexing rejects. Do not equate engineered_ok with semantic success.
-B fiveconditions CLOSED1history16QA each13/15/14/14/12;203gen683988+21emb868 exactledger.
-All80answers,6cachedviews,3fullstates and16rebuild attempts(14views,2length) reviewed. Rawprefix complete
-in all80, so no cache benefit attribution. Rebuild any=[] errors,wrong night premise,source/date faults;
-incremental staysday-only. Full perclause source audit pending. Source-review manifest hasallfindings.
-C external4+4 CLOSED: standard2/value1 thenstandard2/value0. Prompt-onlyvalue hasearly-stop failure.
-Actual subset outcomes now CLOSED2queries: dateempty/singletonsfalse,pair/equivalent/noisetrue7days;
-PBoldfalse27:12,new/both/equivalenttrue25:50;noiseJudgeTRUE butauthor disagreement,trainlabelnull.
-12gen61390 +12gen58846,0emb,newunknown0,ledgerexact.13transitions2queries notindependent13samples.
-OriginalzeroHTTP namespace failure preserved;actualalignednamespace fix9d48aa8a. No trainedCmodel yet.
-Native separate SFTv2 c9aedeb7 CLOSED:15refs/6chains,3objectives15steps270336params;41627input1764target
-perarm,320/289/286s,peak21.1GiB CPU. Main+aux sequences/projectedpositionsmatched;onlylossweightsdiffer.
-Native4exposedcases eval9d48aa8a CLOSED:base4commits butsemanticomissions;imitation4malformed,
-quality4empty,relation3empty1malformed. No learningbenefit. Originalallfailures preserved.
-CPU likelihooddiagnostic12a5b5de CLOSED, exec27958 consumed exit0, worker4089668 absent atclosure.
-4modelsx15traininginputs:mean required-edit referenceNLL1.067/.669/.661/.665, firstdivergence reference
-aboveempty13/4/5/6 of13; formation6/0/0/0 of6. Training-input actionbranchregression, not justunseenfailure.
-Each81902input/1450responsepositions,212/210/209/204s CPU,0updates/HTTP/bankwrites. Summarytracked.
-Matchedformat first2c222b2e FAILED HTTP400 duebare schemawire,0outputs/commits;ledger1request,
-30525chargedreservation,newunknown1 RETAINED. Historicalunknownfloor nowgeneration10/embedding1.
-Newrootformat-v2 a97f7994 CLOSED, exec21223 consumedexit0, driver4131855/child4131989 terminal.
-Same2demos andsame4actualsourcebanks (allactualpayloads anddemoinputs equalitychecked), commonsemantic
-prompt plusformatinstructions,2048output/temp0/thinkingFalse. Operations4commits12832gen vsdelta4/8377.
-8responses21209known0emb/newunknown0 exactledger; firstfailureadditional,notzero/ignored.
-Allsourcecorefactsformed butbothORunknownpremisewrong;delta copieddemotrainingword/addsemptyroute.
-Supportsinterfacecompressiononly. No graph/semantic/learning/lifecycle advantage. All8statesreviewed.
-Shortbudget13tests/mypy/Ruff/DAGpassed. NewtoolsRuff+actualruns;toolsboundary/280sourcematrixpassed.
-Figure common-before SVG generated fromsame2summaries and visuallyinspected. No livejobsatclosure.
-NoSHA/subagents/newledger/newservice/PRmerge. FullD0–D6 remain:more independent controlledformat/update cases and lifecycle
-formation/learning/generalization,scope/scale/reuse1/4/16,rangeaggregation/learnedC,
-complete declaredexternal/longhistory/secondmodel/blindsubset/pairedstats,usefulsame-methodHost,finalaudit.
+Goal ACTIVE/incomplete. Previous goal turn was progress; this turn also changed code, actual training
+and read execution. Branch feat/lab-innovation-v4-20261015; report docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md.
+No SHA/subagents/newledger/newservice/PRmerge. Existing GPUservices left running, fourA100~39.9GiB used.
+Root serial HTTP only; CPU LoRA training independent, CPUcost separate. Original continuous ledger remains
+MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json; unknown floor generation10/embedding1, neverreset.
+LIVE TRAIN sft-pilot-v3 frozen2429eaf1: exec29647, driver4190314, worker4190496 actual/proc confirmed.
+Same15refs/6chains,3epochs x3examples accumulated per step=15steps/arm,rank4/270336parameters,lr.0005,
+4CPUthreads. All3objectives identical sequences/order/headpositions. Compared v2 exposure3x and normalization
+bothchange; notsinglefactor. Imitation CLOSED; quality_weighted laststep9/15, relation pending. Inspectactual
+progress before relying on this count. Do not stop/restart because no tool output: stdoutfile hasstepreceipts.
+QUEUED evaluation exec40529/driver3828 confirmedlive WAITING_FOR_TRAINING. Source93f52386,
+10cases preparedactualsourcebanks:4freshfactualformations+2newemptyacks+4newtransitions onexposedactual
+format-v2 operations banks. These4arenotnewindependenthistories. Bothrealbefore andnewSourcescaptured;
+reviewlabels excluded. Batch2/max1024 greedy base+3adapters thenactualapply, originalbanks neverwritten.
+4trainingobjective/SQLite clone tests passed; modelresults notyetavailable. No forcednonemptyoutputs.
+NEW source-bound structure-first reading b9b35bae usesexistingReader+gap/raw opening; rangecoverage kept.
+42readingtests passed. Saved-material replay copies originalquery-specificraw/cachepool, removes already
+paidpre_read_calls fromnewbudget, no reconstruction. Programsourceenumeration andcandidateexcerpts still
+exist; bodyflagsalone do notproveinformation or lifecycle savings. Needstrongsimple raw-first control.
+Original structure-delivery-v1 b9b35bae CLOSED MISROUTED: exec7798 consumedexit0, driver38456 gone.
+GenericBenchmark CLI ignoredreplay flag, so botharms werefreshsource-only(no cache),64gen155320/0emb,
+newunknown0 exactledger. Each15/16Correct butnotmethodcomparison; manifest preservesoutputs/costs.
+FIX72f1bf35 movesexistingreplaydispatch tocommonBenchmarkRun, AlignmentRun delegates.21relatedtests,
+3sourcemypy+package/toolsboundarypass. Correctedstructure-delivery-v2 LIVE exec4030/driver78088,
+lastchild83153 alongsidepredict actual; root waitedfororiginalexit. Actualpool inspectedcontainsoriginal
+Source+query_structure andpointsoldquery-reuse-v2/incremental snapshot. No newinterpretation/formation.
+Lastcheckalongside14/16saved; thenfirstpredict, bothfirstscores serial. Inspectdriver/PIDs, do notduplicate.
+NEW tools/prepare_innovation_scale.py prepared100/1000/5000initialsource files plus2arrivals/24QA each at
+artifacts/innovation-v4/scale-data-v1. Sameone targetscenario/clocks; not3independenthistories.0modelcalls.
+Scale experiments NOTlaunched. Need raw-first strongcontrol beforeclaimingcachefirstbenefit.
+Previous results preserved: samebefore1history two budgets no stableadvantage; matchedformat4cases
+old12832/delta8377tokens butbothunknownORwrong,delta extrafaults; CPU SFTv2 collapsedtoempty.
+Likelihood12a5b5de showed6/6formation referencebranchaboveemptybase vs0/6eachtrained, notjustunseenfailure.
+B original5arms80QA/all16rebuildattempts reviewed; rawprefixcomplete so nocacheattribution. C twoexternal
+4casebatchesnegative;13observed subset transitions across2queries,oneauthor/Judge disagreement heldout;
+no trainedvalue model or rangeaggregation yet. Reports containallcosts andfailurehistory.
+FullD0–D6 remain: meaningfullearning/ordinary-operation controls/generalization, independentfullhistories,
+cache scope+raw-first/scale/reuse/density, learnedC/rangeaggregation, full declaredexternal+secondmodel,
+blindsubset/pairedstats, usefulsame-methodHost, and requirement-by-requirementfinalaudit. No goalcompletion.
 Historical blocks below are not live state.
 
 # Current publication checkpoint requested; corrected factorial LIVE
