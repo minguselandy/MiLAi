@@ -17,6 +17,7 @@ from innovation_learning_states import components
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.harness.artifact_io import configure_runtime_directory, read_json, write_json
 from milai_lab.memory.functional_state import FunctionalRejection
+from milai_lab.methods.edit_features import compact_prompt_schema
 from milai_lab.methods.edit_maintenance import parse_object
 from milai_lab.methods.semantic_delta import compile_delta, indexed_target
 from milai_lab.runners.edit_benchmarks import BenchmarkRun
@@ -110,14 +111,16 @@ def main() -> None:
                     view = method.writer_request(method.prepare([ref], "", selected_records=[]),
                                                  request_id=request_id)
                     payload = {"observed_date": case["reported_at"], "delivery": view["packet"],
-                               "response_schema": view["schema"]}
+                               "response_schema": compact_prompt_schema(view["schema"])}
                     messages = matched_messages(role, demonstrations, payload)
                     row = {"role": role, "case_id": case_id, "before": service.records(),
                            "receipts": []}
                     key = f"maintenance/{role}/{case_id}"
                     try:
                         content = run.call(key, messages, structured=True,
-                                           response_format=view["schema"], enable_thinking=False)
+                            response_format={"type": "json_schema", "json_schema": {
+                                "name": "milai_format_diagnostic", "schema": view["schema"]}},
+                            enable_thinking=False)
                     except ValueError as error:
                         failure = run._known_reader_failure(
                             error, key, policy="record_known_readonly_failure")
