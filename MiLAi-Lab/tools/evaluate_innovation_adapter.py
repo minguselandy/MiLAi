@@ -21,6 +21,8 @@ def main() -> None:
     parser.add_argument("--threads", type=int, default=4)
     parser.add_argument("--max-new-tokens", type=int, default=1024)
     parser.add_argument("--batch-size", type=int)
+    parser.add_argument("--guided-json", action="store_true",
+                        help="Use each native request's existing JSON schema during decoding.")
     parser.add_argument("--objectives", nargs="+",
                         choices=("base", "imitation", "quality_weighted", "relation_consequence"))
     args = parser.parse_args()
@@ -40,6 +42,28 @@ def main() -> None:
     ]
     batch_size = args.batch_size or len(rows)
     args.output.mkdir(parents=True, exist_ok=True)
+    grammars = None
+    if args.guided_json:
+        import importlib.metadata
+
+        import xgrammar as xgr  # type: ignore[import-not-found]
+        from xgrammar.contrib.hf import LogitsProcessor  # type: ignore[import-not-found]
+
+        grammar_started = time.perf_counter()
+        model_config = json.loads((args.model / "config.json").read_text())
+        generation_config = json.loads((args.model / "generation_config.json").read_text())
+        info = xgr.TokenizerInfo.from_huggingface(
+            tokenizer, vocab_size=model_config["vocab_size"],
+            stop_token_ids=generation_config["eos_token_id"])
+        compiler = xgr.GrammarCompiler(info, max_threads=args.threads)
+        grammars = [compiler.compile_json_schema(
+            json.loads(row["messages"][1]["content"])["response_schema"]) for row in rows]
+        (args.output.parent / "grammar-preparation.json").write_text(json.dumps({
+            "xgrammar": importlib.metadata.version("xgrammar"), "schemas": len(grammars),
+            "wall_seconds": time.perf_counter() - grammar_started,
+            "scope": "Existing request schemas only; empty valid deltas remain allowed. "
+                     "Grammar does not verify semantic coverage, attribution or consequences.",
+        }, indent=2) + "\n")
     for objective in args.objectives or ["base", *protocol["objectives"]]:
         started, cpu_started = time.perf_counter(), time.process_time()
         torch.manual_seed(protocol["seed"])
@@ -70,8 +94,11 @@ def main() -> None:
             prompt_tokens = batch["attention_mask"].sum(dim=1).tolist()
             padded_input_tokens += batch["input_ids"].numel()
             generation_batches += 1
+            processors = ([LogitsProcessor(grammars[start:start + batch_size])]
+                          if grammars is not None else None)
             with torch.no_grad():
-                outputs = model.generate(**batch, generation_config=generation)
+                outputs = model.generate(**batch, generation_config=generation,
+                                         logits_processor=processors)
             for index, row in enumerate(rows[start:start + batch_size]):
                 generated = outputs[index, batch["input_ids"].shape[1] :].tolist()
                 stop = next(
@@ -97,6 +124,7 @@ def main() -> None:
             "sequences": results,
             "generation_batches": generation_batches,
             "model_http_requests": 0,
+            "guided_json": args.guided_json,
             "padded_input_tokens": padded_input_tokens,
             "logical_prompt_tokens": sum(row["prompt_tokens"] for row in results),
             "completion_tokens_including_eos": sum(
