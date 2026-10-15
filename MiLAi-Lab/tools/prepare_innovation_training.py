@@ -51,8 +51,13 @@ def main() -> None:
         (args.output / f"{name}.jsonl").write_text(
             "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in samples))
     (args.output / "preparation.json").write_text(json.dumps({
-        "references": str(args.references), "independent_references": len(rows),
-        "conditions": list(exports), "parameter_updates": 0, "teacher_calls": 0,
+        "references": str(args.references), "reference_examples": len(rows),
+        "source_chains": len({row["provenance"]["owner"] for row in rows}),
+        "references_with_consequence_targets": sum(
+            bool(row["consequence_targets"]) for row in rows),
+        "conditions": list(exports), "parameter_updates": 0, "metered_teacher_http_calls": 0,
+        "reference_authoring_cost": "Assistant authoring/review work is not separately metered "
+                                    "by the experiment ledger; it is not zero cost.",
         "status": "DATA_PREPARATION_ONLY", "split": "exposed_author_development",
         "training_budget": "Not allocated; match trained tokens, steps and parameters before use.",
         "plain_condition": "Same factual clauses and explicit rule text, without auxiliary graph.",
