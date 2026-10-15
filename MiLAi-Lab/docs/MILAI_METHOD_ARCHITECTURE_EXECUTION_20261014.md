@@ -1,5 +1,7 @@
 # 方法架构 v3 执行记录
 
+最新开发与发布状态见[2026-10-15检查点总结](MILAI_DEVELOPMENT_CHECKPOINT_20261015.md)。以下按时间保留历史观察，早期未完成/运行中状态不代表当前状态。
+
 原始目标是执行 `MILAI_METHOD_ARCHITECTURE_EXPERIMENT_PLAN_20261014_v3.md`，当前仍未完成。
 研究分支 `feat/lab-method-architecture-20261014` 从最新可读开发头 `8293a4e7` 建立。
 本记录只说明已实现和已核验的第一切片，不把机械测试当作模型语义成绩。
@@ -546,3 +548,19 @@ index6分类返回allow_forgetting=True，因而使用常规resident/目录路�
 在实际失败SQLite的独立backup副本上、相同tokenizer/8192材料限制、既有binding/读回执重放model_material，0HTTP复现：正文先取3个单位8120tokens，但后加目录最低封装已8211，目录显式省略回执又达8357。问题是正文分页没有预留目录最低开销。现预先计入空目录及真实后续cursor，再按现有优先级分页正文和导航；不增加预算、切正文字符串或删除历史。实际副本重放返回2个正文单位、1个导航项，共7910tokens，其余正文保留pending及continuations。原实验库不改、尚未做模型恢复。
 
 新增3项实际Store分页检查覆盖三个固定材料容量；连同当前/历史resident切换、重开、显式比较保留、未完成维护及真实Host hook等9个用例通过（4项4.08秒、5项5.65秒），Ruff/单文件mypy/DAG通过。下一次用修复冻结版本、实际库副本继续原未执行7–9，不重派原index6；首轮和后续结果分开。SimpleMem完整队列已在首轮关闭后接续，driver2400057/exec62427，预测child2406918，当前仍运行冻结46bc516e。
+
+## SimpleMem完整12链首次结果
+
+冻结46bc516e/native db80b6a的完整对照已于2026-10-15 13:19:12 UTC关闭：36事件、48完整答复，首次Judge40Correct/7invalid/1Hallucination。逐份作者审阅核心事实48/48、来源忠实确认31/48、另4份有歧义；这不替换Judge，也不表示48份解释均正确。全部24个查询flush后状态已审阅，严格四维语义UJS确认3、可能7；该时点包含查询前的延迟形成，不能与Strong到达后UJS直接合并。
+
+实际36次Writer输入只含已到达用户正文/报告日期及opaque标识，没有题目或参考。最终12库共55个原生条目，保留原生窗口、buffer和查询前flush；检索及flush没有fallback、恢复重试或准入拒绝，每题包含flush/原生检索/共同Reader的调用数最高9，仍在12上限内。语义错误包括把“本周五”算成2032年6月5日（实际星期六）、“三点”译成three points、库存手抄表译成meter readings、把本人周末整理归给店主，以及将报告时间绑定到确切事件时间。混合Reader可从原文补足，不能用最终正确答案覆盖这些生成记忆错误。
+
+预测生成326,021 tokens（245原生core164,052，48Reader161,969）；48首次Judge129,498另计。全流程341生成455,519 tokens、245embedding6,983 tokens，与原连续账本完全相符，新增unknown0。pilot原结果不合并。见simplemem-full-v1-summary及review；这是共同条件改造下的公开开发集结果，外部官方benchmark、原生回答复现和额外模型验证仍未完成。
+
+## A/B后续闭合与完整读取因素重复
+
+冻结f8257f46在真实r4库副本中仅执行原7/8/9，均工程COMPLETED。index7错误地把6月12日恢复联系人答成尚未生效的陈丹，应为林舒；取消原因、6月16日联系人及外发确认正确。index8实际提交r5把B改为许安，保留A/确认/茶，但语义正文未明确保留“从一开始/历史纠错”性质。index9实际先read_memory读取r5，再read_memory_revision读取r1，五条初存正文与原首次保存逐值一致；答对纠错后的当前及6月2日B许安、原存B沈瑜、A生效前后、撤销、确认和茶。两次纯查询record values均未改。
+
+此分支14生成134,676 tokens、12embedding1,083，账本一致、新unknown0；首轮6COMPLETED/1FAILED/3NOT_RUN保持，后续不是同版本冷启动成功。原index6未重派，因此新目录容量修复仍只有真实失败库离线回放和回归测试证据。见host-ab-v1-continuation-summary。
+
+修正历史选择的factorial-v3两次对称重复已准备并串行接续，冻结f8257f46，driver2493762/exec13816，首个worker2511884实际运行。沿用原三条真实seed和同一次arrival，12个SQLite副本逐行值一致，0新种子调用、不复制旧HTTP成本。每次四格×9题，共72位置，读取历史现在按模型选择实际交付；原历史全交付的v1/v2不改。原seed均没有显式OR支持组，只有档案例外具有两条条件/覆盖边，这批不能用于证明OR图收益。2项冻结历史选择测试2.05秒通过；运行/最终来源与交付审阅未完，见factorial-v3-protocol。

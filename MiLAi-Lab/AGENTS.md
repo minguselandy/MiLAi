@@ -1,3 +1,24 @@
+# Current publication checkpoint requested; corrected factorial LIVE
+
+User explicitly requests development summary and GitHub submission. Publish the
+current branch as draft continuation of openPR121; do not infer merge or pause.
+GoalACTIVE/incomplete. Nativefull CLOSED13:19:12UTC:48answers,40Correct/7invalid/1H;
+24postquery states+48QA source-reviewed, manualcore48/fidelity31(+4ambiguous),
+postqueryUJS3–7/24 differentboundary fromStrong.341gen455519+245emb6983 exact,
+newunknown0. Reports simplemem-full-v1-summary/review. No externalbenchmark claim.
+ABsuffix f8257f46 CLOSED original7/8/9 allCOMPLETED. June12 query wrongly names
+futureChen instead ofLin; r5BcorrectXu butsince-beginning scope absentcurrenttext;
+finalactual r1historyread proves firstsavedShen and finalQAcorrect.14gen134676+
+12emb1083 exact,newunknown0. Originalfirstfailure preserved; notcoldsuccess.
+LIVE correctedfactorial-v3 driver2493762/exec13816, firstworker2511884 actual/proc
+confirmed. Frozenf8257f46 at host-ab-source-v2;2repeats72QA, sameoriginalseed/arrival,
+no newseedcost/no oldHTTPcopy. Protocol disclosesno explicitORgroup inseed. No duplicate
+model dispatch. Await bothrepeats and fullstate/QA/historydelivery/cost review.
+Publication must retain allfailures and fullscope remaining: cold successfulA/B,
+W4matchedtraining/eval, independentexternalbenchmark/longhistories, extra model,
+quality–cost/scale curves andfinalaudit. NoSHA/subagents/newledger/newdeploy.
+Historical snapshots below.
+
 # Current: native full LIVE; A/B first stopped after commit; capacity fix checked
 
 GoalACTIVE/incomplete. Strong fivearms CLOSED/reviewed (see summary/review).

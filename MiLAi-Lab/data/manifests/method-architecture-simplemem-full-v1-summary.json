@@ -1,0 +1,2839 @@
+{
+  "status": "NATIVE_FULL_FIRST_RESULTS_ALL_REVIEWED",
+  "source_commit": "46bc516e",
+  "native_source_commit": "db80b6a",
+  "driver": {
+    "status": "NATIVE_FULL_PREDICTIONS_AND_FIRST_SCORES_CLOSED",
+    "driver_pid": 2400057,
+    "source_commit": "46bc516e",
+    "native_source_commit": "db80b6a",
+    "started_at": "2026-10-15T12:52:38.479644+00:00",
+    "steps": [
+      {
+        "phase": "predict",
+        "pid": 2406918,
+        "started_at": "2026-10-15T12:54:23.489562+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T13:10:45.788079+00:00"
+      },
+      {
+        "phase": "score",
+        "pid": 2470228,
+        "started_at": "2026-10-15T13:10:45.791224+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T13:19:12.922296+00:00"
+      }
+    ],
+    "events": 36,
+    "questions": 48,
+    "unknown_wrapper_retry": false,
+    "pilot_reviewed": true,
+    "independent_empty_native_banks": true,
+    "pilot_outputs_not_pooled": true,
+    "handoff_at": "2026-10-15T12:54:23.488561+00:00",
+    "closed_at": "2026-10-15T13:19:12.923241+00:00"
+  },
+  "data_role": "12 exposed authored histories; independent empty native banks, two pilot histories repeated in predeclared full cohort but pilot outputs not pooled/replaced. Common-source/common-Reader adaptation, not author-native answer replication or external benchmark.",
+  "first_qa_labels": {
+    "Correct": 40,
+    "invalid": 7,
+    "Hallucination": 1
+  },
+  "review_file": "data/manifests/method-architecture-simplemem-full-v1-review.json",
+  "reviewer": "same source author/developer, not independent/blind",
+  "qa_manual": {
+    "core_correct": 48,
+    "source_faithful_confirmed": 31,
+    "source_faithful_possible": 35,
+    "denominator": 48,
+    "issue_categories": {
+      "unsupported_time_scope_change": 1,
+      "report_storage_clock_conflation": 1,
+      "incorrect_relative_calendar_resolution": 1,
+      "ambiguous_report_capture_wording": 1,
+      "dropped_rule_condition": 1,
+      "stale_extra_claim": 1,
+      "report_time_as_exact_event": 1,
+      "unsupported_system_architecture": 1,
+      "unsupported_causal_rule": 1,
+      "ambiguous_native_observation_attribution": 1,
+      "incorrect_change_continuity": 1,
+      "unsupported_extra_uncertainty": 1,
+      "invented_archiving_rule": 1,
+      "ambiguous_author_content_attribution": 2,
+      "capture_report_clock_confusion": 1,
+      "subject_scope_generalization": 1
+    }
+  },
+  "native_post_query_state_review": {
+    "denominator": 24,
+    "ujs_confirmed": 3,
+    "ujs_possible": 7,
+    "same_boundary_as_strong_post_arrival": false,
+    "boundary": "All native entries after actual first-query remainder flush at each checkpoint; source0 has no semantic flush before source1 query. This query-maintained state is not Strong post-arrival state UJS and is reported separately."
+  },
+  "native_input_audit": [
+    {
+      "case": "method-screen-archive",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 0,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 1,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 2
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 2,
+      "exact_arrived_source_only": true,
+      "opaque_identifier": true,
+      "pending_dialogues": 1
+    }
+  ],
+  "retrievals": [
+    {
+      "case": "method-screen-archive",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 3,
+      "native_plus_flush_and_reader_calls": 9
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 3,
+      "native_plus_flush_and_reader_calls": 8
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 5,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 5,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 5,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 5,
+      "native_plus_flush_and_reader_calls": 8
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_and_reader_calls": 8
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 3,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 3,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 6,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 6,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 6,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 6,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 8,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 8,
+      "native_plus_flush_and_reader_calls": 8
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 9
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 8
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_and_reader_calls": 9
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 4,
+      "native_plus_flush_and_reader_calls": 8
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 3,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 3,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 6,
+      "native_plus_flush_and_reader_calls": 9
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 6,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 1,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 1,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 2,
+      "native_plus_flush_and_reader_calls": 5
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 2,
+      "question_index": 0,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 3,
+      "native_plus_flush_and_reader_calls": 6
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 2,
+      "question_index": 1,
+      "status": "COMPLETED",
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": [],
+      "native_results": 3,
+      "native_plus_flush_and_reader_calls": 5
+    }
+  ],
+  "native_states": [
+    {
+      "case": "method-screen-archive",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "f6d83f02-8018-4651-91ab-99faaacabbdb",
+          "lossless_restatement": "At the Paper Art Archives, gloves must be worn when reading original paper manuscripts and photocopies indoors, while digital copies do not require gloves, and any loan of paper materials requires registration.",
+          "keywords": [
+            "Paper Art Archives",
+            "gloves",
+            "paper manuscripts",
+            "photocopies",
+            "digital copies",
+            "loan registration"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": "Paper Art Archives",
+          "persons": [],
+          "entities": [
+            "Paper Art Archives"
+          ],
+          "topic": "General handling and loan regulations for paper materials"
+        },
+        {
+          "entry_id": "304d0ffa-98ad-484b-8272-8ccb2fea6f00",
+          "lossless_restatement": "During the current public open class period, photocopies provided for student practice do not require gloves, but original paper manuscripts and other photocopies still require gloves, and the regulation requiring registration for any loan of paper materials remains unchanged.",
+          "keywords": [
+            "public open class",
+            "student practice photocopies",
+            "gloves",
+            "original paper manuscripts",
+            "loan registration"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": "Paper Art Archives",
+          "persons": [],
+          "entities": [
+            "Paper Art Archives"
+          ],
+          "topic": "Temporary exception for gloves during public open class"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-archive",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "f6d83f02-8018-4651-91ab-99faaacabbdb",
+          "lossless_restatement": "At the Paper Art Archives, gloves must be worn when reading original paper manuscripts and photocopies indoors, while digital copies do not require gloves, and any loan of paper materials requires registration.",
+          "keywords": [
+            "Paper Art Archives",
+            "gloves",
+            "paper manuscripts",
+            "photocopies",
+            "digital copies",
+            "loan registration"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": "Paper Art Archives",
+          "persons": [],
+          "entities": [
+            "Paper Art Archives"
+          ],
+          "topic": "General handling and loan regulations for paper materials"
+        },
+        {
+          "entry_id": "304d0ffa-98ad-484b-8272-8ccb2fea6f00",
+          "lossless_restatement": "During the current public open class period, photocopies provided for student practice do not require gloves, but original paper manuscripts and other photocopies still require gloves, and the regulation requiring registration for any loan of paper materials remains unchanged.",
+          "keywords": [
+            "public open class",
+            "student practice photocopies",
+            "gloves",
+            "original paper manuscripts",
+            "loan registration"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": "Paper Art Archives",
+          "persons": [],
+          "entities": [
+            "Paper Art Archives"
+          ],
+          "topic": "Temporary exception for gloves during public open class"
+        },
+        {
+          "entry_id": "0ecf0823-c987-4595-86b8-aaa1934cbf20",
+          "lossless_restatement": "On 2032-06-03T09:00:00, the temporary arrangement allowing photocopying without gloves, which was in effect during the public lecture, was revoked and the standard reading room rules were reinstated.",
+          "keywords": [
+            "public lecture",
+            "photocopying",
+            "gloves",
+            "temporary arrangement",
+            "standard reading room rules",
+            "revocation"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Reinstatement of standard reading room rules after public lecture"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "9d81f337-b002-46ab-ab05-5c1f6c0b3e2a",
+          "lossless_restatement": "On 2032-06-01, the initial draft of the program booklet listed Jian Lin as the translator for the short drama 'Lu Deng' and Mu An as the composer, and Su Yao as the translator for 'Yu Ti', based on oral introductions.",
+          "keywords": [
+            "program booklet",
+            "initial draft",
+            "Lu Deng",
+            "Yu Ti",
+            "Jian Lin",
+            "Mu An",
+            "Su Yao",
+            "translator",
+            "composer"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": null,
+          "persons": [
+            "Jian Lin",
+            "Mu An",
+            "Su Yao"
+          ],
+          "entities": [
+            "Lu Deng",
+            "Yu Ti"
+          ],
+          "topic": "Initial program booklet credits entry"
+        },
+        {
+          "entry_id": "2c54bdc8-5883-43ab-a15a-d4dedbd2caf1",
+          "lossless_restatement": "On 2032-06-02, the author sent a signed page correcting the translator for the short drama 'Lu Deng' from Jian Lin to Jian Lan, clarifying that Jian Lin was a mishearing and the change is a correction of the initial draft rather than a replacement of the translator, while the composer and the other drama's credits remain unchanged.",
+          "keywords": [
+            "author",
+            "signed page",
+            "Lu Deng",
+            "Jian Lan",
+            "Jian Lin",
+            "translator correction",
+            "composer",
+            "program booklet"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": null,
+          "persons": [
+            "Jian Lan",
+            "Jian Lin"
+          ],
+          "entities": [
+            "Lu Deng"
+          ],
+          "topic": "Correction of translator credit for Lu Deng"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-credits",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "9d81f337-b002-46ab-ab05-5c1f6c0b3e2a",
+          "lossless_restatement": "On 2032-06-01, the initial draft of the program booklet listed Jian Lin as the translator for the short drama 'Lu Deng' and Mu An as the composer, and Su Yao as the translator for 'Yu Ti', based on oral introductions.",
+          "keywords": [
+            "program booklet",
+            "initial draft",
+            "Lu Deng",
+            "Yu Ti",
+            "Jian Lin",
+            "Mu An",
+            "Su Yao",
+            "translator",
+            "composer"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": null,
+          "persons": [
+            "Jian Lin",
+            "Mu An",
+            "Su Yao"
+          ],
+          "entities": [
+            "Lu Deng",
+            "Yu Ti"
+          ],
+          "topic": "Initial program booklet credits entry"
+        },
+        {
+          "entry_id": "2c54bdc8-5883-43ab-a15a-d4dedbd2caf1",
+          "lossless_restatement": "On 2032-06-02, the author sent a signed page correcting the translator for the short drama 'Lu Deng' from Jian Lin to Jian Lan, clarifying that Jian Lin was a mishearing and the change is a correction of the initial draft rather than a replacement of the translator, while the composer and the other drama's credits remain unchanged.",
+          "keywords": [
+            "author",
+            "signed page",
+            "Lu Deng",
+            "Jian Lan",
+            "Jian Lin",
+            "translator correction",
+            "composer",
+            "program booklet"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": null,
+          "persons": [
+            "Jian Lan",
+            "Jian Lin"
+          ],
+          "entities": [
+            "Lu Deng"
+          ],
+          "topic": "Correction of translator credit for Lu Deng"
+        },
+        {
+          "entry_id": "b4a4b280-cace-49f3-992f-a386eb333a06",
+          "lossless_restatement": "On 2032-06-03T09:00:00, it was considered for future reprints to invite Jian Lin to write a foreword, but this is only a设想 (proposal/idea) and has not been confirmed.",
+          "keywords": [
+            "Jian Lin",
+            "foreword",
+            "reprint",
+            "proposal",
+            "unconfirmed"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [
+            "Jian Lin"
+          ],
+          "entities": [],
+          "topic": "Consideration of inviting Jian Lin to write a foreword for future reprints"
+        },
+        {
+          "entry_id": "601f08e5-f4bf-450a-ad43-cd26347e3ef8",
+          "lossless_restatement": "Jian Lin will not become the translator of this short drama as a result of the consideration to invite him to write a foreword.",
+          "keywords": [
+            "Jian Lin",
+            "translator",
+            "short drama",
+            "not confirmed"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [
+            "Jian Lin"
+          ],
+          "entities": [
+            "short drama"
+          ],
+          "topic": "Clarification that Jian Lin is not the translator of the short drama"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "b6e3f7d9-14d5-457c-8900-32a5de64583e",
+          "lossless_restatement": "On 2032-06-01T09:00:00, it was established that the Orange Hall display cabinet can exhibit original artifacts only if the sunshade curtains are intact and the illuminance is qualified, while wall photos only require qualified illuminance; since both conditions were met on that date, both original artifacts and photos were exhibited, and the electronic catalog remained open regardless of display cabinet conditions.",
+          "keywords": [
+            "Orange Hall",
+            "display cabinet",
+            "original artifacts",
+            "sunshade curtains",
+            "illuminance",
+            "wall photos",
+            "electronic catalog",
+            "exhibition rules"
+          ],
+          "timestamp": "2032-06-01T09:00:00",
+          "location": "Orange Hall",
+          "persons": [],
+          "entities": [
+            "Orange Hall",
+            "electronic catalog"
+          ],
+          "topic": "Exhibition conditions for Orange Hall display cabinet and wall photos"
+        },
+        {
+          "entry_id": "4f9552c9-97a5-4831-a661-52f39d7c6622",
+          "lossless_restatement": "On 2032-06-02T09:00:00, the sunshade curtains were found to be torn while the illuminance detection remained qualified, resulting in the removal of original artifacts from the Orange Hall display cabinet, while wall photos continued to be exhibited and the electronic catalog remained open.",
+          "keywords": [
+            "Orange Hall",
+            "sunshade curtains",
+            "torn",
+            "illuminance",
+            "original artifacts",
+            "wall photos",
+            "electronic catalog",
+            "exhibition status"
+          ],
+          "timestamp": "2032-06-02T09:00:00",
+          "location": "Orange Hall",
+          "persons": [],
+          "entities": [
+            "Orange Hall",
+            "electronic catalog"
+          ],
+          "topic": "Change in exhibition status due to damaged sunshade curtains"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-exhibit",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "b6e3f7d9-14d5-457c-8900-32a5de64583e",
+          "lossless_restatement": "On 2032-06-01T09:00:00, it was established that the Orange Hall display cabinet can exhibit original artifacts only if the sunshade curtains are intact and the illuminance is qualified, while wall photos only require qualified illuminance; since both conditions were met on that date, both original artifacts and photos were exhibited, and the electronic catalog remained open regardless of display cabinet conditions.",
+          "keywords": [
+            "Orange Hall",
+            "display cabinet",
+            "original artifacts",
+            "sunshade curtains",
+            "illuminance",
+            "wall photos",
+            "electronic catalog",
+            "exhibition rules"
+          ],
+          "timestamp": "2032-06-01T09:00:00",
+          "location": "Orange Hall",
+          "persons": [],
+          "entities": [
+            "Orange Hall",
+            "electronic catalog"
+          ],
+          "topic": "Exhibition conditions for Orange Hall display cabinet and wall photos"
+        },
+        {
+          "entry_id": "4f9552c9-97a5-4831-a661-52f39d7c6622",
+          "lossless_restatement": "On 2032-06-02T09:00:00, the sunshade curtains were found to be torn while the illuminance detection remained qualified, resulting in the removal of original artifacts from the Orange Hall display cabinet, while wall photos continued to be exhibited and the electronic catalog remained open.",
+          "keywords": [
+            "Orange Hall",
+            "sunshade curtains",
+            "torn",
+            "illuminance",
+            "original artifacts",
+            "wall photos",
+            "electronic catalog",
+            "exhibition status"
+          ],
+          "timestamp": "2032-06-02T09:00:00",
+          "location": "Orange Hall",
+          "persons": [],
+          "entities": [
+            "Orange Hall",
+            "electronic catalog"
+          ],
+          "topic": "Change in exhibition status due to damaged sunshade curtains"
+        },
+        {
+          "entry_id": "afd28f93-5e61-457f-ba21-60224ede35dc",
+          "lossless_restatement": "On 2032-06-03T09:00:00+08:00, the sunshade curtain was repaired, but the illuminance detection at that time failed to meet the requirements.",
+          "keywords": [
+            "sunshade curtain",
+            "repair",
+            "illuminance detection",
+            "failure"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "sunshade curtain"
+          ],
+          "topic": "Sunshade curtain repair and illuminance detection result"
+        },
+        {
+          "entry_id": "da2b9342-93ee-4789-ab65-4c5df20ab6be",
+          "lossless_restatement": "On 2032-06-03T09:00:00+08:00, the original document could not be exhibited, and the photos had to be removed.",
+          "keywords": [
+            "original document",
+            "exhibition",
+            "photos",
+            "removal"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "original document",
+            "photos"
+          ],
+          "topic": "Exhibition status of original document and photos"
+        },
+        {
+          "entry_id": "5313dfc8-a845-4a76-b5d6-695ce3303172",
+          "lossless_restatement": "On 2032-06-03T09:00:00+08:00, the electronic catalog remained unchanged.",
+          "keywords": [
+            "electronic catalog",
+            "unchanged"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "electronic catalog"
+          ],
+          "topic": "Status of electronic catalog"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "9e2e3419-c32b-4f75-9f43-9a452ffc4376",
+          "lossless_restatement": "On 2032-06-01, the user recorded the initial inventory for Qingmu Book Stall as twelve copies of picture books and eight copies of prose collections, noting that the initial inventory sheet was handwritten and there were no sales on that day.",
+          "keywords": [
+            "Qingmu Book Stall",
+            "initial inventory",
+            "picture books",
+            "prose collections",
+            "handwritten",
+            "sales"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": "Qingmu Book Stall",
+          "persons": [
+            "user"
+          ],
+          "entities": [
+            "Qingmu Book Stall",
+            "picture books",
+            "prose collections"
+          ],
+          "topic": "Initial inventory recording"
+        },
+        {
+          "entry_id": "5c3f4a6a-19d9-40c8-aef8-cab493cfffed",
+          "lossless_restatement": "On 2032-06-02, the user corrected the initial inventory record for Qingmu Book Stall, stating that the actual number of picture books was seventeen instead of twelve due to a copying error, and confirmed that the number of prose collections remained eight.",
+          "keywords": [
+            "Qingmu Book Stall",
+            "initial inventory",
+            "correction",
+            "picture books",
+            "prose collections",
+            "copying error"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": "Qingmu Book Stall",
+          "persons": [
+            "user"
+          ],
+          "entities": [
+            "Qingmu Book Stall",
+            "picture books",
+            "prose collections"
+          ],
+          "topic": "Inventory correction"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-inventory",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "9e2e3419-c32b-4f75-9f43-9a452ffc4376",
+          "lossless_restatement": "On 2032-06-01, the user recorded the initial inventory for Qingmu Book Stall as twelve copies of picture books and eight copies of prose collections, noting that the initial inventory sheet was handwritten and there were no sales on that day.",
+          "keywords": [
+            "Qingmu Book Stall",
+            "initial inventory",
+            "picture books",
+            "prose collections",
+            "handwritten",
+            "sales"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": "Qingmu Book Stall",
+          "persons": [
+            "user"
+          ],
+          "entities": [
+            "Qingmu Book Stall",
+            "picture books",
+            "prose collections"
+          ],
+          "topic": "Initial inventory recording"
+        },
+        {
+          "entry_id": "5c3f4a6a-19d9-40c8-aef8-cab493cfffed",
+          "lossless_restatement": "On 2032-06-02, the user corrected the initial inventory record for Qingmu Book Stall, stating that the actual number of picture books was seventeen instead of twelve due to a copying error, and confirmed that the number of prose collections remained eight.",
+          "keywords": [
+            "Qingmu Book Stall",
+            "initial inventory",
+            "correction",
+            "picture books",
+            "prose collections",
+            "copying error"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": "Qingmu Book Stall",
+          "persons": [
+            "user"
+          ],
+          "entities": [
+            "Qingmu Book Stall",
+            "picture books",
+            "prose collections"
+          ],
+          "topic": "Inventory correction"
+        },
+        {
+          "entry_id": "67f4c265-1a4c-4d20-92b7-8e75b2dabe09",
+          "lossless_restatement": "On 2032-06-03, two published art books were sold, leaving fifteen copies remaining.",
+          "keywords": [
+            "published art books",
+            "sold",
+            "remaining copies",
+            "inventory"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "published art books"
+          ],
+          "topic": "Sales and inventory status of published art books"
+        },
+        {
+          "entry_id": "b78037d2-3fe5-4d74-bbbc-c9f61fc1f19f",
+          "lossless_restatement": "On 2032-06-03, no prose collections were sold.",
+          "keywords": [
+            "prose collections",
+            "sold",
+            "inventory"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "prose collections"
+          ],
+          "topic": "Sales status of prose collections"
+        },
+        {
+          "entry_id": "d3a44346-d007-4166-aae9-7ddfb691dd62",
+          "lossless_restatement": "On 2032-06-03, the uncorrected hand-copied meter readings were kept on file.",
+          "keywords": [
+            "uncorrected hand-copied meter readings",
+            "filed",
+            "records"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "hand-copied meter readings"
+          ],
+          "topic": "Archiving of uncorrected meter reading records"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "2ce841ae-f742-424f-bfe2-afe1dcfa22dc",
+          "lossless_restatement": "On 2032-06-01, the pottery room duty schedule specified that Xia He was responsible for Bailu Kiln, Ye Chu was responsible for Qingli Kiln, the front desk kept the keys for both kilns, and a blue notebook was used to record work piece numbers.",
+          "keywords": [
+            "pottery room",
+            "duty schedule",
+            "Bailu Kiln",
+            "Qingli Kiln",
+            "Xia He",
+            "Ye Chu",
+            "front desk",
+            "keys",
+            "blue notebook",
+            "work piece numbers"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": "pottery room",
+          "persons": [
+            "Xia He",
+            "Ye Chu"
+          ],
+          "entities": [
+            "Bailu Kiln",
+            "Qingli Kiln",
+            "front desk",
+            "blue notebook"
+          ],
+          "topic": "Pottery room duty schedule and key management"
+        },
+        {
+          "entry_id": "108db8ee-4b72-45b6-beb7-9958292478b4",
+          "lossless_restatement": "On 2032-06-02, the responsibility for Bailu Kiln was changed from Xia He to Qiao Yuan, Ye Chu continued to be responsible for Qingli Kiln, and the keys remained with the front desk and were not transferred to the duty personnel.",
+          "keywords": [
+            "Bailu Kiln",
+            "Qingli Kiln",
+            "Xia He",
+            "Qiao Yuan",
+            "Ye Chu",
+            "keys",
+            "front desk",
+            "duty personnel"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": "pottery room",
+          "persons": [
+            "Xia He",
+            "Qiao Yuan",
+            "Ye Chu"
+          ],
+          "entities": [
+            "Bailu Kiln",
+            "Qingli Kiln",
+            "front desk"
+          ],
+          "topic": "Update on pottery room duty schedule and key management"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-kiln",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "2ce841ae-f742-424f-bfe2-afe1dcfa22dc",
+          "lossless_restatement": "On 2032-06-01, the pottery room duty schedule specified that Xia He was responsible for Bailu Kiln, Ye Chu was responsible for Qingli Kiln, the front desk kept the keys for both kilns, and a blue notebook was used to record work piece numbers.",
+          "keywords": [
+            "pottery room",
+            "duty schedule",
+            "Bailu Kiln",
+            "Qingli Kiln",
+            "Xia He",
+            "Ye Chu",
+            "front desk",
+            "keys",
+            "blue notebook",
+            "work piece numbers"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": "pottery room",
+          "persons": [
+            "Xia He",
+            "Ye Chu"
+          ],
+          "entities": [
+            "Bailu Kiln",
+            "Qingli Kiln",
+            "front desk",
+            "blue notebook"
+          ],
+          "topic": "Pottery room duty schedule and key management"
+        },
+        {
+          "entry_id": "108db8ee-4b72-45b6-beb7-9958292478b4",
+          "lossless_restatement": "On 2032-06-02, the responsibility for Bailu Kiln was changed from Xia He to Qiao Yuan, Ye Chu continued to be responsible for Qingli Kiln, and the keys remained with the front desk and were not transferred to the duty personnel.",
+          "keywords": [
+            "Bailu Kiln",
+            "Qingli Kiln",
+            "Xia He",
+            "Qiao Yuan",
+            "Ye Chu",
+            "keys",
+            "front desk",
+            "duty personnel"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": "pottery room",
+          "persons": [
+            "Xia He",
+            "Qiao Yuan",
+            "Ye Chu"
+          ],
+          "entities": [
+            "Bailu Kiln",
+            "Qingli Kiln",
+            "front desk"
+          ],
+          "topic": "Update on pottery room duty schedule and key management"
+        },
+        {
+          "entry_id": "e8705340-1f73-4266-b5b9-6e50c543bb33",
+          "lossless_restatement": "On 2032-06-03, it was noted that Qiao Yuan will be away for one day next week, and the substitute for that day has not yet been determined.",
+          "keywords": [
+            "Qiao Yuan",
+            "away",
+            "substitute",
+            "next week"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [
+            "Qiao Yuan"
+          ],
+          "entities": [],
+          "topic": "Staff absence and substitute arrangement"
+        },
+        {
+          "entry_id": "c21d394d-b1c6-41d7-86b6-4d9374b8971f",
+          "lossless_restatement": "On 2032-06-03, it was confirmed that there are currently no adjustments to the effective schedule for Bailu Kiln.",
+          "keywords": [
+            "Bailu Kiln",
+            "schedule",
+            "no adjustment",
+            "effective"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "Bailu Kiln"
+          ],
+          "topic": "Bailu Kiln schedule status"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "1a3bec9b-aff5-433a-8684-042a290861c3",
+          "lossless_restatement": "As of 2032-06-01T09:00:00, the map of the North Window Reading Room is located in Cabinet No. 2, and newspapers and periodicals are located in Cabinet No. 5. Borrowing maps requires registration, while reading them indoors does not require registration.",
+          "keywords": [
+            "North Window Reading Room",
+            "map",
+            "newspapers and periodicals",
+            "Cabinet No. 2",
+            "Cabinet No. 5",
+            "registration",
+            "borrowing",
+            "indoor reading"
+          ],
+          "timestamp": "2032-06-01T09:00:00",
+          "location": "North Window Reading Room",
+          "persons": [],
+          "entities": [],
+          "topic": "North Window Reading Room item locations and borrowing rules"
+        },
+        {
+          "entry_id": "8899961e-c2ba-467d-9649-1b3eb6479dc9",
+          "lossless_restatement": "Starting from 2032-06-05, the map of the North Window Reading Room will be moved to Cabinet No. 7; before this date, it remains in Cabinet No. 2. The location and registration rules for newspapers and periodicals remain unchanged.",
+          "keywords": [
+            "North Window Reading Room",
+            "map",
+            "Cabinet No. 7",
+            "Cabinet No. 2",
+            "2032-06-05",
+            "newspapers and periodicals",
+            "location change"
+          ],
+          "timestamp": "2032-06-02T09:00:00",
+          "location": "North Window Reading Room",
+          "persons": [],
+          "entities": [],
+          "topic": "North Window Reading Room map relocation schedule"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-maps",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "1a3bec9b-aff5-433a-8684-042a290861c3",
+          "lossless_restatement": "As of 2032-06-01T09:00:00, the map of the North Window Reading Room is located in Cabinet No. 2, and newspapers and periodicals are located in Cabinet No. 5. Borrowing maps requires registration, while reading them indoors does not require registration.",
+          "keywords": [
+            "North Window Reading Room",
+            "map",
+            "newspapers and periodicals",
+            "Cabinet No. 2",
+            "Cabinet No. 5",
+            "registration",
+            "borrowing",
+            "indoor reading"
+          ],
+          "timestamp": "2032-06-01T09:00:00",
+          "location": "North Window Reading Room",
+          "persons": [],
+          "entities": [],
+          "topic": "North Window Reading Room item locations and borrowing rules"
+        },
+        {
+          "entry_id": "8899961e-c2ba-467d-9649-1b3eb6479dc9",
+          "lossless_restatement": "Starting from 2032-06-05, the map of the North Window Reading Room will be moved to Cabinet No. 7; before this date, it remains in Cabinet No. 2. The location and registration rules for newspapers and periodicals remain unchanged.",
+          "keywords": [
+            "North Window Reading Room",
+            "map",
+            "Cabinet No. 7",
+            "Cabinet No. 2",
+            "2032-06-05",
+            "newspapers and periodicals",
+            "location change"
+          ],
+          "timestamp": "2032-06-02T09:00:00",
+          "location": "North Window Reading Room",
+          "persons": [],
+          "entities": [],
+          "topic": "North Window Reading Room map relocation schedule"
+        },
+        {
+          "entry_id": "385af4f5-ea79-4ab0-a3ad-e19c548993f1",
+          "lossless_restatement": "On 2032-06-03T09:00:00, the new labels for Cabinet No. 7 were confirmed to be pasted, indicating that preparation was completed, but the map relocation was not advanced; the relocation date remains 2032-06-05.",
+          "keywords": [
+            "Cabinet No. 7",
+            "new labels",
+            "map relocation",
+            "preparation",
+            "relocation date"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "Cabinet No. 7"
+          ],
+          "topic": "Cabinet No. 7 label update and relocation schedule confirmation"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "94feef8e-555c-4620-ba54-865502f95914",
+          "lossless_restatement": "As of 2032-06-01T09:00:00, the current self-pickup location for Xiaohuashe is located at Nanchuangdian, and mailings are dispatched every Thursday using beige envelopes for postcards and paper tubes for posters; the store owner only visits the store to organize items on weekends.",
+          "keywords": [
+            "Xiaohuashe",
+            "Nanchuangdian",
+            "self-pickup",
+            "mailing",
+            "postcards",
+            "posters",
+            "beige envelopes",
+            "paper tubes",
+            "weekend",
+            "store organization"
+          ],
+          "timestamp": "2032-06-01T09:00:00",
+          "location": "Nanchuangdian",
+          "persons": [],
+          "entities": [
+            "Xiaohuashe",
+            "Nanchuangdian"
+          ],
+          "topic": "Xiaohuashe pickup location and mailing logistics"
+        },
+        {
+          "entry_id": "9e749a37-c762-4384-aef9-7fe8642c8fb9",
+          "lossless_restatement": "As of 2032-06-02T09:00:00, rumors indicated that Nanchuangdian might undergo renovation and change its self-pickup location, but the store owner has not confirmed this, and the new location and date are unknown; there have been no notifications regarding changes to the mailing schedule.",
+          "keywords": [
+            "Nanchuangdian",
+            "renovation",
+            "self-pickup location change",
+            "rumors",
+            "unconfirmed",
+            "mailing schedule",
+            "no changes"
+          ],
+          "timestamp": "2032-06-02T09:00:00",
+          "location": "Nanchuangdian",
+          "persons": [],
+          "entities": [
+            "Nanchuangdian"
+          ],
+          "topic": "Rumors regarding Nanchuangdian renovation and pickup location uncertainty"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-parcel",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "94feef8e-555c-4620-ba54-865502f95914",
+          "lossless_restatement": "As of 2032-06-01T09:00:00, the current self-pickup location for Xiaohuashe is located at Nanchuangdian, and mailings are dispatched every Thursday using beige envelopes for postcards and paper tubes for posters; the store owner only visits the store to organize items on weekends.",
+          "keywords": [
+            "Xiaohuashe",
+            "Nanchuangdian",
+            "self-pickup",
+            "mailing",
+            "postcards",
+            "posters",
+            "beige envelopes",
+            "paper tubes",
+            "weekend",
+            "store organization"
+          ],
+          "timestamp": "2032-06-01T09:00:00",
+          "location": "Nanchuangdian",
+          "persons": [],
+          "entities": [
+            "Xiaohuashe",
+            "Nanchuangdian"
+          ],
+          "topic": "Xiaohuashe pickup location and mailing logistics"
+        },
+        {
+          "entry_id": "9e749a37-c762-4384-aef9-7fe8642c8fb9",
+          "lossless_restatement": "As of 2032-06-02T09:00:00, rumors indicated that Nanchuangdian might undergo renovation and change its self-pickup location, but the store owner has not confirmed this, and the new location and date are unknown; there have been no notifications regarding changes to the mailing schedule.",
+          "keywords": [
+            "Nanchuangdian",
+            "renovation",
+            "self-pickup location change",
+            "rumors",
+            "unconfirmed",
+            "mailing schedule",
+            "no changes"
+          ],
+          "timestamp": "2032-06-02T09:00:00",
+          "location": "Nanchuangdian",
+          "persons": [],
+          "entities": [
+            "Nanchuangdian"
+          ],
+          "topic": "Rumors regarding Nanchuangdian renovation and pickup location uncertainty"
+        },
+        {
+          "entry_id": "3b30a7c8-4ca4-4a3a-bfde-7242da388ab1",
+          "lossless_restatement": "The shop owner announced on 2032-06-03T09:00:00 that the renovation plan is temporarily suspended.",
+          "keywords": [
+            "shop owner",
+            "renovation plan",
+            "suspended",
+            "temporary"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [
+            "shop owner"
+          ],
+          "entities": [
+            "renovation plan"
+          ],
+          "topic": "Renovation plan status update"
+        },
+        {
+          "entry_id": "33545cef-369b-4edb-b279-e2a16871f341",
+          "lossless_restatement": "On 2032-06-03T09:00:00, it was confirmed that customers continue to pick up orders at the South Window Store.",
+          "keywords": [
+            "South Window Store",
+            "pickup",
+            "orders"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": "South Window Store",
+          "persons": [],
+          "entities": [
+            "South Window Store"
+          ],
+          "topic": "Order pickup location confirmation"
+        },
+        {
+          "entry_id": "ab67ec42-d5c4-456b-a489-ae0ba48c1702",
+          "lossless_restatement": "On 2032-06-03T09:00:00, it was clarified that there is no announcement regarding a permanent suspension of renovations.",
+          "keywords": [
+            "renovation",
+            "permanent",
+            "announcement",
+            "clarification"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Clarification on renovation duration"
+        },
+        {
+          "entry_id": "28c93af6-f49b-4df5-ab55-4d02317c75b8",
+          "lossless_restatement": "On 2032-06-03T09:00:00, it was stated that mail delivery continues to occur every Thursday with unchanged packaging.",
+          "keywords": [
+            "mail delivery",
+            "Thursday",
+            "packaging",
+            "unchanged"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Mail delivery schedule and packaging status"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "e13ecfe6-c5e8-4264-9318-708de16b4e4f",
+          "lossless_restatement": "On 2032-06-01T09:00:00, the mobile projection vehicle's projector can be powered by either connected municipal electricity or a charged battery, and both power methods require the cooling fan to operate; on this date, municipal electricity was connected, the battery was charged, and the fan was functioning normally, so the projector could be turned on; the subtitle screen uses a separate small battery and does not depend on this fan system.",
+          "keywords": [
+            "mobile projection vehicle",
+            "projector",
+            "municipal electricity",
+            "battery",
+            "cooling fan",
+            "subtitle screen",
+            "power supply"
+          ],
+          "timestamp": "2032-06-01T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "mobile projection vehicle",
+            "projector",
+            "subtitle screen"
+          ],
+          "topic": "Mobile projection vehicle power supply and operational status"
+        },
+        {
+          "entry_id": "fb42c167-a559-4993-8c15-750c733b022c",
+          "lossless_restatement": "On 2032-06-02T09:00:00, the municipal electricity socket was deactivated, but the vehicle's large battery remained charged and the fan continued to function normally, so the projector switched to battery power; the subtitle screen remained unaffected.",
+          "keywords": [
+            "municipal electricity socket",
+            "deactivated",
+            "vehicle large battery",
+            "charged",
+            "fan",
+            "projector",
+            "battery power",
+            "subtitle screen"
+          ],
+          "timestamp": "2032-06-02T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "vehicle",
+            "projector",
+            "subtitle screen"
+          ],
+          "topic": "Change in power supply mode for mobile projection vehicle"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-projection",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "e13ecfe6-c5e8-4264-9318-708de16b4e4f",
+          "lossless_restatement": "On 2032-06-01T09:00:00, the mobile projection vehicle's projector can be powered by either connected municipal electricity or a charged battery, and both power methods require the cooling fan to operate; on this date, municipal electricity was connected, the battery was charged, and the fan was functioning normally, so the projector could be turned on; the subtitle screen uses a separate small battery and does not depend on this fan system.",
+          "keywords": [
+            "mobile projection vehicle",
+            "projector",
+            "municipal electricity",
+            "battery",
+            "cooling fan",
+            "subtitle screen",
+            "power supply"
+          ],
+          "timestamp": "2032-06-01T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "mobile projection vehicle",
+            "projector",
+            "subtitle screen"
+          ],
+          "topic": "Mobile projection vehicle power supply and operational status"
+        },
+        {
+          "entry_id": "fb42c167-a559-4993-8c15-750c733b022c",
+          "lossless_restatement": "On 2032-06-02T09:00:00, the municipal electricity socket was deactivated, but the vehicle's large battery remained charged and the fan continued to function normally, so the projector switched to battery power; the subtitle screen remained unaffected.",
+          "keywords": [
+            "municipal electricity socket",
+            "deactivated",
+            "vehicle large battery",
+            "charged",
+            "fan",
+            "projector",
+            "battery power",
+            "subtitle screen"
+          ],
+          "timestamp": "2032-06-02T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "vehicle",
+            "projector",
+            "subtitle screen"
+          ],
+          "topic": "Change in power supply mode for mobile projection vehicle"
+        },
+        {
+          "entry_id": "98a11919-dfd0-402b-a4fa-9e1e9859c6a7",
+          "lossless_restatement": "On 2032-06-03T09:00:00, the cooling fan stopped operating, and it was established that the projector cannot be turned on even if the large battery has power until the fan resumes operation.",
+          "keywords": [
+            "cooling fan",
+            "projector",
+            "large battery",
+            "operation status"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "cooling fan",
+            "projector",
+            "large battery"
+          ],
+          "topic": "Projector cooling fan failure and operational restriction"
+        },
+        {
+          "entry_id": "c7c104b8-6748-4b3f-a962-3ec75ae18326",
+          "lossless_restatement": "On 2032-06-03T09:00:00, the small battery and operating status of the subtitle screen remained unchanged.",
+          "keywords": [
+            "subtitle screen",
+            "small battery",
+            "operating status",
+            "unchanged"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "subtitle screen",
+            "small battery"
+          ],
+          "topic": "Subtitle screen status check"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "c9cbd4c9-5ea0-42e0-996d-1fa420902239",
+          "lossless_restatement": "The Muqiao Reading Club currently does not require reservations for its sessions, which start at 14:00 on Saturday afternoons.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "no reservation required",
+            "Saturday afternoon",
+            "14:00"
+          ],
+          "timestamp": null,
+          "location": null,
+          "persons": [],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Reading club attendance policy and schedule"
+        },
+        {
+          "entry_id": "488b2603-67c0-41a0-a835-22d41486a1d1",
+          "lossless_restatement": "The second-floor reading corner of the Muqiao Reading Club is designated for quiet reading only, while activities are held on the first floor.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "second-floor reading corner",
+            "quiet reading",
+            "first floor",
+            "activities"
+          ],
+          "timestamp": null,
+          "location": "Muqiao Reading Club",
+          "persons": [],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Reading club venue usage rules"
+        },
+        {
+          "entry_id": "aaeadcec-d83a-42c1-b9ca-bb73557778ec",
+          "lossless_restatement": "The speaker is responsible for registering the number of attendees at the Muqiao Reading Club.",
+          "keywords": [
+            "speaker",
+            "register",
+            "attendee count",
+            "Muqiao Reading Club"
+          ],
+          "timestamp": null,
+          "location": null,
+          "persons": [
+            "speaker"
+          ],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Reading club registration responsibility"
+        },
+        {
+          "entry_id": "fc3097e2-57af-4625-aba8-f934a53917c0",
+          "lossless_restatement": "Someone suggested changing the Muqiao Reading Club to a reservation-based system in the future, and the speaker is willing to discuss this proposal.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "reservation system",
+            "suggestion",
+            "discussion"
+          ],
+          "timestamp": null,
+          "location": null,
+          "persons": [
+            "speaker"
+          ],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Proposal for future reservation system"
+        },
+        {
+          "entry_id": "fd2fce68-e16d-446e-889c-2d903d098e48",
+          "lossless_restatement": "There is no decision made yet regarding the change to a reservation system for the Muqiao Reading Club, and no start date has been set.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "no decision",
+            "reservation system",
+            "no start date"
+          ],
+          "timestamp": null,
+          "location": null,
+          "persons": [],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Status of reservation system proposal"
+        },
+        {
+          "entry_id": "251d40bd-c7b9-49c4-8001-013e97832944",
+          "lossless_restatement": "The Muqiao Reading Club session on Saturday, 2032-06-05, will proceed without requiring reservations.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "Saturday",
+            "2032-06-05",
+            "no reservation required"
+          ],
+          "timestamp": "2032-06-05T14:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Upcoming session attendance policy"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-reservation",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "c9cbd4c9-5ea0-42e0-996d-1fa420902239",
+          "lossless_restatement": "The Muqiao Reading Club currently does not require reservations for its sessions, which start at 14:00 on Saturday afternoons.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "no reservation required",
+            "Saturday afternoon",
+            "14:00"
+          ],
+          "timestamp": null,
+          "location": null,
+          "persons": [],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Reading club attendance policy and schedule"
+        },
+        {
+          "entry_id": "488b2603-67c0-41a0-a835-22d41486a1d1",
+          "lossless_restatement": "The second-floor reading corner of the Muqiao Reading Club is designated for quiet reading only, while activities are held on the first floor.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "second-floor reading corner",
+            "quiet reading",
+            "first floor",
+            "activities"
+          ],
+          "timestamp": null,
+          "location": "Muqiao Reading Club",
+          "persons": [],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Reading club venue usage rules"
+        },
+        {
+          "entry_id": "aaeadcec-d83a-42c1-b9ca-bb73557778ec",
+          "lossless_restatement": "The speaker is responsible for registering the number of attendees at the Muqiao Reading Club.",
+          "keywords": [
+            "speaker",
+            "register",
+            "attendee count",
+            "Muqiao Reading Club"
+          ],
+          "timestamp": null,
+          "location": null,
+          "persons": [
+            "speaker"
+          ],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Reading club registration responsibility"
+        },
+        {
+          "entry_id": "fc3097e2-57af-4625-aba8-f934a53917c0",
+          "lossless_restatement": "Someone suggested changing the Muqiao Reading Club to a reservation-based system in the future, and the speaker is willing to discuss this proposal.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "reservation system",
+            "suggestion",
+            "discussion"
+          ],
+          "timestamp": null,
+          "location": null,
+          "persons": [
+            "speaker"
+          ],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Proposal for future reservation system"
+        },
+        {
+          "entry_id": "fd2fce68-e16d-446e-889c-2d903d098e48",
+          "lossless_restatement": "There is no decision made yet regarding the change to a reservation system for the Muqiao Reading Club, and no start date has been set.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "no decision",
+            "reservation system",
+            "no start date"
+          ],
+          "timestamp": null,
+          "location": null,
+          "persons": [],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Status of reservation system proposal"
+        },
+        {
+          "entry_id": "251d40bd-c7b9-49c4-8001-013e97832944",
+          "lossless_restatement": "The Muqiao Reading Club session on Saturday, 2032-06-05, will proceed without requiring reservations.",
+          "keywords": [
+            "Muqiao Reading Club",
+            "Saturday",
+            "2032-06-05",
+            "no reservation required"
+          ],
+          "timestamp": "2032-06-05T14:00:00",
+          "location": null,
+          "persons": [],
+          "entities": [
+            "Muqiao Reading Club"
+          ],
+          "topic": "Upcoming session attendance policy"
+        },
+        {
+          "entry_id": "32181348-c3fb-49ee-8f42-ffd7d0eafbbe",
+          "lossless_restatement": "The discussion concluded that the reservation system will not be adopted and the start time starting from Saturday, 2032-06-05, remains unchanged.",
+          "keywords": [
+            "reservation system",
+            "start time",
+            "Saturday",
+            "discussion result"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Decision on reservation system and schedule"
+        },
+        {
+          "entry_id": "ad0a0579-c632-43b7-85f5-bb46d9a351d3",
+          "lossless_restatement": "Three points proposed by someone were only suggestions and were not adopted in the final decision.",
+          "keywords": [
+            "three points",
+            "suggestions",
+            "not adopted",
+            "proposal"
+          ],
+          "timestamp": "2032-06-03T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Rejection of proposed suggestions"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "a374bd0e-bd39-4c12-a457-00be64384999",
+          "lossless_restatement": "At Echo Studio, external speakers are prohibited in the recording room and practice room after 20:00, while headphones are allowed; the control room is not subject to this restriction, and all borrowed cables must be returned to the front desk.",
+          "keywords": [
+            "Echo Studio",
+            "recording room",
+            "practice room",
+            "control room",
+            "external speakers",
+            "headphones",
+            "cables",
+            "front desk"
+          ],
+          "timestamp": null,
+          "location": "Echo Studio",
+          "persons": [],
+          "entities": [
+            "Echo Studio"
+          ],
+          "topic": "Echo Studio equipment usage regulations"
+        },
+        {
+          "entry_id": "cdeb53c6-2e5a-405e-83a3-64b3c221b05f",
+          "lossless_restatement": "For the equipment test on Friday, June 5, 2032, external speakers are permitted in the recording room only between 20:00 and 21:00; the practice room has no exceptions, and the recording room reverts to the prohibition of external speakers after 21:00.",
+          "keywords": [
+            "equipment test",
+            "Friday",
+            "recording room",
+            "practice room",
+            "external speakers",
+            "June 5, 2032"
+          ],
+          "timestamp": "2032-06-05T20:00:00",
+          "location": "Echo Studio",
+          "persons": [],
+          "entities": [],
+          "topic": "Special equipment test schedule and restrictions"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-studio",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "a374bd0e-bd39-4c12-a457-00be64384999",
+          "lossless_restatement": "At Echo Studio, external speakers are prohibited in the recording room and practice room after 20:00, while headphones are allowed; the control room is not subject to this restriction, and all borrowed cables must be returned to the front desk.",
+          "keywords": [
+            "Echo Studio",
+            "recording room",
+            "practice room",
+            "control room",
+            "external speakers",
+            "headphones",
+            "cables",
+            "front desk"
+          ],
+          "timestamp": null,
+          "location": "Echo Studio",
+          "persons": [],
+          "entities": [
+            "Echo Studio"
+          ],
+          "topic": "Echo Studio equipment usage regulations"
+        },
+        {
+          "entry_id": "cdeb53c6-2e5a-405e-83a3-64b3c221b05f",
+          "lossless_restatement": "For the equipment test on Friday, June 5, 2032, external speakers are permitted in the recording room only between 20:00 and 21:00; the practice room has no exceptions, and the recording room reverts to the prohibition of external speakers after 21:00.",
+          "keywords": [
+            "equipment test",
+            "Friday",
+            "recording room",
+            "practice room",
+            "external speakers",
+            "June 5, 2032"
+          ],
+          "timestamp": "2032-06-05T20:00:00",
+          "location": "Echo Studio",
+          "persons": [],
+          "entities": [],
+          "topic": "Special equipment test schedule and restrictions"
+        },
+        {
+          "entry_id": "878a35af-ef20-48de-a806-505ecd8ffb87",
+          "lossless_restatement": "On 2032-06-03, the Friday equipment test was cancelled, which resulted in the cancellation of the exception for external playback in the recording studio from 20:00 to 21:00 on that evening.",
+          "keywords": [
+            "equipment test",
+            "recording studio",
+            "external playback",
+            "cancellation",
+            "Friday"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": "recording studio",
+          "persons": [],
+          "entities": [
+            "equipment test"
+          ],
+          "topic": "Cancellation of equipment test and recording studio playback exception"
+        },
+        {
+          "entry_id": "226772c6-4b42-4e4d-8ded-0089b6b38953",
+          "lossless_restatement": "The regulations regarding the use of headphones and the control room remain unchanged.",
+          "keywords": [
+            "headphones",
+            "control room",
+            "regulations",
+            "unchanged"
+          ],
+          "timestamp": null,
+          "location": "control room",
+          "persons": [],
+          "entities": [
+            "headphones",
+            "control room"
+          ],
+          "topic": "Unchanged regulations for headphones and control room"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "8b96a217-ac76-4953-a441-853fbe2cec2a",
+          "lossless_restatement": "On 2032-06-01, the entry rules for Xingmu Film Club allowed entry using either the current month's member card or a signed invitation letter, and attending the post-screening discussion required a separate reservation; Lu Sheng possessed both valid credentials and a reservation, thus could enter and participate, while Meng Tang only had a valid member card without a reservation.",
+          "keywords": [
+            "Xingmu Film Club",
+            "entry rules",
+            "member card",
+            "invitation letter",
+            "post-screening discussion",
+            "reservation",
+            "Lu Sheng",
+            "Meng Tang"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": null,
+          "persons": [
+            "Lu Sheng",
+            "Meng Tang"
+          ],
+          "entities": [
+            "Xingmu Film Club"
+          ],
+          "topic": "Film club entry rules and attendee status on 2032-06-01"
+        },
+        {
+          "entry_id": "31961e7f-06cb-4d1e-83bb-3927272cf756",
+          "lossless_restatement": "On 2032-06-01, the poster for the event was printed in silver.",
+          "keywords": [
+            "poster",
+            "silver",
+            "print"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Poster design detail"
+        },
+        {
+          "entry_id": "bf489c18-da3b-4170-a956-ea98ab8b46a5",
+          "lossless_restatement": "On 2032-06-02, Lu Sheng's member card for the current month had expired, but her signed invitation letter remained valid and her reservation for the discussion was still active, allowing her to enter and participate in the discussion using the invitation letter.",
+          "keywords": [
+            "Lu Sheng",
+            "member card",
+            "expired",
+            "invitation letter",
+            "valid",
+            "reservation",
+            "discussion",
+            "entry"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": null,
+          "persons": [
+            "Lu Sheng"
+          ],
+          "entities": [],
+          "topic": "Lu Sheng's eligibility for entry and discussion on 2032-06-02"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-tickets",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "8b96a217-ac76-4953-a441-853fbe2cec2a",
+          "lossless_restatement": "On 2032-06-01, the entry rules for Xingmu Film Club allowed entry using either the current month's member card or a signed invitation letter, and attending the post-screening discussion required a separate reservation; Lu Sheng possessed both valid credentials and a reservation, thus could enter and participate, while Meng Tang only had a valid member card without a reservation.",
+          "keywords": [
+            "Xingmu Film Club",
+            "entry rules",
+            "member card",
+            "invitation letter",
+            "post-screening discussion",
+            "reservation",
+            "Lu Sheng",
+            "Meng Tang"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": null,
+          "persons": [
+            "Lu Sheng",
+            "Meng Tang"
+          ],
+          "entities": [
+            "Xingmu Film Club"
+          ],
+          "topic": "Film club entry rules and attendee status on 2032-06-01"
+        },
+        {
+          "entry_id": "31961e7f-06cb-4d1e-83bb-3927272cf756",
+          "lossless_restatement": "On 2032-06-01, the poster for the event was printed in silver.",
+          "keywords": [
+            "poster",
+            "silver",
+            "print"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Poster design detail"
+        },
+        {
+          "entry_id": "bf489c18-da3b-4170-a956-ea98ab8b46a5",
+          "lossless_restatement": "On 2032-06-02, Lu Sheng's member card for the current month had expired, but her signed invitation letter remained valid and her reservation for the discussion was still active, allowing her to enter and participate in the discussion using the invitation letter.",
+          "keywords": [
+            "Lu Sheng",
+            "member card",
+            "expired",
+            "invitation letter",
+            "valid",
+            "reservation",
+            "discussion",
+            "entry"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": null,
+          "persons": [
+            "Lu Sheng"
+          ],
+          "entities": [],
+          "topic": "Lu Sheng's eligibility for entry and discussion on 2032-06-02"
+        },
+        {
+          "entry_id": "473fce7c-7c08-4126-ac82-738b650c8922",
+          "lossless_restatement": "On 2032-06-03T09:00:00, Lu Sheng cancelled the discussion appointment and decided to only watch the screening without participating in the discussion.",
+          "keywords": [
+            "Lu Sheng",
+            "discussion appointment",
+            "cancelled",
+            "screening",
+            "participation"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [
+            "Lu Sheng"
+          ],
+          "entities": [],
+          "topic": "Lu Sheng's event participation change"
+        },
+        {
+          "entry_id": "79e366e3-adcb-4c39-b3ae-227710c1eb2a",
+          "lossless_restatement": "On 2032-06-03T09:00:00, Lu Sheng's invitation to the event remains valid.",
+          "keywords": [
+            "Lu Sheng",
+            "invitation",
+            "valid"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [
+            "Lu Sheng"
+          ],
+          "entities": [],
+          "topic": "Lu Sheng's invitation status"
+        },
+        {
+          "entry_id": "45b33274-78a3-4ca7-83b0-7a97e5b0cb45",
+          "lossless_restatement": "On 2032-06-03T09:00:00, Meng Tang's profile information remains unchanged.",
+          "keywords": [
+            "Meng Tang",
+            "profile",
+            "unchanged"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [
+            "Meng Tang"
+          ],
+          "entities": [],
+          "topic": "Meng Tang's profile status"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 1,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "793e9559-3d64-44f6-9ba2-93dcaf50725a",
+          "lossless_restatement": "On 2032-06-01, the plant observation activity rules were defined: the lakeside route requires both the boardwalk to be open and the guide to be present, while the rooftop route only requires the guide to be present; on this date, both conditions were met, allowing both routes to proceed, and the indoor specimen display does not depend on the guide.",
+          "keywords": [
+            "plant observation activity",
+            "lakeside route",
+            "rooftop route",
+            "indoor specimen display",
+            "boardwalk",
+            "guide",
+            "rules"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Plant observation activity route rules and status on 2032-06-01"
+        },
+        {
+          "entry_id": "e71bf505-fdf3-48ab-8223-f42c5bb6ca85",
+          "lossless_restatement": "On 2032-06-02, the boardwalk was temporarily closed while the guide remained present, resulting in the suspension of the lakeside route, the continuation of the rooftop route, and the normal operation of the indoor specimen display.",
+          "keywords": [
+            "boardwalk",
+            "closed",
+            "guide",
+            "lakeside route",
+            "suspended",
+            "rooftop route",
+            "indoor specimen display",
+            "2032-06-02"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Plant observation activity route status adjustment on 2032-06-02"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    },
+    {
+      "case": "method-screen-walk",
+      "session": 2,
+      "pending_dialogues": 0,
+      "status": "COMPLETED",
+      "entries": [
+        {
+          "entry_id": "793e9559-3d64-44f6-9ba2-93dcaf50725a",
+          "lossless_restatement": "On 2032-06-01, the plant observation activity rules were defined: the lakeside route requires both the boardwalk to be open and the guide to be present, while the rooftop route only requires the guide to be present; on this date, both conditions were met, allowing both routes to proceed, and the indoor specimen display does not depend on the guide.",
+          "keywords": [
+            "plant observation activity",
+            "lakeside route",
+            "rooftop route",
+            "indoor specimen display",
+            "boardwalk",
+            "guide",
+            "rules"
+          ],
+          "timestamp": "2032-06-01T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Plant observation activity route rules and status on 2032-06-01"
+        },
+        {
+          "entry_id": "e71bf505-fdf3-48ab-8223-f42c5bb6ca85",
+          "lossless_restatement": "On 2032-06-02, the boardwalk was temporarily closed while the guide remained present, resulting in the suspension of the lakeside route, the continuation of the rooftop route, and the normal operation of the indoor specimen display.",
+          "keywords": [
+            "boardwalk",
+            "closed",
+            "guide",
+            "lakeside route",
+            "suspended",
+            "rooftop route",
+            "indoor specimen display",
+            "2032-06-02"
+          ],
+          "timestamp": "2032-06-02T09:00:00+08:00",
+          "location": null,
+          "persons": [],
+          "entities": [],
+          "topic": "Plant observation activity route status adjustment on 2032-06-02"
+        },
+        {
+          "entry_id": "148d263f-7c4a-41c3-9cf9-ab68c1acbba0",
+          "lossless_restatement": "On 2032-06-03T09:00:00, the guide left, the rooftop route was suspended, the trestle bridge remained closed, and the indoor exhibition continued to be open.",
+          "keywords": [
+            "guide",
+            "rooftop route",
+            "trestle bridge",
+            "indoor exhibition",
+            "suspended",
+            "closed",
+            "open"
+          ],
+          "timestamp": "2032-06-03T09:00:00",
+          "location": null,
+          "persons": [
+            "guide"
+          ],
+          "entities": [
+            "rooftop route",
+            "trestle bridge",
+            "indoor exhibition"
+          ],
+          "topic": "Status update on venue routes and exhibitions"
+        }
+      ],
+      "fallbacks": [],
+      "recovered_retries": [],
+      "admission_rejections": []
+    }
+  ],
+  "costs_by_stage": {
+    "reader": {
+      "responses": 48,
+      "known_tokens": 161969,
+      "unknown_usage": 0
+    },
+    "judge": {
+      "responses": 48,
+      "known_tokens": 129498,
+      "unknown_usage": 0
+    },
+    "native_core": {
+      "responses": 245,
+      "known_tokens": 164052,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "responses": 245,
+      "known_tokens": 6983,
+      "unknown_usage": 0
+    }
+  },
+  "finish_reasons": {
+    "reader": {
+      "stop": 48
+    },
+    "judge": {
+      "stop": 48
+    },
+    "native_core": {
+      "stop": 245
+    }
+  },
+  "prediction_generation_tokens": 326021,
+  "ledger_delta": {
+    "generation_requests": 341,
+    "generation": {
+      "known_tokens": 455519,
+      "charged_tokens": 455519,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 6983,
+      "charged_tokens": 6983,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens": true,
+    "generation_requests": true,
+    "embedding_tokens": true
+  },
+  "requests_without_responses": [],
+  "limitations": [
+    "Single first generation per history,12exposed histories; no superiority/generalization claim.",
+    "Native buffering and query-boundary flush preserved; native post-query state quality is not pooled with Strong post-arrival UJS.",
+    "Original Sources can repair native restatement errors in mixed QA; semantic_success remains null.",
+    "Manual core factual correctness excludes extra unsupported explanation, which is counted separately in source fidelity; original Judge labels unchanged.",
+    "Corrected clock presentation in newer development is absent here, preserving Strong common Reader settings.",
+    "No SHA checks,newledger,newdeployment,wrapper retry or selective rescoring."
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "status": "TWO_SYMMETRIC_REPEATS_RUNNING",
+  "source_commit": "f8257f46",
+  "driver_path": "artifacts/method-architecture/factorial-v3-driver.json",
+  "driver_pid": 2493762,
+  "exec_session": 13816,
+  "frozen_source": "artifacts/method-architecture/host-ab-source-v2/MiLAi-Lab",
+  "protocol": "data/manifests/method-architecture-factorial-v3-protocol.json",
+  "first_worker": 2511884,
+  "no_new_seed_or_arrival": true,
+  "first_outputs_only": true,
+  "not_full_goal_completion": true
+}

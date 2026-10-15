@@ -1,0 +1,111 @@
+{
+  "status": "CORRECTED_FULL_READ_FACTOR_PREPARED_ZERO_MODEL",
+  "source_commit": "f8257f46",
+  "source_root": "artifacts/method-architecture/host-ab-source-v2/MiLAi-Lab",
+  "repeats": 2,
+  "configs": [
+    "configs/milai-method-architecture-factorial-v3-r1.json",
+    "configs/milai-method-architecture-factorial-v3-r2.json"
+  ],
+  "cells": [
+    "Y00",
+    "Y01",
+    "Y10",
+    "Y11"
+  ],
+  "independent_histories": 3,
+  "questions_per_cell_per_repeat": 9,
+  "total_qa_positions": 72,
+  "before": "Same actual original model-formed conditioned seed and same original captured arrival in both U arms and both repeats. No manual relation or semantic repairs.",
+  "source_copy_checks": [
+    {
+      "repeat": 1,
+      "case": "exception-withdrawal",
+      "bank": "seed/bank/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 1,
+      "case": "exception-withdrawal",
+      "bank": "arrival/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 1,
+      "case": "alternative-support",
+      "bank": "seed/bank/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 1,
+      "case": "alternative-support",
+      "bank": "arrival/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 1,
+      "case": "shared-condition",
+      "bank": "seed/bank/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 1,
+      "case": "shared-condition",
+      "bank": "arrival/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 2,
+      "case": "exception-withdrawal",
+      "bank": "seed/bank/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 2,
+      "case": "exception-withdrawal",
+      "bank": "arrival/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 2,
+      "case": "alternative-support",
+      "bank": "seed/bank/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 2,
+      "case": "alternative-support",
+      "bank": "arrival/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 2,
+      "case": "shared-condition",
+      "bank": "seed/bank/memory.sqlite",
+      "all_store_values_equal": true
+    },
+    {
+      "repeat": 2,
+      "case": "shared-condition",
+      "bank": "arrival/memory.sqlite",
+      "all_store_values_equal": true
+    }
+  ],
+  "new_seed_generation": 0,
+  "new_arrival_capture": 0,
+  "old_http_copied": false,
+  "formation_cost": "Original seed cost paid once in factorial-v1; copied seed/result costs reference old evidence and are excluded from new-ledger deltas.",
+  "R": "R0 ordinary question packs; R1 model dependency selection plus actual selected historical revisions followed by same question-pack Reader. Corrected path no longer force-opens all fixed-history candidate bodies.",
+  "common_pool": "Identical saved visible record/version and original-source pool for both R cells at each U; no extra retrieval or oracle source access.",
+  "data_isolation": "Evaluator-only reference stays method-architecture-factorial-v1-reference.json; no expected answers in runtime inputs, no QA writeback, read_usage_updates False.",
+  "budgets": "Same base dev-v2 source/output/context/call limits in all cells; one initial capacity point, not a quality-cost curve.",
+  "common_projection": "reported_at/captured_at presentation shared by all cells; old-vs-new experiment difference does not isolate this projection change.",
+  "mechanism_limits": [
+    "Actual seed has no support_groups in any case; archive has condition/override edges, two other seeds contain dependencies only in text.",
+    "This can test corrected selection/history path on real states; cannot claim learned explicit OR-group benefit.",
+    "Three exposed development histories and two stochastic repeats do not support stable population or synergy claims."
+  ],
+  "assessment": "All72first answers and12update attempts source-reviewed; target/preservation/time/source state dimensions, QA core/faithfulness, actual selected/delivered historical bodies and complete costs separate. Ambiguity null; missing retained.",
+  "interaction": "(Y11-Y10)-(Y01-Y00), paired within repeat/history; exploratory clusters only",
+  "execution": "Root serial after native full and queued AB suffix close; same original ledger, no retry/rescore, no SHA check"
+}

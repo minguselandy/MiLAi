@@ -82,3 +82,5 @@ uv run --no-sync milai-lab-check-tools-boundary
 历史 README 的完整阶段记录保留在
 [整理前固定提交](https://github.com/minguselandy/MiLAi/blob/091dcbd48dc1800e5b8cc7f0ee3066dc00a76311/MiLAi-Lab/README.md)，
 相关实验报告和锁文件原样保留。复现旧结果应检出其方法/执行提交，不能要求当前源码匹配所有旧冻结。
+
+当前方法架构研究的开发、首次实验结果和未完成项见[2026-10-15检查点总结](docs/MILAI_DEVELOPMENT_CHECKPOINT_20261015.md)。

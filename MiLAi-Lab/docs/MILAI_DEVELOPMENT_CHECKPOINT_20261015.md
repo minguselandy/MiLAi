@@ -1,0 +1,71 @@
+# MiLAi 开发与实验提交总结（2026-10-15）
+
+当前已打通共享依赖更新、历史读取、跨记录版本绑定、正常 Host 接口和 SimpleMem 共同条件适配，并保存了完整的正负结果。**代码路径可执行，但现有实验不支持完整新候选优于简单对照；方法架构 v3 的完整目标尚未完成。**
+
+本次提交位于 `feat/lab-method-architecture-20261014`，接续 GitHub 草稿 [#121](https://github.com/minguselandy/MiLAi/pull/121)。它包含 #121 之后尚未发布的全局读取改进及本轮方法架构研究；研究分支从 `8293a4e7` 建立。原始计划见[方法架构 v3](MILAI_METHOD_ARCHITECTURE_EXPERIMENT_PLAN_20261014_v3.md)，逐次开发、失败、配置与计费见[执行记录](MILAI_METHOD_ARCHITECTURE_EXECUTION_20261014.md)。本次是可审阅的研究检查点，尚未合并。
+
+## 已完成的开发
+
+| 部分 | 实际行为与边界 |
+| --- | --- |
+| 共同原文与读取 | 独立枚举可见 Source；原文、实际语义状态、旧版本与导航分开；统一问题证据包、真实分页、原问题 Reader 和逐阶段计费。原文未形成语义状态时仍可读取。 |
+| 更新区域 | 模型从实际状态选择更新根；正文可改集合与只读上下文分开。共享条件不会自动授权修改全部兄弟事实；保留结论时可单独更新支持。 |
+| AND/OR 支持组 | 同一支持路径内 AND、路径间 OR；真实 clause/unit 绑定和同版本提交。前提或结论改变后标记旧解释失效；失去支持不自动捏造相反结论。 |
+| 跨记录 | 绑定实际 record/unit/revision；仅以同批已确认前序回执推进依赖版本。逐记录提交、部分提交可见，保留精确旧版本；没有伪造跨记录原子事务。 |
+| 共享读取策略 | 更新与读取共用依赖结构，模型选择当前根、完整支持路径和实际历史版本。已修复“候选历史全部交付”错误；修正后的因素重复正在运行。 |
+| 生命周期 | 已实现逐事件维护、明确变化时维护、查询时重建及实际查询复用成本记录；低成本结果不自动算质量保持。 |
+| Host | 普通保存/更新使用共同支持组绑定；只读导航可复用本次已签发的显示 ID；历史导航保持精确版本；新消息策略版本不清空原额度。 |
+| 时间与容量修复 | 证据包统一使用 `reported_at/captured_at`；分页正文前计入目录最低开销。实际失败库副本由超限恢复为 7,910/8,192 tokens，其余材料保留后续读取入口。 |
+| 外部方法 | SimpleMem 使用官方原生 text core、窗口40/重叠2、持久缓冲、原生规划/反思与检索；查询前 flush 和 Reader 共用调用上限，完整原生费用入原账本。生成条目明确标为解释性记忆。 |
+| 学习数据 | 已保存5组来源可核查的匹配示例，普通转换与关系目标共享事实输入。尚未训练、更新参数或完成未见组合评价。 |
+
+这些变更位于 Lab 及其验证配置；没有修改 Product/Archive 实现或 Product 的公开 Schema、API、权限、Canonical 契约。Lab 的 opt-in 支持组、查询投影字段和 Host 读取行为有变化，旧冻结运行使用原源码。没有新增内容 SHA 校验、新模型服务或连续账本。
+
+## 五组强对照与 SimpleMem 的首次结果
+
+每臂12条已公开的作者开发链、36次来源到达、48个答题位置，独立空库形成。Strong 冻结 `a47035f6`；SimpleMem 冻结 Lab `46bc516e` / 原生 `db80b6a`，使用同一原文与共同 Reader 条件。只有一个预算点，尚不是质量—成本曲线。
+
+| 方法 | 首次 Judge Correct /48 | invalid | missing | 预测阶段生成 tokens |
+| --- | ---: | ---: | ---: | ---: |
+| 原文＋共同 Reader | 43 | 3 | 0 | 139,661 |
+| 追加事实 | 44 | 2 | 0 | 419,864 |
+| 普通命题局部更新 | 42 | 3 | 0 | 410,481 |
+| 现有条件局部更新 | 44 | 2 | 0 | 445,272 |
+| 完整新候选 | 39 | 5 | 1 | 765,277 |
+| SimpleMem 原生核心＋共同原文/Reader | 40 | 7 | 0 | 326,021 |
+
+其余首次标签及全部阶段成本保留在对应 summary。完整新候选相对普通局部多消耗约86.4%的预测生成 tokens，QA 与状态审阅均未显示优势。上述是暴露开发数据、一次随机运行；不宣称普适排名。SimpleMem 这一行是明确改造的共同条件结果，不冒称作者原生回答系统或外部官方 benchmark。
+
+Strong 的48个初始状态、96个后续状态和240个答题位置全部审阅。后续四维 UJS（目标、非目标、时间范围、来源含义均满足）的“确认—可能”界限为：追加9—11、普通15—16、现有条件13—13、完整候选7—9，分母各24。原文臂没有语义状态，UJS不适用。存在歧义的维度保留 null；作者审阅不替换首次 Judge，也不属于独立盲评。
+
+SimpleMem 的48份答案及24个实际查询 flush 后状态也全部审阅。核心事实审阅48/48，完整来源忠实确认31/48，另4份存在歧义；这不意味着48份解释全部正确。其严格状态 UJS 为3—7/24，但状态观测发生在查询维护之后，不能和 Strong 的到达后状态直接合并。真实错误包括星期换算、手抄表误译、个人主体错置、条件遗漏和报告/事件时钟混淆。原文可能帮助最终 Reader 答对，不能据此认定语义维护成功。
+
+- [Strong 完整汇总](../data/manifests/method-architecture-strong-v1-summary.json)与[逐项审阅](../data/manifests/method-architecture-strong-v1-review.json)：688生成响应、2,825,468生成 tokens；398 embedding响应、23,740 tokens，账本一致。
+- [SimpleMem 完整汇总](../data/manifests/method-architecture-simplemem-full-v1-summary.json)与[逐项审阅](../data/manifests/method-architecture-simplemem-full-v1-review.json)：341生成响应、455,519生成 tokens；245 embedding响应、6,983 tokens，账本一致。
+- 两队列新增 unknown 均为0，旧 generation/embedding unknown 9/1保留。预测成本与首次 Judge 成本分列，没有退款、重评或选择性重采样。
+
+## Host、机制诊断和生命周期结果
+
+新 A/B 首轮（`b33d5690`）完成前6条消息，在第7条撤销事件上实际提交了 r4，但后续答复封装超限，结果为6COMPLETED、1FAILED、3NOT_RUN。修复 `f8257f46` 后，仅在真实库副本中执行原未运行7/8/9，均工程COMPLETED；撤销后的查询仍把6月12日联系人误答为6月15日才生效的陈丹。B实际改为许安，最终查询真实读取r1并正确区分“纠错后的过去事实”与“最初实际保存的沈瑜”。这是部分能力正例和仍存在的时间语义错误，**不是完整同版本冷启动成功故事**。
+
+首轮28生成/182,422 tokens、27 embedding/2,483；后续14生成/134,676 tokens、12 embedding/1,083，均与原账本一致、新unknown0。当前B语义正文仍缺少明确的“从一开始/历史纠错”限定，最终混合来源答案不能替代这项状态义务。详见[首轮](../data/manifests/method-architecture-host-ab-v1-first-summary.json)和[后续](../data/manifests/method-architecture-host-ab-v1-continuation-summary.json)。
+
+此前 E1 同真实 before、两条连续故事、12链筛选、2×2及两次重复、跨记录模型试验和三种维护策略均保留原始失败及成本。没有稳定架构优势或协同结论。生命周期低成本策略仍有状态遗漏，不能称质量保持的摊销优势。旧效率确认原文臂已关闭；pack只有部分结果，用户授权释放旧暂停进程后原样保存，没有补成完整比较。
+
+修正历史选择的 **factorial-v3 两次对称重复正在运行**：四格×9题×2，共72答题位置。复用原实际 seed/arrival，12个SQLite副本逐行相等，0新增种子生成，不重复计旧形成成本。原seed没有显式OR支持组，这批不能证明OR图收益。状态以[执行清单](../data/manifests/method-architecture-factorial-v3-execution.json)及本地实际进程/产物为准；本提交不预报结果。
+
+## 验证、复现入口与未完成项
+
+发布前复核：201项核心/Host/原生SDK检查（87.07秒）和53项对齐入口检查（4.25秒）全部通过，共254个不同用例，包含真实SQLite及原生SimpleMem SDK/LanceDB/Tantivy＋MockHTTP。53个源文件的CI范围类型检查、`ruff check src tests tools`、包DAG/兼容facade、工具依赖边界及277源验证矩阵均通过。未声称全仓所有测试、完整CI或科学验证已经通过；远端CI按本次实际提交记录。
+
+主要入口为 `tools/run_baseline_alignment.py`、`tools/run_method_architecture_diagnostic.py`、`tools/run_method_architecture_factorial.py`、`tools/run_method_architecture_lifecycle.py` 和 `tools/run_functional.py`。配置、作者构造的数据、协议和审阅汇总已入仓；冻结源码快照、原生源码工作树、原始HTTP、日志、数据库、私有数据与模型文件保持ignored。实验继续使用原串行模型队列和连续账本。
+
+完整计划仍需：
+
+1. 完成当前历史读取因素重复的全部状态、答案、实际历史交付及成本审阅。
+2. 完成同版本、从空库形成的正确 A/B 全故事，以及稳定的正常 Host 迁移验证。
+3. 完成匹配训练/增强与未见作用域、独立事件顺序评价。
+4. 完成独立长历史、外部官方 benchmark 和至少另一个模型族或规模的复验。
+5. 补齐质量—成本、规模/更新密度曲线、必要消融、最终统计图表与逐项证据审计。
+
+最近两个通用修复分别为 `b33d5690`（时钟投影）和 `f8257f46`（目录开销）；前一代码检查点为 `43cd91ce`。可通过 Git 历史逐项回看和回退。保持原冻结实验、来源可见性、版本绑定及实际业务授权边界；Product仍为CANDIDATE / Schema NO-GO。
