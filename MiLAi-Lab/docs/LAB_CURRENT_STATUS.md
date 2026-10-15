@@ -1,3 +1,9 @@
+# 2026-10-15 E1 对称复验关闭，连续状态实验执行中
+
+冻结463b5182的E1第二轮已完成，候选实际提交未来变更，双方当前/历史核心答案正确。新增生成成本普通18,268、候选40,769 tokens；共享seed未重复计费。四次仅状态读取核心答案均正确，额外13,977 tokens，但普通方案解释把通用区间规则当成了具体字段。全部账本增量核对一致，新增unknown为0，尚无架构质量/成本优势证据。
+
+`continuous-v2` 正从各自空库运行两条6事件故事，随后保存首次QA评分；两臂各12题。使用原连续账本串行执行，方法源码冻结463b5182。数据是作者编写的开发故事，使用HaluMem评分口径不等于外部benchmark成绩。原始首轮与失败完整保留。详见[执行记录](MILAI_METHOD_ARCHITECTURE_EXECUTION_20261014.md)和`method-architecture-e1-v2-summary.json`。完整目标仍active/incomplete。
+
 # 2026-10-15 架构实验已恢复：首轮真实 E1 闭合
 
 旧暂停队列按用户“继续工作”结束并完整备份，原账本锁已释放。新 E1 从冻结9bb7d7e1完成真实 seed 和两臂诊断：13次生成/51,650 tokens、embedding615、新unknown0。候选选中目标但返回no_change，状态未更新；原文答对不计为状态成功。已定位其 schema 对 XGrammar 的可生成性问题，等义完整分支修复通过91项检查，准备在 paired-v2 对双方复验。完整目标仍 active/incomplete，历史未完成项保留。[执行记录](MILAI_METHOD_ARCHITECTURE_EXECUTION_20261014.md)。

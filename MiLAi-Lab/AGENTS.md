@@ -1,3 +1,23 @@
+# Current execution: E1 repeat closed, continuous stories running (2026-10-15)
+
+Goal ACTIVE/incomplete. User continuation already authorizes experiments and old queue release.
+E1 v2 uses frozen463b5182, SAME real seed/arrival, both arms repeated after grammar fix.
+Both actually commit r2; target/current/history core answers correct. Candidate adds
+no graph in this plain-seed slice. Gen18268 plain vs40769 candidate; embedding720
+combined. Extra bare-state four reads all core answers correct, gen13977/embedding0;
+plain explanations invent a concrete until field from a generic interval convention.
+All ledger deltas reconcile; newunknown0; floors9gen/1emb retained. See
+method-architecture-e1-v2-summary.json. No quality/cost winner and no same-story retuning.
+LIVE serial continuous-v2 driver30371, original exec7820. Plain child30372 predict
+EXIT0 (12answers); candidate child62029 predict is live at last check. Inspect actual process and driver.json before dispatch; never restart from
+missing tool handle. Frozen463b5182 snapshot runs plain predict, candidate predict,
+then each FIRSTscore. Two independently formed stories,12events/12QA per arm.
+Authored development data with HaluMem scoring rubric, not external benchmark scores.
+No hot edits to frozen source, SHA checks, new ledger, deployments or subagents.
+E2 new12chains/36events/48QA per arm prepared ZERO_MODEL, no dispatch. See screening-v1
+protocol/configs. ObservedSession evaluator-canary projection verified for all36events.
+Prior snapshots below are historical; do not infer current process state from them.
+
 # Current E1 feedback: first pair CLOSED, generation-schema repair ready
 
 User continuation authorizes old queue release and new architecture experiments.
