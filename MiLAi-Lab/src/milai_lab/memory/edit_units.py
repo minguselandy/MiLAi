@@ -1433,9 +1433,12 @@ def writer_projection(
     for ordinal, row in enumerate(delivery.get("records", []), 1):
         for unit in (row.get("edit_state") or {}).get("units", []):
             unit_serial += 1
-            external_aliases[(row["record_id"], unit["unit_id"])] = {
-                "record": f"r{ordinal}", "unit": f"u{unit_serial}"}
-            external_revisions[(row["record_id"], unit["unit_id"])] = row.get("revision")
+            # Identity-free snapshots still support pure local budgeting. They
+            # cannot become targets of a cross-record reference.
+            if "record_id" in row:
+                external_aliases[(row["record_id"], unit["unit_id"])] = {
+                    "record": f"r{ordinal}", "unit": f"u{unit_serial}"}
+                external_revisions[(row["record_id"], unit["unit_id"])] = row.get("revision")
     for record in delivery.get("records", []):
         record_alias = "r" + str(len(records) + 1)
         records[record_alias] = copy.deepcopy(record)
