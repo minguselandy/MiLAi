@@ -40,6 +40,42 @@ def unit_closure(state: dict[str, Any], unit_id: str) -> tuple[list[str], list[d
              if relation["source_unit"] in selected and relation["target_unit"] in selected])
 
 
+def fixed_history_candidates(
+    service: MemoryService, records: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Expose the same actual versions to both Readers in a controlled comparison.
+
+    This is an explicit experimental pool expansion, not ordinary retrieval.
+    Each supplied revision bounds its history: reopening an earlier checkpoint
+    against a later bank never admits later revisions. Current visibility still
+    applies. Unit navigation is removed so both policies may select from the
+    whole retrieved record, including its old conditions and change witnesses.
+    """
+    result = []
+    seen: set[tuple[str, int]] = set()
+    for row in records:
+        record_id, bound = row["id"], row["value"]["revision"]
+        revisions, cursor = [bound], None
+        while True:
+            page = service.history_index(record_id, cursor=cursor)
+            revisions.extend(revision for revision in page.get("revisions", [])
+                             if revision < bound)
+            cursor = page.get("next_cursor")
+            if cursor is None:
+                break
+        for revision in dict.fromkeys(revisions):
+            identity = (record_id, revision)
+            if identity in seen:
+                continue
+            seen.add(identity)
+            actual = service.read(record_id, revision)
+            if actual["ok"]:
+                result.append({**actual, "fixed_history_pool": True,
+                               **({"historical_selection": True}
+                                  if revision != bound else {})})
+    return result
+
+
 def build_evidence_packs(
     service: MemoryService, question: str, date: str, originals: list[dict[str, Any]],
     records: list[dict[str, Any]], *,
@@ -87,14 +123,19 @@ def build_evidence_packs(
                            tokenization=tokenization)
     semantic = []
     selected_records = list(records)
+    seen_versions = {(row["id"], row["value"]["revision"]) for row in records}
     for row in records:
+        if row.get("fixed_history_pool"):
+            continue
         selection = (dependency_selections or {}).get(row["id"], {})
         for revision in dict.fromkeys(selection.get("history_revisions", [])):
-            if revision == row["value"]["revision"]:
+            identity = (row["id"], revision)
+            if identity in seen_versions:
                 continue
             historical = service.read(row["id"], revision)
             if historical["ok"]:
                 selected_records.append({**historical, "historical_selection": True})
+                seen_versions.add(identity)
     for row in selected_records:
         version = row["value"]
         state = version.get("edit_state")
@@ -119,7 +160,8 @@ def build_evidence_packs(
         handles = list(dict.fromkeys(ref["evidence_id"]
                                     for item in [*selected_units, *relations, *groups]
                                     for ref in item["evidence_refs"]))
-        if historical or (selection is not None and selection["history_revisions"]):
+        if (historical or row.get("fixed_history_pool")
+                or (selection is not None and selection["history_revisions"])):
             # A retraction's witness may no longer support any surviving unit.
             handles = list(dict.fromkeys([*handles, *version.get("revision_evidence", []),
                                          *(ref for edit in version.get("edit_operations", [])
@@ -179,7 +221,12 @@ def dependency_read_request(
     The caller meters this selection with its existing provider and budget. Exact
     old bodies are opened only after selection, then passed to the common Reader.
     """
-    records = list({row["id"]: row for row in records if row["value"].get("edit_state")}.values())
+    fixed_versions: dict[str, list[int]] = {}
+    for row in records:
+        if row.get("fixed_history_pool"):
+            fixed_versions.setdefault(row["id"], []).append(row["value"]["revision"])
+    records = list({row["id"]: row for row in records if row["value"].get("edit_state")
+                    and not row.get("historical_selection")}.values())
     full = [{key: value for key, value in row.items() if key != "retrieval_navigation"}
             for row in records]
     packs = build_evidence_packs(service, question, date, [], full,
@@ -191,12 +238,16 @@ def dependency_read_request(
         alias = f"r{index}"
         units = [unit["unit_id"] for unit in row["value"]["edit_state"]["units"]]
         revisions, cursor = [], None
-        while True:
-            page = service.history_index(row["id"], cursor=cursor)
-            revisions.extend(page.get("revisions", []))
-            cursor = page.get("next_cursor")
-            if cursor is None:
-                break
+        if row["id"] in fixed_versions:
+            revisions = fixed_versions[row["id"]]
+        else:
+            while True:
+                page = service.history_index(row["id"], cursor=cursor)
+                revisions.extend(revision for revision in page.get("revisions", [])
+                                 if revision <= row["value"]["revision"])
+                cursor = page.get("next_cursor")
+                if cursor is None:
+                    break
         history[alias] = {"pack": f"e{index}", "revisions": revisions,
                           "current_revision": row["value"]["revision"]}
         mapping[alias] = {"record_id": row["id"], "units": units}

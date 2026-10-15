@@ -21,6 +21,10 @@ FourA100 GPUs ~39.9GB/40GB used; no CPUFP32 training. Formationgrammarprobe acce
 legal groupedcreate under actualXGrammar0.2.3,0HTTP; no compiler graphblock found.
 Next monitor E2, inspect actualgraphformation/UJS/QA/cost, then cross-record slice,
 matchedpool2x2/W3/W4/W5/external+extra model/longhistory remain. Do not callcomplete.
+Development now adds fixed_history_candidates for later controlled R pools, with
+58related tests/types/lint/boundaries passing; 8real closed-bank slices verify same
+versions/no future leaks/unchanged copied records,0HTTP. See fixed-history-pool-v1
+manifest. This is NOT running screening source and is not a scored2x2 result.
 Prior snapshots below are historical, including previously live/blocked jobs.
 
 # Current execution: E1 repeat closed, continuous stories running (2026-10-15)

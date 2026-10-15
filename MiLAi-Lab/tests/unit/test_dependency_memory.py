@@ -17,6 +17,7 @@ from milai_lab.methods.evidence_reading import (
     build_evidence_packs,
     decode_dependency_reads,
     dependency_read_request,
+    fixed_history_candidates,
     open_evidence_packs,
     project_packs,
 )
@@ -209,3 +210,60 @@ def test_history_selection_delivers_withdrawn_clause_and_actual_cancellation(tmp
         assert "renovation was abandoned" in answer
         assert len(calls) == 2
         assert materials[0]["pre_read_calls"] == 1
+
+
+def test_fixed_history_pool_equalizes_versions_and_witnesses_without_future_leak(tmp_path: Path):
+    with SqliteStore.from_conn_string(str(tmp_path / "fixed.sqlite")) as store:
+        service = MemoryService(store, ("fixed", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        memory = FunctionalEditMemory(service, len, interface_version="I2")
+
+        def source(key, text):
+            ref = service.capture_user("story", key, text)["source_ref"]
+            memory.context("story", key, "fixed-test")
+            cfg = {"configurable": {"user_id": "alice", "v13_session": "story",
+                   "v13_turn_id": key, "v13_config_version": "fixed-test"}}
+            return cfg, [service.source_fragments(ref)[0]["fragment_handle"]]
+
+        cfg, first = source("seed", "The desk opens at nine; a temporary desk opens at noon.")
+        saved = memory.save_edit(cfg, "save", units=[
+            {"text": "The desk opens at nine.", "role": "content", "evidence": first},
+            {"text": "A temporary desk opens at noon.", "role": "content", "evidence": first},
+        ], relations=[])
+        old = service.read(saved["id"])
+        root, exception = [u["unit_id"] for u in old["value"]["edit_state"]["units"]]
+        cfg, cancel = source("cancel", "Withdraw the temporary desk because renovation ended.")
+        assert memory.update_edit(cfg, "cancel", old["candidate_handle"], [
+            {"operation": "retract", "target_unit": exception, "evidence": cancel}])["ok"]
+        checkpoint = service.read(saved["id"])
+        cfg, later = source("later", "LATER_SECRET: the desk now opens at eight.")
+        assert memory.update_edit(cfg, "later", checkpoint["candidate_handle"], [
+            {"operation": "replace", "target_unit": root,
+             "text": "LATER_SECRET: the desk now opens at eight.", "evidence": later}])["ok"]
+        current_before = service.read(saved["id"])
+        # Duplicate unit hits do not duplicate versions; the actual checkpoint
+        # bounds available history even when the live bank has a later revision.
+        hit = {**checkpoint, "retrieval_navigation": {"unit_id": root}}
+        pool = fixed_history_candidates(service, [hit, hit])
+        assert [row["value"]["revision"] for row in pool] == [2, 1]
+        assert all("retrieval_navigation" not in row for row in pool)
+        request = dependency_read_request(service, "Why was noon withdrawn?", "2031-01-02", pool)
+        history = json.loads(request["messages"][1]["content"])["history"]
+        assert history["r0"]["revisions"] == [2, 1]
+        assert history["r0"]["current_revision"] == 2
+        chosen = decode_dependency_reads(request, {
+            "r0": {"roots": [0], "excluded": [], "history_revisions": [1]}})
+        flat = build_evidence_packs(service, "Why?", "2031-01-02", [], pool)
+        directed = build_evidence_packs(service, "Why?", "2031-01-02", [], pool,
+                                        dependency_selections=chosen)
+        assert [(p["record_id"], p["revision"]) for p in flat] == [
+            (p["record_id"], p["revision"]) for p in directed]
+        assert len(flat) == len(directed) == 2
+        for packs in (flat, directed):
+            opened = open_evidence_packs(service, packs)
+            body = json.dumps(project_packs(opened, [0, 1]))
+            assert "temporary desk" in body and "renovation ended" in body
+            assert "LATER_SECRET" not in body
+        assert service.read(saved["id"]) == current_before
+        assert service.forget("story", "forget", fragment_handles=first)["ok"]
+        assert fixed_history_candidates(service, [checkpoint]) == []
