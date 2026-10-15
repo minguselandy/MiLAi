@@ -7358,7 +7358,8 @@ def test_new_host_message_changes_policy_version_without_resetting_old_admission
     freeze['config_version'] = 'synthetic-policy-v2'
     freeze['config']['stage_enable_thinking'] = {'reader': False}
     write_json(root / 'input-freeze.json', freeze)
-    second = functional.message(root, **args, message_id='two', content='Only read the second note.')
+    second = functional.message(root, **args, message_id='two',
+                                content='Only read the second note.')
     assert second['status'] == 'COMPLETED', second.get('error')
     after = read_json(path)
     assert all(after['messages'][key] == value for key, value in prior['messages'].items())
