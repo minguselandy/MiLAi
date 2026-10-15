@@ -453,3 +453,24 @@ host-v2配置恢复的第一次启动在任何模型HTTP前被GENERATION_ADMISSI
 按8.4准备source-only、事实追加、B1普通局部、M现有条件局部、完整新候选五臂。使用同一12条已公开E2开发链、共同原文访问/模型/Reader/首次Judge，从空状态各自形成；新候选包含跨记录支持。Source-only走现有S0只捕获路径、Unicode检索，不支付Editor或语义写入；其他臂使用原实现。新对齐代码已真正关闭读后uses写入。
 
 五个配置均prepare成功、0模型调用，每臂36sessions/48QA。旧E2结果不混入这一新源码比较，所有五臂需在同一冻结版本重新执行。当前只准备共同8192输出上限的首个预算点，未声称完整质量—成本曲线或独立外部评价；更多资源分配点仍待。见method-architecture-strong-v1-protocol。
+
+
+## Host恢复路径完成至最后、原首轮不改
+
+a47035f6修复消息级策略版本后，只恢复了此前已确认0模型的配置启动失败。关闭dependency_read长推理、其余额度不变的分支完成恢复查询及原index5/6/7：台账r3保存卡和凭条均无效，资格r2保存不能领取，培训与蓝签保留。实际外部绑定推进到已确认台账r3。所有纯读取后record values逐值不变。四次输出核心事实正确，但图中规则/培训/结论仍合并、组织指令仍被当作有效性条件、旧规则归到复合新断言的细粒度来源问题仍存在，不能称完整正确关系图。
+
+历史答案精确引用了实际资格r1与r2文本。真实read_evidence返回e9为historical_exact_revision1、e3为当前资格r2、e11为当前台账r3，故初存内容有实际版本正文依据。后续一个额外当前读取成功、两次额外读取因额度用尽不可用；不抹去这些拒绝。表格把版本2/3称为第二/三次更新，实际是形成后的第一/二次变更，单独登记解释问题。
+
+对先前截断选择器与这次恢复选择器逐值比较，messages与response_schema完全相同。长推理开启时prompt4232/completion8192、length且无正文；关闭时prompt4234/completion137、stop且合法索引JSON。这只是一个事后选中的已暴露失败对、生成随机性未控制，不能当总体效应或训练收益。
+
+该最后分支16生成/123,270 tokens、15embedding/1,595与原账本一致，新增unknown0。所有Host开发路径合计48生成/387,578 tokens、42embedding/4,068；两个0模型准备/配置失败不增加费用。原804d5fe2首轮仍1FAILED+7NOT_RUN，后续跨源码/配置恢复不得改称一个固定版本从空状态首次跑通。详见method-architecture-host-v1-recovery-v4-summary.json；新的固定版本正常Host故事仍待。
+
+## 历史候选的导航类型修复
+
+最后历史审阅发现，证据包正文虽标为历史版本，Host候选导航却未传递version_view，导致附加导航被当成当前read_memory。开发代码现在将真实历史标记传给既有request target投影，生成read_memory_revision；当前未显式标记的包按原契约默认为current_at_snapshot。25项证据/跨记录检查9.01秒、mypy/Ruff通过；测试验证历史目标不能用read_memory升级、精确读取仍返回初版。最初直接索引可选字段造成4项KeyError，已按现有字段默认契约修正。这不是旧答案改分，冻结运行不热改。
+
+## 强对照执行与模型资源核对
+
+强对照已冻结a47035f6并实际串行执行，driver1672507/exec12669。原文臂已完成36次capture-only、48答复，实际只产生48Reader响应，0Editor/Impact/embedding；首次评分尚未执行，不先判质量优劣。其余四臂继续同一队列，见strong-v1/driver.json与method-architecture-strong-v1-execution.json。
+
+对现有78xx/79xx监听端口只做GET /v1/models：已确认的生成入口7860与7862均报告Qwen3.6-35B-A3B-FP8，另有bge-m3和reranker；其余路由失败不能据此断言具体服务类型。四张A10040GB各约39.9GB已用。没有发现可确认的另一生成族/规模，也未启动/停止服务或训练。此核对0生成调用，不满足计划的额外模型复验；见method-architecture-model-resources-v1.json。

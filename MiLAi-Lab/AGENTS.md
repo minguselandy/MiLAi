@@ -1,3 +1,25 @@
+# Current execution: five strong controls LIVE; Host recovery path reviewed
+
+GoalACTIVE/incomplete. LIVE strong-v1 driver1672507,exec12669;
+lastverified append predict child1714788 actual/proc commandmatches.
+Frozena47035f6 at host-source-v4, five36event/48QAarms serial thenfirstscores.
+SourcearmCLOSED0/48answers,0Editor/Impact/embedding;48Readerresponses. No scores yet.
+Do not duplicate/restart queue or change frozen source. See strong-v1/driver.json.
+Hostv4exec2009/driver1636323 CLOSED0. Recovery and original5/6/7completed; finalledger3/
+qualification2, bothcredentialsinvalid, denial, training/bluelabel preserved. Actualold
+qualification1 andcurrent2 bothdelivered/read. Stillcompoundgraph andsourcefidelityissues.
+Lastlane16gen123270+15emb1595; allHost48gen387578+42emb4068,newunknown0.
+Originalfirst remains1FAILED+7NOT_RUN; mixedversionrecovery isnotfreshfixedversionfirstpass.
+Selectoron/off diagnostic hasexactequalmessages/schema; on8192length vs off137stop,
+onlyoneexposedpair, no population/learningclaim. Seerecovery-v4-summary.
+NEW development fixesHosthistoricalcandidate version_view so itsnavigation isexactrevision;
+25tests9.01s,mypy/Ruffpass. Runningstrongsource unchanged (Benchmark unaffected).
+FiveW4matchedrefs only,no training. Existingconfirmedgeneration7860/7862same35B;
+fourA100full; no newdeploy. SimpleMemnative runtime exists but alignedadapterstillpending.
+NEXT monitor/reviewstrongcontrols, externaladapter/benchmark, W4matchedlearning/eval,
+fullRcorrectedtest, newfixedversionfullA/BHoststory,anothermodel/longhistory/finalaudit.
+NoSHA/subagents/newledger; keepfullobjectiveactive. Historical notes follow.
+
 # Current preparation: Host policy change admission fixed; five strong controls ready
 
 GoalACTIVE/incomplete. No live modeljob now. host recovery-v3 driver1567842/exec68482

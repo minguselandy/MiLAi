@@ -1,0 +1,19 @@
+{
+  "status": "RUNNING_FIVE_STRONG_CONTROLS",
+  "source_commit": "a47035f6",
+  "source_snapshot": "artifacts/method-architecture/host-source-v4/MiLAi-Lab",
+  "driver": "artifacts/method-architecture/strong-v1/driver.json",
+  "driver_pid": 1672507,
+  "exec_session": 12669,
+  "last_verified_active_step": {
+    "arm": "append",
+    "phase": "predict",
+    "pid": 1714788,
+    "started_at": "2026-10-15T09:50:20.702204+00:00"
+  },
+  "source_arm_prediction": "CLOSED0:36capture-only sessions,48complete answers; actual48Reader responses,0Editor/Impact/embedding",
+  "first_scores": "pending after all five prediction arms; no quality winner claimed",
+  "read_usage_updates": false,
+  "original_E2_unchanged": true,
+  "unknown_retry": false
+}

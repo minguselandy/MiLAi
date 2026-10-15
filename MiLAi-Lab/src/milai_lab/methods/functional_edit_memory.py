@@ -347,7 +347,9 @@ class FunctionalEditMemory(FunctionalMemory):
                 **({"pool_generation": state["pool_generation"]}
                    if self.dependency_reading else {})}},
              **({"type": "record_candidate", "record_id": item["record_id"],
-                 "revision": item["revision"]} if item["kind"] == "semantic_view" else {})}
+                 "revision": item["revision"],
+                 "version_view": item.get("version_view", "current_at_snapshot")}
+                if item["kind"] == "semantic_view" else {})}
             for index, item in enumerate(materials)
             if state["task"] == "range" or not item.get("scope_only")]
         mapping = request_target_mapping(self.service, state["binding"])

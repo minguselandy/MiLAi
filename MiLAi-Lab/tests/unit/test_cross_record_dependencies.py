@@ -319,6 +319,8 @@ def test_host_dependency_pool_rebuilds_after_foreign_change_and_rejects_old_indi
 
 
 def test_host_selected_history_keeps_bound_foreign_version(case):
+    import json
+
     service, method, request, _credential, target = case
     view = request("eligibility-change", "Eligibility is withdrawn.", [service.read(target)])
     receipt = method.apply("story", "eligibility-change", method.decode_proposal({
@@ -336,4 +338,18 @@ def test_host_selected_history_keeps_bound_foreign_version(case):
     assert any(any(u["text"] == "Eligible." for u in p.get("units", [])) for p in historical)
     assert not any(any(u["text"] == "Eligibility withdrawn." for u in p.get("units", []))
                    for p in historical)
+    candidate = next(p for p in material["candidates"]
+                     if p.get("version_view") == "historical_exact_revision"
+                     and p.get("revision") == 1 and host.resolve_request_target(
+                         config, p["target"])["identity"].get("record_id") == target)
+    assert candidate["read"]["tool"] == "read_memory_revision"
+    tools = {tool.name: tool for tool in host.tools()}
+    wrong = tools["read_memory"].invoke({"type": "tool_call", "name": "read_memory",
+        "id": "wrong-current", "args": {"target": candidate["target"]}}, config=config)
+    assert "KIND_INVALID" in wrong.content
+    old = tools["read_memory_revision"].invoke({"type": "tool_call",
+        "name": "read_memory_revision", "id": "exact-old",
+        "args": {"target": candidate["target"]}}, config=config)
+    assert json.loads(old.content)["ok"]
+    assert "Eligibility withdrawn." not in old.content
     assert service.records() == before
