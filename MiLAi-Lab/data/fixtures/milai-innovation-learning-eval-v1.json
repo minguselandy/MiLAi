@@ -1,0 +1,49 @@
+{
+  "scope": "Four new author-constructed formation/composition cases fixed before this training; actual empty banks must be used for semantic validation. Not an independent benchmark or full-history evaluation.",
+  "cases": [
+    {
+      "case_id": "learning-eval-future-two-scopes",
+      "reported_at": "2038-02-10T09:00:00+08:00",
+      "source": "棠湾馆甲区负责人是江芮，乙区是周野。自2038年2月12日起，只有甲区改由宋岚负责；此前仍是江芮。登记规定不变：甲乙区借阅均须登记。",
+      "review_dimensions": [
+        "甲区12日前江芮/12日起宋岚同时保留",
+        "乙区周野不变",
+        "两区借阅登记不变",
+        "报告时刻不被当成生效日"
+      ]
+    },
+    {
+      "case_id": "learning-eval-or-unknown-alternative",
+      "reported_at": "2038-02-10T09:00:00+08:00",
+      "source": "溪岩站的清点资格要求完成入门培训，并持有效纸券或有效电子证之一。孟淇已经完成入门培训，纸券有效，电子证状态尚未核实。登记本放在铜盒，与清点资格无关。",
+      "review_dimensions": [
+        "共同培训和OR条件",
+        "纸券有效足以保留资格，另一凭据未知不等于无效",
+        "铜盒位置独立保留",
+        "推断与原报告区分"
+      ]
+    },
+    {
+      "case_id": "learning-eval-history-and-exception",
+      "reported_at": "2038-02-10T09:00:00+08:00",
+      "source": "茶舟馆初录抄错：甲室联络员自开馆一直是蓝昭，最初登记沈黎是错误，并非今日换人；乙室仍是韩露。临时借卡批准只针对2038年2月14日登记访客，其他日期原登记条件仍需满足。",
+      "review_dimensions": [
+        "自开馆蓝昭与初录沈黎区分",
+        "乙室韩露保留",
+        "临时借卡限14日且登记访客",
+        "其他日期登记条件保留"
+      ]
+    },
+    {
+      "case_id": "learning-eval-total-proposal-nontarget",
+      "reported_at": "2038-02-10T09:00:00+08:00",
+      "source": "雾港A组设备拨款共480积分，不按人数分配。A组目前增加至6人，但此次人员变化不改变拨款。B组若未来获批可有900积分，目前仅处于建议，审批仍待定。参考账册封皮用银色。",
+      "review_dimensions": [
+        "480总额不乘人数",
+        "仅本次人员变化不改变拨款，不泛化成永久因果规则",
+        "B的900仅待批建议",
+        "银色账册保留"
+      ]
+    }
+  ]
+}
