@@ -1,3 +1,19 @@
+# Current development: shared Host dependency reading checked; real Host next
+
+GoalACTIVE/incomplete. No model job running at this checkpoint. Development now adds
+Host dependency_reading via same Benchmark selector/decode/evidence functions and
+ordinary model/read allowance. Actual version changes rebuild pool; old generation
+indices rejected. Success/unknown selector receipts persist through ordinary_read;
+no unknown redispatch. Exposure includes selector sources. No newplatform/ledger.
+535unique related tests pass after fixing opt-out Host callback newkeyword; broad
+532pass/3fail362.14s, targeted recovery3pass10.89s.8cross tests3.94s; Ruff/mypy3files/
+DAG/tools/matrixpass. host-v1 eight-message protocol/config/fixture PREPARED_ZERO_MODEL,
+using exposed cross story and model-formed states. Next commit/freeze and normalHost
+first attempts; read-only recovery separate. Firstfailure never overwritten/resampled.
+Old cross-v1 and factorial queues all CLOSED; full reviews/costs below remain valid.
+NoSHA/subagents/newledger. Full goal remains incomplete: actualHost, W4, fullR,
+strong/external controls,anothermodel/longhistory,completeA/Bstory and finalaudit.
+
 # Current development: cross-record pilot CLOSED; Host support writes migrated
 
 Goal ACTIVE/incomplete. No model job currently running. cross-v1/execution driver

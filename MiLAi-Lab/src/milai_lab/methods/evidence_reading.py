@@ -327,7 +327,11 @@ def dependency_read_request(
             properties[alias]["required"].append("support_choices")
     schema = {"type": "object", "additionalProperties": False,
               "properties": properties, "required": list(properties)}
-    return {"schema": schema, "mapping": mapping, "messages": [
+    return {"schema": schema, "mapping": mapping,
+            "delivered_source_refs": list(dict.fromkeys(
+                span["source_ref"] for pack in packs
+                for span in [*pack.get("source_ranges", []), *pack.get("support_turns", [])])),
+            "messages": [
         {"role": "system", "content": (
             "Select query roots from actual memory and exclusions that are unnecessary for "
             "this question's scope. Unit numbers correspond to u0,u1,... in each pack. "

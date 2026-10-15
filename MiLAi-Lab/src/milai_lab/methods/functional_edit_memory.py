@@ -133,6 +133,8 @@ class FunctionalEditMemory(FunctionalMemory):
         query_time: str | None = None,
         query_calendar_context: str | None = None,
         evidence_policy: Literal["legacy", "question_pack_v1"] = "legacy",
+        dependency_reading: bool = False,
+        dependency_read_call: ModelCall | None = None,
         **kwargs: Any,
     ) -> None:
         if arm not in FUNCTIONAL_ARMS.values():
@@ -156,6 +158,12 @@ class FunctionalEditMemory(FunctionalMemory):
         self.query_time = query_time
         self.query_calendar_context = query_calendar_context
         self.evidence_policy = evidence_policy
+        self.dependency_reading = dependency_reading
+        self.dependency_read_call = dependency_read_call
+        if dependency_reading:
+            if evidence_policy != "question_pack_v1" or dependency_read_call is None:
+                raise ValueError("FUNCTIONAL_DEPENDENCY_READING_REQUIRES_PACKS_AND_CALLER")
+            self.policy["dependency_reading"] = True
         if evidence_policy != "legacy":
             self.policy["evidence_policy"] = evidence_policy
         if maintenance_recipe is not None:
@@ -187,8 +195,16 @@ class FunctionalEditMemory(FunctionalMemory):
         key = "evidence-pool:" + reference_key([
             bound["session"], bound["message_id"], self.forget_epoch])
         stored = self.service.store.get(namespace(self.service), key)
-        if stored is not None:
-            return key, stored.value
+        basis = (sorted([row["id"], row["value"]["revision"]] for row in self.service.records())
+                 if self.dependency_reading else None)
+        # Compare actual visible revisions using JSON-stable pairs,
+        # not wall time or a digest, and never reuse old indices after rebuilding.
+        if stored is not None and (not self.dependency_reading
+                                   or stored.value.get("record_basis") == basis):
+            state = stored.value
+            if "materials" in state:
+                return key, state
+            return self._finish_dependency_pool(config, key, state)
         current = self.service.source(bound["source_ref"])
         assert current is not None
         query = current["content"] if isinstance(current["content"], str) else canonical(
@@ -203,6 +219,17 @@ class FunctionalEditMemory(FunctionalMemory):
             # committed update; excluding the query from raw history must not hide it.
             records = self.service.search(query, limit=self.semantic_top_k,
                                           include_raw=False)["records"]
+            if self.features.cross_record_dependencies:
+                from milai_lab.memory.external_support import dependent_record_candidates
+
+                records = dependent_record_candidates(self.service, records)
+        if self.dependency_reading:
+            state = {"binding": bound, "query": query, "native": native, "records": records,
+                     "record_basis": basis,
+                     "pool_generation": stored.value["pool_generation"] + 1 if stored else 0}
+            self.service.store.put(namespace(self.service), key, state, index=False)
+            return self._finish_dependency_pool(config, key, state)
+        with self.service._locked():
             materials = build_evidence_packs(
                 self.service, query, self.query_time or "", native["source_materials"],
                 records, tokenization=self.source_tokenization,
@@ -214,6 +241,59 @@ class FunctionalEditMemory(FunctionalMemory):
         state = {"binding": bound, "materials": materials, "source_scope": scope,
                  "selected": [], "expanded": [],
                  "excluded": [], "task": "lookup", "candidate_page": 0, "gap": None}
+        self.service.store.put(namespace(self.service), key, state, index=False)
+        return key, state
+
+    def _finish_dependency_pool(
+        self, config: RunnableConfig, key: str, state: dict[str, Any],
+    ) -> tuple[str, dict[str, Any]]:
+        """Use the normal read receipt for metering, replay and unknown outcomes."""
+        from milai_lab.memory.functional_state import note_exposure
+        from milai_lab.methods.evidence_reading import (
+            build_evidence_packs,
+            decode_dependency_reads,
+            dependency_read_request,
+        )
+
+        selections = None
+        if state["records"]:
+            if "dependency_request" not in state:
+                state["dependency_request"] = dependency_read_request(
+                    self.service, state["query"], self.query_time or "", state["records"],
+                    calendar_context=self.query_calendar_context)
+                self.service.store.put(namespace(self.service), key, state, index=False)
+            request = state["dependency_request"]
+
+            def choose(bound: dict[str, Any]) -> dict[str, Any]:
+                assert self.dependency_read_call is not None
+                with self.service._locked():
+                    note_exposure(self.service, bound["source_ref"],
+                                  request["delivered_source_refs"])
+                response = self.dependency_read_call(
+                    "dependency_read", request["messages"], request["schema"])
+                return {"ok": True, "status": "dependency_selected", "selections":
+                        decode_dependency_reads(request, response), "operation_effect": "read_only"}
+
+            receipt = self._read(config, key + ":selection:" + str(state["pool_generation"]),
+                {"tool": "dependency_selection", "pool_generation": state["pool_generation"]},
+                choose, deliver_material=False)
+            state["dependency_read_receipt"] = receipt
+            self.service.store.put(namespace(self.service), key, state, index=False)
+            if not receipt.get("ok"):
+                raise FunctionalRejection("FUNCTIONAL_DEPENDENCY_SELECTION_FAILED:"
+                                          + receipt["status"])
+            selections = receipt["selections"]
+        native = state["native"]
+        materials = build_evidence_packs(
+            self.service, state["query"], self.query_time or "", native["source_materials"],
+            state["records"], dependency_selections=selections,
+            tokenization=self.source_tokenization, calendar_context=self.query_calendar_context,
+            source_scope=native["source_scope"])
+        scope = materials[0]["source_scope"] if materials else {
+            "complete": native["source_scope"]["complete"],
+            "basis": native["source_scope"]["basis"], "required_ranges": []}
+        state.update(materials=materials, source_scope=scope, selected=[], expanded=[], excluded=[],
+                     task="lookup", candidate_page=0, gap=None)
         self.service.store.put(namespace(self.service), key, state, index=False)
         return key, state
 
@@ -254,10 +334,18 @@ class FunctionalEditMemory(FunctionalMemory):
                 "for live business state. " + SOURCE_REUSE_INSTRUCTIONS
             ),
         }
+        if self.dependency_reading:
+            base["pool_generation"] = state["pool_generation"]
+            base["dependency_selection"] = {
+                "status": state.get("dependency_read_receipt", {}).get("status", "no_records"),
+                "uses_shared_read_allowance": bool(state["records"]),
+            }
         candidates = directory if directory is not None else [
             {**pack_candidate(open_evidence_packs(
                 self.service, [item], refresh_current=True)[0], index),
-             "evidence_read": {"tool": "read_evidence", "arguments": {"item_indices": [index]}},
+             "evidence_read": {"tool": "read_evidence", "arguments": {"item_indices": [index],
+                **({"pool_generation": state["pool_generation"]}
+                   if self.dependency_reading else {})}},
              **({"type": "record_candidate", "record_id": item["record_id"],
                  "revision": item["revision"]} if item["kind"] == "semantic_view" else {})}
             for index, item in enumerate(materials)
@@ -331,6 +419,7 @@ class FunctionalEditMemory(FunctionalMemory):
             expand_context: list[int] | None = None,
             task: Literal["lookup", "range"] = "lookup", candidate_page: int = 0,
             gap: str | None = None,
+            pool_generation: int | None = None,
         ) -> ToolMessage:
             """Open complete evidence packs in priority order within the shared read allowance.
 
@@ -341,11 +430,15 @@ class FunctionalEditMemory(FunctionalMemory):
             needed earlier exchange; it cannot read sources arriving after this request.
             New selections have priority; fitting previously opened packs remain resident.
             Excluded indices report the actual capacity omissions.
+            Copy pool_generation from the candidate navigation when provided; a changed
+            semantic revision rebuilds the dependency pool and invalidates its old indices.
             """
             from milai_lab.methods.evidence_reading import admit_pack_indices
 
             def action(bound: dict[str, Any]) -> dict[str, Any]:
                 key, state = self._evidence_pool(config)
+                if self.dependency_reading and pool_generation != state["pool_generation"]:
+                    raise FunctionalRejection("EVIDENCE_POOL_GENERATION_CHANGED")
                 if candidate_page < 0 or any(i < 0 or i >= len(state["materials"])
                                              for i in [*item_indices, *(expand_context or [])]):
                     raise FunctionalRejection("EVIDENCE_PACK_INDEX_UNAVAILABLE")
@@ -368,6 +461,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 "tool": "read_evidence", "item_indices": item_indices,
                 "expand_context": expand_context, "task": task,
                 "candidate_page": candidate_page, "gap": gap,
+                **({"pool_generation": pool_generation} if self.dependency_reading else {}),
             }, action, deliver_material=False)
             return ToolMessage(name="read_evidence", tool_call_id=tool_call_id,
                                content=canonical(result),
@@ -1096,8 +1190,8 @@ class FunctionalEditMemory(FunctionalMemory):
             )
             receipt = self.apply_writer_proposal(
                 config, operation_id, proposal,
-                dependency_receipts=dependency_receipts
-                if self.features.cross_record_dependencies else None)
+                **({"dependency_receipts": dependency_receipts}
+                   if self.features.cross_record_dependencies else {}))
             if receipt.get("ok") and (receipt.get("status") == "committed"
                                      or receipt.get("original_status") == "committed"):
                 if self.memory_view_mode != "legacy":

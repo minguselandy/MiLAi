@@ -744,7 +744,7 @@ def prepare(
         "memory_ranking",
         "retrieval_granularity", "stage_enable_thinking",
         "source_access", "source_top_k", "semantic_top_k", "max_evidence_queries",
-        "source_tokenization", "source_granularity", "evidence_policy",
+        "source_tokenization", "source_granularity", "evidence_policy", "dependency_reading",
         "maintenance_mode",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
@@ -777,7 +777,8 @@ def prepare(
         raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
     stage_modes = settings.get("stage_enable_thinking", {})
     if (not isinstance(stage_modes, dict)
-            or set(stage_modes) - {"extract", "select", "edit", "reader"}
+            or set(stage_modes) - {"extract", "select", "edit", "impact", "reader",
+                                  "dependency_read"}
             or any(type(value) is not bool for value in stage_modes.values())):
         raise ValueError("STAGE_ENABLE_THINKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
@@ -788,6 +789,12 @@ def prepare(
         raise ValueError("FUNCTIONAL_EDIT_INTERFACE_INVALID")
     if edit_interface != "v1" and settings.get("memory_method") not in FUNCTIONAL_ARMS:
         raise ValueError("FUNCTIONAL_EDIT_INTERFACE_REQUIRES_EDIT_METHOD")
+    if type(settings.get("dependency_reading", False)) is not bool or (
+        settings.get("dependency_reading") and (
+            settings.get("evidence_policy") != "question_pack_v1"
+            or settings.get("memory_method") not in FUNCTIONAL_ARMS)
+    ):
+        raise ValueError("FUNCTIONAL_DEPENDENCY_READING_REQUIRES_EDIT_PACKS")
     edit_features = EditFeatures.from_settings(settings.get("edit_features", {}))
     if edit_features.enabled and (
         edit_interface != "I2" or settings.get("memory_method") not in FUNCTIONAL_ARMS
@@ -2696,7 +2703,24 @@ def message(
             memory_class = FunctionalEditMemory if edit_arm is not None else FunctionalMemory
             memory_options: dict[str, Any] = {}
             if memory_class is FunctionalEditMemory:
+                def dependency_read_call(
+                    stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
+                ) -> dict[str, Any]:
+                    response = model.invoke(
+                        messages, tools=[], tool_choice="none",
+                        response_format={"type": "json_schema", "json_schema": {
+                            "name": "dependency_reads", "schema": schema}},
+                        **({"enable_thinking": settings["stage_enable_thinking"][stage]}
+                           if stage in settings.get("stage_enable_thinking", {}) else {}))
+                    if not isinstance(response, AIMessage) or not isinstance(response.content, str):
+                        raise ValueError("FUNCTIONAL_DEPENDENCY_RESPONSE_MISSING")
+                    value = parse_object(response.content, reject_duplicate_keys=True)
+                    trace({"event": "functional_dependency_read_envelope", "envelope": value})
+                    return value
+
                 memory_options["evidence_policy"] = settings.get("evidence_policy", "legacy")
+                memory_options["dependency_reading"] = settings.get("dependency_reading", False)
+                memory_options["dependency_read_call"] = dependency_read_call
                 memory_options["arm"] = edit_arm
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
                 memory_options["features"] = edit_features

@@ -383,3 +383,14 @@ cross-v1已prepare零调用：两个条件化表示相同的臂、共同依赖Re
 普通Functional save/update/rewrite现在调用与Benchmark相同的EditMemory.bind_support_groups；仅关系改变也会通过原Host提交产生新版本。支持来源进入原有functional_support，旧来源保留继续受既有实际交付限制。维护commit回调增加前序真实回执参数，Host绑定同批已确认的外部版本；后续失败不回滚前序提交。B2整体重写也保存明确的新支持组，但这只是接口能力，未宣称公平性实测完成。
 
 Host记录页交付目标所属支持组及计数，Writer从实际已交付页重建它们，缺组时不伪造完整记录；外部引用明确需要实际打开正文，不把引用当证据。新4项SQLite/普通工具测试覆盖重开、关系单独更新、B2重写、外部版本绑定、幂等与部分提交。219项不同相关测试全部通过：广测218通过/1处测试回调旧签名失败，修正该fixture后恢复测试2项通过。Ruff、3文件mypy、包DAG、工具边界、277源验证矩阵通过。未跑远端CI、未执行该新源码的真实Host模型任务；共享读取选择尚未接入，W5/E5仍未完成。见method-architecture-host-support-v1.json。
+
+
+## Host共享依赖读取与真实协议
+
+正常Functional Host新增opt-in dependency_reading，直接复用Benchmark的dependency_read_request/decode_dependency_reads和build/open/project证据包。选择原始用户请求的根节点、完整支持路线与实际历史版本，结果只含实际索引，不把gap或导航元数据当事实。调用经过原model/provider/连续账本，额外消耗当前消息一个read allowance；没有新增模型服务或独立预算。
+
+选择请求与结果由原Store和_read回执记录，重开进程后复用成功结果；结果未知时保留原失败且不重发。选择器实际读过的来源也计入exposure。当前可见记录revision改变后重建池并计费重选，导航带pool_generation，旧索引不会悄悄指向另一条材料；旧历史读取仍按选中版本绑定外部前提。此处扫描真实可见record版本，未宣称O(k)效率。来源撤回沿原forget epoch和可见性机制处理。
+
+4项新增SQLite测试覆盖选中的voucher+training路径、共享读取额度、重开回执复用、unknown不重派、外部更新重建池与旧索引拒绝、实际历史版本。跨记录相关8项3.94秒通过。广测532通过/3失败，发现上轮Host写入迁移在未启用cross时也传了新keyword，影响旧提交后恢复override；已仅在启用时传入，3项恢复测试10.89秒复验通过。总计535项不同相关测试通过，Ruff、3文件mypy、DAG/工具边界与277源验证矩阵通过。未作远端CI。
+
+host-v1八条正常Host消息协议已prepare，原账本计数不变，0模型HTTP。使用已公开cross-v1开发故事从空状态开始：4次来源事件、3次纯查询以及实际初存版本查询；不提供正确初态/图，也不加载评价参考。正常队列首次尝试逐条运行，原不完整状态会保留；必要的只读恢复另列，不覆盖首次结果。模型预算保持8192输出tokens、每消息24calls、3次读取（含选择器）；源候选20、语义候选10，所有成本计入原账本。配置/fixture/protocol分别为milai-method-architecture-host-v1及method-architecture-host-v1-protocol。真实执行与语义审查尚待，W5/E5不由prepare或测试宣告完成。

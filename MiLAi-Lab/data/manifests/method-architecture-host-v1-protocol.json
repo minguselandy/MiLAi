@@ -1,0 +1,103 @@
+{
+  "status": "NORMAL_HOST_MIGRATION_PREPARED_PROTOCOL",
+  "fixture": "data/fixtures/milai-method-architecture-host-v1.json",
+  "messages": 8,
+  "formation": "empty state; model forms every actual record and relation through ordinary Host maintenance; no initial semantic imports",
+  "source_story": "same exposed cross-v1 development sources, never external/heldout evidence",
+  "evaluation_reference": [
+    {
+      "index": 0,
+      "kind": "maintenance",
+      "source_event": 0,
+      "required": "inspect actual model state and ordinary receipts; raw capture is not semantic success"
+    },
+    {
+      "index": 1,
+      "kind": "maintenance",
+      "source_event": 1,
+      "required": "inspect actual model state and ordinary receipts; raw capture is not semantic success"
+    },
+    {
+      "index": 2,
+      "kind": "query",
+      "question": "只查询，不保存：许澄目前能领稀有资料吗，需要哪些条件？ 凭据柜标签是什么颜色？",
+      "required_answers": [
+        "能；培训完成，台账显示会员卡或借阅凭条至少一种有效。",
+        "蓝色。"
+      ],
+      "state_write_allowed": false
+    },
+    {
+      "index": 3,
+      "kind": "maintenance",
+      "source_event": 2,
+      "required": "inspect actual model state and ordinary receipts; raw capture is not semantic success"
+    },
+    {
+      "index": 4,
+      "kind": "query",
+      "question": "只查询，不保存：会员卡失效后许澄还能领取吗，靠什么？ 会员卡失效影响培训完成状态或柜签颜色吗？",
+      "required_answers": [
+        "仍能，借阅凭条有效且已培训，不需要两种凭据同时有效。",
+        "不影响，培训仍已完成，柜签仍蓝色。"
+      ],
+      "state_write_allowed": false
+    },
+    {
+      "index": 5,
+      "kind": "maintenance",
+      "source_event": 3,
+      "required": "inspect actual model state and ordinary receipts; raw capture is not semantic success"
+    },
+    {
+      "index": 6,
+      "kind": "query",
+      "question": "只查询，不保存：两种凭据都无效后，许澄现在能领取吗？ 她的培训和柜签颜色目前怎样？",
+      "required_answers": [
+        "不能，培训完成不能替代有效凭据。",
+        "培训仍完成，柜签蓝色。"
+      ],
+      "state_write_allowed": false
+    },
+    {
+      "index": 7,
+      "kind": "saved_history",
+      "required": "first actual model-saved eligibility version, current invalid credentials and denial; compare actual versions rather than assume a gold initial state",
+      "state_write_allowed": false
+    }
+  ],
+  "reference_loaded_by_runtime": false,
+  "first_attempt": "ordinary run executes messages sequentially; original failed/incomplete status is retained, no automatic resume or resampling",
+  "read_only_recovery": "only explicit separate follow-up queries to actual existing state when needed; report separately from first attempts; no replacement of original answers",
+  "business_effects_expected": 0,
+  "unknown_retry": false,
+  "new_ledger": false,
+  "costs": "all classifications, maintenance, selection, Host answers, read recovery and embeddings in original continuous ledger",
+  "limitations": [
+    "not W5/E5 completion from prepare or unit tests",
+    "no graph semantic advantage assumed",
+    "shared whole-record enumeration has real CPU work, no O(k) claim"
+  ],
+  "engineering_checks": {
+    "new_dependency_tests": 4,
+    "cross_and_host_dependency_tests": 8,
+    "cross_tests_seconds": 3.94,
+    "unique_related_tests_passed": 535,
+    "broad_run": {
+      "passed": 532,
+      "failed": 3,
+      "seconds": 362.14
+    },
+    "failure_and_fix": "disabled cross-record path unnecessarily supplied new keyword to old apply_writer_proposal override; new keyword now only passed when enabled",
+    "recovery_rerun": {
+      "passed": 3,
+      "seconds": 10.89
+    },
+    "mypy_files": 3,
+    "ruff": "pass",
+    "package_dag": "pass",
+    "tools_boundary": "pass",
+    "verification_matrix_owned_sources": 277,
+    "prepare": "passed; zero HTTP and original ledger counters unchanged"
+  }
+}
