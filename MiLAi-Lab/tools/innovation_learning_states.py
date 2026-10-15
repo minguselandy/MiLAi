@@ -52,6 +52,7 @@ def main() -> None:
     parser.add_argument("root", type=Path)
     parser.add_argument("--phase", choices=("prepare", "apply"), required=True)
     parser.add_argument("--generations", type=Path)
+    parser.add_argument("--interface", choices=("wrapped", "native"), default="wrapped")
     args = parser.parse_args()
     cases = json.loads(args.cases.read_text())["cases"]
     args.root.mkdir(parents=True, exist_ok=True)
@@ -81,21 +82,25 @@ def main() -> None:
                     "response_schema": view["schema"],
                     "counterfactuals": [],
                 }
+                messages = [
+                    {"role": "system", "content": WRAPPED_INSTRUCTIONS},
+                    {
+                        "role": "user",
+                        "content": json.dumps(payload, ensure_ascii=False, separators=(",", ":")),
+                    },
+                ]
+                if args.interface == "native":
+                    messages = method.edit_messages(
+                        view["packet"],
+                        case["reported_at"],
+                        allow_create=True,
+                        schema=view["schema"],
+                    )
                 inputs.append(
                     {
                         "example_id": case_id,
-                        "messages": [
-                            {
-                                "role": "system",
-                            "content": WRAPPED_INSTRUCTIONS,
-                            },
-                            {
-                                "role": "user",
-                                "content": json.dumps(
-                                    payload, ensure_ascii=False, separators=(",", ":")
-                                ),
-                            },
-                        ],
+                        "messages": messages,
+                        "interface": args.interface,
                         "mapping_id": view["mapping"]["mapping_id"],
                         "actual_before": service.records(),
                     }
@@ -124,7 +129,9 @@ def main() -> None:
                 try:
                     if row["finish_reason"] != "stop":
                         raise ValueError("Provider output incomplete: " + row["finish_reason"])
-                    envelope = parse_object(row["text"], reject_duplicate_keys=True)["delta"]
+                    envelope = parse_object(row["text"], reject_duplicate_keys=True)
+                    if args.interface == "wrapped":
+                        envelope = envelope["delta"]
                     proposals = method.envelope_proposals(envelope, "edit-map:" + case_id)
                     for index, proposal in enumerate(proposals):
                         receipt = method.apply(
