@@ -90,6 +90,7 @@ def prepared(
     bounded_reproposal: bool = False,
     dynamic_memory: bool = False,
     evidence_policy: str = "legacy",
+    dependency_reading: bool = False,
     source_top_k: int = 20,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
@@ -113,6 +114,7 @@ def prepared(
         "profile": "functional_v1", "host": asdict(host),
         "memory_method": memory_method,
         "evidence_policy": evidence_policy,
+        **({"dependency_reading": True} if dependency_reading else {}),
         "source_top_k": source_top_k,
         **({"stage_enable_thinking": stage_enable_thinking}
            if stage_enable_thinking is not None else {}),
@@ -7286,3 +7288,55 @@ def test_actual_read_allowance_exhaustion_instructs_final_answer_without_an_extr
                                 message_id="q", content="Read the current captured statement.")
     assert result["status"] == "COMPLETED", result.get("error")
     assert result["read_completion"]["reads_remaining"] == 0 and len(wires) == 5
+
+
+def test_shared_dependency_host_reads_after_commit_without_duplicate_search(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, independent_capabilities=True,
+        current_delivery=True, direct_response=True, phase_thinking=True,
+        actual_capabilities=True, explicit_reads=True,
+        memory_method='milai_edit_m_v1', edit_interface_version='I2',
+        memory_view_mode='staged', memory_profile='unified_v1', maintenance_recipe='single_pass',
+        evidence_policy='question_pack_v1', dependency_reading=True,
+        edit_features={name: True for name in ('matter_organization', 'semantic_operations',
+            'bound_references', 'single_record_changes', 'source_metadata', 'dependency_groups')})
+    phases = []
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {t['function']['name'] for t in wire.get('tools', [])}
+        if names == {'classify_current_request'}:
+            phases.append('classify')
+            return native_call('classify_current_request', 'mode',
+                memory_write_request='explicit', allow_forgetting=False,
+                business_action_request='none', business_operations=[])
+        schema = (wire.get('response_format') or {}).get('json_schema', {})
+        if schema.get('name') == 'milai_edit':
+            phases.append('maintain')
+            return {'role': 'assistant', 'content': json.dumps({'creates': [{
+                'action': 'create', 'matter': 'Eligibility', 'clauses': [
+                    {'text': text, 'conditions': [], 'evidence': ['e1'],
+                     'assertion': {'source_evidence': 'e1', 'kind': 'reported'}}
+                    for text in ('Card valid.', 'Training complete.', 'Eligible.')],
+                'support_groups': [{'target_unit': 2, 'alternatives': [[0, 1]],
+                                    'evidence': ['e1']}]}], 'records': {}})}
+        if schema.get('name') == 'dependency_reads':
+            phases.append('select')
+            assert 'Eligible.' in wire['messages'][-1]['content']
+            return {'role': 'assistant', 'content': json.dumps({'r0': {
+                'roots': [2], 'excluded': [], 'history_revisions': [],
+                'support_choices': {'u2': [0]}}})}
+        phases.append('answer')
+        assert 'read_evidence' in names
+        assert not names.intersection({'search_memory', 'save_memory', 'update_memory'})
+        assert 'dependency_selected' in wire['messages'][0]['content']
+        return {'role': 'assistant', 'content': 'Saved the reported eligibility and both premises.'}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank='dep', owner='alice', session='s', message_id='save',
+        content='Remember: card valid and training complete together support eligibility.')
+    assert result['status'] == 'COMPLETED', result.get('error')
+    assert phases == ['classify', 'maintain', 'select', 'answer'] and len(wires) == 4
+    assert len(result['records']) == 1
+    assert len(result['records'][0]['value']['edit_state']['support_groups']) == 1
+    assert result['records'][0]['value']['revision'] == 1

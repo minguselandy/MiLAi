@@ -1,3 +1,16 @@
+# Current development: read navigation repaired; real retest next
+
+GoalACTIVE/incomplete. No realmodeljoblive atcheckpoint. Read-only targetresolver now
+acceptsexactdisplayedID ONLY via currentrequest issuedcurrentnavigation; strictglobal
+mutationresolver unchanged, owner/visibility/history-only/unissued tests retained.
+Sharedmaintenance+questionpacks removesduplicateHostsearch; directWriter/forgetkeepsit.
+42relatedchecks pass (11target+25evidence+6normalwire),mypy2files/Ruff/DAG/tools pass.
+Actual two failedrawIDcalls replayed againstoriginalsavedtargetmap onread-onlySQLite,
+resolveexactrecords,0HTTP/0bankwrites. No modelgrade/recoveryclaim fromreplay.
+Next freeze newsource and readonlyrecover actualtwo-recordbank, thenremainingoriginal
+indices2-7 only innewpost-recoverylane. Originalfirstandpriorcontinuationremainfailed.
+Do not loosenmutationpermissions/restartoldcalls. Existingprotocol andcostdetailsbelow.
+
 # Current evidence: Host recovery succeeds; continuation still fails; all queues closed
 
 GoalACTIVE/incomplete. No model job live. host-v1 first exec11501 CLOSED: message0

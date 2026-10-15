@@ -418,3 +418,12 @@ bef02eee冻结为host-source-v2。原bank完整复制到read-recovery-v1，保�
 新增matched-training-v2三组：跨记录凭据OR共同培训；投影两种供电OR共同风扇及用户报告模态；原件需帘+照度、照片仅需照度的不同范围。普通转换与关系目标接收完全相同的输入、修正事实、命题拆分和来源模态，关系目标额外表达支持组。共5组可审查参考，新增2个OR-of-AND、1个独立范围AND；正图均由来源作者标注，不能当成模型形成成功。
 
 三组两种输出均通过各自实际保存的原生成schema，事实clause数组逐值相同；未修改任何实验bank、没有新模型调用或参数更新。初始展柜标签试用了不存在的时间操作数t1，schema拒绝后保留“目前”原文及来源报告时钟，没有编造事件日期。旧两组是影响/局部更新目标，新三组是形成目标，仍需规范任务特定的训练messages，独立复核标签，并在相同参数/训练token预算下做未见范围和事件顺序评价。见method-architecture-training-pairs-v2，W4尚未完成。
+
+
+## Host读取目标等价解析与重复检索退出
+
+针对真实Host把已展示record ID作为read_memory目标的断点，现仅在只读入口复用本次已经签发、当前且未撤回的导航：ID必须精确匹配该导航的record/source identity；不按猜测ID搜索，也不创建正文或修改凭据。历史专属导航不能借ID升级为当前读取，跨请求/用户与未交付ID仍拒绝。全局resolve_request_target及遗忘/修改权限路径保持严格引用要求。
+
+Question pack且共享维护负责写入时，主Host不再暴露重复search_memory；证据包已提供候选、范围与正文读取，共享Writer自行定位更新对象。直接Writer或遗忘请求仍保留搜索。新正常Host wire测试实际经过分类→提交带支持组状态→同一依赖选择器→回答，验证选择成本经过原入口且无第二搜索目录；不将模型桩当科学结果。
+
+11项目标/可见性测试5.54秒、25项证据/跨记录测试8.59秒、6项正常Host接线/恢复检查11.94秒通过；2文件mypy、Ruff、DAG/工具边界通过。用真实失败轨迹中的两个原始read_memory参数及其原request-target映射做read-only SQLite解析回放：都精确命中已交付记录；全局修改resolver仍拒绝raw ID，0HTTP/0库写入，也没有重置原读取额度。这只是实际参数的工程验证，不是模型恢复或改分。见method-architecture-host-read-navigation-v1.json；下一步冻结后新查询恢复并继续尚未执行的消息，旧失败保持。
