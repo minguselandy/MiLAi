@@ -95,6 +95,9 @@ def diagnostic_costs(root: Path) -> dict[str, Any]:
 def prepare_diagnostic(config: dict[str, Any], root: Path) -> dict[str, Any]:
     plain = read_json(Path(config["plain_config"]))["entrypoints"]["benchmark"]
     candidate = read_json(Path(config["candidate_config"]))["entrypoints"]["benchmark"]
+    settings = {"plain": plain, "candidate": candidate}
+    if "delta_config" in config:
+        settings["delta"] = read_json(Path(config["delta_config"]))["entrypoints"]["benchmark"]
     user = halumem_users(Path(config["sources"]), [config["owner"]])[0]
     shared_fields = ("budget_path", "model", "context_tokens", "tokenizer_path", "source_tokens",
                      "source_body_tokens", "calendar_context", "maintenance_recipe",
@@ -102,12 +105,13 @@ def prepare_diagnostic(config: dict[str, Any], root: Path) -> dict[str, Any]:
                      "source_access", "source_granularity", "source_tokenization", "reader_target",
                      "evidence_policy", "retrieval_granularity", "memory_profile", "memory_ranking",
                      "reader_projection", "stage_enable_thinking")
-    differences = [key for key in shared_fields if plain.get(key) != candidate.get(key)]
+    differences = [f"{role}:{key}" for role, selected in settings.items() if role != "plain"
+                   for key in shared_fields if plain.get(key) != selected.get(key)]
     if differences:
         raise ValueError(f"Paired conditions differ: {differences}")
     protocol: dict[str, Any] = {
         "status": "PREPARED_ZERO_MODEL", "config": config,
-        "settings": {"plain": plain, "candidate": candidate},
+        "settings": settings,
         "observations": {name: asdict(halumem_session(
             config["owner"], ordinal, user["sessions"][ordinal]))
                          for name, ordinal in (("seed", config["seed_session"]),
@@ -215,7 +219,7 @@ def run_pair(
     seed = read_json(root / "seed/result.json")
     arrival_bank = _prepare_arrival(protocol, root)
     results = {}
-    for role in ("plain", "candidate"):
+    for role in protocol["settings"]:
         folder = root / role
         path = folder / "result.json"
         if path.exists():
@@ -236,7 +240,7 @@ def run_pair(
                     row["id"]: row["value"] for row in seed["actual_state"]
                 }:
                     raise ValueError("The diagnostic clone differs from its actual model seed")
-                projection = promote_plain_bank(service) if role == "candidate" else []
+                projection = promote_plain_bank(service) if role != "plain" else []
                 before = service.records()
                 write_json(folder / "before.json", {"records": before, "projection": projection})
                 observed = ObservedSession(**protocol["observations"]["update"])

@@ -67,6 +67,10 @@ class StubRun(BenchmarkRun):
                 return {"creates": [{"action": "create", "matter": "test source",
                                      "clauses": [clause]}], "records": {}}
             text = before[0]["value"]["edit_state"]["units"][0]["text"]
+            if self.settings.get("maintenance_mode") == "semantic_delta_v2":
+                return {"changes": {"r1": {"replace": {"u1": {
+                    "text": text + "\n" + observed.turns[0]["content"],
+                    "basis": "e1", "also": ["e2"], "kind": "reported"}}}}}
             return {"creates": [], "records": {"r1": {"action": "edit", "edits": [{
                 "operation": "replace", "target_unit": "u1",
                 "text": text + "\n" + observed.turns[0]["content"],
@@ -83,11 +87,19 @@ class StubRun(BenchmarkRun):
         return "Test response to: " + question
 
 
-def test_common_actual_seed_is_not_reformed_or_repaired_for_candidate(tmp_path: Path):
+@pytest.mark.parametrize("with_delta", [False, True])
+def test_common_actual_seed_is_not_reformed_or_repaired_for_candidate(tmp_path: Path, with_delta):
     lab = Path(__file__).resolve().parents[2]
     config = read_json(lab / "configs/milai-method-architecture-paired-v1.json")
     for key in ("plain_config", "candidate_config", "sources"):
         config[key] = str(lab / config[key])
+    if with_delta:
+        delta = read_json(Path(config["candidate_config"]))
+        settings = delta["entrypoints"]["benchmark"]
+        settings["maintenance_mode"] = "semantic_delta_v2"
+        settings["edit_features"].update(dependency_updates=False, dependency_groups=True)
+        config["delta_config"] = str(tmp_path / "delta.json")
+        write_json(Path(config["delta_config"]), delta)
     # This evaluator-only sentinel must never reach any maintenance call.
     config["queries"][0]["gold"] = "EVALUATOR_SECRET"
     root = tmp_path / "diagnostic"
@@ -107,8 +119,11 @@ def test_common_actual_seed_is_not_reformed_or_repaired_for_candidate(tmp_path: 
     assert candidate["before"][0]["value"]["edit_state"]["relations"] == []
     assert plain["engineered_ok"] and candidate["engineered_ok"]
     assert candidate["state_correct"] is None and candidate["answer_correct"] is None
+    if with_delta:
+        delta = summary["arms"]["delta"]
+        assert delta["before"] == candidate["before"] and delta["engineered_ok"]
     assert read_json(root / "seed/result.json") == saved_seed
-    for name in ("seed", "plain", "candidate"):
+    for name in ("seed", *protocol["settings"]):
         with SqliteStore.from_conn_string(str(root / name / "bank/memory.sqlite")) as store:
             owner = config["owner"]
             service = MemoryService(store, ("edit", "method-architecture-diagnostic", owner), owner,
