@@ -169,7 +169,8 @@ def test_normal_benchmark_pack_projects_local_interpretation_and_shared_source_a
         assert repeated[-1]["query_time"] == "2035-05-08"
 
 
-def test_confirmed_structure_length_keeps_original_reader_and_consumed_call(tmp_path):
+@pytest.mark.parametrize("delivery", ["standard", "structure_first_v1"])
+def test_confirmed_structure_length_keeps_original_reader_and_consumed_call(tmp_path, delivery):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
         service.capture_user("s", "0", "Borrowing starts May 8.")
@@ -177,6 +178,7 @@ def test_confirmed_structure_length_keeps_original_reader_and_consumed_call(tmp_
         run = object.__new__(BenchmarkRun)
         run.root = tmp_path
         run.settings = {"evidence_variant": "S0", "evidence_policy": "question_pack_v1",
+            "evidence_selection_policy": delivery,
             "query_structure_policy": "rebuild", "source_access": "independent_v1",
             "alignment_backend": "MiLAi-memory-only", "context_tokens": 65536,
             "model": {"max_tokens": 8192},
@@ -210,3 +212,55 @@ def test_confirmed_structure_length_keeps_original_reader_and_consumed_call(tmp_
             material_reader=lambda items: run._live_materials(service, items))
         assert answer == "Borrowing starts May 8." and len(calls) == 2
         assert store.get((*service.namespace, "query_structure_v1"), "current") is None
+
+
+@pytest.mark.parametrize("decision", ["lookup_answer", "lookup_gap", "range"])
+def test_structure_first_can_answer_or_open_raw_without_claiming_range_coverage(tmp_path, decision):
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        service.capture_user("s", "0", "Day borrowing opens May 8. Night requires extra training.")
+        native = service.search_sources("borrowing", tokenization="unicode_v1", include_scope=True)
+        run = object.__new__(BenchmarkRun)
+        run.root = tmp_path
+        run.settings = {"evidence_variant": "S0", "evidence_policy": "question_pack_v1",
+            "query_structure_policy": "incremental",
+            "evidence_selection_policy": "structure_first_v1", "context_tokens": 65536,
+            "model": {"max_tokens": 8192}}
+        run.client = SimpleNamespace(config=SimpleNamespace(max_calls=4))
+        run.input_tokens = lambda *args, **kwargs: 100
+        reader_inputs = []
+
+        def call(stage, messages, **_):
+            if stage.startswith("query-structure/"):
+                return json.dumps({"scope": "Day borrowing", "nodes": [{"id": "n0",
+                    "text": "Day borrowing opens May 8.", "kind": "reported", "evidence": ["e0"]}],
+                    "rules": [], "remove": [], "remove_rules": [], "unresolved": []})
+            payload = json.loads(messages[1]["content"])
+            reader_inputs.append(payload)
+            if len(reader_inputs) == 1:
+                assert [m["kind"] for m in payload["memories"]] == ["query_structure"]
+                assert "Night requires extra training" not in json.dumps(payload["memories"])
+                assert payload["source_coverage"]["complete"] is False
+                return json.dumps({"answer": None if decision == "lookup_gap" else "May 8.",
+                    "item_indices": [0] if decision == "lookup_gap" else [],
+                    "expand_context": [], "gap": "Missing night rule" if decision == "lookup_gap"
+                    else None, "task": "range" if decision == "range" else "lookup",
+                    "candidate_page": 0})
+            assert "Night requires extra training" in json.dumps(payload["memories"])
+            assert payload["source_coverage"]["complete"] is True
+            return json.dumps({"answer": "Raw source now delivered.", "item_indices": [],
+                "expand_context": [], "gap": None,
+                "task": "range" if decision == "range" else "lookup", "candidate_page": 0})
+
+        run.call = call
+        materials = run._source_first_materials(service, "Borrowing?", "May 8", native, [],
+                                                snapshot_id="pool.json")
+        answer, used = run.answer_material("Borrowing?", "May 8", "question", materials,
+            snapshot_id="pool.json",
+            material_reader=lambda items: run._live_materials(service, items))
+        if decision == "lookup_answer":
+            assert answer == "May 8." and len(reader_inputs) == 1
+            assert [m["kind"] for m in used] == ["query_structure"]
+        else:
+            assert answer == "Raw source now delivered." and len(reader_inputs) == 2
+            assert any(m["kind"] == "original_source" for m in used)

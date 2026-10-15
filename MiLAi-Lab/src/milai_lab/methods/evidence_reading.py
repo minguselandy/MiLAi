@@ -708,6 +708,7 @@ def read_question_pack(
     call: Callable[[str, list[dict[str, str]], dict[str, Any] | None], str],
     save: Callable[[dict[str, Any]], None], state: dict[str, Any], max_calls: int,
     source_scope: dict[str, Any] | None = None,
+    initial_indices: list[int] | None = None,
 ) -> tuple[str, list[dict[str, Any]]]:
     """Select a budgeted pack; reopen more only for a stated evidence gap.
 
@@ -799,7 +800,8 @@ def read_question_pack(
     # Only a fully represented scope can bypass task selection: a fitting top-k subset
     # does not establish that a count/enumeration query has seen the complete range.
     direct_scope = pack_coverage(materials, opened(lookup_indices), scope=source_scope)
-    if not state["steps"] and direct_scope["complete"] and fits(evidence_messages(lookup_indices)):
+    if not initial_indices and not state["steps"] and direct_scope["complete"] \
+            and fits(evidence_messages(lookup_indices)):
         state.update(resident_refs=[refs[i] for i in lookup_indices],
                      opened_indices=lookup_indices, active_stage="answer",
                      range_coverage=direct_scope)
@@ -813,6 +815,14 @@ def read_question_pack(
 
     if state.get("complete") and "answer" in state:
         return state["answer"], opened(state["opened_indices"])
+
+    if initial_indices and not state["steps"]:
+        admission = admit_pack_indices(initial_indices, lambda chosen: fits(packet(chosen, [])))
+        accepted = admission["admitted_indices"]
+        state.update(initial_indices=initial_indices,
+                     resident_refs=[refs[i] for i in accepted], opened_indices=accepted,
+                     excluded_indices=admission["excluded_indices"])
+        save(state)
 
     # Partition only navigation, using the full empty-evidence wrapper's actual cost.
     pages = plan_delivery([{"index": i} for i in all_indices], lambda rows: fits(packet(

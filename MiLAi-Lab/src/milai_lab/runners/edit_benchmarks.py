@@ -517,11 +517,13 @@ class BenchmarkRun:
             raise ValueError("READER_PROJECTION_INVALID")
         if settings.get("evidence_policy", "legacy") not in {"legacy", "question_pack_v1"}:
             raise ValueError("EVIDENCE_POLICY_INVALID")
-        if settings.get("evidence_selection_policy", "standard") not in {"standard", "value_v1"}:
+        if settings.get("evidence_selection_policy", "standard") not in {
+            "standard", "value_v1", "structure_first_v1",
+        }:
             raise ValueError("EVIDENCE_SELECTION_POLICY_INVALID")
-        if settings.get("evidence_selection_policy") == "value_v1" \
+        if settings.get("evidence_selection_policy") in {"value_v1", "structure_first_v1"} \
                 and settings.get("evidence_policy") != "question_pack_v1":
-            raise ValueError("EVIDENCE_VALUE_REQUIRES_QUESTION_PACKS")
+            raise ValueError("EVIDENCE_SELECTION_REQUIRES_QUESTION_PACKS")
         if settings.get("query_structure_policy") is not None:
             from milai_lab.methods.query_structure import POLICIES
 
@@ -2200,6 +2202,9 @@ class BenchmarkRun:
             policy = read_by_evidence_value
             options["measure"] = lambda messages: self.input_tokens(
                 messages, enable_thinking=self.stage_thinking("reader"))
+        elif self.settings.get("evidence_selection_policy") == "structure_first_v1":
+            options["initial_indices"] = [i for i, item in enumerate(memories)
+                                          if item["kind"] == "query_structure"]
         return policy(
             question, date, memories, snapshot_id=snapshot_id, open_materials=reopen,
             messages_for=lambda items: reader_messages(question, date, items,
