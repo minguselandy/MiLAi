@@ -526,3 +526,13 @@ host-ab-v1已prepare0HTTP，固定Host-v2预算与dependency_read无长推理设
 实际SQLite参数测试覆盖早于/晚于捕获的报告及报告日期未知，经过Source捕获、真实M保存、原文与语义包读回/去重，验证相同日期、未知不补值、原库逐值不变。40项既有证据/依赖/跨记录检查通过，新3项1.79秒通过，正常Host共享读取1项2.02秒通过，合计44个不同用例。新测试初稿因遗漏I2、bound_references/source_metadata及来源assertion配置失败；补齐测试的真实写入配置后通过，未降低生产验证。Ruff、单文件mypy、DAG/兼容facade、工具依赖和277源矩阵通过。
 
 此修订尚无实际模型质量结果，不称时钟问题已解决。Strong及正在运行的SimpleMem均使用各自原冻结源码，不热改、不重评。后续新的A/B Host从本修订冻结版本执行；既有失败与新故事分表。
+
+## SimpleMem真实pilot收尾与完整对照排队
+
+冻结46bc516e/native db80b6a的两案例pilot已于12:47:26 UTC完成，8份完整答复首次Judge为6Correct、2invalid，未重评。逐份作者审阅核心7/8、来源忠实6/8；两份将2026捕获时间当报告时间，展柜末题只答电子目录“不变”、未明确开放，原Judge该题仍为Correct。实际原生9条生成记忆覆盖两链主要条件与前后状态，但将报告09:00写成确切事件时间，部分timestamp丢时区、topic把插座停用称为市电outage；这类解释不冒充原文。
+
+6次原生输入逐项等于实际已到达用户Source，问题未进入Writer，事件ID为opaque Source标识。原生先缓冲，首个查询flush前两条、下一检查点flush第三条，完整窗口40/overlap2及previous_entries行为保留；不能把查询后形成状态混成Strong的到达后UJS。8次原生检索均COMPLETED，fallback/recovered retry/admission rejection均空，原生flush+检索+Reader每题6或5调用，低于共同12上限。全部52生成响应/74,620 tokens、32embedding/1,003 tokens，与连续账本精确一致，新增unknown0。预测生成52,790 tokens，36原生core调用23,884、8Reader28,906；8首次Judge21,830另计。见simplemem-pilot-v1-summary。
+
+新A/B Host冻结b33d5690、独立空库，于12:48:20 UTC接续；driver2384059/exec41638。全10消息第一尝试，不用先前修复分支冒充首轮。当前已完成初存、初次查询、未来A更新及查询，最终质量仍待完整状态/历史审阅。见host-ab-v1-execution。
+
+SimpleMem完整12链36事件48QA已冻结prepare0HTTP，并排队等待本Host lane及子进程退出、完整末账本/无新增unknown/无插队调用后再运行。监督driver2400057/exec62427，暂WAITING_FOR_AB_HOST。沿用46bc516e以保持与Strong的共同Reader条件，不混入新时钟投影；两条pilot链在新空库完整cohort中重新生成，pilot保留且不与full合并。仍是公开开发数据，不满足独立外部benchmark/长历史/额外模型要求。见simplemem-full-v1-execution。
