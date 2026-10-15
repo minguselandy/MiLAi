@@ -1,24 +1,29 @@
-# Current innovation-v4 execution (2026-10-16 local continuation)
+# Current innovation-v4 handoff (2026-10-16, all launched jobs closed)
 
-Full user v4 goal ACTIVE/incomplete. Worktree feat/lab-innovation-v4-20261015, base PR122 c835cf67.
-Current report: docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md. This handoff records concrete progress.
-Paired-v2 frozen08de761d CLOSED all4 stages. FirstQA plain21/24 (invalid2,Omission1), delta23/24
-(invalid1); predictiongen230866/258521 (+11.98%). Whole144gen615686+124emb6314 exactledger,
-newunknown0/old9+1 retained. All48answers/renderedstates reviewed; structured joint audit pending.
-Source/reference ambiguities apply to BOTH; no state-success/advantage claim. SameJSON plot saved.
-D2 three query policies integrated; firstquery-v1 source16answers/firstscore13Correct+3invalid CLOSED.
-Rebuild original FAILED after9answers: tenth interpretation knownlength8192 (allusageknown), later
-arms unrun. Original35gen120165/emb0/newunknown0 preserved; source firstscore separately charged.
-Genericf07 handles confirmed readonly structure failure with raw Reader, keeping cost/call quota.
-LIVE continuationquery-v2 freezes c7c5c469, driver3145177/session58505, worker3145185 lastverifiedlive.
-Newroot copies actualbank+19confirmedresponses, reuses oldlength0newHTTP then rawReader; original
-failure/terminal untouched. Mixed-source continuation is not a same-version cold win. Inspect handles.
-Pending version_cache/incremental/full and firstscores serial. No competingHTTP/hotedit/restartbytimeout.
-Current learning8 author references over6 exposed chains; only1 consequence-labeled,0parameterupdates;
-authoring cost unmetered, notzero.1e7 joint policy+event evidence passed actualSQLite tests, not oldscore.
-36final relatedchecks/types/lint/DAG/tools pass. D3/fulllearning/semantic-cache-scope/independent-long-
-histories/external/secondmodel/Host and fullgoal audit pending. NoSHA/subagents/newledger/newservice/
-PRmerge. Lower blocks historical, never infer old process state from them.
+Full user goal ACTIVE/incomplete; no pause/block/complete. Branch feat/lab-innovation-v4-20261015.
+Current report: docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md. This turn changed code and completed real
+model experiments, parameter updates and source-bound application diagnostics; not a status-only turn.
+A pair and B five-condition runs CLOSED. B onehistory16QA each source/rebuild/version/incremental/full
+13/15/14/14/12, prediction35726/151302/71951/61244/155324; total203gen683988+21emb868 exactledger.
+B full80-answer/source/interpretation audit pending; do not infer cache benefit from raw-assisted QA.
+C externalv1 CLOSED4:standard2/value1, prediction197030/285555. Whole31gen489311,newunknown0.
+C externalv2 CLOSED4 freshcases:standard2/value0, prediction155253/128225. Whole28gen291601,0emb,
+newunknown0. All16C answers/selectiontraces read, full source audit pending. Native catalog plus exact
+source-interval dedup reduced work but did not fix early stopping. Stop expanding prompt-only value;
+next collect actual outcome/complementary-evidence supervision, not more per-question prohibitions.
+CPU LoRA f6cef996 completed3objectives, each8steps/270336parameters, matched sequences/order/seed.
+25645input+948targettokens perarm, about167/150/149s, peak16.3GiB; noGPU/service/HTTP changes.
+Wrapped4casesx4 models allinvalid pseudoJSON, native named alluncommitted(11length). No learning benefit.
+Cases now exposed. Need native editing separate from auxiliary consequences and balanced larger data.
+semantic_delta_v2 uses array positions and program labels. Base indexed4generated from same actualsource
+banks; offline fix restores original publicturn on reopened clone and omits empty creates/changes.
+3realcommits, but2compound fulltext units/1rule-only omission; fourth malformed. Original outputs and
+failures untouched, zero newmodelcalls for application repair. 18relatedtests+6source mypy/Ruff/matrix pass.
+All launched model/CPU jobs terminal; old handles58505/99764/1159/58408/80944/25984/79474 are closed.
+Inspect actual state before new dispatch. No SHA/subagents/newledger/newservice/PRmerge. Full D0–D6
+requirements remain: same-before and matched-format/budget controls, joint state/source audit, B scope/
+scale/reuse, learned C/range aggregation, native matched learning/generalization, independent longhistory/
+full external/secondmodel/Host and final requirement audit. Historical blocks below are not live state.
 
 # Current publication checkpoint requested; corrected factorial LIVE
 
