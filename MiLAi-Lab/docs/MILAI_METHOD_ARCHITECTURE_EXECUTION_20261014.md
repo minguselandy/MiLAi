@@ -196,3 +196,12 @@ E1 使用冻结 9bb7d7e1 和已声明的相同输入/模型/预算执行，seed 
 新增`milai-method-architecture-screening-v1.jsonl`：12条独立作者开发链，六类机制各两条，每链3事件、两次更新后各2题，共36事件/48QA每臂。题材、人物、日期和措辞不同于E1；它仍是机制筛选开发数据，不是独立保留确认。每链有必须改变与必须保持的要求，涉及共享条件的局部例外、OR替代且保留AND前提、两级派生、事实纠错与旧记录、传闻/提案和未来日程。
 
 两臂新配置保持同模型、来源、预算与问题，关闭读取使用统计。评价义务独立放在`method-architecture-screening-v1-protocol.json`，不进入Writer；36个ObservedSession实际解析通过，替换全部评价字段为canary后输入投影逐值一致。两个prepare均PREPARED_ZERO_MODEL，未调用模型，尚未派发predict/score。先完成continuous-v2实际反馈，再确定冻结的筛选源码，不在运行源码上热改。
+
+
+## 观测断点对应的首批匹配数据对
+
+continuous-v2候选出现两种真实断点：未来变更的replace错误引用并未创建的n0支持目标，整条更新被拒；撤销“管理员在场”时遗留“会员卡通道不加这项要求”，使指代转向前面的培训要求，错误正文实际提交。两个原输出保持。
+
+`milai-method-architecture-matched-training-v1.jsonl`保存两组可审查样例，输入为实际before、当前来源与已到达prior_context，不含测试查询/答案。转换质量目标与关系目标使用相同来源和样本；基线也得到相同纠正事实。人工参考修正均通过原实际生成schema检查，没有应用到原实验银行、重新抽样或重新评分。它们只证明训练数据准备开始，不代表训练有效或W4完成；尚缺正向OR/AND建组样例、独立标签复核、未见范围/顺序评价和匹配训练预算。
+
+当时四张A100 40GB显存占用分别为39,981/39,997/39,901/39,863 MiB；保持现有服务运行，没有部署或训练模型，更没有转向CPU FP32大模型训练。记录见`method-architecture-training-pairs-v1.json`。
