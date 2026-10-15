@@ -1,3 +1,18 @@
+# Current innovation-v4 execution (2026-10-15)
+
+User activates the full innovation v4 plan; goal ACTIVE/incomplete. This worktree
+is feat/lab-innovation-v4-20261015 based on PR122 c835cf67. See
+[the current execution record](docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md).
+D1 compact delta uses the existing source/version/commit path, no Impact call.
+Original c8ffd8e5 smoke closed: first formation failed, all4 QA core-correct from
+raw sources; 35366 generation +312 embedding, newunknown0. Original preserved.
+Current paired-v2 freezes08de761d: driver2877480/session9063, plain child2877561
+live at last actual check. Serial plain/delta prediction then both first scores;
+inspect actual PID/session/receipts, never duplicate, hotedit or restart by timeout.
+New matched-data exporter has ONE reviewed reference, 0 parameter updates.
+D2/D3/real learning/long histories/external/second model/Host and final audit pending.
+No SHA checks/subagents/newledger/new deployment/PR merge. Lower snapshots historical.
+
 # Current publication checkpoint requested; corrected factorial LIVE
 
 User explicitly requests development summary and GitHub submission. Publish the
