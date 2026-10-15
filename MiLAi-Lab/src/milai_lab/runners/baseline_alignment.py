@@ -542,7 +542,9 @@ class AlignmentRun(BenchmarkRun):
                 snapshot_id=str(path.relative_to(self.root)),
             )
         if (self.settings["alignment_backend"] == "MiLAi-memory-only"
-                and service.memory_profile == "unified_v1"):
+                and service.memory_profile == "unified_v1"
+                and not self.settings.get("evidence_replay")
+                and self.settings.get("read_usage_updates", True)):
             from milai_lab.memory.activation import ActivationIndex
 
             index = ActivationIndex(service)

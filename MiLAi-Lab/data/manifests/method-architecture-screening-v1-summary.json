@@ -3673,5 +3673,12 @@
     "conclusion": "valid existing-group edits accepted in schema key order; initial unsorted JSON rejection is expected key-order restriction, not a newly demonstrated unavailable edit branch",
     "model_requests": 0
   },
-  "interpretation": "No overall architecture quality/cost advantage established. Same40/48 first Correct, candidate has5actual missing answers and nearly double prediction tokens. Strict source-author UJS differs by1/24 with wide cluster interval; target/preservation-only favors plain. Full first-output source audit is separate and never rewrites official labels."
+  "interpretation": "No overall architecture quality/cost advantage established. Same40/48 first Correct, candidate has5actual missing answers and nearly double prediction tokens. Strict source-author UJS differs by1/24 with wide cluster interval; target/preservation-only favors plain. Full first-output source audit is separate and never rewrites official labels.",
+  "read_feedback_audit": {
+    "audit": "data/manifests/method-architecture-read-usage-audit-v1.json",
+    "configured_false_but_usage_metadata_was_written": true,
+    "semantic_record_values_unchanged_claim_preserved": true,
+    "ranking_mode": "dense; actual service path does not use activation",
+    "original_outputs_and_scores_unchanged": true
+  }
 }

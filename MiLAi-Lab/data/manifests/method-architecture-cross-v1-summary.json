@@ -1573,5 +1573,12 @@
     "normal Host real-model migration still pending",
     "no SHA checks, no new ledger, no model retries or rescoring"
   ],
-  "interpretation": "跨记录引用、版本绑定和替代路线保留已在实际模型状态出现；未证明完整正确关系形成或候选质量优势。对照状态最终正确；候选最终更新length失败。"
+  "interpretation": "跨记录引用、版本绑定和替代路线保留已在实际模型状态出现；未证明完整正确关系形成或候选质量优势。对照状态最终正确；候选最终更新length失败。",
+  "read_feedback_audit": {
+    "audit": "data/manifests/method-architecture-read-usage-audit-v1.json",
+    "configured_false_but_usage_metadata_was_written": true,
+    "semantic_record_values_unchanged_claim_preserved": true,
+    "ranking_mode": "dense; actual service path does not use activation",
+    "original_outputs_and_scores_unchanged": true
+  }
 }

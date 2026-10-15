@@ -1161,3 +1161,44 @@ def test_s0_captures_sources_without_semantic_formation(
         assert len(service.sources()) == 2 and not service.records() and not sent
         execution.answer(service, "Which detail?", "2030-01-02", "question")
         assert "ORIGINAL_BLUE" in repr(sent[-1])
+
+
+@pytest.mark.parametrize('enabled,replay', [(False, False), (True, False), (True, True)])
+def test_alignment_honors_read_usage_policy_in_actual_store(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, enabled: bool, replay: bool,
+) -> None:
+    from milai_lab.memory.activation import ActivationIndex
+    from milai_lab.methods.edit_memory import EditMemory
+
+    with SqliteStore.from_conn_string(str(tmp_path / 'memory.sqlite')) as store:
+        service = MemoryService(store, ('read-policy', 'alice'), 'alice', tmp_path / 'lock',
+                                memory_profile='unified_v1', functional_contract='functional_v1')
+        ref = service.capture_user('s', 'seed', 'Marker blue.')['source_ref']
+        service.bind_public_turn('s', 'seed', ref, config_version='read-policy', phase='start')
+        handle = service.source_fragments(ref)[0]['fragment_handle']
+        saved = EditMemory(service, 'B1').apply('s', 'save', {'action': 'create', 'units': [
+            {'text': 'Marker blue.', 'evidence': [handle]}]})
+        assert saved['ok']
+        record = service.read(saved['id'])['value']
+        material = {'record_id': saved['id'], 'text': 'Marker blue.'}
+        execution = AlignmentRun.__new__(AlignmentRun)
+        execution.root = tmp_path / 'run'
+        execution.settings = {'alignment_backend': 'MiLAi-memory-only',
+            'alignment': {'qa_top_k': 20}, 'read_usage_updates': enabled,
+            'evidence_replay': replay}
+        native = {'materials': [material], 'native_return': {}, 'returned_count': 1,
+                  'source_mapping': 'actual retained state', 'usage': {}}
+        monkeypatch.setattr(execution, '_backend', lambda _: SimpleNamespace(
+            retrieve=lambda *args, **kwargs: copy.deepcopy(native)))
+        monkeypatch.setattr(execution, 'answer_material', lambda *args, **kwargs: (
+            'blue', [material]))
+        index = ActivationIndex(service)
+        before = store.get(index.namespace, saved['id'])
+        before_value = copy.deepcopy(before.value) if before else None
+        assert execution.answer(service, 'Color?', '', 'q') == 'blue'
+        after = store.get(index.namespace, saved['id'])
+        if enabled and not replay:
+            assert after is not None and set(after.value['uses']) == {'q'}
+        else:
+            assert (after.value if after else None) == before_value
+        assert service.read(saved['id'])['value'] == record

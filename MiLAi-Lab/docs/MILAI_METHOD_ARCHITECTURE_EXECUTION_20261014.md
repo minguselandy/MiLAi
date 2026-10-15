@@ -427,3 +427,16 @@ bef02eee冻结为host-source-v2。原bank完整复制到read-recovery-v1，保�
 Question pack且共享维护负责写入时，主Host不再暴露重复search_memory；证据包已提供候选、范围与正文读取，共享Writer自行定位更新对象。直接Writer或遗忘请求仍保留搜索。新正常Host wire测试实际经过分类→提交带支持组状态→同一依赖选择器→回答，验证选择成本经过原入口且无第二搜索目录；不将模型桩当科学结果。
 
 11项目标/可见性测试5.54秒、25项证据/跨记录测试8.59秒、6项正常Host接线/恢复检查11.94秒通过；2文件mypy、Ruff、DAG/工具边界通过。用真实失败轨迹中的两个原始read_memory参数及其原request-target映射做read-only SQLite解析回放：都精确命中已交付记录；全局修改resolver仍拒绝raw ID，0HTTP/0库写入，也没有重置原读取额度。这只是实际参数的工程验证，不是模型恢复或改分。见method-architecture-host-read-navigation-v1.json；下一步冻结后新查询恢复并继续尚未执行的消息，旧失败保持。
+
+
+## 对齐入口读取反馈开关审计
+
+后续强对照准备发现AlignmentRun.answer没有遵守read_usage_updates=False，而基础BenchmarkRun已正确处理。只读SQLite核对旧E2：plain64条uses/16记录、candidate48条/14记录；cross双方各12条/2记录。原记录值未改的检查仍成立，但不能将它等同于完全没有读取元数据写入。四臂实际memory_ranking均dense，冻结与当前service路径只有activation模式才读取这些统计，因此此审计不提供activation模式结论。原模型输出、旧bank和首次评分不修改。
+
+已将对齐入口条件与基础入口一致：read_usage_updates关闭或evidence_replay时不写uses。3项实际Store参数测试1.72秒、mypy/Ruff通过；新测试初次漏设functional_v1合同，补齐真实服务配置后通过，未放宽服务。旧screening/cross摘要追加审计字段，详见method-architecture-read-usage-audit-v1.json。
+
+## Host选择阶段的有限计算修订
+
+570b9d84恢复分支成功完成两记录读取、原index2查询以及index3会员卡失效更新；真实read_memory使用record ID已成功。原index4纯查询停止于依赖选择：原服务返回finish_reason=length、completion8192、content为空。外层通用读取回执记为read_outcome_unknown，但这次HTTP返回和计费都已确认，新增unknown usage不成立；原UNKNOWN结果保持，解释中区分此已知截断。index5-7尚未执行。
+
+新host-v2配置仅将dependency_read阶段enable_thinking=False，其余模型、8192输出上限、3次读取额度和写入/回答阶段保持。将以实际bank副本作单独恢复和剩余消息验证；这不是原样随机重跑，也不替换原first结果或声称无偏消融收益。

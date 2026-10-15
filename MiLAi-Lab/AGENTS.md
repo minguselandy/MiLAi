@@ -1,3 +1,21 @@
+# Current execution: second Host lane closed at known selector length; next config prepared
+
+GoalACTIVE/incomplete; allknownmodelqueuesCLOSED. Frozen570b9d84 Hostsource-v3,
+recovery-v2 exec11667/driver1494450 EXIT0 stopped after originalindex4UNKNOWN.
+Newreadonlyrecovery and originalindex2query/index3card-update COMPLETED; actualrawID
+read_memory calls both succeeded, no duplicate search, so navigationfix has realproof.
+Ledger r2cardinvalid/vouchervalid, eligibilityr1no_change retainsoldbindingr1/pending
+foreignsupport; no completegraph claim. Index4selector finish_reason=length,
+8192completion/contentempty; outerread_outcome_unknown is generic, HTTPknown/usageknown.
+Indices5-7unrun. Thislane15gen141275+15emb1520 exact,newunknown0. Seehost-v1-recovery-v2-summary.
+Host-v2config PREPARED0HTTP: onlydependency_read thinkingFalse; same8192/read3/otherstages.
+Next newbankcopy recoveryquery andindices5-7, originals preserved, no rawresampling.
+ALSO fixed AlignmentRun ignoring read_usage_updates=False. ActualoldE2uses64plain/48M,
+cross12/12 despitefalse; dense mode doesn'tconsultactivation, recordvaluesunchanged.
+3actualStoretests1.72s/mypy/Ruffpass. Oldsummariesannotated, banks/scoresunchanged.
+NoSHA/subagents/newledger. Fullobjective stillincomplete; strong/externalcontrols,
+W4learning/eval,fullRcorrected,extra model+longhistory,completeA/Bstory andfinalauditremain.
+
 # Current development: read navigation repaired; real retest next
 
 GoalACTIVE/incomplete. No realmodeljoblive atcheckpoint. Read-only targetresolver now
