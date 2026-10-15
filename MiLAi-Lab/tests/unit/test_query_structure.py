@@ -167,3 +167,46 @@ def test_normal_benchmark_pack_projects_local_interpretation_and_shared_source_a
                                                native, [], snapshot_id="pool-next.json")
         assert repeated[0]["pre_read_calls"] == 0 and len(calls) == 1
         assert repeated[-1]["query_time"] == "2035-05-08"
+
+
+def test_confirmed_structure_length_keeps_original_reader_and_consumed_call(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        service.capture_user("s", "0", "Borrowing starts May 8.")
+        native = service.search_sources("Borrowing", tokenization="unicode_v1", include_scope=True)
+        run = object.__new__(BenchmarkRun)
+        run.root = tmp_path
+        run.settings = {"evidence_variant": "S0", "evidence_policy": "question_pack_v1",
+            "query_structure_policy": "rebuild", "source_access": "independent_v1",
+            "alignment_backend": "MiLAi-memory-only", "context_tokens": 65536,
+            "model": {"max_tokens": 8192},
+            "halumem": {"reader_failure_policy": "record_known_readonly_failure"}}
+        run.client = SimpleNamespace(config=SimpleNamespace(max_calls=2))
+        run.input_tokens = lambda *args, **kwargs: 100
+        calls = []
+        key = "halumem/alice/0/qa/0"
+
+        def call(stage, messages, **_):
+            calls.append(stage)
+            if stage.startswith("query-structure/"):
+                path = tmp_path / "http" / stage / "response.json"
+                path.parent.mkdir(parents=True)
+                path.write_text(json.dumps({"choices": [{"finish_reason": "length",
+                    "message": {"content": ""}}], "usage": {
+                        "prompt_tokens": 1000, "completion_tokens": 8192, "total_tokens": 9192}}))
+                raise ValueError("Provider output incomplete: length")
+            assert stage == key and "Borrowing starts May 8" in messages[1]["content"]
+            return "Borrowing starts May 8."
+
+        run.call = call
+        materials = run._source_first_materials(service, "When does borrowing start?", "May 7",
+            native, [], snapshot_id=f"native/{key}/retrieval.json")
+        report = native["query_structure"]
+        assert report["action"] == "incomplete_raw_only" and report["model_calls"] == 1
+        assert report["failure"]["finish_reason"] == "length"
+        assert all(item["kind"] == "original_source" for item in materials)
+        answer, _ = run.answer_material("When does borrowing start?", "May 7", key, materials,
+            snapshot_id=f"native/{key}/retrieval.json",
+            material_reader=lambda items: run._live_materials(service, items))
+        assert answer == "Borrowing starts May 8." and len(calls) == 2
+        assert store.get((*service.namespace, "query_structure_v1"), "current") is None

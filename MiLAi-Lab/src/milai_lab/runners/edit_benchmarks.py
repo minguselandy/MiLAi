@@ -6,6 +6,7 @@ import copy
 import fcntl
 import json
 import re
+import time
 from collections import Counter
 from collections.abc import Callable
 from dataclasses import asdict
@@ -1886,11 +1887,25 @@ class BenchmarkRun:
                             "name": "query_structure", "schema": schema}},
                         enable_thinking=self.stage_thinking("reader")))
 
-                structure, report = build_query_structure(service, question, date,
-                    [span["source_ref"] for material in native["source_materials"]
-                     for span in material["source_ranges"]],
-                    policy=cast(QueryStructurePolicy, self.settings["query_structure_policy"]),
-                    call=interpret)
+                started = time.perf_counter()
+                try:
+                    structure, report = build_query_structure(service, question, date,
+                        [span["source_ref"] for material in native["source_materials"]
+                         for span in material["source_ranges"]],
+                        policy=cast(QueryStructurePolicy, self.settings["query_structure_policy"]),
+                        call=interpret)
+                except ValueError as error:
+                    question_key = (snapshot_id.removeprefix("native/").removesuffix(
+                        "/retrieval.json") if self.settings.get("alignment_backend") else
+                        snapshot_id.removeprefix("http/").removesuffix("/retrieval-materials.json"))
+                    failure = self._known_reader_failure(error, question_key)
+                    if failure is None:
+                        raise
+                    structure = None
+                    report = {"policy": self.settings["query_structure_policy"],
+                        "action": "incomplete_raw_only", "failure": failure,
+                        "model_calls": int(failure["phase"] == "confirmed_response"),
+                        "elapsed_ms": (time.perf_counter() - started) * 1000}
                 if structure is not None:
                     materials.append(structure)
                 if materials:
@@ -2877,11 +2892,17 @@ class BenchmarkRun:
         pool_id = (f"native/{key}/retrieval.json" if self.settings.get("alignment_backend")
                    else f"http/{key}/retrieval-materials.json")
         dependency_stage = f"dependency-selection/{pool_id}"
+        structure_stage = f"query-structure/{pool_id}"
         if self.settings.get("dependency_reading") and not view_path.exists() and (
             self.root / "http" / dependency_stage / "response.json"
         ).exists():
             stage = dependency_stage
-        if stage != key and not stage.startswith(key + "/view/") and stage != dependency_stage:
+        if self.settings.get("query_structure_policy") and not view_path.exists() and (
+            self.root / "http" / structure_stage / "response.json"
+        ).exists():
+            stage = structure_stage
+        if stage != key and not stage.startswith(key + "/view/") \
+                and stage not in {dependency_stage, structure_stage}:
             return None
         folder = self.root / "http" / stage
         response_path = folder / "response.json"
