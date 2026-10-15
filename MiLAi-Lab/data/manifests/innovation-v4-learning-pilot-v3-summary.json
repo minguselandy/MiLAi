@@ -1,0 +1,595 @@
+{
+  "status": "TRAINING_AND_EVALUATION_CLOSED",
+  "training_protocol": {
+    "model_path": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/models/qwen25-05b",
+    "model_source": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 4,
+    "seed": 20261016,
+    "rank": 4,
+    "alpha": 8,
+    "learning_rate": 0.0005,
+    "epochs": 3,
+    "gradient_accumulation_examples": 3,
+    "optimizer_steps_per_arm": 15,
+    "normalization": "Sum weighted token losses over the whole minibatch, divided by its total supervised weight; short examples do not each receive a separate full optimizer step.",
+    "examples": 15,
+    "example_order": [
+      "innovation-grant-noop-ack",
+      "innovation-catalog-formation-reference-v3",
+      "innovation-harbor-transition-1-reference",
+      "innovation-grant-noop-ack",
+      "innovation-shared-formation-reference-v3",
+      "innovation-grant-formation-reference-v3",
+      "innovation-catalog-formation-reference-v3",
+      "innovation-harbor-transition-2-reference",
+      "innovation-grant-noop-restatement",
+      "innovation-catalog-transition-1-reference",
+      "innovation-harbor-formation-reference-001",
+      "innovation-orchid-transition-1-reference",
+      "innovation-studio-transition-3-reference",
+      "innovation-shared-transition-3-reference",
+      "innovation-grant-noop-ack",
+      "innovation-harbor-transition-1-reference",
+      "innovation-orchid-transition-1-reference",
+      "innovation-studio-formation-reference-v3",
+      "innovation-shared-transition-3-reference",
+      "innovation-harbor-transition-2-reference",
+      "innovation-shared-transition-3-reference",
+      "innovation-studio-formation-reference-v3",
+      "innovation-catalog-formation-reference-v3",
+      "innovation-studio-transition-3-reference",
+      "innovation-shared-formation-reference-v3",
+      "innovation-harbor-formation-reference-001",
+      "innovation-grant-formation-reference-v3",
+      "innovation-grant-noop-restatement",
+      "innovation-catalog-transition-1-reference",
+      "innovation-harbor-transition-2-reference",
+      "innovation-orchid-formation-reference-v3",
+      "innovation-studio-formation-reference-v3",
+      "innovation-harbor-transition-1-reference",
+      "innovation-studio-transition-3-reference",
+      "innovation-orchid-transition-1-reference",
+      "innovation-grant-formation-reference-v3",
+      "innovation-orchid-formation-reference-v3",
+      "innovation-grant-transition-3-reference",
+      "innovation-grant-noop-restatement",
+      "innovation-grant-transition-3-reference",
+      "innovation-harbor-formation-reference-001",
+      "innovation-shared-formation-reference-v3",
+      "innovation-grant-transition-3-reference",
+      "innovation-orchid-formation-reference-v3",
+      "innovation-catalog-transition-1-reference"
+    ],
+    "objectives": [
+      "imitation",
+      "quality_weighted",
+      "relation_consequence"
+    ],
+    "input_tokens_per_arm": 124881,
+    "target_tokens_per_arm": 5292,
+    "max_sequence_tokens": 5698,
+    "auxiliary_examples": 1,
+    "matching": "Identical sequences, order, initialization, parameters and optimizer steps. Every response position is projected in every arm, including zero-weight auxiliary tokens. Only loss weights differ; each minibatch update normalized by its supervised weight sum.",
+    "quality_proxy": "2x weights on text, kind, evidence aliases and applicability values; not a learned correctness reward or a preference optimization claim.",
+    "relation_objective": "Quality weights plus 2x rule spans and nonempty consequence labels.",
+    "scope": "Exposed author references; pipeline pilot, not a generalization result.",
+    "data_formats": [
+      "indexed_separate"
+    ],
+    "reference_authoring_cost": "Not independently metered; not zero.",
+    "torch": "2.7.0+cu126",
+    "transformers": "4.52.3",
+    "python": "3.10.12",
+    "source_version": "2429eaf1",
+    "cpu_model": "Intel Xeon Processor (Skylake, IBRS)"
+  },
+  "training": {
+    "imitation": {
+      "status": "COMPLETED",
+      "objective": "imitation",
+      "optimizer_steps": 15,
+      "trainable_parameters": 270336,
+      "parameter_l1_change": 856.2404515743256,
+      "wall_seconds": 849.8477451168001,
+      "cpu_seconds": 3150.548653754,
+      "process_peak_rss_mib": 20350.66015625,
+      "model_http_requests": 0,
+      "semantic_bank_writes": 0
+    },
+    "quality_weighted": {
+      "status": "COMPLETED",
+      "objective": "quality_weighted",
+      "optimizer_steps": 15,
+      "trainable_parameters": 270336,
+      "parameter_l1_change": 856.1241799592972,
+      "wall_seconds": 877.9939898410812,
+      "cpu_seconds": 3263.709847407,
+      "process_peak_rss_mib": 20350.66015625,
+      "model_http_requests": 0,
+      "semantic_bank_writes": 0
+    },
+    "relation_consequence": {
+      "status": "COMPLETED",
+      "objective": "relation_consequence",
+      "optimizer_steps": 15,
+      "trainable_parameters": 270336,
+      "parameter_l1_change": 875.9138783216476,
+      "wall_seconds": 878.7134764557704,
+      "cpu_seconds": 3269.033937522,
+      "process_peak_rss_mib": 20350.66015625,
+      "model_http_requests": 0,
+      "semantic_bank_writes": 0
+    }
+  },
+  "evaluation": {
+    "base": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "base",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 1744,
+        "wall_seconds": 271.55527383554727,
+        "cpu_seconds": 1040.16281918,
+        "process_peak_rss_mib": 3583.2578125,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "status_counts": {
+        "applied": 6,
+        "invalid_or_rejected": 4
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "applied",
+          "record_count_before": 0,
+          "record_count_after": 1,
+          "state_changed": true,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "applied",
+          "record_count_before": 0,
+          "record_count_after": 1,
+          "state_changed": true,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "applied",
+          "record_count_before": 0,
+          "record_count_after": 1,
+          "state_changed": true,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "applied",
+          "record_count_before": 0,
+          "record_count_after": 1,
+          "state_changed": true,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "applied",
+          "record_count_before": 0,
+          "record_count_after": 1,
+          "state_changed": true,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "applied",
+          "record_count_before": 0,
+          "record_count_after": 1,
+          "state_changed": true,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "'h1' is not one of ['e1', 'e2']\n\nFailed validating 'enum' in schema['properties']['creates']['items']['properties']['nodes']['items']['properties']['also']['items']:\n    {'type': 'string', 'enum': ['e1', 'e2']}\n\nOn insta"
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "'current' is not one of ['e1', 'e2']\n\nFailed validating 'enum' in schema['properties']['creates']['items']['properties']['nodes']['items']['properties']['basis']:\n    {'type': 'string', 'enum': ['e1', 'e2']}\n\nOn instance"
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "'current' is not one of ['e1', 'e2']\n\nFailed validating 'enum' in schema['properties']['creates']['items']['properties']['nodes']['items']['properties']['basis']:\n    {'type': 'string', 'enum': ['e1', 'e2']}\n\nOn instance"
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "'h1' is not one of ['e1', 'e2']\n\nFailed validating 'enum' in schema['properties']['creates']['items']['properties']['nodes']['items']['properties']['also']['items']:\n    {'type': 'string', 'enum': ['e1', 'e2']}\n\nOn insta"
+        }
+      ],
+      "complete_fact_formation_author_review": {
+        "correct": 0,
+        "opportunities": 4
+      },
+      "required_update_success_author_review": {
+        "correct": 0,
+        "opportunities": 2
+      },
+      "valid_no_change_empty_acknowledgments": 0,
+      "valid_no_change_existing_states": 0,
+      "existing_state_retained_after_invalid_output": 2
+    },
+    "imitation": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "imitation",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 436,
+        "wall_seconds": 120.93451491743326,
+        "cpu_seconds": 465.2832313240001,
+        "process_peak_rss_mib": 4118.17578125,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "status_counts": {
+        "no_change": 6,
+        "invalid_or_rejected": 3,
+        "applied": 1
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "'2038-02-12' is not one of ['t1', 't2']\n\nFailed validating 'enum' in schema['properties']['changes']['properties']['r1']['properties']['replace']['properties']['u1']['properties']['applicability']['properties']['event_at"
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "'2038-02-11' is not one of ['t1']\n\nFailed validating 'enum' in schema['properties']['changes']['properties']['r1']['properties']['replace']['properties']['u1']['properties']['applicability']['properties']['event_at']:\n  "
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "'2038-02-14' is not one of ['t1']\n\nFailed validating 'enum' in schema['properties']['changes']['properties']['r1']['properties']['replace']['properties']['u1']['properties']['applicability']['properties']['event_at']:\n  "
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "applied",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": true,
+          "error": null
+        }
+      ],
+      "complete_fact_formation_author_review": {
+        "correct": 0,
+        "opportunities": 4
+      },
+      "required_update_success_author_review": {
+        "correct": 0,
+        "opportunities": 2
+      },
+      "valid_no_change_empty_acknowledgments": 2,
+      "valid_no_change_existing_states": 0,
+      "existing_state_retained_after_invalid_output": 1
+    },
+    "quality_weighted": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "quality_weighted",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 2104,
+        "wall_seconds": 418.72609172947705,
+        "cpu_seconds": 1631.354763354,
+        "process_peak_rss_mib": 4189.28125,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "status_counts": {
+        "no_change": 6,
+        "invalid_or_rejected": 3,
+        "applied": 1
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "Extra data: line 1 column 1087 (char 1086)"
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "Extra data: line 1 column 1370 (char 1369)"
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "Provider output incomplete: length"
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "applied",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": true,
+          "error": null
+        }
+      ],
+      "complete_fact_formation_author_review": {
+        "correct": 0,
+        "opportunities": 4
+      },
+      "required_update_success_author_review": {
+        "correct": 0,
+        "opportunities": 2
+      },
+      "valid_no_change_empty_acknowledgments": 2,
+      "valid_no_change_existing_states": 0,
+      "existing_state_retained_after_invalid_output": 1
+    },
+    "relation_consequence": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "relation_consequence",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 1504,
+        "wall_seconds": 335.0916425092146,
+        "cpu_seconds": 1286.5547465529999,
+        "process_peak_rss_mib": 4469.09375,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "status_counts": {
+        "no_change": 6,
+        "invalid_or_rejected": 4
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "no_change",
+          "record_count_before": 0,
+          "record_count_after": 0,
+          "state_changed": false,
+          "error": null
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "Expecting ',' delimiter: line 1 column 225 (char 224)"
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID"
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "Provider output incomplete: length"
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "invalid_or_rejected",
+          "record_count_before": 1,
+          "record_count_after": 1,
+          "state_changed": false,
+          "error": "Extra data: line 1 column 743 (char 742)"
+        }
+      ],
+      "complete_fact_formation_author_review": {
+        "correct": 0,
+        "opportunities": 4
+      },
+      "required_update_success_author_review": {
+        "correct": 0,
+        "opportunities": 2
+      },
+      "valid_no_change_empty_acknowledgments": 2,
+      "valid_no_change_existing_states": 0,
+      "existing_state_retained_after_invalid_output": 2
+    }
+  },
+  "scope": "Six source chains and15original training references,45sample passes and15minibatch updates perobjective. Six fresh source-only evaluation cases plusfour new transitions on exposed actualbanks. Not a formal holdout or external benchmark.",
+  "author_review": {
+    "coverage": "All40 application outcomes, original inputs, before states and changed rendered states inspected. Invalid outputs retain their full errors in the originalapplied-results.json. No output was repaired and retried.",
+    "base": "Four fact formations each retain only the beginning of the source and omit decisive/non-target facts. The budget source is tagged with both supporting and opposing evidence despite a consistent report. Both acknowledgments are redundantly copied into semantic memory. Allfour existing-state outputs reject unavailableevidence aliases, leaving actualstate unchanged but not valid no-change decisions.",
+    "imitation": "Allsix empty-before cases returnempty; onlytwo are legitimate acknowledgments. Future cancellation,paper expiry and existingacknowledgment fail literal-date versus time-alias constraints. The restatement commits an incorrect per_member quantity_scope to a non-per-membertotal, while preserving the literal text and otherunits.",
+    "quality_weighted": "Samefour required formations missed andtwo emptyacks retained. Cancellation/expiry malformed; existingacklength. Restatement commits the same incorrect per_member metadata. Reducedloss and parsing are not jointstate success.",
+    "relation_consequence": "Samefour required formations missed andtwo emptyacks retained. Bothupdates fail; thepaper case hasaninvalid effectiveinterval. Existingacklength andrestatementmalformed; originalstate remainswithout a validno-change response.",
+    "causal_limit": "Relative to v2, accumulation and data exposure bothchanged. Results do not isolate normalization, modelcapacity, data coverage or objective design. Field weighting remains a proxy, not an outcome-trained quality objective."
+  },
+  "next_data_preparation": "60dependent variants fromthe original15refs/6chains, consistent entity/public-unit-alias transformations andold-clause order changes; matching full/sparse targets prepared. Runtime alreadyaccepts omitted emptycontainers. No newparametertraining ofthese variants hasrun.",
+  "independent_blind_review": false,
+  "model_http_requests": 0,
+  "full_goal_complete": false
+}

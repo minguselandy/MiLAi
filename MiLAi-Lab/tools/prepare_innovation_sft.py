@@ -25,12 +25,13 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("references", type=Path)
     parser.add_argument("output", type=Path)
-    parser.add_argument("--format", choices=("wrapped", "indexed_separate"), default="wrapped")
+    parser.add_argument("--format", choices=("wrapped", "indexed_separate", "indexed_sparse"),
+                        default="wrapped")
     args = parser.parse_args()
     rows = [json.loads(line) for line in args.references.read_text().splitlines() if line.strip()]
     prepared = []
     for row in rows:
-        if args.format == "indexed_separate":
+        if args.format in {"indexed_separate", "indexed_sparse"}:
             payload = {
                 **row["input"],
                 "response_schema": delta_schema(
@@ -51,6 +52,9 @@ def main() -> None:
                 "review": row["review"],
                 "format": args.format,
             }
+            if args.format == "indexed_sparse":
+                example["target"] = {key: value for key, value in example["target"].items()
+                                     if value}
             if row["consequence_targets"]:
                 example["auxiliary"] = {
                     "messages": [

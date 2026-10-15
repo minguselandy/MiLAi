@@ -1,0 +1,800 @@
+{
+  "status": "CLOSED",
+  "independent_histories": 1,
+  "arms": {
+    "alongside": {
+      "first_correct": 15,
+      "labels": {
+        "Correct": 15,
+        "Hallucination": 1
+      },
+      "stages": {
+        "reader": {
+          "responses": 16,
+          "input_tokens": 16849,
+          "output_tokens": 27779,
+          "total_tokens": 44628
+        },
+        "judge": {
+          "responses": 16,
+          "input_tokens": 17170,
+          "output_tokens": 24563,
+          "total_tokens": 41733
+        }
+      },
+      "reading_tokens": 44628,
+      "queries": [
+        {
+          "session": 0,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 0,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 0,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 0,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 3,
+          "official_label": "Hallucination",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": null
+        },
+        {
+          "session": 3,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 3,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 3,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        },
+        {
+          "session": 3,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source",
+            "original_source",
+            "original_source",
+            "query_structure"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 0,
+          "complete_raw_contents_in_catalog": 0,
+          "core_author_review": true
+        }
+      ],
+      "formation_calls": 0,
+      "retrieval_calls": 0
+    },
+    "structure_first": {
+      "first_correct": 14,
+      "labels": {
+        "Correct": 14,
+        "Hallucination": 1,
+        "Omission": 1
+      },
+      "stages": {
+        "reader_packet": {
+          "responses": 16,
+          "input_tokens": 23125,
+          "output_tokens": 23502,
+          "total_tokens": 46627
+        },
+        "judge": {
+          "responses": 16,
+          "input_tokens": 15759,
+          "output_tokens": 26897,
+          "total_tokens": 42656
+        }
+      },
+      "reading_tokens": 46627,
+      "queries": [
+        {
+          "session": 0,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 0,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 0,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 0,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 2,
+          "complete_raw_contents_in_catalog": 2,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 2,
+          "complete_raw_contents_in_catalog": 2,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 2,
+          "complete_raw_contents_in_catalog": 2,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 3,
+          "official_label": "Hallucination",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 2,
+          "complete_raw_contents_in_catalog": 2,
+          "core_author_review": null
+        },
+        {
+          "session": 3,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 3,
+          "complete_raw_contents_in_catalog": 3,
+          "core_author_review": true
+        },
+        {
+          "session": 3,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 3,
+          "complete_raw_contents_in_catalog": 3,
+          "core_author_review": true
+        },
+        {
+          "session": 3,
+          "question": 2,
+          "official_label": "Omission",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 3,
+          "complete_raw_contents_in_catalog": 3,
+          "core_author_review": true
+        },
+        {
+          "session": 3,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "query_structure"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 3,
+          "complete_raw_contents_in_catalog": 3,
+          "core_author_review": true
+        }
+      ],
+      "formation_calls": 0,
+      "retrieval_calls": 0
+    },
+    "raw_first": {
+      "first_correct": 16,
+      "labels": {
+        "Correct": 16
+      },
+      "stages": {
+        "reader_packet": {
+          "responses": 16,
+          "input_tokens": 18104,
+          "output_tokens": 18501,
+          "total_tokens": 36605
+        },
+        "judge": {
+          "responses": 16,
+          "input_tokens": 15661,
+          "output_tokens": 24934,
+          "total_tokens": 40595
+        }
+      },
+      "reading_tokens": 36605,
+      "queries": [
+        {
+          "session": 0,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 0,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 0,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 0,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 1,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": true,
+          "raw_catalog_entries_seen": 1,
+          "complete_raw_contents_in_catalog": 1,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 2,
+          "complete_raw_contents_in_catalog": 2,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 2,
+          "complete_raw_contents_in_catalog": 2,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 2,
+          "complete_raw_contents_in_catalog": 2,
+          "core_author_review": true
+        },
+        {
+          "session": 2,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 2,
+          "complete_raw_contents_in_catalog": 2,
+          "core_author_review": null
+        },
+        {
+          "session": 3,
+          "question": 0,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 3,
+          "complete_raw_contents_in_catalog": 3,
+          "core_author_review": true
+        },
+        {
+          "session": 3,
+          "question": 1,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 3,
+          "complete_raw_contents_in_catalog": 3,
+          "core_author_review": true
+        },
+        {
+          "session": 3,
+          "question": 2,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 3,
+          "complete_raw_contents_in_catalog": 3,
+          "core_author_review": true
+        },
+        {
+          "session": 3,
+          "question": 3,
+          "official_label": "Correct",
+          "reader_calls": 1,
+          "opened_kinds": [
+            "original_source"
+          ],
+          "declared_body_range_complete": false,
+          "raw_catalog_entries_seen": 3,
+          "complete_raw_contents_in_catalog": 3,
+          "core_author_review": true
+        }
+      ],
+      "formation_calls": 0,
+      "retrieval_calls": 0
+    }
+  },
+  "scope": "Sixteen exposed questions over identical saved source prefixes. Cached arms reuse identical actual interpretations; raw-first excludes them. Not independent formation, a full lifecycle or a formal holdout.",
+  "source_versions": {
+    "cached_arms": "72f1bf35",
+    "raw_first": "5237b6e6"
+  },
+  "original_shared_structure_cost": {
+    "responses": 3,
+    "input_tokens": 3381,
+    "output_tokens": 13774,
+    "total_tokens": 17155,
+    "accounting": "Paid in the original query-reuse run, shared once in this diagnostic; not newly charged. A raw-only method does not require this construction."
+  },
+  "ledger_deltas": {
+    "structure-delivery-v2": {
+      "generation_requests": 64,
+      "generation": {
+        "known_tokens": 175644,
+        "charged_tokens": 175644,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "known_tokens": 0,
+        "charged_tokens": 0,
+        "unknown_usage": 0
+      }
+    },
+    "structure-raw-first-v1": {
+      "generation_requests": 32,
+      "generation": {
+        "known_tokens": 77200,
+        "charged_tokens": 77200,
+        "unknown_usage": 0
+      },
+      "embedding": {
+        "known_tokens": 0,
+        "charged_tokens": 0,
+        "unknown_usage": 0
+      }
+    }
+  },
+  "receipt_ledger_difference": 0,
+  "author_review": {
+    "coverage": "All48 full answers read; packets inventoried and three cache-only examples inspected in full. All original sources and cached views reviewed earlier.",
+    "navigation": "Structure-first opened only the cached view on all16 questions, but its candidate catalog exposed all28 raw contents in full. Answers about omitted night/battery facts therefore cannot establish cache sufficiency.",
+    "alongside": [
+      "Night eligibility is generalized to depend only on night training.",
+      "One cancellation is generalized to universal credential independence.",
+      "Final day-route answer wrongly says night information is unavailable, despite full delivered raw evidence of completed night training."
+    ],
+    "structure_first": [
+      "Some answers infer female gender without source support.",
+      "Answers are shorter; packet vs free-form generation also differs."
+    ],
+    "raw_first": [
+      "Final unchanged-night answer also guesses female gender.",
+      "A one-word yes answers the current-night question using catalog information outside its admitted old raw body; all prompt text must count as exposure."
+    ],
+    "shared_ambiguity": "Session2/question3 conflates latest reported battery position with freshly confirmed physical position. Preserve every official label and mark author core judgement unresolved symmetrically."
+  },
+  "decision": "No demonstrated graph/cache advantage. The simpler raw-first condition gives the best official score in this one exposed history. Body opening counts are not information isolation; common candidate excerpts expose all short sources. Keep cache construction cost separate, and test stronger controls/new histories before scaling a graph claim.",
+  "independent_blind_review": false,
+  "official_scores_modified": false,
+  "prior_misroute": "innovation-v4-structure-delivery-v1-misroute.json",
+  "full_goal_complete": false
+}

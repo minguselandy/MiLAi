@@ -4,6 +4,8 @@ import json
 import sys
 from pathlib import Path
 
+import pytest
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
 from train_innovation_adapter import OBJECTIVES, render_target, token_weights
 
@@ -49,8 +51,9 @@ def test_missing_consequence_labels_are_not_trained_as_a_true_empty_answer():
         assert weights == [0.0]
 
 
+@pytest.mark.parametrize("format_name", ["indexed_separate", "indexed_sparse"])
 def test_indexed_preparation_separates_auxiliary_labels_from_native_edit_request(
-    tmp_path, monkeypatch
+    tmp_path, monkeypatch, format_name
 ):
     from prepare_innovation_sft import main
 
@@ -87,7 +90,7 @@ def test_indexed_preparation_separates_auxiliary_labels_from_native_edit_request
     }
     path.write_text(json.dumps(row) + "\n")
     monkeypatch.setattr(
-        sys, "argv", ["prepare", str(path), str(output), "--format", "indexed_separate"]
+        sys, "argv", ["prepare", str(path), str(output), "--format", format_name]
     )
     main()
     example = json.loads(output.read_text())
@@ -102,6 +105,40 @@ def test_indexed_preparation_separates_auxiliary_labels_from_native_edit_request
         {"training": None}
     ]
     assert auxiliary["target"] == {"consequences": row["consequence_targets"]}
+    if format_name == "indexed_sparse":
+        from milai_lab.methods.semantic_delta import compile_delta, indexed_target
+
+        assert "changes" not in example["target"]
+        assert compile_delta(example["target"], row["mapping"], indexed=True) == compile_delta(
+            indexed_target(row["delta_target"]), row["mapping"], indexed=True)
+
+
+def test_alias_augmentation_preserves_credential_target_and_remaining_training_route():
+    from augment_innovation_training import augment
+    from milai_lab.methods.semantic_delta import compile_delta
+
+    lab = Path(__file__).resolve().parents[2]
+    rows = [json.loads(line) for line in (
+        lab / "data/fixtures/milai-innovation-matched-training-v3.jsonl").read_text().splitlines()]
+    original = next(row for row in rows
+                    if row["example_id"] == "innovation-harbor-transition-1-reference")
+    before = json.dumps(original, ensure_ascii=False)
+    augmented = augment(original, {"杜桐": "柳澈", "湾口观测站": "溪岚观测站"}, 7, "variant")
+    clauses = {clause["id"]: clause for record in augmented["input"]["delivery"]["records"]
+               for clause in record["clauses"]}
+    proposal = compile_delta(augmented["delta_target"], augmented["mapping"])[0]
+    changed = proposal["edits"][0]
+    assert "柳澈" in clauses[changed["target_unit"]]["text"]
+    assert "有效年证" in clauses[changed["target_unit"]]["text"]
+    assert "注销" in changed["text"] and "柳澈" in changed["text"]
+    route = proposal["support_groups"][0]["alternatives"][0]
+    assert len(route) == 2
+    route_text = [clauses[alias]["text"] for alias in route]
+    assert any("安全培训" in text for text in route_text)
+    assert any("通行条" in text for text in route_text)
+    assert not any("年证" in text for text in route_text)
+    assert json.dumps(original, ensure_ascii=False) == before
+    assert augmented["provenance"]["owner"] == original["provenance"]["owner"]
 
 
 def test_learning_evaluation_clones_actual_state_and_restores_current_source_binding(
