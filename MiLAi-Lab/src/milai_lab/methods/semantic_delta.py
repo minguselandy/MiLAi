@@ -16,7 +16,9 @@ from milai_lab.memory.functional_state import FunctionalRejection
 
 INSTRUCTIONS = (
     "Express only the semantic changes supported by the delivered sources. Return the supplied "
-    "delta schema. bases names reusable source evidence and attribution; nodes refer to a basis. "
+    "delta schema. Each node's basis is an existing delivered e evidence reference, and kind "
+    "states its attribution (reported/inferred/observed/uncertain). also can add other delivered "
+    "e references needed to support the whole claim. "
     "creates contains new matters; changes is keyed by delivered record. replace changes an old "
     "u unit, append introduces a new n unit, withdraw removes a unit with cancellation evidence. "
     "Omitted units and support groups stay unchanged. Each node states one self-contained claim "
@@ -45,9 +47,6 @@ def delta_schema(mapping: dict[str, Any], *, allow_create: bool) -> dict[str, An
     evidence = list(mapping.get("evidence", {}))
     e = {"type": "string", "enum": evidence} if evidence else {"type": "string"}
     name = {"type": "string", "minLength": 1}
-    node = _object({"text": name, "basis": name}, ["text", "basis"])
-    new_node = _object({**node["properties"], "id": {"type": "string", "pattern": "^n[0-9]+$"}},
-                       ["id", "text", "basis"])
     applicability: dict[str, Any] = {"scope": name,
         "quantity_scope": {"enum": ["overall", "per_member"]}}
     dates = [item["id"] for item in mapping.get("time_choices", [])]
@@ -56,36 +55,40 @@ def delta_schema(mapping: dict[str, Any], *, allow_create: bool) -> dict[str, An
     for field in ("event_at", "effective_from", "effective_until"):
         if dates:
             applicability[field] = {"enum": dates + (ends if field == "effective_until" else [])}
-    basis = _object({"evidence": {"type": "array", "minItems": 1, "items": e},
-        "source": e, "kind": {"enum": ["reported", "inferred", "observed", "uncertain"]},
+    node = _object({"text": name, "basis": e,
+        "also": {"type": "array", "items": e},
+        "kind": {"enum": ["reported", "inferred", "observed", "uncertain"]},
         "applicability": _object(applicability, []),
         "evidence_links": _object({stance: {"type": "array", "items": e}
                                    for stance in ("supports", "opposes")}, [])},
-        ["evidence", "source", "kind"])
-    ref = {"type": "string", "pattern": "^[un][0-9]+$"}
-    rules = {"type": "array", "items": {"oneOf": [
-        _object({"target": ref, "all": {"type": "array", "items": ref},
-                 "any": {"type": "array", "items": {"type": "array", "items": ref}},
-                 "basis": name}, ["target", "all", "any", "basis"]),
-        _object({"target": ref, "remove": {"const": True}, "basis": name},
-                ["target", "remove", "basis"]),
-    ]}}
+        ["text", "basis", "kind"])
+    new_ref = {"type": "string", "pattern": "^n[0-9]+$"}
+    new_node = _object({**node["properties"], "id": new_ref}, ["id", "text", "basis", "kind"])
+
+    def rules(units: list[str] | None = None) -> dict[str, Any]:
+        ref = {"anyOf": [new_ref, {"enum": units}]} if units else new_ref
+        choices = [_object({"target": ref, "all": {"type": "array", "items": ref},
+            "any": {"type": "array", "items": {"type": "array", "items": ref}},
+            "basis": e}, ["target", "all", "any", "basis"])]
+        if units:
+            choices.append(_object({"target": {"enum": units}, "remove": {"const": True},
+                                    "basis": e}, ["target", "remove", "basis"]))
+        return {"type": "array", "items": {"oneOf": choices}}
     changes = {}
     for target in mapping.get("records", {}):
         units = {alias: node for alias, unit in mapping["units"].items()
                  if unit["record"] == target}
         changes[target] = _object({"replace": _object(units, []),
             "append": {"type": "array", "items": new_node},
-            "withdraw": _object({alias: name for alias in units}, []),
-            "rules": rules}, [])
+            "withdraw": _object({alias: e for alias in units}, []),
+            "rules": rules(list(units))}, [])
     return _object({
-        "bases": {"type": "object", "additionalProperties": basis},
         "creates": {"type": "array", "items": _object({"matter": name,
             "nodes": {"type": "array", "minItems": 1, "items": new_node},
-            "rules": rules}, ["matter", "nodes"]),
+            "rules": rules()}, ["matter", "nodes"]),
             **({"maxItems": 0} if not allow_create or not evidence else {})},
         "changes": _object(changes, []),
-    }, ["bases", "creates", "changes"])
+    }, ["creates", "changes"])
 
 
 def delta_messages(
@@ -104,19 +107,12 @@ def compile_delta(envelope: dict[str, Any], mapping: dict[str, Any]) -> list[dic
     """Normalize once; the existing proposal decoder and commit bind actual effects."""
     Draft202012Validator(delta_schema(mapping, allow_create=mapping["allow_create"])).validate(
         envelope)
-    bases: dict[str, dict[str, Any]] = envelope["bases"]
-
-    def basis_for(name: str) -> dict[str, Any]:
-        if name not in bases:
-            raise FunctionalRejection("DELTA_BASIS_UNAVAILABLE: " + name)
-        return bases[name]
-
     def claim(node: dict[str, Any]) -> dict[str, Any]:
-        basis = basis_for(node["basis"])
-        return {"text": node["text"], "evidence": copy.deepcopy(basis["evidence"]),
-            "assertion": {"source_evidence": basis["source"], "kind": basis["kind"],
-                **{key: copy.deepcopy(basis[key]) for key in ("applicability", "evidence_links")
-                   if key in basis}}}
+        return {"text": node["text"], "evidence": list(dict.fromkeys(
+            [node["basis"], *node.get("also", [])])),
+            "assertion": {"source_evidence": node["basis"], "kind": node["kind"],
+                **{key: copy.deepcopy(node[key]) for key in ("applicability", "evidence_links")
+                   if key in node}}}
 
     def groups(
         item: dict[str, Any], new: dict[str, int], target: str | None,
@@ -132,7 +128,7 @@ def compile_delta(envelope: dict[str, Any], mapping: dict[str, Any]) -> list[dic
         result = []
         for rule in item.get("rules", []):
             group: dict[str, Any] = {"target_unit": resolve(rule["target"]),
-                                    "evidence": copy.deepcopy(basis_for(rule["basis"])["evidence"])}
+                                    "evidence": [rule["basis"]]}
             if rule.get("remove"):
                 group["operation"] = "remove"
             else:
@@ -162,7 +158,7 @@ def compile_delta(envelope: dict[str, Any], mapping: dict[str, Any]) -> list[dic
         edits.extend({"operation": "append", "role": "content", **claim(node)}
                      for node in item.get("append", []))
         edits.extend({"operation": "retract", "target_unit": unit,
-                      "evidence": copy.deepcopy(basis_for(basis)["evidence"])}
+                      "evidence": [basis]}
                      for unit, basis in item.get("withdraw", {}).items())
         proposal = {"action": "edit", "target": target, "edits": edits}
         new = index(item.get("append", []))

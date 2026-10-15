@@ -4,6 +4,7 @@ import copy
 import json
 
 import pytest
+from jsonschema import ValidationError
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.memory.dependency_groups import support_status
@@ -20,10 +21,6 @@ def delta_method(service):
         features=EditFeatures(matter_organization=True, bound_references=True,
             source_metadata=True, temporal_scope=True, proposition_updates=True,
             dependency_groups=True, single_record_changes=True))
-
-
-def basis():
-    return {"b": {"evidence": ["e1"], "source": "e1", "kind": "reported"}}
 
 
 def test_one_call_delta_forms_shared_rule_then_preserves_non_target_and_history(tmp_path):
@@ -53,11 +50,12 @@ def test_one_call_delta_forms_shared_rule_then_preserves_non_target_and_history(
         texts = ["The card is valid.", "The voucher is valid.", "Training is complete.",
                  "Borrowing requires training and either a valid card or voucher.",
                  "Labels stay green."]
-        formed = run("form", " ".join(texts), {"bases": basis(), "creates": [{
+        formed = run("form", " ".join(texts), {"creates": [{
             "matter": "Borrowing", "nodes": [
-                {"id": f"n{i}", "text": text, "basis": "b"} for i, text in enumerate(texts)],
+                {"id": f"n{i}", "text": text, "basis": "e1", "kind": "reported"}
+                for i, text in enumerate(texts)],
             "rules": [{"target": "n3", "all": ["n2"], "any": [["n0"], ["n1"]],
-                       "basis": "b"}]}], "changes": {}}, [])
+                       "basis": "e1"}]}], "changes": {}}, [])
         assert formed["status"] == "completed", formed
         first = service.read(formed["receipts"][0]["id"])
         initial = copy.deepcopy(first["value"]["edit_state"])
@@ -68,9 +66,10 @@ def test_one_call_delta_forms_shared_rule_then_preserves_non_target_and_history(
         assert support_status(group, {ids[texts[0]]: False, ids[texts[1]]: None,
                                       ids[texts[2]]: True}) == "unknown"
         changed = run("card", "The card is invalid; the voucher and training still hold.", {
-            "bases": basis(), "creates": [], "changes": {"r1": {
-                "replace": {"u1": {"text": "The card is invalid.", "basis": "b"}},
-                "rules": [{"target": "u4", "all": ["u3"], "any": [["u2"]], "basis": "b"}]
+            "creates": [], "changes": {"r1": {
+                "replace": {"u1": {"text": "The card is invalid.", "basis": "e1",
+                                   "kind": "reported"}},
+                "rules": [{"target": "u4", "all": ["u3"], "any": [["u2"]], "basis": "e1"}]
             }}}, [first])
         assert changed["status"] == "completed", changed
         current = service.read(first["id"])["value"]["edit_state"]
@@ -86,37 +85,39 @@ def test_one_call_delta_forms_shared_rule_then_preserves_non_target_and_history(
 def test_new_aliases_bind_append_positions_and_rule_only_updates():
     mapping = {"allow_create": True, "evidence": {"e1": {}}, "records": {"r1": {}},
                "units": {"u1": {"record": "r1"}, "u2": {"record": "r1"}}}
-    payload = {"bases": basis(), "creates": [], "changes": {"r1": {
-        "replace": {"u1": {"text": "Credential expired.", "basis": "b"}},
-        "append": [{"id": "n7", "text": "A paper permit is valid.", "basis": "b"}],
-        "rules": [{"target": "u2", "all": [], "any": [["n7"]], "basis": "b"}]}}}
+    payload = {"creates": [], "changes": {"r1": {
+        "replace": {"u1": {"text": "Credential expired.", "basis": "e1", "kind": "reported"}},
+        "append": [{"id": "n7", "text": "A paper permit is valid.", "basis": "e1",
+                    "kind": "reported"}],
+        "rules": [{"target": "u2", "all": [], "any": [["n7"]], "basis": "e1"}]}}}
     proposal = compile_delta(payload, mapping)[0]
     assert proposal["support_groups"][0]["alternatives"] == [["n0"]]
     assert [edit["operation"] for edit in proposal["edits"]] == ["replace", "append"]
-    payload["changes"]["r1"] = {"rules": [{"target": "u2", "all": [], "any": [], "basis": "b"}]}
+    payload["changes"]["r1"] = {"rules": [{"target": "u2", "all": [], "any": [], "basis": "e1"}]}
     proposal = compile_delta(payload, mapping)[0]
     assert proposal["edits"] == [] and proposal["support_groups"][0]["alternatives"] == []
 
 
 @pytest.mark.parametrize("field,value,error", [
-    ("basis", "missing", "DELTA_BASIS_UNAVAILABLE"),
-    ("target", "n404", "DELTA_RULE_REFERENCE_UNAVAILABLE"),
+    ("basis", "missing", ValidationError),
+    ("target", "n404", FunctionalRejection),
 ])
 def test_unbound_names_never_become_persistent_ids(field, value, error):
     mapping = {"allow_create": True, "evidence": {"e1": {}}, "records": {}, "units": {}}
-    rule = {"target": "n1", "all": [], "any": [["n0"]], "basis": "b", field: value}
-    payload = {"bases": basis(), "creates": [{"matter": "test", "nodes": [
-        {"id": "n0", "text": "A", "basis": "b"},
-        {"id": "n1", "text": "B", "basis": "b"}], "rules": [rule]}], "changes": {}}
-    with pytest.raises(FunctionalRejection, match=error):
+    rule = {"target": "n1", "all": [], "any": [["n0"]], "basis": "e1", field: value}
+    payload = {"creates": [{"matter": "test", "nodes": [
+        {"id": "n0", "text": "A", "basis": "e1", "kind": "reported"},
+        {"id": "n1", "text": "B", "basis": "e1", "kind": "reported"}],
+        "rules": [rule]}], "changes": {}}
+    with pytest.raises(error):
         compile_delta(payload, mapping)
 
 
 def test_text_without_rules_and_no_change_are_legal():
     mapping = {"allow_create": True, "evidence": {"e1": {}}, "records": {}, "units": {}}
-    assert compile_delta({"bases": {}, "creates": [], "changes": {}}, mapping) == []
-    result = compile_delta({"bases": basis(), "creates": [{"matter": "Plan",
+    assert compile_delta({"creates": [], "changes": {}}, mapping) == []
+    result = compile_delta({"creates": [{"matter": "Plan",
         "nodes": [{"id": "n0", "text": "No date is confirmed for the proposed trip.",
-                   "basis": "b"}]}], "changes": {}}, mapping)
+                   "basis": "e1", "kind": "reported"}]}], "changes": {}}, mapping)
     assert "support_groups" not in result[0]
     assert result[0]["clauses"][0]["text"].startswith("No date")
