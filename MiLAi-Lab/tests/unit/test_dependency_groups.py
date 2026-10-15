@@ -7,7 +7,8 @@ import pytest
 from jsonschema import Draft202012Validator, ValidationError
 from langgraph.store.sqlite import SqliteStore
 
-from milai_lab.memory.dependency_groups import support_status
+from milai_lab.memory.dependency_groups import apply_support_groups, support_status
+from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.dependency_memory import (
     dependency_region,
@@ -33,6 +34,24 @@ def test_or_of_and_has_no_single_premise_or_unknown_shortcut():
         "unsupported")
     assert support_status(group, {"card": False, "voucher": None, "training": True}) == "unknown"
     assert support_status({"alternatives": []}, {}) == "unsupported"
+
+
+def test_removing_a_deleted_base_units_group_is_cleanup_not_a_new_dangling_group():
+    old = {"units": [{"unit_id": "premise"}, {"unit_id": "target"}], "relations": [],
+           "support_groups": [{"group_id": "g", "target_unit": "target",
+                               "alternatives": [["premise"]], "evidence_refs": []}]}
+    current = {"units": [{"unit_id": "premise"}], "relations": [],
+               "support_groups": old["support_groups"]}
+    apply_support_groups(current, [{"operation": "remove", "target": {"existing": "target"},
+                                   "evidence_refs": []}], old=old)
+    assert current["support_groups"] == []
+    assert old["support_groups"][0]["target_unit"] == "target"
+    with pytest.raises(FunctionalRejection, match="EDIT_SUPPORT_UNIT_UNAVAILABLE"):
+        apply_support_groups(current, [{"operation": "set", "target": {"existing": "target"},
+            "alternatives": [[{"existing": "premise"}]], "evidence_refs": []}], old=old)
+    with pytest.raises(FunctionalRejection, match="EDIT_SUPPORT_UNIT_UNAVAILABLE"):
+        apply_support_groups(current, [{"operation": "remove",
+            "target": {"existing": "never-in-this-base"}, "evidence_refs": []}], old=old)
 
 
 def test_groups_form_with_clause_indexes_and_survive_local_retraction(tmp_path: Path):

@@ -1,3 +1,34 @@
+# Current evidence: E2/E3 CLOSED; W3 LIVE; cleanup fix replayed
+
+Goal ACTIVE/incomplete. Original E2 exec29617/driver141865 CLOSED0; original E3
+exec60980/supervisor247480 CLOSED0. Do NOT rerun/rescore them. W3 exec84404 isLIVE,
+supervisor420999/worker571471, frozen15319207; inspect queue.json/PIDs before newHTTP.
+E2 firstQA: plain40C/2Omission/1H/5invalid; candidate40C/1Omission/1H/1invalid/5missing.
+Candidate5miss are dependency-selector length. Also4Editorlength incl walk formation,
+1EDIT_SUPPORT_ROUTE_INVALID. Plain1time-source reject. Predict403917 vs801695(+98.5%).
+FullE2 325gen1449622 +207emb11707; exactledger,newunknown0,floors9/1 retained.
+All48postupdate states reviewed bysameSourceauthor: strictUJS12/24 vs13/24;
+target+preservation18/24 vs14/24. ClusterCI wide, no advantage/NI claim. Full per-event
+annotations in screening-v1-summary. QA SOURCE REVIEW ONLY maps/kiln COMPLETE;
+remaining10chains still require full symmetric answer review. Kiln staleSummer answer
+had all3Sources incl actualQiao update delivered/opened/resident; source mix failed rescue.
+E3 original35/36answers,1knownselectorfail; recordvaluesunchanged. NEED fullreview/costs.
+Observed duplicatecleanup bugs FIXED in development: repeated base-unit deletion
+idempotent after evidence validation; support-group remove permits a base target already
+removed in same proposal. Unknown IDs, new group on deleted target, replace/retract
+conflicts still reject.100tests15.78s,Ruff,2filemypy,boundaries pass.
+Actual firstU0/U1 proposals replayed VERBATIM on realbankCOPIES: both cancel exception,
+keepgeneral/registration/oldrevision;0newHTTP/nooriginalwrites/noregrading. See cancel-
+cleanup-replay-v1. Running W3 source unchanged. Need freeze and symmetric REALrepeat
+later; deterministic replay is engineering feedback, not model quality evidence.
+Existing-group grammar probe: canonical key order accepted; unsorted rejected bydefault
+but accepted any_orderTrue. Not a new edit-branch generation defect;0HTTP probe.
+Also identified for later development: changed TARGET meaning can leave old support
+route attached without a target-specific pending marker; only changedpremises currently
+flagged. No target-marker change implemented yet. Cross-record/W4/W5/strongcontrols/
+external/extra model+longhistory and final scientific audit remain. Never callcomplete now.
+Prior snapshots below are historical.
+
 # Current development: W3 prepared; E2 plain live; E3 queued
 
 Goal ACTIVE/incomplete. E2 candidate141879 CLOSED0 at03:42:59UTC:36events,

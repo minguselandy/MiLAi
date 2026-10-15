@@ -474,6 +474,23 @@ def test_atomic_multiple_targets_reject_overlap_without_partial_write(tmp_path):
         assert service.read(saved["id"])["value"] == original
 
 
+def test_repeated_retraction_still_validates_its_evidence(tmp_path):
+    with opened(tmp_path, "M") as (service, method):
+        source = incoming(service, "first", "A report with a scoped condition.")
+        saved = initial(method, source, conditioned=True)
+        record = service.read(saved["id"])
+        original = copy.deepcopy(record["value"])
+        target = original["edit_state"]["units"][0]["unit_id"]
+        correction = incoming(service, "withdraw", "Withdraw that report.")
+        with pytest.raises(FunctionalRejection):
+            method.apply("session", "invalid-second-removal", proposal(record, [
+                {"operation": "retract", "target_unit": target, "evidence": [correction]},
+                {"operation": "retract", "target_unit": target,
+                 "evidence": ["not-an-evidence-handle"]},
+            ]))
+        assert service.read(saved["id"])["value"] == original
+
+
 def test_prepare_delivers_only_current_range_and_persists_exact_evidence(tmp_path):
     with opened(tmp_path, "B1") as (service, method):
         old = incoming(service, "first", "Historical original material. " * 1000)

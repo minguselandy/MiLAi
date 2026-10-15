@@ -331,6 +331,7 @@ def apply_local(
     units, relations = state["units"], state["relations"]
     original_ids = {unit["unit_id"] for unit in units}
     targeted = set()
+    removed = set()
     if assertions is not None and len(assertions) != len(edits):
         raise FunctionalRejection("EDIT_ASSERTION_COMPILATION_INVALID")
     for edit_index, edit in enumerate(edits):
@@ -341,6 +342,13 @@ def apply_local(
             else {"replace", "insert", "delete"}
         ):
             raise FunctionalRejection("EDIT_OPERATION_NOT_AVAILABLE_IN_ARM")
+        if edit.operation in {"delete", "retract"} and edit.target_unit in removed:
+            # Repeated cleanup of a target deleted by this same proposal has
+            # one effect. Its declared evidence and operation still must be valid.
+            source_evidence(service, edit.evidence)
+            if edit.text is not None or edit.condition is not None:
+                raise FunctionalRejection("EDIT_RETRACTION_HAS_NEW_TEXT")
+            continue
         by_id = {unit["unit_id"]: unit for unit in units}
         target = by_id.get(edit.target_unit)
         needs_target = edit.operation in {"replace", "delete", "retract", "override"}
@@ -360,6 +368,7 @@ def apply_local(
             relations[:] = [
                 r for r in relations if edit.target_unit not in {r["source_unit"], r["target_unit"]}
             ]
+            removed.add(edit.target_unit)
             continue
         if not isinstance(edit.text, str) or not edit.text.strip():
             raise FunctionalRejection("EDIT_NEW_TEXT_REQUIRED")

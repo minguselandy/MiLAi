@@ -895,7 +895,8 @@ def test_next_contract_actual_enums_no_unavailable_branches_and_legacy_envelope(
         assert legacy.envelope_proposals(mixed, old["mapping"]) == mixed["proposals"]
 
 
-def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_path):
+@pytest.mark.parametrize("repetitions", [1, 2])
+def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_path, repetitions):
     with opened(tmp_path) as (service, _):
         method = EditMemory(service, "M", interface_version="I2", features=NEXT_FEATURES)
         saved, _ = next_save(service, method, conditioned=True)
@@ -1021,12 +1022,15 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         )
         remove = {
             "action": "edit",
-            "edits": [{"operation": "remove_exception", "target_unit": "u3", "evidence": ["e1"]}],
+            "edits": [{"operation": "remove_exception", "target_unit": "u3",
+                       "evidence": ["e1"]}] * repetitions,
         }
         decoded = method.decode_envelope(
             {"creates": [], "records": {"r1": remove}}, view["mapping"]
         )[0]
-        assert len(decoded["edits"]) == len(decoded["_edit_metadata"]["unit_assertions"]) == 2
+        assert len(decoded["edits"]) == len(decoded["_edit_metadata"]["unit_assertions"])
+        assert sum(edit["target_unit"] == state["units"][2]["unit_id"]
+                   for edit in decoded["edits"]) == repetitions
         receipt = method.apply("s", "remove", decoded)
         now = service.read(saved["id"])["value"]["edit_state"]
         assert receipt["revision"] == 3 and now["units"] == state["units"][:2]

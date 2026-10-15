@@ -1,0 +1,3368 @@
+{
+  "status": "PREDICTIONS_AND_FIRST_SCORES_CLOSED",
+  "source_commit": "463b5182",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/screening-v1",
+  "driver": {
+    "source_commit": "463b5182",
+    "configuration_data_commit": "7b336663",
+    "driver_pid": 141865,
+    "started_at": "2026-10-15T02:51:30.818781+00:00",
+    "steps": [
+      {
+        "arm": "candidate",
+        "phase": "predict",
+        "pid": 141879,
+        "started_at": "2026-10-15T02:51:30.841908+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T03:42:59.449880+00:00"
+      },
+      {
+        "arm": "plain",
+        "phase": "predict",
+        "pid": 336636,
+        "started_at": "2026-10-15T03:42:59.451229+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T04:09:29.818030+00:00"
+      },
+      {
+        "arm": "candidate",
+        "phase": "score",
+        "pid": 436091,
+        "started_at": "2026-10-15T04:09:29.821831+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T04:16:43.332136+00:00"
+      },
+      {
+        "arm": "plain",
+        "phase": "score",
+        "pid": 463347,
+        "started_at": "2026-10-15T04:16:43.349585+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T04:25:28.748957+00:00"
+      }
+    ],
+    "chains": 12,
+    "families": 6,
+    "events_per_arm": 36,
+    "questions_per_arm": 48,
+    "independent_formation": true,
+    "read_usage_updates": false,
+    "qa_rubric": "first official HaluMem rubric on authored development data; not external benchmark results",
+    "unknown_retry": false,
+    "claim": "mechanism screening; no isolated U/R attribution or graph-formation assumption",
+    "status": "PREDICTIONS_AND_FIRST_SCORES_CLOSED",
+    "closed_at": "2026-10-15T04:25:28.749447+00:00"
+  },
+  "data_role": "12 authored development chains; official HaluMem QA rubric, not external benchmark scores",
+  "arms": {
+    "plain": {
+      "prediction_terminal": {
+        "status": "PREDICTIONS_SAVED",
+        "phase": "predict",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "PREDICTIONS_SAVED",
+          "sessions": 36,
+          "judge_calls": 0,
+          "complete_answers": 48,
+          "known_reader_failures": 0
+        },
+        "resources_settled": true
+      },
+      "score_terminal": {
+        "status": "SCORED",
+        "phase": "score",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "SCORED_SAVED_PREDICTIONS",
+          "backend": "MiLAi-memory-only",
+          "protocol": {
+            "name": "milai-method-architecture-screening-plain-v1",
+            "track": "common-conditions",
+            "backends": [
+              "MiLAi-memory-only"
+            ],
+            "history_protocol": "halumem-online-prefix",
+            "source_policy": "source-only",
+            "qa_top_k": 20,
+            "update_top_k": 10,
+            "delivery": "direct",
+            "raw_access": "original-history-for-RawRAG; independently-retrieved-visible-original-Sources-plus-linked-supports-and-fitting-semantic-views-for-MiLAi",
+            "rawrag": {
+              "granularity": "session"
+            },
+            "native_answer": "separate-optional-not-main-QA",
+            "prediction_scoring": "explicit-selected-arm-score-after-saved-predictions-and-resource-closure",
+            "unknown_retry": false,
+            "write_test_answers_back": false,
+            "resource_owner": "Root; existing continuous ledger; serial model dispatch",
+            "external_internal_usage": "unobserved unless actual native usage is available; not zero",
+            "claim": "Twelve authored development chains, six mechanism families, independently formed states. Same questions, source access, model, and budgets; no read-usage feedback. Not external benchmark or isolated U/R attribution."
+          },
+          "correct": 40,
+          "opportunities": 48,
+          "missing": 0,
+          "labels": {
+            "Correct": 40,
+            "invalid": 5,
+            "Omission": 2,
+            "Hallucination": 1
+          },
+          "per_user": {
+            "method-screen-maps": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-kiln": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-archive": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-studio": {
+              "correct": 2,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 1
+            },
+            "method-screen-tickets": {
+              "correct": 3,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-projection": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-walk": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-exhibit": {
+              "correct": 3,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-inventory": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-credits": {
+              "correct": 3,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 1
+            },
+            "method-screen-reservation": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-parcel": {
+              "correct": 1,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 3
+            }
+          },
+          "backend_capabilities": {
+            "session_output": "supported",
+            "reference_update_state": "supported-isolated-view"
+          },
+          "official_labels": "unchanged; source conflicts require separate evidence review",
+          "semantic_advantage": "unchecked",
+          "native_answer_result": null
+        },
+        "resources_settled": true
+      },
+      "first_qa_labels": {
+        "Correct": 40,
+        "invalid": 5,
+        "Omission": 2,
+        "Hallucination": 1
+      },
+      "first_qa_records": [
+        {
+          "uuid": "method-screen-maps",
+          "ssession_id": 1,
+          "question": "6月4日和5日应去哪一柜取地图？",
+          "system_response": "\n\n根据记忆中的用户报告（来源s0/e0，明确标注有效起始条件为2032年6月5日），地图存放位置按日期规定如下：\n- **6月4日**：属于“5日之前”的时间范围，地图仍在**二号柜**。\n- **6月5日**：自该日起声明生效，地图统一搬到**七号柜**。\n\n综上，6月4日应去二号柜取地图，6月5日应去七号柜取地图。该结论直接依据记忆内用户提供的有效时间范围得出。此为用户所述信息，具有明确的时间效力。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-maps",
+          "ssession_id": 1,
+          "question": "报刊在哪里，室内翻阅地图需要登记吗？",
+          "system_response": "\n\n根据提供的记忆材料（基于公开用户消息 s0 与 s1 的报告断言）：\n\n* **报刊位置**：报刊放在**五号柜**。\n* **室内翻阅地图登记要求**：**不需要登记**。\n\n**时间与适用条件说明**：\n上述规则明确适用于您提问的时间（**2032年6月2日**）。地图统一搬迁至七号柜的规定自**2032年6月5日起**生效，在此之前（含6月2日）地图仍位于二号柜；报刊位置与室内翻阅登记规定在此期间保持原样。\n\n*(注：以上信息为源记录中的报告断言，未提供外部事实认证，具体执行请以实际现场或最新官方公告为准。)*",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-maps",
+          "ssession_id": 2,
+          "question": "6月3日标签已贴好后，地图已经搬到七号柜了吗？",
+          "system_response": "\n\n根据提供的记忆资料，6月3日标签贴好后，地图**尚未**搬到七号柜。\n\n资料明确报告称，6月3日贴好新标签仅是准备工作完成，“不提前搬地图”，搬迁日仍为**6月5日**。因此，在6月3日当天，地图仍存放在二号柜；该搬迁安排自6月5日起才正式生效，届时地图才统一移至七号柜。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-maps",
+          "ssession_id": 2,
+          "question": "地图搬迁影响报刊位置或借出登记规定吗？",
+          "system_response": "\n\n根据提供的记忆材料，地图搬迁**不影响**报刊位置或借出登记规定。\n\n资料明确记载（来源s0，用户消息，于2032年6月2日报送）：“从2032年6月5日起，地图统一搬到七号柜；5日之前还在二号柜。**报刊位置和登记规定保持原样。**”该报告指出，本次搬迁仅涉及地图的存放位置调整，报刊的存放位置以及借出地图需登记、室内翻阅不用登记的相关规定均不会因搬迁而改变。该声明适用于自2032年6月5日起执行的搬迁安排。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-kiln",
+          "ssession_id": 1,
+          "question": "白鹭窑现在由谁负责，夏禾是否继续值班？",
+          "system_response": "\n\n根据提供的记忆内容（e1）：\n\n1. **白鹭窑**自2032年6月2日起由**乔原**负责。\n2. **夏禾**已**退出**该窑值班。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-kiln",
+          "ssession_id": 1,
+          "question": "青砾窑负责人和两个窑的钥匙保管处是什么？",
+          "system_response": "\n\n根据提供的记忆材料（记录于2026年10月15日的公开用户消息）：\n- **青砾窑负责人**：叶初。\n- **两个窑的钥匙保管处**：前台。\n\n（注：材料中明确记载“青砾窑仍归叶初”“两个窑的钥匙均由前台保管”，并补充说明“钥匙不跟随值班人转交”。因提供的记忆仅包含2026年10月15日的信息，无法确定2032年6月2日的实际状态或此后是否有变更。）",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-kiln",
+          "ssession_id": 2,
+          "question": "乔原外出那天的代班人已定了吗，现在由谁负责？",
+          "system_response": "\n\n根据提供的源记录，回答如下：\n\n1. **代班人是否已定**：根据2032年6月3日的用户留言记录，乔原下周外出一天的代班人**尚未定**。\n2. **现在由谁负责**：根据2032年6月2日的用户通知，白鹭窑自该日起已改由**乔原**负责（夏禾退出该窑值班），青砾窑仍由**叶初**负责。6月3日的记录同时确认，目前“没有调整白鹭窑已经生效的安排”。因此，当前的窑位值班状态保持生效，对应窑位仍由上述人员负责。\n\n以上信息严格基于所交付的源历史记录；代班人的后续安排及状态变更请以实际更新为准。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-kiln",
+          "ssession_id": 2,
+          "question": "我用什么颜色的本子，钥匙是否随值班人转交？",
+          "system_response": "\n\n根据记忆材料中您的陈述：\n\n- **本子颜色**：您记录作品编号时使用**蓝色本子**。\n- **钥匙转交**：钥匙**不**随值班人转交（两个窑的钥匙均由前台保管）。您于此前声明该规则自2032年6月2日起生效，截至本次查询时间（2032年6月3日）仍在适用范围内，材料中无其他变更或例外记录。\n\n以上信息均直接引用自您提交的公开用户消息记录。如后续值班安排或记录规范有调整，请以最新声明为准。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-archive",
+          "ssession_id": 1,
+          "question": "公开课学员练习复印件和阅览原稿分别要戴手套吗？",
+          "system_response": "\n\n根据所给资料（报告于2026年10月15日）：\n- **阅览纸本原稿**：仍须戴手套。\n- **公开课学员练习复印件**：可不戴手套。\n\n**适用条件与说明**：\n该规则明确限定为**“只在本次公开课期间”**有效。由于资料未提供该公开课的具体起止日期，无法确定查询时间（2032年6月2日）是否处于该豁免期内。若处于该期间，则上述要求适用；若处于该期间之外，纸本原稿与各类复印件在室内阅览均须戴手套。此外，外借任何纸本均须登记的规定在此期间亦未放宽。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-archive",
+          "ssession_id": 1,
+          "question": "其他复印件与外借登记规则是否一起放宽？",
+          "system_response": "\n\n根据提供的记录，**并未一起放宽**。\n\n来源明确指出：仅在本次公开课期间供学员练习的复印件可不戴手套，**其他复印件也仍须戴手套**；同时明确记载**外借登记规定没有放宽**。\n\n因此，其他复印件的阅览要求与外借登记规则均维持原状，不存在一起放宽的情况。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-archive",
+          "ssession_id": 2,
+          "question": "公开课结束后练习复印件要戴手套吗，为何改变？",
+          "system_response": "\n\n根据记忆材料中的公开用户消息报道，回答如下：\n\n1. **公开课结束后练习复印件是否需要戴手套**：需要戴手套。\n2. **为何改变**：根据6月1日的报道，纸艺档案室的通常阅览规则为“纸本原稿与复印件在室内阅览均须戴手套”。6月2日的报道补充了临时例外：“只在本次公开课期间，供学员练习的复印件可不戴手套”。6月3日（公开课当日）的报道记录显示，随着公开课结束，该项“免戴手套的临时安排已撤回”，因此规则恢复至通常的阅览标准，练习复印件也就需要重新戴手套。\n\n以上结论均基于已交付的源报道时间与条款范围，未引入外部推断。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-archive",
+          "ssession_id": 2,
+          "question": "数字副本和外借纸本各有什么要求？",
+          "system_response": "\n\n根据提供的档案室记录（用户公开消息报告/声明），针对纸艺档案室的要求如下：\n\n* **数字副本**：室内阅览时**不用戴手套**。\n* **外借纸本**：**外借任何纸本都须登记**。\n\n**时效与适用条件说明**：\n上述为档案室的通常阅览与外借规则。材料显示，随着2032年6月3日公开课结束，供练习复印件免戴手套的临时安排已撤回并恢复通常规则；同时明确指出“外借登记规定没有放宽”。截至提问时间（2032年6月3日 09:00:00），上述要求持续有效。\n\n现有材料未提供关于数字副本或外借纸本的其他特殊规定、例外条件或扩展要求，无法从所交付材料中确定更多信息。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-studio",
+          "ssession_id": 1,
+          "question": "周五八点半录音间和练习间能开外放吗？",
+          "system_response": "\n\n根据记忆中的报告，本周五的设备测试有特定安排：\n- **录音间**：仅允许在晚上八点到九点开外放，因此八点半**可以**开外放。\n- **练习间**：没有例外规定，因此八点半**不可以**开外放。\n\n综上，周五八点半录音间能开外放，练习间不能。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-studio",
+          "ssession_id": 1,
+          "question": "周五九点半录音间可用外放吗，耳机呢？",
+          "system_response": "\n\n根据已交付的记忆材料：\n\n- **外放**：周五九点半**不可用**。记忆中的周五安排明确指出，录音间仅允许在八点到九点开外放，九点后恢复禁用。九点半已超出该例外允许时段，适用常规禁用规定。\n- **耳机**：**可用**。记忆中的常规规定明确录音间内耳机可用，该规则在无特殊限制的情况下持续有效，因此周五九点半可以使用耳机。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-studio",
+          "ssession_id": 2,
+          "question": "测试取消后周五八点半录音间还能开外放吗？原例外是什么？",
+          "system_response": "\n\n根据您提供的记忆材料，回答如下：\n\n- **测试取消后周五八点半录音间还能开外放吗？**\n  **不能。** 材料中用户声明（s0）明确指出：“周五设备测试取消，因此录音间当晚八点到九点的外放例外也取消。”八点半（20:30）位于该被取消的时段内，因此录音间恢复“晚上八点后禁用外放音箱”的常规规定，不可使用外放。\n\n- **原例外是什么？**\n  原例外为：“本周五的设备测试只允许录音间在八点到九点开外放”（即20:00至21:00期间，录音间可临时豁免常规禁外放限制；练习间始终无此例外）。该例外随设备测试的取消而同时失效。\n\n以上结论仅基于您提供的源声明（s0-s2）及修订记录提取，未引入外部信息或推断。",
+          "result_type": null,
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-studio",
+          "ssession_id": 2,
+          "question": "控制室和借用线材的规定有没有改变？",
+          "system_response": "\n\n根据提供的记忆材料：\n- **控制室规定**：材料e0（用户报告）明确指出控制室规定“不变”。\n- **借用线材规定**：材料e1（u2单元）仅载明了现行要求，即“每次借用的线材都要归还前台”。材料中未提及该项规定发生过调整或改变。\n\n综上，基于现有材料可以确定控制室规定未发生改变；关于借用线材的规定，材料中仅记录了当前要求，未提供变更或调整的相关信息，因此无法从所给材料中确定借用线材的规定是否有改变。",
+          "result_type": "Omission",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-tickets",
+          "ssession_id": 1,
+          "question": "社员证失效后陆笙还能入场并参加讨论吗？",
+          "system_response": "\n\n根据提供的记忆材料：\n- 星幕电影社的入场规则为：可使用当月社员证或当场签名的邀请函（任选一种）；参加映后讨论须额外预约。\n- 2026年10月15日的一段记录（报告/推断）指出，陆笙的社员证虽当月失效，但其已签名邀请函与讨论预约仍然有效，因此当时她仍可凭邀请函入场并参加讨论。\n\n由于上述内容均记录于2026年，且材料中未说明邀请函、讨论预约的有效期限制，亦未提供截至2032年6月2日的规则修正或状态更新信息。因此，无法仅凭现有材料确定在2032年6月2日该时间点，陆笙在社员证失效后是否仍能入场并参加讨论。",
+          "result_type": "Hallucination",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-tickets",
+          "ssession_id": 1,
+          "question": "孟棠能入场和参加讨论吗，海报是什么颜色？",
+          "system_response": "\n\n根据记忆中的源陈述（用户s0，报告于2032-06-01）：\n- **孟棠能否入场**：能。该来源断言星幕电影社入场凭据为当月社员证或当场签名的邀请函（任选其一），孟棠持有有效社员证，符合入场条件。\n- **孟棠能否参加讨论**：不能。该来源明确“参加映后讨论另须预约”，并指出孟棠未预约，因此不具备讨论参与资格。\n- **海报颜色**：海报印为银色。\n\n以上结论严格依据所交付断言中的规则与状态陈述，未检测到其他修正、例外或适用时间冲突。如源信息未作更新，则按此状态适用。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-tickets",
+          "ssession_id": 2,
+          "question": "陆笙取消预约后，入场和参加讨论的资格分别怎样？",
+          "system_response": "\n\n根据提供的记忆材料：\n\n- **入场资格**：依然有效。依据星幕电影社规则（来源s2），入场可使用当月社员证或当场签名的邀请函，任选一种。陆笙的社员证虽本月失效，但其邀请函继续有效（来源s0/s1），因此仍可凭邀请函入场。\n- **参加讨论资格**：已取消。映后讨论须另行预约（来源s2），陆笙已明确取消该预约（来源s0/s1），因此不再具备参加讨论的资格，仅可观看放映。\n\n结论：取消预约后，陆笙凭有效邀请函保留入场资格，但失去参加映后讨论的资格。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-tickets",
+          "ssession_id": 2,
+          "question": "陆笙失效的是什么凭据，孟棠的预约情况有改变吗？",
+          "system_response": "\n\n根据交付的记忆材料，回答如下：\n\n1. **陆笙失效的凭据**：**社员证**。来源 e1（语义视图 u0）、e2 及 e3 均为原始用户消息或基于该消息生成的语义视图，报告/断言“陆笙的社员证本月失效”。（当前查询时间为 2032年6月3日）\n2. **孟棠的预约情况**：**未发生改变**。历史来源 e3 报告孟棠“只有有效社员证、未预约”；最新来源 e0（发生于 2032-06-03）为公开用户消息，明确声明“孟棠的资料未变”。因此，其未预约的状态/情况保持不变。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-projection",
+          "ssession_id": 1,
+          "question": "市电停用后投影还能开吗，靠什么？",
+          "system_response": "\n\n根据记忆材料（源s0及语义视图e1的记录），市电停用后投影**仍可开启**。\n\n**依靠供电**：改靠**车上的大电池**供电。\n\n**运行条件**：材料明确指出，投影无论使用市电还是电池供电，**都必须保证冷却风扇正常运转**（记录显示当前风扇仍正常）。字幕屏则单独使用小电池，不依赖该系统。\n\n该状态对应2032年6月2日的报告记录。以上结论仅基于所交付材料中的陈述。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-projection",
+          "ssession_id": 1,
+          "question": "市电停用会使字幕屏停用吗？",
+          "system_response": "\n\n不会。根据提供的记录，字幕屏由单独的小电池供电，不依赖投影系统的市电或冷却风扇。因此，市电停用时字幕屏不受影响，不会停用。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-projection",
+          "ssession_id": 2,
+          "question": "风扇停转而大电池有电时能开投影吗，为什么？",
+          "system_response": "\n\n根据提供的记录，**不能**。\n\n**原因**：根据观测报告，移动放映车开启投影（无论选择市电还是大电池供电）的必需条件是**两种方式都必须有冷却风扇运转**。在风扇恢复运转之前，即使大电池仍有电量，系统也不允许打开投影。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-projection",
+          "ssession_id": 2,
+          "question": "字幕屏现在能否继续运行，它也依赖同一个风扇吗？",
+          "system_response": "\n\n根据您提供的记忆记录，回答如下：\n\n1. **字幕屏现在能否继续运行**：**可以**。记录明确指出，在冷却风扇停止运转后，“字幕屏的小电池和运行状态没有变化”，说明其运行未受风扇停转影响，目前仍可继续运行。\n2. **是否依赖同一个风扇**：**不依赖**。记录明确说明“字幕屏单独用小电池，不依赖这套风扇”，其供电与运行独立于移动放映车的冷却风扇系统。\n\n综上，字幕屏目前仍可维持原有运行状态，且依靠自身独立的小电池供电，不依赖该车的主冷却风扇。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-walk",
+          "ssession_id": 1,
+          "question": "栈桥封闭后湖边和屋顶路线各能否开展？",
+          "system_response": "\n\n根据交付的记忆材料（source_history）：\n\n- **湖边路线**：**不能开展（暂停）**。据源s1于2032-06-02 09:00:00的报告状态指出“栈桥临时封闭”；结合源s0的报告规则“湖边路线同时要求栈桥开放与向导到场”，因栈桥开放条件已不满足，故该路线暂停。\n- **屋顶路线**：**可以开展**。据源s1同日报告状态指出“向导仍已到场”；结合源s0报告规则“屋顶路线只要求向导到场”，所需条件已满足，故该路线可以继续。\n\n以上结论严格依据所交付记忆中的规则陈述（源s0）与当日状态报告（源s1），未作额外推断或补充假设。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-walk",
+          "ssession_id": 1,
+          "question": "室内标本展示是否随湖边路线一起暂停？",
+          "system_response": "\n\n根据来源s1的报告，室内标本展示**不随湖边路线一起暂停**。\n\n材料明确指出，虽然因栈桥临时封闭导致“湖边路线暂停”，但“室内展示照常”进行。室内标本展示本身不依赖向导到场，其开展条件未受栈桥封闭的影响，因此状态保持照常。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-walk",
+          "ssession_id": 2,
+          "question": "向导离开后两条路线状态如何，原因分别是什么？",
+          "system_response": "\n\n根据已交付的记忆材料，向导离开后两条路线的状态及原因如下：\n\n1. **屋顶路线**\n   - **状态**：暂停。\n   - **原因**：根据来源s0（e0）的陈述规则，屋顶路线仅要求“向导到场”。来源s1（e2）作为后续观测报告明确指出，向导随后离开，屋顶路线也随之暂停。因向导缺位，该唯一必要条件不再满足。\n\n2. **湖边路线**\n   - **状态**：暂停。\n   - **原因**：根据来源s0（e0）规则，湖边路线需“同时要求栈桥开放与向导到场”。来源s1（e2）报告此时“栈桥仍封闭”，且向导已离开，两项并列条件均不满足，故该路线维持暂停状态（来源s2/e3此前已因栈桥封闭记录其暂停）。\n\n*注：室内标本展示不依赖向导，因此继续开放。以上状态与归因严格基于交付的源消息、规则声明与观测记录，未引入外部因果或假设。若需特定时间点的绝对状态，受限于交付材料的记录范围，此处仅反映所述情境下的逻辑结果。*",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-walk",
+          "ssession_id": 2,
+          "question": "室内展示还有没有开放？",
+          "system_response": "\n\n根据记忆记录，室内展示**照常（开放）**。\n\n依据2032年6月2日左右的最新报告（e1/s1），明确陈述“室内展示照常。”该记录未设定有效截止时间或关闭条件，且无后续修正说明，因此截至您提问的时间（2032年6月3日）仍适用。此外，2026年10月15日的早期记录（e0/s0）也曾确认“室内展示继续开放。”\n\n基于现有资料，在提问时间点室内展示仍保持开放状态。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-exhibit",
+          "ssession_id": 1,
+          "question": "防晒帘损坏后原件和照片分别是否继续展示？",
+          "system_response": "\n\n根据资料中的展示规则与后续记录：\n- **原件**：不继续展示（需撤下）。资料明确原件展示条件为“防晒帘完好且照度合格”，防晒帘损坏/撕裂后已不满足该条件。\n- **照片**：继续展示。资料指出照片仅要求“照度合格”，在照度仍合格的情况下可继续展出。\n\n上述结论直接依据资料中关于橙厅展柜展示条件及防晒帘状况变更后的具体处理说明。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-exhibit",
+          "ssession_id": 1,
+          "question": "电子目录是否关闭，照度是否因帘坏就不合格？",
+          "system_response": "\n\n根据提供的记忆材料，针对您的两个问题回答如下：\n\n1. **电子目录是否关闭**：**未关闭**。来源 `s0`（2032-06-01 报告/观察）与 `s1`（2032-06-02 观察）均明确指出“电子目录一直开放/照常”，并强调其“与展柜条件无关”。\n\n2. **照度是否因帘坏就不合格**：**不会**。材料 `s1` 明确记录了“防晒帘撕裂，照度检测仍合格”的实际情形；同时 `s0` 指出展柜展示条件是“防晒帘完好**且**照度合格”，说明帘况与照度是两项独立的判定标准。因此，即使防晒帘损坏，照度仍按其独立检测结果判定，并不因帘坏而自动视为不合格。\n\n以上结论均严格基于所交付的来源 `s0` 与 `s1` 的陈述，未引入外部规则或推测。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-exhibit",
+          "ssession_id": 2,
+          "question": "帘修好但照度不合格后原件和照片可展吗？",
+          "system_response": "\n\n根据提供的记忆记录，**原件和照片均不可展**。\n\n- **直接情形报告**：来源s0（e0）明确报告了该状态下的处理结论：“防晒帘修好，但照度检测这时不合格；原件仍不能展，照片也要撤下。电子目录不变。”\n- **规则对照**：来源s2（e2）陈述了展陈条件：“橙厅展柜能展示原件的条件是防晒帘完好且照度合格；壁面照片只要求照度合格。”在当前“帘已修好但照度不合格”的条件下，照度这一必要前提未满足，因此两项实体均不符合展出要求。\n- **附加说明**：电子目录的开放状态与展柜条件无关，记录中显示其保持不变（持续开放）。\n\n上述结论严格基于交付的源文本（s0、s2）及其语义视图（e0、e2）中的报告与规则说明。未从所给材料中识别到覆盖该情形的例外或修正信息。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-exhibit",
+          "ssession_id": 2,
+          "question": "防晒帘现在是否完好，电子目录状态如何？",
+          "system_response": "\n\n根据提供的记忆材料，所有证据均为**2026年10月15日**的**报告（reported）**记录，未提供状态延续至提问时间（2032年6月3日）的时效说明、修正或活跃例外。因此：\n\n- **防晒帘是否完好**：2026年的报告状态存在不同描述（s0报告“完好”；s1报告“修好”；s2报告“撕裂”）。受限于报告日期（2026-10-15）且无后续更新或适用期限说明，截至2032年6月3日，其是否完好**无法从所给材料中确定**。\n- **电子目录状态**：2026年的报告均指出其“一直开放”“不变”或“照常”，并明确声明与展柜条件无关。同样因缺乏2032年的观测数据，其当前状态**无法从所给材料中确定**。\n\n综上，交付的检索结果未覆盖2032年6月3日的时间范围，根据现有材料无法判定防晒帘的当前完好情况及电子目录的实时状态。如需准确信息，需补充该时间节点的记录。检索并非完整库存，仅能依据已有材料作出上述说明。",
+          "result_type": "Omission",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-inventory",
+          "ssession_id": 1,
+          "question": "版画册期初实际多少，最初手抄表写了多少？",
+          "system_response": "\n\n根据提供的记忆记录：\n\n- **版画册期初实际数量**：经核对原始送货单确认，实际为**17本**。\n- **最初手抄表记载数量**：在初始录入及说明中（明确指出期初表系手抄），手抄表上记录的版画册为**12本**（备注为抄错所致）。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-inventory",
+          "ssession_id": 1,
+          "question": "这次更正代表新到五本吗，散文集期初多少？",
+          "system_response": "\n\n根据提供的记忆记录，回答如下：\n\n1. **不代表新到五本**。用户（在核对原始送货单后）明确指出“**不是今天增加五本**”，该更正实为发现初录时“十二本是我抄错”，实际期初版画册应为十七本。\n2. **散文集期初为八本**。用户确认“**散文集八本无误**”。\n\n*(注：上述结论由用户于2026年10月15日的报告中作出，用于说明青木书摊2032年6月1日的期初库存实际情况。)*",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-inventory",
+          "ssession_id": 2,
+          "question": "卖出两本后版画册剩多少，依据哪个期初数？",
+          "system_response": "\n\n根据记忆材料：\n- **剩余数量**：卖出两本后，版画册剩余**15本**（由用户于2032年6月3日直接报告“今天实际卖出版画册两本，因此当前剩十五本”）。\n- **依据的期初数**：依据的是**更正后的期初数17本**。\n\n**依据说明**：\n1. 用户最初于2026年10月15日手抄录入的期初数为**12本**。\n2. 随后用户核对原始送货单后明确更正为实际期初数**17本**，并指出“十二本是我抄错”。\n3. 用户同时说明更正前的12本“仍留档”，意味着原手抄表仅作归档，不用于当前有效计算。因此，剩余数量的计算基数为更正后的17本（17本期初 − 2本售出 = 15本剩余）。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-inventory",
+          "ssession_id": 2,
+          "question": "最初手抄表的版画册数字和当前散文集库存分别是多少？",
+          "system_response": "\n\n根据记忆材料：\n- 最初手抄表的版画册数字为**12本**（依据s2，用户明确说明“期初表是我手抄的”且录入版画册为十二本）。\n- 当前散文集库存为**8本**（散文集期初库存为8本，且依据s0今日无售出记录）。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-credits",
+          "ssession_id": 1,
+          "question": "《芦灯》实际译者是谁，初稿错写谁？",
+          "system_response": "\n\n根据提供的记忆材料：\n\n- **实际译者**：作者通过署名页明确确认（reported），《芦灯》从创作时的实际译者为**简岚**。\n- **初稿错写**：节目册初稿基于口头介绍录入，将译者记为**简霖**。作者随后指出“简霖是我听错”，说明此为初稿录入时的听误记录，并强调此次为初稿署名纠错，并非更换译者。\n\n综上，《芦灯》实际译者为**简岚**，初稿错写为**简霖**。",
+          "result_type": null,
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-credits",
+          "ssession_id": 1,
+          "question": "《芦灯》配乐和《雨梯》译者是谁？",
+          "system_response": "\n\n根据提供的资料：\n\n- **《芦灯》配乐**：为**牧安**。该信息最初记录于2032年6月1日的节目册初稿（s1）中；作者在2032年6月2日发布的署名更正声明（s0）中明确确认“配乐和另一剧目不变”，因此该信息维持有效。\n- **《雨梯》译者**：为**苏遥**。该信息同样记录于2032年6月1日的节目册初稿（s1）中；作者在2032年6月2日的更正声明（s0）中确认相关剧目署名未作更改，确认为苏遥。\n\n（注：资料中提及的《芦灯》译者初稿误录为“简霖”，作者已于2032年6月2日更正为“简岚”，此更正仅针对《芦灯》译者，不影响上述配乐与《雨梯》译者的记录。）",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-credits",
+          "ssession_id": 2,
+          "question": "简霖的导读邀请已确认吗，他是《芦灯》译者吗？",
+          "system_response": "\n\n根据提供的记忆材料：\n\n- **简霖的导读邀请已确认吗？**\n  **尚未确认**。据用户陈述（e0/e1），邀请简霖撰写导读“目前只是邀请设想，未确认”，仅为下次再版的考虑。所提供的材料中未记载该邀请后续有确认进展。\n\n- **他是《芦灯》译者吗？**\n  **不是**。根据用户初次依据口头介绍录入的信息（e2），节目册初稿曾误将其列为译者。随后作者亲自发来署名页进行纠错（e3），明确指出《芦灯》自创作时的译者实为**简岚**，“简霖”系听错。该纠错记录及后续的语义整理（e1）均明确表明：短剧《芦灯》“未确认简霖为译者”，且资料特别说明“他不会因此成为这部短剧的译者”。\n\n注：以上结论基于2026年10月15日左右的记录状态。材料未提供该导读邀请在查询时间（2032年6月）的最新确认进展或译者信息变更。信息均按源材料中的陈述与纠错记录呈现。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-credits",
+          "ssession_id": 2,
+          "question": "译者更正是发生了一次换人吗，配乐有无变化？",
+          "system_response": "\n\n根据提供的资料（作者于2032年6月2日亲自发来的署名页说明）：\n\n1. **译者更正是否换人**：**不是换人**。作者明确指出，《芦灯》从创作时的译者就是简岚，“简霖”是此前录入时的听错。该更正仅为初稿署名的纠错，并非现在更换译者。\n2. **配乐有无变化**：**无变化**。来源中明确说明“配乐和另一剧目不变”，即《芦灯》的配乐仍为牧安，未发生任何调整。\n\n以上结论均直接基于来源中作者的报告内容，未涉及其他信息或外部推断。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-reservation",
+          "ssession_id": 1,
+          "question": "预约制是否已经确定，何时开始？",
+          "system_response": "\n\n根据所交付的记忆材料（报告于2026年10月15日）：\n\n* **是否已确定**：截至该材料记录时间，预约制**尚未确定**。材料中明确记载仅为“有人建议以后改为预约制，我愿意讨论”，并直接说明“**目前没有决定**”。\n* **何时开始**：截至该材料记录时间，**未定开始日期**。\n\n**补充说明**：当前材料仅包含2026年10月15日的记录状态。基于所交付材料，**无法确定**自该日期之后（至提问日期2032年6月2日）是否已推进决定或正式设定开始日期。检索结果不构成对该时段后情况的完整覆盖或最终结论。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-reservation",
+          "ssession_id": 1,
+          "question": "本周六几点、在哪层活动，二楼用途是什么？",
+          "system_response": "\n\n根据提供的记忆材料（均为用户报告/断言）：\n- **活动开始时间**：周六下午两点。\n- **活动楼层**：一楼。\n- **二楼用途**：二楼读书角只供静读。\n\n上述内容直接引自来源陈述，材料中暂无针对这些具体时间、楼层或二楼用途的变更决定或例外条件。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-reservation",
+          "ssession_id": 2,
+          "question": "讨论后是否采用预约制，周六几点开始？",
+          "system_response": "\n\n根据提供的记忆材料，关于是否采用预约制及周六开始时间，不同时间点的报告情况如下：\n\n* **6月2日的沟通记录（来源s2）**：当时有人建议改为预约制，但报告指出“目前没有决定，也未定开始日期”，仅确认“本周六仍按无需预约进行”。\n* **6月3日的讨论结果报告（来源s0及语义视图e1）**：明确“讨论结果是不采用预约制”，有人提出的三点建议未被采纳，且“本周六开始时间也不变”。结合材料中的具体安排，周六活动**于下午两点开始**。\n\n**结论**：根据6月3日的最新报告，讨论后**不采用预约制**，周六活动**下午两点**开始。若回溯6月2日阶段的沟通，当时虽未作出最终决定，但周六已确认按无需预约进行。材料未提供更早或额外的时间变动说明。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-reservation",
+          "ssession_id": 2,
+          "question": "我仍负责什么，二楼是否变成活动场地？",
+          "system_response": "\n\n根据2032年6月1日（报告时间）您作为用户在公开消息中发布的陈述：\n- **您仍负责的事项**：负责登记到场人数。\n- **二楼是否变成活动场地**：否。该陈述明确指出“二楼读书角只供静读，活动在一楼”。\n\n以上状态基于2032年6月1日的原始记录，截至2032年6月3日您的提问时间，已提供材料中未发现后续修正、时间限制失效或本地覆盖规则，因此按原陈述适用。现有材料未包含后续调整的信息，无法确定未来是否会有变更。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-parcel",
+          "ssession_id": 1,
+          "question": "现在是否已确定新的自取地点和启用日？",
+          "system_response": "\n\n根据提供的记忆材料，**尚未确定**。\n\n- **记录状态与内容**：在2026年10月15日的用户反馈中，明确报道了“店主尚未确认，新的地点和日期都不知道”，并补充说明“邮寄安排尚无任何变更通知”。该信息为用户传闻记录，属于未经确认的待查状态。\n- **时效说明**：所提供的材料仅包含上述2026年的记录，未显示2026年10月之后的任何后续确认、公告或状态更新。因此，无法从现有资料中判定截至您提问的2032年6月2日，新的自取地点与启用日是否已最终落实。\n\n如需获取最新确切信息，需依赖该时间窗口之外或此记录之外的后续通知。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-parcel",
+          "ssession_id": 1,
+          "question": "邮寄每周几，明信片和海报各用什么包装？",
+          "system_response": "\n\n根据记忆材料中的用户报告（来源 s1，报告于2032年6月1日）：\n- **邮寄时间**：每周四寄出。\n- **明信片包装**：使用米色信封。\n- **海报包装**：使用纸筒。\n\n注：上述内容为用户当时的报告陈述，材料中明确“邮寄安排尚无任何变更通知”。记忆未提供额外的时间限制、修正或特殊例外说明，实际安排情况无法仅凭当前记忆完全确定。",
+          "result_type": null,
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-parcel",
+          "ssession_id": 2,
+          "question": "店主确认后现在去哪里自取，可以断言永久不装修吗？",
+          "system_response": "\n\n根据提供的记忆材料，回答如下：\n\n1. **当前自取地点**：店主确认装修计划暂缓后，目前自取地点为**南窗店**。\n2. **是否可以断言永久不装修**：**不可以**。该信息为店主当时的声明记录（报告状态），材料明确指出仅表示“装修计划暂缓”，**并未宣布以后永久不装修**。因此，基于现有记录无法得出“永久不装修”的确定断言。",
+          "result_type": null,
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-parcel",
+          "ssession_id": 2,
+          "question": "邮寄、包装和我整理的时间有没有变？",
+          "system_response": "\n\n根据已提供的记录，截至查询时间，邮寄、包装和整理时间均**没有变化**。各项目的具体报告状态如下：\n\n* **邮寄时间**：仍为**每周四**寄出。相关记录明确指出“邮寄仍每周四”，且此前的相关传闻中也确认“邮寄安排尚无任何变更通知”。\n* **包装方式**：保持原样（“照旧”）。明信片继续采用米色信封，海报继续采用纸筒。\n* **整理时间**：仅安排在**周末**去店里整理。\n\n以上结论基于材料中“用户”角色的公开陈述与确认记录。记录显示这些事项目前均处于“有效”状态，未发现任何宣布变更、失效条件或时间限制覆盖。因此，依据现有材料判定为未变。若后续有调整，需以店铺发布的最新通知为准。",
+          "result_type": null,
+          "reader_failure": null
+        }
+      ],
+      "maintenance_status_counts": {
+        "completed": 35,
+        "incomplete": 1
+      },
+      "maintenance": [
+        {
+          "owner": "method-screen-archive",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-archive",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-archive",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-credits",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-credits",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-credits",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-exhibit",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-exhibit",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-exhibit",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-inventory",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-inventory",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-inventory",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-kiln",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-kiln",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-kiln",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-maps",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-maps",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-maps",
+          "session": 2,
+          "status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+            }
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/method-screen-maps/2:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "effect": "none",
+                "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+              }
+            }
+          ]
+        },
+        {
+          "owner": "method-screen-parcel",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            },
+            {
+              "ok": true,
+              "status": "committed"
+            },
+            {
+              "ok": true,
+              "status": "committed"
+            },
+            {
+              "ok": true,
+              "status": "committed"
+            },
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-parcel",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-parcel",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-projection",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-projection",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-projection",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-reservation",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-reservation",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-reservation",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-studio",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-studio",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-studio",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-tickets",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-tickets",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-tickets",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-walk",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-walk",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-walk",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        }
+      ],
+      "formation": {
+        "method-screen-archive": {
+          "records": 1,
+          "units": 3
+        },
+        "method-screen-credits": {
+          "records": 1,
+          "units": 3
+        },
+        "method-screen-exhibit": {
+          "records": 1,
+          "units": 4
+        },
+        "method-screen-inventory": {
+          "records": 1,
+          "units": 3
+        },
+        "method-screen-kiln": {
+          "records": 1,
+          "units": 4
+        },
+        "method-screen-maps": {
+          "records": 1,
+          "units": 4
+        },
+        "method-screen-parcel": {
+          "records": 5,
+          "units": 5
+        },
+        "method-screen-projection": {
+          "records": 1,
+          "units": 6
+        },
+        "method-screen-reservation": {
+          "records": 1,
+          "units": 5
+        },
+        "method-screen-studio": {
+          "records": 1,
+          "units": 3
+        },
+        "method-screen-tickets": {
+          "records": 1,
+          "units": 5
+        },
+        "method-screen-walk": {
+          "records": 1,
+          "units": 4
+        }
+      },
+      "graph_cases": {
+        "method-screen-archive": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-credits": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-exhibit": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-inventory": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-kiln": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-maps": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-parcel": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-projection": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-reservation": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-studio": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-tickets": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-walk": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        }
+      },
+      "costs": {
+        "maintenance": {
+          "responses": 36,
+          "known_tokens": 231850,
+          "unknown_usage_responses": 0
+        },
+        "reader": {
+          "responses": 48,
+          "known_tokens": 172067,
+          "unknown_usage_responses": 0
+        },
+        "judge": {
+          "responses": 48,
+          "known_tokens": 131684,
+          "unknown_usage_responses": 0
+        },
+        "embedding": {
+          "responses": 107,
+          "known_tokens": 5984,
+          "unknown_usage_responses": 0
+        }
+      },
+      "state_metrics": {
+        "opportunities": 24,
+        "ujs": 12,
+        "target_and_preservation_only": 18,
+        "dimensions": {
+          "target_correct": 22,
+          "non_target_postconditions": 20,
+          "time_scope_correct": 16,
+          "unit_source_modality_faithful": 22
+        },
+        "strata": {
+          "change_or_new_assertion": {
+            "opportunities": 23,
+            "ujs": 12
+          },
+          "preservation": {
+            "opportunities": 1,
+            "ujs": 0
+          }
+        }
+      },
+      "requests_without_response": []
+    },
+    "candidate": {
+      "prediction_terminal": {
+        "status": "PREDICTIONS_SAVED",
+        "phase": "predict",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "PREDICTIONS_SAVED",
+          "sessions": 36,
+          "judge_calls": 0,
+          "complete_answers": 43,
+          "known_reader_failures": 5
+        },
+        "resources_settled": true
+      },
+      "score_terminal": {
+        "status": "SCORED",
+        "phase": "score",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "SCORED_SAVED_PREDICTIONS",
+          "backend": "MiLAi-memory-only",
+          "protocol": {
+            "name": "milai-method-architecture-screening-candidate-v1",
+            "track": "common-conditions",
+            "backends": [
+              "MiLAi-memory-only"
+            ],
+            "history_protocol": "halumem-online-prefix",
+            "source_policy": "source-only",
+            "qa_top_k": 20,
+            "update_top_k": 10,
+            "delivery": "direct",
+            "raw_access": "original-history-for-RawRAG; independently-retrieved-visible-original-Sources-plus-linked-supports-and-fitting-semantic-views-for-MiLAi",
+            "rawrag": {
+              "granularity": "session"
+            },
+            "native_answer": "separate-optional-not-main-QA",
+            "prediction_scoring": "explicit-selected-arm-score-after-saved-predictions-and-resource-closure",
+            "unknown_retry": false,
+            "write_test_answers_back": false,
+            "resource_owner": "Root; existing continuous ledger; serial model dispatch",
+            "external_internal_usage": "unobserved unless actual native usage is available; not zero",
+            "claim": "Twelve authored development chains, six mechanism families, independently formed states. Same questions, source access, model, and budgets; no read-usage feedback. Not external benchmark or isolated U/R attribution."
+          },
+          "correct": 40,
+          "opportunities": 48,
+          "missing": 5,
+          "labels": {
+            "Correct": 40,
+            "invalid": 1,
+            "Hallucination": 1,
+            "Omission": 1
+          },
+          "per_user": {
+            "method-screen-maps": {
+              "correct": 3,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 1
+            },
+            "method-screen-kiln": {
+              "correct": 3,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-archive": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-studio": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-tickets": {
+              "correct": 3,
+              "opportunities": 4,
+              "missing": 1,
+              "invalid": 0
+            },
+            "method-screen-projection": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-walk": {
+              "correct": 3,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-exhibit": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-screen-inventory": {
+              "correct": 2,
+              "opportunities": 4,
+              "missing": 2,
+              "invalid": 0
+            },
+            "method-screen-credits": {
+              "correct": 3,
+              "opportunities": 4,
+              "missing": 1,
+              "invalid": 0
+            },
+            "method-screen-reservation": {
+              "correct": 3,
+              "opportunities": 4,
+              "missing": 1,
+              "invalid": 0
+            },
+            "method-screen-parcel": {
+              "correct": 4,
+              "opportunities": 4,
+              "missing": 0,
+              "invalid": 0
+            }
+          },
+          "backend_capabilities": {
+            "session_output": "supported",
+            "reference_update_state": "supported-isolated-view"
+          },
+          "official_labels": "unchanged; source conflicts require separate evidence review",
+          "semantic_advantage": "unchecked",
+          "native_answer_result": null
+        },
+        "resources_settled": true
+      },
+      "first_qa_labels": {
+        "Correct": 40,
+        "invalid": 1,
+        "Hallucination": 1,
+        "missing": 5,
+        "Omission": 1
+      },
+      "first_qa_records": [
+        {
+          "uuid": "method-screen-maps",
+          "ssession_id": 1,
+          "question": "6月4日和5日应去哪一柜取地图？",
+          "system_response": "\n\n根据记忆材料（e0）的规定：\n- **6月4日**（5日之前）：应去**二号柜**取地图。\n- **6月5日**（5日起）：地图统一搬到**七号柜**。\n\n因此，6月4日去二号柜，6月5日去七号柜。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-maps",
+          "ssession_id": 1,
+          "question": "报刊在哪里，室内翻阅地图需要登记吗？",
+          "system_response": "\n\n根据提供的记忆记录：\n- **报刊位置**：在北窗阅览室内，报刊放置在**五号柜**。\n- **室内翻阅地图登记要求**：**不需要登记**（来源明确区分：借出地图需要登记，室内翻阅不用登记）。\n\n时间与适用条件说明：您的查询时间为2032年6月2日。材料提及地图位置调整自2032年6月5日起生效（5日之前在二号柜），且明确指出“报刊位置和登记规定保持原样”。因此，基于已交付材料，在您的查询时间点，上述报刊存放位置与室内翻阅免登记的规定适用。以上结论仅依据来源报告，且适用范围明确限定于北窗阅览室内。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-maps",
+          "ssession_id": 2,
+          "question": "6月3日标签已贴好后，地图已经搬到七号柜了吗？",
+          "system_response": "\n\n根据提供的记忆资料，截至2032年6月3日，地图**尚未**搬到七号柜。\n\n资料明确指出，搬迁日仍为6月5日；6月3日张贴七号柜新标签仅属于准备工作，不提前搬迁。在6月5日之前，地图继续放置在二号柜。",
+          "result_type": null,
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-maps",
+          "ssession_id": 2,
+          "question": "地图搬迁影响报刊位置或借出登记规定吗？",
+          "system_response": "\n\n根据提供的记忆材料（来源s0），地图搬迁**不会**影响报刊位置或借出登记规定。资料中明确指出“报刊位置和登记规定保持原样”，因此在地图搬迁期间及之后，这两项均维持不变。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-kiln",
+          "ssession_id": 1,
+          "question": "白鹭窑现在由谁负责，夏禾是否继续值班？",
+          "system_response": "\n\n根据2032年6月2日09:00:00的查询时间所对应的记忆记录：\n\n- **白鹭窑负责人**：自2032年6月2日起，已变更为**乔原**。\n- **夏禾值班状态**：**已退出**白鹭窑的值班工作。\n\n上述状态直接依据2032年6月2日由用户（来源`s1`）报告/发布的变更通知（原文：“白鹭窑今天起改由乔原负责，夏禾退出该窑值班”）。此前2032年6月1日（来源`s0`）的记录曾显示由夏禾负责，但6月2日生效的最新通知已明确覆盖该安排。该信息仅基于所交付材料中的报告内容，未体现其他外部条件或例外状态。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-kiln",
+          "ssession_id": 1,
+          "question": "青砾窑负责人和两个窑的钥匙保管处是什么？",
+          "system_response": "\n\n根据已交付的记忆材料（均为2026年10月15日的用户报告与值班表记录）：\n- **青砾窑负责人**：叶初。来源s0与s1均明确记载青砾窑由叶初负责，其中s0特别指出“青砾窑仍归叶初”。\n- **钥匙保管处**：前台。来源s1记载“两个窑的钥匙均由前台保管”，s0补充说明“钥匙不跟随值班人转交”。\n\n上述结论基于当前提供的记录。材料仅包含截至2026年10月15日的声明，未提供该安排在此日期之后的后续变更、修正或例外状态，因此无法确定2026年10月15日之后负责人或钥匙保管处是否发生过调整。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-kiln",
+          "ssession_id": 2,
+          "question": "乔原外出那天的代班人已定了吗，现在由谁负责？",
+          "system_response": "\n\n根据提供的记忆记录（报告时间约2032年6月1日）：\n\n1. **代班人是否已定**：**尚未确定**。记录中明确陈述“那天谁代班尚未定”。\n2. **现在由谁负责**：目前“没有调整白鹭窑已经生效的安排”，仍按原生效值班表执行，即**白鹭窑由夏禾负责，青砾窑由叶初负责**。\n\n（注：以上信息为记录中的用户陈述状态，具体代班人选若后续有实际调整，需以最新通知为准。）",
+          "result_type": "Hallucination",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-kiln",
+          "ssession_id": 2,
+          "question": "我用什么颜色的本子，钥匙是否随值班人转交？",
+          "system_response": "\n\n根据提供的记忆材料陈述：\n\n1. **本子颜色**：发言人（您）记录作品编号时使用**蓝色**本子。该信息在记忆中标记为报告主张（kind: reported），观测/报告时间约为2026-10-15（北京时间）。\n2. **钥匙是否随值班人转交**：**不随值班人转交**。记忆明确记录“钥匙不跟随值班人转交”，并补充说明“两个窑的钥匙均由前台保管”。该规则同样基于上述时期的源陈述报告。\n\n以上为记忆片段中的原始报告主张。所交付材料未提供截至查询日期（2032-06-03, 09:00:00）的后续变更、修正或本地覆盖例外。检索结果仅反映已交付内容，不作事实保证，亦不包含材料外推断。如需确认当前实际执行状态，需查阅更新记录。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-archive",
+          "ssession_id": 1,
+          "question": "公开课学员练习复印件和阅览原稿分别要戴手套吗？",
+          "system_response": "\n\n根据提供的记忆材料，回答如下：\n\n- **公开课学员练习复印件**：在**本次公开课期间**，供学员练习的复印件**可不戴手套**。\n- **阅览原稿**：**仍须戴手套**（即使在本次公开课期间，原稿的戴手套要求也保持不变）。\n\n**适用条件说明**：\n上述免戴手套的规定仅明确适用于“**本次公开课期间**”且专供**学员练习**的复印件。该期间内的纸本原稿及其他复印件均须继续戴手套；若不在本次公开课期间，或涉及非学员练习用途的复印件，则按一般规定（室内阅览纸本原稿与复印件均须戴手套）执行。材料中未提及外借登记规定有所放宽。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-archive",
+          "ssession_id": 1,
+          "question": "其他复印件与外借登记规则是否一起放宽？",
+          "system_response": "\n\n根据提供的资料，**并未一起放宽**。\n\n资料明确指出：\n1. **其他复印件**：仅在本次公开课期间，供学员练习的复印件可不戴手套；**其他复印件也仍须戴手套**，未作放宽。\n2. **外借登记**：资料直接说明**“外借登记规定没有放宽”**（原规定“外借任何纸本都须登记”仍然适用）。\n\n因此，这两项规则在本次公开课时均保持原要求，并未一起放宽。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-archive",
+          "ssession_id": 2,
+          "question": "公开课结束后练习复印件要戴手套吗，为何改变？",
+          "system_response": "\n\n根据提供的记录，公开课结束后，练习复印件**需要戴手套**。\n\n改变的原因是：此前“免戴手套”仅为**本次公开课期间的临时安排**，仅在课程进行中且供学员练习时适用。公开课结束后，该临时安排已撤回，因此恢复通常阅览规则（即室内阅览纸本原稿与复印件均须戴手套）。记录中未提供设定该临时安排的具体起因，仅明确其效力以公开课期间为限，课程结束即失效。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-archive",
+          "ssession_id": 2,
+          "question": "数字副本和外借纸本各有什么要求？",
+          "system_response": "\n\n根据记忆材料中的档案室规定（用户报告/所述）：\n\n- **数字副本**：在室内阅览时**无需戴手套**。\n- **外借纸本**：**任何纸本在外借时均须登记**。\n\n*说明*：上述为当前适用的通常规则。材料指出，此前（2026年）曾针对公开课学员练习的复印件实施临时免戴手套安排，但该临时安排已于2026年10月15日撤回并恢复通常规则；同时，外借登记的规定在临时安排期间及之后均无放宽。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-studio",
+          "ssession_id": 1,
+          "question": "周五八点半录音间和练习间能开外放吗？",
+          "system_response": "\n\n根据记忆材料中的报告内容：\n- **录音间**：**可以**开外放。依据材料报告的“本周五设备测试”特别安排（e1），八点到九点期间仅允许录音间使用外放音箱，八点半处于该时间范围内。\n- **练习间**：**不可以**开外放。该特别规定明确指出“练习间没有例外”，因此练习间仍适用晚上八点后禁用外放音箱的常规限制（e0）。\n\n综上，周五晚上八点半，录音间可以开外放，练习间不可以。该结论基于材料中报告的特定周五设备测试安排及工作室常规规定。如需查询其他日期的规定，请补充具体日期。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-studio",
+          "ssession_id": 1,
+          "question": "周五九点半录音间可用外放吗，耳机呢？",
+          "system_response": "\n\n根据提供的记忆材料：\n\n- **录音间外放**：**不可用**。资料针对本周五的设备测试明确设定了例外时段，仅允许录音间在8:00至9:00使用外放，并指出**9点后录音间即恢复禁用**。因此九点半已超出允许时段。\n- **耳机**：**可用**。材料中常规规定（及本周五的测试安排）均明确指出耳机可用，且不受外放时段限制。\n\n上述判断基于材料中“本周五”的特定安排。若需了解其他日期的通用规则或具体设备状态，资料未作进一步说明。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-studio",
+          "ssession_id": 2,
+          "question": "测试取消后周五八点半录音间还能开外放吗？原例外是什么？",
+          "system_response": "\n\n根据提供的资料记录：\n\n1. **测试取消后周五八点半录音间能否开外放**：不能。据报告（s0），因周五设备测试已取消，录音间当晚八点到九点的外放例外也随之取消。按照一般时段规定（晚上八点后录音间禁用外放音箱），八点半处于该禁用时段内，故不可开外放。\n\n2. **原例外是什么**：据报告（s2），原例外为“本周五的设备测试”期间，**仅允许录音间在晚上八点到九点**这一特定时间段内使用外放音箱（练习间无此例外，九点后录音间也恢复禁用规定）。\n\n以上结论均基于所交付的原始用户消息记录，未作额外推断。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-studio",
+          "ssession_id": 2,
+          "question": "控制室和借用线材的规定有没有改变？",
+          "system_response": "\n\n根据提供的记忆材料记载，截至查询时间（2032年6月3日），这两项规定**均未发生改变**。具体依据如下：\n\n1. **控制室规定**：材料中明确以 `reported` 状态声明“耳机使用和控制室规定不变”，并指出控制室不受录音间及练习间晚上八点后禁用外放音箱的限制。在交付的源历史与语义视图修订序列中，未见该声明被修改、覆盖或附加例外，按规定保持原状。\n2. **借用线材规定**：材料记载“每次借线材均需归还至前台”。在所给的材料记录中，未出现针对该条款的修订、变更或废止声明，因此按现有材料认定，该借用与归还要求同样未变。\n\n需说明的是，以上结论仅基于所交付的记忆材料。材料本身不认证外部事实或完整性，若存在未同步收录的外部调整、后续修订或未披露的例外情况，则无法从当前材料中确定。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-tickets",
+          "ssession_id": 1,
+          "question": "社员证失效后陆笙还能入场并参加讨论吗？",
+          "system_response": "\n\n根据提供的记忆材料，**能**。\n\n依据记忆中的陈述：\n- 星幕电影社的入场规则为“可用当月社员证，或当场签名的邀请函，任选一种”；映后讨论“另须预约”。\n- 材料中明确推论：“陆笙的社员证本月失效，但已签名邀请函仍有效，讨论预约也还在；因此她仍可通过邀请函入场参加讨论。”\n\n因此，尽管其社员证已失效，陆笙仍可凭借有效的签名邀请函入场，并参加已预约的讨论。此为记忆材料中的直接陈述与结论。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-tickets",
+          "ssession_id": 1,
+          "question": "孟棠能入场和参加讨论吗，海报是什么颜色？",
+          "system_response": "\n\n根据所交付的记忆材料（来源 s0 的报告）：\n\n* **入场与讨论**：星幕电影社入场可使用当月社员证或当场签名的邀请函，孟棠持有有效社员证，因此**可以入场**。但材料明确说明“参加映后讨论另须预约”，而孟棠未预约，因此**不能参加讨论**。\n* **海报颜色**：材料指出海报为**银色**。\n\n（注：以上结论严格依据给定记忆中的陈述得出，未添加外部信息或推定原因。）",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-tickets",
+          "ssession_id": 2,
+          "question": "陆笙取消预约后，入场和参加讨论的资格分别怎样？",
+          "system_response": "\n\n根据提供的记忆材料，针对陆笙取消预约后的状态如下：\n\n**1. 入场资格**\n* **规则条件**：来源s1（报告状态，2032-06-03）明确星幕电影社入场“可用当月社员证，或当场签名的邀请函，任选一种”。\n* **事实状态**：来源s0（报告状态，2032-06-03）指出陆笙的社员证本月已失效，但其已签名邀请函仍继续有效。\n* **结论**：依据上述规则与事实，陆笙**仍具备入场资格**，可凭有效邀请函入场观看放映。\n\n**2. 参加讨论资格**\n* **规则条件**：来源s1（报告状态，2032-06-03）规定“参加映后讨论另须预约”。\n* **事实状态**：来源s0（报告状态，2032-06-03）明确陆笙“取消了讨论预约”。来源e1（语义视图推断状态）亦确认“讨论预约已取消”。\n* **结论**：因已取消预约，陆笙**不再具备参加映后讨论的资格**。\n\n**综合回答**\n在陆笙取消预约后，依据材料报告的规则与状态：她**可以凭有效邀请函入场观看放映，但无法参加映后讨论**。该结论为基于来源s1规则与来源s0事实的逻辑推断（来源e1），材料未提及存在可豁免预约或改变凭据效力的局部覆盖规则。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-tickets",
+          "ssession_id": 2,
+          "question": "陆笙失效的是什么凭据，孟棠的预约情况有改变吗？",
+          "system_response": null,
+          "result_type": null,
+          "reader_failure": {
+            "type": "ValueError",
+            "message": "Provider output incomplete: length",
+            "finish_reason": "length",
+            "phase": "confirmed_response",
+            "response_ref": "http/dependency-selection/native/halumem/method-screen-tickets/2/qa/1/retrieval.json/response.json",
+            "failure_ref": "http/dependency-selection/native/halumem/method-screen-tickets/2/qa/1/retrieval.json/failure.json"
+          }
+        },
+        {
+          "uuid": "method-screen-projection",
+          "ssession_id": 1,
+          "question": "市电停用后投影还能开吗，靠什么？",
+          "system_response": "\n\n根据提供的记忆记录：\n\n- **市电停用后投影还能开吗？** 可以开启。\n- **靠什么？** \n  1. **供电来源**：改由**车上的大电池**供电。记录明确指出“市电插座停用……投影改走电池供电”，且确认电池仍有电。\n  2. **运行条件**：必须依赖**冷却风扇正常运转**。材料说明移动放映车开启投影时，“两种方式（市电或电池）都必须有冷却风扇运转”。\n\n综上，市电停用后投影仍可开启，主要依靠**车上大电池供电**，且需满足**冷却风扇正常运行**这一必要工作条件。（注：字幕屏另有独立小电池供电，不依赖该风扇系统，但投影本身需符合上述条件。）",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-projection",
+          "ssession_id": 1,
+          "question": "市电停用会使字幕屏停用吗？",
+          "system_response": "\n\n根据交付的记忆材料，**市电停用不会使字幕屏停用**。具体依据如下：\n\n- **主体与条件**：字幕屏；在“市电插座停用”的条件下。\n- **声明状态与来源**：\n  - 来源 `s0` 以 **reported（报告）** 状态指出：“字幕屏单独用小电池，不依赖这套风扇。”\n  - 来源 `s1` 以 **observed（观察）** 状态在同等条件下确认：“市电插座停用……字幕屏不受影响。”\n- **时间背景**：上述报告与观察记录于 `2032-06-01` 至 `2032-06-02` 期间（依据材料共享时间戳）。\n- **不确定性**：材料中未提及例外、修正或不确定性条件。\n\n综上，依据现有资料，字幕屏供电独立于放映车的主电源与风扇系统，市电中断对其运行无影响。若涉及材料范围之外的设备改装或未知故障，则无法从已交付材料中确定。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-projection",
+          "ssession_id": 2,
+          "question": "风扇停转而大电池有电时能开投影吗，为什么？",
+          "system_response": "\n\n根据提供的记忆材料，**不能开投影**。\n\n**原因**（基于用户报告与设备运行记录）：\n1. **直接状态记录**：在冷却风扇停转的特定场景下，用户明确观察到并记录：“在风扇恢复前，即使大电池还有电，也不能开投影。”\n2. **供电与冷却规则**：针对移动放映车的运行规范，用户陈述指出，开启投影可任选接通的市电或有电的电池供电，但**“两种方式都必须有冷却风扇运转”**。该规则属于当前快照下的通用条件，风扇停转时不满足这一必要条件，因此投影设备无法启动。（注：字幕屏等独立小电池设备不受此规则影响）\n\n综上，风扇运转是开启投影的必要前提，大电池有电无法替代该条件。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-projection",
+          "ssession_id": 2,
+          "question": "字幕屏现在能否继续运行，它也依赖同一个风扇吗？",
+          "system_response": "\n\n根据提供的记忆材料，回答如下：\n\n1. **是否依赖同一个风扇**：字幕屏**不依赖**该冷却风扇。源s1（用户报告，发生于2032年06月01日）明确指出字幕屏单独使用小电池供电，不依赖这套风扇系统。\n2. **现在能否继续运行**：截至2032年06月03日09:00:00，字幕屏**可以继续正常运行**。源s0（用户报告/观察，发生于2032年06月03日，与提问时间一致）记录到冷却风扇随后停止运转，但明确声明“字幕屏的小电池和运行状态没有变化”，说明风扇停转不影响其独立运行。\n\n综上，字幕屏为独立小电池供电，不依赖放映车的冷却风扇；截至当前指定时间，其运行状态未发生变化，仍可继续运行。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-walk",
+          "ssession_id": 1,
+          "question": "栈桥封闭后湖边和屋顶路线各能否开展？",
+          "system_response": "\n\n根据记忆视图（source_history）中标签为 `e1` 的 `reported` 状态记录，结合 `e0` 中陈述的分配规则，在查询时间 `Jun 02, 2032, 09:00:00` 下：\n\n- **湖边路线**：不能开展。记录明确声明该路线**“暂停”**。依据既定规则，该路线需同时满足“栈桥开放”与“向导到场”两个条件；现栈桥临时封闭，不满足运行条件，故暂停。\n- **屋顶路线**：可以开展。记录明确声明该路线**“可以继续”**。依据规则，该路线仅要求“向导到场”；在向导已到场且栈桥封闭的情况下，该路线不受影响，可照常开展。\n\n上述结论为源材料中的报告状态（`kind: reported`），适用于所述时间点的特定情境。材料未记录例外、修正或不确定性说明，仅作为当时已发生情况的记录呈现。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-walk",
+          "ssession_id": 1,
+          "question": "室内标本展示是否随湖边路线一起暂停？",
+          "system_response": "\n\n根据2032年6月2日09:00:00的报告（来源s1，用户汇报状态），室内标本展示**不会**随湖边路线一起暂停。该报告明确指出“栈桥临时封闭，向导仍已到场。因此湖边路线暂停，屋顶路线可以继续；室内展示照常”。因此，在湖边路线暂停的条件下，室内展示照常进行。现有材料中未显示其他适用于该场景的暂停条件或例外。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-walk",
+          "ssession_id": 2,
+          "question": "向导离开后两条路线状态如何，原因分别是什么？",
+          "system_response": "\n\n根据记忆材料中的源记录（用户报告），向导离开后两条路线的状态及原因如下：\n\n* **湖边路线**\n  * **状态**：暂停\n  * **原因**：该路线规则要求“栈桥开放”与“向导到场”必须同时满足。此时栈桥已临时封闭，且向导已离开，两项条件均无法达成，因此路线暂停。\n\n* **屋顶路线**\n  * **状态**：暂停\n  * **原因**：该路线规则仅要求“向导到场”。向导离开后，该唯一必要条件不再具备，因此路线暂停。\n\n（注：材料同时报告室内标本展示不依赖向导，照常开放。以上状态与规则均为用户在源消息`e0`/`s0`及`e1`/`s1`、`s2`中陈述的报告事实，未作外部因果推断或补充。）",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-walk",
+          "ssession_id": 2,
+          "question": "室内展示还有没有开放？",
+          "system_response": "\n\n根据2026年10月15日的报告，室内展示状态为“继续开放”且“照常”。在提供的检索材料中，未发现此后关于室内展示关闭或状态变更的后续更新记录。因此，依据现有资料，截至2032年6月3日提问时，室内展示仍维持开放状态。",
+          "result_type": "Omission",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-exhibit",
+          "ssession_id": 1,
+          "question": "防晒帘损坏后原件和照片分别是否继续展示？",
+          "system_response": "\n\n根据提供的记忆资料（证据`e2`/来源`s1`），当防晒帘损坏（资料中具体表述为“撕裂”）且照度检测仍合格时：\n- **原件**：不再继续展示（按规定撤下）。\n- **照片**：继续展示。\n\n该结论直接依据资料中明确记载的展示规则与当前状态描述得出。资料同时指出，电子目录的开放与展柜条件无关，将照常运行。若实际损坏程度或环境照度条件发生改变，展示状态需以实际检测数据及对应规则为准。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-exhibit",
+          "ssession_id": 1,
+          "question": "电子目录是否关闭，照度是否因帘坏就不合格？",
+          "system_response": "\n\n根据提供的记忆材料（用户陈述 `s0`/`s1` 及语义视图 `e0`/`e1`/`e2`）在查询时间（2032年6月2日）内的报告内容：\n\n1. **电子目录是否关闭？** 否。材料明确报告“电子目录一直开放，与展柜条件无关”，且在相关情境下也指出“电子目录照常”。\n2. **照度是否因帘坏就不合格？** 否。材料明确报告“照度检测仍合格”。“防晒帘完好”与“照度合格”是并列的独立条件；防晒帘损坏仅触发“按规则撤下原件”的操作，并不导致照度判定为不合格。照片因照度合格可继续展出，目录亦维持开放。\n\n以上均为记忆材料内的直接陈述与规则引用。材料未提供其他例外或冲突条件影响该判定。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-exhibit",
+          "ssession_id": 2,
+          "question": "帘修好但照度不合格后原件和照片可展吗？",
+          "system_response": "\n\n根据提供的记忆材料（标签 `e0`，来源 `s0` 的用户消息报告），在防晒帘修好但照度检测不合格的情况下，**原件不能展出，照片也需要撤下**（电子目录保持不变）。该状态为用户消息中明确报告的结论。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-exhibit",
+          "ssession_id": 2,
+          "question": "防晒帘现在是否完好，电子目录状态如何？",
+          "system_response": "\n\n根据所交付的记忆材料，针对查询日期（2032年6月3日09:00:00）的状态如下：\n\n- **防晒帘状态**：已修好（处于完好状态）。依据为当日（2032-06-03）的用户观测报告，明确记载“防晒帘修好”。\n- **电子目录状态**：持续开放且状态不变。报告指出电子目录的开放与展柜条件无关，未受帘幕修复或照度检测结果的影响。\n\n注：以上结论基于交付材料中时间戳为2032-06-03的用户报告（s1）。历史记录中曾记载6月1日完好、6月2日撕裂，但截至查询日的最新报告已确认修复状态。未交付材料外的其他后续变化或外部条件无法确定。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-inventory",
+          "ssession_id": 1,
+          "question": "版画册期初实际多少，最初手抄表写了多少？",
+          "system_response": null,
+          "result_type": null,
+          "reader_failure": {
+            "type": "ValueError",
+            "message": "Provider output incomplete: length",
+            "finish_reason": "length",
+            "phase": "confirmed_response",
+            "response_ref": "http/dependency-selection/native/halumem/method-screen-inventory/1/qa/0/retrieval.json/response.json",
+            "failure_ref": "http/dependency-selection/native/halumem/method-screen-inventory/1/qa/0/retrieval.json/failure.json"
+          }
+        },
+        {
+          "uuid": "method-screen-inventory",
+          "ssession_id": 1,
+          "question": "这次更正代表新到五本吗，散文集期初多少？",
+          "system_response": "\n\n根据您于2032年6月2日核对原始送货单后作出的更正声明：\n\n1. **这次更正是否代表新到五本**：不代表新到货。您明确指出期初版画册记录的“十二本”是手抄抄错的笔误，实际版画册期初库存应为十七本，**并不是今天新增了五本**。\n2. **散文集期初多少**：散文集期初库存为**八本**（该项在更正中确认为无误）。\n\n以上结论均严格基于您提供的更正记录与期初库存录入信息，未作额外推断。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-inventory",
+          "ssession_id": 2,
+          "question": "卖出两本后版画册剩多少，依据哪个期初数？",
+          "system_response": "\n\n依据记忆记录，卖出两本后版画册剩余**15本**。\n\n该结果依据**修正后的期初数17本**。原期初数曾录入为12本（系用户手抄抄错），后经核对原始送货单更正为17本。结合用户于2032年6月3日的报告（今日实际售出两本），按此已更正的期初数计算得出剩余15本。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-inventory",
+          "ssession_id": 2,
+          "question": "最初手抄表的版画册数字和当前散文集库存分别是多少？",
+          "system_response": null,
+          "result_type": null,
+          "reader_failure": {
+            "type": "ValueError",
+            "message": "Provider output incomplete: length",
+            "finish_reason": "length",
+            "phase": "confirmed_response",
+            "response_ref": "http/dependency-selection/native/halumem/method-screen-inventory/2/qa/1/retrieval.json/response.json",
+            "failure_ref": "http/dependency-selection/native/halumem/method-screen-inventory/2/qa/1/retrieval.json/failure.json"
+          }
+        },
+        {
+          "uuid": "method-screen-credits",
+          "ssession_id": 1,
+          "question": "《芦灯》实际译者是谁，初稿错写谁？",
+          "system_response": "\n\n根据提供的记忆材料，回答如下：\n\n- **实际译者**：简岚。依据来源e0（作者亲自发送的署名页声明），《芦灯》自创作时的实际译者即为简岚。\n- **初稿错写**：简霖。依据来源e1（节目册初稿录入记录），初稿系根据口头介绍录入，误将译者记为简霖（实为听错）。\n\n该记录为2026年10月15日的初稿署名纠错说明，明确指出“简霖”系听错所致，属于初稿纠正而非更换译者。记忆材料未提及时间限制、例外条件或其他不确定性。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-credits",
+          "ssession_id": 1,
+          "question": "《芦灯》配乐和《雨梯》译者是谁？",
+          "system_response": "\n\n根据已交付的记忆材料，回答如下：\n\n- **《芦灯》配乐**：**牧安**\n- **《雨梯》译者**：**苏遥**\n\n**信息与状态说明**：\n以上信息源自用户根据口头介绍录入的《节目册初稿》（e1/e3）。尽管作者在后续反馈中对《芦灯》的译者进行了更正（确认为简岚，非简霖），但作者已明确声明“**配乐和另一剧目不变**”（e0）。因此，《芦灯》配乐维持初稿记录的**牧安**，《雨梯》译者维持初稿记录的**苏遥**。\n\n注：记忆记录为初稿录入及作者单方确认状态，未提供后续官方定稿文件或变更例外说明。若需最终署名效力，需以最终发布版本或完整署名原件为准。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-credits",
+          "ssession_id": 2,
+          "question": "简霖的导读邀请已确认吗，他是《芦灯》译者吗？",
+          "system_response": "\n\n根据您提供的记忆材料，截至材料记录的2026年10月15日，情况如下：\n\n1. **导读邀请是否已确认？**\n   - **状态**：**未确认**。\n   - **依据与状态说明**：根据2026年10月15日的公开说明（报告类信息）明确指出：“下次再版考虑邀请简霖写导读，目前只是邀请设想，未确认。”该邀请仅作为未来再版的潜在考量，尚未落定。\n\n2. **简霖是否为《芦灯》译者？**\n   - **状态**：**不是**。\n   - **依据与状态说明**：\n     - *初稿误录*：节目册初稿曾根据口头介绍录入为简霖（报告类信息）。\n     - *作者纠错*：随后作者亲自发来署名页进行纠正（报告与纠错类信息），明确说明：“《芦灯》从创作时的译者就是**简岚**，简霖是我听错。这是初稿署名纠错，不是现在换译者”。\n     - *身份排除*：相关说明同时强调：“他不会因此成为这部短剧的译者。”\n\n**补充说明**：以上结论严格基于2026年10月15日交付的原始说明与纠错记录。当前材料未提供2026年至2032年6月3日之间的后续更新或实际执行记录，若需确认当前（2032年）的最新实际状态，现有材料不足以判定。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-credits",
+          "ssession_id": 2,
+          "question": "译者更正是发生了一次换人吗，配乐有无变化？",
+          "system_response": null,
+          "result_type": null,
+          "reader_failure": {
+            "type": "ValueError",
+            "message": "Provider output incomplete: length",
+            "finish_reason": "length",
+            "phase": "confirmed_response",
+            "response_ref": "http/dependency-selection/native/halumem/method-screen-credits/2/qa/1/retrieval.json/response.json",
+            "failure_ref": "http/dependency-selection/native/halumem/method-screen-credits/2/qa/1/retrieval.json/failure.json"
+          }
+        },
+        {
+          "uuid": "method-screen-reservation",
+          "ssession_id": 1,
+          "question": "预约制是否已经确定，何时开始？",
+          "system_response": null,
+          "result_type": null,
+          "reader_failure": {
+            "type": "ValueError",
+            "message": "Provider output incomplete: length",
+            "finish_reason": "length",
+            "phase": "confirmed_response",
+            "response_ref": "http/dependency-selection/native/halumem/method-screen-reservation/1/qa/0/retrieval.json/response.json",
+            "failure_ref": "http/dependency-selection/native/halumem/method-screen-reservation/1/qa/0/retrieval.json/failure.json"
+          }
+        },
+        {
+          "uuid": "method-screen-reservation",
+          "ssession_id": 1,
+          "question": "本周六几点、在哪层活动，二楼用途是什么？",
+          "system_response": "\n\n根据来源 s0（公开用户消息）的报告：\n- **活动开始时间**：本周六下午两点。\n- **活动楼层**：一楼。\n- **二楼用途**：二楼读书角仅用于静读。\n\n以上均为用户 s0 的直接报告内容，材料中未附加其他适用条件、例外或不确定性说明。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-reservation",
+          "ssession_id": 2,
+          "question": "讨论后是否采用预约制，周六几点开始？",
+          "system_response": "\n\n根据记忆中的记录，答案如下：\n\n1. **是否采用预约制**：**不采用**。来源记录明确指出“讨论结果是不采用预约制”，此前有人提出的相关建议未被采纳。\n2. **周六几点开始**：**下午两点**。来源中报告“周六下午两点开始”，且讨论结果确认“本周六开始时间也不变”。\n\n（以上信息均为用户在来源记录中报告的内容，具体安排以实际情况为准。）",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-reservation",
+          "ssession_id": 2,
+          "question": "我仍负责什么，二楼是否变成活动场地？",
+          "system_response": "\n\n根据提供的记忆记录（查询时间：2032年6月3日 09:00:00），针对您的两个问题回答如下：\n\n1. **您仍负责什么**：根据来源`s0`的明确报告，您仍负责**登记到场人数**。后续记录（`s1`、`s2`）仅涉及规则讨论与未来建议，未提及该职责发生调整、交接或附加条件。\n\n2. **二楼是否变成活动场地**：**没有**。来源`s0`报告“二楼读书角只供静读，活动在一楼”。在语义视图（`e1`）的当前快照中，该状态作为未指定有效期限的有效断言被保留。来源`s1`（不采用预约制、建议未采纳）与`s2`（未来预约制仅为建议、本周六仍免预约）的讨论均未提出或批准改变二楼用途或转移活动场地的决定。\n\n**结论**：基于现有材料，您的职责仍为登记到场人数，二楼仍为静读区而非活动场地。材料中未记录有关这两项内容的后续变更、生效时间节点或例外状态。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-parcel",
+          "ssession_id": 1,
+          "question": "现在是否已确定新的自取地点和启用日？",
+          "system_response": "\n\n根据提供的记录，截至2032年6月2日的报告，新的自取地点和启用日**尚未确定**。材料显示，尽管有传闻称可能因装修更换自取点，但店主至今尚未确认，具体的新地点和启用日期均处于未知状态，且未收到任何变更通知。当前交付的材料中未包含后续已确定的确切信息。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-parcel",
+          "ssession_id": 1,
+          "question": "邮寄每周几，明信片和海报各用什么包装？",
+          "system_response": "\n\n根据记忆材料中提供的信息：\n- **邮寄时间**：每周四。\n- **明信片包装**：米色信封。\n- **海报包装**：纸筒。\n\n上述内容基于关于小画社运营设置的用户报告，目前材料中显示邮寄安排尚无变更通知。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-parcel",
+          "ssession_id": 2,
+          "question": "店主确认后现在去哪里自取，可以断言永久不装修吗？",
+          "system_response": "\n\n根据记忆材料（来源s0的`reported`声明）：\n1. **现在自取地点**：继续在南窗店自取。\n2. **能否断言永久不装修**：不能断言。声明明确指出店主仅表示“装修计划暂缓”，且“没有宣布以后永久不装修”，因此无法做出永久不装修的确定推断。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-screen-parcel",
+          "ssession_id": 2,
+          "question": "邮寄、包装和我整理的时间有没有变？",
+          "system_response": "\n\n根据已交付的记忆材料（最新报告与观察时间为2026年10月15日），在您提问的时间（2032年6月3日）之前，记忆留存的状态显示这三项安排**均未发生变化**。具体报告状态如下：\n\n* **邮寄**：店主声明“仍每周四”寄出，且无后续变更通知。\n* **包装**：店主声明“照旧”（具体为明信片使用米色信封，海报使用纸筒）。\n* **我整理的时间**：组织者报告“只在周末去店里整理”。\n\n**时间与确定性说明**：\n上述三项主张均发生于2026年10月15日。在所交付的记忆范围内，未包含2026年10月至2032年6月3日之间的更新、修正或新观察记录。因此，**无法从已交付材料中确定该长时段内是否有实际变动**；当前仅能依据最新留存记忆确认其显示状态为“未变”。",
+          "result_type": "Correct",
+          "reader_failure": null
+        }
+      ],
+      "maintenance_status_counts": {
+        "completed": 31,
+        "incomplete": 5
+      },
+      "maintenance": [
+        {
+          "owner": "method-screen-archive",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-archive",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-archive",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-credits",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            },
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-credits",
+          "session": 1,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ]
+        },
+        {
+          "owner": "method-screen-credits",
+          "session": 2,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ]
+        },
+        {
+          "owner": "method-screen-exhibit",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-exhibit",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-exhibit",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-inventory",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-inventory",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-inventory",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-kiln",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-kiln",
+          "session": 1,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ]
+        },
+        {
+          "owner": "method-screen-kiln",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-maps",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-maps",
+          "session": 1,
+          "status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_SUPPORT_ROUTE_INVALID"
+            }
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/method-screen-maps/1:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "reason": "EDIT_SUPPORT_ROUTE_INVALID",
+                "id": "285a2022-eeeb-5fa8-a776-469d13fe4625",
+                "revision": 1,
+                "effect": "none",
+                "content_verification": "unchecked",
+                "formation_status": "pending",
+                "raw_preserved": true
+              }
+            }
+          ]
+        },
+        {
+          "owner": "method-screen-maps",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-parcel",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-parcel",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-parcel",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-projection",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-projection",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-projection",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-reservation",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-reservation",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-reservation",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-studio",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            },
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-studio",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            },
+            {
+              "ok": true,
+              "status": "no_change"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-studio",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-tickets",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-tickets",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-tickets",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-walk",
+          "session": 0,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ]
+        },
+        {
+          "owner": "method-screen-walk",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        },
+        {
+          "owner": "method-screen-walk",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "unprocessed": []
+        }
+      ],
+      "formation": {
+        "method-screen-archive": {
+          "records": 1,
+          "units": 3
+        },
+        "method-screen-credits": {
+          "records": 2,
+          "units": 3
+        },
+        "method-screen-exhibit": {
+          "records": 1,
+          "units": 4
+        },
+        "method-screen-inventory": {
+          "records": 1,
+          "units": 4
+        },
+        "method-screen-kiln": {
+          "records": 1,
+          "units": 4
+        },
+        "method-screen-maps": {
+          "records": 1,
+          "units": 4
+        },
+        "method-screen-parcel": {
+          "records": 1,
+          "units": 5
+        },
+        "method-screen-projection": {
+          "records": 1,
+          "units": 3
+        },
+        "method-screen-reservation": {
+          "records": 1,
+          "units": 5
+        },
+        "method-screen-studio": {
+          "records": 2,
+          "units": 4
+        },
+        "method-screen-tickets": {
+          "records": 1,
+          "units": 5
+        },
+        "method-screen-walk": {
+          "records": 0,
+          "units": 0
+        }
+      },
+      "graph_cases": {
+        "method-screen-archive": {
+          "relations": true,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-credits": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-exhibit": {
+          "relations": false,
+          "groups": true,
+          "or_groups": false
+        },
+        "method-screen-inventory": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-kiln": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-maps": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-parcel": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-projection": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-reservation": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-studio": {
+          "relations": true,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-tickets": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        },
+        "method-screen-walk": {
+          "relations": false,
+          "groups": false,
+          "or_groups": false
+        }
+      },
+      "costs": {
+        "maintenance": {
+          "responses": 36,
+          "known_tokens": 301570,
+          "unknown_usage_responses": 0
+        },
+        "impact": {
+          "responses": 23,
+          "known_tokens": 92980,
+          "unknown_usage_responses": 0
+        },
+        "reader": {
+          "responses": 43,
+          "known_tokens": 147469,
+          "unknown_usage_responses": 0
+        },
+        "judge": {
+          "responses": 43,
+          "known_tokens": 112326,
+          "unknown_usage_responses": 0
+        },
+        "embedding": {
+          "responses": 100,
+          "known_tokens": 5723,
+          "unknown_usage_responses": 0
+        },
+        "evidence_selection": {
+          "responses": 48,
+          "known_tokens": 259676,
+          "unknown_usage_responses": 0
+        }
+      },
+      "state_metrics": {
+        "opportunities": 24,
+        "ujs": 13,
+        "target_and_preservation_only": 14,
+        "dimensions": {
+          "target_correct": 18,
+          "non_target_postconditions": 19,
+          "time_scope_correct": 24,
+          "unit_source_modality_faithful": 23
+        },
+        "strata": {
+          "change_or_new_assertion": {
+            "opportunities": 23,
+            "ujs": 13
+          },
+          "preservation": {
+            "opportunities": 1,
+            "ujs": 0
+          }
+        }
+      },
+      "requests_without_response": []
+    }
+  },
+  "state_review": {
+    "status": "ALL_48_POST_UPDATE_STATES_REVIEWED",
+    "reviewer": "same source author/developer; not independent or blind",
+    "source_commit": "463b5182",
+    "assessment_type": "manual state review under predeclared target/preserve obligations; separate from official QA labels",
+    "rubric": {
+      "target": "current required root/derived values or new modality must be represented; deterministic forward arithmetic is allowed, inverse inference of missing causal premises is not",
+      "non_target": "all predeclared postconditions, including initial facts still required; missing formation is counted but separately identified from later damage",
+      "time_scope": "literal conditions and explicit applicability must agree; report clocks cannot become unsupported onset dates; appropriately attributed chronological reports can coexist without destructive overwrite",
+      "source": "strict unit-level support/attribution and modality; record-level retention of an old Source does not itself repair a unit newly attributed only to an unrelated update",
+      "pragmatics": "judge meaning, explicit reference context and supplied predicates, not exact text or number of units; kind observed still has actual user ownership and unchecked verification and is not counted as independent verification",
+      "ujs": "all four dimensions true; target+preservation-only also reported so metadata penalties remain visible",
+      "no_op_stratum": "maps event2 is preservation/preparation; report separately from the other23 events per arm"
+    },
+    "formation_notes": {
+      "candidate_walk": "confirmed Editor length; empty semantic state at event0, later statuses do not recreate the missing rules",
+      "candidate_exhibit": "separate photo-only-light rule omitted; one AND group for combined original/photo conclusion formed",
+      "plain_inventory": "hand-copy detail not a standalone unit, but source attribution and old count remain in the original bound Source/history; not treated as disappearance of the historical count"
+    },
+    "graph_observations": {
+      "condition_override": "candidate archive and studio actually form two edges each then retract exceptions",
+      "support_group": "candidate exhibit forms one group; first change no_change, next changes premise and target but leaves group pending via changed_premises",
+      "or_groups": "no committed explicit OR alternatives observed; alternatives are preserved as ordinary text"
+    },
+    "rows": [
+      {
+        "case": "method-screen-maps",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": false,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Both periods are written, but effective_from=2032-06-05 scopes the whole unit including its pre-June-5 clause.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-maps/1/complete.json"
+      },
+      {
+        "case": "method-screen-maps",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "preservation",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": false,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": true,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "Existing future plan still prevents premature relocation; attempted preparation edit is rejected. Composite time-limit mismatch remains.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-maps/2/complete.json"
+      },
+      {
+        "case": "method-screen-maps",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": false,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Future relocation update is rejected with EDIT_SUPPORT_ROUTE_INVALID; no June-5/seventh-cabinet plan stored.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-maps/1/complete.json"
+      },
+      {
+        "case": "method-screen-maps",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "preservation",
+        "target_correct": false,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "No change leaves the missing future relocation plan unrepaired.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-maps/2/complete.json"
+      },
+      {
+        "case": "method-screen-kiln",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": false,
+        "time_scope_correct": false,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": false,
+        "new_non_target_damage": true,
+        "review": "Qiao replaces Xia, but replacing the key clause loses front-desk custody. The key non-transfer statement also inherits an unsupported June-2 effective start.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-kiln/1/complete.json"
+      },
+      {
+        "case": "method-screen-kiln",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": false,
+        "time_scope_correct": false,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "Unconfirmed cover and next-week absence stored; front-desk custody and the key timing problem remain missing/wrong.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-kiln/2/complete.json"
+      },
+      {
+        "case": "method-screen-kiln",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": false,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Editor confirmed length response produces no commit; Xia remains instead of Qiao. Other stored facts survive.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-kiln/1/complete.json"
+      },
+      {
+        "case": "method-screen-kiln",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": false,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "Absence/unknown cover stored, but the already-effective Qiao assignment is still missing; old Xia clause persists.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-kiln/2/complete.json"
+      },
+      {
+        "case": "method-screen-archive",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Practice copies alone get the class-time exemption; originals, other copies, digital copies and loan registration retain their scopes.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-archive/1/complete.json"
+      },
+      {
+        "case": "method-screen-archive",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Temporary exemption is removed/restored to general gloves; actual old versions and withdrawal Source remain available.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-archive/2/complete.json"
+      },
+      {
+        "case": "method-screen-archive",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Practice copies alone get the class-time exemption; originals, other copies, digital copies and loan registration retain their scopes.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-archive/1/complete.json"
+      },
+      {
+        "case": "method-screen-archive",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Temporary exemption is removed/restored to general gloves; actual old versions and withdrawal Source remain available.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-archive/2/complete.json"
+      },
+      {
+        "case": "method-screen-studio",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": false,
+        "time_scope_correct": false,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": false,
+        "new_non_target_damage": true,
+        "review": "Friday/hour exception stored by replacing the general clause, losing headphone permission and the ordinary after-eight ban outside that test.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-studio/1/complete.json"
+      },
+      {
+        "case": "method-screen-studio",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": false,
+        "time_scope_correct": false,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "Cancellation stored, but the lost headphone permission and full general night rule are not restored.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-studio/2/complete.json"
+      },
+      {
+        "case": "method-screen-studio",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Friday test exception is scoped by condition/override; general rule, headphones, control room and cable return stay stored.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-studio/1/complete.json"
+      },
+      {
+        "case": "method-screen-studio",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Actual condition/override preserves the general rule and separate headphone/control-room/cable claims; cancellation removes only the exception.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-studio/2/complete.json"
+      },
+      {
+        "case": "method-screen-tickets",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Card expiry preserves invitation alternative, booking requirement, other member and poster color; old and new unit supports both retained.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-tickets/1/complete.json"
+      },
+      {
+        "case": "method-screen-tickets",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": false,
+        "ujs": false,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Admission remains while discussion booking is cancelled. The replacement also repeats card expiry but keeps only S2 at unit level; S2 does not report/reaffirm that expiry. Record-level history still retains S1.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-tickets/2/complete.json"
+      },
+      {
+        "case": "method-screen-projection",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Supply alternative and shared fan requirement preserved. Earlier reported states remain temporally attributable; the later change determines current state. Subtitle independence remains explicit.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-projection/1/complete.json"
+      },
+      {
+        "case": "method-screen-projection",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Supply alternative and shared fan requirement preserved. Earlier reported states remain temporally attributable; the later change determines current state. Subtitle independence remains explicit.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-projection/2/complete.json"
+      },
+      {
+        "case": "method-screen-tickets",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Card expiry preserves invitation alternative, booking requirement, other member and poster color; old and new unit supports both retained.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-tickets/1/complete.json"
+      },
+      {
+        "case": "method-screen-tickets",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": false,
+        "ujs": false,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Admission remains while discussion booking is cancelled. The replacement also repeats card expiry but keeps only S2 at unit level; S2 does not report/reaffirm that expiry. Record-level history still retains S1.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-tickets/2/complete.json"
+      },
+      {
+        "case": "method-screen-projection",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Supply alternative and shared fan requirement preserved. Earlier reported states remain temporally attributable; the later change determines current state. Subtitle independence remains explicit.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-projection/1/complete.json"
+      },
+      {
+        "case": "method-screen-projection",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Supply alternative and shared fan requirement preserved. Earlier reported states remain temporally attributable; the later change determines current state. Subtitle independence remains explicit.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-projection/2/complete.json"
+      },
+      {
+        "case": "method-screen-walk",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": false,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Stores route outcomes but omits the changed bridge/guide premises needed by the declared update. Does not infer missing causes backwards from eligibility outcomes.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-walk/1/complete.json"
+      },
+      {
+        "case": "method-screen-walk",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": false,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "Current bridge/guide and route outcomes are present, but first formation truncated: both route rules and indoor independence were never stored.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-walk/1/complete.json"
+      },
+      {
+        "case": "method-screen-exhibit",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Changed physical conditions and corresponding original/photo outcomes updated; both distinct rules and independent catalog retained.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-exhibit/1/complete.json"
+      },
+      {
+        "case": "method-screen-walk",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": false,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Stores route outcomes but omits the changed bridge/guide premises needed by the declared update. Does not infer missing causes backwards from eligibility outcomes.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-walk/2/complete.json"
+      },
+      {
+        "case": "method-screen-walk",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": false,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "Current bridge/guide and route outcomes are present, but first formation truncated: both route rules and indoor independence were never stored.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-walk/2/complete.json"
+      },
+      {
+        "case": "method-screen-exhibit",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Changed physical conditions and corresponding original/photo outcomes updated; both distinct rules and independent catalog retained.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-exhibit/2/complete.json"
+      },
+      {
+        "case": "method-screen-exhibit",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": false,
+        "non_target_postconditions": false,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "Correct Impact region includes premise and successor, but Editor no_change leaves curtain/intact and both/displayable stale. Separate photo-only-light rule was omitted at formation.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-exhibit/1/complete.json"
+      },
+      {
+        "case": "method-screen-exhibit",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": false,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "New conditions and both withdrawals stored; photo-only-light rule still absent. Old support group is marked changed-premise, so it is not treated as a confirmed new proof.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-exhibit/2/complete.json"
+      },
+      {
+        "case": "method-screen-inventory",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": false,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Initial amount corrected to17 and original12 remains in history; event_at incorrectly moves the initial inventory to the correction/report day June2.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-inventory/1/complete.json"
+      },
+      {
+        "case": "method-screen-inventory",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": false,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": true,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "Two sold/current15 and unchanged essays recorded, but the erroneous initial-inventory event_at remains.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-inventory/2/complete.json"
+      },
+      {
+        "case": "method-screen-inventory",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Corrects initial amount to17 without changing its event date into the report date; first12 and hand-copy attribution remain retrievable.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-inventory/1/complete.json"
+      },
+      {
+        "case": "method-screen-inventory",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Initial17 and the explicit two-book sale determine15 by forward arithmetic over the arrived stream; no other stock event is asserted. Essays and archived hand-copy provenance preserved. Current15 is not redundantly materialized.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-inventory/2/complete.json"
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Translator corrected to Jian Lan, with first wrong name in actual history; composer and other play translator preserved.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-credits/1/complete.json"
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": false,
+        "ujs": false,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Proposed preface remains tentative and actual translator remains Jian Lan, but an extra clause weakens “will not thereby become translator” into “not confirmed as translator”, moving uncertainty onto the wrong role.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-credits/2/complete.json"
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": false,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Editor confirmed length response: no correction is stored; old text explicitly remains a draft report, not a newly verified fact.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-credits/1/complete.json"
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": false,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": false,
+        "target_and_preservation_only": false,
+        "inherited_gap": true,
+        "new_non_target_damage": false,
+        "review": "Another confirmed Editor length response: invitation proposal not stored and previous correction gap remains.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-credits/2/complete.json"
+      },
+      {
+        "case": "method-screen-reservation",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Proposal remains undecided with no start date; the currently scheduled Saturday still has no reservation and unchanged time/place/responsibility.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-reservation/1/complete.json"
+      },
+      {
+        "case": "method-screen-reservation",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "No-reservation decision retained; unadopted three-o-clock proposal does not replace two-o-clock start; other facts unchanged.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-reservation/2/complete.json"
+      },
+      {
+        "case": "method-screen-parcel",
+        "arm": "plain",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Rumor remains unconfirmed with unknown new place/date. Current South Window pickup is recoverable from the retained topic/reference and S0 support; postage, packaging and weekends remain.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-parcel/1/complete.json"
+      },
+      {
+        "case": "method-screen-parcel",
+        "arm": "plain",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Temporary shelving of renovation remains distinct from permanent denial; South Window pickup and all other settings remain.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/plain/MiLAi-memory-only/predictions/halumem/method-screen-parcel/2/complete.json"
+      },
+      {
+        "case": "method-screen-reservation",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Proposal remains undecided with no start date; the currently scheduled Saturday still has no reservation and unchanged time/place/responsibility.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-reservation/1/complete.json"
+      },
+      {
+        "case": "method-screen-reservation",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "No-reservation decision retained; unadopted three-o-clock proposal does not replace two-o-clock start; other facts unchanged.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-reservation/2/complete.json"
+      },
+      {
+        "case": "method-screen-parcel",
+        "arm": "candidate",
+        "session": 1,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Rumor remains unconfirmed with unknown new place/date. Current South Window pickup is recoverable from the retained topic/reference and S0 support; postage, packaging and weekends remain.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-parcel/1/complete.json"
+      },
+      {
+        "case": "method-screen-parcel",
+        "arm": "candidate",
+        "session": 2,
+        "stratum": "change_or_new_assertion",
+        "target_correct": true,
+        "non_target_postconditions": true,
+        "time_scope_correct": true,
+        "unit_source_modality_faithful": true,
+        "ujs": true,
+        "target_and_preservation_only": true,
+        "inherited_gap": false,
+        "new_non_target_damage": false,
+        "review": "Temporary shelving of renovation remains distinct from permanent denial; South Window pickup and all other settings remain.",
+        "evidence_path": "artifacts/method-architecture/screening-v1/candidate/MiLAi-memory-only/predictions/halumem/method-screen-parcel/2/complete.json"
+      }
+    ],
+    "scoring_caution": "These are source-author annotations, not official/independent state scores. Full per-event evidence is retained for re-review; no source-assisted QA repair is counted as a state mutation."
+  },
+  "queue_ledger_delta": {
+    "generation_requests": 325,
+    "generation": {
+      "known_tokens": 1449622,
+      "charged_tokens": 1449622,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 11707,
+      "charged_tokens": 11707,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens_match": true,
+    "generation_requests_match": true,
+    "embedding_tokens_match": true
+  },
+  "paired_descriptive_estimates": {
+    "ujs": {
+      "candidate_minus_plain": 0.041666666666666664,
+      "cluster_bootstrap_95_percent": [
+        -0.25,
+        0.3333333333333333
+      ],
+      "clusters": 12,
+      "replicates": 20000,
+      "seed": 20261015,
+      "case_differences": {
+        "method-screen-archive": 0.0,
+        "method-screen-credits": -0.5,
+        "method-screen-exhibit": -1.0,
+        "method-screen-inventory": 1.0,
+        "method-screen-kiln": 0.0,
+        "method-screen-maps": 0.0,
+        "method-screen-parcel": 0.0,
+        "method-screen-projection": 0.0,
+        "method-screen-reservation": 0.0,
+        "method-screen-studio": 1.0,
+        "method-screen-tickets": 0.0,
+        "method-screen-walk": 0.0
+      }
+    },
+    "target_and_preservation_only": {
+      "candidate_minus_plain": -0.16666666666666666,
+      "cluster_bootstrap_95_percent": [
+        -0.5,
+        0.16666666666666666
+      ],
+      "clusters": 12,
+      "replicates": 20000,
+      "seed": 20261015,
+      "case_differences": {
+        "method-screen-archive": 0.0,
+        "method-screen-credits": -1.0,
+        "method-screen-exhibit": -1.0,
+        "method-screen-inventory": 0.0,
+        "method-screen-kiln": 0.0,
+        "method-screen-maps": -1.0,
+        "method-screen-parcel": 0.0,
+        "method-screen-projection": 0.0,
+        "method-screen-reservation": 0.0,
+        "method-screen-studio": 1.0,
+        "method-screen-tickets": 0.0,
+        "method-screen-walk": 0.0
+      }
+    },
+    "official_qa_correct": {
+      "candidate_minus_plain": 0.0,
+      "cluster_bootstrap_95_percent": [
+        -0.1875,
+        0.20833333333333334
+      ],
+      "clusters": 12,
+      "replicates": 20000,
+      "seed": 20261015,
+      "case_differences": {
+        "method-screen-archive": 0.0,
+        "method-screen-credits": 0.0,
+        "method-screen-exhibit": 0.25,
+        "method-screen-inventory": -0.5,
+        "method-screen-kiln": -0.25,
+        "method-screen-maps": -0.25,
+        "method-screen-parcel": 0.75,
+        "method-screen-projection": 0.0,
+        "method-screen-reservation": -0.25,
+        "method-screen-studio": 0.5,
+        "method-screen-tickets": 0.0,
+        "method-screen-walk": -0.25
+      }
+    }
+  },
+  "qa_source_review": {
+    "status": "partial",
+    "fully_read_cases": [
+      "method-screen-maps",
+      "method-screen-kiln"
+    ],
+    "remaining_cases": [
+      "method-screen-archive",
+      "method-screen-credits",
+      "method-screen-exhibit",
+      "method-screen-inventory",
+      "method-screen-parcel",
+      "method-screen-projection",
+      "method-screen-reservation",
+      "method-screen-studio",
+      "method-screen-tickets",
+      "method-screen-walk"
+    ],
+    "issues": [
+      {
+        "case": "method-screen-kiln",
+        "arm": "plain",
+        "qa_flat_index": 1,
+        "issue": "capture clock treated as 2026 knowledge cutoff despite explicit2032 reports"
+      },
+      {
+        "case": "method-screen-kiln",
+        "arm": "plain",
+        "qa_flat_index": 3,
+        "issue": "unsupported June2 start date attributed to key rule"
+      },
+      {
+        "case": "method-screen-kiln",
+        "arm": "candidate",
+        "qa_flat_index": 1,
+        "issue": "capture clock treated as report/cutoff date"
+      },
+      {
+        "case": "method-screen-kiln",
+        "arm": "candidate",
+        "qa_flat_index": 2,
+        "issue": "wrong current Xia instead of Qiao; all3originalSources including the update are actually delivered, opened and resident"
+      },
+      {
+        "case": "method-screen-kiln",
+        "arm": "candidate",
+        "qa_flat_index": 3,
+        "issue": "report/observation date incorrectly collapsed to2026 and adds unjustified uncertainty"
+      }
+    ],
+    "official_labels_unchanged": true
+  },
+  "grammar_check": {
+    "path": "existing-group-edit-grammar-canonical.stdout.json",
+    "conclusion": "valid existing-group edits accepted in schema key order; initial unsorted JSON rejection is expected key-order restriction, not a newly demonstrated unavailable edit branch",
+    "model_requests": 0
+  },
+  "interpretation": "No overall architecture quality/cost advantage established. Same40/48 first Correct, candidate has5actual missing answers. Strict source-author UJS differs by1/24 with wide cluster interval; target/preservation-only favors plain. Partial source audit is not complete."
+}

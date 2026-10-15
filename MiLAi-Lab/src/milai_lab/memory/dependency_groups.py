@@ -47,20 +47,23 @@ def apply_support_groups(
     groups = {group["target_unit"]: copy.deepcopy(group)
               for group in state.get("support_groups", [])}
 
-    def resolve(reference: dict[str, Any]) -> str:
+    def resolve(reference: dict[str, Any], *, removing: bool = False) -> str:
         if "generated" in reference:
             index = reference["generated"]
             if not 0 <= index < len(generated):
                 raise FunctionalRejection("EDIT_SUPPORT_GENERATED_UNIT_UNAVAILABLE")
             return str(generated[index])
         unit_id = reference["existing"]
-        if unit_id not in ids:
+        if unit_id not in ids and not (removing and unit_id in old_ids):
             raise FunctionalRejection("EDIT_SUPPORT_UNIT_UNAVAILABLE")
         return str(unit_id)
 
     changed = set()
     for change in changes:
-        target = resolve(change["target"])
+        # Unit retraction already removes its support group. Explicitly
+        # removing that same base target's group is harmless cleanup, not a
+        # dangling new relationship. Setting groups still requires a live target.
+        target = resolve(change["target"], removing=change["operation"] == "remove")
         if target in changed:
             raise FunctionalRejection("EDIT_SUPPORT_TARGET_REPEATED")
         changed.add(target)
