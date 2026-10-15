@@ -72,6 +72,47 @@ def test_unit_closure_keeps_conditions_and_exceptions_without_unrelated_shared_t
     assert "B" in unit_closure(state, "confirm")[0]
 
 
+@pytest.mark.parametrize("reported_at", ["1998-03-14", "2041-07-09T10:00:00+08:00", None])
+def test_source_and_semantic_packs_distinguish_report_and_storage_clocks(
+    tmp_path: Path, reported_at: str | None,
+) -> None:
+    from milai_lab.methods.edit_features import EditFeatures
+    from milai_lab.methods.edit_memory import EditMemory
+
+    with SqliteStore.from_conn_string(str(tmp_path / "clocks.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        source = service.capture_user("story", "entry", "The desk is open.",
+                                      occurred_at=reported_at, calendar_context="Asia/Shanghai")
+        service.bind_public_turn("story", "entry", source["source_ref"],
+                                 config_version="clock-test", phase="start")
+        method = EditMemory(service, "M", interface_version="I2",
+                            features=EditFeatures(bound_references=True, source_metadata=True))
+        request = method.writer_request(method.prepare([source["source_ref"]], ""))
+        saved = method.apply("story", "entry", method.decode_proposal({
+            "action": "create", "clauses": [{"text": "The desk is open.",
+                "conditions": [], "evidence": ["e1"],
+                "assertion": {"source_evidence": "e1", "kind": "reported"}}],
+        }, request["mapping"]))
+        assert saved["ok"]
+        original_source = service.source(source["source_ref"])
+        original_record = service.read(saved["id"])
+        native = service.search_sources("desk", include_scope=True)
+        packs = build_evidence_packs(service, "Is the desk open?", "2041-07-09",
+                                     native["source_materials"], [original_record])
+        projected = project_packs(open_evidence_packs(service, packs), list(range(len(packs))))
+        evidence = [e for pack in projected for e in pack["evidence"]]
+        assertions = [u["assertion"] for pack in projected for u in pack.get("units", [])]
+        assert evidence and assertions
+        for value in [*evidence, *assertions]:
+            assert value["reported_at"] == reported_at
+            assert value["captured_at"] == original_source["observed_at"]
+            assert value["captured_at"] != reported_at
+            assert not {"occurred_at", "observed_at", "report_time"}.intersection(value)
+        assert sum(bool(pack.get("reused_sources")) for pack in projected) >= 1
+        assert service.source(source["source_ref"]) == original_source
+        assert service.read(saved["id"]) == original_record
+
+
 def test_expanded_hits_share_exact_parent_body_without_merging_distinct_sources(
     tmp_path: Path,
 ) -> None:

@@ -518,3 +518,11 @@ host-ab-v1已prepare0HTTP，固定Host-v2预算与dependency_read无长推理设
 具体断点包括初始Editor超长/非法支持引用、后续no_change漏记新报告、覆盖复合事实时丢失非目标、来源归属和报告/捕获时钟混淆。投影案例候选文本正确仍含不充分的支持图；室内活动的规则与当前状态也曾被不当绑定。追加臂展柜末题误答“仍撕裂”，但真实Reader请求已交付完整6月3日修好原文及正确报告时间，不能解释为新来源未交付；旧语义状态同时存在，尚不能隔离哪个输入导致误答。其他QA从原文恢复正确，不补记忆状态失败。
 
 全队列688生成响应、2,825,468生成tokens，398 embedding响应、23,740 embedding tokens，与原连续账本增量精确一致；新增unknown均0，旧9/1保留。各阶段、首次标签、逐事件回执、原文臂36次零模型capture-only及读前后record values检查见method-architecture-strong-v1-summary.json；完整逐项审阅见method-architecture-strong-v1-review.json。SimpleMem监督进程已在原队列及子进程退出后接续，12:43:04 UTC启动pilot预测，冻结46bc516e不变。
+
+## 共用证据包区分报告与系统存储时钟
+
+强对照完整审阅中，多臂把原文的observed_at（实际系统捕获时间）当作报告/事件日期，即使同包已有正确occurred_at/report_time。新的question-pack投影统一将原文及语义assertion中的这两种时钟呈现为reported_at/captured_at，与已有temporal字段一致；移除同一报告时钟的重复别名，并用一句字段说明区分captured_at/version_time与事件或有效期。输入原文、时间值、未知null、版本和可见性均不改，不从保存日期推测事件日期。既有存储契约、直接read_memory返回和Product API不变；这是Lab模型读取投影的字段变化。
+
+实际SQLite参数测试覆盖早于/晚于捕获的报告及报告日期未知，经过Source捕获、真实M保存、原文与语义包读回/去重，验证相同日期、未知不补值、原库逐值不变。40项既有证据/依赖/跨记录检查通过，新3项1.79秒通过，正常Host共享读取1项2.02秒通过，合计44个不同用例。新测试初稿因遗漏I2、bound_references/source_metadata及来源assertion配置失败；补齐测试的真实写入配置后通过，未降低生产验证。Ruff、单文件mypy、DAG/兼容facade、工具依赖和277源矩阵通过。
+
+此修订尚无实际模型质量结果，不称时钟问题已解决。Strong及正在运行的SimpleMem均使用各自原冻结源码，不热改、不重评。后续新的A/B Host从本修订冻结版本执行；既有失败与新故事分表。

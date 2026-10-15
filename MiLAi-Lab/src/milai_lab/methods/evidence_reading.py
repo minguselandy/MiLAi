@@ -503,9 +503,10 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
              else item.get("support_turns", []))
     sources = {turn["source_ref"]: f"e{index}:s{i}" for i, turn in enumerate(turns)}
     result["evidence"] = [{"source": sources[turn["source_ref"]], **{
-        key: turn[key] for key in ("role", "origin", "content", "occurred_at", "observed_at",
-                                   "calendar_context", "range") if key in turn},
-        "report_time": turn.get("occurred_at", turn.get("timestamp")),
+        key: turn[key] for key in ("role", "origin", "content", "calendar_context", "range")
+        if key in turn},
+        "reported_at": turn.get("occurred_at", turn.get("timestamp")),
+        "captured_at": turn.get("observed_at"),
     } for turn in turns]
     if item["kind"] == "semantic_view":
         view = item["applicability"]
@@ -516,7 +517,8 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
         result["units"] = [{"unit": ids[unit["unit_id"]], **{
             key: copy.deepcopy(unit[key]) for key in ("text", "role", "applicability", "temporal")
             if key in unit}, "assertion": {
-                key: sources.get(value, "support_not_opened") if key == "source_ref" else value
+                {"occurred_at": "reported_at", "observed_at": "captured_at"}.get(key, key):
+                sources.get(value, "support_not_opened") if key == "source_ref" else value
                 for key, value in unit.get("assertion", {}).items()
                 if key not in {"source_revision"}
             }} for unit in view["units"]]
@@ -559,7 +561,8 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
 SOURCE_REUSE_INSTRUCTIONS = (
     "Source labels are shared across packs. reused_sources points to evidence already shown; "
     "also_selected_as lists other selected labels for the same Source ranges. Neither adds "
-    "another observation or event."
+    "another observation or event. reported_at dates the source's report; captured_at and "
+    "version_time date system storage, not the reported event or the claim's validity."
 )
 
 
