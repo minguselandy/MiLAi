@@ -9,6 +9,7 @@ from types import SimpleNamespace
 from typing import Any
 
 import pytest
+from jsonschema import Draft202012Validator
 
 from milai_lab.analysis.edit_official import HaluMemOfficial
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
@@ -120,7 +121,10 @@ def test_replay_reopens_saved_prefix_without_future_search_or_original_writes(
     assert len(seen) == 1, "A saved replay answer is never regenerated"
 
 
-def test_retrieved_first_control_excludes_the_cached_interpretation(tmp_path, monkeypatch):
+@pytest.mark.parametrize("catalog_size", [2, 1000])
+def test_retrieved_first_control_excludes_the_cached_interpretation(
+    tmp_path, monkeypatch, catalog_size
+):
     execution, original = fixture_run(tmp_path, monkeypatch, BenchmarkRun)
     execution.settings.update(evidence_policy="question_pack_v1",
                               evidence_selection_policy="retrieved_first_v1")
@@ -137,6 +141,10 @@ def test_retrieved_first_control_excludes_the_cached_interpretation(tmp_path, mo
         native.update(records=[], raw_events=service.sources())
         materials = execution._source_first_materials(service, "Which marker?", "Jan 1",
                                                       native, [], snapshot_id="old-pool.json")
+        # Repeated candidates exercise a large index space over the same two real Sources.
+        materials.extend(copy.deepcopy(materials[-1]) for _ in range(catalog_size - len(materials)))
+        origins = native["material_assembly"]["material_origins"]
+        origins.extend(origins[-1] for _ in range(catalog_size - len(origins)))
         structure, _ = build_query_structure(service, "Which marker?", "Jan 1", [ref],
             policy="incremental", call=lambda *_: {
                 "scope": "DERIVED_SCOPE_NOT_AVAILABLE", "nodes": [],
@@ -155,6 +163,13 @@ def test_retrieved_first_control_excludes_the_cached_interpretation(tmp_path, mo
         assert payload["memories"][0]["kind"] == "original_source"
         assert "EARLY_BLUE_MARKER" in json.dumps(payload["memories"])
         assert "SECOND_SOURCE_MUST_BE_OPENED" not in json.dumps(payload["memories"])
+        schema = kwargs["response_format"]["json_schema"]["schema"]
+        for field in ("item_indices", "expand_context"):
+            spec = schema["properties"][field]
+            assert len(json.dumps(spec)) < 120
+            validator = Draft202012Validator(spec)
+            assert validator.is_valid([0, catalog_size - 1])
+            assert not validator.is_valid([-1]) and not validator.is_valid([catalog_size])
         return json.dumps({"answer": "EARLY_BLUE_MARKER", "item_indices": [],
             "expand_context": [], "gap": None, "task": "lookup", "candidate_page": 0})
 

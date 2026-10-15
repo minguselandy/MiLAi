@@ -742,16 +742,15 @@ def read_question_pack(
 
     visible = open_materials(materials, False)
     directory = [pack_candidate(item, i) for i, item in enumerate(visible)]
+    selection = ({"type": "array", "items": {"type": "integer", "minimum": 0,
+                  "maximum": len(materials) - 1}} if materials else
+                 {"type": "array", "maxItems": 0})
     schema: dict[str, Any] = {
         "type": "object", "additionalProperties": False,
         "properties": {
             "answer": {"type": ["string", "null"]},
-            "item_indices": {"type": "array",
-                             "items": {"type": "integer", "enum": list(range(len(materials)))}}
-                            if materials else {"type": "array", "maxItems": 0},
-            "expand_context": {"type": "array",
-                               "items": {"type": "integer", "enum": list(range(len(materials)))}}
-                              if materials else {"type": "array", "maxItems": 0},
+            "item_indices": selection,
+            "expand_context": selection,
             "gap": {"type": ["string", "null"]},
             "task": {"enum": ["lookup", "range"]},
             "candidate_page": {"type": "integer", "minimum": 0},
