@@ -765,7 +765,9 @@ def prepare(
         or not 0 <= settings["max_evidence_queries"] <= 2
     ):
         raise ValueError("FUNCTIONAL_EVIDENCE_QUERY_LIMIT_INVALID")
-    if settings.get("maintenance_mode", "legacy") not in {"legacy", "event_delta_v1"}:
+    if settings.get("maintenance_mode", "legacy") not in {
+        "legacy", "event_delta_v1", "semantic_delta_v1",
+    }:
         raise ValueError("FUNCTIONAL_MAINTENANCE_MODE_INVALID")
     if settings.get("result_maintenance_mode", "legacy") not in {
         "legacy", "literal_observations_v1",
