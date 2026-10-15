@@ -2066,6 +2066,19 @@ class EditMemory:
             decoded["_edit_metadata"] = metadata
         return decoded
 
+    def bind_support_groups(
+        self, state: dict[str, Any], metadata: dict[str, Any], *,
+        old: dict[str, Any] | None = None,
+        dependency_receipts: list[dict[str, Any]] | None = None,
+    ) -> None:
+        """Shared support binding for Benchmark and ordinary Functional commits."""
+        if "support_groups" in metadata:
+            apply_support_groups(
+                state, metadata["support_groups"], old=old,
+                resolve_external=(lambda ref: bind_external_unit(
+                    self.service, ref, dependency_receipts or []))
+                if self.features.cross_record_dependencies else None)
+
     def apply(
         self,
         session: str,
@@ -2176,13 +2189,10 @@ class EditMemory:
                 old=(old or {}).get("edit_state"),
                 edits=parsed.edits if parsed.action == "edit" else None,
             )
-            if "support_groups" in metadata:
-                apply_support_groups(
-                    state, metadata["support_groups"],
-                    old=(old or {}).get("edit_state") if parsed.action == "edit" else None,
-                    resolve_external=(lambda ref: bind_external_unit(
-                        self.service, ref, dependency_receipts or []))
-                    if self.features.cross_record_dependencies else None)
+            self.bind_support_groups(
+                state, metadata,
+                old=(old or {}).get("edit_state") if parsed.action == "edit" else None,
+                dependency_receipts=dependency_receipts)
         if parsed.action == "no_change":
             assert old is not None
             refs = old.get("source_refs", [old["source_ref"]])

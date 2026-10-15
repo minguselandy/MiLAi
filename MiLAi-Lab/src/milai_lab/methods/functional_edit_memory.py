@@ -1083,7 +1083,8 @@ class FunctionalEditMemory(FunctionalMemory):
                     selected_record_ids = selected
 
         def commit(
-            operation_id: str, proposal: dict[str, Any], mapping: dict[str, Any]
+            operation_id: str, proposal: dict[str, Any], mapping: dict[str, Any],
+            dependency_receipts: list[dict[str, Any]],
         ) -> dict[str, Any]:
             self.service.store.put(
                 namespace(self.service), self._writer_key(config, "edit-writer-active:"),
@@ -1093,7 +1094,10 @@ class FunctionalEditMemory(FunctionalMemory):
                 config, [row["evidence_id"] for row in mapping["evidence"].values()],
                 redelivered=delivery.get("replay", False),
             )
-            receipt = self.apply_writer_proposal(config, operation_id, proposal)
+            receipt = self.apply_writer_proposal(
+                config, operation_id, proposal,
+                dependency_receipts=dependency_receipts
+                if self.features.cross_record_dependencies else None)
             if receipt.get("ok") and (receipt.get("status") == "committed"
                                      or receipt.get("original_status") == "committed"):
                 if self.memory_view_mode != "legacy":
@@ -1348,6 +1352,8 @@ class FunctionalEditMemory(FunctionalMemory):
             }
             if "edit_matter_description" in fragments[0]:
                 state["matter_description"] = copy.deepcopy(fragments[0]["edit_matter_description"])
+            if "edit_support_group_count" in fragments[0]:
+                state["support_groups"] = []
             complete = len(by_unit) == fragments[0].get("edit_unit_count")
             for unit_id, chunks in by_unit.items():
                 chunks = sorted(chunks, key=lambda chunk: chunk["content_range"][0])
@@ -1364,6 +1370,9 @@ class FunctionalEditMemory(FunctionalMemory):
                     for relation in chunk["edit_relations"]:
                         if relation not in state["relations"]:
                             state["relations"].append(copy.deepcopy(relation))
+                    for group in chunk.get("edit_support_groups", []):
+                        if group not in state["support_groups"]:
+                            state["support_groups"].append(copy.deepcopy(group))
                 if end != chunks[0]["content_total_codepoints"]:
                     complete = False
                 state["units"].append(
@@ -1372,6 +1381,8 @@ class FunctionalEditMemory(FunctionalMemory):
             complete = complete and len(state["relations"]) == fragments[0].get(
                 "edit_relation_count", 0
             )
+            complete = complete and len(state.get("support_groups", [])) == fragments[0].get(
+                "edit_support_group_count", 0)
             if not complete:
                 unprocessed.append(
                     {
@@ -1487,7 +1498,8 @@ class FunctionalEditMemory(FunctionalMemory):
             raise FunctionalRejection("FUNCTIONAL_EDIT_V2_SUPPORT_REQUIRED")
         prior = {
             ref["evidence_id"]
-            for item in [*old["edit_state"]["units"], *old["edit_state"]["relations"]]
+            for item in [*old["edit_state"]["units"], *old["edit_state"]["relations"],
+                         *old["edit_state"].get("support_groups", [])]
             for ref in item["evidence_refs"]
         }
         if not set(kept_support) <= prior or not set(kept_support) <= set(handles):
@@ -1504,6 +1516,7 @@ class FunctionalEditMemory(FunctionalMemory):
         proposal: dict[str, Any],
         *,
         scope: dict[str, Any] | None = None,
+        dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Operation-bound decoding before existing save/update/review/commit gates."""
         if self.interface_version == "v1":
@@ -1520,6 +1533,8 @@ class FunctionalEditMemory(FunctionalMemory):
         }
         if self.features.enabled:
             requested["edit_features"] = self.features.settings()
+        if dependency_receipts is not None:
+            requested["dependency_receipts"] = dependency_receipts
         with self.service._locked():
             prior = self.service.store.get(namespace(self.service), key)
             if prior is not None:
@@ -1544,6 +1559,7 @@ class FunctionalEditMemory(FunctionalMemory):
                     *proposal.get("relations", []),
                     *proposal.get("edits", []),
                     *proposal.get("unresolved_conditions", []),
+                    *proposal.get("support_groups", []),
                 ]
                 for clause in proposal.get("clauses", []):
                     support_items.append(clause)
@@ -1602,6 +1618,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 decoded.get("relations"),
                 scope,
                 _edit_metadata=decoded.get("_edit_metadata"),
+                _dependency_receipts=dependency_receipts,
             )
         if scope is not None:
             raise FunctionalRejection("FUNCTIONAL_EDIT_SCOPE_UPDATE_NOT_EXPOSED")
@@ -1615,6 +1632,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 decoded.get("edits", []),
                 _kept_support=kept,
                 _edit_metadata=decoded.get("_edit_metadata"),
+                _dependency_receipts=dependency_receipts,
             )
         return self.rewrite_edit(
             config,
@@ -1625,6 +1643,7 @@ class FunctionalEditMemory(FunctionalMemory):
             decoded.get("withdrawal_evidence"),
             _kept_support=kept,
             _edit_metadata=decoded.get("_edit_metadata"),
+            _dependency_receipts=dependency_receipts,
         )
 
     def _project_read_packet(self, packet: dict[str, Any]) -> dict[str, Any]:
@@ -1693,6 +1712,15 @@ class FunctionalEditMemory(FunctionalMemory):
                     }
                 )
                 if self.features.enabled or projection is not None:
+                    if "support_groups" in state:
+                        result[-1]["edit_support_group_count"] = len(state["support_groups"])
+                        result[-1]["edit_support_groups"] = copy.deepcopy([
+                            group for group in state["support_groups"]
+                            if group["target_unit"] == unit["unit_id"]])
+                        result[-1]["edit_support_semantics"] = (
+                            "Stored model OR-of-AND interpretation, not verified truth. "
+                            "Foreign references require opening their actual current/bound "
+                            "record units; this page does not deliver those bodies.")
                     if "matter_description" in state:
                         result[-1]["edit_matter_description"] = state["matter_description"]
                     if "assertion" in unit:
@@ -1787,6 +1815,7 @@ class FunctionalEditMemory(FunctionalMemory):
         scope: dict[str, Any] | None = None,
         *,
         _edit_metadata: dict[str, Any] | None = None,
+        _dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         bound = self._binding(config)
         parsed = EditProposal.model_validate(
@@ -1802,6 +1831,8 @@ class FunctionalEditMemory(FunctionalMemory):
         if self.features.enabled:
             requested["edit_features"] = self.features.settings()
             requested["edit_metadata"] = _edit_metadata
+        if _dependency_receipts is not None:
+            requested["dependency_receipts"] = _dependency_receipts
         replay = self.service.replay_requested(bound["session"], operation_id, requested)
         if replay is not None:
             return replay
@@ -1811,7 +1842,6 @@ class FunctionalEditMemory(FunctionalMemory):
                 + [h for relation in parsed.relations for h in relation.evidence]
             )
         )
-        support = self._require_delivered(handles)
         state = form_state(parsed, self.service, conditioned=self.conditioned)
         if self.features.enabled:
             if _edit_metadata is None or (
@@ -1819,6 +1849,11 @@ class FunctionalEditMemory(FunctionalMemory):
             ):
                 raise FunctionalRejection("EDIT_FEATURE_METADATA_REQUIRED")
             decorate_state(state, _edit_metadata)
+            self.writer.bind_support_groups(
+                state, _edit_metadata, dependency_receipts=_dependency_receipts)
+            handles = list(dict.fromkeys([*handles, *(ref["evidence_id"]
+                for group in state.get("support_groups", []) for ref in group["evidence_refs"])]))
+        support = self._require_delivered(handles)
         saved_scope = self._scope(scope or {})
         refs = support["source_refs"]
         proposal = {
@@ -1872,6 +1907,7 @@ class FunctionalEditMemory(FunctionalMemory):
         *,
         _kept_support: list[str] | None = None,
         _edit_metadata: dict[str, Any] | None = None,
+        _dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         if not self.local:
             raise FunctionalRejection("FUNCTIONAL_EDIT_FULL_REWRITE_REQUIRED")
@@ -1886,6 +1922,8 @@ class FunctionalEditMemory(FunctionalMemory):
         if self.features.enabled:
             requested["edit_features"] = self.features.settings()
             requested["edit_metadata"] = _edit_metadata
+        if _dependency_receipts is not None:
+            requested["dependency_receipts"] = _dependency_receipts
         replay = self.service.replay_requested(bound["session"], operation_id, requested)
         if replay is not None:
             return replay
@@ -1907,8 +1945,11 @@ class FunctionalEditMemory(FunctionalMemory):
         )
         if any(edit.operation not in operations for edit in parsed.edits):
             raise FunctionalRejection(f"FUNCTIONAL_EDIT_{self.arm}_OPERATION_REQUIRED")
-        changed_handles = list(dict.fromkeys(h for edit in parsed.edits for h in edit.evidence))
-        if parsed.edits:
+        group_changes = (_edit_metadata or {}).get("support_groups", [])
+        changed_handles = list(dict.fromkeys([
+            *(h for edit in parsed.edits for h in edit.evidence),
+            *(ref["evidence_id"] for group in group_changes for ref in group["evidence_refs"])]))
+        if parsed.edits or group_changes:
             self._require_update_delivery(changed_handles, old, _kept_support)
             state = apply_local(
                 state,
@@ -1922,6 +1963,9 @@ class FunctionalEditMemory(FunctionalMemory):
                 if _edit_metadata is None:
                     raise FunctionalRejection("EDIT_FEATURE_METADATA_REQUIRED")
                 decorate_state(state, _edit_metadata, old=old["edit_state"], edits=parsed.edits)
+                self.writer.bind_support_groups(
+                    state, _edit_metadata, old=old["edit_state"],
+                    dependency_receipts=_dependency_receipts)
         content = render_state(state)
         equal = state == old["edit_state"] and content == old["content"]
         retract = not equal and not any(unit["role"] == "content" for unit in state["units"])
@@ -1933,7 +1977,8 @@ class FunctionalEditMemory(FunctionalMemory):
                     *changed_handles,
                     *(
                         ref["evidence_id"]
-                        for item in [*state["units"], *state["relations"]]
+                        for item in [*state["units"], *state["relations"],
+                                     *state.get("support_groups", [])]
                         for ref in item["evidence_refs"]
                     ),
                 ]
@@ -2009,6 +2054,7 @@ class FunctionalEditMemory(FunctionalMemory):
         *,
         _kept_support: list[str] | None = None,
         _edit_metadata: dict[str, Any] | None = None,
+        _dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Replace the whole B0/B2 representation, confirm it, or withdraw with evidence.
 
@@ -2033,6 +2079,8 @@ class FunctionalEditMemory(FunctionalMemory):
         if self.features.enabled:
             requested["edit_features"] = self.features.settings()
             requested["edit_metadata"] = _edit_metadata
+        if _dependency_receipts is not None:
+            requested["dependency_receipts"] = _dependency_receipts
         replay = self.service.replay_requested(bound["session"], operation_id, requested)
         if replay is not None:
             return replay
@@ -2071,7 +2119,6 @@ class FunctionalEditMemory(FunctionalMemory):
                     + (_edit_metadata.get("revision_evidence", []) if _edit_metadata else [])
                 )
             )
-            self._require_update_delivery(handles, old, _kept_support)
             state = form_state(parsed, self.service, conditioned=self.conditioned)
             if not any(unit["role"] == "content" for unit in state["units"]):
                 raise FunctionalRejection("FUNCTIONAL_EDIT_WITHDRAWAL_REQUIRES_EMPTY_UNITS")
@@ -2079,6 +2126,14 @@ class FunctionalEditMemory(FunctionalMemory):
             if _edit_metadata is None:
                 raise FunctionalRejection("EDIT_FEATURE_METADATA_REQUIRED")
             decorate_state(state, _edit_metadata, old=old_state)
+            self.writer.bind_support_groups(
+                state, _edit_metadata, dependency_receipts=_dependency_receipts)
+            group_handles = [ref["evidence_id"] for group in state.get("support_groups", [])
+                             for ref in group["evidence_refs"]]
+            if group_handles:
+                handles = list(dict.fromkeys([*handles, *group_handles]))
+        if not no_change and not retract:
+            self._require_update_delivery(handles, old, _kept_support)
         content = old["content"] if no_change else render_state(state)
         support = self._source_support(old)
         refs = list(

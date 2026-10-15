@@ -368,3 +368,18 @@ cross-v1已prepare零调用：两个条件化表示相同的臂、共同依赖Re
 成本排除旧seed重复引用，r1新增63次生成/333,776 tokens、12次embedding/1,436；r2新增63次生成/315,349 tokens、12次embedding/1,436。合计126次生成/649,125 tokens，embedding2,872。逐阶段回执与原连续账本完全一致，新增unknown0，旧9/1基数保留。全部读取后记录值不变。完整状态、逐答标注、成本与限制见method-architecture-factorial-v2-summary.json。
 
 跨记录8111fd8e已冻结。初次准备因live fixture路径与冻结路径不同被拒，0模型请求、账本不变；旧prepare和错误保留，执行根改为cross-v1/execution。driver1169570、exec4663串行执行control/candidate首次预测与首次评分，不重试未知请求。后续开发不改变该冻结源码。
+
+
+## 跨记录首次实测关闭
+
+8111fd8e的cross-v1/execution已于07:41:41UTC正常关闭，原exec4663返回0。双方均由模型形成两条实际记录和跨记录支持，会员卡失效后都把剩余凭条路线绑定到真实台账r2。对照初始错误地把两种凭据作为同一个AND；候选生成了OR，但把规则、培训事实与结论合成单个目标，缺少独立培训前提。这里证明外部引用/版本/逐记录机制实际运行，尚未证明模型建立完整正确的支持图。
+
+最终撤销时，对照两条记录都提交r3，保存凭条取消与不能领取，保留培训和蓝签。候选Impact选中凭条及资格，Editor却用满8192completion tokens，JSON尚未完成，零提交，两条记录均停r2且仍有凭条有效/可领取。12个首次混合问答核心事实均覆盖，但候选最后两答依赖原文，不代表状态更新成功。首次官方标签对照6Correct，候选5Correct+1invalid；第6个Judge原样返回{}且stop，不重判。全部答案来源审查登记3个时间归属问题。
+
+对照/候选预测生成tokens111,572/129,657；包含首次评分的整个队列47次生成/271,777 tokens、25次embedding/1,289，与原连续账本一致，新增unknown0。全部读取后记录值不变。用read-only SQLite连接经真实MemoryService读取旧版本：对照2记录共6版本，候选2记录共4版本，各4原文仍可见，0库写入。见method-architecture-cross-v1-summary.json。单条独立形成开发故事不能作因果或外部泛化结论，原失败不补跑覆盖。
+
+## Host支持组写入路径迁移
+
+普通Functional save/update/rewrite现在调用与Benchmark相同的EditMemory.bind_support_groups；仅关系改变也会通过原Host提交产生新版本。支持来源进入原有functional_support，旧来源保留继续受既有实际交付限制。维护commit回调增加前序真实回执参数，Host绑定同批已确认的外部版本；后续失败不回滚前序提交。B2整体重写也保存明确的新支持组，但这只是接口能力，未宣称公平性实测完成。
+
+Host记录页交付目标所属支持组及计数，Writer从实际已交付页重建它们，缺组时不伪造完整记录；外部引用明确需要实际打开正文，不把引用当证据。新4项SQLite/普通工具测试覆盖重开、关系单独更新、B2重写、外部版本绑定、幂等与部分提交。219项不同相关测试全部通过：广测218通过/1处测试回调旧签名失败，修正该fixture后恢复测试2项通过。Ruff、3文件mypy、包DAG、工具边界、277源验证矩阵通过。未跑远端CI、未执行该新源码的真实Host模型任务；共享读取选择尚未接入，W5/E5仍未完成。见method-architecture-host-support-v1.json。

@@ -1,28 +1,29 @@
-# Current development: cross-record slice checked; actual pilot next
+# Current development: cross-record pilot CLOSED; Host support writes migrated
 
-Goal ACTIVE/incomplete. Both post-cleanup factorial repeats CLOSED0: r1 at
-05:56:57UTC, r2 at06:15:05UTC on2026-10-15. Driver767706/r2worker839224 gone.
-Both repeats fully reviewed72answers/12updates; costs reconciled649125gen+2872emb.
-Combined coreY00/01/10/11=18/16/17/18 of18;3refusals in same indoor query,
-no graph synergy established. See factorial-v2-summary. Keep original runs
-and their frozen5734ade2 source unchanged; they deliver all historical candidates.
-Cross-record implementation is opt-in and now checked: real foreign record/unit/
-revision bindings, sequential confirmed receipts, global impact regions, actual
-external evidence and bound-history reading. No cross-record atomicity or O(k)
-index claim. Functional Host custom commits are not yet migrated to support groups.
-147 related tests passed; final cross4 passed1.42s;10-filemypy/Ruff/matrix passed.
-Native XGrammar0.2.3 accepts noop/create/group-reset, zero model HTTP. Earlier matrix
-command without PYTHONPATH imported installed source and failed registration; rerun
-with this worktree src passed277owned sources. No code gate was weakened.
-Cross-v1 control/candidate prepared0HTTP,4events/6QA each; model must form all records
-and links from sources, independent formation, no common-before attribution.
-LIVE cross-v1/execution driver1169570,exec4663, frozen8111fd8e; inspect driver/PIDs.
-First prepare path mismatch failed0HTTP, kept separately. Control formed actualforeign
-references but initially ANDed alternative credentials and omitted training premise.
-Candidate still pending at observation. Keep frozen source unchanged.
-Still pending fullR controlled retest, W4, W5Host,strong/external controls, additional
-model+long histories, completeA/Bstory and final scientific audit. NoSHA/subagents/
-newledger. Do not report full goal complete. Older snapshots follow.
+Goal ACTIVE/incomplete. No model job currently running. cross-v1/execution driver
+1169570/exec4663 CLOSED0 at07:41:41UTC. Frozen8111fd8e remains untouched.
+Cross firstQA control6Correct, candidate5Correct+1invalid Judge{} (no rejudge).
+Both model-created two records and actual external supports. Control initialAND
+incorrectly requires both credentials; candidateOR exists but training/rule/outcome
+merged in target, no complete premise graph. Control finalupdate commitsr3; candidate
+finalEditor length8192, no commits, bothrecords stayr2 with stalevalidvoucher/eligible.
+MixedReader answers currentdenial fromSource, not evidenceofsuccessfulstateupdate.
+Prediction gen111572/129657; full47gen271777+25embedding1289 exactledger,newunknown0.
+All12answers+8states reviewed; actualread-only SQLite service reads recover all old
+versions and4Sources/arm. See cross-v1-summary; no quality/costadvantageclaim.
+Two factorial repeats reviewed72answers/12updates; combinedcore18/16/17/18 of18,
+3same-query refusals,649125gen+2872emb exact. See factorial-v2-summary.
+NEW Host writes use same support-group binder as Benchmark; group-only updates,
+B2rewrite, actualforeign versionbinding and precedingreceipts through ordinarycommit.
+Host pages carry groups, writer reconstructs onlydelivered groupmetadata; no fetched
+unseen text.219unique related tests pass after fixingone testcallback signature;
+218passed in broad89.49s, recoverypair rerun2passed1.29s.3filemypy/Ruff/DAG/tools/
+matrixpass. RealHost model migration and shared reading-selection integration pending.
+Next complete Host reading path/realnormalHost, correctedfullR controlledtest,
+W4matchedlearning,strong/externalcontrols,extra model+longhistories,completeA/Bstory,
+and finalscientificaudit. Currentcrossbenchmark failures need generic formation and
+bounded-generation work; do not silently retune/resample originals. NoSHA/subagents/
+newledger. Keep full goal active. Older snapshots follow.
 
 # Current execution: two post-cleanup factorial repeats; analyses closed
 

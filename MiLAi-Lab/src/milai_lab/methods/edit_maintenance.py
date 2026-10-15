@@ -27,7 +27,7 @@ from milai_lab.methods.edit_memory import EditMemory
 MaintenanceRecipe = Literal["single_pass", "extract_then_edit"]
 ModelCall = Callable[[str, list[dict[str, str]], dict[str, Any]], dict[str, Any]]
 StageFit = Callable[[str, list[dict[str, str]]], bool]
-Commit = Callable[[str, dict[str, Any], dict[str, Any]], dict[str, Any]]
+Commit = Callable[[str, dict[str, Any], dict[str, Any], list[dict[str, Any]]], dict[str, Any]]
 CandidateMode = Literal["combined_dense", "per_candidate_dense"]
 MemoryViewMode = Literal["legacy", "staged", "state_driven"]
 
@@ -898,7 +898,8 @@ def maintain_event(
             try:
                 mapping = state["view"]["mapping"]
                 receipt = (
-                    commit(operation_id, proposal, mapping) if commit else method.apply(
+                    commit(operation_id, proposal, mapping, copy.deepcopy(state["receipts"]))
+                    if commit else method.apply(
                         session, operation_id, method.decode_proposal(proposal, mapping),
                         **({"dependency_receipts": state["receipts"]}
                            if method.features.cross_record_dependencies else {}),

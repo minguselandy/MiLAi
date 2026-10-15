@@ -1,0 +1,1577 @@
+{
+  "status": "CROSS_RECORD_PILOT_FIRST_OUTPUTS_REVIEWED",
+  "source_commit": "8111fd8e",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/cross-v1/execution",
+  "driver": {
+    "source_commit": "8111fd8e",
+    "driver_pid": 1169570,
+    "started_at": "2026-10-15T07:25:29.627050+00:00",
+    "steps": [
+      {
+        "arm": "control",
+        "phase": "prepare",
+        "pid": 1169576,
+        "started_at": "2026-10-15T07:25:29.627694+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T07:25:31.000950+00:00"
+      },
+      {
+        "arm": "candidate",
+        "phase": "prepare",
+        "pid": 1169723,
+        "started_at": "2026-10-15T07:25:31.001901+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T07:25:32.395327+00:00"
+      },
+      {
+        "arm": "control",
+        "phase": "predict",
+        "pid": 1169796,
+        "started_at": "2026-10-15T07:25:32.396159+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T07:31:50.128522+00:00"
+      },
+      {
+        "arm": "candidate",
+        "phase": "predict",
+        "pid": 1193572,
+        "started_at": "2026-10-15T07:31:50.131215+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T07:39:31.144795+00:00"
+      },
+      {
+        "arm": "control",
+        "phase": "score",
+        "pid": 1222342,
+        "started_at": "2026-10-15T07:39:31.147631+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T07:40:44.433139+00:00"
+      },
+      {
+        "arm": "candidate",
+        "phase": "score",
+        "pid": 1226779,
+        "started_at": "2026-10-15T07:40:44.435774+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T07:41:41.598290+00:00"
+      }
+    ],
+    "status": "PREDICTIONS_AND_FIRST_SCORES_CLOSED",
+    "events_per_arm": 4,
+    "questions_per_arm": 6,
+    "independent_formation": true,
+    "read_usage_updates": false,
+    "unknown_retry": false,
+    "closed_at": "2026-10-15T07:41:41.598721+00:00"
+  },
+  "data_role": "one authored development story, independent formation, common representation and Reader; impact update factor only; not common-before causal comparison or external benchmark",
+  "reviewer": "same source author/developer; all8event states and12answers reviewed; not independent/blind",
+  "arms": {
+    "control": {
+      "first_qa_labels": {
+        "Correct": 6
+      },
+      "first_qa_records": [
+        {
+          "question": "许澄目前能领稀有资料吗，需要哪些条件？",
+          "system_response": "\n\n根据提供的凭据台账与记录：\n\n**需要哪些条件**\n领取稀有资料需同时满足以下两项要求：\n1. 完成指定培训；\n2. 会员卡或借阅凭条至少一种处于有效状态。\n\n**许澄目前能否领取**\n可以领取。依据台账与凭据柜的报告记录：\n- 许澄的培训已完成；\n- 许澄的会员卡有效；\n- 许澄的借阅凭条有效。\n\n在提供的记录未标注有效期限制或存在例外规则的前提下，依照台账规则与截至查询时间（2034年7月2日）的凭证状态，许澄已满足全部条件，可领取稀有资料。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "凭据柜标签是什么颜色？",
+          "system_response": "\n\n根据提供的记忆材料，凭据柜标签的颜色为**蓝色**。该声明由用户在2026年10月15日的消息中作出（报告状态为 `reported`），原文表述为“凭据柜的标签用蓝色”。当前材料未注明该声明存在有效期限、修正或局部覆盖例外，因此按其所载范围适用。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "会员卡失效后许澄还能领取吗，靠什么？",
+          "system_response": "\n\n根据提供的台账更新与资格指示记录：\n\n**能领取。**\n她主要依靠以下条件：\n1. **借阅凭条仍有效**：记录明确指示“许澄的会员卡失效了，借阅凭条仍有效”。领取资格规则要求“会员卡或借阅凭条至少一种有效”，凭条满足该条件。\n2. **培训已完成**：记录确认“培训完成的事实不变”，满足领取的另一项必要前提。\n\n综合台账指示，**凭条加培训**仍支持她领取稀有资料。以上结论基于用户消息中的台账更新与资格条目记录。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "会员卡失效影响培训完成状态或柜签颜色吗？",
+          "system_response": "\n\n根据交付的材料（e0，2034-07-03 09:00:00 台账更新声明），会员卡失效**不会影响**这两项内容：\n\n1. **培训完成状态**：记录明确声明“培训完成的事实不变”。领取资格的条件为“需要完成培训，并且会员卡或借阅凭条至少一种有效”，培训状态与卡片有效性为独立条件，会员卡失效不改变已完成的培训事实。\n2. **柜签颜色**：记录明确声明“柜子标签不变”。\n\n综上，依据该时间点的记录与声明，会员卡失效既不改变培训完成的事实，也不改变凭据柜的标签颜色。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "两种凭据都无效后，许澄现在能领取吗？",
+          "system_response": "\n\n根据记录中的明确断言，领取稀有资料的条件是“完成培训，并且会员卡或借阅凭条至少一种有效”。当前许澄的培训事实虽保持不变，但两种凭据均已无效，因此记录明确指出她现在**不能**领取稀有资料。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "她的培训和柜签颜色目前怎样？",
+          "system_response": "\n\n根据交付的记忆记录（来源e0，用户声明，发生时间指向2034年7月3日），其状态如下：\n- **培训**：已完成培训的事实保持不变。\n- **柜签颜色**：蓝色柜签保持不变。\n\n记录中明确指出两者“均不变”。（注：上述为交付材料中的直接声明状态，按规则不作真实性认证，亦不补充外部推断。）",
+          "result_type": "Correct",
+          "reader_failure": null
+        }
+      ],
+      "source_reviewed_answers": [
+        {
+          "session": 1,
+          "qa": 0,
+          "question": "许澄目前能领稀有资料吗，需要哪些条件？",
+          "hypothesis": "\n\n根据提供的凭据台账与记录：\n\n**需要哪些条件**\n领取稀有资料需同时满足以下两项要求：\n1. 完成指定培训；\n2. 会员卡或借阅凭条至少一种处于有效状态。\n\n**许澄目前能否领取**\n可以领取。依据台账与凭据柜的报告记录：\n- 许澄的培训已完成；\n- 许澄的会员卡有效；\n- 许澄的借阅凭条有效。\n\n在提供的记录未标注有效期限制或存在例外规则的前提下，依照台账规则与截至查询时间（2034年7月2日）的凭证状态，许澄已满足全部条件，可领取稀有资料。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": []
+        },
+        {
+          "session": 1,
+          "qa": 1,
+          "question": "凭据柜标签是什么颜色？",
+          "hypothesis": "\n\n根据提供的记忆材料，凭据柜标签的颜色为**蓝色**。该声明由用户在2026年10月15日的消息中作出（报告状态为 `reported`），原文表述为“凭据柜的标签用蓝色”。当前材料未注明该声明存在有效期限、修正或局部覆盖例外，因此按其所载范围适用。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": [
+            "把2026捕获日期当用户报告日期；实际报告2034-07-01。"
+          ]
+        },
+        {
+          "session": 2,
+          "qa": 0,
+          "question": "会员卡失效后许澄还能领取吗，靠什么？",
+          "hypothesis": "\n\n根据提供的台账更新与资格指示记录：\n\n**能领取。**\n她主要依靠以下条件：\n1. **借阅凭条仍有效**：记录明确指示“许澄的会员卡失效了，借阅凭条仍有效”。领取资格规则要求“会员卡或借阅凭条至少一种有效”，凭条满足该条件。\n2. **培训已完成**：记录确认“培训完成的事实不变”，满足领取的另一项必要前提。\n\n综合台账指示，**凭条加培训**仍支持她领取稀有资料。以上结论基于用户消息中的台账更新与资格条目记录。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": []
+        },
+        {
+          "session": 2,
+          "qa": 1,
+          "question": "会员卡失效影响培训完成状态或柜签颜色吗？",
+          "hypothesis": "\n\n根据交付的材料（e0，2034-07-03 09:00:00 台账更新声明），会员卡失效**不会影响**这两项内容：\n\n1. **培训完成状态**：记录明确声明“培训完成的事实不变”。领取资格的条件为“需要完成培训，并且会员卡或借阅凭条至少一种有效”，培训状态与卡片有效性为独立条件，会员卡失效不改变已完成的培训事实。\n2. **柜签颜色**：记录明确声明“柜子标签不变”。\n\n综上，依据该时间点的记录与声明，会员卡失效既不改变培训完成的事实，也不改变凭据柜的标签颜色。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": []
+        },
+        {
+          "session": 3,
+          "qa": 0,
+          "question": "两种凭据都无效后，许澄现在能领取吗？",
+          "hypothesis": "\n\n根据记录中的明确断言，领取稀有资料的条件是“完成培训，并且会员卡或借阅凭条至少一种有效”。当前许澄的培训事实虽保持不变，但两种凭据均已无效，因此记录明确指出她现在**不能**领取稀有资料。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": []
+        },
+        {
+          "session": 3,
+          "qa": 1,
+          "question": "她的培训和柜签颜色目前怎样？",
+          "hypothesis": "\n\n根据交付的记忆记录（来源e0，用户声明，发生时间指向2034年7月3日），其状态如下：\n- **培训**：已完成培训的事实保持不变。\n- **柜签颜色**：蓝色柜签保持不变。\n\n记录中明确指出两者“均不变”。（注：上述为交付材料中的直接声明状态，按规则不作真实性认证，亦不补充外部推断。）",
+          "core_facts_source_author_review": true,
+          "source_review_issues": [
+            "把两者均不变引到7月3日，实际这句在7月4日来源；核心状态仍正确。"
+          ]
+        }
+      ],
+      "events": [
+        {
+          "session": 0,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "after_state": [
+            {
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 1,
+              "units": [
+                {
+                  "unit_id": "unit-fc4d0898-e611-4581-b021-ca8d7eed09c4",
+                  "text": "凭据台账须单独保存，不与后续活动资格记录合并。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-3aede8d2-c270-41f4-b629-cc8bde1e8ad8",
+                  "text": "许澄的会员卡有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-882caceb-ec3a-4db8-b736-5c407c813a20",
+                  "text": "借阅凭条有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-0974a14f-3057-46f8-ac7c-d91da2dafae0",
+                  "text": "凭据柜的标签使用蓝色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [],
+              "source_refs": [
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            }
+          ],
+          "read_record_values_unchanged": true
+        },
+        {
+          "session": 1,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "after_state": [
+            {
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 1,
+              "units": [
+                {
+                  "unit_id": "unit-02b41418-3d6a-4a28-9c13-ba3f9c36dd7d",
+                  "text": "领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:26:04.694410+00:00",
+                    "occurred_at": "2034-07-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-e4cdfc66-c48b-425a-ab3c-e9be5f45559f",
+                  "text": "许澄培训已完成，因此依照台账可以领取。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:26:04.694410+00:00",
+                    "occurred_at": "2034-07-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [
+                {
+                  "alternatives": [
+                    [
+                      "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-3aede8d2-c270-41f4-b629-cc8bde1e8ad8",
+                      "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-882caceb-ec3a-4db8-b736-5c407c813a20"
+                    ]
+                  ],
+                  "evidence_refs": [
+                    {
+                      "end": 81,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-dacab119-5543-41ad-9a38-64436c7104f8\",1,0,81]",
+                      "source_ref": "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                      "source_revision": 1,
+                      "start": 0
+                    },
+                    {
+                      "end": 52,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-66bba48c-597f-473b-985b-7b8385c5ed2e\",1,0,52]",
+                      "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                      "source_revision": 1,
+                      "start": 0
+                    }
+                  ],
+                  "external_units": {
+                    "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-3aede8d2-c270-41f4-b629-cc8bde1e8ad8": {
+                      "record_id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+                      "revision": 1,
+                      "unit_id": "unit-3aede8d2-c270-41f4-b629-cc8bde1e8ad8"
+                    },
+                    "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-882caceb-ec3a-4db8-b736-5c407c813a20": {
+                      "record_id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+                      "revision": 1,
+                      "unit_id": "unit-882caceb-ec3a-4db8-b736-5c407c813a20"
+                    }
+                  },
+                  "group_id": "support-f09331df-4f64-4744-922b-c91631f0ea08",
+                  "target_unit": "unit-e4cdfc66-c48b-425a-ab3c-e9be5f45559f"
+                }
+              ],
+              "source_refs": [
+                "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            },
+            {
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 1,
+              "units": [
+                {
+                  "unit_id": "unit-fc4d0898-e611-4581-b021-ca8d7eed09c4",
+                  "text": "凭据台账须单独保存，不与后续活动资格记录合并。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-3aede8d2-c270-41f4-b629-cc8bde1e8ad8",
+                  "text": "许澄的会员卡有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-882caceb-ec3a-4db8-b736-5c407c813a20",
+                  "text": "借阅凭条有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-0974a14f-3057-46f8-ac7c-d91da2dafae0",
+                  "text": "凭据柜的标签使用蓝色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [],
+              "source_refs": [
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            }
+          ],
+          "read_record_values_unchanged": true
+        },
+        {
+          "session": 2,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "after_state": [
+            {
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 2,
+              "units": [
+                {
+                  "unit_id": "unit-02b41418-3d6a-4a28-9c13-ba3f9c36dd7d",
+                  "text": "领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:26:04.694410+00:00",
+                    "occurred_at": "2034-07-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-e4cdfc66-c48b-425a-ab3c-e9be5f45559f",
+                  "text": "培训完成的事实不变。凭条加培训仍支持她领取稀有资料。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:27:51.197734+00:00",
+                    "occurred_at": "2034-07-03T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [
+                {
+                  "alternatives": [
+                    [
+                      "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-882caceb-ec3a-4db8-b736-5c407c813a20"
+                    ]
+                  ],
+                  "evidence_refs": [
+                    {
+                      "end": 73,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-ecadbc92-9735-4c67-9582-f58157f9cb19\",1,0,73]",
+                      "source_ref": "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                      "source_revision": 1,
+                      "start": 0
+                    },
+                    {
+                      "end": 52,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-66bba48c-597f-473b-985b-7b8385c5ed2e\",1,0,52]",
+                      "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                      "source_revision": 1,
+                      "start": 0
+                    }
+                  ],
+                  "external_units": {
+                    "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-882caceb-ec3a-4db8-b736-5c407c813a20": {
+                      "record_id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+                      "revision": 2,
+                      "unit_id": "unit-882caceb-ec3a-4db8-b736-5c407c813a20"
+                    }
+                  },
+                  "group_id": "support-f09331df-4f64-4744-922b-c91631f0ea08",
+                  "target_unit": "unit-e4cdfc66-c48b-425a-ab3c-e9be5f45559f"
+                }
+              ],
+              "source_refs": [
+                "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            },
+            {
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 2,
+              "units": [
+                {
+                  "unit_id": "unit-fc4d0898-e611-4581-b021-ca8d7eed09c4",
+                  "text": "凭据台账须单独保存，不与后续活动资格记录合并。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-3aede8d2-c270-41f4-b629-cc8bde1e8ad8",
+                  "text": "许澄的会员卡失效了。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:27:51.197734+00:00",
+                    "occurred_at": "2034-07-03T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-882caceb-ec3a-4db8-b736-5c407c813a20",
+                  "text": "借阅凭条仍有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:27:51.197734+00:00",
+                    "occurred_at": "2034-07-03T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-0974a14f-3057-46f8-ac7c-d91da2dafae0",
+                  "text": "凭据柜的标签使用蓝色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [],
+              "source_refs": [
+                "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            }
+          ],
+          "read_record_values_unchanged": true
+        },
+        {
+          "session": 3,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 3
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "after_state": [
+            {
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 3,
+              "units": [
+                {
+                  "unit_id": "unit-fc4d0898-e611-4581-b021-ca8d7eed09c4",
+                  "text": "凭据台账须单独保存，不与后续活动资格记录合并。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-3aede8d2-c270-41f4-b629-cc8bde1e8ad8",
+                  "text": "许澄的会员卡失效了。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:27:51.197734+00:00",
+                    "occurred_at": "2034-07-03T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-882caceb-ec3a-4db8-b736-5c407c813a20",
+                  "text": "借阅凭条已取消且无效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:29:43.746859+00:00",
+                    "occurred_at": "2034-07-04T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ff47feef-7d40-4cd6-b565-29395ca16fab",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-0974a14f-3057-46f8-ac7c-d91da2dafae0",
+                  "text": "凭据柜的标签使用蓝色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:25:35.402607+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [],
+              "source_refs": [
+                "source-ff47feef-7d40-4cd6-b565-29395ca16fab",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                "source-ecadbc92-9735-4c67-9582-f58157f9cb19"
+              ]
+            },
+            {
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 3,
+              "units": [
+                {
+                  "unit_id": "unit-02b41418-3d6a-4a28-9c13-ba3f9c36dd7d",
+                  "text": "领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:26:04.694410+00:00",
+                    "occurred_at": "2034-07-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-e4cdfc66-c48b-425a-ab3c-e9be5f45559f",
+                  "text": "培训完成的事实不变。但两种凭据均已无效，她不能领取稀有资料。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:29:43.746859+00:00",
+                    "occurred_at": "2034-07-04T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ff47feef-7d40-4cd6-b565-29395ca16fab",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [
+                {
+                  "alternatives": [],
+                  "evidence_refs": [
+                    {
+                      "end": 53,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-ff47feef-7d40-4cd6-b565-29395ca16fab\",1,0,53]",
+                      "source_ref": "source-ff47feef-7d40-4cd6-b565-29395ca16fab",
+                      "source_revision": 1,
+                      "start": 0
+                    }
+                  ],
+                  "group_id": "support-f09331df-4f64-4744-922b-c91631f0ea08",
+                  "target_unit": "unit-e4cdfc66-c48b-425a-ab3c-e9be5f45559f"
+                }
+              ],
+              "source_refs": [
+                "source-ff47feef-7d40-4cd6-b565-29395ca16fab",
+                "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            }
+          ],
+          "read_record_values_unchanged": true
+        }
+      ],
+      "state_review": [
+        "建立两条实际记录及外部引用；初始组误将会员卡和凭条放进同一AND路线。",
+        "培训事实与可领取结论在同一目标单位，未作为独立共同前提。",
+        "会员卡失效后逐记录提交，单凭条路线绑定台账r2；文本保持培训与蓝色柜签。",
+        "最终双方记录均到r3，凭条取消、不能领取，培训与柜签保留；目标组为空仍不能当作新否定结论的推导证明。"
+      ],
+      "text_update_obligations_satisfied": 2,
+      "text_update_opportunities": 2,
+      "complete_support_graph_demonstrated": false,
+      "costs": {
+        "maintenance": {
+          "responses": 4,
+          "known_tokens": 43935,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "responses": 6,
+          "known_tokens": 23568,
+          "unknown_usage": 0
+        },
+        "judge": {
+          "responses": 6,
+          "known_tokens": 15901,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "responses": 13,
+          "known_tokens": 795,
+          "unknown_usage": 0
+        },
+        "evidence_selection": {
+          "responses": 6,
+          "known_tokens": 44069,
+          "unknown_usage": 0
+        }
+      },
+      "prediction_generation_tokens": 111572,
+      "requests_without_response": []
+    },
+    "candidate": {
+      "first_qa_labels": {
+        "Correct": 5,
+        "invalid": 1
+      },
+      "first_qa_records": [
+        {
+          "question": "许澄目前能领稀有资料吗，需要哪些条件？",
+          "system_response": "\n\n根据所交付的凭据台账与状态记录：\n\n**许澄目前可以领取稀有资料。**\n\n**所需条件：**\n1. 需完成培训；\n2. 会员卡或借阅凭条至少一种有效。\n\n**许澄的当前符合情况（基于已交付的凭证报告）：**\n- 培训状态：已完成；\n- 凭据状态：会员卡有效，且借阅凭条也有效。\n\n综上，许澄已满足“培训完成”及“凭据至少一种有效”的条件，依照现有台账记录可以领取。\n\n（注：以上结论严格基于所交付的材料陈述，仅反映当前记录中的资格状态，未包含超出该范围的限制、变更或额外说明。）",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "凭据柜标签是什么颜色？",
+          "system_response": "\n\n根据提供的记忆材料，该信息属于**用户报告**（reported），报告时间为2026年10月15日。内容明确指出**凭据柜的标签用蓝色**。在当前查询时间（2034年7月2日）且提供的材料中无其他覆盖或修正记录的情况下，依据现有记录，凭据柜标签为蓝色。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "会员卡失效后许澄还能领取吗，靠什么？",
+          "system_response": "\n\n根据记忆材料中的用户报告事实与台账更新记录，许澄在会员卡失效后**仍然可以领取**。\n\n**依据如下（均为材料中报告的声明与规则）**：\n- **资格规则**：材料明确规定，领取稀有资料需要“完成培训”，并且“会员卡或借阅凭条至少一种有效”。\n- **凭条状态**：台账更新报告指出，许澄的会员卡虽已失效，但**借阅凭条仍有效**。\n- **培训状态**：材料确认许澄**培训已完成的事实不变**。\n- **综合结论**：凭借有效的借阅凭条与已完成的培训记录，同时满足上述两项条件。材料中直接说明“凭条加培训仍支持她领取稀有资料”，因此依照台账与资格记录，她仍可继续领取。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "会员卡失效影响培训完成状态或柜签颜色吗？",
+          "system_response": "\n\n根据提供的记忆材料（e0、e1，均为用户报送的明确声明），会员卡失效**不影响**培训完成状态，也**不影响**柜签颜色。具体依据如下：\n\n- **培训完成状态**：用户于2034年7月3日报送的记录（e0）明确指出“培训完成的事实不变”。\n- **柜签颜色**：同条记录（e0）明确声明“柜子标签不变”；此前凭证与柜管理记录（e1）中已设定“凭据柜的标签用蓝色”。\n\n综上，会员卡失效后，许澄的培训完成状态与凭据柜标签颜色均维持原状。所交付材料中未声明其他时间限制、修正或例外条件。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "两种凭据都无效后，许澄现在能领取吗？",
+          "system_response": "\n\n根据已交付的记忆材料，许澄目前**不能领取**。\n\n**依据与说明：**\n1. **当前状态确认**：记录于2034年7月4日09:00:00的声明明确指出：“借阅凭条现在也取消了，两种凭据都已无效，因此许澄现在不能领取稀有资料。她已完成培训的事实和蓝色柜签均不变。”\n2. **规则对照**：材料中设定的领取资格规则为“领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效”。许澄的培训完成事实虽然依然有效，但因两项凭据均已失效，无法满足“至少一种有效”的并列条件。\n\n综上，凭据失效直接导致其不满足当前领取条件，故现在不能领取。",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "question": "她的培训和柜签颜色目前怎样？",
+          "system_response": "\n\n根据2034年7月4日（与查询时间一致）的来源报告（s0），许澄的相关状态均保持不变：\n* **培训状态**：她**已完成培训**的事实不变。\n* **柜签颜色**：**蓝色柜签**不变。\n\n两项内容在当日记录中均明确为“均不变”。",
+          "result_type": null,
+          "reader_failure": null
+        }
+      ],
+      "source_reviewed_answers": [
+        {
+          "session": 1,
+          "qa": 0,
+          "question": "许澄目前能领稀有资料吗，需要哪些条件？",
+          "hypothesis": "\n\n根据所交付的凭据台账与状态记录：\n\n**许澄目前可以领取稀有资料。**\n\n**所需条件：**\n1. 需完成培训；\n2. 会员卡或借阅凭条至少一种有效。\n\n**许澄的当前符合情况（基于已交付的凭证报告）：**\n- 培训状态：已完成；\n- 凭据状态：会员卡有效，且借阅凭条也有效。\n\n综上，许澄已满足“培训完成”及“凭据至少一种有效”的条件，依照现有台账记录可以领取。\n\n（注：以上结论严格基于所交付的材料陈述，仅反映当前记录中的资格状态，未包含超出该范围的限制、变更或额外说明。）",
+          "core_facts_source_author_review": true,
+          "source_review_issues": []
+        },
+        {
+          "session": 1,
+          "qa": 1,
+          "question": "凭据柜标签是什么颜色？",
+          "hypothesis": "\n\n根据提供的记忆材料，该信息属于**用户报告**（reported），报告时间为2026年10月15日。内容明确指出**凭据柜的标签用蓝色**。在当前查询时间（2034年7月2日）且提供的材料中无其他覆盖或修正记录的情况下，依据现有记录，凭据柜标签为蓝色。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": [
+            "把2026捕获日期当报告日期；实际报告2034-07-01。"
+          ]
+        },
+        {
+          "session": 2,
+          "qa": 0,
+          "question": "会员卡失效后许澄还能领取吗，靠什么？",
+          "hypothesis": "\n\n根据记忆材料中的用户报告事实与台账更新记录，许澄在会员卡失效后**仍然可以领取**。\n\n**依据如下（均为材料中报告的声明与规则）**：\n- **资格规则**：材料明确规定，领取稀有资料需要“完成培训”，并且“会员卡或借阅凭条至少一种有效”。\n- **凭条状态**：台账更新报告指出，许澄的会员卡虽已失效，但**借阅凭条仍有效**。\n- **培训状态**：材料确认许澄**培训已完成的事实不变**。\n- **综合结论**：凭借有效的借阅凭条与已完成的培训记录，同时满足上述两项条件。材料中直接说明“凭条加培训仍支持她领取稀有资料”，因此依照台账与资格记录，她仍可继续领取。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": []
+        },
+        {
+          "session": 2,
+          "qa": 1,
+          "question": "会员卡失效影响培训完成状态或柜签颜色吗？",
+          "hypothesis": "\n\n根据提供的记忆材料（e0、e1，均为用户报送的明确声明），会员卡失效**不影响**培训完成状态，也**不影响**柜签颜色。具体依据如下：\n\n- **培训完成状态**：用户于2034年7月3日报送的记录（e0）明确指出“培训完成的事实不变”。\n- **柜签颜色**：同条记录（e0）明确声明“柜子标签不变”；此前凭证与柜管理记录（e1）中已设定“凭据柜的标签用蓝色”。\n\n综上，会员卡失效后，许澄的培训完成状态与凭据柜标签颜色均维持原状。所交付材料中未声明其他时间限制、修正或例外条件。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": []
+        },
+        {
+          "session": 3,
+          "qa": 0,
+          "question": "两种凭据都无效后，许澄现在能领取吗？",
+          "hypothesis": "\n\n根据已交付的记忆材料，许澄目前**不能领取**。\n\n**依据与说明：**\n1. **当前状态确认**：记录于2034年7月4日09:00:00的声明明确指出：“借阅凭条现在也取消了，两种凭据都已无效，因此许澄现在不能领取稀有资料。她已完成培训的事实和蓝色柜签均不变。”\n2. **规则对照**：材料中设定的领取资格规则为“领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效”。许澄的培训完成事实虽然依然有效，但因两项凭据均已失效，无法满足“至少一种有效”的并列条件。\n\n综上，凭据失效直接导致其不满足当前领取条件，故现在不能领取。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": []
+        },
+        {
+          "session": 3,
+          "qa": 1,
+          "question": "她的培训和柜签颜色目前怎样？",
+          "hypothesis": "\n\n根据2034年7月4日（与查询时间一致）的来源报告（s0），许澄的相关状态均保持不变：\n* **培训状态**：她**已完成培训**的事实不变。\n* **柜签颜色**：**蓝色柜签**不变。\n\n两项内容在当日记录中均明确为“均不变”。",
+          "core_facts_source_author_review": true,
+          "source_review_issues": []
+        }
+      ],
+      "events": [
+        {
+          "session": 0,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "after_state": [
+            {
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 1,
+              "units": [
+                {
+                  "unit_id": "unit-132f519c-6aea-4ca9-bc33-1904bf47f8a6",
+                  "text": "凭据台账需单独保存，不要与后续的活动资格记录合并。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-5ed7cc71-b3f7-4e4f-8667-ab6f695824eb",
+                  "text": "许澄的会员卡有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-99cbe037-3002-4305-8870-ee85b41d9044",
+                  "text": "借阅凭条有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-79840ef4-0a89-492c-b25c-73c75dc25c87",
+                  "text": "凭据柜的标签用蓝色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [],
+              "source_refs": [
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            }
+          ],
+          "read_record_values_unchanged": true
+        },
+        {
+          "session": 1,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "after_state": [
+            {
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 1,
+              "units": [
+                {
+                  "unit_id": "unit-64353260-5c91-499c-842a-e26d5f37fddb",
+                  "text": "领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，因此依照台账可以领取。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:32:25.813276+00:00",
+                    "occurred_at": "2034-07-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [
+                {
+                  "alternatives": [
+                    [
+                      "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-5ed7cc71-b3f7-4e4f-8667-ab6f695824eb"
+                    ],
+                    [
+                      "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-99cbe037-3002-4305-8870-ee85b41d9044"
+                    ]
+                  ],
+                  "evidence_refs": [
+                    {
+                      "end": 81,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe\",1,0,81]",
+                      "source_ref": "source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe",
+                      "source_revision": 1,
+                      "start": 0
+                    },
+                    {
+                      "end": 52,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-41981da4-8ee5-4acd-8f94-9fb0b595e965\",1,0,52]",
+                      "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                      "source_revision": 1,
+                      "start": 0
+                    }
+                  ],
+                  "external_units": {
+                    "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-5ed7cc71-b3f7-4e4f-8667-ab6f695824eb": {
+                      "record_id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+                      "revision": 1,
+                      "unit_id": "unit-5ed7cc71-b3f7-4e4f-8667-ab6f695824eb"
+                    },
+                    "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-99cbe037-3002-4305-8870-ee85b41d9044": {
+                      "record_id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+                      "revision": 1,
+                      "unit_id": "unit-99cbe037-3002-4305-8870-ee85b41d9044"
+                    }
+                  },
+                  "group_id": "support-bae6bc49-1867-46c0-a578-98774028a36f",
+                  "target_unit": "unit-64353260-5c91-499c-842a-e26d5f37fddb"
+                }
+              ],
+              "source_refs": [
+                "source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe",
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            },
+            {
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 1,
+              "units": [
+                {
+                  "unit_id": "unit-132f519c-6aea-4ca9-bc33-1904bf47f8a6",
+                  "text": "凭据台账需单独保存，不要与后续的活动资格记录合并。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-5ed7cc71-b3f7-4e4f-8667-ab6f695824eb",
+                  "text": "许澄的会员卡有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-99cbe037-3002-4305-8870-ee85b41d9044",
+                  "text": "借阅凭条有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-79840ef4-0a89-492c-b25c-73c75dc25c87",
+                  "text": "凭据柜的标签用蓝色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [],
+              "source_refs": [
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            }
+          ],
+          "read_record_values_unchanged": true
+        },
+        {
+          "session": 2,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "after_state": [
+            {
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 2,
+              "units": [
+                {
+                  "unit_id": "unit-132f519c-6aea-4ca9-bc33-1904bf47f8a6",
+                  "text": "凭据台账需单独保存，不要与后续的活动资格记录合并。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-5ed7cc71-b3f7-4e4f-8667-ab6f695824eb",
+                  "text": "许澄的会员卡失效了。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:34:59.769087+00:00",
+                    "occurred_at": "2034-07-03T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-99cbe037-3002-4305-8870-ee85b41d9044",
+                  "text": "借阅凭条有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-79840ef4-0a89-492c-b25c-73c75dc25c87",
+                  "text": "凭据柜的标签用蓝色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [],
+              "source_refs": [
+                "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            },
+            {
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 2,
+              "units": [
+                {
+                  "unit_id": "unit-64353260-5c91-499c-842a-e26d5f37fddb",
+                  "text": "领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，因此依照台账可以领取。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:32:25.813276+00:00",
+                    "occurred_at": "2034-07-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [
+                {
+                  "alternatives": [
+                    [
+                      "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-99cbe037-3002-4305-8870-ee85b41d9044"
+                    ]
+                  ],
+                  "evidence_refs": [
+                    {
+                      "end": 73,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249\",1,0,73]",
+                      "source_ref": "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                      "source_revision": 1,
+                      "start": 0
+                    },
+                    {
+                      "end": 52,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-41981da4-8ee5-4acd-8f94-9fb0b595e965\",1,0,52]",
+                      "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                      "source_revision": 1,
+                      "start": 0
+                    }
+                  ],
+                  "external_units": {
+                    "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-99cbe037-3002-4305-8870-ee85b41d9044": {
+                      "record_id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+                      "revision": 2,
+                      "unit_id": "unit-99cbe037-3002-4305-8870-ee85b41d9044"
+                    }
+                  },
+                  "group_id": "support-bae6bc49-1867-46c0-a578-98774028a36f",
+                  "target_unit": "unit-64353260-5c91-499c-842a-e26d5f37fddb"
+                }
+              ],
+              "source_refs": [
+                "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                "source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe",
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            }
+          ],
+          "read_record_values_unchanged": true
+        },
+        {
+          "session": 3,
+          "maintenance_status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ],
+          "after_state": [
+            {
+              "id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+              "revision": 2,
+              "units": [
+                {
+                  "unit_id": "unit-132f519c-6aea-4ca9-bc33-1904bf47f8a6",
+                  "text": "凭据台账需单独保存，不要与后续的活动资格记录合并。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-5ed7cc71-b3f7-4e4f-8667-ab6f695824eb",
+                  "text": "许澄的会员卡失效了。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:34:59.769087+00:00",
+                    "occurred_at": "2034-07-03T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-99cbe037-3002-4305-8870-ee85b41d9044",
+                  "text": "借阅凭条有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-79840ef4-0a89-492c-b25c-73c75dc25c87",
+                  "text": "凭据柜的标签用蓝色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:31:53.173474+00:00",
+                    "occurred_at": "2034-07-01T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [],
+              "source_refs": [
+                "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            },
+            {
+              "id": "2421759b-e63b-598c-85fc-721f47b15c74",
+              "revision": 2,
+              "units": [
+                {
+                  "unit_id": "unit-64353260-5c91-499c-842a-e26d5f37fddb",
+                  "text": "领取稀有资料需要完成培训，并且会员卡或借阅凭条至少一种有效。许澄培训已完成，因此依照台账可以领取。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T07:32:25.813276+00:00",
+                    "occurred_at": "2034-07-02T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "groups": [
+                {
+                  "alternatives": [
+                    [
+                      "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-99cbe037-3002-4305-8870-ee85b41d9044"
+                    ]
+                  ],
+                  "evidence_refs": [
+                    {
+                      "end": 73,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249\",1,0,73]",
+                      "source_ref": "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                      "source_revision": 1,
+                      "start": 0
+                    },
+                    {
+                      "end": 52,
+                      "evidence_id": "frag:[[\"edit\",\"MiLAi-memory-only\",\"M\",\"method-cross-access\"],\"method-cross-access\",\"source-41981da4-8ee5-4acd-8f94-9fb0b595e965\",1,0,52]",
+                      "source_ref": "source-41981da4-8ee5-4acd-8f94-9fb0b595e965",
+                      "source_revision": 1,
+                      "start": 0
+                    }
+                  ],
+                  "external_units": {
+                    "external:be450dec-dcdd-502f-a119-23d02f5aec56:unit-99cbe037-3002-4305-8870-ee85b41d9044": {
+                      "record_id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+                      "revision": 2,
+                      "unit_id": "unit-99cbe037-3002-4305-8870-ee85b41d9044"
+                    }
+                  },
+                  "group_id": "support-bae6bc49-1867-46c0-a578-98774028a36f",
+                  "target_unit": "unit-64353260-5c91-499c-842a-e26d5f37fddb"
+                }
+              ],
+              "source_refs": [
+                "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                "source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe",
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            }
+          ],
+          "read_record_values_unchanged": true
+        }
+      ],
+      "state_review": [
+        "建立两条实际记录及两条外部OR路线。",
+        "资格规则、培训事实和可领取结论合成一个单位；路线缺少独立培训前提，未建立完整AND-of-premises支持。",
+        "会员卡失效后逐记录提交，剩余凭条路线绑定台账r2；保持其他事实。",
+        "最后Impact正确选中凭条与资格单位，Editor用满8192completion tokens且JSON未完成，零提交；台账和资格均停r2，凭条仍有效/仍可领取。",
+        "混合Reader实际从7月4日原文答出不能领取；QA答对不补记忆更新失败。"
+      ],
+      "text_update_obligations_satisfied": 1,
+      "text_update_opportunities": 2,
+      "complete_support_graph_demonstrated": false,
+      "costs": {
+        "impact": {
+          "responses": 3,
+          "known_tokens": 12995,
+          "unknown_usage": 0
+        },
+        "maintenance": {
+          "responses": 4,
+          "known_tokens": 45519,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "responses": 6,
+          "known_tokens": 26997,
+          "unknown_usage": 0
+        },
+        "judge": {
+          "responses": 6,
+          "known_tokens": 14647,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "responses": 12,
+          "known_tokens": 494,
+          "unknown_usage": 0
+        },
+        "evidence_selection": {
+          "responses": 6,
+          "known_tokens": 44146,
+          "unknown_usage": 0
+        }
+      },
+      "prediction_generation_tokens": 129657,
+      "requests_without_response": []
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 47,
+    "generation": {
+      "known_tokens": 271777,
+      "charged_tokens": 271777,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 1289,
+      "charged_tokens": 1289,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens_match": true,
+    "generation_requests_match": true,
+    "embedding_tokens_match": true
+  },
+  "history_check": {
+    "control": {
+      "historical_reads": [
+        {
+          "record_id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+          "versions": [
+            {
+              "revision": 1,
+              "units": 4,
+              "source_refs": [
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            },
+            {
+              "revision": 2,
+              "units": 4,
+              "source_refs": [
+                "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            },
+            {
+              "revision": 3,
+              "units": 4,
+              "source_refs": [
+                "source-ff47feef-7d40-4cd6-b565-29395ca16fab",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e",
+                "source-ecadbc92-9735-4c67-9582-f58157f9cb19"
+              ]
+            }
+          ]
+        },
+        {
+          "record_id": "2421759b-e63b-598c-85fc-721f47b15c74",
+          "versions": [
+            {
+              "revision": 1,
+              "units": 2,
+              "source_refs": [
+                "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            },
+            {
+              "revision": 2,
+              "units": 2,
+              "source_refs": [
+                "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            },
+            {
+              "revision": 3,
+              "units": 2,
+              "source_refs": [
+                "source-ff47feef-7d40-4cd6-b565-29395ca16fab",
+                "source-dacab119-5543-41ad-9a38-64436c7104f8",
+                "source-ecadbc92-9735-4c67-9582-f58157f9cb19",
+                "source-66bba48c-597f-473b-985b-7b8385c5ed2e"
+              ]
+            }
+          ]
+        }
+      ],
+      "visible_sources": 4,
+      "database_opened_read_only": true
+    },
+    "candidate": {
+      "historical_reads": [
+        {
+          "record_id": "be450dec-dcdd-502f-a119-23d02f5aec56",
+          "versions": [
+            {
+              "revision": 1,
+              "units": 4,
+              "source_refs": [
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            },
+            {
+              "revision": 2,
+              "units": 4,
+              "source_refs": [
+                "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            }
+          ]
+        },
+        {
+          "record_id": "2421759b-e63b-598c-85fc-721f47b15c74",
+          "versions": [
+            {
+              "revision": 1,
+              "units": 1,
+              "source_refs": [
+                "source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe",
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            },
+            {
+              "revision": 2,
+              "units": 1,
+              "source_refs": [
+                "source-7b11a456-5b74-4c4f-98d9-fc73ddbcc249",
+                "source-05aba2e9-2559-4242-af3c-fc1c2a40e9fe",
+                "source-41981da4-8ee5-4acd-8f94-9fb0b595e965"
+              ]
+            }
+          ]
+        }
+      ],
+      "visible_sources": 4,
+      "database_opened_read_only": true
+    }
+  },
+  "invalid_judge": {
+    "arm": "candidate",
+    "ordinal": 6,
+    "raw_content": "{}",
+    "finish_reason": "stop",
+    "original_label": "invalid",
+    "rejudged": false,
+    "core_answer_review": "covers training complete and blue label; this is not a replacement Judge score"
+  },
+  "limitations": [
+    "one development story, one generation per arm, no significance/generalization claim",
+    "independent before states and different formed groups; no isolated causal architecture advantage",
+    "actual graph references and sequential receipts work, but graph semantics remain incomplete",
+    "candidate final maintenance failed while mixed QA recovered from Source",
+    "no actual cross-record partial commit in this model cohort; engineered Host/Benchmark partial-commit tests separate",
+    "normal Host real-model migration still pending",
+    "no SHA checks, no new ledger, no model retries or rescoring"
+  ],
+  "interpretation": "跨记录引用、版本绑定和替代路线保留已在实际模型状态出现；未证明完整正确关系形成或候选质量优势。对照状态最终正确；候选最终更新length失败。"
+}
