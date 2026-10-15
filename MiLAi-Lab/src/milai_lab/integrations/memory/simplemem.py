@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import copy
 import hashlib
 import importlib
 import importlib.metadata
@@ -12,17 +13,19 @@ import subprocess
 import sys
 import threading
 import time
+import uuid
 from collections.abc import Callable, Sequence
 from dataclasses import replace
 from pathlib import Path
 from types import SimpleNamespace
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 from langchain_core.runnables import RunnableConfig
 from langchain_core.tools import StructuredTool
 from openai.types.chat import ChatCompletion
 
+from milai_lab.contracts.memory_backend import IngestionResult, MemorySession, RetrievalResult
 from milai_lab.contracts.scope import FoundationScope
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.providers.contextual_capacity import CapacityExceeded
@@ -156,6 +159,7 @@ class SimpleMemTextRuntime:
         *,
         admit_generation: Callable[[], None],
         archive_input_mode: str = "legacy",
+        embed_documents: Callable[[list[str]], list[list[float]]] | None = None,
     ) -> None:
         if archive_input_mode not in ("legacy", "trace_equal_v1"):
             raise ValueError("SIMPLEMEM_ARCHIVE_INPUT_MODE_INVALID")
@@ -217,6 +221,8 @@ class SimpleMemTextRuntime:
         }
         if archive_input_mode != "legacy":
             binding["archive_input_mode"] = archive_input_mode
+        if embed_documents is not None:
+            binding["embedding_input_admission"] = "injected_common_capacity"
         scope_path = root / "scope.json"
         if scope_path.exists():
             if read_json(scope_path) != binding:
@@ -310,7 +316,8 @@ class SimpleMemTextRuntime:
                 with outer.lock:
                     try:
                         values = np.asarray(
-                            embed.embed(texts, embed.config.model), dtype=np.float32
+                            embed_documents(texts) if embed_documents is not None
+                            else embed.embed(texts, embed.config.model), dtype=np.float32
                         )
                         if (
                             values.shape != (len(texts), 1024)
@@ -481,6 +488,7 @@ class SimpleMemTextRuntime:
 
             setattr(self.retriever, method, stage)
         self.dialogue_class = modules["models.memory_entry"].Dialogue
+        self.entry_class = modules["models.memory_entry"].MemoryEntry
 
     def observe(self, kind: str, **value: Any) -> None:
         event = {"kind": kind, **value}
@@ -530,7 +538,9 @@ class SimpleMemTextRuntime:
             "semantic_success": None,
         }
 
-    def add_archive(self, owner: str, records: Sequence[dict[str, Any]]) -> dict[str, Any]:
+    def add_archive(
+        self, owner: str, records: Sequence[dict[str, Any]], *, flush: bool = True,
+    ) -> dict[str, Any]:
         self.check_owner(owner)
         start = len(self.events)
         dialogues = []
@@ -576,11 +586,15 @@ class SimpleMemTextRuntime:
             ],
         )
         self.builder.add_dialogues(dialogues)
-        self.builder.process_remaining()
+        if flush:
+            self.builder.process_remaining()
         result = {
             **self.outcome(start),
             "records_after": self.snapshot(owner),
-            "native_short_flush": "clears buffer; no cross-flush overlap/previous_entries update",
+            "native_short_flush": (
+                "clears buffer; no cross-flush overlap/previous_entries update" if flush
+                else "not called; native complete windows process normally"),
+            "pending_dialogues": len(self.builder.dialogue_buffer),
         }
         self.observe(
             "operation_result",
@@ -588,6 +602,28 @@ class SimpleMemTextRuntime:
             **{key: value for key, value in result.items() if key != "observations"},
         )
         return result
+
+    def flush_archive(self, owner: str) -> dict[str, Any]:
+        """Native final flush uses only buffered source dialogues, never the query."""
+        self.check_owner(owner)
+        start = len(self.events)
+        self.builder.process_remaining()
+        return {**self.outcome(start), "records_after": self.snapshot(owner),
+                "pending_dialogues": len(self.builder.dialogue_buffer)}
+
+    def builder_state(self) -> dict[str, Any]:
+        return {"sequence": self.sequence, "processed_count": self.builder.processed_count,
+                "dialogue_buffer": [row.model_dump(mode="json")
+                                    for row in self.builder.dialogue_buffer],
+                "previous_entries": [row.model_dump(mode="json")
+                                     for row in self.builder.previous_entries]}
+
+    def restore_builder_state(self, state: dict[str, Any]) -> None:
+        self.sequence, self.builder.processed_count = state["sequence"], state["processed_count"]
+        self.builder.dialogue_buffer = [self.dialogue_class.model_validate(row)
+                                       for row in state["dialogue_buffer"]]
+        self.builder.previous_entries = [self.entry_class.model_validate(row)
+                                        for row in state["previous_entries"]]
 
     def search_archive(self, owner: str, query: str) -> dict[str, Any]:
         self.check_owner(owner)
@@ -639,6 +675,125 @@ class SimpleMemTextRuntime:
         pass
 
 
+class SimpleMemAlignedBackend:
+    """Native text core on observed sessions, with durable operation outcomes.
+
+    Complete native windows process on arrival; pending source dialogues flush
+    before retrieval. The common Reader is not author-score reproduction.
+    """
+
+    def __init__(
+        self, root: Path, *, bank_id: str, owner: str, host: VLLMClient, embed: VLLMClient,
+        policy: dict[str, Any], max_query_calls: int,
+        usage: Callable[[], dict[str, Any]],
+        start_operation: Callable[[str, str], None],
+        embed_documents: Callable[[list[str]], list[list[float]]] | None = None,
+    ) -> None:
+        self.root, self.owner, self.usage = root, owner, usage
+        self.start_operation = start_operation
+        policy = {**policy, "writer_cadence": "native_windows_on_arrival_remainder_before_query"}
+        self.write_limit = min(int(policy["archive_generation_limit"]), host.config.max_calls)
+        self.calls, self.limit = 0, self.write_limit
+        self.query_limit = min(int(policy["query_generation_limit"]), max_query_calls - 1)
+        if self.query_limit < 1:
+            raise ValueError("SIMPLEMEM_COMMON_READER_REQUIRES_TWO_CALLS")
+        self.runtime = SimpleMemTextRuntime(
+            root / "native", bank_id, "simplemem_aligned", owner, host, embed, policy,
+            admit_generation=self._admit, archive_input_mode="trace_equal_v1",
+            embed_documents=embed_documents)
+        self.buffer_path = root / "native-builder-state.json"
+        if self.buffer_path.exists():
+            self.runtime.restore_builder_state(read_json(self.buffer_path))
+
+    def _admit(self) -> None:
+        if self.calls >= self.limit:
+            raise ValueError("SIMPLEMEM_OPERATION_GENERATION_CAPACITY_EXCEEDED")
+        self.calls += 1
+
+    def _cost(self, before: dict[str, Any]) -> dict[str, Any]:
+        after = self.usage()
+        return {"generation_calls": self.calls, "ledger_delta": {
+            "generation_requests": after["generation_requests"] - before["generation_requests"],
+            **{kind: {field: after[kind][field] - before[kind][field]
+                      for field in ("known_tokens", "charged_tokens", "unknown_usage")}
+               for kind in ("generation", "embedding")}},
+            "basis": "shared continuous ledger; all native attempts retained"}
+
+    def _operation(self, kind: str, key: str, request: dict[str, Any]) -> Path:
+        path = self.root / "operations" / kind / key
+        original = path / "request.json"
+        if original.exists():
+            if read_json(original) != request:
+                raise ValueError("SIMPLEMEM_OPERATION_INPUT_CHANGED")
+            if not (path / "result.json").exists():
+                raise RuntimeError("SIMPLEMEM_OPERATION_UNCONFIRMED_NO_WRAPPER_RETRY")
+        else:
+            active = self.root / "active-operation.json"
+            if active.exists():
+                pending = self.root / read_json(active)["relative_path"]
+                if not (pending / "result.json").exists():
+                    raise RuntimeError("SIMPLEMEM_OPERATION_UNCONFIRMED_NO_WRAPPER_RETRY")
+            write_json(original, request)
+            write_json(active, {"relative_path": str(path.relative_to(self.root))})
+        return path
+
+    def ingest(self, session: MemorySession, *, key: str) -> IngestionResult:
+        request: dict[str, Any] = {"session_id": session.session_id, "date": session.date,
+                   "turns": [{field: turn[field] for field in ("role", "content", "timestamp")}
+                             for turn in session.turns]}
+        path = self._operation("ingest", key, request)
+        if (path / "result.json").exists():
+            return cast(IngestionResult, read_json(path / "result.json"))
+        # Opaque source labels avoid sending evaluator owner/session identifiers.
+        records = [{**turn, "event_id": "source-" + str(uuid.uuid4())}
+                   for turn in request["turns"]]
+        write_json(path / "native-input.json", records)
+        self.calls, self.limit = 0, self.write_limit
+        self.start_operation("ingest", key)
+        before = copy.deepcopy(self.usage())
+        native = self.runtime.add_archive(self.owner, records, flush=False)
+        write_json(self.buffer_path, self.runtime.builder_state())
+        result: IngestionResult = {
+            "session_id": session.session_id, "completed": native["status"] != "INCOMPLETE",
+            "native_return": native, "session_output": None, "usage": self._cost(before)}
+        write_json(path / "result.json", result)
+        return result
+
+    def retrieve(
+        self, question: str, date: str, *, key: str, limit: int,
+    ) -> RetrievalResult:
+        request = {"question": question, "date": date, "limit": limit}
+        path = self._operation("retrieve", key, request)
+        if (path / "result.json").exists():
+            return cast(RetrievalResult, read_json(path / "result.json"))
+        self.calls, self.limit = 0, self.query_limit
+        before = copy.deepcopy(self.usage())
+        self.start_operation("flush", key)
+        flushed = self.runtime.flush_archive(self.owner)
+        write_json(self.buffer_path, self.runtime.builder_state())
+        write_json(path / "native-flush.json", flushed)
+        self.start_operation("retrieve", key)
+        query = f"Query time: {date}\nQuestion: {question}" if date else question
+        native = self.runtime.search_archive(self.owner, query)
+        native = {**native, "source_flush": flushed}
+        entries = native["results"][:limit]
+        materials = [{"kind": "external_memory", "id": entry["entry_id"],
+                      "text": entry_text(entry), "index_text": entry_text(entry),
+                      "date": entry.get("timestamp"), "body_delivered": True,
+                      "provenance": "SimpleMem native generated entry; not an original Source",
+                      "source_mapping": "native core does not expose exact source-span lineage",
+                      "truncated": False} for entry in entries]
+        result: RetrievalResult = {
+            "materials": materials, "native_return": native, "returned_count": len(entries),
+            "source_mapping": "native_generated_entries_without_exact_source_span_lineage",
+            "usage": self._cost(before)}
+        write_json(path / "result.json", result)
+        return result
+
+    def close(self) -> None:
+        self.runtime.close()
+
+
 __all__ = [
     'POLICY',
     'SEARCH_DESCRIPTION',
@@ -652,6 +807,7 @@ __all__ = [
     'Path',
     'RunnableConfig',
     'Sequence',
+    'SimpleMemAlignedBackend',
     'SimpleMemTextRuntime',
     'SimpleNamespace',
     'StructuredTool',

@@ -496,6 +496,9 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
         result["visibility"] = item["visibility"]
     if item.get("body_delivered") is False:
         return result
+    if item["kind"] == "external_memory":
+        return {**result, "content": item["text"], "native_timestamp": item.get("date"),
+                "provenance": item["provenance"], "source_mapping": item["source_mapping"]}
     turns = (json.loads(item["text"]) if item["kind"] == "original_source"
              else item.get("support_turns", []))
     sources = {turn["source_ref"]: f"e{index}:s{i}" for i, turn in enumerate(turns)}

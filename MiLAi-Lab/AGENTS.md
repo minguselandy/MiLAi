@@ -1,3 +1,20 @@
+# Current development: SimpleMem adapter checked; strong queue still LIVE
+
+GoalACTIVE/incomplete. strong-v1 driver1672507/exec12669 frozena47035f6
+laststep candidate predict child2027770; inspect actualPID beforehandoff.
+Firstfourpredictarmsclosed, candidatepredict underway atlastcheck; firstscorespending.
+NEW SimpleMemAlignedBackend reusesnative textcore/LanceDB/Tantivy/planning/reflection,
+commonSources+Reader, nativewindows/overlap; remainderflush beforequery, actualbuilder
+statepersisted. Query neverWriterinput. Nativeflush+query+Reader share12calls; output
+ceiling8192matchescommon. Fullnative/fallback/usage retained, no authoranswerclaim.
+109relatedtests13.48s +6newnativecases5.60s,3filemypy/Ruff/DAG/tools/matrixpass;
+MockHTTPonly, noexternalmethodmodelresultyet. Pilot2cases6events8QA prepared0HTTP,
+full12chainsconfigready. Existingisolatedsimplemem-env required foractualrun.
+NEXT commit/freeze and queuepilot ONLY afterstrongfivepredictions+firstscoresclose;
+no overlap/newledger/newdeploy/SHA/subagents. Inspectpilot beforefullrun.
+Otherfullscope remains W4reallearning/eval, correctedfullR, newfixedversionA/BHoststory,
+externalbenchmarklonghistories,anothergenerationmodel andfinalscientificaudit.
+
 # Current execution: five strong controls LIVE; Host recovery path reviewed
 
 GoalACTIVE/incomplete. LIVE strong-v1 driver1672507,exec12669;

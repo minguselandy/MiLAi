@@ -421,7 +421,8 @@ def test_prepare_keeps_qa_and_update_budgets_and_opaque_isolation(
     first = prepare_alignment(config, root)
     assert first["per_backend_opportunities"] == {"sessions": 2, "qa": 2, "native_updates": 0}
     assert first["per_user_opportunities"]["opaque-owner"]["session_ordinals"] == [1, 0]
-    banks = [first["bank_ids"][backend]["opaque-owner"] for backend in BACKENDS]
+    banks = [first["bank_ids"][backend]["opaque-owner"]
+             for backend in config["alignment"]["backends"]]
     assert len(set(banks)) == 3
     assert all("opaque-owner" not in bank for bank in banks)
     assert first == prepare_alignment(config, root)
@@ -1202,3 +1203,52 @@ def test_alignment_honors_read_usage_policy_in_actual_store(
         else:
             assert (after.value if after else None) == before_value
         assert service.read(saved['id'])['value'] == record
+
+
+def test_simplemem_common_reader_gets_originals_and_native_entries_with_shared_call_limit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.evidence_reading import project_packs
+    from milai_lab.providers.contextual_vllm import VLLMConfig
+    from milai_lab.runners.baseline_alignment import SIMPLEMEM
+
+    config = configuration()
+    config['alignment']['backends'] = [SIMPLEMEM]
+    config['alignment']['simplemem'] = {'source_access': 'original_sources'}
+    settings = config['entrypoints']['benchmark']
+    settings.update(source_access='independent_v1', source_top_k=20, semantic_top_k=10,
+                    source_tokenization='unicode_v1', evidence_policy='question_pack_v1')
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(config, SIMPLEMEM)
+    execution.root = tmp_path / 'run'
+    execution.client = SimpleNamespace(config=VLLMConfig('http://unused/v1', 'unused', max_calls=8))
+    native = {'materials': [{'kind': 'external_memory', 'id': 'native-id',
+        'text': 'Native says red.', 'index_text': 'Native says red.', 'body_delivered': True,
+        'provenance': 'native generated interpretation', 'source_mapping': 'unavailable'}],
+        'native_return': {'results': [{'lossless_restatement': 'Native says red.'}]},
+        'returned_count': 1, 'source_mapping': 'native entries', 'usage': {'generation_calls': 3}}
+    calls = []
+    monkeypatch.setattr(execution, '_backend', lambda _: SimpleNamespace(retrieve=lambda *a, **k: (
+        calls.append('native') or copy.deepcopy(native))))
+    with SqliteStore.from_conn_string(str(tmp_path / 'memory.sqlite')) as store:
+        service = MemoryService(store, ('native-qa', 'alice'), 'alice', tmp_path / 'lock',
+                                functional_contract='functional_v1')
+        service.capture_user('original', 'turn:0', 'Original says blue.', occurred_at='2025-01-01')
+
+        def answer(question, date, key, materials, *, snapshot_id, material_reader):
+            assert execution.client.config.max_calls == 5
+            opened = material_reader(materials)
+            projected = project_packs(opened, list(range(len(opened))))
+            assert 'Original says blue.' in str(projected) and 'Native says red.' in str(projected)
+            external = next(m for m in projected if m['kind'] == 'external_memory')
+            assert external['source_mapping'] == 'unavailable' and 'evidence' not in external
+            saved = read_json(execution.root / snapshot_id)
+            assert saved['native_return'] == native['native_return']
+            assert saved['original_retrieval']['source_scope']['complete']
+            return 'blue', opened
+
+        monkeypatch.setattr(execution, 'answer_material', answer)
+        assert execution.answer(service, 'Color?', '2025-01-02', 'q') == 'blue'
+        assert execution.answer(service, 'Color?', '2025-01-02', 'q') == 'blue'
+        assert execution.client.config.max_calls == 8 and calls == ['native']
+        assert service.records() == []

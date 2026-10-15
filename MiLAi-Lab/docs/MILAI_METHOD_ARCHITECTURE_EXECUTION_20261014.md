@@ -474,3 +474,16 @@ a47035f6修复消息级策略版本后，只恢复了此前已确认0模型的�
 强对照已冻结a47035f6并实际串行执行，driver1672507/exec12669。原文臂已完成36次capture-only、48答复，实际只产生48Reader响应，0Editor/Impact/embedding；首次评分尚未执行，不先判质量优劣。其余四臂继续同一队列，见strong-v1/driver.json与method-architecture-strong-v1-execution.json。
 
 对现有78xx/79xx监听端口只做GET /v1/models：已确认的生成入口7860与7862均报告Qwen3.6-35B-A3B-FP8，另有bge-m3和reranker；其余路由失败不能据此断言具体服务类型。四张A10040GB各约39.9GB已用。没有发现可确认的另一生成族/规模，也未启动/停止服务或训练。此核对0生成调用，不满足计划的额外模型复验；见method-architecture-model-resources-v1.json。
+
+
+## SimpleMem共同条件适配与原生窗口
+
+新增SimpleMemAlignedBackend，复用已安装的官方SimpleMem text core、LanceDB、Tantivy、结构检索、规划和反思；没有另写摘要算法或原生回答器。新后端SimpleMem-native-common-reader接入现有在线/LongMemEval对齐入口，外部原生回答复现仍未完成，不把共同Reader成绩冒称作者系统成绩。
+
+对齐输入仅包含真实已到达的role/content/timestamp，内部case/session标识不送入原生Writer，Source标签为不含评价信息的opaque标识。初稿按短会话强制flush；核对原生MemoryBuilder后改为完整窗口按原算法处理，剩余Source缓冲区在查询前process_remaining。dialogue_buffer、previous_entries、processed_count和sequence原样保存/恢复，不改变原生40窗口、2重叠或短flush不更新previous_entries的行为。问题正文不进入Writer。未确认的原生操作会阻止新操作，避免丢回执后重复flush；已完成结果直接复用。
+
+共同条件配置增加同一份可见原文检索，原生生成条目明确标为external_memory与解释性材料，不伪造精确Source范围或把它当原文。完整原生返回、fallback、重试与操作快照均保存。原生温度/规划/反思/no-thinking保持；原生生成上限与共同模型统一为8192，实际派生policy另存。延迟flush、原生检索与共同Reader共享每问题12次生成，至少留1次Reader；原生生成/embedding和最终Reader/Judge全部使用原连续账本。原生embedding复用共同容量检查与请求记录，防止直接embed绕过请求序号而覆盖回执。原生返回顺序仅按QA20截取条数，不截断正文字符；相同Reader token容量仍适用。
+
+109项相关检查13.48秒通过，含真实SDK/存储与MockHTTP；3个无关MERIT/MemSyCo私有资产用例未运行。新增6项验证5.60秒通过，覆盖原生窗口重开、输入隔离、已提交丢回执不重派、共享调用额度、Source/解释分离及全部原生费用回执。3文件mypy、Ruff、DAG/兼容facade、工具边界、277源验证矩阵通过。没有新服务部署、SHA校验或模型实测。
+
+两案例pilot（projection/exhibit）6事件8QA已经prepare0调用；另备12链36事件48QA full配置。均为已公开开发数据，不能代替独立外部benchmark/长历史评价。见method-architecture-simplemem-aligned-v1-protocol。当前五臂strong仍执行冻结a47035f6，新增适配不热改队列；外部真实pilot须等其关闭后串行派发。

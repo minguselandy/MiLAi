@@ -12,6 +12,9 @@ from milai_lab.integrations.memory.simplemem import FoundationScope as Foundatio
 from milai_lab.integrations.memory.simplemem import Path as Path
 from milai_lab.integrations.memory.simplemem import RunnableConfig as RunnableConfig
 from milai_lab.integrations.memory.simplemem import Sequence as Sequence
+from milai_lab.integrations.memory.simplemem import (
+    SimpleMemAlignedBackend as SimpleMemAlignedBackend,
+)
 from milai_lab.integrations.memory.simplemem import SimpleMemTextRuntime as SimpleMemTextRuntime
 from milai_lab.integrations.memory.simplemem import SimpleNamespace as SimpleNamespace
 from milai_lab.integrations.memory.simplemem import StructuredTool as StructuredTool
@@ -46,6 +49,7 @@ __all__ = [
     'Path',
     'RunnableConfig',
     'Sequence',
+    'SimpleMemAlignedBackend',
     'SimpleMemTextRuntime',
     'SimpleNamespace',
     'StructuredTool',

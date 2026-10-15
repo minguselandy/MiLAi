@@ -15,6 +15,7 @@ import subprocess
 import time
 import uuid
 from collections import Counter
+from dataclasses import replace
 from pathlib import Path
 from typing import Any, cast
 from urllib.parse import urlencode
@@ -37,9 +38,12 @@ from milai_lab.integrations.memory.hindsight import (
     HindsightModelBridge,
 )
 from milai_lab.memory.service import MemoryService
-from milai_lab.runners.edit_benchmarks import BenchmarkRun, reader_messages
+from milai_lab.providers.contextual_capacity import HostCapacity
+from milai_lab.providers.contextual_vllm import VLLMClient
+from milai_lab.runners.edit_benchmarks import BenchmarkRun, ReadDeliveryIncomplete, reader_messages
 
-BACKENDS = ("RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only")
+SIMPLEMEM = "SimpleMem-native-common-reader"
+BACKENDS = ("RawRAG-local", "Hindsight-native-local-recall", "MiLAi-memory-only", SIMPLEMEM)
 BENCHMARKS = ("halumem", "longmemeval")
 
 # The official env factory omits OpenAIEmbeddings.max_retries in 0.10.3.
@@ -117,10 +121,18 @@ def alignment_settings(config: dict[str, Any], backend: str) -> dict[str, Any]:
     if arm not in ("B0", "B1", "B2", "M", "Append-only"):
         raise ValueError("Unknown declared MiLAi maintenance arm")
     settings.update(arm=arm, alignment_backend=backend, alignment=config["alignment"])
-    if backend != "MiLAi-memory-only":
+    native_source_mode = config["alignment"].get("simplemem", {}).get(
+        "source_access", "native_entries")
+    if backend == SIMPLEMEM and native_source_mode not in {"native_entries", "original_sources"}:
+        raise ValueError("SIMPLEMEM_SOURCE_ACCESS_INVALID")
+    source_assisted = backend == SIMPLEMEM and native_source_mode == "original_sources"
+    if backend != "MiLAi-memory-only" and not source_assisted:
         for name in ("source_access", "source_top_k", "semantic_top_k", "maintenance_mode",
                      "source_tokenization", "source_granularity"):
             settings.pop(name, None)
+    if backend == SIMPLEMEM:
+        settings.update(evidence_variant="S0", dependency_reading=False,
+                        evidence_policy="question_pack_v1")
     # Maintenance retains its original candidate limit. QA passes its separate
     # explicit limit to the backend; aligning answers must not change writing.
     settings["memory_view_mode"] = config["alignment"]["delivery"]
@@ -240,6 +252,65 @@ class AlignmentRun(BenchmarkRun):
         self._native_bridge: HindsightModelBridge | None = None
         self._native_process: subprocess.Popen[bytes] | None = None
         self._native_uid: int | None = None
+        self._simplemem_client: VLLMClient | None = None
+        self._simplemem_serial = 0
+        self._simplemem_operation: dict[str, Any] = {}
+
+    def _simplemem_trace(self, event: dict[str, Any]) -> None:
+        if event["event"] in {"vllm_response", "vllm_error", "vllm_budget_rejected",
+                              "vllm_capacity_rejected"}:
+            self._simplemem_serial += 1
+            path = self.root / "http/simplemem" / f"{self._simplemem_serial:06d}"
+            write_json(path / "operation.json", self._simplemem_operation)
+            if "request" in event:
+                write_json(path / "request.json", event["request"])
+            write_json(path / "transport.json", event)
+            if "receipt" in event:
+                write_json(path / "response.json", event["receipt"])
+            else:
+                write_json(path / "failure.json", event)
+        elif event["event"] == "simplemem_observation":
+            import json
+
+            with (self.root / "simplemem-observations.jsonl").open("a") as stream:
+                stream.write(json.dumps({**event, "alignment_operation": self._simplemem_operation},
+                                         ensure_ascii=False) + "\n")
+
+    def _simplemem_backend(self, service: MemoryService, location: Path) -> MemoryBackend:
+        from milai_lab.integrations.memory.simplemem import (
+            SimpleMemAlignedBackend,
+            validate_simplemem,
+        )
+
+        options = self.settings["alignment"]["simplemem"]
+        policy = validate_simplemem({**self.settings,
+            "second_external": {"simplemem_text": options["policy"]}})
+        # The aligned comparison permits the same output ceiling as the other
+        # methods; native prompts, temperature, planning and reflection stay native.
+        policy = {**policy, "generation_max_tokens": self.client.config.max_tokens,
+                  "writer_cadence": "native_windows_on_arrival_remainder_before_query"}
+        write_json(self.root / "simplemem-effective-policy.json", policy)
+        if self._simplemem_client is None:
+            native_config = replace(self.client.config,
+                max_tokens=policy["generation_max_tokens"], enable_thinking=False)
+            self._simplemem_client = VLLMClient(native_config, budget=self.budget,
+                emit=self._simplemem_trace, capacity=HostCapacity({
+                    "model": native_config.model, "tokenizer_path": self.settings["tokenizer_path"],
+                    "context_tokens": self.settings["context_tokens"],
+                    "output_tokens": native_config.max_tokens,
+                    "batch_source_tokens": self.settings["source_tokens"],
+                    "safety_tokens": 512, "enable_thinking": False}))
+        assert self.retrieval_embedding_client is not None
+        assert self.retrieval_embeddings is not None
+
+        def start(kind: str, key: str) -> None:
+            self._simplemem_operation = {"owner": service.owner, "stage": kind, "key": key}
+
+        return SimpleMemAlignedBackend(location,
+            bank_id=self.settings["alignment_bank_ids"][service.owner], owner=service.owner,
+            host=self._simplemem_client, embed=self.retrieval_embedding_client, policy=policy,
+            max_query_calls=self.client.config.max_calls, usage=lambda: self.budget.state,
+            start_operation=start, embed_documents=self.retrieval_embeddings.embed_documents)
 
     @staticmethod
     def _uid_processes(uid: int) -> list[int]:
@@ -479,6 +550,8 @@ class AlignmentRun(BenchmarkRun):
                 location, bank_id=self.settings["alignment_bank_ids"][owner],
                 **self.settings["alignment"]["hindsight"],
             )
+        elif backend == SIMPLEMEM:
+            value = self._simplemem_backend(service, location)
         else:
             from milai_lab.methods.milai_memory_only import MiLAiMemoryBackend
 
@@ -505,15 +578,21 @@ class AlignmentRun(BenchmarkRun):
 
     def maintain(self, service: MemoryService, observed: ObservedSession, key: str) -> list[str]:
         self._evaluation_key = key
+        if (self.settings["alignment_backend"] == SIMPLEMEM
+                and self.settings.get("source_access") == "independent_v1"):
+            # Existing S0 captures the exact arrived originals, without an Editor.
+            super().maintain(service, observed, key)
         receipt = self._backend(service).ingest(observed, key=key)
         write_json(self.root / "native" / key / "ingestion.json", receipt)
         self._check_native_transport()
         if (not receipt["completed"]
-                and self.settings["alignment_backend"] != "MiLAi-memory-only"):
+                and self.settings["alignment_backend"] not in {"MiLAi-memory-only", SIMPLEMEM}):
             raise RuntimeError("Native ingestion not completed; current QA cannot proceed")
         # Existing MiLAi known partial maintenance has settled receipts and keeps
         # its natural history. Unknown writes/Store failures propagate before a
         # return; a recorded gap is neither retried nor called semantic success.
+        # SimpleMem's synchronous native fallback/cap outcome is also retained;
+        # its actual partial entries and the declared originals remain queryable.
         return receipt["session_output"] or []
 
     def answer(self, service: MemoryService, question: str, date: str, key: str) -> str:
@@ -524,11 +603,45 @@ class AlignmentRun(BenchmarkRun):
             retrieval = self._backend(service).retrieve(
                 question, date, key=key, limit=self.settings["alignment"]["qa_top_k"],
             )
+            if (self.settings["alignment_backend"] == SIMPLEMEM
+                    and self.settings.get("source_access") == "independent_v1"):
+                from milai_lab.methods.evidence_reading import build_evidence_packs
+
+                originals = service.search_sources(question, limit=self.settings["source_top_k"],
+                    tokenization=self.settings["source_tokenization"], include_scope=True)
+                packs = build_evidence_packs(service, question, date,
+                    originals["source_materials"], [],
+                    tokenization=self.settings["source_tokenization"],
+                    calendar_context=self.settings.get("calendar_context"),
+                    source_scope=originals["source_scope"])
+                # Whole original bodies and exact native entries remain distinct.
+                retrieval = {**retrieval, "materials": [*packs, *retrieval["materials"]],
+                    "original_retrieval": originals,
+                    "source_mapping": "common_original_sources_plus_native_generated_entries"}
             write_json(path, retrieval)
         self._check_native_transport()
         # The actual return is retained intact. The common Reader resolves only
         # read-only positions in this saved pool, without a new retrieval.
         cached_response = (self.root / "http" / key / "response.json").exists()
+        if self.settings["alignment_backend"] == SIMPLEMEM:
+            native_calls = retrieval["usage"]["generation_calls"]
+            remaining = self.client.config.max_calls - native_calls
+            if remaining < 1:
+                raise ReadDeliveryIncomplete("read_call_limit")
+            original_config = self.client.config
+            self.client.config = replace(original_config, max_calls=remaining)
+            try:
+                from milai_lab.methods.evidence_reading import open_evidence_packs
+
+                def reopen(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
+                    return [copy.deepcopy(item) if item["kind"] == "external_memory" else
+                            open_evidence_packs(service, [item])[0] for item in items]
+
+                answer, _used = self.answer_material(question, date, key, retrieval["materials"],
+                    snapshot_id=str(path.relative_to(self.root)), material_reader=reopen)
+                return answer
+            finally:
+                self.client.config = original_config
         if (self.settings["alignment_backend"] == "MiLAi-memory-only"
                 and self.settings.get("source_access") == "independent_v1"):
             answer, used = self.answer_material(
@@ -652,6 +765,9 @@ class AlignmentRun(BenchmarkRun):
             self._close_native_service()
         except BaseException as error:
             failures.append(("native-service", error))
+        simplemem_client = getattr(self, "_simplemem_client", None)
+        if simplemem_client is not None:
+            simplemem_client.close()
         if failures:
             if all(isinstance(error, HindsightIngestionIncomplete) and error.resources_settled
                    for _, error in failures):

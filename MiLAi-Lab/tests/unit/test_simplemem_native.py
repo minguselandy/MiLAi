@@ -802,3 +802,186 @@ def test_memsyco_gold_free_history_degraded_order_shared_query_reader_and_once(
     assert result["costs"]["roles"]["reader"]["requests"] == 1
     with pytest.raises(ValueError, match="ALREADY_ATTEMPTED"):
         memsyco_native.run(args, lab_root=tmp_path)
+
+
+def test_aligned_native_backend_preserves_sources_caches_and_real_native_entries(tmp_path):
+    from milai_lab.integrations.memory.simplemem import SimpleMemAlignedBackend
+
+    with sdk(tmp_path, [entry(), *plans()]) as (_, host, embed, wires, _events):
+        operations = []
+        backend = SimpleMemAlignedBackend(tmp_path / 'aligned', bank_id='opaque-bank',
+            owner='owner',
+            host=host, embed=embed, policy=policy(), max_query_calls=8,
+            usage=lambda: host.budget.state, start_operation=lambda kind, key: operations.append(
+                (kind, key)))
+        observed = SimpleNamespace(session_id='PRIVATE_EVALUATOR_CASE_ID', date='2025-01-01',
+            turns=({'role': 'user', 'content': 'Cobalt meeting in Lab with Alice',
+                    'timestamp': '2025-01-01T09:00:00+08:00', 'answer': 'PRIVATE_GOLD'},),
+            questions=['PRIVATE_FUTURE_QUERY'], persona_info='PRIVATE_PERSONA')
+        ingested = backend.ingest(observed, key='session/0')
+        assert ingested['completed'] and ingested['native_return']['records_after'] == []
+        assert ingested['native_return']['pending_dialogues'] == 1
+        assert ingested['session_output'] is None and ingested['usage']['generation_calls'] == 0
+        # Reopen the actual native buffer before it has ever caused an LLM call.
+        backend.close()
+        backend = SimpleMemAlignedBackend(tmp_path / 'aligned', bank_id='opaque-bank',
+            owner='owner', host=host, embed=embed, policy=policy(), max_query_calls=8,
+            usage=lambda: host.budget.state, start_operation=lambda kind, key: operations.append(
+                (kind, key)))
+        assert backend.runtime.sequence == 1 and len(backend.runtime.builder.dialogue_buffer) == 1
+        result = backend.retrieve('Where is the Cobalt meeting?', '2025-01-02', key='q/0', limit=20)
+        assert result['returned_count'] == 1
+        assert result['materials'][0]['kind'] == 'external_memory'
+        assert 'not an original Source' in result['materials'][0]['provenance']
+        assert result['native_return']['query'].startswith('Query time: 2025-01-02')
+        assert result['usage']['generation_calls'] == 5  # source flush plus four retrieval calls
+        assert 'Where is the Cobalt meeting?' not in str(wires[0]['messages'])
+        assert 'PRIVATE' not in str(wires)
+        count = len(wires)
+        assert backend.ingest(observed, key='session/0') == ingested
+        assert backend.retrieve('Where is the Cobalt meeting?', '2025-01-02',
+                                key='q/0', limit=20) == result
+        backend.close()
+        reopened = SimpleMemAlignedBackend(tmp_path / 'aligned', bank_id='opaque-bank',
+            owner='owner', host=host, embed=embed, policy=policy(), max_query_calls=8,
+            usage=lambda: host.budget.state, start_operation=lambda *_: None)
+        assert len(reopened.runtime.snapshot('owner')) == 1
+        assert reopened.ingest(observed, key='session/0') == ingested
+        assert len(wires) == count and operations == [
+            ('ingest', 'session/0'), ('flush', 'q/0'), ('retrieve', 'q/0')]
+        reopened.close()
+
+
+def test_aligned_native_backend_does_not_repeat_a_committed_unacknowledged_ingest(tmp_path):
+    from milai_lab.integrations.memory.simplemem import SimpleMemAlignedBackend
+
+    with sdk(tmp_path, [entry()]) as (_, host, embed, wires, _events):
+        backend = SimpleMemAlignedBackend(tmp_path / 'aligned', bank_id='opaque-bank',
+            owner='owner',
+            host=host, embed=embed, policy=policy(), max_query_calls=8,
+            usage=lambda: host.budget.state, start_operation=lambda *_: None)
+        actual = backend.runtime.add_archive
+
+        def lose(owner, records, **kwargs):
+            actual(owner, records, **kwargs)
+            raise RuntimeError('receipt loss after native commit')
+
+        backend.runtime.add_archive = lose
+        observed = SimpleNamespace(session_id='s', date='2025-01-01', turns=tuple(
+            {'role': 'user', 'content': 'Cobalt meeting in Lab with Alice',
+             'timestamp': '2025-01-01'} for _ in range(40)))
+        with pytest.raises(RuntimeError, match='receipt loss'):
+            backend.ingest(observed, key='s')
+        count = len(wires)
+        assert len(backend.runtime.snapshot('owner')) == 1
+        with pytest.raises(RuntimeError, match='UNCONFIRMED_NO_WRAPPER_RETRY'):
+            backend.ingest(observed, key='s')
+        with pytest.raises(RuntimeError, match='UNCONFIRMED_NO_WRAPPER_RETRY'):
+            backend.retrieve('new question', '', key='new-query', limit=20)
+        assert len(wires) == count
+        backend.close()
+
+
+def test_aligned_factory_uses_common_embedding_admission_and_records_all_native_usage(tmp_path):
+    from dataclasses import replace
+
+    from langgraph.store.sqlite import SqliteStore
+    from tokenizers import Tokenizer, models, pre_tokenizers
+
+    from milai_lab.harness.artifact_io import read_json
+    from milai_lab.memory.service import MemoryService
+    from milai_lab.providers.embedding_capacity import MeteredEmbeddings
+    from milai_lab.runners.baseline_alignment import SIMPLEMEM, AlignmentRun, alignment_settings
+
+    with sdk(tmp_path, [entry(), *plans()]) as (_, host, embed, _wires, _events):
+        host.config = replace(host.config, max_calls=8)
+        config = read_json(Path(__file__).parents[2] /
+                          'configs/milai-method-architecture-strong-source-v1.json')
+        config['alignment']['backends'] = [SIMPLEMEM]
+        config['alignment']['simplemem'] = {'source_access': 'original_sources', 'policy': policy()}
+        execution = AlignmentRun.__new__(AlignmentRun)
+        execution.settings = alignment_settings(config, SIMPLEMEM)
+        execution.settings['alignment_bank_ids'] = {'owner': 'opaque-bank'}
+        execution.root = tmp_path / 'alignment'
+        execution.root.mkdir()
+        execution.backends = {}
+        execution.client = execution._simplemem_client = host
+        execution.budget = host.budget
+        execution.tokenizer = None
+        execution._simplemem_serial = execution._embedding_serial = 0
+        execution._simplemem_operation = {}
+        execution.retrieval_embedding_client = embed
+        host.emit, embed.emit = execution._simplemem_trace, execution._embedding_trace
+        tokenizer = Tokenizer(models.WordLevel({'[UNK]': 0}, unk_token='[UNK]'))
+        tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
+        path = tmp_path / 'embedding-tokenizer.json'
+        tokenizer.save(str(path))
+        execution.retrieval_embeddings = MeteredEmbeddings(embed, 'bge-m3',
+            {'tokenizer_path': str(path), 'context_tokens': 8192}, dimension=1024, batch_size=16)
+        session = SimpleNamespace(session_id='original-session', date='2025-01-01', turns=({
+            'role': 'user', 'content': 'Cobalt meeting in Lab with Alice',
+            'timestamp': '2025-01-01T09:00:00+08:00'},))
+        with SqliteStore.from_conn_string(str(tmp_path / 'sources.sqlite')) as store:
+            service = MemoryService(store, ('aligned', 'owner'), 'owner', tmp_path / 'lock',
+                                    functional_contract='functional_v1')
+            assert execution.maintain(service, session, 'halumem/owner/0') == []
+            assert len(service.sources()) == 1 and service.records() == []
+            backend = execution.backends['owner']
+            result = backend.retrieve('Where is Cobalt?', '2025-01-02', key='q', limit=20)
+            assert result['returned_count'] == 1
+            assert result['usage']['generation_calls'] == 5
+            responses = list((execution.root / 'http').rglob('response.json'))
+            generation = [p for p in responses if 'simplemem' in p.parts]
+            embeddings = [p for p in responses if 'embedding' in p.parts]
+            assert len(generation) == host.budget.state['generation_requests'] == 5
+            assert len(embeddings) >= 2
+            assert sum(read_json(p)['usage']['total_tokens'] for p in generation) == (
+                host.budget.state['generation']['known_tokens'])
+            assert sum(read_json(p)['usage']['total_tokens'] for p in embeddings) == (
+                host.budget.state['embedding']['known_tokens'])
+            assert all(p.with_name('request.json').exists() for p in responses)
+            assert {read_json(p.with_name('operation.json'))['stage'] for p in generation} == {
+                'flush', 'retrieve'}
+            backend.close()
+
+
+def test_aligned_native_complete_window_restores_overlap_and_previous_entries(tmp_path):
+    from milai_lab.integrations.memory.simplemem import SimpleMemAlignedBackend
+
+    with sdk(tmp_path, [entry()]) as (_, host, embed, wires, _events):
+        options = dict(bank_id='opaque-bank', owner='owner', host=host, embed=embed,
+                       policy=policy(), max_query_calls=8, usage=lambda: host.budget.state,
+                       start_operation=lambda *_: None)
+        backend = SimpleMemAlignedBackend(tmp_path / 'aligned', **options)
+        observed = SimpleNamespace(session_id='window', date='2025-01-01', turns=tuple(
+            {'role': 'user', 'content': f'Cobalt meeting fact {i}', 'timestamp': '2025-01-01'}
+            for i in range(40)))
+        result = backend.ingest(observed, key='window')
+        assert result['usage']['generation_calls'] == 1
+        before = backend.runtime.builder_state()
+        assert before['sequence'] == before['processed_count'] == 40
+        assert len(before['dialogue_buffer']) == 2 and len(before['previous_entries']) == 1
+        count = len(wires)
+        backend.close()
+        reopened = SimpleMemAlignedBackend(tmp_path / 'aligned', **options)
+        assert reopened.runtime.builder_state() == before
+        assert len(wires) == count
+        reopened.close()
+
+
+def test_aligned_native_query_flush_and_planning_share_one_limit(tmp_path):
+    from milai_lab.integrations.memory.simplemem import SimpleMemAlignedBackend
+
+    with sdk(tmp_path, [entry()]) as (_, host, embed, wires, _events):
+        backend = SimpleMemAlignedBackend(tmp_path / 'aligned', bank_id='opaque-bank',
+            owner='owner', host=host, embed=embed, policy=policy(), max_query_calls=2,
+            usage=lambda: host.budget.state, start_operation=lambda *_: None)
+        observed = SimpleNamespace(session_id='s', date='2025-01-01', turns=({'role': 'user',
+            'content': 'Cobalt meeting in Lab with Alice', 'timestamp': '2025-01-01'},))
+        assert backend.ingest(observed, key='s')['usage']['generation_calls'] == 0
+        result = backend.retrieve('Cobalt?', '2025-01-02', key='q', limit=20)
+        assert result['usage']['generation_calls'] == 1  # one of two slots remains for Reader
+        assert result['native_return']['status'] == 'INCOMPLETE'
+        assert result['native_return']['source_flush']['status'] == 'COMPLETED'
+        assert sum('messages' in wire for wire in wires) == 1
+        backend.close()
