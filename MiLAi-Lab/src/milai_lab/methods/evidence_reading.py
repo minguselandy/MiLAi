@@ -709,6 +709,7 @@ def read_question_pack(
     save: Callable[[dict[str, Any]], None], state: dict[str, Any], max_calls: int,
     source_scope: dict[str, Any] | None = None,
     initial_indices: list[int] | None = None,
+    aggregate_ranges: bool = False,
 ) -> tuple[str, list[dict[str, Any]]]:
     """Select a budgeted pack; reopen more only for a stated evidence gap.
 
@@ -727,6 +728,20 @@ def read_question_pack(
     state.setdefault("candidate_page", 0)
     state["retrieval_snapshot"] = snapshot_id
     state["evidence_policy"] = "question_pack_v1"
+
+    def aggregate() -> tuple[str, list[dict[str, Any]]]:
+        from milai_lab.methods.range_aggregation import aggregate_source_range
+
+        return aggregate_source_range(materials, open_materials=open_materials,
+            project=project_packs, messages_for=messages_for,
+            coverage=lambda items, required: pack_coverage(materials, items,
+                scope=source_scope if required is None else {
+                    "complete": True, "basis": "mapped_source_ranges",
+                    "required_ranges": required}),
+            fits=fits, call=call, save=save, state=state, max_calls=max_calls)
+
+    if aggregate_ranges and "range_aggregation" in state:
+        return aggregate()
 
     def opened(indices: list[int]) -> list[dict[str, Any]]:
         return [open_materials([materials[i]], i in state["context_indices"])[0] for i in indices]
@@ -871,6 +886,10 @@ def read_question_pack(
             coverage = pack_coverage(materials, opened(indices), scope=source_scope)
             state["range_coverage"] = coverage
             if state["task"] == "range" and not coverage["complete"]:
+                if aggregate_ranges:
+                    state["steps"] += 1
+                    save(state)
+                    return aggregate()
                 # A catalog nomination or lookup stop cannot certify a whole range.
                 answer = None
                 response["gap"] = "The declared source range has not been fully delivered."

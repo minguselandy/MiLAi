@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 from pathlib import Path
 from types import SimpleNamespace
 from typing import Any
@@ -21,6 +22,128 @@ from milai_lab.methods.evidence_reading import (
     unit_closure,
 )
 from milai_lab.runners.edit_benchmarks import BenchmarkRun
+
+
+@pytest.mark.parametrize("max_calls,expected_complete", [(10, True), (3, False)])
+def test_range_aggregation_covers_chunks_or_reports_the_unread_remainder(
+    tmp_path: Path, max_calls: int, expected_complete: bool,
+) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        packs = large_packs(service)
+        service.capture_user("future", "turn:0", "FUTURE_TOPIC_99 must not enter the saved pool.")
+        run = execution_at(tmp_path)
+        run.settings["evidence_selection_policy"] = "range_aggregate_v1"
+        run.client.config.max_calls = max_calls
+        write_json(tmp_path / "pool.json", {"materials": packs})
+        calls = []
+
+        def call(key, messages, **kwargs):
+            payload = json.loads(messages[1]["content"])
+            calls.append(key)
+            assert run.input_tokens(messages) <= 6888
+            assert "FUTURE_TOPIC_99" not in json.dumps(messages)
+            if payload.get("chunk_only"):
+                facts = []
+                for material in payload["memories"]:
+                    for number in set(re.findall(r"TOPIC_(\d+)", json.dumps(material))):
+                        facts.append({"text": f"TOPIC_{number} is one event.",
+                                      "source_indices": [int(material["label"][1:])]})
+                return json.dumps({"facts": facts, "unresolved": []})
+            if "range_aggregation" not in payload:
+                return selection([0], gap="Count the whole captured range.", task="range")
+            coverage = payload["range_aggregation"]
+            assert coverage["summary_coverage"]["complete"] is expected_complete
+            assert coverage["planned_chunks"] > 1
+            topics = set(re.findall(r"TOPIC_(\d+)", json.dumps(payload["memories"])))
+            assert (topics == {"0", "1", "2", "3"}) is expected_complete
+            assert all(m["kind"] == "range_summary" for m in payload["memories"])
+            return "Four events." if expected_complete else "Partial range only."
+
+        run.call = call
+        answer, _ = run.answer_material("Count all TOPIC events", "2030-01-01", "q", packs,
+            snapshot_id="pool.json",
+            material_reader=lambda items: run._live_materials(service, items))
+        assert answer == ("Four events." if expected_complete else "Partial range only.")
+        assert len(calls) <= max_calls
+        state = read_json(tmp_path / "http/q/memory-view.json")
+        assert state["coverage_complete"] is expected_complete
+        previous = len(calls)
+        run.answer_material("Count all TOPIC events", "2030-01-01", "q", packs,
+            snapshot_id="pool.json",
+            material_reader=lambda items: run._live_materials(service, items))
+        assert len(calls) == previous
+
+
+def test_range_summaries_do_not_reveal_a_source_forgotten_after_mapping(tmp_path: Path) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        packs = large_packs(service)
+        run = execution_at(tmp_path)
+        run.settings["evidence_selection_policy"] = "range_aggregate_v1"
+        run.client.config.max_calls = 10
+        write_json(tmp_path / "pool.json", {"materials": packs})
+        maps = 0
+
+        def call(key, messages, **kwargs):
+            nonlocal maps
+            payload = json.loads(messages[1]["content"])
+            if payload.get("chunk_only"):
+                indices = kwargs["response_format"]["json_schema"]["schema"][
+                    "properties"]["facts"]["items"]["properties"]["source_indices"]["items"]["enum"]
+                maps += 1
+                secret = maps == 1
+                if secret:
+                    ref = packs[indices[0]]["source_ranges"][0]["source_ref"]
+                    handle = service.source_fragments(ref)[0]["fragment_handle"]
+                    assert service.forget("forget", "0", fragment_handles=[handle])["ok"]
+                return json.dumps({"facts": [{
+                    "text": "SECRET_MAPPED_FACT" if secret else "Visible.",
+                                              "source_indices": indices}],
+                                   "unresolved": ["SECRET_MAPPED_GAP"] if secret else []})
+            if "range_aggregation" not in payload:
+                return selection([0], gap="Need all topics.", task="range")
+            assert "SECRET_MAPPED" not in json.dumps(messages)
+            assert payload["range_aggregation"]["source_unavailable_chunks"] == [0]
+            assert not payload["range_aggregation"]["summary_coverage"]["complete"]
+            return "A source is no longer available; only a partial result is supported."
+
+        run.call = call
+        answer, _ = run.answer_material("Count topics", "2030-01-01", "q", packs,
+            snapshot_id="pool.json",
+            material_reader=lambda items: run._live_materials(service, items))
+        assert "partial" in answer and maps > 1
+
+
+def test_summary_overflow_keeps_raw_and_summary_coverage_separate(tmp_path: Path) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        packs = large_packs(service)
+        run = execution_at(tmp_path)
+        run.settings["evidence_selection_policy"] = "range_aggregate_v1"
+        run.client.config.max_calls = 10
+        write_json(tmp_path / "pool.json", {"materials": packs})
+
+        def call(key, messages, **kwargs):
+            payload = json.loads(messages[1]["content"])
+            if payload.get("chunk_only"):
+                indices = [int(m["label"][1:]) for m in payload["memories"]]
+                return json.dumps({"facts": [{"text": "Long fact " * 900,
+                                              "source_indices": indices}], "unresolved": []})
+            if "range_aggregation" not in payload:
+                return selection([0], gap="Need all topics.", task="range")
+            assert payload["range_aggregation"]["raw_input_coverage"]["complete"]
+            assert not payload["range_aggregation"]["summary_coverage"]["complete"]
+            assert run.input_tokens(messages) <= 6888
+            return "Mapped facts exceed final capacity; no exact total is justified."
+
+        run.call = call
+        answer, _ = run.answer_material("Count topics", "2030-01-01", "q", packs,
+            snapshot_id="pool.json",
+            material_reader=lambda items: run._live_materials(service, items))
+        assert "no exact total" in answer
+        state = read_json(tmp_path / "http/q/memory-view.json")
+        assert state["range_aggregation"]["unpresented_chunks"]
 
 
 def service_at(store: SqliteStore, tmp_path: Path) -> MemoryService:
@@ -196,13 +319,16 @@ def selection(indices: list[int], *, answer: str | None = None, gap: str | None 
 
 @pytest.mark.parametrize("selection_thinking", [None, False])
 @pytest.mark.parametrize("repeat_target", [False, True])
+@pytest.mark.parametrize("aggregate_ranges", [False, True])
 def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
-    tmp_path: Path, selection_thinking: bool | None, repeat_target: bool,
+    tmp_path: Path, selection_thinking: bool | None, repeat_target: bool, aggregate_ranges: bool,
 ) -> None:
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
         packs = large_packs(service)
         run = execution_at(tmp_path)
+        if aggregate_ranges:
+            run.settings["evidence_selection_policy"] = "range_aggregate_v1"
         run.settings["stage_enable_thinking"] = {"reader": True}
         if selection_thinking is not None:
             run.settings["stage_enable_thinking"]["select"] = selection_thinking

@@ -519,6 +519,7 @@ class BenchmarkRun:
             raise ValueError("EVIDENCE_POLICY_INVALID")
         if settings.get("evidence_selection_policy", "standard") not in {
             "standard", "value_v1", "structure_first_v1", "retrieved_first_v1",
+            "range_aggregate_v1",
         }:
             raise ValueError("EVIDENCE_SELECTION_POLICY_INVALID")
         if settings.get("evidence_selection_policy", "standard") != "standard" \
@@ -2208,6 +2209,8 @@ class BenchmarkRun:
         elif self.settings.get("evidence_selection_policy") == "retrieved_first_v1":
             options["initial_indices"] = [i for i, item in enumerate(memories)
                 if item["kind"] == "original_source" and not item.get("scope_only")][:1]
+        elif self.settings.get("evidence_selection_policy") == "range_aggregate_v1":
+            options["aggregate_ranges"] = True
         return policy(
             question, date, memories, snapshot_id=snapshot_id, open_materials=reopen,
             messages_for=lambda items: reader_messages(question, date, items,
