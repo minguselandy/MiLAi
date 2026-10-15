@@ -825,7 +825,7 @@ def read_question_pack(
 
     # Partition only navigation, using the full empty-evidence wrapper's actual cost.
     pages = plan_delivery([{"index": i} for i in all_indices], lambda rows: fits(packet(
-        [], [directory[row["index"]] for row in rows])))
+        [], [directory[row["index"]] for row in rows])), monotone=True)
     catalogs = [[directory[row["index"]] for row in page] for page in pages["pages"]] or [[]]
     state["candidate_page_count"] = len(catalogs)
     while state["steps"] < max_calls:
