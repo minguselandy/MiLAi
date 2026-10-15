@@ -58,7 +58,7 @@ def test_paraphrase_reuses_rules_at_new_time_and_arrival_refreshes(tmp_path, pol
                                              policy=policy, call=call)
         # The newly arrived rule was not a member of the old retrieval/support pool.
         assert arrived["source_ref"] != ref and three["new_arrivals"] == 1
-        assert three["model_calls"] == 1 and three["source_metadata_scanned"] == 2
+        assert three["model_calls"] == 1 and three["visible_sources_enumerated"] == 2
         assert any("Night borrowing" in source["text"] for source in inputs[-1]["sources"])
         assert three["source_bodies_delivered"] == (1 if policy == "incremental" else 2)
         assert len(third["structure"]["nodes"]) == 2

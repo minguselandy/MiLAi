@@ -115,7 +115,9 @@ def build_query_structure(
     arrivals = ([source["event_id"] for source in events
                  if [source["observed_at"], source["event_id"]] > prior["arrival_cursor"]]
                 if prior is not None and prior["policy"] == policy else [])
-    report: dict[str, Any] = {"policy": policy, "source_metadata_scanned": len(events),
+    report: dict[str, Any] = {"policy": policy, "visible_sources_enumerated": len(events),
+        "source_inventory": "MemoryService.sources full enumeration; "
+                            "hidden-row scan count unobserved",
         "retrieved_sources": len(pool), "new_arrivals": len(arrivals), "model_calls": 0,
         "source_bodies_delivered": 0,
         "cache_capacity": 1, "query_time": date,
