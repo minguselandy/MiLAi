@@ -2949,6 +2949,10 @@ class BenchmarkRun:
                 "failure_ref": str(failure_path.relative_to(self.root))}
 
     def halumem(self, phase: str = "all") -> dict[str, Any]:
+        if self.settings.get("evidence_replay"):
+            from milai_lab.runners.evidence_replay import replay_halumem
+
+            return replay_halumem(self, phase)
         selection = self.settings["halumem"]
         qa_only = selection.get("evaluation_mode", "all") == "qa_only"
         users = halumem_users(Path(selection["path"]), selection["users"])

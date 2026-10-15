@@ -18,9 +18,11 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.methods.query_structure import build_query_structure
 from milai_lab.runners import evidence_replay
 from milai_lab.runners.baseline_alignment import AlignmentRun
+from milai_lab.runners.edit_benchmarks import BenchmarkRun
 
 
-def fixture_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[AlignmentRun, Path]:
+def fixture_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+                run_type: type[BenchmarkRun] = AlignmentRun) -> tuple[BenchmarkRun, Path]:
     original = tmp_path / "original" / "MiLAi-memory-only"
     original.mkdir(parents=True)
     settings = {
@@ -39,7 +41,7 @@ def fixture_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Alignm
             {"question": "Which marker?", "answer": "GOLD_NOT_FOR_READER", "evidence": []},
         ],
     }]}) + "\n")
-    execution = AlignmentRun.__new__(AlignmentRun)
+    execution = run_type.__new__(run_type)
     execution.settings, execution.root = settings, tmp_path / "replay"
     execution.client = SimpleNamespace(config=SimpleNamespace(max_calls=12))
     execution.budget = SimpleNamespace(state={})
@@ -48,10 +50,12 @@ def fixture_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Alignm
 
 
 @pytest.mark.parametrize("saved_materials", [False, True])
+@pytest.mark.parametrize("run_type", [BenchmarkRun, AlignmentRun])
 def test_replay_reopens_saved_prefix_without_future_search_or_original_writes(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch, saved_materials: bool,
+    run_type: type[BenchmarkRun],
 ) -> None:
-    execution, original = fixture_run(tmp_path, monkeypatch)
+    execution, original = fixture_run(tmp_path, monkeypatch, run_type)
     bank = original / "banks/owner"
     bank.mkdir(parents=True)
     with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
@@ -101,7 +105,7 @@ def test_replay_reopens_saved_prefix_without_future_search_or_original_writes(
         return "EARLY_BLUE_MARKER"
 
     monkeypatch.setattr(execution, "call", answer)
-    result = evidence_replay.replay_halumem(execution, "predict")
+    result = execution.halumem("predict")
     assert result["complete_answers"] == 1 and result["formation_calls"] == 0
     assert result["retrieval_calls"] == 0 and result["activation_feedback"] is False
     assert (bank / "memory.sqlite").read_bytes() == before
@@ -112,7 +116,7 @@ def test_replay_reopens_saved_prefix_without_future_search_or_original_writes(
         assert all("pre_read_calls" not in row for row in replayed["materials"])
         old = read_json(original / "native/halumem/owner/0/qa/0/retrieval.json")
         assert old["materials"][0]["pre_read_calls"] == 1
-    evidence_replay.replay_halumem(execution, "predict")
+    execution.halumem("predict")
     assert len(seen) == 1, "A saved replay answer is never regenerated"
 
 
