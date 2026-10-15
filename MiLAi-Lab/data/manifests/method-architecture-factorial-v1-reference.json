@@ -1,0 +1,50 @@
+{
+  "status": "PREDECLARED_EVALUATOR_ONLY",
+  "experiment": "milai-method-architecture-factorial-v1",
+  "not_loaded_by_writer_or_reader": true,
+  "replicates": 1,
+  "independent_case_count": 3,
+  "metric": "per-cell answer joint factual correctness; report explanation faithfulness and engineering failures separately",
+  "interaction": "(Y11-Y10)-(Y01-Y00), descriptive across these three cases; not stable synergy or independent external evidence",
+  "cases": {
+    "exception-withdrawal": {
+      "state_obligations": [
+        "classroom exception withdrawn; no active exempt-copy scope",
+        "general originals/copies glove rule retained",
+        "digital-copy and paper-loan registration rules retained",
+        "old exception and actual withdrawal source accessible"
+      ],
+      "answers": {
+        "current": "公开课已结束，练习复印件和纸本原稿在室内阅览都须戴手套。",
+        "withdrawn": "公开课期间仅供学员练习的复印件可不戴手套；公开课结束后临时例外撤回。",
+        "preserved": "数字副本室内阅览不用戴手套；外借任何纸本仍须登记；都未改变。"
+      }
+    },
+    "alternative-support": {
+      "state_obligations": [
+        "mains unavailable; battery and fan remain available",
+        "battery AND fan route still supports projection",
+        "no false negation of battery or subtitles",
+        "subtitle independence retained"
+      ],
+      "answers": {
+        "remaining-route": "可以用有电的大电池供电，且冷却风扇仍正常；市电这条路径失效不使另一条失效。",
+        "shared-condition": "不能，两种供电方式都要求风扇运转。",
+        "preserved": "字幕屏不受市电停用影响，独立小电池供电，不依赖投影风扇。"
+      }
+    },
+    "shared-condition": {
+      "state_obligations": [
+        "bridge closed and guide still present",
+        "lake route paused, roof route continues",
+        "indoor exhibition remains open and independent of guide",
+        "no assertion that all routes fail from bridge closure alone"
+      ],
+      "answers": {
+        "current": "湖边暂停，屋顶继续；湖边还需要开放栈桥，屋顶只要求向导到场。",
+        "prerequisite": "都不能，湖边和屋顶路线都需要向导到场，栈桥开放不能替代向导。",
+        "preserved": "室内标本展示照常开放，不依赖向导。"
+      }
+    }
+  }
+}

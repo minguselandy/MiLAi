@@ -20,6 +20,7 @@ CONTRACT_SOURCE_FILES = (
 MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/__init__.py",
     "src/milai_lab/memory/activation.py",
+    "src/milai_lab/memory/dependency_groups.py",
     "src/milai_lab/memory/edit_units.py",
     "src/milai_lab/memory/embeddings.py",
     "src/milai_lab/memory/episodes.py",
@@ -34,6 +35,7 @@ MEMORY_SOURCE_FILES = (
     "src/milai_lab/memory/retrieval.py",
     "src/milai_lab/memory/service.py",
     "src/milai_lab/memory/service_tools.py",
+    "src/milai_lab/memory/source_times.py",
     "src/milai_lab/memory/revision_store.py",
     "src/milai_lab/memory/strict_tools.py",
     "src/milai_lab/memory/support_display.py",

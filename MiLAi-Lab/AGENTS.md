@@ -25,6 +25,12 @@ Development now adds fixed_history_candidates for later controlled R pools, with
 58related tests/types/lint/boundaries passing; 8real closed-bank slices verify same
 versions/no future leaks/unchanged copied records,0HTTP. See fixed-history-pool-v1
 manifest. This is NOT running screening source and is not a scored2x2 result.
+New method_architecture_factorial runner/tool/config prepared ZERO_MODEL,3cases/36read
+opportunities: common actualM seed, one arrival, U0/U1 once, samepoststate/sharedsource
++historypool for R0/R1; no promotion/oracle graph; all read feedbackoff.10checks/types/lint/
+boundaries/matrix pass. Matrix repaired missing dependency_groups/source_times registration
+and CI environment ownership; no SHA. Factorial mustfreeze newsource and wait for original
+screening queue toclose before realdispatch. No factorial model run yet.
 Prior snapshots below are historical, including previously live/blocked jobs.
 
 # Current execution: E1 repeat closed, continuous stories running (2026-10-15)

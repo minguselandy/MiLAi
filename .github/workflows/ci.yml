@@ -223,7 +223,7 @@ jobs:
           --ignore=tests/unit/test_unified_benchmarks.py \
           --ignore=tests/unit/test_benchmark_memories.py \
           --ignore=tests/unit/test_merit_native.py \
-          --ignore=tests/unit/test_simplemem_native.py \
+          --ignore=tests/unit/test_simplemem_native.py --ignore=tests/unit/test_simplemem_identity.py \
           --ignore=tests/application/test_v13_5_workflows.py \
           --ignore=tests/memory/test_v13_5_functional.py \
           --ignore=tests/unit/test_v13_5_functional_integration.py \
@@ -241,7 +241,7 @@ jobs:
           --ignore=tests/unit/test_edit_external.py \
           --ignore=tests/unit/test_edit_mechanism.py \
           --ignore=tests/memory/test_edit_memory_v2.py \
-          --ignore=tests/unit/test_edit_v2_runner.py \
+          --ignore=tests/unit/test_edit_v2_runner.py --ignore=tests/unit/test_dependency_memory.py --ignore=tests/unit/test_dependency_groups.py --ignore=tests/unit/test_evidence_reading.py --ignore=tests/unit/test_method_architecture_diagnostic.py \
           --ignore=tests/unit/test_edit_development_history.py \
           --ignore=tests/unit/test_edit_views.py --ignore=tests/unit/test_baseline_alignment.py --ignore=tests/unit/test_baseline_alignment_backends.py --ignore=tests/unit/test_baseline_alignment_arm_entry.py \
           --junitxml="${{ github.workspace }}/lab-test-results/junit.xml"
@@ -301,7 +301,7 @@ jobs:
             uv run --no-sync pytest -q tests/unit/test_baseline_alignment.py tests/unit/test_baseline_alignment_backends.py tests/unit/test_baseline_alignment_arm_entry.py
           )
           uv run --no-sync pytest -q tests/unit/test_edit_mechanism.py
-          uv run --no-sync pytest -q tests/memory/test_edit_memory_v2.py tests/unit/test_edit_v2_runner.py tests/unit/test_edit_development_history.py tests/unit/test_edit_views.py
+          uv run --no-sync pytest -q tests/memory/test_edit_memory_v2.py tests/unit/test_edit_v2_runner.py tests/unit/test_edit_development_history.py tests/unit/test_edit_views.py tests/unit/test_dependency_memory.py tests/unit/test_dependency_groups.py tests/unit/test_evidence_reading.py tests/unit/test_method_architecture_diagnostic.py
           uv run --no-sync python tools/prepare_sealed_regression.py --destination "$RUNNER_TEMP/milai-sealed-r52"
           (
             export PYTHONPATH="$RUNNER_TEMP/milai-sealed-r52/MiLAi-Lab/src"
@@ -330,7 +330,7 @@ jobs:
           uv pip install --python .venv/bin/python -r data/locks/unified-v8-v9-simplemem-text-20260929.requirements.txt
           uv run --no-sync python tools/prepare_simplemem_text_source.py --prepare
           uv run --no-sync mypy src/milai_lab/runners/mem0_native.py src/milai_lab/runners/mem0_identity.py src/milai_lab/runners/simplemem_native.py src/milai_lab/integrations/memory/mem0.py src/milai_lab/integrations/memory/simplemem.py
-          uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_external_memory_v26.py tests/unit/test_simplemem_native.py tests/integrations/test_mem0_contracts.py tests/integrations/test_simplemem_contracts.py tests/integrations/test_external_interfaces.py tests/application/test_v13_5_sdk_lifecycle.py
+          uv run --no-sync pytest -q -m 'not local_artifacts' tests/unit/test_external_memory_v26.py tests/unit/test_simplemem_native.py tests/unit/test_simplemem_identity.py tests/integrations/test_mem0_contracts.py tests/integrations/test_simplemem_contracts.py tests/integrations/test_external_interfaces.py tests/application/test_v13_5_sdk_lifecycle.py
 
   lab-langmem-provenance:
     name: Lab LangMem provenance B1

@@ -251,3 +251,16 @@ continuous-v2候选出现两种真实断点：未来变更的replace错误引用
 24项依赖/证据读取检查通过（6.79秒），34项支持组/v2 runner检查通过（11.29秒）；Ruff、单文件mypy、包DAG和工具边界通过。另对关闭的continuous-v2原银行做SQLite只读备份，在两臂两故事的第1/5检查点共8个真实切片上验证版本集合一致、无未来版本进入、银行记录值不变。未访问原银行写入、未调用模型。明细见`method-architecture-fixed-history-pool-v1.json`。
 
 当前screening-v1仍运行冻结463b5182，没有热改。该入口尚未产生受控R或2×2模型成绩，不能据离线输入公平性检查宣称协同有效。
+
+
+## 同实际条件状态的2×2入口准备
+
+新增`runners/method_architecture_factorial.py`及对应tools入口。三个声明案例覆盖例外撤销、替代供电且风扇共同前提、共享向导条件。种子从已到达的原文通过现有M条件表示局部编辑形成一次；不提供正确图、不重复生成到满意为止，不从E2最终状态手工回滚。更新原文在seed副本中只捕获一次，两条U分支拿到相同Source ID与时钟。
+
+U0保留现有条件局部编辑，U1增加已实现的Impact区域。每个实际更新只执行一次，然后两种R读取复用该后态与同一原文/历史候选池。这个小诊断明确使用所有可见语义记录，隔离前端召回的差异；两种读取均可访问相同真实旧版本与撤销见证。R1仍需自费选择根与支持组，选择调用计入共同读取上限；R0使用原普通Evidence Pack路径。最终Reader、来源访问、模型和容量不变，关闭读后使用反馈。
+
+配置`milai-method-architecture-factorial-v1.json`已prepare为PREPARED_ZERO_MODEL：三案例×四单元×三问题，共36读取机会，实际模型请求0。评价答案和状态义务单独预声明在`method-architecture-factorial-v1-reference.json`，执行器不加载该文件。共享seed、两条更新及四个读取单元分别计费；不能把共享诊断当成四条独立系统生命周期。
+
+实际SQLite加模型桩验证了：seed只形成一次、U0/U1 before逐值一致、实际arrival身份相同、R0/R1版本/来源池一致、选择调用预扣一次额度、读取不改记录值、评价canary不进Writer、重读已关闭阶段不重复生成。最后相关10项通过（3.56秒）；Ruff、3文件mypy、包DAG/工具边界通过。验证矩阵首次暴露既有文件登记遗漏，补入dependency_groups与source_times，并为新测试登记正确的Foundation/External CI依赖环境；矩阵通过，未降低任何检查标准。未执行远端CI。
+
+该入口源码需独立冻结后，在当前screening-v1队列关闭且原账本资源释放后执行。三案例结果只能作机制诊断，不能凭Y11最高就声称稳定正交互。完整W3维护时机、跨记录、W4匹配训练/增强比较、W5正常Host及独立外部评价仍待推进。

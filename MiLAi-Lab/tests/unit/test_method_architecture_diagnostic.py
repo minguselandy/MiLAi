@@ -23,6 +23,7 @@ from milai_lab.runners.method_architecture_diagnostic import (
     run_pair,
     run_seed,
 )
+from milai_lab.runners.method_architecture_factorial import prepare_factorial, run_factorial
 
 
 class StubRun(BenchmarkRun):
@@ -60,6 +61,8 @@ class StubRun(BenchmarkRun):
             if not before:
                 clause = {"text": observed.turns[0]["content"], "evidence": ["e1"],
                           "assertion": assertion}
+                if self.settings["arm"] == "M":
+                    clause["conditions"] = []
                 return {"creates": [{"action": "create", "matter": "test source",
                                      "clauses": [clause]}], "records": {}}
             text = before[0]["value"]["edit_state"]["units"][0]["text"]
@@ -180,3 +183,66 @@ def test_cost_inventory_keeps_unknown_usage_and_separates_shared_components(tmp_
     assert result["stages"]["embedding"]["known_tokens"] == 4
     assert result["stages"]["reader"]["unknown_usage_responses"] == 1
     assert result["requests_without_response"] == ["http/questions/q2/request.json"]
+
+
+class FactorialStubRun(StubRun):
+    read_inputs: ClassVar[list] = []
+    selector_calls: ClassVar[list] = []
+
+    def call(self, stage, messages, **kwargs):
+        self.selector_calls.append((str(self.root), stage))
+        schema = kwargs["response_format"]["json_schema"]["schema"]
+        return json.dumps({key: {"roots": [0], "excluded": [], "history_revisions":
+            row["properties"]["history_revisions"]["items"]["enum"]}
+            for key, row in schema["properties"].items()})
+
+    def answer_material(self, question, date, key, memories, *, snapshot_id, material_reader):
+        opened = material_reader(memories)
+        self.read_inputs.append({"cell": self.root.name, "key": key,
+            "versions": [(m["record_id"], m["revision"]) for m in opened
+                         if m["kind"] == "semantic_view"],
+            "sources": [m["source_ranges"] for m in opened if m["kind"] == "original_source"],
+            "pre_read_calls": memories[0].get("pre_read_calls", 0)})
+        return "Test response to: " + question, opened
+
+
+def test_factorial_shares_actual_formation_update_and_read_pools(tmp_path: Path):
+    lab = Path(__file__).resolve().parents[2]
+    config = read_json(lab / "configs/milai-method-architecture-factorial-v1.json")
+    config["base_config"] = str(lab / "configs/milai-method-architecture-dev-v2.json")
+    config["sources"] = str(lab / "data/fixtures/milai-method-architecture-screening-v1.jsonl")
+    config["cases"] = config["cases"][:1]
+    config["cases"][0]["queries"][0]["gold"] = "FACTORIAL_EVALUATOR_SECRET"
+    root = tmp_path / "factorial"
+    protocol = prepare_factorial(config, root)
+    FactorialStubRun.requests = []
+    FactorialStubRun.read_inputs = []
+    FactorialStubRun.selector_calls = []
+    result = run_factorial(protocol, root, run_class=FactorialStubRun)
+    case = result["cases"]["exception-withdrawal"]
+    seed = case["seed"]["actual_state"]
+    assert seed and seed[0]["value"]["edit_state"]["representation"] == "conditioned_v1"
+    assert len(FactorialStubRun.requests) == 5  # two seed events, two edits, one Impact
+    assert len(FactorialStubRun.selector_calls) == 6
+    assert len(FactorialStubRun.read_inputs) == 12
+    assert "FACTORIAL_EVALUATOR_SECRET" not in json.dumps(FactorialStubRun.requests)
+    for u in (0, 1):
+        assert case["updates"][f"U{u}"]["before"] == seed
+        for query in protocol["cases"][0]["queries"]:
+            a, b = [next(row for row in FactorialStubRun.read_inputs
+                         if row["cell"] == f"Y{u}{r}" and row["key"].endswith(query["id"]))
+                    for r in (0, 1)]
+            assert a["versions"] == b["versions"]
+            assert a["sources"] == b["sources"]
+            assert (a["pre_read_calls"], b["pre_read_calls"]) == (0, 1)
+        for r in (0, 1):
+            cell = case["cells"][f"Y{u}{r}"]
+            assert cell["record_values_unchanged"]
+            assert cell["state_correct"] is None and cell["answer_correct"] is None
+    after = [case["updates"][f"U{u}"]["after"][0]["value"] for u in (0, 1)]
+    assert after[0]["source_ref"] == after[1]["source_ref"]
+    count = len(FactorialStubRun.requests)
+    reads = len(FactorialStubRun.read_inputs)
+    run_factorial(protocol, root, run_class=FactorialStubRun)
+    assert len(FactorialStubRun.requests) == count
+    assert len(FactorialStubRun.read_inputs) == reads
