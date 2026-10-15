@@ -11,7 +11,7 @@ import copy
 import json
 import sqlite3
 import time
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any, cast
 
@@ -153,6 +153,29 @@ def _copy_bank(source: Path, destination: Path) -> None:
             original.backup(copied)
 
 
+def _maintain_with_output_budget(
+    run: BenchmarkRun, service: MemoryService, observed: ObservedSession,
+    output_tokens: int | None,
+) -> None:
+    """A declared maintenance-only ceiling; the common Reader keeps its original settings."""
+    if output_tokens is None:
+        run.maintain_recipe(service, observed, "update")
+        return
+    original = run.client.config
+    original_tokens = run.settings["model"]["max_tokens"]
+    run.client.config = replace(original, max_tokens=output_tokens)
+    run.settings["model"]["max_tokens"] = output_tokens
+    write_json(run.root / "maintenance-model-settings.json", {
+        "max_tokens": output_tokens, "reader_max_tokens": original.max_tokens,
+        "stage_enable_thinking": run.settings.get("stage_enable_thinking", {}),
+    })
+    try:
+        run.maintain_recipe(service, observed, "update")
+    finally:
+        run.client.config = original
+        run.settings["model"]["max_tokens"] = original_tokens
+
+
 def _prepare_arrival(protocol: dict[str, Any], root: Path) -> Path:
     """Capture the common update once so both arms get identical Source identities/clocks."""
     bank = root / "arrival"
@@ -244,7 +267,8 @@ def run_pair(
                 before = service.records()
                 write_json(folder / "before.json", {"records": before, "projection": projection})
                 observed = ObservedSession(**protocol["observations"]["update"])
-                run.maintain_recipe(service, observed, "update")
+                _maintain_with_output_budget(
+                    run, service, observed, protocol["config"].get("maintenance_output_tokens"))
                 after = service.records()
                 write_json(folder / "after.json", after)
                 answers = []

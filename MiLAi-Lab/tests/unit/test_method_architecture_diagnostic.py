@@ -15,8 +15,10 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import maintain_event
 from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.providers.contextual_vllm import VLLMConfig
 from milai_lab.runners.edit_benchmarks import BenchmarkRun
 from milai_lab.runners.method_architecture_diagnostic import (
+    _maintain_with_output_budget,
     diagnostic_costs,
     prepare_diagnostic,
     promote_plain_version,
@@ -85,6 +87,27 @@ class StubRun(BenchmarkRun):
     def answer(self, service, question, date, key):
         assert self.settings["read_usage_updates"] is False
         return "Test response to: " + question
+
+
+@pytest.mark.parametrize("failure", [False, True])
+def test_maintenance_ceiling_does_not_change_reader_or_survive_failure(tmp_path, failure):
+    config = VLLMConfig(base_url="http://localhost/v1", model="test", max_tokens=8192)
+    run = SimpleNamespace(root=tmp_path, client=SimpleNamespace(config=config),
+                          settings={"model": {"max_tokens": 8192}})
+
+    def maintain(*args):
+        assert run.client.config.max_tokens == 2048
+        assert run.settings["model"]["max_tokens"] == 2048
+        if failure:
+            raise ValueError("known test failure")
+
+    run.maintain_recipe = maintain
+    if failure:
+        with pytest.raises(ValueError, match="known test failure"):
+            _maintain_with_output_budget(run, None, None, 2048)
+    else:
+        _maintain_with_output_budget(run, None, None, 2048)
+    assert run.client.config == config and run.settings["model"]["max_tokens"] == 8192
 
 
 @pytest.mark.parametrize("with_delta", [False, True])
