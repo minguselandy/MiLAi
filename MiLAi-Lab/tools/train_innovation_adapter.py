@@ -92,6 +92,7 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--threads", type=int, default=4)
     parser.add_argument("--epochs", type=int, default=1)
+    parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--seed", type=int, default=20261016)
     parser.add_argument("--rank", type=int, default=4)
     parser.add_argument("--learning-rate", type=float, default=0.0005)
@@ -152,6 +153,8 @@ def main() -> None:
     order = list(range(len(examples))) * args.epochs
     permutation = torch.randperm(len(order), generator=torch.Generator().manual_seed(args.seed))
     order = [order[index] for index in permutation.tolist()]
+    batches = [order[start:start + args.batch_size]
+               for start in range(0, len(order), args.batch_size)]
     protocol = {
         "model_path": str(args.model),
         "model_source": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
@@ -163,6 +166,11 @@ def main() -> None:
         "alpha": 2 * args.rank,
         "learning_rate": args.learning_rate,
         "epochs": args.epochs,
+        "gradient_accumulation_examples": args.batch_size,
+        "optimizer_steps_per_arm": len(batches),
+        "normalization": "Sum weighted token losses over the whole minibatch, divided by "
+                         "its total supervised weight; short examples do not each receive "
+                         "a separate full optimizer step.",
         "examples": len(examples),
         "example_order": [examples[i]["id"] for i in order],
         "objectives": list(OBJECTIVES),
@@ -178,7 +186,8 @@ def main() -> None:
         ),
         "matching": "Identical sequences, order, initialization, parameters and optimizer steps. "
         "Every response position is projected in every arm, including zero-weight auxiliary "
-        "tokens. Only loss weights differ; each update normalized by its supervised weight sum.",
+        "tokens. Only loss weights differ; each minibatch update normalized by its "
+        "supervised weight sum.",
         "quality_proxy": "2x weights on text, kind, evidence aliases and applicability values; "
         "not a learned correctness reward or a preference optimization claim.",
         "relation_objective": "Quality weights plus 2x rule spans and nonempty consequence labels.",
@@ -212,12 +221,12 @@ def main() -> None:
         folder = args.output / objective
         folder.mkdir(parents=True, exist_ok=True)
         steps = []
-        for step, index in enumerate(order):
-            example = examples[index]
-            normalization = sum(sum(task["weights"][objective]) for task in example["tasks"])
+        for step, batch in enumerate(batches):
+            tasks = [task for index in batch for task in examples[index]["tasks"]]
+            normalization = sum(sum(task["weights"][objective]) for task in tasks)
             optimizer.zero_grad(set_to_none=True)
             loss_value, supervised, projected = 0.0, 0, 0
-            for task in example["tasks"]:
+            for task in tasks:
                 ids = torch.tensor([task["ids"]], dtype=torch.long)
                 weight = torch.tensor(task["weights"][objective][1:], dtype=torch.float32)
                 response_positions = torch.arange(len(task["ids"]) - 1) >= task["prompt_tokens"] - 1
@@ -236,10 +245,11 @@ def main() -> None:
             optimizer.step()
             receipt = {
                 "step": step + 1,
-                "example_id": example["id"],
-                "input_tokens": sum(task["prompt_tokens"] for task in example["tasks"]),
-                "target_tokens": sum(task["target_tokens"] for task in example["tasks"]),
-                "tasks": len(example["tasks"]),
+                "example_ids": [examples[index]["id"] for index in batch],
+                "input_tokens": sum(task["prompt_tokens"] for task in tasks),
+                "target_tokens": sum(task["target_tokens"] for task in tasks),
+                "tasks": len(tasks),
+                "supervised_weight_sum": normalization,
                 "projected_response_tokens": projected,
                 "supervised_tokens": supervised,
                 "loss": loss_value,

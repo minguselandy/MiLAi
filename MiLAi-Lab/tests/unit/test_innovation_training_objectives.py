@@ -102,3 +102,61 @@ def test_indexed_preparation_separates_auxiliary_labels_from_native_edit_request
         {"training": None}
     ]
     assert auxiliary["target"] == {"consequences": row["consequence_targets"]}
+
+
+def test_learning_evaluation_clones_actual_state_and_restores_current_source_binding(
+    tmp_path, monkeypatch
+):
+    from langgraph.store.sqlite import SqliteStore
+
+    from innovation_learning_states import components, main
+
+    prior = tmp_path / "prior"
+    prior.mkdir()
+    with SqliteStore.from_conn_string(str(prior / "memory.sqlite")) as store:
+        service, method = components(store, prior, "prior-owner", "semantic_delta_v2")
+        ref = service.capture_user("evaluation", "seed", "胶带在蓝柜。",
+                                   occurred_at="2039-03-02T09:00:00+08:00")["source_ref"]
+        service.bind_public_turn("evaluation", "seed", ref,
+                                 config_version="learning-eval-v1", phase="start")
+        view = method.writer_request(method.prepare([ref], "", selected_records=[]),
+                                     request_id="seed")
+        proposals = method.envelope_proposals({"creates": [{"nodes": [
+            {"text": "胶带在蓝柜。", "basis": "e1", "kind": "reported"}]}]},
+            view["mapping"]["mapping_id"])
+        for proposal in proposals:
+            receipt = method.apply("evaluation", "seed-commit", method.decode_proposal(
+                proposal, view["mapping"]["mapping_id"]))
+            assert receipt["ok"]
+        original = service.records()
+    cases = tmp_path / "cases.json"
+    cases.write_text(json.dumps({"cases": [{"case_id": "new-update", "bank_case_id": "prior-owner",
+        "before_bank": str(prior / "memory.sqlite"), "source": "胶带移到白柜。",
+        "reported_at": "2039-03-03T09:00:00+08:00",
+        "review_dimensions": ["hidden evaluator label"]}]}))
+    root = tmp_path / "evaluation"
+    common = [str(cases), str(root), "--interface", "native",
+              "--maintenance-mode", "semantic_delta_v2"]
+    monkeypatch.setattr(sys, "argv", ["states", *common, "--phase", "prepare"])
+    main()
+    prepared = json.loads((root / "inputs.jsonl").read_text())
+    assert prepared["actual_before"] == original
+    assert "hidden evaluator label" not in json.dumps(prepared["messages"])
+    generated = tmp_path / "generations"
+    generated.mkdir()
+    for name, envelope in (("edit", {"changes": {"r1": {"replace": {"u1": {
+        "text": "胶带已移到白柜。", "basis": "e1", "kind": "reported"}}}}}), ("empty", {})):
+        (generated / f"{name}.json").write_text(json.dumps({"objective": name, "sequences": [{
+            "example_id": "new-update", "finish_reason": "stop", "text": json.dumps(envelope)}]}))
+    monkeypatch.setattr(sys, "argv", ["states", *common, "--phase", "apply",
+                                     "--generations", str(generated)])
+    main()
+    results = json.loads((root / "applied-results.json").read_text())["results"]
+    updated = next(row for row in results if row["objective"] == "edit")
+    unchanged = next(row for row in results if row["objective"] == "empty")
+    assert updated["status"] == "applied" and updated["receipts"][0]["ok"]
+    assert "白柜" in updated["after"][0]["value"]["content"]
+    assert unchanged["status"] == "no_change" and unchanged["after"] == original
+    with SqliteStore.from_conn_string(str(prior / "memory.sqlite")) as store:
+        service, _ = components(store, prior, "prior-owner", "semantic_delta_v2")
+        assert service.records() == original and len(service.sources()) == 1

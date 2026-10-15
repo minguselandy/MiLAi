@@ -1,4 +1,4 @@
-"""Prepare actual source-only empty banks or apply saved local model outputs to their copies."""
+"""Prepare source-only or actual prior-state banks, then apply saved outputs to copies."""
 
 from __future__ import annotations
 
@@ -16,6 +16,7 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import parse_object
 from milai_lab.methods.edit_memory import EditMemory, MaintenanceMode
+from milai_lab.runners.method_architecture_diagnostic import _copy_bank
 from prepare_innovation_sft import WRAPPED_INSTRUCTIONS
 
 
@@ -64,9 +65,11 @@ def main() -> None:
         for case in cases:
             case_id = case["case_id"]
             folder = args.root / "source-banks" / case_id
-            folder.mkdir(parents=True, exist_ok=True)
+            folder.mkdir(parents=True)
+            if "before_bank" in case:
+                _copy_bank(Path(case["before_bank"]), folder / "memory.sqlite")
             with SqliteStore.from_conn_string(str(folder / "memory.sqlite")) as store:
-                service, method = components(store, folder, case_id,
+                service, method = components(store, folder, case.get("bank_case_id", case_id),
                                               cast(MaintenanceMode, args.maintenance_mode))
                 ref = service.capture_user(
                     "evaluation",
@@ -78,7 +81,9 @@ def main() -> None:
                 service.bind_public_turn(
                     "evaluation", case_id, ref, config_version="learning-eval-v1", phase="start"
                 )
-                delivery = method.prepare([ref], "", selected_records=[])
+                before = service.records()
+                delivery = method.prepare([ref], "", selected_records=before,
+                    redelivered_ranges=method.target_support_ranges(before) if before else None)
                 view = method.writer_request(delivery, request_id=case_id)
                 payload = {
                     "observed_date": case["reported_at"],
@@ -108,6 +113,7 @@ def main() -> None:
                         "maintenance_mode": args.maintenance_mode,
                         "mapping_id": view["mapping"]["mapping_id"],
                         "actual_before": service.records(),
+                        "before_bank": case.get("before_bank"),
                     }
                 )
         (args.root / "inputs.jsonl").write_text(
@@ -115,6 +121,7 @@ def main() -> None:
         )
         return
     assert args.generations is not None
+    by_id = {case["case_id"]: case for case in cases}
     reports = []
     for path in sorted(args.generations.glob("*.json")):
         output = json.loads(path.read_text())
@@ -124,7 +131,8 @@ def main() -> None:
             folder = args.root / "applied" / objective / case_id
             shutil.copytree(args.root / "source-banks" / case_id, folder)
             with SqliteStore.from_conn_string(str(folder / "memory.sqlite")) as store:
-                service, method = components(store, folder, case_id,
+                service, method = components(store, folder,
+                    by_id[case_id].get("bank_case_id", case_id),
                                               cast(MaintenanceMode, args.maintenance_mode))
                 report: dict[str, Any] = {
                     "objective": objective,
