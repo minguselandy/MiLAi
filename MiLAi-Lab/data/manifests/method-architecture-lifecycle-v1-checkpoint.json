@@ -1,0 +1,49 @@
+{
+  "status": "LIFECYCLE_PREPARED_ZERO_MODEL",
+  "source_parent": "673c84c6",
+  "config": "configs/milai-method-architecture-lifecycle-v1.json",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/lifecycle-v1",
+  "policies": [
+    "event",
+    "explicit_change",
+    "query_rebuild"
+  ],
+  "events_per_policy": 6,
+  "query_checkpoints": [
+    0,
+    2,
+    4,
+    5
+  ],
+  "reuse_counts": [
+    1,
+    4
+  ],
+  "actual_read_opportunities": 48,
+  "model_requests": 0,
+  "capture": "every arrival immediately, including acknowledgments skipped by semantic policy",
+  "gate": "one metered semantic maintenance decision after each post-initial arrival; no future queries",
+  "rebuild": "source-only SQLite prefix clone; empty semantic state; latest-session current boundary and actual redelivered older Sources; ordinary editor plus reconstruction task",
+  "reuse": "first k observed reads per same actual checkpoint; no repeated formation or double charging",
+  "source_identity": "native separate policy captures; immutable originals preserved exactly inside each prefix clone",
+  "read_usage_updates": false,
+  "new_support_authority": false,
+  "source_scope_guards_relaxed": false,
+  "checks": {
+    "diagnostic_sqlite_scheduling_sources_and_costs": "10 passed, 9.35s",
+    "ruff": "pass",
+    "mypy": "3 files pass",
+    "package_dag": "pass",
+    "tools_boundary": "pass",
+    "verification_matrix": "pass, 276 active sources"
+  },
+  "first_failed_check": "attempt to bind historical sessions as current boundary rejected; implementation uses historical redelivery without relaxing source scope",
+  "reference": "data/manifests/method-architecture-lifecycle-v1-reference.json",
+  "limitations": [
+    "one authored development stream",
+    "no real lifecycle answers or costs yet",
+    "no deployment amortization or non-inferiority claim",
+    "remote CI not run"
+  ],
+  "existing_queues": "screening original exec29617 live; frozen factorial exec60980 waits for its first scores/resources"
+}

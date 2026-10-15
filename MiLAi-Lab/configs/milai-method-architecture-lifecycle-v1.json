@@ -1,0 +1,36 @@
+{
+  "name": "milai-method-architecture-lifecycle-v1",
+  "base_config": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/configs/milai-method-architecture-dev-v2.json",
+  "sources": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/data/fixtures/milai-method-architecture-lifecycle-v1.jsonl",
+  "owner": "method-lifecycle-scores",
+  "reuse_counts": [
+    1,
+    4
+  ],
+  "query_after_sessions": [
+    0,
+    2,
+    4,
+    5
+  ],
+  "replicates": 1,
+  "data_role": "one authored lifecycle development stream; no deployment/generalization claim",
+  "queries": [
+    {
+      "id": "current-and-future",
+      "question": "根据已到达的琴谱室规则，复制件现在和2033年6月2日起分别由谁登记？"
+    },
+    {
+      "id": "exception",
+      "question": "目前关于2033年6月4日复制件登记的安排是什么，是否有临时例外？"
+    },
+    {
+      "id": "preservation",
+      "question": "正本能借出吗，借出复制件除了登记还要做什么，封套用什么颜色？"
+    },
+    {
+      "id": "history",
+      "question": "最初接收到的登记规则写了谁，后来有哪些已明确的调整？"
+    }
+  ]
+}

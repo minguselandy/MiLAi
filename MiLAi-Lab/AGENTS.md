@@ -1,3 +1,24 @@
+# Current development: W3 prepared; E2 plain live; E3 queued
+
+Goal ACTIVE/incomplete. E2 candidate141879 CLOSED0 at03:42:59UTC:36events,
+43answers+5known dependency-selector length failures;150gen801695,embedding5723,
+1rejected EDIT_SUPPORT_ROUTE_INVALID. No resampling. Original driver141865/exec29617
+now runs plain child336636; inspect actual PID/status before dispatch. FIRSTscores pending.
+E3 supervisor247480/exec60980 still WAITING_FOR_SCREENING, frozen10c68e54.
+Do not dispatch another factorial. Both snapshots remain unchanged.
+NEW W3 lifecycle runner/tool/config prepared ZERO_MODEL:6events,3policies(event,
+explicit_change,query_rebuild),4querycheckpoints,actual4reads each;reuse1/4 allocate
+same actual states and firstreads,48read opportunities. Immediate Source capture,
+paid gate sees nofuturequeries; rebuild emptysemantic Source-only prefix clone,
+old originals redelivered with their real identity/clocks, never rebound as current
+new events. Initial scope-mismatch test fixed through redelivery, no guard relaxation.
+Latest10relatedchecks9.35s,Ruff,3filemypy,DAG/tools/matrix pass; originalSource identity
+and absence of futureSources verified in real SQLite copies. No realW3model run yet;
+freeze before dispatch after existing queues. Do not treat mock counts as scores.
+Complete E2 UJS/source/QA/cost review and E3 results; cross-record,W4matched learning,
+W5Host,strongcontrols/external/extra model+longhistory/finalscientific audit remain.
+Prior snapshots below are historical.
+
 # Current queue: E2 LIVE; frozen E3 waiting for its closure (2026-10-15)
 
 Goal ACTIVE/incomplete. Last turn made concrete progress: new factorial runner/test/

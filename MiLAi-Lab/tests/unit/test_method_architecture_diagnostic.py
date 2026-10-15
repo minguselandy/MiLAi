@@ -24,6 +24,7 @@ from milai_lab.runners.method_architecture_diagnostic import (
     run_seed,
 )
 from milai_lab.runners.method_architecture_factorial import prepare_factorial, run_factorial
+from milai_lab.runners.method_architecture_lifecycle import prepare_lifecycle, run_lifecycle
 
 
 class StubRun(BenchmarkRun):
@@ -246,3 +247,106 @@ def test_factorial_shares_actual_formation_update_and_read_pools(tmp_path: Path)
     run_factorial(protocol, root, run_class=FactorialStubRun)
     assert len(FactorialStubRun.requests) == count
     assert len(FactorialStubRun.read_inputs) == reads
+
+
+class LifecycleStubRun(StubRun):
+    maintenance_calls: ClassVar[list] = []
+    rebuild_inputs: ClassVar[list] = []
+
+    def __init__(self, settings, root, *, phase):
+        super().__init__(settings, root, phase=phase)
+        self.client = SimpleNamespace(config=SimpleNamespace(max_calls=12))
+
+    def _fits(self, messages, **kwargs):
+        return True
+
+    def maintain_recipe(self, service, observed, key):
+        self.maintenance_calls.append((self.root.name, key))
+        result = super().maintain_recipe(service, observed, key)
+        write_json(self.root / "http/maintenance" / key / "edit/response.json",
+                   {"usage": {"total_tokens": 11}})
+        return result
+
+    def call(self, stage, messages, **kwargs):
+        self.requests.append(copy.deepcopy(messages))
+        if stage.startswith("maintenance-policy/"):
+            ordinal = int(stage.rsplit("-", 1)[-1])
+            response = {"maintain": ordinal not in {1, 3}, "reason": "Test scheduling decision"}
+            tokens = 7
+        else:
+            payload = json.loads(messages[1]["content"])
+            evidence = [*payload["delivery"]["evidence"],
+                        *payload["delivery"]["redelivered_support"]]
+            self.rebuild_inputs.append([item["text"] for item in evidence])
+            response = {"creates": [{"action": "create", "matter": "prefix rebuild",
+                "clauses": [{"text": "\n".join(item["text"] for item in evidence),
+                    "evidence": [item["id"] for item in evidence], "conditions": [],
+                    "assertion": {"source_evidence": evidence[-1]["id"], "kind": "reported"}}]}],
+                "records": {}}
+            tokens = 13
+        write_json(self.root / "http" / stage / "response.json",
+                   {"usage": {"total_tokens": tokens}})
+        return json.dumps(response)
+
+    def answer(self, service, question, date, key):
+        assert self.settings["read_usage_updates"] is False
+        write_json(self.root / "http" / key / "response.json",
+                   {"usage": {"total_tokens": 15}})
+        return "Test response to: " + question
+
+
+def test_lifecycle_captures_skipped_sources_and_rebuilds_only_arrived_prefix(tmp_path: Path):
+    lab = Path(__file__).resolve().parents[2]
+    config = read_json(lab / "configs/milai-method-architecture-lifecycle-v1.json")
+    config["base_config"] = str(lab / "configs/milai-method-architecture-dev-v2.json")
+    config["sources"] = str(lab / "data/fixtures/milai-method-architecture-lifecycle-v1.jsonl")
+    config["queries"] = [{"id": str(i), "question": "READER_ONLY_" + str(i),
+                           "gold": "LIFECYCLE_EVALUATOR_SECRET"} for i in range(4)]
+    root = tmp_path / "lifecycle"
+    protocol = prepare_lifecycle(config, root)
+    LifecycleStubRun.requests = []
+    LifecycleStubRun.maintenance_calls = []
+    LifecycleStubRun.rebuild_inputs = []
+    result = run_lifecycle(protocol, root, run_class=LifecycleStubRun)
+    policies = result["policies"]
+    assert [len([x for x in LifecycleStubRun.maintenance_calls if x[0] == name])
+            for name in ("event", "explicit_change", "query_rebuild")] == [6, 4, 0]
+    assert [len(items) for items in LifecycleStubRun.rebuild_inputs] == [1, 3, 5, 6]
+    assert "LIFECYCLE_EVALUATOR_SECRET" not in json.dumps(LifecycleStubRun.requests)
+    assert "READER_ONLY_" not in json.dumps(LifecycleStubRun.requests)
+    for name, policy in policies.items():
+        assert policy["captured_sources"] == 6
+        assert len(policy["arrivals"]) == 6
+        assert all(c["record_values_unchanged"] for c in policy["checkpoints"])
+        if name == "query_rebuild":
+            assert all(not row["state"] for row in policy["arrivals"])
+            assert all(not c["rebuild_before"] for c in policy["checkpoints"])
+            assert all(c["rebuild_receipt"]["status"] == "completed"
+                       for c in policy["checkpoints"])
+            owner = config["owner"]
+            namespace = ("edit", "method-architecture-diagnostic", owner)
+            bank = root / name / "bank"
+            with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as source_store:
+                original = MemoryService(source_store, namespace, owner, bank / "memory.lock",
+                                         functional_contract="functional_v1")
+                for ordinal in config["query_after_sessions"]:
+                    rebuilt = root / name / "rebuilds" / f"prefix-{ordinal}"
+                    with SqliteStore.from_conn_string(str(rebuilt / "memory.sqlite")) as copied:
+                        actual = MemoryService(copied, namespace, owner, rebuilt / "memory.lock",
+                                               functional_contract="functional_v1")
+                        sources = actual.sources()
+                        assert len(sources) == ordinal + 1
+                        assert all(actual.source(source["event_id"]) == original.source(
+                            source["event_id"])
+                                   for source in sources)
+        for count in (1, 4):
+            curve = policy["reuse_curves"][str(count)]
+            assert curve["query_opportunities"] == 4 * count
+            assert curve["reading"]["generation_known_tokens"] == 4 * count * 15
+        curves = policy["reuse_curves"]
+        assert curves["1"]["maintenance"] == curves["4"]["maintenance"]
+        assert curves["4"]["lifecycle"] == policy["total_costs"]
+    assert policies["explicit_change"]["costs"]["stages"]["policy_selection"] == {
+        "responses": 5, "known_tokens": 35, "unknown_usage_responses": 0}
+    assert [row["decision"]["maintain"] for row in policies["explicit_change"]["arrivals"]] == [
+        True, False, True, False, True, True]
