@@ -54,6 +54,9 @@ def row(text: str, revision: int = 1, identity: str = "saved-record") -> dict:
             "content": text,
             "scope": {},
             "basis": "user_statement",
+            # Restoring a saved row retains its reference but does not create
+            # the original Source event in the destination diagnostic bank.
+            "source_ref": f"original-source-{revision}",
             "method_arm": "M",
             "method_version": "actual-method",
         },
