@@ -14,8 +14,9 @@ classifierallow_forgettingTrue selectedresidentpath, no actualforget operations.
 NEW genericfix reserves directory minimum+continuation before resident paging;
 actualbankCOPY0HTTP replay old8120+wrapper>8192 ->new7910,2units+1candidate,
 pending/continuationspreserved.9tests,Ruff/mypy/DAGpass. No modelrecoveryyet.
-Next freeze fix and COPY actualABbank for original unrunindices7–9 only, after
-nativefull closes/no unknown; do not retry/relabel original6. Still need a complete
+Fixf8257f46 frozenhost-ab-source-v2; actualABbank COPY prepared for original
+unrunindices7–9. Continuationdriver2459124/exec61667 WAITING_FOR_NATIVE_FULL;
+no retry/relabel original6. Inspect actualprocesses beforehandoff. Still need a complete
 single-version successfulstory, correctedfullR, W4learning/eval, independentexternal
 longhistory/benchmark, cost/scale curves, secondmodel andfinalaudit. NoSHA/subagents/
 newledger/newdeploy. Historicalsnapshots below.
