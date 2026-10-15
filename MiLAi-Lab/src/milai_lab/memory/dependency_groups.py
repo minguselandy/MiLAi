@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import copy
 import uuid
+from collections.abc import Callable
 from typing import Any
 
 from milai_lab.memory.functional_state import FunctionalRejection
@@ -19,9 +20,15 @@ def retain_support_groups(state: dict[str, Any], previous: dict[str, Any] | None
         return
     ids = {unit["unit_id"] for unit in state["units"]}
     state["support_groups"] = [
-        {**group, "alternatives": [route for route in group["alternatives"] if set(route) <= ids]}
+        {**group, "alternatives": [route for route in group["alternatives"]
+                                  if set(route) <= ids | set(group.get("external_units", {}))]}
         for group in state["support_groups"] if group["target_unit"] in ids
     ]
+    for group in state["support_groups"]:
+        if "external_units" in group:
+            used = {uid for route in group["alternatives"] for uid in route}
+            group["external_units"] = {uid: ref for uid, ref in group["external_units"].items()
+                                       if uid in used}
     if previous is not None:
         old = {unit["unit_id"]: unit for unit in previous["units"]}
         changed = {unit["unit_id"] for unit in state["units"] if unit["unit_id"] in old and any(
@@ -40,6 +47,8 @@ def retain_support_groups(state: dict[str, Any], previous: dict[str, Any] | None
 
 def apply_support_groups(
     state: dict[str, Any], changes: list[dict[str, Any]], *, old: dict[str, Any] | None = None,
+    resolve_external: Callable[[dict[str, Any]], tuple[
+        str, dict[str, Any], list[dict[str, Any]]]] | None = None,
 ) -> None:
     """Bind local generation references after the existing unit edits, before commit."""
     retain_support_groups(state)
@@ -48,8 +57,17 @@ def apply_support_groups(
     ids = {unit["unit_id"] for unit in state["units"]}
     groups = {group["target_unit"]: copy.deepcopy(group)
               for group in state.get("support_groups", [])}
+    external_units: dict[str, dict[str, Any]] = {}
+    external_evidence: list[dict[str, Any]] = []
 
     def resolve(reference: dict[str, Any], *, removing: bool = False) -> str:
+        if "external" in reference:
+            if resolve_external is None:
+                raise FunctionalRejection("EDIT_EXTERNAL_PREMISE_RESOLVER_REQUIRED")
+            key, binding, evidence = resolve_external(reference["external"])
+            external_units[key] = binding
+            external_evidence.extend(evidence)
+            return key
         if "generated" in reference:
             index = reference["generated"]
             if not 0 <= index < len(generated):
@@ -62,6 +80,8 @@ def apply_support_groups(
 
     changed = set()
     for change in changes:
+        external_units.clear()
+        external_evidence.clear()
         # Unit retraction already removes its support group. Explicitly
         # removing that same base target's group is harmless cleanup, not a
         # dangling new relationship. Setting groups still requires a live target.
@@ -74,11 +94,16 @@ def apply_support_groups(
             continue
         alternatives = [list(dict.fromkeys(resolve(ref) for ref in route))
                         for route in change["alternatives"]]
+        evidence = copy.deepcopy(change["evidence_refs"])
+        for ref in external_evidence:
+            if ref not in evidence:
+                evidence.append(copy.deepcopy(ref))
         groups[target] = {
             "group_id": (groups[target]["group_id"] if target in groups
                          else "support-" + str(uuid.uuid4())),
             "target_unit": target, "alternatives": alternatives,
-            "evidence_refs": copy.deepcopy(change["evidence_refs"]),
+            "evidence_refs": evidence,
+            **({"external_units": copy.deepcopy(external_units)} if external_units else {}),
         }
     if changes or "support_groups" in state:
         state["support_groups"] = list(groups.values())

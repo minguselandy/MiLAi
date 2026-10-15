@@ -253,7 +253,8 @@ def validate_state(state: dict[str, Any], service: Any | None = None) -> None:
             raise FunctionalRejection("EDIT_SUPPORT_TARGET_INVALID")
         group_targets.add(target)
         for route in group["alternatives"]:
-            if not route or target in route or not set(route) <= set(by_id):
+            if (not route or target in route
+                    or not set(route) <= set(by_id) | set(group.get("external_units", {}))):
                 raise FunctionalRejection("EDIT_SUPPORT_ROUTE_INVALID")
     for item in [*units, *state["relations"], *state.get("support_groups", [])]:
         evidence = item.get("evidence_refs")
@@ -1008,7 +1009,11 @@ def render_state(
         if conditions:
             lines.append("  Applies under: " + "; ".join(conditions))
     for group in state.get("support_groups", []):
-        routes = [" AND ".join(units[uid]["text"] for uid in route)
+        external = group.get("external_units", {})
+        routes = [" AND ".join(units[uid]["text"] if uid in units else
+                  "External record " + external[uid]["record_id"] + " unit "
+                  + external[uid]["unit_id"] + " at revision " + str(external[uid]["revision"])
+                  for uid in route)
                   for route in group["alternatives"]]
         lines.append("Support for " + units[group["target_unit"]]["text"] + ": "
                      + " OR ".join("(" + route + ")" for route in routes)
@@ -1182,10 +1187,12 @@ def compile_clause_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
     units.extend({**unit, "role": "condition"} for unit in result.pop("unresolved_conditions", []))
     for group in result.get("support_groups", []):
         indexes = [group["target_unit"], *(i for route in group["alternatives"] for i in route)]
-        if any(not 0 <= index < len(content_indexes) for index in indexes):
+        if any(not 0 <= index < len(content_indexes) for index in indexes
+               if isinstance(index, int)):
             raise FunctionalRejection("EDIT_SUPPORT_CLAUSE_UNAVAILABLE")
         group["target_unit"] = content_indexes[group["target_unit"]]
-        group["alternatives"] = [[content_indexes[index] for index in route]
+        group["alternatives"] = [[content_indexes[index] if isinstance(index, int) else index
+                                  for index in route]
                                  for route in group["alternatives"]]
     result.update(units=units, relations=relations)
     return result
@@ -1420,6 +1427,15 @@ def writer_projection(
         if classify_delivery:
             fresh[alias]["delivery_kind"] = kind
             public_evidence[-1]["delivery_kind"] = kind
+    external_aliases = {}
+    external_revisions = {}
+    unit_serial = 0
+    for ordinal, row in enumerate(delivery.get("records", []), 1):
+        for unit in (row.get("edit_state") or {}).get("units", []):
+            unit_serial += 1
+            external_aliases[(row["record_id"], unit["unit_id"])] = {
+                "record": f"r{ordinal}", "unit": f"u{unit_serial}"}
+            external_revisions[(row["record_id"], unit["unit_id"])] = row.get("revision")
     for record in delivery.get("records", []):
         record_alias = "r" + str(len(records) + 1)
         records[record_alias] = copy.deepcopy(record)
@@ -1499,13 +1515,29 @@ def writer_projection(
             "relations": public_relations,
         }
         if state and "support_groups" in state:
+            def premise_alias(
+                uid: str, group: dict[str, Any], local: dict[str, str] = by_id,
+            ) -> Any:
+                if uid in local:
+                    return local[uid]
+                external = group["external_units"][uid]
+                return external_aliases.get((external["record_id"], external["unit_id"]),
+                                            {"unavailable_external": True})
+
             public_record["support_groups"] = [{
                 "target_unit": by_id[group["target_unit"]],
-                "alternatives": [[by_id[uid] for uid in route] for route in group["alternatives"]],
+                "alternatives": [[premise_alias(uid, group) for uid in route]
+                                 for route in group["alternatives"]],
                 "support": [support_id(group, {"support_target": by_id[group["target_unit"]]})],
                 **({"changed_premises": [by_id[uid] for uid in group["changed_premises"]]}
                    if group.get("changed_premises") else {}),
                 **({"changed_target": True} if group.get("changed_target") else {}),
+                **({"external_bindings": [{"premise": premise_alias(uid, group),
+                    "bound_revision": ref["revision"],
+                    "delivered_revision": external_revisions.get(
+                        (ref["record_id"], ref["unit_id"]))}
+                    for uid, ref in group["external_units"].items()]}
+                   if group.get("external_units") else {}),
             } for group in state["support_groups"]]
         if "scope" in record:
             public_record["scope"] = copy.deepcopy(record["scope"])

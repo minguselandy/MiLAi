@@ -11,6 +11,7 @@ from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 
 from milai_lab.memory.dependency_groups import select_support_routes, support_status
 from milai_lab.memory.edit_units import read_revision_evidence
+from milai_lab.memory.external_support import inspect_external_unit
 from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.memory.retrieval import flat_bm25_rank, merge_candidates
 from milai_lab.memory.service import MemoryService
@@ -123,6 +124,19 @@ def build_evidence_packs(
                            tokenization=tokenization)
     semantic = []
     selected_records = list(records)
+    external_seen: set[tuple[str, int, str]] = set()
+
+    def queue_external(row: dict[str, Any], unit_id: str, *, historical: bool) -> str:
+        version = row["value"]["revision"]
+        identity = (row["id"], version, unit_id)
+        pack_id = f"{row['id']}:external:{version}:{unit_id}"
+        if identity not in external_seen:
+            external_seen.add(identity)
+            selected_records.append({**row, "external_context": True,
+                "external_pack_id": pack_id, "historical_selection": historical,
+                "retrieval_navigation": {"unit_id": unit_id}})
+        return pack_id
+
     seen_versions = {(row["id"], row["value"]["revision"]) for row in records}
     for row in records:
         if row.get("fixed_history_pool"):
@@ -142,7 +156,8 @@ def build_evidence_packs(
         if not state:
             continue
         hit = row.get("retrieval_navigation", {}).get("unit_id")
-        selection = (dependency_selections or {}).get(row["id"])
+        selection = (None if row.get("external_context") else
+                     (dependency_selections or {}).get(row["id"]))
         historical = row.get("historical_selection", False)
         if (historical and row.get("fixed_history_pool") and selection is not None
                 and version["revision"] not in selection["history_revisions"]):
@@ -160,10 +175,31 @@ def build_evidence_packs(
         _, groups = select_support_routes(
             state, set(ids),
             choices=(selection or {}).get("support_choices") if not historical else None)
+        for group in groups:
+            external = {}
+            needed = {uid for route in group["alternatives"] for uid in route}
+            for uid, reference in group.get("external_units", {}).items():
+                if uid not in needed:
+                    continue
+                inspected = inspect_external_unit(service, reference, historical=historical)
+                entry: dict[str, Any] = {"status": inspected["status"],
+                                         "unit_id": reference["unit_id"]}
+                if "current_record" in inspected:
+                    entry["current_pack"] = queue_external(
+                        inspected["current_record"], reference["unit_id"], historical=historical)
+                if inspected["status"] in {"changed", "retracted"}:
+                    entry["bound_pack"] = queue_external(
+                        inspected["bound_record"], reference["unit_id"], historical=True)
+                if inspected["status"] not in {"unchanged", "historical"}:
+                    group["changed_premises"] = list(dict.fromkeys([
+                        *group.get("changed_premises", []), uid]))
+                external[uid] = entry
+            if external:
+                group["external_references"] = external
         handles = list(dict.fromkeys(ref["evidence_id"]
                                     for item in [*selected_units, *relations, *groups]
                                     for ref in item["evidence_refs"]))
-        if (historical or row.get("fixed_history_pool")
+        if (historical or row.get("fixed_history_pool") or row.get("external_context")
                 or (selection is not None and selection["history_revisions"])):
             # A retraction's witness may no longer support any surviving unit.
             handles = list(dict.fromkeys([*handles, *version.get("revision_evidence", []),
@@ -187,7 +223,8 @@ def build_evidence_packs(
             view["support_groups"] = groups
         semantic.append({
             "kind": "semantic_view",
-            "id": f"{row['id']}:history:{version['revision']}" if historical else row["id"],
+            "id": row.get("external_pack_id", f"{row['id']}:history:{version['revision']}"
+                          if historical else row["id"]),
             "record_id": row["id"],
             "revision": version["revision"], "scope": version["scope"],
             "matter_description": state.get("matter_description", version["scope"]),
@@ -205,6 +242,16 @@ def build_evidence_packs(
         })
     packs = merge_candidates([[item for item in ranked if not item["scope_only"]], semantic])
     packs.extend(item for item in ranked if item["scope_only"])
+    positions = {item["id"]: index for index, item in enumerate(packs)}
+    for pack in packs:
+        for group in pack.get("applicability", {}).get("support_groups", []):
+            for entry in group.get("external_references", {}).values():
+                for key in ("current_pack", "bound_pack"):
+                    if key in entry:
+                        entry[key + "_index"] = positions[entry[key]]
+                        units = packs[positions[entry[key]]].get("selected_unit_ids", [])
+                        entry[key + "_unit"] = (f"u{units.index(entry['unit_id'])}"
+                                                if entry["unit_id"] in units else None)
     if packs:
         packs[0]["source_scope"] = {
             "complete": bool(source_scope and source_scope["complete"]),
@@ -401,6 +448,27 @@ def open_evidence_packs(
                                 dependency_status="refreshed_explicit_dependencies")
                     if groups_changed:
                         item["support_selection_status"] = "new_revision_routes_reopened"
+            if refresh_current and item["version_view"] != "historical_exact_revision":
+                parent_changed = item["revision"] != original["revision"]
+                for group in item.get("applicability", {}).get("support_groups", []):
+                    for uid, reference in group.get("external_units", {}).items():
+                        inspected = inspect_external_unit(service, reference)
+                        entry = group.get("external_references", {}).get(uid)
+                        if entry is None:
+                            continue
+                        entry["status"] = inspected["status"]
+                        if parent_changed:
+                            # Rebuilding one parent cannot invent indices in the
+                            # caller's old pool for newly referenced foreign units.
+                            for key in ("current_pack_index", "bound_pack_index",
+                                        "current_pack_unit", "bound_pack_unit"):
+                                entry.pop(key, None)
+                        if parent_changed or inspected["status"] != "unchanged":
+                            item["external_support_refresh"] = "new_dependency_pool_required"
+                            group["changed_premises"] = list(dict.fromkeys([
+                                *group.get("changed_premises", []), uid]))
+                            group["selected_routes_time_eligibility"] = (
+                                "requires_source_interpretation")
             # A retained interpretation never bypasses current support visibility.
             evidence = []
             for span in item["revision_evidence"]:
@@ -418,6 +486,8 @@ def open_evidence_packs(
 def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
     """Short labels and literal evidence; locations and operation handles stay in the pool."""
     result: dict[str, Any] = {"label": f"e{index}", "kind": item["kind"]}
+    if item.get("external_support_refresh"):
+        result["external_support_refresh"] = item["external_support_refresh"]
     if item.get("visibility") not in (None, "visible"):
         result["visibility"] = item["visibility"]
     if item.get("body_delivered") is False:
@@ -448,6 +518,9 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
                                 "relation_type": link["relation_type"]}
                                for link in view.get("relations", [])]
         if "support_groups" in view:
+            external_ids = {uid for group in view["support_groups"]
+                            for uid in group.get("external_references", {})}
+            ids.update({uid: f"x{i}" for i, uid in enumerate(sorted(external_ids))})
             result["support_groups"] = [{
                 "target": ids[group["target_unit"]],
                 "alternatives": [[ids[uid] for uid in route] for route in group["alternatives"]],
@@ -457,6 +530,20 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
                 "changed_premises": [ids[uid] for uid in group.get("changed_premises", [])
                                      if uid in ids],
                 **({"changed_target": True} if group.get("changed_target") else {}),
+                **({"external_references": [{"reference": ids[uid], "status": ref["status"],
+                    **({"current_pack_index": ref["current_pack_index"]}
+                       if "current_pack_index" in ref else {}),
+                    **({"current_unit": ref["current_pack_unit"]}
+                       if "current_pack_unit" in ref else {}),
+                    **({"bound_pack_index": ref["bound_pack_index"]}
+                       if "bound_pack_index" in ref else {}),
+                    **({"bound_unit": ref["bound_pack_unit"]}
+                       if "bound_pack_unit" in ref else {})}
+                    for uid, ref in group["external_references"].items()]}
+                   if group.get("external_references") else {}),
+                **({"external_semantics": "Pack indices locate actual prerequisite material. "
+                    "Undelivered bodies are not evidence; changed bindings need reinterpretation."}
+                   if group.get("external_references") else {}),
                 "semantics": "OR_of_AND; model_interpretation_not_verified_truth",
             } for group in view["support_groups"]]
     return result
@@ -478,6 +565,10 @@ def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[
     Different sources, partial visibility and semantic views remain separate.
     """
     result = []
+    opened_units = {(index, unit["unit_id"]): f"u{position}"
+                    for item, index in zip(items, indices, strict=True)
+                    if item.get("body_delivered") is not False
+                    for position, unit in enumerate(item.get("applicability", {}).get("units", []))}
     originals: dict[tuple[tuple[Any, ...], ...], dict[str, Any]] = {}
     sources: dict[tuple[str, int], str] = {}
     spans: set[tuple[str, int, tuple[int, ...]]] = set()
@@ -493,6 +584,19 @@ def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[
             originals[ranges].setdefault("also_selected_as", []).append(f"e{index}")
             continue
         projected = project_pack(item, index)
+        for group in projected.get("support_groups", []):
+            for reference in group.get("external_references", []):
+                raw_groups = item.get("applicability", {}).get("support_groups", [])
+                raw_references = [ref for g in raw_groups
+                                  for ref in g.get("external_references", {}).values()]
+                for key in ("current", "bound"):
+                    target = reference.get(key + "_pack_index")
+                    raw = next((r for r in raw_references
+                                if r.get(key + "_pack_index") == target), None)
+                    unit = opened_units.get((target, raw["unit_id"])) if raw is not None else None
+                    reference[key + "_body_delivered"] = unit is not None
+                    if unit is not None:
+                        reference[key + "_unit"] = unit
         if "evidence" in projected:
             turns = (json.loads(item["text"]) if item["kind"] == "original_source"
                      else item.get("support_turns", []))

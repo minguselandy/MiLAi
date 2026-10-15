@@ -24,6 +24,7 @@ class EditFeatures:
     proposition_updates: bool = False
     dependency_updates: bool = False
     dependency_groups: bool = False
+    cross_record_dependencies: bool = False
 
     @classmethod
     def from_settings(cls, settings: dict[str, Any]) -> EditFeatures:
@@ -37,6 +38,10 @@ class EditFeatures:
             raise ValueError("EDIT_TEMPORAL_SCOPE_REQUIRES_SOURCE_METADATA")
         if self.patch_text and not self.source_metadata:
             raise ValueError("EDIT_PATCH_TEXT_REQUIRES_SOURCE_METADATA")
+        if self.cross_record_dependencies and not (
+            self.dependency_groups and self.bound_references
+        ):
+            raise ValueError("EDIT_CROSS_RECORD_REQUIRES_BOUND_SUPPORT_GROUPS")
 
     @property
     def enabled(self) -> bool:
@@ -55,6 +60,8 @@ class EditFeatures:
             settings.pop("dependency_updates")
         if not self.dependency_groups:
             settings.pop("dependency_groups")
+        if not self.cross_record_dependencies:
+            settings.pop("cross_record_dependencies")
         return settings
 
 
@@ -645,10 +652,20 @@ def feature_proposal_schema(
             generated = {"type": "integer", "minimum": 0}
             group_reference = generated if action != "edit" else {"anyOf": [
                 reference("u"), {"type": "string", "pattern": "^n[0-9]+$"}]}
+            premise_reference = copy.deepcopy(group_reference)
+            if features.cross_record_dependencies:
+                external = [_object({
+                    "record": {"const": record},
+                    "unit": reference("u", [alias for alias, unit in mapping.get(
+                        "units", {}).items() if unit["record"] == record]),
+                }, ["record", "unit"]) for record in refs["r"] if record != target and any(
+                    unit["record"] == record for unit in mapping.get("units", {}).values())]
+                if external:
+                    premise_reference = {"anyOf": [premise_reference, *external]}
             group = _object({
                 "target_unit": copy.deepcopy(group_reference),
                 "alternatives": {"type": "array", "items": {
-                    "type": "array", "minItems": 1, "items": copy.deepcopy(group_reference)}},
+                    "type": "array", "minItems": 1, "items": premise_reference}},
                 "evidence": {"type": "array", "minItems": 1, "items": reference("e")},
             }, ["target_unit", "alternatives", "evidence"])
             choices = [group]
@@ -672,6 +689,10 @@ def feature_proposal_schema(
                        "Empty alternatives means no remaining support route; operation=remove "
                        "removes the dependency claim when new evidence makes it inapplicable.")),
             }
+            if features.cross_record_dependencies:
+                fields["support_groups"]["description"] += (
+                    " A premise in another delivered record may use {record:r#,unit:u#}; "
+                    "the target remains local. Both aliases must name that actual delivered unit.")
             if action == "edit":
                 # Complete, disjoint objects keep the same JSON semantics and
                 # remain generatable by deployed XGrammar. Partial object

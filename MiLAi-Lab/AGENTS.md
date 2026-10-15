@@ -1,22 +1,23 @@
-# Current development: target support invalidation fixed; repeats2 still LIVE
+# Current development: cross-record slice checked; actual pilot next
 
-GoalACTIVE/incomplete. Current repeated factorial exec49873, driver767706,
-repeat2worker839224 verifiedLIVE. r1CLOSED0/36answers, r2inprogress. Frozen5734ade2,
-same original actualseed/arrival, no newseed charges. No other model job queued.
-E2 all91answers+5missing fullysource-reviewed. E3 andW3 allfirstoutputs now reviewed
-and ledgerreconciled; summaries tracked. No stable synergy or amortizationwinner.
-NEW code:changed_target on actualconclusion text/role/attribution change preserves
-oldgroup asunknown until source-bound explicitreset; writer/reader projection carries
-marker.112tests20.37s,Ruff,4filemypy,DAG/tools pass; actualsavedexhibit before/after
-pureprojection0HTTP/0bankwrite. No realmodelrun of thischange yet.
-Prior code0a9c2e4d now honors selected history in controlled fixedpool. OriginalE3v1
-and currentv2 useALLhistory bodies, so not a full test of historyselection component.
-Keepfrozen runs unchanged; later fullR corrected comparison needed.
-NEXT finishrepeat2 and reviewboth; then realrevalidation of correctedfullR/targetmarker,
-crossrecord slice,W4matchedlearning,W5Host,strong/externalcontrols,extra model+long
-histories,completeA/Bstory andfinalscientificaudit. Sourceaudit fixes/selectorlength,
-falsefinalmaintenancegate and reconstructioncoverage remain observedbreakpoints.
-NoSHA/subagents/newledger; do not reportfullgoalcomplete. Older snapshots follow.
+Goal ACTIVE/incomplete. Both post-cleanup factorial repeats CLOSED0: r1 at
+05:56:57UTC, r2 at06:15:05UTC on2026-10-15. Driver767706/r2worker839224 gone.
+Full review/cost reconciliation of both repeats still pending. Keep original runs
+and their frozen5734ade2 source unchanged; they deliver all historical candidates.
+Cross-record implementation is opt-in and now checked: real foreign record/unit/
+revision bindings, sequential confirmed receipts, global impact regions, actual
+external evidence and bound-history reading. No cross-record atomicity or O(k)
+index claim. Functional Host custom commits are not yet migrated to support groups.
+147 related tests passed; final cross4 passed1.42s;10-filemypy/Ruff/matrix passed.
+Native XGrammar0.2.3 accepts noop/create/group-reset, zero model HTTP. Earlier matrix
+command without PYTHONPATH imported installed source and failed registration; rerun
+with this worktree src passed277owned sources. No code gate was weakened.
+Cross-v1 control/candidate prepared0HTTP,4events/6QA each; model must form all records
+and links from sources, independent formation, no common-before attribution.
+Next freeze and run cross-v1 serially on original ledger; review both E3 repeats.
+Still pending fullR controlled retest, W4, W5Host,strong/external controls, additional
+model+long histories, completeA/Bstory and final scientific audit. NoSHA/subagents/
+newledger. Do not report full goal complete. Older snapshots follow.
 
 # Current execution: two post-cleanup factorial repeats; analyses closed
 

@@ -32,6 +32,7 @@ from milai_lab.memory.edit_units import (
     writer_projection,
     writer_proposal_schema,
 )
+from milai_lab.memory.external_support import bind_external_unit, order_dependent_proposals
 from milai_lab.memory.functional_state import FunctionalRejection, body_text, resolve_fragment
 from milai_lab.memory.observation import maintenance_projection
 from milai_lab.memory.service import MemoryService
@@ -221,6 +222,17 @@ class EditMemory:
                 "explicitly resetting a still-valid group before using it as support. "
                 "An explicit empty alternatives list records no "
                 "remaining route; operation=remove removes that dependency claim itself. "
+            )
+        if self.features.cross_record_dependencies:
+            guidance += (
+                " A support premise in another delivered record uses {record:r#,unit:u#}. "
+                "Its unit must belong to that actual record. Targets remain local; references "
+                "cannot invent or copy foreign facts. Updates commit record by record; a "
+                "later failure does not undo an earlier commit. Explicit group resets bind "
+                "to confirmed preceding updates from the same proposal batch, otherwise to "
+                "the delivered version. Changed foreign support is not a verified proof. "
+                "external_bindings shows the recorded and delivered revisions; a version "
+                "difference calls for checking the premise, not automatic negation. "
             )
         if self.maintenance_mode == "event_delta_v1":
             return self._event_instructions(allow_create=allow_create) + guidance
@@ -1747,9 +1759,10 @@ class EditMemory:
                 targets = [p["target"] for p in proposals if p.get("target")]
                 if len(targets) != len(set(targets)):
                     raise FunctionalRejection("EDIT_DUPLICATE_RECORD_CONTAINER")
-            return proposals  # type: ignore[no-any-return]
+            return (order_dependent_proposals(proposals)
+                    if self.features.cross_record_dependencies else proposals)
         selected_records = envelope.get("records", {})
-        return [
+        proposals = [
             *copy.deepcopy(envelope.get("creates", [])),
             *(
                 {**copy.deepcopy(selected_records[target]), "target": target}
@@ -1757,6 +1770,8 @@ class EditMemory:
                 if target in selected_records
             ),
         ]
+        return order_dependent_proposals(proposals) if self.features.cross_record_dependencies \
+            else proposals
 
     def decode_envelope(
         self, envelope: dict[str, Any], mapping: dict[str, Any] | str
@@ -2016,7 +2031,18 @@ class EditMemory:
         if proposal.get("revision_evidence"):
             supports({"evidence": proposal["revision_evidence"]})
         if self.features.dependency_groups and "support_groups" in proposal:
-            def group_reference(value: int | str) -> dict[str, Any]:
+            def group_reference(value: int | str | dict[str, str]) -> dict[str, Any]:
+                if isinstance(value, dict):
+                    record = value["record"]
+                    external = bound["units"].get(value["unit"])
+                    if (not self.features.cross_record_dependencies or external is None
+                            or external["record"] != record
+                            or (target and bound["records"][record]["record_id"]
+                                == bound["records"][target]["record_id"])):
+                        raise FunctionalRejection("EDIT_EXTERNAL_PREMISE_BINDING_INVALID")
+                    return {"external": {"record_id": bound["records"][record]["record_id"],
+                        "unit_id": external["unit_id"],
+                        "revision": bound["records"][record]["revision"]}}
                 if isinstance(value, int):
                     return {"generated": value}
                 if value.startswith("n"):
@@ -2045,6 +2071,7 @@ class EditMemory:
         session: str,
         proposal_id: str,
         proposal: dict[str, Any],
+        *, dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Apply one parsed proposal through the existing service revision transaction."""
         withdrawal = (
@@ -2152,7 +2179,10 @@ class EditMemory:
             if "support_groups" in metadata:
                 apply_support_groups(
                     state, metadata["support_groups"],
-                    old=(old or {}).get("edit_state") if parsed.action == "edit" else None)
+                    old=(old or {}).get("edit_state") if parsed.action == "edit" else None,
+                    resolve_external=(lambda ref: bind_external_unit(
+                        self.service, ref, dependency_receipts or []))
+                    if self.features.cross_record_dependencies else None)
         if parsed.action == "no_change":
             assert old is not None
             refs = old.get("source_refs", [old["source_ref"]])

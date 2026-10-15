@@ -135,6 +135,9 @@ def impact_request(packet: dict[str, Any], mapping: dict[str, Any], date: str) -
 
 def plan_regions(mapping: dict[str, Any], selection: dict[str, Any]) -> dict[str, Any]:
     """Compute regions using only the aliases actually delivered to this call."""
+    if any(group.get("external_units") for record in mapping["records"].values()
+           for group in record["edit_state"].get("support_groups", [])):
+        return cross_record_regions(mapping, selection)
     regions = {}
     for record_id, record in mapping["records"].items():
         aliases = {unit["unit_id"]: alias for alias, unit in mapping["units"].items()
@@ -156,6 +159,48 @@ def plan_regions(mapping: dict[str, Any], selection: dict[str, Any]) -> dict[str
         regions[record_id] = dependency_region(
             state, [uid for uid in selection["roots"] if uid in ids],
             preserve=[uid for uid in selection["preserve"] if uid in ids])
+    return regions
+
+
+def cross_record_regions(mapping: dict[str, Any], selection: dict[str, Any]) -> dict[str, Any]:
+    """One directed graph over delivered aliases, then per-record edit regions."""
+    aliases = {(mapping["records"][unit["record"]]["record_id"], unit["unit_id"]): alias
+               for alias, unit in mapping["units"].items()}
+    graph: dict[str, Any] = {"units": [{"unit_id": key} for key in mapping["units"]],
+                             "relations": [], "support_groups": []}
+    for record in mapping["records"].values():
+        record_id = record["record_id"]
+        state = record["edit_state"]
+        graph["relations"].extend({"source_unit": aliases[(record_id, e["source_unit"])],
+            "target_unit": aliases[(record_id, e["target_unit"])],
+            "relation_type": e["relation_type"]} for e in state["relations"])
+        for group in state.get("support_groups", []):
+            def premise(
+                uid: str, binding: dict[str, Any] = group, owner: str = record_id,
+            ) -> str:
+                external = binding.get("external_units", {}).get(uid)
+                key = ((external["record_id"], external["unit_id"]) if external else
+                       (owner, uid))
+                return str(aliases.get(key, "unavailable_external"))
+
+            graph["support_groups"].append({
+                "target_unit": aliases[(record_id, group["target_unit"])],
+                "alternatives": [[premise(uid) for uid in route]
+                                 for route in group["alternatives"]]})
+    whole = dependency_region(graph, selection["roots"], preserve=selection["preserve"])
+    regions = {}
+    for record_alias in mapping["records"]:
+        local = {alias for alias, unit in mapping["units"].items()
+                 if unit["record"] == record_alias}
+        regions[record_alias] = {
+            **{key: [uid for uid in whole[key] if uid in local] for key in (
+                "root_units", "affected_units", "read_only_units", "preserved_units",
+                "context_units", "support_update_targets")},
+            "external_context_units": [uid for uid in whole["context_units"] if uid not in local],
+            "relations": [e for e in whole["relations"]
+                          if e["source_unit"] in local or e["target_unit"] in local],
+            "support_groups": [g for g in whole["support_groups"] if g["target_unit"] in local],
+        }
     return regions
 
 

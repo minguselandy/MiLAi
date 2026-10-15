@@ -111,6 +111,10 @@ def _located_delivery(
                 limit=retrieval_limit, mode=candidate_mode,
             )
         )
+    if method.features.cross_record_dependencies:
+        from milai_lab.memory.external_support import dependent_record_candidates
+
+        selected_records = dependent_record_candidates(method.service, selected_records)
     located = method.prepare(
         list(dict.fromkeys(s["source_ref"] for s in sources)), "",
         selected_records=selected_records,
@@ -895,7 +899,9 @@ def maintain_event(
                 mapping = state["view"]["mapping"]
                 receipt = (
                     commit(operation_id, proposal, mapping) if commit else method.apply(
-                        session, operation_id, method.decode_proposal(proposal, mapping)
+                        session, operation_id, method.decode_proposal(proposal, mapping),
+                        **({"dependency_receipts": state["receipts"]}
+                           if method.features.cross_record_dependencies else {}),
                     )
                 )
             except (FunctionalRejection, ValidationError, SchemaError) as error:

@@ -1825,6 +1825,11 @@ class BenchmarkRun:
             )
 
             records = native.get("records", []) if variant != "S0" else []
+            if self.settings.get("edit_features", {}).get("cross_record_dependencies"):
+                from milai_lab.memory.external_support import dependent_record_candidates
+
+                records = dependent_record_candidates(service, records)
+                native["dependency_expanded_record_ids"] = [row["id"] for row in records]
             selections = None
             if self.settings.get("dependency_reading") and records:
                 if self.client.config.max_calls < 2:

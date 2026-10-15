@@ -84,8 +84,10 @@ class AppendMemory(EditMemory):
         return messages
 
     def apply(
-        self, session: str, proposal_id: str, proposal: dict[str, Any]
+        self, session: str, proposal_id: str, proposal: dict[str, Any], *,
+        dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         if proposal.get("action") != "create":
             raise FunctionalRejection("APPEND_ONLY_CREATE_REQUIRED")
-        return super().apply(session, proposal_id, proposal)
+        return super().apply(session, proposal_id, proposal,
+                             dependency_receipts=dependency_receipts)
