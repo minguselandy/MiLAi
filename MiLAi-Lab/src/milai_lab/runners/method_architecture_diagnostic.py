@@ -70,6 +70,8 @@ def diagnostic_costs(root: Path) -> dict[str, Any]:
         stage = ("embedding" if parts[0] == "embedding" else
                  "judge" if parts[:2] in {("halumem", "judge"), ("longmemeval", "judge")} else
                  "query_structure" if parts[0] == "query-structure" else
+                 "evidence_value_selection" if "view" in parts and any(
+                     part.startswith("value-") for part in parts) else
                  "policy_selection" if parts[0] == "maintenance-policy" else
                  "impact" if parts[0] == "maintenance" and "impact" in parts else
                  "maintenance" if parts[0] == "maintenance" else
