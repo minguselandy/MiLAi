@@ -1,3 +1,21 @@
+# Current: strong first results closed; native pilot LIVE; clock projection development
+
+Goal ACTIVE/incomplete. strong-v1 driver1672507 CLOSED0 at12:43:02UTC;
+all5 predictions/firstscores closed. Original labels Correct43/44/42/44/39 of48;
+candidate1selectorlength missing, invalid3/2/3/2/5. No rejudge/retry.
+48formation+96state+240QA positions author-reviewed; UJS append9–11/plain15–16/
+conditioned13/candidate7–9 of24, ambiguous dimensions explicit. No candidate win.
+688gen2825468 +398emb23740 exactledger, newunknown0; summaries/review tracked.
+SimpleMem driver2094352/exec84597 actualhandoff12:43:04UTC; predictchild2363644
+LIVE atlastcheck. Frozen46bc516e/native db80b6a unchanged; inspect actualprocess.
+Development clarifies question-pack reported_at vs captured_at consistently for
+Source and assertions; stored clocks/visibility unchanged. New realSQLite tests
+and existing dependency/Host checks passed; no model-qualityclaim yet.
+Next freeze/queue new A/B Host only after nativepilot closure; no overlappingHTTP.
+Still W4 learning/eval, correctedfullR, external longhistory/benchmark, quality–cost/
+scale curves, secondmodel, complete positiveA/Bstory and finalaudit. NoSHA/subagents/
+newledger/newdeploy. Historical snapshots below.
+
 # Current queues: strong LIVE; native SimpleMem queued; A/B Host prepared
 
 GoalACTIVE/incomplete. LIVE strong driver1672507/exec12669, laststep
