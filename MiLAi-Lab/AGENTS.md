@@ -1,3 +1,28 @@
+# Current execution: E2 screening LIVE, E1 continuous/first scores CLOSED
+
+Goal ACTIVE/incomplete; same user authorization, no subagents/SHA/new ledger/deployment.
+LIVE original exec29617: screening-v1 driver141865, candidate predict child141879.
+Frozen method463b5182; data/config7b336663. Candidate→plain predict then FIRSTscore,
+12independent authored chains/36events/48QA per arm, read-usage feedback off.
+Inspect driver.json + actual PIDs; never duplicate/restart from a missing exec handle.
+Old continuous-v2 exec7820 CLOSED0: both12answers, firstlabels plain12Correct,
+candidate10Correct+2invalid (Judge{} ordinals6/10 retained). Predict140125 vs260492
+(+85.9%); full94gen464156 +65emb3516; ledgerexact,newunknown0,floors9/1 retained.
+No explicit relations/supportgroups committed in either story. Candidate future He
+update rejected undefinedn0; staleShen persists. Candidate cancellation leaves dangling
+“会员卡通道不加这项要求” aftertraining. Normalmixed QA uses originals to repair it.
+Bare exec49121 CLOSED0: fouractualstate-only reads, plaincore2/2 faithful2/2;
+candidatecore1/2 faithful0/2: it wrongly permits cardholder withouttraining.
+Bare4gen17126,emb0,newunknown0. Originaloutputs never overwritten/rejudged.
+Manifests continuous-v2-summary and continuous-bare-v1-summary contain full evidence.
+Training commit10fb664c adds TWO matched reviewable examples from actual failures,
+same correctedfacts forbaseline; no training, no native bank repair, no W4 completion.
+FourA100 GPUs ~39.9GB/40GB used; no CPUFP32 training. Formationgrammarprobe accepts
+legal groupedcreate under actualXGrammar0.2.3,0HTTP; no compiler graphblock found.
+Next monitor E2, inspect actualgraphformation/UJS/QA/cost, then cross-record slice,
+matchedpool2x2/W3/W4/W5/external+extra model/longhistory remain. Do not callcomplete.
+Prior snapshots below are historical, including previously live/blocked jobs.
+
 # Current execution: E1 repeat closed, continuous stories running (2026-10-15)
 
 Goal ACTIVE/incomplete. User continuation already authorizes experiments and old queue release.

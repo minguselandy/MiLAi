@@ -1,0 +1,3215 @@
+{
+  "status": "PREDICTIONS_AND_FIRST_SCORES_CLOSED",
+  "source_commit": "463b5182",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/continuous-v2",
+  "driver": {
+    "source_commit": "463b5182",
+    "driver_pid": 30371,
+    "started_at": "2026-10-15T02:22:33.735550+00:00",
+    "steps": [
+      {
+        "arm": "plain",
+        "phase": "predict",
+        "pid": 30372,
+        "started_at": "2026-10-15T02:22:33.737819+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T02:30:44.967620+00:00"
+      },
+      {
+        "arm": "candidate",
+        "phase": "predict",
+        "pid": 62029,
+        "started_at": "2026-10-15T02:30:44.969248+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T02:45:43.963168+00:00"
+      },
+      {
+        "arm": "plain",
+        "phase": "score",
+        "pid": 119529,
+        "started_at": "2026-10-15T02:45:43.965120+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T02:47:48.130212+00:00"
+      },
+      {
+        "arm": "candidate",
+        "phase": "score",
+        "pid": 127563,
+        "started_at": "2026-10-15T02:47:48.131178+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T02:49:39.110854+00:00"
+      }
+    ],
+    "declared_stories": 2,
+    "events_per_arm": 12,
+    "questions_per_arm": 12,
+    "qa_rubric": "official HaluMem QA scorer on authored development data, not external benchmark results",
+    "independent_formation": true,
+    "original_e1_results_retained": true,
+    "status": "PREDICTIONS_AND_FIRST_SCORES_CLOSED",
+    "closed_at": "2026-10-15T02:49:39.111261+00:00"
+  },
+  "data_role": "two authored development stories, not external HaluMem results",
+  "reviewer": "same source author/developer, not independent or blind",
+  "arms": {
+    "plain": {
+      "terminal_predict": {
+        "status": "PREDICTIONS_SAVED",
+        "phase": "predict",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "PREDICTIONS_SAVED",
+          "sessions": 12,
+          "judge_calls": 0,
+          "complete_answers": 12,
+          "known_reader_failures": 0
+        },
+        "resources_settled": true
+      },
+      "terminal_score": {
+        "status": "SCORED",
+        "phase": "score",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "SCORED_SAVED_PREDICTIONS",
+          "backend": "MiLAi-memory-only",
+          "protocol": {
+            "name": "milai-method-architecture-plain-v2",
+            "track": "common-conditions",
+            "backends": [
+              "MiLAi-memory-only"
+            ],
+            "history_protocol": "halumem-online-prefix",
+            "source_policy": "source-only",
+            "qa_top_k": 20,
+            "update_top_k": 10,
+            "delivery": "direct",
+            "raw_access": "original-history-for-RawRAG; independently-retrieved-visible-original-Sources-plus-linked-supports-and-fitting-semantic-views-for-MiLAi",
+            "rawrag": {
+              "granularity": "session"
+            },
+            "native_answer": "separate-optional-not-main-QA",
+            "prediction_scoring": "explicit-selected-arm-score-after-saved-predictions-and-resource-closure",
+            "unknown_retry": false,
+            "write_test_answers_back": false,
+            "resource_owner": "Root; existing continuous ledger; serial model dispatch",
+            "external_internal_usage": "unobserved unless actual native usage is available; not zero",
+            "claim": "Authored development stories, independent empty-bank trajectories. Plain propositions versus directed update regions and dependency/history reading. Not the shared-before diagnostic, not external HaluMem results, and not a factorial attribution result. Candidate v2 adds model-formed, source-bound OR-of-AND support groups in the existing record version. This has only mechanical validation until actual model experiments run."
+          },
+          "correct": 12,
+          "opportunities": 12,
+          "missing": 0,
+          "labels": {
+            "Correct": 12
+          },
+          "per_user": {
+            "method-dev-loans": {
+              "correct": 6,
+              "opportunities": 6,
+              "missing": 0,
+              "invalid": 0
+            },
+            "method-dev-seed-library": {
+              "correct": 6,
+              "opportunities": 6,
+              "missing": 0,
+              "invalid": 0
+            }
+          },
+          "backend_capabilities": {
+            "session_output": "supported",
+            "reference_update_state": "supported-isolated-view"
+          },
+          "official_labels": "unchanged; source conflicts require separate evidence review",
+          "semantic_advantage": "unchecked",
+          "native_answer_result": null
+        },
+        "resources_settled": true
+      },
+      "costs": {
+        "maintenance": {
+          "responses": 12,
+          "known_tokens": 86887,
+          "unknown_usage_responses": 0
+        },
+        "reader": {
+          "responses": 12,
+          "known_tokens": 53238,
+          "unknown_usage_responses": 0
+        },
+        "judge": {
+          "responses": 12,
+          "known_tokens": 33067,
+          "unknown_usage_responses": 0
+        },
+        "embedding": {
+          "responses": 32,
+          "known_tokens": 1393,
+          "unknown_usage_responses": 0
+        }
+      },
+      "receipt_statuses": {
+        "committed": 12,
+        "no_change": 9,
+        "rejected": 1
+      },
+      "states": [
+        {
+          "user": "method-dev-loans",
+          "session": 0,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+              "revision": 1
+            }
+          ],
+          "records": [
+            {
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 1,
+              "matter": "Receivers",
+              "units": [
+                {
+                  "unit_id": "unit-9f732c10-100c-4563-8ae8-29cc5879f480",
+                  "text": "借展登记中，燕桥站由沈宁收件，松港站由罗琳收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:37.174676+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-0bdb91d8-41c6-48df-a8e3-e95991b6837c",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+              "revision": 1,
+              "matter": "Approval Rules",
+              "units": [
+                {
+                  "unit_id": "unit-f321bafe-a0c4-4f04-b492-459296af1244",
+                  "text": "寄出借展品需要馆员核准；馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:37.174676+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-0bdb91d8-41c6-48df-a8e3-e95991b6837c",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 1,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+              "revision": 1
+            }
+          ],
+          "records": [
+            {
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 2,
+              "matter": "Receivers",
+              "units": [
+                {
+                  "unit_id": "unit-9f732c10-100c-4563-8ae8-29cc5879f480",
+                  "text": "借展登记中，燕桥站自2031年4月18日起由何雨收件，18日之前仍由沈宁负责；松港站由罗琳收件。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "effective_from": "2031-04-18"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:51.075650+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-3a5ac924-4a38-4b82-8397-9219a0a4a3ee",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+              "revision": 1,
+              "matter": "Approval Rules",
+              "units": [
+                {
+                  "unit_id": "unit-f321bafe-a0c4-4f04-b492-459296af1244",
+                  "text": "寄出借展品需要馆员核准；馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:37.174676+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-0bdb91d8-41c6-48df-a8e3-e95991b6837c",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 2,
+          "maintenance_status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+              "revision": 1
+            }
+          ],
+          "records": [
+            {
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 2,
+              "matter": "Receivers",
+              "units": [
+                {
+                  "unit_id": "unit-9f732c10-100c-4563-8ae8-29cc5879f480",
+                  "text": "借展登记中，燕桥站自2031年4月18日起由何雨收件，18日之前仍由沈宁负责；松港站由罗琳收件。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "effective_from": "2031-04-18"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:51.075650+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-3a5ac924-4a38-4b82-8397-9219a0a4a3ee",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+              "revision": 1,
+              "matter": "Approval Rules",
+              "units": [
+                {
+                  "unit_id": "unit-f321bafe-a0c4-4f04-b492-459296af1244",
+                  "text": "寄出借展品需要馆员核准；馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:37.174676+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-0bdb91d8-41c6-48df-a8e3-e95991b6837c",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 3,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 2
+            }
+          ],
+          "records": [
+            {
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 2,
+              "matter": "Receivers",
+              "units": [
+                {
+                  "unit_id": "unit-9f732c10-100c-4563-8ae8-29cc5879f480",
+                  "text": "借展登记中，燕桥站自2031年4月18日起由何雨收件，18日之前仍由沈宁负责；松港站由罗琳收件。",
+                  "role": "content",
+                  "assertion": {
+                    "applicability": {
+                      "effective_from": "2031-04-18"
+                    },
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:51.075650+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-3a5ac924-4a38-4b82-8397-9219a0a4a3ee",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+              "revision": 1,
+              "matter": "Approval Rules",
+              "units": [
+                {
+                  "unit_id": "unit-f321bafe-a0c4-4f04-b492-459296af1244",
+                  "text": "寄出借展品需要馆员核准；馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:37.174676+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-0bdb91d8-41c6-48df-a8e3-e95991b6837c",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 4,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 3
+            }
+          ],
+          "records": [
+            {
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 3,
+              "matter": "Receivers",
+              "units": [
+                {
+                  "unit_id": "unit-9f732c10-100c-4563-8ae8-29cc5879f480",
+                  "text": "借展登记中，燕桥站自2031年4月18日起由何雨收件，18日之前仍由沈宁负责；松港站由罗岚收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:24:24.792320+00:00",
+                    "occurred_at": "2031-04-10T13:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-5b5e5068-d6fd-425c-a618-2215c2219629",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+              "revision": 1,
+              "matter": "Approval Rules",
+              "units": [
+                {
+                  "unit_id": "unit-f321bafe-a0c4-4f04-b492-459296af1244",
+                  "text": "寄出借展品需要馆员核准；馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:37.174676+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-0bdb91d8-41c6-48df-a8e3-e95991b6837c",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "aeb76aef-1189-5036-8313-1b72af0f81e9",
+              "revision": 1
+            }
+          ],
+          "records": [
+            {
+              "id": "aeb76aef-1189-5036-8313-1b72af0f81e9",
+              "revision": 1,
+              "matter": "电子签收",
+              "units": [
+                {
+                  "unit_id": "unit-a6b5ca62-750a-4b85-a0c6-aa26c1f2b328",
+                  "text": "可能以后会给松港站增配电子签收，目前仍只是想法，没有决定",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:24:53.529361+00:00",
+                    "occurred_at": "2031-04-10T14:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-fb17534f-62a1-4a6c-b3c4-c18d0816f035",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "f2603ccb-c48f-573a-baa0-f5c282ab2ca5",
+              "revision": 3,
+              "matter": "Receivers",
+              "units": [
+                {
+                  "unit_id": "unit-9f732c10-100c-4563-8ae8-29cc5879f480",
+                  "text": "借展登记中，燕桥站自2031年4月18日起由何雨收件，18日之前仍由沈宁负责；松港站由罗岚收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:24:24.792320+00:00",
+                    "occurred_at": "2031-04-10T13:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-5b5e5068-d6fd-425c-a618-2215c2219629",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "79bb10d3-55ce-5f5e-ace2-60819d86ab72",
+              "revision": 1,
+              "matter": "Approval Rules",
+              "units": [
+                {
+                  "unit_id": "unit-f321bafe-a0c4-4f04-b492-459296af1244",
+                  "text": "寄出借展品需要馆员核准；馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:22:37.174676+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-0bdb91d8-41c6-48df-a8e3-e95991b6837c",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 0,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 1
+            }
+          ],
+          "records": [
+            {
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 1,
+              "matter": "种子共享柜规程",
+              "units": [
+                {
+                  "unit_id": "unit-26e3ca7f-9b89-4f8a-90e0-91ab1ad42b9a",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-ee8522cb-afbe-4c06-a945-b171bdb80865",
+                  "text": "领稀有品种须完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bce44d5c-0bb2-4e9c-bcde-6f549d2aa79f",
+                  "text": "领普通品种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-accf3631-618e-47ed-9ca8-19aad09395b8",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 1,
+              "matter": "参与者资格状态",
+              "units": [
+                {
+                  "unit_id": "unit-c6ae3e83-5724-4f8c-9af3-4f182ab2ad5d",
+                  "text": "顾桃持有有效的会员卡与借种券，且已完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-750a0d52-d7f7-4ae1-97ed-43e53662e9be",
+                  "text": "闻溪持有有效的会员卡，但未完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 1,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 1
+            }
+          ],
+          "records": [
+            {
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 2,
+              "matter": "参与者资格状态",
+              "units": [
+                {
+                  "unit_id": "unit-c6ae3e83-5724-4f8c-9af3-4f182ab2ad5d",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:53.993871+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-2a7e03a6-c66f-4759-a454-af7b7e0e7d90",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-750a0d52-d7f7-4ae1-97ed-43e53662e9be",
+                  "text": "闻溪持有有效的会员卡，但未完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 1,
+              "matter": "种子共享柜规程",
+              "units": [
+                {
+                  "unit_id": "unit-26e3ca7f-9b89-4f8a-90e0-91ab1ad42b9a",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-ee8522cb-afbe-4c06-a945-b171bdb80865",
+                  "text": "领稀有品种须完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bce44d5c-0bb2-4e9c-bcde-6f549d2aa79f",
+                  "text": "领普通品种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-accf3631-618e-47ed-9ca8-19aad09395b8",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 2,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 2
+            }
+          ],
+          "records": [
+            {
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 2,
+              "matter": "种子共享柜规程",
+              "units": [
+                {
+                  "unit_id": "unit-26e3ca7f-9b89-4f8a-90e0-91ab1ad42b9a",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-ee8522cb-afbe-4c06-a945-b171bdb80865",
+                  "text": "领稀有品种须完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:27:12.466844+00:00",
+                    "occurred_at": "2031-04-10T11:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-c1418f49-341c-47d3-9e41-0a439a389dfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-54a69edd-904d-4d84-af1b-b69d765ee96d",
+                  "text": "这周为临时盘点，持借种券领稀有品种时还须管理员在场。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:27:12.466844+00:00",
+                    "occurred_at": "2031-04-10T11:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-c1418f49-341c-47d3-9e41-0a439a389dfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bce44d5c-0bb2-4e9c-bcde-6f549d2aa79f",
+                  "text": "领普通品种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-accf3631-618e-47ed-9ca8-19aad09395b8",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 2,
+              "matter": "参与者资格状态",
+              "units": [
+                {
+                  "unit_id": "unit-c6ae3e83-5724-4f8c-9af3-4f182ab2ad5d",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:53.993871+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-2a7e03a6-c66f-4759-a454-af7b7e0e7d90",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-750a0d52-d7f7-4ae1-97ed-43e53662e9be",
+                  "text": "闻溪持有有效的会员卡，但未完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 3,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 3
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 2
+            }
+          ],
+          "records": [
+            {
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 3,
+              "matter": "种子共享柜规程",
+              "units": [
+                {
+                  "unit_id": "unit-26e3ca7f-9b89-4f8a-90e0-91ab1ad42b9a",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-ee8522cb-afbe-4c06-a945-b171bdb80865",
+                  "text": "领稀有品种须完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:27:12.466844+00:00",
+                    "occurred_at": "2031-04-10T11:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-c1418f49-341c-47d3-9e41-0a439a389dfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bce44d5c-0bb2-4e9c-bcde-6f549d2aa79f",
+                  "text": "领普通品种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-accf3631-618e-47ed-9ca8-19aad09395b8",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 2,
+              "matter": "参与者资格状态",
+              "units": [
+                {
+                  "unit_id": "unit-c6ae3e83-5724-4f8c-9af3-4f182ab2ad5d",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:53.993871+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-2a7e03a6-c66f-4759-a454-af7b7e0e7d90",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-750a0d52-d7f7-4ae1-97ed-43e53662e9be",
+                  "text": "闻溪持有有效的会员卡，但未完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 4,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 3
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 3
+            }
+          ],
+          "records": [
+            {
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 3,
+              "matter": "参与者资格状态",
+              "units": [
+                {
+                  "unit_id": "unit-c6ae3e83-5724-4f8c-9af3-4f182ab2ad5d",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:53.993871+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-2a7e03a6-c66f-4759-a454-af7b7e0e7d90",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-750a0d52-d7f7-4ae1-97ed-43e53662e9be",
+                  "text": "闻溪持有有效的会员卡，且已完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:28:17.356971+00:00",
+                    "occurred_at": "2031-04-10T13:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-622a170f-52bc-4161-a5f8-34be1f774342",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 3,
+              "matter": "种子共享柜规程",
+              "units": [
+                {
+                  "unit_id": "unit-26e3ca7f-9b89-4f8a-90e0-91ab1ad42b9a",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-ee8522cb-afbe-4c06-a945-b171bdb80865",
+                  "text": "领稀有品种须完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:27:12.466844+00:00",
+                    "occurred_at": "2031-04-10T11:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-c1418f49-341c-47d3-9e41-0a439a389dfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bce44d5c-0bb2-4e9c-bcde-6f549d2aa79f",
+                  "text": "领普通品种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-accf3631-618e-47ed-9ca8-19aad09395b8",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "1c4f7f66-fa0f-5f4b-bb68-400615aaeebb",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 3
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 3
+            }
+          ],
+          "records": [
+            {
+              "id": "1c4f7f66-fa0f-5f4b-bb68-400615aaeebb",
+              "revision": 1,
+              "matter": "种子共享柜下季安排",
+              "units": [
+                {
+                  "unit_id": "unit-7af6e066-5593-46b5-b7d2-92517f973320",
+                  "text": "听说下一季可能需要预约，但目前没有正式决定，也没有生效日期。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:28:39.006479+00:00",
+                    "occurred_at": "2031-04-10T14:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-c151628a-20a7-4748-ac01-41188cecbb31",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "056814b8-aa39-529f-a10d-7ed554f69a2b",
+              "revision": 3,
+              "matter": "参与者资格状态",
+              "units": [
+                {
+                  "unit_id": "unit-c6ae3e83-5724-4f8c-9af3-4f182ab2ad5d",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:53.993871+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-2a7e03a6-c66f-4759-a454-af7b7e0e7d90",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-750a0d52-d7f7-4ae1-97ed-43e53662e9be",
+                  "text": "闻溪持有有效的会员卡，且已完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:28:17.356971+00:00",
+                    "occurred_at": "2031-04-10T13:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-622a170f-52bc-4161-a5f8-34be1f774342",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            },
+            {
+              "id": "550600e9-c6ee-5da2-8d1a-6e707886bacb",
+              "revision": 3,
+              "matter": "种子共享柜规程",
+              "units": [
+                {
+                  "unit_id": "unit-26e3ca7f-9b89-4f8a-90e0-91ab1ad42b9a",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-ee8522cb-afbe-4c06-a945-b171bdb80865",
+                  "text": "领稀有品种须完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:27:12.466844+00:00",
+                    "occurred_at": "2031-04-10T11:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-c1418f49-341c-47d3-9e41-0a439a389dfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bce44d5c-0bb2-4e9c-bcde-6f549d2aa79f",
+                  "text": "领普通品种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-accf3631-618e-47ed-9ca8-19aad09395b8",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:26:27.639003+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-78dae27e-7d58-4eca-bf52-933863ac6648",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        }
+      ],
+      "qa": [
+        {
+          "user": "method-dev-loans",
+          "session": 1,
+          "question": "当前为4月10日，燕桥站现在收件人是谁，4月18日起是谁？",
+          "hypothesis": "\n\n根据排班单记录：\n- **当前（4月10日，即18日之前）**：燕桥站的收件人为**沈宁**。\n- **自4月18日起**：收件人将变更为**何雨**。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "2031年4月17日和19日，燕桥站分别由谁收件？",
+          "hypothesis": "\n\n根据提供的记忆材料中的排班声明、临时调整及撤回记录，按时间条件适用如下：\n\n- **2031年4月17日**：由**沈宁**负责收件。排班单声明（e0/e1）明确划定时间节点为“4月18日起…交给何雨；18日之前仍由沈宁负责”。4月17日处于该截止日之前，故适用沈宁的常规安排。\n- **2031年4月19日**：由**何雨**负责收件。材料中曾记录一项仅针对4月19日的临时安排（改由江舟在侧门收件，e2），但随后来源s4/e4明确记载检修已取消，该临时安排“随之撤回”，并指示“按何雨的一般排班办理”。因4月19日已跨过18日的节点，且指定例外已声明失效，故恢复适用何雨的排班。\n\n**结论**：燕桥站2031年4月17日由**沈宁**收件，4月19日由**何雨**收件。以上结论严格依据所给排班声明的日期限制及后续修正/撤回记录得出。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "燕桥站4月19日为何不再交江舟，原临时安排是什么？",
+          "hypothesis": "\n\n根据提供的记忆材料记载：\n\n* **原临时安排**：因电梯检修，曾临时规定**“仅4月19日，燕桥站的借展品改由江舟在侧门收件”**，其他日期的常规安排保持不变。\n* **不再交江舟的原因**：工程方随后确认检修已取消、电梯恢复正常，因此该“4月19日侧门交江舟”的临时安排随之撤回，燕桥站4月19日的收件工作改为按何雨的一般排班办理。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "松港站从一开始实际应是谁？最初登记误写的是谁？",
+          "hypothesis": "\n\n根据提供的记忆材料，回答如下：\n\n- **松港站从一开始实际应为：罗岚**\n- **最初登记（及早期口述）误写/误报的是：罗琳**\n\n**依据与说明**（基于记忆材料中的用户陈述与登记记录）：\n根据用户提供的纠正声明（s0/e0）：“核对原始签收单后发现松港站从一开始就是罗岚，不是我最初说的罗琳。这是纠正早前口误，并非今天换人；旧登记当时写了什么也要能查到。”同时，早期借展登记内容（s2/e2）明确记载了“松港站由罗琳收件”。该信息为用户基于原始签收单的核实与自我纠正，属用户报告性质，具体旧登记文件的完整原文需按用户要求另行调取查证。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "寄出借展品和馆内搬运分别需要什么核准？",
+          "hypothesis": "\n\n根据提供的记忆材料（来源s0的报告内容）：\n- **寄出借展品**：需要馆员核准。\n- **馆内搬运**：不用核准。\n\n该信息为报告主张（kind: reported），材料中未注明具体的核准流程、适用条件、例外情况或有效期限。因此，基于当前交付的材料，无法确定核准的具体执行标准、是否有临时变更或该规则的其他附加要求。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "我的茶饮偏好是什么？电子签收已经决定启用了吗？",
+          "hypothesis": "\n\n根据已提供的记忆材料，针对您的两个问题答复如下：\n\n1. **茶饮偏好**：根据来源 `s3` 的用户报告（`role: \"user\"`, `kind: \"reported\"`），您曾明确陈述“我个人喜欢无糖乌龙茶”。后续来源 `s0` 进一步报告该偏好“均不变”。此为已声明且未被更改的个人偏好记录。\n2. **电子签收启用决定**：根据来源 `s0` 的用户报告，关于松港站增配电子签收的事项“目前仍只是想法，没有决定”。该声明明确指出了当前的状态为**未决定**，即电子签收尚未作出启用决定。\n\n以上结论严格基于已交付源记录（`s0`、`s3`）中的用户陈述及状态说明。材料中未显示存在限制该状态有效性的条件、例外或修正记录。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 1,
+          "question": "顾桃会员卡失效后还能领稀有品种吗？",
+          "hypothesis": "\n\n根据提供的规程与状态记录，顾桃在会员卡失效后**仍然可以**领取稀有品种。具体依据如下：\n\n1. **借种资格**：规程明确借种资格可凭“本季度有效会员卡”或“社区盖章的当季借种券”任选其一即可。记录指出，顾桃的会员卡虽已失效，但其当季借种券仍有效，因此她依然具备借种资格。\n2. **稀有品种附加条件**：领稀有品种须完成培训。记录确认顾桃的培训已完成。\n\n综上，顾桃凭有效的当季借种券及已完成的培训，完全符合领取稀有品种的条件。会员卡的失效并不影响她通过借种券进行借种及获取稀有品种。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "顾桃现在能领普通种和稀有品种吗，依靠什么？",
+          "hypothesis": "\n\n根据提供的记忆材料（最新记录日期为2026年10月15日，且无后续变更记录），结合您设定的时间（2031年4月10日），依据现有规则与状态回答如下：\n\n- **能否领取**：\n  - **普通种**：可以领取。\n  - **稀有品种**：可以领取。\n\n- **依靠什么**：\n  - **资格凭据**：依靠其**有效的当季借种券**。材料明确借种资格可凭本季度有效会员卡或社区盖章的当季借种券任选其一，顾桃的会员卡已失效，但其借种券仍有效，满足基本借种门槛。\n  - **附加条件**：依靠**已完成的培训状态**。领普通种不要求培训；领稀有品种须完成培训，材料确认顾桃的培训已完成。\n  - **排除的临时限制**：材料提及的“持借种券领稀有品种须管理员在场”的临时要求已明确撤回，不影响当前凭券领取的资格。\n\n- **不确定项说明**：交付材料仅记录至2026年10月15日，无法从现有材料中确定2026年10月至2031年4月期间是否有新规程发布、培训认证过期或凭据有效期变更。若在此期间无新增规则或资格调整，则上述凭据（有效当季借种券）与状态（已完成培训）在当前时间依然适用。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "顾桃领稀有品种现在是否还需要管理员在场？为什么？",
+          "hypothesis": "\n\n根据已交付的记忆材料，顾桃领取稀有品种**不需要**管理员在场。\n\n**原因如下**：\n1. **临时要求已正式撤回**：来源s3（用户报告，记录于2026-10-15）明确指出，此前因临时盘点设置的“持借种券领稀有品种须管理员在场”仅为临时措施，随盘点提前结束已**明确撤回**。\n2. **仅继续执行基本规则**：该临时要求撤回后，仅保留基础规程，即“领稀有品种须完成培训”以及“凭本季度有效会员卡或社区盖章当季借种券任选其一”。在已交付的材料范围内，未显示有新的管理员在场要求生效或覆盖此撤回状态。\n3. **顾桃符合现行条件**：顾桃已完成培训且当季借种券有效，满足基本规程的凭据与培训条件，因此不受已撤回的临时在场限制。\n\n*注：上述结论仅基于已交付的2026年10月记录。材料未包含该日期之后关于此项规定的变更、重新生效或新规程信息；若此后存在未记录的管理要求，则需以实际生效文件为准。*"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "闻溪现在是否能领稀有品种？最初系统登记的培训情况是什么？",
+          "hypothesis": "\n\n根据提供的记忆材料，按 chronology 及报告状态分别回答如下：\n\n**1. 最初系统登记的培训情况是什么？**\n据原始登记记载，系统最初将闻溪的培训状态登记为**“未培训”**。但随后有更正说明指出，该登记属于**录入错误**。实际更正为：闻溪在最初登记之前就已经完成了培训，并非在当天新完成。\n\n**2. 闻溪现在是否能领稀有品种？**\n根据当前执行的规程与状态报告，**闻溪目前具备领取稀有品种的资格**。依据如下：\n* **基本规则**：领取稀有品种需凭有效凭据（本季度有效会员卡或社区盖章当季借种券任选其一），且必须完成培训。\n* **资质核对**：闻溪持有有效的本季度会员卡；经最新更正确认，她已完成培训。两项基本条件均已满足。\n* **临时要求变动**：本周曾临时要求“持借种券领稀有品种须管理员在场”，但该临时盘点已提前结束，该附加要求已被正式撤回。培训要求与凭据任选其一的基本规则继续执行。\n\n综上，在基本规则恢复执行且无其他有效限制的情况下，闻溪符合领取稀有品种的条件。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "领普通种需要培训吗？标签用什么颜色？",
+          "hypothesis": "\n\n根据交付的记忆材料（用户报告的《种子共享柜规程》及相关用户消息）：\n\n- **领普通种需要培训吗？**：不需要。材料明确报告“领普通种不要求培训”。\n- **标签用什么颜色？**：深绿色。材料报告“标签使用深绿色”，后续信息亦确认“标签还是深绿色”。\n\n**状态与适用性说明**：上述声明均为用户报告状态，主体为种子共享柜规程/通知。材料中未设定有效期限、修正记录或本地例外，截至提问时间（2031年4月10日）仍为适用状态。材料未提供其他不确定信息或额外条件。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "下一季预约要求是否已经决定，何时生效？",
+          "hypothesis": "\n\n根据提供的记忆材料，关于**下一季预约要求**：\n- **决定状态**：尚未正式决定。该信息为用户反馈（传闻/听说状态），仅表明“可能需要”，未形成正式决议。\n- **生效时间**：目前无生效日期。\n\n综上所述，该要求仍处于未定状态，具体安排与生效时间均未确定。记忆材料中未提供其他补充决策或时间表信息。"
+        }
+      ],
+      "first_scores": [
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 1,
+          "question": "当前为4月10日，燕桥站现在收件人是谁，4月18日起是谁？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "2031年4月17日和19日，燕桥站分别由谁收件？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "燕桥站4月19日为何不再交江舟，原临时安排是什么？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "松港站从一开始实际应是谁？最初登记误写的是谁？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "寄出借展品和馆内搬运分别需要什么核准？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "我的茶饮偏好是什么？电子签收已经决定启用了吗？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 1,
+          "question": "顾桃会员卡失效后还能领稀有品种吗？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "顾桃现在能领普通种和稀有品种吗，依靠什么？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "顾桃领稀有品种现在是否还需要管理员在场？为什么？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "闻溪现在是否能领稀有品种？最初系统登记的培训情况是什么？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "领普通种需要培训吗？标签用什么颜色？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "下一季预约要求是否已经决定，何时生效？",
+          "result_type": "Correct",
+          "reader_failure": null
+        }
+      ],
+      "first_label_counts": {
+        "Correct": 12
+      },
+      "prediction_ledger_delta": {
+        "generation_requests": 24,
+        "generation": {
+          "known_tokens": 140125,
+          "charged_tokens": 140125,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 1393,
+          "charged_tokens": 1393,
+          "unknown_usage": 0
+        }
+      },
+      "accounting_note": "Prediction phase delta is per-arm; judge cost is in original responses. Complete queue reconciled against one uninterrupted ledger interval.",
+      "requests_without_response": []
+    },
+    "candidate": {
+      "terminal_predict": {
+        "status": "PREDICTIONS_SAVED",
+        "phase": "predict",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "PREDICTIONS_SAVED",
+          "sessions": 12,
+          "judge_calls": 0,
+          "complete_answers": 12,
+          "known_reader_failures": 0
+        },
+        "resources_settled": true
+      },
+      "terminal_score": {
+        "status": "SCORED",
+        "phase": "score",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "SCORED_SAVED_PREDICTIONS",
+          "backend": "MiLAi-memory-only",
+          "protocol": {
+            "name": "milai-method-architecture-dev-v2",
+            "track": "common-conditions",
+            "backends": [
+              "MiLAi-memory-only"
+            ],
+            "history_protocol": "halumem-online-prefix",
+            "source_policy": "source-only",
+            "qa_top_k": 20,
+            "update_top_k": 10,
+            "delivery": "direct",
+            "raw_access": "original-history-for-RawRAG; independently-retrieved-visible-original-Sources-plus-linked-supports-and-fitting-semantic-views-for-MiLAi",
+            "rawrag": {
+              "granularity": "session"
+            },
+            "native_answer": "separate-optional-not-main-QA",
+            "prediction_scoring": "explicit-selected-arm-score-after-saved-predictions-and-resource-closure",
+            "unknown_retry": false,
+            "write_test_answers_back": false,
+            "resource_owner": "Root; existing continuous ledger; serial model dispatch",
+            "external_internal_usage": "unobserved unless actual native usage is available; not zero",
+            "claim": "Authored development stories, independent empty-bank trajectories. Plain propositions versus directed update regions and dependency/history reading. Not the shared-before diagnostic, not external HaluMem results, and not a factorial attribution result. Candidate v2 adds model-formed, source-bound OR-of-AND support groups in the existing record version. This has only mechanical validation until actual model experiments run."
+          },
+          "correct": 10,
+          "opportunities": 12,
+          "missing": 0,
+          "labels": {
+            "Correct": 10,
+            "invalid": 2
+          },
+          "per_user": {
+            "method-dev-loans": {
+              "correct": 5,
+              "opportunities": 6,
+              "missing": 0,
+              "invalid": 1
+            },
+            "method-dev-seed-library": {
+              "correct": 5,
+              "opportunities": 6,
+              "missing": 0,
+              "invalid": 1
+            }
+          },
+          "backend_capabilities": {
+            "session_output": "supported",
+            "reference_update_state": "supported-isolated-view"
+          },
+          "official_labels": "unchanged; source conflicts require separate evidence review",
+          "semantic_advantage": "unchecked",
+          "native_answer_result": null
+        },
+        "resources_settled": true
+      },
+      "costs": {
+        "impact": {
+          "responses": 10,
+          "known_tokens": 44143,
+          "unknown_usage_responses": 0
+        },
+        "maintenance": {
+          "responses": 12,
+          "known_tokens": 99364,
+          "unknown_usage_responses": 0
+        },
+        "reader": {
+          "responses": 12,
+          "known_tokens": 45507,
+          "unknown_usage_responses": 0
+        },
+        "judge": {
+          "responses": 12,
+          "known_tokens": 30472,
+          "unknown_usage_responses": 0
+        },
+        "embedding": {
+          "responses": 33,
+          "known_tokens": 2123,
+          "unknown_usage_responses": 0
+        },
+        "evidence_selection": {
+          "responses": 12,
+          "known_tokens": 71478,
+          "unknown_usage_responses": 0
+        }
+      },
+      "receipt_statuses": {
+        "committed": 11,
+        "rejected": 1
+      },
+      "states": [
+        {
+          "user": "method-dev-loans",
+          "session": 0,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 1
+            }
+          ],
+          "records": [
+            {
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 1,
+              "matter": "exhibition_loan_registration",
+              "units": [
+                {
+                  "unit_id": "unit-f76d9fb3-c8b8-4d7e-aebf-e98eb885866b",
+                  "text": "燕桥站由沈宁收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-70df03fd-2f28-481c-8c66-2a9a2e166ba5",
+                  "text": "松港站由罗琳收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-aa8c5944-02bc-46a2-803d-83b24140d709",
+                  "text": "寄出借展品需要馆员核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-a0cfa547-6317-4ecc-bc5f-c0f24b5688c2",
+                  "text": "馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 1,
+          "maintenance_status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_SUPPORT_GENERATED_UNIT_UNAVAILABLE"
+            }
+          ],
+          "records": [
+            {
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 1,
+              "matter": "exhibition_loan_registration",
+              "units": [
+                {
+                  "unit_id": "unit-f76d9fb3-c8b8-4d7e-aebf-e98eb885866b",
+                  "text": "燕桥站由沈宁收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-70df03fd-2f28-481c-8c66-2a9a2e166ba5",
+                  "text": "松港站由罗琳收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-aa8c5944-02bc-46a2-803d-83b24140d709",
+                  "text": "寄出借展品需要馆员核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-a0cfa547-6317-4ecc-bc5f-c0f24b5688c2",
+                  "text": "馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 2,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 2
+            }
+          ],
+          "records": [
+            {
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 2,
+              "matter": "exhibition_loan_registration",
+              "units": [
+                {
+                  "unit_id": "unit-f76d9fb3-c8b8-4d7e-aebf-e98eb885866b",
+                  "text": "燕桥站由沈宁收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-70df03fd-2f28-481c-8c66-2a9a2e166ba5",
+                  "text": "松港站由罗琳收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-aa8c5944-02bc-46a2-803d-83b24140d709",
+                  "text": "寄出借展品需要馆员核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-a0cfa547-6317-4ecc-bc5f-c0f24b5688c2",
+                  "text": "馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-b5337fd7-12e9-4816-bf56-3dda8907e772",
+                  "text": "仅4月19日，燕桥站的借展品改由江舟在侧门收件，何雨的普通安排在其他日子不变。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:32:52.474434+00:00",
+                    "occurred_at": "2031-04-10T11:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-ef7d4ae6-ca65-4737-a41c-947560eb3ab9",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 3,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 3
+            }
+          ],
+          "records": [
+            {
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 3,
+              "matter": "exhibition_loan_registration",
+              "units": [
+                {
+                  "unit_id": "unit-f76d9fb3-c8b8-4d7e-aebf-e98eb885866b",
+                  "text": "燕桥站由沈宁收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-70df03fd-2f28-481c-8c66-2a9a2e166ba5",
+                  "text": "松港站由罗琳收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-aa8c5944-02bc-46a2-803d-83b24140d709",
+                  "text": "寄出借展品需要馆员核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-a0cfa547-6317-4ecc-bc5f-c0f24b5688c2",
+                  "text": "馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 4,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 4
+            }
+          ],
+          "records": [
+            {
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 4,
+              "matter": "exhibition_loan_registration",
+              "units": [
+                {
+                  "unit_id": "unit-f76d9fb3-c8b8-4d7e-aebf-e98eb885866b",
+                  "text": "燕桥站由沈宁收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-70df03fd-2f28-481c-8c66-2a9a2e166ba5",
+                  "text": "松港站由罗岚收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:34:09.386534+00:00",
+                    "occurred_at": "2031-04-10T13:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-0c077a74-a821-47f4-87dc-ba552b738a04",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-aa8c5944-02bc-46a2-803d-83b24140d709",
+                  "text": "寄出借展品需要馆员核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-a0cfa547-6317-4ecc-bc5f-c0f24b5688c2",
+                  "text": "馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 5
+            }
+          ],
+          "records": [
+            {
+              "id": "3c29727c-d792-5083-a4b6-f5db5690b1aa",
+              "revision": 5,
+              "matter": "exhibition_loan_registration",
+              "units": [
+                {
+                  "unit_id": "unit-f76d9fb3-c8b8-4d7e-aebf-e98eb885866b",
+                  "text": "燕桥站由沈宁收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-70df03fd-2f28-481c-8c66-2a9a2e166ba5",
+                  "text": "松港站由罗岚收件。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:34:09.386534+00:00",
+                    "occurred_at": "2031-04-10T13:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-0c077a74-a821-47f4-87dc-ba552b738a04",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-aa8c5944-02bc-46a2-803d-83b24140d709",
+                  "text": "寄出借展品需要馆员核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-a0cfa547-6317-4ecc-bc5f-c0f24b5688c2",
+                  "text": "馆内搬运不用核准。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:30:47.823902+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e95eb5fa-c994-4f83-a55f-7eb0316cccbc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-1705d42d-acd3-4c73-b5f3-f60afe7f670b",
+                  "text": "可能以后会给松港站增配电子签收，目前仍只是想法，没有决定。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:34:46.640157+00:00",
+                    "occurred_at": "2031-04-10T14:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-7dc4a9df-0ae1-4095-bec7-5508b363e3c3",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 0,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 1
+            }
+          ],
+          "records": [
+            {
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 1,
+              "matter": "SeedCabinetRegulations",
+              "units": [
+                {
+                  "unit_id": "unit-978ead0c-d06f-457a-88eb-8b0b00143a85",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-77bb88da-d0e7-4c64-8498-59f908377c8b",
+                  "text": "领稀有品种还须完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-4857fd5d-07e8-46ad-8c50-c64c6b740481",
+                  "text": "领普通种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bbb7a03f-7615-4c46-8ecd-04d61e8e068c",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-1e27c1a2-e319-4cda-a340-8b514faf7e09",
+                  "text": "顾桃卡和券都有效且已培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-d994abd9-d4e4-4fc4-a53f-900899556ab9",
+                  "text": "闻溪只有有效会员卡、未培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 1,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 2
+            }
+          ],
+          "records": [
+            {
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 2,
+              "matter": "SeedCabinetRegulations",
+              "units": [
+                {
+                  "unit_id": "unit-978ead0c-d06f-457a-88eb-8b0b00143a85",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-77bb88da-d0e7-4c64-8498-59f908377c8b",
+                  "text": "领稀有品种还须完成培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-4857fd5d-07e8-46ad-8c50-c64c6b740481",
+                  "text": "领普通种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bbb7a03f-7615-4c46-8ecd-04d61e8e068c",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-1e27c1a2-e319-4cda-a340-8b514faf7e09",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:38:19.755841+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f0d309a8-e7dd-47ab-aa57-ba15fd7a2ba1",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-d994abd9-d4e4-4fc4-a53f-900899556ab9",
+                  "text": "闻溪只有有效会员卡、未培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 2,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 3
+            }
+          ],
+          "records": [
+            {
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 3,
+              "matter": "SeedCabinetRegulations",
+              "units": [
+                {
+                  "unit_id": "unit-978ead0c-d06f-457a-88eb-8b0b00143a85",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-77bb88da-d0e7-4c64-8498-59f908377c8b",
+                  "text": "领稀有品种还须完成培训；这周为临时盘点，持借种券领稀有品种时还须管理员在场；会员卡通道不加这项要求，普通种不受影响。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:39:28.941040+00:00",
+                    "occurred_at": "2031-04-10T11:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-415310df-a6b5-4be9-b64b-5b40a2338bda",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-4857fd5d-07e8-46ad-8c50-c64c6b740481",
+                  "text": "领普通种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bbb7a03f-7615-4c46-8ecd-04d61e8e068c",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-1e27c1a2-e319-4cda-a340-8b514faf7e09",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:38:19.755841+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f0d309a8-e7dd-47ab-aa57-ba15fd7a2ba1",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-d994abd9-d4e4-4fc4-a53f-900899556ab9",
+                  "text": "闻溪只有有效会员卡、未培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 3,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 4
+            }
+          ],
+          "records": [
+            {
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 4,
+              "matter": "SeedCabinetRegulations",
+              "units": [
+                {
+                  "unit_id": "unit-978ead0c-d06f-457a-88eb-8b0b00143a85",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-77bb88da-d0e7-4c64-8498-59f908377c8b",
+                  "text": "领稀有品种须完成培训；会员卡通道不加这项要求，普通种不受影响。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:40:20.254159+00:00",
+                    "occurred_at": "2031-04-10T12:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-38b9d994-bfd3-41f9-9280-21b9582fbe0d",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-4857fd5d-07e8-46ad-8c50-c64c6b740481",
+                  "text": "领普通种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bbb7a03f-7615-4c46-8ecd-04d61e8e068c",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-1e27c1a2-e319-4cda-a340-8b514faf7e09",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:38:19.755841+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f0d309a8-e7dd-47ab-aa57-ba15fd7a2ba1",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-d994abd9-d4e4-4fc4-a53f-900899556ab9",
+                  "text": "闻溪只有有效会员卡、未培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 4,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 5
+            }
+          ],
+          "records": [
+            {
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 5,
+              "matter": "SeedCabinetRegulations",
+              "units": [
+                {
+                  "unit_id": "unit-978ead0c-d06f-457a-88eb-8b0b00143a85",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-77bb88da-d0e7-4c64-8498-59f908377c8b",
+                  "text": "领稀有品种须完成培训；会员卡通道不加这项要求，普通种不受影响。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:40:20.254159+00:00",
+                    "occurred_at": "2031-04-10T12:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-38b9d994-bfd3-41f9-9280-21b9582fbe0d",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-4857fd5d-07e8-46ad-8c50-c64c6b740481",
+                  "text": "领普通种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bbb7a03f-7615-4c46-8ecd-04d61e8e068c",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-1e27c1a2-e319-4cda-a340-8b514faf7e09",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:38:19.755841+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f0d309a8-e7dd-47ab-aa57-ba15fd7a2ba1",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-d994abd9-d4e4-4fc4-a53f-900899556ab9",
+                  "text": "闻溪已完成培训，会员卡仍有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:40:58.289554+00:00",
+                    "occurred_at": "2031-04-10T13:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-391f0a11-b620-445a-b46a-5d0e0271b68b",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 6
+            }
+          ],
+          "records": [
+            {
+              "id": "a9d793d8-cd1c-5e57-ab13-06b988a36104",
+              "revision": 6,
+              "matter": "SeedCabinetRegulations",
+              "units": [
+                {
+                  "unit_id": "unit-978ead0c-d06f-457a-88eb-8b0b00143a85",
+                  "text": "借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-77bb88da-d0e7-4c64-8498-59f908377c8b",
+                  "text": "领稀有品种须完成培训；会员卡通道不加这项要求，普通种不受影响。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:40:20.254159+00:00",
+                    "occurred_at": "2031-04-10T12:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-38b9d994-bfd3-41f9-9280-21b9582fbe0d",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-4857fd5d-07e8-46ad-8c50-c64c6b740481",
+                  "text": "领普通种不要求培训。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-bbb7a03f-7615-4c46-8ecd-04d61e8e068c",
+                  "text": "标签使用深绿色。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:37:43.679925+00:00",
+                    "occurred_at": "2031-04-10T09:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-8f203ff2-97ee-4868-b7e7-074857355cfc",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-1e27c1a2-e319-4cda-a340-8b514faf7e09",
+                  "text": "顾桃的会员卡本季度已失效；她的当季借种券仍有效，培训也已完成。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:38:19.755841+00:00",
+                    "occurred_at": "2031-04-10T10:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-f0d309a8-e7dd-47ab-aa57-ba15fd7a2ba1",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-d994abd9-d4e4-4fc4-a53f-900899556ab9",
+                  "text": "闻溪已完成培训，会员卡仍有效。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "reported",
+                    "observed_at": "2026-10-15T02:40:58.289554+00:00",
+                    "occurred_at": "2031-04-10T13:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-391f0a11-b620-445a-b46a-5d0e0271b68b",
+                    "source_revision": 1
+                  }
+                },
+                {
+                  "unit_id": "unit-af1d11be-348b-4000-9f18-74d7d16d0a56",
+                  "text": "下一季可能需要预约，但目前没有正式决定，也没有生效日期。",
+                  "role": "content",
+                  "assertion": {
+                    "calendar_context": "Asia/Shanghai",
+                    "kind": "uncertain",
+                    "observed_at": "2026-10-15T02:41:50.547274+00:00",
+                    "occurred_at": "2031-04-10T14:00:00+08:00",
+                    "role": "user",
+                    "source_ref": "source-e9fca234-d505-4d66-a43c-a0bc63d1f832",
+                    "source_revision": 1
+                  }
+                }
+              ],
+              "relations": [],
+              "support_groups": []
+            }
+          ]
+        }
+      ],
+      "qa": [
+        {
+          "user": "method-dev-loans",
+          "session": 1,
+          "question": "当前为4月10日，燕桥站现在收件人是谁，4月18日起是谁？",
+          "hypothesis": "\n\n根据记忆中的排班单记录，当前（4月10日）燕桥站的收件人为**沈宁**；自4月18日起，收件工作将交由**何雨**负责。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "2031年4月17日和19日，燕桥站分别由谁收件？",
+          "hypothesis": "\n\n根据提供的记忆材料，燕桥站收件人安排如下：\n\n- **2031年4月17日**：由**沈宁**收件。排班单（`s0`）明确记载“2031年4月18日起，燕桥站的收件工作交给何雨；18日之前仍由沈宁负责”，4月17日位于4月18日之前，适用沈宁负责的时段。\n- **2031年4月19日**：由**何雨**收件。材料中曾提及一项仅针对4月19日的临时安排（改由江舟在侧门收件，`s3`），但该安排随后因工程检修取消而撤回（`s4`），并明确指示“按何雨的一般排班办理”。因4月19日已处于4月18日之后的常规排班期内，故由何雨收件。\n\n综上，4月17日由沈宁收件，4月19日由何雨收件。以上结论严格依据所交付的源文本及时间节点推导得出。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "燕桥站4月19日为何不再交江舟，原临时安排是什么？",
+          "hypothesis": "\n\n根据提供的source_history记录（e0、e1）：\n\n* **原临时安排**：仅在4月19日当天，燕桥站的借展品改由江舟在侧门收件，其他日期的安排仍按何雨的普通排班不变。\n* **不再交江舟的原因**：工程方确认原定检修取消、电梯已恢复正常，因此该临时安排随之撤回，4月19日恢复按何雨的一般排班办理。\n\n以上内容直接源自源历史中的用户消息记录，未作额外推断或补充。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "松港站从一开始实际应是谁？最初登记误写的是谁？",
+          "hypothesis": "\n\n根据提供的记忆材料，回答如下：\n\n- **从一开始实际应为**：罗岚。\n- **最初登记（及先前口头表述）误写/误说**：罗琳。\n\n**依据与状态说明**：\n- 根据记忆 `e0`（来源 s0，用户于2031年4月10日13:00左右**报告**），用户经核对原始签收单后明确指出：“松港站从一开始就是罗岚，不是我最初说的罗琳。”该陈述为**用户报告状态**，用于纠正早前口误，并强调并非当日换人，同时确认旧登记当时的具体书写内容仍可查证。\n- 根据记忆 `e1`（来源 s1 的借展登记记录），早期登记条目中明确记载“松港站由罗琳收件”，印证了登记阶段的误写情况。\n- 其余记忆（`e2`至`e6`）涉及电子签收增配计划、其他站点人员排班及电梯检修临时调整，与松港站收件人姓名更正无关。以上结论均严格基于记忆材料中的报告与登记记录，未作外部推断。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "寄出借展品和馆内搬运分别需要什么核准？",
+          "hypothesis": "\n\n根据记忆材料中的用户陈述（报告状态）：\n- **寄出借展品**：需要**馆员核准**。\n- **馆内搬运**：**不用核准**。\n\n材料中未提及除此之外的其他核准条件、时间限制或例外情况。"
+        },
+        {
+          "user": "method-dev-loans",
+          "session": 5,
+          "question": "我的茶饮偏好是什么？电子签收已经决定启用了吗？",
+          "hypothesis": "\n\n根据提供的记忆材料：\n\n- **茶饮偏好**：根据您（来源 `s3`）的原始报告，个人偏好为**无糖乌龙茶**。来源 `s0` 进一步确认该偏好“均不变”。\n- **电子签收启用情况**：根据您（来源 `s0`）的原始报告，目前**尚未决定**启用。材料明确指出增配电子签收“目前仍只是想法，没有决定”，且表述为“可能以后会给松港站增配”。\n\n以上结论均严格基于您提供的原始陈述（报告状态），截至查询时间（2031-04-10 14:00:00）未见后续修正或覆盖性记录。材料中未提供超出上述范围的额外条件或更新信息。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 1,
+          "question": "顾桃会员卡失效后还能领稀有品种吗？",
+          "hypothesis": "\n\n根据记忆材料中的报告信息，顾桃在会员卡失效后**仍然可以**领取稀有品种。依据如下：\n\n- **凭据条件**：来源报告指出“借种资格可凭本季度有效会员卡，或者凭社区盖章的当季借种券，两种凭据任选其一即可”。后续报告明确当前状态为“顾桃的会员卡本季度已失效；她的当季借种券仍有效”，并提示“别把卡失效当作券同时失效”。因此，她仍凭有效借种券满足借种资格。\n- **培训条件**：来源规定“领稀有品种还须完成培训”。报告确认顾桃“培训也已完成”。\n- **时间适用**：上述凭据状态与培训记录均报告于当前查询时间（2031年4月10日10:00）内，无冲突或失效例外。\n\n综合两项条件，顾桃同时具备有效凭据资格与完成培训，符合领取稀有品种的要求。材料未报告其他限制条件。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "顾桃现在能领普通种和稀有品种吗，依靠什么？",
+          "hypothesis": "\n\n根据提供的规程与顾桃的凭据状态，顾桃当前**可以**申领普通种和稀有品种。具体依靠如下：\n\n* **领普通种**：依靠其**有效的当季借种券**。规程明确借种资格凭本季度有效会员卡或社区盖章当季借种券任选其一即可，且领普通种不要求培训。\n* **领稀有品种**：依靠其**有效的当季借种券**以及**已完成培训**的记录。规程规定领稀有品种除凭据任选其一外，还须完成培训；顾桃的培训已完成，且有效借种券未被会员卡失效状态影响。\n\n补充说明：顾桃的本季度会员卡已失效，但规程明确允许两种凭据任选其一，且特别提示“别把卡失效当作券同时失效”；同时，原定持券领稀有品种需管理员在场的临时要求已撤回，基本规则继续执行。因此，仅凭有效的当季借种券及已完成的培训记录即可满足申领条件。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "顾桃领稀有品种现在是否还需要管理员在场？为什么？",
+          "hypothesis": "\n\n不需要。\n\n**原因：**\n根据所交付记忆材料中的公开用户消息记录，此前“持借种券领稀有品种须管理员在场”仅为临时盘点期间的附加要求。该临时要求已在盘点提前结束后被明确撤回。目前继续执行的基本规则仅要求领种人完成培训，并凭本季度有效会员卡或社区盖章的当季借种券二选一即可。顾桃的培训已完成且当季借种券有效，符合现行规则，因此现在领取稀有品种不需要管理员在场。记忆材料中未提及该临时要求被恢复或存在其他生效的本地覆盖规则。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "闻溪现在是否能领稀有品种？最初系统登记的培训情况是什么？",
+          "hypothesis": "\n\n根据提供的记忆材料（均为用户报告与更正记录），回答如下：\n\n1. **最初系统登记的培训情况**：系统最初登记显示闻溪为**“未培训”**。但根据用户更正报告，该登记为录入错误，实际情况是闻溪**在最初登记之前就已经完成了培训**，并非在报告当日新完成。\n\n2. **闻溪现在是否能领稀有品种**：**可以领取**。\n   - **规则条件**：当前规程明确“领稀有品种须完成培训”，且需持本季度有效会员卡或当季借种券（二选一）。\n   - **当前状态**：培训表已更正，确认闻溪已完成培训；其会员卡仍有效。\n   - **结论**：在满足培训要求与有效凭据的条件下，她符合领取稀有品种的资格。\n   - **补充说明**：材料中提及“会员卡通道不加这项要求”，系指撤回“本周借种券领稀有品种须管理员在场”的临时盘点要求，培训要求与凭据规则仍继续执行，不影响闻溪的领取资格。\n\n以上信息均基于所交付记忆中的用户报告与系统更正记录，未包含外部推断。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "领普通种需要培训吗？标签用什么颜色？",
+          "hypothesis": "\n\n根据所交付的材料记录：\n- **领普通种是否需要培训**：不需要。材料中的规程说明明确指出“领普通种不要求培训”。\n- **标签用什么颜色**：深绿色。材料明确标注“标签使用深绿色”，后续记录也确认“标签还是深绿色”。\n\n以上结论直接基于所交付的用户消息与规程声明。"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "question": "下一季预约要求是否已经决定，何时生效？",
+          "hypothesis": "\n\n根据记忆材料中的信息（用户于2031年4月10日09:00报告）：\n- **是否已决定**：尚未正式决定。该信息属于传闻性质（断言状态为“不确定”），仅提到“听说下一季可能需要预约”，但明确声明“目前没有正式决定”。\n- **何时生效**：暂无生效日期。材料明确指出“没有生效日期”。\n\n基于当前交付的材料，无法确定下一季预约要求的具体决定内容及确切生效时间。目前该事项相关标签仍为深绿色。"
+        }
+      ],
+      "first_scores": [
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 1,
+          "question": "当前为4月10日，燕桥站现在收件人是谁，4月18日起是谁？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "2031年4月17日和19日，燕桥站分别由谁收件？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "燕桥站4月19日为何不再交江舟，原临时安排是什么？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "松港站从一开始实际应是谁？最初登记误写的是谁？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "寄出借展品和馆内搬运分别需要什么核准？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-loans",
+          "ssession_id": 5,
+          "question": "我的茶饮偏好是什么？电子签收已经决定启用了吗？",
+          "result_type": null,
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 1,
+          "question": "顾桃会员卡失效后还能领稀有品种吗？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "顾桃现在能领普通种和稀有品种吗，依靠什么？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "顾桃领稀有品种现在是否还需要管理员在场？为什么？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "闻溪现在是否能领稀有品种？最初系统登记的培训情况是什么？",
+          "result_type": null,
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "领普通种需要培训吗？标签用什么颜色？",
+          "result_type": "Correct",
+          "reader_failure": null
+        },
+        {
+          "uuid": "method-dev-seed-library",
+          "ssession_id": 5,
+          "question": "下一季预约要求是否已经决定，何时生效？",
+          "result_type": "Correct",
+          "reader_failure": null
+        }
+      ],
+      "first_label_counts": {
+        "Correct": 10,
+        "invalid": 2
+      },
+      "prediction_ledger_delta": {
+        "generation_requests": 46,
+        "generation": {
+          "known_tokens": 260492,
+          "charged_tokens": 260492,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "known_tokens": 2123,
+          "charged_tokens": 2123,
+          "unknown_usage": 0
+        }
+      },
+      "accounting_note": "Prediction phase delta is per-arm; judge cost is in original responses. Complete queue reconciled against one uninterrupted ledger interval.",
+      "requests_without_response": []
+    }
+  },
+  "queue_ledger_delta": {
+    "generation_requests": 94,
+    "generation": {
+      "known_tokens": 464156,
+      "charged_tokens": 464156,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 3516,
+      "charged_tokens": 3516,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens_match": true,
+    "generation_requests_match": true,
+    "embedding_tokens_match": true
+  },
+  "semantic_review": {
+    "basis": "source author inspected every closed pre/post state, receipt and full answer; not independent or blind",
+    "state_qa_engineering_separated": true,
+    "official_labels_never_rewritten": true,
+    "formation": {
+      "loans": {
+        "plain": "two records/two compound units; tea preference omitted",
+        "candidate": "one record/four units; tea preference omitted"
+      },
+      "seed_library": {
+        "plain": "two records, rules and participant state; OR and training retained in text",
+        "candidate": "one record/six units; OR and training retained in text"
+      }
+    },
+    "method_exercised": {
+      "explicit_relation_edges": "none in the inspected formed and updated states",
+      "committed_support_groups": "none in the inspected states; one attempted group names nonexistent n0 and is rejected",
+      "impact_selection": "extra model calls genuinely run; allowed root constraints genuinely apply",
+      "qualification": "these two stories do not establish model-formed graph propagation or a graph-induced benefit"
+    },
+    "plain": {
+      "loans": [
+        {
+          "event": 1,
+          "target": "future change written with both periods",
+          "non_target": "approval and other receiver retained",
+          "issue": null
+        },
+        {
+          "event": 2,
+          "target": "temporary exception not stored",
+          "engineering": "EDIT_TIME_SOURCE_NOT_SELECTED",
+          "joint_update_success": false
+        },
+        {
+          "event": 3,
+          "target": "no change because rejected exception never existed in semantic state",
+          "cancellation_mechanism": "not exercised; cannot call this successful semantic retraction"
+        },
+        {
+          "event": 4,
+          "target": "corrects Luo Lin to Luo Lan",
+          "history": "old stored version still available; correction source retained"
+        },
+        {
+          "event": 5,
+          "target": "proposal kept as possible and undecided",
+          "inherited_gap": "tea still absent from state"
+        }
+      ],
+      "seed_library": [
+        {
+          "event": 1,
+          "target": "card invalid, voucher valid and training done retained"
+        },
+        {
+          "event": 2,
+          "target": "temporary voucher+rare administrator rule stored",
+          "non_target": "training and basic OR preserved in text",
+          "provenance_issue": "unchanged training unit is redundantly replaced and rebound to the current source even though that source does not restate training; old support h2 remains"
+        },
+        {
+          "event": 3,
+          "target": "temporary requirement removed, basic training and OR remain"
+        },
+        {
+          "event": 4,
+          "target": "Wen Xi trained correction stored, old untrained version retained"
+        },
+        {
+          "event": 5,
+          "target": "reservation rumor remains undecided, no effective date"
+        }
+      ],
+      "answer_faithfulness_issues": [
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "qa": 0,
+          "issue": "uses 2026 capture date as knowledge cutoff, inventing a 2026-to-2031 gap although reports explicitly dated 2031 are delivered"
+        },
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "qa": 1,
+          "issue": "adds the same unwarranted 2026 cutoff limitation"
+        }
+      ]
+    },
+    "candidate": {
+      "loans": [
+        {
+          "event": 1,
+          "target": "future change rejected; old Shen unit remains",
+          "engineering": "EDIT_SUPPORT_GENERATED_UNIT_UNAVAILABLE",
+          "joint_update_success": false
+        },
+        {
+          "event": 2,
+          "target": "scoped temporary Jiang arrangement appended as plain content",
+          "inherited_issue": "general future He arrangement still absent; stale Shen persists",
+          "graph": "no condition/override edge"
+        },
+        {
+          "event": 3,
+          "target": "temporary clause actually retracted",
+          "inherited_issue": "restoration to He mentioned in current source is not written; stale Shen persists",
+          "joint_state_correct": false
+        },
+        {
+          "event": 4,
+          "target": "Luo Lin corrected to Luo Lan",
+          "non_target": "approval units retained",
+          "inherited_issue": "future He and tea gaps remain"
+        },
+        {
+          "event": 5,
+          "target": "uncertain electronic signing proposal retained",
+          "inherited_issue": "future He and tea gaps remain"
+        }
+      ],
+      "seed_library": [
+        {
+          "event": 1,
+          "target": "card invalid while voucher and training remain"
+        },
+        {
+          "event": 2,
+          "target": "temporary voucher rare administrator condition merged with training sentence; scope explicitly excludes card route and ordinary seeds"
+        },
+        {
+          "event": 3,
+          "target": "administrator phrase removed",
+          "scope_damage": "leftover “会员卡通道不加这项要求” now follows training, changing its apparent antecedent",
+          "joint_update_success": false
+        },
+        {
+          "event": 4,
+          "target": "Wen Xi trained correction retained",
+          "inherited_issue": "dangling card-route training qualifier persists"
+        },
+        {
+          "event": 5,
+          "target": "pending reservation stored with uncertain assertion, no effective date; green label retained",
+          "inherited_issue": "dangling card-route training qualifier persists in final state"
+        }
+      ],
+      "answer_faithfulness_issues": [
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "qa": 4,
+          "issue": "reports reservation rumor as user report at 2031-04-10 09:00, while its actual source report is 14:00; core uncertainty answer correct"
+        }
+      ],
+      "qa_source_repair": [
+        {
+          "user": "method-dev-seed-library",
+          "session": 5,
+          "qa": 2,
+          "issue": "Reader explicitly recovers correct antecedent of “这项要求” from the original cancellation history, despite damaged retained sentence"
+        }
+      ]
+    },
+    "ujs_reporting": "No aggregate UJS percentage assigned: source-bound state dimensions and inherited gaps reported per event; early failed formation/update must not become vacuous later success.",
+    "next_diagnosis": "four predeclared state-only reads on actual final seed-library states; no original-source bodies or method edits",
+    "training": "two matched reviewable pairs; same corrected facts available to conversion-quality baseline and relation objective; no training or gain claim",
+    "conclusion": "At this stage there is no evidence of architecture quality/cost advantage. Source-assisted answers can conceal failed updates and scope damage.",
+    "all_first_answers_source_reviewed": true,
+    "formation_generation_probe": {
+      "path": "formation-grammar-probe.stdout.json",
+      "actual_deployed_xgrammar": "0.2.3",
+      "actual_ungrouped_create_accepted": true,
+      "syntactic_grouped_create_accepted": true,
+      "model_http_calls": 0,
+      "scope": "grammar language acceptance only; group test is synthetic and never supplied as experimental state"
+    },
+    "state_only_diagnosis": "CLOSED: plain core2/2 faithful2/2; candidate core1/2 faithful0/2; card exemption wrongly inferred from damaged stored rule. See method-architecture-continuous-bare-v1-summary.json.",
+    "invalid_first_judges": [
+      {
+        "arm": "candidate",
+        "ordinal": 6,
+        "response": "{}",
+        "retained": "invalid"
+      },
+      {
+        "arm": "candidate",
+        "ordinal": 10,
+        "response": "{}",
+        "retained": "invalid"
+      }
+    ]
+  }
+}
