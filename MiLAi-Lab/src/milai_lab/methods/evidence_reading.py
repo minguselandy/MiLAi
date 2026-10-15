@@ -144,6 +144,9 @@ def build_evidence_packs(
         hit = row.get("retrieval_navigation", {}).get("unit_id")
         selection = (dependency_selections or {}).get(row["id"])
         historical = row.get("historical_selection", False)
+        if (historical and row.get("fixed_history_pool") and selection is not None
+                and version["revision"] not in selection["history_revisions"]):
+            continue
         ids, relations = (query_support(state, selection["roots"],
                                        excluded=selection["excluded"],
                                        support_choices=selection.get("support_choices"))

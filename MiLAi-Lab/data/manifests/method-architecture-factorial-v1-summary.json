@@ -1,0 +1,953 @@
+{
+  "status": "FACTORIAL_FIRST_ATTEMPTS_REVIEWED",
+  "source_commit": "10c68e54",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/factorial-v1",
+  "cases": {
+    "exception-withdrawal": {
+      "seed_records": 1,
+      "seed_costs": {
+        "stages": {
+          "maintenance": {
+            "responses": 2,
+            "known_tokens": 13125,
+            "unknown_usage_responses": 0
+          },
+          "embedding": {
+            "responses": 2,
+            "known_tokens": 135,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "updates": {
+        "U0": {
+          "maintenance_status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_TARGET_NOT_IN_BASE_REVISION"
+            }
+          ],
+          "before_revisions": {
+            "632d81d8-a8bd-545b-b2ec-0ceaa8de93f9": 2
+          },
+          "after_revisions": {
+            "632d81d8-a8bd-545b-b2ec-0ceaa8de93f9": 2
+          },
+          "after_units": [
+            "纸本原稿与复印件在室内阅览均戴手套；数字副本不用戴。",
+            "外借任何纸本都须登记。",
+            "供学员练习的复印件可不戴手套。",
+            "只在本次公开课期间"
+          ],
+          "costs": {
+            "stages": {
+              "maintenance": {
+                "responses": 1,
+                "known_tokens": 8772,
+                "unknown_usage_responses": 0
+              },
+              "embedding": {
+                "responses": 2,
+                "known_tokens": 309,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "U1": {
+          "maintenance_status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_SUPPORT_UNIT_UNAVAILABLE"
+            }
+          ],
+          "before_revisions": {
+            "632d81d8-a8bd-545b-b2ec-0ceaa8de93f9": 2
+          },
+          "after_revisions": {
+            "632d81d8-a8bd-545b-b2ec-0ceaa8de93f9": 2
+          },
+          "after_units": [
+            "纸本原稿与复印件在室内阅览均戴手套；数字副本不用戴。",
+            "外借任何纸本都须登记。",
+            "供学员练习的复印件可不戴手套。",
+            "只在本次公开课期间"
+          ],
+          "costs": {
+            "stages": {
+              "impact": {
+                "responses": 1,
+                "known_tokens": 4717,
+                "unknown_usage_responses": 0
+              },
+              "maintenance": {
+                "responses": 1,
+                "known_tokens": 8559,
+                "unknown_usage_responses": 0
+              },
+              "embedding": {
+                "responses": 2,
+                "known_tokens": 309,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        }
+      },
+      "cells": {
+        "Y00": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "current",
+              "kind": "current_scope",
+              "question": "公开课结束后，练习复印件和纸本原稿在室内阅览分别要戴手套吗？",
+              "hypothesis": "\n\n根据提供的记忆材料，针对2032年6月3日公开课结束后的阅览要求，答复如下：\n\n* **临时安排状态**：根据标签 `e0` 的记载（2032-06-03报告），公开课结束后，此前针对供学员练习的复印件免戴手套的临时安排已正式撤回。\n* **规则恢复情况**：该记录明确指出，临时安排撤回后将“恢复通常阅览规则”。\n* **通常规则内容**：根据标签 `e1`（版本2）的声明，纸艺档案室的通常规则为“**纸本原稿与复印件在室内阅览均戴手套**；数字副本不用戴”。该规则在公开课期间曾短暂被练习复印件的豁免条款（标签 `e1` 中的 `u2`/`u3`）覆盖，但公开课后豁免期结束，覆盖关系解除。\n* **结论**：公开课结束后，**练习复印件与纸本原稿在室内阅览均需戴手套**。两者在室内阅览环节适用相同的通常防护要求，无分别差异。材料中未提供公开课后室内阅览的其他例外条件。",
+              "reader_failure": null
+            },
+            {
+              "id": "withdrawn",
+              "kind": "history_explanation",
+              "question": "公开课期间曾有什么免戴手套安排，为什么现在不再适用？",
+              "hypothesis": "\n\n根据提供的源历史材料（记录为公开用户报告/声明）：\n\n1. **公开课期间的免戴手套安排**：\n   在“本次公开课期间”，**供学员练习的复印件**可不戴手套。该安排为严格受限的临时例外，具体条件包括：\n   - 纸本原稿仍须戴手套；\n   - 其他非练习用的复印件也仍须戴手套；\n   - 外借任何纸本的登记规定未放宽。\n\n2. **现在不再适用的原因**：\n   - **明确的时间限定**：该安排被声明为“只在本次公开课期间”有效。\n   - **状态已变更**：材料记录显示，随着公开课结束，该临时安排已被正式撤回，并恢复了通常阅览规则（即纸本原稿与复印件在室内阅览均须戴手套）。\n   - **当前时间已超出有效范围**：查询时间为2032年6月3日，已远晚于该临时规定的适用期及撤回时间点。在无其他活跃例外或覆盖规则的情况下，该临时豁免已失效，因此不再适用，须执行常规戴手套规定。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "数字副本室内阅览和外借纸本的规定分别是什么，有变化吗？",
+              "hypothesis": "\n\n根据提供的记忆材料，截至提问时间（2032年6月3日09:00:00）：\n\n**1. 现行规定**\n* **数字副本室内阅览**：不用戴手套。（依据来源 s0）\n* **外借纸本**：外借任何纸本都须登记。（依据来源 s0）\n\n**2. 是否有变化**\n* **数字副本与外借规定**：这两项核心规则自初始报告起未发生永久性变更，外借登记要求始终明确“没有放宽”。\n* **临时调整与撤回**：针对室内阅览的“戴手套”要求，曾有一项临时例外。在过往某次“公开课”期间，供学员练习的复印件允许不戴手套。但该临时安排已于2026年10月15日随公开课结束而被正式撤回，并恢复通常阅览规则。该例外仅针对练习复印件，不涉及数字副本，也不涉及外借规定。\n\n**结论**：目前的规定未发生实质性变化。数字副本室内阅览仍为“不用戴手套”，外借纸本仍为“须登记”；过往针对练习复印件的免手套临时安排已失效，不影响上述两项规定的现行适用状态。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 14617,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "Y01": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "current",
+              "kind": "current_scope",
+              "question": "公开课结束后，练习复印件和纸本原稿在室内阅览分别要戴手套吗？",
+              "hypothesis": "\n\n根据记忆材料中的信息：\n- **通常阅览规则**规定：纸本原稿与复印件在室内阅览均戴手套。\n- **临时安排变更**：材料中明确记录“公开课结束，刚才练习复印件免戴手套的临时安排撤回。恢复通常阅览规则。”\n\n因此，在公开课结束后，**练习复印件和纸本原稿在室内阅览时均需要戴手套**。",
+              "reader_failure": null
+            },
+            {
+              "id": "withdrawn",
+              "kind": "history_explanation",
+              "question": "公开课期间曾有什么免戴手套安排，为什么现在不再适用？",
+              "hypothesis": "\n\n根据交付的记忆材料，回答如下：\n\n1. **公开课期间的免戴手套安排**：仅在本次公开课期间，**供学员练习的复印件可不戴手套**（但纸本原稿与其他复印件仍须戴手套，外借登记规定亦未放宽）。\n2. **现在不再适用的原因**：该安排明确为临时性例外。由于**公开课已结束**，此项针对练习复印件的免戴手套临时安排已被正式撤回，档案室已**恢复通常阅览规则**（即纸本原稿与复印件在室内阅览均须戴手套）。\n\n以上结论严格依据记忆中的源记录（s2 说明临时安排的范围与限制，s0 说明安排撤回及规则恢复的事实）得出。当前查询时间（2032-06-03）下，该临时豁免已失效，适用常规佩戴要求。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "数字副本室内阅览和外借纸本的规定分别是什么，有变化吗？",
+              "hypothesis": "\n\n根据提供的记忆资料，规定及变化情况如下：\n\n1. **数字副本室内阅览规定**：室内阅览数字副本**不用戴手套**。（注：纸本原稿与复印件在室内阅览均须戴手套。）\n2. **外借纸本规定**：**外借任何纸本都须登记**。\n\n**是否有变化**：\n资料中仅提及在特定“公开课期间”曾有过一项临时例外安排（供学员练习的复印件免戴手套），但该安排已随公开课结束被明确**撤回**，且外借登记规定在此期间也明确表示**“没有放宽”**。随后已确认**“恢复通常阅览规则”**。因此，依据记忆记录的时间线，数字副本阅览与外借纸本的**规定本身未发生变化**，仍维持上述通常标准。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 11962,
+                "unknown_usage_responses": 0
+              },
+              "evidence_selection": {
+                "responses": 3,
+                "known_tokens": 14220,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "Y10": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "current",
+              "kind": "current_scope",
+              "question": "公开课结束后，练习复印件和纸本原稿在室内阅览分别要戴手套吗？",
+              "hypothesis": "\n\n根据记忆材料中的报告记录：\n- **练习复印件**：公开课期间供学员练习免戴手套的临时安排已撤回，恢复通常阅览规则。\n- **纸本原稿**：适用通常阅览规则。\n\n依据通常阅览规则，**纸本原稿与复印件在室内阅览均戴手套**。因此，练习复印件和纸本原稿在室内阅览分别均需要戴手套。",
+              "reader_failure": null
+            },
+            {
+              "id": "withdrawn",
+              "kind": "history_explanation",
+              "question": "公开课期间曾有什么免戴手套安排，为什么现在不再适用？",
+              "hypothesis": "\n\n根据提供的记录内容（基于公开用户消息 s0、s1、s2 的报告）：\n\n- **公开课期间的免戴手套安排**：在公开课期间，**供学员练习的复印件可不戴手套**。该安排为局部例外，仅限本次公开课及学员练习用途的复印件；纸本原稿与其他复印件在室内阅览仍须戴手套。\n- **现在不再适用的原因**：该安排明确限定为**“只在本次公开课期间”**有效的临时规定。由于**公开课已经结束**，该临时豁免已按规定撤回，阅览室规则已恢复为通常标准（即纸本原稿与复印件室内阅览均须戴手套）。\n\n（注：相关安排及撤回说明均见于2026年10月15日的公开通报；记录未提供该免戴手套安排是否会在其他课程或条件下重新启用的信息。）",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "数字副本室内阅览和外借纸本的规定分别是什么，有变化吗？",
+              "hypothesis": "\n\n根据提供的材料，截至提问时间（2032年6月3日，09:00:00）的相关规定及演变如下：\n\n**当前适用规定**\n- **数字副本室内阅览**：不用戴手套。\n- **外借纸本**：外借任何纸本都须登记。\n\n**规定是否有变化（Chronological Evolution）**\n有临时性调整，但截至提问时间已恢复为通常规则。根据用户消息记录的先后顺序：\n1. **通常规则**（2032年6月1日报告提出）：室内阅览时，纸本原稿与复印件均戴手套，数字副本不用戴；外借任何纸本都须登记。\n2. **临时调整**（2032年6月2日用户报告）：仅在“本次公开课期间”，供学员练习的复印件可暂免戴手套；纸本原稿仍须戴手套，其他复印件也仍须戴；外借登记规定明确没有放宽。\n3. **恢复常态**（2032年6月3日用户报告，即提问当日）：公开课已结束，此前“练习复印件免戴手套”的临时安排已撤回，通常阅览规则恢复。\n\n**结论**\n在当前的时间点上，数字副本室内阅览仍无需戴手套，外借纸本仍须登记，临时性例外已失效。材料中仅记录了2032年6月1日至3日的规则变动节点，未提供该“公开课”的具体起止日期或其他未提及的例外条件。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 15137,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "Y11": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "current",
+              "kind": "current_scope",
+              "question": "公开课结束后，练习复印件和纸本原稿在室内阅览分别要戴手套吗？",
+              "hypothesis": "\n\n根据提供的资料，关于公开课结束后的室内阅览规则，声明如下：\n\n1.  **练习复印件**：公开课结束后，免戴手套的临时安排已撤回，需恢复通常阅览规则，即**需要戴手套**。\n2.  **纸本原稿**：在室内阅览**需要戴手套**。\n\n通常阅览规则规定：纸艺档案室中，纸本原稿与复印件在室内阅览均须戴手套。",
+              "reader_failure": null
+            },
+            {
+              "id": "withdrawn",
+              "kind": "history_explanation",
+              "question": "公开课期间曾有什么免戴手套安排，为什么现在不再适用？",
+              "hypothesis": "\n\n根据提供的资料记录：\n\n1. **曾有的安排**：仅在本次公开课期间，供学员练习的复印件可不戴手套。该安排有明确限定条件：纸本原稿仍须戴手套，其他复印件也仍须戴手套，且外借登记规定并未放宽。（报告来源：s2）\n2. **不再适用的原因**：因公开课已结束，该临时安排已被撤回，现已恢复通常阅览规则。（报告来源：s0）\n\n综上，该免戴手套规定仅为特定公开课期间的临时例外，随课程结束及临时规定的撤回而失效，不再适用。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "数字副本室内阅览和外借纸本的规定分别是什么，有变化吗？",
+              "hypothesis": "\n\n根据提供的档案记录（公开用户消息）显示：\n\n1. **数字副本室内阅览规定**：通常室内阅览时**不用戴手套**。\n2. **外借纸本规定**：外借任何纸本（含原稿与复印件）均**须登记**。\n3. **是否有变化**：在之前的公开课期间，曾短暂实行过“供学员练习的复印件可不戴手套”的临时安排。该临时豁免已于公开课结束后（记录时间为2032年6月3日）正式撤回，并恢复通常阅览规则。此项临时安排**仅适用于练习用复印件**，并未涉及数字副本阅览与纸本外借。因此，就您询问的“数字副本室内阅览”与“外借纸本登记”这两项规定而言，自始至终**均未发生变化**。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 11231,
+                "unknown_usage_responses": 0
+              },
+              "evidence_selection": {
+                "responses": 3,
+                "known_tokens": 18558,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        }
+      }
+    },
+    "alternative-support": {
+      "seed_records": 1,
+      "seed_costs": {
+        "stages": {
+          "maintenance": {
+            "responses": 1,
+            "known_tokens": 6124,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "updates": {
+        "U0": {
+          "maintenance_status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_SUPPORT_ROUTE_INVALID"
+            }
+          ],
+          "before_revisions": {
+            "5a3ac487-a8aa-561f-9665-6718bdf2c062": 1
+          },
+          "after_revisions": {
+            "5a3ac487-a8aa-561f-9665-6718bdf2c062": 1
+          },
+          "after_units": [
+            "移动放映车开投影可以用接通的市电，或者有电的电池，任选一种供电",
+            "两种方式都必须有冷却风扇运转",
+            "今天市电接通、电池有电、风扇正常，所以投影可开。",
+            "字幕屏单独用小电池，不依赖这套风扇。"
+          ],
+          "costs": {
+            "stages": {
+              "maintenance": {
+                "responses": 1,
+                "known_tokens": 11553,
+                "unknown_usage_responses": 0
+              },
+              "embedding": {
+                "responses": 2,
+                "known_tokens": 229,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "U1": {
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "before_revisions": {
+            "5a3ac487-a8aa-561f-9665-6718bdf2c062": 1
+          },
+          "after_revisions": {
+            "5a3ac487-a8aa-561f-9665-6718bdf2c062": 2
+          },
+          "after_units": [
+            "移动放映车开投影可以用接通的市电，或者有电的电池，任选一种供电",
+            "两种方式都必须有冷却风扇运转",
+            "今天市电接通、电池有电、风扇正常，所以投影可开。",
+            "字幕屏单独用小电池，不依赖这套风扇。",
+            "市电插座停用，车上的大电池仍有电、风扇仍正常，投影改走电池供电。字幕屏不受影响。"
+          ],
+          "costs": {
+            "stages": {
+              "impact": {
+                "responses": 1,
+                "known_tokens": 4845,
+                "unknown_usage_responses": 0
+              },
+              "maintenance": {
+                "responses": 1,
+                "known_tokens": 9748,
+                "unknown_usage_responses": 0
+              },
+              "embedding": {
+                "responses": 2,
+                "known_tokens": 229,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        }
+      },
+      "cells": {
+        "Y00": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "remaining-route",
+              "kind": "alternative_support",
+              "question": "市电插座停用后，投影还能开吗，依靠哪些条件？",
+              "hypothesis": "\n\n根据提供的记忆材料（报告与观察记录），市电插座停用后，投影**仍然可以开启**。其运行主要依靠以下条件：\n\n1. **电力来源切换**：依靠车上的大电池供电。材料明确报告，当市电插座停用时，投影会改走电池供电。\n2. **散热条件**：冷却风扇必须保持正常/运转。材料指出，无论采用市电还是电池供电，两种方式都必须有冷却风扇运转。\n\n综上，在市电停用后，只要满足**“车上大电池仍有电”**且**“冷却风扇正常运转”**这两个条件，投影即可依靠电池继续开启运行。\n（注：材料同时说明，字幕屏单独使用小电池供电，不依赖该风扇系统。）",
+              "reader_failure": null
+            },
+            {
+              "id": "shared-condition",
+              "kind": "required_premise",
+              "question": "按当前规程，如果大电池有电但冷却风扇不转，能开投影吗？",
+              "hypothesis": "\n\n根据记忆中的规程信息，移动放映车开投影虽然可以使用接通的市电或有电的电池任选一种供电，但明确规定**两种方式都必须有冷却风扇运转**。因此，在冷却风扇不转的情况下，即使大电池有电，也**不能开投影**。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "字幕屏受市电停用影响吗，它依赖投影的冷却风扇吗？",
+              "hypothesis": "\n\n根据当前提供的记忆材料，针对您的两个问题作答如下：\n\n1. **字幕屏受市电停用影响吗？** \n   根据用户 `s1` 的明确陈述（报告状态）：在市电插座停用、投影改由车上的大电池供电时，**“字幕屏不受影响”**。\n\n2. **它依赖投影的冷却风扇吗？**\n   根据用户 `s0` 的明确陈述（报告状态）：字幕屏**“单独用小电池，不依赖这套风扇”**。\n\n**结论**：依据记忆中的记录，字幕屏既不受市电停用影响，也不依赖投影的冷却风扇。以上结论均直接引自用户 `s0` 与 `s1` 的明确陈述，未包含推论或外部假设。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 10757,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "Y01": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "remaining-route",
+              "kind": "alternative_support",
+              "question": "市电插座停用后，投影还能开吗，依靠哪些条件？",
+              "hypothesis": "\n\n根据记忆材料记载，市电插座停用后，投影**可以**继续开启。其依赖条件如下：\n\n1. **切换为电池供电**：投影需改由车上仍有电的大电池供电。材料中的特定场景观测（s0）明确记载了“市电插座停用……车上的大电池仍有电……投影改走电池供电”；通用规则（s1）也指出“可以用接通的市电，或者有电的电池，任选一种供电”。\n2. **冷却风扇必须正常运转**：材料明确报告“两种方式都必须有冷却风扇运转”（s1）。因此，无论采用市电还是电池供电，风扇保持正常工作均为开启投影的必要条件。\n\n**状态与依据说明**：\n- 该结论基于记忆中的**报告性规则**（s1）与**特定观测记录**（s0）。\n- 条件具有明确的依赖性：若电池无电或风扇停止运转，依据所述规则投影将无法开启。\n- 材料未提供市电停用后的其他替代供电方式、电池容量限制或风扇独立供电细节；超出上述明确条件的情况无法从已交付材料中确定。",
+              "reader_failure": null
+            },
+            {
+              "id": "shared-condition",
+              "kind": "required_premise",
+              "question": "按当前规程，如果大电池有电但冷却风扇不转，能开投影吗？",
+              "hypothesis": "\n\n不能。\n\n根据所述当前规程（来源s1的报告主张），移动放映车开启投影可任选接通的市电或有电的电池供电，但明确规定**“两种方式都必须有冷却风扇运转”**。因此，在冷却风扇不转的情况下，即使大电池有电，也违反了“风扇必须运转”的强制条件，按该规程**不能开投影**。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "字幕屏受市电停用影响吗，它依赖投影的冷却风扇吗？",
+              "hypothesis": "\n\n根据记忆材料中的报告记录：\n- **关于市电停用的影响**：材料（来源s1）明确指出“市电插座停用……字幕屏不受影响”。\n- **关于是否依赖投影冷却风扇**：材料（来源s0）明确指出“字幕屏单独用小电池，不依赖这套风扇”。\n\n综上，依据当前提供的材料，字幕屏由独立的小电池供电，既不受市电停用的影响，也不依赖投影的冷却风扇系统。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 9416,
+                "unknown_usage_responses": 0
+              },
+              "evidence_selection": {
+                "responses": 3,
+                "known_tokens": 11257,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "Y10": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "remaining-route",
+              "kind": "alternative_support",
+              "question": "市电插座停用后，投影还能开吗，依靠哪些条件？",
+              "hypothesis": "\n\n根据提供的记忆材料（均为用户报告与现场观测记录，适用对象为移动放映车），市电插座停用后投影的开启情况与依赖条件如下：\n\n* **能否开启**：可以开启。\n* **依靠条件**：\n  1. **供电切换**：必须改用车上的大电池供电，且该大电池**必须有电**。材料明确规则为“可用接通的市电，或者有电的电池，任选一种供电”。\n  2. **冷却风扇**：无论采用市电或电池供电，**都必须有冷却风扇运转**。因此投影开启的强制性条件之一是风扇仍保持正常。\n* **关联部件说明**：字幕屏单独使用小电池供电，不依赖上述供电线路与风扇系统，因此市电停用对其无影响。\n\n上述结论综合了来源s0（现场观测记录，报告于2032-06-02）与来源s1（用户报告的设备运行规则，报告于2032-06-01）。若车上大电池电量耗尽或冷却风扇停止运转，则投影无法按此规则开启。材料未提供其他备用电源或散热替代方案。",
+              "reader_failure": null
+            },
+            {
+              "id": "shared-condition",
+              "kind": "required_premise",
+              "question": "按当前规程，如果大电池有电但冷却风扇不转，能开投影吗？",
+              "hypothesis": "\n\n按当前规程，**不能**开投影。\n\n根据提供的资料中的当前规程明确指出：“移动放映车开投影可以用接通的市电，或者有电的电池，任选一种供电；**两种方式都必须有冷却风扇运转**。”因此，冷却风扇运转是开启投影的必要条件。在大电池有电但冷却风扇不转的情况下，不满足规程要求，无法开启投影。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "字幕屏受市电停用影响吗，它依赖投影的冷却风扇吗？",
+              "hypothesis": "\n\n根据提供的记忆材料记录，回答如下：\n\n1. **字幕屏受市电停用影响吗？**\n   **不受影响。** 来源声明明确指出“市电插座停用……字幕屏不受影响”。因为字幕屏采用独立的供电方式，不随主供电系统（市电或车载大电池）的状态而改变。\n\n2. **字幕屏依赖投影的冷却风扇吗？**\n   **不依赖。** 来源记录明确说明“字幕屏单独用小电池，不依赖这套风扇”。投影的冷却风扇仅用于投影系统（无论投影是接市电还是走电池供电，风扇都必须运转），但字幕屏有自己独立的小电池供电，与投影的散热风扇系统无关。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 14494,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "Y11": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "remaining-route",
+              "kind": "alternative_support",
+              "question": "市电插座停用后，投影还能开吗，依靠哪些条件？",
+              "hypothesis": "\n\n根据记忆材料，市电插座停用后，投影**仍可开启**。其依靠的条件如下：\n\n1. **电池供电正常**：投影需改由车上仍有电的大电池供电。依据规则报告（来源 s1），移动放映车开启投影可使用接通的市电或有电的电池，任选一种供电即可。\n2. **冷却风扇运转**：无论切换至市电还是电池供电，冷却风扇都必须保持正常运行。依据同一规则报告，此为两种供电方式下的共同必要条件。\n\n**状态与背景说明**：\n- 依据当前时间点（2032-06-02）的观察记录（来源 s0/规则修订 u2），在“市电插座停用”的具体场景下，只要满足上述条件（车上的大电池仍有电、风扇仍正常），投影即可成功改走电池供电运行。\n- 此外，字幕屏因单独使用小电池，不依赖该风扇与主供电系统，因此不受此次供电切换的影响。\n\n以上判断完全基于记忆库中“移动放映车供电与运行规则”的报告内容及对应时点的用户观察记录。",
+              "reader_failure": null
+            },
+            {
+              "id": "shared-condition",
+              "kind": "required_premise",
+              "question": "按当前规程，如果大电池有电但冷却风扇不转，能开投影吗？",
+              "hypothesis": "\n\n根据当前规程（记忆 `e1`），移动放映车开投影无论选择接通市电还是有电的电池供电，**两种方式都必须有冷却风扇运转**。\n\n因此，即使大电池有电，只要冷却风扇不转，就**不能**开启投影。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "字幕屏受市电停用影响吗，它依赖投影的冷却风扇吗？",
+              "hypothesis": "\n\n根据记忆资料中的明确声明：\n- **字幕屏受市电停用影响吗？** 不受影响。资料中明确指出“市电插座停用……字幕屏不受影响”。\n- **它依赖投影的冷却风扇吗？** 不依赖。资料明确说明“字幕屏单独用小电池，不依赖这套风扇”。\n\n综上，字幕屏依靠独立的小电池供电，因此既不受市电通断状态的影响，也不依赖投影系统的冷却风扇。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 11795,
+                "unknown_usage_responses": 0
+              },
+              "evidence_selection": {
+                "responses": 3,
+                "known_tokens": 13363,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        }
+      }
+    },
+    "shared-condition": {
+      "seed_records": 1,
+      "seed_costs": {
+        "stages": {
+          "maintenance": {
+            "responses": 1,
+            "known_tokens": 6779,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "updates": {
+        "U0": {
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "before_revisions": {
+            "165a1ba2-dd92-5120-bd68-f268109cedd4": 1
+          },
+          "after_revisions": {
+            "165a1ba2-dd92-5120-bd68-f268109cedd4": 2
+          },
+          "after_units": [
+            "湖边路线同时要求栈桥开放与向导到场。",
+            "屋顶路线只要求向导到场。",
+            "室内标本展示不依赖向导。",
+            "今天两项都满足，所以两条路线都能开展。",
+            "栈桥临时封闭，向导仍已到场。因此湖边路线暂停，屋顶路线可以继续；室内展示照常。"
+          ],
+          "costs": {
+            "stages": {
+              "maintenance": {
+                "responses": 1,
+                "known_tokens": 10458,
+                "unknown_usage_responses": 0
+              },
+              "embedding": {
+                "responses": 2,
+                "known_tokens": 180,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "U1": {
+          "maintenance_status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed"
+            }
+          ],
+          "before_revisions": {
+            "165a1ba2-dd92-5120-bd68-f268109cedd4": 1
+          },
+          "after_revisions": {
+            "165a1ba2-dd92-5120-bd68-f268109cedd4": 2
+          },
+          "after_units": [
+            "湖边路线同时要求栈桥开放与向导到场。",
+            "屋顶路线只要求向导到场。",
+            "室内标本展示不依赖向导。",
+            "栈桥临时封闭，向导仍已到场。因此湖边路线暂停，屋顶路线可以继续；室内展示照常。"
+          ],
+          "costs": {
+            "stages": {
+              "impact": {
+                "responses": 1,
+                "known_tokens": 2846,
+                "unknown_usage_responses": 0
+              },
+              "maintenance": {
+                "responses": 1,
+                "known_tokens": 11166,
+                "unknown_usage_responses": 0
+              },
+              "embedding": {
+                "responses": 2,
+                "known_tokens": 180,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        }
+      },
+      "cells": {
+        "Y00": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "current",
+              "kind": "derived_effect",
+              "question": "栈桥封闭但向导仍在场时，湖边和屋顶路线分别能否开展？",
+              "hypothesis": "\n\n根据记忆材料中来源 `s1`（标签 `e1`）的报告内容，当栈桥临时封闭而向导仍已到场时：\n- **湖边路线**：暂停（无法开展）。该路线规则上需同时满足栈桥开放与向导到场两个条件。\n- **屋顶路线**：可以继续（能够开展）。该路线规则上仅要求向导到场。\n\n（材料同时记载：室内标本展示不依赖向导，可照常进行。）\n\n以上结论严格基于所提供记忆材料的明确陈述，未引入外部推断。",
+              "reader_failure": null
+            },
+            {
+              "id": "prerequisite",
+              "kind": "shared_condition",
+              "question": "按当前规则，假如向导离开而栈桥重新开放，湖边和屋顶路线能开展吗？",
+              "hypothesis": "\n\n根据提供的记忆材料，该问题属于基于规则报告的条件逻辑推演。严格依据材料内容分析如下：\n\n**1. 当前规则依据（报告性质）**\n* 来源报告指出：`湖边路线同时要求栈桥开放与向导到场`（材料 `u0`）。\n* 来源报告指出：`屋顶路线只要求向导到场`（材料 `u1`）。\n* 上述规则为当前版本（revision 2）的语义视图保留断言，未标注失效日期或局部覆盖例外，视为当前适用的一般规则。\n\n**2. 条件代入与推演**\n假设情境为：**向导离开（即向导未到场）** 且 **栈桥重新开放（即栈桥已开放）**。\n* **湖边路线**：规则要求“栈桥开放 **且** “向导到场” 必须同时满足。该假设下栈桥条件已满足，但向导未到场，条件不复合，因此**不能开展**。\n* **屋顶路线**：规则仅要求“向导到场”。该假设下向导已离开，不满足该唯一条件，因此**不能开展**。\n\n**3. 结论**\n按当前规则，在“向导离开而栈桥重新开放”的假设条件下，**湖边路线与屋顶路线均无法开展**。\n（注：室内标本展示在规则中明确“不依赖向导”，故不受此向导离开条件影响，但问题未询问此项。）\n\n上述判断为基于报告规则的逻辑推演，未引入材料外的因果或建议。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "室内标本展示现在开放吗，是否依赖向导到场？",
+              "hypothesis": "\n\n根据提供的记忆材料，针对您的两个问题回答如下：\n\n* **室内标本展示现在开放吗？**\n  开放。记忆中的最新状态更新明确指出，在当日安排下“室内展示照常”。\n* **是否依赖向导到场？**\n  不依赖。材料中的活动规则明确报告“室内标本展示不依赖向导”。\n\n以上结论均基于源 `s0` 的初始规则说明与源 `s1` 的当日状态记录，适用于查询时间（2032年6月2日 09:00:00）。记忆材料中未包含其他限制条件或例外说明。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 16475,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "Y01": {
+          "complete_answers": 2,
+          "core_fact_correct": 2,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "current",
+              "kind": "derived_effect",
+              "question": "栈桥封闭但向导仍在场时，湖边和屋顶路线分别能否开展？",
+              "hypothesis": "\n\n根据交付记忆中的报告与规则说明，在**栈桥封闭但向导在场**的条件下：\n\n* **湖边路线**：**不能开展**（暂停）。来源明确该路线“同时要求栈桥开放与向导到场”，栈桥封闭时不满足必要条件，因此暂停。\n* **屋顶路线**：**可以开展**（继续）。来源明确该路线“只要求向导到场”，向导到场即满足条件，因此可以继续进行。\n\n上述结论基于2032年6月2日的当日情况记录与活动规则说明。记忆材料未提及该场景下的其他例外、不确定性或适用限制。",
+              "reader_failure": null
+            },
+            {
+              "id": "prerequisite",
+              "kind": "shared_condition",
+              "question": "按当前规则，假如向导离开而栈桥重新开放，湖边和屋顶路线能开展吗？",
+              "hypothesis": "\n\n根据记忆来源中报告的活动规则：\n- **湖边路线**：同时要求栈桥开放与向导到场。\n- **屋顶路线**：只要求向导到场。\n\n在假设“向导离开、栈桥重新开放”的条件下，按上述规则进行逻辑判定：\n- **湖边路线**：栈桥虽已重新开放，但向导未到场，不满足“同时要求”的双重条件，因此**不能开展**。\n- **屋顶路线**：仅依赖向导到场这一单一条件，因向导已离开，条件不满足，因此也**不能开展**。\n\n结论：在该假设情境下，两条路线均无法开展。\n（注：以上结论仅基于所交付来源中报告的活动规则推导，未引入外部信息或额外假设。）",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "室内标本展示现在开放吗，是否依赖向导到场？",
+              "hypothesis": null,
+              "reader_failure": {
+                "type": "ValueError",
+                "message": "Provider output incomplete: length",
+                "finish_reason": "length",
+                "phase": "confirmed_response",
+                "response_ref": "http/dependency-selection/http/questions/preserved/retrieval-materials.json/response.json",
+                "failure_ref": "http/dependency-selection/http/questions/preserved/retrieval-materials.json/failure.json"
+              }
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 2,
+                "known_tokens": 8916,
+                "unknown_usage_responses": 0
+              },
+              "evidence_selection": {
+                "responses": 3,
+                "known_tokens": 21229,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "Y10": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "current",
+              "kind": "derived_effect",
+              "question": "栈桥封闭但向导仍在场时，湖边和屋顶路线分别能否开展？",
+              "hypothesis": "\n\n根据提供的记忆资料（e0、e1）中用户报告的规则与当日状态，判定如下：\n\n* **规则基础（源s0/e0报告）**：\n  * **湖边路线**：需同时满足“栈桥开放”与“向导到场”。\n  * **屋顶路线**：仅需满足“向导到场”。\n\n* **当日条件（源s1/e1于2032-06-02 09:00:00 Asia/Shanghai报告观察）**：栈桥临时封闭，向导已到场。\n\n* **分别能否开展**：\n  * **湖边路线**：不满足“栈桥开放”的强制条件，**不能开展（暂停）**。\n  * **屋顶路线**：满足“向导到场”的唯一条件，**可以开展（继续）**。\n\n该结论为基于源s0规则与源s1当日观察的直接推断。资料未显示该时间点存在局部覆盖、规则修正或有效例外，故依既定条件判定。",
+              "reader_failure": null
+            },
+            {
+              "id": "prerequisite",
+              "kind": "shared_condition",
+              "question": "按当前规则，假如向导离开而栈桥重新开放，湖边和屋顶路线能开展吗？",
+              "hypothesis": "\n\n根据已记录来源陈述的规则，按您设定的条件（向导离开/不在场，栈桥开放）推演如下：\n\n* **湖边路线**：规则要求“栈桥开放与向导到场”同时满足。在栈桥已开放但向导离开的情况下，条件未同时达成，因此**不能开展**。\n* **屋顶路线**：规则要求“只要求向导到场”。在向导离开的情况下，前提条件不满足，因此**同样不能开展**。\n\n综上，按当前规则与所设条件，湖边路线与屋顶路线均无法开展。室内标本展示不依赖向导，可照常进行（若未受其他条件限制）。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "室内标本展示现在开放吗，是否依赖向导到场？",
+              "hypothesis": "\n\n根据提供的源历史记录（报告于2032-06-02T09:00:00+08:00）：\n- **开放状态**：室内标本展示照常开放。\n- **向导依赖**：室内标本展示不依赖向导到场。\n\n以上结论均直接引自记忆中的明确陈述，无附加条件或不确定性。",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 14099,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        },
+        "Y11": {
+          "complete_answers": 3,
+          "core_fact_correct": 3,
+          "opportunities": 3,
+          "record_values_unchanged": true,
+          "answers": [
+            {
+              "id": "current",
+              "kind": "derived_effect",
+              "question": "栈桥封闭但向导仍在场时，湖边和屋顶路线分别能否开展？",
+              "hypothesis": "\n\n根据提供的记忆材料（报告来源 s1，标签 e1，当前快照版本）中的明确报告与推断：\n\n- **湖边路线**：**暂停开展**。记忆报告指出，该路线“同时要求栈桥开放与向导到场”；在栈桥临时封闭的条件下，即使向导仍在场也不满足全部前提，因此该路线暂停。\n- **屋顶路线**：**可以继续开展**。记忆报告指出，该路线“只要求向导到场”；在向导在场的条件下已满足要求，因此该路线可以继续。\n\n上述结论为记忆片段中的直接报告与逻辑推断。材料未列明其他冲突规则、时间限制或本地例外，依据当前所交付信息可直接得出上述判断。需注意，此为记录中的报告与推断状态，未经验证为绝对事实，实际活动安排应以现场最新状态及最新管理规定为准。",
+              "reader_failure": null
+            },
+            {
+              "id": "prerequisite",
+              "kind": "shared_condition",
+              "question": "按当前规则，假如向导离开而栈桥重新开放，湖边和屋顶路线能开展吗？",
+              "hypothesis": "\n\n根据记忆中的规则记录：\n- **湖边路线**需同时满足“栈桥开放”与“向导到场”两项条件。在您假设的情境中（栈桥重新开放，但向导离开），因缺少向导到场，不满足规则，该路线不能开展。\n- **屋顶路线**仅要求“向导到场”。在向导离开的情况下，不满足规则，该路线同样不能开展。\n\n综上，按当前规则，两条路线均无法开展。",
+              "reader_failure": null
+            },
+            {
+              "id": "preserved",
+              "kind": "non_target",
+              "question": "室内标本展示现在开放吗，是否依赖向导到场？",
+              "hypothesis": "\n\n根据提供的记忆材料：\n\n- **是否开放**：是。根据2032年6月2日09:00的报告/观察信息，室内标本展示状态为“照常”，即目前处于开放状态。\n- **是否依赖向导**：否。材料中的活动规则明确说明“室内标本展示不依赖向导”，因此其开放与运转不取决于向导是否到场。\n\n（注：以上结论完全基于所交付记忆文本中的当日状态报告与规则说明。）",
+              "reader_failure": null
+            }
+          ],
+          "costs": {
+            "stages": {
+              "reader": {
+                "responses": 3,
+                "known_tokens": 14542,
+                "unknown_usage_responses": 0
+              },
+              "evidence_selection": {
+                "responses": 3,
+                "known_tokens": 13829,
+                "unknown_usage_responses": 0
+              }
+            },
+            "requests_without_response": [],
+            "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+          }
+        }
+      }
+    }
+  },
+  "reviewer": "same source author/developer; complete36attempts reviewed, not independent/blind or official HaluMem scores",
+  "core_answer_counts": {
+    "Y00": 9,
+    "Y01": 8,
+    "Y10": 9,
+    "Y11": 9
+  },
+  "opportunities_per_cell": 9,
+  "all_attempt_interaction": 0.1111111111111111,
+  "conditional_on_complete_answers_interaction": 0.0,
+  "interaction_interpretation": "the nonzero all-attempt difference is one selector-length missing answer inY01; all35completed answers cover core reference facts, not evidence of semantic synergy",
+  "state_review": {
+    "exception-withdrawal": {
+      "U0": "failed duplicate remove_exception, state staysr2",
+      "U1": "failed group removal on deleted base units, state staysr2",
+      "both": "raw cancellation Source enables correct core QA despite rejected state update; original failures retained"
+    },
+    "alternative-support": {
+      "U0": "invalid support route rejects update; source still gives current battery route",
+      "U1": "battery route/status appended, both conditions and subtitle independence retained",
+      "graph": "OR maintained in text, no explicit alternative group in this case"
+    },
+    "shared-condition": {
+      "U0": "updated facts appended while old today-status retained with its source clock",
+      "U1": "old status replaced; base rules and indoor independence retained",
+      "graph": "both group a compound observation/outcome under only rule units; observed factual premises are inside target text, so a clean sufficient-premise graph test is not established"
+    }
+  },
+  "source_issues": [
+    {
+      "case": "exception-withdrawal",
+      "cell": "Y00",
+      "query": "withdrawn",
+      "issue": "saysquery far later than exception/withdrawal despite unknown exact dates"
+    },
+    {
+      "case": "exception-withdrawal",
+      "cell": "Y00",
+      "query": "preserved",
+      "issue": "assigns withdrawal to2026 capture date"
+    },
+    {
+      "case": "exception-withdrawal",
+      "cell": "Y10",
+      "query": "withdrawn",
+      "issue": "assigns reports to2026 rather than2032"
+    },
+    {
+      "case": "exception-withdrawal",
+      "cell": "Y10",
+      "query": "preserved",
+      "issue": "opening says there was temporary change although requested digital/loan rules did not change; later chronology clarifies other rule"
+    },
+    {
+      "case": "alternative-support",
+      "cell": "Y10",
+      "query": "remaining-route",
+      "issue": "describes user report as an onsite observation record without that evidential basis being supplied"
+    },
+    {
+      "case": "alternative-support",
+      "cell": "Y10",
+      "query": "preserved",
+      "issue": "says fan is used only for projection; source establishes subtitle independence, not exclusive fan function"
+    },
+    {
+      "case": "shared-condition",
+      "cell": "Y10",
+      "query": "preserved",
+      "issue": "attributes both opening status and independence rule toJune2 report; independence rule was originallyJune1"
+    }
+  ],
+  "costs": {
+    "maintenance": {
+      "responses": 10,
+      "known_tokens": 86284,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "responses": 14,
+      "known_tokens": 1571,
+      "unknown_usage": 0
+    },
+    "impact": {
+      "responses": 3,
+      "known_tokens": 12408,
+      "unknown_usage": 0
+    },
+    "reader": {
+      "responses": 35,
+      "known_tokens": 153441,
+      "unknown_usage": 0
+    },
+    "evidence_selection": {
+      "responses": 18,
+      "known_tokens": 92456,
+      "unknown_usage": 0
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 66,
+    "generation": {
+      "known_tokens": 344589,
+      "charged_tokens": 344589,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 1571,
+      "charged_tokens": 1571,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens_match": true,
+    "generation_requests_match": true,
+    "embedding_tokens_match": true
+  },
+  "limits": [
+    "3development cases/one run",
+    "shared seed/update costs, not4independent lifecycles",
+    "core fact coverage is weaker than fully faithful answers",
+    "many original update failures; repaired symmetric repeats separate"
+  ],
+  "history_selection_limit": "Fixed-history pool in this frozen version retains all old-version candidates after R1 selection, so history_revisions does not prune them. Current-unit/support selection differs, but complete history-selection contribution is not isolated. Future implementation honors the selection; original data unchanged."
+}

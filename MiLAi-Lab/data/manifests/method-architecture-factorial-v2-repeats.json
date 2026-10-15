@@ -1,0 +1,22 @@
+{
+  "status": "TWO_SYMMETRIC_REPEATS_RUNNING",
+  "source_commit": "5734ade2",
+  "source_snapshot": "artifacts/method-architecture/factorial-source-v2/MiLAi-Lab",
+  "driver": "artifacts/method-architecture/factorial-v2-driver.json",
+  "exec_session": 49873,
+  "driver_pid": 767706,
+  "active_repeat2_pid": 839224,
+  "configs": [
+    "configs/milai-method-architecture-factorial-v2-r1.json",
+    "configs/milai-method-architecture-factorial-v2-r2.json"
+  ],
+  "same_original_seed_and_arrival": true,
+  "new_seed_generation": 0,
+  "new_arrival_capture": 0,
+  "old_http_copied": false,
+  "shared_seed_costs": "original cost paid once; reused seed receipts are references only",
+  "repeat1": "EXIT0,36/36answers; exception-withdrawalU0/U1 both committed; shared-conditionU0 invalid support route retained",
+  "limitation": "these frozen repeats retain the original all-history candidate behavior; complete history-selection effect requires the later corrected delivery path",
+  "original_v1_untouched": true,
+  "unknown_retry": false
+}

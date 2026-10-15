@@ -259,6 +259,14 @@ def test_fixed_history_pool_equalizes_versions_and_witnesses_without_future_leak
         assert [(p["record_id"], p["revision"]) for p in flat] == [
             (p["record_id"], p["revision"]) for p in directed]
         assert len(flat) == len(directed) == 2
+        # Availability is shared before selection. R1 may omit an old version;
+        # a fixed candidate pool must not force an unselected history body open.
+        current_only = decode_dependency_reads(request, {
+            "r0": {"roots": [0], "excluded": [], "history_revisions": []}})
+        filtered = build_evidence_packs(service, "Current?", "2031-01-02", [], pool,
+                                        dependency_selections=current_only)
+        assert [p["revision"] for p in filtered] == [2]
+        assert [row["value"]["revision"] for row in pool] == [2, 1]
         for packs in (flat, directed):
             opened = open_evidence_packs(service, packs)
             body = json.dumps(project_packs(opened, [0, 1]))

@@ -3308,16 +3308,15 @@
     }
   },
   "qa_source_review": {
-    "status": "partial",
+    "status": "COMPLETE_ALL_FIRST_OUTPUTS_READ",
+    "reviewer": "same source author/developer; not independent or blind",
     "fully_read_cases": [
-      "method-screen-maps",
-      "method-screen-kiln"
-    ],
-    "remaining_cases": [
       "method-screen-archive",
       "method-screen-credits",
       "method-screen-exhibit",
       "method-screen-inventory",
+      "method-screen-kiln",
+      "method-screen-maps",
       "method-screen-parcel",
       "method-screen-projection",
       "method-screen-reservation",
@@ -3325,44 +3324,354 @@
       "method-screen-tickets",
       "method-screen-walk"
     ],
+    "complete_answers_reviewed": 91,
+    "missing_attempts_reviewed": 5,
+    "total_opportunities": 96,
     "issues": [
       {
-        "case": "method-screen-kiln",
+        "case": "method-screen-maps",
         "arm": "plain",
-        "qa_flat_index": 1,
-        "issue": "capture clock treated as 2026 knowledge cutoff despite explicit2032 reports"
+        "qa_flat_index": 2,
+        "tags": [
+          "minor_event_precision"
+        ],
+        "issue": "Describes June3 as label-posting day although source only reports labels already ready by then; core relocation answer correct."
+      },
+      {
+        "case": "method-screen-maps",
+        "arm": "candidate",
+        "qa_flat_index": 2,
+        "tags": [
+          "minor_event_precision"
+        ],
+        "issue": "Same label-posting-date strengthening; core answer correct, original Judge invalid retained."
       },
       {
         "case": "method-screen-kiln",
         "arm": "plain",
-        "qa_flat_index": 3,
-        "issue": "unsupported June2 start date attributed to key rule"
+        "qa_flat_index": 1,
+        "tags": [
+          "capture_report_clock",
+          "unwarranted_cutoff"
+        ],
+        "issue": "Uses2026 capture date as report/knowledge cutoff despite2032 reports being delivered; core keeper/front-desk facts correct."
       },
       {
         "case": "method-screen-kiln",
         "arm": "candidate",
         "qa_flat_index": 1,
-        "issue": "capture clock treated as report/cutoff date"
+        "tags": [
+          "capture_report_clock",
+          "unwarranted_cutoff"
+        ],
+        "issue": "Uses2026 capture date as report/knowledge cutoff despite2032 reports being delivered; core keeper/front-desk facts correct."
+      },
+      {
+        "case": "method-screen-kiln",
+        "arm": "plain",
+        "qa_flat_index": 3,
+        "tags": [
+          "unsupported_effective_date"
+        ],
+        "issue": "Attributes a June2 effective start to the key non-transfer rule, inheriting incorrect state metadata."
       },
       {
         "case": "method-screen-kiln",
         "arm": "candidate",
         "qa_flat_index": 2,
-        "issue": "wrong current Xia instead of Qiao; all3originalSources including the update are actually delivered, opened and resident"
+        "tags": [
+          "wrong_current_value",
+          "wrong_report_date"
+        ],
+        "issue": "Answers Xia instead of Qiao and dates record nearJune1. All3original Sources, including the actual Qiao update, were candidates, opened and resident. Output matches stale state/old report; this single output does not identify which caused the error."
       },
       {
         "case": "method-screen-kiln",
         "arm": "candidate",
         "qa_flat_index": 3,
-        "issue": "report/observation date incorrectly collapsed to2026 and adds unjustified uncertainty"
+        "tags": [
+          "capture_report_clock",
+          "unwarranted_cutoff"
+        ],
+        "issue": "Treats2026 capture as observation/report clock and adds an unjustified gap to2032."
+      },
+      {
+        "case": "method-screen-archive",
+        "arm": "plain",
+        "qa_flat_index": 0,
+        "tags": [
+          "capture_report_clock",
+          "unwarranted_cutoff"
+        ],
+        "issue": "Wrong2026 report date contributes to unnecessary uncertainty about current class exemption."
+      },
+      {
+        "case": "method-screen-archive",
+        "arm": "plain",
+        "qa_flat_index": 2,
+        "tags": [
+          "report_to_event_date"
+        ],
+        "issue": "IdentifiesJune3 report as the actual class day; exact class-end date was not stated."
+      },
+      {
+        "case": "method-screen-archive",
+        "arm": "plain",
+        "qa_flat_index": 3,
+        "tags": [
+          "report_to_event_date"
+        ],
+        "issue": "States class ended onJune3, rather than merely being reported ended then."
+      },
+      {
+        "case": "method-screen-archive",
+        "arm": "candidate",
+        "qa_flat_index": 3,
+        "tags": [
+          "capture_event_clock"
+        ],
+        "issue": "Says temporary exemption was in2026 and revoked2026-10-15, confusing capture with event/report time."
+      },
+      {
+        "case": "method-screen-studio",
+        "arm": "plain",
+        "qa_flat_index": 3,
+        "tags": [
+          "over_refusal"
+        ],
+        "issue": "Correct cable rule is given but answer refuses to say whether it changed within the delivered history; first Omission retained."
+      },
+      {
+        "case": "method-screen-studio",
+        "arm": "candidate",
+        "qa_flat_index": 1,
+        "tags": [
+          "support_attribution",
+          "over_refusal"
+        ],
+        "issue": "Says both the general rule and Friday notice explicitly allow headphones, though Friday notice does not state that; also denies availability of other-date general rules that are actually supplied."
+      },
+      {
+        "case": "method-screen-tickets",
+        "arm": "plain",
+        "qa_flat_index": 0,
+        "tags": [
+          "capture_report_clock",
+          "over_refusal"
+        ],
+        "issue": "Wrong2026 cutoff causes refusal on current invitation/booking eligibility; first Hallucination retained."
+      },
+      {
+        "case": "method-screen-tickets",
+        "arm": "candidate",
+        "qa_flat_index": 2,
+        "tags": [
+          "wrong_report_date",
+          "support_attribution"
+        ],
+        "issue": "Assigns both base rules and old card expiry toJune3, while their source reports areJune1 andJune2."
+      },
+      {
+        "case": "method-screen-projection",
+        "arm": "candidate",
+        "qa_flat_index": 2,
+        "tags": [
+          "observation_strengthening",
+          "unsupported_mechanism"
+        ],
+        "issue": "Calls the user report an explicit observation and says equipment cannot start; source gives a cooling requirement/cannot-operate rule, not a demonstrated hardware interlock."
+      },
+      {
+        "case": "method-screen-projection",
+        "arm": "candidate",
+        "qa_flat_index": 3,
+        "tags": [
+          "report_to_event_date"
+        ],
+        "issue": "Uses source report timestamps as occurrence dates, although the fan-stop onset was only described as subsequent."
+      },
+      {
+        "case": "method-screen-walk",
+        "arm": "plain",
+        "qa_flat_index": 3,
+        "tags": [
+          "capture_report_clock",
+          "chronology_error"
+        ],
+        "issue": "Calls theJune3 continued-opening report an earlier2026 record and aJune2 record the latest."
+      },
+      {
+        "case": "method-screen-walk",
+        "arm": "candidate",
+        "qa_flat_index": 3,
+        "tags": [
+          "capture_report_clock",
+          "judge_core_disagreement"
+        ],
+        "issue": "Core answer explicitly says open, but first label is Omission; report date incorrectly given as2026. Preserve both the label and this separate source assessment."
+      },
+      {
+        "case": "method-screen-exhibit",
+        "arm": "plain",
+        "qa_flat_index": 3,
+        "tags": [
+          "capture_report_clock",
+          "over_refusal"
+        ],
+        "issue": "Wrong2026-only cutoff causes refusal to identify repaired curtain and open catalog despite explicit2032 reports."
+      },
+      {
+        "case": "method-screen-inventory",
+        "arm": "plain",
+        "qa_flat_index": 1,
+        "tags": [
+          "capture_report_clock",
+          "unsupported_initial_date"
+        ],
+        "issue": "Dates correction report to2026 and suppliesJune1 as initial-inventory date, which is not stated as the inventory onset."
+      },
+      {
+        "case": "method-screen-inventory",
+        "arm": "plain",
+        "qa_flat_index": 2,
+        "tags": [
+          "capture_report_clock"
+        ],
+        "issue": "Dates initial hand-copy entry to2026; core15/17 arithmetic is correct."
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "plain",
+        "qa_flat_index": 0,
+        "tags": [
+          "source_speaker_or_document_attribution"
+        ],
+        "issue": "Treats the user report about the author/signature page as a direct author/page statement. In q0, “I misheard” is wrongly attributed to the author rather than the reporting user."
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "plain",
+        "qa_flat_index": 1,
+        "tags": [
+          "source_speaker_or_document_attribution"
+        ],
+        "issue": "Treats the user report about the author/signature page as a direct author/page statement. In q0, “I misheard” is wrongly attributed to the author rather than the reporting user."
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "plain",
+        "qa_flat_index": 3,
+        "tags": [
+          "source_speaker_or_document_attribution"
+        ],
+        "issue": "Treats the user report about the author/signature page as a direct author/page statement. In q0, “I misheard” is wrongly attributed to the author rather than the reporting user."
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "plain",
+        "qa_flat_index": 2,
+        "tags": [
+          "source_speaker_or_document_attribution",
+          "capture_report_clock",
+          "over_refusal"
+        ],
+        "issue": "Core no-invitation/not-translator answer correct, but presents indirect page report as direct evidence and adds2026 cutoff."
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "candidate",
+        "qa_flat_index": 0,
+        "tags": [
+          "source_speaker_or_document_attribution",
+          "capture_report_clock"
+        ],
+        "issue": "Treats source as author-sent signed-page statement rather than user report; correction date incorrectly2026."
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "candidate",
+        "qa_flat_index": 1,
+        "tags": [
+          "source_speaker_or_document_attribution"
+        ],
+        "issue": "Attributes unchanged composer/other translator to direct author confirmation rather than the supplied user account."
+      },
+      {
+        "case": "method-screen-credits",
+        "arm": "candidate",
+        "qa_flat_index": 2,
+        "tags": [
+          "source_speaker_or_document_attribution",
+          "capture_report_clock",
+          "over_refusal"
+        ],
+        "issue": "Core tentative invitation and corrected translator facts correct; adds false2026 cutoff and promotes indirect source attribution."
+      },
+      {
+        "case": "method-screen-reservation",
+        "arm": "plain",
+        "qa_flat_index": 0,
+        "tags": [
+          "capture_report_clock",
+          "over_refusal"
+        ],
+        "issue": "Wrong2026 cutoff adds uncertainty beyond delivered2032 undecided proposal."
+      },
+      {
+        "case": "method-screen-parcel",
+        "arm": "plain",
+        "qa_flat_index": 0,
+        "tags": [
+          "capture_report_clock",
+          "over_refusal"
+        ],
+        "issue": "Wrong2026 cutoff obscures currently unconfirmed new pickup/date."
+      },
+      {
+        "case": "method-screen-parcel",
+        "arm": "candidate",
+        "qa_flat_index": 3,
+        "tags": [
+          "capture_report_clock",
+          "source_speaker_attribution",
+          "over_refusal"
+        ],
+        "issue": "Collapses report/capture clocks into2026, says claims occurred then, and labels the reporting user organizer; actual current source is a user account of the shop-owner statement."
       }
     ],
-    "official_labels_unchanged": true
+    "official_labels_unchanged": true,
+    "new_judge_calls": 0,
+    "new_corrected_accuracy": null,
+    "scope": "Full text inspected symmetrically. Notes list substantive clock, attribution, unsupported inference and refusal problems; unflagged outputs are not certified external-world truth.",
+    "invalid_core_review": {
+      "plain": {
+        "studio:2": "core matches reference",
+        "credits:0": "core matches reference; attribution issue remains",
+        "parcel:1": "core matches reference",
+        "parcel:2": "core matches reference",
+        "parcel:3": "core matches reference"
+      },
+      "candidate": {
+        "maps:2": "core matches reference; minor timing precision issue remains"
+      }
+    },
+    "evidence_chain_case": {
+      "case": "method-screen-kiln",
+      "arm": "candidate",
+      "session": 2,
+      "qa": 0,
+      "available_originals": 3,
+      "opened_original_ranges": 3,
+      "final_resident_coverage_complete": true,
+      "needed_qiao_update_in_final_reader_input": true,
+      "answer": "Xia, incorrect",
+      "causal_conclusion": "source mix did not repair the wrong answer; no isolated causal attribution to stale semantic view from this single output"
+    }
   },
   "grammar_check": {
     "path": "existing-group-edit-grammar-canonical.stdout.json",
     "conclusion": "valid existing-group edits accepted in schema key order; initial unsorted JSON rejection is expected key-order restriction, not a newly demonstrated unavailable edit branch",
     "model_requests": 0
   },
-  "interpretation": "No overall architecture quality/cost advantage established. Same40/48 first Correct, candidate has5actual missing answers. Strict source-author UJS differs by1/24 with wide cluster interval; target/preservation-only favors plain. Partial source audit is not complete."
+  "interpretation": "No overall architecture quality/cost advantage established. Same40/48 first Correct, candidate has5actual missing answers and nearly double prediction tokens. Strict source-author UJS differs by1/24 with wide cluster interval; target/preservation-only favors plain. Full first-output source audit is separate and never rewrites official labels."
 }

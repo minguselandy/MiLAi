@@ -1,3 +1,28 @@
+# Current execution: two post-cleanup factorial repeats; analyses closed
+
+GoalACTIVE/incomplete. E2/E3/W3 originals CLOSED and never rerun/rescored.
+E2 ALL91answers+5missing source-reviewed;32answer-level issues, firstlabels unchanged.
+StateUJS author-review12/24 vs13/24, target+preserve18/24 vs14/24; no advantageclaim.
+E3first core countsY00=9,Y01=8,Y10=9,Y11=9 of9; +1/9interaction is solelyone
+selectorlength missing. Full35completecorefacts correct, explanationsnotallfaithful.
+E3ledger66gen344589+14emb1571 exact,newunknown0. W3ledger115gen521586+emb2739 exact.
+W3 lowcostnotqualityproof:explicitinitialinvalidgroup, finalgateFalse despite reason
+recognizingcancel; rebuilds omitotherfacts afterprefix2 and pre-effectiveXu atlast.
+All47answers+1missing reviewed; see lifecycle-v1-summary. Eventcompoundbase contains
+stamp+handler, so its override predicate-scope still needs state-onlycheck.
+LIVE exec49873, driver767706, repeat2child839224 atlastcheck. Frozen5734ade2,
+factorial-source-v2. Two symmetric repeats share originalv1actualseed+arrival,
+newseed0/oldHTTPnotcopied. r1EXIT0,36answers,archiveU0/U1bothcommitted;shared-condition
+U0invalidsupport retained. r2LIVE; inspect actualdriver/PIDs before dispatch.
+NEW development fixed historicalselection filtering: common candidate availability,
+but R1 now opens only selected oldversions.34tests/Ruff/mypy/DAG/tools pass.
+IMPORTANT originalv1 and currentv2repeats used all-history delivery; do not overclaim
+fullR/history-selection effect from them. Keep snapshotsfrozen; latercorrectedrun needed.
+Still outstanding: repeatsreview, target-change support invalidation marker,
+full intended R-factor test, crossrecord, W4matchedlearning, W5Host,strong/external
+controls,extra model+longhistory,positive completeexample and finalscientific audit.
+NoSHA/subagents/newledger. Historical snapshots follow.
+
 # Latest resource closure: all three original queues CLOSED
 
 E2exec29617,E3exec60980,W3exec84404 have all returnedEXIT0. W3 supervisor420999/
