@@ -1,17 +1,24 @@
-# Current innovation-v4 execution (2026-10-15)
+# Current innovation-v4 execution (2026-10-16 local continuation)
 
-User activates the full innovation v4 plan; goal ACTIVE/incomplete. This worktree
-is feat/lab-innovation-v4-20261015 based on PR122 c835cf67. See
-[the current execution record](docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md).
-D1 compact delta uses the existing source/version/commit path, no Impact call.
-Original c8ffd8e5 smoke closed: first formation failed, all4 QA core-correct from
-raw sources; 35366 generation +312 embedding, newunknown0. Original preserved.
-Current paired-v2 freezes08de761d: driver2877480/session9063, plain child2877561
-live at last actual check. Serial plain/delta prediction then both first scores;
-inspect actual PID/session/receipts, never duplicate, hotedit or restart by timeout.
-New matched-data exporter has ONE reviewed reference, 0 parameter updates.
-D2/D3/real learning/long histories/external/second model/Host and final audit pending.
-No SHA checks/subagents/newledger/new deployment/PR merge. Lower snapshots historical.
+Full user v4 goal ACTIVE/incomplete. Worktree feat/lab-innovation-v4-20261015, base PR122 c835cf67.
+Current report: docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md. This handoff records concrete progress.
+Paired-v2 frozen08de761d CLOSED all4 stages. FirstQA plain21/24 (invalid2,Omission1), delta23/24
+(invalid1); predictiongen230866/258521 (+11.98%). Whole144gen615686+124emb6314 exactledger,
+newunknown0/old9+1 retained. All48answers/renderedstates reviewed; structured joint audit pending.
+Source/reference ambiguities apply to BOTH; no state-success/advantage claim. SameJSON plot saved.
+D2 three query policies integrated; firstquery-v1 source16answers/firstscore13Correct+3invalid CLOSED.
+Rebuild original FAILED after9answers: tenth interpretation knownlength8192 (allusageknown), later
+arms unrun. Original35gen120165/emb0/newunknown0 preserved; source firstscore separately charged.
+Genericf07 handles confirmed readonly structure failure with raw Reader, keeping cost/call quota.
+LIVE continuationquery-v2 freezes c7c5c469, driver3145177/session58505, worker3145185 lastverifiedlive.
+Newroot copies actualbank+19confirmedresponses, reuses oldlength0newHTTP then rawReader; original
+failure/terminal untouched. Mixed-source continuation is not a same-version cold win. Inspect handles.
+Pending version_cache/incremental/full and firstscores serial. No competingHTTP/hotedit/restartbytimeout.
+Current learning8 author references over6 exposed chains; only1 consequence-labeled,0parameterupdates;
+authoring cost unmetered, notzero.1e7 joint policy+event evidence passed actualSQLite tests, not oldscore.
+36final relatedchecks/types/lint/DAG/tools pass. D3/fulllearning/semantic-cache-scope/independent-long-
+histories/external/secondmodel/Host and fullgoal audit pending. NoSHA/subagents/newledger/newservice/
+PRmerge. Lower blocks historical, never infer old process state from them.
 
 # Current publication checkpoint requested; corrected factorial LIVE
 
