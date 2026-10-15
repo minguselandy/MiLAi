@@ -68,7 +68,8 @@ def diagnostic_costs(root: Path) -> dict[str, Any]:
     for path in responses:
         parts = path.relative_to(root / "http").parts
         stage = ("embedding" if parts[0] == "embedding" else
-                 "judge" if parts[:2] in {("halumem", "judge"), ("longmemeval", "judge")} else
+                 "judge" if parts[:2] == ("halumem", "judge") or (
+                     parts[0] == "longmemeval" and len(parts) == 4 and parts[2] == "judge") else
                  "query_structure" if parts[0] == "query-structure" else
                  "evidence_value_selection" if "view" in parts and any(
                      part.startswith("value-") for part in parts) else

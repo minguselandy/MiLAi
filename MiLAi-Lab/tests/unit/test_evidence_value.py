@@ -1,5 +1,6 @@
 """Actual source subsets, context expansion and the common Reader budget."""
 
+import copy
 import json
 from types import SimpleNamespace
 
@@ -29,11 +30,12 @@ def setup(store, tmp_path, texts):
     return service, packs, run
 
 
-def decision(action, values=(), *, gap=None, task="lookup", page=0):
+def decision(action, values=(), *, gap=None, task="lookup", page=0, full=False):
     return json.dumps({"action": action, "values": [
         {"item_index": index, "gain": gain, "expand_context": expand,
          "answer_distinction": "The relevant scope or condition."}
-        for index, gain, expand in values], "gap": gap, "task": task, "candidate_page": page})
+        for index, gain, expand in values], "gap": gap, "task": task, "candidate_page": page,
+        "search_full_pool": full})
 
 
 def run_reader(run, service, packs):
@@ -171,3 +173,61 @@ def test_range_handoff_is_explicit_and_shares_the_original_total_call_budget(tmp
         state = json.loads((tmp_path / "http/q/memory-view.json").read_text())
         assert len(used) == 6 and calls == ["q/view/value-0", "q"]
         assert state["value_branch"] == "range_common_reader" and state["total_steps"] == 2
+
+
+def test_exact_duplicate_source_body_cannot_consume_another_read_as_new_evidence(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service, packs, run = setup(store, tmp_path, ["KNOWN permit rule.",
+            "Other A.", "Other B.", "Other C.", "Other D."])
+        first = index_of(packs, "KNOWN")
+        packs.append(copy.deepcopy(packs[first]))
+        duplicate = len(packs) - 1
+        calls = []
+
+        def call(key, messages, **_):
+            calls.append(key)
+            if key == "q/view/value-0":
+                return decision("open", [(first, 1, False)])
+            if key == "q/view/value-1":
+                return decision("open", [(duplicate, 1, False)])
+            return "Known permit rule."
+
+        run.call = call
+        _, used = run_reader(run, service, packs)
+        assert len(used) == 1 and len(calls) == 3
+        state = json.loads((tmp_path / "http/q/memory-view.json").read_text())
+        assert state["opened_indices"] == [first]
+        assert state["value_trace"][-1]["selected"] is None
+
+
+def test_lookup_starts_with_native_hits_then_explicit_gap_can_open_rest_of_same_pool(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service, _, run = setup(store, tmp_path, ["BASE permit needs training.",
+            "HIDDEN_EXCEPTION night permit needs a badge.", "Other A.", "Other B.", "Other C."])
+        native = service.search_sources("BASE", limit=1, tokenization="unicode_v1",
+                                         include_scope=True)
+        packs = build_evidence_packs(service, "permit", "2035-05-01",
+                                     native["source_materials"], [],
+                                     source_scope=native["source_scope"])
+        first, other = index_of(packs, "BASE"), index_of(packs, "HIDDEN_EXCEPTION")
+        run.client.config.max_calls = 5
+
+        def call(key, messages, **_):
+            body = json.loads(messages[1]["content"])
+            if key == "q/view/value-0":
+                assert [x["item_index"] for x in body["candidates"]] == [first]
+                return decision("open", [(first, 1, False)])
+            if key == "q/view/value-1":
+                return decision("supplement", gap="Need the night rule.", full=True)
+            if key == "q/view/value-2":
+                assert other in [x["item_index"] for x in body["candidates"]]
+                return decision("open", [(other, 1, False)])
+            if key == "q/view/value-3":
+                return decision("answer")
+            assert "HIDDEN_EXCEPTION" in str(body["memories"])
+            return "Training, plus a badge at night."
+
+        run.call = call
+        _, used = run_reader(run, service, packs)
+        state = json.loads((tmp_path / "http/q/memory-view.json").read_text())
+        assert len(used) == 2 and state["search_full_pool"] is True

@@ -35,8 +35,11 @@ VALUE_INSTRUCTIONS = (
     "an already opened candidate to its captured context; answer stops acquisition. Values "
     "range from -1 to 1; a nonpositive gain does not justify another read. Candidate excerpts "
     "only locate evidence; they are not evidence bodies. Missing evidence does not establish "
-    "the opposite answer. candidate_page can request another navigation page. For range "
-    "counting/enumeration use task=range; this first value policy delegates coverage to the "
+    "the opposite answer. candidate_page can request another navigation page. For lookup, "
+    "the initial catalog is the ordinary retrieved set. To look beyond it for an "
+    "explicit gap, use supplement with search_full_pool=true; this opens navigation from "
+    "the same captured pool, not a new source search. "
+    "For range counting/enumeration use task=range; this policy delegates coverage to the "
     "existing range reader and does not claim a new aggregation method. Return the schema."
 )
 
@@ -55,6 +58,7 @@ def value_schema(size: int) -> dict[str, Any]:
             "gap": {"type": ["string", "null"]},
             "task": {"enum": ["lookup", "range"]},
             "candidate_page": {"type": "integer", "minimum": 0},
+            "search_full_pool": {"type": "boolean"},
         }, "required": ["action", "values", "gap", "task", "candidate_page"]}
 
 
@@ -82,6 +86,7 @@ def read_by_evidence_value(
     state.setdefault("value_trace", [])
     state.setdefault("candidate_cost_evaluations", 0)
     state.setdefault("source_pack_opens", 0)
+    state.setdefault("search_full_pool", False)
     state["evidence_policy"] = "evidence_value_v1"
     state["value_estimator"] = "prompt_only_same_model; untrained_gain_predictions"
     state["retrieval_snapshot"] = snapshot_id
@@ -128,39 +133,64 @@ def read_by_evidence_value(
         messages[0]["content"] += "\n" + VALUE_INSTRUCTIONS
         payload = json.loads(messages[1]["content"])
         payload.update(candidates=candidates, candidate_page=state["candidate_page"],
+                       candidate_page_count=state.get("candidate_page_count"),
+                       search_full_pool=state["search_full_pool"],
+                       captured_pool_size=len(materials),
                        already_opened=state["opened_indices"], response_schema=schema)
         messages[1]["content"] = json.dumps(payload, ensure_ascii=False, separators=(",", ":"))
         return messages
 
-    pages = plan_delivery(directory, lambda rows: fits(packet(rows)))["pages"] or [[]]
-    state["candidate_page_count"] = len(pages)
+    def adds_evidence(rows: list[dict[str, Any]], before: list[dict[str, Any]]) -> bool:
+        """Identical captured Source ranges add no evidence, even under another pack index."""
+        old = [span for row in before if row["kind"] == "original_source"
+               and row.get("body_delivered") is not False
+               for span in row["source_ranges"]]
+        for row in rows:
+            if row.get("body_delivered") is False:
+                continue
+            if row["kind"] != "original_source":
+                if not any(prior.get("id") == row.get("id")
+                           and prior.get("revision") == row.get("revision")
+                           and prior["kind"] == row["kind"]
+                           and prior.get("body_delivered") is not False for prior in before):
+                    return True
+                continue
+            for span in row["source_ranges"]:
+                if not any(prior["source_ref"] == span["source_ref"]
+                           and prior["source_revision"] == span["source_revision"]
+                           and prior["start"] <= span["start"] and prior["end"] >= span["end"]
+                           for prior in old):
+                    return True
+        return False
+
     while state["steps"] < max_calls - 1 and not state.get("value_stop"):
-        page = min(state["candidate_page"], len(pages) - 1)
         indices = state["opened_indices"]
+        before = opened(indices)
         base_cost = measure(answer_messages(indices))
         candidates = []
-        for candidate in pages[page]:
+        for candidate in directory:
             index = candidate["item_index"]
+            if not state["search_full_pool"] and materials[index].get("scope_only"):
+                continue
             expand = index in indices
             if expand and (index in state["context_indices"]
                            or not candidate["can_expand_context"]):
                 continue
             chosen = list(dict.fromkeys([*indices, index]))
             context = list(dict.fromkeys([*state["context_indices"], index])) if expand else None
+            if not adds_evidence(opened(chosen, context), before):
+                continue
             cost = measure(answer_messages(chosen, context)) - base_cost
             state["candidate_cost_evaluations"] += 1
             candidates.append({**candidate, "expand_context": expand,
                                "incremental_input_tokens": max(0, cost)})
-        messages = packet(candidates)
-        # Newly opened bodies can reduce room for navigation; keep the body and
-        # use a smaller actual navigation page, without reading omitted candidates.
+        pages = plan_delivery(candidates, lambda rows: fits(packet(rows)))["pages"] or [[]]
+        state["candidate_page_count"] = len(pages)
+        page = min(state["candidate_page"], len(pages) - 1)
+        messages = packet(pages[page])
         if not fits(messages):
-            smaller = plan_delivery(candidates, lambda rows: fits(packet(rows)))["pages"]
-            if not smaller:
-                state["value_stop"] = "selection_input_exhausted"
-                break
-            candidates = smaller[0]
-            messages = packet(candidates)
+            state["value_stop"] = "selection_input_exhausted"
+            break
         stage = f"view/value-{state['steps']}"
         state["active_stage"] = stage
         save(state)
@@ -169,6 +199,11 @@ def read_by_evidence_value(
         state["steps"] += 1
         state["gap"] = response["gap"]
         state["candidate_page"] = min(response["candidate_page"], len(pages) - 1)
+        broadened = (response["action"] == "supplement" and bool(response["gap"])
+                     and response.get("search_full_pool", False) and not state["search_full_pool"])
+        if broadened:
+            state["search_full_pool"] = True
+            state["candidate_page"] = 0
         trace: dict[str, Any] = {"before_indices": list(indices), "response": response,
                                  "selected": None}
         state["value_trace"].append(trace)
@@ -199,6 +234,8 @@ def read_by_evidence_value(
             chosen = list(dict.fromkeys([*indices, index]))
             context = list(dict.fromkeys([*state["context_indices"], index])) if expand else None
             proposed = answer_messages(chosen, context)
+            if not adds_evidence(opened(chosen, context), before):
+                continue
             if fits(proposed):
                 cost = max(0, measure(proposed) - measure(answer_messages(indices)))
                 offers.append((value["gain"] / max(1, cost), -index, value, chosen, context, cost))
@@ -208,7 +245,7 @@ def read_by_evidence_value(
             state["opened_indices"] = chosen
             if context is not None:
                 state["context_indices"] = context
-        elif state["candidate_page"] == page:
+        elif state["candidate_page"] == page and not broadened:
             state["value_stop"] = "no_positive_affordable_increment"
         save(state)
     state["active_stage"] = "answer"
