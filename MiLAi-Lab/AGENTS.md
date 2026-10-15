@@ -1,3 +1,18 @@
+# Latest resource closure: all three original queues CLOSED
+
+E2exec29617,E3exec60980,W3exec84404 have all returnedEXIT0. W3 supervisor420999/
+worker571471 gone, lifecycle-v1/queue.json LIFECYCLE_CLOSED at05:16:56UTC.
+W3 results exist for all3policies: event15/16answers,212042generation tokens;
+explicit_change16/16,164484;query_rebuild16/16,145060. Every checkpoint record values
+unchanged after reads; receipt unknown0. DO NOT infer quality or amortization winner:
+full state/answer/gate/source/cost reconciliation still pending. No new model job queued.
+Current code5734ade2 fixes redundant cancellation cleanup,100tests and actual first
+model-proposal replay on copies pass. No real model run of that fix yet.
+Next finish E2 remaining10chains QA source review, fullE3 andW3 analysis; then freeze
+and symmetric actual repeats/remainingcrossrecord,W4,W5,strong/external controls,
+extra model+long histories. GoalACTIVE/incomplete, no SHA/subagents/new ledger.
+The previously LIVE W3 snapshot below is historical, not a current process claim.
+
 # Current evidence: E2/E3 CLOSED; W3 LIVE; cleanup fix replayed
 
 Goal ACTIVE/incomplete. Original E2 exec29617/driver141865 CLOSED0; original E3
