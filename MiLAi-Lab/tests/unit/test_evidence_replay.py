@@ -120,6 +120,52 @@ def test_replay_reopens_saved_prefix_without_future_search_or_original_writes(
     assert len(seen) == 1, "A saved replay answer is never regenerated"
 
 
+def test_retrieved_first_control_excludes_the_cached_interpretation(tmp_path, monkeypatch):
+    execution, original = fixture_run(tmp_path, monkeypatch, BenchmarkRun)
+    execution.settings.update(evidence_policy="question_pack_v1",
+                              evidence_selection_policy="retrieved_first_v1")
+    execution.settings["evidence_replay"].update(reuse_saved_materials=True,
+                                               exclude_query_structure=True)
+    bank = original / "banks/owner"
+    bank.mkdir(parents=True)
+    with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
+        service = MemoryService(store, ("edit", original.name, "M", "owner"), "owner",
+            bank / "memory.lock", functional_contract="functional_v1", memory_profile="unified_v1")
+        ref = service.capture_user("s", "0", "EARLY_BLUE_MARKER")["source_ref"]
+        service.capture_user("other", "0", "SECOND_SOURCE_MUST_BE_OPENED")
+        native = service.search_sources("EARLY_BLUE_MARKER", include_scope=True)
+        native.update(records=[], raw_events=service.sources())
+        materials = execution._source_first_materials(service, "Which marker?", "Jan 1",
+                                                      native, [], snapshot_id="old-pool.json")
+        structure, _ = build_query_structure(service, "Which marker?", "Jan 1", [ref],
+            policy="incremental", call=lambda *_: {
+                "scope": "DERIVED_SCOPE_NOT_AVAILABLE", "nodes": [],
+                "rules": [], "remove": [], "remove_rules": [], "unresolved": []})
+        materials.append(structure)
+        native["material_assembly"]["material_origins"].append("query_structure")
+        write_json(original / "native/halumem/owner/0/qa/0/retrieval.json",
+                   {"native_return": native, "materials": materials, "usage": {}})
+    calls = []
+
+    def answer(key, messages, **kwargs):
+        payload = json.loads(messages[1]["content"])
+        calls.append(payload)
+        assert "DERIVED_SCOPE_NOT_AVAILABLE" not in json.dumps(messages)
+        assert len(payload["memories"]) == 1
+        assert payload["memories"][0]["kind"] == "original_source"
+        assert "EARLY_BLUE_MARKER" in json.dumps(payload["memories"])
+        assert "SECOND_SOURCE_MUST_BE_OPENED" not in json.dumps(payload["memories"])
+        return json.dumps({"answer": "EARLY_BLUE_MARKER", "item_indices": [],
+            "expand_context": [], "gap": None, "task": "lookup", "candidate_page": 0})
+
+    monkeypatch.setattr(execution, "call", answer)
+    result = execution.halumem("predict")
+    assert result["complete_answers"] == 1 and len(calls) == 1
+    saved = read_json(execution.root / "predictions/halumem/owner/0/qa/0/complete.json")
+    assert saved["query_structure_excluded"] is True
+    assert saved["evidence"]["query_structure_in_pool"] == 0
+
+
 def test_replay_scores_saved_answers_once_preserving_invalid_missing_and_not_run(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
 ) -> None:

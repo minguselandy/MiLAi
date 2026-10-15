@@ -79,6 +79,12 @@ def _predict(
         # sources and predecessor revisions; no future search is performed.
         if execution.settings["evidence_replay"].get("reuse_saved_materials"):
             materials = copy.deepcopy(saved["materials"])
+            if execution.settings["evidence_replay"].get("exclude_query_structure"):
+                retained = [i for i, material in enumerate(materials)
+                            if material["kind"] != "query_structure"]
+                materials = [materials[i] for i in retained]
+                origins = native["material_assembly"]["material_origins"]
+                native["material_assembly"]["material_origins"] = [origins[i] for i in retained]
             for material in materials:
                 material.pop("pre_read_calls", None)
         else:
@@ -121,6 +127,8 @@ def _predict(
             "execution": "answered" if isinstance(answer, str) else "missing",
             "source_snapshot": str(original), "source_bank": str(source / "banks" / owner),
             "source_state": "saved arrival-prefix records and original ranges; no new search",
+            "query_structure_excluded": execution.settings["evidence_replay"].get(
+                "exclude_query_structure", False),
             "evidence": {
                 "pool": len(materials), "read": len(delivered_indices), "final": len(final),
                 "linked_candidates": assembly["linked_original_candidates"],

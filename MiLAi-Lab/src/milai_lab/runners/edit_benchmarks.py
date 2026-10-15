@@ -518,10 +518,10 @@ class BenchmarkRun:
         if settings.get("evidence_policy", "legacy") not in {"legacy", "question_pack_v1"}:
             raise ValueError("EVIDENCE_POLICY_INVALID")
         if settings.get("evidence_selection_policy", "standard") not in {
-            "standard", "value_v1", "structure_first_v1",
+            "standard", "value_v1", "structure_first_v1", "retrieved_first_v1",
         }:
             raise ValueError("EVIDENCE_SELECTION_POLICY_INVALID")
-        if settings.get("evidence_selection_policy") in {"value_v1", "structure_first_v1"} \
+        if settings.get("evidence_selection_policy", "standard") != "standard" \
                 and settings.get("evidence_policy") != "question_pack_v1":
             raise ValueError("EVIDENCE_SELECTION_REQUIRES_QUESTION_PACKS")
         if settings.get("query_structure_policy") is not None:
@@ -2205,6 +2205,9 @@ class BenchmarkRun:
         elif self.settings.get("evidence_selection_policy") == "structure_first_v1":
             options["initial_indices"] = [i for i, item in enumerate(memories)
                                           if item["kind"] == "query_structure"]
+        elif self.settings.get("evidence_selection_policy") == "retrieved_first_v1":
+            options["initial_indices"] = [i for i, item in enumerate(memories)
+                if item["kind"] == "original_source" and not item.get("scope_only")][:1]
         return policy(
             question, date, memories, snapshot_id=snapshot_id, open_materials=reopen,
             messages_for=lambda items: reader_messages(question, date, items,
