@@ -69,10 +69,12 @@ def delta_schema(mapping: dict[str, Any], *, allow_create: bool) -> dict[str, An
         ref = {"anyOf": [new_ref, {"enum": units}]} if units else new_ref
         choices = [_object({"target": ref, "all": {"type": "array", "items": ref},
             "any": {"type": "array", "items": {"type": "array", "items": ref}},
-            "basis": e}, ["target", "all", "any", "basis"])]
+            "basis": e, "also": {"type": "array", "items": e}},
+            ["target", "all", "any", "basis"])]
         if units:
             choices.append(_object({"target": {"enum": units}, "remove": {"const": True},
-                                    "basis": e}, ["target", "remove", "basis"]))
+                                    "basis": e, "also": {"type": "array", "items": e}},
+                                   ["target", "remove", "basis"]))
         return {"type": "array", "items": {"oneOf": choices}}
     changes = {}
     for target in mapping.get("records", {}):
@@ -128,7 +130,8 @@ def compile_delta(envelope: dict[str, Any], mapping: dict[str, Any]) -> list[dic
         result = []
         for rule in item.get("rules", []):
             group: dict[str, Any] = {"target_unit": resolve(rule["target"]),
-                                    "evidence": [rule["basis"]]}
+                                    "evidence": list(dict.fromkeys(
+                                        [rule["basis"], *rule.get("also", [])]))}
             if rule.get("remove"):
                 group["operation"] = "remove"
             else:

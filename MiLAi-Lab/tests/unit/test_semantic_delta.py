@@ -35,6 +35,7 @@ def test_one_call_delta_forms_shared_rule_then_preserves_non_target_and_history(
             service.bind_public_turn("s", key, ref, config_version="delta", phase="start")
             delivery = method.prepare([ref], "", selected_records=rows,
                                       redelivered_ranges=method.target_support_ranges(rows))
+            delivery["materialize_selected_support"] = True
 
             def model_call(stage, messages, schema):
                 calls.append(stage)
@@ -69,12 +70,17 @@ def test_one_call_delta_forms_shared_rule_then_preserves_non_target_and_history(
             "creates": [], "changes": {"r1": {
                 "replace": {"u1": {"text": "The card is invalid.", "basis": "e1",
                                    "kind": "reported"}},
-                "rules": [{"target": "u4", "all": ["u3"], "any": [["u2"]], "basis": "e1"}]
+                "rules": [{"target": "u4", "all": ["u3"], "any": [["u2"]],
+                           "basis": "e1", "also": ["e2"]}]
             }}}, [first])
         assert changed["status"] == "completed", changed
         current = service.read(first["id"])["value"]["edit_state"]
         assert current["units"][1:] == initial["units"][1:]
         assert current["support_groups"][0]["alternatives"] == [[ids[texts[2]], ids[texts[1]]]]
+        references = current["support_groups"][0]["evidence_refs"]
+        assert len({ref["source_ref"] for ref in references}) == 2
+        assert initial["support_groups"][0]["evidence_refs"][0]["source_ref"] in {
+            ref["source_ref"] for ref in references}
         assert service.read(first["id"], 1)["value"]["edit_state"] == initial
         assert calls == ["edit", "edit"]
         # Reopening the same operation consumes its persisted receipt, not a new generation.
