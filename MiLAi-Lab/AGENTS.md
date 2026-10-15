@@ -1,3 +1,25 @@
+# Current queues: strong LIVE; native SimpleMem queued; A/B Host prepared
+
+GoalACTIVE/incomplete. LIVE strong driver1672507/exec12669, laststep
+candidate predict child2027770; actual/proc confirmed thisturn.
+Frozena47035f6 unchanged. Firstfourpredicts each36sessions48answers/0knownmiss;
+candidatepredict ongoing, FIRSTscorespending. No winnerclaim.
+QUEUED SimpleMem driver2094352/exec84597 WAITING_FOR_STRONG, actualprocessconfirmed.
+FrozenLab46bc516e(simplemem-source-v1), officialdetachednative db80b6a(simplemem-native-v1),
+isolatedsimplemem-env. Frozenpilot6events8QA prepare0HTTP. Supervisor starts onlyafter
+allStrongpredictions+firstscoresclose, oldPIDs gone, sealedledger matches/no newunknown.
+Do not dispatch othermodeljobs or duplicatequeue. Full12chainNative config notqueued;
+pilotmustbereviewedfirst. Existingoriginalledger andunknownfloors preserved.
+Nativeadapter109tests13.48s plus6nativecases5.60s; source inputs/questionisolation,
+40window/2overlap/nativebuilderstate/reopen/partialcommit no-retry/callcaps/receipts
+verified withactualSDK+MockHTTP. No native modelqualityresultyet.
+NEW host-ab-v1 5source+5query freshA/Bstory PREPARED0HTTP, refseparate, no oraclebefore/
+graph. FutureA,scopeexception/cancel,Bhistorycorrection,confirmation,tea. Notstarted.
+Next monitorStrong/queuedpilot; inspectsemanticstate/QA/cost; freeze/runfreshHoststory
+onlywhenexistingqueuesclose. StillW4learning/eval,correctedfullR,externalbenchmarklong
+histories,additionalmodel andfinalaudit. NoSHA/subagents/newledger/newdeploy.
+Historical snapshots follow.
+
 # Current development: SimpleMem adapter checked; strong queue still LIVE
 
 GoalACTIVE/incomplete. strong-v1 driver1672507/exec12669 frozena47035f6

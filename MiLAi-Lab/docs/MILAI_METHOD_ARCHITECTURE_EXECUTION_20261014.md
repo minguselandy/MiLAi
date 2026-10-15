@@ -487,3 +487,14 @@ a47035f6修复消息级策略版本后，只恢复了此前已确认0模型的�
 109项相关检查13.48秒通过，含真实SDK/存储与MockHTTP；3个无关MERIT/MemSyCo私有资产用例未运行。新增6项验证5.60秒通过，覆盖原生窗口重开、输入隔离、已提交丢回执不重派、共享调用额度、Source/解释分离及全部原生费用回执。3文件mypy、Ruff、DAG/兼容facade、工具边界、277源验证矩阵通过。没有新服务部署、SHA校验或模型实测。
 
 两案例pilot（projection/exhibit）6事件8QA已经prepare0调用；另备12链36事件48QA full配置。均为已公开开发数据，不能代替独立外部benchmark/长历史评价。见method-architecture-simplemem-aligned-v1-protocol。当前五臂strong仍执行冻结a47035f6，新增适配不热改队列；外部真实pilot须等其关闭后串行派发。
+
+
+## 外部pilot冻结、串行交接与新完整故事准备
+
+SimpleMem适配46bc516e已git archive冻结，官方db80b6a另建detached只读工作树，原reference工作树保持不变；没有做摘要校验。冻结配置使用冻结Lab数据与独立原生源码路径，隔离Python环境继承原运行库及已安装的Native依赖。冻结prepare成功，仍0模型调用。
+
+外部pilot监督进程2094352/exec84597当前WAITING_FOR_STRONG。只有原strong driver1672507及所有子进程实际退出、五臂预测/首次评分全部正常关闭、末账本存在且无新增unknown/无额外插队调用时才派发6事件8QA的pilot预测和首次评分。不会自动派发12链full；需先审查pilot真实结果。见method-architecture-simplemem-aligned-v1-queue.json。当前strong前四臂均36session/48完整答复、无已知缺答，候选仍在预测；首次评分尚未做，不能预报质量胜负。
+
+另准备全新A/B正常Host故事：5次Source事件、5次纯查询，初始一般联系人与外发本人确认、A未来生效排班、仅临时展台开放期间的对外联络例外、展台撤下后的撤销、B从一开始联系人被记错的历史纠正，并保留乌龙茶不加糖偏好。前态和关系均须由模型从空库形成；初存B内容按真实首次保存版本核查，不用纠错后的名字替代原存内容。参考义务独立存放，运行器不加载。它不同于旧17消息故事，也不是外部盲测。
+
+host-ab-v1已prepare0HTTP，固定Host-v2预算与dependency_read无长推理设置，不做按案例分支。执行尚未开始，不宣称完整例子或W5完成。见method-architecture-host-ab-v1-protocol.json。
