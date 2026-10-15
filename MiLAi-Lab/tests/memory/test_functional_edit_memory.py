@@ -2973,6 +2973,44 @@ def test_shared_maintenance_delivers_selected_prior_request_beyond_recent_source
         assert (len(calls), len(previews)) == count and memory.service.records() == before
 
 
+@pytest.mark.parametrize("material_limit", [12000, 18000, 24000])
+def test_resident_paging_reserves_directory_and_keeps_unopened_continuations(
+    tmp_path, material_limit,
+):
+    features = EditFeatures(bound_references=True, source_metadata=True)
+    with opened(tmp_path, interface_version="I2", features=features) as seed:
+        texts = [f"Room {i} requires a personal booking; the other rooms keep their own rules."
+                 for i in range(6)]
+        writer_turn(seed, "seed", " ".join(texts))
+        saved = json.loads(invoke(seed, "save_memory", {"proposal": {
+            "action": "create", "clauses": [{"text": text, "conditions": [],
+                "evidence": ["e1"], "assertion": {"source_evidence": "e1", "kind": "reported"}}
+                for text in texts],
+        }}, "save", "seed").content)
+        assert saved["ok"], saved
+        before = copy.deepcopy(seed.service.read(saved["id"])["value"])
+        memory = FunctionalEditMemory(seed.service, len, material_limit=material_limit,
+            read_limit=12, interface_version="I2", features=features,
+            memory_view_mode="state_driven", read_interface="explicit_selectors_v1")
+        memory.service.capture_user("s", "u", "Read the room booking rules.")
+        directory = memory.context("s", "u", "functional-m-test-v1")
+        target = next(c["target"] for c in directory["candidates"]
+                      if c.get("record_id") == saved["id"])
+        page = json.loads(invoke(memory, "read_memory", {"target": target}, "read").content)
+        assert page["ok"]
+        material = memory.model_material(cfg())
+        assert len(canonical(material)) <= material_limit
+        assert "candidate_delivery_status" in material
+        shown = [u["content"] for u in expand_host_packet(material)["items"]
+                 if u["type"] == "record"]
+        assert shown and set(shown) <= set(texts)
+        if len(shown) < len(texts):
+            assert material["memory_view"]["pending_refs"]
+            assert material["continuations"]
+            assert material["delivery_status"] == "partial"
+        assert memory.service.read(saved["id"])["value"] == before
+
+
 def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path):
     options = {"interface_version": "I2",
                "features": EditFeatures(True, True, True, True, True, temporal_scope=True),

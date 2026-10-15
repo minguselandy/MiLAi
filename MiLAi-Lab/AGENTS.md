@@ -1,3 +1,25 @@
+# Current: native full LIVE; A/B first stopped after commit; capacity fix checked
+
+GoalACTIVE/incomplete. Strong fivearms CLOSED/reviewed (see summary/review).
+Nativepilot CLOSED:8answers,6Correct+2invalid; manualcore7/sourcefaithful6,9entries;
+52gen74620+32emb1003 exactledger,newunknown0. No external/heldout claim.
+Nativefull driver2400057/exec62427 LIVE predictchild2406918, actual/proc confirmed;
+frozen46bc516e/native db80b6a unchanged,12cases36events48QA. Do notduplicate.
+ABfirst b33d5690 driver2384059/exec41638 CLOSED:6COMPLETED,1FAILED(index6),
+7–9NOT_RUN. Four real revisions; temporary exception removed inr4, futureA/
+confirmation/B/tea kept. No explicitrelations/groups. First3queries correct.
+Index6 read_memory succeeded then pre_model_hook MATERIAL_WRAPPER_EXCEEDS_LIMIT;
+classifierallow_forgettingTrue selectedresidentpath, no actualforget operations.
+28gen182422+27emb2483 exact,newunknown0. Firstsummary tracked.
+NEW genericfix reserves directory minimum+continuation before resident paging;
+actualbankCOPY0HTTP replay old8120+wrapper>8192 ->new7910,2units+1candidate,
+pending/continuationspreserved.9tests,Ruff/mypy/DAGpass. No modelrecoveryyet.
+Next freeze fix and COPY actualABbank for original unrunindices7–9 only, after
+nativefull closes/no unknown; do not retry/relabel original6. Still need a complete
+single-version successfulstory, correctedfullR, W4learning/eval, independentexternal
+longhistory/benchmark, cost/scale curves, secondmodel andfinalaudit. NoSHA/subagents/
+newledger/newdeploy. Historicalsnapshots below.
+
 # Current: strong first results closed; native pilot LIVE; clock projection development
 
 Goal ACTIVE/incomplete. strong-v1 driver1672507 CLOSED0 at12:43:02UTC;

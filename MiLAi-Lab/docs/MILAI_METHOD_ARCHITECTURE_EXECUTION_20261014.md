@@ -536,3 +536,13 @@ host-ab-v1已prepare0HTTP，固定Host-v2预算与dependency_read无长推理设
 新A/B Host冻结b33d5690、独立空库，于12:48:20 UTC接续；driver2384059/exec41638。全10消息第一尝试，不用先前修复分支冒充首轮。当前已完成初存、初次查询、未来A更新及查询，最终质量仍待完整状态/历史审阅。见host-ab-v1-execution。
 
 SimpleMem完整12链36事件48QA已冻结prepare0HTTP，并排队等待本Host lane及子进程退出、完整末账本/无新增unknown/无插队调用后再运行。监督driver2400057/exec62427，暂WAITING_FOR_AB_HOST。沿用46bc516e以保持与Strong的共同Reader条件，不混入新时钟投影；两条pilot链在新空库完整cohort中重新生成，pilot保留且不与full合并。仍是公开开发数据，不满足独立外部benchmark/长历史/额外模型要求。见simplemem-full-v1-execution。
+
+## 新A/B首轮在已提交撤销后遇到目录封装超限
+
+host-ab-v1第一轮关闭为6COMPLETED、1FAILED、3NOT_RUN。初存r1保存A林舒/B沈瑜、外发本人确认及茶偏好；r2保存A从6月15日起陈丹及原林舒；r3追加6月12日展台开放期间对外联络曾蕊；r4实际撤去临时条款，未来安排/确认/B/偏好均保留。前三个纯查询完整回答，读后record values逐值不变；全部版本没有relation/support group，范围在独立正文与时钟中表达，不能当关系形成成功。
+
+index6分类返回allow_forgetting=True，因而使用常规resident/目录路径；没有实际forget操作。共享维护已提交r4，随后read_memory成功交付当前6个单位，下一pre_model_hook因V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT停止，未交付最终答复。index7撤销后查询、index8 B纠错及index9历史查询未运行。28生成响应182,422 tokens、27embedding2,483，与原账本精确一致，新增unknown0。见host-ab-v1-first-summary。仍未满足完整成功故事；不把真实提交当完整答复，也不把首次失败改成恢复成功。
+
+在实际失败SQLite的独立backup副本上、相同tokenizer/8192材料限制、既有binding/读回执重放model_material，0HTTP复现：正文先取3个单位8120tokens，但后加目录最低封装已8211，目录显式省略回执又达8357。问题是正文分页没有预留目录最低开销。现预先计入空目录及真实后续cursor，再按现有优先级分页正文和导航；不增加预算、切正文字符串或删除历史。实际副本重放返回2个正文单位、1个导航项，共7910tokens，其余正文保留pending及continuations。原实验库不改、尚未做模型恢复。
+
+新增3项实际Store分页检查覆盖三个固定材料容量；连同当前/历史resident切换、重开、显式比较保留、未完成维护及真实Host hook等9个用例通过（4项4.08秒、5项5.65秒），Ruff/单文件mypy/DAG通过。下一次用修复冻结版本、实际库副本继续原未执行7–9，不重派原index6；首轮和后续结果分开。SimpleMem完整队列已在首轮关闭后接续，driver2400057/exec62427，预测child2406918，当前仍运行冻结46bc516e。

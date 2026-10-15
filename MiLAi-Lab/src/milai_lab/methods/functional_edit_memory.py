@@ -803,29 +803,37 @@ class FunctionalEditMemory(FunctionalMemory):
         ordinary = self.service.store.get(namespace(self.service), "ordinary:" + reference_key(
             [bound["session"], bound["message_id"], self.forget_epoch]
         ))
+
+        def with_directory(body: dict[str, Any], page: dict[str, Any]) -> dict[str, Any]:
+            return {**body, "candidates": page.get("candidates", []),
+                    "candidate_scope": "navigation_only_not_body_read_or_fact_support",
+                    "candidate_delivery_status": page["delivery_status"],
+                    "candidate_skipped_units": page["skipped_units"],
+                    "next_cursor": page.get("next_cursor")}
+
+        directory_snapshot = ordinary.value.get("catalog_snapshot") if ordinary else None
+        if directory_snapshot and not for_write:
+            # Reserve even an empty directory and its continuation before fitting
+            # bodies. Otherwise the following page's mandatory wrapper can exceed
+            # the limit after the resident page has already consumed the budget.
+            material = with_directory(material, {"delivery_status": "partial",
+                "skipped_units": [], "next_cursor": directory_snapshot + ":0"})
         # Direct Writer calls expand a different packet below. Preserve their
         # complete selected Source/target contract and existing capacity check.
         fitted = material if for_write else self._fit_model_material(
             config, material, fresh_observations)
-        if ordinary is not None and ordinary.value.get("catalog_snapshot"):
-            def with_directory(page: dict[str, Any]) -> dict[str, Any]:
-                return {**fitted, "candidates": page.get("candidates", []),
-                        "candidate_scope": "navigation_only_not_body_read_or_fact_support",
-                        "candidate_delivery_status": page["delivery_status"],
-                        "candidate_skipped_units": page["skipped_units"],
-                        "next_cursor": page.get("next_cursor")}
-
+        if directory_snapshot:
             mapping = request_target_mapping(self.service, bound)
 
             def directory_tokens(page: dict[str, Any]) -> int:
-                packet, _ = project_request_targets(mapping, with_directory(page))
+                packet, _ = project_request_targets(mapping, with_directory(fitted, page))
                 return self.token_count(canonical(self._project_read_packet(packet)))
 
             # A directory that fits alone may overflow beside resident bodies.
             # Page its navigation against the actual final envelope as well.
-            directory = self._page(ordinary.value["catalog_snapshot"], 0, bound,
+            directory = self._page(directory_snapshot, 0, bound,
                                    packet_tokens=None if for_write else directory_tokens)
-            fitted = with_directory(directory)
+            fitted = with_directory(fitted, directory)
         material = self.bind_request_targets(config, fitted)
         if fitted["memory_view"] != view:
             chosen = fitted["memory_view"]
