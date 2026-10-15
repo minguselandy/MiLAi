@@ -13,8 +13,10 @@ paid gate sees nofuturequeries; rebuild emptysemantic Source-only prefix clone,
 old originals redelivered with their real identity/clocks, never rebound as current
 new events. Initial scope-mismatch test fixed through redelivery, no guard relaxation.
 Latest10relatedchecks9.35s,Ruff,3filemypy,DAG/tools/matrix pass; originalSource identity
-and absence of futureSources verified in real SQLite copies. No realW3model run yet;
-freeze before dispatch after existing queues. Do not treat mock counts as scores.
+and absence of futureSources verified in real SQLite copies. No realW3model run yet. Frozen15319207 lifecycle-source-v1 prepareEXIT0.
+NEW queued supervisor420999/exec84404 WAITING_FOR_FACTORIAL; it dispatches only after
+original factorial supervisor247480 closes normally. Do NOT start another lifecycle
+while this supervisor exists; inspect queue.json and actual PIDs first. Do not treat mock counts as scores.
 Complete E2 UJS/source/QA/cost review and E3 results; cross-record,W4matched learning,
 W5Host,strongcontrols/external/extra model+longhistory/finalscientific audit remain.
 Prior snapshots below are historical.
