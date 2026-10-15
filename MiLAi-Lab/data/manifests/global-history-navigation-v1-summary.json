@@ -1,0 +1,39 @@
+{
+  "study": "history-navigation-v1",
+  "runtime_code": "6c0de441",
+  "questions": 1,
+  "attempts": 2,
+  "cost": {
+    "chat/completions": {
+      "calls": 5,
+      "wall_seconds": 57.519162870012224,
+      "prompt_tokens": 86142,
+      "total_tokens": 93135,
+      "completion_tokens": 6993
+    },
+    "embeddings": {
+      "calls": 3,
+      "wall_seconds": 0.10578640177845955,
+      "prompt_tokens": 215,
+      "total_tokens": 215,
+      "completion_tokens": 0
+    }
+  },
+  "new_unknown": {
+    "generation": 0,
+    "embedding": 0
+  },
+  "status": "CLOSED",
+  "mechanism": "read_memory/read_memory_history/read_memory_revision each actually succeeded; one fourth read rejected at allowance",
+  "first_answer": "known null, retained",
+  "recovery": "existing one readonly recovery returned answer",
+  "quality": "NOT_CORRECT",
+  "findings": [
+    "Initial actual revision1 A/Li and B/Wang correctly read.",
+    "B correction was never committed; describing current Wang as corrected contact conflates failed update and intended correction.",
+    "Answer wrongly identifies general Zhao rule as withdrawn temporary Du exception, says exception still effective.",
+    "Evidence delivery success is not Reader semantic success; no rescore or retry."
+  ],
+  "artifact_root": "artifacts/global-development/history-navigation-v1/global-story-v1",
+  "resources_settled": true
+}

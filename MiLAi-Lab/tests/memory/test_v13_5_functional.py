@@ -2908,3 +2908,73 @@ def test_independent_forget_preserves_shared_source_until_whole_selection(tmp_pa
         turn(memory, "reopen", "Which marker or alarm reports remain accessible?")
         assert all(item.get("source_ref") != ref for item in memory._search_units("amber quiet"))
         assert memory.service.source(ref) is None
+
+
+def test_request_read_ids_reuse_only_this_requests_issued_navigation(tmp_path: Path) -> None:
+    options = {'memory_view_mode': 'state_driven', 'read_interface': 'explicit_selectors_v1',
+               'read_limit': 10, 'material_limit': 30000}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, 'seed', 'The marker is red. The folder is blue.')
+        marker = memory.save(cfg('seed'), 'marker', 'The marker is red.', handles(memory, ref))
+        folder = memory.save(cfg('seed'), 'folder', 'The folder is blue.', handles(memory, ref))
+        query = memory.service.capture_user('s', 'read', 'Read the delivered marker and source.')
+        memory.service.bind_public_turn('s', 'read', query['source_ref'],
+                                       config_version=CONFIG_VERSION, phase='start')
+        config = cfg('read')
+        memory.bind_request_targets(config, {'ok': True, 'candidates': [
+            {'type': 'record_candidate', 'record_id': marker['id'], 'revision': 1},
+            {'type': 'source_candidate', 'source_ref': ref, 'source_revision': 1},
+        ]})
+        before = memory.service.records()
+        record = invoke(memory, 'read_memory', {'target': marker['id']}, 'record-id', config)
+        assert record['ok'] and record['items'][0]['content'] == 'The marker is red.'
+        source = invoke(memory, 'read_source', {'target': ref}, 'source-id', config)
+        assert source['ok'] and 'folder is blue' in str(source['items'])
+        unissued = invoke(memory, 'read_memory', {'target': folder['id']}, 'unissued', config)
+        assert not unissued['ok'] and unissued['reason'] == 'V13_5_REQUEST_TARGET_NOT_DELIVERED'
+        with pytest.raises(FunctionalRejection, match='REQUEST_TARGET_NOT_DELIVERED'):
+            memory.resolve_request_target(config, marker['id'])
+        forget = invoke(memory, 'forget_memory', {'targets': [marker['id']]}, 'raw-forget', config)
+        assert not forget['ok'] and memory.service.forget_epoch == 0
+        assert memory.service.records() == before
+        original_binding = memory._binding(config)
+        later = memory.service.capture_user('s', 'later', 'Read the marker again.')
+        memory.service.bind_public_turn('s', 'later', later['source_ref'],
+                                       config_version=CONFIG_VERSION, phase='start')
+        denied = invoke(memory, 'read_memory', {'target': marker['id']}, 'old-id', cfg('later'))
+        assert not denied['ok'] and denied['reason'] == 'V13_5_REQUEST_TARGET_NOT_DELIVERED'
+        assert memory.service.forget('s', 'withdraw', fragment_handles=handles(memory, ref))['ok']
+        with pytest.raises(FunctionalRejection, match='REQUEST_TARGET_NOT_DELIVERED'):
+            memory._resolve_read_target(original_binding,
+                                        {'tool': 'read_memory', 'target': marker['id']})
+        assert not memory.service.read(marker['id'])['ok']
+    with opened(tmp_path, owner='bob', **options) as memory:
+        turn(memory, 'foreign', 'Read a marker from another owner.')
+        denied = invoke(memory, 'read_memory', {'target': marker['id']}, 'foreign-id',
+                        cfg('foreign', 'bob'))
+        assert not denied['ok'] and denied['reason'] == 'V13_5_REQUEST_TARGET_NOT_DELIVERED'
+
+
+def test_request_read_ids_do_not_upgrade_exact_history_navigation(tmp_path: Path) -> None:
+    options = {'memory_view_mode': 'state_driven', 'read_interface': 'explicit_selectors_v1',
+               'read_limit': 5, 'material_limit': 30000}
+    with opened(tmp_path, **options) as memory:
+        ref = turn(memory, 'seed', 'The marker was red, now blue.')
+        saved = memory.save(cfg('seed'), 'marker', 'The marker is red.', handles(memory, ref))
+        row = memory.service.read(saved['id'])
+        assert memory.update(cfg('seed'), 'change', row['candidate_handle'], [
+            {'field': 'content', 'op': 'set', 'value': 'The marker is blue.'}],
+            handles(memory, ref))['ok']
+        query = memory.service.capture_user('s', 'history', 'Read only the first saved version.')
+        memory.service.bind_public_turn('s', 'history', query['source_ref'],
+                                       config_version=CONFIG_VERSION, phase='start')
+        config = cfg('history')
+        packet = memory.bind_request_targets(config, {'ok': True, 'candidates': [{
+            'type': 'record_candidate', 'record_id': saved['id'], 'revision': 1,
+            'version_view': 'historical_exact_revision'}]})
+        denied = invoke(memory, 'read_memory', {'target': saved['id']}, 'raw-current', config)
+        assert not denied['ok']
+        old = invoke(memory, 'read_memory_revision', {
+            'target': packet['candidates'][0]['target']}, 'exact', config)
+        assert old['ok'] and old['items'][0]['content'] == 'The marker is red.'
+        assert memory.service.read(saved['id'])['value']['content'] == 'The marker is blue.'

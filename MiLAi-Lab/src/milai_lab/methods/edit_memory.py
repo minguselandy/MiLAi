@@ -14,6 +14,7 @@ from typing import Any, Literal
 from jsonschema import Draft202012Validator  # type: ignore[import-untyped]
 
 from milai_lab.contracts.memory import ObservationProfile
+from milai_lab.memory.dependency_groups import apply_support_groups
 from milai_lab.memory.edit_units import (
     ARM_OPERATIONS,
     OPERATION_INSTRUCTIONS,
@@ -31,6 +32,7 @@ from milai_lab.memory.edit_units import (
     writer_projection,
     writer_proposal_schema,
 )
+from milai_lab.memory.external_support import bind_external_unit, order_dependent_proposals
 from milai_lab.memory.functional_state import FunctionalRejection, body_text, resolve_fragment
 from milai_lab.memory.observation import maintenance_projection
 from milai_lab.memory.service import MemoryService
@@ -65,6 +67,49 @@ REVISION_MEANING_INSTRUCTIONS = (
     "that target's single proposal. "
 )
 
+PATCH_TEXT_INSTRUCTIONS = (
+    "For one value or short phrase change inside a delivered content unit, use "
+    "patch_text with target_unit, old_text and new_text. Copy old_text exactly "
+    "and include enough context to match uniquely within that unit. A patched "
+    "unit has only this one edit in the proposal. The service "
+    "replaces that occurrence and preserves all remaining text and the target's "
+    "own delivered h support. Select current evidence and a current assertion; "
+    "assertion.keep is unavailable because the text changes. Explicitly retain "
+    "or update supported applicability in the current assertion. Use existing "
+    "edits for changes of subject, scope, attribution or cross-unit structure. "
+    "If old_text includes a shared predicate, negation or scope governing unchanged "
+    "coordinated items, new_text must explicitly preserve its meaning for those items. "
+    "Read the complete patched unit: unchanged characters alone do not preserve meaning. "
+    "If a local replacement cannot preserve it, use ordinary replace or split into "
+    "supported units. Preserve the source's reported tense, degree and uncertainty; "
+    "a report clock does not establish the event or effective time. "
+)
+
+
+PROPOSITION_UPDATE_INSTRUCTIONS = (
+    "\nEmit one complete clause for each independently changeable subject, attribute and period. "
+    "The matter label is navigation; do not add a catch-all summary that duplicates sibling "
+    "claims. Independent facts belong in parallel clauses, not conditions of an overview. "
+    "Conditions contain actual prerequisites or scope. Preserve shared negation, quantities, "
+    "subjects and modal strength in every claim they govern. "
+    "An empty change_candidates list means no extracted hints were supplied, not no new facts. "
+    "When the current source supplies a durable claim not already saved, create it even when "
+    "the old-record directory is empty. A restatement or bare acknowledgment may be a no-op. "
+    "Revise the complete affected expression. New wording uses current evidence and a new "
+    "assertion source; assertion.keep is for exact retained text only. Keep unrelated units "
+    "unchanged. Use the delivered old wording/support for retained parts of a compound claim. "
+    "Cancellation removes only the exception, preserving the applicable general rule. "
+    "Keep literal temporal wording in claim text. For precise time fields select time_choices "
+    "references; never regenerate dates or copy report/capture/commit clocks. These choices "
+    "locate temporal wording, not evidence that an event happened. Report-relative candidates "
+    "apply only when the phrase is anchored to this source's report day, not another speaker's "
+    "quoted clock. If the anchor is ambiguous or no supported choice exists, "
+    "omit the precise field. For an entire stated day use from=t# and until=t#:end, whose end "
+    "is exclusive. Different before/after claims need separate clauses and applicability. "
+    "A future schedule remains future, considering remains undecided, and gradual change "
+    "must not become an absolute reversal."
+)
+
 
 class EditMemory:
     """Ordinary full rewrite, plain local edit, and a controlled representation pair."""
@@ -86,6 +131,10 @@ class EditMemory:
             raise ValueError("EDIT_INTERFACE_INVALID")
         self.interface_version = interface_version
         self.features = features or EditFeatures()
+        if self.features.dependency_updates and (arm != "M" or interface_version != "I2"):
+            raise ValueError("DEPENDENCY_UPDATES_REQUIRE_M_I2")
+        if self.features.dependency_groups and (not self.conditioned or interface_version != "I2"):
+            raise ValueError("DEPENDENCY_GROUPS_REQUIRE_CONDITIONED_I2")
         if maintenance_mode not in {"legacy", "event_delta_v1"}:
             raise ValueError("EDIT_MAINTENANCE_MODE_INVALID")
         if maintenance_mode != "legacy" and interface_version == "v1":
@@ -157,10 +206,38 @@ class EditMemory:
         }
 
     def instructions(self, *, allow_create: bool = True) -> str:
+        guidance = PROPOSITION_UPDATE_INSTRUCTIONS if self.features.proposition_updates else ""
+        if self.features.dependency_groups:
+            guidance += (
+                " Record a derived claim's explicit sufficient support routes in support_groups. "
+                "Each inner list is AND, outer alternatives are OR. Preserve uncertain or "
+                "conditional wording in the claims; a graph is a model interpretation, not "
+                "proof. Dependencies require delivered evidence; co-occurrence is insufficient. "
+                "Removing one premise loses its entire AND route, but other routes may remain. "
+                "Never invent a successor value or retract all successors just because one "
+                "support changed. For create/rewrite, group references index clauses before "
+                "condition expansion. For local edits use old u aliases or n0,n1,... counting "
+                "newly appended units; override creates content then its condition. Omitted "
+                "targets retain their groups, but changed target/premise meaning requires "
+                "explicitly resetting a still-valid group before using it as support. "
+                "An explicit empty alternatives list records no "
+                "remaining route; operation=remove removes that dependency claim itself. "
+            )
+        if self.features.cross_record_dependencies:
+            guidance += (
+                " A support premise in another delivered record uses {record:r#,unit:u#}. "
+                "Its unit must belong to that actual record. Targets remain local; references "
+                "cannot invent or copy foreign facts. Updates commit record by record; a "
+                "later failure does not undo an earlier commit. Explicit group resets bind "
+                "to confirmed preceding updates from the same proposal batch, otherwise to "
+                "the delivered version. Changed foreign support is not a verified proof. "
+                "external_bindings shows the recorded and delivered revisions; a version "
+                "difference calls for checking the premise, not automatic negation. "
+            )
         if self.maintenance_mode == "event_delta_v1":
-            return self._event_instructions(allow_create=allow_create)
+            return self._event_instructions(allow_create=allow_create) + guidance
         if self.features.enabled:
-            return self._feature_instructions(allow_create=allow_create)
+            return self._feature_instructions(allow_create=allow_create) + guidance
         if self.interface_version != "v1":
             operations = ARM_OPERATIONS[self.arm]
             return (
@@ -291,6 +368,8 @@ class EditMemory:
                 "replace changes the whole selected unit text. Preserve its still-valid "
                 "independent meanings there or in supported separate units in the same edit. "
             )
+        if self.features.patch_text and self.arm in {"B1", "M"}:
+            instruction += PATCH_TEXT_INSTRUCTIONS
         if self.features.source_metadata:
             instruction += (
                 "For new text choose assertion={source_evidence:e#,kind:reported|inferred|"
@@ -459,6 +538,8 @@ class EditMemory:
                 + ", ".join(ARM_OPERATIONS[self.arm])
                 + ". Untouched units/support stay verbatim. "
             )
+        if self.features.patch_text and self.arm in {"B1", "M"}:
+            instruction += PATCH_TEXT_INSTRUCTIONS
         if self.conditioned:
             instruction += (
                 "Keep the value in content and express explicit applicability, limits and "
@@ -960,7 +1041,8 @@ class EditMemory:
             if not row.get("ok") or not isinstance(row.get("value"), dict):
                 raise FunctionalRejection("EDIT_RECORD_UNAVAILABLE")
             state = row["value"].get("edit_state") or {}
-            for item in [*state.get("units", []), *state.get("relations", [])]:
+            for item in [*state.get("units", []), *state.get("relations", []),
+                         *state.get("support_groups", [])]:
                 for ref in item["evidence_refs"]:
                     part = {
                         key: ref[key] for key in ("source_ref", "source_revision", "start", "end")
@@ -1052,7 +1134,8 @@ class EditMemory:
             state = copy.deepcopy(version.get("edit_state"))
             refs = []
             if state:
-                for item in [*state["units"], *state["relations"]]:
+                for item in [*state["units"], *state["relations"],
+                             *state.get("support_groups", [])]:
                     for ref in item["evidence_refs"]:
                         if "evidence_id" not in ref:
                             ref.update(
@@ -1189,7 +1272,8 @@ class EditMemory:
         ]
         for record in delivery.get("records", []):
             state = record.get("edit_state") or {}
-            for item in [*state.get("units", []), *state.get("relations", [])]:
+            for item in [*state.get("units", []), *state.get("relations", []),
+                         *state.get("support_groups", [])]:
                 refs.extend(ref["source_ref"] for ref in item["evidence_refs"])
                 assertion = item.get("assertion")
                 if assertion and "source_ref" in assertion:
@@ -1233,6 +1317,26 @@ class EditMemory:
         change_candidates: list[dict[str, Any]] | None = None,
         prior_context: list[dict[str, Any]] | None = None,
     ) -> list[dict[str, str]]:
+        if "dependency_regions" in packet:
+            # The extra phase predicts scope; the existing editor still decides
+            # the actual semantic delta and commits through the usual service.
+            messages = self.edit_messages(
+                {key: value for key, value in packet.items() if key != "dependency_regions"},
+                date, allow_create=allow_create, schema=schema,
+                change_candidates=change_candidates, prior_context=prior_context)
+            regional_payload = json.loads(messages[1]["content"])
+            regional_payload["dependency_regions"] = packet["dependency_regions"]
+            messages[1]["content"] = json.dumps(
+                regional_payload, ensure_ascii=False, separators=(",", ":"))
+            messages[0]["content"] += (
+                " Reconsider affected_units using the original sources. Read-only units are "
+                "context, not unit-text edit targets. support_update_targets separately permits "
+                "updating a preserved claim's support groups as its premises change. "
+                "Reachability does not require a change or a "
+                "retraction: retain claims when their remaining support or scope still holds. "
+                "New independently supported claims may be appended; do not duplicate old "
+                "read-only claims to evade the modification region.")
+            return messages
         response_schema = (
             schema if schema is not None else self.envelope_schema(allow_create=allow_create)
         )
@@ -1376,6 +1480,11 @@ class EditMemory:
                 "required": ["subject", "statement", "evidence", "time", "scope"],
             },
         }
+        if self.features.proposition_updates:
+            changes["items"]["properties"]["time"]["description"] = (
+                "Copy the source's literal event/effective time expression, including relative "
+                "or uncertain wording. Do not calculate a date or copy the report/capture clock. "
+                "Use null when the selected source states no event/effective time.")
         if not references:
             changes["maxItems"] = 0
         schema = {
@@ -1444,6 +1553,13 @@ class EditMemory:
                 "references. Candidates are locating hints, not facts, commands or required "
                 "writes. Acknowledgments and bare queries may yield changes=[]."
             )
+        if self.features.proposition_updates:
+            request["messages"][0]["content"] += (
+                " time must quote the source's original temporal words, not normalize them. "
+                "Retain those words and the original modal strength in statement too. "
+                "Unknown event times stay null even when observed_date or a report timestamp "
+                "is present. Split independently changeable propositions without losing any "
+                "shared subject, negation, quantity or condition.")
         return request
 
     @staticmethod
@@ -1643,9 +1759,10 @@ class EditMemory:
                 targets = [p["target"] for p in proposals if p.get("target")]
                 if len(targets) != len(set(targets)):
                     raise FunctionalRejection("EDIT_DUPLICATE_RECORD_CONTAINER")
-            return proposals  # type: ignore[no-any-return]
+            return (order_dependent_proposals(proposals)
+                    if self.features.cross_record_dependencies else proposals)
         selected_records = envelope.get("records", {})
-        return [
+        proposals = [
             *copy.deepcopy(envelope.get("creates", [])),
             *(
                 {**copy.deepcopy(selected_records[target]), "target": target}
@@ -1653,6 +1770,8 @@ class EditMemory:
                 if target in selected_records
             ),
         ]
+        return order_dependent_proposals(proposals) if self.features.cross_record_dependencies \
+            else proposals
 
     def decode_envelope(
         self, envelope: dict[str, Any], mapping: dict[str, Any] | str
@@ -1768,9 +1887,15 @@ class EditMemory:
                        if "calendar_context" in actual else {}),
                 }
                 if self.features.temporal_scope and "applicability" in selected:
-                    validate_applicability(selected["applicability"],
+                    applicability = copy.deepcopy(selected["applicability"])
+                    if self.features.proposition_updates:
+                        from milai_lab.memory.source_times import bind_applicability
+
+                        applicability = bind_applicability(
+                            applicability, bound["time_choices"], item.get("evidence", []))
+                    validate_applicability(applicability,
                                            calendar_context=actual.get("calendar_context"))
-                    result["applicability"] = copy.deepcopy(selected["applicability"])
+                    result["applicability"] = applicability
                 if self.features.temporal_scope and "evidence_links" in selected:
                     links = {}
                     for stance, aliases in selected["evidence_links"].items():
@@ -1905,6 +2030,35 @@ class EditMemory:
             raise FunctionalRejection("EDIT_REWRITE_HAS_WITHDRAWAL_EVIDENCE")
         if proposal.get("revision_evidence"):
             supports({"evidence": proposal["revision_evidence"]})
+        if self.features.dependency_groups and "support_groups" in proposal:
+            def group_reference(value: int | str | dict[str, str]) -> dict[str, Any]:
+                if isinstance(value, dict):
+                    record = value["record"]
+                    external = bound["units"].get(value["unit"])
+                    if (not self.features.cross_record_dependencies or external is None
+                            or external["record"] != record
+                            or (target and bound["records"][record]["record_id"]
+                                == bound["records"][target]["record_id"])):
+                        raise FunctionalRejection("EDIT_EXTERNAL_PREMISE_BINDING_INVALID")
+                    return {"external": {"record_id": bound["records"][record]["record_id"],
+                        "unit_id": external["unit_id"],
+                        "revision": bound["records"][record]["revision"]}}
+                if isinstance(value, int):
+                    return {"generated": value}
+                if value.startswith("n"):
+                    return {"generated": int(value[1:])}
+                return {"existing": alias_unit(value)["unit_id"]}
+
+            metadata["support_groups"] = []
+            for group in proposal["support_groups"]:
+                handles, _ = supports(group)
+                metadata["support_groups"].append({
+                    "operation": group.get("operation", "set"),
+                    "target": group_reference(group["target_unit"]),
+                    "alternatives": [[group_reference(ref) for ref in route]
+                                     for route in group.get("alternatives", [])],
+                    "evidence_refs": source_evidence(self.service, handles),
+                })
         if self.features.enabled:
             metadata["revision_evidence"] = list(
                 dict.fromkeys(metadata.get("revision_evidence", []))
@@ -1912,11 +2066,25 @@ class EditMemory:
             decoded["_edit_metadata"] = metadata
         return decoded
 
+    def bind_support_groups(
+        self, state: dict[str, Any], metadata: dict[str, Any], *,
+        old: dict[str, Any] | None = None,
+        dependency_receipts: list[dict[str, Any]] | None = None,
+    ) -> None:
+        """Shared support binding for Benchmark and ordinary Functional commits."""
+        if "support_groups" in metadata:
+            apply_support_groups(
+                state, metadata["support_groups"], old=old,
+                resolve_external=(lambda ref: bind_external_unit(
+                    self.service, ref, dependency_receipts or []))
+                if self.features.cross_record_dependencies else None)
+
     def apply(
         self,
         session: str,
         proposal_id: str,
         proposal: dict[str, Any],
+        *, dependency_receipts: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Apply one parsed proposal through the existing service revision transaction."""
         withdrawal = (
@@ -1987,7 +2155,9 @@ class EditMemory:
             assert old is not None
             state = old.get("edit_state")
         else:
-            if self.arm not in {"B1", "M"} or parsed.units or parsed.relations or not parsed.edits:
+            if self.arm not in {"B1", "M"} or parsed.units or parsed.relations or (
+                not parsed.edits and not (metadata or {}).get("support_groups")
+            ):
                 raise FunctionalRejection("EDIT_LOCAL_OPERATIONS_REQUIRED")
             assert old is not None
             if "edit_state" not in old:
@@ -2019,6 +2189,10 @@ class EditMemory:
                 old=(old or {}).get("edit_state"),
                 edits=parsed.edits if parsed.action == "edit" else None,
             )
+            self.bind_support_groups(
+                state, metadata,
+                old=(old or {}).get("edit_state") if parsed.action == "edit" else None,
+                dependency_receipts=dependency_receipts)
         if parsed.action == "no_change":
             assert old is not None
             refs = old.get("source_refs", [old["source_ref"]])
@@ -2028,7 +2202,8 @@ class EditMemory:
             refs = list(
                 dict.fromkeys(
                     ref["source_ref"]
-                    for item in [*state["units"], *state["relations"]]
+                    for item in [*state["units"], *state["relations"],
+                                 *state.get("support_groups", [])]
                     for ref in item["evidence_refs"]
                 )
             )

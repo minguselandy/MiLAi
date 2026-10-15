@@ -330,6 +330,38 @@ def test_explicit_resident_keep_is_not_silently_evicted_for_capacity(
     assert memory.view_state(config) == before
 
 
+def test_resident_directory_shares_budget_and_remaining_candidates_stay_readable(
+    saved_memory: tuple[FunctionalEditMemory, dict[str, Any], str],
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    memory, config, _ = saved_memory
+    memory.material_limit = memory.policy["material_limit"] = 5000
+    memory.source_access = "independent_v1"
+    memory.forget_requested = True
+    bound = memory._binding(config)
+    refs = [memory.service.capture_user(
+        "earlier", f"source-{index}", f"Project {index}: " + "literal saved context " * 8,
+    )["source_ref"] for index in range(12)]
+    units = [{"type": "fragment", **fragment}
+             for ref in [bound["source_ref"], *refs]
+             for fragment in memory.service.source_fragments(ref, max_chars=1200)]
+    monkeypatch.setattr(memory, "_search_units", lambda *_: units)
+    memory.context(bound["session"], bound["message_id"], bound["config_version"])
+    before_items = memory._model_items(config)
+    material = memory.model_material(config)
+    assert _tokens(canonical(material)) <= memory.material_limit
+    assert material["candidate_delivery_status"] == "partial"
+    assert material["candidate_skipped_units"] == []
+    assert 0 < len(material["candidates"]) < len(refs)
+    assert len(material["items"]) == len(before_items)
+    cursor = material["next_cursor"]
+    snapshot, start = cursor.rsplit(":", 1)
+    following = memory._page(snapshot, int(start), bound)
+    delivered = {item["source_ref"] for item in material["candidates"]}
+    assert {item["source_ref"] for item in following["candidates"]} - delivered
+    assert all(memory.service.source(ref) is not None for ref in refs)
+
+
 def test_host_projection_keeps_conflicting_unknowns_raw_source_and_selectors() -> None:
     source = {"type": "fragment", "content": "Literal source body.", "start": 3, "end": 23,
               "source_ref": "literal-source", "fragment_handle": "literal-fragment"}

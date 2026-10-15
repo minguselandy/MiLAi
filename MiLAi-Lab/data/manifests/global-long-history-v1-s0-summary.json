@@ -1,0 +1,314 @@
+{
+  "study": "long-history-v1",
+  "arm": "s0",
+  "arm_status": "CLOSED",
+  "full_study_status": "candidate_running",
+  "runtime_code": "4c988f10",
+  "histories": 2,
+  "sessions": 64,
+  "opportunities": 12,
+  "complete_answers": 11,
+  "known_missing": 1,
+  "first_labels": {
+    "Hallucination": 3,
+    "Correct": 7,
+    "missing": 1,
+    "invalid": 1
+  },
+  "cost": {
+    "predict": {
+      "calls": 76,
+      "prompt_tokens": 2878687,
+      "total_tokens": 3034404,
+      "completion_tokens": 155717
+    },
+    "judge": {
+      "calls": 11,
+      "prompt_tokens": 12003,
+      "total_tokens": 34156,
+      "completion_tokens": 22153
+    }
+  },
+  "embedding_calls": 0,
+  "semantic_formation_calls": 0,
+  "phase_wall_seconds": {
+    "predict": 2736.963461,
+    "score": 148.415032
+  },
+  "latency_scope": "overall process duration, not per-question model latency",
+  "new_unknown": {
+    "generation": 0,
+    "embedding": 0
+  },
+  "rows": [
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 8,
+      "session_index": 7,
+      "original_question_index": 4,
+      "selected_question_index": 0,
+      "first_label": "Hallucination",
+      "reader_failure": null,
+      "calls": 4,
+      "usage": {
+        "prompt_tokens": 122739,
+        "total_tokens": 130974,
+        "completion_tokens": 8235
+      },
+      "source_scope": {
+        "indexed_count": 8,
+        "returned_count": 8,
+        "visible_source_count": 284,
+        "returned_source_count": 284
+      }
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 8,
+      "session_index": 7,
+      "original_question_index": 5,
+      "selected_question_index": 1,
+      "first_label": "Hallucination",
+      "reader_failure": null,
+      "calls": 3,
+      "usage": {
+        "prompt_tokens": 112824,
+        "total_tokens": 119846,
+        "completion_tokens": 7022
+      },
+      "source_scope": {
+        "indexed_count": 8,
+        "returned_count": 8,
+        "visible_source_count": 284,
+        "returned_source_count": 284
+      }
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 18,
+      "session_index": 17,
+      "original_question_index": 0,
+      "selected_question_index": 0,
+      "first_label": "Correct",
+      "reader_failure": null,
+      "calls": 7,
+      "usage": {
+        "prompt_tokens": 252067,
+        "total_tokens": 262561,
+        "completion_tokens": 10494
+      },
+      "source_scope": {
+        "indexed_count": 18,
+        "returned_count": 18,
+        "visible_source_count": 724,
+        "returned_source_count": 724
+      }
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 18,
+      "session_index": 17,
+      "original_question_index": 1,
+      "selected_question_index": 1,
+      "first_label": "Correct",
+      "reader_failure": null,
+      "calls": 7,
+      "usage": {
+        "prompt_tokens": 242719,
+        "total_tokens": 256500,
+        "completion_tokens": 13781
+      },
+      "source_scope": {
+        "indexed_count": 18,
+        "returned_count": 18,
+        "visible_source_count": 724,
+        "returned_source_count": 724
+      }
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 32,
+      "session_index": 31,
+      "original_question_index": 1,
+      "selected_question_index": 0,
+      "first_label": "missing",
+      "reader_failure": {
+        "type": "ValueError",
+        "message": "Provider output incomplete: length",
+        "finish_reason": "length",
+        "phase": "confirmed_response",
+        "response_ref": "http/halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/31/qa/0/view/page-3/response.json",
+        "failure_ref": "http/halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/31/qa/0/view/page-3/failure.json"
+      },
+      "calls": 4,
+      "usage": {
+        "prompt_tokens": 204171,
+        "total_tokens": 219129,
+        "completion_tokens": 14958
+      },
+      "source_scope": {
+        "indexed_count": 32,
+        "returned_count": 20,
+        "visible_source_count": 1322,
+        "returned_source_count": 828
+      }
+    },
+    {
+      "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+      "prefix_sessions": 32,
+      "session_index": 31,
+      "original_question_index": 2,
+      "selected_question_index": 1,
+      "first_label": "invalid",
+      "reader_failure": null,
+      "calls": 7,
+      "usage": {
+        "prompt_tokens": 284285,
+        "total_tokens": 296115,
+        "completion_tokens": 11830
+      },
+      "source_scope": {
+        "indexed_count": 32,
+        "returned_count": 20,
+        "visible_source_count": 1322,
+        "returned_source_count": 828
+      }
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 8,
+      "session_index": 7,
+      "original_question_index": 0,
+      "selected_question_index": 0,
+      "first_label": "Correct",
+      "reader_failure": null,
+      "calls": 4,
+      "usage": {
+        "prompt_tokens": 149588,
+        "total_tokens": 155931,
+        "completion_tokens": 6343
+      },
+      "source_scope": {
+        "indexed_count": 8,
+        "returned_count": 8,
+        "visible_source_count": 310,
+        "returned_source_count": 310
+      }
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 8,
+      "session_index": 7,
+      "original_question_index": 1,
+      "selected_question_index": 1,
+      "first_label": "Correct",
+      "reader_failure": null,
+      "calls": 4,
+      "usage": {
+        "prompt_tokens": 180745,
+        "total_tokens": 187941,
+        "completion_tokens": 7196
+      },
+      "source_scope": {
+        "indexed_count": 8,
+        "returned_count": 8,
+        "visible_source_count": 310,
+        "returned_source_count": 310
+      }
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 20,
+      "session_index": 19,
+      "original_question_index": 0,
+      "selected_question_index": 0,
+      "first_label": "Correct",
+      "reader_failure": null,
+      "calls": 8,
+      "usage": {
+        "prompt_tokens": 287528,
+        "total_tokens": 298561,
+        "completion_tokens": 11033
+      },
+      "source_scope": {
+        "indexed_count": 20,
+        "returned_count": 20,
+        "visible_source_count": 840,
+        "returned_source_count": 840
+      }
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 20,
+      "session_index": 19,
+      "original_question_index": 1,
+      "selected_question_index": 1,
+      "first_label": "Correct",
+      "reader_failure": null,
+      "calls": 6,
+      "usage": {
+        "prompt_tokens": 279166,
+        "total_tokens": 289885,
+        "completion_tokens": 10719
+      },
+      "source_scope": {
+        "indexed_count": 20,
+        "returned_count": 20,
+        "visible_source_count": 840,
+        "returned_source_count": 840
+      }
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 32,
+      "session_index": 31,
+      "original_question_index": 0,
+      "selected_question_index": 0,
+      "first_label": "Hallucination",
+      "reader_failure": null,
+      "calls": 10,
+      "usage": {
+        "prompt_tokens": 350545,
+        "total_tokens": 370525,
+        "completion_tokens": 19980
+      },
+      "source_scope": {
+        "indexed_count": 32,
+        "returned_count": 20,
+        "visible_source_count": 1380,
+        "returned_source_count": 980
+      }
+    },
+    {
+      "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+      "prefix_sessions": 32,
+      "session_index": 31,
+      "original_question_index": 1,
+      "selected_question_index": 1,
+      "first_label": "Correct",
+      "reader_failure": null,
+      "calls": 12,
+      "usage": {
+        "prompt_tokens": 412310,
+        "total_tokens": 446436,
+        "completion_tokens": 34126
+      },
+      "source_scope": {
+        "indexed_count": 32,
+        "returned_count": 20,
+        "visible_source_count": 1380,
+        "returned_source_count": 950
+      }
+    }
+  ],
+  "review": "paired source review deferred until both arms closed; no rescore",
+  "artifact_root": "artifacts/global-development/long-history-v1/s0/MiLAi-memory-only",
+  "invalid_judge": {
+    "response_ref": "http/halumem/judge/000005/response.json",
+    "finish_reason": "stop",
+    "content": "{}",
+    "reason": "required official label absent",
+    "rescored": false
+  },
+  "candidate_continuation_root": "artifacts/global-development/long-history-resumed-v1/candidate"
+}

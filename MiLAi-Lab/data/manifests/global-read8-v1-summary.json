@@ -1,0 +1,556 @@
+{
+  "selection": "2 direct + 6 paged, fixed existing metadata, four exposed development users",
+  "source_code": "a171b814",
+  "arms": {
+    "control": {
+      "cases": [
+        {
+          "case_id": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/0/qa/2/complete.json",
+          "label": "Correct",
+          "execution": "answered",
+          "calls": 1,
+          "input_tokens": 3838,
+          "output_tokens": 1270,
+          "elapsed_seconds": 9.051002230495214,
+          "evidence": {
+            "pool": 1,
+            "read": 1,
+            "final": 1,
+            "linked_candidates": 0,
+            "semantic_candidates": 3,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              0
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 1011,
+              "output_tokens": 2757
+            }
+          }
+        },
+        {
+          "case_id": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/7/qa/4/complete.json",
+          "label": "Hallucination",
+          "execution": "answered",
+          "calls": 5,
+          "input_tokens": 143380,
+          "output_tokens": 10691,
+          "elapsed_seconds": 102.20092257484794,
+          "evidence": {
+            "pool": 8,
+            "read": 8,
+            "final": 2,
+            "linked_candidates": 0,
+            "semantic_candidates": 10,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              1,
+              2
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 1012,
+              "output_tokens": 2206
+            }
+          }
+        },
+        {
+          "case_id": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/0/complete.json",
+          "label": "Hallucination",
+          "execution": "answered",
+          "calls": 6,
+          "input_tokens": 101810,
+          "output_tokens": 10931,
+          "elapsed_seconds": 102.72028405684978,
+          "evidence": {
+            "pool": 8,
+            "read": 8,
+            "final": 0,
+            "linked_candidates": 0,
+            "semantic_candidates": 6,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": []
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 916,
+              "output_tokens": 2026
+            }
+          }
+        },
+        {
+          "case_id": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/3/complete.json",
+          "label": "Hallucination",
+          "execution": "answered",
+          "calls": 5,
+          "input_tokens": 124618,
+          "output_tokens": 10837,
+          "elapsed_seconds": 104.71622773073614,
+          "evidence": {
+            "pool": 8,
+            "read": 8,
+            "final": 3,
+            "linked_candidates": 0,
+            "semantic_candidates": 6,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              1,
+              5,
+              6
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 1298,
+              "output_tokens": 2518
+            }
+          }
+        },
+        {
+          "case_id": "halumem/6106afc1-6ad6-c821-3f0f-b491e3e0b833/7/qa/3/complete.json",
+          "label": "Hallucination",
+          "execution": "answered",
+          "calls": 8,
+          "input_tokens": 101613,
+          "output_tokens": 16988,
+          "elapsed_seconds": 136.09154019411653,
+          "evidence": {
+            "pool": 8,
+            "read": 8,
+            "final": 1,
+            "linked_candidates": 0,
+            "semantic_candidates": 10,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              2
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 1283,
+              "output_tokens": 2543
+            }
+          }
+        },
+        {
+          "case_id": "halumem/6106afc1-6ad6-c821-3f0f-b491e3e0b833/7/qa/7/complete.json",
+          "label": "Correct",
+          "execution": "answered",
+          "calls": 4,
+          "input_tokens": 102131,
+          "output_tokens": 6603,
+          "elapsed_seconds": 66.30645038746297,
+          "evidence": {
+            "pool": 8,
+            "read": 8,
+            "final": 4,
+            "linked_candidates": 0,
+            "semantic_candidates": 10,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 961,
+              "output_tokens": 2396
+            }
+          }
+        },
+        {
+          "case_id": "halumem/8ece194a-885c-8e0c-359e-93a97220252c/0/qa/0/complete.json",
+          "label": null,
+          "execution": "answered",
+          "calls": 1,
+          "input_tokens": 3909,
+          "output_tokens": 882,
+          "elapsed_seconds": 6.247795719653368,
+          "evidence": {
+            "pool": 1,
+            "read": 1,
+            "final": 1,
+            "linked_candidates": 0,
+            "semantic_candidates": 1,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              0
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 898,
+              "output_tokens": 380
+            }
+          }
+        },
+        {
+          "case_id": "halumem/8ece194a-885c-8e0c-359e-93a97220252c/5/qa/0/complete.json",
+          "label": "Correct",
+          "execution": "answered",
+          "calls": 3,
+          "input_tokens": 69463,
+          "output_tokens": 3722,
+          "elapsed_seconds": 38.04367922153324,
+          "evidence": {
+            "pool": 6,
+            "read": 6,
+            "final": 1,
+            "linked_candidates": 0,
+            "semantic_candidates": 9,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              1
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 925,
+              "output_tokens": 1343
+            }
+          }
+        }
+      ],
+      "labels": {
+        "Correct": 3,
+        "Hallucination": 4,
+        "invalid": 1
+      },
+      "prediction_calls": 33,
+      "input_tokens": 650762,
+      "output_tokens": 61924,
+      "elapsed_seconds": 565.3779021156952
+    },
+    "readpack": {
+      "cases": [
+        {
+          "case_id": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/0/qa/2/complete.json",
+          "label": "Correct",
+          "execution": "answered",
+          "calls": 1,
+          "input_tokens": 3520,
+          "output_tokens": 1697,
+          "elapsed_seconds": 11.545907047577202,
+          "evidence": {
+            "pool": 6,
+            "read": 6,
+            "final": 6,
+            "linked_candidates": 0,
+            "semantic_candidates": 3,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 1117,
+              "output_tokens": 1167
+            }
+          }
+        },
+        {
+          "case_id": "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/7/qa/4/complete.json",
+          "label": "Correct",
+          "execution": "answered",
+          "calls": 2,
+          "input_tokens": 30279,
+          "output_tokens": 4118,
+          "elapsed_seconds": 32.388663437217474,
+          "evidence": {
+            "pool": 142,
+            "read": 3,
+            "final": 3,
+            "linked_candidates": 0,
+            "semantic_candidates": 10,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              1,
+              2,
+              78
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 970,
+              "output_tokens": 1607
+            }
+          }
+        },
+        {
+          "case_id": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/0/complete.json",
+          "label": "Correct",
+          "execution": "answered",
+          "calls": 2,
+          "input_tokens": 30978,
+          "output_tokens": 1741,
+          "elapsed_seconds": 17.180149952881038,
+          "evidence": {
+            "pool": 155,
+            "read": 1,
+            "final": 1,
+            "linked_candidates": 0,
+            "semantic_candidates": 6,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              2
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 874,
+              "output_tokens": 315
+            }
+          }
+        },
+        {
+          "case_id": "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/3/complete.json",
+          "label": null,
+          "execution": "missing",
+          "calls": 1,
+          "input_tokens": 15286,
+          "output_tokens": 32768,
+          "elapsed_seconds": 222.88355903699994,
+          "evidence": {
+            "pool": 155,
+            "read": 0,
+            "final": 0,
+            "linked_candidates": 0,
+            "semantic_candidates": 6,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": []
+          },
+          "failure": {
+            "type": "ValueError",
+            "message": "Provider output incomplete: length",
+            "finish_reason": "length",
+            "phase": "confirmed_response",
+            "response_ref": "http/halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/3/view/pack-0/response.json",
+            "failure_ref": "http/halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/3/view/pack-0/failure.json"
+          },
+          "judge_models": {}
+        },
+        {
+          "case_id": "halumem/6106afc1-6ad6-c821-3f0f-b491e3e0b833/7/qa/3/complete.json",
+          "label": "Hallucination",
+          "execution": "answered",
+          "calls": 2,
+          "input_tokens": 29813,
+          "output_tokens": 5795,
+          "elapsed_seconds": 43.39423620700836,
+          "evidence": {
+            "pool": 117,
+            "read": 9,
+            "final": 9,
+            "linked_candidates": 0,
+            "semantic_candidates": 10,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              5,
+              8,
+              14,
+              15,
+              16,
+              18,
+              26,
+              68,
+              72
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 1015,
+              "output_tokens": 4074
+            }
+          }
+        },
+        {
+          "case_id": "halumem/6106afc1-6ad6-c821-3f0f-b491e3e0b833/7/qa/7/complete.json",
+          "label": "Hallucination",
+          "execution": "answered",
+          "calls": 2,
+          "input_tokens": 26773,
+          "output_tokens": 4367,
+          "elapsed_seconds": 33.29473917838186,
+          "evidence": {
+            "pool": 117,
+            "read": 5,
+            "final": 5,
+            "linked_candidates": 0,
+            "semantic_candidates": 10,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              3,
+              9,
+              36,
+              90,
+              98
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 967,
+              "output_tokens": 2940
+            }
+          }
+        },
+        {
+          "case_id": "halumem/8ece194a-885c-8e0c-359e-93a97220252c/0/qa/0/complete.json",
+          "label": "Correct",
+          "execution": "answered",
+          "calls": 1,
+          "input_tokens": 3600,
+          "output_tokens": 1195,
+          "elapsed_seconds": 8.219273425638676,
+          "evidence": {
+            "pool": 6,
+            "read": 6,
+            "final": 6,
+            "linked_candidates": 0,
+            "semantic_candidates": 1,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 944,
+              "output_tokens": 454
+            }
+          }
+        },
+        {
+          "case_id": "halumem/8ece194a-885c-8e0c-359e-93a97220252c/5/qa/0/complete.json",
+          "label": "Correct",
+          "execution": "answered",
+          "calls": 2,
+          "input_tokens": 28127,
+          "output_tokens": 2546,
+          "elapsed_seconds": 21.386540040373802,
+          "evidence": {
+            "pool": 84,
+            "read": 2,
+            "final": 2,
+            "linked_candidates": 0,
+            "semantic_candidates": 9,
+            "semantic_in_pool": 0,
+            "semantic_final": 0,
+            "linked_final": 0,
+            "final_item_indices": [
+              1,
+              2
+            ]
+          },
+          "failure": null,
+          "judge_models": {
+            "Qwen3.6-35B-A3B-FP8": {
+              "calls": 1,
+              "input_tokens": 914,
+              "output_tokens": 1280
+            }
+          }
+        }
+      ],
+      "labels": {
+        "Correct": 5,
+        "missing": 1,
+        "Hallucination": 2
+      },
+      "prediction_calls": 13,
+      "input_tokens": 168376,
+      "output_tokens": 54227,
+      "elapsed_seconds": 390.29306832607836
+    }
+  },
+  "paired": {
+    "candidate_only_correct": [
+      "halumem/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/7/qa/4/complete.json",
+      "halumem/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/7/qa/0/complete.json",
+      "halumem/8ece194a-885c-8e0c-359e-93a97220252c/0/qa/0/complete.json"
+    ],
+    "control_only_correct": [
+      "halumem/6106afc1-6ad6-c821-3f0f-b491e3e0b833/7/qa/7/complete.json"
+    ]
+  },
+  "source_review": {
+    "scope": "Root symmetrical actual-final-input review of U1/S7/Q4 and U3/S7/Q7; auxiliary diagnostics, official first labels unchanged.",
+    "U1S7Q4": "Both answers retain unspecified exact new job title. Prior Director/Huaxin and creative aspect have User support in control input; healthcare/humanitarian framing is partly Assistant speech. Candidate also repeats humanitarian framing. Official H->C is not a clean provenance gain.",
+    "U3S7Q7": "Both identify retirement. Employer/manager and reasons for retirement occur in actual delivered User statements, despite candidate Judge calling them absent from key memory points. Candidate overstates that March12 explicitly reiterated retirement; exact retirement onset still not established merely by the Dec12 report clock.",
+    "interpretation": "Retain5/8 vs3/8 official labels, but source review limits causal quality attribution. Read cost and source delivery improvements are separately observed."
+  }
+}

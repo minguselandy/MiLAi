@@ -15,6 +15,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from milai_lab.memory.dependency_groups import retain_support_groups
 from milai_lab.memory.functional_state import (
     FunctionalRejection,
     body_text,
@@ -123,6 +124,21 @@ def read_revision_evidence(service: Any, version: dict[str, Any]) -> list[dict[s
     return result
 
 
+def read_retained_support(service: Any, version: dict[str, Any]) -> list[dict[str, Any]]:
+    """Reopen current units' retained sources separately from this revision's witnesses."""
+    witnesses = version.get("revision_evidence")
+    if witnesses is None:
+        witnesses = [handle for edit in version.get("edit_operations", [])
+                     for handle in edit["evidence"]]
+    handles = list(dict.fromkeys(
+        ref["evidence_id"] for unit in (version.get("edit_state") or {}).get("units", [])
+        for ref in unit["evidence_refs"] if ref["evidence_id"] not in witnesses
+    ))
+    return [dict(item, support_role="retained_support") for item in read_revision_evidence(
+        service, {"revision_evidence": handles},
+    )]
+
+
 def read_revision_scope(
     service: Any, record_id: str, version: dict[str, Any]
 ) -> list[dict[str, Any]]:
@@ -195,7 +211,8 @@ def validate_state(state: dict[str, Any], service: Any | None = None) -> None:
             raise FunctionalRejection("EDIT_UNIT_INVALID")
         by_id[unit["unit_id"]] = unit
     conditioned = state["representation"] == "conditioned_v1"
-    if not conditioned and (state["relations"] or any(u["role"] != "content" for u in units)):
+    if not conditioned and (state["relations"] or state.get("support_groups")
+                            or any(u["role"] != "content" for u in units)):
         raise FunctionalRejection("EDIT_PLAIN_REPRESENTATION_REQUIRED")
     relation_ids = set()
     override_sources = set()
@@ -229,7 +246,17 @@ def validate_state(state: dict[str, Any], service: Any | None = None) -> None:
                 for r in state["relations"]
             ):
                 raise FunctionalRejection("EDIT_OVERRIDE_SCOPE_REQUIRED")
-    for item in [*units, *state["relations"]]:
+    group_targets = set()
+    for group in state.get("support_groups", []):
+        target = group["target_unit"]
+        if target not in by_id or by_id[target]["role"] != "content" or target in group_targets:
+            raise FunctionalRejection("EDIT_SUPPORT_TARGET_INVALID")
+        group_targets.add(target)
+        for route in group["alternatives"]:
+            if (not route or target in route
+                    or not set(route) <= set(by_id) | set(group.get("external_units", {}))):
+                raise FunctionalRejection("EDIT_SUPPORT_ROUTE_INVALID")
+    for item in [*units, *state["relations"], *state.get("support_groups", [])]:
         evidence = item.get("evidence_refs")
         if not isinstance(evidence, list) or not evidence:
             raise FunctionalRejection("EDIT_EVIDENCE_REQUIRED")
@@ -305,6 +332,7 @@ def apply_local(
     units, relations = state["units"], state["relations"]
     original_ids = {unit["unit_id"] for unit in units}
     targeted = set()
+    removed = set()
     if assertions is not None and len(assertions) != len(edits):
         raise FunctionalRejection("EDIT_ASSERTION_COMPILATION_INVALID")
     for edit_index, edit in enumerate(edits):
@@ -315,6 +343,13 @@ def apply_local(
             else {"replace", "insert", "delete"}
         ):
             raise FunctionalRejection("EDIT_OPERATION_NOT_AVAILABLE_IN_ARM")
+        if edit.operation in {"delete", "retract"} and edit.target_unit in removed:
+            # Repeated cleanup of a target deleted by this same proposal has
+            # one effect. Its declared evidence and operation still must be valid.
+            source_evidence(service, edit.evidence)
+            if edit.text is not None or edit.condition is not None:
+                raise FunctionalRejection("EDIT_RETRACTION_HAS_NEW_TEXT")
+            continue
         by_id = {unit["unit_id"]: unit for unit in units}
         target = by_id.get(edit.target_unit)
         needs_target = edit.operation in {"replace", "delete", "retract", "override"}
@@ -334,6 +369,7 @@ def apply_local(
             relations[:] = [
                 r for r in relations if edit.target_unit not in {r["source_unit"], r["target_unit"]}
             ]
+            removed.add(edit.target_unit)
             continue
         if not isinstance(edit.text, str) or not edit.text.strip():
             raise FunctionalRejection("EDIT_NEW_TEXT_REQUIRED")
@@ -431,6 +467,7 @@ def apply_local(
                     "evidence_refs": evidence,
                 }
             )
+    retain_support_groups(state, old)
     return state
 
 
@@ -853,6 +890,8 @@ def render_revision_view(
         "units": compact_units,
         "source_table": source_table,
         "relations": relations,
+        **({"support_groups": copy.deepcopy(state["support_groups"])}
+           if "support_groups" in state else {}),
         "common_conditions": common_conditions,
         "historical_units": [
             key for key, item in projected.items()
@@ -969,6 +1008,24 @@ def render_state(
         ]
         if conditions:
             lines.append("  Applies under: " + "; ".join(conditions))
+    for group in state.get("support_groups", []):
+        external = group.get("external_units", {})
+        routes = [" AND ".join(units[uid]["text"] if uid in units else
+                  "External record " + external[uid]["record_id"] + " unit "
+                  + external[uid]["unit_id"] + " at revision " + str(external[uid]["revision"])
+                  for uid in route)
+                  for route in group["alternatives"]]
+        lines.append("Support for " + units[group["target_unit"]]["text"] + ": "
+                     + " OR ".join("(" + route + ")" for route in routes)
+                     if routes else "No stored support route for "
+                     + units[group["target_unit"]]["text"])
+        if group.get("changed_premises"):
+            lines.append(
+                "  Premise wording or attribution changed; routes require reinterpretation: "
+                + "; ".join(units[uid]["text"] for uid in group["changed_premises"]))
+        if group.get("changed_target"):
+            lines.append(
+                "  Target wording or attribution changed; routes require reinterpretation.")
     return "\n".join(lines)
 
 
@@ -1128,6 +1185,15 @@ def compile_clause_proposal(proposal: dict[str, Any]) -> dict[str, Any]:
             )
         relations.extend(reused_links)
     units.extend({**unit, "role": "condition"} for unit in result.pop("unresolved_conditions", []))
+    for group in result.get("support_groups", []):
+        indexes = [group["target_unit"], *(i for route in group["alternatives"] for i in route)]
+        if any(not 0 <= index < len(content_indexes) for index in indexes
+               if isinstance(index, int)):
+            raise FunctionalRejection("EDIT_SUPPORT_CLAUSE_UNAVAILABLE")
+        group["target_unit"] = content_indexes[group["target_unit"]]
+        group["alternatives"] = [[content_indexes[index] if isinstance(index, int) else index
+                                  for index in route]
+                                 for route in group["alternatives"]]
     result.update(units=units, relations=relations)
     return result
 
@@ -1361,6 +1427,18 @@ def writer_projection(
         if classify_delivery:
             fresh[alias]["delivery_kind"] = kind
             public_evidence[-1]["delivery_kind"] = kind
+    external_aliases = {}
+    external_revisions = {}
+    unit_serial = 0
+    for ordinal, row in enumerate(delivery.get("records", []), 1):
+        for unit in (row.get("edit_state") or {}).get("units", []):
+            unit_serial += 1
+            # Identity-free snapshots still support pure local budgeting. They
+            # cannot become targets of a cross-record reference.
+            if "record_id" in row:
+                external_aliases[(row["record_id"], unit["unit_id"])] = {
+                    "record": f"r{ordinal}", "unit": f"u{unit_serial}"}
+                external_revisions[(row["record_id"], unit["unit_id"])] = row.get("revision")
     for record in delivery.get("records", []):
         record_alias = "r" + str(len(records) + 1)
         records[record_alias] = copy.deepcopy(record)
@@ -1439,6 +1517,31 @@ def writer_projection(
             "units": public_units,
             "relations": public_relations,
         }
+        if state and "support_groups" in state:
+            def premise_alias(
+                uid: str, group: dict[str, Any], local: dict[str, str] = by_id,
+            ) -> Any:
+                if uid in local:
+                    return local[uid]
+                external = group["external_units"][uid]
+                return external_aliases.get((external["record_id"], external["unit_id"]),
+                                            {"unavailable_external": True})
+
+            public_record["support_groups"] = [{
+                "target_unit": by_id[group["target_unit"]],
+                "alternatives": [[premise_alias(uid, group) for uid in route]
+                                 for route in group["alternatives"]],
+                "support": [support_id(group, {"support_target": by_id[group["target_unit"]]})],
+                **({"changed_premises": [by_id[uid] for uid in group["changed_premises"]]}
+                   if group.get("changed_premises") else {}),
+                **({"changed_target": True} if group.get("changed_target") else {}),
+                **({"external_bindings": [{"premise": premise_alias(uid, group),
+                    "bound_revision": ref["revision"],
+                    "delivered_revision": external_revisions.get(
+                        (ref["record_id"], ref["unit_id"]))}
+                    for uid, ref in group["external_units"].items()]}
+                   if group.get("external_units") else {}),
+            } for group in state["support_groups"]]
         if "scope" in record:
             public_record["scope"] = copy.deepcopy(record["scope"])
         if features and features.get("matter_organization"):
@@ -1534,4 +1637,10 @@ def writer_projection(
     if features and any(features.values()):
         packet["edit_features"] = copy.deepcopy(features)
         draft["edit_features"] = copy.deepcopy(features)
+    if features and features.get("proposition_updates") and features.get("temporal_scope"):
+        from milai_lab.memory.source_times import source_time_choices
+
+        times = source_time_choices(fresh)
+        packet["time_choices"] = times
+        draft["time_choices"] = times
     return packet, draft

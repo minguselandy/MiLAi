@@ -195,7 +195,9 @@ def normalize_read_goal(
 
 class ResidentTargetSelector(ReadSelector):
     target: str = Field(
-        min_length=1, description="Copy an actual target from this request's material.",
+        min_length=1, description="Copy an actual target from this request's material. "
+        "A displayed record/Source ID can also name its current read navigation when "
+        "that navigation was already delivered in this request; it grants no mutation rights.",
     )
     keep_resident: bool = False
     read_goal: str | StructuredReadGoal | None = Field(
@@ -242,6 +244,8 @@ class FunctionalMemory:
         fragment_chars: int = 1200,
         source_access: str = "legacy",
         source_top_k: int = 20,
+        source_tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
+        source_granularity: Literal["session", "turn"] = "session",
         semantic_top_k: int = 10,
         max_evidence_queries: int | None = None,
         retrieval_candidates: list[dict[str, Any]] | None = None,
@@ -271,6 +275,7 @@ class FunctionalMemory:
         ):
             raise FunctionalRejection("FUNCTIONAL_EVIDENCE_QUERY_LIMIT_INVALID")
         self.source_access = source_access
+        self.source_tokenization, self.source_granularity = source_tokenization, source_granularity
         self.source_top_k, self.semantic_top_k = source_top_k, semantic_top_k
         self.max_evidence_queries = max_evidence_queries
         self.forget_requested = False
@@ -325,7 +330,9 @@ class FunctionalMemory:
         }
         if source_access != "legacy":
             self.policy.update(source_access=source_access, source_top_k=source_top_k,
-                               semantic_top_k=semantic_top_k)
+                               semantic_top_k=semantic_top_k,
+                               source_tokenization=source_tokenization,
+                               source_granularity=source_granularity)
         if max_evidence_queries is not None:
             self.policy["max_evidence_queries"] = max_evidence_queries
         if formation_interface != "content_and_scope_v1":
@@ -453,7 +460,26 @@ class FunctionalMemory:
     def _resolve_read_target(
         self, binding: dict[str, Any], request: dict[str, Any],
     ) -> dict[str, Any]:
-        row = resolve_request_target(self.service, binding, request["target"])
+        target = request["target"]
+        mapping = request_target_mapping(self.service, binding)
+        field = {"read_memory": "record_id", "read_memory_history": "record_id",
+                 "read_memory_revision": "record_id", "read_source": "source_ref"}.get(
+                     request["tool"])
+        if field and target not in mapping["targets"] and (
+            request["tool"] != "read_memory_revision" or request.get("revision") is not None
+        ):
+            # Receipts and bodies may display persistent IDs beside request aliases.
+            # Reuse only an already-issued current navigation to that exact identity.
+            # This does not search for guessed IDs or create body/mutation credentials.
+            target = next((alias for alias, candidate in mapping["targets"].items()
+                if candidate["kind"] == "read_only_navigation"
+                and candidate["identity"].get(field) == target
+                and candidate["identity"].get("read", {}).get("tool") in {
+                    "read_memory", "read_memory_history", "read_source"}
+                and candidate["identity"].get("version_view") != "historical_exact_revision"
+                and candidate["identity"].get("forget_epoch", self.forget_epoch)
+                    == self.forget_epoch), target)
+        row = resolve_request_target(self.service, binding, target)
         identity, kind, tool = row["identity"], row["kind"], request["tool"]
         if kind == "read_only_navigation" and identity.get("forget_epoch", self.forget_epoch) \
                 != self.forget_epoch:
@@ -792,7 +818,8 @@ class FunctionalMemory:
             ]
             return self._deduplicate(current + fragments)
         result = (self.service.search_evidence(
-            query, source_limit=self.source_top_k, semantic_limit=self.semantic_top_k
+            query, source_limit=self.source_top_k, semantic_limit=self.semantic_top_k,
+            tokenization=self.source_tokenization, granularity=self.source_granularity,
         ) if self.source_access == "independent_v1" else
             self.service.search(query, limit=100, include_raw=True))
         if self.source_access == "independent_v1" and self.forget_requested:

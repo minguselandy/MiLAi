@@ -1,0 +1,72 @@
+{
+  "status": "EXTERNAL_NATIVE_COMMON_READER_PROTOCOL_ZERO_MODEL",
+  "configs": [
+    "configs/milai-method-architecture-simplemem-pilot-v1.json",
+    "configs/milai-method-architecture-simplemem-full-v1.json"
+  ],
+  "pilot": {
+    "histories": 2,
+    "events": 6,
+    "qa": 8,
+    "selection": "already exposed projection/exhibit mechanism cases; integration feedback only"
+  },
+  "full": {
+    "histories": 12,
+    "events": 36,
+    "qa": 48,
+    "selection": "same exposed E2 development sources as strong controls; not external heldout scores"
+  },
+  "native_components": [
+    "official SimpleMem text memory builder",
+    "LanceDB semantic storage",
+    "Tantivy keyword search",
+    "structured search",
+    "native query planning/reflection and finite internal retries"
+  ],
+  "adaptations": [
+    "same Qwen3.6-35B generation endpoint",
+    "bge-m3 normalized1024 embeddings with common input capacity and receipts",
+    "same8192 generation ceiling including native calls; native temperature and no-thinking retained",
+    "complete native windows process on arrival; pending source-only buffer flushes before query, unchanged short-flush semantics; native buffer/previous_entries/processed_count/sequence persist across reopen",
+    "same independently retrieved original Sources added to native generated entries",
+    "common Reader instead of native answer generator",
+    "deferred native source flush and query calls consume the common12-call question allowance; at least one Reader call remains",
+    "QA20 caps native entry count in original return order; entire native return retained"
+  ],
+  "provenance": "generated native entries are explicitly interpretations; no invented Source IDs/spans; original Sources retain their separate real ranges",
+  "first_failures": "unconfirmed wrapper operations are not retried; native finite retry policy is observed and all requests charged; settled native partial/fallback outcomes remain visible",
+  "costs": "all native ingestion/planning/reflection/embedding plus final Reader and first Judge on original continuous ledger",
+  "no_sha_verification": true,
+  "no_model_deployment": true,
+  "separate_author_native_answer_reproduction": false,
+  "still_required": [
+    "actual pilot and full comparison",
+    "independent external benchmark/long histories",
+    "native author-answer table if claimed",
+    "matched additional model/budget-point evaluation"
+  ],
+  "unknown_operations": "unfinished native operation blocks fresh operations across keys, avoiding a duplicate flush after lost acknowledgement; completed requests replay from saved results",
+  "engineering_checks": {
+    "native_SDK_LanceDB_Tantivy": "actual installed SDK/storage with MockHTTP, not model quality samples",
+    "related_tests": 109,
+    "deselected": "3 unrelated MERIT/MemSyCo private-asset cases",
+    "seconds": 13.48,
+    "new_aligned_tests": 6,
+    "new_tests_seconds": 5.6,
+    "mypy_files": 3,
+    "ruff": "pass",
+    "package_dag_and_facades": "pass",
+    "tools_boundary": "pass",
+    "verification_matrix_owned_sources": 277,
+    "prepare": "pilot windows cadence PREPARED_ZERO_MODEL,6sessions8QA",
+    "covered": [
+      "source-only writer inputs exclude evaluator fields and query text",
+      "actual native window overlap and previous_entries survive reopen",
+      "pending source buffer survives reopen without re-generation",
+      "native commit acknowledgement loss blocks same and different fresh keys",
+      "deferred flush and retrieval share cap, Reader reserves one slot",
+      "all native generation and common embedding receipts reconcile in test ledger",
+      "original Sources remain separate from generated entries in common Reader"
+    ]
+  }
+}

@@ -1,3 +1,706 @@
+# Current publication checkpoint requested; corrected factorial LIVE
+
+User explicitly requests development summary and GitHub submission. Publish the
+current branch as draft continuation of openPR121; do not infer merge or pause.
+GoalACTIVE/incomplete. Nativefull CLOSED13:19:12UTC:48answers,40Correct/7invalid/1H;
+24postquery states+48QA source-reviewed, manualcore48/fidelity31(+4ambiguous),
+postqueryUJS3–7/24 differentboundary fromStrong.341gen455519+245emb6983 exact,
+newunknown0. Reports simplemem-full-v1-summary/review. No externalbenchmark claim.
+ABsuffix f8257f46 CLOSED original7/8/9 allCOMPLETED. June12 query wrongly names
+futureChen instead ofLin; r5BcorrectXu butsince-beginning scope absentcurrenttext;
+finalactual r1historyread proves firstsavedShen and finalQAcorrect.14gen134676+
+12emb1083 exact,newunknown0. Originalfirstfailure preserved; notcoldsuccess.
+LIVE correctedfactorial-v3 driver2493762/exec13816, firstworker2511884 actual/proc
+confirmed. Frozenf8257f46 at host-ab-source-v2;2repeats72QA, sameoriginalseed/arrival,
+no newseedcost/no oldHTTPcopy. Protocol disclosesno explicitORgroup inseed. No duplicate
+model dispatch. Await bothrepeats and fullstate/QA/historydelivery/cost review.
+Publication must retain allfailures and fullscope remaining: cold successfulA/B,
+W4matchedtraining/eval, independentexternalbenchmark/longhistories, extra model,
+quality–cost/scale curves andfinalaudit. NoSHA/subagents/newledger/newdeploy.
+Historical snapshots below.
+
+# Current: native full LIVE; A/B first stopped after commit; capacity fix checked
+
+GoalACTIVE/incomplete. Strong fivearms CLOSED/reviewed (see summary/review).
+Nativepilot CLOSED:8answers,6Correct+2invalid; manualcore7/sourcefaithful6,9entries;
+52gen74620+32emb1003 exactledger,newunknown0. No external/heldout claim.
+Nativefull driver2400057/exec62427 LIVE predictchild2406918, actual/proc confirmed;
+frozen46bc516e/native db80b6a unchanged,12cases36events48QA. Do notduplicate.
+ABfirst b33d5690 driver2384059/exec41638 CLOSED:6COMPLETED,1FAILED(index6),
+7–9NOT_RUN. Four real revisions; temporary exception removed inr4, futureA/
+confirmation/B/tea kept. No explicitrelations/groups. First3queries correct.
+Index6 read_memory succeeded then pre_model_hook MATERIAL_WRAPPER_EXCEEDS_LIMIT;
+classifierallow_forgettingTrue selectedresidentpath, no actualforget operations.
+28gen182422+27emb2483 exact,newunknown0. Firstsummary tracked.
+NEW genericfix reserves directory minimum+continuation before resident paging;
+actualbankCOPY0HTTP replay old8120+wrapper>8192 ->new7910,2units+1candidate,
+pending/continuationspreserved.9tests,Ruff/mypy/DAGpass. No modelrecoveryyet.
+Fixf8257f46 frozenhost-ab-source-v2; actualABbank COPY prepared for original
+unrunindices7–9. Continuationdriver2459124/exec61667 WAITING_FOR_NATIVE_FULL;
+no retry/relabel original6. Inspect actualprocesses beforehandoff. Still need a complete
+single-version successfulstory, correctedfullR, W4learning/eval, independentexternal
+longhistory/benchmark, cost/scale curves, secondmodel andfinalaudit. NoSHA/subagents/
+newledger/newdeploy. Historicalsnapshots below.
+
+# Current: strong first results closed; native pilot LIVE; clock projection development
+
+Goal ACTIVE/incomplete. strong-v1 driver1672507 CLOSED0 at12:43:02UTC;
+all5 predictions/firstscores closed. Original labels Correct43/44/42/44/39 of48;
+candidate1selectorlength missing, invalid3/2/3/2/5. No rejudge/retry.
+48formation+96state+240QA positions author-reviewed; UJS append9–11/plain15–16/
+conditioned13/candidate7–9 of24, ambiguous dimensions explicit. No candidate win.
+688gen2825468 +398emb23740 exactledger, newunknown0; summaries/review tracked.
+SimpleMem driver2094352/exec84597 actualhandoff12:43:04UTC; predictchild2363644
+LIVE atlastcheck. Frozen46bc516e/native db80b6a unchanged; inspect actualprocess.
+Development clarifies question-pack reported_at vs captured_at consistently for
+Source and assertions; stored clocks/visibility unchanged. New realSQLite tests
+and existing dependency/Host checks passed; no model-qualityclaim yet.
+Next freeze/queue new A/B Host only after nativepilot closure; no overlappingHTTP.
+Still W4 learning/eval, correctedfullR, external longhistory/benchmark, quality–cost/
+scale curves, secondmodel, complete positiveA/Bstory and finalaudit. NoSHA/subagents/
+newledger/newdeploy. Historical snapshots below.
+
+# Current queues: strong LIVE; native SimpleMem queued; A/B Host prepared
+
+GoalACTIVE/incomplete. LIVE strong driver1672507/exec12669, laststep
+candidate predict child2027770; actual/proc confirmed thisturn.
+Frozena47035f6 unchanged. Firstfourpredicts each36sessions48answers/0knownmiss;
+candidatepredict ongoing, FIRSTscorespending. No winnerclaim.
+QUEUED SimpleMem driver2094352/exec84597 WAITING_FOR_STRONG, actualprocessconfirmed.
+FrozenLab46bc516e(simplemem-source-v1), officialdetachednative db80b6a(simplemem-native-v1),
+isolatedsimplemem-env. Frozenpilot6events8QA prepare0HTTP. Supervisor starts onlyafter
+allStrongpredictions+firstscoresclose, oldPIDs gone, sealedledger matches/no newunknown.
+Do not dispatch othermodeljobs or duplicatequeue. Full12chainNative config notqueued;
+pilotmustbereviewedfirst. Existingoriginalledger andunknownfloors preserved.
+Nativeadapter109tests13.48s plus6nativecases5.60s; source inputs/questionisolation,
+40window/2overlap/nativebuilderstate/reopen/partialcommit no-retry/callcaps/receipts
+verified withactualSDK+MockHTTP. No native modelqualityresultyet.
+NEW host-ab-v1 5source+5query freshA/Bstory PREPARED0HTTP, refseparate, no oraclebefore/
+graph. FutureA,scopeexception/cancel,Bhistorycorrection,confirmation,tea. Notstarted.
+Next monitorStrong/queuedpilot; inspectsemanticstate/QA/cost; freeze/runfreshHoststory
+onlywhenexistingqueuesclose. StillW4learning/eval,correctedfullR,externalbenchmarklong
+histories,additionalmodel andfinalaudit. NoSHA/subagents/newledger/newdeploy.
+Historical snapshots follow.
+
+# Current development: SimpleMem adapter checked; strong queue still LIVE
+
+GoalACTIVE/incomplete. strong-v1 driver1672507/exec12669 frozena47035f6
+laststep candidate predict child2027770; inspect actualPID beforehandoff.
+Firstfourpredictarmsclosed, candidatepredict underway atlastcheck; firstscorespending.
+NEW SimpleMemAlignedBackend reusesnative textcore/LanceDB/Tantivy/planning/reflection,
+commonSources+Reader, nativewindows/overlap; remainderflush beforequery, actualbuilder
+statepersisted. Query neverWriterinput. Nativeflush+query+Reader share12calls; output
+ceiling8192matchescommon. Fullnative/fallback/usage retained, no authoranswerclaim.
+109relatedtests13.48s +6newnativecases5.60s,3filemypy/Ruff/DAG/tools/matrixpass;
+MockHTTPonly, noexternalmethodmodelresultyet. Pilot2cases6events8QA prepared0HTTP,
+full12chainsconfigready. Existingisolatedsimplemem-env required foractualrun.
+NEXT commit/freeze and queuepilot ONLY afterstrongfivepredictions+firstscoresclose;
+no overlap/newledger/newdeploy/SHA/subagents. Inspectpilot beforefullrun.
+Otherfullscope remains W4reallearning/eval, correctedfullR, newfixedversionA/BHoststory,
+externalbenchmarklonghistories,anothergenerationmodel andfinalscientificaudit.
+
+# Current execution: five strong controls LIVE; Host recovery path reviewed
+
+GoalACTIVE/incomplete. LIVE strong-v1 driver1672507,exec12669;
+lastverified append predict child1714788 actual/proc commandmatches.
+Frozena47035f6 at host-source-v4, five36event/48QAarms serial thenfirstscores.
+SourcearmCLOSED0/48answers,0Editor/Impact/embedding;48Readerresponses. No scores yet.
+Do not duplicate/restart queue or change frozen source. See strong-v1/driver.json.
+Hostv4exec2009/driver1636323 CLOSED0. Recovery and original5/6/7completed; finalledger3/
+qualification2, bothcredentialsinvalid, denial, training/bluelabel preserved. Actualold
+qualification1 andcurrent2 bothdelivered/read. Stillcompoundgraph andsourcefidelityissues.
+Lastlane16gen123270+15emb1595; allHost48gen387578+42emb4068,newunknown0.
+Originalfirst remains1FAILED+7NOT_RUN; mixedversionrecovery isnotfreshfixedversionfirstpass.
+Selectoron/off diagnostic hasexactequalmessages/schema; on8192length vs off137stop,
+onlyoneexposedpair, no population/learningclaim. Seerecovery-v4-summary.
+NEW development fixesHosthistoricalcandidate version_view so itsnavigation isexactrevision;
+25tests9.01s,mypy/Ruffpass. Runningstrongsource unchanged (Benchmark unaffected).
+FiveW4matchedrefs only,no training. Existingconfirmedgeneration7860/7862same35B;
+fourA100full; no newdeploy. SimpleMemnative runtime exists but alignedadapterstillpending.
+NEXT monitor/reviewstrongcontrols, externaladapter/benchmark, W4matchedlearning/eval,
+fullRcorrectedtest, newfixedversionfullA/BHoststory,anothermodel/longhistory/finalaudit.
+NoSHA/subagents/newledger; keepfullobjectiveactive. Historical notes follow.
+
+# Current preparation: Host policy change admission fixed; five strong controls ready
+
+GoalACTIVE/incomplete. No live modeljob now. host recovery-v3 driver1567842/exec68482
+CLOSED0 with FAILED GENERATION_ADMISSION_STATE_INCOMPATIBLE beforeHTTP; ledgerunchanged.
+Newmessage configv2 with sameowner/bank/model/cap was blocked by filewideversionlabel.
+Developmentnow keeps fileinitialversionasprovenance; eachmessage exactversion/source
+binding remains, existingcounts/reservationsunchanged.10admissiontests2.42s +1normal
+Hosttransitionpass; oldmessage改版resume rejectedbeforeHTTP;types/lint/boundariespass.
+NEXT freeze thissource, COPY recovery-v3 bank and --resume itsconfirmedZERO-MODEL
+read-recovery-v3/after-card-expiry request only; sameconfigv2. Then originalindices5-7.
+Originalselectorlengthindex4(notzeroHTTP) neverresume/relabel underchangedconfig.
+Five strong-controlconfigs prepared0HTTP (source/append/plain/conditioned/candidate),
+36events48QAeach, sameE2exposed12histories. Needfreeze/actualrun afterHosthandoff.
+Readusagebugfix255fe5e7 and auditsvalid. SimpleMemruntime already exists at integrations/
+memory/simplemem.py; alignmentMemoryBackend adapterstillmissing, not implementedhere.
+AllpreviousHost/cross/factorialresults preserved; fullscopeW4/external/anothermodel/
+longhistory/fullR/completeA-Bstory/finalaudit stilloutstanding. NoSHA/subagents/newledger.
+
+# Current execution: second Host lane closed at known selector length; next config prepared
+
+GoalACTIVE/incomplete; allknownmodelqueuesCLOSED. Frozen570b9d84 Hostsource-v3,
+recovery-v2 exec11667/driver1494450 EXIT0 stopped after originalindex4UNKNOWN.
+Newreadonlyrecovery and originalindex2query/index3card-update COMPLETED; actualrawID
+read_memory calls both succeeded, no duplicate search, so navigationfix has realproof.
+Ledger r2cardinvalid/vouchervalid, eligibilityr1no_change retainsoldbindingr1/pending
+foreignsupport; no completegraph claim. Index4selector finish_reason=length,
+8192completion/contentempty; outerread_outcome_unknown is generic, HTTPknown/usageknown.
+Indices5-7unrun. Thislane15gen141275+15emb1520 exact,newunknown0. Seehost-v1-recovery-v2-summary.
+Host-v2config PREPARED0HTTP: onlydependency_read thinkingFalse; same8192/read3/otherstages.
+Next newbankcopy recoveryquery andindices5-7, originals preserved, no rawresampling.
+ALSO fixed AlignmentRun ignoring read_usage_updates=False. ActualoldE2uses64plain/48M,
+cross12/12 despitefalse; dense mode doesn'tconsultactivation, recordvaluesunchanged.
+3actualStoretests1.72s/mypy/Ruffpass. Oldsummariesannotated, banks/scoresunchanged.
+NoSHA/subagents/newledger. Fullobjective stillincomplete; strong/externalcontrols,
+W4learning/eval,fullRcorrected,extra model+longhistory,completeA/Bstory andfinalauditremain.
+
+# Current development: read navigation repaired; real retest next
+
+GoalACTIVE/incomplete. No realmodeljoblive atcheckpoint. Read-only targetresolver now
+acceptsexactdisplayedID ONLY via currentrequest issuedcurrentnavigation; strictglobal
+mutationresolver unchanged, owner/visibility/history-only/unissued tests retained.
+Sharedmaintenance+questionpacks removesduplicateHostsearch; directWriter/forgetkeepsit.
+42relatedchecks pass (11target+25evidence+6normalwire),mypy2files/Ruff/DAG/tools pass.
+Actual two failedrawIDcalls replayed againstoriginalsavedtargetmap onread-onlySQLite,
+resolveexactrecords,0HTTP/0bankwrites. No modelgrade/recoveryclaim fromreplay.
+Next freeze newsource and readonlyrecover actualtwo-recordbank, thenremainingoriginal
+indices2-7 only innewpost-recoverylane. Originalfirstandpriorcontinuationremainfailed.
+Do not loosenmutationpermissions/restartoldcalls. Existingprotocol andcostdetailsbelow.
+
+# Current evidence: Host recovery succeeds; continuation still fails; all queues closed
+
+GoalACTIVE/incomplete. No model job live. host-v1 first exec11501 CLOSED: message0
+FAILED after realledgercommit and successfulselector, remaining7NOT_RUN (frozen804d5fe2).
+Sourcebef02eee permits omitted pool_generation only in initial unchangedpool0;
+25tests8.43s,mypy/Ruffpass. Frozenhost-source-v2, originals untouched.
+Read-only recovery exec62835/driver1376916 CLOSED0: newquery on realbankCOPY COMPLETED,
+answersbothcredentialsvalid/bluelabel, correctsave/reportclock; recordvalues/world
+unchanged, maintenance/mutations0.4gen22920+3emb272 exact. Usesordinaryread_memory,
+not actualread_evidence omitted-gen path; thatfix has SQLite testproof only.
+Post-recovery lane exec53077/driver1396411 CLOSED after originalindex1FAILED.
+Actualqualificationrecordr1 created withforeignledgerbindingr1; ledgerno_change.
+Graph remainscompound/incomplete. Selector succeeded; Hostsearch thenread_memory
+with rawrecordIDs instead ofissuedqtargets rejected; finalcontentNone/stop again.
+Indices2-7 remainNOT_RUN inlane.7gen66631+6emb425 exact. First6gen33482+3emb256.
+AllHostsofar17gen123033+12emb953;newunknown0, original9/1floor retained.
+Reports host-v1-first-summary,host-v1-recovery-summary,host-v1-continuation-summary.
+NEXT fixgenericreadtarget/answerdelivery usability withoutweakeningvisibility,
+mutation or business authority. Inspect _resolve_read_target in memory/functional.py,
+request_target_mapping/project_request_targets in functional_state.py, and dynamic
+current_tool_catalog in runners/functional.py. Do not loosen global mutation resolver
+or blindly restartfirst/continuation. No source change for this secondfailure yet.
+W4 expanded to5reviewablematchedexamples: old2impact/localupdate +new3formation
+(2OR-of-AND,1independentANDscope). Baseline/relationtargets identicalfacts; actualsaved
+schemas validate. Positivegraphs are authoredcorrective labels, notmodelsuccess.
+No training/parameterupdates/heldoutlearningeval; normalization remains. See training-
+pairs-v2. Otherfullscope remains: strong/externalcontrols,fullRcorrectedtest,extra model/
+longhistories,completeA/Bstory,normalHostcompletion,finalscientificaudit. NoSHA/subagents/
+newledger. Older closedcross/factorial evidence follows.
+
+# Current development: cross-record pilot CLOSED; Host support writes migrated
+
+Goal ACTIVE/incomplete. No model job currently running. cross-v1/execution driver
+1169570/exec4663 CLOSED0 at07:41:41UTC. Frozen8111fd8e remains untouched.
+Cross firstQA control6Correct, candidate5Correct+1invalid Judge{} (no rejudge).
+Both model-created two records and actual external supports. Control initialAND
+incorrectly requires both credentials; candidateOR exists but training/rule/outcome
+merged in target, no complete premise graph. Control finalupdate commitsr3; candidate
+finalEditor length8192, no commits, bothrecords stayr2 with stalevalidvoucher/eligible.
+MixedReader answers currentdenial fromSource, not evidenceofsuccessfulstateupdate.
+Prediction gen111572/129657; full47gen271777+25embedding1289 exactledger,newunknown0.
+All12answers+8states reviewed; actualread-only SQLite service reads recover all old
+versions and4Sources/arm. See cross-v1-summary; no quality/costadvantageclaim.
+Two factorial repeats reviewed72answers/12updates; combinedcore18/16/17/18 of18,
+3same-query refusals,649125gen+2872emb exact. See factorial-v2-summary.
+NEW Host writes use same support-group binder as Benchmark; group-only updates,
+B2rewrite, actualforeign versionbinding and precedingreceipts through ordinarycommit.
+Host pages carry groups, writer reconstructs onlydelivered groupmetadata; no fetched
+unseen text.219unique related tests pass after fixingone testcallback signature;
+218passed in broad89.49s, recoverypair rerun2passed1.29s.3filemypy/Ruff/DAG/tools/
+matrixpass. RealHost model migration and shared reading-selection integration pending.
+Next complete Host reading path/realnormalHost, correctedfullR controlledtest,
+W4matchedlearning,strong/externalcontrols,extra model+longhistories,completeA/Bstory,
+and finalscientificaudit. Currentcrossbenchmark failures need generic formation and
+bounded-generation work; do not silently retune/resample originals. NoSHA/subagents/
+newledger. Keep full goal active. Older snapshots follow.
+
+# Current execution: two post-cleanup factorial repeats; analyses closed
+
+GoalACTIVE/incomplete. E2/E3/W3 originals CLOSED and never rerun/rescored.
+E2 ALL91answers+5missing source-reviewed;32answer-level issues, firstlabels unchanged.
+StateUJS author-review12/24 vs13/24, target+preserve18/24 vs14/24; no advantageclaim.
+E3first core countsY00=9,Y01=8,Y10=9,Y11=9 of9; +1/9interaction is solelyone
+selectorlength missing. Full35completecorefacts correct, explanationsnotallfaithful.
+E3ledger66gen344589+14emb1571 exact,newunknown0. W3ledger115gen521586+emb2739 exact.
+W3 lowcostnotqualityproof:explicitinitialinvalidgroup, finalgateFalse despite reason
+recognizingcancel; rebuilds omitotherfacts afterprefix2 and pre-effectiveXu atlast.
+All47answers+1missing reviewed; see lifecycle-v1-summary. Eventcompoundbase contains
+stamp+handler, so its override predicate-scope still needs state-onlycheck.
+LIVE exec49873, driver767706, repeat2child839224 atlastcheck. Frozen5734ade2,
+factorial-source-v2. Two symmetric repeats share originalv1actualseed+arrival,
+newseed0/oldHTTPnotcopied. r1EXIT0,36answers,archiveU0/U1bothcommitted;shared-condition
+U0invalidsupport retained. r2LIVE; inspect actualdriver/PIDs before dispatch.
+NEW development fixed historicalselection filtering: common candidate availability,
+but R1 now opens only selected oldversions.34tests/Ruff/mypy/DAG/tools pass.
+IMPORTANT originalv1 and currentv2repeats used all-history delivery; do not overclaim
+fullR/history-selection effect from them. Keep snapshotsfrozen; latercorrectedrun needed.
+Still outstanding: repeatsreview, target-change support invalidation marker,
+full intended R-factor test, crossrecord, W4matchedlearning, W5Host,strong/external
+controls,extra model+longhistory,positive completeexample and finalscientific audit.
+NoSHA/subagents/newledger. Historical snapshots follow.
+
+# Latest resource closure: all three original queues CLOSED
+
+E2exec29617,E3exec60980,W3exec84404 have all returnedEXIT0. W3 supervisor420999/
+worker571471 gone, lifecycle-v1/queue.json LIFECYCLE_CLOSED at05:16:56UTC.
+W3 results exist for all3policies: event15/16answers,212042generation tokens;
+explicit_change16/16,164484;query_rebuild16/16,145060. Every checkpoint record values
+unchanged after reads; receipt unknown0. DO NOT infer quality or amortization winner:
+full state/answer/gate/source/cost reconciliation still pending. No new model job queued.
+Current code5734ade2 fixes redundant cancellation cleanup,100tests and actual first
+model-proposal replay on copies pass. No real model run of that fix yet.
+Next finish E2 remaining10chains QA source review, fullE3 andW3 analysis; then freeze
+and symmetric actual repeats/remainingcrossrecord,W4,W5,strong/external controls,
+extra model+long histories. GoalACTIVE/incomplete, no SHA/subagents/new ledger.
+The previously LIVE W3 snapshot below is historical, not a current process claim.
+
+# Current evidence: E2/E3 CLOSED; W3 LIVE; cleanup fix replayed
+
+Goal ACTIVE/incomplete. Original E2 exec29617/driver141865 CLOSED0; original E3
+exec60980/supervisor247480 CLOSED0. Do NOT rerun/rescore them. W3 exec84404 isLIVE,
+supervisor420999/worker571471, frozen15319207; inspect queue.json/PIDs before newHTTP.
+E2 firstQA: plain40C/2Omission/1H/5invalid; candidate40C/1Omission/1H/1invalid/5missing.
+Candidate5miss are dependency-selector length. Also4Editorlength incl walk formation,
+1EDIT_SUPPORT_ROUTE_INVALID. Plain1time-source reject. Predict403917 vs801695(+98.5%).
+FullE2 325gen1449622 +207emb11707; exactledger,newunknown0,floors9/1 retained.
+All48postupdate states reviewed bysameSourceauthor: strictUJS12/24 vs13/24;
+target+preservation18/24 vs14/24. ClusterCI wide, no advantage/NI claim. Full per-event
+annotations in screening-v1-summary. QA SOURCE REVIEW ONLY maps/kiln COMPLETE;
+remaining10chains still require full symmetric answer review. Kiln staleSummer answer
+had all3Sources incl actualQiao update delivered/opened/resident; source mix failed rescue.
+E3 original35/36answers,1knownselectorfail; recordvaluesunchanged. NEED fullreview/costs.
+Observed duplicatecleanup bugs FIXED in development: repeated base-unit deletion
+idempotent after evidence validation; support-group remove permits a base target already
+removed in same proposal. Unknown IDs, new group on deleted target, replace/retract
+conflicts still reject.100tests15.78s,Ruff,2filemypy,boundaries pass.
+Actual firstU0/U1 proposals replayed VERBATIM on realbankCOPIES: both cancel exception,
+keepgeneral/registration/oldrevision;0newHTTP/nooriginalwrites/noregrading. See cancel-
+cleanup-replay-v1. Running W3 source unchanged. Need freeze and symmetric REALrepeat
+later; deterministic replay is engineering feedback, not model quality evidence.
+Existing-group grammar probe: canonical key order accepted; unsorted rejected bydefault
+but accepted any_orderTrue. Not a new edit-branch generation defect;0HTTP probe.
+Also identified for later development: changed TARGET meaning can leave old support
+route attached without a target-specific pending marker; only changedpremises currently
+flagged. No target-marker change implemented yet. Cross-record/W4/W5/strongcontrols/
+external/extra model+longhistory and final scientific audit remain. Never callcomplete now.
+Prior snapshots below are historical.
+
+# Current development: W3 prepared; E2 plain live; E3 queued
+
+Goal ACTIVE/incomplete. E2 candidate141879 CLOSED0 at03:42:59UTC:36events,
+43answers+5known dependency-selector length failures;150gen801695,embedding5723,
+1rejected EDIT_SUPPORT_ROUTE_INVALID. No resampling. Original driver141865/exec29617
+now runs plain child336636; inspect actual PID/status before dispatch. FIRSTscores pending.
+E3 supervisor247480/exec60980 still WAITING_FOR_SCREENING, frozen10c68e54.
+Do not dispatch another factorial. Both snapshots remain unchanged.
+NEW W3 lifecycle runner/tool/config prepared ZERO_MODEL:6events,3policies(event,
+explicit_change,query_rebuild),4querycheckpoints,actual4reads each;reuse1/4 allocate
+same actual states and firstreads,48read opportunities. Immediate Source capture,
+paid gate sees nofuturequeries; rebuild emptysemantic Source-only prefix clone,
+old originals redelivered with their real identity/clocks, never rebound as current
+new events. Initial scope-mismatch test fixed through redelivery, no guard relaxation.
+Latest10relatedchecks9.35s,Ruff,3filemypy,DAG/tools/matrix pass; originalSource identity
+and absence of futureSources verified in real SQLite copies. No realW3model run yet. Frozen15319207 lifecycle-source-v1 prepareEXIT0.
+NEW queued supervisor420999/exec84404 WAITING_FOR_FACTORIAL; it dispatches only after
+original factorial supervisor247480 closes normally. Do NOT start another lifecycle
+while this supervisor exists; inspect queue.json and actual PIDs first. Do not treat mock counts as scores.
+Complete E2 UJS/source/QA/cost review and E3 results; cross-record,W4matched learning,
+W5Host,strongcontrols/external/extra model+longhistory/finalscientific audit remain.
+Prior snapshots below are historical.
+
+# Current queue: E2 LIVE; frozen E3 waiting for its closure (2026-10-15)
+
+Goal ACTIVE/incomplete. Last turn made concrete progress: new factorial runner/test/
+configs/reference, real bank history-pool validation, CI registration repair.
+E2 original exec29617, driver141865, candidate141879 remain LIVE; frozen463b5182.
+Last inspected22/36candidate events. Archive model actually formed2condition/override
+edges and retracted the temporary exception while retaining general rule. Exhibit
+initial state formed1AND supportgroup but merged original/photo conclusions and
+omitted separate photo-only-light rule; no quality claim from graph existence.
+NEW E3 supervisor exec60980, PID247480, WAITING_FOR_SCREENING. It uses frozen10c68e54
+snapshot factorial-source-v1, protocol factorial-v1,3cases/36read opportunities.
+It dispatches automatically ONLY after original E2driver exits and all predict/firstscore
+resources close. On abnormal handoff it stops without model dispatch. Do NOT launch a
+second factorial while this supervisor exists. Inspect queue.json/PIDs/handles first.
+E3 frozen prepare EXIT0; actual model requests0 at queue observation. Source identity
+recorded from Git archive, no SHA. Same actualM seed and commonarrival, U0/U1 once,
+R0/R1 same actualpoststate+Source/historypool, no oracle/repair, feedbackoff.
+Commit10c68e54:10relatedtests(3.56s),Ruff,3filemypy,boundaries/matrix pass. Matrix
+registered missing dependency_groups+pre-existing source_times and assigned new
+CI tests to actual Foundation/External dependency groups; no gate weakened.
+Do not change either frozen snapshot. Complete E2 review/UJS/firstlabels/costs and E3
+raw results; cross-record,W3,W4matched learning,W5Host,strongcontrols/external/extra
+model+longhistory and final scientific audit still outstanding. W3 only discussed,
+no lifecycle-policy implementation yet. All older snapshots below are historical.
+
+# Current execution: E2 screening LIVE, E1 continuous/first scores CLOSED
+
+Goal ACTIVE/incomplete; same user authorization, no subagents/SHA/new ledger/deployment.
+LIVE original exec29617: screening-v1 driver141865, candidate predict child141879.
+Frozen method463b5182; data/config7b336663. Candidate→plain predict then FIRSTscore,
+12independent authored chains/36events/48QA per arm, read-usage feedback off.
+Inspect driver.json + actual PIDs; never duplicate/restart from a missing exec handle.
+Old continuous-v2 exec7820 CLOSED0: both12answers, firstlabels plain12Correct,
+candidate10Correct+2invalid (Judge{} ordinals6/10 retained). Predict140125 vs260492
+(+85.9%); full94gen464156 +65emb3516; ledgerexact,newunknown0,floors9/1 retained.
+No explicit relations/supportgroups committed in either story. Candidate future He
+update rejected undefinedn0; staleShen persists. Candidate cancellation leaves dangling
+“会员卡通道不加这项要求” aftertraining. Normalmixed QA uses originals to repair it.
+Bare exec49121 CLOSED0: fouractualstate-only reads, plaincore2/2 faithful2/2;
+candidatecore1/2 faithful0/2: it wrongly permits cardholder withouttraining.
+Bare4gen17126,emb0,newunknown0. Originaloutputs never overwritten/rejudged.
+Manifests continuous-v2-summary and continuous-bare-v1-summary contain full evidence.
+Training commit10fb664c adds TWO matched reviewable examples from actual failures,
+same correctedfacts forbaseline; no training, no native bank repair, no W4 completion.
+FourA100 GPUs ~39.9GB/40GB used; no CPUFP32 training. Formationgrammarprobe accepts
+legal groupedcreate under actualXGrammar0.2.3,0HTTP; no compiler graphblock found.
+Next monitor E2, inspect actualgraphformation/UJS/QA/cost, then cross-record slice,
+matchedpool2x2/W3/W4/W5/external+extra model/longhistory remain. Do not callcomplete.
+Development now adds fixed_history_candidates for later controlled R pools, with
+58related tests/types/lint/boundaries passing; 8real closed-bank slices verify same
+versions/no future leaks/unchanged copied records,0HTTP. See fixed-history-pool-v1
+manifest. This is NOT running screening source and is not a scored2x2 result.
+New method_architecture_factorial runner/tool/config prepared ZERO_MODEL,3cases/36read
+opportunities: common actualM seed, one arrival, U0/U1 once, samepoststate/sharedsource
++historypool for R0/R1; no promotion/oracle graph; all read feedbackoff.10checks/types/lint/
+boundaries/matrix pass. Matrix repaired missing dependency_groups/source_times registration
+and CI environment ownership; no SHA. Factorial mustfreeze newsource and wait for original
+screening queue toclose before realdispatch. No factorial model run yet.
+Prior snapshots below are historical, including previously live/blocked jobs.
+
+# Current execution: E1 repeat closed, continuous stories running (2026-10-15)
+
+Goal ACTIVE/incomplete. User continuation already authorizes experiments and old queue release.
+E1 v2 uses frozen463b5182, SAME real seed/arrival, both arms repeated after grammar fix.
+Both actually commit r2; target/current/history core answers correct. Candidate adds
+no graph in this plain-seed slice. Gen18268 plain vs40769 candidate; embedding720
+combined. Extra bare-state four reads all core answers correct, gen13977/embedding0;
+plain explanations invent a concrete until field from a generic interval convention.
+All ledger deltas reconcile; newunknown0; floors9gen/1emb retained. See
+method-architecture-e1-v2-summary.json. No quality/cost winner and no same-story retuning.
+LIVE serial continuous-v2 driver30371, original exec7820. Plain child30372 predict
+EXIT0 (12answers); candidate child62029 predict is live at last check. Inspect actual process and driver.json before dispatch; never restart from
+missing tool handle. Frozen463b5182 snapshot runs plain predict, candidate predict,
+then each FIRSTscore. Two independently formed stories,12events/12QA per arm.
+Authored development data with HaluMem scoring rubric, not external benchmark scores.
+No hot edits to frozen source, SHA checks, new ledger, deployments or subagents.
+E2 new12chains/36events/48QA per arm prepared ZERO_MODEL, no dispatch. See screening-v1
+protocol/configs. ObservedSession evaluator-canary projection verified for all36events.
+Prior snapshots below are historical; do not infer current process state from them.
+
+# Current E1 feedback: first pair CLOSED, generation-schema repair ready
+
+User continuation authorizes old queue release and new architecture experiments.
+Old PIDs1376738/1376965/1626865 gone; all original confirmation artifacts retained
+and backed up. Never rerun/rescore that old partial confirmation.
+Frozen9bb7d7e1 E1 seed/compare both EXIT0: seed4claims misses tea despite delivered
+source; plain writes future change, candidate correct impact but no_change/r1.
+QA source-assisted correctness does not establish updated state. 13gen51650,
+11embedding615, newunknown0; first answers and all failures retained.
+Actual service XGrammar0.2.3 rejects JSON-valid edit sequences under partial-object
+anyOf but accepts no_change. Complete disjoint edit/group-only variants fix that
+language mismatch; native compiler probe and91affected checks pass. No new HTTP
+in grammar probes. Prepare paired-v2 symmetric repeat from SAME actual seed and
+SAME arrival Sources; seed costs charged only once. Freeze new source before run.
+Current no model process live at this checkpoint; inspect actual process handles
+before scheduling. Full original W0-W5/E0-E5 objective remains ACTIVE/incomplete.
+
+# Current E1 execution: user resumed work, 2026-10-15
+
+The user replied 继续工作 to the concrete request to end the old paused queue,
+retain all artifacts, and release the original ledger for E1. This authorizes
+that queue shutdown and continuing the architecture experiments. Do not ask again.
+Old driver1376965/worker1626865 and wrapper1376738 are now gone; owner lock FREE
+at the release observation. Old requests unchanged S0=109, pack=8, all responses
+present. Backup all1068files/206662404bytes and stop receipts under
+artifacts/method-architecture/old-confirmation-release-20261015. Old pack is
+terminated partial, not completed/scored. No old rerun or rescore.
+Run new E1 from immutable paired-source-v1 (source9bb7d7e1), using original
+continuous ledger. Inspect actual current process before any new dispatch.
+Current goal ACTIVE/incomplete. Earlier blocked snapshots below are historical.
+
+# Active architecture research task, 2026-10-14
+
+User activated docs/MILAI_METHOD_ARCHITECTURE_EXPERIMENT_PLAN_20261014_v3.md.
+This is a NEW incomplete goal in feat/lab-method-architecture-20261014, based on
+8293a4e7. The GLOBAL confirmation below remains paused; do not confuse its
+historical paused goal with this active research task. No subagents or SHA checks.
+Read docs/MILAI_METHOD_ARCHITECTURE_EXECUTION_20261014.md for current evidence.
+Second slice adds source-bound AND/OR support groups in existing revisions,
+separate dependency_groups switch, group-only commits, whole-conjunct retraction,
+changed-premise markers and query route selection. v2 configs prepared, no real HTTP.
+Third slice adds tools/run_method_architecture_diagnostic.py with prepare/seed/compare.
+Same actual B1 seed; candidate changes only representation/rendering; one common
+Source arrival before fork; no oracle graph; read-usage feedback disabled. Prepare
+closed0HTTP. Actual seed admission EXIT1 at original owner flock, before
+HTTP/reservation/bank creation; compare NOT_RUN. See paired-v1/seed-admission.stderr.log. 56 affected checks and types/lint/boundaries pass.
+Model-formed results, cross-record, policies/training, external confirmation and
+normal Host migration remain incomplete. Three consecutive turns confirmed the
+same stopped owner queue. Do not replace required real E1 feedback with more mock results.
+Shared continuous ledger and serial HTTP ownership remain. At this checkpoint
+PIDs 1376965 and 1626865 are actually stopped and the owner lock is actually held.
+No new model request has been sent. Develop/test/prepare independently; do not
+bypass the lock, reset accounting, or silently resume/kill the old queue.
+Fourth slice removes SimpleMem SHA/fixed-commit/diff gates; records actual source
+identity and changes. Actual native SDK + LanceDB/Tantivy MockHTTP20passed,
+3deselected. Isolated artifacts/method-architecture/simplemem-env inherits existing
+runtime via its own .pth; 13 locked additions installed there only. Original
+environment untouched, experiment model requests0. Same held paused queue confirmed
+for four goal turns. The next protocol step is real E1, not a larger offline matrix.
+Full W0-W5/E0-E5 scope remains; first code/tests do not complete the goal.
+
+# Current handoff: experiments PAUSED by explicit user request, 2026-10-14
+
+GLOBAL goal status is PAUSED at the user’s explicit request. Full plan remains incomplete.
+Do not resume experiments, dispatch models, or restart this queue without explicit user instruction.
+No SHA/checksum gates, subagents or new model deployment.
+User now explicitly requested current summary+GitHub commit/push; branch publication authorized, not merge. Root serial model HTTP with existing continuous ledger/owner lock.
+Use /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python and PYTHONPATH=src.
+Read docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md and current manifests for results.
+
+Long candidate exec77796 CLOSED0 (predict and first score); no long model job remains.
+S0: 7C/3H/1invalid/1missing; S2+pack+C:7C/5H, 12 answers. Candidate-only3/control-only3.
+Prediction S0=3,034,404 tokens; candidate=3,618,479 (+19.2%), incl maintenance2,743,944;
+reading874,535 (-71.2%); embeddings130/248,882 incl old root and rebuild. Candidate Judge35,462.
+Ledger reconciliation exact by ordinary values, new unknown0. Only2/12 final inputs had semantic
+views. Mixed runtime/interruption/index timing retained. Official labels never revised; paired Source
+review identifies both Judge disagreement and actual modality risks. Not an overall winner.
+Source-only pack comparison declared and CLIprepared0HTTP: configs/milai-global-long32-source-pack-v1.json,
+run_long_source_pack_v1.py, same2users/32sessions/12QA. Originalpredict failed; continuation active below; no heldout contents opened.
+
+Normal story v3 CLOSED first request failed invalid prior Source; v4 CLOSED first completed,
+second classifier length8192; v5 CLOSED first wrong forgetting flag, 4 clauses actually committed,
+no forgetting effect, FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING. Originals and full costs kept.
+3246dbcd resolves empty actual prior-choice sets without a model; no prior permission granted.
+b530261b restores explicit-only forgetting guidance to REQUEST_PARTS_MODE_PROMPT.
+87851a3a shows JSON classification schema descriptions to model and explains additive
+explicit+new_assertion tags. 5 integration variants/Ruff/mypy passed. scope-canary-v1/v2/v3 CLOSED;
+no-thinking still misclassifies semantic rule withdrawal as forgetting (v3). v4 CLOSED known length:
+first completed, second thinking loop32768,6 notrun.2gen36506,newunknown0. No stage-budget feature added.
+All canaries have0 semantic/business/forget mutations. global-request-scope-diagnostics-v1.json.
+Normalstory v6 exec43564 CLOSED0, all17 attempted; first15completed+2null failures,2readonly
+recoveries allCLIcompleted but semanticacceptancePARTIAL. 54gen489040+73emb3891, ledgerexact,newunknown0.
+Bcorrection committed; Cscoped rule correct but duplicates commonrule/provenance. Recovery falsely says
+committedcancel notexecuted; historyr1/r3 actuallyread but callswithdrawnDu effective. Forget3rejects,
+0effect. Reopen honest; actualbankbackup4recordvalues unchanged/9versions readable/0revokedSource.
+See global-story-v6-summary.json. No further same-story tuning, never countCLIcompleted as semanticpass.
+Hostv2 exec81913 CLOSED0 both firstCLIcomplete:9gen43240,emb0. Rangeactual3Sources; contextonly
+legacysearchdirectory, stillnotacceptance. Dedup exec24897 CLOSED0 predict/firstscore:4read72673,
+2Judge7763,old2Correct vsnew1invalid/1Hallucination; no qualityclaim. Manifests saved.
+Latest4370ff9e removes search_memory onlyforpure readonly packrequests; mutations/forgetlegacytarget
+lookup retained.4Hostintegration+13evidencechecks,Ruff/mypy passed; actualHost recheck NOTRUN.
+SOURCE-only continuation exec53109 CLOSED0 predict/firstscore:64sessions12answers,6C3H1Omission2invalid.
+25read956365+12Judge30397,maintenance0/emb0/newunknown0.18oldgenresponses/9answers unchanged;
+oldstart-to-finalledger986762exact. S0predict3034404 so-68.5%, butCorrect6vs7. Noqualitywinnerclaim.
+Pairedreview:2invalid answers semantically match controls; clothingupdate presentbutmissed inselection;
+health chose0bodies, gap-derivedclaims/omission. global-long-source-pack-v1-summary.json.
+Hostv3 exec59108 CLOSED actualallSourcesopened but lastreadreplacedneededoldbodies.8c893af3 fixes
+Hostresident retention: newpriority+fittingoldpacks/contexts, candidatepaging keepsbody. EmptyBenchmark
+answer body_delivered=False fix(metadataonly).17evidence+4Hostchecks/Ruff/mypy pass.
+Hostv4 exec56888 CLOSED: finalrange3/context5actualSources. Rangefirstnull thenreadonlyrecovery;
+correctcount/condition but false no-read/permissionclaim. Contextfirstanswercorrect.11gen49409,emb0.
+KeepfullHostacceptancePARTIAL; no more same-storytuning.
+FINAL METHOD/CONFIG FROZEN beforeheldoutaccess:44fb71f8 / source8c893af3 / source-retain-packs-v1.
+Source-only S0legacy vsS0question_pack efficiencycandidate; sameT1/8192/65536/12calls. Frozenconfigs
+configs/milai-global-final-confirmation-{s0,pack}-v1.json. Firstprepare0HTTPfailedmissingprefixkey;
+explicitnull addedboth preserving fullhistory semantics (dd0e5d01), no method/model/budget change.
+Afterfreeze selected original2reservedusers COMPLETE66sessionseach (132total), QA6each: U1at19/44/66,
+U2at22/44/66 (short oneMemoryBoundary fallbackperrule). Originalfullusers/QA retainedignoredroot;
+inputdialogue/metadata exactequal. Never tune/rescore/reselect fromconfirmationoutcomes.
+USER PAUSE at2026-10-14T14:37:21UTC: worker1626865 anddriver1376965 bothSIGSTOP/stateT.
+Unifiedexec81725 remainsattached to the stoppedqueue. No unrecorded modelresponses atpause:
+allrequests have responsefiles, newunknown0. Processes/connections are retained; resources_settledfalse.
+Do NOT sendSIGCONT, terminate/restart or dispatchmoremodels unless user explicitly resumes.
+Authoritativepause artifacts: final-confirmation-v1/pause.json andpause-summary.json;
+tracked data/manifests/global-final-confirmation-v1-pause-summary.json.
+S0 prediction+FIRSTscore CLOSED:132sessions,9answers+3read_call_limit missing;7Correct/2Hallucination/
+3missing.100read3652278tokens+9Judge24602tokens,emb0.
+Pack PAUSED:54sessioncheckpoints,4answers/12planned,8read363114tokens,scoreNOT_RUN.
+Wholeconfirmation ledgeratpause:4039994known generation,embedding0,newunknown0; no resultresampling.
+Resume onlyoriginalstopped processes after inspectingidentity/receipts; do not repeatclosedS0 phases.
+Account for pause duration separately fromactivewalltime. If originalprocesses aregone onfuture
+resume, inspectbanks/transactions/receipts before anydeliberatecontinuation; never inferclosurefromoldfile.
+Allcode frozen8c893af3; completeHost+evidence407passed312.72s; boundaries/Ruff/mypy pass.
+Finalcollector artifacts/global-development/summarize_final_confirmation_v1.py mustNOTrun until
+botharms FIRSTscore close. No fullcomparison/Product/F/finalacceptance decision yet.
+Currentuser alsoauthorized GitHubsubmission: commit/push onlypausedstatus+existingresults now.
+Do not weaken Source/owner/visibility/real-effect boundaries or add keyword intent heuristics.
+
+All predeclared runs above keep firstoutputs andfailures. Fullheldoutmetadata selection remains
+unchanged:2reservedusers, COMPLETEhistories, no prefixcap or contentaccessbefore finalfreeze.
+Goal is PAUSED; finite negative results remain acceptancefailures. Do not resume from historical snapshots.
+
+Historical handoff snapshots below are closed/stale, not current jobs or authorization.
+
+# Current handoff: range/Host wired, C actual diagnostics fail acceptance, 2026-10-14
+
+Latest runtime f5ef26c9 in global-development-20261014. Full original GLOBAL plan ACTIVE/incomplete.
+No SHA checks, no new audit platform, no Product/Archive changes or publication.
+A done first slice. B scope snapshots and range coverage plus shared pack Host tool implemented;
+421 related checks,9 direct checks passed. Host K1 two synthetic cases first BOTH null-body failures;
+one existing no-tool readonly resume each completed. Range read all3 original sources/2projects;
+context case still uses legacy directory for Qinglan, NOT full B delivery.11gen51680tokens,emb0,newunknown0.
+Root inspected original replies/sources. data/manifests/global-host-packs-v1-summary.json.
+
+C opt-in proposition_updates and single_pass added;195 edit/SDK checks passed.
+Host propositions-v1 failed before Editor on duplicate category tags;42fe55bd normalizes only
+category/restriction sets, never application actions. Same story fresh propositions-v2 formedr1,
+kept event2,r2 event3 (one readonly recovery),kept4,r3 event5 (original+one recovery null),
+event6 failed FUNCTIONAL_CONTINUATION_REFERENCE_UNRESOLVED before Editor. Only6attempted.
+No automatic replay of these failures. Null-body failures known, no business replay/unknown retry.
+f5 now continues explicitly independent memory after known unresolved business continuation,
+and reports actual read allowance exhaustion without a fourth denied read.19 affected checks pass;
+real Host recheck remains required.
+
+Two ordinary benchmark core runs are CLOSED12 each, own empty banks, same authored source events,
+no QA/gold/ideal before. source-propositions-core-v1=>2e8f1895, core-v2=>f5ef26c9.
+Corev1 initial/create/future update omitted;18gen69917tokens(11edit7select),11emb601;
+selector event11 confirmed length.4finalrecords,all5history versions read from copied SQLite.
+Corev2 whole-input-fit single_pass skips selector:12edit50602tokens,18emb2627;1record7versions,
+all7history versions actually readable. BUT C joint success FAILED: compound initial overview,
+event3 invalid support binding/event12 changed assertion kept old provenance, stale overview
+B/Wang vs updated Chen, lost future A/Zhao after exception cancellation, precise event_at
+invented for recently/still considering. Raw model proposals prove time error before compiler.
+Keep events2/4/10 and literal undecided modality are partial positives, never C completion.
+Detailed required facts/costs docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md and core-v1-v2-summary.json.
+All our exec/model jobs now CLOSED; no queued run. Last sessions90049/74036 exited0;
+Host continuation sessions49822/24641 stopped on known recorded failures; do not restart them.
+
+NEXT: fix C generation contracts/source support, not relax commit guards or add another reviewer.
+Consider literal time binding and new-text/old-assertion incompatibility; avoid another food prompt loop.
+Then actual same-before recipe comparison and natural update sources. B broader8-12reads, actual
+context expansion/range semantics, Host recheck, D dependency view,2-4long histories,final holdout,
+full save-correct-history-exception-forget story still outstanding. Original scope not reduced.
+
+# Current handoff: global readpack pilot closed, 2026-10-14
+
+Current worktree global-development-20261014, runtime 8fe9968d. A completed first slice;
+B readpack MVP in methods/evidence_reading.py and Benchmark ordinary/replay paths.
+No SHA checks or new audit platform. Full original global plan active/incomplete.
+All current pilot predict/score processes exited and terminal resources_settled=true:
+readpack-v1 2 official Correct, BUT paged answer was directory-only/no delivered body;
+original failure preserved. Fixed v2 re-ran ONLY paged at new root: 7/82 actual packs,
+2 calls/26399 tokens, first Judge {} => invalid retained, no rescore.
+Control fixed-target S0: direct Correct, paged missing after11calls/93917tokens;
+historical native S0 same paged was Correct4calls/79701, not same target conditions.
+No accuracy claim. Root actual-source audit notes mild career-attribution overstatement.
+Total new generation20/149457known, embedding0/newunknown0; floor gen9/emb1 retained.
+Use docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md and global-readpack-pilot-v1-summary.json.
+Frozen code/results stay unchanged; no current model queue. Poll actual handles before any new HTTP.
+Next: explicit range/count coverage (current task flag/partial coverage insufficient),
+actual missing-context read, shared Functional Host entry, then finite broader paired
+reads and C/D true-before updates. Host does NOT yet call new pack core; no false E claim.
+C/D/long2-4histories/final holdout/full save-correct-history-exception-forget story remain.
+No publication/merge performed in this goal. Preserve original main's untracked plans.
+
+# Current task: global development plan, 2026-10-14
+
+Execute docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md from the evidence-development
+base in this worktree, branch feat/lab-global-development-20261014. The new plan
+supersedes previous completed-plan scheduling and approval gates below. Develop
+A then B and C, shared Host integration and conditional D/E/F as specified. No SHA
+checks, new review platform or model deployment. Preserve old results and defaults;
+new behavior uses explicit configurations. Existing owner/source visibility/version
+boundaries and serial model HTTP/accounting remain. No historical experiment restart.
+Use the existing /cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv for local checks.
+Original user plan documents in main stay untouched. Goal active, not yet complete.
+
+# Current task: evidence development plan, 2026-10-13
+
+User activated /cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_EXPERIMENT_PLAN_20261012.md.
+This supersedes older scheduling/approval gates below. Develop first; no SHA checks or new review platform.
+Root tree /cra/memory/mx_memory/MiLAi-worktrees/evidence-development-20261013, base f964292a includes PR121.
+Original main/integration dirty plans preserved. Product/Archive untouched. Finite development/execution COMPLETE with explicit negative/partial outcomes; no pending required experiment. Positive quality claims remain unproven as detailed below.
+Root alone owns real model HTTP with original continuous budget.json and serial owner lock; unknown floor now9gen/1emb retained after CPU timeout (original8gen/1emb unchanged through earlier branches).
+Original b558 CLOSED32sessions/73QA=71answers+2missing; replay uses exact saved prefix recalls, no final-bank search,
+no new maintenance/recall/ActivationIndex feedback. Original1201witness fragments verified prefix-visible, noHTTP.
+
+A/B/C/D code integrated; latest codebb49ef92 (sharedpredicate patchguide). Details/results docs/MILAI_EVIDENCE_DEVELOPMENT_20261013.md.
+Six S0/S1/S2/llm_probe CLOSED with first scores5/6,4/6,3/6,6/6; first5 ranking skipped, no MemSifter claim.
+Original73 and fixed24 linked additions0: S0/S1 pool-equivalent, stochastic score deltas not linked gain.
+Synthetic patch actually selected, bothmechanism conditions preserve target/nontarget/history, no benefit claim.
+Natural employment and food v1 CLOSED, both ordinaryreplace, old results kept; actual event prompt missed patchguide.
+d6f628f9 fixes that event early-return wiring, 16disabled prompts byte-identical; real guided food followup CLOSED
+at18:27:49UTC, reused actualseed/control, patch_text selected, but sharedpredicate semantics of otherfoods weakened.
+bb49ef92 generic sharedpredicate/negation/scope guide repair merged/model-reviewed;8patch checks PASS.
+Frozen source-bb49ef92 natural-local-patch-scope-v3 CLOSED19:14:34UTC rc0, actualpatch1,
+3gen20346+2emb933. Sharedpredicate meaning STILL damaged; event_at wrongly precise. No more same-case
+prompt edits. Oldh/currentwitness/historyr1/6otherunits preserved, but semanticjointsuccess NOT counted.
+Two actualReader calls natural-current-history-v3 CLOSED19:16:00UTC rc0, both source-correct fixedqueries,
+actualcurrentr2+9sources and historicalr1+7seed sources, nofuture. Reader2gen23396, noemb/Judge/newunknown.
+Correct source-assisted answers do not excuse wrong storedpredicate. Full audit in E/natural-local-patch-v3-final-review.json.
+
+Original S2/J1pilot CLOSED1C/2+invalid1 versus missing1+invalid1. J1v2 budget repair CLOSED2C/2.
+Budget repair preserves cumulative nominations separately from admitted set, whole original sources first,
+complete-wrapper budget, no empty-page repairloops. Allpages delivered; selection completion != evidence sufficient.
+319b6878 makes explicit budgeted_nominations_v2 available to all snapshot material conditions for fair S0control;
+record-reference mode unaffected. Independent lazy ranker model/tokenizer/window uses same ledger, no false checkpointlabel.
+
+Original frozen79749893 fixed24 S0/S1/S2 predict+firstscore all CLOSED18C/24,18C/24,16C/24.
+Counts/paired/cost summaries use immutable per-question prediction/evaluation checkpoints, not mutable score index.
+S0missing1, S1missing0, S2missing1; invalid1/1/4 preserved. Fixed4usersx6,13direct/11paged, old failures retained.
+S2 no demonstrated quality/cost value; do not expand originalS2 or rescore labels.
+Fifth supervisor405940/session96165 CLOSED19:13:20UTC, sixth513866/session85694 CLOSED,
+Reader588878/588879 session52908 CLOSED; all actualPIDs gone. No current model requests.
+S0-budgeted24 CLOSED16C/24,4H4invalid,24answers,59calls1,263,186tokens/881.1seconds.
+J1-budgeted24 CLOSED16C/24,4H3invalid1knownlength,65calls1,565,815tokens/1374.1seconds.
+Against matchedS0 candidateonly5/controlonly5 net0; versus nativeS0 2/4 net-2; originalS2 4/4 net0.
+J1 is23.96% moretokens thanmatched and15.39% morethannative.18questions actuallyfinalsemantic52items.
+No73/longhistory/training signal forJ1 ororiginalS2: stop expansion, retain opt-in code/defaultbehavior.
+S0 budgetrepair removes17empty pages and repairs1missing but overallpaged7->5C, noqualitywin.
+Original8generation/1embedding unknownfloor unchanged through twoReaders. Root only modelHTTP.
+Actual artifacts/evidence-development/*-process.json + terminals + /proc authoritative; no duplicates.
+Frozen source-f9f01661/source-c9f2b68e/source-79749893/source-319b6878 immutable. TMPDIR E/runtime on/cra.
+No root/tmp space; use/cra or/data, do not delete unrelated data. Existing shared GPU services unchanged.
+
+MemSifter official checkpoint downloaded at19:23:14UTC; files8,822,894,504bytes, noSHA. Existingmetadata
+repo revision cec4c7eb82fade1faf800204b7031892031f6660 is identity only. Path /data/models/milai-memsifter-4b-20261013/checkpoint.
+CPU FP32 pilot-v1 FAILED21:24:49UTC at frozen7200s ReadTimeout; direct prediction complete4933tokens/7.4815s
+and ranking_skipped, notscored. First rank batch23035input dispatched/noresponse; secondbatch/pagedReader/Judge NOT_RUN.
+ActualR0 twoquestions=1C+1invalid,5calls84354tokens/80.0341s. No full2qualityratio, no rankerqualityclaim.
+Original failure preserved; generation delta2requests/known4933/charged72526/unknown+1/reservation67593.
+Globalledgergenunknown9/embunknown1; do not refund unknown or reuse old result root for retry.
+Ownedworker619948/container748 SIGTERM after callerexit, gone21:25:55UTC; serverwrapper session15974 EXIT143,
+pilot55929 EXIT1; stopreceipt E/memsifter-cpu-owned-stop.json. Shared GPUservices unchanged.
+Server startupflag normalized generation_dispatched_at_server_start:false, actualgeneration_started_requests1/completed0.
+CPUprestop cumulativeuser17408.62/sys22248.84/elapsed7334.60s, peakRSS27480334336bytes includingload17.9656s;
+not perrequest receipt. Inputlocal/server23035 match, no confirmed output or finishreason.
+Root alreadydecided no24expansion currentCPU; not generalized toofficialGPU/BF16. No currentmodelrequests.
+
+Narrow runtime diagnostic CLOSED, no weights/model/attention/HTTP. E/allocator-probe-{default,jemalloc}.json:
+same FP32/8threads/8KV/32heads/23035length/128dim,2warmups3measuredsteps; all fullvaluechecks pass.
+Default0.146252s/step,minflt691181; Rayjemalloc0.154690s/step,minflt691096. No evidence to rerun model
+with defaultpreload; Root ends CPU FP32 path, no newmodel/24matrix. Not end-to-end or universalallocatorclaim.
+Firstprobe rejected mallocPLT identity beforetensors; originalscript-v1 andstderr retained. Fixed usingactual
+CPUallocatorposix_memalign owner, two independentmodelreviews passed. Comparison E/allocator-probe-comparison.json.
+E/development-final-resource-accounting.json confirms original ledger lockFREE, owned5PIDs gone21:33:15UTC,
+generationunknown9/embeddingunknown1 retained. No currentmodelcalls or queuedreruns. Allrealbranches settled.
+
+All A/C/D realwork closed. C semanticjointsuccess NOT met; correct source-assisted Reader does not excuse stored
+sharedpredicate damage. event_at alreadywrong in Extractor rawchanges[1].time andWriterrawassertion; compiler
+onlycopies, occurred_at separatelyreportmetadata. No deterministic timestamp default bug; no speculative filter.
+Independentplan audit E/development-plan-final-audit-preparation.json covers68requirements/14checklistitems;
+finitefailedexperiments close plan execution without claiming Csemanticacceptance. Final report wording and
+CPUdiagnosis/cost independently reviewed; Bdiagnosis/result/cost report written. No73/longhistory/training
+signal inA/D; keep these conditional branches NOT_RUN. No auto-continuation or rerun needed for this plan.
+
+User subsequently authorized GitHub submission. Branch feat/lab-evidence-development-20261013 published to
+origin (minguselandy/MiLAi); implementation/experiment closeout0e4f8da0 preserved. No main merge or remote CI
+claim. Only Lab source/config/tests/docs tracked; private artifacts/models/databases/logs remain ignored.
+
 # Current handoff: dynamic-memory plan active, 2026-10-12
 
 CURRENT LIVE UPDATE 2026-10-12 04:01 UTC: goal ACTIVE; corrected Q b558 FIRST dispatch running, do not duplicate/restart.

@@ -1955,14 +1955,16 @@ def test_each_embedding_batch_is_recorded_before_http_and_billed_once(tmp_path: 
 
 
 @pytest.mark.parametrize("unknown_answer", [False, True])
-@pytest.mark.parametrize("failure_kind", ["capacity", "no_text", "whole_material"])
+@pytest.mark.parametrize("failure_kind", [
+    "capacity", "no_text", "whole_material", "whole_ranking_material",
+])
 def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_stops(
     tmp_path: Path, unknown_answer: bool, failure_kind: str, monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     class MeasuredTokenizer:
         def apply_chat_template(self, messages: Any, **kwargs: Any) -> list[int]:
             return [0] * (500 if any(probe in str(messages) for probe in (
-                "capacity_probe", "whole_material_probe")) else 2)
+                "capacity_probe", "whole_material_probe", "whole_ranking_material_probe")) else 2)
 
         def encode(self, text: str, **kwargs: Any) -> list[int]:
             return list(range(len(text)))
@@ -2020,14 +2022,16 @@ def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_sto
                     "reader_failure_policy": "record_known_readonly_failure"},
     }
     execution.tokenizer = MeasuredTokenizer()
-    if failure_kind == "whole_material":
+    if failure_kind in {"whole_material", "whole_ranking_material"}:
         execution.settings["memory_view_mode"] = "direct"
+        if failure_kind == "whole_ranking_material":
+            execution.settings["reader_ranking"] = "llm_probe"
         original_answer = execution.answer
 
         def answer_material_probe(
             service: MemoryService, question: str, date: str, key: str,
         ) -> str:
-            if "whole_material_probe" not in question:
+            if f"{failure_kind}_probe" not in question:
                 return original_answer(service, question, date, key)
             materials = [{"id": "actual-synthetic-item", "text": "BlueProject Monday"}]
             snapshot_id = f"native/{key}/retrieval.json"
@@ -2056,6 +2060,11 @@ def test_known_readonly_capacity_failure_keeps_question_progress_and_unknown_sto
             assert first["reader_failure"]["request_sent"] is False
             assert (execution.root / first["reader_failure"]["capacity_ref"]).exists()
             assert not (execution.root / "http/halumem/synthetic/0/qa/0/request.json").exists()
+        elif failure_kind == "whole_ranking_material":
+            assert first["reader_failure"]["reason"] == "whole_ranking_material_unavailable"
+            assert first["reader_failure"]["request_sent"] is False
+            assert (execution.root / first["reader_failure"]["ranking_plan_ref"]).exists()
+            assert not (execution.root / "http/halumem/synthetic/0/qa/0/memory-view.json").exists()
         elif failure_kind == "whole_material":
             assert first["reader_failure"]["phase"] == "before_final_http"
             assert first["reader_failure"]["reason"] == "whole_material_unavailable"
@@ -2165,3 +2174,49 @@ def test_embedding_budget_rejection_is_recorded_as_not_sent(tmp_path: Path) -> N
     assert failure["event"] == "vllm_budget_rejected" and failure["request_sent"] is False
     assert budget.state["embedding"]["charged_tokens"] == 0
     assert budget.state["embedding"]["unknown_usage"] == 0
+
+
+def test_rank_order_controls_direct_page_order_without_changing_item_indices(
+    snapshot_reader: BenchmarkRun, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    execution = snapshot_reader
+    memories = snapshot_materials("MiLAi-memory-only", 18000)
+    snapshot_id = "native/qa/retrieval.json"
+    write_json(execution.root / snapshot_id, {"materials": memories})
+    monkeypatch.setattr(execution, "_rank_materials", lambda *args: [1, 0])
+    pages = []
+
+    def chat(messages: Any, response_format: Any, **sampling: Any) -> Any:
+        payload = json.loads(messages[1]["content"])
+        assert payload["memories"] == [memories[i] for i in payload["memory_item_indices"]]
+        if response_format is not None:
+            pages.append(payload["memory_item_indices"])
+            content = json.dumps({"item_indices": [1], "done": True})
+        else:
+            assert payload["memory_item_indices"] == [1]
+            content = "Actual second entry."
+        return {"choices": [{"finish_reason": "stop", "message": {"content": content}}],
+                "usage": {"prompt_tokens": 20, "completion_tokens": 5, "total_tokens": 25}}
+
+    execution.client.chat = chat
+    answer, _ = execution.answer_material("Which report?", "", "qa", memories,
+                                          snapshot_id=snapshot_id)
+    assert answer == "Actual second entry." and pages == [[1], [0]]
+    assert read_json(execution.root / snapshot_id)["materials"] == memories
+
+
+def test_readpack_selector_configuration_reaches_constructor_resource_setup(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.runners import edit_benchmarks
+
+    settings = read_json(Path(__file__).resolve().parents[2]
+                        / "configs/milai-global-readpack-select-pilot-v3.json")[
+                            "entrypoints"]["benchmark"]
+
+    def resource_boundary(*args: Any, **kwargs: Any) -> None:
+        raise RuntimeError("accepted configuration reached tokenizer setup")
+
+    monkeypatch.setattr(edit_benchmarks.AutoTokenizer, "from_pretrained", resource_boundary)
+    with pytest.raises(RuntimeError, match="accepted configuration"):
+        BenchmarkRun(settings, tmp_path / "run", phase="predict")

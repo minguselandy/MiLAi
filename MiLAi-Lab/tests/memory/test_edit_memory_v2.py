@@ -895,7 +895,8 @@ def test_next_contract_actual_enums_no_unavailable_branches_and_legacy_envelope(
         assert legacy.envelope_proposals(mixed, old["mapping"]) == mixed["proposals"]
 
 
-def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_path):
+@pytest.mark.parametrize("repetitions", [1, 2])
+def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_path, repetitions):
     with opened(tmp_path) as (service, _):
         method = EditMemory(service, "M", interface_version="I2", features=NEXT_FEATURES)
         saved, _ = next_save(service, method, conditioned=True)
@@ -1021,12 +1022,15 @@ def test_next_contract_m_exception_dependency_shared_condition_and_remove(tmp_pa
         )
         remove = {
             "action": "edit",
-            "edits": [{"operation": "remove_exception", "target_unit": "u3", "evidence": ["e1"]}],
+            "edits": [{"operation": "remove_exception", "target_unit": "u3",
+                       "evidence": ["e1"]}] * repetitions,
         }
         decoded = method.decode_envelope(
             {"creates": [], "records": {"r1": remove}}, view["mapping"]
         )[0]
-        assert len(decoded["edits"]) == len(decoded["_edit_metadata"]["unit_assertions"]) == 2
+        assert len(decoded["edits"]) == len(decoded["_edit_metadata"]["unit_assertions"])
+        assert sum(edit["target_unit"] == state["units"][2]["unit_id"]
+                   for edit in decoded["edits"]) == repetitions
         receipt = method.apply("s", "remove", decoded)
         now = service.read(saved["id"])["value"]["edit_state"]
         assert receipt["revision"] == 3 and now["units"] == state["units"][:2]
@@ -2102,3 +2106,76 @@ def test_local_revision_delivers_unlinked_overview_and_keeps_unaffected_scopes(
         assert [part["content"] for part in read_revision_evidence(service, before)] == [
             initial_text
         ]
+
+
+@pytest.mark.parametrize("mode", ["legacy", "event_delta_v1"])
+def test_proposition_recipe_preserves_literal_time_through_extractor_writer_boundary(
+    tmp_path, mode,
+):
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", maintenance_mode=mode,
+                            features=EditFeatures(source_metadata=True, temporal_scope=True,
+                                                  proposition_updates=True))
+        view, delivery = packet(service, method, "consider", "Recently I began considering a move.")
+        request = method.change_request(delivery, "2030-10-14")
+        extracted = method.decode_changes({"changes": [{
+            "subject": "user", "statement": "Recently the user began considering a move.",
+            "evidence": ["e1"], "time": "Recently", "scope": None,
+        }]}, request)
+        candidates = method.writer_changes(extracted, view["mapping"])
+        assert candidates[0]["time"] == "Recently"
+        assert candidates[0]["evidence"] == ["e1"]
+        messages = method.edit_messages(view["packet"], "2030-10-14", allow_create=True,
+                                        change_candidates=candidates)
+        assert "Recently" in messages[1]["content"]
+        assert "event_at" not in candidates[0] and service.records() == []
+        assert "proposition_updates" not in EditFeatures().settings()
+
+
+def test_proposition_time_and_changed_assertion_are_bound_before_generation(tmp_path):
+    features = EditFeatures(True, True, True, True, True, True, proposition_updates=True)
+    with opened(tmp_path) as (service, _):
+        method = EditMemory(service, "M", interface_version="I2", features=features,
+                            maintenance_mode="event_delta_v1")
+        view, _ = next_request(service, method, "seed", "A sends to Li. B sends to Wang.")
+        created = {"action": "create", "matter": "Contacts", "units": [
+            next_unit("A sends to Li."), next_unit("B sends to Wang.")], "relations": []}
+        saved = method.apply("s", "seed", method.decode_proposal(
+            clause_proposal(created, conditioned=True), view["mapping"]))
+        assert saved["ok"]
+        current, _ = next_request(service, method, "change",
+            "From 2030-10-20 A sends to Zhao; B remains unchanged.", [service.read(saved["id"])])
+        assert current["packet"]["time_choices"][0]["value"] == "2030-10-20"
+        valid = {"action": "edit", "target": "r1", "edits": [{
+            "operation": "replace", "target_unit": "u1", "text": "A sends to Zhao from 2030-10-20.",
+            "evidence": ["e1"], "assertion": {"source_evidence": "e1", "kind": "reported",
+                                              "applicability": {"effective_from": "t1"}},
+        }]}
+        schema = method.proposal_schema(mapping=current["mapping"], for_generation=True)
+        Draft202012Validator(schema).validate(valid)
+        wrong = copy.deepcopy(valid)
+        wrong["edits"][0]["assertion"] = {"keep": "h1"}
+        assert not Draft202012Validator(schema).is_valid(wrong)
+        wrong = copy.deepcopy(valid)
+        wrong["edits"][0]["keep_support"] = ["h2"]
+        assert not Draft202012Validator(schema).is_valid(wrong)
+        wrong = copy.deepcopy(valid)
+        wrong["edits"][0]["assertion"]["applicability"]["effective_from"] = "2030-10-20"
+        assert not Draft202012Validator(schema).is_valid(wrong)
+        receipt = method.apply("s", "change", method.decode_proposal(valid, current["mapping"]))
+        assert receipt["ok"]
+        state = service.read(saved["id"])["value"]["edit_state"]
+        assert state["units"][0]["assertion"]["applicability"] == {"effective_from": "2030-10-20"}
+        assert state["units"][1]["text"] == "B sends to Wang."
+        assert service.read(saved["id"], 1)["ok"]
+        recent, _ = next_request(service, method, "recent", "Recently considering SMS; undecided.",
+                                 [service.read(saved["id"])])
+        assert recent["packet"]["time_choices"] == []
+        append = {"action": "edit", "target": "r1", "edits": [{
+            "operation": "append", "role": "content",
+            "text": "Recently considering SMS; undecided.",
+            "evidence": ["e1"], "assertion": {"source_evidence": "e1", "kind": "reported",
+                                              "applicability": {"event_at": "2030-10-14"}},
+        }]}
+        assert not Draft202012Validator(method.proposal_schema(
+            mapping=recent["mapping"], for_generation=True)).is_valid(append)

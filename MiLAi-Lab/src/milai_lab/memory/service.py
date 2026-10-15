@@ -13,7 +13,6 @@ import fcntl
 import json
 import threading
 import time
-import unicodedata
 import uuid
 from collections.abc import Callable, Iterator, Sequence
 from contextlib import contextmanager
@@ -53,6 +52,7 @@ from milai_lab.memory.retrieval import (
     raw_exchange_units,
     semantic_text,
 )
+from milai_lab.memory.retrieval import _lexical_tokens as _lexical_tokens
 
 
 def _json(value: Any) -> str:
@@ -81,54 +81,6 @@ def _receipt_json(content: str) -> Any:
         raise ValueError("non_json_constant:" + value)
 
     return json.loads(content, object_pairs_hook=unique_object, parse_constant=invalid_constant)
-
-
-def _lexical_tokens(text: str, *, include_cjk_unigrams: bool = False) -> list[str]:
-    """Unicode words plus overlapping Han/kana/Hangul bigrams, without a dictionary.
-
-    Multi-character CJK query runs use bigrams rather than common individual
-    characters. Candidate unigrams also allow an explicitly single-character
-    query. Canonical normalization and case folding apply only to matching;
-    original queries and stored bodies are untouched.
-    """
-    tokens: list[str] = []
-    run: list[str] = []
-    cjk = False
-
-    def flush() -> None:
-        if not run:
-            return
-        if cjk:
-            if include_cjk_unigrams or len(run) == 1:
-                tokens.extend(run)
-            tokens.extend(run[index] + run[index + 1] for index in range(len(run) - 1))
-        else:
-            tokens.append("".join(run))
-        run.clear()
-
-    for character in unicodedata.normalize("NFC", text.casefold()):
-        category = unicodedata.category(character)[0]
-        if category in {"L", "N"}:
-            is_cjk = unicodedata.name(character, "").startswith(
-                (
-                    "CJK UNIFIED",
-                    "CJK COMPATIBILITY",
-                    "HIRAGANA",
-                    "KATAKANA",
-                    "HALFWIDTH KATAKANA",
-                    "HANGUL",
-                )
-            )
-            if run and is_cjk != cjk:
-                flush()
-            cjk = is_cjk
-            run.append(character)
-        elif category == "M" and run:
-            run.append(character)
-        else:
-            flush()
-    flush()
-    return tokens
 
 
 class MemoryService:
@@ -1831,21 +1783,21 @@ class MemoryService:
                 return rows
             offset += len(page)
 
+    def _visible_sources(self, session: str | None = None) -> list[dict[str, Any]]:
+        """Only Source visibility and owner scope; no semantic formation history."""
+        events = [event for row in self._rows(self.sources_namespace)
+                  if (event := self.source(row["id"])) is not None
+                  and (session is None or event["session"] == session)]
+        return sorted(events, key=lambda event: (event["observed_at"], event["event_id"]))
+
     def sources(self, session: str | None = None) -> list[dict[str, Any]]:
         with self._locked():
-            records = self._rows(self.namespace)
-            result = []
-            for row in self._rows(self.sources_namespace):
-                event = self.source(row["id"])
-                if event is None or (session is not None and event["session"] != session):
-                    continue
-                formed = any(
-                    row["id"] in self._version_source_refs(version)
-                    for record in records
-                    for version in record["value"].get("_v13_1", {}).get("history", [])
-                )
-                result.append({**event, "formation_status": "formed" if formed else "pending"})
-            return sorted(result, key=lambda event: (event["observed_at"], event["event_id"]))
+            formed = {ref for record in self._rows(self.namespace)
+                      for version in record["value"].get("_v13_1", {}).get("history", [])
+                      for ref in self._version_source_refs(version)}
+            return [{**event, "formation_status":
+                     "formed" if event["event_id"] in formed else "pending"}
+                    for event in self._visible_sources(session)]
 
     def episodes(
         self,
@@ -1925,9 +1877,11 @@ class MemoryService:
     def search_sources(
         self, query: str, limit: int = 20, *,
         granularity: Literal["session", "turn"] = "session",
+        tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
+        include_scope: bool = False,
         source_refs: Sequence[str] | None = None,
     ) -> dict[str, Any]:
-        """Independently rank arrived original text with the existing flat BM25.
+        """Rank visible original text without traversing semantic formation history.
 
         Source storage, rather than semantic formation or Episode descriptions,
         owns the pool. An optional ordered Source allowlist is an arrival-prefix
@@ -1938,8 +1892,12 @@ class MemoryService:
 
         if type(limit) is not int or limit < 1 or granularity not in {"session", "turn"}:
             raise ValueError("SOURCE_RETRIEVAL_LIMIT_OR_GRANULARITY_INVALID")
+        started = time.perf_counter()
+        timings: dict[str, float] = {}
         with self._locked():
-            visible = {source["event_id"]: source for source in self.sources()}
+            visible = {source["event_id"]: source for source in self._visible_sources()}
+            timings["enumerate_seconds"] = time.perf_counter() - started
+            assemble_started = time.perf_counter()
             ordered = list(visible) if source_refs is None else list(dict.fromkeys(source_refs))
             sessions: dict[str, list[dict[str, Any]]] = {}
             for ref in ordered:
@@ -1978,23 +1936,35 @@ class MemoryService:
                     # Tool observations. RawRAG's own user-only keys stay unchanged.
                     unit["index_text"] = " ".join(turn["content"] for turn in unit["turns"])
                 units.extend(selected)
-            ranked = flat_bm25_rank(units, query, limit)
-            descriptors = [{"kind": "original_source", **{key: unit[key] for key in (
-                "id", "session_id", "date", "turn_range", "score")},
-                "source_ranges": [{"source_ref": turn["source_ref"],
-                                   "source_revision": turn["source_revision"],
-                                   "start": 0, "end": len(turn["content"])}
-                                  for turn in unit["turns"]]} for unit in ranked]
+            timings["assemble_seconds"] = time.perf_counter() - assemble_started
+            ranked = flat_bm25_rank(units, query, limit, tokenization=tokenization,
+                                    timings=timings)
+            open_started = time.perf_counter()
+            def descriptor(unit: dict[str, Any]) -> dict[str, Any]:
+                return {"kind": "original_source", **{key: unit[key] for key in (
+                    "id", "session_id", "date", "turn_range")}, "score": unit.get("score"),
+                    "source_ranges": [{"source_ref": turn["source_ref"],
+                                       "source_revision": turn["source_revision"],
+                                       "start": 0, "end": len(turn["content"])}
+                                      for turn in unit["turns"]]}
+
+            descriptors = [descriptor(unit) for unit in ranked]
+            scope = ({"complete": True, "basis": "captured_visible_arrival_prefix",
+                      "materials": [descriptor(unit) for unit in units]} if include_scope else None)
             materials = self.read_source_materials(descriptors)
             selected_refs = dict.fromkeys(span["source_ref"]
                                           for material in materials
                                           for span in material["source_ranges"])
             raw_events = [event for ref in selected_refs
                           if (event := self.source(ref)) is not None]
+            timings["open_seconds"] = time.perf_counter() - open_started
+        timings["total_seconds"] = time.perf_counter() - started
         return {
             "ok": True, "raw_events": raw_events, "source_materials": materials,
+            **({"source_scope": scope} if scope is not None else {}),
             "source_retrieval": {
                 "retrieval": "source_flat_bm25", "granularity": granularity,
+                "tokenization": tokenization, "timings": timings,
                 "index_text": "all_original_source_roles", "requested_count": limit,
                 "indexed_count": len(units), "returned_count": len(materials),
                 "visible_source_count": sum(ref in visible for ref in ordered),
@@ -2006,12 +1976,15 @@ class MemoryService:
     def search_evidence(
         self, query: str, *, source_limit: int = 20, semantic_limit: int = 10,
         granularity: Literal["session", "turn"] = "session",
+        tokenization: Literal["rawrag_space", "unicode_v1"] = "rawrag_space",
+        include_scope: bool = False,
         source_refs: Sequence[str] | None = None,
     ) -> dict[str, Any]:
         """Two independent quotas; original evidence is not gated by semantic hits."""
         with self._locked():
             originals = self.search_sources(query, source_limit, granularity=granularity,
-                                            source_refs=source_refs)
+                                            source_refs=source_refs, tokenization=tokenization,
+                                            include_scope=include_scope)
             semantic = self.search(query, limit=semantic_limit, include_raw=False,
                                    source_refs=source_refs)
             records = semantic["records"]
@@ -2839,7 +2812,11 @@ class MemoryService:
                 text += " " + str(value.get("content", ""))
             return text
 
-        if self.source_backlinks == "enabled" and tokens:
+        # Dense record ranking does not consume keyword backlink text. Only raw
+        # output and withdrawn-record notices still use the lexical path there.
+        needs_backlinks = (self.semantic_retriever is None or include_raw
+                           or any(row.get("status") == "retracted" for row in records))
+        if self.source_backlinks == "enabled" and tokens and needs_backlinks:
             all_sources = raw if include_raw else self.sources()
             if allowed_sources is not None:
                 all_sources = [source for source in all_sources

@@ -1,0 +1,17 @@
+{
+  "status": "WAITING_FOR_SCREENING",
+  "pid": 247480,
+  "started_at": "2026-10-15T03:19:16.437847+00:00",
+  "source_commit": "10c68e54",
+  "previous_driver_pid": 141865,
+  "model_requests_before_handoff": 0,
+  "observed_at": "2026-10-15T03:21:32.744122+00:00",
+  "exec_session": 60980,
+  "process_identity_observed": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python artifacts/method-architecture/run_factorial_after_screening_v1.py ",
+  "source_snapshot": "artifacts/method-architecture/factorial-source-v1/MiLAi-Lab",
+  "source_receipt": "artifacts/method-architecture/factorial-source-v1.json",
+  "screening_exec_session": 29617,
+  "screening_source": "463b5182",
+  "handoff": "only after original screening driver exits, all first scores close and resources settle; otherwise stop without new dispatch",
+  "factorial_model_requests_observed": 0
+}

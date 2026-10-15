@@ -1,0 +1,24 @@
+{
+  "status": "PER_MESSAGE_POLICY_VERSION_ADMISSION_REPAIRED",
+  "observed_failure": "host recovery-v3 FAILED GENERATION_ADMISSION_STATE_INCOMPATIBLE before any generation or embedding; original counters unchanged",
+  "cause": "file-level config_version rejected a new public message even though owner, bank, model config and cap were identical",
+  "change": "file-level first version remains provenance; equality of resource scope excludes that version label. Each message still binds its original config_version, source and identity in resume matching",
+  "invariants": [
+    "old reservations and counts retained exactly",
+    "same original message cannot start again or resume under different version",
+    "owner/bank/host/cap changes still reject",
+    "no new or reset usage ledger"
+  ],
+  "validation": {
+    "admission_cases": 10,
+    "seconds": 2.42,
+    "normal_Host_new_message_transition": 1,
+    "old_Host_resume_rejected_before_HTTP": true,
+    "mypy_files": 1,
+    "ruff": "pass",
+    "package_dag": "pass",
+    "tools_boundary": "pass"
+  },
+  "next": "resume only the confirmed zero-model recovery-v3 query on a new bank copy and frozen repaired source; then remaining indices5-7",
+  "not_relabelled": "original known selector length remains UNKNOWN in its original result; this repair is only for policy switching between messages"
+}

@@ -20,6 +20,11 @@ class EditFeatures:
     single_record_changes: bool = False
     source_metadata: bool = False
     temporal_scope: bool = False
+    patch_text: bool = False
+    proposition_updates: bool = False
+    dependency_updates: bool = False
+    dependency_groups: bool = False
+    cross_record_dependencies: bool = False
 
     @classmethod
     def from_settings(cls, settings: dict[str, Any]) -> EditFeatures:
@@ -31,6 +36,12 @@ class EditFeatures:
     def __post_init__(self) -> None:
         if self.temporal_scope and not self.source_metadata:
             raise ValueError("EDIT_TEMPORAL_SCOPE_REQUIRES_SOURCE_METADATA")
+        if self.patch_text and not self.source_metadata:
+            raise ValueError("EDIT_PATCH_TEXT_REQUIRES_SOURCE_METADATA")
+        if self.cross_record_dependencies and not (
+            self.dependency_groups and self.bound_references
+        ):
+            raise ValueError("EDIT_CROSS_RECORD_REQUIRES_BOUND_SUPPORT_GROUPS")
 
     @property
     def enabled(self) -> bool:
@@ -41,6 +52,16 @@ class EditFeatures:
         # Existing frozen writer maps keep their original five-feature shape.
         if not self.temporal_scope:
             settings.pop("temporal_scope")
+        if not self.patch_text:
+            settings.pop("patch_text")
+        if not self.proposition_updates:
+            settings.pop("proposition_updates")
+        if not self.dependency_updates:
+            settings.pop("dependency_updates")
+        if not self.dependency_groups:
+            settings.pop("dependency_groups")
+        if not self.cross_record_dependencies:
+            settings.pop("cross_record_dependencies")
         return settings
 
 
@@ -337,6 +358,21 @@ def feature_proposal_schema(
                         op["properties"]["target_unit"] = {"type": "null"}
             if not ops:
                 variants.remove(variant)
+    if features.patch_text and refs["e"]:
+        content = [alias for alias in refs["u"] if mapping["units"][alias]["role"] == "content"]
+        for variant in variants:
+            if "edits" not in variant["properties"] or not content:
+                continue
+            variant["properties"]["edits"]["items"]["oneOf"].append(_object(
+                {
+                    "operation": {"const": "patch_text"},
+                    "target_unit": reference("u", content),
+                    "old_text": {"type": "string", "minLength": 1},
+                    "new_text": {"type": "string", "minLength": 1},
+                    "evidence": {"type": "array", "minItems": 1, "items": reference("e")},
+                },
+                ["operation", "target_unit", "old_text", "new_text", "evidence"],
+            ))
     if features.source_metadata:
         # Relation support remains available for bindings, but cannot retain a
         # unit's attribution. Saved proposals keep their original decode schema.
@@ -367,6 +403,22 @@ def feature_proposal_schema(
                 | {"quantity_scope": {"enum": ["overall", "per_member"]}},
                 [],
             )
+            if features.proposition_updates:
+                properties = assertion["oneOf"][0]["properties"]["applicability"]["properties"]
+                dates = [item["id"] for item in mapping.get("time_choices", [])]
+                day_ends = [item["id"] + ":end" for item in mapping.get("time_choices", [])
+                            if "day_end_exclusive" in item]
+                for field in ("event_at", "effective_from", "effective_until"):
+                    if dates:
+                        properties[field] = {
+                            "type": "string",
+                            "enum": dates + (day_ends if field == "effective_until" else []),
+                            "description": "Select a time_choices reference from original wording. "
+                                           "For a whole day, until=t#:end selects the next day's "
+                                           "exclusive boundary. Omit unknown dates.",
+                        }
+                    else:
+                        properties.pop(field)
             assertion["oneOf"][0]["properties"]["evidence_links"] = _object(
                 {
                     stance: {"type": "array", "items": reference("e")}
@@ -403,15 +455,42 @@ def feature_proposal_schema(
                     item["properties"]["assertion"] = copy.deepcopy(current_assertion)
             if "edits" in fields:
                 for item in fields["edits"]["items"]["oneOf"]:
-                    if "text" in item["properties"]:
+                    if item["properties"]["operation"]["const"] == "patch_text":
+                        item["properties"]["assertion"] = copy.deepcopy(current_assertion)
+                        item["required"].append("assertion")
+                    elif "text" in item["properties"]:
                         item["properties"]["assertion"] = copy.deepcopy(assertion)
-                        if item["properties"]["operation"]["const"] not in {
-                            "replace",
-                            "change_value",
-                            "change_condition",
-                        }:
+                        if (features.proposition_updates and for_generation) or (
+                            item["properties"]["operation"]["const"] not in {
+                                "replace", "change_value", "change_condition",
+                            }
+                        ):
                             item["properties"]["assertion"] = copy.deepcopy(current_assertion)
                         item["required"].append("assertion")
+
+    if features.proposition_updates and for_generation:
+        for variant in variants:
+            if "edits" not in variant["properties"]:
+                continue
+            operations = variant["properties"]["edits"]["items"]["oneOf"]
+            bound_operations = []
+            for operation in operations:
+                props = operation["properties"]
+                if props["operation"]["const"] != "replace":
+                    bound_operations.append(operation)
+                    continue
+                for unit in refs["u"]:
+                    choice = copy.deepcopy(operation)
+                    choice["properties"]["target_unit"] = {"const": unit}
+                    supports = [ref for ref in refs["h"]
+                                if mapping["support"][ref].get("unit") == unit]
+                    choice["properties"]["keep_support"] = {
+                        "type": "array", "maxItems": 1 if supports else 0,
+                        "items": reference("h", supports),
+                    }
+                    choice["properties"]["evidence"]["minItems"] = 1
+                    bound_operations.append(choice)
+            variant["properties"]["edits"]["items"]["oneOf"] = bound_operations
 
     def retained_text(item: dict[str, Any], *, keep_only: bool = False) -> None:
         if not features.source_metadata or (
@@ -460,6 +539,11 @@ def feature_proposal_schema(
             if prior_contents and not (arm == "B0" and features.source_metadata and for_generation):
                 clause["properties"]["from_unit"] = reference("u", prior_contents)
         fields["clauses"] = {**unit, "items": clause}
+        if features.proposition_updates:
+            fields["clauses"]["description"] = (
+                "Parallel, independently revisable complete claims: one clause per subject, "
+                "attribute and applicable period. Do not duplicate these in a catch-all summary. "
+                "A different claim is another clause, not a condition of an overview clause.")
         variant["required"] = ["clauses" if key == "units" else key for key in variant["required"]]
         if arm not in {"B2", "M"}:
             retained_text(clause, keep_only=arm == "B0"
@@ -558,6 +642,67 @@ def feature_proposal_schema(
         # An override must bind an actual scope to this clause. Ordinary claims
         # may stay unqualified; declared/reused conditions share the same path.
         fields["clauses"]["items"] = {"oneOf": [clause, scoped]}
+    if features.dependency_groups:
+        group_only_variants = []
+        for variant in variants:
+            fields = variant["properties"]
+            action = fields["action"]["const"]
+            if action not in {"create", "rewrite", "edit"}:
+                continue
+            generated = {"type": "integer", "minimum": 0}
+            group_reference = generated if action != "edit" else {"anyOf": [
+                reference("u"), {"type": "string", "pattern": "^n[0-9]+$"}]}
+            premise_reference = copy.deepcopy(group_reference)
+            if features.cross_record_dependencies:
+                external = [_object({
+                    "record": {"const": record},
+                    "unit": reference("u", [alias for alias, unit in mapping.get(
+                        "units", {}).items() if unit["record"] == record]),
+                }, ["record", "unit"]) for record in refs["r"] if record != target and any(
+                    unit["record"] == record for unit in mapping.get("units", {}).values())]
+                if external:
+                    premise_reference = {"anyOf": [premise_reference, *external]}
+            group = _object({
+                "target_unit": copy.deepcopy(group_reference),
+                "alternatives": {"type": "array", "items": {
+                    "type": "array", "minItems": 1, "items": premise_reference}},
+                "evidence": {"type": "array", "minItems": 1, "items": reference("e")},
+            }, ["target_unit", "alternatives", "evidence"])
+            choices = [group]
+            if action == "edit":
+                choices.append(_object({
+                    "operation": {"const": "remove"},
+                    "target_unit": copy.deepcopy(group_reference),
+                    "evidence": copy.deepcopy(group["properties"]["evidence"]),
+                }, ["operation", "target_unit", "evidence"]))
+                fields["edits"]["minItems"] = 1
+            fields["support_groups"] = {
+                "type": "array", "items": {"oneOf": choices},
+                "description": (
+                    "Model-inferred support: each inner list is jointly required (AND); "
+                    "outer alternatives are independent sufficient routes (OR). Evidence "
+                    "must support the dependency, not mere co-occurrence. "
+                    + ("References are zero-based clause indexes." if action != "edit" else
+                       "References are old u aliases or n0,n1,... for newly generated units "
+                       "in append/override order (an override adds content then condition). "
+                       "Only listed targets change groups; omission retains existing groups. "
+                       "Empty alternatives means no remaining support route; operation=remove "
+                       "removes the dependency claim when new evidence makes it inapplicable.")),
+            }
+            if features.cross_record_dependencies:
+                fields["support_groups"]["description"] += (
+                    " A premise in another delivered record may use {record:r#,unit:u#}; "
+                    "the target remains local. Both aliases must name that actual delivered unit.")
+            if action == "edit":
+                # Complete, disjoint objects keep the same JSON semantics and
+                # remain generatable by deployed XGrammar. Partial object
+                # constraints under anyOf masked otherwise valid edit branches.
+                group_only = copy.deepcopy(variant)
+                group_only["properties"]["edits"].update(minItems=0, maxItems=0)
+                group_only["properties"]["support_groups"]["minItems"] = 1
+                group_only["required"].append("support_groups")
+                group_only_variants.append(group_only)
+        variants.extend(group_only_variants)
     return (
         schema if variants else {"type": "object", "properties": {}, "additionalProperties": False}
     )
@@ -625,6 +770,27 @@ def compile_semantic_operations(
 ) -> dict[str, Any]:
     """Structural compilation only. The model chooses meaning and applicability."""
     result = compile_clause_proposal(proposal)
+    target_counts = Counter(item.get("target_unit") for item in result.get("edits", []))
+    for item in result.get("edits", []):
+        if item["operation"] != "patch_text":
+            continue
+        target = item["target_unit"]
+        if target_counts[target] > 1:
+            raise FunctionalRejection("EDIT_PATCH_TEXT_TARGET_REPEATED")
+        unit = mapping["units"].get(target)
+        if unit is None or unit["record"] != result["target"] or unit["role"] != "content":
+            raise FunctionalRejection("EDIT_SHORT_UNIT_UNAVAILABLE")
+        old_text = item.pop("old_text")
+        text = unit["text"]
+        start = text.find(old_text)
+        if start < 0 or text.find(old_text, start + 1) >= 0:
+            raise FunctionalRejection("EDIT_PATCH_TEXT_MATCH_NOT_UNIQUE")
+        item["text"] = text[:start] + item.pop("new_text") + text[start + len(old_text):]
+        item["operation"] = "replace"
+        item["keep_support"] = [
+            alias for alias, support in mapping["support"].items()
+            if support["record"] == result["target"] and support.get("unit") == target
+        ]
     for item in [*result.get("units", []), *result.get("edits", [])]:
         assertion = item.get("assertion")
         if assertion and "source_evidence" in assertion:

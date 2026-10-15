@@ -1,0 +1,35 @@
+{
+  "source_code": "4205c74b",
+  "status": "CLOSED_WITH_CONFIRMED_READONLY_RECOVERY",
+  "first_attempts": "Both FAILED with confirmed stop/null-content; original attempts retained.",
+  "recovery": "One existing explicit readonly answer resume per case, no tools and no business/semantic replay.",
+  "cases": [
+    {
+      "case": "pack-range",
+      "first_status": "FAILED",
+      "recovery_status": "COMPLETED",
+      "range_source_coverage": true,
+      "sources": 3,
+      "projects_in_answer": 2,
+      "source_review": "A/Li, B/Wang and external-confirmation condition match the delivered original sources."
+    },
+    {
+      "case": "pack-context",
+      "first_status": "FAILED",
+      "recovery_status": "COMPLETED",
+      "range_source_coverage": false,
+      "source_review": "Final text matches originals, but Qinglan fact was accessed via legacy search candidate descriptions rather than reopened pack body; not a full B delivery pass."
+    }
+  ],
+  "cost": {
+    "generation_calls": 11,
+    "known_tokens": 51680,
+    "embedding_tokens": 0,
+    "new_generation_unknown": 0,
+    "new_embedding_unknown": 0
+  },
+  "semantic_records": 0,
+  "business_mutations": 0,
+  "review": "Root, not independent; no official benchmark score for these authored Host cases.",
+  "artifacts": "artifacts/global-development/host-packs-run-v1; per-attempt traces and result bodies retained"
+}

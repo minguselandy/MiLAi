@@ -21,12 +21,13 @@ from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional_state import FunctionalRejection
 from milai_lab.memory.retrieval import merge_candidates
 from milai_lab.memory.working_set import record_candidate
+from milai_lab.methods.dependency_memory import impact_request, plan_regions, scoped_edit_schema
 from milai_lab.methods.edit_memory import EditMemory
 
 MaintenanceRecipe = Literal["single_pass", "extract_then_edit"]
 ModelCall = Callable[[str, list[dict[str, str]], dict[str, Any]], dict[str, Any]]
 StageFit = Callable[[str, list[dict[str, str]]], bool]
-Commit = Callable[[str, dict[str, Any], dict[str, Any]], dict[str, Any]]
+Commit = Callable[[str, dict[str, Any], dict[str, Any], list[dict[str, Any]]], dict[str, Any]]
 CandidateMode = Literal["combined_dense", "per_candidate_dense"]
 MemoryViewMode = Literal["legacy", "staged", "state_driven"]
 
@@ -110,6 +111,10 @@ def _located_delivery(
                 limit=retrieval_limit, mode=candidate_mode,
             )
         )
+    if method.features.cross_record_dependencies:
+        from milai_lab.memory.external_support import dependent_record_candidates
+
+        selected_records = dependent_record_candidates(method.service, selected_records)
     located = method.prepare(
         list(dict.fromkeys(s["source_ref"] for s in sources)), "",
         selected_records=selected_records,
@@ -687,6 +692,9 @@ def maintain_event(
                 for r in state["receipts"]
             ),
             **({"outcome": state["outcome"]} if "outcome" in state else {}),
+            **({"dependency_selection": copy.deepcopy(state["dependency_selection"]),
+                "dependency_regions": copy.deepcopy(state["dependency_regions"])}
+               if "dependency_regions" in state else {}),
             **({"execution_source_refs": list(execution_refs)} if execution_refs else {}),
             **({"batches": copy.deepcopy(batches),
                 "source_batch_count": len(state["batches"])} if "batches" in state else {}),
@@ -808,7 +816,23 @@ def maintain_event(
                     directory=[_directory_ref(row) for row in selected],
                     work_items=[], phase="views",
                 )
-                if selected_record_ids is not None or not selected:
+                direct = selected_record_ids is not None or not selected
+                if not direct and recipe == "single_pass" and method.features.proposition_updates:
+                    located = _located_delivery(
+                        method, {**delivery, "prior_context": state.get("prior_context", [])},
+                        state["changes"], retrieval_limit=retrieval_limit,
+                        selected_record_ids=locating_ids, selected_records=selected,
+                        candidate_mode=candidate_mode, prepare_delivery=prepare_delivery,
+                        materialize_support=True,
+                    )
+                    preview = method.preview_writer_request(located)
+                    direct = _fits("edit", _replay_context(method.edit_messages(
+                        preview["packet"], date, allow_create=True, schema=preview["schema"],
+                        prior_context=state.get("prior_context", []),
+                    ), delivery), fit, stage_fit)
+                    if direct:
+                        state["selection_policy"] = "complete_candidate_input_fits"
+                if direct:
                     _append_work(state, request_id, state["directory"], create=True, done=True)
                 save()
             else:
@@ -841,14 +865,28 @@ def maintain_event(
             return result()
         if state["phase"] == "edit":
             view = state["view"]
+            packet, schema = view["packet"], view["schema"]
+            if method.features.dependency_updates and view["mapping"]["units"]:
+                if "dependency_selection" not in state:
+                    request = impact_request(packet, view["mapping"], date)
+                    selection = call("impact", request["messages"], request["schema"])
+                    Draft202012Validator(request["schema"]).validate(selection)
+                    state.update(dependency_selection=selection,
+                                 dependency_regions=plan_regions(view["mapping"], selection),
+                                 phase="edit")
+                    save()
+                packet = {**packet, "dependency_regions": state["dependency_regions"]}
+                schema = scoped_edit_schema(schema, state["dependency_regions"])
             messages = method.edit_messages(
-                view["packet"], date, allow_create=state.get("allow_create", True),
-                schema=view["schema"],
+                packet, date, allow_create=state.get("allow_create", True),
+                schema=schema,
                 change_candidates=(method.writer_changes(state["changes"], view["mapping"])
                                    if state["changes"] is not None else None),
                 prior_context=state.get("prior_context", []),
             )
-            envelope = call("edit", _replay_context(messages, delivery), view["schema"])
+            envelope = call("edit", _replay_context(messages, delivery), schema)
+            if method.features.dependency_updates:
+                Draft202012Validator(schema).validate(envelope)
             state.update(
                 proposals=method.envelope_proposals(envelope, view["mapping"]),
                 phase="commit",
@@ -860,8 +898,11 @@ def maintain_event(
             try:
                 mapping = state["view"]["mapping"]
                 receipt = (
-                    commit(operation_id, proposal, mapping) if commit else method.apply(
-                        session, operation_id, method.decode_proposal(proposal, mapping)
+                    commit(operation_id, proposal, mapping, copy.deepcopy(state["receipts"]))
+                    if commit else method.apply(
+                        session, operation_id, method.decode_proposal(proposal, mapping),
+                        **({"dependency_receipts": state["receipts"]}
+                           if method.features.cross_record_dependencies else {}),
                     )
                 )
             except (FunctionalRejection, ValidationError, SchemaError) as error:

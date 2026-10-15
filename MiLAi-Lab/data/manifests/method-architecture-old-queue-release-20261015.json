@@ -1,0 +1,58 @@
+{
+  "before": {
+    "at": "2026-10-15T01:33:55.826751+00:00",
+    "authorization": "User replied 继续工作 to the concrete request to end the old paused processes, retain all artifacts, and release the ledger for E1.",
+    "source": "/cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/final-confirmation-v1",
+    "backup": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/old-confirmation-release-20261015/confirmation",
+    "files": 1068,
+    "bytes": 206662404,
+    "processes": {
+      "1376965": {
+        "cmdline": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python artifacts/global-development/run_final_confirmation_v1.py ",
+        "state": "T (stopped)",
+        "sigterm_caught": false,
+        "sigterm_ignored": false
+      },
+      "1626865": {
+        "cmdline": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python /cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/source-retain-packs-v1/MiLAi-Lab/tools/run_baseline_alignment.py /cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/configs/milai-global-final-confirmation-pack-v1.json /cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/final-confirmation-v1/pack --phase predict --backend MiLAi-memory-only --runtime-dir /cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/runtime ",
+        "state": "T (stopped)",
+        "sigterm_caught": false,
+        "sigterm_ignored": false
+      }
+    },
+    "new_requests": 0
+  },
+  "after": {
+    "at": "2026-10-15T01:34:28.734881+00:00",
+    "process_states": {
+      "1376738": "missing",
+      "1376965": "missing",
+      "1626865": "missing"
+    },
+    "owner_lock_free": true,
+    "old_request_counts": {
+      "s0": {
+        "requests": 109,
+        "responses": 109
+      },
+      "pack": {
+        "requests": 8,
+        "responses": 8
+      }
+    },
+    "old_pack_status": "terminated_partial_not_completed",
+    "original_files_retained": true
+  },
+  "signals": {
+    "at": "2026-10-15T01:34:28.654676+00:00",
+    "order": [
+      1376965,
+      1626865
+    ],
+    "signals": [
+      "SIGTERM",
+      "SIGCONT to deliver pending default termination"
+    ],
+    "original_experiment_restarted": false
+  }
+}

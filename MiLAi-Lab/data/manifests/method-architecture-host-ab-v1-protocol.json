@@ -1,0 +1,82 @@
+{
+  "status": "NEW_AB_HOST_PROTOCOL_ZERO_MODEL",
+  "messages": 10,
+  "source_events": 5,
+  "queries": 5,
+  "config": "configs/milai-method-architecture-host-ab-v1.json",
+  "fixture": "data/fixtures/milai-method-architecture-host-ab-v1.json",
+  "reference": [
+    {
+      "event_index": 0,
+      "query_index": 1,
+      "expected_core": [
+        "A林舒，B沈瑜",
+        "外发材料前本人明确确认，联系人记录不是发送授权",
+        "乌龙茶，不加糖"
+      ],
+      "state_review": "actual model state plus target/preservation/time/source dimensions; QA-only source repair is not state success"
+    },
+    {
+      "event_index": 2,
+      "query_index": 3,
+      "expected_core": [
+        "6月14日林舒，6月16日陈丹",
+        "B仍沈瑜；乌龙茶不加糖未变"
+      ],
+      "state_review": "actual model state plus target/preservation/time/source dimensions; QA-only source repair is not state success"
+    },
+    {
+      "event_index": 4,
+      "query_index": 5,
+      "expected_core": [
+        "对外材料联络曾蕊，内部一般联络林舒",
+        "不免确认"
+      ],
+      "state_review": "actual model state plus target/preservation/time/source dimensions; QA-only source repair is not state success"
+    },
+    {
+      "event_index": 6,
+      "query_index": 7,
+      "expected_core": [
+        "当前6月12日下午林舒；因临时展台提前撤下取消曾蕊安排",
+        "6月16日陈丹；本人明确确认仍必要"
+      ],
+      "state_review": "actual model state plus target/preservation/time/source dimensions; QA-only source repair is not state success"
+    },
+    {
+      "event_index": 8,
+      "query_index": 9,
+      "expected_core": [
+        "纠错后的当前及6月2日B均许安",
+        "实际初存版本须按模型真实保存内容核查；若初存沈瑜，不能把它改说成许安",
+        "A6月14日林舒、6月16日陈丹；曾蕊例外已撤回",
+        "外发须本人明确确认；乌龙茶不加糖"
+      ],
+      "state_review": "actual model state plus target/preservation/time/source dimensions; QA-only source repair is not state success"
+    }
+  ],
+  "reference_loaded_by_runtime": false,
+  "formation": "empty semantic bank; model must store every initial fact and all relationships",
+  "scope": "plan5.4 complete example and normal Host migration; no business effects requested",
+  "data_role": "new authored development history; not the old17-message story, not external or blind benchmark data",
+  "success_requires": [
+    "actual initial A/B/confirmation/tea facts formed",
+    "before/after future A date remains represented",
+    "scoped temporary contact does not overwrite internal/general/B duties",
+    "withdrawal preserves June15 change and confirmation condition",
+    "B correction distinguishes past truth from actual original saved content",
+    "unrelated tea preference retained",
+    "all answers grounded in actually opened Sources/state/history",
+    "first attempts, read-only recoveries and failures reported separately"
+  ],
+  "fixed_settings": "same8192 output ceiling/read3; dependency_read thinkingFalse as declared Host-v2; no per-case runtime branches",
+  "replicates": 1,
+  "unknown_retry": false,
+  "not_full_goal_completion": true,
+  "prepare": {
+    "status": "PREPARED_ZERO_MODEL",
+    "root": "artifacts/method-architecture/host-ab-v1/prepare",
+    "source_version": "46bc516e",
+    "actual_execution_not_started": true
+  }
+}

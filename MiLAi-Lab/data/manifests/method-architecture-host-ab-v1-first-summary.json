@@ -1,0 +1,853 @@
+{
+  "status": "FIRST_AB_HOST_FAILED_AFTER_ACTUAL_REVOCATION_COMMIT",
+  "source_commit": "b33d5690",
+  "driver": {
+    "status": "FIRST_AB_HOST_STOPPED",
+    "driver_pid": 2384059,
+    "source_commit": "b33d5690",
+    "started_at": "2026-10-15T12:48:20.599745+00:00",
+    "steps": [
+      {
+        "index": 0,
+        "pid": 2384066,
+        "started_at": "2026-10-15T12:48:20.600812+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:49:25.259132+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "index": 1,
+        "pid": 2388241,
+        "started_at": "2026-10-15T12:49:25.261094+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:49:46.243054+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "index": 2,
+        "pid": 2389565,
+        "started_at": "2026-10-15T12:49:46.244841+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:51:06.671817+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "index": 3,
+        "pid": 2394385,
+        "started_at": "2026-10-15T12:51:06.676464+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:51:31.874432+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "index": 4,
+        "pid": 2396025,
+        "started_at": "2026-10-15T12:51:31.876300+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:52:50.106651+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "index": 5,
+        "pid": 2400808,
+        "started_at": "2026-10-15T12:52:50.110789+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:53:19.809433+00:00",
+        "message_status": "COMPLETED"
+      },
+      {
+        "index": 6,
+        "pid": 2402754,
+        "started_at": "2026-10-15T12:53:19.811452+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:54:23.122789+00:00",
+        "message_status": "FAILED"
+      }
+    ],
+    "messages": 10,
+    "source_events": 5,
+    "queries": 5,
+    "unknown_retry": false,
+    "cold_first_attempt": true,
+    "prior_native_pilot_closed": true,
+    "unrun_indices": [
+      7,
+      8,
+      9
+    ],
+    "closed_at": "2026-10-15T12:54:23.124543+00:00"
+  },
+  "first_outcomes": {
+    "completed": 6,
+    "failed": 1,
+    "not_run": 3
+  },
+  "reviewer": "same source author/developer, not independent/blind",
+  "states": [
+    {
+      "index": 0,
+      "source": "请记住这份协作备忘：A项目一般由林舒联络，B项目一般由沈瑜联络。向外部发任何项目材料前，都必须先得到我本人明确确认；记录联系人本身不代表可以发送。另记一个无关的个人偏好：我喝乌龙茶，不加糖。",
+      "message_status": "COMPLETED",
+      "receipts": [
+        {
+          "ok": true,
+          "status": "committed",
+          "id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 1,
+          "reason": null
+        }
+      ],
+      "records": [
+        {
+          "id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 1,
+          "state": {
+            "matter_description": "协作备忘",
+            "relations": [],
+            "representation": "conditioned_v1",
+            "units": [
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "A项目一般由林舒联络",
+                "unit_id": "unit-36ab0478-0044-47b6-8ebb-616a3e9d64c5"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "B项目一般由沈瑜联络",
+                "unit_id": "unit-3adfaf26-e414-481d-9ebb-f2f9f823978f"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "向外部发任何项目材料前，都必须先得到我本人明确确认",
+                "unit_id": "unit-5994da30-d905-48d7-bc9e-f13ca0dcd4d1"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "记录联系人本身不代表可以发送",
+                "unit_id": "unit-c916f5fe-435a-4272-9715-64907a640dc3"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "我喝乌龙茶，不加糖",
+                "unit_id": "unit-16bf70f0-2a23-40bc-899e-8ba29dc1bc50"
+              }
+            ]
+          }
+        }
+      ],
+      "semantic_meanings_review": "Initial A/B/confirmation/tea all stored."
+    },
+    {
+      "index": 2,
+      "source": "已确认的排班通告：2026年6月15日起，A项目的一般联络改由陈丹负责；15日之前仍由林舒负责。B项目的安排、外发确认要求和我的饮茶偏好均不变。请更新备忘。",
+      "message_status": "COMPLETED",
+      "receipts": [
+        {
+          "ok": true,
+          "status": "committed",
+          "id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 2,
+          "reason": null
+        }
+      ],
+      "records": [
+        {
+          "id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 2,
+          "state": {
+            "matter_description": "协作备忘",
+            "relations": [],
+            "representation": "conditioned_v1",
+            "units": [
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "A项目一般由林舒联络",
+                "unit_id": "unit-36ab0478-0044-47b6-8ebb-616a3e9d64c5"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "B项目一般由沈瑜联络",
+                "unit_id": "unit-3adfaf26-e414-481d-9ebb-f2f9f823978f"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "向外部发任何项目材料前，都必须先得到我本人明确确认",
+                "unit_id": "unit-5994da30-d905-48d7-bc9e-f13ca0dcd4d1"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "记录联系人本身不代表可以发送",
+                "unit_id": "unit-c916f5fe-435a-4272-9715-64907a640dc3"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "我喝乌龙茶，不加糖",
+                "unit_id": "unit-16bf70f0-2a23-40bc-899e-8ba29dc1bc50"
+              },
+              {
+                "assertion": {
+                  "applicability": {
+                    "effective_from": "2026-06-15"
+                  },
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:49:48.823945+00:00",
+                  "occurred_at": "2026-06-10T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-20a05eee-c036-4e34-947f-d2148d5425cd",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 78,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-20a05eee-c036-4e34-947f-d2148d5425cd\",1,0,78]",
+                    "source_ref": "source-20a05eee-c036-4e34-947f-d2148d5425cd",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "自2026年6月15日起，A项目一般联络改由陈丹负责",
+                "unit_id": "unit-639af755-631c-4b1a-968e-ceca2597bef3"
+              }
+            ]
+          }
+        }
+      ],
+      "semantic_meanings_review": "Future A Chen fromJune15 and old Lin remain, others preserved. Earlier general Lin has no explicit end/override edge; newer dated change supplies textual chronology, not formal relation proof."
+    },
+    {
+      "index": 4,
+      "source": "请记下临时安排：只在2026年6月12日的临时展台开放期间，A项目的对外材料联络由曾蕊代办。其他日期和A的内部联络仍按一般排班；B不变。即使曾蕊代办，对外发送仍须先得到我本人明确确认。",
+      "message_status": "COMPLETED",
+      "receipts": [
+        {
+          "ok": true,
+          "status": "committed",
+          "id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 3,
+          "reason": null
+        }
+      ],
+      "records": [
+        {
+          "id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 3,
+          "state": {
+            "matter_description": "协作备忘",
+            "relations": [],
+            "representation": "conditioned_v1",
+            "units": [
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "A项目一般由林舒联络",
+                "unit_id": "unit-36ab0478-0044-47b6-8ebb-616a3e9d64c5"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "B项目一般由沈瑜联络",
+                "unit_id": "unit-3adfaf26-e414-481d-9ebb-f2f9f823978f"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "向外部发任何项目材料前，都必须先得到我本人明确确认",
+                "unit_id": "unit-5994da30-d905-48d7-bc9e-f13ca0dcd4d1"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "记录联系人本身不代表可以发送",
+                "unit_id": "unit-c916f5fe-435a-4272-9715-64907a640dc3"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "我喝乌龙茶，不加糖",
+                "unit_id": "unit-16bf70f0-2a23-40bc-899e-8ba29dc1bc50"
+              },
+              {
+                "assertion": {
+                  "applicability": {
+                    "effective_from": "2026-06-15"
+                  },
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:49:48.823945+00:00",
+                  "occurred_at": "2026-06-10T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-20a05eee-c036-4e34-947f-d2148d5425cd",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 78,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-20a05eee-c036-4e34-947f-d2148d5425cd\",1,0,78]",
+                    "source_ref": "source-20a05eee-c036-4e34-947f-d2148d5425cd",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "自2026年6月15日起，A项目一般联络改由陈丹负责",
+                "unit_id": "unit-639af755-631c-4b1a-968e-ceca2597bef3"
+              },
+              {
+                "assertion": {
+                  "applicability": {
+                    "effective_from": "2026-06-12",
+                    "effective_until": "2026-06-13"
+                  },
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:51:34.463830+00:00",
+                  "occurred_at": "2026-06-11T10:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-96aa50f3-6246-48f7-89ff-82dffe0efd95",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 92,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-96aa50f3-6246-48f7-89ff-82dffe0efd95\",1,0,92]",
+                    "source_ref": "source-96aa50f3-6246-48f7-89ff-82dffe0efd95",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "仅在2026年6月12日的临时展台开放期间，A项目的对外材料联络由曾蕊代办。",
+                "unit_id": "unit-c56fcf46-7429-4a87-b3f3-9ff4664c1a74"
+              }
+            ]
+          }
+        }
+      ],
+      "semantic_meanings_review": "Temporary external-material contact Zeng only whileJune12 booth open; general/internal/B, confirmation and tea remain. Scope is inline in independent content, no relation edges."
+    },
+    {
+      "index": 6,
+      "source": "临时展台已提前撤下，曾蕊代办A项目对外材料联络的临时安排现在取消，恢复一般排班。6月15日起陈丹负责的通告仍有效。外发材料的本人明确确认要求不变。请撤回这个临时例外。",
+      "message_status": "FAILED",
+      "receipts": [
+        {
+          "ok": true,
+          "status": "committed",
+          "id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 4,
+          "reason": null
+        }
+      ],
+      "records": [
+        {
+          "id": "3e51d255-3a62-5507-9959-bf21518024db",
+          "revision": 4,
+          "state": {
+            "matter_description": "协作备忘",
+            "relations": [],
+            "representation": "conditioned_v1",
+            "units": [
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "A项目一般由林舒联络",
+                "unit_id": "unit-36ab0478-0044-47b6-8ebb-616a3e9d64c5"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "B项目一般由沈瑜联络",
+                "unit_id": "unit-3adfaf26-e414-481d-9ebb-f2f9f823978f"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "向外部发任何项目材料前，都必须先得到我本人明确确认",
+                "unit_id": "unit-5994da30-d905-48d7-bc9e-f13ca0dcd4d1"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "记录联系人本身不代表可以发送",
+                "unit_id": "unit-c916f5fe-435a-4272-9715-64907a640dc3"
+              },
+              {
+                "assertion": {
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:48:23.401080+00:00",
+                  "occurred_at": "2026-06-01T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 95,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-b1169a44-b46d-4433-9942-318f29db8cd3\",1,0,95]",
+                    "source_ref": "source-b1169a44-b46d-4433-9942-318f29db8cd3",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "我喝乌龙茶，不加糖",
+                "unit_id": "unit-16bf70f0-2a23-40bc-899e-8ba29dc1bc50"
+              },
+              {
+                "assertion": {
+                  "applicability": {
+                    "effective_from": "2026-06-15"
+                  },
+                  "calendar_context": "Asia/Shanghai",
+                  "kind": "reported",
+                  "observed_at": "2026-10-15T12:49:48.823945+00:00",
+                  "occurred_at": "2026-06-10T09:00:00+08:00",
+                  "role": "user",
+                  "source_ref": "source-20a05eee-c036-4e34-947f-d2148d5425cd",
+                  "source_revision": 1
+                },
+                "evidence_refs": [
+                  {
+                    "end": 78,
+                    "evidence_id": "frag:[[\"functional\",\"execution\",\"ab-future-exception-correction\",\"method-host-ab\"],\"method-host-ab\",\"source-20a05eee-c036-4e34-947f-d2148d5425cd\",1,0,78]",
+                    "source_ref": "source-20a05eee-c036-4e34-947f-d2148d5425cd",
+                    "source_revision": 1,
+                    "start": 0
+                  }
+                ],
+                "role": "content",
+                "text": "自2026年6月15日起，A项目一般联络改由陈丹负责",
+                "unit_id": "unit-639af755-631c-4b1a-968e-ceca2597bef3"
+              }
+            ]
+          }
+        }
+      ],
+      "semantic_meanings_review": "Actual revision4 removes temporary Zeng clause, preserves futureJune15 Chen, old Lin/B/confirmation/tea. Retraction source and exact old revision remain. Final answer failed after commit."
+    }
+  ],
+  "queries": [
+    {
+      "index": 1,
+      "question": "只查询，不保存：A、B的一般联系人分别是谁？外发材料需要什么条件？我的饮茶偏好是什么？",
+      "answer": "\n\n根据已记录的协作备忘（报告时间：2026-06-01），查询结果如下：\n\n**一般联系人：**\n- **A项目**：林舒\n- **B项目**：沈瑜\n\n**外发材料条件：**\n- 向外部发任何项目材料前，都必须先得到您本人明确确认\n- 记录联系人本身不代表可以发送\n\n**饮茶偏好：**\n- 喝乌龙茶，不加糖",
+      "core_correct": true,
+      "source_faithful": true,
+      "records_unchanged": true,
+      "no_maintenance_or_mutation": true
+    },
+    {
+      "index": 3,
+      "question": "只查询，不保存：按已确认的通告，6月14日与6月16日A的一般联系人分别是谁？B项目和饮茶偏好有没有改变？",
+      "answer": "\n\n根据已确认的排班通告（报告时间：2026年6月10日，通告自2026年6月15日起生效），查询结果如下：\n\n**A项目一般联系人：**\n- **6月14日**（6月15日之前）：**林舒**\n- **6月16日**（6月15日起）：**陈丹**\n\n**B项目与饮茶偏好：**\n- 通告明确说明\"B项目的安排、外发确认要求和我的饮茶偏好均不变\"\n- **B项目**：不变（仍由沈瑜负责联络）\n- **饮茶偏好**：不变（乌龙茶，不加糖）",
+      "core_correct": true,
+      "source_faithful": true,
+      "records_unchanged": true,
+      "no_maintenance_or_mutation": true
+    },
+    {
+      "index": 5,
+      "question": "只查询，不保存：6月12日临时展台开放时，A的对外材料联络与内部联络分别找谁？曾蕊代办是否免去本人确认？",
+      "answer": "\n\n根据已记录的协作备忘与临时安排，查询结果如下：\n\n* **对外材料联络人**：**曾蕊**（临时安排明确指定：6月12日临时展台开放期间，A项目的对外材料联络由曾蕊代办）。\n* **内部联络人**：**林舒**（临时安排写明“A的内部联络仍按一般排班”；当时生效的一般排班仍为林舒，陈丹的排班自6月15日起才生效，故6月12日内部联络仍找林舒）。\n* **本人确认要求**：**不免去**。临时安排中明确强调：“即使曾蕊代办，对外发送仍须先得到我本人明确确认”。\n\n> 依据来源：报告时间为 2026年6月11日 的临时安排记录（“只在2026年6月12日的临时展台开放期间，A项目的对外材料联络由曾蕊代办。其他日期和A的内部联络仍按一般排班；B不变。即使曾蕊代办，对外发送仍须先得到我本人明确确认。”）及一般排班备忘。",
+      "core_correct": true,
+      "source_faithful": true,
+      "records_unchanged": true,
+      "no_maintenance_or_mutation": true
+    }
+  ],
+  "failure": {
+    "index": 6,
+    "error": "V13_5_MATERIAL_WRAPPER_EXCEEDS_LIMIT",
+    "semantic_commit_revision": 4,
+    "answer_delivered": false,
+    "classifier_allow_forgetting": true,
+    "actual_forget_operations": [],
+    "read": "read_memory of already-issued current record succeeded; next pre_model_hook failed before another model request",
+    "offline_reproduction": "real final SQLite backup, existing binding and request policy, same actual tokenizer/8192 limit,0HTTP; no changes to original bank",
+    "cause": "Resident page fitted3units8120tokens without directory; directory addition reached8211 and explicit omission wrapper8357, both over8192.",
+    "development_repair": "Reserve empty navigation directory plus actual continuation before resident pagination. Actual failed snapshot replay now delivers2units and1navigation candidate at7910tokens; other material remains pending and reachable.",
+    "model_recovery_not_yet_run": true
+  },
+  "costs": {
+    "generation": {
+      "responses": 28,
+      "known_tokens": 182422,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "responses": 27,
+      "known_tokens": 2483,
+      "unknown_usage": 0
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 28,
+    "generation": {
+      "known_tokens": 182422,
+      "charged_tokens": 182422,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 2483,
+      "charged_tokens": 2483,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens": true,
+    "embedding_tokens": true,
+    "generation_requests": true
+  },
+  "semantic_graph": "All committed state revisions have zero relation edges/support groups; inline scopes and dated replacement clauses do not establish learned graph contribution.",
+  "remaining_original_indices": [
+    7,
+    8,
+    9
+  ],
+  "B_correction_and_exact_saved_history_not_executed": true,
+  "new_clock_projection": "First three pure-query answers use correctJune report dates; no isolated or population-level causal improvement claim.",
+  "cold_complete_example_success": false,
+  "full_W5_complete": false,
+  "original_outputs_unchanged": true,
+  "unknown_retry": false
+}

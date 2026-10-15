@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-10-15T10:00:44.358433+00:00",
+  "queries": "read-only GET /v1/models on existing local 78xx/79xx listeners",
+  "generation_requests": 0,
+  "existing_endpoints": [
+    {
+      "port": 7860,
+      "status": 200,
+      "model_ids": [
+        "Qwen3.6-35B-A3B-FP8"
+      ]
+    },
+    {
+      "port": 7861,
+      "status": 200,
+      "model_ids": [
+        "bge-m3"
+      ]
+    },
+    {
+      "port": 7862,
+      "status": 200,
+      "model_ids": [
+        "Qwen3.6-35B-A3B-FP8"
+      ]
+    },
+    {
+      "port": 7863,
+      "status": 404
+    },
+    {
+      "port": 7960,
+      "status": 400
+    },
+    {
+      "port": 7961,
+      "status": 200,
+      "model_ids": [
+        "bge-reranker"
+      ]
+    },
+    {
+      "port": 7962,
+      "error_type": "RemoteProtocolError"
+    },
+    {
+      "port": 7963,
+      "status": 404
+    },
+    {
+      "port": 7964,
+      "error_type": "JSONDecodeError"
+    },
+    {
+      "port": 7968,
+      "status": 404
+    },
+    {
+      "port": 7969,
+      "status": 404
+    }
+  ],
+  "no_service_started_or_stopped": true,
+  "gpu_observation": {
+    "devices": 4,
+    "model": "A10040GB",
+    "used_mib": [
+      39981,
+      39997,
+      39901,
+      39863
+    ],
+    "total_mib_each": 40960
+  },
+  "interpretation": "Confirmed generation endpoints7860 and7862 both advertise Qwen3.6-35B-A3B-FP8; no different generation family/size confirmed by this read-only inventory. Other listeners are not classified from failed models routes. No deployment or training launched."
+}

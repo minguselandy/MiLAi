@@ -1,0 +1,215 @@
+{
+  "status": "AUTHORED_DEVELOPMENT_PREDECLARATION",
+  "independent_chains": 12,
+  "families": 6,
+  "sessions_per_arm": 36,
+  "questions_per_arm": 48,
+  "chains": [
+    {
+      "user": "method-screen-maps",
+      "family": "simple_value",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "地图保存明确未来搬迁日且保留之前位置",
+          "preserve_and_attribution": "报刊与两种登记范围不变"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "准备完成不是已经搬迁",
+          "preserve_and_attribution": "未来日期与非目标规则保持"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-kiln",
+      "family": "simple_value",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "白鹭窑责任人替换",
+          "preserve_and_attribution": "青砾窑、钥匙和本子保持"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "代班未知不变成既定替换",
+          "preserve_and_attribution": "当前负责人不因未来未决安排丢失"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-archive",
+      "family": "scope_exception",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "局部例外覆盖练习复印件",
+          "preserve_and_attribution": "共同戴手套条件不被全局删除，原稿与外借规则保持"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "撤销例外恢复一般规则",
+          "preserve_and_attribution": "撤销原因和曾有例外可追溯"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-studio",
+      "family": "scope_exception",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "房间和一小时时段例外",
+          "preserve_and_attribution": "共享晚间限制不得误扩或误删"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "取消事件撤回具体例外",
+          "preserve_and_attribution": "耳机、控制室和线材不变"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-tickets",
+      "family": "alternative_support",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "删除一个OR凭据不使另一通道失效",
+          "preserve_and_attribution": "预约这个AND前提仍保留"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "取消共同前提只影响讨论结论",
+          "preserve_and_attribution": "入场替代支持与他人信息保留"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-projection",
+      "family": "alternative_support",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "市电OR电池之一失效，保留完整电池AND风扇路径",
+          "preserve_and_attribution": "独立字幕屏不受影响"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "共享前提失效需重新解释投影结论",
+          "preserve_and_attribution": "不推断电池没电或字幕屏停止"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-walk",
+      "family": "derived_effect",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "单一分支前提变化更新对应结论",
+          "preserve_and_attribution": "共享向导不导致屋顶误停"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "共享向导变化重新考虑两个后继",
+          "preserve_and_attribution": "室内展示不跟随传播"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-exhibit",
+      "family": "derived_effect",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "前提改变传播到原件",
+          "preserve_and_attribution": "照片与电子目录不受帘影响"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "另一个共享前提变化影响两个结论",
+          "preserve_and_attribution": "不把已修好的帘说成仍坏"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-inventory",
+      "family": "historical_correction",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "事实更正与真实库存增加分开",
+          "preserve_and_attribution": "原错误记录可追溯，散文集不变"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "从更正后的事实计算后续变化",
+          "preserve_and_attribution": "原记录不被冒称正确历史事实"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-credits",
+      "family": "historical_correction",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "以新来源纠正原事实，保留原归属与误写见证",
+          "preserve_and_attribution": "配乐与另一剧目不变"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "设想与确定署名分开",
+          "preserve_and_attribution": "不因未来相关人再提及恢复错误译者"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-reservation",
+      "family": "uncertain_modality",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "建议不升级为既定规则或精确日期",
+          "preserve_and_attribution": "时间地点和责任保持"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "拒绝建议确认为不采用",
+          "preserve_and_attribution": "未采纳三点不覆盖原两点"
+        }
+      ]
+    },
+    {
+      "user": "method-screen-parcel",
+      "family": "uncertain_modality",
+      "update_obligations": [
+        {
+          "session_ordinal": 1,
+          "target_and_scope": "传闻与未知地点日期保持不确定",
+          "preserve_and_attribution": "不从装修传闻推断邮寄或包装改变"
+        },
+        {
+          "session_ordinal": 2,
+          "target_and_scope": "暂缓不同于永久否定",
+          "preserve_and_attribution": "当前地点与非目标事实保持"
+        }
+      ]
+    }
+  ],
+  "role": "mechanism screening development data, not independent holdout or an external benchmark",
+  "qa": "first HaluMem rubric scores retained; failures and source-faithfulness reviewed separately",
+  "state_review": "review actual pre/post stored propositions and source bindings, not answers as a proxy",
+  "ujs": "target correct AND non-target preserved AND scope/time correct AND source/modality faithful; failed or missing formation is counted and separated from later damage",
+  "no_gold_to_writer": true,
+  "read_feedback": "disabled in both controlled screening arms",
+  "replicates": 1,
+  "main_comparison": [
+    "plain local propositions",
+    "full candidate"
+  ],
+  "optional_ablations": "only after actual two-arm mechanism evidence; no current oracle-graph run",
+  "statistical_unit": "independent chain; n=12, descriptive screening with paired cluster uncertainty, not proof of external generalization",
+  "source_freeze": "required before model dispatch; no dispatch in this preparation"
+}

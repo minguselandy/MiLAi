@@ -355,6 +355,8 @@ is requested. Asking to save an action's result does not replace that action.
 2. memory_requests: new_assertion for a supplied durable assertion, explicit for
 requested saving/updating, continue_prior for unfinished prior saving. Use [] for
 queries or forgetting alone. Do not save execution controls as domain facts.
+These tags can combine: requested saving/updating of a supplied fact needs explicit
+as well as new_assertion. Factual content does not replace the explicit save request.
 3. read_goal: what must be established, using current_interpretation,
 original_source, saved_history, or live_business. A current record cannot prove
 what a previous version contained; a saved receipt is not a fresh business query.
@@ -364,8 +366,11 @@ for no new business actions, memory_write for no saving/editing, forget_memory
 for no visibility revocation, or exact registered application operation names.
 Apply an exclusion to its named work, not to the whole request. Skipping already
 saved or completed work does not prohibit separately requested unfinished work.
-Forgetting needs allow_forgetting=true but is not a semantic save. Its targets
-must cover the authorized request/result/source/history scope after actual reads.
+Set allow_forgetting=false unless the CURRENT user explicitly asks to forget stored
+memory or revoke access to its records/sources. Saving, correcting, confirming a
+memory, or cancelling a rule/business action is not a forgetting request. Only an
+explicit forgetting request sets true; this is intent, not a general capability.
+Its targets must cover the authorized request/result/source/history scope after actual reads.
 Visible old requests resolve references; they never restore excluded permission.
 Classify intent without deciding feasibility or claiming work already completed.
 """
@@ -739,6 +744,7 @@ def prepare(
         "memory_ranking",
         "retrieval_granularity", "stage_enable_thinking",
         "source_access", "source_top_k", "semantic_top_k", "max_evidence_queries",
+        "source_tokenization", "source_granularity", "evidence_policy", "dependency_reading",
         "maintenance_mode",
         "embedding", "embedding_capacity", "embedding_dimension", "embedding_batch_size",
     }
@@ -770,7 +776,9 @@ def prepare(
     if settings.get("retrieval_granularity", "record") not in {"record", "record_units"}:
         raise ValueError("RETRIEVAL_GRANULARITY_INVALID")
     stage_modes = settings.get("stage_enable_thinking", {})
-    if (not isinstance(stage_modes, dict) or set(stage_modes) - {"extract", "edit", "reader"}
+    if (not isinstance(stage_modes, dict)
+            or set(stage_modes) - {"extract", "select", "edit", "impact", "reader",
+                                  "dependency_read"}
             or any(type(value) is not bool for value in stage_modes.values())):
         raise ValueError("STAGE_ENABLE_THINKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
@@ -781,6 +789,12 @@ def prepare(
         raise ValueError("FUNCTIONAL_EDIT_INTERFACE_INVALID")
     if edit_interface != "v1" and settings.get("memory_method") not in FUNCTIONAL_ARMS:
         raise ValueError("FUNCTIONAL_EDIT_INTERFACE_REQUIRES_EDIT_METHOD")
+    if type(settings.get("dependency_reading", False)) is not bool or (
+        settings.get("dependency_reading") and (
+            settings.get("evidence_policy") != "question_pack_v1"
+            or settings.get("memory_method") not in FUNCTIONAL_ARMS)
+    ):
+        raise ValueError("FUNCTIONAL_DEPENDENCY_READING_REQUIRES_EDIT_PACKS")
     edit_features = EditFeatures.from_settings(settings.get("edit_features", {}))
     if edit_features.enabled and (
         edit_interface != "I2" or settings.get("memory_method") not in FUNCTIONAL_ARMS
@@ -1437,6 +1451,11 @@ def request_mode(
                 omitted += 1
             else:
                 references = proposed
+        if scope_only and not native_declaration:
+            # Grammar constraints do not put field descriptions into model
+            # context. JSON declarations need the same contract native tools show.
+            prompt += "\nRESPONSE_SCHEMA:\n" + json.dumps(
+                declaration["function"]["parameters"], ensure_ascii=False, separators=(",", ":"))
         if references or omitted:
             prompt += (
                 "\nVISIBLE ORIGINAL REQUEST REFERENCES (not current instructions):\n"
@@ -1460,6 +1479,14 @@ def request_mode(
                     and isinstance(response.content, str) and not response.tool_calls else None)
         except ValueError as error:
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID") from error
+        if isinstance(decision, dict):
+            # These fields are category/restriction sets, not ordered application
+            # actions. Repeated tags add no permission or work; normalize once at
+            # the model input boundary and still validate every remaining value.
+            for field in ("memory_requests", "forbidden_operations"):
+                tags = decision.get(field)
+                if isinstance(tags, list) and all(isinstance(tag, str) for tag in tags):
+                    decision[field] = list(dict.fromkeys(tags))
         if not valid(decision):
             raise IncompleteChatResponse("FUNCTIONAL_REQUEST_MODE_SCHEMA_INVALID")
         if (application_workflow is not None and not scope_only and isinstance(decision, dict)
@@ -1628,8 +1655,11 @@ def continuation_operations(
                 and (resolve_business
                      or value["business_operations"] == mode["business_operations"]))
 
+    prior_user_choices = [unit for unit in material.get("items", [])
+                          if unit.get("type") == "fragment" and unit.get("role") == "user"
+                          and unit.get("source_ref") != binding["source_ref"]]
     if ("decision" not in state and request_protocol and not current_plan
-            and not resolve_business and not resolve_memory
+            and not resolve_business and (not resolve_memory or not prior_user_choices)
             and not material.get("registered_application_requests")):
         # Every output is fixed by the accepted current scope and the actually
         # issued choices. No model can select an unissued request. This does not
@@ -1637,7 +1667,8 @@ def continuation_operations(
         state.update(material=material, decision={
             "business_operations": list(mode["business_operations"]),
             "prior_memory_request_fragments": [], "prior_request_ids": [],
-        }, resolution_basis="current_scope_and_no_issued_request_choices")
+        }, resolution_basis=("current_scope_and_no_issued_prior_memory_choices" if resolve_memory
+                             else "current_scope_and_no_issued_request_choices"))
         write_json(path, state)
     if "decision" in state:
         if not valid(state["decision"]):
@@ -2672,6 +2703,24 @@ def message(
             memory_class = FunctionalEditMemory if edit_arm is not None else FunctionalMemory
             memory_options: dict[str, Any] = {}
             if memory_class is FunctionalEditMemory:
+                def dependency_read_call(
+                    stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
+                ) -> dict[str, Any]:
+                    response = model.invoke(
+                        messages, tools=[], tool_choice="none",
+                        response_format={"type": "json_schema", "json_schema": {
+                            "name": "dependency_reads", "schema": schema}},
+                        **({"enable_thinking": settings["stage_enable_thinking"][stage]}
+                           if stage in settings.get("stage_enable_thinking", {}) else {}))
+                    if not isinstance(response, AIMessage) or not isinstance(response.content, str):
+                        raise ValueError("FUNCTIONAL_DEPENDENCY_RESPONSE_MISSING")
+                    value = parse_object(response.content, reject_duplicate_keys=True)
+                    trace({"event": "functional_dependency_read_envelope", "envelope": value})
+                    return value
+
+                memory_options["evidence_policy"] = settings.get("evidence_policy", "legacy")
+                memory_options["dependency_reading"] = settings.get("dependency_reading", False)
+                memory_options["dependency_read_call"] = dependency_read_call
                 memory_options["arm"] = edit_arm
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
                 memory_options["features"] = edit_features
@@ -2685,6 +2734,8 @@ def message(
                 read_limit=settings["additional_reads"],
                 source_access=settings.get("source_access", "legacy"),
                 source_top_k=settings.get("source_top_k", 20),
+                source_tokenization=settings.get("source_tokenization", "rawrag_space"),
+                source_granularity=settings.get("source_granularity", "session"),
                 semantic_top_k=settings.get("semantic_top_k", 10),
                 max_evidence_queries=settings.get("max_evidence_queries"),
                 material_limit=settings["ordinary_material_tokens"],
@@ -3056,22 +3107,50 @@ def message(
                                 delivered.add(part["fragment_handle"])
                     trace({"event": "functional_material_delivery", "material": material,
                            "consumer": "continuation_reference_resolution"})
-                    mode = continuation_operations(
-                        model,
-                        bank_root / f"{identity}-continuation-operations.json",
-                        {
-                            "source_ref": capture["source_ref"],
-                            "source_revision": 1,
-                            "config_version": freeze["config_version"],
-                        },
-                        content,
-                        mode,
-                        material,
-                        settings["format_reproposals"],
-                        trace,
-                        declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
-                        source_fragment=service.source_fragment,
-                    )
+                    unknown_before = tuple(budget.state[kind]["unknown_usage"]
+                                           for kind in ("generation", "embedding"))
+                    try:
+                        mode = continuation_operations(
+                            model,
+                            bank_root / f"{identity}-continuation-operations.json",
+                            {
+                                "source_ref": capture["source_ref"],
+                                "source_revision": 1,
+                                "config_version": freeze["config_version"],
+                            },
+                            content,
+                            mode,
+                            material,
+                            settings["format_reproposals"],
+                            trace,
+                            declaration_tool_choice=settings.get("declaration_tool_choice", "auto"),
+                            source_fragment=service.source_fragment,
+                        )
+                    except ValueError as error:
+                        if (str(error) != "FUNCTIONAL_CONTINUATION_REFERENCE_UNRESOLVED"
+                                or settings.get("request_failure_policy") != "independent_memory"
+                                or not mode["allow_memory_maintenance"]
+                                or mode["memory_write_request"] not in {"explicit", "new_assertion"}
+                                or mode.get("memory_continuation_request")
+                                == "resolve_prior_explicit"
+                                or tuple(budget.state[kind]["unknown_usage"]
+                                         for kind in ("generation", "embedding"))
+                                != unknown_before):
+                            raise
+                        failure = {
+                            "part": "business_plan", "status": "failed", "effect": "none",
+                            "error_type": type(error).__name__, "error": str(error),
+                            "usage_confirmation": "known", "accepted_scope": deepcopy(mode),
+                            "attempt_ref": f"{identity}-continuation-operations.json",
+                            "memory_reference_resolution": "current_independent_intent",
+                        }
+                        output.setdefault("request_part_failures", []).append(failure)
+                        mode = {**mode, "business_action_request": "none",
+                                "business_operations": [], "application_requests": [],
+                                "application_continuation_request": "none",
+                                "allow_business_mutation": False,
+                                "business_declaration_status": "failed_no_business_permission"}
+                        trace({"event": "functional_request_part_failure", **failure})
                 forbidden = set(mode.get("forbidden_operations", []))
                 if "memory_write" in forbidden:
                     mode["allow_memory_maintenance"] = False
@@ -3091,6 +3170,15 @@ def message(
                 mode["allow_memory_maintenance"] if tool.name in {
                     "save_memory", "update_memory", "confirm_existing_memory"}
                 else mode["allow_forgetting"] if tool.name == "forget_memory" else True))
+            if (settings.get("evidence_policy") == "question_pack_v1" and mode is not None
+                    and not mode["allow_forgetting"] and (
+                        settings.get("maintenance_recipe") or not mode["allow_memory_maintenance"]
+                    )):
+                # Pack lookup already supplies navigation and scoped body reads.
+                # A second search catalog encouraged answering unopened excerpts.
+                # Shared maintenance already locates its own write targets. Direct
+                # Writer and forgetting requests retain their target discovery.
+                selected_memory = tuple(t for t in selected_memory if t.name != "search_memory")
             maintenance_recipe = settings.get("maintenance_recipe")
             maintenance_allowed = mode is None or mode["allow_memory_maintenance"]
 
@@ -3168,10 +3256,18 @@ def message(
             business_query_targets: list[dict[str, Any]] = []
 
             def available_tool_names(config: RunnableConfig) -> set[str]:
+                nonlocal read_exhausted
                 names = allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
                 if memory.max_evidence_queries is not None:
                     allowance = memory.read_allowance(config)
                     if allowance["reads_remaining"] == 0:
+                        if settings.get("read_exhaustion") == "answer_from_delivered_v1":
+                            read_exhausted = True
+                            output.setdefault("read_completion", {
+                                "reason": "read_limit_exhausted", "reads_remaining": 0,
+                                "next_step": "answer_from_delivered_material",
+                                "effects_preserved": True,
+                            })
                         names -= set(memory.read_tool_names) | {
                             "get_reservation", "get_document_status"}
                     elif allowance["evidence_queries_remaining"] == 0:
@@ -3479,6 +3575,27 @@ def message(
                         and any(row.id == identity + ":required-memory-receipt"
                                 for row in completion_feedback)
                         and not effects["mutation_receipts"])))
+                if for_finalization and settings.get("evidence_policy") == "question_pack_v1":
+                    from milai_lab.methods.evidence_reading import answer_only_context
+
+                    results = []
+                    for row in wire_messages:
+                        if not isinstance(row, ToolMessage) or row.name == "read_evidence":
+                            continue
+                        try:
+                            body = json.loads(str(row.content))
+                        except ValueError:
+                            body = str(row.content)
+                        results.append({"name": row.name, "result": body,
+                                        "memory_read": row.name in memory.read_tool_names})
+                    final_input = answer_only_context(
+                        content, material, _model_memory_effects(effects), results,
+                        pending=[*request_progress, *output.get("request_part_failures", [])],
+                    )
+                    return {"llm_input_messages": [
+                        SystemMessage(content=final_input[0]["content"]),
+                        HumanMessage(content=final_input[1]["content"]),
+                    ], "receipt_messages": wire_messages, "receipt_material": material}
                 return {
                     "llm_input_messages": [
                         SystemMessage(
@@ -3790,6 +3907,23 @@ def message(
                     # terminal receipt before it can dispatch or generate again.
                     return cast(list[Any], agent.get_state(cfg).values["messages"])
 
+            receipt_status_requested = bool(
+                settings.get("finalization") == "receipt_or_agent_response_v1"
+                and mode and mode.get("response_scope") == "memory_status_only"
+                and mode["business_action_request"] == "none" and not mode["allow_forgetting"]
+            )
+
+            def confirmed_memory_status(effects: dict[str, Any]) -> bool:
+                return bool(receipt_status_requested
+                    and effects["semantic_memory"]["status"] in {"committed", "no_change"}
+                    and effects["semantic_memory"]["operations"]
+                    and not any((effects["business"]["operations"],
+                                 effects["business"]["observations"],
+                                 effects["visibility"]["operations"],
+                                 effects.get("application_requests"),
+                                 effects.get("request_part_failures"),
+                                 output.get("execution_stop"))))
+
             snapshot = agent.get_state(cfg)
             prior = snapshot.values.get("messages", []) if snapshot.values else []
             if prior:
@@ -3810,6 +3944,27 @@ def message(
             app.recover_pending(agent, scope, call_wrapper)
             snapshot = agent.get_state(cfg)
             prior = snapshot.values.get("messages", []) if snapshot.values else []
+            if (not prior and receipt_status_requested and maintenance_recipe
+                    and isinstance(memory, FunctionalEditMemory)
+                    and settings.get("evidence_policy") == "question_pack_v1"
+                    and not request_progress and not output.get("request_part_failures")):
+                # The shared Writer owns this explicit memory-only request.
+                # A confirmed status receipt needs no subsequent Host generation.
+                memory.context(session, message_id, freeze["config_version"], query=content)
+                output["maintenance"] = maintain_current(True)
+                actual = operation_status({**output, "world": app.snapshot()},
+                    thread_id=cfg["configurable"]["thread_id"], execution_started=True)
+                if confirmed_memory_status(actual):
+                    receipt = AIMessage(content=memory_receipt_summary(actual),
+                        id=identity + ":memory-status-receipt",
+                        response_metadata={"milai_origin": "program_receipt"})
+                    agent.update_state(cfg, {"messages": [
+                        HumanMessage(content=content, id=message_id), receipt,
+                    ]}, as_node="agent")
+                    trace({"event": "functional_memory_status_shortcut",
+                           "host_generation": False, "semantic_effects": "confirmed_receipts"})
+                    snapshot = agent.get_state(cfg)
+                    prior = snapshot.values["messages"]
             recovery_path = bank_root / f"{identity}-answer-recovery.json"
             previous_result = read_json(result_path) if result_path.exists() else {}
             invalid_provider_content = (
@@ -3843,7 +3998,9 @@ def message(
                     repair_history = prior[:-1] if bad_checkpoint_text else prior
                     repair_input = context_hook({"messages": repair_history}, cfg,
                         for_finalization=(settings.get("capability_delivery")
-                                          == "actual_catalog_v1"))[
+                                          == "actual_catalog_v1"
+                                          or settings.get("evidence_policy")
+                                          == "question_pack_v1"))[
                         "llm_input_messages"]
                     repair_input[0] = SystemMessage(content=(
                         "The preceding final response was unusable. Report the already observed "
@@ -4016,26 +4173,17 @@ def message(
                 )
                 # Context hook applies visibility checks before any cached response
                 # can be reused. The model sees exactly the same bounded material.
-                response_input = context_hook({"messages": messages}, cfg,
-                    for_finalization=True)["llm_input_messages"]
-                receipt_status_only = (
-                    settings.get("finalization") == "receipt_or_agent_response_v1"
-                    and mode and mode.get("response_scope") == "memory_status_only"
-                    and mode["business_action_request"] == "none" and not mode["allow_forgetting"]
-                    and effects["semantic_memory"]["status"] in {"committed", "no_change"}
-                    and effects["semantic_memory"]["operations"]
-                    and not any((effects["business"]["operations"],
-                                 effects["business"]["observations"],
-                                 effects["visibility"]["operations"],
-                                 effects.get("application_requests"),
-                                 effects.get("request_part_failures"),
-                                 output.get("execution_stop")))
-                )
-                if receipt_status_only:
+                response_context = context_hook({"messages": messages}, cfg,
+                    for_finalization=True)
+                response_input = response_context["llm_input_messages"]
+                receipt_input = response_context.get("receipt_messages", response_input)
+                if confirmed_memory_status(effects):
                     # The undelivered model draft remains in execution_candidate_answer.
                     # Render only confirmed listed effects, not content fidelity or
                     # complete semantic coverage, without a corrective model call.
-                    final = AIMessage(content=memory_receipt_summary(effects))
+                    final = (messages[-1]
+                        if messages[-1].response_metadata.get("milai_origin") == "program_receipt"
+                        else AIMessage(content=memory_receipt_summary(effects)))
                     output["finalization"] = {
                         "status": "response_rendered", "attempts": 0,
                         "tools_available": False, "execution_candidate_delivered": False,
@@ -4071,8 +4219,10 @@ def message(
                         in {"not_committed", "partial", "unknown"}
                     )
                 ):
-                    final = business_response(response_input, effects,
-                        json.loads(str(response_input[0].content).splitlines()[-1]),
+                    final = business_response(receipt_input, effects,
+                        (response_context["receipt_material"]
+                         if settings.get("evidence_policy") == "question_pack_v1" else
+                         json.loads(str(response_input[0].content).splitlines()[-1])),
                         execution_stop=output.get("execution_stop"), current_mode=mode,
                         include_business=bool(effects["business"]["operations"]
                             or effects["business"]["observations"]
@@ -4105,7 +4255,7 @@ def message(
                         # A query alone does not define the user's whole task.
                         # Preserve the answer and separately report its actual
                         # matched observations, without a new model call.
-                        observed = business_response(response_input, effects, {},
+                        observed = business_response(receipt_input, effects, {},
                             include_business=observations_appended, include_memory_feedback=False)
                         final = final.model_copy(update={
                             "content": str(final.content) + "\n\n" + str(observed.content)})
@@ -4133,7 +4283,9 @@ def message(
                         - len(format_failures(messages)) - mode_reproposals - completion_used
                         - answer_repairs - continuation_used, trace=trace,
                         enable_thinking=settings.get("stage_enable_thinking", {}).get("reader"))
-                output["execution_candidate_answer"] = messages[-1].content
+                output["execution_candidate_answer"] = (
+                    None if messages[-1].response_metadata.get("milai_origin") == "program_receipt"
+                    else messages[-1].content)
                 # Do not alter the completed execution checkpoint. The response has
                 # its own durable receipt, so restart cannot repeat business work.
                 if final is not messages[-1]:

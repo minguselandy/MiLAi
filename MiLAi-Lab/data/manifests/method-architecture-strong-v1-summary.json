@@ -1,0 +1,3985 @@
+{
+  "status": "FIVE_STRONG_CONTROLS_FIRST_OUTPUTS_REVIEWED",
+  "source_commit": "a47035f6",
+  "root": "artifacts/method-architecture/strong-v1",
+  "driver": {
+    "source_commit": "a47035f6",
+    "driver_pid": 1672507,
+    "started_at": "2026-10-15T09:39:02.362575+00:00",
+    "steps": [
+      {
+        "arm": "source",
+        "phase": "prepare",
+        "pid": 1672514,
+        "started_at": "2026-10-15T09:39:02.363195+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:39:03.955870+00:00"
+      },
+      {
+        "arm": "append",
+        "phase": "prepare",
+        "pid": 1672674,
+        "started_at": "2026-10-15T09:39:03.956762+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:39:05.321307+00:00"
+      },
+      {
+        "arm": "plain",
+        "phase": "prepare",
+        "pid": 1672735,
+        "started_at": "2026-10-15T09:39:05.322259+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:39:06.687131+00:00"
+      },
+      {
+        "arm": "conditioned",
+        "phase": "prepare",
+        "pid": 1672871,
+        "started_at": "2026-10-15T09:39:06.691768+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:39:08.055146+00:00"
+      },
+      {
+        "arm": "candidate",
+        "phase": "prepare",
+        "pid": 1672996,
+        "started_at": "2026-10-15T09:39:08.056041+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:39:09.436595+00:00"
+      },
+      {
+        "arm": "source",
+        "phase": "predict",
+        "pid": 1673069,
+        "started_at": "2026-10-15T09:39:09.437514+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T09:50:20.700200+00:00"
+      },
+      {
+        "arm": "append",
+        "phase": "predict",
+        "pid": 1714788,
+        "started_at": "2026-10-15T09:50:20.702204+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T10:18:17.069224+00:00"
+      },
+      {
+        "arm": "plain",
+        "phase": "predict",
+        "pid": 1819561,
+        "started_at": "2026-10-15T10:18:17.071401+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T10:46:11.963545+00:00"
+      },
+      {
+        "arm": "conditioned",
+        "phase": "predict",
+        "pid": 1924818,
+        "started_at": "2026-10-15T10:46:11.967182+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T11:13:44.527579+00:00"
+      },
+      {
+        "arm": "candidate",
+        "phase": "predict",
+        "pid": 2027770,
+        "started_at": "2026-10-15T11:13:44.530138+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:00:51.203411+00:00"
+      },
+      {
+        "arm": "source",
+        "phase": "score",
+        "pid": 2204748,
+        "started_at": "2026-10-15T12:00:51.205851+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:09:41.380860+00:00"
+      },
+      {
+        "arm": "append",
+        "phase": "score",
+        "pid": 2237642,
+        "started_at": "2026-10-15T12:09:41.381880+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:17:50.106803+00:00"
+      },
+      {
+        "arm": "plain",
+        "phase": "score",
+        "pid": 2268104,
+        "started_at": "2026-10-15T12:17:50.110852+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:26:53.614933+00:00"
+      },
+      {
+        "arm": "conditioned",
+        "phase": "score",
+        "pid": 2302291,
+        "started_at": "2026-10-15T12:26:53.633655+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:35:15.985449+00:00"
+      },
+      {
+        "arm": "candidate",
+        "phase": "score",
+        "pid": 2333743,
+        "started_at": "2026-10-15T12:35:15.988235+00:00",
+        "exit_code": 0,
+        "closed_at": "2026-10-15T12:43:02.049691+00:00"
+      }
+    ],
+    "status": "FIVE_ARMS_PREDICTIONS_AND_FIRST_SCORES_CLOSED",
+    "arms": [
+      "source",
+      "append",
+      "plain",
+      "conditioned",
+      "candidate"
+    ],
+    "events_per_arm": 36,
+    "questions_per_arm": 48,
+    "independent_formation": true,
+    "read_usage_updates": false,
+    "unknown_retry": false,
+    "closed_at": "2026-10-15T12:43:02.050864+00:00"
+  },
+  "review_file": "data/manifests/method-architecture-strong-v1-review.json",
+  "reviewer": "same source author/developer; not independent/blind",
+  "data_role": "12 authored exposed development histories,36 source events/48 QA per arm; independent formation; not common-before causal effect, external benchmark or blind validation",
+  "budget_point": {
+    "output_ceiling": 8192,
+    "max_calls": 12,
+    "quality_cost_curve_complete": false
+  },
+  "arms": {
+    "source": {
+      "first_qa_labels": {
+        "Correct": 43,
+        "Omission": 1,
+        "invalid": 3,
+        "Hallucination": 1
+      },
+      "first_qa_valid_count": 45,
+      "qa_manual_review": {
+        "denominator": 48,
+        "answers_present": 48,
+        "core_correct": 41,
+        "source_faithful_confirmed": 19,
+        "source_faithful_possible": 20,
+        "ambiguous_answer_count": 1,
+        "issue_categories": {
+          "capture_report_clock_confusion": 27,
+          "over_refusal": 7,
+          "ambiguous_report_clock_use": 1,
+          "unsupported_observation_strength": 1,
+          "speaker_conflation": 1
+        }
+      },
+      "initial_formation_complete": null,
+      "semantic_state_review": null,
+      "costs_by_stage": {
+        "reader": {
+          "responses": 48,
+          "known_tokens": 139661,
+          "unknown_usage": 0
+        },
+        "judge": {
+          "responses": 48,
+          "known_tokens": 133016,
+          "unknown_usage": 0
+        }
+      },
+      "finish_reasons": {
+        "reader": {
+          "stop": 48
+        },
+        "judge": {
+          "stop": 48
+        }
+      },
+      "prediction_generation_tokens": 139661,
+      "all_events": [
+        {
+          "case": "method-screen-archive",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 0,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 1,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 2,
+          "status": "source_capture_only",
+          "source_count": 1,
+          "zero_ingestion_model_usage": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0,
+          "record_values_unchanged_by_reads": true
+        }
+      ],
+      "requests_without_responses": [],
+      "official_case_correct_counts": {
+        "method-screen-archive": 3,
+        "method-screen-credits": 3,
+        "method-screen-exhibit": 4,
+        "method-screen-inventory": 4,
+        "method-screen-kiln": 3,
+        "method-screen-maps": 4,
+        "method-screen-parcel": 4,
+        "method-screen-projection": 4,
+        "method-screen-reservation": 4,
+        "method-screen-studio": 3,
+        "method-screen-tickets": 4,
+        "method-screen-walk": 3
+      }
+    },
+    "append": {
+      "first_qa_labels": {
+        "Correct": 44,
+        "invalid": 2,
+        "Hallucination": 1,
+        "Omission": 1
+      },
+      "first_qa_valid_count": 46,
+      "qa_manual_review": {
+        "denominator": 48,
+        "answers_present": 48,
+        "core_correct": 46,
+        "source_faithful_confirmed": 37,
+        "source_faithful_possible": 37,
+        "ambiguous_answer_count": 0,
+        "issue_categories": {
+          "invented_policy_change": 1,
+          "invented_policy_onset": 1,
+          "wrong_source_citation": 1,
+          "source_report_date_misattribution": 2,
+          "unsupported_observation_strength": 1,
+          "report_time_as_exact_event": 1,
+          "stale_target": 1,
+          "delivered_correction_ignored": 1,
+          "speaker_conflation": 3,
+          "non_target_over_refusal": 1
+        }
+      },
+      "initial_formation_complete": 8,
+      "semantic_state_review": {
+        "denominator": 24,
+        "ujs_confirmed": 9,
+        "ujs_possible": 11,
+        "target_and_preservation": 17,
+        "uncertain_rows": 4,
+        "by_stratum": {
+          "change_or_new_assertion": {
+            "denominator": 23,
+            "ujs_confirmed": 9,
+            "ujs_possible": 11
+          },
+          "preservation": {
+            "denominator": 1,
+            "ujs_confirmed": 0,
+            "ujs_possible": 0
+          }
+        }
+      },
+      "costs_by_stage": {
+        "maintenance": {
+          "responses": 36,
+          "known_tokens": 215146,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "responses": 48,
+          "known_tokens": 204718,
+          "unknown_usage": 0
+        },
+        "judge": {
+          "responses": 48,
+          "known_tokens": 126804,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "responses": 100,
+          "known_tokens": 6616,
+          "unknown_usage": 0
+        }
+      },
+      "finish_reasons": {
+        "maintenance": {
+          "stop": 33,
+          "length": 3
+        },
+        "reader": {
+          "stop": 48
+        },
+        "judge": {
+          "stop": 48
+        }
+      },
+      "prediction_generation_tokens": 419864,
+      "all_events": [
+        {
+          "case": "method-screen-archive",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "e21a34e7-f0b5-5f09-b10f-0474d6d7ebbe",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "89d81577-daf7-5939-b0a2-17409866bc04",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "5f119530-4289-5af6-857f-3d5f2822ceb3",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 6,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "f3f2e9f9-21d6-5fb4-9acc-4f6d8d5c1634",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "7573efec-99c5-52bf-90fc-cecda0799543",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "d9b1649b-a175-5b42-a0cd-93f9731123fd",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 8,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "fd8d8416-9cea-53aa-85b9-ac84f38c9392",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "543ab03c-b6de-5365-956b-22820fabf9a8",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 7,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 2,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 7,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "8c0668ab-5c95-59e5-b92d-e865a1f37161",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "4bce5ca7-c600-5089-8711-080e10cc4f4c",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "addefa1a-d935-5d13-b13d-99ffb597fcfd",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 7,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "5f4c5473-1b22-5b81-a073-15d369becce0",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "8d5d92bf-8583-5a0d-860b-ffe45cea6e1d",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 7,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3c7eee8d-daa7-5bf3-8492-3d3a45902a1e",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 10,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 0,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3dfa928d-7b7b-5f88-88a6-334d4121f6a3",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 2,
+          "status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+            }
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/method-screen-maps/2:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "effect": "none",
+                "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+              }
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "967b0b6c-85f5-52f5-9ba1-818001989b58",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2fb4519c-d80d-56df-90ae-a2383ace5f72",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 7,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "4746ff13-ebb6-5e48-a068-2d26a5d37f19",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 12,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 0,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "029fd003-6920-5bcc-8a86-32e761d5af1f",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "330940d1-86a0-53b6-803f-a6c07f0458f5",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 7,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "dd46a06b-654d-52ce-bc10-5014de596a36",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "9092bcfa-9641-5b50-b793-994d6ed407e6",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 8,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "8548864d-270d-58f0-ada3-fd54d9973e7a",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 11,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "1bc3c366-8fa7-57b9-916a-c659be185745",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a278b69c-de71-52df-b02c-26763792e6d0",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 7,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "1bf6fbac-f655-5f75-a979-5331a2e28e61",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 9,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "50381cb6-ed1e-5a92-9856-0ef8fc1fd28a",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "bb7ad037-6504-574f-86a1-ae83ef8e9cac",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 6,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2023a1f3-c21a-59fe-a2b8-baf77f7221a8",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 9,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "03e1d41a-455b-52b8-acf1-01d49a0ac60e",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 1,
+          "status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+            }
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/method-screen-walk/1:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "effect": "none",
+                "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+              }
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 2,
+          "status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+            }
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/method-screen-walk/2:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "effect": "none",
+                "reason": "EDIT_TIME_SOURCE_NOT_SELECTED"
+              }
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        }
+      ],
+      "requests_without_responses": [],
+      "official_case_correct_counts": {
+        "method-screen-archive": 4,
+        "method-screen-credits": 4,
+        "method-screen-exhibit": 3,
+        "method-screen-inventory": 4,
+        "method-screen-kiln": 4,
+        "method-screen-maps": 4,
+        "method-screen-parcel": 3,
+        "method-screen-projection": 4,
+        "method-screen-reservation": 3,
+        "method-screen-studio": 4,
+        "method-screen-tickets": 3,
+        "method-screen-walk": 4
+      }
+    },
+    "plain": {
+      "first_qa_labels": {
+        "Correct": 42,
+        "Omission": 2,
+        "invalid": 3,
+        "Hallucination": 1
+      },
+      "first_qa_valid_count": 45,
+      "qa_manual_review": {
+        "denominator": 48,
+        "answers_present": 48,
+        "core_correct": 42,
+        "source_faithful_confirmed": 29,
+        "source_faithful_possible": 30,
+        "ambiguous_answer_count": 1,
+        "issue_categories": {
+          "capture_report_clock_confusion": 15,
+          "over_refusal": 5,
+          "current_future_scope_confusion": 1,
+          "current_target_omission": 1,
+          "reason_over_refusal": 1,
+          "inconsistent_report_dates": 1,
+          "ambiguous_report_capture_wording": 1
+        }
+      },
+      "initial_formation_complete": 11,
+      "semantic_state_review": {
+        "denominator": 24,
+        "ujs_confirmed": 15,
+        "ujs_possible": 16,
+        "target_and_preservation": 16,
+        "uncertain_rows": 2,
+        "by_stratum": {
+          "change_or_new_assertion": {
+            "denominator": 23,
+            "ujs_confirmed": 14,
+            "ujs_possible": 15
+          },
+          "preservation": {
+            "denominator": 1,
+            "ujs_confirmed": 1,
+            "ujs_possible": 1
+          }
+        }
+      },
+      "costs_by_stage": {
+        "maintenance": {
+          "responses": 36,
+          "known_tokens": 235757,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "responses": 48,
+          "known_tokens": 174724,
+          "unknown_usage": 0
+        },
+        "judge": {
+          "responses": 48,
+          "known_tokens": 135586,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "responses": 102,
+          "known_tokens": 4971,
+          "unknown_usage": 0
+        }
+      },
+      "finish_reasons": {
+        "maintenance": {
+          "stop": 33,
+          "length": 3
+        },
+        "reader": {
+          "stop": 48
+        },
+        "judge": {
+          "stop": 48
+        }
+      },
+      "prediction_generation_tokens": 410481,
+      "all_events": [
+        {
+          "case": "method-screen-archive",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "bcfcb7fe-e1ae-58b7-b242-ef412d28e4dd",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "bcfcb7fe-e1ae-58b7-b242-ef412d28e4dd",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "bcfcb7fe-e1ae-58b7-b242-ef412d28e4dd",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "33ea1efe-acd0-55b4-89e6-848bd839755c",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "33ea1efe-acd0-55b4-89e6-848bd839755c",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "33ea1efe-acd0-55b4-89e6-848bd839755c",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "b683c84f-7c34-585c-8ff9-419460cc6180",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "b683c84f-7c34-585c-8ff9-419460cc6180",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "b683c84f-7c34-585c-8ff9-419460cc6180",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "cbe39ac6-470c-504e-b37a-825609941b77",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "cbe39ac6-470c-504e-b37a-825609941b77",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 2,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "36c7e382-21f5-5580-8dc4-ccb6e1ec8eeb",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "36c7e382-21f5-5580-8dc4-ccb6e1ec8eeb",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "36c7e382-21f5-5580-8dc4-ccb6e1ec8eeb",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "fe2b9405-56e7-5a1d-9e04-0ef68ce13ca5",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "4e6122b0-dfba-501d-a3e9-412d924d48de",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "fe2b9405-56e7-5a1d-9e04-0ef68ce13ca5",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "4e6122b0-dfba-501d-a3e9-412d924d48de",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "fe2b9405-56e7-5a1d-9e04-0ef68ce13ca5",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "4e6122b0-dfba-501d-a3e9-412d924d48de",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "5845067a-07ea-5504-b973-7c3a7b790ac7",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "5845067a-07ea-5504-b973-7c3a7b790ac7",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "5845067a-07ea-5504-b973-7c3a7b790ac7",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "6297c092-85e0-5e59-be4f-c9754adda3c3",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "6297c092-85e0-5e59-be4f-c9754adda3c3",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "6297c092-85e0-5e59-be4f-c9754adda3c3",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "7dec45be-a215-5376-807b-aca8499ae49f",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 1,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "7dec45be-a215-5376-807b-aca8499ae49f",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "b0c6acb9-2bdb-51a2-802d-26468bc62f2b",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "b0c6acb9-2bdb-51a2-802d-26468bc62f2b",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "b0c6acb9-2bdb-51a2-802d-26468bc62f2b",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "e3400ea1-62aa-5785-a0bb-5cb67e2ff656",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "ca6a1589-0560-54a7-b659-4943df7dbf9d",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "b3446479-d496-5cef-ab0a-eaed99e15caa",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "c5d46b12-b1d2-50cb-92e4-196a9f98ba6d",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 4,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "ca6a1589-0560-54a7-b659-4943df7dbf9d",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "e3400ea1-62aa-5785-a0bb-5cb67e2ff656",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "b3446479-d496-5cef-ab0a-eaed99e15caa",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "c5d46b12-b1d2-50cb-92e4-196a9f98ba6d",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 4,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "ca6a1589-0560-54a7-b659-4943df7dbf9d",
+              "revision": 3
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "b3446479-d496-5cef-ab0a-eaed99e15caa",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "e3400ea1-62aa-5785-a0bb-5cb67e2ff656",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "c5d46b12-b1d2-50cb-92e4-196a9f98ba6d",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 4,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 0,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "23fb480c-ebf2-5531-b7af-d87aa79612b4",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "9d796613-8cda-5fce-89e1-f2aafa69365d",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "173a9d24-b289-5494-b8f3-ff1a85d89f7f",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "9d796613-8cda-5fce-89e1-f2aafa69365d",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "173a9d24-b289-5494-b8f3-ff1a85d89f7f",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 3,
+          "support_group_count": 0
+        }
+      ],
+      "requests_without_responses": [],
+      "official_case_correct_counts": {
+        "method-screen-archive": 4,
+        "method-screen-credits": 3,
+        "method-screen-exhibit": 4,
+        "method-screen-inventory": 4,
+        "method-screen-kiln": 3,
+        "method-screen-maps": 4,
+        "method-screen-parcel": 2,
+        "method-screen-projection": 3,
+        "method-screen-reservation": 4,
+        "method-screen-studio": 3,
+        "method-screen-tickets": 4,
+        "method-screen-walk": 4
+      }
+    },
+    "conditioned": {
+      "first_qa_labels": {
+        "Correct": 44,
+        "Hallucination": 2,
+        "invalid": 2
+      },
+      "first_qa_valid_count": 46,
+      "qa_manual_review": {
+        "denominator": 48,
+        "answers_present": 48,
+        "core_correct": 48,
+        "source_faithful_confirmed": 34,
+        "source_faithful_possible": 35,
+        "ambiguous_answer_count": 1,
+        "issue_categories": {
+          "capture_report_clock_confusion": 9,
+          "rule_state_interval_conflation": 1,
+          "unsupported_causal_rule": 1,
+          "fabricated_event_date": 1,
+          "ambiguous_author_content_attribution": 1,
+          "source_statement_conflation": 2
+        }
+      },
+      "initial_formation_complete": 12,
+      "semantic_state_review": {
+        "denominator": 24,
+        "ujs_confirmed": 13,
+        "ujs_possible": 13,
+        "target_and_preservation": 15,
+        "uncertain_rows": 0,
+        "by_stratum": {
+          "change_or_new_assertion": {
+            "denominator": 23,
+            "ujs_confirmed": 13,
+            "ujs_possible": 13
+          },
+          "preservation": {
+            "denominator": 1,
+            "ujs_confirmed": 0,
+            "ujs_possible": 0
+          }
+        }
+      },
+      "costs_by_stage": {
+        "maintenance": {
+          "responses": 36,
+          "known_tokens": 269201,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "responses": 48,
+          "known_tokens": 176071,
+          "unknown_usage": 0
+        },
+        "judge": {
+          "responses": 48,
+          "known_tokens": 128065,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "responses": 104,
+          "known_tokens": 6819,
+          "unknown_usage": 0
+        }
+      },
+      "finish_reasons": {
+        "maintenance": {
+          "stop": 36
+        },
+        "reader": {
+          "stop": 48
+        },
+        "judge": {
+          "stop": 48
+        }
+      },
+      "prediction_generation_tokens": 445272,
+      "all_events": [
+        {
+          "case": "method-screen-archive",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "894ef25d-93c8-55a7-8762-dbc6d46f00cc",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "894ef25d-93c8-55a7-8762-dbc6d46f00cc",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "894ef25d-93c8-55a7-8762-dbc6d46f00cc",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "ebd8b32b-84fd-56ac-8d64-56b9d8a591a5",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "ebd8b32b-84fd-56ac-8d64-56b9d8a591a5",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "ebd8b32b-84fd-56ac-8d64-56b9d8a591a5",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "90a8f19d-5f91-596b-8c04-ea172afac398",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3f2d96e4-c73c-590a-b6c0-a291033953fd",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "7a08992e-7b03-5b27-9d92-71989b91e50e",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "90a8f19d-5f91-596b-8c04-ea172afac398",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3f2d96e4-c73c-590a-b6c0-a291033953fd",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "7a08992e-7b03-5b27-9d92-71989b91e50e",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "3f2d96e4-c73c-590a-b6c0-a291033953fd",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 3,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a7cb1468-5939-544b-a0b6-c2aca8db2676",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a7cb1468-5939-544b-a0b6-c2aca8db2676",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "a7cb1468-5939-544b-a0b6-c2aca8db2676",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 6,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "bb5b7cd7-5bf9-5df3-ba78-590765f0e2f7",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "bb5b7cd7-5bf9-5df3-ba78-590765f0e2f7",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "bb5b7cd7-5bf9-5df3-ba78-590765f0e2f7",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "285a2022-eeeb-5fa8-a776-469d13fe4625",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "285a2022-eeeb-5fa8-a776-469d13fe4625",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "285a2022-eeeb-5fa8-a776-469d13fe4625",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2a5c72c1-4e2c-561b-ad5b-dc30eded618c",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2a5c72c1-4e2c-561b-ad5b-dc30eded618c",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2a5c72c1-4e2c-561b-ad5b-dc30eded618c",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "e8ff294b-5b8b-512b-a4f9-4600c7b860c4",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "e8ff294b-5b8b-512b-a4f9-4600c7b860c4",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "e8ff294b-5b8b-512b-a4f9-4600c7b860c4",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 6,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "d5a83327-5d26-585d-8ce0-39d74c56b496",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "d5a83327-5d26-585d-8ce0-39d74c56b496",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "d5a83327-5d26-585d-8ce0-39d74c56b496",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "7b4ae926-8914-5857-85cc-bed444f97d15",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "803fcf58-a419-56f6-8038-0cf583b52bd9",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "7b4ae926-8914-5857-85cc-bed444f97d15",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "7b4ae926-8914-5857-85cc-bed444f97d15",
+              "revision": 3
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "803fcf58-a419-56f6-8038-0cf583b52bd9",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 2,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "dc19814a-0f92-5524-9087-116b162c0f1b",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "dc19814a-0f92-5524-9087-116b162c0f1b",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "dc19814a-0f92-5524-9087-116b162c0f1b",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "718d5151-9632-5555-947d-7dff294a5f64",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 8,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "718d5151-9632-5555-947d-7dff294a5f64",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 8,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "718d5151-9632-5555-947d-7dff294a5f64",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 8,
+          "support_group_count": 0
+        }
+      ],
+      "requests_without_responses": [],
+      "official_case_correct_counts": {
+        "method-screen-archive": 4,
+        "method-screen-credits": 3,
+        "method-screen-exhibit": 3,
+        "method-screen-inventory": 4,
+        "method-screen-kiln": 4,
+        "method-screen-maps": 4,
+        "method-screen-parcel": 4,
+        "method-screen-projection": 3,
+        "method-screen-reservation": 4,
+        "method-screen-studio": 3,
+        "method-screen-tickets": 4,
+        "method-screen-walk": 4
+      }
+    },
+    "candidate": {
+      "first_qa_labels": {
+        "Correct": 39,
+        "invalid": 5,
+        "Omission": 2,
+        "Hallucination": 1,
+        "missing": 1
+      },
+      "first_qa_valid_count": 42,
+      "qa_manual_review": {
+        "denominator": 48,
+        "answers_present": 47,
+        "core_correct": 42,
+        "source_faithful_confirmed": 32,
+        "source_faithful_possible": 37,
+        "ambiguous_answer_count": 5,
+        "issue_categories": {
+          "ambiguous_unchanged_policy_onset": 1,
+          "capture_report_clock_confusion": 8,
+          "unsupported_scope_extension": 1,
+          "non_target_over_refusal": 2,
+          "ambiguous_physical_causality": 1,
+          "over_refusal": 3,
+          "missing_answer": 1,
+          "ambiguous_author_content_attribution": 1,
+          "speaker_conflation": 1,
+          "ambiguous_coverage_disclaimer": 1,
+          "ambiguous_report_capture_wording": 1
+        }
+      },
+      "initial_formation_complete": 7,
+      "semantic_state_review": {
+        "denominator": 24,
+        "ujs_confirmed": 7,
+        "ujs_possible": 9,
+        "target_and_preservation": 13,
+        "uncertain_rows": 2,
+        "by_stratum": {
+          "change_or_new_assertion": {
+            "denominator": 23,
+            "ujs_confirmed": 7,
+            "ujs_possible": 9
+          },
+          "preservation": {
+            "denominator": 1,
+            "ujs_confirmed": 0,
+            "ujs_possible": 0
+          }
+        }
+      },
+      "costs_by_stage": {
+        "maintenance": {
+          "responses": 36,
+          "known_tokens": 310524,
+          "unknown_usage": 0
+        },
+        "impact": {
+          "responses": 20,
+          "known_tokens": 78038,
+          "unknown_usage": 0
+        },
+        "reader": {
+          "responses": 47,
+          "known_tokens": 164422,
+          "unknown_usage": 0
+        },
+        "judge": {
+          "responses": 47,
+          "known_tokens": 121442,
+          "unknown_usage": 0
+        },
+        "embedding": {
+          "responses": 92,
+          "known_tokens": 5334,
+          "unknown_usage": 0
+        },
+        "evidence_selection": {
+          "responses": 46,
+          "known_tokens": 212293,
+          "unknown_usage": 0
+        }
+      },
+      "finish_reasons": {
+        "maintenance": {
+          "stop": 34,
+          "length": 2
+        },
+        "impact": {
+          "stop": 20
+        },
+        "reader": {
+          "stop": 47
+        },
+        "judge": {
+          "stop": 47
+        },
+        "evidence_selection": {
+          "stop": 45,
+          "length": 1
+        }
+      },
+      "prediction_generation_tokens": 765277,
+      "all_events": [
+        {
+          "case": "method-screen-archive",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "894ef25d-93c8-55a7-8762-dbc6d46f00cc",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "894ef25d-93c8-55a7-8762-dbc6d46f00cc",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-archive",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "894ef25d-93c8-55a7-8762-dbc6d46f00cc",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 0,
+          "status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "id": "ebd8b32b-84fd-56ac-8d64-56b9d8a591a5",
+              "revision": null,
+              "reason": "EDIT_SUPPORT_ROUTE_INVALID"
+            }
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/method-screen-credits/0:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "reason": "EDIT_SUPPORT_ROUTE_INVALID",
+                "id": "ebd8b32b-84fd-56ac-8d64-56b9d8a591a5",
+                "revision": null,
+                "effect": "none",
+                "content_verification": "unchecked",
+                "formation_status": "pending",
+                "raw_preserved": true
+              }
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "df462911-9b55-5c52-90f9-f17333a82dce",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-credits",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "df462911-9b55-5c52-90f9-f17333a82dce",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "90a8f19d-5f91-596b-8c04-ea172afac398",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "90a8f19d-5f91-596b-8c04-ea172afac398",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-exhibit",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "90a8f19d-5f91-596b-8c04-ea172afac398",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 0,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 1,
+          "status": "incomplete",
+          "receipts": [],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "phase": "edit_pending",
+              "reason": "Provider output incomplete: length"
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-inventory",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "93b3a9c1-0b1e-561b-b087-13fbf3653fd7",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "bb5b7cd7-5bf9-5df3-ba78-590765f0e2f7",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "bb5b7cd7-5bf9-5df3-ba78-590765f0e2f7",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-kiln",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "bb5b7cd7-5bf9-5df3-ba78-590765f0e2f7",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "285a2022-eeeb-5fa8-a776-469d13fe4625",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "285a2022-eeeb-5fa8-a776-469d13fe4625",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-maps",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "285a2022-eeeb-5fa8-a776-469d13fe4625",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2a5c72c1-4e2c-561b-ad5b-dc30eded618c",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "2a5c72c1-4e2c-561b-ad5b-dc30eded618c",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 6,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-parcel",
+          "session": 2,
+          "status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "id": "2a5c72c1-4e2c-561b-ad5b-dc30eded618c",
+              "revision": 2,
+              "reason": "EDIT_SUPPORT_ROUTE_INVALID"
+            }
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/method-screen-parcel/2:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "reason": "EDIT_SUPPORT_ROUTE_INVALID",
+                "id": "2a5c72c1-4e2c-561b-ad5b-dc30eded618c",
+                "revision": 2,
+                "effect": "none",
+                "content_verification": "unchecked",
+                "formation_status": "pending",
+                "raw_preserved": true
+              }
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 6,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "e8ff294b-5b8b-512b-a4f9-4600c7b860c4",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 1
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "e8ff294b-5b8b-512b-a4f9-4600c7b860c4",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 5,
+          "support_group_count": 1
+        },
+        {
+          "case": "method-screen-projection",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "e8ff294b-5b8b-512b-a4f9-4600c7b860c4",
+              "revision": 3
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 6,
+          "support_group_count": 2
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "d5a83327-5d26-585d-8ce0-39d74c56b496",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "d5a83327-5d26-585d-8ce0-39d74c56b496",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-reservation",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "d5a83327-5d26-585d-8ce0-39d74c56b496",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 0,
+          "status": "incomplete",
+          "receipts": [
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_SUPPORT_CLAUSE_UNAVAILABLE"
+            }
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/method-screen-studio/0:batch:0:work:0:proposal:0",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "effect": "none",
+                "reason": "EDIT_SUPPORT_CLAUSE_UNAVAILABLE"
+              }
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 0,
+          "unit_count": 0,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "28e5c764-d344-56c5-8cd6-f95b1868ef69",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 6,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-studio",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "28e5c764-d344-56c5-8cd6-f95b1868ef69",
+              "revision": 2
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 4,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 0,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "dc19814a-0f92-5524-9087-116b162c0f1b",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "18a6b9a4-68c3-5a9b-bffd-e9cfcf4ba45b",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "74521873-f55e-53de-b9c1-b09f9ba522de",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "7cf14ead-b1a6-586e-9dbe-9d2801e33c1e",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 4,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "18a6b9a4-68c3-5a9b-bffd-e9cfcf4ba45b",
+              "revision": 2
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "dc19814a-0f92-5524-9087-116b162c0f1b",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "74521873-f55e-53de-b9c1-b09f9ba522de",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "7cf14ead-b1a6-586e-9dbe-9d2801e33c1e",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 4,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-tickets",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "18a6b9a4-68c3-5a9b-bffd-e9cfcf4ba45b",
+              "revision": 3
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "74521873-f55e-53de-b9c1-b09f9ba522de",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "dc19814a-0f92-5524-9087-116b162c0f1b",
+              "revision": 1
+            },
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "7cf14ead-b1a6-586e-9dbe-9d2801e33c1e",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 4,
+          "unit_count": 5,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 0,
+          "status": "incomplete",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "committed",
+              "id": "718d5151-9632-5555-947d-7dff294a5f64",
+              "revision": 1
+            },
+            {
+              "ok": false,
+              "status": "rejected",
+              "reason": "EDIT_DECLARED_CONDITION_UNAVAILABLE"
+            }
+          ],
+          "unprocessed": [
+            {
+              "batch": 0,
+              "operation_id": "halumem/method-screen-walk/0:batch:0:work:0:proposal:1",
+              "receipt": {
+                "ok": false,
+                "status": "rejected",
+                "effect": "none",
+                "reason": "EDIT_DECLARED_CONDITION_UNAVAILABLE"
+              }
+            }
+          ],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 1,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "718d5151-9632-5555-947d-7dff294a5f64",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        },
+        {
+          "case": "method-screen-walk",
+          "session": 2,
+          "status": "completed",
+          "receipts": [
+            {
+              "ok": true,
+              "status": "no_change",
+              "id": "718d5151-9632-5555-947d-7dff294a5f64",
+              "revision": 1
+            }
+          ],
+          "unprocessed": [],
+          "record_values_unchanged_by_reads": true,
+          "record_count": 1,
+          "unit_count": 3,
+          "support_group_count": 0
+        }
+      ],
+      "requests_without_responses": [],
+      "official_case_correct_counts": {
+        "method-screen-archive": 3,
+        "method-screen-credits": 3,
+        "method-screen-exhibit": 3,
+        "method-screen-inventory": 3,
+        "method-screen-kiln": 3,
+        "method-screen-maps": 4,
+        "method-screen-parcel": 4,
+        "method-screen-projection": 4,
+        "method-screen-reservation": 4,
+        "method-screen-studio": 2,
+        "method-screen-tickets": 3,
+        "method-screen-walk": 3
+      }
+    }
+  },
+  "limitations": [
+    "Single stochastic first run per arm; no significance or universal architecture advantage claim.",
+    "Original first Judge labels, invalid outputs and missing answers preserved; manual source review is separate, no rescoring.",
+    "State UJS requires target/preservation/time/source meanings; source-only has no semantic state and UJS is N/A.",
+    "Ambiguous state/source judgements are null and yield confirmed/possible bounds; label-only observed risk is separate.",
+    "Strict new-report coverage differs from accepted-policy correctness for unadopted proposals; both retained in review.",
+    "Text UJS does not establish adequate support graphs; graph diagnostics recorded separately.",
+    "All methods use common Sources and Reader; correct mixed QA does not repair a missing/incorrect semantic state.",
+    "Prior factorial-v2 observed-label rubric differs and is not pooled; see review disclosure.",
+    "No SHA checks, no new ledger, no new deployment, no wrapper retries or selective rescoring.",
+    "Common source clock projection clarification in later development is not part of these frozen results."
+  ],
+  "ledger_delta": {
+    "generation_requests": 688,
+    "generation": {
+      "known_tokens": 2825468,
+      "charged_tokens": 2825468,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 23740,
+      "charged_tokens": 23740,
+      "unknown_usage": 0
+    },
+    "unknown_floor": {
+      "generation": 9,
+      "embedding": 1
+    }
+  },
+  "ledger_reconciliation": {
+    "generation_tokens_match": true,
+    "generation_requests_match": true,
+    "embedding_tokens_match": true
+  },
+  "exploratory_pairwise": {
+    "cluster": "history/case",
+    "clusters": 12,
+    "draws": 20000,
+    "seed": 20261015,
+    "warning": "Exploratory12-cluster percentile intervals; one stochastic run and author review, not confirmatory tests. UJS intervals below use conservative confirmed coding; possible counts separately bound annotation ambiguity.",
+    "candidate_minus_controls": {
+      "source": {
+        "official_qa_correct_including_invalid_missing_as_not_correct": {
+          "difference": -0.08333333333333333,
+          "cluster_bootstrap_95_percentile": [
+            -0.14583333333333334,
+            -0.020833333333333332
+          ]
+        }
+      },
+      "append": {
+        "official_qa_correct_including_invalid_missing_as_not_correct": {
+          "difference": -0.10416666666666667,
+          "cluster_bootstrap_95_percentile": [
+            -0.22916666666666666,
+            0.020833333333333332
+          ]
+        },
+        "confirmed_ujs_conservative_coding": {
+          "difference": -0.08333333333333333,
+          "cluster_bootstrap_95_percentile": [
+            -0.375,
+            0.20833333333333334
+          ]
+        }
+      },
+      "plain": {
+        "official_qa_correct_including_invalid_missing_as_not_correct": {
+          "difference": -0.0625,
+          "cluster_bootstrap_95_percentile": [
+            -0.1875,
+            0.08333333333333333
+          ]
+        },
+        "confirmed_ujs_conservative_coding": {
+          "difference": -0.3333333333333333,
+          "cluster_bootstrap_95_percentile": [
+            -0.5833333333333334,
+            -0.125
+          ]
+        }
+      },
+      "conditioned": {
+        "official_qa_correct_including_invalid_missing_as_not_correct": {
+          "difference": -0.10416666666666667,
+          "cluster_bootstrap_95_percentile": [
+            -0.1875,
+            -0.020833333333333332
+          ]
+        },
+        "confirmed_ujs_conservative_coding": {
+          "difference": -0.25,
+          "cluster_bootstrap_95_percentile": [
+            -0.5,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "interpretation": "At this exposed single budget point, no evidence supports a full-candidate architecture win. Separate official QA, conservative state UJS/source fidelity and complete costs; same-source Reader recovery can conceal failed state maintenance."
+}

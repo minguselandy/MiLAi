@@ -1,0 +1,71 @@
+{
+  "before": {
+    "scan_seconds": 22.61829274147749,
+    "records": 3,
+    "query_plan": [
+      [
+        7,
+        0,
+        216,
+        "SCAN store"
+      ],
+      [
+        29,
+        0,
+        0,
+        "USE TEMP B-TREE FOR ORDER BY"
+      ]
+    ]
+  },
+  "index_build_seconds": 0.03712405636906624,
+  "after": {
+    "scan_seconds": 0.6798886014148593,
+    "records": 3,
+    "query_plan": [
+      [
+        8,
+        0,
+        223,
+        "SCAN store USING INDEX milai_store_updated_at_idx"
+      ]
+    ]
+  },
+  "full_ordered_rows_equal": true,
+  "model_calls": 0,
+  "semantic_writes": 0,
+  "scope": "one actual bank copy, unchanged full namespace scan; physical non-unique SQLite index only",
+  "runtime_code": "c61e680f",
+  "tests": 9,
+  "ruff": "passed",
+  "mypy": "passed",
+  "applied_to_running_bank": {
+    "bank": "/cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/long-history-resumed-v1/candidate/MiLAi-memory-only/banks/2f1f897e-d67f-dbc5-6a7b-b7634a9e294f/memory.sqlite",
+    "owner": "2f1f897e-d67f-dbc5-6a7b-b7634a9e294f",
+    "at": "2026-10-14T10:44:38.309575+00:00",
+    "elapsed_seconds": 0.09163411147892475,
+    "physical_index": "milai_store_updated_at_idx",
+    "data_rows": 8082,
+    "semantic_records_compared": 3,
+    "exact_record_values_and_times_unchanged": true,
+    "model_calls": 0,
+    "running_code_changed": false,
+    "scope": "non-unique SQLite ORDER BY index only"
+  },
+  "timing_caveat": "Current long cohort has a physical-index intervention; keep pre-index cost and report mixed timing. No model, corpus, order or logical data change.",
+  "applied_to_second_bank": {
+    "bank": "/cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/long-history-resumed-v1/candidate/MiLAi-memory-only/banks/5c005ed8-0d18-99f8-a20e-6a776a7ea30a/memory.sqlite",
+    "owner": "5c005ed8-0d18-99f8-a20e-6a776a7ea30a",
+    "at": "2026-10-14T10:46:21.292574+00:00",
+    "elapsed_seconds": 0.024403030052781105,
+    "physical_index": "milai_store_updated_at_idx",
+    "data_rows": 2712,
+    "semantic_records_compared": 1,
+    "exact_record_values_and_times_unchanged": true,
+    "model_calls": 0,
+    "running_code_changed": false,
+    "scope": "non-unique SQLite ORDER BY index only"
+  },
+  "additional_integration_tests": 52,
+  "package_boundary": "passed",
+  "tools_boundary": "passed"
+}

@@ -1,0 +1,44 @@
+{
+  "status": "HOST_WRITE_SUPPORT_BINDING_ENGINEERED_NO_MODEL_RUN",
+  "shared_function": "EditMemory.bind_support_groups",
+  "paths": [
+    "ordinary Functional save_edit",
+    "ordinary Functional update_edit including group-only proposals",
+    "ordinary Functional rewrite_edit",
+    "maintain_delivery with actual preceding receipts",
+    "record-page support-group delivery and writer reconstruction"
+  ],
+  "tests": {
+    "unique_related_passed": 219,
+    "broad_run": {
+      "passed": 218,
+      "failed": 1,
+      "seconds": 89.49,
+      "failure": "test recovery callback still had old3-argument signature"
+    },
+    "after_test_callback_fix": {
+      "passed": 2,
+      "seconds": 1.29
+    },
+    "new_cases": 4,
+    "mypy_files": 3,
+    "ruff": "pass",
+    "package_dag": "pass",
+    "tools_boundary": "pass",
+    "verification_matrix_owned_sources": 277
+  },
+  "internal_interface_change": "maintenance commit callback receives preceding receipts as fourth argument; existing production callback and fixtures migrated",
+  "preserved": [
+    "ordinary source delivery/authorization/review/receipt boundaries",
+    "record-by-record commit semantics",
+    "old versions and unknown-call no-retry policy",
+    "default old feature settings"
+  ],
+  "limits": [
+    "Host dependency reading selection not yet integrated",
+    "no real-model normal Host trial for this source",
+    "current foreign references remain declared model relationships; bodies require actual opens",
+    "not W5/E5 completion"
+  ],
+  "no_sha": true
+}

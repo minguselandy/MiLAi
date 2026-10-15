@@ -2329,7 +2329,7 @@ def test_shared_recipe_recovery_preserves_effect_and_unknown_call(tmp_path, faul
             return {"proposals": [{"action": "create", "units": [
                 {"text": "The marker is blue.", "evidence": ["e1"]}]}]}
 
-        def commit(operation, proposal, mapping):
+        def commit(operation, proposal, mapping, dependency_receipts):
             memory.service.store.put(
                 namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
                 {"mapping_id": mapping["mapping_id"]}, index=False,
@@ -2346,7 +2346,7 @@ def test_shared_recipe_recovery_preserves_effect_and_unknown_call(tmp_path, faul
     with opened(tmp_path, arm="B1", interface_version="I2") as memory:
         # Resume through the same functional mutation boundary and operation ID.
         memory.context("s", "u", "functional-m-test-v1")
-        args["commit"] = lambda op, proposal, mapping: memory.apply_writer_proposal(
+        args["commit"] = lambda op, proposal, mapping, receipts: memory.apply_writer_proposal(
             cfg(), op, proposal)
         result = maintain_event(memory.writer, delivery, **args)
         assert len(calls) == count
@@ -2398,7 +2398,7 @@ def test_state_view_opens_whole_targets_and_continues_after_durable_commit(tmp_p
                 "text": "The marker is red." if "marker" in old else "The alarm is soft.",
             }]}]}
 
-        def commit(operation, proposal, mapping):
+        def commit(operation, proposal, mapping, dependency_receipts):
             memory.service.store.put(
                 namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
                 {"mapping_id": mapping["mapping_id"]}, index=False,
@@ -2416,7 +2416,7 @@ def test_state_view_opens_whole_targets_and_continues_after_durable_commit(tmp_p
     with opened(tmp_path, arm="B1", interface_version="I2") as memory:
         memory.context("s", "u", "functional-m-test-v1")
 
-        def commit(operation, proposal, mapping):
+        def commit(operation, proposal, mapping, dependency_receipts):
             memory.service.store.put(
                 namespace(memory.service), memory._writer_key(cfg(), "edit-writer-active:"),
                 {"mapping_id": mapping["mapping_id"]}, index=False,
@@ -2513,7 +2513,7 @@ def test_explicit_empty_save_continues_in_current_session_then_replays(tmp_path)
                    memory_view_mode="state_driven", memory_save_requested=True)
     current = cfg()
 
-    def commit(operation, proposal, mapping):
+    def commit(operation, proposal, mapping, dependency_receipts):
         memory.service.store.put(
             namespace(memory.service), memory._writer_key(current, "edit-writer-active:"),
             {"mapping_id": mapping["mapping_id"]}, index=False,
@@ -2973,6 +2973,44 @@ def test_shared_maintenance_delivers_selected_prior_request_beyond_recent_source
         assert (len(calls), len(previews)) == count and memory.service.records() == before
 
 
+@pytest.mark.parametrize("material_limit", [12000, 18000, 24000])
+def test_resident_paging_reserves_directory_and_keeps_unopened_continuations(
+    tmp_path, material_limit,
+):
+    features = EditFeatures(bound_references=True, source_metadata=True)
+    with opened(tmp_path, interface_version="I2", features=features) as seed:
+        texts = [f"Room {i} requires a personal booking; the other rooms keep their own rules."
+                 for i in range(6)]
+        writer_turn(seed, "seed", " ".join(texts))
+        saved = json.loads(invoke(seed, "save_memory", {"proposal": {
+            "action": "create", "clauses": [{"text": text, "conditions": [],
+                "evidence": ["e1"], "assertion": {"source_evidence": "e1", "kind": "reported"}}
+                for text in texts],
+        }}, "save", "seed").content)
+        assert saved["ok"], saved
+        before = copy.deepcopy(seed.service.read(saved["id"])["value"])
+        memory = FunctionalEditMemory(seed.service, len, material_limit=material_limit,
+            read_limit=12, interface_version="I2", features=features,
+            memory_view_mode="state_driven", read_interface="explicit_selectors_v1")
+        memory.service.capture_user("s", "u", "Read the room booking rules.")
+        directory = memory.context("s", "u", "functional-m-test-v1")
+        target = next(c["target"] for c in directory["candidates"]
+                      if c.get("record_id") == saved["id"])
+        page = json.loads(invoke(memory, "read_memory", {"target": target}, "read").content)
+        assert page["ok"]
+        material = memory.model_material(cfg())
+        assert len(canonical(material)) <= material_limit
+        assert "candidate_delivery_status" in material
+        shown = [u["content"] for u in expand_host_packet(material)["items"]
+                 if u["type"] == "record"]
+        assert shown and set(shown) <= set(texts)
+        if len(shown) < len(texts):
+            assert material["memory_view"]["pending_refs"]
+            assert material["continuations"]
+            assert material["delivery_status"] == "partial"
+        assert memory.service.read(saved["id"])["value"] == before
+
+
 def test_resident_switch_projection_and_current_refresh_survive_reopen(tmp_path):
     options = {"interface_version": "I2",
                "features": EditFeatures(True, True, True, True, True, temporal_scope=True),
@@ -3337,3 +3375,155 @@ def test_explicit_save_continues_across_sessions_with_current_binding(tmp_path):
             part["fragment_handle"] for part in memory.service.source_fragments(original_ref)])
         assert visible_cards(None, memory.service, current_ref,
                              pending_maintenance=prior_cards) == []
+
+
+@pytest.mark.parametrize("fits_all", [True, False])
+def test_single_pass_propositions_skip_selector_only_for_complete_fitting_input(tmp_path, fits_all):
+    from milai_lab.methods.edit_maintenance import maintain_event
+
+    features = EditFeatures(True, True, True, True, True, proposition_updates=True)
+    with opened(tmp_path, interface_version="I2", features=features,
+                maintenance_recipe="single_pass", memory_view_mode="staged") as memory:
+        writer_turn(memory, "seed", "User reports quiet reminders.")
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": next_sdk_create()},
+                                  "create", "seed").content)
+        assert saved["ok"]
+        before = memory.service.read(saved["id"])["value"]
+        writer_turn(memory, "next", "Keep the same quiet reminders; no change.")
+        ref = memory._binding(cfg("next"))["source_ref"]
+        delivery = memory.writer.prepare([ref], "", selected_records=[])
+        calls = []
+
+        def call(stage, messages, schema):
+            calls.append(stage)
+            if stage.startswith("select"):
+                return {"record_ids": [saved["id"]], "done": True}
+            body = json.loads(messages[1]["content"])
+            assert body["delivery"]["records"]
+            assert "User reports quiet reminders." in str(body)
+            return {"creates": [], "records": {}}
+
+        result = maintain_event(memory.writer, delivery, session="s", request_id="preserve",
+            date="2030-01-01", recipe="single_pass", model_call=call,
+            candidate_record_ids=[saved["id"]], memory_view_mode="staged",
+            stage_fit=lambda stage, messages: fits_all or stage != "edit")
+        assert memory.service.read(saved["id"])["value"] == before
+        assert len(calls) == 1
+        if fits_all:
+            assert calls[0].startswith("edit:") and result["status"] == "completed"
+        else:
+            assert calls[0].startswith("select:") and result["status"] == "incomplete"
+
+
+@pytest.mark.parametrize("arm", ["M", "B2"])
+def test_host_tools_persist_support_groups_and_reopen_writer_projection(tmp_path, arm):
+    features = EditFeatures(bound_references=True, dependency_groups=True)
+    options = dict(arm=arm, interface_version="I2", features=features)
+    with opened(tmp_path, **options) as memory:
+        writer_turn(memory, "u", "A powered battery and a working fan permit projection.")
+        clauses = [{"text": t, "conditions": [], "evidence": ["e1"]} for t in (
+            "Battery powered.", "Fan works.", "Projection permitted.")]
+        proposal = {"action": "create", "clauses": clauses, "support_groups": [{
+            "target_unit": 2, "alternatives": [[0, 1]], "evidence": ["e1"]}]}
+        saved = json.loads(invoke(memory, "save_memory", {"proposal": proposal}, "save").content)
+        assert saved["ok"], saved
+        original = copy.deepcopy(memory.service.read(saved["id"])["value"])
+        assert len(original["edit_state"]["support_groups"]) == 1
+    with opened(tmp_path, **options) as memory:
+        packet = writer_turn(memory, "change",
+                             "Remove that support claim; retain all three statements.")
+        assert packet["writer_packet"]["records"][0]["support_groups"]
+        if arm == "M":
+            proposal = {"action": "edit", "target": "r1", "edits": [], "support_groups": [{
+                "operation": "remove", "target_unit": "u3", "evidence": ["e1"]}]}
+        else:
+            proposal = {"action": "rewrite", "target": "r1", "clauses": clauses,
+                        "support_groups": [{"target_unit": 2, "alternatives": [[0]],
+                                            "evidence": ["e1"]}]}
+        updated = json.loads(invoke(memory, "update_memory", {"proposal": proposal},
+                                    "update", "change").content)
+        assert updated["ok"] and updated["revision"] == 2, updated
+        new = memory.service.read(saved["id"])["value"]
+        if arm == "M":
+            assert new["edit_state"]["units"] == original["edit_state"]["units"]
+            assert new["edit_state"]["support_groups"] == []
+        else:
+            assert len(new["edit_state"]["support_groups"][0]["alternatives"][0]) == 1
+        assert memory.service.read(saved["id"], 1)["value"] == original
+        replay = json.loads(invoke(memory, "update_memory", {"proposal": proposal},
+                                   "update", "change").content)
+        assert replay["ok"] and memory.service.read(saved["id"])["value"] == new
+
+
+@pytest.mark.parametrize("remove_foreign", [False, True])
+def test_host_shared_maintenance_binds_preceding_receipt_and_keeps_partial_commit(
+    tmp_path, remove_foreign,
+):
+    from milai_lab.memory.external_support import inspect_external_unit
+
+    features = EditFeatures(bound_references=True, dependency_groups=True,
+                            cross_record_dependencies=True)
+    options = dict(arm="M", interface_version="I2", features=features,
+                   maintenance_recipe="single_pass")
+    with opened(tmp_path, **options) as memory:
+        def maintain(key, text, model):
+            writer_turn(memory, key, text)
+            return memory.maintain_sources(cfg(key), recipe="single_pass", model_call=model,
+                                           allowed=True)
+
+        def clause(text):
+            return {"text": text, "conditions": [], "evidence": ["e1"]}
+        first = maintain("ledger", "Card valid. Desk label blue.", lambda *_: {"proposals": [{
+            "action": "create", "clauses": [clause("Card valid."), clause("Desk label blue.")]}]})
+        credential = first[0]["receipts"][0]["id"]
+        second = maintain("eligibility", "Training complete and card validity support eligibility.",
+            lambda *_: {"proposals": [{"action": "create", "clauses": [
+                clause("Training complete."), clause("Eligible.")], "support_groups": [{
+                    "target_unit": 1, "alternatives": [[0, {"record": "r1", "unit": "u1"}]],
+                    "evidence": ["e1"]}]}]})
+        assert second[0]["status"] == "completed", second
+        target = second[0]["receipts"][0]["id"]
+        before = copy.deepcopy(memory.service.read(target)["value"])
+        old_credential = copy.deepcopy(memory.service.read(credential)["value"])
+
+        def update(_stage, messages, _schema):
+            packet = json.loads(messages[1]["content"])["delivery"]
+            records = packet["records"]
+            ledger = next(row for row in records if any(u["text"] == "Card valid."
+                                                       for u in row["clauses"]))
+            eligible = next(row for row in records if any(u["text"] == "Eligible."
+                                                         for u in row["clauses"]))
+            return {"proposals": [
+                {"action": "edit", "target": eligible["id"], "edits": [],
+                 "support_groups": [{"target_unit": eligible["clauses"][1]["id"],
+                    "alternatives": [[eligible["clauses"][0]["id"],
+                        {"record": ledger["id"], "unit": ledger["clauses"][0]["id"]}]],
+                    "evidence": ["e1"]}]},
+                {"action": "edit", "target": ledger["id"], "edits": [{
+                    "operation": "retract" if remove_foreign else "replace",
+                    "target_unit": ledger["clauses"][0]["id"], "evidence": ["e1"],
+                    **({} if remove_foreign else {"text": "Card renewed and valid."})}]},
+            ]}
+
+        text = ("Withdraw the card claim." if remove_foreign
+                else "Card renewed; eligibility unchanged.")
+        result = maintain("renew", text, update)
+        receipts = result[0]["receipts"]
+        assert receipts[0]["ok"] and receipts[0]["id"] == credential, receipts
+        current = memory.service.read(target)["value"]
+        if remove_foreign:
+            assert result[0]["status"] == "incomplete"
+            assert not receipts[1]["ok"] and "RETRACTED" in receipts[1]["reason"]
+            assert current == before
+        else:
+            assert result[0]["status"] == "completed", result
+            group = current["edit_state"]["support_groups"][0]
+            ref = next(iter(group["external_units"].values()))
+            assert ref["revision"] == 2 and inspect_external_unit(memory.service, ref)[
+                "status"] == "unchanged"
+            assert current["edit_state"]["units"] == before["edit_state"]["units"]
+            assert memory.maintain_sources(cfg("renew"), recipe="single_pass", model_call=update,
+                                          allowed=True) == result
+        assert memory.service.read(credential)["value"]["revision"] == 2
+        assert memory.service.read(credential, 1)["value"] == old_credential
+        assert memory.service.read(target, 1)["value"] == before

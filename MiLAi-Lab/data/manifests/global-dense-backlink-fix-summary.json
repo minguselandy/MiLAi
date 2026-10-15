@@ -1,0 +1,84 @@
+{
+  "runtime_code": "51182ead",
+  "previous_runtime": "4c988f10",
+  "mechanism": "skip source backlink discovery only for dense current-record search with include_raw=False and no retracted-record notice",
+  "profile": {
+    "seconds": 10,
+    "samples": 199,
+    "backlink_stack_samples": 199,
+    "sqlite_batch_search_samples": 198,
+    "nonblocking": true
+  },
+  "copied_bank_probe": {
+    "results": {
+      "legacy": {
+        "wall_seconds": 5.120605311356485,
+        "namespace_scans": 3,
+        "backlink_calls": 2,
+        "visible_sources": 450,
+        "diagnostic_source_limit": 4,
+        "returned_records": 2
+      },
+      "candidate": {
+        "wall_seconds": 1.6521004270762205,
+        "namespace_scans": 1,
+        "backlink_calls": 0,
+        "visible_sources": 450,
+        "diagnostic_source_limit": 4,
+        "returned_records": 2
+      }
+    },
+    "dense_inputs_equal": true,
+    "full_return_equal": true,
+    "actual_ranking_model_called": false,
+    "semantic_writes": 0,
+    "model_calls": 0,
+    "measurement_scope": "full actual bank, four original sources in redundant linkage probe; not full model latency"
+  },
+  "tests": {
+    "related": 17,
+    "ruff": "passed",
+    "mypy": "passed"
+  },
+  "schema_change": false,
+  "ranking_or_visibility_change": false,
+  "no_new_index_or_cache": true,
+  "original_candidate_interruption": {
+    "pid": 210418,
+    "command": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python /cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/source-story-repair-v1/MiLAi-Lab/tools/run_baseline_alignment.py /cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/long-history-v1/candidate-config.json /cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/long-history-v1/candidate --phase predict --backend MiLAi-memory-only --runtime-dir /cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/long-history-v1/runtime ",
+    "started_at": "2026-10-14T09:11:09.236000+00:00",
+    "reason": "199/199 sampled stacks in unused per-source backlink scans; tested dense input/output equivalence",
+    "old_runtime": "4c988f10",
+    "replacement_runtime": "51182ead",
+    "status": "CLOSED_FOR_PERFORMANCE_FIX",
+    "stopped_state": "State:\tT (stopped)",
+    "pending_http_artifacts": [],
+    "backlink_stack": true,
+    "processes_gone": true,
+    "resources_settled": true,
+    "new_unknown_generation": 0,
+    "continued_in": "artifacts/global-development/long-history-resumed-v1"
+  },
+  "continuation": {
+    "status": "PREPARED_CONTINUATION",
+    "runtime_sequence": [
+      "4c988f10",
+      "51182ead"
+    ],
+    "continues": "artifacts/global-development/long-history-v1/candidate",
+    "source_control": "artifacts/global-development/long-history-v1/s0",
+    "configuration_unchanged": true,
+    "dataset_and_question_selection_unchanged": true,
+    "same_actual_bank_namespace": true,
+    "all_prior_http_requests_have_responses": 39,
+    "original_output_retained": true,
+    "semantic_state": "read-only SQLite backup of actual interrupted bank, no authored before",
+    "copy_generation_cache": true,
+    "prior_embedding_artifact_root": "artifacts/global-development/long-history-v1/candidate/MiLAi-memory-only/http/embedding",
+    "embedding_receipts_not_copied": "Derived in-process vector cache must rebuild; new embedding receipt numbering starts in this new output root. Original embedding cost remains in prior root and the continuous ledger.",
+    "cost_accounting": "Full copied+new generation responses once; prior plus new embedding receipts; original candidate accounting-start plus final ledger. Include original interrupted wall time and continuation separately. No free restart.",
+    "checkpoint_resume": "Existing completed session/QA and model response checkpoints; no unknown HTTP or automatic repeat of completed generation",
+    "not_an_independent_trial": true,
+    "not_uniform_runtime_timing": "Report mixed implementation timeline; final whole-user confirmation will use one frozen implementation."
+  }
+}

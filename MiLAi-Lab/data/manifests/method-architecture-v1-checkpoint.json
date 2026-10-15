@@ -1,0 +1,170 @@
+{
+  "observed_at": "2026-10-14T15:02:43.099924+00:00",
+  "goal": "method-architecture-v3",
+  "base_commit": "8293a4e7",
+  "branch": "feat/lab-method-architecture-20261014",
+  "new_model_requests": 0,
+  "old_confirmation": {
+    "s0": {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/final-confirmation-v1/s0/MiLAi-memory-only",
+      "terminals": {
+        "predict": {
+          "status": "PREDICTIONS_SAVED",
+          "phase": "predict",
+          "backend": "MiLAi-memory-only",
+          "benchmark": "halumem",
+          "result": {
+            "status": "PREDICTIONS_SAVED",
+            "sessions": 132,
+            "judge_calls": 0,
+            "complete_answers": 9,
+            "known_reader_failures": 3
+          },
+          "resources_settled": true
+        },
+        "score": {
+          "status": "SCORED",
+          "phase": "score",
+          "backend": "MiLAi-memory-only",
+          "benchmark": "halumem",
+          "result": {
+            "status": "SCORED_SAVED_PREDICTIONS",
+            "backend": "MiLAi-memory-only",
+            "protocol": {
+              "name": "milai-global-final-confirmation-s0-v1",
+              "track": "common-conditions",
+              "backends": [
+                "MiLAi-memory-only"
+              ],
+              "history_protocol": "halumem-online-prefix",
+              "source_policy": "source-only",
+              "qa_top_k": 20,
+              "update_top_k": 10,
+              "delivery": "direct",
+              "raw_access": "original-history-for-RawRAG; independently-retrieved-visible-original-Sources-plus-linked-supports-and-fitting-semantic-views-for-MiLAi",
+              "rawrag": {
+                "granularity": "session"
+              },
+              "native_answer": "separate-optional-not-main-QA",
+              "prediction_scoring": "explicit-selected-arm-score-after-saved-predictions-and-resource-closure",
+              "unknown_retry": false,
+              "write_test_answers_back": false,
+              "resource_owner": "Root; existing continuous ledger; serial model dispatch",
+              "external_internal_usage": "unobserved unless actual native usage is available; not zero",
+              "claim": "Final whole-user confirmation: original source-only baseline vs selected source-only evidence-pack efficiency candidate; no automatic semantic maintenance; first labels only."
+            },
+            "correct": 7,
+            "opportunities": 12,
+            "missing": 3,
+            "labels": {
+              "Hallucination": 2,
+              "Correct": 7
+            },
+            "per_user": {
+              "ed9b924b-6bc0-67f9-67a1-a36401dd1782": {
+                "correct": 2,
+                "opportunities": 6,
+                "missing": 2,
+                "invalid": 0
+              },
+              "2f4b4206-20bc-19a5-a5ed-4d110f91f4db": {
+                "correct": 5,
+                "opportunities": 6,
+                "missing": 1,
+                "invalid": 0
+              }
+            },
+            "backend_capabilities": {
+              "session_output": "supported",
+              "reference_update_state": "supported-isolated-view"
+            },
+            "official_labels": "unchanged; source conflicts require separate evidence review",
+            "semantic_advantage": "unchecked",
+            "native_answer_result": null
+          },
+          "resources_settled": true
+        }
+      },
+      "requests": 109,
+      "responses": 109,
+      "requests_without_response": [],
+      "observed_costs": {
+        "reader": {
+          "calls": 100,
+          "tokens": 3652278
+        },
+        "judge": {
+          "calls": 9,
+          "tokens": 24602
+        }
+      }
+    },
+    "pack": {
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/global-development-20261014/MiLAi-Lab/artifacts/global-development/final-confirmation-v1/pack/MiLAi-memory-only",
+      "terminals": {
+        "predict": null,
+        "score": null
+      },
+      "requests": 8,
+      "responses": 8,
+      "requests_without_response": [],
+      "observed_costs": {
+        "reader": {
+          "calls": 8,
+          "tokens": 363114
+        }
+      }
+    }
+  },
+  "prepared": {
+    "plain": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/continuous-v1/plain/alignment-prepared.json",
+      "status": "PREPARED_ZERO_MODEL",
+      "opportunities": {
+        "sessions": 12,
+        "qa": 12,
+        "native_updates": 0
+      }
+    },
+    "candidate": {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/continuous-v1/candidate/alignment-prepared.json",
+      "status": "PREPARED_ZERO_MODEL",
+      "opportunities": {
+        "sessions": 12,
+        "qa": 12,
+        "native_updates": 0
+      }
+    }
+  },
+  "new_goal_status": "active_incomplete",
+  "old_processes": {
+    "1376965": "State:\tT (stopped)",
+    "1626865": "State:\tT (stopped)"
+  },
+  "ledger_lock": "held",
+  "limitations": [
+    "No new real model outputs; no UJS or QA score claimed.",
+    "First slice traverses existing modifies/overrides only; explicit AND/OR support groups not implemented.",
+    "Independent-formation configurations are prepared, but same-before diagnostic still needs an information-equivalent plain projection.",
+    "Dependency Reader wired to Benchmark, shared functions available; normal Host migration pending.",
+    "Existing paused queue retained; no signals sent, no budget reset, no checksum verification."
+  ],
+  "verification": {
+    "affected_tests": {
+      "dependency_memory": 6,
+      "evidence_reading": 17,
+      "edit_v2_runner": 31
+    },
+    "extended_mechanism": {
+      "passed": 17,
+      "failed": 1,
+      "baseline_reproduced": true,
+      "failure": "test_controls_retain_actual_revisions_without_ideal_initialization: missing source_ref in existing diagnostic fixture"
+    },
+    "mypy_modified_modules": 6,
+    "ruff": "passed",
+    "package_dag": "passed",
+    "tools_boundary": "passed",
+    "remote_ci": "not_run"
+  }
+}

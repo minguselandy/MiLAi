@@ -421,7 +421,8 @@ def test_prepare_keeps_qa_and_update_budgets_and_opaque_isolation(
     first = prepare_alignment(config, root)
     assert first["per_backend_opportunities"] == {"sessions": 2, "qa": 2, "native_updates": 0}
     assert first["per_user_opportunities"]["opaque-owner"]["session_ordinals"] == [1, 0]
-    banks = [first["bank_ids"][backend]["opaque-owner"] for backend in BACKENDS]
+    banks = [first["bank_ids"][backend]["opaque-owner"]
+             for backend in config["alignment"]["backends"]]
     assert len(set(banks)) == 3
     assert all("opaque-owner" not in bank for bank in banks)
     assert first == prepare_alignment(config, root)
@@ -742,6 +743,31 @@ def test_independent_source_reaches_reader_after_noop_and_cached_pool_respects_f
         assert "LATER_RED_DETAIL" not in repr(sent[-1])
         assert "unavailable" in repr(sent[-1])
         assert read_json(execution.root / "native/question/retrieval.json") == snapshot
+
+
+def test_unicode_source_settings_reach_benchmark_and_host(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.memory.functional import FunctionalMemory
+
+    execution, sent = source_reader(tmp_path / "run", monkeypatch)
+    execution.settings.update(source_tokenization="unicode_v1", source_granularity="turn",
+                              source_top_k=1, evidence_variant="S0")
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("dynamic-source", "owner"), "owner", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        captured = service.capture_user("cn", "turn:0", "研发部李明不能审批外部预算。")
+        for i in range(4):
+            service.capture_user(f"noise-{i}", "turn:0", "旅行计划和海边酒店。")
+        execution.answer(service, "研发部李明预算审批", "2030-01-02", "question")
+        assert len(sent) == 1 and "研发部李明不能审批" in repr(sent[0])
+        snapshot = read_json(execution.root / "native/question/retrieval.json")
+        retrieval = snapshot["native_return"]["source_retrieval"]
+        assert retrieval["tokenization"] == "unicode_v1" and retrieval["granularity"] == "turn"
+        host = FunctionalMemory(service, len, source_access="independent_v1", source_top_k=1,
+                                source_tokenization="unicode_v1", source_granularity="turn")
+        units = host._search_units("研发部李明预算审批")
+        assert {unit["source_ref"] for unit in units} == {captured["source_ref"]}
 
 
 def test_long_original_uses_complete_existing_fragments_in_initial_fixed_pool(
@@ -1087,3 +1113,142 @@ def test_reference_query_effects_and_later_state_stay_outside_session_view(
         assert execution._score_retrieval(original, "reference B") == ["actual current source"]
         assert store.get(cache, "reference B") is None
         assert all(observed is not store for observed in observed_stores)
+
+
+def test_evidence_variants_deliver_original_linked_and_semantic_material(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    execution, sent = source_reader(tmp_path / "run", monkeypatch)
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("evidence", "owner"), "owner", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        first = service.capture_user("first", "turn:0", "INDEPENDENT_BLUE")
+        second = service.capture_user("second", "turn:0", "LINKED_YELLOW")
+        native = service.search_sources("BLUE", source_refs=[first["source_ref"]])
+        span = service.source_fragment_range(second["source_ref"], 0, len("LINKED_YELLOW"))
+        semantic = {"record_id": "interpretation", "revision": 1, "content": "STATE_GREEN",
+                    "scope": {}, "revision_evidence": [span]}
+        for variant, expected in (("S0", (True, False, False)), ("S1", (True, True, False)),
+                                  ("S2", (True, True, True))):
+            execution.settings["evidence_variant"] = variant
+            pool_id = f"native/{variant}/retrieval.json"
+            material = execution._source_first_materials(
+                service, "Which?", "", native, [semantic], snapshot_id=pool_id,
+            )
+            write_json(execution.root / pool_id, {"materials": material})
+            execution.answer_material("Which?", "", variant, material, snapshot_id=pool_id)
+            actual = tuple(marker in repr(sent[-1]) for marker in
+                           ("INDEPENDENT_BLUE", "LINKED_YELLOW", "STATE_GREEN"))
+            assert actual == expected
+            assert native["material_assembly"]["evidence_variant"] == variant
+        assert not service.records()  # Reading neither forms nor captures semantic assertions.
+
+
+def test_s0_captures_sources_without_semantic_formation(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.datasets.edit_benchmarks import ObservedSession
+
+    execution, sent = source_reader(tmp_path / "run", monkeypatch)
+    execution.settings["evidence_variant"] = "S0"
+    with SqliteStore.from_conn_string(str(tmp_path / "memory.sqlite")) as store:
+        service = MemoryService(store, ("s0", "owner"), "owner", tmp_path / "lock",
+                                functional_contract="functional_v1", memory_profile="unified_v1")
+        observed = ObservedSession("arrived", "2030-01-01", [
+            {"role": "user", "content": "ORIGINAL_BLUE", "timestamp": "2030-01-01"},
+            {"role": "assistant", "content": "Reported.", "timestamp": "2030-01-01"},
+        ])
+        assert execution.maintain_recipe(service, observed, "arrived") == []
+        assert len(service.sources()) == 2 and not service.records() and not sent
+        execution.answer(service, "Which detail?", "2030-01-02", "question")
+        assert "ORIGINAL_BLUE" in repr(sent[-1])
+
+
+@pytest.mark.parametrize('enabled,replay', [(False, False), (True, False), (True, True)])
+def test_alignment_honors_read_usage_policy_in_actual_store(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, enabled: bool, replay: bool,
+) -> None:
+    from milai_lab.memory.activation import ActivationIndex
+    from milai_lab.methods.edit_memory import EditMemory
+
+    with SqliteStore.from_conn_string(str(tmp_path / 'memory.sqlite')) as store:
+        service = MemoryService(store, ('read-policy', 'alice'), 'alice', tmp_path / 'lock',
+                                memory_profile='unified_v1', functional_contract='functional_v1')
+        ref = service.capture_user('s', 'seed', 'Marker blue.')['source_ref']
+        service.bind_public_turn('s', 'seed', ref, config_version='read-policy', phase='start')
+        handle = service.source_fragments(ref)[0]['fragment_handle']
+        saved = EditMemory(service, 'B1').apply('s', 'save', {'action': 'create', 'units': [
+            {'text': 'Marker blue.', 'evidence': [handle]}]})
+        assert saved['ok']
+        record = service.read(saved['id'])['value']
+        material = {'record_id': saved['id'], 'text': 'Marker blue.'}
+        execution = AlignmentRun.__new__(AlignmentRun)
+        execution.root = tmp_path / 'run'
+        execution.settings = {'alignment_backend': 'MiLAi-memory-only',
+            'alignment': {'qa_top_k': 20}, 'read_usage_updates': enabled,
+            'evidence_replay': replay}
+        native = {'materials': [material], 'native_return': {}, 'returned_count': 1,
+                  'source_mapping': 'actual retained state', 'usage': {}}
+        monkeypatch.setattr(execution, '_backend', lambda _: SimpleNamespace(
+            retrieve=lambda *args, **kwargs: copy.deepcopy(native)))
+        monkeypatch.setattr(execution, 'answer_material', lambda *args, **kwargs: (
+            'blue', [material]))
+        index = ActivationIndex(service)
+        before = store.get(index.namespace, saved['id'])
+        before_value = copy.deepcopy(before.value) if before else None
+        assert execution.answer(service, 'Color?', '', 'q') == 'blue'
+        after = store.get(index.namespace, saved['id'])
+        if enabled and not replay:
+            assert after is not None and set(after.value['uses']) == {'q'}
+        else:
+            assert (after.value if after else None) == before_value
+        assert service.read(saved['id'])['value'] == record
+
+
+def test_simplemem_common_reader_gets_originals_and_native_entries_with_shared_call_limit(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    from milai_lab.methods.evidence_reading import project_packs
+    from milai_lab.providers.contextual_vllm import VLLMConfig
+    from milai_lab.runners.baseline_alignment import SIMPLEMEM
+
+    config = configuration()
+    config['alignment']['backends'] = [SIMPLEMEM]
+    config['alignment']['simplemem'] = {'source_access': 'original_sources'}
+    settings = config['entrypoints']['benchmark']
+    settings.update(source_access='independent_v1', source_top_k=20, semantic_top_k=10,
+                    source_tokenization='unicode_v1', evidence_policy='question_pack_v1')
+    execution = AlignmentRun.__new__(AlignmentRun)
+    execution.settings = alignment_settings(config, SIMPLEMEM)
+    execution.root = tmp_path / 'run'
+    execution.client = SimpleNamespace(config=VLLMConfig('http://unused/v1', 'unused', max_calls=8))
+    native = {'materials': [{'kind': 'external_memory', 'id': 'native-id',
+        'text': 'Native says red.', 'index_text': 'Native says red.', 'body_delivered': True,
+        'provenance': 'native generated interpretation', 'source_mapping': 'unavailable'}],
+        'native_return': {'results': [{'lossless_restatement': 'Native says red.'}]},
+        'returned_count': 1, 'source_mapping': 'native entries', 'usage': {'generation_calls': 3}}
+    calls = []
+    monkeypatch.setattr(execution, '_backend', lambda _: SimpleNamespace(retrieve=lambda *a, **k: (
+        calls.append('native') or copy.deepcopy(native))))
+    with SqliteStore.from_conn_string(str(tmp_path / 'memory.sqlite')) as store:
+        service = MemoryService(store, ('native-qa', 'alice'), 'alice', tmp_path / 'lock',
+                                functional_contract='functional_v1')
+        service.capture_user('original', 'turn:0', 'Original says blue.', occurred_at='2025-01-01')
+
+        def answer(question, date, key, materials, *, snapshot_id, material_reader):
+            assert execution.client.config.max_calls == 5
+            opened = material_reader(materials)
+            projected = project_packs(opened, list(range(len(opened))))
+            assert 'Original says blue.' in str(projected) and 'Native says red.' in str(projected)
+            external = next(m for m in projected if m['kind'] == 'external_memory')
+            assert external['source_mapping'] == 'unavailable' and 'evidence' not in external
+            saved = read_json(execution.root / snapshot_id)
+            assert saved['native_return'] == native['native_return']
+            assert saved['original_retrieval']['source_scope']['complete']
+            return 'blue', opened
+
+        monkeypatch.setattr(execution, 'answer_material', answer)
+        assert execution.answer(service, 'Color?', '2025-01-02', 'q') == 'blue'
+        assert execution.answer(service, 'Color?', '2025-01-02', 'q') == 'blue'
+        assert execution.client.config.max_calls == 8 and calls == ['native']
+        assert service.records() == []

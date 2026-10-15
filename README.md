@@ -26,15 +26,27 @@ Archive  → MiLAi-Artifact-Archive/README.md
 各 bundle 保留自己的 `pyproject.toml`、`uv.lock`、测试和运行说明。根仓库不提交第三方 clone、
 虚拟环境、uv cache、模型/数据下载、日志、运行时状态、wheelhouse 或生成性大文件。
 
-## 当前 Lab 导航
+## 当前 Lab 开发
+
+开发分支 `feat/lab-global-development-20261014`，实现起点 `f86fc5c3`，首批代码 `c33e325d`，当前代码 `8c893af3`，维护源绑定 `be7c5e6f`。
+执行[全局开发规划](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_PLAN_20261014.md)。
+[开发记录与运行方式](MiLAi-Lab/docs/MILAI_GLOBAL_DEVELOPMENT_20261014.md)包含实际查询结果和成本。
+
+新配置 `MiLAi-Lab/configs/milai-global-source-v1.json` 接通独立来源枚举和 Unicode 分词；
+Benchmark 明确使用 S0。20 条同库查询已运行：10 条机制来源 Top-1 为 10/10，
+一位已暴露开发用户的 32 会话、10 条查询 Top-1 为 9/10。这是来源召回结果，尚非答案质量。
+B 固定8题首次评分为控制3/8、证据包5/8，预测tokens下降68.8%；仍有缺答和评分分歧。
+C 源绑定修复已通过12事件、同前态recipe与两条自然更新的有限检查；完整Host故事首轮在16/17条闭合，未通过历史读取与遗忘验收。
+目录/正文容量修复后，实际副本中遗忘成功且7个通知历史版本保留；更正截断、Reader规则混淆仍未解决。
+`6c0de441`接通证据包历史导航；D四题比较不支持整条视图的质量/成本优势。
+两段长期前缀对照已闭合，两臂均7/12正确；候选读取tokens降低71.2%，但全预测增加19.2%，自动维护尚未回本。
+保存确认可直接交付确定回执，完整Host回归370项通过；正常链v6已尝试全部17条，仍有非目标重复、答复错误和遗忘未执行；原文证据包比较经保留原响应续跑完成6/12 Correct、预测成本降低68.5%；冻结后的完整保留用户确认已按用户要求暂停：基线首次7/12 Correct，候选完成4/12题且未评分。
+完整计划尚未完成，实验已暂停；训练与 Product 适配的条件决策仍待完整确认结果。
 
 - [代码结构与项目地图](MiLAi-Lab/docs/PROJECT_MAP.md)
 - [架构与依赖边界](MiLAi-Lab/docs/LAB_ARCHITECTURE.md)
-- [当前状态与暂停范围](MiLAi-Lab/docs/LAB_CURRENT_STATUS.md)
-- [GitHub 合并记录](MiLAi-Lab/docs/GITHUB_MERGE_AND_STRUCTURE_20260929.md)
-- [最近实验总体报告](MiLAi-Lab/docs/MILAI_REPAIR_V10_OVERALL_EXPERIMENT_REPORT_20260929.md)
-
-Lab 开发与架构整理的 #70–#74 已合入 main。代码合并不恢复实验，也不构成 Product 验收。
+- [当前状态](MiLAi-Lab/docs/LAB_CURRENT_STATUS.md)
+- [上一轮真实实验报告](MiLAi-Lab/docs/MILAI_EVIDENCE_DEVELOPMENT_20261013.md)
 
 ## 重组证据
 
