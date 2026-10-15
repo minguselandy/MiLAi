@@ -1188,10 +1188,10 @@ class FunctionalEditMemory(FunctionalMemory):
                 config, [row["evidence_id"] for row in mapping["evidence"].values()],
                 redelivered=delivery.get("replay", False),
             )
-            receipt = self.apply_writer_proposal(
-                config, operation_id, proposal,
-                **({"dependency_receipts": dependency_receipts}
-                   if self.features.cross_record_dependencies else {}))
+            receipt = (self.apply_writer_proposal(
+                config, operation_id, proposal, dependency_receipts=dependency_receipts)
+                if self.features.cross_record_dependencies else
+                self.apply_writer_proposal(config, operation_id, proposal))
             if receipt.get("ok") and (receipt.get("status") == "committed"
                                      or receipt.get("original_status") == "committed"):
                 if self.memory_view_mode != "legacy":
