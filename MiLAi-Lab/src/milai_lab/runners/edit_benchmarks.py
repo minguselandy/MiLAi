@@ -516,6 +516,15 @@ class BenchmarkRun:
             raise ValueError("READER_PROJECTION_INVALID")
         if settings.get("evidence_policy", "legacy") not in {"legacy", "question_pack_v1"}:
             raise ValueError("EVIDENCE_POLICY_INVALID")
+        if settings.get("query_structure_policy") is not None:
+            from milai_lab.methods.query_structure import POLICIES
+
+            if settings["query_structure_policy"] not in POLICIES:
+                raise ValueError("QUERY_STRUCTURE_POLICY_INVALID")
+            if settings.get("evidence_policy") != "question_pack_v1" \
+                    or settings.get("source_access") != "independent_v1" \
+                    or settings.get("dependency_reading"):
+                raise ValueError("QUERY_STRUCTURE_REQUIRES_INDEPENDENT_SOURCE_PACK_READER")
         if settings.get("reader_target", "legacy") not in {"legacy", "original_question_v1"}:
             raise ValueError("READER_TARGET_INVALID")
         if settings.get("source_access", "semantic_only") not in {
@@ -1861,13 +1870,41 @@ class BenchmarkRun:
             )
             if selections is not None and materials:
                 materials[0]["pre_read_calls"] = 1
+            if self.settings.get("query_structure_policy"):
+                from milai_lab.methods.query_structure import (
+                    QueryStructurePolicy,
+                    build_query_structure,
+                )
+
+                structure_key = f"query-structure/{snapshot_id}"
+
+                def interpret(messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
+                    if self.client.config.max_calls < 2:
+                        raise ReadDeliveryIncomplete("read_call_limit")
+                    return parse_object(self.call(structure_key, messages, structured=True,
+                        response_format={"type": "json_schema", "json_schema": {
+                            "name": "query_structure", "schema": schema}},
+                        enable_thinking=self.stage_thinking("reader")))
+
+                structure, report = build_query_structure(service, question, date,
+                    [span["source_ref"] for material in native["source_materials"]
+                     for span in material["source_ranges"]],
+                    policy=cast(QueryStructurePolicy, self.settings["query_structure_policy"]),
+                    call=interpret)
+                if structure is not None:
+                    materials.append(structure)
+                if materials:
+                    materials[0]["pre_read_calls"] = report["model_calls"]
+                native["query_structure"] = report
+                write_json(self.root / "http" / structure_key / "interpretation.json",
+                           {"report": report, "material": structure})
             native["material_assembly"] = {
                 "policy": "question_pack_v1", "evidence_variant": variant,
                 "independent_original_candidates": len(native["source_materials"]),
                 "linked_original_candidates": 0,
                 "semantic_candidates": len(native.get("records", [])),
                 "semantic_materials": sum(item["kind"] == "semantic_view" for item in materials),
-                "material_origins": ["semantic_view" if item["kind"] == "semantic_view"
+                "material_origins": [item["kind"] if item["kind"] != "original_source"
                                      else "independent_original" for item in materials],
             }
             return materials

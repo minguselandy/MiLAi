@@ -234,7 +234,7 @@ jobs:
             --ignore=tests/unit/test_edit_external.py \
             --ignore=tests/unit/test_edit_mechanism.py \
             --ignore=tests/memory/test_edit_memory_v2.py \
-            --ignore=tests/unit/test_edit_v2_runner.py --ignore=tests/unit/test_dependency_memory.py --ignore=tests/unit/test_dependency_groups.py --ignore=tests/unit/test_semantic_delta.py --ignore=tests/unit/test_cross_record_dependencies.py --ignore=tests/unit/test_evidence_reading.py --ignore=tests/unit/test_method_architecture_diagnostic.py \
+            --ignore=tests/unit/test_edit_v2_runner.py --ignore=tests/unit/test_dependency_memory.py --ignore=tests/unit/test_dependency_groups.py --ignore=tests/unit/test_semantic_delta.py --ignore=tests/unit/test_query_structure.py --ignore=tests/unit/test_cross_record_dependencies.py --ignore=tests/unit/test_evidence_reading.py --ignore=tests/unit/test_method_architecture_diagnostic.py \
             --ignore=tests/unit/test_edit_development_history.py \
             --ignore=tests/unit/test_edit_views.py --ignore=tests/unit/test_baseline_alignment.py --ignore=tests/unit/test_baseline_alignment_backends.py --ignore=tests/unit/test_baseline_alignment_arm_entry.py \
             --ignore=tests/memory/test_edit_patch_text.py \
@@ -310,7 +310,7 @@ jobs:
             uv run --no-sync pytest -q tests/unit/test_baseline_alignment.py tests/unit/test_baseline_alignment_backends.py tests/unit/test_baseline_alignment_arm_entry.py
           )
           uv run --no-sync pytest -q tests/unit/test_edit_mechanism.py
-          uv run --no-sync pytest -q tests/memory/test_edit_memory_v2.py tests/unit/test_edit_v2_runner.py tests/unit/test_edit_development_history.py tests/unit/test_edit_views.py tests/unit/test_dependency_memory.py tests/unit/test_dependency_groups.py tests/unit/test_semantic_delta.py tests/unit/test_cross_record_dependencies.py tests/unit/test_evidence_reading.py tests/unit/test_method_architecture_diagnostic.py
+          uv run --no-sync pytest -q tests/memory/test_edit_memory_v2.py tests/unit/test_edit_v2_runner.py tests/unit/test_edit_development_history.py tests/unit/test_edit_views.py tests/unit/test_dependency_memory.py tests/unit/test_dependency_groups.py tests/unit/test_semantic_delta.py tests/unit/test_query_structure.py tests/unit/test_cross_record_dependencies.py tests/unit/test_evidence_reading.py tests/unit/test_method_architecture_diagnostic.py
           uv run --no-sync pytest -q tests/memory/test_edit_patch_text.py tests/unit/test_evidence_joint_selection.py tests/unit/test_evidence_ranker_provider.py tests/unit/test_evidence_ranking_integration.py tests/unit/test_evidence_replay.py tests/unit/test_sqlite_store_order_index.py
           uv run --no-sync python tools/prepare_sealed_regression.py --destination "$RUNNER_TEMP/milai-sealed-r52"
           (

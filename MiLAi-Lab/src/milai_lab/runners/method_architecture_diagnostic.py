@@ -68,6 +68,7 @@ def diagnostic_costs(root: Path) -> dict[str, Any]:
     for path in responses:
         parts = path.relative_to(root / "http").parts
         stage = ("embedding" if parts[0] == "embedding" else
+                 "query_structure" if parts[0] == "query-structure" else
                  "policy_selection" if parts[0] == "maintenance-policy" else
                  "impact" if parts[0] == "maintenance" and "impact" in parts else
                  "maintenance" if parts[0] == "maintenance" else

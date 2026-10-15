@@ -369,6 +369,11 @@ def open_evidence_packs(
     result = []
     for original in materials:
         item = copy.deepcopy(original)
+        if item["kind"] == "query_structure":
+            from milai_lab.methods.query_structure import open_structure
+
+            result.append(open_structure(service, item))
+            continue
         if item["kind"] == "original_source":
             if expand_context:
                 item["source_ranges"] = item.get("context_source_ranges", item["source_ranges"])
@@ -496,6 +501,11 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
         result["visibility"] = item["visibility"]
     if item.get("body_delivered") is False:
         return result
+    if item["kind"] == "query_structure":
+        return {**result, "interpretation": copy.deepcopy(item["structure"]),
+                "source_bindings": copy.deepcopy(item["source_bindings"]),
+                "query_time": item["query_time"], "semantics": item["semantics"],
+                "revision": item["revision"]}
     if item["kind"] == "external_memory":
         return {**result, "content": item["text"], "native_timestamp": item.get("date"),
                 "provenance": item["provenance"], "source_mapping": item["source_mapping"]}
@@ -636,6 +646,12 @@ def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[
         result.append(projected)
         if shared:
             originals[ranges] = projected
+    for projected in result:
+        if projected["kind"] == "query_structure" and "source_bindings" in projected:
+            projected["source_bindings"] = {
+                alias: sources.get((binding["source_ref"], binding["source_revision"]),
+                                   "support_not_opened")
+                for alias, binding in projected["source_bindings"].items()}
     return result
 
 
