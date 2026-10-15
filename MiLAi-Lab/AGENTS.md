@@ -1,29 +1,46 @@
-# Current innovation-v4 handoff (2026-10-16, all launched jobs closed)
+# Current innovation-v4 handoff (2026-10-16)
 
 Full user goal ACTIVE/incomplete; no pause/block/complete. Branch feat/lab-innovation-v4-20261015.
-Current report: docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md. This turn changed code and completed real
-model experiments, parameter updates and source-bound application diagnostics; not a status-only turn.
-A pair and B five-condition runs CLOSED. B onehistory16QA each source/rebuild/version/incremental/full
-13/15/14/14/12, prediction35726/151302/71951/61244/155324; total203gen683988+21emb868 exactledger.
-B full80-answer/source/interpretation audit pending; do not infer cache benefit from raw-assisted QA.
-C externalv1 CLOSED4:standard2/value1, prediction197030/285555. Whole31gen489311,newunknown0.
-C externalv2 CLOSED4 freshcases:standard2/value0, prediction155253/128225. Whole28gen291601,0emb,
-newunknown0. All16C answers/selectiontraces read, full source audit pending. Native catalog plus exact
-source-interval dedup reduced work but did not fix early stopping. Stop expanding prompt-only value;
-next collect actual outcome/complementary-evidence supervision, not more per-question prohibitions.
-CPU LoRA f6cef996 completed3objectives, each8steps/270336parameters, matched sequences/order/seed.
-25645input+948targettokens perarm, about167/150/149s, peak16.3GiB; noGPU/service/HTTP changes.
-Wrapped4casesx4 models allinvalid pseudoJSON, native named alluncommitted(11length). No learning benefit.
-Cases now exposed. Need native editing separate from auxiliary consequences and balanced larger data.
-semantic_delta_v2 uses array positions and program labels. Base indexed4generated from same actualsource
-banks; offline fix restores original publicturn on reopened clone and omits empty creates/changes.
-3realcommits, but2compound fulltext units/1rule-only omission; fourth malformed. Original outputs and
-failures untouched, zero newmodelcalls for application repair. 18relatedtests+6source mypy/Ruff/matrix pass.
-All launched model/CPU jobs terminal; old handles58505/99764/1159/58408/80944/25984/79474 are closed.
-Inspect actual state before new dispatch. No SHA/subagents/newledger/newservice/PRmerge. Full D0–D6
-requirements remain: same-before and matched-format/budget controls, joint state/source audit, B scope/
-scale/reuse, learned C/range aggregation, native matched learning/generalization, independent longhistory/
-full external/secondmodel/Host and final requirement audit. Historical blocks below are not live state.
+Report: docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md. Do not infer current processes from historical blocks.
+New same-before3arms CLOSED f1d0595d: one actual seed cost5282 once, plain/full/delta maintenance9779/
+18448/7531, Reader11734/12090/12516; full length/no update, QA3/2/3; total14gen77380+emb567 exactledger.
+Short condition CLOSED767c44f7, exec21172 consumed exit0, driver4069550/child4069582 terminal.
+Reused exact seed/arrival; maintenance2048/thinkingFalse, sameReader8192/thinkingTrue, combined condition.
+Plain/full/delta total17688/21789/20377;13gen59854+18emb627 exactledger,newunknown0.
+All9coreQAcorrect but all3jointstatefail: plain invents next-day expiry; full partial update with wrong
+support plus unavailable generated-node rejection; delta duplicates/mutates non-targets and mislabels
+reported facts inferred/observed, episode indexing rejects. Do not equate engineered_ok with semantic success.
+B fiveconditions CLOSED1history16QA each13/15/14/14/12;203gen683988+21emb868 exactledger.
+All80answers,6cachedviews,3fullstates and16rebuild attempts(14views,2length) reviewed. Rawprefix complete
+in all80, so no cache benefit attribution. Rebuild any=[] errors,wrong night premise,source/date faults;
+incremental staysday-only. Full perclause source audit pending. Source-review manifest hasallfindings.
+C external4+4 CLOSED: standard2/value1 thenstandard2/value0. Prompt-onlyvalue hasearly-stop failure.
+Actual subset outcomes now CLOSED2queries: dateempty/singletonsfalse,pair/equivalent/noisetrue7days;
+PBoldfalse27:12,new/both/equivalenttrue25:50;noiseJudgeTRUE butauthor disagreement,trainlabelnull.
+12gen61390 +12gen58846,0emb,newunknown0,ledgerexact.13transitions2queries notindependent13samples.
+OriginalzeroHTTP namespace failure preserved;actualalignednamespace fix9d48aa8a. No trainedCmodel yet.
+Native separate SFTv2 c9aedeb7 CLOSED:15refs/6chains,3objectives15steps270336params;41627input1764target
+perarm,320/289/286s,peak21.1GiB CPU. Main+aux sequences/projectedpositionsmatched;onlylossweightsdiffer.
+Native4exposedcases eval9d48aa8a CLOSED:base4commits butsemanticomissions;imitation4malformed,
+quality4empty,relation3empty1malformed. No learningbenefit. Originalallfailures preserved.
+CPU likelihooddiagnostic12a5b5de CLOSED, exec27958 consumed exit0, worker4089668 absent atclosure.
+4modelsx15traininginputs:mean required-edit referenceNLL1.067/.669/.661/.665, firstdivergence reference
+aboveempty13/4/5/6 of13; formation6/0/0/0 of6. Training-input actionbranchregression, not justunseenfailure.
+Each81902input/1450responsepositions,212/210/209/204s CPU,0updates/HTTP/bankwrites. Summarytracked.
+Matchedformat first2c222b2e FAILED HTTP400 duebare schemawire,0outputs/commits;ledger1request,
+30525chargedreservation,newunknown1 RETAINED. Historicalunknownfloor nowgeneration10/embedding1.
+Newrootformat-v2 a97f7994 CLOSED, exec21223 consumedexit0, driver4131855/child4131989 terminal.
+Same2demos andsame4actualsourcebanks (allactualpayloads anddemoinputs equalitychecked), commonsemantic
+prompt plusformatinstructions,2048output/temp0/thinkingFalse. Operations4commits12832gen vsdelta4/8377.
+8responses21209known0emb/newunknown0 exactledger; firstfailureadditional,notzero/ignored.
+Allsourcecorefactsformed butbothORunknownpremisewrong;delta copieddemotrainingword/addsemptyroute.
+Supportsinterfacecompressiononly. No graph/semantic/learning/lifecycle advantage. All8statesreviewed.
+Shortbudget13tests/mypy/Ruff/DAGpassed. NewtoolsRuff+actualruns;toolsboundary/280sourcematrixpassed.
+Figure common-before SVG generated fromsame2summaries and visuallyinspected. No livejobsatclosure.
+NoSHA/subagents/newledger/newservice/PRmerge. FullD0–D6 remain:more independent controlledformat/update cases and lifecycle
+formation/learning/generalization,scope/scale/reuse1/4/16,rangeaggregation/learnedC,
+complete declaredexternal/longhistory/secondmodel/blindsubset/pairedstats,usefulsame-methodHost,finalaudit.
+Historical blocks below are not live state.
 
 # Current publication checkpoint requested; corrected factorial LIVE
 

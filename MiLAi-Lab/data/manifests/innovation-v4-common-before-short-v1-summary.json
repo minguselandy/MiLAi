@@ -1,0 +1,263 @@
+{
+  "status": "CLOSED",
+  "source_version": "767c44f7",
+  "output_root": "artifacts/innovation-v4/common-before-short-v1",
+  "scope": "One exposed author history, same actual seed/arrival as common-before-v1; three methods. Combined maintenance2048/thinkingFalse versus previous8192/thinkingTrue; common Reader8192/thinkingTrue. No isolated ceiling effect, independent formation or stable superiority claim.",
+  "independent_history_count": 1,
+  "shared_seed": {
+    "original_root": "artifacts/innovation-v4/common-before-v1/execution/seed",
+    "new_calls": 0,
+    "original_generation_tokens": 5282,
+    "counted_once_across_conditions": true
+  },
+  "arms": {
+    "plain": {
+      "maintenance_status": "completed",
+      "engineered_ok_original_field": true,
+      "stages": {
+        "reader": {
+          "responses": 3,
+          "input_tokens": 5951,
+          "output_tokens": 8097,
+          "total_tokens": 14048,
+          "length": 0
+        },
+        "maintenance": {
+          "responses": 1,
+          "input_tokens": 3394,
+          "output_tokens": 246,
+          "total_tokens": 3640,
+          "length": 0
+        },
+        "embedding": {
+          "responses": 6,
+          "input_tokens": 210,
+          "output_tokens": 0,
+          "total_tokens": 210,
+          "length": 0
+        }
+      },
+      "generation_tokens": 17688,
+      "wall_seconds": 57.4888051180169,
+      "record_revisions_before": {
+        "453c92bc-1d86-5fcd-b895-99aada833dcf": 1,
+        "edc35389-1ce4-579c-b9e9-1dac2cfc4aef": 1,
+        "83745d4b-1207-5320-8551-74c3e9557734": 1
+      },
+      "record_revisions_after": {
+        "edc35389-1ce4-579c-b9e9-1dac2cfc4aef": 2,
+        "453c92bc-1d86-5fcd-b895-99aada833dcf": 1,
+        "83745d4b-1207-5320-8551-74c3e9557734": 1
+      },
+      "unprocessed": [],
+      "episode_index": {
+        "status": "indexed",
+        "episode_ids": [
+          "[\"halumem:innovation-common-before-lucheng:session:1\",\"turn:0\",\"user\"]"
+        ],
+        "unprocessed": [],
+        "new_independent_support": false
+      },
+      "qa_core_author_review": [
+        {
+          "id": "qualification",
+          "correct": true
+        },
+        {
+          "id": "preserve",
+          "correct": true
+        },
+        {
+          "id": "credential_scope",
+          "correct": true
+        }
+      ]
+    },
+    "candidate": {
+      "maintenance_status": "incomplete",
+      "engineered_ok_original_field": false,
+      "stages": {
+        "reader": {
+          "responses": 3,
+          "input_tokens": 7076,
+          "output_tokens": 6513,
+          "total_tokens": 13589,
+          "length": 0
+        },
+        "impact": {
+          "responses": 1,
+          "input_tokens": 1172,
+          "output_tokens": 33,
+          "total_tokens": 1205,
+          "length": 0
+        },
+        "maintenance": {
+          "responses": 1,
+          "input_tokens": 6590,
+          "output_tokens": 405,
+          "total_tokens": 6995,
+          "length": 0
+        },
+        "embedding": {
+          "responses": 6,
+          "input_tokens": 201,
+          "output_tokens": 0,
+          "total_tokens": 201,
+          "length": 0
+        }
+      },
+      "generation_tokens": 21789,
+      "wall_seconds": 49.98449266515672,
+      "record_revisions_before": {
+        "453c92bc-1d86-5fcd-b895-99aada833dcf": 1,
+        "edc35389-1ce4-579c-b9e9-1dac2cfc4aef": 1,
+        "83745d4b-1207-5320-8551-74c3e9557734": 1
+      },
+      "record_revisions_after": {
+        "edc35389-1ce4-579c-b9e9-1dac2cfc4aef": 2,
+        "453c92bc-1d86-5fcd-b895-99aada833dcf": 1,
+        "83745d4b-1207-5320-8551-74c3e9557734": 1
+      },
+      "unprocessed": [
+        {
+          "batch": 0,
+          "operation_id": "update:batch:0:work:0:proposal:2",
+          "receipt": {
+            "ok": false,
+            "status": "rejected",
+            "effect": "none",
+            "reason": "EDIT_SUPPORT_GENERATED_UNIT_UNAVAILABLE"
+          }
+        }
+      ],
+      "episode_index": null,
+      "qa_core_author_review": [
+        {
+          "id": "qualification",
+          "correct": true
+        },
+        {
+          "id": "preserve",
+          "correct": true
+        },
+        {
+          "id": "credential_scope",
+          "correct": true
+        }
+      ]
+    },
+    "delta": {
+      "maintenance_status": "completed",
+      "engineered_ok_original_field": true,
+      "stages": {
+        "reader": {
+          "responses": 3,
+          "input_tokens": 8938,
+          "output_tokens": 6718,
+          "total_tokens": 15656,
+          "length": 0
+        },
+        "maintenance": {
+          "responses": 1,
+          "input_tokens": 4069,
+          "output_tokens": 652,
+          "total_tokens": 4721,
+          "length": 0
+        },
+        "embedding": {
+          "responses": 6,
+          "input_tokens": 216,
+          "output_tokens": 0,
+          "total_tokens": 216,
+          "length": 0
+        }
+      },
+      "generation_tokens": 20377,
+      "wall_seconds": 51.80074777174741,
+      "record_revisions_before": {
+        "453c92bc-1d86-5fcd-b895-99aada833dcf": 1,
+        "edc35389-1ce4-579c-b9e9-1dac2cfc4aef": 1,
+        "83745d4b-1207-5320-8551-74c3e9557734": 1
+      },
+      "record_revisions_after": {
+        "1c10b02d-15ba-5599-bdb0-133c94d3b135": 1,
+        "edc35389-1ce4-579c-b9e9-1dac2cfc4aef": 2,
+        "453c92bc-1d86-5fcd-b895-99aada833dcf": 2,
+        "83745d4b-1207-5320-8551-74c3e9557734": 2
+      },
+      "unprocessed": [],
+      "episode_index": {
+        "status": "incomplete",
+        "episode_ids": [],
+        "unprocessed": [
+          {
+            "episode_id": "[\"halumem:innovation-common-before-lucheng:session:1\",\"turn:0\",\"user\"]",
+            "reason": "EPISODE_OBSERVED_DESCRIPTION_REQUIRES_TOOL_SOURCE"
+          }
+        ],
+        "new_independent_support": false
+      },
+      "qa_core_author_review": [
+        {
+          "id": "qualification",
+          "correct": true
+        },
+        {
+          "id": "preserve",
+          "correct": true
+        },
+        {
+          "id": "credential_scope",
+          "correct": true
+        }
+      ]
+    }
+  },
+  "ledger_delta": {
+    "generation_requests": 13,
+    "generation": {
+      "known_tokens": 59854,
+      "charged_tokens": 59854,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 627,
+      "charged_tokens": 627,
+      "unknown_usage": 0
+    }
+  },
+  "receipt_ledger_difference": {
+    "generation_tokens": 0,
+    "embedding_tokens": 0,
+    "generation_responses": 0
+  },
+  "state_review": {
+    "plain": {
+      "target": true,
+      "non_target_text": true,
+      "joint_success": false,
+      "reason": "Actual credential update preserves training/reference to unchanged status and unrelated records, but unsupported effective_until2036-11-03 expires the entire compound. Current-day QA does not test this damage."
+    },
+    "candidate": {
+      "target": true,
+      "non_target_text": true,
+      "joint_success": false,
+      "reason": "One credential record actually committed; another relation proposal rejected for unavailable n0. Committed graph incorrectly makes reported personal credentials/training depend on the general admission rule. Preserve partial commit and failure; do not describe as no update."
+    },
+    "delta": {
+      "target": true,
+      "non_target_text": true,
+      "joint_success": false,
+      "reason": "Creates duplicate credential status and rewrites allthree old records, including unchanged rule and label location. Training becomes inferred and user-reported label location becomes observed; episode indexing rejects observed description without tool Source. No support group formed. Original engineered_ok does not include the episode-index failure."
+    }
+  },
+  "qa_fidelity_notes": {
+    "plain": "Credential answer conflates qualification paper voucher with independent label paper, despite core validity answers being correct.",
+    "candidate": "Qualification answer adds unestablished physical possession language.",
+    "delta": "Preserve answer reproduces inferred/observed labels from the newly misclassified state."
+  },
+  "decision": "All9 core answers correct with common raw access, while allthree joint state outcomes have faults. Short delta total20377 vsplain17688 is higher, reversing previous local cost order. Neither budget condition supports stable semantic superiority; continue formation/representation learning, not repeat until this one history wins.",
+  "official_judge_calls": 0,
+  "independent_blind_review": false,
+  "full_goal_complete": false
+}

@@ -1,0 +1,20 @@
+{
+  "status": "FAILED_HTTP400",
+  "source_version": "2c222b2e",
+  "generation_responses": 0,
+  "applied_outputs": 0,
+  "ledger_delta": {
+    "requests": 1,
+    "generation": {
+      "known_tokens": 0,
+      "charged_tokens": 30525,
+      "unknown_usage": 1
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "reason": "Diagnostic passed a bare JSON schema as response_format; existing API requires a json_schema wire envelope. Original request/failure and conservative unknown reservation retained. New root uses corrected request; no reset or successful semantic result claimed."
+}
