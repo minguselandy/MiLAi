@@ -141,3 +141,13 @@ def test_indexed_append_binds_generated_units_without_model_names_or_labels():
     payload["changes"]["r1"]["rules"][0]["all"] = [1]
     with pytest.raises(FunctionalRejection, match="DELTA_RULE_INDEX_UNAVAILABLE"):
         compile_delta(payload, mapping, indexed=True)
+
+
+def test_indexed_output_omits_unneeded_empty_containers():
+    mapping = {"allow_create": True, "evidence": {"e1": {}}, "records": {}, "units": {}}
+    assert compile_delta({}, mapping, indexed=True) == []
+    proposals = compile_delta({"creates": [{"nodes": [
+        {"text": "The paper pass remains valid.", "basis": "e1", "kind": "reported"}]}]},
+        mapping, indexed=True)
+    assert proposals[0]["matter"] == "Source claims"
+    assert proposals[0]["clauses"][0]["text"] == "The paper pass remains valid."

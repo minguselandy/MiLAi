@@ -132,6 +132,9 @@ def main() -> None:
                     "before": service.records(),
                     "receipts": [],
                 }
+                service.bind_public_turn("evaluation", case_id,
+                    service.event_id("evaluation", case_id, "user"),
+                    config_version="learning-eval-v1", phase="resume")
                 try:
                     if row["finish_reason"] != "stop":
                         raise ValueError("Provider output incomplete: " + row["finish_reason"])

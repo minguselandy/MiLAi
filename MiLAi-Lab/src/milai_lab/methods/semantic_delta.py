@@ -102,7 +102,7 @@ def delta_schema(
             "rules": rules()}, ["nodes"] if indexed else ["matter", "nodes"]),
             **({"maxItems": 0} if not allow_create or not evidence else {})},
         "changes": _object(changes, []),
-    }, ["creates", "changes"])
+    }, [] if indexed else ["creates", "changes"])
 
 
 def delta_messages(
@@ -124,6 +124,8 @@ def compile_delta(
     """Normalize once; the existing proposal decoder and commit bind actual effects."""
     Draft202012Validator(delta_schema(
         mapping, allow_create=mapping["allow_create"], indexed=indexed)).validate(envelope)
+    if indexed:
+        envelope = {"creates": envelope.get("creates", []), "changes": envelope.get("changes", {})}
     def claim(node: dict[str, Any]) -> dict[str, Any]:
         return {"text": node["text"], "evidence": list(dict.fromkeys(
             [node["basis"], *node.get("also", [])])),
