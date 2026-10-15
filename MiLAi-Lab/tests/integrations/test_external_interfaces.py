@@ -153,22 +153,21 @@ def test_mem0_source_pin_missing_wrong_and_package_identity(
             mem0.mem0_dependency_identity()
 
 
-@pytest.mark.parametrize("failure", ["wrong_commit", "dirty"])
-def test_simplemem_source_pin_guards_preserve_errors(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, failure: str
+@pytest.mark.parametrize("changed", [False, True])
+def test_simplemem_source_identity_reports_actual_revision_and_changes(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, changed: bool
 ) -> None:
+    actual = simplemem.SOURCE_COMMIT if changed else "different-actual-revision"
+    changes = " M simplemem/core.py\n" if changed else ""
     monkeypatch.setattr(
         simplemem.subprocess,
         "check_output",
-        lambda *args, **kwargs: "wrong" if failure == "wrong_commit" else simplemem.SOURCE_COMMIT,
+        lambda command, **kwargs: actual if command[-2:] == ["rev-parse", "HEAD"] else changes,
     )
-    monkeypatch.setattr(
-        simplemem.subprocess, "run", lambda *args, **kwargs: SimpleNamespace(returncode=1)
-    )
-    with pytest.raises(
-        ValueError,
-        match="SIMPLEMEM_SOURCE_NOT_PINNED"
-        if failure == "wrong_commit"
-        else "SIMPLEMEM_SOURCE_CHANGED",
-    ):
-        simplemem.dependency_identity({"source_root": str(tmp_path)})
+    monkeypatch.setattr(simplemem.importlib.metadata, "version", lambda _: "test-installed")
+    identity = simplemem.dependency_identity({"source_root": str(tmp_path),
+                                              "source_commit": simplemem.SOURCE_COMMIT})
+    assert identity["source_commit"] == actual
+    assert identity["declared_source_commit"] == simplemem.SOURCE_COMMIT
+    assert identity["source_changes"] == changes.splitlines()
+    assert "source_sha256" not in identity

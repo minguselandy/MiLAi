@@ -126,7 +126,13 @@
     "tests/unit/test_dependency_groups.py",
     "tests/unit/test_evidence_reading.py",
     "tests/unit/test_method_architecture_diagnostic.py",
-    "tests/unit/test_cross_record_dependencies.py"
+    "tests/unit/test_cross_record_dependencies.py",
+    "tests/memory/test_edit_patch_text.py",
+    "tests/unit/test_evidence_joint_selection.py",
+    "tests/unit/test_evidence_ranker_provider.py",
+    "tests/unit/test_evidence_ranking_integration.py",
+    "tests/unit/test_evidence_replay.py",
+    "tests/unit/test_sqlite_store_order_index.py"
   ],
   "core_pytest_ignores": [
     "tests/unit/test_langmem_foundation.py",
@@ -216,7 +222,13 @@
     "tests/unit/test_evidence_reading.py",
     "tests/unit/test_method_architecture_diagnostic.py",
     "tests/unit/test_simplemem_identity.py",
-    "tests/unit/test_cross_record_dependencies.py"
+    "tests/unit/test_cross_record_dependencies.py",
+    "tests/memory/test_edit_patch_text.py",
+    "tests/unit/test_evidence_joint_selection.py",
+    "tests/unit/test_evidence_ranker_provider.py",
+    "tests/unit/test_evidence_ranking_integration.py",
+    "tests/unit/test_evidence_replay.py",
+    "tests/unit/test_sqlite_store_order_index.py"
   ],
   "external_mypy_paths": [
     "src/milai_lab/runners/mem0_native.py",
