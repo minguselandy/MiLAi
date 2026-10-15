@@ -1,3 +1,34 @@
+# Current E1 feedback: first pair CLOSED, generation-schema repair ready
+
+User continuation authorizes old queue release and new architecture experiments.
+Old PIDs1376738/1376965/1626865 gone; all original confirmation artifacts retained
+and backed up. Never rerun/rescore that old partial confirmation.
+Frozen9bb7d7e1 E1 seed/compare both EXIT0: seed4claims misses tea despite delivered
+source; plain writes future change, candidate correct impact but no_change/r1.
+QA source-assisted correctness does not establish updated state. 13gen51650,
+11embedding615, newunknown0; first answers and all failures retained.
+Actual service XGrammar0.2.3 rejects JSON-valid edit sequences under partial-object
+anyOf but accepts no_change. Complete disjoint edit/group-only variants fix that
+language mismatch; native compiler probe and91affected checks pass. No new HTTP
+in grammar probes. Prepare paired-v2 symmetric repeat from SAME actual seed and
+SAME arrival Sources; seed costs charged only once. Freeze new source before run.
+Current no model process live at this checkpoint; inspect actual process handles
+before scheduling. Full original W0-W5/E0-E5 objective remains ACTIVE/incomplete.
+
+# Current E1 execution: user resumed work, 2026-10-15
+
+The user replied 继续工作 to the concrete request to end the old paused queue,
+retain all artifacts, and release the original ledger for E1. This authorizes
+that queue shutdown and continuing the architecture experiments. Do not ask again.
+Old driver1376965/worker1626865 and wrapper1376738 are now gone; owner lock FREE
+at the release observation. Old requests unchanged S0=109, pack=8, all responses
+present. Backup all1068files/206662404bytes and stop receipts under
+artifacts/method-architecture/old-confirmation-release-20261015. Old pack is
+terminated partial, not completed/scored. No old rerun or rescore.
+Run new E1 from immutable paired-source-v1 (source9bb7d7e1), using original
+continuous ledger. Inspect actual current process before any new dispatch.
+Current goal ACTIVE/incomplete. Earlier blocked snapshots below are historical.
+
 # Active architecture research task, 2026-10-14
 
 User activated docs/MILAI_METHOD_ARCHITECTURE_EXPERIMENT_PLAN_20261014_v3.md.

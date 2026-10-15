@@ -142,3 +142,30 @@ E1 正常 seed 入口已实际尝试准入，进程退出 1：`BenchmarkRun.__in
 身份与依赖详情保存在 `artifacts/method-architecture/simplemem-source-identity.json`，交付索引为 `data/manifests/method-architecture-simplemem-identity-checkpoint.json`。E1 冻结副本仍是 9bb7d7e1；它不调用 SimpleMem，原准入失败日志保持。
 
 当前运行阻碍已连续四个目标回合实际复核：1376965/1626865 仍为原确认进程且均为 T，原 ledger owner lock 被占用。正常 E1 seed 准入已在模型调用和银行创建之前退出。结束旧暂停队列的请求尚无答复；没有发信号、旁路账本或重跑旧确认。后续的范围判断、训练选择、机制筛选与迁移必须以真实 E1 反馈继续，不能把已完成的离线准备当作整项研究完成。
+
+
+## 用户继续执行：旧队列释放与首轮真实 E1（2026-10-15）
+
+用户针对“结束旧暂停进程、保留全部数据并释放锁继续 E1”的具体请求回复“继续工作”。已重新核验 PID 与命令行、确认所有既有请求均有响应，备份旧确认的 1068 文件/206662404 字节，再结束默认 SIGTERM 行为的旧驱动及工作进程。1376738/1376965/1626865 均已退出，owner lock 实测可取得。旧 S0 109 请求、pack 8 请求及原响应均未增加；旧 pack 是保留的部分结果，不是完成或重新评分。释放记录见 `method-architecture-old-queue-release-20261015.json`。
+
+E1 使用冻结 9bb7d7e1 和已声明的相同输入/模型/预算执行，seed 与 compare 均退出 0。种子由 B1 模型实际形成，1 记录/4 命题；茶饮偏好虽在完整输入中，却未进入语义状态。两臂共享这个实际缺口，没有人工修补。
+
+| 项目 | 普通命题 B1 | 依赖候选 M |
+|---|---|---|
+| 初始/最终版本 | r1→r2 | r1→r1 |
+| 目标更新 | 写入何雨未来安排及此前沈宁；同一命题包含两个时段，整体 effective_from 的解释需单独评估 | Impact 正确选择 u1，但 Editor 返回 no_change，未来安排未入状态 |
+| 已存非目标 | 三个非目标命题原样保留 | 三个非目标命题原样保留 |
+| 当前/初存查询 | 核心人物和日期正确 | 核心人物和日期正确，但当前题靠原文补足未写入的变更 |
+| 非目标答案 | 核准事实/茶饮值有依据；额外将报告与捕获时间均说成2026-10-15，来源不忠实 | 核准事实/茶饮值有依据，对是否记录了变更过于保守 |
+| 新增生成 tokens（不含共享 seed） | 16,194 | 31,325 |
+| embedding tokens | 360 | 255 |
+
+共享 seed 1 次/4,131 tokens；全轮实际 13 次生成/51,650 tokens、11 次 embedding/615 tokens、Judge 0。所有实际响应已保存，与原连续账本增量一致；新增 unknown 为 0，原 generation9/embedding1 未知用量基数保留。未重新抽取正确答案或将原文答对等同于状态正确。同一开发者对全部原文与六个完整答案做了对称来源审查，不冒称独立盲审或官方 HaluMem 分数。完整字段和原输出位置见 `method-architecture-e1-v1-summary.json`。
+
+## E1 发现的生成协议缺陷与对称复验
+
+候选的生成 schema 用 partial-object `anyOf` 约束表达“有文本 edits 或有 support_groups”。标准 JSON Schema 接受合法 future append、replace+append，服务内 XGrammar 0.2.3 却拒绝相同完整序列，而接受 no_change；这解释了一个可复现的生成能力缺口，不能只归为模型的范围判断失误。原推理/输出、实际 request schema 和离线检查均保留。该检查仅调用现有服务容器内的 CPU grammar compiler，没有模型 HTTP、额外 verifier 或新服务。
+
+修复将普通 edit 和 group-only edit 展开成两个完整且互斥的对象分支：前者至少一个 edit；后者 edits 为空且至少一个支持组变化。空 edit 仍不合法，单位和支持引用约束保持。修复后的同一示例同时通过 JSON Schema 和相同 XGrammar 编译/字符串匹配。91 项相关检查、Ruff、mypy 通过。
+
+新输出根 `paired-v2` 预声明双方对称复验。复用 v1 真实 seed 与实际 arrival Sources，Source ID/报告时间/捕获时间保持；只复用银行和 seed 结果引用，没有复制 HTTP 输出或再次生成 seed。共享 4,131 tokens 仅全局计费一次。v1 所有结果不变；v2 使用新源码副本，生成温度/容量、问题和 Reader 保持。此修复是工程可生成性修复，不是架构质量或协同已经胜出的证据。

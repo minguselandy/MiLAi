@@ -1,3 +1,9 @@
+# 2026-10-15 架构实验已恢复：首轮真实 E1 闭合
+
+旧暂停队列按用户“继续工作”结束并完整备份，原账本锁已释放。新 E1 从冻结9bb7d7e1完成真实 seed 和两臂诊断：13次生成/51,650 tokens、embedding615、新unknown0。候选选中目标但返回no_change，状态未更新；原文答对不计为状态成功。已定位其 schema 对 XGrammar 的可生成性问题，等义完整分支修复通过91项检查，准备在 paired-v2 对双方复验。完整目标仍 active/incomplete，历史未完成项保留。[执行记录](MILAI_METHOD_ARCHITECTURE_EXECUTION_20261014.md)。
+
+以下阶段快照保留作历史，不代表当前仍受旧队列阻塞。
+
 # 2026-10-14 方法架构 v3：新研究目标执行中
 
 当前工作分支 `feat/lab-method-architecture-20261014`，基于 `8293a4e7`。

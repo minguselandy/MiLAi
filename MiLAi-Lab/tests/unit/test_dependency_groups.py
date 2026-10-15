@@ -189,6 +189,13 @@ def test_group_only_revision_keeps_its_own_source_and_respects_update_region(tmp
         request = method.writer_request(method.prepare([ref], "", selected_records=[before]))
         proposal = {"action": "edit", "target": "r1", "edits": [], "support_groups": [{
             "target_unit": "u3", "alternatives": [["u1", "u2"]], "evidence": ["e1"]}]}
+        # Normal edits and group-only edits are separate complete generation
+        # variants. Their union still excludes an empty disguised edit/no-op.
+        for empty in ({"action": "edit", "target": "r1", "edits": []},
+                      {"action": "edit", "target": "r1", "edits": [], "support_groups": []}):
+            with pytest.raises(ValidationError):
+                Draft202012Validator(request["schema"]).validate({"proposals": [empty]})
+        Draft202012Validator(request["schema"]).validate({"proposals": [proposal]})
         limited = scoped_edit_schema(request["schema"], {"r1": {"affected_units": ["u1"]}})
         with pytest.raises(ValidationError):
             Draft202012Validator(limited).validate({"proposals": [proposal]})

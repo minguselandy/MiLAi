@@ -1,0 +1,38 @@
+{
+  "name": "method-architecture-paired-v2",
+  "plain_config": "configs/milai-method-architecture-plain-v2.json",
+  "candidate_config": "configs/milai-method-architecture-dev-v2.json",
+  "sources": "data/fixtures/milai-method-architecture-dev-v1.jsonl",
+  "owner": "method-dev-loans",
+  "seed_session": 0,
+  "update_session": 1,
+  "queries": [
+    {
+      "id": "current-and-future",
+      "kind": "current_and_time",
+      "question": "2031年4月17日和4月18日，燕桥站分别由谁收件？",
+      "evaluation_basis": "arrived_source_prefix"
+    },
+    {
+      "id": "initial-saved",
+      "kind": "saved_history",
+      "question": "第一次保存的借展登记里，燕桥站和松港站分别记的是哪位收件人？请只说明初存记录。",
+      "evaluation_basis": "actual_model_seed_versions_not_ideal_source_state"
+    },
+    {
+      "id": "non-target",
+      "kind": "non_target_preservation",
+      "question": "寄出借展品、馆内搬运分别需要什么核准？我的茶饮偏好有改变吗？",
+      "evaluation_basis": "arrived_source_prefix"
+    }
+  ],
+  "protocol_notes": [
+    "One actual B1 seed is shared; candidate promotion changes only representation tag and rendering.",
+    "No oracle graph or evaluator answer enters Writer or Reader.",
+    "Candidate begins with no explicit graph; measure relation formation rather than assuming it.",
+    "Independent empty-bank v2 trajectories remain a separate experiment.",
+    "All queries follow the one update. Usage-feedback writes are disabled in both arms.",
+    "Shared formation costs are reported once; this diagnostic is not a complete lifecycle comparison.",
+    "Fresh symmetric repeat after the confirmed generation-schema repair; keep v1 first outputs and costs. Reuse the exact actual B1 seed and arrived Sources without rerunning formation."
+  ]
+}

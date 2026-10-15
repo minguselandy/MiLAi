@@ -636,6 +636,7 @@ def feature_proposal_schema(
         # may stay unqualified; declared/reused conditions share the same path.
         fields["clauses"]["items"] = {"oneOf": [clause, scoped]}
     if features.dependency_groups:
+        group_only_variants = []
         for variant in variants:
             fields = variant["properties"]
             action = fields["action"]["const"]
@@ -657,12 +658,7 @@ def feature_proposal_schema(
                     "target_unit": copy.deepcopy(group_reference),
                     "evidence": copy.deepcopy(group["properties"]["evidence"]),
                 }, ["operation", "target_unit", "evidence"]))
-                fields["edits"]["minItems"] = 0
-                variant["anyOf"] = [
-                    {"properties": {"edits": {"minItems": 1}}},
-                    {"required": ["support_groups"],
-                     "properties": {"support_groups": {"minItems": 1}}},
-                ]
+                fields["edits"]["minItems"] = 1
             fields["support_groups"] = {
                 "type": "array", "items": {"oneOf": choices},
                 "description": (
@@ -676,6 +672,16 @@ def feature_proposal_schema(
                        "Empty alternatives means no remaining support route; operation=remove "
                        "removes the dependency claim when new evidence makes it inapplicable.")),
             }
+            if action == "edit":
+                # Complete, disjoint objects keep the same JSON semantics and
+                # remain generatable by deployed XGrammar. Partial object
+                # constraints under anyOf masked otherwise valid edit branches.
+                group_only = copy.deepcopy(variant)
+                group_only["properties"]["edits"].update(minItems=0, maxItems=0)
+                group_only["properties"]["support_groups"]["minItems"] = 1
+                group_only["required"].append("support_groups")
+                group_only_variants.append(group_only)
+        variants.extend(group_only_variants)
     return (
         schema if variants else {"type": "object", "properties": {}, "additionalProperties": False}
     )
