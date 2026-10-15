@@ -102,6 +102,8 @@ def main() -> None:
     from safetensors.torch import save_file  # type: ignore[import-untyped]
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
+    from innovation_lora import install_lora
+
     torch.set_num_threads(args.threads)
     torch.set_num_interop_threads(1)
     args.output.mkdir(parents=True, exist_ok=True)
@@ -163,23 +165,13 @@ def main() -> None:
         "transformers": transformers.__version__,
         "python": platform.python_version(),
         "source_version": args.source_version,
-        "cpu_model": next(line.split(":", 1)[1].strip()
-                          for line in Path("/proc/cpuinfo").read_text().splitlines()
-                          if line.startswith("model name")),
+        "cpu_model": next(
+            line.split(":", 1)[1].strip()
+            for line in Path("/proc/cpuinfo").read_text().splitlines()
+            if line.startswith("model name")
+        ),
     }
     (args.output / "protocol.json").write_text(json.dumps(protocol, indent=2) + "\n")
-
-    class LoRALinear(torch.nn.Module):
-        def __init__(self, base: Any) -> None:
-            super().__init__()
-            self.base = base
-            self.down = torch.nn.Linear(base.in_features, args.rank, bias=False)
-            self.up = torch.nn.Linear(args.rank, base.out_features, bias=False)
-            torch.nn.init.normal_(self.down.weight, std=0.01)
-            torch.nn.init.zeros_(self.up.weight)
-
-        def forward(self, value: Any) -> Any:
-            return self.base(value) + 2.0 * self.up(self.down(value))
 
     for objective in OBJECTIVES:
         started, cpu_started = time.perf_counter(), time.process_time()
@@ -187,16 +179,8 @@ def main() -> None:
         model = AutoModelForCausalLM.from_pretrained(
             args.model, local_files_only=True, torch_dtype=torch.float32, attn_implementation="sdpa"
         )
-        model.requires_grad_(False)
-        torch.manual_seed(args.seed)
-        for name, module in list(model.named_modules()):
-            if name.endswith(("q_proj", "v_proj")):
-                parent, attribute = name.rsplit(".", 1)
-                setattr(model.get_submodule(parent), attribute, LoRALinear(module))
+        parameters = install_lora(model, rank=args.rank, seed=args.seed)
         model.train()
-        parameters = {
-            name: value for name, value in model.named_parameters() if value.requires_grad
-        }
         initial = {name: value.detach().clone() for name, value in parameters.items()}
         optimizer = torch.optim.AdamW(
             list(parameters.values()), lr=args.learning_rate, weight_decay=0.0

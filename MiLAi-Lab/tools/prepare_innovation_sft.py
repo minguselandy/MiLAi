@@ -8,6 +8,12 @@ from pathlib import Path
 
 from milai_lab.methods.semantic_delta import INSTRUCTIONS, delta_schema
 
+WRAPPED_INSTRUCTIONS = INSTRUCTIONS + (
+    " Wrap the edit envelope under delta and counterfactual outcomes under "
+    "consequences. Counterfactuals ask about the rule; they do not change "
+    "facts. Return {delta: ..., consequences: [...]}; use [] if absent. "
+    "The supplied schema describes delta."
+)
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
@@ -33,11 +39,7 @@ def main() -> None:
                 "messages": [
                     {
                         "role": "system",
-                        "content": INSTRUCTIONS
-                        + " Wrap the edit envelope under delta and counterfactual outcomes under "
-                        "consequences. Counterfactuals ask about the rule; they do not change "
-                        "facts. Return {delta: ..., consequences: [...]}; use [] if absent. "
-                        "The supplied schema describes delta.",
+                        "content": WRAPPED_INSTRUCTIONS,
                     },
                     {
                         "role": "user",
