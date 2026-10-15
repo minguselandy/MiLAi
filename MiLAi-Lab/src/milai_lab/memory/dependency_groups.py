@@ -28,6 +28,8 @@ def retain_support_groups(state: dict[str, Any], previous: dict[str, Any] | None
             unit.get(field) != old[unit["unit_id"]].get(field)
             for field in ("text", "role", "assertion"))}
         for group in state["support_groups"]:
+            if group["target_unit"] in changed:
+                group["changed_target"] = True
             premises = {uid for route in group["alternatives"] for uid in route}
             pending = (set(group.get("changed_premises", [])) | changed) & premises
             if pending:
@@ -84,6 +86,8 @@ def apply_support_groups(
 
 def support_status(group: dict[str, Any], applicability: dict[str, bool | None]) -> str:
     """Three-valued OR-of-AND evaluation; absent applicability stays unknown."""
+    if group.get("changed_target"):
+        return "unknown"
     unknown = False
     for route in group["alternatives"]:
         values = [None if uid in group.get("changed_premises", []) else applicability.get(uid)

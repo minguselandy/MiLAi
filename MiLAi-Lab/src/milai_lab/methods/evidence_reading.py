@@ -456,6 +456,7 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
                 "selected_routes_time_eligibility": group.get("selected_routes_time_eligibility"),
                 "changed_premises": [ids[uid] for uid in group.get("changed_premises", [])
                                      if uid in ids],
+                **({"changed_target": True} if group.get("changed_target") else {}),
                 "semantics": "OR_of_AND; model_interpretation_not_verified_truth",
             } for group in view["support_groups"]]
     return result

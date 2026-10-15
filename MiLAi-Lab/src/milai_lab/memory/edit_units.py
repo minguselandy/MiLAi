@@ -1018,6 +1018,9 @@ def render_state(
             lines.append(
                 "  Premise wording or attribution changed; routes require reinterpretation: "
                 + "; ".join(units[uid]["text"] for uid in group["changed_premises"]))
+        if group.get("changed_target"):
+            lines.append(
+                "  Target wording or attribution changed; routes require reinterpretation.")
     return "\n".join(lines)
 
 
@@ -1502,6 +1505,7 @@ def writer_projection(
                 "support": [support_id(group, {"support_target": by_id[group["target_unit"]]})],
                 **({"changed_premises": [by_id[uid] for uid in group["changed_premises"]]}
                    if group.get("changed_premises") else {}),
+                **({"changed_target": True} if group.get("changed_target") else {}),
             } for group in state["support_groups"]]
         if "scope" in record:
             public_record["scope"] = copy.deepcopy(record["scope"])

@@ -1,3 +1,23 @@
+# Current development: target support invalidation fixed; repeats2 still LIVE
+
+GoalACTIVE/incomplete. Current repeated factorial exec49873, driver767706,
+repeat2worker839224 verifiedLIVE. r1CLOSED0/36answers, r2inprogress. Frozen5734ade2,
+same original actualseed/arrival, no newseed charges. No other model job queued.
+E2 all91answers+5missing fullysource-reviewed. E3 andW3 allfirstoutputs now reviewed
+and ledgerreconciled; summaries tracked. No stable synergy or amortizationwinner.
+NEW code:changed_target on actualconclusion text/role/attribution change preserves
+oldgroup asunknown until source-bound explicitreset; writer/reader projection carries
+marker.112tests20.37s,Ruff,4filemypy,DAG/tools pass; actualsavedexhibit before/after
+pureprojection0HTTP/0bankwrite. No realmodelrun of thischange yet.
+Prior code0a9c2e4d now honors selected history in controlled fixedpool. OriginalE3v1
+and currentv2 useALLhistory bodies, so not a full test of historyselection component.
+Keepfrozen runs unchanged; later fullR corrected comparison needed.
+NEXT finishrepeat2 and reviewboth; then realrevalidation of correctedfullR/targetmarker,
+crossrecord slice,W4matchedlearning,W5Host,strong/externalcontrols,extra model+long
+histories,completeA/Bstory andfinalscientificaudit. Sourceaudit fixes/selectorlength,
+falsefinalmaintenancegate and reconstructioncoverage remain observedbreakpoints.
+NoSHA/subagents/newledger; do not reportfullgoalcomplete. Older snapshots follow.
+
 # Current execution: two post-cleanup factorial repeats; analyses closed
 
 GoalACTIVE/incomplete. E2/E3/W3 originals CLOSED and never rerun/rescored.

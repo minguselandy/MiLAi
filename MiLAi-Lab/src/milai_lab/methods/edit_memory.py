@@ -217,7 +217,9 @@ class EditMemory:
                 "support changed. For create/rewrite, group references index clauses before "
                 "condition expansion. For local edits use old u aliases or n0,n1,... counting "
                 "newly appended units; override creates content then its condition. Omitted "
-                "targets retain their groups. An explicit empty alternatives list records no "
+                "targets retain their groups, but changed target/premise meaning requires "
+                "explicitly resetting a still-valid group before using it as support. "
+                "An explicit empty alternatives list records no "
                 "remaining route; operation=remove removes that dependency claim itself. "
             )
         if self.maintenance_mode == "event_delta_v1":

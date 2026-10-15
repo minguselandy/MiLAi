@@ -247,3 +247,54 @@ def test_group_only_revision_keeps_its_own_source_and_respects_update_region(tmp
         # Existing forgetting hides the linked record, including its history.
         # Group-only support cannot bypass that visibility contract.
         assert not service.read(saved["id"], 1)["ok"]
+
+
+def test_changed_target_does_not_reuse_old_proof_until_explicit_group_reset(tmp_path: Path):
+    with SqliteStore.from_conn_string(str(tmp_path / "target.sqlite")) as store:
+        service = MemoryService(store, ("target", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        method = EditMemory(service, "M", interface_version="I2",
+                            features=EditFeatures(bound_references=True, dependency_groups=True))
+
+        def view(key, text, records):
+            ref = service.capture_user("story", key, text)["source_ref"]
+            service.bind_public_turn("story", key, ref, config_version="target", phase="start")
+            return method.writer_request(method.prepare([ref], "", selected_records=records))
+
+        request = view("seed", "Training and permit are valid, so eligible for rare seeds.", [])
+        receipt = method.apply("story", "seed", method.decode_proposal({
+            "action": "create", "clauses": [
+                {"text": text, "conditions": [], "evidence": ["e1"]} for text in (
+                    "Training complete.", "Permit valid.", "Eligible for rare seeds.")],
+            "support_groups": [{"target_unit": 2, "alternatives": [[0, 1]], "evidence": ["e1"]}],
+        }, request["mapping"]))
+        before = service.read(receipt["id"])
+        request = view("change", "This entry now records a fee waiver instead of eligibility.",
+                       [before])
+        saved = method.apply("story", "change", method.decode_proposal({
+            "action": "edit", "target": "r1", "edits": [{"operation": "replace",
+                "target_unit": "u3", "text": "Fee waived.", "evidence": ["e1"]}],
+        }, request["mapping"]))
+        assert saved["ok"], saved
+        after = service.read(receipt["id"])
+        state = after["value"]["edit_state"]
+        group = state["support_groups"][0]
+        assert group["changed_target"] is True
+        assert not group.get("changed_premises")
+        applicable = {unit["unit_id"]: True for unit in state["units"]}
+        assert support_status(group, applicable) == "unknown"
+        packs = build_evidence_packs(service, "Fee?", "2031-01-01", [], [after])
+        assert project_packs(open_evidence_packs(service, packs), [0])[0][
+            "support_groups"][0]["changed_target"] is True
+        request = view("confirm", "Training AND permit explicitly establish the fee waiver.",
+                       [after])
+        assert request["packet"]["records"][0]["support_groups"][0]["changed_target"] is True
+        saved = method.apply("story", "confirm", method.decode_proposal({
+            "action": "edit", "target": "r1", "edits": [], "support_groups": [{
+                "target_unit": "u3", "alternatives": [["u1", "u2"]], "evidence": ["e1"]}],
+        }, request["mapping"]))
+        assert saved["ok"], saved
+        confirmed = service.read(receipt["id"])["value"]["edit_state"]["support_groups"][0]
+        assert not confirmed.get("changed_target")
+        assert support_status(confirmed, applicable) == "supported"
+        assert service.read(receipt["id"], 1)["value"] == before["value"]
