@@ -47,14 +47,15 @@ def main() -> None:
     args.output.mkdir(parents=True, exist_ok=True)
     write_json(args.output / "protocol.json", protocol)
     bank = args.output / "bank"
-    _copied_bank(source / "banks" / question_id / "memory.sqlite", bank / "memory.sqlite")
+    bank_id = original_settings["alignment_bank_ids"][question_id]
+    _copied_bank(source / "banks" / bank_id / "memory.sqlite", bank / "memory.sqlite")
     execution = BenchmarkRun(settings, args.output)
     official = LongMemEvalOfficial(Path(settings["longmemeval"]["official_checkout"]))
     results = []
     try:
         with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
             service = MemoryService(store,
-                ("edit", source.name, original_settings["arm"], question_id), question_id,
+                ("edit", source.name, "ordinary", bank_id, question_id), question_id,
                 bank / "memory.lock", functional_contract="functional_v1",
                 memory_profile=original_settings["memory_profile"],
                 memory_ranking=original_settings["memory_ranking"])
