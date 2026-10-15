@@ -1,0 +1,246 @@
+{
+  "status": "TRAINING_AND_TWO_INTERFACE_DIAGNOSTICS_CLOSED",
+  "training_protocol": {
+    "model_path": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/models/qwen25-05b",
+    "model_source": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 4,
+    "seed": 20261016,
+    "rank": 4,
+    "alpha": 8,
+    "learning_rate": 0.0005,
+    "epochs": 1,
+    "examples": 8,
+    "example_order": [
+      "innovation-catalog-transition-1-reference",
+      "innovation-shared-transition-3-reference",
+      "innovation-orchid-transition-1-reference",
+      "innovation-harbor-formation-reference-001",
+      "innovation-grant-transition-3-reference",
+      "innovation-harbor-transition-1-reference",
+      "innovation-studio-transition-3-reference",
+      "innovation-harbor-transition-2-reference"
+    ],
+    "objectives": [
+      "imitation",
+      "quality_weighted",
+      "relation_consequence"
+    ],
+    "input_tokens_per_arm": 25645,
+    "target_tokens_per_arm": 948,
+    "max_sequence_tokens": 4475,
+    "auxiliary_examples": 1,
+    "matching": "Identical sequences, order, initialization, parameters and optimizer steps. Only loss weights differ; each loss normalized by its supervised weight sum.",
+    "quality_proxy": "2x weights on text, kind, evidence aliases and applicability values; not a learned correctness reward or a preference optimization claim.",
+    "relation_objective": "Quality weights plus 2x rule spans and nonempty consequence labels.",
+    "scope": "Eight exposed author references; pipeline pilot, not a generalization result.",
+    "reference_authoring_cost": "Not independently metered; not zero.",
+    "torch": "2.7.0+cu126",
+    "transformers": "4.52.3",
+    "python": "3.10.12",
+    "source_version": "f6cef996",
+    "cpu_model": "Intel Xeon Processor (Skylake, IBRS)"
+  },
+  "training": {
+    "imitation": {
+      "status": "COMPLETED",
+      "objective": "imitation",
+      "optimizer_steps": 8,
+      "trainable_parameters": 270336,
+      "parameter_l1_change": 465.67646062374115,
+      "wall_seconds": 167.03320844843984,
+      "cpu_seconds": 615.700890514,
+      "process_peak_rss_mib": 16659.18359375,
+      "model_http_requests": 0,
+      "semantic_bank_writes": 0,
+      "evaluation": "not yet run"
+    },
+    "quality_weighted": {
+      "status": "COMPLETED",
+      "objective": "quality_weighted",
+      "optimizer_steps": 8,
+      "trainable_parameters": 270336,
+      "parameter_l1_change": 432.2113797068596,
+      "wall_seconds": 150.35693972092122,
+      "cpu_seconds": 564.863295923,
+      "process_peak_rss_mib": 16659.18359375,
+      "model_http_requests": 0,
+      "semantic_bank_writes": 0,
+      "evaluation": "not yet run"
+    },
+    "relation_consequence": {
+      "status": "COMPLETED",
+      "objective": "relation_consequence",
+      "optimizer_steps": 8,
+      "trainable_parameters": 270336,
+      "parameter_l1_change": 429.44678807258606,
+      "wall_seconds": 148.79715051595122,
+      "cpu_seconds": 558.6637393459998,
+      "process_peak_rss_mib": 16659.18359375,
+      "model_http_requests": 0,
+      "semantic_bank_writes": 0,
+      "evaluation": "not yet run"
+    }
+  },
+  "evaluations": {
+    "evaluation": {
+      "application_status": {
+        "base": {
+          "invalid_or_rejected": 4
+        },
+        "imitation": {
+          "invalid_or_rejected": 4
+        },
+        "quality_weighted": {
+          "invalid_or_rejected": 4
+        },
+        "relation_consequence": {
+          "invalid_or_rejected": 4
+        }
+      },
+      "actual_after_records": 0,
+      "costs": {
+        "relation_consequence": {
+          "status": "COMPLETED",
+          "objective": "relation_consequence",
+          "device": "cpu",
+          "generation_batches": 1,
+          "model_http_requests": 0,
+          "padded_input_tokens": 4784,
+          "logical_prompt_tokens": 4564,
+          "completion_tokens_including_eos": 36,
+          "wall_seconds": 14.30756050068885,
+          "cpu_seconds": 54.66045204300002,
+          "process_peak_rss_mib": 3622.4921875,
+          "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+        },
+        "quality_weighted": {
+          "status": "COMPLETED",
+          "objective": "quality_weighted",
+          "device": "cpu",
+          "generation_batches": 1,
+          "model_http_requests": 0,
+          "padded_input_tokens": 4784,
+          "logical_prompt_tokens": 4564,
+          "completion_tokens_including_eos": 36,
+          "wall_seconds": 14.905758930370212,
+          "cpu_seconds": 56.32423645300001,
+          "process_peak_rss_mib": 3584.63671875,
+          "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+        },
+        "imitation": {
+          "status": "COMPLETED",
+          "objective": "imitation",
+          "device": "cpu",
+          "generation_batches": 1,
+          "model_http_requests": 0,
+          "padded_input_tokens": 4784,
+          "logical_prompt_tokens": 4564,
+          "completion_tokens_including_eos": 36,
+          "wall_seconds": 13.447024144232273,
+          "cpu_seconds": 51.590956971999994,
+          "process_peak_rss_mib": 3584.63671875,
+          "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+        },
+        "base": {
+          "status": "COMPLETED",
+          "objective": "base",
+          "device": "cpu",
+          "generation_batches": 1,
+          "model_http_requests": 0,
+          "padded_input_tokens": 4784,
+          "logical_prompt_tokens": 4564,
+          "completion_tokens_including_eos": 36,
+          "wall_seconds": 16.42043544817716,
+          "cpu_seconds": 58.397562548,
+          "process_peak_rss_mib": 3525.22265625,
+          "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+        }
+      }
+    },
+    "native-evaluation": {
+      "application_status": {
+        "base": {
+          "invalid_or_rejected": 4
+        },
+        "imitation": {
+          "invalid_or_rejected": 4
+        },
+        "quality_weighted": {
+          "invalid_or_rejected": 4
+        },
+        "relation_consequence": {
+          "invalid_or_rejected": 4
+        }
+      },
+      "actual_after_records": 0,
+      "costs": {
+        "relation_consequence": {
+          "status": "COMPLETED",
+          "objective": "relation_consequence",
+          "device": "cpu",
+          "generation_batches": 1,
+          "model_http_requests": 0,
+          "padded_input_tokens": 4564,
+          "logical_prompt_tokens": 4344,
+          "completion_tokens_including_eos": 3260,
+          "wall_seconds": 248.05286900233477,
+          "cpu_seconds": 988.821517077,
+          "process_peak_rss_mib": 4093.45703125,
+          "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+        },
+        "quality_weighted": {
+          "status": "COMPLETED",
+          "objective": "quality_weighted",
+          "device": "cpu",
+          "generation_batches": 1,
+          "model_http_requests": 0,
+          "padded_input_tokens": 4564,
+          "logical_prompt_tokens": 4344,
+          "completion_tokens_including_eos": 4096,
+          "wall_seconds": 248.16722635086626,
+          "cpu_seconds": 988.8903116689999,
+          "process_peak_rss_mib": 4077.98046875,
+          "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+        },
+        "imitation": {
+          "status": "COMPLETED",
+          "objective": "imitation",
+          "device": "cpu",
+          "generation_batches": 1,
+          "model_http_requests": 0,
+          "padded_input_tokens": 4564,
+          "logical_prompt_tokens": 4344,
+          "completion_tokens_including_eos": 4096,
+          "wall_seconds": 247.32547040376812,
+          "cpu_seconds": 983.946452943,
+          "process_peak_rss_mib": 4077.98046875,
+          "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+        },
+        "base": {
+          "status": "COMPLETED",
+          "objective": "base",
+          "device": "cpu",
+          "generation_batches": 1,
+          "model_http_requests": 0,
+          "padded_input_tokens": 4564,
+          "logical_prompt_tokens": 4344,
+          "completion_tokens_including_eos": 788,
+          "wall_seconds": 72.63253643363714,
+          "cpu_seconds": 281.231146523,
+          "process_peak_rss_mib": 3575.83984375,
+          "scope": "Four predeclared author formation/composition cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+        }
+      }
+    }
+  },
+  "findings": [
+    "All three objectives completed8 optimizer updates over the same8 references and270336 trainable parameters.",
+    "Wrapped runtime produced the same invalid pseudo-JSON in all16 outputs; no semantic commits.",
+    "Native named runtime produced factual content but failed mechanical schema requirements;11/16 outputs reached the unchanged1024 token ceiling. No semantic commits.",
+    "Parameter changes do not establish training benefit. One formation example and one auxiliary-labeled reference are inadequate coverage.",
+    "Current semantic_delta_v2 moves labels/identities into the compiler; untrained-base diagnostic is separate and not yet claimed successful."
+  ],
+  "billing_boundary": "Training and local generation are CPU work, not HTTP requests. Their input/output tokens, padded inputs, CPU/wall time and process peak RSS are separate from the original model-service ledger. No token-to-money equivalence or zero authoring cost claimed."
+}
