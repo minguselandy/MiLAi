@@ -47,3 +47,58 @@ def test_missing_consequence_labels_are_not_trained_as_a_true_empty_answer():
     for objective in OBJECTIVES:
         weights = token_weights([(start, start + 2)], spans, objective)
         assert weights == [0.0]
+
+
+def test_indexed_preparation_separates_auxiliary_labels_from_native_edit_request(
+    tmp_path, monkeypatch
+):
+    from prepare_innovation_sft import main
+
+    path, output = tmp_path / "references.jsonl", tmp_path / "prepared.jsonl"
+    row = {
+        "example_id": "source-rule",
+        "input": {
+            "delivery": {
+                "evidence": [{"id": "e1", "text": "Training and either card or pass qualify."}]
+            }
+        },
+        "mapping": {"allow_create": True, "evidence": {"e1": {}}, "records": {}, "units": {}},
+        "delta_target": {
+            "creates": [
+                {
+                    "matter": "Qualification",
+                    "nodes": [
+                        {
+                            "id": "n7",
+                            "text": "Training is complete.",
+                            "basis": "e1",
+                            "kind": "reported",
+                        },
+                        {"id": "n9", "text": "Qualified.", "basis": "e1", "kind": "inferred"},
+                    ],
+                    "rules": [{"target": "n9", "all": ["n7"], "any": [[]], "basis": "e1"}],
+                }
+            ],
+            "changes": {},
+        },
+        "consequence_targets": [{"training": None, "eligibility": "unknown"}],
+        "provenance": {"owner": "source-rule"},
+        "review": {"type": "author"},
+    }
+    path.write_text(json.dumps(row) + "\n")
+    monkeypatch.setattr(
+        sys, "argv", ["prepare", str(path), str(output), "--format", "indexed_separate"]
+    )
+    main()
+    example = json.loads(output.read_text())
+    payload = json.loads(example["messages"][1]["content"])
+    assert "counterfactuals" not in payload and "delta" not in example["target"]
+    assert "consequences" not in example["target"]
+    create = example["target"]["creates"][0]
+    assert "matter" not in create and all("id" not in node for node in create["nodes"])
+    assert create["rules"][0]["target"] == 1 and create["rules"][0]["all"] == [0]
+    auxiliary = example["auxiliary"]
+    assert json.loads(auxiliary["messages"][1]["content"])["counterfactuals"] == [
+        {"training": None}
+    ]
+    assert auxiliary["target"] == {"consequences": row["consequence_targets"]}

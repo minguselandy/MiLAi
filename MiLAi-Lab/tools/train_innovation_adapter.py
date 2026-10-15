@@ -109,8 +109,8 @@ def main() -> None:
     args.output.mkdir(parents=True, exist_ok=True)
     rows = [json.loads(line) for line in args.data.read_text().splitlines() if line.strip()]
     tokenizer = AutoTokenizer.from_pretrained(args.model, local_files_only=True)
-    examples = []
-    for row in rows:
+
+    def encode(row: dict[str, Any], *, auxiliary: bool = False) -> dict[str, Any]:
         prompt = tokenizer.apply_chat_template(
             row["messages"], tokenize=False, add_generation_prompt=True
         )
@@ -124,15 +124,31 @@ def main() -> None:
             + [1.0]
             for objective in OBJECTIVES
         }
-        examples.append(
-            {
-                "id": row["example_id"],
-                "ids": ids,
-                "weights": weights,
-                "prompt_tokens": len(prompt_ids),
-                "target_tokens": len(encoded["input_ids"]),
+        if auxiliary:
+            weights = {
+                objective: [0.0] * len(prompt_ids)
+                + [1.0 if objective == "relation_consequence" else 0.0]
+                * (len(encoded["input_ids"]) + 1)
+                for objective in OBJECTIVES
             }
-        )
+        return {
+            "ids": ids,
+            "weights": weights,
+            "auxiliary": auxiliary,
+            "prompt_tokens": len(prompt_ids),
+            "target_tokens": len(encoded["input_ids"]),
+        }
+
+    examples = [
+        {
+            "id": row["example_id"],
+            "tasks": [
+                encode(row),
+                *([encode(row["auxiliary"], auxiliary=True)] if "auxiliary" in row else []),
+            ],
+        }
+        for row in rows
+    ]
     order = list(range(len(examples))) * args.epochs
     permutation = torch.randperm(len(order), generator=torch.Generator().manual_seed(args.seed))
     order = [order[index] for index in permutation.tolist()]
@@ -150,16 +166,24 @@ def main() -> None:
         "examples": len(examples),
         "example_order": [examples[i]["id"] for i in order],
         "objectives": list(OBJECTIVES),
-        "input_tokens_per_arm": sum(examples[i]["prompt_tokens"] for i in order),
-        "target_tokens_per_arm": sum(examples[i]["target_tokens"] for i in order),
-        "max_sequence_tokens": max(len(x["ids"]) for x in examples),
-        "auxiliary_examples": sum(bool(row["target"]["consequences"]) for row in rows),
+        "input_tokens_per_arm": sum(
+            task["prompt_tokens"] for i in order for task in examples[i]["tasks"]
+        ),
+        "target_tokens_per_arm": sum(
+            task["target_tokens"] for i in order for task in examples[i]["tasks"]
+        ),
+        "max_sequence_tokens": max(len(task["ids"]) for item in examples for task in item["tasks"]),
+        "auxiliary_examples": sum(
+            "auxiliary" in row or bool(row["target"].get("consequences")) for row in rows
+        ),
         "matching": "Identical sequences, order, initialization, parameters and optimizer steps. "
-        "Only loss weights differ; each loss normalized by its supervised weight sum.",
+        "Every response position is projected in every arm, including zero-weight auxiliary "
+        "tokens. Only loss weights differ; each update normalized by its supervised weight sum.",
         "quality_proxy": "2x weights on text, kind, evidence aliases and applicability values; "
         "not a learned correctness reward or a preference optimization claim.",
         "relation_objective": "Quality weights plus 2x rule spans and nonempty consequence labels.",
-        "scope": "Eight exposed author references; pipeline pilot, not a generalization result.",
+        "scope": "Exposed author references; pipeline pilot, not a generalization result.",
+        "data_formats": sorted({row.get("format", "wrapped") for row in rows}),
         "reference_authoring_cost": "Not independently metered; not zero.",
         "torch": torch.__version__,
         "transformers": transformers.__version__,
@@ -190,28 +214,35 @@ def main() -> None:
         steps = []
         for step, index in enumerate(order):
             example = examples[index]
-            ids = torch.tensor([example["ids"]], dtype=torch.long)
-            weight = torch.tensor(example["weights"][objective][1:], dtype=torch.float32)
-            selected = weight > 0
+            normalization = sum(sum(task["weights"][objective]) for task in example["tasks"])
             optimizer.zero_grad(set_to_none=True)
-            hidden = model.model(input_ids=ids, use_cache=False).last_hidden_state[0, :-1]
-            # Project only supervised positions through the large vocabulary head;
-            # the decoder still processes the identical complete sequence in all arms.
-            logits = model.lm_head(hidden[selected])
-            losses = torch.nn.functional.cross_entropy(
-                logits, ids[0, 1:][selected], reduction="none"
-            )
-            loss = (losses * weight[selected]).sum() / weight.sum()
-            loss.backward()
+            loss_value, supervised, projected = 0.0, 0, 0
+            for task in example["tasks"]:
+                ids = torch.tensor([task["ids"]], dtype=torch.long)
+                weight = torch.tensor(task["weights"][objective][1:], dtype=torch.float32)
+                response_positions = torch.arange(len(task["ids"]) - 1) >= task["prompt_tokens"] - 1
+                hidden = model.model(input_ids=ids, use_cache=False).last_hidden_state[0, :-1]
+                logits = model.lm_head(hidden[response_positions])
+                losses = torch.nn.functional.cross_entropy(
+                    logits, ids[0, 1:][response_positions], reduction="none"
+                )
+                loss = (losses * weight[response_positions]).sum() / normalization
+                loss.backward()
+                loss_value += float(loss.detach())
+                supervised += int((weight > 0).sum())
+                projected += int(response_positions.sum())
+                del hidden, logits, losses, loss
             gradient_norm = torch.nn.utils.clip_grad_norm_(list(parameters.values()), 1.0)
             optimizer.step()
             receipt = {
                 "step": step + 1,
                 "example_id": example["id"],
-                "input_tokens": example["prompt_tokens"],
-                "target_tokens": example["target_tokens"],
-                "supervised_tokens": int(selected.sum()),
-                "loss": float(loss.detach()),
+                "input_tokens": sum(task["prompt_tokens"] for task in example["tasks"]),
+                "target_tokens": sum(task["target_tokens"] for task in example["tasks"]),
+                "tasks": len(example["tasks"]),
+                "projected_response_tokens": projected,
+                "supervised_tokens": supervised,
+                "loss": loss_value,
                 "gradient_norm_before_clip": float(gradient_norm),
                 "elapsed_seconds": time.perf_counter() - started,
                 "cpu_seconds": time.process_time() - cpu_started,
@@ -222,7 +253,6 @@ def main() -> None:
                 + "\n"
             )
             print(json.dumps({"objective": objective, **receipt}), flush=True)
-            del hidden, logits, losses, loss
         saved = {name: parameter.detach().contiguous() for name, parameter in parameters.items()}
         save_file(saved, str(folder / "adapter.safetensors"))
         result = {
