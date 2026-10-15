@@ -7340,3 +7340,32 @@ def test_shared_dependency_host_reads_after_commit_without_duplicate_search(
     assert len(result['records']) == 1
     assert len(result['records'][0]['value']['edit_state']['support_groups']) == 1
     assert result['records'][0]['value']['revision'] == 1
+
+
+def test_new_host_message_changes_policy_version_without_resetting_old_admission(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, memory_method='milai_edit_m_v1',
+                    edit_interface_version='I2', memory_view_mode='staged')
+    wires = scripted(monkeypatch, lambda *_: {'role': 'assistant', 'content': 'Read-only answer.'},
+                     native=True)
+    args = dict(bank='versioned', owner='alice', session='s')
+    first = functional.message(root, **args, message_id='one', content='Only read the first note.')
+    assert first['status'] == 'COMPLETED', first.get('error')
+    path = next(root.glob('banks/*/message-admission.json'))
+    prior = deepcopy(read_json(path))
+    freeze = read_json(root / 'input-freeze.json')
+    freeze['config_version'] = 'synthetic-policy-v2'
+    freeze['config']['stage_enable_thinking'] = {'reader': False}
+    write_json(root / 'input-freeze.json', freeze)
+    second = functional.message(root, **args, message_id='two', content='Only read the second note.')
+    assert second['status'] == 'COMPLETED', second.get('error')
+    after = read_json(path)
+    assert all(after['messages'][key] == value for key, value in prior['messages'].items())
+    assert len(after['messages']) == len(prior['messages']) + 1
+    calls = len(wires)
+    rejected = functional.message(root, **args, message_id='one',
+                                  content='Only read the first note.', resume=True)
+    assert rejected['status'] != 'COMPLETED'
+    assert 'IDENTITY_CHANGED' in rejected['error']
+    assert len(wires) == calls and read_json(path) == after

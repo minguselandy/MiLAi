@@ -1,3 +1,21 @@
+# Current preparation: Host policy change admission fixed; five strong controls ready
+
+GoalACTIVE/incomplete. No live modeljob now. host recovery-v3 driver1567842/exec68482
+CLOSED0 with FAILED GENERATION_ADMISSION_STATE_INCOMPATIBLE beforeHTTP; ledgerunchanged.
+Newmessage configv2 with sameowner/bank/model/cap was blocked by filewideversionlabel.
+Developmentnow keeps fileinitialversionasprovenance; eachmessage exactversion/source
+binding remains, existingcounts/reservationsunchanged.10admissiontests2.42s +1normal
+Hosttransitionpass; oldmessage改版resume rejectedbeforeHTTP;types/lint/boundariespass.
+NEXT freeze thissource, COPY recovery-v3 bank and --resume itsconfirmedZERO-MODEL
+read-recovery-v3/after-card-expiry request only; sameconfigv2. Then originalindices5-7.
+Originalselectorlengthindex4(notzeroHTTP) neverresume/relabel underchangedconfig.
+Five strong-controlconfigs prepared0HTTP (source/append/plain/conditioned/candidate),
+36events48QAeach, sameE2exposed12histories. Needfreeze/actualrun afterHosthandoff.
+Readusagebugfix255fe5e7 and auditsvalid. SimpleMemruntime already exists at integrations/
+memory/simplemem.py; alignmentMemoryBackend adapterstillmissing, not implementedhere.
+AllpreviousHost/cross/factorialresults preserved; fullscopeW4/external/anothermodel/
+longhistory/fullR/completeA-Bstory/finalaudit stilloutstanding. NoSHA/subagents/newledger.
+
 # Current execution: second Host lane closed at known selector length; next config prepared
 
 GoalACTIVE/incomplete; allknownmodelqueuesCLOSED. Frozen570b9d84 Hostsource-v3,

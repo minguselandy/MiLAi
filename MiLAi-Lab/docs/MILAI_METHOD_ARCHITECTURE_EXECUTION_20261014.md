@@ -440,3 +440,16 @@ Question pack且共享维护负责写入时，主Host不再暴露重复search_me
 570b9d84恢复分支成功完成两记录读取、原index2查询以及index3会员卡失效更新；真实read_memory使用record ID已成功。原index4纯查询停止于依赖选择：原服务返回finish_reason=length、completion8192、content为空。外层通用读取回执记为read_outcome_unknown，但这次HTTP返回和计费都已确认，新增unknown usage不成立；原UNKNOWN结果保持，解释中区分此已知截断。index5-7尚未执行。
 
 新host-v2配置仅将dependency_read阶段enable_thinking=False，其余模型、8192输出上限、3次读取额度和写入/回答阶段保持。将以实际bank副本作单独恢复和剩余消息验证；这不是原样随机重跑，也不替换原first结果或声称无偏消融收益。
+
+
+## 新消息策略版本与既有调用额度
+
+host-v2配置恢复的第一次启动在任何模型HTTP前被GENERATION_ADMISSION_STATE_INCOMPATIBLE拒绝；原连续账本generation/embedding/requests逐值未变。原因是文件级config_version把整库绑定到首个策略版本，连相同模型和额度下的新消息也不能换选择策略。没有通过删计数或换账本绕过。
+
+现只将文件级首版本保留为历史信息；owner、bank、host参数和cap仍必须一致。每条消息自身的身份仍包含原config_version，旧消息更改版本无法恢复，也不能重新start；旧reservations/counts不改。10项额度/身份/共享上限检查2.42秒通过，正常Host两条不同版本新消息接线测试通过，旧消息改版恢复在公开Source身份边界被更早拒绝、没有新HTTP。mypy/Ruff及DAG/工具边界通过。下一步只恢复这次已确认0模型的配置启动失败，并继续原未执行index5-7；不重派旧length调用。见method-architecture-host-admission-policy-v1。
+
+## 五个强对照的共同条件准备
+
+按8.4准备source-only、事实追加、B1普通局部、M现有条件局部、完整新候选五臂。使用同一12条已公开E2开发链、共同原文访问/模型/Reader/首次Judge，从空状态各自形成；新候选包含跨记录支持。Source-only走现有S0只捕获路径、Unicode检索，不支付Editor或语义写入；其他臂使用原实现。新对齐代码已真正关闭读后uses写入。
+
+五个配置均prepare成功、0模型调用，每臂36sessions/48QA。旧E2结果不混入这一新源码比较，所有五臂需在同一冻结版本重新执行。当前只准备共同8192输出上限的首个预算点，未声称完整质量—成本曲线或独立外部评价；更多资源分配点仍待。见method-architecture-strong-v1-protocol。

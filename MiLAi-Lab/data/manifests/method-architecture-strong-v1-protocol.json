@@ -1,0 +1,69 @@
+{
+  "status": "FIVE_STRONG_CONTROLS_PROTOCOL_ZERO_MODEL",
+  "arms": [
+    {
+      "arm": "source",
+      "config": "configs/milai-method-architecture-strong-source-v1.json",
+      "method": "B1",
+      "evidence_variant": "S0",
+      "dependency_reading": false
+    },
+    {
+      "arm": "append",
+      "config": "configs/milai-method-architecture-strong-append-v1.json",
+      "method": "Append-only",
+      "evidence_variant": "S2",
+      "dependency_reading": false
+    },
+    {
+      "arm": "plain",
+      "config": "configs/milai-method-architecture-strong-plain-v1.json",
+      "method": "B1",
+      "evidence_variant": "S2",
+      "dependency_reading": false
+    },
+    {
+      "arm": "conditioned",
+      "config": "configs/milai-method-architecture-strong-conditioned-v1.json",
+      "method": "M",
+      "evidence_variant": "S2",
+      "dependency_reading": false
+    },
+    {
+      "arm": "candidate",
+      "config": "configs/milai-method-architecture-strong-candidate-v1.json",
+      "method": "M",
+      "evidence_variant": "S2",
+      "dependency_reading": true
+    }
+  ],
+  "data": "data/fixtures/milai-method-architecture-screening-v1.jsonl",
+  "independent_histories": 12,
+  "events_per_arm": 36,
+  "qa_per_arm": 48,
+  "per_call_output_ceiling": 8192,
+  "max_calls_per_question": 12,
+  "source_access": "same actual original arrival prefix; source-only captures without semantic maintenance; no future questions/gold to Writer",
+  "source_only": "existing S0 code path, Unicode source retrieval, zero Editor/Impact/semantic writes",
+  "append": "existing factual append method; changed reports appended with original time/role",
+  "conditioned": "existing conditioned local updates without new dependency groups/impact/read selector",
+  "candidate": "full current groups/impact/dependency reading/cross-record support; not limited to single-record prototype",
+  "feedback": "read_usage_updates false, repaired alignment path; dense ranking common",
+  "old_runs": "original E2 and its costs/failures remain separate; all five arms repeat under one new frozen code version",
+  "first_score": "first official HaluMem rubric on authored data; missing/invalid retained; state/faithfulness author review separate",
+  "costs": "all formation/update/selection/read/Judge/embedding; no ignored native work",
+  "budget_curve": "this is the initial shared8192 point; further matched resource-allocation points still required before a full curve claim",
+  "independent_external_evaluation": "not satisfied by this exposed development cohort",
+  "unknown_retry": false,
+  "replicates": 1,
+  "prepare": {
+    "status": "ALL_FIVE_PREPARED_ZERO_MODEL",
+    "models_called": 0,
+    "opportunities_per_arm": {
+      "sessions": 36,
+      "qa": 48
+    },
+    "root": "artifacts/method-architecture/strong-v1/prepare",
+    "actual_execution_requires_new_frozen_source_and_empty_run_roots": true
+  }
+}
