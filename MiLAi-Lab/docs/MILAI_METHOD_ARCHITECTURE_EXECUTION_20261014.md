@@ -282,3 +282,6 @@ E2途中已观察到实际模型关系：档案室例外形成condition/modifies
 `milai-method-architecture-lifecycle-v1.json`已prepare，模型调用0，评价参考单独保存且执行器不加载。10项相关测试通过（9.35秒），覆盖每条原文保留、实际重建前态为空、过去来源身份/正文/时钟逐值不变、未来原文不进入副本、查询/评价canary不进入维护、读取不改记录值、判定成本与查询复用分账；Ruff、3文件mypy、DAG/工具边界和验证矩阵通过。测试使用模型桩，不是W3实际结果；一条开发流也不支持部署回本承诺。见`method-architecture-lifecycle-v1-checkpoint.json`。
 
 同时E2候选预测已关闭：36事件、43答复+5已确认缺答，150次生成/801,695 tokens、embedding5,723。五次缺答均来自依赖选择的length响应；一次EDIT_SUPPORT_ROUTE_INVALID更新拒绝保留。普通臂仍在运行，尚未作双方首次评分或完整比较，不提前宣称胜负。
+
+
+W3源码已提交并冻结15319207，`lifecycle-source-v1`再次prepare成功、0模型请求。串行监督进程420999（exec84404）等待原2×2监督进程247480正常关闭及完整summary；异常交接不会新派发。实时状态为`lifecycle-v1/queue.json`，当时核验记录为`method-architecture-lifecycle-v1-queue.json`。当前E2、E3、W3依次执行，分别使用463b5182、10c68e54、15319207，原连续账本保持。没有SHA校验、重开旧确认或新模型部署。

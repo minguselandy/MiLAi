@@ -1,0 +1,15 @@
+{
+  "status": "WAITING_FOR_FACTORIAL",
+  "pid": 420999,
+  "started_at": "2026-10-15T04:05:30.873574+00:00",
+  "source_commit": "15319207",
+  "previous_supervisor_pid": 247480,
+  "model_requests_before_handoff": 0,
+  "observed_at": "2026-10-15T04:07:22.825216+00:00",
+  "exec_session": 84404,
+  "process_identity_observed": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/.venv/bin/python artifacts/method-architecture/run_lifecycle_after_factorial_v1.py ",
+  "source_snapshot": "artifacts/method-architecture/lifecycle-source-v1/MiLAi-Lab",
+  "source_receipt": "artifacts/method-architecture/lifecycle-source-v1.json",
+  "model_requests_observed": 0,
+  "handoff": "only after factorial supervisor exits normally and factorial summary closes; otherwise no new model dispatch"
+}
