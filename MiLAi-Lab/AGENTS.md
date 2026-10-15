@@ -1,18 +1,19 @@
-# Current development: shared Host dependency reading checked; real Host next
+# Current development: first Host attempt FAILED; read-only recovery next
 
-GoalACTIVE/incomplete. No model job running at this checkpoint. Development now adds
-Host dependency_reading via same Benchmark selector/decode/evidence functions and
-ordinary model/read allowance. Actual version changes rebuild pool; old generation
-indices rejected. Success/unknown selector receipts persist through ordinary_read;
-no unknown redispatch. Exposure includes selector sources. No newplatform/ledger.
-535unique related tests pass after fixing opt-out Host callback newkeyword; broad
-532pass/3fail362.14s, targeted recovery3pass10.89s.8cross tests3.94s; Ruff/mypy3files/
-DAG/tools/matrixpass. host-v1 eight-message protocol/config/fixture PREPARED_ZERO_MODEL,
-using exposed cross story and model-formed states. Next commit/freeze and normalHost
-first attempts; read-only recovery separate. Firstfailure never overwritten/resampled.
-Old cross-v1 and factorial queues all CLOSED; full reviews/costs below remain valid.
-NoSHA/subagents/newledger. Full goal remains incomplete: actualHost, W4, fullR,
-strong/external controls,anothermodel/longhistory,completeA/Bstory and finalaudit.
+GoalACTIVE/incomplete. host-v1 driver1347932/exec11501 CLOSED0; message0 FAILED
+VLLM_CHAT_INVALID_CONTENT after realsemanticcommit and successfuldependencyselection,
+remaining7 NOT_RUN. Frozen804d5fe2 untouched. Originalstate hascredentials+bluelabel,
+but mergescredentials and attachesorganization instruction asvaliditycondition.
+Host omitted pool_generation on unchanged pool0; newguard rejected; thenunissued
+sourceidentifier rejected; finalmodel contentNone/stop. See host-v1-first-summary.
+6gen33482+3emb256 exactledger,newunknown0. No currentmodel job running.
+NEW genericfix permits omitted generation beforefirstpoolrebuild (unambiguous), keeps
+revisedpool checks.25relatedtests8.43s,mypy/Ruff pass. Next freeze repairedsource,
+copyactualbank for oneexplicitread-only recovery query, originalfirstresults unchanged.
+Do not resume/retry originalmessage0 or call sevenNOT_RUN firstattemptsuccess.
+FullHost story, W4matchedlearning,strong/externalcontrols,correctedfullR,extra model/
+longhistories,positivecompleteA/Bstory and finalaudit remain. NoSHA/subagents/newledger.
+Older actualresults follow.
 
 # Current development: cross-record pilot CLOSED; Host support writes migrated
 

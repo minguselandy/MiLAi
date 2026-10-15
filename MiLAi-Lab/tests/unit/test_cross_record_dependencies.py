@@ -229,6 +229,8 @@ def _choose_voucher(schema, *, historical=False):
 
 
 def test_host_dependency_selection_reuses_actual_groups_budget_and_persisted_receipt(case):
+    import json
+
     service, method, _request, _credential, _target = case
     calls = []
 
@@ -254,6 +256,11 @@ def test_host_dependency_selection_reuses_actual_groups_budget_and_persisted_rec
     reopened = _host_for_dependency_reads(service, method, call)
     assert reopened.model_material(config) == material
     assert calls == ["dependency_read"]
+    tool = next(t for t in host.tools() if t.name == "read_evidence")
+    result = tool.invoke({"type": "tool_call", "name": "read_evidence", "id": "initial",
+                         "args": {"item_indices": [0]}}, config=config)
+    assert json.loads(result.content)["ok"]
+    assert host.read_allowance(config)["reads_remaining"] == 2
     assert service.records() == before
 
 

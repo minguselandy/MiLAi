@@ -437,7 +437,12 @@ class FunctionalEditMemory(FunctionalMemory):
 
             def action(bound: dict[str, Any]) -> dict[str, Any]:
                 key, state = self._evidence_pool(config)
-                if self.dependency_reading and pool_generation != state["pool_generation"]:
+                # Before the first rebuild, an omitted generation is unambiguous.
+                # Later pools require the supplied navigation generation so an old
+                # index cannot silently resolve to different material.
+                if self.dependency_reading and pool_generation != state["pool_generation"] and (
+                    pool_generation is not None or state["pool_generation"] != 0
+                ):
                     raise FunctionalRejection("EVIDENCE_POOL_GENERATION_CHANGED")
                 if candidate_page < 0 or any(i < 0 or i >= len(state["materials"])
                                              for i in [*item_indices, *(expand_context or [])]):
