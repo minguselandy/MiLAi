@@ -1,0 +1,446 @@
+{
+  "status": "CLOSED",
+  "source_version": "dc9d14cc",
+  "training": "Same completed sft-pilot-v3 adapters, no new updates",
+  "grammar_preparation": {
+    "xgrammar": "0.1.19",
+    "schemas": 10,
+    "wall_seconds": 24.42363827303052,
+    "scope": "Existing request schemas only; empty valid deltas remain allowed. Grammar does not verify semantic coverage, attribution or consequences."
+  },
+  "models": {
+    "base": {
+      "schema_valid_stopped_outputs": 9,
+      "length": 1,
+      "application_status": {
+        "applied": 9,
+        "invalid_or_rejected": 1
+      },
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "base",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "guided_json": true,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 2746,
+        "wall_seconds": 582.6808578055352,
+        "cpu_seconds": 2196.95653196,
+        "process_peak_rss_mib": 3812.34765625,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "state_changed": true
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "state_changed": true
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "state_changed": true
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "state_changed": true
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "state_changed": true
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "state_changed": true
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "applied",
+          "error": null,
+          "before_records": 1,
+          "after_records": 2,
+          "state_changed": true
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "applied",
+          "error": null,
+          "before_records": 1,
+          "after_records": 2,
+          "state_changed": true
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "applied",
+          "error": null,
+          "before_records": 1,
+          "after_records": 7,
+          "state_changed": true
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "invalid_or_rejected",
+          "error": "Provider output incomplete: length",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        }
+      ]
+    },
+    "imitation": {
+      "schema_valid_stopped_outputs": 10,
+      "length": 0,
+      "application_status": {
+        "no_change": 6,
+        "invalid_or_rejected": 3,
+        "applied": 1
+      },
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "imitation",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "guided_json": true,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 1732,
+        "wall_seconds": 277.4070469457656,
+        "cpu_seconds": 1095.6981350800002,
+        "process_peak_rss_mib": 4595.046875,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_TIME_SOURCE_NOT_SELECTED",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "applied",
+          "error": null,
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": true
+        }
+      ]
+    },
+    "quality_weighted": {
+      "schema_valid_stopped_outputs": 10,
+      "length": 0,
+      "application_status": {
+        "no_change": 6,
+        "invalid_or_rejected": 4
+      },
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "quality_weighted",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "guided_json": true,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 1646,
+        "wall_seconds": 268.6025099158287,
+        "cpu_seconds": 1055.3727470879999,
+        "process_peak_rss_mib": 4595.046875,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_TIME_SOURCE_NOT_SELECTED",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "invalid_or_rejected",
+          "error": "DELTA_RULE_INDEX_UNAVAILABLE",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        }
+      ]
+    },
+    "relation_consequence": {
+      "schema_valid_stopped_outputs": 10,
+      "length": 0,
+      "application_status": {
+        "no_change": 6,
+        "invalid_or_rejected": 4
+      },
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "relation_consequence",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "guided_json": true,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 1739,
+        "wall_seconds": 284.7898135529831,
+        "cpu_seconds": 1121.4654367420007,
+        "process_peak_rss_mib": 4595.046875,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "no_change",
+          "error": null,
+          "before_records": 0,
+          "after_records": 0,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_TIME_SOURCE_NOT_SELECTED",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "invalid_or_rejected",
+          "error": "DELTA_RULE_INDEX_UNAVAILABLE",
+          "before_records": 1,
+          "after_records": 1,
+          "state_changed": false
+        }
+      ]
+    }
+  },
+  "scope": "Same10exposed inputs and actual before banks,greedy1024,batch2. Grammar follows existing native schemas and leaves valid no-change outputs available. Separate from originalunconstrained outputs.",
+  "author_review": {
+    "scope": "All40application outcomes and all changed rendered states read against the same source/before inputs.",
+    "base": "Grammar allows9applied cases, but all4required formations remain incomplete; future handover is duplicated and not cancelled, paper expiry appends current text while retaining stale valid-paper/eligibility units, and an acknowledgment grows one record to7. One restatement reacheslength. More valid commits are not better state.",
+    "imitation": "Four required formations remainempty, while2empty acknowledgments are validno-change. Bothrequired updates haveinvalid effectiveintervals; existingackuses unselectedtime evidence. The restatement rewrites all6old units with wrong per_member metadata and appends a duplicate budget unit.",
+    "quality_and_relation": "Four required formations remainempty;2emptyacks correctlyno-change. Bothupdates fail effectiveinterval validation, existingackfails time-source binding, restatementreferences an unavailable generated rule index. No required update success.",
+    "conclusion": "Syntax constraints isolate but do not repair semantic selection, attribution, interval or quantity errors. No learning or architecture benefit is established; keep no-change legal and preserve both decoder conditions."
+  },
+  "model_http_calls": 0,
+  "parameter_updates": 0,
+  "independent_blind_review": false,
+  "full_goal_complete": false
+}
