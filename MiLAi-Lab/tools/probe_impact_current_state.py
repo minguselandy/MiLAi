@@ -31,6 +31,8 @@ def main() -> None:
     protocol = read_json(arm_source.parent / "prepared.json")
     answers = []
     for case in protocol["cases"]:
+        if "cases" in config and case["id"] not in config["cases"]:
+            continue
         case_source = arm_source / case["id"]
         read_json(case_source / "result.json")  # Only closed maintenance outcomes are probed.
         root = args.output / args.arm / case["id"]
