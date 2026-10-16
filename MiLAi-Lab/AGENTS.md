@@ -1,3 +1,31 @@
+# Live reader CE handoff (2026-10-16)
+
+Goal ACTIVE/incomplete. ce-gpu-v2 is live at this checkpoint: PID4093998,
+exec37838, frozen method source8c6cb000. Inspect /proc and run.json before any
+new work; never restart just because the exec handle is missing. Four epochs,
+467 labelled train prefixes from64families/122events;203dev prefixes,164labelled.
+CUDA_VISIBLE_DEVICES=2,3, full encoder+head soft-CE; no calibration/test inference.
+Artifacts: artifacts/jev-reader/ce-gpu-v2; stdout/stderr in ../runtime.
+Original ce-gpu-v1 FAILED/exit1 after29updates: compiled ModernBERT with DP last
+3-row batch hit FX/Dynamo error. Sourceb57c29ef and all first results preserved.
+reference_compile=False fixes native eager path; actual two-GPU batch4->3
+forward/backward probe passed with encoder/head gradients, original ledger charged.
+V2 GPU initial dev15/164 matches CPU; do not treat later majority STOP as success.
+Constant-stop baselines are now reported. Full downstream QA/net benefit unproven.
+CPU base-dev-prefix-v1 CLOSED203forwards/262964tokens/390.706wall/1436.094CPU,
+15/164accepted;39masked. Its compute is in original ledger; V2 ledger closes in finally.
+CUDAenv/CPython/caches all under /cra/memory/mx_memory; task-created348KiBTriton
+root cache moved to .cache/triton-first-gpu-run afterV1terminated. Explicit Triton,
+Inductor and CUDA cache vars now in runtime/env.sh; /root/.triton absent atcheck.
+Do not touch protected BGE services. 7862 remains normally stopped for authorized
+training. Restore only after checking live training allocation and next work.
+Next: verify V2 terminal/checkpoint, inspect all per-stratum curves and costs;
+then ordinary supervised reranker/logits control, fixed-k versus STOP/complement
+ablation, calibrated and unseen LME/MemOps/MEME requirements. No completion claim.
+Preview-exposure manifest excludes one sampled test family from future blind test;
+two dev families are exposed diagnostics. Detailed report and preparation manifest
+in docs/MILAI_JEV_READ_DECISIONS_20261016.md and data/manifests/.
+
 # User GPU allocation (2026-10-16)
 
 User now explicitly authorizes releasing ONLY milai-unified-v8-v9-native-host-r2

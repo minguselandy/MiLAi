@@ -53,7 +53,7 @@ CUDA 训练脚本限定 `CUDA_VISIBLE_DEVICES=2,3`，使用原生完整 encoder+
 
 `ce-gpu-v1`（`b57c29ef`）已终止／FAILED：GPU 零样本仍为 15/164，随后完成 29 次优化器更新、464 条成功训练序列；最后三条不足批次触发 ModernBERT 默认编译与 DataParallel 的 FX/Dynamo 冲突。132.18 秒墙钟及失败开销已入原账本。失败批次另外提供 3 条／3,501 tokens，不能把它们算成成功编码；原始异常、首次输出与成本保留，未生成完成 checkpoint。
 
-修复使用 ModernBERT 原有 `reference_compile=False` 普通 MLP 路径，并新增尝试／成功计数区分。新运行必须另用目录，不覆盖首失败。该修复不增加模型、标签或回退决策。首轮产生的 348 KiB Triton 默认缓存已在进程终止后迁入 `/cra/memory/mx_memory/.cache/triton-first-gpu-run/`；后续 Triton、Inductor 和 CUDA 缓存也已显式指定当前目录。
+修复使用 ModernBERT 原有 `reference_compile=False` 普通 MLP 路径，并新增尝试／成功计数区分。修复已通过真实双卡 batch=4 后 batch=3 的前向／反向检查，两部分梯度均非零。新运行 `ce-gpu-v2` 从 `8c6cb000` 启动，PID 4093998／exec 37838；本检查点仍在运行，计划四轮，原始 GPU dev 为 15/164。新输出另用目录，不覆盖首失败。该修复不增加模型、标签或回退决策。首轮产生的 348 KiB Triton 默认缓存已在进程终止后迁入 `/cra/memory/mx_memory/.cache/triton-first-gpu-run/`；后续 Triton、Inductor 和 CUDA 缓存也已显式指定当前目录。
 
 ## 尚需完成
 
