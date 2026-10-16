@@ -1,0 +1,98 @@
+{
+  "status": "METADATA_ONLY_PRIOR_CONTACT_FOUND_NOT_AN_UNSEEN_REPLACEMENT",
+  "official_repository": "https://github.com/xiaowu0162/LongMemEval-V2",
+  "local_data_root": "/cra/memory/mx_memory/benchmarks/LongMemEval-V2/data/longmemeval-v2",
+  "question_count": 451,
+  "domains": {
+    "enterprise": 211,
+    "web": 240
+  },
+  "question_image_count": 29,
+  "known_opened_question_count": 42,
+  "historical_reports": [
+    {
+      "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/studies/archive/lifecycle/legacy_snapshot/MiLAi/docs/reports/DG-10-benchmark-lme-v2-dev-failed-attempt-candidate.2-2026-08-21.json",
+      "status": "INVALIDATED_FAILED_ATTEMPT_EXCLUDED_FROM_CALIBRATION",
+      "records": 0,
+      "source_question_ids": [],
+      "test_labels_or_outputs_opened": false
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/studies/archive/lifecycle/legacy_snapshot/MiLAi/docs/reports/DG-10-benchmark-lme-v2-dev-smoke-candidate.1-2026-08-21.json",
+      "status": "LME_V2_ADAPTED_TEXT_ONLY_TWO_ARM_DEV_SMOKE_COMPLETE_NOT_CALIBRATION",
+      "records": 2,
+      "source_question_ids": [
+        "106c321b"
+      ],
+      "test_labels_or_outputs_opened": false
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/studies/archive/lifecycle/legacy_snapshot/MiLAi/docs/reports/DG-10-benchmark-lme-v2-dev-smoke-candidate.3-2026-08-21.json",
+      "status": "LME_V2_ADAPTED_TEXT_ONLY_TWO_ARM_DEV_SMOKE_COMPLETE_NOT_CALIBRATION",
+      "records": 84,
+      "source_question_ids": [
+        "0382ed92",
+        "0cd6dc43",
+        "106c321b",
+        "18f9d965",
+        "233f9f09",
+        "25853d7f",
+        "289aea4a",
+        "2b96f402",
+        "2ca2d443",
+        "3f366e15",
+        "3fd81278",
+        "4f92aa38",
+        "597645be",
+        "5aaf0f61",
+        "5c826b28",
+        "5cb7289b",
+        "6a23675f",
+        "6d975a08",
+        "6fc8c511",
+        "6feb33d4",
+        "7c8efee5",
+        "7df9e2ff",
+        "823d133a",
+        "83a77f9d",
+        "90dc7e66",
+        "98e6d369",
+        "a667402d",
+        "b05cf470",
+        "c4c0e117",
+        "c9c6a06a",
+        "d0d61088",
+        "d5b9fda4",
+        "d7c94023",
+        "dd53ab77",
+        "de0abc47",
+        "e334d5c6",
+        "e83245c5",
+        "ee75b921",
+        "f3496ca5",
+        "f35bac4a",
+        "f9f9cd61",
+        "fe41b553"
+      ],
+      "test_labels_or_outputs_opened": false
+    }
+  ],
+  "small_distinct_ordered_haystacks": 2,
+  "small_haystack_group_sizes": [
+    211,
+    240
+  ],
+  "small_trajectories_in_known_question_haystacks": 200,
+  "current_questions_whose_small_history_is_contained_in_known_histories": 451,
+  "current_questions_not_in_these_three_reports": 409,
+  "limits": [
+    "42 known opened questions is a lower bound from three explicit reports, not a complete historical exposure audit.",
+    "Remaining question IDs are not certified unexposed; complete project records, heldout assignments and target/background overlaps require review.",
+    "Shared small-tier history exposure prevents treating each question as an independent unexposed history. Medium is not an independent benchmark reset.",
+    "Prior adapted text-only smoke omits screenshots and is not native full-small. This turn opened no new question text or reference answers and made no evaluation requests.",
+    "V2 is a different agent-trajectory benchmark, not a new version of the original 500 chat-memory questions."
+  ],
+  "sha_checks": 0,
+  "new_downloads": 0,
+  "new_model_calls": 0
+}

@@ -1,0 +1,5511 @@
+{
+  "status": "CLOSED_FROZEN_MODEL_STATE_INFORMATION_PROBE",
+  "source_version": "881e48f7",
+  "protocol": "configs/milai-jev-reader-state-information-v1.json",
+  "artifacts": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/state-information-v1",
+  "run": {
+    "status": "COMPLETED",
+    "pid": 1753392,
+    "source_version": "881e48f7",
+    "prepared": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/state-information-v1/prepared",
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/ce-c20-v1/checkpoint",
+    "physical_gpu": 2,
+    "planned_positions": 368,
+    "completed_positions": 368,
+    "reused_positions": 92,
+    "new_forwards": 276,
+    "http_requests": 0,
+    "new_weights": false,
+    "precision": "torch.float32",
+    "ledger_recorded": true
+  },
+  "compute": {
+    "runs": 1,
+    "wall_seconds": 47.49634719081223,
+    "cpu_seconds": 69.312969377,
+    "forwards": 276,
+    "sequence_rows": 276,
+    "input_tokens": 753026,
+    "state_tokenizations": 276,
+    "state_tokens": 663378,
+    "peak_rss_kib": 2748212,
+    "peak_cuda_allocated_bytes": 5771235328
+  },
+  "view_costs": {
+    "full": {
+      "positions": 184,
+      "standalone_input_tokens": 547859,
+      "maximum_input_tokens": 4960,
+      "truncated": 0
+    },
+    "titles_only": {
+      "positions": 184,
+      "standalone_input_tokens": 515552,
+      "maximum_input_tokens": 4960,
+      "truncated": 0
+    },
+    "ids_only": {
+      "positions": 184,
+      "standalone_input_tokens": 513068,
+      "maximum_input_tokens": 4960,
+      "truncated": 0
+    }
+  },
+  "empty_prefixes_literal_reuse_verified": 46,
+  "sensitivity": {
+    "titles_only": {
+      "nonempty_prefixes": 138,
+      "decision_changed": 60,
+      "top_open_changed": 67,
+      "mean_total_variation": 0.4170849075518637,
+      "mean_stop_probability_delta": -0.07167434288615934,
+      "family_macro_decision_change": 0.41666666666666663,
+      "per_family_decision_change": {
+        "musique-family-000012": 0.16666666666666666,
+        "musique-family-000022": 0.5,
+        "musique-family-000023": 0.8333333333333334,
+        "musique-family-000073": 0.16666666666666666,
+        "musique-family-000135": 0,
+        "musique-family-000138": 0.5,
+        "musique-family-000163": 0.6666666666666666,
+        "musique-family-000184": 0.3333333333333333,
+        "musique-family-000360": 0.3333333333333333,
+        "musique-family-000367": 0.6666666666666666,
+        "musique-family-000397": 0.3333333333333333,
+        "musique-family-000424": 0.6666666666666666,
+        "musique-family-000435": 0,
+        "musique-family-000468": 0.16666666666666666,
+        "musique-family-000493": 0.6666666666666666,
+        "musique-family-000574": 0.16666666666666666,
+        "musique-family-000583": 0.16666666666666666,
+        "musique-family-000604": 0.6666666666666666,
+        "musique-family-000704": 0.6666666666666666,
+        "musique-family-000730": 0.6666666666666666,
+        "musique-family-000748": 0.5,
+        "musique-family-000812": 0.5,
+        "musique-family-000868": 0.5,
+        "musique-family-000871": 0.16666666666666666
+      }
+    },
+    "ids_only": {
+      "nonempty_prefixes": 138,
+      "decision_changed": 64,
+      "top_open_changed": 64,
+      "mean_total_variation": 0.44560724441687827,
+      "mean_stop_probability_delta": -0.04645231997863553,
+      "family_macro_decision_change": 0.4513888888888889,
+      "per_family_decision_change": {
+        "musique-family-000012": 0.16666666666666666,
+        "musique-family-000022": 0.5,
+        "musique-family-000023": 0.6666666666666666,
+        "musique-family-000073": 0.16666666666666666,
+        "musique-family-000135": 0.3333333333333333,
+        "musique-family-000138": 0.5,
+        "musique-family-000163": 0.8333333333333334,
+        "musique-family-000184": 0.16666666666666666,
+        "musique-family-000360": 0.5,
+        "musique-family-000367": 0.8333333333333334,
+        "musique-family-000397": 0.5,
+        "musique-family-000424": 0.3333333333333333,
+        "musique-family-000435": 0,
+        "musique-family-000468": 0.3333333333333333,
+        "musique-family-000493": 0.8333333333333334,
+        "musique-family-000574": 0,
+        "musique-family-000583": 0.16666666666666666,
+        "musique-family-000604": 0.3333333333333333,
+        "musique-family-000704": 0.8333333333333334,
+        "musique-family-000730": 0.5,
+        "musique-family-000748": 0.6666666666666666,
+        "musique-family-000812": 0.6666666666666666,
+        "musique-family-000868": 0.5,
+        "musique-family-000871": 0.5
+      }
+    }
+  },
+  "source_qualified": {
+    "full": {
+      "counts": {
+        "labelled": 20,
+        "accepted": 9,
+        "nonempty_labelled": 15,
+        "nonempty_accepted": 6,
+        "not_source_reviewed": 156,
+        "masked_source_review": 8
+      },
+      "strata": {
+        "reviewed_missing_complement": {
+          "labelled": 10,
+          "accepted": 4
+        },
+        "reviewed_pool_insufficient": {
+          "labelled": 7,
+          "accepted": 3
+        },
+        "reviewed_proof_complete": {
+          "labelled": 3,
+          "accepted": 2
+        }
+      }
+    },
+    "titles_only": {
+      "counts": {
+        "labelled": 20,
+        "accepted": 10,
+        "nonempty_labelled": 15,
+        "nonempty_accepted": 7,
+        "not_source_reviewed": 156,
+        "masked_source_review": 8
+      },
+      "strata": {
+        "reviewed_missing_complement": {
+          "labelled": 10,
+          "accepted": 4
+        },
+        "reviewed_pool_insufficient": {
+          "labelled": 7,
+          "accepted": 4
+        },
+        "reviewed_proof_complete": {
+          "labelled": 3,
+          "accepted": 2
+        }
+      }
+    },
+    "ids_only": {
+      "counts": {
+        "labelled": 20,
+        "accepted": 11,
+        "nonempty_labelled": 15,
+        "nonempty_accepted": 8,
+        "not_source_reviewed": 156,
+        "masked_source_review": 8
+      },
+      "strata": {
+        "reviewed_missing_complement": {
+          "labelled": 10,
+          "accepted": 5
+        },
+        "reviewed_pool_insufficient": {
+          "labelled": 7,
+          "accepted": 5
+        },
+        "reviewed_proof_complete": {
+          "labelled": 3,
+          "accepted": 1
+        }
+      }
+    }
+  },
+  "records": [
+    {
+      "key": "row-866/0",
+      "case_id": "row-866",
+      "step": 0,
+      "family": "musique-family-000138",
+      "opened_ids": [],
+      "reference_target": {
+        "open_p0": 1.0
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.8429518342018127,
+          "input_tokens": 2040
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8429518342018127,
+          "input_tokens": 2040
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8429518342018127,
+          "input_tokens": 2040
+        }
+      }
+    },
+    {
+      "key": "row-866/1",
+      "case_id": "row-866",
+      "step": 1,
+      "family": "musique-family-000138",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {
+        "stop_exhausted": 1.0
+      },
+      "reference_status": "reviewed_pool_insufficient",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6443061232566833,
+          "input_tokens": 2028
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9579373002052307,
+          "input_tokens": 1913
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9900437593460083,
+          "input_tokens": 1902
+        }
+      }
+    },
+    {
+      "key": "row-866/2",
+      "case_id": "row-866",
+      "step": 2,
+      "family": "musique-family-000138",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {
+        "stop_exhausted": 1.0
+      },
+      "reference_status": "reviewed_pool_insufficient",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7660002112388611,
+          "input_tokens": 2016
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7752980589866638,
+          "input_tokens": 1863
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9953752160072327,
+          "input_tokens": 1842
+        }
+      }
+    },
+    {
+      "key": "row-866/3",
+      "case_id": "row-866",
+      "step": 3,
+      "family": "musique-family-000138",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {
+        "stop_exhausted": 1.0
+      },
+      "reference_status": "reviewed_pool_insufficient",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7747247219085693,
+          "input_tokens": 2004
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5076382160186768,
+          "input_tokens": 1808
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9626290202140808,
+          "input_tokens": 1776
+        }
+      }
+    },
+    {
+      "key": "row-1284/0",
+      "case_id": "row-1284",
+      "step": 0,
+      "family": "musique-family-000468",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.8965811729431152,
+          "input_tokens": 2917
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8965811729431152,
+          "input_tokens": 2917
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8965811729431152,
+          "input_tokens": 2917
+        }
+      }
+    },
+    {
+      "key": "row-1284/1",
+      "case_id": "row-1284",
+      "step": 1,
+      "family": "musique-family-000468",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.8031212091445923,
+          "input_tokens": 2906
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.47521287202835083,
+          "input_tokens": 2830
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.6225367784500122,
+          "input_tokens": 2821
+        }
+      }
+    },
+    {
+      "key": "row-1284/2",
+      "case_id": "row-1284",
+      "step": 2,
+      "family": "musique-family-000468",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p2",
+          "choice_probability": 0.5229037404060364,
+          "input_tokens": 2893
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5766573548316956,
+          "input_tokens": 2748
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5165449380874634,
+          "input_tokens": 2730
+        }
+      }
+    },
+    {
+      "key": "row-1284/3",
+      "case_id": "row-1284",
+      "step": 3,
+      "family": "musique-family-000468",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8987390995025635,
+          "input_tokens": 2881
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8118269443511963,
+          "input_tokens": 2645
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7219159007072449,
+          "input_tokens": 2618
+        }
+      }
+    },
+    {
+      "key": "row-2389/0",
+      "case_id": "row-2389",
+      "step": 0,
+      "family": "musique-family-000493",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9589843153953552,
+          "input_tokens": 2391
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9589843153953552,
+          "input_tokens": 2391
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9589843153953552,
+          "input_tokens": 2391
+        }
+      }
+    },
+    {
+      "key": "row-2389/1",
+      "case_id": "row-2389",
+      "step": 1,
+      "family": "musique-family-000493",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.900154173374176,
+          "input_tokens": 2379
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.791466236114502,
+          "input_tokens": 2339
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8368184566497803,
+          "input_tokens": 2327
+        }
+      }
+    },
+    {
+      "key": "row-2389/2",
+      "case_id": "row-2389",
+      "step": 2,
+      "family": "musique-family-000493",
+      "opened_ids": [
+        "p0",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5022125840187073,
+          "input_tokens": 2367
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9527186751365662,
+          "input_tokens": 2192
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9801807999610901,
+          "input_tokens": 2173
+        }
+      }
+    },
+    {
+      "key": "row-2389/3",
+      "case_id": "row-2389",
+      "step": 3,
+      "family": "musique-family-000493",
+      "opened_ids": [
+        "p0",
+        "p5",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.927778959274292,
+          "input_tokens": 2355
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9630537033081055,
+          "input_tokens": 2140
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9942188262939453,
+          "input_tokens": 2110
+        }
+      }
+    },
+    {
+      "key": "row-3045/0",
+      "case_id": "row-3045",
+      "step": 0,
+      "family": "musique-family-000360",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.6993709206581116,
+          "input_tokens": 3268
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.6993709206581116,
+          "input_tokens": 3268
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.6993709206581116,
+          "input_tokens": 3268
+        }
+      }
+    },
+    {
+      "key": "row-3045/1",
+      "case_id": "row-3045",
+      "step": 1,
+      "family": "musique-family-000360",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.981836199760437,
+          "input_tokens": 3256
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.992177426815033,
+          "input_tokens": 3135
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9976316690444946,
+          "input_tokens": 3128
+        }
+      }
+    },
+    {
+      "key": "row-3045/2",
+      "case_id": "row-3045",
+      "step": 2,
+      "family": "musique-family-000360",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.98945552110672,
+          "input_tokens": 3244
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8056505918502808,
+          "input_tokens": 3037
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.37476253509521484,
+          "input_tokens": 3019
+        }
+      }
+    },
+    {
+      "key": "row-3045/3",
+      "case_id": "row-3045",
+      "step": 3,
+      "family": "musique-family-000360",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p3"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5989596247673035,
+          "input_tokens": 3232
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.35255908966064453,
+          "input_tokens": 2977
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.647087812423706,
+          "input_tokens": 2949
+        }
+      }
+    },
+    {
+      "key": "row-3445/0",
+      "case_id": "row-3445",
+      "step": 0,
+      "family": "musique-family-000023",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "masked_source_review",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.6722522377967834,
+          "input_tokens": 2094
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.6722522377967834,
+          "input_tokens": 2094
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.6722522377967834,
+          "input_tokens": 2094
+        }
+      }
+    },
+    {
+      "key": "row-3445/1",
+      "case_id": "row-3445",
+      "step": 1,
+      "family": "musique-family-000023",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "masked_source_review",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.6605157852172852,
+          "input_tokens": 2082
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9629044532775879,
+          "input_tokens": 1953
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.513786256313324,
+          "input_tokens": 1946
+        }
+      }
+    },
+    {
+      "key": "row-3445/2",
+      "case_id": "row-3445",
+      "step": 2,
+      "family": "musique-family-000023",
+      "opened_ids": [
+        "p1",
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "masked_source_review",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.4023757874965668,
+          "input_tokens": 2070
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.436874121427536,
+          "input_tokens": 1905
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.926426112651825,
+          "input_tokens": 1886
+        }
+      }
+    },
+    {
+      "key": "row-3445/3",
+      "case_id": "row-3445",
+      "step": 3,
+      "family": "musique-family-000023",
+      "opened_ids": [
+        "p1",
+        "p0",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "masked_source_review",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5938029289245605,
+          "input_tokens": 2058
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8866235613822937,
+          "input_tokens": 1827
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9313359260559082,
+          "input_tokens": 1800
+        }
+      }
+    },
+    {
+      "key": "row-4588/0",
+      "case_id": "row-4588",
+      "step": 0,
+      "family": "musique-family-000868",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9145023822784424,
+          "input_tokens": 3491
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9145023822784424,
+          "input_tokens": 3491
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9145023822784424,
+          "input_tokens": 3491
+        }
+      }
+    },
+    {
+      "key": "row-4588/1",
+      "case_id": "row-4588",
+      "step": 1,
+      "family": "musique-family-000868",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.3245033323764801,
+          "input_tokens": 3479
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.48460403084754944,
+          "input_tokens": 3173
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8803531527519226,
+          "input_tokens": 3167
+        }
+      }
+    },
+    {
+      "key": "row-4588/2",
+      "case_id": "row-4588",
+      "step": 2,
+      "family": "musique-family-000868",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9523858428001404,
+          "input_tokens": 3467
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9372432231903076,
+          "input_tokens": 2743
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7206065058708191,
+          "input_tokens": 2728
+        }
+      }
+    },
+    {
+      "key": "row-4588/3",
+      "case_id": "row-4588",
+      "step": 3,
+      "family": "musique-family-000868",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p3"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9493400454521179,
+          "input_tokens": 3455
+        },
+        "titles_only": {
+          "choice": "open_p10",
+          "choice_probability": 0.3696042597293854,
+          "input_tokens": 2669
+        },
+        "ids_only": {
+          "choice": "open_p10",
+          "choice_probability": 0.7717795968055725,
+          "input_tokens": 2642
+        }
+      }
+    },
+    {
+      "key": "row-5026/0",
+      "case_id": "row-5026",
+      "step": 0,
+      "family": "musique-family-000367",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.6455036401748657,
+          "input_tokens": 2739
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.6455036401748657,
+          "input_tokens": 2739
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.6455036401748657,
+          "input_tokens": 2739
+        }
+      }
+    },
+    {
+      "key": "row-5026/1",
+      "case_id": "row-5026",
+      "step": 1,
+      "family": "musique-family-000367",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.9930533766746521,
+          "input_tokens": 2727
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.7881407141685486,
+          "input_tokens": 2603
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.93863445520401,
+          "input_tokens": 2594
+        }
+      }
+    },
+    {
+      "key": "row-5026/2",
+      "case_id": "row-5026",
+      "step": 2,
+      "family": "musique-family-000367",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9973397850990295,
+          "input_tokens": 2715
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8333642482757568,
+          "input_tokens": 2370
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9969838261604309,
+          "input_tokens": 2354
+        }
+      }
+    },
+    {
+      "key": "row-5026/3",
+      "case_id": "row-5026",
+      "step": 3,
+      "family": "musique-family-000367",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9962515234947205,
+          "input_tokens": 2703
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8176144957542419,
+          "input_tokens": 2245
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6690884232521057,
+          "input_tokens": 2219
+        }
+      }
+    },
+    {
+      "key": "row-5217/0",
+      "case_id": "row-5217",
+      "step": 0,
+      "family": "musique-family-000424",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9926419854164124,
+          "input_tokens": 3621
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9926419854164124,
+          "input_tokens": 3621
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9926419854164124,
+          "input_tokens": 3621
+        }
+      }
+    },
+    {
+      "key": "row-5217/1",
+      "case_id": "row-5217",
+      "step": 1,
+      "family": "musique-family-000424",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7264655828475952,
+          "input_tokens": 3609
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.4623703062534332,
+          "input_tokens": 3561
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9162506461143494,
+          "input_tokens": 3548
+        }
+      }
+    },
+    {
+      "key": "row-5217/2",
+      "case_id": "row-5217",
+      "step": 2,
+      "family": "musique-family-000424",
+      "opened_ids": [
+        "p0",
+        "p12"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7994152307510376,
+          "input_tokens": 3595
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9868025183677673,
+          "input_tokens": 3389
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.848183810710907,
+          "input_tokens": 3367
+        }
+      }
+    },
+    {
+      "key": "row-5217/3",
+      "case_id": "row-5217",
+      "step": 3,
+      "family": "musique-family-000424",
+      "opened_ids": [
+        "p0",
+        "p12",
+        "p11"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.4703248143196106,
+          "input_tokens": 3581
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9477502107620239,
+          "input_tokens": 3237
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5097216367721558,
+          "input_tokens": 3207
+        }
+      }
+    },
+    {
+      "key": "row-6214/0",
+      "case_id": "row-6214",
+      "step": 0,
+      "family": "musique-family-000868",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.8116402626037598,
+          "input_tokens": 2929
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8116402626037598,
+          "input_tokens": 2929
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8116402626037598,
+          "input_tokens": 2929
+        }
+      }
+    },
+    {
+      "key": "row-6214/1",
+      "case_id": "row-6214",
+      "step": 1,
+      "family": "musique-family-000868",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p3",
+          "choice_probability": 0.2717747092247009,
+          "input_tokens": 2917
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8520060777664185,
+          "input_tokens": 2697
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9626285433769226,
+          "input_tokens": 2690
+        }
+      }
+    },
+    {
+      "key": "row-6214/2",
+      "case_id": "row-6214",
+      "step": 2,
+      "family": "musique-family-000868",
+      "opened_ids": [
+        "p0",
+        "p3"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8544934988021851,
+          "input_tokens": 2905
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.45907115936279297,
+          "input_tokens": 2509
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7846401929855347,
+          "input_tokens": 2488
+        }
+      }
+    },
+    {
+      "key": "row-6214/3",
+      "case_id": "row-6214",
+      "step": 3,
+      "family": "musique-family-000868",
+      "opened_ids": [
+        "p0",
+        "p3",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8515644669532776,
+          "input_tokens": 2893
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7172409296035767,
+          "input_tokens": 2402
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9210831522941589,
+          "input_tokens": 2373
+        }
+      }
+    },
+    {
+      "key": "row-6657/0",
+      "case_id": "row-6657",
+      "step": 0,
+      "family": "musique-family-000012",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.8728260397911072,
+          "input_tokens": 2826
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8728260397911072,
+          "input_tokens": 2826
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8728260397911072,
+          "input_tokens": 2826
+        }
+      }
+    },
+    {
+      "key": "row-6657/1",
+      "case_id": "row-6657",
+      "step": 1,
+      "family": "musique-family-000012",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9883114695549011,
+          "input_tokens": 2814
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9984081387519836,
+          "input_tokens": 2686
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9950248599052429,
+          "input_tokens": 2678
+        }
+      }
+    },
+    {
+      "key": "row-6657/2",
+      "case_id": "row-6657",
+      "step": 2,
+      "family": "musique-family-000012",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9012551307678223,
+          "input_tokens": 2802
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7995786070823669,
+          "input_tokens": 2591
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9666275978088379,
+          "input_tokens": 2574
+        }
+      }
+    },
+    {
+      "key": "row-6657/3",
+      "case_id": "row-6657",
+      "step": 3,
+      "family": "musique-family-000012",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7545719742774963,
+          "input_tokens": 2790
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9440160989761353,
+          "input_tokens": 2453
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.986127495765686,
+          "input_tokens": 2424
+        }
+      }
+    },
+    {
+      "key": "row-7996/0",
+      "case_id": "row-7996",
+      "step": 0,
+      "family": "musique-family-000435",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.58907151222229,
+          "input_tokens": 2993
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.58907151222229,
+          "input_tokens": 2993
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.58907151222229,
+          "input_tokens": 2993
+        }
+      }
+    },
+    {
+      "key": "row-7996/1",
+      "case_id": "row-7996",
+      "step": 1,
+      "family": "musique-family-000435",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.3762757480144501,
+          "input_tokens": 2981
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9891048073768616,
+          "input_tokens": 2775
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.95366370677948,
+          "input_tokens": 2766
+        }
+      }
+    },
+    {
+      "key": "row-7996/2",
+      "case_id": "row-7996",
+      "step": 2,
+      "family": "musique-family-000435",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7800315022468567,
+          "input_tokens": 2969
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.509708821773529,
+          "input_tokens": 2550
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.3544340133666992,
+          "input_tokens": 2535
+        }
+      }
+    },
+    {
+      "key": "row-7996/3",
+      "case_id": "row-7996",
+      "step": 3,
+      "family": "musique-family-000435",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9511175155639648,
+          "input_tokens": 2957
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9682062864303589,
+          "input_tokens": 2433
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.889207661151886,
+          "input_tokens": 2411
+        }
+      }
+    },
+    {
+      "key": "row-8077/0",
+      "case_id": "row-8077",
+      "step": 0,
+      "family": "musique-family-000574",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9161021113395691,
+          "input_tokens": 2824
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9161021113395691,
+          "input_tokens": 2824
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9161021113395691,
+          "input_tokens": 2824
+        }
+      }
+    },
+    {
+      "key": "row-8077/1",
+      "case_id": "row-8077",
+      "step": 1,
+      "family": "musique-family-000574",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9002627730369568,
+          "input_tokens": 2812
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9303188920021057,
+          "input_tokens": 2680
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5481603145599365,
+          "input_tokens": 2668
+        }
+      }
+    },
+    {
+      "key": "row-8077/2",
+      "case_id": "row-8077",
+      "step": 2,
+      "family": "musique-family-000574",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9953265190124512,
+          "input_tokens": 2800
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9589791893959045,
+          "input_tokens": 2614
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9949906468391418,
+          "input_tokens": 2591
+        }
+      }
+    },
+    {
+      "key": "row-8077/3",
+      "case_id": "row-8077",
+      "step": 3,
+      "family": "musique-family-000574",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p3"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9866997003555298,
+          "input_tokens": 2788
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8465156555175781,
+          "input_tokens": 2530
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9925151467323303,
+          "input_tokens": 2498
+        }
+      }
+    },
+    {
+      "key": "row-10114/0",
+      "case_id": "row-10114",
+      "step": 0,
+      "family": "musique-family-000468",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6103499531745911,
+          "input_tokens": 2975
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6103499531745911,
+          "input_tokens": 2975
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6103499531745911,
+          "input_tokens": 2975
+        }
+      }
+    },
+    {
+      "key": "row-10114/1",
+      "case_id": "row-10114",
+      "step": 1,
+      "family": "musique-family-000468",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8350185751914978,
+          "input_tokens": 2963
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.4148864448070526,
+          "input_tokens": 2893
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.2575869560241699,
+          "input_tokens": 2886
+        }
+      }
+    },
+    {
+      "key": "row-10114/2",
+      "case_id": "row-10114",
+      "step": 2,
+      "family": "musique-family-000468",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6971163749694824,
+          "input_tokens": 2951
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5215144157409668,
+          "input_tokens": 2790
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9076116681098938,
+          "input_tokens": 2774
+        }
+      }
+    },
+    {
+      "key": "row-10114/3",
+      "case_id": "row-10114",
+      "step": 3,
+      "family": "musique-family-000468",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.47468701004981995,
+          "input_tokens": 2939
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7113695740699768,
+          "input_tokens": 2707
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6238940954208374,
+          "input_tokens": 2679
+        }
+      }
+    },
+    {
+      "key": "row-10637/0",
+      "case_id": "row-10637",
+      "step": 0,
+      "family": "musique-family-000748",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.955425500869751,
+          "input_tokens": 2449
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.955425500869751,
+          "input_tokens": 2449
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.955425500869751,
+          "input_tokens": 2449
+        }
+      }
+    },
+    {
+      "key": "row-10637/1",
+      "case_id": "row-10637",
+      "step": 1,
+      "family": "musique-family-000748",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.36803191900253296,
+          "input_tokens": 2437
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.6376116871833801,
+          "input_tokens": 2390
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6778770089149475,
+          "input_tokens": 2380
+        }
+      }
+    },
+    {
+      "key": "row-10637/2",
+      "case_id": "row-10637",
+      "step": 2,
+      "family": "musique-family-000748",
+      "opened_ids": [
+        "p0",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9773234128952026,
+          "input_tokens": 2425
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8350566029548645,
+          "input_tokens": 2224
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6848921179771423,
+          "input_tokens": 2206
+        }
+      }
+    },
+    {
+      "key": "row-10637/3",
+      "case_id": "row-10637",
+      "step": 3,
+      "family": "musique-family-000748",
+      "opened_ids": [
+        "p0",
+        "p2",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.983658492565155,
+          "input_tokens": 2413
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9020645618438721,
+          "input_tokens": 2165
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6234934329986572,
+          "input_tokens": 2139
+        }
+      }
+    },
+    {
+      "key": "row-10766/0",
+      "case_id": "row-10766",
+      "step": 0,
+      "family": "musique-family-000397",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.7753815054893494,
+          "input_tokens": 2617
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7753815054893494,
+          "input_tokens": 2617
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7753815054893494,
+          "input_tokens": 2617
+        }
+      }
+    },
+    {
+      "key": "row-10766/1",
+      "case_id": "row-10766",
+      "step": 1,
+      "family": "musique-family-000397",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7137872576713562,
+          "input_tokens": 2605
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8584408760070801,
+          "input_tokens": 2491
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.7058727741241455,
+          "input_tokens": 2483
+        }
+      }
+    },
+    {
+      "key": "row-10766/2",
+      "case_id": "row-10766",
+      "step": 2,
+      "family": "musique-family-000397",
+      "opened_ids": [
+        "p0",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5745740532875061,
+          "input_tokens": 2593
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9715563654899597,
+          "input_tokens": 2393
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.794053316116333,
+          "input_tokens": 2370
+        }
+      }
+    },
+    {
+      "key": "row-10766/3",
+      "case_id": "row-10766",
+      "step": 3,
+      "family": "musique-family-000397",
+      "opened_ids": [
+        "p0",
+        "p5",
+        "p4"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8989375233650208,
+          "input_tokens": 2581
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9933927655220032,
+          "input_tokens": 2293
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9166712760925293,
+          "input_tokens": 2261
+        }
+      }
+    },
+    {
+      "key": "row-11853/0",
+      "case_id": "row-11853",
+      "step": 0,
+      "family": "musique-family-000397",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.8320943117141724,
+          "input_tokens": 2485
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8320943117141724,
+          "input_tokens": 2485
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8320943117141724,
+          "input_tokens": 2485
+        }
+      }
+    },
+    {
+      "key": "row-11853/1",
+      "case_id": "row-11853",
+      "step": 1,
+      "family": "musique-family-000397",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p10",
+          "choice_probability": 0.43912258744239807,
+          "input_tokens": 2473
+        },
+        "titles_only": {
+          "choice": "open_p5",
+          "choice_probability": 0.581581711769104,
+          "input_tokens": 2424
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9433716535568237,
+          "input_tokens": 2414
+        }
+      }
+    },
+    {
+      "key": "row-11853/2",
+      "case_id": "row-11853",
+      "step": 2,
+      "family": "musique-family-000397",
+      "opened_ids": [
+        "p0",
+        "p10"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.4649013876914978,
+          "input_tokens": 2459
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8331373929977417,
+          "input_tokens": 2331
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8826574683189392,
+          "input_tokens": 2312
+        }
+      }
+    },
+    {
+      "key": "row-11853/3",
+      "case_id": "row-11853",
+      "step": 3,
+      "family": "musique-family-000397",
+      "opened_ids": [
+        "p0",
+        "p10",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9112109541893005,
+          "input_tokens": 2447
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.3553904592990875,
+          "input_tokens": 2247
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5328919887542725,
+          "input_tokens": 2219
+        }
+      }
+    },
+    {
+      "key": "row-12523/0",
+      "case_id": "row-12523",
+      "step": 0,
+      "family": "musique-family-000583",
+      "opened_ids": [],
+      "reference_target": {
+        "open_p0": 1.0
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.8057615756988525,
+          "input_tokens": 3225
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8057615756988525,
+          "input_tokens": 3225
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8057615756988525,
+          "input_tokens": 3225
+        }
+      }
+    },
+    {
+      "key": "row-12523/1",
+      "case_id": "row-12523",
+      "step": 1,
+      "family": "musique-family-000583",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {
+        "open_p0": 1.0
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9587376117706299,
+          "input_tokens": 3214
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9323559403419495,
+          "input_tokens": 3022
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9710515141487122,
+          "input_tokens": 3014
+        }
+      }
+    },
+    {
+      "key": "row-12523/2",
+      "case_id": "row-12523",
+      "step": 2,
+      "family": "musique-family-000583",
+      "opened_ids": [
+        "p1",
+        "p0"
+      ],
+      "reference_target": {
+        "stop_exhausted": 1.0
+      },
+      "reference_status": "reviewed_pool_insufficient",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8176982998847961,
+          "input_tokens": 3201
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9057629108428955,
+          "input_tokens": 2903
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5881466269493103,
+          "input_tokens": 2889
+        }
+      }
+    },
+    {
+      "key": "row-12523/3",
+      "case_id": "row-12523",
+      "step": 3,
+      "family": "musique-family-000583",
+      "opened_ids": [
+        "p1",
+        "p0",
+        "p2"
+      ],
+      "reference_target": {
+        "stop_exhausted": 1.0
+      },
+      "reference_status": "reviewed_pool_insufficient",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9083656668663025,
+          "input_tokens": 3190
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9975372552871704,
+          "input_tokens": 2715
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9842962622642517,
+          "input_tokens": 2694
+        }
+      }
+    },
+    {
+      "key": "row-12833/0",
+      "case_id": "row-12833",
+      "step": 0,
+      "family": "musique-family-000022",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.942015528678894,
+          "input_tokens": 3604
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.942015528678894,
+          "input_tokens": 3604
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.942015528678894,
+          "input_tokens": 3604
+        }
+      }
+    },
+    {
+      "key": "row-12833/1",
+      "case_id": "row-12833",
+      "step": 1,
+      "family": "musique-family-000022",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.7614385485649109,
+          "input_tokens": 3592
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.839117169380188,
+          "input_tokens": 3504
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7574710845947266,
+          "input_tokens": 3497
+        }
+      }
+    },
+    {
+      "key": "row-12833/2",
+      "case_id": "row-12833",
+      "step": 2,
+      "family": "musique-family-000022",
+      "opened_ids": [
+        "p1",
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9378169775009155,
+          "input_tokens": 3581
+        },
+        "titles_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.44503432512283325,
+          "input_tokens": 3018
+        },
+        "ids_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.31375280022621155,
+          "input_tokens": 3005
+        }
+      }
+    },
+    {
+      "key": "row-12833/3",
+      "case_id": "row-12833",
+      "step": 3,
+      "family": "musique-family-000022",
+      "opened_ids": [
+        "p1",
+        "p0",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9880346655845642,
+          "input_tokens": 3568
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9052030444145203,
+          "input_tokens": 2809
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8329698443412781,
+          "input_tokens": 2788
+        }
+      }
+    },
+    {
+      "key": "row-14496/0",
+      "case_id": "row-14496",
+      "step": 0,
+      "family": "musique-family-000138",
+      "opened_ids": [],
+      "reference_target": {
+        "open_p0": 1.0
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.5134998559951782,
+          "input_tokens": 2121
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.5134998559951782,
+          "input_tokens": 2121
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.5134998559951782,
+          "input_tokens": 2121
+        }
+      }
+    },
+    {
+      "key": "row-14496/1",
+      "case_id": "row-14496",
+      "step": 1,
+      "family": "musique-family-000138",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {
+        "open_p0": 1.0
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8702264428138733,
+          "input_tokens": 2109
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5917940735816956,
+          "input_tokens": 2065
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9567714929580688,
+          "input_tokens": 2058
+        }
+      }
+    },
+    {
+      "key": "row-14496/2",
+      "case_id": "row-14496",
+      "step": 2,
+      "family": "musique-family-000138",
+      "opened_ids": [
+        "p1",
+        "p0"
+      ],
+      "reference_target": {
+        "stop_exhausted": 1.0
+      },
+      "reference_status": "reviewed_pool_insufficient",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9649661183357239,
+          "input_tokens": 2097
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8960998058319092,
+          "input_tokens": 1937
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9971808195114136,
+          "input_tokens": 1919
+        }
+      }
+    },
+    {
+      "key": "row-14496/3",
+      "case_id": "row-14496",
+      "step": 3,
+      "family": "musique-family-000138",
+      "opened_ids": [
+        "p1",
+        "p0",
+        "p2"
+      ],
+      "reference_target": {
+        "stop_exhausted": 1.0
+      },
+      "reference_status": "reviewed_pool_insufficient",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9449002742767334,
+          "input_tokens": 2085
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.6830101013183594,
+          "input_tokens": 1882
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9676029682159424,
+          "input_tokens": 1853
+        }
+      }
+    },
+    {
+      "key": "row-15332/0",
+      "case_id": "row-15332",
+      "step": 0,
+      "family": "musique-family-000704",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.7728426456451416,
+          "input_tokens": 4926
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7728426456451416,
+          "input_tokens": 4926
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7728426456451416,
+          "input_tokens": 4926
+        }
+      }
+    },
+    {
+      "key": "row-15332/1",
+      "case_id": "row-15332",
+      "step": 1,
+      "family": "musique-family-000704",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.5083245635032654,
+          "input_tokens": 4914
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9685912132263184,
+          "input_tokens": 4575
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9938880801200867,
+          "input_tokens": 4568
+        }
+      }
+    },
+    {
+      "key": "row-15332/2",
+      "case_id": "row-15332",
+      "step": 2,
+      "family": "musique-family-000704",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.6569430828094482,
+          "input_tokens": 4902
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.4816018342971802,
+          "input_tokens": 4327
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7648386359214783,
+          "input_tokens": 4313
+        }
+      }
+    },
+    {
+      "key": "row-15332/3",
+      "case_id": "row-15332",
+      "step": 3,
+      "family": "musique-family-000704",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p3",
+          "choice_probability": 0.6072936058044434,
+          "input_tokens": 4891
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9721770882606506,
+          "input_tokens": 4125
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9487881660461426,
+          "input_tokens": 4104
+        }
+      }
+    },
+    {
+      "key": "row-17008/0",
+      "case_id": "row-17008",
+      "step": 0,
+      "family": "musique-family-000704",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9258018136024475,
+          "input_tokens": 4960
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9258018136024475,
+          "input_tokens": 4960
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9258018136024475,
+          "input_tokens": 4960
+        }
+      }
+    },
+    {
+      "key": "row-17008/1",
+      "case_id": "row-17008",
+      "step": 1,
+      "family": "musique-family-000704",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.4303787052631378,
+          "input_tokens": 4948
+        },
+        "titles_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.16203176975250244,
+          "input_tokens": 4777
+        },
+        "ids_only": {
+          "choice": "open_p5",
+          "choice_probability": 0.16578863561153412,
+          "input_tokens": 4770
+        }
+      }
+    },
+    {
+      "key": "row-17008/2",
+      "case_id": "row-17008",
+      "step": 2,
+      "family": "musique-family-000704",
+      "opened_ids": [
+        "p0",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5063197016716003,
+          "input_tokens": 4936
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7613666653633118,
+          "input_tokens": 4554
+        },
+        "ids_only": {
+          "choice": "open_p10",
+          "choice_probability": 0.26919126510620117,
+          "input_tokens": 4535
+        }
+      }
+    },
+    {
+      "key": "row-17008/3",
+      "case_id": "row-17008",
+      "step": 3,
+      "family": "musique-family-000704",
+      "opened_ids": [
+        "p0",
+        "p5",
+        "p4"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.4584897458553314,
+          "input_tokens": 4924
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7934185266494751,
+          "input_tokens": 4332
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5053178071975708,
+          "input_tokens": 4304
+        }
+      }
+    },
+    {
+      "key": "row-17159/0",
+      "case_id": "row-17159",
+      "step": 0,
+      "family": "musique-family-000360",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.8582776188850403,
+          "input_tokens": 3315
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8582776188850403,
+          "input_tokens": 3315
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8582776188850403,
+          "input_tokens": 3315
+        }
+      }
+    },
+    {
+      "key": "row-17159/1",
+      "case_id": "row-17159",
+      "step": 1,
+      "family": "musique-family-000360",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.5810399055480957,
+          "input_tokens": 3303
+        },
+        "titles_only": {
+          "choice": "open_p14",
+          "choice_probability": 0.4753119647502899,
+          "input_tokens": 3218
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9524294137954712,
+          "input_tokens": 3207
+        }
+      }
+    },
+    {
+      "key": "row-17159/2",
+      "case_id": "row-17159",
+      "step": 2,
+      "family": "musique-family-000360",
+      "opened_ids": [
+        "p1",
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5870283246040344,
+          "input_tokens": 3291
+        },
+        "titles_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.690444827079773,
+          "input_tokens": 3084
+        },
+        "ids_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.7379068732261658,
+          "input_tokens": 3066
+        }
+      }
+    },
+    {
+      "key": "row-17159/3",
+      "case_id": "row-17159",
+      "step": 3,
+      "family": "musique-family-000360",
+      "opened_ids": [
+        "p1",
+        "p0",
+        "p12"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.34432804584503174,
+          "input_tokens": 3278
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.44418057799339294,
+          "input_tokens": 2948
+        },
+        "ids_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.25693145394325256,
+          "input_tokens": 2923
+        }
+      }
+    },
+    {
+      "key": "row-19869/0",
+      "case_id": "row-19869",
+      "step": 0,
+      "family": "musique-family-000748",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.724205732345581,
+          "input_tokens": 2497
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.724205732345581,
+          "input_tokens": 2497
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.724205732345581,
+          "input_tokens": 2497
+        }
+      }
+    },
+    {
+      "key": "row-19869/1",
+      "case_id": "row-19869",
+      "step": 1,
+      "family": "musique-family-000748",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.6778474450111389,
+          "input_tokens": 2485
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.862293541431427,
+          "input_tokens": 2438
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9297113418579102,
+          "input_tokens": 2428
+        }
+      }
+    },
+    {
+      "key": "row-19869/2",
+      "case_id": "row-19869",
+      "step": 2,
+      "family": "musique-family-000748",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.48197051882743835,
+          "input_tokens": 2473
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5433861613273621,
+          "input_tokens": 2289
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.6996392607688904,
+          "input_tokens": 2270
+        }
+      }
+    },
+    {
+      "key": "row-19869/3",
+      "case_id": "row-19869",
+      "step": 3,
+      "family": "musique-family-000748",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7903580069541931,
+          "input_tokens": 2461
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5836389064788818,
+          "input_tokens": 2230
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8801617622375488,
+          "input_tokens": 2203
+        }
+      }
+    },
+    {
+      "key": "row-19890/0",
+      "case_id": "row-19890",
+      "step": 0,
+      "family": "musique-family-000163",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p13",
+          "choice_probability": 0.2769223153591156,
+          "input_tokens": 2647
+        },
+        "titles_only": {
+          "choice": "open_p13",
+          "choice_probability": 0.2769223153591156,
+          "input_tokens": 2647
+        },
+        "ids_only": {
+          "choice": "open_p13",
+          "choice_probability": 0.2769223153591156,
+          "input_tokens": 2647
+        }
+      }
+    },
+    {
+      "key": "row-19890/1",
+      "case_id": "row-19890",
+      "step": 1,
+      "family": "musique-family-000163",
+      "opened_ids": [
+        "p13"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.5839207768440247,
+          "input_tokens": 2633
+        },
+        "titles_only": {
+          "choice": "open_p14",
+          "choice_probability": 0.6321216225624084,
+          "input_tokens": 2509
+        },
+        "ids_only": {
+          "choice": "open_p12",
+          "choice_probability": 0.6920785307884216,
+          "input_tokens": 2501
+        }
+      }
+    },
+    {
+      "key": "row-19890/2",
+      "case_id": "row-19890",
+      "step": 2,
+      "family": "musique-family-000163",
+      "opened_ids": [
+        "p13",
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9212496280670166,
+          "input_tokens": 2621
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.7274318933486938,
+          "input_tokens": 2380
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8647345900535583,
+          "input_tokens": 2364
+        }
+      }
+    },
+    {
+      "key": "row-19890/3",
+      "case_id": "row-19890",
+      "step": 3,
+      "family": "musique-family-000163",
+      "opened_ids": [
+        "p13",
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9566872715950012,
+          "input_tokens": 2609
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5129422545433044,
+          "input_tokens": 2291
+        },
+        "ids_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.33079659938812256,
+          "input_tokens": 2266
+        }
+      }
+    },
+    {
+      "key": "row-21050/0",
+      "case_id": "row-21050",
+      "step": 0,
+      "family": "musique-family-000367",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9759135246276855,
+          "input_tokens": 2634
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9759135246276855,
+          "input_tokens": 2634
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9759135246276855,
+          "input_tokens": 2634
+        }
+      }
+    },
+    {
+      "key": "row-21050/1",
+      "case_id": "row-21050",
+      "step": 1,
+      "family": "musique-family-000367",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.29253074526786804,
+          "input_tokens": 2622
+        },
+        "titles_only": {
+          "choice": "open_p14",
+          "choice_probability": 0.47907471656799316,
+          "input_tokens": 2498
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.887588620185852,
+          "input_tokens": 2489
+        }
+      }
+    },
+    {
+      "key": "row-21050/2",
+      "case_id": "row-21050",
+      "step": 2,
+      "family": "musique-family-000367",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.788497805595398,
+          "input_tokens": 2610
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9546820521354675,
+          "input_tokens": 2440
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9807672500610352,
+          "input_tokens": 2423
+        }
+      }
+    },
+    {
+      "key": "row-21050/3",
+      "case_id": "row-21050",
+      "step": 3,
+      "family": "musique-family-000367",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9451306462287903,
+          "input_tokens": 2598
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9427536725997925,
+          "input_tokens": 2363
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8067179322242737,
+          "input_tokens": 2339
+        }
+      }
+    },
+    {
+      "key": "row-21946/0",
+      "case_id": "row-21946",
+      "step": 0,
+      "family": "musique-family-000730",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5131445527076721,
+          "input_tokens": 3194
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5131445527076721,
+          "input_tokens": 3194
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5131445527076721,
+          "input_tokens": 3194
+        }
+      }
+    },
+    {
+      "key": "row-21946/1",
+      "case_id": "row-21946",
+      "step": 1,
+      "family": "musique-family-000730",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9691656231880188,
+          "input_tokens": 3182
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8614954948425293,
+          "input_tokens": 3120
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.7140045166015625,
+          "input_tokens": 3112
+        }
+      }
+    },
+    {
+      "key": "row-21946/2",
+      "case_id": "row-21946",
+      "step": 2,
+      "family": "musique-family-000730",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5461673736572266,
+          "input_tokens": 3170
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.863490104675293,
+          "input_tokens": 2996
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9450594782829285,
+          "input_tokens": 2981
+        }
+      }
+    },
+    {
+      "key": "row-21946/3",
+      "case_id": "row-21946",
+      "step": 3,
+      "family": "musique-family-000730",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5739920735359192,
+          "input_tokens": 3158
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9798279404640198,
+          "input_tokens": 2876
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9435443878173828,
+          "input_tokens": 2853
+        }
+      }
+    },
+    {
+      "key": "row-23089/0",
+      "case_id": "row-23089",
+      "step": 0,
+      "family": "musique-family-000163",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.5105401277542114,
+          "input_tokens": 2558
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.5105401277542114,
+          "input_tokens": 2558
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.5105401277542114,
+          "input_tokens": 2558
+        }
+      }
+    },
+    {
+      "key": "row-23089/1",
+      "case_id": "row-23089",
+      "step": 1,
+      "family": "musique-family-000163",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.5766807198524475,
+          "input_tokens": 2546
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.940058171749115,
+          "input_tokens": 2430
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9324089288711548,
+          "input_tokens": 2422
+        }
+      }
+    },
+    {
+      "key": "row-23089/2",
+      "case_id": "row-23089",
+      "step": 2,
+      "family": "musique-family-000163",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.4661324918270111,
+          "input_tokens": 2534
+        },
+        "titles_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.47436198592185974,
+          "input_tokens": 2341
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.48606055974960327,
+          "input_tokens": 2324
+        }
+      }
+    },
+    {
+      "key": "row-23089/3",
+      "case_id": "row-23089",
+      "step": 3,
+      "family": "musique-family-000163",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p12"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9781616926193237,
+          "input_tokens": 2520
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.41663387417793274,
+          "input_tokens": 2197
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.27733197808265686,
+          "input_tokens": 2172
+        }
+      }
+    },
+    {
+      "key": "row-23193/0",
+      "case_id": "row-23193",
+      "step": 0,
+      "family": "musique-family-000022",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9560248851776123,
+          "input_tokens": 3363
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9560248851776123,
+          "input_tokens": 3363
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9560248851776123,
+          "input_tokens": 3363
+        }
+      }
+    },
+    {
+      "key": "row-23193/1",
+      "case_id": "row-23193",
+      "step": 1,
+      "family": "musique-family-000022",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.41466256976127625,
+          "input_tokens": 3351
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.7149211168289185,
+          "input_tokens": 3252
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9387586116790771,
+          "input_tokens": 3245
+        }
+      }
+    },
+    {
+      "key": "row-23193/2",
+      "case_id": "row-23193",
+      "step": 2,
+      "family": "musique-family-000022",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5840717554092407,
+          "input_tokens": 3340
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.43270251154899597,
+          "input_tokens": 2766
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.4112110733985901,
+          "input_tokens": 2753
+        }
+      }
+    },
+    {
+      "key": "row-23193/3",
+      "case_id": "row-23193",
+      "step": 3,
+      "family": "musique-family-000022",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7015621066093445,
+          "input_tokens": 3327
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7415095567703247,
+          "input_tokens": 2592
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5604063272476196,
+          "input_tokens": 2573
+        }
+      }
+    },
+    {
+      "key": "row-24052/0",
+      "case_id": "row-24052",
+      "step": 0,
+      "family": "musique-family-000812",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.8529455065727234,
+          "input_tokens": 4515
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8529455065727234,
+          "input_tokens": 4515
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8529455065727234,
+          "input_tokens": 4515
+        }
+      }
+    },
+    {
+      "key": "row-24052/1",
+      "case_id": "row-24052",
+      "step": 1,
+      "family": "musique-family-000812",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9285945892333984,
+          "input_tokens": 4503
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.6343918442726135,
+          "input_tokens": 4333
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8249054551124573,
+          "input_tokens": 4320
+        }
+      }
+    },
+    {
+      "key": "row-24052/2",
+      "case_id": "row-24052",
+      "step": 2,
+      "family": "musique-family-000812",
+      "opened_ids": [
+        "p1",
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6736602187156677,
+          "input_tokens": 4491
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.47007444500923157,
+          "input_tokens": 4253
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.3709108829498291,
+          "input_tokens": 4230
+        }
+      }
+    },
+    {
+      "key": "row-24052/3",
+      "case_id": "row-24052",
+      "step": 3,
+      "family": "musique-family-000812",
+      "opened_ids": [
+        "p1",
+        "p0",
+        "p3"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5446287393569946,
+          "input_tokens": 4479
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.45586124062538147,
+          "input_tokens": 4158
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5500088334083557,
+          "input_tokens": 4127
+        }
+      }
+    },
+    {
+      "key": "row-24087/0",
+      "case_id": "row-24087",
+      "step": 0,
+      "family": "musique-family-000871",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.7678102254867554,
+          "input_tokens": 3119
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7678102254867554,
+          "input_tokens": 3119
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7678102254867554,
+          "input_tokens": 3119
+        }
+      }
+    },
+    {
+      "key": "row-24087/1",
+      "case_id": "row-24087",
+      "step": 1,
+      "family": "musique-family-000871",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9816610813140869,
+          "input_tokens": 3107
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.4191834032535553,
+          "input_tokens": 3034
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.368760347366333,
+          "input_tokens": 3026
+        }
+      }
+    },
+    {
+      "key": "row-24087/2",
+      "case_id": "row-24087",
+      "step": 2,
+      "family": "musique-family-000871",
+      "opened_ids": [
+        "p0",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8791118264198303,
+          "input_tokens": 3095
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8904687166213989,
+          "input_tokens": 2894
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5190204977989197,
+          "input_tokens": 2879
+        }
+      }
+    },
+    {
+      "key": "row-24087/3",
+      "case_id": "row-24087",
+      "step": 3,
+      "family": "musique-family-000871",
+      "opened_ids": [
+        "p0",
+        "p2",
+        "p4"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.6457261443138123,
+          "input_tokens": 3083
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9427353143692017,
+          "input_tokens": 2780
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9442598223686218,
+          "input_tokens": 2755
+        }
+      }
+    },
+    {
+      "key": "row-24439/0",
+      "case_id": "row-24439",
+      "step": 0,
+      "family": "musique-family-000073",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.8926379680633545,
+          "input_tokens": 2477
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8926379680633545,
+          "input_tokens": 2477
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.8926379680633545,
+          "input_tokens": 2477
+        }
+      }
+    },
+    {
+      "key": "row-24439/1",
+      "case_id": "row-24439",
+      "step": 1,
+      "family": "musique-family-000073",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6161230802536011,
+          "input_tokens": 2465
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7959049344062805,
+          "input_tokens": 2397
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9888731837272644,
+          "input_tokens": 2387
+        }
+      }
+    },
+    {
+      "key": "row-24439/2",
+      "case_id": "row-24439",
+      "step": 2,
+      "family": "musique-family-000073",
+      "opened_ids": [
+        "p1",
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5664440393447876,
+          "input_tokens": 2453
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8863843083381653,
+          "input_tokens": 2295
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9610544443130493,
+          "input_tokens": 2278
+        }
+      }
+    },
+    {
+      "key": "row-24439/3",
+      "case_id": "row-24439",
+      "step": 3,
+      "family": "musique-family-000073",
+      "opened_ids": [
+        "p1",
+        "p0",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.4635143578052521,
+          "input_tokens": 2441
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6915738582611084,
+          "input_tokens": 2197
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8913506865501404,
+          "input_tokens": 2173
+        }
+      }
+    },
+    {
+      "key": "row-24506/0",
+      "case_id": "row-24506",
+      "step": 0,
+      "family": "musique-family-000012",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.8461278676986694,
+          "input_tokens": 3107
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8461278676986694,
+          "input_tokens": 3107
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8461278676986694,
+          "input_tokens": 3107
+        }
+      }
+    },
+    {
+      "key": "row-24506/1",
+      "case_id": "row-24506",
+      "step": 1,
+      "family": "musique-family-000012",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8878076076507568,
+          "input_tokens": 3095
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9594650864601135,
+          "input_tokens": 3009
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9983950257301331,
+          "input_tokens": 2998
+        }
+      }
+    },
+    {
+      "key": "row-24506/2",
+      "case_id": "row-24506",
+      "step": 2,
+      "family": "musique-family-000012",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9537902474403381,
+          "input_tokens": 3083
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7728726863861084,
+          "input_tokens": 2871
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.6369289755821228,
+          "input_tokens": 2848
+        }
+      }
+    },
+    {
+      "key": "row-24506/3",
+      "case_id": "row-24506",
+      "step": 3,
+      "family": "musique-family-000012",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9037164449691772,
+          "input_tokens": 3071
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8882099986076355,
+          "input_tokens": 2730
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9087498188018799,
+          "input_tokens": 2699
+        }
+      }
+    },
+    {
+      "key": "row-26884/0",
+      "case_id": "row-26884",
+      "step": 0,
+      "family": "musique-family-000812",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.7062928080558777,
+          "input_tokens": 4262
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7062928080558777,
+          "input_tokens": 4262
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7062928080558777,
+          "input_tokens": 4262
+        }
+      }
+    },
+    {
+      "key": "row-26884/1",
+      "case_id": "row-26884",
+      "step": 1,
+      "family": "musique-family-000812",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6452485918998718,
+          "input_tokens": 4250
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.42426827549934387,
+          "input_tokens": 4183
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.7667545676231384,
+          "input_tokens": 4173
+        }
+      }
+    },
+    {
+      "key": "row-26884/2",
+      "case_id": "row-26884",
+      "step": 2,
+      "family": "musique-family-000812",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8308222889900208,
+          "input_tokens": 4238
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8184767961502075,
+          "input_tokens": 4000
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8337652683258057,
+          "input_tokens": 3977
+        }
+      }
+    },
+    {
+      "key": "row-26884/3",
+      "case_id": "row-26884",
+      "step": 3,
+      "family": "musique-family-000812",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8006141185760498,
+          "input_tokens": 4227
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.515053927898407,
+          "input_tokens": 3830
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5437523722648621,
+          "input_tokens": 3799
+        }
+      }
+    },
+    {
+      "key": "row-27448/0",
+      "case_id": "row-27448",
+      "step": 0,
+      "family": "musique-family-000023",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "masked_source_review",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.5718317627906799,
+          "input_tokens": 2027
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.5718317627906799,
+          "input_tokens": 2027
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.5718317627906799,
+          "input_tokens": 2027
+        }
+      }
+    },
+    {
+      "key": "row-27448/1",
+      "case_id": "row-27448",
+      "step": 1,
+      "family": "musique-family-000023",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "masked_source_review",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9161602854728699,
+          "input_tokens": 2015
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.3860817551612854,
+          "input_tokens": 1980
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.27772650122642517,
+          "input_tokens": 1968
+        }
+      }
+    },
+    {
+      "key": "row-27448/2",
+      "case_id": "row-27448",
+      "step": 2,
+      "family": "musique-family-000023",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "masked_source_review",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5797712206840515,
+          "input_tokens": 2003
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.6929734349250793,
+          "input_tokens": 1861
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.2875075936317444,
+          "input_tokens": 1841
+        }
+      }
+    },
+    {
+      "key": "row-27448/3",
+      "case_id": "row-27448",
+      "step": 3,
+      "family": "musique-family-000023",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "masked_source_review",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8983780741691589,
+          "input_tokens": 1991
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8269180655479431,
+          "input_tokens": 1804
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8048486113548279,
+          "input_tokens": 1774
+        }
+      }
+    },
+    {
+      "key": "row-28384/0",
+      "case_id": "row-28384",
+      "step": 0,
+      "family": "musique-family-000184",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.4039815366268158,
+          "input_tokens": 2079
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.4039815366268158,
+          "input_tokens": 2079
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.4039815366268158,
+          "input_tokens": 2079
+        }
+      }
+    },
+    {
+      "key": "row-28384/1",
+      "case_id": "row-28384",
+      "step": 1,
+      "family": "musique-family-000184",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5952883362770081,
+          "input_tokens": 2067
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8620164394378662,
+          "input_tokens": 1978
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8750234842300415,
+          "input_tokens": 1970
+        }
+      }
+    },
+    {
+      "key": "row-28384/2",
+      "case_id": "row-28384",
+      "step": 2,
+      "family": "musique-family-000184",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6602926850318909,
+          "input_tokens": 2055
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.614269495010376,
+          "input_tokens": 1893
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9626888632774353,
+          "input_tokens": 1871
+        }
+      }
+    },
+    {
+      "key": "row-28384/3",
+      "case_id": "row-28384",
+      "step": 3,
+      "family": "musique-family-000184",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p14"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6615517139434814,
+          "input_tokens": 2041
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6768844127655029,
+          "input_tokens": 1822
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9630836844444275,
+          "input_tokens": 1792
+        }
+      }
+    },
+    {
+      "key": "row-28960/0",
+      "case_id": "row-28960",
+      "step": 0,
+      "family": "musique-family-000583",
+      "opened_ids": [],
+      "reference_target": {
+        "open_p0": 0.5,
+        "open_p4": 0.5
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9683254361152649,
+          "input_tokens": 3397
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9683254361152649,
+          "input_tokens": 3397
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9683254361152649,
+          "input_tokens": 3397
+        }
+      }
+    },
+    {
+      "key": "row-28960/1",
+      "case_id": "row-28960",
+      "step": 1,
+      "family": "musique-family-000583",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {
+        "open_p4": 1.0
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7481634616851807,
+          "input_tokens": 3385
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.7892137765884399,
+          "input_tokens": 3279
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.4853472113609314,
+          "input_tokens": 3273
+        }
+      }
+    },
+    {
+      "key": "row-28960/2",
+      "case_id": "row-28960",
+      "step": 2,
+      "family": "musique-family-000583",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {
+        "open_p4": 1.0
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.984480619430542,
+          "input_tokens": 3374
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8751431703567505,
+          "input_tokens": 3075
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9310145974159241,
+          "input_tokens": 3061
+        }
+      }
+    },
+    {
+      "key": "row-28960/3",
+      "case_id": "row-28960",
+      "step": 3,
+      "family": "musique-family-000583",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {
+        "open_p4": 1.0
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9874300360679626,
+          "input_tokens": 3361
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9913058876991272,
+          "input_tokens": 2854
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.976055920124054,
+          "input_tokens": 2833
+        }
+      }
+    },
+    {
+      "key": "row-32682/0",
+      "case_id": "row-32682",
+      "step": 0,
+      "family": "musique-family-000730",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.8103291392326355,
+          "input_tokens": 3104
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8103291392326355,
+          "input_tokens": 3104
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.8103291392326355,
+          "input_tokens": 3104
+        }
+      }
+    },
+    {
+      "key": "row-32682/1",
+      "case_id": "row-32682",
+      "step": 1,
+      "family": "musique-family-000730",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9773579835891724,
+          "input_tokens": 3092
+        },
+        "titles_only": {
+          "choice": "open_p5",
+          "choice_probability": 0.4118707478046417,
+          "input_tokens": 3030
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.859545886516571,
+          "input_tokens": 3022
+        }
+      }
+    },
+    {
+      "key": "row-32682/2",
+      "case_id": "row-32682",
+      "step": 2,
+      "family": "musique-family-000730",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8823770880699158,
+          "input_tokens": 3080
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5165829658508301,
+          "input_tokens": 2926
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8370780944824219,
+          "input_tokens": 2911
+        }
+      }
+    },
+    {
+      "key": "row-32682/3",
+      "case_id": "row-32682",
+      "step": 3,
+      "family": "musique-family-000730",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p3"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5578532814979553,
+          "input_tokens": 3068
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8779085278511047,
+          "input_tokens": 2830
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9616625308990479,
+          "input_tokens": 2806
+        }
+      }
+    },
+    {
+      "key": "row-35775/0",
+      "case_id": "row-35775",
+      "step": 0,
+      "family": "musique-family-000073",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6005087494850159,
+          "input_tokens": 2768
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6005087494850159,
+          "input_tokens": 2768
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6005087494850159,
+          "input_tokens": 2768
+        }
+      }
+    },
+    {
+      "key": "row-35775/1",
+      "case_id": "row-35775",
+      "step": 1,
+      "family": "musique-family-000073",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9214476943016052,
+          "input_tokens": 2756
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7225831151008606,
+          "input_tokens": 2671
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8757133483886719,
+          "input_tokens": 2664
+        }
+      }
+    },
+    {
+      "key": "row-35775/2",
+      "case_id": "row-35775",
+      "step": 2,
+      "family": "musique-family-000073",
+      "opened_ids": [
+        "p1",
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9731864333152771,
+          "input_tokens": 2744
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9691690802574158,
+          "input_tokens": 2569
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9489552974700928,
+          "input_tokens": 2555
+        }
+      }
+    },
+    {
+      "key": "row-35775/3",
+      "case_id": "row-35775",
+      "step": 3,
+      "family": "musique-family-000073",
+      "opened_ids": [
+        "p1",
+        "p0",
+        "p13"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7536934614181519,
+          "input_tokens": 2730
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8710947632789612,
+          "input_tokens": 2485
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9240482449531555,
+          "input_tokens": 2461
+        }
+      }
+    },
+    {
+      "key": "row-36340/0",
+      "case_id": "row-36340",
+      "step": 0,
+      "family": "musique-family-000135",
+      "opened_ids": [],
+      "reference_target": {
+        "open_p0": 0.5,
+        "open_p17": 0.5
+      },
+      "reference_status": "reviewed_missing_complement",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.96229088306427,
+          "input_tokens": 3096
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.96229088306427,
+          "input_tokens": 3096
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.96229088306427,
+          "input_tokens": 3096
+        }
+      }
+    },
+    {
+      "key": "row-36340/1",
+      "case_id": "row-36340",
+      "step": 1,
+      "family": "musique-family-000135",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {
+        "stop_sufficient": 1.0
+      },
+      "reference_status": "reviewed_proof_complete",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.6074426174163818,
+          "input_tokens": 3084
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.330155611038208,
+          "input_tokens": 2981
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.749396026134491,
+          "input_tokens": 2966
+        }
+      }
+    },
+    {
+      "key": "row-36340/2",
+      "case_id": "row-36340",
+      "step": 2,
+      "family": "musique-family-000135",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {
+        "stop_sufficient": 1.0
+      },
+      "reference_status": "reviewed_proof_complete",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.23792679607868195,
+          "input_tokens": 3072
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7082213759422302,
+          "input_tokens": 2885
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7311076521873474,
+          "input_tokens": 2859
+        }
+      }
+    },
+    {
+      "key": "row-36340/3",
+      "case_id": "row-36340",
+      "step": 3,
+      "family": "musique-family-000135",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p12"
+      ],
+      "reference_target": {
+        "stop_sufficient": 1.0
+      },
+      "reference_status": "reviewed_proof_complete",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.6640855073928833,
+          "input_tokens": 3058
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7917701005935669,
+          "input_tokens": 2705
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5090082883834839,
+          "input_tokens": 2671
+        }
+      }
+    },
+    {
+      "key": "row-36373/0",
+      "case_id": "row-36373",
+      "step": 0,
+      "family": "musique-family-000574",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6703361868858337,
+          "input_tokens": 2789
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6703361868858337,
+          "input_tokens": 2789
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6703361868858337,
+          "input_tokens": 2789
+        }
+      }
+    },
+    {
+      "key": "row-36373/1",
+      "case_id": "row-36373",
+      "step": 1,
+      "family": "musique-family-000574",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9874950051307678,
+          "input_tokens": 2777
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9434996247291565,
+          "input_tokens": 2724
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9688277840614319,
+          "input_tokens": 2713
+        }
+      }
+    },
+    {
+      "key": "row-36373/2",
+      "case_id": "row-36373",
+      "step": 2,
+      "family": "musique-family-000574",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8812940716743469,
+          "input_tokens": 2765
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9984297156333923,
+          "input_tokens": 2666
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.730557918548584,
+          "input_tokens": 2647
+        }
+      }
+    },
+    {
+      "key": "row-36373/3",
+      "case_id": "row-36373",
+      "step": 3,
+      "family": "musique-family-000574",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5124762058258057,
+          "input_tokens": 2753
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9959462285041809,
+          "input_tokens": 2574
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9873443841934204,
+          "input_tokens": 2548
+        }
+      }
+    },
+    {
+      "key": "row-36664/0",
+      "case_id": "row-36664",
+      "step": 0,
+      "family": "musique-family-000493",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9904463291168213,
+          "input_tokens": 2214
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9904463291168213,
+          "input_tokens": 2214
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9904463291168213,
+          "input_tokens": 2214
+        }
+      }
+    },
+    {
+      "key": "row-36664/1",
+      "case_id": "row-36664",
+      "step": 1,
+      "family": "musique-family-000493",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.44019344449043274,
+          "input_tokens": 2202
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.630371630191803,
+          "input_tokens": 2162
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8261520266532898,
+          "input_tokens": 2150
+        }
+      }
+    },
+    {
+      "key": "row-36664/2",
+      "case_id": "row-36664",
+      "step": 2,
+      "family": "musique-family-000493",
+      "opened_ids": [
+        "p0",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7274074554443359,
+          "input_tokens": 2190
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8982865810394287,
+          "input_tokens": 2110
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9958486557006836,
+          "input_tokens": 2087
+        }
+      }
+    },
+    {
+      "key": "row-36664/3",
+      "case_id": "row-36664",
+      "step": 3,
+      "family": "musique-family-000493",
+      "opened_ids": [
+        "p0",
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9919658899307251,
+          "input_tokens": 2178
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.6289498805999756,
+          "input_tokens": 2025
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9467484951019287,
+          "input_tokens": 1994
+        }
+      }
+    },
+    {
+      "key": "row-37002/0",
+      "case_id": "row-37002",
+      "step": 0,
+      "family": "musique-family-000424",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9807385802268982,
+          "input_tokens": 3998
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9807385802268982,
+          "input_tokens": 3998
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9807385802268982,
+          "input_tokens": 3998
+        }
+      }
+    },
+    {
+      "key": "row-37002/1",
+      "case_id": "row-37002",
+      "step": 1,
+      "family": "musique-family-000424",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.19093775749206543,
+          "input_tokens": 3986
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9939447045326233,
+          "input_tokens": 3928
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.9450258612632751,
+          "input_tokens": 3920
+        }
+      }
+    },
+    {
+      "key": "row-37002/2",
+      "case_id": "row-37002",
+      "step": 2,
+      "family": "musique-family-000424",
+      "opened_ids": [
+        "p0",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9552841186523438,
+          "input_tokens": 3974
+        },
+        "titles_only": {
+          "choice": "open_p3",
+          "choice_probability": 0.7145333886146545,
+          "input_tokens": 3793
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.34633126854896545,
+          "input_tokens": 3774
+        }
+      }
+    },
+    {
+      "key": "row-37002/3",
+      "case_id": "row-37002",
+      "step": 3,
+      "family": "musique-family-000424",
+      "opened_ids": [
+        "p0",
+        "p2",
+        "p3"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9814144968986511,
+          "input_tokens": 3962
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8424860239028931,
+          "input_tokens": 3661
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5731669068336487,
+          "input_tokens": 3634
+        }
+      }
+    },
+    {
+      "key": "row-37282/0",
+      "case_id": "row-37282",
+      "step": 0,
+      "family": "musique-family-000184",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.5498642325401306,
+          "input_tokens": 2308
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.5498642325401306,
+          "input_tokens": 2308
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.5498642325401306,
+          "input_tokens": 2308
+        }
+      }
+    },
+    {
+      "key": "row-37282/1",
+      "case_id": "row-37282",
+      "step": 1,
+      "family": "musique-family-000184",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9318418502807617,
+          "input_tokens": 2296
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.6704441905021667,
+          "input_tokens": 2223
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.756225049495697,
+          "input_tokens": 2213
+        }
+      }
+    },
+    {
+      "key": "row-37282/2",
+      "case_id": "row-37282",
+      "step": 2,
+      "family": "musique-family-000184",
+      "opened_ids": [
+        "p1",
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9170010089874268,
+          "input_tokens": 2284
+        },
+        "titles_only": {
+          "choice": "open_p14",
+          "choice_probability": 0.43524375557899475,
+          "input_tokens": 2112
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5496864914894104,
+          "input_tokens": 2091
+        }
+      }
+    },
+    {
+      "key": "row-37282/3",
+      "case_id": "row-37282",
+      "step": 3,
+      "family": "musique-family-000184",
+      "opened_ids": [
+        "p1",
+        "p0",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9890758991241455,
+          "input_tokens": 2272
+        },
+        "titles_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.32670843601226807,
+          "input_tokens": 1893
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5256325602531433,
+          "input_tokens": 1861
+        }
+      }
+    },
+    {
+      "key": "row-38432/0",
+      "case_id": "row-38432",
+      "step": 0,
+      "family": "musique-family-000871",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.9911587834358215,
+          "input_tokens": 3027
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9911587834358215,
+          "input_tokens": 3027
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.9911587834358215,
+          "input_tokens": 3027
+        }
+      }
+    },
+    {
+      "key": "row-38432/1",
+      "case_id": "row-38432",
+      "step": 1,
+      "family": "musique-family-000871",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5430751442909241,
+          "input_tokens": 3015
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9645367860794067,
+          "input_tokens": 2986
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.993569016456604,
+          "input_tokens": 2978
+        }
+      }
+    },
+    {
+      "key": "row-38432/2",
+      "case_id": "row-38432",
+      "step": 2,
+      "family": "musique-family-000871",
+      "opened_ids": [
+        "p0",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.9433555603027344,
+          "input_tokens": 3003
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7377152442932129,
+          "input_tokens": 2905
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8824476003646851,
+          "input_tokens": 2887
+        }
+      }
+    },
+    {
+      "key": "row-38432/3",
+      "case_id": "row-38432",
+      "step": 3,
+      "family": "musique-family-000871",
+      "opened_ids": [
+        "p0",
+        "p2",
+        "p5"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.5024260878562927,
+          "input_tokens": 2991
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.565578043460846,
+          "input_tokens": 2791
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9692472219467163,
+          "input_tokens": 2763
+        }
+      }
+    },
+    {
+      "key": "row-38999/0",
+      "case_id": "row-38999",
+      "step": 0,
+      "family": "musique-family-000604",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p1",
+          "choice_probability": 0.4390346109867096,
+          "input_tokens": 2822
+        },
+        "titles_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.4390346109867096,
+          "input_tokens": 2822
+        },
+        "ids_only": {
+          "choice": "open_p1",
+          "choice_probability": 0.4390346109867096,
+          "input_tokens": 2822
+        }
+      }
+    },
+    {
+      "key": "row-38999/1",
+      "case_id": "row-38999",
+      "step": 1,
+      "family": "musique-family-000604",
+      "opened_ids": [
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p2",
+          "choice_probability": 0.8187833428382874,
+          "input_tokens": 2810
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.644450843334198,
+          "input_tokens": 2658
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.7896174192428589,
+          "input_tokens": 2651
+        }
+      }
+    },
+    {
+      "key": "row-38999/2",
+      "case_id": "row-38999",
+      "step": 2,
+      "family": "musique-family-000604",
+      "opened_ids": [
+        "p1",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.34548255801200867,
+          "input_tokens": 2798
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.7106496691703796,
+          "input_tokens": 2483
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8872518539428711,
+          "input_tokens": 2469
+        }
+      }
+    },
+    {
+      "key": "row-38999/3",
+      "case_id": "row-38999",
+      "step": 3,
+      "family": "musique-family-000604",
+      "opened_ids": [
+        "p1",
+        "p2",
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.48008236289024353,
+          "input_tokens": 2786
+        },
+        "titles_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8817880153656006,
+          "input_tokens": 2344
+        },
+        "ids_only": {
+          "choice": "stop_sufficient",
+          "choice_probability": 0.8420292735099792,
+          "input_tokens": 2323
+        }
+      }
+    },
+    {
+      "key": "row-39565/0",
+      "case_id": "row-39565",
+      "step": 0,
+      "family": "musique-family-000604",
+      "opened_ids": [],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p0",
+          "choice_probability": 0.7221292853355408,
+          "input_tokens": 2985
+        },
+        "titles_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7221292853355408,
+          "input_tokens": 2985
+        },
+        "ids_only": {
+          "choice": "open_p0",
+          "choice_probability": 0.7221292853355408,
+          "input_tokens": 2985
+        }
+      }
+    },
+    {
+      "key": "row-39565/1",
+      "case_id": "row-39565",
+      "step": 1,
+      "family": "musique-family-000604",
+      "opened_ids": [
+        "p0"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "open_p2",
+          "choice_probability": 0.6823064088821411,
+          "input_tokens": 2973
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.4321100115776062,
+          "input_tokens": 2771
+        },
+        "ids_only": {
+          "choice": "open_p2",
+          "choice_probability": 0.3985205590724945,
+          "input_tokens": 2764
+        }
+      }
+    },
+    {
+      "key": "row-39565/2",
+      "case_id": "row-39565",
+      "step": 2,
+      "family": "musique-family-000604",
+      "opened_ids": [
+        "p0",
+        "p2"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.3925137221813202,
+          "input_tokens": 2961
+        },
+        "titles_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.4664149284362793,
+          "input_tokens": 2560
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.8374581336975098,
+          "input_tokens": 2543
+        }
+      }
+    },
+    {
+      "key": "row-39565/3",
+      "case_id": "row-39565",
+      "step": 3,
+      "family": "musique-family-000604",
+      "opened_ids": [
+        "p0",
+        "p2",
+        "p1"
+      ],
+      "reference_target": {},
+      "reference_status": "not_source_reviewed",
+      "views": {
+        "full": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.5474570989608765,
+          "input_tokens": 2949
+        },
+        "titles_only": {
+          "choice": "open_p11",
+          "choice_probability": 0.41841357946395874,
+          "input_tokens": 2421
+        },
+        "ids_only": {
+          "choice": "stop_exhausted",
+          "choice_probability": 0.9243981242179871,
+          "input_tokens": 2397
+        }
+      }
+    }
+  ],
+  "interpretation_limits": [
+    "Input perturbation of a model trained with full state; it is not a retrained stateless baseline or evidence of optimality.",
+    "All positions remain on the original fixed-four path; no on-policy consequences or Reader quality are inferred.",
+    "Hidden read content can make true-state targets unidentifiable. Retained target acceptance measures information loss, not valid supervision for a new hidden-state task.",
+    "Removing fields also shortens inputs and shifts positions; titles/IDs retain prefix and selection information. No length-only or total-state-removal causal claim.",
+    "Source-qualified annotations cover only seven targeted source rows, including masks, not a representative noise-rate sample.",
+    "No independent generalization, confidence calibration, learned stopping utility or whole-pipeline net benefit is established."
+  ],
+  "source_review_notes": [
+    {
+      "prefixes": [
+        "row-866/2",
+        "row-866/3"
+      ],
+      "finding": "Full input declares sufficient after reading birthplace-only biography; source-qualified target is pool exhaustion. Removing read text changes these to exhausted. This label improvement does not prove a hidden-state policy can reason correctly."
+    },
+    {
+      "prefixes": [
+        "row-28960/1",
+        "row-28960/2",
+        "row-28960/3"
+      ],
+      "finding": "Needed open_p4 is never selected by any view. At step1 a STOP-to-open change still chooses an unrelated premise; at later steps all views remain incorrectly sufficient."
+    },
+    {
+      "prefixes": [
+        "row-36340/2"
+      ],
+      "finding": "Full and titles-only choose sufficient; IDs-only loses that judgment and chooses exhausted. Sensitivity can also remove a correct decision."
+    },
+    {
+      "prefixes": [
+        "row-11853/1",
+        "row-11853/2",
+        "row-24439/1"
+      ],
+      "finding": "Prior QA gain cases also vary inconsistently; titles-only selects the Lana supplement at step1, IDs-only stops, and all views prematurely stop after the film/director evidence. These examples were not added to the predeclared source-qualified aggregate."
+    }
+  ],
+  "decision": "Frozen model responds strongly to read-content perturbations, but available source-qualified prefixes do not establish reliable state use or a quality advantage for full inputs. Do not deploy omission, retrain on dev, or infer QA/net savings from this probe. Source-qualified learning and matched trained/on-policy controls remain open.",
+  "sha_checks": 0,
+  "nonempty_decisions": {
+    "full": {
+      "counts": {
+        "stop_exhausted": 61,
+        "stop_sufficient": 54,
+        "open": 23
+      },
+      "mean_p_sufficient": 0.36768358505092247,
+      "mean_p_exhausted": 0.3811703965208532
+    },
+    "titles_only": {
+      "counts": {
+        "stop_exhausted": 64,
+        "open": 36,
+        "stop_sufficient": 38
+      },
+      "mean_p_sufficient": 0.25938753481670207,
+      "mean_p_exhausted": 0.41779210386891424
+    },
+    "ids_only": {
+      "counts": {
+        "stop_exhausted": 78,
+        "open": 32,
+        "stop_sufficient": 28
+      },
+      "mean_p_sufficient": 0.19289025884574876,
+      "mean_p_exhausted": 0.5095114027473914
+    }
+  }
+}

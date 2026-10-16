@@ -27,12 +27,13 @@
     {
       "id": "isolate_stop_and_state_factors",
       "section": "§9.1",
-      "status": "partial_matched_cap_stop_complete",
+      "status": "partial_stop_control_and_input_sensitivity_complete",
       "evidence": [
         "data/manifests/jev-musique-ce-stop-cap4-v1-summary.json",
-        "data/manifests/jev-musique-ce-stop-cap4-v1-source-review.json"
+        "data/manifests/jev-musique-ce-stop-cap4-v1-source-review.json",
+        "data/manifests/jev-reader-state-information-v1-summary.json"
       ],
-      "finding": "Same frozen CE, same four-decision maximum, fixed-four versus adaptive closed on 46 exposed cases with one fresh common Reader. Native F1 .3333 versus .1528, but source review identifies only two complete complement repairs; other gains mix unsupported country/disambiguation answers and formatting. State-information ablation and two-step outcome objective remain incomplete. No quality-comparable net benefit."
+      "finding": "Matched-cap STOP comparison is closed. Frozen full-state CE was then probed at all 184 fixed-four prefixes with read-title-only and read-ID-only views: 60/64 of 138 nonempty decisions changed, but source-qualified acceptance full/title/ID is 9/10/11 of 20. This establishes input dependence, not reliable semantic use, a trained stateless comparison or on-policy QA utility. Hidden information may make retained true-state labels unidentifiable. Source-qualified learning, matched trained state controls and complement outcomes remain incomplete."
     },
     {
       "id": "family_split_and_source_labels",
@@ -88,9 +89,10 @@
       "section": "§7.3/8",
       "status": "unavailable_in_current_corpus",
       "evidence": [
-        "data/manifests/jev-longmemeval-exposure-final-v1-20261017.json"
+        "data/manifests/jev-longmemeval-exposure-final-v1-20261017.json",
+        "data/manifests/jev-longmemeval-v2-prior-contact-20261017.json"
       ],
-      "finding": "All500currentv1questions haveprioropened systemoutcomes. No eligibleunexposedsubset; no s/m/oraclereset. Useraskedfornewunusedsource, noanswerreceived. This requirement isnot satisfied byexposedregression."
+      "finding": "All 500 current v1 questions have prior opened system outcomes. V2 is a different benchmark; local metadata and three historical reports show at least 42 opened questions and two shared small-tier histories comprising 200 trajectories that cover all 451 question histories. The other 409 IDs are not certified unexposed. No original test split reset, new question/gold exposure, or V2 evaluation this turn."
     },
     {
       "id": "reader_failure_intervention",
@@ -112,9 +114,10 @@
         "data/manifests/jev-reader-calibration-c20-v1-summary.json",
         "data/manifests/jev-memops-factor-extension-v1-summary.json",
         "data/manifests/jev-meme-reader-confirm-v1-summary.json",
-        "data/manifests/jev-musique-ce-stop-cap4-v1-summary.json"
+        "data/manifests/jev-musique-ce-stop-cap4-v1-summary.json",
+        "data/manifests/jev-reader-state-information-v1-summary.json"
       ],
-      "finding": "All 200 confirmation and 119 unique STOP Reader receipts reconcile with original per-run ledger deltas; zero new unknown usage. STOP includes cached controller work, within-arm Reader caching, common retrieval and 24-family paired bootstrap. MEME reports per-story/per-seed results, not 200 independent samples. Preparation/final analysis recorded once; human review, exploratory analysis and some cold load/orchestration costs remain unmeasured. No whole-pipeline net-benefit proof."
+      "finding": "All 200 confirmation and 119 unique STOP Reader receipts reconcile with original per-run ledger deltas; zero new unknown usage. STOP includes cached controller work, within-arm Reader caching, common retrieval and 24-family paired bootstrap. MEME reports per-story/per-seed results, not 200 independent samples. Preparation/final analysis recorded once; human review, exploratory analysis and some cold load/orchestration costs remain unmeasured. No whole-pipeline net-benefit proof. State probe adds 276 local GPU forwards /753026 input tokens, 47.496 wall/69.313 CPU seconds, exact once in original compute ledger; zero new HTTP. Empty-prefix cached results and perturbed input costs remain distinct."
     },
     {
       "id": "compatible_modes_and_boundaries",
@@ -128,10 +131,18 @@
   ],
   "conditional_extensions": "SGD/controlledProofWriter-style variants,MemConflict,MemoryAgentBench andRL/utility objectives remain later/conditional directions; they are not silently reportedas executed. No broaderGoal success redefined aroundthispilot.",
   "next_actions": [
-    "Isolate state-information effects on the same visible candidates/actions and frozen model; report perturbation limits, source-qualified labels and total encoding work.",
-    "Use source-qualified complement/STOP findings to decide whether a new training objective is justified; do not tune on these exposed QA answers or scale RL by default.",
-    "Resolve actual W/B relationship coverage and source-faithful Writer issues before enlarging Impact training.",
-    "Obtain or identify a separate exposure-reviewed external long-memory cohort; current LongMemEval v1 has no unexposed cases."
+    "Reconcile sibling MemConflict candidate/Reader findings before duplicating experiments; d3b0c44f freezes a new candidate repair, with no outcome claim from that commit alone.",
+    "Expand source-qualified training-family supervision for complementary evidence and the sufficient/exhausted distinction before another training objective; keep all exposed dev labels out of training.",
+    "Compare trained state factors and actual policy consequences only after source and label quality is established; input omission is not adopted as a method.",
+    "Resolve W/B relationship coverage and source-faithful Writer issues before enlarging Impact training.",
+    "Continue external source eligibility review without treating remaining V2 question IDs or medium tier as new independent histories."
   ],
-  "last_progress": "Completed source review, native score/cost reconciliation and reporting for both previously live cohorts. Current process checks show all our jobs terminal, no queued copy."
+  "last_progress": "Previous turn was progress (21c4a271). This turn froze and completed the read-state probe (881e48f7), reviewed source-qualified changes, reconciled local compute and found concrete prior V2 contact. No outstanding owned job or repeated blocker.",
+  "cross_worktree_observation": {
+    "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab",
+    "observed_head": "d3b0c44f",
+    "closed_memconflict_author_summary": "data/manifests/jev-memconflict-reader-v1-summary.json",
+    "observed_summary_status": "PREDICTIONS_CLOSED_GRADING_REPAIRED_AND_SOURCE_REVIEWED",
+    "scope": "Read-only summary/commit inspection, not independent reconciliation of all receipts or native outcomes; sibling files and processes untouched."
+  }
 }

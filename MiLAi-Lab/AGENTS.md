@@ -1,4 +1,60 @@
-# CURRENT: both cohorts CLOSED and reviewed — 2026-10-17
+# CURRENT: read-state probe CLOSED; V2 prior contact found — 2026-10-17
+
+Goal ACTIVE/incomplete. Previous turn=progress,commit21c4a271. Current turn=progress,
+new local model evidence + exact compute reconciliation + external-source eligibility evidence.
+No subagents, SHA/content fingerprints, new ledger, defaultmodel/Reader/service changes,
+Product/API/Schema/permission/Canonical changes, push/merge or fullrepo/remoteCI.
+All new files/env/cache under /cra/memory/mx_memory. No blocker stops independent work.
+
+NEW PROBE source881e48f7, exec14932/PID1753392 CLOSED exit0, ps absent, runCOMPLETED.
+Root artifacts/jev-reader/state-information-v1, prepared/index.json, predict-v1/{calls,review}.
+All46 exposedC20cases/all184 actualfixed4prefixes; original full predictions reused.
+Titles-only drops readtext; IDs-only also drops readtitles. Question, remainingcandidate
+text/order, openedIDs andactions unchanged. Empty46prefixes literal-equal,92positionreuses.
+276newfloat32GPU2forwards/368positions,753026inputtokens,47.496wall/69.313CPU,peak5.38GiB.
+maxinput4960,0truncation.0HTTP/Reader/embedding/newweights. Source/model/protocol frozen.
+Originalledger reader_state_information_v1 exactonce; preparation .18089wall/.18077CPU
+once reader_state_information_preparation_v1. Local ledger-audit.json; don'trecordagain.
+Authorreview/analysis time unmeasured, notzero. GPU2/3 backto36928MiBfree, no ownedqueue.
+ProtectedBGE7861PID47436/BGE7961PID52982/7860PID2160380 unchanged;7862 staysstopped.
+
+Nonempty138prefixes: title/ID perturbations change60/64decisions and67/64topopens;
+meanTV .4171/.4456;24familymacrochanges .4167/.4514. Full/title/ID STOPsufficient54/38/28,
+exhausted61/64/78,open23/36/32. Strong inputdependence, notprovedsemanticcorrectness.
+Existing source-review maps28prefixes:20labelled,8masked; other156unreviewed. Full/title/ID
+accepted9/10/11 on20;6/7/8 on15nonempty. Hiddenreadfacts canmake true-state targetunknown;
+thisisnotvalidnewhidden-state traininglabels or retrainedstateless/on-policy/QA comparison.
+Sourceexamples:866birthbiography→wrongfullsufficient;28960allviews missnecessaryp4 and
+laterclaim sufficient;36340/2 IDs-only loses correctsufficient;11853/24439 don'tconsistently
+repair. All20labelled+8priorgaincasepositions inspected. Per-prefix summary tracked at
+jev-reader-state-information-v1-summary.json; whole original distributions inignoredreview.
+No adoptionofomission. Nextsource-qualified trainingdata/own-policy evaluation needed.
+
+EXTERNAL SOURCE: browsed official xiaowu0162/LongMemEval-V2. Alreadylocal at
+/cra/memory/mx_memory/benchmarks/LongMemEval-V2/data/longmemeval-v2. Do notredownload.
+Metadataonly:451questions,211enterprise/240web,29questionimages. Three2026-08-21DG10reports
+prove42unique sourcequestionIDs alreadyopened,84recordspercompletedtwoarmsmoke; failed
+attempt retained. All451smallhistories fallwithinthe200trajectoryunion ofthose42questions:
+two orderedhaystacks,one100perdomain.409remainingIDs areNOTcertifiedunexposed andnot409
+independentnewhistories. No newquestiontext/goldopened; no checksums.sha256 read/executed.
+Legacyreports contain oldhashfields; merelyreading metadataisnotnewSHAverification.
+Tracked jev-longmemeval-v2-prior-contact-20261017.json includespaths/IDs/limits.
+Need completehistorical/testsplit/target-background audit beforefreshclaim. V2 agenttrajectory
+benchmark isnot replacementv1chatdata. Existingv1zeroeligible unchanged. Don'tresetmedium.
+
+SIBLING READONLY: jev-read-bottleneck-20261016 HEADd3b0c44f, priorb9a1ce79 closesMemConflict
+withauthorreport jev-memconflict-reader-v1-summary.json.6cases/2families,main36firstanswers,
+source-boundarydiagnostics andJudgeformatrepair; no netbenefit authorclaim. d3b0c44f only
+freezes BGE chronologicalcandidate repair; don'tinfer itsoutcomes or jobstate fromcommit.
+Sibling has2untracked reconciliationmanifests forourpriorcohorts; leaveallfiles/jobs alone.
+Beforeduplicating morecandidate/Reader work, reconcileits actualclosed evidence. FullGoal
+stillneeds sourcequalifiedlearning/WBcoverage/Writer semantics/eligibleexternaltest evidence.
+
+Validation:10 relevant tests, Ruff, REAL packageDAG andtoolsboundary passed. src runtime
+unchanged. Fullrepo/remoteCI notrun. New probe runningcode neverhottedited. Pre-runcommit
+881e48f7; rollback beforeprobe21c4a271. Current report andcompletionaudit updated, notcomplete.
+
+# Historical checkpoint: confirmation and STOP closed — 2026-10-17
 
 Goal ACTIVE/incomplete. Previous service-only turn added no research result; this turn
 revalidated terminal processes and completed source/cost/statistical analysis. No blocker
