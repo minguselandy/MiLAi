@@ -1,0 +1,200 @@
+{
+  "scope": "exposed follow-up, no changed premises in the question; current semantic state only",
+  "reviewer": "assistant author, unblinded",
+  "independent_review": false,
+  "arms": {
+    "D0": {
+      "outcomes": [
+        {
+          "case": "exception-withdrawal",
+          "outcome": "qualified",
+          "note": "States the universal glove requirement but adds uncertainty about practice-copy exceptions.",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D0/exception-withdrawal/result.json",
+          "known_tokens": 2073
+        },
+        {
+          "case": "alternative-support",
+          "outcome": "correct",
+          "note": "Current core facts agree with the arrived source",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D0/alternative-support/result.json",
+          "known_tokens": 2660
+        },
+        {
+          "case": "shared-condition",
+          "outcome": "correct",
+          "note": "Current core facts agree with the arrived source",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D0/shared-condition/result.json",
+          "known_tokens": 2110
+        }
+      ],
+      "model_requests": 3,
+      "generation_tokens": 6843,
+      "embedding_tokens": 0,
+      "new_unknown": 0
+    },
+    "D1": {
+      "outcomes": [
+        {
+          "case": "exception-withdrawal",
+          "outcome": "correct",
+          "note": "Current core facts agree with the arrived source",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D1/exception-withdrawal/result.json",
+          "known_tokens": 2506
+        },
+        {
+          "case": "alternative-support",
+          "outcome": "missing",
+          "note": "Mandatory current state absent",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D1/alternative-support/result.json",
+          "known_tokens": 3509
+        },
+        {
+          "case": "shared-condition",
+          "outcome": "incorrect",
+          "note": "Uses the expired June 1 interval as current June 2 state and claims the pier is open.",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D1/shared-condition/result.json",
+          "known_tokens": 2764
+        }
+      ],
+      "model_requests": 3,
+      "generation_tokens": 8779,
+      "embedding_tokens": 0,
+      "new_unknown": 0
+    },
+    "D2-Laya-0": {
+      "outcomes": [
+        {
+          "case": "exception-withdrawal",
+          "outcome": "correct",
+          "note": "Current core facts agree with the arrived source",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D2-Laya-0/exception-withdrawal/result.json",
+          "known_tokens": 2498
+        },
+        {
+          "case": "alternative-support",
+          "outcome": "missing",
+          "note": "Mandatory current state absent",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D2-Laya-0/alternative-support/result.json",
+          "known_tokens": 3136
+        },
+        {
+          "case": "shared-condition",
+          "outcome": "correct",
+          "note": "Current core facts agree with the arrived source",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D2-Laya-0/shared-condition/result.json",
+          "known_tokens": 4011
+        }
+      ],
+      "model_requests": 3,
+      "generation_tokens": 9645,
+      "embedding_tokens": 0,
+      "new_unknown": 0
+    },
+    "D2-Laya-CE": {
+      "outcomes": [
+        {
+          "case": "exception-withdrawal",
+          "outcome": "incorrect",
+          "note": "Claims practice copies can omit gloves; the actual event withdrew that exception.",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D2-Laya-CE/exception-withdrawal/result.json",
+          "known_tokens": 3513
+        },
+        {
+          "case": "alternative-support",
+          "outcome": "missing",
+          "note": "Mandatory current state absent",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D2-Laya-CE/alternative-support/result.json",
+          "known_tokens": 3672
+        },
+        {
+          "case": "shared-condition",
+          "outcome": "correct_with_explicit_inference",
+          "note": "Correct values, with guide presence explicitly inferred from roof continuation and the necessary condition.",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D2-Laya-CE/shared-condition/result.json",
+          "known_tokens": 3320
+        }
+      ],
+      "model_requests": 3,
+      "generation_tokens": 10505,
+      "embedding_tokens": 0,
+      "new_unknown": 0
+    },
+    "D3": {
+      "outcomes": [
+        {
+          "case": "exception-withdrawal",
+          "outcome": "missing",
+          "note": "Mandatory current state absent",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D3/exception-withdrawal/result.json",
+          "known_tokens": 2855
+        },
+        {
+          "case": "alternative-support",
+          "outcome": "correct",
+          "note": "Current core facts agree with the arrived source",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D3/alternative-support/result.json",
+          "known_tokens": 3294
+        },
+        {
+          "case": "shared-condition",
+          "outcome": "incorrect",
+          "note": "Calls both routes available and pier open using the expired interval.",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D3/shared-condition/result.json",
+          "known_tokens": 2922
+        }
+      ],
+      "model_requests": 3,
+      "generation_tokens": 9071,
+      "embedding_tokens": 0,
+      "new_unknown": 0
+    },
+    "D4": {
+      "outcomes": [
+        {
+          "case": "exception-withdrawal",
+          "outcome": "qualified",
+          "note": "States both need gloves, then introduces uncertainty about practice-copy exemptions.",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D4/exception-withdrawal/result.json",
+          "known_tokens": 1985
+        },
+        {
+          "case": "alternative-support",
+          "outcome": "correct",
+          "note": "Current core facts agree with the arrived source",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D4/alternative-support/result.json",
+          "known_tokens": 2933
+        },
+        {
+          "case": "shared-condition",
+          "outcome": "correct",
+          "note": "Current core facts agree with the arrived source",
+          "record_values_unchanged": true,
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/current-state-probe-v1/D4/shared-condition/result.json",
+          "known_tokens": 2783
+        }
+      ],
+      "model_requests": 3,
+      "generation_tokens": 7701,
+      "embedding_tokens": 0,
+      "new_unknown": 0
+    }
+  },
+  "full_goal_complete": false
+}

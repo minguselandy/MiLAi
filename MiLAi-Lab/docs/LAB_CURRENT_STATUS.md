@@ -1,9 +1,12 @@
-# Jev 类 Laya 接入与训练（2026-10-16）
+# Jev 类 Laya：首轮完整训练与六条件诊断已闭合（2026-10-16）
 
-当前执行 [Jev 接入与训练决定](MILAI_JEV_INTEGRATION_TRAINING_DECISION_20261016.md)，
-目标 ACTIVE / 未完成。已接通共享 Impact provider 与原账本，真实基础模型 dev 为 3/6 单元、
-root 0/1、误 preserve 3；完整 encoder+head soft-CE 训练运行中。20 个来源审阅事件是小型已暴露
-分组诊断，不能代替 D0–D4 全路径与未见家族验证。详见 [执行记录](MILAI_JEV_EXECUTION_20261016.md)。
+当前目标仍 ACTIVE / 未完成。完整 encoder+head soft-CE 已完成且真实服务已调用微调权重，
+但 dev 的 5/6 来自全选 other，root 仍 0/1。三条共同 before 的 D0/D1/D2/D3/D4 六条件、
+108 次首次问答及 18 次不带变化前提的状态查询均已结束并逐项审阅。
+存在 Writer 长度失败、错误免手套声明、no-change 与过期状态回答，尚无方法胜出结论。
+局部 Writer 的完整绑定/部分模型视图及选择复用已实现；独立轨迹、普通 Host 真实验证、
+更充分数据/训练、关系目标、边界标签及未见家族验证仍待完成。
+详见 [执行记录与剩余审计](MILAI_JEV_EXECUTION_20261016.md)。
 
 # Innovation v4：当前研究入口（2026-10-16）
 

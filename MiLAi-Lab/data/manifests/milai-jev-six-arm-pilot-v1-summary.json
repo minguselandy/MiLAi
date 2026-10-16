@@ -1,0 +1,698 @@
+{
+  "scope": "six-arm common-before development pilot; 3 reused histories, not independent trajectories or a method win",
+  "arms": {
+    "D0": {
+      "cases": [
+        {
+          "case": "exception-withdrawal",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 7,
+            "generation_bucket_tokens": 25305,
+            "embedding_tokens": 449,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 5022,
+            "writer_output_tokens": 2681,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D0/exception-withdrawal/result.json"
+        },
+        {
+          "case": "alternative-support",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 7,
+            "generation_bucket_tokens": 26988,
+            "embedding_tokens": 454,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4863,
+            "writer_output_tokens": 4800,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D0/alternative-support/result.json"
+        },
+        {
+          "case": "shared-condition",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 7,
+            "generation_bucket_tokens": 23859,
+            "embedding_tokens": 364,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4831,
+            "writer_output_tokens": 4013,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D0/shared-condition/result.json"
+        }
+      ],
+      "costs": {
+        "model_requests": 21,
+        "generation_bucket_tokens": 76152,
+        "embedding_tokens": 1267,
+        "new_unknown_generation": 0,
+        "new_unknown_embedding": 0,
+        "writer_prompt_tokens": 14716,
+        "writer_output_tokens": 11494,
+        "typed_input_tokens": 0,
+        "typed_questions": 0,
+        "typed_wall_seconds": 0.0
+      },
+      "execution_completed_cases": 3,
+      "changed_cases": 3
+    },
+    "D1": {
+      "cases": [
+        {
+          "case": "exception-withdrawal",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 8,
+            "generation_bucket_tokens": 30969,
+            "embedding_tokens": 449,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4820,
+            "writer_output_tokens": 4012,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D1/exception-withdrawal/result.json"
+        },
+        {
+          "case": "alternative-support",
+          "execution_status": "incomplete",
+          "state_changed": false,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 8,
+            "generation_bucket_tokens": 31771,
+            "embedding_tokens": 298,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4657,
+            "writer_output_tokens": 8192,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D1/alternative-support/result.json"
+        },
+        {
+          "case": "shared-condition",
+          "execution_status": "incomplete",
+          "state_changed": false,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 8,
+            "generation_bucket_tokens": 33424,
+            "embedding_tokens": 248,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4617,
+            "writer_output_tokens": 8192,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D1/shared-condition/result.json"
+        }
+      ],
+      "costs": {
+        "model_requests": 24,
+        "generation_bucket_tokens": 96164,
+        "embedding_tokens": 995,
+        "new_unknown_generation": 0,
+        "new_unknown_embedding": 0,
+        "writer_prompt_tokens": 14094,
+        "writer_output_tokens": 20396,
+        "typed_input_tokens": 0,
+        "typed_questions": 0,
+        "typed_wall_seconds": 0.0
+      },
+      "execution_completed_cases": 1,
+      "changed_cases": 1
+    },
+    "D2-Laya-0": {
+      "cases": [
+        {
+          "case": "exception-withdrawal",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 8,
+            "generation_bucket_tokens": 31318,
+            "embedding_tokens": 449,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 5226,
+            "writer_output_tokens": 4495,
+            "typed_input_tokens": 6160,
+            "typed_questions": 4,
+            "typed_wall_seconds": 16.98337731603533
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-0/exception-withdrawal/result.json"
+        },
+        {
+          "case": "alternative-support",
+          "execution_status": "incomplete",
+          "state_changed": false,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 8,
+            "generation_bucket_tokens": 34339,
+            "embedding_tokens": 298,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4269,
+            "writer_output_tokens": 8192,
+            "typed_input_tokens": 5412,
+            "typed_questions": 4,
+            "typed_wall_seconds": 14.389426531270146
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-0/alternative-support/result.json"
+        },
+        {
+          "case": "shared-condition",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 8,
+            "generation_bucket_tokens": 38850,
+            "embedding_tokens": 419,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4237,
+            "writer_output_tokens": 7869,
+            "typed_input_tokens": 5320,
+            "typed_questions": 4,
+            "typed_wall_seconds": 13.875166170299053
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-0/shared-condition/result.json"
+        }
+      ],
+      "costs": {
+        "model_requests": 24,
+        "generation_bucket_tokens": 104507,
+        "embedding_tokens": 1166,
+        "new_unknown_generation": 0,
+        "new_unknown_embedding": 0,
+        "writer_prompt_tokens": 13732,
+        "writer_output_tokens": 20556,
+        "typed_input_tokens": 16892,
+        "typed_questions": 12,
+        "typed_wall_seconds": 45.24797001760453
+      },
+      "execution_completed_cases": 2,
+      "changed_cases": 2
+    },
+    "D2-Laya-CE": {
+      "cases": [
+        {
+          "case": "exception-withdrawal",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 8,
+            "generation_bucket_tokens": 34891,
+            "embedding_tokens": 474,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4362,
+            "writer_output_tokens": 3730,
+            "typed_input_tokens": 6160,
+            "typed_questions": 4,
+            "typed_wall_seconds": 17.052084604278207
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-CE/exception-withdrawal/result.json"
+        },
+        {
+          "case": "alternative-support",
+          "execution_status": "completed",
+          "state_changed": false,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 8,
+            "generation_bucket_tokens": 29065,
+            "embedding_tokens": 298,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4269,
+            "writer_output_tokens": 2939,
+            "typed_input_tokens": 5412,
+            "typed_questions": 4,
+            "typed_wall_seconds": 14.192401104606688
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-CE/alternative-support/result.json"
+        },
+        {
+          "case": "shared-condition",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 8,
+            "generation_bucket_tokens": 35356,
+            "embedding_tokens": 399,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4237,
+            "writer_output_tokens": 6130,
+            "typed_input_tokens": 5320,
+            "typed_questions": 4,
+            "typed_wall_seconds": 13.720289408229291
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-CE/shared-condition/result.json"
+        }
+      ],
+      "costs": {
+        "model_requests": 24,
+        "generation_bucket_tokens": 99312,
+        "embedding_tokens": 1171,
+        "new_unknown_generation": 0,
+        "new_unknown_embedding": 0,
+        "writer_prompt_tokens": 12868,
+        "writer_output_tokens": 12799,
+        "typed_input_tokens": 16892,
+        "typed_questions": 12,
+        "typed_wall_seconds": 44.964775117114186
+      },
+      "execution_completed_cases": 3,
+      "changed_cases": 2
+    },
+    "D3": {
+      "cases": [
+        {
+          "case": "exception-withdrawal",
+          "execution_status": "completed",
+          "state_changed": false,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 7,
+            "generation_bucket_tokens": 25321,
+            "embedding_tokens": 377,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 3381,
+            "writer_output_tokens": 2522,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [
+            {
+              "source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-CE/exception-withdrawal/typed-http/maintenance/update/batch-0/impact%3Aupdate%3Abatch%3A0%3Awork%3A0",
+              "provider": "laya",
+              "original_compute_tokens": 6160,
+              "new_model_calls": 0
+            }
+          ],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/local-writer-v1/D3/exception-withdrawal/result.json"
+        },
+        {
+          "case": "alternative-support",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 7,
+            "generation_bucket_tokens": 29960,
+            "embedding_tokens": 460,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 3389,
+            "writer_output_tokens": 3557,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [
+            {
+              "source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-CE/alternative-support/typed-http/maintenance/update/batch-0/impact%3Aupdate%3Abatch%3A0%3Awork%3A0",
+              "provider": "laya",
+              "original_compute_tokens": 5412,
+              "new_model_calls": 0
+            }
+          ],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/local-writer-v1/D3/alternative-support/result.json"
+        },
+        {
+          "case": "shared-condition",
+          "execution_status": "completed",
+          "state_changed": false,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 7,
+            "generation_bucket_tokens": 22032,
+            "embedding_tokens": 248,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 3385,
+            "writer_output_tokens": 1123,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [
+            {
+              "source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-CE/shared-condition/typed-http/maintenance/update/batch-0/impact%3Aupdate%3Abatch%3A0%3Awork%3A0",
+              "provider": "laya",
+              "original_compute_tokens": 5320,
+              "new_model_calls": 0
+            }
+          ],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/local-writer-v1/D3/shared-condition/result.json"
+        }
+      ],
+      "costs": {
+        "model_requests": 21,
+        "generation_bucket_tokens": 77313,
+        "embedding_tokens": 1085,
+        "new_unknown_generation": 0,
+        "new_unknown_embedding": 0,
+        "writer_prompt_tokens": 10155,
+        "writer_output_tokens": 7202,
+        "typed_input_tokens": 0,
+        "typed_questions": 0,
+        "typed_wall_seconds": 0.0
+      },
+      "execution_completed_cases": 3,
+      "changed_cases": 1
+    },
+    "D4": {
+      "cases": [
+        {
+          "case": "exception-withdrawal",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 7,
+            "generation_bucket_tokens": 22768,
+            "embedding_tokens": 449,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4804,
+            "writer_output_tokens": 2659,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [
+            {
+              "source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D1/exception-withdrawal/http/maintenance/update/batch-0/impact/work-0",
+              "provider": "generative",
+              "original_compute_tokens": 6134,
+              "new_model_calls": 0
+            }
+          ],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/local-writer-v1/D4/exception-withdrawal/result.json"
+        },
+        {
+          "case": "alternative-support",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 7,
+            "generation_bucket_tokens": 24360,
+            "embedding_tokens": 467,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4434,
+            "writer_output_tokens": 3410,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [
+            {
+              "source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D1/alternative-support/http/maintenance/update/batch-0/impact/work-0",
+              "provider": "generative",
+              "original_compute_tokens": 4053,
+              "new_model_calls": 0
+            }
+          ],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/local-writer-v1/D4/alternative-support/result.json"
+        },
+        {
+          "case": "shared-condition",
+          "execution_status": "completed",
+          "state_changed": true,
+          "answers": 6,
+          "read_values_unchanged": true,
+          "costs": {
+            "model_requests": 7,
+            "generation_bucket_tokens": 26628,
+            "embedding_tokens": 364,
+            "new_unknown_generation": 0,
+            "new_unknown_embedding": 0,
+            "writer_prompt_tokens": 4405,
+            "writer_output_tokens": 6122,
+            "typed_input_tokens": 0,
+            "typed_questions": 0,
+            "typed_wall_seconds": 0.0
+          },
+          "receipt_ledger_difference": 0,
+          "reused_controller": [
+            {
+              "source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D1/shared-condition/http/maintenance/update/batch-0/impact/work-0",
+              "provider": "generative",
+              "original_compute_tokens": 4523,
+              "new_model_calls": 0
+            }
+          ],
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/local-writer-v1/D4/shared-condition/result.json"
+        }
+      ],
+      "costs": {
+        "model_requests": 21,
+        "generation_bucket_tokens": 73756,
+        "embedding_tokens": 1280,
+        "new_unknown_generation": 0,
+        "new_unknown_embedding": 0,
+        "writer_prompt_tokens": 13643,
+        "writer_output_tokens": 12191,
+        "typed_input_tokens": 0,
+        "typed_questions": 0,
+        "typed_wall_seconds": 0.0
+      },
+      "execution_completed_cases": 3,
+      "changed_cases": 3
+    }
+  },
+  "full_goal_complete": false,
+  "training": {
+    "status": "COMPLETED",
+    "effective_questions": 55,
+    "optimizer_updates": 8,
+    "epochs": 4,
+    "training_sequences": 220,
+    "unpadded_training_token_positions": 313620,
+    "epoch_loss": [
+      0.9295394647301042,
+      0.5083452838339976,
+      0.45317839990769115,
+      0.3875319058341639
+    ],
+    "compute": {
+      "wall_seconds": 2071.1906452002004,
+      "cpu_seconds": 6996.502733907,
+      "runs": 1,
+      "peak_rss_kib": 16115736,
+      "device": "cpu",
+      "threads": 4,
+      "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    },
+    "parameter_changes": {
+      "encoder": {
+        "tensors": 134,
+        "parameters": 306939648,
+        "changed_parameters": 94390780,
+        "absolute_change": 5269.931957602501
+      },
+      "decision_head": {
+        "tensors": 36,
+        "parameters": 14969350,
+        "changed_parameters": 11205360,
+        "absolute_change": 1779.4210290312767
+      }
+    },
+    "calibrated": false
+  },
+  "dev": {
+    "base": {
+      "status": "COMPLETED",
+      "events": 2,
+      "fully_labelled_events": 2,
+      "exact_events": 1,
+      "labelled_questions": 6,
+      "correct_questions": 3,
+      "roles": {
+        "direct_root": {
+          "true_positive": 0,
+          "gold": 1,
+          "false_positive": 0,
+          "false_negative": 1
+        },
+        "preserve_successor": {
+          "true_positive": 0,
+          "gold": 0,
+          "false_positive": 3,
+          "false_negative": 0
+        },
+        "other": {
+          "true_positive": 3,
+          "gold": 5,
+          "false_positive": 0,
+          "false_negative": 2
+        }
+      },
+      "calibrated": false,
+      "scope": "Controller diagnostic only; no Writer/Reader/state-quality result"
+    },
+    "ce": {
+      "status": "COMPLETED",
+      "events": 2,
+      "fully_labelled_events": 2,
+      "exact_events": 1,
+      "labelled_questions": 6,
+      "correct_questions": 5,
+      "roles": {
+        "direct_root": {
+          "true_positive": 0,
+          "gold": 1,
+          "false_positive": 0,
+          "false_negative": 1
+        },
+        "preserve_successor": {
+          "true_positive": 0,
+          "gold": 0,
+          "false_positive": 0,
+          "false_negative": 0
+        },
+        "other": {
+          "true_positive": 5,
+          "gold": 5,
+          "false_positive": 1,
+          "false_negative": 0
+        }
+      },
+      "calibrated": false,
+      "scope": "Controller diagnostic only; no Writer/Reader/state-quality result"
+    },
+    "ce_predicts_only_other": true,
+    "interpretation": "5/6 is the majority-class score; root recall remains 0/1, not demonstrated role learning."
+  },
+  "current_state_probe_review": "data/manifests/milai-jev-current-state-probe-v1-review.json",
+  "first_answers_source_review": "data/manifests/milai-jev-six-arm-pilot-v1-review.json",
+  "totals": {
+    "model_requests": 135,
+    "generation_bucket_tokens": 527204,
+    "embedding_tokens": 6964,
+    "new_unknown_generation": 0,
+    "new_unknown_embedding": 0
+  },
+  "ledger_at_close": {
+    "generation_requests": 59998,
+    "generation": {
+      "charged_tokens": 320756114,
+      "known_tokens": 320222967,
+      "unknown_usage": 10
+    },
+    "embedding": {
+      "charged_tokens": 3545208,
+      "known_tokens": 3543965,
+      "unknown_usage": 1
+    },
+    "compute": {
+      "laya_impact": {
+        "input_tokens": 49126,
+        "questions": 36,
+        "requests": 10,
+        "usage_unknown": 0,
+        "wall_seconds": 129.58763725496829
+      },
+      "laya_training": {
+        "cpu_seconds": 6996.502733907,
+        "runs": 1,
+        "wall_seconds": 2071.1906452002004
+      }
+    }
+  },
+  "combined_first_training_phase_compute": {
+    "model_requests": 157,
+    "generation_bucket_known_tokens": 595090,
+    "embedding_known_tokens": 6964,
+    "includes": "base and CE dev HTTP, six-arm common-before run, and current-state follow-up; local CPU training recorded separately in the original ledger",
+    "new_unknown_generation": 0,
+    "new_unknown_embedding": 0
+  }
+}

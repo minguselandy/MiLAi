@@ -109,14 +109,13 @@
   "base_alias": "milai-impact-base-v1",
   "upstream_source": "4ac226d",
   "calibrated": false,
-  "training_status": "RUNNING_AT_OBSERVATION",
-  "training_pid": 3233933,
+  "training_status": "COMPLETED",
+  "training_pid": null,
   "remaining": [
-    "full-CE completion and served evaluation",
-    "more independent reviewed families and class coverage",
+    "more independent reviewed families and adequate learning diagnosis",
     "matched relational objective",
-    "D0-D4 Writer and joint state/QA comparison",
-    "local W/B projection and range-intervention labels",
+    "controlled boundary-range interventions and learned boundary selection",
+    "independent empty-bank trajectories",
     "ordinary Host real model trajectory",
     "calibration, unseen families/seeds and final audit"
   ],
@@ -133,5 +132,6 @@
     "verification_matrix_sources": 285,
     "full_repository": "not_run",
     "remote_ci": "not_run"
-  }
+  },
+  "continuation_summary": "data/manifests/milai-jev-six-arm-pilot-v1-summary.json"
 }
