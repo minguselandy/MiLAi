@@ -1,0 +1,59 @@
+{
+  "status": "COMPLETED_EXPOSED_LEARNING_DIAGNOSTIC",
+  "source_version": "521a32a1",
+  "protocol": "configs/milai-innovation-value-training-v2.json",
+  "questions": [
+    "gpt4_59149c77",
+    "6a1eabeb",
+    "0db4c65d",
+    "2a1811e2",
+    "08e075c7",
+    "0ea62687",
+    "19b5f2b3",
+    "1e043500",
+    "0a34ad58",
+    "0edc2aef"
+  ],
+  "training_fit": {
+    "independent": {
+      "immediate": 0.04777886443538769,
+      "two_open": 0.037156129503604717,
+      "answer_return": 0.21498683824030487
+    },
+    "conditional": {
+      "immediate": 0.005862745838549409,
+      "two_open": 0.0019803189249709176,
+      "answer_return": 0.016206650735665965
+    }
+  },
+  "crossquery_per_question_mean_mse": {
+    "independent": {
+      "immediate": 0.2305762197758427,
+      "two_open": 0.26894141929688165,
+      "answer_return": 0.252982732161284
+    },
+    "conditional": {
+      "immediate": 0.24886287967442589,
+      "two_open": 0.25630998488669743,
+      "answer_return": 0.14202498857860238
+    }
+  },
+  "examples_per_head": {
+    "immediate": 91,
+    "two_open": 66,
+    "answer_return": 55
+  },
+  "coefficients_per_arm": 36876,
+  "vocabulary_size": 2048,
+  "costs": {
+    "fit_wall_seconds": 2.9266887390986085,
+    "fit_cpu_seconds": 2.9264871610000003,
+    "crossquery_wall_seconds": 27.742314824834466,
+    "crossquery_cpu_seconds": 27.741482171,
+    "peak_rss_mib": 94.5234375,
+    "linear_head_fits": 66,
+    "model_http_calls": 0
+  },
+  "scope": "Ten exposed questions, no original-session overlap,91immediate/66two-open/55answer-return labels. Allfolds exclude the question from vocabulary and coefficient fitting. Equal vector length is not equal active capacity: the independent control masks state features. Not formal holdout or selected-subset accuracy.",
+  "finding": "Conditional immediate-return MSE remains worse across questions; two-open and answer-return MSE improve modestly/substantially respectively. Neither proves efficient selection. Actual full-pool wiring selects26of50contexts and extrapolates answer-return to3.445, exposing a serious policy failure."
+}
