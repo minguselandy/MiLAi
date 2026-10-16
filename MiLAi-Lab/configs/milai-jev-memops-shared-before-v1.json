@@ -1,0 +1,119 @@
+{
+  "name": "jev-memops-shared-before-v1",
+  "settings_source": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/factorial-v3-r1/prepared.json",
+  "data_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main/generated_result/2-evidence_conversation",
+  "family_manifest": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/memops-families-v1.json",
+  "cases": [
+    {
+      "id": "case01",
+      "file": "A01_update.json",
+      "arrival": [
+        2,
+        3
+      ],
+      "queries": [
+        {
+          "id": "q1",
+          "question": "What is my current job title at Bridgemark Solutions?",
+          "kind": "current_target"
+        },
+        {
+          "id": "q2",
+          "question": "What annual base salary is currently recorded for me?",
+          "kind": "non_target"
+        },
+        {
+          "id": "q3",
+          "question": "Who is my direct manager at Bridgemark Solutions?",
+          "kind": "non_target"
+        }
+      ],
+      "review": {
+        "stratum": "confirmed correction",
+        "expected_before_title": "Data Analyst",
+        "expected_after_title": "Senior Data Analyst",
+        "retain": [
+          "74500 annual base salary",
+          "Diane Kowalski manager"
+        ],
+        "time_policy": "yesterday remains relative, no invented date",
+        "qualification": "No future assistant echo or later re-confirmation delivered"
+      }
+    },
+    {
+      "id": "case02",
+      "file": "A01_update.json",
+      "arrival": [
+        3,
+        5
+      ],
+      "queries": [
+        {
+          "id": "q1",
+          "question": "What is my current job title at Bridgemark Solutions?",
+          "kind": "current_target"
+        },
+        {
+          "id": "q2",
+          "question": "What future title change, if any, is currently only planned?",
+          "kind": "planned_scope"
+        },
+        {
+          "id": "q3",
+          "question": "Who is my direct manager at Bridgemark Solutions?",
+          "kind": "non_target"
+        }
+      ],
+      "review": {
+        "stratum": "tentative future plan",
+        "expected_current_title": "Senior Data Analyst",
+        "new_plan": "Lead Data Analyst, next quarter, not finalized",
+        "retain": [
+          "Diane Kowalski manager"
+        ],
+        "role_labels": "Must inspect actual before; tentative is not automatically other/preserve"
+      }
+    },
+    {
+      "id": "case03",
+      "file": "B04_forget.json",
+      "arrival": [
+        3,
+        3
+      ],
+      "queries": [
+        {
+          "id": "q1",
+          "question": "How many new hires did B04 bring on last quarter?",
+          "kind": "forgotten_target"
+        },
+        {
+          "id": "q2",
+          "question": "What is the current headcount of B04?",
+          "kind": "non_target"
+        },
+        {
+          "id": "q3",
+          "question": "Where is B04 currently located?",
+          "kind": "non_target"
+        },
+        {
+          "id": "q4",
+          "question": "Who manages B04?",
+          "kind": "non_target"
+        }
+      ],
+      "review": {
+        "stratum": "selective forgetting",
+        "source_target": "number of new hires last quarter, not the misleading top-level target_fact description",
+        "expected_after": "Do not retain/report the three-hire breakdown",
+        "retain": [
+          "headcount14",
+          "Building2 sixth floor",
+          "Linda Zhao manager"
+        ],
+        "qualification": "Reference QA is separate from source-only/actual-state probes; no gold root labels provided"
+      }
+    }
+  ]
+}

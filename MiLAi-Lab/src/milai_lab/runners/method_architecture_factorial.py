@@ -98,6 +98,7 @@ def _seed(
         bank.mkdir()
         with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
             service = _service(run, store, case["owner"], bank)
+            initial_state_empty = not service.records()
             maintenance = []
             for index, raw in enumerate(case["observations"]["seed"]):
                 run.maintain_recipe(service, ObservedSession(**raw), f"seed/{index}")
@@ -107,7 +108,8 @@ def _seed(
     finally:
         run.close()
     result = {"status": "SEED_ATTEMPTS_CLOSED", "actual_state": state,
-              "maintenance": maintenance, "initial_state_empty": not state,
+              "maintenance": maintenance, "initial_state_empty": initial_state_empty,
+              "final_state_empty": not state,
               "semantic_correctness": None,
               "wall_seconds": time.perf_counter() - started, "costs": diagnostic_costs(folder)}
     write_json(path, result)

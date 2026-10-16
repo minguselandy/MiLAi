@@ -260,6 +260,8 @@ def test_factorial_shares_actual_formation_update_and_read_pools(tmp_path: Path)
     result = run_factorial(protocol, root, run_class=FactorialStubRun)
     case = result["cases"]["exception-withdrawal"]
     seed = case["seed"]["actual_state"]
+    assert case["seed"]["initial_state_empty"] is True
+    assert case["seed"]["final_state_empty"] is False
     assert seed and seed[0]["value"]["edit_state"]["representation"] == "conditioned_v1"
     assert len(FactorialStubRun.requests) == 5  # two seed events, two edits, one Impact
     assert len(FactorialStubRun.selector_calls) == 6
