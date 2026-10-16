@@ -1,0 +1,66 @@
+{
+  "name": "jev-musique-reader-v1",
+  "cases": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/cases.jsonl",
+  "labels": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/labels.jsonl",
+  "common_retrieval_costs": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/common-retrieval-costs.json",
+  "official_scorer": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-official",
+  "reader": {
+    "experiment_name": "jev-musique-reader-v1",
+    "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "context_tokens": 65536,
+    "model": {
+      "base_url": "http://127.0.0.1:7862/v1",
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "temperature": 1.0,
+      "max_tokens": 8192,
+      "timeout": 300,
+      "enable_thinking": true,
+      "max_calls": 12
+    },
+    "interface_version": "v2"
+  },
+  "arms": {
+    "bm25_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/selections/bm25",
+      "policy": "k2"
+    },
+    "bm25_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/selections/bm25",
+      "policy": "k4"
+    },
+    "bm25_k8": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/selections/bm25",
+      "policy": "k8"
+    },
+    "laya_zero_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/selections/laya_zero",
+      "policy": "k2"
+    },
+    "laya_zero_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/selections/laya_zero",
+      "policy": "adaptive"
+    },
+    "laya_ce_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/selections/laya_ce",
+      "policy": "k2"
+    },
+    "laya_ce_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/selections/laya_ce",
+      "policy": "adaptive"
+    },
+    "ordinary_ce_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/selections/ordinary_ce",
+      "policy": "k2"
+    },
+    "ordinary_ce_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-v2/selections/ordinary_ce",
+      "policy": "adaptive"
+    }
+  },
+  "planned_reader_calls": 414,
+  "planned_cases": 46,
+  "paired_questions": 22,
+  "orphan_answerable_questions": 2,
+  "scope": "Development proof families; two preview-exposed families. Predictions before official scoring. Missing and retrieval failures remain. Fixed-k versus STOP separated; zero and CE weights explicit. No replacement of LongMemEval unexposed or MemOps/MEME requirements."
+}
