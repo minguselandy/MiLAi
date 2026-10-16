@@ -20,3 +20,7 @@ def test_paired_messages_only_add_generic_rule_task_to_system_instruction():
     assert treatment[1:] == baseline[1:]
     assert treatment[0]["content"] == baseline[0]["content"] + "\nApply the supplied rules."
     assert "EVALUATOR_ONLY" not in str(treatment)
+    compact = messages_for(request, None, "Use reports as attributed premises.")
+    assert compact[0]["content"] == "Use reports as attributed premises."
+    assert compact[1:] == baseline[1:]
+    assert request == original

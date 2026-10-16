@@ -16,9 +16,11 @@ from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.runners.impact_comparison import TimedBenchmarkRun
 
 
-def messages_for(request: dict, addition: str | None) -> list[dict]:
+def messages_for(request: dict, addition: str | None, replacement: str | None = None) -> list[dict]:
     messages = copy.deepcopy(request["messages"])
-    if addition:
+    if replacement is not None:
+        messages[0]["content"] = replacement
+    elif addition:
         messages[0]["content"] += "\n" + addition
     return messages
 
@@ -33,8 +35,9 @@ def main() -> None:
     write_json(args.output / "protocol.json", config)
     settings = read_json(Path(config["settings_source"]))
     settings.update(experiment_name=config["name"], config_version=config["name"])
-    settings["model"].update(temperature=0.0, max_calls=2 * len(config["cases"]))
-    run_state = {"status": "RUNNING", "pid": os.getpid(), "planned_calls": 2 * len(config["cases"]),
+    planned = len(config["variants"]) * len(config["cases"])
+    settings["model"].update(temperature=0.0, max_calls=planned)
+    run_state = {"status": "RUNNING", "pid": os.getpid(), "planned_calls": planned,
                  "completed_calls": 0, "new_writer_calls": 0, "new_retrieval_calls": 0,
                  "temperature": 0.0, "source_version": config["source_version"]}
     write_json(args.output / "run.json", run_state)
@@ -44,12 +47,13 @@ def main() -> None:
     try:
         for index, case in enumerate(config["cases"]):
             request = read_json(Path(case["source_request"]))
-            variants = ("baseline", "rule_application")
+            variants = tuple(config["variants"])
             if index % 2:
                 variants = tuple(reversed(variants))
             for variant in variants:
                 addition = config["instruction"] if variant == "rule_application" else None
-                messages = messages_for(request, addition)
+                replacement = config["compact_system_prompt"] if variant == "compact" else None
+                messages = messages_for(request, addition, replacement)
                 key = f"questions/{variant}/{case['episode']}/{case['id']}"
                 answer = {"episode": case["episode"], "id": case["id"], "phase": case["phase"],
                           "variant": variant, "source_request": case["source_request"]}
