@@ -211,6 +211,10 @@ class VLLMChatModel(BaseChatModel):
             state[self.active_message_key] = self.calls_in_message
             write_json(self.capacity_path, state)
 
+    def reserve_external_request(self, origin: str) -> None:
+        """Share the public-message call allowance with a typed decision provider."""
+        self._reserve_request(origin=origin)
+
     def bind_tools(self, tools: Any, **kwargs: Any) -> Any:
         converted = [convert_to_openai_tool(tool) for tool in tools]
         return self.bind(tools=converted, **kwargs)

@@ -1,3 +1,27 @@
+# Current Jev training execution (2026-10-16)
+
+User activates docs/MILAI_JEV_INTEGRATION_TRAINING_DECISION_20261016.md; this supersedes
+older no-new-model/service scheduling for Laya only. Goal ACTIVE/incomplete. No subagents,
+SHA checks or content fingerprints. Preserve existing GPU services and historical results.
+Worktree jev-training-20261016, parent PR124 remote branch dc431c06; main aligned to origin/main.
+Canonical report docs/MILAI_JEV_EXECUTION_20261016.md and pilot progress manifest.
+Actual full encoder+head soft-CE CPU PID3233933 is live at this observation, exec58326;
+log artifacts/jev-training/runtime/ce-pilot-v1.log, result ce-pilot-v1/result.json.
+Never restart from a missing observation; inspect /proc and actual terminal evidence.
+Source/input snapshots are in ce-pilot-v1/source and data-v1; do not hotedit those.
+CPU base HTTP PID3258785, exec65025, 127.0.0.1:7870; alias milai-impact-base-v1.
+Base dev CLOSED0:2 events/6questions,3correct,root0/1,3false preserve;2requests7671input
+20.354sec,unknown remains10generation/1embedding. Server registration/health saved;
+upstream response model laya-rl-agent is generic, not checkpoint provenance.
+Continue from full CE completion to served trained-alias evaluation, more reviewed families,
+D0/D1/D2 full Writer pilot, then W/B locality and D3/D4 selection reuse plus matched relation
+training, calibration and broader tests. Controller-only accuracy does not close the goal.
+Use original /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json only.
+Checks:14 adapter/data,24 dependency/owner,45 benchmark/budget,392 Host regression passed;
+7-source mypy, affected Ruff, DAG/tools boundaries and285-source matrix passed.
+Root owns serial model HTTP. CPU training may overlap and records separate compute there.
+No remote publication/merge yet; ProductNO_GO. Historical snapshots below are not live state.
+
 # Current innovation-v4 handoff (2026-10-16 publication)
 
 Goal ACTIVE/incomplete; user explicitly requests current experiment/training status on GitHub.

@@ -1,0 +1,137 @@
+{
+  "scope": "Controller-only development diagnostic, not end-to-end quality",
+  "base": {
+    "status": "COMPLETED",
+    "events": 2,
+    "fully_labelled_events": 2,
+    "exact_events": 1,
+    "labelled_questions": 6,
+    "correct_questions": 3,
+    "roles": {
+      "direct_root": {
+        "true_positive": 0,
+        "gold": 1,
+        "false_positive": 0,
+        "false_negative": 1
+      },
+      "preserve_successor": {
+        "true_positive": 0,
+        "gold": 0,
+        "false_positive": 3,
+        "false_negative": 0
+      },
+      "other": {
+        "true_positive": 3,
+        "gold": 5,
+        "false_positive": 0,
+        "false_negative": 2
+      }
+    },
+    "calibrated": false,
+    "scope": "Controller diagnostic only; no Writer/Reader/state-quality result"
+  },
+  "data": {
+    "reviews": "data/fixtures/milai-laya-impact-reviews-v1.jsonl",
+    "source_root": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/artifacts/method-architecture/strong-v1/run/candidate",
+    "splits": {
+      "train": {
+        "events": 15,
+        "families": [
+          "alternative_support",
+          "and_conditions",
+          "exception_withdrawal",
+          "proposal_not_commitment",
+          "responsibility"
+        ],
+        "labels": {
+          "direct_root": 9,
+          "other": 45,
+          "preserve_successor": 1
+        },
+        "masked": 8
+      },
+      "dev": {
+        "events": 2,
+        "families": [
+          "future_location"
+        ],
+        "labels": {
+          "direct_root": 1,
+          "other": 5
+        },
+        "masked": 0
+      },
+      "calibration": {
+        "events": 1,
+        "families": [
+          "attribution"
+        ],
+        "labels": {
+          "other": 3
+        },
+        "masked": 0
+      },
+      "test": {
+        "events": 2,
+        "families": [
+          "uncertain_plan"
+        ],
+        "labels": {
+          "other": 10,
+          "direct_root": 1
+        },
+        "masked": 0
+      }
+    },
+    "augmentation": "none",
+    "calibrated": false,
+    "scope": "exposed author development; family-separated learning diagnostic",
+    "model_calls": 0
+  },
+  "length_audit": {
+    "complete_inputs": true,
+    "oversized_questions": 0,
+    "max_sequence_tokens": 1774,
+    "max_len": 2048,
+    "head_max_len": 256
+  },
+  "base_cost": {
+    "requests": 2,
+    "questions": 6,
+    "input_tokens": 7671,
+    "output_tokens": 0,
+    "wall_seconds": 20.354024171829224,
+    "device": "cpu",
+    "new_unknown_generation": 0,
+    "new_unknown_embedding": 0
+  },
+  "artifact_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training",
+  "base_alias": "milai-impact-base-v1",
+  "upstream_source": "4ac226d",
+  "calibrated": false,
+  "training_status": "RUNNING_AT_OBSERVATION",
+  "training_pid": 3233933,
+  "remaining": [
+    "full-CE completion and served evaluation",
+    "more independent reviewed families and class coverage",
+    "matched relational objective",
+    "D0-D4 Writer and joint state/QA comparison",
+    "local W/B projection and range-intervention labels",
+    "ordinary Host real model trajectory",
+    "calibration, unseen families/seeds and final audit"
+  ],
+  "verification": {
+    "adapter_data": 14,
+    "dependency_owner": 24,
+    "benchmark_budget": 45,
+    "ordinary_host_regression": 392,
+    "host_dependency_warnings": 548,
+    "mypy_changed_sources": 7,
+    "ruff": "passed",
+    "dag": "passed",
+    "tools_boundary": "passed",
+    "verification_matrix_sources": 285,
+    "full_repository": "not_run",
+    "remote_ci": "not_run"
+  }
+}

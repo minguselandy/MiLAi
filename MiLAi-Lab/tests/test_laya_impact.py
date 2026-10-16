@@ -60,7 +60,8 @@ def test_maps_choices_to_existing_impact_schema_and_tracks_receipt():
     }
     assert len(seen) == 1
     assert receipts[0]["stage"] == "impact:child"
-    assert receipts[0]["usage"] == {"input_tokens": 178, "output_tokens": 0}
+    assert json.loads(receipts[0]["response_text"])["usage"] == {
+        "input_tokens": 178, "output_tokens": 0}
 
 
 def test_other_model_stages_unchanged():
@@ -91,11 +92,24 @@ def test_provider_failure_is_not_silently_no_change():
     client = fake_client([], status=503)
     with pytest.raises(httpx.HTTPStatusError):
         client.decide("impact", MESSAGES, SCHEMA)
-    assert not client.receipts
+    assert len(client.receipts) == 1
 
 
 def test_unrecognized_decision_fails():
     client = fake_client([], choices=("unexpected", "other", "other"))
     with pytest.raises(ValueError, match="Unrecognized"):
         client.decide("impact", MESSAGES, SCHEMA)
-    assert not client.receipts
+    assert len(client.receipts) == 1
+
+
+def test_host_attempt_scope_is_instruction_not_new_fact():
+    from milai_lab.methods.laya_impact import impact_payload
+
+    messages = [dict(m) for m in MESSAGES]
+    messages[0]["content"] += (
+        "\nCurrent maintenance scope (instructions for this attempt, not fact evidence):\n"
+        + json.dumps("This request revises only A; B has no new durable change.")
+    )
+    payload = impact_payload(messages, SCHEMA)
+    assert payload["state"]["maintenance_scope"].startswith("This request revises only A")
+    assert payload["state"]["delivery"] == json.loads(MESSAGES[-1]["content"])["delivery"]

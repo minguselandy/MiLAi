@@ -29,6 +29,53 @@ CRITERIA = {
 }
 
 
+def impact_payload(
+    messages: list[dict[str, str]], schema: dict[str, Any],
+) -> dict[str, Any]:
+    """The identical model input for serving and event-level training exports."""
+    supplied = json.loads(messages[-1]["content"])
+    aliases = schema["properties"]["roots"]["items"]["enum"]
+    state = {"observed_date": supplied["observed_date"], "delivery": supplied["delivery"]}
+    # FunctionalEditMemory appends this JSON string to the System instruction.
+    # Keep attempt controls distinct from fact evidence for the typed provider too.
+    scope_marker = ("\nCurrent maintenance scope (instructions for this attempt, "
+                    "not fact evidence):\n")
+    for message in messages:
+        if message["role"] == "system" and scope_marker in message["content"]:
+            state["maintenance_scope"] = json.loads(message["content"].split(scope_marker, 1)[1])
+    return {
+        "state": state,
+        "questions": {
+            f"unit_{i}": {
+                "type": "choice",
+                "instructions": (
+                    f"For memory unit {alias}, what is its role under the CURRENT "
+                    "new event? Do not infer change solely from topic similarity."
+                ),
+                "criteria": dict(CRITERIA),
+            }
+            for i, alias in enumerate(aliases)
+        },
+    }
+
+
+def impact_selection(result: dict[str, Any], schema: dict[str, Any]) -> dict[str, Any]:
+    """Interpret a saved response without repeating inference or its accounting."""
+    if result.get("usage", {}).get("truncated"):
+        raise ValueError("Laya impact input was truncated")
+    aliases = schema["properties"]["roots"]["items"]["enum"]
+    selection: dict[str, list[str]] = {"roots": [], "preserve": []}
+    for i, alias in enumerate(aliases):
+        label = result["answers"][f"unit_{i}"]["choice"]
+        if label == "direct_root":
+            selection["roots"].append(alias)
+        elif label == "preserve_successor":
+            selection["preserve"].append(alias)
+        elif label != "other":
+            raise ValueError(f"Unrecognized Laya impact category for {alias}: {label}")
+    return selection
+
+
 @dataclass(slots=True)
 class LayaImpactClient:
     """Thin client for Laya's POST /v1/systemone endpoint."""
@@ -36,7 +83,8 @@ class LayaImpactClient:
     base_url: str = "http://127.0.0.1:8000"
     model: str = "multilingual"
     timeout_seconds: float = 120.0
-    max_len: int = 4096
+    max_len: int = 2048
+    head_max_len: int = 256
     api_key: str | None = None
     on_receipt: ReceiptHook | None = None
     http_client: httpx.Client | None = None
@@ -48,30 +96,9 @@ class LayaImpactClient:
         messages: list[dict[str, str]],
         schema: dict[str, Any],
     ) -> dict[str, Any]:
-        # These aliases come from the real MiLAi impact_request schema.
-        aliases: list[str] = list(schema["properties"]["roots"]["items"]["enum"])
-        supplied = json.loads(messages[-1]["content"])
-        state = {
-            "observed_date": supplied["observed_date"],
-            "delivery": supplied["delivery"],
-        }
-        questions = {
-            f"unit_{i}": {
-                "type": "choice",
-                "instructions": (
-                    f"For memory unit {alias}, what is its role under the CURRENT "
-                    "new event? Do not infer change solely from topic similarity."
-                ),
-                "criteria": CRITERIA,
-            }
-            for i, alias in enumerate(aliases)
-        }
-        payload = {
-            "state": state,
-            "questions": questions,
-            "model": self.model,
-            "max_len": self.max_len,
-        }
+        payload = {**impact_payload(messages, schema),
+                   "model": self.model, "max_len": self.max_len,
+                   "head_max_len": self.head_max_len}
         headers = {"content-type": "application/json"}
         if self.api_key:
             headers["authorization"] = f"Bearer {self.api_key}"
@@ -90,31 +117,19 @@ class LayaImpactClient:
                     json=payload,
                     headers=headers,
                 )
-        response.raise_for_status()
-        result = response.json()
-        answers = result["answers"]
-        selection: dict[str, list[str]] = {"roots": [], "preserve": []}
-        for i, alias in enumerate(aliases):
-            label = answers[f"unit_{i}"]["choice"]
-            if label == "direct_root":
-                selection["roots"].append(alias)
-            elif label == "preserve_successor":
-                selection["preserve"].append(alias)
-            elif label != "other":
-                raise ValueError(f"Unrecognized Laya impact category for {alias}: {label}")
         receipt = {
-            "stage": stage,
-            "model": result.get("model", self.model),
-            "unit_count": len(aliases),
-            "usage": result.get("usage", {}),
+            "stage": stage, "requested_model": self.model,
+            "unit_count": len(payload["questions"]),
             "latency_seconds": time.perf_counter() - started,
-            "answers": {alias: answers[f"unit_{i}"] for i, alias in enumerate(aliases)},
-            "selection": selection,
+            "status_code": response.status_code,
+            "response_text": response.text,
         }
+        # Persist the actual response before HTTP/JSON/semantic validation.
         self.receipts.append(receipt)
         if self.on_receipt is not None:
             self.on_receipt(receipt)
-        return selection
+        response.raise_for_status()
+        return impact_selection(response.json(), schema)
 
     def wrap(self, existing_model_call: ModelCall) -> ModelCall:
         """Route impact and impact:child stages; leave every other stage alone."""

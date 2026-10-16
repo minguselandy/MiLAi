@@ -695,6 +695,7 @@ def prepare(
 ) -> dict[str, Any]:
     settings = entrypoint_settings(read_json(settings_path), "functional")
     allowed = {
+        "laya_impact",
         "profile",
         "host",
         "capacity",
@@ -3199,7 +3200,7 @@ def message(
                 selected_memory = tuple(t for t in selected_memory if t.name not in {
                     "save_memory", "update_memory", "confirm_existing_memory"})
 
-            def maintenance_call(
+            def generative_maintenance_call(
                 stage: str, messages: list[dict[str, str]], schema: dict[str, Any]
             ) -> dict[str, Any]:
                 response = model.invoke(
@@ -3217,6 +3218,14 @@ def message(
                 trace({"event": "functional_maintenance_envelope", "stage": stage,
                        "envelope": value})
                 return value
+
+            from milai_lab.runners.laya_impact import impact_model_call
+
+            maintenance_call = impact_model_call(
+                generative_maintenance_call, settings, budget=budget,
+                root=bank_root / f"{identity}-laya",
+                admit=lambda: model.reserve_external_request("laya_impact"),
+            )
 
             def maintenance_fit(messages: list[dict[str, str]]) -> bool:
                 try:

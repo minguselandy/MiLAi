@@ -34,6 +34,10 @@ CONFIG_FIELDS = frozenset(
     }
 )
 
+DECISION_CONFIG_FIELDS = frozenset({
+    "base_url", "model", "max_len", "head_max_len", "timeout_seconds",
+})
+
 
 class HttpOwnershipError(RuntimeError):
     """An explicit infrastructure rejection; no implicit retry or refund."""
@@ -68,6 +72,14 @@ def normalized_url(value: Any) -> str:
 
 
 def normalized_config(value: Any) -> dict[str, Any]:
+    if type(value) is dict and set(value) == DECISION_CONFIG_FIELDS:
+        if (not isinstance(value["model"], str) or not value["model"]
+                or any(type(value[key]) is not int or value[key] < 1
+                       for key in ("max_len", "head_max_len"))
+                or type(value["timeout_seconds"]) not in {int, float}
+                or not math.isfinite(value["timeout_seconds"]) or value["timeout_seconds"] <= 0):
+            raise HttpOwnershipError("HTTP_OWNER_CLIENT_CONFIG_INVALID")
+        return {**value, "base_url": normalized_url(value["base_url"])}
     if type(value) is not dict or set(value) != CONFIG_FIELDS:
         raise HttpOwnershipError("HTTP_OWNER_COMPLETE_CLIENT_CONFIG_REQUIRED")
     if (
@@ -363,8 +375,10 @@ class HttpOwnership:
                 self._waiting -= 1
                 entered = True
                 self.assert_client(client, budget, config, base_url, disk=True)
+                allowed_paths = ({"v1/systemone"} if set(config) == DECISION_CONFIG_FIELDS
+                                 else {"chat/completions", "embeddings"})
                 if (
-                    path not in {"chat/completions", "embeddings"}
+                    path not in allowed_paths
                     or model != config["model"]
                     or normalized_url(actual_url) != normalized_url(base_url) + "/" + path
                 ):

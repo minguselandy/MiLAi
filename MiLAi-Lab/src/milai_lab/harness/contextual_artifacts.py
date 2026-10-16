@@ -149,6 +149,16 @@ class RunBudget:
             self.state[kind]["unknown_usage"] -= 1
             self._persist()
 
+    def record_compute(self, phase: str, measures: dict[str, int | float]) -> None:
+        """Accumulate local model work in the existing ledger, separately from tokens."""
+        if self.http_owner is not None:
+            self.http_owner.budget_operation(self)
+        with self.lock:
+            totals = self.state.setdefault("compute", {}).setdefault(phase, {})
+            for name, value in measures.items():
+                totals[name] = totals.get(name, 0) + value
+            self._persist()
+
     def _persist(self) -> None:
         if self.http_owner is None:
             write_json(self.path, self.state)

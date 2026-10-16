@@ -76,22 +76,75 @@ Extractor and all other calls with the original provider. Empty roots
 do **not** mean "skip writing" (a fully new fact needs no old target).
 HTTP failures are raised, never silently turned into no-change results.
 
-**Important integration boundary:** This is an opt-in method_call wrapper.
-Default Benchmark/Host configuration does **not yet select Laya
-automatically**. laya.receipts and on_receipt expose model, selected
-probabilities, actual server-reported usage and latency, but they are
-**not automatically booked in the old model provider's ledger**. To
-publish an accurate experiment, connect on_receipt to the existing run
-accounting and charge local GPU/CPU costs, not just output tokens. For
-a real full maintenance run, instantiate the client at the runner/Host
-model-call boundary and call wrap exactly once.
+Benchmark and ordinary Host now accept an explicit `laya_impact` setting:
 
-Laya is a finite-context encoder, not an arbitrary-long-history reader.
-The bridge requests max_len=4096; that is an input cap, not evidence that
-the entire MiLAi packet fits or is preserved without truncation. First
-evaluate short packets that fit both providers; for long packets build
-and compare an explicit context-selection method. Do not silently
-truncate disjoint scopes or independent supports.
+```json
+{
+  "laya_impact": {
+    "base_url": "http://127.0.0.1:7870",
+    "model": "milai-impact-ce-v1",
+    "max_len": 2048,
+    "head_max_len": 256,
+    "timeout_seconds": 180.0
+  }
+}
+```
+
+Use that CE alias only after a real checkpoint is complete and registered with
+`LAYA_EXTRA_MODELS`. The current pilot initially serves `milai-impact-base-v1`.
+For a serialized HTTP-owner Host, add the same five-field configuration to the
+existing `http_ownership_domain.clients` list. The shared adapter registers the
+actual typed endpoint, reserves the original computation budget, records the raw
+response before semantic validation, and shares Host call admission. No separate
+ledger is created. Non-autoregressive work uses the original generation budget
+bucket and is also itemized under `compute.laya_impact` (requests, questions,
+input tokens, wall time). Missing usage stays unknown. A saved response is reused;
+an unresolved request is not repeated.
+
+Laya is a finite-context encoder. Training and serving use the same
+`impact_payload`; a training audit measures every complete state+question+options
+sequence, and serving rejects a response reporting truncated input. Each question
+has its own encoded sequence even when several questions share one HTTP request.
+Full-candidate Writer delivery remains the first-stage control.
+
+## Source-reviewed training and actual serving
+
+See [execution record](../../docs/MILAI_JEV_EXECUTION_20261016.md) for current results,
+limitations, original artifact paths and the still-incomplete requirement audit.
+These tools run from `MiLAi-Lab`; Laya/Torch are optional training-environment
+dependencies, not new mandatory dependencies for ordinary MiLAi runtime imports.
+
+```bash
+PYTHONPATH=src python tools/prepare_laya_impact.py \
+  data/fixtures/milai-laya-impact-reviews-v1.jsonl \
+  /absolute/path/to/strong-v1/run/candidate /new/path/to/data
+PYTHONPATH=src python tools/train_laya_impact.py \
+  /new/path/to/data /absolute/path/to/laya-multilingual-base /new/path/to/run \
+  --budget /absolute/path/to/existing/budget.json --device cpu
+```
+
+`--audit-only` writes full sequence lengths without optimizing parameters. The
+training command keeps the original encoder and decision head, uses soft-CE and
+external family splits, and disables upstream random item-level calibration.
+The small pilot is uncalibrated. Check the actual effective items, optimizer
+updates, losses and root/preserve errors before interpreting an accuracy gain.
+
+After the checkpoint exists, register its real absolute directory:
+
+```bash
+export LAYA_EXTRA_MODELS='{"milai-impact-ce-v1":"/absolute/path/to/completed/checkpoint"}'
+export LAYA_MODELS=milai-impact-ce-v1
+export LAYA_DEFAULT_MODEL=milai-impact-ce-v1
+export LAYA_PRELOAD=1 LAYA_HOST=127.0.0.1 LAYA_DEVICE=cpu
+laya-serve
+```
+
+The checkpoint contains `model.safetensors`, `encoder/`, `tokenizer/`, and
+`rl_agent_config.json`. The HTTP response's generic `model` field is not sufficient
+checkpoint identity; save the actual service registration and loaded-alias health
+alongside checkpoint configuration. `tools/evaluate_laya_impact.py` uses the metered
+adapter to evaluate one explicitly named split and writes per-role/event metrics.
+It does not execute Writer or Reader. Local files are used without SHA verification.
 
 ## Offline tests (no checkpoint download)
 
@@ -111,7 +164,6 @@ by this branch**. MiLAi's experimental semantic_delta_v1/v2 path
 currently disables dependency_updates; do not enable both by removing
 its compatibility check without a specific delta-scoped compiler.
 
-The current work environment does not provide Docker, a GPU or external
-weight downloads, so this branch includes an executable deployment
-recipe and locally contract-tested integration, **not** a live model
-server or end-to-end model-quality result.
+The current execution has downloaded and served the multilingual checkpoint on
+CPU. Full fine-tuning and the D0–D4 state/Writer comparisons have separate statuses
+in the execution record; the offline tests below are not model-quality evidence.

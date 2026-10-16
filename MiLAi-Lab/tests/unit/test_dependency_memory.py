@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 
+import httpx
 import pytest
 from jsonschema import Draft202012Validator, ValidationError
 from langgraph.store.sqlite import SqliteStore
@@ -41,10 +42,11 @@ def test_shared_prerequisite_is_context_until_it_is_the_changed_root():
     assert retained["read_only_units"] == ["B"]
 
 
+@pytest.mark.parametrize("use_laya", [False, True])
 @pytest.mark.parametrize("wrong_target", [False, True])
 @pytest.mark.parametrize("full_features", [False, True])
 def test_region_constrains_actual_editor_and_keeps_other_claims(
-    tmp_path: Path, wrong_target: bool, full_features: bool,
+    tmp_path: Path, wrong_target: bool, full_features: bool, use_laya: bool,
 ):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = MemoryService(store, ("dep", "alice"), "alice", tmp_path / "lock",
@@ -101,10 +103,26 @@ def test_region_constrains_actual_editor_and_keeps_other_claims(
                 Draft202012Validator(schema).validate(envelope)
             return envelope
 
+        dispatched = call
+        if use_laya:
+            from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+            from milai_lab.runners.laya_impact import impact_model_call
+
+            def decisions(request):
+                payload = json.loads(request.content)
+                return httpx.Response(200, json={"answers": {
+                    q: {"choice": "direct_root" if i == 0 else "other"}
+                    for i, q in enumerate(payload["questions"])},
+                    "usage": {"input_tokens": 100, "output_tokens": 0}})
+
+            dispatched = impact_model_call(call, {"laya_impact": {
+                "http_client": httpx.Client(transport=httpx.MockTransport(decisions))}},
+                budget=RunBudget(RunLimits(), tmp_path / "budget.json"), root=tmp_path / "typed")
+
         result = maintain_event(method, delivery, session="s1", request_id="change",
-                                date="2031-01-02", recipe="single_pass", model_call=call,
+                                date="2031-01-02", recipe="single_pass", model_call=dispatched,
                                 selected_record_ids=[receipt["id"]])
-        assert calls == ["impact", "edit"]
+        assert calls == (["edit"] if use_laya else ["impact", "edit"])
 
         assert result["dependency_regions"]["r1"]["affected_units"] == ["u1"]
         after = service.read(receipt["id"])["value"]
@@ -122,7 +140,7 @@ def test_region_constrains_actual_editor_and_keeps_other_claims(
                                date="2031-01-02", recipe="single_pass", model_call=call,
                                selected_record_ids=[receipt["id"]])
         assert again == result
-        assert calls == ["impact", "edit"]
+        assert calls == (["edit"] if use_laya else ["impact", "edit"])
 
 
 def test_history_selection_delivers_withdrawn_clause_and_actual_cancellation(tmp_path: Path):

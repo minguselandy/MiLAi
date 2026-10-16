@@ -1,3 +1,10 @@
+# Jev 类 Laya 接入与训练（2026-10-16）
+
+当前执行 [Jev 接入与训练决定](MILAI_JEV_INTEGRATION_TRAINING_DECISION_20261016.md)，
+目标 ACTIVE / 未完成。已接通共享 Impact provider 与原账本，真实基础模型 dev 为 3/6 单元、
+root 0/1、误 preserve 3；完整 encoder+head soft-CE 训练运行中。20 个来源审阅事件是小型已暴露
+分组诊断，不能代替 D0–D4 全路径与未见家族验证。详见 [执行记录](MILAI_JEV_EXECUTION_20261016.md)。
+
 # Innovation v4：当前研究入口（2026-10-16）
 
 完整目标仍在执行，当前结果已整理为GitHub开发检查点。三臂匹配偏好训练和40例应用评估、
