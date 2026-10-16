@@ -42,6 +42,7 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--budget", type=Path, required=True)
     parser.add_argument("--epochs", type=int, default=4)
+    parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
     parser.add_argument("--backend", choices=("native", "linear"), default="native")
@@ -51,8 +52,8 @@ def main() -> None:
     from laya.train import _forward, encode_item, items_from_rows, save_checkpoint
 
     torch.set_num_threads(4)
-    torch.manual_seed(0)
-    torch.cuda.manual_seed_all(0)
+    torch.manual_seed(args.seed)
+    torch.cuda.manual_seed_all(args.seed)
     if os.environ.get("CUDA_VISIBLE_DEVICES") != "2,3" or torch.cuda.device_count() != 2:
         raise ValueError("This declared run uses only physical GPUs 2,3")
     for device in (0, 1):
@@ -63,7 +64,7 @@ def main() -> None:
     train = [r for r in train if r["gold"]]
     dev = [json.loads(x) for x in (args.data / "dev.jsonl").read_text().splitlines()]
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
-           "base_checkpoint": str(args.checkpoint.resolve()), "seed": 0,
+           "base_checkpoint": str(args.checkpoint.resolve()), "seed": args.seed,
            "physical_gpus": [2, 3], "device": "cuda", "torch_version": torch.__version__,
            "cuda_version": torch.version.cuda, "precision": "float32",
            "reference_compile": False,
@@ -134,7 +135,7 @@ def main() -> None:
 
         history = [{"epoch": 0, "dev": evaluate(0)}]
         write_json(args.output / "history.json", history)
-        rng = random.Random(0)  # noqa: S311 -- reproducible training order
+        rng = random.Random(args.seed)  # noqa: S311 -- reproducible training order
         for epoch in range(1, args.epochs + 1):
             model.train()
             order = list(range(len(train)))
