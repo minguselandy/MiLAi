@@ -1,3 +1,27 @@
+# Current bounded reader worktree (2026-10-16)
+
+Goal ACTIVE/incomplete. This independent jev-read-decisions-20261016 worktree
+continues the same bottleneck review from20bc06d6. The sibling bottleneck worktree
+has concurrent source/report edits; preserve them and do not overwrite its files.
+This branch owns bounded_evidence.py, prepare_musique_decisions.py,
+evaluate_bounded_laya.py and their new direct tests. No subagents or SHA checks.
+User requires downloads/models/environments under /cra/memory/mx_memory, not /root.
+artifacts/jev-reader/runtime/env.sh sets HF/Torch/pip/uv/XDG/temp paths explicitly.
+New train-env uses a locally copied CPython and existing /cra packages; original
+training environments, model checkpoints, failed runs and GPU services stay intact.
+MuSiQue mirror download COMPLETED39876rows/476696984bytes, no checksum. Official
+archive equivalence unverified. Family split896connected components; discarded
+cross-split target exposures. Shared non-target backgrounds are NOT independent.
+Frozen decisions-v1: train64families/124rows/556prefixes; dev24/46/203;
+calibration24/42/186; test24/44/195. Labels mask unprovable answerable retrieval
+gaps, retain reference complements and two STOP meanings; literal equivalent
+supports share target mass. Prefixes do not create new independent events.
+Full native tokenizer audit4096/384: no truncation/invalid targets; max2137tokens.
+No Reader QA, CE benefit, calibrated stopping or downstream net-cost claim yet.
+Real CPU inference must use original continuous budget.json below for compute,
+record actual sequence rows/tokens/time; no synthetic HTTP or generated-token counts.
+Inspect each live process/terminal before new work; old process snapshots are history.
+
 # Current bottleneck review execution (2026-10-16)
 
 Goal ACTIVE/incomplete: execute MILAI_JEV_BOTTLENECK_TRAINING_BENCHMARK_REVIEW_20261016.md.
