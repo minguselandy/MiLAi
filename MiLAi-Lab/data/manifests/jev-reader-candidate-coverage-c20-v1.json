@@ -1,0 +1,160 @@
+{
+  "status": "C20_PREPARED_CE_STARTED",
+  "pool8": {
+    "positive_cases": 24,
+    "full_reference_in_pool": 10,
+    "top2_reference_complete": 2,
+    "top4_reference_complete": 3,
+    "top8_reference_complete": 10
+  },
+  "pool20": {
+    "splits": {
+      "train": {
+        "families": 64,
+        "source_rows": 124,
+        "states": 602,
+        "label_status": {
+          "missing_complement": 343,
+          "reference_proof_complete": 79,
+          "official_unanswerable_pool": 180
+        },
+        "prefix_origin": {
+          "bm25_prefix": 496,
+          "reference_prefix": 106
+        },
+        "source_rows_answerability": {
+          "True": 62,
+          "False": 62
+        },
+        "source_rows_reference_covered": 124
+      },
+      "dev": {
+        "families": 24,
+        "source_rows": 46,
+        "states": 223,
+        "label_status": {
+          "missing_complement": 135,
+          "reference_proof_complete": 27,
+          "official_unanswerable_pool": 61
+        },
+        "prefix_origin": {
+          "bm25_prefix": 184,
+          "reference_prefix": 39
+        },
+        "source_rows_answerability": {
+          "True": 24,
+          "False": 22
+        },
+        "source_rows_reference_covered": 46
+      },
+      "calibration": {
+        "families": 24,
+        "source_rows": 42,
+        "states": 206,
+        "label_status": {
+          "missing_complement": 123,
+          "reference_proof_complete": 26,
+          "official_unanswerable_pool": 57
+        },
+        "prefix_origin": {
+          "bm25_prefix": 168,
+          "reference_prefix": 38
+        },
+        "source_rows_answerability": {
+          "True": 22,
+          "False": 20
+        },
+        "source_rows_reference_covered": 42
+      },
+      "test": {
+        "families": 24,
+        "source_rows": 44,
+        "states": 212,
+        "label_status": {
+          "missing_complement": 116,
+          "reference_proof_complete": 30,
+          "official_unanswerable_pool": 66
+        },
+        "prefix_origin": {
+          "bm25_prefix": 176,
+          "reference_prefix": 36
+        },
+        "source_rows_answerability": {
+          "True": 24,
+          "False": 20
+        },
+        "source_rows_reference_covered": 44
+      }
+    },
+    "pool_size": 20,
+    "seed": 0,
+    "family_source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/families-v1",
+    "wall_seconds": 3.913600525818765,
+    "cpu_seconds": 3.9133988590000004,
+    "model_calls": 0,
+    "scope": "Derived reference-proof decisions; not downstream QA or calibrated STOP",
+    "sampling": "At most one paired question per family before prefix expansion",
+    "loss_weighting": "Normalize prefixes per source event, then events per family"
+  },
+  "capacity": {
+    "splits": {
+      "train": {
+        "states": 602,
+        "labelled": 602,
+        "max_full_tokens": 3791,
+        "over_4096": 0,
+        "truncated_state": 0,
+        "truncated_head": 0,
+        "skipped": {}
+      },
+      "dev": {
+        "states": 223,
+        "labelled": 223,
+        "max_full_tokens": 4960,
+        "over_4096": 20,
+        "truncated_state": 0,
+        "truncated_head": 0,
+        "skipped": {}
+      },
+      "calibration": {
+        "states": 206,
+        "labelled": 206,
+        "max_full_tokens": 4333,
+        "over_4096": 5,
+        "truncated_state": 0,
+        "truncated_head": 0,
+        "skipped": {}
+      },
+      "test": {
+        "states": 212,
+        "labelled": 212,
+        "max_full_tokens": 4232,
+        "over_4096": 6,
+        "truncated_state": 0,
+        "truncated_head": 0,
+        "skipped": {}
+      }
+    },
+    "max_len": 8192,
+    "head_max_len": 512,
+    "model_calls": 0,
+    "wall_seconds": 21.20292304456234,
+    "cpu_seconds": 21.209253977,
+    "scope": "Complete original20 candidates, same sampled families/rows; no inference or gold injected into candidates"
+  },
+  "same_sampled_families_and_source_rows": true,
+  "candidate_construction": "all20 original supplied paragraphs, ordered by question-only BM25; no support insertion",
+  "change_reason": "14of24 answerable dev cases lack complete reference proof in initial8; review section5 requires repairing candidate coverage first",
+  "reader_protocol_c8": "configs/milai-jev-musique-reader-v1.json remains prepared,0ReaderHTTP; not admitted as net benefit evidence after recall failure",
+  "reader_protocol_c20": "not yet prepared or executed; all original downstream requirements remain",
+  "ce_c20_source": "cc8f8af6",
+  "ce_c20_exec_session": 59654,
+  "limitations": [
+    "Native8192 capacity, complete sequence maximum4960; no truncation",
+    "Twenty source documents are not twenty independent source families",
+    "Additional useful prefixes/labels appear with complete pools, so C8-to-C20 training comparison is multi-factor",
+    "Original train/dev/calibration/test membership and exposure records remain"
+  ],
+  "ce_c20_pid": 94497,
+  "scope_note": "C20 CE running; standalone selector remains C8 and must be adapted before C20 Reader dispatch"
+}

@@ -1,3 +1,48 @@
+# Full-pool CE live handoff (2026-10-16)
+
+Goal ACTIVE/incomplete; this turn made progress through completed matched training,
+real finite read trajectories and a newly verified recall bottleneck. No subagents/SHA.
+Only live task at checkpoint: ce-c20-v1 PID94497/exec59654, frozen sourcecc8f8af6,
+CUDA_VISIBLE_DEVICES2,3, native8192/head512,4epochs/602train/223dev,152plannedupdates.
+At snapshot39updates/epoch2; original zero12/223,epoch1 79/223 with121wrong exhausted
+stops. Inspect actual process/run.json; don't restart from a missing observer handle.
+Artifacts under artifacts/jev-reader/ce-c20-v1, stderr/stdout in runtime. No Reader queue.
+
+C8 ordinary-ce-v1 CLOSED/exit0,exec87911,sourcef62635d2,120updates and saved fp16
+encoder+CLS checkpoint. Final83/164:complement26/78,exhausted57/73,sufficient0/13.
+1459.237wall/1867.384CPU;15648train encoding rows17873160tokens;8395dev10084795tokens.
+C8 Laya CE final73/164 and ordinary83 both poor stopping; constant exhausted73.
+Raw curves/checkpoints/failures and original budget retained. C8 actual selection
+chain CLOSED/exit0 exec24015 source43f5a302: all3models46cases,fixed2/adaptive4;
+reference proof complete of24positive: base1/2,CE2/1,ordinary2/0. BM25k2/k4/k8=2/3/10.
+Both trained checkpoints reloaded:46initial-state argmax46/46match each; not all203.
+Import failure before first selection (rank_bm25 missing in CUDAenv) was0model calls;
+fixed by moving offline preparation import into prepare(), original stderr retained.
+
+CRITICAL: C8 contains full annotated support in only10of24 answerable dev cases.
+Review section5 prioritizes fixing recall. C8 Reader protocol414calls is PREPARED/0HTTP,
+not an admitted net-benefit trial; do not dispatch it from stale plans. Preserve it.
+C20 reuses same sampled families/source rows, all20original paragraphs, no gold insertion.
+Data artifacts/jev-reader/data/decisions-c20-v1:602train/223dev/206calib/212test states.
+C20 lengths max3791/4960/4333/4232,all complete at8192/512. C8 membership/exposure unchanged;
+2dev/1test sampled families preexposed, exclude test overlap from future blind result.
+
+NEXT: inspect C20 terminal/curves and costs; adapt selector/prepare/ordinary capacity
+and pool limits for20 (current run_bounded_reader_selection still8/4096/384!), complete
+same-input C20 controls/logits baseline and real common Reader QA. Current C8 figures
+are not QA. Ordinary full-state independent action encoding is a matched scalar
+baseline, not all optimized rerankers. Avoid claiming Jev advantage from its higher cost.
+Native MuSiQue scorer fetched under artifacts/jev-reader/musique-official; original
+paired metric needs22complete pairs,2orphan positives retained in overall24 denominator.
+Reader driver/tests ready; use official CLI, not dynamic imports. No unconfirmed replay.
+Full unexposed LME,MemOps/MEME,W/B calibration/trajectory requirements still pending.
+
+Only7862authorizedcontainer is stopped. bge-m3 PID47436 and bge-reranker52982 unchanged;
+othermodels/GPU0/1 untouched. Keep models/env/caches under /cra/memory/mx_memory.
+Restore7862only after GPUtraining/selection ends; don't release protected BGE allocations.
+15directchecks/Ruff/package+tools boundaries pass. No fullrepo/remoteCI/publication.
+Reports docs/MILAI_JEV_READ_DECISIONS_20261016.md; 3new manifests C8selection,ordinary,C20.
+
 # Reader CE terminal (2026-10-16)
 
 Previous goal turn was progress: data/split/finite-policy implementation and real
