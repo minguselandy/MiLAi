@@ -30,7 +30,9 @@ def prepare(root: Path) -> dict:
                                                      "source_result": str(path.resolve())})
     rng = random.Random(20261019)  # noqa: S311 -- reproducible review order, not cryptography
     mapping, contexts, packets = {}, {}, defaultdict(list)
-    for key, reference in sorted(references.items()):
+    ordered = sorted(references.items(), key=lambda item: (
+        item[0][0], item[1]["phase"] != "before", int(item[0][1].rsplit("-", 1)[1])))
+    for key, reference in ordered:
         rows = groups[key]
         rng.shuffle(rows)
         visible_inputs = []
