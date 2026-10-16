@@ -1,0 +1,306 @@
+{
+  "status": "COMPLETED_SELECTION_ONLY",
+  "source_version": "e2aa1f37",
+  "cases": 46,
+  "families": 24,
+  "reference_complete_pool": 24,
+  "arms": {
+    "bm25_k2": {
+      "counts": {
+        "cases": 46,
+        "opened": 92,
+        "empty": 0,
+        "positive_cases": 24,
+        "complete_reference": 2
+      },
+      "stop_reasons": {
+        "fixed_k": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 0,
+        "standalone_model_sequence_rows": 0,
+        "reconstructed_standalone_wall_seconds": 0
+      }
+    },
+    "bm25_k4": {
+      "counts": {
+        "cases": 46,
+        "opened": 184,
+        "empty": 0,
+        "positive_cases": 24,
+        "complete_reference": 3
+      },
+      "stop_reasons": {
+        "fixed_k": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 0,
+        "standalone_model_sequence_rows": 0,
+        "reconstructed_standalone_wall_seconds": 0
+      }
+    },
+    "bm25_k20": {
+      "counts": {
+        "cases": 46,
+        "opened": 920,
+        "empty": 0,
+        "positive_cases": 24,
+        "complete_reference": 24
+      },
+      "stop_reasons": {
+        "fixed_k": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 0,
+        "standalone_model_sequence_rows": 0,
+        "reconstructed_standalone_wall_seconds": 0
+      }
+    },
+    "laya_zero_k2": {
+      "counts": {
+        "cases": 46,
+        "opened": 92,
+        "empty": 0,
+        "positive_cases": 24,
+        "complete_reference": 1
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 275019,
+        "standalone_model_sequence_rows": 92,
+        "reconstructed_standalone_wall_seconds": 15.060727533884346
+      }
+    },
+    "laya_zero_adaptive": {
+      "counts": {
+        "cases": 46,
+        "opened": 167,
+        "empty": 1,
+        "positive_cases": 24,
+        "complete_reference": 0
+      },
+      "stop_reasons": {
+        "read_budget": 38,
+        "stop_exhausted": 5,
+        "stop_sufficient": 3
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 516929,
+        "standalone_model_sequence_rows": 175,
+        "reconstructed_standalone_wall_seconds": 27.580041124485433
+      }
+    },
+    "laya_ce_k2": {
+      "counts": {
+        "cases": 46,
+        "opened": 92,
+        "empty": 0,
+        "positive_cases": 24,
+        "complete_reference": 2
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 275042,
+        "standalone_model_sequence_rows": 92,
+        "reconstructed_standalone_wall_seconds": 15.05017064139247
+      }
+    },
+    "laya_ce_adaptive": {
+      "counts": {
+        "cases": 46,
+        "opened": 64,
+        "empty": 4,
+        "positive_cases": 24,
+        "complete_reference": 1
+      },
+      "stop_reasons": {
+        "stop_exhausted": 30,
+        "stop_sufficient": 16
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 326804,
+        "standalone_model_sequence_rows": 110,
+        "reconstructed_standalone_wall_seconds": 17.718122916296124
+      }
+    },
+    "linear_ce_k2": {
+      "counts": {
+        "cases": 46,
+        "opened": 92,
+        "empty": 0,
+        "positive_cases": 24,
+        "complete_reference": 2
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 275045,
+        "standalone_model_sequence_rows": 92,
+        "reconstructed_standalone_wall_seconds": 11.957319328561425
+      }
+    },
+    "linear_ce_adaptive": {
+      "counts": {
+        "cases": 46,
+        "opened": 56,
+        "empty": 2,
+        "positive_cases": 24,
+        "complete_reference": 1
+      },
+      "stop_reasons": {
+        "stop_sufficient": 17,
+        "stop_exhausted": 29
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 297007,
+        "standalone_model_sequence_rows": 102,
+        "reconstructed_standalone_wall_seconds": 12.73114165943116
+      }
+    },
+    "logits_zero_k2": {
+      "counts": {
+        "cases": 46,
+        "opened": 92,
+        "empty": 0,
+        "positive_cases": 24,
+        "complete_reference": 2
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 311394,
+        "standalone_model_sequence_rows": 92,
+        "reconstructed_standalone_wall_seconds": 19.747845308855176
+      }
+    },
+    "logits_zero_adaptive": {
+      "counts": {
+        "cases": 46,
+        "opened": 184,
+        "empty": 0,
+        "positive_cases": 24,
+        "complete_reference": 3
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 618119,
+        "standalone_model_sequence_rows": 184,
+        "reconstructed_standalone_wall_seconds": 38.61875833105296
+      }
+    },
+    "logits_lora_k2": {
+      "counts": {
+        "cases": 46,
+        "opened": 92,
+        "empty": 0,
+        "positive_cases": 24,
+        "complete_reference": 2
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 311394,
+        "standalone_model_sequence_rows": 92,
+        "reconstructed_standalone_wall_seconds": 20.231259380467236
+      }
+    },
+    "logits_lora_adaptive": {
+      "counts": {
+        "cases": 46,
+        "opened": 39,
+        "empty": 7,
+        "positive_cases": 24,
+        "complete_reference": 0
+      },
+      "stop_reasons": {
+        "stop_exhausted": 46
+      },
+      "standalone_selector_cost": {
+        "standalone_model_input_tokens": 292153,
+        "standalone_model_sequence_rows": 85,
+        "reconstructed_standalone_wall_seconds": 19.033567996695638
+      }
+    }
+  },
+  "actual_compute": {
+    "laya_zero": {
+      "wall_seconds": 39.41959950979799,
+      "cpu_seconds": 57.483340164000005,
+      "runs": 1,
+      "forwards": 176,
+      "sequence_rows": 176,
+      "input_tokens": 520408,
+      "state_tokenizations": 176,
+      "state_tokens": 462224,
+      "peak_rss_kib": 2747848,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    },
+    "laya_ce": {
+      "wall_seconds": 26.403949296101928,
+      "cpu_seconds": 39.410061399,
+      "runs": 1,
+      "forwards": 114,
+      "sequence_rows": 114,
+      "input_tokens": 338482,
+      "state_tokenizations": 114,
+      "state_tokens": 299806,
+      "peak_rss_kib": 2748032,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    },
+    "logits_lora": {
+      "wall_seconds": 39.71179364062846,
+      "cpu_seconds": 46.082365918,
+      "runs": 1,
+      "forwards": 92,
+      "sequence_rows": 92,
+      "input_tokens": 311394,
+      "chat_tokenizations": 92,
+      "letter_tokenizations": 1978,
+      "peak_rss_kib": 3657268,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    },
+    "linear_ce": {
+      "wall_seconds": 20.750248367898166,
+      "cpu_seconds": 29.230478201999997,
+      "runs": 1,
+      "forwards": 104,
+      "sequence_rows": 104,
+      "input_tokens": 305104,
+      "state_tokenizations": 104,
+      "state_tokens": 269680,
+      "peak_rss_kib": 2566584,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    },
+    "bm25": {
+      "wall_seconds": 0.05996947921812534,
+      "cpu_seconds": 0.04525740300000001,
+      "runs": 1,
+      "peak_rss_kib": 24544,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    },
+    "logits_zero": {
+      "wall_seconds": 45.30187528394163,
+      "cpu_seconds": 50.355859769,
+      "runs": 1,
+      "forwards": 184,
+      "sequence_rows": 184,
+      "input_tokens": 618119,
+      "chat_tokenizations": 184,
+      "letter_tokenizations": 3772,
+      "peak_rss_kib": 3658116,
+      "scope": "Incremental actual work; standalone policies add cached work separately"
+    }
+  },
+  "reader_calls": 0,
+  "cost_basis": "GPU phases before restoring Reader. Standalone costs reconstruct shared-prefix work; no claim of colocated interactive latency.",
+  "scope": "Previously fixed dev cohort; reference proof and literal equivalents, not all semantic proofs"
+}

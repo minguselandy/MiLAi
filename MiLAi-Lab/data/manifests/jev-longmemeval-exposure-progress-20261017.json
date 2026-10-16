@@ -1,0 +1,93 @@
+{
+  "status": "PARTIAL_NOT_ADMITTED",
+  "metadata_only": true,
+  "new_model_calls": 0,
+  "stages": {
+    "summary.json": {
+      "population": 500,
+      "request_path_ids": 20,
+      "result_metadata_ids": 17,
+      "declared_metadata_ids": 500,
+      "any_recorded_ids": 500,
+      "target_sessions_overlap_observed_histories": 25,
+      "unrecorded_and_no_known_target_overlap": 0,
+      "counts": {
+        "metadata_bytes_read": 2167466916,
+        "distinct_metadata_parsed": 1095,
+        "metadata_files_examined": 50077,
+        "request_paths_examined": 54957,
+        "result_metadata": 96,
+        "declared_metadata": 121039,
+        "oversized_metadata_not_read": 21,
+        "unparsed_files": 3,
+        "request_path": 319
+      },
+      "wall_seconds": 203.7929090736434,
+      "cpu_seconds": 13.373754659000001,
+      "sha_validation": false,
+      "admitted_unseen_test": false,
+      "limits": [
+        "Partial path-list scan: frozen source prefixes and some legacy roots excluded",
+        "Result metadata can describe planned or reserved items; not proof every ID got a response",
+        "Request paths are conservative exposure, not dispatch evidence",
+        "Full family/legacy-root review and manual-exposure limits remain before selecting unseen cases",
+        "Background sharing and pretrained-model exposure are not disproved"
+      ]
+    },
+    "protected-refinement.json": {
+      "historically_exposed": 300,
+      "historically_protected": 200,
+      "later_recorded_exposure_in_protected": 5,
+      "protected_targets_in_observed_histories": 5,
+      "potential_count": 195,
+      "source_registry": "data/manifests/v0211-exposure-review.json",
+      "registry_interpretation": "All500 were excluded from new-to-tuning partitions in that historical Goal; this is not proof that protected200 were all queried. Preserve no-training/no-development treatment.",
+      "admitted_unseen_test": false,
+      "remaining_work": [
+        "Check historical protected task/source groups and full legacy roots",
+        "Reconcile known manual exposure and later reservations",
+        "Freeze evaluation selection and method before source/question access",
+        "Use remaining protected rows only as evaluation, never as new tuning data"
+      ]
+    },
+    "target-body-refinement.json": {
+      "historical_exposed_and_later_query_ids": 305,
+      "protected_ids": 200,
+      "target_id_overlap": 6,
+      "literal_target_body_overlap": 82,
+      "missing_target_bodies": [],
+      "remaining_candidate_count": 118,
+      "wall_seconds": 4.050953881815076,
+      "cpu_seconds": 4.050881229,
+      "sha_validation": false,
+      "admitted_unseen_test": false,
+      "scope": "Exact visible role/content tuples, including all300 historical exposed histories. Dates are not used to relax exclusions. Partial legacy-root scan and unknown manual exposure still need reconciliation."
+    }
+  },
+  "legacy_refinement": {
+    "status": "PARTIAL_LEGACY_RECONCILIATION",
+    "historical_registry_exposed": 300,
+    "v1_frozen_ids": 100,
+    "v1_sealed_records": 400,
+    "v1_provider_event_counts": {
+      "RESERVED": 400,
+      "PROVIDER_TERMINAL": 400,
+      "POST_PROVIDER_TERMINAL": 400
+    },
+    "total_known_queried_or_exposed_ids": 305,
+    "remaining_protected_before_body_overlap": 195,
+    "new_literal_overlap_from_exposed_histories": 77,
+    "remaining_provisional_count": 118,
+    "v2_note": "Consumed marker exists but result proves0requests/0generations/labels_unopened due capability-phase mismatch; do not call those100actually queried. Preserve original historical no-rerun condition pending current-study review.",
+    "admitted_unseen_test": false,
+    "remaining_roots": [
+      "Product02 128-case actual artifacts and later legacy output roots"
+    ],
+    "sha_validation": false
+  },
+  "sealed_label_annotation": {
+    "cases": 500,
+    "classification": "EVALUATION_PLANE_MODEL_ASSISTED_SEALED_LABELS",
+    "not_a_product_reader_evaluation": true
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "status": "METADATA_PREPARED_NO_WRITER_RUN",
+  "memops": {
+    "files": 403,
+    "background_families": 100,
+    "known_exposed_families": [
+      "A01"
+    ],
+    "split_families": {
+      "train": 70,
+      "dev": 10,
+      "calibration": 10,
+      "test": 10
+    },
+    "split_files": {
+      "train": 279,
+      "test": 36,
+      "dev": 43,
+      "calibration": 45
+    },
+    "operation_types": {
+      "Reflect": 96,
+      "Remember": 68,
+      "TrajectoryOps": 82,
+      "Update": 77,
+      "Forget": 80
+    },
+    "validity": {
+      "confirmed": 2296,
+      "tentative": 260,
+      "retracted": 2
+    },
+    "trigger_audit": {
+      "operations": 2558,
+      "distinct_event_positions": 2534,
+      "nonchronological_operation_arrays": 164,
+      "invalid_declared_coordinates": 0,
+      "literal_quote_mismatches_at_declared_position": 0
+    },
+    "label_caveat": "Trigger quote mismatches require source review; no roots/preserve labels or gold before injected.",
+    "question_inventory": {
+      "entries": 4012,
+      "distinct_file_pair_ids": 2006,
+      "missing_pair_ids": 0,
+      "evaluation_settings": {
+        "adjacent_operation": 2006,
+        "longitudinal_operation": 2006
+      },
+      "evaluation_types": {
+        "OperationTrace": 806,
+        "TargetBinding": 806,
+        "StateTransition": 788,
+        "CandidateDisambiguation": 642,
+        "OperationApplication": 806,
+        "StateTrajectory": 164
+      },
+      "independence_unit": "background family, not each question or adjacent/longitudinal presentation"
+    }
+  },
+  "meme": {
+    "episodes": 100,
+    "domains": {
+      "personal_life": 50,
+      "software_project": 50
+    },
+    "root_edge_templates": 58,
+    "episode_role": "evaluation only; HF split names do not authorize training",
+    "sample_content_presented": false
+  },
+  "wall_seconds": 0.20991153456270695,
+  "cpu_seconds": 0.209781316,
+  "model_calls": 0,
+  "sha_validation": false
+}

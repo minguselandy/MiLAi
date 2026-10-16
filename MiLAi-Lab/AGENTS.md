@@ -1,124 +1,78 @@
-# Full-pool CE live handoff (2026-10-16)
+# Current Jev review execution: 2026-10-17
 
-Goal ACTIVE/incomplete; this turn made progress through completed matched training,
-real finite read trajectories and a newly verified recall bottleneck. No subagents/SHA.
-Only live task at checkpoint: ce-c20-v1 PID94497/exec59654, frozen sourcecc8f8af6,
-CUDA_VISIBLE_DEVICES2,3, native8192/head512,4epochs/602train/223dev,152plannedupdates.
-At snapshot39updates/epoch2; original zero12/223,epoch1 79/223 with121wrong exhausted
-stops. Inspect actual process/run.json; don't restart from a missing observer handle.
-Artifacts under artifacts/jev-reader/ce-c20-v1, stderr/stdout in runtime. No Reader queue.
+Goal ACTIVE/incomplete. Previous goal turn made substantive progress: C20 matched
+training, five real selector rollouts, complete common Reader/native scoring,
+source ambiguity review and external data inventory. No subagents or SHA/content
+fingerprint validation. All new models/data/env/cache under /cra/memory/mx_memory.
 
-C8 ordinary-ce-v1 CLOSED/exit0,exec87911,sourcef62635d2,120updates and saved fp16
-encoder+CLS checkpoint. Final83/164:complement26/78,exhausted57/73,sufficient0/13.
-1459.237wall/1867.384CPU;15648train encoding rows17873160tokens;8395dev10084795tokens.
-C8 Laya CE final73/164 and ordinary83 both poor stopping; constant exhausted73.
-Raw curves/checkpoints/failures and original budget retained. C8 actual selection
-chain CLOSED/exit0 exec24015 source43f5a302: all3models46cases,fixed2/adaptive4;
-reference proof complete of24positive: base1/2,CE2/1,ordinary2/0. BM25k2/k4/k8=2/3/10.
-Both trained checkpoints reloaded:46initial-state argmax46/46match each; not all203.
-Import failure before first selection (rank_bm25 missing in CUDAenv) was0model calls;
-fixed by moving offline preparation import into prepare(), original stderr retained.
+Worktree jev-read-decisions-20261016, canonical report
+ docs/MILAI_JEV_READ_DECISIONS_20261016.md. Historical owned handoffs are preserved
+in docs/agent-history/AGENTS_JEV_READER_HANDOFFS_20261017.md; do not treat their live
+PIDs or old scheduling as current. Product/API/Schema/permissions/Canonical unchanged.
 
-CRITICAL: C8 contains full annotated support in only10of24 answerable dev cases.
-Review section5 prioritizes fixing recall. C8 Reader protocol414calls is PREPARED/0HTTP,
-not an admitted net-benefit trial; do not dispatch it from stale plans. Preserve it.
-C20 reuses same sampled families/source rows, all20original paragraphs, no gold insertion.
-Data artifacts/jev-reader/data/decisions-c20-v1:602train/223dev/206calib/212test states.
-C20 lengths max3791/4960/4333/4232,all complete at8192/512. C8 membership/exposure unchanged;
-2dev/1test sampled families preexposed, exclude test overlap from future blind result.
+ALL task jobs now CLOSED. Reader exec9039/PID571580 exited0, source d90878c7.
+598positions/325firstrequests/273literal-input reuses,0knownfailed responses,
+715076generationtokens,0newunknown/embedding. Score-v1 completed via official CLI.
+Source arrays, first responses, prior failures, old C8 and all checkpoints retained.
+Reader config configs/milai-jev-musique-reader-c20-v1.json; artifacts under
+artifacts/jev-reader/musique-reader-c20-v1/{reader-v1,score-v1,selections}.
+C8 414-call Reader protocol remains unrun after its candidate recall failure.
+No automatic model queue exists; inspect actual process and lease before dispatch.
 
-NEXT: inspect C20 terminal/curves and costs; adapt selector/prepare/ordinary capacity
-and pool limits for20 (current run_bounded_reader_selection still8/4096/384!), complete
-same-input C20 controls/logits baseline and real common Reader QA. Current C8 figures
-are not QA. Ordinary full-state independent action encoding is a matched scalar
-baseline, not all optimized rerankers. Avoid claiming Jev advantage from its higher cost.
-Native MuSiQue scorer fetched under artifacts/jev-reader/musique-official; original
-paired metric needs22complete pairs,2orphan positives retained in overall24 denominator.
-Reader driver/tests ready; use official CLI, not dynamic imports. No unconfirmed replay.
-Full unexposed LME,MemOps/MEME,W/B calibration/trajectory requirements still pending.
+C20 final prefix acceptance: Laya81/223, single-encoding linear69/223,
+Qwen0.5B letter-logit LoRA81/223. All4epochs/152updates/602train states;24devfamilies.
+Native/linear exact encoder inputs; decoder chat format/full-vocab CE differs.
+Loss curves/checkpoints/costs are in jev-reader-c20-trained-controls-20261017.json.
+No calibrated probabilities, new-family/seeds confirmation or training-scale claim.
 
-Only7862authorizedcontainer is stopped. bge-m3 PID47436 and bge-reranker52982 unchanged;
-othermodels/GPU0/1 untouched. Keep models/env/caches under /cra/memory/mx_memory.
-Restore7862only after GPUtraining/selection ends; don't release protected BGE allocations.
-15directchecks/Ruff/package+tools boundaries pass. No fullrepo/remoteCI/publication.
-Reports docs/MILAI_JEV_READ_DECISIONS_20261016.md; 3new manifests C8selection,ordinary,C20.
+Actual QA: BM25k2 F1.194, BM25k4 .250, full20 .739; LayaCEk2 .194/adaptive .167,
+linear .178/.167, logitsLoRA .194/.125. No Jev net benefit. Warm phase timing is
+not proof of co-resident interactive latency; count cold restoration separately.
+Reference-support sets are not semantic sufficiency oracles. Targeted post-hoc
+14-case source review found incorrect joins/underidentified questions/aliases and
+answer-format errors. Raw official scores unchanged; no revised labels trained.
+See jev-reader-c20-qa-v1-summary.json and jev-reader-c20-source-review-20261017.json.
 
-# Reader CE terminal (2026-10-16)
+Only user-authorized7862container was stopped and has been restored healthy as PID415919.
+BGE-m3 PID47436 and BGE-reranker52982 unchanged; GPU0/1 othermodels untouched.
+Do not use GPUs2/3 for new training until authorized7862 is idle and explicitly
+released; never stop protected BGE or other models. Original continuous budget:
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+No reset/new ledger. Historical unknown floors10generation/1embedding persist.
+A temporary lock conflict caused preview-v3 to exit before any model call; resource
+was then verified free and the actual Reader ran once. No unknown request replay.
+New HTTP interpreter is artifacts/jev-reader/http-env/bin/python with local CPython;
+source artifacts/jev-reader/runtime/env.sh before further commands.
 
-Previous goal turn was progress: data/split/finite-policy implementation and real
-training. ce-gpu-v2 now CLOSED/exit0, PID4093998 gone, exec37838 completed. Source8c6cb000,
-120updates, full encoder+head native checkpoint. Epoch0/1/2/3/4 dev15/82/79/67/73 of164;
-constant exhaustion73. Final complement26/78, exhausted46/73, sufficient1/13. No net
-benefit or adequate stop-learning claim. Training348.325wall/463.399CPU;1868training
-sequences2311796tokens,1015dev1314820tokens, all in original ledger. Save fp16, in-memory
-float32 curves; full checkpoint reload dev not yet checked. Original failedV1 preserved.
-Ordinary matched CLS cross-encoder tools added; its native shape/gradient/reload check
-passed, full training not yet dispatched at this checkpoint. It uses own base encoder
-copy; never modifies BGE or any protected service. Keep full original benchmark scope.
+LongMemEval exposure remains NOT_ADMITTED. Metadata-only scans originally found
+300historical exposed/200protected; direct requests touched5protected, literal target
+bodies in exposed histories remove82, leaving118provisional only. Legacy DG11v1
+400real generations belong to the original300 (no new protected overlap); V2 has
+consumption marker but proven0requests due capability mismatch. Preserve old no-rerun
+conditions; do not equate markers with exposure. All500 answer-turn labels were
+sealed evaluator preparation, not500Product/Reader runs. Product02 128-case actual
+artifacts and remaining legacy roots/source groups still need reconciliation.
+No unexposed content was admitted, no new LME inference or training happened.
 
-# Live reader CE handoff (2026-10-16)
+MemOps/MEME downloaded under artifacts/jev-reader/external-data, noSHA. MemOps403files/
+100backgrounds;70/10/10/10family split before derivation, knownA01train.4012entries=
+2006pairedquestions,2558operations/2534trigger positions;164arraysout-of-order,
+all declared quotes/coordinates match. Replay actual dialogue order once per turn;
+gold operations/target IDs never runtime features. Root/preserve labels need actual
+Writer before alignment and source review; no Writer run on these data yet.
+MEME100nofiller evaluation-only episodes,58root/edge templates across2domains;
+before probes forCas/Abs/Del required. Strip root/root_change/edges/gold_facts
+from runtime; preserve actual conversation roles/timestamps. No MEME story contents
+were presented for tuning. Full dataframe inventories are saved in external-data.
 
-Goal ACTIVE/incomplete. ce-gpu-v2 is live at this checkpoint: PID4093998,
-exec37838, frozen method source8c6cb000. Inspect /proc and run.json before any
-new work; never restart just because the exec handle is missing. Four epochs,
-467 labelled train prefixes from64families/122events;203dev prefixes,164labelled.
-CUDA_VISIBLE_DEVICES=2,3, full encoder+head soft-CE; no calibration/test inference.
-Artifacts: artifacts/jev-reader/ce-gpu-v2; stdout/stderr in ../runtime.
-Original ce-gpu-v1 FAILED/exit1 after29updates: compiled ModernBERT with DP last
-3-row batch hit FX/Dynamo error. Sourceb57c29ef and all first results preserved.
-reference_compile=False fixes native eager path; actual two-GPU batch4->3
-forward/backward probe passed with encoder/head gradients, original ledger charged.
-V2 GPU initial dev15/164 matches CPU; do not treat later majority STOP as success.
-Constant-stop baselines are now reported. Full downstream QA/net benefit unproven.
-CPU base-dev-prefix-v1 CLOSED203forwards/262964tokens/390.706wall/1436.094CPU,
-15/164accepted;39masked. Its compute is in original ledger; V2 ledger closes in finally.
-CUDAenv/CPython/caches all under /cra/memory/mx_memory; task-created348KiBTriton
-root cache moved to .cache/triton-first-gpu-run afterV1terminated. Explicit Triton,
-Inductor and CUDA cache vars now in runtime/env.sh; /root/.triton absent atcheck.
-Do not touch protected BGE services. 7862 remains normally stopped for authorized
-training. Restore only after checking live training allocation and next work.
-Next: verify V2 terminal/checkpoint, inspect all per-stratum curves and costs;
-then ordinary supervised reranker/logits control, fixed-k versus STOP/complement
-ablation, calibrated and unseen LME/MemOps/MEME requirements. No completion claim.
-Preview-exposure manifest excludes one sampled test family from future blind test;
-two dev families are exposed diagnostics. Detailed report and preparation manifest
-in docs/MILAI_JEV_READ_DECISIONS_20261016.md and data/manifests/.
-
-# User GPU allocation (2026-10-16)
-
-User now explicitly authorizes releasing ONLY milai-unified-v8-v9-native-host-r2
-(7862, physical GPUs2/3) for training. This supersedes older no-GPU-change rules
-only for that container. bge-m3(7861), bge-reranker(7961), GPU0/1 Qwen and all other
-models must remain untouched. 7862 was idle, stopped normally, original container
-retained; restore with docker start milai-unified-v8-v9-native-host-r2.
-Before/after and restore command: artifacts/jev-reader/gpu-allocation-v1/.
-CUDA environment/cache under /cra/memory/mx_memory, no requirement hash validation.
-Training explicitly CUDA_VISIBLE_DEVICES=2,3,75% own-memory cap per GPU; BGE retains
-its existing allocations. Check live jobs before restoring 7862 to avoid contention.
-
-# Current bounded reader worktree (2026-10-16)
-
-Goal ACTIVE/incomplete. This independent jev-read-decisions-20261016 worktree
-continues the same bottleneck review from20bc06d6. The sibling bottleneck worktree
-has concurrent source/report edits; preserve them and do not overwrite its files.
-This branch owns bounded_evidence.py, prepare_musique_decisions.py,
-evaluate_bounded_laya.py and their new direct tests. No subagents or SHA checks.
-User requires downloads/models/environments under /cra/memory/mx_memory, not /root.
-artifacts/jev-reader/runtime/env.sh sets HF/Torch/pip/uv/XDG/temp paths explicitly.
-New train-env uses a locally copied CPython and existing /cra packages; original
-training environments, model checkpoints, failed runs and GPU services stay intact.
-MuSiQue mirror download COMPLETED39876rows/476696984bytes, no checksum. Official
-archive equivalence unverified. Family split896connected components; discarded
-cross-split target exposures. Shared non-target backgrounds are NOT independent.
-Frozen decisions-v1: train64families/124rows/556prefixes; dev24/46/203;
-calibration24/42/186; test24/44/195. Labels mask unprovable answerable retrieval
-gaps, retain reference complements and two STOP meanings; literal equivalent
-supports share target mass. Prefixes do not create new independent events.
-Full native tokenizer audit4096/384: no truncation/invalid targets; max2137tokens.
-No Reader QA, CE benefit, calibrated stopping or downstream net-cost claim yet.
-Real CPU inference must use original continuous budget.json below for compute,
-record actual sequence rows/tokens/time; no synthetic HTTP or generated-token counts.
-Inspect each live process/terminal before new work; old process snapshots are history.
+NEXT requirements: source-grounded derived labels with ambiguity/alternatives;
+independent calibration and train-family own-state trajectories if warranted;
+certifiable unexposed LongMemEval (never rename exposed data unseen);
+MemOps/MEME actual shared-before D0-D4 and reviewed W/B interventions, separate
+continuous trajectories and state-only/raw-mixed QA; full requirement audit.
+Accept simple baselines or negative results; do not expand Impact or RL on faith.
+19directchecks/Ruff/package and tools boundaries passed. No fullrepo/remoteCI,
+publication or merge. Product NO_GO; goal is NOT complete.
 
 # Current bottleneck review execution (2026-10-16)
 

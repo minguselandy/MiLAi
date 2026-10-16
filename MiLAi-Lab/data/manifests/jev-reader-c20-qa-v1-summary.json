@@ -1,0 +1,522 @@
+{
+  "status": "COMPLETED_FIRST_READER_AND_NATIVE_SCORE",
+  "source_version": "d90878c7",
+  "prediction_positions": 598,
+  "actual_reader_receipts": {
+    "requests": 325,
+    "prompt_tokens": 250132,
+    "completion_tokens": 464944,
+    "total_tokens": 715076
+  },
+  "new_generation_unknown": 0,
+  "new_embedding_tokens": 0,
+  "metrics": [
+    {
+      "arm": "bm25_k2",
+      "answer_em": 0.16666666666666666,
+      "answer_f1": 0.19444444444444442,
+      "support_f1": 0.23611111111111108,
+      "pair_answer_sufficiency_f1": 0.167,
+      "answerability_correct": 28,
+      "cost": {
+        "reader_input_tokens": 17840,
+        "reader_output_tokens": 63656,
+        "reader_wall_seconds": 412.53473185002804,
+        "selector_input_tokens": 0,
+        "selector_sequence_rows": 0,
+        "selector_wall_seconds": 0,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 412.5901574008167
+      },
+      "correct_without_complete_reference_set": [
+        "row-17008",
+        "row-36340",
+        "row-37282",
+        "row-38432"
+      ]
+    },
+    {
+      "arm": "bm25_k4",
+      "answer_em": 0.25,
+      "answer_f1": 0.25,
+      "support_f1": 0.3180555555555556,
+      "pair_answer_sufficiency_f1": 0.22699999999999998,
+      "answerability_correct": 29,
+      "cost": {
+        "reader_input_tokens": 30327,
+        "reader_output_tokens": 74302,
+        "reader_wall_seconds": 482.9405850265175,
+        "selector_input_tokens": 0,
+        "selector_sequence_rows": 0,
+        "selector_wall_seconds": 0,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 482.99601057730615
+      },
+      "correct_without_complete_reference_set": [
+        "row-4588",
+        "row-17008",
+        "row-36340",
+        "row-37282",
+        "row-38432"
+      ]
+    },
+    {
+      "arm": "bm25_k20",
+      "answer_em": 0.625,
+      "answer_f1": 0.7390873015873015,
+      "support_f1": 0.8194444444444445,
+      "pair_answer_sufficiency_f1": 0.67,
+      "answerability_correct": 41,
+      "cost": {
+        "reader_input_tokens": 128309,
+        "reader_output_tokens": 81149,
+        "reader_wall_seconds": 539.348660863936,
+        "selector_input_tokens": 0,
+        "selector_sequence_rows": 0,
+        "selector_wall_seconds": 0,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 539.4040864147246
+      },
+      "correct_without_complete_reference_set": []
+    },
+    {
+      "arm": "laya_zero_k2",
+      "answer_em": 0.041666666666666664,
+      "answer_f1": 0.041666666666666664,
+      "support_f1": 0.041666666666666664,
+      "pair_answer_sufficiency_f1": 0.045,
+      "answerability_correct": 24,
+      "cost": {
+        "reader_input_tokens": 17784,
+        "reader_output_tokens": 59087,
+        "reader_wall_seconds": 384.41372203826904,
+        "selector_input_tokens": 275019,
+        "selector_sequence_rows": 92,
+        "selector_wall_seconds": 15.060727533884346,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 399.52987512294203
+      },
+      "correct_without_complete_reference_set": []
+    },
+    {
+      "arm": "laya_zero_adaptive",
+      "answer_em": 0.0,
+      "answer_f1": 0.0,
+      "support_f1": 0.05555555555555555,
+      "pair_answer_sufficiency_f1": 0.0,
+      "answerability_correct": 24,
+      "cost": {
+        "reader_input_tokens": 26980,
+        "reader_output_tokens": 61672,
+        "reader_wall_seconds": 408.7723540244624,
+        "selector_input_tokens": 516929,
+        "selector_sequence_rows": 175,
+        "selector_wall_seconds": 27.580041124485433,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 436.4078206997365
+      },
+      "correct_without_complete_reference_set": []
+    },
+    {
+      "arm": "laya_ce_k2",
+      "answer_em": 0.16666666666666666,
+      "answer_f1": 0.19444444444444442,
+      "support_f1": 0.23611111111111108,
+      "pair_answer_sufficiency_f1": 0.167,
+      "answerability_correct": 27,
+      "cost": {
+        "reader_input_tokens": 17784,
+        "reader_output_tokens": 64702,
+        "reader_wall_seconds": 419.2167940735817,
+        "selector_input_tokens": 275042,
+        "selector_sequence_rows": 92,
+        "selector_wall_seconds": 15.05017064139247,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 434.3223902657628
+      },
+      "correct_without_complete_reference_set": [
+        "row-17008",
+        "row-36340",
+        "row-37282",
+        "row-38432"
+      ]
+    },
+    {
+      "arm": "laya_ce_adaptive",
+      "answer_em": 0.16666666666666666,
+      "answer_f1": 0.16666666666666666,
+      "support_f1": 0.24305555555555555,
+      "pair_answer_sufficiency_f1": 0.136,
+      "answerability_correct": 26,
+      "cost": {
+        "reader_input_tokens": 13647,
+        "reader_output_tokens": 63079,
+        "reader_wall_seconds": 409.3178980303928,
+        "selector_input_tokens": 326804,
+        "selector_sequence_rows": 110,
+        "selector_wall_seconds": 17.718122916296124,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 427.0914464974776
+      },
+      "correct_without_complete_reference_set": [
+        "row-17008",
+        "row-36340",
+        "row-37282",
+        "row-38432"
+      ]
+    },
+    {
+      "arm": "linear_ce_k2",
+      "answer_em": 0.125,
+      "answer_f1": 0.17777777777777778,
+      "support_f1": 0.2083333333333333,
+      "pair_answer_sufficiency_f1": 0.167,
+      "answerability_correct": 28,
+      "cost": {
+        "reader_input_tokens": 17238,
+        "reader_output_tokens": 61842,
+        "reader_wall_seconds": 400.74426135607064,
+        "selector_input_tokens": 275045,
+        "selector_sequence_rows": 92,
+        "selector_wall_seconds": 11.957319328561425,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 412.7570062354207
+      },
+      "correct_without_complete_reference_set": [
+        "row-17008",
+        "row-37282",
+        "row-38432"
+      ]
+    },
+    {
+      "arm": "linear_ce_adaptive",
+      "answer_em": 0.16666666666666666,
+      "answer_f1": 0.16666666666666666,
+      "support_f1": 0.21527777777777776,
+      "pair_answer_sufficiency_f1": 0.136,
+      "answerability_correct": 27,
+      "cost": {
+        "reader_input_tokens": 11714,
+        "reader_output_tokens": 63036,
+        "reader_wall_seconds": 407.0748745026067,
+        "selector_input_tokens": 297007,
+        "selector_sequence_rows": 102,
+        "selector_wall_seconds": 12.73114165943116,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 419.8614417128265
+      },
+      "correct_without_complete_reference_set": [
+        "row-17008",
+        "row-36340",
+        "row-37282",
+        "row-38432"
+      ]
+    },
+    {
+      "arm": "logits_zero_k2",
+      "answer_em": 0.125,
+      "answer_f1": 0.15277777777777776,
+      "support_f1": 0.18749999999999997,
+      "pair_answer_sufficiency_f1": 0.121,
+      "answerability_correct": 27,
+      "cost": {
+        "reader_input_tokens": 18006,
+        "reader_output_tokens": 65284,
+        "reader_wall_seconds": 424.22196667455137,
+        "selector_input_tokens": 311394,
+        "selector_sequence_rows": 92,
+        "selector_wall_seconds": 19.747845308855176,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 444.0252375341952
+      },
+      "correct_without_complete_reference_set": [
+        "row-17008",
+        "row-36340",
+        "row-37282"
+      ]
+    },
+    {
+      "arm": "logits_zero_adaptive",
+      "answer_em": 0.20833333333333334,
+      "answer_f1": 0.20833333333333334,
+      "support_f1": 0.2625,
+      "pair_answer_sufficiency_f1": 0.18199999999999997,
+      "answerability_correct": 28,
+      "cost": {
+        "reader_input_tokens": 30459,
+        "reader_output_tokens": 70310,
+        "reader_wall_seconds": 457.09401633776724,
+        "selector_input_tokens": 618119,
+        "selector_sequence_rows": 184,
+        "selector_wall_seconds": 38.61875833105296,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 495.76820021960884
+      },
+      "correct_without_complete_reference_set": [
+        "row-4588",
+        "row-17008",
+        "row-36340",
+        "row-38432"
+      ]
+    },
+    {
+      "arm": "logits_lora_k2",
+      "answer_em": 0.16666666666666666,
+      "answer_f1": 0.19444444444444442,
+      "support_f1": 0.23611111111111108,
+      "pair_answer_sufficiency_f1": 0.167,
+      "answerability_correct": 28,
+      "cost": {
+        "reader_input_tokens": 17800,
+        "reader_output_tokens": 64036,
+        "reader_wall_seconds": 414.74560033064336,
+        "selector_input_tokens": 311394,
+        "selector_sequence_rows": 92,
+        "selector_wall_seconds": 20.231259380467236,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 435.03228526189923
+      },
+      "correct_without_complete_reference_set": [
+        "row-17008",
+        "row-36340",
+        "row-37282",
+        "row-38432"
+      ]
+    },
+    {
+      "arm": "logits_lora_adaptive",
+      "answer_em": 0.125,
+      "answer_f1": 0.125,
+      "support_f1": 0.1597222222222222,
+      "pair_answer_sufficiency_f1": 0.09099999999999998,
+      "answerability_correct": 26,
+      "cost": {
+        "reader_input_tokens": 10029,
+        "reader_output_tokens": 59993,
+        "reader_wall_seconds": 387.29405359365046,
+        "selector_input_tokens": 292153,
+        "selector_sequence_rows": 85,
+        "selector_wall_seconds": 19.033567996695638,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "estimated_warm_pipeline_seconds": 406.38304714113474
+      },
+      "correct_without_complete_reference_set": [
+        "row-17008",
+        "row-36340",
+        "row-38432"
+      ]
+    }
+  ],
+  "paired_family_f1": {
+    "bm25_k2-vs-bm25_k2": {
+      "mean": 0.0,
+      "lower95": 0.0,
+      "upper95": 0.0,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "bm25_k2-vs-bm25_k20": {
+      "mean": -0.5446428571428571,
+      "lower95": -0.7142857142857143,
+      "upper95": -0.37103174603174605,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "bm25_k4-vs-bm25_k2": {
+      "mean": 0.05555555555555556,
+      "lower95": 0.0,
+      "upper95": 0.1527777777777778,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "bm25_k4-vs-bm25_k20": {
+      "mean": -0.48908730158730157,
+      "lower95": -0.6805555555555555,
+      "upper95": -0.2976190476190476,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "bm25_k20-vs-bm25_k2": {
+      "mean": 0.5446428571428571,
+      "lower95": 0.37103174603174605,
+      "upper95": 0.7142857142857143,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "bm25_k20-vs-bm25_k20": {
+      "mean": 0.0,
+      "lower95": 0.0,
+      "upper95": 0.0,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "laya_zero_k2-vs-bm25_k2": {
+      "mean": -0.1527777777777778,
+      "lower95": -0.3333333333333333,
+      "upper95": 0.02777777777777778,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "laya_zero_k2-vs-bm25_k20": {
+      "mean": -0.6974206349206349,
+      "lower95": -0.8611111111111112,
+      "upper95": -0.5158730158730158,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "laya_zero_adaptive-vs-bm25_k2": {
+      "mean": -0.19444444444444445,
+      "lower95": -0.3611111111111111,
+      "upper95": -0.041666666666666664,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "laya_zero_adaptive-vs-bm25_k20": {
+      "mean": -0.7390873015873016,
+      "lower95": -0.8819444444444443,
+      "upper95": -0.5793650793650794,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "laya_ce_k2-vs-bm25_k2": {
+      "mean": 0.0,
+      "lower95": 0.0,
+      "upper95": 0.0,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "laya_ce_k2-vs-bm25_k20": {
+      "mean": -0.5446428571428571,
+      "lower95": -0.7142857142857143,
+      "upper95": -0.37103174603174605,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "laya_ce_adaptive-vs-bm25_k2": {
+      "mean": -0.027777777777777776,
+      "lower95": -0.08333333333333333,
+      "upper95": 0.0,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "laya_ce_adaptive-vs-bm25_k20": {
+      "mean": -0.5724206349206349,
+      "lower95": -0.7430555555555555,
+      "upper95": -0.39186507936507936,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "linear_ce_k2-vs-bm25_k2": {
+      "mean": -0.016666666666666666,
+      "lower95": -0.05000000000000001,
+      "upper95": 0.0,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "linear_ce_k2-vs-bm25_k20": {
+      "mean": -0.5613095238095238,
+      "lower95": -0.7242063492063492,
+      "upper95": -0.39166666666666666,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "linear_ce_adaptive-vs-bm25_k2": {
+      "mean": -0.027777777777777776,
+      "lower95": -0.08333333333333333,
+      "upper95": 0.0,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "linear_ce_adaptive-vs-bm25_k20": {
+      "mean": -0.5724206349206349,
+      "lower95": -0.7430555555555555,
+      "upper95": -0.39186507936507936,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "logits_zero_k2-vs-bm25_k2": {
+      "mean": -0.041666666666666664,
+      "lower95": -0.125,
+      "upper95": 0.0,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "logits_zero_k2-vs-bm25_k20": {
+      "mean": -0.5863095238095238,
+      "lower95": -0.7529761904761906,
+      "upper95": -0.4156746031746032,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "logits_zero_adaptive-vs-bm25_k2": {
+      "mean": 0.01388888888888889,
+      "lower95": -0.1111111111111111,
+      "upper95": 0.12500000000000003,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "logits_zero_adaptive-vs-bm25_k20": {
+      "mean": -0.5307539682539683,
+      "lower95": -0.7182539682539683,
+      "upper95": -0.3353174603174603,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "logits_lora_k2-vs-bm25_k2": {
+      "mean": 0.0,
+      "lower95": 0.0,
+      "upper95": 0.0,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "logits_lora_k2-vs-bm25_k20": {
+      "mean": -0.5446428571428571,
+      "lower95": -0.7142857142857143,
+      "upper95": -0.37103174603174605,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "logits_lora_adaptive-vs-bm25_k2": {
+      "mean": -0.06944444444444445,
+      "lower95": -0.18055555555555555,
+      "upper95": 0.0,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    },
+    "logits_lora_adaptive-vs-bm25_k20": {
+      "mean": -0.6140873015873016,
+      "lower95": -0.7837301587301587,
+      "upper95": -0.4365079365079365,
+      "units": 24,
+      "unit": "independent sampled proof family, development only",
+      "bootstrap_seed": 0
+    }
+  },
+  "scope": "24answerable families plus22paired unanswerable variants. Existing dev cohort, two preview-exposed families, one seed. Identical input outputs shared; semantic alternative support review remains.",
+  "timing_basis": "Warm standalone estimates add reused controller/Reader timings and shared lexical retrieval. Models ran in separate GPU phases; cold loads/restoration and training are separate, not interactive co-resident latency."
+}
