@@ -18,6 +18,7 @@ from milai_lab.datasets.edit_benchmarks import (
     history_components,
     longmemeval_cases,
     longmemeval_history,
+    source_session_instance_keys,
 )
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.service import MemoryService
@@ -113,11 +114,23 @@ def main() -> None:
                 },
             )
             # This metadata is never inserted into Sources or Reader packets.
-            support_sessions = list(dict.fromkeys(case["answer_session_ids"]))
-            support = [
-                next(i for i, material in enumerate(materials) if material["session_id"] == sid)
-                for sid in support_sessions
+            instances = source_session_instance_keys(case["haystack_session_ids"])
+            instance_pairs = list(zip(case["haystack_session_ids"], instances, strict=True))
+            write_json(args.output / "session-instances" / f"{owner}.json", instance_pairs)
+            support_groups = [
+                [
+                    next(
+                        i
+                        for i, material in enumerate(materials)
+                        if material["session_id"] == instance
+                    )
+                    for sid, instance in instance_pairs
+                    if sid == support_id
+                ]
+                for support_id in dict.fromkeys(case["answer_session_ids"])
             ]
+            support = list(dict.fromkeys(i for group in support_groups for i in group))
+            support_sessions = [materials[i]["session_id"] for i in support]
             noise = next(
                 i
                 for i, material in enumerate(materials)
@@ -128,11 +141,11 @@ def main() -> None:
             def condition(name, indices):
                 return {"name": name, "indices": indices, "expand_context": indices}
 
-            if len(support) == 2:
+            if len(support_groups) == 2:
                 conditions.extend(
                     [
-                        condition("support_0", [support[0]]),
-                        condition("support_1", [support[1]]),
+                        condition("support_0", support_groups[0]),
+                        condition("support_1", support_groups[1]),
                         condition("both", support),
                         condition("both_plus_neighbor", [*support, noise]),
                     ]

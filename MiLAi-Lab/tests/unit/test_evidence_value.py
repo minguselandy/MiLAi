@@ -23,7 +23,7 @@ def test_offline_value_corpus_keeps_reference_labels_out_of_actual_sources(tmp_p
     dataset.write_text(json.dumps([{"question_id": "case", "question_type": "single-session-user",
         "question": "Which marker color?", "question_date": "2030-01-04",
         "answer": "GOLD_ANSWER_DO_NOT_CAPTURE", "answer_session_ids": ["support-session"],
-        "haystack_session_ids": ["support-session", "neighbor-1", "neighbor-2"],
+        "haystack_session_ids": ["support-session", "neighbor", "neighbor"],
         "haystack_dates": ["2030-01-01", "2030-01-02", "2030-01-03"],
         "haystack_sessions": [[
             {"role": "user", "content": "The marker is blue.", "has_answer": True},
@@ -50,6 +50,9 @@ def test_offline_value_corpus_keeps_reference_labels_out_of_actual_sources(tmp_p
         assert len(sources) == 6 and service.records() == []
         assert "has_answer" not in json.dumps(sources)
         assert "GOLD_ANSWER_DO_NOT_CAPTURE" not in json.dumps(sources)
+        neighbors = [row for row in sources if row["session"].startswith("neighbor")]
+        assert len({row["session"] for row in neighbors}) == 2
+        assert {row["occurred_at"] for row in neighbors} == {"2030-01-02", "2030-01-03"}
     pool = json.loads((root / "native/longmemeval/case/answer/retrieval.json").read_text())
     config = json.loads((root / "outcome-configs/case.json").read_text())
     assert len(config["conditions"]) == 6
