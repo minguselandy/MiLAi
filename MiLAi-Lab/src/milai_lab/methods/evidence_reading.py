@@ -723,7 +723,8 @@ def read_question_pack(
     state.setdefault("opened_indices", [])
     state.setdefault("context_indices", [])
     state.setdefault("excluded_indices", [])
-    state.setdefault("task", "lookup")
+    # The first Reader decision classifies the task; no class has been observed yet.
+    state.setdefault("task", None)
     state.setdefault("gap", None)
     state.setdefault("candidate_page", 0)
     state["retrieval_snapshot"] = snapshot_id

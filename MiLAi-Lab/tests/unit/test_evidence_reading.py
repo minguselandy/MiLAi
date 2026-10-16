@@ -51,6 +51,7 @@ def test_range_aggregation_covers_chunks_or_reports_the_unread_remainder(
                                       "source_indices": [int(material["label"][1:])]})
                 return json.dumps({"facts": facts, "unresolved": []})
             if "range_aggregation" not in payload:
+                assert payload["task"] is None
                 return selection([0], gap="Count the whole captured range.", task="range")
             coverage = payload["range_aggregation"]
             assert coverage["summary_coverage"]["complete"] is expected_complete
@@ -341,6 +342,7 @@ def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
             attempts.append(payload)
             assert payload["question"] == "TOPIC_0 only, retain any limits."
             if len(attempts) == 1:
+                assert payload["task"] is None
                 assert kwargs["enable_thinking"] is (True if selection_thinking is None else False)
                 assert payload["memories"] == [] and payload["candidates"]
                 assert payload["response_schema"]["properties"]["answer"] == {"type": "null"}
@@ -350,6 +352,7 @@ def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
                     context=[0, 0] if repeat_target else [],
                     gap="Need the original statement and its reply.")
             assert kwargs["enable_thinking"] is True
+            assert payload["task"] == "lookup"
             assert len(payload["memories"]) == 1
             assert payload["unopened_candidates"] == 3
             assert "source_ref" not in str(payload["memories"])
@@ -478,9 +481,11 @@ def test_range_reads_captured_scope_beyond_top_k_without_future_sources(tmp_path
             assert "FUTURE_NOTICE" not in str(messages)
             calls.append(payload)
             if len(calls) == 1:
+                assert payload["task"] is None
                 assert len(payload["candidates"]) == 1
                 return selection([0], gap="Count every captured notice.", task="range")
             assert payload["range_coverage"]["complete"]
+            assert payload["task"] == "range"
             assert len(payload["memories"]) == 3
             return selection([], answer="Three notices in the captured scope.", task="range")
 
