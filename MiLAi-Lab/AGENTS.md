@@ -1,4 +1,72 @@
-# CURRENT: read-state probe CLOSED; V2 prior contact found — 2026-10-17
+# CURRENT: MemConflict reconciled; expanded source review IN PROGRESS — 2026-10-17
+
+Goal ACTIVE/incomplete. Previous turn=progress801521ad; current turn=progress via new
+source/cost evidence and actual training-label projection. No subagents, SHA/content
+fingerprints, new ledger, new model calls/training, service changes, Product/API/Schema/
+permission/Canonical changes, push/merge or fullrepo/remoteCI. All new files underworkspace.
+No owned model job or queue. GPU2/3each36928MiBfree at check;7862stopped; protectedBGE/7860
+unchanged. Other worktree files/jobs untouched, even its untracked reconciliationmanifests.
+
+SIBLING HEAD1d930b65. Actual dense and dense-control driver-terminal COMPLETED/allstageexit0;
+old driver-progress RUNNING is stale. Original1885bf2bdriver FAILED onlyat12thJudge length;
+all36Readeranswershadalreadyclosed. Continue24unattemptedJudge calls disjoint fromfirst12.
+JSONobjectrepair36same messages verified; no originalanswerretry orfailureoverwrite.
+Newreadonly reconciliation root artifacts/jev-reader/memconflict-shared-review-v1.
+reconcile.py isanignored local recipe; reconciliation.json/answers.json/additional-input-audit
+andcompute/ledger-record preserve evidence. Tracked jev-memconflict-shared-reconciliation-
+20261017.json holds source/cost/native metrics/qualifications.
+
+ALL84firstReaderanswers across original6arms, native2arms, dense4arms, denseCE2arms read;
+plus1ownerprobe read. Literal actualdelivery/response checks84. Fourroots120candidate
+positions each bound to originaldataset spans/time; duplicates are not independentparagraphs.
+21reviewedwitness turns+targeteddensepassages semanticallyread; NOTfullsecond240poolreview.
+2445embeddingdocuments and6queries verifiedchronological, originals only, sameC20dense/CE
+inputs. 210oldgenerationresponses152840tokens,161embeddingresponses153964tokens,24roots
+ledgerdiff0/newunknown0. Localoldselectors84forwards162963tokens. Do NOT recharge these.
+Densepreparation27.938wall22.471CPU,ingestion23.823sec,query/rank.446sec; notfreecachedwork.
+Onlynewreconciliation3.44393wall/3.44372CPU recordedonce
+memconflict_shared_source_reconciliation_v1. Authorsemanticreviewtimeunmeasured/notzero.
+
+Same naturalReader/T0/noThinking/max512 anddensepool: k1/k2/k4/k20 AAsums2/3/5/5.5 of6;
+CEfixed4=2,adaptive=1. Full20name gets.5partial, don'trounditaway. Warmselection+Reader
+k4=2.2985,CEk4=5.2771,adaptive=2.7722sec EXCLUDESsharedretrieval/coldload. Only2personas;
+no netJevwin orindependentgenerality. Densep0restoresmarriage, p3DOB; CEfailsdeliverthese.
+case0maritalvsdating ambiguous;case1Paul/Michael truthauthorityunknown. OldCEcase2moves
+crowded-commuteaudio condition toreading despiteAA1. Densek2case4omitsquiet/bothfree yetAA1.
+DenseCEcase2weekenddesireextra IS supportedbyp4; don't callitfalse solelyforgoingbeyondgold,
+butdon'tupgrade desire to enactedchange. No benchmarklabelsusedfortraining.
+
+NEW TRAIN SOURCE REVIEW v2 selection frozenbeforetext reading: first4extra2-support and
+first4extra3-support positivefamilies inC20trainorder; allpairedrows.8newfamilies/16rows/83
+states; no dev/cal/test familyintersection. Prior4reviewedtrainfamilies retained =>target12.
+Root artifacts/jev-reader/source-qualified-v2; selection.json is ORIGINALpre-review snapshot,
+newall16raw pools at sources/row-N.json. No questionsfromremaining12 openedtoauthor yet.
+Tracked selection/annotations/progress manifests; NOTfinisheddataset orstartedtraining.
+Completedfamily000690 rows32183/16483 andfamily000840 rows1529/26530.80paragraphpositions,
+49uniquetitle/text, literalduplicatesmatchedandallnewparagraphsread. Row32183WarrenWashington
+VT + DanWrightAddisonVT/WashingtonNY doesNOTproveborder; positiveandnegativebothpoolinsufficient,
+usefulpartial4/19. TonySchumacher pair: deathLudwigsburg +German-state locality suffices via
+ordinaryuniquename resolution,proof[8,17]/[17,4]. Schoolsparagraphnotneeded; oldnegative26530
+retainsproof. Preserveawkwardcity/districtwordingqualification; nooutsidegeographicrepair,
+no nationality→deathcountryshortcut. Originalgold/answerable untouchedin source.
+
+Existingreviewed_reader_supervision.relabel projects4newrows→21originalstates,21labelled:
+12missingcomplement/7poolinsufficient/2complete,11changedgold. State/questions/actionsets
+literalunchanged,targetsallvalid/sum1. Newreviewed-train-partial.jsonl retainsreference_gold.
+No newmodelscore/training. Pending12rows:28674,31751,11272,36441,8892,1369,5148,4377,3344,
+16330,29038,25549. Finishdeclaredreviewbeforechoosingtraining. Do NOTtrainfromdev orMEME/
+MemConflict. Sourceprep/16pool extraction/partialprojection2.55502wall/2.55489CPU recorded
+once reader_source_qualified_v2_preparation; first3filesinrootmeasureactualcost. Newfuture
+review/projectionwork needsnewdistinctcostrecord, don'trechargealreadyrecordedfirst4rows.
+
+NEXT finishremainingtrainpool source review (both2/3supportstrata), then justifiedsame-input
+oldlabel/sourcequalifiedlabel training control. Simpledensebaseline alreadyrepairscoverage;
+don'tuncriticallyaddcontrollers/RL. W/B andWritersemantic coverage stillunresolved. Existing
+LMEv1zeroeligible/V2priorcontact constraints unchanged. Completionaudit updatedNOTCOMPLETE.
+Validationthisturn4reviewed-supervisiontests+actual21target/inputchecks; runtimecodeunchanged.
+PriorpackageDAG/toolsboundaryfrompreviousturn remains; nofalseclaimnewfullrepo/remoteCI.
+
+# Historical checkpoint: read-state probe and V2 prior contact — 2026-10-17
 
 Goal ACTIVE/incomplete. Previous turn=progress,commit21c4a271. Current turn=progress,
 new local model evidence + exact compute reconciliation + external-source eligibility evidence.

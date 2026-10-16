@@ -42,9 +42,12 @@
       "evidence": [
         "data/manifests/jev-reader-source-qualified-v1-annotations.json",
         "data/manifests/jev-reader-source-qualified-v1-summary.json",
-        "data/manifests/jev-memops-factor-extension-labels-v1.json"
+        "data/manifests/jev-memops-factor-extension-labels-v1.json",
+        "data/manifests/jev-reader-source-qualified-v2-selection.json",
+        "data/manifests/jev-reader-source-qualified-v2-annotations.json",
+        "data/manifests/jev-reader-source-qualified-v2-progress.json"
       ],
-      "finding": "Family/length inventories and eventnormalization exist;15source-pool review and masked/alternative labels nowconcrete. Not corpuswide independentannotation; Writerpreservepositive coverage absent innewMemOpsslice. No revieweddev labels usedfortraining."
+      "finding": "Family/length inventories and eventnormalization exist;15source-pool review and masked/alternative labels nowconcrete. Not corpuswide independentannotation; Writerpreservepositive coverage absent innewMemOpsslice. No revieweddev labels usedfortraining. A metadata-frozen expansion selects eight more training families/16 rows/83 original states with no dev/cal/test family overlap. Four new complete pools (80 paragraph positions/49 unique title-text pairs) reviewed so far; 21 unchanged-input states projected and 11 labels changed. County adjacency is unsupported in one annotated positive; an explicit German-state statement retains a country proof in one annotated negative. Geographic wording qualification preserved. Twelve new rows remain unreviewed; no new training."
     },
     {
       "id": "independent_calibration",
@@ -115,9 +118,10 @@
         "data/manifests/jev-memops-factor-extension-v1-summary.json",
         "data/manifests/jev-meme-reader-confirm-v1-summary.json",
         "data/manifests/jev-musique-ce-stop-cap4-v1-summary.json",
-        "data/manifests/jev-reader-state-information-v1-summary.json"
+        "data/manifests/jev-reader-state-information-v1-summary.json",
+        "data/manifests/jev-memconflict-shared-reconciliation-20261017.json"
       ],
-      "finding": "All 200 confirmation and 119 unique STOP Reader receipts reconcile with original per-run ledger deltas; zero new unknown usage. STOP includes cached controller work, within-arm Reader caching, common retrieval and 24-family paired bootstrap. MEME reports per-story/per-seed results, not 200 independent samples. Preparation/final analysis recorded once; human review, exploratory analysis and some cold load/orchestration costs remain unmeasured. No whole-pipeline net-benefit proof. State probe adds 276 local GPU forwards /753026 input tokens, 47.496 wall/69.313 CPU seconds, exact once in original compute ledger; zero new HTTP. Empty-prefix cached results and perturbed input costs remain distinct."
+      "finding": "All 200 confirmation and 119 unique STOP Reader receipts reconcile with original per-run ledger deltas; zero new unknown usage. STOP includes cached controller work, within-arm Reader caching, common retrieval and 24-family paired bootstrap. MEME reports per-story/per-seed results, not 200 independent samples. Preparation/final analysis recorded once; human review, exploratory analysis and some cold load/orchestration costs remain unmeasured. No whole-pipeline net-benefit proof. State probe adds 276 local GPU forwards /753026 input tokens, 47.496 wall/69.313 CPU seconds, exact once in original compute ledger; zero new HTTP. Empty-prefix cached results and perturbed input costs remain distinct. Read-only reconciliation covers sibling 210 generation responses/152840 tokens and 161 embedding responses/153964 tokens across 24 closed accounting roots, all deltas exact; 84 old selector forwards/162963 positions remain original charges. Only new local reconciliation3.444s and source preparation2.555s recorded here."
     },
     {
       "id": "compatible_modes_and_boundaries",
@@ -127,22 +131,37 @@
         "src/milai_lab/methods/edit_memory.py"
       ],
       "finding": "Guardrequiringsemantic_delta modes withoutdependency_updates remains. NoProduct/API/schema/permission/Canonicalchanges. ActualboundaryCLI andtoolsboundarypassed; fullrepo/remoteCI notrun."
+    },
+    {
+      "id": "memconflict_candidate_and_reader_stress",
+      "section": "§5/7.3/9.1",
+      "status": "initial_evidence_complete",
+      "evidence": [
+        "data/manifests/jev-memconflict-shared-reconciliation-20261017.json"
+      ],
+      "finding": "Two exposed personas/six cases: 84 first Reader outputs verified against original requests/receipts; 480 pool positions (shared copies included) bound to source spans, 2445 embedding documents and six queries verified within native time prefixes. Same dense pool/natural Reader: top4 AA sum5, CEfixed4 sum2, adaptive sum1; full20 sum5.5 includes partial name-conflict credit. Ordinary candidate repair restores direct witnesses; CE still loses them. Question/identity ambiguity and native grading overacceptance remain explicit; no benchmarkwide or Jev net-benefit claim."
     }
   ],
-  "conditional_extensions": "SGD/controlledProofWriter-style variants,MemConflict,MemoryAgentBench andRL/utility objectives remain later/conditional directions; they are not silently reportedas executed. No broaderGoal success redefined aroundthispilot.",
+  "conditional_extensions": "SGD/controlled ProofWriter-style variants, MemoryAgentBench and RL/utility objectives remain conditional. MemConflict source-prefix and candidate-repair diagnostics are now reconciled, not merely proposed. No broad goal success is inferred from these exposed slices.",
   "next_actions": [
-    "Reconcile sibling MemConflict candidate/Reader findings before duplicating experiments; d3b0c44f freezes a new candidate repair, with no outcome claim from that commit alone.",
-    "Expand source-qualified training-family supervision for complementary evidence and the sufficient/exhausted distinction before another training objective; keep all exposed dev labels out of training.",
-    "Compare trained state factors and actual policy consequences only after source and label quality is established; input omission is not adopted as a method.",
-    "Resolve W/B relationship coverage and source-faithful Writer issues before enlarging Impact training.",
-    "Continue external source eligibility review without treating remaining V2 question IDs or medium tier as new independent histories."
+    "Finish the twelve remaining predeclared training source pools; preserve ambiguous or unsupported relationships instead of manufacturing proof labels.",
+    "Only after the full source review, decide and freeze a same-input original-label versus source-qualified-label training comparison; no MemConflict/dev labels enter training.",
+    "Use the reconciled simple dense baseline as a real comparator; do not infer a controller advantage from reference accuracy that hides source errors.",
+    "Resolve actual W/B relationship coverage and Writer semantics before increasing Impact training.",
+    "Maintain the original external-cohort eligibility constraints; existing LongMemEval v1 and remaining V2 question IDs cannot be reset as unseen."
   ],
-  "last_progress": "Previous turn was progress (21c4a271). This turn froze and completed the read-state probe (881e48f7), reviewed source-qualified changes, reconciled local compute and found concrete prior V2 contact. No outstanding owned job or repeated blocker.",
+  "last_progress": "Previous turn was progress (801521ad). This turn independently reconciled closed sibling MemConflict predictions/source inputs/costs, then froze expanded training-family source review and completed four new pools with unchanged-input label projection. No new model run or current blocker.",
   "cross_worktree_observation": {
     "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab",
-    "observed_head": "d3b0c44f",
+    "observed_head": "1d930b65",
     "closed_memconflict_author_summary": "data/manifests/jev-memconflict-reader-v1-summary.json",
     "observed_summary_status": "PREDICTIONS_CLOSED_GRADING_REPAIRED_AND_SOURCE_REVIEWED",
-    "scope": "Read-only summary/commit inspection, not independent reconciliation of all receipts or native outcomes; sibling files and processes untouched."
+    "scope": "Read-only actual first requests/responses, source spans, chronological embedding inputs and accounting snapshots reconciled. Other worktree files and jobs unchanged.",
+    "reconciled_roots": [
+      "memconflict-reader-v1",
+      "memconflict-native-reader-diagnostic-v1",
+      "memconflict-dense-v1",
+      "memconflict-dense-control-v1"
+    ]
   }
 }

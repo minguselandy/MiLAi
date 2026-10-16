@@ -1,0 +1,202 @@
+{
+  "status": "PARTIAL_TRAIN_SOURCE_REVIEW_4_OF_16_NEW_ROWS",
+  "reviewer": "Assistant author; not independent human adjudication",
+  "selection": "data/manifests/jev-reader-source-qualified-v2-selection.json",
+  "source_protocol": "Visible source text and ordinary reference resolution only; hidden decomposition does not supply missing facts. All twenty paragraphs per row inspected, with literal-equal paired paragraphs matched to their prior full reading. Original data and labels remain untouched.",
+  "cases": [
+    {
+      "review_id": "source-qualified-v2-row-32183",
+      "source_row": 32183,
+      "family": "musique-family-000690",
+      "split": "train",
+      "question_id": "2hop__525610_293429",
+      "question": "What county shares a border with another county, where the town of Warren can be found?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        4
+      ],
+      "rationale": "Warren is explicitly in Washington County, Vermont. No paragraph states a border between that county and Addison County. The marked second support is a biography mentioning birth in Addison County, Vermont and death in Washington County, New York; co-mention of life locations does not establish adjacency, and the two Washington counties must not be conflated.",
+      "original_answerable": true,
+      "original_support_indices": [
+        4,
+        14
+      ]
+    },
+    {
+      "review_id": "source-qualified-v2-row-16483",
+      "source_row": 16483,
+      "family": "musique-family-000690",
+      "split": "train",
+      "question_id": "2hop__525610_293429",
+      "question": "What county shares a border with another county, where the town of Warren can be found?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        19
+      ],
+      "rationale": "The Warren-to-Washington County, Vermont premise remains visible, but none of the twenty paragraphs provides a neighboring-county relation. Read the useful geographic premise before pool-relative exhaustion.",
+      "original_answerable": false,
+      "original_support_indices": [
+        19
+      ]
+    },
+    {
+      "review_id": "source-qualified-v2-row-1529",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question_id": "3hop1__800322_226789_844905",
+      "question": "In which country did Tony Schumacher die?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          8,
+          17
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "rationale": "The biography explicitly places death in Ludwigsburg. The station paragraph places its named Ludwigsburg/Kornwestheim locality in a German state. With ordinary resolution of the unique place name in this pool, these two paragraphs give Germany; the extra school biography is unnecessary. Country is derived from the locality statement, not from the authors nationality. The station paragraph has awkward city/district wording; this annotation uses its literal geographic claim, not outside geographic repair.",
+      "original_answerable": true,
+      "original_support_indices": [
+        4,
+        8,
+        17
+      ]
+    },
+    {
+      "review_id": "source-qualified-v2-row-26530",
+      "source_row": 26530,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question_id": "3hop1__800322_226789_844905",
+      "question": "In which country did Tony Schumacher die?",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          17,
+          4
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "rationale": "Both the death-place biography and the same German-state locality statement remain. Removing the school biography does not remove the visible two-paragraph country path. Original answerable=false is retained as reference metadata, not accepted as source truth. Same ordinary place-name resolution and city/district wording qualification as the paired positive row.",
+      "original_answerable": false,
+      "original_support_indices": [
+        4,
+        17
+      ]
+    }
+  ],
+  "reviewed_new_source_rows": 4,
+  "reviewed_new_families": 2,
+  "paragraph_positions_reviewed": 80,
+  "distinct_title_text_pairs": 49,
+  "remaining_new_rows": [
+    28674,
+    31751,
+    11272,
+    36441,
+    8892,
+    1369,
+    5148,
+    4377,
+    3344,
+    16330,
+    29038,
+    25549
+  ],
+  "training_started": false,
+  "new_model_calls": 0
+}
