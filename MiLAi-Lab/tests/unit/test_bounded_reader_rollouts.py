@@ -4,6 +4,9 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
+from extend_reader_fixed4 import fixed_four
+from milai_lab.harness.artifact_io import write_json
+from milai_lab.methods.bounded_evidence import decision_payload
 from run_bounded_reader_selection import policies
 
 
@@ -50,3 +53,30 @@ def test_full_twenty_pool_is_not_silently_cropped_to_eight(tmp_path):
     assert results["k2"]["selected_ids"] == ["p19", "p18"]
     assert results["adaptive"]["selected_ids"] == ["p19", "p18"]
     assert results["adaptive"]["stop_reason"] == "stop_sufficient"
+
+
+def test_fixed_four_reuses_original_prefix_and_opens_after_saved_stop(tmp_path):
+    candidates = [{"id": f"p{i}", "title": "t", "text": str(i)} for i in range(5)]
+    case = {"case_id": "case", "question": "q", "candidates": candidates}
+    for size in (0, 1):
+        payload = decision_payload("q", candidates[:size], candidates[size:])
+        probabilities = {k: 0.001 for k in payload["questions"]["next"]["criteria"]}
+        probabilities["stop_exhausted"] = 0.9
+        probabilities[f"open_p{size}"] = 0.08
+        folder = tmp_path / "old" / str(size)
+        write_json(folder / "input.json", payload)
+        write_json(folder / "output.json", {"probabilities": probabilities,
+                   "input_tokens": 10, "wall_seconds": 1.0})
+    calls = []
+
+    def predict(payload):
+        size = len(payload["state"]["read_evidence"])
+        calls.append(size)
+        return {"probabilities": {"stop_exhausted": 0.9, f"open_p{size}": 0.1},
+                "input_tokens": 12, "wall_seconds": 2.0}
+
+    result = fixed_four(case, tmp_path / "old", tmp_path / "new", predict)
+    assert calls == [2, 3]
+    assert result["selected_ids"] == ["p0", "p1", "p2", "p3"]
+    assert [r["reused"] for r in result["controller_trace"]] == [True, True, False, False]
+    assert result["standalone_model_input_tokens"] == 44
