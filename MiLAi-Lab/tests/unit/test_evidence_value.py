@@ -2,6 +2,8 @@
 
 import copy
 import json
+import sys
+from pathlib import Path
 from types import SimpleNamespace
 
 from langgraph.store.sqlite import SqliteStore
@@ -9,6 +11,51 @@ from langgraph.store.sqlite import SqliteStore
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_reading import build_evidence_packs
 from milai_lab.runners.edit_benchmarks import BenchmarkRun
+
+
+def test_offline_value_corpus_keeps_reference_labels_out_of_actual_sources(tmp_path, monkeypatch):
+    lab = Path(__file__).resolve().parents[2]
+    monkeypatch.syspath_prepend(str(lab / "tools"))
+    from prepare_value_supervision_corpus import main
+
+    dataset, selection, settings = (tmp_path / name for name in (
+        "data.json", "selection.json", "settings.json"))
+    dataset.write_text(json.dumps([{"question_id": "case", "question_type": "single-session-user",
+        "question": "Which marker color?", "question_date": "2030-01-04",
+        "answer": "GOLD_ANSWER_DO_NOT_CAPTURE", "answer_session_ids": ["support-session"],
+        "haystack_session_ids": ["support-session", "neighbor-1", "neighbor-2"],
+        "haystack_dates": ["2030-01-01", "2030-01-02", "2030-01-03"],
+        "haystack_sessions": [[
+            {"role": "user", "content": "The marker is blue.", "has_answer": True},
+            {"role": "assistant", "content": "Understood."},
+            {"role": "user", "content": "Its cap is round."},
+            {"role": "assistant", "content": "Noted."}],
+            [{"role": "user", "content": "A separate box is red."}],
+            [{"role": "user", "content": "The next meeting is Tuesday."}]]}]))
+    selection.write_text(json.dumps({"name": "test-corpus", "dataset": str(dataset),
+                                     "questions": ["case"]}))
+    settings.write_text(json.dumps({"longmemeval": {}, "memory_profile": "unified_v1",
+        "memory_ranking": "dense", "source_top_k": 1,
+        "source_tokenization": "unicode_v1", "source_granularity": "session"}))
+    root = tmp_path / "corpus"
+    monkeypatch.setattr(sys, "argv", ["prepare", str(selection), str(settings), str(root)])
+    main()
+    actual = json.loads((root / "actual-config.json").read_text())
+    bank_id = actual["alignment_bank_ids"]["case"]
+    bank = root / "banks" / bank_id
+    with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
+        service = MemoryService(store, ("edit", root.name, "ordinary", bank_id, "case"), "case",
+            bank / "memory.lock", functional_contract="functional_v1", memory_profile="unified_v1")
+        sources = service.sources()
+        assert len(sources) == 6 and service.records() == []
+        assert "has_answer" not in json.dumps(sources)
+        assert "GOLD_ANSWER_DO_NOT_CAPTURE" not in json.dumps(sources)
+    pool = json.loads((root / "native/longmemeval/case/answer/retrieval.json").read_text())
+    config = json.loads((root / "outcome-configs/case.json").read_text())
+    assert len(config["conditions"]) == 6
+    for condition in config["conditions"]:
+        assert all(0 <= i < len(pool["materials"]) for i in condition["indices"])
+    assert "GOLD_ANSWER_DO_NOT_CAPTURE" not in json.dumps(pool)
 
 
 def setup(store, tmp_path, texts):
