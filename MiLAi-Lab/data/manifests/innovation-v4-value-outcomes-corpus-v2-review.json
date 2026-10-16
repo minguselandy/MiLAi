@@ -1,0 +1,284 @@
+{
+  "status": "COMPLETED_AUTHOR_OUTCOME_REVIEW",
+  "questions_reviewed": [
+    "0db4c65d",
+    "2a1811e2",
+    "0ea62687",
+    "10d9b85a",
+    "07741c45",
+    "08e075c7",
+    "19b5f2b3",
+    "1e043500",
+    "0a34ad58",
+    "0edc2aef"
+  ],
+  "outcome_roots": "artifacts/innovation-v4/value-outcomes-corpus-v2",
+  "remaining": [],
+  "lookup_training_exclusions": {
+    "07741c45": "source ambiguity",
+    "10d9b85a": "range tasks evaluated separately"
+  },
+  "scope": "All60complete Reader outputs reviewed against nominated user support facts. Core task/preference labels only; historical assistant world claims are not independently verified. Original official verdicts remain unchanged. Not independent blind review.",
+  "questions": {
+    "07741c45": {
+      "empty": {
+        "correct": null,
+        "note": "Entire task withheld from clean labels: newer session first locates shoes in the closet rack but later describes future storage there. Official reference/Judge and all six actual answers are retained. No hard current-location target is justified by this conflicting source wording."
+      },
+      "support_0": {
+        "correct": null,
+        "note": "Entire task withheld from clean labels: newer session first locates shoes in the closet rack but later describes future storage there. Official reference/Judge and all six actual answers are retained. No hard current-location target is justified by this conflicting source wording."
+      },
+      "support_1": {
+        "correct": null,
+        "note": "Entire task withheld from clean labels: newer session first locates shoes in the closet rack but later describes future storage there. Official reference/Judge and all six actual answers are retained. No hard current-location target is justified by this conflicting source wording."
+      },
+      "both": {
+        "correct": null,
+        "note": "Entire task withheld from clean labels: newer session first locates shoes in the closet rack but later describes future storage there. Official reference/Judge and all six actual answers are retained. No hard current-location target is justified by this conflicting source wording."
+      },
+      "both_plus_neighbor": {
+        "correct": null,
+        "note": "Entire task withheld from clean labels: newer session first locates shoes in the closet rack but later describes future storage there. Official reference/Judge and all six actual answers are retained. No hard current-location target is justified by this conflicting source wording."
+      },
+      "equivalent_parent": {
+        "correct": null,
+        "note": "Entire task withheld from clean labels: newer session first locates shoes in the closet rack but later describes future storage there. Official reference/Judge and all six actual answers are retained. No hard current-location target is justified by this conflicting source wording."
+      }
+    },
+    "08e075c7": {
+      "empty": {
+        "correct": false,
+        "note": "Latest Sep2report states9months. Older Jun18report says6months and does not alone give the latest stated duration; approximateness is preserved."
+      },
+      "support_0": {
+        "correct": false,
+        "note": "Latest Sep2report states9months. Older Jun18report says6months and does not alone give the latest stated duration; approximateness is preserved."
+      },
+      "support_1": {
+        "correct": true,
+        "note": "Latest Sep2report states9months. Older Jun18report says6months and does not alone give the latest stated duration; approximateness is preserved."
+      },
+      "both": {
+        "correct": true,
+        "note": "Latest Sep2report states9months. Older Jun18report says6months and does not alone give the latest stated duration; approximateness is preserved."
+      },
+      "both_plus_neighbor": {
+        "correct": true,
+        "note": "Latest Sep2report states9months. Older Jun18report says6months and does not alone give the latest stated duration; approximateness is preserved."
+      },
+      "equivalent_parent": {
+        "correct": true,
+        "note": "Latest Sep2report states9months. Older Jun18report says6months and does not alone give the latest stated duration; approximateness is preserved."
+      }
+    },
+    "0a34ad58": {
+      "empty": {
+        "correct": false,
+        "note": "No personalized navigation support is delivered; answer abstains."
+      },
+      "support": {
+        "correct": true,
+        "note": "Uses the user's Suica and TripIt resources to personalize navigation advice. This is a preference-use label, not independent verification of transport/world facts in historical assistant advice."
+      },
+      "neighbor": {
+        "correct": false,
+        "note": "Home/BBQ/childproofing context yields no Tokyo personalization."
+      },
+      "support_plus_neighbor": {
+        "correct": null,
+        "note": "Official True preserved. Advice is largely generic, suggests acquiring an IC card and omits the already downloaded TripIt app; completeness of preference use is ambiguous, so no clean label."
+      },
+      "second_neighbor": {
+        "correct": false,
+        "note": "Gardening context yields no Tokyo personalization."
+      },
+      "equivalent_parent": {
+        "correct": null,
+        "note": "Official True preserved. Acknowledges the user's Suica but omits TripIt; partial-personalization interpretation is left unresolved. Same Source coverage does not establish equal generated answer quality."
+      }
+    },
+    "0db4c65d": {
+      "empty": {
+        "correct": false,
+        "note": "Both reported event dates establish18elapsed days; either singleton lacks the other date. Title typo remains in Source."
+      },
+      "support_0": {
+        "correct": false,
+        "note": "Both reported event dates establish18elapsed days; either singleton lacks the other date. Title typo remains in Source."
+      },
+      "support_1": {
+        "correct": false,
+        "note": "Both reported event dates establish18elapsed days; either singleton lacks the other date. Title typo remains in Source."
+      },
+      "both": {
+        "correct": true,
+        "note": "Both reported event dates establish18elapsed days; either singleton lacks the other date. Title typo remains in Source."
+      },
+      "both_plus_neighbor": {
+        "correct": true,
+        "note": "Both reported event dates establish18elapsed days; either singleton lacks the other date. Title typo remains in Source."
+      },
+      "equivalent_parent": {
+        "correct": true,
+        "note": "Both reported event dates establish18elapsed days; either singleton lacks the other date. Title typo remains in Source."
+      }
+    },
+    "0ea62687": {
+      "empty": {
+        "correct": false,
+        "note": "Earlier30cityMPG and current approximately28cityMPG establish about2MPG difference; either singleton lacks the comparison quantity."
+      },
+      "support_0": {
+        "correct": false,
+        "note": "Earlier30cityMPG and current approximately28cityMPG establish about2MPG difference; either singleton lacks the comparison quantity."
+      },
+      "support_1": {
+        "correct": false,
+        "note": "Earlier30cityMPG and current approximately28cityMPG establish about2MPG difference; either singleton lacks the comparison quantity."
+      },
+      "both": {
+        "correct": true,
+        "note": "Earlier30cityMPG and current approximately28cityMPG establish about2MPG difference; either singleton lacks the comparison quantity."
+      },
+      "both_plus_neighbor": {
+        "correct": true,
+        "note": "Earlier30cityMPG and current approximately28cityMPG establish about2MPG difference; either singleton lacks the comparison quantity."
+      },
+      "equivalent_parent": {
+        "correct": true,
+        "note": "Earlier30cityMPG and current approximately28cityMPG establish about2MPG difference; either singleton lacks the comparison quantity."
+      }
+    },
+    "0edc2aef": {
+      "empty": {
+        "correct": false,
+        "note": "No hotel preferences or recommendation is offered."
+      },
+      "support": {
+        "correct": false,
+        "note": "Official True disagrees: answer only says no Miami hotel data and does not use the known view/amenity preferences."
+      },
+      "neighbor": {
+        "correct": false,
+        "note": "Official True disagrees: irrelevant Las Vegas packing context produces an abstention, without hotel preferences or recommendation."
+      },
+      "support_plus_neighbor": {
+        "correct": false,
+        "note": "Mentions Seattle amenities only to explain inability to recommend Miami; no preference transfer or useful suggestion."
+      },
+      "second_neighbor": {
+        "correct": false,
+        "note": "Historical-fiction context produces an abstention, without hotel preference use."
+      },
+      "equivalent_parent": {
+        "correct": false,
+        "note": "Repeats Seattle hotel details only to refuse Miami advice; no personalized Miami preference guidance. Same support coverage as support condition, but official verdict differs."
+      }
+    },
+    "10d9b85a": {
+      "empty": {
+        "correct": false,
+        "note": "Apr10 lecture plus Apr17/18workshop establish3reported attendance days. This remains a separate range-task supervision record, not proof of complete scope or lookup-selector performance."
+      },
+      "support_0": {
+        "correct": false,
+        "note": "Apr10 lecture plus Apr17/18workshop establish3reported attendance days. This remains a separate range-task supervision record, not proof of complete scope or lookup-selector performance."
+      },
+      "support_1": {
+        "correct": false,
+        "note": "Apr10 lecture plus Apr17/18workshop establish3reported attendance days. This remains a separate range-task supervision record, not proof of complete scope or lookup-selector performance."
+      },
+      "both": {
+        "correct": true,
+        "note": "Apr10 lecture plus Apr17/18workshop establish3reported attendance days. This remains a separate range-task supervision record, not proof of complete scope or lookup-selector performance."
+      },
+      "both_plus_neighbor": {
+        "correct": true,
+        "note": "Apr10 lecture plus Apr17/18workshop establish3reported attendance days. This remains a separate range-task supervision record, not proof of complete scope or lookup-selector performance."
+      },
+      "equivalent_parent": {
+        "correct": true,
+        "note": "Apr10 lecture plus Apr17/18workshop establish3reported attendance days. This remains a separate range-task supervision record, not proof of complete scope or lookup-selector performance."
+      }
+    },
+    "19b5f2b3": {
+      "empty": {
+        "correct": false,
+        "note": "User explicitly reports a past two-week solo Japan trip; future Asia plans do not change this."
+      },
+      "support": {
+        "correct": true,
+        "note": "User explicitly reports a past two-week solo Japan trip; future Asia plans do not change this."
+      },
+      "neighbor": {
+        "correct": false,
+        "note": "User explicitly reports a past two-week solo Japan trip; future Asia plans do not change this."
+      },
+      "support_plus_neighbor": {
+        "correct": true,
+        "note": "User explicitly reports a past two-week solo Japan trip; future Asia plans do not change this."
+      },
+      "second_neighbor": {
+        "correct": false,
+        "note": "User explicitly reports a past two-week solo Japan trip; future Asia plans do not change this."
+      },
+      "equivalent_parent": {
+        "correct": true,
+        "note": "User explicitly reports a past two-week solo Japan trip; future Asia plans do not change this."
+      }
+    },
+    "1e043500": {
+      "empty": {
+        "correct": false,
+        "note": "User explicitly names the self-created Spotify playlist Summer Vibes; unrelated shoe/account-update sessions do not establish the name."
+      },
+      "support": {
+        "correct": true,
+        "note": "User explicitly names the self-created Spotify playlist Summer Vibes; unrelated shoe/account-update sessions do not establish the name."
+      },
+      "neighbor": {
+        "correct": false,
+        "note": "User explicitly names the self-created Spotify playlist Summer Vibes; unrelated shoe/account-update sessions do not establish the name."
+      },
+      "support_plus_neighbor": {
+        "correct": true,
+        "note": "User explicitly names the self-created Spotify playlist Summer Vibes; unrelated shoe/account-update sessions do not establish the name."
+      },
+      "second_neighbor": {
+        "correct": false,
+        "note": "User explicitly names the self-created Spotify playlist Summer Vibes; unrelated shoe/account-update sessions do not establish the name."
+      },
+      "equivalent_parent": {
+        "correct": true,
+        "note": "User explicitly names the self-created Spotify playlist Summer Vibes; unrelated shoe/account-update sessions do not establish the name."
+      }
+    },
+    "2a1811e2": {
+      "empty": {
+        "correct": false,
+        "note": "Explicit reported event dates Feb26/Mar19 in2023 establish21days. Labels apply to the provided pool, not strict arrival-time access; one source header is later than the question header."
+      },
+      "support_0": {
+        "correct": false,
+        "note": "Explicit reported event dates Feb26/Mar19 in2023 establish21days. Labels apply to the provided pool, not strict arrival-time access; one source header is later than the question header."
+      },
+      "support_1": {
+        "correct": false,
+        "note": "Explicit reported event dates Feb26/Mar19 in2023 establish21days. Labels apply to the provided pool, not strict arrival-time access; one source header is later than the question header."
+      },
+      "both": {
+        "correct": true,
+        "note": "Explicit reported event dates Feb26/Mar19 in2023 establish21days. Labels apply to the provided pool, not strict arrival-time access; one source header is later than the question header."
+      },
+      "both_plus_neighbor": {
+        "correct": true,
+        "note": "Explicit reported event dates Feb26/Mar19 in2023 establish21days. Labels apply to the provided pool, not strict arrival-time access; one source header is later than the question header."
+      },
+      "equivalent_parent": {
+        "correct": true,
+        "note": "Explicit reported event dates Feb26/Mar19 in2023 establish21days. Labels apply to the provided pool, not strict arrival-time access; one source header is later than the question header."
+      }
+    }
+  }
+}

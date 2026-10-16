@@ -1,0 +1,71 @@
+{
+  "name": "milai-innovation-value-training-v2",
+  "questions": [
+    "gpt4_59149c77",
+    "6a1eabeb",
+    "0db4c65d",
+    "2a1811e2",
+    "08e075c7",
+    "0ea62687",
+    "19b5f2b3",
+    "1e043500",
+    "0a34ad58",
+    "0edc2aef"
+  ],
+  "prepared_inputs": [
+    "artifacts/innovation-v4/value-training-v1/date.json",
+    "artifacts/innovation-v4/value-training-v1/update.json",
+    "artifacts/innovation-v4/value-training-v2/0db4c65d.json",
+    "artifacts/innovation-v4/value-training-v2/2a1811e2.json",
+    "artifacts/innovation-v4/value-training-v2/08e075c7.json",
+    "artifacts/innovation-v4/value-training-v2/0ea62687.json",
+    "artifacts/innovation-v4/value-training-v2/19b5f2b3.json",
+    "artifacts/innovation-v4/value-training-v2/1e043500.json",
+    "artifacts/innovation-v4/value-training-v2/0a34ad58.json",
+    "artifacts/innovation-v4/value-training-v2/0edc2aef.json"
+  ],
+  "regularization": 0.1,
+  "max_vocabulary": 2048,
+  "original_session_overlap_components": [
+    [
+      "1e043500"
+    ],
+    [
+      "19b5f2b3"
+    ],
+    [
+      "0edc2aef"
+    ],
+    [
+      "0a34ad58"
+    ],
+    [
+      "0ea62687"
+    ],
+    [
+      "gpt4_59149c77"
+    ],
+    [
+      "0db4c65d"
+    ],
+    [
+      "2a1811e2"
+    ],
+    [
+      "6a1eabeb"
+    ],
+    [
+      "08e075c7"
+    ]
+  ],
+  "examples_per_head": {
+    "immediate": 91,
+    "two_open": 66,
+    "answer_return": 55
+  },
+  "exclusions": {
+    "07741c45": "Pre-reviewed conflicting source wording; allsix labels unresolved.",
+    "10d9b85a": "Range task retained separately, outside the initial lookup-selector training comparison."
+  },
+  "scope": "Exposed development outcome supervision, not formal holdout. Parameters fixed from the two-query pilot; no hyperparameter adjustment based on these new fits. Preferences retain disagreement/partial-use nulls."
+}
