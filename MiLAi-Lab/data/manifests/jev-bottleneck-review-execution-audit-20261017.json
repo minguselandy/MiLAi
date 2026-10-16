@@ -38,16 +38,17 @@
     {
       "id": "family_split_and_source_labels",
       "section": "§6.1/7.2/8",
-      "status": "partial",
+      "status": "expanded_source_pilot_complete",
       "evidence": [
         "data/manifests/jev-reader-source-qualified-v1-annotations.json",
         "data/manifests/jev-reader-source-qualified-v1-summary.json",
         "data/manifests/jev-memops-factor-extension-labels-v1.json",
         "data/manifests/jev-reader-source-qualified-v2-selection.json",
         "data/manifests/jev-reader-source-qualified-v2-annotations.json",
-        "data/manifests/jev-reader-source-qualified-v2-progress.json"
+        "data/manifests/jev-reader-source-qualified-v2-progress.json",
+        "data/manifests/jev-reader-source-qualified-label-pair-v1-summary.json"
       ],
-      "finding": "Family/length inventories and eventnormalization exist;15source-pool review and masked/alternative labels nowconcrete. Not corpuswide independentannotation; Writerpreservepositive coverage absent innewMemOpsslice. No revieweddev labels usedfortraining. A metadata-frozen expansion selects eight more training families/16 rows/83 original states with no dev/cal/test family overlap. Four new complete pools (80 paragraph positions/49 unique title-text pairs) reviewed so far; 21 unchanged-input states projected and 11 labels changed. County adjacency is unsupported in one annotated positive; an explicit German-state statement retains a country proof in one annotated negative. Geographic wording qualification preserved. Twelve new rows remain unreviewed; no new training."
+      "finding": "All predeclared 16 new training source rows/8 families reviewed (320 paragraph positions/208 distinct title-text pairs); all 16 source objects literal-equal saved mirror rows, official archive equivalence remains unverified. Combined source review covers 24 train rows/12 families/123 states:86 labelled,37 masked. All visible inputs/action sets unchanged; 53 target changes include37 masks and16 changes among admitted states. Not corpuswide or independent human adjudication. Original/native labels remain separate. Writer preserve-positive coverage is still insufficient."
     },
     {
       "id": "independent_calibration",
@@ -119,9 +120,10 @@
         "data/manifests/jev-meme-reader-confirm-v1-summary.json",
         "data/manifests/jev-musique-ce-stop-cap4-v1-summary.json",
         "data/manifests/jev-reader-state-information-v1-summary.json",
-        "data/manifests/jev-memconflict-shared-reconciliation-20261017.json"
+        "data/manifests/jev-memconflict-shared-reconciliation-20261017.json",
+        "data/manifests/jev-reader-source-qualified-label-pair-v1-summary.json"
       ],
-      "finding": "All 200 confirmation and 119 unique STOP Reader receipts reconcile with original per-run ledger deltas; zero new unknown usage. STOP includes cached controller work, within-arm Reader caching, common retrieval and 24-family paired bootstrap. MEME reports per-story/per-seed results, not 200 independent samples. Preparation/final analysis recorded once; human review, exploratory analysis and some cold load/orchestration costs remain unmeasured. No whole-pipeline net-benefit proof. State probe adds 276 local GPU forwards /753026 input tokens, 47.496 wall/69.313 CPU seconds, exact once in original compute ledger; zero new HTTP. Empty-prefix cached results and perturbed input costs remain distinct. Read-only reconciliation covers sibling 210 generation responses/152840 tokens and 161 embedding responses/153964 tokens across 24 closed accounting roots, all deltas exact; 84 old selector forwards/162963 positions remain original charges. Only new local reconciliation3.444s and source preparation2.555s recorded here."
+      "finding": "All 200 confirmation and 119 unique STOP Reader receipts reconcile with original per-run ledger deltas; zero new unknown usage. STOP includes cached controller work, within-arm Reader caching, common retrieval and 24-family paired bootstrap. MEME reports per-story/per-seed results, not 200 independent samples. Preparation/final analysis recorded once; human review, exploratory analysis and some cold load/orchestration costs remain unmeasured. No whole-pipeline net-benefit proof. State probe adds 276 local GPU forwards /753026 input tokens, 47.496 wall/69.313 CPU seconds, exact once in original compute ledger; zero new HTTP. Empty-prefix cached results and perturbed input costs remain distinct. Read-only reconciliation covers sibling 210 generation responses/152840 tokens and 161 embedding responses/153964 tokens across 24 closed accounting roots, all deltas exact; 84 old selector forwards/162963 positions remain original charges. Only new local reconciliation3.444s and source preparation2.555s recorded here. Four new label-control jobs:1376trainsequencepositions/3817904tokens,600devforwards/1557140tokens,681.403compute wall/879.013CPU seconds; each original laya_reader_ce ledger delta exact. GPU3 shared with sibling during part of run, no isolated speed inference. NoHTTP."
     },
     {
       "id": "compatible_modes_and_boundaries",
@@ -140,17 +142,26 @@
         "data/manifests/jev-memconflict-shared-reconciliation-20261017.json"
       ],
       "finding": "Two exposed personas/six cases: 84 first Reader outputs verified against original requests/receipts; 480 pool positions (shared copies included) bound to source spans, 2445 embedding documents and six queries verified within native time prefixes. Same dense pool/natural Reader: top4 AA sum5, CEfixed4 sum2, adaptive sum1; full20 sum5.5 includes partial name-conflict credit. Ordinary candidate repair restores direct witnesses; CE still loses them. Question/identity ambiguity and native grading overacceptance remain explicit; no benchmarkwide or Jev net-benefit claim."
+    },
+    {
+      "id": "source_qualified_label_training_intervention",
+      "section": "§6.1/8/9.1",
+      "status": "initial_evidence_complete_no_reliable_gain",
+      "evidence": [
+        "configs/milai-jev-reader-source-qualified-label-pair-v1.json",
+        "data/manifests/jev-reader-source-qualified-label-pair-v1-summary.json"
+      ],
+      "finding": "Four matched jobs closed: original/reviewed targets on identical86admittedstates,9trainfamilies,common37mask,basecheckpoint,seed/order/optimizer/epochs. Final4 source-qualified dev acceptance9→11 forseed0,6→5 forseed1 of22states/3effectivefamilies. Paired epoch0 logits identical. All600devoutputs retained;120finalchoices inspected. No checkpoint/seed selection or QA/net-benefit claim. Doesnot justify increasing Impact/RL."
     }
   ],
   "conditional_extensions": "SGD/controlled ProofWriter-style variants, MemoryAgentBench and RL/utility objectives remain conditional. MemConflict source-prefix and candidate-repair diagnostics are now reconciled, not merely proposed. No broad goal success is inferred from these exposed slices.",
   "next_actions": [
-    "Finish the twelve remaining predeclared training source pools; preserve ambiguous or unsupported relationships instead of manufacturing proof labels.",
-    "Only after the full source review, decide and freeze a same-input original-label versus source-qualified-label training comparison; no MemConflict/dev labels enter training.",
-    "Use the reconciled simple dense baseline as a real comparator; do not infer a controller advantage from reference accuracy that hides source errors.",
-    "Resolve actual W/B relationship coverage and Writer semantics before increasing Impact training.",
-    "Maintain the original external-cohort eligibility constraints; existing LongMemEval v1 and remaining V2 question IDs cannot be reset as unseen."
+    "Reconcile the sibling warm-start source-label study only after its own declared first jobs are closed; its existing-CE initialization differs from this base-start study, so do not pool runs as exchangeable replications.",
+    "Revisit genuine shared-before W/B and Writer-state evidence to separate target selection, necessary read-only context and formation/generation failures; do not fabricate preserve-successor positives.",
+    "Keep source-qualified data and masks, but do not select seed0/earlier epochs or launch more training to rescue this mixed result.",
+    "Policy-state/utility and external-cohort evidence remain unproven; preserve original scope and exposure constraints without resetting LongMemEval v1/V2."
   ],
-  "last_progress": "Previous turn was progress (801521ad). This turn independently reconciled closed sibling MemConflict predictions/source inputs/costs, then froze expanded training-family source review and completed four new pools with unchanged-input label projection. No new model run or current blocker.",
+  "last_progress": "Previous turn was progress (9cbf858e). This turn completed the remaining12source rows, checked all16against savedrawmirror, froze2f9f1e29, executed/reviewed four matched training jobs and reconciled actualcompute. All owned jobs terminal and GPUmemory released.",
   "cross_worktree_observation": {
     "worktree": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab",
     "observed_head": "1d930b65",

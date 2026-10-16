@@ -1,4 +1,121 @@
-# CURRENT: MemConflict reconciled; expanded source review IN PROGRESS — 2026-10-17
+# CURRENT: all four label-control trainings CLOSED/reviewed — 2026-10-17
+
+Goal ACTIVE/incomplete. Previous turn=progress9cbf858e; currentturn completedremaining
+source review andfourrealtrainings withfixedprotocol andclosedcost audit. No subagents,
+SHA/contentfingerprints,newledger,Product/API/Schema/permission/Canonicalchanges orservice
+changes. Allnewweights/data/env/cache under /cra/memory/mx_memory. No push/merge/fullrepoCI.
+
+ALL OUR JOBS CLOSED: exec33646 returnedexit0; coordinatorPID1915363 andchildren1915364,
+1929193,1943660,1956352 absent. driver.json COMPLETED,all4returncodes0. No queuedjob.
+GPU2/3 noweach36928MiBfree. BGE7861PID47436/BGE7961PID52982/7860PID2160380unchanged/running;
+7862containerstopped. Do notrestartfromstaleactive field orhistoricalLIVEheader below.
+
+Training source2f9f1e29. Root artifacts/jev-reader/source-qualified-label-pair-v1.
+4jobs order0original,0reviewed,1reviewed,1original. Same86inputs/17sourcecases/9families,
+common37mask;16admittedtargetschanged. BothrestartoriginalmultilingualBASE (notold602stateCE).
+Seeds0/1,4epochs,fixedfinalepoch4,batch4/accum4,encoder2.5e-5/head1e-4,float32,8192/512.
+Dev30unchangedpositions,22labelled/3effectivefamilies; no calibration/test modelcalls.
+Optional--seed preservesdefault0. Source/runtime usedbytrainingneverthelessunchangedfromfreeze.
+
+FINAL source-qualifiedacceptance seed0original9/22→reviewed11/22,seed1 6/22→5/22.
+OriginalreferenceonEXACTsame22states:9→10 and8→7. Familymacrodeltas+.07870/-.03704.
+Epoch0logits EXACTequalinbothpairs/all30positions,sampling/lengths equal.24updatesperjob,
+encoder/headprobeschanged. Lossdecreases butno stabledevgain; do NOTpickseed0/epoch3 or
+silentlyextendepochs. Constant exhaustedaccepts9/22 butmisses8complement+5sufficientstates.
+All600devoutputs retained;120finalchoices read. Seed0correctsrow28960prefix0opening and
+row866prefix2exhaustion;seed1losesrow28960prefix0 andprefix4whilefixing12523prefix3.
+Allmodels stillmisstargetp4 on28960intermediateprefixes andmostlymissPrince-of-Wales short
+sufficiency. NoQA/defaultadoption/wholepipelinewin. ThisdoesnotjustifylargerImpact/RL.
+
+Actual4jobs1376trainsequences3817904tokens,352batchforwards704deviceforwards;600devforwards
+1557140tokens. Compute681.403wall/879.013CPU sec;coordinatorincludingprocessstartup702.566sec.
+Eachjob originalledger laya_reader_ce incrementexact; notconfusedwithsiblingreader_laya_ce.
+GPU3concurrentlyhad siblingPID1914951 trainingfromOLDCE duringpartofcohort; noexclusive-speed
+claim. NoHTTP/Reader/embedding. Analysis.04222wall/.04220CPU once under
+reader_source_label_pair_closed_analysis_v1. Per-runpeaks separate,notadditiveglobalpeaks.
+Rootreview.json/analyze.py andtrackedjev-reader-source-qualified-label-pair-v1-summary.json
+preservecurves/disagreements/probes/costs. Bothbefore/afterbudgetsnapshots savedperjob.
+
+SOURCE REVIEW v2 COMPLETE:16newrows/8families,320positions/208distincttitle-text. Combined
+withv1train=24rows/12families/123states:52missingcomplement,10sufficient,24exhausted,37masked.
+53changes =37masks+16admittedtargetchanges. All16sourceobjects literal-equal savedrawmirror;
+no localconversion/indexcorruptionshown; officialarchiveequivalence STILLunverified.
+All first4reviewannotations preserved separately. Newcase details inannotationsmanifest;
+source-qualified-v2/reviewed-train-complete.jsonl retainsreference_gold,visibleinputs unchanged.
+APA/Hall andMichal/David/Masur valid2hop;PurePrairie/RCA/PeterEdge valid3hop. SportsGroundlabel
+actuallyusesSalfordTheCliff +unspecifiedorganization→masked. Boston/CornishTrinityChurch
+wrongentity→usefulpartialthenexhausted. EDSA wholequery malformed/cityvsmetro ambiguous→
+masked,whilehotelproperty retainedasseparate supportedfacet. No hiddenquestionrepair.
+EarlierWarrencountybadadjacency andTonycountryshortproofqualifications remain.
+
+Sourcecompletion.85786wall/.85782CPU once reader_source_qualified_v2_completion;
+pairedprep4.70044wall/4.68490CPU632952tokenizerpositions once
+reader_source_label_pair_preparation_v1. Earlier2.555secprep alreadycharged; neveraddagain.
+Authorreviewtimeunmeasured/notzero.5relatedtests,Ruff,realpackageDAG/toolsboundarypassedbefore
+training;actual4runs/paired-input/ledger checksclosed. Fullrepo/remoteCI notrun.
+
+NEXT reconcile siblingwarm-start labelstudy onlywhenitsdeclaredjobsactuallyclosed; different
+initialization meansnotexchangeablewithour4runs. Theninspectgenuinebefore/WB/Writer evidence
+instead of chasinga favorable seed orlargerImpact/RL. Trainedstate/utility,WBcoverage,Writer
+semantics andeligibleexternalcohort remain unproven. LMEv1zeroeligible andV2priorcontact
+constraints unchanged. Goal completionaudit remainsNOTPROVEN, no repeated blocker.
+
+# Historical snapshot: paired label training was live — 2026-10-17
+
+Goal ACTIVE/incomplete. Previous turn=progress9cbf858e. This turncompletedremaining12source
+rows andprojectedall24trainrows; frozeandstartedfourmatchedtrainingjobs. No subagents,
+SHA/content fingerprints,newledger,Product/API/Schema/permission/Canonical/servicechanges,
+push/merge. Allnewweights/data/env/cache under /cra/memory/mx_memory.
+
+LIVE coordinatorPID1915363 / exec33646, training source2f9f1e29. Root
+artifacts/jev-reader/source-qualified-label-pair-v1; driver.json, perjobstdout/stderr and
+runs/seed/arm/run.json. Joborder0original→0reviewed→1reviewed→1original;noautoretry.
+InspectactualPID/handle ANDterminalfiles;do not restartfromstaleprogress/losthandles.
+Only physicalGPUs2,3. ProtectedBGE/7860unchanged;7862 staysstopped. GPU3 alsohas sibling
+PID1914951 training reader-label-ce-v1/qualified-seed0 from existingCE inotherworktree.
+Do notstop/editthatjob. AtobservedsharedpeakGPU3~25.3GiBtotal,capacity40GiB; ourjob~10.5GiB,
+sibling~10.9GiB+BGE3.5GiB. TimingsarenotexclusiveGPUmeasurements. Ourmodeltool/data frozen;
+onlyindependentanalysis/docs maychangewhilejobsrun.
+
+SOURCE REVIEW v2 all16newrows/8families done:320paragraphpositions/208distincttitle-text.
+All16family.sourceobjects literal-equal savedrawmirrorrows (0SHA). Officialarchiveequivalence
+stillunverified; observedsource problemsalreadyin savedmirror,notlocalfamilyindexreordering.
+Newdispositions5supported/7poolinsufficient/4masked. Combinedv1+v2 train24rows/12families,
+123states:86labelled(52missingcomplement,10sufficient,24exhausted),37masked;53goldchanges.
+Originalstate/questions/actionsets unchanged andnativegoldpreserved. First4partialreview
+snapshot atsource-qualified-v2/annotations-first4-preserved.json; don'tloseoriginalreport.
+Newremainingreviews atremaining-review-notes.json. Sourcequalifiedv2traincompleteJSONL and
+combined-annotations.json saved. Noevalbenchmarkcasesaddedtotrain.
+
+Keyfindings: APAjournal→StanleyHall [16,12] supported; MichalhistoricalDavid→RichardMasur
+[3,18] supported withouterasingPalti; SydneySportsGround supposedlink isactuallyTheCliff
+inSalford,organizationunspecified→pairmasked. Richardsonchurch isBoston, otherTrinityChurch
+Cornish countryparagraphwrongentity→usefulpartialthenexhausted. PurePrairie→RCA→PeterEdge
+[12,9,1] supports3hop. EDSAquestionhasmalformedtarget/cityvsmetropolisambiguity→pairmasked;
+explicit hotel fact is retainedasseparatediagnostic,notclaimedfalse orsilentlyrewritten.
+EarlierWarrencountybadborder andTonySchumachershortcountryproofqualificationsretained.
+
+TRAIN PAIR: commonmask37removedfrombotharms;86sameinputstates/17sourcecases/9families,
+only16admittedtargetschanged. BothrestartfromoriginalmultilingualBASE,notexisting602stateCE.
+Seeds0,1;4epochs,fixedfinalepoch4,no bestdevselection;batch4/accum4,lr2.5e-5encoder/1e-4head,
+event/familynormalized CE,float32,max8192/head512,reference_compileFalse. Dev30sameinput,
+22labelled/3effectivefamilies alreadyexposed. No calibration/test modeluse orHTTP/QAcalls.
+Defaultseed0 unchanged; onlynewoptional--seed inexistingtrain_bounded_laya.py.
+Preflight232positions,trainmax3403/devmax3397,0truncation;targets/inputs/weights matched.
+Originalledger only;toolusesexisting laya_reader_ce phase. Coordinator savesbefore/after
+snapshots perjob foractualdelta checks. Neverreset/rechargeoldcompute.
+
+Preprocessingalreadycharged ONCE reader_source_qualified_v2_completion .85786wall/.85782CPU;
+reader_source_label_pair_preparation_v1 4.70044wall/4.68490CPU,632952tokenizerpositions.
+Earlier sourcev2preparation2.555sec remainsseparate/alreadyrecorded. Authorreviewunmeasured.
+Five supervision/weight tests,Ruff,REALpackageDAG/toolsboundarypassed beforelaunch.
+Fullrepo/remoteCI notrun. No trainingresultsclaimuntilallfourfirstjobsclosedandreviewed.
+NEXT monitorfourjobs;thencheckepoch0pairidentity,per-seedfinalscores/loss/parameterchanges,
+standalone/cachedcosts and originalledgerdeltas. Do nottrainagainbylookingatintermediate
+curves. Prefixlearning isnotQAorwholepipelineproof. BroaderW/B/Writer/externaleligibility
+requirements remain. No newdefaultadoption orgoalcompletion.
+
+# Historical checkpoint: MemConflict and partial source review — 2026-10-17
 
 Goal ACTIVE/incomplete. Previous turn=progress801521ad; current turn=progress via new
 source/cost evidence and actual training-label projection. No subagents, SHA/content
