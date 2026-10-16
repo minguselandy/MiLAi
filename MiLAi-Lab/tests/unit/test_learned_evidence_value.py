@@ -6,7 +6,12 @@ from pathlib import Path
 
 import numpy as np
 
-from milai_lab.methods.learned_evidence_value import LearnedValue, ValueFeatures, ridge_fit
+from milai_lab.methods.learned_evidence_value import (
+    LearnedValue,
+    ValueFeatures,
+    ridge_fit,
+    select_by_return,
+)
 
 
 def packet(opened=False):
@@ -112,3 +117,45 @@ def test_unreviewed_labels_are_excluded_per_head(monkeypatch):
     assert len(rows["immediate"]) == len(rows["answer_return"]) == 1
     assert rows["two_open"] == []
     assert rows["answer_return"][0]["target"] == 0.0
+
+
+def test_bundle_selection_keeps_zero_gain_singletons_and_respects_the_input_limit():
+    def predict(payload):
+        return float({0, 1} <= set(payload["indices"]))
+
+    options = {
+        "payload_for": lambda indices: {"indices": indices},
+        "measure": lambda indices: 50 + 100 * len(indices),
+        "predict_return": predict,
+    }
+    greedy = select_by_return([0, 1, 2], input_limit=350, **options)
+    assert greedy["selected_indices"] == []
+    bundled = select_by_return([0, 1, 2], input_limit=350, pair_width=3, **options)
+    assert bundled["selected_indices"] == [0, 1]
+    assert bundled["trace"][0]["selected"]["added_indices"] == [0, 1]
+    assert bundled["input_tokens"] == 250
+    limited = select_by_return([0, 1, 2], input_limit=249, pair_width=3, **options)
+    assert limited["selected_indices"] == []
+    assert all(o["input_tokens"] <= 249 for step in limited["trace"] for o in step["offers"])
+
+
+def test_source_context_aliases_do_not_merge_independent_copies(monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[2] / "tools"))
+    from run_learned_value_comparison import source_context_indices
+
+    def material(source, revision=1):
+        return {
+            "kind": "original_source",
+            "context_source_ranges": [
+                {"source_ref": source, "source_revision": revision, "start": 0, "end": 100}
+            ],
+        }
+
+    assert source_context_indices(
+        [
+            material("a"),
+            material("a"),
+            material("independent-copy"),
+            material("a", 2),
+        ]
+    ) == [0, 2, 3]

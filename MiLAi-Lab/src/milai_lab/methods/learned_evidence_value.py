@@ -8,9 +8,11 @@ inference use the same input projection; outcome/review metadata is never read.
 from __future__ import annotations
 
 import math
+import time
 from collections import Counter
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
+from itertools import combinations
 from typing import Any
 
 import numpy as np
@@ -146,3 +148,86 @@ def ridge_fit(matrix: Vector, targets: Vector, regularization: float) -> Vector:
     return matrix.T @ np.linalg.solve(
         matrix @ matrix.T + regularization * np.eye(len(targets)), targets
     )
+
+
+def select_by_return(
+    candidates: list[int],
+    *,
+    payload_for: Callable[[list[int]], dict[str, Any]],
+    measure: Callable[[list[int]], int],
+    predict_return: Callable[[dict[str, Any]], float],
+    input_limit: int,
+    pair_width: int = 0,
+) -> dict[str, Any]:
+    """Choose actual bodies using fitted return differences and measured input cost.
+
+    Pairs include zero/nonpositive singleton offers, so complementary evidence is
+    not discarded merely because either singleton has no immediate task gain.
+    The shortlist bounds local computation; it is not a claim of optimal search.
+    """
+    started, cpu_started = time.perf_counter(), time.process_time()
+    chosen: list[int] = []
+    trace, predictions, measurements = [], 0, 0
+    current_cost = measure(chosen)
+    current_return = predict_return(payload_for(chosen))
+    predictions += 1
+    measurements += 1
+    offers: list[dict[str, Any]] = []
+
+    def offer(additions: list[int]) -> None:
+        nonlocal predictions, measurements
+        indices = [*chosen, *additions]
+        cost = measure(indices)
+        measurements += 1
+        if cost > input_limit:
+            return
+        value = predict_return(payload_for(indices))
+        predictions += 1
+        gain = value - current_return
+        offers.append(
+            {
+                "indices": indices,
+                "added_indices": additions,
+                "predicted_return": value,
+                "predicted_gain": gain,
+                "input_tokens": cost,
+                "gain_per_input_token": gain / max(1, cost - current_cost),
+            }
+        )
+
+    while len(chosen) < len(candidates):
+        offers = []
+        for index in candidates:
+            if index not in chosen:
+                offer([index])
+        shortlist = sorted(offers, key=lambda o: -o["gain_per_input_token"])[:pair_width]
+        for first, second in combinations(shortlist, 2):
+            offer([first["added_indices"][0], second["added_indices"][0]])
+        positive = [o for o in offers if o["predicted_gain"] > 0]
+        step = {
+            "before_indices": list(chosen),
+            "before_return": current_return,
+            "offers": offers,
+            "selected": None,
+        }
+        trace.append(step)
+        if not positive:
+            break
+        best = max(positive, key=lambda o: o["gain_per_input_token"])
+        step["selected"] = best
+        chosen = best["indices"]
+        current_return, current_cost = best["predicted_return"], best["input_tokens"]
+    return {
+        "selected_indices": chosen,
+        "trace": trace,
+        "pair_width": pair_width,
+        "prediction_evaluations": predictions,
+        "token_measurements": measurements,
+        "input_tokens": current_cost,
+        "input_limit": input_limit,
+        "wall_seconds": time.perf_counter() - started,
+        "cpu_seconds": time.process_time() - cpu_started,
+        "score_semantics": "Raw fitted answer-return differences per incremental Reader "
+        "input token; no calibration or correctness guarantee. "
+        "Pair shortlist contains up to pair_width affordable singletons.",
+    }
