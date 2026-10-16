@@ -1,3 +1,20 @@
+# Current bottleneck review execution (2026-10-16)
+
+Goal ACTIVE/incomplete: execute MILAI_JEV_BOTTLENECK_TRAINING_BENCHMARK_REVIEW_20261016.md.
+This supersedes the old Impact-first scheduling below. Reader component intervention
+comes first; retain the existing six-arm Writer findings rather than erase them.
+Worktree jev-read-bottleneck-20261016 starts at tracked jev-training9e21667e;
+old worktree has uncommitted corpus/CI work and remains untouched.
+No subagents, SHA checks/content fingerprints, new ledger or existing GPU changes.
+Root owns serial real model HTTP; continuous ledger path below remains authoritative.
+CPU Laya PID3396426 confirmed alive on this turn; no experiment runner found.
+Never dispatch or restart from this historical process snapshot without rechecking.
+Full scope: component intervention; family/split inventory and label/length/ambiguity
+statistics; matched baseline/Laya-zero/CE; bounded state/STOP/complement ablations;
+LongMemEval unexposed evaluation; MemOps/MEME Writer effects; all quality and costs.
+Keep exposed, trained and held-out families separate. Simple controls may win.
+Source review is diagnostic, never a main method; no new default Product behavior.
+
 # Current Jev execution handoff (2026-10-16)
 
 Goal ACTIVE/incomplete: execute docs/MILAI_JEV_INTEGRATION_TRAINING_DECISION_20261016.md.
