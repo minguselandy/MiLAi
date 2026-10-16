@@ -1,0 +1,86 @@
+{
+  "name": "jev-musique-reader-c20-v1",
+  "cases": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/cases.jsonl",
+  "labels": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/labels.jsonl",
+  "common_retrieval_costs": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/common-retrieval-costs.json",
+  "official_scorer": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-official",
+  "reader": {
+    "experiment_name": "jev-musique-reader-c20-v1",
+    "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "context_tokens": 65536,
+    "model": {
+      "base_url": "http://127.0.0.1:7862/v1",
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "temperature": 1.0,
+      "max_tokens": 8192,
+      "timeout": 300,
+      "enable_thinking": true,
+      "max_calls": 12
+    },
+    "interface_version": "v2"
+  },
+  "arms": {
+    "bm25_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/bm25",
+      "policy": "k2"
+    },
+    "bm25_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/bm25",
+      "policy": "k4"
+    },
+    "bm25_k20": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/bm25",
+      "policy": "k20"
+    },
+    "laya_zero_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/laya_zero",
+      "policy": "k2"
+    },
+    "laya_zero_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/laya_zero",
+      "policy": "adaptive"
+    },
+    "laya_ce_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/laya_ce",
+      "policy": "k2"
+    },
+    "laya_ce_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/laya_ce",
+      "policy": "adaptive"
+    },
+    "linear_ce_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/linear_ce",
+      "policy": "k2"
+    },
+    "linear_ce_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/linear_ce",
+      "policy": "adaptive"
+    },
+    "logits_zero_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/logits_zero",
+      "policy": "k2"
+    },
+    "logits_zero_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/logits_zero",
+      "policy": "adaptive"
+    },
+    "logits_lora_k2": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/logits_lora",
+      "policy": "k2"
+    },
+    "logits_lora_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/logits_lora",
+      "policy": "adaptive"
+    }
+  },
+  "planned_reader_calls": 598,
+  "planned_cases": 46,
+  "paired_questions": 22,
+  "orphan_answerable_questions": 2,
+  "scope": "Same46 dev cases/24families; original20source pool contains all annotated support for24answerable cases. Native head, single-encoding linear and decoder-letter controls remain distinct. Every first prediction precedes score. Candidate support coverage and missing outputs remain separate from QA. Two preview-exposed families; not unseen external benchmark.",
+  "candidate_count": 20,
+  "selector_max_len": 8192,
+  "selector_head_max_len": 512,
+  "adaptive_read_limit": 4
+}

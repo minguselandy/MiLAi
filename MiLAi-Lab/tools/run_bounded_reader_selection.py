@@ -126,7 +126,8 @@ def main() -> None:
     select = sub.add_parser("select")
     select.add_argument("cases", type=Path)
     select.add_argument("output", type=Path)
-    select.add_argument("--backend", choices=("bm25", "laya", "ordinary", "linear"), required=True)
+    select.add_argument("--backend", choices=("bm25", "laya", "ordinary", "linear",
+                                             "logits_zero", "logits_lora"), required=True)
     select.add_argument("--checkpoint", type=Path)
     select.add_argument("--budget", type=Path, required=True)
     select.add_argument("--max-len", type=int, default=4096)
@@ -161,6 +162,15 @@ def main() -> None:
                 else:
                     decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
                 decision.model.encoder.config.reference_compile = False
+                decision.model.to(device).eval()
+                decision.device = device
+            elif args.backend in {"logits_zero", "logits_lora"}:
+                from logits_reader import LogitsDecision
+
+                decision = (LogitsDecision(args.checkpoint, args.max_len)
+                            if args.backend == "logits_zero"
+                            else LogitsDecision.load(args.checkpoint))
+                decision.max_len = args.max_len
                 decision.model.to(device).eval()
                 decision.device = device
             else:
