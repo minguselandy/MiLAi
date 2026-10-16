@@ -74,7 +74,6 @@
       "policy": "adaptive"
     }
   },
-  "planned_reader_calls": 598,
   "planned_cases": 46,
   "paired_questions": 22,
   "orphan_answerable_questions": 2,
@@ -82,5 +81,12 @@
   "candidate_count": 20,
   "selector_max_len": 8192,
   "selector_head_max_len": 512,
-  "adaptive_read_limit": 4
+  "adaptive_read_limit": 4,
+  "reuse_identical_reader_inputs": true,
+  "reader_reuse_policy": "First response or confirmed failure shared only for identical messages and schema; literal equality, no fingerprints. Native provider cache and original ledger only. Per-method standalone cost reuses the first receipt, actual total charges once.",
+  "reader_delivery_order": "common prepared candidate order; controller opening order remains in selection trace",
+  "planned_prediction_positions": 598,
+  "reader_call_upper_bound": 598,
+  "arm_order_seed": 20261017,
+  "arm_order": "seeded initial permutation, cyclic rotation per case to balance server-cache/order effects"
 }

@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import random
 import subprocess
 import sys
 import time
@@ -23,7 +24,11 @@ from run_bounded_reader_selection import read_rows
 def reader_input(case, selected):
     candidates = {row["id"]: {key: row[key] for key in ("id", "title", "text")}
                   for row in case["candidates"]}
-    evidence = [candidates[key] for key in selected]
+    # Fix final presentation order while retaining the controller's open order in its trace.
+    delivered = [key for key in candidates if key in selected]
+    if set(delivered) != set(selected):
+        raise ValueError("Selected evidence is outside the prepared candidate pool")
+    evidence = [candidates[key] for key in delivered]
     messages = [
         {"role": "system", "content": (
             "Answer the question using only the supplied documents. Return the shortest answer "
@@ -34,7 +39,7 @@ def reader_input(case, selected):
         {"role": "user", "content": json.dumps({"question": case["question"],
                                                     "documents": evidence}, ensure_ascii=False)},
     ]
-    support = {"type": "array", "items": {"type": "string", "enum": selected}}
+    support = {"type": "array", "items": {"type": "string", "enum": delivered}}
     if not selected:
         support = {"type": "array", "items": {"type": "string"}, "maxItems": 0}
     schema = {"type": "object", "additionalProperties": False,
@@ -48,6 +53,7 @@ def reader_input(case, selected):
 def predict(protocol, output, *, preview=False):
     import jsonschema
 
+    total_start, total_cpu = time.perf_counter(), time.process_time()
     cases = read_rows(Path(protocol["cases"]))
     # Resolve the full finite matrix before constructing any provider client.
     selections = {(case["case_id"], arm): read_json(
@@ -55,15 +61,28 @@ def predict(protocol, output, *, preview=False):
         for case in cases for arm, config in protocol["arms"].items()}
     execution = BenchmarkRun(protocol["reader"], output)
     run = {"status": "RUNNING", "phase": "preview" if preview else "predict",
-           "planned": len(selections), "completed": 0, "known_failures": 0}
+           "planned": len(selections), "completed": 0, "known_failures": 0,
+           "fresh_reader_attempts": 0, "reused_reader_outputs": 0,
+           "known_failed_reader_calls": 0}
+    input_keys, call_costs = {}, {}
+    arm_order = list(protocol["arms"])
+    if "arm_order_seed" in protocol:
+        random.Random(protocol["arm_order_seed"]).shuffle(arm_order)  # noqa: S311
     write_json(output / "run.json", run)
     try:
-        for case in cases:
-            for arm in protocol["arms"]:
+        for case_index, case in enumerate(cases):
+            offset = case_index % len(arm_order) if "arm_order_seed" in protocol else 0
+            for arm in arm_order[offset:] + arm_order[:offset]:
                 start, cpu = time.perf_counter(), time.process_time()
                 selected = selections[case["case_id"], arm]["selected_ids"]
                 messages, schema = reader_input(case, selected)
                 key = f"musique/{arm}/{case['case_id']}/answer"
+                if protocol.get("reuse_identical_reader_inputs", False):
+                    # Literal equality only. The existing provider receipt cache is authoritative.
+                    identity = json.dumps([messages, schema], ensure_ascii=False, sort_keys=True)
+                    if identity not in input_keys:
+                        input_keys[identity] = f"musique/shared/{len(input_keys)}/answer"
+                    key = input_keys[identity]
                 if preview:
                     tokens = execution.input_tokens(messages, enable_thinking=True)
                     if tokens + execution.settings["model"]["max_tokens"] + 512 > 65536:
@@ -71,7 +90,10 @@ def predict(protocol, output, *, preview=False):
                     result = {"case_id": case["case_id"], "arm": arm, "input_tokens": tokens,
                               "selected_ids": selected, "model_requests": 0}
                 else:
+                    reused = (output / "http" / key / "response.json").exists()
+                    run["reused_reader_outputs" if reused else "fresh_reader_attempts"] += 1
                     result = {"case_id": case["case_id"], "arm": arm, "selected_ids": selected,
+                              "reader_call_key": key, "reused_reader_output": reused,
                               "answer": None, "failure": None}
                     try:
                         raw = execution.call(key, messages, structured=True,
@@ -84,8 +106,15 @@ def predict(protocol, output, *, preview=False):
                             raise
                         result["failure"] = {"type": type(error).__name__, "message": str(error)}
                         run["known_failures"] += 1
-                    result.update(wall_seconds=time.perf_counter() - start,
-                                  cpu_seconds=time.process_time() - cpu)
+                        run["known_failed_reader_calls"] += not reused
+                    observed_wall = time.perf_counter() - start
+                    observed_cpu = time.process_time() - cpu
+                    if key not in call_costs:
+                        call_costs[key] = {"wall_seconds": observed_wall,
+                                           "cpu_seconds": observed_cpu}
+                    result.update(**call_costs[key], observed_wall_seconds=observed_wall,
+                                  observed_cpu_seconds=observed_cpu,
+                                  timing_scope="first-call cost; replay measured separately")
                 write_json(output / "predictions" / arm / f"{case['case_id']}.json", result)
                 run["completed"] += 1
                 write_json(output / "run.json", run)
@@ -97,6 +126,10 @@ def predict(protocol, output, *, preview=False):
         raise
     finally:
         execution.close()
+        run.update(actual_wall_seconds=time.perf_counter() - total_start,
+                   actual_cpu_seconds=time.process_time() - total_cpu,
+                   unique_reader_inputs=len(input_keys))
+        write_json(output / "reader-call-costs.json", call_costs)
         write_json(output / "run.json", run)
 
 
