@@ -519,7 +519,7 @@ class BenchmarkRun:
             raise ValueError("EVIDENCE_POLICY_INVALID")
         if settings.get("evidence_selection_policy", "standard") not in {
             "standard", "value_v1", "structure_first_v1", "retrieved_first_v1",
-            "range_aggregate_v1",
+            "range_aggregate_v1", "task_first_v1", "range_aggregate_v2",
         }:
             raise ValueError("EVIDENCE_SELECTION_POLICY_INVALID")
         if settings.get("evidence_selection_policy", "standard") != "standard" \
@@ -2175,7 +2175,7 @@ class BenchmarkRun:
         def request_thinking(messages: list[dict[str, str]]) -> bool | None:
             schema = json.loads(messages[1]["content"]).get("response_schema", {})
             selection_only = (schema.get("properties", {}).get("answer") == {"type": "null"}
-                              or schema.get("title") == "evidence_value_v1")
+                              or schema.get("title") in {"evidence_value_v1", "reader_task_v1"})
             if selection_only and "select" in self.settings.get("stage_enable_thinking", {}):
                 return self.stage_thinking("select")
             return thinking
@@ -2211,6 +2211,11 @@ class BenchmarkRun:
                 if item["kind"] == "original_source" and not item.get("scope_only")][:1]
         elif self.settings.get("evidence_selection_policy") == "range_aggregate_v1":
             options["aggregate_ranges"] = True
+        elif self.settings.get("evidence_selection_policy") in {
+                "task_first_v1", "range_aggregate_v2"}:
+            options["classify_task"] = True
+            options["aggregate_ranges"] = (
+                self.settings["evidence_selection_policy"] == "range_aggregate_v2")
         return policy(
             question, date, memories, snapshot_id=snapshot_id, open_materials=reopen,
             messages_for=lambda items: reader_messages(question, date, items,

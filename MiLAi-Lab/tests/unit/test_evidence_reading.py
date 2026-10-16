@@ -25,15 +25,17 @@ from milai_lab.runners.edit_benchmarks import BenchmarkRun
 
 
 @pytest.mark.parametrize("max_calls,expected_complete", [(10, True), (3, False)])
+@pytest.mark.parametrize("classify_task", [False, True])
 def test_range_aggregation_covers_chunks_or_reports_the_unread_remainder(
-    tmp_path: Path, max_calls: int, expected_complete: bool,
+    tmp_path: Path, max_calls: int, expected_complete: bool, classify_task: bool,
 ) -> None:
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
         packs = large_packs(service)
         service.capture_user("future", "turn:0", "FUTURE_TOPIC_99 must not enter the saved pool.")
         run = execution_at(tmp_path)
-        run.settings["evidence_selection_policy"] = "range_aggregate_v1"
+        run.settings["evidence_selection_policy"] = (
+            "range_aggregate_v2" if classify_task else "range_aggregate_v1")
         run.client.config.max_calls = max_calls
         write_json(tmp_path / "pool.json", {"materials": packs})
         calls = []
@@ -43,6 +45,9 @@ def test_range_aggregation_covers_chunks_or_reports_the_unread_remainder(
             calls.append(key)
             assert run.input_tokens(messages) <= 6888
             assert "FUTURE_TOPIC_99" not in json.dumps(messages)
+            if payload.get("response_schema", {}).get("title") == "reader_task_v1":
+                assert "memories" not in payload and "candidates" not in payload
+                return json.dumps({"task": "range"})
             if payload.get("chunk_only"):
                 facts = []
                 for material in payload["memories"]:
@@ -321,8 +326,10 @@ def selection(indices: list[int], *, answer: str | None = None, gap: str | None 
 @pytest.mark.parametrize("selection_thinking", [None, False])
 @pytest.mark.parametrize("repeat_target", [False, True])
 @pytest.mark.parametrize("aggregate_ranges", [False, True])
+@pytest.mark.parametrize("classify_task", [False, True])
 def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
     tmp_path: Path, selection_thinking: bool | None, repeat_target: bool, aggregate_ranges: bool,
+    classify_task: bool,
 ) -> None:
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
@@ -330,6 +337,9 @@ def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
         run = execution_at(tmp_path)
         if aggregate_ranges:
             run.settings["evidence_selection_policy"] = "range_aggregate_v1"
+        if classify_task:
+            run.settings["evidence_selection_policy"] = (
+                "range_aggregate_v2" if aggregate_ranges else "task_first_v1")
         run.settings["stage_enable_thinking"] = {"reader": True}
         if selection_thinking is not None:
             run.settings["stage_enable_thinking"]["select"] = selection_thinking
@@ -339,10 +349,14 @@ def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
         def call(key: str, messages: Any, **kwargs: Any) -> str:
             assert run.input_tokens(messages) <= 6888
             payload = json.loads(messages[1]["content"])
+            if payload.get("response_schema", {}).get("title") == "reader_task_v1":
+                assert "memories" not in payload and "candidates" not in payload
+                assert kwargs["enable_thinking"] is (True if selection_thinking is None else False)
+                return json.dumps({"task": "lookup"})
             attempts.append(payload)
             assert payload["question"] == "TOPIC_0 only, retain any limits."
             if len(attempts) == 1:
-                assert payload["task"] is None
+                assert payload["task"] == ("lookup" if classify_task else None)
                 assert kwargs["enable_thinking"] is (True if selection_thinking is None else False)
                 assert payload["memories"] == [] and payload["candidates"]
                 assert payload["response_schema"]["properties"]["answer"] == {"type": "null"}
@@ -365,12 +379,14 @@ def test_lookup_selects_short_pack_and_stops_with_unread_candidates(
                                                service, items))
         assert answer == "Supported answer." and len(used) == 1 and len(attempts) == 2
         saved = read_json(tmp_path / "http/q/memory-view.json")
+        assert saved["steps"] == 2 + int(classify_task)
         assert [ref["item_index"] for ref in saved["resident_refs"]] == [0]
         assert saved["context_indices"] == ([0] if repeat_target else [])
         assert saved["delivery_plan"]["body_delivered"]
 
 
-def test_small_direct_pool_has_one_call_and_no_selection(tmp_path: Path) -> None:
+@pytest.mark.parametrize("policy", ["standard", "task_first_v1", "range_aggregate_v2"])
+def test_small_direct_pool_has_one_call_and_no_selection(tmp_path: Path, policy: str) -> None:
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
         service.capture_user("short", "turn:0", "The passcode is violet; only for today.")
@@ -379,6 +395,7 @@ def test_small_direct_pool_has_one_call_and_no_selection(tmp_path: Path) -> None
                                      native["source_materials"], [],
                                      source_scope=native["source_scope"])
         run = execution_at(tmp_path)
+        run.settings["evidence_selection_policy"] = policy
         calls = []
 
         def call(key: str, messages: Any, **kwargs: Any) -> str:

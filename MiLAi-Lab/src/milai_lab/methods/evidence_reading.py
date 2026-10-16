@@ -710,6 +710,7 @@ def read_question_pack(
     source_scope: dict[str, Any] | None = None,
     initial_indices: list[int] | None = None,
     aggregate_ranges: bool = False,
+    classify_task: bool = False,
 ) -> tuple[str, list[dict[str, Any]]]:
     """Select a budgeted pack; reopen more only for a stated evidence gap.
 
@@ -776,6 +777,8 @@ def read_question_pack(
 
     def response_schema(indices: list[int]) -> dict[str, Any]:
         selected_schema = copy.deepcopy(schema)
+        if "task_classification" in state:
+            selected_schema["properties"]["task"] = {"const": state["task"]}
         if not indices:
             selected_schema["properties"]["answer"] = {"type": "null"}
         return selected_schema
@@ -838,6 +841,20 @@ def read_question_pack(
                      resident_refs=[refs[i] for i in accepted], opened_indices=accepted,
                      excluded_indices=admission["excluded_indices"])
         save(state)
+
+    if classify_task and "task_classification" not in state and state["steps"] < max_calls - 1:
+        from milai_lab.methods.reader_task import task_request
+
+        messages, task_schema = task_request(question, date)
+        state["active_stage"] = "view/task"
+        save(state)
+        decision = parse_object(call("view/task", messages, task_schema),
+                                reject_duplicate_keys=True)
+        Draft202012Validator(task_schema).validate(decision)
+        state.update(task=decision["task"], task_classification=decision, steps=state["steps"] + 1)
+        save(state)
+    if aggregate_ranges and state.get("task_classification", {}).get("task") == "range":
+        return aggregate()
 
     # Partition only navigation, using the full empty-evidence wrapper's actual cost.
     pages = plan_delivery([{"index": i} for i in all_indices], lambda rows: fits(packet(
