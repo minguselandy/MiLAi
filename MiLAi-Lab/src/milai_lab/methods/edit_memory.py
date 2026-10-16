@@ -131,6 +131,7 @@ class EditMemory:
         interface_version: InterfaceVersion = "v1",
         features: EditFeatures | None = None,
         maintenance_mode: MaintenanceMode = "legacy",
+        writer_input: Literal["full", "dependency_region_v1"] = "full",
     ) -> None:
         if arm not in {"B0", "B1", "B2", "M"}:
             raise ValueError("EDIT_ARM_INVALID")
@@ -140,6 +141,14 @@ class EditMemory:
             raise ValueError("EDIT_INTERFACE_INVALID")
         self.interface_version = interface_version
         self.features = features or EditFeatures()
+        self.writer_input = writer_input
+        if writer_input not in {"full", "dependency_region_v1"}:
+            raise ValueError("WRITER_INPUT_INVALID")
+        if writer_input == "dependency_region_v1" and not (
+            self.features.dependency_updates and self.features.bound_references
+            and self.features.proposition_updates
+        ):
+            raise ValueError("LOCAL_WRITER_REQUIRES_BOUND_PROPOSITION_IMPACT")
         if self.features.dependency_updates and (arm != "M" or interface_version != "I2"):
             raise ValueError("DEPENDENCY_UPDATES_REQUIRE_M_I2")
         if self.features.dependency_groups and (not self.conditioned or interface_version != "I2"):

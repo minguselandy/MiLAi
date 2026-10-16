@@ -695,7 +695,7 @@ def prepare(
 ) -> dict[str, Any]:
     settings = entrypoint_settings(read_json(settings_path), "functional")
     allowed = {
-        "laya_impact",
+        "laya_impact", "writer_input",
         "profile",
         "host",
         "capacity",
@@ -2729,6 +2729,7 @@ def message(
                 memory_options["features"] = edit_features
                 memory_options["maintenance_recipe"] = settings.get("maintenance_recipe")
                 memory_options["maintenance_mode"] = settings.get("maintenance_mode", "legacy")
+                memory_options["writer_input"] = settings.get("writer_input", "full")
                 memory_options["query_time"] = query_time
                 memory_options["query_calendar_context"] = query_calendar_context
             memory = memory_class(

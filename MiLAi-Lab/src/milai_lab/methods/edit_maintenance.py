@@ -23,6 +23,7 @@ from milai_lab.memory.retrieval import merge_candidates
 from milai_lab.memory.working_set import record_candidate
 from milai_lab.methods.dependency_memory import impact_request, plan_regions, scoped_edit_schema
 from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.methods.writer_locality import local_writer_view
 
 MaintenanceRecipe = Literal["single_pass", "extract_then_edit"]
 ModelCall = Callable[[str, list[dict[str, str]], dict[str, Any]], dict[str, Any]]
@@ -649,6 +650,8 @@ def maintain_event(
         binding["result_maintenance_mode"] = delivery["result_maintenance"]["mode"]
     if method.maintenance_mode != "legacy":
         binding["maintenance_mode"] = method.maintenance_mode
+    if method.writer_input != "full":
+        binding["writer_input"] = method.writer_input
     if execution_refs:
         binding["execution_source_refs"] = execution_refs
     locating_ids = selected_record_ids if selected_record_ids is not None else candidate_record_ids
@@ -698,6 +701,8 @@ def maintain_event(
             **({"dependency_selection": copy.deepcopy(state["dependency_selection"]),
                 "dependency_regions": copy.deepcopy(state["dependency_regions"])}
                if "dependency_regions" in state else {}),
+            **({"writer_projection": copy.deepcopy(state["writer_projection"])}
+               if "writer_projection" in state else {}),
             **({"execution_source_refs": list(execution_refs)} if execution_refs else {}),
             **({"batches": copy.deepcopy(batches),
                 "source_batch_count": len(state["batches"])} if "batches" in state else {}),
@@ -869,6 +874,7 @@ def maintain_event(
         if state["phase"] == "edit":
             view = state["view"]
             packet, schema = view["packet"], view["schema"]
+            prior_context = state.get("prior_context", [])
             if method.features.dependency_updates and view["mapping"]["units"]:
                 if "dependency_selection" not in state:
                     request = impact_request(packet, view["mapping"], date)
@@ -879,14 +885,29 @@ def maintain_event(
                                  phase="edit")
                     save()
                 packet = {**packet, "dependency_regions": state["dependency_regions"]}
+                if method.writer_input == "dependency_region_v1":
+                    local = local_writer_view(packet, view["mapping"],
+                                              state["dependency_regions"], prior_context)
+                    packet, prior_context = local["packet"], local["prior_context"]
+                    schema = method.envelope_schema(
+                        allow_create=state.get("allow_create", True),
+                        mapping=local["schema_mapping"])
+                    state["writer_projection"] = local["selection"]
                 schema = scoped_edit_schema(schema, state["dependency_regions"])
             messages = method.edit_messages(
                 packet, date, allow_create=state.get("allow_create", True),
                 schema=schema,
                 change_candidates=(method.writer_changes(state["changes"], view["mapping"])
                                    if state["changes"] is not None else None),
-                prior_context=state.get("prior_context", []),
+                prior_context=prior_context,
             )
+            if method.writer_input == "dependency_region_v1":
+                messages[0]["content"] += (
+                    " Records marked partial_units expose only selected units and read-only "
+                    "boundary conditions. Omitted units still exist and are preserved by the "
+                    "service. Propose local operations only; never treat a slice as a whole "
+                    "record replacement. Current evidence may support new clauses even when "
+                    "no old unit is visible.")
             envelope = call("edit", _replay_context(messages, delivery), schema)
             if method.features.dependency_updates:
                 Draft202012Validator(schema).validate(envelope)

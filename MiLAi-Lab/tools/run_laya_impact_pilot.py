@@ -11,7 +11,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("config", type=Path)
     parser.add_argument("output", type=Path)
-    parser.add_argument("--arm", choices=("D0", "D1", "D2-Laya-0", "D2-Laya-CE"))
+    parser.add_argument("--arm", choices=("D0", "D1", "D2-Laya-0", "D2-Laya-CE", "D3", "D4"))
     parser.add_argument("--runtime-dir", type=Path, required=True)
     args = parser.parse_args()
     configure_runtime_directory(args.runtime_dir)

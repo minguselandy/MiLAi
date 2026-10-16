@@ -17,7 +17,7 @@ from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.runners.edit_benchmarks import READER_PROMPT, BenchmarkRun
 from milai_lab.runners.method_architecture_diagnostic import _copy_bank, _service, diagnostic_costs
 
-ARMS = ("D0", "D1", "D2-Laya-0", "D2-Laya-CE")
+ARMS = ("D0", "D1", "D2-Laya-0", "D2-Laya-CE", "D3", "D4")
 
 
 def prepare_comparison(config: dict[str, Any], root: Path) -> dict[str, Any]:
@@ -50,6 +50,10 @@ def comparison_settings(protocol: dict[str, Any], arm: str, case_id: str) -> dic
     settings["edit_features"]["dependency_updates"] = arm != "D0"
     if arm.startswith("D2-"):
         settings["laya_impact"] = protocol["config"]["laya"][arm]
+    if arm in {"D3", "D4"}:
+        origin = protocol["config"]["selection_runs"][arm]
+        settings.update(writer_input="dependency_region_v1", impact_replay={
+            **origin, "root": str(Path(origin["root"]) / case_id)})
     return settings
 
 
@@ -91,6 +95,21 @@ def comparison_costs(root: Path) -> dict[str, Any]:
     costs["typed_requests_without_response"] = [
         str(path.relative_to(root)) for path in (root / "typed-http").rglob("request.json")
         if not path.with_name("response.json").exists()]
+    reused = []
+    for path in (root / "reused-impact").rglob("selection.json"):
+        reuse = read_json(path)
+        response = read_json(Path(reuse["source"]) / "response.json")
+        usage = (json.loads(response["response_text"]).get("usage", {})
+                 if reuse["provider"] == "laya" else response.get("usage", {}))
+        tokens = (usage.get("input_tokens", 0) + usage.get("output_tokens", 0)
+                  if reuse["provider"] == "laya" and "input_tokens" in usage
+                  else usage.get("total_tokens"))
+        reused.append({"source": reuse["source"], "provider": reuse["provider"],
+                       "original_compute_tokens": tokens, "new_model_calls": 0})
+    costs["reused_controller"] = reused
+    costs["standalone_cost_note"] = (
+        "Add the referenced original controller work when comparing a standalone local "
+        "method; it was paid once, not repeated or claimed free.")
     timings = list((root / "call-timings").rglob("*.json"))
     costs["call_wall_seconds"] = sum(read_json(p)["wall_seconds"] for p in timings)
     return costs

@@ -131,6 +131,7 @@ class FunctionalEditMemory(FunctionalMemory):
         features: EditFeatures | None = None,
         maintenance_recipe: MaintenanceRecipe | None = None,
         maintenance_mode: MaintenanceMode = "legacy",
+        writer_input: Literal["full", "dependency_region_v1"] = "full",
         query_time: str | None = None,
         query_calendar_context: str | None = None,
         evidence_policy: Literal["legacy", "question_pack_v1"] = "legacy",
@@ -151,7 +152,7 @@ class FunctionalEditMemory(FunctionalMemory):
         else:
             self.writer = EditMemory(
                 self.service, arm, interface_version=interface_version, features=features,
-                maintenance_mode=maintenance_mode,
+                maintenance_mode=maintenance_mode, writer_input=writer_input,
             )
         self.features = self.writer.features
         self.interface_version = interface_version
@@ -171,6 +172,8 @@ class FunctionalEditMemory(FunctionalMemory):
             self.policy["maintenance_recipe"] = maintenance_recipe
         if maintenance_mode != "legacy":
             self.policy["maintenance_mode"] = maintenance_mode
+        if writer_input != "full":
+            self.policy["writer_input"] = writer_input
         self.conditioned = arm in {"B2", "M"}
         self.local = arm in {"B1", "M"}
         self.memory_method = next(name for name, value in FUNCTIONAL_ARMS.items() if value == arm)

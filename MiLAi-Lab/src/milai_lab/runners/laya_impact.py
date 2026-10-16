@@ -98,3 +98,34 @@ def impact_model_call(original: ModelCall, settings: dict[str, Any], *,
     if config is None:
         return original
     return MeteredLayaImpactClient(config, budget, root, admit).wrap(original)
+
+
+def replay_impact_selection(stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
+                            *, config: dict[str, Any], http_folder: str, stage_path: str,
+                            output: Path) -> dict[str, Any]:
+    """D3/D4 reuse the source arm's actual choice; no second controller computation."""
+    from milai_lab.methods.edit_maintenance import parse_object
+
+    source = Path(config["root"])
+    selection: dict[str, Any]
+    if config["provider"] == "laya":
+        folder = source / "typed-http" / http_folder / quote(stage, safe="")
+        request = read_json(folder / "request.json")
+        if {k: request[k] for k in ("state", "questions")} != impact_payload(messages, schema):
+            raise ValueError("Replayed Impact has different event/candidate inputs")
+        selection = read_json(folder / "selection.json")
+    elif config["provider"] == "generative":
+        folder = source / "http" / http_folder / stage_path
+        if read_json(folder / "request.json")["messages"] != messages:
+            raise ValueError("Replayed Impact has different event/candidate inputs")
+        response = read_json(folder / "response.json")
+        choice = response["choices"][0]
+        if choice["finish_reason"] != "stop":
+            raise ValueError("Replayed Impact was not a completed choice")
+        selection = parse_object(choice["message"]["content"], reject_duplicate_keys=True)
+    else:
+        raise ValueError("Unknown Impact replay provider")
+    write_json(output / "reused-impact" / http_folder / stage_path / "selection.json", {
+        "source": str(folder), "provider": config["provider"],
+        "selection": selection, "new_model_calls": 0})
+    return selection

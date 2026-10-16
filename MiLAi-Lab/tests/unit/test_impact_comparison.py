@@ -82,3 +82,46 @@ def test_state_diagnostic_never_copies_original_or_support_text():
     assert "ORIGINAL_SECRET" not in json.dumps(messages)
     assert "SUPPORT_SECRET" not in json.dumps(messages)
     assert records == before
+
+
+def test_local_arm_reuses_the_identical_choice_without_another_provider_call(tmp_path):
+    from urllib.parse import quote
+
+    import pytest
+
+    from milai_lab.methods.laya_impact import impact_payload
+    from milai_lab.runners.impact_comparison import comparison_costs
+    from milai_lab.runners.laya_impact import replay_impact_selection
+
+    schema = {"properties": {"roots": {"items": {"enum": ["u1", "u2"]}}}}
+    messages = [{"role": "user", "content": json.dumps({"observed_date": "2032-06-02",
+                "delivery": {"current_event": "A changes; B stays"}})}]
+    selection = {"roots": ["u1"], "preserve": ["u2"]}
+    stage, http_folder, stage_path = "impact:work-0", "maintenance/update/batch-0", "impact/work-0"
+    for provider in ("generative", "laya"):
+        source = tmp_path / provider / "source"
+        output = tmp_path / provider / "local"
+        folder = (source / "typed-http" / http_folder / quote(stage, safe="")
+                  if provider == "laya" else source / "http" / http_folder / stage_path)
+        if provider == "laya":
+            write_json(folder / "request.json", {**impact_payload(messages, schema), "model": "ce"})
+            write_json(folder / "selection.json", selection)
+            write_json(folder / "response.json", {"response_text": json.dumps({
+                "usage": {"input_tokens": 77, "output_tokens": 0}})})
+        else:
+            write_json(folder / "request.json", {"messages": messages})
+            write_json(folder / "response.json", {"choices": [{"finish_reason": "stop",
+                "message": {"content": json.dumps(selection)}}], "usage": {"total_tokens": 88}})
+        config = {"root": str(source), "provider": provider}
+        selected = replay_impact_selection(stage, messages, schema, config=config,
+                    http_folder=http_folder, stage_path=stage_path, output=output)
+        assert selected == selection
+        assert not list(output.rglob("request.json"))
+        costs = comparison_costs(output)
+        assert costs["reused_controller"][0]["original_compute_tokens"] == (
+            77 if provider == "laya" else 88)
+        changed = [{"role": "user", "content": json.dumps({"observed_date": "2032-06-03",
+                    "delivery": {"current_event": "B changes"}})}]
+        with pytest.raises(ValueError, match="different event/candidate"):
+            replay_impact_selection(stage, changed, schema, config=config,
+                http_folder=http_folder, stage_path=stage_path, output=output)
