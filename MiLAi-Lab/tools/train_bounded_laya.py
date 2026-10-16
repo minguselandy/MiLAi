@@ -63,18 +63,23 @@ def main() -> None:
            "base_checkpoint": str(args.checkpoint.resolve()), "seed": 0,
            "physical_gpus": [2, 3], "device": "cuda", "torch_version": torch.__version__,
            "cuda_version": torch.version.cuda, "precision": "float32",
+           "reference_compile": False,
            "epochs": args.epochs, "batch_size": 4, "gradient_accumulation": 4,
            "max_len": 4096, "head_max_len": 384, "train_states": len(train),
            "dev_states": len(dev), "encoder_lr": 2.5e-5, "head_lr": 1e-4,
            "freeze_encoder": False, "objective": "event-and-family-normalized soft-CE",
            "calibration_test_loaded": False, "http_requests": 0,
            "optimizer_updates": 0, "train_sequence_rows": 0, "train_input_tokens": 0,
-           "train_batch_forwards": 0, "train_device_forwards": 0}
+           "train_batch_forwards": 0, "train_device_forwards": 0,
+           "train_batch_attempts": 0, "train_offered_rows": 0, "train_offered_tokens": 0}
     write_json(args.output / "run.json", run)
     decision = None
     try:
         decision = NativeDecision(args.checkpoint, 4096, 384)
         model, tok = decision.model, decision.tokenizer
+        # ModernBERT's compiled MLP cannot be traced concurrently by DataParallel
+        # replicas when the final batch changes shape. Use its ordinary MLP path.
+        model.encoder.config.reference_compile = False
         lengths = {split: audit(rows, tok, 4096, 384) for split, rows in (
             ("train", train), ("dev", dev))}
         write_json(args.output / "lengths.json", lengths)
@@ -131,6 +136,9 @@ def main() -> None:
                 optimizer.zero_grad(set_to_none=True)
                 for indices in window:
                     batch = collate_items([[encoded[i]] for i in indices], tok.pad_token_id)
+                    run["train_batch_attempts"] += 1
+                    run["train_offered_rows"] += len(indices)
+                    run["train_offered_tokens"] += int(batch["attention_mask"].sum())
                     logits = _forward(parallel, batch, decision.device, False, False)
                     mask = batch["marker_mask"].to(decision.device)
                     target = batch["target"].to(decision.device)
@@ -175,7 +183,9 @@ def main() -> None:
         measures = {"wall_seconds": time.perf_counter() - started,
                     "cpu_seconds": time.process_time() - cpu, "runs": 1,
                     **{k: run[k] for k in ("train_sequence_rows", "train_input_tokens",
-                                           "train_batch_forwards", "train_device_forwards")},
+                                           "train_batch_forwards", "train_device_forwards",
+                                           "train_batch_attempts", "train_offered_rows",
+                                           "train_offered_tokens")},
                     **{f"dev_{k}": v for k, v in (
                         decision.counters.items() if decision is not None else [])}}
         write_json(args.output / "compute.json", {**measures,

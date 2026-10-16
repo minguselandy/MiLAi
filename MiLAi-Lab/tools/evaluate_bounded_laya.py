@@ -85,6 +85,7 @@ class NativeDecision:
 
 def score_predictions(rows: list[dict[str, Any]], predictions: list[dict[str, Any]]) -> dict:
     counts: Counter[str] = Counter()
+    constant_stops: Counter[str] = Counter()
     strata: dict[str, Counter[str]] = {}
     family: dict[str, list[int]] = {}
     for row, predicted in zip(rows, predictions, strict=True):
@@ -94,6 +95,8 @@ def score_predictions(rows: list[dict[str, Any]], predictions: list[dict[str, An
             continue
         choice = predicted["choice"]
         accepted = int(target.get(choice, 0) > 0)
+        for stop in ("stop_sufficient", "stop_exhausted"):
+            constant_stops[stop] += int(target.get(stop, 0) > 0)
         counts["labelled"] += 1
         counts["accepted"] += accepted
         status = row["metadata"]["label_status"]
@@ -112,6 +115,7 @@ def score_predictions(rows: list[dict[str, Any]], predictions: list[dict[str, An
                       if k.startswith("open_")), "stop_exhausted")
         counts["first_remaining_candidate_accepted"] += int(target.get(first, 0) > 0)
     return {"counts": dict(counts), "strata": {k: dict(v) for k, v in strata.items()},
+            "constant_stop_reference": dict(constant_stops),
             "family_macro_acceptance": sum(sum(v) / len(v) for v in family.values()) / len(family),
             "families": len(family),
             "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"}

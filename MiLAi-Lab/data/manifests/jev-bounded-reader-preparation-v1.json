@@ -401,5 +401,62 @@
     "Reference-proof labels are not exhaustive semantic equivalence judgements",
     "CPU zero-shot is prefix diagnosis, not Reader QA or a deployment recommendation",
     "CE, supervised reranker, STOP/complement ablations, unexposed LME and MemOps/MEME remain"
-  ]
+  ],
+  "actual_family_isolation": {
+    "source_counts": {
+      "train": 25269,
+      "dev": 1149,
+      "calibration": 1221,
+      "test": 1763
+    },
+    "cross_split_family_question_seed_target": {
+      "family": 0,
+      "question": 0,
+      "seed": 0,
+      "target": 0
+    },
+    "target_as_cross_split_distractor": 0,
+    "shared_nontarget_backgrounds": 12574,
+    "literal_only": true,
+    "semantic_duplicates_audited": false,
+    "sha_validation": false,
+    "wall_seconds": 3.2407587356865406,
+    "cpu_seconds": 3.240672292,
+    "model_calls": 0
+  },
+  "gpu_first_attempt": {
+    "review": {
+      "exec_session": 65517,
+      "exit_code": 1,
+      "source_version": "b57c29ef",
+      "status": "FAILED",
+      "successful_optimizer_updates": 29,
+      "failed_batch_input_rows": 3,
+      "failed_batch_offered_tokens": 3501,
+      "failed_batch_forward_completion": "unknown partial; excluded from successful forward counters",
+      "timing_includes_failure": true,
+      "cause": "ModernBERT default torch.compile with threaded DataParallel and an uneven final batch",
+      "first_cache_moved_to": "/cra/memory/mx_memory/.cache/triton-first-gpu-run"
+    },
+    "compute": {
+      "wall_seconds": 132.176816935651,
+      "cpu_seconds": 164.009086748,
+      "runs": 1,
+      "train_sequence_rows": 464,
+      "train_input_tokens": 574448,
+      "train_batch_forwards": 116,
+      "train_device_forwards": 232,
+      "dev_forwards": 203,
+      "dev_sequence_rows": 203,
+      "dev_input_tokens": 262964,
+      "dev_state_tokenizations": 203,
+      "dev_state_tokens": 229621,
+      "peak_rss_kib": 3728840,
+      "peak_cuda_allocated_bytes": [
+        10876939776,
+        6905782272
+      ],
+      "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    }
+  }
 }
