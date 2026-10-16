@@ -21,7 +21,6 @@ from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.methods.bounded_evidence import select_bounded
 from ordinary_reader_reranker import OrdinaryDecision
-from prepare_musique_decisions import ranked_pool
 
 
 def read_rows(path: Path) -> list[dict[str, Any]]:
@@ -29,6 +28,8 @@ def read_rows(path: Path) -> list[dict[str, Any]]:
 
 
 def prepare(decisions: Path, families: Path, output: Path) -> dict:
+    from prepare_musique_decisions import ranked_pool
+
     output.mkdir(parents=True, exist_ok=False)
     initial = {row["metadata"]["row"]: row for row in read_rows(decisions)
                if not row["state"]["read_evidence"]}
