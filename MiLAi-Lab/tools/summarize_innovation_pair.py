@@ -20,6 +20,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("run", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--state-review", type=Path)
     args = parser.parse_args()
     driver = read(args.run / "driver.json")
     settings = read(args.run / "plain.json")["entrypoints"]["benchmark"]
@@ -93,6 +94,17 @@ def main() -> None:
                     "or selective rejudging.",
         "official_benchmark_claim": False, "parameter_training_completed": False,
     }
+    if args.state_review is not None:
+        review = read(args.state_review)
+        summary["source_reviews"].append(args.state_review.name)
+        summary["author_transition_joint"] = review["counts"]
+        summary["state_result"] = (
+            "Structured states and literal bindings author-reviewed; see attached coverage. "
+            "Joint transition count bounds reflect ambiguous labels, not confidence "
+            "intervals or full-history success. Inherited omissions and absent historical "
+            "states remain. Source identities/ranges valid does not mean semantic support. "
+            "This post-hoc author review is not independent blind confirmation."
+        )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(summary, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps({"status": summary["status"], "receipt_totals": receipts,

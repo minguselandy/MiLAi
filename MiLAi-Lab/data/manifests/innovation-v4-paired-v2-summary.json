@@ -223,11 +223,34 @@
   },
   "source_reviews": [
     "innovation-v4-paired-v2-plain-review.json",
-    "innovation-v4-paired-v2-delta-review.json"
+    "innovation-v4-paired-v2-delta-review.json",
+    "innovation-v4-paired-v2-joint-review.json"
   ],
   "source_author_issues": "Weekend/date ambiguity and catalog independence versus uptime are retained in both methods; original first labels unchanged.",
-  "state_result": "Mixed positives and failures; raw-source QA does not prove state success. Full structured source/scope joint audit remains pending.",
+  "state_result": "Structured states and literal bindings author-reviewed; see attached coverage. Joint transition count bounds reflect ambiguous labels, not confidence intervals or full-history success. Inherited omissions and absent historical states remain. Source identities/ranges valid does not mean semantic support. This post-hoc author review is not independent blind confirmation.",
   "decision": "Current delta is not a demonstrated quality-cost advantage: prediction tokens increase and joint state correctness is unproven. Continue query-local allocation and matched learning; no failed-call replay or selective rejudging.",
   "official_benchmark_claim": false,
-  "parameter_training_completed": false
+  "parameter_training_completed": false,
+  "author_transition_joint": {
+    "plain": {
+      "pass": 11,
+      "fail": 8,
+      "ambiguous": 5,
+      "opportunities": 24,
+      "ambiguity_bounds": [
+        11,
+        16
+      ]
+    },
+    "delta": {
+      "pass": 2,
+      "fail": 18,
+      "ambiguous": 4,
+      "opportunities": 24,
+      "ambiguity_bounds": [
+        2,
+        6
+      ]
+    }
+  }
 }

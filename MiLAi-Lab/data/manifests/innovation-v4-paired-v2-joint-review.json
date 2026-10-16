@@ -1,0 +1,971 @@
+{
+  "status": "AUTHOR_STRUCTURED_REVIEW_COMPLETED",
+  "run": "artifacts/innovation-v4/paired-v2",
+  "run_source_version": "08de761d",
+  "review_packet_tool": "tools/inspect_innovation_pair_states.py",
+  "coverage": {
+    "chains": 6,
+    "post_arrival_states": 48,
+    "all_units_relations_support_groups_and_literal_bindings_reviewed": true,
+    "all_sources_read": 24,
+    "semantic_judgment": "author interpretation, not automated entailment check",
+    "model_calls": 0,
+    "bank_writes": 0
+  },
+  "rubric": {
+    "target_event_meaning": "All relevant incoming meaning; initial formation includes all supplied facts. Missing updates/noops/unsupported additions fail.",
+    "prior_non_target_preservation": "Preservation of actual before state outside the event target. At initial formation this is vacuously true. Inherited omissions are not new damage.",
+    "current_state_scope_time": "Whole current state, including retained metadata and explicit historical/future meanings, must not introduce unsupported applicability or erase stated temporal distinctions.",
+    "unit_source_support_and_attribution": "Literal supporting ranges and the current unit attribution, not merely cumulative record-level source access. Ambiguous observed/reported interpretation is left null.",
+    "transition_joint": "Conjunction of the four dimensions. These are post-hoc exploratory transition labels, not full-history accuracy, an official score or an independent blind metric.",
+    "ambiguity_bounds": "Count range with all nulls treated as failure versus success; NOT confidence intervals.",
+    "whole_prefix_limit": "A locally successful transition does not repair inherited omission, underspecified clauses or never-formed historical states. In particular Harbor battery, Studio northern-object ellipsis/missed exception, and Grant unapproved proposal remain separate full-history limitations."
+  },
+  "counts": {
+    "plain": {
+      "pass": 11,
+      "fail": 8,
+      "ambiguous": 5,
+      "opportunities": 24,
+      "ambiguity_bounds": [
+        11,
+        16
+      ]
+    },
+    "delta": {
+      "pass": 2,
+      "fail": 18,
+      "ambiguous": 4,
+      "opportunities": 24,
+      "ambiguity_bounds": [
+        2,
+        6
+      ]
+    }
+  },
+  "events": [
+    {
+      "arm": "plain",
+      "owner": "innovation-harbor",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S0: U0 general rule, U1 credentials/training and U2 independent battery all have literal S0 support.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-harbor.json",
+      "active_record_revisions": {
+        "42660acf-f449-505a-b130-98bea1446b6f": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-harbor",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S1: U1 cancellation/voucher/training is supported by S1; U0 and U2 remain identical. The new compound status starts Apr2; earlier revision is retained.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-harbor.json",
+      "active_record_revisions": {
+        "42660acf-f449-505a-b130-98bea1446b6f": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-harbor",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": false,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S2: rejected EDIT_TIME_SOURCE_NOT_SELECTED leaves U1 voucher-valid from S1. New uncertainty is absent; this is not a successful no-op. Prior literal attribution remains identifiable.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-harbor.json",
+      "active_record_revisions": {
+        "42660acf-f449-505a-b130-98bea1446b6f": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-harbor",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": false
+      },
+      "transition_joint": false,
+      "observation": "S3: U1 and U3 recover voucher validity and distinguish day/night. U0/U2 stay. U1 also repeats old card cancellation and completed day training but now cites only S3, which does not state those facts. Older record-level sources remain available, but current unit-level support is incomplete.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-harbor.json",
+      "active_record_revisions": {
+        "42660acf-f449-505a-b130-98bea1446b6f": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-orchid",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S0: both roles are retained with literal S0 support.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-orchid.json",
+      "active_record_revisions": {
+        "2e178458-3ceb-5aea-ad10-5464617a42ee": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-orchid",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": false,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S1: length output leaves old state, missing future Qin assignment and explicit pre-Apr6 Gu boundary; key-holder remains intact.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-orchid.json",
+      "active_record_revisions": {
+        "2e178458-3ceb-5aea-ad10-5464617a42ee": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-orchid",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": null,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": null,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": null,
+      "observation": "S2: U0 names the Apr6 handover, Gu before it and Qin not taking over early. Positive post-boundary assignment is implicit and current training participation is omitted. Coverage of the complete incoming meaning is ambiguous; S2/S0 support the retained text.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-orchid.json",
+      "active_record_revisions": {
+        "2e178458-3ceb-5aea-ad10-5464617a42ee": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-orchid",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": null,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": null,
+      "observation": "S3: U1 explicitly corrects the key-holder from project start, supported by S3. U0 is unchanged; the prior handover ambiguity remains.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-orchid.json",
+      "active_record_revisions": {
+        "2e178458-3ceb-5aea-ad10-5464617a42ee": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-studio",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": null,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": null,
+      "observation": "S0: source/metadata are sound, but northern U1 says only normal lending and omits camera. Whole-record context suggests the object; independently selected proposition is underspecified.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-studio.json",
+      "active_record_revisions": {
+        "8f251ca8-61bc-502b-9088-553e6ff1520a": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-studio",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": false,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S1: length leaves no temporary volunteer exception. Original rules survive unchanged.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-studio.json",
+      "active_record_revisions": {
+        "8f251ca8-61bc-502b-9088-553e6ff1520a": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-studio",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S2: unchanged default state is correct for current cancellation. The exception was never formed, so this is not a successful withdrawal mechanism. Northern ellipsis remains a whole-prefix coverage limitation.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-studio.json",
+      "active_record_revisions": {
+        "8f251ca8-61bc-502b-9088-553e6ff1520a": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-studio",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S3: new silver-sticker U3 is directly supported; all lending units are unchanged. Northern ellipsis remains a whole-prefix limitation.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-studio.json",
+      "active_record_revisions": {
+        "8f251ca8-61bc-502b-9088-553e6ff1520a": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-grant",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S0: both totals and the shared not-per-member qualifier are retained and bound to S0.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-grant.json",
+      "active_record_revisions": {
+        "0ece91e4-f9a2-5c3c-abe4-1694da9c5409": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-grant",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": false,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S1: no_change preserves totals but omits the newly reported unapproved 900 proposal.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-grant.json",
+      "active_record_revisions": {
+        "0ece91e4-f9a2-5c3c-abe4-1694da9c5409": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-grant",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S2: separate U0/U3 preserve 600 before Apr8 and 750 afterward without a contradictory whole-unit start limit; Moss and quantity meaning remain unchanged. Both updated clauses cite S2.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-grant.json",
+      "active_record_revisions": {
+        "0ece91e4-f9a2-5c3c-abe4-1694da9c5409": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-grant",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S3: adds five Moss members from S3, leaves all grant clauses intact, and does not multiply amounts or invent a permanent membership rule.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-grant.json",
+      "active_record_revisions": {
+        "0ece91e4-f9a2-5c3c-abe4-1694da9c5409": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-catalog",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S0: both editors and confirmed dark-blue cover have original S0 support.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-catalog.json",
+      "active_record_revisions": {
+        "b6c23eb0-bef0-5350-ba23-dda514663a43": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-catalog",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S1: U0 editor changes correctly with S1 support, but current text/metadata omit from-start correction versus later reassignment. Old stored revision alone does not encode that distinction.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-catalog.json",
+      "active_record_revisions": {
+        "b6c23eb0-bef0-5350-ba23-dda514663a43": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-catalog",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S2: U1 text distinguishes old completed work and future new work, but effective_from Apr9 gates the entire clause; actual Reader projection marks it before_explicit_start. Earlier correction omission remains.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-catalog.json",
+      "active_record_revisions": {
+        "b6c23eb0-bef0-5350-ba23-dda514663a43": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-catalog",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S3: qualified unconfirmed rumor is added with S3 support and dark blue retained. Inherited temporal/correction defects remain.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-catalog.json",
+      "active_record_revisions": {
+        "b6c23eb0-bef0-5350-ba23-dda514663a43": 4
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-shared",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S0: requirements, reported equipment status and catalog independence are retained. Neither graph absence nor missing independent catalog-uptime assertion is an error.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-shared.json",
+      "active_record_revisions": {
+        "33ea8692-d88f-58b3-8774-ab5fad98ce79": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-shared",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S1: literal cooling failure/building ventilation update; unaffected rules and catalog independence are unchanged.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-shared.json",
+      "active_record_revisions": {
+        "33ea8692-d88f-58b3-8774-ab5fad98ce79": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-shared",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": null
+      },
+      "transition_joint": null,
+      "observation": "S2: scope and physical statuses match S2/S1, but assertion kind switches reported to observed with only user sources. Semantic-kind interpretation is not sufficiently explicit to assign a clean pass/fail; preserve ambiguity.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-shared.json",
+      "active_record_revisions": {
+        "33ea8692-d88f-58b3-8774-ab5fad98ce79": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "plain",
+      "owner": "innovation-shared",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": null
+      },
+      "transition_joint": null,
+      "observation": "S3: separate West scanner/unknown requirements and state are supported by S3. East state unchanged; earlier observed-versus-reported attribution ambiguity remains.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/plain/innovation-shared.json",
+      "active_record_revisions": {
+        "33ea8692-d88f-58b3-8774-ab5fad98ce79": 3,
+        "8b385063-7e0e-509c-9f04-b07ec5cf4fef": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 2
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-harbor",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": false,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S0: four personal units and a correct OR-of-AND support group are formed with S0 support; independent battery and general population rule are omitted.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-harbor.json",
+      "active_record_revisions": {
+        "e600bf5f-d61d-5f59-85d3-3180b515460d": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-harbor",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S1: cancellation changes U1; other existing units remain. Unsupported effective_until Apr3 is added. The stale cancellation-as-positive route is flagged pending, not silently counted as a validated new graph.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-harbor.json",
+      "active_record_revisions": {
+        "e600bf5f-d61d-5f59-85d3-3180b515460d": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-harbor",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S2: voucher and eligibility uncertainty are represented. Old unsupported cancellation expiry remains; actual question projection labels cancellation expired. Routes remain pending reinterpretation.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-harbor.json",
+      "active_record_revisions": {
+        "e600bf5f-d61d-5f59-85d3-3180b515460d": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-harbor",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": null
+      },
+      "transition_joint": false,
+      "observation": "S3: day/night outcome and valid voucher return; battery/general-rule omissions and bad expiry persist. Claim that verification is a subsequent state change rather than correction is stronger than the source clearly establishes. Old support routes still carry changed premise/target flags.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-harbor.json",
+      "active_record_revisions": {
+        "e600bf5f-d61d-5f59-85d3-3180b515460d": 4
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-orchid",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S0: two roles, source attribution and named scopes are supported.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-orchid.json",
+      "active_record_revisions": {
+        "42515d44-651c-55c7-bebf-adfe1f0b2817": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-orchid",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": false,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S1: future Qin is saved but replaces still-valid pre-Apr6 Gu entirely; source explicitly required both periods. Key-holder is preserved.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-orchid.json",
+      "active_record_revisions": {
+        "42515d44-651c-55c7-bebf-adfe1f0b2817": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-orchid",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S2: text restores prior Gu, future Qin and training-only status with S2/S1 support. Whole-unit effective_from Apr6 now covers its before-Apr6 facts too; actual projection says before_explicit_start.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-orchid.json",
+      "active_record_revisions": {
+        "42515d44-651c-55c7-bebf-adfe1f0b2817": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-orchid",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S3: from-start key correction is explicit and supported. Window clause unchanged with inherited contradictory whole-unit start limit.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-orchid.json",
+      "active_record_revisions": {
+        "42515d44-651c-55c7-bebf-adfe1f0b2817": 4
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-studio",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S0: all rule text exists, but applicability scope adds report date Apr1 to lasting rules without source support for that date restriction. Literal source bindings are correct.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-studio.json",
+      "active_record_revisions": {
+        "053db1fa-f541-5aae-8d0c-07b73ce9c00a": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-studio",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S1: actual separate volunteer exception has correct Apr7..Apr8 bounds and S1 source. General record remains with unsupported report-date applicability scope.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-studio.json",
+      "active_record_revisions": {
+        "053db1fa-f541-5aae-8d0c-07b73ce9c00a": 1,
+        "cd296786-b461-53bf-8de5-23fda755023b": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 2
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-studio",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S2: the actually formed exception record is retracted and its prior revision retained; unaffected general record remains. Its prior scope defect is not repaired.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-studio.json",
+      "active_record_revisions": {
+        "053db1fa-f541-5aae-8d0c-07b73ce9c00a": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-studio",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": false,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S3: empty proposal omits new silver sticker. Existing rules/retraction remain, including the unsupported original date scope.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-studio.json",
+      "active_record_revisions": {
+        "053db1fa-f541-5aae-8d0c-07b73ce9c00a": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-grant",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": true,
+      "observation": "S0: both totals and explicit not-per-member interpretation are supported, with overall quantity scope.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-grant.json",
+      "active_record_revisions": {
+        "d8980828-2e10-5490-a917-b529c7ea7cc0": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-grant",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": null,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": null,
+      "observation": "S1: proposed 900 is saved and confirmed 600 retained. Explicit not-approved qualifier is absent; whether proposal wording alone preserves the required status is ambiguous.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-grant.json",
+      "active_record_revisions": {
+        "d8980828-2e10-5490-a917-b529c7ea7cc0": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-grant",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S2: 600-before/750-after wording has literal S2/S0 support, but whole-unit effective_from Apr8 contradicts the before-period part; projection says before_explicit_start.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-grant.json",
+      "active_record_revisions": {
+        "d8980828-2e10-5490-a917-b529c7ea7cc0": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-grant",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": false,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": false
+      },
+      "transition_joint": false,
+      "observation": "S3: duplicates membership fact into two records and generalizes one unchanged decision into membership count never affecting grant decisions. S3/S0 do not support that permanent rule. Old grant metadata defect remains.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-grant.json",
+      "active_record_revisions": {
+        "4e4b30e4-917b-5f27-8b16-f2dd05f4dc7b": 1,
+        "d8980828-2e10-5490-a917-b529c7ea7cc0": 4
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 2
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-catalog",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S0: core editor/color text is supported but per_member quantity metadata is unsupported for all three attributes.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-catalog.json",
+      "active_record_revisions": {
+        "e730e2f7-3f55-57b1-8fba-2898d3716d2f": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-catalog",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S1: from-start correction is explicit, unlike plain; unsupported per_member metadata persists.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-catalog.json",
+      "active_record_revisions": {
+        "e730e2f7-3f55-57b1-8fba-2898d3716d2f": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-catalog",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S2: past and future work are both in text, but effective_from Apr9 applies to the whole unit; actual projection says before_explicit_start. Other attributes retain unsupported per_member metadata.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-catalog.json",
+      "active_record_revisions": {
+        "e730e2f7-3f55-57b1-8fba-2898d3716d2f": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-catalog",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": false,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": false,
+        "unit_source_support_and_attribution": true
+      },
+      "transition_joint": false,
+      "observation": "S3: no unconfirmed-cover rumor is saved. Existing U1 only has evidence metadata changed; its S2 citation still supports text, but inherited time/quantity defects remain.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-catalog.json",
+      "active_record_revisions": {
+        "e730e2f7-3f55-57b1-8fba-2898d3716d2f": 4
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-shared",
+      "session": 0,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": null
+      },
+      "transition_joint": null,
+      "observation": "S0: text covers rules/status/catalog independence. Status uses observed with only a user source; attribution interpretation remains ambiguous. No graph is required just to pass factual coverage.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-shared.json",
+      "active_record_revisions": {
+        "2f27d56a-8a83-5aab-b89f-9d0471e805a1": 1
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-shared",
+      "session": 1,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": null
+      },
+      "transition_joint": null,
+      "observation": "S1: cooling/ventilation wording and scope match S1; observed attribution ambiguity persists.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-shared.json",
+      "active_record_revisions": {
+        "2f27d56a-8a83-5aab-b89f-9d0471e805a1": 2
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-shared",
+      "session": 2,
+      "dimensions": {
+        "target_event_meaning": true,
+        "prior_non_target_preservation": true,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": null
+      },
+      "transition_joint": null,
+      "observation": "S2: East-only ventilation failure and archive ventilation retained correctly with S2 support; observed attribution ambiguity persists.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-shared.json",
+      "active_record_revisions": {
+        "2f27d56a-8a83-5aab-b89f-9d0471e805a1": 3
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    },
+    {
+      "arm": "delta",
+      "owner": "innovation-shared",
+      "session": 3,
+      "dimensions": {
+        "target_event_meaning": false,
+        "prior_non_target_preservation": false,
+        "current_state_scope_time": true,
+        "unit_source_support_and_attribution": false
+      },
+      "transition_joint": false,
+      "observation": "S3: West facts omitted, old East facts duplicated, and a new nonpending group makes working cooling AND failed ventilation support the scanner-rule target. S0 instead requires both working; rule text is not itself an operational conclusion. This damages an unrelated rule during a West arrival.",
+      "evidence_packet": "artifacts/innovation-v4/paired-v2-joint-review/delta/innovation-shared.json",
+      "active_record_revisions": {
+        "2f27d56a-8a83-5aab-b89f-9d0471e805a1": 4
+      },
+      "source_identity_and_ranges_valid": true,
+      "retrieved_semantic_revisions_checked": 1
+    }
+  ],
+  "official_labels_modified": false,
+  "independent_blind_review": false,
+  "findings": [
+    "Exact source identities and ranges are valid throughout, but this does not establish semantic support for added scope, dates or logical relations.",
+    "Both methods can bind an entire past/future compound clause to a future effective_from. Actual stored Reader projection shows before_explicit_start; the text is still delivered, so this is contradictory applicability metadata, not a claim that the text was hidden.",
+    "Delta truly forms then retracts the Studio exception, and initially forms Harbor OR-of-AND. Those local positives coexist with omitted facts, pending routes and a wrong new Shared relation.",
+    "Original QA 21/24 vs23/24 remains unchanged; original full Source access can rescue answers and does not establish these transition labels or full-state success."
+  ]
+}
