@@ -89,5 +89,7 @@
     "cases": 500,
     "classification": "EVALUATION_PLANE_MODEL_ASSISTED_SEALED_LABELS",
     "not_a_product_reader_evaluation": true
-  }
+  },
+  "superseded_by": "jev-longmemeval-exposure-final-v1-20261017.json",
+  "latest_remaining_unexposed_candidates": 0
 }

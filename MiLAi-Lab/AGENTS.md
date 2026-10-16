@@ -1,78 +1,75 @@
-# Current Jev review execution: 2026-10-17
+# Current Jev review execution: 2026-10-17 calibration and exposure closure
 
-Goal ACTIVE/incomplete. Previous goal turn made substantive progress: C20 matched
-training, five real selector rollouts, complete common Reader/native scoring,
-source ambiguity review and external data inventory. No subagents or SHA/content
-fingerprint validation. All new models/data/env/cache under /cra/memory/mx_memory.
+Goal ACTIVE/incomplete. Previous goal turn made concrete progress: released user-owned
+7862; completed five-model probability calibration; resolved local LongMemEval v1 exposure;
+prepared chronological MemOps Writer slice. No subagents, SHA/content fingerprint checks,
+new ledger, Product/API/Schema/permission/Canonical changes or remote publication.
+All new files/env/cache remain under /cra/memory/mx_memory.
 
 Worktree jev-read-decisions-20261016, canonical report
- docs/MILAI_JEV_READ_DECISIONS_20261016.md. Historical owned handoffs are preserved
-in docs/agent-history/AGENTS_JEV_READER_HANDOFFS_20261017.md; do not treat their live
-PIDs or old scheduling as current. Product/API/Schema/permissions/Canonical unchanged.
+ docs/MILAI_JEV_READ_DECISIONS_20261016.md. Historical live snapshots below are not current.
+Reader QA from d90878c7 is CLOSED:598positions/325firstrequests/273literal-input reuses,
+715076generationtokens,0newunknown/embedding. Same original C20 scores remain: BM25k2
+F1.194,k4.250,full20.739;LayaCEk2.194/adaptive.167. No Jev net benefit. Reference proof
+completion is not semantic sufficiency;14posthoc source reviews found invalid joins,
+ambiguities/aliases. No revised labels trained or policy calibrated from QA outcomes.
 
-ALL task jobs now CLOSED. Reader exec9039/PID571580 exited0, source d90878c7.
-598positions/325firstrequests/273literal-input reuses,0knownfailed responses,
-715076generationtokens,0newunknown/embedding. Score-v1 completed via official CLI.
-Source arrays, first responses, prior failures, old C8 and all checkpoints retained.
-Reader config configs/milai-jev-musique-reader-c20-v1.json; artifacts under
-artifacts/jev-reader/musique-reader-c20-v1/{reader-v1,score-v1,selections}.
-C8 414-call Reader protocol remains unrun after its candidate recall failure.
-No automatic model queue exists; inspect actual process and lease before dispatch.
+NEW calibration source4870cc42, exec72504/PID918505 CLOSED exit0. Five models, each181
+calibration states/21families and179test/19families. Cross-worktree exposure exclusions:
+cal000174/000400/000716;test000014/000338/000414/000561/000581. Exclusion comes from shared
+artifacts/jev-reader/data/cross-worktree-exposure-20261017.json; do not restore old counts.
+Positive scalar T fit only on calibration before test; fixedT[.05,20], no weight/argmax or
+threshold change. Laya0/CE/linear/logits0/LoRA T8.652/2.777/3.451/20/1.053;
+test accepted22/59/61/28/74 of179. LayaCE softCE3.608→2.473,linear3.993→2.274;
+LoRA2.272→2.269 no clear effect. No Reader QA or sufficient-stop semantic guarantee.
+1800actual forwards/5301601tokens,312.803wall/386.084CPU seconds. Originalledger phase
+reader_calibration_c20_v1 exact match,runs1,0HTTP. Firstoutputs/inputs saved; literal
+input and argmax checks all1800 passed,0truncation. Source code was not edited while running.
+Artifacts calibration-c20-v1 and manifest jev-reader-calibration-c20-v1-summary.json.
 
-C20 final prefix acceptance: Laya81/223, single-encoding linear69/223,
-Qwen0.5B letter-logit LoRA81/223. All4epochs/152updates/602train states;24devfamilies.
-Native/linear exact encoder inputs; decoder chat format/full-vocab CE differs.
-Loss curves/checkpoints/costs are in jev-reader-c20-trained-controls-20261017.json.
-No calibrated probabilities, new-family/seeds confirmation or training-scale claim.
-
-Actual QA: BM25k2 F1.194, BM25k4 .250, full20 .739; LayaCEk2 .194/adaptive .167,
-linear .178/.167, logitsLoRA .194/.125. No Jev net benefit. Warm phase timing is
-not proof of co-resident interactive latency; count cold restoration separately.
-Reference-support sets are not semantic sufficiency oracles. Targeted post-hoc
-14-case source review found incorrect joins/underidentified questions/aliases and
-answer-format errors. Raw official scores unchanged; no revised labels trained.
-See jev-reader-c20-qa-v1-summary.json and jev-reader-c20-source-review-20261017.json.
-
-Only user-authorized7862container was stopped and has been restored healthy as PID415919.
-BGE-m3 PID47436 and BGE-reranker52982 unchanged; GPU0/1 othermodels untouched.
-Do not use GPUs2/3 for new training until authorized7862 is idle and explicitly
-released; never stop protected BGE or other models. Original continuous budget:
+7862 milai-unified-v8-v9-native-host-r2 is STOPPED per latest explicit user request.
+No restoration this turn. GPU2/3 each36928MiB free after calibration exit;BGE-m3 PID47436
+and BGE-reranker52982 unchanged;GPU0/1 untouched. Only GPUs2/3 authorized for training.
+Original continuous ledger only:
 /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
-No reset/new ledger. Historical unknown floors10generation/1embedding persist.
-A temporary lock conflict caused preview-v3 to exit before any model call; resource
-was then verified free and the actual Reader ran once. No unknown request replay.
-New HTTP interpreter is artifacts/jev-reader/http-env/bin/python with local CPython;
-source artifacts/jev-reader/runtime/env.sh before further commands.
+Historicalunknownfloor11generation/1embedding (one sibling pre-request connection failure).
+Do not reset/createledger. Own jobs CLOSED; sibling MEME D1 PID917965 was observed live,
+uses7860 and serialHTTP lease. Check actual process before any dispatch; never stop its job.
+Source artifacts/jev-reader/runtime/env.sh; local http-env/cuda-env/train-env available.
 
-LongMemEval exposure remains NOT_ADMITTED. Metadata-only scans originally found
-300historical exposed/200protected; direct requests touched5protected, literal target
-bodies in exposed histories remove82, leaving118provisional only. Legacy DG11v1
-400real generations belong to the original300 (no new protected overlap); V2 has
-consumption marker but proven0requests due capability mismatch. Preserve old no-rerun
-conditions; do not equate markers with exposure. All500 answer-turn labels were
-sealed evaluator preparation, not500Product/Reader runs. Product02 128-case actual
-artifacts and remaining legacy roots/source groups still need reconciliation.
-No unexposed content was admitted, no new LME inference or training happened.
+CRITICAL: local LongMemEval v1 has ZERO unexposed candidates after legacy reconciliation.
+The earlier118 and79 were provisional intermediate inventories, now superseded.
+Old /cra/memory/mx_memory/MiLAi-Lab/artifacts contains actualProduct02 128-case results;
+449metadata files add57observed IDs:305→362.34of118directly exposed+5targetbodyoverlap
+left79 temporarily. Then MiLAi/var/ml_closure/ml-closure-20260830-001/
+longmemeval-results.jsonl proves all500sameIDs in closed system evaluation,1000successful
+Judge positions; ONLY38actualAnswer calls across25cases,962NOT_CALLED_CONTEXT_TERMINAL.
+Do not say500Readercalls. terminalBELOW_TARGET/complete_executiontrue. This differs from
+all500sealed answer-turn annotation preparation. No unseen500subset/s-m-oracle reset.
+Latest manifest jev-longmemeval-exposure-final-v1-20261017.json; originalpartialprogress
+marked superseded. Per-case evidence/legacy scans under exposure-inventory-v1.
+Unseen external evaluation still requires another exposure-reviewed cohort; exposed
+regression may be reported explicitly but cannot fulfill an unseen generalization claim.
+No new LME inference/training this turn; no SHA validation or source body to methods.
 
-MemOps/MEME downloaded under artifacts/jev-reader/external-data, noSHA. MemOps403files/
-100backgrounds;70/10/10/10family split before derivation, knownA01train.4012entries=
-2006pairedquestions,2558operations/2534trigger positions;164arraysout-of-order,
-all declared quotes/coordinates match. Replay actual dialogue order once per turn;
-gold operations/target IDs never runtime features. Root/preserve labels need actual
-Writer before alignment and source review; no Writer run on these data yet.
-MEME100nofiller evaluation-only episodes,58root/edge templates across2domains;
-before probes forCas/Abs/Del required. Strip root/root_change/edges/gold_facts
-from runtime; preserve actual conversation roles/timestamps. No MEME story contents
-were presented for tuning. Full dataframe inventories are saved in external-data.
+MemOps/MEME data and family inventory already exist. NEW prepared MemOps source-only
+three-case slice from source3fb61687 at artifacts/jev-reader/memops-writer-v1/source:
+case01A01update(2,3),case02A01tentative(3,5),case03B04forget(3,3). Two independenttrain
+families; sourceevent only,no futureAssistant echo/goldmetadata/dates invented. Writer
+before NOT formed; no D0-D4 launched. Unknown dates survive realSQLitecapture.
+Tools prepare_memops_writer.py/run_external_writer_seed.py reuse existing_factorial.
+Initial-empty reporting corrected to preformation;final_state_empty separately saved.
+Known readonly failures preserved; partialanswers alone not terminal. Oldartifacts unchanged.
+Sibling already completed DIFFERENTMemOps3cases(A01/B01/D02) actualbefore+D0/D1/reviewedFull/
+reviewedLocal; inspect its report/manifests before duplicating experiments. Sibling MEME
+pl_011/sw_001 D0closed,D1live last observed; not our owned runner. Do not hotedit/restart.
 
-NEXT requirements: source-grounded derived labels with ambiguity/alternatives;
-independent calibration and train-family own-state trajectories if warranted;
-certifiable unexposed LongMemEval (never rename exposed data unseen);
-MemOps/MEME actual shared-before D0-D4 and reviewed W/B interventions, separate
-continuous trajectories and state-only/raw-mixed QA; full requirement audit.
-Accept simple baselines or negative results; do not expand Impact or RL on faith.
-19directchecks/Ruff/package and tools boundaries passed. No fullrepo/remoteCI,
-publication or merge. Product NO_GO; goal is NOT complete.
+NEXT: source-qualified/ambiguous/equivalent-support labels; remaining Writer D0-D4 matched
+factors and W/B supervision on actualbefore;review siblingMEME and independenttrajectories;
+external read cohort with legitimate exposure status; final requirement audit. Do not grow
+Impact/RL just to force a positive result. Calibration is probability diagnosis only.
+24unique directly relevant tests,Ruff,Labtools/package boundaries passed; no fullrepo/remoteCI.
+Goal not complete; ProductNO_GO. Historical handoffs below retained for provenance only.
 
 # Current bottleneck review execution (2026-10-16)
 
