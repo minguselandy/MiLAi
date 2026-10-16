@@ -1,0 +1,26 @@
+{
+  "name": "jev-reader-state-information-v1",
+  "selector": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/selections/laya_ce",
+  "fixed_four": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-fixed4-v1",
+  "labels": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-reader-c20-v1/labels.jsonl",
+  "source_review": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/data/manifests/jev-reader-source-qualified-v1-annotations.json",
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "selection": "All 46 exposed C20 dev cases, all four prefixes on the frozen CE fixed-four path; no selection by score or new target answer.",
+  "views": {
+    "full": "Reuse the original full-input first prediction at each prefix.",
+    "titles_only": "Keep opened IDs and titles; omit opened text. All remaining candidates, question, criteria and order stay identical.",
+    "ids_only": "Keep opened IDs; omit opened titles and text. All remaining candidates, question, criteria and order stay identical."
+  },
+  "sampling": "Frozen float32 CE model, eval mode, seed 0, same NativeDecision adapter and 8192/512 capacity. No new weights, QA or HTTP.",
+  "reuse": "Literal-equal empty-prefix inputs reuse original first predictions; literal-equal perturbed inputs reuse their first result. No fingerprints or SHA checks.",
+  "primary": "Action/top-open sensitivity and probability change on nonempty prefixes; aggregate within original source families. Empty prefixes are unchanged controls.",
+  "secondary": "Acceptance against the existing source-qualified true-state annotations, same targets for all views; masked and unreviewed rows remain separate. No new labels or dev training.",
+  "interpretation_limits": [
+    "Input perturbation of a model trained with full state; it is not a retrained stateless baseline or evidence of optimality.",
+    "All positions remain on the original fixed-four path; no on-policy consequences or Reader quality are inferred.",
+    "Hidden read content can make true-state targets unidentifiable. Retained target acceptance measures information loss, not valid supervision for a new hidden-state task.",
+    "Removing fields also shortens inputs and shifts positions; titles/IDs retain prefix and selection information. No length-only or total-state-removal causal claim.",
+    "Source-qualified annotations cover only seven targeted source rows, including masks, not a representative noise-rate sample.",
+    "No independent generalization, confidence calibration, learned stopping utility or whole-pipeline net benefit is established."
+  ]
+}
