@@ -1,3 +1,15 @@
+# User GPU allocation (2026-10-16)
+
+User now explicitly authorizes releasing ONLY milai-unified-v8-v9-native-host-r2
+(7862, physical GPUs2/3) for training. This supersedes older no-GPU-change rules
+only for that container. bge-m3(7861), bge-reranker(7961), GPU0/1 Qwen and all other
+models must remain untouched. 7862 was idle, stopped normally, original container
+retained; restore with docker start milai-unified-v8-v9-native-host-r2.
+Before/after and restore command: artifacts/jev-reader/gpu-allocation-v1/.
+CUDA environment/cache under /cra/memory/mx_memory, no requirement hash validation.
+Training explicitly CUDA_VISIBLE_DEVICES=2,3,75% own-memory cap per GPU; BGE retains
+its existing allocations. Check live jobs before restoring 7862 to avoid contention.
+
 # Current bounded reader worktree (2026-10-16)
 
 Goal ACTIVE/incomplete. This independent jev-read-decisions-20261016 worktree

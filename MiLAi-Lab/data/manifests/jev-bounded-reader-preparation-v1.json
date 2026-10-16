@@ -1,0 +1,405 @@
+{
+  "status": "PARTIAL",
+  "source_version": "ff38d22b",
+  "model_artifacts_under": "/cra/memory/mx_memory",
+  "sha_validation": false,
+  "family_preparation": {
+    "source_rows": 39876,
+    "families": 896,
+    "seed": 0,
+    "largest_family_rows": [
+      9000,
+      972,
+      814,
+      788,
+      518,
+      508,
+      468,
+      404,
+      392,
+      392
+    ],
+    "splits": {
+      "train": {
+        "families_before_exclusion": 627,
+        "families": 599,
+        "rows_before_exclusion": 31218,
+        "rows": 25269,
+        "excluded_target_exposure": 5949,
+        "answerability": {
+          "True": 12623,
+          "False": 12646
+        },
+        "hops": {
+          "3": 5673,
+          "2": 17963,
+          "4": 1633
+        }
+      },
+      "dev": {
+        "families_before_exclusion": 89,
+        "families": 69,
+        "rows_before_exclusion": 2422,
+        "rows": 1149,
+        "excluded_target_exposure": 1273,
+        "answerability": {
+          "True": 592,
+          "False": 557
+        },
+        "hops": {
+          "2": 875,
+          "3": 241,
+          "4": 33
+        }
+      },
+      "calibration": {
+        "families_before_exclusion": 89,
+        "families": 65,
+        "rows_before_exclusion": 2628,
+        "rows": 1221,
+        "excluded_target_exposure": 1407,
+        "answerability": {
+          "False": 595,
+          "True": 626
+        },
+        "hops": {
+          "2": 1008,
+          "3": 201,
+          "4": 12
+        }
+      },
+      "test": {
+        "families_before_exclusion": 91,
+        "families": 78,
+        "rows_before_exclusion": 3608,
+        "rows": 1763,
+        "excluded_target_exposure": 1845,
+        "answerability": {
+          "False": 865,
+          "True": 898
+        },
+        "hops": {
+          "2": 1418,
+          "4": 53,
+          "3": 292
+        }
+      }
+    },
+    "shared_non_target_paragraphs_before_exclusion": 20694,
+    "policy": "Question variants, shared single-hop IDs and supporting paragraphs form connected families. Assign 70/10/10/remainder percent of families; remove rows exposing another split's target paragraphs. Never rebalance using model results. All four splits derive from official TRAIN only.",
+    "scope": "Proof/target independence, not complete independence of all encyclopedia backgrounds or pretrained model knowledge. No augmented examples yet.",
+    "source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/musique_full_v1.0_train.jsonl",
+    "source_bytes": 476696984,
+    "wall_seconds": 9.722606929950416,
+    "cpu_seconds": 9.722009652,
+    "model_calls": 0
+  },
+  "decisions": {
+    "splits": {
+      "train": {
+        "families": 64,
+        "source_rows": 124,
+        "states": 556,
+        "label_status": {
+          "missing_complement": 227,
+          "masked_retrieval_gap_or_unannotated_alternative": 89,
+          "official_unanswerable_pool": 197,
+          "reference_proof_complete": 43
+        },
+        "prefix_origin": {
+          "bm25_prefix": 496,
+          "reference_prefix": 60
+        },
+        "source_rows_answerability": {
+          "True": 62,
+          "False": 62
+        },
+        "source_rows_reference_covered": 82
+      },
+      "dev": {
+        "families": 24,
+        "source_rows": 46,
+        "states": 203,
+        "label_status": {
+          "missing_complement": 78,
+          "masked_retrieval_gap_or_unannotated_alternative": 39,
+          "official_unanswerable_pool": 73,
+          "reference_proof_complete": 13
+        },
+        "prefix_origin": {
+          "bm25_prefix": 184,
+          "reference_prefix": 19
+        },
+        "source_rows_answerability": {
+          "True": 24,
+          "False": 22
+        },
+        "source_rows_reference_covered": 28
+      },
+      "calibration": {
+        "families": 24,
+        "source_rows": 42,
+        "states": 186,
+        "label_status": {
+          "missing_complement": 66,
+          "masked_retrieval_gap_or_unannotated_alternative": 41,
+          "official_unanswerable_pool": 68,
+          "reference_proof_complete": 11
+        },
+        "prefix_origin": {
+          "bm25_prefix": 168,
+          "reference_prefix": 18
+        },
+        "source_rows_answerability": {
+          "True": 22,
+          "False": 20
+        },
+        "source_rows_reference_covered": 23
+      },
+      "test": {
+        "families": 24,
+        "source_rows": 44,
+        "states": 195,
+        "label_status": {
+          "missing_complement": 72,
+          "masked_retrieval_gap_or_unannotated_alternative": 42,
+          "official_unanswerable_pool": 66,
+          "reference_proof_complete": 15
+        },
+        "prefix_origin": {
+          "bm25_prefix": 176,
+          "reference_prefix": 19
+        },
+        "source_rows_answerability": {
+          "True": 24,
+          "False": 20
+        },
+        "source_rows_reference_covered": 29
+      }
+    },
+    "pool_size": 8,
+    "seed": 0,
+    "family_source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/families-v1",
+    "wall_seconds": 3.9929214091971517,
+    "cpu_seconds": 3.992804668,
+    "model_calls": 0,
+    "scope": "Derived reference-proof decisions; not downstream QA or calibrated STOP",
+    "sampling": "At most one paired question per family before prefix expansion",
+    "loss_weighting": "Normalize prefixes per source event, then events per family"
+  },
+  "length_audit": {
+    "splits": {
+      "train": {
+        "states": 556,
+        "labelled": 467,
+        "skipped": {},
+        "oversized": 0,
+        "max_full_tokens": 2137,
+        "max_head_dropped": 0
+      },
+      "dev": {
+        "states": 203,
+        "labelled": 164,
+        "skipped": {},
+        "oversized": 0,
+        "max_full_tokens": 2068,
+        "max_head_dropped": 0
+      },
+      "calibration": {
+        "states": 186,
+        "labelled": 145,
+        "skipped": {},
+        "oversized": 0,
+        "max_full_tokens": 1784,
+        "max_head_dropped": 0
+      },
+      "test": {
+        "states": 195,
+        "labelled": 153,
+        "skipped": {},
+        "oversized": 0,
+        "max_full_tokens": 1692,
+        "max_head_dropped": 0
+      }
+    },
+    "max_len": 4096,
+    "head_max_len": 384,
+    "wall_seconds": 11.51034055929631,
+    "cpu_seconds": 11.517514963,
+    "peak_rss_kib": 840644,
+    "model_forwards": 0,
+    "tokenizer": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base/tokenizer",
+    "calibration_test_inference": false
+  },
+  "zero_shot_cpu": {
+    "run": {
+      "status": "COMPLETED",
+      "pid": 4022489,
+      "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/decisions-v1/dev.jsonl",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+      "device": "cpu",
+      "threads": 4,
+      "max_len": 4096,
+      "head_max_len": 384,
+      "completed_states": 203,
+      "planned_states": 203,
+      "calibrated": false,
+      "http_requests": 0
+    },
+    "metrics": {
+      "counts": {
+        "labelled": 164,
+        "accepted": 15,
+        "first_remaining_candidate_accepted": 34,
+        "masked_reference": 39,
+        "unnecessary_continue": 73,
+        "unsupported_sufficient_stop": 18,
+        "unsupported_exhaustion_stop": 6
+      },
+      "strata": {
+        "missing_complement": {
+          "labelled": 78,
+          "accepted": 13
+        },
+        "official_unanswerable_pool": {
+          "labelled": 73,
+          "accepted": 1
+        },
+        "reference_proof_complete": {
+          "labelled": 13,
+          "accepted": 1
+        }
+      },
+      "family_macro_acceptance": 0.06801046176046176,
+      "families": 24,
+      "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+    },
+    "compute": {
+      "wall_seconds": 390.7062394404784,
+      "cpu_seconds": 1436.094354999,
+      "runs": 1,
+      "forwards": 203,
+      "sequence_rows": 203,
+      "input_tokens": 262964,
+      "state_tokenizations": 203,
+      "state_tokens": 229621,
+      "peak_rss_kib": 2356820,
+      "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+    }
+  },
+  "exposure": {
+    "source": "50-row HF metadata preview conservatively treated as author-exposed",
+    "question_ids": [
+      "2hop__106237_44852",
+      "2hop__121972_834952",
+      "2hop__122700_7672",
+      "2hop__124719_533073",
+      "2hop__130463_609442",
+      "2hop__131267_45142",
+      "2hop__131693_45439",
+      "2hop__144697_8773",
+      "2hop__150985_444333",
+      "2hop__151457_15815",
+      "2hop__20910_42892",
+      "2hop__22215_22103",
+      "2hop__230157_160837",
+      "2hop__236674_52135",
+      "2hop__248482_48850",
+      "2hop__255070_93486",
+      "2hop__267698_623616",
+      "2hop__269805_135710",
+      "2hop__271363_851079",
+      "2hop__32957_514685",
+      "2hop__32986_62851",
+      "2hop__349950_526735",
+      "2hop__365613_92585",
+      "2hop__42543_20093",
+      "2hop__444948_126045",
+      "2hop__482728_91717",
+      "2hop__55332_86951",
+      "2hop__568389_161223",
+      "2hop__60386_47465",
+      "2hop__644901_89360",
+      "2hop__658_830293",
+      "2hop__66890_93263",
+      "2hop__6805_77289",
+      "2hop__758324_851079",
+      "2hop__776866_88957",
+      "2hop__821585_56026",
+      "2hop__92702_70445",
+      "2hop__99233_14948",
+      "3hop1__107866_146715_19973",
+      "3hop1__204168_9522_8111",
+      "3hop1__360282_544708_33164",
+      "3hop1__51280_6975_5741",
+      "3hop1__698_669_40159",
+      "3hop1__704748_797479_57072",
+      "3hop1__706183_20196_35380",
+      "3hop1__709382_146811_55083",
+      "3hop1__739197_517267_451901",
+      "4hop1__11265_35341_71250_135051",
+      "4hop2__53235_18485_57802_311656",
+      "4hop3__73634_75897_26851_19700"
+    ],
+    "families": [
+      "musique-family-000000",
+      "musique-family-000001",
+      "musique-family-000006",
+      "musique-family-000014",
+      "musique-family-000017",
+      "musique-family-000028",
+      "musique-family-000034",
+      "musique-family-000042",
+      "musique-family-000083",
+      "musique-family-000103",
+      "musique-family-000107",
+      "musique-family-000108",
+      "musique-family-000132",
+      "musique-family-000142",
+      "musique-family-000158",
+      "musique-family-000163",
+      "musique-family-000182",
+      "musique-family-000183",
+      "musique-family-000184",
+      "musique-family-000191",
+      "musique-family-000203",
+      "musique-family-000341",
+      "musique-family-000373",
+      "musique-family-000378",
+      "musique-family-000405",
+      "musique-family-000454",
+      "musique-family-000480",
+      "musique-family-000504",
+      "musique-family-000508",
+      "musique-family-000509",
+      "musique-family-000533",
+      "musique-family-000565",
+      "musique-family-000660",
+      "musique-family-000685",
+      "musique-family-000751"
+    ],
+    "sampled_overlap": {
+      "train": {
+        "sampled_exposed_families": 0
+      },
+      "dev": {
+        "sampled_exposed_families": 2
+      },
+      "calibration": {
+        "sampled_exposed_families": 0
+      },
+      "test": {
+        "sampled_exposed_families": 1
+      }
+    },
+    "policy": "Keep existing v1 train/dev as developmental diagnosis. Exclude exposed families from future blind calibration/test; never relabel current sample as unseen."
+  },
+  "limits": [
+    "Mirrored source; official archive equivalence unverified",
+    "Shared non-target encyclopedia backgrounds are not independent",
+    "One sampled test family was preview-exposed and must be excluded from blind testing",
+    "Reference-proof labels are not exhaustive semantic equivalence judgements",
+    "CPU zero-shot is prefix diagnosis, not Reader QA or a deployment recommendation",
+    "CE, supervised reranker, STOP/complement ablations, unexposed LME and MemOps/MEME remain"
+  ]
+}
