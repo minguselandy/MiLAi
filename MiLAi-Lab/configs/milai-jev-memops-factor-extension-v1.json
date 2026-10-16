@@ -1,0 +1,51 @@
+{
+  "name": "jev-memops-factor-extension-v1",
+  "source_run": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-before-v2",
+  "cases": [
+    "case-0",
+    "case-1",
+    "case-2"
+  ],
+  "laya": {
+    "D2-Laya-0": {
+      "base_url": "http://127.0.0.1:7870",
+      "model": "milai-impact-base-v1",
+      "max_len": 8192,
+      "head_max_len": 256,
+      "timeout_seconds": 300.0
+    },
+    "D2-Laya-CE": {
+      "base_url": "http://127.0.0.1:7870",
+      "model": "milai-impact-ce-v1",
+      "max_len": 8192,
+      "head_max_len": 256,
+      "timeout_seconds": 300.0
+    }
+  },
+  "selection_runs": {
+    "D3": {
+      "provider": "laya",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/memops-factor-extension-v1/D2-Laya-CE"
+    },
+    "D4": {
+      "provider": "generative",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-d0-d1-v1/D1"
+    }
+  },
+  "existing_controls": {
+    "D0": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-d0-d1-v1/D0",
+    "D1": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-d0-d1-v1/D1"
+  },
+  "dispatch_order": [
+    "D2-Laya-0",
+    "D2-Laya-CE",
+    "D3",
+    "D4"
+  ],
+  "scope": "Complete the six-arm factor diagnostic on three previously formed MemOps training-family states. No new seed/arrival; D0/D1 first outputs retained. Not a new independent trajectory or heldout test.",
+  "input_policy": "All original before values, arrivals, writer/reader settings and queries preserved. No oracle graph repair. The same original7860 service is queried without service changes;7862 remains stopped.",
+  "capacity_policy": "8192 is a complete-input serving budget for both Laya checkpoints; prior small CE training was max_len2048. Source-qualified role/generalization caveats remain.",
+  "compute_policy": "Laya serves on physicalGPU2 only; both checkpoint aliases are local. D3/D4 reuse the actual single D2-CE/D1 choice. Controller costs retained in standalone comparisons; ledger charges actual requests once.",
+  "unknown_retry": false,
+  "sha_validation": false
+}
