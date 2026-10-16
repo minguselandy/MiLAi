@@ -109,6 +109,7 @@ def main():
     parser.add_argument("--max-vocabulary", type=int, default=2048)
     parser.add_argument("--source-version", required=True)
     args = parser.parse_args()
+    started, cpu_started = time.perf_counter(), time.process_time()
     prepared = [read_json(path) for path in args.inputs]
     examples = training_examples(prepared)
     models, diagnostics = fit(
@@ -134,6 +135,9 @@ def main():
         "model_http_calls": 0,
         "source_mutations": 0,
         "linear_head_fits": 6,
+        "numpy_version": np.__version__,
+        "total_wall_seconds": time.perf_counter() - started,
+        "total_cpu_seconds": time.process_time() - cpu_started,
         "peak_rss_mib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024,
         "scope": "Small lexical control on exposed development outcomes. Training fit does not "
         "establish semantic generalization, calibrated utility, valid stopping, "
