@@ -1,3 +1,16 @@
+# Reader CE terminal (2026-10-16)
+
+Previous goal turn was progress: data/split/finite-policy implementation and real
+training. ce-gpu-v2 now CLOSED/exit0, PID4093998 gone, exec37838 completed. Source8c6cb000,
+120updates, full encoder+head native checkpoint. Epoch0/1/2/3/4 dev15/82/79/67/73 of164;
+constant exhaustion73. Final complement26/78, exhausted46/73, sufficient1/13. No net
+benefit or adequate stop-learning claim. Training348.325wall/463.399CPU;1868training
+sequences2311796tokens,1015dev1314820tokens, all in original ledger. Save fp16, in-memory
+float32 curves; full checkpoint reload dev not yet checked. Original failedV1 preserved.
+Ordinary matched CLS cross-encoder tools added; its native shape/gradient/reload check
+passed, full training not yet dispatched at this checkpoint. It uses own base encoder
+copy; never modifies BGE or any protected service. Keep full original benchmark scope.
+
 # Live reader CE handoff (2026-10-16)
 
 Goal ACTIVE/incomplete. ce-gpu-v2 is live at this checkpoint: PID4093998,

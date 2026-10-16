@@ -1,0 +1,259 @@
+{
+  "status": "COMPLETED",
+  "exit_code": 0,
+  "source_version": "8c6cb000",
+  "exec_session": 37838,
+  "run": {
+    "status": "COMPLETED",
+    "pid": 4093998,
+    "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/decisions-v1",
+    "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+    "seed": 0,
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "device": "cuda",
+    "torch_version": "2.7.0+cu126",
+    "cuda_version": "12.6",
+    "precision": "float32",
+    "reference_compile": false,
+    "epochs": 4,
+    "batch_size": 4,
+    "gradient_accumulation": 4,
+    "max_len": 4096,
+    "head_max_len": 384,
+    "train_states": 467,
+    "dev_states": 203,
+    "encoder_lr": 2.5e-05,
+    "head_lr": 0.0001,
+    "freeze_encoder": false,
+    "objective": "event-and-family-normalized soft-CE",
+    "calibration_test_loaded": false,
+    "http_requests": 0,
+    "optimizer_updates": 120,
+    "train_sequence_rows": 1868,
+    "train_input_tokens": 2311796,
+    "train_batch_forwards": 468,
+    "train_device_forwards": 936,
+    "train_batch_attempts": 468,
+    "train_offered_rows": 1868,
+    "train_offered_tokens": 2311796
+  },
+  "history": [
+    {
+      "epoch": 0,
+      "dev": {
+        "counts": {
+          "labelled": 164,
+          "accepted": 15,
+          "first_remaining_candidate_accepted": 34,
+          "masked_reference": 39,
+          "unnecessary_continue": 73,
+          "unsupported_sufficient_stop": 18,
+          "unsupported_exhaustion_stop": 6
+        },
+        "strata": {
+          "missing_complement": {
+            "labelled": 78,
+            "accepted": 13
+          },
+          "official_unanswerable_pool": {
+            "labelled": 73,
+            "accepted": 1
+          },
+          "reference_proof_complete": {
+            "labelled": 13,
+            "accepted": 1
+          }
+        },
+        "constant_stop_reference": {
+          "stop_sufficient": 13,
+          "stop_exhausted": 73
+        },
+        "family_macro_acceptance": 0.06801046176046176,
+        "families": 24,
+        "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+      }
+    },
+    {
+      "epoch": 1,
+      "weighted_ce_mean": 1.5982071967911158,
+      "dev": {
+        "counts": {
+          "labelled": 164,
+          "accepted": 82,
+          "unsupported_exhaustion_stop": 59,
+          "first_remaining_candidate_accepted": 34,
+          "masked_reference": 39,
+          "unnecessary_continue": 15
+        },
+        "strata": {
+          "missing_complement": {
+            "labelled": 78,
+            "accepted": 22
+          },
+          "official_unanswerable_pool": {
+            "labelled": 73,
+            "accepted": 60
+          },
+          "reference_proof_complete": {
+            "labelled": 13,
+            "accepted": 0
+          }
+        },
+        "constant_stop_reference": {
+          "stop_sufficient": 13,
+          "stop_exhausted": 73
+        },
+        "family_macro_acceptance": 0.5524651274651274,
+        "families": 24,
+        "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+      }
+    },
+    {
+      "epoch": 2,
+      "weighted_ce_mean": 0.7351403902514142,
+      "dev": {
+        "counts": {
+          "labelled": 164,
+          "accepted": 79,
+          "unsupported_exhaustion_stop": 57,
+          "first_remaining_candidate_accepted": 34,
+          "masked_reference": 39,
+          "unnecessary_continue": 18
+        },
+        "strata": {
+          "missing_complement": {
+            "labelled": 78,
+            "accepted": 22
+          },
+          "official_unanswerable_pool": {
+            "labelled": 73,
+            "accepted": 57
+          },
+          "reference_proof_complete": {
+            "labelled": 13,
+            "accepted": 0
+          }
+        },
+        "constant_stop_reference": {
+          "stop_sufficient": 13,
+          "stop_exhausted": 73
+        },
+        "family_macro_acceptance": 0.5630140692640693,
+        "families": 24,
+        "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+      }
+    },
+    {
+      "epoch": 3,
+      "weighted_ce_mean": 0.3763569618517441,
+      "dev": {
+        "counts": {
+          "labelled": 164,
+          "accepted": 67,
+          "unsupported_exhaustion_stop": 43,
+          "first_remaining_candidate_accepted": 34,
+          "masked_reference": 39,
+          "unnecessary_continue": 26,
+          "unsupported_sufficient_stop": 12
+        },
+        "strata": {
+          "missing_complement": {
+            "labelled": 78,
+            "accepted": 25
+          },
+          "official_unanswerable_pool": {
+            "labelled": 73,
+            "accepted": 42
+          },
+          "reference_proof_complete": {
+            "labelled": 13,
+            "accepted": 0
+          }
+        },
+        "constant_stop_reference": {
+          "stop_sufficient": 13,
+          "stop_exhausted": 73
+        },
+        "family_macro_acceptance": 0.48333483645983644,
+        "families": 24,
+        "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+      }
+    },
+    {
+      "epoch": 4,
+      "weighted_ce_mean": 0.23396655398359167,
+      "dev": {
+        "counts": {
+          "labelled": 164,
+          "accepted": 73,
+          "first_remaining_candidate_accepted": 34,
+          "unsupported_exhaustion_stop": 43,
+          "masked_reference": 39,
+          "unnecessary_continue": 25,
+          "unsupported_sufficient_stop": 8
+        },
+        "strata": {
+          "missing_complement": {
+            "labelled": 78,
+            "accepted": 26
+          },
+          "official_unanswerable_pool": {
+            "labelled": 73,
+            "accepted": 46
+          },
+          "reference_proof_complete": {
+            "labelled": 13,
+            "accepted": 1
+          }
+        },
+        "constant_stop_reference": {
+          "stop_sufficient": 13,
+          "stop_exhausted": 73
+        },
+        "family_macro_acceptance": 0.5328057359307359,
+        "families": 24,
+        "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+      }
+    }
+  ],
+  "compute": {
+    "wall_seconds": 348.32467904035,
+    "cpu_seconds": 463.39900402499995,
+    "runs": 1,
+    "train_sequence_rows": 1868,
+    "train_input_tokens": 2311796,
+    "train_batch_forwards": 468,
+    "train_device_forwards": 936,
+    "train_batch_attempts": 468,
+    "train_offered_rows": 1868,
+    "train_offered_tokens": 2311796,
+    "dev_forwards": 1015,
+    "dev_sequence_rows": 1015,
+    "dev_input_tokens": 1314820,
+    "dev_state_tokenizations": 1015,
+    "dev_state_tokens": 1148105,
+    "peak_rss_kib": 5463928,
+    "peak_cuda_allocated_bytes": [
+      11315851776,
+      7339844096
+    ],
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+  },
+  "parameter_probes": {
+    "encoder": {
+      "parameter": "encoder.embeddings.tok_embeddings.weight",
+      "changed_elements": 196607872
+    },
+    "head": {
+      "parameter": "head.layers.0.self_attn.in_proj_weight",
+      "changed_elements": 1769470
+    }
+  },
+  "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/ce-gpu-v2/checkpoint",
+  "checkpoint_storage": "upstream native fp16; training and in-memory dev float32",
+  "checkpoint_reloaded_full_dev": false,
+  "scope": "64-family learning diagnosis; no downstream Reader QA or net benefit claim"
+}
