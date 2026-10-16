@@ -8,8 +8,8 @@ missing; no replay of an unconfirmed request and no substitution of an answer.
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
+import subprocess
 import sys
 import time
 from collections import defaultdict
@@ -110,9 +110,6 @@ def score(protocol, prediction_root, output):
     from metrics.answer import AnswerMetric
     from metrics.support import SupportMetric
 
-    spec = importlib.util.spec_from_file_location("musique_official", official / "evaluate_v1.0.py")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
     labels = read_rows(Path(protocol["labels"]))
     groups = defaultdict(list)
     for row in labels:
@@ -167,8 +164,12 @@ def score(protocol, prediction_root, output):
                 folder.mkdir(parents=True, exist_ok=True)
                 (folder / f"{name}.jsonl").write_text(
                     "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
-            paired_result = module.evaluate(str(folder / "paired-predictions.jsonl"),
-                                            str(folder / "paired-gold.jsonl"))
+            destination = folder / "native-paired-metrics.json"
+            subprocess.run(  # noqa: S603 -- explicit argv for the reviewed official scorer
+                [sys.executable, str(official / "evaluate_v1.0.py"),
+                 str(folder / "paired-predictions.jsonl"), str(folder / "paired-gold.jsonl"),
+                 "--output_filepath", str(destination)], check=True, capture_output=True, text=True)
+            paired_result = read_json(destination)
         em, f1 = answers.get_metric()
         _, support_f1 = supports.get_metric()
         results[arm] = {"cases": len(labels), "missing": missing,
