@@ -693,6 +693,11 @@ class BenchmarkRun:
         structured: bool,
         response_format: dict[str, Any] | None = None,
         presence_penalty: float | None = None,
+        top_p: float | None = None,
+        top_k: int | None = None,
+        min_p: float | None = None,
+        repetition_penalty: float | None = None,
+        seed: int | None = None,
         enable_thinking: bool | None = None,
         ranker: bool | None = False,
     ) -> str:
@@ -730,6 +735,12 @@ class BenchmarkRun:
             if self.ranker_client is None:
                 self.ranker_client = VLLMClient(VLLMConfig(**settings["model"]), budget=self.budget)
             client = self.ranker_client
+        sampling: dict[str, Any] = {
+            name: value for name, value in (
+                ("presence_penalty", presence_penalty), ("top_p", top_p), ("top_k", top_k),
+                ("min_p", min_p), ("repetition_penalty", repetition_penalty), ("seed", seed),
+            ) if value is not None
+        }
         write_json(
             folder / "request.json",
             {
@@ -740,16 +751,12 @@ class BenchmarkRun:
                 **({"provider": "ranker", "model": settings["model"]["model"],
                     "max_tokens": settings["model"]["max_tokens"],
                     "context_tokens": settings["context_tokens"]} if ranker else {}),
-                **({"presence_penalty": presence_penalty}
-                   if presence_penalty is not None else {}),
+                **sampling,
                 **({"enable_thinking": enable_thinking}
                    if enable_thinking is not None else {}),
             },
         )
         try:
-            sampling: dict[str, Any] = (
-                {"presence_penalty": presence_penalty} if presence_penalty is not None else {}
-            )
             if enable_thinking is not None:
                 sampling["enable_thinking"] = enable_thinking
             response = client.chat(messages, response_format=selected_format, **sampling)

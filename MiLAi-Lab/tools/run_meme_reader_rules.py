@@ -1,7 +1,7 @@
 """Paired Reader task wording on frozen, previously exposed MEME deliveries.
 
 No Writer, retrieval, state repair, new source or evaluator answer enters this
-experiment. Both fresh conditions use temperature zero and the same output limit.
+experiment. Conditions share the protocol's decoding settings and output limit.
 """
 
 from __future__ import annotations
@@ -36,10 +36,12 @@ def main() -> None:
     settings = read_json(Path(config["settings_source"]))
     settings.update(experiment_name=config["name"], config_version=config["name"])
     planned = len(config["variants"]) * len(config["cases"])
-    settings["model"].update(temperature=0.0, max_calls=planned)
+    settings["model"].update(temperature=config["temperature"], max_calls=planned,
+        max_tokens=config.get("output_limit", settings["model"]["max_tokens"]))
     run_state = {"status": "RUNNING", "pid": os.getpid(), "planned_calls": planned,
                  "completed_calls": 0, "new_writer_calls": 0, "new_retrieval_calls": 0,
-                 "temperature": 0.0, "source_version": config["source_version"]}
+                 "temperature": config["temperature"], "sampling": config.get("sampling", {}),
+                 "source_version": config["source_version"]}
     write_json(args.output / "run.json", run_state)
     started = time.perf_counter()
     run = TimedBenchmarkRun(settings, args.output, phase="predict")
@@ -59,7 +61,7 @@ def main() -> None:
                           "variant": variant, "source_request": case["source_request"]}
                 try:
                     answer["hypothesis"] = run.call(key, messages, structured=False,
-                                                   enable_thinking=run.stage_thinking("reader"))
+                        enable_thinking=run.stage_thinking("reader"), **config.get("sampling", {}))
                 except ValueError as error:
                     failure = run._known_reader_failure(error, key)
                     if failure is None:

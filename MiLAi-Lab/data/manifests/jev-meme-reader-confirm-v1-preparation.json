@@ -1,0 +1,335 @@
+{
+  "status": "FROZEN_BEFORE_INFERENCE",
+  "selection": {
+    "status": "METADATA_SELECTION_FROZEN_BEFORE_STORY_READING",
+    "seed": 20261017,
+    "source_inventory": "artifacts/jev-reader/external-data/meme-evaluation-inventory-v1.json",
+    "input_paths_examined": 820,
+    "known_exposed_ids": [
+      "pl_011",
+      "sw_001"
+    ],
+    "excluded_preview_ids": [
+      "pl_001",
+      "pl_002",
+      "pl_003",
+      "pl_004",
+      "pl_005",
+      "pl_006",
+      "pl_007",
+      "pl_008",
+      "pl_009",
+      "pl_010"
+    ],
+    "selected": [
+      {
+        "episode_id": "pl_044",
+        "domain": "personal_life",
+        "family_template": [
+          "personal_life",
+          "health_condition",
+          [
+            [
+              "exercise_routine",
+              "fitness_facility",
+              2
+            ],
+            [
+              "health_condition",
+              "exercise_routine",
+              1
+            ],
+            [
+              "health_condition",
+              "exercise_routine",
+              1
+            ],
+            [
+              "health_condition",
+              "sleep_pattern",
+              1
+            ]
+          ]
+        ],
+        "task_types": {
+          "Tr": 1,
+          "Cas": 2,
+          "Abs": 1,
+          "Del": 1,
+          "Agg": 1,
+          "ER": 1
+        },
+        "has_2hop": true,
+        "sessions": 5,
+        "session_kinds": {
+          "Fact Introduction (Part 1a)": 1,
+          "Fact Introduction (Part 1b)": 1,
+          "Fact Introduction (Part 1c)": 1,
+          "Fact Introduction (Part 2)": 1,
+          "Change+Delete Event": 1
+        },
+        "before_question_groups": [
+          "timestamp",
+          "position_after_session",
+          "questions"
+        ],
+        "conversation_type": "list"
+      },
+      {
+        "episode_id": "pl_048",
+        "domain": "personal_life",
+        "family_template": [
+          "personal_life",
+          "health_condition",
+          [
+            [
+              "exercise_routine",
+              "fitness_facility",
+              2
+            ],
+            [
+              "health_condition",
+              "dietary_restriction",
+              1
+            ],
+            [
+              "health_condition",
+              "exercise_routine",
+              1
+            ],
+            [
+              "health_condition",
+              "sleep_pattern",
+              1
+            ]
+          ]
+        ],
+        "task_types": {
+          "Tr": 1,
+          "Cas": 2,
+          "Abs": 1,
+          "Del": 1,
+          "Agg": 1,
+          "ER": 1
+        },
+        "has_2hop": true,
+        "sessions": 5,
+        "session_kinds": {
+          "Fact Introduction (Part 1a)": 1,
+          "Fact Introduction (Part 1b)": 1,
+          "Fact Introduction (Part 1c)": 1,
+          "Fact Introduction (Part 2)": 1,
+          "Change+Delete Event": 1
+        },
+        "before_question_groups": [
+          "timestamp",
+          "position_after_session",
+          "questions"
+        ],
+        "conversation_type": "list"
+      },
+      {
+        "episode_id": "sw_037",
+        "domain": "software_project",
+        "family_template": [
+          "software_project",
+          "deploy_target",
+          [
+            [
+              "ci_config",
+              "deploy_command",
+              2
+            ],
+            [
+              "deploy_target",
+              "ci_config",
+              1
+            ],
+            [
+              "deploy_target",
+              "log_drain_endpoint",
+              1
+            ],
+            [
+              "deploy_target",
+              "staging_url",
+              1
+            ],
+            [
+              "docker_image",
+              "dockerfile_path",
+              2
+            ]
+          ]
+        ],
+        "task_types": {
+          "Tr": 1,
+          "Cas": 2,
+          "Abs": 2,
+          "Del": 1,
+          "Agg": 1,
+          "ER": 1
+        },
+        "has_2hop": true,
+        "sessions": 5,
+        "session_kinds": {
+          "Fact Introduction (Part 1a)": 1,
+          "Fact Introduction (Part 1b)": 1,
+          "Fact Introduction (Part 1c)": 1,
+          "Fact Introduction (Part 2)": 1,
+          "Change+Delete Event": 1
+        },
+        "before_question_groups": [
+          "timestamp",
+          "position_after_session",
+          "questions"
+        ],
+        "conversation_type": "list"
+      },
+      {
+        "episode_id": "sw_007",
+        "domain": "software_project",
+        "family_template": [
+          "software_project",
+          "database",
+          [
+            [
+              "database",
+              "connection_string",
+              1
+            ],
+            [
+              "database",
+              "orm_library",
+              1
+            ],
+            [
+              "database",
+              "orm_library",
+              1
+            ],
+            [
+              "orm_library",
+              "model_syntax",
+              2
+            ]
+          ]
+        ],
+        "task_types": {
+          "Tr": 1,
+          "Cas": 2,
+          "Abs": 1,
+          "Del": 1,
+          "Agg": 1,
+          "ER": 1
+        },
+        "has_2hop": true,
+        "sessions": 5,
+        "session_kinds": {
+          "Fact Introduction (Part 1a)": 1,
+          "Fact Introduction (Part 1b)": 1,
+          "Fact Introduction (Part 1c)": 1,
+          "Fact Introduction (Part 2)": 1,
+          "Change+Delete Event": 1
+        },
+        "before_question_groups": [
+          "timestamp",
+          "position_after_session",
+          "questions"
+        ],
+        "conversation_type": "list"
+      }
+    ],
+    "selection": "Two per domain,2hop present,template tuple distinct from known used and each other. Deterministic shuffle within available metadata.",
+    "limits": [
+      "Known-study input-path and declared-run exposure only; not certification of every historical human contact or base-model pretraining.",
+      "All episodes still share two underlying domain DAGs; distinct active-edge templates are not four independent source generators."
+    ],
+    "new_model_calls": 0,
+    "sha_checks": 0
+  },
+  "preparation": {
+    "status": "PREPARED_NO_MODEL",
+    "jobs": [
+      {
+        "seed": 20261017,
+        "episode": "pl_044",
+        "config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/prepared/jobs/20261017/pl_044.json",
+        "planned_calls": 24
+      },
+      {
+        "seed": 20261017,
+        "episode": "pl_048",
+        "config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/prepared/jobs/20261017/pl_048.json",
+        "planned_calls": 24
+      },
+      {
+        "seed": 20261017,
+        "episode": "sw_037",
+        "config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/prepared/jobs/20261017/sw_037.json",
+        "planned_calls": 28
+      },
+      {
+        "seed": 20261017,
+        "episode": "sw_007",
+        "config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/prepared/jobs/20261017/sw_007.json",
+        "planned_calls": 24
+      },
+      {
+        "seed": 20261018,
+        "episode": "pl_044",
+        "config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/prepared/jobs/20261018/pl_044.json",
+        "planned_calls": 24
+      },
+      {
+        "seed": 20261018,
+        "episode": "pl_048",
+        "config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/prepared/jobs/20261018/pl_048.json",
+        "planned_calls": 24
+      },
+      {
+        "seed": 20261018,
+        "episode": "sw_037",
+        "config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/prepared/jobs/20261018/sw_037.json",
+        "planned_calls": 28
+      },
+      {
+        "seed": 20261018,
+        "episode": "sw_007",
+        "config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/prepared/jobs/20261018/sw_007.json",
+        "planned_calls": 24
+      }
+    ],
+    "source_cases": 50,
+    "total_planned_calls": 200,
+    "wall_seconds": 0.10659746639430523,
+    "cpu_seconds": 0.10658561399999966,
+    "scope": "Four metadata-frozen new-to-registered-study stories, distinct active-edge templates; two seeds per story. Same complete raw-source prefix and native before/after questions for both frozen Reader instructions. Shared underlying domain DAGs limit independence. Source-only view differs from prior mixed-state pilot; no maintenance or exact mixed-view replication claim.",
+    "new_model_calls": 0
+  },
+  "capacity": {
+    "max_input_tokens": 6038,
+    "truncated": false,
+    "unique_prompts": 100,
+    "tokenizer_positions": 531016,
+    "wall_seconds": 1.607954466715455,
+    "cpu_seconds": 1.610886399,
+    "new_model_calls": 0
+  },
+  "frozen_prompt_equal_to_prior": true,
+  "new_model_calls": 0,
+  "view": "literal chronological source prefixes, no Writer state or retrieval",
+  "planned_decoder": {
+    "temperature": 1.0,
+    "top_p": 0.95,
+    "top_k": 20,
+    "min_p": 0.0,
+    "presence_penalty": 1.5,
+    "repetition_penalty": 1.0,
+    "seeds": [
+      20261017,
+      20261018
+    ],
+    "max_output_tokens": 8192
+  }
+}

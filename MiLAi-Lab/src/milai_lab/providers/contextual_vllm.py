@@ -150,6 +150,10 @@ class VLLMClient:
         response_format: dict[str, Any] | None = None,
         top_p: float | None = None,
         presence_penalty: float | None = None,
+        top_k: int | None = None,
+        min_p: float | None = None,
+        repetition_penalty: float | None = None,
+        seed: int | None = None,
         enable_thinking: bool | None = None,
     ) -> dict[str, Any]:
         self._check_owner()
@@ -176,6 +180,10 @@ class VLLMClient:
             request["top_p"] = top_p
         if presence_penalty is not None:
             request["presence_penalty"] = presence_penalty
+        for name, value in (("top_k", top_k), ("min_p", min_p),
+                            ("repetition_penalty", repetition_penalty), ("seed", seed)):
+            if value is not None:
+                request[name] = value
         selected_format = (
             response_format if response_format is not None else self.config.response_format
         )
