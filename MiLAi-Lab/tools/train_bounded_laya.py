@@ -44,6 +44,7 @@ def main() -> None:
     parser.add_argument("--epochs", type=int, default=4)
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
+    parser.add_argument("--backend", choices=("native", "linear"), default="native")
     args = parser.parse_args()
     import torch
     from laya.common import collate_items
@@ -66,6 +67,7 @@ def main() -> None:
            "physical_gpus": [2, 3], "device": "cuda", "torch_version": torch.__version__,
            "cuda_version": torch.version.cuda, "precision": "float32",
            "reference_compile": False,
+           "backend": args.backend,
            "epochs": args.epochs, "batch_size": 4, "gradient_accumulation": 4,
            "max_len": args.max_len, "head_max_len": args.head_max_len, "train_states": len(train),
            "dev_states": len(dev), "encoder_lr": 2.5e-5, "head_lr": 1e-4,
@@ -77,7 +79,14 @@ def main() -> None:
     write_json(args.output / "run.json", run)
     decision = None
     try:
-        decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
+        if args.backend == "linear":
+            from linear_reader_classifier import LinearDecision, save_linear_checkpoint
+
+            decision = LinearDecision(args.checkpoint, args.max_len, args.head_max_len)
+            checkpoint_writer = save_linear_checkpoint
+        else:
+            decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
+            checkpoint_writer = save_checkpoint
         model, tok = decision.model, decision.tokenizer
         # ModernBERT's compiled MLP cannot be traced concurrently by DataParallel
         # replicas when the final batch changes shape. Use its ordinary MLP path.
@@ -170,11 +179,11 @@ def main() -> None:
             config = {**decision.config, "max_len": args.max_len, "head_max_len": args.head_max_len,
                       "temperature": [1.0, 1.0, 1.0], "temperature_by_options": {},
                       "fine_tuned": True, "training": {"milai_reader": {**run, "epoch": epoch}}}
-            save_checkpoint(model, tok, config, str(args.output / "checkpoint_latest"))
+            checkpoint_writer(model, tok, config, str(args.output / "checkpoint_latest"))
         changes = {key: {"parameter": name, "changed_elements": int((
             parameters[name].detach().cpu() != before[key]).sum())} for key, name in probes.items()}
         write_json(args.output / "parameter-probes.json", changes)
-        save_checkpoint(model, tok, config, str(args.output / "checkpoint"))
+        checkpoint_writer(model, tok, config, str(args.output / "checkpoint"))
         run["status"] = "COMPLETED"
     except BaseException as error:
         run.update(status="FAILED", error_type=type(error).__name__, error=str(error))
@@ -197,7 +206,8 @@ def main() -> None:
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
-            budget.record_compute("laya_reader_ce", measures)
+            phase = "laya_reader_ce" if args.backend == "native" else "linear_reader_ce"
+            budget.record_compute(phase, measures)
         write_json(args.output / "run.json", run)
 
 

@@ -29,3 +29,24 @@ def test_fixed_and_adaptive_reuse_prefix_and_keep_stopping_failure(tmp_path):
     assert results["adaptive"]["controller_trace"][0]["reused"] is True
     assert results["adaptive"]["standalone_model_input_tokens"] == 10
     assert results["k2"]["standalone_model_input_tokens"] == 20
+
+
+def test_full_twenty_pool_is_not_silently_cropped_to_eight(tmp_path):
+    case = {"case_id": "case", "question": "q", "candidates": [
+        {"id": f"p{i}", "title": "title", "text": str(i)} for i in range(20)]}
+    calls = []
+
+    def predict(payload):
+        calls.append(len(payload["state"]["candidates"]))
+        opened = len(payload["state"]["read_evidence"])
+        choices = payload["questions"]["next"]["criteria"]
+        preferred = f"open_p{19 - opened}" if opened < 2 else "stop_sufficient"
+        assert preferred in choices
+        return {"probabilities": {key: float(key == preferred) for key in choices},
+                "input_tokens": 10, "wall_seconds": 0.0}
+
+    results = policies(case, predict, tmp_path)
+    assert calls == [20, 19, 18]
+    assert results["k2"]["selected_ids"] == ["p19", "p18"]
+    assert results["adaptive"]["selected_ids"] == ["p19", "p18"]
+    assert results["adaptive"]["stop_reason"] == "stop_sufficient"

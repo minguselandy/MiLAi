@@ -44,7 +44,7 @@ def prepare(decisions: Path, families: Path, output: Path) -> dict:
         visible = {"question": source["question"], "paragraphs": [
             {k: p[k] for k in ("title", "paragraph_text")} for p in source["paragraphs"]]}
         started, cpu = time.perf_counter(), time.process_time()
-        indices = ranked_pool(visible, 8)
+        indices = ranked_pool(visible, len(candidates))
         retrieval.append({"case_id": f"row-{source_row}",
                           "wall_seconds": time.perf_counter() - started,
                           "cpu_seconds": time.process_time() - cpu,
@@ -62,7 +62,8 @@ def prepare(decisions: Path, families: Path, output: Path) -> dict:
     result = {"cases": len(cases), "families": len({r["family"] for r in labels}),
               "source_decisions": str(decisions.resolve()),
               "source_families": str(families.resolve()),
-              "pool_size": 8, "fixed_k": [2, 4, 8], "adaptive_read_limit": 4,
+              "pool_sizes": sorted({len(case["candidates"]) for case in cases}),
+              "fixed_k": [2, 4, "full_pool"], "adaptive_read_limit": 4,
               "scope": "Existing dev families; two preview-exposed families; not blind benchmark"}
     write_json(output / "preparation.json", result)
     write_json(output / "common-retrieval-costs.json", retrieval)
@@ -101,7 +102,7 @@ def policies(case: dict[str, Any], predict: Any, output: Path) -> dict:
 
         start = time.perf_counter()
         result = select_bounded(case["question"], case["candidates"], decide,
-                                max_candidates=8, max_reads=limit)
+                                max_candidates=len(case["candidates"]), max_reads=limit)
         elapsed = time.perf_counter() - start
         result.update(policy=policy, case_id=case["case_id"], controller_trace=used,
                       control_wall_seconds=elapsed,
@@ -125,9 +126,11 @@ def main() -> None:
     select = sub.add_parser("select")
     select.add_argument("cases", type=Path)
     select.add_argument("output", type=Path)
-    select.add_argument("--backend", choices=("bm25", "laya", "ordinary"), required=True)
+    select.add_argument("--backend", choices=("bm25", "laya", "ordinary", "linear"), required=True)
     select.add_argument("--checkpoint", type=Path)
     select.add_argument("--budget", type=Path, required=True)
+    select.add_argument("--max-len", type=int, default=4096)
+    select.add_argument("--head-max-len", type=int, default=384)
     args = parser.parse_args()
     if args.phase == "prepare":
         print(json.dumps(prepare(args.decisions, args.families, args.output)))
@@ -137,6 +140,7 @@ def main() -> None:
     cases = read_rows(args.cases)
     run = {"status": "RUNNING", "pid": os.getpid(), "backend": args.backend,
            "checkpoint": str(args.checkpoint.resolve()) if args.checkpoint else None,
+           "max_len": args.max_len, "head_max_len": args.head_max_len,
            "cases": str(args.cases.resolve()), "planned_cases": len(cases), "completed_cases": 0}
     write_json(args.output / "run.json", run)
     decision = None
@@ -149,8 +153,13 @@ def main() -> None:
             torch.set_num_threads(4)
             torch.cuda.set_per_process_memory_fraction(0.75, 0)
             device = torch.device("cuda:0")
-            if args.backend == "laya":
-                decision = NativeDecision(args.checkpoint, 4096, 384)
+            if args.backend in {"laya", "linear"}:
+                if args.backend == "linear":
+                    from linear_reader_classifier import LinearDecision
+
+                    decision = LinearDecision.load(args.checkpoint, args.max_len, args.head_max_len)
+                else:
+                    decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
                 decision.model.encoder.config.reference_compile = False
                 decision.model.to(device).eval()
                 decision.device = device
@@ -163,7 +172,7 @@ def main() -> None:
                 result = {f"k{k}": {"case_id": case["case_id"], "selected_ids": [
                     p["id"] for p in case["candidates"][:k]], "policy": f"k{k}",
                     "stop_reason": "fixed_k", "decision_calls": 0}
-                    for k in (2, 4, 8)}
+                    for k in (2, 4, len(case["candidates"]))}
                 for policy, row in result.items():
                     write_json(args.output / case["case_id"] / f"{policy}.json", row)
             else:
