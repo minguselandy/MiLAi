@@ -1,4 +1,78 @@
-# Current Jev review execution: MemOps factors CLOSED 2026-10-17
+# Current review execution: source-qualified labels and Reader task probes CLOSED
+
+Goal ACTIVE/incomplete,2026-10-17. This turn made concrete progress: real source review,
+relabelled frozeninputs/cached rescoring, MEMEtrajectory reconciliation, 48newReader
+responses and actualbeforegate/firstanswer review. No subagents,SHA/contentfingerprints,
+newledger,Product/API/Schema/permission/Canonicalchanges or modelservicechanges.
+All new data/env/cache under /cra/memory/mx_memory. No push/merge/remoteCI.
+
+Worktree jev-read-decisions-20261016; report docs/MILAI_JEV_READ_DECISIONS_20261016.md.
+ALL OUR JOBS CLOSED. 09269b66 Readerpair PID1212926/exec64428 exit0,32calls268.760sec.
+a724c5eb compactprobe PID1265115/exec24599 exit0,16calls139.851sec. No modelqueue remains.
+7862/7870 remain stopped; protectedBGE PIDs47436/52982 and existing7860PID2160380 unchanged.
+NoGPU2/3 use thisturn; each36928MiB free lastcheck. 7860used onlyforinference,no restart.
+Originalledger /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json only;
+newunknown0; historicalfloor11generation/1embedding persists. Source runtime/env.sh.
+
+SOURCEQUALIFIED commit257cc35e: fully read15sourcepools/300paragraphpositions (duplicates
+acrosspairedrows included),8trainrows4families +7targeteddevrows4families. Sourceannotations
+jev-reader-source-qualified-v1-annotations.json; trainselection fixed bysupport-countmetadata
+before reading. Originalpositive train has53two-support/9three-support/no4-support rows.
+New train40states26labelled14masked;dev30states22labelled8masked. Allvisibleinputs/actionsets
+unchanged. Alternativecompletepaths useOR,partialusefulpremises precedepoolrelativeSTOP,
+unclearbusinessreferent/Leaidentity/geographyjoin masked. Birthparagraph doesnotprove death;
+PrinceofWales directbiography sufficient. Mask doesnotassert officialanswerfalse.
+Currentlabels are assistant author review, not independenthuman adjudication/fullcorpuscleaning.
+NO newtraining;devnevertraining. Originaldata/weights/officialQA scores untouched.
+Five cached training-timefloat32dev outputs re-scored on same22 admittedstates:
+Laya0 1→1,CE9→9,linear11→8,logits0 7→6,LoRA10→13. Not a modelimprovement claim.
+Exactfrozenprojection/index/eventid(encoder)/length/actionset checks;0newmodelcalls.
+Knownprep+rescore .19687wall/.19685CPU seconds recordedonce reader_source_qualified_v1;
+authorreview/initialsourceextraction costs unmeasured, notzero. Artifacts source-qualified-v1.
+
+MEMEshared source59c61406 independently reconciled4closedD0/D1emptybanktrajectories,
+20states104answers,originalledgerdiff0. No rerun. Sourceauthornativebeforegate reported
+stateonlyD0/D1before4/11 each,after1/15 vs2/15(+1ambig);mixed6/15(+2ambig) vs4/15(+5ambig).
+These are2episodes/sharedtemplates, not commonbefore or isolatedImpactcausality.
+Manifest jev-meme-shared-trajectories-reconciliation-20261017.json; localreconciliationCPU
+recordedonce meme_shared_trajectory_reconciliation_v1. No newindependentadjudication claimed.
+
+NEWREADER taskprobe uses frozenD0mixed deliveries for allCas/Abs after+correspondingbefore
+andERaftercontrols:16cases percondition. Firstpaired32 bothT0/max8192; baseline vs same
+system+genericruleapplication sentence. Bothbefore7/7,dynamicafter1/7,exactrecall2/2.
+CurrentReaderalreadyallowedrules; do not sayitblanketforbidinference. Addedcue didnothelp.
+Then POSTHOC compactsystemreplacement,16additionalcalls sameuserpayloads/T0/outputlimit:
+before7/7,dynamic5/7,ER2/2. ImprovesPLappointment/facility/medication andSWbuildcommand;
+SWprojectstructure alreadycorrect; SWbuildtool andtestcommand stillwrong. Samevariant says
+oldbuildtool butnewbuildcommand: not a coherentglobalstate. All48answers read onlyaftereach
+closed cohort. Userpayloads exact; noGoldgraph/newsource/Writer/retrieval/bank mutations.
+Baseline/appended/compact inputs158098/159026/154802,outputs17651/17942/18870;
+callwall133.14/133.53/138.39sec. Compactisnotfaster; changesinstructioncontentaswellaslength.
+Total48responses526389tokens,0embedding/newunknown,receipt/ledgerexact. No defaultchange,
+trainedmodelbenefit,independentgeneralization or wholepipelinegain claim.
+Artifacts meme-reader-rules-v1 andmeme-reader-compact-v1;3summary/comparison manifests.
+
+Local /cra/qwen36-35B/README.md1010–1018 recommends generalthinkingT1/topP.95/topK20/
+presence1.5. Existinggeneration_config hasT1/topK20/topP.95; clientdoesnotsendpresencepenalty.
+OurpairedT0 is NOT that recommendedprofile. Do notretroactivelyattributefailures todecoding
+withouta controlledtest. Recommendeddecoding/frozencompactconfirmation on separately
+selected stories is a meaningfulnextstep. Do notkeepaddingprompts untilsamecases lookgood.
+
+Currentcompletionaudit jev-bottleneck-review-execution-audit-20261017.json marksNOTCOMPLETE.
+Remaining: matchedcapSTOP/state/complementfactor isolation; representative sourcequalified
+supervision/WBrelationship coverage; confirmedReader/Writersemanticstability; legitimate
+unseenexternalcohort. ExistingLMEv1hasZEROunexposedcases (legacy500openedoutcomes,1000Judges,
+only38actualAnswers); neverrestore118/79 orcancelledsiblingLMEqueue. Asyncnewsourcequestion
+hasnoreply; do notblockindependentwork orpretendnewdataexists. FurtherRL/Impactscaleconditional.
+
+Verification:9relatedunique tests,Ruff,toolsboundary, REAL python -m milai_lab.boundary PASS.
+IMPORTANT earlier python -m milai_lab.import_graph onlyimports code andwasnotDAGvalidation;
+actualboundaryentrypoint nowran andpassed. TwoLangGraph-dependentnewtests routed into
+existingLangMemCIjob inbothfast.yml/ci.yml;YAMLparsepass. Fullrepo/remoteCI notrun.
+RemoteGET/ls-remoterecheckedmain518aee41,PR124open/draftdc431c06/latestopenlist124..119.
+NoGitHubwrite. Preservealloriginalfirstresponses/failures and otherworktree dirtyfiles.
+
+# Historical checkpoint: MemOps factors CLOSED 2026-10-17
 
 Goal ACTIVE/incomplete. Previous turn is concrete progress: completed remaining MemOps
 D0-D4 factor matrix on existing genuine before, source-qualified labels, literal-input

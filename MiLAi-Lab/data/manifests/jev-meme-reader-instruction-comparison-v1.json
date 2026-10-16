@@ -1,0 +1,471 @@
+{
+  "status": "ALL48READER_FIRST_OUTPUTS_AND_NATIVE_GATES_REVIEWED",
+  "source_roots": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-rules-v1",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-compact-v1"
+  ],
+  "source_versions": [
+    "09269b66",
+    "a724c5eb"
+  ],
+  "scores": {
+    "baseline": {
+      "counts": {
+        "before_total": 7,
+        "before_pass": 7,
+        "dynamic_after_total": 7,
+        "dynamic_after_pass": 1,
+        "exact_recall_total": 2,
+        "exact_recall_pass": 2
+      },
+      "cost": {
+        "requests": 16,
+        "prompt_tokens": 158098,
+        "completion_tokens": 17651,
+        "total_tokens": 175749,
+        "call_wall_seconds": 133.1413498800248
+      },
+      "case_judgments": [
+        {
+          "episode": "pl_011",
+          "id": "before-0",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "before-1",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "before-2",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-1",
+          "type": "Cas",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-2",
+          "type": "Cas",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-3",
+          "type": "Abs",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-6",
+          "type": "ER",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-0",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-1",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-2",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-3",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-1",
+          "type": "Cas",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-2",
+          "type": "Cas",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-3",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-4",
+          "type": "Abs",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-7",
+          "type": "ER",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        }
+      ]
+    },
+    "rule_application": {
+      "counts": {
+        "before_total": 7,
+        "before_pass": 7,
+        "dynamic_after_total": 7,
+        "dynamic_after_pass": 1,
+        "exact_recall_total": 2,
+        "exact_recall_pass": 2
+      },
+      "cost": {
+        "requests": 16,
+        "prompt_tokens": 159026,
+        "completion_tokens": 17942,
+        "total_tokens": 176968,
+        "call_wall_seconds": 133.52809801977128
+      },
+      "case_judgments": [
+        {
+          "episode": "pl_011",
+          "id": "before-0",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "before-1",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "before-2",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-1",
+          "type": "Cas",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-2",
+          "type": "Cas",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-3",
+          "type": "Abs",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-6",
+          "type": "ER",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-0",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-1",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-2",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-3",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-1",
+          "type": "Cas",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-2",
+          "type": "Cas",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-3",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-4",
+          "type": "Abs",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-7",
+          "type": "ER",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        }
+      ]
+    },
+    "compact": {
+      "counts": {
+        "before_total": 7,
+        "before_pass": 7,
+        "dynamic_after_total": 7,
+        "dynamic_after_pass": 5,
+        "exact_recall_total": 2,
+        "exact_recall_pass": 2
+      },
+      "cost": {
+        "requests": 16,
+        "prompt_tokens": 154802,
+        "completion_tokens": 18870,
+        "total_tokens": 173672,
+        "call_wall_seconds": 138.39086894411594
+      },
+      "case_judgments": [
+        {
+          "episode": "pl_011",
+          "id": "before-0",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "before-1",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "before-2",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-1",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-2",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-3",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "pl_011",
+          "id": "after-6",
+          "type": "ER",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-0",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-1",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-2",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "before-3",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-1",
+          "type": "Cas",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-2",
+          "type": "Cas",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-3",
+          "type": "Abs",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-4",
+          "type": "Abs",
+          "judgment": "fail",
+          "before_gate_pass": true,
+          "filtered_pass": false
+        },
+        {
+          "episode": "sw_001",
+          "id": "after-7",
+          "type": "ER",
+          "judgment": "pass",
+          "before_gate_pass": true,
+          "filtered_pass": true
+        }
+      ]
+    }
+  },
+  "default_changed": false,
+  "new_model_calls": 48,
+  "new_embedding_or_writer_calls": 0,
+  "whole_pipeline_gain_claimed": false,
+  "new_unseen_evaluation": false,
+  "limits": [
+    "Two exposed episodes and one draw; compact condition chosen after the firstpaired failure.",
+    "Same T0 throughout, not local modelcard general-thinking T1/presence1.5 profile; recommended decoding not tested in this probe.",
+    "Compact changes instruction content/epistemic framing as well as length; effect cannot be assigned solely to shortertext.",
+    "Software onehopbuildtool remainswrong although twohopcommand isright; no coherent-global-state claim.",
+    "Mixedoriginalsources rescueReader; stored state not repaired."
+  ],
+  "local_model_card": "/cra/qwen36-35B/README.md lines1010-1018",
+  "budget_receipt_reconciliations": [
+    "jev-meme-reader-rules-v1-summary.json",
+    "jev-meme-reader-compact-v1-summary.json"
+  ]
+}

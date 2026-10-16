@@ -1,0 +1,307 @@
+{
+  "status": "PAIRED_READER_RULE_CUE_CLOSED",
+  "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-rules-v1",
+  "run": {
+    "status": "COMPLETED",
+    "pid": 1212926,
+    "planned_calls": 32,
+    "completed_calls": 32,
+    "new_writer_calls": 0,
+    "new_retrieval_calls": 0,
+    "temperature": 0.0,
+    "source_version": "09269b6687dd6caa247a95bc16c633a58b5487c4",
+    "wall_seconds": 268.7597275553271
+  },
+  "model_config": {
+    "base_url": "http://127.0.0.1:7860/v1",
+    "model": "Qwen3.6-35B-A3B-FP8",
+    "temperature": 0.0,
+    "max_tokens": 8192,
+    "timeout": 300,
+    "enable_thinking": true,
+    "max_calls": 32
+  },
+  "review": {
+    "status": "ALL32FIRSTANSWERS_REVIEWED",
+    "reviewer": "Rootauthor,exposed,notindependent",
+    "judgments": [
+      {
+        "episode": "pl_011",
+        "id": "before-0",
+        "phase": "before",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "pl_011",
+        "id": "before-0",
+        "phase": "before",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "pl_011",
+        "id": "before-1",
+        "phase": "before",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "pl_011",
+        "id": "before-1",
+        "phase": "before",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "pl_011",
+        "id": "before-2",
+        "phase": "before",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "pl_011",
+        "id": "before-2",
+        "phase": "before",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-1",
+        "phase": "after",
+        "variant": "rule_application",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-1",
+        "phase": "after",
+        "variant": "baseline",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-2",
+        "phase": "after",
+        "variant": "baseline",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-2",
+        "phase": "after",
+        "variant": "rule_application",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-3",
+        "phase": "after",
+        "variant": "rule_application",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-3",
+        "phase": "after",
+        "variant": "baseline",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-6",
+        "phase": "after",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Exactquote retained"
+      },
+      {
+        "episode": "pl_011",
+        "id": "after-6",
+        "phase": "after",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Exactquote retained"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-0",
+        "phase": "before",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-0",
+        "phase": "before",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-1",
+        "phase": "before",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-1",
+        "phase": "before",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-2",
+        "phase": "before",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-2",
+        "phase": "before",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-3",
+        "phase": "before",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "before-3",
+        "phase": "before",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Correctpre-change target; conditionalalternatives remain conditional"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-1",
+        "phase": "after",
+        "variant": "rule_application",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-1",
+        "phase": "after",
+        "variant": "baseline",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-2",
+        "phase": "after",
+        "variant": "baseline",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-2",
+        "phase": "after",
+        "variant": "rule_application",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-3",
+        "phase": "after",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Acknowledges frameworkmigration and unknownnewstructure"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-3",
+        "phase": "after",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Acknowledges frameworkmigration and unknownnewstructure"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-4",
+        "phase": "after",
+        "variant": "baseline",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-4",
+        "phase": "after",
+        "variant": "rule_application",
+        "judgment": "fail",
+        "rationale": "Repeatsoldvalue orholdsconsequence hypothetical despite suppliedtrigger; requiredcurrentchange/uncertainty notresolved"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-7",
+        "phase": "after",
+        "variant": "rule_application",
+        "judgment": "pass",
+        "rationale": "Exactquote retained"
+      },
+      {
+        "episode": "sw_001",
+        "id": "after-7",
+        "phase": "after",
+        "variant": "baseline",
+        "judgment": "pass",
+        "rationale": "Exactquote retained"
+      }
+    ],
+    "before_pass_per_variant": 7,
+    "after_dynamic_pass_per_variant": 1,
+    "after_dynamic_denominator": 7,
+    "exact_recall_pass_per_variant": 2,
+    "original_defaults_changed": false
+  },
+  "costs": {
+    "generation_responses": 32,
+    "generation_tokens": 352717,
+    "generation_unknown": 0
+  },
+  "ledger_differences": {
+    "generation_known_token_difference": 0,
+    "generation_new_unknown_usage": 0,
+    "embedding_known_token_difference": 0,
+    "embedding_new_unknown_usage": 0,
+    "generation_request_difference": 0
+  },
+  "input_audit_errors": [],
+  "scope": "All same16exposed deliveries freshly answered under bothT0conditions. Onlysystemsuffix changes. Native beforegate applies within eachvariant. No newWriter/retrieval/states.",
+  "conclusion": "Bothvariants pass7/7before,1/7dynamicafter,and2/2exact-recall controls. No effect shown for this addedinstruction; do not infer everypossibleprompt fails.",
+  "sampling_limit": "T0chosenforpairedinstructiondiagnostic. LocalQwenREADME general-thinking recommendation usesT1/presence1.5. These probes are not that recommended samplingprofile; unsupported causal attribution to decoding is avoided."
+}

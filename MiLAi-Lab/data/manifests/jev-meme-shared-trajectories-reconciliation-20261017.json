@@ -1,0 +1,226 @@
+{
+  "status": "CLOSED_MEME_ARTIFACTS_RECONCILED",
+  "source_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1",
+  "source_summary": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/data/manifests/jev-meme-native-v1-summary.json",
+  "source_version": "59c61406",
+  "cases": {
+    "D0/pl_011": {
+      "result_status": "TRAJECTORY_ATTEMPTS_CLOSED",
+      "independent_empty_bank": true,
+      "saved_states": 5,
+      "first_answers": 24,
+      "checkpoints": {
+        "before": {
+          "session_index": 3,
+          "read_values_unchanged": true
+        },
+        "after": {
+          "session_index": 4,
+          "read_values_unchanged": true
+        }
+      },
+      "receipts": {
+        "generation_responses": 29,
+        "generation_tokens": 233845,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 40628,
+        "writer_completion_tokens": 23735,
+        "embedding_responses": 20,
+        "embedding_tokens": 3645,
+        "embedding_unknown": 0
+      },
+      "ledger_differences": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    "D0/sw_001": {
+      "result_status": "TRAJECTORY_ATTEMPTS_CLOSED",
+      "independent_empty_bank": true,
+      "saved_states": 5,
+      "first_answers": 28,
+      "checkpoints": {
+        "before": {
+          "session_index": 3,
+          "read_values_unchanged": true
+        },
+        "after": {
+          "session_index": 4,
+          "read_values_unchanged": true
+        }
+      },
+      "receipts": {
+        "generation_responses": 33,
+        "generation_tokens": 249318,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 34927,
+        "writer_completion_tokens": 22879,
+        "embedding_responses": 20,
+        "embedding_tokens": 2605,
+        "embedding_unknown": 0
+      },
+      "ledger_differences": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    "D1/pl_011": {
+      "result_status": "TRAJECTORY_ATTEMPTS_CLOSED",
+      "independent_empty_bank": true,
+      "saved_states": 5,
+      "first_answers": 24,
+      "checkpoints": {
+        "before": {
+          "session_index": 3,
+          "read_values_unchanged": true
+        },
+        "after": {
+          "session_index": 4,
+          "read_values_unchanged": true
+        }
+      },
+      "receipts": {
+        "generation_responses": 33,
+        "generation_tokens": 275283,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 41903,
+        "writer_completion_tokens": 27506,
+        "embedding_responses": 21,
+        "embedding_tokens": 3582,
+        "embedding_unknown": 0
+      },
+      "ledger_differences": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    "D1/sw_001": {
+      "result_status": "TRAJECTORY_ATTEMPTS_CLOSED",
+      "independent_empty_bank": true,
+      "saved_states": 5,
+      "first_answers": 28,
+      "checkpoints": {
+        "before": {
+          "session_index": 3,
+          "read_values_unchanged": true
+        },
+        "after": {
+          "session_index": 4,
+          "read_values_unchanged": true
+        }
+      },
+      "receipts": {
+        "generation_responses": 37,
+        "generation_tokens": 271894,
+        "generation_unknown": 0,
+        "writer_prompt_tokens": 35164,
+        "writer_completion_tokens": 24726,
+        "embedding_responses": 22,
+        "embedding_tokens": 3191,
+        "embedding_unknown": 0
+      },
+      "ledger_differences": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    }
+  },
+  "total_saved_states": 20,
+  "total_first_answers": 104,
+  "reported_source_author_scores": {
+    "D0": {
+      "state_only": {
+        "before_opportunities": 11,
+        "before_pass": 4,
+        "before_ambiguous": 0,
+        "after_opportunities": 15,
+        "after_raw_pass": 3,
+        "after_filtered_pass": 1,
+        "after_ambiguous": 0,
+        "raw_pass_removed_by_before_gate": 2,
+        "task_counts": {
+          "Tr": 2,
+          "Cas": 4,
+          "Abs": 3,
+          "Del": 2,
+          "Agg": 2,
+          "ER": 2
+        }
+      },
+      "mixed": {
+        "before_opportunities": 11,
+        "before_pass": 11,
+        "before_ambiguous": 0,
+        "after_opportunities": 15,
+        "after_raw_pass": 6,
+        "after_filtered_pass": 6,
+        "after_ambiguous": 2,
+        "raw_pass_removed_by_before_gate": 0,
+        "task_counts": {
+          "Tr": 2,
+          "Cas": 4,
+          "Abs": 3,
+          "Del": 2,
+          "Agg": 2,
+          "ER": 2
+        }
+      }
+    },
+    "D1": {
+      "state_only": {
+        "before_opportunities": 11,
+        "before_pass": 4,
+        "before_ambiguous": 0,
+        "after_opportunities": 15,
+        "after_raw_pass": 5,
+        "after_filtered_pass": 2,
+        "after_ambiguous": 1,
+        "raw_pass_removed_by_before_gate": 3,
+        "task_counts": {
+          "Tr": 2,
+          "Cas": 4,
+          "Abs": 3,
+          "Del": 2,
+          "Agg": 2,
+          "ER": 2
+        }
+      },
+      "mixed": {
+        "before_opportunities": 11,
+        "before_pass": 10,
+        "before_ambiguous": 1,
+        "after_opportunities": 15,
+        "after_raw_pass": 4,
+        "after_filtered_pass": 4,
+        "after_ambiguous": 5,
+        "raw_pass_removed_by_before_gate": 0,
+        "task_counts": {
+          "Tr": 2,
+          "Cas": 4,
+          "Abs": 3,
+          "Del": 2,
+          "Agg": 2,
+          "ER": 2
+        }
+      }
+    }
+  },
+  "score_status": "Read source author review and native beforegate; no new independent adjudication or officialscore claim.",
+  "audit_errors": [],
+  "new_model_calls": 0,
+  "wall_seconds": 0.09041693154722452,
+  "cpu_seconds": 0.090362611,
+  "scope": "IndependentD0/D1 trajectories, NOT commonbefore or isolatedImpactcausality. Twoepisodes/sharedtemplates; do not count as full benchmark."
+}

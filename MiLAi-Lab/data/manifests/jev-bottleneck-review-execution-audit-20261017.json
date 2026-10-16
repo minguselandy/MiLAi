@@ -1,0 +1,131 @@
+{
+  "status": "COMPLETION_NOT_PROVEN",
+  "goal_complete": false,
+  "review_source": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_JEV_BOTTLENECK_TRAINING_BENCHMARK_REVIEW_20261016.md",
+  "requirements": [
+    {
+      "id": "local_and_remote_state",
+      "section": "§1/3",
+      "status": "initial_evidence_complete",
+      "evidence": [
+        "docs/MILAI_JEV_READ_DECISIONS_20261016.md",
+        "artifacts/jev-reader/remote-readonly-check-20261017.json",
+        "artifacts/jev-reader/remote-open-prs-20261017.json"
+      ],
+      "finding": "Localmethods/providers/read-writeflow inspected; main518aee41 andPR124openDraftdc431c06 rechecked. Localresearch is not published or merged."
+    },
+    {
+      "id": "finite_reader_controls",
+      "section": "§4.1/9.1",
+      "status": "initial_evidence_complete",
+      "evidence": [
+        "data/manifests/jev-reader-c20-trained-controls-20261017.json",
+        "data/manifests/jev-reader-c20-qa-v1-summary.json"
+      ],
+      "finding": "BoundedC20,distinctsufficient/exhaustedSTOP,plainlinear/letterLoRA/base/CE and commonReader/nativeQA completed. No netbenefit; no universalarchitecture claim."
+    },
+    {
+      "id": "isolate_stop_and_state_factors",
+      "section": "§9.1",
+      "status": "incomplete",
+      "evidence": [
+        "data/manifests/jev-reader-c20-selections-v1.json"
+      ],
+      "finding": "Existingfixed2/adaptive4 do not isolateSTOP at samecap; state-information ablation and two-step outcome objective not completed. Next meaningful read-control is matchedfixed4/adaptive4; do not callpresentresults causalSTOP proof."
+    },
+    {
+      "id": "family_split_and_source_labels",
+      "section": "§6.1/7.2/8",
+      "status": "partial",
+      "evidence": [
+        "data/manifests/jev-reader-source-qualified-v1-annotations.json",
+        "data/manifests/jev-reader-source-qualified-v1-summary.json",
+        "data/manifests/jev-memops-factor-extension-labels-v1.json"
+      ],
+      "finding": "Family/length inventories and eventnormalization exist;15source-pool review and masked/alternative labels nowconcrete. Not corpuswide independentannotation; Writerpreservepositive coverage absent innewMemOpsslice. No revieweddev labels usedfortraining."
+    },
+    {
+      "id": "independent_calibration",
+      "section": "§6",
+      "status": "initial_evidence_complete",
+      "evidence": [
+        "data/manifests/jev-reader-calibration-c20-v1-summary.json"
+      ],
+      "finding": "ScalarT fitonlyeligiblecalibration,thenreservedtest; weights/actionsunchanged. Proxyproof labels remain limited; not calibratedstopping utility."
+    },
+    {
+      "id": "shared_before_writer_factors",
+      "section": "§3.1/4.2/5/9.2",
+      "status": "initial_evidence_complete",
+      "evidence": [
+        "data/manifests/jev-memops-factor-extension-v1-summary.json",
+        "data/manifests/jev-memops-factor-extension-v1-review.json",
+        "data/manifests/jev-memops-forgotten-content-probe-v1-summary.json"
+      ],
+      "finding": "Genuinebefore/D0-D4/actuallocalprojection/fullbinding andfirstfailuresclosed. Earlierreviewedroot interventions preserved. No sufficientW/Blearning or quality-comparablecostwin."
+    },
+    {
+      "id": "boundary_necessity_and_own_state_learning",
+      "section": "§4.2/6.1",
+      "status": "incomplete",
+      "evidence": [
+        "data/manifests/jev-memops-factor-extension-labels-v1.json"
+      ],
+      "finding": "W/Bnecessity with relevantconditional/alternative-support boundaries not isolated across enough actualbefore states. MoreImpact/RL is conditional on resolvingsemantic failures, not automatically warranted byavailablecompute."
+    },
+    {
+      "id": "independent_native_writer_trajectories",
+      "section": "§7.3/9.2",
+      "status": "initial_evidence_complete",
+      "evidence": [
+        "data/manifests/jev-meme-shared-trajectories-reconciliation-20261017.json"
+      ],
+      "finding": "D0/D1twoepisodes,4independentemptybanks/20states/104answers; nativebeforegate retained. Doesnot establishtrainedcontroller continuouspolicyquality or benchmarkwidegeneralization."
+    },
+    {
+      "id": "unexposed_longmemeval",
+      "section": "§7.3/8",
+      "status": "unavailable_in_current_corpus",
+      "evidence": [
+        "data/manifests/jev-longmemeval-exposure-final-v1-20261017.json"
+      ],
+      "finding": "All500currentv1questions haveprioropened systemoutcomes. No eligibleunexposedsubset; no s/m/oraclereset. Useraskedfornewunusedsource, noanswerreceived. This requirement isnot satisfied byexposedregression."
+    },
+    {
+      "id": "reader_failure_intervention",
+      "section": "§5/10",
+      "status": "partial",
+      "evidence": [
+        "data/manifests/jev-meme-reader-instruction-comparison-v1.json"
+      ],
+      "finding": "Addedrulecuefailed; posthoccompacttask improvesdynamic1/7to5/7 atsameT0/noevidencechange, but twodynamicfailures/inconsistencyremain. Mustconfirmfrozenchange on separatecases anddeclaredrecommendeddecoding; notdefault."
+    },
+    {
+      "id": "costs_and_statistics",
+      "section": "§9.3",
+      "status": "partial",
+      "evidence": [
+        "data/manifests/jev-reader-c20-qa-v1-summary.json",
+        "data/manifests/jev-reader-calibration-c20-v1-summary.json",
+        "data/manifests/jev-memops-factor-extension-v1-summary.json"
+      ],
+      "finding": "Originalsingleledger andfirstreceipts retained; actualmodeltokens/calls/wall/devicesknown, familybootstrap present. Authorlabeltime,somecoldload/batchforward detailsunmeasured. Not a fullnetbenefit proof."
+    },
+    {
+      "id": "compatible_modes_and_boundaries",
+      "section": "§9.2",
+      "status": "evidenced_unchanged",
+      "evidence": [
+        "src/milai_lab/methods/edit_memory.py"
+      ],
+      "finding": "Guardrequiringsemantic_delta modes withoutdependency_updates remains. NoProduct/API/schema/permission/Canonicalchanges. ActualboundaryCLI andtoolsboundarypassed; fullrepo/remoteCI notrun."
+    }
+  ],
+  "conditional_extensions": "SGD/controlledProofWriter-style variants,MemConflict,MemoryAgentBench andRL/utility objectives remain later/conditional directions; they are not silently reportedas executed. No broaderGoal success redefined aroundthispilot.",
+  "next_actions": [
+    "ValidatefrozencompactReader withappropriate declaredsampling andnewstoryselection; no defaultadoptionfromposthocpair.",
+    "IsolatematchedcapSTOP andstate/complement effects withoutrepeatingclosedcohortsunchanged.",
+    "ResolveactualW/Blabels/coverage andsource-faithful Writerissues beforelargeImpacttraining.",
+    "Obtainseparateexposure-reviewedexternalcohort; currentLMEv1cannotbeunseen."
+  ]
+}
