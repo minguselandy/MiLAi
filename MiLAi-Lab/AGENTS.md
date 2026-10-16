@@ -1,4 +1,68 @@
-# Current review execution: source-qualified labels and Reader task probes CLOSED
+# LIVE: new-story Reader confirmation and queued same-cap STOP QA — 2026-10-17
+
+Goal ACTIVE/incomplete; prior turn is progress + verified running work. No subagents,
+SHA/contentfingerprints,newledger,Product/API/Schema/permission/Canonical or model-service
+changes. OnlyGPU2usedbrieflyforownedlocalCEselection; nowreleased.7862/7870staystopped;
+protectedBGE/7860containersunchanged. Allnewfiles/env/cacheunder/cra/memory/mx_memory.
+
+PRIMARY LIVE: exec53424,coordinatorPID1434606,source5e2b0dcb. Root
+artifacts/jev-reader/meme-reader-confirm-v1.200predeclaredReader positions,8jobs,
+pl_044/pl_048/sw_037/sw_007 ×seeds20261017/20261018 ×baseline/compact.
+Firstseed100positionsCLOSED0;lastsnapshot116/200,secondseedpl_044live. Verifycurrent
+/proc,driver.json,runs/*/*/run.json andlogs; do not restart fromsnapshot orlosthandle.
+Allsource/runtimecodeusedbythiscohortunchangedfrom5e2; latercommitsaddindependenttools/configs.
+Do notopenreferences/scoresemanticoutputs untilall200firstpredictionsclosedperprotocol.
+Preparedreferences at prepared/references.json; inputs underprepared/inputs; dispatch
+configs underdispatch/seed/episode.json; rawreceipts/answers under runs/seed/episode.
+Eachpart releasesoriginalHTTPlease whenclosed. KnownfailedReaderresponsesretained;
+unexpected/unconfirmedfailure stopscoordinator,no retry. Keepallfirstfailedoutputs.
+
+Selection metadata frozenbeforestoryreading:820knownMEMEinputpaths hitonlypl011/sw001;
+excludepl001..010preview. Chosen4active-edge templatesdifferentfromused/eachother, but
+share2domainDAGs. Thisis new-to-registered-study only,notcertifiedneverexposed/pretrained.
+Source-only chronologicaloriginalturns,NOToldmixedsemanticview. Gold/root/edges/tasktags
+absentfrommodelinput; samefullprefixforallmethods. Nativebeforegateperseed/variantrequired.
+Compactprompt byte-equal originalcandidate. NoWriter/retrieval/bankformation.
+Sampling explicitT1,topP.95,topK20,minP0,presence1.5,repeatPenalty1,seed;thinkingtrue,
+maxoutput8192 (notmodelcard32768). Longestinput6038/no truncation. Actualrequestreceipts
+andserverOpenAPIfieldschecked. Addedonlyoptionalper-call sampling passthrough; defaults
+unchangedwhenomitted.91relevanttests,mypy2src,Ruff/package/toolsboundariespassed.
+Metadata/prep manifest jev-meme-reader-confirm-v1-preparation.json; progress manifest
+jev-meme-reader-confirm-v1-progress.json isdatedsnapshot,notterminal/performance.
+
+SECOND LIVE WAITING: exec10628,supervisorPID1510741,source5bf6d6de. Root
+artifacts/jev-reader/musique-ce-stop-cap4-v1;waits actualPID1434606 andCOMPLETEDdriver.
+Thenauto-runs existingrun_musique_reader.py predict→score underoriginalledger, same7860
+Readerforall3arms BM25k4/CEk4/CEadaptive4.138positions119uniqueinputs; no old7862response
+reuse. DependencyFAILED/missingwithoutcompletion cancelsqueue; no automaticretry.
+AtlastsnapshotNOReaderdispatchyet. Inspectsupervisor.json andactualprocess before action.
+Do NOT startanothercopy or casuallystoptheplannedqueue. Sourceprotocol
+configs/milai-jev-musique-ce-stop-cap4-v1.json; reader-v1/score-v1 createdwhenactuallyrun.
+
+FIXED4 selector CLOSED:exec42763/PID1451842 exit0,source31837038,root
+artifacts/jev-reader/musique-reader-c20-fixed4-v1.46cases,184positions,114literalcached
+prefixes +70newGPUforwards209377tokens,18.607wall/26.265CPU sec. All46firsttwochoices
+matcholdk2. SameBM25k4set17/46,sameadaptivefinalset0/46; noQAclaim yet.
+Originalledger phase reader_ce_fixed4_extension_v1 exactonce. Checkpoint unchanged;
+GPU2/3 noweach36928MiBfree.3reuse/rollouttests passed. Newtool extend_reader_fixed4.py.
+
+Originalledger only /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Do notreset/newledger or writecompute whileanotherHTTPownerholdslease. PreparationCPU
+1.71455wall/1.71747CPU,531016tokenizerpositions alreadyonce under
+meme_reader_confirmation_preparation_v1. STOPofflinepreflight .901wall/.904CPU saved
+inits preparation.json,notyetaddedtocompute ledger. Keepinflight reservations distinct
+fromterminalunknown; perclosedjobdiff0. Source artifacts/jev-reader/runtime/env.sh.
+
+NEXT: monitorbothspecificlivehandles; afterconfirmationallclosedread4storysources and
+all200firstanswers, applynativebeforegates andsource-fidelity/ambiguousstatus consistently,
+pairedperstory/perseed statistics (not200independentstories), exactreceipts/ledger/inputaudit.
+Thenreview queuedSTOPactualfirstoutputs/nativeQA +controller/reusecosts. No newdefault
+adoption/claim beforethose evidence steps. ExistingLMEv1has0unexposedcases; no newsource
+answerfromuser. Do notresurrect118/79 orcancelledsiblingLMEqueue. FullgoalNOTcomplete.
+Frozencompactpriorpilotwasposthoc5/7vs1/7atT0,only2exposedstories,notalreadyconfirmed.
+Currentreport docs/MILAI_JEV_READ_DECISIONS_20261016.md. No publication/merge/fullrepoCI.
+
+# Historical checkpoint: source-qualified labels and Reader task probes CLOSED
 
 Goal ACTIVE/incomplete,2026-10-17. This turn made concrete progress: real source review,
 relabelled frozeninputs/cached rescoring, MEMEtrajectory reconciliation, 48newReader

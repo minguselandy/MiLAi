@@ -1,0 +1,207 @@
+{
+  "status": "LIVE_PREDICTION_NOT_SCORED",
+  "driver": {
+    "status": "RUNNING",
+    "pid": 1434606,
+    "source_version": "5e2b0dcb72fce24b0c6f5040af269b9d218b9583",
+    "planned_calls": 200,
+    "jobs": [
+      {
+        "seed": 20261017,
+        "episode": "pl_044",
+        "returncode": 0,
+        "wall_seconds": 295.36239712219685,
+        "planned_calls": 24
+      },
+      {
+        "seed": 20261017,
+        "episode": "pl_048",
+        "returncode": 0,
+        "wall_seconds": 299.9352522781119,
+        "planned_calls": 24
+      },
+      {
+        "seed": 20261017,
+        "episode": "sw_037",
+        "returncode": 0,
+        "wall_seconds": 298.4760993300006,
+        "planned_calls": 28
+      },
+      {
+        "seed": 20261017,
+        "episode": "sw_007",
+        "returncode": 0,
+        "wall_seconds": 300.4004657249898,
+        "planned_calls": 24
+      }
+    ],
+    "started_epoch": 1792185664.4445662,
+    "automatic_retry": false,
+    "active": "20261018/pl_044"
+  },
+  "observed_epoch": 1792187040.5084174,
+  "completed_positions_at_snapshot": 116,
+  "planned_positions": 200,
+  "jobs": [
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/runs/20261017/pl_044",
+      "run": {
+        "status": "COMPLETED",
+        "pid": 1434608,
+        "planned_calls": 24,
+        "completed_calls": 24,
+        "new_writer_calls": 0,
+        "new_retrieval_calls": 0,
+        "temperature": 1.0,
+        "sampling": {
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repetition_penalty": 1.0,
+          "seed": 20261017
+        },
+        "source_version": "5e2b0dcb72fce24b0c6f5040af269b9d218b9583",
+        "wall_seconds": 293.45505294948816
+      },
+      "costs": {
+        "generation_responses": 24,
+        "generation_tokens": 163180,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/runs/20261017/pl_048",
+      "run": {
+        "status": "COMPLETED",
+        "pid": 1454479,
+        "planned_calls": 24,
+        "completed_calls": 24,
+        "new_writer_calls": 0,
+        "new_retrieval_calls": 0,
+        "temperature": 1.0,
+        "sampling": {
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repetition_penalty": 1.0,
+          "seed": 20261017
+        },
+        "source_version": "5e2b0dcb72fce24b0c6f5040af269b9d218b9583",
+        "wall_seconds": 297.8188714263961
+      },
+      "costs": {
+        "generation_responses": 24,
+        "generation_tokens": 178492,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/runs/20261017/sw_007",
+      "run": {
+        "status": "COMPLETED",
+        "pid": 1494202,
+        "planned_calls": 24,
+        "completed_calls": 24,
+        "new_writer_calls": 0,
+        "new_retrieval_calls": 0,
+        "temperature": 1.0,
+        "sampling": {
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repetition_penalty": 1.0,
+          "seed": 20261017
+        },
+        "source_version": "5e2b0dcb72fce24b0c6f5040af269b9d218b9583",
+        "wall_seconds": 298.380114287138
+      },
+      "costs": {
+        "generation_responses": 24,
+        "generation_tokens": 161778,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/runs/20261017/sw_037",
+      "run": {
+        "status": "COMPLETED",
+        "pid": 1474521,
+        "planned_calls": 28,
+        "completed_calls": 28,
+        "new_writer_calls": 0,
+        "new_retrieval_calls": 0,
+        "temperature": 1.0,
+        "sampling": {
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repetition_penalty": 1.0,
+          "seed": 20261017
+        },
+        "source_version": "5e2b0dcb72fce24b0c6f5040af269b9d218b9583",
+        "wall_seconds": 296.29938965663314
+      },
+      "costs": {
+        "generation_responses": 28,
+        "generation_tokens": 191099,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    {
+      "path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/meme-reader-confirm-v1/runs/20261018/pl_044",
+      "run": {
+        "status": "RUNNING",
+        "pid": 1514187,
+        "planned_calls": 24,
+        "completed_calls": 16,
+        "new_writer_calls": 0,
+        "new_retrieval_calls": 0,
+        "temperature": 1.0,
+        "sampling": {
+          "top_p": 0.95,
+          "top_k": 20,
+          "min_p": 0.0,
+          "presence_penalty": 1.5,
+          "repetition_penalty": 1.0,
+          "seed": 20261018
+        },
+        "source_version": "5e2b0dcb72fce24b0c6f5040af269b9d218b9583"
+      }
+    }
+  ],
+  "references_opened_for_scoring": false,
+  "no_semantic_results_claimed": true,
+  "scheduled_followup": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-ce-stop-cap4-v1/supervisor.json"
+}
