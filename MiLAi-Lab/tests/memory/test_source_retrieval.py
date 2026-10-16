@@ -12,7 +12,38 @@ from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.memory.episodes import EpisodeIndex
 from milai_lab.memory.functional import FunctionalMemory
-from milai_lab.memory.service import MemoryService
+from milai_lab.memory.service import MemoryService, reference_key
+
+
+def test_source_identity_legacy_lookup_filters_once_and_keeps_owner_and_cached_identity(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    with SqliteStore.from_conn_string(str(tmp_path / "identity.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        original = service.capture_user("old-session", "old-key", "Original source.")["source_ref"]
+        source = service.source(original)
+        assert source is not None
+        store.put(service.sources_namespace, "foreign", {**source, "owner": "foreign-owner",
+                                                          "event_id": "foreign"}, index=False)
+        ns = (*service.namespace, "source_identities")
+        store.delete(ns, reference_key([service.owner, "old-session", "old-key", "user"]))
+        calls = []
+        search = store.search
+
+        def filtered(namespace, **kwargs):
+            calls.append(kwargs)
+            assert kwargs["filter"]["owner"] == service.owner and kwargs["limit"] == 1
+            return search(namespace, **kwargs)
+
+        monkeypatch.setattr(store, "search", filtered)
+        monkeypatch.setattr(service, "_rows", lambda *_: pytest.fail("Whole Source scan"))
+        assert service.event_id("old-session", "old-key", "user") == original
+        assert service.event_id("old-session", "old-key", "user") == original
+        assert len(calls) == 1
+        fresh = service.event_id("new-session", "new-key", "user")
+        assert fresh != original and fresh != "foreign"
+        assert service.event_id("new-session", "new-key", "user") == fresh
+        assert len(calls) == 2
 
 
 def test_source_query_skips_formation_and_keeps_owner_scope(

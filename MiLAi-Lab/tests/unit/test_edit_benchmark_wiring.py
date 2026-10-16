@@ -296,6 +296,31 @@ def test_long_history_is_complete_chronological_and_strips_answer_markers() -> N
     assert "gold" not in repr(observed)
 
 
+def test_long_history_preserves_distinct_dates_for_repeated_external_session_ids() -> None:
+    observed = longmemeval_history(
+        {
+            "haystack_session_ids": ["same", "same", "unique"],
+            "haystack_dates": ["2030-01-03", "2030-01-01", "2030-01-02"],
+            "haystack_sessions": [
+                [{"role": "user", "content": text, "has_answer": True}]
+                for text in ("later report", "earlier report", "middle report")
+            ],
+        }
+    )
+    assert [row.session_id for row in observed] == [
+        "same\x1fduplicate-occurrence:1",
+        "unique",
+        "same\x1fduplicate-occurrence:0",
+    ]
+    assert [row.turns[0]["content"] for row in observed] == [
+        "earlier report",
+        "middle report",
+        "later report",
+    ]
+    assert [row.date for row in observed] == ["2030-01-01", "2030-01-02", "2030-01-03"]
+    assert "has_answer" not in repr(observed)
+
+
 def test_source_clusters_follow_transitive_history_overlap() -> None:
     groups = history_components(
         [

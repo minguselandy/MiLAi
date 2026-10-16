@@ -15,8 +15,10 @@ from milai_lab.memory.service import MemoryService
 from milai_lab.methods.edit_features import EditFeatures
 from milai_lab.methods.edit_maintenance import maintain_event
 from milai_lab.methods.edit_memory import EditMemory
+from milai_lab.providers.contextual_vllm import VLLMConfig
 from milai_lab.runners.edit_benchmarks import BenchmarkRun
 from milai_lab.runners.method_architecture_diagnostic import (
+    _maintain_with_output_budget,
     diagnostic_costs,
     prepare_diagnostic,
     promote_plain_version,
@@ -67,6 +69,10 @@ class StubRun(BenchmarkRun):
                 return {"creates": [{"action": "create", "matter": "test source",
                                      "clauses": [clause]}], "records": {}}
             text = before[0]["value"]["edit_state"]["units"][0]["text"]
+            if self.settings.get("maintenance_mode") == "semantic_delta_v2":
+                return {"changes": {"r1": {"replace": {"u1": {
+                    "text": text + "\n" + observed.turns[0]["content"],
+                    "basis": "e1", "also": ["e2"], "kind": "reported"}}}}}
             return {"creates": [], "records": {"r1": {"action": "edit", "edits": [{
                 "operation": "replace", "target_unit": "u1",
                 "text": text + "\n" + observed.turns[0]["content"],
@@ -83,11 +89,40 @@ class StubRun(BenchmarkRun):
         return "Test response to: " + question
 
 
-def test_common_actual_seed_is_not_reformed_or_repaired_for_candidate(tmp_path: Path):
+@pytest.mark.parametrize("failure", [False, True])
+def test_maintenance_ceiling_does_not_change_reader_or_survive_failure(tmp_path, failure):
+    config = VLLMConfig(base_url="http://localhost/v1", model="test", max_tokens=8192)
+    run = SimpleNamespace(root=tmp_path, client=SimpleNamespace(config=config),
+                          settings={"model": {"max_tokens": 8192}})
+
+    def maintain(*args):
+        assert run.client.config.max_tokens == 2048
+        assert run.settings["model"]["max_tokens"] == 2048
+        if failure:
+            raise ValueError("known test failure")
+
+    run.maintain_recipe = maintain
+    if failure:
+        with pytest.raises(ValueError, match="known test failure"):
+            _maintain_with_output_budget(run, None, None, 2048)
+    else:
+        _maintain_with_output_budget(run, None, None, 2048)
+    assert run.client.config == config and run.settings["model"]["max_tokens"] == 8192
+
+
+@pytest.mark.parametrize("with_delta", [False, True])
+def test_common_actual_seed_is_not_reformed_or_repaired_for_candidate(tmp_path: Path, with_delta):
     lab = Path(__file__).resolve().parents[2]
     config = read_json(lab / "configs/milai-method-architecture-paired-v1.json")
     for key in ("plain_config", "candidate_config", "sources"):
         config[key] = str(lab / config[key])
+    if with_delta:
+        delta = read_json(Path(config["candidate_config"]))
+        settings = delta["entrypoints"]["benchmark"]
+        settings["maintenance_mode"] = "semantic_delta_v2"
+        settings["edit_features"].update(dependency_updates=False, dependency_groups=True)
+        config["delta_config"] = str(tmp_path / "delta.json")
+        write_json(Path(config["delta_config"]), delta)
     # This evaluator-only sentinel must never reach any maintenance call.
     config["queries"][0]["gold"] = "EVALUATOR_SECRET"
     root = tmp_path / "diagnostic"
@@ -107,8 +142,11 @@ def test_common_actual_seed_is_not_reformed_or_repaired_for_candidate(tmp_path: 
     assert candidate["before"][0]["value"]["edit_state"]["relations"] == []
     assert plain["engineered_ok"] and candidate["engineered_ok"]
     assert candidate["state_correct"] is None and candidate["answer_correct"] is None
+    if with_delta:
+        delta = summary["arms"]["delta"]
+        assert delta["before"] == candidate["before"] and delta["engineered_ok"]
     assert read_json(root / "seed/result.json") == saved_seed
-    for name in ("seed", "plain", "candidate"):
+    for name in ("seed", *protocol["settings"]):
         with SqliteStore.from_conn_string(str(root / name / "bank/memory.sqlite")) as store:
             owner = config["owner"]
             service = MemoryService(store, ("edit", "method-architecture-diagnostic", owner), owner,

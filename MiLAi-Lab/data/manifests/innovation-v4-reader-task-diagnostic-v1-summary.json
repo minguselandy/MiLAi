@@ -1,0 +1,106 @@
+{
+  "status": "COMPLETED",
+  "source_version": "521a32a1",
+  "rows": [
+    {
+      "case_id": "innovation-range-reservations-0",
+      "question": "Based on all records as of 2039-03-20, how many distinct confirmed reservations remain for Aurora room on 2039-03-25? Give their IDs.",
+      "predicted": "range",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-reservations-1",
+      "question": "Based on all records as of 2039-03-20, list the distinct confirmed reservations for Birch room on 2039-03-25 and give the count.",
+      "predicted": "range",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-reservations-2",
+      "question": "Which Aurora-room reservations for 2039-03-25 were cancelled by 2039-03-20, and how many distinct cancellations are recorded?",
+      "predicted": "range",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-deliveries-0",
+      "question": "Based on all records available as of 2039-04-20, how many books do all records establish were delivered to Cedar room on 2039-04-02? Account for duplicates and corrections.",
+      "predicted": "range",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-deliveries-1",
+      "question": "Based on all records available as of 2039-04-20, list the distinct completed Cedar-room deliveries on 2039-04-02 and give their count.",
+      "predicted": "range",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-deliveries-2",
+      "question": "Based on all records available as of 2039-04-20, which recorded pledge for Cedar room on 2039-04-02 remains undelivered and how many books does it promise?",
+      "predicted": "lookup",
+      "expected": "range"
+    },
+    {
+      "case_id": "lookup-0",
+      "question": "What is the reference index's latest reported location?",
+      "predicted": "lookup",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-1",
+      "question": "Did removing the voucher access route mean Mira's voucher itself became invalid?",
+      "predicted": "lookup",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-2",
+      "question": "What is the name of the playlist I created on Spotify?",
+      "predicted": "lookup",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-3",
+      "question": "How long was I in Japan for?",
+      "predicted": "lookup",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-4",
+      "question": "How many days had passed between the Hindu festival of Holi and the Sunday mass at St. Mary's Church?",
+      "predicted": "lookup",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-5",
+      "question": "How much more miles per gallon was my car getting a few months ago compared to now?",
+      "predicted": "lookup",
+      "expected": "lookup"
+    }
+  ],
+  "matched": 11,
+  "total": 12,
+  "costs": {
+    "stages": {
+      "reader": {
+        "responses": 12,
+        "known_tokens": 2329,
+        "unknown_usage_responses": 0
+      }
+    },
+    "requests_without_response": [],
+    "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+  },
+  "ledger_delta": {
+    "generation_requests": 12,
+    "generation": {
+      "known_tokens": 2329,
+      "charged_tokens": 2329,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "scope": "Exposed question-only routing diagnostic. Expected labels are used only after responses; no Sources, answers or candidate labels enter the request. Not an answer-quality or independent generalization result.",
+  "finding": "Five ofsix range examples and allsix lookup controls classified as expected. The undelivered-pledge question is classified lookup. Not a perfect router or independent classification test."
+}

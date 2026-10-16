@@ -18,6 +18,7 @@ def empty_view() -> dict[str, Any]:
 def plan_delivery(
     selected_refs: list[dict[str, Any]],
     fits: Callable[[list[dict[str, Any]]], bool],
+    *, monotone: bool = False,
 ) -> dict[str, Any]:
     """Plan whole semantic matters using the caller's complete request cost.
 
@@ -25,6 +26,8 @@ def plan_delivery(
     that cannot fit alone. Pages are delivery choices, never summaries or proof
     that their bodies have already reached a model. Previously read references
     remain loadable through the same caller-owned snapshot.
+    A caller with a monotone prefix cost may use binary page boundaries; the
+    generic path retains its original behavior for arbitrary cost functions.
     """
     selected = copy.deepcopy(selected_refs)
     if fits(selected):
@@ -33,6 +36,30 @@ def plan_delivery(
     pages: list[list[dict[str, Any]]] = []
     page: list[dict[str, Any]] = []
     unavailable = []
+    if monotone:
+        start = 0
+        while start < len(selected):
+            remaining = selected[start:]
+            if start and fits(remaining):
+                pages.append(remaining)
+                break
+            # The whole remaining suffix is known not to fit. Find its largest
+            # fitting prefix, preserving the same pages and oversized items.
+            low, high = 0, len(remaining) - 1
+            while low < high:
+                middle = (low + high + 1) // 2
+                if fits(remaining[:middle]):
+                    low = middle
+                else:
+                    high = middle - 1
+            if low:
+                pages.append(remaining[:low])
+                start += low
+            else:
+                unavailable.append(remaining[0])
+                start += 1
+        return {"selected_refs": selected, "pages": pages,
+                "unavailable_refs": unavailable, "fits_together": False}
     for ref in selected:
         if fits([*page, ref]):
             page.append(ref)

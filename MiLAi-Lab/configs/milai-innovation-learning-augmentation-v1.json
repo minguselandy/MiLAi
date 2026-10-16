@@ -1,0 +1,69 @@
+{
+  "seed": 20261017,
+  "scope": "Same-codepoint entity bijections, old public-unit alias permutations and clause presentation order; dates/quantities/event order unchanged. Three dependent variants per original, all objectives receive the same data. No evaluation sources added.",
+  "variants": [
+    {
+      "name": "entity-alias-1",
+      "entities": {
+        "杜桐": "柳澈",
+        "湾口观测站": "溪岚观测站",
+        "兰庭社区": "蒲岸社区",
+        "顾月": "卫清",
+        "秦澈": "安洛",
+        "何川": "黎可",
+        "南坡": "东岭",
+        "北坡": "西岭",
+        "桐河": "柳川",
+        "叶霖": "唐岑",
+        "叶澜": "唐钰",
+        "沈禾": "季遥",
+        "Elm": "Ash",
+        "Moss": "Reed",
+        "East": "Dawn",
+        "West": "Dusk"
+      }
+    },
+    {
+      "name": "entity-alias-2",
+      "entities": {
+        "杜桐": "薛原",
+        "湾口观测站": "岚谷观测站",
+        "兰庭社区": "竹野社区",
+        "顾月": "周伊",
+        "秦澈": "舒芩",
+        "何川": "宁禾",
+        "南坡": "南岭",
+        "北坡": "北岭",
+        "桐河": "晴河",
+        "叶霖": "沈泽",
+        "叶澜": "沈芷",
+        "沈禾": "方筠",
+        "Elm": "Bay",
+        "Moss": "Fern",
+        "East": "Peak",
+        "West": "Vale"
+      }
+    },
+    {
+      "name": "entity-alias-3",
+      "entities": {
+        "杜桐": "黎舒",
+        "湾口观测站": "白汀观测站",
+        "兰庭社区": "禾庭社区",
+        "顾月": "简朔",
+        "秦澈": "俞岑",
+        "何川": "安荻",
+        "南坡": "东坡",
+        "北坡": "西坡",
+        "桐河": "岚江",
+        "叶霖": "许原",
+        "叶澜": "许汐",
+        "沈禾": "叶初",
+        "Elm": "Oak",
+        "Moss": "Pine",
+        "East": "Rise",
+        "West": "Cove"
+      }
+    }
+  ]
+}

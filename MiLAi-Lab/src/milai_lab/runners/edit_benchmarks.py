@@ -6,6 +6,7 @@ import copy
 import fcntl
 import json
 import re
+import time
 from collections import Counter
 from collections.abc import Callable
 from dataclasses import asdict
@@ -516,6 +517,23 @@ class BenchmarkRun:
             raise ValueError("READER_PROJECTION_INVALID")
         if settings.get("evidence_policy", "legacy") not in {"legacy", "question_pack_v1"}:
             raise ValueError("EVIDENCE_POLICY_INVALID")
+        if settings.get("evidence_selection_policy", "standard") not in {
+            "standard", "value_v1", "structure_first_v1", "retrieved_first_v1",
+            "range_aggregate_v1", "task_first_v1", "range_aggregate_v2",
+        }:
+            raise ValueError("EVIDENCE_SELECTION_POLICY_INVALID")
+        if settings.get("evidence_selection_policy", "standard") != "standard" \
+                and settings.get("evidence_policy") != "question_pack_v1":
+            raise ValueError("EVIDENCE_SELECTION_REQUIRES_QUESTION_PACKS")
+        if settings.get("query_structure_policy") is not None:
+            from milai_lab.methods.query_structure import POLICIES
+
+            if settings["query_structure_policy"] not in POLICIES:
+                raise ValueError("QUERY_STRUCTURE_POLICY_INVALID")
+            if settings.get("evidence_policy") != "question_pack_v1" \
+                    or settings.get("source_access") != "independent_v1" \
+                    or settings.get("dependency_reading"):
+                raise ValueError("QUERY_STRUCTURE_REQUIRES_INDEPENDENT_SOURCE_PACK_READER")
         if settings.get("reader_target", "legacy") not in {"legacy", "original_question_v1"}:
             raise ValueError("READER_TARGET_INVALID")
         if settings.get("source_access", "semantic_only") not in {
@@ -527,7 +545,9 @@ class BenchmarkRun:
             for name in ("source_top_k", "semantic_top_k")
         ):
             raise ValueError("SOURCE_RETRIEVAL_LIMIT_INVALID")
-        if settings.get("maintenance_mode", "legacy") not in {"legacy", "event_delta_v1"}:
+        if settings.get("maintenance_mode", "legacy") not in {
+            "legacy", "event_delta_v1", "semantic_delta_v1", "semantic_delta_v2",
+        }:
             raise ValueError("MAINTENANCE_MODE_INVALID")
         if settings.get("halumem", {}).get("reader_failure_policy", "fail_fast") not in {
             "fail_fast", "record_confirmed_length", "record_known_readonly_failure",
@@ -1859,13 +1879,55 @@ class BenchmarkRun:
             )
             if selections is not None and materials:
                 materials[0]["pre_read_calls"] = 1
+            if self.settings.get("query_structure_policy"):
+                from milai_lab.methods.query_structure import (
+                    QueryStructurePolicy,
+                    build_query_structure,
+                )
+
+                structure_key = f"query-structure/{snapshot_id}"
+
+                def interpret(messages: list[dict[str, str]], schema: dict[str, Any]) -> Any:
+                    if self.client.config.max_calls < 2:
+                        raise ReadDeliveryIncomplete("read_call_limit")
+                    return parse_object(self.call(structure_key, messages, structured=True,
+                        response_format={"type": "json_schema", "json_schema": {
+                            "name": "query_structure", "schema": schema}},
+                        enable_thinking=self.stage_thinking("reader")))
+
+                started = time.perf_counter()
+                try:
+                    structure, report = build_query_structure(service, question, date,
+                        [span["source_ref"] for material in native["source_materials"]
+                         for span in material["source_ranges"]],
+                        policy=cast(QueryStructurePolicy, self.settings["query_structure_policy"]),
+                        call=interpret)
+                except ValueError as error:
+                    question_key = (snapshot_id.removeprefix("native/").removesuffix(
+                        "/retrieval.json") if self.settings.get("alignment_backend") else
+                        snapshot_id.removeprefix("http/").removesuffix("/retrieval-materials.json"))
+                    failure = self._known_reader_failure(error, question_key)
+                    if failure is None:
+                        raise
+                    structure = None
+                    report = {"policy": self.settings["query_structure_policy"],
+                        "action": "incomplete_raw_only", "failure": failure,
+                        "model_calls": int(failure["phase"] == "confirmed_response"),
+                        "elapsed_ms": (time.perf_counter() - started) * 1000}
+                if structure is not None:
+                    materials.append(structure)
+                if materials:
+                    materials[0]["pre_read_calls"] = report["model_calls"]
+                native["query_structure"] = report
+                write_json(self.root / "http" / structure_key / "interpretation.json",
+                           {"report": report, "material": structure})
             native["material_assembly"] = {
                 "policy": "question_pack_v1", "evidence_variant": variant,
                 "independent_original_candidates": len(native["source_materials"]),
                 "linked_original_candidates": 0,
                 "semantic_candidates": len(native.get("records", [])),
                 "semantic_materials": sum(item["kind"] == "semantic_view" for item in materials),
-                "material_origins": ["semantic_view" if item["kind"] == "semantic_view"
+                "material_origins": [item["kind"] if item["kind"] != "original_source"
                                      else "independent_original" for item in materials],
             }
             return materials
@@ -2112,7 +2174,8 @@ class BenchmarkRun:
 
         def request_thinking(messages: list[dict[str, str]]) -> bool | None:
             schema = json.loads(messages[1]["content"]).get("response_schema", {})
-            selection_only = schema.get("properties", {}).get("answer") == {"type": "null"}
+            selection_only = (schema.get("properties", {}).get("answer") == {"type": "null"}
+                              or schema.get("title") in {"evidence_value_v1", "reader_task_v1"})
             if selection_only and "select" in self.settings.get("stage_enable_thinking", {}):
                 return self.stage_thinking("select")
             return thinking
@@ -2132,7 +2195,28 @@ class BenchmarkRun:
                 saved["active_stage"] = key if stage == "answer" else f"{key}/{stage}"
             write_json(path, saved)
 
-        return read_question_pack(
+        policy: Callable[..., tuple[str, list[dict[str, Any]]]] = read_question_pack
+        options: dict[str, Any] = {}
+        if self.settings.get("evidence_selection_policy") == "value_v1":
+            from milai_lab.methods.evidence_value import read_by_evidence_value
+
+            policy = read_by_evidence_value
+            options["measure"] = lambda messages: self.input_tokens(
+                messages, enable_thinking=self.stage_thinking("reader"))
+        elif self.settings.get("evidence_selection_policy") == "structure_first_v1":
+            options["initial_indices"] = [i for i, item in enumerate(memories)
+                                          if item["kind"] == "query_structure"]
+        elif self.settings.get("evidence_selection_policy") == "retrieved_first_v1":
+            options["initial_indices"] = [i for i, item in enumerate(memories)
+                if item["kind"] == "original_source" and not item.get("scope_only")][:1]
+        elif self.settings.get("evidence_selection_policy") == "range_aggregate_v1":
+            options["aggregate_ranges"] = True
+        elif self.settings.get("evidence_selection_policy") in {
+                "task_first_v1", "range_aggregate_v2"}:
+            options["classify_task"] = True
+            options["aggregate_ranges"] = (
+                self.settings["evidence_selection_policy"] == "range_aggregate_v2")
+        return policy(
             question, date, memories, snapshot_id=snapshot_id, open_materials=reopen,
             messages_for=lambda items: reader_messages(question, date, items,
                                                         memory_view="source_history"),
@@ -2143,6 +2227,7 @@ class BenchmarkRun:
                 memories[0].get("pre_read_calls", 0) if memories else
                 int(bool(self.settings.get("dependency_reading")))),
             source_scope=scope,
+            **options,
         )
 
     def _rank_materials(
@@ -2838,11 +2923,17 @@ class BenchmarkRun:
         pool_id = (f"native/{key}/retrieval.json" if self.settings.get("alignment_backend")
                    else f"http/{key}/retrieval-materials.json")
         dependency_stage = f"dependency-selection/{pool_id}"
+        structure_stage = f"query-structure/{pool_id}"
         if self.settings.get("dependency_reading") and not view_path.exists() and (
             self.root / "http" / dependency_stage / "response.json"
         ).exists():
             stage = dependency_stage
-        if stage != key and not stage.startswith(key + "/view/") and stage != dependency_stage:
+        if self.settings.get("query_structure_policy") and not view_path.exists() and (
+            self.root / "http" / structure_stage / "response.json"
+        ).exists():
+            stage = structure_stage
+        if stage != key and not stage.startswith(key + "/view/") \
+                and stage not in {dependency_stage, structure_stage}:
             return None
         folder = self.root / "http" / stage
         response_path = folder / "response.json"
@@ -2869,6 +2960,10 @@ class BenchmarkRun:
                 "failure_ref": str(failure_path.relative_to(self.root))}
 
     def halumem(self, phase: str = "all") -> dict[str, Any]:
+        if self.settings.get("evidence_replay"):
+            from milai_lab.runners.evidence_replay import replay_halumem
+
+            return replay_halumem(self, phase)
         selection = self.settings["halumem"]
         qa_only = selection.get("evaluation_mode", "all") == "qa_only"
         users = halumem_users(Path(selection["path"]), selection["users"])

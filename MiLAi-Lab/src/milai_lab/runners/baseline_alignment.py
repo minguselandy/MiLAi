@@ -706,12 +706,8 @@ class AlignmentRun(BenchmarkRun):
         )
 
     def halumem(self, phase: str = "all") -> dict[str, Any]:
-        if self.settings.get("evidence_replay"):
-            from milai_lab.runners.evidence_replay import replay_halumem
-
-            return replay_halumem(self, phase)
         result = super().halumem(phase)
-        if phase == "predict":
+        if phase == "predict" or self.settings.get("evidence_replay"):
             return result
         result["backend_capabilities"] = {
             "session_output": "supported" if self.session_output_supported else "N/A",

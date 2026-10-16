@@ -11,7 +11,7 @@ import copy
 import json
 import sqlite3
 import time
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 from typing import Any, cast
 
@@ -68,6 +68,11 @@ def diagnostic_costs(root: Path) -> dict[str, Any]:
     for path in responses:
         parts = path.relative_to(root / "http").parts
         stage = ("embedding" if parts[0] == "embedding" else
+                 "judge" if parts[:2] == ("halumem", "judge") or (
+                     parts[0] == "longmemeval" and len(parts) == 4 and parts[2] == "judge") else
+                 "query_structure" if parts[0] == "query-structure" else
+                 "evidence_value_selection" if "view" in parts and any(
+                     part.startswith("value-") for part in parts) else
                  "policy_selection" if parts[0] == "maintenance-policy" else
                  "impact" if parts[0] == "maintenance" and "impact" in parts else
                  "maintenance" if parts[0] == "maintenance" else
@@ -90,6 +95,9 @@ def diagnostic_costs(root: Path) -> dict[str, Any]:
 def prepare_diagnostic(config: dict[str, Any], root: Path) -> dict[str, Any]:
     plain = read_json(Path(config["plain_config"]))["entrypoints"]["benchmark"]
     candidate = read_json(Path(config["candidate_config"]))["entrypoints"]["benchmark"]
+    settings = {"plain": plain, "candidate": candidate}
+    if "delta_config" in config:
+        settings["delta"] = read_json(Path(config["delta_config"]))["entrypoints"]["benchmark"]
     user = halumem_users(Path(config["sources"]), [config["owner"]])[0]
     shared_fields = ("budget_path", "model", "context_tokens", "tokenizer_path", "source_tokens",
                      "source_body_tokens", "calendar_context", "maintenance_recipe",
@@ -97,12 +105,13 @@ def prepare_diagnostic(config: dict[str, Any], root: Path) -> dict[str, Any]:
                      "source_access", "source_granularity", "source_tokenization", "reader_target",
                      "evidence_policy", "retrieval_granularity", "memory_profile", "memory_ranking",
                      "reader_projection", "stage_enable_thinking")
-    differences = [key for key in shared_fields if plain.get(key) != candidate.get(key)]
+    differences = [f"{role}:{key}" for role, selected in settings.items() if role != "plain"
+                   for key in shared_fields if plain.get(key) != selected.get(key)]
     if differences:
         raise ValueError(f"Paired conditions differ: {differences}")
     protocol: dict[str, Any] = {
         "status": "PREPARED_ZERO_MODEL", "config": config,
-        "settings": {"plain": plain, "candidate": candidate},
+        "settings": settings,
         "observations": {name: asdict(halumem_session(
             config["owner"], ordinal, user["sessions"][ordinal]))
                          for name, ordinal in (("seed", config["seed_session"]),
@@ -142,6 +151,29 @@ def _copy_bank(source: Path, destination: Path) -> None:
     with sqlite3.connect(f"file:{source}?mode=ro", uri=True) as original:
         with sqlite3.connect(destination) as copied:
             original.backup(copied)
+
+
+def _maintain_with_output_budget(
+    run: BenchmarkRun, service: MemoryService, observed: ObservedSession,
+    output_tokens: int | None,
+) -> None:
+    """A declared maintenance-only ceiling; the common Reader keeps its original settings."""
+    if output_tokens is None:
+        run.maintain_recipe(service, observed, "update")
+        return
+    original = run.client.config
+    original_tokens = run.settings["model"]["max_tokens"]
+    run.client.config = replace(original, max_tokens=output_tokens)
+    run.settings["model"]["max_tokens"] = output_tokens
+    write_json(run.root / "maintenance-model-settings.json", {
+        "max_tokens": output_tokens, "reader_max_tokens": original.max_tokens,
+        "stage_enable_thinking": run.settings.get("stage_enable_thinking", {}),
+    })
+    try:
+        run.maintain_recipe(service, observed, "update")
+    finally:
+        run.client.config = original
+        run.settings["model"]["max_tokens"] = original_tokens
 
 
 def _prepare_arrival(protocol: dict[str, Any], root: Path) -> Path:
@@ -210,7 +242,7 @@ def run_pair(
     seed = read_json(root / "seed/result.json")
     arrival_bank = _prepare_arrival(protocol, root)
     results = {}
-    for role in ("plain", "candidate"):
+    for role in protocol["settings"]:
         folder = root / role
         path = folder / "result.json"
         if path.exists():
@@ -231,11 +263,12 @@ def run_pair(
                     row["id"]: row["value"] for row in seed["actual_state"]
                 }:
                     raise ValueError("The diagnostic clone differs from its actual model seed")
-                projection = promote_plain_bank(service) if role == "candidate" else []
+                projection = promote_plain_bank(service) if role != "plain" else []
                 before = service.records()
                 write_json(folder / "before.json", {"records": before, "projection": projection})
                 observed = ObservedSession(**protocol["observations"]["update"])
-                run.maintain_recipe(service, observed, "update")
+                _maintain_with_output_budget(
+                    run, service, observed, protocol["config"].get("maintenance_output_tokens"))
                 after = service.records()
                 write_json(folder / "after.json", after)
                 answers = []

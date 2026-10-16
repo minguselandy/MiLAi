@@ -1,0 +1,82 @@
+{
+  "name": "milai-innovation-value-supervision-v2",
+  "dataset": "/cra/memory/mx_memory/reference-sources/milai-edit/data/longmemeval_s_cleaned.json",
+  "questions": [
+    "0db4c65d",
+    "2a1811e2",
+    "07741c45",
+    "08e075c7",
+    "0ea62687",
+    "10d9b85a",
+    "19b5f2b3",
+    "1e043500",
+    "0a34ad58",
+    "0edc2aef"
+  ],
+  "selection": [
+    {
+      "question_id": "0db4c65d",
+      "question_type": "temporal-reasoning",
+      "sessions": 44,
+      "answer_session_count": 2
+    },
+    {
+      "question_id": "2a1811e2",
+      "question_type": "temporal-reasoning",
+      "sessions": 46,
+      "answer_session_count": 2
+    },
+    {
+      "question_id": "07741c45",
+      "question_type": "knowledge-update",
+      "sessions": 49,
+      "answer_session_count": 2
+    },
+    {
+      "question_id": "08e075c7",
+      "question_type": "knowledge-update",
+      "sessions": 45,
+      "answer_session_count": 2
+    },
+    {
+      "question_id": "0ea62687",
+      "question_type": "multi-session",
+      "sessions": 43,
+      "answer_session_count": 2
+    },
+    {
+      "question_id": "10d9b85a",
+      "question_type": "multi-session",
+      "sessions": 44,
+      "answer_session_count": 2
+    },
+    {
+      "question_id": "19b5f2b3",
+      "question_type": "single-session-user",
+      "sessions": 43,
+      "answer_session_count": 1
+    },
+    {
+      "question_id": "1e043500",
+      "question_type": "single-session-user",
+      "sessions": 50,
+      "answer_session_count": 1
+    },
+    {
+      "question_id": "0a34ad58",
+      "question_type": "single-session-preference",
+      "sessions": 42,
+      "answer_session_count": 1
+    },
+    {
+      "question_id": "0edc2aef",
+      "question_type": "single-session-preference",
+      "sessions": 46,
+      "answer_session_count": 1
+    }
+  ],
+  "scope": "Ten external development questions selected by type/session metadata before outcomes. Excludes explicit question IDs/families in current configs; not a claim of global never-exposure or a formal holdout. Answer-session metadata nominates offline supervision subsets only; it never enters runtime method inputs.",
+  "excluded_explicit_question_ids": 38,
+  "model_calls": 0,
+  "parameter_updates": 0
+}

@@ -1278,17 +1278,10 @@ class MemoryService:
                 return str(prior.value["source_ref"])
             # Keep IDs issued before this index existed. Do not reconstruct an
             # ID from content or reinterpret old digest-shaped IDs.
-            existing = next(
-                (
-                    row["id"]
-                    for row in self._rows(self.sources_namespace)
-                    if row["value"].get("owner") == self.owner
-                    and row["value"].get("session") == session
-                    and row["value"].get("role") == role
-                    and row["value"].get("capture_key") == event_key
-                ),
-                None,
-            )
+            matches = self.store.search(self.sources_namespace, filter={
+                "owner": self.owner, "session": session, "role": role, "capture_key": event_key,
+            }, limit=1)
+            existing = matches[0].key if matches else None
             source_ref = existing or "source-" + str(uuid.uuid4())
             self.store.put(ns, key, {"source_ref": source_ref}, index=False)
             return str(source_ref)

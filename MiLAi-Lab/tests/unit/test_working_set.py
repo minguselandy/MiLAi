@@ -2,7 +2,34 @@
 
 from __future__ import annotations
 
-from milai_lab.memory.working_set import admit_refs, empty_view, read_requirement_status
+import pytest
+
+from milai_lab.memory.working_set import (
+    admit_refs,
+    empty_view,
+    plan_delivery,
+    read_requirement_status,
+)
+
+
+@pytest.mark.parametrize("sizes,limit", [
+    ([2, 3, 4, 100, 1, 6, 0, 3], 10), ([1] * 1000, 75), ([100] * 4, 10), ([], 10),
+])
+def test_monotone_pages_preserve_order_capacity_and_oversized_items(sizes, limit):
+    refs = [{"index": index, "size": size} for index, size in enumerate(sizes)]
+    counts = {False: 0, True: 0}
+    results = {}
+    for fast in (False, True):
+        def fits(page, fast=fast):
+            counts[fast] += 1
+            return sum(row["size"] for row in page) <= limit
+
+        results[fast] = plan_delivery(refs, fits, monotone=fast)
+    assert results[True] == results[False]
+    assert all(sum(row["size"] for row in page) <= limit for page in results[True]["pages"])
+    assert results[True]["unavailable_refs"] == [row for row in refs if row["size"] > limit]
+    if len(sizes) == 1000:
+        assert counts[True] < 200 and counts[False] > 1000
 
 
 def test_current_and_original_wording_do_not_satisfy_history_or_live_query() -> None:

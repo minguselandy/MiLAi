@@ -1,0 +1,18 @@
+{
+  "status": "COMPLETED_ZERO_MODEL_PROFILE",
+  "source_counts": [
+    3233,
+    3233
+  ],
+  "source_fields_identical": true,
+  "old_capture_seconds": 0.3132128519937396,
+  "new_capture_seconds": 0.14272025972604752,
+  "old_bind_seconds": 0.0123829310759902,
+  "new_bind_seconds": 0.012574653141200542,
+  "new_model_calls": 0,
+  "original_banks_written": false,
+  "old_source_version": "dc9d14cc",
+  "new_source_version": "37c0d47e",
+  "scope": "Two independent copies of the same actual3233-source bank. One fresh external capture key in each. This is localCPU/profile evidence, not an asymptoticindex or fullpipeline speedclaim. Database JSONfilter maystillscan rows internally.",
+  "prior_setup_failure": "ingest-profile-v2 named its scriptprofile.py, shadowing stdlib profile before measurement;0HTTP and no originalbank writes. Preserved separately."
+}

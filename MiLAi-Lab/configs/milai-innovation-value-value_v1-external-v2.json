@@ -1,0 +1,137 @@
+{
+  "candidate_version": "milai-innovation-value-value_v1-external-v2",
+  "entrypoints": {
+    "benchmark": {
+      "experiment_name": "milai-innovation-value-value_v1-external-v2",
+      "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+      "tokenizer_path": "/cra/qwen36-35B",
+      "context_tokens": 65536,
+      "retrieval_limit": 10,
+      "model": {
+        "base_url": "http://127.0.0.1:7862/v1",
+        "model": "Qwen3.6-35B-A3B-FP8",
+        "temperature": 1.0,
+        "max_tokens": 8192,
+        "timeout": 300,
+        "enable_thinking": true,
+        "max_calls": 12
+      },
+      "source_tokens": 4096,
+      "chronological_order": "timestamp",
+      "method_version": "milai_edit_v2",
+      "config_version": "milai-innovation-value-value_v1-external-v2",
+      "working_sets": false,
+      "interface_version": "I2",
+      "edit_features": {
+        "matter_organization": true,
+        "semantic_operations": true,
+        "bound_references": true,
+        "single_record_changes": true,
+        "source_metadata": true,
+        "temporal_scope": true,
+        "proposition_updates": true,
+        "dependency_updates": false,
+        "dependency_groups": false
+      },
+      "source_body_tokens": 8192,
+      "embedding": {
+        "base_url": "http://127.0.0.1:7861/v1/",
+        "model": "bge-m3",
+        "temperature": 0,
+        "max_tokens": 4096,
+        "timeout": 180,
+        "tool_mode": "json_action",
+        "max_calls": 12,
+        "enable_thinking": false
+      },
+      "embedding_capacity": {
+        "tokenizer_path": "/data/models/embed/tokenizer.json",
+        "context_tokens": 8192
+      },
+      "embedding_dimension": 1024,
+      "embedding_batch_size": 16,
+      "halumem": {
+        "path": "/cra/memory/mx_memory/MiLAi-worktrees/method-architecture-20261014/MiLAi-Lab/data/fixtures/milai-method-architecture-screening-v1.jsonl",
+        "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/HaluMem",
+        "users": [
+          "method-screen-maps",
+          "method-screen-kiln",
+          "method-screen-archive",
+          "method-screen-studio",
+          "method-screen-tickets",
+          "method-screen-projection",
+          "method-screen-walk",
+          "method-screen-exhibit",
+          "method-screen-inventory",
+          "method-screen-credits",
+          "method-screen-reservation",
+          "method-screen-parcel"
+        ],
+        "reader_failure_policy": "record_known_readonly_failure",
+        "session_prefix": null,
+        "evaluation_mode": "qa_only"
+      },
+      "maintenance_recipe": "single_pass",
+      "evidence_kind": "DEVELOPMENT_SOURCE_RETRIEVAL_UNICODE_V1",
+      "memory_profile": "unified_v1",
+      "memory_ranking": "dense",
+      "calendar_context": "Asia/Shanghai",
+      "memory_view_mode": "direct",
+      "reader_projection": "semantic_units_v1",
+      "retrieval_granularity": "record_units",
+      "stage_enable_thinking": {
+        "edit": true,
+        "impact": true,
+        "reader": true,
+        "select": false
+      },
+      "longmemeval": {
+        "path": "/cra/memory/mx_memory/reference-sources/milai-edit/data/longmemeval_s_cleaned.json",
+        "official_checkout": "/cra/memory/mx_memory/reference-sources/milai-edit/LongMemEval",
+        "questions": [
+          "6d550036",
+          "gpt4_f49edff3",
+          "6aeb4375",
+          "75832dbd"
+        ],
+        "reader_failure_policy": "record_known_readonly_failure"
+      },
+      "arm": "B1",
+      "source_access": "independent_v1",
+      "source_top_k": 20,
+      "semantic_top_k": 10,
+      "maintenance_mode": "event_delta_v1",
+      "source_tokenization": "unicode_v1",
+      "source_granularity": "session",
+      "evidence_variant": "S0",
+      "reader_target": "original_question_v1",
+      "evidence_policy": "question_pack_v1",
+      "dependency_reading": false,
+      "read_usage_updates": false,
+      "evidence_selection_policy": "value_v1"
+    }
+  },
+  "alignment": {
+    "name": "milai-innovation-value-value_v1-external-v2",
+    "track": "common-conditions",
+    "backends": [
+      "MiLAi-memory-only"
+    ],
+    "history_protocol": "longmemeval-complete-history",
+    "source_policy": "source-only",
+    "qa_top_k": 20,
+    "update_top_k": 10,
+    "delivery": "direct",
+    "raw_access": "original-history-for-RawRAG; independently-retrieved-visible-original-Sources-plus-linked-supports-and-fitting-semantic-views-for-MiLAi",
+    "rawrag": {
+      "granularity": "session"
+    },
+    "native_answer": "separate-optional-not-main-QA",
+    "prediction_scoring": "explicit-selected-arm-score-after-saved-predictions-and-resource-closure",
+    "unknown_retry": false,
+    "write_test_answers_back": false,
+    "resource_owner": "Root; existing continuous ledger; serial model dispatch",
+    "external_internal_usage": "unobserved unless actual native usage is available; not zero",
+    "claim": "new external development subset after v1 failure analysis; not formal confirmation or full benchmark; Standard may answer inside a pack-reading call; value policy reserves a final answer call. This is an acquisition-policy comparison, not isolated scoring-head causality."
+  }
+}

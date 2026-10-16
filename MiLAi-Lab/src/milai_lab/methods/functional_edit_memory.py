@@ -67,6 +67,7 @@ from milai_lab.methods.edit_memory import (
     Arm,
     EditMemory,
     InterfaceVersion,
+    MaintenanceMode,
 )
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
@@ -129,7 +130,7 @@ class FunctionalEditMemory(FunctionalMemory):
         interface_version: InterfaceVersion = "v1",
         features: EditFeatures | None = None,
         maintenance_recipe: MaintenanceRecipe | None = None,
-        maintenance_mode: Literal["legacy", "event_delta_v1"] = "legacy",
+        maintenance_mode: MaintenanceMode = "legacy",
         query_time: str | None = None,
         query_calendar_context: str | None = None,
         evidence_policy: Literal["legacy", "question_pack_v1"] = "legacy",

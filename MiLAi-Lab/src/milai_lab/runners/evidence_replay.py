@@ -77,10 +77,21 @@ def _predict(
         # These are the actual values/revisions returned at this question, never
         # the copied bank's latest values. The service only reopens their exact
         # sources and predecessor revisions; no future search is performed.
-        semantic = execution._record_materials(service, native["records"], date)
-        materials = execution._source_first_materials(
-            service, question, date, native, semantic, snapshot_id=snapshot_id,
-        )
+        if execution.settings["evidence_replay"].get("reuse_saved_materials"):
+            materials = copy.deepcopy(saved["materials"])
+            if execution.settings["evidence_replay"].get("exclude_query_structure"):
+                retained = [i for i, material in enumerate(materials)
+                            if material["kind"] != "query_structure"]
+                materials = [materials[i] for i in retained]
+                origins = native["material_assembly"]["material_origins"]
+                native["material_assembly"]["material_origins"] = [origins[i] for i in retained]
+            for material in materials:
+                material.pop("pre_read_calls", None)
+        else:
+            semantic = execution._record_materials(service, native["records"], date)
+            materials = execution._source_first_materials(
+                service, question, date, native, semantic, snapshot_id=snapshot_id,
+            )
         write_json(pool, {
             "materials": materials, "native_return": native, "source_snapshot": str(original),
             "returned_count": len(materials), "shared_retrieval_usage": saved.get("usage"),
@@ -116,20 +127,30 @@ def _predict(
             "execution": "answered" if isinstance(answer, str) else "missing",
             "source_snapshot": str(original), "source_bank": str(source / "banks" / owner),
             "source_state": "saved arrival-prefix records and original ranges; no new search",
+            "query_structure_excluded": execution.settings["evidence_replay"].get(
+                "exclude_query_structure", False),
             "evidence": {
                 "pool": len(materials), "read": len(delivered_indices), "final": len(final),
                 "linked_candidates": assembly["linked_original_candidates"],
                 "semantic_candidates": assembly["semantic_candidates"],
                 "semantic_in_pool": assembly["semantic_materials"],
                 "semantic_final": sum(item.get("kind") == "semantic_view" for item in final),
+                "query_structure_in_pool": sum(item.get("kind") == "query_structure"
+                                               for item in materials),
+                "query_structure_final": sum(item.get("kind") == "query_structure"
+                                             for item in final),
                 "linked_final": (sum(origins[index] == "linked_source"
                                      for index in final_indices) if origins is not None else None),
                 "final_item_indices": final_indices,
+                "opened_item_indices": view.get("opened_indices", []),
             },
             "prediction_cost": _cost(execution.root / "http" / key, time.monotonic() - started),
             "shared_cost": {
                 "formation": str(source / "maintenance" / key.split("/qa/")[0]),
                 "retrieval": str(original), "accounting": "reused once, not charged per arm",
+                **({"query_structure": str(source / "http/query-structure/native" / key /
+                                            "retrieval.json/interpretation.json")}
+                   if "query_structure" in native else {}),
             },
             **({"reader_failure": failure} if failure is not None else {}),
         }

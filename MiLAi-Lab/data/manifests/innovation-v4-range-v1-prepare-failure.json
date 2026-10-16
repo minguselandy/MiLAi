@@ -1,0 +1,26 @@
+{
+  "status": "PREPARATION_FAILED_ZERO_MODEL",
+  "source_version": "ce8cc684",
+  "error": "First comparison declares QA20 and evaluator-only update10",
+  "cause": "Generic alignment.qa_top_k was4 rather than20. Independent S0 Source retrieval separately uses source_top_k=4; no model was dispatched.",
+  "ledger_delta": {
+    "generation_requests": 0,
+    "generation": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "original_run_preserved": "artifacts/innovation-v4/range-v1",
+  "new_configs": [
+    "configs/milai-innovation-range-standard-v2.json",
+    "configs/milai-innovation-range-aggregate-v2.json"
+  ],
+  "semantic_configuration_change": "None: independent original Source top-k remains4, with the full captured scope accessible; same two data histories and model/context/output/call settings.",
+  "downstream_queue": "value-outcomes-corpus-v1 ended PREDECESSOR_REQUIRES_INSPECTION with no worker steps; new queue will follow range-v2."
+}

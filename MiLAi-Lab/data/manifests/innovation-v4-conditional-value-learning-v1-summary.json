@@ -1,0 +1,145 @@
+{
+  "status": "COMPLETED_EXPOSED_LEARNING_DIAGNOSTIC",
+  "training_source_version": "40616f5d",
+  "crossquery_source_version": "8e40739f",
+  "method": "Explicit-vocabulary TF-IDF features and linear ridge heads; independent control masks current-state features, conditional arm includes current-state text/count/interactions. Shared projection/weights are portable JSON; no runtime selector integration yet.",
+  "training_inputs": {
+    "questions": [
+      "gpt4_59149c77",
+      "6a1eabeb"
+    ],
+    "immediate_examples": 20,
+    "two_open_examples": 14,
+    "answer_return_examples": 11,
+    "vocabulary": 2048,
+    "ridge_regularization": 0.1,
+    "labels": "Original reviewed actual Reader outcomes, nulls omitted; equal total weight per question/head. Multiple subsets and equivalent aliases remain dependent.",
+    "coefficient_vector_length_per_arm": 36876
+  },
+  "training_fit": {
+    "independent": {
+      "immediate": 0.06072240687798371,
+      "two_open": 0.05604386938200271,
+      "answer_return": 0.245011334799583
+    },
+    "conditional": {
+      "immediate": 0.007450901473450287,
+      "two_open": 0.002061541712627707,
+      "answer_return": 0.026266693188816824
+    }
+  },
+  "same_candidate_different_evidence": {
+    "independent": [
+      {
+        "example_id": "gpt4_59149c77:empty->moma_only",
+        "target": 0.0,
+        "prediction": 0.6292402545945309
+      },
+      {
+        "example_id": "gpt4_59149c77:ancient_only->both",
+        "target": 1.0,
+        "prediction": 0.6292402545945309
+      }
+    ],
+    "conditional": [
+      {
+        "example_id": "gpt4_59149c77:empty->moma_only",
+        "target": 0.0,
+        "prediction": 0.23450077188401622
+      },
+      {
+        "example_id": "gpt4_59149c77:ancient_only->both",
+        "target": 1.0,
+        "prediction": 0.9443263691345589
+      }
+    ]
+  },
+  "crossquery_per_question_mean_mse": {
+    "independent": {
+      "immediate": 0.18004257703925552,
+      "two_open": 0.26415775147816484,
+      "answer_return": 0.3111178559331102
+    },
+    "conditional": {
+      "immediate": 0.23691890762820622,
+      "two_open": 0.23936091856252245,
+      "answer_return": 0.14314262363249136
+    }
+  },
+  "crossquery_folds": [
+    {
+      "excluded_question_id": "gpt4_59149c77",
+      "training_question_ids": [
+        "6a1eabeb"
+      ],
+      "vocabulary_size": 996,
+      "mse": {
+        "independent": {
+          "immediate": 0.1776551122822061,
+          "two_open": 0.26886325693821456,
+          "answer_return": 0.2799929501738135
+        },
+        "conditional": {
+          "immediate": 0.18897268161066513,
+          "two_open": 0.22953567023186427,
+          "answer_return": 0.09161438891824596
+        }
+      }
+    },
+    {
+      "excluded_question_id": "6a1eabeb",
+      "training_question_ids": [
+        "gpt4_59149c77"
+      ],
+      "vocabulary_size": 1686,
+      "mse": {
+        "independent": {
+          "immediate": 0.18243004179630495,
+          "two_open": 0.2594522460181151,
+          "answer_return": 0.3422427616924069
+        },
+        "conditional": {
+          "immediate": 0.2848651336457473,
+          "two_open": 0.2491861668931806,
+          "answer_return": 0.19467085834673675
+        }
+      }
+    }
+  ],
+  "costs": {
+    "training_arm_fit": {
+      "independent": {
+        "wall_seconds": 0.36144787073135376,
+        "cpu_seconds": 0.327876469
+      },
+      "conditional": {
+        "wall_seconds": 0.3198740519583225,
+        "cpu_seconds": 0.3198578999999999
+      }
+    },
+    "training_timing_limit": "Initial full-fit common vocabulary construction was not timed separately; arm timings are not the complete training wall time. Later runner adds total timing. Original result is preserved.",
+    "crossquery_total_wall_seconds": 1.2898849798366427,
+    "crossquery_total_cpu_seconds": 1.28985833,
+    "process_peak_rss_mib": 589.11328125,
+    "blas_threads": 1,
+    "linear_head_fits": 18,
+    "new_model_http_calls": 0,
+    "new_teacher_calls": 0,
+    "source_bank_writes": 0,
+    "existing_teacher_cost": "Two prior outcome runs paid 24 generation calls/120236 tokens total; already recorded in the continuous ledger, not charged again."
+  },
+  "validation": [
+    "7 conditional-feature/label-isolation/serialization/transition tests passed",
+    "learned_evidence_value source mypy passed",
+    "Ruff/package DAG/tools boundary passed",
+    "Actual full fitting and two excluded-question folds completed"
+  ],
+  "finding": "Conditioning improves fit on the two training questions and distinguishes a fixed candidate at empty versus complementary evidence. Across the two excluded-question folds, immediate-gain MSE is worse (0.2369 versus0.1800); two-open and answer-return MSE are lower. This mixed two-query result does not establish a useful selector or semantic generalization.",
+  "limits": [
+    "Both questions were already exposed during development; excluded-fold vocabulary and coefficients are trained only on the other question, but this is not global formal holdout.",
+    "Only oracle-nominated subsets have outcome labels. No actual full-pool action trajectory, stop decision or selected-subset Reader quality has been measured for these weights.",
+    "Scores are uncalibrated, unpenalized observed-return estimates; cost/opens remain explicit. The lexical control is not an LLM or claimed new architecture.",
+    "Equal coefficient-vector dimensions are not equal effective capacity: state feature blocks are identically zero in the independent control."
+  ],
+  "next": "Review the queued ten-question actual outcomes, expand clean supervised cases, and compare a trained conditional policy through the same real Source/Reader path with strong simple controls; retain this cross-query failure."
+}

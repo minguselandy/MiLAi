@@ -1,0 +1,111 @@
+{
+  "status": "COMPLETED",
+  "independent_queries": 1,
+  "subset_conditions": 6,
+  "training_transitions": 7,
+  "conditions": [
+    {
+      "condition": "empty",
+      "indices": [],
+      "expand_context": [],
+      "correct": false,
+      "reader_input_tokens": 384
+    },
+    {
+      "condition": "moma_only",
+      "indices": [
+        2
+      ],
+      "expand_context": [
+        2
+      ],
+      "correct": false,
+      "reader_input_tokens": 6181
+    },
+    {
+      "condition": "ancient_only",
+      "indices": [
+        0
+      ],
+      "expand_context": [
+        0
+      ],
+      "correct": false,
+      "reader_input_tokens": 4924
+    },
+    {
+      "condition": "both",
+      "indices": [
+        2,
+        0
+      ],
+      "expand_context": [
+        2,
+        0
+      ],
+      "correct": true,
+      "reader_input_tokens": 10732
+    },
+    {
+      "condition": "equivalent_parent",
+      "indices": [
+        2,
+        8
+      ],
+      "expand_context": [
+        2,
+        8
+      ],
+      "correct": true,
+      "reader_input_tokens": 10732
+    },
+    {
+      "condition": "both_plus_unrelated",
+      "indices": [
+        2,
+        0,
+        108
+      ],
+      "expand_context": [
+        2,
+        0,
+        108
+      ],
+      "correct": true,
+      "reader_input_tokens": 15115
+    }
+  ],
+  "equivalent_source_intervals": true,
+  "costs": {
+    "stages": {
+      "reader": {
+        "responses": 6,
+        "known_tokens": 55821,
+        "unknown_usage_responses": 0
+      },
+      "judge": {
+        "responses": 6,
+        "known_tokens": 5569,
+        "unknown_usage_responses": 0
+      }
+    },
+    "requests_without_response": [],
+    "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+  },
+  "ledger_delta": {
+    "generation_requests": 12,
+    "generation": {
+      "known_tokens": 61390,
+      "charged_tokens": 61390,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "source_review": "Actual Jan8 MoMA and Jan15 Ancient Civilizations source messages read. Both/alternate/noise answers7days; singleton and empty answers abstain. MoMA-only incorrectly also says no calendar dates, but lacks the other visit so the task label remains false.",
+  "finding": "Immediate singleton task accuracy is zero while the complementary pair succeeds. Equivalent parent navigation is not uniquely necessary. An unrelated source adds input without observed task gain.",
+  "limits": "One exposed query, one sample per subset, same-family Judge. Offline nominated supports, not a main-method benchmark result. No original prediction or score changed, no new retrieval/formation, no second ledger."
+}

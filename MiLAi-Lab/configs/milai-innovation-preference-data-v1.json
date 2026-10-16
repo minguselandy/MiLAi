@@ -1,0 +1,15 @@
+{
+  "scope": "Relative source-grounded local preferences over the same actual inputs, not perfect global states. Observed model responses remain unchanged; only equivalent format conversion is used. Counterfactual no-change/duplicate-copy alternatives are explicitly synthetic, not observed model outcomes.",
+  "observed_negatives": {
+    "innovation-harbor-transition-1-reference": "Invents an end-of-day expiry for a cancellation and leaves the invalidated support route.",
+    "innovation-harbor-transition-2-reference": "Asserts an unsupported history-versus-change distinction and leaves the old expiry/positive dependency problem.",
+    "innovation-orchid-transition-1-reference": "Overwrites the before-effective-date assignment instead of retaining both periods.",
+    "innovation-catalog-transition-1-reference": "Attaches per-member quantity semantics to a book editor correction.",
+    "innovation-grant-transition-3-reference": "Duplicates the membership event in a new record and existing record, and generalizes this one event into a permanent rule.",
+    "innovation-shared-transition-3-reference": "Omits the new West scope, rewrites old scope, misattributes reports as observed, and uses failed ventilation as a positive premise.",
+    "innovation-studio-transition-3-reference": "No operation omits the new independent sticker information.",
+    "innovation-catalog-formation-reference-v3": "Adds per-member quantity metadata to editors and cover color.",
+    "innovation-shared-formation-reference-v3": "Combines independently changeable equipment states and misattributes the user report as observed; absence of a graph alone is not the negative label."
+  },
+  "counterfactuals": "Required edits versus a no-change action; valid no-change references versus an unnecessary semantic copy of the current source. References themselves remain author-reviewed development data."
+}

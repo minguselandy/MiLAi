@@ -1,0 +1,79 @@
+{
+  "name": "milai-innovation-reader-task-diagnostic-v1",
+  "settings": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/range-v3/standard/MiLAi-memory-only/actual-config.json",
+  "cases": [
+    {
+      "case_id": "innovation-range-reservations-0",
+      "question": "Based on all records as of 2039-03-20, how many distinct confirmed reservations remain for Aurora room on 2039-03-25? Give their IDs.",
+      "date": "2039-03-20",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-reservations-1",
+      "question": "Based on all records as of 2039-03-20, list the distinct confirmed reservations for Birch room on 2039-03-25 and give the count.",
+      "date": "2039-03-20",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-reservations-2",
+      "question": "Which Aurora-room reservations for 2039-03-25 were cancelled by 2039-03-20, and how many distinct cancellations are recorded?",
+      "date": "2039-03-20",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-deliveries-0",
+      "question": "Based on all records available as of 2039-04-20, how many books do all records establish were delivered to Cedar room on 2039-04-02? Account for duplicates and corrections.",
+      "date": "2039-04-20",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-deliveries-1",
+      "question": "Based on all records available as of 2039-04-20, list the distinct completed Cedar-room deliveries on 2039-04-02 and give their count.",
+      "date": "2039-04-20",
+      "expected": "range"
+    },
+    {
+      "case_id": "innovation-range-deliveries-2",
+      "question": "Based on all records available as of 2039-04-20, which recorded pledge for Cedar room on 2039-04-02 remains undelivered and how many books does it promise?",
+      "date": "2039-04-20",
+      "expected": "range"
+    },
+    {
+      "case_id": "lookup-0",
+      "question": "What is the reference index's latest reported location?",
+      "date": "2037-01-02",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-1",
+      "question": "Did removing the voucher access route mean Mira's voucher itself became invalid?",
+      "date": "2037-01-03",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-2",
+      "question": "What is the name of the playlist I created on Spotify?",
+      "date": "2023-05-30",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-3",
+      "question": "How long was I in Japan for?",
+      "date": "2023-05-30",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-4",
+      "question": "How many days had passed between the Hindu festival of Holi and the Sunday mass at St. Mary's Church?",
+      "date": "2023-03-26",
+      "expected": "lookup"
+    },
+    {
+      "case_id": "lookup-5",
+      "question": "How much more miles per gallon was my car getting a few months ago compared to now?",
+      "date": "2023-05-30",
+      "expected": "lookup"
+    }
+  ],
+  "scope": "Six exposed range and six lookup controls, fixed before classifier outputs. Same35B model/thinkingFalse/temperature0; no full Reader/Source rerun or gold answer provided."
+}

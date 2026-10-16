@@ -1,0 +1,39 @@
+{
+  "selection": "First remaining ID per four task types absent from tracked configs; metadata-only choice. Prior exposures elsewhere unknown.",
+  "role": "new external development subset after v1 failure analysis; not formal confirmation or full benchmark",
+  "cases": [
+    {
+      "question_id": "6d550036",
+      "question_type": "multi-session",
+      "sessions": 47
+    },
+    {
+      "question_id": "gpt4_f49edff3",
+      "question_type": "temporal-reasoning",
+      "sessions": 47
+    },
+    {
+      "question_id": "6aeb4375",
+      "question_type": "knowledge-update",
+      "sessions": 47
+    },
+    {
+      "question_id": "75832dbd",
+      "question_type": "single-session-preference",
+      "sessions": 48
+    }
+  ],
+  "changes": [
+    "value lookup starts in the standard retrieved set",
+    "explicit gap can expose the rest of the same captured pool",
+    "identical already opened source intervals add no evidence"
+  ],
+  "unchanged": [
+    "source access",
+    "Reader base prompt",
+    "model",
+    "sampling settings",
+    "call/output caps"
+  ],
+  "protocol_difference": "Standard may answer inside a pack-reading call; value policy reserves a final answer call. This is an acquisition-policy comparison, not isolated scoring-head causality."
+}

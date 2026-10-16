@@ -1,0 +1,99 @@
+{
+  "status": "ORIGINAL_QUEUE_FAILED_AND_PRESERVED",
+  "source_version": "73116958",
+  "source_prediction": {
+    "complete_answers": 16
+  },
+  "source_first_score": {
+    "correct": 13,
+    "opportunities": 16,
+    "missing": 0,
+    "labels": {
+      "Correct": 13,
+      "invalid": 3
+    }
+  },
+  "source_costs": {
+    "stages": {
+      "reader": {
+        "responses": 16,
+        "known_tokens": 35726,
+        "unknown_usage_responses": 0
+      },
+      "judge": {
+        "responses": 16,
+        "known_tokens": 40786,
+        "unknown_usage_responses": 0
+      }
+    },
+    "requests_without_response": [],
+    "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+  },
+  "rebuild_costs": {
+    "stages": {
+      "reader": {
+        "responses": 9,
+        "known_tokens": 23787,
+        "unknown_usage_responses": 0
+      },
+      "query_structure": {
+        "responses": 10,
+        "known_tokens": 60652,
+        "unknown_usage_responses": 0
+      }
+    },
+    "requests_without_response": [],
+    "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+  },
+  "original_queue_ledger_delta": {
+    "generation_requests": 35,
+    "generation": {
+      "known_tokens": 120165,
+      "charged_tokens": 120165,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "source_first_score_ledger_delta": {
+    "generation_requests": 16,
+    "generation": {
+      "known_tokens": 40786,
+      "charged_tokens": 40786,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "rebuild_result": {
+    "complete_answers": 9,
+    "structure_responses": 10,
+    "successful_interpretations": 9,
+    "confirmed_length": {
+      "question_key": "halumem/innovation-query-pine/2/qa/1",
+      "prompt_tokens": 1048,
+      "completion_tokens": 8192,
+      "total_tokens": 9240
+    },
+    "source_state_mutation": false,
+    "later_conditions_in_original_queue": "not run"
+  },
+  "continuation": {
+    "output": "artifacts/innovation-v4/query-reuse-v2",
+    "source_version": "c7c5c469",
+    "copied_original_responses": 19,
+    "already_saved_answers": 9,
+    "known_length_response": "reused without generation; raw Reader added after explicit incomplete interpretation",
+    "original_terminal_unchanged": true,
+    "cold_same_version_claim": false,
+    "copied_costs": "count once in complete-condition cost, excluded from newly charged continuation delta",
+    "latency": "cached-response invocation time does not measure original model latency"
+  },
+  "scientific_claim": "Method quality and reuse advantage not established. Initial interpretation covers day scope only; graph node count is not semantic coverage."
+}

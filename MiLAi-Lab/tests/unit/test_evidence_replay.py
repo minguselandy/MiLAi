@@ -9,17 +9,21 @@ from types import SimpleNamespace
 from typing import Any
 
 import pytest
+from jsonschema import Draft202012Validator
 
 from milai_lab.analysis.edit_official import HaluMemOfficial
 from milai_lab.baselines.langmem_sqlite_store import TransactionalSqliteStore as SqliteStore
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.memory.activation import ActivationIndex
 from milai_lab.memory.service import MemoryService
+from milai_lab.methods.query_structure import build_query_structure
 from milai_lab.runners import evidence_replay
 from milai_lab.runners.baseline_alignment import AlignmentRun
+from milai_lab.runners.edit_benchmarks import BenchmarkRun
 
 
-def fixture_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[AlignmentRun, Path]:
+def fixture_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+                run_type: type[BenchmarkRun] = AlignmentRun) -> tuple[BenchmarkRun, Path]:
     original = tmp_path / "original" / "MiLAi-memory-only"
     original.mkdir(parents=True)
     settings = {
@@ -38,7 +42,7 @@ def fixture_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Alignm
             {"question": "Which marker?", "answer": "GOLD_NOT_FOR_READER", "evidence": []},
         ],
     }]}) + "\n")
-    execution = AlignmentRun.__new__(AlignmentRun)
+    execution = run_type.__new__(run_type)
     execution.settings, execution.root = settings, tmp_path / "replay"
     execution.client = SimpleNamespace(config=SimpleNamespace(max_calls=12))
     execution.budget = SimpleNamespace(state={})
@@ -46,10 +50,13 @@ def fixture_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> tuple[Alignm
     return execution, original
 
 
+@pytest.mark.parametrize("saved_materials", [False, True])
+@pytest.mark.parametrize("run_type", [BenchmarkRun, AlignmentRun])
 def test_replay_reopens_saved_prefix_without_future_search_or_original_writes(
-    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, saved_materials: bool,
+    run_type: type[BenchmarkRun],
 ) -> None:
-    execution, original = fixture_run(tmp_path, monkeypatch)
+    execution, original = fixture_run(tmp_path, monkeypatch, run_type)
     bank = original / "banks/owner"
     bank.mkdir(parents=True)
     with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
@@ -57,11 +64,23 @@ def test_replay_reopens_saved_prefix_without_future_search_or_original_writes(
             store, ("edit", original.name, "M", "owner"), "owner", bank / "memory.lock",
             functional_contract="functional_v1", memory_profile="unified_v1",
         )
-        service.capture_user("first", "turn:0", "EARLY_BLUE_MARKER")
+        ref = service.capture_user("first", "turn:0", "EARLY_BLUE_MARKER")["source_ref"]
         native = service.search_sources("marker")
         native.update(records=[], raw_events=service.sources())
+        materials = native["source_materials"]
+        if saved_materials:
+            execution.settings.update(evidence_policy="question_pack_v1")
+            execution.settings["evidence_replay"]["reuse_saved_materials"] = True
+            materials = execution._source_first_materials(service, "Which marker?", "Jan 1",
+                native, [], snapshot_id="old-pool.json")
+            structure, _ = build_query_structure(service, "Which marker?", "Jan 1", [ref],
+                policy="incremental", call=lambda *_: {"scope": "DERIVED_BLUE_SCOPE", "nodes": [],
+                    "rules": [], "remove": [], "remove_rules": [], "unresolved": []})
+            materials.append(structure)
+            materials[0]["pre_read_calls"] = 1
+            native["material_assembly"]["material_origins"].append("query_structure")
         write_json(original / "native/halumem/owner/0/qa/0/retrieval.json", {
-            "native_return": native, "materials": native["source_materials"], "usage": {},
+            "native_return": native, "materials": materials, "usage": {},
         })
         service.capture_user("later", "turn:0", "FUTURE_RED_MARKER", occurred_at="1900-01-01")
     before = (bank / "memory.sqlite").read_bytes()
@@ -73,6 +92,8 @@ def test_replay_reopens_saved_prefix_without_future_search_or_original_writes(
     monkeypatch.setattr(MemoryService, "search_sources", forbidden)
     monkeypatch.setattr(ActivationIndex, "record_use", forbidden)
     monkeypatch.setattr(execution, "maintain", forbidden)
+    if saved_materials:
+        monkeypatch.setattr(execution, "_source_first_materials", forbidden)
     seen: list[list[dict[str, Any]]] = []
 
     def answer(key: str, messages: list[dict[str, Any]], **_: Any) -> str:
@@ -80,17 +101,84 @@ def test_replay_reopens_saved_prefix_without_future_search_or_original_writes(
         assert "EARLY_BLUE_MARKER" in repr(messages)
         assert "FUTURE_RED_MARKER" not in repr(messages)
         assert "GOLD_NOT_FOR_READER" not in repr(messages)
+        if saved_materials:
+            assert "DERIVED_BLUE_SCOPE" in repr(messages)
         return "EARLY_BLUE_MARKER"
 
     monkeypatch.setattr(execution, "call", answer)
-    result = evidence_replay.replay_halumem(execution, "predict")
+    result = execution.halumem("predict")
     assert result["complete_answers"] == 1 and result["formation_calls"] == 0
     assert result["retrieval_calls"] == 0 and result["activation_feedback"] is False
     assert (bank / "memory.sqlite").read_bytes() == before
     assert (execution.root / "replay-banks/owner/memory.sqlite").exists()
     assert len(seen) == 1
-    evidence_replay.replay_halumem(execution, "predict")
+    if saved_materials:
+        replayed = read_json(execution.root / "native/halumem/owner/0/qa/0/retrieval.json")
+        assert all("pre_read_calls" not in row for row in replayed["materials"])
+        old = read_json(original / "native/halumem/owner/0/qa/0/retrieval.json")
+        assert old["materials"][0]["pre_read_calls"] == 1
+    execution.halumem("predict")
     assert len(seen) == 1, "A saved replay answer is never regenerated"
+
+
+@pytest.mark.parametrize("catalog_size", [2, 1000])
+def test_retrieved_first_control_excludes_the_cached_interpretation(
+    tmp_path, monkeypatch, catalog_size
+):
+    execution, original = fixture_run(tmp_path, monkeypatch, BenchmarkRun)
+    execution.settings.update(evidence_policy="question_pack_v1",
+                              evidence_selection_policy="retrieved_first_v1")
+    execution.settings["evidence_replay"].update(reuse_saved_materials=True,
+                                               exclude_query_structure=True)
+    bank = original / "banks/owner"
+    bank.mkdir(parents=True)
+    with SqliteStore.from_conn_string(str(bank / "memory.sqlite")) as store:
+        service = MemoryService(store, ("edit", original.name, "M", "owner"), "owner",
+            bank / "memory.lock", functional_contract="functional_v1", memory_profile="unified_v1")
+        ref = service.capture_user("s", "0", "EARLY_BLUE_MARKER")["source_ref"]
+        service.capture_user("other", "0", "SECOND_SOURCE_MUST_BE_OPENED")
+        native = service.search_sources("EARLY_BLUE_MARKER", include_scope=True)
+        native.update(records=[], raw_events=service.sources())
+        materials = execution._source_first_materials(service, "Which marker?", "Jan 1",
+                                                      native, [], snapshot_id="old-pool.json")
+        # Repeated candidates exercise a large index space over the same two real Sources.
+        materials.extend(copy.deepcopy(materials[-1]) for _ in range(catalog_size - len(materials)))
+        origins = native["material_assembly"]["material_origins"]
+        origins.extend(origins[-1] for _ in range(catalog_size - len(origins)))
+        structure, _ = build_query_structure(service, "Which marker?", "Jan 1", [ref],
+            policy="incremental", call=lambda *_: {
+                "scope": "DERIVED_SCOPE_NOT_AVAILABLE", "nodes": [],
+                "rules": [], "remove": [], "remove_rules": [], "unresolved": []})
+        materials.append(structure)
+        native["material_assembly"]["material_origins"].append("query_structure")
+        write_json(original / "native/halumem/owner/0/qa/0/retrieval.json",
+                   {"native_return": native, "materials": materials, "usage": {}})
+    calls = []
+
+    def answer(key, messages, **kwargs):
+        payload = json.loads(messages[1]["content"])
+        calls.append(payload)
+        assert "DERIVED_SCOPE_NOT_AVAILABLE" not in json.dumps(messages)
+        assert len(payload["memories"]) == 1
+        assert payload["memories"][0]["kind"] == "original_source"
+        assert "EARLY_BLUE_MARKER" in json.dumps(payload["memories"])
+        assert "SECOND_SOURCE_MUST_BE_OPENED" not in json.dumps(payload["memories"])
+        schema = kwargs["response_format"]["json_schema"]["schema"]
+        for field in ("item_indices", "expand_context"):
+            spec = schema["properties"][field]
+            assert len(json.dumps(spec)) < 120
+            validator = Draft202012Validator(spec)
+            assert validator.is_valid([0, catalog_size - 1])
+            assert not validator.is_valid([-1]) and not validator.is_valid([catalog_size])
+        return json.dumps({"answer": "EARLY_BLUE_MARKER", "item_indices": [],
+            "expand_context": [], "gap": None, "task": "lookup", "candidate_page": 0})
+
+    monkeypatch.setattr(execution, "call", answer)
+    result = execution.halumem("predict")
+    assert result["complete_answers"] == 1 and len(calls) == 1
+    saved = read_json(execution.root / "predictions/halumem/owner/0/qa/0/complete.json")
+    assert saved["query_structure_excluded"] is True
+    assert saved["evidence"]["query_structure_in_pool"] == 0
 
 
 def test_replay_scores_saved_answers_once_preserving_invalid_missing_and_not_run(

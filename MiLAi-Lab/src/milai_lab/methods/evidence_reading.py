@@ -369,6 +369,11 @@ def open_evidence_packs(
     result = []
     for original in materials:
         item = copy.deepcopy(original)
+        if item["kind"] == "query_structure":
+            from milai_lab.methods.query_structure import open_structure
+
+            result.append(open_structure(service, item))
+            continue
         if item["kind"] == "original_source":
             if expand_context:
                 item["source_ranges"] = item.get("context_source_ranges", item["source_ranges"])
@@ -496,6 +501,11 @@ def project_pack(item: dict[str, Any], index: int) -> dict[str, Any]:
         result["visibility"] = item["visibility"]
     if item.get("body_delivered") is False:
         return result
+    if item["kind"] == "query_structure":
+        return {**result, "interpretation": copy.deepcopy(item["structure"]),
+                "source_bindings": copy.deepcopy(item["source_bindings"]),
+                "query_time": item["query_time"], "semantics": item["semantics"],
+                "revision": item["revision"]}
     if item["kind"] == "external_memory":
         return {**result, "content": item["text"], "native_timestamp": item.get("date"),
                 "provenance": item["provenance"], "source_mapping": item["source_mapping"]}
@@ -636,6 +646,12 @@ def project_packs(items: list[dict[str, Any]], indices: list[int]) -> list[dict[
         result.append(projected)
         if shared:
             originals[ranges] = projected
+    for projected in result:
+        if projected["kind"] == "query_structure" and "source_bindings" in projected:
+            projected["source_bindings"] = {
+                alias: sources.get((binding["source_ref"], binding["source_revision"]),
+                                   "support_not_opened")
+                for alias, binding in projected["source_bindings"].items()}
     return result
 
 
@@ -692,6 +708,9 @@ def read_question_pack(
     call: Callable[[str, list[dict[str, str]], dict[str, Any] | None], str],
     save: Callable[[dict[str, Any]], None], state: dict[str, Any], max_calls: int,
     source_scope: dict[str, Any] | None = None,
+    initial_indices: list[int] | None = None,
+    aggregate_ranges: bool = False,
+    classify_task: bool = False,
 ) -> tuple[str, list[dict[str, Any]]]:
     """Select a budgeted pack; reopen more only for a stated evidence gap.
 
@@ -705,11 +724,26 @@ def read_question_pack(
     state.setdefault("opened_indices", [])
     state.setdefault("context_indices", [])
     state.setdefault("excluded_indices", [])
-    state.setdefault("task", "lookup")
+    # The first Reader decision classifies the task; no class has been observed yet.
+    state.setdefault("task", None)
     state.setdefault("gap", None)
     state.setdefault("candidate_page", 0)
     state["retrieval_snapshot"] = snapshot_id
     state["evidence_policy"] = "question_pack_v1"
+
+    def aggregate() -> tuple[str, list[dict[str, Any]]]:
+        from milai_lab.methods.range_aggregation import aggregate_source_range
+
+        return aggregate_source_range(materials, open_materials=open_materials,
+            project=project_packs, messages_for=messages_for,
+            coverage=lambda items, required: pack_coverage(materials, items,
+                scope=source_scope if required is None else {
+                    "complete": True, "basis": "mapped_source_ranges",
+                    "required_ranges": required}),
+            fits=fits, call=call, save=save, state=state, max_calls=max_calls)
+
+    if aggregate_ranges and "range_aggregation" in state:
+        return aggregate()
 
     def opened(indices: list[int]) -> list[dict[str, Any]]:
         return [open_materials([materials[i]], i in state["context_indices"])[0] for i in indices]
@@ -725,16 +759,15 @@ def read_question_pack(
 
     visible = open_materials(materials, False)
     directory = [pack_candidate(item, i) for i, item in enumerate(visible)]
+    selection = ({"type": "array", "items": {"type": "integer", "minimum": 0,
+                  "maximum": len(materials) - 1}} if materials else
+                 {"type": "array", "maxItems": 0})
     schema: dict[str, Any] = {
         "type": "object", "additionalProperties": False,
         "properties": {
             "answer": {"type": ["string", "null"]},
-            "item_indices": {"type": "array",
-                             "items": {"type": "integer", "enum": list(range(len(materials)))}}
-                            if materials else {"type": "array", "maxItems": 0},
-            "expand_context": {"type": "array",
-                               "items": {"type": "integer", "enum": list(range(len(materials)))}}
-                              if materials else {"type": "array", "maxItems": 0},
+            "item_indices": selection,
+            "expand_context": selection,
             "gap": {"type": ["string", "null"]},
             "task": {"enum": ["lookup", "range"]},
             "candidate_page": {"type": "integer", "minimum": 0},
@@ -744,6 +777,8 @@ def read_question_pack(
 
     def response_schema(indices: list[int]) -> dict[str, Any]:
         selected_schema = copy.deepcopy(schema)
+        if "task_classification" in state:
+            selected_schema["properties"]["task"] = {"const": state["task"]}
         if not indices:
             selected_schema["properties"]["answer"] = {"type": "null"}
         return selected_schema
@@ -783,7 +818,8 @@ def read_question_pack(
     # Only a fully represented scope can bypass task selection: a fitting top-k subset
     # does not establish that a count/enumeration query has seen the complete range.
     direct_scope = pack_coverage(materials, opened(lookup_indices), scope=source_scope)
-    if not state["steps"] and direct_scope["complete"] and fits(evidence_messages(lookup_indices)):
+    if not initial_indices and not state["steps"] and direct_scope["complete"] \
+            and fits(evidence_messages(lookup_indices)):
         state.update(resident_refs=[refs[i] for i in lookup_indices],
                      opened_indices=lookup_indices, active_stage="answer",
                      range_coverage=direct_scope)
@@ -798,9 +834,31 @@ def read_question_pack(
     if state.get("complete") and "answer" in state:
         return state["answer"], opened(state["opened_indices"])
 
+    if initial_indices and not state["steps"]:
+        admission = admit_pack_indices(initial_indices, lambda chosen: fits(packet(chosen, [])))
+        accepted = admission["admitted_indices"]
+        state.update(initial_indices=initial_indices,
+                     resident_refs=[refs[i] for i in accepted], opened_indices=accepted,
+                     excluded_indices=admission["excluded_indices"])
+        save(state)
+
+    if classify_task and "task_classification" not in state and state["steps"] < max_calls - 1:
+        from milai_lab.methods.reader_task import task_request
+
+        messages, task_schema = task_request(question, date)
+        state["active_stage"] = "view/task"
+        save(state)
+        decision = parse_object(call("view/task", messages, task_schema),
+                                reject_duplicate_keys=True)
+        Draft202012Validator(task_schema).validate(decision)
+        state.update(task=decision["task"], task_classification=decision, steps=state["steps"] + 1)
+        save(state)
+    if aggregate_ranges and state.get("task_classification", {}).get("task") == "range":
+        return aggregate()
+
     # Partition only navigation, using the full empty-evidence wrapper's actual cost.
     pages = plan_delivery([{"index": i} for i in all_indices], lambda rows: fits(packet(
-        [], [directory[row["index"]] for row in rows])))
+        [], [directory[row["index"]] for row in rows])), monotone=True)
     catalogs = [[directory[row["index"]] for row in page] for page in pages["pages"]] or [[]]
     state["candidate_page_count"] = len(catalogs)
     while state["steps"] < max_calls:
@@ -846,6 +904,10 @@ def read_question_pack(
             coverage = pack_coverage(materials, opened(indices), scope=source_scope)
             state["range_coverage"] = coverage
             if state["task"] == "range" and not coverage["complete"]:
+                if aggregate_ranges:
+                    state["steps"] += 1
+                    save(state)
+                    return aggregate()
                 # A catalog nomination or lookup stop cannot certify a whole range.
                 answer = None
                 response["gap"] = "The declared source range has not been fully delivered."

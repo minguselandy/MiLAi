@@ -607,6 +607,9 @@ def maintain_event(
     """
     if recipe not in {"single_pass", "extract_then_edit"}:
         raise ValueError("EDIT_MAINTENANCE_RECIPE_INVALID")
+    if method.maintenance_mode in {"semantic_delta_v1", "semantic_delta_v2"} \
+            and recipe != "single_pass":
+        raise ValueError("SEMANTIC_DELTA_REQUIRES_SINGLE_PASS")
     if memory_view_mode not in {"legacy", "staged", "state_driven"}:
         raise ValueError("EDIT_MEMORY_VIEW_MODE_INVALID")
     service = method.service

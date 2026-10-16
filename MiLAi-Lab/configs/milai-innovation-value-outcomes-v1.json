@@ -1,0 +1,72 @@
+{
+  "name": "innovation-value-outcomes-v1",
+  "source_run": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/value-external-v1/standard/MiLAi-memory-only",
+  "question_id": "gpt4_59149c77",
+  "scope": "exposed training/diagnostic source pool, not a new benchmark arm or a heldout result",
+  "nomination": "actual source review: Jan8 MoMA and Jan15 Ancient Civilizations; indices0/8 share captured parent when expanded",
+  "conditions": [
+    {
+      "name": "empty",
+      "indices": [],
+      "expand_context": []
+    },
+    {
+      "name": "moma_only",
+      "indices": [
+        2
+      ],
+      "expand_context": [
+        2
+      ]
+    },
+    {
+      "name": "ancient_only",
+      "indices": [
+        0
+      ],
+      "expand_context": [
+        0
+      ]
+    },
+    {
+      "name": "both",
+      "indices": [
+        2,
+        0
+      ],
+      "expand_context": [
+        2,
+        0
+      ]
+    },
+    {
+      "name": "equivalent_parent",
+      "indices": [
+        2,
+        8
+      ],
+      "expand_context": [
+        2,
+        8
+      ]
+    },
+    {
+      "name": "both_plus_unrelated",
+      "indices": [
+        2,
+        0,
+        108
+      ],
+      "expand_context": [
+        2,
+        0,
+        108
+      ]
+    }
+  ],
+  "generation_bound": 12,
+  "source_and_state_mutations": false,
+  "retrieval": "none, exact saved accessible pool",
+  "reader": "same free-form final Reader and same sampling in every subset",
+  "gold": "only original Judge, never Reader; no old scores replaced"
+}

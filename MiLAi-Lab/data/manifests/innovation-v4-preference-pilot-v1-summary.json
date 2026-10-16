@@ -1,0 +1,567 @@
+{
+  "status": "COMPLETED_TRAINING_GENERATION_APPLICATION",
+  "source_version": "bc8f6288",
+  "protocol": {
+    "source_version": "bc8f6288",
+    "model_path": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/models/qwen25-05b",
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 4,
+    "seed": 20261016,
+    "rank": 4,
+    "alpha": 8,
+    "learning_rate": 0.0005,
+    "epochs": 3,
+    "batch_size": 3,
+    "examples": 15,
+    "optimizer_steps_per_arm": 15,
+    "objectives": [
+      "imitation",
+      "quality_preference",
+      "relation_consequence"
+    ],
+    "example_order": [
+      "innovation-grant-noop-ack",
+      "innovation-catalog-formation-reference-v3",
+      "innovation-harbor-transition-1-reference",
+      "innovation-grant-noop-ack",
+      "innovation-shared-formation-reference-v3",
+      "innovation-grant-formation-reference-v3",
+      "innovation-catalog-formation-reference-v3",
+      "innovation-harbor-transition-2-reference",
+      "innovation-grant-noop-restatement",
+      "innovation-catalog-transition-1-reference",
+      "innovation-harbor-formation-reference-001",
+      "innovation-orchid-transition-1-reference",
+      "innovation-studio-transition-3-reference",
+      "innovation-shared-transition-3-reference",
+      "innovation-grant-noop-ack",
+      "innovation-harbor-transition-1-reference",
+      "innovation-orchid-transition-1-reference",
+      "innovation-studio-formation-reference-v3",
+      "innovation-shared-transition-3-reference",
+      "innovation-harbor-transition-2-reference",
+      "innovation-shared-transition-3-reference",
+      "innovation-studio-formation-reference-v3",
+      "innovation-catalog-formation-reference-v3",
+      "innovation-studio-transition-3-reference",
+      "innovation-shared-formation-reference-v3",
+      "innovation-harbor-formation-reference-001",
+      "innovation-grant-formation-reference-v3",
+      "innovation-grant-noop-restatement",
+      "innovation-catalog-transition-1-reference",
+      "innovation-harbor-transition-2-reference",
+      "innovation-orchid-formation-reference-v3",
+      "innovation-studio-formation-reference-v3",
+      "innovation-harbor-transition-1-reference",
+      "innovation-studio-transition-3-reference",
+      "innovation-orchid-transition-1-reference",
+      "innovation-grant-formation-reference-v3",
+      "innovation-orchid-formation-reference-v3",
+      "innovation-grant-transition-3-reference",
+      "innovation-grant-noop-restatement",
+      "innovation-grant-transition-3-reference",
+      "innovation-harbor-formation-reference-001",
+      "innovation-shared-formation-reference-v3",
+      "innovation-grant-transition-3-reference",
+      "innovation-orchid-formation-reference-v3",
+      "innovation-catalog-transition-1-reference"
+    ],
+    "input_tokens_per_arm": 315396,
+    "response_positions_per_arm": 8565,
+    "preference_weight": 0.5,
+    "preference_beta": 1.0,
+    "consequence_weight": 0.25,
+    "main_loss": "Uniform chosen-token CE normalized over each minibatch.",
+    "preference_loss": "Mean softplus(chosen mean response NLL - rejected mean response NLL), averaged over alternatives and examples. Not DPO or RL.",
+    "matching": "Same sequences, ordering, initialization, trainable parameters and steps. Unused negative/auxiliary terms remain in the graph with zero coefficients. No claim of bit-for-bit kernel/FLOP equality.",
+    "scope": "Exposed author-reviewed local preferences; not perfect global states or holdout.",
+    "torch": "2.7.0+cu126",
+    "model_http_calls": 0
+  },
+  "models": {
+    "base": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "base",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "guided_json": true,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 2746,
+        "wall_seconds": 573.812845335342,
+        "cpu_seconds": 2151.10573544,
+        "process_peak_rss_mib": 4347.98046875,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "application_status": {
+        "applied": 9,
+        "invalid_or_rejected": 1
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "applied",
+          "error": null,
+          "before_records": 1,
+          "after_records": 2,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "applied",
+          "error": null,
+          "before_records": 1,
+          "after_records": 2,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "applied",
+          "error": null,
+          "before_records": 1,
+          "after_records": 7,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "invalid_or_rejected",
+          "error": "Provider output incomplete: length",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        }
+      ]
+    },
+    "imitation": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "imitation",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "guided_json": true,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 4123,
+        "wall_seconds": 426.9633972849697,
+        "cpu_seconds": 1693.347083954,
+        "process_peak_rss_mib": 4522.25,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "application_status": {
+        "applied": 4,
+        "invalid_or_rejected": 6
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 0,
+          "after_records": 0,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "invalid_or_rejected",
+          "error": "Provider output incomplete: length",
+          "before_records": 0,
+          "after_records": 0,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "invalid_or_rejected",
+          "error": "Provider output incomplete: length",
+          "before_records": 0,
+          "after_records": 0,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_TIME_SOURCE_NOT_SELECTED",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "applied",
+          "error": null,
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        }
+      ],
+      "training_cost": {
+        "status": "COMPLETED",
+        "objective": "imitation",
+        "optimizer_steps": 15,
+        "trainable_parameters": 270336,
+        "parameter_l1_change": 888.3753921985626,
+        "wall_seconds": 2021.6356960805133,
+        "cpu_seconds": 7625.323498787,
+        "process_peak_rss_mib": 42107.89453125,
+        "model_http_calls": 0,
+        "semantic_bank_writes": 0
+      }
+    },
+    "quality_preference": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "quality_preference",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "guided_json": true,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 4021,
+        "wall_seconds": 413.1581006171182,
+        "cpu_seconds": 1638.6371526479998,
+        "process_peak_rss_mib": 4522.25,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "application_status": {
+        "applied": 3,
+        "invalid_or_rejected": 7
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 0,
+          "after_records": 0,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "invalid_or_rejected",
+          "error": "Provider output incomplete: length",
+          "before_records": 0,
+          "after_records": 0,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "invalid_or_rejected",
+          "error": "Provider output incomplete: length",
+          "before_records": 0,
+          "after_records": 0,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "error": "DELTA_RULE_INDEX_UNAVAILABLE",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_TIME_SOURCE_NOT_SELECTED",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "error": "DELTA_RULE_INDEX_UNAVAILABLE",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "invalid_or_rejected",
+          "error": "DELTA_RULE_INDEX_UNAVAILABLE",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        }
+      ],
+      "training_cost": {
+        "status": "COMPLETED",
+        "objective": "quality_preference",
+        "optimizer_steps": 15,
+        "trainable_parameters": 270336,
+        "parameter_l1_change": 642.5840207338333,
+        "wall_seconds": 1952.1940879411995,
+        "cpu_seconds": 7285.890889691999,
+        "process_peak_rss_mib": 42703.6640625,
+        "model_http_calls": 0,
+        "semantic_bank_writes": 0
+      }
+    },
+    "relation_consequence": {
+      "generation_cost": {
+        "status": "COMPLETED",
+        "objective": "relation_consequence",
+        "device": "cpu",
+        "generation_batches": 5,
+        "model_http_requests": 0,
+        "guided_json": true,
+        "padded_input_tokens": 21750,
+        "logical_prompt_tokens": 21089,
+        "completion_tokens_including_eos": 3970,
+        "wall_seconds": 411.4249829854816,
+        "cpu_seconds": 1632.9382965389996,
+        "process_peak_rss_mib": 4594.2109375,
+        "scope": "10 predeclared author cases; unreviewed model outputs, not semantic passes or an external benchmark score."
+      },
+      "application_status": {
+        "applied": 3,
+        "invalid_or_rejected": 7
+      },
+      "cases": [
+        {
+          "case_id": "learning-v2-common-prerequisite-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-total-membership-proposal",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-correction-then-future",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_EFFECTIVE_INTERVAL_INVALID",
+          "before_records": 0,
+          "after_records": 0,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-measurement-and-unknown",
+          "status": "applied",
+          "error": null,
+          "before_records": 0,
+          "after_records": 1,
+          "exact_before_after_equal": false
+        },
+        {
+          "case_id": "learning-v2-empty-ack-zh",
+          "status": "invalid_or_rejected",
+          "error": "Provider output incomplete: length",
+          "before_records": 0,
+          "after_records": 0,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-empty-ack-en",
+          "status": "invalid_or_rejected",
+          "error": "Provider output incomplete: length",
+          "before_records": 0,
+          "after_records": 0,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-cancel-future",
+          "status": "invalid_or_rejected",
+          "error": "DELTA_RULE_INDEX_UNAVAILABLE",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-paper-expiry",
+          "status": "invalid_or_rejected",
+          "error": "EDIT_TIME_SOURCE_NOT_SELECTED",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-existing-ack",
+          "status": "invalid_or_rejected",
+          "error": "DELTA_RULE_INDEX_UNAVAILABLE",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        },
+        {
+          "case_id": "learning-v2-existing-restatement",
+          "status": "invalid_or_rejected",
+          "error": "DELTA_RULE_INDEX_UNAVAILABLE",
+          "before_records": 1,
+          "after_records": 1,
+          "exact_before_after_equal": true
+        }
+      ],
+      "training_cost": {
+        "status": "COMPLETED",
+        "objective": "relation_consequence",
+        "optimizer_steps": 15,
+        "trainable_parameters": 270336,
+        "parameter_l1_change": 642.4231284856796,
+        "wall_seconds": 1912.8120482088998,
+        "cpu_seconds": 7155.850071762001,
+        "process_peak_rss_mib": 42703.6640625,
+        "model_http_calls": 0,
+        "semantic_bank_writes": 0
+      }
+    }
+  },
+  "source_review": {
+    "coverage": "All10actual arrival inputs, all40application outcomes, and all19changed rendered states read. All21invalid/rejected outputs leave before/after records exactly equal. This is author source review, not independent blind review.",
+    "base": "Four factual formations are partial. Copies both empty acknowledgments into semantic records. Cancelled future handover is retained/duplicated; expired paper is added while stale validity/eligibility remains; an acknowledgment expands1record to7. Restatement hits length.",
+    "imitation": "Copies complete common-prerequisite and measurement/unknown sources into one compound unit each, with literal source attribution and overall metadata. Larch formation omits Willow pending request and blue folder. Historical/future formation and both required updates reject invalid intervals. Empty acknowledgments reach length; existing acknowledgment rejects time source. Restatement wrongly applies per_member metadata across existing units and adds a duplicate.",
+    "quality_preference": "Same two complete source-text copies and partial Larch content, but allthree creations attach the same source as supports AND opposes. Chosen training targets contain no nonempty opposition links. Required updates/holds still fail through length, interval, rule-index or time-source errors.",
+    "relation_consequence": "Shares the source self-opposition problem; Larch loses membership/not-per-member information and adds contradictory per_member metadata. Required updates and holds fail.",
+    "counts": {
+      "literal_full_source_copies_among_four_formations": {
+        "base": 0,
+        "imitation": 2,
+        "quality_preference": 2,
+        "relation_consequence": 2
+      },
+      "required_update_success_of_two": {
+        "base": 0,
+        "imitation": 0,
+        "quality_preference": 0,
+        "relation_consequence": 0
+      },
+      "valid_hold_success_of_four": {
+        "base": 0,
+        "imitation": 0,
+        "quality_preference": 0,
+        "relation_consequence": 0
+      }
+    },
+    "limits": "Literal full-source copies demonstrate text retention, not factorized relationships, safe future updates or complete state success. Compound natural-language fallback is allowed by the plan; absence of a graph alone is not labeled failure. Rejected unchanged states are not valid no-op predictions. These are the same exposed cases as prior diagnostics."
+  },
+  "parameter_learning": "Actual CPU LoRA updates in allthree arms, same chosen/rejected/auxiliary sequences and order. Pairwise mean response NLL includesEOS. NotDPO/RL; no exact kernel/FLOP claim.",
+  "scope": "15references/6source chains,23distinct rejected actions including9actual-output origins and declared synthetic alternatives. Sparse equivalent target format;60augmented variants still unused. Same10exposed evaluation inputs/banks.",
+  "finding": "Nonempty source copying replaces some prior no-op collapse, also in the imitation arm; sparse-target/data/compute changes prevent attribution to the preference objective alone. Quality/preference and consequence objectives do not show a semantic advantage over imitation. Valid keep behavior regresses and required updates remain unsuccessful.",
+  "model_http_calls": 0,
+  "new_teacher_calls": 0,
+  "source_original_banks_modified": false,
+  "full_goal_complete": false
+}

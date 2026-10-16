@@ -1,0 +1,66 @@
+{
+  "status": "PARTIAL_PREDICTIONS_CLOSED",
+  "source_version": "cd1dcf86",
+  "completed_predictions": [
+    100,
+    1000
+  ],
+  "unrun_predictions": [
+    5000
+  ],
+  "scoring": "Not dispatched; original protocol was interrupted before completing all prediction sizes.",
+  "supervisor": "Original driver378541 disappeared; liveworker392807 was observed without restarting until its normal terminal confirmed24answers/resources_settled.",
+  "ledger_delta": {
+    "generation_requests": 49,
+    "generation": {
+      "known_tokens": 208615,
+      "charged_tokens": 208615,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "sizes": {
+    "100": {
+      "terminal": {
+        "status": "PREDICTIONS_SAVED",
+        "phase": "predict",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "PREDICTIONS_SAVED",
+          "sessions": 102,
+          "judge_calls": 0,
+          "complete_answers": 24,
+          "known_reader_failures": 0
+        },
+        "resources_settled": true
+      },
+      "generation_responses": 25,
+      "generation_tokens": 106482
+    },
+    "1000": {
+      "terminal": {
+        "status": "PREDICTIONS_SAVED",
+        "phase": "predict",
+        "backend": "MiLAi-memory-only",
+        "benchmark": "halumem",
+        "result": {
+          "status": "PREDICTIONS_SAVED",
+          "sessions": 1002,
+          "judge_calls": 0,
+          "complete_answers": 24,
+          "known_reader_failures": 0
+        },
+        "resources_settled": true
+      },
+      "generation_responses": 24,
+      "generation_tokens": 102133
+    }
+  },
+  "receipt_ledger_difference": 0,
+  "next_run": "raw-scale-v3 uses one fresh frozen version acrossallthree sizes after the measured catalog bottleneck fix. Originalpartial predictions/costs are not overwritten or upgraded into the new result."
+}

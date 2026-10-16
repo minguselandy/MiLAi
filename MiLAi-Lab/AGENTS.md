@@ -1,3 +1,72 @@
+# Current innovation-v4 handoff (2026-10-16 publication)
+
+Goal ACTIVE/incomplete; user explicitly requests current experiment/training status on GitHub.
+Publish feat/lab-innovation-v4-20261015 as a draft continuation of PR122, base
+feat/lab-method-architecture-20261014 (c835cf67). PR122 observed open/draft/unmerged.
+Canonical report docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md. Development before this
+publication checkpoint:621908c0. No merge; preserve frozen experiment source versions.
+No SHA/content-fingerprint checks, subagents, new ledger/model service or stopping GPU services.
+Root serial generation/embedding/Judge HTTP; local CPU work may overlap with separate costs.
+Continuous ledger /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json;
+historical unknown floors10generation/1embedding. Mainvenv noTorch; systemPython hasTorch.
+TMPDIR artifacts/tmp or artifacts/innovation-v4/runtime, not /tmp.
+
+ALL latest jobs CLOSED. No live/queued model job at publication checkpoint. Never restart
+from a lost tool handle; inspect actual process and terminal artifacts before any action.
+- value-outcomes-corpus-v2:a2a91ea8,60Reader+60firstJudge,499559generationtokens,
+  0embedding/newunknown,receipt/ledgerdifferences0. All60answers author-reviewed.
+  Sneaker ambiguity excluded; Tokyo incomplete/ambiguous pairs and Miami official/author
+  disagreements trainnull; Holi source-header later than query disclosed; Aprilrange separate.
+  Original60officiallabels unchanged. Corpus452sessions/4830Sources/2433packs verified.
+- conditional-value-learning-v2:521a32a1,10questions(old2+new8),91/66/55headlabels,
+  66linearheadfits,0HTTP. Crossquery independent/conditional MSE immediate.23058/.24886,
+  twoopen.26894/.25631,answerreturn.25298/.14202. Fit2.93sec/crossquery27.74sec,
+  peak94.52MiB. Not formal heldout or proven QA benefit.
+- learned-value-comparison-v1:b3eb1662,driver1484887/worker1484888 gone,
+  driver-select.json SELECTIONS_SAVED/returncode0,40selectionfiles. NO Reader predict or
+  Judge score dispatched; no automatic queue. Bothlearnedarms finalorderedsubsets identical
+  all10,20–26contexts,53840–56393/56832inputtokens,rawreturns3.003–3.563. Bundle2pair
+  steps didnotchangefinalsubsets. Wall780.43/1480.08sec vs top1/top2 1.02/1.20sec,
+  driver2271.34sec,0HTTP. See learned-value-selection-v1-summary.
+  Earlier real singlequestion wiring scans50/selects26/217Sources/55056tokens and misses
+  SummerVibes. StubbedfinalReader, noQA. No clipping/forcedreadcaps to hide failure.
+- range-v3:61631a5b tasknull stillalllookup/noaggregation. Standard3Correct/3Omission,
+  nominalaggregate3Correct/2Omission/1Hallucination.37gen78631.
+- reader-task-diagnostic-v1:521a32a1 question/date-only classification11/12,
+  range5/6,lookup6/6;pledgequestionmissed.12gen2329,0embedding/newunknown.
+- range-v4:3f5e62ea sharedtaskfirst;standard3Correct/3Omission,aggregate
+  2Correct/2Hallucination/2missing of6.5actualrangequeries perarm;aggregate each2chunks,
+  allrawscope scanned/allchunksdelivered,semanticerrorspersist.51gen117180,0embedding,
+  newunknown0/receiptmatches.2finalReaderlength1024;ID/correctionlinks lost,reportdate
+  misapplied,chunklocaluncertaintyglobalized. All12outcomes+10mapoutputsread.
+- preference-pilot-v1:bc8f6288 all3train15steps+base/3adapter guidedgeneration/application
+  CLOSED0.15refs/6chains,23negactions(9actualbadoutputorigins),each315396input+
+  8565responsepositions,270336params. Trainwall2021.64/1952.19/1912.81sec,
+  parameterL1change888.38/642.58/642.42. NotDPO/RL/exactFLOPmatching.
+  Applied/rejected base9/1,imitation4/6,quality3/7,relation3/7. All40statuses+19changed
+  states read;21rejectedexactbefore==after. Allmodelsrequiredupdates0/2,validholds0/4.
+  Adapters2fullSourcecopiesof4formations, notcompletegenericstatebenefit.Quality/relation
+  selfsupportsANDopposes absentchosenlabels; budgetpartial/wrongper_member/intervals fail.
+  Natural-languagecompoundfallbackallowed; lackofgraphalone notfailure. Same10exposed
+  cases;60augmentationvariantsstillnottrained.0HTTP;CPUcostseparate.
+
+Earlier closed evidence retained in report/manifests:rawscale100/1000/5000Correct24/23/22,
+144gen437047,oneAsterhistorynot3independent;pairedQA21/24vs23/24 butfourdimensional
+transitionreviewplain11pass8fail5ambiguous/delta2/18/4;Bsamepool15/14/16;
+scale100source24/24vsgraph23/24andno1/4/16reusecrossover;earlierguided39/40syntaxvalid
+withoutcompleteformations/updates. Sourceidentity/catalognavigation fixesareengineering,
+notmethodsqualitywins. All original failures/firstlabels/costs remain.
+
+Publication checks:95affectedtests passed; fullLabRuff,3methodsmypy,DAG/tools boundaries,
+283sourceverificationmatrix passed. Three new learningtestfiles routed to existingLangGraph
+CIjob (allstillrun). Currentreport15links/JSON checked; fullreporegression notrunlocally.
+
+Remaining fullgoal:effectiveconditional/bundle selection/stopping/fullpoolReaderquality;
+range semantic fidelity;sufficient independenthistories/unseencombinations;full declared
+external split;secondmodelwholepipeline;independentblindsubset;stability/pairedstats;
+useful SAME method in ordinaryHost;finalplanaudit. No forced architecture win or expanding
+unchangedfailedconditions. Historical blocks below are NOT current process state.
+
 # Current publication checkpoint requested; corrected factorial LIVE
 
 User explicitly requests development summary and GitHub submission. Publish the

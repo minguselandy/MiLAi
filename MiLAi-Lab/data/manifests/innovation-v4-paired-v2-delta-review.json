@@ -1,0 +1,232 @@
+{
+  "status": "DELTA_PREDICTION_CLOSED; FIRST_SCORES_RUNNING",
+  "source_version": "08de761d",
+  "coverage": "All 24 post-arrival states reconstructed from saved initial states and complete unit/metadata changes; all 24 complete Reader answers read against frozen sources. Full structured support-binding audit remains pending.",
+  "stages_from_actual_receipts": {
+    "maintenance": {
+      "responses": 24,
+      "prompt_tokens": 68751,
+      "completion_tokens": 105129,
+      "total_tokens": 173880,
+      "length": 0
+    },
+    "reader": {
+      "responses": 24,
+      "prompt_tokens": 43018,
+      "completion_tokens": 41623,
+      "total_tokens": 84641,
+      "length": 0
+    },
+    "embedding": {
+      "responses": 63,
+      "prompt_tokens": 3618,
+      "completion_tokens": 0,
+      "total_tokens": 3618,
+      "length": 0
+    }
+  },
+  "source_author_issues": [
+    {
+      "id": "orchid-weekday-scope",
+      "owner": "innovation-orchid",
+      "session": 1,
+      "scope": "both methods and original reference",
+      "finding": "The source calls this a weekend window, but Apr 5/6 2035 are Thursday/Friday. The expected names follow the effective-date transition but actual availability on those weekdays is unspecified. Plain additionally asserted that both days are weekends.",
+      "treatment": "Keep frozen input and first Judge labels. Annotate question/source scope ambiguity; do not count it as clean temporal confirmation."
+    },
+    {
+      "id": "shared-catalog-availability",
+      "owner": "innovation-shared",
+      "session": 1,
+      "scope": "both methods and original reference",
+      "finding": "Source says catalog access is independent of cooling and ventilation, not that the catalog is currently online. Reference says catalog remains available. Plain distinguishes independence from unreported operational status.",
+      "treatment": "Preserve original reference/Judge; do not mark this source-grounded distinction a model failure solely from reference mismatch."
+    }
+  ],
+  "state_notes": {
+    "innovation-harbor": [
+      "Actual initial OR-of-AND support group formed for Du, but independent battery location and the general population rule were omitted.",
+      "Card text corrected but its cancellation was given an unsupported effective_until Apr 3; old card route retained with pending-premise flag.",
+      "Voucher and eligibility become unknown in text; old graph remains pending rather than being reset to valid semantics.",
+      "Day/night outcome collapsed into one derived node, with the old pending routes still attached; battery still missing."
+    ],
+    "innovation-orchid": [
+      "Two roles formed with scopes.",
+      "Future Qin assignment replaces current Gu clause outright, so pre-Apr-6 assignment disappears from current state.",
+      "Earlier Gu wording restored inside future Qin clause; effective_from still gates the complete compound clause, requiring temporal audit.",
+      "From-project-start correction explicitly retained in key-holder text."
+    ],
+    "innovation-studio": [
+      "All rule text formed, but arbitrary report-day text entered applicability scope without a source-stated daily restriction.",
+      "Temporary volunteer exception saved separately with supported single-day limits.",
+      "Actual exception record retracted and history remains available; general rules retained. This is a real local-retraction positive, not full chain correctness.",
+      "Empty proposal; new silver inspection sticker fact absent from state, although Reader uses raw arrival."
+    ],
+    "innovation-grant": [
+      "Totals and not-per-member meaning formed.",
+      "900 proposal saved, with the explicit not-approved qualifier omitted from its own clause; word proposal partly retains nonfinal status.",
+      "Compound 600-before/750-after clause receives effective_from Apr 8 on the whole unit, potentially masking the before-period clause.",
+      "Membership source changed into the stronger general rule that membership count does not affect grant decisions; duplicated across two records. Source only reports no change in this event."
+    ],
+    "innovation-catalog": [
+      "Initial facts formed; quantity_scope=per_member is unsupported and irrelevant to editor/color attributes.",
+      "From-start correction retained in current wording, unlike the plain condition.",
+      "Past work and new future work merged under one effective_from date.",
+      "New unconfirmed cover rumor omitted; an unrelated existing clause had metadata work instead."
+    ],
+    "innovation-shared": [
+      "Initial requirements present; current conditions labeled observed despite user report, attribution interpretation unconfirmed.",
+      "Cooling failure updated while other statements retained.",
+      "East-only ventilation failure/repair preserved.",
+      "New West unknown facts omitted. Old East facts regenerated and a new nonpending support route uses failed ventilation as a prerequisite for a scanner-rule target; this is not correct semantic relation formation."
+    ]
+  },
+  "qa_author_review": {
+    "innovation-harbor": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 1,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": [
+          "Unknown eligibility conclusion correct; explanation invokes the erroneous stored expiry interval, although original card cancellation already occurred Apr 2."
+        ]
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ],
+    "innovation-orchid": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 1,
+        "core": null,
+        "notes": [
+          "Same author weekend/date ambiguity as plain. Does not add the false claim that both dates are weekend days."
+        ]
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ],
+    "innovation-studio": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": [
+          "Core default rules correct; elaboration treats usually as uncertainty and adds operational/inventory contingencies absent from source."
+        ]
+      },
+      {
+        "session": 1,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ],
+    "innovation-grant": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 1,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": [
+          "Core totals correct, but explanation repeats the state generalization that membership changes do not affect grant decisions."
+        ]
+      }
+    ],
+    "innovation-catalog": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 1,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ],
+    "innovation-shared": [
+      {
+        "session": 0,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 1,
+        "core": null,
+        "notes": [
+          "Matches the original reference by asserting catalog accessible, but source establishes independence rather than current uptime. Same author issue as plain."
+        ]
+      },
+      {
+        "session": 2,
+        "core": true,
+        "notes": []
+      },
+      {
+        "session": 3,
+        "core": true,
+        "notes": []
+      }
+    ]
+  },
+  "independent_blind_review": false,
+  "official_labels_modified": false,
+  "rejudged": false,
+  "claims": "No paired quality superiority. Real initial support group and actual exception withdrawal coexist with omissions, invalid temporal scope and pending/wrong relations."
+}
