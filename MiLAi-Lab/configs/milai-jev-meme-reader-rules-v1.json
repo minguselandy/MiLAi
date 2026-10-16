@@ -1,0 +1,146 @@
+{
+  "name": "jev-meme-reader-rules-v1",
+  "source_version": "recorded_at_dispatch",
+  "settings_source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/pl_011/actual-config.json",
+  "cases": [
+    {
+      "episode": "pl_011",
+      "id": "before-0",
+      "phase": "before",
+      "task_type_for_scoring_only": "Cas",
+      "before_id_for_scoring_only": null,
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/pl_011/http/questions/mixed/before-0/request.json"
+    },
+    {
+      "episode": "pl_011",
+      "id": "before-1",
+      "phase": "before",
+      "task_type_for_scoring_only": "Cas",
+      "before_id_for_scoring_only": null,
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/pl_011/http/questions/mixed/before-1/request.json"
+    },
+    {
+      "episode": "pl_011",
+      "id": "before-2",
+      "phase": "before",
+      "task_type_for_scoring_only": "Abs",
+      "before_id_for_scoring_only": null,
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/pl_011/http/questions/mixed/before-2/request.json"
+    },
+    {
+      "episode": "pl_011",
+      "id": "after-1",
+      "phase": "after",
+      "task_type_for_scoring_only": "Cas",
+      "before_id_for_scoring_only": "before-0",
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/pl_011/http/questions/mixed/after-1/request.json"
+    },
+    {
+      "episode": "pl_011",
+      "id": "after-2",
+      "phase": "after",
+      "task_type_for_scoring_only": "Cas",
+      "before_id_for_scoring_only": "before-1",
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/pl_011/http/questions/mixed/after-2/request.json"
+    },
+    {
+      "episode": "pl_011",
+      "id": "after-3",
+      "phase": "after",
+      "task_type_for_scoring_only": "Abs",
+      "before_id_for_scoring_only": "before-2",
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/pl_011/http/questions/mixed/after-3/request.json"
+    },
+    {
+      "episode": "pl_011",
+      "id": "after-6",
+      "phase": "after",
+      "task_type_for_scoring_only": "ER",
+      "before_id_for_scoring_only": null,
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/pl_011/http/questions/mixed/after-6/request.json"
+    },
+    {
+      "episode": "sw_001",
+      "id": "before-0",
+      "phase": "before",
+      "task_type_for_scoring_only": "Cas",
+      "before_id_for_scoring_only": null,
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/sw_001/http/questions/mixed/before-0/request.json"
+    },
+    {
+      "episode": "sw_001",
+      "id": "before-1",
+      "phase": "before",
+      "task_type_for_scoring_only": "Cas",
+      "before_id_for_scoring_only": null,
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/sw_001/http/questions/mixed/before-1/request.json"
+    },
+    {
+      "episode": "sw_001",
+      "id": "before-2",
+      "phase": "before",
+      "task_type_for_scoring_only": "Abs",
+      "before_id_for_scoring_only": null,
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/sw_001/http/questions/mixed/before-2/request.json"
+    },
+    {
+      "episode": "sw_001",
+      "id": "before-3",
+      "phase": "before",
+      "task_type_for_scoring_only": "Abs",
+      "before_id_for_scoring_only": null,
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/sw_001/http/questions/mixed/before-3/request.json"
+    },
+    {
+      "episode": "sw_001",
+      "id": "after-1",
+      "phase": "after",
+      "task_type_for_scoring_only": "Cas",
+      "before_id_for_scoring_only": "before-0",
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/sw_001/http/questions/mixed/after-1/request.json"
+    },
+    {
+      "episode": "sw_001",
+      "id": "after-2",
+      "phase": "after",
+      "task_type_for_scoring_only": "Cas",
+      "before_id_for_scoring_only": "before-1",
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/sw_001/http/questions/mixed/after-2/request.json"
+    },
+    {
+      "episode": "sw_001",
+      "id": "after-3",
+      "phase": "after",
+      "task_type_for_scoring_only": "Abs",
+      "before_id_for_scoring_only": "before-2",
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/sw_001/http/questions/mixed/after-3/request.json"
+    },
+    {
+      "episode": "sw_001",
+      "id": "after-4",
+      "phase": "after",
+      "task_type_for_scoring_only": "Abs",
+      "before_id_for_scoring_only": "before-3",
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/sw_001/http/questions/mixed/after-4/request.json"
+    },
+    {
+      "episode": "sw_001",
+      "id": "after-7",
+      "phase": "after",
+      "task_type_for_scoring_only": "ER",
+      "before_id_for_scoring_only": null,
+      "source_request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/meme-native-v1/D0/sw_001/http/questions/mixed/after-7/request.json"
+    }
+  ],
+  "instruction": "Apply explicitly supplied conditional rules to observed trigger events, including consequences through more than one rule. Identify an answer obtained this way as derived from those rules. Distinguish a missing premise from a conditional rule whose trigger is already established. Do not present a derived consequence as an independently observed event.",
+  "selection": "AllCas/Abs afterquestions and their corresponding beforequestions, plusER aftercontrols, in the two alreadyexposed native episodes. SavedD0mixed deliveries reused verbatim; no new source selection.",
+  "variants": [
+    "baseline",
+    "rule_application"
+  ],
+  "temperature": 0.0,
+  "variant_order": "Alternating percase; both newly executed atT0. OriginalT1 answers remain separate, not the causal baseline.",
+  "scoring": "Source-grounded author review after all firstanswers; samevariant Cas/Abs beforegate required. Ambiguity/missing not silently passed. No runtimegold or officialjudgeclaim.",
+  "scope": "Exposed component intervention, not new blindMEME or wholepipeline superiority. No maintenance or bank mutation.",
+  "unknown_retry": false
+}
