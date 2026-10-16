@@ -1,0 +1,1350 @@
+{
+  "status": "CLOSED_RECEIPTS_AND_NATIVE_SCORES_RECONCILED",
+  "run": {
+    "status": "COMPLETED",
+    "phase": "predict",
+    "planned": 138,
+    "completed": 138,
+    "known_failures": 0,
+    "fresh_reader_attempts": 119,
+    "reused_reader_outputs": 19,
+    "known_failed_reader_calls": 0,
+    "actual_wall_seconds": 1134.1812769835815,
+    "actual_cpu_seconds": 2.369713494,
+    "unique_reader_inputs": 119
+  },
+  "source_version": "5bf6d6de300e39f4c8c858a4f30087ee808d3779",
+  "arms": {
+    "bm25_k4": {
+      "native": {
+        "cases": 46,
+        "missing": [],
+        "answerable_cases": 24,
+        "valid_answerable": 24,
+        "answer_em_with_missing_zero": 0.20833333333333334,
+        "answer_f1_with_missing_zero": 0.23958333333333334,
+        "support_f1_with_missing_zero": 0.3875,
+        "answerability_correct": 31,
+        "reference_proof_in_pool": 24,
+        "reference_proof_delivered": 3,
+        "planned_pairs": 22,
+        "valid_pairs": 22,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.227,
+          "answer_em": 0.227,
+          "support_f1": 0.392,
+          "group_answer_sufficiency_f1": 0.227,
+          "group_support_sufficiency_f1": 0.256
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.22699999999999998
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 29680,
+        "reader_completion_tokens": 67044,
+        "reader_total_tokens": 96724,
+        "reader_first_call_wall_seconds": 437.4577259775251,
+        "reader_positions": 46,
+        "fresh_reader_calls": 42,
+        "reused_reader_outputs": 4,
+        "controller_input_tokens": 0,
+        "controller_model_wall_seconds": 0,
+        "controller_decision_positions": 0,
+        "opened_documents": 184,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "standalone_unique_reader_calls": 45,
+        "reader_plus_controller_input_tokens": 29680,
+        "reader_plus_controller_total_tokens": 96724,
+        "warm_component_wall_sum_seconds": 437.51315152831376
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 30327,
+        "reader_completion_tokens": 69306,
+        "reader_total_tokens": 99633,
+        "reader_first_call_wall_seconds": 452.11842580419034,
+        "reader_positions": 46,
+        "fresh_reader_calls": 42,
+        "reused_reader_outputs": 4,
+        "controller_input_tokens": 0,
+        "controller_model_wall_seconds": 0,
+        "controller_decision_positions": 0,
+        "opened_documents": 184,
+        "common_retrieval_wall_seconds": 0.055425550788640976
+      },
+      "opened_count_histogram": {
+        "4": 46
+      },
+      "stop_reasons": {
+        "fixed_k": 46
+      }
+    },
+    "laya_ce_k4": {
+      "native": {
+        "cases": 46,
+        "missing": [],
+        "answerable_cases": 24,
+        "valid_answerable": 24,
+        "answer_em_with_missing_zero": 0.3333333333333333,
+        "answer_f1_with_missing_zero": 0.3333333333333333,
+        "support_f1_with_missing_zero": 0.36111111111111116,
+        "answerability_correct": 32,
+        "reference_proof_in_pool": 24,
+        "reference_proof_delivered": 4,
+        "planned_pairs": 22,
+        "valid_pairs": 22,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.318,
+          "answer_em": 0.318,
+          "support_f1": 0.364,
+          "group_answer_sufficiency_f1": 0.318,
+          "group_support_sufficiency_f1": 0.288
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.318
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 29903,
+        "reader_completion_tokens": 67768,
+        "reader_total_tokens": 97671,
+        "reader_first_call_wall_seconds": 442.5166908269748,
+        "reader_positions": 46,
+        "fresh_reader_calls": 32,
+        "reused_reader_outputs": 14,
+        "controller_input_tokens": 547859,
+        "controller_model_wall_seconds": 29.929978916421533,
+        "controller_decision_positions": 184,
+        "opened_documents": 184,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "standalone_unique_reader_calls": 46,
+        "reader_plus_controller_input_tokens": 577762,
+        "reader_plus_controller_total_tokens": 645530,
+        "warm_component_wall_sum_seconds": 472.502095294185
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 29903,
+        "reader_completion_tokens": 67768,
+        "reader_total_tokens": 97671,
+        "reader_first_call_wall_seconds": 442.5166908269748,
+        "reader_positions": 46,
+        "fresh_reader_calls": 32,
+        "reused_reader_outputs": 14,
+        "controller_input_tokens": 547859,
+        "controller_model_wall_seconds": 29.929978916421533,
+        "controller_decision_positions": 184,
+        "opened_documents": 184,
+        "common_retrieval_wall_seconds": 0.055425550788640976
+      },
+      "opened_count_histogram": {
+        "4": 46
+      },
+      "stop_reasons": {
+        "read_budget": 46
+      }
+    },
+    "laya_ce_adaptive": {
+      "native": {
+        "cases": 46,
+        "missing": [],
+        "answerable_cases": 24,
+        "valid_answerable": 24,
+        "answer_em_with_missing_zero": 0.125,
+        "answer_f1_with_missing_zero": 0.15277777777777776,
+        "support_f1_with_missing_zero": 0.2083333333333333,
+        "answerability_correct": 28,
+        "reference_proof_in_pool": 24,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 22,
+        "valid_pairs": 22,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.121,
+          "answer_em": 0.091,
+          "support_f1": 0.197,
+          "group_answer_sufficiency_f1": 0.121,
+          "group_support_sufficiency_f1": 0.136
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.121
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 13299,
+        "reader_completion_tokens": 64997,
+        "reader_total_tokens": 78296,
+        "reader_first_call_wall_seconds": 421.42258573602885,
+        "reader_positions": 46,
+        "fresh_reader_calls": 45,
+        "reused_reader_outputs": 1,
+        "controller_input_tokens": 326804,
+        "controller_model_wall_seconds": 17.605710313655436,
+        "controller_decision_positions": 110,
+        "opened_documents": 64,
+        "common_retrieval_wall_seconds": 0.055425550788640976,
+        "standalone_unique_reader_calls": 45,
+        "reader_plus_controller_input_tokens": 340103,
+        "reader_plus_controller_total_tokens": 405100,
+        "warm_component_wall_sum_seconds": 439.0837216004729
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 13647,
+        "reader_completion_tokens": 66056,
+        "reader_total_tokens": 79703,
+        "reader_first_call_wall_seconds": 428.3123295493424,
+        "reader_positions": 46,
+        "fresh_reader_calls": 45,
+        "reused_reader_outputs": 1,
+        "controller_input_tokens": 326804,
+        "controller_model_wall_seconds": 17.605710313655436,
+        "controller_decision_positions": 110,
+        "opened_documents": 64,
+        "common_retrieval_wall_seconds": 0.055425550788640976
+      },
+      "opened_count_histogram": {
+        "1": 22,
+        "3": 2,
+        "2": 18,
+        "0": 4
+      },
+      "stop_reasons": {
+        "stop_exhausted": 30,
+        "stop_sufficient": 16
+      }
+    }
+  },
+  "actual_reader_usage": {
+    "prompt_tokens": 61580,
+    "completion_tokens": 174055,
+    "total_tokens": 235635,
+    "generation_responses": 119
+  },
+  "ledger_differences": {
+    "generation_token_difference": 0,
+    "generation_request_difference": 0,
+    "embedding_token_delta": 0,
+    "generation_new_unknown": 0,
+    "embedding_new_unknown": 0
+  },
+  "literal_reader_inputs_verified": 138,
+  "semantic_format_issues": [
+    {
+      "arm": "laya_ce_k4",
+      "case": "row-28384",
+      "answer": {
+        "answer": "None",
+        "answerable": false,
+        "support_ids": []
+      },
+      "issue": "insufficient_evidence_requires_empty_answer"
+    },
+    {
+      "arm": "laya_ce_adaptive",
+      "case": "row-7996",
+      "answer": {
+        "answer": "answerable=false\nanswer=\"\"\nsupporting_ids=[]",
+        "answerable": false,
+        "support_ids": []
+      },
+      "issue": "insufficient_evidence_requires_empty_answer"
+    },
+    {
+      "arm": "laya_ce_adaptive",
+      "case": "row-24052",
+      "answer": {
+        "answer": "answerable: false\nanswer: \"\"\nsupporting IDs: none",
+        "answerable": false,
+        "support_ids": []
+      },
+      "issue": "insufficient_evidence_requires_empty_answer"
+    }
+  ],
+  "paired_positive_families": [
+    {
+      "baseline": "bm25_k4",
+      "candidate": "laya_ce_k4",
+      "families": 24,
+      "mean_difference": 0.09375,
+      "percentile_95_interval": [
+        0.0,
+        0.21875
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": 0.0,
+        "musique-family-000022": 0.0,
+        "musique-family-000023": 0.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000135": 0.2500000000000001,
+        "musique-family-000138": 0.0,
+        "musique-family-000163": 1.0,
+        "musique-family-000184": 0.0,
+        "musique-family-000360": 0.0,
+        "musique-family-000367": 0.0,
+        "musique-family-000397": 1.0,
+        "musique-family-000424": 0.0,
+        "musique-family-000435": 0.0,
+        "musique-family-000468": 0.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000574": 0.0,
+        "musique-family-000583": 0.0,
+        "musique-family-000604": 0.0,
+        "musique-family-000704": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000748": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000868": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Conditional on these exposed development families and first responses; not independent test inference or repeated-generation uncertainty."
+    },
+    {
+      "baseline": "laya_ce_adaptive",
+      "candidate": "laya_ce_k4",
+      "families": 24,
+      "mean_difference": 0.18055555555555555,
+      "percentile_95_interval": [
+        0.041666666666666664,
+        0.3472222222222222
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": 0.0,
+        "musique-family-000022": 0.0,
+        "musique-family-000023": 0.0,
+        "musique-family-000073": 1.0,
+        "musique-family-000135": 0.0,
+        "musique-family-000138": 0.0,
+        "musique-family-000163": 1.0,
+        "musique-family-000184": 1.0,
+        "musique-family-000360": 0.0,
+        "musique-family-000367": 0.0,
+        "musique-family-000397": 1.0,
+        "musique-family-000424": 0.0,
+        "musique-family-000435": 0.0,
+        "musique-family-000468": 0.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000574": 0.0,
+        "musique-family-000583": 0.0,
+        "musique-family-000604": 0.0,
+        "musique-family-000704": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000748": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000868": 0.33333333333333337,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Conditional on these exposed development families and first responses; not independent test inference or repeated-generation uncertainty."
+    }
+  ],
+  "case_comparisons": [
+    {
+      "id": "row-866",
+      "family": "musique-family-000138",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-1284",
+      "family": "musique-family-000468",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-2389",
+      "family": "musique-family-000493",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-3045",
+      "family": "musique-family-000360",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-3445",
+      "family": "musique-family-000023",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "Saint John River",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "Saint John River",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-4588",
+      "family": "musique-family-000868",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "22.3%",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "22.3%",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "22.3 percent",
+          "f1": 0.6666666666666666,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-5026",
+      "family": "musique-family-000367",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-5217",
+      "family": "musique-family-000424",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-6214",
+      "family": "musique-family-000868",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-6657",
+      "family": "musique-family-000012",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-7996",
+      "family": "musique-family-000435",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "answerable=false\nanswer=\"\"\nsupporting_ids=[]",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-8077",
+      "family": "musique-family-000574",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "Massachusetts",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "Massachusetts",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "Massachusetts",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-10114",
+      "family": "musique-family-000468",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-10637",
+      "family": "musique-family-000748",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "commedia per musica",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "commedia per musica",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "commedia per musica",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-10766",
+      "family": "musique-family-000397",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-11853",
+      "family": "musique-family-000397",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "comune",
+          "f1": 1.0,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-12523",
+      "family": "musique-family-000583",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-12833",
+      "family": "musique-family-000022",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-14496",
+      "family": "musique-family-000138",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-15332",
+      "family": "musique-family-000704",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-17008",
+      "family": "musique-family-000704",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "Newcastle United",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "Newcastle United",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "Newcastle United",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-17159",
+      "family": "musique-family-000360",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-19869",
+      "family": "musique-family-000748",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "commedia per musica",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-19890",
+      "family": "musique-family-000163",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "United States",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-21050",
+      "family": "musique-family-000367",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-21946",
+      "family": "musique-family-000730",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-23089",
+      "family": "musique-family-000163",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "United States",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "Kenya",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-23193",
+      "family": "musique-family-000022",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-24052",
+      "family": "musique-family-000812",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "answerable: false\nanswer: \"\"\nsupporting IDs: none",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-24087",
+      "family": "musique-family-000871",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-24439",
+      "family": "musique-family-000073",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "James Dearden",
+          "f1": 1.0,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "James Dearden",
+          "f1": 1.0,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-24506",
+      "family": "musique-family-000012",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-26884",
+      "family": "musique-family-000812",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-27448",
+      "family": "musique-family-000023",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-28384",
+      "family": "musique-family-000184",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "None",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-28960",
+      "family": "musique-family-000583",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-32682",
+      "family": "musique-family-000730",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-35775",
+      "family": "musique-family-000073",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-36340",
+      "family": "musique-family-000135",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "Prince and Princess of Wales",
+          "f1": 0.7499999999999999,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "Prince of Wales",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "Prince of Wales",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-36373",
+      "family": "musique-family-000574",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-36664",
+      "family": "musique-family-000493",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-37002",
+      "family": "musique-family-000424",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-37282",
+      "family": "musique-family-000184",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "Sawatch Range",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "Sawatch Range",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-38432",
+      "family": "musique-family-000871",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "United States",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "United States",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "United States",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-38999",
+      "family": "musique-family-000604",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        }
+      }
+    },
+    {
+      "id": "row-39565",
+      "family": "musique-family-000604",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "laya_ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        }
+      }
+    }
+  ],
+  "cost_scope": "Standalone costs include reused first responses and cached controller forwards; identical Reader inputs within each arm are charged once. Gross per-position costs are separate. Actual ledger charges each shared call once. Encoder input tokens and Reader generated tokens are distinct workloads. Warm component sum excludes cold load and unmeasured orchestration/review costs; it is not measured standalone end-to-end latency."
+}

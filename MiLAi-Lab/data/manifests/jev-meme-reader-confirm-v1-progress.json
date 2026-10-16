@@ -203,5 +203,10 @@
   ],
   "references_opened_for_scoring": false,
   "no_semantic_results_claimed": true,
-  "scheduled_followup": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-ce-stop-cap4-v1/supervisor.json"
+  "scheduled_followup": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-ce-stop-cap4-v1/supervisor.json",
+  "snapshot_note": "Historical in-flight observation retained verbatim; superseded by the closed confirmation and STOP summaries. It is not current process state.",
+  "superseded_by": [
+    "data/manifests/jev-meme-reader-confirm-v1-summary.json",
+    "data/manifests/jev-musique-ce-stop-cap4-v1-summary.json"
+  ]
 }

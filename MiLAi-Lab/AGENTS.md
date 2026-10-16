@@ -1,4 +1,68 @@
-# LIVE: new-story Reader confirmation and queued same-cap STOP QA — 2026-10-17
+# CURRENT: both cohorts CLOSED and reviewed — 2026-10-17
+
+Goal ACTIVE/incomplete. Previous service-only turn added no research result; this turn
+revalidated terminal processes and completed source/cost/statistical analysis. No blocker
+prevents independent next work. No subagents, SHA/content fingerprints, new budget ledger,
+Product/API/Schema/permission/Canonical changes, remote publication or merge.
+All new files/env/cache remain under /cra/memory/mx_memory.
+
+ALL OUR JOBS CLOSED. Actual ps has no PIDs1434606/1510741/1451842. Confirmation driver and
+8 subjobs COMPLETED; STOP supervisor predict/score return0 and reader138/138 COMPLETED.
+No queue remains. Do not restart from the historical snapshot below.
+7862 container milai-unified-v8-v9-native-host-r2 exited0/restart=no; no7862 listener.
+Protected BGE7861 PID47436, BGE7961 PID52982 and7860 PID2160380 unchanged/running.
+GPU2/3 each36928MiB free at current check. No task GPU process/service remains.
+
+Confirmation source5e2b0dcb, artifacts/jev-reader/meme-reader-confirm-v1:
+4 stories /2 seeds /200 first positions. All actual input pairs and explicit sampling
+verified; raw original source view, no Writer/retrieval. All4sources/20sessions and200
+positions reviewed after closure; label/seed hidden judgments frozen before joining.
+Not independent human adjudication; response style may unblind. Before42/42 both;
+after baseline25pass/17fail/16ambiguous versus compact35pass/3fail/19ambiguous/1missing.
+Cas4/16→13/16; Abs4/10 each; Del0/8 each; Agg1/8→2/8 under full-fidelity review though
+all16Agganswers cover core target facts; Tr/ER8/8 each. All4 episode mean deltas positive,
+macro+.1741; two domain DAGs, not200independent samples. Source contradiction pl044after3
+kept ambiguous; original gold unchanged. Compact seed20261018/pl048after2 has stop but
+content=null,1365completiontokens; keptmissing, no reasoning substitution or retry.
+200responses/1,385,656tokens,0embedding;8run ledger deltas exact/newunknown0.
+Compact uses6.06%fewer tokens/18.01%less observed callwall here; no default or pipelinewin.
+Tracked confirmation summary/review manifests and original frozen judgments preserve details.
+
+STOP source5bf6d6de, artifacts/jev-reader/musique-ce-stop-cap4-v1:
+46 exposed C20cases/24families,138positions119uniqueReader responses19reuse. Freshcommon7860;
+no old7862 outputs reused. BM25k4/CEk4/CEadaptive positiveAnswerF1 .23958/.33333/.15278;
+22pairnativegroupF1 .227/.318/.121. All138literal actual request/schema pairs match.
+Adaptive opens64total, fixed4each184; stop_exhausted30/stop_sufficient16. Six F1-changing
+positive cases source-reviewed. Real complement repairs:11853Lana/comune,24439JamesDearden.
+23089Kenya not in delivered text;37282missinghospital-state qualifier;4588percentformat;
+36340correct father-only scope from already delivered biography. Native scores unchanged.
+Three valid-JSON responses violate answerable=false/emptyanswer convention; retained.
+24familypaired bootstrap CE-BM +.09375 CI[0,.21875],CE-adaptive +.18056 CI[.04167,.34722];
+conditional exposed-cohort/first-draw analysis, no unseen-generalization or significance claim.
+119newReader responses235635tokens,receipt/ledgerdiff0,newunknown0. Standalone within-arm
+Readerunique calls45/46/45. Including cached controllers+retrieval, warmcomponent sums
+437.51/472.50/439.08sec; not measured fullcoldlatency. CEcontrollerinput547859/326804tokens.
+New summary tool tools/summarize_musique_reader.py; tracked summary and source-review manifests.
+
+Only original budget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+STOPpreflight .90112wall/.90424CPU now recorded ONCE reader_stop_cap4_preparation_v1.
+Finalanalysis1.56839wall/4.33700CPU ONCE reader_stop_cap4_closed_analysis_v1. Local receipt
+at STOProot/offline-compute-ledger-record.json. Author review/exploratory analysis time
+unmeasured, notzero. Fixed4extension70newforwards alreadycharged earlier, do notaddagain.
+
+NEXT: isolate state-information effect on frozen candidate/actions/model with source-qualified
+labels, then determine justified complement/STOP learning. Actual W/B relation coverage and
+Writer semantics remain unresolved; no automatic larger Impact/RL run. CurrentLongMemEvalv1
+0unexposedcases; optional new-source question unanswered. Don't resurrect118/79 subsets.
+Completion audit remains NOTPROVEN. Report docs/MILAI_JEV_READ_DECISIONS_20261016.md now
+contains closed results and marks old running sections historical. Read relevant protocol/code
+before any new experiment; no changes to protected services or other worktree dirty files.
+
+Validation:7related tests including local officialMuSiQue scorer, Ruff, real packageDAG and
+toolsboundary passed. Fullrepo/remoteCI notrun. Remote identities are from previous read-only
+check, not rechecked this turn. Current rollback base b95c20a4 (before reporting changes).
+
+# Historical snapshot: confirmation and STOP queue before closure — 2026-10-17
 
 Goal ACTIVE/incomplete; prior turn is progress + verified running work. No subagents,
 SHA/contentfingerprints,newledger,Product/API/Schema/permission/Canonical or model-service

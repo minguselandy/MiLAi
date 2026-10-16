@@ -11,6 +11,19 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
 import run_musique_reader
 from run_musique_reader import predict, reader_input, score
+from summarize_musique_reader import family_difference
+
+
+def test_paired_summary_weights_families_not_repeated_questions():
+    positive = {"family": "a", "answerable": True,
+                "arms": {"base": {"f1": 0}, "candidate": {"f1": 1}}}
+    negative = {"family": "b", "answerable": True,
+                "arms": {"base": {"f1": 1}, "candidate": {"f1": 0}}}
+    rows = [positive] * 10 + [negative, {**positive, "answerable": False}]
+    result = family_difference(rows, "base", "candidate")
+    assert result["families"] == 2
+    assert result["mean_difference"] == 0
+    assert result["percentile_95_interval"] == [-1, 1]
 
 
 def test_reader_sees_only_chosen_sources_without_gold_or_controller_verdict():

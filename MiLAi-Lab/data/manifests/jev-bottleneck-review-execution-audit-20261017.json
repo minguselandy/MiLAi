@@ -27,11 +27,12 @@
     {
       "id": "isolate_stop_and_state_factors",
       "section": "§9.1",
-      "status": "incomplete",
+      "status": "partial_matched_cap_stop_complete",
       "evidence": [
-        "data/manifests/jev-reader-c20-selections-v1.json"
+        "data/manifests/jev-musique-ce-stop-cap4-v1-summary.json",
+        "data/manifests/jev-musique-ce-stop-cap4-v1-source-review.json"
       ],
-      "finding": "Existingfixed2/adaptive4 do not isolateSTOP at samecap; state-information ablation and two-step outcome objective not completed. Next meaningful read-control is matchedfixed4/adaptive4; do not callpresentresults causalSTOP proof."
+      "finding": "Same frozen CE, same four-decision maximum, fixed-four versus adaptive closed on 46 exposed cases with one fresh common Reader. Native F1 .3333 versus .1528, but source review identifies only two complete complement repairs; other gains mix unsupported country/disambiguation answers and formatting. State-information ablation and two-step outcome objective remain incomplete. No quality-comparable net benefit."
     },
     {
       "id": "family_split_and_source_labels",
@@ -94,11 +95,13 @@
     {
       "id": "reader_failure_intervention",
       "section": "§5/10",
-      "status": "partial",
+      "status": "initial_component_confirmation_complete",
       "evidence": [
-        "data/manifests/jev-meme-reader-instruction-comparison-v1.json"
+        "data/manifests/jev-meme-reader-instruction-comparison-v1.json",
+        "data/manifests/jev-meme-reader-confirm-v1-summary.json",
+        "data/manifests/jev-meme-reader-confirm-v1-review.json"
       ],
-      "finding": "Addedrulecuefailed; posthoccompacttask improvesdynamic1/7to5/7 atsameT0/noevidencechange, but twodynamicfailures/inconsistencyremain. Mustconfirmfrozenchange on separatecases anddeclaredrecommendeddecoding; notdefault."
+      "finding": "Frozen compact instruction confirmed on four newly registered stories, two declared seeds, 200 first positions using raw chronological source. Same-condition before gates all pass; after unqualified passes 25/58 to 35/58, with deletion/aggregation ambiguities, one missing final answer and one native reference/source contradiction retained. Shared two-domain DAGs and changed evidence view limit generalization. No default change or Writer-state repair."
     },
     {
       "id": "costs_and_statistics",
@@ -107,9 +110,11 @@
       "evidence": [
         "data/manifests/jev-reader-c20-qa-v1-summary.json",
         "data/manifests/jev-reader-calibration-c20-v1-summary.json",
-        "data/manifests/jev-memops-factor-extension-v1-summary.json"
+        "data/manifests/jev-memops-factor-extension-v1-summary.json",
+        "data/manifests/jev-meme-reader-confirm-v1-summary.json",
+        "data/manifests/jev-musique-ce-stop-cap4-v1-summary.json"
       ],
-      "finding": "Originalsingleledger andfirstreceipts retained; actualmodeltokens/calls/wall/devicesknown, familybootstrap present. Authorlabeltime,somecoldload/batchforward detailsunmeasured. Not a fullnetbenefit proof."
+      "finding": "All 200 confirmation and 119 unique STOP Reader receipts reconcile with original per-run ledger deltas; zero new unknown usage. STOP includes cached controller work, within-arm Reader caching, common retrieval and 24-family paired bootstrap. MEME reports per-story/per-seed results, not 200 independent samples. Preparation/final analysis recorded once; human review, exploratory analysis and some cold load/orchestration costs remain unmeasured. No whole-pipeline net-benefit proof."
     },
     {
       "id": "compatible_modes_and_boundaries",
@@ -123,9 +128,10 @@
   ],
   "conditional_extensions": "SGD/controlledProofWriter-style variants,MemConflict,MemoryAgentBench andRL/utility objectives remain later/conditional directions; they are not silently reportedas executed. No broaderGoal success redefined aroundthispilot.",
   "next_actions": [
-    "ValidatefrozencompactReader withappropriate declaredsampling andnewstoryselection; no defaultadoptionfromposthocpair.",
-    "IsolatematchedcapSTOP andstate/complement effects withoutrepeatingclosedcohortsunchanged.",
-    "ResolveactualW/Blabels/coverage andsource-faithful Writerissues beforelargeImpacttraining.",
-    "Obtainseparateexposure-reviewedexternalcohort; currentLMEv1cannotbeunseen."
-  ]
+    "Isolate state-information effects on the same visible candidates/actions and frozen model; report perturbation limits, source-qualified labels and total encoding work.",
+    "Use source-qualified complement/STOP findings to decide whether a new training objective is justified; do not tune on these exposed QA answers or scale RL by default.",
+    "Resolve actual W/B relationship coverage and source-faithful Writer issues before enlarging Impact training.",
+    "Obtain or identify a separate exposure-reviewed external long-memory cohort; current LongMemEval v1 has no unexposed cases."
+  ],
+  "last_progress": "Completed source review, native score/cost reconciliation and reporting for both previously live cohorts. Current process checks show all our jobs terminal, no queued copy."
 }
