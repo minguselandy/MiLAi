@@ -1,4 +1,79 @@
-# Current Jev review execution: 2026-10-17 calibration and exposure closure
+# Current Jev review execution: MemOps factors CLOSED 2026-10-17
+
+Goal ACTIVE/incomplete. Previous turn is concrete progress: completed remaining MemOps
+D0-D4 factor matrix on existing genuine before, source-qualified labels, literal-input
+checks, full first-answer/state review, and premise-free forgetting probes. No subagents,
+SHA/content fingerprints, new ledger, Product/API/Schema/permission/Canonical changes.
+All new files/env/cache under /cra/memory/mx_memory. No remote publication or merge.
+
+Worktree jev-read-decisions-20261016; report docs/MILAI_JEV_READ_DECISIONS_20261016.md.
+ALL OUR JOBS CLOSED. Main source caddcc15,driver990479/exec85071 exited0;D2-Laya-0,
+D2-Laya-CE,D3,D4 each3cases18QA. Reused sibling memops-before-v2 and original
+memops-d0-d1-v1 D0/D1; no seed/baseline reruns. Families A01/B01/D02 train/exposed.
+This is DIFFERENT from our still-unrun three-case prepared A01later/tentative/B04 slice.
+Core maintenance/provider files equal across trees. All12 before-values equal originalseed,
+all12 read-values unchanged; six typed inputs literal-equal originalD1 visible payloads.
+D3 reuses actualD2CE choices; D4 reuses originalD1 choices,6literal matches/0newImpact.
+
+Source-reviewed25labelled units:3root22other;1beer/afterwards boundary masked. No positive
+preserve_successor examples. Laya0 correct13/25,CE22/25 but BOTHroot0/3;CEallother equals
+constantother. NativeGPU2 served fullinputs8192/head256,max3493/no truncation; oldCE
+trained at2048. No additional training/calibration or role-learning win.
+
+Main new outcomes: zero appends conflicting title/resolution, keeps forgotten target plus
+forget directive. CEtitle transition readable but fabricates mutual title/project supports;
+CEforget rejected EDIT_ASSERTION_SOURCE_NOT_SELECTED,no semantic commit;resolutionconflict.
+D3title transition succeeds in this draw;forget still retains target;resolutionconflict.
+D4title+resolutionlength8192 reasoning/no finalcommit;forget removes target AND unrelated
+bar preference. ALL72firstanswers/12before-after pairs read; review manifest saved.
+D2zero/CE Writer requests forcases0/2 are LITERALLY IDENTICAL (sameemptyselection), so
+stochastic generation differences must not be called a CE learning benefit.
+
+Additional premise-free question: What did I help Darren do in mid-April?
+Source d3af9f80,driver1062441/exec66397 CLOSED exit0,6state-only calls on cloned banks,
+allvaluesunchanged and exactprompt audit6/6. D0/D1/D4withhold;D2zero/CE/D3returnforgotten
+storage/furniture details. Zero adds a disclaimer but still returns detail. This verifies
+append-forget-directive does not enforce forgetting here; the old retention-framed
+question hid failure. Exposedposthoc diagnostic, not an independent test or newWriter run.
+
+Artifacts artifacts/jev-reader/{memops-factor-extension-v1,memops-forgotten-content-probe-v1}.
+Manifests jev-memops-factor-extension-{labels-v1,v1-summary,v1-review}.json and
+jev-memops-forgotten-content-probe-v1-summary.json. tools/summarize_memops_factors.py
+reconciles original receipts, exactbefore/typedinputs and originalbudget per-case deltas.
+Audit errors0. Newmain84Qwen responses362015tokens +6typed137330tokens +69embedding8950;
+newprobe6Qwen responses13527tokens. Totalnewgenerationbucket512872,0newunknown.
+SourceD0/D1/seed costs remain in originalartifacts, not recharged. D3 standalone adds68665
+originaltypedtokens, D4 adds13077originalgenerativeImpacttokens. WriterinputsCE18418→D3
+11272(-38.8%),D120111→D415056(-25.1%);quality not comparable, no netbenefit claim.
+Actualphase driver1088.43sec; same-casewarm standalone D0/D1/zero/CE/D3/D4
+248.05/322.19/264.20/260.55/249.36/332.29sec. Coldload/batchforward counts not fullymeasured.
+
+TaskLaya7870 PID981593/exec84279 STOPPED afterD2, requestedSIGTERM/exit143, not failure.
+ServiceCPU23.8sec/lifetime724.18sec(includesidle) recordedONCE in originalledger phase
+jev_memops_impact_gpu_service_v1; do not add overlappingwall dimensions. All source banks
+preserved. Existing7860 used forinference only; containers/weights/config unchanged.
+7862 user-authorizedcontainer remains STOPPED. GPU2/3 each36928MiBfree. ProtectedBGE
+PIDs47436/52982 andGPU0/1unchanged. No taskmodel queue/service left; verify actualstate.
+Original ledger only /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json;
+unknownfloors11generation/1embedding remain. Source artifacts/jev-reader/runtime/env.sh.
+
+C20 Reader/CE/calibration all CLOSED as historicalcheckpoint below. LocalLongMemEvalv1
+unexposedcandidatecount0 proven by legacy full500scoredoutcomes; ONLY38actualAnswercalls
+and1000Judgecalls in that oldrun, not500Readercalls. Do not resurrect118/79 provisionalsets.
+Async user question asks for a new unused dataset path/link; no answer received at this
+checkpoint. Continue independentwork; no permission barrier or goalblocked declaration.
+
+NEXT requirements: source-qualified/equivalent-support read supervision, Writer source/
+semantic representation and stability, W/B relationship coverage/actualown-state labels,
+remaining independentMemOps trajectories, reconcile closed siblingMEME results, external
+cohort with legitimate exposure status, final requirement-by-requirement audit. Do not
+expand Impact/RL on these negative findings. Rootrelationship labels and actual state
+utility are separate; explicit appended title transition may be valid without oldunit edit.
+Full goal NOTcomplete; ProductNO_GO. Narrownewprobe filter and receipt analysis only;
+Ruff/tools/packageboundaries pass plus real12+6state/input/cost audits; previous24tests
+remain previous-turn evidence, not falsely claimed rerun. Fullrepo/remoteCI not run.
+
+# Historical checkpoint: 2026-10-17 calibration and exposure closure
 
 Goal ACTIVE/incomplete. Previous goal turn made concrete progress: released user-owned
 7862; completed five-model probability calibration; resolved local LongMemEval v1 exposure;

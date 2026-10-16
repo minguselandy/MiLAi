@@ -1,0 +1,251 @@
+{
+  "reviewer": "Root author; source-reviewed, not blinded or independent",
+  "status": "ALL_MAIN_FACTOR_FIRST_OUTPUTS_REVIEWED",
+  "cases": {
+    "D2-Laya-0/case-0": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "new_event": "New Data Analyst title and MedVantage assignment added, but old current Junior title left unreconciled; February title-transition relation lost.",
+      "non_target": "Manager, company facts and work preference retained.",
+      "time_scope": "January15 retained on Junior unit; no explicit link disambiguates current vs initial titles.",
+      "state_only_qa": {
+        "current": "unresolved/conflicting titles, no definitive answer",
+        "manager": "correct",
+        "initial": "mentions Junior/Jan15 but unnecessarily declines definitive starting title"
+      },
+      "mixed_qa": {
+        "current": "correct",
+        "manager": "correct",
+        "initial": "correct from originals"
+      },
+      "joint_state": "fails clear current/historical transition despite newly stored current title"
+    },
+    "D2-Laya-0/case-1": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "selection": "All11units marked preserve, including explicitly forgottenu8.",
+      "new_event": "Supportive friend stance and forgetting directives added; original storage-help unit remains in current state.",
+      "non_target": "General bar preference, birthday and other friend facts retained.",
+      "fidelity": "Adds no-longer-remember directive for dive-bar visit, whose event boundary is ambiguous; not a hard role target.",
+      "state_only_qa": {
+        "kept": "recognizes retention directives; does not prove target removal",
+        "birthday": "correct",
+        "move": "Says retain none based on newly stored directive, but current-state forgotten unit remains; answer repeats mid-April detail."
+      },
+      "mixed_qa": {
+        "kept": "names storage episode under explicitly retained exception although its text says retracted; retain/retract wording is inconsistent",
+        "birthday": "correct",
+        "move": "Says retain none with original forget intent and historical details quoted."
+      },
+      "joint_state": "current storage target retained; instruction-following by Reader is not evidence of successful state forgetting"
+    },
+    "D2-Laya-0/case-2": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "new_event": "New2560x1600 assertion appended, old2560x1440 remains current and unqualified; no explicit correction relation.",
+      "non_target": "RAM32GB,weightabout1.12kg,device and warranty facts unchanged.",
+      "time_scope": "No invented date; unresolved same-scope conflicting specifications.",
+      "state_only_qa": {
+        "resolution": "conflict, cannot determine",
+        "ram": "correct",
+        "weight": "correct"
+      },
+      "mixed_qa": {
+        "resolution": "correct via original correction",
+        "ram": "correct",
+        "weight": "correct"
+      },
+      "joint_state": "fails to reconcile corrected resolution"
+    },
+    "D2-Laya-CE/case-0": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "new_event": "Explicit February title-restructuring transition added, with original Junior/Jan15 assertion retained; current/historical title QA now supported.",
+      "non_target": "Original manager, company and preference facts unchanged.",
+      "time_scope": "New wording ties role start toJan15 but title restructuring toFebruary; all six Reader answers correctly distinguish initial/current title.",
+      "fidelity": "Writer invents mutual support links between MedVantage assignment and title change; same-event co-occurrence does not establish either dependence.",
+      "state_only_qa": {
+        "current": "correct",
+        "manager": "correct",
+        "initial": "correct"
+      },
+      "mixed_qa": {
+        "current": "correct",
+        "manager": "correct",
+        "initial": "correct"
+      },
+      "joint_state": "Qualified factual transition success; unsupported cyclic support links prevent clean source-faithful state pass",
+      "writer_request_equal_to_zero": true,
+      "causal_note": "Both selectors returned the same empty selection; identical Writer request with a different stochastic response. Not evidence CE improved this event."
+    },
+    "D2-Laya-CE/case-1": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "maintenance_status": "incomplete",
+      "failure_reason": "EDIT_ASSERTION_SOURCE_NOT_SELECTED",
+      "new_event": "No semantic writes committed; actual before unchanged. Source assertion rejected although provider finished stop,4434completion tokens.",
+      "non_target": "All before facts preserved because maintenance failed; not a successful selective-retention outcome.",
+      "time_scope": "Mixed kept answer incorrectly labels reports2026-10-16 despite final note source dates unknown; capture/report conflation.",
+      "state_only_qa": {
+        "kept": "still includes forgotten storage help",
+        "birthday": "correct",
+        "move": "returns old move/beer facts, no forget intent"
+      },
+      "mixed_qa": {
+        "kept": "recognizes dropped topic but invents report dates and widens ambiguous beer scope",
+        "birthday": "correct",
+        "move": "correctly states retain none via originals"
+      },
+      "joint_state": "failed forgetting/new-event transition; no partial proposal was applied"
+    },
+    "D2-Laya-CE/case-2": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "new_event": "Appends2560x1600 and16:10, but old2560x1440 remains current with no explicit correction relation.",
+      "non_target": "All original specifications and warranty details retained.",
+      "state_only_qa": {
+        "resolution": "conflict, cannot determine",
+        "ram": "correct",
+        "weight": "correct with about qualifier"
+      },
+      "mixed_qa": {
+        "resolution": "correct via original correction",
+        "ram": "correct",
+        "weight": "correct"
+      },
+      "joint_state": "fails to reconcile same-scope conflicting resolution",
+      "writer_request_equal_to_zero": true,
+      "causal_note": "Same empty selector result and literal identical Writer request; differing generated extra aspect-ratio clause is not a CE decision benefit."
+    },
+    "D3/case-0": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "new_event": "Adds explicit title-changed-in-February relation and late-February MedVantage assignment. Original Junior/January15 is readable as initial title under that relation.",
+      "non_target": "Original manager/company/preference facts retained; no fabricated support relation.",
+      "time_scope": "Current and initial scopes recoverable without inventing year.",
+      "state_only_qa": {
+        "current": "correct, qualified as latest reported title",
+        "manager": "correct",
+        "initial": "correct"
+      },
+      "mixed_qa": {
+        "current": "correct",
+        "manager": "correct",
+        "initial": "correct"
+      },
+      "joint_state": "core transition and retention supported in this draw; no requirement to physically replace old unit if appended transition makes historical/current meaning explicit",
+      "selection": "Reuses CE empty roots/preserve; no new Impact inference",
+      "writer_input_tokens": 3864,
+      "source_full_writer_input_tokens": 5989,
+      "causal_note": "Local projection changes Writer input; one stochastic sample, not stable or trained-controller superiority."
+    },
+    "D3/case-1": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "new_event": "Friend support stance and explicit storage-drop directive added, but the storage-help unit remains in current state.",
+      "non_target": "General bar preference and other friend facts retained.",
+      "state_only_qa": {
+        "kept": "retells storage/beer details under concluded/dropped heading",
+        "birthday": "correct",
+        "move": "says retain none while repeating storage/beer details"
+      },
+      "mixed_qa": {
+        "kept": "says storage dropped, other facts retained",
+        "birthday": "correct",
+        "move": "says retain none using original instruction"
+      },
+      "joint_state": "Retention directive represented; target details still in current state. Operational response to premise-free content question remains separately tested.",
+      "selection": "Reuses CE empty roots/preserve; no new Impact call"
+    },
+    "D3/case-2": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "new_event": "New separate display-resolution2560x1600/16:10 record added; old2560x1440 remains without correction relation.",
+      "non_target": "All original laptop/warranty facts retained.",
+      "state_only_qa": {
+        "resolution": "unresolved conflict",
+        "ram": "correct",
+        "weight": "correct"
+      },
+      "mixed_qa": {
+        "resolution": "correct via original correction",
+        "ram": "correct",
+        "weight": "correct number but false reported dateOctober16,2026 from capture metadata"
+      },
+      "joint_state": "unresolved corrected specification; local projection alone did not repair missed root",
+      "selection": "Reuses CE empty roots/preserve; no new Impact call"
+    },
+    "D4/case-0": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "maintenance_status": "incomplete",
+      "provider_finish_reason": "length",
+      "new_event": "No update committed; original Junior title and other facts remain.",
+      "non_target": "Unchanged due failed maintenance, not a successful update.",
+      "state_only_qa": {
+        "current": "wrong: Junior Data Analyst",
+        "manager": "correct",
+        "initial": "mentions Junior/Jan15 but questions whether it is initial title"
+      },
+      "mixed_qa": {
+        "current": "correct from originals",
+        "manager": "correct",
+        "initial": "correct"
+      },
+      "joint_state": "target update absent despite original Impact selecting correct rootu1",
+      "selection": "Exact D1 rootsu1/preserveu2-u5 replay; no new Impact inference",
+      "failure_reason": "Provider length:8192completion tokens consumed in repetitive reasoning; no final content or semantic commit"
+    },
+    "D4/case-1": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "maintenance_status": "completed",
+      "new_event": "Storage-help unit and beer fragment removed; general bar-preferenceu10 also removed, despite independent current relevance. Supportive friend stance not separately stored.",
+      "non_target": "Collateral general preference lost; birthday/other friend facts retained.",
+      "state_only_qa": {
+        "kept": "lists remaining friend facts",
+        "birthday": "correct",
+        "move": "no storage information in current state"
+      },
+      "mixed_qa": {
+        "kept": "retells storage event and narrows removal to logistics/followups",
+        "birthday": "correct",
+        "move": "states retain none"
+      },
+      "joint_state": "target deletion with collateral unrelated preference loss",
+      "selection": "Exact originalD1 rootsu8/u9/u10 plus preserveothers; local projection did not prevent u10 loss",
+      "ambiguous_boundary": "u9beer remains masked; removal not itself a hard failure"
+    },
+    "D4/case-2": {
+      "before_after_read": true,
+      "answers_read": 6,
+      "maintenance_status": "incomplete",
+      "failure_reason": "Provider length at8192completion tokens; no proposal applied",
+      "new_event": "Original2560x1440 remains; correction absent despite correct rootu3 from originalImpact.",
+      "non_target": "All original facts unchanged because update failed.",
+      "state_only_qa": {
+        "resolution": "wrong:2560x1440",
+        "ram": "correct",
+        "weight": "correct"
+      },
+      "mixed_qa": {
+        "resolution": "correct via original correction",
+        "ram": "correct",
+        "weight": "correct"
+      },
+      "joint_state": "correction failed, not a semantic success",
+      "selection": "Exact originalD1 rootu3 with otherunits preserved; no new Impact call"
+    }
+  },
+  "notes": "All72main firstanswers and12before/after pairs read; six separate premise-free probes additionally read. Originaloutputs unchanged. Single-draw exposed diagnostic, not independent or blinded.",
+  "all_new_first_answers_read": 72,
+  "all_new_before_after_pairs_read": 12,
+  "forgotten_content_probes": {
+    "D0": "withheld",
+    "D1": "withheld",
+    "D2-Laya-0": "returned_forgotten_detail_with_disclaimer",
+    "D2-Laya-CE": "returned_forgotten_detail",
+    "D3": "returned_forgotten_detail",
+    "D4": "withheld"
+  }
+}

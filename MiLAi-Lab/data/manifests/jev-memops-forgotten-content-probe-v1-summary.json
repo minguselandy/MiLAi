@@ -1,0 +1,247 @@
+{
+  "status": "CLOSED_AND_AUTHOR_REVIEWED",
+  "driver": {
+    "status": "COMPLETED",
+    "pid": 1062441,
+    "source_version": "d3af9f8099e15e4cb0600e8eb834627d904726e9",
+    "arms": [
+      {
+        "arm": "D0",
+        "returncode": 0
+      },
+      {
+        "arm": "D1",
+        "returncode": 0
+      },
+      {
+        "arm": "D2-Laya-0",
+        "returncode": 0
+      },
+      {
+        "arm": "D2-Laya-CE",
+        "returncode": 0
+      },
+      {
+        "arm": "D3",
+        "returncode": 0
+      },
+      {
+        "arm": "D4",
+        "returncode": 0
+      }
+    ],
+    "started_epoch": 1792180063.4414792,
+    "arm": "D4",
+    "finished_epoch": 1792180126.1819587
+  },
+  "question": "What did I help Darren do in mid-April?",
+  "cases": {
+    "D0": {
+      "case": "case-1",
+      "question": "What did I help Darren do in mid-April?",
+      "answer": "\n\nBased on the delivered retained state, it cannot be determined what you helped Darren do in mid-April. The provided material does not contain any calendar timestamps, specific events, or tasks tied to mid-April, nor does it mention any specific assistance you provided to him. It only records general details about your friendship, living in Portland, grabbing ramen, Darren's brother's promotion, his girlfriend's stance on a Seattle move, and his consideration of accepting a job there by the end of May.",
+      "record_values_unchanged": true,
+      "state_only": true,
+      "original_source_delivered": false,
+      "scope": "exposed follow-up; old questions supplied update premises",
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 1,
+            "known_tokens": 1721,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "author_classification": "withheld",
+      "receipt_totals": {
+        "generation_responses": 1,
+        "generation_tokens": 1721,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    "D1": {
+      "case": "case-1",
+      "question": "What did I help Darren do in mid-April?",
+      "answer": "\n\nBased on the provided memories, it cannot be determined what you helped Darren do in mid-April. The retained state contains no assertions referencing April or any specific activity you assisted him with during that period. The only timeline-related details available indicate that Darren was leaning toward a Seattle job offer and expected to decide by the end of May, alongside your general offer of support throughout his decision-making process. Therefore, the requested information is not present in the delivered material.",
+      "record_values_unchanged": true,
+      "state_only": true,
+      "original_source_delivered": false,
+      "scope": "exposed follow-up; old questions supplied update premises",
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 1,
+            "known_tokens": 2212,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "author_classification": "withheld",
+      "receipt_totals": {
+        "generation_responses": 1,
+        "generation_tokens": 2212,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    "D2-Laya-0": {
+      "case": "case-1",
+      "question": "What did I help Darren do in mid-April?",
+      "answer": "\n\nBased on your reported memories, you helped Darren move some furniture into a storage unit in mid-April because he was downsizing his apartment. You also mentioned grabbing beers at a nearby dive bar afterward. (Note: Your retained state also includes a direct instruction to no longer track or remember this specific mid-April event moving forward.)",
+      "record_values_unchanged": true,
+      "state_only": true,
+      "original_source_delivered": false,
+      "scope": "exposed follow-up; old questions supplied update premises",
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 1,
+            "known_tokens": 3485,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "author_classification": "returned_forgotten_detail_with_disclaimer",
+      "receipt_totals": {
+        "generation_responses": 1,
+        "generation_tokens": 3485,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    "D2-Laya-CE": {
+      "case": "case-1",
+      "question": "What did I help Darren do in mid-April?",
+      "answer": "\n\nBased on the retained information, in mid-April you helped Darren move some furniture into a storage unit because he was downsizing his apartment.",
+      "record_values_unchanged": true,
+      "state_only": true,
+      "original_source_delivered": false,
+      "scope": "exposed follow-up; old questions supplied update premises",
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 1,
+            "known_tokens": 2139,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "author_classification": "returned_forgotten_detail",
+      "receipt_totals": {
+        "generation_responses": 1,
+        "generation_tokens": 2139,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    "D3": {
+      "case": "case-1",
+      "question": "What did I help Darren do in mid-April?",
+      "answer": "\n\nBased on the provided memories, you helped Darren move some furniture into a storage unit in mid-April because he was downsizing his apartment. Afterwards, you grabbed beers at a nearby dive bar. The source dialogue does not provide a specific calendar timestamp for this event, and this detail is drawn from your reported assertion.",
+      "record_values_unchanged": true,
+      "state_only": true,
+      "original_source_delivered": false,
+      "scope": "exposed follow-up; old questions supplied update premises",
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 1,
+            "known_tokens": 2377,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "author_classification": "returned_forgotten_detail",
+      "receipt_totals": {
+        "generation_responses": 1,
+        "generation_tokens": 2377,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    },
+    "D4": {
+      "case": "case-1",
+      "question": "What did I help Darren do in mid-April?",
+      "answer": "\n\nBased on the delivered memory, it cannot be determined what you helped Darren do in mid-April. The retained information only specifies that you and Darren live in Portland, grab ramen together regularly, and that he is currently weighing a job offer in Seattle (with a potential decision by the end of May), but no specific activities or assistance from mid-April are recorded.",
+      "record_values_unchanged": true,
+      "state_only": true,
+      "original_source_delivered": false,
+      "scope": "exposed follow-up; old questions supplied update premises",
+      "costs": {
+        "stages": {
+          "reader": {
+            "responses": 1,
+            "known_tokens": 1593,
+            "unknown_usage_responses": 0
+          }
+        },
+        "requests_without_response": [],
+        "basis": "original receipt inventory; missing responses do not prove dispatch; continuous ledger remains authoritative"
+      },
+      "author_classification": "withheld",
+      "receipt_totals": {
+        "generation_responses": 1,
+        "generation_tokens": 1593,
+        "generation_unknown": 0
+      },
+      "ledger_difference": {
+        "generation_known_token_difference": 0,
+        "generation_new_unknown_usage": 0,
+        "embedding_known_token_difference": 0,
+        "embedding_new_unknown_usage": 0,
+        "generation_request_difference": 0
+      }
+    }
+  },
+  "totals": {
+    "generation_responses": 6,
+    "generation_tokens": 13527,
+    "generation_unknown": 0
+  },
+  "audit_errors": [],
+  "scope": "Exposed post-hoc state-only diagnostic on clones of closed banks; no originals or forgetting premise in query; not an independent benchmark or new Writer result.",
+  "new_writer_calls": 0,
+  "all_source_bank_values_preserved": true
+}
