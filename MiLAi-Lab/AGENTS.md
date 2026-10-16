@@ -1,99 +1,105 @@
 # Current innovation-v4 handoff (2026-10-16)
 
-Goal ACTIVE/incomplete. Continue the full v4 plan; do not pause, block or mark complete.
-Branch `feat/lab-innovation-v4-20261015`. Report: `docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md`.
-No SHA checks, subagents, new ledger/service, stopping GPU services or PR merge.
-Continuous ledger: `/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json`;
-historical unknown floors generation10/embedding1. Root serial model/embedding/Judge HTTP.
-CPU local training and zero-model preparation may run concurrently, with costs separate.
-Detached supervisors survive turn changes. Inspect actual processes and terminal artifacts;
-a missing tool handle does not authorize restarting an existing job.
+Goal ACTIVE/incomplete; execute the full v4 plan, do not pause/block/complete on this checkpoint.
+Branch feat/lab-innovation-v4-20261015. Canonical report docs/MILAI_INNOVATION_V4_EXECUTION_20261015.md.
+No SHA/content-fingerprint checks, subagents, new ledger/model service, stopping GPU services or PR merge.
+Root serial generation/embedding/Judge HTTP. CPU local training/zero-model work can run concurrently.
+Continuous ledger /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json; unknown floor10/1.
+Detached supervisors survive turns; inspect actual PIDs and terminal artifacts before acting.
+Main venv has no Torch; system /usr/bin/python3 has Torch/Transformers. TMPDIR artifacts/tmp or
+artifacts/innovation-v4/runtime, not /tmp. Last system RAM251GiB/available164GiB during training.
 
-LIVE raw-scale-v3 driver581303, worker618845, frozen dc9d14cc. Prepare all sizes and
-predict100/1000 closed0. Predict5000 has finished the initial5000-source ingestion and is answering; four actual
-saved model responses under session4999/qa existed at last check. Session-level prediction
-rows still show4999/0QA because the current16-question block has not closed.
-Then first scores all3 sizes. Do not hotpatch/restart. This frozen source still has the
-old ingestion compatibility scan; current working code has measured shared fix37c0d47e.
-QUEUED range-v1 driver711699, frozen ce8cc684, WAITING_FOR_SCALE. Two authored histories,
-26 sources/6QA, shared6144 context/1024 output/12 calls/thinkingFalse. Both predictions
-before first scores. No range model results yet. Source-traceable chunk maps are unverified
-model interpretations; limited calls, oversized summaries or lost Sources leave partial coverage.
+LIVE value-outcomes-corpus-v2 driver1113594, frozen a2a91ea8, worker1148766 at last check on10d9b85a.
+Actual /proc confirmed S states. First five questions0db4c65d,2a1811e2,07741c45,08e075c7,0ea62687
+closed0; sixth ongoing. Ten questions total,6subsets each,up to120Reader/Judge calls, same original
+ledger. Actual outcomes under value-outcomes-corpus-v2/<qid>/results.json; do NOT train on all new
+Judge labels without reading full answers/source context. Source pre-review only was done earlier.
+Source banks/settings frozen at value-supervision-v3/corpus:452sessions/4830Sources/2433packs;
+all original role/date/content/instance tuples verified,0semantic records. Support nominations
+are offline teacher supervision, not achieved selector accuracy or formal holdout. Sneaker wording
+conflicts within session; Holi source header later than question header. Preserve these limitations.
 
-LIVE preference-pilot-v1 driver845387/worker845388, frozen bc8f6288, CPU4threads/noHTTP.
-Imitation CLOSED15steps: wall2021.64sec/CPU7625.32sec, process peak42107.9MiB,
-parameter L1change888.375. Quality-preference laststep2/15; relation/evaluations not yet run.
-Each arm processes315396 input tokens/8565 response positions including negatives/auxiliary;
-all15 examples occur exactly3times in the shared shuffled multiset. Three objectives each15steps,batch3,
-rank4/270336 trainable parameters. Fifteen refs/six source chains,23 distinct negatives,
-nine actual-output origins plus explicit synthetic no-op/duplicate-copy alternatives.
-Main uniform token CE; quality adds pairwise softplus response-NLL difference; relation
-adds auxiliary consequences. All process same chosen/rejected/auxiliary sequences, but
-no exact kernel/FLOP equivalence claim. Not DPO/RL. After training automatically guided
-base+3adapter evaluation and actual application on same10 exposed inputs. Preserve empty
-valid noops and failed required edits. No new learning outcome yet. 60 augmented dependent
-variants remain prepared only, not used in this run.
+QUEUED range-v3 driver1133025, frozen61631a5b, WAITING_FOR_VALUE_OUTCOMES predecessor1113594.
+Actual /proc confirmed alive. Uses standard/aggregate-v3 configs on same two now-exposed histories.
+New shared Reader state starts task=null, not a fabricated pre-classification lookup value.
+Both arms still let the model choose lookup/range; no force-range tag or oracle outcome is supplied.
+36evidence/reader/value tests, source mypy/Ruff passed. Do not hotpatch or start another HTTP job.
 
-CLOSED value-supervision-v2 frozen f2c0f4d5: zero-model capture failure on repeated raw
-session ID at different dates. Preserve failure/partial bank. a2a91ea8 moves existing pure
-instance-key helper to common dataset adapter and reexports it from context_preflight;
-unique IDs unchanged, duplicate ordinals from original order, then chronological sort.
-Do not execute unrelated SHA selection paths in context_preflight. Source replay checks
-unchanged. Ninety relevant tests, two-source mypy, DAG/tools boundaries passed; final narrow10 pass.
-CLOSED value-supervision-v3 a2a91ea8: ten metadata-selected external DEVELOPMENT questions,
-452sessions/4830Sources/2433packs/60conditions,0semantic records/0generation/0embedding.
-Literal original content/role/date/instance tuples verified against all actual Source rows;
-ten equivalent-parent nominations have identical expanded Source ranges. Roughly317sec capture.
-Original-ID overlap components are separate, not certification of globally unseen independent users.
-User-turn source pre-review found sneaker factual/planned wording conflict and a Holi session
-header later than the question header. Preserve both; no finalized new training labels.
-QUEUED value-outcomes-corpus-v1 driver940791 frozen a2a91ea8, WAITING_FOR_RANGE (711699).
-Then ten questions serial,60conditions,max120Reader/Judge calls using original ledger;
-no teacher results yet. Source banks/settings in value-supervision-v3/corpus. No other HTTP job.
+LIVE preference-pilot-v1 driver845387/worker845388, frozenbc8f6288, CPU4threads/noHTTP.
+Imitation and quality_preference each CLOSED15steps. Wall2021.64/1952.19sec, CPU7625.32/7285.89sec,
+parameter L1change888.375/642.584; process peak42,703.7MiB across the process.
+Relation_consequence laststep4/15; all generation/application evaluation still pending.
+Each arm315396 input/8565response positions including negatives/auxiliary,15examples each3exposures,
+batch3/rank4/270336 trainable params. Fifteen refs/six chains,23distinct negative actions,9actual-output
+origins plus explicit synthetic no-op/duplicate-copy alternatives. Quality adds pairwise softplus
+response-NLL difference; relation adds auxiliary consequences. Not DPO/RL or exact FLOP matching.
+After training auto guided base+3 adapters generation/application on SAME10 exposed cases.
+60augmented dependent variants remain prepared only; not used by this run. No new learning benefit yet.
 
-NEW 5a90f2cb tools/prepare_evidence_value_transitions.py: actual saved Reader inputs plus
-ordinary candidate excerpts, review/outcome labels outside model_input. Source intervals
-compared/merged directly. Conflicting equivalent outcomes and author/Judge disagreements
-stay unlabeled. Prior two queries now12states/24dependent transitions,20labeled/4null,
-0newHTTP/parameters. Immediate and observed two-open returns separate: complementary singleton
-can have zero immediate and positive continuation return. Two-open return is unpenalized
-optimistic observed return, not expected utility/sufficiency; use costs and opens alongside it.
-3tests and tools boundary passed. Manifests value-supervision-v3-summary,
-value-supervision-source-review-v3, value-training-v1-summary record exact scope.
+CLOSED raw-scale-v3 dc9d14cc: all100/1000/5000 predictions and first scores completed, old PIDs gone.
+Correct24/23/22 of24; prediction tokens100891/100168/99017. Total144gen437047,0embedding,newunknown0,
+receipt/ledger token and request differences0. Each size is the SAME Aster target history with more
+unrelated depot sources, not3independent histories. Initial reuse1/4/16 costs4278/16998/67322;
+4087/16320/65779;4089/16275/65699. Prediction CLI seconds195.02/390.94/6847.55 include ingestion,
+DB/tokenization/model/IO;5000 uses old compatibility lookup and overlapping CPU training, not pureGPU.
+All72answers read,4critical full requests inspected.1000s1000q2 stops with only new policy; original
+orientation-complete Source is candidate1 but excerpt ends before the fact.5000s5000q0 same missing
+support produces false/unsupported orientation-unknown explanation with correct denial;5000s4999q15
+has full Source but omits requested voucher route.100s99q15 invents reference-index access route.
+Author core24/23/23 is separate from official labels. See raw-scale-v3-summary/author-review manifests
+and summarize_innovation_raw_scale.py. Scoring rewrites aggregate halumem-predictions incrementally;
+immutable per-question complete.json remains authoritative during that stage, not transient row count.
 
-Previous closed results remain negative/limited: same-pool alongside/structure-first/raw-first
-15/14/16 Correct of16; all28 raw short contents visible in initial catalog. Scale100 raw24/24,
-114081 prediction tokens vs cache23/24,187183; no reuse crossover. Guided SFT39/40 schema-valid
-but no complete4formations/2required updates in any arm. Grammar is not semantic success.
-Raw-scale-v2 partial100+1000 closed, lost parent never restarted; original49gen208615 retained.
-Catalog binary planner actual1000 offline replay1004->14 measurements,60.69->2.48sec with
-identical requests/state. Source identity lookup .313->.143sec on matched3233-source copies,
-identical content; database scans still possible. These are shared engineering, not method gains.
+CLOSED range-v1 ce8cc684: prepare failed because generic alignment.qa_top_k4 violates existing fixed20
+protocol. Ledger delta0; preserved. v2 changed genericcap to20 while actual independent Source top-k4
+remained unchanged. No authority relaxation or model replay. Old teacher queue value-outcomes-corpus-v1
+stopped PREDECESSOR_REQUIRES_INSPECTION with0steps/HTTP. Both original directories are preserved.
+CLOSED range-v2 352ace3b: both predictions/firstscores exit0, both3Correct/3Omission of6.
+Total36gen76639,0embedding,newunknown0,receipt differences0. All12answers/firstrequests/task states
+read; actual26Source tuples per arm match original fixture exactly. EVERY task remained lookup;
+no chunk aggregation ran. This is end-to-end classification failure, not tested map/reduce quality.
+Nominal aggregate delivery-total answer starts17 then8 and trails into schema prose; actual stop,
+642output tokens (not length). First packets carry unobserved task=lookup, motivating null-state
+fix61631a5b; whether it cures classification is UNPROVEN. See range-v2-summary and prepare-failure.
 
-NEW 7b35d303 paired-v2 structured author audit CLOSED: read-only original SQLite histories,
-48post-arrival states,51retrieved semantic revisions/unit texts matched,24literal source
-role/date/content tuples matched across arms. All units/relations/groups/assertions/literal
-ranges reviewed. New inspect_innovation_pair_states.py is offline extraction only, not a
-semantic verifier. Rejected/no-op ingestion may return[] while old state remains; explicitly
-preserved. Retrieval projections saved in packets under paired-v2-joint-review.
-Four post-hoc dimensions: incoming target, actual-before non-target preservation, whole
-current scope/time, unit provenance. Plain11pass/8fail/5ambiguous; delta2/18/4 of24.
-11-16 and2-6 are ambiguity count bounds, NOT confidence intervals or full-history success.
-Inherited missing/ambiguous state and never-formed history remain separate limitations.
-Observed-vs-reported user attribution ambiguity stays null symmetrically. Actual temporal
-projection marks whole before/future clauses before_explicit_start (text is still delivered).
-Delta cancellation is wrongly expired; shared final group uses failed ventilation as a
-positive premise to a rule. Positive actual Studio exception retraction and initial Harbor
-OR-of-AND retained. First QA/labels/receipt costs unchanged;144gen615686+124emb6314 exact.
-New paired-v2-joint-review manifest and pair summary/document updated. Ruff/actual 48-state
-inspection/tools boundary passed; no runtime algorithm or original bank changes/HTTP.
+NEW C lexical learned control:40616f5d shared methods/learned_evidence_value.py +train_evidence_value.py.
+Actual two-query fit:20immediate/14two-open/11answer-return rows, per-question weighting,2048TF-IDF
+vocabulary, ridge.1;36,876 coefficient slots/arm, but independent state blocks are zero, so not equal
+active capacity. Label/ID/review isolation and serialization checked. Shared runtime scoring exists,
+NO actual selector loop integrated yet. Full-fit immediate MSE.06072independent/.00745conditional.
+SameMoMA candidate fromempty vscomplement: independent.629/.629, conditional.235/.944 (targets0/1).
+8e40739f cross-query diagnosis refits vocabulary/coefficients on only the other question eachfold:
+immediate MSE.18004/.23692 (conditional WORSE);two-open.26416/.23936;answer-return.31112/.14314.
+Only2already-exposed development questions, nominated subsets, not main QA/holdout/generalization.
+18linear head fits in total,0newHTTP/teacher calls/source writes. Full-fit arm timings.361/.320sec
+exclude untimed shared vocab prep; original preserved. Crossfold totalCPU/wall1.290sec, peak589MiB,
+BLAS1thread. Future trainer now records total timing. Artifacts conditional-value-pilot-v1 and
+conditional-value-crossquery-v1; conditional-value-learning-v1-summary records limitations.
+7tests/source mypy/Ruff/DAG/tools passed. Expand reviewed actual outcomes; do not treat fit as success.
 
-Remaining full goal: finish/review scale, range and preference jobs; actual ten-query teacher
-outcomes/source review; learned conditional/bundle-aware C with real subsets/stop/gap; sufficient
-independent histories and unseen combinations; formal full declared external split; second-model
-whole pipeline; blind subset/repeats/paired statistics; useful SAME method in normal Host and
-final plan audit. Do not force an architecture victory or expand unchanged failing conditions.
-Historical blocks below are not current process state.
+NEW previous paired audit7b35d303 CLOSED: read-only48states,51retrieved semantic revisions/units,
+24source role/date/content tuples matched across arms. All units/relations/groups/assertions/literal
+ranges reviewed. Plain11pass/8fail/5ambiguous;delta2/18/4 of24 four-dimensional transition labels.
+11-16 and2-6 are ambiguity counts, NOT confidence intervals/full-history success. Inherited omissions
+remain; observed-vs-reported ambiguity retained symmetrically. Actual projections mark whole
+before/future clauses before_explicit_start (text still delivered), delta cancellation expired,
+shared final route wrongly uses failed ventilation. Real Studio exception withdrawal/initial Harbor
+OR-of-AND retained. FirstQA21/24 vs23/24 and144gen615686+124emb6314 unchanged. See paired-v2-joint-review.
+
+Other closed evidence: Bsamepool alongside/structure-first/raw-first15/14/16 Correct; all28short
+raw texts visible in first catalog. Scale100 source24/24,114081prediction vs cache23/24,187183,
+no reuse crossover. SFTguided39/40schema-valid but0complete4formations/2updates for every arm.
+Raw-scale-v2 old partial100/1000 is preserved; no restart of lost parent/live worker. Catalog
+binary planner offline1000replay1004->14measurements,60.69->2.48sec, identical requests/state.
+Sourceidentity37c0d47e capture.313->.143sec on matched3233-source copies; DB scans still possible.
+These are shared engineering, not demonstrated method superiority.
+
+Remaining full goal: finish/review teacher/range/preference runs; real learned conditional/bundle
+selection with full pools, stopping/gaps and matched Reader costs; sufficient independent histories,
+unseen combinations, formal full declared external split, second-model whole pipeline, blind subset,
+stability repeats/paired statistics, useful SAME method in ordinary Host and final plan audit.
+No forced architecture win or repeated expansion of unchanged failing conditions.
+Historical blocks below are not live process state.
 
 # Current publication checkpoint requested; corrected factorial LIVE
 
