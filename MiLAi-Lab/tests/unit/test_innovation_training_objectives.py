@@ -141,6 +141,37 @@ def test_alias_augmentation_preserves_credential_target_and_remaining_training_r
     assert augmented["provenance"]["owner"] == original["provenance"]["owner"]
 
 
+def test_preferences_distinguish_real_failures_and_counterfactual_holds(tmp_path, monkeypatch):
+    from milai_lab.methods.semantic_delta import compile_delta
+    from prepare_innovation_preferences import prepare
+    from prepare_innovation_sft import main
+
+    lab = Path(__file__).resolve().parents[2]
+    rows = [json.loads(line) for line in (
+        lab / "data/fixtures/milai-innovation-matched-training-v3.jsonl").read_text().splitlines()]
+    missed = next(r for r in rows if r["example_id"] == "innovation-studio-transition-3-reference")
+    request = tmp_path / "request.json"
+    response = {"choices": [{"finish_reason": "stop", "message": {"content": json.dumps({
+        "creates": [], "changes": {"r1": {"replace": {}, "append": [], "withdraw": {}}}})}}]}
+    request.with_name("response.json").write_text(json.dumps(response))
+    missed["provenance"]["request_path"] = str(request)
+    paired = prepare(missed, "The actual no-op omits the sticker change.")
+    assert len(paired["rejected"]) == 1
+    assert paired["rejected"][0]["target"] == {}
+    assert {o["observed_model_output"] for o in paired["rejected"][0]["origins"]} == {False, True}
+    assert json.loads(request.with_name("response.json").read_text()) == response
+    noop = prepare(next(r for r in rows if r["example_id"] == "innovation-grant-noop-ack"))
+    assert not compile_delta(noop["delta_target"], noop["mapping"])
+    assert compile_delta(noop["rejected"][0]["target"], noop["mapping"], indexed=True)
+    refs, output = tmp_path / "refs.jsonl", tmp_path / "sft.jsonl"
+    refs.write_text(json.dumps(paired) + "\n")
+    monkeypatch.setattr(sys, "argv", ["sft", str(refs), str(output), "--format", "indexed_sparse"])
+    main()
+    example = json.loads(output.read_text())
+    assert example["rejected"] and "rejected" not in json.dumps(example["messages"])
+    assert "preference_reason" not in json.dumps(example["messages"])
+
+
 def test_learning_evaluation_clones_actual_state_and_restores_current_source_binding(
     tmp_path, monkeypatch
 ):

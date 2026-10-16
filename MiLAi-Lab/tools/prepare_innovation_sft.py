@@ -55,6 +55,8 @@ def main() -> None:
             if args.format == "indexed_sparse":
                 example["target"] = {key: value for key, value in example["target"].items()
                                      if value}
+            if "rejected" in row:
+                example["rejected"] = row["rejected"]
             if row["consequence_targets"]:
                 example["auxiliary"] = {
                     "messages": [

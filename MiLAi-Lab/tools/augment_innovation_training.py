@@ -39,6 +39,12 @@ def augment(row, entities, seed, name):
         result[key] = rewrite(row[key])
     for record in result["input"]["delivery"]["records"]:
         rng.shuffle(record["clauses"])
+    if "rejected" in row:
+        result["rejected"] = [{"target": rewrite(item["target"]), "origins": [{
+            "kind": "mechanical_variant", "observed_model_output": False,
+            "derived_from_observed_model_output": origin["observed_model_output"],
+            "original": copy.deepcopy(origin),
+        } for origin in item["origins"]]} for item in row["rejected"]]
     result["example_id"] = row["example_id"] + ":" + name
     result["provenance"] = {
         "owner": row["provenance"]["owner"], "derived_from": row["example_id"],
