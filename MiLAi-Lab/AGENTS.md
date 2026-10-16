@@ -10,7 +10,9 @@ Detached supervisors survive turn changes. Inspect actual processes and terminal
 a missing tool handle does not authorize restarting an existing job.
 
 LIVE raw-scale-v3 driver581303, worker618845, frozen dc9d14cc. Prepare all sizes and
-predict100/1000 closed0. Predict5000 had4764 sessions/0QA at last check; still ingesting.
+predict100/1000 closed0. Predict5000 has finished the initial5000-source ingestion and is answering; four actual
+saved model responses under session4999/qa existed at last check. Session-level prediction
+rows still show4999/0QA because the current16-question block has not closed.
 Then first scores all3 sizes. Do not hotpatch/restart. This frozen source still has the
 old ingestion compatibility scan; current working code has measured shared fix37c0d47e.
 QUEUED range-v1 driver711699, frozen ce8cc684, WAITING_FOR_SCALE. Two authored histories,
@@ -19,7 +21,10 @@ before first scores. No range model results yet. Source-traceable chunk maps are
 model interpretations; limited calls, oversized summaries or lost Sources leave partial coverage.
 
 LIVE preference-pilot-v1 driver845387/worker845388, frozen bc8f6288, CPU4threads/noHTTP.
-Last training log imitation step11/15. Three matched objectives each15steps,3epochs,batch3,
+Imitation CLOSED15steps: wall2021.64sec/CPU7625.32sec, process peak42107.9MiB,
+parameter L1change888.375. Quality-preference laststep2/15; relation/evaluations not yet run.
+Each arm processes315396 input tokens/8565 response positions including negatives/auxiliary;
+all15 examples occur exactly3times in the shared shuffled multiset. Three objectives each15steps,batch3,
 rank4/270336 trainable parameters. Fifteen refs/six source chains,23 distinct negatives,
 nine actual-output origins plus explicit synthetic no-op/duplicate-copy alternatives.
 Main uniform token CE; quality adds pairwise softplus response-NLL difference; relation
@@ -64,6 +69,24 @@ Raw-scale-v2 partial100+1000 closed, lost parent never restarted; original49gen2
 Catalog binary planner actual1000 offline replay1004->14 measurements,60.69->2.48sec with
 identical requests/state. Source identity lookup .313->.143sec on matched3233-source copies,
 identical content; database scans still possible. These are shared engineering, not method gains.
+
+NEW 7b35d303 paired-v2 structured author audit CLOSED: read-only original SQLite histories,
+48post-arrival states,51retrieved semantic revisions/unit texts matched,24literal source
+role/date/content tuples matched across arms. All units/relations/groups/assertions/literal
+ranges reviewed. New inspect_innovation_pair_states.py is offline extraction only, not a
+semantic verifier. Rejected/no-op ingestion may return[] while old state remains; explicitly
+preserved. Retrieval projections saved in packets under paired-v2-joint-review.
+Four post-hoc dimensions: incoming target, actual-before non-target preservation, whole
+current scope/time, unit provenance. Plain11pass/8fail/5ambiguous; delta2/18/4 of24.
+11-16 and2-6 are ambiguity count bounds, NOT confidence intervals or full-history success.
+Inherited missing/ambiguous state and never-formed history remain separate limitations.
+Observed-vs-reported user attribution ambiguity stays null symmetrically. Actual temporal
+projection marks whole before/future clauses before_explicit_start (text is still delivered).
+Delta cancellation is wrongly expired; shared final group uses failed ventilation as a
+positive premise to a rule. Positive actual Studio exception retraction and initial Harbor
+OR-of-AND retained. First QA/labels/receipt costs unchanged;144gen615686+124emb6314 exact.
+New paired-v2-joint-review manifest and pair summary/document updated. Ruff/actual 48-state
+inspection/tools boundary passed; no runtime algorithm or original bank changes/HTTP.
 
 Remaining full goal: finish/review scale, range and preference jobs; actual ten-query teacher
 outcomes/source review; learned conditional/bundle-aware C with real subsets/stop/gap; sufficient
