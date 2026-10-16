@@ -1,0 +1,60 @@
+{
+  "name": "reader_calibration_c20_v1",
+  "source_version": "record actual executable commit in dispatch config before inference",
+  "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/decisions-c20-v1",
+  "exclusion_source": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/data/musique/cross-worktree-exposure-20261017.json",
+  "exclude_families": {
+    "calibration": [
+      "musique-family-000174",
+      "musique-family-000400",
+      "musique-family-000716"
+    ],
+    "test": [
+      "musique-family-000014",
+      "musique-family-000338",
+      "musique-family-000414",
+      "musique-family-000561",
+      "musique-family-000581"
+    ]
+  },
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "max_len": 8192,
+  "head_max_len": 512,
+  "temperature_bounds": [
+    0.05,
+    20.0
+  ],
+  "scope": "Exposure-purged known-family reference-proof decision diagnostic; remaining families not certified blind. Labels are incomplete semantic proxies. Temperature is fit only on calibration; test is evaluation-only. No Reader QA, stopping-utility, deployment or net-benefit claim.",
+  "arms": [
+    {
+      "name": "laya_zero",
+      "backend": "native",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+      "physical_gpu": 2
+    },
+    {
+      "name": "laya_ce",
+      "backend": "native",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/ce-c20-v1/checkpoint",
+      "physical_gpu": 3
+    },
+    {
+      "name": "linear_ce",
+      "backend": "linear",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/linear-c20-v1/checkpoint",
+      "physical_gpu": 2
+    },
+    {
+      "name": "logits_zero",
+      "backend": "logits_zero",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/innovation-v4-20261015/MiLAi-Lab/artifacts/innovation-v4/models/qwen25-05b",
+      "physical_gpu": 3
+    },
+    {
+      "name": "logits_lora",
+      "backend": "logits_lora",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/logits-c20-v1/checkpoint",
+      "physical_gpu": 2
+    }
+  ]
+}

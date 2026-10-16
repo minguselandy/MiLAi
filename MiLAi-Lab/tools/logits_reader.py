@@ -111,6 +111,7 @@ class LogitsDecision:
         self.counters["chat_tokenizations"] += 1
         self.counters["letter_tokenizations"] += len(encoded["letter_ids"])
         return {"choice": max(probabilities, key=probabilities.get), "probabilities": probabilities,
+                "logits": dict(zip(encoded["keys"], logits.tolist(), strict=True)),
                 "option_probability_mass": option_mass, "input_tokens": len(encoded["input_ids"]),
                 "generated_tokens": 0, "calibrated": False,
                 "wall_seconds": time.perf_counter() - start,

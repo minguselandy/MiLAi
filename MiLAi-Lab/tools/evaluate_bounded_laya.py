@@ -75,6 +75,7 @@ class NativeDecision:
         self.counters["sequence_rows"] += 1
         self.counters["input_tokens"] += int(batch["attention_mask"].sum())
         return {"choice": keys[max(range(len(keys)), key=lambda i: probabilities[i])],
+                "logits": dict(zip(keys, logits.float().tolist(), strict=True)),
                 "probabilities": dict(zip(keys, probabilities, strict=True)),
                 "input_tokens": int(batch["attention_mask"].sum()), "truncated": False,
                 "preparation_seconds": preparation_seconds,
