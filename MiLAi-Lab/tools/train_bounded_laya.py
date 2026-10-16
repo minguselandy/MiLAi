@@ -42,6 +42,8 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--budget", type=Path, required=True)
     parser.add_argument("--epochs", type=int, default=4)
+    parser.add_argument("--max-len", type=int, default=4096)
+    parser.add_argument("--head-max-len", type=int, default=384)
     args = parser.parse_args()
     import torch
     from laya.common import collate_items
@@ -65,7 +67,7 @@ def main() -> None:
            "cuda_version": torch.version.cuda, "precision": "float32",
            "reference_compile": False,
            "epochs": args.epochs, "batch_size": 4, "gradient_accumulation": 4,
-           "max_len": 4096, "head_max_len": 384, "train_states": len(train),
+           "max_len": args.max_len, "head_max_len": args.head_max_len, "train_states": len(train),
            "dev_states": len(dev), "encoder_lr": 2.5e-5, "head_lr": 1e-4,
            "freeze_encoder": False, "objective": "event-and-family-normalized soft-CE",
            "calibration_test_loaded": False, "http_requests": 0,
@@ -75,21 +77,21 @@ def main() -> None:
     write_json(args.output / "run.json", run)
     decision = None
     try:
-        decision = NativeDecision(args.checkpoint, 4096, 384)
+        decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
         model, tok = decision.model, decision.tokenizer
         # ModernBERT's compiled MLP cannot be traced concurrently by DataParallel
         # replicas when the final batch changes shape. Use its ordinary MLP path.
         model.encoder.config.reference_compile = False
-        lengths = {split: audit(rows, tok, 4096, 384) for split, rows in (
+        lengths = {split: audit(rows, tok, args.max_len, args.head_max_len) for split, rows in (
             ("train", train), ("dev", dev))}
         write_json(args.output / "lengths.json", lengths)
         if any(r["state_tokens_dropped"] or r["head_tokens_dropped"]
                for records in lengths.values() for r in records):
             raise ValueError("Complete-input audit failed")
-        items, skipped = items_from_rows(tok, train, 4096, 384)
+        items, skipped = items_from_rows(tok, train, args.max_len, args.head_max_len)
         if skipped or len(items) != len(train):
             raise ValueError(f"Invalid training items: {skipped}")
-        encoded = [encode_item(tok, item, 4096, 384) for item in items]
+        encoded = [encode_item(tok, item, args.max_len, args.head_max_len) for item in items]
         weights = event_weights(train)
         write_json(args.output / "sampling.json", [
             {"event_id": r["metadata"]["event_id"], "family": r["metadata"]["family"],
@@ -165,7 +167,7 @@ def main() -> None:
             history.append({"epoch": epoch, "weighted_ce_mean": loss_total / len(train),
                             "dev": evaluate(epoch)})
             write_json(args.output / "history.json", history)
-            config = {**decision.config, "max_len": 4096, "head_max_len": 384,
+            config = {**decision.config, "max_len": args.max_len, "head_max_len": args.head_max_len,
                       "temperature": [1.0, 1.0, 1.0], "temperature_by_options": {},
                       "fine_tuned": True, "training": {"milai_reader": {**run, "epoch": epoch}}}
             save_checkpoint(model, tok, config, str(args.output / "checkpoint_latest"))
