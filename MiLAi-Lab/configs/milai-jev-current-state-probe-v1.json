@@ -1,0 +1,22 @@
+{
+  "name": "milai-jev-current-state-probe-v1",
+  "arms": {
+    "D0": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D0",
+    "D1": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D1",
+    "D2-Laya-0": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-0",
+    "D2-Laya-CE": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/shared-before-v1/D2-Laya-CE",
+    "D3": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/local-writer-v1/D3",
+    "D4": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/local-writer-v1/D4"
+  },
+  "questions": {
+    "exception-withdrawal": "现在供学员练习的复印件和纸本原稿在室内阅览分别要戴手套吗？",
+    "alternative-support": "当前投影能开吗？目前实际使用什么供电，电池和冷却风扇分别是什么状态？",
+    "shared-condition": "现在湖边路线和屋顶路线分别能否开展？栈桥和向导当前各是什么状态？"
+  },
+  "scope": "Follow-up authored after reading the first shared-before outputs; exposed diagnostic, not blind confirmation. No new Writer or Impact execution.",
+  "predetermined_reference": {
+    "exception-withdrawal": "Both require gloves now; the temporary practice-copy exception was withdrawn.",
+    "alternative-support": "Projection is available using the charged battery with normal fan; mains socket is disabled.",
+    "shared-condition": "Lake paused, roof continues; pier closed and guide present."
+  }
+}
