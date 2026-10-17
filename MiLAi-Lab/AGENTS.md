@@ -86,6 +86,9 @@ annotationssavedstream-review/response-annotations.json. NEXTexportnewclosedcase
 views startingcaseindex05; annotateonlyactuallyreadresponses. ReusedIDs needoneannotation.
 No methodname mappingopened; documentcount canrevealsomepolicytype, notfullblind/independent.
 Do notreinterpretcorrectabstentiononmissingselectedevidenceasretrievalsuccessonanswerablepool.
+FirstconfirmedReaderfailure: shared/253/answer finishlength,4306prompt+8192output=12498
+tokens, receiptpreserved; no retry. Streamview willshow failure/rawfinal; donotgrade itas
+correctabstention merelybecause parsedanswerisNone. No model/prompt/budget changes.
 After Reader/scorerterminal:finalexportall31 THENfinalreceiptcollector THENfinishgrading/join.
 No furtherexportsafterfinalcollectorchargesstreamcost. Allfirstresponses/labels unchanged.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
