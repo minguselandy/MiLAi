@@ -1,0 +1,1990 @@
+{
+  "name": "jev-reader-option-shuffle-v1",
+  "status": "CLOSED",
+  "source_version": "5b151962",
+  "results": [
+    {
+      "seed": 0,
+      "metrics": {
+        "train": {
+          "fixed": {
+            "counts": {
+              "labelled": 86,
+              "accepted": 74,
+              "first_remaining_candidate_accepted": 18,
+              "unsupported_exhaustion_stop": 11
+            },
+            "strata": {
+              "reviewed_missing_complement": {
+                "labelled": 52,
+                "accepted": 44
+              },
+              "reviewed_proof_complete": {
+                "labelled": 10,
+                "accepted": 6
+              },
+              "reviewed_pool_insufficient": {
+                "labelled": 24,
+                "accepted": 24
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 10,
+              "stop_exhausted": 24
+            },
+            "family_macro_acceptance": 0.8721661054994387,
+            "families": 9,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+            "open_ranking": {
+              "open_positions": 86,
+              "first_option_is_best_open": 46,
+              "complement_states": 52,
+              "best_open_complement_hit": 47
+            }
+          },
+          "shuffled": {
+            "counts": {
+              "labelled": 86,
+              "accepted": 50,
+              "first_remaining_candidate_accepted": 18,
+              "unsupported_exhaustion_stop": 30,
+              "unsupported_sufficient_stop": 2
+            },
+            "strata": {
+              "reviewed_missing_complement": {
+                "labelled": 52,
+                "accepted": 26
+              },
+              "reviewed_proof_complete": {
+                "labelled": 10,
+                "accepted": 0
+              },
+              "reviewed_pool_insufficient": {
+                "labelled": 24,
+                "accepted": 24
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 10,
+              "stop_exhausted": 24
+            },
+            "family_macro_acceptance": 0.592720859387526,
+            "families": 9,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+            "open_ranking": {
+              "open_positions": 86,
+              "first_option_is_best_open": 35,
+              "complement_states": 52,
+              "best_open_complement_hit": 34
+            }
+          }
+        },
+        "dev": {
+          "fixed": {
+            "counts": {
+              "labelled": 22,
+              "accepted": 10,
+              "unsupported_exhaustion_stop": 10,
+              "first_remaining_candidate_accepted": 6,
+              "masked_reference": 8,
+              "unnecessary_continue": 2
+            },
+            "strata": {
+              "reviewed_missing_complement": {
+                "labelled": 8,
+                "accepted": 2
+              },
+              "reviewed_proof_complete": {
+                "labelled": 5,
+                "accepted": 1
+              },
+              "reviewed_pool_insufficient": {
+                "labelled": 9,
+                "accepted": 7
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 5,
+              "stop_exhausted": 9
+            },
+            "family_macro_acceptance": 0.39814814814814814,
+            "families": 3,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+            "open_ranking": {
+              "open_positions": 30,
+              "first_option_is_best_open": 30,
+              "complement_states": 8,
+              "best_open_complement_hit": 6
+            }
+          },
+          "shuffled": {
+            "counts": {
+              "labelled": 22,
+              "accepted": 8,
+              "unsupported_exhaustion_stop": 13,
+              "first_remaining_candidate_accepted": 6,
+              "masked_reference": 8,
+              "unnecessary_continue": 1
+            },
+            "strata": {
+              "reviewed_missing_complement": {
+                "labelled": 8,
+                "accepted": 0
+              },
+              "reviewed_proof_complete": {
+                "labelled": 5,
+                "accepted": 0
+              },
+              "reviewed_pool_insufficient": {
+                "labelled": 9,
+                "accepted": 8
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 5,
+              "stop_exhausted": 9
+            },
+            "family_macro_acceptance": 0.3194444444444444,
+            "families": 3,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+            "open_ranking": {
+              "open_positions": 30,
+              "first_option_is_best_open": 10,
+              "complement_states": 8,
+              "best_open_complement_hit": 4
+            }
+          }
+        }
+      },
+      "initial_model_comparison": {
+        "train": {
+          "positions": 86,
+          "exact_logits_equal": true,
+          "max_abs_logit_difference": 0.0
+        },
+        "dev": {
+          "positions": 30,
+          "exact_logits_equal": true,
+          "max_abs_logit_difference": 0.0
+        }
+      },
+      "sampling_weights_and_lengths_equal": true,
+      "actual_saved_option_orders_verified": 344,
+      "parameter_changes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607874
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769469
+        }
+      },
+      "compute": {
+        "wall_seconds": 185.7167675718665,
+        "cpu_seconds": 249.100844775,
+        "runs": 1,
+        "train_sequence_rows": 344,
+        "train_input_tokens": 954476,
+        "train_batch_forwards": 88,
+        "train_device_forwards": 176,
+        "train_batch_attempts": 88,
+        "train_offered_rows": 344,
+        "train_offered_tokens": 954476,
+        "dev_forwards": 150,
+        "dev_sequence_rows": 150,
+        "dev_input_tokens": 389285,
+        "dev_state_tokenizations": 150,
+        "dev_state_tokens": 340125,
+        "train_eval_forwards": 430,
+        "train_eval_sequence_rows": 430,
+        "train_eval_input_tokens": 1193095,
+        "train_eval_state_tokenizations": 430,
+        "train_eval_state_tokens": 1052295,
+        "peak_rss_kib": 5037416,
+        "peak_cuda_allocated_bytes": [
+          15668690944,
+          11646731264
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_delta_verified": true,
+      "final_action_changes": {
+        "train": [
+          {
+            "event_id": "row-31011-prefix-0",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p5"
+          },
+          {
+            "event_id": "row-31011-prefix-1",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p5"
+          },
+          {
+            "event_id": "row-31011-prefix-2",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p5"
+          },
+          {
+            "event_id": "row-31011-prefix-3",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p5"
+          },
+          {
+            "event_id": "row-33457-prefix-0",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p1": 0.5
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-33457-prefix-1",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 1.0
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-33457-prefix-2",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-33457-prefix-3",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-32183-prefix-0",
+            "family": "musique-family-000690",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-28674-prefix-0",
+            "family": "musique-family-000407",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p1": 0.5
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "open_p1"
+          },
+          {
+            "event_id": "row-28674-prefix-2",
+            "family": "musique-family-000407",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-28674-prefix-3",
+            "family": "musique-family-000407",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-11272-prefix-0",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p0"
+          },
+          {
+            "event_id": "row-11272-prefix-1",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-11272-prefix-2",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "stop_sufficient"
+          },
+          {
+            "event_id": "row-11272-prefix-3",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p14": 1.0
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-11272-prefix-4",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p14": 1.0
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "stop_sufficient"
+          },
+          {
+            "event_id": "row-36441-prefix-0",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p15": 1.0
+                }
+              }
+            },
+            "fixed": "open_p15",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-36441-prefix-1",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p15": 1.0
+                }
+              }
+            },
+            "fixed": "open_p15",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-36441-prefix-2",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p15": 1.0
+                }
+              }
+            },
+            "fixed": "open_p15",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-36441-prefix-3",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p15": 1.0
+                }
+              }
+            },
+            "fixed": "open_p15",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-5473-prefix-0",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.3333333333333333,
+                  "open_p4": 0.3333333333333333,
+                  "open_p14": 0.3333333333333333
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-5473-prefix-1",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.3333333333333333,
+                  "open_p4": 0.3333333333333333,
+                  "open_p14": 0.3333333333333333
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-5473-prefix-2",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-5473-prefix-3",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-5473-prefix-4",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-5473-prefix-5",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p14": 1.0
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-5473-prefix-6",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-1529-prefix-1",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.5,
+                  "open_p12": 0.5
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "open_p12"
+          },
+          {
+            "event_id": "row-1529-prefix-5",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p12": 1.0
+                }
+              }
+            },
+            "fixed": "stop_exhausted",
+            "shuffled": "open_p12"
+          },
+          {
+            "event_id": "row-26530-prefix-1",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p11": 1.0
+                }
+              }
+            },
+            "fixed": "open_p11",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-26530-prefix-2",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p11": 1.0
+                }
+              }
+            },
+            "fixed": "open_p11",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-26530-prefix-3",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p11": 1.0
+                }
+              }
+            },
+            "fixed": "open_p11",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-26530-prefix-4",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-5148-prefix-1",
+            "family": "musique-family-000892",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p8": 1.0
+                }
+              }
+            },
+            "fixed": "stop_exhausted",
+            "shuffled": "open_p2"
+          },
+          {
+            "event_id": "row-3344-prefix-0",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.3333333333333333,
+                  "open_p4": 0.3333333333333333,
+                  "open_p17": 0.3333333333333333
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-3344-prefix-1",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p17": 0.5
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-3344-prefix-2",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p17": 0.5
+                }
+              }
+            },
+            "fixed": "open_p4",
+            "shuffled": "open_p2"
+          },
+          {
+            "event_id": "row-3344-prefix-4",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p17": 1.0
+                }
+              }
+            },
+            "fixed": "open_p17",
+            "shuffled": "open_p2"
+          }
+        ],
+        "dev": [
+          {
+            "event_id": "row-28960-prefix-4",
+            "family": "musique-family-000583",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-866-prefix-0",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-866-prefix-1",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-14496-prefix-0",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          }
+        ]
+      },
+      "curves": [
+        {
+          "epoch": 0,
+          "loss": null,
+          "train_accepted": 4,
+          "dev_accepted": 1
+        },
+        {
+          "epoch": 1,
+          "loss": 2.8104080654854,
+          "train_accepted": 24,
+          "dev_accepted": 9
+        },
+        {
+          "epoch": 2,
+          "loss": 2.351257601449656,
+          "train_accepted": 30,
+          "dev_accepted": 8
+        },
+        {
+          "epoch": 3,
+          "loss": 1.9553627025249392,
+          "train_accepted": 44,
+          "dev_accepted": 9
+        },
+        {
+          "epoch": 4,
+          "loss": 1.631870425024698,
+          "train_accepted": 50,
+          "dev_accepted": 8
+        }
+      ]
+    },
+    {
+      "seed": 1,
+      "metrics": {
+        "train": {
+          "fixed": {
+            "counts": {
+              "labelled": 86,
+              "accepted": 80,
+              "first_remaining_candidate_accepted": 18,
+              "unsupported_exhaustion_stop": 6
+            },
+            "strata": {
+              "reviewed_missing_complement": {
+                "labelled": 52,
+                "accepted": 47
+              },
+              "reviewed_proof_complete": {
+                "labelled": 10,
+                "accepted": 9
+              },
+              "reviewed_pool_insufficient": {
+                "labelled": 24,
+                "accepted": 24
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 10,
+              "stop_exhausted": 24
+            },
+            "family_macro_acceptance": 0.9353535353535354,
+            "families": 9,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+            "open_ranking": {
+              "open_positions": 86,
+              "first_option_is_best_open": 49,
+              "complement_states": 52,
+              "best_open_complement_hit": 48
+            }
+          },
+          "shuffled": {
+            "counts": {
+              "labelled": 86,
+              "accepted": 30,
+              "first_remaining_candidate_accepted": 18,
+              "unsupported_exhaustion_stop": 24,
+              "unnecessary_continue": 5
+            },
+            "strata": {
+              "reviewed_missing_complement": {
+                "labelled": 52,
+                "accepted": 8
+              },
+              "reviewed_proof_complete": {
+                "labelled": 10,
+                "accepted": 0
+              },
+              "reviewed_pool_insufficient": {
+                "labelled": 24,
+                "accepted": 22
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 10,
+              "stop_exhausted": 24
+            },
+            "family_macro_acceptance": 0.3538439955106622,
+            "families": 9,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+            "open_ranking": {
+              "open_positions": 86,
+              "first_option_is_best_open": 41,
+              "complement_states": 52,
+              "best_open_complement_hit": 15
+            }
+          }
+        },
+        "dev": {
+          "fixed": {
+            "counts": {
+              "labelled": 22,
+              "accepted": 5,
+              "unsupported_exhaustion_stop": 10,
+              "first_remaining_candidate_accepted": 6,
+              "masked_reference": 8,
+              "unnecessary_continue": 4,
+              "unsupported_sufficient_stop": 2
+            },
+            "strata": {
+              "reviewed_missing_complement": {
+                "labelled": 8,
+                "accepted": 2
+              },
+              "reviewed_proof_complete": {
+                "labelled": 5,
+                "accepted": 0
+              },
+              "reviewed_pool_insufficient": {
+                "labelled": 9,
+                "accepted": 3
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 5,
+              "stop_exhausted": 9
+            },
+            "family_macro_acceptance": 0.21944444444444444,
+            "families": 3,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+            "open_ranking": {
+              "open_positions": 30,
+              "first_option_is_best_open": 29,
+              "complement_states": 8,
+              "best_open_complement_hit": 5
+            }
+          },
+          "shuffled": {
+            "counts": {
+              "labelled": 22,
+              "accepted": 9,
+              "unsupported_exhaustion_stop": 13,
+              "first_remaining_candidate_accepted": 6,
+              "masked_reference": 8
+            },
+            "strata": {
+              "reviewed_missing_complement": {
+                "labelled": 8,
+                "accepted": 0
+              },
+              "reviewed_proof_complete": {
+                "labelled": 5,
+                "accepted": 0
+              },
+              "reviewed_pool_insufficient": {
+                "labelled": 9,
+                "accepted": 9
+              }
+            },
+            "constant_stop_reference": {
+              "stop_sufficient": 5,
+              "stop_exhausted": 9
+            },
+            "family_macro_acceptance": 0.3611111111111111,
+            "families": 3,
+            "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+            "open_ranking": {
+              "open_positions": 30,
+              "first_option_is_best_open": 19,
+              "complement_states": 8,
+              "best_open_complement_hit": 2
+            }
+          }
+        }
+      },
+      "initial_model_comparison": {
+        "train": {
+          "positions": 86,
+          "exact_logits_equal": true,
+          "max_abs_logit_difference": 0.0
+        },
+        "dev": {
+          "positions": 30,
+          "exact_logits_equal": true,
+          "max_abs_logit_difference": 0.0
+        }
+      },
+      "sampling_weights_and_lengths_equal": true,
+      "actual_saved_option_orders_verified": 344,
+      "parameter_changes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607877
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769465
+        }
+      },
+      "compute": {
+        "wall_seconds": 181.633992228657,
+        "cpu_seconds": 233.098768903,
+        "runs": 1,
+        "train_sequence_rows": 344,
+        "train_input_tokens": 954476,
+        "train_batch_forwards": 88,
+        "train_device_forwards": 176,
+        "train_batch_attempts": 88,
+        "train_offered_rows": 344,
+        "train_offered_tokens": 954476,
+        "dev_forwards": 150,
+        "dev_sequence_rows": 150,
+        "dev_input_tokens": 389285,
+        "dev_state_tokenizations": 150,
+        "dev_state_tokens": 340125,
+        "train_eval_forwards": 430,
+        "train_eval_sequence_rows": 430,
+        "train_eval_input_tokens": 1193095,
+        "train_eval_state_tokenizations": 430,
+        "train_eval_state_tokens": 1052295,
+        "peak_rss_kib": 5194616,
+        "peak_cuda_allocated_bytes": [
+          15665200640,
+          11646477312
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "ledger_delta_verified": true,
+      "final_action_changes": {
+        "train": [
+          {
+            "event_id": "row-31011-prefix-0",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p1"
+          },
+          {
+            "event_id": "row-31011-prefix-1",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p1"
+          },
+          {
+            "event_id": "row-31011-prefix-2",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p2"
+          },
+          {
+            "event_id": "row-31011-prefix-3",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-31011-prefix-5",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-37250-prefix-0",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 1.0
+                }
+              }
+            },
+            "fixed": "open_p2",
+            "shuffled": "open_p1"
+          },
+          {
+            "event_id": "row-37250-prefix-1",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 1.0
+                }
+              }
+            },
+            "fixed": "open_p2",
+            "shuffled": "open_p1"
+          },
+          {
+            "event_id": "row-37250-prefix-3",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "fixed": "stop_exhausted",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-33457-prefix-0",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p1": 0.5
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-33457-prefix-1",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 1.0
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-33457-prefix-2",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-33457-prefix-3",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-11604-prefix-0",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-32183-prefix-0",
+            "family": "musique-family-000690",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-16483-prefix-0",
+            "family": "musique-family-000690",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-28674-prefix-0",
+            "family": "musique-family-000407",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p1": 0.5
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-28674-prefix-1",
+            "family": "musique-family-000407",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 1.0
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-28674-prefix-2",
+            "family": "musique-family-000407",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-28674-prefix-3",
+            "family": "musique-family-000407",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-11272-prefix-0",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-11272-prefix-1",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-11272-prefix-2",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p2",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-11272-prefix-3",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p14": 1.0
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-11272-prefix-4",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p14": 1.0
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-11272-prefix-5",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_exhausted",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-36441-prefix-0",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p15": 1.0
+                }
+              }
+            },
+            "fixed": "open_p15",
+            "shuffled": "open_p1"
+          },
+          {
+            "event_id": "row-36441-prefix-1",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p15": 1.0
+                }
+              }
+            },
+            "fixed": "open_p15",
+            "shuffled": "open_p1"
+          },
+          {
+            "event_id": "row-36441-prefix-2",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p15": 1.0
+                }
+              }
+            },
+            "fixed": "open_p15",
+            "shuffled": "open_p2"
+          },
+          {
+            "event_id": "row-36441-prefix-3",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p15": 1.0
+                }
+              }
+            },
+            "fixed": "open_p15",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-36441-prefix-4",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "fixed": "stop_exhausted",
+            "shuffled": "open_p1"
+          },
+          {
+            "event_id": "row-5473-prefix-0",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.3333333333333333,
+                  "open_p4": 0.3333333333333333,
+                  "open_p14": 0.3333333333333333
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-5473-prefix-1",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.3333333333333333,
+                  "open_p4": 0.3333333333333333,
+                  "open_p14": 0.3333333333333333
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p11"
+          },
+          {
+            "event_id": "row-5473-prefix-2",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-5473-prefix-3",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-5473-prefix-4",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p13"
+          },
+          {
+            "event_id": "row-5473-prefix-5",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p14": 1.0
+                }
+              }
+            },
+            "fixed": "open_p14",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-5473-prefix-6",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-1529-prefix-0",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.5,
+                  "open_p12": 0.5
+                }
+              }
+            },
+            "fixed": "open_p12",
+            "shuffled": "open_p11"
+          },
+          {
+            "event_id": "row-1529-prefix-1",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.5,
+                  "open_p12": 0.5
+                }
+              }
+            },
+            "fixed": "open_p12",
+            "shuffled": "open_p11"
+          },
+          {
+            "event_id": "row-1529-prefix-3",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p12": 1.0
+                }
+              }
+            },
+            "fixed": "open_p12",
+            "shuffled": "open_p11"
+          },
+          {
+            "event_id": "row-1529-prefix-4",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p12": 1.0
+                }
+              }
+            },
+            "fixed": "open_p12",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-1529-prefix-5",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p12": 1.0
+                }
+              }
+            },
+            "fixed": "open_p12",
+            "shuffled": "open_p11"
+          },
+          {
+            "event_id": "row-1529-prefix-6",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "open_p13"
+          },
+          {
+            "event_id": "row-26530-prefix-0",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p11": 0.5
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "open_p11"
+          },
+          {
+            "event_id": "row-26530-prefix-2",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p11": 1.0
+                }
+              }
+            },
+            "fixed": "open_p11",
+            "shuffled": "open_p12"
+          },
+          {
+            "event_id": "row-26530-prefix-3",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p11": 1.0
+                }
+              }
+            },
+            "fixed": "open_p11",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-26530-prefix-4",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "open_p10"
+          },
+          {
+            "event_id": "row-5148-prefix-0",
+            "family": "musique-family-000892",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p8": 0.5
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-4377-prefix-0",
+            "family": "musique-family-000892",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-3344-prefix-0",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.3333333333333333,
+                  "open_p4": 0.3333333333333333,
+                  "open_p17": 0.3333333333333333
+                }
+              }
+            },
+            "fixed": "open_p17",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-3344-prefix-1",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p17": 0.5
+                }
+              }
+            },
+            "fixed": "open_p17",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-3344-prefix-2",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p17": 0.5
+                }
+              }
+            },
+            "fixed": "open_p17",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-3344-prefix-3",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p17": 0.5
+                }
+              }
+            },
+            "fixed": "open_p17",
+            "shuffled": "open_p4"
+          },
+          {
+            "event_id": "row-3344-prefix-4",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p17": 1.0
+                }
+              }
+            },
+            "fixed": "open_p17",
+            "shuffled": "open_p2"
+          },
+          {
+            "event_id": "row-3344-prefix-5",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-16330-prefix-0",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          }
+        ],
+        "dev": [
+          {
+            "event_id": "row-3445-prefix-0",
+            "family": "musique-family-000023",
+            "target": {},
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-27448-prefix-0",
+            "family": "musique-family-000023",
+            "target": {},
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-866-prefix-0",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-866-prefix-1",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-866-prefix-2",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "fixed": "open_p2",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-866-prefix-3",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-14496-prefix-0",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-14496-prefix-1",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "fixed": "open_p1",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-14496-prefix-2",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "fixed": "open_p2",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-14496-prefix-3",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "fixed": "stop_sufficient",
+            "shuffled": "stop_exhausted"
+          },
+          {
+            "event_id": "row-36340-prefix-0",
+            "family": "musique-family-000135",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p17": 0.5
+                }
+              }
+            },
+            "fixed": "open_p0",
+            "shuffled": "stop_exhausted"
+          }
+        ]
+      },
+      "curves": [
+        {
+          "epoch": 0,
+          "loss": null,
+          "train_accepted": 4,
+          "dev_accepted": 1
+        },
+        {
+          "epoch": 1,
+          "loss": 2.8300501634908275,
+          "train_accepted": 25,
+          "dev_accepted": 9
+        },
+        {
+          "epoch": 2,
+          "loss": 2.363461122956387,
+          "train_accepted": 28,
+          "dev_accepted": 9
+        },
+        {
+          "epoch": 3,
+          "loss": 2.242539780084477,
+          "train_accepted": 31,
+          "dev_accepted": 9
+        },
+        {
+          "epoch": 4,
+          "loss": 2.1128290531247162,
+          "train_accepted": 30,
+          "dev_accepted": 9
+        }
+      ]
+    }
+  ],
+  "actual_new_training_compute": {
+    "wall_seconds": 367.3507598005235,
+    "cpu_seconds": 482.199613678,
+    "runs": 2,
+    "train_sequence_rows": 688,
+    "train_input_tokens": 1908952,
+    "train_batch_forwards": 176,
+    "train_device_forwards": 352,
+    "train_batch_attempts": 176,
+    "train_offered_rows": 688,
+    "train_offered_tokens": 1908952,
+    "dev_forwards": 300,
+    "dev_sequence_rows": 300,
+    "dev_input_tokens": 778570,
+    "dev_state_tokenizations": 300,
+    "dev_state_tokens": 680250,
+    "train_eval_forwards": 860,
+    "train_eval_sequence_rows": 860,
+    "train_eval_input_tokens": 2386190,
+    "train_eval_state_tokenizations": 860,
+    "train_eval_state_tokens": 2104590
+  },
+  "driver_wall_seconds": 378.9830491542816,
+  "scope": "Fixed finalepoch4, same86trainstates and22labelledexposeddevstates; fixed-option controls reused, not rebilled. No QA or independent generalization claim.",
+  "analysis_compute": {
+    "wall_seconds": 0.12746322341263294,
+    "cpu_seconds": 0.12729859100000002
+  }
+}
