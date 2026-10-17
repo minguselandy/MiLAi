@@ -22,9 +22,22 @@ supported-pool acceptance deltas+6/-11/+11 of185; insufficient partial+18/+11/+5
 seed-statepositions mostly34partialinsufficient, not40independentcases or improvedQA.
 
 LIVE EVALUATION: evaluation-v2/driver.json RUNNING, coordinatorPID1209651, exec1227.
-First16stages all3reference models plus source_seed0 presentation/evidence/devselect/reservedselect
-CLOSED exit0. This is8/12PROBEjobs, not all12probes. Current presentation-source_seed1 child1665499 onGPU2
-was live atlatest snapshot. Analyze probes only when both probe runs for all6models are COMPLETED.
+All12PROBEjobs plus all20modelselectors CLOSED exit0. Devdense and559position preview CLOSED.
+Current reader-dev child1730143 was live atlatest snapshot;34/40stagesclosed. ActualQA RUNNING.
+Probe analysis CLOSED: probe-analysis-v1/report.json, tracked milai-source-selection-v2-probe-results.json.
+All12probe ledger auditsmatch;15672forwards,34625088inputtokens,1901.880wallsec alreadycharged.
+Analysis8.116sec chargedONCE. Source equivalent-view both-accepted counts higher, but authored
+evidence-pair both-correct source7/5/10 versus reference10/12/12 of31: ALL3source lower. Do NOT
+hide negative mechanism finding or tune/retrain. Evidenceorder changed-input labelled132, not255.
+Reloadoriginal reference1=191/255 versus pre-save192 (onechoicechange);other5choiceagreement428/428.
+Do NOT reusepre-save predictions or claim quantization alone caused theonechange.
+
+RESPONSE REVIEW STARTED, METHOD MAPPINGS STILL UNOPENED. dev/response-review/annotations.json
+has row-0 complete,12unique firstresponses: IDs0,1,2,3,4,5,7,8,10,11 Arista/p18 grounded andcited
+underFROZEN compilation-label qualification; IDs6,9 correctemptyabstention fordeficient subsets.
+Wholeview dev/stream-review/00-row-0.txt fullyread, annotationbatch saved. No methodmapping yet.
+Continue fromnextcompletecase via exporter; do not overwritefirstjudgments or blindlygradeabstentions.
+Streamexports are timed in export-compute.jsonl and chargedlater afterHTTPcloses; never rebill.
 Use driver.json for laterstage/PID.40serialstages, frozenimports215c84da; do NOT start second driver.
 Training and evaluation data/modelrecipe remain frozen. No tuning, retries, services oroldcohortresumes.
 Evaluation-v1 is superseded PRE-MODEL: absent2Wikianswer_aliases fixed in offline labels only;
@@ -56,8 +69,8 @@ Reader endpoint/prompt/settings fixed; identical literal renderedinput reuse onl
 Response-review protocol frozen, allfirstanswers must be source/citation/contract reviewed before
 method mappings; assistant partialblinding, notindependentgold. Qualifiedsubsets reported separately.
 
-NEXT: learning analysis already CLOSED, never rebill. Main analysis tools ready (see --help):
-analyze_source_selection_learning.py probes afterall12probestagesclose; export_global_reader_responses.py during
+NEXT: learning AND probe analyses already CLOSED, never rebill. Main analysis tools ready (see --help):
+export_global_reader_responses.py during
 Reader fromcompletecases (no budgetwrites); review_global_reader_results.py afterHTTPownercloses;
 manuallyreviewall
 firstresponses; join_global_reader_review.py into semantic-final; summarize_source_selection_qa.py
