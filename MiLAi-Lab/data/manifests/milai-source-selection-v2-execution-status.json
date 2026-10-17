@@ -1,8 +1,8 @@
 {
-  "status": "DEVELOPMENT_QA_AND_BLIND_RESPONSE_REVIEW_CLOSED_RESERVED_QA_RUNNING",
-  "goal_complete": false,
+  "status": "EXECUTION_CLOSED_WITH_LOCAL_QA_GAINS_SOURCE_SUPERVISION_ADVANTAGE_NOT_ESTABLISHED",
+  "goal_complete": true,
   "objective": "docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md",
-  "last_goal_turn_classification": "progress",
+  "last_goal_turn_classification": "complete",
   "source_annotation_snapshot": "artifacts/jev-reader/selection-v2/source-review/all228-before-reference.json",
   "source_review_rows": 228,
   "source_review_families": 158,
@@ -18,10 +18,7 @@
   "training_started": true,
   "default_adoption": false,
   "boundary_scope_decision": "data/manifests/milai-source-selection-v2-boundary-scope-decision.json",
-  "still_required": [
-    "13-arm first Reader QA on dev and reserved, with complete first-response source/citation/contract review before method mapping",
-    "original/reference and source/qualified results,all actual costs,uncertainty,figures and final requirement audit"
-  ],
+  "still_required": [],
   "sha_checks": false,
   "content_fingerprints": false,
   "new_services": false,
@@ -43,10 +40,10 @@
   "verification": "data/manifests/milai-source-selection-v2-verification.json",
   "source_version": "6ec3984b58d2c04131bdadc725a532aff9e227ce",
   "training_driver": "artifacts/jev-reader/selection-v2/training-v1/driver.json",
-  "coordinator_pid": 1145336,
-  "exec_session": 40960,
+  "coordinator_pid": null,
+  "exec_session": null,
   "training_active": null,
-  "actual_model_call_accounting": "All six training and twelve probe jobs closed and reconciled once; dev Reader closed, reserved Reader active; final QA receipts pending.",
+  "actual_model_call_accounting": "All six training,32local evaluation and both Reader/dense receipts closed and reconciled once. Summary/export/figure/audit accounting complete; unmetered preparation/review disclosed.",
   "reserved_source_review_closed": true,
   "reserved_source_counts": {
     "supported": 6,
@@ -56,13 +53,13 @@
   },
   "evaluation_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evaluation-v2",
   "evaluation_protocol": "data/manifests/milai-source-selection-v2-evaluation-matrix-protocol.json",
-  "evaluation_status": "RUNNING",
+  "evaluation_status": "COMPLETED",
   "evaluation_source_version": "215c84da652db384a6427a36437893fa3d0745d7",
-  "evaluation_coordinator_pid": 1209651,
-  "evaluation_exec_session": 1227,
+  "evaluation_coordinator_pid": null,
+  "evaluation_exec_session": null,
   "evaluation_driver": "artifacts/jev-reader/selection-v2/evaluation-v2/driver.json",
   "training_completed_jobs": 6,
-  "last_observed_epoch": 1792260980.0030627,
+  "last_observed_epoch": 1792262626.7137618,
   "training_active_updates": null,
   "previous_goal_turn_classification": "progress",
   "first_seed_pair": "data/manifests/milai-source-selection-v2-first-seed-pair.json",
@@ -131,12 +128,8 @@
     ]
   },
   "learning_analysis": "data/manifests/milai-source-selection-v2-learning-results.json",
-  "evaluation_active": {
-    "stage": "reader-reserved",
-    "pid": 1989337,
-    "physical_gpus": null
-  },
-  "evaluation_completed_stages": 38,
+  "evaluation_active": null,
+  "evaluation_completed_stages": 40,
   "evaluation_completed_stage_names": [
     "presentation-reference_seed0",
     "evidence-reference_seed0",
@@ -175,7 +168,9 @@
     "reader-dev",
     "score-dev",
     "dense-reserved",
-    "preview-reserved"
+    "preview-reserved",
+    "reader-reserved",
+    "score-reserved"
   ],
   "evaluation_probe_jobs_completed": 12,
   "probe_analysis": "data/manifests/milai-source-selection-v2-probe-results.json",
@@ -183,7 +178,8 @@
     "status": "ALL_DEVELOPMENT_FIRST_RESPONSES_REVIEWED_BEFORE_METHOD_MAPPING",
     "cases": 43,
     "unique_responses": 433,
-    "method_mappings_opened": false,
+    "method_mappings_opened_after_seal": true,
+    "snapshot_was_method_blind": true,
     "snapshot": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/response-review/all43-before-method-mapping.json"
   },
   "development_reader_progress": {
@@ -200,25 +196,42 @@
     "unique_reader_inputs": 433
   },
   "exploratory_citation_sensitivity": {
-    "status": "PENDING_ALL_METHOD_REPORT_AFTER_REVIEW",
+    "status": "ALL_METHODS_REPORTED_PRIMARY_UNCHANGED",
     "source": "data/manifests/milai-source-selection-v2-dev-citation-supplement.json",
+    "report": "data/manifests/milai-source-selection-v2-qa-results.json",
     "frozen_primary_labels_changed": false,
-    "implementation": "tools/summarize_source_selection_qa.py; copied annotations passed through original verdict, all arms; focused tests passed, actual all-method report pending"
+    "affected": "prior128_seed1 only,dev16,response186;7→8/23 in alternative citation reading"
   },
   "reserved_reader_progress": {
-    "status": "RUNNING",
+    "status": "COMPLETED",
     "phase": "predict",
     "planned": 364,
-    "completed": 251,
+    "completed": 364,
     "known_failures": 1,
-    "fresh_reader_attempts": 208,
-    "reused_reader_outputs": 43,
-    "known_failed_reader_calls": 1
+    "fresh_reader_attempts": 298,
+    "reused_reader_outputs": 66,
+    "known_failed_reader_calls": 1,
+    "actual_wall_seconds": 3101.527679560706,
+    "actual_cpu_seconds": 6.098334535,
+    "unique_reader_inputs": 298
   },
   "reserved_response_review": {
-    "cases": 18,
-    "unique_responses": 194,
-    "method_mappings_opened": false,
-    "path": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/response-review/annotations.json"
-  }
+    "status": "ALL_RESERVED_FIRST_RESPONSES_REVIEWED_BEFORE_METHOD_MAPPING",
+    "cases": 28,
+    "unique_responses": 298,
+    "method_mappings_opened_after_seal": true,
+    "snapshot_was_method_blind": true,
+    "snapshot": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/response-review/all28-before-method-mapping.json"
+  },
+  "final_report": "docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md",
+  "completion_audit": "data/manifests/milai-source-selection-v2-completion-audit.json",
+  "qa_results": "data/manifests/milai-source-selection-v2-qa-results.json",
+  "qa_costs": "data/manifests/milai-source-selection-v2-qa-costs.json",
+  "source_supervision_advantage_established": false,
+  "local_fixed4_qa_positive_signal": true,
+  "historical_training_coordinator_pid": 1145336,
+  "historical_evaluation_coordinator_pid": 1209651,
+  "training_exec_terminal_returncode": 0,
+  "evaluation_exec_terminal_returncode": 0,
+  "method_mappings_opened_after_both_reviews_sealed": true
 }

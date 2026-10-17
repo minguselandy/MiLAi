@@ -9,15 +9,20 @@
   [最终结果](MILAI_GLOBAL_TRAINING_RESULT_20261017.md)和
   [原完成清单](../data/manifests/milai-development-audit-requirements-20261017.json)
   只对应上轮审计。三个 driver 均为 COMPLETED，原协调器和最终子进程均不存在。
-- 效果验收：未建立超过 dense 固定 4 段的稳定来源忠实净收益；不默认采用自动 STOP。
+- 上轮效果验收：未建立超过 dense 固定 4 段的稳定来源忠实净收益；本轮新增结果见下。
 - 当前用户目标：执行[最新评审](MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md)，
   128训练家族、30开发家族的228行来源已全部审阅，并在查看原参考前封存。
   参考对照、边界核查、混合状态与长度审计已完成；六任务等更新训练及后续评价协议已冻结。
   训练源码冻结为`6ec3984b`，六项训练及完整学习分析已闭合；评测源码冻结为`215c84da`。
-  全部探针及模型选材完成；开发集559方法位置问答、433份不同首次响应审阅已闭合。
-  保留集问答与审阅正在继续；两批的方法映射尚未向审阅者展开。
-  [实时执行状态](../data/manifests/milai-source-selection-v2-execution-status.json)记录进程与产物；不重跑旧任务。
-  逐项进度见[本轮执行记录](MILAI_SOURCE_SELECTION_EXECUTION_20261017.md)。
+  **本轮执行已闭合**：6训练、12探针、20模型选材、40评测阶段均成功退出；
+  两批71案例/923方法位置、731份不同首次响应全部先审阅封存，再展开方法映射。
+  最终[结果与图表](MILAI_SOURCE_SELECTION_RESULT_20261018.md)、
+  [40项执行核对与11项需求审计](../data/manifests/milai-source-selection-v2-completion-audit.json)、
+  [终态清单](../data/manifests/milai-source-selection-v2-execution-status.json)均已保存。
+  保留支持类reference为5/5/5、source5/4/4（/6），BM25/dense均2/6：有局部QA进展；
+  source相对reference的新增优势未建立，已读前提配对指标反而三种子均较低。
+  小样本、限定解释、额外控制器成本及长串行覆盖限制保留；没有默认采用STOP/Writer。
+  历史过程见[本轮执行记录](MILAI_SOURCE_SELECTION_EXECUTION_20261017.md)，不重跑或重计费。
 - 旧保留 14 家族在原冻结实验中的资格不变；后续仅作已暴露回归。旧训练与问答不重跑，
   原始结果和费用不重算。其他工作树继续保持原暂停状态。
 

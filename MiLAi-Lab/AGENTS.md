@@ -1,4 +1,61 @@
-# CURRENT: source selection v2 execution ACTIVE — 2026-10-18 Asia/Shanghai
+# CURRENT: source selection v2 execution CLOSED — 2026-10-18 Asia/Shanghai
+
+User objective docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md has been executed.
+Final report: docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md.
+Completion evidence: data/manifests/milai-source-selection-v2-completion-audit.json
+(40 execution checks,11 requirement entries). Navigation: docs/LAB_CURRENT_STATUS.md.
+All new commits LOCAL, no push/merge/remoteCI claim. Git IDs are provenance only.
+No subagents,SHA/checksum/content fingerprints,new services/ledger,automatic retries,other-worktree
+resumes,Product/schema/publicAPI/default/STOP/Writer adoption. Do not restart/rebill closed work.
+
+All6trainings closed,188updates/job,3008examples/job; trainingfreeze6ec3984b.
+All40evaluation stages closed exit0 (12probes,20modelselectors,2dense,2preview,2Reader,2score),
+evaluationfreeze215c84da. Coordinator1209651,Reader1989337,lastscorer2182548 absent; exec1227exit0.
+Olddriver active field is stale terminal provenance, NOT live work. Trainingexec40960 alsoexit0.
+Dev43cases/559positions:433fresh+126reuse; reserved28/364:298fresh+66reuse.731unique firstresponses
+ALLauthorreviewed and sealed BEFOREmethodmapping;923totalpositions. Bothcohorts nowmapped/summarized.
+Frozen dev/all43-before-method-mapping.json and reserved/all28-before-method-mapping.json retain
+method_mappings_opened=false as seal-time facts, not current prohibition. Do NOT regrade annotations.
+All artifacts under artifacts/jev-reader/selection-v2; qa-analysis-v1/report.json final.
+Tracked QA results/costs/annotations manifests contain allseeds/strata/qualifications.
+
+MIXED FINDINGS: newfixed4 recipes show local QA gains over BM25/dense. Devsupported /23:
+reference19/20/20,source18/19/20,dense11,BM258,full22. Reservedsupported /6:
+reference5/5/5,source5/4/4,dense2,BM252,full5. Source advantage overmatchedreference NOTestablished.
+Devinsufficient /16 reference14/11/13,source12/13/13,dense14; reserved /18 reference13/12/13,
+source13/13/11,dense13. Do not suppress positiveQA findings or claim generalquality-cost superiority.
+Authored evidencepair bothcorrect /31 reference10/12/12,source7/5/10: sourceLOWERall3.
+DevQA gains mostly2Wiki; minimum4read dev2casesallnewpass,butparallelcomparisons,notbroadserialchains.
+Reserved only6supported/5families (3qualified),18insufficient,4masked; no minimum4readcase.
+Matched source/ref sameBASE/nativehead/188updates,not equalFLOPs orpurelabelcausality; masks and
+fittedfamilies116/127 differ. Sharedstates include bothsource/refexpertprefixes. Allseeds retained.
+
+Citation sensitivity CLOSED uniformlyallarms: Alta dev16/response186 onlyaffects prior128_seed1,
+primary7/23→alternative8/23; mainlabels/proofs/nativeanswers unchanged;newmodels/reserved unchanged.
+Dev198/reserved14 lengthfailures retained, no retry; dev139/260 nonemptyabstention contractfailures.
+Reserved4660 conditional1964 retainsuncertain timing/host binding; masked. Reserved4733 only269
+hascompletecitedqualifiedtitlerepairproof; remainingpartialmatches cannotborrow otherresponse sources.
+Reserved4778 r287 correctdate butmissingbirthplacebinding;288/291/295 completequalifiedsourceproof.
+
+COSTS: original budget ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+All6training and32local evaluation stage audits match; Reader1,715,422tokens,dense93,013tokens.
+Newgeneration/embeddingunknown0; historicalunknown11/1 retained. Selectors2840forwards,
+7,212,253inputtokens; training35,021,231inputtokens plus separate diagnostics; probes34,625,088tokens.
+Learning/probe/receipt/semantic/summary/export/figure/finalaudit compute chargedONCE. Fourpreviously
+unchargedpreview/score driverwall times11.778sec separatelyrecorded; CPUunknown,modelworknotrebilled.
+Finalaudit0.076sec. Initialauditfieldnamemistake failedbeforerecording; correctedwithoutmodelrerun.
+Authorreview/prep/coordination notfullymetered. Differenttokenizers !=equivalentFLOPs;warmtime !=production.
+
+Figures docs/figures/source-selection-v2/{learning,actual-qa}.{png,pdf} renderedandvisuallyinspected.
+Training39/evaluation22/semantic6/receipt2 targetedtestgroups pass (overlap,don'tsum);Ruff/mypy and
+package/toolsboundaries pass. No fullrepo/remoteCIclaim. Actual28sourceboundaries pass;unused4318
+whole-family96titleexception retained. Thisnewreservedcohort isnowexposedforfutureuse,notinvalidated
+retrospectively; no pretrainingunseen/officialtest/independenthuman gold claim. Broadserialcoverage,
+sourceconditioning,STOP,Writer andproductionadoption remain researchlimitations,notunfinishedreruns.
+
+Everything below is historical. Earlier ACTIVE/NEXT/PID snapshots are not live instructions.
+
+# HISTORICAL: source selection v2 execution ACTIVE — 2026-10-18 Asia/Shanghai
 
 Execute docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md. This active goal is
 NOT the closed earlier12-job audit. No subagents, SHA/checksum/content fingerprints, new

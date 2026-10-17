@@ -1,5 +1,5 @@
 {
-  "status": "FIRST_RESPONSE_REVIEW_IN_PROGRESS",
+  "status": "ALL_RESERVED_FIRST_RESPONSES_REVIEWED_BEFORE_METHOD_MAPPING",
   "cohort": "reserved",
   "reviewer_is_independent": false,
   "method_mappings_opened": false,
@@ -23,9 +23,19 @@
     "row-3991",
     "row-4296",
     "row-4405",
-    "row-4423"
+    "row-4423",
+    "row-4466",
+    "row-4561",
+    "row-4571",
+    "row-4595",
+    "row-4620",
+    "row-4650",
+    "row-4660",
+    "row-4733",
+    "row-4755",
+    "row-4778"
   ],
-  "reviewed_unique_responses": 194,
+  "reviewed_unique_responses": 298,
   "full_views_read": [
     "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/00-row-53.txt",
     "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/01-row-328.txt",
@@ -44,7 +54,17 @@
     "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/14-row-3991.txt",
     "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/15-row-4296.txt",
     "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/16-row-4405.txt",
-    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/17-row-4423.txt"
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/17-row-4423.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/18-row-4466.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/19-row-4561.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/20-row-4571.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/21-row-4595.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/22-row-4620.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/23-row-4650.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/24-row-4660.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/25-row-4733.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/26-row-4755.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/27-row-4778.txt"
   ],
   "annotations": {
     "response-000000": {
@@ -2002,8 +2022,1059 @@
       "citation_grounding": "inadequate",
       "output_contract": "valid",
       "rationale": "Permanent members is a plausible external answer, but p17 only states permanent seats and contains no veto-power relation. The selected subset also lacks the Hayek project/time binding. It cannot support the requested complete chain."
+    },
+    "response-000194": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p13 names Ferdinand de Lesseps as leader of an initial French construction attempt, but does not state the requested advocate/cross-continent two-ocean connection. No delivered paragraph identifies the Sampit River ocean or completes the requested binding; unrelated rivers cannot substitute. The historically plausible name is not declared false, but the supplied materials do not prove this answer."
+    },
+    "response-000196": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p13 names Ferdinand de Lesseps as leader of an initial French construction attempt, but does not state the requested advocate/cross-continent two-ocean connection. No delivered paragraph identifies the Sampit River ocean or completes the requested binding; unrelated rivers cannot substitute. The historically plausible name is not declared false, but the supplied materials do not prove this answer."
+    },
+    "response-000197": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p13 names Ferdinand de Lesseps as leader of an initial French construction attempt, but does not state the requested advocate/cross-continent two-ocean connection. No delivered paragraph identifies the Sampit River ocean or completes the requested binding; unrelated rivers cannot substitute. The historically plausible name is not declared false, but the supplied materials do not prove this answer."
+    },
+    "response-000198": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p13 names Ferdinand de Lesseps as leader of an initial French construction attempt, but does not state the requested advocate/cross-continent two-ocean connection. No delivered paragraph identifies the Sampit River ocean or completes the requested binding; unrelated rivers cannot substitute. The historically plausible name is not declared false, but the supplied materials do not prove this answer."
+    },
+    "response-000199": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p13 names Ferdinand de Lesseps as leader of an initial French construction attempt, but does not state the requested advocate/cross-continent two-ocean connection. No delivered paragraph identifies the Sampit River ocean or completes the requested binding; unrelated rivers cannot substitute. The historically plausible name is not declared false, but the supplied materials do not prove this answer."
+    },
+    "response-000200": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p13 names Ferdinand de Lesseps as leader of an initial French construction attempt, but does not state the requested advocate/cross-continent two-ocean connection. No delivered paragraph identifies the Sampit River ocean or completes the requested binding; unrelated rivers cannot substitute. The historically plausible name is not declared false, but the supplied materials do not prove this answer."
+    },
+    "response-000202": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p13 names Ferdinand de Lesseps as leader of an initial French construction attempt, but does not state the requested advocate/cross-continent two-ocean connection. No delivered paragraph identifies the Sampit River ocean or completes the requested binding; unrelated rivers cannot substitute. The historically plausible name is not declared false, but the supplied materials do not prove this answer."
+    },
+    "response-000203": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p13 names Ferdinand de Lesseps as leader of an initial French construction attempt, but does not state the requested advocate/cross-continent two-ocean connection. No delivered paragraph identifies the Sampit River ocean or completes the requested binding; unrelated rivers cannot substitute. The historically plausible name is not declared false, but the supplied materials do not prove this answer."
+    },
+    "response-000195": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual delivered materials omit the Sampit River-to-ocean relation and the required canal-advocacy/connection chain; p13 where present only describes a French construction leader. Empty abstention correctly reflects the missing proof."
+    },
+    "response-000201": {
+      "case_ids": [
+        "row-4466"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual delivered materials omit the Sampit River-to-ocean relation and the required canal-advocacy/connection chain; p13 where present only describes a French construction leader. Empty abstention correctly reflects the missing proof."
+    },
+    "response-000205": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "In p3 the explicit 1948 modifies the State Department edition Nazi–Soviet Relations, not the publication date of Stalin’s responding Falsifiers of History. The early-1920s officeholder and successor binding is also absent. A plausible date is not declared historically false, but all these responses lack the requested full source proof."
+    },
+    "response-000206": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "In p3 the explicit 1948 modifies the State Department edition Nazi–Soviet Relations, not the publication date of Stalin’s responding Falsifiers of History. The early-1920s officeholder and successor binding is also absent. A plausible date is not declared historically false, but all these responses lack the requested full source proof."
+    },
+    "response-000207": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "In p3 the explicit 1948 modifies the State Department edition Nazi–Soviet Relations, not the publication date of Stalin’s responding Falsifiers of History. The early-1920s officeholder and successor binding is also absent. A plausible date is not declared historically false, but all these responses lack the requested full source proof."
+    },
+    "response-000208": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "In p3 the explicit 1948 modifies the State Department edition Nazi–Soviet Relations, not the publication date of Stalin’s responding Falsifiers of History. The early-1920s officeholder and successor binding is also absent. A plausible date is not declared historically false, but all these responses lack the requested full source proof."
+    },
+    "response-000209": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "In p3 the explicit 1948 modifies the State Department edition Nazi–Soviet Relations, not the publication date of Stalin’s responding Falsifiers of History. The early-1920s officeholder and successor binding is also absent. A plausible date is not declared historically false, but all these responses lack the requested full source proof."
+    },
+    "response-000211": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "In p3 the explicit 1948 modifies the State Department edition Nazi–Soviet Relations, not the publication date of Stalin’s responding Falsifiers of History. The early-1920s officeholder and successor binding is also absent. A plausible date is not declared historically false, but all these responses lack the requested full source proof."
+    },
+    "response-000212": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "In p3 the explicit 1948 modifies the State Department edition Nazi–Soviet Relations, not the publication date of Stalin’s responding Falsifiers of History. The early-1920s officeholder and successor binding is also absent. A plausible date is not declared historically false, but all these responses lack the requested full source proof."
+    },
+    "response-000213": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "In p3 the explicit 1948 modifies the State Department edition Nazi–Soviet Relations, not the publication date of Stalin’s responding Falsifiers of History. The early-1920s officeholder and successor binding is also absent. A plausible date is not declared historically false, but all these responses lack the requested full source proof."
+    },
+    "response-000214": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "In p3 the explicit 1948 modifies the State Department edition Nazi–Soviet Relations, not the publication date of Stalin’s responding Falsifiers of History. The early-1920s officeholder and successor binding is also absent. A plausible date is not declared historically false, but all these responses lack the requested full source proof."
+    },
+    "response-000204": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected evidence does not provide the required officeholder/successor chain or the response publication date. Response210 includes p3, whose date belongs to the preceding State Department publication; response204 lacks that passage as well. Empty abstention is supported."
+    },
+    "response-000210": {
+      "case_ids": [
+        "row-4561"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected evidence does not provide the required officeholder/successor chain or the response publication date. Response210 includes p3, whose date belongs to the preceding State Department publication; response204 lacks that passage as well. Empty abstention is supported."
+    },
+    "response-000215": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000216": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000217": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000218": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000219": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000220": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000221": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000222": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000223": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000224": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000225": {
+      "case_ids": [
+        "row-4571"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All eleven first answers are empty with answerable=false. This pool does not contain the last-cold-phase account listing English Channel, Irish Channel and North Sea: its Rhine paragraph instead concerns cold river flow in Lake Constance. Hamburg and Speckter can identify location but cannot supply the absent glacial-event relation; even the full-pool abstention is source-correct."
+    },
+    "response-000226": {
+      "case_ids": [
+        "row-4595"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p7 names Ferdinand de Lesseps as an initial French canal-construction leader, but no delivered material binds that canal to the specified two oceans and continent. Where p16 is delivered it gives Sampit→Winyah Bay; p15 places land between bay and Atlantic but does not state the missing drainage relation. The extra partial links do not complete the frozen source proof, including in the full pool. A relevant historical name is not declared false."
+    },
+    "response-000227": {
+      "case_ids": [
+        "row-4595"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p7 names Ferdinand de Lesseps as an initial French canal-construction leader, but no delivered material binds that canal to the specified two oceans and continent. Where p16 is delivered it gives Sampit→Winyah Bay; p15 places land between bay and Atlantic but does not state the missing drainage relation. The extra partial links do not complete the frozen source proof, including in the full pool. A relevant historical name is not declared false."
+    },
+    "response-000228": {
+      "case_ids": [
+        "row-4595"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p7 names Ferdinand de Lesseps as an initial French canal-construction leader, but no delivered material binds that canal to the specified two oceans and continent. Where p16 is delivered it gives Sampit→Winyah Bay; p15 places land between bay and Atlantic but does not state the missing drainage relation. The extra partial links do not complete the frozen source proof, including in the full pool. A relevant historical name is not declared false."
+    },
+    "response-000229": {
+      "case_ids": [
+        "row-4595"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p7 names Ferdinand de Lesseps as an initial French canal-construction leader, but no delivered material binds that canal to the specified two oceans and continent. Where p16 is delivered it gives Sampit→Winyah Bay; p15 places land between bay and Atlantic but does not state the missing drainage relation. The extra partial links do not complete the frozen source proof, including in the full pool. A relevant historical name is not declared false."
+    },
+    "response-000231": {
+      "case_ids": [
+        "row-4595"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p7 names Ferdinand de Lesseps as an initial French canal-construction leader, but no delivered material binds that canal to the specified two oceans and continent. Where p16 is delivered it gives Sampit→Winyah Bay; p15 places land between bay and Atlantic but does not state the missing drainage relation. The extra partial links do not complete the frozen source proof, including in the full pool. A relevant historical name is not declared false."
+    },
+    "response-000230": {
+      "case_ids": [
+        "row-4595"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset does not establish the requested canal identity and ocean connection; both lack Sampit/Winyah text, and response232 also lacks the canal-leader paragraph. Empty abstention reflects missing relations rather than a claim that no historical advocate exists."
+    },
+    "response-000232": {
+      "case_ids": [
+        "row-4595"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset does not establish the requested canal identity and ocean connection; both lack Sampit/Winyah text, and response232 also lacks the canal-leader paragraph. Empty abstention reflects missing relations rather than a claim that no historical advocate exists."
+    },
+    "response-000233": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000234": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000235": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000236": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000237": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000238": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000239": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000240": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000241": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000242": {
+      "case_ids": [
+        "row-4620"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "All ten first responses abstain with an empty answer. The pool can identify You Wenhui→Shanghai and the film’s Japanese producer, but none of the delivered war passages supplies the US declaration date against Japan. The 1942 passage instead names Hungary, Bulgaria and Romania; 1812 and European declarations concern other countries. The missing date is not inferred from world knowledge."
+    },
+    "response-000244": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p18 explicitly dates Australian National Service to 1964 and p8 identifies the book’s Vietnam setting. No delivered material identifies Pepsi Live’s host country or connects this policy to that war. The year is a real partial-source fact, but the full requested country/event binding is unproved; the plausible answer is not declared historically false."
+    },
+    "response-000245": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p18 explicitly dates Australian National Service to 1964 and p8 identifies the book’s Vietnam setting. No delivered material identifies Pepsi Live’s host country or connects this policy to that war. The year is a real partial-source fact, but the full requested country/event binding is unproved; the plausible answer is not declared historically false."
+    },
+    "response-000247": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p18 explicitly dates Australian National Service to 1964 and p8 identifies the book’s Vietnam setting. No delivered material identifies Pepsi Live’s host country or connects this policy to that war. The year is a real partial-source fact, but the full requested country/event binding is unproved; the plausible answer is not declared historically false."
+    },
+    "response-000248": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p18 explicitly dates Australian National Service to 1964 and p8 identifies the book’s Vietnam setting. No delivered material identifies Pepsi Live’s host country or connects this policy to that war. The year is a real partial-source fact, but the full requested country/event binding is unproved; the plausible answer is not declared historically false."
+    },
+    "response-000249": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p18 explicitly dates Australian National Service to 1964 and p8 identifies the book’s Vietnam setting. No delivered material identifies Pepsi Live’s host country or connects this policy to that war. The year is a real partial-source fact, but the full requested country/event binding is unproved; the plausible answer is not declared historically false."
+    },
+    "response-000250": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p18 explicitly dates Australian National Service to 1964 and p8 identifies the book’s Vietnam setting. No delivered material identifies Pepsi Live’s host country or connects this policy to that war. The year is a real partial-source fact, but the full requested country/event binding is unproved; the plausible answer is not declared historically false."
+    },
+    "response-000253": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p18 explicitly dates Australian National Service to 1964 and p8 identifies the book’s Vietnam setting. No delivered material identifies Pepsi Live’s host country or connects this policy to that war. The year is a real partial-source fact, but the full requested country/event binding is unproved; the plausible answer is not declared historically false."
+    },
+    "response-000243": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials cannot identify Pepsi Live’s host country and the Vietnam-policy date connection. This remains true for the full pool response251; the other subsets also omit key book/policy evidence. Empty abstention correctly preserves these gaps."
+    },
+    "response-000246": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials cannot identify Pepsi Live’s host country and the Vietnam-policy date connection. This remains true for the full pool response251; the other subsets also omit key book/policy evidence. Empty abstention correctly preserves these gaps."
+    },
+    "response-000251": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials cannot identify Pepsi Live’s host country and the Vietnam-policy date connection. This remains true for the full pool response251; the other subsets also omit key book/policy evidence. Empty abstention correctly preserves these gaps."
+    },
+    "response-000252": {
+      "case_ids": [
+        "row-4650"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials cannot identify Pepsi Live’s host country and the Vietnam-policy date connection. This remains true for the full pool response251; the other subsets also omit key book/policy evidence. Empty abstention correctly preserves these gaps."
+    },
+    "response-000254": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "uncertain",
+      "citation_grounding": "uncertain",
+      "output_contract": "valid",
+      "rationale": "All three sources of the predeclared conditional route are delivered and cited: Pepsi Live includes both Australia and the UK; Australian National Service starts in 1964; the book concerns Vietnam. The answer 1964 fits the registered Australian/Vietnam-era interpretation, but exclusive host-country choice and policy-to-war timing are not explicitly supplied. The frozen review expressly retains this external/implicit timing condition, so this is a qualified answer with uncertain complete source grounding rather than a false date or unqualified proof.",
+      "qualification": "Predeclared Australian broadcast/host reading plus implicit Vietnam-era time binding; all conditional source IDs p6,p9,p15 cited. Full-pool case remains masked from primary task."
+    },
+    "response-000255": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "uncertain",
+      "citation_grounding": "uncertain",
+      "output_contract": "valid",
+      "rationale": "All three sources of the predeclared conditional route are delivered and cited: Pepsi Live includes both Australia and the UK; Australian National Service starts in 1964; the book concerns Vietnam. The answer 1964 fits the registered Australian/Vietnam-era interpretation, but exclusive host-country choice and policy-to-war timing are not explicitly supplied. The frozen review expressly retains this external/implicit timing condition, so this is a qualified answer with uncertain complete source grounding rather than a false date or unqualified proof.",
+      "qualification": "Predeclared Australian broadcast/host reading plus implicit Vietnam-era time binding; all conditional source IDs p6,p9,p15 cited. Full-pool case remains masked from primary task."
+    },
+    "response-000257": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "uncertain",
+      "citation_grounding": "uncertain",
+      "output_contract": "valid",
+      "rationale": "All three sources of the predeclared conditional route are delivered and cited: Pepsi Live includes both Australia and the UK; Australian National Service starts in 1964; the book concerns Vietnam. The answer 1964 fits the registered Australian/Vietnam-era interpretation, but exclusive host-country choice and policy-to-war timing are not explicitly supplied. The frozen review expressly retains this external/implicit timing condition, so this is a qualified answer with uncertain complete source grounding rather than a false date or unqualified proof.",
+      "qualification": "Predeclared Australian broadcast/host reading plus implicit Vietnam-era time binding; all conditional source IDs p6,p9,p15 cited. Full-pool case remains masked from primary task."
+    },
+    "response-000258": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "uncertain",
+      "citation_grounding": "uncertain",
+      "output_contract": "valid",
+      "rationale": "All three sources of the predeclared conditional route are delivered and cited: Pepsi Live includes both Australia and the UK; Australian National Service starts in 1964; the book concerns Vietnam. The answer 1964 fits the registered Australian/Vietnam-era interpretation, but exclusive host-country choice and policy-to-war timing are not explicitly supplied. The frozen review expressly retains this external/implicit timing condition, so this is a qualified answer with uncertain complete source grounding rather than a false date or unqualified proof.",
+      "qualification": "Predeclared Australian broadcast/host reading plus implicit Vietnam-era time binding; all conditional source IDs p6,p9,p15 cited. Full-pool case remains masked from primary task."
+    },
+    "response-000259": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "uncertain",
+      "citation_grounding": "uncertain",
+      "output_contract": "valid",
+      "rationale": "All three sources of the predeclared conditional route are delivered and cited: Pepsi Live includes both Australia and the UK; Australian National Service starts in 1964; the book concerns Vietnam. The answer 1964 fits the registered Australian/Vietnam-era interpretation, but exclusive host-country choice and policy-to-war timing are not explicitly supplied. The frozen review expressly retains this external/implicit timing condition, so this is a qualified answer with uncertain complete source grounding rather than a false date or unqualified proof.",
+      "qualification": "Predeclared Australian broadcast/host reading plus implicit Vietnam-era time binding; all conditional source IDs p6,p9,p15 cited. Full-pool case remains masked from primary task."
+    },
+    "response-000262": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "uncertain",
+      "citation_grounding": "uncertain",
+      "output_contract": "valid",
+      "rationale": "All three sources of the predeclared conditional route are delivered and cited: Pepsi Live includes both Australia and the UK; Australian National Service starts in 1964; the book concerns Vietnam. The answer 1964 fits the registered Australian/Vietnam-era interpretation, but exclusive host-country choice and policy-to-war timing are not explicitly supplied. The frozen review expressly retains this external/implicit timing condition, so this is a qualified answer with uncertain complete source grounding rather than a false date or unqualified proof.",
+      "qualification": "Predeclared Australian broadcast/host reading plus implicit Vietnam-era time binding; all conditional source IDs p6,p9,p15 cited. Full-pool case remains masked from primary task."
+    },
+    "response-000256": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "These delivered subsets lack the Pepsi Live country and conscription-date paragraphs, so even the predeclared conditional route cannot be formed. Empty abstention is locally correct; the frozen ambiguous full-pool case stays masked, not converted into a negative primary task."
+    },
+    "response-000260": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "These delivered subsets lack the Pepsi Live country and conscription-date paragraphs, so even the predeclared conditional route cannot be formed. Empty abstention is locally correct; the frozen ambiguous full-pool case stays masked, not converted into a negative primary task."
+    },
+    "response-000261": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "These delivered subsets lack the Pepsi Live country and conscription-date paragraphs, so even the predeclared conditional route cannot be formed. Empty abstention is locally correct; the frozen ambiguous full-pool case stays masked, not converted into a negative primary task."
+    },
+    "response-000263": {
+      "case_ids": [
+        "row-4660"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "These delivered subsets lack the Pepsi Live country and conscription-date paragraphs, so even the predeclared conditional route cannot be formed. Empty abstention is locally correct; the frozen ambiguous full-pool case stays masked, not converted into a negative primary task."
+    },
+    "response-000269": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Under the predeclared Abuse of power→Abuse of Reason title repair, p17 identifies WWII; p11 directly connects WWII victors, five permanent Security Council members and veto power, supplemented by p6/p14. The actual delivery and cited IDs contain a complete registered conditional proof. The original mismatched question is unchanged and the full-pool case remains masked.",
+      "qualification": "Predeclared Hayek project-title repair; qualified grounded/cited answer, not an unqualified primary task pass."
+    },
+    "response-000264": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p17 identifies the Hayek project during WWII under the registered title repair, and p14 states Security Council permanent-member veto power, but these subsets lack the WWII-victors→this-organization/permanent-seats binding (p6 or p11). Matching the conditional answer is not a complete delivered or cited chain."
+    },
+    "response-000272": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p17 identifies the Hayek project during WWII under the registered title repair, and p14 states Security Council permanent-member veto power, but these subsets lack the WWII-victors→this-organization/permanent-seats binding (p6 or p11). Matching the conditional answer is not a complete delivered or cited chain."
+    },
+    "response-000265": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p6/p15 discuss permanent seats and representation, not veto power; the actual subsets also omit the Hayek project/date paragraph. A plausible permanent-members answer lacks both necessary connections and cannot borrow p11/p14 from other responses."
+    },
+    "response-000271": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p6/p15 discuss permanent seats and representation, not veto power; the actual subsets also omit the Hayek project/date paragraph. A plausible permanent-members answer lacks both necessary connections and cannot borrow p11/p14 from other responses."
+    },
+    "response-000266": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The delivered/cited UN or Great power material states which members have veto power, but neither subset includes p17 binding the Hayek project to WWII. Response273 additionally lacks the WWII-victor seat relation. Even accepting the frozen title repair, the requested full chain is incomplete."
+    },
+    "response-000273": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The delivered/cited UN or Great power material states which members have veto power, but neither subset includes p17 binding the Hayek project to WWII. Response273 additionally lacks the WWII-victor seat relation. Even accepting the frozen title repair, the requested full chain is incomplete."
+    },
+    "response-000267": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "These actual subsets lack the veto-power relation and a complete organization-binding proof. Empty abstention is appropriate locally; the title-mismatched full-pool case remains masked rather than being relabelled a primary negative."
+    },
+    "response-000268": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "These actual subsets lack the veto-power relation and a complete organization-binding proof. Empty abstention is appropriate locally; the title-mismatched full-pool case remains masked rather than being relabelled a primary negative."
+    },
+    "response-000270": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "These actual subsets lack the veto-power relation and a complete organization-binding proof. Empty abstention is appropriate locally; the title-mismatched full-pool case remains masked rather than being relabelled a primary negative."
+    },
+    "response-000274": {
+      "case_ids": [
+        "row-4733"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "These actual subsets lack the veto-power relation and a complete organization-binding proof. Empty abstention is appropriate locally; the title-mismatched full-pool case remains masked rather than being relabelled a primary negative."
+    },
+    "response-000276": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "All cite p15, where 1948 dates Nazi–Soviet Relations, the publication to which Stalin responded, rather than explicitly dating his Falsifiers of History. Only the full pool280 also contains p14’s Lenin→Stalin succession, and none proves all queried early-1920s office titles or the response date. The additional succession passage does not repair publication-date scope; the plausible year is not declared false."
+    },
+    "response-000277": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "All cite p15, where 1948 dates Nazi–Soviet Relations, the publication to which Stalin responded, rather than explicitly dating his Falsifiers of History. Only the full pool280 also contains p14’s Lenin→Stalin succession, and none proves all queried early-1920s office titles or the response date. The additional succession passage does not repair publication-date scope; the plausible year is not declared false."
+    },
+    "response-000278": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "All cite p15, where 1948 dates Nazi–Soviet Relations, the publication to which Stalin responded, rather than explicitly dating his Falsifiers of History. Only the full pool280 also contains p14’s Lenin→Stalin succession, and none proves all queried early-1920s office titles or the response date. The additional succession passage does not repair publication-date scope; the plausible year is not declared false."
+    },
+    "response-000279": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "All cite p15, where 1948 dates Nazi–Soviet Relations, the publication to which Stalin responded, rather than explicitly dating his Falsifiers of History. Only the full pool280 also contains p14’s Lenin→Stalin succession, and none proves all queried early-1920s office titles or the response date. The additional succession passage does not repair publication-date scope; the plausible year is not declared false."
+    },
+    "response-000280": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "All cite p15, where 1948 dates Nazi–Soviet Relations, the publication to which Stalin responded, rather than explicitly dating his Falsifiers of History. Only the full pool280 also contains p14’s Lenin→Stalin succession, and none proves all queried early-1920s office titles or the response date. The additional succession passage does not repair publication-date scope; the plausible year is not declared false."
+    },
+    "response-000282": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "All cite p15, where 1948 dates Nazi–Soviet Relations, the publication to which Stalin responded, rather than explicitly dating his Falsifiers of History. Only the full pool280 also contains p14’s Lenin→Stalin succession, and none proves all queried early-1920s office titles or the response date. The additional succession passage does not repair publication-date scope; the plausible year is not declared false."
+    },
+    "response-000283": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "All cite p15, where 1948 dates Nazi–Soviet Relations, the publication to which Stalin responded, rather than explicitly dating his Falsifiers of History. Only the full pool280 also contains p14’s Lenin→Stalin succession, and none proves all queried early-1920s office titles or the response date. The additional succession passage does not repair publication-date scope; the plausible year is not declared false."
+    },
+    "response-000284": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "All cite p15, where 1948 dates Nazi–Soviet Relations, the publication to which Stalin responded, rather than explicitly dating his Falsifiers of History. Only the full pool280 also contains p14’s Lenin→Stalin succession, and none proves all queried early-1920s office titles or the response date. The additional succession passage does not repair publication-date scope; the plausible year is not declared false."
+    },
+    "response-000286": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "All cite p15, where 1948 dates Nazi–Soviet Relations, the publication to which Stalin responded, rather than explicitly dating his Falsifiers of History. Only the full pool280 also contains p14’s Lenin→Stalin succession, and none proves all queried early-1920s office titles or the response date. The additional succession passage does not repair publication-date scope; the plausible year is not declared false."
+    },
+    "response-000275": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subsets lack the requested publication and its date as well as the full officeholder/successor chain. Unrelated communist leaders, a computer game or office descriptions cannot fill those relations. Empty abstention is appropriate."
+    },
+    "response-000281": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subsets lack the requested publication and its date as well as the full officeholder/successor chain. Unrelated communist leaders, a computer game or office descriptions cannot fill those relations. Empty abstention is appropriate."
+    },
+    "response-000285": {
+      "case_ids": [
+        "row-4755"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subsets lack the requested publication and its date as well as the full officeholder/successor chain. Unrelated communist leaders, a computer game or office descriptions cannot fill those relations. Empty abstention is appropriate."
+    },
+    "response-000288": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p16 binds You Wenhui to Shanghai, p15 gives the disambiguated film and explicitly Japanese producer, and p19 supplies the US declaration date December 8, 1941. The complete registered proof is present, under the frozen producer-country/title interpretation.",
+      "qualification": "Frozen supported-but-qualified case: Japanese production company, not exclusive film nationality or a separately proven filming location."
+    },
+    "response-000291": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p16 binds You Wenhui to Shanghai, p15 gives the disambiguated film and explicitly Japanese producer, and p19 supplies the US declaration date December 8, 1941. The complete registered proof is present, under the frozen producer-country/title interpretation.",
+      "qualification": "Frozen supported-but-qualified case: Japanese production company, not exclusive film nationality or a separately proven filming location."
+    },
+    "response-000295": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p16 binds You Wenhui to Shanghai, p15 gives the disambiguated film and explicitly Japanese producer, and p19 supplies the US declaration date December 8, 1941. The complete registered proof is present, under the frozen producer-country/title interpretation.",
+      "qualification": "Frozen supported-but-qualified case: Japanese production company, not exclusive film nationality or a separately proven filming location."
+    },
+    "response-000287": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The date matches the frozen expected answer and p15/p19 connect this film’s Japanese producer to the date, but the actual subset omits p16 (You Wenhui→Shanghai). The city/title binding in the question is therefore missing; correct value alone does not supply the full proof."
+    },
+    "response-000289": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Each actual subset lacks at least one necessary relation: 289/290/293/294/296/297 lack the Japan declaration-date paragraph, 292 has that date but lacks the film/producer and birthplace binding, and several lack additional links. Empty abstention is correct for the delivered subset, while the qualified full-pool task remains supported and thus unfulfilled by these responses."
+    },
+    "response-000290": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Each actual subset lacks at least one necessary relation: 289/290/293/294/296/297 lack the Japan declaration-date paragraph, 292 has that date but lacks the film/producer and birthplace binding, and several lack additional links. Empty abstention is correct for the delivered subset, while the qualified full-pool task remains supported and thus unfulfilled by these responses."
+    },
+    "response-000292": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Each actual subset lacks at least one necessary relation: 289/290/293/294/296/297 lack the Japan declaration-date paragraph, 292 has that date but lacks the film/producer and birthplace binding, and several lack additional links. Empty abstention is correct for the delivered subset, while the qualified full-pool task remains supported and thus unfulfilled by these responses."
+    },
+    "response-000293": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Each actual subset lacks at least one necessary relation: 289/290/293/294/296/297 lack the Japan declaration-date paragraph, 292 has that date but lacks the film/producer and birthplace binding, and several lack additional links. Empty abstention is correct for the delivered subset, while the qualified full-pool task remains supported and thus unfulfilled by these responses."
+    },
+    "response-000294": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Each actual subset lacks at least one necessary relation: 289/290/293/294/296/297 lack the Japan declaration-date paragraph, 292 has that date but lacks the film/producer and birthplace binding, and several lack additional links. Empty abstention is correct for the delivered subset, while the qualified full-pool task remains supported and thus unfulfilled by these responses."
+    },
+    "response-000296": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Each actual subset lacks at least one necessary relation: 289/290/293/294/296/297 lack the Japan declaration-date paragraph, 292 has that date but lacks the film/producer and birthplace binding, and several lack additional links. Empty abstention is correct for the delivered subset, while the qualified full-pool task remains supported and thus unfulfilled by these responses."
+    },
+    "response-000297": {
+      "case_ids": [
+        "row-4778"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Each actual subset lacks at least one necessary relation: 289/290/293/294/296/297 lack the Japan declaration-date paragraph, 292 has that date but lacks the film/producer and birthplace binding, and several lack additional links. Empty abstention is correct for the delivered subset, while the qualified full-pool task remains supported and thus unfulfilled by these responses."
     }
   },
   "scope": "All first final answers and actual delivered sources reviewed before method mapping. Reserved response IDs have their own cohort namespace; do not merge them with dev IDs.",
-  "last_updated_epoch": 1792260831.4837322
+  "last_updated_epoch": 1792262068.1987298,
+  "sealed_epoch": 1792262068.2370296
 }
