@@ -13,7 +13,9 @@ import json
 import os
 import resource
 import time
+from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 from evaluate_bounded_laya import NativeDecision
 from milai_lab.harness.artifact_io import read_json, write_json
@@ -21,7 +23,8 @@ from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.methods.bounded_evidence import select_bounded
 
 
-def fixed_four(case: dict, old_calls: Path, output: Path, predict) -> dict:
+def fixed_four(case: dict[str, Any], old_calls: Path, output: Path,
+               predict: Callable[[dict[str, Any]], dict[str, Any]]) -> dict[str, Any]:
     old = {}
     for path in old_calls.glob("*/input.json"):
         payload = read_json(path)
@@ -29,7 +32,7 @@ def fixed_four(case: dict, old_calls: Path, output: Path, predict) -> dict:
         old[key] = (payload, read_json(path.with_name("output.json")), path)
     trace = []
 
-    def decide(payload):
+    def decide(payload: dict[str, Any]) -> str:
         key = tuple(p["id"] for p in payload["state"]["read_evidence"])
         if key in old:
             original, prediction, source = old[key]
@@ -45,8 +48,9 @@ def fixed_four(case: dict, old_calls: Path, output: Path, predict) -> dict:
         trace.append({"source": str(source.resolve()), "reused": reused,
                       "input_tokens": prediction["input_tokens"],
                       "wall_seconds": prediction["wall_seconds"]})
-        opens = {k: p for k, p in prediction["probabilities"].items() if k.startswith("open_")}
-        return max(opens, key=opens.get)
+        opens: dict[str, float] = {
+            k: p for k, p in prediction["probabilities"].items() if k.startswith("open_")}
+        return max(opens, key=lambda key: opens[key])
 
     result = select_bounded(case["question"], case["candidates"], decide,
                             max_candidates=len(case["candidates"]), max_reads=4)
@@ -67,8 +71,8 @@ def main() -> None:
     import torch
 
     prior = read_json(args.source / "run.json")
-    if prior["status"] != "COMPLETED" or prior["backend"] != "laya":
-        raise ValueError("This extension requires the closed native Laya CE selector")
+    if prior["status"] != "COMPLETED" or prior["backend"] not in {"laya", "linear"}:
+        raise ValueError("This extension requires a closed native or linear selector")
     if os.environ.get("CUDA_VISIBLE_DEVICES") != "2,3":
         raise ValueError("Only allocated physical GPUs2,3 may be visible")
     args.output.mkdir(parents=True, exist_ok=False)
@@ -77,13 +81,20 @@ def main() -> None:
     cases = [json.loads(x) for x in Path(prior["cases"]).read_text().splitlines()]
     run = {"status": "RUNNING", "pid": os.getpid(), "source_version": args.source_version,
            "source": str(args.source.resolve()), "planned_cases": len(cases), "completed_cases": 0,
-           "checkpoint": prior["checkpoint"], "physical_gpu": 2, "new_http_calls": 0}
+           "checkpoint": prior["checkpoint"], "backend": prior["backend"],
+           "physical_gpu": 2, "new_http_calls": 0}
     write_json(args.output / "run.json", run)
     started, cpu = time.perf_counter(), time.process_time()
-    decision = None
+    decision: NativeDecision | None = None
     try:
-        decision = NativeDecision(Path(prior["checkpoint"]), prior["max_len"],
-                                  prior["head_max_len"])
+        if prior["backend"] == "linear":
+            from linear_reader_classifier import LinearDecision
+
+            decision = LinearDecision.load(Path(prior["checkpoint"]), prior["max_len"],
+                                           prior["head_max_len"])
+        else:
+            decision = NativeDecision(Path(prior["checkpoint"]), prior["max_len"],
+                                      prior["head_max_len"])
         decision.device = torch.device("cuda:0")
         decision.model.encoder.config.reference_compile = False
         decision.model.to(decision.device).eval()
@@ -118,7 +129,9 @@ def main() -> None:
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
-            budget.record_compute("reader_ce_fixed4_extension_v1", measures)
+            phase = ("reader_ce_fixed4_extension_v1" if prior["backend"] == "laya"
+                     else "reader_linear_fixed4_extension_v1")
+            budget.record_compute(phase, measures)
         write_json(args.output / "run.json", {**terminal, "ledger_recorded": True})
 
 

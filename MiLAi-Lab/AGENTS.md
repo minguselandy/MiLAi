@@ -23,6 +23,16 @@ Inspect allcompletedoutputs/actualterminalstatus; no outcome-based dispatch/chec
 First32/native/seed0 CLOSED38updates,train157/304,dev33/168 vsconstant-exhausted34;
 sufficient0/17. No routechoice fromfirstresult. Currentlinear32/seed0 PID3112544; inspect
 driver.json forlatertransitions. Firstjobcost306.869s wall alreadyoriginalledger. Do notrebill.
+POSTTRAIN PREPARED notstarted: artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
+config configs/milai-global-reader-policy-qa-v1.json. Requiresall12trainclosed+actualPIDsabsent.
+31cases27arms837Readerpositions,12modelsallfixed4/adaptive+BM25/dense4/full20. 8064newprobe
+forwards(4transforms); originalview reusesfinaldev2. Ordinarylinear supportedbyprobe/fixed4.
+Dense377uniqueinputs/42325tokens/max379,24batch16requests expected but0sentsofar.
+Offlineanalysis-progress-1 isINTERIM2jobs; bothoriginalledgerdeltas match. Do notrerun/rebill.
+14targetedtests inclofficialscorer, Ruff/mypy andDAG/toolsboundaryPASS; trainingimportsnotedited.
+Reservedsource protocolmilai-global-reserved-source-v1 fixes14of49groups6/4/4,28rows bymetadata;
+NOnewbody/answerdisplay. Completecurrentliteralboundarycheck andfreezemethodbeforeviewing,
+nevergradient/tuning. Futureevaluateall12models,notanoutcome-selectedwinner. Max756Readerpositions.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17

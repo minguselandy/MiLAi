@@ -77,6 +77,11 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=20261017)
     parser.add_argument("--max-len", type=int, default=8192)
     parser.add_argument("--head-max-len", type=int, default=512)
+    parser.add_argument("--backend", choices=("native", "linear"), default="native")
+    parser.add_argument("--variants", nargs="+", choices=(
+        "original", "aliases", "candidate_order", "option_order", "title_frame"),
+        default=("original", "aliases", "candidate_order", "option_order", "title_frame"),
+        help="Omit original when exact frozen baseline predictions already exist")
     args = parser.parse_args()
     import json
     import os
@@ -88,16 +93,22 @@ def main() -> None:
     torch.set_num_threads(4)
     args.output.mkdir(parents=True, exist_ok=False)
     rows = [json.loads(line) for line in args.data.read_text().splitlines()]
-    variants = ("original", "aliases", "candidate_order", "option_order", "title_frame")
+    variants = args.variants
     run = {"status": "RUNNING", "pid": os.getpid(), "completed": 0,
            "planned": len(rows) * len(variants), "data": str(args.data.resolve()),
            "checkpoint": str(args.checkpoint.resolve()), "physical_gpu": 2,
-           "seed": args.seed, "http_requests": 0}
+           "seed": args.seed, "http_requests": 0, "backend": args.backend,
+           "variants": variants}
     write_json(args.output / "run.json", run)
     started, cpu = time.perf_counter(), time.process_time()
-    decision = None
+    decision: NativeDecision | None = None
     try:
-        decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
+        if args.backend == "linear":
+            from linear_reader_classifier import LinearDecision
+
+            decision = LinearDecision.load(args.checkpoint, args.max_len, args.head_max_len)
+        else:
+            decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
         decision.model.encoder.config.reference_compile = False
         decision.device = torch.device("cuda:0")
         decision.model.to(decision.device)

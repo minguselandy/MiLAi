@@ -1,0 +1,20 @@
+{
+  "status": "ANSWER_FREE_INPUTS_AND_CONTROL_MAPPINGS_VERIFIED_NO_MODEL_CALLS",
+  "cases": 31,
+  "families": 17,
+  "model_payloads_match_training_dev_empty": true,
+  "all620paragraphs_literal_source_match": true,
+  "dev_inputs_identical_both_cohorts": true,
+  "dense_unique_inputs": 377,
+  "dense_max_input_tokens": 379,
+  "dense_total_unique_input_tokens_with_specials": 42325,
+  "dense_expected_requests_at_batch16": 24,
+  "planned_reader_positions": 837,
+  "new_model_calls": 0,
+  "sha_checks": false,
+  "validation_compute": {
+    "wall_seconds": 1.113102087751031,
+    "cpu_seconds": 0.85365878,
+    "validations": 1
+  }
+}

@@ -240,3 +240,46 @@ Writer D0独立保留，读端监督不冒充写端根修改训练。训练与�
 
 [开发来源逐条注释](../data/manifests/milai-global-reader-reference-v1-dev-source-annotations.json) ·
 [数量与解释范围](../data/manifests/milai-global-reader-reference-v1-dev-source-summary.json)。
+
+
+## 冻结实际策略和呈现探针评估
+
+已准备 `global-reader-policy-qa-v1`，须等12个训练任务全部闭合及实际PID退出后派发。
+31来源/17家族×27臂=837个Reader位置：12个模型各fixed4/adaptive，加BM25fixed4、
+同池BGE-M3 dense4和全20段。所有最终epoch2模型均保留，不根据早期分数挑大小档、头或种子。
+Reader仍为原7860、原source-only指令与8192输出上限，相同messages/schema复用首次回执，
+不补跑已确认失败或unknown。上限837次首次请求，不意味着将实际调用837次。
+
+同一随机呈现顺序用于所有方法；BM25对照还原真实词面排序后映射到当前别名，不能错误地
+把前4个随机展示项当BM25。所有620段与原来源逐项相同，31个空前缀payload逐对象等于
+训练期间dev输入，两档dev完全相同。Dense共377种字面输入，BGE tokenizer最大379tokens、
+总42325tokens，batch16预计24请求；此处只是容量检查，尚无embedding调用。
+
+呈现探针覆盖12模型×168状态×4变化=8064次新forward：别名、候选顺序、选项顺序和中性
+标题前缀。original视图复用同模型保存的finaldev2预测，原训练账本不重复收费。普通线性头
+现可走同一探针和fixed4延伸入口；没有为它另加昂贵的每动作全文编码。排序与STOP、动作
+变化与成对正确性一起评价；一致但始终停止不会记为学会状态条件化。
+
+新增离线分析区分参考标签接受、best-open、真实BM25-next、两类错误STOP、家族/分解步数/
+状态来源、已读证据转换、正负来源配对，以及有来源完整证明的子集。池内不足/歧义不被
+自动变成一套未经审定的唯一open标签。首两任务的原账本差额已逐项核对相等，仅分析CPU
+成本新增记账；中间表是INTERIM，不是完整12任务结果。
+
+[策略/探针协议](../data/manifests/milai-global-reader-policy-qa-v1-protocol.json) ·
+[输入、映射和容量检查](../data/manifests/milai-global-reader-policy-qa-v1-input-review.json)。
+14项相关测试（包含实际已下载MuSiQue官方scorer的缺失分母测试）、Ruff/mypy、包DAG和
+工具边界通过。测试不证明模型质量，也没有启动额外服务或改变训练代码。
+
+## 保留来源切片：元数据先固定
+
+现有49组保留总体中，用seed20261017固定选择6/4/4个含最大2/3/4步分解的组，每组随机取
+一个最大步数问题，保留正负两行，共14组/28来源。整个49组仍受保护；本次不是删除其余
+组或把它们转成训练。选择时未展示新问题/答案/段落，没有根据任何保留集模型结果选择。
+
+计划仍对全部12个模型与三个简单控制作同样的fixed4/adaptive比较，最多756Reader位置。
+先完成来源ID与当前数据的字面边界核对，冻结方法后才查看这28条来源作评价审阅，训练
+全部闭合后才推理。分解步数不等于实际必要证据数，需要来源审阅单列。本样本用于困难
+分层的来源迁移检查，不代表自然分布准确率、官方test、全部历史或预训练未见认证。
+作者镜像等价、语义近重复与未登记历史接触仍未证明。不给LongMemEval v1/V2重新发盲测身份。
+
+[保留来源元数据冻结协议](../data/manifests/milai-global-reserved-source-v1-protocol.json)。
