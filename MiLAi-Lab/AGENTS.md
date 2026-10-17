@@ -36,6 +36,14 @@ and864registered/currentseen rows; method539e3ad3 fixed. Sourceviewing isnowallo
 evaluation reviewonly, afterexplicitdatasetexport. No protectedrawfile goesintotrain.
 CommonQAprepare nowrequires explicitdecisions/sources/output --budget --scope (no devscaffold).
 nevergradient/tuning. Futureevaluateall12models,notanoutcome-selectedwinner. Max756Readerpositions.
+Reservedsource data NOWEXPORTED: global-reserved-source-v1/data/reference-states.jsonl,
+selected-sources.jsonl,158states28rows/test/training_allowedfalse,max3848/zero truncation.
+review-views/ catalogorder14families560positions349literaltexts NOTYETREAD. Source-first
+annotation snapshotinitialized0/28. NEXTindependentwork:readfullviews,annotatebeforeoriginal
+answers/predictions; donotuse newsource data fortraining. Method539e3ad3 frozen beforehand.
+ReservedQA prepared global-reserved-policy-qa-v1/driver.py/config,requiresdevQAclosedAND
+all28sourceannotationsclosed:1896prefixforwards+756Readerpositions,all12models+3controls.
+Dense363inputs/max442/45834tokens/23batchesexpected;0HTTP. Do notdispatchbeforeprerequisites.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17

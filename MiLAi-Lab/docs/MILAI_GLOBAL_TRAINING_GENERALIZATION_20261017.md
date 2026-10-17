@@ -283,3 +283,23 @@ Reader仍为原7860、原source-only指令与8192输出上限，相同messages/s
 作者镜像等价、语义近重复与未登记历史接触仍未证明。不给LongMemEval v1/V2重新发盲测身份。
 
 [保留来源元数据冻结协议](../data/manifests/milai-global-reserved-source-v1-protocol.json)。
+
+
+保留切片已完成当前边界复核：28行与全部联合保留train5454/dev119/calibration229及已登记/
+当前使用864行比较，双向目标↔候选池和字面问题冲突均0；ID/分解步数绑定全部一致。
+仅计数输出的核对1.259秒记原账本。这是上述有限范围内的评价准入，不替代未证明的条件。
+
+已导出独立test元数据的28来源/158参考前缀，未写train/dev梯度文件；完整560段位置、
+349种字面正文的审阅视图已准备，**尚未阅读正文或原答案、尚无保留集模型推理**。
+完整输入最大3848tokens，无截断。源文字没有被摘要或删短。下一轮先按视图顺序审阅所有
+14家族，再比对参考答案，不能依据模型输出标注。
+
+保留策略配置独立冻结：同12模型原始前缀158×12=1896次本地forward；28来源×27臂=756个
+Reader位置，同BM25/dense4/full20控制。全部560段与来源逐项相同、空前缀payload一致；
+Dense363种输入最大442tokens、总45834tokens、batch16预计23请求，仍只是容量审计。
+须训练与前一dev评估闭合、保留来源审阅完成后才派发。原trained方法、提示与模型选择不变。
+
+[保留边界核对](../data/manifests/milai-global-reserved-source-v1-admission.json) ·
+[保留数据导出](../data/manifests/milai-global-reserved-source-v1-preparation.json) ·
+[保留策略协议](../data/manifests/milai-global-reserved-policy-qa-v1-protocol.json) ·
+[保留输入核对](../data/manifests/milai-global-reserved-policy-qa-v1-input-review.json)。

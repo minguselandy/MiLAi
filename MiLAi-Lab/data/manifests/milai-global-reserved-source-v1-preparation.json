@@ -1,0 +1,171 @@
+{
+  "status": "EVALUATION_EXPORTED_SOURCE_VIEWS_NOT_YET_READ",
+  "families": 14,
+  "source_rows": 28,
+  "states": 158,
+  "paragraph_positions": 560,
+  "unique_literal_title_texts": 349,
+  "max_tokens": 3848,
+  "total_tokens": 488877,
+  "truncated_states": 0,
+  "native_reference_state_counts": {
+    "missing_complement": 126,
+    "reference_proof_complete": 14,
+    "official_unanswerable_pool": 18
+  },
+  "no_train_or_dev_gradient_file_written": true,
+  "source_split_metadata": "test",
+  "method_source_version": "539e3ad3",
+  "training_source_version": "2346bb57",
+  "new_model_calls": 0,
+  "new_HTTP_calls": 0,
+  "source_text_emitted_by_export_process": false,
+  "catalog": [
+    {
+      "family": "candidate-family-000173",
+      "source_rows": [
+        647,
+        1967
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/00-candidate-family-000173.txt",
+      "max_decomposition_steps": 2,
+      "bytes": 10720
+    },
+    {
+      "family": "candidate-family-000466",
+      "source_rows": [
+        119,
+        410
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/01-candidate-family-000466.txt",
+      "max_decomposition_steps": 2,
+      "bytes": 11712
+    },
+    {
+      "family": "candidate-family-000025",
+      "source_rows": [
+        1561,
+        2273
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/02-candidate-family-000025.txt",
+      "max_decomposition_steps": 2,
+      "bytes": 13116
+    },
+    {
+      "family": "candidate-family-000421",
+      "source_rows": [
+        1673,
+        2203
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/03-candidate-family-000421.txt",
+      "max_decomposition_steps": 2,
+      "bytes": 11504
+    },
+    {
+      "family": "candidate-family-000434",
+      "source_rows": [
+        3314,
+        3604
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/04-candidate-family-000434.txt",
+      "max_decomposition_steps": 2,
+      "bytes": 18480
+    },
+    {
+      "family": "candidate-family-000443",
+      "source_rows": [
+        3703,
+        3911
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/05-candidate-family-000443.txt",
+      "max_decomposition_steps": 2,
+      "bytes": 11951
+    },
+    {
+      "family": "candidate-family-000080",
+      "source_rows": [
+        1941,
+        3039
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/06-candidate-family-000080.txt",
+      "max_decomposition_steps": 3,
+      "bytes": 12218
+    },
+    {
+      "family": "candidate-family-000482",
+      "source_rows": [
+        4475,
+        4524
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/07-candidate-family-000482.txt",
+      "max_decomposition_steps": 3,
+      "bytes": 16954
+    },
+    {
+      "family": "candidate-family-000506",
+      "source_rows": [
+        4403,
+        4621
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/08-candidate-family-000506.txt",
+      "max_decomposition_steps": 3,
+      "bytes": 21208
+    },
+    {
+      "family": "candidate-family-000485",
+      "source_rows": [
+        1643,
+        2382
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/09-candidate-family-000485.txt",
+      "max_decomposition_steps": 3,
+      "bytes": 14293
+    },
+    {
+      "family": "candidate-family-000347",
+      "source_rows": [
+        4519,
+        4622
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/10-candidate-family-000347.txt",
+      "max_decomposition_steps": 4,
+      "bytes": 13529
+    },
+    {
+      "family": "candidate-family-000520",
+      "source_rows": [
+        786,
+        2141
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/11-candidate-family-000520.txt",
+      "max_decomposition_steps": 4,
+      "bytes": 25525
+    },
+    {
+      "family": "candidate-family-000526",
+      "source_rows": [
+        1654,
+        3395
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/12-candidate-family-000526.txt",
+      "max_decomposition_steps": 4,
+      "bytes": 15348
+    },
+    {
+      "family": "candidate-family-000484",
+      "source_rows": [
+        1067,
+        3467
+      ],
+      "view": "artifacts/jev-reader/global-reserved-source-v1/review-views/13-candidate-family-000484.txt",
+      "max_decomposition_steps": 4,
+      "bytes": 19336
+    }
+  ],
+  "scope": "Protected evaluation only, qualified literal source boundary, not semantic/pretraining isolation. No reference labels displayed to reviewer.",
+  "compute": {
+    "wall_seconds": 4.496871681883931,
+    "cpu_seconds": 4.5135474229999994,
+    "exports": 1
+  }
+}
