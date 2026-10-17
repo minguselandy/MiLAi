@@ -23,7 +23,9 @@ seed-statepositions mostly34partialinsufficient, not40independentcases or improv
 
 LIVE EVALUATION: evaluation-v2/driver.json RUNNING, coordinatorPID1209651, exec1227.
 All12PROBEjobs plus all20modelselectors CLOSED exit0. Devdense and559position preview CLOSED.
-Current reader-dev child1730143 was live atlatest snapshot;34/40stagesclosed. ActualQA RUNNING.
+DevReader/scorer CLOSED; all559positions,433fresh/126reused,1knownlengthfailure. OriginaldevPID1730143
+absent. Reserveddense and364position preview CLOSED (298uniqueReaderinputs,370embeddingtexts).
+Current reader-reserved child1989337 was live atlatest snapshot;38/40stagesclosed. ActualQA RUNNING.
 Probe analysis CLOSED: probe-analysis-v1/report.json, tracked milai-source-selection-v2-probe-results.json.
 All12probe ledger auditsmatch;15672forwards,34625088inputtokens,1901.880wallsec alreadycharged.
 Analysis8.116sec chargedONCE. Source equivalent-view both-accepted counts higher, but authored
@@ -33,9 +35,15 @@ Reloadoriginal reference1=191/255 versus pre-save192 (onechoicechange);other5cho
 Do NOT reusepre-save predictions or claim quantization alone caused theonechange.
 
 RESPONSE REVIEW IN PROGRESS, METHOD MAPPINGS STILL UNOPENED. dev/response-review/annotations.json
-has rows0..26 CLOSED,305unique firstresponses (IDs0..304); ALL27Mu devcasesdone,16twoWiki remain.
-Tracked partialcopy:data/manifests/milai-source-selection-v2-dev-response-annotations.json.
-Continue atrow27, notrow0. Batch13-14,15-16,17-19,20-21,22-23,24,25,26 are saved.
+DEV REVIEW FULLY CLOSED: rows0..42,433unique firstresponses (IDs0..432),559methodpositions.
+Immutable dev/response-review/all43-before-method-mapping.json sealed BEFOREmethodmappings.
+Tracked data/manifests/milai-source-selection-v2-dev-response-annotations.json is complete. DO NOT
+regrade/restartdev. Native score file exists but has NOT been opened; keep ALLmethodmappingsclosed
+until reservedreviewalso complete. Copiesofhelpers now in reserved/response-review; emptyannotations
+initialized and first4completeviews exported: row-53,row-328,row-415,row-671. Continue RESERVED.
+Reserved IDs are native MuDEVrows, NOT ordinal0..27; use label_by_case and source_review_by_source_row.
+Frozen reservedsource judgment: reserved-source-review/all28-before-reference.json. Response IDs
+restart at0 percohort; nevermerge dev/reservedannotations bybare responseID. Samefrozenprotocol.
 Authored batches and append_batch.py in dev/response-review; only explicit author labels appended,
 enum/complete-case coverage checked, no automatic semanticgrader. show_cases.py prints allnew
 bodies/answers and exactbody pointers ONLY to priorfullyreviewedcases; originalstreamviews unchanged.
@@ -55,6 +63,13 @@ withonlyp5 theyalso lacktheme-composer identity. Row25/26Norma ambiguity staysMA
 Firstconfirmedgeneration failure: devresponse198, finish_reason=length, nofinalcontent; recorded as
 schema_or_generation_failure, NOTcorrectabstention, no retry. Response260 also hasnonemptyanswer
 withanswerable=false. Unknownusage reconciliation remains pending; do not assume usage fromfailure.
+Remainingdev batches27-28,29-30,31-32,33-34,35,36-37,38,39-40,41,42 saved. Importantlate cases:
+dev387/391 and423 arequalifiedgrounded/cited answers using PREDECLARED her/his-film attribution,
+notunqualified primarycitation passes; fullselectedchain isalso present. dev347 ispartial1937year,
+notexactdeathdate. dev426/427/428 preserve oppositeco-director comparisonbranches asqualified;
+426also lacksfilm-links incitations. Corecorrectnonminimalstatus/IDstrings retained asvalidschema
+(e.g320/353/360/369), notrewritten; dev403 No.Yes.string ambiguous. Do notturnqualified intoerrors
+by subtractingprimarycounts. All adjudications remainassistant/partialblinding,notindependentgold.
 
 ONE EXPLORATORY CITATION SUPPLEMENT PENDING ALL-METHOD SENSITIVITY AFTER REVIEW:
 dev/response-review/proof-supplements-before-mapping.json, trackeddev-citation-supplementmanifest.

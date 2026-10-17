@@ -1,5 +1,5 @@
 {
-  "status": "FIRST_RESPONSE_REVIEW_IN_PROGRESS",
+  "status": "ALL_DEVELOPMENT_FIRST_RESPONSES_REVIEWED_BEFORE_METHOD_MAPPING",
   "reviewer_is_independent": false,
   "method_mappings_opened": false,
   "created_epoch": 1792255020.0855618,
@@ -31,9 +31,25 @@
     "row-23",
     "row-24",
     "row-25",
-    "row-26"
+    "row-26",
+    "row-27",
+    "row-28",
+    "row-29",
+    "row-30",
+    "row-31",
+    "row-32",
+    "row-33",
+    "row-34",
+    "row-35",
+    "row-36",
+    "row-37",
+    "row-38",
+    "row-39",
+    "row-40",
+    "row-41",
+    "row-42"
   ],
-  "reviewed_unique_responses": 305,
+  "reviewed_unique_responses": 433,
   "full_views_read": [
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/00-row-0.txt",
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/01-row-1.txt",
@@ -61,7 +77,23 @@
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/23-row-23.txt",
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/24-row-24.txt",
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/25-row-25.txt",
-    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/26-row-26.txt"
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/26-row-26.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/27-row-27.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/28-row-28.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/29-row-29.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/30-row-30.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/31-row-31.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/32-row-32.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/33-row-33.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/34-row-34.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/35-row-35.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/36-row-36.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/37-row-37.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/38-row-38.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/39-row-39.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/40-row-40.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/41-row-41.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/42-row-42.txt"
   ],
   "annotations": {
     "response-000000": {
@@ -3215,8 +3247,1323 @@
       "output_contract": "valid",
       "rationale": "Cited p0 describes the American author Norma Fox Mazer but does not establish her as author of the work Norma. A matching given name does not resolve the work or its author’s citizenship; no unique target-country truth is forced for this masked question.",
       "error_kind": "author_vs_given_name_substitution"
+    },
+    "response-000305": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 calls Elias Tahan American and cited p5 calls Piotr Beczała Polish. The explicit national affiliations differ, so No is grounded with both required identities cited."
+    },
+    "response-000306": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 calls Elias Tahan American and cited p5 calls Piotr Beczała Polish. The explicit national affiliations differ, so No is grounded with both required identities cited."
+    },
+    "response-000307": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 calls Elias Tahan American and cited p5 calls Piotr Beczała Polish. The explicit national affiliations differ, so No is grounded with both required identities cited."
+    },
+    "response-000308": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 calls Elias Tahan American and cited p5 calls Piotr Beczała Polish. The explicit national affiliations differ, so No is grounded with both required identities cited."
+    },
+    "response-000309": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 calls Elias Tahan American and cited p5 calls Piotr Beczała Polish. The explicit national affiliations differ, so No is grounded with both required identities cited."
+    },
+    "response-000312": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 calls Elias Tahan American and cited p5 calls Piotr Beczała Polish. The explicit national affiliations differ, so No is grounded with both required identities cited."
+    },
+    "response-000314": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 calls Elias Tahan American and cited p5 calls Piotr Beczała Polish. The explicit national affiliations differ, so No is grounded with both required identities cited."
+    },
+    "response-000310": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks at least one target’s explicit national affiliation. A Polish TV show involving other Piotrs and an American accompanist mentioning Beczała do not establish the target pair’s countries."
+    },
+    "response-000311": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks at least one target’s explicit national affiliation. A Polish TV show involving other Piotrs and an American accompanist mentioning Beczała do not establish the target pair’s countries."
+    },
+    "response-000313": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks at least one target’s explicit national affiliation. A Polish TV show involving other Piotrs and an American accompanist mentioning Beczała do not establish the target pair’s countries."
+    },
+    "response-000315": {
+      "case_ids": [
+        "row-27"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks at least one target’s explicit national affiliation. A Polish TV show involving other Piotrs and an American accompanist mentioning Beczała do not establish the target pair’s countries."
+    },
+    "response-000316": {
+      "case_ids": [
+        "row-28"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p6 identifies William’s father as Granville Proby, 3rd Earl, and cited p1 gives his death as 3 November 1868. Other Earls, the mother’s death and William’s own death are distinct events."
+    },
+    "response-000318": {
+      "case_ids": [
+        "row-28"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p6 identifies William’s father as Granville Proby, 3rd Earl, and cited p1 gives his death as 3 November 1868. Other Earls, the mother’s death and William’s own death are distinct events."
+    },
+    "response-000319": {
+      "case_ids": [
+        "row-28"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p6 identifies William’s father as Granville Proby, 3rd Earl, and cited p1 gives his death as 3 November 1868. Other Earls, the mother’s death and William’s own death are distinct events."
+    },
+    "response-000323": {
+      "case_ids": [
+        "row-28"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p6 identifies William’s father as Granville Proby, 3rd Earl, and cited p1 gives his death as 3 November 1868. Other Earls, the mother’s death and William’s own death are distinct events."
+    },
+    "response-000320": {
+      "case_ids": [
+        "row-28"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "The core date and both cited father/death premises are correct. The extra yes/p1/p6 text repeats status and citations without adding an unsupported factual claim.",
+      "format_note": "Nonminimal answer text is preserved, not normalized. JSON schema and the explicit answerability contract are valid; native string metrics remain unchanged."
+    },
+    "response-000317": {
+      "case_ids": [
+        "row-28"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p6 identifies the father but his death-date passage p1 is absent. John Proby, other fifth Earls, the mother’s death after birth and William’s 1909 death cannot supply Granville’s death date."
+    },
+    "response-000321": {
+      "case_ids": [
+        "row-28"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p6 identifies the father but his death-date passage p1 is absent. John Proby, other fifth Earls, the mother’s death after birth and William’s 1909 death cannot supply Granville’s death date."
+    },
+    "response-000322": {
+      "case_ids": [
+        "row-28"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p6 identifies the father but his death-date passage p1 is absent. John Proby, other fifth Earls, the mother’s death after birth and William’s 1909 death cannot supply Granville’s death date."
+    },
+    "response-000324": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 identifies Mahamaya Prasad Sinha as Indian; cited p3 identifies Vittorio Magnelli as from Italy. The stated national affiliations differ and both target identities are bound."
+    },
+    "response-000325": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 identifies Mahamaya Prasad Sinha as Indian; cited p3 identifies Vittorio Magnelli as from Italy. The stated national affiliations differ and both target identities are bound."
+    },
+    "response-000326": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 identifies Mahamaya Prasad Sinha as Indian; cited p3 identifies Vittorio Magnelli as from Italy. The stated national affiliations differ and both target identities are bound."
+    },
+    "response-000328": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 identifies Mahamaya Prasad Sinha as Indian; cited p3 identifies Vittorio Magnelli as from Italy. The stated national affiliations differ and both target identities are bound."
+    },
+    "response-000329": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 identifies Mahamaya Prasad Sinha as Indian; cited p3 identifies Vittorio Magnelli as from Italy. The stated national affiliations differ and both target identities are bound."
+    },
+    "response-000331": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 identifies Mahamaya Prasad Sinha as Indian; cited p3 identifies Vittorio Magnelli as from Italy. The stated national affiliations differ and both target identities are bound."
+    },
+    "response-000332": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 identifies Mahamaya Prasad Sinha as Indian; cited p3 identifies Vittorio Magnelli as from Italy. The stated national affiliations differ and both target identities are bound."
+    },
+    "response-000333": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 identifies Mahamaya Prasad Sinha as Indian; cited p3 identifies Vittorio Magnelli as from Italy. The stated national affiliations differ and both target identities are bound."
+    },
+    "response-000327": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Mahamaya Prasad Sinha’s profile. Other Prasad/Sinha politicians or an umpire cannot supply his nationality, even when they are described as Indian."
+    },
+    "response-000330": {
+      "case_ids": [
+        "row-29"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Mahamaya Prasad Sinha’s profile. Other Prasad/Sinha politicians or an umpire cannot supply his nationality, even when they are described as Indian."
+    },
+    "response-000336": {
+      "case_ids": [
+        "row-30"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Shirley’s birthplace is explicit, but the basketball player’s profile provides nationality, club and birth date without birthplace. The selected sources cannot decide whether the birth locations match."
+    },
+    "response-000337": {
+      "case_ids": [
+        "row-30"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Shirley’s birthplace is explicit, but the basketball player’s profile provides nationality, club and birth date without birthplace. The selected sources cannot decide whether the birth locations match."
+    },
+    "response-000338": {
+      "case_ids": [
+        "row-30"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Shirley’s birthplace is explicit, but the basketball player’s profile provides nationality, club and birth date without birthplace. The selected sources cannot decide whether the birth locations match."
+    },
+    "response-000334": {
+      "case_ids": [
+        "row-30"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "No may be plausible in the world, but p4’s Qatari nationality/Doha club does not establish birthplace. p7 supplies only Shirley’s birthplace. The snooker namesake and other athletes do not fill the missing basketball-player attribute."
+    },
+    "response-000335": {
+      "case_ids": [
+        "row-30"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "No may be plausible in the world, but p4’s Qatari nationality/Doha club does not establish birthplace. p7 supplies only Shirley’s birthplace. The snooker namesake and other athletes do not fill the missing basketball-player attribute."
+    },
+    "response-000339": {
+      "case_ids": [
+        "row-30"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "No may be plausible in the world, but p4’s Qatari nationality/Doha club does not establish birthplace. p7 supplies only Shirley’s birthplace. The snooker namesake and other athletes do not fill the missing basketball-player attribute."
+    },
+    "response-000340": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p5 binds the requested Louis to his mother Eleonore; cited p1 supplies 16 November 1937. Wife Margaret and other Louis/Louise profiles are not substituted."
+    },
+    "response-000341": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p5 binds the requested Louis to his mother Eleonore; cited p1 supplies 16 November 1937. Wife Margaret and other Louis/Louise profiles are not substituted."
+    },
+    "response-000343": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p5 binds the requested Louis to his mother Eleonore; cited p1 supplies 16 November 1937. Wife Margaret and other Louis/Louise profiles are not substituted."
+    },
+    "response-000344": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p5 binds the requested Louis to his mother Eleonore; cited p1 supplies 16 November 1937. Wife Margaret and other Louis/Louise profiles are not substituted."
+    },
+    "response-000345": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p5 binds the requested Louis to his mother Eleonore; cited p1 supplies 16 November 1937. Wife Margaret and other Louis/Louise profiles are not substituted."
+    },
+    "response-000342": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks Eleonore’s exact death-date passage. The wedding/crash narrative in p5 supplies relative chronology but not the requested full calendar date; other relatives’ dates do not fill it."
+    },
+    "response-000346": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks Eleonore’s exact death-date passage. The wedding/crash narrative in p5 supplies relative chronology but not the requested full calendar date; other relatives’ dates do not fill it."
+    },
+    "response-000348": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks Eleonore’s exact death-date passage. The wedding/crash narrative in p5 supplies relative chronology but not the requested full calendar date; other relatives’ dates do not fill it."
+    },
+    "response-000349": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks Eleonore’s exact death-date passage. The wedding/crash narrative in p5 supplies relative chronology but not the requested full calendar date; other relatives’ dates do not fill it."
+    },
+    "response-000350": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks Eleonore’s exact death-date passage. The wedding/crash narrative in p5 supplies relative chronology but not the requested full calendar date; other relatives’ dates do not fill it."
+    },
+    "response-000347": {
+      "case_ids": [
+        "row-31"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "uncertain",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "1937 is a partial temporal answer drawn from the wedding/crash narrative in p5. The passage dates the wedding and places the mother’s death one day earlier, but does not state the full death date. Preserve this limited inference without crediting a complete date answer or importing the missing p1 date.",
+      "qualification": "Coarse/partial temporal information, not the frozen exact-date target."
+    },
+    "response-000351": {
+      "case_ids": [
+        "row-32"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p3 identifies Ted Gärdestad as the original performer; cited p2 explicitly calls Ted a Swedish singer/songwriter within the biopic discussion. This registered alternative uses the subject’s nationality, not merely the actor’s.",
+      "qualification": "Frozen original-performer interpretation; no assertion about every cover artist."
+    },
+    "response-000352": {
+      "case_ids": [
+        "row-32"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p3 identifies Ted Gärdestad as the original performer; cited p2 explicitly calls Ted a Swedish singer/songwriter within the biopic discussion. This registered alternative uses the subject’s nationality, not merely the actor’s.",
+      "qualification": "Frozen original-performer interpretation; no assertion about every cover artist."
+    },
+    "response-000357": {
+      "case_ids": [
+        "row-32"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p3 identifies Ted Gärdestad as the original performer; cited p2 explicitly calls Ted a Swedish singer/songwriter within the biopic discussion. This registered alternative uses the subject’s nationality, not merely the actor’s.",
+      "qualification": "Frozen original-performer interpretation; no assertion about every cover artist."
+    },
+    "response-000354": {
+      "case_ids": [
+        "row-32"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p3 supplies the original performer and cited p7 directly identifies him as Swedish. Both premises support Sweden under the frozen original-recording interpretation.",
+      "qualification": "Later cover performers are not all assigned the same country."
+    },
+    "response-000355": {
+      "case_ids": [
+        "row-32"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p3 supplies the original performer and cited p7 directly identifies him as Swedish. Both premises support Sweden under the frozen original-recording interpretation.",
+      "qualification": "Later cover performers are not all assigned the same country."
+    },
+    "response-000356": {
+      "case_ids": [
+        "row-32"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p3 supplies the original performer and cited p7 directly identifies him as Swedish. Both premises support Sweden under the frozen original-recording interpretation.",
+      "qualification": "Later cover performers are not all assigned the same country."
+    },
+    "response-000358": {
+      "case_ids": [
+        "row-32"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p3 supplies the original performer and cited p7 directly identifies him as Swedish. Both premises support Sweden under the frozen original-recording interpretation.",
+      "qualification": "Later cover performers are not all assigned the same country."
+    },
+    "response-000359": {
+      "case_ids": [
+        "row-32"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p3 supplies the original performer and cited p7 directly identifies him as Swedish. Both premises support Sweden under the frozen original-recording interpretation.",
+      "qualification": "Later cover performers are not all assigned the same country."
+    },
+    "response-000353": {
+      "case_ids": [
+        "row-32"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "The Sweden core answer and p3/p7 citations are supported for original performer Ted Gärdestad. Extra True/p3/p7 text restates valid fields and is preserved rather than repaired.",
+      "qualification": "Frozen original-performer reading.",
+      "format_note": "Nonminimal status/citation text retained; schema remains valid and native string score is unchanged."
+    },
+    "response-000361": {
+      "case_ids": [
+        "row-33"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p6 and p9 explicitly locate the two named villages in Iran. Extra p0 where cited is unnecessary but does not replace either required target; the claim is same country, not same province."
+    },
+    "response-000362": {
+      "case_ids": [
+        "row-33"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p6 and p9 explicitly locate the two named villages in Iran. Extra p0 where cited is unnecessary but does not replace either required target; the claim is same country, not same province."
+    },
+    "response-000365": {
+      "case_ids": [
+        "row-33"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p6 and p9 explicitly locate the two named villages in Iran. Extra p0 where cited is unnecessary but does not replace either required target; the claim is same country, not same province."
+    },
+    "response-000367": {
+      "case_ids": [
+        "row-33"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p6 and p9 explicitly locate the two named villages in Iran. Extra p0 where cited is unnecessary but does not replace either required target; the claim is same country, not same province."
+    },
+    "response-000360": {
+      "case_ids": [
+        "row-33"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "The Yes core answer and p6/p9 country premises are correct. The added sufficiency/citation sentence repeats supported fields without introducing a new factual claim.",
+      "format_note": "Nonminimal answer string retained; no output normalization or invented schema failure."
+    },
+    "response-000363": {
+      "case_ids": [
+        "row-33"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Mitangun’s country. Other Iranian villages and Kaluvar’s entry cannot prove that missing target’s location; empty abstention is correct."
+    },
+    "response-000364": {
+      "case_ids": [
+        "row-33"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Mitangun’s country. Other Iranian villages and Kaluvar’s entry cannot prove that missing target’s location; empty abstention is correct."
+    },
+    "response-000366": {
+      "case_ids": [
+        "row-33"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Mitangun’s country. Other Iranian villages and Kaluvar’s entry cannot prove that missing target’s location; empty abstention is correct."
+    },
+    "response-000368": {
+      "case_ids": [
+        "row-33"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Mitangun’s country. Other Iranian villages and Kaluvar’s entry cannot prove that missing target’s location; empty abstention is correct."
+    },
+    "response-000370": {
+      "case_ids": [
+        "row-34"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 identifies the exact film’s director as Tali Avrahami and cited p8 explicitly calls her Israeli. No nationality is inferred from religion, film language or audience."
+    },
+    "response-000371": {
+      "case_ids": [
+        "row-34"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 identifies the exact film’s director as Tali Avrahami and cited p8 explicitly calls her Israeli. No nationality is inferred from religion, film language or audience."
+    },
+    "response-000372": {
+      "case_ids": [
+        "row-34"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 identifies the exact film’s director as Tali Avrahami and cited p8 explicitly calls her Israeli. No nationality is inferred from religion, film language or audience."
+    },
+    "response-000374": {
+      "case_ids": [
+        "row-34"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 identifies the exact film’s director as Tali Avrahami and cited p8 explicitly calls her Israeli. No nationality is inferred from religion, film language or audience."
+    },
+    "response-000375": {
+      "case_ids": [
+        "row-34"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 identifies the exact film’s director as Tali Avrahami and cited p8 explicitly calls her Israeli. No nationality is inferred from religion, film language or audience."
+    },
+    "response-000369": {
+      "case_ids": [
+        "row-34"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Israeli is supported by the cited film-director and person-nationality premises p7/p8. The extra yes/citation text is consistent and left unchanged.",
+      "format_note": "Nonminimal answer string preserved; schema remains valid."
+    },
+    "response-000373": {
+      "case_ids": [
+        "row-34"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The film identifies Tali Avrahami, but her nationality profile is absent. Other Israeli cultural figures or similarly named Angels films cannot supply her nationality."
+    },
+    "response-000376": {
+      "case_ids": [
+        "row-34"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Tali Avrahami’s Israeli profile is present but the Angels in White director link is absent. Jacob Berger’s different Angels film does not connect the requested title to her."
+    },
+    "response-000382": {
+      "case_ids": [
+        "row-35"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "p1 states both Ed Hansen’s American affiliation and his direction of Bikini Carwash; p6 identifies Roar’s director Kamal Sadanah and p0 calls him Indian. All necessary relations are delivered/cited; p7 is redundant but consistent."
+    },
+    "response-000377": {
+      "case_ids": [
+        "row-35"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "The No core answer is supported by p0/p1/p6, with p7 also cited. Extra sufficient/ID text restates supported fields and does not replace the person-nationality evidence.",
+      "format_note": "Nonminimal answer text retained; schema valid and native string metrics unchanged."
+    },
+    "response-000380": {
+      "case_ids": [
+        "row-35"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "No matches the intended comparison, but Kamal Sadanah’s personal nationality passage p0 is absent. p6 identifies an Indian film, not an Indian director; citing the film cannot fill that person-attribute gap."
+    },
+    "response-000383": {
+      "case_ids": [
+        "row-35"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "No matches the intended comparison, but Kamal Sadanah’s personal nationality passage p0 is absent. p6 identifies an Indian film, not an Indian director; citing the film cannot fill that person-attribute gap."
+    },
+    "response-000378": {
+      "case_ids": [
+        "row-35"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the Bikini Carwash director/country chain and does not supply both named directors’ nationalities. Other director biographies are not substitutes."
+    },
+    "response-000379": {
+      "case_ids": [
+        "row-35"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the Bikini Carwash director/country chain and does not supply both named directors’ nationalities. Other director biographies are not substitutes."
+    },
+    "response-000381": {
+      "case_ids": [
+        "row-35"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected sources identify both directors and Kamal’s Indian affiliation, but do not state Ed Hansen’s country. Jason Moore’s American nationality belongs to another director; empty abstention is correct."
+    },
+    "response-000385": {
+      "case_ids": [
+        "row-36"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "p3 supplies Bock’s explicit direction credit, p2 her Canadian affiliation, and p7 both Weber’s direction and French affiliation. All required premises are cited; p4 is redundant but consistent."
+    },
+    "response-000389": {
+      "case_ids": [
+        "row-36"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "p3 supplies Bock’s explicit direction credit, p2 her Canadian affiliation, and p7 both Weber’s direction and French affiliation. All required premises are cited; p4 is redundant but consistent."
+    },
+    "response-000387": {
+      "case_ids": [
+        "row-36"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "The No core answer is supported by the selected full chain, including p3. The cited p2/p7 route instead uses the pre-registered qualified reading of her short film as director attribution. Preserve it as a qualified grounded/cited response, separate from an unqualified full-credit citation pass.",
+      "core_answer_correct": true,
+      "qualification": "Pre-frozen qualified alternative proof, not a newly invented route; explicit direction passage p3 is delivered but uncited."
+    },
+    "response-000391": {
+      "case_ids": [
+        "row-36"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "The No core answer is supported by the selected full chain, including p3. The cited p2/p7 route instead uses the pre-registered qualified reading of her short film as director attribution. Preserve it as a qualified grounded/cited response, separate from an unqualified full-credit citation pass.",
+      "core_answer_correct": true,
+      "qualification": "Pre-frozen qualified alternative proof, not a newly invented route; explicit direction passage p3 is delivered but uncited."
+    },
+    "response-000384": {
+      "case_ids": [
+        "row-36"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset supplies Bock’s direction credit but not her personal Canadian affiliation. Canadian film origin cannot replace her nationality; empty abstention is correct."
+    },
+    "response-000386": {
+      "case_ids": [
+        "row-36"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the Cursed for Gold director binding p7. A French writer’s profile without that film link, or other directors, cannot complete the comparison."
+    },
+    "response-000388": {
+      "case_ids": [
+        "row-36"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the Cursed for Gold director binding p7. A French writer’s profile without that film link, or other directors, cannot complete the comparison."
+    },
+    "response-000390": {
+      "case_ids": [
+        "row-36"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the Cursed for Gold director binding p7. A French writer’s profile without that film link, or other directors, cannot complete the comparison."
+    },
+    "response-000392": {
+      "case_ids": [
+        "row-37"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "p4 binds Gizmo to Howard Smith, p8 gives his 1936 birth, and p5 supplies Nirad Mohapatra’s 1947 birth plus Maya Miriga credit. 1936 precedes 1947. The separately cited Maya film paragraph is redundant, not required."
+    },
+    "response-000395": {
+      "case_ids": [
+        "row-37"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "p4 binds Gizmo to Howard Smith, p8 gives his 1936 birth, and p5 supplies Nirad Mohapatra’s 1947 birth plus Maya Miriga credit. 1936 precedes 1947. The separately cited Maya film paragraph is redundant, not required."
+    },
+    "response-000396": {
+      "case_ids": [
+        "row-37"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "p4 binds Gizmo to Howard Smith, p8 gives his 1936 birth, and p5 supplies Nirad Mohapatra’s 1947 birth plus Maya Miriga credit. 1936 precedes 1947. The separately cited Maya film paragraph is redundant, not required."
+    },
+    "response-000393": {
+      "case_ids": [
+        "row-37"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Both personal dates may be present, but no selected source links Howard Smith to Gizmo. The film-to-director premise cannot be borrowed from elsewhere."
+    },
+    "response-000394": {
+      "case_ids": [
+        "row-37"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The film/director identities and Mohapatra date are available, but Howard Smith’s birth date is absent. Other directors’ dates or unspecified birth information cannot complete the ordering."
+    },
+    "response-000397": {
+      "case_ids": [
+        "row-37"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The film/director identities and Mohapatra date are available, but Howard Smith’s birth date is absent. Other directors’ dates or unspecified birth information cannot complete the ordering."
+    },
+    "response-000398": {
+      "case_ids": [
+        "row-37"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The response substitutes Yolonda Ross’s date for the unbound Gizmo director and cites p0/p5. No source links Ross to Gizmo, and the actual target comparison is Howard Smith 1936 versus Mohapatra 1947, so Maya Miriga is the wrong film."
+    },
+    "response-000399": {
+      "case_ids": [
+        "row-38"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "p7 supplies Gerwig’s American affiliation and Lady Bird credit, p2 identifies Pink Wall’s director Cullen, and p8 calls him Welsh. Both personal affiliations are cited; p3 is consistent but redundant."
+    },
+    "response-000402": {
+      "case_ids": [
+        "row-38"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "p7 supplies Gerwig’s American affiliation and Lady Bird credit, p2 identifies Pink Wall’s director Cullen, and p8 calls him Welsh. Both personal affiliations are cited; p3 is consistent but redundant."
+    },
+    "response-000400": {
+      "case_ids": [
+        "row-38"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The Pink Wall director/country side is missing. Gerwig and unrelated directors do not decide the two-person comparison."
+    },
+    "response-000401": {
+      "case_ids": [
+        "row-38"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "No matches the intended comparison, but Cullen’s personal nationality p8 is absent. Pink Wall being a British film does not establish Cullen’s country; Gerwig’s complete side cannot fill the other attribute."
+    },
+    "response-000404": {
+      "case_ids": [
+        "row-38"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The citations give the two films’ origins and director names but not the directors’ nationalities. Film-country descriptions cannot substitute for both personal-country links."
+    },
+    "response-000403": {
+      "case_ids": [
+        "row-38"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The answer string contains both No and Yes without labels; it could be a No answer plus a Yes sufficiency marker, but is not normalized. Either way the cited film origins do not establish the directors’ countries.",
+      "format_note": "Raw No. Yes. p2, p3. string preserved; schema valid, semantic answer text ambiguous."
+    },
+    "response-000409": {
+      "case_ids": [
+        "row-39"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies the director of the Static Cling special. Creating the original Rocko series is not that specific directing credit; some subsets also lack Juhn’s personal nationality. Empty abstention is correct."
+    },
+    "response-000410": {
+      "case_ids": [
+        "row-39"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies the director of the Static Cling special. Creating the original Rocko series is not that specific directing credit; some subsets also lack Juhn’s personal nationality. Empty abstention is correct."
+    },
+    "response-000412": {
+      "case_ids": [
+        "row-39"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies the director of the Static Cling special. Creating the original Rocko series is not that specific directing credit; some subsets also lack Juhn’s personal nationality. Empty abstention is correct."
+    },
+    "response-000407": {
+      "case_ids": [
+        "row-39"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The sources identify Juhn as South Korean and Joe Murray as American, but do not state that Murray directed the Static Cling special. No is plausible under that unproven role substitution, not a source-complete comparison."
+    },
+    "response-000408": {
+      "case_ids": [
+        "row-39"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The sources identify Juhn as South Korean and Joe Murray as American, but do not state that Murray directed the Static Cling special. No is plausible under that unproven role substitution, not a source-complete comparison."
+    },
+    "response-000405": {
+      "case_ids": [
+        "row-39"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The response assumes Murray’s special-director role and uses One Step’s South Korean film origin without Juhn’s personal-nationality passage. Both missing links prevent support for the comparison.",
+      "format_note": "Any extra sufficiency/ID wording is preserved; schema remains valid but sufficiency is not established."
+    },
+    "response-000406": {
+      "case_ids": [
+        "row-39"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The response assumes Murray’s special-director role and uses One Step’s South Korean film origin without Juhn’s personal-nationality passage. Both missing links prevent support for the comparison.",
+      "format_note": "Any extra sufficiency/ID wording is preserved; schema remains valid but sufficiency is not established."
+    },
+    "response-000411": {
+      "case_ids": [
+        "row-39"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The cited unrelated director (Peter Levin or Ian Barry) is never linked to Static Cling. The Juhn/One Step side cannot determine the other director’s identity and nationality.",
+      "error_kind": "unrelated_director_substitution"
+    },
+    "response-000413": {
+      "case_ids": [
+        "row-39"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The cited unrelated director (Peter Levin or Ian Barry) is never linked to Static Cling. The Juhn/One Step side cannot determine the other director’s identity and nationality.",
+      "error_kind": "unrelated_director_substitution"
+    },
+    "response-000415": {
+      "case_ids": [
+        "row-40"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "All four cited links are present: p3 names Larreta as the first film’s director, p5 calls him Uruguayan, p1 names Kroll as Menno’s Mind director, and p0 calls him American. The Argentine film label is not substituted for Larreta’s country."
+    },
+    "response-000417": {
+      "case_ids": [
+        "row-40"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "All four cited links are present: p3 names Larreta as the first film’s director, p5 calls him Uruguayan, p1 names Kroll as Menno’s Mind director, and p0 calls him American. The Argentine film label is not substituted for Larreta’s country."
+    },
+    "response-000414": {
+      "case_ids": [
+        "row-40"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not supply both film/director/personal-nationality chains, particularly Larreta’s nationality. Other directors or a film’s Argentine origin cannot fill the missing person attribute."
+    },
+    "response-000416": {
+      "case_ids": [
+        "row-40"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not supply both film/director/personal-nationality chains, particularly Larreta’s nationality. Other directors or a film’s Argentine origin cannot fill the missing person attribute."
+    },
+    "response-000418": {
+      "case_ids": [
+        "row-40"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not supply both film/director/personal-nationality chains, particularly Larreta’s nationality. Other directors or a film’s Argentine origin cannot fill the missing person attribute."
+    },
+    "response-000419": {
+      "case_ids": [
+        "row-40"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not supply both film/director/personal-nationality chains, particularly Larreta’s nationality. Other directors or a film’s Argentine origin cannot fill the missing person attribute."
+    },
+    "response-000420": {
+      "case_ids": [
+        "row-40"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not supply both film/director/personal-nationality chains, particularly Larreta’s nationality. Other directors or a film’s Argentine origin cannot fill the missing person attribute."
+    },
+    "response-000421": {
+      "case_ids": [
+        "row-40"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not supply both film/director/personal-nationality chains, particularly Larreta’s nationality. Other directors or a film’s Argentine origin cannot fill the missing person attribute."
+    },
+    "response-000422": {
+      "case_ids": [
+        "row-41"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "All four cited relations are explicit: Choi directed the biopic and is South Korean, Niermans directed Casanova and is French. The historical subject Na and his earlier films are not substituted."
+    },
+    "response-000423": {
+      "case_ids": [
+        "row-41"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "The selected full chain supports No. The cited p0/p2/p9 route uses the pre-frozen qualified his-film attribution for Niermans rather than citing explicit direction p3. Preserve this as qualified grounded/cited support, not an unqualified citation pass.",
+      "core_answer_correct": true,
+      "qualification": "Pre-registered qualified short proof; the explicit credit is delivered but uncited."
+    },
+    "response-000424": {
+      "case_ids": [
+        "row-41"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "No matches the target comparison but Choi’s personal nationality p0 is absent. A South Korean biopic or the historical subject’s Korean films do not establish the biopic director’s nationality.",
+      "format_note": "Extra sufficient/ID text is retained; schema valid, evidence sufficiency not established."
+    },
+    "response-000425": {
+      "case_ids": [
+        "row-41"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset contains national profiles but lacks the biopic-to-Choi directing link p9. The historical Na-directed Ok-nyeo film is a different work and cannot bind Choi to the requested biopic."
+    },
+    "response-000427": {
+      "case_ids": [
+        "row-42"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Royal Journey is supported when comparing Bairstow’s 1985 death with Ravi’s 2010 death; the cited sources bind both films and those people. Royal Journey has multiple directors, including Blais with the reverse ordering, so this is a qualified branch answer, not a unique unconditional result.",
+      "qualification": "Frozen Bairstow comparison only; no earliest/latest/all-directors aggregation rule is supplied."
+    },
+    "response-000428": {
+      "case_ids": [
+        "row-42"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Royal Journey is supported when comparing Bairstow’s 1985 death with Ravi’s 2010 death; the cited sources bind both films and those people. Royal Journey has multiple directors, including Blais with the reverse ordering, so this is a qualified branch answer, not a unique unconditional result.",
+      "qualification": "Frozen Bairstow comparison only; no earliest/latest/all-directors aggregation rule is supplied."
+    },
+    "response-000426": {
+      "case_ids": [
+        "row-42"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "En Swasa Kaatre is a valid conditional answer for Ravi 2010 versus Blais 2012, and the selected p0/p5 bind the films. The response cites only p4/p7 dates, omitting the explicit film/director bindings, especially En Swasa Kaatre→Ravi. The alternative value is not labelled false.",
+      "qualification": "Frozen Blais comparison branch; primary case remains masked."
+    },
+    "response-000429": {
+      "case_ids": [
+        "row-42"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a required film/director link or Ravi’s death date, and the question does not resolve the multiple-director choice. Empty abstention is justified without selecting an unprovided aggregation rule."
+    },
+    "response-000430": {
+      "case_ids": [
+        "row-42"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a required film/director link or Ravi’s death date, and the question does not resolve the multiple-director choice. Empty abstention is justified without selecting an unprovided aggregation rule."
+    },
+    "response-000431": {
+      "case_ids": [
+        "row-42"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a required film/director link or Ravi’s death date, and the question does not resolve the multiple-director choice. Empty abstention is justified without selecting an unprovided aggregation rule."
+    },
+    "response-000432": {
+      "case_ids": [
+        "row-42"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a required film/director link or Ravi’s death date, and the question does not resolve the multiple-director choice. Empty abstention is justified without selecting an unprovided aggregation rule."
     }
   },
   "scope": "All complete first final answers and delivered texts in this case read before method mapping. Source qualifications preserved; no automatic semantic grading or native-answer rewrite.",
-  "last_updated_epoch": 1792257850.6572924
+  "last_updated_epoch": 1792259168.5941231,
+  "review_complete_epoch": 1792259168.6328573,
+  "reviewed_method_positions": 559,
+  "unique_first_responses": 433,
+  "reused_method_positions": 126,
+  "preserved_known_failed_calls": 1
 }

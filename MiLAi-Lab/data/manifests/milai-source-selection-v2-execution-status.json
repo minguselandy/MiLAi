@@ -1,5 +1,5 @@
 {
-  "status": "TRAINING_AND_PROBES_CLOSED_ACTUAL_QA_AND_RESPONSE_REVIEW_RUNNING",
+  "status": "DEVELOPMENT_QA_AND_BLIND_RESPONSE_REVIEW_CLOSED_RESERVED_QA_RUNNING",
   "goal_complete": false,
   "objective": "docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md",
   "last_goal_turn_classification": "progress",
@@ -62,7 +62,7 @@
   "evaluation_exec_session": 1227,
   "evaluation_driver": "artifacts/jev-reader/selection-v2/evaluation-v2/driver.json",
   "training_completed_jobs": 6,
-  "last_observed_epoch": 1792257850.6972957,
+  "last_observed_epoch": 1792259355.9947789,
   "training_active_updates": null,
   "previous_goal_turn_classification": "progress",
   "first_seed_pair": "data/manifests/milai-source-selection-v2-first-seed-pair.json",
@@ -132,11 +132,11 @@
   },
   "learning_analysis": "data/manifests/milai-source-selection-v2-learning-results.json",
   "evaluation_active": {
-    "stage": "reader-dev",
-    "pid": 1730143,
+    "stage": "reader-reserved",
+    "pid": 1989337,
     "physical_gpus": null
   },
-  "evaluation_completed_stages": 34,
+  "evaluation_completed_stages": 38,
   "evaluation_completed_stage_names": [
     "presentation-reference_seed0",
     "evidence-reference_seed0",
@@ -171,29 +171,53 @@
     "select-dev-prior128_seed2",
     "select-reserved-prior128_seed2",
     "dense-dev",
-    "preview-dev"
+    "preview-dev",
+    "reader-dev",
+    "score-dev",
+    "dense-reserved",
+    "preview-reserved"
   ],
   "evaluation_probe_jobs_completed": 12,
   "probe_analysis": "data/manifests/milai-source-selection-v2-probe-results.json",
   "development_response_review": {
-    "cases": 27,
-    "unique_responses": 305,
+    "status": "ALL_DEVELOPMENT_FIRST_RESPONSES_REVIEWED_BEFORE_METHOD_MAPPING",
+    "cases": 43,
+    "unique_responses": 433,
     "method_mappings_opened": false,
-    "path": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/response-review/annotations.json"
+    "snapshot": "artifacts/jev-reader/selection-v2/evaluation-v2/dev/response-review/all43-before-method-mapping.json"
   },
   "development_reader_progress": {
-    "status": "RUNNING",
+    "status": "COMPLETED",
     "phase": "predict",
     "planned": 559,
-    "completed": 381,
+    "completed": 559,
     "known_failures": 1,
-    "fresh_reader_attempts": 328,
-    "reused_reader_outputs": 53,
-    "known_failed_reader_calls": 1
+    "fresh_reader_attempts": 433,
+    "reused_reader_outputs": 126,
+    "known_failed_reader_calls": 1,
+    "actual_wall_seconds": 4159.596478777938,
+    "actual_cpu_seconds": 8.103730309,
+    "unique_reader_inputs": 433
   },
   "exploratory_citation_sensitivity": {
     "status": "PENDING_ALL_METHOD_REPORT_AFTER_REVIEW",
     "source": "data/manifests/milai-source-selection-v2-dev-citation-supplement.json",
     "frozen_primary_labels_changed": false
+  },
+  "reserved_reader_progress": {
+    "status": "RUNNING",
+    "phase": "predict",
+    "planned": 364,
+    "completed": 53,
+    "known_failures": 1,
+    "fresh_reader_attempts": 40,
+    "reused_reader_outputs": 13,
+    "known_failed_reader_calls": 1
+  },
+  "reserved_response_review": {
+    "cases": 0,
+    "unique_responses": 0,
+    "method_mappings_opened": false,
+    "path": "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/response-review/annotations.json"
   }
 }
