@@ -31,7 +31,10 @@ Dense377uniqueinputs/42325tokens/max379,24batch16requests expected but0sentsofar
 Offlineanalysis-progress-1 isINTERIM2jobs; bothoriginalledgerdeltas match. Do notrerun/rebill.
 14targetedtests inclofficialscorer, Ruff/mypy andDAG/toolsboundaryPASS; trainingimportsnotedited.
 Reservedsource protocolmilai-global-reserved-source-v1 fixes14of49groups6/4/4,28rows bymetadata;
-NOnewbody/answerdisplay. Completecurrentliteralboundarycheck andfreezemethodbeforeviewing,
+NOnewbody/answerdisplay. Currentliteralcheck CLOSED0conflicts vs5454train119dev229cal
+and864registered/currentseen rows; method539e3ad3 fixed. Sourceviewing isnowallowed for
+evaluation reviewonly, afterexplicitdatasetexport. No protectedrawfile goesintotrain.
+CommonQAprepare nowrequires explicitdecisions/sources/output --budget --scope (no devscaffold).
 nevergradient/tuning. Futureevaluateall12models,notanoutcome-selectedwinner. Max756Readerpositions.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
