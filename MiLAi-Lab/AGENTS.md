@@ -22,8 +22,8 @@ supported-pool acceptance deltas+6/-11/+11 of185; insufficient partial+18/+11/+5
 seed-statepositions mostly34partialinsufficient, not40independentcases or improvedQA.
 
 LIVE EVALUATION: evaluation-v2/driver.json RUNNING, coordinatorPID1209651, exec1227.
-First12stages all3reference models presentation/evidence/devselect/reservedselect CLOSED exit0.
-This is6/12PROBEjobs, not all12probes. Current presentation-source_seed0 child1641673 onGPU2
+First16stages all3reference models plus source_seed0 presentation/evidence/devselect/reservedselect
+CLOSED exit0. This is8/12PROBEjobs, not all12probes. Current presentation-source_seed1 child1665499 onGPU2
 was live atlatest snapshot. Analyze probes only when both probe runs for all6models are COMPLETED.
 Use driver.json for laterstage/PID.40serialstages, frozenimports215c84da; do NOT start second driver.
 Training and evaluation data/modelrecipe remain frozen. No tuning, retries, services oroldcohortresumes.
