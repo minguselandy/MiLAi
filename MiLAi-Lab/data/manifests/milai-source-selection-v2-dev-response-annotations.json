@@ -1,0 +1,1596 @@
+{
+  "status": "FIRST_RESPONSE_REVIEW_IN_PROGRESS",
+  "reviewer_is_independent": false,
+  "method_mappings_opened": false,
+  "created_epoch": 1792255020.0855618,
+  "protocol": "data/manifests/milai-source-selection-v2-response-review-protocol.json",
+  "reviewed_cases": [
+    "row-0",
+    "row-1",
+    "row-2",
+    "row-3",
+    "row-4",
+    "row-5",
+    "row-6",
+    "row-7",
+    "row-8",
+    "row-9",
+    "row-10",
+    "row-11",
+    "row-12"
+  ],
+  "reviewed_unique_responses": 149,
+  "full_views_read": [
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/00-row-0.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/01-row-1.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/02-row-2.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/03-row-3.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/04-row-4.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/05-row-5.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/06-row-6.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/07-row-7.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/08-row-8.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/09-row-9.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/10-row-10.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/11-row-11.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/12-row-12.txt"
+  ],
+  "annotations": {
+    "response-000000": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000001": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000002": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000003": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000004": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000005": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000007": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000008": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000010": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000011": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p18 explicitly gives Arista Records for the named 1980 compilation and identifies Lou Reed/Velvet Underground context. Correct under the frozen compilation-release qualification; the short answer does not assert an exclusive or current artist contract.",
+      "qualification": "Frozen source-qualified compilation-label reading, not an unqualified lifelong-label fact."
+    },
+    "response-000006": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual selected subset lacks the named compilation and a binding to its performer/label. Other artists and record labels cannot supply the missing relation. Empty-answer abstention is correct for this subset, though full-pool task success is separate."
+    },
+    "response-000009": {
+      "case_ids": [
+        "row-0"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual selected subset lacks the named compilation and a binding to its performer/label. Other artists and record labels cannot supply the missing relation. Empty-answer abstention is correct for this subset, though full-pool task success is separate."
+    },
+    "response-000012": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000013": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000014": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000015": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000016": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000018": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000019": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000020": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000022": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000023": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Delivered and cited p12 explicitly gives Arista Records for the named 1980 compilation and its performers. Correct under the frozen release-association interpretation, without an exclusive/current contract claim.",
+      "qualification": "Frozen source-qualified compilation-label reading."
+    },
+    "response-000017": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset has no named compilation or binding performer/label relation. Labels of unrelated artists do not answer this question; empty abstention is correct for the subset."
+    },
+    "response-000021": {
+      "case_ids": [
+        "row-1"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset has no named compilation or binding performer/label relation. Labels of unrelated artists do not answer this question; empty abstention is correct for the subset."
+    },
+    "response-000027": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p10 establishes Spectre as having the wider UK release; cited p13 supplies 374 IMAX screens in the US/Canada opening-weekend scope. Both necessary links are delivered and cited."
+    },
+    "response-000035": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p10 establishes Spectre as having the wider UK release; cited p13 supplies 374 IMAX screens in the US/Canada opening-weekend scope. Both necessary links are delivered and cited."
+    },
+    "response-000025": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the complete UK-comparison-to-North-American-IMAX chain. Other films, Chinese screens, UK revenues and all-format screen counts cannot supply the missing requested scope."
+    },
+    "response-000029": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the complete UK-comparison-to-North-American-IMAX chain. Other films, Chinese screens, UK revenues and all-format screen counts cannot supply the missing requested scope."
+    },
+    "response-000031": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the complete UK-comparison-to-North-American-IMAX chain. Other films, Chinese screens, UK revenues and all-format screen counts cannot supply the missing requested scope."
+    },
+    "response-000034": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the complete UK-comparison-to-North-American-IMAX chain. Other films, Chinese screens, UK revenues and all-format screen counts cannot supply the missing requested scope."
+    },
+    "response-000024": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "374 is the correct core count and p13 states that value for Spectre, but the actual subset does not include the UK wider-release comparison p10. Reviews against Skyfall or unrelated market counts do not bind the question condition. Citing p13 alone leaves that necessary link unsupported."
+    },
+    "response-000026": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "374 is the correct core count and p13 states that value for Spectre, but the actual subset does not include the UK wider-release comparison p10. Reviews against Skyfall or unrelated market counts do not bind the question condition. Citing p13 alone leaves that necessary link unsupported."
+    },
+    "response-000032": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "374 is the correct core count and p13 states that value for Spectre, but the actual subset does not include the UK wider-release comparison p10. Reviews against Skyfall or unrelated market counts do not bind the question condition. Citing p13 alone leaves that necessary link unsupported."
+    },
+    "response-000033": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "374 is the correct core count and p13 states that value for Spectre, but the actual subset does not include the UK wider-release comparison p10. Reviews against Skyfall or unrelated market counts do not bind the question condition. Citing p13 alone leaves that necessary link unsupported."
+    },
+    "response-000030": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The core value 374 matches the target, but p13 does not establish the wider-UK-release condition; p2/p14 are review comparisons, not release breadth. The extra true/p13 text does not repair missing evidence.",
+      "format_note": "The answer string contains redundant status/citation text. JSON schema is valid; preserve this defect without inventing a schema failure."
+    },
+    "response-000028": {
+      "case_ids": [
+        "row-2"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "400 in p1 is the general US/Canada theatrical release of My Hero Academia, not Spectre IMAX screens. The subset also lacks the wider-than-Skyfall UK condition. Its asserted sufficiency and p1 citation do not support the requested answer.",
+      "format_note": "Redundant sufficient/p1 text remains in the answer string; schema itself is valid."
+    },
+    "response-000036": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset does not supply Spectre’s US/Canada IMAX count. UK release/gross, Chinese IMAX counts and other films cannot fill that metric. Empty abstention is correct."
+    },
+    "response-000037": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset does not supply Spectre’s US/Canada IMAX count. UK release/gross, Chinese IMAX counts and other films cannot fill that metric. Empty abstention is correct."
+    },
+    "response-000040": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset does not supply Spectre’s US/Canada IMAX count. UK release/gross, Chinese IMAX counts and other films cannot fill that metric. Empty abstention is correct."
+    },
+    "response-000041": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset does not supply Spectre’s US/Canada IMAX count. UK release/gross, Chinese IMAX counts and other films cannot fill that metric. Empty abstention is correct."
+    },
+    "response-000043": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset does not supply Spectre’s US/Canada IMAX count. UK release/gross, Chinese IMAX counts and other films cannot fill that metric. Empty abstention is correct."
+    },
+    "response-000044": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset does not supply Spectre’s US/Canada IMAX count. UK release/gross, Chinese IMAX counts and other films cannot fill that metric. Empty abstention is correct."
+    },
+    "response-000045": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset does not supply Spectre’s US/Canada IMAX count. UK release/gross, Chinese IMAX counts and other films cannot fill that metric. Empty abstention is correct."
+    },
+    "response-000047": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset does not supply Spectre’s US/Canada IMAX count. UK release/gross, Chinese IMAX counts and other films cannot fill that metric. Empty abstention is correct."
+    },
+    "response-000038": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected material identifies Spectre via p8 but lacks its US/Canada IMAX count. Empty abstention is correct; the contract does not require an empty citation array when abstaining.",
+      "citation_note": "p8 is a relevant partial identity source; it is not presented as a positive numerical answer proof."
+    },
+    "response-000046": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected material identifies Spectre via p8 but lacks its US/Canada IMAX count. Empty abstention is correct; the contract does not require an empty citation array when abstaining.",
+      "citation_note": "p8 is a relevant partial identity source; it is not presented as a positive numerical answer proof."
+    },
+    "response-000039": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "388 in cited p2 belongs to Fantastic Beasts, not to the film identified by the wider-UK-than-Skyfall condition. The necessary Spectre count is absent."
+    },
+    "response-000042": {
+      "case_ids": [
+        "row-3"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "400 in cited p15 counts My Hero Academia general theaters, not Spectre IMAX screens. Both film identity and metric type are wrong for the requested answer."
+    },
+    "response-000048": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000049": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000050": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000051": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000052": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000053": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000054": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000055": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000056": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000057": {
+      "case_ids": [
+        "row-4"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered materials never identify the Niki FM performers or their formation. Radio-station dates, FM computers and people named Niki are unrelated; every reviewed empty abstention is correct for its subset."
+    },
+    "response-000058": {
+      "case_ids": [
+        "row-5"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p15 identifies Niki FM as a Hawthorne Heights song and cited p1 explicitly dates the band formation to 2001. Both links are delivered and the song’s 2005 radio release is not confused with formation."
+    },
+    "response-000061": {
+      "case_ids": [
+        "row-5"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p15 identifies Niki FM as a Hawthorne Heights song and cited p1 explicitly dates the band formation to 2001. Both links are delivered and the song’s 2005 radio release is not confused with formation."
+    },
+    "response-000062": {
+      "case_ids": [
+        "row-5"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p15 identifies Niki FM as a Hawthorne Heights song and cited p1 explicitly dates the band formation to 2001. Both links are delivered and the song’s 2005 radio release is not confused with formation."
+    },
+    "response-000063": {
+      "case_ids": [
+        "row-5"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p15 identifies Niki FM as a Hawthorne Heights song and cited p1 explicitly dates the band formation to 2001. Both links are delivered and the song’s 2005 radio release is not confused with formation."
+    },
+    "response-000064": {
+      "case_ids": [
+        "row-5"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p15 identifies Niki FM as a Hawthorne Heights song and cited p1 explicitly dates the band formation to 2001. Both links are delivered and the song’s 2005 radio release is not confused with formation."
+    },
+    "response-000059": {
+      "case_ids": [
+        "row-5"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p1 gives Hawthorne Heights formation in 2001, but no delivered source connects that band to Niki FM. A band date alone does not satisfy the question’s performer condition."
+    },
+    "response-000060": {
+      "case_ids": [
+        "row-5"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p15 identifies the band and gives a 2005 song release, but the formation-year paragraph p1 is absent. The unrelated FM/radio dates cannot supply formation; empty abstention is correct."
+    },
+    "response-000065": {
+      "case_ids": [
+        "row-5"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p15 identifies the band and gives a 2005 song release, but the formation-year paragraph p1 is absent. The unrelated FM/radio dates cannot supply formation; empty abstention is correct."
+    },
+    "response-000066": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000067": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000068": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000069": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000070": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000071": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000072": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000073": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000074": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000075": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000076": {
+      "case_ids": [
+        "row-6"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies a bordering-county relation for the requested Warren Township. Some also lack its identity or contain competing homonymous townships. Empty abstention is justified; the full-pool masked status remains excluded from primary task scoring.",
+      "citation_note": "Responses69/70/72 cite relevant partial township identities while abstaining; no empty-citation requirement is imposed."
+    },
+    "response-000077": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000078": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000079": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000080": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000081": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000082": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000083": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000084": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000085": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000086": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000087": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000088": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000089": {
+      "case_ids": [
+        "row-7"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered material identifies the relevant Warren Township or its county. Borders of unrelated countries, districts, towns and parks do not supply the requested county adjacency. Each empty abstention is correct without importing information from the other variant."
+    },
+    "response-000090": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000091": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000092": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000093": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000094": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000095": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000096": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000097": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000098": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000099": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000100": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000101": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000102": {
+      "case_ids": [
+        "row-8"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "None of the delivered subsets states Megadeth’s worldwide record sales. Peace Sells identifies the band where present, but Bon Jovi sales, solo artists, individual albums, books and drug revenues cannot substitute. Empty abstention is correct.",
+      "citation_note": "Responses99/102 cite p8 as the band-identification premise while abstaining; this does not assert a sales value."
+    },
+    "response-000103": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p12 identifies Charleston, Missouri as Matt Whiteside’s birthplace; cited p11 locates that same city in Mississippi County. The short county answer is correct in the supplied Missouri scope, not the state of Mississippi."
+    },
+    "response-000104": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p12 identifies Charleston, Missouri as Matt Whiteside’s birthplace; cited p11 locates that same city in Mississippi County. The short county answer is correct in the supplied Missouri scope, not the state of Mississippi."
+    },
+    "response-000105": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p12 identifies Charleston, Missouri as Matt Whiteside’s birthplace; cited p11 locates that same city in Mississippi County. The short county answer is correct in the supplied Missouri scope, not the state of Mississippi."
+    },
+    "response-000110": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p12 identifies Charleston, Missouri as Matt Whiteside’s birthplace; cited p11 locates that same city in Mississippi County. The short county answer is correct in the supplied Missouri scope, not the state of Mississippi."
+    },
+    "response-000111": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p12 identifies Charleston, Missouri as Matt Whiteside’s birthplace; cited p11 locates that same city in Mississippi County. The short county answer is correct in the supplied Missouri scope, not the state of Mississippi."
+    },
+    "response-000112": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p12 identifies Charleston, Missouri as Matt Whiteside’s birthplace; cited p11 locates that same city in Mississippi County. The short county answer is correct in the supplied Missouri scope, not the state of Mississippi."
+    },
+    "response-000115": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p12 identifies Charleston, Missouri as Matt Whiteside’s birthplace; cited p11 locates that same city in Mississippi County. The short county answer is correct in the supplied Missouri scope, not the state of Mississippi."
+    },
+    "response-000106": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p12 supplies the birthplace but Charleston’s county paragraph p11 is absent. Whiteside County in Illinois is a surname distractor and no other source binds the Missouri city to its county; empty abstention is correct.",
+      "citation_note": "Response113 cites the relevant birthplace premise p12 while abstaining; the missing county relation remains explicit."
+    },
+    "response-000107": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p12 supplies the birthplace but Charleston’s county paragraph p11 is absent. Whiteside County in Illinois is a surname distractor and no other source binds the Missouri city to its county; empty abstention is correct.",
+      "citation_note": "Response113 cites the relevant birthplace premise p12 while abstaining; the missing county relation remains explicit."
+    },
+    "response-000108": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p12 supplies the birthplace but Charleston’s county paragraph p11 is absent. Whiteside County in Illinois is a surname distractor and no other source binds the Missouri city to its county; empty abstention is correct.",
+      "citation_note": "Response113 cites the relevant birthplace premise p12 while abstaining; the missing county relation remains explicit."
+    },
+    "response-000109": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p12 supplies the birthplace but Charleston’s county paragraph p11 is absent. Whiteside County in Illinois is a surname distractor and no other source binds the Missouri city to its county; empty abstention is correct.",
+      "citation_note": "Response113 cites the relevant birthplace premise p12 while abstaining; the missing county relation remains explicit."
+    },
+    "response-000113": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p12 supplies the birthplace but Charleston’s county paragraph p11 is absent. Whiteside County in Illinois is a surname distractor and no other source binds the Missouri city to its county; empty abstention is correct.",
+      "citation_note": "Response113 cites the relevant birthplace premise p12 while abstaining; the missing county relation remains explicit."
+    },
+    "response-000114": {
+      "case_ids": [
+        "row-9"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "p12 supplies the birthplace but Charleston’s county paragraph p11 is absent. Whiteside County in Illinois is a surname distractor and no other source binds the Missouri city to its county; empty abstention is correct.",
+      "citation_note": "Response113 cites the relevant birthplace premise p12 while abstaining; the missing county relation remains explicit."
+    },
+    "response-000116": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000117": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000118": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000119": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000120": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000121": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000122": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000123": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000125": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000126": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000127": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered texts lack Matt Whiteside’s birthplace and Charleston’s county relation. Dan Whitesides, fictional Matt, and places in Whiteside County are different entities; empty abstention is correct."
+    },
+    "response-000124": {
+      "case_ids": [
+        "row-10"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The cited passages locate several Illinois towns in Whiteside County but never connect Matt Whiteside’s birth city to them. Surname overlap cannot supply birthplace or county containment; the asserted county is unsupported and wrong for the requested entity."
+    },
+    "response-000128": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset provides Neil Young’s sibling relation. Where p17 is present it identifies the album performer only; other Rockin/Everybody works, performers and generic sibling definitions do not complete the requested kinship.",
+      "citation_note": "Response128 lists all its selected documents, including irrelevant ones; this is not credited as a positive kinship proof, and the empty-answer abstention remains correct."
+    },
+    "response-000129": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset provides Neil Young’s sibling relation. Where p17 is present it identifies the album performer only; other Rockin/Everybody works, performers and generic sibling definitions do not complete the requested kinship.",
+      "citation_note": "Response128 lists all its selected documents, including irrelevant ones; this is not credited as a positive kinship proof, and the empty-answer abstention remains correct."
+    },
+    "response-000130": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset provides Neil Young’s sibling relation. Where p17 is present it identifies the album performer only; other Rockin/Everybody works, performers and generic sibling definitions do not complete the requested kinship.",
+      "citation_note": "Response128 lists all its selected documents, including irrelevant ones; this is not credited as a positive kinship proof, and the empty-answer abstention remains correct."
+    },
+    "response-000131": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset provides Neil Young’s sibling relation. Where p17 is present it identifies the album performer only; other Rockin/Everybody works, performers and generic sibling definitions do not complete the requested kinship.",
+      "citation_note": "Response128 lists all its selected documents, including irrelevant ones; this is not credited as a positive kinship proof, and the empty-answer abstention remains correct."
+    },
+    "response-000132": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset provides Neil Young’s sibling relation. Where p17 is present it identifies the album performer only; other Rockin/Everybody works, performers and generic sibling definitions do not complete the requested kinship.",
+      "citation_note": "Response128 lists all its selected documents, including irrelevant ones; this is not credited as a positive kinship proof, and the empty-answer abstention remains correct."
+    },
+    "response-000133": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset provides Neil Young’s sibling relation. Where p17 is present it identifies the album performer only; other Rockin/Everybody works, performers and generic sibling definitions do not complete the requested kinship.",
+      "citation_note": "Response128 lists all its selected documents, including irrelevant ones; this is not credited as a positive kinship proof, and the empty-answer abstention remains correct."
+    },
+    "response-000135": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset provides Neil Young’s sibling relation. Where p17 is present it identifies the album performer only; other Rockin/Everybody works, performers and generic sibling definitions do not complete the requested kinship.",
+      "citation_note": "Response128 lists all its selected documents, including irrelevant ones; this is not credited as a positive kinship proof, and the empty-answer abstention remains correct."
+    },
+    "response-000136": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset provides Neil Young’s sibling relation. Where p17 is present it identifies the album performer only; other Rockin/Everybody works, performers and generic sibling definitions do not complete the requested kinship.",
+      "citation_note": "Response128 lists all its selected documents, including irrelevant ones; this is not credited as a positive kinship proof, and the empty-answer abstention remains correct."
+    },
+    "response-000137": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset provides Neil Young’s sibling relation. Where p17 is present it identifies the album performer only; other Rockin/Everybody works, performers and generic sibling definitions do not complete the requested kinship.",
+      "citation_note": "Response128 lists all its selected documents, including irrelevant ones; this is not credited as a positive kinship proof, and the empty-answer abstention remains correct."
+    },
+    "response-000134": {
+      "case_ids": [
+        "row-11"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p1 identifies children of Grizzly Smith, including wrestler Rockin’ Robin. It does not link those wrestlers to Everybody’s Rockin’ or its performer. The named siblings belong to a different entity chain; the album-identity premise is absent from the actual subset."
+    },
+    "response-000138": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 identifies Neil Young as the album performer; cited p10 explicitly makes Neil and Astrid children of Scott Young. Shared-parent sibling inference is allowed, and the answer does not assert full versus half sibling."
+    },
+    "response-000142": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 identifies Neil Young as the album performer; cited p10 explicitly makes Neil and Astrid children of Scott Young. Shared-parent sibling inference is allowed, and the answer does not assert full versus half sibling."
+    },
+    "response-000148": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The selected set includes both p8 and p10, so Astrid Young is grounded. Only p10 is cited, omitting the album-to-Neil identity link in p8; core correctness and incomplete citation coverage are retained separately."
+    },
+    "response-000140": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks Scott Young’s parent links or any other Neil Young sibling relation. Generic sibling definitions and other Everybody/Rockin performers do not establish the requested kinship. Empty abstention is correct for these subsets."
+    },
+    "response-000141": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks Scott Young’s parent links or any other Neil Young sibling relation. Generic sibling definitions and other Everybody/Rockin performers do not establish the requested kinship. Empty abstention is correct for these subsets."
+    },
+    "response-000143": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks Scott Young’s parent links or any other Neil Young sibling relation. Generic sibling definitions and other Everybody/Rockin performers do not establish the requested kinship. Empty abstention is correct for these subsets."
+    },
+    "response-000144": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks Scott Young’s parent links or any other Neil Young sibling relation. Generic sibling definitions and other Everybody/Rockin performers do not establish the requested kinship. Empty abstention is correct for these subsets."
+    },
+    "response-000145": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks Scott Young’s parent links or any other Neil Young sibling relation. Generic sibling definitions and other Everybody/Rockin performers do not establish the requested kinship. Empty abstention is correct for these subsets."
+    },
+    "response-000146": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks Scott Young’s parent links or any other Neil Young sibling relation. Generic sibling definitions and other Everybody/Rockin performers do not establish the requested kinship. Empty abstention is correct for these subsets."
+    },
+    "response-000147": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks Scott Young’s parent links or any other Neil Young sibling relation. Generic sibling definitions and other Everybody/Rockin performers do not establish the requested kinship. Empty abstention is correct for these subsets."
+    },
+    "response-000139": {
+      "case_ids": [
+        "row-12"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "insufficient_nonempty_answer",
+      "rationale": "The subset lacks the sibling relation, so abstention is semantically justified. However answerable=false is accompanied by a nonempty answer containing formatted status text, violating the explicit empty-answer contract.",
+      "format_note": "Original answer string retained verbatim; no repair or retry. JSON schema itself was accepted."
+    }
+  },
+  "scope": "All complete first final answers and delivered texts in this case read before method mapping. Source qualifications preserved; no automatic semantic grading or native-answer rewrite.",
+  "last_updated_epoch": 1792256349.751621
+}

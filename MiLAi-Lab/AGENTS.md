@@ -32,12 +32,22 @@ hide negative mechanism finding or tune/retrain. Evidenceorder changed-input lab
 Reloadoriginal reference1=191/255 versus pre-save192 (onechoicechange);other5choiceagreement428/428.
 Do NOT reusepre-save predictions or claim quantization alone caused theonechange.
 
-RESPONSE REVIEW STARTED, METHOD MAPPINGS STILL UNOPENED. dev/response-review/annotations.json
-has row-0 complete,12unique firstresponses: IDs0,1,2,3,4,5,7,8,10,11 Arista/p18 grounded andcited
-underFROZEN compilation-label qualification; IDs6,9 correctemptyabstention fordeficient subsets.
-Wholeview dev/stream-review/00-row-0.txt fullyread, annotationbatch saved. No methodmapping yet.
-Continue fromnextcompletecase via exporter; do not overwritefirstjudgments or blindlygradeabstentions.
-Streamexports are timed in export-compute.jsonl and chargedlater afterHTTPcloses; never rebill.
+RESPONSE REVIEW IN PROGRESS, METHOD MAPPINGS STILL UNOPENED. dev/response-review/annotations.json
+has rows0..12 CLOSED,149unique firstresponses (IDs0..148). Tracked partialcopy:
+data/manifests/milai-source-selection-v2-dev-response-annotations.json. Continue atrow13, notrow0.
+Authored batches and append_batch.py in dev/response-review; only explicit author labels appended,
+enum/complete-case coverage checked, no automatic semanticgrader. show_cases.py prints allnew
+bodies/answers and exactbody pointers ONLY to priorfullyreviewedcases; originalstreamviews unchanged.
+For newlyrelevant oldtext, open originalfullview or exactcandidatebody. Do not skip unseen text.
+Key retained judgments: rows0/1 Arista answers valid UNDERFROZEN compilation-label qualification.
+Row2 IDs24/26/30/32/33 match374 but lackUK-release-condition sourcep10 inactualsubset: targetcorrect,
+unsupportedgrounding/inadequatecitations. Row12 ID148 hasbothnecessarydocs but citesonlyparentp10:
+groundedtargetcorrect,citationinadequate (missingalbum→Neilp8). ID139 correctlyabstains but nonempty
+answer withanswerable=false =>insufficient_nonempty_answer; originaloutput retained, schema itselfvalid.
+Row6 remainsMASKED inprimarytask despitecorrectabstentions; don'tregradeasnegative. Wrong-entity
+answers includeSpectre/otherfilms,WhitesideCounty surname substitution,wrongRockinperformer siblings.
+Streamexports timed in export-compute.jsonl and chargedlater afterHTTPcloses; never rebill. Reader
+transport/schema knownfailures0 sofar is NOT semantic/contract success; fullreviewstillrequired.
 Use driver.json for laterstage/PID.40serialstages, frozenimports215c84da; do NOT start second driver.
 Training and evaluation data/modelrecipe remain frozen. No tuning, retries, services oroldcohortresumes.
 Evaluation-v1 is superseded PRE-MODEL: absent2Wikianswer_aliases fixed in offline labels only;
