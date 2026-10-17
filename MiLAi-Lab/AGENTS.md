@@ -1,3 +1,21 @@
+# CURRENT: global reference training PREPARED — 2026-10-17
+
+Full user goal ACTIVE/incomplete; global analysis/generalization required.
+New global-reader-reference-v1 protocol is frozen:32/128nestedfamilies,304/1223states,
+17devfamilies168states.12serialjobs =2sizes xnative/linear xseeds0/1/2,epoch2fixedfinal,
+38/154updates. AllBASE/softCE/family+questionweights/optionsshuffle. Fullinputmax4512/4515,
+zero truncation.41reviewedquestionIDs all reserved, no per-case gold patch. Supervision is
+nativeREFERENCE weak labels, notsource-semanticgold. Only1foursteptrainfamily, noneindev.
+Protected49candidategroups rawfile notloaded duringpreparation; no newtestcontents shown.
+Training driver at artifacts/jev-reader/global-reader-reference-v1/driver.py; beforedispatch
+check actualPIDs/status andvalidation, then RootusesGPU2,3 only. Neverrelaunch aclosed/failed
+job or automaticretry. Do nothotedit training/runtime imports whilejobs run. Preserve BASE,
+first failures, originalledger, sourceidentity. No subagents/SHA/fingerprints/newservices.
+Otherworktrees remain userpaused; oldPIDsabsent doesnot authorize restart. Superseded155state
+semantic-fit-v1 remains unrun. Old7questions/22states diagnostic only. WriterD0/simpleIR/full20
+controls remain required; fulltask cannotbeclosed onprefixmetrics alone.
+See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
+
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17
 
 Full user goal ACTIVE/incomplete. Latest user requires global task/distribution

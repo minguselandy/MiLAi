@@ -1,0 +1,141 @@
+{
+  "name": "milai-global-reader-reference-v1",
+  "status": "FROZEN_BEFORE_PREPARATION_OR_MODEL_FORWARD",
+  "question": "Does broad family-balanced weak supervision learn state-conditioned evidence selection beyond ordinary linear heads and simple retrieval?",
+  "train_mirror": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/data/musique_full_v1.0_train.jsonl",
+  "metadata": {
+    "train": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-training-design-v1/heldout-candidate-intake/joint-retained-train-metadata.jsonl",
+    "dev": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-training-design-v1/heldout-candidate-intake/joint-retained-dev-metadata.jsonl"
+  },
+  "data_seed": 20261017,
+  "excluded_question_ids": [
+    "2hop__108202_821686",
+    "2hop__109254_37364",
+    "2hop__115615_120682",
+    "2hop__125316_149236",
+    "2hop__125960_675104",
+    "2hop__128772_745471",
+    "2hop__181212_701819",
+    "2hop__26529_42793",
+    "2hop__329904_10038",
+    "2hop__34208_22796",
+    "2hop__502793_420644",
+    "2hop__525610_293429",
+    "2hop__589649_83687",
+    "2hop__627880_14904",
+    "2hop__64563_86874",
+    "2hop__70236_84254",
+    "2hop__734425_42696",
+    "2hop__92840_542979",
+    "2hop__96945_155490",
+    "3hop1__150746_803683_87372",
+    "3hop1__179514_89345_618532",
+    "3hop1__221048_280519_81233",
+    "3hop1__415702_226789_844905",
+    "3hop1__423967_229859_5303",
+    "3hop1__428944_194186_611260",
+    "3hop1__491573_171721_264389",
+    "3hop1__606072_383061_565778",
+    "3hop1__615885_623201_357168",
+    "3hop1__634954_729377_238895",
+    "3hop1__797401_479775_779156",
+    "3hop1__800322_226789_844905",
+    "3hop1__94154_247017_615062",
+    "3hop2__360318_64618_807056",
+    "4hop1__129710_74386_444296_179769",
+    "4hop1__133590_631695_74047_4239",
+    "4hop1__187479_301282_65293_48285",
+    "4hop1__531733_185356_328647_21625",
+    "4hop1__642304_829000_51791_796745",
+    "4hop3__484585_769404_544850_170163",
+    "4hop3__695568_769559_129926_718885",
+    "4hop3__778278_796114_88276_242202"
+  ],
+  "exclusion_scope": "All questions in source-qualified label pair, source-v3 and new44-row source audit; whole admitted variants excluded from new training/dev, regardless of review disposition. Not all project historical exposure excluded.",
+  "cohorts": [
+    {
+      "name": "families32",
+      "family_quota": {
+        "2": 24,
+        "3": 7,
+        "4": 1
+      }
+    },
+    {
+      "name": "families128",
+      "family_quota": {
+        "2": 95,
+        "3": 32,
+        "4": 1
+      }
+    }
+  ],
+  "selection_rule": "One maximum-step question per family, uniformly selected from sorted eligible IDs. Fixed shuffled family list per difficulty. Nested quotas; every admitted variant. Complete-input exclusions remove whole selected question without replacement.",
+  "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "max_len": 8192,
+  "head_max_len": 512,
+  "epochs": 2,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "backends": [
+    "native",
+    "linear"
+  ],
+  "objective": "soft-ce",
+  "shuffle_options": true,
+  "candidate_view": "One label-independent shuffled pool/alias mapping per source row, stable across its state contrasts. Native literal text unchanged.",
+  "states": [
+    "empty",
+    "bm25_two",
+    "random_two",
+    "reference_leave_one_out",
+    "reference_complete",
+    "unrelated_two"
+  ],
+  "training_event": "question_id; family then question normalized; positive/negative variants remain in same event",
+  "label_scope": "Native reference weak supervision; no source-semantic gold claim, original answers unchanged; known reviewed questions excluded.",
+  "checkpoint_rule": "Fixed final epoch2 for all runs, no seed or checkpoint selection. Epoch0/1/2 development curves diagnostic only.",
+  "train_evaluation": "All fitted training states once at finalepoch2, original unshuffled option view.",
+  "learning_curve_scope": "Nested family cohorts at equal epochs, so larger cohort has more optimizer updates. Compare architectures only within same cohort/seed/update budget. Not compute-matched sample efficiency.",
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "batch_size": 4,
+  "gradient_accumulation": 4,
+  "encoder_lr": 2.5e-05,
+  "head_lr": 0.0001,
+  "weight_decay": 0.01,
+  "precision": "float32",
+  "planned_jobs": 12,
+  "job_order": "families32 then families128; seeds0,1,2; native/linear order alternates by seed. Root runs serially, no automatic retry.",
+  "primary_components": [
+    "family-macro reference acceptance",
+    "best-open complementary acceptance excluding STOP competition",
+    "two STOP recalls and errors",
+    "first-open/constant-stop controls",
+    "per-step and per-state-origin metrics",
+    "paired source variants and leave-one/complete contrast correctness",
+    "all3seed results; no winner selection"
+  ],
+  "downstream_protocol": {
+    "method_rule": "Same finalepoch2 native/linear perseed, fixed4 and adaptive cap4. BM25fixed4, densefixed4 and full20Reader retain independent results/costs.",
+    "development": "All admitted max-step dev question variants used in this cohort, exposed development scope. Source-first semantic review distinct from native reference scoring.",
+    "reserved_groups": "Fixed49groups remain protected until all training and method settings frozen; no candidate body/answer used here. Further history/source eligibility limitations disclosed.",
+    "external_transfer": "Preexisting MemConflict/MEME/LME are disclosed regression, never new blind evidence. Writer D0 kept separate; read labels do not train Writer roots.",
+    "reader": "Keep previously frozen source-only Reader prompt/endpoint/settings. No per-case fixes, retries or judge-based model choice.",
+    "adoption": "Research only. No autonomous STOP or default adoption without source-faithful end-to-end net gain."
+  },
+  "sha_or_content_fingerprint_checks": false,
+  "new_services": false,
+  "limits": [
+    "Only one eligible maximum-four-step training family after reviewed-question reservation; length/novel-source transfer not guaranteed.",
+    "Native reference semantics and mirror-author equivalence remain uncertain.",
+    "Registered historical source isolation does not establish complete-history, semantic duplicate or pretraining isolation.",
+    "Other worktree jobs remain paused, no restart."
+  ]
+}

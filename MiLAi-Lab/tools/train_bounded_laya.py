@@ -79,6 +79,8 @@ def main() -> None:
     parser.add_argument("--objective", choices=("soft-ce", "set"), default="soft-ce")
     parser.add_argument("--evaluate-train", action="store_true",
                         help="Save train-prefix predictions as a learning diagnosis")
+    parser.add_argument("--train-eval-final-only", action="store_true",
+                        help="With --evaluate-train, evaluate training states only after fitting")
     parser.add_argument("--shuffle-options", action="store_true",
                         help="Resample option slots and matching targets each training epoch")
     args = parser.parse_args()
@@ -116,6 +118,7 @@ def main() -> None:
            "freeze_encoder": False, "objective": args.objective,
            "loss_weighting": "event-and-family-normalized",
            "evaluate_train": args.evaluate_train,
+           "train_eval_final_only": args.train_eval_final_only,
            "shuffle_options": args.shuffle_options,
            "calibration_test_loaded": False, "http_requests": 0,
            "optimizer_updates": 0, "train_sequence_rows": 0, "train_input_tokens": 0,
@@ -183,7 +186,7 @@ def main() -> None:
             return result
 
         history = [{"epoch": 0, "dev": evaluate(0)}]
-        if args.evaluate_train:
+        if args.evaluate_train and not args.train_eval_final_only:
             history[0]["train"] = evaluate(0, "train")
         write_json(args.output / "history.json", history)
         rng = random.Random(args.seed)  # noqa: S311 -- reproducible training order
@@ -235,7 +238,7 @@ def main() -> None:
                             "dev": evaluate(epoch)})
             if args.objective == "soft-ce":
                 history[-1]["weighted_ce_mean"] = loss_total / len(train)
-            if args.evaluate_train:
+            if args.evaluate_train and (not args.train_eval_final_only or epoch == args.epochs):
                 history[-1]["train"] = evaluate(epoch, "train")
             write_json(args.output / "history.json", history)
             config = {**decision.config, "max_len": args.max_len, "head_max_len": args.head_max_len,
