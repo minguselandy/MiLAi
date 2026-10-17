@@ -1,3 +1,28 @@
+# CURRENT: policy QA CLOSED, option-shuffle contrast LIVE — 2026-10-17
+
+Full audit ACTIVE/incomplete. Other worktree group2432756 remains user-paused,
+all35processes T; never resume/relaunch its tasks without user instruction.
+Previous turn=progress: objective4closed,600presentationprobesclosed,70QApositions
+closed/source-reviewed, newtrain-onlysource/facetpreparation, opt-inshuffleimplemented.
+Objective softCE->set dev10->12/5->6 buttrain74->72/80->76; no netQA gain.
+Optionreverse all4models chooseexhausted30/30; best-opencomplement falls6/6/5/5 to0.
+All600slot/label mappings checked; no decode mismatch. Fixed-order mostly favorsfirstopen.
+QA v1 failedpre-torch (resolvedinterpreterlink),0forward/HTTP; oldfailure/BM25retained.
+CorrectedQA v2exec65276exit0/coordinator2559749absent:70positions/28actualReadercalls,
+42reused/0fail,67962tokens,0newunknown/embedding.112controllerforwards285995tokens.
+Allfixed4nativeF1.25=simpleBM25; allmissGyumri sourcep4. Full20.40; source2answerable
+versusnative4positive, don'tmix denominators. Readall70finalanswers/supportrefs; masked
+Lawtonentityjoin remainsunsupported. Rootreview isnotindependentJudge. Summarymanifest
+jev-reader-objective-policy-qa-v2-summary.json retains source-qualified andnative evidence.
+LIVE option-shuffle-v1 coordinator2595298,seed0trainer2595299,exec87369; source5b151962.
+2serialjobs seeds0/1, same86states/BASE/softCE/24updates, onlyper-epochoptionshuffle;
+fixed-optioncontrols reuse restarted0/1softCE, neverrebill orrepeat. SeparateRNGseed+10000,
+targets/nativeoptiontokens checked all86,5relatedtests/types/lint/DAG/toolsboundarypass.
+No semantic155state augmentation in this factor. Inspect PID/driver terminal; no hotedit,
+unknownreplay/SHA/fingerprints/subagents/newledger/services/defaultadoption/Product changes.
+Next closebothtrainings, comparetrain/dev plusinvariance, thenownpolicyQA andremaining
+semantictraining/Writer/Impact/budgetutility/externaleligibility. Fullgoal notcomplete.
+
 # CURRENT: restarted objective training CLOSED, presentation probe LIVE — 2026-10-17
 
 Prior turn was progress: four user-restarted jobs closed, source review expanded,
