@@ -1,15 +1,10 @@
 {
-  "status": "RESERVED_READER_LIVE_AUTHOR_REVIEW_PARTIAL",
-  "observed_epoch": 1792231139.9779356,
+  "status": "RESERVED_ALL_MODEL_STAGES_REVIEW_AND_COSTS_CLOSED",
+  "observed_epoch": 1792233827.7112317,
   "driver_pid": 4100019,
   "source_version": "d5261e45",
   "exec_session": 80572,
-  "active": {
-    "stage": "reader",
-    "pid": 4158352,
-    "physical_gpu_allocation": null
-  },
-  "completed_stages": 38,
+  "completed_stages": 40,
   "first_probe": {
     "status": "COMPLETED",
     "pid": 4100025,
@@ -29,19 +24,22 @@
   "all28_source_reviews_closed_before_dispatch": true,
   "models_or_policies_selected_from_dev": false,
   "automatic_retry": false,
-  "next": "Inspect actual PID/stage and continue existing session. Never dispatch a duplicate driver.",
+  "next": "No model work remains in this cohort. Do not restart or export again; all first outputs and original ledger records are closed.",
   "all12_prefix_probes_closed": true,
   "prefix_summary": "data/manifests/milai-global-reserved-reader-prefix-v1-summary.json",
   "actual_training_boundary": "data/manifests/milai-global-reserved-actual-training-boundary-v1.json",
   "reader": {
-    "status": "RUNNING",
+    "status": "COMPLETED",
     "phase": "predict",
     "planned": 756,
-    "completed": 608,
+    "completed": 756,
     "known_failures": 1,
-    "fresh_reader_attempts": 401,
-    "reused_reader_outputs": 207,
-    "known_failed_reader_calls": 1
+    "fresh_reader_attempts": 504,
+    "reused_reader_outputs": 252,
+    "known_failed_reader_calls": 1,
+    "actual_wall_seconds": 5174.728798528202,
+    "actual_cpu_seconds": 9.275494289,
+    "unique_reader_inputs": 504
   },
   "preview": {
     "status": "COMPLETED",
@@ -76,25 +74,34 @@
     "row-3314",
     "row-3395",
     "row-3467",
-    "row-3604"
+    "row-3604",
+    "row-3703",
+    "row-3911",
+    "row-4403",
+    "row-4475",
+    "row-4519",
+    "row-4524",
+    "row-4621",
+    "row-4622"
   ],
-  "reviewed_unique_responses": 351,
+  "reviewed_unique_responses": 504,
   "review_path": "artifacts/jev-reader/global-reserved-policy-qa-v1/stream-review/response-annotations.json",
-  "stream_export_compute_pending_original_ledger": true,
+  "stream_export_compute_pending_original_ledger": false,
   "mechanical_review_consistency": {
-    "cases": 20,
-    "unique_outputs": 351,
+    "cases": 28,
+    "unique_outputs": 504,
     "issues": [],
     "method_mapping_opened": false
   },
   "cohort_summary_tool": "tools/summarize_global_reader_cohorts.py",
-  "cohort_summary_execution": "PENDING_ALL_RESERVED_FIRST_RESPONSE_REVIEW",
+  "cohort_summary_execution": "COMPLETED_AND_VALIDATED_ALL54_METHOD_COHORT_COMBINATIONS",
   "confirmed_unique_semantic_contract_failures": [
     "response-000072",
     "response-000172",
     "response-000184",
     "response-000239",
-    "response-000339"
+    "response-000339",
+    "response-000361"
   ],
   "review_clarifications": [
     {
@@ -111,7 +118,10 @@
       "applies_to_identical_responses_in_all_occurrences": true
     }
   ],
-  "reviewed_families": 10,
-  "fully_reviewed_families": 10,
-  "first_generation_failure": "data/manifests/milai-global-reserved-reader-first-failure-v1.json"
+  "reviewed_families": 14,
+  "fully_reviewed_families": 14,
+  "first_generation_failure": "data/manifests/milai-global-reserved-reader-first-failure-v1.json",
+  "summary": "data/manifests/milai-global-reserved-policy-qa-v1-summary.json",
+  "final_result_report": "docs/MILAI_GLOBAL_TRAINING_RESULT_20261017.md",
+  "actual_final_pids_absent": true
 }

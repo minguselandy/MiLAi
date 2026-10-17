@@ -1,6 +1,6 @@
 {
-  "status": "COMPLETION_NOT_PROVEN",
-  "goal_complete": false,
+  "status": "EXECUTION_AUDIT_COMPLETE_WITH_NEGATIVE_GENERALIZATION_FINDINGS",
+  "goal_complete": true,
   "objective_source": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_TRAINING_AUDIT_20261017.md",
   "scope": "Current20261017audit pluslatestuserglobaltraining/nootherworktreeresume direction; old20261016bottleneck audit remains historical, not silently rewritten.",
   "previous_goal_turn_classification": "progress",
@@ -14,13 +14,16 @@
         "4",
         "9"
       ],
-      "state": "EVIDENCE_REVIEWED_CURRENT_BRANCH_AND_PROCESSES_VERIFIED",
+      "state": "COMPLETE_CURRENT_LOCAL_AND_REMOTE_SCOPE_RECONCILED",
       "evidence": [
         "docs/MILAI_AUDIT_EXECUTION_20261017.md",
         "docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md",
         "artifacts/jev-reader/global-writer-evidence-audit-v1/remote-refs.json"
       ],
-      "finding": "All12 training jobs and dev posttraining41 stages closed; original sessions exited0 and actual PIDs absent. Public refs remain previously verified main518aee41/oldresearche832e2d, current audit branch local only. No Product change or inferred remote CI."
+      "finding": "Full referenced audit and repository governance/implementation reviewed. All training and both QA pipelines are terminal. Fresh read-only remote refs remain main518aee41/prior-researche832e2d; current audit branch is local. No Lab runtime src or Product diff from the research baseline.",
+      "previous_state": "EVIDENCE_REVIEWED_CURRENT_BRANCH_AND_PROCESSES_VERIFIED",
+      "required_now": true,
+      "execution_satisfied": true
     },
     {
       "id": "same_data_objective_and_train_fit",
@@ -29,14 +32,17 @@
         "8/priority1",
         "8/priority3"
       ],
-      "state": "GLOBAL_TRAINING_MATRIX_CLOSED_NO_END_TO_END_CLAIM",
+      "state": "COMPLETE_PAIRED_OBJECTIVE_AND_GLOBAL_TRAINING_EXECUTION",
       "evidence": [
         "data/manifests/jev-reader-objective-pair-user-restart-v1-summary.json",
         "data/manifests/milai-global-reader-reference-v1-protocol.json",
         "artifacts/jev-reader/global-reader-reference-v1/analysis-progress-2/report.json",
         "data/manifests/milai-global-reader-reference-v1-summary.json"
       ],
-      "finding": "Base-start softCE/set comparison on86 reviewedstates, same24 updates/seeds0,1 closed without consistent net gain. Global32/128family native/linear,3seed matrix all12 closed at fixed epoch2:1152 updates, all original ledger deltas match. No stable native-head advantage; larger data also increases updates. STOP majority score is not semantic success."
+      "finding": "Four source-reviewed soft-CE/set runs closed at24 updates with matched initial logits/sampling; no task net-benefit claim inferred from small prefix changes. All12 broad32/128-family native/linear,3-seed jobs closed at fixed epoch2/1152 updates; encoder/head changed and original ledger deltas match. Actual-policy QA now fully reported alongside fit.",
+      "previous_state": "GLOBAL_TRAINING_MATRIX_CLOSED_NO_END_TO_END_CLAIM",
+      "required_now": true,
+      "execution_satisfied": true
     },
     {
       "id": "global_semantics_and_source_partitions",
@@ -44,7 +50,7 @@
         "4",
         "8/priority2"
       ],
-      "state": "BROAD_PREPARATION_AND_SOURCE_AUDITS_CLOSED_GENERALIZATION_UNPROVEN",
+      "state": "COMPLETE_BROAD_DESIGN_AND_SOURCE_ANALYSIS_WITH_DECLARED_LIMITS",
       "evidence": [
         "data/manifests/milai-global-joint-partition-v1-feasibility.json",
         "data/manifests/milai-global-training-source-audit-v1-summary.json",
@@ -52,7 +58,10 @@
         "data/manifests/milai-global-reader-reference-v1-dev-source-summary.json",
         "data/manifests/milai-global-reserved-source-v1-summary.json"
       ],
-      "finding": "Latestuserglobality steers away from superseded155state microfit.128independenttrainingfamilies, multiplegenericreadstates and sourcevariants, wholefamilysplits and questionweights. Supervision remains explicitlynativeweak references; audits44traincandidate/31dev/28reserved distinguish sourcevalidity, ambiguity, alternative paths and derived facts. Fullsemantic generality not established by population size or labelcounts."
+      "finding": "User globality steering superseded the unstarted155-state microfit. Whole-family/question weighting, broad reference states and all-seed comparisons executed; source-first reviews44traincandidate/31dev/28reserved distinguish complete proofs, insufficiency, ambiguity and derived quantities. Native training labels remain weak references, not falsely promoted to semantic gold. Universal/semantic/pretraining generalization is not accepted.",
+      "previous_state": "BROAD_PREPARATION_AND_SOURCE_AUDITS_CLOSED_GENERALIZATION_UNPROVEN",
+      "required_now": true,
+      "execution_satisfied": true
     },
     {
       "id": "presentation_and_reload_factors",
@@ -60,7 +69,7 @@
         "5.3",
         "8/priority2"
       ],
-      "state": "GLOBAL_PRESENTATION_PROBES_CLOSED_MAPPING_VERIFIED",
+      "state": "COMPLETE_FROZEN_PRESENTATION_AND_RESERVED_PREFIX_ANALYSIS",
       "evidence": [
         "data/manifests/jev-reader-option-shuffle-v1-summary.json",
         "data/manifests/milai-global-reader-policy-qa-v1-protocol.json",
@@ -68,7 +77,10 @@
         "data/manifests/milai-global-reader-presentation-probe-v1-summary.json",
         "data/manifests/milai-global-reserved-reader-prefix-v1-summary.json"
       ],
-      "finding": "Oldoption/order collapse and constant-stop augmentation preserved. Newglobal12model five-view10080forward probe uses same reloadedcheckpoint for original and variants; F16storage/FP32reload corrected BEFOREposttraincalls, no trainingchange. Reserved original-only1896 forwards closed and mappings verified. These are reference-prefix transfer diagnostics, not new invariance or final QA."
+      "finding": "All10080 dev five-view and1896 reserved original-only first forwards closed with literal input/action-map checks. Same reloaded checkpoint used for dev variants; pre-saveFP32 versus F16-storage/reload comparison kept separate. Constant-stop agreement does not count as semantic invariance; no favorable variant adopted.",
+      "previous_state": "GLOBAL_PRESENTATION_PROBES_CLOSED_MAPPING_VERIFIED",
+      "required_now": true,
+      "execution_satisfied": true
     },
     {
       "id": "remaining_budget_utility",
@@ -76,12 +88,20 @@
         "5.2",
         "8/priority3"
       ],
-      "state": "CONDITIONAL_EXTENSION_NOT_CLAIMED_OR_SILENTLY_SUBSTITUTED",
+      "state": "CONDITIONAL_FUTURE_FACTOR_NOT_ACTIVATED",
       "evidence": [
         "data/manifests/jev-reader-objective-pair-user-restart-v1-summary.json",
         "data/manifests/milai-global-reader-reference-v1-protocol.json"
       ],
-      "finding": "Explicitremainingbudget/utility objective is separate from setloss. No usefulness result claimed. Audit says ranking should work before deployingadaptiveSTOP; currentfirstlarge bestopen36/117 remainsbelowBM25next50/117, so no adaptive default or speculativeRL expansion."
+      "finding": "The audit says later work may expose remaining budget and, if studied, separate utility from set-loss. This conditional extension was not run or claimed. Actual fixed4/adaptive QA is complete and still lacks stable net benefit against dense; automatic STOP remains unadopted. No speculative RL or calibration substitute was added.",
+      "previous_state": "CONDITIONAL_EXTENSION_NOT_CLAIMED_OR_SILENTLY_SUBSTITUTED",
+      "required_now": false,
+      "execution_satisfied": null,
+      "applicability": "Conditional research suggestion, not an unconditional command to run another objective.",
+      "source_wording": [
+        "后续研究可显式给出剩余预算",
+        "若再研究预算效用，要与单纯换标签明确分离"
+      ]
     },
     {
       "id": "writer_reader_separate_and_real_state",
@@ -91,7 +111,7 @@
         "6",
         "8/priority4"
       ],
-      "state": "ACTUAL_STATE_AND_STRONG_CONTROLS_RECONCILED_NO_BROAD_WRITER_LEARNING_CLAIM",
+      "state": "COMPLETE_SEPARATE_WRITER_STATE_AUDIT_WITH_NEGATIVE_FINDINGS",
       "evidence": [
         "data/manifests/jev-memops-factor-extension-v1-summary.json",
         "data/manifests/jev-memops-factor-extension-v1-review.json",
@@ -99,7 +119,10 @@
         "data/manifests/jev-writer-empty-hints-joint-review-20261017.json",
         "data/manifests/milai-global-writer-evidence-audit-v1.json"
       ],
-      "finding": "18genuinebefore/after pairs acrossD0-D4,25currentcommittedrecordvalues plus4seedvalues checked againstSQLite read-only. Zero storedbefore relations and no demonstratedpreservepositive coverage: do not fabricate labels or expandImpact. Validproposals/shortinputs notequatedwithstate benefit; Readerweights are notWriter supervision. WiderW/Bsemantic necessity/generalization remainsunproven."
+      "finding": "Existing exposed D0-D4 research states reconciled read-only across18 before/after pairs,4 seed and25 committed record values. Necessary-root/preserve coverage and broad Writer learning remain unproven; D0 retained, no expansion or bank modification. Prior compact-Reader/empty-hint component findings remain distinct from learned-weight or actual Writer-state benefit.",
+      "previous_state": "ACTUAL_STATE_AND_STRONG_CONTROLS_RECONCILED_NO_BROAD_WRITER_LEARNING_CLAIM",
+      "required_now": true,
+      "execution_satisfied": true
     },
     {
       "id": "same_method_policy_qa_and_complete_cost",
@@ -108,7 +131,7 @@
         "5.4",
         "8/priority5"
       ],
-      "state": "DEV_FULL_MATRIX_CLOSED_RESERVED_PIPELINE_LIVE",
+      "state": "COMPLETE_BOTH_FROZEN_QA_MATRICES_AND_ALL_FIRST_RESPONSE_REVIEWS",
       "evidence": [
         "configs/milai-global-reader-policy-qa-v1.json",
         "configs/milai-global-reserved-policy-qa-v1.json",
@@ -116,9 +139,16 @@
         "data/manifests/milai-global-reserved-policy-qa-v1-input-review.json",
         "data/manifests/milai-global-reader-policy-qa-v1-review-progress.json",
         "data/manifests/milai-global-reader-policy-qa-v1-summary.json",
-        "data/manifests/milai-global-reader-response-review-v1-annotations.json"
+        "data/manifests/milai-global-reader-response-review-v1-annotations.json",
+        "data/manifests/milai-global-reserved-policy-qa-v1-summary.json",
+        "data/manifests/milai-global-reader-transfer-v1-summary.json",
+        "data/manifests/milai-global-training-execution-closure-v1.json",
+        "docs/MILAI_GLOBAL_TRAINING_RESULT_20261017.md"
       ],
-      "finding": "Dev837 positions/570 actual first requests/267 reuses complete. All31 sources/570 responses author reviewed before method mapping. Generation1238480tokens/dense42325tokens and all12 local-stage ledger deltas match. Supported6: dense3,128native/linear fixed4=1/2/2;128native adaptive0/0/0,linear0/2/1. No stable benefit. Reserved frozen pipeline dispatched source d5261e45, coordinator4100019/session80572; all12 models retained. Prefixes and756 Reader positions still to finish."
+      "finding": "All27 arms on both cohorts:1593 positions,1074 actual first requests,519 exact-input reuses. All59 sources and1074 unique first responses reviewed under the frozen source rubric before method-name mapping. Generation2406056tokens and embeddings88159tokens reconcile exactly with original ledger; local stages match. Both length failures and10 unique nonempty-abstention contract issues retained. All family/step/seed/source tables and complete per-method/controller cost records delivered.",
+      "previous_state": "DEV_FULL_MATRIX_CLOSED_RESERVED_PIPELINE_LIVE",
+      "required_now": true,
+      "execution_satisfied": true
     },
     {
       "id": "external_identity_and_transfer_scope",
@@ -126,14 +156,21 @@
         "7",
         "8/priority5"
       ],
-      "state": "EXPOSURE_IDENTITY_RESOLVED_RESERVED_EVALUATION_LIVE",
+      "state": "COMPLETE_EXPOSURE_AUDIT_AND_QUALIFIED_RESERVED_TRANSFER",
       "evidence": [
         "data/manifests/jev-longmemeval-exposure-final-v1-20261017.json",
         "data/manifests/jev-longmemeval-v2-prior-contact-20261017.json",
         "data/manifests/milai-global-reserved-source-v1-admission.json",
-        "data/manifests/milai-global-reserved-actual-training-boundary-v1.json"
+        "data/manifests/milai-global-reserved-actual-training-boundary-v1.json",
+        "data/manifests/milai-global-reserved-policy-qa-v1-summary.json",
+        "data/manifests/milai-global-reader-transfer-v1-summary.json",
+        "data/manifests/milai-global-training-execution-closure-v1.json",
+        "docs/MILAI_GLOBAL_TRAINING_RESULT_20261017.md"
       ],
-      "finding": "LMEv1/V2 cannot be reset to blind by questionIDs; priorMEME/MemConflict are qualified exposed regressions. NewMuSiQueDEV14sourcegroups have checkedliteralboundary vs5454train/119dev/229cal/864seen; not officialtest, exhaustivehistorical,semantic-nearduplicate orpretraining certification. No broadcross-domain claim. Actual visible32/128 training and reserved pools share1/6 background paragraphs; none is native target on either side or reserved reviewed complete proof. No question-ID overlap. Do not claim all text unseen."
+      "finding": "LME500/V2 shared-history exposure identities resolved without resetting blindness; oldMEME/MemConflict remain disclosed regressions. Frozen14-family MuSiQue publicDEV-mirror transfer completed with target-versus-pool literal admission and actual1/6 shared background paragraphs across32/128train. No target/question overlap found; author-mirror equivalence, exhaustive history, semantic near-duplicates and pretraining isolation remain unproven. Not a new official-test or cross-domain certification.",
+      "previous_state": "EXPOSURE_IDENTITY_RESOLVED_RESERVED_EVALUATION_LIVE",
+      "required_now": true,
+      "execution_satisfied": true
     },
     {
       "id": "minimal_changes_and_user_constraints",
@@ -141,13 +178,16 @@
         "8",
         "user_latest_global_training_and_pause"
       ],
-      "state": "PRESERVED_CONTINUOUSLY",
+      "state": "COMPLETE_PRESERVED_CONSTRAINTS_AND_NO_DEFAULT_ADOPTION",
       "evidence": [
         "AGENTS.md",
         "docs/MILAI_AUDIT_EXECUTION_20261017.md",
         "artifacts/jev-reader/global-reader-reference-v1/driver.json"
       ],
-      "finding": "Otherworktrees noresume, existingBGE/7860 unchanged; rootserialGPU2/3, originalledger, firstfailures retained, noSHA/contentfingerprints, per-case runtimepatches, newservices, auto-retries, defaultadoption orProduct/API/permission/Canonical changes. Genericmetadata/analysis kept outside modelpayload."
+      "finding": "Other worktree tasks were paused under the user instruction and never resumed. New work used existing GPU2/3 training facilities and original ledger; protected services unchanged by this work. No SHA/content-fingerprint checks, per-question runtime rules, automatic retries, new services, Product/API/permissions/Canonical change or default adoption. Actual training and both cohort processes ended normally.",
+      "previous_state": "PRESERVED_CONTINUOUSLY",
+      "required_now": true,
+      "execution_satisfied": true
     },
     {
       "id": "software_checks_and_reviewable_delivery",
@@ -155,25 +195,26 @@
         "1",
         "9"
       ],
-      "state": "TARGETED_CHECKS_PASSED_FULL_MODEL_AND_COST_REPORT_PENDING",
+      "state": "COMPLETE_SCOPED_CHECKS_ARTIFACTS_AND_REVIEWABLE_REPORT",
       "evidence": [
         "tests/unit/test_global_reader_analysis.py",
         "tests/unit/test_bounded_invariance.py",
         "tests/unit/test_bounded_reader_rollouts.py",
         "tests/unit/test_musique_reader.py",
         "docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md",
-        "tests/unit/test_global_reader_cohort_summary.py"
+        "tests/unit/test_global_reader_cohort_summary.py",
+        "data/manifests/milai-global-reserved-policy-qa-v1-summary.json",
+        "data/manifests/milai-global-reader-transfer-v1-summary.json",
+        "data/manifests/milai-global-training-execution-closure-v1.json",
+        "docs/MILAI_GLOBAL_TRAINING_RESULT_20261017.md"
       ],
-      "finding": "Relevant14 prior tests and2 new semantic tests pass. Ruff, targeted mypy with local src/tools and optional dependency imports ignored, package DAG and active tools boundaries pass. Dev first-response/cost reports now closed; reserved result pending. No full-repository/remote CI or publication. Cohort aggregation2 meaningful tests pass: family weighting and grounded masked answers; Ruff/targetedmypy/toolsboundary pass. Full two-cohort aggregation is prepared, not yet executed."
+      "finding": "Previously affected training/input/official-scorer tests plus new semantic2 and family/qualified-response2 tests passed; targeted Ruff/mypy and package/tools boundaries passed in their stated environments. Final two-cohort aggregation executed and all54 nativeF1/source-family metrics and denominators agree with independent prior reports. Both figures rendered and visually inspected. The final58-check execution/configuration/accounting audit passed. No claim of full-repository or remote CI.",
+      "previous_state": "TARGETED_CHECKS_PASSED_FULL_MODEL_AND_COST_REPORT_PENDING",
+      "required_now": true,
+      "execution_satisfied": true
     }
   ],
-  "next_required_execution": [
-    "Continue existing reserved Reader PID4158352 under coordinator4100019/session80572. No duplicate dispatch or input change.",
-    "Finish reserved response reviews from index20/row3703; current20cases/10completefamilies/351 unique responses reviewed before method mapping.",
-    "After actual Reader/scorer terminal, final export all28 once, then receipt/cost collector and semantic join.",
-    "Run summarize_global_reader_cohorts.py on both completed cohort roots into a new output folder. Report family/decomposition-size/source-class denominators, grounded qualified responses and complete costs.",
-    "Perform full audit completion review; preserve source-isolation and assistant-review limitations."
-  ],
+  "next_required_execution": [],
   "training_closure": "data/manifests/milai-global-reader-reference-v1-summary.json",
   "historical_training_snapshot": {
     "observed_epoch": 1792215003.3797836,
@@ -251,18 +292,13 @@
     "summary": "data/manifests/milai-global-reader-policy-qa-v1-summary.json",
     "actual_driver_reader_scorer_pids_absent": true
   },
-  "live_reserved_posttrain_snapshot": {
-    "status": "RESERVED_READER_LIVE_AUTHOR_REVIEW_PARTIAL",
-    "observed_epoch": 1792231139.9779356,
+  "closed_reserved_posttrain_snapshot": {
+    "status": "RESERVED_ALL_MODEL_STAGES_REVIEW_AND_COSTS_CLOSED",
+    "observed_epoch": 1792233827.7112317,
     "driver_pid": 4100019,
     "source_version": "d5261e45",
     "exec_session": 80572,
-    "active": {
-      "stage": "reader",
-      "pid": 4158352,
-      "physical_gpu_allocation": null
-    },
-    "completed_stages": 38,
+    "completed_stages": 40,
     "first_probe": {
       "status": "COMPLETED",
       "pid": 4100025,
@@ -282,19 +318,22 @@
     "all28_source_reviews_closed_before_dispatch": true,
     "models_or_policies_selected_from_dev": false,
     "automatic_retry": false,
-    "next": "Inspect actual PID/stage and continue existing session. Never dispatch a duplicate driver.",
+    "next": "No model work remains in this cohort. Do not restart or export again; all first outputs and original ledger records are closed.",
     "all12_prefix_probes_closed": true,
     "prefix_summary": "data/manifests/milai-global-reserved-reader-prefix-v1-summary.json",
     "actual_training_boundary": "data/manifests/milai-global-reserved-actual-training-boundary-v1.json",
     "reader": {
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "phase": "predict",
       "planned": 756,
-      "completed": 608,
+      "completed": 756,
       "known_failures": 1,
-      "fresh_reader_attempts": 401,
-      "reused_reader_outputs": 207,
-      "known_failed_reader_calls": 1
+      "fresh_reader_attempts": 504,
+      "reused_reader_outputs": 252,
+      "known_failed_reader_calls": 1,
+      "actual_wall_seconds": 5174.728798528202,
+      "actual_cpu_seconds": 9.275494289,
+      "unique_reader_inputs": 504
     },
     "preview": {
       "status": "COMPLETED",
@@ -329,25 +368,34 @@
       "row-3314",
       "row-3395",
       "row-3467",
-      "row-3604"
+      "row-3604",
+      "row-3703",
+      "row-3911",
+      "row-4403",
+      "row-4475",
+      "row-4519",
+      "row-4524",
+      "row-4621",
+      "row-4622"
     ],
-    "reviewed_unique_responses": 351,
+    "reviewed_unique_responses": 504,
     "review_path": "artifacts/jev-reader/global-reserved-policy-qa-v1/stream-review/response-annotations.json",
-    "stream_export_compute_pending_original_ledger": true,
+    "stream_export_compute_pending_original_ledger": false,
     "mechanical_review_consistency": {
-      "cases": 20,
-      "unique_outputs": 351,
+      "cases": 28,
+      "unique_outputs": 504,
       "issues": [],
       "method_mapping_opened": false
     },
     "cohort_summary_tool": "tools/summarize_global_reader_cohorts.py",
-    "cohort_summary_execution": "PENDING_ALL_RESERVED_FIRST_RESPONSE_REVIEW",
+    "cohort_summary_execution": "COMPLETED_AND_VALIDATED_ALL54_METHOD_COHORT_COMBINATIONS",
     "confirmed_unique_semantic_contract_failures": [
       "response-000072",
       "response-000172",
       "response-000184",
       "response-000239",
-      "response-000339"
+      "response-000339",
+      "response-000361"
     ],
     "review_clarifications": [
       {
@@ -364,8 +412,28 @@
         "applies_to_identical_responses_in_all_occurrences": true
       }
     ],
-    "reviewed_families": 10,
-    "fully_reviewed_families": 10,
-    "first_generation_failure": "data/manifests/milai-global-reserved-reader-first-failure-v1.json"
-  }
+    "reviewed_families": 14,
+    "fully_reviewed_families": 14,
+    "first_generation_failure": "data/manifests/milai-global-reserved-reader-first-failure-v1.json",
+    "summary": "data/manifests/milai-global-reserved-policy-qa-v1-summary.json",
+    "final_result_report": "docs/MILAI_GLOBAL_TRAINING_RESULT_20261017.md",
+    "actual_final_pids_absent": true
+  },
+  "execution_audit_completed_epoch": 1792233827.713025,
+  "generalization_accepted": false,
+  "production_adoption": false,
+  "remaining_required_work": [],
+  "final_result_report": "docs/MILAI_GLOBAL_TRAINING_RESULT_20261017.md",
+  "execution_closure": "data/manifests/milai-global-training-execution-closure-v1.json",
+  "completion_scope": "Requested audit execution, global training and qualified end-to-end analysis are complete under the predeclared negative-result exit condition. This does not certify a universally generalizable model or turn unresolved scientific claims into achievements.",
+  "predeclared_exit_condition": "只在QA/状态质量与完整控制成本一起支持时采用学习组件；没有稳定净收益时保留简单方法。",
+  "open_scientific_claims": [
+    "Stable net benefit over strong dense retrieval",
+    "Universal or cross-domain generalization",
+    "Independent adjudicated source gold",
+    "Author-mirror equivalence and exhaustive semantic/history/pretraining isolation",
+    "Budget-aware utility learning",
+    "Broad Writer necessary-root/preserve learning",
+    "Production co-resident end-to-end latency"
+  ]
 }

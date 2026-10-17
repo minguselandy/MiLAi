@@ -1,4 +1,36 @@
-# CURRENT: BOTH Reader cohorts CLOSED; final reserved reconciliation next
+# CURRENT: audit and frozen global experiment execution CLOSED — 2026-10-17
+
+No model tasks are live. Training12 jobs, dev41 stages and reserved40 stages are CLOSED.
+Original exec50991/56592/80572 terminal exit0; do not restart any of these cohorts.
+Other worktrees remain under the user's pause/no-resume direction. No SHA/fingerprints,
+new services, automatic retries, Product/runtime/API/permission change or default adoption.
+
+Final entry: docs/MILAI_GLOBAL_TRAINING_RESULT_20261017.md.
+Requirements: milai-development-audit-requirements-20261017.json records execution complete,
+generalization_accepted=false. Full58-check closure: milai-global-training-execution-closure-v1.
+This is a negative/qualified scientific result, not certification of universal generalization.
+No required model/analysis work remains. Goal bookkeeping is controlled by the thread tool.
+
+Dev31 cases/837 positions/570 actual first calls/267 reuses; reserved28/756/504/252.
+All1074 unique responses fully reviewed and frozen before method-name mappings. Assistant
+review only; document counts partly reveal methods. Both first length failures retained;
+6 reserved and4 dev unique nonempty-abstention contract issues remain unchanged.
+Both receipt-review and semantic-final reports CLOSED. Both final exports already charged
+once; NEVER export/reconcile/rebill them again. Original ledger exact; no unknown new usage.
+Combined cohort summary executed, all54 method/cohort metrics and denominators reconciled.
+Learning and transfer PNG/PDF figures generated and visually inspected; plot CPU limits noted.
+
+Source-supported QA: dev dense3/6 vs128 native/linear fixed4=1/2/2; reserved dense6/10,
+128 native fixed4=4/3/3, linear=1/1/3. Native adaptive dev0/0/0, reserved3/1/0.
+Keep positive local signals and weaknesses; no stable net benefit or auto-STOP deployment.
+All14 reserved families remain evaluation-only. Actual1/6 shared background paragraphs in
+32/128 train are not target/proof overlaps; do not claim all text or pretraining unseen.
+Writer old18 state pairs reconciled; no broad root/preserve-learning claim or bank mutations.
+Remote main518aee41/prior researche832e2d; audit branch local only. No request to publish.
+
+Everything below is historical and must not trigger a duplicate run or cost record.
+
+# HISTORICAL: BOTH Reader cohorts CLOSED; final reserved reconciliation next
 
 Reserved driver40stages COMPLETED, exec80572exit0, PIDs4100019/4158352/286526 ABSENT.
 756positions/504fresh/252reuse/1knownfailure. All28cases/504uniqueresponses fullyreviewed
@@ -8,7 +40,7 @@ cohortsummary/plot/cost and fullgoalcompletionaudit. Do NOT run any model or exp
 oncecollectorrecordsstreamcost. Goal remainsACTIVE; do notcloseonpipelineexecution alone.
 More historicaldetails below; this terminalstate supersedes prior LIVE snapshots.
 
-# CURRENT: dev QA/review CLOSED; reserved pipeline LIVE — 2026-10-17
+# HISTORICAL: dev QA/review CLOSED; reserved pipeline LIVE — 2026-10-17
 
 Full user goal remains ACTIVE. Global analysis/generalization, no per-case runtime tuning.
 Other worktrees stay user-paused. No subagents/SHA/fingerprints/newservices/retries/default
