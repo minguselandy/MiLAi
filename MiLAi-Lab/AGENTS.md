@@ -43,10 +43,10 @@ source/reference diagnostics; no nonexistent FP32-dev baseline/five-view invaria
 Analysis CLOSED; no repeat. Do not block a live HTTPowner with new ledger writes.
 Reserved now in Reader: PID4158352 under4100019/exec80572. All38 precedingstages
 CLOSED, preview756/756 with504uniqueinputs. Dense363inputs/45834tokens CLOSED.
-Reserved response review nowfirst14cases throughindex13/row2273 CLOSED,
-245unique IDs000000–000244. Mechanicalcoverage/outputflags verified0issues.
+Reserved response review nowfirst20cases throughindex19/row3604 CLOSED,
+10completefamilies/351unique IDs000000–000350. Mechanicalcoverage/outputflags verified0issues.
 Annotations in reserved stream-review/response-annotations.json. NEXT export completecases
-and read startingindex14/row2382. IDs arecohort-local: never reuse570dev annotations.
+and read startingindex20/row3703. IDs arecohort-local: never reuse570dev annotations.
 Case119 p12original-character authorship supported; p17adaptation-only path retaineduncertain
 forresponses3/11/12(12alsoanswer metadata contamination). No methodmapping opened.
 Case786 missingDaraga-religion identity: positives54/55/56/58/59/60/61/65/66/67
@@ -71,6 +71,22 @@ UNCERTAIN (no explicitp10wife); allothersblankvalidmissingpremises.
 Case2273 positives229/230/233/235/236/240/241/242/243 aregroundedqualifiednonuniquechildren;
 allothernew229–244 responsesnoanswer/uncertain,239also violatesempty-answercontract.
 Emptyresponse89 reused retains sameuncertainty. Do not gradeallmasked/qualified aswrong.
+Case2382 sourcepredeclared directRX350 proof:250/254/257/258 April2012supported/cited
+underfaceliftmarketdate; no extra brandproof required. Allothers245–260blankcorrect.
+Case3039 r273Rialto correctvaluebutmissingcomposer/birth, plusanswer metadata;othersblankcorrect.
+Reserved FIRSTGENERATIONFAILURE response282/case3314: finishlength,567+8192=8759tokens,
+finalcontentnull; preservedno retry. Not normalabstention. Manifest first-failure-v1 tracked.
+Case3314 supported interval1788–1795 in278/280/281/284/285/286/288/289/290/291/293;
+285extra positiveanswer metadata. Allothers277–293blankcorrect except282failed.
+Case3395 1839responses294/296/297/298/300/303/305/307/308/311/312qualifiedunsupported
+(missingperformerbirth,Republic/state distinction); allothers294–313blankcorrect.
+Case3467 r319/324correcttreatyvaluewithoutbirth/citychain; allothers314–331blankcorrect;
+reused72stillnonemptyfalseanswer. Case3604MASKEDstageconflict:334/336/338/340/3421786
+conditionalgrounded/cited(singleaccount);333/341/345/346/347/348datebutmissingfirstholder;
+335/3491788openinguncertainwithcontradictory1786account,adequateconditionalcitations;
+3431786uncertainconflict+citationmissingidentity;339nonemptyfalseanswercontractfailure;
+other332–350blankcorrectmissingidentity/date. No source-mask ormodeloutputchange.
+Confirmedunique nonemptyfalseanswer issues72/172/184/239/339; generationfailure282 separate.
 Qualifiedgroundedresponses need separate descriptivecounts: reader_response_pass is
 unqualifiedsuccess, so do not call allremainingqualifiedresponseserrors.
 Allcases410/647blankanswers validinsufficiency. Nonempty support_ids withfalse/emptyanswer allowed.

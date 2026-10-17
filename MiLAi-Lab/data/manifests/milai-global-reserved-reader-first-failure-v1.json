@@ -1,0 +1,20 @@
+{
+  "status": "CONFIRMED_FIRST_READER_LENGTH_FAILURE_RETAINED",
+  "cohort": "global-reserved-policy-qa-v1",
+  "response_id": "response-000282",
+  "reader_call_key": "musique/shared/282/answer",
+  "case": "row-3314",
+  "finish_reason": "length",
+  "usage": {
+    "prompt_tokens": 567,
+    "total_tokens": 8759,
+    "completion_tokens": 8192,
+    "prompt_tokens_details": null
+  },
+  "raw_final_content": null,
+  "retry_performed": false,
+  "answer_repaired": false,
+  "method_name_mapping_opened": false,
+  "accounting": "Original provider receipt and ongoing original ledger retained. Final complete-cohort reconciliation remains pending.",
+  "observed_epoch": 1792230248.2025251
+}
