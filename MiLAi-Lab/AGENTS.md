@@ -1,3 +1,43 @@
+# CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17
+
+Full user goal ACTIVE/incomplete. Latest user requires global task/distribution
+analysis and generalization, not repeated tuning of single problems. No model
+jobs are live or queued; other worktrees remain under the user's no-resume order.
+Their old paused PIDs are absent; stale RUNNING files never authorize restart.
+No SHA/content fingerprints, new ledger, subagents, services or default adoption.
+
+Previous goal turn was progress; this turn completed all24selectedtrainingfamilies,
+44source rows/880paragraph positions/563literal texts, source-first then reference.
+Counts8supported attributes/21pool-insufficient/15masked; nativepositive21 maps8/4/9.
+Not13provenwronganswers or a corpus-noise rate; interpretation uncertainty retained.
+Do not automatically turn this audit into training gold. Original labels intact.
+44sourceobjects match savedmirror; fullinitial20pool max7825tokens/zero truncation.
+Author archive and rawTRAIN downloads both returned quota HTML; equivalence unproven.
+No new model calls. See global source-audit annotations/summary and global report.
+
+Global population had444trainfamilies/17975rows; existing63heldoutcandidates hadno4step.
+New public nativeDEV mirror downloaded for protected intake:4834rows/2417questions,
+no question/seed IDs shared with currentTRAIN. No question/answer/body shown to the
+assistant or model. Private literal comparison (not inference) then merged seed/
+target links into528groups;143groups clearagainst oldpopulation+631registeredseen
+source rows, only1four-stepgroup. Metadata-only IDs were insufficient for isolation.
+Joint feasibility used fixedseed20261017, no reroll:49reservedgroups (28/14/7 by2/3/4),
+349questions/698rows. Remove entire conflicting train/dev/calibration families:
+retained371trainfamilies5454rows,17dev119rows,16cal229rows; family sets disjoint.
+Same49selection across passes. Still NOT semantic/whole-history/pretraining/author
+source certification; no new scores. Protected candidate answers not accessed.
+Artifacts under global-training-design-v1/heldout-candidate-intake; never feed its
+raw candidate file into gradients or print its questions/answers during development.
+Count-only source admission checks are allowed; no hidden source text to model.
+
+NEXT: use docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md and actual data to
+finish a coherent broad training/validation protocol, labels and >=3seed budget.
+Keep reference weak supervision distinct from source semantics, preserve D0/simple
+retrieval/ordinary-head controls and full cost. Do not relaunch superseded155state
+semantic-fit-v1 or use old7questions/22states as principal model-selection evidence.
+Runtime/Product/API/permissions/Canonical unchanged; this turn is data/review only.
+All previous local diagnostic results and failures stay in execution report.
+
 # CURRENT: user requires global training/generalization — 2026-10-17
 
 User explicitly redirects training toward global analysis, generality and

@@ -1,0 +1,2595 @@
+{
+  "status": "JOINT_PARTITION_FEASIBILITY_NOT_TRAINING_OR_FINAL_EVALUATION_ADMISSION",
+  "selection": {
+    "seed": 20261017,
+    "selection_basis": "metadata only, no current model outcomes",
+    "rule": "28two-step,14three-step,all7four-step groups without registered-seen violations; shuffle sorted group IDs once per stratum. No seed reroll.",
+    "groups": [
+      {
+        "family": "candidate-family-000043",
+        "question_ids": [
+          "2hop__132469_533882",
+          "2hop__132954_533882",
+          "2hop__133116_533882"
+        ],
+        "rows": [
+          314,
+          569,
+          1704,
+          2472,
+          3621,
+          4046
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000097",
+        "question_ids": [
+          "2hop__15650_77173"
+        ],
+        "rows": [
+          4413,
+          4469
+        ],
+        "max_steps": 2,
+        "violations": [
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000000",
+        "question_ids": [
+          "2hop__10017_18974",
+          "2hop__10122_18974",
+          "2hop__36747_18974",
+          "2hop__631024_18974"
+        ],
+        "rows": [
+          571,
+          639,
+          993,
+          2220,
+          2540,
+          2606,
+          3725,
+          4045
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000104",
+        "question_ids": [
+          "2hop__158247_71142"
+        ],
+        "rows": [
+          4500,
+          4558
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000476",
+        "question_ids": [
+          "2hop__96410_159054",
+          "2hop__96410_47902",
+          "2hop__96411_159054",
+          "2hop__96411_47902",
+          "2hop__96414_159054",
+          "2hop__96414_47902"
+        ],
+        "rows": [
+          127,
+          542,
+          634,
+          1005,
+          1544,
+          1788,
+          2116,
+          2342,
+          2686,
+          3448,
+          4029,
+          4077
+        ],
+        "max_steps": 2,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000466",
+        "question_ids": [
+          "2hop__85931_108632"
+        ],
+        "rows": [
+          119,
+          410
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000041",
+        "question_ids": [
+          "2hop__131818_161450",
+          "2hop__307218_161450",
+          "2hop__391258_161450",
+          "2hop__525581_161450",
+          "2hop__582045_161450",
+          "2hop__607517_161450"
+        ],
+        "rows": [
+          415,
+          467,
+          1087,
+          1235,
+          1919,
+          2400,
+          2438,
+          3366,
+          3632,
+          3644,
+          3991,
+          4266
+        ],
+        "max_steps": 2,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000247",
+        "question_ids": [
+          "2hop__327688_56873",
+          "2hop__337223_56873",
+          "2hop__442175_56873",
+          "2hop__50432_56873",
+          "2hop__629030_56873",
+          "2hop__806869_56873"
+        ],
+        "rows": [
+          152,
+          296,
+          373,
+          810,
+          1188,
+          2027,
+          2129,
+          3020,
+          3202,
+          3465,
+          3925,
+          4086
+        ],
+        "max_steps": 2,
+        "violations": [
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000025",
+        "question_ids": [
+          "2hop__124412_402641",
+          "2hop__124592_402641",
+          "2hop__681463_402641"
+        ],
+        "rows": [
+          57,
+          368,
+          649,
+          1561,
+          1846,
+          2273
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000421",
+        "question_ids": [
+          "2hop__706637_93362",
+          "2hop__771727_93362",
+          "2hop__780652_93362"
+        ],
+        "rows": [
+          1673,
+          2203,
+          2424,
+          2986,
+          3080,
+          3712
+        ],
+        "max_steps": 2,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000014",
+        "question_ids": [
+          "2hop__109242_113442",
+          "2hop__272714_113442",
+          "2hop__540035_113442",
+          "2hop__794999_113442",
+          "2hop__818692_113442"
+        ],
+        "rows": [
+          359,
+          640,
+          969,
+          1869,
+          2576,
+          2726,
+          3303,
+          3333,
+          4110,
+          4222
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000173",
+        "question_ids": [
+          "2hop__242753_658778"
+        ],
+        "rows": [
+          647,
+          1967
+        ],
+        "max_steps": 2,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000089",
+        "question_ids": [
+          "2hop__153009_44880"
+        ],
+        "rows": [
+          4541,
+          4673
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000023",
+        "question_ids": [
+          "2hop__123166_47134",
+          "2hop__123545_47134",
+          "2hop__347652_47134",
+          "2hop__351045_47134",
+          "2hop__846844_47134"
+        ],
+        "rows": [
+          102,
+          356,
+          530,
+          677,
+          1046,
+          1978,
+          2522,
+          3196,
+          3358,
+          4071
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000232",
+        "question_ids": [
+          "2hop__310456_846599"
+        ],
+        "rows": [
+          2268,
+          3822
+        ],
+        "max_steps": 2,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000160",
+        "question_ids": [
+          "2hop__223823_29898",
+          "2hop__223823_29905",
+          "2hop__29893_29898",
+          "2hop__29893_29905",
+          "2hop__434218_29898",
+          "2hop__434218_29905"
+        ],
+        "rows": [
+          185,
+          252,
+          663,
+          1153,
+          1491,
+          1847,
+          2272,
+          2362,
+          2663,
+          2799,
+          3023,
+          3579
+        ],
+        "max_steps": 2,
+        "violations": [
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000440",
+        "question_ids": [
+          "2hop__776377_857193"
+        ],
+        "rows": [
+          53,
+          3727
+        ],
+        "max_steps": 2,
+        "violations": [
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000434",
+        "question_ids": [
+          "2hop__75714_148696",
+          "2hop__75714_21969",
+          "2hop__80834_148696",
+          "2hop__80834_21969",
+          "2hop__84847_148696",
+          "2hop__84847_21969",
+          "2hop__84937_148696",
+          "2hop__84937_21969"
+        ],
+        "rows": [
+          48,
+          123,
+          805,
+          901,
+          1345,
+          1437,
+          1464,
+          1508,
+          1679,
+          2046,
+          2407,
+          2532,
+          3314,
+          3522,
+          3604,
+          4185
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000299",
+        "question_ids": [
+          "2hop__44590_510545",
+          "2hop__68322_510545",
+          "2hop__72487_510545",
+          "2hop__73719_510545",
+          "2hop__80673_510545",
+          "2hop__80860_510545"
+        ],
+        "rows": [
+          34,
+          516,
+          549,
+          1031,
+          1619,
+          1761,
+          1957,
+          2097,
+          2452,
+          2623,
+          2716,
+          3402
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000364",
+        "question_ids": [
+          "2hop__580458_139390"
+        ],
+        "rows": [
+          328,
+          2896
+        ],
+        "max_steps": 2,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000248",
+        "question_ids": [
+          "2hop__329591_91104",
+          "2hop__449673_91104",
+          "2hop__560534_91104",
+          "2hop__575797_91104",
+          "2hop__822113_91104",
+          "2hop__835914_91104"
+        ],
+        "rows": [
+          52,
+          254,
+          445,
+          797,
+          1251,
+          1987,
+          2701,
+          3052,
+          3180,
+          3534,
+          3781,
+          4307
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000400",
+        "question_ids": [
+          "2hop__677929_696450"
+        ],
+        "rows": [
+          1170,
+          3286
+        ],
+        "max_steps": 2,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000150",
+        "question_ids": [
+          "2hop__20536_96912",
+          "2hop__749997_96912",
+          "2hop__91626_96912"
+        ],
+        "rows": [
+          92,
+          1086,
+          2658,
+          3040,
+          4088,
+          4157
+        ],
+        "max_steps": 2,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000001",
+        "question_ids": [
+          "2hop__10114_599630",
+          "2hop__144658_599630",
+          "2hop__144763_599630"
+        ],
+        "rows": [
+          206,
+          313,
+          322,
+          1918,
+          2409,
+          2816
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000300",
+        "question_ids": [
+          "2hop__445963_6063",
+          "2hop__445963_6095",
+          "2hop__445963_6098"
+        ],
+        "rows": [
+          189,
+          2892,
+          3041,
+          3378,
+          4201,
+          4386
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000443",
+        "question_ids": [
+          "2hop__79875_72187",
+          "2hop__79875_84469",
+          "2hop__85713_72187",
+          "2hop__85713_84469"
+        ],
+        "rows": [
+          1110,
+          2256,
+          2261,
+          2295,
+          2530,
+          3047,
+          3703,
+          3911
+        ],
+        "max_steps": 2,
+        "violations": [
+          "candidate_target_in_training_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000411",
+        "question_ids": [
+          "2hop__693444_220151"
+        ],
+        "rows": [
+          3181,
+          3289
+        ],
+        "max_steps": 2,
+        "violations": [
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000193",
+        "question_ids": [
+          "2hop__256553_617289"
+        ],
+        "rows": [
+          1727,
+          3019
+        ],
+        "max_steps": 2,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000490",
+        "question_ids": [
+          "3hop1__145924_131905_41948",
+          "3hop1__146155_131905_41948",
+          "3hop1__147162_131905_41948",
+          "3hop1__160324_131905_41948"
+        ],
+        "rows": [
+          4405,
+          4481,
+          4571,
+          4669,
+          4767,
+          4784,
+          4796,
+          4823
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000250",
+        "question_ids": [
+          "2hop__33288_157788",
+          "3hop1__145427_106426_157788",
+          "3hop1__145427_106426_77199"
+        ],
+        "rows": [
+          4472,
+          4590,
+          4620,
+          4705,
+          4710,
+          4778
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000502",
+        "question_ids": [
+          "3hop1__454441_55349_651302",
+          "3hop1__654651_55349_651302"
+        ],
+        "rows": [
+          261,
+          1132,
+          1728,
+          2856
+        ],
+        "max_steps": 3,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000506",
+        "question_ids": [
+          "3hop1__6362_14336_21111"
+        ],
+        "rows": [
+          4403,
+          4621
+        ],
+        "max_steps": 3,
+        "violations": [
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000226",
+        "question_ids": [
+          "2hop__30390_36634",
+          "2hop__30390_92972",
+          "3hop1__30390_36635_87083"
+        ],
+        "rows": [
+          4423,
+          4529,
+          4694,
+          4733,
+          4735,
+          4805
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000485",
+        "question_ids": [
+          "3hop1__132795_40769_64047",
+          "3hop1__132798_40769_64047",
+          "3hop1__132967_40769_64047",
+          "3hop1__132968_40769_64047",
+          "3hop1__133264_40769_64047",
+          "3hop1__133292_40769_64047",
+          "3hop1__222979_40769_64047",
+          "3hop1__295815_40769_64047",
+          "3hop1__379231_40769_64047",
+          "3hop1__483843_40769_64047",
+          "3hop1__51933_40769_64047",
+          "3hop1__52222_40769_64047",
+          "3hop1__593597_40769_64047",
+          "3hop1__595371_40769_64047",
+          "3hop1__76377_40769_64047",
+          "3hop1__800948_40769_64047",
+          "3hop2__132957_132798_40768",
+          "3hop2__132957_132967_40768",
+          "3hop2__132957_132968_40768",
+          "3hop2__132957_133264_40768",
+          "3hop2__132957_133292_40768",
+          "3hop2__132957_222979_40768",
+          "3hop2__132957_295815_40768",
+          "3hop2__132957_379231_40768",
+          "3hop2__132957_433432_40768",
+          "3hop2__132957_483843_40768",
+          "3hop2__132957_51933_40768",
+          "3hop2__132957_52222_40768",
+          "3hop2__132957_593597_40768",
+          "3hop2__132957_595371_40768",
+          "3hop2__132957_76377_40768",
+          "3hop2__132957_800948_40768",
+          "3hop2__222979_132477_40768",
+          "3hop2__222979_132536_40768",
+          "3hop2__222979_132628_40768",
+          "3hop2__222979_132957_40768",
+          "3hop2__222979_133099_40768",
+          "3hop2__222979_133154_40768",
+          "3hop2__222979_380281_40768",
+          "3hop2__222979_840908_40768"
+        ],
+        "rows": [
+          18,
+          25,
+          101,
+          218,
+          273,
+          335,
+          367,
+          416,
+          517,
+          528,
+          1009,
+          1039,
+          1195,
+          1324,
+          1388,
+          1485,
+          1569,
+          1578,
+          1615,
+          1629,
+          1643,
+          1695,
+          1746,
+          1773,
+          1856,
+          1890,
+          1899,
+          1905,
+          2201,
+          2328,
+          2347,
+          2370,
+          2382,
+          2391,
+          2429,
+          2509,
+          2594,
+          2614,
+          2702,
+          2768,
+          2891,
+          2952,
+          2964,
+          2993,
+          3008,
+          3017,
+          3024,
+          3037,
+          3070,
+          3150,
+          3157,
+          3160,
+          3170,
+          3225,
+          3239,
+          3393,
+          3421,
+          3427,
+          3488,
+          3502,
+          3512,
+          3592,
+          3610,
+          3766,
+          3807,
+          3843,
+          3856,
+          3872,
+          3955,
+          3987,
+          4075,
+          4103,
+          4135,
+          4138,
+          4172,
+          4260,
+          4271,
+          4278,
+          4305,
+          4323
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000503",
+        "question_ids": [
+          "3hop1__5544_34179_23375",
+          "3hop1__64694_34179_23375",
+          "3hop1__92251_34179_23375"
+        ],
+        "rows": [
+          4458,
+          4561,
+          4641,
+          4651,
+          4740,
+          4755
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000513",
+        "question_ids": [
+          "3hop2__14253_76873_64554",
+          "3hop2__69814_76873_64554",
+          "3hop2__76873_69814_64554"
+        ],
+        "rows": [
+          4427,
+          4461,
+          4545,
+          4623,
+          4665,
+          4737
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000482",
+        "question_ids": [
+          "3hop1__128516_30587_83479",
+          "3hop1__128865_30587_83479",
+          "3hop1__136852_30587_83479",
+          "3hop1__147225_30587_83479",
+          "3hop2__159979_30587_44003",
+          "3hop2__67618_30587_44003"
+        ],
+        "rows": [
+          4465,
+          4475,
+          4491,
+          4524,
+          4599,
+          4625,
+          4663,
+          4678,
+          4695,
+          4730,
+          4756,
+          4809
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000489",
+        "question_ids": [
+          "3hop1__145194_160545_34751",
+          "3hop1__145194_160545_34754",
+          "3hop1__145194_160545_60577",
+          "3hop1__145194_160545_62931",
+          "3hop1__446612_160545_34751",
+          "3hop1__446612_160545_34754",
+          "3hop1__446612_160545_60577",
+          "3hop1__446612_160545_62931",
+          "3hop1__462960_160545_34751",
+          "3hop1__462960_160545_34754",
+          "3hop1__462960_160545_60577",
+          "3hop1__462960_160545_62931",
+          "3hop1__465684_160545_34751",
+          "3hop1__465684_160545_34754",
+          "3hop1__465684_160545_60577",
+          "3hop1__465684_160545_62931",
+          "3hop1__539312_744503_34754",
+          "3hop1__818422_160545_34751",
+          "3hop1__818422_160545_34754",
+          "3hop1__818422_160545_60577",
+          "3hop1__818422_160545_62931"
+        ],
+        "rows": [
+          8,
+          79,
+          176,
+          192,
+          363,
+          743,
+          761,
+          811,
+          1028,
+          1048,
+          1142,
+          1186,
+          1226,
+          1262,
+          1334,
+          1339,
+          1357,
+          1397,
+          1489,
+          1635,
+          1736,
+          1739,
+          1748,
+          1789,
+          1793,
+          1827,
+          2026,
+          2092,
+          2212,
+          2363,
+          2570,
+          2630,
+          2857,
+          3002,
+          3042,
+          3233,
+          3500,
+          3511,
+          3597,
+          3945,
+          4242,
+          4381
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000510",
+        "question_ids": [
+          "3hop2__11282_57233_56883",
+          "3hop2__57233_105140_56883",
+          "3hop2__57233_106716_56883",
+          "3hop2__57233_11282_56883"
+        ],
+        "rows": [
+          4480,
+          4511,
+          4521,
+          4555,
+          4644,
+          4650,
+          4660,
+          4712
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000080",
+        "question_ids": [
+          "2hop__147171_27537",
+          "3hop1__107540_720914_27537",
+          "3hop1__108062_720914_27537",
+          "3hop1__108062_720914_41132",
+          "3hop1__108833_720914_27537",
+          "3hop1__108833_720914_41132",
+          "3hop1__108881_720914_27537",
+          "3hop1__108881_720914_41132",
+          "3hop1__109113_720914_27537",
+          "3hop1__109113_720914_41132",
+          "3hop1__109185_720914_27537",
+          "3hop1__109185_720914_41132",
+          "3hop1__109196_720914_27537",
+          "3hop1__109196_720914_41132",
+          "3hop1__109422_720914_27537",
+          "3hop1__109422_720914_41132",
+          "3hop1__178435_547811_41132",
+          "3hop1__178435_547811_80702",
+          "3hop1__208108_547811_41132",
+          "3hop1__208108_547811_80702",
+          "3hop1__222497_309482_27537",
+          "3hop1__222497_309482_41132",
+          "3hop1__222497_309482_80702",
+          "3hop1__222497_309482_89834",
+          "3hop1__222497_737465_93723",
+          "3hop1__280834_547811_41132",
+          "3hop1__280834_547811_80702",
+          "3hop1__28841_547811_41132",
+          "3hop1__28841_547811_80702",
+          "3hop1__30240_740597_41132",
+          "3hop1__312146_720914_27537",
+          "3hop1__312146_720914_41132",
+          "3hop1__320697_547811_41132",
+          "3hop1__320697_547811_80702",
+          "3hop1__409517_547811_41132",
+          "3hop1__409517_547811_80702",
+          "3hop1__593288_720914_27537",
+          "3hop1__593288_720914_41132",
+          "3hop1__689538_547811_80702",
+          "3hop1__796649_720914_27537",
+          "3hop1__796649_720914_41132",
+          "3hop1__801799_547811_41132",
+          "3hop1__801799_547811_80702",
+          "3hop1__820301_720914_27537",
+          "3hop1__820301_720914_41132",
+          "3hop1__844109_720914_27537",
+          "3hop1__844109_720914_41132"
+        ],
+        "rows": [
+          116,
+          147,
+          309,
+          329,
+          349,
+          388,
+          413,
+          459,
+          471,
+          584,
+          667,
+          687,
+          692,
+          773,
+          813,
+          905,
+          915,
+          1081,
+          1089,
+          1160,
+          1237,
+          1284,
+          1319,
+          1396,
+          1436,
+          1475,
+          1478,
+          1558,
+          1611,
+          1699,
+          1712,
+          1723,
+          1769,
+          1876,
+          1898,
+          1900,
+          1941,
+          1992,
+          2009,
+          2053,
+          2063,
+          2263,
+          2336,
+          2441,
+          2507,
+          2513,
+          2587,
+          2601,
+          2618,
+          2638,
+          2706,
+          2746,
+          2812,
+          2898,
+          2999,
+          3009,
+          3028,
+          3039,
+          3077,
+          3078,
+          3086,
+          3114,
+          3158,
+          3337,
+          3396,
+          3525,
+          3529,
+          3561,
+          3571,
+          3603,
+          3636,
+          3642,
+          3723,
+          3729,
+          3736,
+          3770,
+          3883,
+          3894,
+          3896,
+          3980,
+          4032,
+          4048,
+          4066,
+          4174,
+          4176,
+          4177,
+          4221,
+          4282,
+          4302,
+          4303,
+          4334,
+          4378,
+          4528,
+          4607
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000498",
+        "question_ids": [
+          "3hop1__305282_282081_10972",
+          "3hop1__305282_282081_73772",
+          "3hop1__390673_228453_10972",
+          "3hop1__390673_228453_86925",
+          "3hop1__398232_326948_10972",
+          "3hop1__398232_326948_59893",
+          "3hop1__398232_326948_78782",
+          "3hop1__640171_228453_10972",
+          "3hop1__640171_228453_86925",
+          "3hop1__707569_228453_10972",
+          "3hop1__765565_326948_10972",
+          "3hop1__765565_326948_78782",
+          "3hop1__765565_326948_86925",
+          "3hop1__768500_730460_70315",
+          "3hop1__768500_730460_78782",
+          "3hop1__786067_228453_10972",
+          "3hop1__786067_228453_86925",
+          "3hop1__823336_228453_10972",
+          "3hop1__823336_228453_86925",
+          "3hop1__831499_228453_10972"
+        ],
+        "rows": [
+          88,
+          100,
+          217,
+          380,
+          468,
+          476,
+          608,
+          632,
+          654,
+          791,
+          912,
+          1058,
+          1071,
+          1459,
+          1547,
+          1583,
+          1647,
+          1948,
+          2198,
+          2285,
+          2435,
+          2475,
+          2484,
+          2485,
+          2523,
+          2578,
+          2771,
+          2971,
+          3101,
+          3173,
+          3347,
+          3483,
+          3568,
+          3769,
+          3990,
+          4016,
+          4133,
+          4259,
+          4279,
+          4300
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000499",
+        "question_ids": [
+          "3hop1__358853_339990_15538",
+          "3hop1__358853_339990_54675",
+          "3hop1__483634_720378_15538",
+          "3hop1__491648_339990_15538",
+          "3hop1__491648_339990_54675",
+          "3hop1__527372_339990_54675",
+          "3hop1__573244_339990_15538",
+          "3hop1__586087_339990_54675",
+          "3hop1__604991_339990_15538",
+          "3hop1__604991_339990_54675",
+          "3hop1__637555_339990_15538",
+          "3hop1__662618_339990_54675",
+          "3hop1__841091_339990_54675",
+          "3hop1__847420_720378_15538",
+          "3hop1__847684_339990_54675"
+        ],
+        "rows": [
+          384,
+          578,
+          668,
+          766,
+          1062,
+          1109,
+          1135,
+          1273,
+          1862,
+          1962,
+          2320,
+          2350,
+          2375,
+          2479,
+          2652,
+          2659,
+          2712,
+          2853,
+          2917,
+          2969,
+          3051,
+          3100,
+          3208,
+          3296,
+          3324,
+          3450,
+          3532,
+          3608,
+          3732,
+          3946
+        ],
+        "max_steps": 3,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000347",
+        "question_ids": [
+          "2hop__51881_20590",
+          "2hop__53433_59035",
+          "3hop2__106842_30645_84681",
+          "3hop2__30956_65244_84681",
+          "3hop2__79512_16214_84681",
+          "4hop1__58323_375563_161848_20546",
+          "4hop1__58323_375563_161848_28750",
+          "4hop1__58323_375563_161848_44231",
+          "4hop1__58323_375563_161848_53331",
+          "4hop1__58323_375563_161848_61344",
+          "4hop1__58323_375563_161848_67585",
+          "4hop1__58323_375563_161848_83118",
+          "4hop1__58323_375563_161848_84681"
+        ],
+        "rows": [
+          4419,
+          4426,
+          4442,
+          4497,
+          4499,
+          4501,
+          4519,
+          4522,
+          4536,
+          4550,
+          4557,
+          4570,
+          4601,
+          4614,
+          4622,
+          4646,
+          4667,
+          4671,
+          4679,
+          4680,
+          4691,
+          4717,
+          4739,
+          4741,
+          4748,
+          4797
+        ],
+        "max_steps": 4,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000527",
+        "question_ids": [
+          "4hop3__710473_354093_254885_76356",
+          "4hop3__827497_354093_254885_76356"
+        ],
+        "rows": [
+          4466,
+          4492,
+          4587,
+          4595
+        ],
+        "max_steps": 4,
+        "violations": [],
+        "literal_boundary_clear": true
+      },
+      {
+        "family": "candidate-family-000526",
+        "question_ids": [
+          "4hop3__324979_836463_161616_77103",
+          "4hop3__531933_836463_161616_77103",
+          "4hop3__601548_836463_161616_77103",
+          "4hop3__773800_152874_161616_77103"
+        ],
+        "rows": [
+          118,
+          259,
+          1306,
+          1654,
+          2777,
+          3036,
+          3147,
+          3395
+        ],
+        "max_steps": 4,
+        "violations": [
+          "candidate_target_in_training_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000520",
+        "question_ids": [
+          "4hop1__159467_725495_49925_267352",
+          "4hop1__159467_725495_49925_349426",
+          "4hop1__163763_49925_13759_736921",
+          "4hop1__166471_49925_13759_736921",
+          "4hop1__228808_49925_13759_736921",
+          "4hop1__264443_49925_13759_736921",
+          "4hop1__277409_49925_13759_736921",
+          "4hop1__31050_725495_49925_267352",
+          "4hop1__31050_725495_49925_349426",
+          "4hop1__341156_49925_13759_736921",
+          "4hop1__391525_49925_13759_736921",
+          "4hop1__562740_49925_13759_736921",
+          "4hop1__56635_49925_13759_736921",
+          "4hop1__570103_49925_13759_736921",
+          "4hop1__571599_49925_13759_736921",
+          "4hop1__580153_49925_13759_736921",
+          "4hop1__629520_49925_13759_736921",
+          "4hop1__636860_49925_13759_736921",
+          "4hop1__696484_49925_13759_736921",
+          "4hop1__711307_49925_13759_736921",
+          "4hop1__749363_49925_13759_736921",
+          "4hop1__836115_49925_13759_736921"
+        ],
+        "rows": [
+          19,
+          605,
+          706,
+          774,
+          786,
+          908,
+          1010,
+          1263,
+          1287,
+          1393,
+          1421,
+          1428,
+          1440,
+          1460,
+          1493,
+          1552,
+          1591,
+          1822,
+          1858,
+          2096,
+          2110,
+          2134,
+          2140,
+          2141,
+          2372,
+          2474,
+          2549,
+          2646,
+          2723,
+          2759,
+          2806,
+          2829,
+          2961,
+          3247,
+          3405,
+          3545,
+          3563,
+          3702,
+          3748,
+          3771,
+          3780,
+          4137,
+          4160,
+          4311
+        ],
+        "max_steps": 4,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000484",
+        "question_ids": [
+          "3hop1__131783_131926_13165",
+          "3hop1__131783_131926_87157",
+          "3hop1__131783_131926_89261",
+          "3hop1__131783_131926_90707",
+          "3hop1__152880_131926_13165",
+          "3hop1__152880_131926_87157",
+          "3hop1__152880_131926_89261",
+          "3hop1__152880_131926_90707",
+          "3hop1__584774_131926_87157",
+          "3hop1__635099_131926_13165",
+          "3hop1__635099_131926_87157",
+          "3hop1__635099_131926_89261",
+          "3hop1__635099_131926_90707",
+          "3hop1__79039_131926_13165",
+          "3hop1__79039_131926_87157",
+          "3hop1__79039_131926_89261",
+          "3hop1__79039_131926_90707",
+          "4hop1__525129_315334_131926_13165",
+          "4hop1__525129_315334_131926_87157",
+          "4hop1__525129_315334_131926_89261",
+          "4hop1__525129_315334_131926_90707",
+          "4hop1__860115_798482_131926_13165",
+          "4hop1__860115_798482_131926_87157",
+          "4hop1__860115_798482_131926_89261",
+          "4hop1__860115_798482_131926_90707",
+          "4hop1__94201_642284_131926_13165",
+          "4hop1__94201_642284_131926_87157",
+          "4hop1__94201_642284_131926_89261",
+          "4hop1__94201_642284_131926_90707"
+        ],
+        "rows": [
+          41,
+          310,
+          338,
+          371,
+          474,
+          552,
+          631,
+          874,
+          928,
+          970,
+          1067,
+          1143,
+          1166,
+          1264,
+          1356,
+          1359,
+          1361,
+          1455,
+          1535,
+          1579,
+          1604,
+          1614,
+          1692,
+          1763,
+          1777,
+          1839,
+          1895,
+          1938,
+          1942,
+          2119,
+          2340,
+          2365,
+          2384,
+          2385,
+          2490,
+          2541,
+          2733,
+          2780,
+          2786,
+          2894,
+          2970,
+          3143,
+          3321,
+          3418,
+          3467,
+          3520,
+          3574,
+          3589,
+          3611,
+          3664,
+          3737,
+          3827,
+          3931,
+          3953,
+          4060,
+          4190,
+          4217,
+          4372
+        ],
+        "max_steps": 4,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000479",
+        "question_ids": [
+          "3hop1__106239_650651_7262",
+          "3hop1__174833_650651_7262",
+          "3hop1__321720_650651_7262",
+          "3hop1__377943_650651_7262",
+          "3hop1__664835_650651_7262",
+          "4hop1__105773_457883_650651_7262",
+          "4hop1__107309_457883_650651_7262",
+          "4hop1__161810_583746_457883_650651"
+        ],
+        "rows": [
+          275,
+          336,
+          417,
+          527,
+          534,
+          1069,
+          1118,
+          2266,
+          2330,
+          2332,
+          2480,
+          3016,
+          3750,
+          4022,
+          4286,
+          4296
+        ],
+        "max_steps": 4,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      },
+      {
+        "family": "candidate-family-000523",
+        "question_ids": [
+          "4hop1__43565_624859_355213_203322",
+          "4hop1__463635_624859_355213_203322",
+          "4hop1__473563_309800_355213_203322",
+          "4hop1__482815_624859_355213_203322",
+          "4hop1__76111_624859_355213_203322",
+          "4hop1__767417_624859_355213_203322",
+          "4hop1__814349_624859_355213_203322",
+          "4hop1__89530_624859_355213_203322"
+        ],
+        "rows": [
+          652,
+          671,
+          1016,
+          1625,
+          1802,
+          2486,
+          2866,
+          2956,
+          2958,
+          3082,
+          3297,
+          3788,
+          3935,
+          4316,
+          4318,
+          4338
+        ],
+        "max_steps": 4,
+        "violations": [
+          "candidate_target_in_training_pool",
+          "training_target_in_candidate_pool"
+        ],
+        "literal_boundary_clear": false
+      }
+    ]
+  },
+  "selected_groups": 49,
+  "selected_unique_questions": 349,
+  "selected_source_rows": 698,
+  "selected_group_max_steps": {
+    "2": 28,
+    "3": 14,
+    "4": 7
+  },
+  "original_train_rows": 17975,
+  "original_train_families": 444,
+  "conflicting_families_all_roles": [
+    {
+      "family": "musique-family-000000",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000002",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000004",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000005",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000006",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000007",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000008",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000013",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000019",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000020",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000021",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000023",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000025",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000030",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000044",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000053",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000054",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000055",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000058",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000067",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000078",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000083",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000098",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000108",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000116",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000130",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000136",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000154",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000156",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000158",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000180",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000182",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000183",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000200",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000205",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000206",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000210",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000213",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000217",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000221",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000234",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000239",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000243",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000267",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000271",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000276",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000309",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000329",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000348",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000352",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000381",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000386",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000390",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000416",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000442",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000462",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000472",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000473",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000480",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000481",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000503",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000506",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000510",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000514",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000528",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000535",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000558",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000572",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000576",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000590",
+      "reasons": [
+        "reserved_target_in_training_pool",
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000608",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000632",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000658",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000707",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000732",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000760",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000815",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000820",
+      "reasons": [
+        "reserved_target_in_training_pool"
+      ]
+    },
+    {
+      "family": "musique-family-000834",
+      "reasons": [
+        "training_target_in_reserved_pool"
+      ]
+    }
+  ],
+  "directly_conflicting_rows_all_roles": 1060,
+  "development_and_calibration": {
+    "dev": {
+      "original_rows": 299,
+      "original_families": 23,
+      "retained_rows": 119,
+      "retained_families": [
+        "musique-family-000012",
+        "musique-family-000073",
+        "musique-family-000199",
+        "musique-family-000493",
+        "musique-family-000657",
+        "musique-family-000679",
+        "musique-family-000698",
+        "musique-family-000719",
+        "musique-family-000730",
+        "musique-family-000734",
+        "musique-family-000755",
+        "musique-family-000798",
+        "musique-family-000800",
+        "musique-family-000804",
+        "musique-family-000812",
+        "musique-family-000865",
+        "musique-family-000871"
+      ]
+    },
+    "calibration": {
+      "original_rows": 229,
+      "original_families": 16,
+      "retained_rows": 229,
+      "retained_families": [
+        "musique-family-000191",
+        "musique-family-000194",
+        "musique-family-000297",
+        "musique-family-000593",
+        "musique-family-000649",
+        "musique-family-000676",
+        "musique-family-000699",
+        "musique-family-000771",
+        "musique-family-000781",
+        "musique-family-000805",
+        "musique-family-000808",
+        "musique-family-000846",
+        "musique-family-000857",
+        "musique-family-000867",
+        "musique-family-000869",
+        "musique-family-000894"
+      ]
+    }
+  },
+  "retained_train_rows": 5454,
+  "retained_train_families": [
+    "musique-family-000009",
+    "musique-family-000010",
+    "musique-family-000011",
+    "musique-family-000018",
+    "musique-family-000026",
+    "musique-family-000028",
+    "musique-family-000031",
+    "musique-family-000032",
+    "musique-family-000034",
+    "musique-family-000036",
+    "musique-family-000038",
+    "musique-family-000045",
+    "musique-family-000047",
+    "musique-family-000049",
+    "musique-family-000050",
+    "musique-family-000051",
+    "musique-family-000056",
+    "musique-family-000057",
+    "musique-family-000060",
+    "musique-family-000068",
+    "musique-family-000074",
+    "musique-family-000076",
+    "musique-family-000079",
+    "musique-family-000081",
+    "musique-family-000085",
+    "musique-family-000087",
+    "musique-family-000088",
+    "musique-family-000089",
+    "musique-family-000090",
+    "musique-family-000092",
+    "musique-family-000096",
+    "musique-family-000100",
+    "musique-family-000102",
+    "musique-family-000104",
+    "musique-family-000106",
+    "musique-family-000107",
+    "musique-family-000109",
+    "musique-family-000110",
+    "musique-family-000112",
+    "musique-family-000114",
+    "musique-family-000115",
+    "musique-family-000117",
+    "musique-family-000123",
+    "musique-family-000125",
+    "musique-family-000131",
+    "musique-family-000132",
+    "musique-family-000134",
+    "musique-family-000139",
+    "musique-family-000141",
+    "musique-family-000146",
+    "musique-family-000148",
+    "musique-family-000161",
+    "musique-family-000168",
+    "musique-family-000169",
+    "musique-family-000170",
+    "musique-family-000171",
+    "musique-family-000172",
+    "musique-family-000177",
+    "musique-family-000178",
+    "musique-family-000185",
+    "musique-family-000186",
+    "musique-family-000190",
+    "musique-family-000201",
+    "musique-family-000203",
+    "musique-family-000214",
+    "musique-family-000216",
+    "musique-family-000219",
+    "musique-family-000222",
+    "musique-family-000231",
+    "musique-family-000232",
+    "musique-family-000233",
+    "musique-family-000235",
+    "musique-family-000236",
+    "musique-family-000237",
+    "musique-family-000238",
+    "musique-family-000240",
+    "musique-family-000242",
+    "musique-family-000246",
+    "musique-family-000253",
+    "musique-family-000254",
+    "musique-family-000255",
+    "musique-family-000258",
+    "musique-family-000260",
+    "musique-family-000261",
+    "musique-family-000262",
+    "musique-family-000263",
+    "musique-family-000264",
+    "musique-family-000270",
+    "musique-family-000272",
+    "musique-family-000273",
+    "musique-family-000274",
+    "musique-family-000275",
+    "musique-family-000278",
+    "musique-family-000279",
+    "musique-family-000283",
+    "musique-family-000286",
+    "musique-family-000289",
+    "musique-family-000292",
+    "musique-family-000293",
+    "musique-family-000296",
+    "musique-family-000299",
+    "musique-family-000302",
+    "musique-family-000303",
+    "musique-family-000304",
+    "musique-family-000305",
+    "musique-family-000306",
+    "musique-family-000307",
+    "musique-family-000312",
+    "musique-family-000314",
+    "musique-family-000315",
+    "musique-family-000316",
+    "musique-family-000319",
+    "musique-family-000322",
+    "musique-family-000325",
+    "musique-family-000328",
+    "musique-family-000331",
+    "musique-family-000334",
+    "musique-family-000337",
+    "musique-family-000339",
+    "musique-family-000347",
+    "musique-family-000349",
+    "musique-family-000351",
+    "musique-family-000354",
+    "musique-family-000355",
+    "musique-family-000356",
+    "musique-family-000357",
+    "musique-family-000359",
+    "musique-family-000364",
+    "musique-family-000371",
+    "musique-family-000372",
+    "musique-family-000373",
+    "musique-family-000374",
+    "musique-family-000375",
+    "musique-family-000376",
+    "musique-family-000377",
+    "musique-family-000378",
+    "musique-family-000384",
+    "musique-family-000385",
+    "musique-family-000388",
+    "musique-family-000389",
+    "musique-family-000391",
+    "musique-family-000392",
+    "musique-family-000393",
+    "musique-family-000395",
+    "musique-family-000396",
+    "musique-family-000399",
+    "musique-family-000401",
+    "musique-family-000402",
+    "musique-family-000404",
+    "musique-family-000405",
+    "musique-family-000406",
+    "musique-family-000407",
+    "musique-family-000409",
+    "musique-family-000410",
+    "musique-family-000412",
+    "musique-family-000413",
+    "musique-family-000415",
+    "musique-family-000418",
+    "musique-family-000420",
+    "musique-family-000423",
+    "musique-family-000425",
+    "musique-family-000426",
+    "musique-family-000428",
+    "musique-family-000431",
+    "musique-family-000434",
+    "musique-family-000437",
+    "musique-family-000440",
+    "musique-family-000441",
+    "musique-family-000443",
+    "musique-family-000448",
+    "musique-family-000450",
+    "musique-family-000451",
+    "musique-family-000454",
+    "musique-family-000457",
+    "musique-family-000459",
+    "musique-family-000460",
+    "musique-family-000463",
+    "musique-family-000465",
+    "musique-family-000466",
+    "musique-family-000467",
+    "musique-family-000469",
+    "musique-family-000470",
+    "musique-family-000474",
+    "musique-family-000475",
+    "musique-family-000476",
+    "musique-family-000477",
+    "musique-family-000479",
+    "musique-family-000489",
+    "musique-family-000492",
+    "musique-family-000494",
+    "musique-family-000499",
+    "musique-family-000502",
+    "musique-family-000509",
+    "musique-family-000511",
+    "musique-family-000512",
+    "musique-family-000513",
+    "musique-family-000517",
+    "musique-family-000518",
+    "musique-family-000521",
+    "musique-family-000522",
+    "musique-family-000525",
+    "musique-family-000526",
+    "musique-family-000529",
+    "musique-family-000530",
+    "musique-family-000531",
+    "musique-family-000532",
+    "musique-family-000536",
+    "musique-family-000539",
+    "musique-family-000540",
+    "musique-family-000543",
+    "musique-family-000544",
+    "musique-family-000548",
+    "musique-family-000550",
+    "musique-family-000552",
+    "musique-family-000554",
+    "musique-family-000555",
+    "musique-family-000559",
+    "musique-family-000562",
+    "musique-family-000563",
+    "musique-family-000566",
+    "musique-family-000567",
+    "musique-family-000570",
+    "musique-family-000571",
+    "musique-family-000575",
+    "musique-family-000579",
+    "musique-family-000580",
+    "musique-family-000584",
+    "musique-family-000588",
+    "musique-family-000594",
+    "musique-family-000595",
+    "musique-family-000596",
+    "musique-family-000598",
+    "musique-family-000599",
+    "musique-family-000600",
+    "musique-family-000602",
+    "musique-family-000606",
+    "musique-family-000609",
+    "musique-family-000613",
+    "musique-family-000618",
+    "musique-family-000619",
+    "musique-family-000622",
+    "musique-family-000623",
+    "musique-family-000634",
+    "musique-family-000638",
+    "musique-family-000641",
+    "musique-family-000642",
+    "musique-family-000643",
+    "musique-family-000646",
+    "musique-family-000648",
+    "musique-family-000652",
+    "musique-family-000661",
+    "musique-family-000663",
+    "musique-family-000664",
+    "musique-family-000665",
+    "musique-family-000667",
+    "musique-family-000668",
+    "musique-family-000670",
+    "musique-family-000671",
+    "musique-family-000673",
+    "musique-family-000674",
+    "musique-family-000675",
+    "musique-family-000677",
+    "musique-family-000678",
+    "musique-family-000681",
+    "musique-family-000683",
+    "musique-family-000685",
+    "musique-family-000687",
+    "musique-family-000689",
+    "musique-family-000690",
+    "musique-family-000691",
+    "musique-family-000692",
+    "musique-family-000693",
+    "musique-family-000694",
+    "musique-family-000702",
+    "musique-family-000705",
+    "musique-family-000706",
+    "musique-family-000708",
+    "musique-family-000709",
+    "musique-family-000710",
+    "musique-family-000711",
+    "musique-family-000712",
+    "musique-family-000713",
+    "musique-family-000715",
+    "musique-family-000725",
+    "musique-family-000733",
+    "musique-family-000738",
+    "musique-family-000739",
+    "musique-family-000741",
+    "musique-family-000742",
+    "musique-family-000743",
+    "musique-family-000744",
+    "musique-family-000745",
+    "musique-family-000749",
+    "musique-family-000750",
+    "musique-family-000752",
+    "musique-family-000753",
+    "musique-family-000754",
+    "musique-family-000756",
+    "musique-family-000757",
+    "musique-family-000759",
+    "musique-family-000761",
+    "musique-family-000762",
+    "musique-family-000763",
+    "musique-family-000764",
+    "musique-family-000766",
+    "musique-family-000767",
+    "musique-family-000768",
+    "musique-family-000769",
+    "musique-family-000770",
+    "musique-family-000774",
+    "musique-family-000778",
+    "musique-family-000782",
+    "musique-family-000783",
+    "musique-family-000784",
+    "musique-family-000786",
+    "musique-family-000788",
+    "musique-family-000789",
+    "musique-family-000791",
+    "musique-family-000792",
+    "musique-family-000793",
+    "musique-family-000795",
+    "musique-family-000796",
+    "musique-family-000799",
+    "musique-family-000809",
+    "musique-family-000810",
+    "musique-family-000811",
+    "musique-family-000813",
+    "musique-family-000814",
+    "musique-family-000816",
+    "musique-family-000819",
+    "musique-family-000821",
+    "musique-family-000823",
+    "musique-family-000825",
+    "musique-family-000826",
+    "musique-family-000827",
+    "musique-family-000832",
+    "musique-family-000836",
+    "musique-family-000838",
+    "musique-family-000840",
+    "musique-family-000841",
+    "musique-family-000842",
+    "musique-family-000843",
+    "musique-family-000844",
+    "musique-family-000847",
+    "musique-family-000848",
+    "musique-family-000850",
+    "musique-family-000851",
+    "musique-family-000854",
+    "musique-family-000855",
+    "musique-family-000856",
+    "musique-family-000858",
+    "musique-family-000860",
+    "musique-family-000866",
+    "musique-family-000870",
+    "musique-family-000873",
+    "musique-family-000874",
+    "musique-family-000876",
+    "musique-family-000877",
+    "musique-family-000878",
+    "musique-family-000879",
+    "musique-family-000880",
+    "musique-family-000881",
+    "musique-family-000882",
+    "musique-family-000884",
+    "musique-family-000885",
+    "musique-family-000887",
+    "musique-family-000888",
+    "musique-family-000889",
+    "musique-family-000891",
+    "musique-family-000892",
+    "musique-family-000895"
+  ],
+  "retained_train_family_max_steps": {
+    "2": 317,
+    "3": 52,
+    "4": 2
+  },
+  "scope": "Remove entire train/dev/calibration families touched by the selected literal source overlaps. Original roles/results stay unchanged. No reclassification of observed families as blind.",
+  "still_unproven": [
+    "semantic duplicates and all project history",
+    "author archive equivalence",
+    "source/label validity of prospective evaluation",
+    "pretrained exposure"
+  ],
+  "text_or_answers_emitted_to_developer_or_model": false,
+  "model_calls": 0,
+  "sha_checks": false,
+  "compute": {
+    "wall_seconds": 1.6320507964119315,
+    "cpu_seconds": 1.631969508
+  }
+}

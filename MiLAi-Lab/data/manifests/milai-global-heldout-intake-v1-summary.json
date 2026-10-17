@@ -1,0 +1,35 @@
+{
+  "status": "METADATA_ONLY_POTENTIAL_EVALUATION_NOT_ADMITTED",
+  "source_url": "https://huggingface.co/datasets/bdsaglam/musique/resolve/main/musique_full_v1.0_dev.jsonl",
+  "observed_source_version": "22873a405dd809893b22ada0b499299fb612d2df",
+  "download_bytes": 59422562,
+  "rows": 4834,
+  "unique_question_ids": 2417,
+  "decomposition_step_rows": {
+    "2": 2504,
+    "4": 810,
+    "3": 1520
+  },
+  "shared_seed_components": 544,
+  "component_max_steps": {
+    "2": 465,
+    "4": 30,
+    "3": 49
+  },
+  "question_id_overlap_with_all_current_official_train_mirror": 0,
+  "seed_id_overlap_with_all_current_official_train_mirror": 0,
+  "rows_with_shared_train_seed": 0,
+  "eligible_for_gradient_training": false,
+  "question_answer_paragraph_text_displayed_or_model_input": false,
+  "source_text_overlap_checked": false,
+  "project_full_historical_exposure_certified": false,
+  "author_archive_equivalence_confirmed": false,
+  "sha_checks": false,
+  "new_model_calls": 0,
+  "limits": [
+    "Seed-only components are not full source-family isolation; target/background text and semantic overlap are not inspected here.",
+    "This is the named public dev split from a third-party mirror, not an officialtest score or already-certified blind cohort.",
+    "Existing63potentialheldoutfamilies contain no4hopfamilies; this intake assesses possible coverage only.",
+    "Do not consume new question/answer/paragraph text for method development or training; admission requires the broader protocol."
+  ]
+}

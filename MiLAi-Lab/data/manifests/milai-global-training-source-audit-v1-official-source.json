@@ -1,0 +1,12 @@
+{
+  "status": "OFFICIAL_ARCHIVE_UNAVAILABLE_QUOTA",
+  "url": "https://drive.usercontent.google.com/download?id=1tGdADlNjWFaHLeZZGShh2IRcpO6Lv24h&export=download&confirm=t",
+  "author_reference": "https://github.com/StonyBrookNLP/musique",
+  "observed": "HTTP200 yielded2040byte GoogleDrive quota-exceeded HTML, not an archive",
+  "sha_checks": false,
+  "official_equivalence_proven": false,
+  "automatic_retry": false,
+  "raw_train_status": "AUTHOR_RAW_TRAIN_ALSO_QUOTA_EXCEEDED",
+  "raw_train_url": "https://drive.usercontent.google.com/download?id=1qRgF7UXv1iNQ8NU3k5rau1lPFEu6ip1Y&export=download&confirm=t",
+  "raw_train_response_bytes": 2040
+}

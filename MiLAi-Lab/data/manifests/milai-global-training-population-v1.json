@@ -1875,5 +1875,20 @@
     "4": 1371
   },
   "candidate_training_metadata_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-training-design-v1/candidate-train-metadata.jsonl",
-  "all_source_rows_same_family_and_question_ids": true
+  "all_source_rows_same_family_and_question_ids": true,
+  "evaluation_coverage_metadata": {
+    "consistent_dev_families": 23,
+    "consistent_dev_family_max_steps": {
+      "2": 16,
+      "3": 6,
+      "4": 1
+    },
+    "unregistered_test_candidate_families": 63,
+    "unregistered_test_candidate_family_max_steps": {
+      "2": 59,
+      "3": 4
+    },
+    "four_step_unregistered_test_candidates": 0,
+    "conclusion": "The existing candidate panel cannot establish unseen4step family generalization. Additional evaluation intake is metadata-only and not yet admitted."
+  }
 }
