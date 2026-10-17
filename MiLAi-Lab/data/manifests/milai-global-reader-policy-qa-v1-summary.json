@@ -1,0 +1,5383 @@
+{
+  "status": "DEV_ALL_FIRST_RESPONSES_REVIEWED_COSTS_RECONCILED_RESERVED_PENDING",
+  "run": {
+    "status": "COMPLETED",
+    "phase": "predict",
+    "planned": 837,
+    "completed": 837,
+    "known_failures": 1,
+    "fresh_reader_attempts": 570,
+    "reused_reader_outputs": 267,
+    "known_failed_reader_calls": 1,
+    "actual_wall_seconds": 5549.321726499125,
+    "actual_cpu_seconds": 8.920201716000001,
+    "unique_reader_inputs": 570
+  },
+  "actual_reader_usage": {
+    "responses": 570,
+    "known_prompt_tokens": 390105,
+    "known_completion_tokens": 848375,
+    "known_total_tokens": 1238480
+  },
+  "reader_ledger_audit": {
+    "generation": {
+      "known_tokens": 1238480,
+      "charged_tokens": 1238480,
+      "unknown_usage": 0,
+      "requests": 570
+    },
+    "embedding": {
+      "known_tokens": 0,
+      "charged_tokens": 0,
+      "unknown_usage": 0
+    },
+    "known_token_difference": 0,
+    "request_difference": 0
+  },
+  "actual_local_compute_already_charged": {
+    "families32-0-native": {
+      "probe": {
+        "wall_seconds": 134.77328141313046,
+        "cpu_seconds": 204.004764488,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 17.570401377044618,
+        "cpu_seconds": 26.741260355,
+        "runs": 1,
+        "forwards": 65,
+        "sequence_rows": 65,
+        "input_tokens": 192427,
+        "state_tokenizations": 65,
+        "state_tokens": 170194,
+        "peak_rss_kib": 2747200,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 14.543666758574545,
+        "cpu_seconds": 19.681445476999997,
+        "forwards": 59,
+        "sequence_rows": 59,
+        "input_tokens": 173421,
+        "state_tokenizations": 59,
+        "state_tokens": 154666,
+        "peak_rss_kib": 2747216,
+        "peak_cuda_allocated_bytes": 5260974080
+      }
+    },
+    "families32-0-linear": {
+      "probe": {
+        "wall_seconds": 120.00965236406773,
+        "cpu_seconds": 186.50311626799999,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 15.481973762623966,
+        "cpu_seconds": 21.594997867,
+        "runs": 1,
+        "forwards": 72,
+        "sequence_rows": 72,
+        "input_tokens": 212347,
+        "state_tokenizations": 72,
+        "state_tokens": 187921,
+        "peak_rss_kib": 2565368,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 11.43049197923392,
+        "cpu_seconds": 13.936807453,
+        "forwards": 52,
+        "sequence_rows": 52,
+        "input_tokens": 153384,
+        "state_tokenizations": 52,
+        "state_tokens": 136936,
+        "peak_rss_kib": 2565412,
+        "peak_cuda_allocated_bytes": 1610060800
+      }
+    },
+    "families32-1-native": {
+      "probe": {
+        "wall_seconds": 137.33658150676638,
+        "cpu_seconds": 208.36534089,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 18.81167488452047,
+        "cpu_seconds": 28.247269587999998,
+        "runs": 1,
+        "forwards": 70,
+        "sequence_rows": 70,
+        "input_tokens": 208344,
+        "state_tokenizations": 70,
+        "state_tokens": 184554,
+        "peak_rss_kib": 2747944,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 13.778079681098461,
+        "cpu_seconds": 18.826347558000002,
+        "forwards": 54,
+        "sequence_rows": 54,
+        "input_tokens": 157413,
+        "state_tokenizations": 54,
+        "state_tokens": 140307,
+        "peak_rss_kib": 2747048,
+        "peak_cuda_allocated_bytes": 5254422528
+      }
+    },
+    "families32-1-linear": {
+      "probe": {
+        "wall_seconds": 122.54381353035569,
+        "cpu_seconds": 191.623713615,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 14.599379089660943,
+        "cpu_seconds": 20.290552163999998,
+        "runs": 1,
+        "forwards": 63,
+        "sequence_rows": 63,
+        "input_tokens": 186679,
+        "state_tokenizations": 63,
+        "state_tokens": 165120,
+        "peak_rss_kib": 2565608,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 13.147363333962858,
+        "cpu_seconds": 16.223296294,
+        "forwards": 61,
+        "sequence_rows": 61,
+        "input_tokens": 179050,
+        "state_tokenizations": 61,
+        "state_tokens": 159739,
+        "peak_rss_kib": 2565320,
+        "peak_cuda_allocated_bytes": 1611721728
+      }
+    },
+    "families32-2-native": {
+      "probe": {
+        "wall_seconds": 134.99758556485176,
+        "cpu_seconds": 201.657394692,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 17.079495574347675,
+        "cpu_seconds": 25.36656877,
+        "runs": 1,
+        "forwards": 62,
+        "sequence_rows": 62,
+        "input_tokens": 183666,
+        "state_tokenizations": 62,
+        "state_tokens": 162428,
+        "peak_rss_kib": 2747236,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 15.091079957783222,
+        "cpu_seconds": 20.828281453000002,
+        "forwards": 62,
+        "sequence_rows": 62,
+        "input_tokens": 182060,
+        "state_tokenizations": 62,
+        "state_tokens": 162428,
+        "peak_rss_kib": 2747480,
+        "peak_cuda_allocated_bytes": 5254422528
+      }
+    },
+    "families32-2-linear": {
+      "probe": {
+        "wall_seconds": 124.46370004117489,
+        "cpu_seconds": 196.958558334,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 18.701386526226997,
+        "cpu_seconds": 25.490297600999998,
+        "runs": 1,
+        "forwards": 73,
+        "sequence_rows": 73,
+        "input_tokens": 218419,
+        "state_tokenizations": 73,
+        "state_tokens": 193646,
+        "peak_rss_kib": 2565648,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 12.282044949941337,
+        "cpu_seconds": 16.221181612,
+        "forwards": 51,
+        "sequence_rows": 51,
+        "input_tokens": 147344,
+        "state_tokenizations": 51,
+        "state_tokens": 131213,
+        "peak_rss_kib": 2565344,
+        "peak_cuda_allocated_bytes": 1611149312
+      }
+    },
+    "families128-0-native": {
+      "probe": {
+        "wall_seconds": 136.3876620652154,
+        "cpu_seconds": 201.512340378,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 21.488926799967885,
+        "cpu_seconds": 32.572990875,
+        "runs": 1,
+        "forwards": 87,
+        "sequence_rows": 87,
+        "input_tokens": 261801,
+        "state_tokenizations": 87,
+        "state_tokens": 232628,
+        "peak_rss_kib": 2747816,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 10.92761883046478,
+        "cpu_seconds": 14.336204694000001,
+        "forwards": 37,
+        "sequence_rows": 37,
+        "input_tokens": 103918,
+        "state_tokenizations": 37,
+        "state_tokens": 92233,
+        "peak_rss_kib": 2747076,
+        "peak_cuda_allocated_bytes": 3370902528
+      }
+    },
+    "families128-0-linear": {
+      "probe": {
+        "wall_seconds": 123.64487860072404,
+        "cpu_seconds": 196.199626852,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 16.3538483614102,
+        "cpu_seconds": 22.945284123,
+        "runs": 1,
+        "forwards": 75,
+        "sequence_rows": 75,
+        "input_tokens": 223801,
+        "state_tokenizations": 75,
+        "state_tokens": 198406,
+        "peak_rss_kib": 2565968,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 11.216792091727257,
+        "cpu_seconds": 14.180250214,
+        "forwards": 49,
+        "sequence_rows": 49,
+        "input_tokens": 141933,
+        "state_tokenizations": 49,
+        "state_tokens": 126452,
+        "peak_rss_kib": 2565044,
+        "peak_cuda_allocated_bytes": 1610271744
+      }
+    },
+    "families128-1-native": {
+      "probe": {
+        "wall_seconds": 139.80778384488076,
+        "cpu_seconds": 207.743528209,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 17.123551918193698,
+        "cpu_seconds": 25.519224575000003,
+        "runs": 1,
+        "forwards": 64,
+        "sequence_rows": 64,
+        "input_tokens": 189362,
+        "state_tokenizations": 64,
+        "state_tokens": 167480,
+        "peak_rss_kib": 2746932,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 20.46650261990726,
+        "cpu_seconds": 27.425783936,
+        "forwards": 60,
+        "sequence_rows": 60,
+        "input_tokens": 176367,
+        "state_tokenizations": 60,
+        "state_tokens": 157381,
+        "peak_rss_kib": 2747588,
+        "peak_cuda_allocated_bytes": 5260989440
+      }
+    },
+    "families128-1-linear": {
+      "probe": {
+        "wall_seconds": 121.51760224346071,
+        "cpu_seconds": 190.708671414,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 16.609372403472662,
+        "cpu_seconds": 23.787794679999998,
+        "runs": 1,
+        "forwards": 75,
+        "sequence_rows": 75,
+        "input_tokens": 222870,
+        "state_tokenizations": 75,
+        "state_tokens": 197455,
+        "peak_rss_kib": 2565476,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 11.00277862790972,
+        "cpu_seconds": 13.252437069000003,
+        "forwards": 49,
+        "sequence_rows": 49,
+        "input_tokens": 142901,
+        "state_tokenizations": 49,
+        "state_tokens": 127400,
+        "peak_rss_kib": 2564944,
+        "peak_cuda_allocated_bytes": 1579183616
+      }
+    },
+    "families128-2-native": {
+      "probe": {
+        "wall_seconds": 135.43702588230371,
+        "cpu_seconds": 204.720560449,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 20.56849361769855,
+        "cpu_seconds": 31.195415745000002,
+        "runs": 1,
+        "forwards": 81,
+        "sequence_rows": 81,
+        "input_tokens": 241469,
+        "state_tokenizations": 81,
+        "state_tokens": 214196,
+        "peak_rss_kib": 2747360,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 11.881104237399995,
+        "cpu_seconds": 15.809612822000002,
+        "forwards": 43,
+        "sequence_rows": 43,
+        "input_tokens": 124233,
+        "state_tokenizations": 43,
+        "state_tokens": 110666,
+        "peak_rss_kib": 2747308,
+        "peak_cuda_allocated_bytes": 5252524032
+      }
+    },
+    "families128-2-linear": {
+      "probe": {
+        "wall_seconds": 120.57098260894418,
+        "cpu_seconds": 187.656502642,
+        "runs": 1,
+        "forwards": 840,
+        "sequence_rows": 840,
+        "input_tokens": 2492164,
+        "state_tokenizations": 840,
+        "state_tokens": 2215214
+      },
+      "selector": {
+        "wall_seconds": 17.912958150729537,
+        "cpu_seconds": 25.402052804999997,
+        "runs": 1,
+        "forwards": 85,
+        "sequence_rows": 85,
+        "input_tokens": 253885,
+        "state_tokenizations": 85,
+        "state_tokens": 225324,
+        "peak_rss_kib": 2565612,
+        "scope": "Incremental actual work; standalone policies add cached work separately"
+      },
+      "fixed4_extension": {
+        "runs": 1,
+        "wall_seconds": 9.857578796334565,
+        "cpu_seconds": 12.050267961,
+        "forwards": 39,
+        "sequence_rows": 39,
+        "input_tokens": 111845,
+        "state_tokenizations": 39,
+        "state_tokens": 99534,
+        "peak_rss_kib": 2565608,
+        "peak_cuda_allocated_bytes": 1610060800
+      }
+    }
+  },
+  "local_ledger_audits": {
+    "families32-0-native": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 2.842170943040401e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_laya",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 7.105427357601002e-15,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_ce_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families32-0-linear": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_linear",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_linear_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families32-1-native": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -2.842170943040401e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_laya",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 2.4868995751603507e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_ce_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": -7.105427357601002e-15,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families32-1-linear": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 2.842170943040401e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_linear",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_linear_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families32-2-native": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -8.526512829121202e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_laya",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 1.4210854715202004e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_ce_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": 1.4210854715202004e-14,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families32-2-linear": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -8.526512829121202e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_linear",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -3.552713678800501e-15,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_linear_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": 3.552713678800501e-15,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families128-0-native": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 8.526512829121202e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_laya",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 1.4210854715202004e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_ce_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": 1.7763568394002505e-15,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families128-0-linear": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -5.684341886080802e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_linear",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -7.105427357601002e-15,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_linear_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": -3.552713678800501e-15,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families128-1-native": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 2.842170943040401e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_laya",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 7.105427357601002e-15,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_ce_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": -1.0658141036401503e-14,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families128-1-linear": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -1.9895196601282805e-13,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_linear",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -7.105427357601002e-15,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_linear_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": 7.105427357601002e-15,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families128-2-native": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": 0.0,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_laya",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -1.0658141036401503e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_ce_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": -1.0658141036401503e-14,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    },
+    "families128-2-linear": {
+      "probe": {
+        "phase": "reader_invariance_probe_v1",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -1.4210854715202004e-13,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "selector": {
+        "phase": "bounded_reader_selection_linear",
+        "differences": {
+          "wall_seconds": 0.0,
+          "cpu_seconds": -1.4210854715202004e-14,
+          "runs": 0,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      },
+      "fixed4_extension": {
+        "phase": "reader_linear_fixed4_extension_v1",
+        "differences": {
+          "runs": 0,
+          "wall_seconds": 0.0,
+          "cpu_seconds": 3.552713678800501e-15,
+          "forwards": 0,
+          "sequence_rows": 0,
+          "input_tokens": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0
+        },
+        "matches": true
+      }
+    }
+  },
+  "reader_unknown_usage_difference": 0,
+  "dense_control": {
+    "usage": {
+      "responses": 24,
+      "known_prompt_tokens": 42325,
+      "known_total_tokens": 42325
+    },
+    "ledger_delta": {
+      "known_tokens": 42325,
+      "charged_tokens": 42325,
+      "unknown_usage": 0
+    },
+    "known_token_difference": 0,
+    "unknown_usage_difference": 0,
+    "compute": {
+      "wall_seconds": 7.3875236958265305,
+      "cpu_seconds": 3.2667313589999996,
+      "runs": 1,
+      "completed_cases": 31,
+      "embedding_http_receipts": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/dense/http/embedding",
+      "scope": "Actual unique text embeddings across the cohort plus ranking. Do not multiply shared batch/index costs by question or policy count."
+    }
+  },
+  "common_retrieval": [
+    {
+      "case_id": "row-2389",
+      "wall_seconds": 0.0021342411637306213,
+      "cpu_seconds": 0.0021334170000000263,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-2792",
+      "wall_seconds": 0.0010774480178952217,
+      "cpu_seconds": 0.0010781449999996973,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-3035",
+      "wall_seconds": 0.0010259030386805534,
+      "cpu_seconds": 0.0010259480000001098,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-5054",
+      "wall_seconds": 0.0011094249784946442,
+      "cpu_seconds": 0.0011093909999999596,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-9391",
+      "wall_seconds": 0.0009462814778089523,
+      "cpu_seconds": 0.0009461019999998932,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-9768",
+      "wall_seconds": 0.0009618252515792847,
+      "cpu_seconds": 0.0009619700000000897,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-13068",
+      "wall_seconds": 0.0008079102262854576,
+      "cpu_seconds": 0.0008078690000004052,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-13512",
+      "wall_seconds": 0.0010696332901716232,
+      "cpu_seconds": 0.0010696960000000644,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-15048",
+      "wall_seconds": 0.0010290434584021568,
+      "cpu_seconds": 0.0010292650000001125,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-16494",
+      "wall_seconds": 0.0007836371660232544,
+      "cpu_seconds": 0.0007838659999999109,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-21156",
+      "wall_seconds": 0.0010694079101085663,
+      "cpu_seconds": 0.0010699020000002335,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-21798",
+      "wall_seconds": 0.0010695969685912132,
+      "cpu_seconds": 0.0010693939999999458,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-21946",
+      "wall_seconds": 0.0013300394639372826,
+      "cpu_seconds": 0.0013303199999996629,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-24052",
+      "wall_seconds": 0.001482308842241764,
+      "cpu_seconds": 0.001482608999999968,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-24087",
+      "wall_seconds": 0.0011507729068398476,
+      "cpu_seconds": 0.0011512289999999759,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-26884",
+      "wall_seconds": 0.00144925806671381,
+      "cpu_seconds": 0.0014496400000001408,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-28535",
+      "wall_seconds": 0.0011054398491978645,
+      "cpu_seconds": 0.0011056460000000712,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-30334",
+      "wall_seconds": 0.001295766793191433,
+      "cpu_seconds": 0.0012957339999997153,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-32106",
+      "wall_seconds": 0.0012273360043764114,
+      "cpu_seconds": 0.0012280619999995857,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-32682",
+      "wall_seconds": 0.001254139468073845,
+      "cpu_seconds": 0.001254076999999576,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-33099",
+      "wall_seconds": 0.0009759571403264999,
+      "cpu_seconds": 0.0009756849999997819,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-36433",
+      "wall_seconds": 0.0010505234822630882,
+      "cpu_seconds": 0.0010506880000002994,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-36451",
+      "wall_seconds": 0.0012021306902170181,
+      "cpu_seconds": 0.001202076999999857,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-36664",
+      "wall_seconds": 0.0008732005953788757,
+      "cpu_seconds": 0.0008730109999999236,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-37230",
+      "wall_seconds": 0.0010358355939388275,
+      "cpu_seconds": 0.0010357290000002628,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-37871",
+      "wall_seconds": 0.001008789986371994,
+      "cpu_seconds": 0.0010095169999999598,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-38432",
+      "wall_seconds": 0.0011355569586157799,
+      "cpu_seconds": 0.0011360589999998005,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-38602",
+      "wall_seconds": 0.0012906678020954132,
+      "cpu_seconds": 0.0012911469999998815,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-39147",
+      "wall_seconds": 0.0013271821662783623,
+      "cpu_seconds": 0.001327239000000091,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-39159",
+      "wall_seconds": 0.0012680161744356155,
+      "cpu_seconds": 0.0012682040000000505,
+      "source_paragraphs": 20,
+      "selected": 20
+    },
+    {
+      "case_id": "row-39603",
+      "wall_seconds": 0.0012442050501704216,
+      "cpu_seconds": 0.0012442189999997133,
+      "source_paragraphs": 20,
+      "selected": 20
+    }
+  ],
+  "family_native_f1_comparisons": [
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-0-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.23529411764705882,
+      "percentile_95_interval": [
+        -0.47058823529411764,
+        -0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-0-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.3277310924369748,
+      "percentile_95_interval": [
+        -0.5630252100840336,
+        -0.11764705882352941
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-0-native_k4",
+      "families": 17,
+      "mean_difference": -0.1140819964349376,
+      "percentile_95_interval": [
+        -0.40819964349376114,
+        0.1800356506238859
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.06060606060606061,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-0-native_k4",
+      "families": 17,
+      "mean_difference": -0.20651897122485358,
+      "percentile_95_interval": [
+        -0.4117647058823529,
+        -0.044563279857397504
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.06060606060606061,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-0-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.17647058823529413,
+      "percentile_95_interval": [
+        -0.4117647058823529,
+        0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-0-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.2689075630252101,
+      "percentile_95_interval": [
+        -0.4789915966386555,
+        -0.06722689075630253
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-0-linear_k4",
+      "families": 17,
+      "mean_difference": 0.11764705882352941,
+      "percentile_95_interval": [
+        -0.17647058823529413,
+        0.4117647058823529
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 1.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-0-linear_k4",
+      "families": 17,
+      "mean_difference": 0.02521008403361344,
+      "percentile_95_interval": [
+        -0.21008403361344538,
+        0.2605042016806723
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.4285714285714285,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 1.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-1-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.23529411764705882,
+      "percentile_95_interval": [
+        -0.47058823529411764,
+        -0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-1-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.3277310924369748,
+      "percentile_95_interval": [
+        -0.5630252100840336,
+        -0.11764705882352941
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-1-native_k4",
+      "families": 17,
+      "mean_difference": -0.23529411764705882,
+      "percentile_95_interval": [
+        -0.47058823529411764,
+        -0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-1-native_k4",
+      "families": 17,
+      "mean_difference": -0.3277310924369748,
+      "percentile_95_interval": [
+        -0.5630252100840336,
+        -0.11764705882352941
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-1-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.23529411764705882,
+      "percentile_95_interval": [
+        -0.47058823529411764,
+        -0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-1-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.3277310924369748,
+      "percentile_95_interval": [
+        -0.5630252100840336,
+        -0.11764705882352941
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-1-linear_k4",
+      "families": 17,
+      "mean_difference": -0.11764705882352941,
+      "percentile_95_interval": [
+        -0.4117647058823529,
+        0.17647058823529413
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-1-linear_k4",
+      "families": 17,
+      "mean_difference": -0.21008403361344538,
+      "percentile_95_interval": [
+        -0.453781512605042,
+        0.02521008403361344
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-2-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.23529411764705882,
+      "percentile_95_interval": [
+        -0.47058823529411764,
+        -0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-2-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.3277310924369748,
+      "percentile_95_interval": [
+        -0.5630252100840336,
+        -0.11764705882352941
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-2-native_k4",
+      "families": 17,
+      "mean_difference": -0.17647058823529413,
+      "percentile_95_interval": [
+        -0.4117647058823529,
+        0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-2-native_k4",
+      "families": 17,
+      "mean_difference": -0.2689075630252101,
+      "percentile_95_interval": [
+        -0.4789915966386555,
+        -0.09243697478991597
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-2-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.17647058823529413,
+      "percentile_95_interval": [
+        -0.4117647058823529,
+        0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-2-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.2689075630252101,
+      "percentile_95_interval": [
+        -0.4789915966386555,
+        -0.06722689075630253
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families32-2-linear_k4",
+      "families": 17,
+      "mean_difference": 0.0,
+      "percentile_95_interval": [
+        -0.29411764705882354,
+        0.29411764705882354
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families32-2-linear_k4",
+      "families": 17,
+      "mean_difference": -0.09243697478991597,
+      "percentile_95_interval": [
+        -0.3025210084033614,
+        0.11764705882352941
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-0-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.15294117647058825,
+      "percentile_95_interval": [
+        -0.35294117647058826,
+        0.023529411764705882
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.4,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-0-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.24537815126050422,
+      "percentile_95_interval": [
+        -0.4789915966386555,
+        -0.04537815126050421
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.4,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-0-native_k4",
+      "families": 17,
+      "mean_difference": -0.03529411764705882,
+      "percentile_95_interval": [
+        -0.29411764705882354,
+        0.2235294117647059
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.4,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-0-native_k4",
+      "families": 17,
+      "mean_difference": -0.12773109243697478,
+      "percentile_95_interval": [
+        -0.42016806722689076,
+        0.16470588235294117
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.4,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-0-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.11764705882352941,
+      "percentile_95_interval": [
+        -0.35294117647058826,
+        0.11764705882352941
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 1.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-0-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.21008403361344538,
+      "percentile_95_interval": [
+        -0.453781512605042,
+        0.02521008403361344
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 1.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-0-linear_k4",
+      "families": 17,
+      "mean_difference": -0.08823529411764706,
+      "percentile_95_interval": [
+        -0.3235294117647059,
+        0.14705882352941177
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.5,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-0-linear_k4",
+      "families": 17,
+      "mean_difference": -0.18067226890756302,
+      "percentile_95_interval": [
+        -0.41596638655462187,
+        0.05462184873949579
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -0.5,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-1-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.23529411764705882,
+      "percentile_95_interval": [
+        -0.47058823529411764,
+        -0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-1-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.3277310924369748,
+      "percentile_95_interval": [
+        -0.5630252100840336,
+        -0.11764705882352941
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-1-native_k4",
+      "families": 17,
+      "mean_difference": 0.0,
+      "percentile_95_interval": [
+        -0.23529411764705882,
+        0.23529411764705882
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-1-native_k4",
+      "families": 17,
+      "mean_difference": -0.09243697478991597,
+      "percentile_95_interval": [
+        -0.3277310924369748,
+        0.14285714285714285
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.4285714285714285,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-1-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.058823529411764705,
+      "percentile_95_interval": [
+        -0.29411764705882354,
+        0.17647058823529413
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.0,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-1-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.1512605042016807,
+      "percentile_95_interval": [
+        -0.44537815126050423,
+        0.14285714285714285
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.4285714285714285,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-1-linear_k4",
+      "families": 17,
+      "mean_difference": -0.058823529411764705,
+      "percentile_95_interval": [
+        -0.29411764705882354,
+        0.17647058823529413
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.0,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-1-linear_k4",
+      "families": 17,
+      "mean_difference": -0.1512605042016807,
+      "percentile_95_interval": [
+        -0.44537815126050423,
+        0.14285714285714285
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.4285714285714285,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-2-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.17647058823529413,
+      "percentile_95_interval": [
+        -0.4117647058823529,
+        0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-2-native_adaptive",
+      "families": 17,
+      "mean_difference": -0.2689075630252101,
+      "percentile_95_interval": [
+        -0.5294117647058824,
+        0.0
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 1.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": -1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 0.0,
+        "musique-family-000871": -1.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-2-native_k4",
+      "families": 17,
+      "mean_difference": 0.11764705882352941,
+      "percentile_95_interval": [
+        -0.11764705882352941,
+        0.35294117647058826
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.0,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": 0.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 1.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-2-native_k4",
+      "families": 17,
+      "mean_difference": 0.02521008403361344,
+      "percentile_95_interval": [
+        -0.21008403361344538,
+        0.2605042016806723
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": 0.4285714285714285,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": 0.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 1.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-2-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.058823529411764705,
+      "percentile_95_interval": [
+        -0.29411764705882354,
+        0.17647058823529413
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -1.0,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 1.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-2-linear_adaptive",
+      "families": 17,
+      "mean_difference": -0.1512605042016807,
+      "percentile_95_interval": [
+        -0.3865546218487395,
+        0.058823529411764705
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 0.0,
+        "musique-family-000199": -0.5714285714285715,
+        "musique-family-000493": 0.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 0.0,
+        "musique-family-000865": 1.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "bm25_k4",
+      "candidate": "families128-2-linear_k4",
+      "families": 17,
+      "mean_difference": 0.17647058823529413,
+      "percentile_95_interval": [
+        -0.11764705882352941,
+        0.47058823529411764
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 1.0,
+        "musique-family-000199": 0.0,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 1.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": 0.0,
+        "musique-family-000812": 1.0,
+        "musique-family-000865": 1.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    },
+    {
+      "baseline": "dense_k4",
+      "candidate": "families128-2-linear_k4",
+      "families": 17,
+      "mean_difference": 0.08403361344537814,
+      "percentile_95_interval": [
+        -0.23529411764705882,
+        0.37815126050420167
+      ],
+      "replicates": 10000,
+      "seed": 20261017,
+      "family_differences": {
+        "musique-family-000012": -1.0,
+        "musique-family-000073": 1.0,
+        "musique-family-000199": 0.4285714285714285,
+        "musique-family-000493": 1.0,
+        "musique-family-000657": 0.0,
+        "musique-family-000679": 0.0,
+        "musique-family-000698": 0.0,
+        "musique-family-000719": 0.0,
+        "musique-family-000730": 0.0,
+        "musique-family-000734": 0.0,
+        "musique-family-000755": 0.0,
+        "musique-family-000798": -1.0,
+        "musique-family-000800": 0.0,
+        "musique-family-000804": -1.0,
+        "musique-family-000812": 1.0,
+        "musique-family-000865": 1.0,
+        "musique-family-000871": 0.0
+      },
+      "scope": "Descriptive conditional family bootstrap on this declared cohort; not repeated-generation uncertainty or natural-population certification."
+    }
+  ],
+  "unique_responses_for_review": 570,
+  "method_positions": 837,
+  "source_scope": "Known proof delivery is not answer correctness. Insufficiency, ambiguity and qualified source judgments remain distinct from native reference metrics.",
+  "cost_scope": "Actual receipts charged once. Standalone methods include each within-arm unique Reader response and all controller prefix work, including reused work. Dense encoding, common retrieval and local loads/preparation are separate. Tokenizers differ; tokens are not equivalent FLOPs. Warm component sums are not measured standalone production latency. Review cost not fully metered.",
+  "goal_complete": false,
+  "driver": {
+    "status": "COMPLETED",
+    "pid": 3610392,
+    "source_version": "8ce5d09b",
+    "training_source_version": "2346bb57",
+    "stages": [
+      {
+        "name": "training-matrix",
+        "returncode": 0,
+        "wall_seconds": 2.3908063545823097
+      },
+      {
+        "name": "probe-families32-0-native",
+        "returncode": 0,
+        "wall_seconds": 139.300044731237
+      },
+      {
+        "name": "probe-families32-0-linear",
+        "returncode": 0,
+        "wall_seconds": 123.30578651279211
+      },
+      {
+        "name": "probe-families32-1-native",
+        "returncode": 0,
+        "wall_seconds": 140.82797400839627
+      },
+      {
+        "name": "probe-families32-1-linear",
+        "returncode": 0,
+        "wall_seconds": 126.13894169405103
+      },
+      {
+        "name": "probe-families32-2-native",
+        "returncode": 0,
+        "wall_seconds": 138.88607738446444
+      },
+      {
+        "name": "probe-families32-2-linear",
+        "returncode": 0,
+        "wall_seconds": 127.92878094129264
+      },
+      {
+        "name": "probe-families128-0-native",
+        "returncode": 0,
+        "wall_seconds": 139.52787838876247
+      },
+      {
+        "name": "probe-families128-0-linear",
+        "returncode": 0,
+        "wall_seconds": 126.76446405984461
+      },
+      {
+        "name": "probe-families128-1-native",
+        "returncode": 0,
+        "wall_seconds": 143.94775523804128
+      },
+      {
+        "name": "probe-families128-1-linear",
+        "returncode": 0,
+        "wall_seconds": 125.74142649397254
+      },
+      {
+        "name": "probe-families128-2-native",
+        "returncode": 0,
+        "wall_seconds": 138.5407282616943
+      },
+      {
+        "name": "probe-families128-2-linear",
+        "returncode": 0,
+        "wall_seconds": 123.61228245869279
+      },
+      {
+        "name": "select-families32-0-native",
+        "returncode": 0,
+        "wall_seconds": 19.30211924854666
+      },
+      {
+        "name": "fixed4-families32-0-native",
+        "returncode": 0,
+        "wall_seconds": 18.02748278528452
+      },
+      {
+        "name": "select-families32-0-linear",
+        "returncode": 0,
+        "wall_seconds": 17.16802970226854
+      },
+      {
+        "name": "fixed4-families32-0-linear",
+        "returncode": 0,
+        "wall_seconds": 14.953338775783777
+      },
+      {
+        "name": "select-families32-1-native",
+        "returncode": 0,
+        "wall_seconds": 20.57468817103654
+      },
+      {
+        "name": "fixed4-families32-1-native",
+        "returncode": 0,
+        "wall_seconds": 17.312585192732513
+      },
+      {
+        "name": "select-families32-1-linear",
+        "returncode": 0,
+        "wall_seconds": 16.315761364996433
+      },
+      {
+        "name": "fixed4-families32-1-linear",
+        "returncode": 0,
+        "wall_seconds": 16.931360721588135
+      },
+      {
+        "name": "select-families32-2-native",
+        "returncode": 0,
+        "wall_seconds": 18.823899415321648
+      },
+      {
+        "name": "fixed4-families32-2-native",
+        "returncode": 0,
+        "wall_seconds": 18.63589414115995
+      },
+      {
+        "name": "select-families32-2-linear",
+        "returncode": 0,
+        "wall_seconds": 21.31702302210033
+      },
+      {
+        "name": "fixed4-families32-2-linear",
+        "returncode": 0,
+        "wall_seconds": 17.308842456899583
+      },
+      {
+        "name": "select-families128-0-native",
+        "returncode": 0,
+        "wall_seconds": 23.231212400831282
+      },
+      {
+        "name": "fixed4-families128-0-native",
+        "returncode": 0,
+        "wall_seconds": 14.599925371818244
+      },
+      {
+        "name": "select-families128-0-linear",
+        "returncode": 0,
+        "wall_seconds": 18.097422558814287
+      },
+      {
+        "name": "fixed4-families128-0-linear",
+        "returncode": 0,
+        "wall_seconds": 14.733731240965426
+      },
+      {
+        "name": "select-families128-1-native",
+        "returncode": 0,
+        "wall_seconds": 18.782583481632173
+      },
+      {
+        "name": "fixed4-families128-1-native",
+        "returncode": 0,
+        "wall_seconds": 24.118250991217792
+      },
+      {
+        "name": "select-families128-1-linear",
+        "returncode": 0,
+        "wall_seconds": 18.316465828567743
+      },
+      {
+        "name": "fixed4-families128-1-linear",
+        "returncode": 0,
+        "wall_seconds": 14.757586565800011
+      },
+      {
+        "name": "select-families128-2-native",
+        "returncode": 0,
+        "wall_seconds": 22.318594046868384
+      },
+      {
+        "name": "fixed4-families128-2-native",
+        "returncode": 0,
+        "wall_seconds": 15.41218580212444
+      },
+      {
+        "name": "select-families128-2-linear",
+        "returncode": 0,
+        "wall_seconds": 19.65111523028463
+      },
+      {
+        "name": "fixed4-families128-2-linear",
+        "returncode": 0,
+        "wall_seconds": 13.503158270381391
+      },
+      {
+        "name": "dense",
+        "returncode": 0,
+        "wall_seconds": 9.507967646233737
+      },
+      {
+        "name": "preview",
+        "returncode": 0,
+        "wall_seconds": 3.922141115181148
+      },
+      {
+        "name": "reader",
+        "returncode": 0,
+        "wall_seconds": 5551.025856291875
+      },
+      {
+        "name": "native-score",
+        "returncode": 0,
+        "wall_seconds": 3.1542196329683065
+      }
+    ],
+    "automatic_retry": false,
+    "started_epoch": 1792218332.0613933,
+    "active": {
+      "stage": "native-score",
+      "pid": 4085866,
+      "physical_gpu_allocation": null
+    },
+    "finished_epoch": 1792225930.8580964
+  },
+  "semantic_review_scope": "Conditional source-contract outcomes under recorded source/response interpretations. Correct Reader abstention on a deficient selected subset is not task success when a source-supported answer exists in the full pool. Masked cases and qualified responses are retained separately. Native metrics and first outputs are unchanged; not universal or independent-gold accuracy.",
+  "reviewer_is_independent": false,
+  "annotation_file": "data/manifests/milai-global-reader-response-review-v1-annotations.json",
+  "semantic_report": "artifacts/jev-reader/global-reader-policy-qa-v1/semantic-final/report.json",
+  "stream_export_cost_record": {
+    "recorded": true,
+    "measures": {
+      "wall_seconds": 1.6217736853286624,
+      "cpu_seconds": 1.6201828630000001,
+      "exports": 18
+    }
+  },
+  "arms": {
+    "bm25_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.23529411764705882,
+        "answer_f1_with_missing_zero": 0.23529411764705882,
+        "support_f1_with_missing_zero": 0.28431372549019607,
+        "answerability_correct": 19,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 3,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.214,
+          "answer_em": 0.214,
+          "support_f1": 0.274,
+          "group_answer_sufficiency_f1": 0.214,
+          "group_support_sufficiency_f1": 0.226
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.214
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19062,
+          "known_completion_tokens": 43336,
+          "known_total_tokens": 62398
+        },
+        "first_call_wall_seconds": 283.34840454813093,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19062,
+          "known_completion_tokens": 43336,
+          "known_total_tokens": 62398
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 0,
+        "input_tokens": 0,
+        "model_wall_seconds": 0,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "fixed_k": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 27,
+        "grounded_target_answer": 1,
+        "source_contract_task_pass": 18,
+        "qualified_response": 4,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 1,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 17,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.9285714285714286,
+        "supported": 0.16666666666666666
+      },
+      "balanced_source_class_macro": 0.5476190476190477,
+      "known_reviewed_proofs_delivered": 1
+    },
+    "dense_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.29411764705882354,
+        "answer_f1_with_missing_zero": 0.3277310924369748,
+        "support_f1_with_missing_zero": 0.5,
+        "answerability_correct": 20,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 6,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.327,
+          "answer_em": 0.286,
+          "support_f1": 0.488,
+          "group_answer_sufficiency_f1": 0.327,
+          "group_support_sufficiency_f1": 0.321
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.327
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19382,
+          "known_completion_tokens": 50641,
+          "known_total_tokens": 70023
+        },
+        "first_call_wall_seconds": 329.33554597292095,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19382,
+          "known_completion_tokens": 50641,
+          "known_total_tokens": 70023
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 0,
+        "input_tokens": 0,
+        "model_wall_seconds": 0,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "fixed_k": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 28,
+        "grounded_target_answer": 3,
+        "source_contract_task_pass": 20,
+        "qualified_response": 3,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 3,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 17,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.8333333333333334,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.9285714285714286,
+        "supported": 0.5
+      },
+      "balanced_source_class_macro": 0.7142857142857143,
+      "known_reviewed_proofs_delivered": 3
+    },
+    "full20": {
+      "native": {
+        "cases": 31,
+        "missing": [
+          "row-24052"
+        ],
+        "answerable_cases": 17,
+        "valid_answerable": 16,
+        "answer_em_with_missing_zero": 0.47058823529411764,
+        "answer_f1_with_missing_zero": 0.5294117647058824,
+        "support_f1_with_missing_zero": 0.6843137254901961,
+        "answerability_correct": 25,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 17,
+        "planned_pairs": 14,
+        "valid_pairs": 13,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.654,
+          "answer_em": 0.615,
+          "support_f1": 0.818,
+          "group_answer_sufficiency_f1": 0.654,
+          "group_support_sufficiency_f1": 0.705
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.6072857142857143
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 85269,
+          "known_completion_tokens": 67642,
+          "known_total_tokens": 152911
+        },
+        "first_call_wall_seconds": 447.8041136832908,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 85269,
+          "known_completion_tokens": 67642,
+          "known_total_tokens": 152911
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 0,
+        "input_tokens": 0,
+        "model_wall_seconds": 0,
+        "opened_documents": 620
+      },
+      "stop_reasons": {
+        "fixed_k": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 22,
+        "grounded_target_answer": 5,
+        "source_contract_task_pass": 19,
+        "qualified_response": 6,
+        "schema_or_generation_failure": 1,
+        "contract_failure": 1,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 5,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 14,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.7857142857142857,
+        "supported": 0.8333333333333334
+      },
+      "balanced_source_class_macro": 0.8095238095238095,
+      "known_reviewed_proofs_delivered": 6
+    },
+    "families32-0-native_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.0,
+        "answer_f1_with_missing_zero": 0.0,
+        "support_f1_with_missing_zero": 0.0,
+        "answerability_correct": 14,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.0,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 24,
+        "usage": {
+          "responses": 24,
+          "known_prompt_tokens": 4022,
+          "known_completion_tokens": 31487,
+          "known_total_tokens": 35509
+        },
+        "first_call_wall_seconds": 204.68774541467428,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 4698,
+          "known_completion_tokens": 39252,
+          "known_total_tokens": 43950
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 44,
+        "input_tokens": 130523,
+        "model_wall_seconds": 7.113372406922281,
+        "opened_documents": 13
+      },
+      "stop_reasons": {
+        "stop_exhausted": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 31,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 0,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families32-0-native_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.11764705882352941,
+        "answer_f1_with_missing_zero": 0.12121212121212122,
+        "support_f1_with_missing_zero": 0.11764705882352941,
+        "answerability_correct": 16,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.147,
+          "answer_em": 0.143,
+          "support_f1": 0.143,
+          "group_answer_sufficiency_f1": 0.143,
+          "group_support_sufficiency_f1": 0.095
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.143
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19034,
+          "known_completion_tokens": 46282,
+          "known_total_tokens": 65316
+        },
+        "first_call_wall_seconds": 301.6802591830492,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19034,
+          "known_completion_tokens": 46282,
+          "known_total_tokens": 65316
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365848,
+        "model_wall_seconds": 19.52502922900021,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 28,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 18,
+        "qualified_response": 0,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 1,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 18,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.9285714285714286,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.4642857142857143,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families32-0-linear_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.058823529411764705,
+        "answer_f1_with_missing_zero": 0.058823529411764705,
+        "support_f1_with_missing_zero": 0.0392156862745098,
+        "answerability_correct": 15,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.071,
+          "answer_em": 0.071,
+          "support_f1": 0.048,
+          "group_answer_sufficiency_f1": 0.071,
+          "group_support_sufficiency_f1": 0.048
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.071
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 25,
+        "usage": {
+          "responses": 25,
+          "known_prompt_tokens": 6445,
+          "known_completion_tokens": 32325,
+          "known_total_tokens": 38770
+        },
+        "first_call_wall_seconds": 209.75526042934507,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 7021,
+          "known_completion_tokens": 40279,
+          "known_total_tokens": 47300
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 54,
+        "input_tokens": 160136,
+        "model_wall_seconds": 6.443251297809184,
+        "opened_documents": 25
+      },
+      "stop_reasons": {
+        "stop_exhausted": 29,
+        "read_budget": 2
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 30,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 0,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families32-0-linear_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.35294117647058826,
+        "answer_f1_with_missing_zero": 0.35294117647058826,
+        "support_f1_with_missing_zero": 0.2745098039215686,
+        "answerability_correct": 20,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.429,
+          "answer_em": 0.429,
+          "support_f1": 0.286,
+          "group_answer_sufficiency_f1": 0.429,
+          "group_support_sufficiency_f1": 0.286
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.429
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20852,
+          "known_completion_tokens": 48732,
+          "known_total_tokens": 69584
+        },
+        "first_call_wall_seconds": 318.1966377776116,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20852,
+          "known_completion_tokens": 48732,
+          "known_total_tokens": 69584
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365731,
+        "model_wall_seconds": 14.527978588826954,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 25,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 18,
+        "qualified_response": 3,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 18,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7333333333333333,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.9642857142857143,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.48214285714285715,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families32-1-native_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.0,
+        "answer_f1_with_missing_zero": 0.0,
+        "support_f1_with_missing_zero": 0.058823529411764705,
+        "answerability_correct": 15,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.071,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.071
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 24,
+        "usage": {
+          "responses": 24,
+          "known_prompt_tokens": 5229,
+          "known_completion_tokens": 30353,
+          "known_total_tokens": 35582
+        },
+        "first_call_wall_seconds": 196.76063313148916,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 5914,
+          "known_completion_tokens": 38469,
+          "known_total_tokens": 44383
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 50,
+        "input_tokens": 150241,
+        "model_wall_seconds": 8.232964631170034,
+        "opened_documents": 20
+      },
+      "stop_reasons": {
+        "stop_exhausted": 30,
+        "read_budget": 1
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 30,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 1,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 1
+    },
+    "families32-1-native_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.0,
+        "answer_f1_with_missing_zero": 0.0,
+        "support_f1_with_missing_zero": 0.058823529411764705,
+        "answerability_correct": 15,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.071,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.071
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 18636,
+          "known_completion_tokens": 42678,
+          "known_total_tokens": 61314
+        },
+        "first_call_wall_seconds": 278.7948403246701,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 18636,
+          "known_completion_tokens": 42678,
+          "known_total_tokens": 61314
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365757,
+        "model_wall_seconds": 19.620314977131784,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 29,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 1,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 1,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 1
+    },
+    "families32-1-linear_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.0,
+        "answer_f1_with_missing_zero": 0.0,
+        "support_f1_with_missing_zero": 0.0,
+        "answerability_correct": 14,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.0,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 21,
+        "usage": {
+          "responses": 21,
+          "known_prompt_tokens": 3457,
+          "known_completion_tokens": 26968,
+          "known_total_tokens": 30425
+        },
+        "first_call_wall_seconds": 174.59088528435677,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 4426,
+          "known_completion_tokens": 38679,
+          "known_total_tokens": 43105
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 38,
+        "input_tokens": 115893,
+        "model_wall_seconds": 4.837341818958521,
+        "opened_documents": 7
+      },
+      "stop_reasons": {
+        "stop_exhausted": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 31,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 0,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families32-1-linear_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.11764705882352941,
+        "answer_f1_with_missing_zero": 0.11764705882352941,
+        "support_f1_with_missing_zero": 0.1372549019607843,
+        "answerability_correct": 17,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.143,
+          "answer_em": 0.143,
+          "support_f1": 0.167,
+          "group_answer_sufficiency_f1": 0.143,
+          "group_support_sufficiency_f1": 0.167
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.143
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 21256,
+          "known_completion_tokens": 47207,
+          "known_total_tokens": 68463
+        },
+        "first_call_wall_seconds": 308.05688006523997,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 21256,
+          "known_completion_tokens": 47207,
+          "known_total_tokens": 68463
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365729,
+        "model_wall_seconds": 14.879316152073443,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 29,
+        "grounded_target_answer": 1,
+        "source_contract_task_pass": 19,
+        "qualified_response": 0,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 1,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 18,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.9642857142857143,
+        "supported": 0.16666666666666666
+      },
+      "balanced_source_class_macro": 0.5654761904761905,
+      "known_reviewed_proofs_delivered": 1
+    },
+    "families32-2-native_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.0,
+        "answer_f1_with_missing_zero": 0.0,
+        "support_f1_with_missing_zero": 0.0,
+        "answerability_correct": 14,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.0,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 17,
+        "usage": {
+          "responses": 17,
+          "known_prompt_tokens": 1680,
+          "known_completion_tokens": 20208,
+          "known_total_tokens": 21888
+        },
+        "first_call_wall_seconds": 130.71102148946375,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 3062,
+          "known_completion_tokens": 36440,
+          "known_total_tokens": 39502
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 31,
+        "input_tokens": 92031,
+        "model_wall_seconds": 4.982002544216812,
+        "opened_documents": 0
+      },
+      "stop_reasons": {
+        "stop_exhausted": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 31,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 0,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families32-2-native_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.058823529411764705,
+        "answer_f1_with_missing_zero": 0.058823529411764705,
+        "support_f1_with_missing_zero": 0.06862745098039215,
+        "answerability_correct": 17,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.071,
+          "answer_em": 0.071,
+          "support_f1": 0.083,
+          "group_answer_sufficiency_f1": 0.071,
+          "group_support_sufficiency_f1": 0.083
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.071
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20054,
+          "known_completion_tokens": 44842,
+          "known_total_tokens": 64896
+        },
+        "first_call_wall_seconds": 292.9373188940808,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20054,
+          "known_completion_tokens": 44842,
+          "known_total_tokens": 64896
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365726,
+        "model_wall_seconds": 19.291369952261448,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 28,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 1,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families32-2-linear_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.058823529411764705,
+        "answer_f1_with_missing_zero": 0.058823529411764705,
+        "support_f1_with_missing_zero": 0.0392156862745098,
+        "answerability_correct": 15,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.071,
+          "answer_em": 0.071,
+          "support_f1": 0.048,
+          "group_answer_sufficiency_f1": 0.071,
+          "group_support_sufficiency_f1": 0.048
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.071
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 26,
+        "usage": {
+          "responses": 26,
+          "known_prompt_tokens": 6666,
+          "known_completion_tokens": 35032,
+          "known_total_tokens": 41698
+        },
+        "first_call_wall_seconds": 226.8204978806898,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 7148,
+          "known_completion_tokens": 40708,
+          "known_total_tokens": 47856
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 56,
+        "input_tokens": 169190,
+        "model_wall_seconds": 7.8763082809746265,
+        "opened_documents": 25
+      },
+      "stop_reasons": {
+        "stop_exhausted": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 30,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 0,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families32-2-linear_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.23529411764705882,
+        "answer_f1_with_missing_zero": 0.23529411764705882,
+        "support_f1_with_missing_zero": 0.20588235294117646,
+        "answerability_correct": 18,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 2,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.286,
+          "answer_em": 0.286,
+          "support_f1": 0.25,
+          "group_answer_sufficiency_f1": 0.286,
+          "group_support_sufficiency_f1": 0.226
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.286
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19917,
+          "known_completion_tokens": 41419,
+          "known_total_tokens": 61336
+        },
+        "first_call_wall_seconds": 270.68556535895914,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19917,
+          "known_completion_tokens": 41419,
+          "known_total_tokens": 61336
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365763,
+        "model_wall_seconds": 17.10175355989486,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 29,
+        "grounded_target_answer": 2,
+        "source_contract_task_pass": 20,
+        "qualified_response": 1,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 2,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 18,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.8,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.9642857142857143,
+        "supported": 0.3333333333333333
+      },
+      "balanced_source_class_macro": 0.6488095238095238,
+      "known_reviewed_proofs_delivered": 2
+    },
+    "families128-0-native_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.058823529411764705,
+        "answer_f1_with_missing_zero": 0.08235294117647059,
+        "support_f1_with_missing_zero": 0.029411764705882353,
+        "answerability_correct": 16,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.071,
+          "answer_em": 0.071,
+          "support_f1": 0.036,
+          "group_answer_sufficiency_f1": 0.071,
+          "group_support_sufficiency_f1": 0.036
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.071
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 27,
+        "usage": {
+          "responses": 27,
+          "known_prompt_tokens": 10994,
+          "known_completion_tokens": 38148,
+          "known_total_tokens": 49142
+        },
+        "first_call_wall_seconds": 253.2780123008415,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 11382,
+          "known_completion_tokens": 43348,
+          "known_total_tokens": 54730
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 75,
+        "input_tokens": 227567,
+        "model_wall_seconds": 12.203281053341925,
+        "opened_documents": 51
+      },
+      "stop_reasons": {
+        "stop_exhausted": 22,
+        "read_budget": 7,
+        "stop_sufficient": 2
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 29,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 17,
+        "qualified_response": 2,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 17,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.6666666666666666,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.8928571428571429,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.44642857142857145,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families128-0-native_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.17647058823529413,
+        "answer_f1_with_missing_zero": 0.19999999999999998,
+        "support_f1_with_missing_zero": 0.18627450980392157,
+        "answerability_correct": 18,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.214,
+          "answer_em": 0.214,
+          "support_f1": 0.226,
+          "group_answer_sufficiency_f1": 0.214,
+          "group_support_sufficiency_f1": 0.155
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.214
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 21634,
+          "known_completion_tokens": 45408,
+          "known_total_tokens": 67042
+        },
+        "first_call_wall_seconds": 296.30552363488823,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 21634,
+          "known_completion_tokens": 45408,
+          "known_total_tokens": 67042
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365719,
+        "model_wall_seconds": 19.551340294070542,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 28,
+        "grounded_target_answer": 1,
+        "source_contract_task_pass": 18,
+        "qualified_response": 2,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 1,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 17,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.8928571428571429,
+        "supported": 0.16666666666666666
+      },
+      "balanced_source_class_macro": 0.5297619047619048,
+      "known_reviewed_proofs_delivered": 1
+    },
+    "families128-0-linear_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.11764705882352941,
+        "answer_f1_with_missing_zero": 0.11764705882352941,
+        "support_f1_with_missing_zero": 0.08823529411764706,
+        "answerability_correct": 15,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.143,
+          "answer_em": 0.143,
+          "support_f1": 0.107,
+          "group_answer_sufficiency_f1": 0.143,
+          "group_support_sufficiency_f1": 0.107
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.143
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 29,
+        "usage": {
+          "responses": 29,
+          "known_prompt_tokens": 7278,
+          "known_completion_tokens": 38163,
+          "known_total_tokens": 45441
+        },
+        "first_call_wall_seconds": 247.2879976266995,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 7466,
+          "known_completion_tokens": 41123,
+          "known_total_tokens": 48589
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 61,
+        "input_tokens": 184189,
+        "model_wall_seconds": 7.5525186304003,
+        "opened_documents": 30
+      },
+      "stop_reasons": {
+        "stop_exhausted": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 28,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 17,
+        "qualified_response": 2,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 17,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.9285714285714286,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.4642857142857143,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families128-0-linear_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.11764705882352941,
+        "answer_f1_with_missing_zero": 0.14705882352941177,
+        "support_f1_with_missing_zero": 0.22549019607843135,
+        "answerability_correct": 18,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 2,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.179,
+          "answer_em": 0.143,
+          "support_f1": 0.274,
+          "group_answer_sufficiency_f1": 0.179,
+          "group_support_sufficiency_f1": 0.202
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.179
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20955,
+          "known_completion_tokens": 43636,
+          "known_total_tokens": 64591
+        },
+        "first_call_wall_seconds": 284.68783683050424,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20955,
+          "known_completion_tokens": 43636,
+          "known_total_tokens": 64591
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365734,
+        "model_wall_seconds": 15.023737565614283,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 27,
+        "grounded_target_answer": 1,
+        "source_contract_task_pass": 17,
+        "qualified_response": 3,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 1,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 1,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 16,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.6666666666666666,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.8571428571428571,
+        "supported": 0.16666666666666666
+      },
+      "balanced_source_class_macro": 0.5119047619047619,
+      "known_reviewed_proofs_delivered": 1
+    },
+    "families128-1-native_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.0,
+        "answer_f1_with_missing_zero": 0.0,
+        "support_f1_with_missing_zero": 0.0392156862745098,
+        "answerability_correct": 14,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.048,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 24,
+        "usage": {
+          "responses": 24,
+          "known_prompt_tokens": 3886,
+          "known_completion_tokens": 31348,
+          "known_total_tokens": 35234
+        },
+        "first_call_wall_seconds": 202.7330004554242,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 4575,
+          "known_completion_tokens": 39956,
+          "known_total_tokens": 44531
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 43,
+        "input_tokens": 126009,
+        "model_wall_seconds": 6.721858451142907,
+        "opened_documents": 12
+      },
+      "stop_reasons": {
+        "stop_exhausted": 28,
+        "stop_sufficient": 3
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 31,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 0,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families128-1-native_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.23529411764705882,
+        "answer_f1_with_missing_zero": 0.23529411764705882,
+        "support_f1_with_missing_zero": 0.3431372549019608,
+        "answerability_correct": 19,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 4,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.286,
+          "answer_em": 0.286,
+          "support_f1": 0.369,
+          "group_answer_sufficiency_f1": 0.286,
+          "group_support_sufficiency_f1": 0.298
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.286
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20587,
+          "known_completion_tokens": 49233,
+          "known_total_tokens": 69820
+        },
+        "first_call_wall_seconds": 324.6831335229799,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20587,
+          "known_completion_tokens": 49233,
+          "known_total_tokens": 69820
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365729,
+        "model_wall_seconds": 19.62770351022482,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 28,
+        "grounded_target_answer": 2,
+        "source_contract_task_pass": 19,
+        "qualified_response": 2,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 2,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 17,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.9285714285714286,
+        "supported": 0.3333333333333333
+      },
+      "balanced_source_class_macro": 0.6309523809523809,
+      "known_reviewed_proofs_delivered": 2
+    },
+    "families128-1-linear_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.17647058823529413,
+        "answer_f1_with_missing_zero": 0.17647058823529413,
+        "support_f1_with_missing_zero": 0.17647058823529413,
+        "answerability_correct": 16,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 3,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.214,
+          "answer_em": 0.214,
+          "support_f1": 0.214,
+          "group_answer_sufficiency_f1": 0.214,
+          "group_support_sufficiency_f1": 0.214
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.214
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 30,
+        "usage": {
+          "responses": 30,
+          "known_prompt_tokens": 7350,
+          "known_completion_tokens": 39128,
+          "known_total_tokens": 46478
+        },
+        "first_call_wall_seconds": 253.43368140794337,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 7452,
+          "known_completion_tokens": 39901,
+          "known_total_tokens": 47353
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 65,
+        "input_tokens": 192991,
+        "model_wall_seconds": 8.079151581041515,
+        "opened_documents": 35
+      },
+      "stop_reasons": {
+        "stop_exhausted": 29,
+        "read_budget": 1,
+        "stop_sufficient": 1
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 29,
+        "grounded_target_answer": 2,
+        "source_contract_task_pass": 21,
+        "qualified_response": 1,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 2,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.8333333333333334,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0.3333333333333333
+      },
+      "balanced_source_class_macro": 0.6666666666666666,
+      "known_reviewed_proofs_delivered": 2
+    },
+    "families128-1-linear_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.17647058823529413,
+        "answer_f1_with_missing_zero": 0.17647058823529413,
+        "support_f1_with_missing_zero": 0.2156862745098039,
+        "answerability_correct": 16,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 4,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.214,
+          "answer_em": 0.214,
+          "support_f1": 0.262,
+          "group_answer_sufficiency_f1": 0.143,
+          "group_support_sufficiency_f1": 0.19
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.143
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19139,
+          "known_completion_tokens": 43644,
+          "known_total_tokens": 62783
+        },
+        "first_call_wall_seconds": 284.24711531959474,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19139,
+          "known_completion_tokens": 43644,
+          "known_total_tokens": 62783
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365771,
+        "model_wall_seconds": 14.922982976771891,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 26,
+        "grounded_target_answer": 2,
+        "source_contract_task_pass": 20,
+        "qualified_response": 2,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 1,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 2,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 18,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.8,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.9285714285714286,
+        "supported": 0.3333333333333333
+      },
+      "balanced_source_class_macro": 0.6309523809523809,
+      "known_reviewed_proofs_delivered": 2
+    },
+    "families128-2-native_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.058823529411764705,
+        "answer_f1_with_missing_zero": 0.058823529411764705,
+        "support_f1_with_missing_zero": 0.058823529411764705,
+        "answerability_correct": 14,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.071,
+          "answer_em": 0.071,
+          "support_f1": 0.071,
+          "group_answer_sufficiency_f1": 0.071,
+          "group_support_sufficiency_f1": 0.048
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.071
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 29,
+        "usage": {
+          "responses": 29,
+          "known_prompt_tokens": 9282,
+          "known_completion_tokens": 42994,
+          "known_total_tokens": 52276
+        },
+        "first_call_wall_seconds": 278.8388130115345,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 9480,
+          "known_completion_tokens": 45493,
+          "known_total_tokens": 54973
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 71,
+        "input_tokens": 210482,
+        "model_wall_seconds": 11.247784860432148,
+        "opened_documents": 45
+      },
+      "stop_reasons": {
+        "stop_exhausted": 20,
+        "stop_sufficient": 6,
+        "read_budget": 5
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 29,
+        "grounded_target_answer": 0,
+        "source_contract_task_pass": 19,
+        "qualified_response": 0,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 19,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7666666666666667,
+      "source_class_family_macro": {
+        "pool_insufficient": 1,
+        "supported": 0
+      },
+      "balanced_source_class_macro": 0.5,
+      "known_reviewed_proofs_delivered": 0
+    },
+    "families128-2-native_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.35294117647058826,
+        "answer_f1_with_missing_zero": 0.35294117647058826,
+        "support_f1_with_missing_zero": 0.43137254901960786,
+        "answerability_correct": 21,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 5,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.429,
+          "answer_em": 0.429,
+          "support_f1": 0.476,
+          "group_answer_sufficiency_f1": 0.429,
+          "group_support_sufficiency_f1": 0.405
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.429
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20886,
+          "known_completion_tokens": 49749,
+          "known_total_tokens": 70635
+        },
+        "first_call_wall_seconds": 324.78816041816026,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 20886,
+          "known_completion_tokens": 49749,
+          "known_total_tokens": 70635
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365702,
+        "model_wall_seconds": 19.450845029205084,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 26,
+        "grounded_target_answer": 2,
+        "source_contract_task_pass": 18,
+        "qualified_response": 4,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 2,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 16,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7333333333333333,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.8928571428571429,
+        "supported": 0.3333333333333333
+      },
+      "balanced_source_class_macro": 0.6130952380952381,
+      "known_reviewed_proofs_delivered": 2
+    },
+    "families128-2-linear_adaptive": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.17647058823529413,
+        "answer_f1_with_missing_zero": 0.17647058823529413,
+        "support_f1_with_missing_zero": 0.20980392156862743,
+        "answerability_correct": 18,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 3,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.214,
+          "answer_em": 0.214,
+          "support_f1": 0.226,
+          "group_answer_sufficiency_f1": 0.214,
+          "group_support_sufficiency_f1": 0.226
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.214
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 11131,
+          "known_completion_tokens": 44492,
+          "known_total_tokens": 55623
+        },
+        "first_call_wall_seconds": 288.47835801914334,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 11131,
+          "known_completion_tokens": 44492,
+          "known_total_tokens": 55623
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 83,
+        "input_tokens": 248736,
+        "model_wall_seconds": 10.374318277463317,
+        "opened_documents": 56
+      },
+      "stop_reasons": {
+        "stop_exhausted": 19,
+        "read_budget": 4,
+        "stop_sufficient": 8
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 28,
+        "grounded_target_answer": 1,
+        "source_contract_task_pass": 18,
+        "qualified_response": 2,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 1,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 17,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.7,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.8928571428571429,
+        "supported": 0.16666666666666666
+      },
+      "balanced_source_class_macro": 0.5297619047619048,
+      "known_reviewed_proofs_delivered": 1
+    },
+    "families128-2-linear_k4": {
+      "native": {
+        "cases": 31,
+        "missing": [],
+        "answerable_cases": 17,
+        "valid_answerable": 17,
+        "answer_em_with_missing_zero": 0.4117647058823529,
+        "answer_f1_with_missing_zero": 0.4117647058823529,
+        "support_f1_with_missing_zero": 0.44509803921568625,
+        "answerability_correct": 21,
+        "reference_proof_in_pool": 17,
+        "reference_proof_delivered": 8,
+        "planned_pairs": 14,
+        "valid_pairs": 14,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.5,
+          "answer_em": 0.5,
+          "support_f1": 0.512,
+          "group_answer_sufficiency_f1": 0.5,
+          "group_support_sufficiency_f1": 0.512
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.5
+      },
+      "standalone_reader": {
+        "positions": 31,
+        "unique_calls": 31,
+        "usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19472,
+          "known_completion_tokens": 47322,
+          "known_total_tokens": 66794
+        },
+        "first_call_wall_seconds": 311.20553089585155,
+        "gross_position_usage": {
+          "responses": 31,
+          "known_prompt_tokens": 19472,
+          "known_completion_tokens": 47322,
+          "known_total_tokens": 66794
+        }
+      },
+      "standalone_controller": {
+        "decision_positions": 124,
+        "input_tokens": 365730,
+        "model_wall_seconds": 15.170899012126029,
+        "opened_documents": 124
+      },
+      "stop_reasons": {
+        "read_budget": 31
+      },
+      "semantic_counts": {
+        "positions": 31,
+        "source_pool_insufficient": 19,
+        "reader_response_pass": 24,
+        "grounded_target_answer": 2,
+        "source_contract_task_pass": 17,
+        "qualified_response": 5,
+        "schema_or_generation_failure": 0,
+        "contract_failure": 0,
+        "source_masked": 6,
+        "source_supported": 6
+      },
+      "source_strata": {
+        "supported": {
+          "task_pass": 2,
+          "cases": 6,
+          "families": 6
+        },
+        "pool_insufficient": {
+          "task_pass": 15,
+          "cases": 19,
+          "families": 14
+        },
+        "masked": {
+          "task_pass": 0,
+          "cases": 6,
+          "families": 4
+        }
+      },
+      "eligible_families": 15,
+      "family_macro_task_pass": 0.6666666666666666,
+      "source_class_family_macro": {
+        "pool_insufficient": 0.7857142857142857,
+        "supported": 0.3333333333333333
+      },
+      "balanced_source_class_macro": 0.5595238095238095,
+      "known_reviewed_proofs_delivered": 2
+    }
+  }
+}

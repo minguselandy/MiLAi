@@ -20,7 +20,7 @@
         "docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md",
         "artifacts/jev-reader/global-writer-evidence-audit-v1/remote-refs.json"
       ],
-      "finding": "Research implementation and historical main/publication remain distinct. All12 training jobs closed; global dev Reader is live. Public refs unchanged, audit branch local only. No Product diff from e832e2d or inferred remote CI result."
+      "finding": "All12 training jobs and dev posttraining41 stages closed; original sessions exited0 and actual PIDs absent. Public refs remain previously verified main518aee41/oldresearche832e2d, current audit branch local only. No Product change or inferred remote CI."
     },
     {
       "id": "same_data_objective_and_train_fit",
@@ -107,15 +107,17 @@
         "5.4",
         "8/priority5"
       ],
-      "state": "INCOMPLETE_GLOBAL_READER_LIVE_RESERVED_PENDING",
+      "state": "DEV_FULL_MATRIX_REVIEW_AND_COSTS_CLOSED_RESERVED_PENDING",
       "evidence": [
         "configs/milai-global-reader-policy-qa-v1.json",
         "configs/milai-global-reserved-policy-qa-v1.json",
         "data/manifests/milai-global-reader-policy-qa-v1-input-review.json",
         "data/manifests/milai-global-reserved-policy-qa-v1-input-review.json",
-        "data/manifests/milai-global-reader-policy-qa-v1-review-progress.json"
+        "data/manifests/milai-global-reader-policy-qa-v1-review-progress.json",
+        "data/manifests/milai-global-reader-policy-qa-v1-summary.json",
+        "data/manifests/milai-global-reader-response-review-v1-annotations.json"
       ],
-      "finding": "All12 final models fixed4/adaptive plus BM25/dense4/full20. Dev actual Reader 715/837 positions, 1 known failure retained without retry. Author source-and-answer review25/31 cases,455 unique responses. Reserved28x27=756 positions prepared but not started. Full first-response/cost/family/seed reconciliation still required."
+      "finding": "Dev837 positions/570 actual first requests/267 reuses complete. All31 sources/570 responses author reviewed before method mapping. Generation1238480tokens/dense42325tokens and all12 local-stage ledger deltas match. Supported6: dense3,128native/linear fixed4=1/2/2;128native adaptive0/0/0,linear0/2/1. No stable benefit. Reserved28x27 still required."
     },
     {
       "id": "external_identity_and_transfer_scope",
@@ -159,34 +161,47 @@
         "tests/unit/test_musique_reader.py",
         "docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md"
       ],
-      "finding": "Prior14 targeted tests include official scorer. New semantic-join tests2 pass; Ruff, targeted mypy with local src/tools paths and optional dependency imports ignored pass. Full-repository/remote CI not run. Software checks do not prove model quality."
+      "finding": "Relevant14 prior tests and2 new semantic tests pass. Ruff, targeted mypy with local src/tools and optional dependency imports ignored, package DAG and active tools boundaries pass. Dev first-response/cost reports now closed; reserved result pending. No full-repository/remote CI or publication."
     }
   ],
   "next_required_execution": [
-    "Finish frozen globaldev Reader/scorer; do not restart on stale observation.",
-    "Export all31completecase responseviews, finish allfirstresponse annotations, reconcile originalreceipt/ledger/standalonecosts.",
-    "Execute frozen reserved pipeline after predecessors and actualPIDs close; all28source reviews alreadycomplete.",
-    "Review reservedfirstresponses, sourcefidelity, family/seed/stratumquality and fullcosts; then perform fullcompletionaudit."
+    "Dispatch frozen reserved pipeline now that all predecessor processes exited and all28 source reviews are complete; no seed or policy changes.",
+    "Review original-only reserved prefixes, actual firstresponses, source fidelity, family/seed/stratum quality and complete costs.",
+    "Reconcile both cohorts and perform full audit completion review; never infer broad generality from small conditional counts."
   ],
   "training_closure": "data/manifests/milai-global-reader-reference-v1-summary.json",
-  "live_posttrain_snapshot": {
-    "status": "READER_LIVE_AUTHOR_REVIEW_PARTIAL",
-    "observed_epoch": 1792225124.108969,
-    "driver_pid": 3610392,
+  "historical_training_snapshot": {
+    "observed_epoch": 1792215003.3797836,
+    "driver_pid": 3091162,
+    "completed_jobs": 8,
+    "planned_jobs": 12,
     "active": {
-      "stage": "reader",
-      "pid": 3740226,
-      "physical_gpu_allocation": null
+      "cohort": "families128",
+      "seed": 1,
+      "backend": "linear",
+      "pid": 3334790,
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/linear"
     },
+    "active_optimizer_updates": 154,
+    "actual_pids_verified": true,
+    "historical_only": true
+  },
+  "closed_dev_posttrain_snapshot": {
+    "status": "DEV_READER_AND_REVIEW_CLOSED_RESERVED_PENDING",
+    "observed_epoch": 1792226138.2207432,
+    "driver_pid": 3610392,
     "run": {
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "phase": "predict",
       "planned": 837,
-      "completed": 715,
+      "completed": 837,
       "known_failures": 1,
-      "fresh_reader_attempts": 485,
-      "reused_reader_outputs": 230,
-      "known_failed_reader_calls": 1
+      "fresh_reader_attempts": 570,
+      "reused_reader_outputs": 267,
+      "known_failed_reader_calls": 1,
+      "actual_wall_seconds": 5549.321726499125,
+      "actual_cpu_seconds": 8.920201716000001,
+      "unique_reader_inputs": 570
     },
     "reviewed_cases": [
       "row-2389",
@@ -213,30 +228,22 @@
       "row-36433",
       "row-36451",
       "row-36664",
-      "row-37230"
+      "row-37230",
+      "row-37871",
+      "row-38432",
+      "row-38602",
+      "row-39147",
+      "row-39159",
+      "row-39603"
     ],
-    "reviewed_unique_responses": 455,
+    "reviewed_unique_responses": 570,
     "review_path": "artifacts/jev-reader/global-reader-policy-qa-v1/stream-review/response-annotations.json",
-    "stream_export_cost_pending_original_ledger": true,
+    "stream_export_cost_pending_original_ledger": false,
     "cost_recording": "Final review_global_reader_results.py records export-compute.jsonl once after originalHTTPowner closes. No newledger, no modelrebilling.",
-    "scope": "Author reviewed actual delivered materials and first responses for the listed cases. No method-name mapping opened; document count can reveal policy types. Not independent adjudication or a complete-cohort performance claim. Correct abstention on deficient selections is not task success on a supported full pool.",
+    "scope": "All31 cases/570 unique first responses reviewed before method mapping, with partial blinding and author-only adjudication explicitly retained. All actual receipt/ledger differences match; native and conditional source-contract metrics are separate. No stable trained-policy advantage established.",
     "semantic_join_tool": "tools/join_global_reader_review.py",
-    "reserved_prefix_analysis_tool": "tools/analyze_reserved_reader_probes.py"
-  },
-  "historical_training_snapshot": {
-    "observed_epoch": 1792215003.3797836,
-    "driver_pid": 3091162,
-    "completed_jobs": 8,
-    "planned_jobs": 12,
-    "active": {
-      "cohort": "families128",
-      "seed": 1,
-      "backend": "linear",
-      "pid": 3334790,
-      "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/linear"
-    },
-    "active_optimizer_updates": 154,
-    "actual_pids_verified": true,
-    "historical_only": true
+    "reserved_prefix_analysis_tool": "tools/analyze_reserved_reader_probes.py",
+    "summary": "data/manifests/milai-global-reader-policy-qa-v1-summary.json",
+    "actual_driver_reader_scorer_pids_absent": true
   }
 }

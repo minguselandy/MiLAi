@@ -1,4 +1,44 @@
-# CURRENT: training/probes/selectors CLOSED; dev Reader LIVE — 2026-10-17
+# CURRENT: dev Reader and review CLOSED; reserved dispatch next — 2026-10-17
+
+Full user goal remains ACTIVE. Global analysis/generalization, no per-case runtime tuning.
+Other worktrees stay user-paused. No subagents/SHA/fingerprints/newservices/retries/default
+adoption/Product/API/permission changes. Original ledger only; do not rebill model work.
+All12 training CLOSED source2346bb57; all41 dev posttrain stages CLOSED source8ce5d09b.
+Original exec56592 returned exit0. PIDs3610392/3740226/4085866 absent. Never restart them.
+Dev31cases27arms837positions,570 actual first requests,267 identical-input reuses.
+All31 cases and570 unique responses reviewed BEFORE method-name mapping. Author/partial
+blinding only (doc counts reveal some types). Immutable snapshot stream-review/
+response-annotations-before-method-mapping.json; full tracked annotations in
+milai-global-reader-response-review-v1-annotations.json. Do not regrade for method outcome.
+Final export31 already done. DO NOT export again: export costs already reconciled once.
+Final receipt-review/report.json and semantic-final/report.json CLOSED; native metrics and
+conditional source-contract metrics remain separate. Receipt/ledger generation1238480tokens,
+570requests and dense24/42325tokens exact; all12 local-stage deltas match. No unknown newusage.
+One known response253 length failure4306+8192tokens and4 unique nonempty false-answer
+contract failures retained. No retry. All original source labels and first outputs unchanged.
+Source-supported6 task success: BM25=1,dense=3,full20=5.128native/linear fixed4=1/2/2,
+native adaptive=0/0/0,linear adaptive=0/2/1. All128 k4-vs-dense nativeF1 family intervals cross0.
+Full20 SAS unit vs requested branch retained as qualified. Ordinary geography/relationship
+assumptions explicitly qualified, not called false world facts. No stable advantage proven.
+Full docs and summary: milai-global-reader-policy-qa-v1-summary.json. Semantic join2tests,
+Ruff/targetedmypy and package/tools boundaries pass. Goal not complete ondev results alone.
+
+NEXT dispatch PREPARED global-reserved-policy-qa-v1/driver.py using current gitversion,
+PYTHONPATH=src:tools CUDA interpreter artifacts/jev-reader/cuda-env/bin/python (do NOT resolve
+venv symlink). No reserved driver.json exists yet. Frozen config all12 models,14families28rows,
+158prefixes x12=1896 original-only forwards,24selection stages,dense,preview,756Readerpositions,
+nativescore. All28 source-first reviews already CLOSED before reserved predictions.
+Prerequisite dev driver COMPLETED and actual PIDs absent are now satisfied.
+New tools/analyze_reserved_reader_probes.py supports original-only reserved inputs and
+source/reference diagnostics; no nonexistent FP32-dev baseline/five-view invariance.
+Run analysis after probes close when original ledger lease free; do not block live HTTPowner.
+Can stream-review closed reserved cases with tools/export_global_reader_responses.py; stable
+IDs local to that cohort. Export costs deferred to final receipt collector after HTTP closes.
+Finish all first-response source review before method mappings; final export then collector
+then join_global_reader_review.py. Do not select a favorable seed or change prompts/policies.
+Later sections below are historical snapshots, not authority to restart old jobs.
+
+# HISTORICAL SNAPSHOT: dev Reader was live — 2026-10-17
 
 Full user goal ACTIVE/incomplete; global analysis/generalization required.
 New global-reader-reference-v1 protocol is frozen:32/128nestedfamilies,304/1223states,

@@ -1,21 +1,19 @@
 {
-  "status": "READER_LIVE_AUTHOR_REVIEW_PARTIAL",
-  "observed_epoch": 1792225124.108969,
+  "status": "DEV_READER_AND_REVIEW_CLOSED_RESERVED_PENDING",
+  "observed_epoch": 1792226138.2207432,
   "driver_pid": 3610392,
-  "active": {
-    "stage": "reader",
-    "pid": 3740226,
-    "physical_gpu_allocation": null
-  },
   "run": {
-    "status": "RUNNING",
+    "status": "COMPLETED",
     "phase": "predict",
     "planned": 837,
-    "completed": 715,
+    "completed": 837,
     "known_failures": 1,
-    "fresh_reader_attempts": 485,
-    "reused_reader_outputs": 230,
-    "known_failed_reader_calls": 1
+    "fresh_reader_attempts": 570,
+    "reused_reader_outputs": 267,
+    "known_failed_reader_calls": 1,
+    "actual_wall_seconds": 5549.321726499125,
+    "actual_cpu_seconds": 8.920201716000001,
+    "unique_reader_inputs": 570
   },
   "reviewed_cases": [
     "row-2389",
@@ -42,13 +40,21 @@
     "row-36433",
     "row-36451",
     "row-36664",
-    "row-37230"
+    "row-37230",
+    "row-37871",
+    "row-38432",
+    "row-38602",
+    "row-39147",
+    "row-39159",
+    "row-39603"
   ],
-  "reviewed_unique_responses": 455,
+  "reviewed_unique_responses": 570,
   "review_path": "artifacts/jev-reader/global-reader-policy-qa-v1/stream-review/response-annotations.json",
-  "stream_export_cost_pending_original_ledger": true,
+  "stream_export_cost_pending_original_ledger": false,
   "cost_recording": "Final review_global_reader_results.py records export-compute.jsonl once after originalHTTPowner closes. No newledger, no modelrebilling.",
-  "scope": "Author reviewed actual delivered materials and first responses for the listed cases. No method-name mapping opened; document count can reveal policy types. Not independent adjudication or a complete-cohort performance claim. Correct abstention on deficient selections is not task success on a supported full pool.",
+  "scope": "All31 cases/570 unique first responses reviewed before method mapping, with partial blinding and author-only adjudication explicitly retained. All actual receipt/ledger differences match; native and conditional source-contract metrics are separate. No stable trained-policy advantage established.",
   "semantic_join_tool": "tools/join_global_reader_review.py",
-  "reserved_prefix_analysis_tool": "tools/analyze_reserved_reader_probes.py"
+  "reserved_prefix_analysis_tool": "tools/analyze_reserved_reader_probes.py",
+  "summary": "data/manifests/milai-global-reader-policy-qa-v1-summary.json",
+  "actual_driver_reader_scorer_pids_absent": true
 }
