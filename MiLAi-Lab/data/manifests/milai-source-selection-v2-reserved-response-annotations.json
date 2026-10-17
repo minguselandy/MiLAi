@@ -1,0 +1,2009 @@
+{
+  "status": "FIRST_RESPONSE_REVIEW_IN_PROGRESS",
+  "cohort": "reserved",
+  "reviewer_is_independent": false,
+  "method_mappings_opened": false,
+  "created_epoch": 1792259355.9917924,
+  "protocol": "data/manifests/milai-source-selection-v2-response-review-protocol.json",
+  "reviewed_cases": [
+    "row-53",
+    "row-328",
+    "row-415",
+    "row-671",
+    "row-2266",
+    "row-2268",
+    "row-2486",
+    "row-2896",
+    "row-3041",
+    "row-3181",
+    "row-3289",
+    "row-3378",
+    "row-3727",
+    "row-3822",
+    "row-3991",
+    "row-4296",
+    "row-4405",
+    "row-4423"
+  ],
+  "reviewed_unique_responses": 194,
+  "full_views_read": [
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/00-row-53.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/01-row-328.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/02-row-415.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/03-row-671.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/04-row-2266.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/05-row-2268.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/06-row-2486.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/07-row-2896.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/08-row-3041.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/09-row-3181.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/10-row-3289.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/11-row-3378.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/12-row-3727.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/13-row-3822.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/14-row-3991.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/15-row-4296.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/16-row-4405.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/reserved/stream-review/17-row-4423.txt"
+  ],
+  "annotations": {
+    "response-000000": {
+      "case_ids": [
+        "row-53"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 places Bartram’s bridge over Crum Creek; cited p0 states that Crum Creek drains into the Delaware River. Both requested links are delivered and cited."
+    },
+    "response-000002": {
+      "case_ids": [
+        "row-53"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 places Bartram’s bridge over Crum Creek; cited p0 states that Crum Creek drains into the Delaware River. Both requested links are delivered and cited."
+    },
+    "response-000003": {
+      "case_ids": [
+        "row-53"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 places Bartram’s bridge over Crum Creek; cited p0 states that Crum Creek drains into the Delaware River. Both requested links are delivered and cited."
+    },
+    "response-000004": {
+      "case_ids": [
+        "row-53"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 places Bartram’s bridge over Crum Creek; cited p0 states that Crum Creek drains into the Delaware River. Both requested links are delivered and cited."
+    },
+    "response-000005": {
+      "case_ids": [
+        "row-53"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 places Bartram’s bridge over Crum Creek; cited p0 states that Crum Creek drains into the Delaware River. Both requested links are delivered and cited."
+    },
+    "response-000008": {
+      "case_ids": [
+        "row-53"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 places Bartram’s bridge over Crum Creek; cited p0 states that Crum Creek drains into the Delaware River. Both requested links are delivered and cited."
+    },
+    "response-000001": {
+      "case_ids": [
+        "row-53"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks Crum Creek’s receiving-water relation or the named bridge identity. Other bridge/river mouths cannot substitute, so empty abstention is correct for these subsets."
+    },
+    "response-000006": {
+      "case_ids": [
+        "row-53"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks Crum Creek’s receiving-water relation or the named bridge identity. Other bridge/river mouths cannot substitute, so empty abstention is correct for these subsets."
+    },
+    "response-000007": {
+      "case_ids": [
+        "row-53"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Crum Creek is the intermediate watercourse under the bridge, not its receiving river/mouth. p16 supplies the bridge-to-creek link only; the requested downstream relation p0 is absent."
+    },
+    "response-000009": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset provides a nomination/award relation for an identified Bad Man cast member. Other nominees, political nominations, films and cast lists do not fill the missing relation; empty abstention is correct."
+    },
+    "response-000010": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset provides a nomination/award relation for an identified Bad Man cast member. Other nominees, political nominations, films and cast lists do not fill the missing relation; empty abstention is correct."
+    },
+    "response-000011": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset provides a nomination/award relation for an identified Bad Man cast member. Other nominees, political nominations, films and cast lists do not fill the missing relation; empty abstention is correct."
+    },
+    "response-000012": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset provides a nomination/award relation for an identified Bad Man cast member. Other nominees, political nominations, films and cast lists do not fill the missing relation; empty abstention is correct."
+    },
+    "response-000013": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset provides a nomination/award relation for an identified Bad Man cast member. Other nominees, political nominations, films and cast lists do not fill the missing relation; empty abstention is correct."
+    },
+    "response-000015": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset provides a nomination/award relation for an identified Bad Man cast member. Other nominees, political nominations, films and cast lists do not fill the missing relation; empty abstention is correct."
+    },
+    "response-000016": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset provides a nomination/award relation for an identified Bad Man cast member. Other nominees, political nominations, films and cast lists do not fill the missing relation; empty abstention is correct."
+    },
+    "response-000017": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset provides a nomination/award relation for an identified Bad Man cast member. Other nominees, political nominations, films and cast lists do not fill the missing relation; empty abstention is correct."
+    },
+    "response-000018": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset provides a nomination/award relation for an identified Bad Man cast member. Other nominees, political nominations, films and cast lists do not fill the missing relation; empty abstention is correct."
+    },
+    "response-000014": {
+      "case_ids": [
+        "row-328"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "uncertain",
+      "citation_grounding": "not_applicable",
+      "output_contract": "schema_or_generation_failure",
+      "rationale": "The first response ended at the generation length limit with an incomplete JSON prefix and trailing whitespace. It is not a completed abstention and was not repaired or retried.",
+      "finish_reason": "length",
+      "raw_characters": 29026,
+      "trailing_whitespace_characters": 28987,
+      "nontrailing_raw_content": "{\n  \"answer\": \"\",\n  \"answerable\": false"
+    },
+    "response-000019": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000020": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000021": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000022": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000023": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000024": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000025": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000026": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000027": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000028": {
+      "case_ids": [
+        "row-415"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p19 explicitly places Maraveh Tappeh County in Golestan Province in Iran. The question does not require a compass-region granularity, and Iran is a registered single-paragraph answer; no unseen northeastern/Caspian detail is added."
+    },
+    "response-000031": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "All four cited sources support the pre-registered conditional Cabarrus route only if Abel is the chosen co-director, his unspecified Cleveland is the North Carolina town, and near the county line is read as adjacency. These assumptions are retained, not promoted to an unqualified answer.",
+      "qualification": "Frozen co-director/homonym/adjacency interpretation; primary case remains masked."
+    },
+    "response-000029": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a necessary director/birth-city/county/border link, in addition to the unresolved director and Cleveland interpretations. Empty abstention is justified; unrelated borders are not substitutes."
+    },
+    "response-000030": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a necessary director/birth-city/county/border link, in addition to the unresolved director and Cleveland interpretations. Empty abstention is justified; unrelated borders are not substitutes."
+    },
+    "response-000032": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a necessary director/birth-city/county/border link, in addition to the unresolved director and Cleveland interpretations. Empty abstention is justified; unrelated borders are not substitutes."
+    },
+    "response-000033": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a necessary director/birth-city/county/border link, in addition to the unresolved director and Cleveland interpretations. Empty abstention is justified; unrelated borders are not substitutes."
+    },
+    "response-000034": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a necessary director/birth-city/county/border link, in addition to the unresolved director and Cleveland interpretations. Empty abstention is justified; unrelated borders are not substitutes."
+    },
+    "response-000035": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a necessary director/birth-city/county/border link, in addition to the unresolved director and Cleveland interpretations. Empty abstention is justified; unrelated borders are not substitutes."
+    },
+    "response-000036": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a necessary director/birth-city/county/border link, in addition to the unresolved director and Cleveland interpretations. Empty abstention is justified; unrelated borders are not substitutes."
+    },
+    "response-000037": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a necessary director/birth-city/county/border link, in addition to the unresolved director and Cleveland interpretations. Empty abstention is justified; unrelated borders are not substitutes."
+    },
+    "response-000038": {
+      "case_ids": [
+        "row-671"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset lacks a necessary director/birth-city/county/border link, in addition to the unresolved director and Cleveland interpretations. Empty abstention is justified; unrelated borders are not substitutes."
+    },
+    "response-000041": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset establishes the full Brunei-show-creator-radio-person chain. Food/place facts, a broadcaster association, unrelated radio stations and television figures do not identify the requested role; empty abstention is correct."
+    },
+    "response-000042": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset establishes the full Brunei-show-creator-radio-person chain. Food/place facts, a broadcaster association, unrelated radio stations and television figures do not identify the requested role; empty abstention is correct."
+    },
+    "response-000044": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset establishes the full Brunei-show-creator-radio-person chain. Food/place facts, a broadcaster association, unrelated radio stations and television figures do not identify the requested role; empty abstention is correct."
+    },
+    "response-000045": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset establishes the full Brunei-show-creator-radio-person chain. Food/place facts, a broadcaster association, unrelated radio stations and television figures do not identify the requested role; empty abstention is correct."
+    },
+    "response-000046": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset establishes the full Brunei-show-creator-radio-person chain. Food/place facts, a broadcaster association, unrelated radio stations and television figures do not identify the requested role; empty abstention is correct."
+    },
+    "response-000047": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset establishes the full Brunei-show-creator-radio-person chain. Food/place facts, a broadcaster association, unrelated radio stations and television figures do not identify the requested role; empty abstention is correct."
+    },
+    "response-000048": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset establishes the full Brunei-show-creator-radio-person chain. Food/place facts, a broadcaster association, unrelated radio stations and television figures do not identify the requested role; empty abstention is correct."
+    },
+    "response-000039": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Walter Sabo is named in NBC radio history, but the sources do not establish NBC as creator of the Bruneian version or bind the requested radio role/country. Multiple radio personalities are named. The proposed person is plausible, not a completed source-supported chain; citations do not fill the missing relations."
+    },
+    "response-000040": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Walter Sabo is named in NBC radio history, but the sources do not establish NBC as creator of the Bruneian version or bind the requested radio role/country. Multiple radio personalities are named. The proposed person is plausible, not a completed source-supported chain; citations do not fill the missing relations."
+    },
+    "response-000043": {
+      "case_ids": [
+        "row-2266"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Walter Sabo is named in NBC radio history, but the sources do not establish NBC as creator of the Bruneian version or bind the requested radio role/country. Multiple radio personalities are named. The proposed person is plausible, not a completed source-supported chain; citations do not fill the missing relations."
+    },
+    "response-000049": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000050": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000051": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000052": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000053": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000054": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000055": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000056": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000057": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000058": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000059": {
+      "case_ids": [
+        "row-2268"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset supplies a child of Stefan Nemanja. The successor passage where present identifies Nemanja, while Saint Sava’s religious-role description gives no parentage. Other Serbian figures and child-related passages cannot close the kinship link."
+    },
+    "response-000060": {
+      "case_ids": [
+        "row-2486"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the relevant Cleveland county and an adjacent-county relation. Film/director and unspecified Cleveland facts where present do not supply those missing geographic links; empty abstention is correct."
+    },
+    "response-000061": {
+      "case_ids": [
+        "row-2486"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the relevant Cleveland county and an adjacent-county relation. Film/director and unspecified Cleveland facts where present do not supply those missing geographic links; empty abstention is correct."
+    },
+    "response-000062": {
+      "case_ids": [
+        "row-2486"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the relevant Cleveland county and an adjacent-county relation. Film/director and unspecified Cleveland facts where present do not supply those missing geographic links; empty abstention is correct."
+    },
+    "response-000063": {
+      "case_ids": [
+        "row-2486"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the relevant Cleveland county and an adjacent-county relation. Film/director and unspecified Cleveland facts where present do not supply those missing geographic links; empty abstention is correct."
+    },
+    "response-000064": {
+      "case_ids": [
+        "row-2486"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the relevant Cleveland county and an adjacent-county relation. Film/director and unspecified Cleveland facts where present do not supply those missing geographic links; empty abstention is correct."
+    },
+    "response-000065": {
+      "case_ids": [
+        "row-2486"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the relevant Cleveland county and an adjacent-county relation. Film/director and unspecified Cleveland facts where present do not supply those missing geographic links; empty abstention is correct."
+    },
+    "response-000066": {
+      "case_ids": [
+        "row-2486"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the relevant Cleveland county and an adjacent-county relation. Film/director and unspecified Cleveland facts where present do not supply those missing geographic links; empty abstention is correct."
+    },
+    "response-000067": {
+      "case_ids": [
+        "row-2486"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the relevant Cleveland county and an adjacent-county relation. Film/director and unspecified Cleveland facts where present do not supply those missing geographic links; empty abstention is correct."
+    },
+    "response-000069": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p0 identifies Walter Huston in the 1930 film and p15 records his Best Supporting Actor award win. The nomination answer is supported only under the pre-registered winner-implies-nominee and selected-adaptation reading; the masked case is not forced to a unique unqualified answer.",
+      "qualification": "Frozen award-inference/adaptation qualification; category wording alone does not broaden the claim."
+    },
+    "response-000078": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p0 identifies Walter Huston in the 1930 film and p15 records his Best Supporting Actor award win. The nomination answer is supported only under the pre-registered winner-implies-nominee and selected-adaptation reading; the masked case is not forced to a unique unqualified answer.",
+      "qualification": "Frozen award-inference/adaptation qualification; category wording alone does not broaden the claim."
+    },
+    "response-000068": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000070": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000071": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000072": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000073": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000074": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000075": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000076": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000077": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000079": {
+      "case_ids": [
+        "row-2896"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the relevant Huston award relation or the requested cast identity. Other nominees and similarly titled films do not establish a Bad Man cast member’s nomination; empty abstention is justified."
+    },
+    "response-000080": {
+      "case_ids": [
+        "row-3041"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 places Watson’s birth on a ship at Saint Helena and cited p10 gives the island’s 2008 population as 4,255. This matches the frozen island/locality interpretation, without claiming ship population, birth-year population or a current value.",
+      "qualification": "Frozen geographic-unit and census-year qualification."
+    },
+    "response-000081": {
+      "case_ids": [
+        "row-3041"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 places Watson’s birth on a ship at Saint Helena and cited p10 gives the island’s 2008 population as 4,255. This matches the frozen island/locality interpretation, without claiming ship population, birth-year population or a current value.",
+      "qualification": "Frozen geographic-unit and census-year qualification."
+    },
+    "response-000082": {
+      "case_ids": [
+        "row-3041"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 places Watson’s birth on a ship at Saint Helena and cited p10 gives the island’s 2008 population as 4,255. This matches the frozen island/locality interpretation, without claiming ship population, birth-year population or a current value.",
+      "qualification": "Frozen geographic-unit and census-year qualification."
+    },
+    "response-000084": {
+      "case_ids": [
+        "row-3041"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 places Watson’s birth on a ship at Saint Helena and cited p10 gives the island’s 2008 population as 4,255. This matches the frozen island/locality interpretation, without claiming ship population, birth-year population or a current value.",
+      "qualification": "Frozen geographic-unit and census-year qualification."
+    },
+    "response-000085": {
+      "case_ids": [
+        "row-3041"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 places Watson’s birth on a ship at Saint Helena and cited p10 gives the island’s 2008 population as 4,255. This matches the frozen island/locality interpretation, without claiming ship population, birth-year population or a current value.",
+      "qualification": "Frozen geographic-unit and census-year qualification."
+    },
+    "response-000083": {
+      "case_ids": [
+        "row-3041"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The birthplace association is supplied but Saint Helena’s population p10 is absent. Another place’s population cannot substitute."
+    },
+    "response-000086": {
+      "case_ids": [
+        "row-3041"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the Francis Watson birthplace link, even when a Saint Helena population is present. Other Watsons and people named Francis do not identify the target place."
+    },
+    "response-000087": {
+      "case_ids": [
+        "row-3041"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks the Francis Watson birthplace link, even when a Saint Helena population is present. Other Watsons and people named Francis do not identify the target place."
+    },
+    "response-000088": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000089": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000090": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000091": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000092": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000093": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000094": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000095": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000096": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000098": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000099": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000100": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset states Erik Erikson’s spouse. Where the book author is identified, the marriage link remains missing; Martin Luther is the book’s subject, not its author, and unrelated spouses do not transfer."
+    },
+    "response-000097": {
+      "case_ids": [
+        "row-3181"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Joan Erikson is a plausible world answer, but cited p8 only states collaboration with Erik Erikson. Shared surname and collaboration do not supply marriage; p19 identifies the author without that missing relation."
+    },
+    "response-000101": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000102": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000103": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000104": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000105": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000106": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000107": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000108": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000109": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000110": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000111": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000112": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000113": {
+      "case_ids": [
+        "row-3289"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The named book’s author and spouse relation are absent. The supplied wife of Martin Luther concerns a different role; other young-man titles, songs and fictional spouses do not answer the author’s spouse question."
+    },
+    "response-000114": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000115": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000116": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000117": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000118": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000119": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000120": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000121": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000122": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000123": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000124": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000125": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000126": {
+      "case_ids": [
+        "row-3378"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Francis Watson’s birthplace nor the relevant Saint Helena population is supplied. Other Watsons, Francis namesakes and unrelated populations do not close the chain; each empty abstention is correct."
+    },
+    "response-000127": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000128": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000129": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000130": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000131": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000132": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000133": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000134": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000135": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000136": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000137": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000138": {
+      "case_ids": [
+        "row-3727"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected source identifies Bartram’s Covered Bridge or Crum Creek. Mouths and crossings of unrelated rivers cannot answer the named bridge’s watercourse question, so empty abstention is correct."
+    },
+    "response-000139": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000140": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000141": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000142": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000143": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000144": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000145": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000146": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000147": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000148": {
+      "case_ids": [
+        "row-3822"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "Neither Tihomir’s successor nor the successor’s child is identified in the selected sources. Saint Sava’s religious role and unrelated Serbian people do not establish parentage; empty abstention is correct."
+    },
+    "response-000149": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 explicitly gives the county→Golestan Province→Iran containment. Iran is a registered country-level answer; absence of the finer-location passage does not invalidate it."
+    },
+    "response-000155": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 explicitly gives the county→Golestan Province→Iran containment. Iran is a registered country-level answer; absence of the finer-location passage does not invalidate it."
+    },
+    "response-000158": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 explicitly gives the county→Golestan Province→Iran containment. Iran is a registered country-level answer; absence of the finer-location passage does not invalidate it."
+    },
+    "response-000161": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 explicitly gives the county→Golestan Province→Iran containment. Iran is a registered country-level answer; absence of the finer-location passage does not invalidate it."
+    },
+    "response-000150": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 identifies the relevant province and cited p1 locates it in northeastern Iran south of the Caspian Sea. The finer regional answer is directly supported with both links cited."
+    },
+    "response-000151": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 identifies the relevant province and cited p1 locates it in northeastern Iran south of the Caspian Sea. The finer regional answer is directly supported with both links cited."
+    },
+    "response-000152": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 identifies the relevant province and cited p1 locates it in northeastern Iran south of the Caspian Sea. The finer regional answer is directly supported with both links cited."
+    },
+    "response-000153": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 identifies the relevant province and cited p1 locates it in northeastern Iran south of the Caspian Sea. The finer regional answer is directly supported with both links cited."
+    },
+    "response-000156": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 identifies the relevant province and cited p1 locates it in northeastern Iran south of the Caspian Sea. The finer regional answer is directly supported with both links cited."
+    },
+    "response-000157": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 identifies the relevant province and cited p1 locates it in northeastern Iran south of the Caspian Sea. The finer regional answer is directly supported with both links cited."
+    },
+    "response-000159": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 identifies the relevant province and cited p1 locates it in northeastern Iran south of the Caspian Sea. The finer regional answer is directly supported with both links cited."
+    },
+    "response-000160": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p4 identifies the relevant province and cited p1 locates it in northeastern Iran south of the Caspian Sea. The finer regional answer is directly supported with both links cited."
+    },
+    "response-000154": {
+      "case_ids": [
+        "row-3991"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset has neither Maraveh Tappeh County nor a binding Golestan location. Unrelated municipalities cannot establish the target province’s location; empty abstention is correct for this subset."
+    },
+    "response-000162": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not establish the palitaw-origin/embassy country binding, television creator rather than broadcaster, and requested local radio-person role. Empty abstention correctly reflects insufficient delivered evidence."
+    },
+    "response-000163": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not establish the palitaw-origin/embassy country binding, television creator rather than broadcaster, and requested local radio-person role. Empty abstention correctly reflects insufficient delivered evidence."
+    },
+    "response-000166": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not establish the palitaw-origin/embassy country binding, television creator rather than broadcaster, and requested local radio-person role. Empty abstention correctly reflects insufficient delivered evidence."
+    },
+    "response-000167": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not establish the palitaw-origin/embassy country binding, television creator rather than broadcaster, and requested local radio-person role. Empty abstention correctly reflects insufficient delivered evidence."
+    },
+    "response-000168": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not establish the palitaw-origin/embassy country binding, television creator rather than broadcaster, and requested local radio-person role. Empty abstention correctly reflects insufficient delivered evidence."
+    },
+    "response-000169": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not establish the palitaw-origin/embassy country binding, television creator rather than broadcaster, and requested local radio-person role. Empty abstention correctly reflects insufficient delivered evidence."
+    },
+    "response-000170": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not establish the palitaw-origin/embassy country binding, television creator rather than broadcaster, and requested local radio-person role. Empty abstention correctly reflects insufficient delivered evidence."
+    },
+    "response-000171": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not establish the palitaw-origin/embassy country binding, television creator rather than broadcaster, and requested local radio-person role. Empty abstention correctly reflects insufficient delivered evidence."
+    },
+    "response-000172": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset does not establish the palitaw-origin/embassy country binding, television creator rather than broadcaster, and requested local radio-person role. Empty abstention correctly reflects insufficient delivered evidence."
+    },
+    "response-000164": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Walter Sabo and Tom Parker are named in NBC radio history, but the delivered material does not establish the country/creator/radio-role chain required by this question. NBC television association is not proof of creator identity or a unique Brunei radio figure; the named person is not declared false as world knowledge."
+    },
+    "response-000165": {
+      "case_ids": [
+        "row-4296"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Walter Sabo and Tom Parker are named in NBC radio history, but the delivered material does not establish the country/creator/radio-role chain required by this question. NBC television association is not proof of creator identity or a unique Brunei radio figure; the named person is not declared false as world knowledge."
+    },
+    "response-000173": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the Rhine paragraph identifying the three waters exposed in the last cold phase. Speckter/Hamburg or unrelated channel passages alone cannot determine the requested remaining water. Abstention is Reader-correct on this subset, while the frozen qualified full pool is supported."
+    },
+    "response-000174": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the Rhine paragraph identifying the three waters exposed in the last cold phase. Speckter/Hamburg or unrelated channel passages alone cannot determine the requested remaining water. Abstention is Reader-correct on this subset, while the frozen qualified full pool is supported."
+    },
+    "response-000176": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the Rhine paragraph identifying the three waters exposed in the last cold phase. Speckter/Hamburg or unrelated channel passages alone cannot determine the requested remaining water. Abstention is Reader-correct on this subset, while the frozen qualified full pool is supported."
+    },
+    "response-000178": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the Rhine paragraph identifying the three waters exposed in the last cold phase. Speckter/Hamburg or unrelated channel passages alone cannot determine the requested remaining water. Abstention is Reader-correct on this subset, while the frozen qualified full pool is supported."
+    },
+    "response-000180": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the Rhine paragraph identifying the three waters exposed in the last cold phase. Speckter/Hamburg or unrelated channel passages alone cannot determine the requested remaining water. Abstention is Reader-correct on this subset, while the frozen qualified full pool is supported."
+    },
+    "response-000181": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset lacks the Rhine paragraph identifying the three waters exposed in the last cold phase. Speckter/Hamburg or unrelated channel passages alone cannot determine the requested remaining water. Abstention is Reader-correct on this subset, while the frozen qualified full pool is supported."
+    },
+    "response-000175": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Sea level is explicitly described as lower in p4, so that ancillary statement is sourced. It is not the requested remaining named water, the English Channel, under the frozen set-difference reading. Citing p4 alone also does not bind the death city and North Sea; complete person/city sources are available only in response 175 among these subsets.",
+      "qualification": "Retain the predeclared Speckler→Speckter and sea-level/exposed-water interpretation; no post-response revision of expected answer."
+    },
+    "response-000177": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Sea level is explicitly described as lower in p4, so that ancillary statement is sourced. It is not the requested remaining named water, the English Channel, under the frozen set-difference reading. Citing p4 alone also does not bind the death city and North Sea; complete person/city sources are available only in response 175 among these subsets.",
+      "qualification": "Retain the predeclared Speckler→Speckter and sea-level/exposed-water interpretation; no post-response revision of expected answer."
+    },
+    "response-000179": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Sea level is explicitly described as lower in p4, so that ancillary statement is sourced. It is not the requested remaining named water, the English Channel, under the frozen set-difference reading. Citing p4 alone also does not bind the death city and North Sea; complete person/city sources are available only in response 175 among these subsets.",
+      "qualification": "Retain the predeclared Speckler→Speckter and sea-level/exposed-water interpretation; no post-response revision of expected answer."
+    },
+    "response-000182": {
+      "case_ids": [
+        "row-4405"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Sea level is explicitly described as lower in p4, so that ancillary statement is sourced. It is not the requested remaining named water, the English Channel, under the frozen set-difference reading. Citing p4 alone also does not bind the death city and North Sea; complete person/city sources are available only in response 175 among these subsets.",
+      "qualification": "Retain the predeclared Speckler→Speckter and sea-level/exposed-water interpretation; no post-response revision of expected answer."
+    },
+    "response-000183": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000184": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000185": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000187": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000188": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000189": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000190": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000191": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000192": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000193": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered paragraph states which Security Council members hold veto power. The Great power paragraph only identifies permanent seats; Hayek also concerns Abuse of Reason rather than the literal questioned title. Abstention remains correct even for the full pool; an absent veto relation is not supplied by world knowledge."
+    },
+    "response-000186": {
+      "case_ids": [
+        "row-4423"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Permanent members is a plausible external answer, but p17 only states permanent seats and contains no veto-power relation. The selected subset also lacks the Hayek project/time binding. It cannot support the requested complete chain."
+    }
+  },
+  "scope": "All first final answers and actual delivered sources reviewed before method mapping. Reserved response IDs have their own cohort namespace; do not merge them with dev IDs.",
+  "last_updated_epoch": 1792260831.4837322
+}

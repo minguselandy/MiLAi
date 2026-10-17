@@ -272,7 +272,7 @@ def collect(root: Path, output: Path) -> dict[str, Any]:
     paired = [
         difference(list(comparisons.values()), baseline, arm)
         for arm in arms
-        if arm not in {"bm25_k4", "dense_k4", "full20"}
+        if arm not in {"bm25_k4", "dense_k4", "full20", "full_pool"}
         for baseline in ("bm25_k4", "dense_k4")
     ]
     for item in paired:

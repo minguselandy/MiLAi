@@ -40,7 +40,15 @@ Immutable dev/response-review/all43-before-method-mapping.json sealed BEFOREmeth
 Tracked data/manifests/milai-source-selection-v2-dev-response-annotations.json is complete. DO NOT
 regrade/restartdev. Native score file exists but has NOT been opened; keep ALLmethodmappingsclosed
 until reservedreviewalso complete. Copiesofhelpers now in reserved/response-review; emptyannotations
-initialized and first4completeviews exported: row-53,row-328,row-415,row-671. Continue RESERVED.
+initialized. RESERVED review now18cases/194unique firstresponses (IDs0..193), through row4423.
+Tracked reserved-response-annotations manifest is an IN-PROGRESS snapshot; continue row4466 onward.
+Reader progressed249/364positions,206fresh/43reuse,1lengthfailure atlatest observation; notterminal.
+Reservedresponse14 rawincompleteJSON has28987trailingwhitespacechars; allnonwhitespace content and
+fullsources were read separately after displaytruncation. No retry; schema_or_generation_failure.
+Rows4405 responses175/177/179/182 say sea level: ancillaryfact explicitly inRhineparagraph butwrong
+requestedremainingwater (EnglishChannel underfrozenreading), citations misscity/person chain.
+Keep frozenqualifiedsource judgment, noanswer-dependentregrafting. Row4423response186 permanent
+members lacks theveto relation; otherresponses correctlyabstain. Methodmappings stillunopened.
 Reserved IDs are native MuDEVrows, NOT ordinal0..27; use label_by_case and source_review_by_source_row.
 Frozen reservedsource judgment: reserved-source-review/all28-before-reference.json. Response IDs
 restart at0 percohort; nevermerge dev/reservedannotations bybare responseID. Samefrozenprotocol.
@@ -77,6 +85,9 @@ Row16response186 citesAlta p16/source8 twice; actualselectedp7 alreadygroundsUpl
 Primarycitation=uncertain; exploratory_citation_grounding=adequate underhierarchicaladdress reading
 (questiongivenUplandWV + AltaaddressWV,US). Newpathunregistered beforepredictions, so no edits to
 frozen sourceproofs/training/primarylabels. Exacttitle/literal checkofnewpath vsactualtrain/reserved0.
+Summary implementation nowapplies alternativecitations to copiedannotations viaoriginalverdict,
+withtests forsharedresponses/primaryimmutability/masked/failed/unsupported cases;6semantic testsPASS,
+2receiptanalysis testsPASS,Ruff/mypyandbothboundariesPASS. ActualsensitivityreportstillPENDING.
 Afterallreviews apply alternativecitation acceptance to EVERYcorresponding methodposition andreport
 separately; do not omit this remaining item or creditonly a preferredmodel. Originalprimaryunchanged.
 

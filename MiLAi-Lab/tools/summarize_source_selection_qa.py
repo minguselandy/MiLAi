@@ -12,6 +12,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
+from join_global_reader_review import verdict
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from summarize_global_reader_cohorts import summarize
@@ -40,6 +41,30 @@ def natural_pairs(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "source_pair_details": source,
         "scope": "Natural variants, not equivalent presentation. Original answerability does "
                  "not force a source-semantic polarity change; masked pairs remain excluded."}
+
+
+def citation_sensitivity(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    """Apply every pre-mapping citation supplement, preserving primary annotations."""
+    alternative, affected = [], []
+    for row in rows:
+        annotation = row["annotation"]
+        if "exploratory_citation_grounding" in annotation:
+            amended = {**annotation,
+                       "citation_grounding": annotation["exploratory_citation_grounding"]}
+            result = verdict(amended, row["disposition"])
+            alternative.append({**row, "annotation": amended, **result})
+            affected.append({"case": row["case"], "response_id": row["response_id"],
+                "supplement": annotation["exploratory_supplement"],
+                "primary_task_pass": row["source_contract_task_pass"],
+                "alternative_task_pass": result["source_contract_task_pass"],
+                "primary_reader_pass": row["reader_response_pass"],
+                "alternative_reader_pass": result["reader_response_pass"]})
+        else:
+            alternative.append(row)
+    return {"affected_positions": affected, "all": summarize(alternative),
+        "scope": "Exploratory citation routes logged before method mapping, applied to every "
+                 "matching response in every arm. Primary annotations, source proofs, native "
+                 "metrics, masking and contract requirements are unchanged."}
 
 
 def collect(root: Path) -> dict[str, Any]:
@@ -76,6 +101,7 @@ def collect(root: Path) -> dict[str, Any]:
                                               if label["dataset"].startswith("musique") else None})
         all_rows[name] = {r["case"]: r for r in output}
         arms[name] = {"all": summarize(output),
+            "exploratory_citation_sensitivity": citation_sensitivity(output),
             "by_dataset": {dataset: summarize([r for r in output if r["dataset"] == dataset])
                            for dataset in sorted({r["dataset"] for r in output})},
             "by_source_qualification": {str(flag): summarize([
