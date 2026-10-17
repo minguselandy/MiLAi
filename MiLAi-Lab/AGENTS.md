@@ -12,8 +12,8 @@ SOURCE FREEZES (commit IDs are provenance only, no SHA verification):
 Paths below are relative to artifacts/jev-reader/selection-v2 unless stated otherwise.
 
 LIVE: training-v1/driver.json is authority. CoordinatorPID1145336, exec40960. Seed0 reference AND source CLOSED exit0, each188updates/3008examples.
-source/seed1 and reference/seed1 also CLOSED exit0; total4/6. Current reference/seed2
-child1429856 was live at latest snapshot. Seed1source/ref finalsource-dev192/255both (TIE),
+source/seed1,reference/seed1,reference/seed2 also CLOSED exit0; total5/6. Current FINAL
+source/seed2 child1500140 was live at latest snapshot. Reference2source-dev185/255,train1492/1495. Seed1source/ref finalsource-dev192/255both (TIE),
 source1train1228/1228,reference1train1495/1495; pre-save only, no cross-seed win claim. Queue is6jobs, source/reference x seeds0/1/2, serialGPU2/3, no retry. Do NOT
 restart when an exec poll expires. Source code/data/protocol are frozen, do not tune from results.
 Evaluation-v2/driver.json WAITING_FOR_TRAINING, coordinatorPID1209651, exec1227. It will
