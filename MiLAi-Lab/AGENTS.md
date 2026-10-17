@@ -1,3 +1,25 @@
+# CURRENT: restarted objective training CLOSED, presentation probe LIVE — 2026-10-17
+
+Prior turn was progress: four user-restarted jobs closed, source review expanded,
+semantic facets prepared. Full audit ACTIVE/incomplete; other worktree remains
+user-paused, group2432756 and all35members T. Do not resume or replace its tasks.
+Training root objective-pair-user-restart-v1: coordinator2481980 exited/exec51424exit0,
+all4COMPLETED/24updates. Actualsourceaa8f97e2; preserved source-label correction
+explains the raw driver placeholder. No repeated training or ledger reset.
+Final softCE->set:seed0train74->72/dev10->12;seed1train80->76/dev5->6.
+Dev complement2->5 and2->3, best-open score6->6 and5->5; sufficiency1/5or0/5.
+Only3effective exposeddevfamilies, noQA/netgain. Full metrics/curves/compute reconciled.
+Source-qualified-v3:4additional trainfamilies/8rows/160positions/95texts,39states,
+34labelled/5masked. Semantic-v2:36authoredfacets/155states/8families,933max/0truncation;
+nottrained, oldC20alreadyexposedfamilies, nevercallnewblindbenchmark.
+LIVE presentationprobe coordinator2538184/exec28199, root invariance-user-restart-v1,
+source/protocolfcc50da2,4models x30positions x5views. Inspect actual process/terminal.
+No model runtime hot edits/restarts; do not run obsolete invariance-v1 coordinator.
+Prepared objective-policy-qa-v1:7exposedquestions/10arms/70Readerpositions, notrun.
+Only after probesclose, execute fixed4/adaptive and BM25/full20 under existing
+7860Reader settings, originalledger, serialHTTP; preserve all first failures.
+NoSHA/fingerprints/subagents/newservices/defaultadoption/Product/API changes.
+
 # CURRENT: user-requested training restart — 2026-10-17
 
 User explicitly requests pausing other MiLAi worktree tasks and restarting current

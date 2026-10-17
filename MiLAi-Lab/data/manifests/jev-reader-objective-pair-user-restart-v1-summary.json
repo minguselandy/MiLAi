@@ -1,0 +1,1456 @@
+{
+  "name": "jev-reader-objective-pair-user-restart-v1",
+  "status": "CLOSED",
+  "training_source": "aa8f97e2",
+  "raw_driver_source_label": "c5-placeholder",
+  "runs": [
+    {
+      "seed": 0,
+      "objective": "soft-ce",
+      "optimizer_updates": 24,
+      "parameter_changes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607876
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769470
+        }
+      },
+      "curves": [
+        {
+          "epoch": 0,
+          "loss": null,
+          "train_accepted": 4,
+          "dev_accepted": 1
+        },
+        {
+          "epoch": 1,
+          "loss": 2.799706747365552,
+          "train_accepted": 37,
+          "dev_accepted": 9
+        },
+        {
+          "epoch": 2,
+          "loss": 1.8162376991538114,
+          "train_accepted": 56,
+          "dev_accepted": 8
+        },
+        {
+          "epoch": 3,
+          "loss": 1.2561442255973816,
+          "train_accepted": 69,
+          "dev_accepted": 9
+        },
+        {
+          "epoch": 4,
+          "loss": 0.9465027895084647,
+          "train_accepted": 74,
+          "dev_accepted": 10
+        }
+      ],
+      "final": {
+        "train": {
+          "counts": {
+            "labelled": 86,
+            "accepted": 74,
+            "first_remaining_candidate_accepted": 18,
+            "unsupported_exhaustion_stop": 11
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 52,
+              "accepted": 44
+            },
+            "reviewed_proof_complete": {
+              "labelled": 10,
+              "accepted": 6
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 24,
+              "accepted": 24
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 10,
+            "stop_exhausted": 24
+          },
+          "family_macro_acceptance": 0.8721661054994387,
+          "families": 9,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "best_open_complement": {
+            "accepted": 47,
+            "labelled": 52
+          },
+          "positive_cardinality": {
+            "multi_positive": {
+              "labelled": 22,
+              "accepted": 21
+            },
+            "single_positive": {
+              "labelled": 64,
+              "accepted": 53
+            }
+          }
+        },
+        "dev": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 10,
+            "unsupported_exhaustion_stop": 10,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8,
+            "unnecessary_continue": 2
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 2
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 1
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 7
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.39814814814814814,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "best_open_complement": {
+            "accepted": 6,
+            "labelled": 8
+          },
+          "positive_cardinality": {
+            "multi_positive": {
+              "labelled": 2,
+              "accepted": 0
+            },
+            "single_positive": {
+              "labelled": 20,
+              "accepted": 10
+            }
+          }
+        }
+      },
+      "original_reference_same_admitted_dev": {
+        "counts": {
+          "labelled": 22,
+          "accepted": 9,
+          "unsupported_exhaustion_stop": 12,
+          "first_remaining_candidate_accepted": 7,
+          "masked_reference": 8,
+          "unnecessary_continue": 1
+        },
+        "strata": {
+          "reviewed_missing_complement": {
+            "labelled": 8,
+            "accepted": 2
+          },
+          "reviewed_proof_complete": {
+            "labelled": 5,
+            "accepted": 1
+          },
+          "reviewed_pool_insufficient": {
+            "labelled": 9,
+            "accepted": 6
+          }
+        },
+        "constant_stop_reference": {
+          "stop_sufficient": 4,
+          "stop_exhausted": 6
+        },
+        "family_macro_acceptance": 0.35648148148148145,
+        "families": 3,
+        "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+      },
+      "compute": {
+        "wall_seconds": 183.8653880432248,
+        "cpu_seconds": 250.812350747,
+        "runs": 1,
+        "train_sequence_rows": 344,
+        "train_input_tokens": 954476,
+        "train_batch_forwards": 88,
+        "train_device_forwards": 176,
+        "train_batch_attempts": 88,
+        "train_offered_rows": 344,
+        "train_offered_tokens": 954476,
+        "dev_forwards": 150,
+        "dev_sequence_rows": 150,
+        "dev_input_tokens": 389285,
+        "dev_state_tokenizations": 150,
+        "dev_state_tokens": 340125,
+        "train_eval_forwards": 430,
+        "train_eval_sequence_rows": 430,
+        "train_eval_input_tokens": 1193095,
+        "train_eval_state_tokenizations": 430,
+        "train_eval_state_tokens": 1052295,
+        "peak_rss_kib": 5042864,
+        "peak_cuda_allocated_bytes": [
+          15668690944,
+          11646731264
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "original_ledger_delta_matches_saved_compute": true
+    },
+    {
+      "seed": 0,
+      "objective": "set",
+      "optimizer_updates": 24,
+      "parameter_changes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607867
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769464
+        }
+      },
+      "curves": [
+        {
+          "epoch": 0,
+          "loss": null,
+          "train_accepted": 4,
+          "dev_accepted": 1
+        },
+        {
+          "epoch": 1,
+          "loss": 2.5564370432565378,
+          "train_accepted": 36,
+          "dev_accepted": 9
+        },
+        {
+          "epoch": 2,
+          "loss": 1.5181057674940241,
+          "train_accepted": 56,
+          "dev_accepted": 9
+        },
+        {
+          "epoch": 3,
+          "loss": 0.8706695499808289,
+          "train_accepted": 67,
+          "dev_accepted": 11
+        },
+        {
+          "epoch": 4,
+          "loss": 0.5651096795620614,
+          "train_accepted": 72,
+          "dev_accepted": 12
+        }
+      ],
+      "final": {
+        "train": {
+          "counts": {
+            "labelled": 86,
+            "accepted": 72,
+            "first_remaining_candidate_accepted": 18,
+            "unnecessary_continue": 2,
+            "unsupported_exhaustion_stop": 6
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 52,
+              "accepted": 42
+            },
+            "reviewed_proof_complete": {
+              "labelled": 10,
+              "accepted": 7
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 24,
+              "accepted": 23
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 10,
+            "stop_exhausted": 24
+          },
+          "family_macro_acceptance": 0.8519360269360269,
+          "families": 9,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "best_open_complement": {
+            "accepted": 42,
+            "labelled": 52
+          },
+          "positive_cardinality": {
+            "multi_positive": {
+              "labelled": 22,
+              "accepted": 20
+            },
+            "single_positive": {
+              "labelled": 64,
+              "accepted": 52
+            }
+          }
+        },
+        "dev": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 12,
+            "first_remaining_candidate_accepted": 6,
+            "unsupported_exhaustion_stop": 6,
+            "unsupported_sufficient_stop": 1,
+            "unnecessary_continue": 3,
+            "masked_reference": 8
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 5
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 1
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 6
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.5018518518518519,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "best_open_complement": {
+            "accepted": 6,
+            "labelled": 8
+          },
+          "positive_cardinality": {
+            "multi_positive": {
+              "labelled": 2,
+              "accepted": 2
+            },
+            "single_positive": {
+              "labelled": 20,
+              "accepted": 10
+            }
+          }
+        }
+      },
+      "original_reference_same_admitted_dev": {
+        "counts": {
+          "labelled": 22,
+          "accepted": 11,
+          "first_remaining_candidate_accepted": 7,
+          "unsupported_exhaustion_stop": 8,
+          "unsupported_sufficient_stop": 1,
+          "unnecessary_continue": 2,
+          "masked_reference": 8
+        },
+        "strata": {
+          "reviewed_missing_complement": {
+            "labelled": 8,
+            "accepted": 5
+          },
+          "reviewed_proof_complete": {
+            "labelled": 5,
+            "accepted": 1
+          },
+          "reviewed_pool_insufficient": {
+            "labelled": 9,
+            "accepted": 5
+          }
+        },
+        "constant_stop_reference": {
+          "stop_sufficient": 4,
+          "stop_exhausted": 6
+        },
+        "family_macro_acceptance": 0.4601851851851852,
+        "families": 3,
+        "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+      },
+      "compute": {
+        "wall_seconds": 192.77314814552665,
+        "cpu_seconds": 256.89934130999995,
+        "runs": 1,
+        "train_sequence_rows": 344,
+        "train_input_tokens": 954476,
+        "train_batch_forwards": 88,
+        "train_device_forwards": 176,
+        "train_batch_attempts": 88,
+        "train_offered_rows": 344,
+        "train_offered_tokens": 954476,
+        "dev_forwards": 150,
+        "dev_sequence_rows": 150,
+        "dev_input_tokens": 389285,
+        "dev_state_tokenizations": 150,
+        "dev_state_tokens": 340125,
+        "train_eval_forwards": 430,
+        "train_eval_sequence_rows": 430,
+        "train_eval_input_tokens": 1193095,
+        "train_eval_state_tokenizations": 430,
+        "train_eval_state_tokens": 1052295,
+        "peak_rss_kib": 5035508,
+        "peak_cuda_allocated_bytes": [
+          15668690944,
+          11646731264
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "original_ledger_delta_matches_saved_compute": true
+    },
+    {
+      "seed": 1,
+      "objective": "set",
+      "optimizer_updates": 24,
+      "parameter_changes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607871
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769469
+        }
+      },
+      "curves": [
+        {
+          "epoch": 0,
+          "loss": null,
+          "train_accepted": 4,
+          "dev_accepted": 1
+        },
+        {
+          "epoch": 1,
+          "loss": 2.4436769568642904,
+          "train_accepted": 38,
+          "dev_accepted": 6
+        },
+        {
+          "epoch": 2,
+          "loss": 1.5390035163524538,
+          "train_accepted": 61,
+          "dev_accepted": 8
+        },
+        {
+          "epoch": 3,
+          "loss": 0.910291617692903,
+          "train_accepted": 72,
+          "dev_accepted": 6
+        },
+        {
+          "epoch": 4,
+          "loss": 0.47190663599690724,
+          "train_accepted": 76,
+          "dev_accepted": 6
+        }
+      ],
+      "final": {
+        "train": {
+          "counts": {
+            "labelled": 86,
+            "accepted": 76,
+            "first_remaining_candidate_accepted": 18,
+            "unnecessary_continue": 1,
+            "unsupported_exhaustion_stop": 1,
+            "unsupported_sufficient_stop": 5
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 52,
+              "accepted": 44
+            },
+            "reviewed_proof_complete": {
+              "labelled": 10,
+              "accepted": 9
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 24,
+              "accepted": 23
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 10,
+            "stop_exhausted": 24
+          },
+          "family_macro_acceptance": 0.884078884078884,
+          "families": 9,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "best_open_complement": {
+            "accepted": 46,
+            "labelled": 52
+          },
+          "positive_cardinality": {
+            "multi_positive": {
+              "labelled": 22,
+              "accepted": 20
+            },
+            "single_positive": {
+              "labelled": 64,
+              "accepted": 56
+            }
+          }
+        },
+        "dev": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 6,
+            "unsupported_exhaustion_stop": 8,
+            "first_remaining_candidate_accepted": 6,
+            "unnecessary_continue": 6,
+            "masked_reference": 8,
+            "unsupported_sufficient_stop": 1
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 3
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 3
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.26111111111111107,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "best_open_complement": {
+            "accepted": 5,
+            "labelled": 8
+          },
+          "positive_cardinality": {
+            "multi_positive": {
+              "labelled": 2,
+              "accepted": 1
+            },
+            "single_positive": {
+              "labelled": 20,
+              "accepted": 5
+            }
+          }
+        }
+      },
+      "original_reference_same_admitted_dev": {
+        "counts": {
+          "labelled": 22,
+          "accepted": 8,
+          "unsupported_exhaustion_stop": 8,
+          "first_remaining_candidate_accepted": 7,
+          "unnecessary_continue": 4,
+          "masked_reference": 8
+        },
+        "strata": {
+          "reviewed_missing_complement": {
+            "labelled": 8,
+            "accepted": 3
+          },
+          "reviewed_proof_complete": {
+            "labelled": 5,
+            "accepted": 0
+          },
+          "reviewed_pool_insufficient": {
+            "labelled": 9,
+            "accepted": 5
+          }
+        },
+        "constant_stop_reference": {
+          "stop_sufficient": 4,
+          "stop_exhausted": 6
+        },
+        "family_macro_acceptance": 0.3444444444444444,
+        "families": 3,
+        "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+      },
+      "compute": {
+        "wall_seconds": 187.69157996028662,
+        "cpu_seconds": 252.645356475,
+        "runs": 1,
+        "train_sequence_rows": 344,
+        "train_input_tokens": 954476,
+        "train_batch_forwards": 88,
+        "train_device_forwards": 176,
+        "train_batch_attempts": 88,
+        "train_offered_rows": 344,
+        "train_offered_tokens": 954476,
+        "dev_forwards": 150,
+        "dev_sequence_rows": 150,
+        "dev_input_tokens": 389285,
+        "dev_state_tokenizations": 150,
+        "dev_state_tokens": 340125,
+        "train_eval_forwards": 430,
+        "train_eval_sequence_rows": 430,
+        "train_eval_input_tokens": 1193095,
+        "train_eval_state_tokenizations": 430,
+        "train_eval_state_tokens": 1052295,
+        "peak_rss_kib": 5002432,
+        "peak_cuda_allocated_bytes": [
+          15665200640,
+          11646477312
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "original_ledger_delta_matches_saved_compute": true
+    },
+    {
+      "seed": 1,
+      "objective": "soft-ce",
+      "optimizer_updates": 24,
+      "parameter_changes": {
+        "encoder": {
+          "parameter": "encoder.embeddings.tok_embeddings.weight",
+          "changed_elements": 196607867
+        },
+        "head": {
+          "parameter": "head.layers.0.self_attn.in_proj_weight",
+          "changed_elements": 1769463
+        }
+      },
+      "curves": [
+        {
+          "epoch": 0,
+          "loss": null,
+          "train_accepted": 4,
+          "dev_accepted": 1
+        },
+        {
+          "epoch": 1,
+          "loss": 2.6543803159580674,
+          "train_accepted": 36,
+          "dev_accepted": 7
+        },
+        {
+          "epoch": 2,
+          "loss": 1.6991998539414517,
+          "train_accepted": 64,
+          "dev_accepted": 8
+        },
+        {
+          "epoch": 3,
+          "loss": 1.1354009911071423,
+          "train_accepted": 79,
+          "dev_accepted": 7
+        },
+        {
+          "epoch": 4,
+          "loss": 0.776742851318315,
+          "train_accepted": 80,
+          "dev_accepted": 5
+        }
+      ],
+      "final": {
+        "train": {
+          "counts": {
+            "labelled": 86,
+            "accepted": 80,
+            "first_remaining_candidate_accepted": 18,
+            "unsupported_exhaustion_stop": 6
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 52,
+              "accepted": 47
+            },
+            "reviewed_proof_complete": {
+              "labelled": 10,
+              "accepted": 9
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 24,
+              "accepted": 24
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 10,
+            "stop_exhausted": 24
+          },
+          "family_macro_acceptance": 0.9353535353535354,
+          "families": 9,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "best_open_complement": {
+            "accepted": 48,
+            "labelled": 52
+          },
+          "positive_cardinality": {
+            "multi_positive": {
+              "labelled": 22,
+              "accepted": 22
+            },
+            "single_positive": {
+              "labelled": 64,
+              "accepted": 58
+            }
+          }
+        },
+        "dev": {
+          "counts": {
+            "labelled": 22,
+            "accepted": 5,
+            "unsupported_exhaustion_stop": 10,
+            "first_remaining_candidate_accepted": 6,
+            "masked_reference": 8,
+            "unnecessary_continue": 4,
+            "unsupported_sufficient_stop": 2
+          },
+          "strata": {
+            "reviewed_missing_complement": {
+              "labelled": 8,
+              "accepted": 2
+            },
+            "reviewed_proof_complete": {
+              "labelled": 5,
+              "accepted": 0
+            },
+            "reviewed_pool_insufficient": {
+              "labelled": 9,
+              "accepted": 3
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 5,
+            "stop_exhausted": 9
+          },
+          "family_macro_acceptance": 0.21944444444444444,
+          "families": 3,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit",
+          "best_open_complement": {
+            "accepted": 5,
+            "labelled": 8
+          },
+          "positive_cardinality": {
+            "multi_positive": {
+              "labelled": 2,
+              "accepted": 1
+            },
+            "single_positive": {
+              "labelled": 20,
+              "accepted": 4
+            }
+          }
+        }
+      },
+      "original_reference_same_admitted_dev": {
+        "counts": {
+          "labelled": 22,
+          "accepted": 7,
+          "unsupported_exhaustion_stop": 10,
+          "first_remaining_candidate_accepted": 7,
+          "masked_reference": 8,
+          "unnecessary_continue": 3,
+          "unsupported_sufficient_stop": 1
+        },
+        "strata": {
+          "reviewed_missing_complement": {
+            "labelled": 8,
+            "accepted": 2
+          },
+          "reviewed_proof_complete": {
+            "labelled": 5,
+            "accepted": 0
+          },
+          "reviewed_pool_insufficient": {
+            "labelled": 9,
+            "accepted": 5
+          }
+        },
+        "constant_stop_reference": {
+          "stop_sufficient": 4,
+          "stop_exhausted": 6
+        },
+        "family_macro_acceptance": 0.30277777777777776,
+        "families": 3,
+        "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+      },
+      "compute": {
+        "wall_seconds": 204.0125837251544,
+        "cpu_seconds": 278.56475999599996,
+        "runs": 1,
+        "train_sequence_rows": 344,
+        "train_input_tokens": 954476,
+        "train_batch_forwards": 88,
+        "train_device_forwards": 176,
+        "train_batch_attempts": 88,
+        "train_offered_rows": 344,
+        "train_offered_tokens": 954476,
+        "dev_forwards": 150,
+        "dev_sequence_rows": 150,
+        "dev_input_tokens": 389285,
+        "dev_state_tokenizations": 150,
+        "dev_state_tokens": 340125,
+        "train_eval_forwards": 430,
+        "train_eval_sequence_rows": 430,
+        "train_eval_input_tokens": 1193095,
+        "train_eval_state_tokenizations": 430,
+        "train_eval_state_tokens": 1052295,
+        "peak_rss_kib": 4972696,
+        "peak_cuda_allocated_bytes": [
+          15665200640,
+          11646477312
+        ],
+        "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+      },
+      "original_ledger_delta_matches_saved_compute": true
+    }
+  ],
+  "pairs": [
+    {
+      "seed": 0,
+      "initial_logits_equal_both_splits": true,
+      "sampling_and_lengths_equal": true,
+      "final_action_differences": {
+        "train": [
+          {
+            "event_id": "row-31011-prefix-4",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p14": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p14"
+          },
+          {
+            "event_id": "row-31011-prefix-5",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "stop_sufficient"
+          },
+          {
+            "event_id": "row-11604-prefix-1",
+            "family": "musique-family-000550",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-16483-prefix-0",
+            "family": "musique-family-000690",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-1529-prefix-0",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.5,
+                  "open_p12": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p12",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-1529-prefix-4",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p12": 1.0
+                }
+              }
+            },
+            "soft_ce": "open_p12",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-1529-prefix-5",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p12": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-26530-prefix-0",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p11": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p11",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-26530-prefix-1",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p11": 1.0
+                }
+              }
+            },
+            "soft_ce": "open_p11",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-26530-prefix-4",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_sufficient",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-3344-prefix-2",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p17": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p4",
+            "set": "open_p2"
+          },
+          {
+            "event_id": "row-3344-prefix-4",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p17": 1.0
+                }
+              }
+            },
+            "soft_ce": "open_p17",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-3344-prefix-5",
+            "family": "musique-family-000410",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "stop_sufficient"
+          }
+        ],
+        "dev": [
+          {
+            "event_id": "row-28960-prefix-0",
+            "family": "musique-family-000583",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p4": 0.5
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-28960-prefix-3",
+            "family": "musique-family-000583",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "stop_sufficient"
+          },
+          {
+            "event_id": "row-12523-prefix-0",
+            "family": "musique-family-000583",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-12523-prefix-1",
+            "family": "musique-family-000583",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-3445-prefix-0",
+            "family": "musique-family-000023",
+            "target": {},
+            "soft_ce": "stop_exhausted",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-27448-prefix-0",
+            "family": "musique-family-000023",
+            "target": {},
+            "soft_ce": "stop_exhausted",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-36340-prefix-0",
+            "family": "musique-family-000135",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 0.5,
+                  "open_p17": 0.5
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p0"
+          }
+        ]
+      }
+    },
+    {
+      "seed": 1,
+      "initial_logits_equal_both_splits": true,
+      "sampling_and_lengths_equal": true,
+      "final_action_differences": {
+        "train": [
+          {
+            "event_id": "row-31011-prefix-1",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p5"
+          },
+          {
+            "event_id": "row-31011-prefix-2",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p5"
+          },
+          {
+            "event_id": "row-31011-prefix-3",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p5": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p5"
+          },
+          {
+            "event_id": "row-31011-prefix-4",
+            "family": "musique-family-000678",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p14": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p14"
+          },
+          {
+            "event_id": "row-11272-prefix-0",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p2"
+          },
+          {
+            "event_id": "row-11272-prefix-1",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p2": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p2"
+          },
+          {
+            "event_id": "row-11272-prefix-5",
+            "family": "musique-family-000760",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-5473-prefix-0",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.3333333333333333,
+                  "open_p4": 0.3333333333333333,
+                  "open_p14": 0.3333333333333333
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-5473-prefix-1",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.3333333333333333,
+                  "open_p4": 0.3333333333333333,
+                  "open_p14": 0.3333333333333333
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-5473-prefix-2",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p2"
+          },
+          {
+            "event_id": "row-5473-prefix-3",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p4"
+          },
+          {
+            "event_id": "row-5473-prefix-4",
+            "family": "musique-family-000848",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p4": 0.5,
+                  "open_p14": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p14",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-1529-prefix-0",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.5,
+                  "open_p12": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p12",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-1529-prefix-1",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p1": 0.5,
+                  "open_p12": 0.5
+                }
+              }
+            },
+            "soft_ce": "open_p12",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-1529-prefix-5",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p12": 1.0
+                }
+              }
+            },
+            "soft_ce": "open_p12",
+            "set": "stop_exhausted"
+          },
+          {
+            "event_id": "row-26530-prefix-3",
+            "family": "musique-family-000840",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p11": 1.0
+                }
+              }
+            },
+            "soft_ce": "open_p11",
+            "set": "stop_sufficient"
+          },
+          {
+            "event_id": "row-5148-prefix-1",
+            "family": "musique-family-000892",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p8": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "stop_sufficient"
+          },
+          {
+            "event_id": "row-5148-prefix-2",
+            "family": "musique-family-000892",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p8": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p2"
+          },
+          {
+            "event_id": "row-5148-prefix-3",
+            "family": "musique-family-000892",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p8": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "stop_sufficient"
+          },
+          {
+            "event_id": "row-5148-prefix-4",
+            "family": "musique-family-000892",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p8": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "stop_sufficient"
+          },
+          {
+            "event_id": "row-5148-prefix-5",
+            "family": "musique-family-000892",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "stop_sufficient"
+          }
+        ],
+        "dev": [
+          {
+            "event_id": "row-12523-prefix-0",
+            "family": "musique-family-000583",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "open_p0": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p0"
+          },
+          {
+            "event_id": "row-12523-prefix-1",
+            "family": "musique-family-000583",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-3445-prefix-1",
+            "family": "musique-family-000023",
+            "target": {},
+            "soft_ce": "stop_exhausted",
+            "set": "open_p1"
+          },
+          {
+            "event_id": "row-14496-prefix-3",
+            "family": "musique-family-000138",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_exhausted": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_sufficient",
+            "set": "stop_exhausted"
+          },
+          {
+            "event_id": "row-36340-prefix-1",
+            "family": "musique-family-000135",
+            "target": {
+              "next": {
+                "probabilities": {
+                  "stop_sufficient": 1.0
+                }
+              }
+            },
+            "soft_ce": "stop_exhausted",
+            "set": "open_p1"
+          }
+        ]
+      }
+    }
+  ],
+  "compute_totals": {
+    "wall_seconds": 768.3426998741925,
+    "cpu_seconds": 1038.921808528,
+    "runs": 4,
+    "train_sequence_rows": 1376,
+    "train_input_tokens": 3817904,
+    "train_batch_forwards": 352,
+    "train_device_forwards": 704,
+    "train_batch_attempts": 352,
+    "train_offered_rows": 1376,
+    "train_offered_tokens": 3817904,
+    "dev_forwards": 600,
+    "dev_sequence_rows": 600,
+    "dev_input_tokens": 1557140,
+    "dev_state_tokenizations": 600,
+    "dev_state_tokens": 1360500,
+    "train_eval_forwards": 1720,
+    "train_eval_sequence_rows": 1720,
+    "train_eval_input_tokens": 4772380,
+    "train_eval_state_tokenizations": 1720,
+    "train_eval_state_tokens": 4209180
+  },
+  "driver_wall_seconds": 788.1676261425018,
+  "scope": "Fixed final epoch4, exposed dev, two seeds; no policy QA or state accuracy.",
+  "accounting_note": "All costs already recorded by the four jobs in the original ledger; optimization/train-evaluation/dev-evaluation fields are separate. Do not rebill training.",
+  "analysis_compute": {
+    "wall_seconds": 0.16138003673404455,
+    "cpu_seconds": 0.161233018
+  }
+}
