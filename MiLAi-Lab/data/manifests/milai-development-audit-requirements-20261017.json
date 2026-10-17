@@ -169,7 +169,7 @@
   ],
   "next_required_execution": [
     "Continue existing reserved Reader PID4158352 under coordinator4100019/session80572. No duplicate dispatch or input change.",
-    "Finish reserved response reviews from index10/row1967; current10cases179 unique responses reviewed before method mapping.",
+    "Finish reserved response reviews from index14/row2382; current14cases245 unique responses reviewed before method mapping.",
     "After actual Reader/scorer terminal, final export all28 once, then receipt/cost collector and semantic join.",
     "Run summarize_global_reader_cohorts.py on both completed cohort roots into a new output folder. Report family/decomposition-size/source-class denominators, grounded qualified responses and complete costs.",
     "Perform full audit completion review; preserve source-isolation and assistant-review limitations."
@@ -253,7 +253,7 @@
   },
   "live_reserved_posttrain_snapshot": {
     "status": "RESERVED_READER_LIVE_AUTHOR_REVIEW_PARTIAL",
-    "observed_epoch": 1792228938.1577969,
+    "observed_epoch": 1792229590.158131,
     "driver_pid": 4100019,
     "source_version": "d5261e45",
     "exec_session": 80572,
@@ -290,10 +290,10 @@
       "status": "RUNNING",
       "phase": "predict",
       "planned": 756,
-      "completed": 292,
+      "completed": 395,
       "known_failures": 0,
-      "fresh_reader_attempts": 193,
-      "reused_reader_outputs": 99,
+      "fresh_reader_attempts": 255,
+      "reused_reader_outputs": 140,
       "known_failed_reader_calls": 0
     },
     "preview": {
@@ -319,18 +319,43 @@
       "row-1643",
       "row-1654",
       "row-1673",
-      "row-1941"
+      "row-1941",
+      "row-1967",
+      "row-2141",
+      "row-2203",
+      "row-2273"
     ],
-    "reviewed_unique_responses": 179,
+    "reviewed_unique_responses": 245,
     "review_path": "artifacts/jev-reader/global-reserved-policy-qa-v1/stream-review/response-annotations.json",
     "stream_export_compute_pending_original_ledger": true,
     "mechanical_review_consistency": {
-      "cases": 7,
-      "unique_outputs": 126,
+      "cases": 14,
+      "unique_outputs": 245,
       "issues": [],
       "method_mapping_opened": false
     },
     "cohort_summary_tool": "tools/summarize_global_reader_cohorts.py",
-    "cohort_summary_execution": "PENDING_ALL_RESERVED_FIRST_RESPONSE_REVIEW"
+    "cohort_summary_execution": "PENDING_ALL_RESERVED_FIRST_RESPONSE_REVIEW",
+    "confirmed_unique_semantic_contract_failures": [
+      "response-000072",
+      "response-000172",
+      "response-000184",
+      "response-000239"
+    ],
+    "review_clarifications": [
+      {
+        "case": "row-1561",
+        "response_ids": [
+          "response-000089",
+          "response-000102",
+          "response-000104"
+        ],
+        "change": "Blank answers with no Chiang family evidence changed from correct_insufficiency to uncertain because the nonunique question itself admits the named subject.",
+        "method_mapping_opened": false,
+        "source_disposition_changed": false,
+        "model_inputs_or_outputs_changed": false,
+        "applies_to_identical_responses_in_all_occurrences": true
+      }
+    ]
   }
 }
