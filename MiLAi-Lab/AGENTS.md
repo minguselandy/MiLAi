@@ -22,7 +22,8 @@ supported-pool acceptance deltas+6/-11/+11 of185; insufficient partial+18/+11/+5
 seed-statepositions mostly34partialinsufficient, not40independentcases or improvedQA.
 
 LIVE EVALUATION: evaluation-v2/driver.json RUNNING, coordinatorPID1209651, exec1227.
-First stage presentation-reference_seed0 child1568399 onGPU2 was live atlatest snapshot.
+First4stages reference_seed0 presentation/evidence/devselect/reservedselect CLOSED exit0.
+Current presentation-reference_seed1 child1592840 onGPU2 was live atlatest snapshot.
 Use driver.json for laterstage/PID.40serialstages, frozenimports215c84da; do NOT start second driver.
 Training and evaluation data/modelrecipe remain frozen. No tuning, retries, services oroldcohortresumes.
 Evaluation-v1 is superseded PRE-MODEL: absent2Wikianswer_aliases fixed in offline labels only;
