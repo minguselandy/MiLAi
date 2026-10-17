@@ -13,7 +13,11 @@ objective-pair-user-restart-v1 and corrected counting only. Four serial jobs sta
 from BASE; no subagents, SHA/content fingerprints, new ledger, default adoption or
 Product/Archive behavior changes. Old invariance-v1 protocol targets interrupted
 cohort and remains unrun; refreeze its model paths before future probes.
-See docs/MILAI_AUDIT_EXECUTION_20261017.md and restart protocol for live state.
+LIVE restart coordinator2481980, firsttrainer2481981, exec51424; actualsourceaa8f97e2.
+Driver provenance argument was mistyped c5-placeholder; metadata only. Explicit
+source-label-correction.json binds actualsource; preserve raw record, no repeat.
+Inspect actual process/terminal before any next dispatch. Follow restart protocol
+and docs/MILAI_AUDIT_EXECUTION_20261017.md; old invariance queue remains unrun.
 
 # CURRENT: audit execution resumed — 2026-10-17
 

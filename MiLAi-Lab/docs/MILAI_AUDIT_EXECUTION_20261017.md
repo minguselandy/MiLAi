@@ -70,3 +70,15 @@ SIGSTOP保留内存/显存现场，后续仅在用户明确要求恢复时继续
 重启前验证：13项监督/损失/计量/探针测试通过（使用实际torch环境），Ruff通过。
 训练器类型检查通过（实际CUDA环境，忽略第三方缺失类型声明）；包DAG/工具边界通过。
 未运行全仓/远端CI，未推送或合并。原始完整审计目标仍未完成。
+
+### 新队列已实际启动
+
+新训练源码为`aa8f97e2`；协调器PID2481980，首任务seed0/soft-CE PID2481981，
+exec session51424。实际进程和run.json均为RUNNING，已加载GPU；不是完成状态。
+后续只观察该队列，不能因观察句柄丢失重启。其他工作树35进程保持T状态。
+
+启动命令误把来源说明参数写成`c5-placeholder`；该参数只写driver元数据，不传给
+训练器，也不影响模型/数据/优化。保留原始driver记录，另存
+`artifacts/jev-reader/objective-pair-user-restart-v1/source-label-correction.json`
+明确实际提交为`aa8f97e2`；后续报告不得把占位文本当成真实版本，亦不因此重跑。
+待队列闭合后按新train_eval字段核对完整计量，再重冻结探针对应模型路径。
