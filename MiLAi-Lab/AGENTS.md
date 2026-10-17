@@ -33,8 +33,9 @@ Reloadoriginal reference1=191/255 versus pre-save192 (onechoicechange);other5cho
 Do NOT reusepre-save predictions or claim quantization alone caused theonechange.
 
 RESPONSE REVIEW IN PROGRESS, METHOD MAPPINGS STILL UNOPENED. dev/response-review/annotations.json
-has rows0..12 CLOSED,149unique firstresponses (IDs0..148). Tracked partialcopy:
-data/manifests/milai-source-selection-v2-dev-response-annotations.json. Continue atrow13, notrow0.
+has rows0..26 CLOSED,305unique firstresponses (IDs0..304); ALL27Mu devcasesdone,16twoWiki remain.
+Tracked partialcopy:data/manifests/milai-source-selection-v2-dev-response-annotations.json.
+Continue atrow27, notrow0. Batch13-14,15-16,17-19,20-21,22-23,24,25,26 are saved.
 Authored batches and append_batch.py in dev/response-review; only explicit author labels appended,
 enum/complete-case coverage checked, no automatic semanticgrader. show_cases.py prints allnew
 bodies/answers and exactbody pointers ONLY to priorfullyreviewedcases; originalstreamviews unchanged.
@@ -46,8 +47,26 @@ groundedtargetcorrect,citationinadequate (missingalbum→Neilp8). ID139 correctl
 answer withanswerable=false =>insufficient_nonempty_answer; originaloutput retained, schema itselfvalid.
 Row6 remainsMASKED inprimarytask despitecorrectabstentions; don'tregradeasnegative. Wrong-entity
 answers includeSpectre/otherfilms,WhitesideCounty surname substitution,wrongRockinperformer siblings.
+Further judgments: source-insufficient citizenship/language answers from filmcountry/relative nationality
+are unsupported, plausibleworldtruth notcalledfalse. Genre cases19/20 accept modern underFROZEN
+work/form qualification; abstentions withthatproof remaininterpretation-dependent, nottaskpass.
+Row24 Warner answerswithbothp5/p8 are qualifiedgrounded release-associations, NOTstrictsigning success;
+withonlyp5 theyalso lacktheme-composer identity. Row25/26Norma ambiguity staysMASKED, notforcednegative.
+Firstconfirmedgeneration failure: devresponse198, finish_reason=length, nofinalcontent; recorded as
+schema_or_generation_failure, NOTcorrectabstention, no retry. Response260 also hasnonemptyanswer
+withanswerable=false. Unknownusage reconciliation remains pending; do not assume usage fromfailure.
+
+ONE EXPLORATORY CITATION SUPPLEMENT PENDING ALL-METHOD SENSITIVITY AFTER REVIEW:
+dev/response-review/proof-supplements-before-mapping.json, trackeddev-citation-supplementmanifest.
+Row16response186 citesAlta p16/source8 twice; actualselectedp7 alreadygroundsUpland country.
+Primarycitation=uncertain; exploratory_citation_grounding=adequate underhierarchicaladdress reading
+(questiongivenUplandWV + AltaaddressWV,US). Newpathunregistered beforepredictions, so no edits to
+frozen sourceproofs/training/primarylabels. Exacttitle/literal checkofnewpath vsactualtrain/reserved0.
+Afterallreviews apply alternativecitation acceptance to EVERYcorresponding methodposition andreport
+separately; do not omit this remaining item or creditonly a preferredmodel. Originalprimaryunchanged.
+
 Streamexports timed in export-compute.jsonl and chargedlater afterHTTPcloses; never rebill. Reader
-transport/schema knownfailures0 sofar is NOT semantic/contract success; fullreviewstillrequired.
+transport/schema failures and semantic/contract outcomes are different; fullreviewstillrequired.
 Use driver.json for laterstage/PID.40serialstages, frozenimports215c84da; do NOT start second driver.
 Training and evaluation data/modelrecipe remain frozen. No tuning, retries, services oroldcohortresumes.
 Evaluation-v1 is superseded PRE-MODEL: absent2Wikianswer_aliases fixed in offline labels only;

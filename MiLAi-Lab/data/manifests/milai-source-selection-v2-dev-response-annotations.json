@@ -17,9 +17,23 @@
     "row-9",
     "row-10",
     "row-11",
-    "row-12"
+    "row-12",
+    "row-13",
+    "row-14",
+    "row-15",
+    "row-16",
+    "row-17",
+    "row-18",
+    "row-19",
+    "row-20",
+    "row-21",
+    "row-22",
+    "row-23",
+    "row-24",
+    "row-25",
+    "row-26"
   ],
-  "reviewed_unique_responses": 149,
+  "reviewed_unique_responses": 305,
   "full_views_read": [
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/00-row-0.txt",
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/01-row-1.txt",
@@ -33,7 +47,21 @@
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/09-row-9.txt",
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/10-row-10.txt",
     "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/11-row-11.txt",
-    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/12-row-12.txt"
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/12-row-12.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/13-row-13.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/14-row-14.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/15-row-15.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/16-row-16.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/17-row-17.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/18-row-18.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/19-row-19.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/20-row-20.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/21-row-21.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/22-row-22.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/23-row-23.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/24-row-24.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/25-row-25.txt",
+    "artifacts/jev-reader/selection-v2/evaluation-v2/dev/stream-review/26-row-26.txt"
   ],
   "annotations": {
     "response-000000": {
@@ -1589,8 +1617,1606 @@
       "output_contract": "insufficient_nonempty_answer",
       "rationale": "The subset lacks the sibling relation, so abstention is semantically justified. However answerable=false is accompanied by a nonempty answer containing formatted status text, violating the explicit empty-answer contract.",
       "format_note": "Original answer string retained verbatim; no repair or retry. JSON schema itself was accepted."
+    },
+    "response-000149": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000150": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000151": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000152": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000153": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000154": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000155": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000156": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000157": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000158": {
+      "case_ids": [
+        "row-13"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material locates the Rhode Island village in North Kingstown but never supplies that town’s county. Essex is the English namesake’s geography, not the requested containing town; empty abstention is correct."
+    },
+    "response-000159": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000160": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000161": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000162": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000163": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000165": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000166": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000167": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000168": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000169": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 places Wickford in North Kingstown, Rhode Island; cited p14 places that same town in Washington County. Both containment links are delivered and cited, with no confusion with the English namesake or metropolitan region."
+    },
+    "response-000164": {
+      "case_ids": [
+        "row-14"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset contains neither Wickford nor North Kingstown. Other administrative districts and communes cannot establish the requested county; empty abstention is correct for the deficient subset."
+    },
+    "response-000170": {
+      "case_ids": [
+        "row-15"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Upland’s country and any supplied West-Virginia-to-US link. Ingalls in North Carolina and other border/radio statements do not locate Upland; no outside geography is inserted."
+    },
+    "response-000171": {
+      "case_ids": [
+        "row-15"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Upland’s country and any supplied West-Virginia-to-US link. Ingalls in North Carolina and other border/radio statements do not locate Upland; no outside geography is inserted."
+    },
+    "response-000172": {
+      "case_ids": [
+        "row-15"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Upland’s country and any supplied West-Virginia-to-US link. Ingalls in North Carolina and other border/radio statements do not locate Upland; no outside geography is inserted."
+    },
+    "response-000173": {
+      "case_ids": [
+        "row-15"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Upland’s country and any supplied West-Virginia-to-US link. Ingalls in North Carolina and other border/radio statements do not locate Upland; no outside geography is inserted."
+    },
+    "response-000174": {
+      "case_ids": [
+        "row-15"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Upland’s country and any supplied West-Virginia-to-US link. Ingalls in North Carolina and other border/radio statements do not locate Upland; no outside geography is inserted."
+    },
+    "response-000175": {
+      "case_ids": [
+        "row-15"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Upland’s country and any supplied West-Virginia-to-US link. Ingalls in North Carolina and other border/radio statements do not locate Upland; no outside geography is inserted."
+    },
+    "response-000177": {
+      "case_ids": [
+        "row-15"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset lacks Upland’s country and any supplied West-Virginia-to-US link. Ingalls in North Carolina and other border/radio statements do not locate Upland; no outside geography is inserted."
+    },
+    "response-000176": {
+      "case_ids": [
+        "row-15"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "United States matches the intended country, but cited p13 locates Ingalls, not Upland or West Virginia. A county-border premise does not entail the same country, and these subsets lack the needed target-country link."
+    },
+    "response-000178": {
+      "case_ids": [
+        "row-15"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "United States matches the intended country, but cited p13 locates Ingalls, not Upland or West Virginia. A county-border premise does not entail the same country, and these subsets lack the needed target-country link."
+    },
+    "response-000179": {
+      "case_ids": [
+        "row-16"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p14 directly locates the explicitly named Upland, West Virginia in the United States. This satisfies the frozen country-answer shortcut without endorsing the inconsistent extra county-border chain.",
+      "qualification": "Frozen qualified named-place country reading; not a claim that the stated county adjacency is true."
+    },
+    "response-000180": {
+      "case_ids": [
+        "row-16"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p14 directly locates the explicitly named Upland, West Virginia in the United States. This satisfies the frozen country-answer shortcut without endorsing the inconsistent extra county-border chain.",
+      "qualification": "Frozen qualified named-place country reading; not a claim that the stated county adjacency is true."
+    },
+    "response-000181": {
+      "case_ids": [
+        "row-16"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p14 directly locates the explicitly named Upland, West Virginia in the United States. This satisfies the frozen country-answer shortcut without endorsing the inconsistent extra county-border chain.",
+      "qualification": "Frozen qualified named-place country reading; not a claim that the stated county adjacency is true."
+    },
+    "response-000183": {
+      "case_ids": [
+        "row-16"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p14 directly locates the explicitly named Upland, West Virginia in the United States. This satisfies the frozen country-answer shortcut without endorsing the inconsistent extra county-border chain.",
+      "qualification": "Frozen qualified named-place country reading; not a claim that the stated county adjacency is true."
+    },
+    "response-000184": {
+      "case_ids": [
+        "row-16"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p14 directly locates the explicitly named Upland, West Virginia in the United States. This satisfies the frozen country-answer shortcut without endorsing the inconsistent extra county-border chain.",
+      "qualification": "Frozen qualified named-place country reading; not a claim that the stated county adjacency is true."
+    },
+    "response-000185": {
+      "case_ids": [
+        "row-16"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p7 explicitly places West Virginia in the Southern United States; the question already specifies Upland, West Virginia. This is a registered short proof. Additional p2 is not needed to endorse the country answer.",
+      "qualification": "Frozen question-premise shortcut; the extra county-border condition is not certified."
+    },
+    "response-000182": {
+      "case_ids": [
+        "row-16"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset supplies Ingalls and an Avery/McDowell North Carolina tavern but no Upland country or West-Virginia-to-US relation. Empty abstention is correct for the actual deficient subset."
+    },
+    "response-000186": {
+      "case_ids": [
+        "row-16"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "uncertain",
+      "output_contract": "valid",
+      "rationale": "The delivered p7 provides the registered West-Virginia-to-US proof, so the country answer is grounded. The response instead cites Alta’s p16 twice. Treating that nested address as a parent-region country proof is a newly noticed citation route and is separated from frozen primary proof accounting; it is not declared false.",
+      "qualification": "Frozen named-place country reading. Citation can be adequate under the separately logged hierarchical-address interpretation.",
+      "exploratory_citation_grounding": "adequate",
+      "exploratory_supplement": "dev-row16-alta-parent-region",
+      "citation_note": "Duplicate p16 IDs are retained; uniqueness is not required by the schema, and duplication adds no support."
+    },
+    "response-000187": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset contains no Jane Birkin spoken-language fact. Director/sister identity where present, other film titles and regional language prevalence do not establish personal language ability. Empty abstention is correct."
+    },
+    "response-000189": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset contains no Jane Birkin spoken-language fact. Director/sister identity where present, other film titles and regional language prevalence do not establish personal language ability. Empty abstention is correct."
+    },
+    "response-000190": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset contains no Jane Birkin spoken-language fact. Director/sister identity where present, other film titles and regional language prevalence do not establish personal language ability. Empty abstention is correct."
+    },
+    "response-000192": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset contains no Jane Birkin spoken-language fact. Director/sister identity where present, other film titles and regional language prevalence do not establish personal language ability. Empty abstention is correct."
+    },
+    "response-000193": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset contains no Jane Birkin spoken-language fact. Director/sister identity where present, other film titles and regional language prevalence do not establish personal language ability. Empty abstention is correct."
+    },
+    "response-000194": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered subset contains no Jane Birkin spoken-language fact. Director/sister identity where present, other film titles and regional language prevalence do not establish personal language ability. Empty abstention is correct."
+    },
+    "response-000188": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "French may be a plausible world answer, but p1 only identifies a French film directed by/starring Jane Birkin, not her spoken language. p6/p10 establish the family/film chain without the language link; the citations do not close that gap.",
+      "qualification": "World-language truth is not declared false; production-country-to-person-language inference is unsupported by these sources."
+    },
+    "response-000191": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "French may be a plausible world answer, but p1 only identifies a French film directed by/starring Jane Birkin, not her spoken language. p6/p10 establish the family/film chain without the language link; the citations do not close that gap.",
+      "qualification": "World-language truth is not declared false; production-country-to-person-language inference is unsupported by these sources."
+    },
+    "response-000195": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "French may be a plausible world answer, but p1 only identifies a French film directed by/starring Jane Birkin, not her spoken language. p6/p10 establish the family/film chain without the language link; the citations do not close that gap.",
+      "qualification": "World-language truth is not declared false; production-country-to-person-language inference is unsupported by these sources."
+    },
+    "response-000196": {
+      "case_ids": [
+        "row-17"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "English is not established as Jane Birkin’s spoken language. p6 describes her brother as English and names his sister; nationality/kinship does not supply the requested personal-language fact. p10 only identifies the director.",
+      "qualification": "Plausible real-world ability is separate from source support."
+    },
+    "response-000199": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset does not supply the Cement Garden director link and Jane Birkin’s personal spoken language. Other regional languages and her French film do not close those gaps; empty abstention is correct."
+    },
+    "response-000200": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset does not supply the Cement Garden director link and Jane Birkin’s personal spoken language. Other regional languages and her French film do not close those gaps; empty abstention is correct."
+    },
+    "response-000201": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset does not supply the Cement Garden director link and Jane Birkin’s personal spoken language. Other regional languages and her French film do not close those gaps; empty abstention is correct."
+    },
+    "response-000203": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset does not supply the Cement Garden director link and Jane Birkin’s personal spoken language. Other regional languages and her French film do not close those gaps; empty abstention is correct."
+    },
+    "response-000204": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset does not supply the Cement Garden director link and Jane Birkin’s personal spoken language. Other regional languages and her French film do not close those gaps; empty abstention is correct."
+    },
+    "response-000205": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset does not supply the Cement Garden director link and Jane Birkin’s personal spoken language. Other regional languages and her French film do not close those gaps; empty abstention is correct."
+    },
+    "response-000206": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The subset does not supply the Cement Garden director link and Jane Birkin’s personal spoken language. Other regional languages and her French film do not close those gaps; empty abstention is correct."
+    },
+    "response-000197": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Andrew Birkin’s English identity and Jane Birkin’s French film do not establish Jane’s spoken language, and the named-film director link is absent. English may be true in the world but is unsupported by the delivered/cited material."
+    },
+    "response-000202": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Andrew Birkin’s English identity and Jane Birkin’s French film do not establish Jane’s spoken language, and the named-film director link is absent. English may be true in the world but is unsupported by the delivered/cited material."
+    },
+    "response-000198": {
+      "case_ids": [
+        "row-18"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "uncertain",
+      "citation_grounding": "not_applicable",
+      "output_contract": "schema_or_generation_failure",
+      "rationale": "The provider stopped at the generation length limit and supplied no final content. This is a preserved first-output failure, not a justified abstention or a repaired answer.",
+      "finish_reason": "length",
+      "raw_final_content": null
+    },
+    "response-000209": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 identifies Szymanowski as the exact numbered concerto’s composer and explicitly describes the work as a modern violin concerto. The answer is valid under the frozen demonstrated-work/form interpretation of genre.",
+      "qualification": "Not an exclusive career-wide genre taxonomy; the frozen source-qualified reading is preserved."
+    },
+    "response-000210": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 identifies Szymanowski as the exact numbered concerto’s composer and explicitly describes the work as a modern violin concerto. The answer is valid under the frozen demonstrated-work/form interpretation of genre.",
+      "qualification": "Not an exclusive career-wide genre taxonomy; the frozen source-qualified reading is preserved."
+    },
+    "response-000212": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 identifies Szymanowski as the exact numbered concerto’s composer and explicitly describes the work as a modern violin concerto. The answer is valid under the frozen demonstrated-work/form interpretation of genre.",
+      "qualification": "Not an exclusive career-wide genre taxonomy; the frozen source-qualified reading is preserved."
+    },
+    "response-000215": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 identifies Szymanowski as the exact numbered concerto’s composer and explicitly describes the work as a modern violin concerto. The answer is valid under the frozen demonstrated-work/form interpretation of genre.",
+      "qualification": "Not an exclusive career-wide genre taxonomy; the frozen source-qualified reading is preserved."
+    },
+    "response-000218": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p16 identifies Szymanowski as the exact numbered concerto’s composer and explicitly describes the work as a modern violin concerto. The answer is valid under the frozen demonstrated-work/form interpretation of genre.",
+      "qualification": "Not an exclusive career-wide genre taxonomy; the frozen source-qualified reading is preserved."
+    },
+    "response-000208": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "uncertain",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered p16 provides the registered modern-work/form answer under the frozen qualified interpretation, so no answer is not conditional task success. A stricter demand for a career-wide genre label would remain underdetermined; preserve that interpretation dependence rather than calling the world claim false.",
+      "qualification": "Qualified genre/form scope; full proof is delivered under the frozen reading."
+    },
+    "response-000214": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "uncertain",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered p16 provides the registered modern-work/form answer under the frozen qualified interpretation, so no answer is not conditional task success. A stricter demand for a career-wide genre label would remain underdetermined; preserve that interpretation dependence rather than calling the world claim false.",
+      "qualification": "Qualified genre/form scope; full proof is delivered under the frozen reading."
+    },
+    "response-000211": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the exact Violin Concerto No.1-to-Szymanowski identity passage. Other violin composers, festivals and generic concerto history do not identify the requested composer’s demonstrated genre."
+    },
+    "response-000216": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the exact Violin Concerto No.1-to-Szymanowski identity passage. Other violin composers, festivals and generic concerto history do not identify the requested composer’s demonstrated genre."
+    },
+    "response-000217": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the exact Violin Concerto No.1-to-Szymanowski identity passage. Other violin composers, festivals and generic concerto history do not identify the requested composer’s demonstrated genre."
+    },
+    "response-000207": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Czech in p11 is Janáček’s nationality, not a musical genre, and the passage concerns a differently titled concerto. It does not answer the requested Szymanowski work/composer question."
+    },
+    "response-000213": {
+      "case_ids": [
+        "row-19"
+      ],
+      "answer_target": "incorrect",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Cited p12 gives Vivaldi’s Baroque description, but there is no delivered link from the requested numbered work to Vivaldi. It substitutes a different composer’s attribute for the target."
+    },
+    "response-000225": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 binds the exact numbered concerto to Szymanowski and describes it as modern. This is the frozen qualified demonstrated-work/form answer, without an exclusive career-wide genre assertion.",
+      "qualification": "Same frozen work/form reading as the paired case."
+    },
+    "response-000227": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "correct",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p9 binds the exact numbered concerto to Szymanowski and describes it as modern. This is the frozen qualified demonstrated-work/form answer, without an exclusive career-wide genre assertion.",
+      "qualification": "Same frozen work/form reading as the paired case."
+    },
+    "response-000219": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "uncertain",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected p9 contains the registered modern-work/form proof. Abstention is not success under that frozen qualified reading, although a demand for an exclusive career-wide genre taxonomy would remain underdetermined.",
+      "qualification": "Preserve genre-scope uncertainty rather than treating the unanswered world fact as false."
+    },
+    "response-000224": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "uncertain",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected p9 contains the registered modern-work/form proof. Abstention is not success under that frozen qualified reading, although a demand for an exclusive career-wide genre taxonomy would remain underdetermined.",
+      "qualification": "Preserve genre-scope uncertainty rather than treating the unanswered world fact as false."
+    },
+    "response-000220": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset does not identify the requested numbered concerto’s composer. Other violin works, generic concerto history and unrelated composers do not close that identity/genre chain."
+    },
+    "response-000221": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset does not identify the requested numbered concerto’s composer. Other violin works, generic concerto history and unrelated composers do not close that identity/genre chain."
+    },
+    "response-000222": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset does not identify the requested numbered concerto’s composer. Other violin works, generic concerto history and unrelated composers do not close that identity/genre chain."
+    },
+    "response-000223": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset does not identify the requested numbered concerto’s composer. Other violin works, generic concerto history and unrelated composers do not close that identity/genre chain."
+    },
+    "response-000226": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset does not identify the requested numbered concerto’s composer. Other violin works, generic concerto history and unrelated composers do not close that identity/genre chain."
+    },
+    "response-000228": {
+      "case_ids": [
+        "row-20"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The actual subset does not identify the requested numbered concerto’s composer. Other violin works, generic concerto history and unrelated composers do not close that identity/genre chain."
+    },
+    "response-000229": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000230": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000231": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000232": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000233": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000234": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000235": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000236": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000237": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000238": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000239": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000240": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000241": {
+      "case_ids": [
+        "row-21"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset identifies the director of En herre med bart. Other films, theatre figures and unrelated naturalized citizens cannot supply that person’s citizenship; each empty abstention is correct."
+    },
+    "response-000243": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies Alfred Maurstad’s citizenship. A Norwegian film and a different Maurstad’s theatre work do not establish that personal legal attribute; unrelated citizens do not repair it."
+    },
+    "response-000244": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies Alfred Maurstad’s citizenship. A Norwegian film and a different Maurstad’s theatre work do not establish that personal legal attribute; unrelated citizens do not repair it."
+    },
+    "response-000245": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies Alfred Maurstad’s citizenship. A Norwegian film and a different Maurstad’s theatre work do not establish that personal legal attribute; unrelated citizens do not repair it."
+    },
+    "response-000246": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies Alfred Maurstad’s citizenship. A Norwegian film and a different Maurstad’s theatre work do not establish that personal legal attribute; unrelated citizens do not repair it."
+    },
+    "response-000247": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies Alfred Maurstad’s citizenship. A Norwegian film and a different Maurstad’s theatre work do not establish that personal legal attribute; unrelated citizens do not repair it."
+    },
+    "response-000251": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies Alfred Maurstad’s citizenship. A Norwegian film and a different Maurstad’s theatre work do not establish that personal legal attribute; unrelated citizens do not repair it."
+    },
+    "response-000252": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies Alfred Maurstad’s citizenship. A Norwegian film and a different Maurstad’s theatre work do not establish that personal legal attribute; unrelated citizens do not repair it."
+    },
+    "response-000253": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No delivered subset supplies Alfred Maurstad’s citizenship. A Norwegian film and a different Maurstad’s theatre work do not establish that personal legal attribute; unrelated citizens do not repair it."
+    },
+    "response-000242": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Norway is a plausible world answer, but cited p11 labels the film Norwegian and identifies its director without stating his citizenship. Film country is not director citizenship; no confirming personal relation is supplied."
+    },
+    "response-000248": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Norway is a plausible world answer, but cited p11 labels the film Norwegian and identifies its director without stating his citizenship. Film country is not director citizenship; no confirming personal relation is supplied."
+    },
+    "response-000249": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Norway is a plausible world answer, but cited p11 labels the film Norwegian and identifies its director without stating his citizenship. Film country is not director citizenship; no confirming personal relation is supplied."
+    },
+    "response-000250": {
+      "case_ids": [
+        "row-22"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "The core Norway answer relies on the Norwegian film description in p11, which does not state Alfred Maurstad’s citizenship. Added sufficiency/citation text does not repair the missing relation.",
+      "format_note": "Redundant sufficient/p11 text inside the answer string is retained. Schema is valid; no schema failure is invented."
+    },
+    "response-000254": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000255": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000256": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000257": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000258": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000259": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000261": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000262": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000263": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000264": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000265": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000266": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "No selected subset gives Vince Guaraldi’s record-label/signing relation. Linus and Lucy can identify him, but Charlie Byrd, Charlie Haden and other artists’ labels do not transfer to him. Empty abstention is correct."
+    },
+    "response-000260": {
+      "case_ids": [
+        "row-23"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "insufficient_nonempty_answer",
+      "rationale": "The missing Guaraldi label makes abstention semantically appropriate, but answerable=false is paired with a nonempty answer containing formatting instructions. Preserve the first response as an empty-answer contract failure."
+    },
+    "response-000274": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 identifies Guaraldi as the theme composer and cited p5 gives his 1968 Warner Bros. album release. This supports the predeclared release-label alternative, not a documented signing event. Strict full-pool disposition remains insufficient and the qualified response is reported separately.",
+      "qualification": "Pre-frozen release-association reading only; no explicit signing, original-theme label or exclusive/current contract is asserted as proven."
+    },
+    "response-000279": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "supported_by_delivered_material",
+      "citation_grounding": "adequate",
+      "output_contract": "valid",
+      "rationale": "Cited p8 identifies Guaraldi as the theme composer and cited p5 gives his 1968 Warner Bros. album release. This supports the predeclared release-label alternative, not a documented signing event. Strict full-pool disposition remains insufficient and the qualified response is reported separately.",
+      "qualification": "Pre-frozen release-association reading only; no explicit signing, original-theme label or exclusive/current contract is asserted as proven."
+    },
+    "response-000269": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p5 gives Guaraldi’s Warner Bros. album association but does not say he wrote the Charlie Brown theme, and p8 is absent. Even the qualified release-label route lacks the composer-identification premise; no signing event is supplied either."
+    },
+    "response-000271": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p5 gives Guaraldi’s Warner Bros. album association but does not say he wrote the Charlie Brown theme, and p8 is absent. Even the qualified release-label route lacks the composer-identification premise; no signing event is supplied either."
+    },
+    "response-000272": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p5 gives Guaraldi’s Warner Bros. album association but does not say he wrote the Charlie Brown theme, and p8 is absent. Even the qualified release-label route lacks the composer-identification premise; no signing event is supplied either."
+    },
+    "response-000277": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p5 gives Guaraldi’s Warner Bros. album association but does not say he wrote the Charlie Brown theme, and p8 is absent. Even the qualified release-label route lacks the composer-identification premise; no signing event is supplied either."
+    },
+    "response-000267": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the required Guaraldi label/signing chain. Other Charlie/Brown artists and labels cannot substitute; empty abstention is correct. The frozen qualified release alternative is unavailable in these delivered subsets."
+    },
+    "response-000268": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the required Guaraldi label/signing chain. Other Charlie/Brown artists and labels cannot substitute; empty abstention is correct. The frozen qualified release alternative is unavailable in these delivered subsets."
+    },
+    "response-000270": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the required Guaraldi label/signing chain. Other Charlie/Brown artists and labels cannot substitute; empty abstention is correct. The frozen qualified release alternative is unavailable in these delivered subsets."
+    },
+    "response-000273": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the required Guaraldi label/signing chain. Other Charlie/Brown artists and labels cannot substitute; empty abstention is correct. The frozen qualified release alternative is unavailable in these delivered subsets."
+    },
+    "response-000275": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the required Guaraldi label/signing chain. Other Charlie/Brown artists and labels cannot substitute; empty abstention is correct. The frozen qualified release alternative is unavailable in these delivered subsets."
+    },
+    "response-000276": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the required Guaraldi label/signing chain. Other Charlie/Brown artists and labels cannot substitute; empty abstention is correct. The frozen qualified release alternative is unavailable in these delivered subsets."
+    },
+    "response-000278": {
+      "case_ids": [
+        "row-24"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The selected subset lacks the required Guaraldi label/signing chain. Other Charlie/Brown artists and labels cannot substitute; empty abstention is correct. The frozen qualified release alternative is unavailable in these delivered subsets."
+    },
+    "response-000280": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material does not establish a uniquely intended Norma author and that author’s legal citizenship. Empty abstention is justified; the frozen full-pool masked status remains excluded from primary task scoring."
+    },
+    "response-000281": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material does not establish a uniquely intended Norma author and that author’s legal citizenship. Empty abstention is justified; the frozen full-pool masked status remains excluded from primary task scoring."
+    },
+    "response-000283": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material does not establish a uniquely intended Norma author and that author’s legal citizenship. Empty abstention is justified; the frozen full-pool masked status remains excluded from primary task scoring."
+    },
+    "response-000284": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material does not establish a uniquely intended Norma author and that author’s legal citizenship. Empty abstention is justified; the frozen full-pool masked status remains excluded from primary task scoring."
+    },
+    "response-000285": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material does not establish a uniquely intended Norma author and that author’s legal citizenship. Empty abstention is justified; the frozen full-pool masked status remains excluded from primary task scoring."
+    },
+    "response-000291": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material does not establish a uniquely intended Norma author and that author’s legal citizenship. Empty abstention is justified; the frozen full-pool masked status remains excluded from primary task scoring."
+    },
+    "response-000282": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Norway is plausible under an Ibsen-play interpretation, but p8 supplies a Norwegian-language title/performance context rather than Henrik Ibsen’s citizenship. Nora Ibsen’s nationality in p14 is a different person’s attribute. Work/author ambiguity and the missing personal-citizenship relation remain.",
+      "qualification": "No claim that Norway is false in the world; it is not proven by these citations."
+    },
+    "response-000286": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Norway is plausible under an Ibsen-play interpretation, but p8 supplies a Norwegian-language title/performance context rather than Henrik Ibsen’s citizenship. Nora Ibsen’s nationality in p14 is a different person’s attribute. Work/author ambiguity and the missing personal-citizenship relation remain.",
+      "qualification": "No claim that Norway is false in the world; it is not proven by these citations."
+    },
+    "response-000289": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Norway is plausible under an Ibsen-play interpretation, but p8 supplies a Norwegian-language title/performance context rather than Henrik Ibsen’s citizenship. Nora Ibsen’s nationality in p14 is a different person’s attribute. Work/author ambiguity and the missing personal-citizenship relation remain.",
+      "qualification": "No claim that Norway is false in the world; it is not proven by these citations."
+    },
+    "response-000290": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Norway is plausible under an Ibsen-play interpretation, but p8 supplies a Norwegian-language title/performance context rather than Henrik Ibsen’s citizenship. Nora Ibsen’s nationality in p14 is a different person’s attribute. Work/author ambiguity and the missing personal-citizenship relation remain.",
+      "qualification": "No claim that Norway is false in the world; it is not proven by these citations."
+    },
+    "response-000292": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Norway is plausible under an Ibsen-play interpretation, but p8 supplies a Norwegian-language title/performance context rather than Henrik Ibsen’s citizenship. Nora Ibsen’s nationality in p14 is a different person’s attribute. Work/author ambiguity and the missing personal-citizenship relation remain.",
+      "qualification": "No claim that Norway is false in the world; it is not proven by these citations."
+    },
+    "response-000287": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p11 calls Norma Fox Mazer an American author, but never identifies her as author of a work titled Norma. It substitutes a person’s given name for the requested work/author relation. With the title itself ambiguous, no unique target-country truth is forced.",
+      "error_kind": "author_vs_given_name_substitution"
+    },
+    "response-000288": {
+      "case_ids": [
+        "row-25"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "p11 calls Norma Fox Mazer an American author, but never identifies her as author of a work titled Norma. It substitutes a person’s given name for the requested work/author relation. With the title itself ambiguous, no unique target-country truth is forced.",
+      "error_kind": "author_vs_given_name_substitution"
+    },
+    "response-000293": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000294": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000295": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000296": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000297": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000299": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000300": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000301": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000302": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000303": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000304": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "no_answer",
+      "source_grounding": "correct_insufficiency",
+      "citation_grounding": "not_applicable",
+      "output_contract": "valid",
+      "rationale": "The delivered material leaves Norma’s work/author ambiguous and provides no relevant author citizenship. Empty abstention is justified; the frozen masked case remains outside primary task scoring."
+    },
+    "response-000298": {
+      "case_ids": [
+        "row-26"
+      ],
+      "answer_target": "ambiguous_or_qualified",
+      "source_grounding": "unsupported_claim",
+      "citation_grounding": "inadequate",
+      "output_contract": "valid",
+      "rationale": "Cited p0 describes the American author Norma Fox Mazer but does not establish her as author of the work Norma. A matching given name does not resolve the work or its author’s citizenship; no unique target-country truth is forced for this masked question.",
+      "error_kind": "author_vs_given_name_substitution"
     }
   },
   "scope": "All complete first final answers and delivered texts in this case read before method mapping. Source qualifications preserved; no automatic semantic grading or native-answer rewrite.",
-  "last_updated_epoch": 1792256349.751621
+  "last_updated_epoch": 1792257850.6572924
 }

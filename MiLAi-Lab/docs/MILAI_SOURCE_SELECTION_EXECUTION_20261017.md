@@ -510,3 +510,17 @@ reference/seed1相对保存前少1项，canonical选择427/428一致；另五模
 把格式说明写入answer，在answerable=false时没有留空，计独立契约失败。结构解析成功
 不代表这些问题通过，回答字段均未修复。模糊的Warren Township案例继续排除在主任务
 分母之外，不能因为所有响应空答就改成负例。首13案例的原始判断已保存为在审快照。
+
+开发前27案例（全部MuSiQue部分）的305份不同首次响应现已审阅，方法映射仍关闭。
+response198首次生成达到长度上限、无最终内容，按失败保留且没有重试；response260
+另有answerable=false但answer非空的契约问题。电影国家/亲属国籍不替代本人语言或
+公民身份，Norma作品与作者歧义仍屏蔽主任务。现代协奏曲风格、发行标签等已冻结的
+限定解释分别保留，不能把严格主任务未通过的补充回答全称为错误。
+
+审阅还发现一条待单列的引用解释：row16/response186实际交付的West Virginia段落已
+足以支持美国这一国家答案，但两次引用的都是另一地点Alta的地址段落。若按地址层级
+读取“Fayette County, West Virginia, United States”，结合问题已给定的Upland位于
+West Virginia，可形成额外国家路径。该路径未在预测前登记，故冻结主证明表不回改，
+主引用判断保留uncertain；按预设规则另存[探索性补充](../data/manifests/milai-source-selection-v2-dev-citation-supplement.json)。
+补充来源与实际训练/新保留输入的标题、字面交叠均0。全部回答审阅后须对所有对应方法
+位置统一报告该解释的敏感性，不能只给某方法补分；当前尚未展开方法映射。
