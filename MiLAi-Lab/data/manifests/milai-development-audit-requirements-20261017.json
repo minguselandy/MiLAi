@@ -167,10 +167,10 @@
     }
   ],
   "next_required_execution": [
-    "Continue existing reserved pipeline4100019/session80572. Do not launch again or alter method from dev results.",
-    "After all reserved probes close, run analyze_reserved_reader_probes.py when the ledger lease is free.",
-    "Review reserved firstresponses before method mapping, finalize export once, then receipt/cost collector and semantic join.",
-    "Reconcile both cohorts and perform full audit completion review; do not infer broad generality from small conditional counts."
+    "Continue existing reserved Reader PID4158352 under coordinator4100019/session80572. No duplicate dispatch or input change.",
+    "Export completed cases to reserved stream-review and review all first responses before opening method mapping. Dev IDs are cohort-local: never reuse dev annotations for reserved IDs.",
+    "After actual Reader/scorer terminal, final export all28 once, then receipt/cost collector and semantic join.",
+    "Reconcile both cohorts and perform full audit completion review; source-isolation and author-review limitations remain explicit."
   ],
   "training_closure": "data/manifests/milai-global-reader-reference-v1-summary.json",
   "historical_training_snapshot": {
@@ -250,17 +250,17 @@
     "actual_driver_reader_scorer_pids_absent": true
   },
   "live_reserved_posttrain_snapshot": {
-    "status": "RESERVED_PIPELINE_LIVE",
-    "observed_epoch": 1792226997.1843624,
+    "status": "RESERVED_READER_LIVE_AUTHOR_REVIEW_PARTIAL",
+    "observed_epoch": 1792227473.6930707,
     "driver_pid": 4100019,
     "source_version": "d5261e45",
     "exec_session": 80572,
     "active": {
-      "stage": "dense",
-      "pid": 4157372,
+      "stage": "reader",
+      "pid": 4158352,
       "physical_gpu_allocation": null
     },
-    "completed_stages": 36,
+    "completed_stages": 38,
     "first_probe": {
       "status": "COMPLETED",
       "pid": 4100025,
@@ -283,6 +283,36 @@
     "next": "Inspect actual PID/stage and continue existing session. Never dispatch a duplicate driver.",
     "all12_prefix_probes_closed": true,
     "prefix_summary": "data/manifests/milai-global-reserved-reader-prefix-v1-summary.json",
-    "actual_training_boundary": "data/manifests/milai-global-reserved-actual-training-boundary-v1.json"
+    "actual_training_boundary": "data/manifests/milai-global-reserved-actual-training-boundary-v1.json",
+    "reader": {
+      "status": "RUNNING",
+      "phase": "predict",
+      "planned": 756,
+      "completed": 82,
+      "known_failures": 0,
+      "fresh_reader_attempts": 55,
+      "reused_reader_outputs": 27,
+      "known_failed_reader_calls": 0
+    },
+    "preview": {
+      "status": "COMPLETED",
+      "phase": "preview",
+      "planned": 756,
+      "completed": 756,
+      "known_failures": 0,
+      "fresh_reader_attempts": 0,
+      "reused_reader_outputs": 0,
+      "known_failed_reader_calls": 0,
+      "actual_wall_seconds": 2.8988285837695003,
+      "actual_cpu_seconds": 2.289049522,
+      "unique_reader_inputs": 504
+    },
+    "reviewed_cases": [
+      "row-119",
+      "row-410"
+    ],
+    "reviewed_unique_responses": 33,
+    "review_path": "artifacts/jev-reader/global-reserved-policy-qa-v1/stream-review/response-annotations.json",
+    "stream_export_compute_pending_original_ledger": true
   }
 }
