@@ -7,7 +7,8 @@ new ledger, retries, other-worktree resumes, Product/default-policy changes. Tra
 Current work: docs/MILAI_SOURCE_SELECTION_EXECUTION_20261017.md; status navigation corrected.
 Prior12 trainings and both QA drivers COMPLETED, original PIDs absent; NEVER restart/rebill.
 Remote read-only query earlier: research46351b5f/main518aee41. New LOCAL source freeze6ec3984b.
-Serial driver PID1145336, exec40960; first reference/seed0 child1145387.
+Serial driver PID1145336, exec40960. reference/seed0 CLOSED exit0; source/seed0 child1218595
+was live at latest snapshot. driver.json is authority for later job transitions.
 Live state artifacts/jev-reader/selection-v2/training-v1/driver.json; do NOT restart.
 Frozen imports artifacts/jev-reader/selection-v2/frozen-code-6ec3984b/MiLAi-Lab; never edit.
 States-v2/protocol/modelrecipe frozen; later QA authoring may edit main sources only.
@@ -154,8 +155,31 @@ Reserved295prefixes used for preparation/length audit ONLY, not extra modelprobe
 was test-environment choice; HTTP tests pass without package/service changes.4QApreparations
 v1/v2xdev/reserved already charged once to old global_reader_qa_v1_preparation phase (0.502s);
 final reserved audit0.036s and evaluation input audit7.855s separately charged ONCE. Failedv1
-length audit timing not persisted; overhead incomplete, notfree. Neverrebill. Next freeze eval
-source and queue serial evaluation AFTER all6trainingterminal; no autoretry or earlierforward.
+length audit timing not persisted; overhead incomplete, notfree. Neverrebill. Evaluation SOURCE FROZEN215c84da; coordinatorPID1209651, exec1227,
+evaluation-v2/driver.json WAITING_FOR_TRAINING. It polls until all6trainingterminal then
+serially dispatches40frozenstages. Do NOT restart. Frozen-code-215c84da remains immutable.
+No autoretry or earlierforward. Old frozen trainingcode6ec3984b remains unchanged.
+
+ANALYSIS IMPLEMENTED IN MAIN ONLY (not hot-edited into frozen driver imports):
+- analyze_source_selection_learning.py learning TRAINING_ROOT OUT: run only after all6close;
+  compares common428dev inputs under source255/reference354 labels at0/94/188; ownrecipe
+  trainfit; actualcompute/ledger; family+question weighting and dataset/status/qualification strata.
+- same tool probes EVALUATION_ROOT OUT: after12probe stages close, compares all6views onboth
+  sourceacceptance/exactchoice, unchanged-input denominators, savedFP16reload vs pre-saveFP32,
+ 44evidencecontexts/31disjointtargetpairs; switching alone is not success.
+- summarize_source_selection_qa.py EVALUATION_ROOT OUT: after both semantic-final/reports,
+ reusesfirstresponses, reports dataset/qualified/minproof/native-step/family and naturalvariants;
+ familybootstrap againstBM25/dense and matchedsource/reference seeds.2Wiki adaptedscoreexplicit.
+- plot_source_selection_results.py LEARNING_REPORT QA_REPORT OUT: onlyfinalclosedreports,
+ PNG/PDFlearning/actualQA withallseeds. No fabricatedmockresults or autoregression reruns.
+4analysissemantic tests,Ruff,2filemypy PASS. Actualfirstclosedjob smoke analysis saved in
+analysis-smoke-v1,CPU0.173sec chargedONCE. reference0: source-dev171/255 (BM25next150),
+reference-dev251/354(BM25next207); train1494/1495. Train3008examples/5937015tokens,
+1048.488wallsec; parameterprobes changedencoder/head, ledgermatches. This is SINGLEJOB
+pre-saveFP32 diagnostic, NOT saved-policyQA nor allseed/source-recipe benefit. Devsource
+Mu61/117,2Wiki110/138. Preserve94point181/255 but final188fixed171/255, no bestcheckpoint.
+Response-review protocol frozen BEFOREnewQA outputs withconditional sourcequalified counts
+separate; original blind annotations unchanged. All actualReaderresponse review still pending.
 
 Everything below is historical. Prior audit completion does not close this new user goal.
 

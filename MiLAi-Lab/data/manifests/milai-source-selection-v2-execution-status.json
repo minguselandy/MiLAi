@@ -48,10 +48,10 @@
   "coordinator_pid": 1145336,
   "exec_session": 40960,
   "training_active": {
-    "condition": "reference",
+    "condition": "source",
     "seed": 0,
-    "pid": 1145387,
-    "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/0"
+    "pid": 1218595,
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/source/0"
   },
   "actual_model_call_accounting": "Live trainer run.json and terminal compute.json; not yet closed",
   "reserved_source_review_closed": true,
@@ -63,5 +63,10 @@
   },
   "evaluation_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evaluation-v2",
   "evaluation_protocol": "data/manifests/milai-source-selection-v2-evaluation-matrix-protocol.json",
-  "evaluation_status": "PREPARED_PENDING_SOURCE_FREEZE_AND_TRAINING_COMPLETION"
+  "evaluation_status": "QUEUED_WAITING_FOR_ALL_SIX_TRAINING_JOBS",
+  "evaluation_source_version": "215c84da652db384a6427a36437893fa3d0745d7",
+  "evaluation_coordinator_pid": 1209651,
+  "evaluation_exec_session": 1227,
+  "evaluation_driver": "artifacts/jev-reader/selection-v2/evaluation-v2/driver.json",
+  "training_completed_jobs": 1
 }
