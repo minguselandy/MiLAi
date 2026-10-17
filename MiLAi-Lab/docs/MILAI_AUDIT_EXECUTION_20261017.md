@@ -268,3 +268,23 @@ seed0首进程2595299，exec87369，根`artifacts/jev-reader/option-shuffle-v1`�
 本轮未推送/合并、未运行全仓或远端CI；只运行受影响检查和实际有限实验。公开Schema、
 API、权限、Canonical、Product/Archive均未改。撤销可选置换代码可回到bff6719a，
 历史模型/来源/首次结果继续保留。用户完整目标保持ACTIVE，完成尚未证明。
+
+## LongMemEval-V2来源资格补查
+
+仅读取公开schema与ID映射，另检查58份既有DG-10 benchmark报告的source_case_id/
+source_question_id/question_id字段；2份含可匹配源题号，共42个，与此前已知下界一致。
+这不是对全项目所有日志的完整暴露穷尽。未把新问题/参考答案/轨迹正文送入本次模型。
+
+42题原small分配历史的并集仍为200条轨迹。所有451题small均与这200条相交；medium
+也全部相交，每题交集52–96条。注意medium并非各自small的直接超集（451题均非全含），
+因此不能用“增加400个干扰项”描述其实际构造。medium并集有1273条额外轨迹，但没有
+逐题目标证据轨迹标注，新增干扰历史不证明目标证据未见。
+
+按当前保守历史来源隔离口径，两个档位均无已证实history-disjoint候选。目标证据隔离
+子集不能从现有元数据认证；不把剩余409题号当作新盲测，保留明确披露的外部回归用途。
+“分配历史已接触”不等于每个token实际进过模型；本次没有重新推理或计算任何SHA。
+[元数据结果与资格边界](../data/manifests/jev-longmemeval-v2-eligibility-20261017.json)。
+
+置换训练后的同30状态/5呈现探针已固定，仅运行两个新模型300次前向，复用原固定选项
+模型的既有探针作为控制，不重跑控制、不依据结果选择变体。
+[探针协议](../data/manifests/jev-reader-option-shuffle-invariance-v1-protocol.json)。
