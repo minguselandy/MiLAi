@@ -338,3 +338,18 @@ Dense363种输入最大442tokens、总45834tokens、batch16预计23请求，仍�
 
 [保留来源逐条审阅](../data/manifests/milai-global-reserved-source-v1-annotations.json) ·
 [数量、推导和范围](../data/manifests/milai-global-reserved-source-v1-summary.json)。
+
+
+### 派发前修正：重载精度与呈现基准
+
+上文原计划复用finaldev2作original视图，现明确撤销。代码及实际safetensors头核对确认：
+原生与普通头都把权重保存为FP16；训练内评价使用保存前FP32权重，重载只是把已舍入的
+FP16值转回FP32，不能保证与原值相同。直接复用会把舍入差异混入呈现扰动效果。
+
+在任何posttrain模型调用之前，协议改为每个重载checkpoint完整测original及四个变体，
+共12×168×5=10080次新forward（比原计划增加2016），新增Reader请求0。旧finaldev2继续
+保存，仅作“训练内FP32与保存重载”的独立诊断；原训练成本不重复记账。两种头同样处理。
+这不是根据保留集成绩改变方法：保留集尚无预测，训练、选checkpoint、选项/候选映射和
+Reader提示/设置全不变。原协议另存快照，修正理由与头部dtype观察可追溯。
+
+[重载基准修正](../data/manifests/milai-global-reader-checkpoint-baseline-correction-v1.json)。

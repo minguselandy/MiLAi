@@ -27,8 +27,11 @@ PID3214855 at144/154updates; inspectactualstate. Inspectdriver.json forlatertran
 306.869s wall alreadyoriginalledger; do notrebill. Onlyourcoordinator/trainer found live.
 POSTTRAIN PREPARED notstarted: artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
 config configs/milai-global-reader-policy-qa-v1.json. Requiresall12trainclosed+actualPIDsabsent.
-31cases27arms837Readerpositions,12modelsallfixed4/adaptive+BM25/dense4/full20. 8064newprobe
-forwards(4transforms); originalview reusesfinaldev2. Ordinarylinear supportedbyprobe/fixed4.
+31cases27arms837Readerpositions,12modelsallfixed4/adaptive+BM25/dense4/full20. CORRECTED
+BEFORE DISPATCH:10080probe forwards(5views incl freshoriginal). Bothheads saveF16/reloadFP32;
+trainFP32finaldev2 mustNOTbe reused as same-weightoriginal. Keptseparatelyasreloaddiagnostic.
+Correctionmanifest+oldprotocolsnapshot preserve8064plan;0postmodelcalls/Readerchanges.
+Ordinarylinear supportedbyprobe/fixed4.
 Dense377uniqueinputs/42325tokens/max379,24batch16requests expected but0sentsofar.
 Offlineanalysis-progress-1 isINTERIM2jobs; bothoriginalledgerdeltas match. Do notrerun/rebill.
 14targetedtests inclofficialscorer, Ruff/mypy andDAG/toolsboundaryPASS; trainingimportsnotedited.

@@ -162,7 +162,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families32-0-native",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-0-native",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-0-native-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/0/native/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/0/native/dev/2"
     },
     {
       "name": "families32-0-linear",
@@ -174,7 +174,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families32-0-linear",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-0-linear",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-0-linear-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/0/linear/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/0/linear/dev/2"
     },
     {
       "name": "families32-1-native",
@@ -186,7 +186,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families32-1-native",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-1-native",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-1-native-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/1/native/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/1/native/dev/2"
     },
     {
       "name": "families32-1-linear",
@@ -198,7 +198,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families32-1-linear",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-1-linear",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-1-linear-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/1/linear/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/1/linear/dev/2"
     },
     {
       "name": "families32-2-native",
@@ -210,7 +210,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families32-2-native",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-2-native",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-2-native-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/2/native/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/2/native/dev/2"
     },
     {
       "name": "families32-2-linear",
@@ -222,7 +222,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families32-2-linear",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-2-linear",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families32-2-linear-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/2/linear/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/2/linear/dev/2"
     },
     {
       "name": "families128-0-native",
@@ -234,7 +234,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families128-0-native",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-0-native",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-0-native-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/0/native/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/0/native/dev/2"
     },
     {
       "name": "families128-0-linear",
@@ -246,7 +246,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families128-0-linear",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-0-linear",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-0-linear-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/0/linear/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/0/linear/dev/2"
     },
     {
       "name": "families128-1-native",
@@ -258,7 +258,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families128-1-native",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-1-native",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-1-native-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/native/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/native/dev/2"
     },
     {
       "name": "families128-1-linear",
@@ -270,7 +270,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families128-1-linear",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-1-linear",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-1-linear-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/linear/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/linear/dev/2"
     },
     {
       "name": "families128-2-native",
@@ -282,7 +282,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families128-2-native",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-2-native",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-2-native-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/2/native/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/2/native/dev/2"
     },
     {
       "name": "families128-2-linear",
@@ -294,7 +294,7 @@
       "probe_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/probes/families128-2-linear",
       "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-2-linear",
       "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-policy-qa-v1/selections/families128-2-linear-k4",
-      "original_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/2/linear/dev/2"
+      "training_fp32_dev_predictions": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/2/linear/dev/2"
     }
   ],
   "planned_cases": 31,
@@ -306,6 +306,7 @@
   "invariance": {
     "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/data/families128/dev.jsonl",
     "variants": [
+      "original",
       "aliases",
       "candidate_order",
       "option_order",
@@ -313,8 +314,12 @@
     ],
     "seed": 20261017,
     "states": 168,
-    "new_forward_upper_bound": 8064,
-    "original_reuse": "Use each frozen finaldev2 prediction as original view only after exact same dev.jsonl input equality. Already charged training work, no new original forwards or rebilling."
+    "new_forward_upper_bound": 10080,
+    "original_baseline": "Fresh unperturbed inference from the same reloadedF16checkpoint/FP32execution as four variants. No original-view reuse across pre-save precision.",
+    "training_prediction_comparison": "Retain finaldev2 as separate in-trainingFP32 versus reloaded-checkpoint diagnostic, never as the invariant-view baseline.",
+    "checkpoint_storage_precision": "F16 for both architectures",
+    "inference_execution_precision": "FP32 afterload",
+    "correction": "data/manifests/milai-global-reader-checkpoint-baseline-correction-v1.json"
   },
   "planned_prediction_positions": 837,
   "reader_call_upper_bound": 837,
