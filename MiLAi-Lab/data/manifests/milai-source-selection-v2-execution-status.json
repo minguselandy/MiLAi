@@ -49,9 +49,9 @@
   "exec_session": 40960,
   "training_active": {
     "condition": "reference",
-    "seed": 1,
-    "pid": 1358674,
-    "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/1"
+    "seed": 2,
+    "pid": 1429856,
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/2"
   },
   "actual_model_call_accounting": "Live trainer run.json and terminal compute.json; not yet closed",
   "reserved_source_review_closed": true,
@@ -68,9 +68,9 @@
   "evaluation_coordinator_pid": 1209651,
   "evaluation_exec_session": 1227,
   "evaluation_driver": "artifacts/jev-reader/selection-v2/evaluation-v2/driver.json",
-  "training_completed_jobs": 3,
-  "last_observed_epoch": 1792249181.7217789,
-  "training_active_updates": 0,
+  "training_completed_jobs": 4,
+  "last_observed_epoch": 1792250249.0011175,
+  "training_active_updates": 1,
   "previous_goal_turn_classification": "progress",
   "first_seed_pair": "data/manifests/milai-source-selection-v2-first-seed-pair.json",
   "closed_training_jobs": [
@@ -106,6 +106,18 @@
       "source_dev_accepted": 192,
       "source_dev_labelled": 255,
       "evidence": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/source/1"
+    },
+    {
+      "condition": "reference",
+      "seed": 1,
+      "status": "COMPLETED",
+      "returncode": 0,
+      "updates": 188,
+      "examples": 3008,
+      "source_dev_accepted": 192,
+      "source_dev_labelled": 255,
+      "evidence": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/1"
     }
-  ]
+  ],
+  "endpoint_metadata": "data/manifests/milai-source-selection-v2-endpoint-readiness.json"
 }

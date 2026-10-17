@@ -12,8 +12,9 @@ SOURCE FREEZES (commit IDs are provenance only, no SHA verification):
 Paths below are relative to artifacts/jev-reader/selection-v2 unless stated otherwise.
 
 LIVE: training-v1/driver.json is authority. CoordinatorPID1145336, exec40960. Seed0 reference AND source CLOSED exit0, each188updates/3008examples.
-source/seed1 also CLOSED exit0; total3/6. Current reference/seed1 child1358674
-was live at latest snapshot. Source1 finalsource-dev192/255,train1228/1228; pre-save only. Queue is6jobs, source/reference x seeds0/1/2, serialGPU2/3, no retry. Do NOT
+source/seed1 and reference/seed1 also CLOSED exit0; total4/6. Current reference/seed2
+child1429856 was live at latest snapshot. Seed1source/ref finalsource-dev192/255both (TIE),
+source1train1228/1228,reference1train1495/1495; pre-save only, no cross-seed win claim. Queue is6jobs, source/reference x seeds0/1/2, serialGPU2/3, no retry. Do NOT
 restart when an exec poll expires. Source code/data/protocol are frozen, do not tune from results.
 Evaluation-v2/driver.json WAITING_FOR_TRAINING, coordinatorPID1209651, exec1227. It will
 execute40serial stages after ALL6trainingterminalCOMPLETED. Do NOT start a second driver.
@@ -70,6 +71,10 @@ source-dev195/255 vs reference0 171, improvements31/regressions7; sourceMu71/117
 reference-compatibledev256/354vs251. Source train1228/1228,5751633trainingtokens,1023.886wallsec.
 Both188updates/3008examples, initialchoices/inputlengths same428. Bothledgeraudits match.
 Pairanalysis0.237sec chargedONCE. Still single-seed pre-saveFP32 diagnosis, NOT actualQA/allseedgain.
+
+Existing Reader/embedding GET /v1/models readiness200 with expectedmodels/contextsizes;
+endpoint-readiness-v1.json metadata ONLY,noinference/servicechange.0.076wallsec chargedONCE
+to source_selection_v2_endpoint_metadata; no repeatedmetadatacharge or futureavailabilityclaim.
 
 Current navigation: docs/LAB_CURRENT_STATUS.md; execution record
  docs/MILAI_SOURCE_SELECTION_EXECUTION_20261017.md; machine status
