@@ -51,6 +51,18 @@ def decision_loss(logits: Any, target: Any, mask: Any, objective: str) -> Any:
     return -(target * logp).sum(-1)
 
 
+def compute_counts(run: dict[str, Any], evaluations: dict[str, Counter[str]]) -> dict[str, int]:
+    """Keep optimization work distinct from evaluation on the training split."""
+    counts = {k: run[k] for k in (
+        "train_sequence_rows", "train_input_tokens", "train_batch_forwards",
+        "train_device_forwards", "train_batch_attempts", "train_offered_rows",
+        "train_offered_tokens")}
+    for split, counters in evaluations.items():
+        prefix = "train_eval" if split == "train" else split
+        counts.update({f"{prefix}_{key}": value for key, value in counters.items()})
+    return counts
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("data", type=Path)
@@ -99,7 +111,7 @@ def main() -> None:
            "train_batch_forwards": 0, "train_device_forwards": 0,
            "train_batch_attempts": 0, "train_offered_rows": 0, "train_offered_tokens": 0}
     write_json(args.output / "run.json", run)
-    decision = None
+    decision: NativeDecision
     evaluation_counts: dict[str, Counter[str]] = defaultdict(Counter)
     try:
         if args.backend == "linear":
@@ -225,12 +237,7 @@ def main() -> None:
             torch.cuda.synchronize(device)
         measures = {"wall_seconds": time.perf_counter() - started,
                     "cpu_seconds": time.process_time() - cpu, "runs": 1,
-                    **{k: run[k] for k in ("train_sequence_rows", "train_input_tokens",
-                                           "train_batch_forwards", "train_device_forwards",
-                                           "train_batch_attempts", "train_offered_rows",
-                                           "train_offered_tokens")},
-                    **{f"{split}_{k}": v for split, counters in evaluation_counts.items()
-                       for k, v in counters.items()}}
+                    **compute_counts(run, evaluation_counts)}
         write_json(args.output / "compute.json", {**measures,
             "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
             "peak_cuda_allocated_bytes": [torch.cuda.max_memory_allocated(i) for i in (0, 1)],

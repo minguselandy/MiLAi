@@ -1,0 +1,107 @@
+{
+  "reason": "User-requested restart; three completed jobs and one interrupted at 14 updates retained. Original compute.json had train-evaluation key collisions. Correction changes counters only, never erases wall/CPU/attempts or old outputs.",
+  "jobs": [
+    {
+      "seed": 0,
+      "arm": "soft-ce",
+      "status": "COMPLETED",
+      "optimizer_updates": 24,
+      "original_output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-v1/runs/0/soft-ce",
+      "correction": {
+        "train_sequence_rows": -86,
+        "train_eval_sequence_rows": 430,
+        "train_input_tokens": -238619,
+        "train_eval_input_tokens": 1193095,
+        "train_forwards": -430,
+        "train_eval_forwards": 430,
+        "train_state_tokenizations": -430,
+        "train_eval_state_tokenizations": 430,
+        "train_state_tokens": -1052295,
+        "train_eval_state_tokens": 1052295
+      },
+      "reason": null,
+      "original_ledger_delta_verified": true
+    },
+    {
+      "seed": 0,
+      "arm": "set",
+      "status": "COMPLETED",
+      "optimizer_updates": 24,
+      "original_output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-v1/runs/0/set",
+      "correction": {
+        "train_sequence_rows": -86,
+        "train_eval_sequence_rows": 430,
+        "train_input_tokens": -238619,
+        "train_eval_input_tokens": 1193095,
+        "train_forwards": -430,
+        "train_eval_forwards": 430,
+        "train_state_tokenizations": -430,
+        "train_eval_state_tokenizations": 430,
+        "train_state_tokens": -1052295,
+        "train_eval_state_tokens": 1052295
+      },
+      "reason": null,
+      "original_ledger_delta_verified": true
+    },
+    {
+      "seed": 1,
+      "arm": "set",
+      "status": "COMPLETED",
+      "optimizer_updates": 24,
+      "original_output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-v1/runs/1/set",
+      "correction": {
+        "train_sequence_rows": -86,
+        "train_eval_sequence_rows": 430,
+        "train_input_tokens": -238619,
+        "train_eval_input_tokens": 1193095,
+        "train_forwards": -430,
+        "train_eval_forwards": 430,
+        "train_state_tokenizations": -430,
+        "train_eval_state_tokenizations": 430,
+        "train_state_tokens": -1052295,
+        "train_eval_state_tokens": 1052295
+      },
+      "reason": null,
+      "original_ledger_delta_verified": true
+    },
+    {
+      "seed": 1,
+      "arm": "soft-ce",
+      "status": "FAILED",
+      "optimizer_updates": 14,
+      "original_output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-v1/runs/1/soft-ce",
+      "correction": {
+        "train_sequence_rows": -50,
+        "train_eval_sequence_rows": 258,
+        "train_input_tokens": -136460,
+        "train_eval_input_tokens": 715857,
+        "train_forwards": -258,
+        "train_eval_forwards": 258,
+        "train_state_tokenizations": -258,
+        "train_eval_state_tokenizations": 258,
+        "train_state_tokens": -631377,
+        "train_eval_state_tokens": 631377
+      },
+      "reason": "KeyboardInterrupt",
+      "original_ledger_delta_verified": true
+    }
+  ],
+  "correction": {
+    "train_sequence_rows": -308,
+    "train_eval_sequence_rows": 1548,
+    "train_input_tokens": -852317,
+    "train_eval_input_tokens": 4295142,
+    "train_forwards": -1548,
+    "train_eval_forwards": 1548,
+    "train_state_tokenizations": -1548,
+    "train_eval_state_tokenizations": 1548,
+    "train_state_tokens": -3788262,
+    "train_eval_state_tokens": 3788262
+  },
+  "recorded_once": true,
+  "analysis_compute": {
+    "wall_seconds": 0.08074278570711613,
+    "cpu_seconds": 0.080657534
+  },
+  "generation_or_embedding_calls": 0
+}

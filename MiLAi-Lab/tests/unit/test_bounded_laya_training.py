@@ -1,13 +1,13 @@
 """Derived prefixes and event multiplicity must not inflate a family's loss."""
 
 import sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
-from train_bounded_laya import decision_loss, event_weights
+from train_bounded_laya import compute_counts, decision_loss, event_weights
 
 
 def test_loss_mass_is_equal_by_family_then_event_not_prefix_count():
@@ -48,3 +48,18 @@ def test_single_positive_set_equals_ce_and_multiple_positives_differ():
     multiple = torch.tensor([[0.5, 0.5, 0.0]])
     assert decision_loss(logits, multiple, mask, "set").item() < 0.02
     assert decision_loss(logits, multiple, mask, "soft-ce").item() > 3
+
+
+def test_train_evaluation_does_not_overwrite_optimization_or_partial_attempts():
+    run = {"train_sequence_rows": 208, "train_input_tokens": 579397,
+           "train_batch_forwards": 53, "train_device_forwards": 106,
+           "train_batch_attempts": 54, "train_offered_rows": 212,
+           "train_offered_tokens": 590488}
+    counts = compute_counts(run, {
+        "train": Counter(forwards=258, sequence_rows=258, input_tokens=715857),
+        "dev": Counter(forwards=90, sequence_rows=90, input_tokens=233571)})
+    assert all(counts[k] == value for k, value in run.items())
+    assert counts["train_eval_forwards"] == counts["train_eval_sequence_rows"] == 258
+    assert counts["train_eval_input_tokens"] == 715857
+    assert counts["dev_input_tokens"] == 233571
+    assert counts["train_input_tokens"] + counts["train_eval_input_tokens"] == 1295254

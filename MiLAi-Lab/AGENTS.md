@@ -1,3 +1,20 @@
+# CURRENT: user-requested training restart — 2026-10-17
+
+User explicitly requests pausing other MiLAi worktree tasks and restarting current
+training. Other worktree group2432756 is SIGSTOP-suspended with35members, including
+reader-state-contrast-v1 coordinator/trainer/compiler workers; do not resume it or
+launch replacement work there without user instruction. It retains GPU3 memory.
+Original BGE/7860 services stay running. Full audit goal remains ACTIVE here.
+Original objective-pair-v1 is terminal:3COMPLETED,1KeyboardInterrupt at14updates;
+coordinator and current child have exited. Never restart or overwrite that root.
+All original costs retained; train/evaluation counter collision reconciled once in
+original ledger (interruption manifest). Same data/model/optimizer; new output root
+objective-pair-user-restart-v1 and corrected counting only. Four serial jobs start
+from BASE; no subagents, SHA/content fingerprints, new ledger, default adoption or
+Product/Archive behavior changes. Old invariance-v1 protocol targets interrupted
+cohort and remains unrun; refreeze its model paths before future probes.
+See docs/MILAI_AUDIT_EXECUTION_20261017.md and restart protocol for live state.
+
 # CURRENT: audit execution resumed — 2026-10-17
 
 The current user explicitly resumes research by requesting execution of
