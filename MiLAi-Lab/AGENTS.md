@@ -20,6 +20,9 @@ retained(commongeography, co-parentage, snapshotdates, championshipdefinition). 
 changed; before-reference snapshot preserved. No predictions read before fullsource review.
 See reference-v1-dev-source annotations/summary. Reader contract=supplieddocumentsonly.
 Inspect allcompletedoutputs/actualterminalstatus; no outcome-based dispatch/checkpointchoice.
+First32/native/seed0 CLOSED38updates,train157/304,dev33/168 vsconstant-exhausted34;
+sufficient0/17. No routechoice fromfirstresult. Currentlinear32/seed0 PID3112544; inspect
+driver.json forlatertransitions. Firstjobcost306.869s wall alreadyoriginalledger. Do notrebill.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17
