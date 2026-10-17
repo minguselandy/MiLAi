@@ -48,10 +48,10 @@
   "coordinator_pid": 1145336,
   "exec_session": 40960,
   "training_active": {
-    "condition": "source",
+    "condition": "reference",
     "seed": 1,
-    "pid": 1289388,
-    "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/source/1"
+    "pid": 1358674,
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/1"
   },
   "actual_model_call_accounting": "Live trainer run.json and terminal compute.json; not yet closed",
   "reserved_source_review_closed": true,
@@ -68,9 +68,44 @@
   "evaluation_coordinator_pid": 1209651,
   "evaluation_exec_session": 1227,
   "evaluation_driver": "artifacts/jev-reader/selection-v2/evaluation-v2/driver.json",
-  "training_completed_jobs": 2,
-  "last_observed_epoch": 1792248187.8609169,
-  "training_active_updates": 10,
+  "training_completed_jobs": 3,
+  "last_observed_epoch": 1792249181.7217789,
+  "training_active_updates": 0,
   "previous_goal_turn_classification": "progress",
-  "first_seed_pair": "data/manifests/milai-source-selection-v2-first-seed-pair.json"
+  "first_seed_pair": "data/manifests/milai-source-selection-v2-first-seed-pair.json",
+  "closed_training_jobs": [
+    {
+      "condition": "reference",
+      "seed": 0,
+      "status": "COMPLETED",
+      "returncode": 0,
+      "updates": 188,
+      "examples": 3008,
+      "source_dev_accepted": 171,
+      "source_dev_labelled": 255,
+      "evidence": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/0"
+    },
+    {
+      "condition": "source",
+      "seed": 0,
+      "status": "COMPLETED",
+      "returncode": 0,
+      "updates": 188,
+      "examples": 3008,
+      "source_dev_accepted": 195,
+      "source_dev_labelled": 255,
+      "evidence": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/source/0"
+    },
+    {
+      "condition": "source",
+      "seed": 1,
+      "status": "COMPLETED",
+      "returncode": 0,
+      "updates": 188,
+      "examples": 3008,
+      "source_dev_accepted": 192,
+      "source_dev_labelled": 255,
+      "evidence": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/source/1"
+    }
+  ]
 }
