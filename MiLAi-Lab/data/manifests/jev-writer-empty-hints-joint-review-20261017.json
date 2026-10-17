@@ -1,0 +1,483 @@
+{
+  "status": "CLOSED_PROPOSALS_RECONCILED_NO_BANK_COMMITS",
+  "date": "2026-10-17",
+  "source_tool_version": "08301fd1",
+  "protocol_commit": "a5bc98fa",
+  "new_model_calls_during_reconciliation": 0,
+  "scope": "Four exposed synthetic source contexts, two fixed seeds, two paired variants. Primary eight calls reused; companion eight calls are disjoint. Original 16-call preparation was superseded before any own model call.",
+  "cohorts": [
+    {
+      "name": "primary_reused",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/empty-writer-hint-paired-v1",
+      "responses": 8,
+      "literal_request_response_bindings_verified": 8,
+      "schema_valid": 8,
+      "committed_proposals": 0,
+      "usage": {
+        "prompt_tokens": 36416,
+        "completion_tokens": 22991,
+        "total_tokens": 59407
+      },
+      "summed_request_wall_seconds": 159.52495736256242,
+      "ledger_delta_exact": true,
+      "new_unknown_usage": 0,
+      "cost_status": "Already charged by original runner; no HTTP cost added in reconciliation.",
+      "proposals": [
+        {
+          "case": "family-1-first-check",
+          "seed": 0,
+          "variant": "original",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "edit",
+                "edits": [
+                  {
+                    "operation": "append",
+                    "evidence": [
+                      "e1"
+                    ],
+                    "text": "Luma has an accepted bench-check result.",
+                    "role": "content",
+                    "assertion": {
+                      "source_evidence": "e1",
+                      "kind": "reported"
+                    }
+                  }
+                ],
+                "support_groups": [
+                  {
+                    "target_unit": "n0",
+                    "alternatives": [
+                      [
+                        "n0"
+                      ]
+                    ],
+                    "evidence": [
+                      "e1"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "case": "family-1-first-check",
+          "seed": 0,
+          "variant": "omit_empty",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "edit",
+                "edits": [
+                  {
+                    "operation": "append",
+                    "evidence": [
+                      "e1"
+                    ],
+                    "text": "Luma has an accepted bench-check result.",
+                    "role": "content",
+                    "assertion": {
+                      "source_evidence": "e1",
+                      "kind": "reported"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "case": "family-2-first-check",
+          "seed": 0,
+          "variant": "original",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "no_change"
+              }
+            }
+          }
+        },
+        {
+          "case": "family-2-first-check",
+          "seed": 0,
+          "variant": "omit_empty",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "no_change"
+              }
+            }
+          }
+        },
+        {
+          "case": "family-1-first-check",
+          "seed": 1,
+          "variant": "omit_empty",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "edit",
+                "edits": [
+                  {
+                    "operation": "append",
+                    "evidence": [
+                      "e1"
+                    ],
+                    "text": "Luma has an accepted bench-check result.",
+                    "role": "content",
+                    "assertion": {
+                      "source_evidence": "e1",
+                      "kind": "observed"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "case": "family-1-first-check",
+          "seed": 1,
+          "variant": "original",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "edit",
+                "edits": [
+                  {
+                    "operation": "append",
+                    "evidence": [
+                      "e1"
+                    ],
+                    "text": "Luma has an accepted bench-check result.",
+                    "role": "content",
+                    "assertion": {
+                      "source_evidence": "e1",
+                      "kind": "observed"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "case": "family-2-first-check",
+          "seed": 1,
+          "variant": "omit_empty",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "no_change"
+              }
+            }
+          }
+        },
+        {
+          "case": "family-2-first-check",
+          "seed": 1,
+          "variant": "original",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "no_change"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "companion",
+      "root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/writer-empty-hints-companion-v1/run-v1",
+      "responses": 8,
+      "literal_request_response_bindings_verified": 8,
+      "schema_valid": 8,
+      "committed_proposals": 0,
+      "usage": {
+        "prompt_tokens": 37224,
+        "completion_tokens": 19553,
+        "total_tokens": 56777
+      },
+      "summed_request_wall_seconds": 136.58364481385797,
+      "ledger_delta_exact": true,
+      "new_unknown_usage": 0,
+      "cost_status": "Already charged by original runner; no HTTP cost added in reconciliation.",
+      "proposals": [
+        {
+          "case": "case-0",
+          "seed": 0,
+          "variant": "original",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "no_change"
+              }
+            }
+          }
+        },
+        {
+          "case": "case-0",
+          "seed": 0,
+          "variant": "omit_empty",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "edit",
+                "edits": [
+                  {
+                    "operation": "append",
+                    "evidence": [
+                      "e1"
+                    ],
+                    "text": "Currently, the grid feed is live, the north switch is on, and the south switch is on.",
+                    "role": "content",
+                    "assertion": {
+                      "source_evidence": "e1",
+                      "kind": "observed"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "case": "case-3",
+          "seed": 0,
+          "variant": "original",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "no_change"
+              }
+            }
+          }
+        },
+        {
+          "case": "case-3",
+          "seed": 0,
+          "variant": "omit_empty",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "edit",
+                "edits": [
+                  {
+                    "operation": "append",
+                    "evidence": [
+                      "e1"
+                    ],
+                    "text": "The South draft has an accepted text check and an accepted image check.",
+                    "role": "content",
+                    "assertion": {
+                      "source_evidence": "e1",
+                      "kind": "reported"
+                    }
+                  }
+                ],
+                "support_groups": []
+              }
+            }
+          }
+        },
+        {
+          "case": "case-0",
+          "seed": 1,
+          "variant": "omit_empty",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "no_change"
+              }
+            }
+          }
+        },
+        {
+          "case": "case-0",
+          "seed": 1,
+          "variant": "original",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "no_change"
+              }
+            }
+          }
+        },
+        {
+          "case": "case-3",
+          "seed": 1,
+          "variant": "omit_empty",
+          "proposal": {
+            "creates": [],
+            "records": {
+              "r1": {
+                "action": "edit",
+                "edits": [
+                  {
+                    "operation": "append",
+                    "evidence": [
+                      "e1"
+                    ],
+                    "text": "The South draft has an accepted text check and an accepted image check.",
+                    "role": "content",
+                    "attach_to": [],
+                    "assertion": {
+                      "source_evidence": "e1",
+                      "kind": "observed"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "case": "case-3",
+          "seed": 1,
+          "variant": "original",
+          "proposal": {
+            "creates": [
+              {
+                "action": "create",
+                "matter": "South draft readiness status",
+                "clauses": [
+                  {
+                    "text": "The South draft has an accepted text check and an accepted image check.",
+                    "evidence": [
+                      "e1"
+                    ],
+                    "assertion": {
+                      "source_evidence": "e1",
+                      "kind": "reported"
+                    },
+                    "conditions": []
+                  }
+                ]
+              }
+            ],
+            "records": {
+              "r1": {
+                "action": "no_change"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "manual_source_review": {
+    "metric": "Presence of new event facts in proposal text; not state correctness or benchmark accuracy.",
+    "original": {
+      "fact_containing": 3,
+      "total": 8
+    },
+    "omit_empty": {
+      "fact_containing": 5,
+      "total": 8
+    },
+    "by_context": [
+      {
+        "context": "Luma bench check",
+        "original_by_seed": [
+          true,
+          true
+        ],
+        "omit_empty_by_seed": [
+          true,
+          true
+        ]
+      },
+      {
+        "context": "North checks",
+        "original_by_seed": [
+          false,
+          false
+        ],
+        "omit_empty_by_seed": [
+          false,
+          false
+        ]
+      },
+      {
+        "context": "Nera grid/switch checks",
+        "original_by_seed": [
+          false,
+          false
+        ],
+        "omit_empty_by_seed": [
+          true,
+          false
+        ]
+      },
+      {
+        "context": "South checks",
+        "original_by_seed": [
+          false,
+          true
+        ],
+        "omit_empty_by_seed": [
+          true,
+          true
+        ]
+      }
+    ],
+    "limitations": [
+      "Luma seed0 original adds a self-dependent support route n0<-n0; schema validity does not establish state validation. No actual commit/rejection was attempted.",
+      "North remains no_change in every variant/seed, and Nera seed1 remains no_change.",
+      "Nera seed0 omission combines three separately revisable facts; check-report attribution requires qualification.",
+      "South seed1 original creates a new matter while omission appends to the existing matter. Granularity and assertion kind vary.",
+      "Two gains in fact presence do not prove reliable Writer-state repair or end-to-end quality/cost benefit."
+    ]
+  },
+  "code_change": "event_delta_v1 omits change_candidates only when exactly []. Nonempty hints, evidence, system instruction, response schema and source/commit validation stay unchanged. Research branch only; no service deployment.",
+  "accounting": {
+    "original_ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "local_compute_recorded": {
+      "reader_warm_label_shared_reconciliation_v1": {
+        "runs": 1,
+        "wall_seconds": 0.04572675283998251,
+        "cpu_seconds": 0.04572736,
+        "model_calls": 0
+      },
+      "writer_empty_hints_preparation_v1": {
+        "runs": 1,
+        "wall_seconds": 0.9106609262526035,
+        "cpu_seconds": 0.9137324250000001,
+        "model_calls": 0
+      },
+      "writer_empty_hints_joint_reconciliation_v1": {
+        "runs": 1,
+        "wall_seconds": 0.046881443820893764,
+        "cpu_seconds": 0.04686923600000001,
+        "model_calls": 0
+      }
+    },
+    "newly_recorded_phases": [
+      "reader_warm_label_shared_reconciliation_v1",
+      "writer_empty_hints_preparation_v1",
+      "writer_empty_hints_joint_reconciliation_v1"
+    ],
+    "http_recharged": false,
+    "unmeasured": "Author semantic review, import-failure preparation and some orchestration time are not fully measured; not zero."
+  },
+  "goal_status": "paused"
+}

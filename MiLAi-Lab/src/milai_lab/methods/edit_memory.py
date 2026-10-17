@@ -1395,6 +1395,8 @@ class EditMemory:
                 **{k: v for k, v in packet.items() if k not in {
                     "evidence", "source_table", "records", "historical_support"}},
             }
+            if ordered["change_candidates"] == []:
+                del ordered["change_candidates"]
             return [
                 {"role": "system", "content": self.instructions(allow_create=allow_create)},
                 {"role": "user", "content": json.dumps({

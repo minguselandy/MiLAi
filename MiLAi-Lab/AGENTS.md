@@ -1,4 +1,39 @@
-# CURRENT: all four label-control trainings CLOSED/reviewed — 2026-10-17
+# CURRENT: research PAUSED; training summary publication requested — 2026-10-17
+
+Goal is PAUSED/incomplete. The user requested a current training summary and GitHub
+submission. Complete publication on feat/lab-jev-read-decisions-20261016; no new
+training, model calls, service changes or autonomous research continuation.
+Current summary: docs/MILAI_JEV_TRAINING_STATUS_20261017.md. Historical ACTIVE/LIVE
+headers below are snapshots, not instructions to resume. All owned jobs are closed.
+
+Base-start four jobs remain 9/22->11/22 and 6/22->5/22. The sibling warm-start four
+jobs are closed and independently reconciled: 9/22->11/22 and 10/22->10/22. Different
+initialization/data/recipes; do not pool as exchangeable replicates. Actual warm
+policy/Reader responses still fail useful complement/STOP decisions; no stable QA gain.
+Warm evidence: data/manifests/jev-reader-warm-label-shared-reconciliation-20261017.json.
+
+Paired Writer empty-hint probes CLOSED: eight sibling first responses reused, eight
+disjoint companion responses, all schema-valid, zero bank commits. Fact-containing
+proposals 3/8 original -> 5/8 omit-empty, not state accuracy. North still entirely
+no_change; original Luma seed0 has a self-dependent route; Nera granularity/report
+wording remains qualified. Own companion exec4053 exited0 and PID2167904 is absent.
+Sixteen literal input/receipt bindings and both original ledger deltas verified.
+Source tool 08301fd1, protocol a5bc98fa. No new HTTP during publication/reconciliation.
+Evidence: data/manifests/jev-writer-empty-hints-joint-review-20261017.json.
+
+Pending publication code: event_delta_v1 omits change_candidates only when exactly
+empty. Nonempty hints/evidence/schema/source/commit checks unchanged. No deployment,
+Product/API/permission/Canonical changes. Forty affected tests, Ruff, mypy, actual
+package DAG and tools boundary pass; full repository/remote CI not run. Rollback
+base a5bc98fa. Do not include ignored models/data/env/logs or sibling dirty files.
+
+GPU2/3 each36928MiB free at publication check; protected BGE7861 PID47436,
+BGE7961 PID52982 and7860 PID2160380 still running;7862 container exited. All new
+files/cache/env remain under /cra/memory/mx_memory. No SHA/content fingerprint checks.
+Only original budget.json used; measured warm reconciliation and Writer preparation/
+reconciliation recorded once under distinct phases. Existing HTTP/training not rebilled.
+
+# Historical checkpoint: all four label-control trainings CLOSED/reviewed — 2026-10-17
 
 Goal ACTIVE/incomplete. Previous turn=progress9cbf858e; currentturn completedremaining
 source review andfourrealtrainings withfixedprotocol andclosedcost audit. No subagents,
