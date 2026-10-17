@@ -23,8 +23,8 @@
 [570份首次回答注释](../data/manifests/milai-global-reader-response-review-v1-annotations.json)、
 [训练学习曲线](figures/milai-global-reader-learning-20261017.png)、
 [逐要求完成状态](../data/manifests/milai-development-audit-requirements-20261017.json)。
-来源判分遵循冻结的严格材料口径，常识补充、歧义和限定解释保留单独记录；这不是独立
-人工金标准。六个来源充分开发案例和17个开发家族不能支撑普遍有效的承诺。
+来源判分由同一开发助手逐条审阅，遵循冻结的严格材料口径；常识补充、歧义和限定解释
+保留单独记录。这不是独立人工金标准。六个来源充分开发案例和17个开发家族不能支撑普遍有效的承诺。
 
 ## 初始全局设计调整（历史）
 
@@ -552,7 +552,7 @@ bootstrap的95%区间分别[-0.210,0.261]、[-0.235,0.378]，其余四个128固�
 gross-position用量。固定4学习控制器每方法还处理约365702–365848输入tokens、124次
 决策；其成本不能省略。自适应也有31–83次决策、92031–248736输入tokens。训练、
 probe、模型加载、本地准备、共享检索和dense编码另列。不同tokenizer的token不是等价
-FLOPs，暖组件耗时之和不是生产共驻端到端时延；人工审阅成本未完整计量。
+FLOPs，暖组件耗时之和不是生产共驻端到端时延；开发助手审阅成本未完整计量。
 
 [全部27方法、成本及家族对照](../data/manifests/milai-global-reader-policy-qa-v1-summary.json) ·
 [首次回答完整审阅注释](../data/manifests/milai-global-reader-response-review-v1-annotations.json)。

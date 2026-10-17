@@ -43,11 +43,21 @@ source/reference diagnostics; no nonexistent FP32-dev baseline/five-view invaria
 Analysis CLOSED; no repeat. Do not block a live HTTPowner with new ledger writes.
 Reserved now in Reader: PID4158352 under4100019/exec80572. All38 precedingstages
 CLOSED, preview756/756 with504uniqueinputs. Dense363inputs/45834tokens CLOSED.
-Reserved response review nowfirst3cases119/410/647 CLOSED,54unique IDs000000–000053.
+Reserved response review nowfirst7cases119/410/647/786/1067/1561/1643 CLOSED,
+126unique IDs000000–000125. Mechanicalcoverage/outputflags verified0issues.
 Annotations in reserved stream-review/response-annotations.json. NEXT export completecases
-and read startingindex03/row786. IDs arecohort-local: never reuse570dev annotations.
+and read startingindex07/row1654. IDs arecohort-local: never reuse570dev annotations.
 Case119 p12original-character authorship supported; p17adaptation-only path retaineduncertain
 forresponses3/11/12(12alsoanswer metadata contamination). No methodmapping opened.
+Case786 missingDaraga-religion identity: positives54/55/56/58/59/60/61/65/66/67
+have matchingstatevalue butunsupportedchain; remaining57/62/63/64/68 validabstention.
+Case1067 groundedTreatyParis69/70/73/76/84;74missingcityriverlink,83missingbirthplace;
+72empty-doc falseanswerhasnonempty metadata string =contractfailure, not generationfailure.
+Case1561 maskednonuniquechildren: allnonemptyresponses supportedqualified alternatives,
+not errorsforfailingthenativereference;89/102/104blankcorrectinsufficientsubsets.
+Allcase1643blankresponses validinsufficiency(noRX350 chronology).
+Qualifiedgroundedresponses need separate descriptivecounts: reader_response_pass is
+unqualifiedsuccess, so do not call allremainingqualifiedresponseserrors.
 Allcases410/647blankanswers validinsufficiency. Nonempty support_ids withfalse/emptyanswer allowed.
 Can stream-review closed reserved cases with tools/export_global_reader_responses.py; stable
 IDs local to that cohort. Export costs deferred to final receipt collector after HTTP closes.
