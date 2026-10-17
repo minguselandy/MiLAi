@@ -11,9 +11,8 @@ SOURCE FREEZES (commit IDs are provenance only, no SHA verification):
 - main analysis implementation2a7940d2. All commits LOCAL; no push/merge performed.
 Paths below are relative to artifacts/jev-reader/selection-v2 unless stated otherwise.
 
-LIVE: training-v1/driver.json is authority. CoordinatorPID1145336, exec40960. First job
-reference/seed0 CLOSED exit0,188updates/3008examples; source/seed0 child1218595 was live at
-latest snapshot. Queue is6jobs, source/reference x seeds0/1/2, serialGPU2/3, no retry. Do NOT
+LIVE: training-v1/driver.json is authority. CoordinatorPID1145336, exec40960. Seed0 reference AND source CLOSED exit0, each188updates/3008examples.
+Current source/seed1 child1289388 was live at latest snapshot. Queue is6jobs, source/reference x seeds0/1/2, serialGPU2/3, no retry. Do NOT
 restart when an exec poll expires. Source code/data/protocol are frozen, do not tune from results.
 Evaluation-v2/driver.json WAITING_FOR_TRAINING, coordinatorPID1209651, exec1227. It will
 execute40serial stages after ALL6trainingterminalCOMPLETED. Do NOT start a second driver.
@@ -64,6 +63,12 @@ alreadychargedONCE; see ledger-records, NEVERrebill. Firstreference0actualledger
 FourQApreparationsv1/v2xdev/reserved0.502seccharged, finalreserved audit0.036sec,inputaudit7.855sec;
 failedv1length-audit timing not persisted. Authorreview/prep overhead notfullymetered, notfree.
 Historical generationunknown11/embeddingunknown1 are notnew; don'tclaimglobalunknown0.
+
+FIRST PAIR now CLOSED: first-pair-learning-v1 and trackedfirst-seed-pair report. source0
+source-dev195/255 vs reference0 171, improvements31/regressions7; sourceMu71/117,twoWiki124/138;
+reference-compatibledev256/354vs251. Source train1228/1228,5751633trainingtokens,1023.886wallsec.
+Both188updates/3008examples, initialchoices/inputlengths same428. Bothledgeraudits match.
+Pairanalysis0.237sec chargedONCE. Still single-seed pre-saveFP32 diagnosis, NOT actualQA/allseedgain.
 
 Current navigation: docs/LAB_CURRENT_STATUS.md; execution record
  docs/MILAI_SOURCE_SELECTION_EXECUTION_20261017.md; machine status
