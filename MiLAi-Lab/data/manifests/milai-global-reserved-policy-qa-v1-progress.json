@@ -1,6 +1,6 @@
 {
   "status": "RESERVED_READER_LIVE_AUTHOR_REVIEW_PARTIAL",
-  "observed_epoch": 1792228401.3453896,
+  "observed_epoch": 1792228938.1577969,
   "driver_pid": 4100019,
   "source_version": "d5261e45",
   "exec_session": 80572,
@@ -37,10 +37,10 @@
     "status": "RUNNING",
     "phase": "predict",
     "planned": 756,
-    "completed": 208,
+    "completed": 292,
     "known_failures": 0,
-    "fresh_reader_attempts": 139,
-    "reused_reader_outputs": 69,
+    "fresh_reader_attempts": 193,
+    "reused_reader_outputs": 99,
     "known_failed_reader_calls": 0
   },
   "preview": {
@@ -63,9 +63,12 @@
     "row-786",
     "row-1067",
     "row-1561",
-    "row-1643"
+    "row-1643",
+    "row-1654",
+    "row-1673",
+    "row-1941"
   ],
-  "reviewed_unique_responses": 126,
+  "reviewed_unique_responses": 179,
   "review_path": "artifacts/jev-reader/global-reserved-policy-qa-v1/stream-review/response-annotations.json",
   "stream_export_compute_pending_original_ledger": true,
   "mechanical_review_consistency": {
@@ -73,5 +76,7 @@
     "unique_outputs": 126,
     "issues": [],
     "method_mapping_opened": false
-  }
+  },
+  "cohort_summary_tool": "tools/summarize_global_reader_cohorts.py",
+  "cohort_summary_execution": "PENDING_ALL_RESERVED_FIRST_RESPONSE_REVIEW"
 }

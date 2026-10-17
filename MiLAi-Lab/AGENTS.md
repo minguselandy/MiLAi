@@ -43,10 +43,10 @@ source/reference diagnostics; no nonexistent FP32-dev baseline/five-view invaria
 Analysis CLOSED; no repeat. Do not block a live HTTPowner with new ledger writes.
 Reserved now in Reader: PID4158352 under4100019/exec80572. All38 precedingstages
 CLOSED, preview756/756 with504uniqueinputs. Dense363inputs/45834tokens CLOSED.
-Reserved response review nowfirst7cases119/410/647/786/1067/1561/1643 CLOSED,
-126unique IDs000000–000125. Mechanicalcoverage/outputflags verified0issues.
+Reserved response review nowfirst10cases throughindex09/row1941 CLOSED,
+179unique IDs000000–000178. Mechanicalcheck lastcoveredfirst7/126 with0issues.
 Annotations in reserved stream-review/response-annotations.json. NEXT export completecases
-and read startingindex07/row1654. IDs arecohort-local: never reuse570dev annotations.
+and read startingindex10/row1967. IDs arecohort-local: never reuse570dev annotations.
 Case119 p12original-character authorship supported; p17adaptation-only path retaineduncertain
 forresponses3/11/12(12alsoanswer metadata contamination). No methodmapping opened.
 Case786 missingDaraga-religion identity: positives54/55/56/58/59/60/61/65/66/67
@@ -56,6 +56,10 @@ Case1067 groundedTreatyParis69/70/73/76/84;74missingcityriverlink,83missingbirth
 Case1561 maskednonuniquechildren: allnonemptyresponses supportedqualified alternatives,
 not errorsforfailingthenativereference;89/102/104blankcorrectinsufficientsubsets.
 Allcase1643blankresponses validinsufficiency(noRX350 chronology).
+Allcase1654blankcorrect(noEricJohnson birth/capitaldate); all1673blankcorrect(nojointcast).
+Case1941 r178Rialto matchesreference butmissingVivaldibirth; r172nonemptyfalseanswer
+contractfailure; allother162–178blankcorrectinsufficiency. Reserved knownsemanticcontract
+failures nowunique72 and172; generationfailures maystill0, inspectactualrun separately.
 Qualifiedgroundedresponses need separate descriptivecounts: reader_response_pass is
 unqualifiedsuccess, so do not call allremainingqualifiedresponseserrors.
 Allcases410/647blankanswers validinsufficiency. Nonempty support_ids withfalse/emptyanswer allowed.
@@ -63,6 +67,12 @@ Can stream-review closed reserved cases with tools/export_global_reader_response
 IDs local to that cohort. Export costs deferred to final receipt collector after HTTP closes.
 Finish all first-response source review before method mappings; final export then collector
 then join_global_reader_review.py. Do not select a favorable seed or change prompts/policies.
+New tools/summarize_global_reader_cohorts.py +2tests READY, Ruff/targetedmypy/toolsboundary
+PASS; NOTRUN oncohorts yet. After BOTH semantic-final reportsclose, run withdevroot,
+reservedroot,newoutput artifacts/jev-reader/global-reader-transfer-review-v1 usingHTTPenv
+PYTHONPATH=src:tools (officialscorer dependencies). Reports allmethods/allsteps/families,
+retains empty strata asNone and groundedqualifiedanswers separately. No primaryscorechange,
+no modelcalls/rebilling. Do not execute while reserved HTTPowner stilllive.
 Later sections below are historical snapshots, not authority to restart old jobs.
 
 # HISTORICAL SNAPSHOT: dev Reader was live — 2026-10-17

@@ -161,16 +161,18 @@
         "tests/unit/test_bounded_invariance.py",
         "tests/unit/test_bounded_reader_rollouts.py",
         "tests/unit/test_musique_reader.py",
-        "docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md"
+        "docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md",
+        "tests/unit/test_global_reader_cohort_summary.py"
       ],
-      "finding": "Relevant14 prior tests and2 new semantic tests pass. Ruff, targeted mypy with local src/tools and optional dependency imports ignored, package DAG and active tools boundaries pass. Dev first-response/cost reports now closed; reserved result pending. No full-repository/remote CI or publication."
+      "finding": "Relevant14 prior tests and2 new semantic tests pass. Ruff, targeted mypy with local src/tools and optional dependency imports ignored, package DAG and active tools boundaries pass. Dev first-response/cost reports now closed; reserved result pending. No full-repository/remote CI or publication. Cohort aggregation2 meaningful tests pass: family weighting and grounded masked answers; Ruff/targetedmypy/toolsboundary pass. Full two-cohort aggregation is prepared, not yet executed."
     }
   ],
   "next_required_execution": [
     "Continue existing reserved Reader PID4158352 under coordinator4100019/session80572. No duplicate dispatch or input change.",
-    "Export completed cases to reserved stream-review and review all first responses before opening method mapping. Dev IDs are cohort-local: never reuse dev annotations for reserved IDs.",
+    "Finish reserved response reviews from index10/row1967; current10cases179 unique responses reviewed before method mapping.",
     "After actual Reader/scorer terminal, final export all28 once, then receipt/cost collector and semantic join.",
-    "Reconcile both cohorts and perform full audit completion review; source-isolation and author-review limitations remain explicit."
+    "Run summarize_global_reader_cohorts.py on both completed cohort roots into a new output folder. Report family/decomposition-size/source-class denominators, grounded qualified responses and complete costs.",
+    "Perform full audit completion review; preserve source-isolation and assistant-review limitations."
   ],
   "training_closure": "data/manifests/milai-global-reader-reference-v1-summary.json",
   "historical_training_snapshot": {
@@ -251,7 +253,7 @@
   },
   "live_reserved_posttrain_snapshot": {
     "status": "RESERVED_READER_LIVE_AUTHOR_REVIEW_PARTIAL",
-    "observed_epoch": 1792228401.3453896,
+    "observed_epoch": 1792228938.1577969,
     "driver_pid": 4100019,
     "source_version": "d5261e45",
     "exec_session": 80572,
@@ -288,10 +290,10 @@
       "status": "RUNNING",
       "phase": "predict",
       "planned": 756,
-      "completed": 208,
+      "completed": 292,
       "known_failures": 0,
-      "fresh_reader_attempts": 139,
-      "reused_reader_outputs": 69,
+      "fresh_reader_attempts": 193,
+      "reused_reader_outputs": 99,
       "known_failed_reader_calls": 0
     },
     "preview": {
@@ -314,9 +316,12 @@
       "row-786",
       "row-1067",
       "row-1561",
-      "row-1643"
+      "row-1643",
+      "row-1654",
+      "row-1673",
+      "row-1941"
     ],
-    "reviewed_unique_responses": 126,
+    "reviewed_unique_responses": 179,
     "review_path": "artifacts/jev-reader/global-reserved-policy-qa-v1/stream-review/response-annotations.json",
     "stream_export_compute_pending_original_ledger": true,
     "mechanical_review_consistency": {
@@ -324,6 +329,8 @@
       "unique_outputs": 126,
       "issues": [],
       "method_mapping_opened": false
-    }
+    },
+    "cohort_summary_tool": "tools/summarize_global_reader_cohorts.py",
+    "cohort_summary_execution": "PENDING_ALL_RESERVED_FIRST_RESPONSE_REVIEW"
   }
 }
