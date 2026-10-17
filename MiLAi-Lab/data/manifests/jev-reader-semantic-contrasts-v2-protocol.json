@@ -1,0 +1,1409 @@
+{
+  "name": "jev-reader-semantic-contrasts-v2",
+  "status": "PREPARATION_NOT_TRAINING",
+  "facets": [
+    {
+      "facet": "tony-birth",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which city was Tony Schumacher, the author, born?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          8
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Ludwigsburg",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          8
+        ],
+        [
+          2,
+          18
+        ],
+        [
+          8,
+          2,
+          18
+        ]
+      ]
+    },
+    {
+      "facet": "tony-death",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which city did Tony Schumacher, the author, die?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          8
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Ludwigsburg",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          8
+        ],
+        [
+          2,
+          18
+        ],
+        [
+          8,
+          2,
+          18
+        ]
+      ]
+    },
+    {
+      "facet": "gottlieb-birth",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which city was Gottlieb Schumacher born?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          2
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Zanesville",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          2
+        ],
+        [
+          8,
+          18
+        ],
+        [
+          8,
+          2,
+          18
+        ]
+      ]
+    },
+    {
+      "facet": "gottlieb-death",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which city did Gottlieb Schumacher die?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        2
+      ],
+      "expected_answer": null,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          2
+        ],
+        [
+          8,
+          18
+        ],
+        [
+          8,
+          2,
+          18
+        ]
+      ]
+    },
+    {
+      "facet": "mick-birth",
+      "source_row": 1529,
+      "family": "musique-family-000840",
+      "split": "train",
+      "question": "In which country was Mick Schumacher born?",
+      "pool_source_indices": [
+        8,
+        2,
+        18
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          18
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Switzerland",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          18
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          2,
+          18
+        ]
+      ]
+    },
+    {
+      "facet": "apa-president",
+      "source_row": 28674,
+      "family": "musique-family-000407",
+      "split": "train",
+      "question": "Who was the first president of the American Psychological Association?",
+      "pool_source_indices": [
+        16,
+        12
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "G. Stanley Hall",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          12
+        ],
+        [
+          16
+        ],
+        [
+          16,
+          12
+        ]
+      ]
+    },
+    {
+      "facet": "journal-publisher-president",
+      "source_row": 28674,
+      "family": "musique-family-000407",
+      "split": "train",
+      "question": "Who was the first president of the association publishing Psychology of Addictive Behaviors?",
+      "pool_source_indices": [
+        16,
+        12
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16,
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "G. Stanley Hall",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          16,
+          12
+        ],
+        [
+          16
+        ]
+      ]
+    },
+    {
+      "facet": "journal-editor",
+      "source_row": 28674,
+      "family": "musique-family-000407",
+      "split": "train",
+      "question": "Who is named editor-in-chief of Psychology of Addictive Behaviors in the supplied passage?",
+      "pool_source_indices": [
+        16,
+        12
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Nancy M. Petry",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          16
+        ],
+        [
+          12
+        ],
+        [
+          16,
+          12
+        ]
+      ]
+    },
+    {
+      "facet": "journal-frequency",
+      "source_row": 28674,
+      "family": "musique-family-000407",
+      "split": "train",
+      "question": "How many times a year does Psychology of Addictive Behaviors publish, according to the supplied passage?",
+      "pool_source_indices": [
+        16,
+        12
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "8",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          16
+        ],
+        [
+          12
+        ],
+        [
+          16,
+          12
+        ]
+      ]
+    },
+    {
+      "facet": "rca-ceo",
+      "source_row": 3344,
+      "family": "musique-family-000410",
+      "split": "train",
+      "question": "Who became the new CEO of the RCA Records unit in the supplied passage?",
+      "pool_source_indices": [
+        12,
+        9,
+        1
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          1
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Peter Edge",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          1
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          12,
+          9,
+          1
+        ]
+      ]
+    },
+    {
+      "facet": "epic-ceo",
+      "source_row": 3344,
+      "family": "musique-family-000410",
+      "split": "train",
+      "question": "Who became chairman and CEO of Epic Records in the supplied passage?",
+      "pool_source_indices": [
+        12,
+        9,
+        1
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          1
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "L.A. Reid",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          1
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          12,
+          9,
+          1
+        ]
+      ]
+    },
+    {
+      "facet": "parent-ceo",
+      "source_row": 3344,
+      "family": "musique-family-000410",
+      "split": "train",
+      "question": "Who became chairman and CEO of Sony Music on July 1, 2011, according to the supplied passage?",
+      "pool_source_indices": [
+        12,
+        9,
+        1
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          1
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Doug Morris",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          1
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          12,
+          9,
+          1
+        ]
+      ]
+    },
+    {
+      "facet": "album-band",
+      "source_row": 3344,
+      "family": "musique-family-000410",
+      "split": "train",
+      "question": "Which band released Two Lane Highway?",
+      "pool_source_indices": [
+        12,
+        9,
+        1
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Pure Prairie League",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          12
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          12,
+          9,
+          1
+        ]
+      ]
+    },
+    {
+      "facet": "cornish-country",
+      "source_row": 5148,
+      "family": "musique-family-000892",
+      "split": "train",
+      "question": "In which country is Trinity Church in Cornish, New Hampshire?",
+      "pool_source_indices": [
+        19,
+        14,
+        10
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          10
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "United States",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          10
+        ],
+        [
+          19,
+          14
+        ],
+        [
+          19,
+          14,
+          10
+        ]
+      ]
+    },
+    {
+      "facet": "boston-city",
+      "source_row": 5148,
+      "family": "musique-family-000892",
+      "split": "train",
+      "question": "Which city is specified for the Trinity Church called Richardson's masterpiece?",
+      "pool_source_indices": [
+        19,
+        14,
+        10
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          14
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Boston",
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          14
+        ],
+        [
+          19,
+          10
+        ],
+        [
+          19,
+          14,
+          10
+        ]
+      ]
+    },
+    {
+      "facet": "richardson-church-country",
+      "source_row": 5148,
+      "family": "musique-family-000892",
+      "split": "train",
+      "question": "In which country is the church designed by the same architect as Billings Memorial Library?",
+      "pool_source_indices": [
+        19,
+        14,
+        10
+      ],
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        19,
+        14
+      ],
+      "expected_answer": null,
+      "scope": "New author-written question, unchanged reviewed source texts; training-only, not native benchmark QA or independent family.",
+      "opened_states": [
+        [],
+        [
+          19
+        ],
+        [
+          19,
+          14
+        ],
+        [
+          10
+        ],
+        [
+          19,
+          14,
+          10
+        ]
+      ]
+    },
+    {
+      "facet": "merlin-painter",
+      "source_row": 10214,
+      "family": "musique-family-000058",
+      "split": "train",
+      "question": "Who painted The Beguiling of Merlin?",
+      "pool_source_indices": [
+        6,
+        16,
+        5
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          6
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Edward Burne-Jones",
+      "opened_states": [
+        [],
+        [
+          6
+        ],
+        [
+          16,
+          5
+        ],
+        [
+          6,
+          16,
+          5
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "georgiana-mother",
+      "source_row": 10214,
+      "family": "musique-family-000058",
+      "split": "train",
+      "question": "Which painter is Georgiana Burne-Jones explicitly described as the mother of?",
+      "pool_source_indices": [
+        6,
+        16,
+        5
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Philip Burne-Jones",
+      "opened_states": [
+        [],
+        [
+          16
+        ],
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          16,
+          5
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "film-intended-duration",
+      "source_row": 10214,
+      "family": "musique-family-000058",
+      "split": "train",
+      "question": "How many years was the exclusive Universal Pictures and Sanen Productions association intended to last, according to the Two Mules for Sister Sara passage?",
+      "pool_source_indices": [
+        6,
+        16,
+        5
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          5
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "five years",
+      "opened_states": [
+        [],
+        [
+          5
+        ],
+        [
+          6,
+          16
+        ],
+        [
+          6,
+          16,
+          5
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "film-realized-duration",
+      "source_row": 10214,
+      "family": "musique-family-000058",
+      "split": "train",
+      "question": "How many years did the exclusive Universal Pictures and Sanen Productions association actually last?",
+      "pool_source_indices": [
+        6,
+        16,
+        5
+      ],
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        5
+      ],
+      "expected_answer": null,
+      "opened_states": [
+        [],
+        [
+          5
+        ],
+        [
+          6,
+          16
+        ],
+        [
+          6,
+          16,
+          5
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "film-release-year",
+      "source_row": 10214,
+      "family": "musique-family-000058",
+      "split": "train",
+      "question": "In which year was Two Mules for Sister Sara released according to the supplied passage?",
+      "pool_source_indices": [
+        6,
+        16,
+        5
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          5
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "1970",
+      "opened_states": [
+        [],
+        [
+          5
+        ],
+        [
+          6,
+          16
+        ],
+        [
+          6,
+          16,
+          5
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "india-alternative-coastline",
+      "source_row": 39085,
+      "family": "musique-family-000577",
+      "split": "train",
+      "question": "What coastline length is given for the country with the longest constitution?",
+      "pool_source_indices": [
+        1,
+        7,
+        13,
+        17,
+        14
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          1,
+          17
+        ],
+        [
+          7,
+          17
+        ],
+        [
+          13,
+          17
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "7,516.6 km (4,671 mi)",
+      "opened_states": [
+        [],
+        [
+          1,
+          17
+        ],
+        [
+          1
+        ],
+        [
+          7,
+          17
+        ],
+        [
+          7
+        ],
+        [
+          13,
+          17
+        ],
+        [
+          13
+        ],
+        [
+          14
+        ],
+        [
+          1,
+          7,
+          13,
+          17,
+          14
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "india-direct-coastline",
+      "source_row": 39085,
+      "family": "musique-family-000577",
+      "split": "train",
+      "question": "What coastline length is given for India?",
+      "pool_source_indices": [
+        1,
+        7,
+        13,
+        17,
+        14
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          17
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "7,516.6 km (4,671 mi)",
+      "opened_states": [
+        [],
+        [
+          17
+        ],
+        [
+          1,
+          7,
+          13,
+          14
+        ],
+        [
+          1,
+          7,
+          13,
+          17,
+          14
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "canada-coastline",
+      "source_row": 39085,
+      "family": "musique-family-000577",
+      "split": "train",
+      "question": "What country has the longest coastline according to the supplied passages?",
+      "pool_source_indices": [
+        1,
+        7,
+        13,
+        17,
+        14
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          14
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Canada",
+      "opened_states": [
+        [],
+        [
+          14
+        ],
+        [
+          1,
+          7,
+          13,
+          17
+        ],
+        [
+          1,
+          7,
+          13,
+          17,
+          14
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "longest-country-constitution",
+      "source_row": 39085,
+      "family": "musique-family-000577",
+      "split": "train",
+      "question": "Which country is described as having the longest constitution?",
+      "pool_source_indices": [
+        1,
+        7,
+        13,
+        17,
+        14
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          1
+        ],
+        [
+          7
+        ],
+        [
+          13
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "India",
+      "opened_states": [
+        [],
+        [
+          1
+        ],
+        [
+          7
+        ],
+        [
+          13
+        ],
+        [
+          17,
+          14
+        ],
+        [
+          1,
+          7,
+          13,
+          17,
+          14
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "india-land-frontier",
+      "source_row": 39085,
+      "family": "musique-family-000577",
+      "split": "train",
+      "question": "What land-frontier length is given for India?",
+      "pool_source_indices": [
+        1,
+        7,
+        13,
+        17,
+        14
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          17
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "15,106.7 km (9,387 mi)",
+      "opened_states": [
+        [],
+        [
+          17
+        ],
+        [
+          1,
+          7,
+          13,
+          14
+        ],
+        [
+          1,
+          7,
+          13,
+          17,
+          14
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "pacific-album-performer",
+      "source_row": 6352,
+      "family": "musique-family-000844",
+      "split": "train",
+      "question": "Whose solo album is Pacific Ocean Blue?",
+      "pool_source_indices": [
+        19,
+        12,
+        5,
+        11
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          19
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Dennis Wilson",
+      "opened_states": [
+        [],
+        [
+          19
+        ],
+        [
+          12,
+          5,
+          11
+        ],
+        [
+          19,
+          12,
+          5,
+          11
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "dennis-father",
+      "source_row": 6352,
+      "family": "musique-family-000844",
+      "split": "train",
+      "question": "Who is explicitly named as Dennis Wilson's father?",
+      "pool_source_indices": [
+        19,
+        12,
+        5,
+        11
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Murry Wilson",
+      "opened_states": [
+        [],
+        [
+          12
+        ],
+        [
+          19,
+          5,
+          11
+        ],
+        [
+          19,
+          12,
+          5,
+          11
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "album-performer-father",
+      "source_row": 6352,
+      "family": "musique-family-000844",
+      "split": "train",
+      "question": "Who is the father of the performer of Pacific Ocean Blue?",
+      "pool_source_indices": [
+        19,
+        12,
+        5,
+        11
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          19,
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Murry Wilson",
+      "opened_states": [
+        [],
+        [
+          19,
+          12
+        ],
+        [
+          19
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          19,
+          12,
+          5,
+          11
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "mike-uncle",
+      "source_row": 6352,
+      "family": "musique-family-000844",
+      "split": "train",
+      "question": "Who is explicitly named as Mike Love's uncle?",
+      "pool_source_indices": [
+        19,
+        12,
+        5,
+        11
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Murry Wilson",
+      "opened_states": [
+        [],
+        [
+          12
+        ],
+        [
+          19,
+          5,
+          11
+        ],
+        [
+          19,
+          12,
+          5,
+          11
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "father-citizenship",
+      "source_row": 6352,
+      "family": "musique-family-000844",
+      "split": "train",
+      "question": "What is the citizenship of the father of the performer of Pacific Ocean Blue?",
+      "pool_source_indices": [
+        19,
+        12,
+        5,
+        11
+      ],
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "useful_partial_evidence": [
+        19,
+        12
+      ],
+      "expected_answer": null,
+      "opened_states": [
+        [],
+        [
+          19
+        ],
+        [
+          19,
+          12
+        ],
+        [
+          5,
+          11
+        ],
+        [
+          19,
+          12,
+          5,
+          11
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "broadcast-headquarters",
+      "source_row": 38572,
+      "family": "musique-family-000890",
+      "split": "train",
+      "question": "Which community contains Sinclair Broadcast Group's headquarters?",
+      "pool_source_indices": [
+        4,
+        10,
+        12,
+        15
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          4
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Hunt Valley",
+      "opened_states": [
+        [],
+        [
+          4
+        ],
+        [
+          10,
+          12,
+          15
+        ],
+        [
+          4,
+          10,
+          12,
+          15
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "broadcast-county",
+      "source_row": 38572,
+      "family": "musique-family-000890",
+      "split": "train",
+      "question": "Which county contains the community where Sinclair Broadcast Group is headquartered?",
+      "pool_source_indices": [
+        4,
+        10,
+        12,
+        15
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          4,
+          10
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Baltimore County",
+      "opened_states": [
+        [],
+        [
+          4,
+          10
+        ],
+        [
+          4
+        ],
+        [
+          12,
+          15
+        ],
+        [
+          4,
+          10,
+          12,
+          15
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "broadcast-county-seat",
+      "source_row": 38572,
+      "family": "musique-family-000890",
+      "split": "train",
+      "question": "What is the county seat of the county containing Sinclair Broadcast Group's headquarters?",
+      "pool_source_indices": [
+        4,
+        10,
+        12,
+        15
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          4,
+          10,
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Towson, Maryland",
+      "opened_states": [
+        [],
+        [
+          4,
+          10,
+          12
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          15
+        ],
+        [
+          4,
+          10,
+          12,
+          15
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "sheriff-seat",
+      "source_row": 38572,
+      "family": "musique-family-000890",
+      "split": "train",
+      "question": "Which county seat contains the courthouse headquarters of the Baltimore County Sheriff's Office?",
+      "pool_source_indices": [
+        4,
+        10,
+        12,
+        15
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          12
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Towson, Maryland",
+      "opened_states": [
+        [],
+        [
+          12
+        ],
+        [
+          4,
+          10,
+          15
+        ],
+        [
+          4,
+          10,
+          12,
+          15
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    },
+    {
+      "facet": "oil-acquirer",
+      "source_row": 38572,
+      "family": "musique-family-000890",
+      "split": "train",
+      "question": "Which company acquired Sinclair Oil Corporation in 1969?",
+      "pool_source_indices": [
+        4,
+        10,
+        12,
+        15
+      ],
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          15
+        ]
+      ],
+      "useful_partial_evidence": [],
+      "expected_answer": "Atlantic Richfield Company (ARCO)",
+      "opened_states": [
+        [],
+        [
+          15
+        ],
+        [
+          4,
+          10,
+          12
+        ],
+        [
+          4,
+          10,
+          12,
+          15
+        ]
+      ],
+      "scope": "Author-written training question using unchanged original source passages; not native benchmark QA."
+    }
+  ],
+  "scope": "Training-only facets on eight original train families. Four families are new to the 86-state BASE-start reviewed training set, but all were already in old C20 training; no unseen benchmark claim. Stable aliases within each facet; keep this data change separate from loss comparisons.",
+  "coverage": [
+    "complete/missing evidence",
+    "birth/death and same-name persons",
+    "future intended duration versus realized duration",
+    "country/organization/parent/subsidiary scope",
+    "single and alternative sufficient proofs",
+    "two/three-premise conjunctions",
+    "father versus uncle versus citizenship"
+  ],
+  "source_question_review": "Native ambiguous creator-child question remains masked; clear direct mother/painter facets do not repair or relabel that native question.",
+  "model_calls": 0,
+  "reviewer_is_independent": false
+}

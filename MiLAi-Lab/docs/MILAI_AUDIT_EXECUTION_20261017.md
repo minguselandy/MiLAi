@@ -82,3 +82,32 @@ exec session51424。实际进程和run.json均为RUNNING，已加载GPU；不是
 `artifacts/jev-reader/objective-pair-user-restart-v1/source-label-correction.json`
 明确实际提交为`aa8f97e2`；后续报告不得把占位文本当成真实版本，亦不因此重跑。
 待队列闭合后按新train_eval字段核对完整计量，再重冻结探针对应模型路径。
+
+## 来源审阅与独立语义变化准备
+
+按原C20训练顺序、在阅读新增正文前固定选择另4个训练家族（2个双支持、2个三支持），
+包含8行/160段落位置/95种标题正文。逐项核对原下载镜像的完整source对象，均相同；
+官方归档与镜像的全文等价性仍未证实。没有查看新测试标签或将开发失败移动进训练。
+
+新增来源问题包含：画作作者的妻子同时是某人的母亲，不唯一证明作者是其父亲，故该
+原问题5状态遮罩；Murry的父亲关系可见，却缺其国籍，不能由美国乐队推出国籍。
+印度海岸线有三种国家身份前提，可形成三条替代证明；Sinclair总部→Hunt Valley→
+Baltimore County→Towson的三段证据成立，保留county capital解释为county seat的限定。
+39原状态中34有监督、5遮罩，改标签22；所有模型可见输入保持不变。
+[来源选择](../data/manifests/jev-reader-source-qualified-v3-selection.json) ·
+[逐来源解释](../data/manifests/jev-reader-source-qualified-v3-annotations.json) ·
+[投影结果](../data/manifests/jev-reader-source-qualified-v3-summary.json)。
+
+另准备36个训练专用语义问题、155个明确读取状态，来自8个来源家族，非155个独立来源。
+包含原先16问题与新增20问题；新增覆盖计划五年合作/实际持续时长、单段/替代证明、
+父亲/叔父/国籍、海岸线/陆地边界、广播公司/同名石油公司等区别。标题和正文不改写，
+同一问题的候选别名在各状态保持一致，答案/证明只在离线metadata/gold中。
+新增4家族相对于86状态BASE-start训练集是新的，但它们早已存在于旧C20训练，不能
+声称全项目未见。仍只准备，未启动增强训练或宣称模型质量改善。
+[语义问题协议](../data/manifests/jev-reader-semantic-contrasts-v2-protocol.json) ·
+[完整输入核查](../data/manifests/jev-reader-semantic-contrasts-v2-summary.json)。
+
+监督与投影5项检查、Ruff/mypy、包DAG及工具边界通过；本次仅扩展离线训练数据工具，
+未改变公开Schema/API/权限/Canonical。标注助手不等于独立人工审阅。
+新的4模型呈现探针协议已重新绑定用户重启队列的最终checkpoint，保留原协议不执行：
+[重启后探针协议](../data/manifests/jev-reader-invariance-user-restart-v1-protocol.json)。

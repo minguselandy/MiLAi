@@ -1,0 +1,24 @@
+{
+  "facets": 36,
+  "states": 155,
+  "families": 8,
+  "new_model_calls": 0,
+  "training_started": false,
+  "scope": "Author-reviewed training-only semantic contrasts; not benchmark QA.",
+  "source_rows": 8,
+  "label_status_counts": {
+    "reviewed_missing_complement": 80,
+    "reviewed_proof_complete": 67,
+    "reviewed_pool_insufficient": 8
+  },
+  "tokenizer_positions": 95367,
+  "max_sequence_tokens": 933,
+  "truncated": 0,
+  "literal_source_text_and_action_bindings_verified": true,
+  "same_source_families_stay_train": true,
+  "interpretation": "155 states from36 author-written facets,8 original train families; not155 independent sources. Four families are additional to86-state BASE-start reviewed cohort, already present in older C20 training. No source truth is inferred from old answer keys.",
+  "compute": {
+    "wall_seconds": 3.4382089730352163,
+    "cpu_seconds": 3.440754418000001
+  }
+}

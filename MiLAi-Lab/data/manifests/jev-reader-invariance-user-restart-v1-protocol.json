@@ -1,0 +1,60 @@
+{
+  "name": "jev-reader-invariance-user-restart-v1",
+  "purpose": "Audit fixed identifiers, candidate order, action order and a neutral title-frame on the same exposed source-reviewed dev prefixes.",
+  "data": "artifacts/jev-reader/source-qualified-label-pair-v1/data/reviewed_labels/dev.jsonl",
+  "models": [
+    {
+      "seed": 0,
+      "objective": "soft-ce",
+      "checkpoint": "artifacts/jev-reader/objective-pair-user-restart-v1/runs/0/soft-ce/checkpoint"
+    },
+    {
+      "seed": 0,
+      "objective": "set",
+      "checkpoint": "artifacts/jev-reader/objective-pair-user-restart-v1/runs/0/set/checkpoint"
+    },
+    {
+      "seed": 1,
+      "objective": "soft-ce",
+      "checkpoint": "artifacts/jev-reader/objective-pair-user-restart-v1/runs/1/soft-ce/checkpoint"
+    },
+    {
+      "seed": 1,
+      "objective": "set",
+      "checkpoint": "artifacts/jev-reader/objective-pair-user-restart-v1/runs/1/set/checkpoint"
+    }
+  ],
+  "variants": [
+    "original",
+    "aliases",
+    "candidate_order",
+    "option_order",
+    "title_frame"
+  ],
+  "rows": 30,
+  "labelled_rows": 22,
+  "labelled_families": 3,
+  "forwards": 600,
+  "physical_gpu": 2,
+  "max_len": 8192,
+  "head_max_len": 512,
+  "seed": 20261017,
+  "budget": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+  "scheduling": "Run only after the original four objective jobs are terminal; serial checkpoints, no training, no automatic retry.",
+  "report": [
+    "canonical first-action agreement",
+    "labelled acceptance by semantic status",
+    "best-open agreement and complement hit",
+    "false sufficient/exhaustion",
+    "whole open ranking changes",
+    "input tokens and actual compute"
+  ],
+  "limits": [
+    "Same exposed dev prefixes, not policy QA or independent confirmation.",
+    "Title-frame adds Passage titled: to each unchanged title; not a substantive paraphrase robustness claim.",
+    "Candidate order and option order are separate interventions.",
+    "All four final-epoch models included; no outcome-based selection.",
+    "No source/body removal, SHA or alternative fingerprints, test loading, HTTP, new ledger, service/default changes."
+  ],
+  "supersedes": "Original invariance-v1 was prepared but never run; original training cohort was interrupted by user request."
+}
