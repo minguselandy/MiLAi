@@ -27,12 +27,14 @@ from train_laya_matched import audit
 
 
 def event_weights(rows: list[dict[str, Any]]) -> list[float]:
-    counts = Counter((r["metadata"]["family"], r["metadata"]["row"]) for r in rows)
-    events: dict[str, set[int]] = defaultdict(set)
+    keys = [(r["metadata"]["family"],
+             r["metadata"].get("training_event", r["metadata"]["row"])) for r in rows]
+    counts = Counter(keys)
+    events: dict[str, set[int | str]] = defaultdict(set)
     for family, event in counts:
         events[family].add(event)
-    return [len(rows) / len(events) / len(events[r["metadata"]["family"]])
-            / counts[r["metadata"]["family"], r["metadata"]["row"]] for r in rows]
+    return [len(rows) / len(events) / len(events[family]) / counts[family, event]
+            for family, event in keys]
 
 
 def decision_loss(logits: Any, target: Any, mask: Any, objective: str) -> Any:

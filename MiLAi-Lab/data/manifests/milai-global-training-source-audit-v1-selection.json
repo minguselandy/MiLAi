@@ -1,0 +1,347 @@
+{
+  "name": "milai-global-training-source-audit-v1",
+  "status": "METADATA_SELECTED_BEFORE_SOURCE_REVIEW",
+  "population": "data/manifests/milai-global-training-population-v1.json",
+  "seed": 20261017,
+  "rule": "Uniform shuffle within family-max-hop strata2/3/4;8families perstratum, thenone eligible question ID chosen uniformly per family and all its jointly included source rows. No model output or failure case selection.",
+  "selected": [
+    {
+      "family": "musique-family-000068",
+      "max_hops": 2,
+      "question_id": "2hop__115615_120682",
+      "source_rows": [
+        9324,
+        16106
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000148",
+      "max_hops": 2,
+      "question_id": "2hop__589649_83687",
+      "source_rows": [
+        12065,
+        12568
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000002",
+      "max_hops": 2,
+      "question_id": "2hop__329904_10038",
+      "source_rows": [
+        26964,
+        34770
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000170",
+      "max_hops": 2,
+      "question_id": "2hop__128772_745471",
+      "source_rows": [
+        9812,
+        10100
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000826",
+      "max_hops": 2,
+      "question_id": "2hop__96945_155490",
+      "source_rows": [
+        25256
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000813",
+      "max_hops": 2,
+      "question_id": "2hop__92840_542979",
+      "source_rows": [
+        24139,
+        38308
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": true
+    },
+    {
+      "family": "musique-family-000058",
+      "max_hops": 2,
+      "question_id": "2hop__109254_37364",
+      "source_rows": [
+        5418,
+        33747
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": true
+    },
+    {
+      "family": "musique-family-000420",
+      "max_hops": 2,
+      "question_id": "2hop__70236_84254",
+      "source_rows": [
+        2563,
+        36500
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000878",
+      "max_hops": 3,
+      "question_id": "3hop1__428944_194186_611260",
+      "source_rows": [
+        38693,
+        38872
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000855",
+      "max_hops": 3,
+      "question_id": "3hop1__221048_280519_81233",
+      "source_rows": [
+        19509
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000739",
+      "max_hops": 3,
+      "question_id": "3hop2__360318_64618_807056",
+      "source_rows": [
+        32488,
+        37552
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000881",
+      "max_hops": 3,
+      "question_id": "3hop1__606072_383061_565778",
+      "source_rows": [
+        1048,
+        20611
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000847",
+      "max_hops": 3,
+      "question_id": "3hop1__179514_89345_618532",
+      "source_rows": [
+        37121,
+        37786
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000882",
+      "max_hops": 3,
+      "question_id": "3hop1__615885_623201_357168",
+      "source_rows": [
+        3645,
+        9378
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000840",
+      "max_hops": 3,
+      "question_id": "3hop1__415702_226789_844905",
+      "source_rows": [
+        683,
+        4497
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": true
+    },
+    {
+      "family": "musique-family-000025",
+      "max_hops": 3,
+      "question_id": "3hop1__150746_803683_87372",
+      "source_rows": [
+        32433,
+        36742
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": true
+    },
+    {
+      "family": "musique-family-000000",
+      "max_hops": 4,
+      "question_id": "4hop1__642304_829000_51791_796745",
+      "source_rows": [
+        2466,
+        18834
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": true
+    },
+    {
+      "family": "musique-family-000008",
+      "max_hops": 4,
+      "question_id": "4hop3__695568_769559_129926_718885",
+      "source_rows": [
+        23338
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000200",
+      "max_hops": 4,
+      "question_id": "4hop1__129710_74386_444296_179769",
+      "source_rows": [
+        34957,
+        38399
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000083",
+      "max_hops": 4,
+      "question_id": "4hop1__187479_301282_65293_48285",
+      "source_rows": [
+        21819,
+        23165
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": true
+    },
+    {
+      "family": "musique-family-000206",
+      "max_hops": 4,
+      "question_id": "4hop1__531733_185356_328647_21625",
+      "source_rows": [
+        4600,
+        12750
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000158",
+      "max_hops": 4,
+      "question_id": "4hop3__778278_796114_88276_242202",
+      "source_rows": [
+        10687,
+        22014
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": true
+    },
+    {
+      "family": "musique-family-000895",
+      "max_hops": 4,
+      "question_id": "4hop3__484585_769404_544850_170163",
+      "source_rows": [
+        7101,
+        25143
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    },
+    {
+      "family": "musique-family-000045",
+      "max_hops": 4,
+      "question_id": "4hop1__133590_631695_74047_4239",
+      "source_rows": [
+        19075
+      ],
+      "original_roles": {
+        "read_decisions": "train",
+        "bottleneck": "train"
+      },
+      "previous_registered_sample_or_preview": false
+    }
+  ],
+  "families": 24,
+  "source_rows": 44,
+  "selection_scope": "Stratified training-source audit, not a random estimate of unweighted corpus noise and not an evaluation split. The original protected family union is excluded from new training.",
+  "source_reviewed": 0,
+  "model_calls": 0,
+  "sha_checks": 0
+}

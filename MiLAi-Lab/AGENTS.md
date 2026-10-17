@@ -1,3 +1,35 @@
+# CURRENT: user requires global training/generalization — 2026-10-17
+
+User explicitly redirects training toward global analysis, generality and
+transfer, not repeated tuning of individual problems. Full goal ACTIVE.
+All owned model jobs are CLOSED now. Do not resume micro-cohorts or select a
+route/epoch/seed from exposed7questions/22prefixstates. The prepared155state
+semantic-fit-v1 was superseded BEFORE dispatch; no fit training or queued driver.
+Its data are only review inputs for the global design, not an authorized next run.
+Other worktree remains USER-PAUSED; latestinspection finds all35previous group2432756
+PIDs ABSENT, while olddriver/run files are staleRUNNING/TRAINING. Do notresume or
+replace its tasks; exitcause notestablished. Protected BGE/7860 unchanged.
+Read docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md first for next work.
+Both39876rowfamilymaps agree in family/questionidentity but disagree in splits.
+New training population=jointlyincludedtrainintersection17975rows/444families,
+notlocaltrain alone. Old155includes000577 classifiedtestinsibling; quarantine it.
+63unregistered test-protectedfamilies are only potential eligibility, not certified
+blind data. No newtestbody access. NoSHA/contentfingerprints/subagents/newledger.
+Global source-audit metadata fixed24families(8eachmaxhop2/3/4),44rows/880paragraphs,
+no model-outcome selection. Inputs under artifacts/jev-reader/global-training-design-v1;
+source review NOT YET DONE. First perform population-level source/label review,
+then freeze coherent task coverage, family partitions, >=3seeds and quality/cost
+protocol. Preserve strongD0/simple retrieval. No per-case keyword/runtime patches.
+Latest completed diagnostics: shuffletrain50/86,30/86;dev8/22,9/22 with0complement/
+sufficient;300probes mostlyconstantstop. QA70positions/34fresh+36reuse,78397tokens,
+56newcontrollerforwards142997tokens,0newunknown. Shufflefixed4F1.50vsBM25.25 onONLY
+7exposedquestions/2source-answerablecases; adaptiveopens0/F1zero. Do not promote.
+Two actualReaderresponses(4methodpositions) violatedemptyanswer-on-insufficient.
+Allfirstresponses retained/read; root review notindependentJudge. Summary manifests
+and full execution report preserve controls/costs. No push/merge/fullremoteCI.
+Generictraining_event weight support has10tests/Ruff/mypy/DAG/toolsboundaryPASS;
+source5b151962 remains the closedshuffletraining identity, newer code nottrained.
+
 # CURRENT: policy QA CLOSED, option-shuffle contrast LIVE — 2026-10-17
 
 Full audit ACTIVE/incomplete. Other worktree group2432756 remains user-paused,

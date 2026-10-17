@@ -1,0 +1,2672 @@
+{
+  "status": "CLOSED_RECEIPTS_AND_NATIVE_SCORES_RECONCILED",
+  "run": {
+    "status": "COMPLETED",
+    "phase": "predict",
+    "planned": 70,
+    "completed": 70,
+    "known_failures": 0,
+    "fresh_reader_attempts": 34,
+    "reused_reader_outputs": 36,
+    "known_failed_reader_calls": 0,
+    "actual_wall_seconds": 320.8475008159876,
+    "actual_cpu_seconds": 1.2949370659999992,
+    "unique_reader_inputs": 34
+  },
+  "source_version": "96979e99",
+  "arms": {
+    "bm25_k4": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.25,
+        "answer_f1_with_missing_zero": 0.25,
+        "support_f1_with_missing_zero": 0.16666666666666666,
+        "answerability_correct": 4,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 2,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.0,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 4201,
+        "reader_completion_tokens": 9836,
+        "reader_total_tokens": 14037,
+        "reader_first_call_wall_seconds": 64.21534190978855,
+        "reader_positions": 7,
+        "fresh_reader_calls": 1,
+        "reused_reader_outputs": 6,
+        "controller_input_tokens": 0,
+        "controller_model_wall_seconds": 0,
+        "controller_decision_positions": 0,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 7,
+        "reader_plus_controller_input_tokens": 4201,
+        "reader_plus_controller_total_tokens": 14037,
+        "warm_component_wall_sum_seconds": 64.23127266019583
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 4201,
+        "reader_completion_tokens": 9836,
+        "reader_total_tokens": 14037,
+        "reader_first_call_wall_seconds": 64.21534190978855,
+        "reader_positions": 7,
+        "fresh_reader_calls": 1,
+        "reused_reader_outputs": 6,
+        "controller_input_tokens": 0,
+        "controller_model_wall_seconds": 0,
+        "controller_decision_positions": 0,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "4": 7
+      },
+      "stop_reasons": {
+        "fixed_k": 7
+      }
+    },
+    "full20": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.5,
+        "answer_f1_with_missing_zero": 0.5,
+        "support_f1_with_missing_zero": 0.41666666666666663,
+        "answerability_correct": 5,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 4,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.333,
+          "answer_em": 0.333,
+          "support_f1": 0.333,
+          "group_answer_sufficiency_f1": 0.333,
+          "group_support_sufficiency_f1": 0.333
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.333
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 16490,
+        "reader_completion_tokens": 12543,
+        "reader_total_tokens": 29033,
+        "reader_first_call_wall_seconds": 83.11905265040696,
+        "reader_positions": 7,
+        "fresh_reader_calls": 7,
+        "reused_reader_outputs": 0,
+        "controller_input_tokens": 0,
+        "controller_model_wall_seconds": 0,
+        "controller_decision_positions": 0,
+        "opened_documents": 140,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 7,
+        "reader_plus_controller_input_tokens": 16490,
+        "reader_plus_controller_total_tokens": 29033,
+        "warm_component_wall_sum_seconds": 83.13498340081424
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 16490,
+        "reader_completion_tokens": 12543,
+        "reader_total_tokens": 29033,
+        "reader_first_call_wall_seconds": 83.11905265040696,
+        "reader_positions": 7,
+        "fresh_reader_calls": 7,
+        "reused_reader_outputs": 0,
+        "controller_input_tokens": 0,
+        "controller_model_wall_seconds": 0,
+        "controller_decision_positions": 0,
+        "opened_documents": 140,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "20": 7
+      },
+      "stop_reasons": {
+        "fixed_k": 7
+      }
+    },
+    "0-soft-ce_adaptive": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.0,
+        "answer_f1_with_missing_zero": 0.0,
+        "support_f1_with_missing_zero": 0.0,
+        "answerability_correct": 3,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.0,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 893,
+        "reader_completion_tokens": 6483,
+        "reader_total_tokens": 7376,
+        "reader_first_call_wall_seconds": 41.914098682813346,
+        "reader_positions": 7,
+        "fresh_reader_calls": 3,
+        "reused_reader_outputs": 4,
+        "controller_input_tokens": 26250,
+        "controller_model_wall_seconds": 1.822921053506434,
+        "controller_decision_positions": 11,
+        "opened_documents": 4,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 5,
+        "reader_plus_controller_input_tokens": 27143,
+        "reader_plus_controller_total_tokens": 33626,
+        "warm_component_wall_sum_seconds": 43.75295048672706
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 1099,
+        "reader_completion_tokens": 9421,
+        "reader_total_tokens": 10520,
+        "reader_first_call_wall_seconds": 60.875183266587555,
+        "reader_positions": 7,
+        "fresh_reader_calls": 3,
+        "reused_reader_outputs": 4,
+        "controller_input_tokens": 26250,
+        "controller_model_wall_seconds": 1.822921053506434,
+        "controller_decision_positions": 11,
+        "opened_documents": 4,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "2": 2,
+        "0": 5
+      },
+      "stop_reasons": {
+        "stop_exhausted": 7
+      }
+    },
+    "0-soft-ce_k4": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.25,
+        "answer_f1_with_missing_zero": 0.25,
+        "support_f1_with_missing_zero": 0.16666666666666666,
+        "answerability_correct": 4,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 2,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.0,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 4201,
+        "reader_completion_tokens": 9836,
+        "reader_total_tokens": 14037,
+        "reader_first_call_wall_seconds": 64.21534190978855,
+        "reader_positions": 7,
+        "fresh_reader_calls": 3,
+        "reused_reader_outputs": 4,
+        "controller_input_tokens": 71499,
+        "controller_model_wall_seconds": 4.422781964763999,
+        "controller_decision_positions": 28,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 7,
+        "reader_plus_controller_input_tokens": 75700,
+        "reader_plus_controller_total_tokens": 85536,
+        "warm_component_wall_sum_seconds": 68.65405462495983
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 4201,
+        "reader_completion_tokens": 9836,
+        "reader_total_tokens": 14037,
+        "reader_first_call_wall_seconds": 64.21534190978855,
+        "reader_positions": 7,
+        "fresh_reader_calls": 3,
+        "reused_reader_outputs": 4,
+        "controller_input_tokens": 71499,
+        "controller_model_wall_seconds": 4.422781964763999,
+        "controller_decision_positions": 28,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "4": 7
+      },
+      "stop_reasons": {
+        "read_budget": 7
+      }
+    },
+    "1-soft-ce_adaptive": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.25,
+        "answer_f1_with_missing_zero": 0.25,
+        "support_f1_with_missing_zero": 0.41666666666666663,
+        "answerability_correct": 4,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.333,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 1201,
+        "reader_completion_tokens": 6180,
+        "reader_total_tokens": 7381,
+        "reader_first_call_wall_seconds": 39.99770781584084,
+        "reader_positions": 7,
+        "fresh_reader_calls": 4,
+        "reused_reader_outputs": 3,
+        "controller_input_tokens": 37520,
+        "controller_model_wall_seconds": 2.102338799275458,
+        "controller_decision_positions": 16,
+        "opened_documents": 9,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 5,
+        "reader_plus_controller_input_tokens": 38721,
+        "reader_plus_controller_total_tokens": 44901,
+        "warm_component_wall_sum_seconds": 42.11597736552358
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 1462,
+        "reader_completion_tokens": 9095,
+        "reader_total_tokens": 10557,
+        "reader_first_call_wall_seconds": 58.813330966979265,
+        "reader_positions": 7,
+        "fresh_reader_calls": 4,
+        "reused_reader_outputs": 3,
+        "controller_input_tokens": 37520,
+        "controller_model_wall_seconds": 2.102338799275458,
+        "controller_decision_positions": 16,
+        "opened_documents": 9,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "3": 2,
+        "1": 3,
+        "0": 2
+      },
+      "stop_reasons": {
+        "stop_sufficient": 2,
+        "stop_exhausted": 5
+      }
+    },
+    "1-soft-ce_k4": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.25,
+        "answer_f1_with_missing_zero": 0.25,
+        "support_f1_with_missing_zero": 0.16666666666666666,
+        "answerability_correct": 4,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 2,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.0,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 4201,
+        "reader_completion_tokens": 9836,
+        "reader_total_tokens": 14037,
+        "reader_first_call_wall_seconds": 64.21534190978855,
+        "reader_positions": 7,
+        "fresh_reader_calls": 2,
+        "reused_reader_outputs": 5,
+        "controller_input_tokens": 71499,
+        "controller_model_wall_seconds": 4.227980873547494,
+        "controller_decision_positions": 28,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 7,
+        "reader_plus_controller_input_tokens": 75700,
+        "reader_plus_controller_total_tokens": 85536,
+        "warm_component_wall_sum_seconds": 68.45925353374332
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 4201,
+        "reader_completion_tokens": 9836,
+        "reader_total_tokens": 14037,
+        "reader_first_call_wall_seconds": 64.21534190978855,
+        "reader_positions": 7,
+        "fresh_reader_calls": 2,
+        "reused_reader_outputs": 5,
+        "controller_input_tokens": 71499,
+        "controller_model_wall_seconds": 4.227980873547494,
+        "controller_decision_positions": 28,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "4": 7
+      },
+      "stop_reasons": {
+        "read_budget": 7
+      }
+    },
+    "0-shuffled-ce_adaptive": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.0,
+        "answer_f1_with_missing_zero": 0.0,
+        "support_f1_with_missing_zero": 0.0,
+        "answerability_correct": 3,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.0,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 408,
+        "reader_completion_tokens": 5450,
+        "reader_total_tokens": 5858,
+        "reader_first_call_wall_seconds": 35.22552896104753,
+        "reader_positions": 7,
+        "fresh_reader_calls": 3,
+        "reused_reader_outputs": 4,
+        "controller_input_tokens": 18000,
+        "controller_model_wall_seconds": 1.3083214601501822,
+        "controller_decision_positions": 7,
+        "opened_documents": 0,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 4,
+        "reader_plus_controller_input_tokens": 18408,
+        "reader_plus_controller_total_tokens": 23858,
+        "warm_component_wall_sum_seconds": 36.54978117160499
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 711,
+        "reader_completion_tokens": 9773,
+        "reader_total_tokens": 10484,
+        "reader_first_call_wall_seconds": 63.14557584282011,
+        "reader_positions": 7,
+        "fresh_reader_calls": 3,
+        "reused_reader_outputs": 4,
+        "controller_input_tokens": 18000,
+        "controller_model_wall_seconds": 1.3083214601501822,
+        "controller_decision_positions": 7,
+        "opened_documents": 0,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "0": 7
+      },
+      "stop_reasons": {
+        "stop_exhausted": 7
+      }
+    },
+    "0-shuffled-ce_k4": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.5,
+        "answer_f1_with_missing_zero": 0.5,
+        "support_f1_with_missing_zero": 0.41666666666666663,
+        "answerability_correct": 5,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 1,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.333,
+          "answer_em": 0.333,
+          "support_f1": 0.333,
+          "group_answer_sufficiency_f1": 0.333,
+          "group_support_sufficiency_f1": 0.333
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.333
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 4355,
+        "reader_completion_tokens": 9525,
+        "reader_total_tokens": 13880,
+        "reader_first_call_wall_seconds": 62.11940647289157,
+        "reader_positions": 7,
+        "fresh_reader_calls": 7,
+        "reused_reader_outputs": 0,
+        "controller_input_tokens": 71498,
+        "controller_model_wall_seconds": 4.2451465195044875,
+        "controller_decision_positions": 28,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 7,
+        "reader_plus_controller_input_tokens": 75853,
+        "reader_plus_controller_total_tokens": 85378,
+        "warm_component_wall_sum_seconds": 66.38048374280334
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 4355,
+        "reader_completion_tokens": 9525,
+        "reader_total_tokens": 13880,
+        "reader_first_call_wall_seconds": 62.11940647289157,
+        "reader_positions": 7,
+        "fresh_reader_calls": 7,
+        "reused_reader_outputs": 0,
+        "controller_input_tokens": 71498,
+        "controller_model_wall_seconds": 4.2451465195044875,
+        "controller_decision_positions": 28,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "4": 7
+      },
+      "stop_reasons": {
+        "read_budget": 7
+      }
+    },
+    "1-shuffled-ce_adaptive": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.0,
+        "answer_f1_with_missing_zero": 0.0,
+        "support_f1_with_missing_zero": 0.0,
+        "answerability_correct": 3,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 0,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.0,
+          "answer_em": 0.0,
+          "support_f1": 0.0,
+          "group_answer_sufficiency_f1": 0.0,
+          "group_support_sufficiency_f1": 0.0
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.0
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 408,
+        "reader_completion_tokens": 5450,
+        "reader_total_tokens": 5858,
+        "reader_first_call_wall_seconds": 35.22552896104753,
+        "reader_positions": 7,
+        "fresh_reader_calls": 0,
+        "reused_reader_outputs": 7,
+        "controller_input_tokens": 18000,
+        "controller_model_wall_seconds": 1.2466790601611137,
+        "controller_decision_positions": 7,
+        "opened_documents": 0,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 4,
+        "reader_plus_controller_input_tokens": 18408,
+        "reader_plus_controller_total_tokens": 23858,
+        "warm_component_wall_sum_seconds": 36.48813877161592
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 711,
+        "reader_completion_tokens": 9773,
+        "reader_total_tokens": 10484,
+        "reader_first_call_wall_seconds": 63.14557584282011,
+        "reader_positions": 7,
+        "fresh_reader_calls": 0,
+        "reused_reader_outputs": 7,
+        "controller_input_tokens": 18000,
+        "controller_model_wall_seconds": 1.2466790601611137,
+        "controller_decision_positions": 7,
+        "opened_documents": 0,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "0": 7
+      },
+      "stop_reasons": {
+        "stop_exhausted": 7
+      }
+    },
+    "1-shuffled-ce_k4": {
+      "native": {
+        "cases": 7,
+        "missing": [],
+        "answerable_cases": 4,
+        "valid_answerable": 4,
+        "answer_em_with_missing_zero": 0.5,
+        "answer_f1_with_missing_zero": 0.5,
+        "support_f1_with_missing_zero": 0.41666666666666663,
+        "answerability_correct": 5,
+        "reference_proof_in_pool": 4,
+        "reference_proof_delivered": 3,
+        "planned_pairs": 3,
+        "valid_pairs": 3,
+        "native_metrics_valid_pairs": {
+          "answer_f1": 0.333,
+          "answer_em": 0.333,
+          "support_f1": 0.333,
+          "group_answer_sufficiency_f1": 0.333,
+          "group_support_sufficiency_f1": 0.333
+        },
+        "group_answer_sufficiency_f1_with_missing_zero": 0.333
+      },
+      "standalone_cost": {
+        "reader_prompt_tokens": 4344,
+        "reader_completion_tokens": 9810,
+        "reader_total_tokens": 14154,
+        "reader_first_call_wall_seconds": 64.07556017488241,
+        "reader_positions": 7,
+        "fresh_reader_calls": 4,
+        "reused_reader_outputs": 3,
+        "controller_input_tokens": 71499,
+        "controller_model_wall_seconds": 4.237589840777218,
+        "controller_decision_positions": 28,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538,
+        "standalone_unique_reader_calls": 7,
+        "reader_plus_controller_input_tokens": 75843,
+        "reader_plus_controller_total_tokens": 85653,
+        "warm_component_wall_sum_seconds": 68.32908076606691
+      },
+      "per_position_cost": {
+        "reader_prompt_tokens": 4344,
+        "reader_completion_tokens": 9810,
+        "reader_total_tokens": 14154,
+        "reader_first_call_wall_seconds": 64.07556017488241,
+        "reader_positions": 7,
+        "fresh_reader_calls": 4,
+        "reused_reader_outputs": 3,
+        "controller_input_tokens": 71499,
+        "controller_model_wall_seconds": 4.237589840777218,
+        "controller_decision_positions": 28,
+        "opened_documents": 28,
+        "common_retrieval_wall_seconds": 0.015930750407278538
+      },
+      "opened_count_histogram": {
+        "4": 7
+      },
+      "stop_reasons": {
+        "read_budget": 7
+      }
+    }
+  },
+  "actual_reader_usage": {
+    "prompt_tokens": 29433,
+    "completion_tokens": 48964,
+    "total_tokens": 78397,
+    "generation_responses": 34
+  },
+  "ledger_differences": {
+    "generation_token_difference": 0,
+    "generation_request_difference": 0,
+    "embedding_token_delta": 0,
+    "generation_new_unknown": 0,
+    "embedding_new_unknown": 0
+  },
+  "literal_reader_inputs_verified": 70,
+  "semantic_format_issues": [
+    {
+      "arm": "bm25_k4",
+      "case": "row-28960",
+      "answer": {
+        "answer": "answerable: false\nanswer: \"\"",
+        "answerable": false,
+        "support_ids": []
+      },
+      "issue": "insufficient_evidence_requires_empty_answer"
+    },
+    {
+      "arm": "0-soft-ce_k4",
+      "case": "row-28960",
+      "answer": {
+        "answer": "answerable: false\nanswer: \"\"",
+        "answerable": false,
+        "support_ids": []
+      },
+      "issue": "insufficient_evidence_requires_empty_answer"
+    },
+    {
+      "arm": "1-soft-ce_k4",
+      "case": "row-28960",
+      "answer": {
+        "answer": "answerable: false\nanswer: \"\"",
+        "answerable": false,
+        "support_ids": []
+      },
+      "issue": "insufficient_evidence_requires_empty_answer"
+    },
+    {
+      "arm": "0-shuffled-ce_k4",
+      "case": "row-12523",
+      "answer": {
+        "answer": "answerable=false\nanswer=\nThe supplied documents are insufficient.\nIDs: p1, p2, p3, p4 (None contain the required information)",
+        "answerable": false,
+        "support_ids": []
+      },
+      "issue": "insufficient_evidence_requires_empty_answer"
+    }
+  ],
+  "paired_positive_families": [],
+  "statistical_scope": "Only four exposed source families; report literal per-case comparisons, no significance claim.",
+  "case_comparisons": [
+    {
+      "id": "row-866",
+      "family": "musique-family-000138",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "full20": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "0-soft-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "0-soft-ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "1-soft-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "1-soft-ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "0-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "0-shuffled-ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-3445",
+      "family": "musique-family-000023",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "full20": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "0-soft-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "0-soft-ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "1-soft-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "1-soft-ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        },
+        "0-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "0-shuffled-ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_k4": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-12523",
+      "family": "musique-family-000583",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "full20": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "0-soft-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "0-soft-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "1-soft-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "1-soft-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "0-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "0-shuffled-ce_k4": {
+          "answer": "answerable=false\nanswer=\nThe supplied documents are insufficient.\nIDs: p1, p2, p3, p4 (None contain the required information)",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-14496",
+      "family": "musique-family-000138",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "full20": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "0-soft-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "0-soft-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "1-soft-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "1-soft-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "0-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "0-shuffled-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "1-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-27448",
+      "family": "musique-family-000023",
+      "answerable": false,
+      "arms": {
+        "bm25_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "full20": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "0-soft-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "0-soft-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "1-soft-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "1-soft-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "0-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "0-shuffled-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        },
+        "1-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_k4": {
+          "answer": "",
+          "f1": null,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-28960",
+      "family": "musique-family-000583",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "answerable: false\nanswer: \"\"",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "full20": {
+          "answer": "30,000",
+          "f1": 1.0,
+          "reference_support_delivered": true
+        },
+        "0-soft-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "0-soft-ce_k4": {
+          "answer": "answerable: false\nanswer: \"\"",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "1-soft-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "1-soft-ce_k4": {
+          "answer": "answerable: false\nanswer: \"\"",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "0-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "0-shuffled-ce_k4": {
+          "answer": "30000",
+          "f1": 1.0,
+          "reference_support_delivered": true
+        },
+        "1-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_k4": {
+          "answer": "30000",
+          "f1": 1.0,
+          "reference_support_delivered": true
+        }
+      }
+    },
+    {
+      "id": "row-36340",
+      "family": "musique-family-000135",
+      "answerable": true,
+      "arms": {
+        "bm25_k4": {
+          "answer": "Prince of Wales",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "full20": {
+          "answer": "Prince of Wales",
+          "f1": 1.0,
+          "reference_support_delivered": true
+        },
+        "0-soft-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "0-soft-ce_k4": {
+          "answer": "Prince of Wales",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "1-soft-ce_adaptive": {
+          "answer": "Prince of Wales",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "1-soft-ce_k4": {
+          "answer": "Prince of Wales",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "0-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "0-shuffled-ce_k4": {
+          "answer": "Prince of Wales",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_adaptive": {
+          "answer": "",
+          "f1": 0.0,
+          "reference_support_delivered": false
+        },
+        "1-shuffled-ce_k4": {
+          "answer": "Prince of Wales",
+          "f1": 1.0,
+          "reference_support_delivered": false
+        }
+      }
+    }
+  ],
+  "cost_scope": "Standalone costs include reused first responses and cached controller forwards; identical Reader inputs within each arm are charged once. Gross per-position costs are separate. Actual ledger charges each shared call once. Encoder input tokens and Reader generated tokens are distinct workloads. Warm component sum excludes cold load and unmeasured orchestration/review costs; it is not measured standalone end-to-end latency.",
+  "execution": {
+    "status": "COMPLETED",
+    "pid": 2634412,
+    "source_version": "96979e99",
+    "stages": [
+      {
+        "name": "0-shuffled-ce",
+        "returncode": 0,
+        "wall_seconds": 11.98348054010421
+      },
+      {
+        "name": "0-shuffled-ce-k4",
+        "returncode": 0,
+        "wall_seconds": 11.029371610842645
+      },
+      {
+        "name": "1-shuffled-ce",
+        "returncode": 0,
+        "wall_seconds": 11.228473471477628
+      },
+      {
+        "name": "1-shuffled-ce-k4",
+        "returncode": 0,
+        "wall_seconds": 11.252815131098032
+      },
+      {
+        "name": "preview",
+        "returncode": 0,
+        "wall_seconds": 2.622423351742327
+      },
+      {
+        "name": "reader",
+        "returncode": 0,
+        "wall_seconds": 322.3995840298012
+      },
+      {
+        "name": "score",
+        "returncode": 0,
+        "wall_seconds": 1.9212450366467237
+      }
+    ],
+    "automatic_retry": false,
+    "started_epoch": 1792203559.664986,
+    "active": {
+      "stage": "score",
+      "pid": 2659820
+    },
+    "finished_epoch": 1792203932.1132557
+  },
+  "source_review": {
+    "bm25_k4": {
+      "counts": {
+        "format_valid": 6,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 1,
+        "supported_answer_value": 1
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            9,
+            3,
+            15,
+            2
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            2,
+            12,
+            19,
+            14
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            1,
+            3,
+            9,
+            11
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            7,
+            17,
+            14,
+            6
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            1,
+            3,
+            13,
+            17
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            16,
+            12,
+            7,
+            14
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "answerable: false\nanswer: \"\"",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": false
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            14,
+            6,
+            3,
+            16
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "Prince of Wales",
+            "answerable": true,
+            "support_ids": [
+              "p0"
+            ]
+          },
+          "source_assessment": "SUPPORTED_ANSWER",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    },
+    "full20": {
+      "counts": {
+        "format_valid": 7,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 2,
+        "supported_answer_value": 2,
+        "approximation_omitted": 1
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            9,
+            3,
+            15,
+            2,
+            14,
+            4,
+            7,
+            1,
+            17,
+            6,
+            8,
+            10,
+            18,
+            12,
+            19,
+            0,
+            13,
+            5,
+            11,
+            16
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            2,
+            12,
+            19,
+            14,
+            3,
+            15,
+            10,
+            6,
+            13,
+            1,
+            5,
+            17,
+            9,
+            18,
+            11,
+            4,
+            0,
+            16,
+            7,
+            8
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            1,
+            3,
+            9,
+            11,
+            13,
+            17,
+            5,
+            8,
+            19,
+            4,
+            18,
+            2,
+            10,
+            6,
+            16,
+            7,
+            0,
+            15,
+            14,
+            12
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            7,
+            17,
+            14,
+            6,
+            0,
+            4,
+            5,
+            18,
+            10,
+            3,
+            9,
+            16,
+            19,
+            11,
+            15,
+            8,
+            12,
+            1,
+            2,
+            13
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": [
+              "p0"
+            ]
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            1,
+            3,
+            13,
+            17,
+            15,
+            2,
+            4,
+            6,
+            11,
+            9,
+            7,
+            8,
+            16,
+            18,
+            5,
+            0,
+            12,
+            19,
+            14,
+            10
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            16,
+            12,
+            7,
+            14,
+            10,
+            9,
+            15,
+            4,
+            2,
+            18,
+            1,
+            3,
+            8,
+            13,
+            0,
+            19,
+            5,
+            17,
+            11,
+            6
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "30,000",
+            "answerable": true,
+            "support_ids": [
+              "p0",
+              "p4"
+            ]
+          },
+          "source_assessment": "SUPPORTED_VALUE_APPROXIMATION_OMITTED",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            14,
+            6,
+            3,
+            16,
+            8,
+            18,
+            2,
+            4,
+            9,
+            13,
+            7,
+            11,
+            1,
+            5,
+            10,
+            17,
+            15,
+            0,
+            12,
+            19
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "fixed_k",
+          "answer": {
+            "answer": "Prince of Wales",
+            "answerable": true,
+            "support_ids": [
+              "p0"
+            ]
+          },
+          "source_assessment": "SUPPORTED_ANSWER",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    },
+    "0-soft-ce_adaptive": {
+      "counts": {
+        "format_valid": 7,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 0
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            9,
+            3
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            7,
+            17
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": [
+              "p0"
+            ]
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    },
+    "0-soft-ce_k4": {
+      "counts": {
+        "format_valid": 6,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 1,
+        "supported_answer_value": 1
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            9,
+            3,
+            15,
+            2
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            2,
+            12,
+            19,
+            14
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            1,
+            3,
+            9,
+            11
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            7,
+            17,
+            14,
+            6
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            1,
+            3,
+            13,
+            17
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            16,
+            12,
+            7,
+            14
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "answerable: false\nanswer: \"\"",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": false
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            14,
+            6,
+            3,
+            16
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "Prince of Wales",
+            "answerable": true,
+            "support_ids": [
+              "p0"
+            ]
+          },
+          "source_assessment": "SUPPORTED_ANSWER",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    },
+    "1-soft-ce_adaptive": {
+      "counts": {
+        "format_valid": 7,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 1,
+        "supported_answer_value": 1
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            9,
+            3,
+            15
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_sufficient",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": [
+              "p0",
+              "p1"
+            ]
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            2
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            17,
+            14,
+            7
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_sufficient",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            1
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            14
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "Prince of Wales",
+            "answerable": true,
+            "support_ids": [
+              "p0"
+            ]
+          },
+          "source_assessment": "SUPPORTED_ANSWER",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    },
+    "1-soft-ce_k4": {
+      "counts": {
+        "format_valid": 6,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 1,
+        "supported_answer_value": 1
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            9,
+            3,
+            15,
+            2
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            2,
+            12,
+            19,
+            14
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            1,
+            3,
+            9,
+            11
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            17,
+            14,
+            7,
+            6
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            1,
+            3,
+            13,
+            17
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            16,
+            12,
+            7,
+            14
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "answerable: false\nanswer: \"\"",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": false
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            14,
+            6,
+            3,
+            16
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "Prince of Wales",
+            "answerable": true,
+            "support_ids": [
+              "p0"
+            ]
+          },
+          "source_assessment": "SUPPORTED_ANSWER",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    },
+    "0-shuffled-ce_adaptive": {
+      "counts": {
+        "format_valid": 7,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 0
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    },
+    "0-shuffled-ce_k4": {
+      "counts": {
+        "format_valid": 6,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 2,
+        "supported_answer_value": 2,
+        "approximation_omitted": 1
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            9,
+            15,
+            2,
+            14
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            19,
+            12,
+            14,
+            3
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            3,
+            9,
+            11,
+            13
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "answerable=false\nanswer=\nThe supplied documents are insufficient.\nIDs: p1, p2, p3, p4 (None contain the required information)",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": false
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            17,
+            14,
+            7,
+            0
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            13,
+            3,
+            1,
+            15
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            7,
+            10,
+            14,
+            16
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "30000",
+            "answerable": true,
+            "support_ids": [
+              "p0",
+              "p4"
+            ]
+          },
+          "source_assessment": "SUPPORTED_VALUE_APPROXIMATION_OMITTED",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            14,
+            3,
+            6,
+            8
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "Prince of Wales",
+            "answerable": true,
+            "support_ids": [
+              "p0"
+            ]
+          },
+          "source_assessment": "SUPPORTED_ANSWER",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    },
+    "1-shuffled-ce_adaptive": {
+      "counts": {
+        "format_valid": 7,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 0
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [],
+          "source_proof_delivered": false,
+          "stop_reason": "stop_exhausted",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "MISSED_SOURCE_ANSWERABLE",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    },
+    "1-shuffled-ce_k4": {
+      "counts": {
+        "format_valid": 7,
+        "source_insufficient": 3,
+        "insufficiency_decision_correct": 3,
+        "masked": 2,
+        "source_answerable": 2,
+        "source_proof_delivered": 2,
+        "supported_answer_value": 2,
+        "approximation_omitted": 1
+      },
+      "cases": [
+        {
+          "case_id": "row-866",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            9,
+            3,
+            15,
+            2
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-3445",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            12,
+            19,
+            2,
+            3
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-12523",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            3,
+            9,
+            1,
+            13
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": [
+              "p0",
+              "p1",
+              "p2",
+              "p4"
+            ]
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-14496",
+          "source_disposition": "pool_insufficient",
+          "selected_source_indices": [
+            17,
+            14,
+            7,
+            0
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "INSUFFICIENT",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-27448",
+          "source_disposition": "masked",
+          "selected_source_indices": [
+            3,
+            13,
+            1,
+            15
+          ],
+          "source_proof_delivered": false,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "",
+            "answerable": false,
+            "support_ids": []
+          },
+          "source_assessment": "ABSTAIN_AMBIGUOUS",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-28960",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            12,
+            7,
+            16,
+            10
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "30000",
+            "answerable": true,
+            "support_ids": [
+              "p0",
+              "p4"
+            ]
+          },
+          "source_assessment": "SUPPORTED_VALUE_APPROXIMATION_OMITTED",
+          "empty_answer_contract_valid": true
+        },
+        {
+          "case_id": "row-36340",
+          "source_disposition": "supported",
+          "selected_source_indices": [
+            6,
+            14,
+            3,
+            16
+          ],
+          "source_proof_delivered": true,
+          "stop_reason": "read_budget",
+          "answer": {
+            "answer": "Prince of Wales",
+            "answerable": true,
+            "support_ids": [
+              "p0"
+            ]
+          },
+          "source_assessment": "SUPPORTED_ANSWER",
+          "empty_answer_contract_valid": true
+        }
+      ]
+    }
+  },
+  "actual_new_controller_compute": {
+    "wall_seconds": 34.540291835553944,
+    "cpu_seconds": 46.13242416999999,
+    "runs": 4,
+    "forwards": 56,
+    "sequence_rows": 56,
+    "input_tokens": 142997,
+    "state_tokenizations": 56,
+    "state_tokens": 124461
+  },
+  "controller_ledger_checks": [
+    {
+      "stage": "0-shuffled-ce",
+      "ledger_delta_verified": true
+    },
+    {
+      "stage": "0-shuffled-ce-k4",
+      "ledger_delta_verified": true
+    },
+    {
+      "stage": "1-shuffled-ce",
+      "ledger_delta_verified": true
+    },
+    {
+      "stage": "1-shuffled-ce-k4",
+      "ledger_delta_verified": true
+    }
+  ],
+  "reviewer_is_independent": false,
+  "scope_qualification": "Closed already-exposed7question diagnostic; four native positives versus onlytwo source-answerable cases. Narrowfixed4gain is a mechanism observation, not basis for model selection/generalization claim. User requires next training to use global task/distribution analysis.",
+  "first_calls_preserved": true
+}

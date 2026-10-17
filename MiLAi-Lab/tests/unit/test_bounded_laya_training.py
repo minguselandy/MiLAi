@@ -24,6 +24,16 @@ def test_loss_mass_is_equal_by_family_then_event_not_prefix_count():
     assert mass["b", 2] == pytest.approx(5)
 
 
+def test_semantic_questions_on_one_source_row_do_not_inherit_prefix_multiplicity():
+    rows = [{"metadata": {"family": "a", "row": 4, "training_event": event}}
+            for event, copies in (("birth", 7), ("death", 2)) for _ in range(copies)]
+    rows.append({"metadata": {"family": "b", "row": 9}})
+    weights = event_weights(rows)
+    assert sum(weights[:7]) == pytest.approx(2.5)
+    assert sum(weights[7:9]) == pytest.approx(2.5)
+    assert weights[9] == pytest.approx(5)
+
+
 def test_set_loss_accepts_mass_on_either_positive_and_ignores_padding():
     torch = pytest.importorskip("torch")
     logits = torch.tensor([[2.0, -1.0, 0.5, 100.0]], requires_grad=True)
