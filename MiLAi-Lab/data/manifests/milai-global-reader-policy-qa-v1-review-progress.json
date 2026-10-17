@@ -1,6 +1,6 @@
 {
   "status": "READER_LIVE_AUTHOR_REVIEW_PARTIAL",
-  "observed_epoch": 1792223530.8944159,
+  "observed_epoch": 1792225124.108969,
   "driver_pid": 3610392,
   "active": {
     "stage": "reader",
@@ -11,10 +11,10 @@
     "status": "RUNNING",
     "phase": "predict",
     "planned": 837,
-    "completed": 461,
+    "completed": 715,
     "known_failures": 1,
-    "fresh_reader_attempts": 313,
-    "reused_reader_outputs": 148,
+    "fresh_reader_attempts": 485,
+    "reused_reader_outputs": 230,
     "known_failed_reader_calls": 1
   },
   "reviewed_cases": [
@@ -22,11 +22,33 @@
     "row-2792",
     "row-3035",
     "row-5054",
-    "row-9391"
+    "row-9391",
+    "row-9768",
+    "row-13068",
+    "row-13512",
+    "row-15048",
+    "row-16494",
+    "row-21156",
+    "row-21798",
+    "row-21946",
+    "row-24052",
+    "row-24087",
+    "row-26884",
+    "row-28535",
+    "row-30334",
+    "row-32106",
+    "row-32682",
+    "row-33099",
+    "row-36433",
+    "row-36451",
+    "row-36664",
+    "row-37230"
   ],
-  "reviewed_unique_responses": 94,
+  "reviewed_unique_responses": 455,
   "review_path": "artifacts/jev-reader/global-reader-policy-qa-v1/stream-review/response-annotations.json",
   "stream_export_cost_pending_original_ledger": true,
   "cost_recording": "Final review_global_reader_results.py records export-compute.jsonl once after originalHTTPowner closes. No newledger, no modelrebilling.",
-  "scope": "Earlycases mostlyinsufficient/ambiguous; no wholecohortqualityclaim. Sourcefacts, targetrelations and outputcontract distinct; no methodname mapping opened."
+  "scope": "Author reviewed actual delivered materials and first responses for the listed cases. No method-name mapping opened; document count can reveal policy types. Not independent adjudication or a complete-cohort performance claim. Correct abstention on deficient selections is not task success on a supported full pool.",
+  "semantic_join_tool": "tools/join_global_reader_review.py",
+  "reserved_prefix_analysis_tool": "tools/analyze_reserved_reader_probes.py"
 }

@@ -22,10 +22,9 @@ retained(commongeography, co-parentage, snapshotdates, championshipdefinition). 
 changed; before-reference snapshot preserved. No predictions read before fullsource review.
 See reference-v1-dev-source annotations/summary. Reader contract=supplieddocumentsonly.
 Inspect allcompletedoutputs/actualterminalstatus; no outcome-based dispatch/checkpointchoice.
-First32/native/seed0 CLOSED38updates,train157/304,dev33/168 vsconstant-exhausted34;
-sufficient0/17. No routechoice fromfirstresult. Lastverified8/12CLOSED; current128/seed1/linear
-PID3334790 at154updates/finaltrain-eval; inspectactualstate. Inspectdriver.json forlatertransitions. Firstjobcost
-306.869s wall alreadyoriginalledger; do notrebill. Onlyourcoordinator/trainer found live.
+All12training jobs CLOSED. First32/native/seed0 train157/304,dev33/168 vsconstant34;
+sufficient0/17. No routechoice fromfirstresult. All1152updates andoriginalledgerdeltas verified.
+No trainer remains live. Neverrelaunch; originalmodelcosts alreadycharged.
 POSTTRAIN LIVE source8ce5d09b coordinator3610392 exec56592; inspectcurrentstage/PID: artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
 config configs/milai-global-reader-policy-qa-v1.json. Requiresall12trainclosed+actualPIDsabsent.
 31cases27arms837Readerpositions,12modelsallfixed4/adaptive+BM25/dense4/full20. CORRECTED
@@ -33,7 +32,7 @@ BEFORE DISPATCH:10080probe forwards(5views incl freshoriginal). Bothheads saveF1
 trainFP32finaldev2 mustNOTbe reused as same-weightoriginal. Keptseparatelyasreloaddiagnostic.
 Correctionmanifest+oldprotocolsnapshot preserve8064plan;0postmodelcalls/Readerchanges.
 Ordinarylinear supportedbyprobe/fixed4.
-Dense377uniqueinputs/42325tokens/max379,24batch16requests expected but0sentsofar.
+Dev dense377uniqueinputs/42325tokens/max379,24batch16requests CLOSED.
 Offlineanalysis-progress-1 isINTERIM2jobs; bothoriginalledgerdeltas match. Do notrerun/rebill.
 14targetedtests inclofficialscorer, Ruff/mypy andDAG/toolsboundaryPASS; trainingimportsnotedited.
 Reservedsource protocolmilai-global-reserved-source-v1 fixes14of49groups6/4/4,28rows bymetadata;
@@ -81,9 +80,9 @@ Streamreview tools/export_global_reader_responses.py exportsONLYfull27positionca
 root/stream-review. Stable IDs are response-NNNNNN fromactualsharedreceiptkey, fixedcaseorder
 seed20261019+index. NOnewmodelcalls; exportcompute deferred untilHTTPownercloses, thenfinal
 review_global_reader_results.py records itonce andwritesstream-review/ledger-record.json.
-Author reviewedfirst5cases2389,2792,3035,5054,9391 =94uniqueresponses(IDs000000–000093),
-annotationssavedstream-review/response-annotations.json. NEXTexportnewclosedcases andread
-views startingcaseindex05; annotateonlyactuallyreadresponses. ReusedIDs needoneannotation.
+Author reviewedfirst25cases throughindex24/row37230 =455unique responses(IDs000000–000454),
+annotations savedstream-review/response-annotations.json. NEXTexportnewclosedcases andread
+views startingindex25; annotateonlyactuallyreadresponses. ReusedIDs needoneannotation.
 No methodname mappingopened; documentcount canrevealsomepolicytype, notfullblind/independent.
 Do notreinterpretcorrectabstentiononmissingselectedevidenceasretrievalsuccessonanswerablepool.
 FirstconfirmedReaderfailure: shared/253/answer finishlength,4306prompt+8192output=12498
@@ -91,6 +90,11 @@ tokens, receiptpreserved; no retry. Streamview willshow failure/rawfinal; donotg
 correctabstention merelybecause parsedanswerisNone. No model/prompt/budget changes.
 After Reader/scorerterminal:finalexportall31 THENfinalreceiptcollector THENfinishgrading/join.
 No furtherexportsafterfinalcollectorchargesstreamcost. Allfirstresponses/labels unchanged.
+New tools/join_global_reader_review.py requires alluniqueIDs reviewed, separates Reader
+responsevalidity from full-pool tasksuccess andclass/familymacros;2tests+Ruff/targetedmypy pass.
+New tools/analyze_reserved_reader_probes.py validatesoriginal-only inputs andsource/reference
+diagnostics, no trainingFP32 baseline orfake invariance. Run afterreservedprobesclose and
+when originalledger leaseisfree. Neithernewanalysis toolhasrun onmodelresults yet.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17
