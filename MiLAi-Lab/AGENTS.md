@@ -11,15 +11,22 @@ SOURCE FREEZES (commit IDs are provenance only, no SHA verification):
 - main analysis implementation2a7940d2. All commits LOCAL; no push/merge performed.
 Paths below are relative to artifacts/jev-reader/selection-v2 unless stated otherwise.
 
-LIVE: training-v1/driver.json is authority. CoordinatorPID1145336, exec40960. Seed0 reference AND source CLOSED exit0, each188updates/3008examples.
-source/seed1,reference/seed1,reference/seed2 also CLOSED exit0; total5/6. Current FINAL
-source/seed2 child1500140 was live at latest snapshot. Reference2source-dev185/255,train1492/1495. Seed1source/ref finalsource-dev192/255both (TIE),
-source1train1228/1228,reference1train1495/1495; pre-save only, no cross-seed win claim. Queue is6jobs, source/reference x seeds0/1/2, serialGPU2/3, no retry. Do NOT
-restart when an exec poll expires. Source code/data/protocol are frozen, do not tune from results.
-Evaluation-v2/driver.json WAITING_FOR_TRAINING, coordinatorPID1209651, exec1227. It will
-execute40serial stages after ALL6trainingterminalCOMPLETED. Do NOT start a second driver.
+TRAINING CLOSED: training-v1/driver.json COMPLETED, all6jobs exit0, each188updates/3008examples.
+Original coordinator1145336/finalchild1500140 absent; exec40960 terminal exit0. NEVER restart/rebill.
+Source/ref finalpre-save source-dev:195/192/201 vs171/192/185 of255. Main learning analysis CLOSED:
+learning-analysis-v1/report.json; tracked milai-source-selection-v2-learning-results.json.
+Everyjob ledger matches;1128updates,18048trainexamples,35021231traininputtokens;6183.947wallsec
+sum for6training processes. Training diagnostics additional dev17013708/train-eval15871626tokens
+SEPARATE, not doubled offered-token fields. Analysis2.989sec chargedONCE. No method successclaim:
+supported-pool acceptance deltas+6/-11/+11 of185; insufficient partial+18/+11/+5 of70. Net40across
+seed-statepositions mostly34partialinsufficient, not40independentcases or improvedQA.
+
+LIVE EVALUATION: evaluation-v2/driver.json RUNNING, coordinatorPID1209651, exec1227.
+First stage presentation-reference_seed0 child1568399 onGPU2 was live atlatest snapshot.
+Use driver.json for laterstage/PID.40serialstages, frozenimports215c84da; do NOT start second driver.
+Training and evaluation data/modelrecipe remain frozen. No tuning, retries, services oroldcohortresumes.
 Evaluation-v1 is superseded PRE-MODEL: absent2Wikianswer_aliases fixed in offline labels only;
-original answers/runtime inputs identical. Firstfailure retained. No evaluationmodels yet.
+original answers/runtime inputs identical. Firstfailure retained. Saved-checkpoint evaluation NOW RUNNING.
 
 DATA CLOSED:128trainfamilies/185rows (64Mu+64twoWiki),30devfamilies/43rows; ALL228source
 reviews sealed before native references. Active states-v2:1877train/428dev,max5198tokens,
@@ -47,8 +54,8 @@ Reader endpoint/prompt/settings fixed; identical literal renderedinput reuse onl
 Response-review protocol frozen, allfirstanswers must be source/citation/contract reviewed before
 method mappings; assistant partialblinding, notindependentgold. Qualifiedsubsets reported separately.
 
-NEXT while drivers run: main analysis tools ready (see --help): analyze_source_selection_learning.py
-learning afterall6close, probes afterall12probestagesclose; export_global_reader_responses.py during
+NEXT: learning analysis already CLOSED, never rebill. Main analysis tools ready (see --help):
+analyze_source_selection_learning.py probes afterall12probestagesclose; export_global_reader_responses.py during
 Reader fromcompletecases; review_global_reader_results.py aftercohortterminal; manuallyreviewall
 firstresponses; join_global_reader_review.py into semantic-final; summarize_source_selection_qa.py
 onlyafterbothreviews; plot_source_selection_results.py finalPNG/PDF. Keep allseeds/native/source
