@@ -1,3 +1,78 @@
+# CURRENT: source selection v2 execution ACTIVE — 2026-10-17
+
+Execute docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md. This active goal is
+NOT the closed earlier12-job audit. No subagents, SHA/checksum/content fingerprints, new
+services/ledger, automatic retries, other-worktree resumes, Product/default/STOP/Writer adoption.
+User authorized execution. Never rerun/rebill the old12trainings or olddev/reservedQA cohorts.
+
+SOURCE FREEZES (commit IDs are provenance only, no SHA verification):
+- training code6ec3984b, frozen-code-6ec3984b/MiLAi-Lab; do not edit frozen imports.
+- evaluation code215c84da, frozen-code-215c84da/MiLAi-Lab; do not edit frozen imports.
+- main analysis implementation2a7940d2. All commits LOCAL; no push/merge performed.
+Paths below are relative to artifacts/jev-reader/selection-v2 unless stated otherwise.
+
+LIVE: training-v1/driver.json is authority. CoordinatorPID1145336, exec40960. First job
+reference/seed0 CLOSED exit0,188updates/3008examples; source/seed0 child1218595 was live at
+latest snapshot. Queue is6jobs, source/reference x seeds0/1/2, serialGPU2/3, no retry. Do NOT
+restart when an exec poll expires. Source code/data/protocol are frozen, do not tune from results.
+Evaluation-v2/driver.json WAITING_FOR_TRAINING, coordinatorPID1209651, exec1227. It will
+execute40serial stages after ALL6trainingterminalCOMPLETED. Do NOT start a second driver.
+Evaluation-v1 is superseded PRE-MODEL: absent2Wikianswer_aliases fixed in offline labels only;
+original answers/runtime inputs identical. Firstfailure retained. No evaluationmodels yet.
+
+DATA CLOSED:128trainfamilies/185rows (64Mu+64twoWiki),30devfamilies/43rows; ALL228source
+reviews sealed before native references. Active states-v2:1877train/428dev,max5198tokens,
+source1228labelled/116fittedfamilies vs reference1495/127. Full masks retained; paired1226only
+DIAGNOSTIC. states-v1 retained; minimal-residual correction changed70train/11dev source targets
+beforemodels; reference/input/annotations unchanged. Label-era addenda separately recorded.
+Train coverage87supportedfamilies,min1/2/3/4reads=5/47/12/23,mostlyparallel4readcomparisons,
+NOT broad4-edge serial reasoning. Only2native3-stepMu originalrows source-supported.
+
+New RESERVED: all28rows/14families source-reviewed AFTER methodfreeze BEFOREanswers/models;
+reserved-source-review/all28-before-reference.json.6supported(3qualified)/18insufficient/4masked,
+5supportedfamilies,min1/2/3reads2each,no definite4readproof. No resampling. Actual28input
+train/dev target/text/title/question/background intersections0. Earlier UNUSED4318whole-family
+article-title overlap withdev16 retained; do not falsely claim whole96familytitlemetric passes.
+Stable cohort train/dev row0..227 distinct from native row; never join Mu/2Wiki by raw row alone.
+
+PROTOCOL: data/manifests/milai-source-selection-v2-training-protocol.json;188updates/job,
+0/94/188diagnostics,final188only,softCE/native/commonBASE/optionshuffle. Equalupdates !=equal
+FLOPs; masks/families/tokens differ. SavedFP16 reloadFP32; pre-saveFP32 is separatediagnostic.
+QA13arms*71cases=923positions:6new,BASE,3prior128native,BM25,dense,full_pool. Oldmodels original
+STOP task with--fixed4-only,new/BASE--selection-only; pool10/19/20;4reads.6newmodelprobes:
+428dev x6presentationviews +44evidencecontexts/31disjointtargetpairs. No reservedprefixprobes.
+Reader endpoint/prompt/settings fixed; identical literal renderedinput reuse only, firstfailures kept.
+2Wiki native-score uses adaptedMuSiQueEM/F1, NOT official2Wiki leaderboard; nativeMu pairs official.
+Response-review protocol frozen, allfirstanswers must be source/citation/contract reviewed before
+method mappings; assistant partialblinding, notindependentgold. Qualifiedsubsets reported separately.
+
+NEXT while drivers run: main analysis tools ready (see --help): analyze_source_selection_learning.py
+learning afterall6close, probes afterall12probestagesclose; export_global_reader_responses.py during
+Reader fromcompletecases; review_global_reader_results.py aftercohortterminal; manuallyreviewall
+firstresponses; join_global_reader_review.py into semantic-final; summarize_source_selection_qa.py
+onlyafterbothreviews; plot_source_selection_results.py finalPNG/PDF. Keep allseeds/native/source
+and qualifiedresults/costs/limitations. Finalrequirementclosure stillpending; do NOT markgoalcomplete.
+
+Checks:39targetedtrainingtests;22evaluationtests(13CUDA+9HTTPwithofficialmetrics);4analysissemantic
+checks; respectiveRuff/mypy/package/toolsboundariesPASS. Counts overlap, do notsum indiscriminately.
+Use CUDAenv path artifacts/jev-reader/cuda-env/bin/python WITHOUT resolving interpreter symlink;
+HTTPenv forJSONschema/receiptanalysis. Originalbudget ONLY:
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json. All timedpreparation/audits
+alreadychargedONCE; see ledger-records, NEVERrebill. Firstreference0actualledger matches:
+1048.488wallsec,5937015trainingtokens; finalsource-dev171/255 vs BM25next150, train1494/1495.
+94point181/255 NOTselected; this singlejob is NOT QA/allseedgain. analysis-smoke-v1 0.173sec charged.
+FourQApreparationsv1/v2xdev/reserved0.502seccharged, finalreserved audit0.036sec,inputaudit7.855sec;
+failedv1length-audit timing not persisted. Authorreview/prep overhead notfullymetered, notfree.
+Historical generationunknown11/embeddingunknown1 are notnew; don'tclaimglobalunknown0.
+
+Current navigation: docs/LAB_CURRENT_STATUS.md; execution record
+ docs/MILAI_SOURCE_SELECTION_EXECUTION_20261017.md; machine status
+ data/manifests/milai-source-selection-v2-execution-status.json (goal_complete=false).
+
+Everything below is historical. Earlier ACTIVE/NEXT/PID/uncommitted snapshots are not live instructions.
+
+# HISTORICAL: source selection preparation and first dispatch snapshots
+
 # CURRENT: latest-review execution ACTIVE — source selection v2, 2026-10-17
 
 User explicitly asks to execute docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md,
