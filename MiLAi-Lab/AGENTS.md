@@ -1,4 +1,4 @@
-# CURRENT: source selection v2 execution ACTIVE — 2026-10-17
+# CURRENT: source selection v2 execution ACTIVE — 2026-10-18 Asia/Shanghai
 
 Execute docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md. This active goal is
 NOT the closed earlier12-job audit. No subagents, SHA/checksum/content fingerprints, new
@@ -22,8 +22,8 @@ supported-pool acceptance deltas+6/-11/+11 of185; insufficient partial+18/+11/+5
 seed-statepositions mostly34partialinsufficient, not40independentcases or improvedQA.
 
 LIVE EVALUATION: evaluation-v2/driver.json RUNNING, coordinatorPID1209651, exec1227.
-First4stages reference_seed0 presentation/evidence/devselect/reservedselect CLOSED exit0.
-Current presentation-reference_seed1 child1592840 onGPU2 was live atlatest snapshot.
+First8stages reference_seed0/seed1 presentation/evidence/devselect/reservedselect CLOSED exit0.
+Current presentation-reference_seed2 child1617440 onGPU2 was live atlatest snapshot.
 Use driver.json for laterstage/PID.40serialstages, frozenimports215c84da; do NOT start second driver.
 Training and evaluation data/modelrecipe remain frozen. No tuning, retries, services oroldcohortresumes.
 Evaluation-v1 is superseded PRE-MODEL: absent2Wikianswer_aliases fixed in offline labels only;
