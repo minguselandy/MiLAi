@@ -1,0 +1,22 @@
+{
+  "status": "FROZEN_BEFORE_SUPPLEMENTAL_ADMISSION_OR_SOURCE_REVIEW",
+  "train_family_target": 128,
+  "train_dataset_quota": {
+    "musique_train_mirror": 64,
+    "two_wiki_author_train": 64
+  },
+  "dev_dataset_quota": {
+    "musique_train_mirror": 14,
+    "two_wiki_author_train": 16
+  },
+  "first_draw": "data/manifests/milai-source-selection-v2-cohort-candidates.json",
+  "reserved": "data/manifests/milai-source-selection-v2-reservation.json",
+  "retain_rule": "Keep every first-draw family that passes the declared boundary. Dev first, then train; never move a first-draw train family to dev or vice versa.",
+  "supplement_rule": "MuSiQue: continue the same seed20261017 maximum-step question selection and family ordering, descending native max steps. TwoWiki: unused families by descending native support-title count then family ID; choose a maximum-support question using seed20261017+numeric family ID. Never reroll after annotations or model outcomes.",
+  "boundary": "All selected family members remain assigned to one role. Actual selected pools compared privately in both target-to-pool directions by exact title/text and title, plus exact questions. Dev and train both exclude new reserved whole-family pools and old reserved cases. Train also excludes all final dev pools and prior registered dev/calibration/test source pools. Cross-dataset shared target titles merge source families for counting; do not count two copies as independent.",
+  "coverage": "Native hop/support counts are only selection strata. Independent semantic relations, depth, minimal paragraph proofs, ambiguity and alternatives are established by full source-first review; no hard label from metadata.",
+  "review_rule": "Export admitted train/dev visible pools without answers/support flags/decompositions. Save all source annotations before native-reference comparison. New reserved text remains unexposed to the reviewer until method freeze.",
+  "model_calls": 0,
+  "sha_checks": false,
+  "content_fingerprints": false
+}

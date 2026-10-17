@@ -44,6 +44,25 @@ def decision_payload(
     }
 
 
+def selection_payload(
+    question: str,
+    evidence: list[dict[str, Any]],
+    candidates: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """The fixed-budget selection task has open actions only, including in training."""
+    payload = decision_payload(question, evidence, candidates)
+    choice = payload["questions"]["next"]
+    choice["criteria"].pop(STOP_SUFFICIENT)
+    choice["criteria"].pop(STOP_EXHAUSTED)
+    choice["instructions"] = (
+        "Choose the next evidence needed for this question. A candidate can supply a "
+        "missing premise even if it cannot answer alone. Prefer evidence that complements "
+        "the already read evidence. This decision selects one document within a fixed "
+        "reading budget; it does not declare the answer supported."
+    )
+    return payload
+
+
 def select_bounded(
     question: str,
     candidates: list[dict[str, Any]],
@@ -51,6 +70,7 @@ def select_bounded(
     *,
     max_candidates: int = 8,
     max_reads: int = 4,
+    selection_only: bool = False,
 ) -> dict[str, Any]:
     """At most max_reads decisions, without subset enumeration or retries."""
     remaining = list(candidates[:max_candidates])
@@ -61,7 +81,8 @@ def select_bounded(
         if not remaining:
             reason = "pool_consumed"  # Consumed is not a semantic sufficiency verdict.
             break
-        payload = decision_payload(question, evidence, remaining)
+        build_payload = selection_payload if selection_only else decision_payload
+        payload = build_payload(question, evidence, remaining)
         action = decide(payload)
         if action not in payload["questions"]["next"]["criteria"]:
             raise ValueError(f"Decision is outside the offered actions: {action}")

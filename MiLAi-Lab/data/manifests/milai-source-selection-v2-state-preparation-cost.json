@@ -1,0 +1,22 @@
+{
+  "status": "BOTH_PREPARATIONS_RECORDED_ONCE_ORIGINAL_LEDGER",
+  "phases": {
+    "source_selection_v2_states_v1": {
+      "wall_seconds": 25.119332049041986,
+      "cpu_seconds": 25.120400307,
+      "runs": 1
+    },
+    "source_selection_v2_states_v2": {
+      "wall_seconds": 23.083671648986638,
+      "cpu_seconds": 23.331457165,
+      "runs": 1
+    }
+  },
+  "generation_requests_delta": 0,
+  "generation_tokens_delta": 0,
+  "embedding_tokens_delta": 0,
+  "new_ledger": false,
+  "unmetered": "Contrast preparation,coverage/edit/test/author-analysis overhead not completely timed.",
+  "sha_checks": false,
+  "content_fingerprints": false
+}

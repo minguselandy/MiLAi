@@ -1,4 +1,133 @@
-# CURRENT: audit and frozen global experiment execution CLOSED — 2026-10-17
+# CURRENT: latest-review execution ACTIVE — source selection v2, 2026-10-17
+
+User explicitly asks to execute docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md,
+reduce defensive programming, retain innovation/reflection, disable SHA checks. This is a NEW
+active goal, not the closed prior audit. No subagents, SHA/content fingerprints, new services,
+new ledger, retries, other-worktree resumes, Product/default-policy changes. No model calls yet.
+Current work: docs/MILAI_SOURCE_SELECTION_EXECUTION_20261017.md; status navigation corrected.
+Prior12 trainings and both QA drivers COMPLETED, original PIDs absent; NEVER restart/rebill.
+Remote read-only query: research46351b5f/main518aee41. Current changes are local/uncommitted.
+
+Implemented shared selection_payload and select_bounded(selection_only=True), runner flag
+--selection-only for fixed4, prepare_source_selection.py reuses reviewed OR-of-AND labels.
+Full source AND reference exports retain all states with their respective empty-gold masks.
+Paired exports contain only states with opens in both, and are DIAGNOSTICS, not the sole main
+training dataset. Main comparison must use full supervision recipes, common initialization
+and matched update budget, with actual compute/mask differences disclosed. No STOP deployment.
+
+New MuSiQue reservation: data/manifests/milai-source-selection-v2-reservation.json,
+14 new families/28 rows, steps6/5/3. Former14 remain original valid evaluation, future regression.
+Unused registered TRAIN:224families/5466rows, maxsteps206/17/1. No broader blindness claim.
+Author 2Wiki archive downloaded successfully to artifacts/jev-reader/selection-v2/two-wiki-intake/;
+read ONLY train.json (167454rows), no dev/test or answer preview. Metadata grouping CLOSED:
+46642 source families,115 with4 support titles; largest96347rows is ONE family. This was
+metadata-only intake; subsequent64train reviews are below. Support count is NOT semantic depth.
+
+FIRST draw and boundary retained unchanged. Supplemental protocol BEFORE source review:
+artifacts/jev-reader/selection-v2/admission/protocol.json, tracked matching manifest.
+Admission CLOSED:128train/185rows (64Mu+64twoWiki),30dev/43rows (14Mu+16twoWiki).
+Mu train native2/3 counts55/9, no4; twoWiki train support2/4 counts24/40. These are NOT
+semantic chain-depth counts. NewDEV check rejected4first Mu families;40candidate rejections
+total preserved. Selected train/dev clear declared bidirectional native target/title boundary
+against new reserved96whole-family rows, old28regression, prior registered evaluation pools;
+train additionally clear final dev. No selected target-title family merges. Semantic alternative
+proof isolation must be rechecked after all source reviews; no claim of complete-history novelty.
+Final sources: admission/cohort-sources.jsonl, stable local row0..227 plus native_source_row,
+dataset and review_id. NEVER join corpora by native numeric row alone. Source-only views in
+cohort-review-inputs.jsonl; lossless per-family deduplicated views in review-by-family/*.json
+(members map original paragraph indices to uid). No native answers/supports in review views.
+
+ALL228 source rows/158families CLOSED before native answers/supports/predictions display.
+Full immutable snapshot source-review/all228-before-reference.json; prior114/185/64snapshots
+retained.3760paragraph positions/2290literal texts reviewed. Train185:88supported(19qualified),
+87insufficient,10masked; dev43:23supported(6qualified),16insufficient,4masked. Minimum recorded
+train proofs1/2/3/4 =6/47/12/23; dev=5/12/4/2. Not all unqualified gold. Film long-support families
+mostly two parallel relational branches, not four-edge serial chains. No general noise-rate claim.
+Case207/222 co-director quantifier ambiguity masked;177 adoptive/biological/homonym masked;
+188economist identity,190producer nationality,168deathplace,172army-vs-person nationality,
+186release-vs-production country insufficient. Explicit qualifications in annotations must survive.
+Same-name compatible film-role co-reference convention is author judgment, not independent
+identity certification. Common multi-national affiliation and film-by attribution likewise qualified.
+
+reviewed_target masks completed qualified_alternative_proofs until a complete_proofs path is
+read. New partial_evidence_groups represents alternative sources for one partial premise:
+reading either satisfies the group; groups get equal target mass and copies divide that mass.
+10targeted tests,Ruff,2filemypy and package/tools boundaries PASS. Full-source/reference export
+added and tested to retain states excluded by the intersection. Old jobs stay closed.
+Mu source highlights:110has genuine author→Rutgers→land-grant proof;114has Newton→Mercury→
+88days with DECLARED approximate-year conversion;73supports Wisconsin directly, not the
+homonymous Maryland county.48Oursi/Markoye title-body mismatch plus twoDouré villages masked.
+120/71citizenship proxies,45/46release-vs-signing,61nationality-vs-birthplace,115route-vs-border
+remain qualified alternatives/strict insufficiency. Never regrade after model results.
+All9native3-step Mu families reviewed; source-supported long-chain coverage remains limited.
+Metadata counts alone do not discharge the requested independent semantic coverage.
+
+Source authoring mu_001..mu_026.json and dev_001..dev_009.json retained. append_family.py maps
+author UID judgments to original paragraph indices and literal copies. show_families.py references
+previously FULLY read exact title/body with prior row/index instead of reprinting. Expand any
+newly relevant prior body; do not skip unseen content. Earlier truncated combined outputs were
+re-read in full for missing families before annotations. This never changes runtime source pools.
+
+Native-reference comparison NOW ALLOWED and EXECUTED after all228snapshot. New tool
+audit_source_selection.py; outputs reference-and-boundary-audit and -v2 CLOSED, both charged
+once (combined0.571wall/CPU), original ledger generation/embedding delta0. Never rebill.
+Train nativeTrue→source supported87/insufficient27/masked10; nativeFalse→supported1/insufficient60.
+Dev nativeTrue→supported21/insufficient5/masked3; nativeFalse→supported2/insufficient11/masked1.
+Do NOT automatically regrade annotations or rewrite native answers. Known native mismatches
+include73Dorchester vs sourceWisconsin,149film-name answer for actor question;77/1 retain
+source-supported short record-label proofs despite nativeFalse. Original counts are not noise rates.
+
+Full reviewed-target boundary:train/dev no target/pool or title intersections,66literal backgrounds.
+Train/reserved family96 clear. Dev/reserved family96 has ONE ARTICLE-TITLE-ONLY exception:
+dev16 Territorial evolution of the United States vs UNUSED reserved-family000523 row4318,
+not its selected671/2486. Zero same literal text. Actual selected28reserved rows have ZERO
+train/dev target-title or literal intersections and ZERO literal background overlap.
+Boundary-scope-decision manifest preserves the broader exception and full-family ID quarantine;
+no changed questions/cohort or claim that all unused family text is unseen. Later reserved semantic
+proofs still checked after method freeze. Do not block actual runs solely on the disclosed unused
+variant title exception, or silently mark the broader family title metric as passing.
+
+PREPARATION NOW CLOSED: states-v2 is ACTIVE; states-v1 retained as superseded. Shared pools
+and inputs unchanged; minimal-residual proof projection corrected70train/11dev source targets
+before any forwards, reference labels unchanged. A completed alternative premise must not reward
+redundant reads. Train78/dev0 previously acknowledged label-era alternatives have separate
+projection-addenda provenance; immutable pre-reference annotations remain unchanged.
+1877train/428dev states, max5198tokens (limit8192), zero truncation. Source1228labelled states/
+116fitted families vs reference1495/127;128admitted families retained. Paired1226diagnostic only.
+Proof coverage87unique supported train families: minimum1/2/3/4 reads=5/47/12/23; four-read
+cases mainly parallel comparisons, not four-edge serial chains. Mu native3-step source support
+still only2original rows. Do not claim semantic depth solved.
+Frozen protocol: milai-source-selection-v2-training-protocol.json. Six native soft-CE jobs,
+source/reference x seeds0/1/2, same BASE and188updates (3008rows), common428state dev,
+fixed0/94/188 diagnostics and final188 selection. Same state/pass option shuffle, no hashes.
+Equalupdates !=equalFLOPs; masks/eligible inputs part of recipe. New optimizer window mode
+preserves legacy epoch mode; savedFP16 checkpoints reloadedFP32 for actual probes/selection.
+All6models, all3prior128native,BASE,BM25,dense,fullpool =13QAarms/cohort,43dev/28reserved.
+Six presentation views and44evidence contexts/31disjoint-target pairs frozen before models.
+39targeted tests,Ruff,12projectfilemypy passed. Data audit4610source/reference records PASS.
+No model forwards yet at this freeze. NEXT: commit/freeze code and launch the serial driver on
+GPU2/3; preserve first failure,no automaticretry. Then all fixed4 QA/strong controls,reserved
+source-first review,invariance/evidence changes,actual costs and final requirement audit.
+Do not declare goal complete from software tests or training alone. All old runs remain closed;
+Reader settings and models unchanged, automaticSTOP unadopted. states-v1/v2 CPU preparation
+each charged ONCE (25.119/23.084wall seconds) to original ledger; never rebill. Other untimed
+preparation/review overhead not claimedfree. No SHA or replacement fingerprint checks.
+
+Prior17 targeted tests, Ruff, expanded5-file mypy with actual CUDA environment and boundaries
+passed; new checks above are separate. Five closed timed CPU stages were charged ONCE to
+the original ledger: two previous in preparation-ledger-record.json, new admission in
+admission/ledger-record.json (18.606wall/19.355CPU), plus the two reference audits in
+reference-and-boundary-audit-v2/ledger-record.json. Do not rebill; generation/embedding delta0.
+Other preparation/download/review work incompletely timed, not claimed free.
+Old HTTPenv lacks torch/ruff executable; cached Ruff
+binary /cra/memory/mx_memory/.uv-cache/archive-v0/TDeZ5_U4Wzk6nFWXDLcjm/ruff-0.16.4.data/scripts/ruff
+works. HTTPenv pytest/mypy used with PYTHONPATH=src:tools; CUDA interpreter path must not be
+symlink-resolved. Current work changes Lab research src only, no Product/schema/permissions.
+Goal remains active; substantial semantic review, training and evaluation are NOT complete.
+
+Everything below is historical. Prior audit completion does not close this new user goal.
+
+# HISTORICAL: audit and frozen global experiment execution CLOSED — 2026-10-17
 
 No model tasks are live. Training12 jobs, dev41 stages and reserved40 stages are CLOSED.
 Original exec50991/56592/80572 terminal exit0; do not restart any of these cohorts.

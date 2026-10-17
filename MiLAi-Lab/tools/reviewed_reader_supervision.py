@@ -13,37 +13,54 @@ import json
 import time
 from collections import Counter
 from pathlib import Path
+from typing import Any
 
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.methods.bounded_evidence import STOP_EXHAUSTED, STOP_SUFFICIENT
 
 
-def reviewed_target(review: dict, pool: list[int], opened: list[int]) -> tuple[dict, str]:
+def reviewed_target(review: dict[str, Any], pool: list[int], opened: list[int]
+                    ) -> tuple[dict[str, float], str]:
     if review["disposition"] == "masked":
         return {}, "masked_source_review"
     seen = set(opened)
     proofs = [set(path) for path in review["complete_proofs"]]
     if any(proof <= seen for proof in proofs):
         return {STOP_SUFFICIENT: 1.0}, "reviewed_proof_complete"
+    if any(set(proof) <= seen for proof in review.get("qualified_alternative_proofs", [])):
+        # A plausible shorter interpretation must not teach that another read is necessary.
+        return {}, "masked_qualified_proof_complete"
     if review["disposition"] == "supported":
         feasible = [proof for proof in proofs if proof <= seen | set(pool)]
         if not feasible:
             return {}, "masked_reviewed_retrieval_gap"
-        useful = set().union(*(proof - seen for proof in feasible))
+        residuals = [proof - seen for proof in feasible]
+        minimal = [path for path in residuals if not any(other < path for other in residuals)]
+        useful = set().union(*minimal)
     elif review["disposition"] == "pool_insufficient":
         # An incomplete pool can still offer a grounded entity/premise to read.
-        useful = set(review["useful_partial_evidence"]) - seen
+        groups = review.get("partial_evidence_groups",
+                            [[index] for index in review["useful_partial_evidence"]])
+        pending = [{f"open_p{i}" for i, index in enumerate(pool) if index in group}
+                   for group in groups if not seen.intersection(group)]
+        pending = [group for group in pending if group]
+        weights: dict[str, float] = {}
+        for group in pending:
+            for action in group:
+                weights[action] = weights.get(action, 0.0) + 1 / len(pending) / len(group)
+        if weights:
+            return weights, "reviewed_missing_complement"
+        return {STOP_EXHAUSTED: 1.0}, "reviewed_pool_insufficient"
     else:
         raise ValueError("Unknown source-review disposition")
     actions = [f"open_p{i}" for i, source_index in enumerate(pool) if source_index in useful]
     if actions:
         return {key: 1 / len(actions) for key in actions}, "reviewed_missing_complement"
-    if review["disposition"] == "pool_insufficient":
-        return {STOP_EXHAUSTED: 1.0}, "reviewed_pool_insufficient"
     return {}, "masked_reviewed_retrieval_gap"
 
 
-def relabel(rows: list[dict], reviews: list[dict], split: str) -> tuple[list[dict], dict]:
+def relabel(rows: list[dict[str, Any]], reviews: list[dict[str, Any]], split: str
+            ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     by_row = {r["source_row"]: r for r in reviews if r["split"] == split}
     results, changes = [], []
     for index, row in enumerate(rows):

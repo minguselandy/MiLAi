@@ -1,0 +1,128 @@
+{
+  "status": "PREPARED",
+  "splits": {
+    "train": {
+      "source_states": 1877,
+      "source_labelled": 1228,
+      "reference_labelled": 1495,
+      "paired_states": 1226,
+      "paired_changed_targets": 354,
+      "pair_exclusions": {
+        "reviewed_pool_insufficient": 371,
+        "masked_qualified_proof_complete": 20,
+        "masked_source_review": 120,
+        "reviewed_proof_complete": 138,
+        "reference_has_no_open_target": 2
+      },
+      "comparison_scope": "Conditional on both supervision schemes having a valid open target; not a comparison of STOP correctness or all source states.",
+      "source_family_count": 128,
+      "paired_family_count": 116,
+      "recipes": {
+        "source": {
+          "states": 1877,
+          "labelled": 1228,
+          "fitted_families": 116,
+          "label_status": {
+            "reviewed_missing_complement": 1228,
+            "reviewed_pool_insufficient": 371,
+            "masked_qualified_proof_complete": 20,
+            "masked_source_review": 120,
+            "reviewed_proof_complete": 138
+          }
+        },
+        "reference": {
+          "states": 1877,
+          "labelled": 1495,
+          "fitted_families": 127,
+          "label_status": {
+            "missing_complement": 1495,
+            "reference_proof_complete": 119,
+            "official_unanswerable_pool": 263
+          }
+        },
+        "paired_source": {
+          "states": 1226,
+          "labelled": 1226,
+          "fitted_families": 116,
+          "label_status": {
+            "reviewed_missing_complement": 1226
+          }
+        },
+        "paired_reference": {
+          "states": 1226,
+          "labelled": 1226,
+          "fitted_families": 116,
+          "label_status": {
+            "missing_complement": 1226
+          }
+        }
+      }
+    },
+    "dev": {
+      "source_states": 428,
+      "source_labelled": 255,
+      "reference_labelled": 354,
+      "paired_states": 255,
+      "paired_changed_targets": 80,
+      "pair_exclusions": {
+        "reviewed_proof_complete": 51,
+        "reviewed_pool_insufficient": 67,
+        "masked_source_review": 51,
+        "masked_qualified_proof_complete": 4
+      },
+      "comparison_scope": "Conditional on both supervision schemes having a valid open target; not a comparison of STOP correctness or all source states.",
+      "source_family_count": 30,
+      "paired_family_count": 27,
+      "recipes": {
+        "source": {
+          "states": 428,
+          "labelled": 255,
+          "fitted_families": 27,
+          "label_status": {
+            "reviewed_missing_complement": 255,
+            "reviewed_proof_complete": 51,
+            "reviewed_pool_insufficient": 67,
+            "masked_source_review": 51,
+            "masked_qualified_proof_complete": 4
+          }
+        },
+        "reference": {
+          "states": 428,
+          "labelled": 354,
+          "fitted_families": 30,
+          "label_status": {
+            "missing_complement": 354,
+            "reference_proof_complete": 27,
+            "official_unanswerable_pool": 47
+          }
+        },
+        "paired_source": {
+          "states": 255,
+          "labelled": 255,
+          "fitted_families": 27,
+          "label_status": {
+            "reviewed_missing_complement": 255
+          }
+        },
+        "paired_reference": {
+          "states": 255,
+          "labelled": 255,
+          "fitted_families": 27,
+          "label_status": {
+            "missing_complement": 255
+          }
+        }
+      }
+    }
+  },
+  "max_tokens": 5198,
+  "oversized_states": [],
+  "shared_visible_inputs": true,
+  "state_scope": "Empty,BM25/random1..3,both reference/reviewed proof leave-one/prefixes, qualified and partial-premise states. Expert origins are offline metadata. Not on-policy trajectories or a STOP training objective.",
+  "all_source_cases_retained": 228,
+  "model_calls": 0,
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "wall_seconds": 23.083671648986638,
+  "cpu_seconds": 23.331457165
+}

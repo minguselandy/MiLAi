@@ -50,6 +50,8 @@ def transform(
         result["questions"]["next"]["criteria"] = rewritten
     elif variant == "candidate_order":
         state["candidates"].reverse()
+    elif variant == "evidence_order":
+        state["read_evidence"].reverse()
     elif variant == "option_order":
         result["questions"]["next"]["criteria"] = dict(reversed(list(criteria.items())))
     elif variant == "title_frame":
@@ -79,7 +81,7 @@ def main() -> None:
     parser.add_argument("--head-max-len", type=int, default=512)
     parser.add_argument("--backend", choices=("native", "linear"), default="native")
     parser.add_argument("--variants", nargs="+", choices=(
-        "original", "aliases", "candidate_order", "option_order", "title_frame"),
+        "original", "aliases", "candidate_order", "option_order", "title_frame", "evidence_order"),
         default=("original", "aliases", "candidate_order", "option_order", "title_frame"),
         help="Omit original when exact frozen baseline predictions already exist")
     args = parser.parse_args()

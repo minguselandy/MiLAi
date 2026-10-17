@@ -1,0 +1,35 @@
+{
+  "train": {
+    "supported_families": 87,
+    "independent_families_by_minimum_paragraph_proof": {
+      "2": 47,
+      "1": 5,
+      "3": 12,
+      "4": 23
+    },
+    "without_explicit_qualification_by_minimum_proof": {
+      "2": 36,
+      "1": 5,
+      "3": 10,
+      "4": 17
+    }
+  },
+  "dev": {
+    "supported_families": 21,
+    "independent_families_by_minimum_paragraph_proof": {
+      "1": 3,
+      "2": 12,
+      "3": 4,
+      "4": 2
+    },
+    "without_explicit_qualification_by_minimum_proof": {
+      "2": 11,
+      "3": 4,
+      "4": 2
+    }
+  },
+  "status": "ACTUAL_SOURCE_PROOF_COVERAGE_RECORDED",
+  "scope": "Independent source families,not independent relation templates. Four-paragraph cases mostly parallel film/person comparison branches;not four-edge serial chains. Nine native3-step Mu families contain only two source-supported original rows. No data-scale or architecture effect claim.",
+  "new_model_calls": 0,
+  "sha_checks": false
+}

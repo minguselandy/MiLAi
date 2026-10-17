@@ -1,0 +1,16 @@
+{
+  "phase": "source_selection_v2_admission",
+  "measures": {
+    "wall_seconds": 18.605972691439092,
+    "cpu_seconds": 19.354953064999997,
+    "runs": 1
+  },
+  "status": "RECORDED_ONCE_IN_ORIGINAL_LEDGER",
+  "model_calls_delta": 0,
+  "generation_tokens_delta": 0,
+  "embedding_tokens_delta": 0,
+  "new_ledger": false,
+  "unmetered": "Author source review, binding/grouped presentation, tests and coordinator overhead not completely timed.",
+  "sha_checks": false,
+  "content_fingerprints": false
+}

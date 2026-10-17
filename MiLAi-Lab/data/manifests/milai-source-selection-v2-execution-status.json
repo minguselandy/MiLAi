@@ -1,0 +1,48 @@
+{
+  "status": "DATA_AND_METHOD_FROZEN_READY_FOR_SERIAL_TRAINING",
+  "goal_complete": false,
+  "objective": "docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md",
+  "last_goal_turn_classification": "progress",
+  "source_annotation_snapshot": "artifacts/jev-reader/selection-v2/source-review/all228-before-reference.json",
+  "source_review_rows": 228,
+  "source_review_families": 158,
+  "new_training_families_admitted": 128,
+  "dev_families": 30,
+  "primary_comparison": "Full source and full native-reference open-only supervision with respective masks. Match optimizer update budget and initialization;report actual input/compute differences. Paired intersection remains a conditional diagnostic,not the sole candidate.",
+  "software_exports_ready": [
+    "source",
+    "reference",
+    "paired_source",
+    "paired_reference"
+  ],
+  "actual_model_calls": 0,
+  "training_started": false,
+  "default_adoption": false,
+  "boundary_scope_decision": "data/manifests/milai-source-selection-v2-boundary-scope-decision.json",
+  "still_required": [
+    "execute all six frozen training jobs and retain first failures",
+    "saved-checkpoint fixed4 selection and 13-arm QA on dev and new reserved cohorts",
+    "all-six presentation and actual-evidence-change probes",
+    "reserved source-first review, final semantic boundary and first-response review",
+    "all actual costs, uncertainty, limitations and final requirement audit"
+  ],
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "new_services": false,
+  "new_ledger": false,
+  "training_protocol": "data/manifests/milai-source-selection-v2-training-protocol.json",
+  "active_states": "artifacts/jev-reader/selection-v2/states-v2",
+  "training_states": 1877,
+  "development_states": 428,
+  "labelled_train": {
+    "source": 1228,
+    "reference": 1495
+  },
+  "fitted_families": {
+    "source": 116,
+    "reference": 127
+  },
+  "planned_jobs": 6,
+  "optimizer_updates_per_job": 188,
+  "verification": "data/manifests/milai-source-selection-v2-verification.json"
+}

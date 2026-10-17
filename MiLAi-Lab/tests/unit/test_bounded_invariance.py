@@ -9,13 +9,17 @@ from milai_lab.methods.bounded_evidence import decision_payload
 from probe_bounded_invariance import canonical_prediction, transform
 
 
-@pytest.mark.parametrize("variant", ["aliases", "candidate_order", "option_order"])
+@pytest.mark.parametrize("variant", [
+    "aliases", "candidate_order", "option_order", "evidence_order"])
 def test_equivalent_views_preserve_source_and_canonical_actions(variant):
-    evidence = [{"id": "p0", "title": "Read", "text": "A says p2 literally."}]
+    evidence = [{"id": "p0", "title": "Read", "text": "A says p2 literally."},
+                {"id": "p3", "title": "Also read", "text": "Another known premise."}]
     candidates = [{"id": "p1", "title": "One", "text": "One source."},
                   {"id": "p2", "title": "Two", "text": "Another source."}]
     payload = decision_payload("Which subject?", evidence, candidates)
     changed, mapping = transform(payload, variant, 7)
+    if variant == "evidence_order":
+        assert changed["state"]["read_evidence"] == list(reversed(evidence))
     assert payload == decision_payload("Which subject?", evidence, candidates)
     assert changed["state"]["question"] == payload["state"]["question"]
     for field in ("read_evidence", "candidates"):

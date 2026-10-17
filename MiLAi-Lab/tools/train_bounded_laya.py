@@ -2,7 +2,7 @@
 
 All labelled prefixes are used. Normalize within event and then family, so a
 long history or a family with many derived states cannot dominate the objective.
-Calibration/test are not loaded. GPU zero-shot and per-epoch dev use the same
+Calibration/test are not loaded. GPU zero-shot and checkpoint dev use the same
 inputs, model and evaluator. This is a learning diagnosis, not a QA benchmark.
 """
 
@@ -11,7 +11,6 @@ from __future__ import annotations
 import argparse
 import fcntl
 import json
-import math
 import os
 import random
 import resource
@@ -24,6 +23,43 @@ from evaluate_bounded_laya import NativeDecision, score_predictions
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from train_laya_matched import audit
+
+TrainingWindow = list[tuple[int, int]]  # (data pass, row index)
+
+
+def training_stages(size: int, epochs: int, seed: int,
+                    update_budget: int | None = None) -> list[tuple[int, list[TrainingWindow]]]:
+    """Legacy epochs or an exact budget of full16-example optimizer updates.
+
+    Budgeted updates cross pass boundaries without dropping or padding examples.
+    Half/final checkpoints are fixed in advance, not selected by development loss.
+    """
+    if size < 1 or epochs < 1 or (update_budget is not None and update_budget < 1):
+        raise ValueError("Training requires labelled states and a positive budget")
+    rng = random.Random(seed)  # noqa: S311 -- reproducible training schedule
+    if update_budget is None:
+        stages = []
+        for epoch in range(1, epochs + 1):
+            order = list(range(size))
+            rng.shuffle(order)
+            stages.append((epoch, [[(epoch, i) for i in order[start:start + 16]]
+                                   for start in range(0, size, 16)]))
+        return stages
+    draws: TrainingWindow = []
+    data_pass = 0
+    while len(draws) < update_budget * 16:
+        data_pass += 1
+        order = list(range(size))
+        rng.shuffle(order)
+        draws.extend((data_pass, i) for i in order)
+    windows = [draws[i:i + 16] for i in range(0, update_budget * 16, 16)]
+    cuts = sorted({update_budget // 2, update_budget} - {0})
+    return [(end, windows[start:end]) for start, end in zip([0, *cuts[:-1]], cuts, strict=True)]
+
+
+def state_option_seed(seed: int, data_pass: int, state_id: int) -> int:
+    """Integer source-state identity keeps shared options aligned across different masks."""
+    return (seed << 64) + (data_pass << 32) + state_id
 
 
 def event_weights(rows: list[dict[str, Any]]) -> list[float]:
@@ -71,7 +107,12 @@ def main() -> None:
     parser.add_argument("checkpoint", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--budget", type=Path, required=True)
+    parser.add_argument("--compute-phase", help="Distinct phase in the original shared ledger")
     parser.add_argument("--epochs", type=int, default=4)
+    parser.add_argument("--optimizer-updates", type=int,
+                        help="Use this exact update budget with full16-example windows")
+    parser.add_argument("--dev-data", type=Path,
+                        help="Common development labels/inputs independent of the training recipe")
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
@@ -105,14 +146,20 @@ def main() -> None:
     started, cpu = time.perf_counter(), time.process_time()
     train = [json.loads(x) for x in (args.data / "train.jsonl").read_text().splitlines()]
     train = [r for r in train if r["gold"]]
-    dev = [json.loads(x) for x in (args.data / "dev.jsonl").read_text().splitlines()]
+    dev_path = args.dev_data or args.data / "dev.jsonl"
+    dev = [json.loads(x) for x in dev_path.read_text().splitlines()]
+    stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates)
+    axis = "epoch" if args.optimizer_updates is None else "optimizer_updates"
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
            "base_checkpoint": str(args.checkpoint.resolve()), "seed": args.seed,
            "physical_gpus": [2, 3], "device": "cuda", "torch_version": torch.__version__,
            "cuda_version": torch.version.cuda, "precision": "float32",
            "reference_compile": False,
            "backend": args.backend,
-           "epochs": args.epochs, "batch_size": 4, "gradient_accumulation": 4,
+           "epochs": args.epochs if args.optimizer_updates is None else None,
+           "planned_optimizer_updates": sum(len(windows) for _, windows in stages),
+           "checkpoint_axis": axis, "dev_source": str(dev_path.resolve()),
+           "batch_size": 4, "gradient_accumulation": 4,
            "max_len": args.max_len, "head_max_len": args.head_max_len, "train_states": len(train),
            "dev_states": len(dev), "encoder_lr": 2.5e-5, "head_lr": 1e-4,
            "freeze_encoder": False, "objective": args.objective,
@@ -125,6 +172,7 @@ def main() -> None:
            "train_batch_forwards": 0, "train_device_forwards": 0,
            "train_batch_attempts": 0, "train_offered_rows": 0, "train_offered_tokens": 0}
     write_json(args.output / "run.json", run)
+    write_json(args.output / "training-plan.json", stages)
     decision: NativeDecision
     evaluation_counts: dict[str, Counter[str]] = defaultdict(Counter)
     try:
@@ -167,7 +215,7 @@ def main() -> None:
              "lr": run["encoder_lr"]},
             {"params": [p for n, p in parameters.items() if not n.startswith("encoder.")],
              "lr": run["head_lr"]}], weight_decay=0.01)
-        steps = args.epochs * math.ceil(math.ceil(len(train) / 4) / 4)
+        steps = run["planned_optimizer_updates"]
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, steps, eta_min=1e-6)
 
         def evaluate(epoch: int, split: str = "dev") -> dict[str, Any]:
@@ -185,30 +233,43 @@ def main() -> None:
             write_json(args.output / split / str(epoch) / "summary.json", result)
             return result
 
-        history = [{"epoch": 0, "dev": evaluate(0)}]
+        history = [{axis: 0, "dev": evaluate(0)}]
         if args.evaluate_train and not args.train_eval_final_only:
             history[0]["train"] = evaluate(0, "train")
         write_json(args.output / "history.json", history)
-        rng = random.Random(args.seed)  # noqa: S311 -- reproducible training order
         option_rng = random.Random(args.seed + 10000)  # noqa: S311 -- independent of row order
-        for epoch in range(1, args.epochs + 1):
+        encoded_pass = 0
+        for checkpoint_step, windows in stages:
             model.train()
-            if args.shuffle_options:
-                option_orders = [draw_option_order(item, option_rng, ("choice",)) for item in items]
-                encoded = [encode_item(tok, item, args.max_len, args.head_max_len,
-                                       option_order=order)
-                           for item, order in zip(items, option_orders, strict=True)]
-                write_json(args.output / "option-orders" / f"{epoch}.json", option_orders)
-            order = list(range(len(train)))
-            rng.shuffle(order)
-            batches = [order[i:i + 4] for i in range(0, len(order), 4)]
             loss_total = 0.0
-            for start in range(0, len(batches), 4):
-                window = batches[start:start + 4]
-                denominator = sum(map(len, window))
+            offered = 0
+            for window in windows:
+                denominator = len(window)
                 optimizer.zero_grad(set_to_none=True)
-                for indices in window:
-                    batch = collate_items([[encoded[i]] for i in indices], tok.pad_token_id)
+                for start in range(0, len(window), 4):
+                    indices, batch_items = [], []
+                    for data_pass, index in window[start:start + 4]:
+                        if encoded_pass != data_pass:
+                            if args.shuffle_options:
+                                option_orders = []
+                                for item, row in zip(items, train, strict=True):
+                                    shuffle_rng = option_rng
+                                    if args.optimizer_updates is not None:
+                                        state_seed = state_option_seed(
+                                            args.seed, data_pass, row["metadata"]["state_id"])
+                                        shuffle_rng = random.Random(state_seed)  # noqa: S311
+                                    option_orders.append(draw_option_order(
+                                        item, shuffle_rng, ("choice",)))
+                                encoded = [encode_item(tok, item, args.max_len, args.head_max_len,
+                                           option_order=order) for item, order in zip(
+                                               items, option_orders, strict=True)]
+                                write_json(args.output / "option-orders" / f"{data_pass}.json",
+                                           option_orders)
+                            encoded_pass = data_pass
+                            run["data_passes_started"] = data_pass
+                        indices.append(index)
+                        batch_items.append([encoded[index]])
+                    batch = collate_items(batch_items, tok.pad_token_id)
                     run["train_batch_attempts"] += 1
                     run["train_offered_rows"] += len(indices)
                     run["train_offered_tokens"] += int(batch["attention_mask"].sum())
@@ -223,6 +284,7 @@ def main() -> None:
                         raise ValueError("Non-finite decision loss")
                     loss.backward()
                     loss_total += float(weighted.sum().detach())
+                    offered += len(indices)
                     run["train_sequence_rows"] += len(indices)
                     run["train_input_tokens"] += int(batch["attention_mask"].sum())
                     run["train_batch_forwards"] += 1
@@ -232,18 +294,20 @@ def main() -> None:
                 scheduler.step()
                 run["optimizer_updates"] += 1
                 write_json(args.output / "run.json", run)
-                print(json.dumps({"epoch": epoch, "updates": run["optimizer_updates"],
-                                  "batch": start + len(window)}), flush=True)
-            history.append({"epoch": epoch, "weighted_loss_mean": loss_total / len(train),
-                            "dev": evaluate(epoch)})
+                print(json.dumps({"data_pass": encoded_pass,
+                                  "updates": run["optimizer_updates"]}), flush=True)
+            history.append({axis: checkpoint_step, "weighted_loss_mean": loss_total / offered,
+                            "dev": evaluate(checkpoint_step)})
             if args.objective == "soft-ce":
-                history[-1]["weighted_ce_mean"] = loss_total / len(train)
-            if args.evaluate_train and (not args.train_eval_final_only or epoch == args.epochs):
-                history[-1]["train"] = evaluate(epoch, "train")
+                history[-1]["weighted_ce_mean"] = loss_total / offered
+            if args.evaluate_train and (
+                    not args.train_eval_final_only or checkpoint_step == stages[-1][0]):
+                history[-1]["train"] = evaluate(checkpoint_step, "train")
             write_json(args.output / "history.json", history)
             config = {**decision.config, "max_len": args.max_len, "head_max_len": args.head_max_len,
                       "temperature": [1.0, 1.0, 1.0], "temperature_by_options": {},
-                      "fine_tuned": True, "training": {"milai_reader": {**run, "epoch": epoch}}}
+                      "fine_tuned": True,
+                      "training": {"milai_reader": {**run, axis: checkpoint_step}}}
             checkpoint_writer(model, tok, config, str(args.output / "checkpoint_latest"))
         changes = {key: {"parameter": name, "changed_elements": int((
             parameters[name].detach().cpu() != before[key]).sum())} for key, name in probes.items()}
@@ -266,7 +330,8 @@ def main() -> None:
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
-            phase = "laya_reader_ce" if args.backend == "native" else "linear_reader_ce"
+            phase = args.compute_phase or (
+                "laya_reader_ce" if args.backend == "native" else "linear_reader_ce")
             budget.record_compute(phase, measures)
         write_json(args.output / "run.json", run)
 

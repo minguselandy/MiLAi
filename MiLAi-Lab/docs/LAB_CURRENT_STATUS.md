@@ -1,12 +1,23 @@
-# 2026-10-17：训练审计执行已恢复
+# 当前导航（2026-10-17）
 
-本轮用户明确恢复并要求执行训练审计。方法基点e832e2d，当前开发分支
-`feat/lab-audit-objective-diagnosis-20261017`。已实现并冻结同86个来源审阅状态、
-两种子soft-CE/集合损失四任务对照，实际队列已启动；尚未闭合或证明收益。
-新增训练集分项预测，避免只用总接受数掩盖互补和STOP失败。
-无SHA/内容指纹检查，无Product/API/权限/Canonical或既有服务变更。
-完整目标仍active/incomplete，详见[本轮执行记录](MILAI_AUDIT_EXECUTION_20261017.md)。
-下方ACTIVE/PAUSED/LIVE均为各日期历史快照。
+已发布研究基点为 `46351b5f`，分支 `feat/lab-audit-objective-diagnosis-20261017`；
+本次只读远端查询确认该分支仍指向此提交，main 为 `518aee41`。提交 ID 仅作来源记录，
+不执行 SHA 或替代内容指纹校验。
+
+- 上轮执行：12 组训练、开发和保留评估全部闭合；
+  [最终结果](MILAI_GLOBAL_TRAINING_RESULT_20261017.md)和
+  [原完成清单](../data/manifests/milai-development-audit-requirements-20261017.json)
+  只对应上轮审计。三个 driver 均为 COMPLETED，原协调器和最终子进程均不存在。
+- 效果验收：未建立超过 dense 固定 4 段的稳定来源忠实净收益；不默认采用自动 STOP。
+- 当前用户目标：执行[最新评审](MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md)，
+  128训练家族、30开发家族的228行来源已全部审阅，并在查看原参考前封存。
+  参考对照、边界核查、混合状态与长度审计已完成；六任务等更新训练及后续评价协议已冻结。
+  此次源码封存点尚未模型前向；真实启动和终态记入本轮执行状态，不重跑旧任务。
+  逐项进度见[本轮执行记录](MILAI_SOURCE_SELECTION_EXECUTION_20261017.md)。
+- 旧保留 14 家族在原冻结实验中的资格不变；后续仅作已暴露回归。旧训练与问答不重跑，
+  原始结果和费用不重算。其他工作树继续保持原暂停状态。
+
+下方 ACTIVE/PAUSED/LIVE、进程和未发布表述均为各日期历史快照。
 
 # Jev 类 Laya：首轮完整训练与六条件诊断已闭合（2026-10-16）
 

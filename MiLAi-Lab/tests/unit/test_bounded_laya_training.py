@@ -1,5 +1,6 @@
 """Derived prefixes and event multiplicity must not inflate a family's loss."""
 
+import random
 import sys
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -7,7 +8,52 @@ from pathlib import Path
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
-from train_bounded_laya import compute_counts, decision_loss, event_weights
+from train_bounded_laya import (
+    compute_counts,
+    decision_loss,
+    event_weights,
+    state_option_seed,
+    training_stages,
+)
+
+
+def test_fixed_update_budget_keeps_full_windows_across_different_masks():
+    for size in (17, 37):
+        stages = training_stages(size, epochs=2, seed=7, update_budget=5)
+        assert [step for step, _ in stages] == [2, 5]
+        windows = [w for _, batch in stages for w in batch]
+        assert len(windows) == 5 and all(len(w) == 16 for w in windows)
+        draws = [pair for window in windows for pair in window]
+        for data_pass in range(1, len(draws) // size + 1):
+            assert sorted(i for p, i in draws if p == data_pass) == list(range(size))
+        assert stages == training_stages(size, epochs=9, seed=7, update_budget=5)
+
+
+def test_legacy_epoch_order_and_partial_windows_remain_unchanged():
+    rng = random.Random(19)  # noqa: S311 -- compare the frozen sampling order
+    stages = training_stages(35, epochs=2, seed=19)
+    for epoch, windows in stages:
+        expected = list(range(35))
+        rng.shuffle(expected)
+        assert [len(w) for w in windows] == [16, 16, 3]
+        assert [i for w in windows for p, i in w] == expected
+        assert {p for w in windows for p, _ in w} == {epoch}
+
+
+def test_shared_state_option_order_is_independent_of_filtered_list_position():
+    laya = pytest.importorskip("laya.train")
+    item = {"q": {"t": "choice"}, "k": 8}
+
+    def orders(ids):
+        result = {}
+        for i in ids:
+            rng = random.Random(state_option_seed(2, 3, i))  # noqa: S311
+            result[i] = laya.draw_option_order(item, rng, ("choice",))
+        return result
+
+    source, reference = orders([7, 101, 409]), orders([2, 7, 90, 101, 409, 800])
+    assert all(source[i] == reference[i] for i in source)
+    assert all(sorted(order) == list(range(8)) for order in source.values())
 
 
 def test_loss_mass_is_equal_by_family_then_event_not_prefix_count():

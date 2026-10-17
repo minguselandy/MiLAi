@@ -1,0 +1,14 @@
+{
+  "status": "PASS_BEFORE_MODEL_DISPATCH",
+  "pytest": {
+    "passed": 39,
+    "log": "artifacts/jev-reader/selection-v2/verification-v1/pytest.log"
+  },
+  "ruff": "PASS;initial misplaced-noqa finding retained in ruff-before-fix.log",
+  "mypy": "12projectfilesPASS;external untypedLaya imports not type-checked (import-untyped disabled);API functions exercised in tests",
+  "training_state_records_checked": 4610,
+  "all_open_labels_legal_and_normalized": true,
+  "actual_addenda_add_no_new_boundary_target": true,
+  "sha_checks": false,
+  "model_calls": 0
+}

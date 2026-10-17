@@ -18,6 +18,15 @@ def test_any_complete_proof_suffices_without_reading_the_other_path():
     assert reviewed_target(review, [0, 1, 2], [0, 1])[0] == {"stop_sufficient": 1.0}
 
 
+def test_already_satisfied_alternative_does_not_require_an_equivalent_extra_read():
+    review = {"disposition": "supported", "complete_proofs": [[0, 1, 3], [0, 2, 3]]}
+    assert reviewed_target(review, [0, 1, 2, 3], [0, 1])[0] == {"open_p3": 1.0}
+    # Incomparable routes remain legal; this is not a shortest-length/cost policy.
+    review["complete_proofs"] = [[0, 1], [2]]
+    assert reviewed_target(review, [0, 1, 2], [])[0] == {
+        "open_p0": 1 / 3, "open_p1": 1 / 3, "open_p2": 1 / 3}
+
+
 def test_incomplete_pool_can_supply_a_partial_premise_before_exhaustion():
     review = {"disposition": "pool_insufficient", "complete_proofs": [],
               "useful_partial_evidence": [2]}
@@ -25,10 +34,31 @@ def test_incomplete_pool_can_supply_a_partial_premise_before_exhaustion():
     assert reviewed_target(review, [2, 8], [2])[0] == {"stop_exhausted": 1.0}
 
 
+def test_reading_either_equivalent_partial_source_satisfies_that_premise():
+    review = {"disposition": "pool_insufficient", "complete_proofs": [],
+              "useful_partial_evidence": [1, 2, 3], "partial_evidence_groups": [[1, 2], [3]]}
+    assert reviewed_target(review, [0, 1, 2, 3], [])[0] == {
+        "open_p1": 0.25, "open_p2": 0.25, "open_p3": 0.5}
+    assert reviewed_target(review, [0, 1, 2, 3], [1])[0] == {"open_p3": 1.0}
+    assert reviewed_target(review, [0, 1, 2, 3], [2])[0] == {"open_p3": 1.0}
+    assert reviewed_target(review, [0, 1, 2, 3], [2, 3])[0] == {"stop_exhausted": 1.0}
+
+
 def test_ambiguity_and_missing_retrieved_proof_are_not_hard_negative_labels():
     assert reviewed_target({"disposition": "masked"}, [0], [0])[0] == {}
     assert reviewed_target({"disposition": "supported", "complete_proofs": [[0, 1]]},
                            [0, 2], [0])[0] == {}
+
+
+def test_qualified_shorter_proof_masks_extra_read_without_claiming_certain_sufficiency():
+    review = {"disposition": "supported", "complete_proofs": [[0, 1, 2]],
+              "qualified_alternative_proofs": [[0, 1]]}
+    assert reviewed_target(review, [0, 1, 2, 3], [0, 1]) == (
+        {}, "masked_qualified_proof_complete")
+    assert reviewed_target(review, [0, 1, 2, 3], [0, 1, 2]) == (
+        {"stop_sufficient": 1.0}, "reviewed_proof_complete")
+    assert reviewed_target(review, [0, 1, 2, 3], [0])[0] == {
+        "open_p1": 0.5, "open_p2": 0.5}
 
 
 def test_relabelling_preserves_visible_input_and_separates_dev_from_training():

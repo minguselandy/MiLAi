@@ -27,7 +27,7 @@ def read_rows(path: Path) -> list[dict[str, Any]]:
     return [json.loads(line) for line in path.read_text().splitlines()]
 
 
-def prepare(decisions: Path, families: Path, output: Path) -> dict:
+def prepare(decisions: Path, families: Path, output: Path) -> dict[str, Any]:
     from prepare_musique_decisions import ranked_pool
 
     output.mkdir(parents=True, exist_ok=False)
@@ -70,14 +70,18 @@ def prepare(decisions: Path, families: Path, output: Path) -> dict:
     return result
 
 
-def policies(case: dict[str, Any], predict: Any, output: Path) -> dict:
+def policies(case: dict[str, Any], predict: Any, output: Path,
+             *, selection_only: bool = False) -> dict[str, Any]:
     cache: dict[tuple[str, ...], dict[str, Any]] = {}
     results = {}
-    for policy, limit in (("k2", 2), ("adaptive", 4)):
-        used = []
-        fresh_wall = []
+    schedule = (("k4", 4),) if selection_only else (("k2", 2), ("adaptive", 4))
+    for policy, limit in schedule:
+        used: list[dict[str, Any]] = []
+        fresh_wall: list[float] = []
 
-        def decide(payload, policy=policy, used=used, fresh_wall=fresh_wall):
+        def decide(payload: dict[str, Any], policy: str = policy,
+                   used: list[dict[str, Any]] = used,
+                   fresh_wall: list[float] = fresh_wall) -> str:
             key = tuple(p["id"] for p in payload["state"]["read_evidence"])
             reused = key in cache
             if key not in cache:
@@ -95,14 +99,15 @@ def policies(case: dict[str, Any], predict: Any, output: Path) -> dict:
                          "fresh_call_wall_seconds": cache[key]["fresh_call_wall_seconds"],
                          "reused": reused,
                          "sequence_rows": prediction.get("sequence_rows", 1)})
-            probabilities = prediction["probabilities"]
+            probabilities: dict[str, float] = prediction["probabilities"]
             options = probabilities if policy == "adaptive" else {
                 key: p for key, p in probabilities.items() if key.startswith("open_")}
-            return max(options, key=options.get)
+            return max(options, key=lambda name: options[name])
 
         start = time.perf_counter()
         result = select_bounded(case["question"], case["candidates"], decide,
-                                max_candidates=len(case["candidates"]), max_reads=limit)
+                                max_candidates=len(case["candidates"]), max_reads=limit,
+                                selection_only=selection_only)
         elapsed = time.perf_counter() - start
         result.update(policy=policy, case_id=case["case_id"], controller_trace=used,
                       control_wall_seconds=elapsed,
@@ -132,6 +137,8 @@ def main() -> None:
     select.add_argument("--budget", type=Path, required=True)
     select.add_argument("--max-len", type=int, default=4096)
     select.add_argument("--head-max-len", type=int, default=384)
+    select.add_argument("--selection-only", action="store_true",
+                        help="Run fixed4 with the same open-only task used in selection training")
     args = parser.parse_args()
     if args.phase == "prepare":
         print(json.dumps(prepare(args.decisions, args.families, args.output)))
@@ -140,11 +147,12 @@ def main() -> None:
     start, cpu = time.perf_counter(), time.process_time()
     cases = read_rows(args.cases)
     run = {"status": "RUNNING", "pid": os.getpid(), "backend": args.backend,
+           "selection_only": args.selection_only,
            "checkpoint": str(args.checkpoint.resolve()) if args.checkpoint else None,
            "max_len": args.max_len, "head_max_len": args.head_max_len,
            "cases": str(args.cases.resolve()), "planned_cases": len(cases), "completed_cases": 0}
     write_json(args.output / "run.json", run)
-    decision = None
+    decision: Any = None  # Native, linear, generative and reranker backends share this seam.
     try:
         if args.backend != "bm25":
             import torch
@@ -182,11 +190,12 @@ def main() -> None:
                 result = {f"k{k}": {"case_id": case["case_id"], "selected_ids": [
                     p["id"] for p in case["candidates"][:k]], "policy": f"k{k}",
                     "stop_reason": "fixed_k", "decision_calls": 0}
-                    for k in (2, 4, len(case["candidates"]))}
+                    for k in ((4,) if args.selection_only else (2, 4, len(case["candidates"])))}
                 for policy, row in result.items():
                     write_json(args.output / case["case_id"] / f"{policy}.json", row)
             else:
-                result = policies(case, decision.predict, args.output / case["case_id"])
+                result = policies(case, decision.predict, args.output / case["case_id"],
+                                  selection_only=args.selection_only)
             results.append(result)
             run["completed_cases"] += 1
             write_json(args.output / "run.json", run)

@@ -435,5 +435,12 @@
     "Budget-aware utility learning",
     "Broad Writer necessary-root/preserve learning",
     "Production co-resident end-to-end latency"
-  ]
+  ],
+  "publication_note": {
+    "status": "PUBLISHED_RESEARCH_BASELINE",
+    "branch": "feat/lab-audit-objective-diagnosis-20261017",
+    "published_commit": "46351b5f",
+    "verification": "Fresh git ls-remote returned research46351b5f/main518aee41; commit IDs used only as provenance, not SHA verification.",
+    "historical_scope": "Local-only/unpublished findings below describe the pre-publication closure. goal_complete covers the prior audit, not the new source-selection goal."
+  }
 }
