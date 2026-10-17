@@ -1,0 +1,32 @@
+{
+  "status": "READER_LIVE_AUTHOR_REVIEW_PARTIAL",
+  "observed_epoch": 1792223530.8944159,
+  "driver_pid": 3610392,
+  "active": {
+    "stage": "reader",
+    "pid": 3740226,
+    "physical_gpu_allocation": null
+  },
+  "run": {
+    "status": "RUNNING",
+    "phase": "predict",
+    "planned": 837,
+    "completed": 461,
+    "known_failures": 1,
+    "fresh_reader_attempts": 313,
+    "reused_reader_outputs": 148,
+    "known_failed_reader_calls": 1
+  },
+  "reviewed_cases": [
+    "row-2389",
+    "row-2792",
+    "row-3035",
+    "row-5054",
+    "row-9391"
+  ],
+  "reviewed_unique_responses": 94,
+  "review_path": "artifacts/jev-reader/global-reader-policy-qa-v1/stream-review/response-annotations.json",
+  "stream_export_cost_pending_original_ledger": true,
+  "cost_recording": "Final review_global_reader_results.py records export-compute.jsonl once after originalHTTPowner closes. No newledger, no modelrebilling.",
+  "scope": "Earlycases mostlyinsufficient/ambiguous; no wholecohortqualityclaim. Sourcefacts, targetrelations and outputcontract distinct; no methodname mapping opened."
+}

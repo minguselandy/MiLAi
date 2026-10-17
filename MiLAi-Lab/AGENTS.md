@@ -1,4 +1,4 @@
-# CURRENT: global training CLOSED; dev posttrain LIVE — 2026-10-17
+# CURRENT: training/probes/selectors CLOSED; dev Reader LIVE — 2026-10-17
 
 Full user goal ACTIVE/incomplete; global analysis/generalization required.
 New global-reader-reference-v1 protocol is frozen:32/128nestedfamilies,304/1223states,
@@ -74,6 +74,20 @@ Input/criteria/outputkey/actionmapping all10080verified;2.718secvalidation separ
 128native0reloadchanges3choices butsameaccept38;11otherssamechoices. Candidateorder128
 agreement77–86/168;32native2constantSTOP167–168agreementonly34accepted. No variantselection.
 Probe summaries/inputreviewtracked; postdriver nowpastprobes intoownselection/Reader stages.
+DEV READER LIVE PID3740226 undercoordinator3610392/exec56592 (source8ce5d09b).
+All24selectionstages+dense+837preview CLOSED;570uniqueReaderinputs expected. Inspectrunactual
+progress beforeacting; donotrestart. Reserved pipelineNOTSTARTED; predecessorstilllive.
+Streamreview tools/export_global_reader_responses.py exportsONLYfull27positioncases to
+root/stream-review. Stable IDs are response-NNNNNN fromactualsharedreceiptkey, fixedcaseorder
+seed20261019+index. NOnewmodelcalls; exportcompute deferred untilHTTPownercloses, thenfinal
+review_global_reader_results.py records itonce andwritesstream-review/ledger-record.json.
+Author reviewedfirst5cases2389,2792,3035,5054,9391 =94uniqueresponses(IDs000000–000093),
+annotationssavedstream-review/response-annotations.json. NEXTexportnewclosedcases andread
+views startingcaseindex05; annotateonlyactuallyreadresponses. ReusedIDs needoneannotation.
+No methodname mappingopened; documentcount canrevealsomepolicytype, notfullblind/independent.
+Do notreinterpretcorrectabstentiononmissingselectedevidenceasretrievalsuccessonanswerablepool.
+After Reader/scorerterminal:finalexportall31 THENfinalreceiptcollector THENfinishgrading/join.
+No furtherexportsafterfinalcollectorchargesstreamcost. Allfirstresponses/labels unchanged.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17

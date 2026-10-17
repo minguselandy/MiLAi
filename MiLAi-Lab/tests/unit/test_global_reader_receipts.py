@@ -8,6 +8,7 @@ from pathlib import Path
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
+from export_global_reader_responses import export_closed_cases
 from milai_lab.harness.artifact_io import write_json
 from review_global_reader_results import (
     collect,
@@ -166,6 +167,18 @@ def test_closed_matrix_audit_keeps_shared_calls_source_review_and_unknown_cost(t
     write_json(root / "selections/dense/accounting-start.json", start)
     write_json(root / "selections/dense/accounting-end.json", start)
     write_json(root / "selections/dense/compute.json", {"wall_seconds": 0.0})
+    pending = root / "reader/predictions/model_k4/1.json"
+    saved = pending.read_text()
+    pending.unlink()
+    stream = tmp_path / "stream"
+    first = export_closed_cases(root, stream)
+    assert first["completed_cases"] == 1
+    initial_view = (stream / "00-0.txt").read_text()
+    pending.write_text(saved)
+    second = export_closed_cases(root, stream)
+    assert second["completed_cases"] == 2
+    assert (stream / "00-0.txt").read_text() == initial_view
+    assert first["catalog"][0]["response_ids"] == second["catalog"][0]["response_ids"]
     report = collect(root, tmp_path / "review")
     assert report["unique_responses_for_review"] == 2
     assert report["method_positions"] == 8

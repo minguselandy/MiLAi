@@ -17,6 +17,7 @@ from collections.abc import Callable
 from pathlib import Path
 from typing import Any
 
+from export_global_reader_responses import response_id
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from run_musique_reader import reader_input
@@ -188,7 +189,7 @@ def collect(root: Path, output: Path) -> dict[str, Any]:
             "stop_reasons": dict(stops),
             "source_delivery": source_rows,
         }
-    review_ids = {key: f"response-{i:04d}" for i, key in enumerate(sorted(responses))}
+    review_ids = {key: response_id(key) for key in responses}
     write_json(
         output / "response-occurrences.json",
         {review_ids[k]: {"reader_call_key": k, "positions": v} for k, v in occurrences.items()},
@@ -324,6 +325,14 @@ def main() -> None:
         fcntl.flock(lease, fcntl.LOCK_EX)
         budget = RunBudget(RunLimits(**read_json(budget_path)["limits"]), budget_path)
         budget.record_compute("global_reader_receipt_review", measures)
+        exports = args.root / "stream-review/export-compute.jsonl"
+        marker = args.root / "stream-review/ledger-record.json"
+        if exports.exists() and not marker.exists():
+            totals: Counter[str] = Counter()
+            for line in exports.read_text().splitlines():
+                totals.update(json.loads(line))
+            budget.record_compute("global_reader_response_stream_exports_v1", dict(totals))
+            write_json(marker, {"recorded": True, "measures": dict(totals)})
     write_json(args.output / "compute.json", measures)
     print(
         json.dumps(
