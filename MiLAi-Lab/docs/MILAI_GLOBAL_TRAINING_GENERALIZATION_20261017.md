@@ -535,3 +535,9 @@ FLOPs，暖组件耗时之和不是生产共驻端到端时延；人工审阅成
 [全部27方法、成本及家族对照](../data/manifests/milai-global-reader-policy-qa-v1-summary.json) ·
 [首次回答完整审阅注释](../data/manifests/milai-global-reader-response-review-v1-annotations.json)。
 保留集仍按已冻结的全部12模型推进；这些dev结果不用于更改参数、选择种子或补题。
+
+
+保留集流程已实际启动，源码d5261e45、协调器4100019、会话80572。先运行12模型的
+1896个original前缀，再进行自身策略和756个Reader位置；首个probe已实际产生输出。
+使用原训练权重与固定方法，未根据上述dev分数挑seed，其他工作树保持暂停。当前是
+保留集执行中，尚无完整保留集质量结论。

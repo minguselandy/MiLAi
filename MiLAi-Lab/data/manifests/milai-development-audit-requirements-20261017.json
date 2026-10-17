@@ -107,7 +107,7 @@
         "5.4",
         "8/priority5"
       ],
-      "state": "DEV_FULL_MATRIX_REVIEW_AND_COSTS_CLOSED_RESERVED_PENDING",
+      "state": "DEV_FULL_MATRIX_CLOSED_RESERVED_PIPELINE_LIVE",
       "evidence": [
         "configs/milai-global-reader-policy-qa-v1.json",
         "configs/milai-global-reserved-policy-qa-v1.json",
@@ -117,7 +117,7 @@
         "data/manifests/milai-global-reader-policy-qa-v1-summary.json",
         "data/manifests/milai-global-reader-response-review-v1-annotations.json"
       ],
-      "finding": "Dev837 positions/570 actual first requests/267 reuses complete. All31 sources/570 responses author reviewed before method mapping. Generation1238480tokens/dense42325tokens and all12 local-stage ledger deltas match. Supported6: dense3,128native/linear fixed4=1/2/2;128native adaptive0/0/0,linear0/2/1. No stable benefit. Reserved28x27 still required."
+      "finding": "Dev837 positions/570 actual first requests/267 reuses complete. All31 sources/570 responses author reviewed before method mapping. Generation1238480tokens/dense42325tokens and all12 local-stage ledger deltas match. Supported6: dense3,128native/linear fixed4=1/2/2;128native adaptive0/0/0,linear0/2/1. No stable benefit. Reserved frozen pipeline dispatched source d5261e45, coordinator4100019/session80572; all12 models retained. Prefixes and756 Reader positions still to finish."
     },
     {
       "id": "external_identity_and_transfer_scope",
@@ -125,7 +125,7 @@
         "7",
         "8/priority5"
       ],
-      "state": "EXPOSURE_IDENTITY_RESOLVED_NEW_TRANSFER_RESULTS_PENDING",
+      "state": "EXPOSURE_IDENTITY_RESOLVED_RESERVED_EVALUATION_LIVE",
       "evidence": [
         "data/manifests/jev-longmemeval-exposure-final-v1-20261017.json",
         "data/manifests/jev-longmemeval-v2-prior-contact-20261017.json",
@@ -165,9 +165,10 @@
     }
   ],
   "next_required_execution": [
-    "Dispatch frozen reserved pipeline now that all predecessor processes exited and all28 source reviews are complete; no seed or policy changes.",
-    "Review original-only reserved prefixes, actual firstresponses, source fidelity, family/seed/stratum quality and complete costs.",
-    "Reconcile both cohorts and perform full audit completion review; never infer broad generality from small conditional counts."
+    "Continue existing reserved pipeline4100019/session80572. Do not launch again or alter method from dev results.",
+    "After all reserved probes close, run analyze_reserved_reader_probes.py when the ledger lease is free.",
+    "Review reserved firstresponses before method mapping, finalize export once, then receipt/cost collector and semantic join.",
+    "Reconcile both cohorts and perform full audit completion review; do not infer broad generality from small conditional counts."
   ],
   "training_closure": "data/manifests/milai-global-reader-reference-v1-summary.json",
   "historical_training_snapshot": {
@@ -245,5 +246,38 @@
     "reserved_prefix_analysis_tool": "tools/analyze_reserved_reader_probes.py",
     "summary": "data/manifests/milai-global-reader-policy-qa-v1-summary.json",
     "actual_driver_reader_scorer_pids_absent": true
+  },
+  "live_reserved_posttrain_snapshot": {
+    "status": "RESERVED_PIPELINE_LIVE",
+    "observed_epoch": 1792226226.7497532,
+    "driver_pid": 4100019,
+    "source_version": "d5261e45",
+    "exec_session": 80572,
+    "active": {
+      "stage": "probe-families32-0-linear",
+      "pid": 4102595,
+      "physical_gpu_allocation": "2"
+    },
+    "completed_stages": 1,
+    "first_probe": {
+      "status": "COMPLETED",
+      "pid": 4100025,
+      "completed": 158,
+      "planned": 158,
+      "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-source-v1/data/reference-states.jsonl",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/0/native/checkpoint",
+      "physical_gpu": 2,
+      "seed": 20261017,
+      "http_requests": 0,
+      "backend": "native",
+      "variants": [
+        "original"
+      ]
+    },
+    "predecessor_dev_closed": true,
+    "all28_source_reviews_closed_before_dispatch": true,
+    "models_or_policies_selected_from_dev": false,
+    "automatic_retry": false,
+    "next": "Inspect actual PID/stage and continue existing session. Never dispatch a duplicate driver."
   }
 }

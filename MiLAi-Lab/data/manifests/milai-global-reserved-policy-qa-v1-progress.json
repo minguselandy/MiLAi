@@ -1,0 +1,33 @@
+{
+  "status": "RESERVED_PIPELINE_LIVE",
+  "observed_epoch": 1792226226.7497532,
+  "driver_pid": 4100019,
+  "source_version": "d5261e45",
+  "exec_session": 80572,
+  "active": {
+    "stage": "probe-families32-0-linear",
+    "pid": 4102595,
+    "physical_gpu_allocation": "2"
+  },
+  "completed_stages": 1,
+  "first_probe": {
+    "status": "COMPLETED",
+    "pid": 4100025,
+    "completed": 158,
+    "planned": 158,
+    "data": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reserved-source-v1/data/reference-states.jsonl",
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families32/0/native/checkpoint",
+    "physical_gpu": 2,
+    "seed": 20261017,
+    "http_requests": 0,
+    "backend": "native",
+    "variants": [
+      "original"
+    ]
+  },
+  "predecessor_dev_closed": true,
+  "all28_source_reviews_closed_before_dispatch": true,
+  "models_or_policies_selected_from_dev": false,
+  "automatic_retry": false,
+  "next": "Inspect actual PID/stage and continue existing session. Never dispatch a duplicate driver."
+}

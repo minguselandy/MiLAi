@@ -1,4 +1,4 @@
-# CURRENT: dev Reader and review CLOSED; reserved dispatch next — 2026-10-17
+# CURRENT: dev QA/review CLOSED; reserved pipeline LIVE — 2026-10-17
 
 Full user goal remains ACTIVE. Global analysis/generalization, no per-case runtime tuning.
 Other worktrees stay user-paused. No subagents/SHA/fingerprints/newservices/retries/default
@@ -23,12 +23,13 @@ assumptions explicitly qualified, not called false world facts. No stable advant
 Full docs and summary: milai-global-reader-policy-qa-v1-summary.json. Semantic join2tests,
 Ruff/targetedmypy and package/tools boundaries pass. Goal not complete ondev results alone.
 
-NEXT dispatch PREPARED global-reserved-policy-qa-v1/driver.py using current gitversion,
+RESERVED NOW LIVE source d5261e45 coordinator4100019 exec80572, initial child4100025.
+Do NOT dispatch again. Inspect actual driver.json/stage/PIDs; first native probe progressing.
 PYTHONPATH=src:tools CUDA interpreter artifacts/jev-reader/cuda-env/bin/python (do NOT resolve
-venv symlink). No reserved driver.json exists yet. Frozen config all12 models,14families28rows,
+venv symlink). Frozen config all12 models,14families28rows,
 158prefixes x12=1896 original-only forwards,24selection stages,dense,preview,756Readerpositions,
 nativescore. All28 source-first reviews already CLOSED before reserved predictions.
-Prerequisite dev driver COMPLETED and actual PIDs absent are now satisfied.
+Prerequisite dev driver COMPLETED and actual PIDs absent verified before dispatch.
 New tools/analyze_reserved_reader_probes.py supports original-only reserved inputs and
 source/reference diagnostics; no nonexistent FP32-dev baseline/five-view invariance.
 Run analysis after probes close when original ledger lease free; do not block live HTTPowner.
