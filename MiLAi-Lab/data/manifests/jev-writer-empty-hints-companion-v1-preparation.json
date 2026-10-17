@@ -1,0 +1,66 @@
+{
+  "status": "PREPARED_NO_MODEL",
+  "new_model_calls": 0,
+  "source_tool_literal_copy": true,
+  "actual_omission_inputs_verified": 4,
+  "selected_source_requests": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/controlled-boundary-v1/family-0/seed/http/maintenance/seed/1/batch-0/edit/work-0/request.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/controlled-boundary-v1/family-2/seed/http/maintenance/seed/2/batch-0/edit/work-0/request.json"
+  ],
+  "case_lengths": [
+    {
+      "case": "case-0",
+      "variant": "baseline",
+      "tokens": 4946
+    },
+    {
+      "case": "case-0",
+      "variant": "omit_empty",
+      "tokens": 4942
+    },
+    {
+      "case": "case-3",
+      "variant": "baseline",
+      "tokens": 4364
+    },
+    {
+      "case": "case-3",
+      "variant": "omit_empty",
+      "tokens": 4360
+    }
+  ],
+  "source_scope": "Archived local recipe copied verbatim; no sibling source or experiment files changed.",
+  "protocol": {
+    "name": "milai-jev-writer-empty-hints-companion-v1",
+    "base_config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/configs/milai-jev-memops-common-7860-v1.json",
+    "cases": [
+      {
+        "id": "case-0",
+        "request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/controlled-boundary-v1/family-0/seed/http/maintenance/seed/1/batch-0/edit/work-0/request.json",
+        "selection": "previous_success_control"
+      },
+      {
+        "id": "case-3",
+        "request": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/controlled-boundary-v1/family-2/seed/http/maintenance/seed/2/batch-0/edit/work-0/request.json",
+        "selection": "south_checks_noop"
+      }
+    ],
+    "seeds": [
+      0,
+      1
+    ],
+    "factor": "Only omit an exactly empty delivery.change_candidates list; original evidence, actual before, instructions, response schema and model profile stay unchanged.",
+    "scope": "Companion proposal-only diagnostic. The two source requests were selected in a four-context preparation before inspecting any probe output. The overlapping Luma-first-check and North-first-check requests are covered by an already-running sibling study; only prior-success Nera checks and South-check arrival are run here. Not an independent benchmark or bank commit.",
+    "primary_study": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/empty-writer-hint-paired-v1",
+    "counterbalance": "Original then omission seed0; omission then original seed1, matching the primary study.",
+    "planned_calls": 8,
+    "output_budget": 8192,
+    "temperature": 1.0,
+    "enable_thinking": true,
+    "source_tool_snapshot": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/writer-empty-hints-companion-v1/probe.py",
+    "source_tool_original": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/tools/probe_empty_writer_hint.py",
+    "original_16_call_preparation": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/writer-empty-hints-v1/preparation.json"
+  },
+  "source_tool_version": "08301fd1",
+  "superseded_preparation": "artifacts/jev-reader/writer-empty-hints-v1/supersession.json"
+}
