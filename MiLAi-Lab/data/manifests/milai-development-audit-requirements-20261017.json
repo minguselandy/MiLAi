@@ -1,0 +1,184 @@
+{
+  "status": "COMPLETION_NOT_PROVEN",
+  "goal_complete": false,
+  "objective_source": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_TRAINING_AUDIT_20261017.md",
+  "scope": "Current20261017audit pluslatestuserglobaltraining/nootherworktreeresume direction; old20261016bottleneck audit remains historical, not silently rewritten.",
+  "previous_goal_turn_classification": "progress",
+  "requirements": [
+    {
+      "id": "project_and_audit_understanding",
+      "audit_sections": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "9"
+      ],
+      "state": "EVIDENCE_REVIEWED_CURRENT_BRANCH_AND_PROCESSES_VERIFIED",
+      "evidence": [
+        "docs/MILAI_AUDIT_EXECUTION_20261017.md",
+        "docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md",
+        "artifacts/jev-reader/global-writer-evidence-audit-v1/remote-refs.json"
+      ],
+      "finding": "Research implementation and historical main/publication distinct. Actualtraining live, publicrefs unchanged, currentauditbranch localonly. Productdiff frome832e2d empty; no remoteCI result inferred."
+    },
+    {
+      "id": "same_data_objective_and_train_fit",
+      "audit_sections": [
+        "5.1",
+        "8/priority1",
+        "8/priority3"
+      ],
+      "state": "SMALL_MATCHED_CONTRAST_CLOSED_GLOBAL_MATRIX_STILL_RUNNING",
+      "evidence": [
+        "data/manifests/jev-reader-objective-pair-user-restart-v1-summary.json",
+        "data/manifests/milai-global-reader-reference-v1-protocol.json",
+        "artifacts/jev-reader/global-reader-reference-v1/analysis-progress-2/report.json"
+      ],
+      "finding": "Base-start softCE/set paired on86reviewedstates, same24updates/seeds0,1 closed with no consistent netgain. New32/128family native/linear,seeds0/1/2 matrix inprogress; finaltrain evaluation and originalledger captured. No root/STOP majority score substituted for semantic success."
+    },
+    {
+      "id": "global_semantics_and_source_partitions",
+      "audit_sections": [
+        "4",
+        "8/priority2"
+      ],
+      "state": "BROAD_PREPARATION_AND_SOURCE_AUDITS_CLOSED_GENERALIZATION_UNPROVEN",
+      "evidence": [
+        "data/manifests/milai-global-joint-partition-v1-feasibility.json",
+        "data/manifests/milai-global-training-source-audit-v1-summary.json",
+        "data/manifests/milai-global-reader-reference-v1-preparation.json",
+        "data/manifests/milai-global-reader-reference-v1-dev-source-summary.json",
+        "data/manifests/milai-global-reserved-source-v1-summary.json"
+      ],
+      "finding": "Latestuserglobality steers away from superseded155state microfit.128independenttrainingfamilies, multiplegenericreadstates and sourcevariants, wholefamilysplits and questionweights. Supervision remains explicitlynativeweak references; audits44traincandidate/31dev/28reserved distinguish sourcevalidity, ambiguity, alternative paths and derived facts. Fullsemantic generality not established by population size or labelcounts."
+    },
+    {
+      "id": "presentation_and_reload_factors",
+      "audit_sections": [
+        "5.3",
+        "8/priority2"
+      ],
+      "state": "OLD_PROBES_CLOSED_GLOBAL_PROBES_PREPARED_NOT_DISPATCHED",
+      "evidence": [
+        "data/manifests/jev-reader-option-shuffle-v1-summary.json",
+        "data/manifests/milai-global-reader-policy-qa-v1-protocol.json",
+        "data/manifests/milai-global-reader-checkpoint-baseline-correction-v1.json"
+      ],
+      "finding": "Oldoption/order collapse and constant-stop augmentation preserved. Newglobal12model five-view10080forward probe uses same reloadedcheckpoint for original and variants; F16storage/FP32reload corrected BEFOREposttraincalls, no trainingchange."
+    },
+    {
+      "id": "remaining_budget_utility",
+      "audit_sections": [
+        "5.2",
+        "8/priority3"
+      ],
+      "state": "CONDITIONAL_EXTENSION_NOT_CLAIMED_OR_SILENTLY_SUBSTITUTED",
+      "evidence": [
+        "data/manifests/jev-reader-objective-pair-user-restart-v1-summary.json",
+        "data/manifests/milai-global-reader-reference-v1-protocol.json"
+      ],
+      "finding": "Explicitremainingbudget/utility objective is separate from setloss. No usefulness result claimed. Audit says ranking should work before deployingadaptiveSTOP; currentfirstlarge bestopen36/117 remainsbelowBM25next50/117, so no adaptive default or speculativeRL expansion."
+    },
+    {
+      "id": "writer_reader_separate_and_real_state",
+      "audit_sections": [
+        "2.1",
+        "4",
+        "6",
+        "8/priority4"
+      ],
+      "state": "ACTUAL_STATE_AND_STRONG_CONTROLS_RECONCILED_NO_BROAD_WRITER_LEARNING_CLAIM",
+      "evidence": [
+        "data/manifests/jev-memops-factor-extension-v1-summary.json",
+        "data/manifests/jev-memops-factor-extension-v1-review.json",
+        "data/manifests/jev-memops-forgotten-content-probe-v1-summary.json",
+        "data/manifests/jev-writer-empty-hints-joint-review-20261017.json",
+        "data/manifests/milai-global-writer-evidence-audit-v1.json"
+      ],
+      "finding": "18genuinebefore/after pairs acrossD0-D4,25currentcommittedrecordvalues plus4seedvalues checked againstSQLite read-only. Zero storedbefore relations and no demonstratedpreservepositive coverage: do not fabricate labels or expandImpact. Validproposals/shortinputs notequatedwithstate benefit; Readerweights are notWriter supervision. WiderW/Bsemantic necessity/generalization remainsunproven."
+    },
+    {
+      "id": "same_method_policy_qa_and_complete_cost",
+      "audit_sections": [
+        "3",
+        "5.4",
+        "8/priority5"
+      ],
+      "state": "INCOMPLETE_FROZEN_EVALUATIONS_READY_AFTER_TRAINING",
+      "evidence": [
+        "configs/milai-global-reader-policy-qa-v1.json",
+        "configs/milai-global-reserved-policy-qa-v1.json",
+        "data/manifests/milai-global-reader-policy-qa-v1-input-review.json",
+        "data/manifests/milai-global-reserved-policy-qa-v1-input-review.json"
+      ],
+      "finding": "All12finalmodels fixed4/adaptive plusBM25/dense4/full20. Dev31x27=837positions;reserved28x27=756. Sourcepreviews complete; actualposttrainmodelcallsnotstarted. Must close firstresponses, source-faithfulness review, family/seed/stratum table and actual/standalonecosts before completion."
+    },
+    {
+      "id": "external_identity_and_transfer_scope",
+      "audit_sections": [
+        "7",
+        "8/priority5"
+      ],
+      "state": "EXPOSURE_IDENTITY_RESOLVED_NEW_TRANSFER_RESULTS_PENDING",
+      "evidence": [
+        "data/manifests/jev-longmemeval-exposure-final-v1-20261017.json",
+        "data/manifests/jev-longmemeval-v2-prior-contact-20261017.json",
+        "data/manifests/milai-global-reserved-source-v1-admission.json"
+      ],
+      "finding": "LMEv1/V2 cannot be reset to blind by questionIDs; priorMEME/MemConflict are qualified exposed regressions. NewMuSiQueDEV14sourcegroups have checkedliteralboundary vs5454train/119dev/229cal/864seen; not officialtest, exhaustivehistorical,semantic-nearduplicate orpretraining certification. No broadcross-domain claim."
+    },
+    {
+      "id": "minimal_changes_and_user_constraints",
+      "audit_sections": [
+        "8",
+        "user_latest_global_training_and_pause"
+      ],
+      "state": "PRESERVED_CONTINUOUSLY",
+      "evidence": [
+        "AGENTS.md",
+        "docs/MILAI_AUDIT_EXECUTION_20261017.md",
+        "artifacts/jev-reader/global-reader-reference-v1/driver.json"
+      ],
+      "finding": "Otherworktrees noresume, existingBGE/7860 unchanged; rootserialGPU2/3, originalledger, firstfailures retained, noSHA/contentfingerprints, per-case runtimepatches, newservices, auto-retries, defaultadoption orProduct/API/permission/Canonical changes. Genericmetadata/analysis kept outside modelpayload."
+    },
+    {
+      "id": "software_checks_and_reviewable_delivery",
+      "audit_sections": [
+        "1",
+        "9"
+      ],
+      "state": "TARGETED_CHECKS_PASSED_FULL_MODEL_AND_COST_REPORT_PENDING",
+      "evidence": [
+        "tests/unit/test_global_reader_analysis.py",
+        "tests/unit/test_bounded_invariance.py",
+        "tests/unit/test_bounded_reader_rollouts.py",
+        "tests/unit/test_musique_reader.py",
+        "docs/MILAI_GLOBAL_TRAINING_GENERALIZATION_20261017.md"
+      ],
+      "finding": "14targetedtests including downloadedofficialscorer pass, Ruff/mypy andpackage/toolsboundary pass. Latestchanges aredata/protocol/reports; nofullrepo/remoteCI run and noremote publication. Softwarechecks are not semantic quality proof."
+    }
+  ],
+  "live_training_snapshot": {
+    "observed_epoch": 1792215003.3797836,
+    "driver_pid": 3091162,
+    "completed_jobs": 8,
+    "planned_jobs": 12,
+    "active": {
+      "cohort": "families128",
+      "seed": 1,
+      "backend": "linear",
+      "pid": 3334790,
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/global-reader-reference-v1/runs/families128/1/linear"
+    },
+    "active_optimizer_updates": 154,
+    "actual_pids_verified": true
+  },
+  "next_required_execution": [
+    "Close all12frozen trainingjobs and perseed/size/head train-dev/componentcost matrix.",
+    "Run prepared globaldev posttrain pipeline using corrected5viewreloadedbaseline.",
+    "Run prepared reservedsource prefix/actualpolicyQA after declared predecessorsclose; no training/tuning onreviewedreserveddata.",
+    "Review firstanswers and source/statefidelity, preserve original/native metrics, compare strongsimplecontrols and fullcosts with family/seed/stratum scope.",
+    "Reaudit fullobjective from actualterminalfiles/currentstate beforecompletion; negative or narrow evidence must not become broadsuccess."
+  ]
+}

@@ -22,8 +22,8 @@ changed; before-reference snapshot preserved. No predictions read before fullsou
 See reference-v1-dev-source annotations/summary. Reader contract=supplieddocumentsonly.
 Inspect allcompletedoutputs/actualterminalstatus; no outcome-based dispatch/checkpointchoice.
 First32/native/seed0 CLOSED38updates,train157/304,dev33/168 vsconstant-exhausted34;
-sufficient0/17. No routechoice fromfirstresult. Lastverified6/12CLOSED; first128/seed0/native
-PID3214855 at144/154updates; inspectactualstate. Inspectdriver.json forlatertransitions. Firstjobcost
+sufficient0/17. No routechoice fromfirstresult. Lastverified8/12CLOSED; current128/seed1/linear
+PID3334790 at154updates/finaltrain-eval; inspectactualstate. Inspectdriver.json forlatertransitions. Firstjobcost
 306.869s wall alreadyoriginalledger; do notrebill. Onlyourcoordinator/trainer found live.
 POSTTRAIN PREPARED notstarted: artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
 config configs/milai-global-reader-policy-qa-v1.json. Requiresall12trainclosed+actualPIDsabsent.
@@ -52,6 +52,14 @@ Nevertrain/tune onreservedcontents. Method539e3ad3 frozen beforeviewing.
 ReservedQA prepared global-reserved-policy-qa-v1/driver.py/config,requiresdevQAclosedAND
 all28sourceannotationsclosed:1896prefixforwards+756Readerpositions,all12models+3controls.
 Dense363inputs/max442/45834tokens/23batchesexpected;0HTTP. Do notdispatchbeforeprerequisites.
+Currentcompletionaudit data/manifests/milai-development-audit-requirements-20261017.json:
+fullgoalnotproven, nextall12close→correcteddevpostpipeline→reservedpipeline→allfirstanswers/
+sourcefidelity/fullcost/seed/family analysis. Nevercallcompletedonprefixorsourcepreparation.
+INTERIManalysis-progress-2 covers7jobs, allledgerdeltasmatch.32sixall devsufficient0/17;
+first128native0train971/1223,dev38/168,bestopen36/117 vsBM25next50/117. No routechoice.
+Writerread-onlyphysicalreconciliation CLOSED18before/afterpairs,4seed+25currentSQLitevalues
+match. Allbeforestoredrelations0, nopreservepositives established; keepD0, noImpactexpansion.
+Remoteexplicitrefscheckedmain518aee41/oldbranche832e2d,currentbranchunpublished; noProductdiff.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17
