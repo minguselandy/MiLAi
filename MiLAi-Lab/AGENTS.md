@@ -26,7 +26,9 @@ Keep positive local signals and weaknesses; no stable net benefit or auto-STOP d
 All14 reserved families remain evaluation-only. Actual1/6 shared background paragraphs in
 32/128 train are not target/proof overlaps; do not claim all text or pretraining unseen.
 Writer old18 state pairs reconciled; no broad root/preserve-learning claim or bank mutations.
-Remote main518aee41/prior researche832e2d; audit branch local only. No request to publish.
+Remote snapshot at audit closure: main518aee41/prior researche832e2d.
+The user authorized GitHub publication of feat/lab-audit-objective-diagnosis-20261017
+on 2026-10-17. Earlier local-only/no-publication notes remain historical snapshots.
 
 Everything below is historical and must not trigger a duplicate run or cost record.
 
