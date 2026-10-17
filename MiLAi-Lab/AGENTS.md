@@ -69,6 +69,11 @@ Plot tool uses systempython3/matplotlib3.10.3 onanalysis-final ONLY. Freshmetada
 Fulltraining summarytracked+PNG/PDFverified:1152updates,7172.844wall/10188.318CPU,all12ledger
 deltasmatch.128native dev38/46/58,bestopen36/33/52;linear43/51/65,best45/47/52;BM2550/117.
 Keepallseeds/models; no stable nativeadvantage or semanticSTOP. Fullposttrain stillrequired.
+All12five-view probes CLOSED10080forwards/29905968tokens,1551.491wall/2377.654CPU alreadyledger.
+Input/criteria/outputkey/actionmapping all10080verified;2.718secvalidation separatelycharged.
+128native0reloadchanges3choices butsameaccept38;11otherssamechoices. Candidateorder128
+agreement77–86/168;32native2constantSTOP167–168agreementonly34accepted. No variantselection.
+Probe summaries/inputreviewtracked; postdriver nowpastprobes intoownselection/Reader stages.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17

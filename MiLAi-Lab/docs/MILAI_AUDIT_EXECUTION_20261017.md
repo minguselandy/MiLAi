@@ -523,3 +523,10 @@ best-open36/33/52；linear43/51/65、45/47/52，BM25next50/117。原生头尚无
 7172.844秒训练墙钟、10188.318秒CPU及全部token/forward计数只汇总原消耗，不重计。
 新posttrain源码8ce5d09b/coordinator3610392/exec56592已启动，实际阶段probe执行中；
 数据、Reader及训练参数不再改变。完整goal仍ACTIVE。
+
+
+12模型五视图10080forward全部闭合，29905968输入tokens，1551.491秒墙钟/2377.654秒CPU。
+10080输入、criteria/输出keys顺序及canonical映射全检通过。128native0重载改变3个choice，
+总接受数不变；其他11模型choice相同。128档candidate反序一致率仅77–86/168；小档native2
+常量exhausted一致率很高而只有34/168接受。所有变体结果保存，不选有利呈现或重训。
+新动作轨迹阶段已继续执行；尚不能宣布QA/来源忠实或净收益。当前模型代码未热改。

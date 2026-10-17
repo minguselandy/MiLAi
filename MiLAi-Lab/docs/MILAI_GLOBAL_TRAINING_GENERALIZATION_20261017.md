@@ -424,3 +424,33 @@ encoder输入工作，不是生成请求或独立样本数。总计7172.844秒�
 不足时空答案契约和原生指标分开。作者审阅仍非独立人工评判；事后发现的新证明只可单列
 补充，不能覆盖预先审阅标签或只奖励某个方法。未知用量保留，不以0充当免费调用。
 [结果审阅与成本协议](../data/manifests/milai-global-reader-response-review-v1-protocol.json)。
+
+
+## 重载与呈现探针闭合
+
+12模型×168状态×5视图共10080次首次forward全部完成；实际输入、criteria顺序、输出key
+顺序及canonical动作映射逐位置核对通过。保持原段落正文和监督，标题前缀是预声明的
+呈现变化。没有将新探针结果回填训练。
+
+重载因素确实能影响动作：128家族native/seed0有3/168个choice改变，虽然总接受数仍38；
+其余11模型choice相同。所有模型logits都有小差异，最大绝对差约0.0051–0.0559。因此新
+original与变体使用同一重载模型的修正是必要的，不能用总分没变代替逐动作一致。
+
+| 128家族模型 | original | aliases | candidate反序 | option反序 | title前缀 |
+|---|---:|---:|---:|---:|---:|
+| native seed0 | 38 | 31 | 39 | 37 | 43 |
+| native seed1 | 46 | 52 | 57 | 53 | 48 |
+| native seed2 | 58 | 61 | 72 | 55 | 56 |
+| linear seed0 | 43 | 43 | 51 | 46 | 52 |
+| linear seed1 | 51 | 37 | 39 | 50 | 52 |
+| linear seed2 | 65 | 63 | 60 | 58 | 62 |
+
+以上为参考接受数/168，不是QA。128档candidate反序时，exactchoice一致数仅77–86/168；
+一些变化是多个可接受open之间的合法替换，所以同时保留两视图均正确的计数。相反，
+32/native/seed2几乎一直选择exhausted，表现为167–168/168的一致，却只有34/168接受。
+不能把一致率当语义稳健性，也不根据某个变体较高的分数事后更换当前策略呈现方式。
+
+新增probe实际29905968输入tokens、1551.491秒墙钟/2377.654秒CPU，原账本已计；汇总不重计。
+逐输入机械核对2.718秒另计，0模型调用、无SHA/替代指纹。自身策略与Reader仍在按原协议运行。
+[全部模型/分项/成本](../data/manifests/milai-global-reader-presentation-probe-v1-summary.json) ·
+[输入与动作映射核对](../data/manifests/milai-global-reader-presentation-probe-v1-input-review.json)。

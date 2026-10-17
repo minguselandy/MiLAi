@@ -1,0 +1,14 @@
+{
+  "status": "ALL10080_VISIBLE_TRANSFORMS_ORDER_AND_ACTION_MAPPINGS_VERIFIED",
+  "positions": 10080,
+  "source_text_or_supervision_changed": false,
+  "model_calls": 0,
+  "sha_checks": false,
+  "scope": "Literalpayload/criteriaorder/outputkey/mapping verification. Not semantic performance.",
+  "compute": {
+    "wall_seconds": 2.7183018224313855,
+    "cpu_seconds": 2.716400258,
+    "validations": 1
+  },
+  "source_text_scope": "Literal paragraph bodies and original supervision are retained; title_frame intentionally adds a neutral title prefix."
+}
