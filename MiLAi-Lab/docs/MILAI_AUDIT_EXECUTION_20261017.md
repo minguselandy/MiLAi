@@ -405,3 +405,16 @@ uv从本地缓存补rank-bm25==0.2.2后成功准备一次，未重跑任何模�
 Ruff、package DAG、active tools边界通过；工具mypy首次发现新文件类型声明问题及dev环境无
 可选torch/laya，修正类型声明后按可选依赖缺失范围复查。无Product/Schema/API等改动。
 完整审查目标仍ACTIVE，训练结果与后续自身策略QA/来源语义/Writer独立验收尚待完成。
+
+
+### 全局训练派发与新dev来源审阅
+
+已按2346bb57派发global-reader-reference-v1，coordinator3091162/exec50991，首次trainer3091167；
+12个任务串行，无自动重试/其他工作树恢复。初始native32 seed0已实际完成38个更新；
+闭合状态以driver/run和实际PID为准。同期完整读完新dev31来源/17家族/620段位置/360正文，
+未先读预测；保存来源快照后才比较原答案与support。6supported/19pool-insufficient/6masked，
+原17阳性对应6/8/3。不将11个非supported全部称原答案错误；地理常识、父母/婚姻、历史
+时点等范围明确保留。完整注释与summary已保存，未改变训练数据或模型设置。
+Ruff/mypy最终通过（mypy对缺失可选torch/laya依赖使用ignore-missing-imports），真实torch
+环境针对测试8通过，DAG/tools边界通过。来源关闭脚本首次误用系统python3.10，在导入时
+因StrEnum退出，尚无写操作；改项目3.11环境闭合一次，无模型/账本重计。

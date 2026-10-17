@@ -222,3 +222,21 @@ Writer D0独立保留，读端监督不冒充写端根修改训练。训练与�
 [准备与完整输入检查](../data/manifests/milai-global-reader-reference-v1-preparation.json)。
 运行产物位于 `artifacts/jev-reader/global-reader-reference-v1`，沿用原账本与GPU2/3，
 不恢复其他工作树、不新增服务、不做SHA/内容指纹校验、不改变Product/API/权限/Canonical。
+
+
+## 新开发集的来源语义审阅
+
+训练已按源码2346bb57启动，12个任务由单一coordinator串行执行。其他工作树未恢复。
+在不查看模型预测的前提下，17个开发家族/31条来源全部620段位置、360种字面正文已读；
+先保存来源判断，再比对原答案/support。结果为6条请求属性有支持、19条在严格来源合同下
+证据不足、6条歧义遮罩。原17个answerable对应6/8/3。这不是11个已证实错误答案，
+也不是全语料噪声率或独立人工gold。
+
+区别包括：同名县跨州连接、剧院毁于二战不能证明某人参加一战、演出地点不能证明出生地、
+博物馆所在地不能证明死亡地；另有共同父母能否推出婚姻、地理常识是否允许、历史WorldCup
+时点、冠军认定口径等解释边界，逐项保留条件。Grieg题有两条替代身份材料，不能把两条
+并成必须同时读取的目标。审阅仅作评价解释层，不更改冻结训练输入/标签，不根据失败补题。
+模型仍按原协议训练，不改变epoch/种子/队列。机械验证单列原账本，助手审阅未完整计时。
+
+[开发来源逐条注释](../data/manifests/milai-global-reader-reference-v1-dev-source-annotations.json) ·
+[数量与解释范围](../data/manifests/milai-global-reader-reference-v1-dev-source-summary.json)。

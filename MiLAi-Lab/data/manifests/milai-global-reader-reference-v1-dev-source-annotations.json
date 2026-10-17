@@ -1,0 +1,1604 @@
+{
+  "status": "SOURCE_FIRST_REVIEW_AND_REFERENCE_COMPARISON_COMPLETE",
+  "completed_families": 17,
+  "planned_families": 17,
+  "completed_rows": 31,
+  "planned_rows": 31,
+  "cases": [
+    {
+      "source_row": 32106,
+      "family": "musique-family-000012",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          14,
+          12
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "15 October 1979",
+      "rationale": "Guazapa volcano is located in El Salvador (14); the Salvadoran Civil War paragraph (12) identifies the 15 October 1979 coup as the widely seen tipping point toward civil war. Treat the date as conventional onset, not a claim that the source assigns a formally declared first day.",
+      "qualifications": [
+        "Conventional onset/tipping point wording preserved."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "October 15, 1979",
+        "support_source_indices": [
+          12,
+          14
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 3035,
+      "family": "musique-family-000073",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          9
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "9 identifies Basil Dearden as the director; none of the other19paragraphs establishes his spouse. Spouses of other directors or fictional characters cannot fill this relation.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Melissa Stribling",
+        "support_source_indices": [
+          9
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 37871,
+      "family": "musique-family-000073",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          18,
+          12
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "18 identifies director Basil Dearden.12 says James Dearden is the son of Melissa Stribling and Basil Dearden; this establishes joint parentage, not their marriage. The explicit marriage in12 is James to Annabel Brooks. Melissa is a plausible intended candidate but spouse relation is not established by the pool.",
+      "qualifications": [
+        "Do not silently treat co-parentage as a marriage proof."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Melissa Stribling",
+        "support_source_indices": [
+          12,
+          18
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 13068,
+      "family": "musique-family-000199",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "Question asks for a county that contains a state.4 places Wonderland Village in Livonia,Michigan,United States;17 places Livonia in Wayne County in Michigan. Neither says a county contains the state. Possible repairs yield different targets (county of place=Wayne County; country of state=United States); keep task ambiguity, no auto-rewrite.",
+      "qualifications": [
+        "Conditional Wayne County proof[4,17] only for a different repaired question; United States directly in4 for country reading."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Wayne County",
+        "support_source_indices": [
+          4,
+          17
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 16494,
+      "family": "musique-family-000199",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "Same county-contains-state ambiguity. In addition, this pool lacks WonderlandVillage/Livonia/Michigan linking facts; unrelated administrative villages cannot supply the missing entity.",
+      "qualifications": [
+        "No repaired question or inferred answer used for supervision."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Wayne County",
+        "support_source_indices": []
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 2389,
+      "family": "musique-family-000493",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          16
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "16 identifies Paul Potts as the performer of Passione. No other paragraph states his genre; other artists genres cannot fill it.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "opera",
+        "support_source_indices": [
+          16
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 36664,
+      "family": "musique-family-000493",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          6,
+          4
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "opera",
+      "rationale": "6 identifies Passione as Paul Potts album and4 explicitly calls Paul Potts an opera singer. The question asks performer genre, not a claim that every track is an opera.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "opera",
+        "support_source_indices": [
+          4,
+          6
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 13512,
+      "family": "musique-family-000657",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          13
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "13 identifies Nolan Ryan as the record holder for most no-hitters. No paragraph gives his high school; Keefe Cato university facts and other players do not fill the missing premise.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Alvin High School",
+        "support_source_indices": [
+          13
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 28535,
+      "family": "musique-family-000657",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          6,
+          14
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Alvin High School",
+      "rationale": "6 identifies Nolan Ryan as most-no-hitters pitcher;14 names Alvin High School for all of his high-school baseball career.",
+      "qualifications": [
+        "Record scope follows the supplied baseball/MLB account, not a fresh current-sports claim."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Alvin High School",
+        "support_source_indices": [
+          6,
+          14
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 15048,
+      "family": "musique-family-000679",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "5 calls Jarkko Nieminen a Finnish tennis player and resident of Masku. Neither residence nor nationality establishes place/county of birth. No Jarkko birth fact elsewhere; Kai Nieminen is another person.",
+      "qualifications": [
+        "County is not silently rewritten to country; either reading still lacks a supported birthplace."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Finland",
+        "support_source_indices": [
+          5
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 36433,
+      "family": "musique-family-000679",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "12 gives residence in Masku,16 puts a football club in Masku,Finland. Neither establishes where Jarkko Nieminen was born. Birthplaces of Jarkko Suo and Jarkko Oikarinen concern different people.",
+      "qualifications": [
+        "County/country distinction retained; nationality and residence not treated as birthplace."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Finland",
+        "support_source_indices": [
+          12,
+          16
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 2792,
+      "family": "musique-family-000698",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          1
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "1 locates Edgewater Colorado in Jefferson County and names neighbors of the CITY. No paragraph establishes a neighboring region of Jefferson County/the requested district. Boundaries of the city cannot silently become county boundaries.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Clallam County",
+        "support_source_indices": [
+          1,
+          17
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 9768,
+      "family": "musique-family-000698",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "Multiple Edgewaters occur: Chicago community0, colonial Hudson location16, Colorado city18. No unique requested district is fixed, and19 describes a Russian district without linking it to any Edgewater. No complete border chain is supplied.",
+      "qualifications": [
+        "Conditional Colorado context18 is not a completed district-border proof."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Clallam County",
+        "support_source_indices": [
+          18
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 30334,
+      "family": "musique-family-000719",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          0,
+          11
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "British Army",
+      "rationale": "0 identifies Andy McNab as the book writer;11 explicitly states that Andy McNab is an ex-member of British Army regiment SAS. The author, not fictional Nick Stone, is the subject of that clause.",
+      "qualifications": [
+        "Awkward grammar understood via explicit film/book relationship. SAS is named regiment; military branch is British Army."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "British Army",
+        "support_source_indices": [
+          0,
+          11
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 36451,
+      "family": "musique-family-000719",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "No paragraph identifies the Bravo Two Zero book writer or his service. Mexican colonel Calixto Bravo is another person; TV Bravo references and unrelated armed forces do not establish the relation.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "British Army",
+        "support_source_indices": []
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 21946,
+      "family": "musique-family-000730",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          8,
+          19
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Copenhagen",
+      "rationale": "8 identifies Soren Kierkegaard as advocating a larger role for language in philosophy, the available interpretation of the question descriptor.19 gives his birth in Copenhagen.",
+      "qualifications": [
+        "Question descriptor broadened doctrine is loose; source says advocated greater focus, not a unique formal doctrine founder. From is read as birth/origin city."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Copenhagen",
+        "support_source_indices": [
+          8,
+          19
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 32682,
+      "family": "musique-family-000730",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "19 still gives Kierkegaard birthplace, but the source that identifies him as the philosopher in the question is absent. Other philosophers have birthplace or language interests, not the specific described broadening contribution.",
+      "qualifications": [
+        "Kierkegaard birth fact is available context, not sufficient identification of the unspecified person."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Copenhagen",
+        "support_source_indices": [
+          19
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 37230,
+      "family": "musique-family-000734",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          2
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "2 explicitly identifies husband Erwin Piscator. None establishes his participation in a conflict. WWII destruction of a theatre and the performers migration narrative do not show his military service.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "World War I",
+        "support_source_indices": [
+          2,
+          11
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 21798,
+      "family": "musique-family-000755",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          4
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "4 identifies Mal Waldron as Mal81 performer, but no paragraph establishes his birthplace. Performance in New York is not birth there. The hurricane timeline cannot be attached to an unknown birthplace, and the NY effects infobox mixes NJ landfall/rainband dates.",
+      "qualifications": [
+        "Do not substitute concert location for birthplace or infer a date from an ungrounded location join."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "October 28, 2012",
+        "support_source_indices": [
+          4,
+          5,
+          15
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 38602,
+      "family": "musique-family-000798",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "17 dates French colonization of the Americas broadly to the16thcentury, but no paragraph identifies the place exporting freshwater to theUS. Generic freshwater lakes and reserves are not export evidence.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "in the 16th century",
+        "support_source_indices": [
+          17
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 39147,
+      "family": "musique-family-000798",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          17
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "17 identifies Canadian freshwater exports to theUS.0 describes French colonization of the Americas broadly, without locating or dating first French settlement specifically in Canada. A hemispheric onset is not a proven first-settlement date for each constituent country.",
+      "qualifications": [
+        "A16thcentury answer may match a coarse intended reference but is not an explicit Canada-specific chain in this pool."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "in the 16th century",
+        "support_source_indices": [
+          0,
+          17
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 5054,
+      "family": "musique-family-000800",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          2
+        ],
+        [
+          14
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "2 explicitly names Edvard Grieg as composer;14 independently attributes the piece to him. Neither supplies death place.15 locates a prize/museum in Bergen and gives a birthday, not where Grieg died.",
+      "qualifications": [
+        "Two alternative identity premises must not become a must-read union."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Bergen",
+        "support_source_indices": [
+          14,
+          15
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 21156,
+      "family": "musique-family-000800",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "This pool lacks the piece/composer identification and any Grieg death-place fact. Other writers, kings, halls and death stories concern different entities.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Bergen",
+        "support_source_indices": []
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 39159,
+      "family": "musique-family-000804",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          11,
+          17
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "1807",
+      "rationale": "11 is the future-scheduled2018WorldCup in Russia in the supplied historical snapshot.17 dates the Anglo-Russian War to1807-1812 and explicitly identifies the two countries via Russia-UK heading.",
+      "qualifications": [
+        "Answer conditional on the source-snapshot planned2018WorldCup, not current2026 nextWorldCup. England is read in the question as Britain/UK; source names Anglo-Russian War."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "1807",
+        "support_source_indices": [
+          11,
+          17
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 39603,
+      "family": "musique-family-000804",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "No future2018Russia host paragraph and no Anglo-Russian conflict/date remain. Other WorldCups and WWII tournament cancellation do not identify the requested host-country war.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "1807",
+        "support_source_indices": []
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 24052,
+      "family": "musique-family-000812",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "2 identifies NotreDame.7 explicitly distinguishes school-claimed/AP-Coaches/NCAA-recognized championships and any-major-selector championships. The latest listed NCAA-recognized year is1988, while at-least-one-selector national championships include2012. Question supplies no recognition criterion, so no unique unqualified latest year.",
+      "qualifications": [
+        "Conditional1988 under recognized/claimed championship convention; conditional2012 under any-selector convention. Both use[2,7]. Preserve ambiguity instead of declaring either historical fact false."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "1988",
+        "support_source_indices": [
+          2,
+          7
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 26884,
+      "family": "musique-family-000812",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          7
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "7 identifies NotreDame as the team Georgia beat. No remaining paragraph gives NotreDame championship history, under either school/NCAA or any-selector convention. Georgia championships and other teams do not answer it.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "1988",
+        "support_source_indices": [
+          7
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 9391,
+      "family": "musique-family-000865",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "Question asks a neighboring COUNTRY but sources concern counties and multiple distinct Goshen Townships (Clermont,Hardin,Belmont).19 places a library/county east of Hamilton County but does not explicitly establish shared border.5 says8of10HamiltonCounties named for AlexanderHamilton without identifying which eight. A unique country/namesake chain is not established.",
+      "qualifications": [
+        "Do not silently repair country to county, choose one Goshen, infer border from east-of and apply generic8of10namesake to a specific county."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Alexander Hamilton",
+        "support_source_indices": [
+          5,
+          7,
+          19
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 33099,
+      "family": "musique-family-000865",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "Same country/county and Goshen-identity ambiguity; this pool also lacks the Goshen township and Clermont location paragraphs. Generic HamiltonCounty namesake statistic8 does not identify the requested jurisdiction.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Alexander Hamilton",
+        "support_source_indices": [
+          8
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 24087,
+      "family": "musique-family-000871",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "No paragraph identifies Henry English Read or his birth. Other Henry/Read names and general citizenship rules do not establish the requested country.",
+      "qualifications": [],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": false,
+        "answer": "America",
+        "support_source_indices": [
+          9
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    },
+    {
+      "source_row": 38432,
+      "family": "musique-family-000871",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          3
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "3 explicitly states birth in LaRue County,Kentucky.11 repeats the county/state for a building; no paragraph states Kentucky or LaRueCounty is in the UnitedStates. American nationality of a different singer does not entail country of that singers birth or Reads birth.",
+      "qualifications": [
+        "If ordinary external geographic knowledge is allowed, UnitedStates follows; under the frozen source-only contract the final containment premise is absent. This is a source-sufficiency limitation, not a claim the expected geographic answer is false."
+      ],
+      "split": "dev",
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "model_predictions_seen": false,
+      "original_reference_seen": true,
+      "original_reference": {
+        "answerable": true,
+        "answer": "America",
+        "support_source_indices": [
+          3,
+          11,
+          14
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "label_role": "Evaluation annotation only; not admitted training gold or independent adjudication"
+    }
+  ],
+  "updated_epoch": 1792210867.2718177,
+  "scope": "Author-reviewed complete development sources; conditional interpretations retained. Not independent human gold and not a corpus noise estimate. No label changes or model tuning.",
+  "paragraph_positions": 620,
+  "unique_literal_title_texts": 360,
+  "original_reference_comparison_epoch": 1792210867.3077343,
+  "native_by_review": {
+    "True/supported": 6,
+    "False/pool_insufficient": 11,
+    "True/pool_insufficient": 8,
+    "True/masked": 3,
+    "False/masked": 3
+  }
+}

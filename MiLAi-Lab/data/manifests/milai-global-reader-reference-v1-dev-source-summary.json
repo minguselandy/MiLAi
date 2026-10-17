@@ -1,0 +1,53 @@
+{
+  "status": "ALL31_DEVELOPMENT_SOURCE_POOLS_REVIEWED_BEFORE_REFERENCE_AND_MODEL_PREDICTIONS",
+  "source_rows": 31,
+  "families": 17,
+  "paragraph_positions": 620,
+  "unique_literal_title_texts": 360,
+  "dispositions": {
+    "supported": 6,
+    "pool_insufficient": 19,
+    "masked": 6
+  },
+  "native_by_review": {
+    "True/supported": 6,
+    "False/pool_insufficient": 11,
+    "True/pool_insufficient": 8,
+    "True/masked": 3,
+    "False/masked": 3
+  },
+  "original_reference_answerable": 17,
+  "supported_rows": [
+    32106,
+    36664,
+    28535,
+    30334,
+    21946,
+    39159
+  ],
+  "ambiguity_or_scope_notes": {
+    "32106": "Conventional coup/tipping point as civil-war onset.",
+    "37871": "Co-parentage does not necessarily establish marriage.",
+    "21946": "Loose question descriptor interpreted as advocacy of greater language focus.",
+    "39147": "Continental colonization date is not automatically country-specific first settlement.",
+    "39159": "Historical planned2018WorldCup snapshot; England interpreted as Britain/UK.",
+    "24052": "Recognized championship versus any-selector championship changes last year.",
+    "38432": "US country inference requires external geographic knowledge not explicitly supplied."
+  },
+  "alternative_partial_paths": {
+    "5054": [
+      [
+        2
+      ],
+      [
+        14
+      ]
+    ]
+  },
+  "label_scope": "Strict source-only contract; retain qualifications. Author review is not independent. Not eleven proven wrong native answers or a corpus noise rate.",
+  "review_before_prediction": true,
+  "training_inputs_or_labels_modified": false,
+  "new_model_calls_for_review": 0,
+  "manual_review_compute": "Not fully metered; never counted as zero. Simultaneous training is recorded separately.",
+  "source_blind_snapshot": "artifacts/jev-reader/global-reader-reference-v1/development-source-review/source-annotations-before-reference.json"
+}
