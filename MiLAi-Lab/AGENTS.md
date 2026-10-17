@@ -1,4 +1,4 @@
-# CURRENT: global reference training LIVE — 2026-10-17
+# CURRENT: global training CLOSED; posttrain READY — 2026-10-17
 
 Full user goal ACTIVE/incomplete; global analysis/generalization required.
 New global-reader-reference-v1 protocol is frozen:32/128nestedfamilies,304/1223states,
@@ -8,8 +8,9 @@ zero truncation.41reviewedquestionIDs all reserved, no per-case gold patch. Supe
 nativeREFERENCE weak labels, notsource-semanticgold. Only1foursteptrainfamily, noneindev.
 Protected49groups never entertraining. Selected14groups/28rows nowreviewedforEVALUATION
 only aftermethodfreeze/literaladmission; othercandidatebodies notshown.
-LIVE source2346bb57 coordinator3091162, initialtrainer3091167, exec50991; inspectactual
-activePID in driver.json beforeacting. RootusesGPU2,3 only. Neverrelaunch aclosed/failed
+Training source2346bb57 ALL12CLOSED, exec50991exit0, coordinator3091162/finaltrainer3521456
+ABSENT. Closurevalidation passed updates38/154, parameterchanges, sixmatchedsampling/length/
+option-order pairs and zeroepoch0logit delta acrosscohorts. Neverrelaunch aclosed/failed
 job or automaticretry. Do nothotedit training/runtime imports whilejobs run. Preserve BASE,
 first failures, originalledger, sourceidentity. No subagents/SHA/fingerprints/newservices.
 Otherworktrees remain userpaused; oldPIDsabsent doesnot authorize restart. Superseded155state
@@ -25,7 +26,7 @@ First32/native/seed0 CLOSED38updates,train157/304,dev33/168 vsconstant-exhausted
 sufficient0/17. No routechoice fromfirstresult. Lastverified8/12CLOSED; current128/seed1/linear
 PID3334790 at154updates/finaltrain-eval; inspectactualstate. Inspectdriver.json forlatertransitions. Firstjobcost
 306.869s wall alreadyoriginalledger; do notrebill. Onlyourcoordinator/trainer found live.
-POSTTRAIN PREPARED notstarted: artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
+POSTTRAIN READY (inspectactualdriver.json beforedispatch): artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
 config configs/milai-global-reader-policy-qa-v1.json. Requiresall12trainclosed+actualPIDsabsent.
 31cases27arms837Readerpositions,12modelsallfixed4/adaptive+BM25/dense4/full20. CORRECTED
 BEFORE DISPATCH:10080probe forwards(5views incl freshoriginal). Bothheads saveF16/reloadFP32;
@@ -60,6 +61,11 @@ first128native0train971/1223,dev38/168,bestopen36/117 vsBM25next50/117. No route
 Writerread-onlyphysicalreconciliation CLOSED18before/afterpairs,4seed+25currentSQLitevalues
 match. Allbeforestoredrelations0, nopreservepositives established; keepD0, noImpactexpansion.
 Remoteexplicitrefscheckedmain518aee41/oldbranche832e2d,currentbranchunpublished; noProductdiff.
+New tools/review_global_reader_results.py auditsactual/standalonecost, exportsarm-hidden
+responseviews withfixedseed20261019 order. Fourtests incl officialscorer PASS; no model calls.
+Response-review rubric frozen preoutcomes; neverequateknownproofdeliverywithcorrectanswer.
+Plot tool uses systempython3/matplotlib3.10.3 onanalysis-final ONLY. FreshmetadataGETs7860/
+7861 healthycorrectIDs/windows,0inference0servicechanges.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17
