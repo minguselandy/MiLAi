@@ -21,8 +21,9 @@ changed; before-reference snapshot preserved. No predictions read before fullsou
 See reference-v1-dev-source annotations/summary. Reader contract=supplieddocumentsonly.
 Inspect allcompletedoutputs/actualterminalstatus; no outcome-based dispatch/checkpointchoice.
 First32/native/seed0 CLOSED38updates,train157/304,dev33/168 vsconstant-exhausted34;
-sufficient0/17. No routechoice fromfirstresult. Currentlinear32/seed0 PID3112544; inspect
-driver.json forlatertransitions. Firstjobcost306.869s wall alreadyoriginalledger. Do notrebill.
+sufficient0/17. No routechoice fromfirstresult. Lastverified5/12CLOSED; sixth32/seed2/linear
+PID3195366 at38updates/finaltrain-eval. Inspectdriver.json forlatertransitions. Firstjobcost
+306.869s wall alreadyoriginalledger; do notrebill. Onlyourcoordinator/trainer found live.
 POSTTRAIN PREPARED notstarted: artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
 config configs/milai-global-reader-policy-qa-v1.json. Requiresall12trainclosed+actualPIDsabsent.
 31cases27arms837Readerpositions,12modelsallfixed4/adaptive+BM25/dense4/full20. 8064newprobe
