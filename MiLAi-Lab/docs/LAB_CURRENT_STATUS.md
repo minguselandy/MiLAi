@@ -1,3 +1,13 @@
+# 2026-10-17：训练审计执行已恢复
+
+本轮用户明确恢复并要求执行训练审计。方法基点e832e2d，当前开发分支
+`feat/lab-audit-objective-diagnosis-20261017`。已实现并冻结同86个来源审阅状态、
+两种子soft-CE/集合损失四任务对照，实际队列已启动；尚未闭合或证明收益。
+新增训练集分项预测，避免只用总接受数掩盖互补和STOP失败。
+无SHA/内容指纹检查，无Product/API/权限/Canonical或既有服务变更。
+完整目标仍active/incomplete，详见[本轮执行记录](MILAI_AUDIT_EXECUTION_20261017.md)。
+下方ACTIVE/PAUSED/LIVE均为各日期历史快照。
+
 # Jev 类 Laya：首轮完整训练与六条件诊断已闭合（2026-10-16）
 
 当前目标仍 ACTIVE / 未完成。完整 encoder+head soft-CE 已完成且真实服务已调用微调权重，
