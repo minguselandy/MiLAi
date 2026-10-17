@@ -1,6 +1,6 @@
 {
   "status": "RESERVED_READER_LIVE_AUTHOR_REVIEW_PARTIAL",
-  "observed_epoch": 1792227473.6930707,
+  "observed_epoch": 1792227500.1530197,
   "driver_pid": 4100019,
   "source_version": "d5261e45",
   "exec_session": 80572,
@@ -37,10 +37,10 @@
     "status": "RUNNING",
     "phase": "predict",
     "planned": 756,
-    "completed": 82,
+    "completed": 85,
     "known_failures": 0,
-    "fresh_reader_attempts": 55,
-    "reused_reader_outputs": 27,
+    "fresh_reader_attempts": 57,
+    "reused_reader_outputs": 28,
     "known_failed_reader_calls": 0
   },
   "preview": {
@@ -58,9 +58,10 @@
   },
   "reviewed_cases": [
     "row-119",
-    "row-410"
+    "row-410",
+    "row-647"
   ],
-  "reviewed_unique_responses": 33,
+  "reviewed_unique_responses": 54,
   "review_path": "artifacts/jev-reader/global-reserved-policy-qa-v1/stream-review/response-annotations.json",
   "stream_export_compute_pending_original_ledger": true
 }

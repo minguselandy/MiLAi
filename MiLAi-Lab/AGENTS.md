@@ -43,12 +43,12 @@ source/reference diagnostics; no nonexistent FP32-dev baseline/five-view invaria
 Analysis CLOSED; no repeat. Do not block a live HTTPowner with new ledger writes.
 Reserved now in Reader: PID4158352 under4100019/exec80572. All38 precedingstages
 CLOSED, preview756/756 with504uniqueinputs. Dense363inputs/45834tokens CLOSED.
-Reserved response review nowfirst2cases119/410 CLOSED,33unique IDs000000–000032.
+Reserved response review nowfirst3cases119/410/647 CLOSED,54unique IDs000000–000053.
 Annotations in reserved stream-review/response-annotations.json. NEXT export completecases
-and read startingindex02/row647. IDs arecohort-local: never reuse570dev annotations.
+and read startingindex03/row786. IDs arecohort-local: never reuse570dev annotations.
 Case119 p12original-character authorship supported; p17adaptation-only path retaineduncertain
 forresponses3/11/12(12alsoanswer metadata contamination). No methodmapping opened.
-Allcase410blankanswers validinsufficiency. Nonempty support_ids withfalse/emptyanswer allowed.
+Allcases410/647blankanswers validinsufficiency. Nonempty support_ids withfalse/emptyanswer allowed.
 Can stream-review closed reserved cases with tools/export_global_reader_responses.py; stable
 IDs local to that cohort. Export costs deferred to final receipt collector after HTTP closes.
 Finish all first-response source review before method mappings; final export then collector
