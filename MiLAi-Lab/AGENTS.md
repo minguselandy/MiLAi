@@ -22,8 +22,9 @@ supported-pool acceptance deltas+6/-11/+11 of185; insufficient partial+18/+11/+5
 seed-statepositions mostly34partialinsufficient, not40independentcases or improvedQA.
 
 LIVE EVALUATION: evaluation-v2/driver.json RUNNING, coordinatorPID1209651, exec1227.
-First8stages reference_seed0/seed1 presentation/evidence/devselect/reservedselect CLOSED exit0.
-Current presentation-reference_seed2 child1617440 onGPU2 was live atlatest snapshot.
+First12stages all3reference models presentation/evidence/devselect/reservedselect CLOSED exit0.
+This is6/12PROBEjobs, not all12probes. Current presentation-source_seed0 child1641673 onGPU2
+was live atlatest snapshot. Analyze probes only when both probe runs for all6models are COMPLETED.
 Use driver.json for laterstage/PID.40serialstages, frozenimports215c84da; do NOT start second driver.
 Training and evaluation data/modelrecipe remain frozen. No tuning, retries, services oroldcohortresumes.
 Evaluation-v1 is superseded PRE-MODEL: absent2Wikianswer_aliases fixed in offline labels only;
@@ -57,7 +58,8 @@ method mappings; assistant partialblinding, notindependentgold. Qualifiedsubsets
 
 NEXT: learning analysis already CLOSED, never rebill. Main analysis tools ready (see --help):
 analyze_source_selection_learning.py probes afterall12probestagesclose; export_global_reader_responses.py during
-Reader fromcompletecases; review_global_reader_results.py aftercohortterminal; manuallyreviewall
+Reader fromcompletecases (no budgetwrites); review_global_reader_results.py afterHTTPownercloses;
+manuallyreviewall
 firstresponses; join_global_reader_review.py into semantic-final; summarize_source_selection_qa.py
 onlyafterbothreviews; plot_source_selection_results.py finalPNG/PDF. Keep allseeds/native/source
 and qualifiedresults/costs/limitations. Finalrequirementclosure stillpending; do NOT markgoalcomplete.

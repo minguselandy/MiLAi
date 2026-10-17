@@ -63,7 +63,7 @@
   "evaluation_exec_session": 1227,
   "evaluation_driver": "artifacts/jev-reader/selection-v2/evaluation-v2/driver.json",
   "training_completed_jobs": 6,
-  "last_observed_epoch": 1792253098.8465736,
+  "last_observed_epoch": 1792253554.3399253,
   "training_active_updates": null,
   "previous_goal_turn_classification": "progress",
   "first_seed_pair": "data/manifests/milai-source-selection-v2-first-seed-pair.json",
@@ -133,11 +133,11 @@
   },
   "learning_analysis": "data/manifests/milai-source-selection-v2-learning-results.json",
   "evaluation_active": {
-    "stage": "presentation-reference_seed2",
-    "pid": 1617440,
+    "stage": "presentation-source_seed0",
+    "pid": 1641673,
     "physical_gpus": "2"
   },
-  "evaluation_completed_stages": 8,
+  "evaluation_completed_stages": 12,
   "evaluation_completed_stage_names": [
     "presentation-reference_seed0",
     "evidence-reference_seed0",
@@ -146,6 +146,11 @@
     "presentation-reference_seed1",
     "evidence-reference_seed1",
     "select-dev-reference_seed1",
-    "select-reserved-reference_seed1"
-  ]
+    "select-reserved-reference_seed1",
+    "presentation-reference_seed2",
+    "evidence-reference_seed2",
+    "select-dev-reference_seed2",
+    "select-reserved-reference_seed2"
+  ],
+  "evaluation_probe_jobs_completed": 6
 }
