@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "tools"))
-from train_bounded_laya import event_weights
+from train_bounded_laya import decision_loss, event_weights
 
 
 def test_loss_mass_is_equal_by_family_then_event_not_prefix_count():
@@ -22,3 +22,29 @@ def test_loss_mass_is_equal_by_family_then_event_not_prefix_count():
     assert mass["a", 0] == pytest.approx(2.5)
     assert mass["a", 1] == pytest.approx(2.5)
     assert mass["b", 2] == pytest.approx(5)
+
+
+def test_set_loss_accepts_mass_on_either_positive_and_ignores_padding():
+    torch = pytest.importorskip("torch")
+    logits = torch.tensor([[2.0, -1.0, 0.5, 100.0]], requires_grad=True)
+    target = torch.tensor([[0.5, 0.5, 0.0, 0.0]])
+    mask = torch.tensor([[True, True, True, False]])
+    actual = decision_loss(logits, target, mask, "set")
+    expected = -torch.log(torch.softmax(logits[0, :3], 0)[:2].sum())
+    assert actual.item() == pytest.approx(expected.item())
+    actual.sum().backward()
+    assert logits.grad[0, 3] == 0
+    assert logits.grad[0, 2] > 0
+    assert torch.isfinite(logits.grad).all()
+
+
+def test_single_positive_set_equals_ce_and_multiple_positives_differ():
+    torch = pytest.importorskip("torch")
+    logits = torch.tensor([[4.0, -2.0, 0.0]])
+    mask = torch.ones_like(logits, dtype=torch.bool)
+    single = torch.tensor([[1.0, 0.0, 0.0]])
+    assert decision_loss(logits, single, mask, "set").item() == pytest.approx(
+        decision_loss(logits, single, mask, "soft-ce").item(), abs=1e-6)
+    multiple = torch.tensor([[0.5, 0.5, 0.0]])
+    assert decision_loss(logits, multiple, mask, "set").item() < 0.02
+    assert decision_loss(logits, multiple, mask, "soft-ce").item() > 3

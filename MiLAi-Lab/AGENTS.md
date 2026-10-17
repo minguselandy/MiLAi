@@ -1,3 +1,16 @@
+# CURRENT: audit execution resumed — 2026-10-17
+
+The current user explicitly resumes research by requesting execution of
+/cra/memory/mx_memory/MiLAi/MiLAi-Lab/docs/MILAI_DEVELOPMENT_TRAINING_AUDIT_20261017.md.
+The older PAUSED publication block below is historical. Work on
+feat/lab-audit-objective-diagnosis-20261017 from e832e2d; no subagents needed.
+See docs/MILAI_AUDIT_EXECUTION_20261017.md and the fixed objective-pair-v1 protocol.
+Only Root runs the four declared serial local GPU jobs on GPUs2,3, original ledger.
+No SHA/content fingerprints, new services, default adoption, unknown replay or
+Product/Archive/API/permission/Canonical changes. Preserve old data/results.
+The full audit remains incomplete: a loss comparison alone does not satisfy
+semantic diversity, Writer/Reader state, policy QA, cost or external eligibility.
+
 # CURRENT: research PAUSED; training summary publication requested — 2026-10-17
 
 Goal is PAUSED/incomplete. The user requested a current training summary and GitHub

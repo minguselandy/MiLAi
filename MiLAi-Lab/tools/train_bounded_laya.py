@@ -1,4 +1,4 @@
-"""Plain soft-CE for bounded reader decisions on two explicitly allocated GPUs.
+"""Matched soft-CE or acceptable-set loss on two explicitly allocated GPUs.
 
 All labelled prefixes are used. Normalize within event and then family, so a
 long history or a family with many derived states cannot dominate the objective.
@@ -35,6 +35,22 @@ def event_weights(rows: list[dict[str, Any]]) -> list[float]:
             / counts[r["metadata"]["family"], r["metadata"]["row"]] for r in rows]
 
 
+def decision_loss(logits: Any, target: Any, mask: Any, objective: str) -> Any:
+    """Return per-state loss; padding is never an acceptable action.
+
+    Set likelihood rewards any admitted action without forcing uniform mass
+    among equivalent positives. It does not correct the source labels.
+    """
+    import torch
+
+    valid_logits = logits.masked_fill(~mask, -torch.inf)
+    if objective == "set":
+        positive_logits = valid_logits.masked_fill(~(target > 0), -torch.inf)
+        return torch.logsumexp(valid_logits, -1) - torch.logsumexp(positive_logits, -1)
+    logp = torch.log_softmax(valid_logits, dim=-1).masked_fill(~mask, 0)
+    return -(target * logp).sum(-1)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("data", type=Path)
@@ -46,6 +62,9 @@ def main() -> None:
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
     parser.add_argument("--backend", choices=("native", "linear"), default="native")
+    parser.add_argument("--objective", choices=("soft-ce", "set"), default="soft-ce")
+    parser.add_argument("--evaluate-train", action="store_true",
+                        help="Save train-prefix predictions as a learning diagnosis")
     args = parser.parse_args()
     import torch
     from laya.common import collate_items
@@ -72,13 +91,16 @@ def main() -> None:
            "epochs": args.epochs, "batch_size": 4, "gradient_accumulation": 4,
            "max_len": args.max_len, "head_max_len": args.head_max_len, "train_states": len(train),
            "dev_states": len(dev), "encoder_lr": 2.5e-5, "head_lr": 1e-4,
-           "freeze_encoder": False, "objective": "event-and-family-normalized soft-CE",
+           "freeze_encoder": False, "objective": args.objective,
+           "loss_weighting": "event-and-family-normalized",
+           "evaluate_train": args.evaluate_train,
            "calibration_test_loaded": False, "http_requests": 0,
            "optimizer_updates": 0, "train_sequence_rows": 0, "train_input_tokens": 0,
            "train_batch_forwards": 0, "train_device_forwards": 0,
            "train_batch_attempts": 0, "train_offered_rows": 0, "train_offered_tokens": 0}
     write_json(args.output / "run.json", run)
     decision = None
+    evaluation_counts: dict[str, Counter[str]] = defaultdict(Counter)
     try:
         if args.backend == "linear":
             from linear_reader_classifier import LinearDecision, save_linear_checkpoint
@@ -122,18 +144,24 @@ def main() -> None:
         steps = args.epochs * math.ceil(math.ceil(len(train) / 4) / 4)
         scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, steps, eta_min=1e-6)
 
-        def evaluate(epoch: int) -> dict[str, Any]:
+        def evaluate(epoch: int, split: str = "dev") -> dict[str, Any]:
             model.eval()
             predictions = []
-            for index, row in enumerate(dev):
+            rows = dev if split == "dev" else train
+            for index, row in enumerate(rows):
                 payload = {k: row[k] for k in ("state", "questions")}
+                previous_counts = dict(decision.counters)
                 predictions.append(decision.predict(payload))
-                write_json(args.output / "dev" / str(epoch) / f"{index}.json", predictions[-1])
-            result = score_predictions(dev, predictions)
-            write_json(args.output / "dev" / str(epoch) / "summary.json", result)
+                evaluation_counts[split].update({
+                    k: v - previous_counts[k] for k, v in decision.counters.items()})
+                write_json(args.output / split / str(epoch) / f"{index}.json", predictions[-1])
+            result = score_predictions(rows, predictions)
+            write_json(args.output / split / str(epoch) / "summary.json", result)
             return result
 
         history = [{"epoch": 0, "dev": evaluate(0)}]
+        if args.evaluate_train:
+            history[0]["train"] = evaluate(0, "train")
         write_json(args.output / "history.json", history)
         rng = random.Random(args.seed)  # noqa: S311 -- reproducible training order
         for epoch in range(1, args.epochs + 1):
@@ -154,13 +182,12 @@ def main() -> None:
                     logits = _forward(parallel, batch, decision.device, False, False)
                     mask = batch["marker_mask"].to(decision.device)
                     target = batch["target"].to(decision.device)
-                    logp = torch.log_softmax(logits.masked_fill(~mask, -1e9), dim=-1)
-                    ce = -(target * logp * mask).sum(-1)
+                    ce = decision_loss(logits, target, mask, args.objective)
                     weighted = ce * torch.tensor([weights[i] for i in indices],
                                                   device=decision.device)
                     loss = weighted.sum() / denominator
                     if not torch.isfinite(loss):
-                        raise ValueError("Non-finite CE")
+                        raise ValueError("Non-finite decision loss")
                     loss.backward()
                     loss_total += float(weighted.sum().detach())
                     run["train_sequence_rows"] += len(indices)
@@ -174,8 +201,12 @@ def main() -> None:
                 write_json(args.output / "run.json", run)
                 print(json.dumps({"epoch": epoch, "updates": run["optimizer_updates"],
                                   "batch": start + len(window)}), flush=True)
-            history.append({"epoch": epoch, "weighted_ce_mean": loss_total / len(train),
+            history.append({"epoch": epoch, "weighted_loss_mean": loss_total / len(train),
                             "dev": evaluate(epoch)})
+            if args.objective == "soft-ce":
+                history[-1]["weighted_ce_mean"] = loss_total / len(train)
+            if args.evaluate_train:
+                history[-1]["train"] = evaluate(epoch, "train")
             write_json(args.output / "history.json", history)
             config = {**decision.config, "max_len": args.max_len, "head_max_len": args.head_max_len,
                       "temperature": [1.0, 1.0, 1.0], "temperature_by_options": {},
@@ -198,8 +229,8 @@ def main() -> None:
                                            "train_batch_forwards", "train_device_forwards",
                                            "train_batch_attempts", "train_offered_rows",
                                            "train_offered_tokens")},
-                    **{f"dev_{k}": v for k, v in (
-                        decision.counters.items() if decision is not None else [])}}
+                    **{f"{split}_{k}": v for split, counters in evaluation_counts.items()
+                       for k, v in counters.items()}}
         write_json(args.output / "compute.json", {**measures,
             "peak_rss_kib": resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
             "peak_cuda_allocated_bytes": [torch.cuda.max_memory_allocated(i) for i in (0, 1)],
