@@ -77,10 +77,18 @@ def main() -> None:
     parser.add_argument("--objective", choices=("soft-ce", "set"), default="soft-ce")
     parser.add_argument("--evaluate-train", action="store_true",
                         help="Save train-prefix predictions as a learning diagnosis")
+    parser.add_argument("--shuffle-options", action="store_true",
+                        help="Resample option slots and matching targets each training epoch")
     args = parser.parse_args()
     import torch
     from laya.common import collate_items
-    from laya.train import _forward, encode_item, items_from_rows, save_checkpoint
+    from laya.train import (
+        _forward,
+        draw_option_order,
+        encode_item,
+        items_from_rows,
+        save_checkpoint,
+    )
 
     torch.set_num_threads(4)
     torch.manual_seed(args.seed)
@@ -106,6 +114,7 @@ def main() -> None:
            "freeze_encoder": False, "objective": args.objective,
            "loss_weighting": "event-and-family-normalized",
            "evaluate_train": args.evaluate_train,
+           "shuffle_options": args.shuffle_options,
            "calibration_test_loaded": False, "http_requests": 0,
            "optimizer_updates": 0, "train_sequence_rows": 0, "train_input_tokens": 0,
            "train_batch_forwards": 0, "train_device_forwards": 0,
@@ -176,8 +185,15 @@ def main() -> None:
             history[0]["train"] = evaluate(0, "train")
         write_json(args.output / "history.json", history)
         rng = random.Random(args.seed)  # noqa: S311 -- reproducible training order
+        option_rng = random.Random(args.seed + 10000)  # noqa: S311 -- independent of row order
         for epoch in range(1, args.epochs + 1):
             model.train()
+            if args.shuffle_options:
+                option_orders = [draw_option_order(item, option_rng, ("choice",)) for item in items]
+                encoded = [encode_item(tok, item, args.max_len, args.head_max_len,
+                                       option_order=order)
+                           for item, order in zip(items, option_orders, strict=True)]
+                write_json(args.output / "option-orders" / f"{epoch}.json", option_orders)
             order = list(range(len(train)))
             rng.shuffle(order)
             batches = [order[i:i + 4] for i in range(0, len(order), 4)]

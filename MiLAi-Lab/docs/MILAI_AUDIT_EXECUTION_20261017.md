@@ -195,3 +195,17 @@ summary相同，各任务计量与原账本差额一致；未重新收费训练�
 计算，不自动重试原根。v2改用不解析符号链接的absolute解释器路径，复用已完成BM25
 及原7问题；已验证实际torch和Reader子进程环境，模型、输入、策略和Reader设置均不变。
 [修正派发协议](../configs/milai-jev-reader-objective-policy-qa-v2.json)。
+
+## 下一项最小训练因素已实现，尚未运行
+
+训练器新增显式`--shuffle-options`，默认关闭。启用时每epoch调用Laya既有
+`draw_option_order`和`encode_item`，选项正文与目标概率同步重排；候选正文、问题、
+家族权重、行采样及loss不变。置换RNG为seed+10000，与行顺序RNG分离。
+每epoch保存实际置换。此改动不影响正在运行的已冻结权重QA。
+
+使用实际tokenizer检查86个训练状态：目标逐槽跟随置换，完整选项token片段对应、
+序列长度保持；无模型前向。5项损失/计量/指标检查、Ruff/mypy、包DAG及工具边界通过。
+准备两项新soft-CE训练（seed0/1），复用本轮两项已完成的固定选项soft-CE作为控制，
+不重复计费控制。保持相同86状态、BASE初始化及24更新；不加入新155语义状态，避免
+把数据收益混入位置因素。最终epoch4和两个种子完整报告，先等当前QA终态及审阅。
+[置换因素协议](../data/manifests/jev-reader-option-shuffle-v1-protocol.json)。
