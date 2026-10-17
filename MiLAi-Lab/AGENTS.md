@@ -1,3 +1,13 @@
+# CURRENT: BOTH Reader cohorts CLOSED; final reserved reconciliation next
+
+Reserved driver40stages COMPLETED, exec80572exit0, PIDs4100019/4158352/286526 ABSENT.
+756positions/504fresh/252reuse/1knownfailure. All28cases/504uniqueresponses fullyreviewed
+beforemethodmapping; snapshot stream-review/response-annotations-before-method-mapping.json
+now CLOSED. Finalexport28 DONE. Next finalreceiptcollector, semanticjoin, then combined
+cohortsummary/plot/cost and fullgoalcompletionaudit. Do NOT run any model or export again
+oncecollectorrecordsstreamcost. Goal remainsACTIVE; do notcloseonpipelineexecution alone.
+More historicaldetails below; this terminalstate supersedes prior LIVE snapshots.
+
 # CURRENT: dev QA/review CLOSED; reserved pipeline LIVE — 2026-10-17
 
 Full user goal remains ACTIVE. Global analysis/generalization, no per-case runtime tuning.
