@@ -1,0 +1,111 @@
+{
+  "name": "jev-reader-objective-policy-qa-v1",
+  "cases": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/cases.jsonl",
+  "labels": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/labels.jsonl",
+  "common_retrieval_costs": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/common-retrieval-costs.json",
+  "official_scorer": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/musique-official",
+  "reader": {
+    "experiment_name": "jev-reader-objective-policy-qa-v1",
+    "budget_path": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json",
+    "tokenizer_path": "/cra/qwen36-35B",
+    "context_tokens": 65536,
+    "model": {
+      "base_url": "http://127.0.0.1:7860/v1",
+      "model": "Qwen3.6-35B-A3B-FP8",
+      "temperature": 1.0,
+      "max_tokens": 8192,
+      "timeout": 300,
+      "enable_thinking": true,
+      "max_calls": 12
+    },
+    "interface_version": "v2"
+  },
+  "arms": {
+    "bm25_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/bm25",
+      "policy": "k4"
+    },
+    "full20": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/bm25",
+      "policy": "k20"
+    },
+    "0-soft-ce_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/0-soft-ce",
+      "policy": "adaptive"
+    },
+    "0-soft-ce_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/0-soft-ce-k4",
+      "policy": "k4"
+    },
+    "0-set_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/0-set",
+      "policy": "adaptive"
+    },
+    "0-set_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/0-set-k4",
+      "policy": "k4"
+    },
+    "1-soft-ce_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/1-soft-ce",
+      "policy": "adaptive"
+    },
+    "1-soft-ce_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/1-soft-ce-k4",
+      "policy": "k4"
+    },
+    "1-set_adaptive": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/1-set",
+      "policy": "adaptive"
+    },
+    "1-set_k4": {
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/1-set-k4",
+      "policy": "k4"
+    }
+  },
+  "planned_cases": 7,
+  "scope": "All seven previously source-reviewed dev questions, including masked questions. Four final epoch4 BASE-start models, each fixed4 and adaptive4; BM25 fixed4 and full20. Exposed diagnostic, not independent confirmation. Report source-grounded review separately from native answer/support scores. No augmented training or changed Reader in this comparison.",
+  "candidate_count": 20,
+  "selector_max_len": 8192,
+  "selector_head_max_len": 512,
+  "adaptive_read_limit": 4,
+  "reuse_identical_reader_inputs": true,
+  "reader_reuse_policy": "First response or confirmed failure shared only for identical messages and schema; literal equality, no fingerprints. Native provider cache and original ledger only. Per-method standalone cost reuses the first receipt, actual total charges once.",
+  "reader_delivery_order": "common prepared candidate order; controller opening order remains in selection trace",
+  "planned_prediction_positions": 70,
+  "reader_call_upper_bound": 70,
+  "arm_order_seed": 20261017,
+  "arm_order": "seeded initial permutation, cyclic rotation per case to balance server-cache/order effects",
+  "models": [
+    {
+      "seed": 0,
+      "objective": "soft-ce",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-user-restart-v1/runs/0/soft-ce/checkpoint",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/0-soft-ce",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/0-soft-ce-k4"
+    },
+    {
+      "seed": 0,
+      "objective": "set",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-user-restart-v1/runs/0/set/checkpoint",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/0-set",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/0-set-k4"
+    },
+    {
+      "seed": 1,
+      "objective": "soft-ce",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-user-restart-v1/runs/1/soft-ce/checkpoint",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/1-soft-ce",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/1-soft-ce-k4"
+    },
+    {
+      "seed": 1,
+      "objective": "set",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-pair-user-restart-v1/runs/1/set/checkpoint",
+      "selection_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/1-set",
+      "fixed4_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/objective-policy-qa-v1/selections/1-set-k4"
+    }
+  ],
+  "source_review": "data/manifests/jev-reader-source-qualified-v1-annotations.json",
+  "model_selection": "All four fixed epoch4 checkpoints; no favorable-seed/epoch selection, weights unchanged after presentation diagnostics.",
+  "status": "PREPARED_NO_MODEL_CALLS"
+}

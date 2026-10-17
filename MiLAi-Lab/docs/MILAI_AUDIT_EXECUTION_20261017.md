@@ -111,3 +111,15 @@ Baltimore County→Towson的三段证据成立，保留county capital解释为co
 未改变公开Schema/API/权限/Canonical。标注助手不等于独立人工审阅。
 新的4模型呈现探针协议已重新绑定用户重启队列的最终checkpoint，保留原协议不执行：
 [重启后探针协议](../data/manifests/jev-reader-invariance-user-restart-v1-protocol.json)。
+
+## 同方法真实策略问答协议已准备
+
+在这批已来源审阅的7个开发问题（4家族，含遮罩问题）上固定70个方法位置：
+四个最终epoch4模型各自固定4次打开与自适应4次决策，外加BM25固定4和全20段。
+所有条件共用原7860 Reader指令与解码设置；完全相同messages/schema仅复用首次回执，
+按独立方法另计控制器/Reader成本。数据增强未加入这批模型，不混成标签/损失/Reader
+多因素实验。原生分数与来源充分性审阅分开；这是已暴露诊断，不是独立测试。
+
+已核对固定输入20段、真实BM25排序、7问题来源映射；3项轨迹/重用测试通过。
+目前只准备输入与协议，新增Reader调用0；需四任务训练终态和呈现探针闭合后执行。
+[固定QA协议](../configs/milai-jev-reader-objective-policy-qa-v1.json)。
