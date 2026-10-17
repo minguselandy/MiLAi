@@ -6,7 +6,8 @@ New global-reader-reference-v1 protocol is frozen:32/128nestedfamilies,304/1223s
 38/154updates. AllBASE/softCE/family+questionweights/optionsshuffle. Fullinputmax4512/4515,
 zero truncation.41reviewedquestionIDs all reserved, no per-case gold patch. Supervision is
 nativeREFERENCE weak labels, notsource-semanticgold. Only1foursteptrainfamily, noneindev.
-Protected49candidategroups rawfile notloaded duringpreparation; no newtestcontents shown.
+Protected49groups never entertraining. Selected14groups/28rows nowreviewedforEVALUATION
+only aftermethodfreeze/literaladmission; othercandidatebodies notshown.
 LIVE source2346bb57 coordinator3091162, initialtrainer3091167, exec50991; inspectactual
 activePID in driver.json beforeacting. RootusesGPU2,3 only. Neverrelaunch aclosed/failed
 job or automaticretry. Do nothotedit training/runtime imports whilejobs run. Preserve BASE,
@@ -21,8 +22,8 @@ changed; before-reference snapshot preserved. No predictions read before fullsou
 See reference-v1-dev-source annotations/summary. Reader contract=supplieddocumentsonly.
 Inspect allcompletedoutputs/actualterminalstatus; no outcome-based dispatch/checkpointchoice.
 First32/native/seed0 CLOSED38updates,train157/304,dev33/168 vsconstant-exhausted34;
-sufficient0/17. No routechoice fromfirstresult. Lastverified5/12CLOSED; sixth32/seed2/linear
-PID3195366 at38updates/finaltrain-eval. Inspectdriver.json forlatertransitions. Firstjobcost
+sufficient0/17. No routechoice fromfirstresult. Lastverified6/12CLOSED; first128/seed0/native
+PID3214855 at144/154updates; inspectactualstate. Inspectdriver.json forlatertransitions. Firstjobcost
 306.869s wall alreadyoriginalledger; do notrebill. Onlyourcoordinator/trainer found live.
 POSTTRAIN PREPARED notstarted: artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
 config configs/milai-global-reader-policy-qa-v1.json. Requiresall12trainclosed+actualPIDsabsent.
@@ -32,16 +33,19 @@ Dense377uniqueinputs/42325tokens/max379,24batch16requests expected but0sentsofar
 Offlineanalysis-progress-1 isINTERIM2jobs; bothoriginalledgerdeltas match. Do notrerun/rebill.
 14targetedtests inclofficialscorer, Ruff/mypy andDAG/toolsboundaryPASS; trainingimportsnotedited.
 Reservedsource protocolmilai-global-reserved-source-v1 fixes14of49groups6/4/4,28rows bymetadata;
-NOnewbody/answerdisplay. Currentliteralcheck CLOSED0conflicts vs5454train119dev229cal
+Currentliteralcheck CLOSED0conflicts vs5454train119dev229cal
 and864registered/currentseen rows; method539e3ad3 fixed. Sourceviewing isnowallowed for
 evaluation reviewonly, afterexplicitdatasetexport. No protectedrawfile goesintotrain.
 CommonQAprepare nowrequires explicitdecisions/sources/output --budget --scope (no devscaffold).
 nevergradient/tuning. Futureevaluateall12models,notanoutcome-selectedwinner. Max756Readerpositions.
 Reservedsource data NOWEXPORTED: global-reserved-source-v1/data/reference-states.jsonl,
 selected-sources.jsonl,158states28rows/test/training_allowedfalse,max3848/zero truncation.
-review-views/ catalogorder14families560positions349literaltexts NOTYETREAD. Source-first
-annotation snapshotinitialized0/28. NEXTindependentwork:readfullviews,annotatebeforeoriginal
-answers/predictions; donotuse newsource data fortraining. Method539e3ad3 frozen beforehand.
+SOURCE REVIEW CLOSED14families28rows560positions349literaltexts beforeoriginalanswers
+andreservedpredictions:10supported15insufficient3masked. Nativepositive14=9/3/2,negative14=1/12/1.
+Keep qualifications:6000000/.754~8millioncountryvs6millionsubgroup;impeachmentstageconflict;
+nonuniquechildren;brand/facelift;contextualWittenberg. Notindependentgold/alllabelerrors.
+Saved source-annotations-before-reference unchanged, finalannotations+summarytracked.
+Nevertrain/tune onreservedcontents. Method539e3ad3 frozen beforeviewing.
 ReservedQA prepared global-reserved-policy-qa-v1/driver.py/config,requiresdevQAclosedAND
 all28sourceannotationsclosed:1896prefixforwards+756Readerpositions,all12models+3controls.
 Dense363inputs/max442/45834tokens/23batchesexpected;0HTTP. Do notdispatchbeforeprerequisites.

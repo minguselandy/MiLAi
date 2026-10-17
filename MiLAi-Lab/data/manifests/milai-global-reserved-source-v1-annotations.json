@@ -1,0 +1,1587 @@
+{
+  "status": "SOURCE_FIRST_REVIEW_AND_REFERENCE_COMPARISON_COMPLETE",
+  "planned_families": 14,
+  "planned_rows": 28,
+  "completed_families": 14,
+  "completed_rows": 28,
+  "cases": [
+    {
+      "source_row": 647,
+      "family": "candidate-family-000173",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          2
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "2 identifies Gustav Klimt as creator of the exact titled painting. No paragraph gives his movement/group; other Judith artworks and creators are different entities.",
+      "qualifications": [],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Vienna Secession",
+        "support_source_indices": [
+          2
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 1967,
+      "family": "candidate-family-000173",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          11,
+          1
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Vienna Secession movement",
+      "rationale": "11 identifies Gustav Klimt as the painter;1 explicitly calls him a member of the Vienna Secession movement.",
+      "qualifications": [],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Vienna Secession",
+        "support_source_indices": [
+          1,
+          11
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 119,
+      "family": "candidate-family-000466",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          4
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Mario Puzo",
+      "rationale": "4 places the fictional Vito Corleone in Mario Puzos novel The Godfather, supporting original novel-character authorship;12 additionally identifies Vito in the title Godfather role. Performer Brando and film director Coppola are distinct credits.",
+      "qualifications": [
+        "Creation interpreted as original fictional-character authorship, not acting or adaptation direction. Main-character descriptor does not require inventing a different creator; a shorter authorship path is allowed."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Mario Puzo",
+        "support_source_indices": [
+          4,
+          12
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 410,
+      "family": "candidate-family-000466",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          2
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "2 describes the Godfather plot and Vito, but the novel/author paragraph and PartII novel attribution are absent.0 names Coppola as film director and Cazale as an actor, not the creator of the original main character.",
+      "qualifications": [],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Mario Puzo",
+        "support_source_indices": [
+          2
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 1561,
+      "family": "candidate-family-000025",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "The singular child is not uniquely specified.16 directly identifies Hsiao-wen as Ching-kuos son and names paternal half-brothers;0 and13 independently identify Hsiao-chang and Hsiao-wu as the same fathers children. The named person himself also satisfies the wording.",
+      "qualifications": [
+        "Multiple valid children; do not force one reference child as the unique correct answer or all other children as false."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Chiang Hsiao-wu",
+        "support_source_indices": [
+          13,
+          16
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 2273,
+      "family": "candidate-family-000025",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "7 retains Hsiao-wens biography, explicitly making him a child of Ching-kuo and identifying Winston Chang and John Chiang as sharing the same father. Even without the other sibling biographies, several answers satisfy the question.",
+      "qualifications": [
+        "Removing a particular child paragraph does not establish unanswerability of this nonunique question."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Chiang Hsiao-wu",
+        "support_source_indices": [
+          7
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 1673,
+      "family": "candidate-family-000421",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          10
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "10 explicitly identifies Ajay Devgan as Kajols husband. None of the films listed has all three requested stars Preity Zinta,Madhuri Dixit and that spouse.1 only gives an in-law relation and is not needed as a marriage proof.",
+      "qualifications": [],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Yeh Raaste Hain Pyaar Ke",
+        "support_source_indices": [
+          1
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 2203,
+      "family": "candidate-family-000421",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          7,
+          6
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Yeh Raaste Hain Pyaar Ke",
+      "rationale": "7 identifies Ajay Devgan as Kajols husband;6 credits Madhuri Dixit,Ajay Devgn and Preity Zinta as stars of Yeh Raaste Hain Pyaar Ke.",
+      "qualifications": [
+        "Devgan/Devgn spelling variant interpreted as the same named actor in these source contexts."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Yeh Raaste Hain Pyaar Ke",
+        "support_source_indices": [
+          6,
+          13
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 3314,
+      "family": "candidate-family-000434",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          6
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "1788–1795 (impeachment proceedings)",
+      "rationale": "6 directly identifies the first Governor-General in its description of Warren Hastings impeachment and dates the attempt/proceedings to1788-1795; no extra officeholder paragraph is necessary.",
+      "qualifications": [
+        "Source dates the proceedings/attempt, not a precisely dated formal charge or conviction. Preserve failed-attempt wording;1788 is the stated start of that interval."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "1786",
+        "support_source_indices": [
+          14
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold",
+      "post_reference_scope_note": "Initial review supports the1788-1795 proceedings interval. The native1786 answer refers to a different event-stage interpretation; this is not a certified false-negative native answerability label."
+    },
+    {
+      "source_row": 3604,
+      "family": "candidate-family-000434",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "masked",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "0/5/11/13 identify Hastings as first holder.4 separates charges on4April1786 from Westminster impeachment beginning14February1788;18 instead calls1786 the trial year. The question does not specify stage, and the supplied accounts conflict on trial chronology.",
+      "qualifications": [
+        "Conditional14February1788 for Westminster opening from4 plus any first-holder paragraph;4April1786 for charge presentation.18 gives a conflicting trial-in1786 account. No unique formal-impeachment date is certified."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "1786",
+        "support_source_indices": [
+          0,
+          18
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 3703,
+      "family": "candidate-family-000443",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          15
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "15 identifies Geena Davis as Thelma. No paragraph supplies her A League of Their Own role; other actresses named Thelma and unrelated casting lists cannot fill it.",
+      "qualifications": [],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Dottie Hinson",
+        "support_source_indices": [
+          15
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 3911,
+      "family": "candidate-family-000443",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          15,
+          3
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Dottie Hinson",
+      "rationale": "15 names Geena Davis as Thelma, and3 associates Dottie Hinson with Geena Davis in A League of Their Own.",
+      "qualifications": [
+        "Role supported by the supplied casting notation; no external chronology or cast correction inserted."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Dottie Hinson",
+        "support_source_indices": [
+          3,
+          15
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 1941,
+      "family": "candidate-family-000080",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          12
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "12 attributes the exact concerto wording to Antonio Vivaldi;2 locates staging of an opera in Venice, not his birth.19 identifies Rialto Bridge in Venice, but no Vivaldi birthplace premise is supplied.",
+      "qualifications": [
+        "Performance/staging place is not birthplace; no external musical-catalogue or biographical fact inserted."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Rialto Bridge",
+        "support_source_indices": [
+          2,
+          12,
+          19
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 3039,
+      "family": "candidate-family-000080",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "18 identifies Rialto Bridge in Venice, but neither exact concerto composer nor composer birthplace is supplied. Chopins differently titled CmajorOp3 work at15 does not identify this concerto.",
+      "qualifications": [],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Rialto Bridge",
+        "support_source_indices": [
+          18
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 4475,
+      "family": "candidate-family-000482",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          5
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "5 establishes Miami as the Golden Palace setting. None supplies Miamis adjacent ocean or the relevant naval battle/German objective. Football goals and battles at other named sites do not complete the chain.",
+      "qualifications": [],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "to stem the flow of merchant shipping that enabled Britain to keep fighting",
+        "support_source_indices": [
+          5
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 4524,
+      "family": "candidate-family-000482",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          1,
+          8,
+          5
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Cut off merchant shipping and supplies to Britain",
+      "rationale": "1 sets the show in Miami;8 places Miami on the Atlantic Ocean;5 describes the Battle of the Atlantic as the Axis attempt to stem merchant shipping sustaining Britain, and calls it the German blockade.",
+      "qualifications": [
+        "5 also states the later1942-onward aim of preventing Allied supply/equipment buildup for invasion; preserve that temporal detail if given, rather than replacing the broad main objective."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "to stem the flow of merchant shipping that enabled Britain to keep fighting",
+        "support_source_indices": [
+          1,
+          5,
+          8
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 4403,
+      "family": "candidate-family-000506",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          19,
+          17,
+          2
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Approximately 8 million (6 million / 0.754 ≈ 7.96 million)",
+      "rationale": "19 names the US Air Force as developer of Man in Space Soonest, before transfer/renaming;17 names Israel as collaborating with the US Air Force.2 states Jews are75.4percent of Israels population and number6million. Total population can be derived by division;6million alone is the subgroup, not the country total.",
+      "qualifications": [
+        "Derived arithmetic from rounded historical source figures, not current population or exact census count. Country identified via original developer, not the later renamed NASA program."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "6 million",
+        "support_source_indices": [
+          2,
+          17,
+          19
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold",
+      "post_reference_scope_note": "Original6million is the Jewish subgroup count in the supplied paragraph. Initial source-first total estimate used6million/0.754 before seeing this reference. It is approximately8million, not an exact current census."
+    },
+    {
+      "source_row": 4621,
+      "family": "candidate-family-000506",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          18
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "18 identifies original developer US Air Force, but the named cooperating-country link and population figures are absent. Canadian military personnel115349 and population of cocoa-program communities are not the requested national population.",
+      "qualifications": [],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "6 million",
+        "support_source_indices": [
+          18
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 1643,
+      "family": "candidate-family-000485",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          14,
+          19
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "14 identifies Scion as a Toyota brand and the concept car as physically built by Five Axis Models;19 names Lexus as Toyotas luxury division. No paragraph supplies an RX350 styling-change date. Other350cc models are unrelated.",
+      "qualifications": [
+        "Parent-brand/manufacturer versus physical prototype-builder distinction retained; this partial path identifies brand ownership only."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Sales began worldwide in April 2012",
+        "support_source_indices": [
+          14,
+          19
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 2382,
+      "family": "candidate-family-000485",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          16
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "2012 (facelift unveiled March; sales began April)",
+      "rationale": "16 directly names RX350 and describes the facelift unveiled in March2012, with worldwide sales in April2012. The model is explicitly named in the question, so its styling-date attribute has a direct source without forcing extra brand paragraphs.10 and18 additionally ground Scion/Toyota/Lexus ownership if needed.",
+      "qualifications": [
+        "Body style interpreted as the supplied facelift/appearance change, not a claim of a new body class or first-ever generation redesign. Design late2010 and patent7January2011 are separate stages. Toyota is the parent brand;10 explicitly names Five Axis Models as physical builder of the concept."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Sales began worldwide in April 2012",
+        "support_source_indices": [
+          10,
+          16,
+          18
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 4519,
+      "family": "candidate-family-000347",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          0
+        ],
+        [
+          16
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "0 and16 independently identify Markus Zusak as novel author. No paragraph establishes his citizenship or the nearby-country relation.15 identifies Abel Tasman with New Zealand in the source, but cannot connect that country to the unspecified citizenship chain.",
+      "qualifications": [
+        "Dutch-discovery wording belongs to the source historical account; no claim that the inhabited country lacked prior Indigenous discovery. Alternative author paragraphs are not a must-read union."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Abel Tasman",
+        "support_source_indices": [
+          0,
+          15
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 4622,
+      "family": "candidate-family-000347",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          0
+        ],
+        [
+          1
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "0/1 identify Zusak;14 gives an Australian book award, not citizenship.12 lists Australia/NewZealand Olympic participation, not geographical proximity.6 gives the NewZealand/Tasman fact without the missing links.",
+      "qualifications": [
+        "Award nationality does not establish author citizenship; co-participation does not establish neighboring geography."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Abel Tasman",
+        "support_source_indices": [
+          0,
+          6,
+          12,
+          14
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 786,
+      "family": "candidate-family-000520",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "12 names Luther as a priest/reformer, describes RomanCatholic critiques and a Marian sermon at Wittenberg;0 gives the state of the named Wittenberg district. The pool contains no DaragaChurch religion fact, so the church-to-person criterion cannot be established.",
+      "qualifications": [
+        "Conditional Saxony-Anhalt from[12,0] if Luther is independently identified as the intended person; that condition is not supplied by the Daraga premise here."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Saxony-Anhalt",
+        "support_source_indices": [
+          0,
+          12
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 2141,
+      "family": "candidate-family-000520",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          19,
+          6,
+          1
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Saxony-Anhalt",
+      "rationale": "19 identifies DaragaChurch as RomanCatholic.6 identifies Luther as a priest-professor-reformer, describes his RomanCatholic critiques and locates his Marian sermon in Wittenberg.1 locates the named Wittenberg district in Saxony-Anhalt.17 gives an additional explicit Reformation identification but is redundant under the contextual reading of6.",
+      "qualifications": [
+        "Contextual inference from reformer plus Catholic critiques is allowed; an explicit four-link corroborating path is[19,17,6,1]. Wittenberg in the sermon is resolved to the district named by the question; no separate city-to-district containment sentence is supplied. The state is the supplied present administrative location, not a claim that Saxony-Anhalt existed during Luthers lifetime."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Saxony-Anhalt",
+        "support_source_indices": [
+          1,
+          6,
+          17,
+          19
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 1654,
+      "family": "candidate-family-000526",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          12,
+          9
+        ],
+        [
+          12,
+          6
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "12 identifies the album as Eric Johnsons side-project AlienLoveChild with several named performers;9 or6 grounds Knowles/Texas.4 is a Johnson performance in Austin, not birth there, and no relevant capital-date or performer birthplace fact is supplied.",
+      "qualifications": [
+        "Performer identity is not uniquely a solo person; no possible named performer has a birthplace stated here. Performance location cannot replace birth."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "1839",
+        "support_source_indices": [
+          4,
+          6,
+          12
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 3395,
+      "family": "candidate-family-000526",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [
+        [
+          9,
+          10
+        ],
+        [
+          9,
+          11
+        ]
+      ],
+      "answer_supported": null,
+      "rationale": "9 identifies album/performers;10 or11 gives Knowles/Texas;5 says Austin became capital of the Republic of Texas by1839.3 merely gives a Johnson performance in Austin. No paragraph establishes the intended performers birth there.",
+      "qualifications": [
+        "1839 is a grounded conditional capital date, not an answer through a proven birthplace chain. Republic/state history is kept distinct; capitol is read as city-capital in this question."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "1839",
+        "support_source_indices": [
+          3,
+          5,
+          9,
+          11
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 1067,
+      "family": "candidate-family-000484",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "supported",
+      "complete_proofs": [
+        [
+          5,
+          10,
+          18
+        ]
+      ],
+      "partial_paths": [],
+      "answer_supported": "Treaty of Paris (after the Revolution)",
+      "rationale": "5 gives Elizabeth Bergs birthplace as SaintPaul.10 says Minneapolis adjoins SaintPaul and lies on both Mississippi banks;18 names TreatyofParis after the Revolution as ceding lands between Appalachians and Mississippi to theUS. Neighbor-city and river links share paragraph10.",
+      "qualifications": [
+        "No treaty year is explicitly supplied; do not require or invent one. Other cessions to Britain/Spain and the Mexican Cession are different events."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": true,
+        "answer": "Treaty of Paris",
+        "support_source_indices": [
+          5,
+          9,
+          10,
+          18
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    },
+    {
+      "source_row": 3467,
+      "family": "candidate-family-000484",
+      "split": "test",
+      "source_dataset": "native-dev-reserved-v1",
+      "disposition": "pool_insufficient",
+      "complete_proofs": [],
+      "partial_paths": [],
+      "answer_supported": null,
+      "rationale": "17 retains the TreatyofParis/Mississippi cession fact, but no ElizabethBerg birthplace or neighboring-city/river identification remains. Other BergRiver, rivers and territory cessions cannot ground the missing chain.",
+      "qualifications": [
+        "The treaty fact alone does not validate the unidentified river constrained by the birthplace relation."
+      ],
+      "paragraphs_reviewed": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "full_pool_reviewed": true,
+      "reviewer_is_independent": false,
+      "original_reference_seen": true,
+      "model_predictions_seen": false,
+      "original_reference": {
+        "answerable": false,
+        "answer": "Treaty of Paris",
+        "support_source_indices": [
+          17
+        ]
+      },
+      "original_reference_seen_during_source_review": false,
+      "model_predictions_seen_during_source_review": false,
+      "training_allowed": false,
+      "label_role": "Qualified evaluation annotation; never gradient supervision or independent adjudicated gold"
+    }
+  ],
+  "created_epoch": 1792212352.6956506,
+  "model_predictions_seen": false,
+  "original_reference_answers_seen": false,
+  "reviewer_is_independent": false,
+  "scope": "All selected evaluation sources reviewed before original reference comparison or reserved-cohort predictions. Qualifications include ordinary contextual inference, time phases and numerical derivation; not independent adjudicated gold or corpus noise estimate.",
+  "updated_epoch": 1792213008.354969,
+  "paragraph_positions": 560,
+  "unique_literal_title_texts": 349,
+  "original_reference_comparison_epoch": 1792213008.3619733,
+  "native_by_review": {
+    "False/pool_insufficient": 12,
+    "True/supported": 9,
+    "True/masked": 2,
+    "False/masked": 1,
+    "False/supported": 1,
+    "True/pool_insufficient": 3
+  }
+}
