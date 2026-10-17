@@ -65,9 +65,10 @@
         "data/manifests/jev-reader-option-shuffle-v1-summary.json",
         "data/manifests/milai-global-reader-policy-qa-v1-protocol.json",
         "data/manifests/milai-global-reader-checkpoint-baseline-correction-v1.json",
-        "data/manifests/milai-global-reader-presentation-probe-v1-summary.json"
+        "data/manifests/milai-global-reader-presentation-probe-v1-summary.json",
+        "data/manifests/milai-global-reserved-reader-prefix-v1-summary.json"
       ],
-      "finding": "Oldoption/order collapse and constant-stop augmentation preserved. Newglobal12model five-view10080forward probe uses same reloadedcheckpoint for original and variants; F16storage/FP32reload corrected BEFOREposttraincalls, no trainingchange."
+      "finding": "Oldoption/order collapse and constant-stop augmentation preserved. Newglobal12model five-view10080forward probe uses same reloadedcheckpoint for original and variants; F16storage/FP32reload corrected BEFOREposttraincalls, no trainingchange. Reserved original-only1896 forwards closed and mappings verified. These are reference-prefix transfer diagnostics, not new invariance or final QA."
     },
     {
       "id": "remaining_budget_utility",
@@ -129,9 +130,10 @@
       "evidence": [
         "data/manifests/jev-longmemeval-exposure-final-v1-20261017.json",
         "data/manifests/jev-longmemeval-v2-prior-contact-20261017.json",
-        "data/manifests/milai-global-reserved-source-v1-admission.json"
+        "data/manifests/milai-global-reserved-source-v1-admission.json",
+        "data/manifests/milai-global-reserved-actual-training-boundary-v1.json"
       ],
-      "finding": "LMEv1/V2 cannot be reset to blind by questionIDs; priorMEME/MemConflict are qualified exposed regressions. NewMuSiQueDEV14sourcegroups have checkedliteralboundary vs5454train/119dev/229cal/864seen; not officialtest, exhaustivehistorical,semantic-nearduplicate orpretraining certification. No broadcross-domain claim."
+      "finding": "LMEv1/V2 cannot be reset to blind by questionIDs; priorMEME/MemConflict are qualified exposed regressions. NewMuSiQueDEV14sourcegroups have checkedliteralboundary vs5454train/119dev/229cal/864seen; not officialtest, exhaustivehistorical,semantic-nearduplicate orpretraining certification. No broadcross-domain claim. Actual visible32/128 training and reserved pools share1/6 background paragraphs; none is native target on either side or reserved reviewed complete proof. No question-ID overlap. Do not claim all text unseen."
     },
     {
       "id": "minimal_changes_and_user_constraints",
@@ -249,16 +251,16 @@
   },
   "live_reserved_posttrain_snapshot": {
     "status": "RESERVED_PIPELINE_LIVE",
-    "observed_epoch": 1792226226.7497532,
+    "observed_epoch": 1792226997.1843624,
     "driver_pid": 4100019,
     "source_version": "d5261e45",
     "exec_session": 80572,
     "active": {
-      "stage": "probe-families32-0-linear",
-      "pid": 4102595,
-      "physical_gpu_allocation": "2"
+      "stage": "dense",
+      "pid": 4157372,
+      "physical_gpu_allocation": null
     },
-    "completed_stages": 1,
+    "completed_stages": 36,
     "first_probe": {
       "status": "COMPLETED",
       "pid": 4100025,
@@ -278,6 +280,9 @@
     "all28_source_reviews_closed_before_dispatch": true,
     "models_or_policies_selected_from_dev": false,
     "automatic_retry": false,
-    "next": "Inspect actual PID/stage and continue existing session. Never dispatch a duplicate driver."
+    "next": "Inspect actual PID/stage and continue existing session. Never dispatch a duplicate driver.",
+    "all12_prefix_probes_closed": true,
+    "prefix_summary": "data/manifests/milai-global-reserved-reader-prefix-v1-summary.json",
+    "actual_training_boundary": "data/manifests/milai-global-reserved-actual-training-boundary-v1.json"
   }
 }

@@ -1,0 +1,240 @@
+{
+  "status": "ACTUAL_TARGET_BOUNDARY_VERIFIED_SHARED_BACKGROUND_RETAINED",
+  "reserved_states": 158,
+  "reserved_unique_title_body_pairs": 349,
+  "all_reserved_evaluation_only": true,
+  "cohorts": {
+    "families32": {
+      "path": "artifacts/jev-reader/global-reader-reference-v1/data/families32/train.jsonl",
+      "states": 304,
+      "families": 32,
+      "all_train": true,
+      "shared_question_ids": 0,
+      "shared_literal_title_body_pairs": 1,
+      "train_unique_title_body_pairs": 681,
+      "shared_target_paragraphs": 0,
+      "shared_reviewed_complete_proof_paragraphs": 0,
+      "shared_background_details": [
+        {
+          "title": "Borders of China",
+          "body_characters": 374,
+          "training": [
+            {
+              "source_row": 38870,
+              "paragraph_index": 10,
+              "native_support": false
+            },
+            {
+              "source_row": 39791,
+              "paragraph_index": 7,
+              "native_support": false
+            }
+          ],
+          "reserved": [
+            {
+              "case": "row-1067",
+              "source_row": 1067,
+              "paragraph_index": 12,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            },
+            {
+              "case": "row-3467",
+              "source_row": 3467,
+              "paragraph_index": 9,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            }
+          ]
+        }
+      ]
+    },
+    "families128": {
+      "path": "artifacts/jev-reader/global-reader-reference-v1/data/families128/train.jsonl",
+      "states": 1223,
+      "families": 128,
+      "all_train": true,
+      "shared_question_ids": 0,
+      "shared_literal_title_body_pairs": 6,
+      "train_unique_title_body_pairs": 2477,
+      "shared_target_paragraphs": 0,
+      "shared_reviewed_complete_proof_paragraphs": 0,
+      "shared_background_details": [
+        {
+          "title": "Anti-aircraft warfare",
+          "body_characters": 579,
+          "training": [
+            {
+              "source_row": 2435,
+              "paragraph_index": 19,
+              "native_support": false
+            },
+            {
+              "source_row": 37325,
+              "paragraph_index": 7,
+              "native_support": false
+            }
+          ],
+          "reserved": [
+            {
+              "case": "row-4621",
+              "source_row": 4621,
+              "paragraph_index": 8,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            }
+          ]
+        },
+        {
+          "title": "Biłgoraj County",
+          "body_characters": 476,
+          "training": [
+            {
+              "source_row": 39281,
+              "paragraph_index": 6,
+              "native_support": false
+            }
+          ],
+          "reserved": [
+            {
+              "case": "row-786",
+              "source_row": 786,
+              "paragraph_index": 7,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            }
+          ]
+        },
+        {
+          "title": "Borders of China",
+          "body_characters": 374,
+          "training": [
+            {
+              "source_row": 39747,
+              "paragraph_index": 4,
+              "native_support": false
+            },
+            {
+              "source_row": 39791,
+              "paragraph_index": 7,
+              "native_support": false
+            },
+            {
+              "source_row": 38870,
+              "paragraph_index": 10,
+              "native_support": false
+            }
+          ],
+          "reserved": [
+            {
+              "case": "row-1067",
+              "source_row": 1067,
+              "paragraph_index": 12,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            },
+            {
+              "case": "row-3467",
+              "source_row": 3467,
+              "paragraph_index": 9,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            }
+          ]
+        },
+        {
+          "title": "Dutch Water Dreams",
+          "body_characters": 182,
+          "training": [
+            {
+              "source_row": 25852,
+              "paragraph_index": 7,
+              "native_support": false
+            }
+          ],
+          "reserved": [
+            {
+              "case": "row-4519",
+              "source_row": 4519,
+              "paragraph_index": 5,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            }
+          ]
+        },
+        {
+          "title": "East Prussia",
+          "body_characters": 896,
+          "training": [
+            {
+              "source_row": 39270,
+              "paragraph_index": 3,
+              "native_support": false
+            }
+          ],
+          "reserved": [
+            {
+              "case": "row-1067",
+              "source_row": 1067,
+              "paragraph_index": 1,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            },
+            {
+              "case": "row-3467",
+              "source_row": 3467,
+              "paragraph_index": 16,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            }
+          ]
+        },
+        {
+          "title": "Minsk Region",
+          "body_characters": 283,
+          "training": [
+            {
+              "source_row": 39747,
+              "paragraph_index": 1,
+              "native_support": false
+            },
+            {
+              "source_row": 39281,
+              "paragraph_index": 8,
+              "native_support": false
+            }
+          ],
+          "reserved": [
+            {
+              "case": "row-786",
+              "source_row": 786,
+              "paragraph_index": 17,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            },
+            {
+              "case": "row-2141",
+              "source_row": 2141,
+              "paragraph_index": 0,
+              "native_support": false,
+              "in_recorded_complete_proof": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "comparison": "Literal title/body equality and question IDs; no SHA or substitute fingerprints. Original admission protects target-versus-pool overlap both directions, not all background. Not semantic near-duplicate, unrecorded history or pretraining certification.",
+  "model_calls": 0,
+  "preceding_diagnostic_failure": {
+    "type": "AssertionError",
+    "reason": "An additional exploratory check assumed zero overlap for every background paragraph. That stronger assumption is false and was not the frozen admission criterion.",
+    "changed_inputs_or_model_calls": false,
+    "original_failed_invocation_cpu_not_captured": true
+  },
+  "compute": {
+    "wall_seconds": 0.30193218775093555,
+    "cpu_seconds": 0.301924614,
+    "validations": 1
+  }
+}

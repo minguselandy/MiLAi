@@ -1,15 +1,15 @@
 {
   "status": "RESERVED_PIPELINE_LIVE",
-  "observed_epoch": 1792226226.7497532,
+  "observed_epoch": 1792226997.1843624,
   "driver_pid": 4100019,
   "source_version": "d5261e45",
   "exec_session": 80572,
   "active": {
-    "stage": "probe-families32-0-linear",
-    "pid": 4102595,
-    "physical_gpu_allocation": "2"
+    "stage": "dense",
+    "pid": 4157372,
+    "physical_gpu_allocation": null
   },
-  "completed_stages": 1,
+  "completed_stages": 36,
   "first_probe": {
     "status": "COMPLETED",
     "pid": 4100025,
@@ -29,5 +29,8 @@
   "all28_source_reviews_closed_before_dispatch": true,
   "models_or_policies_selected_from_dev": false,
   "automatic_retry": false,
-  "next": "Inspect actual PID/stage and continue existing session. Never dispatch a duplicate driver."
+  "next": "Inspect actual PID/stage and continue existing session. Never dispatch a duplicate driver.",
+  "all12_prefix_probes_closed": true,
+  "prefix_summary": "data/manifests/milai-global-reserved-reader-prefix-v1-summary.json",
+  "actual_training_boundary": "data/manifests/milai-global-reserved-actual-training-boundary-v1.json"
 }

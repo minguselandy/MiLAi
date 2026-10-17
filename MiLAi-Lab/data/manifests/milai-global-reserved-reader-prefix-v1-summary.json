@@ -1,0 +1,2695 @@
+{
+  "status": "ALL_RESERVED_PREFIX_PROBES_CLOSED_AND_INPUTS_VERIFIED",
+  "models": [
+    {
+      "model": "families32-0-native",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 24,
+            "unsupported_exhaustion_stop": 122,
+            "first_remaining_candidate_accepted": 25,
+            "unsupported_sufficient_stop": 2
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 7
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 0
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 17
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.15205627705627706,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 139,
+          "complement_states": 126,
+          "best_open_accepted": 35,
+          "bm25_next_accepted": 49,
+          "selected_open": 17,
+          "selected_stop_sufficient": 2
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 12
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 1
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 5
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 1
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 1
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 13
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 4
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 3
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 6
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 2
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 6
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 2
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 2
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 1
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 4
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 2
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 0
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 10,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 0,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 0,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 2,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 0
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.0,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 33.16995001398027,
+        "cpu_seconds": 48.698517512,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families32-0-linear",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 25,
+            "unsupported_exhaustion_stop": 91,
+            "first_remaining_candidate_accepted": 25,
+            "unnecessary_continue": 7
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 11
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 0
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 14
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.1590909090909091,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 105,
+          "complement_states": 126,
+          "best_open_accepted": 25,
+          "bm25_next_accepted": 49,
+          "selected_open": 53
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 9
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 4
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 6
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 2
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 0
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 10
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 3
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 9
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 2
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 7
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 2
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 11
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 0,
+            "semantic_action_kind_changed": 10
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 0
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 10,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 6,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 0,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 3
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 0
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 1
+          }
+        },
+        "supported_family_macro_acceptance": 0.09999999999999999,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 28.949339486658573,
+        "cpu_seconds": 44.354136798999996,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families32-1-native",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 30,
+            "first_remaining_candidate_accepted": 25,
+            "unnecessary_continue": 10,
+            "unsupported_exhaustion_stop": 79,
+            "unsupported_sufficient_stop": 3
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 15
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 2
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 13
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.1899350649350649,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_open": 61,
+          "complement_states": 126,
+          "best_open_accepted": 31,
+          "bm25_next_accepted": 49,
+          "selected_stop_exhausted": 92,
+          "selected_stop_sufficient": 5
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 10
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 3
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 7
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 4
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 1
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 12
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 4
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 13
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 3
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 5
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 7
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 3
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 5
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 4
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 2,
+            "semantic_action_kind_changed": 8
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 7
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 1
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 9,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 4,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 2,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 0
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.09999999999999999,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 31.759408868849277,
+        "cpu_seconds": 46.498643632,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families32-1-linear",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 25,
+            "unsupported_exhaustion_stop": 129,
+            "first_remaining_candidate_accepted": 25,
+            "unnecessary_continue": 1,
+            "unsupported_sufficient_stop": 1
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 8
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 0
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 17
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.1601731601731602,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 146,
+          "complement_states": 126,
+          "best_open_accepted": 23,
+          "bm25_next_accepted": 49,
+          "selected_open": 11,
+          "selected_stop_sufficient": 1
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 11
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 3
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 5
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 1
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 1
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 13
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 3
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 6
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 3
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 8
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 5
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 5
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 1
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 4
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 2
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 0
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 9,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 2,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 0,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 0
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.03333333333333333,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 28.697337166406214,
+        "cpu_seconds": 43.446624415,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families32-2-native",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 18,
+            "unsupported_exhaustion_stop": 140,
+            "first_remaining_candidate_accepted": 25
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 0
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 0
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 18
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.1147186147186147,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 158,
+          "complement_states": 126,
+          "best_open_accepted": 28,
+          "bm25_next_accepted": 49
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 9
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 0
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 4
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 0
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 0
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 14
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 0
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 4
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 5
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 1
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 0,
+            "semantic_action_kind_changed": 0
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 0,
+            "semantic_action_kind_changed": 0
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 0
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 15,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 0,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 0,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 0
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.0,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 32.23263431806117,
+        "cpu_seconds": 47.932520987000004,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families32-2-linear",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 29,
+            "unsupported_exhaustion_stop": 58,
+            "first_remaining_candidate_accepted": 25,
+            "unsupported_sufficient_stop": 20,
+            "unnecessary_continue": 11
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 14
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 3
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 12
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.18506493506493507,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 70,
+          "complement_states": 126,
+          "best_open_accepted": 23,
+          "bm25_next_accepted": 49,
+          "selected_open": 65,
+          "selected_stop_sufficient": 23
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 9
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 3
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 5
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 5
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 1
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 12
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 4
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 13
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 8
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 7
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 3
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 3
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 2,
+            "semantic_action_kind_changed": 13
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 9
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 1
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 10,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 5,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 3,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 11,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 3
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 0
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 1
+          }
+        },
+        "supported_family_macro_acceptance": 0.13333333333333333,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 28.925487908534706,
+        "cpu_seconds": 43.618881638999994,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families128-0-native",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 51,
+            "first_remaining_candidate_accepted": 25,
+            "unsupported_exhaustion_stop": 40,
+            "unsupported_sufficient_stop": 4,
+            "unnecessary_continue": 15
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 41
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 1
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.3176406926406926,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_open": 104,
+          "complement_states": 126,
+          "best_open_accepted": 47,
+          "bm25_next_accepted": 49,
+          "selected_stop_exhausted": 49,
+          "selected_stop_sufficient": 5
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 10
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 10
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 9
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 8
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 6
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 8
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 12
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 28
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 5
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 6
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 13
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 3
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 7
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 6
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 3
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 10
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 4,
+            "semantic_action_kind_changed": 11
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 9
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 0
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 12,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 12,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 1,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 3,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 3
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.2266666666666667,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 32.98119562771171,
+        "cpu_seconds": 47.970418936,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families128-0-linear",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 25,
+            "unsupported_exhaustion_stop": 74,
+            "first_remaining_candidate_accepted": 25,
+            "unnecessary_continue": 11,
+            "unsupported_sufficient_stop": 3
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 15
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 1
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 9
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.15584415584415587,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 83,
+          "complement_states": 126,
+          "best_open_accepted": 25,
+          "bm25_next_accepted": 49,
+          "selected_open": 71,
+          "selected_stop_sufficient": 4
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 5
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 3
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 4
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 4
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 2
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 8
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 5
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 14
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 7
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 6
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 0
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 4
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 1
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 8
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 1,
+            "semantic_action_kind_changed": 7
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 1
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 10,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 7,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 1,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 2,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 3
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.14333333333333334,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 28.706175713799894,
+        "cpu_seconds": 43.321273665,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families128-1-native",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 42,
+            "unsupported_exhaustion_stop": 82,
+            "first_remaining_candidate_accepted": 25,
+            "unnecessary_continue": 5,
+            "unsupported_sufficient_stop": 21
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 28
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 3
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 11
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.26461038961038963,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 93,
+          "complement_states": 126,
+          "best_open_accepted": 63,
+          "bm25_next_accepted": 49,
+          "selected_open": 41,
+          "selected_stop_sufficient": 24
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 12
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 9
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 7
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 8
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 5
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 11
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 6
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 24
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 9
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 6
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 0
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 8
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 3
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 6
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 5,
+            "semantic_action_kind_changed": 11
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 3,
+            "semantic_action_kind_changed": 9
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 2
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 21,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 7,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 2,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 11,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 5
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 0
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 1
+          }
+        },
+        "supported_family_macro_acceptance": 0.15000000000000002,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 32.57031329907477,
+        "cpu_seconds": 48.224936590999995,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families128-1-linear",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 20,
+            "unsupported_exhaustion_stop": 97,
+            "first_remaining_candidate_accepted": 25,
+            "unnecessary_continue": 9,
+            "unsupported_sufficient_stop": 9
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 9
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 0
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 11
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.1277056277056277,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 108,
+          "complement_states": 126,
+          "best_open_accepted": 21,
+          "bm25_next_accepted": 49,
+          "selected_open": 41,
+          "selected_stop_sufficient": 9
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 8
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 3
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 3
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 3
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 0
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 9
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 2
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 6
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 3
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 6
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 1
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 0,
+            "semantic_action_kind_changed": 11
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 0,
+            "semantic_action_kind_changed": 9
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 0
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 9,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 6,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 0,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 7,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 3
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 0
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 3
+          }
+        },
+        "supported_family_macro_acceptance": 0.1,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 29.70247165299952,
+        "cpu_seconds": 44.899454505,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families128-2-native",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 70,
+            "unsupported_exhaustion_stop": 34,
+            "first_remaining_candidate_accepted": 25,
+            "unnecessary_continue": 14,
+            "unsupported_sufficient_stop": 9
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 60
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 2
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 8
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.43993506493506496,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 42,
+          "complement_states": 126,
+          "best_open_accepted": 69,
+          "bm25_next_accepted": 49,
+          "selected_open": 105,
+          "selected_stop_sufficient": 11
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 16
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 16
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 11
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 15
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 10
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 8
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 16
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 7
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 31
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 3
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 9
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 4
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 23
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 5
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 10
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 8
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 9
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 9
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 7,
+            "semantic_action_kind_changed": 16
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 5,
+            "semantic_action_kind_changed": 10
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 0
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 19,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 16,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 2,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 5,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 5
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 4
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 0
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 3
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 5
+          }
+        },
+        "supported_family_macro_acceptance": 0.30000000000000004,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 32.060965792275965,
+        "cpu_seconds": 46.758687806,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    },
+    {
+      "model": "families128-2-linear",
+      "reference": {
+        "reference": {
+          "counts": {
+            "labelled": 158,
+            "accepted": 51,
+            "unsupported_exhaustion_stop": 30,
+            "first_remaining_candidate_accepted": 25,
+            "unnecessary_continue": 19,
+            "unsupported_sufficient_stop": 11
+          },
+          "strata": {
+            "missing_complement": {
+              "labelled": 126,
+              "accepted": 42
+            },
+            "reference_proof_complete": {
+              "labelled": 14,
+              "accepted": 3
+            },
+            "official_unanswerable_pool": {
+              "labelled": 18,
+              "accepted": 6
+            }
+          },
+          "constant_stop_reference": {
+            "stop_sufficient": 14,
+            "stop_exhausted": 18
+          },
+          "family_macro_acceptance": 0.3176406926406926,
+          "families": 14,
+          "scope": "Reference-proof prefix decisions; not Reader QA or net pipeline benefit"
+        },
+        "counts": {
+          "selected_stop_exhausted": 36,
+          "complement_states": 126,
+          "best_open_accepted": 52,
+          "bm25_next_accepted": 49,
+          "selected_open": 108,
+          "selected_stop_sufficient": 14
+        },
+        "strata": {
+          "steps/2": {
+            "labelled": 66,
+            "accepted": 12
+          },
+          "family/candidate-family-000466": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "origin/empty": {
+            "labelled": 28,
+            "accepted": 10
+          },
+          "origin/bm25_two": {
+            "labelled": 28,
+            "accepted": 8
+          },
+          "origin/random_two": {
+            "labelled": 28,
+            "accepted": 9
+          },
+          "origin/reference_leave_one_out": {
+            "labelled": 28,
+            "accepted": 8
+          },
+          "origin/reference_complete": {
+            "labelled": 28,
+            "accepted": 8
+          },
+          "origin/unrelated_two": {
+            "labelled": 28,
+            "accepted": 10
+          },
+          "family/candidate-family-000173": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "steps/4": {
+            "labelled": 47,
+            "accepted": 23
+          },
+          "family/candidate-family-000520": {
+            "labelled": 12,
+            "accepted": 1
+          },
+          "family/candidate-family-000484": {
+            "labelled": 11,
+            "accepted": 5
+          },
+          "family/candidate-family-000025": {
+            "labelled": 11,
+            "accepted": 5
+          },
+          "steps/3": {
+            "labelled": 45,
+            "accepted": 16
+          },
+          "family/candidate-family-000485": {
+            "labelled": 12,
+            "accepted": 7
+          },
+          "family/candidate-family-000526": {
+            "labelled": 12,
+            "accepted": 9
+          },
+          "family/candidate-family-000421": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000080": {
+            "labelled": 11,
+            "accepted": 1
+          },
+          "family/candidate-family-000434": {
+            "labelled": 11,
+            "accepted": 0
+          },
+          "family/candidate-family-000443": {
+            "labelled": 11,
+            "accepted": 3
+          },
+          "family/candidate-family-000506": {
+            "labelled": 11,
+            "accepted": 6
+          },
+          "family/candidate-family-000482": {
+            "labelled": 11,
+            "accepted": 2
+          },
+          "family/candidate-family-000347": {
+            "labelled": 12,
+            "accepted": 8
+          }
+        },
+        "state_transitions": {
+          "empty_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 3,
+            "semantic_action_kind_changed": 8
+          },
+          "reference_leave_one_out_to_reference_complete": {
+            "pairs": 28,
+            "both_accepted": 2,
+            "semantic_action_kind_changed": 9
+          }
+        },
+        "paired_native_reference_complete": {
+          "question_pairs": 14,
+          "both_correct": 1
+        },
+        "origin_denominators_overlap": true,
+        "bm25_scope": "Best remaining lexical candidate; candidate presentation itself is shuffled"
+      },
+      "source": {
+        "counts": {
+          "supported_states": 59,
+          "source_best_open_accepted": 20,
+          "source_missing_complement_states": 49,
+          "source_missing_complement_accepted": 14,
+          "source_proof_complete_states": 10,
+          "source_proof_complete_accepted": 3,
+          "pool_insufficient_states": 82,
+          "strict_pool_insufficient_selected_sufficient": 6,
+          "masked_states": 17
+        },
+        "supported_family_results": {
+          "candidate-family-000466": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000484": {
+            "states": 6,
+            "accepted": 5
+          },
+          "candidate-family-000173": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000520": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000421": {
+            "states": 6,
+            "accepted": 0
+          },
+          "candidate-family-000485": {
+            "states": 6,
+            "accepted": 1
+          },
+          "candidate-family-000434": {
+            "states": 5,
+            "accepted": 2
+          },
+          "candidate-family-000443": {
+            "states": 6,
+            "accepted": 2
+          },
+          "candidate-family-000506": {
+            "states": 6,
+            "accepted": 3
+          },
+          "candidate-family-000482": {
+            "states": 6,
+            "accepted": 2
+          }
+        },
+        "supported_family_macro_acceptance": 0.29000000000000004,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "compute": {
+        "wall_seconds": 28.86984772607684,
+        "cpu_seconds": 43.722151701,
+        "runs": 1,
+        "forwards": 158,
+        "sequence_rows": 158,
+        "input_tokens": 488877,
+        "state_tokenizations": 158,
+        "state_tokens": 437029
+      }
+    }
+  ],
+  "input_output_mappings_verified": 1896,
+  "actual_compute_already_charged": {
+    "wall_seconds": 368.6251275744289,
+    "cpu_seconds": 549.446248188,
+    "runs": 12,
+    "forwards": 1896,
+    "sequence_rows": 1896,
+    "input_tokens": 5866524,
+    "state_tokenizations": 1896,
+    "state_tokens": 5244348
+  },
+  "model_work_rebilled": false,
+  "new_model_calls": 0,
+  "scope": "Frozen original-view reference-prefix diagnostics on reserved source groups. No presentation variants or pre-save comparison; not actual-policy QA. Source judgments are qualified author review, not independent gold. All models retained.",
+  "analysis_compute": {
+    "wall_seconds": 0.6101113120093942,
+    "cpu_seconds": 0.609780495,
+    "analyses": 1
+  },
+  "source_lexical_baseline": "data/manifests/milai-global-reader-source-bm25-prefix-v1.json",
+  "actual_training_boundary": "data/manifests/milai-global-reserved-actual-training-boundary-v1.json"
+}

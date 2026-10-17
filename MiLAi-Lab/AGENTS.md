@@ -24,7 +24,15 @@ Full docs and summary: milai-global-reader-policy-qa-v1-summary.json. Semantic j
 Ruff/targetedmypy and package/tools boundaries pass. Goal not complete ondev results alone.
 
 RESERVED NOW LIVE source d5261e45 coordinator4100019 exec80572, initial child4100025.
-Do NOT dispatch again. Inspect actual driver.json/stage/PIDs; first native probe progressing.
+Do NOT dispatch again. Inspect actual driver.json/stage/PIDs; all12 probes now CLOSED.
+Reserved probe-analysis/report.json already generated/charged once. Do NOT rerun/rebill.
+1896forwards/5866524tokens,368.625wall/549.446CPU; allinputs/mappings verified.
+128native reference51/42/70,bestopen47/63/69 vs BM2549/126; sourcebest12/21/19 vsBM2521/49,
+sourcecompleteSTOP1/2/2 of10. Not actual-policy QA; do not choose seed from heldout.
+Actualtraining/reserved visible pools share1/6 literal background paragraphs(32/128); no
+question-ID/native-target/recorded-complete-proof overlap. First extrazero-background
+assertion failed because broaderthanoriginalprotocol; report preserves it. No datachange.
+See actual-training-boundary-v1 and reader-source-bm25-prefix-v1 manifests.
 PYTHONPATH=src:tools CUDA interpreter artifacts/jev-reader/cuda-env/bin/python (do NOT resolve
 venv symlink). Frozen config all12 models,14families28rows,
 158prefixes x12=1896 original-only forwards,24selection stages,dense,preview,756Readerpositions,
@@ -32,7 +40,7 @@ nativescore. All28 source-first reviews already CLOSED before reserved predictio
 Prerequisite dev driver COMPLETED and actual PIDs absent verified before dispatch.
 New tools/analyze_reserved_reader_probes.py supports original-only reserved inputs and
 source/reference diagnostics; no nonexistent FP32-dev baseline/five-view invariance.
-Run analysis after probes close when original ledger lease free; do not block live HTTPowner.
+Analysis CLOSED; no repeat. Do not block a live HTTPowner with new ledger writes.
 Can stream-review closed reserved cases with tools/export_global_reader_responses.py; stable
 IDs local to that cohort. Export costs deferred to final receipt collector after HTTP closes.
 Finish all first-response source review before method mappings; final export then collector
