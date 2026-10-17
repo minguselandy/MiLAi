@@ -515,3 +515,11 @@ encoder/head实测参数均改变。六个同规模同seed头对照的sampling�
 两次只读GET确认7860模型Qwen3.6-35B-A3B-FP8/65536窗口、7861bge-m3/8192窗口均200；
 0模型推理、0服务变更。训练关闭验证首次shell片段有语法笔误，执行前退出，未写文件/
 计量/调用模型；独立修正脚本成功执行一次并计机械CPU。下一步派发已冻结posttrain流程。
+
+
+12项完整矩阵与学习图已保存，原账本全部匹配。128native三个seed的dev38/46/58、
+best-open36/33/52；linear43/51/65、45/47/52，BM25next50/117。原生头尚无稳定优于普通
+头/简单检索的证据，source充分6项native0/1/0、linear0/2/0。拟合改善不能写成整体泛化。
+7172.844秒训练墙钟、10188.318秒CPU及全部token/forward计数只汇总原消耗，不重计。
+新posttrain源码8ce5d09b/coordinator3610392/exec56592已启动，实际阶段probe执行中；
+数据、Reader及训练参数不再改变。完整goal仍ACTIVE。

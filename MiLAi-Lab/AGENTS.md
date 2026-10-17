@@ -1,4 +1,4 @@
-# CURRENT: global training CLOSED; posttrain READY — 2026-10-17
+# CURRENT: global training CLOSED; dev posttrain LIVE — 2026-10-17
 
 Full user goal ACTIVE/incomplete; global analysis/generalization required.
 New global-reader-reference-v1 protocol is frozen:32/128nestedfamilies,304/1223states,
@@ -26,7 +26,7 @@ First32/native/seed0 CLOSED38updates,train157/304,dev33/168 vsconstant-exhausted
 sufficient0/17. No routechoice fromfirstresult. Lastverified8/12CLOSED; current128/seed1/linear
 PID3334790 at154updates/finaltrain-eval; inspectactualstate. Inspectdriver.json forlatertransitions. Firstjobcost
 306.869s wall alreadyoriginalledger; do notrebill. Onlyourcoordinator/trainer found live.
-POSTTRAIN READY (inspectactualdriver.json beforedispatch): artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
+POSTTRAIN LIVE source8ce5d09b coordinator3610392 exec56592; inspectcurrentstage/PID: artifacts/jev-reader/global-reader-policy-qa-v1/driver.py,
 config configs/milai-global-reader-policy-qa-v1.json. Requiresall12trainclosed+actualPIDsabsent.
 31cases27arms837Readerpositions,12modelsallfixed4/adaptive+BM25/dense4/full20. CORRECTED
 BEFORE DISPATCH:10080probe forwards(5views incl freshoriginal). Bothheads saveF16/reloadFP32;
@@ -66,6 +66,9 @@ responseviews withfixedseed20261019 order. Fourtests incl officialscorer PASS; n
 Response-review rubric frozen preoutcomes; neverequateknownproofdeliverywithcorrectanswer.
 Plot tool uses systempython3/matplotlib3.10.3 onanalysis-final ONLY. FreshmetadataGETs7860/
 7861 healthycorrectIDs/windows,0inference0servicechanges.
+Fulltraining summarytracked+PNG/PDFverified:1152updates,7172.844wall/10188.318CPU,all12ledger
+deltasmatch.128native dev38/46/58,bestopen36/33/52;linear43/51/65,best45/47/52;BM2550/117.
+Keepallseeds/models; no stable nativeadvantage or semanticSTOP. Fullposttrain stillrequired.
 See global report and reference-v1 protocol/preparation. Prior turn was meaningful progress.
 
 # CURRENT: global source audit and joint split feasibility CLOSED — 2026-10-17

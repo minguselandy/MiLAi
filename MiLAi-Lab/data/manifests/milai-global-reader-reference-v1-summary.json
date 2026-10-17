@@ -1,0 +1,1172 @@
+{
+  "status": "ALL12_TRAINING_CLOSED_NOT_QA_OR_GENERALIZATION_ACCEPTANCE",
+  "source_version": "2346bb57",
+  "jobs": 12,
+  "total_optimizer_updates": 1152,
+  "groups": [
+    {
+      "cohort": "families32",
+      "backend": "native",
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "train_accepted": [
+        157,
+        162,
+        70
+      ],
+      "dev_accepted": [
+        33,
+        32,
+        34
+      ],
+      "dev_family_macro_mean": 0.18746286393345216,
+      "best_open": [
+        29,
+        19,
+        21
+      ],
+      "dev_sufficient": [
+        0,
+        0,
+        0
+      ],
+      "source_sufficient": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "families32",
+      "backend": "linear",
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "train_accepted": [
+        193,
+        126,
+        203
+      ],
+      "dev_accepted": [
+        30,
+        24,
+        23
+      ],
+      "dev_family_macro_mean": 0.14224598930481283,
+      "best_open": [
+        22,
+        13,
+        14
+      ],
+      "dev_sufficient": [
+        0,
+        0,
+        0
+      ],
+      "source_sufficient": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "cohort": "families128",
+      "backend": "native",
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "train_accepted": [
+        971,
+        725,
+        1035
+      ],
+      "dev_accepted": [
+        38,
+        46,
+        58
+      ],
+      "dev_family_macro_mean": 0.2748663101604278,
+      "best_open": [
+        36,
+        33,
+        52
+      ],
+      "dev_sufficient": [
+        0,
+        2,
+        2
+      ],
+      "source_sufficient": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "cohort": "families128",
+      "backend": "linear",
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "train_accepted": [
+        961,
+        978,
+        1134
+      ],
+      "dev_accepted": [
+        43,
+        51,
+        65
+      ],
+      "dev_family_macro_mean": 0.31396316102198457,
+      "best_open": [
+        45,
+        47,
+        52
+      ],
+      "dev_sufficient": [
+        0,
+        2,
+        2
+      ],
+      "source_sufficient": [
+        0,
+        2,
+        0
+      ]
+    }
+  ],
+  "job_results": [
+    {
+      "cohort": "families32",
+      "backend": "native",
+      "seed": 0,
+      "train_accepted": 157,
+      "train_labelled": 304,
+      "train_family_macro": 0.5456439393939394,
+      "dev_accepted": 33,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.19340463458110516,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 8
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 25
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 0
+        }
+      },
+      "best_open_accepted": 29,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 5
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 5
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "supported_states": 36,
+          "source_best_open_accepted": 7,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 5,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 1
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 4
+          }
+        },
+        "supported_family_macro_acceptance": 0.13888888888888887,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families32",
+      "backend": "linear",
+      "seed": 0,
+      "train_accepted": 193,
+      "train_labelled": 304,
+      "train_family_macro": 0.6428030303030303,
+      "dev_accepted": 30,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.1657754010695187,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 14
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 16
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 0
+        }
+      },
+      "best_open_accepted": 22,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 0,
+          "semantic_action_kind_changed": 9
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 0,
+          "semantic_action_kind_changed": 8
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "supported_states": 36,
+          "source_best_open_accepted": 11,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 7,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 1
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 4
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 2
+          }
+        },
+        "supported_family_macro_acceptance": 0.19444444444444442,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families32",
+      "backend": "linear",
+      "seed": 1,
+      "train_accepted": 126,
+      "train_labelled": 304,
+      "train_family_macro": 0.43825757575757585,
+      "dev_accepted": 24,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.13315508021390374,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 0
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 24
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 0
+        }
+      },
+      "best_open_accepted": 13,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 0,
+          "semantic_action_kind_changed": 2
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 0,
+          "semantic_action_kind_changed": 2
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "supported_states": 36,
+          "source_best_open_accepted": 1,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 0,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.0,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families32",
+      "backend": "native",
+      "seed": 1,
+      "train_accepted": 162,
+      "train_labelled": 304,
+      "train_family_macro": 0.546496212121212,
+      "dev_accepted": 32,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.17860962566844918,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 11
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 21
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 0
+        }
+      },
+      "best_open_accepted": 19,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 10
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 7
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 1,
+          "supported_states": 36,
+          "source_best_open_accepted": 12,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 8,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 2
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 1
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 5
+          }
+        },
+        "supported_family_macro_acceptance": 0.22222222222222224,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families32",
+      "backend": "native",
+      "seed": 2,
+      "train_accepted": 70,
+      "train_labelled": 304,
+      "train_family_macro": 0.25767045454545456,
+      "dev_accepted": 34,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.19037433155080213,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 0
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 34
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 0
+        }
+      },
+      "best_open_accepted": 21,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 0,
+          "semantic_action_kind_changed": 0
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 0,
+          "semantic_action_kind_changed": 0
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "supported_states": 36,
+          "source_best_open_accepted": 7,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 0,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.0,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families32",
+      "backend": "linear",
+      "seed": 2,
+      "train_accepted": 203,
+      "train_labelled": 304,
+      "train_family_macro": 0.6681818181818181,
+      "dev_accepted": 23,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.12780748663101604,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 5
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 18
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 0
+        }
+      },
+      "best_open_accepted": 14,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 8
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 10
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "supported_states": 36,
+          "source_best_open_accepted": 5,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 2,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 2
+          }
+        },
+        "supported_family_macro_acceptance": 0.05555555555555555,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families128",
+      "backend": "native",
+      "seed": 0,
+      "train_accepted": 971,
+      "train_labelled": 1223,
+      "train_family_macro": 0.8076270517676761,
+      "dev_accepted": 38,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.21016042780748664,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 25
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 13
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 0
+        }
+      },
+      "best_open_accepted": 36,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 6
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 4
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "supported_states": 36,
+          "source_best_open_accepted": 9,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 5,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 1
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 4
+          }
+        },
+        "supported_family_macro_acceptance": 0.13888888888888887,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families128",
+      "backend": "linear",
+      "seed": 0,
+      "train_accepted": 961,
+      "train_labelled": 1223,
+      "train_family_macro": 0.7948547979797973,
+      "dev_accepted": 43,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.25650623885918,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 28
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 15
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 0
+        }
+      },
+      "best_open_accepted": 45,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 0,
+          "semantic_action_kind_changed": 3
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 0,
+          "semantic_action_kind_changed": 8
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 0,
+          "supported_states": 36,
+          "source_best_open_accepted": 7,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 6,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 3
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 3
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.16666666666666666,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families128",
+      "backend": "linear",
+      "seed": 1,
+      "train_accepted": 978,
+      "train_labelled": 1223,
+      "train_family_macro": 0.8052438446969696,
+      "dev_accepted": 51,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.2935828877005348,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 33
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 16
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 2
+        }
+      },
+      "best_open_accepted": 47,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 3,
+          "semantic_action_kind_changed": 11
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 2,
+          "semantic_action_kind_changed": 8
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 1,
+          "supported_states": 36,
+          "source_best_open_accepted": 12,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 8,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 2,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 2
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 3
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 5
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 0
+          }
+        },
+        "supported_family_macro_acceptance": 0.27777777777777773,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families128",
+      "backend": "native",
+      "seed": 1,
+      "train_accepted": 725,
+      "train_labelled": 1223,
+      "train_family_macro": 0.60814788510101,
+      "dev_accepted": 46,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.26898395721925134,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 17
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 27
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 2
+        }
+      },
+      "best_open_accepted": 33,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 3,
+          "semantic_action_kind_changed": 10
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 3,
+          "semantic_action_kind_changed": 10
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 6,
+          "supported_states": 36,
+          "source_best_open_accepted": 7,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 3,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 1,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 3
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 1
+          }
+        },
+        "supported_family_macro_acceptance": 0.1111111111111111,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families128",
+      "backend": "native",
+      "seed": 2,
+      "train_accepted": 1035,
+      "train_labelled": 1223,
+      "train_family_macro": 0.8533183396464639,
+      "dev_accepted": 58,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.3454545454545454,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 38
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 18
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 2
+        }
+      },
+      "best_open_accepted": 52,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 9
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 1,
+          "semantic_action_kind_changed": 10
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 1,
+          "supported_states": 36,
+          "source_best_open_accepted": 9,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 6,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 4
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 2
+          }
+        },
+        "supported_family_macro_acceptance": 0.16666666666666666,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    },
+    {
+      "cohort": "families128",
+      "backend": "linear",
+      "seed": 2,
+      "train_accepted": 1134,
+      "train_labelled": 1223,
+      "train_family_macro": 0.9322877209595958,
+      "dev_accepted": 65,
+      "dev_labelled": 168,
+      "dev_family_macro": 0.39180035650623884,
+      "dev_strata": {
+        "missing_complement": {
+          "labelled": 117,
+          "accepted": 51
+        },
+        "official_unanswerable_pool": {
+          "labelled": 34,
+          "accepted": 12
+        },
+        "reference_proof_complete": {
+          "labelled": 17,
+          "accepted": 2
+        }
+      },
+      "best_open_accepted": 52,
+      "complement_states": 117,
+      "bm25_next_accepted": 50,
+      "state_transitions": {
+        "empty_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 3,
+          "semantic_action_kind_changed": 10
+        },
+        "reference_leave_one_out_to_reference_complete": {
+          "pairs": 27,
+          "both_accepted": 3,
+          "semantic_action_kind_changed": 9
+        }
+      },
+      "source_semantics": {
+        "counts": {
+          "pool_insufficient_states": 100,
+          "strict_pool_insufficient_selected_sufficient": 2,
+          "supported_states": 36,
+          "source_best_open_accepted": 8,
+          "source_missing_complement_states": 30,
+          "source_missing_complement_accepted": 8,
+          "source_proof_complete_states": 6,
+          "source_proof_complete_accepted": 0,
+          "masked_states": 32
+        },
+        "supported_family_results": {
+          "musique-family-000493": {
+            "states": 6,
+            "accepted": 4
+          },
+          "musique-family-000804": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000730": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000657": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000012": {
+            "states": 6,
+            "accepted": 0
+          },
+          "musique-family-000719": {
+            "states": 6,
+            "accepted": 4
+          }
+        },
+        "supported_family_macro_acceptance": 0.2222222222222222,
+        "scope": "Author source review with recorded qualifications; not independent gold. No exhaustive open/STOP labels fabricated for insufficient or masked pools."
+      },
+      "ledger_delta_matches": true
+    }
+  ],
+  "actual_training_compute": {
+    "wall_seconds": 7172.843743617646,
+    "cpu_seconds": 10188.318380291,
+    "runs": 12,
+    "train_sequence_rows": 18324,
+    "train_input_tokens": 52321548,
+    "train_batch_forwards": 4584,
+    "train_device_forwards": 9168,
+    "train_batch_attempts": 4584,
+    "train_offered_rows": 18324,
+    "train_offered_tokens": 52321548,
+    "dev_forwards": 6048,
+    "dev_sequence_rows": 6048,
+    "dev_input_tokens": 17872488,
+    "dev_state_tokenizations": 6048,
+    "dev_state_tokens": 15877944,
+    "train_eval_forwards": 9162,
+    "train_eval_sequence_rows": 9162,
+    "train_eval_input_tokens": 26160774,
+    "train_eval_state_tokenizations": 9162,
+    "train_eval_state_tokens": 23141484
+  },
+  "driver_wall_seconds_including_processes": 7239.12589097023,
+  "all_original_ledger_deltas_match": true,
+  "closure_validation": "data/manifests/milai-global-reader-reference-v1-closure-validation.json",
+  "figures": [
+    "docs/figures/milai-global-reader-learning-20261017.png",
+    "docs/figures/milai-global-reader-learning-20261017.pdf"
+  ],
+  "interpretation": [
+    "Biggerfamilycohort/moreupdates improvesreferencefit anddevcounts, withlarge seedvariation. It is notcompute-matched data-only causality.",
+    "Nativehead does not showconsistentadvantage overmatchedordinarylinear head.",
+    "Devbest-open BM25next50/117; native128seeds36/33/52,linear45/47/52. No consistentranking superiority.",
+    "Devreference sufficientnative1280/2/2 andlinear0/2/2 outof17; source-reviewed complete6 givesnative0/1/0 andlinear0/2/0. No reliable semanticstopping established.",
+    "Currentresults arepre-saveFP32diagnostics. Same-reloadedcheckpointprobes/actualpolicyQA/sourcefidelity/fullcost remainrequired."
+  ],
+  "new_model_calls_for_summary": 0,
+  "scope": "Threefixedtrainingseeds;development17families/168correlatedstates. No defaultadoption, missingoutcomes replacement or universalclaim. Plot/authoranalysisnotfullymetered; notzero."
+}

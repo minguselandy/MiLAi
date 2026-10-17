@@ -385,3 +385,42 @@ Writer侧再次只读核对原D0–D4三家族18组before/after：与原真实be
 再次只读查询远端公开ref：main仍518aee41、旧研究分支仍e832e2d；本轮audit研究分支尚未
 发布。相对研究基点无Product路径改动。Git提交身份仅作provenance，没有执行SHA/内容
 指纹校验；未推送、合并、部署或把本地软件检查称为远端CI。
+
+
+## 12项全局训练闭合结果
+
+固定epoch2全部完成，合计1152次优化器更新。每个seed/同backend两规模的初始168个dev
+logits完全一致；六个同规模同seed的原生/普通头对照，数据、权重、长度和每epoch选项顺序
+逐对象相同。encoder/head参数变化均实测非零。所有12项原账本差额精确匹配。
+
+| 训练家族 | 头 | train接受，seed0/1/2 | dev接受 /168 | best-open /117 | dev充分 /17 |
+|---|---|---|---|---|---|
+| 32 | native | 157/162/70，分母304 | 33/32/34 | 29/19/21 | 0/0/0 |
+| 32 | linear | 193/126/203，分母304 | 30/24/23 | 22/13/14 | 0/0/0 |
+| 128 | native | 971/725/1035，分母1223 | 38/46/58 | 36/33/52 | 0/2/2 |
+| 128 | linear | 961/978/1134，分母1223 | 43/51/65 | 45/47/52 | 0/2/2 |
+
+BM25-next为50/117。规模扩大同时增加更新数，因此不作等算力样本效率的因果结论。
+原生头没有稳定超过普通线性头；个别seed超过BM25的2个best-open命中不能作为稳定优势。
+较大档6个来源审阅已充分状态命中native0/1/0、linear0/2/0，停止语义仍不可靠。
+这些是保存前FP32训练诊断，不能当作保存重载模型的自身轨迹QA成绩。
+
+![广家族学习诊断](figures/milai-global-reader-learning-20261017.png)
+
+[完整训练表与成本](../data/manifests/milai-global-reader-reference-v1-summary.json) ·
+[闭合和配对核对](../data/manifests/milai-global-reader-reference-v1-closure-validation.json) ·
+[可导出PDF](figures/milai-global-reader-learning-20261017.pdf)。
+总训练输入52321548tokens，dev评价17872488tokens、train评价26160774tokens；均为本地
+encoder输入工作，不是生成请求或独立样本数。总计7172.844秒墙钟、10188.318秒进程CPU。
+训练器batchforward4584次、deviceforward9168次，dev/train评价分别6048/9162次。
+这些原始工作已入原账本，汇总不重计。
+
+源码8ce5d09b的posttrain流程已实际派发：协调器3610392、exec56592。先完整矩阵汇总，
+再12模型五视图、同池策略与Reader。末次观察仍在呈现probe，不能把运行中当完成。
+其他工作树没有恢复，训练没有重跑，也没有因部分结果改变模型选择。
+
+首次问答结果审阅协议也已冻结：先隐藏方法名并按固定seed20261019打乱展示顺序，阅读
+每个实际唯一响应与其真正交付的材料，再映射到方法位置。证据交付、正确答案、引用、
+不足时空答案契约和原生指标分开。作者审阅仍非独立人工评判；事后发现的新证明只可单列
+补充，不能覆盖预先审阅标签或只奖励某个方法。未知用量保留，不以0充当免费调用。
+[结果审阅与成本协议](../data/manifests/milai-global-reader-response-review-v1-protocol.json)。
