@@ -3,10 +3,15 @@
 User explicitly asks to execute docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md,
 reduce defensive programming, retain innovation/reflection, disable SHA checks. This is a NEW
 active goal, not the closed prior audit. No subagents, SHA/content fingerprints, new services,
-new ledger, retries, other-worktree resumes, Product/default-policy changes. No model calls yet.
+new ledger, retries, other-worktree resumes, Product/default-policy changes. Training NOW RUNNING.
 Current work: docs/MILAI_SOURCE_SELECTION_EXECUTION_20261017.md; status navigation corrected.
 Prior12 trainings and both QA drivers COMPLETED, original PIDs absent; NEVER restart/rebill.
-Remote read-only query: research46351b5f/main518aee41. Current changes are local/uncommitted.
+Remote read-only query earlier: research46351b5f/main518aee41. New LOCAL source freeze6ec3984b.
+Serial driver PID1145336, exec40960; first reference/seed0 child1145387.
+Live state artifacts/jev-reader/selection-v2/training-v1/driver.json; do NOT restart.
+Frozen imports artifacts/jev-reader/selection-v2/frozen-code-6ec3984b/MiLAi-Lab; never edit.
+States-v2/protocol/modelrecipe frozen; later QA authoring may edit main sources only.
+No remote publication performed. Commit ID is provenance only, no SHA validation.
 
 Implemented shared selection_payload and select_bounded(selection_only=True), runner flag
 --selection-only for fixed4, prepare_source_selection.py reuses reviewed OR-of-AND labels.
@@ -105,8 +110,8 @@ preserves legacy epoch mode; savedFP16 checkpoints reloadedFP32 for actual probe
 All6models, all3prior128native,BASE,BM25,dense,fullpool =13QAarms/cohort,43dev/28reserved.
 Six presentation views and44evidence contexts/31disjoint-target pairs frozen before models.
 39targeted tests,Ruff,12projectfilemypy passed. Data audit4610source/reference records PASS.
-No model forwards yet at this freeze. NEXT: commit/freeze code and launch the serial driver on
-GPU2/3; preserve first failure,no automaticretry. Then all fixed4 QA/strong controls,reserved
+Before source freeze no model forwards. NOW serial driver RUNNING onGPU2/3 as above;
+preserve first failure,no automaticretry. NEXT all fixed4 QA/strong controls,reserved
 source-first review,invariance/evidence changes,actual costs and final requirement audit.
 Do not declare goal complete from software tests or training alone. All old runs remain closed;
 Reader settings and models unchanged, automaticSTOP unadopted. states-v1/v2 CPU preparation
@@ -124,6 +129,33 @@ binary /cra/memory/mx_memory/.uv-cache/archive-v0/TDeZ5_U4Wzk6nFWXDLcjm/ruff-0.1
 works. HTTPenv pytest/mypy used with PYTHONPATH=src:tools; CUDA interpreter path must not be
 symlink-resolved. Current work changes Lab research src only, no Product/schema/permissions.
 Goal remains active; substantial semantic review, training and evaluation are NOT complete.
+
+RESERVED SOURCE REVIEW NOW CLOSED AFTER METHOD FREEZE: all28rows/14families,559paragraph
+positions/356literal texts; snapshot reserved-source-review/all28-before-reference.json BEFORE
+native reference/predictions.6supported(3qualified),18insufficient,4masked; supported5families,
+minimum1/2/3reads=2/2/2, no definite4read proof. Do NOT resample or claim4-step generalization.
+Final semantic boundary against actual train/dev pools: target/text/title/question/background
+intersections all0. Earlier unused4318whole-family title exception remains disclosed. Original
+reference true14 =>5supported,5insufficient,4masked; false14 =>1supported,13insufficient.
+All source judgments remain unchanged after comparison; source review is assistant,notgold.
+
+Evaluation ACTIVE DATA evaluation-v2; evaluation-v1 superseded BEFORE models because2Wiki
+sources lackanswer_aliases. Offline evaluation labels now carry emptyaliases only; original
+answers and runtime cases unchanged. Firstfailure retained in evaluation-preparation-audit-v1.
+Do NOT run evaluation-v1. Protocols materialized: matrix/dev/reserved manifests.13arms*71cases
+=923positions, all10learned/BASE/prior models,6new probes,6presentationviews+44evidencecontexts.
+Old models --fixed4-only preserves STOP-trained task while ignoring STOP for action choice;
+new/BASE --selection-only. full_pool handles10/19/20candidates. Native2Wiki score is ADAPTED
+MuSiQue answer normalization, NOT official2Wiki leaderboard. NaturalMu pairs separately scored.
+Reserved295prefixes used for preparation/length audit ONLY, not extra modelprobes. Max3936oldtask/
+3905openonlytokens, no truncation. Runtime contains only question/candidate id/title/text.
+22unique targeted evaluation tests passed (13CUDAenv+9HTTPenv with officialmetricpath), Ruff,
+6filemypy(actualofficialMYPYPATH), package/tools boundary PASS. First missingjsonschema inCUDA
+was test-environment choice; HTTP tests pass without package/service changes.4QApreparations
+v1/v2xdev/reserved already charged once to old global_reader_qa_v1_preparation phase (0.502s);
+final reserved audit0.036s and evaluation input audit7.855s separately charged ONCE. Failedv1
+length audit timing not persisted; overhead incomplete, notfree. Neverrebill. Next freeze eval
+source and queue serial evaluation AFTER all6trainingterminal; no autoretry or earlierforward.
 
 Everything below is historical. Prior audit completion does not close this new user goal.
 

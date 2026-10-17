@@ -1,5 +1,5 @@
 {
-  "status": "DATA_AND_METHOD_FROZEN_READY_FOR_SERIAL_TRAINING",
+  "status": "SERIAL_TRAINING_RUNNING",
   "goal_complete": false,
   "objective": "docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md",
   "last_goal_turn_classification": "progress",
@@ -15,16 +15,14 @@
     "paired_source",
     "paired_reference"
   ],
-  "actual_model_calls": 0,
-  "training_started": false,
+  "training_started": true,
   "default_adoption": false,
   "boundary_scope_decision": "data/manifests/milai-source-selection-v2-boundary-scope-decision.json",
   "still_required": [
-    "execute all six frozen training jobs and retain first failures",
-    "saved-checkpoint fixed4 selection and 13-arm QA on dev and new reserved cohorts",
+    "all six training jobs terminal with full fixed-budget analysis",
     "all-six presentation and actual-evidence-change probes",
-    "reserved source-first review, final semantic boundary and first-response review",
-    "all actual costs, uncertainty, limitations and final requirement audit"
+    "13-arm fixed4 QA on dev and reserved with first-response review before method mapping",
+    "original/reference and source/qualified results,all actual costs,uncertainty and final requirement audit"
   ],
   "sha_checks": false,
   "content_fingerprints": false,
@@ -44,5 +42,26 @@
   },
   "planned_jobs": 6,
   "optimizer_updates_per_job": 188,
-  "verification": "data/manifests/milai-source-selection-v2-verification.json"
+  "verification": "data/manifests/milai-source-selection-v2-verification.json",
+  "source_version": "6ec3984b58d2c04131bdadc725a532aff9e227ce",
+  "training_driver": "artifacts/jev-reader/selection-v2/training-v1/driver.json",
+  "coordinator_pid": 1145336,
+  "exec_session": 40960,
+  "training_active": {
+    "condition": "reference",
+    "seed": 0,
+    "pid": 1145387,
+    "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/training-v1/runs/reference/0"
+  },
+  "actual_model_call_accounting": "Live trainer run.json and terminal compute.json; not yet closed",
+  "reserved_source_review_closed": true,
+  "reserved_source_counts": {
+    "supported": 6,
+    "pool_insufficient": 18,
+    "masked": 4,
+    "qualified_supported": 3
+  },
+  "evaluation_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/selection-v2/evaluation-v2",
+  "evaluation_protocol": "data/manifests/milai-source-selection-v2-evaluation-matrix-protocol.json",
+  "evaluation_status": "PREPARED_PENDING_SOURCE_FREEZE_AND_TRAINING_COMPLETION"
 }

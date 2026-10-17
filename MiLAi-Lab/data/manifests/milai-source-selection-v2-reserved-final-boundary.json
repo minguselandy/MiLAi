@@ -1,0 +1,39 @@
+{
+  "status": "FINAL_SELECTED_RESERVED_SOURCE_BOUNDARY_AND_REFERENCE_AUDIT_CLOSED",
+  "source_snapshot": "artifacts/jev-reader/selection-v2/reserved-source-review/all28-before-reference.json",
+  "method_source_version": "6ec3984b",
+  "selected_rows": 28,
+  "selected_families": 14,
+  "boundaries": {
+    "train": {
+      "left_target_in_right_pool": [],
+      "right_target_in_left_pool": [],
+      "left_target_title_in_right_pool": [],
+      "right_target_title_in_left_pool": [],
+      "same_questions": 0,
+      "shared_literal_background_or_target": 0
+    },
+    "dev": {
+      "left_target_in_right_pool": [],
+      "right_target_in_left_pool": [],
+      "left_target_title_in_right_pool": [],
+      "right_target_title_in_left_pool": [],
+      "same_questions": 0,
+      "shared_literal_background_or_target": 0
+    }
+  },
+  "cross_table": {
+    "native_True__source_supported": 5,
+    "native_False__source_pool_insufficient": 13,
+    "native_False__source_supported": 1,
+    "native_True__source_masked": 4,
+    "native_True__source_pool_insufficient": 5
+  },
+  "source_annotation_changed": false,
+  "full_family_title_exception": "Earlier unused reserved row4318 article-title overlap with dev16 retained; actual selected28 input metric is distinct.",
+  "sha_checks": false,
+  "content_fingerprints": false,
+  "new_model_calls": 0,
+  "wall_seconds": 0.036366512067615986,
+  "cpu_seconds": 0.03636699
+}

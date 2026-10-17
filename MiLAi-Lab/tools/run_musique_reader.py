@@ -221,8 +221,9 @@ def score(protocol, prediction_root, output):
             (paired_result["group_answer_sufficiency_f1"] if paired_result else 0.0)
             * len(valid_pairs) / len(paired)) if paired else None
     write_json(output / "results.json", {"arms": results,
-        "scope": "Derived dev cohort, native metrics for complete pairs; missing outputs explicit. "
-                 "Reference support coverage does not enumerate every semantic equivalent."})
+        "scope": protocol.get("native_metric_scope",
+                 "Derived dev cohort, native metrics for complete pairs; missing outputs explicit. "
+                 "Reference support coverage does not enumerate every semantic equivalent.")})
     return results
 
 

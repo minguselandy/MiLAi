@@ -71,10 +71,10 @@ def prepare(decisions: Path, families: Path, output: Path) -> dict[str, Any]:
 
 
 def policies(case: dict[str, Any], predict: Any, output: Path,
-             *, selection_only: bool = False) -> dict[str, Any]:
+             *, selection_only: bool = False, fixed4_only: bool = False) -> dict[str, Any]:
     cache: dict[tuple[str, ...], dict[str, Any]] = {}
     results = {}
-    schedule = (("k4", 4),) if selection_only else (("k2", 2), ("adaptive", 4))
+    schedule = (("k4", 4),) if selection_only or fixed4_only else (("k2", 2), ("adaptive", 4))
     for policy, limit in schedule:
         used: list[dict[str, Any]] = []
         fresh_wall: list[float] = []
@@ -139,6 +139,9 @@ def main() -> None:
     select.add_argument("--head-max-len", type=int, default=384)
     select.add_argument("--selection-only", action="store_true",
                         help="Run fixed4 with the same open-only task used in selection training")
+    select.add_argument("--fixed4-only", action="store_true",
+                        help="Run fixed4 with the original task; ignore STOP during action choice")
+    select.add_argument("--compute-phase", help="Original-ledger phase for this frozen cohort")
     args = parser.parse_args()
     if args.phase == "prepare":
         print(json.dumps(prepare(args.decisions, args.families, args.output)))
@@ -147,7 +150,7 @@ def main() -> None:
     start, cpu = time.perf_counter(), time.process_time()
     cases = read_rows(args.cases)
     run = {"status": "RUNNING", "pid": os.getpid(), "backend": args.backend,
-           "selection_only": args.selection_only,
+           "selection_only": args.selection_only, "fixed4_only": args.fixed4_only,
            "checkpoint": str(args.checkpoint.resolve()) if args.checkpoint else None,
            "max_len": args.max_len, "head_max_len": args.head_max_len,
            "cases": str(args.cases.resolve()), "planned_cases": len(cases), "completed_cases": 0}
@@ -190,12 +193,13 @@ def main() -> None:
                 result = {f"k{k}": {"case_id": case["case_id"], "selected_ids": [
                     p["id"] for p in case["candidates"][:k]], "policy": f"k{k}",
                     "stop_reason": "fixed_k", "decision_calls": 0}
-                    for k in ((4,) if args.selection_only else (2, 4, len(case["candidates"])))}
+                    for k in ((4,) if args.selection_only or args.fixed4_only
+                              else (2, 4, len(case["candidates"])))}
                 for policy, row in result.items():
                     write_json(args.output / case["case_id"] / f"{policy}.json", row)
             else:
                 result = policies(case, decision.predict, args.output / case["case_id"],
-                                  selection_only=args.selection_only)
+                                  selection_only=args.selection_only, fixed4_only=args.fixed4_only)
             results.append(result)
             run["completed_cases"] += 1
             write_json(args.output / "run.json", run)
@@ -216,7 +220,8 @@ def main() -> None:
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
-            budget.record_compute("bounded_reader_selection_" + args.backend, measures)
+            budget.record_compute(args.compute_phase or "bounded_reader_selection_" + args.backend,
+                                  measures)
         write_json(args.output / "run.json", run)
 
 

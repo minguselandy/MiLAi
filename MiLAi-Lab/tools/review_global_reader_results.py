@@ -164,7 +164,9 @@ def collect(root: Path, output: Path) -> dict[str, Any]:
                 {
                     "case": cid,
                     "family": label["family"],
+                    "dataset": label.get("dataset", "musique"),
                     "disposition": review["disposition"],
+                    "source_qualified": review.get("qualified", False),
                     "selected_source_indices": sorted(selected),
                     "known_reviewed_proof_delivered": proof_delivery(review, selected),
                     "reader_answerable": answer["answerable"] if answer is not None else None,
@@ -229,7 +231,12 @@ def collect(root: Path, output: Path) -> dict[str, Any]:
         path.write_text("\n".join(lines) + "\n")
     local_compute = {}
     local_ledger = {}
-    for model in protocol["models"]:
+    for stage in protocol.get("local_stages", []):
+        name = stage["name"]
+        local_compute[name] = read_json(Path(stage["root"]) / "compute.json")
+        local_ledger[name] = local_ledger_audit(
+            Path(protocol["stage_receipts_root"]), name, stage["phase"], local_compute[name])
+    for model in protocol.get("models", []):
         local_compute[model["name"]] = {
             kind: read_json(Path(model[field]) / "compute.json")
             for kind, field in (

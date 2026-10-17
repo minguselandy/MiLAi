@@ -80,3 +80,23 @@ def test_fixed_four_reuses_original_prefix_and_opens_after_saved_stop(tmp_path):
     assert result["selected_ids"] == ["p0", "p1", "p2", "p3"]
     assert [r["reused"] for r in result["controller_trace"]] == [True, True, False, False]
     assert result["standalone_model_input_tokens"] == 44
+
+
+def test_direct_fixed_four_keeps_old_task_and_ignores_stop(tmp_path):
+    case = {"case_id": "case", "question": "q", "candidates": [
+        {"id": f"p{i}", "title": "t", "text": str(i)} for i in range(5)]}
+    calls = []
+
+    def predict(payload):
+        calls.append(payload)
+        choices = payload["questions"]["next"]["criteria"]
+        assert "stop_exhausted" in choices
+        first = next(k for k in choices if k.startswith("open_"))
+        return {"probabilities": {k: 0.9 if k == "stop_exhausted" else
+                                  0.08 if k == first else 0.001 for k in choices},
+                "input_tokens": 10, "wall_seconds": 0.0}
+
+    result = policies(case, predict, tmp_path, fixed4_only=True)
+    assert list(result) == ["k4"]
+    assert result["k4"]["selected_ids"] == ["p0", "p1", "p2", "p3"]
+    assert len(calls) == 4

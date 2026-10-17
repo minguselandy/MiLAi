@@ -80,6 +80,7 @@ def main() -> None:
     parser.add_argument("--max-len", type=int, default=8192)
     parser.add_argument("--head-max-len", type=int, default=512)
     parser.add_argument("--backend", choices=("native", "linear"), default="native")
+    parser.add_argument("--compute-phase", default="reader_invariance_probe_v1")
     parser.add_argument("--variants", nargs="+", choices=(
         "original", "aliases", "candidate_order", "option_order", "title_frame", "evidence_order"),
         default=("original", "aliases", "candidate_order", "option_order", "title_frame"),
@@ -142,7 +143,7 @@ def main() -> None:
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
-            budget.record_compute("reader_invariance_probe_v1", measures)
+            budget.record_compute(args.compute_phase, measures)
         write_json(args.output / "run.json", run)
 
 

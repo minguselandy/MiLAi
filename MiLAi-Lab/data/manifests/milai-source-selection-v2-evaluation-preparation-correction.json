@@ -1,0 +1,11 @@
+{
+  "status": "PRE_DISPATCH_VALIDATION_FAILED_NO_MODEL_CALLS",
+  "finding": "2Wiki normalized source records have no answer_aliases; old MuSiQue scorer expects that field. Runtime inputs unchanged. Add empty aliases in evaluation labels only, preserving original answers.",
+  "superseded_preparation": "artifacts/jev-reader/selection-v2/evaluation-v1",
+  "active_replacement": "artifacts/jev-reader/selection-v2/evaluation-v2",
+  "first_failure_retained": true,
+  "automatic_model_retry": false,
+  "validation_failed_at": "assert answer_aliases in source",
+  "failed_validation_full_cpu_timing": "not persisted before exception; incompletely timed, not claimed free",
+  "sha_checks": false
+}

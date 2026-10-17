@@ -48,27 +48,28 @@ def prepare(decisions: Path, source_records: Path, budget_path: Path,
                     {k: p[k] for k in ("title", "paragraph_text")} for p in source["paragraphs"]
                 ],
             },
-            20,
+            len(source["paragraphs"]),
         )
         costs.append(
             {
                 "case_id": case_id,
                 "wall_seconds": time.perf_counter() - before,
                 "cpu_seconds": time.process_time() - before_cpu,
-                "source_paragraphs": 20,
-                "selected": 20,
+                "source_paragraphs": len(source["paragraphs"]),
+                "selected": len(candidates),
             }
         )
         if lexical != meta["bm25_source_indices"]:
             raise ValueError("Lexical control differs from the frozen question-only ranking")
         lexical_ids = [next(alias for alias, idx in mapping.items() if idx == i) for i in lexical]
-        for count in (2, 4, 20):
+        for policy, count in (("k2", 2), ("k4", 4), ("full_pool", len(candidates)),
+                              (f"k{len(candidates)}", len(candidates))):
             write_json(
-                output / "selections/bm25" / case_id / f"k{count}.json",
+                output / "selections/bm25" / case_id / f"{policy}.json",
                 {
                     "case_id": case_id,
                     "selected_ids": lexical_ids[:count],
-                    "policy": f"k{count}",
+                    "policy": policy,
                     "stop_reason": "fixed_k",
                     "decision_calls": 0,
                     "ranking_scope": "BM25 order mapped to shared shuffled candidate IDs",
@@ -80,8 +81,9 @@ def prepare(decisions: Path, source_records: Path, budget_path: Path,
                 "case_id": case_id,
                 "family": meta["family"],
                 "source_row": index,
-                "source": source,
+                "source": {**source, "answer_aliases": source.get("answer_aliases", [])},
                 "candidate_source_indices": mapping,
+                "dataset": meta.get("dataset", "musique"),
             }
         )
     for name, rows in (("cases", cases), ("labels", labels)):
@@ -192,7 +194,8 @@ def dense(protocol_path: Path, output: Path) -> None:
             "runs": 1,
             "completed_cases": run["completed_cases"],
         }
-        execution.budget.record_compute("global_reader_dense_control_v1", measures)
+        execution.budget.record_compute(
+            protocol.get("dense_compute_phase", "global_reader_dense_control_v1"), measures)
         execution.close()
         write_json(
             output / "compute.json",
