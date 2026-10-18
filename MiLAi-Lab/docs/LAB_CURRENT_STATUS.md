@@ -1,7 +1,8 @@
 # 动态记忆控制 v2 执行中（2026-10-18）
 
 当前目标为[动态控制计划](MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md)。
-共享操作循环和正常 Host 接线已开发，正在验证首条真实路径；操作训练、六历史、变化复用和新保留评价仍未完成。
+共享操作循环和正常 Host 的首条真实 Laya→操作反馈→Reader 路径已完成；本例时态/作用域答案正确。
+操作训练、六历史、变化复用和新保留评价仍未完成，不能据此声称方法优势。
 [本轮执行记录](MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md)。不执行 SHA 校验；此前选材实验不重跑。
 
 # 当前导航（2026-10-18，Asia/Shanghai）

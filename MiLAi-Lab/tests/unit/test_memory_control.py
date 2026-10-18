@@ -168,3 +168,20 @@ def test_unknown_result_ends_without_reexecuting(tmp_path):
         result = run_memory_control(state, FixedMemoryPolicy(), ops)
         assert result["reason"] == "operation_outcome_unknown"
         assert len(result["trace"]) == 1
+
+
+def test_context_expansion_disappears_when_other_read_delivers_its_ranges(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path)
+        service.capture_user("s", "1", "A and B approval threshold is 1000.")
+        service.capture_user("s", "2", "From November 1 only A becomes 2000.")
+        state, ops = setup_operations(service)
+        ops.execute(next(a for a in ops.actions(state) if a.kind == "SEARCH"), state)
+        small = min(range(len(ops.materials)), key=lambda i: len(ops.materials[i]["source_ranges"]))
+        ops.execute(next(a for a in ops.actions(state) if a.id == f"read_{small}"), state)
+        assert any(a.id == f"context_{small}" for a in ops.actions(state))
+        other = next(a for a in ops.actions(state) if a.kind == "READ"
+                     and not a.parameters.get("expand_context"))
+        ops.execute(other, state)
+        assert not any(a.kind == "READ" for a in ops.actions(state))
+        assert "2000" in json.dumps(state.visible_evidence)

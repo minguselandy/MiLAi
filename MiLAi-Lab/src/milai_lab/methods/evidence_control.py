@@ -57,16 +57,36 @@ class EvidenceOperations:
         return tuple(sorted({span["source_ref"] for item in self.opened.values()
             for span in [*item.get("source_ranges", []), *item.get("support_turns", [])]}))
 
+    def adds_source_range(self, item: dict[str, Any], *, expand: bool = False) -> bool:
+        """Availability uses actual versioned intervals, never semantic sufficiency."""
+        if item["kind"] != "original_source":
+            return True
+        delivered = [span for opened in self.opened.values()
+                     if opened.get("body_delivered") is not False
+                     for span in opened.get("source_ranges", [])]
+        for target in item["context_source_ranges" if expand else "source_ranges"]:
+            intervals = sorted((span["start"], span["end"]) for span in delivered
+                if (span["source_ref"], span["source_revision"]) == (
+                    target["source_ref"], target["source_revision"]))
+            end = target["start"]
+            for left, right in intervals:
+                if left > end:
+                    break
+                end = max(end, right)
+            if end < target["end"]:
+                return True
+        return False
+
     def actions(self, state: MemoryControlState) -> list[MemoryAction]:
         actions = []
         if not self.searched:
             actions.append(MemoryAction("search", "SEARCH", "original request"))
         for i, item in enumerate(self.materials):
-            if (i, False) not in self.attempted:
+            if (i, False) not in self.attempted and self.adds_source_range(item):
                 actions.append(MemoryAction(f"read_{i}", "READ", f"candidate {i}", {"index": i}))
             if (i, False) in self.attempted and (i, True) not in self.attempted and (
                 item.get("context_source_ranges") != item.get("source_ranges")
-            ) and item.get("context_source_ranges"):
+            ) and item.get("context_source_ranges") and self.adds_source_range(item, expand=True):
                 actions.append(MemoryAction(f"context_{i}", "READ", f"candidate {i} context",
                                             {"index": i, "expand_context": True}))
         if self.view and not self.used and state.views[0]["visibility"] == "visible":

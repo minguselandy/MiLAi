@@ -2,7 +2,7 @@
 
 2026-10-18，完整目标 active。依据 `MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md`。
 
-当前切片 D1：共享有限动作循环、规则/固定/Laya/生成式策略、正常 Host 的证据交付接线。
+D1首条真实闭环已验证；完整目标仍 active。当前切片 D1：共享有限动作循环、规则/固定/Laya/生成式策略、正常 Host 的证据交付接线。
 USE_VIEW 只打开原 Store 的视图；REFRESH_VIEW 才调用原解释生成器。
 本地 Laya 推理从评测脚本提取至 provider；旧脚本继续调用同一实现。基础权重明确作为零样本诊断。
 
@@ -21,7 +21,22 @@ Laya 前向 0；生成 10,528 tokens、嵌入162 tokens，新增 unknown0。原�
 本次生成13,032 tokens、嵌入218 tokens，新增HTTP unknown0；本地加载尝试的时间未留存，
 不能记成0或伪造精确费用。没有完成可用的Laya前向回执。
 原账本新增窄的 local_compute 串行入口，仍不允许其中预留假HTTP请求；8项相关测试通过。
-下一身份 `d1-laya-v4` 使用正常Host的来源导入加真实查询，先验证读取。
+`d1-laya-v4` 使用正常Host的来源导入加真实查询，真实基础Laya完成6次前向：
+SEARCH → READ0 → READ1 → context1 → REFRESH_VIEW → HANDOFF。
+原视图实际保存revision1，控制输入6225tokens；加载7.252秒、推理及准备8.331秒（CPU30.111秒）。
+Reader随后400：现有7860未启用auto-tool-choice。首响失败保持；生成known4401tokens，
+额外13396tokens的失败请求预留仍为unknown，不能因400自行清零；嵌入0。
+37b9cf23修复纯Reader交接：完成控制后关闭其读取工具目录，业务/遗忘任务保留原工具。
+6项控制回归、相关mypy/Ruff通过。`d1-laya-v5` 从新空库完成完整交接：
+基础Laya真实5前向/4318输入tokens，SEARCH→READ1→READ0→context1→HANDOFF；
+原Reader回答10月18日A/B均1000元，11月2日A2000/B1000元，与实际两份来源一致。
+没有要求显式引用标签，也未输出标签；这是作者核对的开发结果，不是盲评或泛化成绩。
+生成5686tokens、嵌入0、unknown增量0；本地加载5.979秒，决策准备及推理4.760秒。
+详见 `data/manifests/dynamic-memory-control-d1-results.json`，其路径指向全部原首响与轨迹。
+
+轨迹反思：READ0之后已经交付context1的全部范围，目录仍提供扩展，造成一次无新信息的操作。
+现按原始source_ref/revision/区间覆盖移除这种重复可执行项；未用答案或语义充分性裁剪目录。
+7项控制测试及相关mypy/Ruff通过；此目录修复后尚未重跑模型，旧v5成绩不改。
 `d1-laya-v1` 只有未执行的 prepare，未产生模型调用。
 当前仍为单槽，每请求一次显式 Source 枚举；不声称增量发现或动态策略收益。
 不执行 SHA/checksum/内容指纹校验，不改历史实验，不推送/合并，不使用子代理。

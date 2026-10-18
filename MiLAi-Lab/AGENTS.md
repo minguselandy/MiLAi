@@ -2,7 +2,12 @@
 
 Execute docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md.
 Progress: docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md. Full goal remains active.
-D1 shared operation loop/Host integration is being verified; no trained-operation or quality claim.
+D1 real base-Laya loop and Reader completed at artifacts/dynamic-memory-control/d1-laya-v5:
+5forwards/4318inputtokens, temporal/scope answer correct under author review; not method efficacy.
+v2/v3/v4 are terminal failures, preserve costs and committed effects; no restart/rebill.
+v4 adds1unknown HTTP usage; v3 local load timing unknown. v1 is prepare-only.
+Version/range overlap fix follows v5; next work is six histories and shared-policy comparisons.
+No operation training, multi-slot, held-out confirmation, or overall completion claim.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.
