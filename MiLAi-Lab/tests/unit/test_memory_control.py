@@ -14,6 +14,7 @@ from milai_lab.methods.functional_edit_memory import FunctionalEditMemory
 from milai_lab.methods.laya_memory_policy import LayaMemoryPolicy, operation_payload
 from milai_lab.methods.memory_control import (
     FixedMemoryPolicy,
+    MemoryAction,
     MemoryControlState,
     RulesMemoryPolicy,
     run_memory_control,
@@ -223,8 +224,10 @@ def test_history_directory_opens_actual_saved_version_and_respects_revocation(tm
             return cfg, [service.source_fragments(ref)[0]["fragment_handle"]]
 
         cfg, old_handles = context("first", "The start date is February 1.")
+        # A scripted Writer error is committed through the real boundary. History
+        # must show what was stored, not substitute the original Source's date.
         saved = memory.save_edit(cfg, "save", units=[{
-            "text": "The start date is February 1.", "role": "content", "evidence": old_handles}])
+            "text": "The start date is February 9.", "role": "content", "evidence": old_handles}])
         assert saved["ok"]
         current = service.read(saved["id"])
         unit = current["value"]["edit_state"]["units"][0]["unit_id"]
@@ -254,7 +257,8 @@ def test_history_directory_opens_actual_saved_version_and_respects_revocation(tm
             historical = state.visible_evidence[0]
             assert historical["revision"] == 1
             assert historical["version_view"] == "historical_exact_revision"
-            assert "February 1" in str(historical["units"])
+            assert "February 9" in str(historical["units"])
+            assert "February 1" in str(historical["evidence"])
             assert "February 3" not in str(historical["units"])
 
 
@@ -273,3 +277,59 @@ def test_controller_source_observation_is_exposed_but_not_automatically_sent_to_
         exposure = store.get(namespace(service), "exposure:" + query).value
         assert exposure["source_refs"] == [ref]
         assert exposure["meaning"] == "material_exposure_not_semantic_support"
+
+
+def test_known_source_scope_can_refresh_without_a_forced_search_read_pipeline(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path)
+        first = service.capture_user("s", "1", "Approval threshold is 1000.")["source_ref"]
+        state, ops = setup_operations(service)
+        result = run_memory_control(state, Scripted(["refresh_view", "handoff"]), ops)
+        assert [e["selected"] for e in result["trace"]] == ["refresh_view", "handoff"]
+        assert state.visible_evidence[0]["kind"] == "query_structure"
+        state, ops = setup_operations(service)
+        assert not any(a.kind == "REFRESH_VIEW" for a in ops.actions(state))
+        new = service.capture_user("s", "2", "A new exception applies to travel.")["source_ref"]
+        state, ops = setup_operations(service)
+        refresh = next(a for a in ops.actions(state) if a.kind == "REFRESH_VIEW")
+        assert set(refresh.parameters["source_refs"]) == {first, new}
+
+
+def test_revocation_removes_controller_body_excerpts_and_cached_scope(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path)
+        text = "PRIVATE_SCOPE_VALUE is the label."
+        ref = service.capture_user("s", "1", text)["source_ref"]
+
+        def call(messages, schema):
+            return {**interpretation(messages, schema), "scope": "PRIVATE_SCOPE_VALUE"}
+
+        state, ops = setup_operations(service, call)
+        run_memory_control(state, Scripted(["refresh_view", "handoff"]), ops)
+        state, ops = setup_operations(service)
+        ops.execute(next(a for a in ops.actions(state) if a.kind == "SEARCH"), state)
+        assert "PRIVATE_SCOPE_VALUE" in str(state.project())
+        handle = service.source_fragment_range(ref, 0, len(text))["fragment_handle"]
+        service.forget("s", "forget", fragment_handles=[handle])
+        actions = ops.actions(state)
+        assert not any(a.kind in {"READ", "USE_VIEW", "REFRESH_VIEW"} for a in actions)
+        assert "PRIVATE_SCOPE_VALUE" not in str(state.project())
+        reopened, _ = setup_operations(service)
+        assert "PRIVATE_SCOPE_VALUE" not in str(reopened.project())
+
+
+def test_single_available_handoff_does_not_invoke_a_model():
+    class Operations:
+        def actions(self, state):
+            return [MemoryAction("done", "HANDOFF", "Reader")]
+
+        def execute(self, action, state):
+            raise AssertionError("HANDOFF does not execute another memory operation")
+
+    class Policy:
+        def choose(self, state, actions):
+            raise AssertionError("There is no model decision with only one available action")
+
+    result = run_memory_control(MemoryControlState(task={}), Policy(), Operations())
+    assert result["reason"] == "no_available_operation"
+    assert result["trace"][0]["selection_mode"] == "only_available_action"

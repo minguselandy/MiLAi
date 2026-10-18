@@ -49,6 +49,7 @@ class EvidenceOperations:
         self.used = False
         self.refreshed_inputs: set[tuple[str, ...]] = set()
         self.history_pages: dict[str, dict[str, Any]] = {}
+        self.visibility_epoch = service.forget_epoch
         self.view = cached_structure(service)
         # D1 scans once, explicitly measured; D4 replaces this with an incremental feed.
         started = time.perf_counter()
@@ -62,17 +63,70 @@ class EvidenceOperations:
             "reported_at": s.get("occurred_at"), "captured_at": s["observed_at"]}
             for s in arrivals]
         state.budget["visible_sources_enumerated"] = len(self.events)
-        if self.view:
-            opened = open_structure(service, self.view)
-            state.views = [{"id": self.view["id"], "scope": self.view["index_text"],
-                "revision": self.view["revision"], "visibility": opened["visibility"],
-                "pending_events": [s["event_id"] for s in arrivals],
-                "source_bindings": self.view["source_bindings"],
-                "semantics": "binding status is not semantic correctness"}]
+        self.view_observation(state)
+
+    def view_observation(self, state: MemoryControlState) -> dict[str, Any] | None:
+        if self.view is None:
+            return None
+        opened = open_structure(self.service, self.view)
+        state.views = [{"id": self.view["id"], "scope": opened.get("index_text"),
+            "revision": self.view["revision"], "visibility": opened["visibility"],
+            "pending_events": [e["source_ref"] for e in state.new_events
+                if [e["captured_at"], e["source_ref"]] > self.view["arrival_cursor"]],
+            "source_bindings": self.view["source_bindings"],
+            "semantics": "binding status is not semantic correctness"}]
+        return opened
+
+    def refresh_visibility(self, state: MemoryControlState) -> None:
+        epoch = self.service.forget_epoch
+        if epoch == self.visibility_epoch:
+            return
+        self.visibility_epoch = epoch
+        self.events = [s for e in self.events
+                       if (s := self.service.source(e["event_id"])) is not None]
+        visible = {s["event_id"] for s in self.events}
+        state.new_events = [e for e in state.new_events if e["source_ref"] in visible]
+        self.materials = [open_evidence_packs(self.service, [m], refresh_current=True)[0]
+            if m["kind"] != "stored_revision" else m for m in self.materials]
+        self.opened = dict(zip(self.opened, open_evidence_packs(
+            self.service, list(self.opened.values()), refresh_current=True), strict=True))
+        self._deliver(state)
+        state.pending_candidates = [self.candidate(m, i) for i, m in enumerate(self.materials)
+                                    if i not in self.opened]
+        self.history_pages.clear()
+        self.view_observation(state)
+
+    def refresh_refs(self, state: MemoryControlState) -> tuple[str, ...]:
+        visible = {s["event_id"] for s in self.events}
+        arrivals = {e["source_ref"] for e in state.new_events
+                    if not self.view or [e["captured_at"], e["source_ref"]]
+                    > self.view["arrival_cursor"]}
+        prior = ({b["source_ref"] for b in self.view["source_bindings"].values()}
+                 if self.view else set())
+        refs = (set(self.source_refs()) or (prior | arrivals)) & visible
+        changed_input = (not self.view or arrivals or refs != set(self.view["retrieved_sources"])
+            or self.view.get("built_for") != state.task["request"]
+            or self.view["query_time"] != state.task["query_time"]
+            or state.views[0]["visibility"] != "visible")
+        return tuple(sorted(refs)) if changed_input else ()
 
     def source_refs(self) -> tuple[str, ...]:
         return tuple(sorted({span["source_ref"] for item in self.opened.values()
             for span in [*item.get("source_ranges", []), *item.get("support_turns", [])]}))
+
+    def observation_source_refs(self, state: MemoryControlState) -> list[str]:
+        """Origins of controller-visible bodies/excerpts, distinct from Reader delivery."""
+        refs = {event["source_ref"] for event in state.new_events}
+        for view in state.views:
+            if view["visibility"] == "visible":
+                refs.update(b["source_ref"] for b in view["source_bindings"].values())
+        for candidate in state.pending_candidates:
+            item = self.materials[candidate["item_index"]]
+            if item.get("body_delivered") is not False:
+                refs.update(span["source_ref"] for span in [
+                    *item.get("focus_source_ranges", item.get("source_ranges", [])),
+                    *item.get("revision_evidence", []), *item.get("support_turns", [])])
+        return sorted(refs)
 
     def adds_source_range(self, item: dict[str, Any], *, expand: bool = False) -> bool:
         """Availability uses actual versioned intervals, never semantic sufficiency."""
@@ -95,11 +149,14 @@ class EvidenceOperations:
         return False
 
     def actions(self, state: MemoryControlState) -> list[MemoryAction]:
+        self.refresh_visibility(state)
         actions = []
         history_records = set()
         if not self.searched:
             actions.append(MemoryAction("search", "SEARCH", "original request"))
         for i, item in enumerate(self.materials):
+            if item.get("body_delivered") is False:
+                continue
             if (i, False) not in self.attempted and self.adds_source_range(item):
                 actions.append(MemoryAction(f"read_{i}", "READ", f"candidate {i}", {"index": i}))
             if (i, False) in self.attempted and (i, True) not in self.attempted and (
@@ -119,7 +176,7 @@ class EvidenceOperations:
                             "cursor": page["next_cursor"] if page else None}))
         if self.view and not self.used and state.views[0]["visibility"] == "visible":
             actions.append(MemoryAction("use_view", "USE_VIEW", self.view["id"]))
-        refs = self.source_refs()
+        refs = self.refresh_refs(state)
         if refs and refs not in self.refreshed_inputs:
             actions.append(MemoryAction("refresh_view", "REFRESH_VIEW", "current source scope",
                                        {"source_refs": list(refs)}))
@@ -183,21 +240,24 @@ class EvidenceOperations:
                     "status": "opened", "index": i, "visibility": item.get("visibility")}
         if action.kind == "USE_VIEW":
             assert self.view is not None
-            item = open_structure(self.service, self.view)
+            observed = self.view_observation(state)
+            assert observed is not None
+            item = observed
             self.used = True
         elif action.kind == "REFRESH_VIEW":
-            refs = self.source_refs()
+            refs = tuple(action.parameters["source_refs"])
             self.refreshed_inputs.add(refs)
+            events = [s for e in self.events
+                      if (s := self.service.source(e["event_id"])) is not None]
             built, report = build_query_structure(self.service, state.task["request"],
                 state.task["query_time"], list(refs), policy="incremental", call=self.refresh_call,
-                source_events=self.events, force_refresh=True)
+                source_events=events, force_refresh=True)
             if built is None:
                 return {"ok": False, "status": "empty_source_pool", "report": report}
-            item = built
-            self.view = copy.deepcopy(item)
-            state.views = [{"id": item["id"], "revision": item["revision"],
-                "scope": item["index_text"], "pending_events": [], "visibility": "visible",
-                "source_bindings": item["source_bindings"]}]
+            self.view = copy.deepcopy(built)
+            observed = self.view_observation(state)
+            assert observed is not None
+            item = observed
             self.used = True
         else:
             raise ValueError(f"Non-executable operation: {action.kind}")
@@ -207,9 +267,11 @@ class EvidenceOperations:
         if delivered:
             self.opened = trial
             self._deliver(state)
-        return {"ok": item.get("body_delivered") is not False and delivered,
-                "status": "view_opened" if delivered else "material_budget_exhausted",
-                "view_id": item["id"], "revision": item.get("revision"),
+        available = item.get("body_delivered") is not False
+        return {"ok": available and delivered,
+                "status": ("material_budget_exhausted" if not delivered else
+                           "view_opened" if available else item["visibility"]),
+                "view_id": item["id"], "revision": self.view["revision"],
                 **({"report": report} if action.kind == "REFRESH_VIEW" else {})}
 
     def reader_evidence(self) -> list[dict[str, Any]]:

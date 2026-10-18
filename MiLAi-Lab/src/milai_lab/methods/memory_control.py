@@ -65,15 +65,18 @@ def run_memory_control(
                                 "actions": [asdict(a) for a in actions]}
         record({"phase": "decision_input", **copy.deepcopy(event)})
         started = time.perf_counter()
-        selected = policy.choose(state, actions)
+        forced = len(actions) == 1
+        selected = actions[0].id if forced else policy.choose(state, actions)
         # The sole action boundary binds the returned ID to actual supplied parameters.
         action = next((a for a in actions if a.id == selected), None)
         if action is None:
             raise ValueError(f"Unknown memory operation ID: {selected}")
-        event.update(selected=selected, control_wall_seconds=time.perf_counter() - started)
+        event.update(selected=selected,
+                     selection_mode="only_available_action" if forced else "policy",
+                     control_wall_seconds=time.perf_counter() - started)
         record({"phase": "decision_output", **copy.deepcopy(event)})
         if action.kind == "HANDOFF":
-            reason = "policy_handoff"
+            reason = "no_available_operation" if forced else "policy_handoff"
             trace.append(event)
             break
         started = time.perf_counter()

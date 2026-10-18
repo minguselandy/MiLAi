@@ -466,11 +466,14 @@ class FunctionalEditMemory(FunctionalMemory):
                 fits=lambda items: self.token_count(canonical(packet(items, "budget_exhausted")))
                     <= self.material_limit,
                 excluded_source_refs=(bound["source_ref"],))
-            # Controller observations are exposure, not proof of Reader delivery.
-            with self.service._locked():
-                note_exposure(self.service, bound["source_ref"],
-                              [event["source_ref"] for event in state.new_events])
             memory = self
+
+            def record_control(event: dict[str, Any]) -> None:
+                if event.get("phase") == "decision_input":
+                    with self.service._locked():
+                        note_exposure(self.service, bound["source_ref"],
+                                      operations.observation_source_refs(state))
+                self.control_record(event)
 
             class AdmittedOperations:
                 def actions(self, observed: MemoryControlState) -> list[MemoryAction]:
@@ -488,7 +491,7 @@ class FunctionalEditMemory(FunctionalMemory):
                     return result
 
             result = run_memory_control(state, self.control_policy, AdmittedOperations(),
-                max_steps=self.control_steps, record=self.control_record,
+                max_steps=self.control_steps, record=record_control,
                 can_continue=lambda: self.control_available()
                     and bool(self.read_allowance(config)["reads_remaining"]))
             self.control_record({"event": "memory_control_handoff", **result})

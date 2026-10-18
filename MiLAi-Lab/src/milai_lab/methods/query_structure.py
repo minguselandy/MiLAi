@@ -209,6 +209,7 @@ def build_query_structure(
     revision = prior["revision"] + 1 if prior else 1
     item = {"id": f"query-structure:{revision}", "kind": "query_structure", "policy": policy,
         "revision": revision, "structure": structure, "source_bindings": bindings,
+        "built_for": question,
         "arrival_cursor": cursor, "retrieved_sources": pool, "query_time": date,
         "index_text": response["scope"], "visibility": "visible", "body_delivered": True,
         "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); "
