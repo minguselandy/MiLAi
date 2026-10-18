@@ -1,0 +1,766 @@
+{
+  "version": "operation-t0-dev-own-rollout-v1",
+  "scope": "Eight development families already used for prefix evaluation. Not held out. Each policy starts empty and forms its own actual views and Source history.",
+  "histories": [
+    {
+      "id": "quota_reallocation",
+      "split": "development",
+      "source_family": "quota_reallocation",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，按最新实际转移记录，竹组与梅组分别还可发多少张票？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "竹组原剩余可发票为5张。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "梅组原剩余可发票为1张。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "已执行从竹组向梅组转2张票，两组之外无变化。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "竹组3张，梅组3张。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，按最新实际转移记录，竹组与梅组分别还可发多少张票？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "竹组3张，梅组3张。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，按最新实际转移记录，竹组与梅组分别还可发多少张票？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "兰组另有2张票，不属于这次转移。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "竹组3张，梅组3张。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，按最新实际转移记录，竹组与梅组分别还可发多少张票？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "更正：实际转移只有1张票，原2张记录错误；没有额外发出票。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "竹组4张，梅组2张。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "ordered_precedence",
+      "split": "development",
+      "source_family": "ordered_precedence",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，紫沙样品当前应使用什么包装？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "通用包装指南要求纸盒。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "紫沙样品专项指令要求硬壳盒。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "规则明确专项指令优先于通用指南。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "硬壳盒。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，紫沙样品当前应使用什么包装？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "硬壳盒。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，紫沙样品当前应使用什么包装？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "紫沙专项包装指令已撤销，没有替代专项指令。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "纸盒，回到通用指南。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，紫沙样品当前应使用什么包装？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "白沙样品的专项指令仍要求硬壳盒。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "纸盒，回到通用指南。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "fraction_scope",
+      "split": "development",
+      "source_family": "fraction_scope",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，青湾组上午收到的箱子是否也一定有一半贴了蓝标？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "青湾组全天收到的箱子中有一半贴了蓝标。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "全天收货分上午和下午两个批次。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "记录未提供各批次的蓝标比例。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能推断，全天一半不代表上午一半。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，青湾组上午收到的箱子是否也一定有一半贴了蓝标？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "下午的点验还在继续，不改变已记录的上午结果。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能推断，全天一半不代表上午一半。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，青湾组上午收到的箱子是否也一定有一半贴了蓝标？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "不能推断，全天一半不代表上午一半。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，青湾组上午收到的箱子是否也一定有一半贴了蓝标？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "上午批次经点验有10箱，其中2箱贴蓝标。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不是，上午2/10为五分之一。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "nonunique_identity",
+      "split": "development",
+      "source_family": "nonunique_identity",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，记录中的“阿林”应该通知哪个项目？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "光帆项目有一位联络员昵称阿林。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "影帆项目也有一位不同的联络员昵称阿林。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "当前通知单只写了阿林，没有项目或其他身份字段。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能唯一确定，需要区分光帆与影帆的阿林。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，记录中的“阿林”应该通知哪个项目？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "第三个项目新增一位叫阿岚的联络员。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不能唯一确定，需要区分光帆与影帆的阿林。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，记录中的“阿林”应该通知哪个项目？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "通知单补充项目编号，明确指光帆的阿林。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "光帆项目。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，记录中的“阿林”应该通知哪个项目？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "光帆项目。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "joint_schedule",
+      "split": "development",
+      "source_family": "joint_schedule",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，流云讨论在两位参与者都可用的时段内，应安排在哪个区间？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "流云讨论需要沈岚与邵石两人同时参加。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "沈岚可参加14:00至16:00，含端点。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "邵石可参加15:00至17:00，含端点。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "15:00至16:00。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，流云讨论在两位参与者都可用的时段内，应安排在哪个区间？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "邵石的可用时段改为16:30至17:00，沈岚时段不变。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "两位必要参与者没有重叠可用区间。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，流云讨论在两位参与者都可用的时段内，应安排在哪个区间？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "两位必要参与者没有重叠可用区间。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，流云讨论在两位参与者都可用的时段内，应安排在哪个区间？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "旁听者可全天参加，不替代两位必要参与者。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "两位必要参与者没有重叠可用区间。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "negated_exception",
+      "split": "development",
+      "source_family": "negated_exception",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，雾岭这批含磁片的轻件可走加急通道吗？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "雾岭轻件一般可以走加急通道。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "但含磁片的轻件不得走加急通道。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "本批货是含磁片的轻件。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "不可以，命中含磁片例外。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，雾岭这批含磁片的轻件可走加急通道吗？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "新说明：含磁片禁用加急的规则不适用于已用指定屏蔽盒封装的轻件；本批已完成这种封装。",
+              "occurred_at": "2032-07-02T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "可以，命中已屏蔽封装的例外之例外。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，雾岭这批含磁片的轻件可走加急通道吗？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "含液体货物的规则另行制定，与本批无关。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "可以，命中已屏蔽封装的例外之例外。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，雾岭这批含磁片的轻件可走加急通道吗？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "可以，命中已屏蔽封装的例外之例外。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "serial_responsibility",
+      "split": "development",
+      "source_family": "serial_responsibility",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，现在谁保管鸣沙档案，原作者是谁？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "鸣沙档案由俞青撰写。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "俞青已将档案保管工作交给吴庭。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "作者身份不会因保管人变化而改变。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "吴庭保管，俞青为作者。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，现在谁保管鸣沙档案，原作者是谁？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "吴庭保管，俞青为作者。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，现在谁保管鸣沙档案，原作者是谁？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "鸣川档案也由连舒保管，但不是鸣沙档案。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "吴庭保管，俞青为作者。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，现在谁保管鸣沙档案，原作者是谁？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "吴庭又把保管工作交给连舒，档案作者未改。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "连舒保管，俞青仍是作者。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    },
+    {
+      "id": "count_distinct",
+      "split": "development",
+      "source_family": "count_distinct",
+      "task_count": 4,
+      "steps": [
+        {
+          "id": "cold",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，按目前已记录的清单，银禾实际有几个不同的样品？",
+          "occurred_at": "2032-07-02T09:10:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "a",
+              "content": "银禾清单初始全部样品编号为S11和S12，没有其他样品编号。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "b",
+              "content": "另一条登记再次提到S11，明确是重复登记。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "c",
+              "content": "统计要求按不同样品编号计数。",
+              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "2个。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "repeat",
+          "kind": "task",
+          "session": "query",
+          "content": "根据当前已提供的记录，按目前已记录的清单，银禾实际有几个不同的样品？",
+          "occurred_at": "2032-07-02T09:20:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [],
+          "expected": "2个。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "changed",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，按目前已记录的清单，银禾实际有几个不同的样品？",
+          "occurred_at": "2032-07-02T09:30:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "u",
+              "content": "新增样品S13已经登记，不是任何旧编号的别名。",
+              "occurred_at": "2032-07-02T09:30:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "3个。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        },
+        {
+          "id": "unrelated",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "根据当前已提供的记录，按目前已记录的清单，银禾实际有几个不同的样品？",
+          "occurred_at": "2032-07-02T09:40:00+08:00",
+          "query_time": "2032-07-02",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "n",
+              "content": "金禾清单也有S13，但本题只统计银禾清单。",
+              "occurred_at": "2032-07-02T09:40:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": "3个。",
+          "qualification": "Source-contained answer only; authored log statements are not independent live application effect verification."
+        }
+      ]
+    }
+  ]
+}
