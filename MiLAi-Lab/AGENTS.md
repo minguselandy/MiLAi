@@ -10,21 +10,33 @@ E0 first dispatch artifacts/dynamic-memory-control/e0-v1 is TERMINAL FAILED:
 PID4179314 absent, exec88910 exit1, 12 positions attempted. Fixed/rules approval answers4/4;
 BASE approvalq1 SEARCH→HANDOFF without READ (task loss), q2/q3 correct answer text, q4 Reader
 VLLM_CHAT_TRUNCATED with known usage. Keep failure/effects/costs; no old position rerun.
-E0 continuation LIVE: artifacts/dynamic-memory-control/e0-v1-remaining1/driver.json,
-PID35395, exec73048. Revalidate actual process/session; runtime roots remain e0-v1/{policy}.
-Runtime imports frozen1541deec, coordinator frozen7e8df793. It skips the12closedpositions;
-known-usage length failures are retained and next distinct inputs continue. Other execution errors stop.
-116 total positions=96tasks+20explicit operations. All cases/arms remain; no resampling or retry.
-Latest observed16closed positions: approval fixed4/4 and rules4/4 core answers, BASE2/4,
-generative3/4. BASEq1 missed READ; BASEq4 and generativeq2 Readerlengthfailures. Not full grounding
-or state success; only1sourcefamily. Nextlive stage fixed/project_lead/command-1 at observation.
-Rules approvalq2 view uses prior assistant answer e2 as reported support and narrows temporal rules;
-QA correctness does not establish independent grounding/view quality. Full state review still pending.
-Working tree34849348 reopens selected original supports on explicit refresh and clarifies source roles;
-23 relevant tests pass, NOT yet real-model evaluated. Do not import it into ongoing frozen v1 run.
-Working tree0103fb8f adds operation export/metrics: e0-prefix12-states-v1 has67unlabelled states,
-1family,21actual Laya inputs match by direct JSON comparison. Export CPU0.128s charged once.
-No gold auto-generated, operation training, multi-slot, held-out confirmation or overall completion.
+E0 remaining1 TERMINAL FAILED at98positions: PID35395 absent, exec73048 exit1.
+Rules/reopen_forget/command-2 rejected EDIT_SUPPORT_ROUTE_INVALID, then required-operation-missing;
+no semantic commit;45371generation+41embeddingtokens, unknown0. Keep it failed, never redo it.
+E0 remaining2 LIVE: artifacts/dynamic-memory-control/e0-v1-remaining2/driver.json,
+PID415031, exec57568, runtime1541deec/coordinator7e8df793; runtime banks remain e0-v1/{policy}.
+It skips98closedpositions. Latest107/116 attempted, laya/reopen_forget/command-4 active.
+Revalidate process/handle, not stale status. Known lengths retained; other errors require inspection.
+Source family views QUEUED behind E0: operation-collection-dispatch-v1.json,
+waiterPID459851, exec13707, frozen-efbdfe9c. It starts collection ONLY after E0 process exits and
+status is COMPLETED(_WITH_FAILURES); a failed dependency yields NEEDS_REVIEW, not automatic retry.
+Child when launched: operation-collection-v1/run.json. No collection model calls at this snapshot.
+Prepared24train/8dev authored source families, six post-cold phase orders, no E0 families fitted.
+Collection uses real shared operations/Qwen-generated views; scripted choices are NOT gold,
+no Reader task execution, no operation training yet. Original ledger only; full goal still active.
+Working code06a5384f exposes actual stored-version directories/reads and actual new-event content,
+with original visibility/exposure accounting. History test stores9 despite source1, then corrects3;
+READ returns actual stored9, not substitute source1. Runtime semantic checker was not loosened.
+511b1872 clarifies direct facts vs derived support groups; actual improvement untested.
+8bb64192 permits direct REFRESH on known sources, avoids identical no-input refresh,
+redacts revoked view scopes/controller observations, and skips model calls for sole legal action.
+35 relevant tests + Ruff/mypy pass. Do not inject new code into E0 frozen1541deec.
+E0 storage finding: fixed/project_lead first save rejected, correction truncated, no record;
+rules/laya firstsave rev1, correction not committed; generative correction actually rev2.
+Matching q4 date strings do NOT establish successful saves or actual-history grounding.
+First approval family fixed/rules4/4 core answers, BASE2/4, generative3/4; only1family, not full state proof.
+67 old prefix states remain unlabelled (e0-prefix12-states-v1);21 actual model inputs matched.
+No multi-slot, expanded128/32 data, own-policy CE trajectories, held-out confirmation or completion.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.

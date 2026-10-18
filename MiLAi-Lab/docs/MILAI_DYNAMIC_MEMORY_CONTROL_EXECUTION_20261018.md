@@ -107,3 +107,45 @@ BASEq1漏READ；BASEq4与生成式q2均为Reader长度失败，用量已知，�
 当前开发提交：1541deec为E0方法冻结；0103fb8f为操作监督入口；34849348为后续刷新器修复；
 7e8df793为已审阅失败后的剩余位置调度。全部仅本地，无push/merge；Product API/Schema/权限未改。
 Lab Host新增incoming_sources可选参数。当前package/tools边界通过，未运行完整仓库/远端CI。
+
+
+## 后续当前状态：历史读取与操作数据（2026-10-18）
+
+E0第二调度在98位置退出：rules/reopen_forget/command-2提案被EDIT_SUPPORT_ROUTE_INVALID拒绝，
+随后Host报告FUNCTIONAL_REQUIRED_MEMORY_OPERATION_MISSING。实际未提交，新增45371生成tokens、
+41嵌入tokens、unknown0。进程35395已消失，exec73048退出1；不是观察超时。
+新调度e0-v1-remaining2（PID415031、exec57568）只继续未执行位置，方法仍1541deec、
+协调器7e8df793，旧银行和失败保持。最新观察107/116位置，正在执行Laya遗忘请求。
+
+项目负责人实际状态复核：fixed首次保存被拒绝、更正又截断，当前无语义记录；rules和Laya
+首次保存成功到revision1，但更正未提交；generative确实更新为revision2，内容为林岚2月3日起任职。
+这说明仅核对最终2月1日/2月3日字符串会高估状态成功。历史题须结合实际前态/提交/所读版本；
+语义保存、原文保留和正确的新事实回答分别记录，原fixture里的预期不是提交成功的证明。
+
+开发06a5384f增加真实存储版本目录/精确版本READ，复用原MemoryService与证据包，不复制存储。
+测试故意经原提交入口保存错误日期9（原文为1），随后更正3；历史读取确实返回存储的9及原文1，
+也验证撤销后不能打开该历史。Host原read_goal投影进入控制状态，视图不替代实际历史。
+新事件正文现在作为控制器观察提供，并单独记暴露关系；没有READ/USE就不会自动交给Reader。
+
+511b1872澄清Writer：直接事实只需引用来源，派生支持路线的前提不能是目标自身。
+未放宽EDIT_SUPPORT_ROUTE_INVALID校验，实际模型效果尚未在新版本验证。
+8bb64192让已知来源可直接REFRESH，保持USE无生成，不强制SEARCH→READ→REFRESH固定顺序；
+相同输入没有重复刷新对象时不再提供刷新。已撤销视图的标题/控制器正文/摘要也按原可见性更新。
+已闭合轨迹发现Laya4次仅有HANDOFF仍前向，开发版改为程序直接交接，明确不算模型充分性判断。
+最新35项相关测试、Ruff及5文件mypy通过；先前依赖边界通过，完整仓库/远端CI未运行。
+
+新来源文件operation-families-v1.json包含24训练家族和8开发家族，均为作者构造的来源历史，
+与六条E0功能历史分开；只有来源合同与答案预期，尚无操作gold。审阅修正了过时的问题预设、
+清单范围和必要/充分条件措辞；充分来源集合不冒充穷尽最小证明。重复/无关/相关变化在家族内
+采用六种顺序，且报告时刻按实际阶段递进，避免固定事件计数成为语义变化标签。
+
+收集协议已保存于dynamic-memory-control-operation-collection-protocol.json。
+collect_memory_operation_states.py通过相同执行器形成实际来源、缓存视图和反馈；脚本前缀只作
+候选示范，不是正确标签。视图必须用实际Qwen首响生成，之后审阅；收集阶段不执行Reader，
+不能写成任务成绩。先统计真实可标注状态/长度，再确定普通CE更新数。
+
+串行等待器operation-collection-dispatch-v1.json（PID459851、exec13707）已启动，代码冻结efbdfe9c。
+它核对E0具体进程，只有退出且调度完成时启动operation-collection-v1；若E0再次失败则停在
+NEEDS_REVIEW，不重启任何已尝试位置。此时尚无收集模型调用或操作训练。
+待完成范围仍为E0完整语义/状态/成本评价、真实视图审阅与操作CE、自身轨迹、两槽及增量发现、
+强dense基线和机制对照、新保留确认及正常沙箱任务。完整目标active，未推送或合并。
