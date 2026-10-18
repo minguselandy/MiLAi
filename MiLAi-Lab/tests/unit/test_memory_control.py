@@ -5,6 +5,7 @@ from dataclasses import dataclass
 import pytest
 from langgraph.store.sqlite import SqliteStore
 
+from milai_lab.harness.contextual_artifacts import Trace
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_control import EvidenceOperations
 from milai_lab.methods.evidence_reading import build_evidence_packs
@@ -65,7 +66,12 @@ def test_actual_feedback_and_finite_id_mapping(tmp_path):
             inputs.append(payload)
             return {"choice": ["search", "read_0", "handoff"][len(inputs) - 1]}
 
-        result = run_memory_control(state, LayaMemoryPolicy(predict), ops)
+        trace_path = tmp_path / "trace.jsonl"
+        result = run_memory_control(state, LayaMemoryPolicy(predict), ops,
+                                    record=Trace(trace_path, "functional_v1"))
+        trace = [json.loads(line) for line in trace_path.read_text().splitlines()]
+        assert trace[-1]["phase"] == "decision_output"
+        assert all(row["event"] == "memory_control_step" for row in trace)
         assert inputs[0]["state"]["pending_candidates"] == []
         assert inputs[1]["state"]["last_result"]["status"] == "searched"
         assert "1000" in json.dumps(inputs[2]["state"]["visible_evidence"])

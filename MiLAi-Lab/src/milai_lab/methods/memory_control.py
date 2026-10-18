@@ -61,7 +61,7 @@ def run_memory_control(
             reason = "no_available_operation"
             break
         before = state.project()
-        event: dict[str, Any] = {"step": step, "before": before,
+        event: dict[str, Any] = {"event": "memory_control_step", "step": step, "before": before,
                                 "actions": [asdict(a) for a in actions]}
         record({"phase": "decision_input", **copy.deepcopy(event)})
         started = time.perf_counter()
