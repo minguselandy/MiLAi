@@ -118,6 +118,8 @@ def main() -> None:
     parser.add_argument("--head-max-len", type=int, default=384)
     parser.add_argument("--backend", choices=("native", "linear"), default="native")
     parser.add_argument("--objective", choices=("soft-ce", "set"), default="soft-ce")
+    parser.add_argument("--task", choices=("bounded_reader", "memory_operation"),
+                        default="bounded_reader", help="Use task-specific offline decision metrics")
     parser.add_argument("--evaluate-train", action="store_true",
                         help="Save train-prefix predictions as a learning diagnosis")
     parser.add_argument("--train-eval-final-only", action="store_true",
@@ -155,7 +157,7 @@ def main() -> None:
            "physical_gpus": [2, 3], "device": "cuda", "torch_version": torch.__version__,
            "cuda_version": torch.version.cuda, "precision": "float32",
            "reference_compile": False,
-           "backend": args.backend,
+           "backend": args.backend, "task": args.task,
            "epochs": args.epochs if args.optimizer_updates is None else None,
            "planned_optimizer_updates": sum(len(windows) for _, windows in stages),
            "checkpoint_axis": axis, "dev_source": str(dev_path.resolve()),
@@ -229,7 +231,12 @@ def main() -> None:
                 evaluation_counts[split].update({
                     k: v - previous_counts[k] for k, v in decision.counters.items()})
                 write_json(args.output / split / str(epoch) / f"{index}.json", predictions[-1])
-            result = score_predictions(rows, predictions)
+            if args.task == "memory_operation":
+                from milai_lab.methods.memory_control_learning import score_operation_predictions
+
+                result = score_operation_predictions(rows, predictions)
+            else:
+                result = score_predictions(rows, predictions)
             write_json(args.output / split / str(epoch) / "summary.json", result)
             return result
 
@@ -331,6 +338,8 @@ def main() -> None:
             fcntl.flock(lease, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
             phase = args.compute_phase or (
+                f"{'laya' if args.backend == 'native' else 'linear'}_memory_operation_ce"
+                if args.task == "memory_operation" else
                 "laya_reader_ce" if args.backend == "native" else "linear_reader_ce")
             budget.record_compute(phase, measures)
         write_json(args.output / "run.json", run)
