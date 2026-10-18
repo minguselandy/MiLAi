@@ -128,6 +128,28 @@ def response(known: bool = True) -> httpx.Response:
     return httpx.Response(200, json=body)
 
 
+def test_local_compute_uses_original_ledger_without_http_reservation(tmp_path: Path) -> None:
+    settings, host, _, initial = seed(tmp_path)
+    with http_budget_scope(settings) as budget:
+        assert budget is not None and budget.http_owner is not None
+        owner = budget.http_owner
+        budget.record_compute("local_model_load", {"loads": 1, "wall_seconds": 0.5})
+        budget.record_compute("local_model", {"forwards": 2, "input_tokens": 99})
+        with owner.local_compute(budget):
+            with pytest.raises(HttpOwnershipError, match="OUTSIDE_REQUEST"):
+                budget.reserve("chat/completions", {"messages": [], "max_tokens": 8})
+        with VLLMClient(host, budget=budget, transport=httpx.MockTransport(
+            lambda request: response())) as client:
+            client.chat([])
+        assert budget.state["generation_requests"] == initial["generation_requests"] + 1
+        assert budget.state["generation"]["known_tokens"] == (
+            initial["generation"]["known_tokens"] + 5)
+    saved = json.loads(Path(settings["budget_path"]).read_text())
+    assert saved["compute"]["local_model"] == {"forwards": 2, "input_tokens": 99}
+    assert saved["compute"]["local_model_load"]["loads"] == 1
+    assert saved["generation"]["unknown_usage"] == initial["generation"]["unknown_usage"]
+
+
 def test_multiple_clients_generation_embedding_span_finish(tmp_path: Path) -> None:
     settings, host, embedding, initial = seed(tmp_path)
     entered, release_transport, finish_entered, release_finish = Event(), Event(), Event(), Event()

@@ -10,7 +10,19 @@ USE_VIEW 只打开原 Store 的视图；REFRESH_VIEW 才调用原解释生成器
 旧7862端口当前不可达，已在本配置改为实测可用的7860；没有启动服务或恢复旧任务。
 运行环境沿用 `artifacts/jev-reader/cuda-env`，以 site.addsitedir 加载原 http-env 的 Host 依赖；未升级依赖。
 
-局部 SQLite/Source/Host 接线验证已通过；真实模型首响与完整检查正在执行。
+验证：129 项 Host/记忆集成测试通过；查询视图/旧训练工具局部组 27 passed、3 skipped，
+在原 Laya 环境补跑训练/度量组 9 passed（覆盖那 3 项）；8 个触达源码文件 mypy、Ruff、
+package/tools 边界通过。各组有重叠，不求和；未声明全仓或远端 CI。
+
+首次真实运行 `artifacts/dynamic-memory-control/d1-laya-v2`（代码61124918）退出，
+`save-1` 已完成真实语义提交，但回答阶段失败：操作日志缺原 Trace 的 event 字段。
+Laya 前向 0；生成 10,528 tokens、嵌入162 tokens，新增 unknown0。原失败与已保存状态保留。
+2a4f83d2 修复原日志合同并增加真实 Trace 回归（6 passed）；新身份 `d1-laya-v3` 再次退出失败：原 HTTP owner 拒绝请求外的本地模型计算记账。
+本次生成13,032 tokens、嵌入218 tokens，新增HTTP unknown0；本地加载尝试的时间未留存，
+不能记成0或伪造精确费用。没有完成可用的Laya前向回执。
+原账本新增窄的 local_compute 串行入口，仍不允许其中预留假HTTP请求；8项相关测试通过。
+下一身份 `d1-laya-v4` 使用正常Host的来源导入加真实查询，先验证读取。
+`d1-laya-v1` 只有未执行的 prepare，未产生模型调用。
 当前仍为单槽，每请求一次显式 Source 枚举；不声称增量发现或动态策略收益。
 不执行 SHA/checksum/内容指纹校验，不改历史实验，不推送/合并，不使用子代理。
 

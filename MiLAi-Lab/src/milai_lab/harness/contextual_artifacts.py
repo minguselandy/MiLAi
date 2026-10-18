@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from collections.abc import Iterator
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from contextvars import ContextVar
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -151,9 +151,8 @@ class RunBudget:
 
     def record_compute(self, phase: str, measures: dict[str, int | float]) -> None:
         """Accumulate local model work in the existing ledger, separately from tokens."""
-        if self.http_owner is not None:
-            self.http_owner.budget_operation(self)
-        with self.lock:
+        context = self.http_owner.local_compute(self) if self.http_owner else nullcontext()
+        with context, self.lock:
             totals = self.state.setdefault("compute", {}).setdefault(phase, {})
             for name, value in measures.items():
                 totals[name] = totals.get(name, 0) + value

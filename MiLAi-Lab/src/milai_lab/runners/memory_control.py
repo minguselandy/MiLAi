@@ -42,9 +42,9 @@ def memory_policy(
             finally:
                 loading = {"wall_seconds": time.perf_counter() - started,
                            "cpu_seconds": time.process_time() - cpu, "loads": 1}
-                budget.record_compute("dynamic_memory_laya_load", loading)
                 record({"event": "memory_control_model_load", "checkpoint": config["checkpoint"],
-                        "device": "cpu", **loading})
+                        "device": "cpu", "loaded": model is not None, **loading})
+                budget.record_compute("dynamic_memory_laya_load", loading)
         started, cpu = time.perf_counter(), time.process_time()
         before = dict(model.counters)
         try:

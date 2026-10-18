@@ -394,9 +394,33 @@ class HttpOwnership:
             if acquired:
                 self.mutex.release()
 
+    @contextmanager
+    def local_compute(self, budget: Any) -> Iterator[None]:
+        """Serialize local-model accounting under the same lease, without fake HTTP."""
+        self._pid_guard()
+        if self._active_thread == get_ident():
+            self.assert_budget(budget)
+            yield
+            return
+        with self._metadata:
+            self._waiting += 1
+        try:
+            with self.mutex:
+                self.assert_budget(budget)
+                with self._metadata:
+                    self._active_thread = get_ident()
+                try:
+                    yield
+                finally:
+                    with self._metadata:
+                        self._active_thread = None
+        finally:
+            with self._metadata:
+                self._waiting -= 1
+
     def budget_operation(self, budget: Any) -> None:
         self.assert_budget(budget)
-        if self._active_thread != get_ident():
+        if self._active_thread != get_ident() or self._active_client is None:
             raise HttpOwnershipError("HTTP_OWNER_RESERVATION_OUTSIDE_REQUEST")
 
     def persist(self, budget: Any) -> None:
