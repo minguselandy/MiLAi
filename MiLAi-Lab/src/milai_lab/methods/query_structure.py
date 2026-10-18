@@ -41,6 +41,11 @@ INSTRUCTIONS = (
     "source-supported implications, not an assurance that their premises hold. If the source "
     "does not support a relation, retain plain text. Return the supplied schema."
 )
+EXPLICIT_REFRESH_INSTRUCTIONS = (
+    " Prior assistant answers are model interpretations, not independent factual support; "
+    "user questions are requests, not assertions. Preserve the original source attribution. "
+    "Keep temporal rules instead of replacing them with values evaluated only at the query date."
+)
 
 
 def _object(properties: dict[str, Any], required: list[str]) -> dict[str, Any]:
@@ -146,6 +151,10 @@ def build_query_structure(
     # the arrival cursor. This prevents source-version caching from hiding scope changes.
     old_pool = set(prior["retrieved_sources"]) if prior else set()
     reopen = set(pool) - old_pool
+    if force_refresh:
+        # Explicit control supplied these actually opened supports for this refresh.
+        # Do not drop their bodies while delivering a newer assistant paraphrase.
+        reopen.update(pool)
     if old_pool - set(pool):
         reopen.update(pool)
     delivered = ([ref for ref in wanted
@@ -165,7 +174,8 @@ def build_query_structure(
             "calendar_context": source.get("calendar_context")})
     schema = structure_schema(bindings, previous)
     delivered_aliases = {item["id"] for item in sources}
-    messages = [{"role": "system", "content": INSTRUCTIONS},
+    messages = [{"role": "system", "content": INSTRUCTIONS + (
+                    EXPLICIT_REFRESH_INSTRUCTIONS if force_refresh else "")},
                 {"role": "user", "content": json.dumps({
                     "question": question, "query_time": date,
                     "previous": previous, "sources": sources,

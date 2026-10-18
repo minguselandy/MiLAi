@@ -17,6 +17,7 @@ from milai_lab.methods.memory_control import (
     RulesMemoryPolicy,
     run_memory_control,
 )
+from milai_lab.methods.query_structure import build_query_structure
 
 
 def service_at(store, root):
@@ -185,3 +186,23 @@ def test_context_expansion_disappears_when_other_read_delivers_its_ranges(tmp_pa
         ops.execute(other, state)
         assert not any(a.kind == "READ" for a in ops.actions(state))
         assert "2000" in json.dumps(state.visible_evidence)
+
+
+def test_explicit_refresh_keeps_selected_originals_beside_new_assistant_context(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path)
+        ref = service.capture_user("s", "original", "A becomes 2000 only from May 1.")["source_ref"]
+        build_query_structure(service, "Which threshold?", "April 1", [ref],
+                              policy="incremental", call=interpretation)
+        service.capture_assistant("s", "answer", "A is 2000.")
+        inputs = []
+
+        def call(messages, schema):
+            inputs.append(json.loads(messages[-1]["content"]))
+            return interpretation(messages, schema)
+
+        build_query_structure(service, "Which threshold before May?", "April 2", [ref],
+                              policy="incremental", call=call, force_refresh=True)
+        assert any(s["role"] == "user" and "only from May 1" in s["text"]
+                   for s in inputs[0]["sources"])
+        assert any(s["role"] == "assistant" for s in inputs[0]["sources"])
