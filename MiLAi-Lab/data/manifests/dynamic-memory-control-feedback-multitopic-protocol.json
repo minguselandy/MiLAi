@@ -1,0 +1,45 @@
+{
+  "version": "dynamic-memory-control-feedback-and-multitopic-v1",
+  "status": "preregistered_before_execution",
+  "M1": {
+    "fixture": "data/fixtures/dynamic-memory-control/t0-dev-rollouts-v1.json",
+    "positions_per_arm": 32,
+    "arms": [
+      "feedback-full-v1",
+      "one-shot-v1"
+    ],
+    "checkpoint": "same saved T0 seed0 final96",
+    "matching": "Same current runtime, one slot, empty banks, actions, Reader capacity and8step ceiling. Independent trajectories, not identical later before-states.",
+    "one_shot": "One learned first action only; after SEARCH use fixed4 normal READs, after successful USE/REFRESH hand off. Definite view rejection falls back to fixed4 shared reads, without another model call. Mechanical capacity/failure feedback remains; this ablates learned semantic feedback, not all program feedback."
+  },
+  "D4": {
+    "fixture": "data/fixtures/dynamic-memory-control/multitopic-v1.json",
+    "independent_families": 1,
+    "positions_per_arm": 12,
+    "arms": [
+      "fixed_context",
+      "rules",
+      "laya",
+      "generative"
+    ],
+    "slots": 2,
+    "checkpoint": "same T0 seed0 final96 for laya; no choosing checkpoint from this workload",
+    "stages": [
+      "A/B/A with two retained topics",
+      "third topic and revisit under bounded capacity",
+      "new related exception outside old bindings",
+      "unrelated event then stable repetition",
+      "B language correction and later A/C revisits"
+    ],
+    "cost": "All actual Source discovery, controller, generation, indexing, loads and Reader included. USE count alone is not task-valid reuse.",
+    "capacity_four": "Follow up with4slots after inspecting the actual2slot execution; do not attribute simple extra capacity to learned semantics."
+  },
+  "evaluation": "Author first-response task/support/state review; keep path/cost separate. Known length failures retained; no retries. Source metadata and expected values remain offline.",
+  "queue": "Serial original budget after T2 own-prefix collection; new run roots, no previous attempt replay.",
+  "future_limits": [
+    "Initial T0 checkpoint may transfer poorly from one to two slots; report this rather than claiming a trained multi-slot policy.",
+    "Per-request full rebuild versus incremental input-factor comparison remains required separately.",
+    "No new holdout or generalization claim."
+  ],
+  "checksum_verification": false
+}

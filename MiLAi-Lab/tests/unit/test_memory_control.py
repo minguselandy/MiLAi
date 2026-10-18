@@ -16,6 +16,7 @@ from milai_lab.methods.memory_control import (
     FixedMemoryPolicy,
     MemoryAction,
     MemoryControlState,
+    OneShotMemoryPolicy,
     RulesMemoryPolicy,
     run_memory_control,
 )
@@ -83,6 +84,39 @@ def test_actual_feedback_and_finite_id_mapping(tmp_path):
         assert operation_payload(state, ops.actions(state))["state"] == state.project()
         with pytest.raises(ValueError, match="Unknown memory operation"):
             run_memory_control(state, Scripted(["nonexistent"]), ops)
+
+
+@pytest.mark.parametrize("route", ["search", "refresh_view", "rejected_view"])
+def test_one_shot_uses_one_model_decision_and_actual_fixed_fallback(tmp_path, route):
+    from jsonschema.exceptions import ValidationError
+
+    def generate(messages, schema):
+        if route == "rejected_view":
+            raise ValidationError("Known pre-write rejection")
+        return interpretation(messages, schema)
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path)
+        service.capture_user("s", "1", "A approval threshold is 1000 until November 1.")
+        state, ops = setup_operations(service, generate)
+        inputs = []
+
+        def predict(payload):
+            inputs.append(payload)
+            return {"choice": "search" if route == "search" else "refresh_view"}
+
+        result = run_memory_control(state, OneShotMemoryPolicy(LayaMemoryPolicy(predict)), ops)
+        assert len(inputs) == 1
+        assert result["reason"] == ("no_available_operation" if route == "rejected_view"
+                                    else "policy_handoff")
+        path = [e["selected"] for e in result["trace"]]
+        if route == "refresh_view":
+            assert path == ["refresh_view", "handoff"]
+        else:
+            assert "search" in path and any(p.startswith("read_") for p in path)
+        if route == "rejected_view":
+            assert result["trace"][0]["result"]["status"] == "view_rejected"
+        assert "1000" in json.dumps(state.visible_evidence)
 
 
 def test_budget_handoff_keeps_actual_evidence(tmp_path):

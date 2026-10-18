@@ -127,6 +127,30 @@ class FixedContextMemoryPolicy:
 
 
 @dataclass
+class OneShotMemoryPolicy:
+    """One learned route, then a fixed read budget or a successful view handoff.
+
+    Definite view rejection falls back to the same fixed reads. No subsequent
+    model decision sees the retrieved text or generated interpretation.
+    """
+
+    initial: MemoryPolicy
+    reads: int = 4
+    routed: bool = field(default=False, init=False)
+
+    def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        if not self.routed:
+            self.routed = True
+            return self.initial.choose(state, actions)
+        result = state.last_result
+        if result and result.get("ok") and result["action"]["kind"] in {
+            "USE_VIEW", "REFRESH_VIEW"
+        }:
+            return next(a.id for a in actions if a.kind == "HANDOFF")
+        return FixedMemoryPolicy(self.reads).choose(state, actions)
+
+
+@dataclass
 class RulesMemoryPolicy:
     reads: int = 4
 

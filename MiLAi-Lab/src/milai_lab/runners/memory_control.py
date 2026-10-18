@@ -15,6 +15,7 @@ from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     FixedMemoryPolicy,
     MemoryPolicy,
+    OneShotMemoryPolicy,
     RulesMemoryPolicy,
 )
 from milai_lab.providers.laya_local import NativeDecision
@@ -50,7 +51,9 @@ def memory_policy(
     if kind == "rules":
         return RulesMemoryPolicy(config.get("reads", 4))
     if kind == "generative":
-        return GenerativeMemoryPolicy(call)
+        generative = GenerativeMemoryPolicy(call)
+        return (OneShotMemoryPolicy(generative, config.get("reads", 4))
+                if config.get("routing") == "one_shot" else generative)
     if kind not in {"laya", "linear"}:
         raise ValueError(f"Unknown memory control policy: {kind}")
     model: NativeDecision | None = None
@@ -90,4 +93,6 @@ def memory_policy(
                 "cpu_seconds": time.process_time() - cpu,
                 **{k: v - before[k] for k, v in model.counters.items()}})
 
-    return LayaMemoryPolicy(predict, config.get("state_projection", "full"))
+    learned = LayaMemoryPolicy(predict, config.get("state_projection", "full"))
+    return (OneShotMemoryPolicy(learned, config.get("reads", 4))
+            if config.get("routing") == "one_shot" else learned)
