@@ -1,3 +1,13 @@
+# CURRENT: dynamic memory control v2 ACTIVE — 2026-10-18
+
+Execute docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md.
+Progress: docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md. Full goal remains active.
+D1 shared operation loop/Host integration is being verified; no trained-operation or quality claim.
+No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
+Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.
+Source-selection closure below remains historical evidence, not this new goal's completion.
+
 # CURRENT: source selection v2 execution CLOSED — 2026-10-18 Asia/Shanghai
 
 User objective docs/MILAI_LATEST_DOCS_TRAINING_REVIEW_20261017_46351b5f.md has been executed.

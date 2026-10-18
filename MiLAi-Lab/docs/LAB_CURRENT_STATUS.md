@@ -1,3 +1,9 @@
+# 动态记忆控制 v2 执行中（2026-10-18）
+
+当前目标为[动态控制计划](MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md)。
+共享操作循环和正常 Host 接线已开发，正在验证首条真实路径；操作训练、六历史、变化复用和新保留评价仍未完成。
+[本轮执行记录](MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md)。不执行 SHA 校验；此前选材实验不重跑。
+
 # 当前导航（2026-10-18，Asia/Shanghai）
 
 用户在执行闭合后明确要求提交到GitHub；截至研究结果提交`5c61fe0d`的24个新增提交

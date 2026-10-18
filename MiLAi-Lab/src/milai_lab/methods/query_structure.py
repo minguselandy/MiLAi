@@ -88,10 +88,18 @@ def open_structure(service: MemoryService, item: dict[str, Any]) -> dict[str, An
     return copy.deepcopy(item)
 
 
+def cached_structure(service: MemoryService) -> dict[str, Any] | None:
+    """Locate the existing slot without triggering retrieval or generation."""
+    item = service.store.get((*service.namespace, "query_structure_v1"), "current")
+    return copy.deepcopy(item.value) if item else None
+
+
 def build_query_structure(
     service: MemoryService, question: str, date: str, source_refs: list[str], *,
     policy: QueryStructurePolicy,
     call: Callable[[list[dict[str, str]], dict[str, Any]], dict[str, Any]],
+    source_events: list[dict[str, Any]] | None = None,
+    force_refresh: bool = False,
 ) -> tuple[dict[str, Any] | None, dict[str, Any]]:
     """Reuse, reconstruct or incrementally refresh the same actually retrieved scope.
 
@@ -106,7 +114,7 @@ def build_query_structure(
     namespace = (*service.namespace, "query_structure_v1")
     cached = service.store.get(namespace, "current")
     prior = copy.deepcopy(cached.value) if cached else None
-    events = service.sources()
+    events = service.sources() if source_events is None else source_events
     by_ref = {source["event_id"]: source for source in events}
     pool = sorted(set(source_refs) & set(by_ref))
     cursor = max(([source["observed_at"], source["event_id"]] for source in events), default=[])
@@ -122,7 +130,7 @@ def build_query_structure(
         "source_bodies_delivered": 0,
         "cache_capacity": 1, "query_time": date,
         "scope_claim": "retrieved scope plus new arrivals, not full-history semantic coverage"}
-    if policy != "rebuild" and valid and prior is not None \
+    if not force_refresh and policy != "rebuild" and valid and prior is not None \
             and prior["retrieved_sources"] == pool and not arrivals:
         item = copy.deepcopy(prior)
         item["query_time"] = date

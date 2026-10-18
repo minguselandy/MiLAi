@@ -695,7 +695,7 @@ def prepare(
 ) -> dict[str, Any]:
     settings = entrypoint_settings(read_json(settings_path), "functional")
     allowed = {
-        "laya_impact", "writer_input",
+        "laya_impact", "writer_input", "memory_control",
         "profile",
         "host",
         "capacity",
@@ -781,7 +781,7 @@ def prepare(
     stage_modes = settings.get("stage_enable_thinking", {})
     if (not isinstance(stage_modes, dict)
             or set(stage_modes) - {"extract", "select", "edit", "impact", "reader",
-                                  "dependency_read"}
+                                  "dependency_read", "memory_control", "query_structure"}
             or any(type(value) is not bool for value in stage_modes.values())):
         raise ValueError("STAGE_ENABLE_THINKING_INVALID")
     if (settings.get("memory_method", "functional_v1") != "functional_v1"
@@ -799,6 +799,11 @@ def prepare(
     ):
         raise ValueError("FUNCTIONAL_DEPENDENCY_READING_REQUIRES_EDIT_PACKS")
     edit_features = EditFeatures.from_settings(settings.get("edit_features", {}))
+    if settings.get("memory_control") and (
+        settings.get("evidence_policy") != "question_pack_v1"
+        or settings.get("memory_method") not in FUNCTIONAL_ARMS
+    ):
+        raise ValueError("MEMORY_CONTROL_REQUIRES_EDIT_EVIDENCE_PACKS")
     if edit_features.enabled and (
         edit_interface != "I2" or settings.get("memory_method") not in FUNCTIONAL_ARMS
     ):
@@ -2724,6 +2729,18 @@ def message(
                 memory_options["evidence_policy"] = settings.get("evidence_policy", "legacy")
                 memory_options["dependency_reading"] = settings.get("dependency_reading", False)
                 memory_options["dependency_read_call"] = dependency_read_call
+                if settings.get("memory_control"):
+                    from milai_lab.runners.memory_control import memory_policy
+
+                    control = settings["memory_control"]
+                    memory_options["control_policy"] = memory_policy(control, budget,
+                        call=dependency_read_call,
+                        admit=lambda: model.reserve_external_request("memory_control"),
+                        record=trace)
+                    memory_options["control_steps"] = control.get("max_control_steps", 8)
+                    memory_options["control_record"] = trace
+                    memory_options["control_available"] = lambda: (
+                        model.calls_in_message < settings["max_calls_per_message"] - 2)
                 memory_options["arm"] = edit_arm
                 memory_options["interface_version"] = settings.get("edit_interface_version", "v1")
                 memory_options["features"] = edit_features
@@ -2808,7 +2825,7 @@ def message(
             client.queue = FunctionalQueue(
                 root / "queue-admission.json", **settings["queue_limits"]
             )
-            model = LangMemRecipeChatModel(
+            model: LangMemRecipeChatModel = LangMemRecipeChatModel(
                 client=client,
                 allow_required_tool_choice=(settings.get("declaration_tool_choice") == "required"
                     or settings.get("completion_tool_choice") in {

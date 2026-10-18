@@ -69,6 +69,7 @@ from milai_lab.methods.edit_memory import (
     InterfaceVersion,
     MaintenanceMode,
 )
+from milai_lab.methods.memory_control import MemoryPolicy
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
 FUNCTIONAL_B0_METHOD = "milai_edit_b0_v1"
@@ -137,6 +138,10 @@ class FunctionalEditMemory(FunctionalMemory):
         evidence_policy: Literal["legacy", "question_pack_v1"] = "legacy",
         dependency_reading: bool = False,
         dependency_read_call: ModelCall | None = None,
+        control_policy: MemoryPolicy | None = None,
+        control_steps: int = 8,
+        control_record: Callable[[dict[str, Any]], None] = lambda event: None,
+        control_available: Callable[[], bool] = lambda: True,
         **kwargs: Any,
     ) -> None:
         if arm not in FUNCTIONAL_ARMS.values():
@@ -162,6 +167,12 @@ class FunctionalEditMemory(FunctionalMemory):
         self.evidence_policy = evidence_policy
         self.dependency_reading = dependency_reading
         self.dependency_read_call = dependency_read_call
+        self.control_policy = control_policy
+        self.control_steps = control_steps
+        self.control_record = control_record
+        self.control_available = control_available
+        if control_policy is not None:
+            self.policy["memory_control"] = type(control_policy).__name__
         if dependency_reading:
             if evidence_policy != "question_pack_v1" or dependency_read_call is None:
                 raise ValueError("FUNCTIONAL_DEPENDENCY_READING_REQUIRES_PACKS_AND_CALLER")
@@ -398,6 +409,8 @@ class FunctionalEditMemory(FunctionalMemory):
     ) -> dict[str, Any]:
         from milai_lab.methods.evidence_reading import open_evidence_packs, pack_coverage
 
+        if self.control_policy is not None:
+            return self._dynamic_evidence_material(config, fresh_observations)
         key, state = self._evidence_pool(config)
         if not state.get("initialized"):
             indices = [i for i, item in enumerate(state["materials"]) if not item.get("scope_only")]
@@ -414,6 +427,84 @@ class FunctionalEditMemory(FunctionalMemory):
         if fresh_observations:
             packet["fresh_observations"] = fresh_observations
         return packet
+
+    def _dynamic_evidence_material(
+        self, config: RunnableConfig, fresh_observations: list[dict[str, Any]] | None,
+    ) -> dict[str, Any]:
+        from milai_lab.memory.functional_state import note_exposure
+        from milai_lab.methods.evidence_control import EvidenceOperations
+        from milai_lab.methods.evidence_reading import open_evidence_packs, project_packs
+        from milai_lab.methods.memory_control import (
+            MemoryAction,
+            MemoryControlState,
+            run_memory_control,
+        )
+
+        bound = self._binding(config)
+        current = self.service.source(bound["source_ref"])
+        assert current is not None and self.control_policy is not None
+        question = current["content"]
+        state = MemoryControlState(task={"request": question,
+            "query_time": self.query_time or "", "calendar_context": self.query_calendar_context,
+            "mode": "read", "fresh_observations": fresh_observations or []})
+
+        def packet(evidence: list[dict[str, Any]], reason: str) -> dict[str, Any]:
+            return {"ok": True, "schema": "question_evidence_v1", "evidence": evidence,
+                "control_handoff": reason,
+                "instructions": "Answer the original request from delivered evidence. "
+                    "Interpretations are model-derived, not original sources. Handoff does not "
+                    "certify sufficiency. Report missing conditions or sources explicitly."}
+
+        def refresh(messages: list[dict[str, str]], schema: dict[str, Any]) -> dict[str, Any]:
+            assert self.dependency_read_call is not None
+            return self.dependency_read_call("query_structure", messages, schema)
+
+        key = "dynamic-control:" + reference_key([bound["session"], bound["message_id"]])
+        stored = self.service.store.get(namespace(self.service), key)
+        if stored is None:
+            self.service.store.put(namespace(self.service), key, {"status": "started"}, index=False)
+            operations = EvidenceOperations(self.service, state,
+                load_pool=lambda: self._evidence_pool(config)[1]["materials"],
+                refresh_call=refresh,
+                fits=lambda items: self.token_count(canonical(packet(items, "budget_exhausted")))
+                    <= self.material_limit,
+                excluded_source_refs=(bound["source_ref"],))
+            memory = self
+
+            class AdmittedOperations:
+                def actions(self, observed: MemoryControlState) -> list[MemoryAction]:
+                    return operations.actions(observed)
+
+                def execute(
+                    self, action: MemoryAction, observed: MemoryControlState,
+                ) -> dict[str, Any]:
+                    result = memory._read(config, "dynamic:" + str(
+                        observed.budget["remaining_control_steps"]),
+                        {"tool": "search_memory" if action.kind == "SEARCH" else "memory_control",
+                         "operation": action.kind, "target": action.target,
+                         "parameters": action.parameters},
+                        lambda _: operations.execute(action, observed), deliver_material=False)
+                    return result
+
+            result = run_memory_control(state, self.control_policy, AdmittedOperations(),
+                max_steps=self.control_steps, record=self.control_record,
+                can_continue=lambda: self.control_available()
+                    and bool(self.read_allowance(config)["reads_remaining"]))
+            self.control_record({"event": "memory_control_handoff", **result})
+            saved = {"status": "completed", "reason": result["reason"],
+                     "items": list(operations.opened.values()), "indices": list(operations.opened)}
+            self.service.store.put(namespace(self.service), key, saved, index=False)
+        else:
+            saved = stored.value
+            if saved["status"] != "completed":
+                raise FunctionalIntegrityError("DYNAMIC_CONTROL_OUTCOME_UNKNOWN")
+        actual = open_evidence_packs(self.service, saved["items"], refresh_current=True)
+        refs = [span["source_ref"] for item in actual
+                for span in [*item.get("source_ranges", []), *item.get("support_turns", []),
+                             *item.get("source_bindings", {}).values()]]
+        with self.service._locked():
+            note_exposure(self.service, bound["source_ref"], list(dict.fromkeys(refs)))
+        return packet(project_packs(actual, saved["indices"]), saved["reason"])
 
     def _evidence_tools(self) -> tuple[BaseTool, ...]:
         if self.evidence_policy != "question_pack_v1":
