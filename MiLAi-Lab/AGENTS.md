@@ -77,8 +77,9 @@ View graph overall validity remains partial; indirect history/assistant proof qu
 M2 shared mechanical projection and Host linear head freezeaaec2f5c:13CUDAtraining/projection and
 20Hosttests (overlap),Ruff,mypy,boundaries pass. Waiter798639/exec82156 follows strong queue, then
 2matched96-update seed0 trainings. Not yet trained; no QA/efficacy claim.
-T2 train-only own-prefix fixture24families/96positions registered; no gold auto-created and no dev
-family moved to fitting. Review actual own views/prefixes before fixed-budget aggregation.
+T2 train-only own-prefix fixture24families/96positions queued after M2: PID824662/exec27222,
+t2-own-prefix-dispatch-v1.json, runtime5cc68464. No gold auto-created or dev family moved to fitting.
+Review actual own views/prefixes before fixed-budget aggregation. CE latest6/32, still running.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.
