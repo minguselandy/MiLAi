@@ -35,8 +35,14 @@ class CollectionPrefix:
     def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
         if self.reuse:
             use = next((a for a in actions if a.kind == "USE_VIEW"), None)
-            return use.id if use else next(a.id for a in actions if a.kind == "HANDOFF")
+            if use is not None:
+                return use.id
+            if state.last_result and state.last_result["action"]["kind"] == "USE_VIEW" \
+                    and state.last_result.get("ok"):
+                return next(a.id for a in actions if a.kind == "HANDOFF")
         for kind in ("SEARCH", "READ", "REFRESH_VIEW", "HANDOFF"):
+            if self.reuse and kind == "REFRESH_VIEW":
+                continue
             action = next((a for a in actions if a.kind == kind
                 and not a.parameters.get("history_directory")
                 and not a.parameters.get("expand_context")), None)

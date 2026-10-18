@@ -333,3 +333,24 @@ def test_single_available_handoff_does_not_invoke_a_model():
     result = run_memory_control(MemoryControlState(task={}), Policy(), Operations())
     assert result["reason"] == "no_available_operation"
     assert result["trace"][0]["selection_mode"] == "only_available_action"
+
+
+def test_rejected_view_returns_feedback_without_repeating_generation(tmp_path):
+    calls = []
+
+    def invalid(messages, schema):
+        calls.append(messages)
+        return {**interpretation(messages, schema), "rules": [{"id": "g0", "target": "n99",
+            "all": ["n0"], "any": [[]], "evidence": ["e0"]}]}
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path)
+        service.capture_user("s", "one", "Approval threshold is 1000.")
+        state, ops = setup_operations(service, invalid)
+        result = run_memory_control(state, RulesMemoryPolicy(), ops)
+        rejected = next(e for e in result["trace"] if e.get("result", {}).get("status")
+                        == "view_rejected")
+        assert rejected["result"]["reason"] == "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE"
+        assert len(calls) == 1
+        assert "1000" in str(state.visible_evidence)
+        assert store.get((*service.namespace, "query_structure_v1"), "current") is None

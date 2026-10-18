@@ -6,7 +6,9 @@ import time
 from collections.abc import Callable
 from typing import Any
 
-from milai_lab.memory.functional_state import body_text
+from jsonschema.exceptions import ValidationError  # type: ignore[import-untyped]
+
+from milai_lab.memory.functional_state import FunctionalRejection, body_text
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_reading import (
     build_evidence_packs,
@@ -249,9 +251,16 @@ class EvidenceOperations:
             self.refreshed_inputs.add(refs)
             events = [s for e in self.events
                       if (s := self.service.source(e["event_id"])) is not None]
-            built, report = build_query_structure(self.service, state.task["request"],
-                state.task["query_time"], list(refs), policy="incremental", call=self.refresh_call,
-                source_events=events, force_refresh=True)
+            try:
+                built, report = build_query_structure(self.service, state.task["request"],
+                    state.task["query_time"], list(refs), policy="incremental",
+                    call=self.refresh_call,
+                    source_events=events, force_refresh=True)
+            except (FunctionalRejection, ValidationError) as error:
+                # These checks precede the cache write. Preserve a definite failure
+                # as feedback; the attempted input cannot silently be regenerated.
+                return {"ok": False, "status": "view_rejected", "effect": "none",
+                        "error_type": type(error).__name__, "reason": str(error)}
             if built is None:
                 return {"ok": False, "status": "empty_source_pool", "report": report}
             self.view = copy.deepcopy(built)

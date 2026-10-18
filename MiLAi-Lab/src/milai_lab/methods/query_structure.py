@@ -45,6 +45,9 @@ EXPLICIT_REFRESH_INSTRUCTIONS = (
     " Prior assistant answers are model interpretations, not independent factual support; "
     "user questions are requests, not assertions. Preserve the original source attribution. "
     "Keep temporal rules instead of replacing them with values evaluated only at the query date."
+    " Every rule target and prerequisite must be a node actually defined in previous or nodes."
+    " Direct reports need no rule edge. If a prerequisite is absent or false, keep the conditional"
+    " rule as text; do not invent an asserted positive premise to fill the graph."
 )
 
 
