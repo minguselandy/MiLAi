@@ -3287,6 +3287,13 @@ def message(
             def available_tool_names(config: RunnableConfig) -> set[str]:
                 nonlocal read_exhausted
                 names = allowed_tools - (set(memory.read_tool_names) if read_exhausted else set())
+                if (isinstance(memory, FunctionalEditMemory) and memory.control_handed_off
+                        and mode is not None and mode["business_action_request"] == "none"
+                        and not mode["allow_forgetting"]):
+                    # HANDOFF completes controlled retrieval. A pure Reader uses
+                    # its delivered packet; business/forget work retains its tools.
+                    names -= set(memory.read_tool_names) | {
+                        "get_reservation", "get_document_status"}
                 if memory.max_evidence_queries is not None:
                     allowance = memory.read_allowance(config)
                     if allowance["reads_remaining"] == 0:

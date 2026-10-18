@@ -153,6 +153,7 @@ def test_host_reopen_does_not_repeat_control_or_use_query_as_fact(tmp_path):
                 control_record=traces.append,
                 dependency_read_call=lambda _, m, s: interpretation(m, s))
             packet = memory.model_material(config)
+            assert memory.control_handed_off
             assert "1000" in json.dumps(packet)
             assert "9000" not in json.dumps(packet["evidence"])
             assert len([t for t in traces if t.get("event") == "memory_control_handoff"]) == 1

@@ -171,6 +171,7 @@ class FunctionalEditMemory(FunctionalMemory):
         self.control_steps = control_steps
         self.control_record = control_record
         self.control_available = control_available
+        self.control_handed_off = False
         if control_policy is not None:
             self.policy["memory_control"] = type(control_policy).__name__
         if dependency_reading:
@@ -504,6 +505,7 @@ class FunctionalEditMemory(FunctionalMemory):
                              *item.get("source_bindings", {}).values()]]
         with self.service._locked():
             note_exposure(self.service, bound["source_ref"], list(dict.fromkeys(refs)))
+        self.control_handed_off = True
         return packet(project_packs(actual, saved["indices"]), saved["reason"])
 
     def _evidence_tools(self) -> tuple[BaseTool, ...]:
