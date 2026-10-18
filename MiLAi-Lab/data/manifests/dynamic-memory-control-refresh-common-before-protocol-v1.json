@@ -1,0 +1,66 @@
+{
+  "version": "dynamic-memory-control-refresh-common-before-v1",
+  "status": "ACTUAL_BEFORE_PREPARED_ZERO_MODEL",
+  "cases": [
+    {
+      "family": "sealed_parcel",
+      "step": "changed",
+      "prior_step": "unrelated",
+      "prior_revision": 2,
+      "available_sources": 11,
+      "old_bound_sources": 8,
+      "new_outside_old_binding": 3,
+      "before": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-v1/sealed_parcel/before.json"
+    },
+    {
+      "family": "publication_revision",
+      "step": "repeat",
+      "prior_step": "changed",
+      "prior_revision": 1,
+      "available_sources": 8,
+      "old_bound_sources": 6,
+      "new_outside_old_binding": 2,
+      "before": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-v1/publication_revision/before.json"
+    },
+    {
+      "family": "measurement_replacement",
+      "step": "changed",
+      "prior_step": "cold",
+      "prior_revision": 1,
+      "available_sources": 6,
+      "old_bound_sources": 3,
+      "new_outside_old_binding": 3,
+      "before": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-v1/measurement_replacement/before.json"
+    },
+    {
+      "family": "delegation_boundary",
+      "step": "unrelated",
+      "prior_step": "cold",
+      "prior_revision": 1,
+      "available_sources": 6,
+      "old_bound_sources": 3,
+      "new_outside_old_binding": 3,
+      "before": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/refresh-common-before-v1/delegation_boundary/before.json"
+    }
+  ],
+  "arms": [
+    "rebuild_all_available",
+    "incremental_all_available",
+    "incremental_old_bindings_only"
+  ],
+  "model_positions": {
+    "generator": 12,
+    "reader": 12
+  },
+  "executor_runtime": "2b5c7fbc or exact frozen same query-structure executor; record exact source before execution",
+  "intervention": "Each arm starts from a separate copy of the same actual cached view and visible source cut. Never replace the view with an authored ideal graph. All-available branches see the same original source records; rebuild omits prior interpretation, incremental retains it. Old-bindings-only deliberately restricts source evidence and is a weak diagnostic, not the sole baseline.",
+  "reader": "Same original question/time and view-only shared packet; no oracle answer or hand-repaired text. Same generator/Reader settings and original ledger.",
+  "limits": [
+    "Training-only mechanism diagnostics selected before branch outcomes; not a heldout or whole-policy advantage.",
+    "Node/source alias assignment can differ when rebuilding; source identities/text/roles/times remain matched.",
+    "Generator syntax/semantic failures stay as first results; no resampling or node repair.",
+    "Old-bindings-only is not an authorized production freshness filter.",
+    "Original T2 first outcomes and bank remain untouched."
+  ],
+  "queue": "Prepared after V4 at a reviewed idle boundary; no model worker started."
+}

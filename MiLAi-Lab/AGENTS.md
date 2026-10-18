@@ -7,13 +7,26 @@ No subagents, SHA/checksum/content-fingerprint verification, new model services,
 old-position retries, other-worktree resumes, push or merge. Leave the user's untracked
 MILAI_GLOBAL_ARCHITECTURE_MEMORY_RESEARCH_20261018.md untouched.
 
-LATEST QUEUE: reviewed-followups-dispatch-v3 PID1163419/exec7496; child1832743,
-active multitopic-two-slots-v1 (frozen5052477f,48positions; latest12closed). Revalidate processes.
+LATEST QUEUE: reviewed-followups-dispatch-v4 PID1958241/exec85326; child1958247,
+active t0-continued-full-native-seed0 (frozen3654662b,additional96updates; latest39).
+V3 PID1163419/exec7496 and lastchild1832743 TERMINAL exit0/absent; all original jobs closed.
 Dense2remaining1 and dense8 CLOSED32each; mechanical-native-seed0 and full-linear-seed0
 both COMPLETED96updates. All original failures/effects/costs remain; no position retried.
-T2 CLOSED96; M1 feedback-full/one-shot CLOSED32each (semantic review pending). Two-slot is last V3 job.
+T2 CLOSED96; M1 CLOSED64 reviewed; two-slot CLOSED48 reviewed. Preserve original first failures.
 NEVER settle offline compute while a model job lives: prior billing caused HTTP_OWNER_BUSY.
-New exports/reviews/capacity probes remain PENDING; no competing billing/scheduling worker.
+36measured offline phases SETTLED ONCE at actual idle boundary before V4; model token/unknown
+counters unchanged. New common-before preparation CPU is pending, not billed during V4.
+
+M1: full feedback19correct/12wrong/1lengthfail; one-shot23correct/6wrong/3lengthfail.
+Native forwards98vs32, input198293vs50216; generation231871vs242234. No full-feedback net gain.
+Two-slot: fixed_context12correct; rules12correct with1rejected view and repeated generation;
+laya3correct/8wrong/1identity-conflict qualification, only current slot used; generative10correct/
+1wrong/1lengthfail, actual2slots. Core QA/path review is not full graph validity certification.
+4slot followup prepared (rules/laya/generative36new positions, same5052477f/runtime/data/checkpoint);
+unchanged fixed_context baseline is only a shared descriptive reference, not a new replicate.
+M3 common-before4training snapshots prepared from real T2 cached states, no oracle repair:
+sealed/changed,publication/repeat,measurement/changed,delegation/unrelated.3input/rebuild arms,
+12generator+12Reader positions proposed. Actual execution adapter/run still pending after V4.
 
 Strong baselines all128positions reviewed (8exposed dev families, not128independent cases):
 dense2=13correct/15wrong/4noanswer; dense4=19correct/9wrong/1incomplete/3noanswer;

@@ -1,0 +1,24 @@
+{
+  "version": "dynamic-memory-control-four-slot-followup-v1",
+  "status": "PREPARED_NOT_RUN",
+  "method_runtime": "5052477f",
+  "config": "configs/dynamic-memory-operation-multitopic-four-slots-v1.json",
+  "fixture": "data/fixtures/dynamic-memory-control/multitopic-v1.json",
+  "policies": [
+    "rules",
+    "laya",
+    "generative"
+  ],
+  "positions_per_policy": 12,
+  "new_positions": 36,
+  "capacity_only_change": "2to4cached slots; no policy, prompt, checkpoint, source or budget adjustment",
+  "basis": "Two-slot observations show actual rule allocation to both slots, while the single-slot-trained Laya often replaces/uses current and leaves slot1free. More capacity is not assumed to repair policy behavior.",
+  "baseline_reference": "Preserve the existing fixed_context first12positions as the unchanged no-view baseline. It never creates or uses view slots; no duplicate baseline run and no transfer of its state into other arms. This is one shared descriptive reference, not a new paired replicate or zero method cost.",
+  "gates": [
+    "Complete author review of all48two-slot outcomes before dispatch.",
+    "Original V3 coordinator must be terminal, and no other model owner may run.",
+    "Use fixed T0seed0final96 and report every first outcome; no capacity choice from heldout results."
+  ],
+  "evaluation": "Core answer, literal identity fidelity, actual opened/current slot and revisions, valid reuse versus stale/wrong-topic reuse, view creation/rejection and eviction, source/generation/controller/load costs.4slot gain is capacity evidence, not evidence of improved semantic control.",
+  "queue": "Prepared followup only; no worker launched."
+}

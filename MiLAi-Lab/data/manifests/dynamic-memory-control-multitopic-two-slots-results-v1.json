@@ -1,0 +1,1310 @@
+{
+  "version": "dynamic-memory-control-multitopic-two-slots-results-v1",
+  "status": "ALL48FIRST_POSITIONS_REVIEWED",
+  "runtime": "5052477f",
+  "source_run": "artifacts/dynamic-memory-control/multitopic-two-slots-v1",
+  "independent_histories": 1,
+  "task_positions_per_arm": 12,
+  "capacity": 2,
+  "reviewer": "Codex author, method visible; no independent Judge",
+  "arms": {
+    "fixed_context": {
+      "counts": {
+        "correct": 12
+      },
+      "costs": {
+        "attempted": 12,
+        "host_completed": 12,
+        "task_positions": 12,
+        "explicit_positions": 0,
+        "generation_known_tokens": 91661,
+        "generation_charged_tokens": 91661,
+        "generation_unknown_usage": 0,
+        "embedding_known_tokens": 0,
+        "embedding_charged_tokens": 0,
+        "embedding_unknown_usage": 0
+      },
+      "actions": {
+        "search": 12,
+        "context_0": 12,
+        "handoff": 12,
+        "read_1": 1,
+        "context_1": 6,
+        "context_2": 6,
+        "read_3": 1,
+        "context_6": 1,
+        "context_7": 3,
+        "context_11": 1
+      },
+      "max_observed_slots": 0,
+      "slots_used_in_actual_view_results": [],
+      "rows": [
+        {
+          "history": "multitopic_switching",
+          "step": "a-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "可以空运。根据记录，砂桥项目普通无电池样品可以空运，当前这批样品原登记为普通无电池样品。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/6b87b32d-4c56-4f95-98b5-9f91ae589600-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/6b87b32d-4c56-4f95-98b5-9f91ae589600-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "溪港团队的文稿发布前由编辑审核，使用中文。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/0155a88e-2eb1-466a-a43e-e14bd77b725e-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/0155a88e-2eb1-466a-a43e-e14bd77b725e-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "read_1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据记录，砂桥项目普通无电池样品可以空运，当前这批样品原登记为普通无电池样品，因此可以空运。当前记录中未提及具体的寄送流程。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/5b7da5b6-a47b-4d1c-a94b-d2eaba000403-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/5b7da5b6-a47b-4d1c-a94b-d2eaba000403-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "c-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，苇原档案室每周三闭馆维护，维护负责人是贺青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/9d6b68e4-106e-4b61-9714-99325181c424-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/9d6b68e4-106e-4b61-9714-99325181c424-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-after-third-topic",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，砂桥项目当前这批样品原登记为普通无电池样品，可以空运。当前记录中未提及具体的寄送流程。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/06b0b4f4-74e0-47dc-a7ff-7545dcf8b72c-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/06b0b4f4-74e0-47dc-a7ff-7545dcf8b72c-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_2",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，溪港团队的文稿发布前由编辑审核，使用中文。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/9fd9f96b-bf9c-497a-a75d-e21bf1ec89d2-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/9fd9f96b-bf9c-497a-a75d-e21bf1ec89d2-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_1",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-related",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，砂桥项目当前这批样品**不能空运**。记录指出，该批样品经核查实际含锂电池，而含锂电池样品只能陆运且不能空运。因此，这批样品应通过**陆运**方式寄送。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/1189f0d6-b1c5-4ef3-80cc-a5ef93d9e687-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/1189f0d6-b1c5-4ef3-80cc-a5ef93d9e687-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_1",
+            "context_6",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的最新记录，砂桥项目当前这批样品**不能空运**。记录指出，该批样品经核查实际含锂电池，含锂电池样品只能陆运且不能空运。因此，这批样品应通过**陆运**方式寄送。当前记录中未提及具体的包装与报关详细指引，仅明确了因含锂电池需改用陆运的限制。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/cdce3663-c0ae-41e3-9d6f-f603e40308dc-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/cdce3663-c0ae-41e3-9d6f-f603e40308dc-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_2",
+            "context_7",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据最新的记录，砂桥项目当前这批样品**不能空运**。核查显示该批样品实际含有锂电池，而含锂电池样品只能**陆运**且不能空运。当前记录中未提及具体的包装与报关详细指引，仅明确了因含锂电池需改用陆运的限制。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/27e7bf85-ea54-44e4-9406-aaeb91780741-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/27e7bf85-ea54-44e4-9406-aaeb91780741-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_2",
+            "context_7",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-related",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前最新记录，溪港团队的文稿发布前由编辑审核，使用英文。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/e27695ff-bdeb-4d74-8254-b9f5eae3faa0-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/e27695ff-bdeb-4d74-8254-b9f5eae3faa0-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_1",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "c-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，苇原档案室每周三闭馆维护，维护负责人是贺青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/b9ebfd88-8a42-4329-a966-64654c9714f9-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/b9ebfd88-8a42-4329-a966-64654c9714f9-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_1",
+            "context_7",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-final-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的最新记录，砂桥项目当前这批样品**不能空运**。记录指出，该批样品经核查实际含有锂电池，而含锂电池样品只能**陆运**且不能空运。因此，这批样品应通过**陆运**方式寄送。当前记录中未提及具体的包装与报关详细指引，仅明确了因含锂电池需改用陆运的限制。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/34c1fa0b-8898-4450-926b-adb2f080495e-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/fixed_context/banks/594281ff-c314-4247-8d9e-3baae026f782/34c1fa0b-8898-4450-926b-adb2f080495e-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "context_0",
+            "context_2",
+            "context_11",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        }
+      ]
+    },
+    "rules": {
+      "counts": {
+        "correct": 12
+      },
+      "costs": {
+        "attempted": 12,
+        "host_completed": 12,
+        "task_positions": 12,
+        "explicit_positions": 0,
+        "generation_known_tokens": 128467,
+        "generation_charged_tokens": 128467,
+        "generation_unknown_usage": 0,
+        "embedding_known_tokens": 0,
+        "embedding_charged_tokens": 0,
+        "embedding_unknown_usage": 0
+      },
+      "actions": {
+        "search": 12,
+        "read_0": 12,
+        "read_1": 12,
+        "new_view": 7,
+        "handoff": 12,
+        "read_2": 11,
+        "read_3": 8,
+        "read_4": 2,
+        "refresh_view_slot1": 4,
+        "refresh_view_current": 1
+      },
+      "max_observed_slots": 2,
+      "slots_used_in_actual_view_results": [
+        "current",
+        "slot1"
+      ],
+      "rows": [
+        {
+          "history": "multitopic_switching",
+          "step": "a-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前记录，砂桥项目当前这批样品**可以空运**。因为这批样品原登记为**普通无电池样品**，而规则明确说明砂桥项目的普通无电池样品允许空运。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/c49f7e3b-3894-42c3-a79c-a244274888d7-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/c49f7e3b-3894-42c3-a79c-a244274888d7-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "new_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录，溪港团队的文稿发布前由编辑审核，使用中文。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/fb093d97-a1a9-430e-8f2e-f974212ee729-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/fb093d97-a1a9-430e-8f2e-f974212ee729-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "new_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，砂桥项目当前这批样品**可以空运**。应将其按**普通无电池样品**寄送，因为记录表明该批样品原登记为此类，且规则明确说明砂桥项目的普通无电池样品允许空运。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/c1040008-d24d-47fe-996b-703bc3f27347-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/c1040008-d24d-47fe-996b-703bc3f27347-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "new_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "c-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，苇原档案室每周三闭馆维护，维护负责人是贺青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/b1aedf79-13e6-4e06-82e2-5b54c3423f66-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/b1aedf79-13e6-4e06-82e2-5b54c3423f66-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_4",
+            "new_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-after-third-topic",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，砂桥项目当前这批样品**可以空运**。应将其按**普通无电池样品**寄送，因为记录表明该批样品原登记为此类，且规则明确说明砂桥项目的普通无电池样品允许空运。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/8622dcaf-9d2a-4ff9-9615-8f9a78171757-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/8622dcaf-9d2a-4ff9-9615-8f9a78171757-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "refresh_view_slot1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，溪港团队的文稿发布前由编辑审核，使用中文。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/97359cc9-dd81-4ac4-b997-33cddd5cd31d-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/97359cc9-dd81-4ac4-b997-33cddd5cd31d-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "new_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-related",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，砂桥项目当前这批样品**不能空运**。应将其作为**含锂电池样品**，通过**陆运**方式寄送。虽然该批样品原登记为“普通无电池样品”（此前记录表明此类允许空运），但最新记录（证据e15）表明该批次经核查**实际含有锂电池**，而含锂电池样品按规定只能陆运，禁止空运。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/8804ed5b-fa1a-45d3-8d33-a3177e6a7a88-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/8804ed5b-fa1a-45d3-8d33-a3177e6a7a88-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_4",
+            "refresh_view_slot1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据最新提供的记录，砂桥项目当前这批样品**不能空运**。虽然该批样品原登记为“普通无电池样品”，但最新记录表明经核查**实际含有锂电池**。含锂电池样品按规定**禁止空运**，应将其作为**含锂电池样品**，通过**陆运**方式寄送。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/7eaef9cd-8173-4ceb-a432-04ed2b6a491b-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/7eaef9cd-8173-4ceb-a432-04ed2b6a491b-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "refresh_view_slot1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，砂桥项目当前这批样品**不能空运**。应将其作为**含锂电池样品**，通过**陆运**方式寄送。虽然该批样品原登记为“普通无电池样品”，但最新记录表明经核查**实际含有锂电池**。含锂电池样品按规定**禁止空运**，只能采用陆运方式寄送。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/e631d16d-5035-4843-be93-70724738f419-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/e631d16d-5035-4843-be93-70724738f419-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "refresh_view_slot1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-related",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，溪港团队的文稿发布前由编辑审核，使用英文。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/056ee897-3ff6-4e4c-8ced-5c799cf87995-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/056ee897-3ff6-4e4c-8ced-5c799cf87995-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "refresh_view_current",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "c-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，苇原档案室每周三闭馆维护，维护负责人是贺青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/0fd3d66b-0f24-489b-839d-59f35e5b77c4-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/0fd3d66b-0f24-489b-839d-59f35e5b77c4-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "new_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-final-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据最新提供的记录，砂桥项目当前这批样品**不能空运**。虽然该批样品原登记为“普通无电池样品”，但最新记录表明经核查**实际含有锂电池**。含锂电池样品按规定**禁止空运**，应将其作为**含锂电池样品**，通过**陆运**方式寄送。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/f29566a3-212c-4ab1-a52b-eb3fe3d6f58b-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/rules/banks/28fbb008-c4a8-4fb3-9c4a-2362c1169816/f29566a3-212c-4ab1-a52b-eb3fe3d6f58b-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "read_1",
+            "read_2",
+            "read_3",
+            "new_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        }
+      ]
+    },
+    "laya": {
+      "counts": {
+        "correct": 3,
+        "wrong": 8,
+        "qualified_identity_conflict": 1
+      },
+      "costs": {
+        "attempted": 12,
+        "host_completed": 12,
+        "task_positions": 12,
+        "explicit_positions": 0,
+        "generation_known_tokens": 96025,
+        "generation_charged_tokens": 96025,
+        "generation_unknown_usage": 0,
+        "embedding_known_tokens": 0,
+        "embedding_charged_tokens": 0,
+        "embedding_unknown_usage": 0,
+        "dynamic_memory_laya_cpu_seconds": 713.3735067939997,
+        "dynamic_memory_laya_forwards": 30,
+        "dynamic_memory_laya_input_tokens": 79374,
+        "dynamic_memory_laya_sequence_rows": 30,
+        "dynamic_memory_laya_state_tokenizations": 30,
+        "dynamic_memory_laya_state_tokens": 72345,
+        "dynamic_memory_laya_wall_seconds": 201.11175500787795,
+        "dynamic_memory_laya_load_cpu_seconds": 45.14286285499975,
+        "dynamic_memory_laya_load_loads": 12,
+        "dynamic_memory_laya_load_wall_seconds": 33.16946864593774
+      },
+      "actions": {
+        "search": 3,
+        "read_2": 1,
+        "context_2": 1,
+        "handoff": 12,
+        "read_3": 1,
+        "new_view": 1,
+        "use_view_current": 8,
+        "refresh_view_current": 3
+      },
+      "max_observed_slots": 1,
+      "slots_used_in_actual_view_results": [
+        "current"
+      ],
+      "rows": [
+        {
+          "history": "multitopic_switching",
+          "step": "a-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据提供的记录（s0），砂桥项目当前这批样品原登记为“普通无电池样品”，因此**可以空运**。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/f76d182a-532f-487d-a6c7-0747cc4f7c28-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/f76d182a-532f-487d-a6c7-0747cc4f7c28-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_2",
+            "context_2",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "当前提供的记录中仅包含砂桥项目样品运输的相关信息，并未提及溪港团队的文稿发布前的审核人及使用的语言。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/b4450299-8c42-4bcf-b85f-ecebf70c85e2-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/b4450299-8c42-4bcf-b85f-ecebf70c85e2-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_3",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录，砂桥项目当前这批样品**可以空运**。根据记录描述，该批样品被注册为“**普通非电池样品**”（ordinary non-battery samples），因此符合空运条件。\n\n（注：证据记录的总结部分明确提及“砂桥项目”及其空运可行性，但详细的分析节点（如 n1、n3）中对应的项目名称为“清高项目”。基于记录中的总结性陈述，针对用户询问的砂桥项目给出上述结论。）",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/73cc9471-c6c6-4b77-9da2-03071c63079f-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/73cc9471-c6c6-4b77-9da2-03071c63079f-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "new_view",
+            "handoff"
+          ],
+          "grade": "qualified_identity_conflict",
+          "note": "Air eligibility core matches, but response acknowledges incompatible project names in the interpretation and relies on its scope summary; not an unqualified identity-faithful result."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "c-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据记录 e3，苇原档案室每周周三闭馆维护，负责人是贺青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/f648804f-83cb-4edc-83a4-93440267b4f7-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/f648804f-83cb-4edc-83a4-93440267b4f7-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "refresh_view_current",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-after-third-topic",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据现有提供的记录（特别是来源e4和e5），砂桥项目当前这批样品被注册为普通非电池样品，这类样品是可以进行空运的。关于具体的寄送程序或物流方式（来源e2），目前提供的记录中并未包含相关信息。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/6ac2ed0a-3162-44b8-a975-86c856006bbf-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/6ac2ed0a-3162-44b8-a975-86c856006bbf-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "refresh_view_current",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，现有信息仅涉及沙桥项目批次样品作为普通非电池样品的空运资格及相关判定，并未包含任何关于“溪港团队”的资料。因此，记录中未说明溪港团队的文稿发布前由谁审核，也未提及使用的语言，无法从现有证据中回答该问题。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/533040e5-1730-4987-a4ea-cd0393d41d07-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/533040e5-1730-4987-a4ea-cd0393d41d07-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-related",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据记录，砂桥项目当前这批样品**可以空运**，因为该批次样品已注册为普通非电池样品，此类样品符合空运条件。但是，现有记录中**未提及**具体的寄送方式或物流操作细节，仅确认了其具备空运资质。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/1cb84304-689f-4ac7-a0be-84fd7dc5fa44-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/1cb84304-689f-4ac7-a0be-84fd7dc5fa44-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录（e4, e5, e2）分析：\n\n1. **能否空运**：**可以**。记录显示砂桥项目当前批样品被注册为“普通非电池类样品”，此类样品符合空运条件。\n2. **怎样寄送**：现有记录中**未提及**具体的寄送方式或详细物流流程。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/7fba3070-5501-4680-9a85-c197731d1c5e-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/7fba3070-5501-4680-9a85-c197731d1c5e-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录：\n1. **能否空运：** 可以。记录显示砂桥项目当前这批样品已注册为普通非电池样品，普通非电池样品允许空运。\n2. **应怎样寄送：** 当前记录中**未包含**该批次样品具体的空运寄送程序、物流操作细节或标准寄送方案的具体步骤。现有资料无法提供具体的寄送流程与方法，建议补充相关操作指引或咨询物流支持部门。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/50643ae2-ce68-4048-af56-9332f4e38a38-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/50643ae2-ce68-4048-af56-9332f4e38a38-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-related",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录（关于沙桥项目），未包含关于“溪港团队”文稿发布前审核人及使用语言的详细信息。为了回答这个问题，我需要进行进一步搜索。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/87cef182-81eb-4a1f-a59b-fe57c805267c-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/87cef182-81eb-4a1f-a59b-fe57c805267c-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "c-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，苇原档案室每周三闭馆维护，负责人是何清。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/e489b36d-07ae-484e-92c7-3af167155f48-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/e489b36d-07ae-484e-92c7-3af167155f48-trace-0.jsonl",
+          "control_path": [
+            "refresh_view_current",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "note": "Maintenance weekday correct, but 贺青 is rendered as何清 after an English-only He Qing interpretation; literal identity fidelity fails."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-final-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录，无法直接评估“砂桥项目”当前批次样品的空运可行性及具体寄送方案，因为现有记录中**未包含关于“砂桥项目”的任何信息**。提供的证据仅涉及“韦远档案馆”（Weiyuan Archive）的维护情况：该档案馆**每周三（Wednesday）关闭进行维护**，且**He Qing**为该维护工作的负责人。若砂桥项目的样品需寄往韦远档案馆，请避开周三并联系He Qing。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/e5e61746-9d1c-486d-a483-f3caf043bfdd-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/laya/banks/063ccd02-cc35-4904-9a26-da33fdfaa230/e5e61746-9d1c-486d-a483-f3caf043bfdd-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "handoff"
+          ],
+          "grade": "wrong",
+          "note": "Wrong-topic archive view is used for shipment question; answer also invents an unsupported relation between the shipment and archive."
+        }
+      ]
+    },
+    "generative": {
+      "counts": {
+        "correct": 10,
+        "wrong": 1,
+        "no_answer": 1
+      },
+      "costs": {
+        "attempted": 12,
+        "host_completed": 11,
+        "task_positions": 12,
+        "explicit_positions": 0,
+        "generation_known_tokens": 235098,
+        "generation_charged_tokens": 235098,
+        "generation_unknown_usage": 0,
+        "embedding_known_tokens": 0,
+        "embedding_charged_tokens": 0,
+        "embedding_unknown_usage": 0
+      },
+      "actions": {
+        "new_view": 2,
+        "handoff": 12,
+        "search": 3,
+        "read_0": 3,
+        "refresh_view_current": 4,
+        "use_view_current": 2,
+        "read_1": 1,
+        "refresh_view_slot1": 2,
+        "use_view_slot1": 1
+      },
+      "max_observed_slots": 2,
+      "slots_used_in_actual_view_results": [
+        "current",
+        "slot1"
+      ],
+      "rows": [
+        {
+          "history": "multitopic_switching",
+          "step": "a-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录，砂桥项目当前这批样品**可以空运**。依据记录中的逻辑判定，该批样品原登记为“普通无电池样品”，符合“砂桥项目普通无电池样品允许空运”的规定。关于“应怎样寄送”，当前记录仅确认了运输方式的合规性，未提供具体的包装要求、标签规范、运输声明或物流操作流程等详细指引。实际寄送时，需按普通无电池样品的标准航空运输流程办理。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/971dd266-6b0f-42db-9e3d-7b100164c78d-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/971dd266-6b0f-42db-9e3d-7b100164c78d-trace-0.jsonl",
+          "control_path": [
+            "new_view",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据已提供的记录，溪港团队文稿发布前由编辑审核，使用中文。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/7d059df8-f0ec-4018-9aba-7dcef610ac63-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/7d059df8-f0ec-4018-9aba-7dcef610ac63-trace-0.jsonl",
+          "control_path": [
+            "search",
+            "read_0",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前记录，砂桥项目当前这批样品**可以空运**。原因如下：\n\n1. **空运可行性**：当前这批样品原登记为“普通无电池样品”，而普通无电池样品属于允许空运的类别。\n\n2. **寄送指引**：当前记录中未包含具体的包装要求、标签规范、运输声明或详细的物流操作流程指引。实际寄送时，建议**按普通无电池样品的标准航空运输流程办理**。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/c77a9f09-5fc8-402c-a661-12af8f571248-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/c77a9f09-5fc8-402c-a661-12af8f571248-trace-0.jsonl",
+          "control_path": [
+            "refresh_view_current",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "c-cold",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据记录，苇原档案室每周三闭馆维护，维护负责人是贺青。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/1e6bc7bc-c5a7-4c27-a230-0eae45dcadc2-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/1e6bc7bc-c5a7-4c27-a230-0eae45dcadc2-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "search",
+            "read_0",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-after-third-topic",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据现有记录，砂桥项目当前这批样品**可以空运**。\n\n1. **空运可行性**：可以空运。依据记录，该批样品原登记为“普通无电池样品”，而普通无电池样品是允许空运的。\n2. **寄送指引**：实际寄送时，需按**普通无电池样品的标准航空运输流程**办理。\n3. **注意事项**：当前记录中**未提供**具体的包装要求、标签规范、运输声明或详细的物流操作流程，建议在操作时遵循通用的无电池样品运输标准。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/76cb4a5f-8a37-4e4f-b856-f510401e2da0-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/76cb4a5f-8a37-4e4f-b856-f510401e2da0-trace-0.jsonl",
+          "control_path": [
+            "refresh_view_current",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前已提供的记录，溪港团队的文稿发布前由编辑审核，使用中文。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/8815e9d9-5f30-417a-8a86-447bbe1f2605-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/8815e9d9-5f30-417a-8a86-447bbe1f2605-trace-0.jsonl",
+          "control_path": [
+            "new_view",
+            "search",
+            "read_0",
+            "read_1",
+            "refresh_view_slot1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-related",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前记录，砂桥项目当前这批样品不能空运。因为经核查，这批样品实际含锂电池，而含锂电池样品只能陆运且不能空运。此外，当前记录未提供针对含锂电池样品的具体寄送指引（如包装要求、标签规范、运输声明或物流操作流程等）。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/8a5f6a7f-e8cb-466e-89b5-6e1e7a2732d2-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/8a5f6a7f-e8cb-466e-89b5-6e1e7a2732d2-trace-0.jsonl",
+          "control_path": [
+            "refresh_view_current",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-unrelated",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "基于当前已提供的记录（包括已确认的记忆证据），未找到关于“砂桥项目”样品空运可行性及寄送方式的相关档案。当前缺乏必要的历史数据支持，无法确认该批样品能否空运，也无法提供具体的寄送方式建议。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/b9d7ee44-8a04-4641-bd46-4b866af713f0-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/b9d7ee44-8a04-4641-bd46-4b866af713f0-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "wrong",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-repeat",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前记录，砂桥项目当前这批样品**不能空运**。记录显示，该批次样品经核查实际含有**锂电池**，而含锂电池的样品**只能陆运且不能空运**。关于具体寄送方式，当前记录中未提供针对含锂电池样品的详细操作指引（如UN3481包装规范等），仅明确了不可空运的结论；建议咨询专业物流公司或参考最新的危险品运输规定。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/07154004-6cc6-423a-98b5-c4325ed34b63-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/07154004-6cc6-423a-98b5-c4325ed34b63-trace-0.jsonl",
+          "control_path": [
+            "refresh_view_current",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract. Adds unsupported external shipping-standard/company advice; only source-contained air/ground eligibility is credited, not the external advice."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "b-related",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录，溪港团队文稿发布前由编辑审核，使用英语。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/d7169f0f-8b33-4dbc-a900-f7db241dc133-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/d7169f0f-8b33-4dbc-a900-f7db241dc133-trace-0.jsonl",
+          "control_path": [
+            "use_view_slot1",
+            "refresh_view_slot1",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "c-return",
+          "status": "FAILED",
+          "error": "VLLM_CHAT_TRUNCATED",
+          "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/29bdce2e-9c99-4ed9-9308-c93c49103278-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/29bdce2e-9c99-4ed9-9308-c93c49103278-trace-0.jsonl",
+          "control_path": [
+            "handoff"
+          ],
+          "grade": "no_answer",
+          "note": "Core task matches the authored current source contract."
+        },
+        {
+          "history": "multitopic_switching",
+          "step": "a-final-return",
+          "status": "COMPLETED",
+          "error": null,
+          "final_answer": "根据当前提供的记录（证据e14等，捕获于2026-10-18）：\n1. 空运可行性：当前这批样品**不能空运**。经核查，该批样品实际含有锂电池，现有规则已明确规定含锂电池样品只能陆运，禁止空运。\n2. 寄送指引：当前记录中**未提供**针对含锂电池样品的具体合规寄送指引（如具体UN编码或包装标准）。仅明确排除了空运方式，并建议咨询专业物流或参考最新的危险品运输规定。实际寄送时应联系具备危险品陆运资质的专业物流公司，并严格按照危险货物陆运相关规范进行包装和申报。",
+          "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/5c0c6203-856d-403b-828d-519a76dbbedc-result.json",
+          "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/multitopic-two-slots-v1/generative/banks/d744c706-a89f-474e-8f79-e4310ca1798c/5c0c6203-856d-403b-828d-519a76dbbedc-trace-0.jsonl",
+          "control_path": [
+            "use_view_current",
+            "handoff"
+          ],
+          "grade": "correct",
+          "note": "Core task matches the authored current source contract. Adds unsupported external shipping-standard/company advice; only source-contained air/ground eligibility is credited, not the external advice."
+        }
+      ]
+    }
+  },
+  "actual_view_operations": [
+    {
+      "policy": "rules",
+      "step": "a-cold",
+      "selected": "new_view",
+      "status": "view_rejected",
+      "reason": "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE",
+      "view_id": null,
+      "revision": null
+    },
+    {
+      "policy": "rules",
+      "step": "b-cold",
+      "selected": "new_view",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:1",
+      "revision": 1
+    },
+    {
+      "policy": "rules",
+      "step": "a-return",
+      "selected": "new_view",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:1",
+      "revision": 1
+    },
+    {
+      "policy": "rules",
+      "step": "c-cold",
+      "selected": "new_view",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:2",
+      "revision": 2
+    },
+    {
+      "policy": "rules",
+      "step": "a-after-third-topic",
+      "selected": "refresh_view_slot1",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:2",
+      "revision": 2
+    },
+    {
+      "policy": "rules",
+      "step": "b-return",
+      "selected": "new_view",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:3",
+      "revision": 3
+    },
+    {
+      "policy": "rules",
+      "step": "a-related",
+      "selected": "refresh_view_slot1",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:3",
+      "revision": 3
+    },
+    {
+      "policy": "rules",
+      "step": "a-unrelated",
+      "selected": "refresh_view_slot1",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:4",
+      "revision": 4
+    },
+    {
+      "policy": "rules",
+      "step": "a-repeat",
+      "selected": "refresh_view_slot1",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:5",
+      "revision": 5
+    },
+    {
+      "policy": "rules",
+      "step": "b-related",
+      "selected": "refresh_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:4",
+      "revision": 4
+    },
+    {
+      "policy": "rules",
+      "step": "c-return",
+      "selected": "new_view",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:6",
+      "revision": 6
+    },
+    {
+      "policy": "rules",
+      "step": "a-final-return",
+      "selected": "new_view",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:5",
+      "revision": 5
+    },
+    {
+      "policy": "laya",
+      "step": "a-return",
+      "selected": "new_view",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:1",
+      "revision": 1
+    },
+    {
+      "policy": "laya",
+      "step": "c-cold",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:1",
+      "revision": 1
+    },
+    {
+      "policy": "laya",
+      "step": "c-cold",
+      "selected": "refresh_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:2",
+      "revision": 2
+    },
+    {
+      "policy": "laya",
+      "step": "a-after-third-topic",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:2",
+      "revision": 2
+    },
+    {
+      "policy": "laya",
+      "step": "a-after-third-topic",
+      "selected": "refresh_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:3",
+      "revision": 3
+    },
+    {
+      "policy": "laya",
+      "step": "b-return",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:3",
+      "revision": 3
+    },
+    {
+      "policy": "laya",
+      "step": "a-related",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:3",
+      "revision": 3
+    },
+    {
+      "policy": "laya",
+      "step": "a-unrelated",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:3",
+      "revision": 3
+    },
+    {
+      "policy": "laya",
+      "step": "a-repeat",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:3",
+      "revision": 3
+    },
+    {
+      "policy": "laya",
+      "step": "b-related",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:3",
+      "revision": 3
+    },
+    {
+      "policy": "laya",
+      "step": "c-return",
+      "selected": "refresh_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:4",
+      "revision": 4
+    },
+    {
+      "policy": "laya",
+      "step": "a-final-return",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:4",
+      "revision": 4
+    },
+    {
+      "policy": "generative",
+      "step": "a-cold",
+      "selected": "new_view",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:1",
+      "revision": 1
+    },
+    {
+      "policy": "generative",
+      "step": "a-return",
+      "selected": "refresh_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:2",
+      "revision": 2
+    },
+    {
+      "policy": "generative",
+      "step": "c-cold",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:2",
+      "revision": 2
+    },
+    {
+      "policy": "generative",
+      "step": "a-after-third-topic",
+      "selected": "refresh_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:3",
+      "revision": 3
+    },
+    {
+      "policy": "generative",
+      "step": "b-return",
+      "selected": "new_view",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:1",
+      "revision": 1
+    },
+    {
+      "policy": "generative",
+      "step": "b-return",
+      "selected": "refresh_view_slot1",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:2",
+      "revision": 2
+    },
+    {
+      "policy": "generative",
+      "step": "a-related",
+      "selected": "refresh_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:4",
+      "revision": 4
+    },
+    {
+      "policy": "generative",
+      "step": "a-repeat",
+      "selected": "refresh_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:5",
+      "revision": 5
+    },
+    {
+      "policy": "generative",
+      "step": "b-related",
+      "selected": "use_view_slot1",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:2",
+      "revision": 2
+    },
+    {
+      "policy": "generative",
+      "step": "b-related",
+      "selected": "refresh_view_slot1",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:slot1:3",
+      "revision": 3
+    },
+    {
+      "policy": "generative",
+      "step": "a-final-return",
+      "selected": "use_view_current",
+      "status": "view_opened",
+      "reason": null,
+      "view_id": "query-structure:5",
+      "revision": 5
+    }
+  ],
+  "findings": [
+    "Fixed complete-context baseline and rules answer12/12core tasks; rules also has one rejected first view and repeated view generation, so task success does not prove its views are all valid or reused efficiently.",
+    "Laya trained on one-slot states uses only current despite new_view(slot1) being offered. Wrong-topic/stale use and lost literal names occur; extra capacity alone is not established as a fix.",
+    "Generative demonstrates actual two-slot use and an on-topic finalA reuse, but also hands off an empty packet onA-unrelated and later has a length failure onC-return.",
+    "Full view-graph validity and every stored non-target fact are not certified by this core-answer/path review; source-name corruption and unsupported advice are separately retained.",
+    "All first failures/effects/costs preserved. One history with three topics is not12independent families or generalization evidence.",
+    "Four-slot followup is separately preregistered with the same frozen method/data/checkpoint; the unchanged no-view fixed_context baseline is reused as a descriptive reference, not a new replicate."
+  ],
+  "generation_unknown_increment": 0,
+  "offline_compute": "pending until idle boundary"
+}
