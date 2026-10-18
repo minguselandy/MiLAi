@@ -20,7 +20,7 @@ def main() -> None:
     examples: list[dict[str, Any]] = []
     redacted = 0
     for row in run["completed"]:
-        root = args.run / row["policy"]
+        root = Path(run.get("runtime_root", str(args.run))) / row["policy"]
         bank_name = "bank-" + str(run["histories"].index(row["history"]))
         bank = next(b["id"] for b in read_json(root / "bank-index.json")
                     if b["identity"]["bank"] == bank_name)
