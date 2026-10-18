@@ -45,8 +45,8 @@ class CollectionPrefix:
         raise ValueError("No collection operation available")
 
 
-def capture(service: MemoryService, source: dict[str, Any]) -> str:
-    metadata = {"occurred_at": "2032-07-02T09:00:00+08:00", "calendar_context": "Asia/Shanghai"}
+def capture(service: MemoryService, source: dict[str, Any], reported_at: str) -> str:
+    metadata = {"occurred_at": reported_at, "calendar_context": "Asia/Shanghai"}
     if source["role"] == "tool":
         receipt = service.capture_tool("source-stream", source["id"], source["origin"],
                                        source["content"], None, **metadata)
@@ -63,15 +63,17 @@ def collect_family(
     with SqliteStore.from_conn_string(str(root / "memory.sqlite")) as store:
         service = MemoryService(store, ("operation-collection", "author"), "author", root / "lock",
                                 functional_contract="functional_v1")
-        mapping = {capture(service, s): s["id"] for s in family["sources"]}
+        mapping = {capture(service, s, "2032-07-02T09:00:00+08:00"): s["id"]
+                   for s in family["sources"]}
         report: dict[str, Any] = {"family": family["family"],
                                   "split": family["split"], "phases": {}}
-        for phase in family["phase_order"]:
+        for ordinal, phase in enumerate(family["phase_order"], 1):
+            reported_at = f"2032-07-02T09:{ordinal * 10:02d}:00+08:00"
             if phase in {"unrelated", "changed"}:
                 source = family["unrelated_update" if phase == "unrelated" else "related_update"]
-                mapping[capture(service, source)] = source["id"]
+                mapping[capture(service, source, reported_at)] = source["id"]
             current = service.capture_user("query-stream", phase, family["query"],
-                occurred_at="2032-07-02T09:00:00+08:00",
+                occurred_at=reported_at,
                 calendar_context="Asia/Shanghai")["source_ref"]
             mapping[current] = "query:" + phase
             state = MemoryControlState(task={"request": family["query"],
