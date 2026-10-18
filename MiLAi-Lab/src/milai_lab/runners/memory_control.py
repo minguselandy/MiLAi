@@ -10,7 +10,11 @@ from typing import Any
 from milai_lab.harness.contextual_artifacts import RunBudget
 from milai_lab.memory.retrieval import SemanticRetriever
 from milai_lab.methods.evidence_reading import project_pack
-from milai_lab.methods.laya_memory_policy import GenerativeMemoryPolicy, LayaMemoryPolicy
+from milai_lab.methods.laya_memory_policy import (
+    GenerativeMemoryPolicy,
+    LayaMemoryPolicy,
+    project_operation_payload,
+)
 from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     FixedMemoryPolicy,
@@ -52,7 +56,7 @@ def memory_policy(
         return RulesMemoryPolicy(config.get("reads", 4), config.get("reuse_views", True),
                                  config.get("expand_context", False))
     if kind == "generative":
-        generative = GenerativeMemoryPolicy(call)
+        generative = GenerativeMemoryPolicy(call, config.get("state_projection", "full"))
         return (OneShotMemoryPolicy(generative, config.get("reads", 4))
                 if config.get("routing") == "one_shot" else generative)
     if kind not in {"laya", "linear"}:
@@ -85,6 +89,7 @@ def memory_policy(
         started, cpu = time.perf_counter(), time.process_time()
         before = dict(model.counters)
         try:
+            payload = project_operation_payload(payload, config.get("state_projection", "full"))
             result = model.predict(payload)
             record({"event": "memory_control_model_result", "input": payload, "result": result})
             return result
@@ -94,6 +99,6 @@ def memory_policy(
                 "cpu_seconds": time.process_time() - cpu,
                 **{k: v - before[k] for k, v in model.counters.items()}})
 
-    learned = LayaMemoryPolicy(predict, config.get("state_projection", "full"))
+    learned = LayaMemoryPolicy(predict)
     return (OneShotMemoryPolicy(learned, config.get("reads", 4))
             if config.get("routing") == "one_shot" else learned)

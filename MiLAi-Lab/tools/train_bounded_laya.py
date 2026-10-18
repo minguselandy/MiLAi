@@ -120,7 +120,8 @@ def main() -> None:
     parser.add_argument("--objective", choices=("soft-ce", "set"), default="soft-ce")
     parser.add_argument("--task", choices=("bounded_reader", "memory_operation"),
                         default="bounded_reader", help="Use task-specific offline decision metrics")
-    parser.add_argument("--operation-state", choices=("full", "mechanical"), default="full",
+    parser.add_argument("--operation-state", choices=("full", "mechanical", "shared"),
+                        default="full",
                         help="Retrain with the same operation-state projection used in the Host")
     parser.add_argument("--evaluate-train", action="store_true",
                         help="Save train-prefix predictions as a learning diagnosis")

@@ -3,47 +3,48 @@
 Execute docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md.
 Progress: docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md. Full goal remains active.
 USER STEERING: avoid question/case-specific rigid fixes; preserve generality and generalization.
-LATEST QUEUE: reviewed-followups-dispatch-v3 PID1163419/exec7496, child1226071;
-active strong-dense8-v1. Dense2remaining1 CLOSED32 (including original failed position), exit0.
-V2 coordinator946632 and dense2child1058276 TERMINAL exit1.
-Dense4remaining1 and fixed_context4 CLOSED all32 each. Dense2closed2positions includes final
-answer unavailable (8801gen+948embed,unknown0), raw stored/no semantic or business effects.
-V3 preserves2closed positions and continues30unexecuted, then original unstarted jobs.
-No question-specific runtime change or answer repair. Offline pending2CPUphases billed once
-while all model jobs were terminal, before starting V3. Older LIVE blocks below are historical.
+No subagents, SHA/checksum/content-fingerprint verification, new model services, second budget,
+old-position retries, other-worktree resumes, push or merge. Leave the user's untracked
+MILAI_GLOBAL_ARCHITECTURE_MEMORY_RESEARCH_20261018.md untouched.
 
-Strong author review first64positions: dense4=19correct/9wrong/1incomplete/3noanswer;
-fixed-context4=28correct/1wrong/3noanswer. Dense4 has8wrong omitting update,1despite full proof;
-context4wrong also despite full proof. No learned-policy advantage. Tracked strong-first-results-v1.
-New offline CPU exports/review/intake remain PENDING; never bill during live model jobs.
-Prepared NOT RUN: sandbox-reservation-v1 (1history/16positions across4policies) and MemOps
-six jointly-train backgrounds,18chronological cuts+repeats (36tasks/policy, laya+generative planned).
-MemOps A02/B01/C02/D02/E01/F07 only; D16/D22/C06 split conflicts excluded. No test/calibration use.
-Source review/protocol tracked; actual projected data ignored memops-control-six-train-v1.
-Dispatch now preserves provided source session IDs (default unchanged), roles and unknown dates.
-Own-prefix labels support arbitrary per-step source contexts, retaining legacy before/after.
-10related tests,Ruff,3toolmypy,package/tools boundaries passed. Neither dataset prep nor tests
-complete T1/D6; no fitted MemOps data or actual sandbox effects yet. No new scheduling worker.
+LATEST QUEUE: reviewed-followups-dispatch-v3 PID1163419/exec7496; child1351401,
+active t2-train-own-rollouts-v1 (frozen5cc68464,96positions). Revalidate actual processes.
+Dense2remaining1 and dense8 CLOSED32each; mechanical-native-seed0 and full-linear-seed0
+both COMPLETED96updates. All original failures/effects/costs remain; no position retried.
+Then original M1 feedback-full/one-shot and multitopic2slots follow in this same coordinator.
+NEVER settle offline compute while a model job lives: prior billing caused HTTP_OWNER_BUSY.
+New exports/reviews/capacity probes remain PENDING; no competing billing/scheduling worker.
 
-Dense2 CLOSED32 reviewed:13correct/15wrong/4noanswer (3length+1final unavailable); all15wrong
-omit the relevant update.6positions have the full authored raw proof, all6correct. Saved dense2-results-v1.
-Prepared M2 Host QA64new positions with frozen5052477f runtime; comparator is already queued
-feedback-full-v1 first32results. Mechanical/native and full/linear must use their final96 completed
-checkpoint with matching saved operation_state; no best-checkpoint selection or old-output rerun.
-M3 current development wires existing query_structure rebuild policy into normal Host; rules can
-select complete contexts and disable view reuse. Default behavior unchanged; no case/keyword branches.
-88related tests,Ruff,5modulemypy,package/tools boundaries pass (46control+42evidence/transport).
-Prepared M3 three workloads24tasks ×4policies,2slots: rebuild/context-on-demand/Laya/generative.
-Actual model M3 remains NOT RUN, common-before input-scope diagnostic and4slot followup pending.
-All newly prepared work waits for the sole existing queue; no new worker/ledger/service started.
+Strong baselines all128positions reviewed (8exposed dev families, not128independent cases):
+dense2=13correct/15wrong/4noanswer; dense4=19correct/9wrong/1incomplete/3noanswer;
+dense8=29correct/3noanswer; fixed-context4=28correct/1wrong/3noanswer.
+Dense8 uses10steps, dense4/context4 use6, dense2use4; preserve the extra-budget qualification.
+Strong-comparison-v1 includes actual gen/embedding/wall work and paired family intervals;
+dense8-context4 difference interval[-.0625,.125], no resolved winner from these small families.
+SVG: docs/assets/dynamic-memory-control-strong-cost-quality-v1.svg.
 
-IMPORTANT MemOps NOT READY TO DISPATCH: source-only actual Store/full-context capacity probe v2
-has181states,72over8192,maxcomplete12737tokens,head drops0. All6families affected. Local encoder
-max_position_embeddings8192. Marked prepared-next-0593c57c MemOps job CAPACITY_REDESIGN_REQUIRED;
-source-review/fixtures untouched. Resolve general complete-input representation before dispatch,
-not truncated histories or larger unsupported limit. No model forward/call; v2CPU pending billing.
-Probev1 failed before capture due author namespace typo,0modelcalls,timingunmeasured; v2 preserved
-separately. Manifest memops-capacity-v1. Source-only probe is not an upper bound on real prefixes.
+M2 training closed: mechanical86→102→103/125 dev; full-linear92→87→117/125;
+full-native prior107/125. Final train323/373 and361/373 respectively. Fixed final96 only.
+Both original ledger compute phases match once, runs1; no rebilling. Head initialization differs.
+Matched64QA prepared on5052477f runtime; comparator is already queued feedback-full-v1.
+Prepared future jobs in prepared-next-2b5c7fbc: M2→sandbox16→M3fourarms96; not started.
+M3 runtime has generic rebuild/view-policy and rule full-context/reuse switches;88tests passed.
+Common-before input-scope diagnostic and4slot followup remain pending.
+
+MemOps six jointly-train backgrounds A02/B01/C02/D02/E01/F07:138original turns,18cuts+repeats,
+36tasks/policy. D16/D22/C06 split conflicts excluded; no test/calibration content used.
+Original full-format native dispatch remains HELD: source-only181states had72over8192.
+New opt-in shared projection reuses pure literal sharing and object-list tables; all fields,
+IDs, roles, clocks, null/missing/type distinctions and action criteria recover exactly.
+Final shared-projection-audit-v3:181MemOps states max8003,0over;418train max3479 and139dev
+max3461,0over.738typed JSON roundtrips and idempotence; no truncation/deletion/model calls.
+Only final v3 projection artifacts are admitted; earlier unsent prototypes are not training inputs.
+This is NOT encoder-state caching, semantic correctness or an upper bound on generated views.
+114related tests, Ruff,4modulemypy, package/tools boundaries, CUDA training CLI pass.
+New36position generative-shared intake prepared; native36 follows actual shared-input fitting.
+Do not treat the old full-format T0 checkpoint as retrained for the new representation.
+No new intake worker started. T1 collection/fitting, T2 fitting, matchedQA, all declared seeds,
+new heldout confirmation and remaining lifecycle/sandbox work are still incomplete.
 
 Latest development restores legal any=[] (no route), [[]] (pureAND), and alternatives; no coercion.
 All clocks remain available: source report time separate from ingestion_observations with version.

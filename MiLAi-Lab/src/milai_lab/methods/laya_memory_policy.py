@@ -6,6 +6,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
+from milai_lab.memory.literal_projection import project_observation_state
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 
 INSTRUCTIONS = (
@@ -20,9 +21,11 @@ INSTRUCTIONS = (
 
 
 def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[str, Any]:
-    """Matched training/live input ablation; task and actual operation options stay fixed."""
+    """Project matched training/live inputs; task and actual operation options stay fixed."""
     if projection == "full":
         return payload
+    if projection == "shared":
+        return {**payload, "state": project_observation_state(payload["state"])}
     if projection != "mechanical":
         raise ValueError(f"Unknown operation state projection: {projection}")
 
@@ -82,9 +85,10 @@ class LayaMemoryPolicy:
 @dataclass
 class GenerativeMemoryPolicy:
     call: Callable[[str, list[dict[str, str]], dict[str, Any]], dict[str, Any]]
+    projection: str = "full"
 
     def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
-        payload = operation_payload(state, actions)
+        payload = operation_payload(state, actions, self.projection)
         schema = {"type": "object", "properties": {"choice": {
             "type": "string", "enum": [a.id for a in actions]}},
             "required": ["choice"], "additionalProperties": False}
