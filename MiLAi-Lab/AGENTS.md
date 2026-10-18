@@ -3,6 +3,14 @@
 Execute docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md.
 Progress: docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md. Full goal remains active.
 USER STEERING: avoid question/case-specific rigid fixes; preserve generality and generalization.
+LATEST QUEUE: reviewed-followups-dispatch-v3 PID1163419/exec7496, child1163425;
+active strong-dense2-v1-remaining1. V2 coordinator946632 and dense2child1058276 TERMINAL exit1.
+Dense4remaining1 and fixed_context4 CLOSED all32 each. Dense2closed2positions includes final
+answer unavailable (8801gen+948embed,unknown0), raw stored/no semantic or business effects.
+V3 preserves2closed positions and continues30unexecuted, then original unstarted jobs.
+No question-specific runtime change or answer repair. Offline pending2CPUphases billed once
+while all model jobs were terminal, before starting V3. Older LIVE blocks below are historical.
+
 Latest development restores legal any=[] (no route), [[]] (pureAND), and alternatives; no coercion.
 All clocks remain available: source report time separate from ingestion_observations with version.
 No question/keyword/family-ID runtime branches.39tests,Ruff,mypy passed; model efficacy unclaimed.
