@@ -1,0 +1,27 @@
+{
+  "status": "COMPLETED",
+  "states": 181,
+  "max_sequence_tokens": 8192,
+  "oversized": 72,
+  "max_dropped": 4545,
+  "scope": "Offline actual source Store and full-context read path only; no learned controller, generated view, Reader reply, or source gold. Not an upper bound on future generated prefixes. No material-limit filtering in this geometric probe.",
+  "model_calls": 0,
+  "model_forwards": 0,
+  "version": "dynamic-memory-control-memops-source-capacity-v1",
+  "source": "artifacts/dynamic-memory-control/memops-source-capacity-v2/report.json",
+  "max_full_sequence_tokens": 12737,
+  "max_head_tokens_dropped": 0,
+  "oversized_by_family": {
+    "memops_A02": 16,
+    "memops_B01": 13,
+    "memops_C02": 10,
+    "memops_D02": 10,
+    "memops_E01": 10,
+    "memops_F07": 13
+  },
+  "decision": "Hold the unstarted MemOps rollout. Retain all original sources and tasks. Investigate general lossless observation representation before revised preparation; no forced truncation or input substitution. No impact on existing frozen queue.",
+  "model_capacity": "BASE local encoder/config.json max_position_embeddings8192, declared controller max_len8192/head2048",
+  "probe_limit": "Source-only fixed full-context trajectory; no model replies/views, so not an upper bound on actual own-policy prefixes. No material admission limit in this geometric probe.",
+  "earlier_probe": "v1 failed before source capture because probe namespace omitted owner suffix;0model calls, timing unmeasured. v2 uses valid ordinary owner namespace.",
+  "ledger": "v2 CPU measurement pending; no live model ledger acquired"
+}

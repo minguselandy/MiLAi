@@ -172,7 +172,8 @@ def test_new_exception_outside_old_support_reaches_refresh(tmp_path):
         assert "2000" in json.dumps(ops.reader_evidence())
 
 
-def test_host_reopen_does_not_repeat_control_or_use_query_as_fact(tmp_path):
+@pytest.mark.parametrize("view_policy", ["incremental", "rebuild"])
+def test_host_reopen_does_not_repeat_control_or_use_query_as_fact(tmp_path, view_policy):
     traces = []
     config = {"configurable": {"user_id": "alice", "thread_id": "t", "v13_session": "s",
               "v13_turn_id": "q", "v13_config_version": "dynamic-test"}}
@@ -186,7 +187,8 @@ def test_host_reopen_does_not_repeat_control_or_use_query_as_fact(tmp_path):
                                      phase="resume" if reopen else "start")
             memory = FunctionalEditMemory(service, len, material_limit=30000, read_limit=8,
                 arm="M", evidence_policy="question_pack_v1", source_access="independent_v1",
-                source_tokenization="unicode_v1", control_policy=RulesMemoryPolicy(),
+                source_tokenization="unicode_v1", control_policy=RulesMemoryPolicy(
+                    reuse_views=view_policy != "rebuild"), control_view_policy=view_policy,
                 control_record=traces.append,
                 dependency_read_call=lambda _, m, s: interpretation(m, s))
             packet = memory.model_material(config)

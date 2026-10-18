@@ -1,0 +1,47 @@
+{
+  "version": "dynamic-memory-control-m2-host-qa-v1",
+  "status": "PREPARED_BEFORE_TRAINING_RESULTS",
+  "method_runtime_source": "5052477f",
+  "fixture": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-5052477f/MiLAi-Lab/data/fixtures/dynamic-memory-control/t0-dev-rollouts-v1.json",
+  "positions_per_arm": 32,
+  "new_positions": 64,
+  "families": 8,
+  "jobs": [
+    {
+      "id": "m2-mechanical-native-seed0-v1",
+      "config": "configs/dynamic-memory-operation-m2-mechanical-native-seed0-v1.json",
+      "policy": "laya",
+      "state_projection": "mechanical",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-mechanisms-v1/mechanical-native-seed0/checkpoint",
+      "training_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-mechanisms-v1/mechanical-native-seed0/run.json"
+    },
+    {
+      "id": "m2-full-linear-seed0-v1",
+      "config": "configs/dynamic-memory-operation-m2-full-linear-seed0-v1.json",
+      "policy": "linear",
+      "state_projection": "full",
+      "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-mechanisms-v1/full-linear-seed0/checkpoint",
+      "training_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-mechanisms-v1/full-linear-seed0/run.json"
+    }
+  ],
+  "full_native_comparator": {
+    "run": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/feedback-full-v1",
+    "config": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/frozen-5052477f/MiLAi-Lab/configs/dynamic-memory-operation-feedback-full-v1.json",
+    "runtime_source": "5052477f",
+    "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+    "status": "already queued first run; reuse these exact first outputs, not rerun"
+  },
+  "matching": "Same frozen Host, actions, view executor, one slot, Reader budget,8control steps, source sequence and blank independent banks. Model initialization difference and inputs/tokens differ and are disclosed. Final96 fixed for all; no selection using QA outcomes.",
+  "gates": [
+    "Each required training run must be COMPLETED with optimizer_updates96 and final checkpoint; never use checkpoint_latest or a failed run.",
+    "Check saved checkpoint operation_state agrees with declared projection using ordinary JSON fields; no SHA or fingerprint check.",
+    "Previous serial coordinator must be terminal, actual PID inspected; no parallel ledger acquisition.",
+    "Retain every first result and original failure, do not replay closed positions."
+  ],
+  "review": "Source-task answer, actual evidence, current view validity, whole-controller/generation/embedding/load costs; preference accuracy alone cannot establish task benefit.",
+  "limits": [
+    "Development-only exposed8families, not heldout generalization.",
+    "Full-native checkpoint was trained at edf087d3; ablations train at aaec2f5c with same source task/labels/updates/optimizer, and all Host QA uses5052477f.",
+    "Native head starts pretrained and linear head random, so this is not a pure head architecture causal contrast."
+  ]
+}

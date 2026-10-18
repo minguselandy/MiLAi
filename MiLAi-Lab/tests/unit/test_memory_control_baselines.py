@@ -1,5 +1,6 @@
 import json
 
+import pytest
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.memory.retrieval import SemanticRetriever
@@ -10,9 +11,67 @@ from milai_lab.methods.memory_control import (
     FixedContextMemoryPolicy,
     FixedMemoryPolicy,
     MemoryControlState,
+    RulesMemoryPolicy,
     run_memory_control,
 )
+from milai_lab.methods.query_structure import cached_structures
 from milai_lab.runners.memory_control import dense_control_pool
+
+
+@pytest.mark.parametrize("capacity", [1, 2])
+@pytest.mark.parametrize("view_policy", ["rebuild", "incremental"])
+def test_rebuild_and_on_demand_share_real_sources_but_differ_on_stable_repeat(
+    tmp_path, capacity, view_policy,
+):
+    inputs = []
+
+    def generate(messages, schema):
+        value = json.loads(messages[-1]["content"])
+        inputs.append(value)
+        return {"scope": "Shipment conditions", "nodes": [
+            {"id": "n" + s["id"][1:], "text": s["text"], "evidence": [s["id"]],
+             "kind": "reported"} for s in value["sources"]],
+            "rules": [], "remove": [], "remove_rules": [], "unresolved": []}
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("refresh", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        service.capture_user("s", "rule", "Ordinary samples can be sent by air.")
+
+        def run():
+            state = MemoryControlState(task={"request": "How can samples be sent?",
+                                            "query_time": "2032-07-02"})
+
+            def pool():
+                source = service.search_sources(state.task["request"], include_scope=True)
+                return build_evidence_packs(service, state.task["request"], "2032-07-02",
+                    source["source_materials"], [], source_scope=source["source_scope"])
+
+            operations = EvidenceOperations(service, state, load_pool=pool,
+                refresh_call=generate, fits=lambda _: True, view_capacity=capacity,
+                view_policy=view_policy)
+            result = run_memory_control(state, RulesMemoryPolicy(
+                reuse_views=view_policy != "rebuild", expand_context=True), operations)
+            return result, operations.reader_evidence()
+
+        _, evidence = run()
+        assert len(inputs) == 1 and "sent by air" in str(evidence)
+        second, evidence = run()
+        assert len(inputs) == (2 if view_policy == "rebuild" else 1)
+        assert "sent by air" in str(evidence)
+        if view_policy == "rebuild":
+            assert all(v["structure"] == {} for v in cached_structures(service, capacity).values())
+            assert not any(t["selected"].startswith("use_view") for t in second["trace"])
+        else:
+            assert any(t["selected"].startswith("use_view") for t in second["trace"])
+        service.capture_user("s", "exception",
+                             "Samples containing batteries require ground transit.")
+        _, evidence = run()
+        assert len(inputs) == (3 if view_policy == "rebuild" else 2)
+        assert "require ground transit" in str(evidence)
+        assert any("sent by air" in s["text"] for s in inputs[-1]["sources"])
+        assert any("require ground transit" in s["text"] for s in inputs[-1]["sources"])
+        assert bool(inputs[-1]["previous"]) == (view_policy == "incremental")
 
 
 def test_full_context_is_a_shared_action_and_fixed_policy_reads_one_complete_session(tmp_path):

@@ -13,7 +13,7 @@ No question-specific runtime change or answer repair. Offline pending2CPUphases 
 while all model jobs were terminal, before starting V3. Older LIVE blocks below are historical.
 
 Strong author review first64positions: dense4=19correct/9wrong/1incomplete/3noanswer;
-fixed-context4=28correct/1wrong/3noanswer. Dense8wrong omit update,1wrong despite full proof;
+fixed-context4=28correct/1wrong/3noanswer. Dense4 has8wrong omitting update,1despite full proof;
 context4wrong also despite full proof. No learned-policy advantage. Tracked strong-first-results-v1.
 New offline CPU exports/review/intake remain PENDING; never bill during live model jobs.
 Prepared NOT RUN: sandbox-reservation-v1 (1history/16positions across4policies) and MemOps
@@ -24,6 +24,26 @@ Dispatch now preserves provided source session IDs (default unchanged), roles an
 Own-prefix labels support arbitrary per-step source contexts, retaining legacy before/after.
 10related tests,Ruff,3toolmypy,package/tools boundaries passed. Neither dataset prep nor tests
 complete T1/D6; no fitted MemOps data or actual sandbox effects yet. No new scheduling worker.
+
+Dense2 CLOSED32 reviewed:13correct/15wrong/4noanswer (3length+1final unavailable); all15wrong
+omit the relevant update.6positions have the full authored raw proof, all6correct. Saved dense2-results-v1.
+Prepared M2 Host QA64new positions with frozen5052477f runtime; comparator is already queued
+feedback-full-v1 first32results. Mechanical/native and full/linear must use their final96 completed
+checkpoint with matching saved operation_state; no best-checkpoint selection or old-output rerun.
+M3 current development wires existing query_structure rebuild policy into normal Host; rules can
+select complete contexts and disable view reuse. Default behavior unchanged; no case/keyword branches.
+88related tests,Ruff,5modulemypy,package/tools boundaries pass (46control+42evidence/transport).
+Prepared M3 three workloads24tasks ×4policies,2slots: rebuild/context-on-demand/Laya/generative.
+Actual model M3 remains NOT RUN, common-before input-scope diagnostic and4slot followup pending.
+All newly prepared work waits for the sole existing queue; no new worker/ledger/service started.
+
+IMPORTANT MemOps NOT READY TO DISPATCH: source-only actual Store/full-context capacity probe v2
+has181states,72over8192,maxcomplete12737tokens,head drops0. All6families affected. Local encoder
+max_position_embeddings8192. Marked prepared-next-0593c57c MemOps job CAPACITY_REDESIGN_REQUIRED;
+source-review/fixtures untouched. Resolve general complete-input representation before dispatch,
+not truncated histories or larger unsupported limit. No model forward/call; v2CPU pending billing.
+Probev1 failed before capture due author namespace typo,0modelcalls,timingunmeasured; v2 preserved
+separately. Manifest memops-capacity-v1. Source-only probe is not an upper bound on real prefixes.
 
 Latest development restores legal any=[] (no route), [[]] (pureAND), and alternatives; no coercion.
 All clocks remain available: source report time separate from ingestion_observations with version.

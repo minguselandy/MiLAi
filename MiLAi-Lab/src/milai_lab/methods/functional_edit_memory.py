@@ -70,6 +70,7 @@ from milai_lab.methods.edit_memory import (
     MaintenanceMode,
 )
 from milai_lab.methods.memory_control import MemoryPolicy
+from milai_lab.methods.query_structure import QueryStructurePolicy
 
 FUNCTIONAL_METHOD = "milai_edit_m_v1"
 FUNCTIONAL_B0_METHOD = "milai_edit_b0_v1"
@@ -141,6 +142,7 @@ class FunctionalEditMemory(FunctionalMemory):
         control_policy: MemoryPolicy | None = None,
         control_steps: int = 8,
         control_view_capacity: int = 1,
+        control_view_policy: QueryStructurePolicy = "incremental",
         control_rank_pool: (Callable[[str, list[dict[str, Any]]],
                                      list[dict[str, Any]]] | None) = None,
         control_record: Callable[[dict[str, Any]], None] = lambda event: None,
@@ -173,6 +175,7 @@ class FunctionalEditMemory(FunctionalMemory):
         self.control_policy = control_policy
         self.control_steps = control_steps
         self.control_view_capacity = control_view_capacity
+        self.control_view_policy = control_view_policy
         self.control_rank_pool = control_rank_pool
         self.control_record = control_record
         self.control_available = control_available
@@ -477,7 +480,7 @@ class FunctionalEditMemory(FunctionalMemory):
                 fits=lambda items: self.token_count(canonical(packet(items, "budget_exhausted")))
                     <= self.material_limit,
                 excluded_source_refs=(bound["source_ref"],),
-                view_capacity=self.control_view_capacity)
+                view_capacity=self.control_view_capacity, view_policy=self.control_view_policy)
             memory = self
 
             def record_control(event: dict[str, Any]) -> None:

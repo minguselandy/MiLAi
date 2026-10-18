@@ -153,6 +153,8 @@ class OneShotMemoryPolicy:
 @dataclass
 class RulesMemoryPolicy:
     reads: int = 4
+    reuse_views: bool = True
+    expand_context: bool = False
 
     def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
         if state.last_result and state.last_result["action"]["kind"] in {
@@ -174,16 +176,15 @@ class RulesMemoryPolicy:
                 return read.id
         matching = [v for v in state.views if v.get("built_for") == state.task["request"]]
         reusable = {v["id"] for v in matching if not v["pending_events"]}
-        if not wants_history and reusable:
+        if self.reuse_views and not wants_history and reusable:
             use = next((a for a in actions if a.kind == "USE_VIEW" and a.target in reusable), None)
             if use is not None:
                 return use.id
-        for action in actions:
-            if action.kind == "SEARCH" or (action.kind == "READ"
-                    and not action.parameters.get("expand_context")
-                    and not action.parameters.get("history_directory")
-                    and len(state.visible_evidence) < self.reads):
-                return action.id
+        reading = (FixedContextMemoryPolicy(self.reads) if self.expand_context
+                   else FixedMemoryPolicy(self.reads))
+        selected = reading.choose(state, actions)
+        if next(a for a in actions if a.id == selected).kind != "HANDOFF":
+            return selected
         target_views = {v["id"] for v in matching}
         refresh = next((a for a in actions if a.kind == "REFRESH_VIEW" and (
             a.target in target_views or (not matching and a.parameters.get("new_scope")))), None)

@@ -2747,6 +2747,8 @@ def message(
                         record=trace)
                     memory_options["control_steps"] = control.get("max_control_steps", 8)
                     memory_options["control_view_capacity"] = control.get("view_capacity", 1)
+                    memory_options["control_view_policy"] = control.get(
+                        "view_policy", "incremental")
                     if control.get("pool_order", "shared") == "dense":
                         if retriever is None:
                             raise ValueError("DENSE_CONTROL_POOL_REQUIRES_EMBEDDINGS")

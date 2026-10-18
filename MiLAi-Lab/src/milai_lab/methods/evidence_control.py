@@ -18,6 +18,7 @@ from milai_lab.methods.evidence_reading import (
 )
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 from milai_lab.methods.query_structure import (
+    QueryStructurePolicy,
     build_query_structure,
     cached_structures,
     next_structure_slot,
@@ -45,6 +46,7 @@ class EvidenceOperations:
         fits: Callable[[list[dict[str, Any]]], bool],
         excluded_source_refs: tuple[str, ...] = (),
         view_capacity: int = 1,
+        view_policy: QueryStructurePolicy = "incremental",
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
@@ -53,6 +55,7 @@ class EvidenceOperations:
         self.attempted: set[tuple[int, bool]] = set()
         self.searched = False
         self.view_capacity = view_capacity
+        self.view_policy = view_policy
         self.used: set[str] = set()
         self.refreshed_inputs: set[tuple[str, tuple[str, ...], bool]] = set()
         self.history_pages: dict[str, dict[str, Any]] = {}
@@ -131,7 +134,8 @@ class EvidenceOperations:
         prior = {b["source_ref"] for b in view["source_bindings"].values()} if view else set()
         refs = (set(self.source_refs()) or (prior | arrivals)) & visible
         metadata = next((v for v in state.views if v["slot"] == slot), None)
-        changed = (not view or arrivals or refs != set(view["retrieved_sources"])
+        changed = (self.view_policy == "rebuild" or not view or arrivals
+            or refs != set(view["retrieved_sources"])
             or view.get("built_for") != state.task["request"]
             or view["query_time"] != state.task["query_time"]
             or (metadata is not None and metadata["visibility"] != "visible"))
@@ -306,7 +310,7 @@ class EvidenceOperations:
                       if (s := self.service.source(e["event_id"])) is not None]
             try:
                 built, report = build_query_structure(self.service, state.task["request"],
-                    state.task["query_time"], list(refs), policy="incremental",
+                    state.task["query_time"], list(refs), policy=self.view_policy,
                     call=self.refresh_call,
                     source_events=events, force_refresh=True, slot=slot,
                     capacity=self.view_capacity, replace_slot=replace)

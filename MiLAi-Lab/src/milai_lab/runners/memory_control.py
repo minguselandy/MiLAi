@@ -49,7 +49,8 @@ def memory_policy(
     if kind == "fixed_context":
         return FixedContextMemoryPolicy(config.get("reads", 4))
     if kind == "rules":
-        return RulesMemoryPolicy(config.get("reads", 4))
+        return RulesMemoryPolicy(config.get("reads", 4), config.get("reuse_views", True),
+                                 config.get("expand_context", False))
     if kind == "generative":
         generative = GenerativeMemoryPolicy(call)
         return (OneShotMemoryPolicy(generative, config.get("reads", 4))

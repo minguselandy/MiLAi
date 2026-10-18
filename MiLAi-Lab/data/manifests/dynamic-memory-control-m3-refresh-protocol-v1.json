@@ -1,0 +1,98 @@
+{
+  "version": "dynamic-memory-control-m3-refresh-v1",
+  "status": "PREPARED_NOT_RUN",
+  "runtime_source": "freeze this shared implementation before execution",
+  "fixture": "data/fixtures/dynamic-memory-control/refresh-workloads-v1.json",
+  "workloads": 3,
+  "positions_per_arm": 24,
+  "positions": 96,
+  "arms": [
+    {
+      "id": "m3-every-rebuild-v1",
+      "config": "configs/dynamic-memory-operation-m3-every-rebuild-v1.json",
+      "policy": "rules",
+      "operation_settings": {
+        "policy": "rules",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+        "max_control_steps": 8,
+        "reads": 4,
+        "max_len": 8192,
+        "head_max_len": 2048,
+        "threads": 4,
+        "routing": "feedback",
+        "view_capacity": 2,
+        "view_policy": "rebuild",
+        "reuse_views": false,
+        "expand_context": true
+      }
+    },
+    {
+      "id": "m3-on-demand-context-v1",
+      "config": "configs/dynamic-memory-operation-m3-on-demand-context-v1.json",
+      "policy": "rules",
+      "operation_settings": {
+        "policy": "rules",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+        "max_control_steps": 8,
+        "reads": 4,
+        "max_len": 8192,
+        "head_max_len": 2048,
+        "threads": 4,
+        "routing": "feedback",
+        "view_capacity": 2,
+        "view_policy": "incremental",
+        "reuse_views": true,
+        "expand_context": true
+      }
+    },
+    {
+      "id": "m3-laya-v1",
+      "config": "configs/dynamic-memory-operation-m3-laya-v1.json",
+      "policy": "laya",
+      "operation_settings": {
+        "policy": "laya",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+        "max_control_steps": 8,
+        "reads": 4,
+        "max_len": 8192,
+        "head_max_len": 2048,
+        "threads": 4,
+        "routing": "feedback",
+        "view_capacity": 2,
+        "view_policy": "incremental"
+      }
+    },
+    {
+      "id": "m3-generative-v1",
+      "config": "configs/dynamic-memory-operation-m3-generative-v1.json",
+      "policy": "generative",
+      "operation_settings": {
+        "policy": "generative",
+        "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+        "max_control_steps": 8,
+        "reads": 4,
+        "max_len": 8192,
+        "head_max_len": 2048,
+        "threads": 4,
+        "routing": "feedback",
+        "view_capacity": 2,
+        "view_policy": "incremental"
+      }
+    }
+  ],
+  "common": "Normal Host, identical source sequence, blank independent banks,8control steps,2slots, same generator/Reader/capacity. All choices and incurred work are real, no teacher repair.",
+  "rebuild": "Existing query_structure policy rebuild with no retained interpretation body; each query reads up to4full contexts and calls same generator from empty previous. The cursor is retained for arrival accounting.",
+  "on_demand": "Simple exact-task matching and pending-arrival reuse rule, full-context read fallback, incremental executor. Any new arrival is conservatively treated as pending, including newly captured prior answers; this is not an oracle semantic-change detector.",
+  "learned": "Existing T0 seed0 final96; same shared actions, default full state, dynamic scope and refresh choices. Multi-slot transfer is not assumed successful.",
+  "evaluation": [
+    "task answer and original source sufficiency",
+    "view task adequacy, source binding and full current state validity",
+    "genuine semantic reuse after unrelated arrivals versus stale reuse after related changes",
+    "all generator/Reader/embedding/controller/load/source-inventory work, including first cold cost and failures",
+    "early handoff and unnecessary reads after earliest reviewed sufficient evidence"
+  ],
+  "causal_scope": "Independent policy trajectories, not identical per-step before states. Simple baselines use complete contexts; differences include input selection and refresh timing. Common-before input-scope factors remain a separate pending diagnostic; do not attribute all differences to graph caching.",
+  "capacity_scope": "All arms2slots.4slot capacity followup remains conditional on the already queued two-slot inspection; never infer learned-semantic benefit merely from larger memory.",
+  "queue": "After original serial jobs and prepared matched M2/sandbox/source intake at an idle reviewed boundary. No worker launched by this preparation.",
+  "failures": "Preserve first failures and effects; no retry or answer correction. Any unavailable operation/budget exhaustion remains visible."
+}

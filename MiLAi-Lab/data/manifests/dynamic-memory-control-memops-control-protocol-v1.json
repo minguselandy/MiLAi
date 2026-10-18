@@ -1,6 +1,6 @@
 {
   "version": "dynamic-memory-operation-memops-train-v1",
-  "status": "PREPARED_NOT_RUN",
+  "status": "PREPARED_CAPACITY_GAP_NOT_RUN",
   "source_review": "data/manifests/dynamic-memory-control-memops-source-review-v1.json",
   "input": "artifacts/dynamic-memory-control/memops-control-six-train-v1/histories.json",
   "offline_source_contract": "artifacts/dynamic-memory-control/memops-control-six-train-v1/source-review.json",
@@ -29,5 +29,7 @@
     "original_session_boundaries": "preserved",
     "model_calls": 0
   },
-  "timing_qualification": "Source-contract drafting and first projection preparation CPU were not timed. Do not claim complete preparation cost from the separately measured intake/projection checks."
+  "timing_qualification": "Source-contract drafting and first projection preparation CPU were not timed. Do not claim complete preparation cost from the separately measured intake/projection checks.",
+  "capacity_finding": "data/manifests/dynamic-memory-control-memops-capacity-v1.json",
+  "execution_hold": "Do not dispatch until the general complete-input representation is resolved and revalidated. Original sources/queries remain unchanged."
 }
