@@ -8,7 +8,7 @@ from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_reading import open_evidence_packs, project_packs
-from milai_lab.methods.query_structure import build_query_structure
+from milai_lab.methods.query_structure import build_query_structure, cached_structure
 from milai_lab.runners.edit_benchmarks import BenchmarkRun
 
 
@@ -25,6 +25,45 @@ def interpretation(payload):
          "temporal": "Use the dates literally stated in this source."}
         for source in payload["sources"]],
         "remove": [], "rules": [], "remove_rules": [], "unresolved": []}
+
+
+@pytest.mark.parametrize("routes", [[[]], []])
+def test_generation_uses_source_report_time_and_explicit_and_route(tmp_path, routes):
+    from jsonschema.exceptions import ValidationError
+
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        ref = service.capture_user("s", "0",
+            "Eligibility iff training complete and card valid. Both are confirmed.",
+            occurred_at="2035-05-07T09:00:00+08:00")["source_ref"]
+        original = service.source(ref)
+
+        def call(messages, _schema):
+            payload = json.loads(messages[1]["content"])
+            assert payload["sources"][0]["reported_at"] == "2035-05-07T09:00:00+08:00"
+            assert "captured_at" not in payload["sources"][0]
+            return {"scope": "Eligibility", "nodes": [
+                {"id": f"n{i}", "text": text, "evidence": ["e0"], "kind": kind}
+                for i, (text, kind) in enumerate([
+                    ("Training complete", "reported"), ("Card valid", "reported"),
+                    ("Eligible", "inferred")])], "remove": [], "remove_rules": [],
+                "rules": [{"id": "g0", "target": "n2", "all": ["n0", "n1"],
+                           "any": routes, "evidence": ["e0"]}], "unresolved": []}
+
+        if not routes:
+            with pytest.raises(ValidationError):
+                build_query_structure(service, "Eligible?", "2035-05-07", [ref],
+                                      policy="incremental", call=call)
+            assert cached_structure(service) is None
+        else:
+            saved, _ = build_query_structure(service, "Eligible?", "2035-05-07", [ref],
+                                            policy="incremental", call=call)
+            assert saved["structure"]["rules"]["g0"]["any"] == [[]]
+            # Legacy stored no-route rules remain readable with their original meaning.
+            saved["structure"]["rules"]["g0"]["any"] = []
+            store.put((*service.namespace, "query_structure_v1"), "current", saved, index=False)
+            assert cached_structure(service)["structure"]["rules"]["g0"]["any"] == []
+        assert service.source(ref) == original and original["observed_at"]
 
 
 @pytest.mark.parametrize("policy", ["rebuild", "version_cache", "incremental"])

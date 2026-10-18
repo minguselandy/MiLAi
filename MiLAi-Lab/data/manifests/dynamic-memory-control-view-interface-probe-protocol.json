@@ -1,0 +1,26 @@
+{
+  "version": "dynamic-memory-control-view-interface-probe-v1",
+  "status": "preregistered_before_execution",
+  "purpose": "Diagnose actual graph/time errors exposed by CE rollout; generation-interface change only.",
+  "changes": [
+    "New generated rules require at least one OR route; pure AND explicitly uses[[]]. Withdrawn rules use remove_rules. Empty OR is not silently rewritten.",
+    "Source captured_at is omitted from generator input; source reported_at, content, role and calendar context remain. Original ingestion clocks stay in Store, controller observations and audit."
+  ],
+  "fixture": "data/fixtures/dynamic-memory-control/view-interface-probe-v1.json",
+  "families": [
+    "ordered_precedence",
+    "fraction_scope",
+    "nonunique_identity",
+    "count_distinct",
+    "negated_exception",
+    "joint_schedule"
+  ],
+  "expected_view_calls": 12,
+  "prefix": "Existing scripted collection through shared real EvidenceOperations and query_structure; old/new scope actual sources, not teacher views.",
+  "model": "Existing7860 Qwen; no new service, no Reader, no Laya inference, no automatic retries.",
+  "review": "Review all actual generated nodes, routes, source bindings and times; syntax acceptance alone is not semantic correctness. Compare descriptively with prior exposed outputs, not a randomized causal estimate.",
+  "compatibility": "Old stored any=[] rules remain readable with no-route meaning. No old view or first response is repaired. All already-frozen controller/baseline jobs keep their original generation interface.",
+  "serial_order": "Run now after reviewed terminal strong queue lock collision, before continuing only unexecuted baseline positions. Offline compute settlement only at boundaries with no model job alive.",
+  "budget": "Original continuous budget; all first responses and compute preserved.",
+  "checksum_verification": false
+}

@@ -36,7 +36,9 @@ INSTRUCTIONS = (
     "State dates and scopes in full text and temporal when the source supplies them; a report "
     "date is not an effective date. Preserve future rules so the Reader interprets them at its "
     "current query time. A rule needs every all prerequisite and one any route; each route "
-    "itself requires every member. any=[[]] means just all, any=[] means no remaining route. "
+    "itself requires every member. For pure AND use any=[[]]. Emit only rules with at least "
+    "one route; remove withdrawn rules with remove_rules and describe unresolved support "
+    "in unresolved. Empty outer any is not a pure AND rule. "
     "An uncertain or unavailable premise is unknown, never its negation. Rules express "
     "source-supported implications, not an assurance that their premises hold. If the source "
     "does not support a relation, retain plain text. Return the supplied schema."
@@ -75,7 +77,9 @@ def structure_schema(bindings: dict[str, Any], previous: dict[str, Any]) -> dict
         "remove": removal(list(previous.get("nodes", {}))),
         "rules": {"type": "array", "items": _object({"id": rule_id,
             "target": node_id, "all": {"type": "array", "items": node_id},
-            "any": {"type": "array", "items": {"type": "array", "items": node_id}},
+            "any": {"type": "array", "minItems": 1,
+                    "description": "Alternative prerequisite routes. Use [[]] for only all.",
+                    "items": {"type": "array", "items": node_id}},
             "evidence": refs}, ["id", "target", "all", "any", "evidence"])},
         "remove_rules": removal(list(previous.get("rules", {}))),
         "unresolved": {"type": "array", "items": text},
@@ -210,7 +214,7 @@ def build_query_structure(
         alias = aliases.get(ref, f"e{len(bindings)}")
         bindings[alias] = {"source_ref": ref, "source_revision": source.get("source_revision", 1)}
         sources.append({"id": alias, "text": body_text(source), "role": source["role"],
-            "reported_at": source.get("occurred_at"), "captured_at": source["observed_at"],
+            "reported_at": source.get("occurred_at"),
             "calendar_context": source.get("calendar_context")})
     schema = structure_schema(bindings, previous)
     delivered_aliases = {item["id"] for item in sources}

@@ -1,0 +1,29 @@
+{
+  "version": "dynamic-memory-control-strong-queue-admission-incident-v1",
+  "dispatch": "artifacts/dynamic-memory-control/strong-baselines-dispatch-v1.json",
+  "status": "terminal_failed_before_next_model_position",
+  "cause": "Offline diagnostic compute settlement acquired the original ledger lease while the Host tried nonblocking admission of its next message. Assistant scheduling error; not model-quality failure.",
+  "closed_positions": 12,
+  "next_position": {
+    "policy": "fixed",
+    "history": "nonunique_identity",
+    "step": "cold"
+  },
+  "evidence": {
+    "driver_error": "HTTP_OWNER_BUSY",
+    "dispatcher_exec14366_exit": 1,
+    "child897939": "absent",
+    "bank3_directory": "artifacts/dynamic-memory-control/strong-dense4-v1/fixed/banks/002fc136-2754-4a7f-ad4c-7c3905f3b08c",
+    "bank3_files": [
+      "message-index.json",
+      "60bb59b5-ce84-46ec-af85-306dac33c4a9-input.json"
+    ],
+    "bank3_memory_sqlite": false,
+    "bank3_checkpoint_sqlite": false,
+    "bank3_trace_result_attempts": false,
+    "code_boundary": "http_budget_scope admission occurs before SqliteStore opening, source capture and model client calls"
+  },
+  "followups": "Old M2/T2/M1 waiters exited2 NEEDS_REVIEW without children or model work. Their records remain terminal.",
+  "resolution": "Preserve all12 first responses and costs. New dispatch continues only20unexecuted dense4 positions using --continue-from and original runtime bank; later jobs remain unstarted. No old message rerun, no budget refund.",
+  "prevention": "Do not acquire ledger for offline diagnostics while a model job is live; save pending measured compute and settle at serial job boundaries."
+}
