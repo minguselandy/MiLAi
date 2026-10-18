@@ -3,13 +3,27 @@
 Execute docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md.
 Progress: docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md. Full goal remains active.
 USER STEERING: avoid question/case-specific rigid fixes; preserve generality and generalization.
-LATEST QUEUE: reviewed-followups-dispatch-v3 PID1163419/exec7496, child1163425;
-active strong-dense2-v1-remaining1. V2 coordinator946632 and dense2child1058276 TERMINAL exit1.
+LATEST QUEUE: reviewed-followups-dispatch-v3 PID1163419/exec7496, child1226071;
+active strong-dense8-v1. Dense2remaining1 CLOSED32 (including original failed position), exit0.
+V2 coordinator946632 and dense2child1058276 TERMINAL exit1.
 Dense4remaining1 and fixed_context4 CLOSED all32 each. Dense2closed2positions includes final
 answer unavailable (8801gen+948embed,unknown0), raw stored/no semantic or business effects.
 V3 preserves2closed positions and continues30unexecuted, then original unstarted jobs.
 No question-specific runtime change or answer repair. Offline pending2CPUphases billed once
 while all model jobs were terminal, before starting V3. Older LIVE blocks below are historical.
+
+Strong author review first64positions: dense4=19correct/9wrong/1incomplete/3noanswer;
+fixed-context4=28correct/1wrong/3noanswer. Dense8wrong omit update,1wrong despite full proof;
+context4wrong also despite full proof. No learned-policy advantage. Tracked strong-first-results-v1.
+New offline CPU exports/review/intake remain PENDING; never bill during live model jobs.
+Prepared NOT RUN: sandbox-reservation-v1 (1history/16positions across4policies) and MemOps
+six jointly-train backgrounds,18chronological cuts+repeats (36tasks/policy, laya+generative planned).
+MemOps A02/B01/C02/D02/E01/F07 only; D16/D22/C06 split conflicts excluded. No test/calibration use.
+Source review/protocol tracked; actual projected data ignored memops-control-six-train-v1.
+Dispatch now preserves provided source session IDs (default unchanged), roles and unknown dates.
+Own-prefix labels support arbitrary per-step source contexts, retaining legacy before/after.
+10related tests,Ruff,3toolmypy,package/tools boundaries passed. Neither dataset prep nor tests
+complete T1/D6; no fitted MemOps data or actual sandbox effects yet. No new scheduling worker.
 
 Latest development restores legal any=[] (no route), [[]] (pureAND), and alternatives; no coercion.
 All clocks remain available: source report time separate from ingestion_observations with version.

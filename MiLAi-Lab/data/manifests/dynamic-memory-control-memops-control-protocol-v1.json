@@ -1,0 +1,33 @@
+{
+  "version": "dynamic-memory-operation-memops-train-v1",
+  "status": "PREPARED_NOT_RUN",
+  "source_review": "data/manifests/dynamic-memory-control-memops-source-review-v1.json",
+  "input": "artifacts/dynamic-memory-control/memops-control-six-train-v1/histories.json",
+  "offline_source_contract": "artifacts/dynamic-memory-control/memops-control-six-train-v1/source-review.json",
+  "reproduce": "tools/prepare_memops_control_histories.py",
+  "config": "configs/dynamic-memory-operation-memops-train-v1.json",
+  "policies": [
+    "laya",
+    "generative"
+  ],
+  "positions_per_policy": 36,
+  "background_families": 6,
+  "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+  "runtime_source": "freeze this preparation commit before running",
+  "purpose": "Actual chronological own-policy prefixes for broadened training-source intake; original corpus remains external synthetic, not natural production conversations.",
+  "labels": "Review actual view contexts and original-source coverage after execution. Use the declared per-step source contract; selected actions remain observations, not gold.",
+  "fitting": "No updates or final T1 training allocation declared until actual state counts, lengths and reviewed labels exist. Neither this preparation nor prefix count completes T1.",
+  "capacity": "No truncation allowed by existing local inference. Actual generated-prefix length admission and any failures/costs must be retained.",
+  "ordering": "Follow the existing serial queue and prepared sandbox validation at a reviewed idle boundary; no concurrent model owner, no retry of closed positions.",
+  "projection_check": {
+    "histories": 6,
+    "task_positions": 36,
+    "distinct_delivered_original_turns": 138,
+    "future_source_proofs": 0,
+    "source_dates": "unknown",
+    "original_roles": "preserved",
+    "original_session_boundaries": "preserved",
+    "model_calls": 0
+  },
+  "timing_qualification": "Source-contract drafting and first projection preparation CPU were not timed. Do not claim complete preparation cost from the separately measured intake/projection checks."
+}

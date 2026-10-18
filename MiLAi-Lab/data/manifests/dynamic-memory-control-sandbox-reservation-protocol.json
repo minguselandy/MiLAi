@@ -1,0 +1,31 @@
+{
+  "version": "dynamic-memory-operation-sandbox-reservation-v1",
+  "status": "PREPARED_NOT_RUN",
+  "runtime_source": "freeze the local preparation commit before invocation",
+  "fixture": "data/fixtures/dynamic-memory-control/sandbox-reservation-v1.json",
+  "config": "configs/dynamic-memory-operation-sandbox-reservation-v1.json",
+  "policies": [
+    "fixed_context",
+    "rules",
+    "laya",
+    "generative"
+  ],
+  "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+  "view_capacity": 2,
+  "positions": 16,
+  "independent_histories": 1,
+  "initial_state": "separate empty bank/world per policy; original world default label service available",
+  "host": "normal functional.message; default existing reservation workflow; runner and tools unchanged",
+  "operations": "only current user requests authorize sandbox actions; source capture and query views never authorize actions",
+  "review": [
+    "actual request mode and selected operations",
+    "actual delivered source facts, role and effective dates",
+    "SQLite reservation fields and attempts after each message",
+    "actual get_reservation and mutation receipts; no inferred shipping effect",
+    "separate answer correctness, actual state fulfilment and duplicate attempts",
+    "all model, embedding and local compute charges, including failures"
+  ],
+  "queue": "Run only after existing serial coordinator finishes or an explicitly reviewed terminal boundary; no parallel ledger owner and no retries of closed positions",
+  "fixed_selection": "all four declared policies, first responses only; no tuning from this history",
+  "source_boundary": "offline expected values and future steps excluded by existing host_input projection"
+}

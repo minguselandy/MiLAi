@@ -6,6 +6,27 @@ from pathlib import Path
 from milai_lab.runners import functional
 
 
+def test_projection_preserves_source_sessions_roles_and_unknown_dates():
+    spec = importlib.util.spec_from_file_location("dynamic_dispatch", Path(__file__).parents[2]
+        / "tools/run_dynamic_memory_histories.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    sources = [{"session_id": "original-0", "role": "user", "content": "Earlier report.",
+                "event_key": "turn-1", "occurred_at": None},
+               {"session_id": "original-1", "role": "assistant", "content": "A suggestion.",
+                "event_key": "turn-2", "occurred_at": None},
+               {"role": "user", "content": "A new event.", "event_key": "turn-3"}]
+    step = {"id": "q", "session": "query-reopened", "incoming_sources": sources,
+            "content": "What is established?", "occurred_at": None, "query_time": None,
+            "expected": "OFFLINE_ONLY", "operations": [{"target": "OFFLINE_ONLY"}]}
+    projected = module.host_input(step, bank="b")
+    assert projected["incoming_sources"][:2] == sources[:2]
+    assert projected["incoming_sources"][2]["session_id"] == "source-stream"
+    assert "session_id" not in sources[2]
+    assert projected["query_time"] is None and projected["occurred_at"] is None
+    assert "OFFLINE_ONLY" not in json.dumps(projected)
+
+
 def test_continuation_preserves_failed_prefix_and_runs_only_new_messages(tmp_path, monkeypatch):
     spec = importlib.util.spec_from_file_location("dynamic_dispatch", Path(__file__).parents[2]
         / "tools/run_dynamic_memory_histories.py")

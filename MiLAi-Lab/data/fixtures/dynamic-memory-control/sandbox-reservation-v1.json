@@ -1,0 +1,127 @@
+{
+  "version": "dynamic-memory-control-sandbox-reservation-v1",
+  "scope": "One authored functional development history on the existing local reservation ApplicationWorld. Four correlated requests; not independent heldout families or external business success. Offline expectations never enter Host input.",
+  "histories": [
+    {
+      "id": "sandbox_reservation_continuation",
+      "source_family": "sandbox_reservation_continuation",
+      "split": "functional_development",
+      "task_count": 2,
+      "steps": [
+        {
+          "id": "requirements",
+          "kind": "task",
+          "session": "query",
+          "content": "只核对记录：今天要办理的澄湾样件（耐冲击测试批）应预留多少件、送往哪里、用什么包装？这一步不要预留或创建标签。",
+          "occurred_at": "2032-09-06T09:10:00+08:00",
+          "query_time": "2032-09-06",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "quantity",
+              "content": "澄湾样件（耐冲击测试批）的完整物品名称就是“澄湾样件（耐冲击测试批）”，本次需求3件。",
+              "occurred_at": "2032-09-06T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "destination",
+              "content": "澄湾样件（耐冲击测试批）当前收货地点为北库2号门。",
+              "occurred_at": "2032-09-06T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "packing",
+              "content": "耐冲击测试批运输时使用防震箱；同项目外观展示批使用纸套。",
+              "occurred_at": "2032-09-06T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "other",
+              "content": "澄湾样件（外观展示批）需求8件，收货地点为展示厅。",
+              "occurred_at": "2032-09-06T09:00:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": {
+            "answer": "3件，北库2号门，防震箱",
+            "business_mutations": 0
+          }
+        },
+        {
+          "id": "reserve",
+          "kind": "explicit_operation",
+          "session": "query",
+          "content": "现在请按今天有效的已登记要求，为澄湾样件（耐冲击测试批）实际预留并创建标签。先查实际状态，已经完成的部分不要重复；只报告真实回执确认的结果。",
+          "occurred_at": "2032-09-06T09:20:00+08:00",
+          "query_time": "2032-09-06",
+          "incoming_sources": [
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "current-destination",
+              "content": "澄湾样件（耐冲击测试批）收货地点即刻改为西库4号门，原北库2号门不再使用；件数与防震箱要求不变。",
+              "occurred_at": "2032-09-06T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            },
+            {
+              "role": "user",
+              "session_id": "source-stream",
+              "event_key": "future-destination",
+              "content": "明天9月7日起，澄湾样件（耐冲击测试批）收货地点才改为南库1号门；今天仍按当前安排。",
+              "occurred_at": "2032-09-06T09:20:00+08:00",
+              "calendar_context": "Asia/Shanghai"
+            }
+          ],
+          "expected": {
+            "state": {
+              "item_key": "澄湾样件（耐冲击测试批）",
+              "quantity": 3,
+              "destination": "西库4号门",
+              "packing": "防震箱",
+              "label_status": "created"
+            },
+            "reservation_rows": 1,
+            "successful_reservations_total": 1
+          }
+        },
+        {
+          "id": "reopen-status",
+          "kind": "task",
+          "session": "query-reopened",
+          "content": "重新查一下澄湾样件（耐冲击测试批）的实际预留和标签状态，报告数量、目的地、包装与标签情况。此次只查询。",
+          "occurred_at": "2032-09-06T09:30:00+08:00",
+          "query_time": "2032-09-06",
+          "incoming_sources": [],
+          "expected": {
+            "state": "same as reserve",
+            "live_query_required": true,
+            "new_business_mutations": 0
+          }
+        },
+        {
+          "id": "continue-if-needed",
+          "kind": "explicit_operation",
+          "session": "query-reopened",
+          "content": "请继续检查澄湾样件（耐冲击测试批）那项办理：若预留和标签已完成，就只核对并报告；若尚未完成，则根据现有真实状态补完未完成的部分，不要再次预留已有项目。",
+          "occurred_at": "2032-09-06T09:40:00+08:00",
+          "query_time": "2032-09-06",
+          "incoming_sources": [],
+          "expected": {
+            "state": "same as reserve",
+            "live_query_required": true,
+            "reservation_rows": 1,
+            "successful_reservations_total": 1,
+            "duplicate_reservation_attempts": 0
+          }
+        }
+      ]
+    }
+  ]
+}

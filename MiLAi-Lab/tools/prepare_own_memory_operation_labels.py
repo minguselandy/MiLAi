@@ -19,6 +19,18 @@ from milai_lab.methods.evidence_control import EvidenceOperations
 from milai_lab.methods.memory_control_learning import decision_example, reviewed_prefix_preferences
 
 
+def source_task_review(
+    family: dict[str, Any], step: str, arrived: set[str],
+) -> tuple[str, list[set[str]], str]:
+    review = family["offline_review"]
+    if "steps" in review:
+        current = review["steps"][step]
+        return (current["context"], [set(p) for p in current["support_sets"]], current["answer"])
+    context = "after" if "u" in arrived else "before"
+    return (context, [set(p) for p in review[context + "_support_sets"]],
+            review[context + "_answer"])
+
+
 def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path | None) -> None:
     output.mkdir(parents=True, exist_ok=False)
     started, cpu = time.perf_counter(), time.process_time()
@@ -48,7 +60,8 @@ def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path
             ):
                 continue
             family = families[family_id]
-            originals = [*family["sources"], family["related_update"], family["unrelated_update"]]
+            originals = [*family["sources"], *(family[key] for key in
+                         ("related_update", "unrelated_update") if key in family)]
             by_text = {(s["role"], s["content"]): s["id"] for s in originals}
             bank_name = f"bank-{number}"
             bank = next(b for b in banks if b["identity"]["bank"] == bank_name)
@@ -82,8 +95,8 @@ def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path
                         for ref, s in sources.items()
                         if (s["role"], s["content"]) in by_text
                     }
-                    context = "after" if "u" in mapping.values() else "before"
-                    proofs = [set(p) for p in family["offline_review"][context + "_support_sets"]]
+                    context, proofs, expected = source_task_review(
+                        family, closed["step"], set(mapping.values()))
                     key = "evidence-pool:" + reference_key(
                         [result["session"], result["message_id"], service.forget_epoch]
                     )
@@ -134,7 +147,7 @@ def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path
                                         if v["revision"] == item["revision"]
                                     ],
                                     "sources": list(sources.values()),
-                                    "expected": family["offline_review"][context + "_answer"],
+                                    "expected": expected,
                                     "task_sufficient": reviewed.get(view_key),
                                     "note": "",
                                 },
@@ -222,7 +235,7 @@ def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path
             "persisted_candidate_matches": checked,
             "policy_choices_copied": False,
             "scope": "Single-slot source-only own rollouts; inputs unchanged, actual pools only. "
-            "View adequacy reviewed separately in before/after source contexts. "
+            "View adequacy reviewed separately in the declared source contexts. "
             "No silent stale-view credit or future-source reconstruction.",
         },
     )
