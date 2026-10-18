@@ -433,7 +433,7 @@ class FunctionalEditMemory(FunctionalMemory):
         self, config: RunnableConfig, fresh_observations: list[dict[str, Any]] | None,
     ) -> dict[str, Any]:
         from milai_lab.memory.functional_state import note_exposure
-        from milai_lab.methods.evidence_control import EvidenceOperations
+        from milai_lab.methods.evidence_control import EvidenceOperations, controlled_reader_packet
         from milai_lab.methods.evidence_reading import open_evidence_packs, project_packs
         from milai_lab.methods.memory_control import (
             MemoryAction,
@@ -447,14 +447,10 @@ class FunctionalEditMemory(FunctionalMemory):
         question = current["content"]
         state = MemoryControlState(task={"request": question,
             "query_time": self.query_time or "", "calendar_context": self.query_calendar_context,
+            "read_goal": self.view_state(config).get("read_goal"),
             "mode": "read", "fresh_observations": fresh_observations or []})
 
-        def packet(evidence: list[dict[str, Any]], reason: str) -> dict[str, Any]:
-            return {"ok": True, "schema": "question_evidence_v1", "evidence": evidence,
-                "control_handoff": reason,
-                "instructions": "Answer the original request from delivered evidence. "
-                    "Interpretations are model-derived, not original sources. Handoff does not "
-                    "certify sufficiency. Report missing conditions or sources explicitly."}
+        packet = controlled_reader_packet
 
         def refresh(messages: list[dict[str, str]], schema: dict[str, Any]) -> dict[str, Any]:
             assert self.dependency_read_call is not None
@@ -470,6 +466,10 @@ class FunctionalEditMemory(FunctionalMemory):
                 fits=lambda items: self.token_count(canonical(packet(items, "budget_exhausted")))
                     <= self.material_limit,
                 excluded_source_refs=(bound["source_ref"],))
+            # Controller observations are exposure, not proof of Reader delivery.
+            with self.service._locked():
+                note_exposure(self.service, bound["source_ref"],
+                              [event["source_ref"] for event in state.new_events])
             memory = self
 
             class AdmittedOperations:

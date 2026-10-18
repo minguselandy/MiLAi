@@ -97,6 +97,7 @@ class FixedMemoryPolicy:
         for action in actions:
             if action.kind == "SEARCH" or (action.kind == "READ"
                     and not action.parameters.get("expand_context")
+                    and not action.parameters.get("history_directory")
                     and len(state.visible_evidence) < self.reads):
                 return action.id
         return next(a.id for a in actions if a.kind == "HANDOFF")
@@ -111,13 +112,27 @@ class RulesMemoryPolicy:
             "USE_VIEW", "REFRESH_VIEW"
         } and state.last_result.get("ok"):
             return next(a.id for a in actions if a.kind == "HANDOFF")
-        if state.views and not state.views[0]["pending_events"]:
+        read_goal = state.task.get("read_goal") or {}
+        wants_history = (isinstance(read_goal, dict)
+                         and "saved_history" in read_goal.get("evidence", []))
+        if wants_history:
+            history = next((a for a in actions if a.parameters.get("history_directory")), None)
+            if history is not None:
+                return history.id
+            historical = {p["item_index"] for p in state.pending_candidates
+                          if p.get("version_view") == "historical_exact_revision"}
+            read = next((a for a in actions if a.kind == "READ"
+                         and a.parameters.get("index") in historical), None)
+            if read is not None:
+                return read.id
+        if not wants_history and state.views and not state.views[0]["pending_events"]:
             use = next((a for a in actions if a.kind == "USE_VIEW"), None)
             if use is not None:
                 return use.id
         for action in actions:
             if action.kind == "SEARCH" or (action.kind == "READ"
                     and not action.parameters.get("expand_context")
+                    and not action.parameters.get("history_directory")
                     and len(state.visible_evidence) < self.reads):
                 return action.id
         refresh = next((a for a in actions if a.kind == "REFRESH_VIEW"), None)

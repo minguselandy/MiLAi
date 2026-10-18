@@ -6,6 +6,7 @@ import pytest
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.harness.contextual_artifacts import Trace
+from milai_lab.memory.functional_state import namespace
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_control import EvidenceOperations
 from milai_lab.methods.evidence_reading import build_evidence_packs
@@ -206,3 +207,69 @@ def test_explicit_refresh_keeps_selected_originals_beside_new_assistant_context(
         assert any(s["role"] == "user" and "only from May 1" in s["text"]
                    for s in inputs[0]["sources"])
         assert any(s["role"] == "assistant" for s in inputs[0]["sources"])
+
+
+@pytest.mark.parametrize("forget", [False, True])
+def test_history_directory_opens_actual_saved_version_and_respects_revocation(tmp_path, forget):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path)
+        memory = FunctionalEditMemory(service, len, interface_version="I2")
+
+        def context(key, text):
+            ref = service.capture_user("s", key, text)["source_ref"]
+            memory.context("s", key, "history-test")
+            cfg = {"configurable": {"user_id": "alice", "v13_session": "s",
+                "v13_turn_id": key, "v13_config_version": "history-test"}}
+            return cfg, [service.source_fragments(ref)[0]["fragment_handle"]]
+
+        cfg, old_handles = context("first", "The start date is February 1.")
+        saved = memory.save_edit(cfg, "save", units=[{
+            "text": "The start date is February 1.", "role": "content", "evidence": old_handles}])
+        assert saved["ok"]
+        current = service.read(saved["id"])
+        unit = current["value"]["edit_state"]["units"][0]["unit_id"]
+        cfg, handles = context("correction", "Correct the start date to February 3.")
+        corrected = memory.update_edit(cfg, "correct", current["candidate_handle"], [{
+            "operation": "replace", "target_unit": unit,
+            "text": "The start date is February 3.", "evidence": handles}])
+        assert corrected["ok"]
+        state = MemoryControlState(task={"request": "What date was originally stored?",
+            "query_time": "2031-04-01", "read_goal": {"evidence": ["saved_history"]}})
+        ops = EvidenceOperations(service, state,
+            load_pool=lambda: build_evidence_packs(service, state.task["request"], "2031-04-01",
+                                                   [], [service.read(saved["id"])]),
+            refresh_call=interpretation, fits=lambda items: True)
+        ops.execute(next(a for a in ops.actions(state) if a.kind == "SEARCH"), state)
+        directory = next(a for a in ops.actions(state) if a.parameters.get("history_directory"))
+        result = ops.execute(directory, state)
+        assert result["revisions"] == [1, 2]
+        assert state.visible_evidence == []  # A directory is not a stored body.
+        if forget:
+            service.forget("s", "forget", fragment_handles=old_handles)
+        read = next(a for a in ops.actions(state) if a.id == "read_1")
+        result = ops.execute(read, state)
+        if forget:
+            assert not result["ok"] and not state.visible_evidence
+        else:
+            historical = state.visible_evidence[0]
+            assert historical["revision"] == 1
+            assert historical["version_view"] == "historical_exact_revision"
+            assert "February 1" in str(historical["units"])
+            assert "February 3" not in str(historical["units"])
+
+
+def test_controller_source_observation_is_exposed_but_not_automatically_sent_to_reader(tmp_path):
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = service_at(store, tmp_path)
+        ref = service.capture_user("s", "fact", "The parcel is sealed.")["source_ref"]
+        query = service.capture_user("s", "q", "May it ship?")["source_ref"]
+        service.bind_public_turn("s", "q", query, config_version="observation-test", phase="start")
+        cfg = {"configurable": {"user_id": "alice", "v13_session": "s", "v13_turn_id": "q",
+                                "v13_config_version": "observation-test"}}
+        memory = FunctionalEditMemory(service, len, material_limit=10000, read_limit=8,
+            evidence_policy="question_pack_v1", control_policy=Scripted(["handoff"]))
+        packet = memory.model_material(cfg)
+        assert packet["evidence"] == []
+        exposure = store.get(namespace(service), "exposure:" + query).value
+        assert exposure["source_refs"] == [ref]
+        assert exposure["meaning"] == "material_exposure_not_semantic_support"
