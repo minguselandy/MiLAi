@@ -37,10 +37,10 @@ def score_operation_predictions(
         chosen[kind].update(selected=1, accepted=accepted)
         families[row["metadata"]["family"]].append(accepted)
         if kind == "HANDOFF" and not accepted:
-            counts["inadmissible_handoff"] += 1
+            counts["handoff_outside_reviewed_preference"] += 1
     return {"counts": dict(counts), "strata": dict(strata), "selected_operations": dict(chosen),
             "families": len(families), "family_macro_acceptance": (
                 sum(sum(v) / len(v) for v in families.values()) / len(families)
                 if families else None),
-            "scope": "Reviewed next-operation acceptability; "
-                     "not Reader task success or cost benefit"}
+            "scope": "Reviewed operation preferences; not exhaustive action legality, "
+                     "Reader task/state success or cost benefit"}

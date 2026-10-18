@@ -28,7 +28,7 @@ def test_operation_metrics_allow_multiple_actions_and_preserve_masked_states():
     report = score_operation_predictions([row, row, masked],
                                           [{"choice": "v"}, {"choice": "h"}, {"choice": "h"}])
     assert report["counts"] == {"labelled": 2, "accepted": 1,
-                                 "inadmissible_handoff": 1, "masked": 1}
+                                 "handoff_outside_reviewed_preference": 1, "masked": 1}
     assert report["families"] == 1
     assert report["family_macro_acceptance"] == 0.5
     assert row == before
