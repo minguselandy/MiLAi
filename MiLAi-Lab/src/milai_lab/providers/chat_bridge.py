@@ -68,6 +68,8 @@ def _action_schema(
         "required": ["answer"],
         "additionalProperties": False,
     }
+    if not tools:
+        return final
     return {
         "oneOf": [
             final,
@@ -236,7 +238,8 @@ class VLLMChatModel(BaseChatModel):
         if not isinstance(wire_messages, list):
             raise TypeError("Expected a message sequence")
         tools = kwargs.get("tools") or []
-        native = self.client.config.tool_mode == "native"
+        schema_only = not tools and kwargs.get("response_format") is not None
+        native = self.client.config.tool_mode == "native" or schema_only
         if self.preserve_tool_reasoning:
             if not native:
                 raise ValueError("TOOL_REASONING_HISTORY_REQUIRES_NATIVE")
@@ -335,7 +338,7 @@ class VLLMChatModel(BaseChatModel):
         message_id = receipt.get("id") or uuid.uuid4().hex
         calls = []
         completion_metadata: dict[str, Any] = {}
-        if self.client.config.tool_mode == "json_action":
+        if self.client.config.tool_mode == "json_action" and not schema_only:
             if wire_message.get("tool_calls"):
                 raise IncompleteChatResponse("JSON_ACTION_UNEXPECTED_NATIVE_TOOL_CALL")
             try:

@@ -944,7 +944,8 @@ def prepare(
         "current_request_json_v9",
     }:
         raise ValueError("FUNCTIONAL_REQUEST_MODE_INVALID")
-    if settings.get("request_mode", "disabled") != "disabled" and host.tool_mode != "native":
+    if settings.get("request_mode", "disabled") not in {"disabled", "current_request_json_v9"} \
+            and host.tool_mode != "native":
         raise ValueError("FUNCTIONAL_REQUEST_MODE_NATIVE_REQUIRED")
     if settings.get("request_mode") in {
         "current_request_native_v8", "current_request_native_v9", "current_request_json_v9",
@@ -2511,6 +2512,7 @@ def message(
     workflow: str = "reservation",
     initial_world: dict[str, Any] | None = None,
     initial_sources: list[dict[str, Any]] | None = None,
+    incoming_sources: list[dict[str, Any]] | None = None,
     retrieval_candidates: list[dict[str, Any]] | None = None,
     evaluator_control: dict[str, Any] | None = None,
     message_index: int = 0,
@@ -2530,7 +2532,7 @@ def message(
     bank_id = _bank_reference(root, freeze["run_id"], bank, owner)
     bank_root = root / "banks" / bank_id
     bank_root.mkdir(parents=True, exist_ok=True)
-    public = {
+    public: dict[str, Any] = {
         "owner": owner,
         "session": session,
         "message_id": message_id,
@@ -2545,6 +2547,8 @@ def message(
         public["query_time"] = query_time
     if query_calendar_context is not None:
         public["query_calendar_context"] = query_calendar_context
+    if incoming_sources is not None:
+        public["incoming_sources"] = incoming_sources
     identity = _message_reference(bank_root, session, message_id)
     result_path = bank_root / (identity + "-result.json")
     input_path = bank_root / (identity + "-input.json")
@@ -2666,6 +2670,10 @@ def message(
             )
             if seed_receipts:
                 output["source_import_receipts"] = seed_receipts
+            if incoming_sources:
+                output["incoming_source_receipts"] = seed_sources(
+                    service, incoming_sources, bank_root / f"{identity}-source-imports.json",
+                    preserve_occurrence=edit_features.source_metadata)
             output["capture_attempted"] = True
             capture = (
                 service.capture_user(session, message_id, content, occurred_at=occurred_at,

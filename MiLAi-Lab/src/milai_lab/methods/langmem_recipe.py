@@ -140,7 +140,7 @@ class _RecipeRequestTransform:
                 }:
                     raise IncompleteChatResponse(str(exc)) from exc
                 raise
-        if model.client.config.tool_mode == "json_action":
+        if not request.native:
             wire_messages = _json_action_history(wire_messages)
             if model.memory_protocol is not None:
                 refs = {row["ref"]: row for row in memory_receipts}

@@ -1,0 +1,38 @@
+{
+  "stage": "E0 functional development",
+  "fixture": "data/fixtures/dynamic-memory-control/e0-v1.json",
+  "histories": 6,
+  "source_events_per_history": 8,
+  "questions_per_history": 4,
+  "policies": [
+    "fixed",
+    "rules",
+    "laya",
+    "generative"
+  ],
+  "task_positions": 96,
+  "explicit_operation_positions": 20,
+  "public_message_positions": 116,
+  "controls": {
+    "shared_operation_library": "SEARCH/READ/USE_VIEW/REFRESH_VIEW/HANDOFF",
+    "max_control_steps": 8,
+    "fixed_and_rules_reads": 4,
+    "source_top_k": 20,
+    "semantic_top_k": 10,
+    "view_capacity": 1,
+    "reader_and_writer": "same existing Qwen service, JSON action transport",
+    "laya": "original multilingual BASE; no operation training"
+  },
+  "selection_rule": "Retain all first attempts and all histories. A concrete execution failure stops dispatch for diagnosis; semantic failure alone does not stop. No automatic replay.",
+  "costs": "Original continuous ledger; report individual message deltas and local-controller work. Source scan and operation timings remain in native traces; full workload time is not production latency.",
+  "evaluation": "Author source/answer/actual-state review; preserve partial/ambiguous/unsupported/failure categories. Four method paths are diagnostic, not independent families.",
+  "runtime_projection": "Only current text, declared times, arriving source bodies/roles and normal Host state. Expected answers and named offline families are never passed to policy.",
+  "limitations": [
+    "Authored synthetic development histories, not a held-out or external benchmark.",
+    "Tool log source fixtures are authored historical observations, not live sandbox actions.",
+    "E0 fixed baseline uses the common evidence-pool order (lexical original Sources, dense semantic retrieval), not the stronger standalone dense fixed4 benchmark baseline; add that matched baseline for main evaluation.",
+    "Single-slot and full inventory discovery remain initial implementation; multi-slot and incremental discovery pending."
+  ],
+  "checkpoint_selection": "BASE only for E0. No seed/chosen checkpoint claims.",
+  "checksum_verification": false
+}

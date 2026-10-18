@@ -7370,3 +7370,22 @@ def test_new_host_message_changes_policy_version_without_resetting_old_admission
     assert rejected['status'] != 'COMPLETED'
     assert 'IDENTITY_CHANGED' in rejected['error']
     assert len(wires) == calls and read_json(path) == after
+
+
+def test_arriving_sources_are_captured_per_public_message(tmp_path, monkeypatch):
+    root = prepared(tmp_path)
+    scripted(monkeypatch, lambda *_: {"answer": "Received the current source."})
+    common = {"bank": "arrivals", "owner": "alice", "session": "s"}
+    receipts = []
+    for index in (1, 2):
+        result = functional.message(
+            root, **common, message_id=f"q{index}", content="Read the note.",
+            incoming_sources=[{"role": "user", "session_id": "source-stream",
+                               "event_key": str(index), "content": f"Arriving note {index}."}])
+        assert result["status"] == "COMPLETED", result.get("error")
+        receipt = result["incoming_source_receipts"][0]["receipt"]
+        assert receipt["ok"]
+        receipts.append(receipt["source_ref"])
+    assert receipts[0] != receipts[1]
+    imports = list(root.glob("banks/*/*-source-imports.json"))
+    assert len(imports) == 2
