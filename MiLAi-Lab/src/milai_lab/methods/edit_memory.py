@@ -242,7 +242,10 @@ class EditMemory:
         guidance = PROPOSITION_UPDATE_INSTRUCTIONS if self.features.proposition_updates else ""
         if self.features.dependency_groups:
             guidance += (
-                " Record a derived claim's explicit sufficient support routes in support_groups. "
+                " Use support_groups only for derived claims "
+                "with explicit sufficient premise routes. "
+                "Directly reported facts cite their sources and need no support group. "
+                "Route premises must be other units, never the target itself. "
                 "Each inner list is AND, outer alternatives are OR. Preserve uncertain or "
                 "conditional wording in the claims; a graph is a model interpretation, not "
                 "proof. Dependencies require delivered evidence; co-occurrence is insufficient. "
