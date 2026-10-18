@@ -1,7 +1,10 @@
 # 当前导航（2026-10-18，Asia/Shanghai）
 
-已发布研究基点为 `46351b5f`，分支 `feat/lab-audit-objective-diagnosis-20261017`；
-本目标启动时的只读远端查询记录为该提交，main 为 `518aee41`；之后未推送或合并。
+用户在执行闭合后明确要求提交到GitHub；截至研究结果提交`5c61fe0d`的24个新增提交
+已成功推送到分支`feat/lab-audit-objective-diagnosis-20261017`。
+[GitHub最终报告](https://github.com/minguselandy/MiLAi/blob/feat/lab-audit-objective-diagnosis-20261017/MiLAi-Lab/docs/MILAI_SOURCE_SELECTION_RESULT_20261018.md)。
+本目标启动时的远端研究基点为`46351b5f`、main为`518aee41`；本次未合并main。
+此前“仅本地”表述对应发布授权之前的执行快照，没有新增远端CI通过声明。
 提交 ID 仅作来源记录，
 不执行 SHA 或替代内容指纹校验。
 
