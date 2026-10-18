@@ -60,6 +60,10 @@ def test_retrained_mechanical_projection_keeps_feedback_but_hides_semantic_diffe
     policy = LayaMemoryPolicy(lambda p: observed.append(p) or {"choice": "r"}, "mechanical")
     assert policy.choose(state, actions) == "r"
     assert observed[0] == {k: training[k] for k in ("state", "questions")}
+    exported = decision_example(
+        {"before": state.project(), "actions": [asdict(a) for a in actions]},
+        {"family": "one"}, projection="mechanical")
+    assert observed[0] == {k: exported[k] for k in ("state", "questions")}
     assert training["gold"] == row["gold"] and training["metadata"] == row["metadata"]
     assert "Alice" not in str(training["state"]) and "Bob" not in str(training["state"])
     assert row == before

@@ -73,8 +73,8 @@
         "Literal observation candidates preserve actual public Tool spans; they are program projections, not LLM formation success or proof of semantic completeness.",
         "One exposed development story, no common-before Host/Benchmark causal comparison.",
         "The selector uses the same per-message model/read allowance; any failure and its paid cost remain in the first attempt.",
-        "D1 uses one persistent view slot and one explicit full Source scan per query. No multi-slot or learned operation policy yet.",
-        "JSON action transport on the existing service; no native-auto tool parser. Tool observations in the supplied histories are authored source fixtures, not live application effects."
+        "JSON action transport on the existing service; no native-auto tool parser. Tool observations in the supplied histories are authored source fixtures, not live application effects.",
+        "One view slot matches initial operation training; current public source feed is incremental, but complete Host work and real task effects must still be measured."
       ],
       "revision": "dynamic-memory-operation-mechanical-native-seed0-v1",
       "change_intent": "Matched operation-state/head mechanism comparison, fixed final96 checkpoint; no result claim.",

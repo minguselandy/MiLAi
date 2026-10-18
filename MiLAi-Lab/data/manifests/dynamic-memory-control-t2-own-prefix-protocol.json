@@ -1,0 +1,17 @@
+{
+  "version": "dynamic-memory-control-t2-own-prefix-v1",
+  "status": "preregistered_before_execution",
+  "source_families": "data/fixtures/dynamic-memory-control/operation-families-v1.json",
+  "selection": "All24 previously declared training families, in original order. No development or test family is added to training.",
+  "fixture": "data/fixtures/dynamic-memory-control/t2-train-own-rollouts-v1.json",
+  "positions": 96,
+  "controller_checkpoint": "artifacts/dynamic-memory-control/t0-ce-v1/seed0/checkpoint",
+  "runtime": "Current shared operation library, normal Host, new empty banks; source version frozen before dispatch.",
+  "purpose": "Collect actual learned-policy prefixes including its own Reader replies and interpretation failures before own-prefix aggregation. This does not count as128 independent training families.",
+  "labels": "Export observations with empty gold. Review actual source sufficiency and actual generated views, preserve ambiguity/masks. Do not copy selected actions as gold or repair observations.",
+  "splits": "Training-only additions; existing8 dev families remain evaluation-only. All new wording/phase variants of a family retain its split.",
+  "training_rule": "After actual coverage and lengths are known, declare fixed updates and aggregation weights before fitting. No RL or adaptive checkpoint selection.",
+  "first_responses": "Preserve all first failures, effects and paid usage. Only existing reviewed known-length failure continuation is permitted; no retry.",
+  "budget": "Original continuous budget, serial after t0-mechanisms-dispatch-v1; no new services.",
+  "checksum_verification": false
+}

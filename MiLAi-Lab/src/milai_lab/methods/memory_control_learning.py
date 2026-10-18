@@ -8,11 +8,13 @@ from milai_lab.methods.laya_memory_policy import operation_payload
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 
 
-def decision_example(event: dict[str, Any], metadata: dict[str, Any]) -> dict[str, Any]:
+def decision_example(
+    event: dict[str, Any], metadata: dict[str, Any], *, projection: str = "full",
+) -> dict[str, Any]:
     """Export the same model input, initially masked until a source-grounded review."""
     state = MemoryControlState(**event["before"])
     actions = [MemoryAction(**a) for a in event["actions"]]
-    return {**operation_payload(state, actions), "gold": {},
+    return {**operation_payload(state, actions, projection), "gold": {},
             "metadata": {**metadata, "action_kinds": {a.id: a.kind for a in actions},
                          "label_status": "unreviewed_masked"}}
 

@@ -54,11 +54,11 @@ Encoder and nativehead parameter probes changed. Tracked t0-learning-result.json
 Dev preference matching93→101→107/125 at0/48/96. Final15handoffs outside preference; train342/373.
 This is not QA/state success or cost benefit. Fixed final96 only, no checkpoint/seed selection.
 
-Own-policy QA LIVE: t0-rollout-dispatch-v1.json PID639365/exec30496; BASEchild651845,
-t0-rollout-base-v1/driver.json latest25/32attempted. Revalidate exact child process/command.
-BASE then saved CE final96,32positions each, independent empty banks, same8dev families.
-Runtime imports frozenedf087d3. Some known length failures retained; do not restart/rebill.
-CE not yet dispatched at this snapshot. Training checkpoint config uses actual saved final path.
+Own-policy BASE CLOSED: t0-rollout-base-v1 COMPLETED_WITH_FAILURES,32/32; PID651845 absent.
+Author core28correct,1mixed-stale explanation,3known length failures; no USE/REFRESH.
+Costs246142gen,embed0,newunknown0;171forwards429338tokens,31loads. Tracked t0-base-rollout-result.
+CE QA LIVE: dispatcher639365/exec30496, child801060 actual final96; revalidate process+cmdline.
+Runtimeedf087d3, same8dev families, independent empty banks, no teacher views. No restart/rebill.
 
 Working head ec756611 adds2/4bounded Store slots, actual-slot USE/REFRESH/new-scope options,
 LRU eviction, and source_arrivals Store owner/time filtering without formation enumeration.
@@ -74,6 +74,11 @@ E0 author-review-v1 covers96firstanswers/20explicitops: core21/18/22/15 of24; BA
 failed-forget disclosure is NOT end-to-end success (21). Full explicit state2/2/2/4 of5.
 BASElabel correction text saved but empty support alternatives; allfour full-forgets failed.
 View graph overall validity remains partial; indirect history/assistant proof qualifications retained.
+M2 shared mechanical projection and Host linear head freezeaaec2f5c:13CUDAtraining/projection and
+20Hosttests (overlap),Ruff,mypy,boundaries pass. Waiter798639/exec82156 follows strong queue, then
+2matched96-update seed0 trainings. Not yet trained; no QA/efficacy claim.
+T2 train-only own-prefix fixture24families/96positions registered; no gold auto-created and no dev
+family moved to fitting. Review actual own views/prefixes before fixed-budget aggregation.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.

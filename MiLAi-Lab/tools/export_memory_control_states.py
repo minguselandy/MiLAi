@@ -16,11 +16,16 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
     run = read_json(args.run / "driver.json")
+    histories = {h["id"]: h for h in read_json(args.run / "fixture.json")["histories"]}
+    runtime = Path(run.get("runtime_root", str(args.run)))
+    projections = {policy: read_json(runtime / f"{policy}-config.json")[
+        "entrypoints"]["functional"]["memory_control"].get("state_projection", "full")
+        for policy in run["policies"]}
     args.output.mkdir(parents=True, exist_ok=False)
     examples: list[dict[str, Any]] = []
     redacted = 0
     for row in run["completed"]:
-        root = Path(run.get("runtime_root", str(args.run))) / row["policy"]
+        root = runtime / row["policy"]
         bank_name = "bank-" + str(run["histories"].index(row["history"]))
         bank = next(b["id"] for b in read_json(root / "bank-index.json")
                     if b["identity"]["bank"] == bank_name)
@@ -41,14 +46,17 @@ def main() -> None:
                 "event_id": f"{row['policy']}:{row['history']}:{row['step']}:{event['step']}",
                 "training_event": row["step"], "policy": row["policy"],
                 "source_version": run["source_version"], "trace": str(path),
-                "decision_step": event["step"], "split": "functional_development"}))
+                "decision_step": event["step"], "split": histories[row["history"]]["split"],
+                "state_projection": projections[row["policy"]]},
+                projection=projections[row["policy"]]))
     with (args.output / "unlabelled.jsonl").open("w") as stream:
         for example in examples:
             stream.write(json.dumps(example, ensure_ascii=False) + "\n")
     write_json(args.output / "summary.json", {"states": len(examples),
         "closed_messages": len(run["completed"]), "redacted_events_skipped": redacted,
         "gold_created": False, "source_run": str(args.run),
-        "scope": "Functional development observations; no new training-family claim"})
+        "scope": "Actual observations with original history splits; no automatic gold "
+                 "or new training-family claim"})
 
 
 if __name__ == "__main__":
