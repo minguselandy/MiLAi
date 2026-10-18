@@ -245,3 +245,15 @@ BASE完成后才会运行CE最终权重32位置。使用edf087d3冻结实现，�
 同一时钟新来源、A撤销不隐藏B，以及旧读取/查询结构回归。Ruff、6文件mypy和两个依赖边界通过。
 新配置dynamic-memory-control-two-slots-v1.json尚未真实模型验证；不把工程测试算成方法收益。
 运行中的BASE/CE依旧使用旧冻结实现，后续单独比较容量/刷新执行器/策略贡献。
+
+
+## 强简单基线已接线，真实运行待串行队列
+
+dense固定2/4/8通过原计量embedding客户端排序完整可见证据包，保留原索引和实际来源绑定；
+固定上下文4可直接选共享的整会话READ，不需先付一次窄READ。配置与预登记见
+`dynamic-memory-control-strong-baselines-protocol.json`。8个已暴露开发家族，每臂32位置；
+k8明确使用10步上限，是额外成本点。当前T0自身QA仍使用冻结edf087d3，不注入新动作目录；
+新基线与旧冻结T0仅作描述比较，后续匹配当前实现的动态对照仍需要执行。
+183项相关测试、Ruff、5文件mypy、package/tools边界通过；首次测试命令含不存在的
+`test_evidence_control.py`，未执行测试，已改用真实测试路径得到上述结果。
+无Product Schema/API/权限修改，无SHA校验，无远端push/merge。

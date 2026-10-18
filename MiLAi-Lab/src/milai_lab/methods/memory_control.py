@@ -107,6 +107,26 @@ class FixedMemoryPolicy:
 
 
 @dataclass
+class FixedContextMemoryPolicy:
+    """Fixed complete-context reads; no semantic selector or hidden sufficiency label."""
+
+    reads: int = 4
+
+    def choose(self, state: MemoryControlState, actions: list[MemoryAction]) -> str:
+        search = next((a for a in actions if a.kind == "SEARCH"), None)
+        if search is not None:
+            return search.id
+        if len(state.visible_evidence) < self.reads:
+            for expanded in (True, False):
+                read = next((a for a in actions if a.kind == "READ"
+                    and bool(a.parameters.get("expand_context")) == expanded
+                    and not a.parameters.get("history_directory")), None)
+                if read is not None:
+                    return read.id
+        return next(a.id for a in actions if a.kind == "HANDOFF")
+
+
+@dataclass
 class RulesMemoryPolicy:
     reads: int = 4
 

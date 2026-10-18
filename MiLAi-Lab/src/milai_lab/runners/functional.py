@@ -2738,7 +2738,7 @@ def message(
                 memory_options["dependency_reading"] = settings.get("dependency_reading", False)
                 memory_options["dependency_read_call"] = dependency_read_call
                 if settings.get("memory_control"):
-                    from milai_lab.runners.memory_control import memory_policy
+                    from milai_lab.runners.memory_control import dense_control_pool, memory_policy
 
                     control = settings["memory_control"]
                     memory_options["control_policy"] = memory_policy(control, budget,
@@ -2747,6 +2747,19 @@ def message(
                         record=trace)
                     memory_options["control_steps"] = control.get("max_control_steps", 8)
                     memory_options["control_view_capacity"] = control.get("view_capacity", 1)
+                    if control.get("pool_order", "shared") == "dense":
+                        if retriever is None:
+                            raise ValueError("DENSE_CONTROL_POOL_REQUIRES_EMBEDDINGS")
+                        pool_retriever = SemanticRetriever(
+                            retriever.embeddings, settings["embedding_dimension"])
+
+                        def rank_pool(
+                            query: str, materials: list[dict[str, Any]],
+                        ) -> list[dict[str, Any]]:
+                            return dense_control_pool(query, materials,
+                                                      retriever=pool_retriever, record=trace)
+
+                        memory_options["control_rank_pool"] = rank_pool
                     memory_options["control_record"] = trace
                     memory_options["control_available"] = lambda: (
                         model.calls_in_message < settings["max_calls_per_message"] - 2)

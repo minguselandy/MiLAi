@@ -1,0 +1,47 @@
+{
+  "version": "dynamic-memory-control-strong-baselines-v1",
+  "status": "preregistered_before_execution",
+  "split": "development_only",
+  "fixture": "data/fixtures/dynamic-memory-control/t0-dev-rollouts-v1.json",
+  "histories": 8,
+  "positions_per_arm": 32,
+  "arms": {
+    "dense2": {
+      "policy": "fixed",
+      "reads": 2,
+      "steps": 4
+    },
+    "dense4": {
+      "policy": "fixed",
+      "reads": 4,
+      "steps": 6
+    },
+    "dense8": {
+      "policy": "fixed",
+      "reads": 8,
+      "steps": 10
+    },
+    "fixed-context4": {
+      "policy": "fixed_context",
+      "reads": 4,
+      "steps": 6
+    }
+  },
+  "source_pool": "Identical shared source/semantic pool; dense ranks complete actually visible packs using the existing metered embedder; context reads complete available session ranges. Original pool indices retained.",
+  "comparison": "k=8 is an explicit higher action-budget point, not a matched eight-step dynamic arm. All arms retain Reader capacity and actual shared retrieval/Host costs.",
+  "order": [
+    "dense4",
+    "fixed-context4",
+    "dense2",
+    "dense8"
+  ],
+  "queue": "After terminal successful T0 BASE and CE dispatcher only; serial original budget; no automatic retry.",
+  "labels": "Author source-task expectations used offline only. All first responses, failures, committed effects and usage retained.",
+  "qualifications": [
+    "Development family outcomes, no held-out/generalization claim.",
+    "T0 BASE/CE use earlier frozen edf087d3 single-slot operation catalogue. New baselines use current shared context action availability. Their cost-quality points are descriptive; matched current-code dynamic comparison remains required.",
+    "No per-arm hidden evidence or sufficiency oracle.",
+    "Dense encoding is real additional work. All candidate body embeddings and queries charged.",
+    "No SHA/checksum/content-fingerprint gate."
+  ]
+}

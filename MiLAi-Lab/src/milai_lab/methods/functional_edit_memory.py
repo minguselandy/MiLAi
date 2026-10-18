@@ -141,6 +141,8 @@ class FunctionalEditMemory(FunctionalMemory):
         control_policy: MemoryPolicy | None = None,
         control_steps: int = 8,
         control_view_capacity: int = 1,
+        control_rank_pool: (Callable[[str, list[dict[str, Any]]],
+                                     list[dict[str, Any]]] | None) = None,
         control_record: Callable[[dict[str, Any]], None] = lambda event: None,
         control_available: Callable[[], bool] = lambda: True,
         **kwargs: Any,
@@ -171,6 +173,7 @@ class FunctionalEditMemory(FunctionalMemory):
         self.control_policy = control_policy
         self.control_steps = control_steps
         self.control_view_capacity = control_view_capacity
+        self.control_rank_pool = control_rank_pool
         self.control_record = control_record
         self.control_available = control_available
         self.control_handed_off = False
@@ -462,8 +465,14 @@ class FunctionalEditMemory(FunctionalMemory):
         stored = self.service.store.get(namespace(self.service), key)
         if stored is None:
             self.service.store.put(namespace(self.service), key, {"status": "started"}, index=False)
+
+            def load_pool() -> list[dict[str, Any]]:
+                materials = self._evidence_pool(config)[1]["materials"]
+                return (self.control_rank_pool(question, materials) if self.control_rank_pool
+                        else materials)
+
             operations = EvidenceOperations(self.service, state,
-                load_pool=lambda: self._evidence_pool(config)[1]["materials"],
+                load_pool=load_pool,
                 refresh_call=refresh,
                 fits=lambda items: self.token_count(canonical(packet(items, "budget_exhausted")))
                     <= self.material_limit,

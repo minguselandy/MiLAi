@@ -181,12 +181,13 @@ class EvidenceOperations:
         history_records = set()
         if not self.searched:
             actions.append(MemoryAction("search", "SEARCH", "original request"))
-        for i, item in enumerate(self.materials):
+        for i, item in sorted(enumerate(self.materials),
+                              key=lambda pair: pair[1].get("control_pool_rank", pair[0])):
             if item.get("body_delivered") is False:
                 continue
             if (i, False) not in self.attempted and self.adds_source_range(item):
                 actions.append(MemoryAction(f"read_{i}", "READ", f"candidate {i}", {"index": i}))
-            if (i, False) in self.attempted and (i, True) not in self.attempted and (
+            if (i, True) not in self.attempted and (
                 item.get("context_source_ranges") != item.get("source_ranges")
             ) and item.get("context_source_ranges") and self.adds_source_range(item, expand=True):
                 actions.append(MemoryAction(f"context_{i}", "READ", f"candidate {i} context",
@@ -235,7 +236,8 @@ class EvidenceOperations:
     @staticmethod
     def candidate(item: dict[str, Any], index: int) -> dict[str, Any]:
         return {**pack_candidate(item, index), **{
-            k: item[k] for k in ("revision", "version_view") if k in item}}
+            k: item[k] for k in ("revision", "version_view", "control_pool_rank",
+                                "control_dense_score") if k in item}}
 
     def execute(self, action: MemoryAction, state: MemoryControlState) -> dict[str, Any]:
         if action.kind == "SEARCH":
