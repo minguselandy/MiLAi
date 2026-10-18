@@ -19,12 +19,18 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-from evaluate_bounded_laya import NativeDecision, score_predictions
+from evaluate_bounded_laya import score_predictions
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
+from milai_lab.providers.laya_local import NativeDecision
 from train_laya_matched import audit
 
 TrainingWindow = list[tuple[int, int]]  # (data pass, row index)
+
+
+def training_microbatches(window: TrainingWindow, size: int) -> list[TrainingWindow]:
+    """Partition one optimizer window without changing its examples or loss denominator."""
+    return [window[start:start + size] for start in range(0, len(window), size)]
 
 
 def training_stages(size: int, epochs: int, seed: int,
@@ -111,6 +117,8 @@ def main() -> None:
     parser.add_argument("--epochs", type=int, default=4)
     parser.add_argument("--optimizer-updates", type=int,
                         help="Use this exact update budget with full16-example windows")
+    parser.add_argument("--micro-batch-size", type=int, choices=(1, 2, 4, 8, 16), default=4,
+                        help="Per-forward rows; effective optimizer windows remain16 examples")
     parser.add_argument("--dev-data", type=Path,
                         help="Common development labels/inputs independent of the training recipe")
     parser.add_argument("--seed", type=int, default=0)
@@ -169,7 +177,8 @@ def main() -> None:
            "epochs": args.epochs if args.optimizer_updates is None else None,
            "planned_optimizer_updates": sum(len(windows) for _, windows in stages),
            "checkpoint_axis": axis, "dev_source": str(dev_path.resolve()),
-           "batch_size": 4, "gradient_accumulation": 4,
+           "batch_size": args.micro_batch_size,
+           "gradient_accumulation": 16 // args.micro_batch_size,
            "max_len": args.max_len, "head_max_len": args.head_max_len, "train_states": len(train),
            "dev_states": len(dev), "encoder_lr": 2.5e-5, "head_lr": 1e-4,
            "freeze_encoder": False, "objective": args.objective,
@@ -262,9 +271,9 @@ def main() -> None:
             for window in windows:
                 denominator = len(window)
                 optimizer.zero_grad(set_to_none=True)
-                for start in range(0, len(window), 4):
+                for microbatch in training_microbatches(window, args.micro_batch_size):
                     indices, batch_items = [], []
-                    for data_pass, index in window[start:start + 4]:
+                    for data_pass, index in microbatch:
                         if encoded_pass != data_pass:
                             if args.shuffle_options:
                                 option_orders = []

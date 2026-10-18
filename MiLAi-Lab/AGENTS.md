@@ -7,11 +7,11 @@ No subagents, SHA/checksum/content-fingerprint verification, new model services,
 old-position retries, other-worktree resumes, push or merge. Leave the user's untracked
 MILAI_GLOBAL_ARCHITECTURE_MEMORY_RESEARCH_20261018.md untouched.
 
-LATEST QUEUE: reviewed-followups-dispatch-v3 PID1163419/exec7496; child1351401,
-active t2-train-own-rollouts-v1 (frozen5cc68464,96positions). Revalidate actual processes.
+LATEST QUEUE: reviewed-followups-dispatch-v3 PID1163419/exec7496; child1832743,
+active multitopic-two-slots-v1 (frozen5052477f,48positions; latest12closed). Revalidate processes.
 Dense2remaining1 and dense8 CLOSED32each; mechanical-native-seed0 and full-linear-seed0
 both COMPLETED96updates. All original failures/effects/costs remain; no position retried.
-Then original M1 feedback-full/one-shot and multitopic2slots follow in this same coordinator.
+T2 CLOSED96; M1 feedback-full/one-shot CLOSED32each (semantic review pending). Two-slot is last V3 job.
 NEVER settle offline compute while a model job lives: prior billing caused HTTP_OWNER_BUSY.
 New exports/reviews/capacity probes remain PENDING; no competing billing/scheduling worker.
 
@@ -46,6 +46,34 @@ New36position generative-shared intake prepared; native36 follows actual shared-
 Do not treat the old full-format T0 checkpoint as retrained for the new representation.
 No new intake worker started. T1 collection/fitting, T2 fitting, matchedQA, all declared seeds,
 new heldout confirmation and remaining lifecycle/sandbox work are still incomplete.
+
+T2 review:59correct/27wrong/7lengthfail/3unknown-as-false qualifications.283native calls,590766
+inputtokens,751786gen,embed0,newunknown0.46view contexts/30revisions reviewed:23task-sufficient,
+8current-state valid; final19opened-view families have6task-sufficient/2valid. Empty OR is legal
+for unresolved unsupported targets (coverage_gap); never blanket-ban it or repair outputs.
+Own labels283train+1forcedmask, actual inputs283matched,517persisted candidates; pref227/283,
+30handoffs outside preference. Aggregate original418+own284=702rows,656labelled,24families;
+original139dev stays separate;max5238,no truncation. t2-aggregate-v1 ready, NOT FITTED.
+T2 fitting protocol: same T0final96 initialization, additional96original-only vs96aggregated;
+micro2/accum8/effective16, fixed final96, seed0, then matched5052477f QA32each. No best selection.
+New microbatch option preserves default4 and weighted optimizer windows;16CUDAtraining tests pass.
+Trainer mypy excludes only untyped external Laya imports;2changed source/tool modules strict pass.
+
+Provenance fix: authored originals bind by capture_key+literal role/body; new Host trace stores
+opened original identity/version/ranges OUTSIDE model input. Old unique body/time evidence remains
+compatible; ambiguous duplicates/echoes masked. Closed BASE171+CE80 inputs/golds/statuses unchanged.
+29source/Host tests,Ruff,package/tools boundaries pass. Old results/labels/banks untouched.
+
+MemOps metadata cohort registered70train/9dev/10provisionally reserved test backgrounds;3split
+conflicts excluded. Known held refs all preparation-only403case index (0modelcalls), not outcomes.
+Mechanical scan read prepared JSON but emitted no held semantic contents; do not claim byte-sealed
+or pretraining-unseen data. Backgrounds are not independent generators/novel reasoning templates.
+Second6train source contracts A01/B02/C01/D11/E07/F06 prepared;12reviewed total,0newly fitted.
+Wave2 source-only180states:shared max8569,3over8192; keep all sources, native admission unresolved.
+Generative wave2 36positions prepared under existing Host capacity, actual-prefix audit still needed.
+Forget-only backgrounds remain explicit-lifecycle track; source quotes never count as executed deletion.
+Authoritative next-job preparation will be artifacts/dynamic-memory-control/prepared-next-current.json;
+it must wait for V3 terminal review, then settle pending CPU before new model work. No worker yet.
 
 Latest development restores legal any=[] (no route), [[]] (pureAND), and alternatives; no coercion.
 All clocks remain available: source report time separate from ingestion_observations with version.

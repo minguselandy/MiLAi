@@ -485,6 +485,11 @@ class FunctionalEditMemory(FunctionalMemory):
 
             def record_control(event: dict[str, Any]) -> None:
                 if event.get("phase") == "decision_input":
+                    event["opened_original_source_ranges"] = [
+                        copy.deepcopy(span) for item in operations.opened.values()
+                        if item["kind"] == "original_source"
+                        and item.get("body_delivered") is True
+                        for span in item.get("source_ranges", [])]
                     with self.service._locked():
                         note_exposure(self.service, bound["source_ref"],
                                       operations.observation_source_refs(state))

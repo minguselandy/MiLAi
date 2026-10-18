@@ -1,0 +1,1369 @@
+{
+  "version": "dynamic-memory-control-memops-source-cohort-v1",
+  "status": "METADATA_ALLOCATION_ONLY_NO_NEW_MODEL_CALLS",
+  "source": "https://github.com/MemTensor/MemOps",
+  "snapshot_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main",
+  "split_sources": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/memops-families-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/data/manifests/jev-memops-families-v1.json"
+  ],
+  "split_conflicts": [
+    {
+      "family": "D16",
+      "local": "dev",
+      "peer": "calibration",
+      "decision": "exclude from this cohort, preserve the more protected identity"
+    },
+    {
+      "family": "D22",
+      "local": "calibration",
+      "peer": "test",
+      "decision": "exclude from this cohort, preserve the more protected identity"
+    },
+    {
+      "family": "C06",
+      "local": "calibration",
+      "peer": "test",
+      "decision": "exclude from this cohort, preserve the more protected identity"
+    }
+  ],
+  "allocated_counts": {
+    "train": 70,
+    "dev": 9,
+    "test": 10
+  },
+  "allocated_operation_types": {
+    "train": {
+      "Update": 14,
+      "Remember": 8,
+      "TrajectoryOps": 18,
+      "Forget": 13,
+      "Reflect": 17
+    },
+    "dev": {
+      "Update": 1,
+      "Reflect": 3,
+      "TrajectoryOps": 3,
+      "Forget": 1,
+      "Remember": 1
+    },
+    "test": {
+      "Update": 1,
+      "Reflect": 2,
+      "Remember": 2,
+      "TrajectoryOps": 2,
+      "Forget": 3
+    }
+  },
+  "selection_rule": "Keep the six already registered pilot files. For remaining jointly assigned backgrounds, sort family IDs within each split and rotate Update/Reflect/Remember/TrajectoryOps/Forget preference; choose the first available type. No source body, question, answer or method outcome used for allocation. All file variants of a background retain its existing split.",
+  "families": [
+    {
+      "family": "A01",
+      "split": "train",
+      "source_group": "A",
+      "file": "A01_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+    },
+    {
+      "family": "A02",
+      "split": "train",
+      "source_group": "A",
+      "file": "A02_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": true,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A04",
+      "split": "train",
+      "source_group": "A",
+      "file": "A04_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A05",
+      "split": "train",
+      "source_group": "A",
+      "file": "A05_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A06",
+      "split": "train",
+      "source_group": "A",
+      "file": "A06_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A07",
+      "split": "train",
+      "source_group": "A",
+      "file": "A07_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A13",
+      "split": "train",
+      "source_group": "A",
+      "file": "A13_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A14",
+      "split": "train",
+      "source_group": "A",
+      "file": "A14_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A16",
+      "split": "train",
+      "source_group": "A",
+      "file": "A16_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A20",
+      "split": "train",
+      "source_group": "A",
+      "file": "A20_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A22",
+      "split": "train",
+      "source_group": "A",
+      "file": "A22_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A27",
+      "split": "train",
+      "source_group": "A",
+      "file": "A27_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A28",
+      "split": "train",
+      "source_group": "A",
+      "file": "A28_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A29",
+      "split": "train",
+      "source_group": "A",
+      "file": "A29_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A30",
+      "split": "train",
+      "source_group": "A",
+      "file": "A30_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A33",
+      "split": "train",
+      "source_group": "A",
+      "file": "A33_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B01",
+      "split": "train",
+      "source_group": "B",
+      "file": "B01_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": true,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B02",
+      "split": "train",
+      "source_group": "B",
+      "file": "B02_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+    },
+    {
+      "family": "B03",
+      "split": "train",
+      "source_group": "B",
+      "file": "B03_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B04",
+      "split": "train",
+      "source_group": "B",
+      "file": "B04_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B05",
+      "split": "train",
+      "source_group": "B",
+      "file": "B05_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B06",
+      "split": "train",
+      "source_group": "B",
+      "file": "B06_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B10",
+      "split": "train",
+      "source_group": "B",
+      "file": "B10_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B12",
+      "split": "train",
+      "source_group": "B",
+      "file": "B12_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B14",
+      "split": "train",
+      "source_group": "B",
+      "file": "B14_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B21",
+      "split": "train",
+      "source_group": "B",
+      "file": "B21_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B22",
+      "split": "train",
+      "source_group": "B",
+      "file": "B22_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B25",
+      "split": "train",
+      "source_group": "B",
+      "file": "B25_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B26",
+      "split": "train",
+      "source_group": "B",
+      "file": "B26_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B28",
+      "split": "train",
+      "source_group": "B",
+      "file": "B28_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C01",
+      "split": "train",
+      "source_group": "C",
+      "file": "C01_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+    },
+    {
+      "family": "C02",
+      "split": "train",
+      "source_group": "C",
+      "file": "C02_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": true,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C04",
+      "split": "train",
+      "source_group": "C",
+      "file": "C04_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C05",
+      "split": "train",
+      "source_group": "C",
+      "file": "C05_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C07",
+      "split": "train",
+      "source_group": "C",
+      "file": "C07_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C10",
+      "split": "train",
+      "source_group": "C",
+      "file": "C10_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C11",
+      "split": "train",
+      "source_group": "C",
+      "file": "C11_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C21",
+      "split": "train",
+      "source_group": "C",
+      "file": "C21_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C23",
+      "split": "train",
+      "source_group": "C",
+      "file": "C23_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C25",
+      "split": "train",
+      "source_group": "C",
+      "file": "C25_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C26",
+      "split": "train",
+      "source_group": "C",
+      "file": "C26_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C27",
+      "split": "train",
+      "source_group": "C",
+      "file": "C27_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C28",
+      "split": "train",
+      "source_group": "C",
+      "file": "C28_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C29",
+      "split": "train",
+      "source_group": "C",
+      "file": "C29_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C30",
+      "split": "train",
+      "source_group": "C",
+      "file": "C30_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D02",
+      "split": "train",
+      "source_group": "D",
+      "file": "D02_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": true,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D11",
+      "split": "train",
+      "source_group": "D",
+      "file": "D11_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+    },
+    {
+      "family": "D14",
+      "split": "train",
+      "source_group": "D",
+      "file": "D14_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D17",
+      "split": "train",
+      "source_group": "D",
+      "file": "D17_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D18",
+      "split": "train",
+      "source_group": "D",
+      "file": "D18_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D19",
+      "split": "train",
+      "source_group": "D",
+      "file": "D19_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D20",
+      "split": "train",
+      "source_group": "D",
+      "file": "D20_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D21",
+      "split": "train",
+      "source_group": "D",
+      "file": "D21_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D23",
+      "split": "train",
+      "source_group": "D",
+      "file": "D23_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D24",
+      "split": "train",
+      "source_group": "D",
+      "file": "D24_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "E01",
+      "split": "train",
+      "source_group": "E",
+      "file": "E01_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": true,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "E07",
+      "split": "train",
+      "source_group": "E",
+      "file": "E07_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+    },
+    {
+      "family": "E10",
+      "split": "train",
+      "source_group": "E",
+      "file": "E10_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "E11",
+      "split": "train",
+      "source_group": "E",
+      "file": "E11_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "E13",
+      "split": "train",
+      "source_group": "E",
+      "file": "E13_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "E14",
+      "split": "train",
+      "source_group": "E",
+      "file": "E14_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F06",
+      "split": "train",
+      "source_group": "F",
+      "file": "F06_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+    },
+    {
+      "family": "F07",
+      "split": "train",
+      "source_group": "F",
+      "file": "F07_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": true,
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F08",
+      "split": "train",
+      "source_group": "F",
+      "file": "F08_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F11",
+      "split": "train",
+      "source_group": "F",
+      "file": "F11_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F12",
+      "split": "train",
+      "source_group": "F",
+      "file": "F12_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F13",
+      "split": "train",
+      "source_group": "F",
+      "file": "F13_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F14",
+      "split": "train",
+      "source_group": "F",
+      "file": "F14_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F15",
+      "split": "train",
+      "source_group": "F",
+      "file": "F15_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F17",
+      "split": "train",
+      "source_group": "F",
+      "file": "F17_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A19",
+      "split": "dev",
+      "source_group": "A",
+      "file": "A19_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A32",
+      "split": "dev",
+      "source_group": "A",
+      "file": "A32_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B30",
+      "split": "dev",
+      "source_group": "B",
+      "file": "B30_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C03",
+      "split": "dev",
+      "source_group": "C",
+      "file": "C03_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C31",
+      "split": "dev",
+      "source_group": "C",
+      "file": "C31_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D25",
+      "split": "dev",
+      "source_group": "D",
+      "file": "D25_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "E08",
+      "split": "dev",
+      "source_group": "E",
+      "file": "E08_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "E15",
+      "split": "dev",
+      "source_group": "E",
+      "file": "E15_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F01",
+      "split": "dev",
+      "source_group": "F",
+      "file": "F01_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "A11",
+      "split": "test",
+      "source_group": "A",
+      "file": "A11_update.json",
+      "operation_type": "Update",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B24",
+      "split": "test",
+      "source_group": "B",
+      "file": "B24_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "B29",
+      "split": "test",
+      "source_group": "B",
+      "file": "B29_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C16",
+      "split": "test",
+      "source_group": "C",
+      "file": "C16_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C22",
+      "split": "test",
+      "source_group": "C",
+      "file": "C22_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C24",
+      "split": "test",
+      "source_group": "C",
+      "file": "C24_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "C32",
+      "split": "test",
+      "source_group": "C",
+      "file": "C32_reflect.json",
+      "operation_type": "Reflect",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D01",
+      "split": "test",
+      "source_group": "D",
+      "file": "D01_remember.json",
+      "operation_type": "Remember",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "D10",
+      "split": "test",
+      "source_group": "D",
+      "file": "D10_trajectory_ops.json",
+      "operation_type": "TrajectoryOps",
+      "track": "source_task",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    },
+    {
+      "family": "F16",
+      "split": "test",
+      "source_group": "F",
+      "file": "F16_forget.json",
+      "operation_type": "Forget",
+      "track": "explicit_lifecycle",
+      "pilot": false,
+      "body_reviewed_for_this_intake": false,
+      "admitted_to_current_training": false
+    }
+  ],
+  "bounded_prior_use_check": {
+    "inspected_registered_config_manifest_and_memops_run_jsons": 2785,
+    "registry_only_files": [
+      "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/data/manifests/jev-memops-families-v1.json"
+    ],
+    "held_family_references_outside_allocation_registries": [
+      {
+        "family": "A11",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "27",
+          "family"
+        ]
+      },
+      {
+        "family": "A11",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "28",
+          "family"
+        ]
+      },
+      {
+        "family": "A11",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "29",
+          "family"
+        ]
+      },
+      {
+        "family": "B24",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "138",
+          "family"
+        ]
+      },
+      {
+        "family": "B24",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "139",
+          "family"
+        ]
+      },
+      {
+        "family": "B24",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "140",
+          "family"
+        ]
+      },
+      {
+        "family": "B24",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "141",
+          "family"
+        ]
+      },
+      {
+        "family": "B24",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "142",
+          "family"
+        ]
+      },
+      {
+        "family": "B29",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "156",
+          "family"
+        ]
+      },
+      {
+        "family": "B29",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "157",
+          "family"
+        ]
+      },
+      {
+        "family": "B29",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "158",
+          "family"
+        ]
+      },
+      {
+        "family": "B29",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "159",
+          "family"
+        ]
+      },
+      {
+        "family": "B29",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "160",
+          "family"
+        ]
+      },
+      {
+        "family": "C16",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "201",
+          "family"
+        ]
+      },
+      {
+        "family": "C16",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "202",
+          "family"
+        ]
+      },
+      {
+        "family": "C22",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "206",
+          "family"
+        ]
+      },
+      {
+        "family": "C22",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "207",
+          "family"
+        ]
+      },
+      {
+        "family": "C22",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "208",
+          "family"
+        ]
+      },
+      {
+        "family": "C22",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "209",
+          "family"
+        ]
+      },
+      {
+        "family": "C22",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "210",
+          "family"
+        ]
+      },
+      {
+        "family": "C24",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "216",
+          "family"
+        ]
+      },
+      {
+        "family": "C32",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "245",
+          "family"
+        ]
+      },
+      {
+        "family": "C32",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "246",
+          "family"
+        ]
+      },
+      {
+        "family": "C32",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "247",
+          "family"
+        ]
+      },
+      {
+        "family": "D01",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "248",
+          "family"
+        ]
+      },
+      {
+        "family": "D01",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "249",
+          "family"
+        ]
+      },
+      {
+        "family": "D01",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "250",
+          "family"
+        ]
+      },
+      {
+        "family": "D10",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "260",
+          "family"
+        ]
+      },
+      {
+        "family": "D10",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "261",
+          "family"
+        ]
+      },
+      {
+        "family": "D10",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "262",
+          "family"
+        ]
+      },
+      {
+        "family": "D10",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "263",
+          "family"
+        ]
+      },
+      {
+        "family": "F16",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "393",
+          "family"
+        ]
+      },
+      {
+        "family": "F16",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "394",
+          "family"
+        ]
+      },
+      {
+        "family": "F16",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "395",
+          "family"
+        ]
+      },
+      {
+        "family": "F16",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "396",
+          "family"
+        ]
+      },
+      {
+        "family": "F16",
+        "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+        "json_location": [
+          "397",
+          "family"
+        ]
+      }
+    ],
+    "scope": "Registered local MemOps configurations/manifests and existing memops-named run roots in the two relevant artifact categories. Filename/family metadata only in outputs. Not a guarantee about upstream pretraining or every unrecorded historical interaction.",
+    "case_stem_check": {
+      "matched_references": 36,
+      "outside_preparation_index": []
+    },
+    "reference_classification": {
+      "artifact": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/artifacts/jev-bottleneck/memops-events-v1/index.json",
+      "kind": "preparation-only403-case inventory, not model outcomes",
+      "evidence_summary": "jev-read-bottleneck-20261016/MiLAi-Lab/data/manifests/jev-memops-events-v1-summary.json",
+      "model_calls": 0,
+      "actual_before_formed": false,
+      "unit_role_labels_created": 0,
+      "registered_model_cases_inspected": [
+        "A01_update",
+        "B01_forget",
+        "D02_update",
+        "B04_forget"
+      ],
+      "conclusion": "No held-family model-run reference found in this bounded registered-artifact check. Preparation/index references do not establish evaluated outcomes."
+    }
+  },
+  "protection": "All10jointly-test backgrounds remain provisionally reserved together. Their semantic contents/questions/answers were not emitted to the model or reviewer for this registration, and no held outcome was used. The mechanical reference scan did read previously prepared observation/reference JSON, so these are not byte-sealed unread blobs. Prior preparation has0model calls. Any later evidence of evaluated exposure keeps the family as regression rather than silently replacing it. Calibration/conflicts stay outside fitting.",
+  "lifecycle_boundary": "Forget sources are retained as a separate explicit lifecycle track. A quoted historical request is not an executed deletion; require normal Host current commands, actual state/receipts and non-target preservation checks. Mixed trajectory files may also need this route after source review. Never derive action gold directly from upstream operation tags.",
+  "scale_qualification": "With original24/8 authored operation families, full admission would provide94train/17dev source backgrounds, not128/32. This registration does not admit or train them. Background count is not a count of independent generators or novel task mechanisms. Larger planned training/confirmation scope remains pending.",
+  "next": "Review additional training-source cuts and task contracts; retain allocated hard/ambiguous cases. Freeze method choice and the evaluation protocol before protected payload use.",
+  "initial_registration_issue": "First metadata pass assumed every background had a non-Forget file and stopped before writing. No model call or state mutation; its CPU timing was not captured. The allocation now retains the actual full operation coverage rather than substituting an easier source.",
+  "reviewed_training_backgrounds": 12,
+  "admitted_training_backgrounds": 0
+}

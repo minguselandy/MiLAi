@@ -13,7 +13,8 @@ from typing import Any
 from langgraph.store.sqlite import SqliteStore
 
 from milai_lab.harness.artifact_io import read_json, write_json
-from milai_lab.memory.functional_state import namespace, reference_key
+from milai_lab.memory.functional_state import body_text, namespace, reference_key
+from milai_lab.memory.reader_projection import merge_source_ranges
 from milai_lab.memory.service import MemoryService
 from milai_lab.methods.evidence_control import EvidenceOperations
 from milai_lab.methods.memory_control_learning import decision_example, reviewed_prefix_preferences
@@ -29,6 +30,42 @@ def source_task_review(
     context = "after" if "u" in arrived else "before"
     return (context, [set(p) for p in review[context + "_support_sets"]],
             review[context + "_answer"])
+
+
+def original_source_mapping(
+    originals: list[dict[str, Any]], sources: dict[str, dict[str, Any]],
+) -> dict[str, str]:
+    """Bind authored source IDs to actual captures, never to a future matching sentence."""
+    by_id = {s["id"]: s for s in originals}
+    return {ref: original["id"] for ref, source in sources.items()
+            if (original := by_id.get(source["capture_key"])) is not None
+            and source["role"] == original["role"] and body_text(source) == body_text(original)}
+
+
+def delivered_original_sources(
+    event: dict[str, Any], mapping: dict[str, str], sources: dict[str, dict[str, Any]],
+) -> tuple[set[str], bool]:
+    """Use actual opened spans; old traces require unambiguous literal/time matching."""
+    if "opened_original_source_ranges" in event:
+        return ({mapping[span["source_ref"]] for span in merge_source_ranges(
+                    event["opened_original_source_ranges"])
+                 if span["source_ref"] in mapping and span["start"] == 0
+                 and span["end"] == len(body_text(sources[span["source_ref"]]))
+                 and span["source_revision"] == sources[span["source_ref"]]["source_revision"]},
+                False)
+    covered: set[str] = set()
+    ambiguous = False
+    for item in event["before"]["visible_evidence"]:
+        if item["kind"] != "original_source":
+            continue
+        for body in item.get("evidence", []):
+            matches = {ref for ref, source in sources.items()
+                if source["role"] == body["role"] and body_text(source) == body["content"]
+                and ("captured_at" not in body or body["captured_at"] == source["observed_at"])}
+            if len(matches) == 1:
+                covered.update(mapping[ref] for ref in matches if ref in mapping)
+            ambiguous |= len(matches) > 1 and any(ref in mapping for ref in matches)
+    return covered, ambiguous
 
 
 def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path | None) -> None:
@@ -62,7 +99,6 @@ def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path
             family = families[family_id]
             originals = [*family["sources"], *(family[key] for key in
                          ("related_update", "unrelated_update") if key in family)]
-            by_text = {(s["role"], s["content"]): s["id"] for s in originals}
             bank_name = f"bank-{number}"
             bank = next(b for b in banks if b["identity"]["bank"] == bank_name)
             owner = bank["identity"]["owner"]
@@ -90,11 +126,7 @@ def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path
                     result_path = folder / f"{mid}-result.json"
                     result = read_json(result_path)
                     sources = {s["event_id"]: s for s in result.get("sources", [])}
-                    mapping = {
-                        ref: by_text[s["role"], s["content"]]
-                        for ref, s in sources.items()
-                        if (s["role"], s["content"]) in by_text
-                    }
+                    mapping = original_source_mapping(originals, sources)
                     context, proofs, expected = source_task_review(
                         family, closed["step"], set(mapping.values()))
                     key = "evidence-pool:" + reference_key(
@@ -117,13 +149,8 @@ def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path
                             ):
                                 raise ValueError("Persisted pool does not match actual prefix")
                             checked += 1
-                        covered = {
-                            by_text[e["role"], e["content"]]
-                            for item in state["visible_evidence"]
-                            if item["kind"] == "original_source"
-                            for e in item.get("evidence", [])
-                            if (e["role"], e["content"]) in by_text
-                        }
+                        covered, ambiguous_source = delivered_original_sources(
+                            event, mapping, sources)
                         opened_views = []
                         for item in state["visible_evidence"]:
                             if item["kind"] != "query_structure":
@@ -183,6 +210,11 @@ def prepare(run_path: Path, families_path: Path, output: Path, review_path: Path
                             refresh_sources=refreshes,
                             opened_views=opened_views,
                         )
+                        if ambiguous_source and status != "forced_single_action_masked" \
+                                and not any(p <= covered for p in proofs) \
+                                and not any(v is True for v in opened_views):
+                            selected, status = [], "ambiguous_original_identity_masked"
+                            basis = [*basis, "ambiguous_original_identity"]
                         row = decision_example(
                             event,
                             {

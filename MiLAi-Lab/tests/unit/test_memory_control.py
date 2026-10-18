@@ -197,6 +197,12 @@ def test_host_reopen_does_not_repeat_control_or_use_query_as_fact(tmp_path, view
             assert "9000" not in json.dumps(packet["evidence"])
             assert len([t for t in traces if t.get("event") == "memory_control_handoff"]) == 1
             assert memory.read_allowance(config)["reads_remaining"] == 5
+            before = [t for t in traces if t.get("phase") == "decision_input"]
+            assert before[0]["opened_original_source_ranges"] == []
+            assert before[-1]["opened_original_source_ranges"]
+            assert all(span["source_ref"] != ref
+                       for span in before[-1]["opened_original_source_ranges"])
+            assert "opened_original_source_ranges" not in before[-1]["before"]
 
 
 def test_unknown_result_ends_without_reexecuting(tmp_path):

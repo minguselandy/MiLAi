@@ -13,6 +13,7 @@ from train_bounded_laya import (
     decision_loss,
     event_weights,
     state_option_seed,
+    training_microbatches,
     training_stages,
 )
 
@@ -56,6 +57,30 @@ def test_fixed_update_budget_keeps_full_windows_across_different_masks():
         for data_pass in range(1, len(draws) // size + 1):
             assert sorted(i for p, i in draws if p == data_pass) == list(range(size))
         assert stages == training_stages(size, epochs=9, seed=7, update_budget=5)
+
+
+@pytest.mark.parametrize("size", [3, 16])
+def test_microbatch_accumulation_preserves_the_weighted_full_window_gradient(size):
+    torch = pytest.importorskip("torch")
+    inputs = torch.arange(size * 3, dtype=torch.float64).reshape(size, 3) / 31
+    target = torch.zeros(size, 5, dtype=torch.float64)
+    target[:, :2] = .5
+    mask = torch.arange(5).unsqueeze(0) < (torch.arange(size) % 4 + 2).unsqueeze(1)
+    weights = torch.arange(1, size + 1, dtype=torch.float64) / size
+    initial = torch.arange(15, dtype=torch.float64).reshape(3, 5) / 10
+    full = initial.clone().requires_grad_()
+    (decision_loss(inputs @ full, target, mask, "soft-ce") * weights).mean().backward()
+    window = [(1, i) for i in range(size)]
+    for micro_size in (1, 2, 4, 8, 16):
+        current = initial.clone().requires_grad_()
+        batches = training_microbatches(window, micro_size)
+        assert [pair for batch in batches for pair in batch] == window
+        for batch in batches:
+            indices = [i for _, i in batch]
+            loss = decision_loss(inputs[indices] @ current, target[indices], mask[indices],
+                                 "soft-ce")
+            ((loss * weights[indices]).sum() / size).backward()
+        assert torch.allclose(current.grad, full.grad, atol=1e-12)
 
 
 def test_legacy_epoch_order_and_partial_windows_remain_unchanged():

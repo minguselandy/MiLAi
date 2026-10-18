@@ -1,0 +1,2446 @@
+{
+  "version": "dynamic-memory-control-t2-own-rollout-results-v1",
+  "status": "ALL96FIRST_POSITIONS_REVIEWED_283TRAIN_LABELS_READY",
+  "source_run": "artifacts/dynamic-memory-control/t2-train-own-rollouts-v1",
+  "runtime_source": "5cc68464",
+  "checkpoint": "T0 seed0 final96, not T2-fitted",
+  "reviewer": "Codex author, method visible, no independent Judge",
+  "source_families": 24,
+  "positions": 96,
+  "counts": {
+    "correct": 59,
+    "wrong": 27,
+    "no_answer": 7,
+    "qualified_unknown_as_false": 3
+  },
+  "phase_counts": {
+    "cold": {
+      "correct": 20,
+      "no_answer": 1,
+      "wrong": 2,
+      "qualified_unknown_as_false": 1
+    },
+    "repeat": {
+      "correct": 15,
+      "wrong": 5,
+      "no_answer": 3,
+      "qualified_unknown_as_false": 1
+    },
+    "unrelated": {
+      "correct": 15,
+      "wrong": 7,
+      "no_answer": 1,
+      "qualified_unknown_as_false": 1
+    },
+    "changed": {
+      "correct": 9,
+      "wrong": 13,
+      "no_answer": 2
+    }
+  },
+  "costs": {
+    "attempted": 96,
+    "host_completed": 89,
+    "task_positions": 96,
+    "explicit_positions": 0,
+    "generation_known_tokens": 751786,
+    "generation_charged_tokens": 751786,
+    "generation_unknown_usage": 0,
+    "embedding_known_tokens": 0,
+    "embedding_charged_tokens": 0,
+    "embedding_unknown_usage": 0,
+    "dynamic_memory_laya_cpu_seconds": 4350.553741245996,
+    "dynamic_memory_laya_forwards": 283,
+    "dynamic_memory_laya_input_tokens": 590766,
+    "dynamic_memory_laya_sequence_rows": 283,
+    "dynamic_memory_laya_state_tokenizations": 283,
+    "dynamic_memory_laya_state_tokens": 528134,
+    "dynamic_memory_laya_wall_seconds": 1213.3149807387963,
+    "dynamic_memory_laya_load_cpu_seconds": 426.3812487160002,
+    "dynamic_memory_laya_load_loads": 96,
+    "dynamic_memory_laya_load_wall_seconds": 336.9953387705609
+  },
+  "actions": {
+    "search": 49,
+    "read_2": 17,
+    "context_2": 18,
+    "handoff": 96,
+    "refresh_view": 30,
+    "context_3": 5,
+    "use_view": 45,
+    "context_4": 5,
+    "read_1": 4,
+    "read_4": 3,
+    "read_3": 5,
+    "read_5": 2,
+    "read_0": 2,
+    "read_7": 1,
+    "context_0": 2
+  },
+  "view_review": {
+    "contexts": 46,
+    "distinct_view_revisions": 30,
+    "task_sufficient": 23,
+    "current_view_state_valid": 8,
+    "task_insufficient": 23
+  },
+  "view_rejections": [],
+  "final_opened_views": {
+    "families": 19,
+    "task_sufficient": 6,
+    "current_state_valid": 2
+  },
+  "own_prefix_preferences": {
+    "counts": {
+      "labelled": 283,
+      "accepted": 227,
+      "handoff_outside_reviewed_preference": 30,
+      "masked": 1
+    },
+    "strata": {
+      "acquire_evidence_preference": {
+        "labelled": 196,
+        "accepted": 162
+      },
+      "ready_handoff_preference": {
+        "labelled": 87,
+        "accepted": 65
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 49,
+        "accepted": 48
+      },
+      "READ": {
+        "selected": 64,
+        "accepted": 43
+      },
+      "HANDOFF": {
+        "selected": 95,
+        "accepted": 65
+      },
+      "REFRESH_VIEW": {
+        "selected": 30,
+        "accepted": 26
+      },
+      "USE_VIEW": {
+        "selected": 45,
+        "accepted": 45
+      }
+    },
+    "families": 24,
+    "family_macro_acceptance": 0.8036772833647835,
+    "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit",
+    "actual_model_inputs_matched": 283
+  },
+  "rows": [
+    {
+      "history": "sealed_parcel",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前记录，梧桐批次目前**不可以**发运。还缺少的发运前提是**封签尚未完成**（发运条件要求封签完成且抽检通过，目前仅满足抽检通过一项）。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/fe7b39b2-7bc8-4fa3-8cf2-be173c4b6925/89b77e1b-6633-4a59-8c65-cfd7fe547462-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/fe7b39b2-7bc8-4fa3-8cf2-be173c4b6925/89b77e1b-6633-4a59-8c65-cfd7fe547462-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "sealed_parcel",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "梧桐批次目前不可以发运。还缺的前提是“封签完成”。根据记录，梧桐批次需“封签完成且抽检通过”同时满足方可发运，目前“抽检已通过”，但“封签尚未完成”。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/fe7b39b2-7bc8-4fa3-8cf2-be173c4b6925/1626d613-23bd-48a8-82ad-02b447f1b44b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/fe7b39b2-7bc8-4fa3-8cf2-be173c4b6925/1626d613-23bd-48a8-82ad-02b447f1b44b-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "context_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "sealed_parcel",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，梧桐批次目前**不可以**发运。缺失的前提条件是**封签尚未完成**（发运需同时满足“封签完成且抽检通过”，目前仅抽检已通过，封签条件尚未满足）。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/fe7b39b2-7bc8-4fa3-8cf2-be173c4b6925/d1b53690-140f-4bb6-8b5a-2b427ac1f9f0-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/fe7b39b2-7bc8-4fa3-8cf2-be173c4b6925/d1b53690-140f-4bb6-8b5a-2b427ac1f9f0-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "sealed_parcel",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的证据解释，梧桐批次目前可以发运。证据显示该批次已完成封签且抽检通过，已满足发运条件，未发现缺失的前提。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/fe7b39b2-7bc8-4fa3-8cf2-be173c4b6925/52f4b7b4-1c89-4548-86b5-3977976d13e4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/fe7b39b2-7bc8-4fa3-8cf2-be173c4b6925/52f4b7b4-1c89-4548-86b5-3977976d13e4-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "room_capacity",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是，超过了上限。现有两组预订共7人（4人+3人），此次新增6人后，同时在场人数将达到13人（7+6=13），超过了溪厅12人的上限。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/015006fb-77c3-423f-9c6c-a71cf698e2b2/5d0a37f8-c200-4f3a-bc98-b579f93686f0-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/015006fb-77c3-423f-9c6c-a71cf698e2b2/5d0a37f8-c200-4f3a-bc98-b579f93686f0-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "room_capacity",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是。现有两组预订共计7人，若再安排6人，同时在场总人数将达到13人，已超过溪厅12人的同时在场人数上限。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/015006fb-77c3-423f-9c6c-a71cf698e2b2/b52b2058-beee-4e43-90a0-e3bd3d03eba2-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/015006fb-77c3-423f-9c6c-a71cf698e2b2/b52b2058-beee-4e43-90a0-e3bd3d03eba2-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "room_capacity",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是的，超过了。根据现有记录，溪厅的同时在场人数上限为12人。当前已有预订共7人，若再安排6人，总人数将达到13人，因此超过了12人的同时在场人数上限。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/015006fb-77c3-423f-9c6c-a71cf698e2b2/7c8ecdb0-a36f-46ea-8c37-f8b067498e5c-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/015006fb-77c3-423f-9c6c-a71cf698e2b2/7c8ecdb0-a36f-46ea-8c37-f8b067498e5c-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_capacity",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "room_capacity",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是，超过同时在场人数上限。根据已提供的记录与推论，溪厅的同时在场人数上限设定为12人。目前已有两个预订共计7人，若再安排6人，在场总人数将达到13人（7+6=13），这超过了设定的12人上限。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/015006fb-77c3-423f-9c6c-a71cf698e2b2/522cc36e-4edc-4728-afbc-706174608d23-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/015006fb-77c3-423f-9c6c-a71cf698e2b2/522cc36e-4edc-4728-afbc-706174608d23-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_capacity",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "contingent_editor",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "宋禾",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f9a6095b-0971-4936-982b-1ca8fbd0d396/e4143b8b-bff4-4670-a06d-92fa6a83ecd4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f9a6095b-0971-4936-982b-1ca8fbd0d396/e4143b8b-bff4-4670-a06d-92fa6a83ecd4-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "contingent_editor",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，这份北窗稿件应由宋禾复核。因为明确规则规定“仅当宋禾缺席时才由魏宁代为复核”，而当前宋禾在岗，魏宁虽在岗但无接替授权，故复核工作仍由宋禾负责。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f9a6095b-0971-4936-982b-1ca8fbd0d396/5a821cee-c95e-4caf-9def-1da157be0be9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f9a6095b-0971-4936-982b-1ca8fbd0d396/5a821cee-c95e-4caf-9def-1da157be0be9-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "use_view",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "contingent_editor",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录（截至2032-07-02），北窗稿件应交给宋禾复核。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f9a6095b-0971-4936-982b-1ca8fbd0d396/af0a86b1-0c8f-428c-a8a5-565b7ace84b6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f9a6095b-0971-4936-982b-1ca8fbd0d396/af0a86b1-0c8f-428c-a8a5-565b7ace84b6-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "contingent_editor",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，北窗稿件应交给宋禾复核。记录明确指出该稿件由宋禾负责，且宋禾当前在岗；魏宁虽同在岗，但无额外授权接替宋禾，因此复核责任归属宋禾。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f9a6095b-0971-4936-982b-1ca8fbd0d396/8223f814-b1d1-47a1-bee2-303b79622958-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f9a6095b-0971-4936-982b-1ca8fbd0d396/8223f814-b1d1-47a1-bee2-303b79622958-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_responsibility",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "partial_delivery",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据已有记录，岚仓订购的零件尚未全部到货。订单总数量为40件，目前已累计实收34件（第一批24件，第二批10件），还差6件未到货。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c89a9028-5006-44c7-ac0f-1f395857a23d/2cddf180-47f5-4069-9ea3-139c17c742a7-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c89a9028-5006-44c7-ac0f-1f395857a23d/2cddf180-47f5-4069-9ea3-139c17c742a7-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "partial_delivery",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "未全部到货。根据已有记录，岚仓订单共订购40件零件，目前已实收第一批24件和第二批10件，累计到货34件，尚未全部到货，还差6件。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c89a9028-5006-44c7-ac0f-1f395857a23d/cf0541ff-40ff-4ace-a03e-1427fdb21f15-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c89a9028-5006-44c7-ac0f-1f395857a23d/cf0541ff-40ff-4ace-a03e-1427fdb21f15-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "use_view",
+        "context_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "partial_delivery",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，岚仓订购的零件尚未全部到货。订购总数为40件，已实收34件（第一批24件、第二批10件），还差6件未到货。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c89a9028-5006-44c7-ac0f-1f395857a23d/4bd5f092-f063-4714-8d22-b7b05ec2636f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c89a9028-5006-44c7-ac0f-1f395857a23d/4bd5f092-f063-4714-8d22-b7b05ec2636f-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_count",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "partial_delivery",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前记录，岚仓订购的零件尚未全部到货。订单订购总量为40件，目前已累计实收34件（包含第一批24件和第二批10件），还差6件未到货。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c89a9028-5006-44c7-ac0f-1f395857a23d/e7a531cd-7894-4927-826b-499535224d66-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c89a9028-5006-44c7-ac0f-1f395857a23d/e7a531cd-7894-4927-826b-499535224d66-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_count",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "publication_revision",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，发布白鹭手册时应采用**白鹭手册版本v1**。原因如下：\n\n1. **v1状态**：记录明确指出“白鹭手册版本v1已经审核通过”。\n2. **v2状态**：记录指出“白鹭手册v2仍在起草，未提交审核”，因此不具备审核通过的条件。\n3. **发布规则**：规则要求“采用当前已审核通过的最新版本”。\n\n综上所述，v1是当前唯一已审核通过且符合发布规则的版本。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/8408f685-ecc3-4343-b696-2a269339d0f8/53c639f7-05a7-43bc-bd6b-720052a197b0-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/8408f685-ecc3-4343-b696-2a269339d0f8/53c639f7-05a7-43bc-bd6b-720052a197b0-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "publication_revision",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "白鹭手册v2",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/8408f685-ecc3-4343-b696-2a269339d0f8/6922545b-3ab0-4bd3-befc-8f3b8653c9d4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/8408f685-ecc3-4343-b696-2a269339d0f8/6922545b-3ab0-4bd3-befc-8f3b8653c9d4-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "search",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "publication_revision",
+      "step": "repeat",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/8408f685-ecc3-4343-b696-2a269339d0f8/7d09c1b8-0d80-4e23-8cc7-cae336ba02f4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/8408f685-ecc3-4343-b696-2a269339d0f8/7d09c1b8-0d80-4e23-8cc7-cae336ba02f4-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "no_answer",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "publication_revision",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，发布白鹭手册时应采用 **白鹭手册v1**。具体依据如下：\n\n1.  **发布规则**：根据记录s2（2032-07-02 09:00），发布规则要求采用“当前已审核通过的最新版本”。\n2.  **版本v1状态**：记录s0（2032-07-02 09:00）明确确认“白鹭手册版本v1已经审核通过”。\n3.  **版本v2状态及冲突**：\n    *   记录s1（2032-07-02 09:00）指出“白鹭手册v2仍在起草，未提交审核”。\n    *   记录s3（2032-07-02 09:20）声称“白鹭手册v2现已审核通过，并声明取代v1”。\n4.  **综合判定**：关于白鹭手册v2的状态，记录s1和记录s3存在直接的事实互斥（未审核 vs 已审核）。在缺乏明确最高优先级规则确认s3效力的情况下，依据证据解读中采用的“保守状态”原则（即在冲突未决时，维持已确认的审核状态，或视为v2尚未正式生效），**白鹭手册v1**被视为当前唯一符合发布规则（已审核通过）的版本。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/8408f685-ecc3-4343-b696-2a269339d0f8/6ca3071e-b7be-469b-9543-403afd9b5fa5-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/8408f685-ecc3-4343-b696-2a269339d0f8/6ca3071e-b7be-469b-9543-403afd9b5fa5-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "search",
+        "context_4",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "invented_priority_requirement_despite_explicit_replacement",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "n",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "route_closure",
+      "step": "cold",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/d5533fcc-2078-4976-88fd-ebb500e2406f/d8f47f30-36ed-49bb-9a66-6fd280e9e7c7-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/d5533fcc-2078-4976-88fd-ebb500e2406f/d8f47f30-36ed-49bb-9a66-6fd280e9e7c7-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "no_answer",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "route_closure",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据最新提供的记录（2032-07-02 09:20:00+08:00），从橡站寄送到松站**目前**没有可用的已知路线。\n\n具体依据如下：\n1. **南线**：虽然在09:00时（s2）报告为开放，但在09:20的记录（s3）中显示“南线现在也封闭”。\n2. **北线**：自09:00时（s1）起已封闭，且09:20的记录（s3）显示“尚未收到北线恢复开放的消息”。\n3. **其他路线**：记录中指出“尚未收到……其他路线开放的消息”。\n\n综上所述，截止最新消息时间，两条已知路线（北线和南线）均已封闭，且无其他路线开放的记录。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/d5533fcc-2078-4976-88fd-ebb500e2406f/1fc04c01-a504-48bc-b046-bab9151cdfce-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/d5533fcc-2078-4976-88fd-ebb500e2406f/1fc04c01-a504-48bc-b046-bab9151cdfce-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "route_closure",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，截至2032-07-02 09:20:00+08:00，南线已处于封闭状态；北线及除南线外的其他路线均尚未收到开放或恢复的消息。因此，目前已知没有可用的路线。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/d5533fcc-2078-4976-88fd-ebb500e2406f/01bce343-b83c-4955-b7d6-1b3190ad5d1f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/d5533fcc-2078-4976-88fd-ebb500e2406f/01bce343-b83c-4955-b7d6-1b3190ad5d1f-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "route_closure",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，南线已于2032-07-02 09:20封闭，北线自09:00起封闭且截至09:20尚未收到恢复开放的消息，同时没有连接橡站和松站的其他路线（如东站的支线不连通）。因此，目前从橡站到松站没有可用的已知路线。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/d5533fcc-2078-4976-88fd-ebb500e2406f/53741870-ae5a-4383-aa36-82fccd1203e5-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/d5533fcc-2078-4976-88fd-ebb500e2406f/53741870-ae5a-4383-aa36-82fccd1203e5-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "target_measurement",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，砾室设备的设定目标为20度，最新测量值为22度。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/3dcc1714-95c9-41ec-a71d-eca0303cec97/e73213a9-7423-4be4-a62a-f5b921931ec6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/3dcc1714-95c9-41ec-a71d-eca0303cec97/e73213a9-7423-4be4-a62a-f5b921931ec6-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "target_measurement",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前记录，砾室设备的设定目标为20度，最新测量值为22度。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/3dcc1714-95c9-41ec-a71d-eca0303cec97/e18431ab-9c1a-4f48-a64d-1a4f7b69ac5e-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/3dcc1714-95c9-41ec-a71d-eca0303cec97/e18431ab-9c1a-4f48-a64d-1a4f7b69ac5e-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "target_measurement",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据记录，砾室设备的设定目标为20度，最新测量值为22度。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/3dcc1714-95c9-41ec-a71d-eca0303cec97/5a3cd3a9-9506-4f60-9ee8-64889a2474f0-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/3dcc1714-95c9-41ec-a71d-eca0303cec97/5a3cd3a9-9506-4f60-9ee8-64889a2474f0-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "context_4",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "target_measurement",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，未包含关于砾室设备的设定目标与最新测量值的信息。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/3dcc1714-95c9-41ec-a71d-eca0303cec97/477f4dc3-24d2-4c9b-adea-d5781a63b181-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/3dcc1714-95c9-41ec-a71d-eca0303cec97/477f4dc3-24d2-4c9b-adea-d5781a63b181-trace-0.jsonl",
+      "control_path": [
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "premature_handoff_empty_reader_material",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "access_window",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，我们只知道“杉亭临时展板”不适用“旁边常设展板的全天开放规则”，但缺乏该临时展板具体的开放时间或状态确认记录。目前无法确定7月2日14:00是否可以使用。为了准确回答，我需要查询相关的历史记录以获取该展板的开放时间说明。请允许我进行检索。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/2709faef-5849-45fb-a65a-0bcefaea4009/25fcf16f-0666-445c-9fb8-57d608bedc64-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/2709faef-5849-45fb-a65a-0bcefaea4009/25fcf16f-0666-445c-9fb8-57d608bedc64-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "missed_required_originals",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "access_window",
+      "step": "repeat",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/2709faef-5849-45fb-a65a-0bcefaea4009/d2a9e7dc-d59e-4b21-92b7-acbf668f8232-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/2709faef-5849-45fb-a65a-0bcefaea4009/d2a9e7dc-d59e-4b21-92b7-acbf668f8232-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "no_answer",
+      "note": "source-task core reviewed; detailed support/view state separate",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "access_window",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，无法确定能否使用。虽然记录显示该临时展板原定的可用时间窗为7月2日13:00至15:00（含两端），且不适用毗邻永久展板的“全天开放”规则，但记录中明确指出“缺乏关于杉亭临时展板具体开放时间或状态的确认记录”。因此，仅凭现有证据，无法确认其在7月2日14:00是否实际可用。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/2709faef-5849-45fb-a65a-0bcefaea4009/3789d7c0-d1b6-4fa8-b844-14aea2fba6a4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/2709faef-5849-45fb-a65a-0bcefaea4009/3789d7c0-d1b6-4fa8-b844-14aea2fba6a4-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_false_uncertainty",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "access_window",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，虽然杉亭临时展板的原定可用时间段为7月2日13:00至15:00（包含两端点），但该时间段不适用相邻固定展板的全天开放规则。此外，现有记录中明确指出缺乏关于杉亭临时展板具体开放时间或状态的确认信息。因此，基于当前记录，无法确定7月2日14:00该展板是否可以使用。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/2709faef-5849-45fb-a65a-0bcefaea4009/dce8831c-2283-45a5-94e1-357e952af0b5-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/2709faef-5849-45fb-a65a-0bcefaea4009/dce8831c-2283-45a5-94e1-357e952af0b5-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_false_uncertainty",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "allocation_consumption",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是的，仍在分配额度内。根据已提供的记录，柳组本轮分配额度为10卷，已领取6卷，此次申请再领3卷。合并计算后总领取量为9卷（6+3），在10卷的分配额度范围内。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/6ba2b9e4-8781-47c1-a077-62b38fe42bb4/41b2454b-6785-42ce-a50b-2b825b927df9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/6ba2b9e4-8781-47c1-a077-62b38fe42bb4/41b2454b-6785-42ce-a50b-2b825b927df9-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "allocation_consumption",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是的，根据当前记录，柳组本轮分配材料额度为10卷，已实际领取6卷。此次再领3卷后，累计领取量为9卷，仍在分配额度内。此外，记录明确指出槐组分配的3卷不占用柳组额度。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/6ba2b9e4-8781-47c1-a077-62b38fe42bb4/f4dd89a9-260e-492a-85de-974a622722c1-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/6ba2b9e4-8781-47c1-a077-62b38fe42bb4/f4dd89a9-260e-492a-85de-974a622722c1-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "allocation_consumption",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是的，柳组此次再领3卷后仍在分配额度内。根据记录，柳组本轮分配额度为10卷，已实际领取6卷，此次拟再领3卷，合并计算后的总领取量为9卷，未超出分配额度。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/6ba2b9e4-8781-47c1-a077-62b38fe42bb4/d018361b-b7f9-4557-b5aa-b364eaabdb16-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/6ba2b9e4-8781-47c1-a077-62b38fe42bb4/d018361b-b7f9-4557-b5aa-b364eaabdb16-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "use_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "allocation_consumption",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是的，仍在分配额度内。根据已有记录，柳组本轮材料分配额度为10卷，此前已实际领取6卷，此次再领3卷后累计领取量为9卷，未超过10卷的分配额度限制。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/6ba2b9e4-8781-47c1-a077-62b38fe42bb4/23137871-54b2-4b0a-bb51-725a8453d8a5-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/6ba2b9e4-8781-47c1-a077-62b38fe42bb4/23137871-54b2-4b0a-bb51-725a8453d8a5-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_total",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "tool_permission",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，星台文件**尚未完成发布**。具体分析如下：\n\n1.  **获得许可**：记录显示“星台文件已获得发布许可”（来源s0）。\n2.  **仅预览未提交**：操作日志“目前只记录了预览成功，没有发布提交”（来源s1）。\n3.  **未完成判定**：根据记录中的说明，“发布完成必须有发布提交回执，许可或预览不代表完成”（来源s2）。\n\n综上，目前该文件的状态是已获得许可并成功预览，但缺少关键的发布提交回执，因此尚未正式发布。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1879d405-f5d5-4c67-b5f0-c890f3ceb60d/4153f2a3-bb68-41d1-ac1f-80f3ccdd5a25-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1879d405-f5d5-4c67-b5f0-c890f3ceb60d/4153f2a3-bb68-41d1-ac1f-80f3ccdd5a25-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "tool_permission",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据已有记录（截至2032-07-02），星台文件虽已获得发布许可且操作日志显示预览成功，但并无发布提交的记录。因发布完成必须包含发布提交回执，许可或预览均不代表发布完成，故星台文件目前尚未发布。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1879d405-f5d5-4c67-b5f0-c890f3ceb60d/8c4183f9-a68d-4228-b7fa-e12f234e06eb-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1879d405-f5d5-4c67-b5f0-c890f3ceb60d/8c4183f9-a68d-4228-b7fa-e12f234e06eb-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "context_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "tool_permission",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，星台文件目前已发布。记录显示该文件已获取发布权限，且操作日志中记录了成功的发布提交回执，符合发布完成的条件。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1879d405-f5d5-4c67-b5f0-c890f3ceb60d/7dd4bbf3-cc46-4218-8088-be807a996df8-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1879d405-f5d5-4c67-b5f0-c890f3ceb60d/7dd4bbf3-cc46-4218-8088-be807a996df8-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "tool_permission",
+      "step": "repeat",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1879d405-f5d5-4c67-b5f0-c890f3ceb60d/b646ef19-dfec-461e-9220-b3596713598f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1879d405-f5d5-4c67-b5f0-c890f3ceb60d/b646ef19-dfec-461e-9220-b3596713598f-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "no_answer",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "reservation_scope",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据现有记录，木桥展柜目前仅建立了临时预留，管理员尚未确认该预留，因此尚未为陶片展确认留位。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c5b78594-71f2-40d2-80f6-16618c4b1257/3e8f6d77-c181-46d9-8779-f396553759d2-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c5b78594-71f2-40d2-80f6-16618c4b1257/3e8f6d77-c181-46d9-8779-f396553759d2-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "reservation_scope",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，管理员尚未确认该临时预留（证据 s1）。由于临时预留需要管理员确认才能成为确认留位（证据 s0），因此木桥展柜目前尚未为陶片展确认留位。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c5b78594-71f2-40d2-80f6-16618c4b1257/16ae5828-06de-4758-a825-e1222bff4ac9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c5b78594-71f2-40d2-80f6-16618c4b1257/16ae5828-06de-4758-a825-e1222bff4ac9-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_4",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "missed_confirmation",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "reservation_scope",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是的，根据当前已提供的记录，木桥展柜已经为陶片展确认留位。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c5b78594-71f2-40d2-80f6-16618c4b1257/46c5f795-284b-4ddb-a6f1-c8ff7508c253-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c5b78594-71f2-40d2-80f6-16618c4b1257/46c5f795-284b-4ddb-a6f1-c8ff7508c253-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "reservation_scope",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，管理员已于2032-07-02T09:20:00+08:00确认木桥展柜给陶片展的留位。虽然09:00:00的记录显示尚未确认，但随后的更新表明留位已确认。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c5b78594-71f2-40d2-80f6-16618c4b1257/5803ca9e-79f3-44c9-ab64-c4d5333b0608-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/c5b78594-71f2-40d2-80f6-16618c4b1257/5803ca9e-79f3-44c9-ab64-c4d5333b0608-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "alias_binding",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，晨页项目的负责人是杜清。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/56790949-91b0-4789-8eae-a1e99be62fe0/d27d0eed-ca56-4bad-baa6-5a9f9634cc4d-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/56790949-91b0-4789-8eae-a1e99be62fe0/d27d0eed-ca56-4bad-baa6-5a9f9634cc4d-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "alias_binding",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，晨页项目的负责人是许遥。源文件e2（包含记录s3）指出，项目P17（晨页）的负责人于2032年7月2日09:20由杜清更改为许遥。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/56790949-91b0-4789-8eae-a1e99be62fe0/d9e36629-16f1-4639-96ac-0d52ea6cc7fb-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/56790949-91b0-4789-8eae-a1e99be62fe0/d9e36629-16f1-4639-96ac-0d52ea6cc7fb-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "use_view",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "alias_binding",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，\"晨页\"项目（原内部编号P17，旧称\"纸舟\"）的负责人是杜清。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/56790949-91b0-4789-8eae-a1e99be62fe0/b97bfb08-a69e-4a95-a0c9-2b901b473cb4-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/56790949-91b0-4789-8eae-a1e99be62fe0/b97bfb08-a69e-4a95-a0c9-2b901b473cb4-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_owner",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "alias_binding",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，晨页项目的负责人是杜清。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/56790949-91b0-4789-8eae-a1e99be62fe0/97fe282d-4007-4384-a61a-b16aeef6b93f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/56790949-91b0-4789-8eae-a1e99be62fe0/97fe282d-4007-4384-a61a-b16aeef6b93f-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_owner",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "relative_order",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，溪石试件的处理流程顺序为：烘干 -> 称量 -> 封存。记录显示目前溪石试件的“烘干”已完成，但“称量”尚未进行。因此，下一项必要步骤是**称量**。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/89e69751-961b-4f82-90e8-a37fd26329a4/be84c4c4-7032-4414-b033-1b0e7b563011-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/89e69751-961b-4f82-90e8-a37fd26329a4/be84c4c4-7032-4414-b033-1b0e7b563011-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "relative_order",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据已有记录，溪石试件的下一项必要步骤是称量。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/89e69751-961b-4f82-90e8-a37fd26329a4/ea3f386e-88b8-4890-8df6-c51c58857e9f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/89e69751-961b-4f82-90e8-a37fd26329a4/ea3f386e-88b8-4890-8df6-c51c58857e9f-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "relative_order",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "称量",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/89e69751-961b-4f82-90e8-a37fd26329a4/1fa3eaeb-4e6f-41ae-afdb-19a6b3d686b5-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/89e69751-961b-4f82-90e8-a37fd26329a4/1fa3eaeb-4e6f-41ae-afdb-19a6b3d686b5-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "relative_order",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，溪石试件已完成烘干，尚未称量，按照“烘干 -> 称量 -> 封存”的流程顺序，其下一项必要步骤是称量。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/89e69751-961b-4f82-90e8-a37fd26329a4/5a2e57f9-6cb3-47a2-be2e-d4fc56e8b2d0-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/89e69751-961b-4f82-90e8-a37fd26329a4/5a2e57f9-6cb3-47a2-be2e-d4fc56e8b2d0-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_process_stage",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "priority_exception",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，澄海组这份明确用于跨境样品的清单属于例外情况，须在7月3日前提交。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/25b0ebf4-bab2-4e99-aeae-387b96573d14/c9fb000b-a1f7-47ce-a23a-04943132eac1-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/25b0ebf4-bab2-4e99-aeae-387b96573d14/c9fb000b-a1f7-47ce-a23a-04943132eac1-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "priority_exception",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，澄海组一般样品清单须在7月5日前提交，但该清单明确用于**跨境样品**。根据记录说明，跨境样品清单属于例外情况，须在**7月3日**前提交。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/25b0ebf4-bab2-4e99-aeae-387b96573d14/b7494e30-7166-4451-85ee-3126f8f0e917-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/25b0ebf4-bab2-4e99-aeae-387b96573d14/b7494e30-7166-4451-85ee-3126f8f0e917-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "priority_exception",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "7月3日前",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/25b0ebf4-bab2-4e99-aeae-387b96573d14/9c1ae6d5-319e-4ab8-93c0-2204d1920fc6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/25b0ebf4-bab2-4e99-aeae-387b96573d14/9c1ae6d5-319e-4ab8-93c0-2204d1920fc6-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_deadline",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "priority_exception",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据记录，澄海组这份明确用于跨境样品的清单属于例外情况，须在7月3日前提交。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/25b0ebf4-bab2-4e99-aeae-387b96573d14/59d47f26-ec41-4c86-9a03-dccd8b1c5586-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/25b0ebf4-bab2-4e99-aeae-387b96573d14/59d47f26-ec41-4c86-9a03-dccd8b1c5586-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_deadline",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "source_correction",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，无法确定青石展在6月10日的具体登记地点。现有证据仅指出西厅举办的是白石展而非青石展，且提示登记地点可能存在录入误差，但未给出修正后的正确地点。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/e707e4fa-d3f8-45ad-8b96-350f3c2ffb21/48476d04-c27f-435a-afef-dddd1e171b63-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/e707e4fa-d3f8-45ad-8b96-350f3c2ffb21/48476d04-c27f-435a-afef-dddd1e171b63-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "missed_initial_registered_location",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "source_correction",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，青石展在6月10日的登记地点为**东厅**。虽然档案指出登记地点可能存在录入误差，但说明中明确“尚无正式更正”；同时，档案澄清西厅举办的是白石展，并非青石展。因此在缺乏其他更正信息的情况下，依据现有记录，地点仍认定为东厅。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/e707e4fa-d3f8-45ad-8b96-350f3c2ffb21/b83f4644-6c0e-4a66-80c1-9c9815113da9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/e707e4fa-d3f8-45ad-8b96-350f3c2ffb21/b83f4644-6c0e-4a66-80c1-9c9815113da9-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "source_correction",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据目前提供的档案记录，青石展在6月10日的登记地点仍为**东厅**。尽管档案指出该地点可能存在录入误差，但目前尚无正式更正。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/e707e4fa-d3f8-45ad-8b96-350f3c2ffb21/8816ef9c-70cf-4988-896e-b3acc235c8ae-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/e707e4fa-d3f8-45ad-8b96-350f3c2ffb21/8816ef9c-70cf-4988-896e-b3acc235c8ae-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_5",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "source_correction",
+      "step": "changed",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/e707e4fa-d3f8-45ad-8b96-350f3c2ffb21/7f643308-67a5-48e3-8182-d5525c14d2e3-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/e707e4fa-d3f8-45ad-8b96-350f3c2ffb21/7f643308-67a5-48e3-8182-d5525c14d2e3-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "handoff"
+      ],
+      "grade": "no_answer",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "delegation_boundary",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，云杉报告的技术复核由程羽负责（韩松将其技术复核委托给程羽），最终批准人是韩松。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/51c7beaa-14db-49fe-9c5d-79a1124e4cc1/b0224bde-0740-4547-91d4-51c55cd65f3c-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/51c7beaa-14db-49fe-9c5d-79a1124e4cc1/b0224bde-0740-4547-91d4-51c55cd65f3c-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "delegation_boundary",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，云杉报告的技术复核由程羽负责，最终批准人为韩松。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/51c7beaa-14db-49fe-9c5d-79a1124e4cc1/63fa8c89-3bea-40e6-bdb1-eba0215e8423-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/51c7beaa-14db-49fe-9c5d-79a1124e4cc1/63fa8c89-3bea-40e6-bdb1-eba0215e8423-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "delegation_boundary",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据已提供的记录，云杉报告的技术复核人为程羽，最终批准人为韩松。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/51c7beaa-14db-49fe-9c5d-79a1124e4cc1/20181ce5-62e7-4a68-bae9-d34f0cba2c94-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/51c7beaa-14db-49fe-9c5d-79a1124e4cc1/20181ce5-62e7-4a68-bae9-d34f0cba2c94-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_delegation_scope",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "delegation_boundary",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，云杉报告的技术复核人是程羽，最终批准人是韩松。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/51c7beaa-14db-49fe-9c5d-79a1124e4cc1/419521b7-b9cc-4fc5-9cc8-77339760a497-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/51c7beaa-14db-49fe-9c5d-79a1124e4cc1/419521b7-b9cc-4fc5-9cc8-77339760a497-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_delegation_scope",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "component_compatibility",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，砚台插件当前**不能**在这台引擎上启用。记录显示引擎版本（4.3）满足版本要求，但引擎尚未启用扩展模式，导致插件启用条件未完全满足。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/da6767cb-fee8-46c5-86d1-cb9071ca7c58/ebed9ec0-e8fa-42aa-ab0f-3a11a93a1a4d-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/da6767cb-fee8-46c5-86d1-cb9071ca7c58/ebed9ec0-e8fa-42aa-ab0f-3a11a93a1a4d-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "component_compatibility",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，**可以启用**。理由如下：\n1. **插件启用条件**（来源 `s0`）：引擎版本至少4.2，且启用扩展模式。\n2. **引擎版本**（来源 `s1`、`s3`）：版本为4.3，满足“至少4.2”的要求。\n3. **扩展模式状态**（来源 `s2`、`s3`）：\n   - 记录 `s2`（09:00）显示当时尚未启用。\n   - 记录 `s3`（09:20）明确指出“现已启用扩展模式”。\n   - 依据时间顺序，以最新的 `s3` 记录为准，当前扩展模式状态为已启用。\n\n综上，引擎版本与扩展模式均满足兼容条件。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/da6767cb-fee8-46c5-86d1-cb9071ca7c58/97b335d4-7f26-459c-ac32-ee9962622e21-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/da6767cb-fee8-46c5-86d1-cb9071ca7c58/97b335d4-7f26-459c-ac32-ee9962622e21-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "use_view",
+        "refresh_view",
+        "context_4",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "component_compatibility",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是的，根据现有记录，砚台插件当前能在这台引擎上启用。根据记录显示，引擎版本为 4.3，且已启用扩展模式，满足插件的启用条件。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/da6767cb-fee8-46c5-86d1-cb9071ca7c58/685d06b2-b86c-49a2-8577-bc9c7f5a3277-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/da6767cb-fee8-46c5-86d1-cb9071ca7c58/685d06b2-b86c-49a2-8577-bc9c7f5a3277-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "component_compatibility",
+      "step": "unrelated",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/da6767cb-fee8-46c5-86d1-cb9071ca7c58/13200cb7-a0bd-4124-987e-4e5312b75133-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/da6767cb-fee8-46c5-86d1-cb9071ca7c58/13200cb7-a0bd-4124-987e-4e5312b75133-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "no_answer",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "unit_conversion",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "11",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/db1ba5c3-89f8-42e4-a18c-6aaa3ce33919/c0aea84e-79a2-4c90-b5c3-f2749e8b3baf-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/db1ba5c3-89f8-42e4-a18c-6aaa3ce33919/c0aea84e-79a2-4c90-b5c3-f2749e8b3baf-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "read_0",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "unit_conversion",
+      "step": "changed",
+      "status": "FAILED",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "final_answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮保存许可: 当前未获允许。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/db1ba5c3-89f8-42e4-a18c-6aaa3ce33919/38029aed-bb11-413b-b73f-926e3f07c3ef-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/db1ba5c3-89f8-42e4-a18c-6aaa3ce33919/38029aed-bb11-413b-b73f-926e3f07c3ef-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_4",
+        "read_2",
+        "read_3",
+        "read_0",
+        "handoff"
+      ],
+      "grade": "no_answer",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "unit_conversion",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "8",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/db1ba5c3-89f8-42e4-a18c-6aaa3ce33919/1c062691-3c5c-482d-8794-35ac82e56613-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/db1ba5c3-89f8-42e4-a18c-6aaa3ce33919/1c062691-3c5c-482d-8794-35ac82e56613-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_box_quantity_and_omitted_loose_units",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "unit_conversion",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据记录，鹭池每盒为4小包，本次领用2盒，因此鹭池本次领用总量为8小包。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/db1ba5c3-89f8-42e4-a18c-6aaa3ce33919/8ade6033-5051-42e3-9c05-1782f5cfb678-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/db1ba5c3-89f8-42e4-a18c-6aaa3ce33919/8ade6033-5051-42e3-9c05-1782f5cfb678-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_box_quantity_and_omitted_loose_units",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "coverage_gap",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，无法确定榆园当天三处入口的登记总人数。记录显示东入口登记8人，南入口登记5人，西入口登记人数为未知。已知部分合计13人。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/9ed51a08-ed1b-4105-b436-a74acc59596c/43378622-c86d-49fb-bc02-7dddfcab632b-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/9ed51a08-ed1b-4105-b436-a74acc59596c/43378622-c86d-49fb-bc02-7dddfcab632b-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "coverage_gap",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，东入口登记8人，南入口登记5人，已知两入口合计13人；因西入口登记人数未知，无法得出三处入口的准确总登记人数。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/9ed51a08-ed1b-4105-b436-a74acc59596c/631b6e20-3fe6-4b3a-b573-473062d97caa-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/9ed51a08-ed1b-4105-b436-a74acc59596c/631b6e20-3fe6-4b3a-b573-473062d97caa-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "coverage_gap",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，西入口的登记人数未知，无法确定榆园当天三处入口的合计登记人数。已知东入口登记8人，南入口登记5人，已知两处合计13人。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/9ed51a08-ed1b-4105-b436-a74acc59596c/66ed8eeb-ad17-4fcc-9650-f1d8ffa77315-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/9ed51a08-ed1b-4105-b436-a74acc59596c/66ed8eeb-ad17-4fcc-9650-f1d8ffa77315-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "coverage_gap",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前提供的记录，榆园当天（2032-07-02）东入口登记8人，南入口登记5人，西入口登记人数未知。因西入口数据缺失，三处入口合计登记人数无法确定，仅已知前两处合计13人。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/9ed51a08-ed1b-4105-b436-a74acc59596c/186bf6bf-84e8-4aac-a2f5-62efce244de5-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/9ed51a08-ed1b-4105-b436-a74acc59596c/186bf6bf-84e8-4aac-a2f5-62efce244de5-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_unknown",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "conditional_reminder",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据记录，陆澈特别说明夜间工作提醒只用静默站内消息，不发邮件。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f6b44dff-e504-4aca-a866-83058f52aba4/e601ede8-f414-430f-8a57-f293cb23e961-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f6b44dff-e504-4aca-a866-83058f52aba4/e601ede8-f414-430f-8a57-f293cb23e961-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "conditional_reminder",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "静默站内消息",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f6b44dff-e504-4aca-a866-83058f52aba4/e4d75988-aee1-4b83-bff1-c63b28ca3afe-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f6b44dff-e504-4aca-a866-83058f52aba4/e4d75988-aee1-4b83-bff1-c63b28ca3afe-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "conditional_reminder",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据现有记录，应使用邮件。陆澈在09:30的指示中已取消夜间特殊渠道要求，此后工作提醒统一使用邮件。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f6b44dff-e504-4aca-a866-83058f52aba4/fb50c8bb-c5d1-40f4-85af-cd10777b41a9-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f6b44dff-e504-4aca-a866-83058f52aba4/fb50c8bb-c5d1-40f4-85af-cd10777b41a9-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "context_3",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "conditional_reminder",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "邮件",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f6b44dff-e504-4aca-a866-83058f52aba4/2c9b0aea-1283-4de7-9002-57a9f8299d8d-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/f6b44dff-e504-4aca-a866-83058f52aba4/2c9b0aea-1283-4de7-9002-57a9f8299d8d-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_7",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "n",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "return_receipt",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，白帆借出的相机尚未归还。虽然借用者表示计划当天归还，但仓库目前尚未有该相机的归还入库回执。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/048bc7d8-c124-4778-8bbb-802a908f0d43/47c1b043-e6fb-470c-835b-bf6ba711bd2c-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/048bc7d8-c124-4778-8bbb-802a908f0d43/47c1b043-e6fb-470c-835b-bf6ba711bd2c-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "qualified_unknown_as_false",
+      "note": "Correctly notes absent receipt, but asserts not returned. Source contract establishes unconfirmed return, not non-occurrence.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "return_receipt",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，白帆借出的相机尚未归还。记录显示借用者虽表示计划当天归还，但截至报告时间（2032-07-02），仓库目前仍无该相机的归还入库回执。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/048bc7d8-c124-4778-8bbb-802a908f0d43/4fe1cf7c-4a9b-4efd-8a3d-84775e939663-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/048bc7d8-c124-4778-8bbb-802a908f0d43/4fe1cf7c-4a9b-4efd-8a3d-84775e939663-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "refresh_view",
+        "context_3",
+        "handoff"
+      ],
+      "grade": "qualified_unknown_as_false",
+      "note": "Correctly notes absent receipt, but asserts not returned. Source contract establishes unconfirmed return, not non-occurrence.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "n"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "return_receipt",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，白帆借出的相机尚未归还。借用者虽表示计划当天归还，但仓库目前尚未有该相机的归还入库回执。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/048bc7d8-c124-4778-8bbb-802a908f0d43/8caf55c0-5ee2-44e3-a3d7-8ee7ff1489df-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/048bc7d8-c124-4778-8bbb-802a908f0d43/8caf55c0-5ee2-44e3-a3d7-8ee7ff1489df-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "use_view",
+        "context_0",
+        "handoff"
+      ],
+      "grade": "qualified_unknown_as_false",
+      "note": "Correctly notes absent receipt, but asserts not returned. Source contract establishes unconfirmed return, not non-occurrence.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "return_receipt",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，白帆借出的相机**尚未归还**。记录显示仓库目前**没有该相机的归还证明**。虽然借用人曾表达过归还计划，且另有计划归还三脚架，但相机本身并未显示已归还。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/048bc7d8-c124-4778-8bbb-802a908f0d43/0c795707-be03-4c90-aa13-5aafb5aa7099-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/048bc7d8-c124-4778-8bbb-802a908f0d43/0c795707-be03-4c90-aa13-5aafb5aa7099-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "missed_actual_matching_receipt",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "membership_expiry",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，槐舟的临时借阅资格于2032年6月30日到期，且截至2032年7月2日没有延期记录（资格到期自动失效）。因此，该资格在2032年7月2日已无效。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1718cb3d-0bb8-4d61-8989-dbe8512eb60c/9459fd5d-5b5d-4a30-aac3-ef7faf02a0bd-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1718cb3d-0bb8-4d61-8989-dbe8512eb60c/9459fd5d-5b5d-4a30-aac3-ef7faf02a0bd-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "membership_expiry",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，到2032年7月2日，槐舟的临时借阅资格**已失效**（无效）。\n\n**依据如下：**\n1. **原始有效期截止：** 记录显示槐舟的临时借阅资格原定有效期至 **2032年6月30日**。\n2. **当前时间：** 查询日期为 **2032年7月2日**，已晚于原定有效期。\n3. **无延期记录：** 截至报告日，没有任何关于该资格延期的记录。\n4. **自动过期规则：** 除非明确延期，否则资格在到期后自动失效。\n\n因此，该资格在7月2日已过期。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1718cb3d-0bb8-4d61-8989-dbe8512eb60c/db5500a6-8e76-4193-93cf-bdc4489e76fc-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1718cb3d-0bb8-4d61-8989-dbe8512eb60c/db5500a6-8e76-4193-93cf-bdc4489e76fc-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "membership_expiry",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，到2032年7月2日，槐舟的临时借阅资格已失效。记录指出，该资格的最初有效期截止至2032年6月30日，且截至当前日期没有关于该资格延期的任何记录，因此资格已自动过期。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1718cb3d-0bb8-4d61-8989-dbe8512eb60c/13b38521-9f16-4b0a-997e-956dc456ede6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1718cb3d-0bb8-4d61-8989-dbe8512eb60c/13b38521-9f16-4b0a-997e-956dc456ede6-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_expiry",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "membership_expiry",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "是的，根据提供的记录，到2032年7月2日，槐舟的临时借阅资格仍然有效。记录显示，其资格虽原定于2032年6月30日到期，但管理员已确认将其延长至2032年7月10日。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1718cb3d-0bb8-4d61-8989-dbe8512eb60c/92f577ae-2c28-49c0-a743-c19b97b97b06-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/1718cb3d-0bb8-4d61-8989-dbe8512eb60c/92f577ae-2c28-49c0-a743-c19b97b97b06-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "disjoint_constraints",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，目前风铃组出库需要两人复核，而海铃组出库只需要一人复核。两者的流程独立，要求不同。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/5a750eae-1732-45dc-a303-c68207e56b49/99eb9031-3299-40e5-8165-812f47412a53-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/5a750eae-1732-45dc-a303-c68207e56b49/99eb9031-3299-40e5-8165-812f47412a53-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_2",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "disjoint_constraints",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据最新提供的记录（报告时间为2032-07-02T09:20:00），风铃组目前的出库复核要求为两人复核，海铃组目前的出库复核要求为三人复核。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/5a750eae-1732-45dc-a303-c68207e56b49/196f1586-4d46-4486-aeb8-c0cd82b3d926-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/5a750eae-1732-45dc-a303-c68207e56b49/196f1586-4d46-4486-aeb8-c0cd82b3d926-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "context_4",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "disjoint_constraints",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前最新提供的记录（报告时间为2032-07-02T09:20:00），两组的出库复核要求如下：\n\n*   **风铃组**：目前的出库复核要求为**两人复核**。\n*   **海铃组**：目前的出库复核要求为**三人复核**。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/5a750eae-1732-45dc-a303-c68207e56b49/3990ae78-d00c-4576-b2ab-351ea3cf29cc-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/5a750eae-1732-45dc-a303-c68207e56b49/3990ae78-d00c-4576-b2ab-351ea3cf29cc-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "read_5",
+        "read_4",
+        "read_3",
+        "read_1",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": null
+    },
+    {
+      "history": "disjoint_constraints",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据最新记录（报告时间为2032年7月2日09:20），目前风铃组的出库复核要求为**两人复核**，海铃组的出库复核要求为**三人复核**。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/5a750eae-1732-45dc-a303-c68207e56b49/4dae1523-2fe8-4454-9607-3fa0d9e79e15-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/5a750eae-1732-45dc-a303-c68207e56b49/4dae1523-2fe8-4454-9607-3fa0d9e79e15-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "search",
+        "context_4",
+        "read_2",
+        "context_0",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "n",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "measurement_replacement",
+      "step": "cold",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据已有记录，镜湾样品第一次称量最初登记为18克，第二次独立称量得到19克。由于两次称量属于独立操作，且第二次称量未声明更正第一次，后次结果不自动覆盖前次，因此第一次称量最终应采用的结果是18克。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/4fd7c976-a521-4589-b624-ebd95012533b/78ec2354-4132-44d4-b487-6cd79883c665-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/4fd7c976-a521-4589-b624-ebd95012533b/78ec2354-4132-44d4-b487-6cd79883c665-trace-0.jsonl",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "before",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": true,
+      "opened_view_current_state_valid": true
+    },
+    {
+      "history": "measurement_replacement",
+      "step": "changed",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据当前已提供的记录，镜湾样品第一次称量最终应采用的结果是17克。\n\n依据如下：\n1. 第一次称量最初登记为18克。\n2. 第二次称量得到19克，但属于独立操作，且未声明更正第一次结果，因此不能自动覆盖前次登记。\n3. 记录中明确提到“计量员正式更正第一次称量”，指出18克为录入错误，正确值为17克。因此，经正式更正后的17克为最终采用结果。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/4fd7c976-a521-4589-b624-ebd95012533b/0d3b1c35-9f73-431d-a0a5-d400527cae36-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/4fd7c976-a521-4589-b624-ebd95012533b/0d3b1c35-9f73-431d-a0a5-d400527cae36-trace-0.jsonl",
+      "control_path": [
+        "search",
+        "use_view",
+        "context_2",
+        "handoff"
+      ],
+      "grade": "correct",
+      "note": "Core answer matches the authored source-task contract.",
+      "source_context": "after",
+      "delivered_original_ids": [
+        "a",
+        "b",
+        "c",
+        "u"
+      ],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": true,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "measurement_replacement",
+      "step": "unrelated",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "根据提供的记录，镜湾样品第一次称量最初登记为18克，且第二次称量未声明更正第一次，故最终采用的结果为18克。",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/4fd7c976-a521-4589-b624-ebd95012533b/7d07ad84-a6ad-47d8-8183-caf056f90b45-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/4fd7c976-a521-4589-b624-ebd95012533b/7d07ad84-a6ad-47d8-8183-caf056f90b45-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_first_measurement",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    },
+    {
+      "history": "measurement_replacement",
+      "step": "repeat",
+      "status": "COMPLETED",
+      "error": null,
+      "final_answer": "18克",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/4fd7c976-a521-4589-b624-ebd95012533b/77450162-f9a4-4899-b81f-e3481fe6dbd8-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t2-train-own-rollouts-v1/laya/banks/4fd7c976-a521-4589-b624-ebd95012533b/77450162-f9a4-4899-b81f-e3481fe6dbd8-trace-0.jsonl",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "grade": "wrong",
+      "note": "stale_first_measurement",
+      "source_context": "after",
+      "delivered_original_ids": [],
+      "original_identity_ambiguous": false,
+      "reviewed_raw_proof_delivered": false,
+      "view_task_sufficient": false,
+      "opened_view_current_state_valid": false
+    }
+  ],
+  "qualifications": [
+    "All7length failures and their paid costs retained; no rerun or answer repair.",
+    "Only24original training families are used; all newly labelled prefixes stay train-only. The original8dev families remain separate.",
+    "Missing receipt is not proof of non-occurrence;3return answers are qualified rather than counted as fully correct.",
+    "Some correct answers coexist with defective view graphs; literal task adequacy and full current-state validity remain separate.",
+    "Published revision failure occurs despite explicit replacement evidence; not every error is retrieval omission.",
+    "View adequacy false means not an unqualified current-task basis; it may still contain useful premises a Reader can repair. Preferences are not exhaustive legality or long-term optimality.",
+    "No claim of learned-policy improvement until the aggregation is actually fitted and evaluated in the matched Host.",
+    "Model inference compute is charged in the original ledger; all new offline preparation/review phases remain pending while the serial model queue lives."
+  ]
+}

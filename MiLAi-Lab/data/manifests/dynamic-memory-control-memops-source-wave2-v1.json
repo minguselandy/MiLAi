@@ -1,0 +1,348 @@
+{
+  "version": "dynamic-memory-control-memops-source-wave2-v1",
+  "scope": "Six additional preallocated training backgrounds,18chronological cuts plus repeats. Not six new independent reasoning templates; reflects external synthetic linguistic/source variation. No held-family semantic content used.",
+  "source": "https://github.com/MemTensor/MemOps",
+  "license": "MIT; original literal sources retained locally with upstream LICENSE",
+  "source_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main/generated_result/2-evidence_conversation",
+  "family_assignments": [
+    {
+      "A01": "train",
+      "B02": "train",
+      "C01": "train",
+      "D11": "train",
+      "E07": "train",
+      "F06": "train"
+    },
+    {
+      "A01": "train",
+      "B02": "train",
+      "C01": "train",
+      "D11": "train",
+      "E07": "train",
+      "F06": "train"
+    }
+  ],
+  "assignment_evidence": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/memops-families-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/data/manifests/jev-memops-families-v1.json"
+  ],
+  "reviewer": "Codex author, method visible; task/source contracts and sufficient original-user witnesses, not model-view grades or operation gold",
+  "source_boundary": "Use chronological original role/content only. No target_fact, operations, difficulty knobs, segment descriptions or source answer fields in Host input. Stop each cut on the actual user turn before the next assistant response. Unknown calendar dates remain unknown.",
+  "cases": [
+    {
+      "family": "A01",
+      "file": "A01_update.json",
+      "query": "According to my confirmed reports so far, what are my current title, base salary and direct manager at Bridgemark Solutions? Distinguish current facts from any title change that is only planned, and say when a requested detail has not yet been supplied.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            5
+          ],
+          "answer": "Current title Data Analyst, corrected from Junior Data Analyst; direct manager Diane Kowalski. Salary has not yet been supplied and no future title change is established in this prefix.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            3
+          ],
+          "answer": "Current title Senior Data Analyst, effective immediately/as of the reported yesterday; annual base salary74500, not72000; manager Diane Kowalski. Do not invent a calendar date for yesterday.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Senior Data Analyst,74500annual base, Diane Kowalski. Lead Data Analyst is a not-yet-finalized next-quarter plan; old templates and other departments do not change the current title.",
+          "support_sets": [
+            [
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Previously exposed training background; counted as a newly admitted source in this intake, not a new unseen family. Historical freelance withdrawal is not an executed Store deletion here."
+    },
+    {
+      "family": "B02",
+      "file": "B02_remember.json",
+      "query": "Using the provided conversation, how should I arrange Danny’s birthday mailing and heads-up? State the established address, arrival deadline, approximate sending window and preferred contact channel; keep other people’s details separate and do not invent missing dates.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Danny:2731 North Kedzie Avenue, Apartment4B, Logan Square, Chicago. Text is preferred over calls. Birthday/arrival date and a sending window have not yet been supplied.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Use Danny’s established2731 North Kedzie Avenue Apartment4B address; arrive by October17, send about two weeks earlier/early October (approximately October3). Prefer text. Do not invent a year or guaranteed shipping duration.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t1",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same Danny address, arrival by October17 and early-October sending window; text a heads-up. Rachel’s2745/Apartment2A is a different person’s address and must not replace Danny’s.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1",
+              "s2t3",
+              "s3t1",
+              "s3t3"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Public synthetic contact-history data; this is source-contained planning, not actual mailing, contact verification or an external shipment."
+    },
+    {
+      "family": "C01",
+      "file": "C01_update.json",
+      "query": "What is the latest firm BrightFix quote in my records, and what is actually reported about the fan installation status? Separate firm quotes from conditional or third-party prices, and a planned installation from a completed one.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Firm BrightFix quote corrected to240 for parts/labor, not220. No completed installation is reported; the project was shelved and is being revisited.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            5
+          ],
+          "answer": "Latest firm BrightFix quote260; user plans DIY installation on May10. Purchase of the fan is reported, but an installation plan is not a completed installation.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Firm reference quote remains260.245requires an undecided dryer-cleaning bundle;210was not a firm offer and230is another person’s contractor. Fan is still boxed, with May10DIY installation planned.",
+          "support_sets": [
+            [
+              "s2t3",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Contains an unrelated historical request to forget a cousin lead at[2,7]. Source capture does not execute it; this query does not evaluate deletion or actual electrical work."
+    },
+    {
+      "family": "D11",
+      "file": "D11_reflect.json",
+      "query": "What does the conversation support about the restaurant atmosphere and food I prefer, and which place is my established regular choice? Distinguish a suggested or tentative visit from a confirmed new preference.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Olive & Thyme is the go-to; user values soft/warm light, low noise and comfortable solo seating. Usual cauliflower flatbread with green salad is established; avoid a universal dietary or personality inference.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Olive & Thyme remains the only regular restaurant. Quiet, calm, uncramped settings including the patio and lighter/simple flavors are supported; rich risotto was not preferred.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Olive & Thyme remains the comfortable regular choice; quiet surroundings and lighter food remain supported. Green Fork’s live music is a concern; Basil & Vine’s rooftop is attractive but the DJ makes a visit tentative, not an established shift toward loud dining.",
+          "support_sets": [
+            [
+              "s2t5",
+              "s2t7",
+              "s3t3",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "A restaurant-preference reflection background, not a distinct general-purpose reasoning mechanism merely because names/settings differ."
+    },
+    {
+      "family": "E07",
+      "file": "E07_reflect.json",
+      "query": "What common pattern is supported by my food, drink and leisure habits so far, which change in routine is still tentative, and what personal hydration target did I actually report? Keep the inference tied to my examples and distinguish my target from generic suggestions.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Food/drink examples support plain, clean, unadorned flavors: unsweetened green tea and plain rice crackers. Leisure pattern is not yet established. Reported personal target is2.5liters/day; do not turn this report into medical advice.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Simple/clean food and quiet, low-stimulation leisure are supported by tea/crackers, pond lunches and solo hikes. Personal target remains2.5liters/day. Keep the inference bounded to described preferences.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s2t1",
+              "s2t5",
+              "s2t7"
+            ],
+            [
+              "s1t7",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Simple, quiet preferences and2.5liter personal target remain.3liters on a form is a generic suggestion explicitly rejected. Maya has reportedly signed the user up for a group, but trying it this Saturday and replacing the weekly solo routine remain tentative; actual weekly attendance is not established.",
+          "support_sets": [
+            [
+              "s2t7",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Source reports about habits and a clinician-set number, not independent medical verification or a recommendation to the user."
+    },
+    {
+      "family": "F06",
+      "file": "F06_reflect.json",
+      "query": "What qualities in the activities I have described seem to help me cope during this period? Distinguish reported experiences from plans or other people’s suggestions, and keep conclusions limited to the period and examples described.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Reported evening river walks and simple cooking are quiet, intentional, largely solitary and grounding in the post-breakup period. Do not infer a lifelong identity or a clinical outcome.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "The pattern extends to bookstore browsing and ceramics reading: quiet, solitary and low-stimulation activities currently help. Earlier social habits and the sister’s recovery timeline do not establish a universal personality or predict recovery.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Quiet, intentional, aesthetically rich/nourishing activities remain central. Pottery signup and agreeing to a gentle gallery visit are reported commitments, while attendance is still future. Small calm social settings may fit; the cousin’s running-club suggestion is not the user’s preference.",
+          "support_sets": [
+            [
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Bounded reflection on synthetic reported experience; not a diagnosis, treatment advice or a claim that planned social events already occurred."
+    }
+  ]
+}
