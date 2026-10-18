@@ -41,7 +41,25 @@ absence. Do not hand-repair states or label scripted choices as gold. Full revie
 06a5384f history READ/actual event content;511b1872 Writer guidance;8bb64192 direct refresh,
 visibility filtering and sole-action dispatch.36related tests, Ruff/mypy passed for latest fix.
 No subagents, Source/operation data must exclude offline answers from model inputs.
-No CE training, multi-slot,128/32expansion, own-policy trajectories, newholdout or completion claim.
+T0 LABELS COMPLETE (author source-task preferences, not exhaustive legality or QA gold):
+operation-labels-v1:373train/125dev labelled states,59forcedsingleaction masks;24/8families.
+All557model inputs unchanged,1081candidate reconstructions match actual prefixes;max4301tokens,
+no truncation. View review64stages:43task-text adequate, graph/time defects separately retained.
+No teacher choice copying or hand-repair of stored views. Label preparation/length audit billed once.
+
+T0 CE TRAINING LIVE: artifacts/dynamic-memory-control/t0-ce-v1/seed0/run.json,
+PID623006, exec14845, frozen imports edf087d3. BASE native encoder+head, softCE, seed0,
+96fixedupdates,1536draws,event/family weighting,option shuffle; GPUs2,3. No old open-only weights.
+Latest observed68updates; diagnostics0=93/125 matched,48=101/125 but23handoffs outside preference.
+Do not call offline preference matching task success or tune/select a checkpoint from it.
+Final saved checkpoint path: t0-ce-v1/seed0/checkpoint; only use after terminal COMPLETED.
+
+Own-policy QA QUEUED: t0-rollout-dispatch-v1.json, waiterPID639365, exec30496.
+It waits for actual training process exit and success, then runs BASE and final96 CE sequentially,
+32positions each, independent empty banks, same8development families and actual normal Host.
+Runtime imports remain edf087d3; frozen inputs t0-rollout-inputs-v1. No heldout claim.
+Revalidate processes and handles before continuing; no automatic retry or old-root restart.
+No multi-slot,128/32expansion,T2own-prefix fitting,newholdout or full-goal completion yet.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.
