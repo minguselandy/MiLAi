@@ -19,8 +19,11 @@ from milai_lab.methods.evidence_reading import (
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
 from milai_lab.methods.query_structure import (
     build_query_structure,
-    cached_structure,
+    cached_structures,
+    next_structure_slot,
     open_structure,
+    structure_slots,
+    touch_structure,
 )
 
 
@@ -41,6 +44,7 @@ class EvidenceOperations:
         refresh_call: Callable[[list[dict[str, str]], dict[str, Any]], dict[str, Any]],
         fits: Callable[[list[dict[str, Any]]], bool],
         excluded_source_refs: tuple[str, ...] = (),
+        view_capacity: int = 1,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
@@ -48,35 +52,57 @@ class EvidenceOperations:
         self.opened: dict[int, dict[str, Any]] = {}
         self.attempted: set[tuple[int, bool]] = set()
         self.searched = False
-        self.used = False
-        self.refreshed_inputs: set[tuple[str, ...]] = set()
+        self.view_capacity = view_capacity
+        self.used: set[str] = set()
+        self.refreshed_inputs: set[tuple[str, tuple[str, ...], bool]] = set()
         self.history_pages: dict[str, dict[str, Any]] = {}
         self.visibility_epoch = service.forget_epoch
-        self.view = cached_structure(service)
-        # D1 scans once, explicitly measured; D4 replaces this with an incremental feed.
+        self.views = cached_structures(service, view_capacity)
         started = time.perf_counter()
-        self.events = [s for s in service.sources() if s["event_id"] not in excluded_source_refs]
-        state.budget["source_inventory_wall_seconds"] = time.perf_counter() - started
-        cursor = self.view["arrival_cursor"] if self.view else []
-        arrivals = [s for s in self.events if [s["observed_at"], s["event_id"]] > cursor]
-        state.new_events = [{"source_ref": s["event_id"], "role": s["role"],
-            "content": body_text(s), "origin": s.get("origin"),
+        cursors = [v["arrival_cursor"][0] for v in self.views.values() if v["arrival_cursor"]]
+        since = min(cursors) if cursors else None
+        feed = service.source_arrivals(since)
+        boundary_views = [v for v in self.views.values()
+                          if v["arrival_cursor"] and v["arrival_cursor"][0] == since]
+        seen = set.intersection(*(set(v.get("arrival_boundary_refs", [v["arrival_cursor"][1]]))
+                                  for v in boundary_views)) if boundary_views else set()
+        arrivals = [e for e in feed["events"] if e["event_id"] not in excluded_source_refs
+                    and (e["observed_at"] != since or e["event_id"] not in seen)]
+        by_ref = {e["event_id"]: e for e in arrivals}
+        bound_refs = {b["source_ref"] for view in self.views.values()
+                      for b in view["source_bindings"].values()}
+        for ref in bound_refs - set(by_ref):
+            source = service.source(ref)
+            if source is not None and ref not in excluded_source_refs:
+                by_ref[ref] = source
+        self.events = list(by_ref.values())
+        state.budget.update(source_inventory_wall_seconds=time.perf_counter() - started,
+            visible_sources_enumerated=len(self.events), source_feed_rows=feed["rows_materialized"],
+            source_discovery=feed["query"], bound_source_lookups=len(bound_refs))
+        state.new_events = [{"source_ref": e["event_id"], "role": e["role"],
+            "content": body_text(e), "origin": e.get("origin"),
             "delivery": "controller_observation; Reader uses visible_evidence",
-            "reported_at": s.get("occurred_at"), "captured_at": s["observed_at"]}
-            for s in arrivals]
-        state.budget["visible_sources_enumerated"] = len(self.events)
+            "reported_at": e.get("occurred_at"), "captured_at": e["observed_at"]}
+            for e in arrivals]
         self.view_observation(state)
 
-    def view_observation(self, state: MemoryControlState) -> dict[str, Any] | None:
-        if self.view is None:
-            return None
-        opened = open_structure(self.service, self.view)
-        state.views = [{"id": self.view["id"], "scope": opened.get("index_text"),
-            "revision": self.view["revision"], "visibility": opened["visibility"],
-            "pending_events": [e["source_ref"] for e in state.new_events
-                if [e["captured_at"], e["source_ref"]] > self.view["arrival_cursor"]],
-            "source_bindings": self.view["source_bindings"],
-            "semantics": "binding status is not semantic correctness"}]
+    @staticmethod
+    def pending(view: dict[str, Any], event: dict[str, Any]) -> bool:
+        cursor = view["arrival_cursor"]
+        if not cursor:
+            return True
+        return (event["captured_at"] > cursor[0] or (event["captured_at"] == cursor[0]
+            and event["source_ref"] not in view.get("arrival_boundary_refs", [cursor[1]])))
+
+    def view_observation(self, state: MemoryControlState) -> dict[str, dict[str, Any]]:
+        opened = {slot: open_structure(self.service, item) for slot, item in self.views.items()}
+        state.views = [{"id": view["id"], "slot": slot,
+            "scope": opened[slot].get("index_text"), "built_for": opened[slot].get("built_for"),
+            "revision": view["revision"], "visibility": opened[slot]["visibility"],
+            "pending_events": [e["source_ref"] for e in state.new_events if self.pending(view, e)],
+            "source_bindings": view["source_bindings"],
+            "semantics": "binding/inventory status is not semantic correctness or full coverage"}
+            for slot, view in self.views.items()]
         return opened
 
     def refresh_visibility(self, state: MemoryControlState) -> None:
@@ -98,19 +124,18 @@ class EvidenceOperations:
         self.history_pages.clear()
         self.view_observation(state)
 
-    def refresh_refs(self, state: MemoryControlState) -> tuple[str, ...]:
+    def refresh_refs(self, state: MemoryControlState, slot: str) -> tuple[str, ...]:
+        view = self.views.get(slot)
         visible = {s["event_id"] for s in self.events}
-        arrivals = {e["source_ref"] for e in state.new_events
-                    if not self.view or [e["captured_at"], e["source_ref"]]
-                    > self.view["arrival_cursor"]}
-        prior = ({b["source_ref"] for b in self.view["source_bindings"].values()}
-                 if self.view else set())
+        arrivals = {e["source_ref"] for e in state.new_events if not view or self.pending(view, e)}
+        prior = {b["source_ref"] for b in view["source_bindings"].values()} if view else set()
         refs = (set(self.source_refs()) or (prior | arrivals)) & visible
-        changed_input = (not self.view or arrivals or refs != set(self.view["retrieved_sources"])
-            or self.view.get("built_for") != state.task["request"]
-            or self.view["query_time"] != state.task["query_time"]
-            or state.views[0]["visibility"] != "visible")
-        return tuple(sorted(refs)) if changed_input else ()
+        metadata = next((v for v in state.views if v["slot"] == slot), None)
+        changed = (not view or arrivals or refs != set(view["retrieved_sources"])
+            or view.get("built_for") != state.task["request"]
+            or view["query_time"] != state.task["query_time"]
+            or (metadata is not None and metadata["visibility"] != "visible"))
+        return tuple(sorted(refs)) if changed else ()
 
     def source_refs(self) -> tuple[str, ...]:
         return tuple(sorted({span["source_ref"] for item in self.opened.values()
@@ -176,12 +201,31 @@ class EvidenceOperations:
                         f"candidate {i} stored-version directory", {"index": i,
                             "history_directory": True,
                             "cursor": page["next_cursor"] if page else None}))
-        if self.view and not self.used and state.views[0]["visibility"] == "visible":
-            actions.append(MemoryAction("use_view", "USE_VIEW", self.view["id"]))
-        refs = self.refresh_refs(state)
-        if refs and refs not in self.refreshed_inputs:
-            actions.append(MemoryAction("refresh_view", "REFRESH_VIEW", "current source scope",
-                                       {"source_refs": list(refs)}))
+        for slot in structure_slots(self.view_capacity):
+            view = self.views.get(slot)
+            meta = next((v for v in state.views if v["slot"] == slot), None)
+            suffix = "" if self.view_capacity == 1 else "_" + slot
+            if view and slot not in self.used and meta and meta["visibility"] == "visible":
+                actions.append(MemoryAction("use_view" + suffix, "USE_VIEW", view["id"],
+                                            {"slot": slot}))
+            if view is None and self.view_capacity > 1:
+                continue
+            refs = self.refresh_refs(state, slot)
+            if refs and (slot, refs, False) not in self.refreshed_inputs:
+                actions.append(MemoryAction("refresh_view" + suffix, "REFRESH_VIEW",
+                    view["id"] if view else "current source scope",
+                    {"source_refs": list(refs), "slot": slot}))
+        if self.view_capacity > 1:
+            refs = tuple(sorted(set(self.source_refs()) or {
+                event["source_ref"] for event in state.new_events}))
+            duplicate = any(v.get("built_for") == state.task["request"]
+                and set(v["retrieved_sources"]) == set(refs)
+                and v["query_time"] == state.task["query_time"] for v in self.views.values())
+            slot = next_structure_slot(self.service, self.view_capacity)
+            if refs and not duplicate and (slot, refs, True) not in self.refreshed_inputs:
+                actions.append(MemoryAction("new_view", "REFRESH_VIEW", "new selected source scope",
+                    {"slot": slot, "source_refs": list(refs), "new_scope": True,
+                     "replaces": self.views[slot]["id"] if slot in self.views else None}))
         actions.append(MemoryAction("handoff", "HANDOFF", "Reader with opened evidence"))
         return actions
 
@@ -235,27 +279,35 @@ class EvidenceOperations:
             if not self.fits(project_packs(list(trial.values()), list(trial))):
                 return {"ok": False, "status": "material_budget_exhausted", "index": i}
             self.opened = trial
+            known = {source["event_id"] for source in self.events}
+            for ref in self.source_refs():
+                if ref not in known and (source := self.service.source(ref)) is not None:
+                    self.events.append(source)
+                    known.add(ref)
             self._deliver(state)
             state.pending_candidates = [c for c in state.pending_candidates
                                         if c["item_index"] != i]
             return {"ok": item.get("body_delivered") is not False,
                     "status": "opened", "index": i, "visibility": item.get("visibility")}
         if action.kind == "USE_VIEW":
-            assert self.view is not None
-            observed = self.view_observation(state)
-            assert observed is not None
-            item = observed
-            self.used = True
+            slot = action.parameters.get("slot", "current")
+            item = self.view_observation(state)[slot]
+            self.used.add(slot)
+            if self.view_capacity > 1:
+                touch_structure(self.service, slot)
         elif action.kind == "REFRESH_VIEW":
             refs = tuple(action.parameters["source_refs"])
-            self.refreshed_inputs.add(refs)
+            slot = action.parameters.get("slot", "current")
+            replace = action.parameters.get("new_scope", False)
+            self.refreshed_inputs.add((slot, refs, replace))
             events = [s for e in self.events
                       if (s := self.service.source(e["event_id"])) is not None]
             try:
                 built, report = build_query_structure(self.service, state.task["request"],
                     state.task["query_time"], list(refs), policy="incremental",
                     call=self.refresh_call,
-                    source_events=events, force_refresh=True)
+                    source_events=events, force_refresh=True, slot=slot,
+                    capacity=self.view_capacity, replace_slot=replace)
             except (FunctionalRejection, ValidationError) as error:
                 # These checks precede the cache write. Preserve a definite failure
                 # as feedback; the attempted input cannot silently be regenerated.
@@ -263,15 +315,14 @@ class EvidenceOperations:
                         "error_type": type(error).__name__, "reason": str(error)}
             if built is None:
                 return {"ok": False, "status": "empty_source_pool", "report": report}
-            self.view = copy.deepcopy(built)
-            observed = self.view_observation(state)
-            assert observed is not None
-            item = observed
-            self.used = True
+            self.views[slot] = copy.deepcopy(built)
+            item = self.view_observation(state)[slot]
+            self.used.add(slot)
         else:
             raise ValueError(f"Non-executable operation: {action.kind}")
         item["query_time"] = state.task["query_time"]
-        trial = {**self.opened, -1: item}
+        view_index = -1 - structure_slots(self.view_capacity).index(slot)
+        trial = {**self.opened, view_index: item}
         delivered = self.fits(project_packs(list(trial.values()), list(trial)))
         if delivered:
             self.opened = trial
@@ -280,7 +331,7 @@ class EvidenceOperations:
         return {"ok": available and delivered,
                 "status": ("material_budget_exhausted" if not delivered else
                            "view_opened" if available else item["visibility"]),
-                "view_id": item["id"], "revision": self.view["revision"],
+                "view_id": item["id"], "revision": self.views[slot]["revision"],
                 **({"report": report} if action.kind == "REFRESH_VIEW" else {})}
 
     def reader_evidence(self) -> list[dict[str, Any]]:

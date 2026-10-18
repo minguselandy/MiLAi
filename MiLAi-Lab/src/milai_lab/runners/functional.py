@@ -2746,6 +2746,7 @@ def message(
                         admit=lambda: model.reserve_external_request("memory_control"),
                         record=trace)
                     memory_options["control_steps"] = control.get("max_control_steps", 8)
+                    memory_options["control_view_capacity"] = control.get("view_capacity", 1)
                     memory_options["control_record"] = trace
                     memory_options["control_available"] = lambda: (
                         model.calls_in_message < settings["max_calls_per_message"] - 2)

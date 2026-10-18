@@ -96,10 +96,41 @@ def open_structure(service: MemoryService, item: dict[str, Any]) -> dict[str, An
     return copy.deepcopy(item)
 
 
-def cached_structure(service: MemoryService) -> dict[str, Any] | None:
+def cached_structure(service: MemoryService, slot: str = "current") -> dict[str, Any] | None:
     """Locate the existing slot without triggering retrieval or generation."""
-    item = service.store.get((*service.namespace, "query_structure_v1"), "current")
+    item = service.store.get((*service.namespace, "query_structure_v1"), slot)
     return copy.deepcopy(item.value) if item else None
+
+
+def structure_slots(capacity: int) -> list[str]:
+    if capacity not in (1, 2, 4):
+        raise ValueError("QUERY_STRUCTURE_CAPACITY_INVALID")
+    return ["current", *(f"slot{i}" for i in range(1, capacity))]
+
+
+def cached_structures(service: MemoryService, capacity: int) -> dict[str, dict[str, Any]]:
+    return {slot: item for slot in structure_slots(capacity)
+            if (item := cached_structure(service, slot)) is not None}
+
+
+def touch_structure(service: MemoryService, slot: str) -> None:
+    namespace = (*service.namespace, "query_structure_v1")
+    previous = service.store.get(namespace, "slot_recency")
+    order = previous.value["slots"] if previous else []
+    service.store.put(namespace, "slot_recency",
+                      {"slots": [s for s in order if s != slot] + [slot]},
+                      index=False)
+
+
+def next_structure_slot(service: MemoryService, capacity: int) -> str:
+    slots = structure_slots(capacity)
+    occupied = cached_structures(service, capacity)
+    for slot in slots:
+        if slot not in occupied:
+            return slot
+    recency = service.store.get((*service.namespace, "query_structure_v1"), "slot_recency")
+    order = recency.value["slots"] if recency else slots
+    return next(slot for slot in order if slot in occupied)
 
 
 def build_query_structure(
@@ -108,6 +139,9 @@ def build_query_structure(
     call: Callable[[list[dict[str, str]], dict[str, Any]], dict[str, Any]],
     source_events: list[dict[str, Any]] | None = None,
     force_refresh: bool = False,
+    slot: str = "current",
+    capacity: int = 1,
+    replace_slot: bool = False,
 ) -> tuple[dict[str, Any] | None, dict[str, Any]]:
     """Reuse, reconstruct or incrementally refresh the same actually retrieved scope.
 
@@ -120,8 +154,10 @@ def build_query_structure(
         raise ValueError("QUERY_STRUCTURE_POLICY_INVALID")
     started = time.perf_counter()
     namespace = (*service.namespace, "query_structure_v1")
-    cached = service.store.get(namespace, "current")
-    prior = copy.deepcopy(cached.value) if cached else None
+    if slot not in structure_slots(capacity):
+        raise ValueError("QUERY_STRUCTURE_SLOT_INVALID")
+    cached = service.store.get(namespace, slot)
+    prior = copy.deepcopy(cached.value) if cached and not replace_slot else None
     events = service.sources() if source_events is None else source_events
     by_ref = {source["event_id"]: source for source in events}
     pool = sorted(set(source_refs) & set(by_ref))
@@ -136,7 +172,8 @@ def build_query_structure(
                             "hidden-row scan count unobserved",
         "retrieved_sources": len(pool), "new_arrivals": len(arrivals), "model_calls": 0,
         "source_bodies_delivered": 0,
-        "cache_capacity": 1, "query_time": date,
+        "cache_capacity": capacity, "slot": slot, "replaced_view": cached.value["id"]
+        if cached and replace_slot else None, "query_time": date,
         "scope_claim": "retrieved scope plus new arrivals, not full-history semantic coverage"}
     if not force_refresh and policy != "rebuild" and valid and prior is not None \
             and prior["retrieved_sources"] == pool and not arrivals:
@@ -209,11 +246,15 @@ def build_query_structure(
             raise FunctionalRejection("QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE")
     structure = {"scope": response["scope"], "nodes": nodes, "rules": rules,
                  "unresolved": response["unresolved"]}
-    revision = prior["revision"] + 1 if prior else 1
-    item = {"id": f"query-structure:{revision}", "kind": "query_structure", "policy": policy,
+    revision = cached.value["revision"] + 1 if cached else 1
+    identifier = (f"query-structure:{revision}" if slot == "current"
+                  else f"query-structure:{slot}:{revision}")
+    item = {"id": identifier, "kind": "query_structure", "policy": policy,
         "revision": revision, "structure": structure, "source_bindings": bindings,
-        "built_for": question,
+        "built_for": question, "slot": slot,
         "arrival_cursor": cursor, "retrieved_sources": pool, "query_time": date,
+        "arrival_boundary_refs": [s["event_id"] for s in events
+                                  if cursor and s["observed_at"] == cursor[0]],
         "index_text": response["scope"], "visibility": "visible", "body_delivered": True,
         "semantics": "source_bound_model_interpretation; all AND (OR of AND any routes); "
                      "unknown is not false; apply temporal rules at current query time"}
@@ -222,7 +263,9 @@ def build_query_structure(
         # Only the observed arrival cursor is retained in the no-cache control;
         # it receives the same newly arrived events as the cached conditions.
         saved.update(structure={}, source_bindings={})
-    service.store.put(namespace, "current", saved, index=False)
+    service.store.put(namespace, slot, saved, index=False)
+    if capacity > 1:
+        touch_structure(service, slot)
     report.update(action="refresh" if incremental else "build", model_calls=1,
                   source_bodies_delivered=len(sources), node_count=len(nodes),
                   rule_count=len(rules),

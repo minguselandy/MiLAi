@@ -128,8 +128,10 @@ class RulesMemoryPolicy:
                          and a.parameters.get("index") in historical), None)
             if read is not None:
                 return read.id
-        if not wants_history and state.views and not state.views[0]["pending_events"]:
-            use = next((a for a in actions if a.kind == "USE_VIEW"), None)
+        matching = [v for v in state.views if v.get("built_for") == state.task["request"]]
+        reusable = {v["id"] for v in matching if not v["pending_events"]}
+        if not wants_history and reusable:
+            use = next((a for a in actions if a.kind == "USE_VIEW" and a.target in reusable), None)
             if use is not None:
                 return use.id
         for action in actions:
@@ -138,7 +140,11 @@ class RulesMemoryPolicy:
                     and not action.parameters.get("history_directory")
                     and len(state.visible_evidence) < self.reads):
                 return action.id
-        refresh = next((a for a in actions if a.kind == "REFRESH_VIEW"), None)
+        target_views = {v["id"] for v in matching}
+        refresh = next((a for a in actions if a.kind == "REFRESH_VIEW" and (
+            a.target in target_views or (not matching and a.parameters.get("new_scope")))), None)
+        if refresh is None:
+            refresh = next((a for a in actions if a.kind == "REFRESH_VIEW"), None)
         if refresh is not None:
             return refresh.id
         return next(a.id for a in actions if a.kind == "HANDOFF")

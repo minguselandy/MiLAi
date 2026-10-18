@@ -140,6 +140,7 @@ class FunctionalEditMemory(FunctionalMemory):
         dependency_read_call: ModelCall | None = None,
         control_policy: MemoryPolicy | None = None,
         control_steps: int = 8,
+        control_view_capacity: int = 1,
         control_record: Callable[[dict[str, Any]], None] = lambda event: None,
         control_available: Callable[[], bool] = lambda: True,
         **kwargs: Any,
@@ -169,6 +170,7 @@ class FunctionalEditMemory(FunctionalMemory):
         self.dependency_read_call = dependency_read_call
         self.control_policy = control_policy
         self.control_steps = control_steps
+        self.control_view_capacity = control_view_capacity
         self.control_record = control_record
         self.control_available = control_available
         self.control_handed_off = False
@@ -465,7 +467,8 @@ class FunctionalEditMemory(FunctionalMemory):
                 refresh_call=refresh,
                 fits=lambda items: self.token_count(canonical(packet(items, "budget_exhausted")))
                     <= self.material_limit,
-                excluded_source_refs=(bound["source_ref"],))
+                excluded_source_refs=(bound["source_ref"],),
+                view_capacity=self.control_view_capacity)
             memory = self
 
             def record_control(event: dict[str, Any]) -> None:

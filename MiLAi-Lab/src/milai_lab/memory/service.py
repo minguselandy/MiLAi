@@ -1792,6 +1792,33 @@ class MemoryService:
                      "formed" if event["event_id"] in formed else "pending"}
                     for event in self._visible_sources(session)]
 
+    def source_arrivals(self, since: str | None = None) -> dict[str, Any]:
+        """Read visible arrivals at/after a capture-time boundary, without formation scans.
+
+        The boundary is inclusive: callers retain the exact IDs already seen at
+        that timestamp, so equal capture clocks cannot silently lose an arrival.
+        Store filtering limits materialization; SQLite's internal scan is unmeasured.
+        """
+        with self._locked():
+            predicate: dict[str, Any] = {"owner": self.owner}
+            if since is not None:
+                predicate["observed_at"] = {"$gte": since}
+            events: list[dict[str, Any]] = []
+            offset, materialized = 0, 0
+            while True:
+                page = self.store.search(self.sources_namespace, filter=predicate,
+                                         limit=100, offset=offset)
+                materialized += len(page)
+                events.extend(source for item in page if item.namespace == self.sources_namespace
+                    and (source := self.source(item.key)) is not None)
+                if len(page) < 100:
+                    break
+                offset += len(page)
+            return {"events": sorted(events, key=lambda e: (e["observed_at"], e["event_id"])),
+                    "rows_materialized": materialized, "since_inclusive": since,
+                    "query": "Store owner/time filter; no semantic-formation enumeration",
+                    "database_rows_scanned": None}
+
     def episodes(
         self,
         *,
