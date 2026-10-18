@@ -2,6 +2,14 @@
 
 Execute docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md.
 Progress: docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md. Full goal remains active.
+USER STEERING: avoid question/case-specific rigid fixes; preserve generality and generalization.
+Latest development restores legal any=[] (no route), [[]] (pureAND), and alternatives; no coercion.
+All clocks remain available: source report time separate from ingestion_observations with version.
+No question/keyword/family-ID runtime branches.39tests,Ruff,mypy passed; model efficacy unclaimed.
+The538373e8nonempty-OR trial remains historical evidence, NOT the adopted generic contract.
+Procedural176structure draft is auxiliary only, archived understructural-data-draft-v1 (ignored);
+not fitted and NOT credited as broad128family expansion or cross-domain holdout. T1/E2 still pending.
+
 LATEST LIVE: reviewed-followups-dispatch-v2 PID946632/exec48742; revalidate child+command.
 New interface probe538373e8 CLOSED exit0:12calls/24154gen,unknown0;11accepted/1rejected;
 10task-text adequate+1mixed+1stale,6/12full view-state valid; no Reader/method score.
@@ -101,9 +109,8 @@ Own-prefix labels now use persisted actual request pools, no final-state reconst
 inputs+590candidates match; dev-only124/171preference match,15extra READs after raw sufficiency.
 Unreviewed opened views are masked; each revision reviewed separately before/after changes.
 4labeltests,Ruff,mypy,boundaries pass; old T0 labels unchanged.
-New query-view generation contract: nonempty OR routes, pureAND[[]]; omitcaptureclock from
-generator input, preserve original Store/audit clocks. Legacy stored any=[] unchanged.38tests/Ruff/
-mypy pass. Sixdev-family12-call executor probe preregistered; not yet executed.
+Historical538373e8probe used nonempty-OR generation and omitted captureclock; it CLOSED.
+Latest development supersedes that restriction as described above; old outputs remain unchanged.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.

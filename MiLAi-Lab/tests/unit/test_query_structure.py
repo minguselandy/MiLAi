@@ -27,10 +27,8 @@ def interpretation(payload):
         "remove": [], "rules": [], "remove_rules": [], "unresolved": []}
 
 
-@pytest.mark.parametrize("routes", [[[]], []])
-def test_generation_uses_source_report_time_and_explicit_and_route(tmp_path, routes):
-    from jsonschema.exceptions import ValidationError
-
+@pytest.mark.parametrize("routes", [[[]], [], [["n0"], ["n1"]]])
+def test_generation_preserves_clock_types_and_all_route_values(tmp_path, routes):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
         service = service_at(store, tmp_path)
         ref = service.capture_user("s", "0",
@@ -42,6 +40,8 @@ def test_generation_uses_source_report_time_and_explicit_and_route(tmp_path, rou
             payload = json.loads(messages[1]["content"])
             assert payload["sources"][0]["reported_at"] == "2035-05-07T09:00:00+08:00"
             assert "captured_at" not in payload["sources"][0]
+            assert payload["ingestion_observations"] == [{"source": "e0",
+                "source_revision": 1, "captured_at": original["observed_at"]}]
             return {"scope": "Eligibility", "nodes": [
                 {"id": f"n{i}", "text": text, "evidence": ["e0"], "kind": kind}
                 for i, (text, kind) in enumerate([
@@ -50,19 +50,10 @@ def test_generation_uses_source_report_time_and_explicit_and_route(tmp_path, rou
                 "rules": [{"id": "g0", "target": "n2", "all": ["n0", "n1"],
                            "any": routes, "evidence": ["e0"]}], "unresolved": []}
 
-        if not routes:
-            with pytest.raises(ValidationError):
-                build_query_structure(service, "Eligible?", "2035-05-07", [ref],
-                                      policy="incremental", call=call)
-            assert cached_structure(service) is None
-        else:
-            saved, _ = build_query_structure(service, "Eligible?", "2035-05-07", [ref],
-                                            policy="incremental", call=call)
-            assert saved["structure"]["rules"]["g0"]["any"] == [[]]
-            # Legacy stored no-route rules remain readable with their original meaning.
-            saved["structure"]["rules"]["g0"]["any"] = []
-            store.put((*service.namespace, "query_structure_v1"), "current", saved, index=False)
-            assert cached_structure(service)["structure"]["rules"]["g0"]["any"] == []
+        saved, _ = build_query_structure(service, "Eligible?", "2035-05-07", [ref],
+                                        policy="incremental", call=call)
+        assert saved["structure"]["rules"]["g0"]["any"] == routes
+        assert cached_structure(service)["structure"]["rules"]["g0"]["any"] == routes
         assert service.source(ref) == original and original["observed_at"]
 
 

@@ -28,17 +28,19 @@ INSTRUCTIONS = (
     "task can use them. scope describes that scope, not proof that all history was examined. "
     "Old nodes and rules in previous are model interpretations, not original evidence. "
     "sources contains newly delivered original bodies. source_directory binds the old and new "
-    "e aliases; an old alias without a body grants attribution, not new evidence. "
+    "e aliases; an old alias without a body does not supply its semantic content. "
     "New arrivals can introduce an overriding rule even if they are absent from old support. "
     "Use nodes/rules to add or replace only changed interpretations and remove/remove_rules "
     "for withdrawn ones. Unlisted prior nodes/rules stay. An unrelated new event can leave "
     "the structure unchanged. Distinguish new facts from corrections of earlier history. "
-    "State dates and scopes in full text and temporal when the source supplies them; a report "
-    "date is not an effective date. Preserve future rules so the Reader interprets them at its "
-    "current query time. A rule needs every all prerequisite and one any route; each route "
-    "itself requires every member. For pure AND use any=[[]]. Emit only rules with at least "
-    "one route; remove withdrawn rules with remove_rules and describe unresolved support "
-    "in unresolved. Empty outer any is not a pure AND rule. "
+    "State dates and scopes in full text and temporal when the source supplies them. "
+    "reported_at is when a source reports something; ingestion_observations records when this "
+    "system received it. Neither establishes an event or effective date. Use the clock matching "
+    "the requested meaning, and retain unknown dates as unknown. Preserve future rules and "
+    "their effective boundaries for the Reader's query time. A rule needs every all prerequisite "
+    "and one any route; each route "
+    "itself requires every member. any=[[]] adds no alternative prerequisite to all; any=[] "
+    "means no available support route. These are different logical states, both representable. "
     "An uncertain or unavailable premise is unknown, never its negation. Rules express "
     "source-supported implications, not an assurance that their premises hold. If the source "
     "does not support a relation, retain plain text. Return the supplied schema."
@@ -77,8 +79,8 @@ def structure_schema(bindings: dict[str, Any], previous: dict[str, Any]) -> dict
         "remove": removal(list(previous.get("nodes", {}))),
         "rules": {"type": "array", "items": _object({"id": rule_id,
             "target": node_id, "all": {"type": "array", "items": node_id},
-            "any": {"type": "array", "minItems": 1,
-                    "description": "Alternative prerequisite routes. Use [[]] for only all.",
+            "any": {"type": "array",
+                    "description": "OR of AND routes: [[]] adds no condition; [] has no route.",
                     "items": {"type": "array", "items": node_id}},
             "evidence": refs}, ["id", "target", "all", "any", "evidence"])},
         "remove_rules": removal(list(previous.get("rules", {}))),
@@ -223,6 +225,10 @@ def build_query_structure(
                 {"role": "user", "content": json.dumps({
                     "question": question, "query_time": date,
                     "previous": previous, "sources": sources,
+                    "ingestion_observations": [{"source": alias,
+                        "source_revision": binding["source_revision"],
+                        "captured_at": by_ref[binding["source_ref"]]["observed_at"]}
+                        for alias, binding in bindings.items()],
                     "source_directory": [{"id": key, "body_delivered": key in delivered_aliases,
                         "role": by_ref[binding["source_ref"]]["role"],
                         "reported_at": by_ref[binding["source_ref"]].get("occurred_at")}
