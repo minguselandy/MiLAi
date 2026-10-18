@@ -389,3 +389,20 @@ checkpoint、trace、attempt或result；模型/来源捕获尚未开始。不是
 旧调度exec14366退出1；M2/T2/M1等待器均退出2 NEEDS_REVIEW且未启动模型子进程。
 原失败保留，接下来新调度只继续20个未执行dense4位置及后续未启动工作；不重跑前12位置。
 诊断费用今后只在无模型作业的串行边界结算，避免再次竞争。详见strong-queue-admission-incident-v1。
+
+
+## 新接口真实试片闭合，剩余基线继续
+
+view-interface-probe-v1从538373e8完成6个已暴露dev家族、12真实生成，11接受、1拒绝，
+98观察；Reader/Laya均0。24154生成tokens、新unknown0；墙钟46.926s、localCPU1.100s
+已由原收集器在模型作业内记账。报告组装CPU保存待无模型作业时结算，避免锁竞争。
+12阶段视图作者复核：10任务文本充分、1混合（残留旧未知声明）、1过期（刷新拒绝）；
+6完整当前视图状态有效。无空外层OR和capture时间误用，但错用OR代AND、依赖目标/
+作用域错误及过期含义仍存在。不能把schema排除的形式错误当作语义解决。
+ordered_precedence/changed因未定义节点被拒绝，保留旧视图，未造节点或修补首响。
+
+统一串行调度reviewed-followups-dispatch-v2已运行，PID946632、exec48742；
+探针退出0，现strong-dense4-v1-remaining1子进程949997，继承原12闭合位置，仅继续
+20个未进入模型/Source捕获的位置，保持冻结2b1766e8与原银行。
+后续原未启动context4/dense2/dense8、M2两训练、T2收集、M1/多主题列入同一调度，
+各自保留原冻结源码/输入，不用新接口替换已声明实验。旧失败队列与等待器保持终态。

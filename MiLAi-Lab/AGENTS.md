@@ -2,6 +2,15 @@
 
 Execute docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md.
 Progress: docs/MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md. Full goal remains active.
+LATEST LIVE: reviewed-followups-dispatch-v2 PID946632/exec48742; revalidate child+command.
+New interface probe538373e8 CLOSED exit0:12calls/24154gen,unknown0;11accepted/1rejected;
+10task-text adequate+1mixed+1stale,6/12full view-state valid; no Reader/method score.
+Now strong-dense4-v1-remaining1 child949997, original2b1766e8 runtime+bank;12inherited/20new
+positions. Then original unstarted strong baselines→M2→T2→M1/multitopic in ONE coordinator.
+Old dispatcher/waiter records below are terminal, not live dependencies; do not restart them.
+Offline preparation compute stays pending while any model job lives; settle only at idle boundary.
+Concurrent ledger settlement previously caused HTTP_OWNER_BUSY.
+
 D1 real base-Laya loop and Reader completed at artifacts/dynamic-memory-control/d1-laya-v5:
 5forwards/4318inputtokens, temporal/scope answer correct under author review; not method efficacy.
 v2/v3/v4 are terminal failures, preserve costs and committed effects; no restart/rebill.
