@@ -55,7 +55,7 @@ Dev preference matching93→101→107/125 at0/48/96. Final15handoffs outside pre
 This is not QA/state success or cost benefit. Fixed final96 only, no checkpoint/seed selection.
 
 Own-policy QA LIVE: t0-rollout-dispatch-v1.json PID639365/exec30496; BASEchild651845,
-t0-rollout-base-v1/driver.json latest13/32attempted. Revalidate exact child process/command.
+t0-rollout-base-v1/driver.json latest25/32attempted. Revalidate exact child process/command.
 BASE then saved CE final96,32positions each, independent empty banks, same8dev families.
 Runtime imports frozenedf087d3. Some known length failures retained; do not restart/rebill.
 CE not yet dispatched at this snapshot. Training checkpoint config uses actual saved final path.
@@ -67,6 +67,13 @@ A/B/A,reopen,LRU,outside-support arrivals and revocation tests pass.39relatedtes
 package/tools boundaries pass. New two-slot recipe exists but real-model validation still pending.
 SQLite internal scan is unmeasured; other Host retrieval work not claimed incremental. Do NOT inject
 this new code into running own-policy QA. No128/32expansion,T2own-prefix fitting,newholdout or completion.
+2b1766e8 strong dense2/4/8 and fixed_context4 ready;183relatedtests,Ruff,mypy,boundaries pass.
+Strong queue PID761698/exec14366 waits T0 terminal success, then128new development positions;
+strong-baselines-dispatch-v1.json. No retries, frozen2b1766e8, original ledger.
+E0 author-review-v1 covers96firstanswers/20explicitops: core21/18/22/15 of24; BASE1correct
+failed-forget disclosure is NOT end-to-end success (21). Full explicit state2/2/2/4 of5.
+BASElabel correction text saved but empty support alternatives; allfour full-forgets failed.
+View graph overall validity remains partial; indirect history/assistant proof qualifications retained.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.

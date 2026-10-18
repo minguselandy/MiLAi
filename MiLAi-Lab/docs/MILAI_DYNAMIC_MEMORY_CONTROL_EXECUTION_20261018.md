@@ -257,3 +257,24 @@ k8明确使用10步上限，是额外成本点。当前T0自身QA仍使用冻结
 183项相关测试、Ruff、5文件mypy、package/tools边界通过；首次测试命令含不存在的
 `test_evidence_control.py`，未执行测试，已改用真实测试路径得到上述结果。
 无Product Schema/API/权限修改，无SHA校验，无远端push/merge。
+
+
+## E0首响与明确维护逐项审阅完成
+
+`data/manifests/dynamic-memory-control-e0-author-review-v1.json`记录全部96问答和20明确操作，
+保留方法可见的作者审阅身份。回答核心内容正确数为fixed21、rules18、BASE22、generative15（各24）；
+BASE其中1项如实披露遗忘未完成，不能计为工作负载已满足，扣除此项为21。
+这些不是完整来源忠实评分：固定替代支持q3、生成式审批q4依赖上轮assistant答案；
+rules/generative负责人q4虽与审计中的真实前态相符，但未读取确切历史revision1。
+六个作者家族、OR原文“仅当”的必要条件歧义及审批query_time限定保留，不作优越性推断。
+
+明确请求结束时完整有效状态分别2/5、2/5、2/5、4/5。BASE收藏柜更正虽实际提交revision2、
+文本为新值，却有alternatives=[]的空支持路线；记为结构部分失败，不补成完整成功。
+四臂遗忘均未覆盖请求的全部原始来源；fixed只撤销1个record、Sources0，其他臂无成功撤销。
+未撤销后仍读到旧值不叫撤销后绕过。rules负责人更正后来在q3才提交，原command-3仍失败，
+且q3最终只返回回执，问答没有完成。query-view全图正确率仍未穷尽审阅，不宣称该项已完成。
+最终评分组装CPU0.0626s已沿原锁记账一次；此前一次组装失败未计时，未伪记为0。
+
+强基线已冻结2b1766e8并排入原串行队列：等待器PID761698、exec14366，
+`strong-baselines-dispatch-v1.json`。仅在T0 BASE和CE协调器正常结束后启动；四臂各32位置，
+无旧位置重试。当前BASE最新25/32，仍运行；CE尚未启动，需实际重验进程再使用此快照。
