@@ -21,7 +21,7 @@
               "session_id": "source-stream",
               "event_key": "a",
               "content": "竹组原剩余可发票为5张。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -29,7 +29,7 @@
               "session_id": "source-stream",
               "event_key": "b",
               "content": "梅组原剩余可发票为1张。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -37,7 +37,7 @@
               "session_id": "source-stream",
               "event_key": "c",
               "content": "已执行从竹组向梅组转2张票，两组之外无变化。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             }
           ],
@@ -116,7 +116,7 @@
               "session_id": "source-stream",
               "event_key": "a",
               "content": "通用包装指南要求纸盒。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -124,7 +124,7 @@
               "session_id": "source-stream",
               "event_key": "b",
               "content": "紫沙样品专项指令要求硬壳盒。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -132,7 +132,7 @@
               "session_id": "source-stream",
               "event_key": "c",
               "content": "规则明确专项指令优先于通用指南。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             }
           ],
@@ -211,7 +211,7 @@
               "session_id": "source-stream",
               "event_key": "a",
               "content": "青湾组全天收到的箱子中有一半贴了蓝标。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -219,7 +219,7 @@
               "session_id": "source-stream",
               "event_key": "b",
               "content": "全天收货分上午和下午两个批次。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -227,7 +227,7 @@
               "session_id": "source-stream",
               "event_key": "c",
               "content": "记录未提供各批次的蓝标比例。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             }
           ],
@@ -306,7 +306,7 @@
               "session_id": "source-stream",
               "event_key": "a",
               "content": "光帆项目有一位联络员昵称阿林。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -314,7 +314,7 @@
               "session_id": "source-stream",
               "event_key": "b",
               "content": "影帆项目也有一位不同的联络员昵称阿林。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -322,7 +322,7 @@
               "session_id": "source-stream",
               "event_key": "c",
               "content": "当前通知单只写了阿林，没有项目或其他身份字段。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             }
           ],
@@ -401,7 +401,7 @@
               "session_id": "source-stream",
               "event_key": "a",
               "content": "流云讨论需要沈岚与邵石两人同时参加。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -409,7 +409,7 @@
               "session_id": "source-stream",
               "event_key": "b",
               "content": "沈岚可参加14:00至16:00，含端点。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -417,7 +417,7 @@
               "session_id": "source-stream",
               "event_key": "c",
               "content": "邵石可参加15:00至17:00，含端点。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             }
           ],
@@ -496,7 +496,7 @@
               "session_id": "source-stream",
               "event_key": "a",
               "content": "雾岭轻件一般可以走加急通道。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -504,7 +504,7 @@
               "session_id": "source-stream",
               "event_key": "b",
               "content": "但含磁片的轻件不得走加急通道。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -512,7 +512,7 @@
               "session_id": "source-stream",
               "event_key": "c",
               "content": "本批货是含磁片的轻件。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             }
           ],
@@ -591,7 +591,7 @@
               "session_id": "source-stream",
               "event_key": "a",
               "content": "鸣沙档案由俞青撰写。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -599,7 +599,7 @@
               "session_id": "source-stream",
               "event_key": "b",
               "content": "俞青已将档案保管工作交给吴庭。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -607,7 +607,7 @@
               "session_id": "source-stream",
               "event_key": "c",
               "content": "作者身份不会因保管人变化而改变。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             }
           ],
@@ -686,7 +686,7 @@
               "session_id": "source-stream",
               "event_key": "a",
               "content": "银禾清单初始全部样品编号为S11和S12，没有其他样品编号。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -694,7 +694,7 @@
               "session_id": "source-stream",
               "event_key": "b",
               "content": "另一条登记再次提到S11，明确是重复登记。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             },
             {
@@ -702,7 +702,7 @@
               "session_id": "source-stream",
               "event_key": "c",
               "content": "统计要求按不同样品编号计数。",
-              "occurred_at": "2032-07-02T09:10:00+08:00",
+              "occurred_at": "2032-07-02T09:00:00+08:00",
               "calendar_context": "Asia/Shanghai"
             }
           ],
