@@ -1,0 +1,1883 @@
+{
+  "version": "operation-families-v1",
+  "authorship": "assistant-authored synthetic source histories; not external data or independent human gold",
+  "scope": "24 train and 8 development source families for the first operation supervision slice. The six E0 histories remain separate functional regression. Related/unrelated variants and repeats stay in their original family.",
+  "runtime_boundary": "Offline answers and support sets must never enter the state projection. Actual views and feedback must be executed before use; no hand-authored perfect view states.",
+  "status": "Source contracts prepared; no operation labels/checkpoints or actual generated-view quality claim.",
+  "families": [
+    {
+      "family": "sealed_parcel",
+      "split": "train",
+      "mechanism": "conjunction with separate preconditions",
+      "query": "根据当前已提供的记录，梧桐批次现在可以发运吗？还缺哪项前提？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "梧桐批次只有封签完成且抽检通过，才允许发运。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "梧桐批次的抽检已通过。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "梧桐批次的封签尚未完成。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "梧桐批次封签现已完成，抽检结果仍有效。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "银杏批次新增一个包装工位，与梧桐无关。"
+      },
+      "offline_review": {
+        "before_answer": "不能，还缺封签完成。",
+        "after_answer": "可以，封签和抽检两项前提均已满足。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "unrelated",
+        "changed"
+      ]
+    },
+    {
+      "family": "room_capacity",
+      "split": "train",
+      "mechanism": "pooled capacity rather than per-booking limit",
+      "query": "根据当前已提供的记录，溪厅这次再安排6人，是否超过同时在场人数上限？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "溪厅同时在场人数上限为12人，所有预订人数合并计算。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "溪厅目前已有两组预订，分别为4人和3人，同一时段。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "这次新申请在相同时段增加6人。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "原3人那组取消了该时段的预订，4人那组仍在。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "岭厅购买了6把新椅子，不影响溪厅上限。"
+      },
+      "offline_review": {
+        "before_answer": "超过：4+3+6=13，大于12。",
+        "after_answer": "不超过：4+6=10，不大于12。",
+        "before_support_sets": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "changed",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "contingent_editor",
+      "split": "train",
+      "mechanism": "fallback applies only to absence",
+      "query": "根据当前已提供的记录，这份北窗稿件现在应交给谁复核？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "北窗稿件由宋禾复核；仅当宋禾缺席时才由魏宁代为复核。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "宋禾当前在岗。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "魏宁今天也在岗，但没有额外授权接替在岗的宋禾。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "宋禾临时离岗，预计明天返回；当前由魏宁按原代班规则复核。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "南窗稿件换了文件名，与北窗稿件无关。"
+      },
+      "offline_review": {
+        "before_answer": "宋禾。",
+        "after_answer": "魏宁。",
+        "before_support_sets": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "repeat",
+        "changed"
+      ]
+    },
+    {
+      "family": "partial_delivery",
+      "split": "train",
+      "mechanism": "partial versus complete fulfillment",
+      "query": "根据当前已提供的记录，岚仓订购的零件已全部到货了吗？还差多少件？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "岚仓这张订单共订购40件同规格零件。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "岚仓第一批实收24件。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "岚仓第二批实收10件，目前没有其他实收批次。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "岚仓又实收最后6件，记录确认此订单已无未到货件。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "霁仓也订购了6件，但属于另一张订单。"
+      },
+      "offline_review": {
+        "before_answer": "未全部到货，已收34件，还差6件。",
+        "after_answer": "已全部到货，40件收齐。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "changed",
+        "repeat"
+      ]
+    },
+    {
+      "family": "publication_revision",
+      "split": "train",
+      "mechanism": "superseded version remains historical",
+      "query": "根据当前已提供的记录，发布白鹭手册时，当前应采用哪一个审核版本？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "白鹭手册版本v1已经审核通过。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "白鹭手册v2仍在起草，未提交审核。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "发布规则要求采用当前已审核通过的最新版本。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "白鹭手册v2现已审核通过，并声明取代v1用于今后的发布。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "青鹭手册也有一个v2，与白鹭版本无关。"
+      },
+      "offline_review": {
+        "before_answer": "v1。",
+        "after_answer": "v2；v1仅保留历史身份。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "repeat",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "route_closure",
+      "split": "train",
+      "mechanism": "route choice with distinct blocker",
+      "query": "根据当前已提供的记录，从橡站寄到松站，目前可用的已知路线是哪条？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "橡站至松站有北线和南线两条路线，任一开放路线都可使用。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "北线目前封闭。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "南线目前开放。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "南线现在也封闭；尚未收到北线恢复开放或其他路线开放的消息。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "东站通往柳站的支线开放，不连接橡站和松站。"
+      },
+      "offline_review": {
+        "before_answer": "南线。",
+        "after_answer": "没有已知开放路线，不能断言可以寄送。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "b",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "unrelated",
+        "repeat"
+      ]
+    },
+    {
+      "family": "target_measurement",
+      "split": "train",
+      "mechanism": "requested target versus observed value",
+      "query": "根据当前已提供的记录，砾室设备的设定目标与最新测量值分别是多少？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "砾室设备的设定目标为20度。"
+        },
+        {
+          "id": "b",
+          "role": "tool",
+          "content": "砾室仪表最近一次测量值为22度。",
+          "origin": "authored_observation"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "测量记录表示观测值，并不自动改变设定目标。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "操作者将砾室设备设定目标改为21度；尚无新的测量结果。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "另一间沙室的仪表读数为21度。"
+      },
+      "offline_review": {
+        "before_answer": "目标20度，最新测量22度。",
+        "after_answer": "目标21度，最新测量仍为22度。",
+        "before_support_sets": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "b",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "unrelated",
+        "changed"
+      ]
+    },
+    {
+      "family": "access_window",
+      "split": "train",
+      "mechanism": "closed interval interpreted at query time",
+      "query": "根据当前已提供的记录，7月2日14:00，能使用杉亭的临时展板吗？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "杉亭临时展板原可用窗口为7月2日13:00至15:00，含两个端点。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "本次询问的使用时刻是7月2日14:00。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "这块展板不适用旁边常设展板的全天开放规则。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "杉亭临时展板的可用窗口改为7月2日15:00至17:00，原窗口取消。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "杉亭入口的指示牌更换了颜色。"
+      },
+      "offline_review": {
+        "before_answer": "可以，14:00在原窗口内。",
+        "after_answer": "不可以，14:00早于新窗口。",
+        "before_support_sets": [
+          [
+            "a"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "changed",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "allocation_consumption",
+      "split": "train",
+      "mechanism": "allocation and remaining budget are distinct",
+      "query": "根据当前已提供的记录，柳组这次再领3卷材料后，是否仍在分配额度内？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "柳组本轮分配材料额度为10卷。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "柳组已实际领取6卷。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "这次申请另领3卷；申请数不包含此前已领的6卷。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "库存管理员补记：柳组此前还有2卷已经领走但漏记，现累计已领8卷。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "槐组分配了3卷，不占柳组额度。"
+      },
+      "offline_review": {
+        "before_answer": "是，累计9卷，不超过10卷。",
+        "after_answer": "否，累计11卷，超过10卷。",
+        "before_support_sets": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "repeat",
+        "changed"
+      ]
+    },
+    {
+      "family": "tool_permission",
+      "split": "train",
+      "mechanism": "permission is not execution completion",
+      "query": "根据当前已提供的记录，星台文件目前已发布了吗？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "星台文件已获得发布许可。"
+        },
+        {
+          "id": "b",
+          "role": "tool",
+          "content": "操作日志目前只记录了预览成功，没有发布提交。",
+          "origin": "authored_observation"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "发布完成必须有发布提交回执，许可或预览不代表完成。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "操作日志新增发布提交成功回执，文件名为星台文件。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "月台文件有一条发布失败日志，与星台不同。"
+      },
+      "offline_review": {
+        "before_answer": "不能称已发布；只有许可和预览，没有完成回执。",
+        "after_answer": "已发布，存在对应提交成功回执。",
+        "before_support_sets": [
+          [
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "changed",
+        "repeat"
+      ]
+    },
+    {
+      "family": "reservation_scope",
+      "split": "train",
+      "mechanism": "temporary reservation versus confirmed holding",
+      "query": "根据当前已提供的记录，木桥展柜现在是否已为陶片展确认留位？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "木桥展柜为陶片展建立了临时预留。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "临时预留需要管理员确认才成为确认留位。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "管理员尚未确认该临时预留。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "管理员已经确认木桥展柜给陶片展的留位。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "石桥展柜也有陶片展询价，但没有共享留位。"
+      },
+      "offline_review": {
+        "before_answer": "尚未确认。",
+        "after_answer": "已确认。",
+        "before_support_sets": [
+          [
+            "a",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "repeat",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "alias_binding",
+      "split": "train",
+      "mechanism": "renamed object retains identity",
+      "query": "根据当前已提供的记录，现在“晨页”项目的负责人是谁？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "内部项目编号P17的负责人是杜清。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "项目P17由旧名“纸舟”正式改名为“晨页”，编号不变。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "另有编号P71的项目“晨光”，负责人是任林。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "编号P17的负责人现在改为许遥，项目仍名“晨页”。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "编号P71更换了晨光项目的展示图。"
+      },
+      "offline_review": {
+        "before_answer": "杜清。",
+        "after_answer": "许遥。",
+        "before_support_sets": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "unrelated",
+        "repeat"
+      ]
+    },
+    {
+      "family": "relative_order",
+      "split": "train",
+      "mechanism": "ordered steps with recorded progress",
+      "query": "根据当前已提供的记录，溪石试件的下一项必要步骤是什么？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "溪石试件流程依次为烘干、称量、封存，必须按此顺序。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "溪石试件的烘干已完成。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "溪石试件尚未称量，也未封存。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "溪石试件称量已完成，尚未封存。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "另一块河石试件已经封存，不代表溪石的进度。"
+      },
+      "offline_review": {
+        "before_answer": "称量。",
+        "after_answer": "封存。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "b",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "unrelated",
+        "changed"
+      ]
+    },
+    {
+      "family": "priority_exception",
+      "split": "train",
+      "mechanism": "specific exception to a general deadline",
+      "query": "根据当前已提供的记录，澄海组这份跨境样品清单应在几号提交？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "澄海组一般样品清单须在7月5日前提交。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "跨境样品清单属于例外，须在7月3日前提交。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "本份澄海组清单明确用于跨境样品。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "负责人撤回跨境清单的提前提交例外，此后所有澄海组清单统一在7月5日前提交。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "近海组仍按自己的7月3日截止规则执行。"
+      },
+      "offline_review": {
+        "before_answer": "7月3日前。",
+        "after_answer": "7月5日前。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "changed",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "source_correction",
+      "split": "train",
+      "mechanism": "correction changes earlier fact, not just current fact",
+      "query": "根据当前已提供的记录，纠错后，青石展在6月10日的登记地点是哪里？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "青石展最初登记为6月10日在东厅举行。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "档案说明登记地点可能有录入误差，但尚无正式更正。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "西厅有另一场白石展，不是青石展。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "正式更正：青石展6月10日实际登记地点为西厅，原东厅是录入错误。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "东厅7月新增一场花展，与6月10日青石展无关。"
+      },
+      "offline_review": {
+        "before_answer": "目前仅有东厅登记，尚无确定的更正地点。",
+        "after_answer": "西厅；更正的是6月10日的历史登记。",
+        "before_support_sets": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "repeat",
+        "changed"
+      ]
+    },
+    {
+      "family": "delegation_boundary",
+      "split": "train",
+      "mechanism": "delegated review does not transfer final approval",
+      "query": "根据当前已提供的记录，云杉报告目前由谁做技术复核、由谁最终批准？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "云杉报告的最终批准人是韩松。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "韩松将技术复核委托给程羽，但保留最终批准权。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "技术复核意见不等于最终批准。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "韩松现将最终批准权也正式移交给程羽，原技术复核委托不变。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "另一份红杉报告仍由韩松批准。"
+      },
+      "offline_review": {
+        "before_answer": "程羽技术复核，韩松最终批准。",
+        "after_answer": "程羽技术复核并最终批准。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "b",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "changed",
+        "repeat"
+      ]
+    },
+    {
+      "family": "component_compatibility",
+      "split": "train",
+      "mechanism": "compatibility through versioned prerequisites",
+      "query": "根据当前已提供的记录，砚台插件当前能在这台引擎上启用吗？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "砚台插件只兼容引擎版本至少4.2且启用扩展模式的环境。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "这台引擎版本为4.3。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "这台引擎尚未启用扩展模式。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "这台4.3引擎现已启用扩展模式，版本未变。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "另一台4.1引擎也启用了扩展模式。"
+      },
+      "offline_review": {
+        "before_answer": "不能，缺扩展模式。",
+        "after_answer": "可以，两项条件均满足。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "repeat",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "unit_conversion",
+      "split": "train",
+      "mechanism": "provided conversion rather than assumed units",
+      "query": "根据当前已提供的记录，按记录的换算，鹭池本次领用总量是多少小包？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "鹭池耗材记录规定每盒为4小包。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "鹭池本次领用2盒。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "鹭池还在同次领用中另取了3小包。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "更正本次领用：整盒部分只有1盒，另取的3小包不变。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "燕池使用每盒6小包的不同包装，不适用于鹭池。"
+      },
+      "offline_review": {
+        "before_answer": "11小包。",
+        "after_answer": "7小包。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "unrelated",
+        "repeat"
+      ]
+    },
+    {
+      "family": "coverage_gap",
+      "split": "train",
+      "mechanism": "complete count requires all named partitions",
+      "query": "根据当前已提供的记录，榆园当天三处入口合计登记多少人？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "榆园当天只开放东、南、西三个入口，总数须包含这三处。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "东入口登记8人，南入口登记5人。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "西入口的当天登记数尚未提供。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "西入口当天登记数确认为7人。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "北入口当天未开放，也没有登记人数。"
+      },
+      "offline_review": {
+        "before_answer": "总数无法确定，已知东南合计13人，缺西入口。",
+        "after_answer": "合计20人。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "b",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "unrelated",
+        "changed"
+      ]
+    },
+    {
+      "family": "conditional_reminder",
+      "split": "train",
+      "mechanism": "channel-specific preference with temporal qualifier",
+      "query": "根据当前已提供的记录，现在给陆澈发夜间工作提醒，应使用哪种渠道？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "陆澈的普通工作提醒使用邮件。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "陆澈特别说明夜间工作提醒只用静默站内消息，不发邮件。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "这次提醒的时段明确为夜间，且属于工作提醒。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "陆澈取消夜间特殊渠道要求，此后工作提醒统一使用邮件。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "陆澈的周末生活提醒仍用短信，与工作提醒不同。"
+      },
+      "offline_review": {
+        "before_answer": "静默站内消息。",
+        "after_answer": "邮件。",
+        "before_support_sets": [
+          [
+            "b"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "changed",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "return_receipt",
+      "split": "train",
+      "mechanism": "intent to return versus recorded return",
+      "query": "根据当前已提供的记录，白帆借出的相机现在是否已经归还？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "白帆借出了一台相机。"
+        },
+        {
+          "id": "b",
+          "role": "tool",
+          "content": "借用者表示计划今天归还。",
+          "origin": "authored_observation"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "仓库目前没有该相机的归还入库回执。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "仓库记录了该相机归还入库成功的回执。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "借用者还计划归还三脚架，但它是另一件物品。"
+      },
+      "offline_review": {
+        "before_answer": "尚不能确认已归还，只有计划。",
+        "after_answer": "已经归还，有对应入库回执。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "repeat",
+        "changed"
+      ]
+    },
+    {
+      "family": "membership_expiry",
+      "split": "train",
+      "mechanism": "elapsed effective date without inventing an event",
+      "query": "根据当前已提供的记录，到2032年7月2日，槐舟的临时借阅资格是否仍有效？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "槐舟的临时借阅资格原有效至2032年6月30日结束。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "到期后资格自动失效，除非有明确延期。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "目前记录中没有延期。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "管理员确认槐舟资格已延至2032年7月10日结束，其他条件不变。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "另一位成员柏舟的资格7月2日到期，与槐舟无关。"
+      },
+      "offline_review": {
+        "before_answer": "无效，原有效期已结束且无延期。",
+        "after_answer": "有效，延期覆盖7月2日。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "changed",
+        "repeat"
+      ]
+    },
+    {
+      "family": "disjoint_constraints",
+      "split": "train",
+      "mechanism": "parallel constraints must not transfer between subjects",
+      "query": "根据当前已提供的记录，风铃组和海铃组目前各需要哪种出库复核？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "风铃组出库需要两人复核。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "海铃组出库只需要一人复核。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "两组流程独立，不因名称相近而共用要求。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "只有海铃组改为三人复核；风铃组两人复核要求不变。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "山铃组新增一位联络员，不属于风铃或海铃。"
+      },
+      "offline_review": {
+        "before_answer": "风铃两人，海铃一人。",
+        "after_answer": "风铃两人，海铃三人。",
+        "before_support_sets": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "repeat",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "measurement_replacement",
+      "split": "train",
+      "mechanism": "later correction versus independent second observation",
+      "query": "根据当前已提供的记录，镜湾样品第一次称量最终应采用的结果是多少？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "镜湾样品这次称量最初登记为18克。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "后来另做一次独立称量得到19克，但未声明更正第一次。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "这两次称量是独立操作，除非有明确更正声明，后次结果不自动覆盖前次。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "计量员正式更正第一次称量：18克是录入错误，正确值为17克；第二次仍为19克。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "镜湖样品也重19克，是另一份样品。"
+      },
+      "offline_review": {
+        "before_answer": "18克；第二次19克不自动更正第一次。",
+        "after_answer": "17克；正式更正第一次。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "unrelated",
+        "repeat"
+      ]
+    },
+    {
+      "family": "quota_reallocation",
+      "split": "dev",
+      "mechanism": "transfer changes two remaining pools",
+      "query": "根据当前已提供的记录，按最新实际转移记录，竹组与梅组分别还可发多少张票？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "竹组原剩余可发票为5张。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "梅组原剩余可发票为1张。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "已执行从竹组向梅组转2张票，两组之外无变化。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "更正：实际转移只有1张票，原2张记录错误；没有额外发出票。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "兰组另有2张票，不属于这次转移。"
+      },
+      "offline_review": {
+        "before_answer": "竹组3张，梅组3张。",
+        "after_answer": "竹组4张，梅组2张。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "b",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "unrelated",
+        "changed"
+      ]
+    },
+    {
+      "family": "ordered_precedence",
+      "split": "dev",
+      "mechanism": "explicit hierarchy of conflicting instructions",
+      "query": "根据当前已提供的记录，紫沙样品当前应使用什么包装？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "通用包装指南要求纸盒。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "紫沙样品专项指令要求硬壳盒。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "规则明确专项指令优先于通用指南。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "紫沙专项包装指令已撤销，没有替代专项指令。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "白沙样品的专项指令仍要求硬壳盒。"
+      },
+      "offline_review": {
+        "before_answer": "硬壳盒。",
+        "after_answer": "纸盒，回到通用指南。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "changed",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "fraction_scope",
+      "split": "dev",
+      "mechanism": "overall ratio does not specify each subgroup",
+      "query": "根据当前已提供的记录，青湾组上午收到的箱子是否也一定有一半贴了蓝标？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "青湾组全天收到的箱子中有一半贴了蓝标。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "全天收货分上午和下午两个批次。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "记录未提供各批次的蓝标比例。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "上午批次经点验有10箱，其中2箱贴蓝标。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "下午的点验还在继续，不改变已记录的上午结果。"
+      },
+      "offline_review": {
+        "before_answer": "不能推断，全天一半不代表上午一半。",
+        "after_answer": "不是，上午2/10为五分之一。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "repeat",
+        "changed"
+      ]
+    },
+    {
+      "family": "nonunique_identity",
+      "split": "dev",
+      "mechanism": "ambiguous matching requires disambiguation",
+      "query": "根据当前已提供的记录，记录中的“阿林”应该通知哪个项目？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "光帆项目有一位联络员昵称阿林。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "影帆项目也有一位不同的联络员昵称阿林。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "当前通知单只写了阿林，没有项目或其他身份字段。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "通知单补充项目编号，明确指光帆的阿林。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "第三个项目新增一位叫阿岚的联络员。"
+      },
+      "offline_review": {
+        "before_answer": "不能唯一确定，需要区分光帆与影帆的阿林。",
+        "after_answer": "光帆项目。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "unrelated",
+        "changed",
+        "repeat"
+      ]
+    },
+    {
+      "family": "joint_schedule",
+      "split": "dev",
+      "mechanism": "intersection of independently constrained windows",
+      "query": "根据当前已提供的记录，流云讨论在两位参与者都可用的时段内，应安排在哪个区间？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "流云讨论需要沈岚与邵石两人同时参加。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "沈岚可参加14:00至16:00，含端点。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "邵石可参加15:00至17:00，含端点。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "邵石的可用时段改为16:30至17:00，沈岚时段不变。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "旁听者可全天参加，不替代两位必要参与者。"
+      },
+      "offline_review": {
+        "before_answer": "15:00至16:00。",
+        "after_answer": "两位必要参与者没有重叠可用区间。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "b",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "repeat",
+        "unrelated"
+      ]
+    },
+    {
+      "family": "negated_exception",
+      "split": "dev",
+      "mechanism": "exception itself has an exclusion",
+      "query": "根据当前已提供的记录，雾岭这批含磁片的轻件可走加急通道吗？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "雾岭轻件一般可以走加急通道。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "但含磁片的轻件不得走加急通道。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "本批货是含磁片的轻件。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "新说明：含磁片禁用加急的规则不适用于已用指定屏蔽盒封装的轻件；本批已完成这种封装。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "含液体货物的规则另行制定，与本批无关。"
+      },
+      "offline_review": {
+        "before_answer": "不可以，命中含磁片例外。",
+        "after_answer": "可以，命中已屏蔽封装的例外之例外。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "b",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "changed",
+        "unrelated",
+        "repeat"
+      ]
+    },
+    {
+      "family": "serial_responsibility",
+      "split": "dev",
+      "mechanism": "handover separates author from current custodian",
+      "query": "根据当前已提供的记录，现在谁保管鸣沙档案，原作者是谁？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "鸣沙档案由俞青撰写。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "俞青已将档案保管工作交给吴庭。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "作者身份不会因保管人变化而改变。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "吴庭又把保管工作交给连舒，档案作者未改。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "鸣川档案也由连舒保管，但不是鸣沙档案。"
+      },
+      "offline_review": {
+        "before_answer": "吴庭保管，俞青为作者。",
+        "after_answer": "连舒保管，俞青仍是作者。",
+        "before_support_sets": [
+          [
+            "a",
+            "b"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "unrelated",
+        "changed"
+      ]
+    },
+    {
+      "family": "count_distinct",
+      "split": "dev",
+      "mechanism": "duplicate event is not a new independent item",
+      "query": "根据当前已提供的记录，按目前已记录的清单，银禾实际有几个不同的样品？",
+      "query_time": "2032-07-02",
+      "sources": [
+        {
+          "id": "a",
+          "role": "user",
+          "content": "银禾清单初始全部样品编号为S11和S12，没有其他样品编号。"
+        },
+        {
+          "id": "b",
+          "role": "user",
+          "content": "另一条登记再次提到S11，明确是重复登记。"
+        },
+        {
+          "id": "c",
+          "role": "user",
+          "content": "统计要求按不同样品编号计数。"
+        }
+      ],
+      "related_update": {
+        "id": "u",
+        "role": "user",
+        "content": "新增样品S13已经登记，不是任何旧编号的别名。"
+      },
+      "unrelated_update": {
+        "id": "n",
+        "role": "user",
+        "content": "金禾清单也有S13，但本题只统计银禾清单。"
+      },
+      "offline_review": {
+        "before_answer": "2个。",
+        "after_answer": "3个。",
+        "before_support_sets": [
+          [
+            "a",
+            "b",
+            "c"
+          ]
+        ],
+        "after_support_sets": [
+          [
+            "a",
+            "b",
+            "c",
+            "u"
+          ]
+        ],
+        "status": "author_source_contract; generated views and operation targets not yet reviewed",
+        "answer_scope": "Source-contained answer only; authored log statements are not independent live application effect verification."
+      },
+      "phase_order": [
+        "cold",
+        "repeat",
+        "changed",
+        "unrelated"
+      ]
+    }
+  ],
+  "source_review": "Full source texts reviewed by author before operation execution. Fixed a stale transfer-quantity presupposition, removed a source that restated a task instruction, made list scope explicit, and separated sufficient proof alternatives from action targets. These proof sets are not exhaustive minimal proofs or automatic action gold.",
+  "phase_design": "After cold construction, repeat/unrelated/related phases use all six orders across families. Unrelated and related events concern independent subjects and may be reordered. Labels must follow actual arrived sources, not ordinal phase. This prevents one fixed event-count progression from standing in for semantic change."
+}
