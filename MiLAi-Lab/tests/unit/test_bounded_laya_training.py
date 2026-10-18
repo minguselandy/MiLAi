@@ -17,6 +17,35 @@ from train_bounded_laya import (
 )
 
 
+def test_shared_linear_checkpoint_roundtrip_keeps_option_scores(tmp_path):
+    torch = pytest.importorskip("torch")
+    transformers = pytest.importorskip("transformers")
+    from linear_reader_classifier import save_linear_checkpoint
+    from milai_lab.providers.linear_local import LinearDecision, build_linear_model
+
+    vocab = tmp_path / "vocab.txt"
+    vocab.write_text("[PAD]\n[UNK]\n[CLS]\n[SEP]\n[MASK]\nalpha\nbeta\n")
+    tokenizer = transformers.BertTokenizer(vocab_file=str(vocab))
+    torch.manual_seed(3)
+    encoder = transformers.BertModel(transformers.BertConfig(
+        vocab_size=7, hidden_size=8, intermediate_size=12,
+        num_hidden_layers=1, num_attention_heads=2))
+    model = build_linear_model(encoder).eval()
+    inputs = dict(input_ids=torch.tensor([[2, 5, 4, 6, 4, 3]]),
+        attention_mask=torch.ones(1, 6, dtype=torch.long), marker_pos=torch.tensor([[2, 4]]),
+        marker_mask=torch.ones(1, 2, dtype=torch.bool), qtype=torch.tensor([0]))
+    with torch.no_grad():
+        before = model(**inputs)[0]
+    save_linear_checkpoint(model, tokenizer, {"operation_state": "mechanical"},
+                           str(tmp_path / "checkpoint"))
+    loaded = LinearDecision.load(tmp_path / "checkpoint", 128, 64)
+    with torch.no_grad():
+        after = loaded.model(**inputs)[0]
+    assert torch.allclose(before, after, atol=1e-3)
+    assert loaded.config["operation_state"] == "mechanical"
+    assert loaded.counters["forwards"] == 0
+
+
 def test_fixed_update_budget_keeps_full_windows_across_different_masks():
     for size in (17, 37):
         stages = training_stages(size, epochs=2, seed=7, update_budget=5)

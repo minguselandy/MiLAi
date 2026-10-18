@@ -51,7 +51,7 @@ def memory_policy(
         return RulesMemoryPolicy(config.get("reads", 4))
     if kind == "generative":
         return GenerativeMemoryPolicy(call)
-    if kind != "laya":
+    if kind not in {"laya", "linear"}:
         raise ValueError(f"Unknown memory control policy: {kind}")
     model: NativeDecision | None = None
 
@@ -64,14 +64,20 @@ def memory_policy(
             torch.set_num_threads(config.get("threads", 4))
             started, cpu = time.perf_counter(), time.process_time()
             try:
-                model = NativeDecision(Path(config["checkpoint"]), config.get("max_len", 8192),
-                                       config.get("head_max_len", 2048))
+                if kind == "linear":
+                    from milai_lab.providers.linear_local import LinearDecision
+
+                    model = LinearDecision.load(Path(config["checkpoint"]),
+                        config.get("max_len", 8192), config.get("head_max_len", 2048))
+                else:
+                    model = NativeDecision(Path(config["checkpoint"]),
+                        config.get("max_len", 8192), config.get("head_max_len", 2048))
             finally:
                 loading = {"wall_seconds": time.perf_counter() - started,
                            "cpu_seconds": time.process_time() - cpu, "loads": 1}
                 record({"event": "memory_control_model_load", "checkpoint": config["checkpoint"],
-                        "device": "cpu", "loaded": model is not None, **loading})
-                budget.record_compute("dynamic_memory_laya_load", loading)
+                        "backend": kind, "device": "cpu", "loaded": model is not None, **loading})
+                budget.record_compute(f"dynamic_memory_{kind}_load", loading)
         started, cpu = time.perf_counter(), time.process_time()
         before = dict(model.counters)
         try:
@@ -79,9 +85,9 @@ def memory_policy(
             record({"event": "memory_control_model_result", "input": payload, "result": result})
             return result
         finally:
-            budget.record_compute("dynamic_memory_laya", {
+            budget.record_compute(f"dynamic_memory_{kind}", {
                 "wall_seconds": time.perf_counter() - started,
                 "cpu_seconds": time.process_time() - cpu,
                 **{k: v - before[k] for k, v in model.counters.items()}})
 
-    return LayaMemoryPolicy(predict)
+    return LayaMemoryPolicy(predict, config.get("state_projection", "full"))

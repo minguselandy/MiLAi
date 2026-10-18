@@ -1,0 +1,49 @@
+{
+  "version": "dynamic-memory-control-t0-mechanisms-v1",
+  "status": "preregistered_before_training",
+  "purpose": "M2 retrained mechanical state and ordinary linear action head; isolate each change relative to T0 full native.",
+  "data": "artifacts/dynamic-memory-control/operation-labels-v1",
+  "families": {
+    "train": 24,
+    "dev": 8
+  },
+  "labels": "Same reviewed preferences, masks and event/family weights as T0. No relabeling for mechanical indistinguishability. No held-out families loaded.",
+  "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "jobs": [
+    {
+      "id": "mechanical-native-seed0",
+      "backend": "native",
+      "operation_state": "mechanical",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-mechanisms-v1/mechanical-native-seed0"
+    },
+    {
+      "id": "full-linear-seed0",
+      "backend": "linear",
+      "operation_state": "full",
+      "output": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t0-mechanisms-v1/full-linear-seed0"
+    }
+  ],
+  "common": {
+    "seed": 0,
+    "optimizer_updates": 96,
+    "effective_batch": 16,
+    "objective": "soft-ce",
+    "shuffle_options": true,
+    "max_len": 8192,
+    "head_max_len": 2048,
+    "physical_gpus": [
+      2,
+      3
+    ],
+    "selection": "final96; report diagnostics0/48/96, no best checkpoint selection",
+    "evaluate_train": "final only",
+    "optimizer": "unchanged original trainer"
+  },
+  "mechanical_projection": "Retains original task and options, candidate IDs/kinds/versions, source roles/timestamps, view binding/status/version, budget and last execution status. Removes source bodies, excerpts, interpreted facts, view scope/built_for and graph semantics. Shared projection in retraining and normal Host.",
+  "linear_head": "Same BASE encoder and one encoding per state with identical option markers; randomly initialized scalar linear scorer replaces pretrained native head. Encoder and head both trained. Unequal head initialization and parameter counts are disclosed; not pure architecture causality.",
+  "full_native_comparator": "Existing t0-ce-v1/seed0 final96; same data/updates/seed. Shared full projection remains unchanged.",
+  "execution": "Serial original ledger after strong-baselines-dispatch-v1 terminal success; no retries. Stop and inspect any implementation failure.",
+  "downstream": "Normal Host linear checkpoint loading and mechanical projection are wired; actual matched QA scheduled after these training diagnostics. Offline preference improvement alone is not task/state success.",
+  "qualification": "Initial 24/8-family mechanism trial; expanded128/32, own-prefix aggregation and all declared confirmation seeds remain future work.",
+  "checksum_verification": false
+}

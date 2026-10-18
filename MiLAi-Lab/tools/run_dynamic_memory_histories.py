@@ -32,7 +32,7 @@ def main() -> None:
     parser.add_argument("output", type=Path)
     parser.add_argument("--source-version", required=True)
     parser.add_argument("--policies", nargs="+", choices=(
-        "fixed", "fixed_context", "rules", "laya", "generative"),
+        "fixed", "fixed_context", "rules", "laya", "linear", "generative"),
                         default=["fixed", "rules", "laya", "generative"])
     parser.add_argument("--history", action="append", help="Explicit development subset")
     parser.add_argument("--continue-from", type=Path,

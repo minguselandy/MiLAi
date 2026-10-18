@@ -278,3 +278,20 @@ rules/generative负责人q4虽与审计中的真实前态相符，但未读取�
 强基线已冻结2b1766e8并排入原串行队列：等待器PID761698、exec14366，
 `strong-baselines-dispatch-v1.json`。仅在T0 BASE和CE协调器正常结束后启动；四臂各32位置，
 无旧位置重试。当前BASE最新25/32，仍运行；CE尚未启动，需实际重验进程再使用此快照。
+
+
+## M2匹配输入与普通头接线
+
+共享`project_operation_payload`提供机械状态消融：保留任务、目录、ID/版本、来源角色/时刻、
+预算和真实返回状态；去掉正文、摘要、解释、图语义和视图主题。训练器`--operation-state mechanical`
+直接使用同一投影，标签、mask、采样和操作机会不改。该项将重新训练，不拿冻结模型删字段代替。
+原普通线性动作头提取到`providers/linear_local.py`，训练工具兼容导出；正常Host可实际加载其
+encoder/scorer/tokenizer checkpoint，分别记linear加载/推理成本。未引入新服务或第二控制器。
+
+预登记`dynamic-memory-control-t0-mechanisms-protocol.json`：原24/8家族、同seed0/96更新，
+机械状态native与完整状态linear各一次；固定final96。普通头随机初始化，native头来自BASE，
+差异明确披露，不能作纯架构因果结论。先做这两个试片，再依据诊断安排匹配Host问答，
+不把离线偏好分数当QA、实际状态或保留效果。
+13项原CUDA环境训练/投影测试与20项Host控制测试通过（有重叠，不求和）；包含普通头真实
+小模型存取往返和同一投影的语义隐藏/反馈保留测试。Ruff、3源码mypy、package/tools边界通过。
+训练与真实Host机制评价尚未执行；当前T0/强基线源码冻结保持不变。

@@ -120,6 +120,8 @@ def main() -> None:
     parser.add_argument("--objective", choices=("soft-ce", "set"), default="soft-ce")
     parser.add_argument("--task", choices=("bounded_reader", "memory_operation"),
                         default="bounded_reader", help="Use task-specific offline decision metrics")
+    parser.add_argument("--operation-state", choices=("full", "mechanical"), default="full",
+                        help="Retrain with the same operation-state projection used in the Host")
     parser.add_argument("--evaluate-train", action="store_true",
                         help="Save train-prefix predictions as a learning diagnosis")
     parser.add_argument("--train-eval-final-only", action="store_true",
@@ -150,6 +152,11 @@ def main() -> None:
     train = [r for r in train if r["gold"]]
     dev_path = args.dev_data or args.data / "dev.jsonl"
     dev = [json.loads(x) for x in dev_path.read_text().splitlines()]
+    if args.task == "memory_operation":
+        from milai_lab.methods.laya_memory_policy import project_operation_payload
+
+        train = [project_operation_payload(row, args.operation_state) for row in train]
+        dev = [project_operation_payload(row, args.operation_state) for row in dev]
     stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates)
     axis = "epoch" if args.optimizer_updates is None else "optimizer_updates"
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
@@ -157,7 +164,7 @@ def main() -> None:
            "physical_gpus": [2, 3], "device": "cuda", "torch_version": torch.__version__,
            "cuda_version": torch.version.cuda, "precision": "float32",
            "reference_compile": False,
-           "backend": args.backend, "task": args.task,
+           "backend": args.backend, "task": args.task, "operation_state": args.operation_state,
            "epochs": args.epochs if args.optimizer_updates is None else None,
            "planned_optimizer_updates": sum(len(windows) for _, windows in stages),
            "checkpoint_axis": axis, "dev_source": str(dev_path.resolve()),
@@ -186,6 +193,7 @@ def main() -> None:
         else:
             decision = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
             checkpoint_writer = save_checkpoint
+        decision.config = {**decision.config, "operation_state": args.operation_state}
         model, tok = decision.model, decision.tokenizer
         # ModernBERT's compiled MLP cannot be traced concurrently by DataParallel
         # replicas when the final batch changes shape. Use its ordinary MLP path.
