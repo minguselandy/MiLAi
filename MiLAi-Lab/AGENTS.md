@@ -79,7 +79,13 @@ M2 shared mechanical projection and Host linear head freezeaaec2f5c:13CUDAtraini
 2matched96-update seed0 trainings. Not yet trained; no QA/efficacy claim.
 T2 train-only own-prefix fixture24families/96positions queued after M2: PID824662/exec27222,
 t2-own-prefix-dispatch-v1.json, runtime5cc68464. No gold auto-created or dev family moved to fitting.
-Review actual own views/prefixes before fixed-budget aggregation. CE latest6/32, still running.
+Review actual own views/prefixes before fixed-budget aggregation. CE latest27/32, still running.
+5052477f feedback/multitopic queue PID861339/exec21082 follows T2:64matchedfull/one-shot plus
+48two-slot positions, frozen inputs; no results yet.23tests,Ruff,mypy,boundaries passed.
+Own-prefix labels now use persisted actual request pools, no final-state reconstruction. BASE171
+inputs+590candidates match; dev-only124/171preference match,15extra READs after raw sufficiency.
+Unreviewed opened views are masked; each revision reviewed separately before/after changes.
+4labeltests,Ruff,mypy,boundaries pass; old T0 labels unchanged.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.

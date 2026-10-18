@@ -7,7 +7,11 @@ from milai_lab.methods.laya_memory_policy import (
     project_operation_payload,
 )
 from milai_lab.methods.memory_control import MemoryAction, MemoryControlState
-from milai_lab.methods.memory_control_learning import decision_example, score_operation_predictions
+from milai_lab.methods.memory_control_learning import (
+    decision_example,
+    reviewed_prefix_preferences,
+    score_operation_predictions,
+)
 
 
 def test_export_matches_live_projection_and_does_not_label_teacher_choice():
@@ -73,3 +77,20 @@ def test_retrained_mechanical_projection_keeps_feedback_but_hides_semantic_diffe
     assert operation_payload(changed, actions, "mechanical") == observed[0]
     changed.last_result = {"ok": False, "status": "view_rejected"}
     assert operation_payload(changed, actions, "mechanical") != observed[0]
+
+
+def test_own_prefix_stale_view_needs_new_source_and_unreviewed_view_is_masked():
+    actions = [{"id": "read_new", "kind": "READ"},
+               {"id": "refresh", "kind": "REFRESH_VIEW"}, {"id": "handoff", "kind": "HANDOFF"}]
+    inputs = dict(proofs=[{"a", "b", "u"}], covered={"a", "b", "c"},
+                  read_sources={"read_new": {"u"}}, refresh_sources={"refresh": {"a", "b", "u"}})
+    selected, status, _ = reviewed_prefix_preferences(actions, **inputs, opened_views=[False])
+    assert selected == ["read_new", "refresh"]
+    assert status == "acquire_evidence_preference"
+    selected, status, _ = reviewed_prefix_preferences(actions, **inputs, opened_views=[None])
+    assert selected == [] and status == "unreviewed_opened_view_masked"
+    selected, status, _ = reviewed_prefix_preferences(actions, **inputs, opened_views=[True])
+    assert selected == ["handoff"] and status == "ready_handoff_preference"
+    inputs["covered"] = {"a", "b", "u"}
+    selected, status, _ = reviewed_prefix_preferences(actions, **inputs, opened_views=[None])
+    assert selected == ["handoff"] and status == "ready_handoff_preference"

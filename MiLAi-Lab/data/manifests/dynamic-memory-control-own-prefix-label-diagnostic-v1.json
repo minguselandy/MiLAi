@@ -1,0 +1,66 @@
+{
+  "version": "dynamic-memory-control-own-prefix-label-diagnostic-v1",
+  "source": "artifacts/dynamic-memory-control/t0-base-own-label-diagnostic-v1",
+  "summary": {
+    "source_run": "artifacts/dynamic-memory-control/t0-rollout-base-v1",
+    "source_status": "COMPLETED_WITH_FAILURES",
+    "states": 171,
+    "labelled_by_split": {
+      "dev": 171
+    },
+    "statuses": {
+      "acquire_evidence_preference": 125,
+      "ready_handoff_preference": 46
+    },
+    "unreviewed_view_contexts": 0,
+    "persisted_candidate_matches": 590,
+    "policy_choices_copied": false,
+    "scope": "Single-slot source-only own rollouts; inputs unchanged, actual pools only. View adequacy reviewed separately in before/after source contexts. No silent stale-view credit or future-source reconstruction."
+  },
+  "diagnostic": {
+    "counts": {
+      "labelled": 171,
+      "accepted": 124
+    },
+    "strata": {
+      "acquire_evidence_preference": {
+        "labelled": 125,
+        "accepted": 93
+      },
+      "ready_handoff_preference": {
+        "labelled": 46,
+        "accepted": 31
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 31,
+        "accepted": 31
+      },
+      "READ": {
+        "selected": 109,
+        "accepted": 62
+      },
+      "HANDOFF": {
+        "selected": 31,
+        "accepted": 31
+      }
+    },
+    "families": 8,
+    "family_macro_acceptance": 0.7297289666854885,
+    "scope": "New offline preferences on actual BASE prefixes, not a task quality score. Choices are scored after label construction, never copied into targets.",
+    "actual_model_inputs_matched": 171,
+    "split": "dev_only_not_training",
+    "source_run": "t0-rollout-base-v1"
+  },
+  "compute": {
+    "wall_seconds": 0.4361183550208807,
+    "cpu_seconds": 0.30856734799999996,
+    "ledger_recorded": true,
+    "diagnostic_wall_seconds": 0.12028701603412628,
+    "diagnostic_cpu_seconds": 0.120287742
+  },
+  "interpretation": "171 real BASE prefixes remain dev-only. Preference matching124/171 is not QA error rate. Fifteen actual READ choices occurred after reviewed original sufficiency, but no causal claim of answer damage is made. Old T0 collection/labels unchanged.",
+  "mechanism": "Read each request's actually persisted evidence pool from a diagnostic Store copy, preserve actual observations, map original-source spans to offline proof sets; no final-state reconstruction or teacher-choice copying.",
+  "view_review": "Opened query views are judged separately for actual before/after source context. Missing review masks the state unless original Sources independently suffice. Stale view review is not inferred from successful USE or schema acceptance."
+}

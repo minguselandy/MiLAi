@@ -19,6 +19,44 @@ def decision_example(
                          "label_status": "unreviewed_masked"}}
 
 
+def reviewed_prefix_preferences(
+    actions: list[dict[str, Any]], *, proofs: list[set[str]], covered: set[str],
+    read_sources: dict[str, set[str]], refresh_sources: dict[str, set[str]],
+    opened_views: list[bool | None],
+) -> tuple[list[str], str, list[str]]:
+    """Offline next-step preferences; unreviewed opened views do not become false labels."""
+    if len(actions) == 1:
+        return [], "forced_single_action_masked", []
+    raw_ready = any(proof <= covered for proof in proofs)
+    if raw_ready or any(ready is True for ready in opened_views):
+        return ([a["id"] for a in actions if a["kind"] == "HANDOFF"],
+                "ready_handoff_preference", ["adequate_originals" if raw_ready
+                                             else "reviewed_task_adequate_view"])
+    if None in opened_views:
+        return [], "unreviewed_opened_view_masked", []
+    selected, basis = [], []
+    for action in actions:
+        key, kind = action["id"], action["kind"]
+        if kind == "SEARCH":
+            selected.append(key)
+            basis.append("source_pool_acquisition")
+        elif kind == "USE_VIEW":
+            selected.append(key)
+            basis.append("inspect_existing_interpretation_without_assuming_adequacy")
+        elif kind == "REFRESH_VIEW" and any(
+            proof <= refresh_sources.get(key, set()) for proof in proofs
+        ):
+            selected.append(key)
+            basis.append("adequate_source_scope;executor_quality_separate")
+        elif kind == "READ" and any(
+            read_sources.get(key, set()) & (proof - covered) for proof in proofs
+        ):
+            selected.append(key)
+            basis.append("adds_missing_reviewed_original")
+    return (selected, "acquire_evidence_preference" if selected
+            else "ambiguous_no_proven_progress_masked", sorted(set(basis)))
+
+
 def score_operation_predictions(
     rows: list[dict[str, Any]], predictions: list[dict[str, Any]],
 ) -> dict[str, Any]:
