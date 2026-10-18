@@ -6,8 +6,25 @@ D1 real base-Laya loop and Reader completed at artifacts/dynamic-memory-control/
 5forwards/4318inputtokens, temporal/scope answer correct under author review; not method efficacy.
 v2/v3/v4 are terminal failures, preserve costs and committed effects; no restart/rebill.
 v4 adds1unknown HTTP usage; v3 local load timing unknown. v1 is prepare-only.
-Version/range overlap fix follows v5; next work is six histories and shared-policy comparisons.
-No operation training, multi-slot, held-out confirmation, or overall completion claim.
+E0 first dispatch artifacts/dynamic-memory-control/e0-v1 is TERMINAL FAILED:
+PID4179314 absent, exec88910 exit1, 12 positions attempted. Fixed/rules approval answers4/4;
+BASE approvalq1 SEARCH→HANDOFF without READ (task loss), q2/q3 correct answer text, q4 Reader
+VLLM_CHAT_TRUNCATED with known usage. Keep failure/effects/costs; no old position rerun.
+E0 continuation LIVE: artifacts/dynamic-memory-control/e0-v1-remaining1/driver.json,
+PID35395, exec73048. Revalidate actual process/session; runtime roots remain e0-v1/{policy}.
+Runtime imports frozen1541deec, coordinator frozen7e8df793. It skips the12closedpositions;
+known-usage length failures are retained and next distinct inputs continue. Other execution errors stop.
+116 total positions=96tasks+20explicit operations. All cases/arms remain; no resampling or retry.
+Latest observed16closed positions: approval fixed4/4 and rules4/4 core answers, BASE2/4,
+generative3/4. BASEq1 missed READ; BASEq4 and generativeq2 Readerlengthfailures. Not full grounding
+or state success; only1sourcefamily. Nextlive stage fixed/project_lead/command-1 at observation.
+Rules approvalq2 view uses prior assistant answer e2 as reported support and narrows temporal rules;
+QA correctness does not establish independent grounding/view quality. Full state review still pending.
+Working tree34849348 reopens selected original supports on explicit refresh and clarifies source roles;
+23 relevant tests pass, NOT yet real-model evaluated. Do not import it into ongoing frozen v1 run.
+Working tree0103fb8f adds operation export/metrics: e0-prefix12-states-v1 has67unlabelled states,
+1family,21actual Laya inputs match by direct JSON comparison. Export CPU0.128s charged once.
+No gold auto-generated, operation training, multi-slot, held-out confirmation or overall completion.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.
