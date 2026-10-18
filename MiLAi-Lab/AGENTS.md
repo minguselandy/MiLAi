@@ -27,7 +27,8 @@ M2 training closed: mechanical86→102→103/125 dev; full-linear92→87→117/1
 full-native prior107/125. Final train323/373 and361/373 respectively. Fixed final96 only.
 Both original ledger compute phases match once, runs1; no rebilling. Head initialization differs.
 Matched64QA prepared on5052477f runtime; comparator is already queued feedback-full-v1.
-Prepared future jobs in prepared-next-2b5c7fbc: M2→sandbox16→M3fourarms96; not started.
+Prepared future jobs in prepared-next-e2f731be: M2→sandbox16→shared-generative36→M3fourarms96;
+8ready jobs, native intake held, none started. Preserve each job's declared frozen runtime.
 M3 runtime has generic rebuild/view-policy and rule full-context/reuse switches;88tests passed.
 Common-before input-scope diagnostic and4slot followup remain pending.
 
