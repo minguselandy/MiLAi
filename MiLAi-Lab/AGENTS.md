@@ -47,19 +47,26 @@ All557model inputs unchanged,1081candidate reconstructions match actual prefixes
 no truncation. View review64stages:43task-text adequate, graph/time defects separately retained.
 No teacher choice copying or hand-repair of stored views. Label preparation/length audit billed once.
 
-T0 CE TRAINING LIVE: artifacts/dynamic-memory-control/t0-ce-v1/seed0/run.json,
-PID623006, exec14845, frozen imports edf087d3. BASE native encoder+head, softCE, seed0,
-96fixedupdates,1536draws,event/family weighting,option shuffle; GPUs2,3. No old open-only weights.
-Latest observed68updates; diagnostics0=93/125 matched,48=101/125 but23handoffs outside preference.
-Do not call offline preference matching task success or tune/select a checkpoint from it.
-Final saved checkpoint path: t0-ce-v1/seed0/checkpoint; only use after terminal COMPLETED.
+T0 CE TRAINING CLOSED: t0-ce-v1/seed0/run.json COMPLETED,96updates/1536examples,
+PID623006 absent, finalcheckpoint saved. Runtime/training sourceedf087d3. Traininput2629749tokens;
+dev diagnostics769416tokens, finaltrain-eval638278tokens separate. Compute389.509wallsec billed once.
+Encoder and nativehead parameter probes changed. Tracked t0-learning-result.json.
+Dev preference matching93→101→107/125 at0/48/96. Final15handoffs outside preference; train342/373.
+This is not QA/state success or cost benefit. Fixed final96 only, no checkpoint/seed selection.
 
-Own-policy QA QUEUED: t0-rollout-dispatch-v1.json, waiterPID639365, exec30496.
-It waits for actual training process exit and success, then runs BASE and final96 CE sequentially,
-32positions each, independent empty banks, same8development families and actual normal Host.
-Runtime imports remain edf087d3; frozen inputs t0-rollout-inputs-v1. No heldout claim.
-Revalidate processes and handles before continuing; no automatic retry or old-root restart.
-No multi-slot,128/32expansion,T2own-prefix fitting,newholdout or full-goal completion yet.
+Own-policy QA LIVE: t0-rollout-dispatch-v1.json PID639365/exec30496; BASEchild651845,
+t0-rollout-base-v1/driver.json latest13/32attempted. Revalidate exact child process/command.
+BASE then saved CE final96,32positions each, independent empty banks, same8dev families.
+Runtime imports frozenedf087d3. Some known length failures retained; do not restart/rebill.
+CE not yet dispatched at this snapshot. Training checkpoint config uses actual saved final path.
+
+Working head ec756611 adds2/4bounded Store slots, actual-slot USE/REFRESH/new-scope options,
+LRU eviction, and source_arrivals Store owner/time filtering without formation enumeration.
+Inclusive timestamp+seen boundaryIDs retains equal-clock arrivals; visibility remains original boundary.
+A/B/A,reopen,LRU,outside-support arrivals and revocation tests pass.39relatedtests,Ruff,mypy,
+package/tools boundaries pass. New two-slot recipe exists but real-model validation still pending.
+SQLite internal scan is unmeasured; other Host retrieval work not claimed incremental. Do NOT inject
+this new code into running own-policy QA. No128/32expansion,T2own-prefix fitting,newholdout or completion.
 No subagents, SHA/checksum/content fingerprints, new services/ledger, old-run restarts, or push/merge.
 Original budget remains /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
 Current live generation endpoint 7860, embedding7861; historical7862 is unavailable.
