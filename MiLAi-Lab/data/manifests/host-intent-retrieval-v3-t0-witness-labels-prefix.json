@@ -1,26 +1,53 @@
 {
-  "states": 542,
-  "labelled": 191,
+  "states": 963,
+  "labelled": 648,
   "status_counts": {
-    "source_reviewed_preference": 191,
-    "forced_single_action_masked": 13,
-    "unreviewed_masked": 308,
-    "reviewed_ambiguous_masked": 30
+    "source_reviewed_preference": 648,
+    "forced_single_action_masked": 48,
+    "unreviewed_masked": 171,
+    "reviewed_ambiguous_masked": 96
   },
-  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v2/train.jsonl",
-  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v2/combined-reviews-v1.json",
+  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v4/train.jsonl",
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v4/combined-reviews-v2.json",
   "input_changes": 0,
   "teacher_actions_copied": false,
-  "scope": "Inherited sourcecontracts plus rereading the selected originaluserwitnesses and eachactualHostrequest. Whole-source sufficient witnesses; not optimal utilities or all legal actions.",
+  "scope": "Whole-turn sufficient source witnesses and explicit literal saved-version review, not minimum or optimal utility proofs. Source identities/roles/arrival cuts and exact actual Host requests are checked offline.",
   "status": "PARTIAL_SOURCE_REVIEW_NOT_FIT_READY",
-  "source_groups": 8,
-  "actual_requests_reviewed": 30,
-  "raw_range_projection_checks": 243,
+  "source_groups": 28,
+  "actual_source_requests_reviewed": 108,
+  "additional_stored_version_request": 1,
+  "held_request_count": 3,
+  "held_requests": [
+    {
+      "event_prefix": "rules-query_only/memops_A27/stage-2/chatcmpl-8e0945b185633c26:tool:0",
+      "reason": "Hostaddsworklocations/remote-in-office/schedule requirements absent fromthe reviewed preference task; retainunreviewed ratherthan silentlymapparentproofs."
+    },
+    {
+      "event_prefix": "rules-rich/memops_A27/stage-0/chatcmpl-8879886bdd0f03e4:tool:0",
+      "reason": "Hostaddsworklocations/remote-in-office/schedule requirements absent fromthe reviewed preference task; retainunreviewed ratherthan silentlymapparentproofs."
+    },
+    {
+      "event_prefix": "rules-rich/memops_C04/stage-0/chatcmpl-96b55373d55b8c79:tool:0",
+      "reason": "Actual target_scope=current_public_message conflicts with history-wide request and reviewed source-session proof. Do not silently broaden that scope or declare those originals sufficient."
+    }
+  ],
   "reviewer": "assistant author, not independent judgment",
-  "read_preference": "Adds missing reviewed evidence and fits the full live returnpacket, including references and usage.",
-  "search_preference": "Only an observed search result that adds a missing witness; not executableSEARCH bydefault.",
-  "view_preference": "No automaticUSE_VIEW/REFRESH positives; nonoriginalopenedmaterial without rawproofs remainsmasked.",
   "original_inputs_equal": true,
+  "prior_full_row_equality": {
+    "matched": 806,
+    "compared": 806
+  },
+  "actual_delivery_audit": {
+    "closed_trace_files": 126,
+    "actual_tool_deliveries": 133,
+    "matching_visible_and_returned_labels": 133,
+    "mismatches": []
+  },
+  "read_preference": "Adds missing request-reviewed original evidence and fits the complete live return packet.",
+  "search_preference": "Only an observed search successor adding missing witnesses; not every executable SEARCH.",
+  "view_preference": "No automatic USE_VIEW or REFRESH positives; nonoriginal material needs explicit review.",
   "model_calls": 0,
-  "unmeasured_research_cost": "Sourceannotation and these offlinecompilations not yet timed; notzero; no ledger settlementwhilemodelrunlives."
+  "unmeasured_research_cost": "Human source review, earlier compilation, and some verification were not timed; not zero. Three measured offline phases retained pending settlement; no settlement during the live model run.",
+  "measured_offline_work": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v2.json",
+  "data_path": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v7"
 }

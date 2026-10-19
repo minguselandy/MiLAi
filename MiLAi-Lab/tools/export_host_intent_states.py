@@ -14,17 +14,23 @@ from milai_lab.methods.memory_control_learning import decision_example
 def export_states(root: Path) -> list[dict[str, Any]]:
     driver = read_json(root / "driver.json")
     histories = {h["id"]: h for h in read_json(root / "fixture.json")["histories"]}
-    rows = []
+    rows: list[dict[str, Any]] = []
+    results_by_profile: dict[str, dict[tuple[str, str], tuple[Path, dict[str, Any]]]] = {}
     for position in driver["completed"]:
         history = histories[position["history"]]
         request = next(r for r in history["requests"] if r["id"] == position["request"])
         profile = position.get("profile", position["policy"])
         bank = (history["id"] if history.get("continuous") and not request.get("independent") else
                 history["id"] + "-" + position["request"])
-        results = [(path, read_json(path)) for path in (root / profile / "banks").glob(
-            "*/*-result.json")]
-        path, result = next((p, r) for p, r in results if r["bank"] == bank
-                           and r["message_id"] in {position["request"], "request"})
+        if profile not in results_by_profile:
+            indexed = {}
+            for path in (root / profile / "banks").glob("*/*-result.json"):
+                result = read_json(path)
+                indexed[result["bank"], result["message_id"]] = (path, result)
+            results_by_profile[profile] = indexed
+        indexed = results_by_profile[profile]
+        result_key = (bank, position["request"])
+        path, result = indexed[result_key if result_key in indexed else (bank, "request")]
         trace = next(path.parent.glob(path.name.replace("-result.json", "-trace-*.jsonl")))
         for line in trace.read_text().splitlines():
             event = json.loads(line)

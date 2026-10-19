@@ -1,16 +1,21 @@
-# LIVE UPDATE 2026-10-20: witnesslabels expanded; samerunpreserved
+# LIVE UPDATE 2026-10-20: 648 reviewed labels; same collection continues
 
-MainPID3815344/exec24523/frozen8f7f2a18 RUNNING snapshot106/272closed.
-Neverduplicate/restartonobservationtimeout; noofflinebudgetsettlementwhilelive.
-Closedprefix542states/15touchedgroups exported;30actualrequests from8groups source-reviewed.
-191labels aftermerging literalstoredversion review;13forced/30ambiguous/308unreviewedmasked.
-State/questions equalityverifiedall542; actualrange/bodyprojection equalityverified243states.
-Newofflinehelper READmustaddmissingreviewedsource AND fitfullreturn; SEARCHonlyobservednew
-neededcandidate. Emptyproof!=sufficient; no blanketUSE_VIEW/REFRESHpositive. SixrelatedtestsPASS.
-No runtimecasebranches, no teacheractioncopy, no modelcalls/fitting. Source/intentionannotations
-and data: t0-witness-labels-prefix manifest; ignoreddata/t0-reviewed-prefix-v3 and witnessreviews-v3.
-Continue source review/collection then dev64/generative48serially. NativeE0still0/24; sharedservice
-approvalPENDING; noSHA/subagents/newservices/secondledger/oldoutcomerepair. Fullgoalactive.
+Main PID3815344 / exec24523 / frozen8f7f2a18 RUNNING, snapshot145/272 closed (9 failures).
+Revalidate driver/proc; do not restart or duplicate on observation timeout. No offline settlement while live.
+Closed prefix v4 has963 states from29 touched groups. Source reviews v7 approve108 actual requests
+from28 groups;3 conflicting/drifted requests held. Merged stored-version review ->648 labelled,
+48 forced /96 ambiguous /171 unreviewed masked. All963 state/questions unchanged; prior806 full rows
+identical after exporter indexing optimization. All133 observed deliveries match final visible labels.
+Data: artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v7; review requests in
+ data/t0-main-closed-prefix-v4/original-witness-reviews-v7.json under the same artifact root.
+Tracked witness-labels-prefix and view-review-prefix manifests describe partial, not fit-ready data.
+Three views reviewed: B01 persisted but not delivered due budget; B06 rejected for absent rule nodes;
+B22 delivered with attribution qualification. No blanket USE_VIEW/REFRESH positive labels.
+Only exporter changed this checkpoint; Ruff/mypy pass. Running frozen source untouched. No new weights.
+Measured export/compile/audit costs: data/pending-offline-review-v2.json, NOT settled. Human/other untimed
+work unmeasured, not zero. Continue remaining source reviews, then dev64/generative48 serially.
+Native E0 still0/24; shared7860 parser change permission PENDING. No SHA/subagents/new service/second
+ledger/old-position replay or repair. Full goal ACTIVE; historical counts below are not current state.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 

@@ -1,0 +1,40 @@
+{
+  "status": "THREE_SELECTED_VIEWS_AUTHOR_REVIEW_NOT_COMPLETE_COHORT",
+  "collection": "t0-main-train-v2",
+  "profile": "rules-query_only",
+  "request": "stage-0",
+  "reviews": [
+    {
+      "family": "memops_B01",
+      "generated_nodes": 10,
+      "generated_rules": 0,
+      "operation_status": "material_budget_exhausted",
+      "persisted": true,
+      "delivered": false,
+      "basis": "Generated early-cut view summarizes ramen/proximity preferences and Darren job plans. The same revision is present in later decision metadata; the original return contains only three source materials. Generation and persistence do not imply delivery or later semantic freshness.",
+      "reuse_label": null
+    },
+    {
+      "family": "memops_B06",
+      "generated_nodes": 7,
+      "generated_rules": 3,
+      "operation_status": "view_rejected",
+      "reason": "QUERY_STRUCTURE_RULE_NODE_UNAVAILABLE",
+      "effect": "none",
+      "delivered": false,
+      "basis": "Generated rules reference absent n8/n9. The existing operation explicitly rejects the view; no output repair or retry. The rendered temporal field also mentions ingestion time despite unknown report time, and source January timing was approximate. These are raw generation observations, not accepted evidence.",
+      "reuse_label": null
+    },
+    {
+      "family": "memops_B22",
+      "delivered_nodes": 6,
+      "delivered_rules": 0,
+      "delivered": true,
+      "basis": "Delivered view captures early-cut workspace, quiet lunch and remote-day reduction. Node n4 frames autonomy as reported while citing both original user and assistant interpretations; preserve this attribution qualification. Later data-entry/patient-coordination experiences and possible open-plan move require fresh request-specific adequacy review.",
+      "reuse_label": null
+    }
+  ],
+  "model_calls_for_review": 0,
+  "old_outputs_changed": false,
+  "scope": "No blanket view action positive; not a whole-run readiness score."
+}
