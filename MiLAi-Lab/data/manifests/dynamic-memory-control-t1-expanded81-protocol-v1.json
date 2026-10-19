@@ -38,5 +38,8 @@
   "original_scripted_collection_prefixes": 418,
   "existing_generative_controller_prefixes": 98,
   "existing_labelled_prefixes": 468,
-  "source_only_label_contract": "Reviewed preferences using sufficient source witnesses; alternatives not exhaustively enumerated, no optimal-control or semantic-truth guarantee."
+  "source_only_label_contract": "Reviewed preferences using sufficient source witnesses; alternatives not exhaustively enumerated, no optimal-control or semantic-truth guarantee.",
+  "evaluation_config": "configs/dynamic-memory-operation-t1-expanded81-shared-evaluation-v1.json",
+  "evaluation_config_admission": "Passed offline; checkpoint gate remains conditional on future96updatefit.",
+  "ready_job_plan": "artifacts/dynamic-memory-control/prepared-after-v10-usability-and-expanded81-v1.json"
 }

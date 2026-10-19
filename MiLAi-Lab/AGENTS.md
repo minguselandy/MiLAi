@@ -28,7 +28,13 @@ All shared inputs fit12288,max9496; existing capacity measures reused after exac
 new auxiliary typed roundtrip rechecked. No new numerical model probe or model call needed.
 Next fixed96 seed0 fit fromBASE prepared in prepared-after-v10-expanded81-v1.json; NOT_STARTED.
 No expansion of liveV10. Full goal/protected/allseeds/fullstate/final fit and QA remain incomplete.
-New source-label/preparation compute pending. User-owned global research file remains untouched.
+Generic unreadable-receipt fix committed/frozen d230c945.2postforget profiles prepared from exact
+closed banks (6SQLite backups), same run namespaces/bank identities, copied admission counters and
+original singleledger. New session/message IDs; old firstoutcomes preserved, no model replay/idealstate.
+Next concrete plan prepared-after-v10-usability-and-expanded81-v1.json: postforget2 -> expanded81seed0
+fixed96 fit -> matched80QA. Config offlineadmission passed; futurefinal96/shared gate remains.
+This is not appended to liveV10. New source-label/audit/freeze/preparation compute remains pending.
+User-owned global research file remains untouched.
 
 # V9 TERMINAL / NEXT SERIAL QUEUE READY: 2026-10-19
 

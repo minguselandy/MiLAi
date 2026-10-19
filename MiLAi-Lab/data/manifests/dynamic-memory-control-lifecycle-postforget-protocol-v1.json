@@ -1,6 +1,6 @@
 {
   "version": "dynamic-memory-control-lifecycle-postforget-protocol-v1",
-  "status": "PREPARED_NOT_STARTED",
+  "status": "FROZEN_PROFILES_READY_NOT_STARTED",
   "config": "configs/dynamic-memory-operation-lifecycle-postforget-v1.json",
   "fixture": "data/fixtures/dynamic-memory-control/lifecycle-postforget-v1.json",
   "positions": 2,
@@ -8,5 +8,10 @@
   "admission": "Freeze tested source, prepare both profiles and bank copies without model calls; execute only after liveV10terminalreview.",
   "evaluation": "Actual final response must retrieve retained preference and respect revoked target. Verify no new semantic/business mutation. Historical access already demonstrated by rules, not inferred from fixed-context answer.",
   "scope": "Follow-up implementation verification from actual state, not replay of original messages or independent method efficacy/generalization.",
-  "model_calls_by_preparation": 0
+  "model_calls_by_preparation": 0,
+  "source_version": "d230c945",
+  "prepared_profiles": "artifacts/dynamic-memory-control/prepared-lifecycle-postforget-v1.json",
+  "ready_job_plan": "artifacts/dynamic-memory-control/prepared-after-v10-usability-and-expanded81-v1.json",
+  "original_profile_queue_counts_preserved": true,
+  "source_sqlite_backups": 6
 }

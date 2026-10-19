@@ -959,3 +959,11 @@ value导致KeyError。service.records公开返回读取状态，不能把每条�
 原答案与费用未重写。两臂整段任务仍有失败，完整语义图不作认证。准备两条新的后续会话问题，
 从各自真实最终bank的副本起步，不重复8条旧消息、不修补状态；测试源码冻结后待V10终态再
 执行。当前来源扩展拟合仍待队列空闲，所有新离线费用pending，完整目标尚未完成。
+
+
+修正已提交并冻结d230c945。两条后续查询的profile已离线准入：从已关闭的实际bank做6份SQLite
+备份，保留原namespace、bank身份、queue-admission计数和全部既有结果；仅新运行输入/源码身份
+以及新会话/消息ID。单一全局账本不改、不重置，准备0模型调用。后续具体计划为
+prepared-after-v10-usability-and-expanded81-v1：先2条新查询，再expanded81固定96拟合，随后
+同80开发位置QA；评价仍用0acc4b9a方法、17d6f621调度器。评价配置也已离线准入，checkpoint
+以未来实际final96/shared为准。当前V10仍运行，不追加/并发新模型任务，新费用pending。
