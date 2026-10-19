@@ -1612,7 +1612,8 @@ def continuation_operations(
         or mode.get("application_continuation_request") == "resolve_prior_request")
     if not current_plan and not resolve_business and not resolve_memory and not resolve_request:
         raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_NOT_REQUESTED")
-    bound = {**binding, "snapshot_id": material.get("snapshot_id"), "mode_attempt_id": path.stem}
+    bound = {**binding, "snapshot_id": None if current_plan else material.get("snapshot_id"),
+             "mode_attempt_id": path.stem}
     if memory_protocol:
         bound["resolution_contract"] = ("current_application_plan_v1" if current_plan else
                                         "explicit_resolution_scope_v1")
@@ -1687,7 +1688,7 @@ def continuation_operations(
         if state["attempts"] >= 1 + remaining:
             raise ValueError("FUNCTIONAL_CONTINUATION_RESOLUTION_REPROPOSAL_EXHAUSTED")
         state["attempts"] += 1
-        if request_protocol and not current_plan:
+        if request_protocol:
             state["material"] = material
         write_json(path, state)
         prompt = (
@@ -1774,8 +1775,12 @@ def continuation_operations(
                 "the requested workflow stages; reserve_and_label already includes labeling. "
                 "Completion criteria or implicit steps do not authorize more actions. Submit the "
                 "same call with application_requests=[] when no CURRENT application action is "
-                "requested or literal target/parameters cannot be resolved from this input; "
+                "requested or target/parameters cannot be resolved from the current input "
+                "and delivered evidence; "
                 "the earlier scope interpretation does not require a nonempty plan. "
+                "Bounded memory can supply parameter values referenced by the CURRENT request, "
+                "but cannot add actions or establish completed effects. Preserve source roles, "
+                "effective dates and scope; an earlier answer is not a fresh observation. "
                 "Original-request continuation is resolved separately, not by creating a new "
                 "plan from history. "
                 "The program compiles this plan and binds actual identities after queries. "
@@ -1788,6 +1793,9 @@ def continuation_operations(
                 "parameters": {"type": "object", "additionalProperties": False,
                     "properties": {"application_requests": application_requests_schema(
                         cast(str, application_workflow))}, "required": ["application_requests"]}}}
+            if material:
+                prompt += "\nBOUNDED PARAMETER EVIDENCE:\n" + json.dumps(
+                    material, ensure_ascii=False)
         response = model.invoke([SystemMessage(content=prompt), HumanMessage(
             content=content if current_plan else json.dumps(frame, ensure_ascii=False))],
             tools=[declaration], tool_choice=declaration_tool_choice)
@@ -3000,6 +3008,12 @@ def message(
                 )
                 if mode["protocol"] == "native_scope_requests_v9":
                     output["request_mode"] = mode
+                if mode.get("read_goal") is not None and memory.memory_view_mode != "legacy":
+                    view = memory.view_state(cfg)
+                    if view["read_goal"] is None:
+                        memory.focus_view(cfg, focus=view["focus"], read_goal=mode["read_goal"])
+                memory.forget_requested = bool(mode["allow_forgetting"]
+                    and "forget_memory" not in mode.get("forbidden_operations", []))
                 if (mode["protocol"] == "native_scope_requests_v9"
                         and mode["business_action_request"] == "perform"):
                     blocked = _visibility_replay(
@@ -3024,11 +3038,16 @@ def message(
                         budget.state[kind]["unknown_usage"] for kind in ("generation", "embedding"))
                     try:
                         if failure is None:
+                            material = (memory.model_material(cfg)
+                                if isinstance(memory, FunctionalEditMemory) else memory.context(
+                                    session, message_id, freeze["config_version"], query=content))
+                            trace({"event": "functional_material_delivery", "material": material,
+                                   "consumer": "current_application_plan"})
                             mode = continuation_operations(
                                 model, bank_root / f"{identity}-current-operations.json",
                                 {"source_ref": capture["source_ref"], "source_revision": 1,
                                  "config_version": freeze["config_version"]},
-                                content, mode, {}, settings["format_reproposals"], trace,
+                                content, mode, material, settings["format_reproposals"], trace,
                                 declaration_tool_choice=settings.get(
                                     "declaration_tool_choice", "auto"),
                                 application_workflow=app.workflow,
@@ -3205,11 +3224,6 @@ def message(
                     mode["business_operations"] = [op for op in mode["business_operations"]
                         if op not in forbidden and "business_mutation" not in forbidden]
                     mode["allow_business_mutation"] = bool(mode["business_operations"])
-                if mode.get("read_goal") is not None and memory.memory_view_mode != "legacy":
-                    view = memory.view_state(cfg)
-                    if view["read_goal"] is None:
-                        memory.focus_view(cfg, focus=view["focus"], read_goal=mode["read_goal"])
-                memory.forget_requested = bool(mode["allow_forgetting"])
                 output["request_mode"] = mode
             selected_memory = tuple(tool for tool in memory.tools() if mode is None or (
                 mode["allow_memory_maintenance"] if tool.name in {

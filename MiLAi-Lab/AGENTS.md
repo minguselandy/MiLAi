@@ -1,3 +1,22 @@
+# LIVE V6 / HOST EVIDENCE PLANNING: 2026-10-19
+
+V6 dispatcher PID1012861 / exec95123, active child1012869 multitopic-four-slots-v1-remaining1.
+Revalidate artifacts/dynamic-memory-control/reviewed-followups-dispatch-v6.json and /proc commands.
+15 measured offline phases SETTLED ONCE at idle before launch; original model/unknown counters unchanged.
+NEVER bill new offline work while V6 or any model child lives. V5 remains terminal failed, not restarted.
+Queue:13unstarted four-slot positions (method5052477f, dispatcher19f864a0) -> common-before8eb07410
+-> longest12288capacity probe -> conditional matched original/broader shared fits (modules3654662b).
+Host now delivers bounded shared memory evidence BEFORE current v9 application parameter planning;
+current request still controls actions, existing permissions/query limits/tracker remain. Dynamic
+retrieval executes once and its packet is reused by later Agent calls. No new service or model layer.
+Normal Host398tests passed, focused30 passed,5dispatcher tests passed, Ruff/2modulemypy/boundaries pass.
+New sandbox-evidence-plan-v2 is prepared:2simple policies x5messages, label outage/partial reservation,
+read-only reopen, backend recovery, original-label-only continuation and final actual status.
+Existing backend controls are passed explicitly to Host, never into prompt/gold. Real run NOT_STARTED;
+freeze this new source before its next-queue admission. It is not part of the currently frozen V6 jobs.
+Original failures are retained; full goal, broad cohort, protected confirmation/all seeds/lifecycle
+remain incomplete. Do not infer performance or semantic success from mechanical test passes.
+
 # V5 TERMINAL FAILURE REVIEW: 2026-10-19
 
 V5 PID893293/exec69065 and child893299 are terminal/absent (exec exit1), not live dependencies.

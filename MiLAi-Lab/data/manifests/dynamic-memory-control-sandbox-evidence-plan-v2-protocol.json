@@ -1,0 +1,23 @@
+{
+  "version": "dynamic-memory-control-sandbox-evidence-plan-v2",
+  "status": "PREPARED_NOT_STARTED",
+  "history": "data/fixtures/dynamic-memory-control/sandbox-evidence-plan-v2.json",
+  "config": "configs/dynamic-memory-operation-sandbox-evidence-plan-v2.json",
+  "policies": [
+    "fixed_context",
+    "rules"
+  ],
+  "message_positions": 10,
+  "independent_histories": 1,
+  "expected_behavior": [
+    "Use current original parameter evidence before registering the requested plan; current destination wins over old and future arrangements.",
+    "Reserve once while label backend is unavailable; preserve actual partial effect and do not report full completion.",
+    "Read-only cross-session status must query the actual application; memory requirements do not prove a reservation.",
+    "After declared backend recovery, query actual state and complete only the original label, preserving prior reservation parameters.",
+    "Final read-only query confirms actual state without duplicate reservation attempts."
+  ],
+  "runtime_boundary": "Only existing workflow/initial_world/evaluator_control/message_index fields are forwarded to ordinary Host. Offline expected values and later steps never enter prompts. Hidden backend availability is discoverable only through real tool outcomes.",
+  "model_policy": "First response only, original ledger/services, no retries or source/value repairs. New runtime must be frozen after related Host/dispatch tests.",
+  "gates": "After V6 serial queue terminal review; no concurrent model work.",
+  "prior_failure": "Original sandbox16and four-slot c-return capacity failure remain unchanged."
+}

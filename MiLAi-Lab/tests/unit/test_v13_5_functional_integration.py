@@ -7271,6 +7271,88 @@ def test_memory_handoff_preserves_declared_live_business_queries(
     assert result["records"] == []
 
 
+def test_current_business_plan_receives_controlled_evidence_before_registration(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    root = prepared(tmp_path, native=True, json_scope_requests=True, direct_response=True,
+        declaration_thinking="disabled", phase_thinking=True, actual_capabilities=True,
+        dynamic_memory=True, memory_method="milai_edit_m_v1", memory_profile="unified_v1",
+        maintenance_recipe="single_pass", edit_interface_version="I2",
+        edit_features={"source_metadata": True},
+        evidence_policy="question_pack_v1", memory_view_mode="staged",
+        memory_control={"policy": "fixed_context", "reads": 1, "max_control_steps": 4})
+    query = "Reserve and label the amber sample batch using today's recorded requirements."
+    requirement = "The amber sample batch needs4 units, destination North gate, packing padded box."
+    future = "Tomorrow the amber sample batch destination changes to West gate."
+    expected = {"item_key": "amber sample batch", "quantity": 4,
+                "destination": "North gate", "packing": "padded box"}
+    seen = {"plan": False, "query": False, "reserve": False}
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        names = {entry["function"]["name"] for entry in wire.get("tools", [])}
+        if ordinal == 1:
+            return {"role": "assistant", "content": json.dumps({
+                "memory_requests": [], "allow_forgetting": False,
+                "business_action_request": "perform", "application_continuation_request": "none",
+                "response_scope": "substantive", "forbidden_operations": ["memory_write"],
+                "read_goal": {"purpose": "Find the current recorded batch parameters",
+                              "evidence": ["original_source", "live_business"]}})}
+        if names == {"resolve_continuation_operations"}:
+            assert not seen["plan"] and wire["messages"][-1]["content"] == query
+            prompt = wire["messages"][0]["content"]
+            assert "BOUNDED PARAMETER EVIDENCE:\n" in prompt
+            packet = json.loads(prompt.split("BOUNDED PARAMETER EVIDENCE:\n", 1)[1])
+            originals = [source for item in packet["evidence"]
+                         for source in item.get("evidence", [])]
+            assert {(source["role"], source["content"]) for source in originals} >= {
+                ("user", requirement), ("user", future)}
+            assert any(source["reported_at"] == "2032-10-04T09:00:00+08:00"
+                       for source in originals)
+            seen["plan"] = True
+            return native_call("resolve_continuation_operations", "plan",
+                application_requests=[{"target": {"item_key": expected["item_key"]},
+                    "actions": [{"operation": "reserve_and_label", "arguments": {
+                        k: v for k, v in expected.items() if k != "item_key"}}]}])
+        assert seen["plan"]
+        assert not {"save_memory", "update_memory", "forget_memory"}.intersection(names)
+        if not seen["query"]:
+            seen["query"] = True
+            return native_call("get_reservation", "query", item_key=expected["item_key"])
+        if not seen["reserve"]:
+            assert actual_tool_receipt(wire)["receipt"]["status"] == "not_found"
+            seen["reserve"] = True
+            return native_call("reserve_and_label", "reserve", **expected)
+        assert actual_tool_receipt(wire)["receipt"]["label_status"] == "created"
+        return {"role": "assistant", "content": "Reserved4 for North gate in a padded box."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    request = dict(bank="planned-evidence", owner="alice", session="work",
+        message_id="act", content=query, query_time="2032-10-04", incoming_sources=[
+            {"role": "user", "session_id": "requirements", "event_key": "current",
+             "content": requirement, "occurred_at": "2032-10-04T09:00:00+08:00"},
+            {"role": "user", "session_id": "requirements", "event_key": "future",
+             "content": future, "occurred_at": "2032-10-04T09:01:00+08:00"}])
+    result = functional.message(root, **request)
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert all(seen.values())
+    assert result["records"] == []
+    reservations = result["world"]["world"]["reservations"]
+    assert len(reservations) == 1 and all(reservations[0][k] == v for k, v in expected.items())
+    assert reservations[0]["label_status"] == "created"
+    assert result["application_requests"][0]["business"]["status"] == "completed"
+    events = [json.loads(line) for trace in root.glob("banks/*/*-trace-0.jsonl")
+              for line in trace.read_text().splitlines()]
+    handoffs = [i for i, event in enumerate(events)
+                if event.get("event") == "memory_control_handoff"]
+    plans = [i for i, event in enumerate(events)
+             if event.get("event") == "functional_current_operation_resolution"]
+    assert len(handoffs) == len(plans) == 1 and handoffs[0] < plans[0]
+    calls = len(wires)
+    repeated = functional.message(root, **request, resume=True)
+    assert repeated["status"] == "COMPLETED" and len(wires) == calls
+    assert repeated["world"]["world"] == result["world"]["world"]
+
+
 @pytest.mark.parametrize("unknown_tag", [False, True])
 def test_request_scope_normalizes_repeated_categories_but_keeps_permission_checks(
     tmp_path: Path, unknown_tag: bool,

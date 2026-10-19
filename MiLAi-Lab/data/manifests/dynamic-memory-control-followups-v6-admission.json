@@ -1,0 +1,22 @@
+{
+  "version": "dynamic-memory-control-followups-v6-admission",
+  "status": "STARTED_SERIAL",
+  "dispatcher": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/reviewed-followups-dispatch-v6.json",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/prepared-followups-v6.json",
+  "observed_pid": 1012861,
+  "observed_child_pid": 1012869,
+  "observed_active": "multitopic-four-slots-v1-remaining1",
+  "prior_failure_review": "dynamic-memory-control-four-slot-capacity-failure-v1.json",
+  "settled_offline_phases_once": 15,
+  "settlement": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/pending-offline-settlement-v6.json",
+  "runtime_versions": {
+    "remaining_four_slot_method": "5052477f",
+    "remaining_four_slot_dispatcher": "19f864a0",
+    "common_before": "8eb07410",
+    "long_input_probe_and_training_modules": "3654662b"
+  },
+  "conditional_training": "Both matched shared fits run only if the declared longest-input numerical/resource probe COMPLETES. No task-efficacy inference from admission.",
+  "new_budget": false,
+  "automatic_retry": false,
+  "scope": "13unstarted four-slot positions,12common-before branches,one resource probe,two conditional96-update fits. New Host planning source is not used by these frozen comparisons."
+}

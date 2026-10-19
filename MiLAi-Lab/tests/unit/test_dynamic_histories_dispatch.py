@@ -20,12 +20,19 @@ def test_projection_preserves_source_sessions_roles_and_unknown_dates():
                {"role": "user", "content": "A new event.", "event_key": "turn-3"}]
     step = {"id": "q", "session": "query-reopened", "incoming_sources": sources,
             "content": "What is established?", "occurred_at": None, "query_time": None,
+            "initial_world": {"label_available": False}, "message_index": 2,
+            "evaluator_control": {"before_message_events": [{
+                "before_message_index": 2, "event_id": "restore",
+                "operation": "reservation.set_label_available", "available": True}]},
             "expected": "OFFLINE_ONLY", "operations": [{"target": "OFFLINE_ONLY"}]}
     projected = module.host_input(step, bank="b")
     assert projected["incoming_sources"][:2] == sources[:2]
     assert projected["incoming_sources"][2]["session_id"] == "source-stream"
     assert "session_id" not in sources[2]
     assert projected["query_time"] is None and projected["occurred_at"] is None
+    assert projected["initial_world"] == step["initial_world"]
+    assert projected["evaluator_control"] == step["evaluator_control"]
+    assert projected["message_index"] == 2
     assert "OFFLINE_ONLY" not in json.dumps(projected)
 
 

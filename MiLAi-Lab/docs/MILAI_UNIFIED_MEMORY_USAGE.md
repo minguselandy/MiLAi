@@ -1,5 +1,17 @@
 # 统一记忆功能候选与当前执行状态
 
+## 2026-10-19：动态控制下的当前业务参数与实时查询
+
+v9当前业务动作规划现接收共享读取路径实际交付的有界证据。例如当前请求只说“按已登记要求办理”，
+既有Source中的主体、数量、日期与适用范围可以用于解析参数；当前请求仍是动作许可的依据。
+计划不是执行回执。原应用查询、已登记计划、部分效果与重开续作仍由同一个Host/进度跟踪器处理。
+动态记忆HANDOFF结束记忆取证；已声明live_business的只读业务查询在原读取额度内保持可用。
+
+398项Host程序回归通过。新真实沙箱验证配置为
+`configs/dynamic-memory-operation-sandbox-evidence-plan-v2.json`，实际模型运行仍待执行；
+不把接口通过视为业务或语义验收。当前实验状态见[动态控制执行记录](MILAI_DYNAMIC_MEMORY_CONTROL_EXECUTION_20261018.md)。
+
+
 ## 2026-10-12：Host14 已闭合，修复后新 Q 首次运行
 
 新候选 `configs/milai-dynamic-memory-small-v1.json` 将可见原始 Source 的检索独立于语义形成。

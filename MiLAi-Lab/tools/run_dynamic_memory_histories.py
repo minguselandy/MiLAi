@@ -22,7 +22,9 @@ def host_input(step: dict[str, Any], *, bank: str) -> dict[str, Any]:
             "session": "session-1" if step["session"].endswith("-reopened") else "session-0",
             "message_id": step["id"], "content": step["content"],
             "occurred_at": step["occurred_at"], "query_time": step["query_time"],
-            "calendar_context": "Asia/Shanghai", "incoming_sources": sources}
+            "calendar_context": "Asia/Shanghai", "incoming_sources": sources,
+            **{key: copy.deepcopy(step[key]) for key in (
+                "workflow", "initial_world", "evaluator_control", "message_index") if key in step}}
 
 
 def main() -> None:
