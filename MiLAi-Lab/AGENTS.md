@@ -12,7 +12,12 @@ Receipt renderer uses source capture order for journal-authorized receipts. Orig
 173affected tests, Ruff/mypy2modules and package/tools boundaries passed. Lifecycle16positions prepared,
 full-context4rule predeclared; freeze before later serial admission, never modify current V9 methods.
 Confirmation selection protocol registered before external-dev author grading/protected content use.
-All45remaining train backgrounds registered;6source-reviewed,39pending, none newly collected/fitted.
+All45remaining train backgrounds registered;14source-reviewed,31pending, none newly model-collected/fitted.
+First12projected72queries/276literal turns;366source-only states losslessly shared,max7952,no truncation.
+Source-only admission is not generated-view/learned-trajectory coverage. WaveA source contracts/intake
+are committed manifests; nextB03/B05 contracts remain in expanded-source-review-v1 partial artifact.
+Lifecycle source frozen3f3c10d3; both configs admitted0modelcalls. Concrete next16position job is
+artifacts/dynamic-memory-control/prepared-after-v9-lifecycle-v1.json, not launched.
 Queue remains matched original/shared80 -> broader/shared80 -> external baselines144 -> own-train72.
 Evaluation method0acc4b9a, dispatcherdc2d4b32. All fixed final96; no best-checkpoint/protected selection.
 7earlier offline phases settled ONCE beforeV9; new offline work remains pending. NEVER settle while any

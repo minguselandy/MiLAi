@@ -1,0 +1,28 @@
+{
+  "status": "PROJECTED_SOURCE_ONLY_ADMISSION_NO_MODEL_COLLECTION",
+  "states": 366,
+  "raw": {
+    "max_full_tokens": 13026,
+    "oversized": 10
+  },
+  "shared": {
+    "max_full_tokens": 7952,
+    "oversized": 0
+  },
+  "typed_roundtrip": 366,
+  "model_calls": 0,
+  "model_forwards": 0,
+  "scope": "Source-only real Store/full-context diagnostic; no generated view or learned decision, not an upper bound on actual prefixes.",
+  "version": "dynamic-memory-control-memops-expanded-wave-a-intake-v1",
+  "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
+  "histories": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json",
+  "offline_proofs": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/source-review.json",
+  "source_backgrounds": 12,
+  "source_turns": 276,
+  "queries": 72,
+  "projection_checks": 72,
+  "method_source_version": "3f3c10d3",
+  "selection": "First12of all45predeclared remaining training backgrounds; rest continue in cohort order.",
+  "next": "Collect actual trajectories under a declared recipe only after V9 terminal review; do not treat these source-only observations as generated-view coverage or learned trajectories.",
+  "ledger": "Measured offline work pending until actual idle boundary; no second budget. Semantic author annotation is separate from script timings."
+}
