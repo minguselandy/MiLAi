@@ -1,57 +1,59 @@
-# CURRENT 2026-10-20: T0seed0 ordinary-tool dev64 RUNNING
+# CURRENT 2026-10-20: T0seed0 tool64 CLOSED; fixed_context64 next
 
-PID509200 gone; exec65861 exit0; fitting/t0-native-shared-seed0-v1/run.json COMPLETED207.
-Frozen training source c0770e49; final checkpoint exists.3312trainingrows/16457101tokens.
-Initial/mid/final dev accepted152/241/255 of353; family macro0.435331/0.707956/0.746665.
-Finaltrain1413/1649,macro0.874632. Encoder/head probes both changed; compute matches originalledger.
-Final fit wall4042.812391/CPU6993.788020. NO fitted seeds1/2 yet.
+No current model job at this snapshot. PID817340 gone / exec7553 exit0.
+Tool run t0-laya-dev-seed0-v1 COMPLETED_WITH_FAILURES64:57complete/7failed(4length/3format),
+147HTTP407486known=charged/newunknown0,embedding0; no old position replay.
+All64 source-author answers reviewed:38C/4Q/15W/7F; query_only17C/3Q/6W/6F,rich21C/1Q/9W/1F.
+Rules64:38C/9Q/11W/6F,182HTTP515477tokens. Same full-task count, not equivalence/gain.
+Paired33both/5rules-only/5laya-only/21neither.16group bootstrap overalldelta0,95%[-.09375,.109375].
+No query_structure generation/delivery forLaya; actual semantic record snapshots separate.
+Native320forwards/1185927tokens,1model load. Wholewall1372.767s vsrules1382.117s; messageCPU
+262.933s vs96.191s. Generation-token reduction alone is not netefficiency improvement.
 
-IMPORTANT: Laya SDK saves FP16, loads FP32. Persisted final207 validation COMPLETE456/456,
-PID797851 gone/exec35013 exit0.455choices identical; row189 context_8->read_4, bothpreferred.
-Same255/353,macro0.746665; maxlogitdelta0.006714.154.448wall/239.323CPU,456forwards/1800795tokens,
-originalledger phasehost_intent_t0_seed0_exported_dev_v1 matches. ComparisonCPU1.044368 settledv7.
+Runtime audit320actual sharedinputs exact,max8913tokens,allfinite/no truncation;85fullpackets
+match actual ToolMessages,max1791<=limits; no post-return evidence drops.2documented semantic_view
+current->frozen_snapshot metadata transitions, all other fields unchanged; initial audit assumption corrected,
+not runtime outputs. partial_evidence/with_prior/rich really forwarded ownprefetchref and reopenedroom,
+but also read irrelevant projector/setupquery; functional reuse, not optimality/savings proof.
+3layer-review cases in data/t0-laya-dev-layer-review-prefix-v1.json:2visibleupdates omitted;1Host
+promoted delivered plan/suggestion into completed action/intention. Do not turn these dev cases into train.
 
-ACTIVE MODEL JOB: PID817340 / exec7553 / frozen63603feb; normalHost JSON-action, notnativeE0.
-runs/t0-laya-dev-seed0-v1/driver.json,64dev positions, laya query_only+rich ownactualbanks.
-Dispatch t0-tool-eval-dispatch-v1.json; finalcheckpoint fromfitting/t0-native-shared-seed0-v1/checkpoint.
-Snapshot 19/64 closed, program statuses {'COMPLETED': 18, 'FAILED': 1}; NOT fullcohortquality.
-8answers reviewed in data/t0-laya-dev-seed0-task-reviews-v1.json (A19/A32); nofullscore.
-Firstfailure D25richstage0 VLLM_CHAT_TRUNCATED,2HTTP/13143known=charged/newunknown0.
-Receipt in run/first-failure-review-v1.json; retained, onlynextpositionscontinue.
-RevalidateactualPID/driver andpollsamehandle.
-No second model task or offline costsettlement whilethisjoblives. Preserve firstfailures; no retries.
+NEXT prepared model job: e1-fixed-context-dev-dispatch-v1.json, frozen63603feb,64dev positions,
+existing HTTPenv, policyfixed_context, query_only+rich, JSON-action, ownbanks, sameHost/budget.
+Plan data/manifests/host-intent-retrieval-v3-e1-development-protocol-v1.json registered before thisarm.
+Select strongerC0 by fullCORRECT includingfailures, tiesgenerationtokens thenmessagewall; reportboth.
+Initial E1development pilot, not finalJev/three-seed/new-reserved confirmation. Dispatch notstarted yet.
+Always revalidate actualPID/driver andpollsamehandle. No second modeljob or offline settlement whilelive.
 
-Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json ONLY.
-All offline-review-settlement-v1..v7 are SETTLED. pending-v6 statusSETTLED:10measuredphases
-14.844556CPU plus1failedtokenizer diagnostic with known5.83700721commandwall and missingCPU.
-Raw historical measurementfalse flags do not authorize rebilling. No offline settlement during live model jobs.
-Untimed author/tests remainunmeasured, notzero. Training phase already recorded bytrainer.
+Originalledger ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
+All offline-review-settlement-v1..v8 SETTLED. v8=5measuredphases11.273785CPU plus1audit-failure
+commandwall3.777963894 with explicit CPUmissing. Old rawfalse flags never authorize rebilling.
+Untimed author/tests/commands unmeasured, notzero. All actual model costs already in originalledger.
 
-T0fitting immutable data2276trainstates/1649labelled,64groups;456dev/353labelled,16groups.
-Final generative viewlabels use gen-view-reviews-v2, not provisionalv1 (unsupported2024 withdrawn).
-All384collection positions reviewed: main272107C/59Q/83W/1UNFULFILLED/22FAILED;
-rulesdev6438C/9Q/11W/6FAILED; gen4819C/1Q/15W/2UNFULFILLED/11FAILED.
-Only source-author exploratory judgments, not independentholdout. Full manifests tracked.
-Matched48 rules21C/142HTTP476795tokens;gen19C/320HTTP1611720tokens.8train groups/descriptive,
-not E2same-before or learned-policy results. Rawoutputs/firstfailures unchanged.
+T0seed0 fit c0770e49 COMPLETED207:3312rows/16457101trainingtokens. Finalcheckpoint under
+fitting/t0-native-shared-seed0-v1/checkpoint. Initial/mid/finaldev152/241/255of353;
+macro.435331/.707956/.746665. Finaltrain1413/1649,macro.874632; encoder/head probes changed.
+Trainingwall4042.812391/CPU6993.788020. Seeds1/2NOT_STARTED.
+SDKsaves170F16tensors, loadsFP32. Exported devvalidation e1df7ede COMPLETE456,PID797851gone/
+exec35013exit0,455choices same; changedrow189 bothpreferred. Same255/353. Cost154.448wall/
+239.323CPU,456forwards/1800795tokens, alreadyrecorded; comparisonCPU1.044368 settledv7.
 
-Workinghead supports actualsinglequestion IDs and explicit instruction_applicability task in train/eval;
-6puretests+2SDKprep stubforward PASS. Newoperation evalCLI4stub/metricsPASS,static/toolsPASS.
-No actual auxiliary model evaluation or T1mixedfitting yet. FollowIR1427train/349dev,965/241topics,
-max747/644tokens,no truncation. Author8group11row spotreview9supported/2qualified,notindependent;
-clinical/research factuality not established by relevance labels. Original labels unchanged.
+T0data frozen2276train/1649labelled64groups;456dev/353labelled16groups. Genviewreviews-v2 only,
+unsupported2024 positives withdrawn. All384oldcollection tasks reviewed (main272/dev64/gen48),
+source-author exploratory, not independentholdout; rawresults/firstfailures preserved.
+FollowIR auxiliary1427train/349dev,965/241groups,max747/644tokens,no truncation.11row spotreview
+9supported/2qualified, factuality not proved by relevance. Publishedlabels unchanged.
+Workinghead supports single actualquestion IDs and instruction_applicability train/eval; pure/stub
+SDK/CLI tests andstatic/boundariesPASS; no actual auxiliary model run or mixedT1 fitting yet.
+T1 inputs128train/32dev primarygroups, new64/16groups228/52positions. Use t1-sources-v1/new-histories
+fornewcollection; all oldT0inputs retained in full-histories. Newpools/requests/labels stillneedreview.
+T1mix/sampling/budget pending. Inheritedboundaries retained,000503excluded,2Wiki license notinvented.
 
-T1 allocation/source inputs128train/32dev primarygroups; new64/16groups,228/52positions.
-Use data/t1-sources-v1/new-histories.json for newcollection; full-histories retains alloldT0inputs.
-Train57MemOps+64MuSiQue+7TwoWiki; dev8MemOps+13MuSiQue+6authored+5TwoWiki.
-Inheritedadmission/boundaries retained;000503excluded;2Wiki license notinvented/no publication.
-Newpools/requests needreview; no newT1trajectory or operationgold. T1mix/sampling/budget pending.
-
-NativeE0 remains0/24, shared7860 parser permission stillPENDING. No sharedservice restart.
+NativeE0 0/24, shared7860 parser permission PENDING; no service restart.
 NoSHA/checksum/contentfingerprints/subagents/newservice/secondledger/remotepublication.
 FullT0/T1/T2,seeds0/1/2,E1/E2/E3,E4InstructIR/LongMemEval451images/Mem2ActGivenTool400,
 E5workloads/additionalHost remain. GoalACTIVE, notcomplete/blocked.
-All shortartifactpaths under artifacts/host-intent-retrieval-v3; historicalnotes below superseded.
+All shortartifactpaths under artifacts/host-intent-retrieval-v3; older notes superseded.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 

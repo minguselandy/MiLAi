@@ -1,0 +1,38 @@
+{
+  "status": "ALL64_TASK_CONTENT_REVIEWED",
+  "source_version": "63603feb",
+  "training_source_version": "c0770e49",
+  "checkpoint": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/checkpoint",
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-laya-dev-seed0-task-reviews-v1.json",
+  "positions": 64,
+  "source_groups": 16,
+  "grades": {
+    "CORRECT": 38,
+    "QUALIFIED": 4,
+    "WRONG": 15,
+    "FAILED": 7
+  },
+  "by_interface": {
+    "query_only": {
+      "CORRECT": 17,
+      "QUALIFIED": 3,
+      "WRONG": 6,
+      "FAILED": 6
+    },
+    "rich": {
+      "CORRECT": 21,
+      "WRONG": 9,
+      "QUALIFIED": 1,
+      "FAILED": 1
+    }
+  },
+  "scope": "Complete exploratory source-author review of64 T0seed0 ordinary-tool dev positions; not independent judgment or final held-out confirmation.",
+  "failure_receipts_match": 7,
+  "layer_review_prefix": "artifacts/host-intent-retrieval-v3/data/t0-laya-dev-layer-review-prefix-v1.json",
+  "raw_results_changed": false,
+  "model_calls": 0,
+  "phase": "host_intent_t0_laya_dev_task_review_aggregation_v1",
+  "wall_seconds": 0.0016220426186919212,
+  "cpu_seconds": 0.0016212299999999978,
+  "ledger_recorded": false
+}

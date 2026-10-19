@@ -1,0 +1,384 @@
+{
+  "status": "COMPLETE_MATCHED_DEV64_DESCRIPTIVE_COMPARISON",
+  "scope": "16 development source groups, provisional T0seed0 versus rules; source-author task-content rubric, no independent held-out confirmation or pure controller causal claim.",
+  "arms": {
+    "rules": {
+      "grades": {
+        "FAILED": 6,
+        "CORRECT": 38,
+        "WRONG": 11,
+        "QUALIFIED": 9
+      },
+      "generation_requests": 182,
+      "generation": {
+        "charged_tokens": 515477,
+        "known_tokens": 515477,
+        "unknown_usage": 0
+      },
+      "run_wall_seconds": 1382.1171315601096,
+      "sum_message_cpu_seconds": 96.19104549799998,
+      "sum_message_wall_seconds": 1356.3416916187853,
+      "tool_attempts": 71,
+      "tool_rejections": 0,
+      "executed_retrievals": 71,
+      "empty_returns": 8,
+      "query_semantic_mutation_receipts": 0,
+      "known_evidence_retrievals": 0,
+      "local_model": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 0.0,
+          "forwards": 0,
+          "input_tokens": 0,
+          "sequence_rows": 0,
+          "state_tokenizations": 0,
+          "state_tokens": 0,
+          "wall_seconds": 0.0
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 0.0,
+          "loads": 0,
+          "wall_seconds": 0.0
+        }
+      },
+      "stages": {
+        "host_request": {
+          "requests": 68,
+          "tokens": 116899,
+          "http_wall_seconds": 286.5065561514348
+        },
+        "view_generation": {
+          "requests": 50,
+          "tokens": 129642,
+          "http_wall_seconds": 188.70780353993177
+        },
+        "host_completion": {
+          "requests": 58,
+          "tokens": 212657,
+          "http_wall_seconds": 439.07638621143997
+        },
+        "host_incomplete": {
+          "requests": 5,
+          "tokens": 51966,
+          "http_wall_seconds": 267.7558770002797
+        },
+        "unparsed_host_response": {
+          "requests": 1,
+          "tokens": 4313,
+          "http_wall_seconds": 10.544059660285711
+        }
+      },
+      "delivered_query_views": 43,
+      "delivered_semantic_record_snapshots": 5
+    },
+    "laya": {
+      "grades": {
+        "CORRECT": 38,
+        "QUALIFIED": 4,
+        "WRONG": 15,
+        "FAILED": 7
+      },
+      "generation_requests": 147,
+      "generation": {
+        "charged_tokens": 407486,
+        "known_tokens": 407486,
+        "unknown_usage": 0
+      },
+      "run_wall_seconds": 1372.7670161761343,
+      "sum_message_cpu_seconds": 262.93345369900027,
+      "sum_message_wall_seconds": 1348.8105863733217,
+      "tool_attempts": 85,
+      "tool_rejections": 0,
+      "executed_retrievals": 85,
+      "empty_returns": 2,
+      "query_semantic_mutation_receipts": 0,
+      "known_evidence_retrievals": 1,
+      "local_model": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 161.72210472795996,
+          "forwards": 320,
+          "input_tokens": 1185927,
+          "sequence_rows": 320,
+          "state_tokenizations": 320,
+          "state_tokens": 1029029,
+          "wall_seconds": 101.63586517237127
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 7.142015000999891,
+          "loads": 1,
+          "wall_seconds": 5.7203454952687025
+        }
+      },
+      "stages": {
+        "host_request": {
+          "requests": 83,
+          "tokens": 154513,
+          "http_wall_seconds": 338.5026865983382
+        },
+        "host_completion": {
+          "requests": 57,
+          "tokens": 198847,
+          "http_wall_seconds": 495.3495707232505
+        },
+        "host_incomplete": {
+          "requests": 4,
+          "tokens": 43707,
+          "http_wall_seconds": 214.91242613177747
+        },
+        "unparsed_host_response": {
+          "requests": 3,
+          "tokens": 10419,
+          "http_wall_seconds": 26.7411096310243
+        }
+      },
+      "delivered_query_views": 0,
+      "delivered_semantic_record_snapshots": 3
+    }
+  },
+  "paired_full_correct": {
+    "both": 33,
+    "rules_only": 5,
+    "laya_only": 5,
+    "neither": 21
+  },
+  "source_group_rows": [
+    {
+      "history": "changed_view_missing_detail",
+      "source_group": "authored-changed-view-missing-detail-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 2
+      }
+    },
+    {
+      "history": "effective_threshold",
+      "source_group": "authored-effective-threshold-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 2
+      }
+    },
+    {
+      "history": "language_preference",
+      "source_group": "authored-language-preference-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 2
+      }
+    },
+    {
+      "history": "memops_A19",
+      "source_group": "memops_A19",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_A32",
+      "source_group": "memops_A32",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_B30",
+      "source_group": "memops_B30",
+      "rules": {
+        "query_only": 2,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_C03",
+      "source_group": "memops_C03",
+      "rules": {
+        "query_only": 2,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_D25",
+      "source_group": "memops_D25",
+      "rules": {
+        "query_only": 0,
+        "rich": 0
+      },
+      "laya": {
+        "query_only": 0,
+        "rich": 0
+      }
+    },
+    {
+      "history": "memops_E08",
+      "source_group": "memops_E08",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 0,
+        "rich": 1
+      }
+    },
+    {
+      "history": "memops_E15",
+      "source_group": "memops_E15",
+      "rules": {
+        "query_only": 0,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 0,
+        "rich": 2
+      }
+    },
+    {
+      "history": "memops_F01",
+      "source_group": "memops_F01",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "musique-family-000752",
+      "source_group": "musique-family-000752",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 0,
+        "rich": 1
+      }
+    },
+    {
+      "history": "musique-family-000879",
+      "source_group": "musique-family-000879",
+      "rules": {
+        "query_only": 0,
+        "rich": 0
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 1
+      }
+    },
+    {
+      "history": "partial_evidence",
+      "source_group": "authored-partial-evidence-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 1,
+        "rich": 2
+      }
+    },
+    {
+      "history": "same_name_scope",
+      "source_group": "authored-same-name-scope-v3",
+      "rules": {
+        "query_only": 2,
+        "rich": 2
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 2
+      }
+    },
+    {
+      "history": "stored_vs_original",
+      "source_group": "authored-stored-vs-original-v3",
+      "rules": {
+        "query_only": 1,
+        "rich": 1
+      },
+      "laya": {
+        "query_only": 2,
+        "rich": 1
+      }
+    }
+  ],
+  "group_cluster_bootstrap": {
+    "resamples": 10000,
+    "seed": 0,
+    "unit": "source group, retaining all requests/interfaces together",
+    "intervals": {
+      "overall_policy_delta": {
+        "estimate": 0.0,
+        "percentile_95": [
+          -0.09375,
+          0.109375
+        ]
+      },
+      "query_only_policy_delta": {
+        "estimate": -0.09375,
+        "percentile_95": [
+          -0.25,
+          0.0625
+        ]
+      },
+      "rich_policy_delta": {
+        "estimate": 0.09375,
+        "percentile_95": [
+          0.0,
+          0.1875
+        ]
+      },
+      "interface_by_policy_interaction": {
+        "estimate": 0.1875,
+        "percentile_95": [
+          0.03125,
+          0.34375
+        ]
+      }
+    }
+  },
+  "cost_interpretation": "Generation tokens decreased with equal complete-task count on this panel, but additional local GPU inference and more wrong/failed answers remain. Nested local/message/HTTP times are not additive; no total-cost or equivalence claim.",
+  "qualification": [
+    "Both interfaces use the same model/decoding settings, but actual stochastic Host requests differ.",
+    "CORRECT only; QUALIFIED is separate. Native benchmark values and source-qualified judgments are not merged.",
+    "A confidence interval crossing zero does not establish equivalence.",
+    "C0 fixed-context comparison is still required before selecting the strong simple reference."
+  ],
+  "model_calls": 0,
+  "phase": "host_intent_t0_laya_rules_dev64_comparison_v1",
+  "wall_seconds": 0.14664706122130156,
+  "cpu_seconds": 0.14663900600000002,
+  "ledger_recorded": false
+}

@@ -1,0 +1,139 @@
+{
+  "status": "COMPLETE_ACTUAL_INPUT_AND_DELIVERY_AUDIT",
+  "positions": 64,
+  "model_inputs_match_actual_shared_state_and_actions": 320,
+  "native_max_input_tokens": 8913,
+  "native_nonfinite_or_truncated": 0,
+  "deliveries_preserve_labels_bodies_revisions_and_other_fields": 85,
+  "documented_snapshot_status_transitions": [
+    {
+      "history": "stored_vs_original",
+      "request": "stored",
+      "interface": "query_only",
+      "label": "e1",
+      "revision": 2,
+      "transition": "current -> frozen_snapshot; open_evidence_packs(refresh_current=False)"
+    },
+    {
+      "history": "stored_vs_original",
+      "request": "spoken",
+      "interface": "rich",
+      "label": "e1",
+      "revision": 2,
+      "transition": "current -> frozen_snapshot; open_evidence_packs(refresh_current=False)"
+    }
+  ],
+  "full_packet_max_tokens": 1791,
+  "packets_over_actual_return_limit": 0,
+  "actual_tool_messages_match_packets": 85,
+  "known_reference_cases": [
+    {
+      "history": "partial_evidence",
+      "request": "with_prior",
+      "interface": "rich",
+      "actual_reference": {
+        "snapshot_id": "retrieval:[\"setup-prefetch\",\"request\",\"setup-read\"]",
+        "collection": "materials",
+        "item_index": 0
+      },
+      "known_content": "The Cedar workshop is in room N-214 on the second floor.",
+      "path": [
+        "search_0_8",
+        "read_1",
+        "read_3",
+        "read_2",
+        "handoff"
+      ],
+      "qualification": "Actual own-bank prefetch reference forwarded/reopened. It also read irrelevant projector and setup query before entry; no optimal-reuse or counterfactual-saving claim."
+    }
+  ],
+  "failures": [
+    {
+      "history": "memops_D25",
+      "request": "stage-0",
+      "interface": "rich",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "generation_delta": {
+        "charged_tokens": 13143,
+        "known_tokens": 13143,
+        "unknown_usage": 0
+      }
+    },
+    {
+      "history": "memops_E08",
+      "request": "stage-0",
+      "interface": "query_only",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "generation_delta": {
+        "charged_tokens": 16774,
+        "known_tokens": 16774,
+        "unknown_usage": 0
+      }
+    },
+    {
+      "history": "memops_E08",
+      "request": "stage-2",
+      "interface": "query_only",
+      "error": "JSON_ACTION_MALFORMED",
+      "generation_delta": {
+        "charged_tokens": 5373,
+        "known_tokens": 5373,
+        "unknown_usage": 0
+      }
+    },
+    {
+      "history": "memops_E15",
+      "request": "stage-0",
+      "interface": "query_only",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "generation_delta": {
+        "charged_tokens": 11333,
+        "known_tokens": 11333,
+        "unknown_usage": 0
+      }
+    },
+    {
+      "history": "musique-family-000752",
+      "request": "corpus-5087",
+      "interface": "query_only",
+      "error": "JSON_ACTION_MALFORMED",
+      "generation_delta": {
+        "charged_tokens": 8786,
+        "known_tokens": 8786,
+        "unknown_usage": 0
+      }
+    },
+    {
+      "history": "musique-family-000752",
+      "request": "corpus-9233",
+      "interface": "query_only",
+      "error": "VLLM_CHAT_TRUNCATED",
+      "generation_delta": {
+        "charged_tokens": 15708,
+        "known_tokens": 15708,
+        "unknown_usage": 0
+      }
+    },
+    {
+      "history": "musique-family-000879",
+      "request": "corpus-39805",
+      "interface": "query_only",
+      "error": "JSON_ACTION_MALFORMED",
+      "generation_delta": {
+        "charged_tokens": 11781,
+        "known_tokens": 11781,
+        "unknown_usage": 0
+      }
+    }
+  ],
+  "query_semantic_mutation_receipts": 0,
+  "first_audit_expectation_correction": "Initial whole-object equality incorrectly assumed current dependency status survives immutable return snapshot. Source code deliberately changes semantic_view current->frozen_snapshot; exactly2 such transitions found, all other fields unchanged. No runtime output repaired.",
+  "scope": "Mechanical checks, separate from semantic correctness/nativeE0/efficiency.",
+  "model_loads_for_audit": 0,
+  "model_calls": 0,
+  "http_requests": 0,
+  "phase": "host_intent_t0_laya_dev_runtime_audit_v1",
+  "wall_seconds": 2.815741766244173,
+  "cpu_seconds": 5.587821484,
+  "ledger_recorded": false
+}

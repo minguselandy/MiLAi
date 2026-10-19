@@ -1,0 +1,74 @@
+{
+  "status": "C0_COMPARISON_REGISTERED_FIXED_CONTEXT_NOT_STARTED",
+  "scope": "Initial E1 development pilot using finalT0seed0 as provisionalC1. Final selected Jev recipe, three-seed comparison and new reserved confirmation still required.",
+  "source_version": "63603feb",
+  "source_groups": [
+    "memops_A19",
+    "memops_A32",
+    "memops_B30",
+    "memops_C03",
+    "memops_D25",
+    "memops_E08",
+    "memops_E15",
+    "memops_F01",
+    "musique-family-000752",
+    "musique-family-000879",
+    "authored-language-preference-v3",
+    "authored-effective-threshold-v3",
+    "authored-stored-vs-original-v3",
+    "authored-partial-evidence-v3",
+    "authored-same-name-scope-v3",
+    "authored-changed-view-missing-detail-v3"
+  ],
+  "positions_per_policy": 64,
+  "interfaces": [
+    "query_only",
+    "rich"
+  ],
+  "transport": "json_action",
+  "native_probe": false,
+  "rules_run": "artifacts/host-intent-retrieval-v3/runs/t0-main-dev-v2",
+  "rules_reviews": "artifacts/host-intent-retrieval-v3/data/t0-dev-task-reviews-v1.json",
+  "fixed_context_run": "artifacts/host-intent-retrieval-v3/runs/e1-fixed-context-dev-v1",
+  "provisional_laya_run": "artifacts/host-intent-retrieval-v3/runs/t0-laya-dev-seed0-v1",
+  "C0_candidates": {
+    "rules": "Existing RulesMemoryPolicy reads4 with actual view reuse/refresh and saved-history handling.",
+    "fixed_context": "Existing FixedContextMemoryPolicy: actual search and up to4 complete-context reads within the common return/control budget; no learned semantic selector."
+  },
+  "selection_rule": [
+    "Use all64 registered positions, including first failures; same source-qualified complete-task rubric.",
+    "Choose the C0 candidate with more CORRECT answers; QUALIFIED stays separate and failures score0.",
+    "If tied, choose lower measured generation tokens; if still tied choose lower message wall time. Report full stage/local/ingest costs separately rather than equating tokens with all compute.",
+    "Report both candidates and source-group paired uncertainty; do not replace old failures or select a weaker C0 to improve C1 contrast."
+  ],
+  "common_configuration_fields_checked": [
+    "host",
+    "capacity",
+    "system_prompt",
+    "ordinary_material_tokens",
+    "additional_reads",
+    "source_access",
+    "source_top_k",
+    "semantic_top_k",
+    "evidence_policy",
+    "memory_ranking",
+    "read_exhaustion",
+    "business_tools",
+    "max_calls_per_message",
+    "format_reproposals"
+  ],
+  "common_limits": {
+    "material_tokens": 2048,
+    "max_control_steps": 8,
+    "fixed_reads_upper_bound": 4,
+    "source_top_k": 16,
+    "host_calls_per_message": 24
+  },
+  "registration_information": "Rules64 already closed (38CORRECT). ProvisionalC1 running; no fixed_context output exists at registration. This is exploratory development, not blind preregistration.",
+  "host_randomness": "Same model and decoding parameters; no claim of shared random draws or identical requests across policies.",
+  "input_boundary": "Same tasks/source arrivals and actual Store preparation; each policy/interface own bank. No gold, extra historical context, ideal views or forced tool invocation.",
+  "statistical_unit": "16 source groups;2requests and interfaces within group, not64 independent users.",
+  "native_e0": "Separate0/24; shared-service permission still pending.",
+  "created_epoch": 1792445569.237788,
+  "model_calls_for_registration": 0
+}

@@ -1,5 +1,5 @@
 {
-  "status": "RUNNING",
+  "status": "COMPLETED_WITH_FAILURES",
   "purpose": "T0 seed0 ordinary Host tool evaluation after predetermined final207 weights; independent of native E0 and not a final external benchmark.",
   "config": "configs/host-intent-retrieval-v3-t0-seed0-tool-eval.json",
   "data": "artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
@@ -61,22 +61,11 @@
   "exec_session": 7553,
   "source_version": "63603feb",
   "exported_checkpoint_validation": "data/manifests/host-intent-retrieval-v3-t0-export-validation-results.json",
-  "progress_snapshot": {
-    "closed_positions": 19,
-    "program_statuses": {
-      "COMPLETED": 18,
-      "FAILED": 1
-    },
-    "active": {
-      "history": "memops_D25",
-      "policy": "laya",
-      "interface": "rich",
-      "profile": "laya-rich",
-      "request": "stage-2"
-    },
-    "observed_epoch": 1792444427.7867644,
-    "semantic_reviews": 8,
-    "semantic_review_artifact": "artifacts/host-intent-retrieval-v3/data/t0-laya-dev-seed0-task-reviews-v1.json",
-    "scope": "Prefix only; no fullcohort or efficacy conclusion."
-  }
+  "exec_exit_code": 0,
+  "closed_positions": 64,
+  "program_completed": 57,
+  "program_failed": 7,
+  "semantic_reviews": 64,
+  "results": "data/manifests/host-intent-retrieval-v3-t0-laya-rules-dev64-comparison-v1.json",
+  "runtime_audit": "artifacts/host-intent-retrieval-v3/runs/t0-laya-dev-seed0-v1/runtime-audit-v1.json"
 }
