@@ -1,3 +1,12 @@
+# LIVE V7: 2026-10-19
+
+Only live coordinator PID1109944 / exec16345; child1109949 active t1-original-shared-seed0-v2.
+Status artifacts/dynamic-memory-control/reviewed-followups-dispatch-v7.json; inspect actual /proc before work.
+Queue: original_shared-v2 -> broader_shared-v2 (both frozen0acc4b9a,96updates,skip initial dev)
+-> sandbox-evidence-plan-v2 frozen dbf08661. No old first result or failed training directory resumed.
+9pending measured offline phases settled ONCE at idle before V7; model/unknown counters unchanged.
+NEVER settle new offline costs while this queue or any model child lives. Full goal stays active.
+
 # V6 TERMINAL / TRAINING FIX READY: 2026-10-19
 
 V6 PID1012861/exec95123 and finalchild1071570 are terminal/absent; exec exit1.
