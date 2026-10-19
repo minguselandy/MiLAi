@@ -19,5 +19,20 @@
   "runtime_boundary": "Only existing workflow/initial_world/evaluator_control/message_index fields are forwarded to ordinary Host. Offline expected values and later steps never enter prompts. Hidden backend availability is discoverable only through real tool outcomes.",
   "model_policy": "First response only, original ledger/services, no retries or source/value repairs. New runtime must be frozen after related Host/dispatch tests.",
   "gates": "After V6 serial queue terminal review; no concurrent model work.",
-  "prior_failure": "Original sandbox16and four-slot c-return capacity failure remain unchanged."
+  "prior_failure": "Original sandbox16and four-slot c-return capacity failure remain unchanged.",
+  "runtime_source": "dbf08661",
+  "prepared_job": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/prepared-after-v6-sandbox-v2.json",
+  "config_admission": {
+    "status": "CONFIG_PREPARED_NO_MODEL",
+    "source_version": "dbf08661",
+    "model_calls": 0,
+    "protocol": "data/manifests/dynamic-memory-control-sandbox-evidence-plan-v2-protocol.json"
+  },
+  "validation": {
+    "host_integration": 398,
+    "dispatch": 5,
+    "ruff": "passed",
+    "mypy": "2modules passed",
+    "package_tools_boundaries": "passed"
+  }
 }

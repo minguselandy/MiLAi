@@ -783,3 +783,7 @@ V6现由PID1012861/exec95123串行执行13个未开始四槽位置，随后共�
 通过后才执行匹配共享表示训练。15项已测离线费用在实际空闲边界各结算一次，模型与unknown计数不变。
 原四槽Host仍5052477f；只调度器换19f864a0以记录已知容量失败后继续不同输入。共同before仍8eb07410，
 训练模块仍3654662b。此处新业务计划源码不会混入这些冻结比较。见followups-v6-admission清单。
+
+新沙箱源码已冻结dbf08661，实际functional.prepare配置准入完成、0模型调用。
+具体未启动命令见artifacts/dynamic-memory-control/prepared-after-v6-sandbox-v2.json；
+共享读取/规划/执行都走冻结正常Host，待当前V6终态审阅后串行执行。

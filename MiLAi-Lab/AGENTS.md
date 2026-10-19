@@ -13,7 +13,8 @@ Normal Host398tests passed, focused30 passed,5dispatcher tests passed, Ruff/2mod
 New sandbox-evidence-plan-v2 is prepared:2simple policies x5messages, label outage/partial reservation,
 read-only reopen, backend recovery, original-label-only continuation and final actual status.
 Existing backend controls are passed explicitly to Host, never into prompt/gold. Real run NOT_STARTED;
-freeze this new source before its next-queue admission. It is not part of the currently frozen V6 jobs.
+frozen dbf08661 and real config prepared with0modelcalls. Next job is prepared-after-v6-sandbox-v2.json.
+It is not part of the currently frozen V6 jobs.
 Original failures are retained; full goal, broad cohort, protected confirmation/all seeds/lifecycle
 remain incomplete. Do not infer performance or semantic success from mechanical test passes.
 
