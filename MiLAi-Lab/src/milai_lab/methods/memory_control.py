@@ -174,7 +174,8 @@ class RulesMemoryPolicy:
                          and a.parameters.get("index") in historical), None)
             if read is not None:
                 return read.id
-        matching = [v for v in state.views if v.get("built_for") == state.task["request"]]
+        matching = [v for v in state.views if v.get("built_for") == state.task["request"]
+                    and v.get("retrieval_request") == state.task.get("retrieval_request")]
         reusable = {v["id"] for v in matching if not v["pending_events"]}
         if self.reuse_views and not wants_history and reusable:
             use = next((a for a in actions if a.kind == "USE_VIEW" and a.target in reusable), None)

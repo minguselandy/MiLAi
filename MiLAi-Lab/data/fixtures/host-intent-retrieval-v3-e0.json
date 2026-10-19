@@ -1,0 +1,32 @@
+{
+  "schema": "host_intent_development_v3",
+  "split": "dev",
+  "histories": [
+    {
+      "id": "language_preference",
+      "source_group": "authored-language-preference-v3",
+      "coverage": "simple_fact_and_same_query_different_purpose",
+      "sources": [
+        {
+          "session_id": "preference-history",
+          "event_key": "preference",
+          "role": "user",
+          "content": "For our morning check-ins, please use Spanish. For the written weekly summary, use English.",
+          "occurred_at": "2026-10-01T09:00:00+08:00",
+          "calendar_context": "Asia/Shanghai"
+        }
+      ],
+      "requests": [
+        {
+          "id": "original",
+          "content": "What language did I request for morning check-ins? Retrieve the original wording so I can quote it."
+        },
+        {
+          "id": "apply",
+          "content": "What language did I request for morning check-ins? Retrieve what you need to apply that preference to tomorrow’s check-in; distinguish it from the written weekly summary."
+        }
+      ],
+      "review_basis": "Morning check-ins Spanish; written weekly summary English; both purposes use the identical pre-query source pool."
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "host_intent_retrieval_v3_data",
+  "plan": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/docs/MILAI_HOST_INTENT_RETRIEVAL_DEVELOPMENT_EXPERIMENT_PLAN_20261019_v3.md",
+  "current_stage": "M1 development; one of six authored histories prepared",
+  "splits": {
+    "dev": {
+      "source_groups": [
+        "authored-language-preference-v3"
+      ],
+      "fixture": "data/fixtures/host-intent-retrieval-v3-e0.json",
+      "training_allowed": false
+    },
+    "train": {
+      "status": "not_compiled"
+    },
+    "confirmation": {
+      "status": "not_registered"
+    }
+  },
+  "e0_target": {
+    "histories": 6,
+    "requests_per_history": 2,
+    "policies": [
+      "rules",
+      "laya"
+    ],
+    "external_tool_calls": 24
+  },
+  "e0_pending_coverage": [
+    "effective_time_before_after",
+    "original_wording_vs_actual_stored_revision",
+    "partial_evidence_already_delivered",
+    "same_name_subjects_and_scope",
+    "missing_evidence_or_outdated_view"
+  ],
+  "training_targets": {
+    "T0_train_groups": 64,
+    "T0_dev_groups": 16,
+    "T1_train_groups": [
+      128,
+      256
+    ],
+    "T1_dev_groups": 32,
+    "self_policy_train_groups": 32,
+    "confirmation_groups": [
+      32,
+      48
+    ],
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  "source_policy": "Inherit registered splits; exposed MemOps dev and external evaluations never become train. FollowIR themes and multi-hop shared seeds grouped before expansion.",
+  "external_targets": {
+    "InstructIR": "official full selected configuration",
+    "LongMemEval_V2_Small": 451,
+    "Mem2Act_GivenTool_small": 400
+  },
+  "hash_verification": false
+}

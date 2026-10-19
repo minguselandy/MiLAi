@@ -149,6 +149,7 @@ def build_query_structure(
     slot: str = "current",
     capacity: int = 1,
     replace_slot: bool = False,
+    retrieval_request: dict[str, Any] | None = None,
 ) -> tuple[dict[str, Any] | None, dict[str, Any]]:
     """Reuse, reconstruct or incrementally refresh the same actually retrieved scope.
 
@@ -231,6 +232,7 @@ def build_query_structure(
                     EXPLICIT_REFRESH_INSTRUCTIONS if force_refresh else "")},
                 {"role": "user", "content": json.dumps({
                     "question": question, "query_time": date,
+                    **({"retrieval_request": retrieval_request} if retrieval_request else {}),
                     "previous": previous, "sources": sources,
                     "ingestion_observations": [{"source": alias,
                         "source_revision": binding["source_revision"],
@@ -271,6 +273,7 @@ def build_query_structure(
     item = {"id": identifier, "kind": "query_structure", "policy": policy,
         "revision": revision, "structure": structure, "source_bindings": bindings,
         "built_for": question, "slot": slot,
+        **({"retrieval_request": retrieval_request} if retrieval_request else {}),
         "arrival_cursor": cursor, "retrieved_sources": pool, "query_time": date,
         "arrival_boundary_refs": [s["event_id"] for s in events
                                   if cursor and s["observed_at"] == cursor[0]],

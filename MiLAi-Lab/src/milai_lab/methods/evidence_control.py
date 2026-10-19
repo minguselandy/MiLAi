@@ -47,11 +47,13 @@ class EvidenceOperations:
         excluded_source_refs: tuple[str, ...] = (),
         view_capacity: int = 1,
         view_policy: QueryStructurePolicy = "incremental",
+        known_materials: list[dict[str, Any]] | None = None,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
         self.materials: list[dict[str, Any]] = []
         self.opened: dict[int, dict[str, Any]] = {}
+        self.known_materials = known_materials or []
         self.attempted: set[tuple[int, bool]] = set()
         self.searched = False
         self.view_capacity = view_capacity
@@ -104,6 +106,8 @@ class EvidenceOperations:
             "revision": view["revision"], "visibility": opened[slot]["visibility"],
             "pending_events": [e["source_ref"] for e in state.new_events if self.pending(view, e)],
             "source_bindings": view["source_bindings"],
+            **({"retrieval_request": view["retrieval_request"]}
+               if "retrieval_request" in view else {}),
             "semantics": "binding/inventory status is not semantic correctness or full coverage"}
             for slot, view in self.views.items()]
         return opened
@@ -138,6 +142,7 @@ class EvidenceOperations:
             or refs != set(view["retrieved_sources"])
             or view.get("built_for") != state.task["request"]
             or view["query_time"] != state.task["query_time"]
+            or view.get("retrieval_request") != state.task.get("retrieval_request")
             or (metadata is not None and metadata["visibility"] != "visible"))
         return tuple(sorted(refs)) if changed else ()
 
@@ -163,7 +168,7 @@ class EvidenceOperations:
         """Availability uses actual versioned intervals, never semantic sufficiency."""
         if item["kind"] != "original_source":
             return True
-        delivered = [span for opened in self.opened.values()
+        delivered = [span for opened in [*self.opened.values(), *self.known_materials]
                      if opened.get("body_delivered") is not False
                      for span in opened.get("source_ranges", [])]
         for target in item["context_source_ranges" if expand else "source_ranges"]:
@@ -225,7 +230,9 @@ class EvidenceOperations:
                 event["source_ref"] for event in state.new_events}))
             duplicate = any(v.get("built_for") == state.task["request"]
                 and set(v["retrieved_sources"]) == set(refs)
-                and v["query_time"] == state.task["query_time"] for v in self.views.values())
+                and v["query_time"] == state.task["query_time"]
+                and v.get("retrieval_request") == state.task.get("retrieval_request")
+                for v in self.views.values())
             slot = next_structure_slot(self.service, self.view_capacity)
             if refs and not duplicate and (slot, refs, True) not in self.refreshed_inputs:
                 actions.append(MemoryAction("new_view", "REFRESH_VIEW", "new selected source scope",
@@ -313,7 +320,8 @@ class EvidenceOperations:
                     state.task["query_time"], list(refs), policy=self.view_policy,
                     call=self.refresh_call,
                     source_events=events, force_refresh=True, slot=slot,
-                    capacity=self.view_capacity, replace_slot=replace)
+                    capacity=self.view_capacity, replace_slot=replace,
+                    retrieval_request=state.task.get("retrieval_request"))
             except (FunctionalRejection, ValidationError) as error:
                 # These checks precede the cache write. Preserve a definite failure
                 # as feedback; the attempted input cannot silently be regenerated.

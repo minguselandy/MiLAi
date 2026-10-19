@@ -44,7 +44,8 @@ class LinearDecision(NativeDecision):
         self.config = {**self.config, "architecture": "linear_action_markers_v1"}
 
     @classmethod
-    def load(cls, checkpoint: Path, max_len: int, head_max_len: int) -> LinearDecision:
+    def load(cls, checkpoint: Path, max_len: int, head_max_len: int,
+             device: str = "cpu") -> LinearDecision:
         import torch
         from safetensors.torch import load_file
         from transformers import AutoModel, AutoTokenizer
@@ -54,10 +55,10 @@ class LinearDecision(NativeDecision):
         encoder = AutoModel.from_pretrained(checkpoint / "encoder", local_files_only=True)
         result.model = build_linear_model(encoder)
         result.model.scorer.load_state_dict(load_file(str(checkpoint / "scorer.safetensors")))
-        result.model.float().eval()
+        result.model.float().to(device).eval()
         result.tokenizer = AutoTokenizer.from_pretrained(  # type: ignore[no-untyped-call]
             checkpoint / "tokenizer", local_files_only=True)
-        result.device = torch.device("cpu")
+        result.device = torch.device(device)
         result.max_len, result.head_max_len = max_len, head_max_len
         result.counters = dict(forwards=0, sequence_rows=0, input_tokens=0,
                                state_tokenizations=0, state_tokens=0)

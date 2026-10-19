@@ -39,6 +39,7 @@ from milai_lab.memory.functional_state import (
     visibility,
 )
 from milai_lab.memory.reader_projection import expand_host_packet
+from milai_lab.memory.retrieval_request import StructuredReadGoal as StructuredReadGoal
 from milai_lab.memory.service import MemoryService, _lexical_tokens
 from milai_lab.memory.working_set import (
     admit_refs,
@@ -174,16 +175,6 @@ class ForgetTargetSelector(ReadSelector):
     scope: Literal["record", "record_and_sources"] = "record_and_sources"
 
 
-class StructuredReadGoal(BaseModel):
-    """Declared reading purpose and evidence needs, never a sufficiency verdict."""
-
-    model_config = ConfigDict(extra="forbid", strict=True)
-    purpose: str = Field(min_length=1)
-    evidence: list[Literal[
-        "current_interpretation", "saved_history", "original_source", "live_business"
-    ]]
-
-
 def normalize_read_goal(
     value: str | dict[str, Any] | StructuredReadGoal | None,
 ) -> str | dict[str, Any] | None:
@@ -191,7 +182,7 @@ def normalize_read_goal(
         return value
     goal = value if isinstance(value, StructuredReadGoal) \
         else StructuredReadGoal.model_validate(value)
-    return goal.model_dump(mode="json")
+    return goal.model_dump(mode="json", exclude_unset=True)
 
 
 class ResidentTargetSelector(ReadSelector):

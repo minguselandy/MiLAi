@@ -1,0 +1,252 @@
+"""A Host tool over the existing evidence operations and durable read allowance."""
+from __future__ import annotations
+
+import copy
+import time
+from typing import Annotated, Any, Literal
+
+from langchain_core.messages import ToolMessage
+from langchain_core.runnables import RunnableConfig
+from langchain_core.tools import BaseTool, InjectedToolCallId, StructuredTool
+
+from milai_lab.memory.functional import normalize_read_goal
+from milai_lab.memory.functional_state import (
+    FunctionalIntegrityError,
+    FunctionalRejection,
+    canonical,
+    namespace,
+    note_exposure,
+    reference_key,
+)
+from milai_lab.memory.retrieval_request import (
+    RetrievalContext,
+    RetrievalLimits,
+    RetrievalRequest,
+    StructuredReadGoal,
+)
+from milai_lab.memory.working_set import material_ref
+from milai_lab.methods.evidence_control import EvidenceOperations
+from milai_lab.methods.evidence_reading import (
+    build_evidence_packs,
+    open_evidence_packs,
+    project_packs,
+)
+from milai_lab.methods.functional_edit_memory import FunctionalEditMemory
+from milai_lab.methods.memory_control import MemoryAction, MemoryControlState, run_memory_control
+
+TOOL_DESCRIPTION = (
+    "Retrieve evidence from existing memory for your current task. Supply the full query; "
+    "optionally state the purpose, required evidence points, target scope, as_of time and "
+    "references you actually received. Do not prescribe internal search/read/refresh steps. "
+    "The result contains evidence, termination_reason and usage, not the final answer. "
+    "Keep unverified premises as questions. Use the returned evidence to continue the original "
+    "task; request additional material only when needed. A termination reason does not certify "
+    "sufficiency. This tool does not save, correct, forget or execute business actions."
+)
+
+
+class IntentRetrievalMemory(FunctionalEditMemory):
+    """Opt-in adapter: the Host calls retrieval instead of receiving automatic retrieval."""
+
+    def __init__(self, *args: Any, retrieval_interface: Literal["rich", "query_only"] = "rich",
+                 **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        self.retrieval_interface = retrieval_interface
+        self.policy["retrieval_interface"] = retrieval_interface
+
+    @property
+    def read_tool_names(self) -> frozenset[str]:
+        return super().read_tool_names | {"milai_retrieve"}
+
+    def model_material(
+        self, config: RunnableConfig, *, for_write: bool = False,
+        fresh_observations: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        if for_write or self.forget_requested:
+            return super().model_material(config, for_write=for_write,
+                                          fresh_observations=fresh_observations)
+        return {"ok": True, "schema": "milai_retrieval_context_v1",
+                "instructions": "Call milai_retrieve when past evidence is needed. "
+                    "Previously returned evidence remains in the actual tool messages.",
+                "fresh_observations": fresh_observations or []}
+
+    def tools(self) -> tuple[BaseTool, ...]:
+        return self._retrieval_tools(super().tools())
+
+    def writer_tools(self, config: RunnableConfig) -> tuple[BaseTool, ...]:
+        return (self._retrieval_tools(super().writer_tools(config)) if self.features.enabled
+                else self.tools())
+
+    def _retrieval_tools(self, base: tuple[BaseTool, ...]) -> tuple[BaseTool, ...]:
+        def milai_retrieve(
+            query: str, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+            read_goal: str | StructuredReadGoal | None = None,
+            task_context: RetrievalContext | None = None,
+            limits: RetrievalLimits | None = None,
+        ) -> ToolMessage:
+            request = RetrievalRequest.model_validate({"query": query, **{
+                key: value for key, value in (("read_goal", read_goal),
+                    ("task_context", task_context), ("limits", limits)) if value is not None}})
+            result = self.retrieve(config, tool_call_id, request)
+            return ToolMessage(name="milai_retrieve", tool_call_id=tool_call_id,
+                               content=canonical(result),
+                               status="success" if result["ok"] else "error")
+
+        def query_only(
+            query: str, config: RunnableConfig, *,
+            tool_call_id: Annotated[str, InjectedToolCallId],
+        ) -> ToolMessage:
+            return milai_retrieve(query, config, tool_call_id=tool_call_id)
+
+        retrieve = StructuredTool.from_function(
+            query_only if self.retrieval_interface == "query_only" else milai_retrieve,
+            name="milai_retrieve", description=TOOL_DESCRIPTION)
+        reads = super().read_tool_names
+        return (*(t for t in base if t.name not in reads or self.forget_requested),
+                retrieve)
+
+    def _known_materials(self, request: RetrievalRequest) -> list[dict[str, Any]]:
+        materials = []
+        for ref in request.task_context.known_evidence_refs:
+            stored = self.service.store.get(namespace(self.service), ref.snapshot_id)
+            if (stored is None or stored.value.get("schema") != "milai_retrieval_snapshot_v1"
+                    or ref.item_index not in stored.value.get("delivered_indices", [])):
+                raise FunctionalRejection("RETRIEVAL_REFERENCE_NOT_DELIVERED")
+            item = copy.deepcopy(stored.value["materials"][ref.item_index])
+            if item["kind"] == "semantic_view":
+                current = self.service.read(item["record_id"])
+                if not current["ok"] or current["value"]["revision"] != item["revision"]:
+                    item["version_view"] = "historical_exact_revision"
+            materials.append(item)
+        return open_evidence_packs(self.service, materials)
+
+    def retrieve(self, config: RunnableConfig, call_id: str,
+                 request: RetrievalRequest) -> dict[str, Any]:
+        bound = self._binding(config)
+        key = "retrieval:" + reference_key([bound["session"], bound["message_id"], call_id])
+        existing = self.service.store.get(namespace(self.service), key)
+        if existing is not None:
+            saved = existing.value
+            if saved["request"] != request.project():
+                raise FunctionalRejection("RETRIEVAL_CALL_CHANGED")
+            if saved["status"] != "completed":
+                raise FunctionalIntegrityError("RETRIEVAL_OUTCOME_UNKNOWN")
+            return self._retrieval_result(key, saved)
+
+        started = time.perf_counter()
+        return_limit = min(self.material_limit,
+                           request.limits.max_return_tokens or self.material_limit)
+        steps = min(self.control_steps, request.limits.max_control_steps
+                    if request.limits.max_control_steps is not None else self.control_steps)
+        saved = {"schema": "milai_retrieval_snapshot_v1", "status": "started",
+                 "request": request.project(), "return_limit": return_limit}
+        self.service.store.put(namespace(self.service), key, saved, index=False)
+        known = []
+        if request.task_context.known_evidence_refs:
+            receipt = self._read(config, call_id + ":known",
+                {"tool": "memory_control", "known_evidence_refs": [
+                    ref.model_dump() for ref in request.task_context.known_evidence_refs]},
+                lambda _: {"ok": True, "materials": self._known_materials(request)},
+                deliver_material=False)
+            if not receipt["ok"]:
+                saved.update(status="completed", ok=False, reason=receipt["status"], materials=[],
+                    delivered_indices=[], usage={"control_steps": 0,
+                        "wall_seconds": time.perf_counter() - started})
+                self.service.store.put(namespace(self.service), key, saved, index=False)
+                return self._retrieval_result(key, saved)
+            known = receipt["materials"]
+        state = MemoryControlState(task={"request": request.query,
+            "query_time": request.task_context.as_of or "", "mode": "retrieve",
+            "read_goal": normalize_read_goal(request.read_goal),
+            "retrieval_request": request.project(),
+            "known_evidence": project_packs(known, list(range(len(known))))},
+            budget={"max_return_tokens": return_limit})
+
+        def load_pool() -> list[dict[str, Any]]:
+            refs = [row["event_id"] for row in self.service._visible_sources()
+                    if row["event_id"] != bound["source_ref"]]
+            native = self.service.search_sources(request.query, limit=self.source_top_k,
+                source_refs=refs, tokenization=self.source_tokenization, include_scope=True)
+            records = self.service.search(request.query, limit=self.semantic_top_k,
+                                          include_raw=False)["records"]
+            materials = build_evidence_packs(self.service, request.query,
+                request.task_context.as_of or "", native["source_materials"], records,
+                tokenization=self.source_tokenization, source_scope=native["source_scope"])
+            return (self.control_rank_pool(request.query, materials)
+                    if self.control_rank_pool else materials)
+
+        def refresh(messages: list[dict[str, str]], schema: dict[str, Any]) -> dict[str, Any]:
+            assert self.dependency_read_call is not None
+            return self.dependency_read_call("query_structure", messages, schema)
+
+        operations = EvidenceOperations(self.service, state, load_pool=load_pool,
+            refresh_call=refresh,
+            fits=lambda items: self.token_count(canonical(items)) <= return_limit,
+            excluded_source_refs=(bound["source_ref"],),
+            known_materials=known,
+            view_capacity=self.control_view_capacity, view_policy=self.control_view_policy)
+        memory = self
+
+        class AdmittedOperations:
+            def actions(self, observed: MemoryControlState) -> list[MemoryAction]:
+                return operations.actions(observed)
+
+            def execute(self, action: MemoryAction, observed: MemoryControlState) -> dict[str, Any]:
+                return memory._read(config, call_id + ":" + str(
+                    observed.budget["remaining_control_steps"]),
+                    {"tool": "search_memory" if action.kind == "SEARCH" else "memory_control",
+                     "request": request.project(), "operation": action.kind,
+                     "target": action.target, "parameters": action.parameters},
+                    lambda _: operations.execute(action, observed), deliver_material=False)
+
+        def record(event: dict[str, Any]) -> None:
+            if event.get("phase") == "decision_input":
+                refs = {span["source_ref"] for item in known for span in [
+                    *item.get("source_ranges", []), *item.get("support_turns", []),
+                    *item.get("source_bindings", {}).values()]}
+                refs.update(operations.observation_source_refs(state))
+                with self.service._locked():
+                    note_exposure(self.service, bound["source_ref"], sorted(refs))
+            self.control_record({**event, "retrieval_call_id": call_id})
+
+        assert self.control_policy is not None
+        result = run_memory_control(state, self.control_policy, AdmittedOperations(),
+            max_steps=steps, record=record, can_continue=lambda: self.control_available()
+                and bool(self.read_allowance(config)["reads_remaining"]))
+        trace = result["trace"]
+        saved.update(status="completed", reason=result["reason"],
+            materials=list(operations.opened.values()),
+            usage={"control_steps": len(trace),
+                   "known_reference_reads": len(known),
+                   "operations": sum("result" in event for event in trace),
+                   "wall_seconds": time.perf_counter() - started})
+        saved["usage"]["read_operations"] = sum(
+            any(a["id"] == event["selected"] and a["kind"] == "READ" for a in event["actions"])
+            for event in trace)
+        packet = self._retrieval_result(key, saved)
+        saved["reason"] = packet["termination_reason"]
+        saved["delivered_indices"] = [row["ref"]["item_index"] for row in packet["evidence"]]
+        self.service.store.put(namespace(self.service), key, saved, index=False)
+        with self.service._locked():
+            note_exposure(self.service, bound["source_ref"], list(operations.source_refs()))
+        self.control_record({"event": "milai_retrieve_result", "call_id": call_id,
+                             "request": request.project(), "result": packet,
+                             "control": result})
+        return packet
+
+    def _retrieval_result(self, key: str, saved: dict[str, Any]) -> dict[str, Any]:
+        indices = saved.get("delivered_indices", list(range(len(saved["materials"]))))
+        actual = open_evidence_packs(self.service, [saved["materials"][i] for i in indices])
+        evidence = project_packs(actual, indices)
+        for row in evidence:
+            row["ref"] = material_ref(key, int(row["label"][1:]))
+        packet = {"ok": saved.get("ok", saved["reason"] != "operation_outcome_unknown"),
+                  "schema": "milai_retrieval_result_v1", "evidence": evidence,
+                  "termination_reason": saved["reason"], "usage": saved["usage"]}
+        while evidence and self.token_count(canonical(packet)) > saved["return_limit"]:
+            evidence.pop()
+            packet["termination_reason"] = "budget_exhausted"
+        if self.token_count(canonical(packet)) > saved["return_limit"]:
+            raise FunctionalRejection("RETRIEVAL_RETURN_ENVELOPE_EXCEEDS_LIMIT")
+        return packet

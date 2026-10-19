@@ -46,6 +46,7 @@ def memory_policy(
     config: dict[str, Any], budget: RunBudget, *,
     call: Callable[[str, list[dict[str, str]], dict[str, Any]], dict[str, Any]],
     admit: Callable[[], None], record: Callable[[dict[str, Any]], None],
+    models: dict[tuple[Any, ...], NativeDecision] | None = None,
 ) -> MemoryPolicy:
     kind = config["policy"]
     if kind == "fixed":
@@ -61,11 +62,16 @@ def memory_policy(
                 if config.get("routing") == "one_shot" else generative)
     if kind not in {"laya", "linear"}:
         raise ValueError(f"Unknown memory control policy: {kind}")
-    model: NativeDecision | None = None
+    model_key = (kind, str(Path(config["checkpoint"]).resolve()),
+                 config.get("max_len", 8192), config.get("head_max_len", 2048),
+                 config.get("device", "cpu"), config.get("threads", 4))
+    model: NativeDecision | None = models.get(model_key) if models is not None else None
 
     def predict(payload: dict[str, Any]) -> dict[str, Any]:
         nonlocal model
         admit()
+        if model is None and models is not None:
+            model = models.get(model_key)
         if model is None:
             import torch  # type: ignore[import-not-found]
 
@@ -76,15 +82,20 @@ def memory_policy(
                     from milai_lab.providers.linear_local import LinearDecision
 
                     model = LinearDecision.load(Path(config["checkpoint"]),
-                        config.get("max_len", 8192), config.get("head_max_len", 2048))
+                        config.get("max_len", 8192), config.get("head_max_len", 2048),
+                        config.get("device", "cpu"))
                 else:
                     model = NativeDecision(Path(config["checkpoint"]),
-                        config.get("max_len", 8192), config.get("head_max_len", 2048))
+                        config.get("max_len", 8192), config.get("head_max_len", 2048),
+                        **({"device": config["device"]} if "device" in config else {}))
+                if models is not None:
+                    models[model_key] = model
             finally:
                 loading = {"wall_seconds": time.perf_counter() - started,
                            "cpu_seconds": time.process_time() - cpu, "loads": 1}
                 record({"event": "memory_control_model_load", "checkpoint": config["checkpoint"],
-                        "backend": kind, "device": "cpu", "loaded": model is not None, **loading})
+                        "backend": kind, "device": config.get("device", "cpu"),
+                        "loaded": model is not None, **loading})
                 budget.record_compute(f"dynamic_memory_{kind}_load", loading)
         started, cpu = time.perf_counter(), time.process_time()
         before = dict(model.counters)

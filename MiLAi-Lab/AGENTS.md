@@ -1,3 +1,21 @@
+# CURRENT: Host intent retrieval v3 — 2026-10-19
+
+Active objective is the full docs/MILAI_HOST_INTENT_RETRIEVAL_DEVELOPMENT_EXPERIMENT_PLAN_20261019_v3.md.
+New isolated worktree host-intent-retrieval-20261019, branch feat/host-intent-retrieval-20261019,
+base1d568169. Authoritative progress: docs/HOST_INTENT_RETRIEVAL_EXECUTION.md.
+No subagents, SHA/checksum/content fingerprints, second ledger, new model services, old-run
+retries or remote publication. Use the existing original continuous budget. Preserve the user's
+untracked global research document in the original worktree.
+M1 code and63mechanical tests done; full M1–M6/D1–D5/E0–E5/T0–T2 remain incomplete.
+New request schema lives in memory (contracts boundary forbids SDK imports).
+Old V10 coordinator1651723 and child2665555 verified absent; V10COMPLETED and own-train72/72
+COMPLETED_WITH_FAILURES. V11 is prepared only; do not launch it as part of this objective.
+First E0 history prepared2goals×rules/Laya=4positions, NOT yet real-run. Existing7860 supports
+named native calls but no native-auto parser; E0native-probe is forced call then Host answer,
+not autonomousE1. Original model/checkpoint/envs reused via absolute paths. No live model now.
+
+Historical inherited task notes below describe the old worktree and earlier goals.
+
 # LIVE V10: 2026-10-19
 
 User explicitly requests organizing CURRENT development and submitting it to GitHub. This authorizes

@@ -19,6 +19,19 @@ INSTRUCTIONS = (
     "the delivered material already supports the task. A tool receipt is not semantic proof."
 )
 
+RETRIEVAL_INSTRUCTIONS = (
+    "Control this MiLAi evidence retrieval, not the Host's entire task. "
+    "Follow the Host request, purpose, required points, target scope, as_of time and limits. "
+    "Use actual observations and operation results to choose the next available operation "
+    "with its bound parameters. Candidate excerpts are navigation, not returned evidence. "
+    "Known evidence was previously delivered; its current visibility and applicability "
+    "must be considered separately. USE_VIEW opens a source-bound interpretation, not a "
+    "certified answer. REFRESH_VIEW generates an interpretation from actual sources. "
+    "Read or refresh when relevant changes or missing evidence require it; avoid repeating "
+    "work when the evidence already supports this request. HANDOFF returns only opened "
+    "material, never invented facts or the Host's final answer."
+)
+
 
 def project_operation_payload(payload: dict[str, Any], projection: str) -> dict[str, Any]:
     """Project matched training/live inputs; task and actual operation options stay fixed."""
@@ -64,7 +77,8 @@ def operation_payload(
     state: MemoryControlState, actions: list[MemoryAction], projection: str = "full",
 ) -> dict[str, Any]:
     payload = {"state": state.project(), "questions": {"next": {
-        "type": "choice", "instructions": INSTRUCTIONS,
+        "type": "choice", "instructions": (RETRIEVAL_INSTRUCTIONS
+            if "retrieval_request" in state.task else INSTRUCTIONS),
         "criteria": {action.id: f"{action.kind} {action.target} "
                      + json.dumps(action.parameters, ensure_ascii=False, separators=(",", ":"))
                      for action in actions},
@@ -92,6 +106,7 @@ class GenerativeMemoryPolicy:
         schema = {"type": "object", "properties": {"choice": {
             "type": "string", "enum": [a.id for a in actions]}},
             "required": ["choice"], "additionalProperties": False}
-        result = self.call("memory_control", [{"role": "system", "content": INSTRUCTIONS},
+        result = self.call("memory_control", [{"role": "system",
+            "content": payload["questions"]["next"]["instructions"]},
             {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}], schema)
         return str(result["choice"])

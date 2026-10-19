@@ -695,7 +695,7 @@ def prepare(
 ) -> dict[str, Any]:
     settings = entrypoint_settings(read_json(settings_path), "functional")
     allowed = {
-        "laya_impact", "writer_input", "memory_control",
+        "laya_impact", "writer_input", "memory_control", "retrieval_tool",
         "profile",
         "host",
         "capacity",
@@ -804,6 +804,11 @@ def prepare(
         or settings.get("memory_method") not in FUNCTIONAL_ARMS
     ):
         raise ValueError("MEMORY_CONTROL_REQUIRES_EDIT_EVIDENCE_PACKS")
+    if "retrieval_tool" in settings and (
+        settings["retrieval_tool"] not in {"rich", "query_only"}
+        or not settings.get("memory_control")
+    ):
+        raise ValueError("RETRIEVAL_TOOL_REQUIRES_CONTROL_AND_REQUEST_INTERFACE")
     if edit_features.enabled and (
         edit_interface != "I2" or settings.get("memory_method") not in FUNCTIONAL_ARMS
     ):
@@ -2525,6 +2530,8 @@ def message(
     evaluator_control: dict[str, Any] | None = None,
     message_index: int = 0,
     resume: bool = False,
+    control_models: dict[tuple[Any, ...], Any] | None = None,
+    model_tool_choice: Callable[[list[Any]], Any] | None = None,
 ) -> dict[str, Any]:
     freeze = frozen(root)
     workflow = {"reservation_v1": "reservation", "document_publication_v1": "document"}.get(
@@ -2726,7 +2733,12 @@ def message(
             edit_arm = FUNCTIONAL_ARMS.get(settings.get("memory_method", "functional_v1"))
             memory_class = FunctionalEditMemory if edit_arm is not None else FunctionalMemory
             memory_options: dict[str, Any] = {}
-            if memory_class is FunctionalEditMemory:
+            if settings.get("retrieval_tool"):
+                from milai_lab.methods.intent_retrieval import IntentRetrievalMemory
+
+                memory_class = IntentRetrievalMemory
+                memory_options["retrieval_interface"] = settings["retrieval_tool"]
+            if issubclass(memory_class, FunctionalEditMemory):
                 def dependency_read_call(
                     stage: str, messages: list[dict[str, str]], schema: dict[str, Any],
                 ) -> dict[str, Any]:
@@ -2752,7 +2764,7 @@ def message(
                     memory_options["control_policy"] = memory_policy(control, budget,
                         call=dependency_read_call,
                         admit=lambda: model.reserve_external_request("memory_control"),
-                        record=trace)
+                        record=trace, models=control_models)
                     memory_options["control_steps"] = control.get("max_control_steps", 8)
                     memory_options["control_view_capacity"] = control.get("view_capacity", 1)
                     memory_options["control_view_policy"] = control.get(
@@ -3937,7 +3949,7 @@ def message(
                     return "required"
                 return "auto"
 
-            choice_selector = (execution_tool_choice
+            choice_selector = model_tool_choice or (execution_tool_choice
                                if settings.get("completion_tool_choice", "auto") != "auto"
                                else None)
 

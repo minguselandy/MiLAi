@@ -7,12 +7,13 @@ from typing import Any
 
 
 class NativeDecision:
-    def __init__(self, checkpoint: Path, max_len: int, head_max_len: int) -> None:
+    def __init__(self, checkpoint: Path, max_len: int, head_max_len: int,
+                 device: str = "cpu") -> None:
         import torch  # type: ignore[import-not-found]
         from laya.train import load_checkpoint  # type: ignore[import-not-found]
 
         self.model, self.tokenizer, self.config = load_checkpoint(str(checkpoint))
-        self.device = torch.device("cpu")
+        self.device = torch.device(device)
         self.model.to(self.device).eval()
         self.max_len, self.head_max_len = max_len, head_max_len
         self.counters = dict(forwards=0, sequence_rows=0, input_tokens=0,
