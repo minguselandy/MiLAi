@@ -12,10 +12,10 @@
     1,
     2
   ],
-  "optimizer_updates": 196,
+  "optimizer_updates": 207,
   "planned_optimizer_updates": 207,
-  "train_sequence_rows": 3136,
-  "train_input_tokens": 15628912,
+  "train_sequence_rows": 3312,
+  "train_input_tokens": 16457101,
   "micro_batch_size": 2,
   "gradient_accumulation": 8,
   "effective_batch": 16,
@@ -95,5 +95,10 @@
     "family_macro_acceptance": 0.7079560886944695,
     "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
   },
-  "snapshot_note": "Read from live run.json; revalidate process and current file before any dispatch."
+  "snapshot_note": "Read from live run.json; revalidate process and current file before any dispatch.",
+  "final_diagnostic_snapshot": {
+    "dev_predictions": 105,
+    "train_predictions": 0,
+    "final_checkpoint_written": false
+  }
 }

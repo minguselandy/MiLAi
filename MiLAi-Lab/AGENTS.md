@@ -2,7 +2,7 @@
 
 ACTIVE model job PID509200 / exec65861, frozen training source c0770e49,
 artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/run.json.
-Snapshot 196/207 updates, 3136 train rows, 15628912 inputtokens; process RUNNING.
+Snapshot 207/207 updates, 3312 train rows, 16457101 inputtokens; process RUNNING.
 Initial dev456 predictions closed:152/353 reviewed preferences accepted,103masked;
 family-macro0.435331,15HANDOFF outside reviewed preference. This is NOT task accuracy or final gain.
 Revalidate actual PID/driver and pollsamehandle. Never restart from observation timeout.
@@ -17,7 +17,8 @@ maxall9723; full inputs retained. Explicit nonreentrant encoder activation check
 4gradient/update/microbatch regressions PASS,Ruff/tools boundary PASS. Mypy uses CUDAenv and
 excludes only import-untyped for Laya SDK lacking py.typed. Logical forwards exclude layer
 recomputation; actual time includes it. Diagnostics0/103/207; final207weights are preselected.
-Seeds1/2 not started. No finished T0 checkpoint yet. Alllater T1/T2/factors/external obligations remain.
+Seeds1/2 not started. Final diagnostics snapshot dev105/456,train0/1649; no final checkpoint yet.
+Alllater T1/T2/factors/external obligations remain.
 
 All197gen states now reviewed or held:85labels,108ambiguous,4temporalconflict states.
 38source+16storage requests,1held current-record/as_of2026-01-01 request. Final generative data:
