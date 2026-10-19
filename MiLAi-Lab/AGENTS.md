@@ -1,10 +1,27 @@
 # LIVE V10: 2026-10-19
 
-Only live coordinator PID1651723/exec59686; active child1710423 original-shared25remaining.
+Only live coordinator PID1651723/exec59686; active child1849697 t1-broader-shared-evaluation-v1.
 Revalidate reviewed-followups-dispatch-v10.json and actual/proc commands. Never restart live queues.
-Queue: lifecycle16CLOSED(method3f3c10d3) -> original25remaining -> broader80 -> baselines144 -> own72.
-Evaluation method0acc4b9a, dispatcher17d6f621;337newpositions total, no old retry.
-30offline phases settled ONCE at idle beforeV10; NEVER settle new work while any model child lives.
+Original/shared evaluation CLOSED80 (55first+25continuation), all first failures retained.
+Broader/shared currently59/80; then baselines144 and own-train72. Do not alter the queue.
+Evaluation method0acc4b9a, dispatcher17d6f621;30earlier offline phases settled ONCE beforeV10.
+NEVER settle new offline work while any model child lives.
+
+Original/shared results: old8dev25C/5W/2length; external8dev11C/18empty-unfulfilled/6length/
+2incomplete/5W/2protocol/4qualified. E08stage-0 author grade correctedC->qualified after full
+source-role audit: fatigue explanation was assistant-only. Model output unchanged; partial review
+retained, complete evaluation-results-v1 author_review_revision2 is authoritative. No recipe selection.
+Old/external generation240661/475900; native80/103forwards,142428/463499inputtokens; load30/45.
+Native forwardwall236.33/1797.60s, load78.85/118.18s, wholemessage1397.27/4312.57s. No efficiency claim.
+All80effects:0semanticcommits/0revocations/0businessmutations,3readonlybusinessqueries.8constructed
+views (39nodes/11rules) audited;2rejected graph builds preserved and followed by successful raw reads.
+USE_VIEW7:4meaning-valid,3invalid (2stale after relevantupdate,1already incomplete budget view).
+Node truth, provenance, rule logic, coverage and later applicability remain separate; no all-graph-valid claim.
+M4dev-only analysis184states/181labels,trainfileEMPTY.39messages have a conservative sufficiency
+witness (including1forced action); only1extraREAD afterwitness, olderDianecontext, finalanswercorrect.
+23emptyHANDOFFs retained7/8controlsteps and availableacquisition;18refusals+3length+2protocol outcomes.
+5otherlengthfailures precede controller. Alternative proofs/view uncertainty prevent calling the
+witness marker an exact earliest oracle; devlabels never enter training. All new audit compute pending.
 
 Lifecycle16first outcomes reviewed. Both formed2independent records and corrected identifier torev2;
 rules actually opened historical_exact_revision1, fixed only answered correctly from current/raw context.

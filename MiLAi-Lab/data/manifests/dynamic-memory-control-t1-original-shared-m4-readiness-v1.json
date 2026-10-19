@@ -1,0 +1,2700 @@
+{
+  "version": "dynamic-memory-control-t1-original-shared-m4-readiness-v1",
+  "status": "OFFLINE_TRAJECTORY_ANALYSIS_COMPLETE",
+  "run": "t1-original-shared-evaluation-v1-remaining1",
+  "positions": 80,
+  "policy_states": 184,
+  "positions_with_policy_states": 75,
+  "positions_before_controller_failure": 5,
+  "positions_with_established_sufficient_witness": 39,
+  "observed_operations_after_first_witness": [
+    {
+      "family": "memops_A19",
+      "row": "stage-2-repeat",
+      "step": 3,
+      "operation": "READ",
+      "selected": "read_15",
+      "operation_wall_seconds": 0.056371092796325684,
+      "actual_task_label": "correct",
+      "first_witness": "Complete original conversation segment3already establishes Karen/currentphone, abortedTomchange and unsubmittedPriyasecondary.",
+      "added_original_turns": [
+        "s1t1",
+        "s1t2"
+      ],
+      "added_source_content": "EarlierDianeHRcontact report plus assistant recap, not a new required current fact.",
+      "actual_final_answer_correct": true,
+      "counterfactual_reader_run": false,
+      "following_policy_decision_wall_seconds": 40.74003526289016
+    }
+  ],
+  "empty_handoffs_with_remaining_opportunities": [
+    {
+      "family": "memops_A19",
+      "row": "stage-1",
+      "step": 1,
+      "remaining_control_steps": 7,
+      "available_operation_kinds": [
+        "READ",
+        "REFRESH_VIEW"
+      ],
+      "last_result": {
+        "action": {
+          "id": "search",
+          "kind": "SEARCH",
+          "target": "original request",
+          "parameters": {}
+        },
+        "ok": true,
+        "status": "searched",
+        "candidates": 10,
+        "scope": "captured visible pool, not a sufficiency judgment"
+      },
+      "source_events_visible_to_controller": 19,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_A19",
+      "row": "stage-2",
+      "step": 1,
+      "remaining_control_steps": 7,
+      "available_operation_kinds": [
+        "READ",
+        "REFRESH_VIEW"
+      ],
+      "last_result": {
+        "action": {
+          "id": "search",
+          "kind": "SEARCH",
+          "target": "original request",
+          "parameters": {}
+        },
+        "ok": true,
+        "status": "searched",
+        "candidates": 16,
+        "scope": "captured visible pool, not a sufficiency judgment"
+      },
+      "source_events_visible_to_controller": 31,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_A32",
+      "row": "stage-0-repeat",
+      "step": 1,
+      "remaining_control_steps": 7,
+      "available_operation_kinds": [
+        "READ",
+        "REFRESH_VIEW"
+      ],
+      "last_result": {
+        "action": {
+          "id": "search",
+          "kind": "SEARCH",
+          "target": "original request",
+          "parameters": {}
+        },
+        "ok": true,
+        "status": "searched",
+        "candidates": 5,
+        "scope": "captured visible pool, not a sufficiency judgment"
+      },
+      "source_events_visible_to_controller": 9,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_A32",
+      "row": "stage-1-repeat",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 21,
+      "selection_mode": "policy",
+      "task_label": "length_failure",
+      "forbidden_operations": [
+        "business_mutation",
+        "memory_write"
+      ]
+    },
+    {
+      "family": "memops_A32",
+      "row": "stage-2-repeat",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 33,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_B30",
+      "row": "stage-1",
+      "step": 1,
+      "remaining_control_steps": 7,
+      "available_operation_kinds": [
+        "READ",
+        "REFRESH_VIEW"
+      ],
+      "last_result": {
+        "action": {
+          "id": "search",
+          "kind": "SEARCH",
+          "target": "original request",
+          "parameters": {}
+        },
+        "ok": true,
+        "status": "searched",
+        "candidates": 10,
+        "scope": "captured visible pool, not a sufficiency judgment"
+      },
+      "source_events_visible_to_controller": 19,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_B30",
+      "row": "stage-1-repeat",
+      "step": 1,
+      "remaining_control_steps": 7,
+      "available_operation_kinds": [
+        "READ",
+        "REFRESH_VIEW"
+      ],
+      "last_result": {
+        "action": {
+          "id": "search",
+          "kind": "SEARCH",
+          "target": "original request",
+          "parameters": {}
+        },
+        "ok": true,
+        "status": "searched",
+        "candidates": 11,
+        "scope": "captured visible pool, not a sufficiency judgment"
+      },
+      "source_events_visible_to_controller": 21,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_B30",
+      "row": "stage-2",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 31,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_C03",
+      "row": "stage-1",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 24,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_C03",
+      "row": "stage-2",
+      "step": 1,
+      "remaining_control_steps": 7,
+      "available_operation_kinds": [
+        "READ",
+        "REFRESH_VIEW"
+      ],
+      "last_result": {
+        "action": {
+          "id": "search",
+          "kind": "SEARCH",
+          "target": "original request",
+          "parameters": {}
+        },
+        "ok": true,
+        "status": "searched",
+        "candidates": 16,
+        "scope": "captured visible pool, not a sufficiency judgment"
+      },
+      "source_events_visible_to_controller": 33,
+      "selection_mode": "policy",
+      "task_label": "format_failure",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_D25",
+      "row": "stage-0-repeat",
+      "step": 1,
+      "remaining_control_steps": 7,
+      "available_operation_kinds": [
+        "READ",
+        "REFRESH_VIEW"
+      ],
+      "last_result": {
+        "action": {
+          "id": "search",
+          "kind": "SEARCH",
+          "target": "original request",
+          "parameters": {}
+        },
+        "ok": true,
+        "status": "searched",
+        "candidates": 5,
+        "scope": "captured visible pool, not a sufficiency judgment"
+      },
+      "source_events_visible_to_controller": 9,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_D25",
+      "row": "stage-1",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 19,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_D25",
+      "row": "stage-1-repeat",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 21,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_D25",
+      "row": "stage-2",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 31,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_D25",
+      "row": "stage-2-repeat",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 33,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_E08",
+      "row": "stage-2",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH",
+        "USE_VIEW"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 22,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_E08",
+      "row": "stage-2-repeat",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH",
+        "USE_VIEW"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 24,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_E15",
+      "row": "stage-1",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH",
+        "USE_VIEW"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 12,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_E15",
+      "row": "stage-1-repeat",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH",
+        "USE_VIEW"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 14,
+      "selection_mode": "policy",
+      "task_label": "length_failure",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_E15",
+      "row": "stage-2",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH",
+        "USE_VIEW"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 24,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_E15",
+      "row": "stage-2-repeat",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH",
+        "USE_VIEW"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 26,
+      "selection_mode": "policy",
+      "task_label": "format_failure",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_F01",
+      "row": "stage-1",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 19,
+      "selection_mode": "policy",
+      "task_label": "length_failure",
+      "forbidden_operations": []
+    },
+    {
+      "family": "memops_F01",
+      "row": "stage-1-repeat",
+      "step": 1,
+      "remaining_control_steps": 7,
+      "available_operation_kinds": [
+        "READ",
+        "REFRESH_VIEW"
+      ],
+      "last_result": {
+        "action": {
+          "id": "search",
+          "kind": "SEARCH",
+          "target": "original request",
+          "parameters": {}
+        },
+        "ok": true,
+        "status": "searched",
+        "candidates": 11,
+        "scope": "captured visible pool, not a sufficiency judgment"
+      },
+      "source_events_visible_to_controller": 21,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled",
+      "forbidden_operations": []
+    }
+  ],
+  "empty_handoff_outcomes": {
+    "unfulfilled": 18,
+    "length_failure": 3,
+    "format_failure": 2
+  },
+  "readiness_outcomes": {
+    "correct": 34,
+    "wrong": 3,
+    "qualified": 2
+  },
+  "messages": [
+    {
+      "family": "quota_reallocation",
+      "step": "cold",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "quota_reallocation",
+      "step": "repeat",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_3",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "quota_reallocation",
+      "step": "unrelated",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_5",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "quota_reallocation",
+      "step": "changed",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_7",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "cold",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_0",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "repeat",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_3",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "changed",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_5",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "unrelated",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_7",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "fraction_scope",
+      "step": "cold",
+      "task_label": "correct",
+      "policy_states": 2,
+      "first_established_sufficient_step": 1,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": true,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "fraction_scope",
+      "step": "unrelated",
+      "task_label": "correct",
+      "policy_states": 2,
+      "first_established_sufficient_step": 1,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "use_view",
+          "selected_kind": "USE_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": true,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "fraction_scope",
+      "step": "repeat",
+      "task_label": "correct",
+      "policy_states": 2,
+      "first_established_sufficient_step": 1,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "use_view",
+          "selected_kind": "USE_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": true,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "fraction_scope",
+      "step": "changed",
+      "task_label": "wrong",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "use_view",
+          "selected_kind": "USE_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "cold",
+      "task_label": "correct",
+      "policy_states": 4,
+      "first_established_sufficient_step": 3,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_0",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 3,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "unrelated",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_4",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "changed",
+      "task_label": "correct",
+      "policy_states": 4,
+      "first_established_sufficient_step": 3,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_4",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 3,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "repeat",
+      "task_label": "wrong",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "joint_schedule",
+      "step": "cold",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_0",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "joint_schedule",
+      "step": "changed",
+      "task_label": "wrong",
+      "policy_states": 3,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_0",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "joint_schedule",
+      "step": "repeat",
+      "task_label": "length_failure",
+      "policy_states": 0,
+      "first_established_sufficient_step": null,
+      "markers": []
+    },
+    {
+      "family": "joint_schedule",
+      "step": "unrelated",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_7",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "negated_exception",
+      "step": "cold",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_0",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "negated_exception",
+      "step": "changed",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_4",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "negated_exception",
+      "step": "unrelated",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_4",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "negated_exception",
+      "step": "repeat",
+      "task_label": "correct",
+      "policy_states": 2,
+      "first_established_sufficient_step": 1,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": true,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "cold",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_0",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "repeat",
+      "task_label": "wrong",
+      "policy_states": 2,
+      "first_established_sufficient_step": 1,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": true,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "unrelated",
+      "task_label": "correct",
+      "policy_states": 2,
+      "first_established_sufficient_step": 1,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "use_view",
+          "selected_kind": "USE_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": true,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "changed",
+      "task_label": "wrong",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "use_view",
+          "selected_kind": "USE_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "count_distinct",
+      "step": "cold",
+      "task_label": "length_failure",
+      "policy_states": 0,
+      "first_established_sufficient_step": null,
+      "markers": []
+    },
+    {
+      "family": "count_distinct",
+      "step": "repeat",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "count_distinct",
+      "step": "changed",
+      "task_label": "correct",
+      "policy_states": 2,
+      "first_established_sufficient_step": 1,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": true,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "count_distinct",
+      "step": "unrelated",
+      "task_label": "correct",
+      "policy_states": 2,
+      "first_established_sufficient_step": 1,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "use_view",
+          "selected_kind": "USE_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": true,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-0",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_3",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-0-repeat",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_4",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-1",
+      "task_label": "unfulfilled",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-1-repeat",
+      "task_label": "correct",
+      "policy_states": 4,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_8",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_9",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 3,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-2",
+      "task_label": "unfulfilled",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A19",
+      "step": "stage-2-repeat",
+      "task_label": "correct",
+      "policy_states": 5,
+      "first_established_sufficient_step": 3,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_10",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_10",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 3,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_15",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 4,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-0",
+      "task_label": "correct",
+      "policy_states": 4,
+      "first_established_sufficient_step": 3,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 3,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-0-repeat",
+      "task_label": "unfulfilled",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-1",
+      "task_label": "length_failure",
+      "policy_states": 0,
+      "first_established_sufficient_step": null,
+      "markers": []
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-1-repeat",
+      "task_label": "length_failure",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-2",
+      "task_label": "incomplete",
+      "policy_states": 6,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_8",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_8",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 3,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_11",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 4,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_15",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 5,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_A32",
+      "step": "stage-2-repeat",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-0",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_3",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-0-repeat",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_4",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-1",
+      "task_label": "unfulfilled",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-1-repeat",
+      "task_label": "unfulfilled",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-2",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_B30",
+      "step": "stage-2-repeat",
+      "task_label": "length_failure",
+      "policy_states": 0,
+      "first_established_sufficient_step": null,
+      "markers": []
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-0",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-0-repeat",
+      "task_label": "correct",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-1",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-1-repeat",
+      "task_label": "wrong",
+      "policy_states": 3,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_11",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-2",
+      "task_label": "format_failure",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-2-repeat",
+      "task_label": "qualified",
+      "policy_states": 4,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_14",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_9",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 3,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-0",
+      "task_label": "wrong",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-0-repeat",
+      "task_label": "unfulfilled",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-1",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-1-repeat",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-2",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_D25",
+      "step": "stage-2-repeat",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-0",
+      "task_label": "qualified",
+      "policy_states": 4,
+      "first_established_sufficient_step": 3,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 3,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-0-repeat",
+      "task_label": "correct",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": true,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-1",
+      "task_label": "incomplete",
+      "policy_states": 3,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_9",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-1-repeat",
+      "task_label": "length_failure",
+      "policy_states": 0,
+      "first_established_sufficient_step": null,
+      "markers": []
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-2",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E08",
+      "step": "stage-2-repeat",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E15",
+      "step": "stage-0",
+      "task_label": "qualified",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": true,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E15",
+      "step": "stage-0-repeat",
+      "task_label": "wrong",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_4",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E15",
+      "step": "stage-1",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E15",
+      "step": "stage-1-repeat",
+      "task_label": "length_failure",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E15",
+      "step": "stage-2",
+      "task_label": "unfulfilled",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_E15",
+      "step": "stage-2-repeat",
+      "task_label": "format_failure",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_F01",
+      "step": "stage-0",
+      "task_label": "correct",
+      "policy_states": 4,
+      "first_established_sufficient_step": 3,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "read_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 3,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_F01",
+      "step": "stage-0-repeat",
+      "task_label": "qualified",
+      "policy_states": 3,
+      "first_established_sufficient_step": 2,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "context_1",
+          "selected_kind": "READ"
+        },
+        {
+          "step": 2,
+          "raw_witness_complete": true,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_F01",
+      "step": "stage-1",
+      "task_label": "length_failure",
+      "policy_states": 1,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_F01",
+      "step": "stage-1-repeat",
+      "task_label": "unfulfilled",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "search",
+          "selected_kind": "SEARCH"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_F01",
+      "step": "stage-2",
+      "task_label": "wrong",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "refresh_view",
+          "selected_kind": "REFRESH_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    },
+    {
+      "family": "memops_F01",
+      "step": "stage-2-repeat",
+      "task_label": "wrong",
+      "policy_states": 2,
+      "first_established_sufficient_step": null,
+      "markers": [
+        {
+          "step": 0,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "use_view",
+          "selected_kind": "USE_VIEW"
+        },
+        {
+          "step": 1,
+          "raw_witness_complete": false,
+          "reviewed_view_sufficient": false,
+          "view_sufficiency_uncertain": false,
+          "selected": "handoff",
+          "selected_kind": "HANDOFF"
+        }
+      ]
+    }
+  ],
+  "source_label_summary": {
+    "source_run": "artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1-remaining1",
+    "source_status": "COMPLETED_WITH_FAILURES",
+    "states": 184,
+    "labelled_by_split": {
+      "dev": 181
+    },
+    "statuses": {
+      "acquire_evidence_preference": 142,
+      "ready_handoff_preference": 39,
+      "forced_single_action_masked": 1,
+      "unreviewed_opened_view_masked": 2
+    },
+    "unreviewed_view_contexts": 2,
+    "persisted_candidate_matches": 617,
+    "policy_choices_copied": false,
+    "scope": "Single-slot source-only own rollouts; inputs unchanged, actual pools only. View adequacy reviewed separately in the declared source contexts. No silent stale-view credit or future-source reconstruction."
+  },
+  "interpretation": "Empty handoffs are actual selected choices with source observations and legal acquisition actions still available, not forced lack of tools/control budget. Source-inherent unknown values can still support a correct conditional answer; those differ from withholding known facts.",
+  "limits": [
+    "First established sufficiency is a conservative witness-based bound, not an exhaustive earliest semantic oracle; alternative proofs can exist.",
+    "E08/E15view qualifications remain uncertain for readiness; masks are not negative labels.",
+    "Forced single-action masking is ignored for this readiness observation when raw source witnesses are actually complete.",
+    "One additional read after established sufficiency added older contact context; actual response stayed correct. The later40.74sdecision/read work is observed, not a counterfactual net saving estimate.",
+    "Development labels remain dev-only; train.jsonl is empty and no controller receives offline witnesses. No model/state replay."
+  ],
+  "model_calls": 0
+}

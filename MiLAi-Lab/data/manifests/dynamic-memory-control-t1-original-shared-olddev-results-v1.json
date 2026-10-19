@@ -1,0 +1,1151 @@
+{
+  "version": "dynamic-memory-control-t1-original-shared-olddev-results-v1",
+  "status": "CLOSED32_AUTHOR_REVIEWED",
+  "source_run": "artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1",
+  "continued_dispatch": "artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1-remaining1",
+  "method_source": "0acc4b9a",
+  "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-fitting-v2/t1-original-shared-seed0-v2/checkpoint",
+  "slice": "Original8exposed development families only; external8primary selection slice still incomplete.",
+  "reviewer": "Codex author, source/method visible; no independent Judge claim",
+  "counts": {
+    "correct": 25,
+    "wrong": 5,
+    "length_failure": 2
+  },
+  "per_family": {
+    "quota_reallocation": {
+      "correct": 4
+    },
+    "ordered_precedence": {
+      "correct": 4
+    },
+    "fraction_scope": {
+      "correct": 3,
+      "wrong": 1
+    },
+    "nonunique_identity": {
+      "correct": 3,
+      "wrong": 1
+    },
+    "joint_schedule": {
+      "correct": 2,
+      "wrong": 1,
+      "length_failure": 1
+    },
+    "negated_exception": {
+      "correct": 4
+    },
+    "serial_responsibility": {
+      "correct": 2,
+      "wrong": 2
+    },
+    "count_distinct": {
+      "length_failure": 1,
+      "correct": 3
+    }
+  },
+  "family_macro_success": 0.78125,
+  "identity_rendering_rule": "Unambiguous direct romanization accepted when no competing participant exists in the source history. Invented alternate Chinese name characters are identity errors, not accepted aliases. No action-object resolution is inferred.",
+  "full_semantic_state_validity": "Not certified from QA. Five erroneous paths inspected; nonunique refresh source was present in actual action parameters/new_events, so this is not merely missing retrieval.",
+  "cost": {
+    "attempted": 32,
+    "host_completed": 30,
+    "task_positions": 32,
+    "explicit_positions": 0,
+    "generation_known_tokens": 240661,
+    "generation_charged_tokens": 240661,
+    "generation_unknown_usage": 0,
+    "embedding_known_tokens": 0,
+    "embedding_charged_tokens": 0,
+    "embedding_unknown_usage": 0,
+    "dynamic_memory_laya_cpu_seconds": 881.2738693099891,
+    "dynamic_memory_laya_forwards": 80,
+    "dynamic_memory_laya_input_tokens": 142428,
+    "dynamic_memory_laya_sequence_rows": 80,
+    "dynamic_memory_laya_state_tokenizations": 80,
+    "dynamic_memory_laya_state_tokens": 125036,
+    "dynamic_memory_laya_wall_seconds": 236.32992915343493,
+    "dynamic_memory_laya_load_cpu_seconds": 114.72304963100032,
+    "dynamic_memory_laya_load_loads": 30,
+    "dynamic_memory_laya_load_wall_seconds": 78.84774881321937
+  },
+  "message_wall_seconds": 1397.2707476466894,
+  "records": [
+    {
+      "family": "quota_reallocation",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "竹组3张，梅组3张。",
+      "answer": "根据最新转移记录：\n\n1. **竹组**：原剩余5张，转出2张，现剩余可发3张。\n2. **梅组**：原剩余1张，转入2张，现剩余可发3张。",
+      "control_path": [
+        "search",
+        "context_1",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/b1bd7808-3f17-444c-aed0-09dd19937b67/36eea1ab-6c54-44ff-9e3e-38eba9ecd4bc-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/b1bd7808-3f17-444c-aed0-09dd19937b67/36eea1ab-6c54-44ff-9e3e-38eba9ecd4bc-trace-0.jsonl",
+      "generation_known_tokens": 7003,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 15.228648806998535,
+          "forwards": 3,
+          "input_tokens": 3263,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 2632,
+          "wall_seconds": 4.079797589220107
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 7.918187880000005,
+          "loads": 1,
+          "wall_seconds": 5.563437636941671
+        }
+      },
+      "wall_seconds": 42.10607091616839
+    },
+    {
+      "family": "quota_reallocation",
+      "step": "repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "竹组3张，梅组3张。",
+      "answer": "根据记录，竹组原剩余5张票，转给梅组2张后，竹组还可发3张票；梅组原剩余1张票，接收2张后，梅组还可发3张票。",
+      "control_path": [
+        "search",
+        "context_3",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/b1bd7808-3f17-444c-aed0-09dd19937b67/553a8c95-6291-4e0d-8f72-f89c585648ad-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/b1bd7808-3f17-444c-aed0-09dd19937b67/553a8c95-6291-4e0d-8f72-f89c585648ad-trace-0.jsonl",
+      "generation_known_tokens": 8450,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 25.23341134200018,
+          "forwards": 3,
+          "input_tokens": 4455,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 3796,
+          "wall_seconds": 6.7492943201214075
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 4.159903399000086,
+          "loads": 1,
+          "wall_seconds": 2.268880581483245
+        }
+      },
+      "wall_seconds": 50.374360052868724
+    },
+    {
+      "family": "quota_reallocation",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "竹组3张，梅组3张。",
+      "answer": "竹组可发3张票，梅组可发3张票。",
+      "control_path": [
+        "search",
+        "context_5",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/b1bd7808-3f17-444c-aed0-09dd19937b67/fd582250-b64e-4b82-8ea4-1540924e69db-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/b1bd7808-3f17-444c-aed0-09dd19937b67/fd582250-b64e-4b82-8ea4-1540924e69db-trace-0.jsonl",
+      "generation_known_tokens": 6095,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 40.60343037799976,
+          "forwards": 3,
+          "input_tokens": 6037,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 5273,
+          "wall_seconds": 10.90235525649041
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 4.1747874580000826,
+          "loads": 1,
+          "wall_seconds": 2.2701043467968702
+        }
+      },
+      "wall_seconds": 39.18104170355946
+    },
+    {
+      "family": "quota_reallocation",
+      "step": "changed",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "竹组4张，梅组2张。",
+      "answer": "根据最新实际转移记录（来源s4修正，实际转移1张票），计算如下：\n\n1. **竹组**：原剩余5张（来源s0），转出1张，现为4张。\n2. **梅组**：原剩余1张（来源s1），接收1张，现为2张。\n\n**结论：** 竹组还可发4张票，梅组还可发2张票。",
+      "control_path": [
+        "search",
+        "context_7",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/b1bd7808-3f17-444c-aed0-09dd19937b67/44bb4421-2463-46ce-aa72-27627dc10db1-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/b1bd7808-3f17-444c-aed0-09dd19937b67/44bb4421-2463-46ce-aa72-27627dc10db1-trace-0.jsonl",
+      "generation_known_tokens": 5779,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 54.141006137997465,
+          "forwards": 3,
+          "input_tokens": 7297,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 6470,
+          "wall_seconds": 14.574295233935118
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.9729880269999285,
+          "loads": 1,
+          "wall_seconds": 2.1667129639536142
+        }
+      },
+      "wall_seconds": 39.42244034353644
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "硬壳盒。",
+      "answer": "根据当前已提供的记录，紫沙样品当前应使用**硬壳盒**。虽然《通用包装指南》要求纸盒，但《紫沙样品专项指令》明确要求紫沙样品使用硬壳盒，且记录规定专项指令优先于通用指南，因此应遵循专项指令。",
+      "control_path": [
+        "search",
+        "context_0",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f18ed21-489a-45fe-afaf-006bddc5d220/69428702-7f2c-4ff4-84ee-7fec15257bce-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f18ed21-489a-45fe-afaf-006bddc5d220/69428702-7f2c-4ff4-84ee-7fec15257bce-trace-0.jsonl",
+      "generation_known_tokens": 5074,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 14.974651547996473,
+          "forwards": 3,
+          "input_tokens": 3205,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 2574,
+          "wall_seconds": 3.9315122915431857
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.6572227179999572,
+          "loads": 1,
+          "wall_seconds": 2.2211015094071627
+        }
+      },
+      "wall_seconds": 25.77106843702495
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "硬壳盒。",
+      "answer": "根据当前提供的记录，紫沙样品当前应使用**硬壳盒**。依据是专项指令（要求硬壳盒）优先于通用包装指南（要求纸盒）。",
+      "control_path": [
+        "search",
+        "context_3",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f18ed21-489a-45fe-afaf-006bddc5d220/738afd03-6997-481e-b370-0712b07e76ac-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f18ed21-489a-45fe-afaf-006bddc5d220/738afd03-6997-481e-b370-0712b07e76ac-trace-0.jsonl",
+      "generation_known_tokens": 5147,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 24.736868182000762,
+          "forwards": 3,
+          "input_tokens": 4380,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 3721,
+          "wall_seconds": 6.567938474938273
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.8358455200000208,
+          "loads": 1,
+          "wall_seconds": 2.310273294337094
+        }
+      },
+      "wall_seconds": 30.003731965087354
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "changed",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "纸盒，回到通用指南。",
+      "answer": "根据已提供的记录，紫沙样品当前应使用**纸盒**进行包装。依据记录，虽然紫沙样品专项指令曾要求使用硬壳盒，但该指令已撤销且无替代指令，因此应当恢复执行通用包装指南关于“要求纸盒”的规定。",
+      "control_path": [
+        "search",
+        "context_5",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f18ed21-489a-45fe-afaf-006bddc5d220/4dcd799d-1ed8-42b6-a01d-ab0c4e06302c-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f18ed21-489a-45fe-afaf-006bddc5d220/4dcd799d-1ed8-42b6-a01d-ab0c4e06302c-trace-0.jsonl",
+      "generation_known_tokens": 5393,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 35.483059122998384,
+          "forwards": 3,
+          "input_tokens": 5838,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 5074,
+          "wall_seconds": 9.375307604670525
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 7.028347381999993,
+          "loads": 1,
+          "wall_seconds": 6.185060606338084
+        }
+      },
+      "wall_seconds": 37.388026962056756
+    },
+    {
+      "family": "ordered_precedence",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "纸盒，回到通用指南。",
+      "answer": "根据当前已提供的记录（来源s3），紫沙样品的专项包装指令（要求硬壳盒）已撤销，且没有替代的专项指令。因此，紫沙样品应遵循通用包装指南（来源s0），目前应使用**纸盒**进行包装。",
+      "control_path": [
+        "search",
+        "context_7",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f18ed21-489a-45fe-afaf-006bddc5d220/3b4357cb-e5c6-45ce-9d23-2d9bc0ee62ae-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2f18ed21-489a-45fe-afaf-006bddc5d220/3b4357cb-e5c6-45ce-9d23-2d9bc0ee62ae-trace-0.jsonl",
+      "generation_known_tokens": 5253,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 53.68750358800389,
+          "forwards": 3,
+          "input_tokens": 7311,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 6484,
+          "wall_seconds": 14.487862375564873
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.9847341629999846,
+          "loads": 1,
+          "wall_seconds": 3.19945415481925
+        }
+      },
+      "wall_seconds": 37.72488550841808
+    },
+    {
+      "family": "fraction_scope",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "不能推断，全天一半不代表上午一半。",
+      "answer": "根据当前已提供的记录，无法确定（不能推断出）青湾组上午收到的箱子中有一半贴了蓝标。记录仅指出青湾组**全天**收到的箱子中有一半贴了蓝标，而全天收货分为上午和下午两个批次。仅凭全天的平均比例，缺乏关于上午批次具体数量或各批次蓝标分布的详细信息，因此不能断定上午的蓝标比例也恰好是50%。",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/070a31d4-3adf-481b-a9c0-d9738db46237-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/070a31d4-3adf-481b-a9c0-d9738db46237-trace-0.jsonl",
+      "generation_known_tokens": 13975,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 14.148759594001604,
+          "forwards": 2,
+          "input_tokens": 2705,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 2394,
+          "wall_seconds": 3.7995462492108345
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.0999820760000603,
+          "loads": 1,
+          "wall_seconds": 2.318315983749926
+        }
+      },
+      "wall_seconds": 75.51933135371655
+    },
+    {
+      "family": "fraction_scope",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "不能推断，全天一半不代表上午一半。",
+      "answer": "不一定。根据当前已提供的记录，虽然青湾组全天收到的箱子中有一半贴了蓝标，但记录明确指出未提供各批次（含上午）的具体蓝标比例，上午批次的情况被标记为不确定，缺乏上午批次与全天比例相同的数据支持，因此无法确定上午收到的箱子是否也有一半贴了蓝标。",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/edeebc8b-84bb-41d3-a493-0e8e5446ffb4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/edeebc8b-84bb-41d3-a493-0e8e5446ffb4-trace-0.jsonl",
+      "generation_known_tokens": 6573,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 19.201823578001495,
+          "forwards": 2,
+          "input_tokens": 3282,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 2904,
+          "wall_seconds": 5.11800142750144
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.095187261000092,
+          "loads": 1,
+          "wall_seconds": 2.272304273210466
+        }
+      },
+      "wall_seconds": 37.13163128122687
+    },
+    {
+      "family": "fraction_scope",
+      "step": "repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "不能推断，全天一半不代表上午一半。",
+      "answer": "根据当前已提供的记录，青湾组上午收到的箱子并不必然有一半贴了蓝标。记录仅表明全天收到的箱子中有一半贴了蓝标，且全天分为上午和下午两个批次，但并未提供上午批次的具体蓝标比例。全天的整体比例无法推导出上午批次的比例也一定相等。",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/6ab14e0d-cf46-4893-897a-1df11a81e9a0-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/6ab14e0d-cf46-4893-897a-1df11a81e9a0-trace-0.jsonl",
+      "generation_known_tokens": 5806,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 23.609769217000576,
+          "forwards": 2,
+          "input_tokens": 4000,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 3622,
+          "wall_seconds": 6.279944449663162
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.251781551000022,
+          "loads": 1,
+          "wall_seconds": 2.518532069399953
+        }
+      },
+      "wall_seconds": 33.48307388648391
+    },
+    {
+      "family": "fraction_scope",
+      "step": "changed",
+      "label": "wrong",
+      "full_task_success": false,
+      "mechanism": "stale_view_reuse",
+      "note": "Reused pre-update unknown-ratio view despite arrival of morning10boxes/2blue; did not deliver the new evidence.",
+      "expected": "不是，上午2/10为五分之一。",
+      "answer": "根据当前已提供的记录，无法确定青湾组上午收到的箱子是否也一定有一半贴了蓝标。记录中仅提供了全天收到的箱子中有一半贴了蓝标，以及全天分为上午和下午两个批次，但并未提供各批次具体的蓝标比例，因此上午批次的蓝标比例是否等于全天比例缺乏数据支持。",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/0a5bfeb9-281e-41ec-8b8b-e1516aa080bb-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/f617488d-0997-4ff4-a41f-78e4d852e3ee/0a5bfeb9-281e-41ec-8b8b-e1516aa080bb-trace-0.jsonl",
+      "generation_known_tokens": 5025,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 35.421118373000354,
+          "forwards": 2,
+          "input_tokens": 5028,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 4650,
+          "wall_seconds": 9.547954449430108
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.842738843999996,
+          "loads": 1,
+          "wall_seconds": 2.837601011618972
+        }
+      },
+      "wall_seconds": 37.57239874638617
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "不能唯一确定，需要区分光帆与影帆的阿林。",
+      "answer": "根据当前提供的记录，无法确定具体需要通知哪个项目。因为记录显示光帆项目和影帆项目各有一位不同的联络员均昵称为阿林，而当前通知单仅写了“阿林”，缺乏区分身份的项目或其他字段信息，因此无法明确指代。",
+      "control_path": [
+        "refresh_view",
+        "search",
+        "context_0",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/2e9dc275-88d9-4af6-92cd-7d1477361d9a-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/2e9dc275-88d9-4af6-92cd-7d1477361d9a-trace-0.jsonl",
+      "generation_known_tokens": 11194,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 13.065368495997973,
+          "forwards": 3,
+          "input_tokens": 3021,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 2481,
+          "wall_seconds": 3.398208275437355
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.3076912279998396,
+          "loads": 1,
+          "wall_seconds": 2.4928039852529764
+        }
+      },
+      "wall_seconds": 57.67165711335838
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "不能唯一确定，需要区分光帆与影帆的阿林。",
+      "answer": "根据提供的记录，光帆项目和影帆项目各有一位不同的联络员阿林。由于当前通知单仅写了“阿林”，未包含项目或其他身份字段，无法确定该通知具体应通知光帆还是影帆的阿林。",
+      "control_path": [
+        "search",
+        "context_4",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/46f2e135-bf20-4865-be3b-9a63ab73bec4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/46f2e135-bf20-4865-be3b-9a63ab73bec4-trace-0.jsonl",
+      "generation_known_tokens": 11068,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 27.066197636999277,
+          "forwards": 3,
+          "input_tokens": 4943,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 4249,
+          "wall_seconds": 7.218973715789616
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.989605322999978,
+          "loads": 1,
+          "wall_seconds": 2.852455595508218
+        }
+      },
+      "wall_seconds": 68.20249709580094
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "changed",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "光帆项目。",
+      "answer": "光帆项目",
+      "control_path": [
+        "refresh_view",
+        "search",
+        "context_4",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/a9b4f913-484d-4885-825b-c30b966a52d4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/a9b4f913-484d-4885-825b-c30b966a52d4-trace-0.jsonl",
+      "generation_known_tokens": 8586,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 54.37174029900052,
+          "forwards": 4,
+          "input_tokens": 8444,
+          "sequence_rows": 4,
+          "state_tokenizations": 4,
+          "state_tokens": 7563,
+          "wall_seconds": 14.559156210161746
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.621765699999969,
+          "loads": 1,
+          "wall_seconds": 2.463866988196969
+        }
+      },
+      "wall_seconds": 44.06957552488893
+    },
+    {
+      "family": "nonunique_identity",
+      "step": "repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "mechanism": "view_generation_ignored_update",
+      "note": "REFRESH scope included the actual disambiguating user Source, but generated interpretation still says notification lacks identity; subsequent handoff retained wrong view.",
+      "expected": "光帆项目。",
+      "answer": "根据当前已提供的记录，无法确定应该通知“阿林”所属的哪个项目。记录显示“光帆项目”和“影帆项目”均有名为“阿林”的联络员，但当前的通知记录仅包含“阿林”这一名字，缺乏区分不同项目或其他身份字段，因此无法确定具体是哪一个项目。",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/9e47e307-7ebc-4c30-8f7a-493f20b35315-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/e53c498f-4803-430e-bbcd-ab426f252b92/9e47e307-7ebc-4c30-8f7a-493f20b35315-trace-0.jsonl",
+      "generation_known_tokens": 9368,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 42.30434073500146,
+          "forwards": 2,
+          "input_tokens": 5454,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 5143,
+          "wall_seconds": 11.520980342291296
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.501674259999845,
+          "loads": 1,
+          "wall_seconds": 2.3012910494580865
+        }
+      },
+      "wall_seconds": 45.44198967050761
+    },
+    {
+      "family": "joint_schedule",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "15:00至16:00。",
+      "answer": "15:00至16:00",
+      "control_path": [
+        "search",
+        "context_0",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/a72bdf28-6e40-408e-8d66-1896303f6866/e70a7f73-87a0-419d-87c2-2a5293451abb-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/a72bdf28-6e40-408e-8d66-1896303f6866/e70a7f73-87a0-419d-87c2-2a5293451abb-trace-0.jsonl",
+      "generation_known_tokens": 5720,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 14.70130431799771,
+          "forwards": 3,
+          "input_tokens": 3290,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 2659,
+          "wall_seconds": 3.862027755007148
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 2.8306471260000308,
+          "loads": 1,
+          "wall_seconds": 2.0455650314688683
+        }
+      },
+      "wall_seconds": 29.592760536819696
+    },
+    {
+      "family": "joint_schedule",
+      "step": "changed",
+      "label": "wrong",
+      "full_task_success": false,
+      "mechanism": "old_assistant_answer_only",
+      "note": "SEARCH/read_0 delivered only a previous query and assistant15:00–16:00 answer; current16:30update was not delivered.",
+      "expected": "两位必要参与者没有重叠可用区间。",
+      "answer": "15:00至16:00",
+      "control_path": [
+        "search",
+        "read_0",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/a72bdf28-6e40-408e-8d66-1896303f6866/8bae050b-f169-4414-91cc-cf35572ecfda-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/a72bdf28-6e40-408e-8d66-1896303f6866/8bae050b-f169-4414-91cc-cf35572ecfda-trace-0.jsonl",
+      "generation_known_tokens": 9793,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 25.52309451199835,
+          "forwards": 3,
+          "input_tokens": 4809,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 3989,
+          "wall_seconds": 6.724148814566433
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.343637964999971,
+          "loads": 1,
+          "wall_seconds": 2.048809140920639
+        }
+      },
+      "wall_seconds": 59.64632082823664
+    },
+    {
+      "family": "joint_schedule",
+      "step": "repeat",
+      "label": "length_failure",
+      "full_task_success": false,
+      "mechanism": "pipeline_output_limit",
+      "note": "First failed response retained; no task answer credited.",
+      "expected": "两位必要参与者没有重叠可用区间。",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/a72bdf28-6e40-408e-8d66-1896303f6866/6564e715-a50c-4e81-9438-6b96b7e95777-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/a72bdf28-6e40-408e-8d66-1896303f6866/6564e715-a50c-4e81-9438-6b96b7e95777-trace-0.jsonl",
+      "generation_known_tokens": 9243,
+      "native_compute": {},
+      "wall_seconds": 54.99953376688063
+    },
+    {
+      "family": "joint_schedule",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "两位必要参与者没有重叠可用区间。",
+      "answer": "根据现有记录，沈岚的可用时段为14:00至16:00（s1，s3确认不变），邵石的可用时段已更新为16:30至17:00（s3）。由于16:00早于16:30，两人时间无重叠，且旁听者无法替代必要参与者，因此无法安排在双方都可用的时段内。",
+      "control_path": [
+        "search",
+        "context_7",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/a72bdf28-6e40-408e-8d66-1896303f6866/9e3ad9ee-14b5-4dcc-9a74-40b1fdcc85e4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/a72bdf28-6e40-408e-8d66-1896303f6866/9e3ad9ee-14b5-4dcc-9a74-40b1fdcc85e4-trace-0.jsonl",
+      "generation_known_tokens": 10227,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 51.129138566997426,
+          "forwards": 3,
+          "input_tokens": 7387,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 6560,
+          "wall_seconds": 13.721582090482116
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.1593882629999825,
+          "loads": 1,
+          "wall_seconds": 2.0980284456163645
+        }
+      },
+      "wall_seconds": 67.11121400538832
+    },
+    {
+      "family": "negated_exception",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "不可以，命中含磁片例外。",
+      "answer": "根据已提供的记录，雾岭这批含磁片的轻件**不可**走加急通道。记录指出：1. 雾岭轻件一般可以走加急通道；2. 但含磁片的轻件明确不得走加急通道；3. 本批货确认为含磁片的轻件。因此，该批货物不符合走加急通道的条件。",
+      "control_path": [
+        "search",
+        "context_0",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/0e6d67ae-ba69-476d-b190-bf61ce788d43-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/0e6d67ae-ba69-476d-b190-bf61ce788d43-trace-0.jsonl",
+      "generation_known_tokens": 8756,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 14.2532576779995,
+          "forwards": 3,
+          "input_tokens": 3266,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 2635,
+          "wall_seconds": 3.758748504333198
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.7375112990000616,
+          "loads": 1,
+          "wall_seconds": 2.1673566196113825
+        }
+      },
+      "wall_seconds": 49.2119180066511
+    },
+    {
+      "family": "negated_exception",
+      "step": "changed",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "可以，命中已屏蔽封装的例外之例外。",
+      "answer": "可以。根据当前记录，虽然含磁片的轻件通常不得走加急通道，但根据最新说明，该规则不适用于已使用指定屏蔽盒封装的轻件。由于本批货物是含磁片的轻件且已完成这种指定屏蔽盒的封装，符合豁免条件，因此可以走加急通道。",
+      "control_path": [
+        "search",
+        "context_4",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/b7af91f5-a0f5-4d1e-976d-78047ed983c9-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/b7af91f5-a0f5-4d1e-976d-78047ed983c9-trace-0.jsonl",
+      "generation_known_tokens": 5853,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 28.790493847998732,
+          "forwards": 3,
+          "input_tokens": 5095,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 4401,
+          "wall_seconds": 7.631133632734418
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 4.527974317000144,
+          "loads": 1,
+          "wall_seconds": 2.4258647048845887
+        }
+      },
+      "wall_seconds": 33.69984719529748
+    },
+    {
+      "family": "negated_exception",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "可以，命中已屏蔽封装的例外之例外。",
+      "answer": "可以。根据已有记录，虽然含磁片的轻件通常不得走加急通道，但新说明指出含磁片禁用加急的规则不适用于已用指定屏蔽盒封装的轻件，且本批已完成这种封装，因此符合通行条件。",
+      "control_path": [
+        "search",
+        "context_4",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/5808c58f-a568-4d0c-b013-796d65df772d-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/5808c58f-a568-4d0c-b013-796d65df772d-trace-0.jsonl",
+      "generation_known_tokens": 5754,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 45.426985084999615,
+          "forwards": 3,
+          "input_tokens": 6722,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 5923,
+          "wall_seconds": 12.176471420563757
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.9325501260000237,
+          "loads": 1,
+          "wall_seconds": 2.3022383404895663
+        }
+      },
+      "wall_seconds": 36.796572397463024
+    },
+    {
+      "family": "negated_exception",
+      "step": "repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "可以，命中已屏蔽封装的例外之例外。",
+      "answer": "可以。根据现有记录，虽然含磁片的轻件一般禁止走加急通道，但对于包装在指定屏蔽箱内的此类物品有豁免规定。记录显示，雾岭这批含磁片的轻件已完成指定屏蔽箱包装，符合豁免条件，因此可以使用加急通道。",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/87e9a093-d63f-4d68-a250-b0868a06c422-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/d64d0798-73c6-4b76-baf9-8b08e94532c1/87e9a093-d63f-4d68-a250-b0868a06c422-trace-0.jsonl",
+      "generation_known_tokens": 9016,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 50.77366483199876,
+          "forwards": 2,
+          "input_tokens": 5855,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 5544,
+          "wall_seconds": 14.226405320689082
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.560953429999927,
+          "loads": 1,
+          "wall_seconds": 2.080120406113565
+        }
+      },
+      "wall_seconds": 55.292032710276544
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "cold",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "吴庭保管，俞青为作者。",
+      "answer": "根据当前已提供的记录，原作者是俞青，现在的保管人是吴庭。",
+      "control_path": [
+        "search",
+        "context_0",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/ac48b75c-96cc-4c37-a1b4-da51c643e9ea-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/ac48b75c-96cc-4c37-a1b4-da51c643e9ea-trace-0.jsonl",
+      "generation_known_tokens": 5484,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 14.787536720999924,
+          "forwards": 3,
+          "input_tokens": 3214,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 2583,
+          "wall_seconds": 3.8577646501362324
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 2.9747668269999394,
+          "loads": 1,
+          "wall_seconds": 2.210301274433732
+        }
+      },
+      "wall_seconds": 28.791797566227615
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "repeat",
+      "label": "wrong",
+      "full_task_success": false,
+      "mechanism": "identity_rendering_error",
+      "note": "View used unambiguousYuQing/WuTing; Reader emitted different Chinese names于青/吴汀 rather than俞青/吴庭. Roles alone are insufficient for full identity success.",
+      "expected": "吴庭保管，俞青为作者。",
+      "answer": "根据当前已提供的记录，鸣沙档案的当前保管人是吴汀，原作者是于青。",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/f30a3a96-d33d-4343-88e5-538cc72ad253-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/f30a3a96-d33d-4343-88e5-538cc72ad253-trace-0.jsonl",
+      "generation_known_tokens": 8129,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 18.919339563002723,
+          "forwards": 2,
+          "input_tokens": 3324,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 3013,
+          "wall_seconds": 5.1219946295022964
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.1189439970000876,
+          "loads": 1,
+          "wall_seconds": 2.3788769794628024
+        }
+      },
+      "wall_seconds": 36.84456502087414
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "DirectYuQing/WuTingromanization unambiguously maps the only matching participants in this history; accepted semantic rendering, unlike invented alternate Chinese characters.",
+      "expected": "吴庭保管，俞青为作者。",
+      "answer": "根据当前提供的记录，鸣沙档案的原作者是 Yu Qing，现任保管者是 Wu Ting。",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/fb1a3e4b-d369-4412-8e0e-dc5ee2936ea3-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/fb1a3e4b-d369-4412-8e0e-dc5ee2936ea3-trace-0.jsonl",
+      "generation_known_tokens": 7202,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 17.925106610000512,
+          "forwards": 2,
+          "input_tokens": 3341,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 2963,
+          "wall_seconds": 4.763159028254449
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.3463872350000656,
+          "loads": 1,
+          "wall_seconds": 2.5059171486645937
+        }
+      },
+      "wall_seconds": 41.27925188280642
+    },
+    {
+      "family": "serial_responsibility",
+      "step": "changed",
+      "label": "wrong",
+      "full_task_success": false,
+      "mechanism": "stale_view_reuse",
+      "note": "Reused oldWuTingcustodian view after actual handover toLianShu; retained author but missed changed custody.",
+      "expected": "连舒保管，俞青仍是作者。",
+      "answer": "根据当前提供的记录，鸣沙档案的原作者是 Yu Qing，当前保管人是 Wu Ting。",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/776404f3-2d02-498d-bf6e-b8d4479945b9-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/427c6c07-b9b1-46ec-8d4f-66e5f910099f/776404f3-2d02-498d-bf6e-b8d4479945b9-trace-0.jsonl",
+      "generation_known_tokens": 8213,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 26.438492615998257,
+          "forwards": 2,
+          "input_tokens": 4249,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 3871,
+          "wall_seconds": 7.05855664703995
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.3543325370001185,
+          "loads": 1,
+          "wall_seconds": 2.467193947173655
+        }
+      },
+      "wall_seconds": 49.86317121051252
+    },
+    {
+      "family": "count_distinct",
+      "step": "cold",
+      "label": "length_failure",
+      "full_task_success": false,
+      "mechanism": "pipeline_output_limit",
+      "note": "First failed response retained; no task answer credited.",
+      "expected": "2个。",
+      "answer": "回答协议失败, 执行已停止; 以下是已确认的操作状态。未列出的请求完成情况仍未确认。\n\n本轮业务结果: 未执行新的业务操作。以下仅报告已核实的操作和查询, 不代表未列出的请求也已完成。\n\n本轮未取得新的业务回执。\n\n本轮语义记忆: 未提交。这里只报告列出的回执, 不确认全部请求或语义覆盖。\n\n本轮原始消息已记录。原始消息记录与语义记忆提交分别计数。",
+      "control_path": [],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/a29507e4-141c-4823-8f94-a6483bd96fde-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/a29507e4-141c-4823-8f94-a6483bd96fde-trace-0.jsonl",
+      "generation_known_tokens": 9239,
+      "native_compute": {},
+      "wall_seconds": 58.00334848463535
+    },
+    {
+      "family": "count_distinct",
+      "step": "repeat",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "2个。",
+      "answer": "根据现有记录，银禾清单中记录的样品编号包含S11和S12，共2个不同的样品。",
+      "control_path": [
+        "search",
+        "context_1",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/af878070-fc5a-4cb5-bc7d-b5031a6a9718-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/af878070-fc5a-4cb5-bc7d-b5031a6a9718-trace-0.jsonl",
+      "generation_known_tokens": 5462,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 24.581292130998918,
+          "forwards": 3,
+          "input_tokens": 4716,
+          "sequence_rows": 3,
+          "state_tokenizations": 3,
+          "state_tokens": 4057,
+          "wall_seconds": 6.479939605109394
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.517521493000004,
+          "loads": 1,
+          "wall_seconds": 2.629492891021073
+        }
+      },
+      "wall_seconds": 31.92632709722966
+    },
+    {
+      "family": "count_distinct",
+      "step": "changed",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "3个。",
+      "answer": "根据目前已提供的记录清单，银禾实际有3个不同的样品，分别为：S11、S12和S13。",
+      "control_path": [
+        "refresh_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/6a837b16-39fe-4085-8925-985b7cafbec4-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/6a837b16-39fe-4085-8925-985b7cafbec4-trace-0.jsonl",
+      "generation_known_tokens": 7818,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 32.288732002998586,
+          "forwards": 2,
+          "input_tokens": 4665,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 4354,
+          "wall_seconds": 8.84304381441325
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.4728150930000083,
+          "loads": 1,
+          "wall_seconds": 2.6238286085426807
+        }
+      },
+      "wall_seconds": 35.867203616537154
+    },
+    {
+      "family": "count_distinct",
+      "step": "unrelated",
+      "label": "correct",
+      "full_task_success": true,
+      "mechanism": null,
+      "note": "All requested source-grounded dimensions satisfied.",
+      "expected": "3个。",
+      "answer": "3个",
+      "control_path": [
+        "use_view",
+        "handoff"
+      ],
+      "source_result": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/408a61a3-f654-443f-b109-0822d8695b02-result.json",
+      "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/2b38dc7a-8201-4bde-906e-5d00989d87a1/408a61a3-f654-443f-b109-0822d8695b02-trace-0.jsonl",
+      "generation_known_tokens": 4963,
+      "native_compute": {
+        "dynamic_memory_laya": {
+          "cpu_seconds": 22.457733791001374,
+          "forwards": 2,
+          "input_tokens": 3832,
+          "sequence_rows": 2,
+          "state_tokenizations": 2,
+          "state_tokens": 3454,
+          "wall_seconds": 5.993824974633753
+        },
+        "dynamic_memory_laya_load": {
+          "cpu_seconds": 3.4031771330000993,
+          "loads": 1,
+          "wall_seconds": 2.6219592243433
+        }
+      },
+      "wall_seconds": 27.2811027597636
+    }
+  ],
+  "conclusion": "Descriptive regression slice, no quality/cost advantage or protected generalization established. Width/data selection remains governed by the separately registered external-development rule.",
+  "model_calls_by_review": 0,
+  "fixed_checkpoint_update": 96
+}
