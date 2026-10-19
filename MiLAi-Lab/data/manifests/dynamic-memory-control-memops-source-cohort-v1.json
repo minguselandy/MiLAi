@@ -67,7 +67,10 @@
       "pilot": false,
       "body_reviewed_for_this_intake": true,
       "admitted_to_current_training": false,
-      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json",
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "A02",
@@ -78,7 +81,10 @@
       "track": "source_task",
       "pilot": true,
       "body_reviewed_for_this_intake": true,
-      "admitted_to_current_training": false
+      "admitted_to_current_training": false,
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "A04",
@@ -243,7 +249,10 @@
       "track": "source_task",
       "pilot": true,
       "body_reviewed_for_this_intake": true,
-      "admitted_to_current_training": false
+      "admitted_to_current_training": false,
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "B02",
@@ -255,7 +264,10 @@
       "pilot": false,
       "body_reviewed_for_this_intake": true,
       "admitted_to_current_training": false,
-      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json",
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "B03",
@@ -399,7 +411,10 @@
       "pilot": false,
       "body_reviewed_for_this_intake": true,
       "admitted_to_current_training": false,
-      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json",
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "C02",
@@ -410,7 +425,10 @@
       "track": "source_task",
       "pilot": true,
       "body_reviewed_for_this_intake": true,
-      "admitted_to_current_training": false
+      "admitted_to_current_training": false,
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "C04",
@@ -564,7 +582,10 @@
       "track": "source_task",
       "pilot": true,
       "body_reviewed_for_this_intake": true,
-      "admitted_to_current_training": false
+      "admitted_to_current_training": false,
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "D11",
@@ -576,7 +597,10 @@
       "pilot": false,
       "body_reviewed_for_this_intake": true,
       "admitted_to_current_training": false,
-      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json",
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "D14",
@@ -675,7 +699,10 @@
       "track": "source_task",
       "pilot": true,
       "body_reviewed_for_this_intake": true,
-      "admitted_to_current_training": false
+      "admitted_to_current_training": false,
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "E07",
@@ -687,7 +714,10 @@
       "pilot": false,
       "body_reviewed_for_this_intake": true,
       "admitted_to_current_training": false,
-      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json",
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "E10",
@@ -743,7 +773,10 @@
       "pilot": false,
       "body_reviewed_for_this_intake": true,
       "admitted_to_current_training": false,
-      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json"
+      "source_review": "dynamic-memory-control-memops-source-wave2-v1.json",
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "F07",
@@ -754,7 +787,10 @@
       "track": "source_task",
       "pilot": true,
       "body_reviewed_for_this_intake": true,
-      "admitted_to_current_training": false
+      "admitted_to_current_training": false,
+      "admitted_to_prepared_t1_pilot": true,
+      "actual_training_started": false,
+      "prepared_t1_protocol": "dynamic-memory-control-t1-shared-pilot-protocol-v1.json"
     },
     {
       "family": "F08",

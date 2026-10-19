@@ -174,8 +174,9 @@ def build_query_structure(
                  if [source["observed_at"], source["event_id"]] > prior["arrival_cursor"]]
                 if prior is not None and prior["policy"] == policy else [])
     report: dict[str, Any] = {"policy": policy, "visible_sources_enumerated": len(events),
-        "source_inventory": "MemoryService.sources full enumeration; "
-                            "hidden-row scan count unobserved",
+        "source_inventory": ("MemoryService.sources full enumeration; "
+                             "hidden-row scan count unobserved" if source_events is None else
+                             "explicit source events; upstream discovery counted separately"),
         "retrieved_sources": len(pool), "new_arrivals": len(arrivals), "model_calls": 0,
         "source_bodies_delivered": 0,
         "cache_capacity": capacity, "slot": slot, "replaced_view": cached.value["id"]

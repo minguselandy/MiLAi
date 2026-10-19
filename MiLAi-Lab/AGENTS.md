@@ -1,3 +1,25 @@
+# REVIEW / NEXT INPUTS: 2026-10-19
+
+V5 remains the only live queue; revalidate PID893293/exec69065 and child before any model work.
+M3 all96 first tasks reviewed: rebuild22/24, on-demand rule23/24, Laya14/24, generative15/24.
+Rules actually USE_VIEW0; captured preceding queries/answers become pending events, and saved_history
+can also prohibit reuse. No case-specific source deletion or forced reuse added. Full graphs not certified.
+M3 cumulative SVG and stage costs saved. Laya generation199825 plus73forwards/243325tokens; no net win.
+MemOps72 first answers reviewed: pilot12C/19W/3length/2qualified; wave2 11C/15W/8length/2qualified.
+27 view contexts:20task-sufficient,4inadequate,3attribution-uncertain masked.95labels+3masks prepared;
+74acquire/21handoff preferences, not copied teacher actions. No SEARCH-followed candidate prefixes.
+Actual98 shared inputs match sent wires;3exceed8192, maximum9496. Do not drop or truncate them.
+T1 matched pilot prepared: original24families373labels vs broader36families468labels; both shared,
+same BASE/96updates/micro1/effective16/final96, same12288declared capacity and original8family dev.
+Actual numerical/gradient admission beyond encoder pretraining8192 remains UNRUN; quality unverified.
+Next plan artifacts/dynamic-memory-control/prepared-after-v5-v1/jobs.json: longest-prefix probe then
+conditional two fits. No worker started; do not modify the live V5 queue or start concurrent models.
+All new offline compute stays ledger_recorded:false until an actual idle boundary.
+Latest source edit only corrects query_structure source_inventory reporting for explicit events;
+20tests, Ruff and modulemypy pass. It does not modify frozen8eb07410 common-before execution.
+Broader data beyond this pilot, external dev/protected confirmation, all seeds, full-state/lifecycle
+and repaired real sandbox validation remain incomplete. Full goal stays active.
+
 # LIVE V5: 2026-10-19
 
 Serial dispatcher PID893293 / exec69065, child893299, activemultitopic-four-slots-v1.
