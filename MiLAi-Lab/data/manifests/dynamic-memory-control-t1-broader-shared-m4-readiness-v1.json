@@ -1,0 +1,222 @@
+{
+  "version": "dynamic-memory-control-t1-broader-shared-m4-readiness-v1",
+  "status": "OFFLINE_TRAJECTORY_ANALYSIS_COMPLETE",
+  "positions": 80,
+  "policy_states": 216,
+  "positions_with_policy_states": 77,
+  "positions_before_controller_failure": [
+    {
+      "family": "memops_B30",
+      "step": "stage-2",
+      "task_label": "length_failure"
+    },
+    {
+      "family": "memops_C03",
+      "step": "stage-1-repeat",
+      "task_label": "length_failure"
+    },
+    {
+      "family": "memops_F01",
+      "step": "stage-0-repeat",
+      "task_label": "length_failure"
+    }
+  ],
+  "positions_with_established_sufficient_witness": 29,
+  "observed_operations_after_first_witness": [
+    {
+      "family": "nonunique_identity",
+      "row": "repeat",
+      "step": 3,
+      "operation": "READ",
+      "selected": "read_2",
+      "operation_wall_seconds": 0.02451846282929182,
+      "actual_task_label": "correct",
+      "added_original_turns": [],
+      "following_policy_decision_wall_seconds": 7.305226064287126,
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/7054a902-0714-4e43-9a15-00c67350a204-trace-0.jsonl",
+      "counterfactual_reader_run": false,
+      "author_assessment": "Opens a prior user query and protocol-failure receipt, adding no original identity-disambiguation evidence."
+    },
+    {
+      "family": "nonunique_identity",
+      "row": "repeat",
+      "step": 4,
+      "operation": "READ",
+      "selected": "context_1",
+      "operation_wall_seconds": 0.028588641434907913,
+      "actual_task_label": "correct",
+      "added_original_turns": [],
+      "following_policy_decision_wall_seconds": 8.331527235917747,
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/a4879801-cea5-46b7-aa4f-60f396d78de8/7054a902-0714-4e43-9a15-00c67350a204-trace-0.jsonl",
+      "counterfactual_reader_run": false,
+      "author_assessment": "Opens earlier query/answer pairs that repeat the already established ambiguity; no new original identity evidence."
+    },
+    {
+      "family": "memops_A19",
+      "row": "stage-1-repeat",
+      "step": 2,
+      "operation": "READ",
+      "selected": "context_1",
+      "operation_wall_seconds": 0.033433969132602215,
+      "actual_task_label": "correct",
+      "added_original_turns": [],
+      "following_policy_decision_wall_seconds": 18.207986976020038,
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/47ed2e0d-2d5c-4414-8dc8-a5b61a6719a1-trace-0.jsonl",
+      "counterfactual_reader_run": false,
+      "author_assessment": "Opens old stage-0 query/answer pairs about Karen and unknown phone after a task-adequate current Priya view; adds no current required fact."
+    },
+    {
+      "family": "memops_C03",
+      "row": "stage-0",
+      "step": 2,
+      "operation": "READ",
+      "selected": "context_2",
+      "operation_wall_seconds": 0.03767235390841961,
+      "actual_task_label": "correct",
+      "added_original_turns": [
+        "s1t1",
+        "s1t2",
+        "s1t3",
+        "s1t4",
+        "s1t5",
+        "s1t6",
+        "s1t7"
+      ],
+      "following_policy_decision_wall_seconds": 5.367211997509003e-06,
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/eb54fe9f-8c3e-42c6-b05e-cbdae80ebde7-trace-0.jsonl",
+      "counterfactual_reader_run": false,
+      "author_assessment": "Opens seven original first-segment turns after an adequate view. This corroborates the cached facts; it is not evidence of added current requirements or proven counterfactual waste."
+    },
+    {
+      "family": "memops_C03",
+      "row": "stage-2-repeat",
+      "step": 2,
+      "operation": "REFRESH_VIEW",
+      "selected": "refresh_view",
+      "operation_wall_seconds": 7.48394094966352,
+      "actual_task_label": "correct",
+      "added_original_turns": [],
+      "following_policy_decision_wall_seconds": 34.00939118396491,
+      "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/2936db3a-c06f-48e4-bd3b-db597e444303-trace-0.jsonl",
+      "counterfactual_reader_run": false,
+      "author_assessment": "Refresh adds two query/answer arrivals but leaves node/rule bodies identical to revision 3. No improvement in required facts is observed."
+    }
+  ],
+  "empty_handoffs_with_remaining_opportunities": [
+    {
+      "family": "quota_reallocation",
+      "row": "cold",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 3,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled"
+    },
+    {
+      "family": "ordered_precedence",
+      "row": "repeat",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 5,
+      "selection_mode": "policy",
+      "task_label": "length_failure"
+    },
+    {
+      "family": "joint_schedule",
+      "row": "cold",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 3,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled"
+    },
+    {
+      "family": "serial_responsibility",
+      "row": "unrelated",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 8,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled"
+    },
+    {
+      "family": "serial_responsibility",
+      "row": "changed",
+      "step": 0,
+      "remaining_control_steps": 8,
+      "available_operation_kinds": [
+        "REFRESH_VIEW",
+        "SEARCH"
+      ],
+      "last_result": null,
+      "source_events_visible_to_controller": 11,
+      "selection_mode": "policy",
+      "task_label": "unfulfilled"
+    }
+  ],
+  "empty_handoff_outcomes": {
+    "unfulfilled": 4,
+    "length_failure": 1
+  },
+  "readiness_outcomes": {
+    "correct": 27,
+    "qualified": 1,
+    "length_failure": 1
+  },
+  "source_label_summary": {
+    "source_run": "artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1",
+    "source_status": "COMPLETED_WITH_FAILURES",
+    "states": 216,
+    "labelled_by_split": {
+      "dev": 204
+    },
+    "statuses": {
+      "acquire_evidence_preference": 172,
+      "ready_handoff_preference": 32,
+      "unreviewed_opened_view_masked": 10,
+      "forced_single_action_masked": 2
+    },
+    "unreviewed_view_contexts": 6,
+    "persisted_candidate_matches": 742,
+    "policy_choices_copied": false,
+    "scope": "Single-slot source-only own rollouts; inputs unchanged, actual pools only. View adequacy reviewed separately in the declared source contexts. No silent stale-view credit or future-source reconstruction."
+  },
+  "limits": [
+    "Registered witnesses are sufficient, not an exhaustive earliest-evidence oracle.",
+    "Qualified view contexts remain uncertain; absence of a witness does not prove impossibility.",
+    "Observed extra operation clocks are descriptive, not net counterfactual savings.",
+    "All labels are development analysis only; train.jsonl remains empty.",
+    "Author review is exposed to method identities and prior outcomes, not blinded confirmation."
+  ],
+  "model_calls": 0,
+  "interpretation": "Five extra operations in four messages occur after a conservative sufficient witness; all four final tasks are correct. Source corroboration and duplicate/history reads are distinguished. Five empty handoffs retain eight steps, visible source events and actual acquisition actions; four end unfulfilled and one in a later length failure. These are descriptive trajectories, not a forced-read policy or a measured counterfactual speedup.",
+  "empty_handoffs_by_domain": {
+    "original_development": 5,
+    "external_development": 0
+  },
+  "observed_extra_operation_wall_seconds": 7.608154376968741,
+  "observed_following_decision_wall_seconds": 67.85413682740182,
+  "labels_path": "artifacts/dynamic-memory-control/t1-broader-shared-sufficiency-v1/dev.jsonl",
+  "training_rows": 0,
+  "detailed_analysis": "artifacts/dynamic-memory-control/t1-broader-shared-sufficiency-v1/m4-analysis.json"
+}

@@ -1,0 +1,302 @@
+{
+  "status": "ALL80_EFFECTS_ALL28_CONSTRUCTED_VIEWS_AND24_REUSES_AUTHOR_REVIEWED",
+  "reviewer": "Codex author; complete structures and changes against original bound reports, not an independent Judge. Unchanged fields inherit review but are reconsidered under new source reports.",
+  "scope": "Actual delivered graphs reviewed against captured source roles, current query and source contracts. Task sufficiency is separate from node truth, provenance, logical rule validity and later applicability. Contradictory views are not positive witnesses merely because a Reader can repair them. No model calls or runtime changes.",
+  "model_calls": 0,
+  "version": "dynamic-memory-control-t1-broader-shared-state-results-v1",
+  "effect_inventory": {
+    "messages": 80,
+    "semantic_commits": 0,
+    "visibility_revocations": 0,
+    "business_effects": 0,
+    "business_observations": 2,
+    "refresh_attempts": 29,
+    "refresh_not_delivered": 1
+  },
+  "operation_counts": {
+    "SEARCH": 40,
+    "READ": 47,
+    "REFRESH_VIEW": 29,
+    "USE_VIEW": 24
+  },
+  "constructed_views": 28,
+  "nodes_reviewed": 235,
+  "rules_reviewed": 49,
+  "rejected_or_failed_refreshes": [
+    {
+      "family": "memops_A19",
+      "step": "stage-2",
+      "result": {
+        "ok": false,
+        "status": "read_outcome_unknown",
+        "error_type": "KeyError",
+        "phase": "read_action",
+        "read_state_effect": "unconfirmed",
+        "retryable": false
+      }
+    }
+  ],
+  "runtime_change": "None. First model responses, caches, failures and costs preserved.",
+  "reuse_assessment": {
+    "actual_use_view_calls": 24,
+    "valid_for_requested_meaning": 8,
+    "invalid_for_requested_meaning": 12,
+    "qualified_or_uncertain": 4,
+    "cases": [
+      {
+        "family": "memops_B30",
+        "step": "stage-0-repeat",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": null,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/e7e38d72-120d-4bd5-b8ea-f481e9158a39-trace-0.jsonl"
+      },
+      {
+        "family": "memops_B30",
+        "step": "stage-1-repeat",
+        "view_id": "query-structure:2",
+        "revision": 2,
+        "meaning_supported": null,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/07f76c36-4591-42db-b458-97c1b8fc7e6b-trace-0.jsonl"
+      },
+      {
+        "family": "memops_B30",
+        "step": "stage-2-repeat",
+        "view_id": "query-structure:3",
+        "revision": 3,
+        "meaning_supported": false,
+        "basis": "Old view omits the later corporate Marc website plan and M.J. suggestion, beyond existing person-mapping qualifications.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/3e3a5f3c-d4da-4a16-b4d0-9b670de3abaf/679f0802-45fb-4d31-acc3-f141d47f4296-trace-0.jsonl"
+      },
+      {
+        "family": "memops_D25",
+        "step": "stage-1-repeat",
+        "view_id": "query-structure:2",
+        "revision": 2,
+        "meaning_supported": false,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/c9607d7c-68e2-433b-b66e-4090252bb7ad/7ee31ced-bea5-4389-803b-4c0fa80b678d-trace-0.jsonl"
+      },
+      {
+        "family": "memops_C03",
+        "step": "stage-0-repeat",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": true,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/3f8a6009-5e53-4a16-8144-83728a2d9ad7-trace-0.jsonl"
+      },
+      {
+        "family": "memops_C03",
+        "step": "stage-2-repeat",
+        "view_id": "query-structure:3",
+        "revision": 3,
+        "meaning_supported": true,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/8ece33af-b433-4f79-9e3a-1b3381581f4e/2936db3a-c06f-48e4-bd3b-db597e444303-trace-0.jsonl"
+      },
+      {
+        "family": "memops_A32",
+        "step": "stage-0-repeat",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": true,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/6d33cd0c-cfdd-4097-9caa-c66649cc397e-trace-0.jsonl"
+      },
+      {
+        "family": "memops_A32",
+        "step": "stage-1-repeat",
+        "view_id": "query-structure:2",
+        "revision": 2,
+        "meaning_supported": true,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/5f4c88d0-542b-41c2-a106-c082d52e3434-trace-0.jsonl"
+      },
+      {
+        "family": "memops_A32",
+        "step": "stage-2",
+        "view_id": "query-structure:2",
+        "revision": 2,
+        "meaning_supported": false,
+        "basis": "Actual app audit is now completed; old view still treats it as an intention.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/86b63107-9591-4d9f-bddc-0b8d690fd2ee-trace-0.jsonl"
+      },
+      {
+        "family": "memops_A32",
+        "step": "stage-2-repeat",
+        "view_id": "query-structure:2",
+        "revision": 2,
+        "meaning_supported": false,
+        "basis": "Actual app audit is now completed; old view still treats it as an intention.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/e8b16027-8642-4b3c-8686-f547e1315ed7/e3ea7312-dd6a-4179-a2cf-154a726e9714-trace-0.jsonl"
+      },
+      {
+        "family": "fraction_scope",
+        "step": "repeat",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": true,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/d6dd4f37-696b-4a5a-80e8-f2d7c1249d74-trace-0.jsonl"
+      },
+      {
+        "family": "fraction_scope",
+        "step": "changed",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": false,
+        "basis": "New morning 10-box/2-blue observation resolves the prior uncertainty; old view omits it.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/100a483d-b33a-4dd7-8d5c-174fd8b3de8a/584b23cc-c454-4152-848d-eb3789f01291-trace-0.jsonl"
+      },
+      {
+        "family": "negated_exception",
+        "step": "unrelated",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": false,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/d8350dd3-0244-4d40-8150-6f65a1ad4725-trace-0.jsonl"
+      },
+      {
+        "family": "negated_exception",
+        "step": "repeat",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": false,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/2b03f640-72e6-4897-9ecb-fc8536603ac2/17a491dc-0438-482b-8daf-6b6753297ab0-trace-0.jsonl"
+      },
+      {
+        "family": "memops_A19",
+        "step": "stage-0-repeat",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": true,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/9f2f59d4-92cc-4b41-b909-54171a9e330e-trace-0.jsonl"
+      },
+      {
+        "family": "memops_A19",
+        "step": "stage-1-repeat",
+        "view_id": "query-structure:2",
+        "revision": 2,
+        "meaning_supported": true,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1ad7f714-6d43-44c1-af63-e4f24d0366e3/47ed2e0d-2d5c-4414-8dc8-a5b61a6719a1-trace-0.jsonl"
+      },
+      {
+        "family": "memops_F01",
+        "step": "stage-1",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": false,
+        "basis": "The old view retains 6200 and incorrect old arithmetic after the confirmed 6080 update.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1f47eadc-d4dd-40e6-b7ee-4457b0152466/7d58d7dc-0bf0-4c30-a306-1494d9111496-trace-0.jsonl"
+      },
+      {
+        "family": "memops_F01",
+        "step": "stage-1-repeat",
+        "view_id": "query-structure:2",
+        "revision": 2,
+        "meaning_supported": true,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1f47eadc-d4dd-40e6-b7ee-4457b0152466/ae13c283-4a46-4334-9d5c-597dbafc1340-trace-0.jsonl"
+      },
+      {
+        "family": "memops_F01",
+        "step": "stage-2-repeat",
+        "view_id": "query-structure:3",
+        "revision": 3,
+        "meaning_supported": false,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/1f47eadc-d4dd-40e6-b7ee-4457b0152466/b9bd8a44-e255-42bc-a979-caad1751c751-trace-0.jsonl"
+      },
+      {
+        "family": "memops_E08",
+        "step": "stage-1-repeat",
+        "view_id": "query-structure:2",
+        "revision": 2,
+        "meaning_supported": false,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/d44a076b-ec54-4550-8f07-d99af0d71e24/e81f1766-fc22-401f-ad43-b02bacc15196-trace-0.jsonl"
+      },
+      {
+        "family": "memops_E08",
+        "step": "stage-2-repeat",
+        "view_id": "query-structure:3",
+        "revision": 3,
+        "meaning_supported": false,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/d44a076b-ec54-4550-8f07-d99af0d71e24/5cec4139-b53c-4f13-9696-27994e6df3cc-trace-0.jsonl"
+      },
+      {
+        "family": "memops_E15",
+        "step": "stage-0-repeat",
+        "view_id": "query-structure:1",
+        "revision": 1,
+        "meaning_supported": null,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7d0d76e4-158c-42f8-8061-77a0f8aa6674/141c987e-6f35-4c88-a3f6-9192120c373c-trace-0.jsonl"
+      },
+      {
+        "family": "memops_E15",
+        "step": "stage-1-repeat",
+        "view_id": "query-structure:2",
+        "revision": 2,
+        "meaning_supported": null,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7d0d76e4-158c-42f8-8061-77a0f8aa6674/ce5f8b99-94fd-4d50-a66f-43a7357bf64d-trace-0.jsonl"
+      },
+      {
+        "family": "memops_E15",
+        "step": "stage-2-repeat",
+        "view_id": "query-structure:3",
+        "revision": 3,
+        "meaning_supported": false,
+        "basis": "Same reviewed source context as construction; see construction findings.",
+        "trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-broader-shared-evaluation-v1/laya/banks/7d0d76e4-158c-42f8-8061-77a0f8aa6674/2a6de722-9665-4bc1-9991-44647e5e8bc1-trace-0.jsonl"
+      }
+    ],
+    "scope": "Meaning at actual query time; qualified/uncertain views are not forced into positive or negative readiness labels. Not a cache-hit validity score."
+  },
+  "source_export": "artifacts/dynamic-memory-control/t1-broader-shared-state-inventory-v1/views.json",
+  "detailed_author_review": "artifacts/dynamic-memory-control/t1-broader-shared-state-inventory-v1/author-review.json",
+  "construction_task_sufficiency": {
+    "true": 10,
+    "false": 12,
+    "uncertain": 6
+  },
+  "reviewed_view_keys": [
+    "memops_B30/query-structure:1",
+    "memops_B30/query-structure:2",
+    "memops_B30/query-structure:3",
+    "memops_B30/query-structure:4",
+    "memops_C03/query-structure:1",
+    "memops_C03/query-structure:2",
+    "memops_C03/query-structure:3",
+    "memops_C03/query-structure:4",
+    "fraction_scope/query-structure:1",
+    "negated_exception/query-structure:1",
+    "memops_A19/query-structure:1",
+    "memops_A19/query-structure:2",
+    "memops_A19/query-structure:3",
+    "memops_D25/query-structure:1",
+    "memops_D25/query-structure:2",
+    "memops_D25/query-structure:3",
+    "memops_D25/query-structure:4",
+    "memops_A32/query-structure:1",
+    "memops_A32/query-structure:2",
+    "memops_E08/query-structure:1",
+    "memops_E08/query-structure:2",
+    "memops_E08/query-structure:3",
+    "memops_E15/query-structure:1",
+    "memops_E15/query-structure:2",
+    "memops_E15/query-structure:3",
+    "memops_F01/query-structure:1",
+    "memops_F01/query-structure:2",
+    "memops_F01/query-structure:3"
+  ]
+}

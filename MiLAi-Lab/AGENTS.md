@@ -1,5 +1,16 @@
 # LIVE V10: 2026-10-19
 
+Broader36 complete state/reuse/M4 audit now saved in state-results-v1 and m4-readiness-v1.
+All28 constructed views:235nodes/49rules; construction sufficiency10true/12false/6uncertain,
+not fullgraph validity. Actual24USE_VIEW:8meaning-valid/12invalid/4qualified-uncertain.
+M4:216actualstates/204devlabels,742candidate matches, trainfileEMPTY;10uncertain-state masks,
+2forced masks.29messages establish conservative sufficient witness;27C/1qualified/1length.
+5extra operations in4messages (4READ/1REFRESH); separate original corroboration from old-answer
+reads. Operationwall7.61s plus followingdecision67.85s are observed costs, not netcounterfactual savings.
+5emptyhandoffs allolddev with8steps/availableacquisition:4unfulfilled/1length.3failuresbeforecontroller.
+Auditcompute remains pending whileV10live. Prefix72baseline exports prepared from4closedfamilies;
+semantic baseline review NOT started. Revalidate driver rather than using historical progress count.
+
 Only live coordinator PID1651723/exec59686; active child2234237 memops-dev-baselines-v1.
 Revalidate reviewed-followups-dispatch-v10.json and actual/proc commands. Never restart live queues.
 Both matched learned evaluations CLOSED80each; baselines currently62/144, then own-train72.
