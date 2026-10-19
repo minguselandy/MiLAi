@@ -1,0 +1,26 @@
+{
+  "states": 542,
+  "labelled": 191,
+  "status_counts": {
+    "source_reviewed_preference": 191,
+    "forced_single_action_masked": 13,
+    "unreviewed_masked": 308,
+    "reviewed_ambiguous_masked": 30
+  },
+  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v2/train.jsonl",
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v2/combined-reviews-v1.json",
+  "input_changes": 0,
+  "teacher_actions_copied": false,
+  "scope": "Inherited sourcecontracts plus rereading the selected originaluserwitnesses and eachactualHostrequest. Whole-source sufficient witnesses; not optimal utilities or all legal actions.",
+  "status": "PARTIAL_SOURCE_REVIEW_NOT_FIT_READY",
+  "source_groups": 8,
+  "actual_requests_reviewed": 30,
+  "raw_range_projection_checks": 243,
+  "reviewer": "assistant author, not independent judgment",
+  "read_preference": "Adds missing reviewed evidence and fits the full live returnpacket, including references and usage.",
+  "search_preference": "Only an observed search result that adds a missing witness; not executableSEARCH bydefault.",
+  "view_preference": "No automaticUSE_VIEW/REFRESH positives; nonoriginalopenedmaterial without rawproofs remainsmasked.",
+  "original_inputs_equal": true,
+  "model_calls": 0,
+  "unmeasured_research_cost": "Sourceannotation and these offlinecompilations not yet timed; notzero; no ledger settlementwhilemodelrunlives."
+}

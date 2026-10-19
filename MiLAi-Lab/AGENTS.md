@@ -1,3 +1,17 @@
+# LIVE UPDATE 2026-10-20: witnesslabels expanded; samerunpreserved
+
+MainPID3815344/exec24523/frozen8f7f2a18 RUNNING snapshot106/272closed.
+Neverduplicate/restartonobservationtimeout; noofflinebudgetsettlementwhilelive.
+Closedprefix542states/15touchedgroups exported;30actualrequests from8groups source-reviewed.
+191labels aftermerging literalstoredversion review;13forced/30ambiguous/308unreviewedmasked.
+State/questions equalityverifiedall542; actualrange/bodyprojection equalityverified243states.
+Newofflinehelper READmustaddmissingreviewedsource AND fitfullreturn; SEARCHonlyobservednew
+neededcandidate. Emptyproof!=sufficient; no blanketUSE_VIEW/REFRESHpositive. SixrelatedtestsPASS.
+No runtimecasebranches, no teacheractioncopy, no modelcalls/fitting. Source/intentionannotations
+and data: t0-witness-labels-prefix manifest; ignoreddata/t0-reviewed-prefix-v3 and witnessreviews-v3.
+Continue source review/collection then dev64/generative48serially. NativeE0still0/24; sharedservice
+approvalPENDING; noSHA/subagents/newservices/secondledger/oldoutcomerepair. Fullgoalactive.
+
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 
 PID3815344/exec24523/frozen8f7f2a18 remainsRUNNING, snapshot44/272closed.

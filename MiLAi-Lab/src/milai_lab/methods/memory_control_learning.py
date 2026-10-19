@@ -1,6 +1,7 @@
 """Offline operation examples and metrics; task success requires actual rollouts."""
 from __future__ import annotations
 
+import copy
 from collections import Counter, defaultdict
 from typing import Any
 
@@ -16,6 +17,7 @@ def decision_example(
     actions = [MemoryAction(**a) for a in event["actions"]]
     return {**operation_payload(state, actions, projection), "gold": {},
             "metadata": {**metadata, "action_kinds": {a.id: a.kind for a in actions},
+                         "action_parameters": {a.id: copy.deepcopy(a.parameters) for a in actions},
                          "label_status": "unreviewed_masked"}}
 
 

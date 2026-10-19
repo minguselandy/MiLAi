@@ -2,7 +2,112 @@
 from __future__ import annotations
 
 import copy
+import json
+from collections.abc import Callable
 from typing import Any
+
+from milai_lab.memory.functional_state import body_text, canonical
+from milai_lab.memory.reader_projection import merge_source_ranges
+from milai_lab.methods.intent_retrieval import retrieval_packet
+
+
+def original_binding_material(
+    binding: dict[str, Any], sources: dict[str, dict[str, Any]], *, expand: bool = False,
+) -> dict[str, Any]:
+    """Project issued original ranges from immutable captured bodies for offline costing."""
+    ranges = merge_source_ranges(binding[
+        "context_source_ranges" if expand else "source_ranges"])
+    turns = []
+    for span in ranges:
+        source = sources[span["source_ref"]]
+        turns.append({"source_ref": span["source_ref"], "source_revision": span["source_revision"],
+            "role": source["role"], "origin": source["origin"],
+            "content": body_text(source)[span["start"]:span["end"]],
+            "range": [span["start"], span["end"]],
+            "occurred_at": source.get("occurred_at"), "observed_at": source["observed_at"],
+            **({"calendar_context": source["calendar_context"]}
+               if "calendar_context" in source else {})})
+    return {"kind": "original_source", "source_ranges": ranges,
+            "visibility": "visible", "body_delivered": True,
+            "text": json.dumps(turns, ensure_ascii=False)}
+
+
+def complete_originals(
+    bindings: list[dict[str, Any]], sources: dict[str, dict[str, Any]],
+) -> set[str]:
+    """Conservative whole-turn witnesses; excerpts never count as the whole report."""
+    spans = merge_source_ranges([span for item in bindings
+        if item["kind"] == "original_source" and item.get("body_delivered") is not False
+        for span in item.get("source_ranges", [])])
+    return {span["source_ref"] for span in spans if span["start"] == 0
+            and span["source_revision"] == sources[span["source_ref"]].get("source_revision", 1)
+            and span["end"] == len(body_text(sources[span["source_ref"]]))}
+
+
+def original_witness_preferences(
+    row: dict[str, Any], *, proofs: list[set[str]], sources: dict[str, dict[str, Any]],
+    return_key: str, token_count: Callable[[str], int],
+    observed_search: tuple[str, list[dict[str, Any]]] | None = None,
+) -> tuple[list[str], str]:
+    """Only for a request whose source witnesses were explicitly reviewed offline.
+
+    READ must add missing evidence and fit the same full return representation.
+    SEARCH is preferred only when its observed result adds a missing witness.
+    View value is not inferred from availability, source count or a teacher action.
+    """
+    choices = row["questions"]["next"]["criteria"]
+    if len(choices) == 1:
+        return [], "forced_single_action_masked"
+    if not proofs or any(not proof for proof in proofs):
+        return [], "no_reviewed_source_proof_masked"
+    bindings = row["metadata"]["actual_bindings"]
+    opened = {int(i): item for i, item in bindings["opened_materials"].items()}
+    known = bindings["known_materials"]
+    covered = complete_originals([*opened.values(), *known], sources)
+    kinds = row["metadata"]["action_kinds"]
+    if any(proof <= covered for proof in proofs):
+        return [key for key in choices if kinds[key] == "HANDOFF"], "reviewed_originals_sufficient"
+    if any(item["kind"] != "original_source" for item in opened.values()):
+        return [], "nonoriginal_opened_material_requires_review"
+    missing = set().union(*(proof - covered for proof in proofs)) if proofs else set()
+    materials = bindings["candidate_materials"]
+    actual = {i: original_binding_material(item, sources) for i, item in opened.items()}
+    step = int(row["metadata"]["event_id"].rsplit("/", 1)[1])
+    total_steps = row["state"]["budget"]["remaining_control_steps"] + step
+    usage = {"control_steps": total_steps, "known_reference_reads": len(known),
+             "operations": total_steps, "read_operations": total_steps,
+             "material_budget_rejections": total_steps}
+    preferred = []
+    # The real typed options include bound parameters; no topic-specific route is added.
+    for key in choices:
+        if kinds[key] != "READ":
+            continue
+        parameters = row["metadata"]["action_parameters"][key]
+        if parameters.get("history_directory"):
+            continue
+        index = parameters["index"]
+        item = materials[index]
+        if item["kind"] != "original_source" or item.get("body_delivered") is False:
+            continue
+        candidate = original_binding_material(item, sources,
+                                              expand=parameters.get("expand_context", False))
+        if not (complete_originals([candidate], sources) & missing):
+            continue
+        trial = {**actual, index: candidate}
+        if all(token_count(canonical(retrieval_packet(
+            return_key, list(trial.values()), list(trial), list(range(len(trial))), reason,
+            usage, ok=False))) <= row["state"]["budget"]["max_return_tokens"]
+            for reason in ("policy_handoff", "budget_exhausted", "no_available_operation",
+                           "operation_outcome_unknown")):
+            preferred.append(key)
+    if observed_search is not None:
+        key, after_candidates = observed_search
+        before_refs = complete_originals(materials, sources)
+        new_refs = complete_originals(after_candidates, sources) - before_refs
+        if key in choices and kinds[key] == "SEARCH" and new_refs & missing:
+            preferred.append(key)
+    return preferred, ("reviewed_missing_original_progress" if preferred
+                       else "no_reviewed_progress_masked")
 
 
 def annotate_decisions(
