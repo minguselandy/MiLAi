@@ -1,3 +1,19 @@
+# LATEST: T0actualcollection prepared, pilot20next
+
+T0sourcev3actual inputs64train/16dev: MemOpsfirst/lastarrival cuts keepallinterveningoriginals;
+MuSiQue20paragraph variants excludeanswers/support/answerable/decomposition fromHostinputs.
+A01/A04/A05/A07 controlledliteralrecord current/first-version contrasts via realsave/update;
+fourrealpreflightbanks allrevision2, no idealgeneratedview. Public2–4requests/group×2interfaces:
+primary336(train272/dev64), plus48generative trainpositions separately registered.
+Pilot20groups memops_A01,A02,musique-family-000856,000710 beforeremaining252train/64dev.
+Protocol: data/manifests/host-intent-retrieval-v3-t0-collection.json; data under artifacts/.../data/t0-sources-v3.
+Newcollector keepsquery_only/rich in ownprofiles; query-onlyprompt matchesactualschema.
+Trace actualcandidate/opened/knownbindings OUTSIDEbefore; export allstates withgoldEMPTY.
+Never copy teacheractions asgold or giveallSEARCH/USE_VIEW/REFRESH unconditionalpositive labels.
+12affectedtestsPASS. Knownclosedlength/format failures withunknownincrement0continueonlynewpositions;
+unknownorunexpectederrorsstop. No originalposition retry, noSHA/servicechange/subagents.
+NativeE0still0/24, sharedserviceapprovalPENDING. Fullgoalincomplete; fittingNOT_STARTED.
+
 # LATEST: remaining20 JSON positions CLOSED; v3 fitting NOT_STARTED
 
 Methodc2fc3928: mainremaining14closed thenlengthfailure, scope-Laya2closed thenformatfailure,

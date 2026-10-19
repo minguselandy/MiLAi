@@ -1,0 +1,64 @@
+{
+  "status": "REGISTERED_BEFORE_COLLECTION",
+  "source_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
+  "offline_reference_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
+  "allocation": "data/manifests/host-intent-retrieval-v3-t0-allocation.json",
+  "primary_policy": "rules",
+  "interfaces": [
+    "query_only",
+    "rich"
+  ],
+  "transport": "json_action",
+  "counts": {
+    "train": {
+      "groups": 64,
+      "requests_per_interface": 136
+    },
+    "dev": {
+      "groups": 16,
+      "requests_per_interface": 32
+    }
+  },
+  "primary_positions": 336,
+  "pilot_groups": [
+    "memops_A01",
+    "memops_A02",
+    "musique-family-000856",
+    "musique-family-000710"
+  ],
+  "pilot_positions": 20,
+  "pilot_rule": "First2registeredMemOps train groups, firstallocatedthree-hop andfirstallocatedtwo-hop MuSiQue group. Metadata selection before model outcomes.",
+  "remaining_train_positions": 252,
+  "dev_positions": 64,
+  "additional_policy": {
+    "policy": "generative",
+    "train_groups": [
+      "memops_A01",
+      "memops_A04",
+      "memops_A05",
+      "memops_A07",
+      "musique-family-000856",
+      "musique-family-000404",
+      "musique-family-000710",
+      "musique-family-000552"
+    ],
+    "positions": 48,
+    "selection": "Four controlled-storage training groups plus firsttwo selectedMuSiQue groups perhopstratum; no devsampling for training."
+  },
+  "controlled_storage": {
+    "families": [
+      "A01",
+      "A04",
+      "A05",
+      "A07"
+    ],
+    "rule": "First allocated train background per operation type; store first/last literal user turns using actual APIs. No ideal semantic view. Independent current/first-version query banks; original cuts untouched.",
+    "qualification": "Literal first/lastuserturns in independent actual saved-version banks, not ideal semantic views. Basearrivalqueries unchanged."
+  },
+  "trajectory_export": "All actual decision inputs exported through live operation_payload; gold empty until reviewed. Actual range/version bindings in trace metadata only.",
+  "labels": "Do not copy rule/generative actions as gold. Review actual request intent, supports, current observations and views; ambiguous labels masked. No blanket SEARCH/USE_VIEW/REFRESH positives.",
+  "native_e0_status": "0/24; thiscollection does not substitute for native E0. Sharedservice restart approval pending.",
+  "budget": "original continuous ledger; every first failure and its cost retained",
+  "model_calls_so_far": 0,
+  "sha_verification": false
+}

@@ -1,5 +1,5 @@
 {
-  "candidate_version": "host-intent-retrieval-v3-development-v5",
+  "candidate_version": "host-intent-retrieval-v3-development-v6",
   "entrypoints": {
     "functional": {
       "profile": "functional_v1",
@@ -49,7 +49,7 @@
           }
         ]
       },
-      "config_version": "host-intent-retrieval-v3-development-v5",
+      "config_version": "host-intent-retrieval-v3-development-v6",
       "system_prompt": "MiLAi retrieves evidence from existing memory; you remain responsible for the user's task.\nWhen past information, changes, preferences or stored history are needed, call milai_retrieve.\nWrite the complete evidence question in query. Add purpose, required evidence points, target scope,\nas_of time and references you actually received only when useful. Keep unverified premises as\nquestions. Do not prescribe the internal search/read/cache/refresh sequence.\nUse the returned evidence to complete the original task. A termination reason does not certify\nsufficiency. Distinguish original statements, stored interpretations, applicable dates and unknowns.\nRequest further evidence only when necessary. Never invent missing sources or tool effects.\n",
       "ordinary_material_tokens": 2048,
       "additional_reads": 8,

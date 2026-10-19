@@ -45,6 +45,21 @@ TOOL_DESCRIPTION = (
 )
 
 
+def material_binding(item: dict[str, Any]) -> dict[str, Any]:
+    """Small evaluator trace of actual ranges/versions, outside the policy input."""
+    result = {key: copy.deepcopy(item[key]) for key in (
+        "kind", "id", "record_id", "revision", "version_view", "visibility", "body_delivered",
+        "source_ranges", "context_source_ranges", "focus_source_ranges", "source_bindings")
+        if key in item}
+    if "support_turns" in item:
+        result["support_turns"] = [{key: turn[key] for key in (
+            "source_ref", "source_revision", "range", "role") if key in turn}
+            for turn in item["support_turns"]]
+    if "applicability" in item:
+        result["unit_ids"] = [unit["unit_id"] for unit in item["applicability"]["units"]]
+    return result
+
+
 class IntentRetrievalMemory(FunctionalEditMemory):
     """Opt-in adapter: the Host calls retrieval instead of receiving automatic retrieval."""
 
@@ -103,7 +118,12 @@ class IntentRetrievalMemory(FunctionalEditMemory):
 
         retrieve = StructuredTool.from_function(
             query_only if self.retrieval_interface == "query_only" else milai_retrieve,
-            name="milai_retrieve", description=TOOL_DESCRIPTION)
+            name="milai_retrieve", description=(TOOL_DESCRIPTION
+                if self.retrieval_interface == "rich" else
+                "Retrieve evidence from existing memory. Supply a complete query describing "
+                "the information needed for the user's task. The tool returns actual evidence, "
+                "termination reason and usage; you use it to finish the task. "
+                "This interface takes only query; retrieval does not save, correct or forget."))
         # This profile exposes retrieval only. The existing FunctionalEditMemory
         # profile continues to own explicit save/correct/forget tools.
         return (retrieve,)
@@ -213,6 +233,12 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                 refs.update(operations.observation_source_refs(state))
                 with self.service._locked():
                     note_exposure(self.service, bound["source_ref"], sorted(refs))
+                # Evaluator-only bindings preserve actual candidates and read outcomes.
+                # They are outside before/state and never enter operation_payload.
+                event["candidate_materials"] = [material_binding(m) for m in operations.materials]
+                event["opened_materials"] = {i: material_binding(m)
+                                             for i, m in operations.opened.items()}
+                event["known_materials"] = [material_binding(m) for m in known]
             self.control_record({**event, "retrieval_call_id": call_id})
 
         assert self.control_policy is not None

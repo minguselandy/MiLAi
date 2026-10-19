@@ -65,7 +65,8 @@ def prepare_history_bank(
                 name = revision["record"]
                 if name not in records:
                     receipt = writer.save_edit(cfg, f"setup-save-{number}", units=[{
-                        "text": revision["text"], "role": "content", "evidence": evidence}])
+                        "text": revision["text"], "role": "content", "evidence": evidence}],
+                        scope=revision.get("scope"))
                     if receipt["ok"]:
                         records[name] = receipt["id"]
                 else:

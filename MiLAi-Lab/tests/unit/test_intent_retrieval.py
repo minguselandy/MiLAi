@@ -31,7 +31,8 @@ def test_native_tool_call_query_only_and_rich_feedback(tmp_path):
     with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
         service = MemoryService(store, ("intent-test", "alice"), "alice", tmp_path / "lock",
                                 functional_contract="functional_v1")
-        service.capture_user("history", "1", "A travel approval threshold is 1000 before May 1.")
+        source = service.capture_user("history", "1",
+                                      "A travel approval threshold is 1000 before May 1.")
         cfg = context(service)
         inputs = []
 
@@ -41,7 +42,8 @@ def test_native_tool_call_query_only_and_rich_feedback(tmp_path):
                                    if v.startswith("SEARCH ")) if len(inputs) == 1 else
                                "read_0" if len(inputs) == 2 else "handoff")}
 
-        memory = memory_at(service)
+        traces = []
+        memory = memory_at(service, control_record=traces.append)
         memory.control_policy = LayaMemoryPolicy(choose)
         assert inputs == [] and "evidence" not in memory.model_material(cfg)
         tool = next(t for t in memory.tools() if t.name == "milai_retrieve")
@@ -60,6 +62,11 @@ def test_native_tool_call_query_only_and_rich_feedback(tmp_path):
         assert inputs[0]["state"]["task"]["retrieval_request"] == request
         assert inputs[1]["state"]["last_result"]["status"] == "searched"
         assert inputs[2]["state"]["visible_evidence"]
+        before = [t for t in traces if t.get("phase") == "decision_input"]
+        assert before[1]["candidate_materials"][0]["source_ranges"][0]["source_ref"] == (
+            source["source_ref"])
+        assert before[2]["opened_materials"][0]["kind"] == "original_source"
+        assert all("candidate_materials" not in p["state"] for p in inputs)
         assert memory.control_handed_off is False  # Host may request a remaining gap.
         assert not service.records()
 

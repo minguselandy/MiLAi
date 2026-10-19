@@ -279,3 +279,29 @@ reference-boundary冲突，不读新保留集正文。MuSiQue7组按既有metada
 已关闭c2fc3928运行没有这项完整逐消息计时，原资料只支持其驱动总wall及分阶段计时；
 不得由相加嵌套计时伪造逐消息端到端数值。最新语义字段/分组/准备回归11项通过，
 Ruff、mypy与包/tools边界检查通过。未运行全仓测试；既有provider golden差异仍如前记录。
+
+## T0实际轨迹采集准备
+
+新的source-only适配器只将已登记的来源和公共问题交给Host。MemOps取首/末两个到达截面，
+中间所有原始turn按原顺序进入末截面，不把旧控制器的回答或expected注入来源。
+MuSiQue保留每个已选问题的两个真实语料变体，所有20段正文/标题可检索；answerable、
+答案、支持标记和分解只进入单独的offline-references.jsonl，不能生成Host必答点。
+引用文件不是训练标签，尚未做新来源下的语义裁决。
+
+按每种既定MemOps操作类型的第一个合法train背景选A01/A04/A05/A07，增加独立bank中的
+当前保存/首次保存内容请求。两版记录为该来源组首/末user原文的字面记录，经过原save/update，
+scope只命名其“retained conversation record”工件。没有插入人工正确的语义视图，原到达任务不变。
+四组实际配置预检均形成revision2。每组2–4个公共请求，各运行query-only和rich接口，
+所以主采集为train272＋dev64=336位置；不是336个独立来源。
+
+query-only使用与实际单query schema一致的描述和提示，不再要求模型填不存在的结构字段。
+两个接口各自使用原Store bank、原上限、同一操作库。固定四组试采集20位置先验证管线，
+随后剩余60训练组252位置、16开发组64位置；另在预登记8个train组用生成式控制采集48位置。
+这些仅是实际状态采集，规则/生成式动作不会自动成为gold；参见
+`data/manifests/host-intent-retrieval-v3-t0-collection.json`。
+
+决策输入日志增加实际candidate/opened/known材料的范围与版本绑定，位于before之外，
+不会进入policy输入；不重复保存所有候选正文。导出器复用decision_example/operation_payload，
+初始gold为空。已有代码、来源和投影回归12项通过，元数据/标签不进入公共输入的反事实测试通过。
+已知长度/格式终态若没有新增unknownusage，保留该位置后仅继续下一位置；未知费用或意外运行错误仍停止。
+未执行SHA校验、未改共享服务、未将源文档或监督转成运行时规则。
