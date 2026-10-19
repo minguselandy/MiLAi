@@ -1,3 +1,12 @@
+# LIVE V5: 2026-10-19
+
+Serial dispatcher PID893293 / exec69065, child893299, activemultitopic-four-slots-v1.
+Status artifacts/dynamic-memory-control/reviewed-followups-dispatch-v5.json.
+Then refresh-common-before-results-v1 uses frozen8eb07410;4slot uses original5052477f.
+17pending measured offline phases settled ONCE before launch; token/unknown counters unchanged.
+NEVER settle any new offline work while this queue or a model child is live.
+No retry of old positions. Revalidate actual process/command before any followup.
+
 # CURRENT UPDATE: 2026-10-19 — full goal remains ACTIVE
 
 V4 coordinator1958241 and finalchild2903731 are terminal/absent; all13 jobs exited0.
