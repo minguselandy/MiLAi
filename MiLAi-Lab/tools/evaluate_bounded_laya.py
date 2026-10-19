@@ -102,7 +102,7 @@ def main() -> None:
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
     parser.add_argument("--task", choices=("bounded_reader", "memory_operation",
-                                           "instruction_applicability"),
+                                           "instruction_applicability", "mixed_retrieval"),
                         default="bounded_reader")
     parser.add_argument("--operation-state", choices=("full", "mechanical", "shared"),
                         default="full")
@@ -117,6 +117,10 @@ def main() -> None:
         from milai_lab.methods.laya_memory_policy import project_operation_payload
 
         rows = [project_operation_payload(row, args.operation_state) for row in rows]
+    elif args.task == "mixed_retrieval":
+        from retrieval_mixture import project_mixed_row
+
+        rows = [project_mixed_row(row, args.operation_state) for row in rows]
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
            "checkpoint": str(args.checkpoint.resolve()), "device": args.device,
            "visible_cuda_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
@@ -142,9 +146,11 @@ def main() -> None:
             print(json.dumps({"completed": len(predictions), "planned": len(rows),
                               "input_tokens": prediction["input_tokens"]}), flush=True)
         from milai_lab.methods.memory_control_learning import score_operation_predictions
+        from retrieval_mixture import score_mixed_predictions
 
         scorer = {"bounded_reader": score_predictions,
                   "memory_operation": score_operation_predictions,
+                  "mixed_retrieval": score_mixed_predictions,
                   "instruction_applicability": score_applicability_predictions}[args.task]
         write_json(args.output / "results.json", scorer(rows, predictions))
         run["status"] = "COMPLETED"
@@ -164,6 +170,7 @@ def main() -> None:
             phase = args.compute_phase or {
                 "bounded_reader": "laya_reader_prefix",
                 "memory_operation": "laya_memory_operation_evaluation",
+                "mixed_retrieval": "laya_mixed_retrieval_evaluation",
                 "instruction_applicability": "laya_candidate_applicability",
             }[args.task]
             budget.record_compute(phase, measures)

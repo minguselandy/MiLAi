@@ -1,5 +1,5 @@
 {
-  "status": "FIXED_CONTEXT_RUNNING",
+  "status": "INITIAL_PILOT_COMPLETED_C0_SELECTED",
   "scope": "Initial E1 development pilot using finalT0seed0 as provisionalC1. Final selected Jev recipe, three-seed comparison and new reserved confirmation still required.",
   "source_version": "63603feb",
   "source_groups": [
@@ -73,19 +73,8 @@
   "model_calls_for_registration": 0,
   "pid": 1036675,
   "exec_session": 94632,
-  "progress_snapshot": {
-    "closed": 16,
-    "statuses": {
-      "COMPLETED": 16
-    },
-    "active": {
-      "history": "memops_D25",
-      "policy": "fixed_context",
-      "interface": "query_only",
-      "profile": "fixed_context-query_only",
-      "request": "stage-0"
-    },
-    "observed_epoch": 1792447866.9001138,
-    "semantic_review": "Not yet completed; no C0 selected."
-  }
+  "selected_C0": "fixed_context",
+  "selection_results": "data/manifests/host-intent-retrieval-v3-e1-initial-pilot-results.json",
+  "selected_future_config": "configs/host-intent-retrieval-v3-selected-fixed-context.json",
+  "feedback_version_qualification": "Closed pilot used frozen63603feb and inherited SHA error fingerprints. New retrieval-only source disables them without relaxing validation. Old results retained; final confirmation uses the new version."
 }

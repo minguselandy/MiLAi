@@ -1,0 +1,30 @@
+{
+  "status": "REGISTERED_NOT_STARTED",
+  "data": "artifacts/host-intent-retrieval-v3/data/mixed-pipeline-probe-v1",
+  "base_checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/jev-training-20261016/MiLAi-Lab/artifacts/jev-training/models/laya-multilingual-base",
+  "output": "artifacts/host-intent-retrieval-v3/fitting/mixed-pipeline-probe-v1",
+  "task": "mixed_retrieval",
+  "mixture": {
+    "operation_history": 0.6,
+    "complementary_evidence": 0.2,
+    "instruction_applicability": 0.2
+  },
+  "optimizer_updates": 1,
+  "train_rows": 6,
+  "dev_rows": 6,
+  "seed": 0,
+  "micro_batch_size": 2,
+  "effective_batch": 16,
+  "gradient_checkpointing": true,
+  "operation_state": "shared",
+  "max_len": 12288,
+  "head_max_len": 2048,
+  "skip_initial_dev": true,
+  "physical_gpus": [
+    2,
+    3
+  ],
+  "compute_phase": "host_intent_mixed_pipeline_probe_v1",
+  "scope": "Actual forward/backward, per-task metrics, sample counters and serialization integration only. Throwaway weights, not T1 main fitting or a method comparison.",
+  "after": "Inspect terminal job/counters and run persisted-checkpoint dev6 validation before any T1 main job."
+}

@@ -23,6 +23,13 @@ from evaluate_bounded_laya import score_applicability_predictions, score_predict
 from milai_lab.harness.artifact_io import read_json, write_json
 from milai_lab.harness.contextual_artifacts import RunBudget, RunLimits
 from milai_lab.providers.laya_local import NativeDecision
+from retrieval_mixture import (
+    event_weights,
+    mixture_event_weights,
+    normalized_mixture,
+    project_mixed_row,
+    score_mixed_predictions,
+)
 from train_laya_matched import audit
 
 TrainingWindow = list[tuple[int, int]]  # (data pass, row index)
@@ -76,17 +83,6 @@ def state_option_seed(seed: int, data_pass: int, state_id: int) -> int:
     return (seed << 64) + (data_pass << 32) + state_id
 
 
-def event_weights(rows: list[dict[str, Any]]) -> list[float]:
-    keys = [(r["metadata"]["family"],
-             r["metadata"].get("training_event", r["metadata"]["row"])) for r in rows]
-    counts = Counter(keys)
-    events: dict[str, set[int | str]] = defaultdict(set)
-    for family, event in counts:
-        events[family].add(event)
-    return [len(rows) / len(events) / len(events[family]) / counts[family, event]
-            for family, event in keys]
-
-
 def decision_loss(logits: Any, target: Any, mask: Any, objective: str) -> Any:
     """Return per-state loss; padding is never an acceptable action.
 
@@ -112,6 +108,10 @@ def compute_counts(run: dict[str, Any], evaluations: dict[str, Counter[str]]) ->
     for split, counters in evaluations.items():
         prefix = "train_eval" if split == "train" else split
         counts.update({f"{prefix}_{key}": value for key, value in counters.items()})
+    for component, count in run.get("sampled_component_rows", {}).items():
+        counts[f"train_component_{component}_rows"] = count
+    for component, tokens in run.get("sampled_component_input_tokens", {}).items():
+        counts[f"train_component_{component}_input_tokens"] = tokens
     return counts
 
 
@@ -135,8 +135,10 @@ def main() -> None:
     parser.add_argument("--backend", choices=("native", "linear"), default="native")
     parser.add_argument("--objective", choices=("soft-ce", "set"), default="soft-ce")
     parser.add_argument("--task", choices=("bounded_reader", "memory_operation",
-                                           "instruction_applicability"),
+                                           "instruction_applicability", "mixed_retrieval"),
                         default="bounded_reader", help="Use task-specific offline decision metrics")
+    parser.add_argument("--mixture", type=Path,
+                        help="Component loss masses for mixed_retrieval; draws stay uniform")
     parser.add_argument("--operation-state", choices=("full", "mechanical", "shared"),
                         default="full",
                         help="Retrain with the same operation-state projection used in the Host")
@@ -151,6 +153,10 @@ def main() -> None:
     parser.add_argument("--gradient-checkpointing", action="store_true",
                         help="Recompute encoder activations during backward to reduce memory")
     args = parser.parse_args()
+    if (args.task == "mixed_retrieval") != (args.mixture is not None):
+        parser.error("mixed_retrieval requires --mixture, and other tasks do not use it")
+    if args.mixture is not None and args.optimizer_updates is None:
+        parser.error("The mixed recipe requires an explicit matched optimizer-update budget")
     import torch
     from laya.common import collate_items
     from laya.train import (
@@ -178,6 +184,11 @@ def main() -> None:
 
         train = [project_operation_payload(row, args.operation_state) for row in train]
         dev = [project_operation_payload(row, args.operation_state) for row in dev]
+    elif args.task == "mixed_retrieval":
+        train = [project_mixed_row(row, args.operation_state) for row in train]
+        dev = [project_mixed_row(row, args.operation_state) for row in dev]
+    mixture = normalized_mixture(read_json(args.mixture)) if args.mixture is not None else None
+    weights = mixture_event_weights(train, mixture) if mixture is not None else event_weights(train)
     stages = training_stages(len(train), args.epochs, args.seed, args.optimizer_updates)
     axis = "epoch" if args.optimizer_updates is None else "optimizer_updates"
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
@@ -205,6 +216,11 @@ def main() -> None:
            "optimizer_updates": 0, "train_sequence_rows": 0, "train_input_tokens": 0,
            "train_batch_forwards": 0, "train_device_forwards": 0,
            "train_batch_attempts": 0, "train_offered_rows": 0, "train_offered_tokens": 0}
+    if mixture is not None:
+        run.update(loss_weighting="declared component mass, then family and event",
+                   mixture=mixture, sampling="uniform shuffled passes over labelled rows",
+                   sampled_component_rows={}, sampled_task_rows={},
+                   sampled_component_input_tokens={})
     write_json(args.output / "run.json", run)
     write_json(args.output / "training-plan.json", stages)
     decision: NativeDecision
@@ -236,10 +252,11 @@ def main() -> None:
         if skipped or len(items) != len(train):
             raise ValueError(f"Invalid training items: {skipped}")
         encoded = [encode_item(tok, item, args.max_len, args.head_max_len) for item in items]
-        weights = event_weights(train)
         write_json(args.output / "sampling.json", [
             {"event_id": r["metadata"]["event_id"], "family": r["metadata"]["family"],
-             "source_row": r["metadata"]["row"], "weight": w}
+             "source_row": r["metadata"]["row"], "weight": w,
+             **({"component": r["metadata"]["component"], "task": r["metadata"]["task"]}
+                if mixture is not None else {})}
             for r, w in zip(train, weights, strict=True)])
         decision.device = torch.device("cuda:0")
         model.to(decision.device)
@@ -273,6 +290,8 @@ def main() -> None:
                 result = score_operation_predictions(rows, predictions)
             elif args.task == "instruction_applicability":
                 result = score_applicability_predictions(rows, predictions)
+            elif args.task == "mixed_retrieval":
+                result = score_mixed_predictions(rows, predictions)
             else:
                 result = score_predictions(rows, predictions)
             write_json(args.output / split / str(epoch) / "summary.json", result)
@@ -333,6 +352,17 @@ def main() -> None:
                     loss_total += float(weighted.sum().detach())
                     offered += len(indices)
                     run["train_sequence_rows"] += len(indices)
+                    if mixture is not None:
+                        token_counts = batch["attention_mask"].sum(dim=1).tolist()
+                        for index, tokens in zip(indices, token_counts, strict=True):
+                            for field, count_key in (("component", "sampled_component_rows"),
+                                                     ("task", "sampled_task_rows")):
+                                name = train[index]["metadata"][field]
+                                run[count_key][name] = run[count_key].get(name, 0) + 1
+                            component = train[index]["metadata"]["component"]
+                            component_tokens = run["sampled_component_input_tokens"]
+                            component_tokens[component] = (
+                                component_tokens.get(component, 0) + int(tokens))
                     run["train_input_tokens"] += int(batch["attention_mask"].sum())
                     run["train_batch_forwards"] += 1
                     run["train_device_forwards"] += min(len(indices), 2)
@@ -381,6 +411,7 @@ def main() -> None:
             phase = args.compute_phase or {
                 "memory_operation": f"{backend}_memory_operation_ce",
                 "instruction_applicability": f"{backend}_instruction_applicability_ce",
+                "mixed_retrieval": f"{backend}_mixed_retrieval_ce",
                 "bounded_reader": f"{backend}_reader_ce",
             }[args.task]
             budget.record_compute(phase, measures)

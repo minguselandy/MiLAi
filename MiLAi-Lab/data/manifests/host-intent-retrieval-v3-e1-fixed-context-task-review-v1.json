@@ -1,0 +1,32 @@
+{
+  "status": "ALL64_FIXED_CONTEXT_REVIEWED",
+  "reviews": "artifacts/host-intent-retrieval-v3/data/e1-fixed-context-dev-task-reviews-v1.json",
+  "positions": 64,
+  "source_groups": 16,
+  "grades": {
+    "CORRECT": 46,
+    "WRONG": 11,
+    "QUALIFIED": 5,
+    "FAILED": 2
+  },
+  "by_interface": {
+    "query_only": {
+      "CORRECT": 24,
+      "WRONG": 5,
+      "QUALIFIED": 1,
+      "FAILED": 2
+    },
+    "rich": {
+      "CORRECT": 22,
+      "WRONG": 6,
+      "QUALIFIED": 4
+    }
+  },
+  "scope": "All64 fixed_context development positions reviewed under common source-author rubric. Not independent or held-out confirmation.",
+  "raw_outputs_changed": false,
+  "model_calls": 0,
+  "phase": "host_intent_e1_fixed_context_review_aggregation_v1",
+  "wall_seconds": 0.0019773785024881363,
+  "cpu_seconds": 0.0019770910000000003,
+  "ledger_recorded": false
+}
