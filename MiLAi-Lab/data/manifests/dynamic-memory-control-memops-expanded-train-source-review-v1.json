@@ -1,0 +1,2701 @@
+{
+  "source": "https://github.com/MemTensor/MemOps",
+  "license": "MIT; original literal sources retained locally with upstream LICENSE",
+  "reviewer": "Codex author, method visible; task/source contracts and sufficient original-user witnesses, not model-view grades or operation gold",
+  "source_boundary": "Use chronological original role/content only. No target_fact, operations, difficulty knobs, segment descriptions or source answer fields in Host input. Stop each cut on the actual user turn before the next assistant response. Unknown calendar dates remain unknown.",
+  "version": "dynamic-memory-control-memops-expanded-train-source-review-v1",
+  "status": "ALL45_SOURCE_CONTRACTS_COMPLETE_NOT_MODEL_COLLECTED_OR_FITTED",
+  "declared_split": "train",
+  "scope": "All45predeclared remaining source-task training backgrounds,135chronological user cuts plus repeats. Same background grouping retained; not45new independent reasoning templates, no outcome-based replacement.",
+  "source_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main/generated_result/2-evidence_conversation",
+  "family_assignments": [
+    {
+      "A04": "train",
+      "A05": "train",
+      "A07": "train",
+      "A13": "train",
+      "A14": "train",
+      "A16": "train",
+      "A20": "train",
+      "A22": "train",
+      "A27": "train",
+      "A28": "train",
+      "A29": "train",
+      "A33": "train",
+      "B03": "train",
+      "B05": "train",
+      "B06": "train",
+      "B10": "train",
+      "B12": "train",
+      "B21": "train",
+      "B22": "train",
+      "B25": "train",
+      "B26": "train",
+      "C04": "train",
+      "C05": "train",
+      "C07": "train",
+      "C10": "train",
+      "C11": "train",
+      "C23": "train",
+      "C26": "train",
+      "C27": "train",
+      "C28": "train",
+      "C29": "train",
+      "D14": "train",
+      "D17": "train",
+      "D18": "train",
+      "D19": "train",
+      "D20": "train",
+      "D21": "train",
+      "D23": "train",
+      "E10": "train",
+      "E11": "train",
+      "E14": "train",
+      "F08": "train",
+      "F12": "train",
+      "F13": "train",
+      "F14": "train"
+    },
+    {
+      "A04": "train",
+      "A05": "train",
+      "A07": "train",
+      "A13": "train",
+      "A14": "train",
+      "A16": "train",
+      "A20": "train",
+      "A22": "train",
+      "A27": "train",
+      "A28": "train",
+      "A29": "train",
+      "A33": "train",
+      "B03": "train",
+      "B05": "train",
+      "B06": "train",
+      "B10": "train",
+      "B12": "train",
+      "B21": "train",
+      "B22": "train",
+      "B25": "train",
+      "B26": "train",
+      "C04": "train",
+      "C05": "train",
+      "C07": "train",
+      "C10": "train",
+      "C11": "train",
+      "C23": "train",
+      "C26": "train",
+      "C27": "train",
+      "C28": "train",
+      "C29": "train",
+      "D14": "train",
+      "D17": "train",
+      "D18": "train",
+      "D19": "train",
+      "D20": "train",
+      "D21": "train",
+      "D23": "train",
+      "E10": "train",
+      "E11": "train",
+      "E14": "train",
+      "F08": "train",
+      "F12": "train",
+      "F13": "train",
+      "F14": "train"
+    }
+  ],
+  "assignment_evidence": [
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/memops-families-v1.json",
+    "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-bottleneck-20261016/MiLAi-Lab/data/manifests/jev-memops-families-v1.json"
+  ],
+  "cases": [
+    {
+      "family": "A04",
+      "file": "A04_remember.json",
+      "query": "Based on my own reports so far, what is my current city and apartment cross-street, when does my lease end, and what written-notice requirement have I actually reported? Keep my neighbor’s dates and my past city separate, and preserve an unknown calendar year rather than guessing it.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Portland; SE Division Street near26th, not30th. Own lease ends January31of next year. No notice interval has yet been supplied. Tucson is the prior city; no reliable absolute year is established.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            1
+          ],
+          "answer": "Same Portland/Division-near26th residence and January31next-year lease end. User now reports90days written notice for renew/vacate. State the reported lead time without inventing an absolute year or treating assistant scheduling suggestions as contract terms.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same current address area, January31next-year lease end and90-day written-notice requirement. Greg’s March31is a different lease. Mid-October decision timing and loose November2/3wording were assistant suggestions, not newly reported lease terms.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s3t3",
+              "s3t5"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported housing information, not legal advice or independent lease verification. Relative-year/weekday/duration statements do not provide a consistent absolute-year anchor."
+    },
+    {
+      "family": "A05",
+      "file": "A05_trajectory_ops.json",
+      "query": "What full current address and lease end have I reported for myself, and which unit-label change is still planned or has been cancelled? Separate my former address, relatives’ addresses and assistant-only details from my own confirmed reports.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "742Birchwood Lane,Unit3B,Ashford Heights,60143. No end date for the current lease is yet supplied; January31belongs to the former Caldwell Street lease. No unit relabeling plan is established yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            3
+          ],
+          "answer": "742Birchwood Lane,Unit3A,Ashford Heights,60143; corrected from3B. Current lease ends March14next year.3Cis proposed for next month, not current and no paperwork yet. Do not use the assistant-only3Ddelivery detail or the closed PO Box as the current address.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t5",
+              "s3t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same full address withUnit3Aand60143. Planned3Crelabeling was cancelled; own lease end remains March14next year. Mother’s Greenleaf address and former Caldwell address are separate. Do not invent an absolute year.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t5",
+              "s3t5"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Public synthetic address reports, not a real delivery, insurance update or legal deadline. Historical request to forget a closed PO Box is not executed Store deletion in this source-only task."
+    },
+    {
+      "family": "A07",
+      "file": "A07_reflect.json",
+      "query": "What dining setting do I generally prefer, which experiences support that preference, and what have I said about making an exception for Daniel's birthday? Keep a tentative birthday idea separate from a confirmed plan and from a change in my usual preference.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers small, quiet, uncrowded places where conversation is easy. Enjoyed a nearly empty Vietnamese restaurant on Birch Avenue on an early-March weeknight anniversary dinner. No birthday exception or plan supplied yet.",
+          "support_sets": [
+            [
+              "s1t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Same quiet, uncrowded dining preference, reinforced by wanting to try the downtown Ethiopian restaurant on Tuesday or Wednesday to avoid noise/crowds. The anniversary dinner is a supporting experience. No birthday exception or plan supplied yet.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Still generally prefers quiet uncrowded weeknights. Daniel is considering a big Friday-night group birthday dinner at the Ethiopian restaurant; nothing is confirmed. User is happy to make an exception for his birthday and hopes for a quiet corner; this does not replace the general preference.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t5",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "An interpretation of explicit user preference and stated exception, not a personality diagnosis. Historical medication-disregard text does not execute deletion. Assistant callback dates/role extrapolations are not evidence for this task."
+    },
+    {
+      "family": "A13",
+      "file": "A13_reflect.json",
+      "query": "Based on my own reports, how do I feel about managing my health and medication routine, what specific experiences support that interpretation, and what routine change is only being considered? Distinguish my experiences from my relatives and keep current treatment separate from an unconfirmed plan. Summarize my reports, without giving medical advice.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Frustrated and discouraged that dietary efforts did not avoid the metformin increase; tried tea/antacids for reflux before contacting the doctor after about a week. Now enjoys lighter plain dinners and reports improved sleep after starting omeprazole. No proposed routine change has been reported. Avoid a firm global trait from just these initial reports.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Explicitly values control and self-sufficiency in health decisions, dislikes depending on doctors/medication. Evidence includes delaying the reflux call until sleep deprivation impaired work, feeling good about stopping ibuprofen after the knee recovered, and wanting diet rather than a dose increase to solve glucose problems. No planned regimen change yet. Emily's lisinopril is her medication, not the user's.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Still values autonomy and a simple routine. Morning routine is acceptable; evening metformin feels intrusive but user uses a dinner alarm and still takes it. Current metformin remains750mg twice daily; office is considering extended-release1500mg once each morning, awaiting confirmation in two weeks. User hopes for it; it has not happened. Prior reflux delay/dose-increase frustration support autonomy interpretation; family blood-pressure treatments do not establish the user takes those drugs.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Source-grounded account of reported feelings/behavior, not clinical advice, diagnosis or proof of drug efficacy. Alternative representative evidence accepted; planned extended-release switch never treated as current."
+    },
+    {
+      "family": "A14",
+      "file": "A14_trajectory_ops.json",
+      "query": "What nationality and passport number are current in my own reports, what is the status and reference of my Portuguese citizenship application, and which alternative numbers are mistakes or merely future projections? Keep colleagues' details and unconfirmed future documents separate.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Brazilian, born São Paulo; reported passport HG284913. Portuguese citizenship application submitted March3this year in São Paulo, reference PT-2025-04417; still an application, not an established second nationality. No replacement number supplied yet. The reference string alone is not an independent calendar-year anchor.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Brazilian only, Portuguese citizenship pending PT-2025-04417. Current passport corrected to HG284193; HG284913 was a transposition error. Mariana's Spanish citizenship does not belong to the user. No active new passport number yet.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Brazilian only, Portuguese citizenship still pending PT-2025-04417. Current passport HG284193; old HG284913 was wrong. HG291843 is only projected for possible future reissue after citizenship finalization, not active until an actual new document is issued. HG248193 appeared in the company template and user thinks it came from Rafael's old application; it is not the user's number.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Synthetic reported document history; no independent validation of nationality/passport issuance rules and no immigration advice. Keep user uncertainty about template provenance."
+    },
+    {
+      "family": "A16",
+      "file": "A16_trajectory_ops.json",
+      "query": "Which Edinburgh master's degree title am I currently asking to use, why do other titles appear in my reports, and what are my student ID, completion and ceremony dates, and overall classification? Distinguish accepted corrections from proposed future renaming and my friend's credentials.",
+      "cuts": [
+        {
+          "through": [
+            2,
+            3
+          ],
+          "answer": "User now requests MSc in Computational Linguistics and Natural Language Processing, based on transcript, replacing the earlier shortened MSc in Computational Linguistics. Student ID s2145837; requirements completed September2022, ceremony November2022; overall merit, not distinction.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            5
+          ],
+          "answer": "User reverts to MSc in Computational Linguistics after consulting the certificate and explicitly gives it precedence over the transcript's extended title. ID s2145837; September2022requirements, November2022ceremony; merit.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7",
+              "s2t3",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Canonical requested title remains MSc in Computational Linguistics. Transcript extended title was superseded by the certificate correction. MSc in Language Technology is a proposed optional future rename; user has not opted in and will await details. ID s2145837, requirements September2022, ceremony November2022, merit. Callum's distinction/PhD are his, and user has not committed to a PhD.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7",
+              "s2t3",
+              "s2t5",
+              "s3t1",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Document priority follows this user's explicit instruction; not a general rule that certificates always override transcripts. Historical contact-forget text is not actual Store deletion."
+    },
+    {
+      "family": "A20",
+      "file": "A20_reflect.json",
+      "query": "What priorities and experiences explain my emergency-contact setup, and am I currently relying on the wallet card or a replacement app? Keep my confirmed actions and preferences separate from suggestions, future plans, and other people's forms.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "The late-March fender bender left user rattled and briefly unable to recall the number, motivating contact readiness. Mother's landline is familiar; workplace HR was updated to Karen's current number and Dave removed from HR. User says the old doctor ICE entry needs removal, not that removal is complete. No wallet card or app has been reported yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "User explicitly prioritizes dependable redundant backups, proximity and prompt answering after feeling unprepared in the accident. Marco was added as secondary at work because he is near the office and answers calls. A wallet card contains mother, Karen and Marco and works without a phone battery. No replacement app has been reported; Theo's form is separate.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same priorities: reliable redundancy, responsiveness, proximity and preparedness after the accident. User considered an app and possibly ditching the card but has not downloaded it; explicitly keeps and trusts the wallet card now. Theo's planned correction to Karen's number is his form, not a completed update to the user's system. Do not infer a globally completed deletion from an assistant assurance.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported preferences/actions, not a live emergency system audit or a diagnosis. Representative source-grounded examples suffice; do not claim real-world readiness."
+    },
+    {
+      "family": "A22",
+      "file": "A22_reflect.json",
+      "query": "Using only my own reported weigh-ins, what is my latest confirmed weight and how does the overall loss compare with the recent pace? Separate measured values from hopes, targets and other people's numbers, and preserve any missing timing information. This is a summary of my reports, not health advice.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "187.4lb on March12, down from194.2lb on January6:6.8lb total, approximately0.7lb/week over9–10weeks. User reports roughly stable around the current range for two weeks; no intermediate numeric weigh-in is supplied yet to compute a separate recent rate. Under180by endApril is a goal, not attained weight; year unspecified.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Latest confirmed187.4lb on March12; total6.8lb since January6, about0.7lb/week.191.0aroundFebruary5and188.6aroundFebruary20provide intermediate points: roughly3.2lb in the first month versus1.2lb over aboutthreeweeks recently (~0.4lb/week), so recent pace is slower. Laura142and target135are hers; Kevin's12lb is his. No assured future result or exact year.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Latest confirmed stays187.4lb on March12, overall6.8lb loss (~0.7lb/week) but recent1.2lb over aboutthreeweeks (~0.4lb/week), slower than the first month.186nextweek is expressly a hopeful prediction, not a weigh-in; under180endApril is a goal. User's tentative reconsideration of fasting is not a completed change or evidence of future loss. Laura's numbers and Kevin's results stay separate; exact year unavailable.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t1",
+              "s2t5",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Arithmetic over reported approximate dates, not medical assessment, recommendation, forecast or verified measurements. Do not treat the assistant's physiological explanations as user evidence."
+    },
+    {
+      "family": "A27",
+      "file": "A27_reflect.json",
+      "query": "What recurring preferences do my own workplace choices show, and what reported examples support that interpretation? Distinguish my actual choices from coworkers' choices and anticipated badge changes; do not invent a new current credential.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers understated appearance and simple easy-to-remember formats: swapped neon-green lanyard for plain black, and appreciates concise Meridian ID format versus cluttered former university format. Own ID A27-4183; Priya's A27-4201 and old student A27-0076 are separate. No new badge plan yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Explicitly prefers clean/simple environments with fewer steps, less visual clutter and friction. Supporting examples include black lanyard, concise ID, badge tap-to-pay, bare desk and six visible home-screen apps;40minutes resolving a benefits-portal problem disrupted the schedule and mood. Own credential remains A27-4183; representative examples suffice.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same preference for minimal, efficient routines, reinforced by quick parking setup, wanting a minimal ticketing profile and a five-minute tap-door/tap-coffee/clear-desk morning. April22photo-badge issuance is reported as planned; new number/prefix only probable/possible, not issued or active. User still explicitly keeps A27-4183; coworkers' choices do not define the user's.",
+          "support_sets": [
+            [
+              "s2t5",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "A source-grounded preference summary, not diagnosis or universal personality prediction. Accept representative evidence rather than requiring every example."
+    },
+    {
+      "family": "A28",
+      "file": "A28_remember.json",
+      "query": "What is my current thesis supervision arrangement, including the advisor's name and start date, regular meeting slot, sabbatical plan, interim cover and statistics support? Keep current roles, upcoming cover, former advisors and other people's supervisors separate, and state what has not yet been supplied.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Current Dr.Renata Voss, Cognitive Science at Leiden, sinceFebruary14; weeklyThursday10:30AM. Sabbatical aroundJune15at UC San Diego is upcoming. Duration and interim advisor name not yet provided. Former Professor Anil Mehta ended lateJanuary; no statistics-support person supplied yet. No absolute year/timezone given.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Voss remains current sinceFebruary14withThursday10:30meetings; upcoming UC San Diego sabbatical aroundJune15for sixmonths. Dr.Lena Brandt will cover during it, not current replacement yet. James Okoro is Voss's postdoc helping statistics, ad hoc after email, usually within a day or two. Sara's Dr.Kim is not the user's advisor. No absolute year/timezone.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same currentVoss/February14/Thursday10:30arrangement. Mid-June sixmonth UC San Diego sabbatical upcoming, Brandt interim during absence, Okoro postdoc statistics help with ad hoc meetings. Dr.Renata Vogt is explicitly a different person, not Voss. The proposed revision schedule is not proof that feedback/reviews have already happened; year/timezone remain unknown.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "User-reported supervision, not verified university data. Approximate mid-December return can be inferred from approximate start+duration, never upgraded to an exact announced return date."
+    },
+    {
+      "family": "A29",
+      "file": "A29_trajectory_ops.json",
+      "query": "What vocabulary placement score should I currently use for my WriteInPT track, and how do the other numbers in the conversation relate to it? Explain which correction or recalibration is currently applicable, keeping other people's scores and course progress separate.",
+      "cuts": [
+        {
+          "through": [
+            2,
+            3
+          ],
+          "answer": "72/100for the Brazilian Portuguese track, corrected after checking WriteInPT email.74was a misremembered initial report, not a separate assessment. No recalibrated score has yet been reported.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            3
+          ],
+          "answer": "Latest user report says Professor Cláudia Mendes's note recalibrates the Brazilian-track vocabulary score to78; prior corrected72and earlier misremembered74are historical. This is a reported rubric adjustment, not a new test result or measured improvement. No contrary support follow-up yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t3",
+              "s3t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "72/100stands for the user's Brazilian track. WriteInPT support clarified recalibration applies only to European-track test takers and Cláudia's notice was mistakenly sent to all;78is inapplicable,74was the original misremembering. Pedro's85belongs to him and a similar European-track test. Encouraging assignment feedback does not replace the placement score.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t3",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Applicability follows explicit local scope and correction in the source; no universal authority-ranking rule is injected into the controller. Historical group closure is not actual Store deletion."
+    },
+    {
+      "family": "A33",
+      "file": "A33_update.json",
+      "query": "What heights have I actually reported as measured, with their dates or measurement conditions, and which numbers are stale beliefs, another person's measurement or an unconfirmed prediction? Do not collapse measurements taken in different conditions into one unconditional fact, and do not give medical advice.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "User reports5ft11in at March12physical, repeated with same result.6ft was longstanding assumption/old driver's-license entry, superseded as a measured claim. Kevin5ft8.5in and mother5ft4in are other people. No home measurement or future height prediction supplied yet; year/clinic measurement conditions unspecified.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Clinic5ft11in onMarch12and later home5ft11.25in first thing in morning, barefoot, straight against door frame with tape. Preserve both scopes; do not invent clinic time or barefoot condition from the assistant.6ft is old belief/license. No measured treatment gain; curiosity about future remeasurement is not a result.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t3",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Actual reported measurements remain clinic5ft11in March12and home5ft11.25in morning/barefoot/door-frame tape. No new post-treatment measurement yet.5ft11.5in is chiropractor's projected future result; second round undecided.6ft in gym prefill is stale and user says corrected it, but exact replacement entry unspecified; license update still future. Derek5ft11.75in was with shoes and is his.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t3",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported observations only; no endorsement of treatment claims, inference of clinical measurement protocol, causal attribution or real-world verification. Alternative valid unit conversions accepted."
+    },
+    {
+      "family": "B03",
+      "file": "B03_trajectory_ops.json",
+      "query": "What are David Keane's current official title and additional duties, who manages him, and what changed in Priya's team placement? Keep a stale chart entry, a pending permanent-role proposal and other people's titles separate from the currently reported arrangement.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "David Keane is Senior Technical Lead on product integration; user began working with himMarch4. Manager Tom Aldridge is VP of Engineering, formerly Director. Priya Mukherjee is Systems Analyst II on the same team. No extra interim duty or permanent-role proposal yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "David retains Senior Technical Lead and additionally acts as interim lead for the subgroup while a permanent replacement is sought. Tom remains VP overseeing him. Priya moved to another project under a new manager aroundApril11; her job title was not reported changed. Duration of David's interim duty unknown.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Still Senior Technical Lead plus interim subgroup lead. Proposal to make him only Team Lead has not taken effect; approvals delayed, no timeline. Chart's Technical Lead omission is explicitly described by user as stale. Kevin Dahl is a different Senior Technical Lead on infrastructure. Tom remains manager/VP; Priya's move remains as reported.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "User-reported organization state, not an independently verified HR record. Explicitly additive duties must not erase the continuing official role; unknown dates/timelines stay unknown."
+    },
+    {
+      "family": "B05",
+      "file": "B05_update.json",
+      "query": "Where does our daughter's naming decision stand: the last jointly agreed first choice, any current disagreement or proposed switch, the middle-name decision, and our timing? Distinguish my view, my wife's view and other people's or template names; do not turn one person's proposal into a joint final decision.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Joint first choice switched from Elara toIris; Elara remains on the list, exact new rank not explicitly supplied by user. Charlotte off the table. No middle-name shortlist or due/deadline dates yet. Kevin's sonMatteo and prior alternativeLuca are unrelated.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Joint first choice has returned toElara; Iris explicit backup. Middle name unresolved betweenJune andMae; liking a combination is not a final decision. DueJuly18, intended name decision byendJune; no year.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Last joint agreement wasElara withIris backup, but current agreement is disputed: wife firmly wantsIris after her sister choseElara, user has not agreed and still wantsElara. Do not callIris a completed joint switch or presentElara as an uncontested final decision. Middle name stillJune/Mae; user leansJune, wife uncommitted. DueJuly18, deadlineendJune, currentlymidMay. Cousin'sSeraphina, sister's plannedElara/Septemberdue and templateLilyAnne are not this child's finalized name.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t5",
+              "s2t7",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Track agreement and attribution, not just a single latest string. No actual birth, legal registration or completed hospital action is implied."
+    },
+    {
+      "family": "B06",
+      "file": "B06_reflect.json",
+      "query": "What kinds of family activities do I generally prefer, which reported experiences support this, and have I agreed to any larger-group exception? Keep preferences separate from an absolute prohibition and upcoming events separate from completed outings.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Enjoys calm focused activity: watching Ethan concentrate at museum building blocks; likes the small four-or-five-child swim class for Lily because big chaotic classes stress user. Class found, not confirmed enrolled. No large-group exception planned yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Explicit calm/low-key preference: museum, small swim class and one-on-one park walks; hectic back-to-back birthday scheduling caused stress and a rough mood. Quiet park walks help connection with Ethan. Not evidence of an antisocial diagnosis or rejection of every group activity.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Still prefers calm smaller activities, keeping small soccer league and planning a small Lily birthday. Sara has accepted a huge family barbecue nextSaturday and user supports trying it for social exposure, with quiet fallback to scope out on arrival. This is a forthcoming exception, not a completed outing or wholesale reversal of preference.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s3t1",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Summary of reported preference/exception, not diagnosis. Representative source examples accepted; differentiate found, enrolled, planned and completed.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "B10",
+      "file": "B10_remember.json",
+      "query": "What identifying details and measured health baseline have I reported for my kitten, and when is her next vet appointment according to the stated interval? Keep another pet, unused names, projected growth and unconfirmed microchip status separate from observed facts.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Mochi, female calico adoptedMarch3; registered withDr.Patel onElmStreet underChen. Biscuit is roommateSara's golden retriever. Momo is wrong; Clover unchosen; Princess old shelter tag no longer used. No first-checkup date, weight or next appointment interval yet supplied.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Mochi's first checkupApril8, measured1.4kg. AdoptedMarch3 and registeredDr.Patel/ElmStreet/Chen.0.5kgpermonth is the vet's reported growth expectation, not later measured weights. Weekly home logging is planned, with no new numeric measurement yet. Next visit interval and microchip status not yet supplied.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same measuredApril8baseline1.4kg. Next appointment three calendar months after first checkup impliesJuly8; absolute year not supplied.0.5kg/month is an expectation, no follow-up weight observed. Microchip status unknown; user will check shelter records/ask vet. Biscuit is Sara's dog; Dumpling is a possible future second-cat name, not a rename.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t5",
+              "s3t1",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Synthetic source summary/calendar arithmetic only, not veterinary advice or endorsement of growth/visit norms.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "B12",
+      "file": "B12_update.json",
+      "query": "What landlord contact details are currently confirmed for my unit, what changes are only proposed, and what maintenance coverage information is still missing? Distinguish corrections, retired numbers, prefilled forms and other people's contacts.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "LandlordGeraldHuang forunitB12; corrected cell604-881-3724, not mistyped604-881-3742. Text preferred, seldom uses emailg.huang.properties@gmail.com; Mei reports weekend responsiveness may be poor. No travel/cover contact supplied yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Current cell604-881-3790 after carrier switch;3724no longer active,3742initial mistake. Email unchanged, text preferred. Gerald plans international travelJune15–July10; brotherKevinHuang will cover maintenance, but Kevin's number still not received. Danny is a plumber with surname/number unknown.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "3790remains confirmed current cell; porting3724back is only proposed pending confirmation.3742in fire-safety form is stale original typo; user left it blank, did not confirm that number. Email unchanged; travelJune15–July10/coverKevin still planned and Kevin's contact unavailable.604-550-1180was Rachel's temporary property-management contact, now irrelevant.",
+          "support_sets": [
+            [
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "User-reported contact history; no actual message, maintenance dispatch or form submission is performed.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "B21",
+      "file": "B21_update.json",
+      "query": "What are David's currently reported role, annual salary and workweek, and which compensation or consulting changes remain unconfirmed? Keep his old employer, colleague's role and exam preparation distinct from his present job and completed qualifications.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Senior physical therapist atGreenfieldRehabilitationCenter sinceFebruary12, salarycorrectedto$82,000annually from$78,000initialoffer recollection. WorksTuesday–Saturday, offSunday/Monday. Current universitytrack-and-fieldconsultingPT sinceearlyMarch; OCSexamJune7planned, not passed.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Salary corrected again to$82,500/year from pay-stub calculation;82,000and78,000superseded. SameGreenfieldseniorPT andTue–Satworkweek; LakewoodMon–Friwas old employer/schedule. Priya's clinicdirector promotion is hers. No future salary or cross-country proposal yet. User describes dry-needling certification and workshop attendance; OCS remains a future exam.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Current$82,500/year, GreenfieldseniorPT, Tue–Sat, universitytrack-and-fieldconsulting. Proposed$85,000nextquarter has no official confirmation; not current pay. Fallcross-countrycoverage is request/interest needingPriya's approval, not current assignment. OCSJune7remainsupcoming; oldLakewoodpaperworkdoesnotrestoreoldjob.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s2t3",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Preserve the source currency symbol without inventing currency jurisdiction or year. Reported employment, not HR/payroll verification.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "B22",
+      "file": "B22_reflect.json",
+      "query": "What pattern does my account suggest about Sarah's preferred work environment and autonomy, and which experiences support it? Distinguish my interpretation or forecast of her reaction from what she has actually said or done, and future workplace plans from current conditions.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "User reports Sarah likes natural light/open space, a quiet solo lunch room and uninterrupted home work. She now has one remote day, reduced from two, at Meridian Health Systems in Wilmington; the former clinic is historical. These support a preference for quiet and fewer interruptions, but no open-plan move or her reaction to one has been reported.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "User explicitly interprets a recurring need for low stimulation, autonomy and control: quiet lunch/natural light/uninterrupted home work; anxiety about being stuck in data entry, relief at patient-coordination move, and upset after remote days were cut. This is the user's account of Sarah, not an independent psychological assessment.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same reported pattern and current Meridian patient-coordination role. Tom mentioned a possible fourth-floor open-plan move next quarter; it has not happened. Sarah has been quiet and has not stated her reaction; the user guesses she will dislike it. Billing relocation concerns Kevin's wife's department, not Sarah's. Preserve those attribution and timing limits.",
+          "support_sets": [
+            [
+              "s2t7",
+              "s3t1",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Representative evidence supports an attributed interpretation, not a diagnosis or certainty about future emotion.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "B25",
+      "file": "B25_trajectory_ops.json",
+      "query": "What activity schedule has been reported for Lily, which changes take effect in April, and which later changes or extra activities remain only proposals? Keep different weekdays, recurrence rules, discontinued activities and another child's schedule separate.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Robotics corrected to second and fourth Fridays, 3:15–4:30 PM, not first/third. Swimming Tuesday and Thursday 4:30–5:15 PM at Greenfield with Coach Rivera. Art every Saturday 10–11:30 AM at Creative Sparks on Elm Street. No April changes or further proposals supplied yet; do not convert second/fourth Fridays into an unbroken fortnightly rule.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "April plan: Tuesday swim changes from April1 to 5–5:45 PM; Thursday stays 4:30–5:15 PM. Robotics expands to every Friday in April, still 3:15–4:30. Saturday art remains 10–11:30 AM. Wednesday piano ended in February; Monday/Wednesday free. Saturday-afternoon climbing is being considered, not enrolled. Do not apply April times to March retrospectively.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Reported April schedule remains Tuesday swim 5–5:45, Thursday 4:30–5:15, every-Friday robotics 3:15–4:30, Saturday art 10–11:30. May move of robotics to Wednesday is proposed and unconfirmed. Wednesday piano remains discontinued; climbing not confirmed. April19 art show is in the afternoon, exact time/year unspecified. Ethan's Thursday robotics and Monday/Wednesday swimming are separate.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t7",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Recurrence and effective-date reasoning over reports, not a live calendar or registration. Preserve unstated years and timezone.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "B26",
+      "file": "B26_trajectory_ops.json",
+      "query": "Where do my siblings currently live according to my reports, which moves have already occurred versus remain upcoming, and what is the status of our proposed Austin family visit? Preserve family identities and distinguish intentions from booked travel or an actual birth.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Older brother Daniel lives in Austin since2016. Younger sister Chloe moved from Denver to Portland about two months earlier for a nonprofit job; Portland is current. User is middle sibling. No further move or Austin-visit plan yet supplied.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Daniel remains Austin. Chloe has actually moved from Portland to Eugene last week for the same nonprofit's satellite office; Denver and Portland historical. Daniel's wife is due lateSeptember with second child; user proposes Austin by midSeptember for a buffer, not booked travel or a completed birth.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Daniel Austin; Chloe currently Eugene, with nonprofit-confirmed relocation back to Portland next month still future. Old Denver lease is historical. User now targets second week of September for Austin because first child arrived about a week early; second-child due date still lateSeptember. Chloe's availability unconfirmed; flights only being researched and no booked trip or birth reported.",
+          "support_sets": [
+            [
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "A confirmed future move is still future. A sibling's earlier birth timing motivates a travel plan without changing the next due date.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C04",
+      "file": "C04_trajectory_ops.json",
+      "query": "What medical follow-up is currently scheduled in my reports, with clinician, department, hospital and time, and what diagnosis wording did I report? Separate an unmade rescheduling proposal, conditional ENT follow-up and my friend's appointments; do not infer a room from a different procedure.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Gastroenterology follow-up with Dr.Liu Wenjie at Zhongshan Hospital, May1 Thursday 9:30 AM, six weeks after March20 endoscopy. Reported diagnosis mild chronic gastritis. Building2/floor4 refers to endoscopy, not a stated follow-up room. ENT Dr.He Mingyu April8 advised return only if symptoms persist after two weeks; no fixed ENT follow-up booked. Xiao Chen's Huashan dermatology and former Dr.Tan/Ruijin are separate.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Follow-up actually rescheduled to April28 Monday 9:30 AM, Dr.Liu Wenjie, Zhongshan gastroenterology. May1 is superseded. User explicitly corrects diagnosis to mild chronic gastritis, not moderate. Sinus symptoms mostly cleared; the ENT return remains conditional, not a booked appointment. No follow-up room or absolute year supplied.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "April28 Monday 9:30 AM remains scheduled with Dr.Liu at Zhongshan gastroenterology. April30 was considered but never changed with hospital; meeting moved to afternoon and user retained April28. Mild chronic gastritis remains diagnosis wording. User says sinuses resolved and no ENT follow-up needed. May5 dermatology is Xiao Chen's, not the user's.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Source summary only, not medical advice or an actual appointment action. Preserve year and room uncertainty.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C05",
+      "file": "C05_trajectory_ops.json",
+      "query": "What are the currently booked dates and reference for our Iceland flights, how have proposed changes been resolved, and what budget scope have I stated? Keep another person's booking and approved leave separate from changes actually made to our flights.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Booked Icelandair departure May18 and return May25 for user and partner, reference IKXR47, about$640 per person for round trip. Black Beach Guesthouse near Vik booked. No separate ground-trip budget or date-extension proposal yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Return actually changed with Icelandair to May26; departure May18, eight nights, IKXR47. Ground-trip budget about$3,200 total for both excluding already paid flights; not per person or flights-inclusive. Faroe side trip dropped; Iceland only.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Booked dates stay May18–26, IKXR47. Partner's approved extra leave enabled a May28 idea but flights were never changed; user rejected extension after$340/person fee quote. May24/IKXR52 belongs to friend's old trip. Ground budget$3,200 for both excluding flights remains; insurance not sorted as last reported.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported booking and arithmetic, not airline verification, recommendations or an independent claim about destination conditions.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C07",
+      "file": "C07_update.json",
+      "query": "Which Kyoto accommodation is actually confirmed in my reports, for what dates when known, and what alternatives are only past bookings or current possibilities? Also distinguish planned early arrival and the unbooked Takayama trip from established lodging.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Kyoto booking actually switched from Sowaka to Tawaraya Ryokan for June; exact dates not yet stated. Gagaku was user's earlier Tokyo stay, Park Hyatt Tokyo was Lena's. No early-arrival or Takayama plan yet supplied.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Confirmed Kyoto hotel is again Sowaka, June20–25, five nights; Tawaraya replaced for cost reasons. Shinkansen arrival June19 evening is planned, one evening before check-in; no lodging for that night reported. Honjin Hiranoya Annex in Takayama is only research for possible autumn trip, no booking/dates yet.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Sowaka June20–25 remains actual confirmed booking. Hoshinoya held by agent until tomorrow and user likely interested, but decision postponed overnight; no accepted switch/cancellation supplied. June19 arrival still planned with lodging gap unstated. Takayama roughlyOct25–29 tentative, Honjin Hiranoya Annex preferred but not contacted/booked. Dan's Osaka Ritz-Carlton stay is his.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t5",
+              "s2t7",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Calendar/bookings as reported, without inventing travel-year, accommodation for a gap night or an accepted held reservation.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C10",
+      "file": "C10_update.json",
+      "query": "What FAR exam date is actually scheduled according to my reports, and what changes are still conditional? Summarize my latest reported study completion and topic scores without mixing completion with accuracy, other people's exams, or an unanchored study-day estimate.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "FAR moved by Prometric fromJune7 toJune14; latter scheduled. Becker completion58% as ofMay3; timed practice overall65–68%, not completion. Ninja bank acquiredApril20; no topic-specific score supplied yet. No date anchor for exact remaining study days.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "User actually rescheduled FAR toJune21. Becker latest reported completion58%; overall practice65–68%, governmental-accounting Ninja about55%. Kevin's71 AUD practice is his. AugustREG plan dropped. Exact remaining study days cannot be calculated without current date/year despite a requested six-days/week schedule.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Actual booking remainsJune21. User wantsJune14 after manager approves leave but has not contacted Prometric, will keepJune21 if slot unavailable. Becker completion now72%; governmental Ninja about68%, bonds/leases73%, revenue76%; consolidation/equity modules not reached. User's36days/87hours is an assumed planning window, not an independently established date calculation. Kevin's date unknown.",
+          "support_sets": [
+            [
+              "s2t5",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported prep data, not advice about exam readiness or current certification rules. Keep hypothetical June14 plan separate from booked date.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C11",
+      "file": "C11_reflect.json",
+      "query": "What study approach do my own reports show I prefer, what examples support it, and what exam booking should that plan currently use? Keep flexible study intentions, my own confirmation and Kevin's different exam arrangements separate.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers tactile CSI paper flashcards, focused morning work around7:30–10/10:30, and flexible choice of weak topics rather than rigid scheduling. Underwriting/reinsurance need scenario practice. Own exam rescheduled April19 toMay10; work trip dates uncertain. Kevin's May24/digital learning are his. No own center/start time supplied yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Same tactile/flexible morning approach, with weekend full practice and short bedtime card review; prioritizes understanding/confidence and a lighter final weekend. Own booking May10 at9AM, Pearson VUE250YongeStreet Toronto; past Mississauga site separate. Latest practice71%, reported pass mark60% is not exam outcome. Commute dry run is planned, not completed.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same approach; latest practice74%, underwriting improved, reinsurance still weakest. Own email still confirms May10 9AM at250YongeStreet. Kevin's relocation report/booking at300BayStreet does not change user's confirmation; user plans to phone. Saturday8AM final practice and light final-weekend review are intentions.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s2t3",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Summarize reported learning preferences and confirmed booking; no independent exam-policy verification or guaranteed readiness.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C23",
+      "file": "C23_trajectory_ops.json",
+      "query": "What passport expiry dates have I actually supplied for my family, which remain uncertain, and what is the current plan for my own renewal? Distinguish a chosen planning window from a booked appointment and an available cancellation slot.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Own passport expiresSeptember14,2025; wife's March7,2026. Own renewal plannedJune, not yet performed or booked; no son's expiry supplied yet. ID card validity throughNovember2034 is a different document and no precise expiry day given.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Own expirySeptember14,2025 and wifeMarch7,2026 unchanged. Son's expiry estimatedJuly/August2025 from age/five-year validity, exact date still unchecked. Own renewal plan moved fromJune toearlyMay; no accepted appointment or completed renewal.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same known passport expiries; son's exact date still unknown. EarlyMay/first week is chosen renewal window. April11 cancellation slot was offered and considered but conflicts with son's event and was declined in favor ofMay; no exactMay appointment accepted. Combining renewals depends on locating son's passport/scheduling. Wife's renewal planning aroundAugust/September is an intention.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported document dates and intentions, not passport validity rules or a completed scheduling service. Preserve estimated versus confirmed dates.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C26",
+      "file": "C26_update.json",
+      "query": "What date, time, location and panel information are currently confirmed in my C26 interview reports, and what proposed change still awaits confirmation? Keep earlier errors, previous venue and Rina's separate interview distinct.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "March12 at2:00PM, corrected from2:30 after checking confirmation. Venue15ClarkeRoad satellite office, replacing40KentStreet. Three interviewers led byDavidKoh; remaining names not supplied. Rina's interview only roughlymidApril, separate. Own plan to arrive30minutes early is intention, not another interview time.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "March12 at3:00PM after actual email change, still15ClarkeRoad with three-person panel/main interviewerDavidKoh.2:00previous confirmed time and2:30initial error are superseded. Phone screen was earlyFebruary with exact date uncertain, not the panel date.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t3",
+              "s2t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "March12 at3:00PM remains confirmed,15ClarkeRoad, mainDavidKoh/three panelists.4:00PM is a possible change awaiting assistant's confirmation by tomorrow; not current booking. Old calendar2:30 remains wrong. April16 withMarcusTan is Rina's logistics-company interview, not user's.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t3",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Only reports, not calendar writes. Unknown year/timezone and unspecified panelists stay unknown.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C27",
+      "file": "C27_reflect.json",
+      "query": "What preferences and preparation habits have I described for medical visits, and what is the current appointment and paperwork status? Use reported examples, keeping an unconfirmed reschedule and other people's medical details separate from my own current situation.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers quiet, morning, predictable visits: switched from loud4thAvenue branch to Greenfield ElmStreet with soft music, feels sharper before noon, prepares clothes/alarms/directions/parking beforehand. No upcoming exact date, clinician or questionnaire status supplied yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Same quiet, early, structured preference, with fasting described as a personally centering ritual rather than a general recommendation. Current annual physical April17 9:30AM with Dr.LenaPark at Greenfield ElmStreet. Pre-visit questionnaire still not done, planned for weekend; father's type2diabetes belongs in family history, not user diagnosis.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same preferences; questionnaire now completed and father's diagnosis added. Own physical remains April17 9:30AM/Dr.Park/Greenfield ElmStreet; April24 is possible and awaits confirmation. WifeSarah's February physical/cholesterol at Riverside are separate. User reported checking blood type asA-negative, not oldA-positive, if mentioned; no inferred medical conclusion.",
+          "support_sets": [
+            [
+              "s2t3",
+              "s2t7",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "An account of stated preferences and reports, not fasting instructions or clinical advice. Representative supporting examples accepted.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C28",
+      "file": "C28_remember.json",
+      "query": "What vaccinations have I reported already receiving, what dates and location are only my future targets, and what personal scheduling conditions did I state? Keep my history separate from Laura's or Kevin's and distinguish reported interval advice from independently verified medical guidance.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Received first reported Pfizer dose March3 at CVS ElmStreet nearTarget, and own Tdap in2022; Moderna reaction is past history. Second Pfizer targeted aroundApril21, not yet received. Pharmacist reportedly said minimum four weeks; user prefers1.5–2weeks between shots. Shingles vaccine recommended byDr.Levine but no target date yet. Kevin's combined shots are his.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Completed doses unchanged. Targets secondPfizer April21, firstShingrix May5/earlyMay, late morning10/11AM atCVS ElmStreet; user now explicitly wants at least two weeks between vaccines. Reported Shingrix2 interval2–6months after first is conditional on actual first-dose date; user considers August/September. Laura's pendingTdap is separate from user's completed2022Tdap. No future shot completed.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same future targets: secondPfizer April21, firstShingrix earlyMay/May5, secondShingrix late summer; CVS ElmStreet, late morning and separated. User refuses same-day stacking; if Pfizer delayed, prefers delayingShingrix. Unusual reaction would promptDr.Levine follow-up before proceeding. Verbal insurance confirmation$0copay does not mean vaccination occurred. Completed history still firstPfizer March3 andTdap2022.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t7",
+              "s2t3",
+              "s2t5",
+              "s2t7",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Synthetic source-summary task only. Medical interval/eligibility statements are attributed reports, not validated recommendations; no new clinical instruction or appointment action.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "C29",
+      "file": "C29_trajectory_ops.json",
+      "query": "What is the status of my mother's birthday gift decision and purchase, including price and overall budget, and which alternatives remain only ideas or have been rejected? Separate my purchase from Emily's gifts, Marco's ring and a quoted price or shipping plan.",
+      "cuts": [
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "For mother's April18birthday, selected TimberCraft personalized recipe box$65 but has not reported ordering; plans to contact seller. Tea set$120 rejected for cost. Olive tree$45 optional, not committed. Total spending under$150 includes wrapping/card/extras. Emily's cashmere wrap and Marco's ring are separate.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            5
+          ],
+          "answer": "Recipe box$65 is earlier selected option, but user is now considering olive tree alone$45 including gift wrap/care guide; this is a possible switch, no order or final change yet. Emily's boutique recipe box$80 was explicitly rejected. Overall birthday budget remains under$150.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s2t7",
+              "s3t3",
+              "s3t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Recipe box actually ordered and paid$65 fromTimberCraft; will ship in three days, not already delivered. User chooses it plus a card, abandons olive-tree indecision. Discounted tea set$95 still explicitly out of running. Budget under$150 for entire birthday gift/extras remains; other people's purchases separate.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t3",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "User-reported purchase effects, not an actual tool transaction. Keep paid/ordered, future shipment and delivery distinct.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "D14",
+      "file": "D14_remember.json",
+      "query": "What financial accounts and payment tools have I reported using, what is each for, and which transfers or closures are completed versus still intentions? Keep my setup and historically reported rates separate from coworkers' choices and live financial verification.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Chase checking receives biweekly salary and pays recurring bills; held since2018. Marcus savings opened midMarch at reported4.5% APY, about$8,000 actually moved from Chase savings. Fee from a transfer glitch reportedly reversed. No ApplePay/Zelle/Venmo/BECU details yet supplied.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Chase checking/Marcus savings roles persist. Daily purchases use ApplePay linked to Chase Sapphire Preferred; stopped carrying cash. Zelle set up through Chase for new landlord's rent; Venmo account reportedly deleted inFebruary. Digital/app preference does not prove every transfer succeeds. Derek's cash preference is separate.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Current hub Chase checking; savings Marcus; ApplePay/Sapphire for spending, Zelle rent, Venmo gone. BECU remains open with about$200 unused; closure and transfer toMarcus intended, not completed. Priya's Discover account is hers and user explicitly not switching.0.01% Chase savings and4.5% Marcus are reported comparison rates, not a fresh market check.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Synthetic user-report inventory, not financial advice, live balances/rates or executed bank actions.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "D17",
+      "file": "D17_trajectory_ops.json",
+      "query": "What browser is currently default on each of my devices, and what happened to the Firefox extensions/search setup and the proposed workplace rollout? Keep device scope, application overrides, colleagues' choices and future policy separate from current defaults.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Work laptop Firefox sinceearlyMarch, with uBlock Origin installedmidApril and DuckDuckGo default search April22. iPhone Safari sincemidMarch. Home desktop not yet specified. Kevin's Brave/possibleVivaldi are separate; brief personal Brave trial is not current default.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Work laptop actually switched toEdge for SSO; iPhone Safari; home desktopChrome. uBlock/DuckDuckGo were Firefox setup and not carried intoEdge; equivalent Edge setup not yet made. Earlier Outlook openingEdge was a policy override whileFirefox was default, not proof that system default had already changed then.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Still workEdge, phoneSafari, homeChrome. Announced next-month mandatory workChrome rollout was later postponed indefinitely, never made current. Firefox historical DuckDuckGo April22/uBlock remains historical, Edge equivalent still not confirmed. Kevin's companyFirefox standard is separate. OldAndroid tablet sold; its bookmark-sync issue no longer relevant.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t3",
+              "s2t5",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "No actual device settings are read or changed; reported policy and device scopes only.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "D18",
+      "file": "D18_update.json",
+      "query": "What keyboard settings are currently reported for my phone and laptop, and which changes are just planned or rejected? Preserve device, app and person scope, including the phone's current height and languages.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Phone Gboard now tall, changed from initialmedium; English/Japanese active, Japanese addedsecondweekApril. Plain darkgray theme and emoji suggestions bar off. Laptop setup not yet supplied. FormerSwiftKey is historical.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Phone Gboard reverted tomedium, English/Japanese active, darkgray theme/emoji bar off unchanged; occasional built-in translator use. Laptop Windows default English IME with USInternational layout forSpanish, setApril1, separate fromphone. Mei's LinuxRIME/Chinese is hers, not user setup.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Phone remainsmedium: short is a planned weekend experiment after David's demo, no reported change yet. English/Japanese retained; Korean considered then not added. Laptop USInternational forSpanish unchanged. David's Fleksy tall/Gboard short are his. Japanese addition secondweekApril known, elapsed duration cannot be exact without current date.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s2t1",
+              "s2t3",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported settings only; planned tests do not change current state and a different application's geometry is not a shared setting.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "D19",
+      "file": "D19_update.json",
+      "query": "What cloud plan, main folder and photo-storage arrangement have I actually reported, and what upgrades or backup changes remain intentions? Distinguish confirmed setup, requested offline priorities and another person's storage plan.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "GoogleDrive/GoogleOne upgraded from200GB to2TB inmidMarch; main folderCore_Vault includes work/personal/tax/photos including RAW archive. Phone camera auto-backup reportedly enabled. PriorOneDrive is historical. No externalSSD or backup plan supplied yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Actually downgraded back to200GB after bulk photo archives moved to4TB SamsungT7Shield SSD. Core_Vault keeps documents and selected photos. SecondarySSD backup not set up; monthly clone planned. User reports enabling offlineCore_Vault on laptop/tablet, then specifies Work/Finance priority and personal/photos can stay cloud-only; no separate completion report for that scope adjustment. No disabling of the previously enabled phone camera backup is reported.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t7",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Confirmed plan stays200GB, Core_Vault plus bulk photos on4TB SSD; secondary backup remains unreported.2TB dashboard option is not active plan.5TB promotional upgrade is likely interest but user will read terms before committing and says keep current setup. Tessa's6TB iCloud is hers. Prior offline activation and requested Work/Finance priority retain their distinct reported statuses. No disabling of the previously enabled phone camera backup is reported.",
+          "support_sets": [
+            [
+              "s1t7",
+              "s2t3",
+              "s2t5",
+              "s2t7",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Synthetic source-report inventory, not verification of vendor features, current subscription products or actual account changes.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "D20",
+      "file": "D20_reflect.json",
+      "query": "What reading preferences and favorite author have I stated, which experiences support them, and where do my current reading and next-book plans stand? Keep tentative genre labels, another person's reading and completed books separate from intentions.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Favorite author UrsulaK.LeGuin; finished TheLeftHandOfDarkness earlyMarch and valued unexplained strangeness/quiet tension. Read Annihilation, especially liked atmosphere over plot. TheDispossessed owned but not reported started. Sister reading Kindred; user's Butler reading is historical. No firm genre label supplied.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Prefers immersive strange settings, slow mystery, atmosphere over fast action: Annihilation/Piranesi; abandoned JackReacher after~60pages. LeGuin prioritized. ProjectHailMary is current Maybookclub reading, firstchapters feel breezy; intends finish for meeting. TheDispossessed planned, not yet started.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "LeGuin explicitly remains favorite; philosophical depth/restrained prose plus immersion/strangeness matter. NewWeird is tentative self-label, not settled preference replacement. ProjectHailMary halfway, mixed enjoyment; TheDispossessed planned after finishing it, TheLatheOfHeaven appealing later plan. No Miéville read yet; sister's experiences not user's.",
+          "support_sets": [
+            [
+              "s2t3",
+              "s2t5",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Source summary of taste and reading status, not new book recommendations or a fixed personality classification.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "D21",
+      "file": "D21_trajectory_ops.json",
+      "query": "What is my last explicitly confirmed favorite album, and which newer reactions remain tentative? Also distinguish my music preferences for focus versus relaxation and my film preferences from friends' tastes.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Favorite album RandomAccessMemories byDaftPunk. For late work, synth-heavy atmospheric electronic with instrumental/minimal vocals; Drive/Nightcall examples. Quiet Shoplifters storytelling resonated. Relaxation-specific music preference not yet separately supplied.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            3
+          ],
+          "answer": "Last explicit update selected Discovery overRAM. After one Homework listen user thinks it is going to take top spot, a tentative new reaction rather than confirmed final ranking. Work focus synth-heavy, relaxation ambient/no lyrics; films quiet/cinematography-led, spectacle/action disliked. Lina's K-pop interest is hers despite user appreciating production.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7",
+              "s3t1",
+              "s3t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Discovery explicitly reaffirmed after second Homework listen; Homework tracks admired but whole album not favorite. RAM is historical own favorite and now Lina's number1, not user's. Same synth-heavy focus, ambient relaxation, quiet visually expressive films rather than explosions.",
+          "support_sets": [
+            [
+              "s2t3",
+              "s2t5",
+              "s2t7",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Tentative ranking language remains qualified; another listener's ranking never updates the user's.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "D23",
+      "file": "D23_trajectory_ops.json",
+      "query": "What flight-seat preference and actual travel experiences have I reported, and what seat choices or profile corrections remain unconfirmed plans? Keep other people's aisle preferences and a tentative aircraft-layout assumption separate from my own current preference or bookings.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers window, usually left side, for sleeping/enclosure. FlewChicago–Denver March3 in12A and slept well. Daniel prefers aisle for knees; sister switched toaisle after turbulence, unlike user. Those do not change user's window preference.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Still window/left preference; accidental outboundTampa22B middle unpleasant, return18A leftwindow calming and completed. LateAprilSeattle trip and selectedwindowseats cancelled; no currentSeattle booking.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Window preference persists. MidMayBoston unbooked; user considers right-side supposedsolo seatD on a possibleCRJ900 layout, explicitly will verify configuration before booking. No confirmed seat or universal layout claim. Workprofile aisle is stale default; user requests correctiondraft but does not report profile updated. Daniel's preference remains aisle.",
+          "support_sets": [
+            [
+              "s1t5",
+              "s2t5",
+              "s2t7",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported preference/flight history only; do not validate aircraft geometry or invent actual HR/bookings from a drafting request.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "E10",
+      "file": "E10_remember.json",
+      "query": "What gym membership and assessment timing have I reported, including any notice deadline implied by the stated interval, and what coffee, contact and birthday-gift preferences are currently known? Keep different people's plans and unstated dates separate.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Iron&Oak standard gym membership renewedApril1 at$45/month. Workouts Monday/Wednesday/Friday5:30AM. Assessment twelve weeks afterApril1 impliesJune24, not simply three calendar months. No rescheduling notice rule, coffee/contact preference or gift yet supplied; no absolute year.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Same gym/assessmentJune24; two-weeks notice impliesJune10 for rescheduling under stated rule. Coffee plain blackdrip, no milk/sugar. Appointment/reservation contact prefers texting/online beforecalls. Diane's milk change is hers. No gift details yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same$45 standard gym, M/W/F5:30, June24assessment andJune10notice from intervals; blackdrip coffee and texting/online preference. Intended brotherKevin birthday gift is Coltrane A Love Supreme onvinyl, not purchased; birthday described aboutsixweeks away with no absolute date anchor. Marcus's upgraded gym plan is not user's.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Calendar arithmetic from reported intervals; no live gym-policy verification, transaction or invented gift date.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "E11",
+      "file": "E11_trajectory_ops.json",
+      "query": "What quantities and units are currently confirmed for my GreenWrap and JarSource orders, and which changes are only offers or future intentions? Keep suppliers, old invoice units and production plans separate from the current order and delivery status.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "GreenWrap Co. inPortland, notGreenBox. Current reorder changed by phone from500 to1,000 boxes. NoJarSource order yet supplied. Planned150candles/week across three scents is production rate, not box quantity or delivered stock. Order placement/change reported, not delivery.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "GreenWrap confirmed stock limit and user agreed750 boxes on this shipment, replacing1,000. Smaller follow-up intended but not placed. JarSource order12cases×12jars=144jars. No delivery receipt/report yet.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1",
+              "s2t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Confirmed GreenWrap stays750 boxes. Rep offers1,000 if user confirms byFriday, but undecided and explicitly says do not change confirmed number. JarSource12cases/144jars unchanged. March invoice500sleeves×50=25,000boxes is a different historical order, not current500boxes or750shipment. No current delivery completed.",
+          "support_sets": [
+            [
+              "s2t1",
+              "s2t3",
+              "s3t3",
+              "s3t5"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Unit arithmetic and attributed order status only; no actual purchase or delivery action performed.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "E14",
+      "file": "E14_reflect.json",
+      "query": "What pattern have I reported about commitment frequency and engagement, which concrete routines support it, and what work-meeting change is actually in effect versus future or uncertain? Keep my schedules separate from my sister's and avoid turning preference into a universal rule.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Reports better enjoyment after moving fromweekly tobiweekly bookclub, everyotherThursday. Rent monthly on1st. Prescribed vitaminD reported weeklySunday, not mistaken earlierdaily use. No standup schedule supplied yet. Preference for clear manageable cadence does not authorize changing prescribed or contractual schedules.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Explicitly values breathing room: biweekly bookclub reduces pressure,5,000mile oil-change interval feels easier, relieved by planned May standup reduction fromdaily tothree/week. May change is announced; source has not yet established it started. SisterEmily's monthlyallergyshots are hers. No global claim that every routine should be less frequent.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same reported preference for spacing and fuller engagement. User now says enjoyingthree-times-weekly standup rhythm; possible return todaily inJune is being considered, not effective. Twice-weekly gym class is a leaning versusfour-times, not enrolled. Monthlyrent/weeklySundayvitaminD andbiweeklyclub retain their distinct intervals.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s1t7",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Source-grounded preference summary, not medical or maintenance advice. Never infer schedule authority from a general preference.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "F08",
+      "file": "F08_trajectory_ops.json",
+      "query": "What code is currently supported as the historical InPost pickup reference for my early-March transaction, at which location, and what uncertainty or correction has occurred? Keep other services and people's codes separate; do not claim an old pickup reference is still usable.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "User initially reports historicalInPost code7724 atGreenfieldAve aroundMarch3. Greenfield is regular locker, nottrainstation. Mother's pharmacy3058 andJenna's gym2276 are separate. This is a historical reference with reported48hourpickup window, not proof of current validity.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            3
+          ],
+          "answer": "Last definite correction is7742 rather than7724, but user now sees email subject7740 and explicitly withholds changing until inspecting further. Preserve unresolved discrepancy; do not assert7740 as confirmed or claimemailbodyalready checked. Greenfield historicalInPost transaction; bank/Target/food codes separate.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7",
+              "s3t3"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "User opened full email body and explicitly reconfirms7742, GreenfieldAve, March3;7740subjectline is reported typo,7724initial transposition. Jenna's7741 is her gymcode. This resolves this reported discrepancy, not a universal rule about email fields or proof old code works now.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s2t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Public synthetic historical codes only; no credential use or actual access. Preserve uncertainty before explicit source resolution.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "F12",
+      "file": "F12_update.json",
+      "query": "What credit-score readings have I actually reported, with their provider and timing when known, and which values are simulations or another person's result? Distinguish observed scores from a planned authorized-user addition and avoid inventing a common scoring model.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Experian712 onMarch3 baseline; CreditKarma698 aroundsecondweekApril. Different named sources, scoring model unspecified; no verified like-for-like change beyond user's reported timeline. Chase application effects are user's hypothesis, not established cause. Kevin's collections/car-loan issue is separate.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Same712Experian March3 and698CreditKarma April. Latest user says721 lastweek; provider/model and exact date not specified, so do not label itExperian orCreditKarma without evidence. Autopay/full-balance and low-utilization are user practices, not proof of a future score.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Latest actual reported own score remains721, provider/date unspecified apart fromlastweek.745 is CreditKarma simulator projection conditional on mother's1998card reporting after planned authorized-user addition; no posted effect yet. Kevin's731 after dispute is his. Preserve earlier712Experian/698CreditKarma with their dates and source differences.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t3",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Reported score history only, not financial guidance, live credit data, causal proof or guaranteed mortgage terms.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "F13",
+      "file": "F13_reflect.json",
+      "query": "What preferences about possessions and home life have I reported, and which current possessions, residence and house-purchase status support that picture? Separate completed sales, mortgage pre-approval and a tentative house transaction from completed ownership.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Prefers understated practical car and small low-maintenance house. Own daily driver2019HondaCR-V boughtJanuary2023;2016YamahaMT-07 soldlastmonth for$4,200. FirstUnited mortgage pre-approval up to$310K datedMay8,2025, not a loan/purchase closing. House search ongoing; current residence not yet specified. Kevin's condo belongs toKevin.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s1t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Explicitly wants reliable simple possessions, manageable small home and quiet weekends indoors. CR-V remains, motorcycle sold. Meridian apartment lease endedMarch without renewal; moved out and temporarily stays withmother inRichardson. Mortgage pre-approval and search do not establish house ownership.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Same practical/homebody preference, CR-V and temporarymother's residence. SycamoreCourt$295K/1,350sqft considered; CedarParkDrive$305K/1,280sqft seller reportedly verbally accepted offer viarealtor, but unsigned and fullinspection unseen, not closed/current residence. Sycamore fallback. Mother's2017Camry not user's. Pre-approval$310K not sale price or executed mortgage.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t5",
+              "s2t1",
+              "s2t3",
+              "s2t5",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Source-grounded interpretation and reported transaction stages, not housing/financial advice or independently verified ownership.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    },
+    {
+      "family": "F14",
+      "file": "F14_trajectory_ops.json",
+      "query": "What blood-pressure readings have I reported, with their source and role, who is the responsible primary doctor versus the historical surgeon, and has the St.Luke's record transfer been completed? Preserve measurement context and corrections rather than replacing every older number with the newest one.",
+      "cuts": [
+        {
+          "through": [
+            1,
+            7
+          ],
+          "answer": "Official reported clinic reading corrected to142/88 from initialmistaken138/88, primaryDr.Simmons. Home monitoring begun but no numeric home readings yet. Dr.Patel was gallbladder surgeon atSt.Luke's late2019/early2020, not currentprimary. No completed record transfer yet reported.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5"
+            ]
+          ]
+        },
+        {
+          "through": [
+            2,
+            7
+          ],
+          "answer": "Clinic142/88 corrected baseline remains; no home numeric reading yet. PrimaryDr.Simmons versus historicalgallbladder surgeonDr.Patel/St.Luke's. FullSt.Luke's records reportedly transferred toSimmons and taskdone. Sister's Dr.Nakamura/knee surgery is separate.",
+          "support_sets": [
+            [
+              "s1t1",
+              "s1t3",
+              "s1t5",
+              "s2t7"
+            ]
+          ]
+        },
+        {
+          "through": [
+            3,
+            7
+          ],
+          "answer": "Simmons office explicitly reconfirms142/88 as their official in-office baseline;138/88 initialerror. Home systolic135–145 over~threeweeks and specificyesterday-morning136/84 are supplementary observations, not clinic replacement. User's lower-level interpretation not a new verified clinic measurement.128/82 is sister's form template, not either person's measured reading. St.Luke's transfer alreadycompleted, Patel historicalsurgeon.",
+          "support_sets": [
+            [
+              "s1t3",
+              "s1t5",
+              "s2t7",
+              "s3t1",
+              "s3t3",
+              "s3t5",
+              "s3t7"
+            ]
+          ]
+        }
+      ],
+      "qualification": "Only an attributed medical-record summary, not diagnosis, advice, interpretation of treatment efficacy or an independent baseline recommendation.",
+      "review_basis": "Complete original user turns reviewed; user-only sufficient witnesses. Original assistant turns retained literally in projection, not accepted as independent truth."
+    }
+  ],
+  "model_calls": 0,
+  "review_basis": "First14 backgrounds read with assistant context; remaining31 complete original user turns reviewed for user-report questions. Original assistant turns remain literal model inputs, not independent truth or annotated view judgments. These are sufficient-source contracts, not exhaustive answer strings or operation gold."
+}

@@ -105,10 +105,13 @@ def main() -> None:
                     run["completed"].append(row)
                     write_json(args.output / "driver.json", run)
                     print(json.dumps(row, ensure_ascii=False), flush=True)
-                    known_closed_failure = (result.get("error") in {
-                            "VLLM_CHAT_TRUNCATED",
+                    # Host's protocol category covers malformed and incomplete model replies.
+                    # Keep that first result and proceed only to a different input position.
+                    response_failure = (result.get("error_type") == "IncompleteChatResponse"
+                                        and result.get("error_category") == "provider_protocol")
+                    known_closed_failure = ((response_failure or result.get("error") in {
                             "Finite decision input exceeds declared complete-input capacity",
-                            "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID"}
+                            "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID"})
                         and all(result["budget_after"][kind]["unknown_usage"]
                                 == result["budget_before"][kind]["unknown_usage"]
                                 for kind in ("generation", "embedding")))

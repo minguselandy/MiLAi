@@ -1,0 +1,48 @@
+{
+  "version": "dynamic-memory-control-v9-terminal-review-v1",
+  "status": "TERMINAL_REVIEWED",
+  "coordinator_pid": 1338326,
+  "coordinator_exec": 71303,
+  "child_pid": 1387216,
+  "exit_code": 1,
+  "processes_absent": true,
+  "completed_jobs": [
+    "sandbox-progress-observation-v3"
+  ],
+  "active_failed_job": "t1-original-shared-evaluation-v1",
+  "closed_positions": 55,
+  "planned_positions": 80,
+  "remaining_unstarted": 25,
+  "failed_position": {
+    "policy": "laya",
+    "history": "memops_C03",
+    "step": "stage-2",
+    "error": "JSON_ACTION_MALFORMED",
+    "error_type": "IncompleteChatResponse",
+    "error_category": "provider_protocol",
+    "generation_known_tokens": 14096,
+    "new_unknown_usage": {
+      "generation": 0,
+      "embedding": 0
+    },
+    "business_operations": [],
+    "business_observations": [
+      {
+        "tool": "get_reservation",
+        "effect": "observed",
+        "executed": true
+      }
+    ],
+    "semantic_operations": [],
+    "world": {
+      "label_available": true,
+      "reservations": [],
+      "attempts": []
+    },
+    "source_result": "artifacts/dynamic-memory-control/t1-original-shared-evaluation-v1/laya/banks/4262aa42-58be-4dbc-af5a-6a5f92c1fc67/aff71edb-90ed-4310-8552-3cf9d2d1620d-result.json"
+  },
+  "interpretation": "Known provider-response protocol failure after a completed read-only reservation query; no business mutation or semantic commit. The query was irrelevant to the source-history answer. Failed answer stays failed; no old position replay or response repair.",
+  "dispatch_change": "Use existing IncompleteChatResponse/provider_protocol classification for terminal malformed/incomplete replies, not a growing list of specific response strings. Unknown-usage increments and unexpected implementation failures still stop. New dispatcher source independent of frozenmethod0acc4b9a.",
+  "next": "Lifecycle16 on frozen3f3c10d3, then only25unstarted original positions and remaining predeclared evaluation jobs under method0acc4b9a; all with tested new dispatcher.",
+  "model_cost_already_recorded": true
+}

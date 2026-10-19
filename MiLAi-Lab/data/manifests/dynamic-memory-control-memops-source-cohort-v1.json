@@ -1,6 +1,6 @@
 {
   "version": "dynamic-memory-control-memops-source-cohort-v1",
-  "status": "METADATA_ALLOCATION_ONLY_NO_NEW_MODEL_CALLS",
+  "status": "SOURCE_TASK_TRAIN57_REVIEWED_FIRST12_FITTED_NEXT45_SOURCE_ONLY",
   "source": "https://github.com/MemTensor/MemOps",
   "snapshot_root": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/jev-reader/external-data/MemOps-main",
   "split_sources": [
@@ -96,8 +96,11 @@
       "operation_type": "Remember",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A05",
@@ -107,8 +110,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A06",
@@ -129,8 +135,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A13",
@@ -140,8 +149,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A14",
@@ -151,8 +163,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A16",
@@ -162,8 +177,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A20",
@@ -173,8 +191,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A22",
@@ -184,8 +205,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A27",
@@ -195,8 +219,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A28",
@@ -206,8 +233,11 @@
       "operation_type": "Remember",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A29",
@@ -217,8 +247,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "A30",
@@ -239,8 +272,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B01",
@@ -281,8 +317,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B04",
@@ -303,8 +342,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B06",
@@ -314,8 +356,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B10",
@@ -325,8 +370,11 @@
       "operation_type": "Remember",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B12",
@@ -336,8 +384,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B14",
@@ -358,8 +409,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B22",
@@ -369,8 +423,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B25",
@@ -380,8 +437,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B26",
@@ -391,8 +451,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "B28",
@@ -444,8 +507,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C05",
@@ -455,8 +521,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C07",
@@ -466,8 +535,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C10",
@@ -477,8 +549,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C11",
@@ -488,8 +563,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C21",
@@ -510,8 +588,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C25",
@@ -532,8 +613,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C27",
@@ -543,8 +627,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C28",
@@ -554,8 +641,11 @@
       "operation_type": "Remember",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C29",
@@ -565,8 +655,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "C30",
@@ -618,8 +711,11 @@
       "operation_type": "Remember",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "D17",
@@ -629,8 +725,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "D18",
@@ -640,8 +739,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "D19",
@@ -651,8 +753,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "D20",
@@ -662,8 +767,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "D21",
@@ -673,8 +781,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "D23",
@@ -684,8 +795,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "D24",
@@ -737,8 +851,11 @@
       "operation_type": "Remember",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "E11",
@@ -748,8 +865,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "E13",
@@ -770,8 +890,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "F06",
@@ -812,8 +935,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "F11",
@@ -834,8 +960,11 @@
       "operation_type": "Update",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "F13",
@@ -845,8 +974,11 @@
       "operation_type": "Reflect",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "F14",
@@ -856,8 +988,11 @@
       "operation_type": "TrajectoryOps",
       "track": "source_task",
       "pilot": false,
-      "body_reviewed_for_this_intake": false,
-      "admitted_to_current_training": false
+      "body_reviewed_for_this_intake": true,
+      "admitted_to_current_training": false,
+      "source_review": "dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "source_only_admitted": true,
+      "actual_training_started": false
     },
     {
       "family": "F15",
@@ -1425,9 +1560,10 @@
   },
   "protection": "All10jointly-test backgrounds remain provisionally reserved together. Their semantic contents/questions/answers were not emitted to the model or reviewer for this registration, and no held outcome was used. The mechanical reference scan did read previously prepared observation/reference JSON, so these are not byte-sealed unread blobs. Prior preparation has0model calls. Any later evidence of evaluated exposure keeps the family as regression rather than silently replacing it. Calibration/conflicts stay outside fitting.",
   "lifecycle_boundary": "Forget sources are retained as a separate explicit lifecycle track. A quoted historical request is not an executed deletion; require normal Host current commands, actual state/receipts and non-target preservation checks. Mixed trajectory files may also need this route after source review. Never derive action gold directly from upstream operation tags.",
-  "scale_qualification": "With original24/8 authored operation families, full admission would provide94train/17dev source backgrounds, not128/32. This registration does not admit or train them. Background count is not a count of independent generators or novel task mechanisms. Larger planned training/confirmation scope remains pending.",
-  "next": "Review additional training-source cuts and task contracts; retain allocated hard/ambiguous cases. Freeze method choice and the evaluation protocol before protected payload use.",
+  "scale_qualification": "Read/source-task train has57external backgrounds, plus24original=81;13other training backgrounds belong to a separate Forget lifecycle track. Counts are not independent reasoning generators and do not meet the suggested128training-family scale. Actual fitting still uses only the earlier12external backgrounds.",
+  "next": "Compile reviewed auxiliary source-prefix preferences and combine with actual model trajectories under a declared fitting recipe; no protected selection.",
   "initial_registration_issue": "First metadata pass assumed every background had a non-Forget file and stopped before writing. No model call or state mutation; its CPU timing was not captured. The allocation now retains the actual full operation coverage rather than substituting an easier source.",
-  "reviewed_training_backgrounds": 12,
-  "admitted_training_backgrounds": 0
+  "reviewed_training_backgrounds": 57,
+  "admitted_training_backgrounds": 12,
+  "source_only_additional_backgrounds": 45
 }

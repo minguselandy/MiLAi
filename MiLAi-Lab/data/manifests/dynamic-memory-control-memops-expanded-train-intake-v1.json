@@ -1,6 +1,6 @@
 {
   "version": "dynamic-memory-control-memops-expanded-train-intake-v1",
-  "status": "PARTIAL_SOURCE_REVIEW_NOT_COLLECTED_OR_FITTED",
+  "status": "ALL45_SOURCE_ONLY_ADMITTED_NOT_LABELLED_OR_FITTED",
   "selection": "All45remaining jointly allocated source_task training backgrounds, in existing cohort order; no outcome-based substitution. Forget-only backgrounds remain the explicit lifecycle track.",
   "families": [
     {
@@ -12,8 +12,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A05",
@@ -24,8 +24,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A07",
@@ -36,8 +36,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A13",
@@ -48,8 +48,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A14",
@@ -60,8 +60,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A16",
@@ -72,8 +72,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A20",
@@ -84,8 +84,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A22",
@@ -96,8 +96,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A27",
@@ -108,8 +108,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A28",
@@ -120,8 +120,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A29",
@@ -132,8 +132,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "A33",
@@ -144,8 +144,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-wave-a-source-review-v1.json",
-      "projection": "artifacts/dynamic-memory-control/memops-expanded-wave-a-v1/histories.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "B03",
@@ -156,7 +156,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "artifacts/dynamic-memory-control/memops-expanded-source-review-v1/source-review-partial.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "B05",
@@ -167,7 +168,8 @@
       "source_reviewed": true,
       "model_collected": false,
       "fitted": false,
-      "source_review": "artifacts/dynamic-memory-control/memops-expanded-source-review-v1/source-review-partial.json"
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "B06",
@@ -175,9 +177,11 @@
       "split": "train",
       "source_group": "B",
       "operation_type": "Reflect",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "B10",
@@ -185,9 +189,11 @@
       "split": "train",
       "source_group": "B",
       "operation_type": "Remember",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "B12",
@@ -195,9 +201,11 @@
       "split": "train",
       "source_group": "B",
       "operation_type": "Update",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "B21",
@@ -205,9 +213,11 @@
       "split": "train",
       "source_group": "B",
       "operation_type": "Update",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "B22",
@@ -215,9 +225,11 @@
       "split": "train",
       "source_group": "B",
       "operation_type": "Reflect",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "B25",
@@ -225,9 +237,11 @@
       "split": "train",
       "source_group": "B",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "B26",
@@ -235,9 +249,11 @@
       "split": "train",
       "source_group": "B",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C04",
@@ -245,9 +261,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C05",
@@ -255,9 +273,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C07",
@@ -265,9 +285,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "Update",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C10",
@@ -275,9 +297,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "Update",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C11",
@@ -285,9 +309,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "Reflect",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C23",
@@ -295,9 +321,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C26",
@@ -305,9 +333,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "Update",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C27",
@@ -315,9 +345,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "Reflect",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C28",
@@ -325,9 +357,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "Remember",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "C29",
@@ -335,9 +369,11 @@
       "split": "train",
       "source_group": "C",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "D14",
@@ -345,9 +381,11 @@
       "split": "train",
       "source_group": "D",
       "operation_type": "Remember",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "D17",
@@ -355,9 +393,11 @@
       "split": "train",
       "source_group": "D",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "D18",
@@ -365,9 +405,11 @@
       "split": "train",
       "source_group": "D",
       "operation_type": "Update",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "D19",
@@ -375,9 +417,11 @@
       "split": "train",
       "source_group": "D",
       "operation_type": "Update",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "D20",
@@ -385,9 +429,11 @@
       "split": "train",
       "source_group": "D",
       "operation_type": "Reflect",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "D21",
@@ -395,9 +441,11 @@
       "split": "train",
       "source_group": "D",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "D23",
@@ -405,9 +453,11 @@
       "split": "train",
       "source_group": "D",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "E10",
@@ -415,9 +465,11 @@
       "split": "train",
       "source_group": "E",
       "operation_type": "Remember",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "E11",
@@ -425,9 +477,11 @@
       "split": "train",
       "source_group": "E",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "E14",
@@ -435,9 +489,11 @@
       "split": "train",
       "source_group": "E",
       "operation_type": "Reflect",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "F08",
@@ -445,9 +501,11 @@
       "split": "train",
       "source_group": "F",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "F12",
@@ -455,9 +513,11 @@
       "split": "train",
       "source_group": "F",
       "operation_type": "Update",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "F13",
@@ -465,9 +525,11 @@
       "split": "train",
       "source_group": "F",
       "operation_type": "Reflect",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     },
     {
       "family": "F14",
@@ -475,9 +537,11 @@
       "split": "train",
       "source_group": "F",
       "operation_type": "TrajectoryOps",
-      "source_reviewed": false,
+      "source_reviewed": true,
       "model_collected": false,
-      "fitted": false
+      "fitted": false,
+      "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+      "projection": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json"
     }
   ],
   "planned_source_backgrounds": 45,
@@ -487,5 +551,13 @@
   "scope": "Expanded source diversity, not81independent reasoning generators and not completion of the proposed128family target. Every source/task contract and actual state input must be reviewed before fitting. No dev/protected families admitted.",
   "collection": "Reuse shared Source/operation executors; source-only acquisition states can be auxiliary, but cannot substitute ideal generated views or be reported as actual learned trajectories.",
   "model_calls": 0,
-  "author_review_cost": "Stored compute measures cover scripts only; Codex source reading/semantic annotation is separate, not measured as zero cost."
+  "author_review_cost": "Stored compute measures cover scripts only; Codex source reading/semantic annotation is separate, not measured as zero cost.",
+  "projected_queries": 270,
+  "projected_literal_turns": 1035,
+  "source_contracts_complete": 45,
+  "remaining_source_review": 0,
+  "source_only_states": 1361,
+  "shared_max_tokens": 8000,
+  "shared_oversized": 0,
+  "real_generated_view_and_own_trajectory_coverage": "Not supplied by this source-only cohort; existing model cohorts remain separate."
 }

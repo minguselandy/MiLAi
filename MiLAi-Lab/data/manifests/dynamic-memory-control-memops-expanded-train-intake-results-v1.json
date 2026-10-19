@@ -1,0 +1,26 @@
+{
+  "version": "dynamic-memory-control-memops-expanded-train-intake-results-v1",
+  "status": "SOURCE_ONLY_ADMISSION_COMPLETE_NOT_FITTED",
+  "backgrounds": 45,
+  "queries": 270,
+  "literal_turns": 1035,
+  "states": 1361,
+  "typed_roundtrip": 1361,
+  "raw": {
+    "max_full_tokens": 13026,
+    "oversized": 27
+  },
+  "shared": {
+    "max_full_tokens": 8000,
+    "oversized": 0
+  },
+  "reused_first12_diagnostic": "artifacts/dynamic-memory-control/memops-expanded-wave-a-capacity-v1/report.json",
+  "new_remaining33_diagnostic": "artifacts/dynamic-memory-control/memops-expanded-remaining-capacity-v1/report.json",
+  "model_calls": 0,
+  "model_forwards": 0,
+  "scope": "Full-source-context scripted Store paths; auxiliary acquisition/coverage observations, not generated views, learned trajectories or task-quality validation. First12capacity states reused rather than recollected. All45selected in predeclared order; not45independent reasoning templates.",
+  "source_review": "data/manifests/dynamic-memory-control-memops-expanded-train-source-review-v1.json",
+  "histories": "artifacts/dynamic-memory-control/memops-expanded-train-v1/histories.json",
+  "source_version": "3f3c10d3",
+  "cost_note": "Per-preparation compute pending at current idle boundary; aggregate creates no additional billable phase. Codex source annotation separate."
+}

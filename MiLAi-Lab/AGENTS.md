@@ -1,28 +1,28 @@
-# LIVE V9 / SHARED FEEDBACK FIX READY: 2026-10-19
+# V9 TERMINAL / NEXT SERIAL QUEUE READY: 2026-10-19
 
-Only live coordinator PID1338326 / exec71303; active child1387216 t1-original-shared-evaluation-v1.
-Revalidate actual /proc commands and reviewed-followups-dispatch-v9.json; do not restart/resume V9.
-Sandboxv3 CLOSED10: fixed correct reservation6/destination/packing and complete_label only continuation,
-final business target met but intermediate query length failure. Rules label completed without duplicate
-reservation, wrong initial standard packing so task failed. Three length failures retained. Extra fixed
-semantic revisions not credited as explicitly requested saves. Same template, no independent-family gain.
-New generic forget feedback identifies uncovered Source plus existing issued selectors; same closure,
-current-request inclusion, shared/partial-source restrictions. body_text handles structured Source length.
-Receipt renderer uses source capture order for journal-authorized receipts. Original answers unchanged.
-173affected tests, Ruff/mypy2modules and package/tools boundaries passed. Lifecycle16positions prepared,
-full-context4rule predeclared; freeze before later serial admission, never modify current V9 methods.
-Confirmation selection protocol registered before external-dev author grading/protected content use.
-All45remaining train backgrounds registered;14source-reviewed,31pending, none newly model-collected/fitted.
-First12projected72queries/276literal turns;366source-only states losslessly shared,max7952,no truncation.
-Source-only admission is not generated-view/learned-trajectory coverage. WaveA source contracts/intake
-are committed manifests; nextB03/B05 contracts remain in expanded-source-review-v1 partial artifact.
-Lifecycle source frozen3f3c10d3; both configs admitted0modelcalls. Concrete next16position job is
-artifacts/dynamic-memory-control/prepared-after-v9-lifecycle-v1.json, not launched.
-Queue remains matched original/shared80 -> broader/shared80 -> external baselines144 -> own-train72.
-Evaluation method0acc4b9a, dispatcherdc2d4b32. All fixed final96; no best-checkpoint/protected selection.
-7earlier offline phases settled ONCE beforeV9; new offline work remains pending. NEVER settle while any
-model child lives. Model/unknown counters unchanged by preparation. Full goal/allseeds/protected/lifecycle
-and broad training remain incomplete. User-owned global architecture research file stays untouched.
+V9 PID1338326/exec71303 and child1387216 terminal/absent, exec exit1. Do not restart V9.
+Original-shared evaluation closed55/80; memops_C03/stage-2 failed JSON_ACTION_MALFORMED.
+That call spent14096generationtokens, newunknown0, completed1readonly reservation query,
+no business/semantic mutation. Failed response and actual state/cost preserved.25positions unstarted.
+Dispatcher now uses existing IncompleteChatResponse/provider_protocol category for known terminal
+response failures, not per-string additions; unknownusage increments/unexpected errors still stop.
+11dispatch tests passed, Ruff/tools boundary passed. Freeze before new dispatch; all evaluation method
+stays0acc4b9a and existing banks/configs/checkpoints. No old position retry or final-answer repair.
+Next queue: lifecycle16(frozen3f3c10d3) -> original25remaining -> broader80 -> externalbaselines144
+-> broader own-train72. Both lifecycle configs already admitted0modelcalls; use new dispatcher only.
+
+All45predeclared remaining train source_task backgrounds now reviewed/projected:135cuts/repeats270queries,
+1035literalturns. First14fullrole review; remaining31completeuserturns reviewed for user-report tasks,
+assistant turns retained literally, not accepted as independent truth. No protected content admitted.
+1361source-only Store states losslessly shared,max8000,no truncation; rawmax13026,27oversized.
+Reuse first12capacity366states plus new33capacity995. This is not generated-view or learned-trajectory
+coverage. Full source manifests expanded-train-source-review/intake-results-v1. Source-only preferences
+not compiled/fitted yet.57external source_task training backgrounds total;12previously fitted,45new.
+With24original,81source backgrounds, not128or81independent reasoning templates.13Forget-track separate.
+Current pending offline costs must be settled ONCE at this verified idle boundary before next launch;
+never settle while a model child lives. Codex semantic annotation is separate from script timings.
+Full goal/broad fitting/allseeds/protected/fullstate/lifecycle incomplete. User-owned global research
+file untouched. Source fixes3f3c10d3 and sourcewaveA9f4286d9 committed; current live processes none.
 
 # V8 TERMINAL / PROGRESS OBSERVATION FIX: 2026-10-19
 
