@@ -1,3 +1,16 @@
+# LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
+
+PID3815344/exec24523/frozen8f7f2a18 remainsRUNNING, snapshot44/272closed.
+Same authoritative driver artifacts/host-intent-retrieval-v3/runs/t0-main-train-v2/driver.json.
+Do notrestartonhandleloss/timeout; inspect/proc. Noofflinebudgetsettlementwhilelive.
+Closedprefix exported190actualstates. Offline explicitreviewcompiler nowlabels12from16author
+reviews (2families),4forcedmasked,174unreviewed. State/questions equality verifiedall190;
+no teacheraction/native-answer automaticgold. A01realrev1alreadyread ->HANDOFF preference
+contrastswithrulecontinuedwork. Sourceproofs/notes in t0-first-labels manifest and ignored
+closedprefix review files. NOTfitready; no newweights. Continue fullcollection/source reviews,
+then dev64/generative48serially. NativeE0still0/24/sharedserviceapprovalPENDING.
+Fullobjectiveactive; noSHA/subagents/serviceschange/secondledger/old-outcomeoverwrite.
+
 # LIVE: main T0train collection — preserve actual handle
 
 Authoritative live job: PID3815344 / exec24523, frozen8f7f2a18,
