@@ -16,6 +16,8 @@ runs/t0-laya-dev-seed0-v1/driver.json,64dev positions, laya query_only+rich owna
 Dispatch t0-tool-eval-dispatch-v1.json; finalcheckpoint fromfitting/t0-native-shared-seed0-v1/checkpoint.
 Snapshot 19/64 closed, program statuses {'COMPLETED': 18, 'FAILED': 1}; NOT fullcohortquality.
 8answers reviewed in data/t0-laya-dev-seed0-task-reviews-v1.json (A19/A32); nofullscore.
+Firstfailure D25richstage0 VLLM_CHAT_TRUNCATED,2HTTP/13143known=charged/newunknown0.
+Receipt in run/first-failure-review-v1.json; retained, onlynextpositionscontinue.
 RevalidateactualPID/driver andpollsamehandle.
 No second model task or offline costsettlement whilethisjoblives. Preserve firstfailures; no retries.
 
