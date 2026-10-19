@@ -1,43 +1,43 @@
-# CURRENT UPDATE 2026-10-20: all collectors CLOSED; finish generative labels then T0 fit
+# LIVE UPDATE 2026-10-20: T0 seed0 FITTING — preserve this process
 
-No active experiment model process. MainPID3815344/exec24523,devPID60366/exec8258,
-genPID178302/exec87225,remainingPID289896/exec73747 all terminal. Revalidate before new jobs;
-never restart closed positions or infer restart permission from lost handles.
-Main272=250programcomplete/22fail,740HTTP/2516826tokens. Dev64=58/6,182HTTP/515477tokens.
-Generative48=37/11,320HTTP/1611720tokens,197states/8trainfamilies; all newunknown0.
-Gen first36 remainFAILED after literal... FinalAnswerUnavailable/no_answer_text; untouched next12
-were separately dispatched under same frozen8f7f2a18 and closed. Original outcomes/costs unchanged.
-Combined gen:197controlHTTP/1206129tokens,16viewHTTP/67591tokens;63tools/27empty/0semanticwrites.
-Process counts are not semantic success; host_completion includes a rejected final placeholder.
+ACTIVE model job PID509200 / exec65861, frozen training source c0770e49,
+artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/run.json.
+Snapshot 33/207 updates, 528 train rows, 2668400 inputtokens; process RUNNING.
+Initial dev456 predictions closed:152/353 reviewed preferences accepted,103masked;
+family-macro0.435331,15HANDOFF outside reviewed preference. This is NOT task accuracy or final gain.
+Revalidate actual PID/driver and pollsamehandle. Never restart from observation timeout.
+NO second model task and NO offline cost settlement while fit lives. Frozen source and
+artifacts/.../data/t0-fitting-v1 are immutable for this run. Trainer settles own compute at exit.
 
-Primary labels: data/t0-reviewed-primary-v14,2079states/64groups,1564labels;105forced/379ambiguous/
-31held. All inputs unchanged;302/302deliveries;max8807,no truncation. Dev:data/t0-reviewed-dev-v3,
-456states/16groups,353labels,36forced/67ambiguous;71/71deliveries;max8378,no truncation.
-Raw full gen:data/t0-gen-all-closed-v1,197states ALLgoldEMPTY. Only9 explicit view preferences
-compiled separately at data/t0-gen-view-labels-v1 (2REFRESH/1USE_VIEW/6HANDOFF). Finish ALL gen
-request/source/view/storage review, then combine same-group data and prepare ordinaryCE T0/seeds.
-Do not fit a partial subset or copy teacher choices. No v3 weights trained yet.
-Gen view annotation source:data/t0-gen-closed-prefix-v1/gen-view-action-reviews-v1.json.
-Actual same-query warm view reuse preference fits559tokens; staleA01late cache is not positive;
-late rule semantics still need review. Many literal-storage generative requests use wrong view kinds.
-Source original vs actual stored distinction: dev Atlas spokenApril3,storedrev1April8,currentrev2April6;
-read-only actual Store history checked, no original-text-equals-stored-text assumption.
-Main task review:data/t0-main-task-reviews-v1.json,76/272 reviewed includingall22failures;
-26C/20W/8qualified/22failed. Selected subset is not full accuracy. Stored16=6C/8W/2F.
+Final data:2276trainstates/64groups,1649labelled;456devstates/16groups,353labelled,no groupoverlap.
+U=ceil(2*1649/16)=207; batch16,micro2,accum8,encoder/headLR2.5e-5/1e-4,fullencoder,
+native/shared/softCE,float32,physicalGPUs2/3,shuffleoptions synchronized with labels.
+Sequential metadata.state_id assigned before masking; outside model inputs. Maxlabelled8634,
+maxall9723; full inputs retained. Explicit nonreentrant encoder activation checkpointing enabled;
+4gradient/update/microbatch regressions PASS,Ruff/tools boundary PASS. Mypy uses CUDAenv and
+excludes only import-untyped for Laya SDK lacking py.typed. Logical forwards exclude layer
+recomputation; actual time includes it. Diagnostics0/103/207; final207weights are preselected.
+Seeds1/2 not started. No finished T0 checkpoint yet. Alllater T1/T2/factors/external obligations remain.
 
-Gen raw longest9723tokens triggered tokenizer8192 warning. Actual longest-row NativeDecision probe
-COMPLETED once on physicalGPU2, float32/SDPA, reference_compileFalse, NO capacity parameter change,
-9723tokens/no truncation/finite outputs. Peak allocated19618862080bytes,reserved21103640576.
-Installed ModernBERT has dynamic position-id RoPE, no fixed learned position table. This verifies
-one eval forward, not long-context quality or backward-pass memory. ProbePID383065/exec37910 gone.
-Probe artifact capacity-probe-v1/run.json; two compute phases ALREADY RECORDED in original ledger.
+All197gen states now reviewed or held:85labels,108ambiguous,4temporalconflict states.
+38source+16storage requests,1held current-record/as_of2026-01-01 request. Final generative data:
+ data/t0-reviewed-generative-v1. Source/storage/view reviews under data/t0-gen-all-closed-v1.
+IMPORTANT: provisional gen-view-v1 labels superseded by gen-view-reviews-v2. Full temporal review
+found unsupported2024 in A01query-only early view;2positiveswithdrawn. A05correctedrefresh/return
+adds2; total9viewpositives unchanged but row identities differ. Do NOT use v1 in training.
+GenSource proof includes effective-date witness for A01rich late and narrower A07subqueries.
+Storage generic followup omittedfirst-version constraint, reviewed ascurrent; helddateconflict notfixed.
+Main task reviews now88/272 in data/t0-main-task-reviews-v1.json; remaining184notgraded.
 
-Settlements offline-review-settlement-v1/v2/v3/v4 ALREADY RECORDED. Never settle snapshot falseflags
-again. v4=5phases/35.033654CPU at actual idle; author/tests/untimed work unmeasured,notzero.
-Cost helper now separates controller schema choice as control_generation. Producer regression,
-Ruff/mypy/tools boundary pass; no runtime method change. No SHA/subagents/newservices/secondledger/
-remote publication. NativeE0 still0/24; shared7860 parser permission PENDING. Full goal ACTIVE.
-All data/run paths above are under artifacts/host-intent-retrieval-v3/; historical notes below superseded.
+Collectors all CLOSED: main272 has250 completed/22failed; dev64 has58/6; gen48 has37/11.
+No positions retried. Old collector processes are gone.
+Settlements offline-review-settlement-v1..v5 and capacity-probe-v1 compute ALREADY RECORDED.
+v5 recorded3measured preparation phases atidle before fit; unmeasured author/tests notzero.
+NEW pending offline cost: runs/t0-main-train-v2/first-input-source-audit-v1.json;158fresh bank
+first requests,zero source-prefix matches. Do not settle while PID509200 lives.
+NativeE0 remains0/24; shared7860 parser permission PENDING. No SHA/subagents/newservice/secondledger/
+remote publication. Full goal ACTIVE. All shortartifact paths above under artifacts/host-intent-retrieval-v3/.
+Historical notes below superseded.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 

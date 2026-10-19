@@ -1,0 +1,67 @@
+{
+  "status": "RUNNING",
+  "pid": 509200,
+  "exec_session": 65861,
+  "source_version": "c0770e49",
+  "collection_source_version": "8f7f2a18",
+  "data": "artifacts/host-intent-retrieval-v3/data/t0-fitting-v1",
+  "output": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1",
+  "seed": 0,
+  "planned_seeds": [
+    0,
+    1,
+    2
+  ],
+  "optimizer_updates": 33,
+  "planned_optimizer_updates": 207,
+  "train_sequence_rows": 528,
+  "train_input_tokens": 2668400,
+  "micro_batch_size": 2,
+  "gradient_accumulation": 8,
+  "effective_batch": 16,
+  "gradient_checkpointing": true,
+  "freeze_encoder": false,
+  "precision": "float32",
+  "initial_dev": {
+    "counts": {
+      "labelled": 353,
+      "accepted": 152,
+      "masked": 103,
+      "handoff_outside_reviewed_preference": 15
+    },
+    "strata": {
+      "source_reviewed_preference": {
+        "labelled": 353,
+        "accepted": 152
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 80,
+        "accepted": 27
+      },
+      "READ": {
+        "selected": 180,
+        "accepted": 89
+      },
+      "HANDOFF": {
+        "selected": 51,
+        "accepted": 36
+      },
+      "REFRESH_VIEW": {
+        "selected": 12,
+        "accepted": 0
+      },
+      "USE_VIEW": {
+        "selected": 30,
+        "accepted": 0
+      }
+    },
+    "families": 16,
+    "family_macro_acceptance": 0.43533100586909623,
+    "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+  },
+  "final_checkpoint_selection": "Predetermined step207",
+  "budget_policy": "Original continuous ledger; no offline settlement or another model task while this process lives. Trainer records compute on terminal exit.",
+  "frozen_inputs": "Do not edit frozen-c0770e49 or data/t0-fitting-v1 while running."
+}

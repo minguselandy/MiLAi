@@ -1,0 +1,10 @@
+{
+  "scope": "First model request in every fresh primary train bank; continuous later turns excluded because earlier returned evidence is allowed. Tests exact first160characters or complete shorter source, including JSON-escaped forms. It does not rule out every paraphrased leak.",
+  "fresh_positions_checked": 158,
+  "positions_with_source_prefix_match": 0,
+  "matches": [],
+  "wall_seconds": 0.7836899664252996,
+  "cpu_seconds": 0.783650087,
+  "model_calls": 0,
+  "ledger_recorded": false
+}

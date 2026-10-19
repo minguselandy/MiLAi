@@ -1,13 +1,13 @@
 {
   "status": "PARTIAL_AUTHOR_TASK_REVIEW",
-  "reviewed_positions": 76,
+  "reviewed_positions": 88,
   "total_positions": 272,
-  "unreviewed_positions": 196,
+  "unreviewed_positions": 184,
   "reviewed_counts": {
     "FAILED": 22,
-    "WRONG": 20,
-    "CORRECT": 26,
-    "QUALIFIED": 8
+    "WRONG": 24,
+    "CORRECT": 33,
+    "QUALIFIED": 9
   },
   "saved_version_subset": {
     "positions": 16,
