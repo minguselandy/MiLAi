@@ -34,5 +34,28 @@
     "package_boundary": "passed"
   },
   "live_experiments": "Frozen0acc4b9aV10 remains unchanged; original error and cost count. Existing postforget followup stays on its separately frozen d230c945 contract.",
-  "semantic_limits": "Applying a syntactically valid recorded delta does not establish task completeness, source truth or correct rule meaning. The source response still omits some requested secondary-contact information."
+  "semantic_limits": "Applying a syntactically valid recorded delta does not establish task completeness, source truth or correct rule meaning. The source response still omits some requested secondary-contact information.",
+  "additional_captured_response_validation": {
+    "policy": "rules",
+    "family": "memops_A19",
+    "step": "stage-2",
+    "source_trace": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-dev-baselines-v1/rules/banks/e7328efe-4d58-4225-9a00-94e4e5575c05/740b67ce-8bd0-4795-924e-f8d2e17b7ace-trace-0.jsonl",
+    "remove": [
+      "n8",
+      "n9",
+      "n10",
+      "n10",
+      "n10"
+    ],
+    "remove_rules": [],
+    "before": "artifacts/dynamic-memory-control/baseline-rules-a19-delta-before-v1/report.json",
+    "after": "artifacts/dynamic-memory-control/baseline-rules-a19-delta-after-v1/report.json",
+    "before_error": "KeyError/n10",
+    "before_cache_unchanged": true,
+    "after_revision": 5,
+    "same_actual_model_messages": true,
+    "new_model_calls": 0,
+    "additional_runtime_change": "None. Existing stable distinct-removal implementation handles repeated node IDs as well as the previously observed repeated rule IDs.",
+    "scope": "Second captured delta under a different controller, same source family; not a new independent family or repaired first task outcome. Prior graph/delta preserved; only diagnostic copies written."
+  }
 }

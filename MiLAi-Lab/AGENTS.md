@@ -9,16 +9,24 @@ M4:216actualstates/204devlabels,742candidate matches, trainfileEMPTY;10uncertain
 reads. Operationwall7.61s plus followingdecision67.85s are observed costs, not netcounterfactual savings.
 5emptyhandoffs allolddev with8steps/availableacquisition:4unfulfilled/1length.3failuresbeforecontroller.
 Auditcompute remains pending whileV10live. Prefix72baseline task review complete onA19/A32/B30/C03:
-fixed17C/5W/1length/1qualified; rules16C/1W/4qualified/1length/2incomplete;
+fixed15C/5W/1length/3qualified (author revision2); rules16C/1W/4qualified/1length/2incomplete;
 generative5C/15unfulfilled/2length/1qualified/1W. Each24positions, not full8family selection.
 Gen tokens262454/419270/356207; messagewall991.24/1102.21/1013.97s, unknown0.
 All72no semantic/revocation/business effects or businessqueries; rules22delivered/23refresh,
-generative6delivered/7refresh. Baseline viewsemantic audit stillpending. Last92/144closed;
-revalidate live driver rather than using historical progress count. Prefix72-results-v1 is authoritative.
+generative6delivered/7refresh. All28prefix72views now audited:180nodes/11rules,
+12task-sufficient/5insufficient/11uncertain; graph/provenance validity separate. OneactualUSE_VIEW
+qualified/uncertain. Twofixed A32stage2 grades changedC->qualified: Danielle only started accountsetup,
+not confirmedcompleted. Oldauthorreview preserved; modeloutputs/costs unchanged. Prefix72 revision2
+is authoritative. D25additional18reviewed in review-memops-dev-baselines-d25-v1/author-review.json:
+fixed5qualified/1length;rules4C/2W;generative3W/2unfulfilled/1length. No full8family selection.
+RulesA19stage2 captured remove[n8,n9,n10,n10,n10] reproducesKeyError/n10 onfrozen0acc;
+sameactualmessages/delta appliesrevision5 oncurrentexistingfix,0newmodelcalls. No newruntimepatch,
+firstfailure preserved; secondcapturedresponse samefamily/differentcontroller, not independentfamily.
+Last100/144closed; revalidate driver rather than trusting historical count. Newaudit costs pending.
 
 Only live coordinator PID1651723/exec59686; active child2234237 memops-dev-baselines-v1.
 Revalidate reviewed-followups-dispatch-v10.json and actual/proc commands. Never restart live queues.
-Both matched learned evaluations CLOSED80each; baselines currently62/144, then own-train72.
+Both matched learned evaluations CLOSED80each; baselines remain active, then own-train72.
 Method0acc4b9a/dispatch17d6f621;30earlier phases settled once beforeV10. NEVER settle whilemodels live.
 Broader36background task review complete: olddev18C/5unfulfilled/5length/4W; external20C/1operation
 failure/3incomplete/9W/8qualified/6length/1progress-only. Original24background old25C/external11C.
@@ -29,7 +37,7 @@ vs4312.57s. Oldregression and highergeneration cost remain; no selection beforee
 Stage-cost all160tokens reconcile; REFRESHwall includes its HTTPcost and must not be double summed.
 Figure docs/assets/dynamic-memory-control-t1-shared-comparison-v1.svg inspected. Allfirstoutcomes retained.
 Broaderstate inventory:0semanticcommits/revocations/businessmutations,2readonlyqueries;29refresh
-attempts,28constructed/delivered views,24USE_VIEW. Full28view semantic/reuse/M4review still pending.
+attempts,28constructed/delivered views,24USE_VIEW. Full28view semantic/reuse/M4review now complete above.
 Generic repeated-removal fix committedce07ebc2: stable distinct node/rule deletions before replacement.
 Existing unknown-ID/conflicting-update/undefined-node checks unchanged.40tests/Ruff/mypy/boundarypass.
 Exactcaptured modelmessages/response replay: beforeKeyError/cacheunchanged, afterrevision3,0newmodelcalls.

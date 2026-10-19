@@ -713,9 +713,9 @@
       "family": "memops_A32",
       "policy": "fixed_context",
       "step": "stage-2",
-      "label": "correct",
-      "full_task_success": true,
-      "note": "All required source-report dimensions satisfied.",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Current Gmail, completed user audit and prior changes are correct, but says Danielle has already set up the ProtonMail account. Original s3t5 only reports she has started setting it up, with login details promised tonight. Third-party action initiation is not confirmed completion.",
       "answer": "Based on your records, here is the breakdown of your email-related choices, strictly separating completed actions from intentions and external proposals:\n\n**Pattern Supported**\nYour choices support a pattern of **centralization**, **orderliness**, and **reactive security**:\n* *Centralization:* You prefer maintaining a single, highly integrated email address for all aspects of your digital life to avoid the hassle of managing multiple accounts.\n* *Orderliness:* You place a high value on digital tidiness and visual organization (e.g., using labels and color-coding).\n* *Reactive Security:* You tend to implement stricter security protocols only after experiencing a direct breach, lockout, or hearing about a family member's incident, rather than enacting them preemptively.\n\n**Actually Completed Changes**\nYou have actually completed the following actions:\n1. *Inbox Cleanup (March 16):* You dedicated a Saturday to unsubscribing from promotional emails, reducing your unread inbox from approximately 4,000 to about 200.\n2. *Password Reset (April 2):* Following a six-hour account lockout caused by a suspicious login attempt from Southeast Asia, you immediately changed your password upon regaining access.\n3. *Two-Factor Authentication (Post-April 2):* You enabled 2FA for your account and linked it to your current mobile phone number ending in 4738.\n4. *Connected Apps Audit (Most Recent):* You completed a review of your connected apps and revoked access for about eight old services, including a game from 2017.\n\n**Primary Provider**\nYour primary provider remains **Gmail** (`marcus.t.holloway@gmail.com`). You have been using it as your central hub and explicitly prefer not to deal with the overwhelming workload of migrating banking, medical, and subscription accounts.\n\n**Distinguished Intentions & External Proposals (Not Yet Completed)**\n* *ProtonMail Proposal:* Your friend Danielle has been advocating for you to switch and has already set up a ProtonMail address (`marcus.t.holloway@proton.me`) for you. However, you have explicitly stated you are not agreeing to use it as your primary provider. It remains an unadopted, experimental setup.\n* *Security Alerts:* Prompted by your brother Kevin's recent phishing scare, you recognized the need to set up alerts for suspicious activity. While you finished the connected apps audit, setting up these alerts remains a future plan and has not been completed yet.",
       "control_path": [
         "search",
@@ -747,9 +747,9 @@
       "family": "memops_A32",
       "policy": "fixed_context",
       "step": "stage-2-repeat",
-      "label": "correct",
-      "full_task_success": true,
-      "note": "All required source-report dimensions satisfied.",
+      "label": "qualified",
+      "full_task_success": false,
+      "note": "Current Gmail, completed user audit and prior changes are correct, but says Danielle has already set up the ProtonMail account. Original s3t5 only reports she has started setting it up, with login details promised tonight. Third-party action initiation is not confirmed completion.",
       "answer": "Based on your records, here is the breakdown strictly separating completed actions from intentions and proposals:\n\n**Pattern Supported**\nYour email-related choices reflect a pattern of **centralization**, **orderliness**, and **reactive security**:\n* **Centralization:** You prefer maintaining a single, highly integrated email address for all personal, financial, and social activities to avoid the hassle of managing multiple accounts.\n* **Orderliness:** You place a high value on digital tidiness and visual organization, finding satisfaction in a structured inbox using Gmail's labels and color-coding.\n* **Reactive Security:** You tend to implement stricter security protocols only after experiencing a direct breach, lockout, or hearing about a family member's incident, rather than enacting them preemptively.\n\n**Actually Completed Changes**\nYou have successfully completed the following actions:\n1. **Inbox Cleanup (March 16):** Dedicated a Saturday to unsubscribing from promotional emails, reducing your unread count from approximately 4,000 to ~200.\n2. **Password Reset (April 2):** Immediately changed your password following a six-hour account lockout caused by a suspicious login attempt from Southeast Asia.\n3. **Two-Factor Authentication (Post-April 2):** Enabled 2FA and linked it to your current mobile phone number ending in 4738.\n4. **Connected Apps Audit (Most Recent):** Completed a full review of connected applications and revoked access for about eight old services, including a game from 2017.\n\n**Primary Provider**\nYour primary provider remains **Gmail** (`marcus.t.holloway@gmail.com`). You have used this account since 2014 and explicitly prefer not to deal with the overwhelming workload of migrating thousands of linked banking, medical, and subscription accounts.\n\n**Distinguished Intentions & External Proposals (Not Yet Completed)**\n* **ProtonMail Proposal:** Your friend Danielle has already set up an account for you (`marcus.t.holloway@proton.me`) and advocates for a switch. However, you have explicitly stated you are not agreeing to use it as your primary provider. It remains an unadopted, experimental setup.\n* **Security Alerts:** You expressed an intention to set up alerts for suspicious activity, but this remains a future plan and has not been completed yet.\n* **Migration:** Despite suggestions to move away from Gmail, no migration has taken place.",
       "control_path": [
         "search",
@@ -2315,10 +2315,10 @@
     "fixed_context": {
       "positions": 24,
       "counts": {
-        "correct": 17,
+        "correct": 15,
         "wrong": 5,
-        "length_failure": 1,
-        "qualified": 1
+        "qualified": 3,
+        "length_failure": 1
       },
       "per_family": {
         "memops_A19": {
@@ -2326,7 +2326,8 @@
           "wrong": 2
         },
         "memops_A32": {
-          "correct": 6
+          "correct": 4,
+          "qualified": 2
         },
         "memops_B30": {
           "correct": 3,
@@ -2413,5 +2414,24 @@
   },
   "method_source": "0acc4b9a",
   "dispatcher": "17d6f621",
-  "scope": "First four of eight predeclared external-development families. Partial quality/cost audit, not a full comparison or recipe selection. Saved/committed absence does not establish source-report absence. Original first failures preserved. State/view audit separate."
+  "scope": "First four of eight predeclared external-development families. Partial quality/cost audit, not a full comparison or recipe selection. Saved/committed absence does not establish source-report absence. Original first failures preserved. State/view audit separate.",
+  "author_review_revision": 2,
+  "review_revision_reason": "Full role-labelled source review distinguishes third-party account setup started from completed. Applies the existing no-unconfirmed-completion criterion; model outputs and costs unchanged.",
+  "grade_changes": [
+    {
+      "policy": "fixed_context",
+      "family": "memops_A32",
+      "step": "stage-2",
+      "from": "correct",
+      "to": "qualified"
+    },
+    {
+      "policy": "fixed_context",
+      "family": "memops_A32",
+      "step": "stage-2-repeat",
+      "from": "correct",
+      "to": "qualified"
+    }
+  ],
+  "previous_review": "artifacts/dynamic-memory-control/review-memops-dev-baselines-prefix72-v1/author-review-revision1.json"
 }
