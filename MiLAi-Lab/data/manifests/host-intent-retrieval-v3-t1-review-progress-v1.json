@@ -1,0 +1,47 @@
+{
+  "status": "NEW_T1_COLLECTION_RUNNING_PREFIX_REVIEW_ONLY",
+  "pid": 1429403,
+  "exec_session": 94846,
+  "source_version": "c6b1f3bd",
+  "run": "artifacts/host-intent-retrieval-v3/runs/t1-new-train-fixed-context-v1",
+  "observed_closed_positions": 13,
+  "planned_positions": 228,
+  "observed_program_statuses": {
+    "COMPLETED": 10,
+    "FAILED": 3
+  },
+  "source_review": {
+    "notes": "artifacts/host-intent-retrieval-v3/data/t1-source-review-notes-v1.json",
+    "pools": 34,
+    "families": 18,
+    "scope": "All20 sources per recorded pool reviewed including exactly repeated passages from earlier reviewed pools. All are new train groups. Other new source pools/actual requests pending."
+  },
+  "latest_closed_export": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v2",
+  "labels": {
+    "states": 62,
+    "reviewed_requests": 11,
+    "reviewed_states": 62,
+    "labelled": 44,
+    "reasons": {
+      "reviewed_missing_original_progress": 40,
+      "no_reviewed_source_proof_masked": 18,
+      "reviewed_originals_sufficient": 4
+    },
+    "families_labelled": 2,
+    "model_calls": 0,
+    "inputs_changed": false,
+    "states_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v2/train.jsonl",
+    "reviews_source": "artifacts/host-intent-retrieval-v3/data/t1-new-train-closed-prefix-v2/request-witness-reviews-v1.json"
+  },
+  "public_inputs_unchanged": 62,
+  "request_specific_example": "Same song paragraph can fully support an actual artist-only request, while explicit artist-and-signing requests retain missing relation. Unsupported Host as_of2024 call is masked; actual request preserved.",
+  "first8_author_task_review_counts": {
+    "QUALIFIED": 3,
+    "FAILED": 3,
+    "CORRECT": 1,
+    "WRONG": 1
+  },
+  "pending_offline_costs": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v10.json",
+  "training_status": "Not ready for main T1; only62 prefix states labelled/held, actual expanded corpus and matched budget incomplete.",
+  "native_E0": "Still0/24; native service change authorization unanswered, service unchanged."
+}

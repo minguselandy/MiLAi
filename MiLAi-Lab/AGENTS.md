@@ -1,5 +1,15 @@
 # CURRENT 2026-10-20: mixed diagnostic CLOSED; new T1 collection registered
 
+ACTIVE model collection PID1429403 / exec94846 / frozen-c6b1f3bd:
+runs/t1-new-train-fixed-context-v1/driver.json, planned228. Registration faf56025.
+Revalidate actual PID/driver and pollsamehandle; never restart after observation timeout.
+Latest closed-prefix export v2 has62states/8positions,11actualrequests,44labels/18masked,
+40source-progress preferences/4sufficient; all62publicinputs unchanged. Source-review-notes-v1
+has34reviewedpools/18trainfamilies. Artist-only actualrequests use narrower evidence than full
+signing relation; invented2024as_of call heldmasked. Taskauthor review first8 only:1C/3Q/1W/3F.
+pending-offline-review-v10 has4 measured export/label phases, unsettled whilelive; do not rebill
+closed probe/comparison or older v1..v9settlements. No newT1fitting or devcollection yet.
+
 Both mixed diagnostic jobs CLOSED: fit PID1380577 and exported dev6 PID1391476 absent,
 authoritative runs COMPLETED. Export exec53815 no longer available; no restart.
 All6 public inputs equal, choices6/6 unchanged, task/component metrics equal; maxlogitdelta.082847.
