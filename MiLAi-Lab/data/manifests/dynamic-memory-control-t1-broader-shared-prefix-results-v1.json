@@ -2831,5 +2831,6 @@
     }
   ],
   "scope": "Partial descriptive task review, not recipe selection or fullstate certification. Preserve shared-executor failures separately from policy/Reader errors. No development labels enter training.",
-  "model_calls_by_review": 0
+  "model_calls_by_review": 0,
+  "superseded_by": "dynamic-memory-control-t1-broader-shared-evaluation-results-v1.json"
 }

@@ -1,0 +1,40 @@
+{
+  "version": "dynamic-memory-control-t1-broader-shared-state-inventory-v1",
+  "status": "MECHANICAL_EFFECT_INVENTORY_COMPLETE_SEMANTIC_VIEW_REVIEW_PENDING",
+  "counts": {
+    "messages": 80,
+    "semantic_commits": 0,
+    "visibility_revocations": 0,
+    "business_effects": 0,
+    "business_observations": 2,
+    "refresh_attempts": 29,
+    "refresh_not_delivered": 1
+  },
+  "operation_counts": {
+    "SEARCH": 40,
+    "READ": 47,
+    "REFRESH_VIEW": 29,
+    "USE_VIEW": 24
+  },
+  "constructed_delivered_views": 28,
+  "undelivered_refreshes": [
+    {
+      "family": "memops_A19",
+      "step": "stage-2",
+      "result": {
+        "ok": false,
+        "status": "read_outcome_unknown",
+        "error_type": "KeyError",
+        "phase": "read_action",
+        "read_state_effect": "unconfirmed",
+        "retryable": false
+      }
+    }
+  ],
+  "scope": "All80broader/shared first positions. Source imports/query caches differ from semantic/business mutation. This inventory is not semantic truth certification.",
+  "view_audit": "All actually constructed delivered views selected; error examples already seen, so descriptive exposed-development author audit, not blinded confirmation.",
+  "model_calls": 0,
+  "preparation_note": "Uses actual next decision input or terminal handoff state. No model replay.",
+  "views": "artifacts/dynamic-memory-control/t1-broader-shared-state-inventory-v1/views.json",
+  "operations": "artifacts/dynamic-memory-control/t1-broader-shared-state-inventory-v1/operations.json"
+}
