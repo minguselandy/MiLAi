@@ -25,8 +25,9 @@ def generation_stage(event: dict[str, Any]) -> str:
 
 
 def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any]:
-    reviewed = {(r["history"], r["policy"], r["request"]): r for r in reviews}
-    seen: set[tuple[str, str, str]] = set()
+    reviewed = {(r["history"], r["policy"], r["request"], r.get("interface", "rich")): r
+                for r in reviews}
+    seen: set[tuple[str, str, str, str]] = set()
     rows, runs = [], []
     stages: dict[str, Counter[str]] = defaultdict(Counter)
     local: dict[str, Counter[str]] = defaultdict(Counter)
@@ -47,13 +48,17 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
                 for k, v in after.get("compute", {}).get(name, {}).items()})
         fixture = {h["id"]: h for h in read_json(root / "fixture.json")["histories"]}
         for position in driver["completed"]:
-            key = (position["history"], position["policy"], position["request"])
+            key = (position["history"], position["policy"], position["request"],
+                   position.get("interface", "rich"))
             if key in seen:
                 raise ValueError("A closed position was included twice: " + str(key))
             seen.add(key)
             history = fixture[position["history"]]
-            bank = history["id"] if history.get("continuous") else "-".join((key[0], key[2]))
-            candidates = [(p, read_json(p)) for p in (root / key[1] / "banks").glob(
+            request = next(r for r in history["requests"] if r["id"] == position["request"])
+            bank = (history["id"] if history.get("continuous") and not request.get("independent")
+                    else "-".join((key[0], key[2])))
+            profile = position.get("profile", position["policy"])
+            candidates = [(p, read_json(p)) for p in (root / profile / "banks").glob(
                 "*/*-result.json")]
             path, result = next((p, r) for p, r in candidates if r["bank"] == bank
                                 and r["message_id"] in {key[2], "request"})
@@ -89,9 +94,9 @@ def summarize(roots: list[Path], reviews: list[dict[str, Any]]) -> dict[str, Any
     tokens = sum(stage["tokens"] for stage in stages.values())
     if tokens != sum(run["generation"]["known_tokens"] for run in runs):
         raise ValueError("Stage response tokens do not reconcile with closed-run ledger deltas")
-    counts = {policy: dict(Counter(row["review"]["grade"] for row in rows
-                                  if row["policy"] == policy))
-              for policy in sorted({row["policy"] for row in rows})}
+    counts = {profile: dict(Counter(row["review"]["grade"] for row in rows
+                                   if row.get("profile", row["policy"]) == profile))
+              for profile in sorted({row.get("profile", row["policy"]) for row in rows})}
     return {"schema": "host_intent_closed_results_v1", "runs": runs, "positions": rows,
             "grades": counts, "stages": dict(stages), "local_model": dict(local),
             "known_generation_tokens": tokens, "model_outcomes_rewritten": False,

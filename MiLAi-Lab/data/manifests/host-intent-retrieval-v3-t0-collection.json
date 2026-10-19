@@ -1,5 +1,5 @@
 {
-  "status": "PILOT_CLOSED_MAIN_COLLECTION_AFTER_DELIVERY_FIX",
+  "status": "MAIN_TRAIN_COLLECTION_RUNNING",
   "source_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
   "offline_reference_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
   "allocation": "data/manifests/host-intent-retrieval-v3-t0-allocation.json",
@@ -69,7 +69,12 @@
     "dev_positions": 64,
     "method_change": "Fullpacket-aware read admission, stablecandidate labels/physicalreference slots, timingoutsideboundedtoolpacket.",
     "version_policy": "New frozen method and new banks for all64train/16dev; originalpilotpositions/answers/costs unchanged. Not selective successful reruns or source replacement.",
-    "data": "artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json"
+    "data": "artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
+    "source_version": "8f7f2a18",
+    "run": "artifacts/host-intent-retrieval-v3/runs/t0-main-train-v2",
+    "pid": 3815344,
+    "exec_session": 24523,
+    "observed_closed_positions": 11
   },
   "pilot_positions_closed": 20
 }

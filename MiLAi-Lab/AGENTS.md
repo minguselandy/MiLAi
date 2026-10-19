@@ -1,3 +1,16 @@
+# LIVE: main T0train collection — preserve actual handle
+
+Authoritative live job: PID3815344 / exec24523, frozen8f7f2a18,
+artifacts/host-intent-retrieval-v3/runs/t0-main-train-v2/driver.json.
+272positions/64traingroups, rules withquery_only+rich ownprofiles/banks; snapshot11closed.
+Revalidate /proc anddriver, pollsameexec; do notrestartonobservationtimeout. Newfirstlengthfailure
+retainedwithoutunknownincrement; onlynextpositionscontinue. No offlinecostsettlementwhilelive.
+First7closedtoolreturnchecks:visible_evidencelabels==returnedlabels, fullpacketbudgetfeedbackworks.
+Thisisnotfullcohortorsemanticcompletion. Dev64andgenerative-train48areNOT_STARTED; serialnext.
+Oldpilot20/157states remainallgoldEMPTY/diagnostic; noT0fit yet. Actualsource reviews/nativegold
+qualifications and fullscope inexecutiondoc andpilotmanifest. No SHA/subagents/serviceschange.
+NativeE0still0/24/shared7860approvalPENDING. GoalACTIVE, notcomplete/notpaused.
+
 # LATEST: pilot20CLOSED; full-return-budget fix checked; main272trainnext
 
 Pilot frozen cd1c1291 / exec33206 / PID3609459 closedCOMPLETED_WITH_FAILURES20;

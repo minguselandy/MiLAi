@@ -1,3 +1,11 @@
+# 2026-10-19 — T0 actual trajectory collection running
+
+Maintrain collection frozen8f7f2a18:64sourcegroups,272dual-interface positions,
+PID3815344/exec24523. Revalidate the livehandle; never duplicate the job.
+Pilot20closed,157actualstates/allgoldmasked; full-returnbudget defect fixed before maincollection.
+Dev64andgenerative48followserially, no v3fitting yet. NativeE0service approval stillpending.
+See [execution record](HOST_INTENT_RETRIEVAL_EXECUTION.md) for unchanged fullscope and evidence.
+
 # 2026-10-19 — six-history JSON development evidence and T0 source allocation
 
 Current v3 progress: [execution record](HOST_INTENT_RETRIEVAL_EXECUTION.md).
