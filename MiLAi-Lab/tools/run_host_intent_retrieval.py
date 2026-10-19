@@ -23,10 +23,14 @@ def main() -> None:
                         "laya", "generative"), default=["rules", "laya"])
     parser.add_argument("--history", action="append")
     parser.add_argument("--host-site-packages", type=Path)
+    parser.add_argument("--transport", choices=("native", "json_action"),
+                        help="Explicit transport experiment; JSON-action is not native E0 evidence")
     parser.add_argument("--native-probe", action="store_true", help=(
         "E0 only: one named native retrieval call then the original Host answer. "
         "This is interface validation, not autonomous tool-use evaluation."))
     args = parser.parse_args()
+    if args.native_probe and args.transport == "json_action":
+        parser.error("--native-probe requires native transport")
     if args.host_site_packages:
         site.addsitedir(str(args.host_site_packages))
     from langchain_core.messages import ToolMessage
@@ -42,9 +46,16 @@ def main() -> None:
     fixture = read_json(args.histories)
     histories = [h for h in fixture["histories"] if not args.history or h["id"] in args.history]
     config = read_json(args.config)
+    if args.transport:
+        settings = config["entrypoints"]["functional"]
+        settings["host"]["tool_mode"] = args.transport
+        for client in settings["http_ownership_domain"]["clients"]:
+            if client["model"] == settings["host"]["model"]:
+                client["tool_mode"] = args.transport
     budget_path = Path(config["entrypoints"]["functional"]["budget_path"])
     driver: dict[str, Any] = {"status": "RUNNING", "pid": os.getpid(),
         "source_version": args.source_version, "started_epoch": time.time(),
+        "transport": config["entrypoints"]["functional"]["host"]["tool_mode"],
         "native_probe": args.native_probe, "planned_positions": sum(
             len(h["requests"]) for h in histories) * len(args.policies), "completed": [],
         "automatic_retry": False, "source_groups": [h["source_group"] for h in histories],

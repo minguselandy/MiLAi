@@ -1,3 +1,19 @@
+# CURRENT UPDATE: native service approval pending; continue independent work
+
+Full v3 goal remains ACTIVE. Two E0 dispatches terminal: v1 frozenbbf27e2b failed locally,
+0HTTP; v2 frozen0f59b4f2 failed HTTP400 requiring tool-call-parser, originalledger retains
+1request/13714charged/0known/+1unknown. Do not replay or erase either first outcome.
+Installed qwen3_xml offline parsing checked with real tokenizer,0modelforwards. User approval
+question pending for reconfiguring/restarting the existing shared7860 service with native parser;
+do not execute that dependent action without the reply. Candidate settings are in
+artifacts/host-intent-retrieval-v3/existing-host-native-change.json. No service changed.
+New source removes accidental Writer source prelude from retrieval profile;7intent tests pass,
+including firstmodelinput lacks source answers. D2 searches now have actual8/16batch params and
+required-point/opened-text supplementary targets, common operation library and up to2searches.
+JSON-action diagnostic is permitted independent work but cannot count as native24 or completeM1.
+Provider23tests pass;1historical json_zero_tools golden mismatch reproduces on frozenbbf27e2b.
+No golden rewritten. Progress file has full unshrunk requirements, costs and remaining work.
+
 # CURRENT: Host intent retrieval v3 — 2026-10-19
 
 Active objective is the full docs/MILAI_HOST_INTENT_RETRIEVAL_DEVELOPMENT_EXPERIMENT_PLAN_20261019_v3.md.

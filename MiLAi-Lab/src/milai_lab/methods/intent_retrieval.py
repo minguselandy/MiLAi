@@ -71,13 +71,15 @@ class IntentRetrievalMemory(FunctionalEditMemory):
                 "fresh_observations": fresh_observations or []}
 
     def tools(self) -> tuple[BaseTool, ...]:
-        return self._retrieval_tools(super().tools())
+        return self._retrieval_tools()
 
     def writer_tools(self, config: RunnableConfig) -> tuple[BaseTool, ...]:
-        return (self._retrieval_tools(super().writer_tools(config)) if self.features.enabled
-                else self.tools())
+        return self.tools()
 
-    def _retrieval_tools(self, base: tuple[BaseTool, ...]) -> tuple[BaseTool, ...]:
+    def instructions(self) -> str:
+        return TOOL_DESCRIPTION
+
+    def _retrieval_tools(self) -> tuple[BaseTool, ...]:
         def milai_retrieve(
             query: str, config: RunnableConfig, *,
             tool_call_id: Annotated[str, InjectedToolCallId],
@@ -102,9 +104,9 @@ class IntentRetrievalMemory(FunctionalEditMemory):
         retrieve = StructuredTool.from_function(
             query_only if self.retrieval_interface == "query_only" else milai_retrieve,
             name="milai_retrieve", description=TOOL_DESCRIPTION)
-        reads = super().read_tool_names
-        return (*(t for t in base if t.name not in reads or self.forget_requested),
-                retrieve)
+        # This profile exposes retrieval only. The existing FunctionalEditMemory
+        # profile continues to own explicit save/correct/forget tools.
+        return (retrieve,)
 
     def _known_materials(self, request: RetrievalRequest) -> list[dict[str, Any]]:
         materials = []
@@ -163,24 +165,27 @@ class IntentRetrievalMemory(FunctionalEditMemory):
             "known_evidence": project_packs(known, list(range(len(known))))},
             budget={"max_return_tokens": return_limit})
 
-        def load_pool() -> list[dict[str, Any]]:
+        def search_pool(query: str, limit: int) -> list[dict[str, Any]]:
             refs = [row["event_id"] for row in self.service._visible_sources()
                     if row["event_id"] != bound["source_ref"]]
-            native = self.service.search_sources(request.query, limit=self.source_top_k,
-                source_refs=refs, tokenization=self.source_tokenization, include_scope=True)
-            records = self.service.search(request.query, limit=self.semantic_top_k,
+            native = self.service.search_sources(query, limit=min(limit, self.source_top_k),
+                source_refs=refs, tokenization=self.source_tokenization)
+            records = self.service.search(query, limit=min(limit, self.semantic_top_k),
                                           include_raw=False)["records"]
             materials = build_evidence_packs(self.service, request.query,
                 request.task_context.as_of or "", native["source_materials"], records,
-                tokenization=self.source_tokenization, source_scope=native["source_scope"])
-            return (self.control_rank_pool(request.query, materials)
+                tokenization=self.source_tokenization)
+            return (self.control_rank_pool(query, materials)
                     if self.control_rank_pool else materials)
 
         def refresh(messages: list[dict[str, str]], schema: dict[str, Any]) -> dict[str, Any]:
             assert self.dependency_read_call is not None
             return self.dependency_read_call("query_structure", messages, schema)
 
-        operations = EvidenceOperations(self.service, state, load_pool=load_pool,
+        operations = EvidenceOperations(self.service, state,
+            load_pool=lambda: search_pool(request.query, self.source_top_k),
+            search_pool=search_pool,
+            search_batch_sizes=tuple(dict.fromkeys(min(n, self.source_top_k) for n in (8, 16))),
             refresh_call=refresh,
             fits=lambda items: self.token_count(canonical(items)) <= return_limit,
             excluded_source_refs=(bound["source_ref"],),

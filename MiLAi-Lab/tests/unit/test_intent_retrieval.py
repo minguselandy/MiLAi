@@ -37,7 +37,8 @@ def test_native_tool_call_query_only_and_rich_feedback(tmp_path):
 
         def choose(payload):
             inputs.append(payload)
-            return {"choice": ("search" if len(inputs) == 1 else
+            return {"choice": (next(k for k, v in payload["questions"]["next"]["criteria"].items()
+                                   if v.startswith("SEARCH ")) if len(inputs) == 1 else
                                "read_0" if len(inputs) == 2 else "handoff")}
 
         memory = memory_at(service)
@@ -160,6 +161,7 @@ def test_normal_host_runner_calls_tool_and_receives_evidence(tmp_path, monkeypat
         tools = {t["function"]["name"] for t in wire.get("tools", [])}
         receipts = [m for m in wire["messages"] if m["role"] == "tool"]
         if not receipts:
+            assert "1000" not in json.dumps(wire["messages"])
             assert wire["tool_choice"] == {
                 "type": "function", "function": {"name": "milai_retrieve"}}
             assert "milai_retrieve" in tools
@@ -224,3 +226,39 @@ def test_known_source_ranges_do_not_require_duplicate_read_and_view_sees_goal(tm
         memory.retrieval_interface = "query_only"
         tool = next(t for t in memory.tools() if t.name == "milai_retrieve")
         assert set(tool.tool_call_schema.model_fields) == {"query"}
+
+
+def test_supplementary_search_executes_a_different_requested_target(tmp_path):
+    from milai_lab.methods.evidence_control import EvidenceOperations
+    from milai_lab.methods.evidence_reading import build_evidence_packs
+
+    with SqliteStore.from_conn_string(str(tmp_path / "db")) as store:
+        service = MemoryService(store, ("intent-test", "alice"), "alice", tmp_path / "lock",
+                                functional_contract="functional_v1")
+        service.capture_user("dispatch", "1", "The dispatch codeword is ZEPHYR.")
+        service.capture_user("schedule", "1", "The appointment weekday is Tuesday for ZEPHYR.")
+        service.capture_user("unrelated", "1", "The visitor entrance closes at six.")
+        state = MemoryControlState(task={"request": "dispatch codeword", "query_time": "",
+            "read_goal": {"required_points": ["appointment weekday"]}})
+        queries = []
+
+        def search(query, limit):
+            queries.append(query)
+            native = service.search_sources(query, limit=limit, tokenization="unicode_v1")
+            return build_evidence_packs(service, state.task["request"], "",
+                                         native["source_materials"], [])
+
+        ops = EvidenceOperations(service, state, load_pool=lambda: [], search_pool=search,
+            search_batch_sizes=(1,), refresh_call=lambda *_: {}, fits=lambda _: True)
+        ops.execute(next(a for a in ops.actions(state)
+                         if a.parameters.get("query") == "dispatch codeword"), state)
+        ops.execute(next(a for a in ops.actions(state) if a.id == "read_0"), state)
+        assert "Tuesday" not in json.dumps(state.visible_evidence)
+        assert any(a.target == "opened evidence" for a in ops.actions(state))
+        ops.execute(next(a for a in ops.actions(state)
+                         if a.parameters.get("query") == "appointment weekday"), state)
+        ops.execute(next(a for a in ops.actions(state) if a.id == "read_1"), state)
+        assert queries == ["dispatch codeword", "appointment weekday"]
+        assert "Tuesday" in json.dumps(state.visible_evidence)
+        assert state.task["request"] == "dispatch codeword"
+        assert not any(a.kind == "SEARCH" for a in ops.actions(state))

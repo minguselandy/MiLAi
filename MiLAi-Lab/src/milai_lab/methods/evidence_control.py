@@ -48,12 +48,19 @@ class EvidenceOperations:
         view_capacity: int = 1,
         view_policy: QueryStructurePolicy = "incremental",
         known_materials: list[dict[str, Any]] | None = None,
+        search_pool: Callable[[str, int], list[dict[str, Any]]] | None = None,
+        search_batch_sizes: tuple[int, ...] = (8, 16),
+        max_searches: int = 2,
     ) -> None:
         self.service, self.load_pool, self.refresh_call, self.fits = (
             service, load_pool, refresh_call, fits)
         self.materials: list[dict[str, Any]] = []
         self.opened: dict[int, dict[str, Any]] = {}
         self.known_materials = known_materials or []
+        self.search_pool = search_pool
+        self.search_batch_sizes = search_batch_sizes
+        self.max_searches = max_searches
+        self.search_attempts: set[tuple[str, int]] = set()
         self.attempted: set[tuple[int, bool]] = set()
         self.searched = False
         self.view_capacity = view_capacity
@@ -188,7 +195,9 @@ class EvidenceOperations:
         self.refresh_visibility(state)
         actions = []
         history_records = set()
-        if not self.searched:
+        if self.search_pool is not None:
+            actions.extend(self.search_actions(state))
+        elif not self.searched:
             actions.append(MemoryAction("search", "SEARCH", "original request"))
         for i, item in sorted(enumerate(self.materials),
                               key=lambda pair: pair[1].get("control_pool_rank", pair[0])):
@@ -241,6 +250,24 @@ class EvidenceOperations:
         actions.append(MemoryAction("handoff", "HANDOFF", "Reader with opened evidence"))
         return actions
 
+    def search_actions(self, state: MemoryControlState) -> list[MemoryAction]:
+        """Bind searches to the request or actually opened text, never offline answers."""
+        if len(self.search_attempts) >= self.max_searches:
+            return []
+        query = state.task["request"]
+        goal = state.task.get("read_goal")
+        points = goal.get("required_points", []) if isinstance(goal, dict) else []
+        queries = [(query, "Host query"), *(
+            (point, "Host required point") for point in points)]
+        queries.extend((item["index_text"], "opened evidence")
+            for item in [*self.opened.values(), *self.known_materials]
+            if item.get("body_delivered") is not False and item.get("index_text"))
+        unique = dict(queries)
+        return [MemoryAction(f"search_{i}_{limit}", "SEARCH", origin,
+                             {"query": text, "limit": limit})
+                for i, (text, origin) in enumerate(unique.items())
+                for limit in self.search_batch_sizes if (text, limit) not in self.search_attempts]
+
     def _deliver(self, state: MemoryControlState) -> None:
         state.visible_evidence = project_packs(list(self.opened.values()), list(self.opened))
 
@@ -252,11 +279,28 @@ class EvidenceOperations:
 
     def execute(self, action: MemoryAction, state: MemoryControlState) -> dict[str, Any]:
         if action.kind == "SEARCH":
-            self.materials = self.load_pool()
+            if self.search_pool is None:
+                self.materials = self.load_pool()
+            else:
+                query, limit = action.parameters["query"], action.parameters["limit"]
+                self.search_attempts.add((query, limit))
+                found = self.search_pool(query, limit)
+                # Preserve the indices of earlier observations as the actual pool grows.
+                def identity(item: dict[str, Any]) -> tuple[Any, ...]:
+                    return (item["kind"], item.get("id", item.get("record_id")),
+                            item.get("revision"), item.get("version_view"))
+
+                existing_items = {identity(item) for item in self.materials}
+                for item in found:
+                    if identity(item) not in existing_items:
+                        self.materials.append(item)
+                        existing_items.add(identity(item))
             self.searched = True
             state.pending_candidates = [self.candidate(item, i)
-                                        for i, item in enumerate(self.materials)]
+                                        for i, item in enumerate(self.materials)
+                                        if i not in self.opened]
             return {"ok": True, "status": "searched", "candidates": len(self.materials),
+                    **action.parameters,
                     "scope": "captured visible pool, not a sufficiency judgment"}
         if action.kind == "READ":
             i, expand = action.parameters["index"], action.parameters.get("expand_context", False)

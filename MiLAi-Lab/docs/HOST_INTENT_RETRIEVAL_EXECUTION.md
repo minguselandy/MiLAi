@@ -45,7 +45,7 @@ COMPLETED_WITH_FAILURES 72/72。没有重启或改动其冻结源码、结果与
 |---|---|---|
 | M1/D1/E0：6 历史×2目的×规则/Laya=24 次原生外部调用 | 原 Host 请求、内部 trace、返回、答案、首次失败和成本 | 只准备第一历史 4 个位置，未运行 |
 | query-only、丰富请求、跨调用引用和模型反馈 | 接口测试＋实际轨迹 | 机械通过；语义未验证 |
-| 六种条件配对＋D2 参数化补搜/范围 | 同池目的、时间、已读、相关/无关更新、排除范围、预算两侧效果 | 未完成；当前 SEARCH 尚只有原请求 |
+| 六种条件配对＋D2 参数化补搜/范围 | 同池目的、时间、已读、相关/无关更新、排除范围、预算两侧效果 | 未完成；参数化 SEARCH 已接入，但六类语义配对未验证 |
 | FollowIR / 合法 MemOps train / MuSiQue-Full TRAIN | 来源/许可版本、主题背景共享种子分组、实际 Store 状态与偏好 | 未导入；既有 dev 不转 train |
 | T0 / T1 / T2＋continued-CE、原生/实际工具评测 | 数据版本、最终权重、tokens、分组结果、0/1/2种子 | 未训练 |
 | E1 Host×控制2×2，16组128开发任务及新保留组 | 全部位置和配对区间，允许无调用失败 | 未运行 |
@@ -68,7 +68,7 @@ COMPLETED_WITH_FAILURES 72/72。没有重启或改动其冻结源码、结果与
 离线 review_basis 不进入 Host 输入。数据归属见
 `data/manifests/host-intent-retrieval-v3-data.json`。
 
-当前 7860 服务未启用 native-auto tool parser；E0 用服务器支持的命名原生工具调用，
+当前 7860 服务未启用 tool parser；第二次派发证实连命名原生工具调用也需要该配置。E0 的设计仍为原生工具调用，
 工具名固定，query/可选字段由实际 Host 生成，然后原 Host 接收结果作答。
 不能把这种强制调用证据写成自主调用/放弃调用的 E1 成绩。
 后续自主实验可用既有 JSON-action 传输，在所有条件保持一致并清楚标注。
@@ -95,3 +95,33 @@ PYTHONPATH=src <existing-cuda-env>/bin/python tools/run_host_intent_retrieval.py
 response_format边界。正常Host测试显式发出命名选择，修改前重现失败，修改后通过。
 新用例/Provider检查23通过；一个旧 `json_zero_tools` manual golden 不匹配，
 已在未修改 Provider 的冻结 bbf27e2b 上重现同一项失败，属于已有差异；未刷新 golden。两模块 mypy 和包边界通过。
+
+## 服务原生能力与新的开发版本
+
+`runs/e0-first-history-v2` 使用冻结 `0f59b4f2`。启动时 source-version 参数是人类标签
+`native-v2-local-commit`，冻结目录的 source-identity.json 明确映射实际提交；未改运行输入。
+服务对命名调用返回 HTTP400：`tool_choice=function ... requires --tool-call-parser to be set`。
+驱动终止，第一失败保留，其余3位置未运行。原账本增量1请求、13,714 charged tokens、
+0 known tokens、1 unknown usage；保持保守收费和原计数，不重置或推算为零。
+
+本地已安装 qwen3_xml；在原容器里用实际 tokenizer 对合成 XML 调用离线解析，正确得到
+query 和嵌套 read_goal，零模型前向。配置候选保存在 ignored 的
+`artifacts/host-intent-retrieval-v3/existing-host-native-change.json`。需要按原资源配置
+重建并重启共享7860容器，仅增加 `--enable-auto-tool-choice --tool-call-parser qwen3_xml`，
+保留旧容器回滚。已向用户请求这项共享服务中断的许可；未执行。等待回复不视为同意。
+
+第二次真实派发的输入另暴露了旧 Host 的 Writer prelude：当 save/update 仍在目录中时，
+`for_write` 会先给出原文。这不是工具取证成功。新的检索 profile 只暴露 milai_retrieve，
+原保存/更正/遗忘仍在原 FunctionalEditMemory profile 中。加强的正常 Host 回归现已断言
+第一次模型输入没有历史答案，材料只能从实际工具回执进入下一次模型调用。
+
+新开发版本还接入同一 EvidenceOperations 中的参数化 SEARCH：8/16 两档，最多两次，
+候选目标来自原 query、Host required_points 或已打开文本；补搜合并实际发现项并保留原索引。
+不再把完整 source_scope 无条件塞进候选池，不生成离线答案条件，也没有另加查询生成模型。
+实际 SQLite 回归显示第二个请求要点能够发现首次池外来源。小至两文档的 BM25 IDF 会出现
+零分并列，这是继承检索器的性质；该机械定位样例使用三文档验证明确非零排序，不修改检索算法。
+这仍未证明六类条件配对中的语义有效性。
+
+新的7项检索测试通过；先前受影响控制/视图测试与静态检查保持单列记录。
+原生验收仍为0/24成功调用。计划先以同一工具的现有 JSON-action 传输作功能诊断，
+不把它计入 E0 原生验收，也不伪称 M1 完成。后续仍需完整六历史、训练、因素/外部矩阵。
