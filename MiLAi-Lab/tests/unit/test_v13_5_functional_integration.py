@@ -94,6 +94,7 @@ def prepared(
     source_top_k: int = 20,
     memory_control: dict[str, Any] | None = None,
     retrieval_tool: str | None = None,
+    business_tools: list[str] | None = None,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -116,6 +117,7 @@ def prepared(
         "profile": "functional_v1", "host": asdict(host),
         "memory_method": memory_method,
         **({"retrieval_tool": retrieval_tool} if retrieval_tool is not None else {}),
+        **({"business_tools": business_tools} if business_tools is not None else {}),
         "evidence_policy": evidence_policy,
         **({"dependency_reading": True} if dependency_reading else {}),
         "source_top_k": source_top_k,

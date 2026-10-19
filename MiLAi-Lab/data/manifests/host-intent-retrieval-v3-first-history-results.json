@@ -1,0 +1,365 @@
+{
+  "schema": "host_intent_first_history_diagnostic_v1",
+  "source_commit": "ec9d4ef7",
+  "runtime_root": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/runs/first-history-json-v3",
+  "transport": "json_action",
+  "independent_source_groups": 1,
+  "native_e0_successes": 0,
+  "author_review": "source reviewed, not independent judgment",
+  "policies": {
+    "rules": [
+      {
+        "task": "What language did I request for morning check-ins? Retrieve the original wording so I can quote it.",
+        "bank": "language_preference-original",
+        "status": "COMPLETED",
+        "first_final_answer": "For morning check-ins, you requested to use **Spanish**.\n\nHere is the original wording: \"For our morning check-ins, please use Spanish. For the written weekly summary, use English.\"",
+        "task_grade": "correct",
+        "source_basis": "Spanish for morning check-ins; English for written weekly summary. Original-wording answers quote the literal user source.",
+        "retrieval_attempts": 1,
+        "schema_rejections": 0,
+        "executed_retrievals": 1,
+        "empty_returns": 0,
+        "requests_and_paths": [
+          {
+            "request": {
+              "query": "What language did I request for morning check-ins? Retrieve the original wording for my morning check-in language preference.",
+              "read_goal": {
+                "purpose": "Find the user's request regarding the language for morning check-ins.",
+                "required_points": [
+                  "language requested",
+                  "original wording of the request"
+                ]
+              }
+            },
+            "path": [
+              "search_0_8",
+              "search_0_16",
+              "read_0",
+              "refresh_view",
+              "handoff"
+            ],
+            "reason": "no_available_operation",
+            "evidence_kinds": [
+              "original_source",
+              "query_structure"
+            ]
+          }
+        ],
+        "views": {
+          "count": 1,
+          "nodes": 1,
+          "rules": 0,
+          "node_review": "all five nodes across the three run views restate the actual user source; no general graph-validity claim",
+          "qualification": "rules original-wording view carries unnecessary uncertainty about isolating the exact quotation; the returned raw source supports the final quote"
+        },
+        "stage_costs": {
+          "host_request": {
+            "requests": 1,
+            "tokens": 1672,
+            "http_wall_seconds": 1.9841358223930001
+          },
+          "view_generation": {
+            "requests": 1,
+            "tokens": 1267,
+            "http_wall_seconds": 1.3693083310499787
+          },
+          "host_completion": {
+            "requests": 1,
+            "tokens": 2244,
+            "http_wall_seconds": 1.6244659265503287
+          }
+        },
+        "semantic_commits": 0
+      },
+      {
+        "task": "What language did I request for morning check-ins? Retrieve what you need to apply that preference to tomorrow’s check-in; distinguish it from the written weekly summary.",
+        "bank": "language_preference-apply",
+        "status": "COMPLETED",
+        "first_final_answer": "You requested Spanish for morning check-ins. This is distinct from the written weekly summary, for which you requested English.",
+        "task_grade": "correct",
+        "source_basis": "Spanish for morning check-ins; English for written weekly summary. Original-wording answers quote the literal user source.",
+        "retrieval_attempts": 2,
+        "schema_rejections": 1,
+        "executed_retrievals": 1,
+        "empty_returns": 0,
+        "requests_and_paths": [
+          {
+            "request": {
+              "query": "What language did the user request for morning check-ins? Retrieve what you need to apply that preference to tomorrow’s check-in; distinguish it from the written weekly summary.",
+              "read_goal": {
+                "purpose": "Find the language preference for morning check-ins and distinguish it from the weekly summary.",
+                "evidence": [
+                  "current_interpretation",
+                  "saved_history"
+                ],
+                "required_points": [
+                  "Language for morning check-ins",
+                  "Details for tomorrow's check-in"
+                ]
+              }
+            },
+            "path": [
+              "search_0_8",
+              "search_0_16",
+              "read_0",
+              "refresh_view",
+              "handoff"
+            ],
+            "reason": "no_available_operation",
+            "evidence_kinds": [
+              "original_source",
+              "query_structure"
+            ]
+          }
+        ],
+        "views": {
+          "count": 1,
+          "nodes": 2,
+          "rules": 0,
+          "node_review": "all five nodes across the three run views restate the actual user source; no general graph-validity claim",
+          "qualification": "rules original-wording view carries unnecessary uncertainty about isolating the exact quotation; the returned raw source supports the final quote"
+        },
+        "stage_costs": {
+          "host_request": {
+            "requests": 2,
+            "tokens": 5454,
+            "http_wall_seconds": 13.55920568946749
+          },
+          "view_generation": {
+            "requests": 1,
+            "tokens": 1348,
+            "http_wall_seconds": 1.622928898781538
+          },
+          "host_completion": {
+            "requests": 1,
+            "tokens": 3094,
+            "http_wall_seconds": 3.7467269841581583
+          }
+        },
+        "semantic_commits": 0
+      }
+    ],
+    "laya": [
+      {
+        "task": "What language did I request for morning check-ins? Retrieve what you need to apply that preference to tomorrow’s check-in; distinguish it from the written weekly summary.",
+        "bank": "language_preference-apply",
+        "status": "COMPLETED",
+        "first_final_answer": "For your morning check-ins, you requested Spanish. This is distinct from the written weekly summary, which is requested in English.",
+        "task_grade": "correct",
+        "source_basis": "Spanish for morning check-ins; English for written weekly summary. Original-wording answers quote the literal user source.",
+        "retrieval_attempts": 4,
+        "schema_rejections": 1,
+        "executed_retrievals": 3,
+        "empty_returns": 2,
+        "requests_and_paths": [
+          {
+            "request": {
+              "query": "What language did I request for morning check-ins? Does this differ from the language for the written weekly summary?",
+              "read_goal": {
+                "purpose": "Identify the specific language preference for morning check-ins and distinguish it from the weekly summary format.",
+                "evidence": [
+                  "saved_history",
+                  "current_interpretation"
+                ],
+                "required_points": [
+                  "check_in_language",
+                  "weekly_summary_language"
+                ]
+              }
+            },
+            "path": [
+              "search_1_8",
+              "search_1_16",
+              "handoff"
+            ],
+            "reason": "policy_handoff",
+            "evidence_kinds": []
+          },
+          {
+            "request": {
+              "query": "What are my language preferences for morning check-ins and weekly summaries?",
+              "read_goal": {
+                "purpose": "Find specific language settings for daily and weekly communications.",
+                "evidence": [
+                  "saved_history",
+                  "current_interpretation"
+                ],
+                "required_points": [
+                  "language",
+                  "check_in_format",
+                  "weekly_summary_format"
+                ]
+              }
+            },
+            "path": [
+              "search_1_16",
+              "handoff"
+            ],
+            "reason": "policy_handoff",
+            "evidence_kinds": []
+          },
+          {
+            "request": {
+              "query": "What language is used for morning check-ins versus the written weekly summary?",
+              "read_goal": {
+                "purpose": "Retrieve language preferences for specific recurring tasks.",
+                "evidence": [
+                  "saved_history",
+                  "original_source"
+                ],
+                "required_points": [
+                  "morning_checkin_language",
+                  "weekly_summary_language"
+                ]
+              }
+            },
+            "path": [
+              "search_1_8",
+              "search_1_16",
+              "read_0",
+              "handoff"
+            ],
+            "reason": "policy_handoff",
+            "evidence_kinds": [
+              "original_source"
+            ]
+          }
+        ],
+        "views": {
+          "count": 0,
+          "nodes": 0,
+          "rules": 0,
+          "node_review": "all five nodes across the three run views restate the actual user source; no general graph-validity claim",
+          "qualification": "rules original-wording view carries unnecessary uncertainty about isolating the exact quotation; the returned raw source supports the final quote"
+        },
+        "stage_costs": {
+          "host_request": {
+            "requests": 4,
+            "tokens": 10086,
+            "http_wall_seconds": 16.561320677399635
+          },
+          "host_completion": {
+            "requests": 1,
+            "tokens": 2783,
+            "http_wall_seconds": 1.628711512312293
+          }
+        },
+        "semantic_commits": 0
+      },
+      {
+        "task": "What language did I request for morning check-ins? Retrieve the original wording so I can quote it.",
+        "bank": "language_preference-original",
+        "status": "COMPLETED",
+        "first_final_answer": "For morning check-ins, you requested Spanish. The original wording was: \"For our morning check-ins, please use Spanish. For the written weekly summary, use English.\"",
+        "task_grade": "correct",
+        "source_basis": "Spanish for morning check-ins; English for written weekly summary. Original-wording answers quote the literal user source.",
+        "retrieval_attempts": 1,
+        "schema_rejections": 0,
+        "executed_retrievals": 1,
+        "empty_returns": 0,
+        "requests_and_paths": [
+          {
+            "request": {
+              "query": "What language did the user request for morning check-ins and what was the original wording?"
+            },
+            "path": [
+              "search_0_8",
+              "read_0",
+              "search_1_8",
+              "refresh_view",
+              "handoff"
+            ],
+            "reason": "no_available_operation",
+            "evidence_kinds": [
+              "original_source",
+              "query_structure"
+            ]
+          }
+        ],
+        "views": {
+          "count": 1,
+          "nodes": 2,
+          "rules": 0,
+          "node_review": "all five nodes across the three run views restate the actual user source; no general graph-validity claim",
+          "qualification": "rules original-wording view carries unnecessary uncertainty about isolating the exact quotation; the returned raw source supports the final quote"
+        },
+        "stage_costs": {
+          "host_request": {
+            "requests": 1,
+            "tokens": 1676,
+            "http_wall_seconds": 1.6077702026814222
+          },
+          "view_generation": {
+            "requests": 1,
+            "tokens": 1294,
+            "http_wall_seconds": 1.8573833405971527
+          },
+          "host_completion": {
+            "requests": 1,
+            "tokens": 2206,
+            "http_wall_seconds": 1.3487673765048385
+          }
+        },
+        "semantic_commits": 0
+      }
+    ]
+  },
+  "stages": {
+    "host_request": {
+      "requests": 8,
+      "tokens": 18888,
+      "http_wall_seconds": 33.71243239194155
+    },
+    "view_generation": {
+      "requests": 3,
+      "tokens": 3909,
+      "http_wall_seconds": 4.8496205704286695
+    },
+    "host_completion": {
+      "requests": 4,
+      "tokens": 10327,
+      "http_wall_seconds": 8.348671799525619
+    }
+  },
+  "generation_delta": {
+    "charged_tokens": 33124,
+    "known_tokens": 33124,
+    "unknown_usage": 0
+  },
+  "http_requests": 15,
+  "wall_seconds": 81.9790356606245,
+  "local_model": {
+    "dynamic_memory_laya": {
+      "cpu_seconds": 61.43740903300204,
+      "forwards": 13,
+      "input_tokens": 12651,
+      "sequence_rows": 13,
+      "state_tokenizations": 13,
+      "state_tokens": 8533,
+      "wall_seconds": 16.385856065899134
+    },
+    "dynamic_memory_laya_load": {
+      "cpu_seconds": 9.891790408999896,
+      "loads": 1,
+      "wall_seconds": 6.523363378830254
+    }
+  },
+  "findings": [
+    "4/4 source-reviewed final tasks correct; only one development source group, no generalization claim.",
+    "8 external retrieval attempts:2schema rejections and6executed tool calls; not4 external tool calls and not native E0.",
+    "Laya apply task handed off empty twice despite readable candidate, then Host requested evidence again and succeeded; these are actual within-task continuations, not reruns.",
+    "Actual Laya instance loaded once across two messages;13forwards/12651inputtokens.",
+    "Rules searched the same query twice then refreshed a simple source; this is observed redundancy, not a net savings estimate.",
+    "Both apply requests unnecessarily asked for saved_history; no actual stored record existed.",
+    "Two schema failures involved optional scope null/string. Later code accepts both as semantic input, not permission; the invented evidence category in one failed request remains invalid.",
+    "Original native HTTP400 failure and charged13714/+1unknown remain separate from this33,124known-token diagnostic."
+  ],
+  "limitations": [
+    "native24not completed; shared service reconfiguration approval pending",
+    "warm old policy, no v3 training",
+    "remaining5histories not prepared",
+    "allcosts including prior native failure preserved; author review and earlier preparation time unmeasured, notzero",
+    "no Product release, no remote publication, no SHA verification"
+  ],
+  "initial_host_input_audit": "All four actual first HTTP inputs exclude Spanish and the original source body; evidence is delivered only by subsequent tool results."
+}

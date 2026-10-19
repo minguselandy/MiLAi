@@ -1,3 +1,17 @@
+# Host intent retrieval v3 development — 2026-10-19
+
+This isolated branch implements the active full Host intent retrieval v3 plan.
+Current evidence and the complete remaining scope are in
+[HOST_INTENT_RETRIEVAL_EXECUTION.md](HOST_INTENT_RETRIEVAL_EXECUTION.md).
+
+The first JSON-action diagnostic closed4/4 source-reviewed final tasks on1authored history,
+with8toolattempts/2schemafailures/6executedretrievals/2emptyreturns. It is not native E0 or
+independent generalization. NativeE0 remains0/24; shared7860parser reconfiguration approval
+is pending and no service has changed. OldV10 is terminal; V11 was not launched.
+New tool/schema/search and Host model reuse are opt-in Lab work; Product remains unchanged.
+Full training, factorial/ablation, external451/400, cache/cost and additionalHost work remain.
+Historical checkpoint details below belong to the earlier dynamic-memory goal.
+
 # 动态记忆控制 v2 执行中（2026-10-19）
 
 当前目标为[动态控制计划](MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md)，

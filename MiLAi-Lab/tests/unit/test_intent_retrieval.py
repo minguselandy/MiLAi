@@ -148,13 +148,15 @@ def test_model_instance_shared_across_host_messages_but_calls_charged_separately
     assert sum(row[1].get("forwards", 0) for row in charges) == 2
 
 
-def test_normal_host_runner_calls_tool_and_receives_evidence(tmp_path, monkeypatch):
+@pytest.mark.parametrize("target_scope", [None, "communication preferences"])
+def test_normal_host_runner_calls_tool_and_receives_evidence(tmp_path, monkeypatch, target_scope):
     from test_v13_5_functional_integration import prepared, scripted
 
     from milai_lab.runners.functional import message
 
     root = prepared(tmp_path, native=True, memory_method="milai_edit_m_v1",
         evidence_policy="question_pack_v1", retrieval_tool="rich",
+        business_tools=[],
         memory_view_mode="staged", memory_control={"policy": "fixed", "max_control_steps": 4})
 
     def reply(wire, _number):
@@ -164,11 +166,12 @@ def test_normal_host_runner_calls_tool_and_receives_evidence(tmp_path, monkeypat
             assert "1000" not in json.dumps(wire["messages"])
             assert wire["tool_choice"] == {
                 "type": "function", "function": {"name": "milai_retrieve"}}
-            assert "milai_retrieve" in tools
+            assert tools == {"milai_retrieve"}
             assert "read_evidence" not in tools and "search_memory" not in tools
             return {"role": "assistant", "content": "", "tool_calls": [{"id": "retrieve-1",
                 "type": "function", "function": {"name": "milai_retrieve", "arguments":
-                    json.dumps({"query": "approval threshold", "read_goal": {
+                    json.dumps({"query": "approval threshold", "task_context": {
+                        "target_scope": target_scope}, "read_goal": {
                         "purpose": "quote the original threshold"}})}}]}
         evidence = json.loads(receipts[-1]["content"])
         assert wire["tool_choice"] == "none"

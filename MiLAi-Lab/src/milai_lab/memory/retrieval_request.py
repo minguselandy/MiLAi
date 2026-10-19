@@ -30,7 +30,7 @@ class MaterialReference(RequestFields):
 
 class RetrievalContext(RequestFields):
     as_of: str | None = None
-    target_scope: dict[str, Any] = Field(default_factory=dict)
+    target_scope: str | dict[str, Any] | None = None
     known_evidence_refs: list[MaterialReference] = Field(default_factory=list)
 
 

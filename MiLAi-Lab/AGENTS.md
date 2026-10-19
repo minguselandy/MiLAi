@@ -1,3 +1,18 @@
+# LATEST: first JSON diagnostic CLOSED; goal ACTIVE
+
+First-history-json-v3 (frozenec9d4ef7, exec96061, PID3171944) COMPLETED4/4 final tasks;
+verify terminal process before future dispatch.1authoredsourcegroup,8toolattempts/2schemafailures/
+6executedretrievals/2emptyhandoffs. Laya apply succeeded only after two empty toolreturns.
+15HTTP/33124known&chargedtokens/newunknown0/embedding0;3viewbuilds/5groundednodes/0rules.
+Native model13forwards/12651tokens,1load across2messages. Detailed authoritative artifact:
+data/manifests/host-intent-retrieval-v3-first-history-results.json. No efficiency/generalizationclaim.
+NativeE0still0/24; sharedserviceapprovalquestion pending. Do not treat elapsed time as approval.
+Nextdevelopment accepts optional scope as text/object/null and declares empty business_tools for
+QA (observed unnecessary business-tool assumptions);8newmechanicaltests pass, not real-replayed.
+Next: remaining5histories using real storedversions/actual priorreferences; then24native when
+serviceapproval/capability exists, full T0/T1/T2/factors/external/additional-Host/cost obligations remain.
+Original2native failures/costs unchanged. Allmodelruns currently closed; no service changed.
+
 # CURRENT UPDATE: native service approval pending; continue independent work
 
 Full v3 goal remains ACTIVE. Two E0 dispatches terminal: v1 frozenbbf27e2b failed locally,

@@ -695,7 +695,7 @@ def prepare(
 ) -> dict[str, Any]:
     settings = entrypoint_settings(read_json(settings_path), "functional")
     allowed = {
-        "laya_impact", "writer_input", "memory_control", "retrieval_tool",
+        "laya_impact", "writer_input", "memory_control", "retrieval_tool", "business_tools",
         "profile",
         "host",
         "capacity",
@@ -3317,6 +3317,9 @@ def message(
                 or tool.name in {"get_reservation", "get_document_status"}
                 or (tool.name in mode["business_operations"] if "business_operations" in mode
                     else mode["allow_business_mutation"]))
+            if "business_tools" in settings:
+                selected_business = tuple(tool for tool in selected_business
+                                          if tool.name in settings["business_tools"])
             allowed_tools = {tool.name for tool in (*selected_memory, *selected_business)}
             mode_reproposals = mode["format_reproposals_used"] if mode else 0
             completion_path = bank_root / f"{identity}-completion-feedback.json"
