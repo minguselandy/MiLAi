@@ -2,7 +2,7 @@
 
 ACTIVE model job PID509200 / exec65861, frozen training source c0770e49,
 artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/run.json.
-Snapshot 33/207 updates, 528 train rows, 2668400 inputtokens; process RUNNING.
+Snapshot 135/207 updates, 2160 train rows, 10777257 inputtokens; process RUNNING.
 Initial dev456 predictions closed:152/353 reviewed preferences accepted,103masked;
 family-macro0.435331,15HANDOFF outside reviewed preference. This is NOT task accuracy or final gain.
 Revalidate actual PID/driver and pollsamehandle. Never restart from observation timeout.
@@ -27,14 +27,19 @@ found unsupported2024 in A01query-only early view;2positiveswithdrawn. A05correc
 adds2; total9viewpositives unchanged but row identities differ. Do NOT use v1 in training.
 GenSource proof includes effective-date witness for A01rich late and narrower A07subqueries.
 Storage generic followup omittedfirst-version constraint, reviewed ascurrent; helddateconflict notfixed.
-Main task reviews now88/272 in data/t0-main-task-reviews-v1.json; remaining184notgraded.
+Main task reviews COMPLETE272/272:107CORRECT/59QUALIFIED/83WRONG/1UNFULFILLED/22FAILED.
+Source-author exploratory training-collection review, not independent holdout. Full summary in
+data/manifests/host-intent-retrieval-v3-t0-task-review-full-v1.json. Raw outputs unchanged.
+Midpoint103 dev:241/353 accepted,macro0.707956,3HANDOFF outside reviewed preference.
+Tool-eval plan registered64dev laya positions after final207; NOT_STARTED; native E0 stillpending.
 
 Collectors all CLOSED: main272 has250 completed/22failed; dev64 has58/6; gen48 has37/11.
 No positions retried. Old collector processes are gone.
 Settlements offline-review-settlement-v1..v5 and capacity-probe-v1 compute ALREADY RECORDED.
 v5 recorded3measured preparation phases atidle before fit; unmeasured author/tests notzero.
 NEW pending offline cost: runs/t0-main-train-v2/first-input-source-audit-v1.json;158fresh bank
-first requests,zero source-prefix matches. Do not settle while PID509200 lives.
+first requests,zero source-prefix matches. Also task-review-full-v1 aggregation0.009498wall/0.009498CPU
+pending. Do not settle while PID509200 lives.
 NativeE0 remains0/24; shared7860 parser permission PENDING. No SHA/subagents/newservice/secondledger/
 remote publication. Full goal ACTIVE. All shortartifact paths above under artifacts/host-intent-retrieval-v3/.
 Historical notes below superseded.

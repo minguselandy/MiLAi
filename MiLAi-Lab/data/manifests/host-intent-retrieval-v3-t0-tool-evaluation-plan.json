@@ -1,0 +1,60 @@
+{
+  "status": "REGISTERED_NOT_STARTED",
+  "purpose": "T0 seed0 ordinary Host tool evaluation after predetermined final207 weights; independent of native E0 and not a final external benchmark.",
+  "config": "configs/host-intent-retrieval-v3-t0-seed0-tool-eval.json",
+  "data": "artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
+  "output": "artifacts/host-intent-retrieval-v3/runs/t0-laya-dev-seed0-v1",
+  "source_groups": [
+    "memops_A19",
+    "memops_A32",
+    "memops_B30",
+    "memops_C03",
+    "memops_D25",
+    "memops_E08",
+    "memops_E15",
+    "memops_F01",
+    "musique-family-000752",
+    "musique-family-000879",
+    "authored-language-preference-v3",
+    "authored-effective-threshold-v3",
+    "authored-stored-vs-original-v3",
+    "authored-partial-evidence-v3",
+    "authored-same-name-scope-v3",
+    "authored-changed-view-missing-detail-v3"
+  ],
+  "positions": 64,
+  "policy": "laya",
+  "interfaces": [
+    "query_only",
+    "rich"
+  ],
+  "split": "dev",
+  "transport": "json_action",
+  "native_probe": false,
+  "checkpoint": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/checkpoint",
+  "checkpoint_selection": "Final207 only; never checkpoint_latest or best dev.",
+  "physical_gpu": 2,
+  "CUDA_VISIBLE_DEVICES": "2,3",
+  "baseline_collection": "artifacts/host-intent-retrieval-v3/runs/t0-main-dev-v2",
+  "baseline_scope": "Same64 rules positions; exploratory development comparison, not matched2x2 E1 or causal final claim.",
+  "preconditions": [
+    "PID509200 terminal and actual run completed207 updates.",
+    "Final checkpoint exists with final training metadata; encoder/head changes and all train/dev diagnostics inspected.",
+    "Original ledger reconciled at idle; no overlapping model owner.",
+    "Register frozen source identity and actual exec/PID at launch; preserve first failures."
+  ],
+  "unchanged": [
+    "Host prompt by interface",
+    "Host sampling and token limits",
+    "Source arrivals and actual Store preparation",
+    "2048 material tokens,8 control steps,4 fixed read setting",
+    "Original continuous budget ledger"
+  ],
+  "review": [
+    "Source-qualified answer content/status and first failures",
+    "Actual requests, material returns, query mutation receipts and completeness",
+    "View/source/refresh validity separate from task-content score",
+    "Generation, local model load/forward, CPU/wall and delivered materials separately"
+  ],
+  "no_model_calls_preparation": true
+}
