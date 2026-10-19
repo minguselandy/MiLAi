@@ -84,5 +84,19 @@
     "No current operation state, frozen T0 inputs, or running trainer modified."
   ],
   "first_preparation_diagnostic_failure": "artifacts/host-intent-retrieval-v3/data/followir-applicability-v1/input-audit-first-failure.json",
-  "failure_qualification": "Wrong tokenizer root rejected before tokenization; corrected to existing tokenizer subdirectory without model loads/forwards. Tool wall5.83700721s known, processCPU unmeasured."
+  "failure_qualification": "Wrong tokenizer root rejected before tokenization; corrected to existing tokenizer subdirectory without model loads/forwards. Tool wall5.83700721s known, processCPU unmeasured.",
+  "author_spot_review": {
+    "artifact": "artifacts/host-intent-retrieval-v3/data/followir-applicability-v1/source-review-sample-v1.json",
+    "groups": 8,
+    "rows": 11,
+    "selection_seed": 20261020,
+    "counts": {
+      "SUPPORTED": 7,
+      "QUALIFIED": 2,
+      "SUPPORTED_WITH_FACTUALITY_UNVERIFIED": 2
+    },
+    "published_labels_changed": false,
+    "scope": "Candidate topical/instruction applicability, not factuality, clinical efficacy, confidence calibration or operation sufficiency.",
+    "independent": false
+  }
 }

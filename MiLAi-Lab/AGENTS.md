@@ -2,7 +2,7 @@
 
 ACTIVE model job PID509200 / exec65861, frozen training source c0770e49,
 artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/run.json.
-Snapshot 163/207 updates, 2608 train rows, 12946448 inputtokens; process RUNNING.
+Snapshot 196/207 updates, 3136 train rows, 15628912 inputtokens; process RUNNING.
 Initial dev456 predictions closed:152/353 reviewed preferences accepted,103masked;
 family-macro0.435331,15HANDOFF outside reviewed preference. This is NOT task accuracy or final gain.
 Revalidate actual PID/driver and pollsamehandle. Never restart from observation timeout.
@@ -32,6 +32,9 @@ Source-author exploratory training-collection review, not independent holdout. F
 data/manifests/host-intent-retrieval-v3-t0-task-review-full-v1.json. Raw outputs unchanged.
 Midpoint103 dev:241/353 accepted,macro0.707956,3HANDOFF outside reviewed preference.
 Tool-eval plan registered64dev laya positions after final207; NOT_STARTED; native E0 stillpending.
+Concrete dispatch artifacts/.../t0-tool-eval-dispatch-v1.json uses frozen-63603feb; no job started.
+After fit terminal, inspect207final/checkpoint/parameterprobes, reconcile original ledger and pending-v6
+at idle, then dispatch registered64 using existing CUDA+HTTP environments. Do not use checkpoint_latest.
 Rulesdev64 also fully reviewed:38C/9Q/11W/6FAILED. Generative48:19C/1Q/15W/2UNFULFILLED/11FAILED.
 Matched48 rules:21C,142HTTP476795tokens; generative19C,320HTTP1611720tokens. Only8train
 groups/descriptive, not E2 same-before or learned-policy result. New full review manifests tracked.
@@ -52,6 +55,8 @@ Historical notes below superseded.
 FollowIR auxiliary prepared in data/followir-applicability-v1:1427train/349dev,965/241groups;
 max747/644 tokens,all literal inputs unchanged,no truncation,0modelcalls.3puretests/static/boundariesPASS.
 NOT mixed/fitted: NativeDecision currently expects next; task-aware auxiliary inference/scoring remains.
+Author spot review8randomgroups/11rows done:9topically supported (2explicit factuality-unverified),
+2qualified relevance boundaries; labelsunchanged, not independent or exhaustive. Sampleartifact underauxdir.
 7measured offlinephases now pending-v6 (14.432584CPU); failed tokenizer-root diagnostic wall5.83700721
 known,CPUunmeasured. Do not settle while fitter lives. See followir-applicability manifest.
 

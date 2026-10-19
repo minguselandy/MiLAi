@@ -12,10 +12,10 @@
     1,
     2
   ],
-  "optimizer_updates": 163,
+  "optimizer_updates": 196,
   "planned_optimizer_updates": 207,
-  "train_sequence_rows": 2608,
-  "train_input_tokens": 12946448,
+  "train_sequence_rows": 3136,
+  "train_input_tokens": 15628912,
   "micro_batch_size": 2,
   "gradient_accumulation": 8,
   "effective_batch": 16,

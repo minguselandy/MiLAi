@@ -703,3 +703,13 @@ t0-matched48-descriptive-v1；384个采集位置均已有任务内容或失败�
 数据准备，不是T1拟合完成：后续还需明确来源审阅、混合预算和任务评分；当前NativeDecision
 只读取next问题，需要以新版本支持辅助applicability问题，不能直接用当前操作评分器宣称通过。
 正在运行的T0冻结源码/输入不受影响。
+
+
+FollowIR另以seed20261020预选6train/2dev来源组，检查其11行：9行的主题适用性有支持，
+其中2行明确保留事实正确性未核实；另2行的宽泛背景/额外信息门槛有歧义。发布标签未改，
+这不是独立或全量质量估计；合成正文中的临床/研究断言不能由相关性标签变成事实依据。
+样本与逐行依据保存在followir-applicability-v1/source-review-sample-v1.json。
+
+最终权重工具评价的可执行参数已保存在t0-tool-eval-dispatch-v1.json，使用冻结63603feb，
+状态PREPARED_NOT_STARTED；当前训练仍用c0770e49。禁止用checkpoint_latest提前运行；须等
+训练终态及最终207checkpoint、参数变化、诊断和原账本检查完成，再串行启动64位置。
