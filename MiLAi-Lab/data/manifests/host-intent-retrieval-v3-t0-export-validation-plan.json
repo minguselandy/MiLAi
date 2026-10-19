@@ -1,5 +1,5 @@
 {
-  "status": "RUNNING",
+  "status": "COMPLETED",
   "purpose": "Validate persisted predetermined final207 weights after discovering standard SDK FP16 serialization; compare with existing in-memory FP32 diagnostics.",
   "input": "artifacts/host-intent-retrieval-v3/data/t0-fitting-v1/dev.jsonl",
   "checkpoint": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/checkpoint",
@@ -18,5 +18,7 @@
   "after": "Registered64 tool evaluation uses this exact checkpoint.",
   "pid": 797851,
   "exec_session": 35013,
-  "source_version": "e1df7ede"
+  "source_version": "e1df7ede",
+  "exec_exit_code": 0,
+  "results": "data/manifests/host-intent-retrieval-v3-t0-export-validation-results.json"
 }

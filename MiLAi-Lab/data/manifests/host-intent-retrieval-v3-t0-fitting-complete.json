@@ -1,5 +1,5 @@
 {
-  "status": "FITTING_COMPLETED_EXPORTED_WEIGHT_VALIDATION_PENDING",
+  "status": "FITTING_AND_EXPORTED_WEIGHT_VALIDATION_COMPLETE",
   "run": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/run.json",
   "training_source_version": "c0770e49",
   "final_checkpoint": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/checkpoint",
@@ -201,9 +201,10 @@
     "training_and_in_memory_diagnostics": "float32",
     "exported_weight_tensors": "170 F16 tensors",
     "loader_output": "float32 per installed Laya load_checkpoint",
-    "qualification": "Pre-export diagnostic predictions do not yet prove identical choices from serialized weights. Standard SDK save_checkpoint uses detach().half(); no post-hoc weight repair."
+    "qualification": "Persisted-weight dev validation completed:455/456 choices unchanged; changed row189 chose another reviewed-preferred READ. Same255/353 acceptance. No checkpoint selection change."
   },
-  "next": "Evaluate persisted final207 checkpoint on same456dev with unchanged shared projection, then registered64 ordinary-tool dev positions. No checkpoint selection change.",
+  "next": "Registered64 ordinary-tool dev evaluation running PID817340/exec7553, frozen63603feb.",
   "other_seeds": "NOT_STARTED",
-  "native_e0": "0/24; shared service permission pending"
+  "native_e0": "0/24; shared service permission pending",
+  "exported_validation": "data/manifests/host-intent-retrieval-v3-t0-export-validation-results.json"
 }

@@ -1,5 +1,5 @@
 {
-  "status": "REGISTERED_NOT_STARTED",
+  "status": "RUNNING",
   "purpose": "T0 seed0 ordinary Host tool evaluation after predetermined final207 weights; independent of native E0 and not a final external benchmark.",
   "config": "configs/host-intent-retrieval-v3-t0-seed0-tool-eval.json",
   "data": "artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
@@ -56,5 +56,9 @@
     "View/source/refresh validity separate from task-content score",
     "Generation, local model load/forward, CPU/wall and delivered materials separately"
   ],
-  "no_model_calls_preparation": true
+  "no_model_calls_preparation": true,
+  "pid": 817340,
+  "exec_session": 7553,
+  "source_version": "63603feb",
+  "exported_checkpoint_validation": "data/manifests/host-intent-retrieval-v3-t0-export-validation-results.json"
 }

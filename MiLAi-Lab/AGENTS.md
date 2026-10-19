@@ -1,4 +1,4 @@
-# CURRENT 2026-10-20: exported-weight validation RUNNING; T0 seed0 FIT CLOSED
+# CURRENT 2026-10-20: T0seed0 ordinary-tool dev64 RUNNING
 
 PID509200 gone; exec65861 exit0; fitting/t0-native-shared-seed0-v1/run.json COMPLETED207.
 Frozen training source c0770e49; final checkpoint exists.3312trainingrows/16457101tokens.
@@ -6,18 +6,19 @@ Initial/mid/final dev accepted152/241/255 of353; family macro0.435331/0.707956/0
 Finaltrain1413/1649,macro0.874632. Encoder/head probes both changed; compute matches originalledger.
 Final fit wall4042.812391/CPU6993.788020. NO fitted seeds1/2 yet.
 
-IMPORTANT: installed Laya SDK saves FP16, loads FP32. Header170F16 tensors; prior finaldev
-was in-memory FP32. Registered next: same456dev persisted final207 validation on physicalGPU2,
-shared projection12288/2048, originalledger phasehost_intent_t0_seed0_exported_dev_v1.
-ACTIVE PID797851 / exec35013 / frozen-e1df7ede,
-evaluations/t0-seed0-exported-dev-v1/run.json. Revalidate/pollsamehandle; no second model job
-or offline settlement while alive. Plan data/manifests/host-intent-retrieval-v3-t0-export-validation-plan.json.
-Then registered64 ordinary-tool dev positions, frozen63603feb dispatch in
-artifacts/host-intent-retrieval-v3/t0-tool-eval-dispatch-v1.json. No checkpoint reselection or retry.
-Check actual process/driver before every launch; never restart after lost observation handle.
+IMPORTANT: Laya SDK saves FP16, loads FP32. Persisted final207 validation COMPLETE456/456,
+PID797851 gone/exec35013 exit0.455choices identical; row189 context_8->read_4, bothpreferred.
+Same255/353,macro0.746665; maxlogitdelta0.006714.154.448wall/239.323CPU,456forwards/1800795tokens,
+originalledger phasehost_intent_t0_seed0_exported_dev_v1 matches. ComparisonCPU1.044368 settledv7.
+
+ACTIVE MODEL JOB: PID817340 / exec7553 / frozen63603feb; normalHost JSON-action, notnativeE0.
+runs/t0-laya-dev-seed0-v1/driver.json,64dev positions, laya query_only+rich ownactualbanks.
+Dispatch t0-tool-eval-dispatch-v1.json; finalcheckpoint fromfitting/t0-native-shared-seed0-v1/checkpoint.
+First3closed successful; this is NOT fullcohortquality. RevalidateactualPID/driver andpollsamehandle.
+No second model task or offline costsettlement whilethisjoblives. Preserve firstfailures; no retries.
 
 Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json ONLY.
-All offline-review-settlement-v1..v6 are SETTLED. pending-v6 statusSETTLED:10measuredphases
+All offline-review-settlement-v1..v7 are SETTLED. pending-v6 statusSETTLED:10measuredphases
 14.844556CPU plus1failedtokenizer diagnostic with known5.83700721commandwall and missingCPU.
 Raw historical measurementfalse flags do not authorize rebilling. No offline settlement during live model jobs.
 Untimed author/tests remainunmeasured, notzero. Training phase already recorded bytrainer.

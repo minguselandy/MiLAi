@@ -1,0 +1,81 @@
+{
+  "status": "PERSISTED_FINAL207_VALIDATED",
+  "source_version": "e1df7ede",
+  "training_source_version": "c0770e49",
+  "checkpoint": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/checkpoint",
+  "evaluation": "artifacts/host-intent-retrieval-v3/evaluations/t0-seed0-exported-dev-v1",
+  "exec_exit_code": 0,
+  "process_absent": 797851,
+  "states": 456,
+  "public_inputs_equal": 456,
+  "truncated": 0,
+  "nonfinite_logits": 0,
+  "choice_agreement": 455,
+  "different_choices": [
+    {
+      "row": 189,
+      "event_id": "rules-query_only/memops_E15/stage-2/chatcmpl-96c5b58ae423ab2a:tool:0/1",
+      "in_memory": "context_8",
+      "exported": "read_4",
+      "labelled": true,
+      "in_memory_preferred": true,
+      "exported_preferred": true
+    }
+  ],
+  "max_abs_logit_delta": 0.0067138671875,
+  "results": {
+    "counts": {
+      "labelled": 353,
+      "accepted": 255,
+      "masked": 103,
+      "handoff_outside_reviewed_preference": 9
+    },
+    "strata": {
+      "source_reviewed_preference": {
+        "labelled": 353,
+        "accepted": 255
+      }
+    },
+    "selected_operations": {
+      "SEARCH": {
+        "selected": 62,
+        "accepted": 62
+      },
+      "READ": {
+        "selected": 231,
+        "accepted": 142
+      },
+      "HANDOFF": {
+        "selected": 60,
+        "accepted": 51
+      }
+    },
+    "families": 16,
+    "family_macro_acceptance": 0.746664859985231,
+    "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+  },
+  "compute": {
+    "wall_seconds": 154.4484095191583,
+    "cpu_seconds": 239.322593004,
+    "runs": 1,
+    "forwards": 456,
+    "sequence_rows": 456,
+    "input_tokens": 1800795,
+    "state_tokenizations": 456,
+    "state_tokens": 1615783,
+    "peak_rss_kib": 2764856,
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+  },
+  "ledger_phase_matches_compute": true,
+  "precision": "FP16 saved by standard SDK, reloaded float32. In-memory diagnostics used float32 weights before save. Difference may include reload execution path; no precision-only causal claim.",
+  "checkpoint_selection": "Unchanged predetermined final207",
+  "scope": "Native action-preference validation only; no Host task gain claimed.",
+  "comparison_compute": {
+    "phase": "host_intent_t0_exported_comparison_v1",
+    "wall_seconds": 1.044483283534646,
+    "cpu_seconds": 1.044368221,
+    "model_calls": 0,
+    "ledger_recorded": true
+  },
+  "next": "registered64 ordinary-tool dev evaluation"
+}
