@@ -1,64 +1,65 @@
-# CURRENT 2026-10-20: fixed_context64 RUNNING; T0seed0 tool64 CLOSED
+# CURRENT 2026-10-20: one-update mixed pipeline probe RUNNING
 
-ACTIVE MODEL JOB PID1036675 / exec94632 / frozen63603feb,
-runs/e1-fixed-context-dev-v1/driver.json,64dev positions, fixed_context query_only+rich.
-Snapshot 16/64 closed; revalidate actualPID/driver andpollsamehandle.
-No second model job or offline cost settlement while it lives.
-PID817340 gone / exec7553 exit0.
-Tool run t0-laya-dev-seed0-v1 COMPLETED_WITH_FAILURES64:57complete/7failed(4length/3format),
-147HTTP407486known=charged/newunknown0,embedding0; no old position replay.
-All64 source-author answers reviewed:38C/4Q/15W/7F; query_only17C/3Q/6W/6F,rich21C/1Q/9W/1F.
-Rules64:38C/9Q/11W/6F,182HTTP515477tokens. Same full-task count, not equivalence/gain.
-Paired33both/5rules-only/5laya-only/21neither.16group bootstrap overalldelta0,95%[-.09375,.109375].
-No query_structure generation/delivery forLaya; actual semantic record snapshots separate.
-Native320forwards/1185927tokens,1model load. Wholewall1372.767s vsrules1382.117s; messageCPU
-262.933s vs96.191s. Generation-token reduction alone is not netefficiency improvement.
+ACTIVE MODEL JOB PID1380577 / exec48123 / frozen-c6b1f3bd,
+fitting/mixed-pipeline-probe-v1/run.json.6train/6dev selected actual examples,1update,
+native/fullencoder/shared,float32,gradient checkpointing,micro2/accum8,physicalGPUs2/3.
+This is only a mixed-task forward/backward/metrics/serialization diagnostic, NOT mainT1fitting.
+No initialdev, finaldev6; throwaway weights. After terminal inspect counters/probes/checkpoint,
+then run persisted mixed dev6 validation. RevalidatePID/driver; pollsamehandle; never restart ontimeout.
+No second model job or offline budget settlement while active.
 
-Runtime audit320actual sharedinputs exact,max8913tokens,allfinite/no truncation;85fullpackets
-match actual ToolMessages,max1791<=limits; no post-return evidence drops.2documented semantic_view
-current->frozen_snapshot metadata transitions, all other fields unchanged; initial audit assumption corrected,
-not runtime outputs. partial_evidence/with_prior/rich really forwarded ownprefetchref and reopenedroom,
-but also read irrelevant projector/setupquery; functional reuse, not optimality/savings proof.
-3layer-review cases in data/t0-laya-dev-layer-review-prefix-v1.json:2visibleupdates omitted;1Host
-promoted delivered plan/suggestion into completed action/intention. Do not turn these dev cases into train.
+C0fixed_context run CLOSED64: PID1036675 gone/exec94632exit0,62complete/2lengthfail.
+All64 author reviews46C/5Q/11W/2F; query_only24C,rich22C.139HTTP368599known=charged,
+newunknown0,0nativeforward/load,77deliveries/11empty/2enumrejections,0querysemanticmutations.
+Wholewall1110.909s,messageCPU88.018s.77packet audit,max2026tokens,no drops/overlimit.
+Four documented current->frozen_snapshot status changes only; contents/versions unchanged.
+SELECTED C0=fixed_context by registered fullCORRECT criterion(46 vs rules38).
+Future config configs/host-intent-retrieval-v3-selected-fixed-context.json,v2 uses newsource.
+Initial E1pilot selected128positions/all3arms192,16groups; not finalrecipe or reserved confirmation.
+T0C1 remains38C: selectedC0-C1 paired36both/10C0only/2C1only/16neither.
+C1-C0=-.125,groupbootstrap95%[-.21875,-.046875]; bothinterfacesC1worse. No positiveJevclaim.
 
-ACTIVE dispatch: e1-fixed-context-dev-dispatch-v1.json, frozen63603feb,64dev positions,
-existing HTTPenv, policyfixed_context, query_only+rich, JSON-action, ownbanks, sameHost/budget.
-Plan data/manifests/host-intent-retrieval-v3-e1-development-protocol-v1.json registered before thisarm.
-Select strongerC0 by fullCORRECT includingfailures, tiesgenerationtokens thenmessagewall; reportboth.
-Initial E1development pilot, not finalJev/three-seed/new-reserved confirmation. Started actualexecutor,
-first program completions do not establish taskquality or selectC0.
-Always revalidate actualPID/driver andpollsamehandle. No second modeljob or offline settlement whilelive.
+IMPORTANT constraint correction: old63603feb enum-error formatter generated SHA presentation
+fingerprints. Not file checksum gates, but earlier blanket no-fingerprint claims were incomplete.
+Historical receipts unchanged. New c0a55538+ code disables fingerprints in functional retrieval
+profile while preserving real argumentvalidation/4096bytecap/permissions.3tests patched SHA
+functions to fail through actual scripted Host preparation/execution and passed. Legacy SHA-check
+ tests NOT run. Future Host jobs must use NEW frozen source, not63603feb. Other legacy profiles
+unchanged. See feedback-no-fingerprints manifest; no substitute fingerprint checks added.
+
+Mixed-task code: uniform shuffled row passes unchanged;0.6/.2/.2 are LOSS masses perfullpass,
+not sampling quotas. Component/family/event normalization; actual task/component draws andtokens
+recorded; metrics separated by task/component.13puretests/static/toolsboundaryPASS.
+Integration inputs T0+FollowIR ONLY:3703train/3076labelled,805dev/702labelled;4508publicinputs/gold
+unchanged,max9723/8378,no truncation,SDKalllabelleditems accepted,group splits preserved.
+NOT the expandedT1 corpus. NewT1operation collection/labels stillpending.
 
 Originalledger ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
-All offline-review-settlement-v1..v8 SETTLED. v8=5measuredphases11.273785CPU plus1audit-failure
-commandwall3.777963894 with explicit CPUmissing. Old rawfalse flags never authorize rebilling.
-Untimed author/tests/commands unmeasured, notzero. All actual model costs already in originalledger.
+All offline-review-settlement-v1..v9 SETTLED; v9=6phases99.808229CPU. Rawoldfalse flags doNOT
+permit rebilling. Untimed author/tests/commands remainunmeasured,notzero. Probe settlesowncost at exit.
 
-T0seed0 fit c0770e49 COMPLETED207:3312rows/16457101trainingtokens. Finalcheckpoint under
+T0seed0 fit c0770e49 COMPLETE207,3312rows/16457101trainingtokens; finalcheckpoint under
 fitting/t0-native-shared-seed0-v1/checkpoint. Initial/mid/finaldev152/241/255of353;
-macro.435331/.707956/.746665. Finaltrain1413/1649,macro.874632; encoder/head probes changed.
-Trainingwall4042.812391/CPU6993.788020. Seeds1/2NOT_STARTED.
-SDKsaves170F16tensors, loadsFP32. Exported devvalidation e1df7ede COMPLETE456,PID797851gone/
-exec35013exit0,455choices same; changedrow189 bothpreferred. Same255/353. Cost154.448wall/
-239.323CPU,456forwards/1800795tokens, alreadyrecorded; comparisonCPU1.044368 settledv7.
+macro.435331/.707956/.746665. Finaltrain1413/1649,macro.874632; encoder/headprobeschanged.
+Fit4042.812wall/6993.788CPU. Seeds1/2NOT_STARTED. SDKsavesF16/loadsF32; persisteddev456 passed,
+455choices same,changedrow189 bothpreferred; same255/353. Allcostsalreadyrecorded.
+T0Laya tool64 closed57complete/7fail,38C/4Q/15W/7F,147HTTP407486tokens,320nativeforwards/
+1185927tokens/1load. Wholewall1372.767s,messageCPU262.933s. Rawoutputs/firstfailures retained.
+Runtime audit320sharedinputs,max8913,85packetsmax1791; actualknownref1withpriorrich but redundantreads.
 
-T0data frozen2276train/1649labelled64groups;456dev/353labelled16groups. Genviewreviews-v2 only,
-unsupported2024 positives withdrawn. All384oldcollection tasks reviewed (main272/dev64/gen48),
-source-author exploratory, not independentholdout; rawresults/firstfailures preserved.
-FollowIR auxiliary1427train/349dev,965/241groups,max747/644tokens,no truncation.11row spotreview
-9supported/2qualified, factuality not proved by relevance. Publishedlabels unchanged.
-Workinghead supports single actualquestion IDs and instruction_applicability train/eval; pure/stub
-SDK/CLI tests andstatic/boundariesPASS; no actual auxiliary model run or mixedT1 fitting yet.
-T1 inputs128train/32dev primarygroups, new64/16groups228/52positions. Use t1-sources-v1/new-histories
-fornewcollection; all oldT0inputs retained in full-histories. Newpools/requests/labels stillneedreview.
-T1mix/sampling/budget pending. Inheritedboundaries retained,000503excluded,2Wiki license notinvented.
+T0data frozen2276train/1649labelled64groups;456dev/353labelled16groups. Genviewreviews-v2only;
+unsupported2024 positives withdrawn. All384oldcollection tasks+64Laya+64fixed reviewed; source-author,
+not independentholdout. FollowIR1427/349 rows,965/241groups;11rowspotreview9supported/2qualified,
+factuality not established by relevance. Publishedlabels unchanged.
+T1 inputs128train/32dev primarygroups,new64/16groups228/52positions. Use t1-sources-v1/new-histories
+fornewcollection; oldT0inputs retained. Allnewpools/requests needreview. No newT1operationgold.
+Inheritedboundaries retained,000503excluded,2Wiki license notinvented. Finalmix budget pending labels.
 
 NativeE0 0/24, shared7860 parser permission PENDING; no service restart.
-NoSHA/checksum/contentfingerprints/subagents/newservice/secondledger/remotepublication.
+NoSHA/checksum/contentfingerprints in new retrieval path; no subagents/newservice/secondledger/remote.
 FullT0/T1/T2,seeds0/1/2,E1/E2/E3,E4InstructIR/LongMemEval451images/Mem2ActGivenTool400,
 E5workloads/additionalHost remain. GoalACTIVE, notcomplete/blocked.
-All shortartifactpaths under artifacts/host-intent-retrieval-v3; older notes superseded.
+Shortartifactpaths under artifacts/host-intent-retrieval-v3; historicalnotes below superseded.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 
