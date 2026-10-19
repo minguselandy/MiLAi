@@ -9,7 +9,7 @@ from milai_lab.harness.artifact_io import read_json, write_json
 
 
 def project_case(
-    sample: dict[str, Any], case: dict[str, Any],
+    sample: dict[str, Any], case: dict[str, Any], *, split: str = "train",
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     turns = [((segment["segment_index"], i), turn)
              for segment in sorted(sample["conversations"], key=lambda s: s["segment_index"])
@@ -42,9 +42,9 @@ def project_case(
                 "support_sets": cut["support_sets"], "through": list(position)}
         previous = position
     identity = "memops_" + case["family"]
-    history = {"id": identity, "source_family": identity, "split": "train",
+    history = {"id": identity, "source_family": identity, "split": split,
                "task_count": len(steps), "steps": steps}
-    labels = {"family": identity, "split": "train", "sources": originals,
+    labels = {"family": identity, "split": split, "sources": originals,
               "offline_review": {"steps": contexts,
                   "status": "author-reviewed source-task sufficiency, not operation gold",
                   "source_file": case["file"]}}
@@ -55,14 +55,17 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("review", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--split", choices=("train", "dev", "test"), default="train",
+                        help="Preserve the declared source-family split in every projected row")
     args = parser.parse_args()
     review = read_json(args.review)
     histories, labels = [], []
     for case in review["cases"]:
         for assignment in review["family_assignments"]:
-            if assignment[case["family"]] != "train":
-                raise ValueError("Only jointly assigned training families enter this preparation")
-        history, label = project_case(read_json(Path(review["source_root"]) / case["file"]), case)
+            if assignment[case["family"]] != args.split:
+                raise ValueError("Source family split differs from the declared preparation split")
+        history, label = project_case(read_json(Path(review["source_root"]) / case["file"]), case,
+                                      split=args.split)
         histories.append(history)
         labels.append(label)
     args.output.mkdir(parents=True, exist_ok=False)

@@ -1,19 +1,25 @@
 import importlib.util
 import json
+import sys
 from pathlib import Path
 
 import pytest
 
 
-def project():
+def module():
     spec = importlib.util.spec_from_file_location("memops_control", Path(__file__).parents[2]
         / "tools/prepare_memops_control_histories.py")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
-    return module.project_case
+    return module
 
 
-def test_chronological_prefix_keeps_roles_without_future_reply_or_offline_labels():
+def project():
+    return module().project_case
+
+
+@pytest.mark.parametrize("split", ["train", "dev", "test"])
+def test_chronological_prefix_keeps_roles_without_future_reply_or_offline_labels(split):
     sample = {"target_fact": "GOLD_TARGET", "operations": [{"new_value": "GOLD_VALUE"}],
         "conversations": [
             {"segment_index": 2, "dialogue": [
@@ -25,7 +31,8 @@ def test_chronological_prefix_keeps_roles_without_future_reply_or_offline_labels
     case = {"family": "Example", "file": "example.json", "query": "What is established?",
         "cuts": [{"through": [1, 1], "answer": "OFFLINE_1", "support_sets": [["s1t1"]]},
                  {"through": [2, 1], "answer": "OFFLINE_2", "support_sets": [["s2t1"]]}]}
-    history, labels = project()(sample, case)
+    history, labels = project()(sample, case, split=split)
+    assert history["split"] == labels["split"] == split
     initial, repeat, changed, _ = history["steps"]
     assert len(initial["incoming_sources"]) == 1 and repeat["incoming_sources"] == []
     arrived = changed["incoming_sources"]
@@ -43,3 +50,21 @@ def test_nonadvancing_or_assistant_cut_is_not_a_new_user_arrival():
         {"role": "assistant", "content": "A suggestion."}]}]}
     with pytest.raises(ValueError, match="actual user turn"):
         project()(sample, {"cuts": [{"through": [1, 1]}]})
+
+
+@pytest.mark.parametrize("requested,assignments", [
+    ("train", [{"Example": "dev"}, {"Example": "dev"}]),
+    ("dev", [{"Example": "dev"}, {"Example": "test"}]),
+])
+def test_mismatched_split_stops_before_source_read_or_output(
+    tmp_path, monkeypatch, requested, assignments,
+):
+    review = tmp_path / "review.json"
+    review.write_text(json.dumps({"source_root": str(tmp_path / "unread-sources"),
+        "cases": [{"family": "Example", "file": "must-not-open.json"}],
+        "family_assignments": assignments}))
+    output = tmp_path / "output"
+    monkeypatch.setattr(sys, "argv", ["prepare", str(review), str(output), "--split", requested])
+    with pytest.raises(ValueError, match="Source family split differs"):
+        module().main()
+    assert not output.exists()

@@ -105,13 +105,14 @@ def main() -> None:
                     run["completed"].append(row)
                     write_json(args.output / "driver.json", run)
                     print(json.dumps(row, ensure_ascii=False), flush=True)
-                    known_length_failure = (result.get("error") in {
+                    known_closed_failure = (result.get("error") in {
                             "VLLM_CHAT_TRUNCATED",
-                            "Finite decision input exceeds declared complete-input capacity"}
+                            "Finite decision input exceeds declared complete-input capacity",
+                            "FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID"}
                         and all(result["budget_after"][kind]["unknown_usage"]
                                 == result["budget_before"][kind]["unknown_usage"]
                                 for kind in ("generation", "embedding")))
-                    if result["status"] != "COMPLETED" and not known_length_failure:
+                    if result["status"] != "COMPLETED" and not known_closed_failure:
                         raise RuntimeError("First Host failure retained; inspect before a new run")
         run["status"] = ("COMPLETED_WITH_FAILURES" if any(r["status"] != "COMPLETED"
                          for r in run["completed"]) else "COMPLETED")

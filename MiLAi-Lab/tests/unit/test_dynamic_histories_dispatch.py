@@ -40,6 +40,8 @@ def test_projection_preserves_source_sessions_roles_and_unknown_dates():
     ("VLLM_CHAT_TRUNCATED", 0, True),
     ("Finite decision input exceeds declared complete-input capacity", 0, True),
     ("Finite decision input exceeds declared complete-input capacity", 1, False),
+    ("FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID", 0, True),
+    ("FUNCTIONAL_CONTINUATION_RESOLUTION_SCHEMA_INVALID", 1, False),
     ("Unexpected execution failure", 0, False),
 ])
 def test_continuation_preserves_failed_prefix_and_runs_only_new_messages(

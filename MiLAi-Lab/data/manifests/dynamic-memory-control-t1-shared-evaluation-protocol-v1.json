@@ -1,0 +1,70 @@
+{
+  "version": "dynamic-memory-control-t1-shared-evaluation-protocol-v1",
+  "status": "PREPARED_NOT_STARTED",
+  "runtime_source": "0acc4b9a",
+  "checkpoints": "t1-fitting-v2 original_shared and broader_shared fixed final96; both COMPLETED96 required",
+  "policies": {
+    "matched_dev": [
+      "original_shared",
+      "broader_shared"
+    ],
+    "external_dev_simple": [
+      "fixed_context4",
+      "rules_context4_incremental",
+      "generative_shared"
+    ],
+    "own_train": [
+      "broader_shared"
+    ]
+  },
+  "positions": {
+    "matched_dev_per_arm": 80,
+    "external_dev_baselines_per_arm": 48,
+    "own_train": 72,
+    "total": 376
+  },
+  "independent_family_units": {
+    "original_dev": 8,
+    "external_dev": 8,
+    "own_train_backgrounds": 12
+  },
+  "sources": {
+    "matched_dev": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-evaluation-prepared-v1/matched-dev-histories.json",
+    "external_dev": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/memops-control-dev-v1/histories.json",
+    "own_train": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/t1-evaluation-prepared-v1/own-train-histories.json"
+  },
+  "configs": {
+    "original": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/configs/dynamic-memory-operation-t1-original-shared-evaluation-v1.json",
+    "broader": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/configs/dynamic-memory-operation-t1-broader-shared-evaluation-v1.json",
+    "baselines": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/configs/dynamic-memory-operation-memops-dev-baselines-v1.json",
+    "own_train": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/configs/dynamic-memory-operation-t1-broader-shared-own-train-v1.json"
+  },
+  "shared_capabilities": {
+    "reader_material_tokens": 8192,
+    "native_state_capacity": 12288,
+    "head_max_len": 2048,
+    "source_top_k": 20,
+    "additional_reads": 8,
+    "evidence_queries": 2,
+    "control_steps": 8,
+    "view_capacity": 1,
+    "view_policy": "incremental",
+    "source_projection": "shared for native and generative; no source omission"
+  },
+  "capacity_admission": "Source-only external241states all shared <=8386tokens. Actual generated/learned prefixes may be longer and remain subject to complete-input refusal; no trimming or failed-position retry.",
+  "analysis_plan": [
+    "Separate original and external development task outcomes, source/temporal/scope errors, early/empty HANDOFF, view rejection, and actual view adequacy.",
+    "Report actual generation/embedding, native forward/input/load work and end-to-end per-message wall time. Lower generation count alone is not efficiency.",
+    "Compare the two learned arms on identical source histories under independent evolution; account for stochastic classifier/Writer/Reader output, not same-before causality.",
+    "Report representative source-supported reflection examples without requiring every sentence of an authored answer. Unsupported additions, unknown-as-false and planned-as-completed remain distinct errors.",
+    "Own-train results diagnose visited states and cannot be called heldout generalization. No development labels are added to training.",
+    "Source families cluster the uncertainty; repeats, prefixes and model calls do not create new independent units."
+  ],
+  "gates": "After V7 actual terminal review. Checkpoint metadata shared/final96 checked before calls. One serial queue, existing model services and original ledger, no automatic retry.",
+  "model_calls_by_preparation": 0,
+  "limitations": [
+    "This is still a36training-family pilot, not the planned wider cohort or protected confirmation.",
+    "Only seed0here; all declared confirmation seeds and protected evaluation remain separate.",
+    "The old fixed-context results on original8dev families are descriptive references, not newly matched baseline replicates."
+  ]
+}
