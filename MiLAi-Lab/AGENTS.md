@@ -1,3 +1,24 @@
+# CURRENT UPDATE: 2026-10-19 — full goal remains ACTIVE
+
+V4 coordinator1958241 and finalchild2903731 are terminal/absent; all13 jobs exited0.
+First responses, length failures, generated views and costs remain unchanged.
+Matched T2 QA: original-only continuation27correct/4wrong/1length; aggregate23correct/5wrong/
+2identity qualifications/2length, each32 on8exposed dev families. No aggregation advantage.
+M2 QA: mechanical22correct/7wrong/1incomplete/2length; linear22correct/8wrong/2length.
+Original full-native reference19/32 remains its first run. No semantic/native superiority claim.
+Sandbox16 reviewed:3correct requirements answers,1incomplete,5length,3missing live observations,
+4unfulfilled actions. All four banks have zero reservations. Do not call failure disclosure success.
+Generic Host fix retains existing read-only application queries after HANDOFF when declared
+read_goal requires live_business. Writes and shared read/query allowance retain existing boundaries.
+Normal Host regression covers absent/source/live/mixed goals; old outputs are never repaired.
+Full Host run396passed/1stale empty-field assertion; reproduced on frozen2cfb6dcc, then
+assert actual original delivery instead. Focused7passed; adapter/view20passed; Ruff/mypy/boundaries pass.
+Common-before adapter and12branch input checks ready; next serial queue is4slot36positions
+then common-before12generator+12Reader. Freeze adapter before launch; never restart old positions.
+V4 M3 workloads and both MemOps36position intakes are closed/exported but not yet fully reviewed.
+T1 fitting, protected confirmation, seeds0/1/2, lifecycle and new-version sandbox remain incomplete.
+Use the latest actual dispatcher file and process state; older live/NOT_RUN blocks below are history.
+
 # CURRENT: dynamic memory control v2 ACTIVE — 2026-10-18
 
 Execute docs/MILAI_DYNAMIC_MEMORY_CONTROL_DEVELOPMENT_EXPERIMENT_PLAN_20261018_v2.md.

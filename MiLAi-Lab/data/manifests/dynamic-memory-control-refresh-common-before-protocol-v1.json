@@ -1,6 +1,6 @@
 {
   "version": "dynamic-memory-control-refresh-common-before-v1",
-  "status": "ACTUAL_BEFORE_PREPARED_ZERO_MODEL",
+  "status": "EXECUTION_ADAPTER_AND_INPUTS_READY_NOT_RUN",
   "cases": [
     {
       "family": "sealed_parcel",
@@ -52,7 +52,7 @@
     "generator": 12,
     "reader": 12
   },
-  "executor_runtime": "2b5c7fbc or exact frozen same query-structure executor; record exact source before execution",
+  "executor_runtime": "Freeze adapter commit before execution; shared query_structure.py unchanged from2b5c7fbc by direct source diff.",
   "intervention": "Each arm starts from a separate copy of the same actual cached view and visible source cut. Never replace the view with an authored ideal graph. All-available branches see the same original source records; rebuild omits prior interpretation, incremental retains it. Old-bindings-only deliberately restricts source evidence and is a weak diagnostic, not the sole baseline.",
   "reader": "Same original question/time and view-only shared packet; no oracle answer or hand-repaired text. Same generator/Reader settings and original ledger.",
   "limits": [
@@ -62,5 +62,67 @@
     "Old-bindings-only is not an authorized production freshness filter.",
     "Original T2 first outcomes and bank remain untouched."
   ],
-  "queue": "Prepared after V4 at a reviewed idle boundary; no model worker started."
+  "queue": "After four-slot followup in the next serial coordinator, once V4 is verified terminal; no model execution by preparation.",
+  "tool": "tools/run_memory_refresh_interventions.py",
+  "config": "configs/dynamic-memory-operation-m3-every-rebuild-v1.json",
+  "admission": {
+    "status": "INPUT_CAPTURE_ONLY_ZERO_MODEL",
+    "branches": 12,
+    "records": [
+      {
+        "family": "sealed_parcel",
+        "all_sources": 11,
+        "old_sources": 8,
+        "all_input_source_values_equal": true,
+        "original_prior_preserved": true,
+        "prompt_tokens": {
+          "rebuild_all_available": 2585,
+          "incremental_all_available": 2836,
+          "incremental_old_bindings_only": 2356
+        }
+      },
+      {
+        "family": "publication_revision",
+        "all_sources": 8,
+        "old_sources": 6,
+        "all_input_source_values_equal": true,
+        "original_prior_preserved": true,
+        "prompt_tokens": {
+          "rebuild_all_available": 2118,
+          "incremental_all_available": 2690,
+          "incremental_old_bindings_only": 2423
+        }
+      },
+      {
+        "family": "measurement_replacement",
+        "all_sources": 6,
+        "old_sources": 3,
+        "all_input_source_values_equal": true,
+        "original_prior_preserved": true,
+        "prompt_tokens": {
+          "rebuild_all_available": 1839,
+          "incremental_all_available": 2198,
+          "incremental_old_bindings_only": 1694
+        }
+      },
+      {
+        "family": "delegation_boundary",
+        "all_sources": 6,
+        "old_sources": 3,
+        "all_input_source_values_equal": true,
+        "original_prior_preserved": true,
+        "prompt_tokens": {
+          "rebuild_all_available": 1776,
+          "incremental_all_available": 2013,
+          "incremental_old_bindings_only": 1555
+        }
+      }
+    ],
+    "scope": "Real before snapshots and shared executor input construction; no mocked semantic response, no generated after state, no Reader. All actual generator inputs pass the same Host capacity check used by transport.",
+    "model_calls": 0,
+    "model_forwards": 0,
+    "prior_attempt": "v1 offline check called nonexistent response_format argument; failed before any model call, timing unmeasured."
+  },
+  "checks": "20real-Store/query-structure tests, Ruff, tool mypy and package/tools boundaries passed.",
+  "failure_contract": "Definite pre-write schema/referent rejection leaves actual prior cache untouched and gives Reader no new view. Generator transport/incomplete failures stop the job with raw response retained; Reader length failures are recorded without an invented answer. No generation retry or prior-view substitution."
 }

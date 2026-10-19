@@ -1,0 +1,259 @@
+{
+  "version": "dynamic-memory-control-sandbox-results-v1",
+  "status": "FIRST_OUTCOMES_REVIEWED_NEGATIVE",
+  "source_run": "artifacts/dynamic-memory-control/sandbox-reservation-v1",
+  "frozen_runtime": "0593c57c",
+  "positions": 16,
+  "independent_histories": 1,
+  "review": "Author review of source expectations, first responses, actual world and per-turn query traces; not independent or heldout review.",
+  "records": [
+    {
+      "policy": "fixed_context",
+      "step": "requirements",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/fixed_context/banks/4d7b93e2-ce53-4efe-915c-ecefce788a66/70acc17e-4377-4f95-b08d-bf739616706c-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/fixed_context/banks/4d7b93e2-ce53-4efe-915c-ecefce788a66/70acc17e-4377-4f95-b08d-bf739616706c-trace-0.jsonl",
+      "task_outcome": "correct",
+      "reason": "Quantity3, North warehouse gate2 and shockproof packing match source requirements.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "fixed_context",
+      "step": "reserve",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/fixed_context/banks/4d7b93e2-ce53-4efe-915c-ecefce788a66/d2ba5e94-1d45-415c-a8ca-69ec8423f14d-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/fixed_context/banks/4d7b93e2-ce53-4efe-915c-ecefce788a66/d2ba5e94-1d45-415c-a8ca-69ec8423f14d-trace-0.jsonl",
+      "task_outcome": "no_answer",
+      "reason": "First response truncated; receipt/status fallback is not task completion.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "fixed_context",
+      "step": "reopen-status",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/fixed_context/banks/4d7b93e2-ce53-4efe-915c-ecefce788a66/a8e8883b-771c-4c9e-8870-972735c66d6f-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/fixed_context/banks/4d7b93e2-ce53-4efe-915c-ecefce788a66/a8e8883b-771c-4c9e-8870-972735c66d6f-trace-0.jsonl",
+      "task_outcome": "failed_live_observation",
+      "reason": "No fresh application query in this turn. Requested parameters or old observations cannot establish actual reservation state.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "fixed_context",
+      "step": "continue-if-needed",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/fixed_context/banks/4d7b93e2-ce53-4efe-915c-ecefce788a66/d855abca-a10a-4926-8e4d-88c6c736d5d6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/fixed_context/banks/4d7b93e2-ce53-4efe-915c-ecefce788a66/d855abca-a10a-4926-8e4d-88c6c736d5d6-trace-0.jsonl",
+      "task_outcome": "unfulfilled_action",
+      "reason": "No reservation or label was created. Intention, truthful refusal and plan-not-registered reports do not fulfill the authorized task.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "rules",
+      "step": "requirements",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/rules/banks/58b5c7a9-0bb6-4443-91f7-9db47ef657ac/12d5e79a-6805-482e-b659-b090b6ffa0d6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/rules/banks/58b5c7a9-0bb6-4443-91f7-9db47ef657ac/12d5e79a-6805-482e-b659-b090b6ffa0d6-trace-0.jsonl",
+      "task_outcome": "correct",
+      "reason": "Quantity3, North warehouse gate2 and shockproof packing match source requirements.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "rules",
+      "step": "reserve",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/rules/banks/58b5c7a9-0bb6-4443-91f7-9db47ef657ac/69e68504-9fc8-4567-a84a-e2e46ad70f4c-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/rules/banks/58b5c7a9-0bb6-4443-91f7-9db47ef657ac/69e68504-9fc8-4567-a84a-e2e46ad70f4c-trace-0.jsonl",
+      "task_outcome": "unfulfilled_action",
+      "reason": "No reservation or label was created. Intention, truthful refusal and plan-not-registered reports do not fulfill the authorized task.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "rules",
+      "step": "reopen-status",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/rules/banks/58b5c7a9-0bb6-4443-91f7-9db47ef657ac/d307ef33-dae5-4970-9de3-2613a7775d11-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/rules/banks/58b5c7a9-0bb6-4443-91f7-9db47ef657ac/d307ef33-dae5-4970-9de3-2613a7775d11-trace-0.jsonl",
+      "task_outcome": "no_answer",
+      "reason": "First response truncated; receipt/status fallback is not task completion.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "rules",
+      "step": "continue-if-needed",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/rules/banks/58b5c7a9-0bb6-4443-91f7-9db47ef657ac/628e416e-f762-4db5-b7d8-c2685494fbe6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/rules/banks/58b5c7a9-0bb6-4443-91f7-9db47ef657ac/628e416e-f762-4db5-b7d8-c2685494fbe6-trace-0.jsonl",
+      "task_outcome": "unfulfilled_action",
+      "reason": "No reservation or label was created. Intention, truthful refusal and plan-not-registered reports do not fulfill the authorized task.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "laya",
+      "step": "requirements",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/laya/banks/91064401-0c01-4a8b-917f-1b8cf99fe621/3bba7396-5b5a-4635-a598-e2bc2320ece0-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/laya/banks/91064401-0c01-4a8b-917f-1b8cf99fe621/3bba7396-5b5a-4635-a598-e2bc2320ece0-trace-0.jsonl",
+      "task_outcome": "incomplete",
+      "reason": "Quantity and destination were available in sources but not delivered.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "laya",
+      "step": "reserve",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/laya/banks/91064401-0c01-4a8b-917f-1b8cf99fe621/445da17b-b1eb-46e5-bc3f-a150b9e500ec-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/laya/banks/91064401-0c01-4a8b-917f-1b8cf99fe621/445da17b-b1eb-46e5-bc3f-a150b9e500ec-trace-0.jsonl",
+      "task_outcome": "no_answer",
+      "reason": "First response truncated; receipt/status fallback is not task completion.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "laya",
+      "step": "reopen-status",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/laya/banks/91064401-0c01-4a8b-917f-1b8cf99fe621/463304d5-c1c9-4d15-9e1d-9c4a4318c3f6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/laya/banks/91064401-0c01-4a8b-917f-1b8cf99fe621/463304d5-c1c9-4d15-9e1d-9c4a4318c3f6-trace-0.jsonl",
+      "task_outcome": "failed_live_observation",
+      "reason": "No fresh application query in this turn. Requested parameters or old observations cannot establish actual reservation state.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "laya",
+      "step": "continue-if-needed",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/laya/banks/91064401-0c01-4a8b-917f-1b8cf99fe621/8d9c2a76-5ef5-44a5-af7c-f4b089060c45-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/laya/banks/91064401-0c01-4a8b-917f-1b8cf99fe621/8d9c2a76-5ef5-44a5-af7c-f4b089060c45-trace-0.jsonl",
+      "task_outcome": "no_answer",
+      "reason": "First response truncated; receipt/status fallback is not task completion.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "generative",
+      "step": "requirements",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/generative/banks/b742f63e-1b6a-47e7-ac08-1f9626e3731c/9c8f1183-6939-4db8-963f-c2911fea5864-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/generative/banks/b742f63e-1b6a-47e7-ac08-1f9626e3731c/9c8f1183-6939-4db8-963f-c2911fea5864-trace-0.jsonl",
+      "task_outcome": "correct",
+      "reason": "Quantity3, North warehouse gate2 and shockproof packing match source requirements.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "generative",
+      "step": "reserve",
+      "status": "FAILED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/generative/banks/b742f63e-1b6a-47e7-ac08-1f9626e3731c/e4759a67-c756-48ad-a1e2-da49e91d985e-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/generative/banks/b742f63e-1b6a-47e7-ac08-1f9626e3731c/e4759a67-c756-48ad-a1e2-da49e91d985e-trace-0.jsonl",
+      "task_outcome": "no_answer",
+      "reason": "First response truncated; receipt/status fallback is not task completion.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "generative",
+      "step": "reopen-status",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/generative/banks/b742f63e-1b6a-47e7-ac08-1f9626e3731c/55a3632c-c0ea-474c-88d1-edcbd894a6f6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/generative/banks/b742f63e-1b6a-47e7-ac08-1f9626e3731c/55a3632c-c0ea-474c-88d1-edcbd894a6f6-trace-0.jsonl",
+      "task_outcome": "failed_live_observation",
+      "reason": "No fresh application query in this turn. Requested parameters or old observations cannot establish actual reservation state.",
+      "reservations": 0,
+      "application_attempts": 0
+    },
+    {
+      "policy": "generative",
+      "step": "continue-if-needed",
+      "status": "COMPLETED",
+      "result_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/generative/banks/b742f63e-1b6a-47e7-ac08-1f9626e3731c/cefc5c59-a19b-4dcb-9f8d-3bae113683b6-result.json",
+      "trace_path": "/cra/memory/mx_memory/MiLAi-worktrees/jev-read-decisions-20261016/MiLAi-Lab/artifacts/dynamic-memory-control/sandbox-reservation-v1/generative/banks/b742f63e-1b6a-47e7-ac08-1f9626e3731c/cefc5c59-a19b-4dcb-9f8d-3bae113683b6-trace-0.jsonl",
+      "task_outcome": "unfulfilled_action",
+      "reason": "No reservation or label was created. Intention, truthful refusal and plan-not-registered reports do not fulfill the authorized task.",
+      "reservations": 0,
+      "application_attempts": 0
+    }
+  ],
+  "costs": {
+    "fixed_context": {
+      "attempted": 4,
+      "host_completed": 3,
+      "task_positions": 2,
+      "explicit_positions": 2,
+      "generation_known_tokens": 86608,
+      "generation_charged_tokens": 86608,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 0,
+      "embedding_charged_tokens": 0,
+      "embedding_unknown_usage": 0
+    },
+    "rules": {
+      "attempted": 4,
+      "host_completed": 3,
+      "task_positions": 2,
+      "explicit_positions": 2,
+      "generation_known_tokens": 78108,
+      "generation_charged_tokens": 78108,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 0,
+      "embedding_charged_tokens": 0,
+      "embedding_unknown_usage": 0
+    },
+    "laya": {
+      "attempted": 4,
+      "host_completed": 2,
+      "task_positions": 2,
+      "explicit_positions": 2,
+      "generation_known_tokens": 70720,
+      "generation_charged_tokens": 70720,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 0,
+      "embedding_charged_tokens": 0,
+      "embedding_unknown_usage": 0,
+      "dynamic_memory_laya_cpu_seconds": 149.23153700300463,
+      "dynamic_memory_laya_forwards": 7,
+      "dynamic_memory_laya_input_tokens": 18038,
+      "dynamic_memory_laya_sequence_rows": 7,
+      "dynamic_memory_laya_state_tokenizations": 7,
+      "dynamic_memory_laya_state_tokens": 16232,
+      "dynamic_memory_laya_wall_seconds": 41.648763664998114,
+      "dynamic_memory_laya_load_cpu_seconds": 15.836150103999898,
+      "dynamic_memory_laya_load_loads": 3,
+      "dynamic_memory_laya_load_wall_seconds": 13.157729121856391
+    },
+    "generative": {
+      "attempted": 4,
+      "host_completed": 3,
+      "task_positions": 2,
+      "explicit_positions": 2,
+      "generation_known_tokens": 85441,
+      "generation_charged_tokens": 85441,
+      "generation_unknown_usage": 0,
+      "embedding_known_tokens": 0,
+      "embedding_charged_tokens": 0,
+      "embedding_unknown_usage": 0
+    }
+  },
+  "findings": [
+    "All four arms ended with zero reservations and zero label creation. None completed the business workflow.",
+    "Requirements-only answers were correct for fixed_context, rules and generative; laya omitted available quantity and destination.",
+    "Five original length failures remain failures; no original position is retried.",
+    "HANDOFF incorrectly removed read-only application queries for declared live_business goals; a shared Host fix is mechanically verified separately.",
+    "Request planning before retrieval produced guessed parameters, empty operation lists or unregistered continuation plans. These are separate unresolved problems; the tool-catalog fix grants no write authority and does not repair plans."
+  ],
+  "limits": [
+    "One authored sandbox history and four independently evolving banks; no method advantage or generalization inference.",
+    "Memory-view full graph validity has not been certified.",
+    "New-version real Host validation remains required."
+  ]
+}

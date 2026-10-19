@@ -3314,10 +3314,11 @@ def message(
                 if (isinstance(memory, FunctionalEditMemory) and memory.control_handed_off
                         and mode is not None and mode["business_action_request"] == "none"
                         and not mode["allow_forgetting"]):
-                    # HANDOFF completes controlled retrieval. A pure Reader uses
-                    # its delivered packet; business/forget work retains its tools.
-                    names -= set(memory.read_tool_names) | {
-                        "get_reservation", "get_document_status"}
+                    # HANDOFF completes memory retrieval, not a declared live
+                    # application observation. Both still share the read allowance.
+                    names -= set(memory.read_tool_names)
+                    if "live_business" not in (mode.get("read_goal") or {}).get("evidence", []):
+                        names -= {"get_reservation", "get_document_status"}
                 if memory.max_evidence_queries is not None:
                     allowance = memory.read_allowance(config)
                     if allowance["reads_remaining"] == 0:

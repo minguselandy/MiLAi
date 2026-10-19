@@ -92,6 +92,7 @@ def prepared(
     evidence_policy: str = "legacy",
     dependency_reading: bool = False,
     source_top_k: int = 20,
+    memory_control: dict[str, Any] | None = None,
 ) -> Path:
     tokenizer = Tokenizer(models.WordLevel({"[UNK]": 0}, unk_token="[UNK]"))
     tokenizer.pre_tokenizer = pre_tokenizers.Whitespace()
@@ -199,6 +200,8 @@ def prepared(
         settings.update(
             source_access="independent_v1", source_top_k=source_top_k, semantic_top_k=10,
             max_evidence_queries=2, maintenance_mode="event_delta_v1")
+    if memory_control is not None:
+        settings["memory_control"] = memory_control
     if edit_features is not None:
         settings["edit_features"] = edit_features
     if maintenance_recipe is not None:
@@ -7169,7 +7172,7 @@ def test_dynamic_host_reads_unformed_source_and_explicitly_consolidates_once(
         if not names:
             frame = json.loads(wire["messages"][-1]["content"])
             delivery = frame["delivery"]
-            assert "change_candidates" in delivery
+            assert any(row["text"] == original for row in delivery["evidence"])
             if not state["consolidating"]:
                 return {"role": "assistant", "content": '{"creates":[],"records":{}}'}
             evidence = next(row["id"] for row in delivery["evidence"] if row["text"] == original)
@@ -7216,6 +7219,56 @@ def test_dynamic_host_reads_unformed_source_and_explicitly_consolidates_once(
     count = len(wires)
     repeated = memory_operations.run(root, **arguments)
     assert repeated["status"] == "completed" and len(wires) == count
+
+
+@pytest.mark.parametrize("evidence", [None, ["original_source"], ["live_business"],
+                                      ["original_source", "live_business"]])
+def test_memory_handoff_preserves_declared_live_business_queries(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch, evidence: list[str] | None,
+) -> None:
+    root = prepared(tmp_path, native=True, json_scope_requests=True, direct_response=True,
+        declaration_thinking="disabled", phase_thinking=True,
+        actual_capabilities=True, dynamic_memory=True,
+        memory_method="milai_edit_m_v1",
+        memory_profile="unified_v1", maintenance_recipe="single_pass",
+        edit_interface_version="I2", evidence_policy="question_pack_v1", memory_view_mode="staged",
+        memory_control={"policy": "fixed", "reads": 1, "max_control_steps": 4})
+    needs_live = evidence is not None and "live_business" in evidence
+    query = "Inspect the requested evidence for the amber pack without changing anything."
+
+    def reply(wire: dict[str, Any], ordinal: int) -> dict[str, Any]:
+        if ordinal == 1:
+            return {"role": "assistant", "content": json.dumps({
+                "memory_requests": [], "allow_forgetting": False,
+                "business_action_request": "none", "application_continuation_request": "none",
+                "response_scope": "substantive", "forbidden_operations": [
+                    "business_mutation", "memory_write"],
+                "read_goal": {"purpose": query, "evidence": evidence} if evidence else None})}
+        names = {entry["function"]["name"] for entry in wire.get("tools", [])}
+        assert not set(functional.BUSINESS_MUTATIONS).intersection(names)
+        assert not {"search_memory", "read_source", "read_memory", "save_memory",
+                    "update_memory", "forget_memory"}.intersection(names)
+        # SEARCH and the live query share the two-query allowance. Once spent,
+        # HANDOFF must not reopen any evidence tool.
+        assert ("get_reservation" in names) is (needs_live and ordinal == 2)
+        if needs_live and ordinal == 2:
+            return native_call("get_reservation", "observe", item_key="amber pack")
+        if needs_live:
+            assert actual_tool_receipt(wire)["receipt"]["status"] == "not_found"
+        return {"role": "assistant", "content": "No reservation observed."}
+
+    wires = scripted(monkeypatch, reply, native=True)
+    result = functional.message(root, bank="handoff-query", owner="alice", session="query",
+                                message_id="inspect", content=query)
+    assert result["status"] == "COMPLETED", result.get("error")
+    assert len(wires) == (3 if needs_live else 2)
+    journal = list(result["world"]["journal"].values())
+    assert sum(row["name"] == "get_reservation" and row["executed"] for row in journal) == (
+        1 if needs_live else 0)
+    assert not any(row["executed"] and row["name"] in functional.BUSINESS_MUTATIONS
+                   for row in journal)
+    assert result["world"]["world"]["reservations"] == []
+    assert result["records"] == []
 
 
 @pytest.mark.parametrize("unknown_tag", [False, True])
