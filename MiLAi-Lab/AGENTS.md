@@ -6,9 +6,13 @@ Queue: lifecycle16(method3f3c10d3) -> original-shared25unstarted -> broader80 ->
 broader own-train72. Evaluation method0acc4b9a, all dispatcher17d6f621.337newpositions, no old retry.
 30measured offline phases settled ONCE at idle beforeV10; original model/unknown counters unchanged.
 NEVER settle new offline work while this or another model child lives.
-First6fixed lifecycle positions closed: two distinct commits, identifierrevision2correction, independent
-preference no_change; correct recall/reopen/history answers. Actual stored-history tool path and final
-forget/visibility fullstate still need review; do not call complete from answers alone.
+Fixed lifecycle8nowclosed; rules stillrunning. Two distinct commits and identifierrevision2correction.
+History answer oldvalue correct but only current snapshots read, no historical_exact_revision access.
+Forget third attempt revoked targetrecord and9Sources (3explicit+6derived); postforgetquery says BOTH
+identifier and independent language preference unavailable. Control trace onlySEARCH, no openedviews.
+Next: copied-final-fixed-Store SDK audit distinguishes actual preservation from retrieval failure;
+inspect search operation result before any fix. Partial evidence lifecycle-fixed-partial-review-v1.
+Do not count lifecycle complete from the visibility receipt or answer alone.
 
 45source-only cohorts now compiled1361labels:1081acquire/280handoff.11107candidate matches and1035source
 identity matches on diagnostic Storecopies, original input/state unchanged, no ideal view/teacher-copy.
