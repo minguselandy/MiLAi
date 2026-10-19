@@ -1,6 +1,10 @@
-# CURRENT 2026-10-20: T0seed0 tool64 CLOSED; fixed_context64 next
+# CURRENT 2026-10-20: fixed_context64 RUNNING; T0seed0 tool64 CLOSED
 
-No current model job at this snapshot. PID817340 gone / exec7553 exit0.
+ACTIVE MODEL JOB PID1036675 / exec94632 / frozen63603feb,
+runs/e1-fixed-context-dev-v1/driver.json,64dev positions, fixed_context query_only+rich.
+Snapshot 16/64 closed; revalidate actualPID/driver andpollsamehandle.
+No second model job or offline cost settlement while it lives.
+PID817340 gone / exec7553 exit0.
 Tool run t0-laya-dev-seed0-v1 COMPLETED_WITH_FAILURES64:57complete/7failed(4length/3format),
 147HTTP407486known=charged/newunknown0,embedding0; no old position replay.
 All64 source-author answers reviewed:38C/4Q/15W/7F; query_only17C/3Q/6W/6F,rich21C/1Q/9W/1F.
@@ -18,11 +22,12 @@ but also read irrelevant projector/setupquery; functional reuse, not optimality/
 3layer-review cases in data/t0-laya-dev-layer-review-prefix-v1.json:2visibleupdates omitted;1Host
 promoted delivered plan/suggestion into completed action/intention. Do not turn these dev cases into train.
 
-NEXT prepared model job: e1-fixed-context-dev-dispatch-v1.json, frozen63603feb,64dev positions,
+ACTIVE dispatch: e1-fixed-context-dev-dispatch-v1.json, frozen63603feb,64dev positions,
 existing HTTPenv, policyfixed_context, query_only+rich, JSON-action, ownbanks, sameHost/budget.
 Plan data/manifests/host-intent-retrieval-v3-e1-development-protocol-v1.json registered before thisarm.
 Select strongerC0 by fullCORRECT includingfailures, tiesgenerationtokens thenmessagewall; reportboth.
-Initial E1development pilot, not finalJev/three-seed/new-reserved confirmation. Dispatch notstarted yet.
+Initial E1development pilot, not finalJev/three-seed/new-reserved confirmation. Started actualexecutor,
+first program completions do not establish taskquality or selectC0.
 Always revalidate actualPID/driver andpollsamehandle. No second modeljob or offline settlement whilelive.
 
 Originalledger ONLY /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json.
