@@ -31,6 +31,8 @@ Main task reviews COMPLETE272/272:107CORRECT/59QUALIFIED/83WRONG/1UNFULFILLED/22
 Source-author exploratory training-collection review, not independent holdout. Full summary in
 data/manifests/host-intent-retrieval-v3-t0-task-review-full-v1.json. Raw outputs unchanged.
 Midpoint103 dev:241/353 accepted,macro0.707956,3HANDOFF outside reviewed preference.
+15/16families improve; stored-vs-original stays9/22, same-name only12->13/26. Remaining112
+nonpreferred choices:109READ/3HANDOFF. Read-only analysis at analysis/t0-seed0-midpoint-v1.json.
 Tool-eval plan registered64dev laya positions after final207; NOT_STARTED; native E0 stillpending.
 Concrete dispatch artifacts/.../t0-tool-eval-dispatch-v1.json uses frozen-63603feb; no job started.
 After fit terminal, inspect207final/checkpoint/parameterprobes, reconcile original ledger and pending-v6
@@ -57,7 +59,7 @@ max747/644 tokens,all literal inputs unchanged,no truncation,0modelcalls.3purete
 NOT mixed/fitted: NativeDecision currently expects next; task-aware auxiliary inference/scoring remains.
 Author spot review8randomgroups/11rows done:9topically supported (2explicit factuality-unverified),
 2qualified relevance boundaries; labelsunchanged, not independent or exhaustive. Sampleartifact underauxdir.
-7measured offlinephases now pending-v6 (14.432584CPU); failed tokenizer-root diagnostic wall5.83700721
+8measured offlinephases now pending-v6 (14.655381CPU); failed tokenizer-root diagnostic wall5.83700721
 known,CPUunmeasured. Do not settle while fitter lives. See followir-applicability manifest.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
