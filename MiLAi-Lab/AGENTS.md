@@ -1,25 +1,28 @@
-# LIVE UPDATE 2026-10-20: 994 labels, exact saved versions, same running collection
+# LIVE UPDATE 2026-10-20: main272 CLOSED; dev64 RUNNING
 
-Main PID3815344 / exec24523 / frozen8f7f2a18 RUNNING; snapshot196/272 closed, 9 failures.
-Revalidate driver and /proc; never duplicate/restart on observation timeout. No offline settlement while live.
-Closed prefix v6:1259 states,38 groups. Source reviews v9:152 requests; plus16 explicitly reviewed
-saved-version requests. Combined t0-reviewed-prefix-v9:994 labels,67 forced/177 ambiguous/21 held
-masks. Three held requests remain two A27 drifted scopes and C04 current_public_message conflict.
-All1259 inputs unchanged; prior1129 full rows equal.173 actual deliveries match final visible labels.
-Actual Laya tokenizer/shared projection audit: max8530 tokens under12288/head2048,zero truncation,
-zero forwards. No v3 weights trained; cohort and generative-view supervision still incomplete.
-Saved-version review uses real save/update receipts and read-only snapshots:103 labels/128 states;
-11 actually opened target bodies checked in full. Five first-version requests never opened target;
-no HANDOFF label there. Current-vs-first follows explicit request review, not evidence-keyword routing.
-Review script and data remain under ignored artifacts/.../data; no runtime code changed this turn.
-Source v9 also handles A05 assistant-only3D and60/90-day suggestion as assistant reports, not user facts.
-102 refresh operations in closed prefix:50 opened/49 budget rejections/3 view rejections.68 occurred
-when reviewed raw source proof was already sufficient:68 HTTP receipts,208428 known tokens.
-This is descriptive work after source sufficiency, not net counterfactual savings or answer correctness.
-Pending measured offline costs v3 references earlier v2. Both NOT settled; human/untimed work unknown,
-not zero. Continue remaining source reviews, then dev64/generative48 serially after main actually closes.
-Native E0 still0/24; existing7860 parser-change permission PENDING. No SHA/subagents/new services/second
-ledger/old-position retries or repair. Full goal ACTIVE. Historical counts below are superseded.
+ACTIVE model job: PID60366 / exec8258 / frozen8f7f2a18, runs/t0-main-dev-v2, 7/64 closed.
+Revalidate driver/proc; never duplicate/restart on observation timeout. NO offline settlement while dev lives.
+Main PID3815344/exec24523 is terminal, COMPLETED_WITH_FAILURES272:250 program completed/22 failed
+(21 length,1 JSON malformed).740HTTP/2516826 known=charged tokens/newunknown0/embedding0.
+Main302 executed retrievals/30 empty/303 attempts/1 tool rejection/0 query semantic mutations.
+These are process/cost counts, not full semantic correctness. Full closed export2079states/64groups,
+all raw gold empty, at data/t0-main-closed-v1. Remaining MuSiQue actual requests still need review.
+Latest reviewed subset: data/t0-reviewed-prefix-v13,1862states/58groups,1444labels;105 forced/282 ambiguous/
+31 held masks.233 source requests plus16 saved-version requests. Five scope requests held.
+Source preparation for all57 MemOps backgrounds is saved in data/source-notes-remaining-memops-v1.json.
+14 registered MuSiQue variants reviewed offline; new manifest records wrong entity/year/event/answer
+joins and historical-label ambiguity. Native question/gold unchanged; each tool subquestion reviewed.
+New offline proof_complete=false allows source progress but masks HANDOFF when only a partial proof
+is covered.3 actual states masked that way,9 have no reviewed proof. Six tests/Ruff/mypy/boundaries pass.
+All1862 inputs unchanged; prior1713 full rows equal;258 actual deliveries match final visible labels.
+Actual tokenizer audit: max8807 under12288/head2048,zero truncation/forwards. No v3 weights trained.
+Pending review-cost v2/v3/v4 phases SETTLED ONCE at verified main/dev idle, plus main driver CPU,
+closed cost audit and final export:23phases/1282.966784 CPU seconds. Settlement manifest authoritative;
+raw measurement files may retain initial ledger_recorded=false. Do NOT settle them again.
+Native E0 still0/24; existing7860 parser-change permission PENDING. Generative train48 NOT_STARTED,
+prepared next-collections-v1.json; launch only after dev terminal. No SHA/subagents/new services/second
+ledger/old-position retries or repair. Full M1–M6/T0–T2 goal ACTIVE. Historical notes below superseded.
+All artifact data paths above are under artifacts/host-intent-retrieval-v3/.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 

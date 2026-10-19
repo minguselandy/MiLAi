@@ -48,11 +48,13 @@ def original_witness_preferences(
     row: dict[str, Any], *, proofs: list[set[str]], sources: dict[str, dict[str, Any]],
     return_key: str, token_count: Callable[[str], int],
     observed_search: tuple[str, list[dict[str, Any]]] | None = None,
+    proof_complete: bool = True,
 ) -> tuple[list[str], str]:
     """Only for a request whose source witnesses were explicitly reviewed offline.
 
     READ must add missing evidence and fit the same full return representation.
     SEARCH is preferred only when its observed result adds a missing witness.
+    A reviewed partial chain can support progress, but never certifies sufficiency.
     View value is not inferred from availability, source count or a teacher action.
     """
     choices = row["questions"]["next"]["criteria"]
@@ -66,6 +68,8 @@ def original_witness_preferences(
     covered = complete_originals([*opened.values(), *known], sources)
     kinds = row["metadata"]["action_kinds"]
     if any(proof <= covered for proof in proofs):
+        if not proof_complete:
+            return [], "reviewed_partial_evidence_only_masked"
         return [key for key in choices if kinds[key] == "HANDOFF"], "reviewed_originals_sufficient"
     if any(item["kind"] != "original_source" for item in opened.values()):
         return [], "nonoriginal_opened_material_requires_review"

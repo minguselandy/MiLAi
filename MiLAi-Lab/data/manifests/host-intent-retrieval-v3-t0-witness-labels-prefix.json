@@ -1,22 +1,31 @@
 {
-  "states": 1259,
-  "labelled": 994,
+  "states": 1862,
+  "labelled": 1444,
   "status_counts": {
-    "source_reviewed_preference": 994,
-    "forced_single_action_masked": 67,
-    "reviewed_ambiguous_masked": 177,
-    "unreviewed_masked": 21
+    "source_reviewed_preference": 1444,
+    "forced_single_action_masked": 105,
+    "reviewed_ambiguous_masked": 282,
+    "unreviewed_masked": 31
   },
-  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v6/train.jsonl",
-  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v6/combined-reviews-v3.json",
+  "states_source": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v10/train.jsonl",
+  "reviews": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v10/combined-reviews-v5.json",
   "input_changes": 0,
   "teacher_actions_copied": false,
-  "scope": "Source witnesses and explicit saved-version judgments on closed training trajectories. No optimal-cost or full training-readiness claim.",
+  "scope": "All57 registered MemOps backgrounds have source preparation; actual reviewed prefix includes58 groups and first MuSiQue subquestions. Remaining MuSiQue request-level review, dev and generative collection still pending.",
   "status": "PARTIAL_COHORT_REVIEW_NOT_FIT_READY",
-  "source_groups": 38,
-  "actual_source_requests_reviewed": 152,
+  "source_groups": 58,
+  "actual_source_requests_reviewed": 233,
   "saved_version_requests_reviewed": 16,
-  "held_request_count": 3,
+  "partial_or_no_proof_requests": 5,
+  "source_preference_reasons": {
+    "reviewed_missing_original_progress": 1209,
+    "reviewed_originals_sufficient": 132,
+    "forced_single_action_masked": 105,
+    "no_reviewed_progress_masked": 245,
+    "reviewed_partial_evidence_only_masked": 3,
+    "no_reviewed_source_proof_masked": 9
+  },
+  "held_request_count": 5,
   "held_requests": [
     {
       "event_prefix": "rules-query_only/memops_A27/stage-2/chatcmpl-8e0945b185633c26:tool:0",
@@ -29,78 +38,87 @@
     {
       "event_prefix": "rules-rich/memops_C04/stage-0/chatcmpl-96b55373d55b8c79:tool:0",
       "reason": "Actual target_scope=current_public_message conflicts with history-wide request and reviewed source-session proof. Do not silently broaden that scope or declare those originals sufficient."
+    },
+    {
+      "event_prefix": "rules-rich/memops_E10/stage-2/chatcmpl-a533e2ece327ed5c:tool:0",
+      "reason": "Actual read_goal.target_scope=current_public_message conflicts with requested historical gym/preferences evidence. Preserve field literally rather than silently broadening its scope."
+    },
+    {
+      "event_prefix": "rules-rich/memops_E14/stage-0/chatcmpl-886c198a818e1e8e:tool:0",
+      "reason": "Actual follow-up asks for additional facts beyond already named book-club/rent/vitamin routines at the early cut. No reviewed new fact witness; do not reward rereading excluded known routines or infer global absence from no new evidence."
     }
   ],
   "reviewer": "assistant author, not independent judgment",
   "original_inputs_equal": true,
   "prior_full_row_equality": {
-    "prior_full_rows_compared": 1129,
-    "prior_full_rows_identical": 1129
+    "prior_full_rows_compared": 1713,
+    "prior_full_rows_identical": 1713
   },
   "actual_delivery_audit": {
-    "closed_trace_files": 165,
-    "actual_tool_deliveries": 173,
-    "matching_visible_and_returned_labels": 173,
+    "closed_trace_files": 244,
+    "actual_tool_deliveries": 258,
+    "matching_visible_and_returned_labels": 258,
     "mismatches": []
   },
-  "read_preference": "Adds missing request-reviewed evidence or exact requested saved revision and fits the complete live return packet.",
-  "search_preference": "Observed search adds a needed witness or the specifically requested record.",
-  "saved_version_preference": "Explicit request interpretation identifies current or first saved version. Existing record/unit/revision identity and actual snapshot bodies are checked; no evidence-keyword route is trained as a rule.",
-  "view_preference": "No automatic USE_VIEW or REFRESH positives. Of 50 successful refreshes,49 already had sufficient reviewed raw sources;1 request has a held scope conflict. This does not prove full view validity or downstream savings.",
-  "refresh_prefix_audit": {
-    "refresh_statuses": {
-      "view_opened": 50,
-      "material_budget_exhausted": 49,
-      "view_rejected": 3
-    },
-    "successful_refresh_before_source_status": {
-      "reviewed_originals_sufficient": 49,
-      "request_unreviewed": 1
-    },
-    "qualification": "Readiness is only for reviewed original-source proof; not whole graph correctness, savings or counterfactual generation success."
-  },
+  "read_preference": "Adds missing request-reviewed evidence or the exact requested saved revision and fits the complete live return packet.",
+  "search_preference": "Observed search adds needed reviewed evidence; no universal positive for availability.",
+  "sufficiency_rule": "Explicit proof_complete=false allows progress labels toward known premises but cannot label HANDOFF after those premises are covered. No automatic flag from native dataset answerability.",
+  "view_preference": "No automatic USE_VIEW/REFRESH positive. Actual semantic value requires review beyond availability and source bindings.",
   "length_audit": {
-    "rows": 1259,
+    "rows": 1862,
     "max_len": 12288,
     "head_max_len": 2048,
     "oversized": 0,
-    "max_sequence_tokens": 8530,
+    "max_sequence_tokens": 8807,
     "max_state_dropped": 0,
     "max_head_dropped": 0,
     "state_projection": "shared",
     "model_forwards": 0
   },
   "model_calls": 0,
-  "unmeasured_research_cost": "Human annotation and untimed analysis remain unmeasured, not zero. Measured offline phases await actual idle.",
-  "measured_offline_work": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v3.json",
-  "data_path": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v9",
-  "refresh_observed_cost_prefix": {
-    "by_before_source_proof": {
-      "reviewed_originals_sufficient": {
-        "refresh_operations": 68,
-        "observed_http_responses": 68,
-        "known_tokens": 208428,
-        "http_wall_seconds": 331.02464010193944
+  "measured_offline_work": "artifacts/host-intent-retrieval-v3/data/pending-offline-review-v4.json",
+  "unmeasured_research_cost": "Author semantic review, tests and untimed analysis remain unmeasured, not zero. No offline settlement while model collection lives.",
+  "data_path": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v13",
+  "musique_review": "data/manifests/host-intent-retrieval-v3-t0-musique-source-review-v1.json",
+  "earlier_refresh_cost_audit": {
+    "source_prefix": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-prefix-v6",
+    "states": 1259,
+    "report": {
+      "by_before_source_proof": {
+        "reviewed_originals_sufficient": {
+          "refresh_operations": 68,
+          "observed_http_responses": 68,
+          "known_tokens": 208428,
+          "http_wall_seconds": 331.02464010193944
+        },
+        "reviewed_missing_original_progress": {
+          "refresh_operations": 4,
+          "observed_http_responses": 4,
+          "known_tokens": 22282,
+          "http_wall_seconds": 20.392155218869448
+        },
+        "request_unreviewed": {
+          "refresh_operations": 5,
+          "observed_http_responses": 5,
+          "known_tokens": 16688,
+          "http_wall_seconds": 28.107208319939673
+        },
+        "no_reviewed_progress_masked": {
+          "refresh_operations": 25,
+          "observed_http_responses": 25,
+          "known_tokens": 170174,
+          "http_wall_seconds": 179.20501328539103
+        }
       },
-      "reviewed_missing_original_progress": {
-        "refresh_operations": 4,
-        "observed_http_responses": 4,
-        "known_tokens": 22282,
-        "http_wall_seconds": 20.392155218869448
-      },
-      "request_unreviewed": {
-        "refresh_operations": 5,
-        "observed_http_responses": 5,
-        "known_tokens": 16688,
-        "http_wall_seconds": 28.107208319939673
-      },
-      "no_reviewed_progress_masked": {
-        "refresh_operations": 25,
-        "observed_http_responses": 25,
-        "known_tokens": 170174,
-        "http_wall_seconds": 179.20501328539103
-      }
-    },
-    "scope": "Closed-position HTTP receipts only; ongoing-run ledger not settled/reconciled. Source proof is request-specific author judgment. Counts describe generation after already sufficient raw evidence, not net counterfactual savings or final answer correctness."
+      "scope": "Closed-position HTTP receipts only; ongoing-run ledger not settled/reconciled. Source proof is request-specific author judgment. Counts describe generation after already sufficient raw evidence, not net counterfactual savings or final answer correctness."
+    }
+  },
+  "accounting_status": "MEASURED_PHASES_SETTLED_AT_VERIFIED_MAIN_DEV_GAP",
+  "cost_settlement": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v1.json",
+  "whole_main_export": {
+    "states": 2079,
+    "families": 64,
+    "data": "artifacts/host-intent-retrieval-v3/data/t0-main-closed-v1",
+    "labels": "All empty in raw export; reviewed subset is separate."
   }
 }

@@ -88,6 +88,9 @@ def test_source_preferences_add_missing_material_fit_budget_and_skip_redundant_s
         assert preferred == [f"read_{target_index}"]
         assert status == "reviewed_missing_original_progress"
         assert "refresh_view" not in preferred
+        # One known premise is still worth reading when another required link is missing.
+        assert original_witness_preferences(row, proofs=[{target}], sources=sources,
+            return_key="snapshot", token_count=len, proof_complete=False)[0] == preferred
         assert original_witness_preferences(row, proofs=[set()], sources=sources,
             return_key="snapshot", token_count=len)[0] == []
         row["state"]["budget"]["max_return_tokens"] = 1
@@ -99,3 +102,7 @@ def test_source_preferences_add_missing_material_fit_budget_and_skip_redundant_s
         assert project_packs([reconstructed], [target_index]) == state.visible_evidence
         assert original_witness_preferences(example(), proofs=[{target}], sources=sources,
             return_key="snapshot", token_count=len)[0] == ["handoff"]
+        # Opening that premise must not teach HANDOFF as if the entire chain were proved.
+        assert original_witness_preferences(example(), proofs=[{target}], sources=sources,
+            return_key="snapshot", token_count=len, proof_complete=False) == (
+                [], "reviewed_partial_evidence_only_masked")

@@ -1,5 +1,5 @@
 {
-  "status": "MAIN_TRAIN_COLLECTION_RUNNING",
+  "status": "DEV_COLLECTION_RUNNING_MAIN_TRAIN_CLOSED",
   "source_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/histories.json",
   "offline_reference_data": "/cra/memory/mx_memory/MiLAi-worktrees/host-intent-retrieval-20261019/MiLAi-Lab/artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
   "allocation": "data/manifests/host-intent-retrieval-v3-t0-allocation.json",
@@ -28,7 +28,6 @@
   ],
   "pilot_positions": 20,
   "pilot_rule": "First2registeredMemOps train groups, firstallocatedthree-hop andfirstallocatedtwo-hop MuSiQue group. Metadata selection before model outcomes.",
-  "remaining_train_positions": 252,
   "dev_positions": 64,
   "additional_policy": {
     "policy": "generative",
@@ -43,7 +42,8 @@
       "musique-family-000552"
     ],
     "positions": 48,
-    "selection": "Four controlled-storage training groups plus firsttwo selectedMuSiQue groups perhopstratum; no devsampling for training."
+    "selection": "Four controlled-storage training groups plus firsttwo selectedMuSiQue groups perhopstratum; no devsampling for training.",
+    "status": "NOT_STARTED"
   },
   "controlled_storage": {
     "families": [
@@ -73,10 +73,23 @@
     "run": "artifacts/host-intent-retrieval-v3/runs/t0-main-train-v2",
     "pid": 3815344,
     "exec_session": 24523,
-    "observed_closed_positions": 192,
-    "observed_failures": 9,
-    "observed_at": "2026-10-19T17:03:58.018127+00:00"
+    "observed_closed_positions": 272,
+    "observed_failures": 22,
+    "observed_at": "2026-10-19T17:48:52.931634+00:00",
+    "status": "COMPLETED_WITH_FAILURES",
+    "results": "data/manifests/host-intent-retrieval-v3-t0-main-collection-results.json"
   },
   "pilot_positions_closed": 20,
-  "pilot_model_http_calls": 65
+  "pilot_model_http_calls": 65,
+  "historical_pilot_remaining_train_positions": 252,
+  "remaining_main_train_positions": 0,
+  "dev_collection": {
+    "run": "artifacts/host-intent-retrieval-v3/runs/t0-main-dev-v2",
+    "pid": 60366,
+    "exec_session": 8258,
+    "status": "RUNNING",
+    "positions": 64,
+    "observed_closed": 7,
+    "source_version": "8f7f2a18"
+  }
 }

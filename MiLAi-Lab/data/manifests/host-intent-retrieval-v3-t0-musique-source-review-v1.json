@@ -1,0 +1,193 @@
+{
+  "status": "REGISTERED_TRAIN_SOURCE_REVIEW; ACTUAL_REQUESTS_NOT_YET_APPROVED",
+  "cases": [
+    {
+      "source_group": "musique-family-000552",
+      "row": 202,
+      "original_question": "Who was the first Muslim elected president of the political party of Pradeep Tamta?",
+      "native_answerable": true,
+      "native_answer": "Badruddin Tayyab Ji",
+      "review_status": "complete_original_chain",
+      "reviewed_witness_indices": [
+        10,
+        7
+      ],
+      "review_basis": "Pradeep Tamta is explicitly INC; Rahimtulla Sayani paragraph explicitly says the first Muslim INC president was Badruddin Tayyab Ji.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000552",
+      "row": 6272,
+      "original_question": "Who was the first Muslim elected president of the political party of Pradeep Tamta?",
+      "native_answerable": false,
+      "native_answer": "Badruddin Tayyab Ji",
+      "review_status": "no_reviewed_chain",
+      "reviewed_witness_indices": [],
+      "review_basis": "No approved witness chain. Do not convert official unanswerable flag into a HANDOFF/abstention preference; actual request and observations still need review.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000856",
+      "row": 2427,
+      "original_question": "How much was pledged to the United Nations Environment Programme, by the country of citizenship of the actress who played the voice of Sally in Cars?",
+      "native_answerable": false,
+      "native_answer": "$40 million",
+      "review_status": "partial_original_chain",
+      "reviewed_witness_indices": [
+        15
+      ],
+      "review_basis": "UNEP paragraph supports the United States pledge of40million, but reviewed source does not identify Sally voice actress and her citizenship. Amount is conditional on unresolved country identification.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000856",
+      "row": 10869,
+      "original_question": "How much was pledged to the United Nations Environment Programme, by the country of citizenship of the actress who played the voice of Sally in Cars?",
+      "native_answerable": true,
+      "native_answer": "$40 million",
+      "review_status": "partial_original_chain",
+      "reviewed_witness_indices": [
+        12,
+        11
+      ],
+      "review_basis": "Cars character paragraph identifies Bonnie Hunt; UNEP identifies United States40million. Return to Me is an American FILM directed by Hunt; that is not evidence of her citizenship. Do not turn film nationality into person nationality.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000710",
+      "row": 2817,
+      "original_question": "What administrative territorial entity contains the city where Edward F. Moore died?",
+      "native_answerable": true,
+      "native_answer": "Dorchester County",
+      "review_status": "entity_mismatch_with_source_supported_alternative",
+      "reviewed_witness_indices": [
+        10
+      ],
+      "review_basis": "Edward F. Moore died in Madison,Wisconsin. The official county bridge uses Madison,Maryland, a different entity. Wisconsin is a source-supported enclosing state if that satisfies the actual requested granularity; no reviewed county proof. Native Dorchester County gold retained separately.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000710",
+      "row": 12620,
+      "original_question": "What administrative territorial entity contains the city where Edward F. Moore died?",
+      "native_answerable": false,
+      "native_answer": "Dorchester County",
+      "review_status": "no_reviewed_chain",
+      "reviewed_witness_indices": [],
+      "review_basis": "No approved Moore/death-location/administrative-entity chain; no automatic label from native unanswerable flag.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000404",
+      "row": 3991,
+      "original_question": "In what year was the company that owns the publisher of Death Times Three formed?",
+      "native_answerable": true,
+      "native_answer": "2001",
+      "review_status": "partial_original_chain",
+      "reviewed_witness_indices": [
+        11,
+        16
+      ],
+      "review_basis": "Death Times Three -> Bantam Books -> parentRandom House is supported. Paragraph6 concerns Spanish-language division/Random House Mondadori joint venture from2001, not the parent company formation year.1945 is Bantam founding,1998 its acquisition; neither silently becomes parent formation.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000404",
+      "row": 23786,
+      "original_question": "In what year was the company that owns the publisher of Death Times Three formed?",
+      "native_answerable": false,
+      "native_answer": "2001",
+      "review_status": "partial_original_chain",
+      "reviewed_witness_indices": [
+        7
+      ],
+      "review_basis": "Death Times Three paragraph supports publisherBantam only. Owner and formation year remain unproved by reviewed witnesses.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000104",
+      "row": 4099,
+      "original_question": "Where did the creator of Ode to Joy die?",
+      "native_answerable": true,
+      "native_answer": "Weimar",
+      "review_status": "partial_original_chain",
+      "reviewed_witness_indices": [
+        16
+      ],
+      "review_basis": "Ode to Joy paragraph names Schiller as author. The Bride of Messina premiered in Weimar; performance location does not establish Schiller death location. Official goldWeimar retained, not taught as a source-proven bridge.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000104",
+      "row": 14364,
+      "original_question": "Where did the creator of Ode to Joy die?",
+      "native_answerable": false,
+      "native_answer": "Weimar",
+      "review_status": "partial_original_chain",
+      "reviewed_witness_indices": [
+        18
+      ],
+      "review_basis": "Ode to Joy -> Schiller is supported; reviewed material does not establish his place of death.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000766",
+      "row": 18441,
+      "original_question": "What's the record label of the artist who sings You'll Never Find Another Love Like Mine?",
+      "native_answerable": false,
+      "native_answer": "Capitol Records",
+      "review_status": "label_scope_requires_actual_request_review",
+      "reviewed_witness_indices": [
+        9
+      ],
+      "review_basis": "Song paragraph identifies Lou Rawls and describes a hit for Philadelphia International. Official missing-Capitol flag is not proof that every record-label answer is absent. Historical label versus this song release must be distinguished.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000766",
+      "row": 33114,
+      "original_question": "What's the record label of the artist who sings You'll Never Find Another Love Like Mine?",
+      "native_answerable": true,
+      "native_answer": "Capitol Records",
+      "review_status": "multiple_historical_labels",
+      "reviewed_witness_indices": [
+        7,
+        8,
+        18
+      ],
+      "review_basis": "Lou Rawls debutStormy Monday released1962 onCapitol. Named1976 song appears onAll Things in Time explicitly released onPhiladelphia International; paragraph3 also confirms1977PIR. General artist label is temporally ambiguous; Capitol history is not the named song label. Respect actual query scope and preserve nativeCapitol metric.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000664",
+      "row": 31689,
+      "original_question": "What actor who played the president in \"The American President\" starred in \"Las Vegas\"?",
+      "native_answerable": true,
+      "native_answer": "Last Vegas",
+      "review_status": "answer_type_and_title_mismatch",
+      "reviewed_witness_indices": [
+        0,
+        10
+      ],
+      "review_basis": "The actual question asks an actor but original answer is the filmLast Vegas. Documents support MichaelDouglas as PresidentAndrewShepherd and as a Last Vegas star. User question says Las Vegas; clarify title assumption rather than silently treating it as an exact title. Original question/gold unchanged.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    },
+    {
+      "source_group": "musique-family-000664",
+      "row": 34915,
+      "original_question": "What actor who played the president in \"The American President\" starred in \"Las Vegas\"?",
+      "native_answerable": false,
+      "native_answer": "Last Vegas",
+      "review_status": "no_reviewed_chain",
+      "reviewed_witness_indices": [],
+      "review_basis": "No approved American President/Last Vegas actor bridge. Native false flag does not create an action label.",
+      "actual_request_approval": "PENDING; source review alone is not a label contract."
+    }
+  ],
+  "source": "artifacts/host-intent-retrieval-v3/data/t0-sources-v3/offline-references.jsonl",
+  "method": "Original paragraphs inspected, including alternative same-entity mentions for suspect links. Answer/support/answerable fields remain offline and are not accepted automatically. No claim that a keyword scan proves corpus-wide absence.",
+  "native_data_modified": false,
+  "model_calls": 0,
+  "reviewer": "assistant author, not independent judgment",
+  "label_rule": "An explicit partial proof may label progress toward known premises; covering those premises cannot label HANDOFF. Complete/qualified proofs require actual request-level review."
+}

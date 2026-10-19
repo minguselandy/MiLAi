@@ -64,10 +64,12 @@ def main() -> None:
         call_id = prefix.rsplit("/", 1)[1]
         key = "retrieval:" + reference_key([result["session"], result["message_id"], call_id])
         preferred, status = original_witness_preferences(row, proofs=proofs, sources=sources,
-            return_key=key, token_count=capacity.text_tokens, observed_search=observed_search)
+            return_key=key, token_count=capacity.text_tokens, observed_search=observed_search,
+            proof_complete=review.get("proof_complete", True))
         annotations.append({"event_id": event_id, "preferred_actions": preferred,
             "basis": review["basis"], "preference_reason": status,
             "support_sets": review["support_sets"],
+            "proof_complete": review.get("proof_complete", True),
             "request_review": review["request_review"],
             "reviewer": "assistant author; not independent judgment",
             "scope": "Whole-source, request-approved preferences; exact return budget checked. "

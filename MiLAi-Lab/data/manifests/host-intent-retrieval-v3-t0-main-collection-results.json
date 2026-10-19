@@ -1,0 +1,101 @@
+{
+  "status": "COMPLETED_WITH_FAILURES",
+  "source_version": "8f7f2a18",
+  "positions": 272,
+  "program_completed": 250,
+  "program_failed": 22,
+  "failure_errors": {
+    "VLLM_CHAT_TRUNCATED": 21,
+    "JSON_ACTION_MALFORMED": 1
+  },
+  "generation_requests": 740,
+  "ledger_delta": {
+    "generation": {
+      "charged_tokens": 2516826,
+      "known_tokens": 2516826,
+      "unknown_usage": 0
+    },
+    "embedding": {
+      "charged_tokens": 0,
+      "known_tokens": 0,
+      "unknown_usage": 0
+    }
+  },
+  "stages": {
+    "host_request": {
+      "requests": 296,
+      "tokens": 493348,
+      "http_wall_seconds": 1065.3622567513958
+    },
+    "view_generation": {
+      "requests": 172,
+      "tokens": 626608,
+      "http_wall_seconds": 849.1596486559138
+    },
+    "host_incomplete": {
+      "requests": 21,
+      "tokens": 224405,
+      "http_wall_seconds": 1124.4420072799549
+    },
+    "host_completion": {
+      "requests": 250,
+      "tokens": 1167931,
+      "http_wall_seconds": 2942.968206773512
+    },
+    "unparsed_host_response": {
+      "requests": 1,
+      "tokens": 4534,
+      "http_wall_seconds": 12.693719217553735
+    }
+  },
+  "driver_wall_seconds": 6890.304948396049,
+  "driver_cpu_seconds": 469.412413191,
+  "tool_attempts": 303,
+  "tool_rejections": 1,
+  "executed_retrievals": 302,
+  "empty_returns": 30,
+  "query_semantic_mutation_receipts": 0,
+  "semantic_evaluation": "NOT_COMPLETE; program completion is not task correctness. Native MuSiQue gold/source qualifications remain separate.",
+  "cost_note": "HTTP wall is nested inside tool/message/driver wall; do not sum it twice. Offline review phases overlapped this run and have their own CPU measurements.",
+  "run": "artifacts/host-intent-retrieval-v3/runs/t0-main-train-v2",
+  "raw_summary": "artifacts/host-intent-retrieval-v3/runs/t0-main-train-v2/collection-cost-summary-v1.json",
+  "closed_state_export": {
+    "status": "ACTUAL_STATES_EXPORTED_ALL_LABELS_MASKED",
+    "runs": [
+      "artifacts/host-intent-retrieval-v3/runs/t0-main-train-v2"
+    ],
+    "states": 2079,
+    "labelled": 0,
+    "splits": {
+      "train": 2079
+    },
+    "interfaces": {
+      "query_only": 1050,
+      "rich": 1029
+    },
+    "families": 64,
+    "projection": "live operation_payload via decision_example; actual bindings outside state",
+    "annotation": "No teacher action, operation availability or final answer becomes gold."
+  },
+  "latest_reviewed_subset": {
+    "data": "artifacts/host-intent-retrieval-v3/data/t0-reviewed-prefix-v13",
+    "states": 1862,
+    "labelled": 1444
+  },
+  "accounting": {
+    "status": "SETTLED_ONCE_AT_VERIFIED_IDLE",
+    "manifest": "artifacts/host-intent-retrieval-v3/offline-review-settlement-v1.json",
+    "measured_phases": 23,
+    "cpu_seconds_recorded": 1282.9667839620001,
+    "model_counters_unchanged": true
+  },
+  "dev_collection": {
+    "run": "artifacts/host-intent-retrieval-v3/runs/t0-main-dev-v2",
+    "pid": 60366,
+    "exec_session": 8258,
+    "status": "RUNNING",
+    "positions": 64,
+    "observed_closed": 7
+  },
+  "generative_collection": "NOT_STARTED;48registered train positions follow dev serially"
+}
