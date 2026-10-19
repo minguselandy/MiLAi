@@ -1,0 +1,209 @@
+{
+  "status": "FITTING_COMPLETED_EXPORTED_WEIGHT_VALIDATION_PENDING",
+  "run": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/run.json",
+  "training_source_version": "c0770e49",
+  "final_checkpoint": "artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/checkpoint",
+  "seed": 0,
+  "optimizer_updates": 207,
+  "train_states": 1649,
+  "train_groups": 64,
+  "dev_states": 456,
+  "dev_labelled": 353,
+  "history": [
+    {
+      "optimizer_updates": 0,
+      "dev": {
+        "counts": {
+          "labelled": 353,
+          "accepted": 152,
+          "masked": 103,
+          "handoff_outside_reviewed_preference": 15
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 353,
+            "accepted": 152
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 80,
+            "accepted": 27
+          },
+          "READ": {
+            "selected": 180,
+            "accepted": 89
+          },
+          "HANDOFF": {
+            "selected": 51,
+            "accepted": 36
+          },
+          "REFRESH_VIEW": {
+            "selected": 12,
+            "accepted": 0
+          },
+          "USE_VIEW": {
+            "selected": 30,
+            "accepted": 0
+          }
+        },
+        "families": 16,
+        "family_macro_acceptance": 0.43533100586909623,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      }
+    },
+    {
+      "optimizer_updates": 103,
+      "weighted_loss_mean": 2.010079998847095,
+      "dev": {
+        "counts": {
+          "labelled": 353,
+          "accepted": 241,
+          "masked": 103,
+          "handoff_outside_reviewed_preference": 3
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 353,
+            "accepted": 241
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 62,
+            "accepted": 62
+          },
+          "READ": {
+            "selected": 244,
+            "accepted": 135
+          },
+          "HANDOFF": {
+            "selected": 47,
+            "accepted": 44
+          }
+        },
+        "families": 16,
+        "family_macro_acceptance": 0.7079560886944695,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "weighted_ce_mean": 2.010079998847095
+    },
+    {
+      "optimizer_updates": 207,
+      "weighted_loss_mean": 1.776722834035284,
+      "dev": {
+        "counts": {
+          "labelled": 353,
+          "accepted": 255,
+          "masked": 103,
+          "handoff_outside_reviewed_preference": 9
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 353,
+            "accepted": 255
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 62,
+            "accepted": 62
+          },
+          "READ": {
+            "selected": 231,
+            "accepted": 142
+          },
+          "HANDOFF": {
+            "selected": 60,
+            "accepted": 51
+          }
+        },
+        "families": 16,
+        "family_macro_acceptance": 0.746664859985231,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      },
+      "weighted_ce_mean": 1.776722834035284,
+      "train": {
+        "counts": {
+          "labelled": 1649,
+          "accepted": 1413,
+          "handoff_outside_reviewed_preference": 24
+        },
+        "strata": {
+          "source_reviewed_preference": {
+            "labelled": 1649,
+            "accepted": 1413
+          }
+        },
+        "selected_operations": {
+          "SEARCH": {
+            "selected": 287,
+            "accepted": 274
+          },
+          "READ": {
+            "selected": 1110,
+            "accepted": 911
+          },
+          "HANDOFF": {
+            "selected": 252,
+            "accepted": 228
+          }
+        },
+        "families": 64,
+        "family_macro_acceptance": 0.8746317018660565,
+        "scope": "Reviewed operation preferences; not exhaustive action legality, Reader task/state success or cost benefit"
+      }
+    }
+  ],
+  "parameter_probes": {
+    "encoder": {
+      "parameter": "encoder.embeddings.tok_embeddings.weight",
+      "changed_elements": 196607870
+    },
+    "head": {
+      "parameter": "head.layers.0.self_attn.in_proj_weight",
+      "changed_elements": 1769471
+    }
+  },
+  "compute": {
+    "wall_seconds": 4042.812390799634,
+    "cpu_seconds": 6993.788020308,
+    "runs": 1,
+    "train_sequence_rows": 3312,
+    "train_input_tokens": 16457101,
+    "train_batch_forwards": 1656,
+    "train_device_forwards": 3312,
+    "train_batch_attempts": 1656,
+    "train_offered_rows": 3312,
+    "train_offered_tokens": 16457101,
+    "dev_forwards": 1368,
+    "dev_sequence_rows": 1368,
+    "dev_input_tokens": 5402385,
+    "dev_state_tokenizations": 1368,
+    "dev_state_tokens": 4847349,
+    "train_eval_forwards": 1649,
+    "train_eval_sequence_rows": 1649,
+    "train_eval_input_tokens": 8196625,
+    "train_eval_state_tokenizations": 1649,
+    "train_eval_state_tokens": 7370901,
+    "peak_rss_kib": 6544108,
+    "peak_cuda_allocated_bytes": [
+      19646037504,
+      3525516288
+    ],
+    "ledger": "/cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json"
+  },
+  "ledger_phase": "host_intent_t0_native_shared_seed0_v1",
+  "ledger_phase_matches_compute": true,
+  "process_exit_code": 0,
+  "process_absent": 509200,
+  "precision": {
+    "training_and_in_memory_diagnostics": "float32",
+    "exported_weight_tensors": "170 F16 tensors",
+    "loader_output": "float32 per installed Laya load_checkpoint",
+    "qualification": "Pre-export diagnostic predictions do not yet prove identical choices from serialized weights. Standard SDK save_checkpoint uses detach().half(); no post-hoc weight repair."
+  },
+  "next": "Evaluate persisted final207 checkpoint on same456dev with unchanged shared projection, then registered64 ordinary-tool dev positions. No checkpoint selection change.",
+  "other_seeds": "NOT_STARTED",
+  "native_e0": "0/24; shared service permission pending"
+}

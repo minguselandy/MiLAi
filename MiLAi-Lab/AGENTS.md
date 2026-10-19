@@ -1,78 +1,50 @@
-# LIVE UPDATE 2026-10-20: T0 seed0 FITTING — preserve this process
+# CURRENT 2026-10-20: T0 seed0 FIT CLOSED; exported-weight validation next
 
-ACTIVE model job PID509200 / exec65861, frozen training source c0770e49,
-artifacts/host-intent-retrieval-v3/fitting/t0-native-shared-seed0-v1/run.json.
-Snapshot 207/207 updates, 3312 train rows, 16457101 inputtokens; process RUNNING.
-Final dev456 predictions closed:255/353 accepted,macro0.746665,9HANDOFF outside preference.
-Train1649 final diagnostic still running; verify exact counts before dispatch.
-Initial dev456 predictions closed:152/353 reviewed preferences accepted,103masked;
-family-macro0.435331,15HANDOFF outside reviewed preference. This is NOT task accuracy or final gain.
-Revalidate actual PID/driver and pollsamehandle. Never restart from observation timeout.
-NO second model task and NO offline cost settlement while fit lives. Frozen source and
-artifacts/.../data/t0-fitting-v1 are immutable for this run. Trainer settles own compute at exit.
+PID509200 gone; exec65861 exit0; fitting/t0-native-shared-seed0-v1/run.json COMPLETED207.
+Frozen training source c0770e49; final checkpoint exists.3312trainingrows/16457101tokens.
+Initial/mid/final dev accepted152/241/255 of353; family macro0.435331/0.707956/0.746665.
+Finaltrain1413/1649,macro0.874632. Encoder/head probes both changed; compute matches originalledger.
+Final fit wall4042.812391/CPU6993.788020. NO fitted seeds1/2 yet.
 
-Final data:2276trainstates/64groups,1649labelled;456devstates/16groups,353labelled,no groupoverlap.
-U=ceil(2*1649/16)=207; batch16,micro2,accum8,encoder/headLR2.5e-5/1e-4,fullencoder,
-native/shared/softCE,float32,physicalGPUs2/3,shuffleoptions synchronized with labels.
-Sequential metadata.state_id assigned before masking; outside model inputs. Maxlabelled8634,
-maxall9723; full inputs retained. Explicit nonreentrant encoder activation checkpointing enabled;
-4gradient/update/microbatch regressions PASS,Ruff/tools boundary PASS. Mypy uses CUDAenv and
-excludes only import-untyped for Laya SDK lacking py.typed. Logical forwards exclude layer
-recomputation; actual time includes it. Diagnostics0/103/207; final207weights are preselected.
-Seeds1/2 not started. Final diagnostics snapshot dev105/456,train0/1649; no final checkpoint yet.
-Alllater T1/T2/factors/external obligations remain.
+IMPORTANT: installed Laya SDK saves FP16, loads FP32. Header170F16 tensors; prior finaldev
+was in-memory FP32. Registered next: same456dev persisted final207 validation on physicalGPU2,
+shared projection12288/2048, originalledger phasehost_intent_t0_seed0_exported_dev_v1.
+Plan data/manifests/host-intent-retrieval-v3-t0-export-validation-plan.json. Not started at this snapshot.
+Then registered64 ordinary-tool dev positions, frozen63603feb dispatch in
+artifacts/host-intent-retrieval-v3/t0-tool-eval-dispatch-v1.json. No checkpoint reselection or retry.
+Check actual process/driver before every launch; never restart after lost observation handle.
 
-All197gen states now reviewed or held:85labels,108ambiguous,4temporalconflict states.
-38source+16storage requests,1held current-record/as_of2026-01-01 request. Final generative data:
- data/t0-reviewed-generative-v1. Source/storage/view reviews under data/t0-gen-all-closed-v1.
-IMPORTANT: provisional gen-view-v1 labels superseded by gen-view-reviews-v2. Full temporal review
-found unsupported2024 in A01query-only early view;2positiveswithdrawn. A05correctedrefresh/return
-adds2; total9viewpositives unchanged but row identities differ. Do NOT use v1 in training.
-GenSource proof includes effective-date witness for A01rich late and narrower A07subqueries.
-Storage generic followup omittedfirst-version constraint, reviewed ascurrent; helddateconflict notfixed.
-Main task reviews COMPLETE272/272:107CORRECT/59QUALIFIED/83WRONG/1UNFULFILLED/22FAILED.
-Source-author exploratory training-collection review, not independent holdout. Full summary in
-data/manifests/host-intent-retrieval-v3-t0-task-review-full-v1.json. Raw outputs unchanged.
-Midpoint103 dev:241/353 accepted,macro0.707956,3HANDOFF outside reviewed preference.
-15/16families improve; stored-vs-original stays9/22, same-name only12->13/26. Remaining112
-nonpreferred choices:109READ/3HANDOFF. Read-only analysis at analysis/t0-seed0-midpoint-v1.json.
-Tool-eval plan registered64dev laya positions after final207; NOT_STARTED; native E0 stillpending.
-Concrete dispatch artifacts/.../t0-tool-eval-dispatch-v1.json uses frozen-63603feb; no job started.
-After fit terminal, inspect207final/checkpoint/parameterprobes, reconcile original ledger and pending-v6
-at idle, then dispatch registered64 using existing CUDA+HTTP environments. Do not use checkpoint_latest.
-Rulesdev64 also fully reviewed:38C/9Q/11W/6FAILED. Generative48:19C/1Q/15W/2UNFULFILLED/11FAILED.
-Matched48 rules:21C,142HTTP476795tokens; generative19C,320HTTP1611720tokens. Only8train
-groups/descriptive, not E2 same-before or learned-policy result. New full review manifests tracked.
-Pending offline review phases explicitly listed in artifacts/.../offline-review-pending-v6.json; do not
-settle until fitter terminal. Prior v1..v5 settlements stay recorded.
+Originalbudget /cra/memory/mx_memory/MiLAi/MiLAi-Lab/artifacts/ser-v20/budget.json ONLY.
+All offline-review-settlement-v1..v6 are SETTLED. pending-v6 statusSETTLED:10measuredphases
+14.844556CPU plus1failedtokenizer diagnostic with known5.83700721commandwall and missingCPU.
+Raw historical measurementfalse flags do not authorize rebilling. No offline settlement during live model jobs.
+Untimed author/tests remainunmeasured, notzero. Training phase already recorded bytrainer.
 
-Collectors all CLOSED: main272 has250 completed/22failed; dev64 has58/6; gen48 has37/11.
-No positions retried. Old collector processes are gone.
-Settlements offline-review-settlement-v1..v5 and capacity-probe-v1 compute ALREADY RECORDED.
-v5 recorded3measured preparation phases atidle before fit; unmeasured author/tests notzero.
-NEW pending offline cost: runs/t0-main-train-v2/first-input-source-audit-v1.json;158fresh bank
-first requests,zero source-prefix matches. Also task-review-full-v1 aggregation0.009498wall/0.009498CPU
-pending. Do not settle while PID509200 lives.
-NativeE0 remains0/24; shared7860 parser permission PENDING. No SHA/subagents/newservice/secondledger/
-remote publication. Full goal ACTIVE. All shortartifact paths above under artifacts/host-intent-retrieval-v3/.
-Historical notes below superseded.
+T0fitting immutable data2276trainstates/1649labelled,64groups;456dev/353labelled,16groups.
+Final generative viewlabels use gen-view-reviews-v2, not provisionalv1 (unsupported2024 withdrawn).
+All384collection positions reviewed: main272107C/59Q/83W/1UNFULFILLED/22FAILED;
+rulesdev6438C/9Q/11W/6FAILED; gen4819C/1Q/15W/2UNFULFILLED/11FAILED.
+Only source-author exploratory judgments, not independentholdout. Full manifests tracked.
+Matched48 rules21C/142HTTP476795tokens;gen19C/320HTTP1611720tokens.8train groups/descriptive,
+not E2same-before or learned-policy results. Rawoutputs/firstfailures unchanged.
 
-FollowIR auxiliary prepared in data/followir-applicability-v1:1427train/349dev,965/241groups;
-max747/644 tokens,all literal inputs unchanged,no truncation,0modelcalls.3puretests/static/boundariesPASS.
-Working head now supports single actual question IDs and --task instruction_applicability in
-train/eval with distinct candidate metrics/ledger phase.6puretests+2SDKpreparation(stubforward)PASS,
-Ruff,mypy and package/tools boundariesPASS. No actual auxiliary model run or mixedT1 yet.
-Frozen c0770e49 training and63603feb tool evaluation remain unchanged.
-Author spot review8randomgroups/11rows done:9topically supported (2explicit factuality-unverified),
-2qualified relevance boundaries; labelsunchanged, not independent or exhaustive. Sampleartifact underauxdir.
-10measured offlinephases now pending-v6 (14.844556CPU); failed tokenizer-root diagnostic wall5.83700721
-known,CPUunmeasured. Do not settle while fitter lives. See followir-applicability manifest.
+Workinghead supports actualsinglequestion IDs and explicit instruction_applicability task in train/eval;
+6puretests+2SDKprep stubforward PASS. Newoperation evalCLI4stub/metricsPASS,static/toolsPASS.
+No actual auxiliary model evaluation or T1mixedfitting yet. FollowIR1427train/349dev,965/241topics,
+max747/644tokens,no truncation. Author8group11row spotreview9supported/2qualified,notindependent;
+clinical/research factuality not established by relevance labels. Original labels unchanged.
 
-T1 expanded metadata/source inputs prepared:128train/32dev primarygroups; new64/16groups,
-228/52 new positions. Use data/t1-sources-v1/new-histories.json only for new collection; full-histories
-preserves every oldT0 input. Allnewpools/requests/labels and T1mixedfitting remainpending.
-Manifest t1-allocation and t1-source-preparation;4source tests,static/tools boundaryPASS.
-Next model job remains T0seed0 dev64, not T1 collection. No old position replay.
+T1 allocation/source inputs128train/32dev primarygroups; new64/16groups,228/52positions.
+Use data/t1-sources-v1/new-histories.json for newcollection; full-histories retains alloldT0inputs.
+Train57MemOps+64MuSiQue+7TwoWiki; dev8MemOps+13MuSiQue+6authored+5TwoWiki.
+Inheritedadmission/boundaries retained;000503excluded;2Wiki license notinvented/no publication.
+Newpools/requests needreview; no newT1trajectory or operationgold. T1mix/sampling/budget pending.
+
+NativeE0 remains0/24, shared7860 parser permission stillPENDING. No sharedservice restart.
+NoSHA/checksum/contentfingerprints/subagents/newservice/secondledger/remotepublication.
+FullT0/T1/T2,seeds0/1/2,E1/E2/E3,E4InstructIR/LongMemEval451images/Mem2ActGivenTool400,
+E5workloads/additionalHost remain. GoalACTIVE, notcomplete/blocked.
+All shortartifactpaths under artifacts/host-intent-retrieval-v3; historicalnotes below superseded.
 
 # LIVE UPDATE 2026-10-20: source review started; samemainjobrunning
 

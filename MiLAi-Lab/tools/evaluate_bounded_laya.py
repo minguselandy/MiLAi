@@ -98,10 +98,14 @@ def main() -> None:
     parser.add_argument("--budget", type=Path, required=True)
     parser.add_argument("--compute-phase", help="Distinct phase in the original shared ledger")
     parser.add_argument("--threads", type=int, default=4)
+    parser.add_argument("--device", default="cpu")
     parser.add_argument("--max-len", type=int, default=4096)
     parser.add_argument("--head-max-len", type=int, default=384)
-    parser.add_argument("--task", choices=("bounded_reader", "instruction_applicability"),
+    parser.add_argument("--task", choices=("bounded_reader", "memory_operation",
+                                           "instruction_applicability"),
                         default="bounded_reader")
+    parser.add_argument("--operation-state", choices=("full", "mechanical", "shared"),
+                        default="full")
     args = parser.parse_args()
     import torch
 
@@ -109,17 +113,24 @@ def main() -> None:
     torch.manual_seed(0)
     args.output.mkdir(parents=True, exist_ok=False)
     rows = [json.loads(line) for line in args.data.read_text().splitlines()]
+    if args.task == "memory_operation":
+        from milai_lab.methods.laya_memory_policy import project_operation_payload
+
+        rows = [project_operation_payload(row, args.operation_state) for row in rows]
     run = {"status": "RUNNING", "pid": os.getpid(), "data": str(args.data.resolve()),
-           "checkpoint": str(args.checkpoint.resolve()), "device": "cpu",
+           "checkpoint": str(args.checkpoint.resolve()), "device": args.device,
+           "visible_cuda_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
            "threads": args.threads, "max_len": args.max_len,
            "head_max_len": args.head_max_len, "completed_states": 0, "planned_states": len(rows),
-           "task": args.task, "calibrated": False, "http_requests": 0}
+           "task": args.task, "operation_state": args.operation_state,
+           "calibrated": False, "http_requests": 0}
     write_json(args.output / "run.json", run)
     started, cpu = time.perf_counter(), time.process_time()
     predictions = []
     model = None
     try:
-        model = NativeDecision(args.checkpoint, args.max_len, args.head_max_len)
+        model = NativeDecision(args.checkpoint, args.max_len, args.head_max_len, args.device)
+        run["loaded_weight_dtype"] = str(next(model.model.parameters()).dtype)
         for index, row in enumerate(rows):
             payload = {k: row[k] for k in ("state", "questions")}
             write_json(args.output / "calls" / str(index) / "input.json", payload)
@@ -130,8 +141,11 @@ def main() -> None:
             write_json(args.output / "run.json", run)
             print(json.dumps({"completed": len(predictions), "planned": len(rows),
                               "input_tokens": prediction["input_tokens"]}), flush=True)
-        scorer = (score_applicability_predictions if args.task == "instruction_applicability"
-                  else score_predictions)
+        from milai_lab.methods.memory_control_learning import score_operation_predictions
+
+        scorer = {"bounded_reader": score_predictions,
+                  "memory_operation": score_operation_predictions,
+                  "instruction_applicability": score_applicability_predictions}[args.task]
         write_json(args.output / "results.json", scorer(rows, predictions))
         run["status"] = "COMPLETED"
     except BaseException as error:
@@ -147,9 +161,11 @@ def main() -> None:
         with args.budget.with_name("budget.json.http-owner.lock").open("a+b") as lease:
             fcntl.flock(lease, fcntl.LOCK_EX)
             budget = RunBudget(RunLimits(**read_json(args.budget)["limits"]), args.budget)
-            phase = args.compute_phase or (
-                "laya_candidate_applicability" if args.task == "instruction_applicability"
-                else "laya_reader_prefix")
+            phase = args.compute_phase or {
+                "bounded_reader": "laya_reader_prefix",
+                "memory_operation": "laya_memory_operation_evaluation",
+                "instruction_applicability": "laya_candidate_applicability",
+            }[args.task]
             budget.record_compute(phase, measures)
         write_json(args.output / "run.json", run)
 
