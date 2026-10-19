@@ -1,5 +1,18 @@
 # LIVE V10: 2026-10-19
 
+Development query-structure projection now retains Source session and presents bodies in capture
+order AFTER stable alias allocation. Originalbody/role/reportdates/calendar/scope/bindings/schema
+unchanged; capture clocks still not event clocks. No new gate or case branch.50relatedtests,
+Ruff,mypy1module,packageboundary pass. NewrealSQLite two-session reverse-ID test failedbefore.
+Actual capturedD25 input probe preserves all previous fields except order/session; aliases unchanged,
+bodyorder nowmatches original s1t1..s1t7.0modelcalls; semantic quality NOT retested. Freeze new source
+before future real-model use; live0acc and preparedpostforgetd230/expanded81frozen inputs unchanged.
+D25state audit all9constructed/153nodes/0rules complete:8delivered,1persistedbutnotdelivered due
+material budget (rules revision6, SDKread onactualSQLitebackup). Not a construction failure.
+All9have required trial/actor errors despite correct corepreference facts. No originaloutcome repair.
+Latestbaseline115/144, E08all18closed but NOT reviewed; E15active. D25task/state artifacts complete.
+New offline checks/probes/audits remain pending; no live-ledger settlement.
+
 Broader36 complete state/reuse/M4 audit now saved in state-results-v1 and m4-readiness-v1.
 All28 constructed views:235nodes/49rules; construction sufficiency10true/12false/6uncertain,
 not fullgraph validity. Actual24USE_VIEW:8meaning-valid/12invalid/4qualified-uncertain.

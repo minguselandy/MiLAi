@@ -27,6 +27,49 @@ def interpretation(payload):
         "remove": [], "rules": [], "remove_rules": [], "unresolved": []}
 
 
+def test_source_presentation_keeps_capture_context_and_existing_aliases(tmp_path, monkeypatch):
+    with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:
+        service = service_at(store, tmp_path)
+        # Opaque IDs deliberately sort opposite to actual arrival order.
+        monkeypatch.setattr(service, "event_id", lambda session, key, role:
+                            f"source-00000000-0000-0000-0000-{9 - int(key):012d}")
+        question = service.capture_assistant("conversation-a", "0", "Did that option work?",
+            occurred_at="2035-06-02T12:00:00+08:00")["source_ref"]
+        unrelated = service.capture_user("conversation-b", "1", "A different report.",
+            occurred_at="2035-05-01T12:00:00+08:00")["source_ref"]
+        reply = service.capture_user("conversation-a", "2", "Yes, that one worked.")["source_ref"]
+        original = {ref: service.source(ref) for ref in (question, unrelated, reply)}
+        inputs = []
+
+        def call(messages, _schema):
+            inputs.append(json.loads(messages[1]["content"]))
+            return interpretation(inputs[-1])
+
+        first, _ = build_query_structure(service, "What was reported?", "",
+            [reply, question, unrelated], policy="incremental", call=call,
+            source_events=list(reversed(service.sources())))
+        assert [s["text"] for s in inputs[0]["sources"]] == [
+            "Did that option work?", "A different report.", "Yes, that one worked."]
+        assert [s["session"] for s in inputs[0]["sources"]] == [
+            "conversation-a", "conversation-b", "conversation-a"]
+        assert [s["reported_at"] for s in inputs[0]["sources"]] == [
+            "2035-06-02T12:00:00+08:00", "2035-05-01T12:00:00+08:00", None]
+        # Presentation must not renumber the established opaque-ID bindings.
+        assert [s["id"] for s in inputs[0]["sources"]] == ["e2", "e1", "e0"]
+        later = service.capture_user("conversation-a", "3", "Here is a later update.")[
+            "source_ref"]
+        second, _ = build_query_structure(service, "What was reported now?", "",
+            [unrelated, reply, question, later], policy="incremental", call=call,
+            source_events=list(reversed(service.sources())), force_refresh=True)
+        assert [s["id"] for s in inputs[1]["sources"]] == ["e2", "e1", "e0", "e3"]
+        assert all(second["source_bindings"][key] == value
+                   for key, value in first["source_bindings"].items())
+        for item in inputs[1]["source_directory"]:
+            ref = second["source_bindings"][item["id"]]["source_ref"]
+            assert item["session"] == service.source(ref)["session"]
+        assert {ref: service.source(ref) for ref in original} == original
+
+
 @pytest.mark.parametrize("routes", [[[]], [], [["n0"], ["n1"]]])
 def test_generation_preserves_clock_types_and_all_route_values(tmp_path, routes):
     with SqliteStore.from_conn_string(str(tmp_path / "bank.sqlite")) as store:

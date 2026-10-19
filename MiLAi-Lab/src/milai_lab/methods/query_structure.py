@@ -27,7 +27,8 @@ INSTRUCTIONS = (
     "Capture the independently changeable facts in the selected scope, so another wording or "
     "task can use them. scope describes that scope, not proof that all history was examined. "
     "Old nodes and rules in previous are model interpretations, not original evidence. "
-    "sources contains newly delivered original bodies. source_directory binds the old and new "
+    "sources contains newly delivered original bodies in capture order, with session identifiers "
+    "for captured conversation context. source_directory binds the old and new "
     "e aliases; an old alias without a body does not supply its semantic content. "
     "New arrivals can introduce an overriding rule even if they are absent from old support. "
     "Use nodes/rules to add or replace only changed interpretations and remove/remove_rules "
@@ -217,8 +218,13 @@ def build_query_structure(
         alias = aliases.get(ref, f"e{len(bindings)}")
         bindings[alias] = {"source_ref": ref, "source_revision": source.get("source_revision", 1)}
         sources.append({"id": alias, "text": body_text(source), "role": source["role"],
+            "session": source["session"],
             "reported_at": source.get("occurred_at"),
             "calendar_context": source.get("calendar_context")})
+    # Preserve stable aliases while presenting the actual capture sequence.
+    sources.sort(key=lambda item: (
+        by_ref[bindings[item["id"]]["source_ref"]]["observed_at"],
+        bindings[item["id"]]["source_ref"]))
     schema = structure_schema(bindings, previous)
     delivered_aliases = {item["id"] for item in sources}
     messages = [{"role": "system", "content": INSTRUCTIONS + (
@@ -232,6 +238,7 @@ def build_query_structure(
                         for alias, binding in bindings.items()],
                     "source_directory": [{"id": key, "body_delivered": key in delivered_aliases,
                         "role": by_ref[binding["source_ref"]]["role"],
+                        "session": by_ref[binding["source_ref"]]["session"],
                         "reported_at": by_ref[binding["source_ref"]].get("occurred_at")}
                         for key, binding in bindings.items()], "current_scope_sources": [
                         key for key, binding in bindings.items() if binding["source_ref"] in pool],
